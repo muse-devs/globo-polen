@@ -37,6 +37,7 @@ node_modules/
 # Ignorar arquivos descompactados no diretório de uploads padrão
 uploads/*
 !uploads/uploads.tar.gz
+!uploads/README.md
 
 # Ignorar arquivos de log e bancos de dados 
 # exceto o arquivo padrão do banco do projeto
@@ -48,3 +49,4 @@ wordpress/wp-admin/*.log
 *.sqlite.gz
 sql/*
 !sql/database.sql.gz
+!sql/README.md
