@@ -1,23 +1,50 @@
-# ignore everything in the root except the "wp-content" directory.
-!wp-content/
+# MacOS
+*.DS_Store
 
-# ignore everything in the "wp-content" directory, except:
-# "mu-plugins", "plugins", "themes" directory
-wp-content/*
-!wp-content/mu-plugins/
-!wp-content/plugins/
-!wp-content/themes/
+# Ignorar Configurações
+wordpress/.htaccess
+wordpress/wp-config.php
 
-# ignore these plugins
-wp-content/plugins/hello.php
+# Ignorar Modelos padrões do Wordpress
+wordpress/wp-config-sample.php
+wordpress/license.txt
+wordpress/readme.html
 
-# ignore specific themes
-wp-content/themes/twenty*/
+# Ignorar tudo no wp-content/cubonove exceto os diretórios
+# "mu-plugins", "plugins", "themes"
+wordpress/wp-content/*
+!wordpress/wp-content/languages/
+!wordpress/wp-content/mu-plugins/
+!wordpress/wp-content/plugins/
+!wordpress/wp-content/themes/
+wordpress/polen/*
+!wordpress/polen/languages/
+!wordpress/polen/mu-plugins/
+!wordpress/polen/plugins/
+!wordpress/polen/themes/
 
-# ignore node dependency directories
+# Ignorar determinados plugins
+wordpress/wp-content/plugins/hello.php
+wordpress/polen/plugins/hello.php
+
+# Ignorar temas específicos
+wordpress/wp-content/themes/twenty*/
+wordpress/polen/themes/twenty*/
+
+# Ignorar dependências do node
 node_modules/
 
-# ignore log files and databases
+# Ignorar arquivos descompactados no diretório de uploads padrão
+uploads/*
+!uploads/uploads.tar.gz
+
+# Ignorar arquivos de log e bancos de dados 
+# exceto o arquivo padrão do banco do projeto
+wordpress/wp-admin/*.log
 *.log
 *.sql
 *.sqlite
+*.sql.gz
+*.sqlite.gz
+sql/*
+!sql/database.sql.gz
