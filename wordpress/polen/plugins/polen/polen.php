@@ -1,17 +1,17 @@
 <?php
 
 /**
- * Plugin Name: Cubo9 E-Commerce Pack Plugin
- * Description: Cubo9 E-Commere for Wordpress/WooCommerce multi purpose plugin focused on Brazil Market.
+ * Plugin Name: Polen
+ * Description: Plugin plataforma Polen.
  * Version: 1.0.0
  * Author: Cubo9
  * Developer: Cubo9
- * Text Domain: cubonove
+ * Text Domain: polen
  *
  * WC requires at least: 4.0
  * WC tested up to: 4.0
  *
- * Copyright: © 2021 by Cubo9.
+ * Copyright: © 2021 by Polen.
  * License: Proprietary
  */
 
@@ -75,15 +75,15 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
         }
 
         public function Load_Text_Domain() {
-            if( file_exists( PLUGIN_CUBO9_ECOMMERCE_DIR . 'languages/' ) ) {
-                $path = PLUGIN_CUBO9_ECOMMERCE_DIR . 'languages/';
-                load_plugin_textdomain( 'cubo9-ecommerce', false, $path );
+            if( file_exists( PLUGIN_POLEN_DIR . 'languages/' ) ) {
+                $path = PLUGIN_POLEN_DIR . 'languages/';
+                load_plugin_textdomain( 'polen', false, $path );
             }
         }
 
         public function Set_WooCommerce_Settings() {
-            $cubo9_woocommerce_setup_finish = get_option( 'cubo9_woocommerce_setup_finish' );
-            if( ! $cubo9_woocommerce_setup_finish || is_null( $cubo9_woocommerce_setup_finish ) || empty( $cubo9_woocommerce_setup_finish ) ) {
+            $polen_woocommerce_setup_finish = get_option( 'polen_woocommerce_setup_finish' );
+            if( ! $polen_woocommerce_setup_finish || is_null( $polen_woocommerce_setup_finish ) || empty( $polen_woocommerce_setup_finish ) ) {
                 if( 'no' === get_option( 'woocommerce_registration_generate_username' ) ) {
                     update_option( 'woocommerce_registration_generate_username', 'yes' );
                 }
@@ -91,6 +91,8 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
                 if ( 'yes' === get_option( 'woocommerce_registration_generate_password' ) ) {
                     update_option( 'woocommerce_registration_generate_password', 'no' );
                 }
+
+                update_option( 'polen_woocommerce_setup_finish', 'true' );
             }
         }
 
