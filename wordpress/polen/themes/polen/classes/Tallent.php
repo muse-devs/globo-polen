@@ -50,7 +50,7 @@ class Tallent {
         if( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
         if( !current_user_can( 'edit_post' ) ) return;
 
-        if( $_POST['post_type'] == 'product' ){
+        if( isset( $_POST['post_type'] ) && ( $_POST['post_type'] == 'product' ) ){
             $chosen_tallent = isset( $_POST['polen_choose_tallent'] )? $_POST[ 'polen_choose_tallent' ]: '';
             $post_author = sanitize_text_field( $chosen_tallent );
 

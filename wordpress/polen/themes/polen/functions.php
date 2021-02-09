@@ -166,27 +166,4 @@ require get_template_directory() . '/inc/template-functions.php';
  */
 require get_template_directory() . '/inc/customizer.php';
 
-
-if( is_admin() ) {
-	remove_action( 'welcome_panel', 'wp_welcome_panel' );
-	add_action( 'wp_dashboard_setup', 'polen_dashboard_widgets');
-	function polen_dashboard_widgets(){
-		 remove_meta_box('welcome_panel', 'dashboard', 'normal');
-		 remove_meta_box('dashboard_site_health', 'dashboard', 'normal');     // Status do Diagnóstico
-		 remove_meta_box('dashboard_activity', 'dashboard', 'normal');        // Atividade
-		 remove_meta_box('dashboard_right_now', 'dashboard', 'normal');       // Agora
-		 remove_meta_box('dashboard_recent_comments', 'dashboard', 'normal'); // Comentários Recentes
-		 remove_meta_box('dashboard_incoming_links', 'dashboard', 'normal');  // Links
-		 remove_meta_box('dashboard_plugins', 'dashboard', 'normal');         // Plugins
-		 remove_meta_box('dashboard_quick_press', 'dashboard', 'side');       // Quick Press
-		 remove_meta_box('dashboard_recent_drafts', 'dashboard', 'side');     // Rascunhos
-		 remove_meta_box('dashboard_primary', 'dashboard', 'side');           // Novidades e eventos do Wordpress
-		 remove_meta_box('dashboard_secondary', 'dashboard', 'side');         // Outas novidades do Wordpress
-	}
-}
-
-add_action( 'admin_init', 'footer_text' );
-function footer_text() {
-     add_filter( 'admin_footer_text', '__return_false' );
-}
-add_filter( 'update_footer', '__return_false' );
+require get_template_directory() . '/classes/Tallent.php';
