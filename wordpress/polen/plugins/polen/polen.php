@@ -71,6 +71,8 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
                 if( defined( 'MULTISITE' ) && is_network_admin() ) {
                     add_action( 'wp_network_dashboard_setup', array( 'Remove_Dashboard_Metaboxes_Multisite' ) );
                 }
+
+                register_activation_hook( __FILE__, array( $this, 'do_install' ) );
             }
         }
 
@@ -142,8 +144,54 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
             wp_enqueue_script('polen-script', PLUGIN_POLEN_URL . 'assets/scripts/scripts.js', array( 'jquery' ), null, true );
         }
 
+        public function do_install(){
+            if( ! taxonomy_exists( 'talent_category' ) ) {
+                register_taxonomy(
+                    'talent_category',
+                    'user_talent',
+                    array( 
+                        'public' => true,
+                        'show_ui' => true,
+                        'show_in_menu' => true, 
+                        'query_var' => true,
+                        'show_in_rest' => true, 
+                        'labels' => array(
+                            'name'		=> __( 'Categoria de Talento', 'polen' ),
+                            'singular_name'	=>  __( 'Categoria de Talento', 'polen' ),
+                            'menu_name'	=>  __( 'Categoria de Talento', 'polen' ),
+                            'search_items'	=> __( 'Pesquisar Categoria de Talento', 'polen' ),
+                            'all_items'	=>  __( 'Todas Categorias de Talento', 'polen' ),
+                            'edit_item'	=>  __( 'Editar Categoria de Talento', 'polen' ),
+                            'update_item'	=>  __( 'Atualizar Categoria de Talento', 'polen' ),
+                            'add_new_item'	=>  __( 'Nova Categoria de Talento', 'polen' ),
+                        ),
+                        'update_count_callback' => function() {
+                            return;
+                        }
+                    )
+                );
+            }
+
+            remove_role( 'user_talent' );
+            add_role( 'user_talent', 
+                        __( 'Talento', 'polen' ), 
+                        array(
+                            'read'                      => true,
+                            'publish_posts'             => true,
+                            'edit_posts'                => true,
+                            'edit_published_posts'      => true,
+                            'upload_files'              => true,
+                            'edit_product'              => true,
+                            'read_product'              => true,
+                            'manage_product_terms'      => true,
+                            'delete_product_terms'      => true,
+                            'assign_product_terms'      => true,
+                        )
+            );
+        }
+
     }
 
     new Polen( true );
-
+    require 'classes/Talent.php';
 }

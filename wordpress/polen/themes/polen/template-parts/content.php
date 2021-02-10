@@ -22,14 +22,14 @@
 			?>
 			<div class="entry-meta">
 				<?php
-				polen_posted_on();
-				polen_posted_by();
+				//polen_posted_on();
+				//polen_posted_by();
 				?>
 			</div><!-- .entry-meta -->
 		<?php endif; ?>
 	</header><!-- .entry-header -->
 
-	<?php polen_post_thumbnail(); ?>
+	<?php //polen_post_thumbnail(); ?>
 
 	<div class="entry-content">
 		<?php
@@ -58,6 +58,6 @@
 	</div><!-- .entry-content -->
 
 	<footer class="entry-footer">
-		<?php polen_entry_footer(); ?>
+		<?php //polen_entry_footer(); ?>
 	</footer><!-- .entry-footer -->
 </article><!-- #post-<?php the_ID(); ?> -->
