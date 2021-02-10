@@ -144,6 +144,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 
     }
 
+    include_once 'includes/CreateUserProcess.php';
     new Polen( true );
 
 }

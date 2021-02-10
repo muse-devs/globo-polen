@@ -190,3 +190,8 @@ function footer_text() {
      add_filter( 'admin_footer_text', '__return_false' );
 }
 add_filter( 'update_footer', '__return_false' );
+
+function polen_post_thumbnail() {return true;}
+function polen_posted_on(){}
+function polen_posted_by(){}
+function polen_entry_footer(){}
