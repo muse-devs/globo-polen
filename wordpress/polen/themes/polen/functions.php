@@ -12,6 +12,8 @@ if ( ! defined( '_S_VERSION' ) ) {
 	define( '_S_VERSION', '1.0.0' );
 }
 
+define('TEMPLATE_URI', get_template_directory_uri());
+
 if ( ! function_exists( 'polen_setup' ) ) :
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.
@@ -143,7 +145,11 @@ function polen_scripts() {
 	wp_enqueue_style( 'polen-style', get_stylesheet_uri(), array(), _S_VERSION );
 	wp_style_add_data( 'polen-style', 'rtl', 'replace' );
 
-	wp_enqueue_script( 'polen-navigation', get_template_directory_uri() . '/assets/js/navigation.js', array(), _S_VERSION, true );
+	wp_enqueue_style('bootstrap', TEMPLATE_URI . '/assets/bootstrap-4.6.0/dist/css/bootstrap.min.css', array(), _S_VERSION);
+	wp_enqueue_style('polen-custom-styles', TEMPLATE_URI . '/assets/css/style.css', array('bootstrap'), _S_VERSION);
+
+	wp_enqueue_script( 'polen-bootstrap-bundle', TEMPLATE_URI . '/assets/bootstrap-4.6.0/dist/js/bootstrap.bundle.min.js', array(), '4.6.0', true );
+	wp_enqueue_script( 'polen-navigation', TEMPLATE_URI . '/assets/js/navigation.js', array(), _S_VERSION, true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
@@ -166,32 +172,4 @@ require get_template_directory() . '/inc/template-functions.php';
  */
 require get_template_directory() . '/inc/customizer.php';
 
-
-if( is_admin() ) {
-	remove_action( 'welcome_panel', 'wp_welcome_panel' );
-	add_action( 'wp_dashboard_setup', 'polen_dashboard_widgets');
-	function polen_dashboard_widgets(){
-		 remove_meta_box('welcome_panel', 'dashboard', 'normal');
-		 remove_meta_box('dashboard_site_health', 'dashboard', 'normal');     // Status do Diagnóstico
-		 remove_meta_box('dashboard_activity', 'dashboard', 'normal');        // Atividade
-		 remove_meta_box('dashboard_right_now', 'dashboard', 'normal');       // Agora
-		 remove_meta_box('dashboard_recent_comments', 'dashboard', 'normal'); // Comentários Recentes
-		 remove_meta_box('dashboard_incoming_links', 'dashboard', 'normal');  // Links
-		 remove_meta_box('dashboard_plugins', 'dashboard', 'normal');         // Plugins
-		 remove_meta_box('dashboard_quick_press', 'dashboard', 'side');       // Quick Press
-		 remove_meta_box('dashboard_recent_drafts', 'dashboard', 'side');     // Rascunhos
-		 remove_meta_box('dashboard_primary', 'dashboard', 'side');           // Novidades e eventos do Wordpress
-		 remove_meta_box('dashboard_secondary', 'dashboard', 'side');         // Outas novidades do Wordpress
-	}
-}
-
-add_action( 'admin_init', 'footer_text' );
-function footer_text() {
-     add_filter( 'admin_footer_text', '__return_false' );
-}
-add_filter( 'update_footer', '__return_false' );
-
-function polen_post_thumbnail() {return true;}
-function polen_posted_on(){}
-function polen_posted_by(){}
-function polen_entry_footer(){}
+require get_template_directory() . '/classes/Tallent.php';
