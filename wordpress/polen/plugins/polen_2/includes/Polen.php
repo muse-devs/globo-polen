@@ -29,7 +29,7 @@ use Polen\Admin\Polen_Admin;
  *
  * @since      1.0.0
  * @package    Polen
- * @subpackage Polen/includes
+ * @subpackage Polen/Includes
  * @author     Rodolfo <rodolfoneto@gmail.com>
  */
 class Polen {

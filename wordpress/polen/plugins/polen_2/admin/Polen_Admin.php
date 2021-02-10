@@ -54,6 +54,7 @@ class Polen_Admin {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 
+		new Polen_Admin_DisableMetabox( true );
 	}
 
 	/**
