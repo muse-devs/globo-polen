@@ -82,7 +82,7 @@ this["wc"] = this["wc"] || {}; this["wc"]["onboardingTaxNotice"] =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 472);
+/******/ 	return __webpack_require__(__webpack_require__.s = 467);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -235,7 +235,7 @@ module.exports = _typeof;
 
 /***/ }),
 
-/***/ 472:
+/***/ 467:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

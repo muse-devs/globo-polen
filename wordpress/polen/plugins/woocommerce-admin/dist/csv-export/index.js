@@ -82,7 +82,7 @@ this["wc"] = this["wc"] || {}; this["wc"]["csvExport"] =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 459);
+/******/ 	return __webpack_require__(__webpack_require__.s = 454);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -94,7 +94,7 @@ this["wc"] = this["wc"] || {}; this["wc"]["csvExport"] =
 
 /***/ }),
 
-/***/ 286:
+/***/ 284:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* FileSaver.js
@@ -381,7 +381,7 @@ if ( true && module.exports) {
 
 /***/ }),
 
-/***/ 459:
+/***/ 454:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -391,7 +391,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "downloadCSVFile", function() { return downloadCSVFile; });
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(16);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var browser_filesaver__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(286);
+/* harmony import */ var browser_filesaver__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(284);
 /* harmony import */ var browser_filesaver__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(browser_filesaver__WEBPACK_IMPORTED_MODULE_1__);
 /**
  * External dependencies

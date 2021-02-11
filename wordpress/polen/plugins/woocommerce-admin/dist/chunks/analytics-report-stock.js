@@ -1,6 +1,6 @@
 (window["__wcAdmin_webpackJsonp"] = window["__wcAdmin_webpackJsonp"] || []).push([[17],{
 
-/***/ 486:
+/***/ 481:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -78,7 +78,7 @@ var config_filters = Object(external_this_wp_hooks_["applyFilters"])(STOCK_REPOR
 }]);
 var config_advancedFilters = Object(external_this_wp_hooks_["applyFilters"])(STOCK_REPORT_ADVANCED_FILTERS_FILTER, {});
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/assertThisInitialized.js
-var assertThisInitialized = __webpack_require__(8);
+var assertThisInitialized = __webpack_require__(9);
 var assertThisInitialized_default = /*#__PURE__*/__webpack_require__.n(assertThisInitialized);
 
 // EXTERNAL MODULE: external {"this":["wp","htmlEntities"]}
@@ -88,16 +88,16 @@ var external_this_wp_htmlEntities_ = __webpack_require__(40);
 var external_this_wc_components_ = __webpack_require__(47);
 
 // EXTERNAL MODULE: external {"this":["wc","navigation"]}
-var external_this_wc_navigation_ = __webpack_require__(20);
+var external_this_wc_navigation_ = __webpack_require__(21);
 
 // EXTERNAL MODULE: external {"this":["wc","number"]}
-var external_this_wc_number_ = __webpack_require__(144);
+var external_this_wc_number_ = __webpack_require__(142);
 
 // EXTERNAL MODULE: ./client/settings/index.js
 var settings = __webpack_require__(25);
 
 // EXTERNAL MODULE: ./client/analytics/components/report-table/index.js + 2 modules
-var report_table = __webpack_require__(508);
+var report_table = __webpack_require__(503);
 
 // CONCATENATED MODULE: ./client/analytics/report/stock/utils.js
 /**
@@ -115,7 +115,7 @@ function isLowStock(status, quantity, threshold) {
   return status && quantity <= threshold === 'instock';
 }
 // EXTERNAL MODULE: ./client/lib/currency-context.js
-var currency_context = __webpack_require__(500);
+var currency_context = __webpack_require__(495);
 
 // CONCATENATED MODULE: ./client/analytics/report/stock/table.js
 
@@ -301,7 +301,7 @@ var table_StockReportTable = /*#__PURE__*/function (_Component) {
 table_StockReportTable.contextType = currency_context["a" /* CurrencyContext */];
 /* harmony default export */ var table = (table_StockReportTable);
 // EXTERNAL MODULE: ./client/analytics/components/report-filters/index.js
-var report_filters = __webpack_require__(507);
+var report_filters = __webpack_require__(502);
 
 // CONCATENATED MODULE: ./client/analytics/report/stock/index.js
 
