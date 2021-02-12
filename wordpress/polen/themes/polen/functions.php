@@ -145,8 +145,9 @@ function polen_scripts() {
 	wp_enqueue_style( 'polen-style', get_stylesheet_uri(), array(), _S_VERSION );
 	wp_style_add_data( 'polen-style', 'rtl', 'replace' );
 
-	wp_enqueue_style('bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css', array(), '4.6.0');
-	wp_enqueue_style('polen-custom-styles', TEMPLATE_URI . '/assets/css/style.css', array('bootstrap'), _S_VERSION);
+	wp_enqueue_style('font-poppins', 'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap', array(), '1.0.0');
+	wp_enqueue_style('font-inter', 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap', array(), '1.0.0');
+	wp_enqueue_style('polen-custom-styles', TEMPLATE_URI . '/assets/css/style.css', array(), _S_VERSION);
 
 	wp_enqueue_script( 'polen-bootstrap-bundle', 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js', array(), '4.6.0', true );
 	wp_enqueue_script( 'polen-navigation', TEMPLATE_URI . '/assets/js/navigation.js', array(), _S_VERSION, true );
