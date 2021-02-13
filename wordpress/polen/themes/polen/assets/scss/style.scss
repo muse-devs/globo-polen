@@ -1,21 +1,8 @@
 // Your variable overrides
 @import "colors";
+
 // Bootstrap por último
 @import "../bootstrap-4.0.0/scss/bootstrap.scss";
-
-body {
-	font-family: "Inter", sans-serif;
-}
-
-ul {
-	margin: 0;
-	padding: 0;
-	list-style-type: none;
-}
-
-h1,
-h2,
-h3,
-h4 {
-	font-family: "Poppins", sans-serif;
-}
+@import "reset";
+@import "forms";
+@import "cards";
