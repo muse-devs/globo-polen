@@ -10,6 +10,7 @@
             <td>
                 <div id="PolenVendorTabs">
                     <ul>
+                        <li><a href="#PolenVendorProfileTab0">Geral</a></li>
                         <li><a href="#PolenVendorProfileTab1">Dados do Talento</a></li>
                         <li><a href="#PolenVendorProfileTab2">Informações de Contato</a></li>
                         <li><a href="#PolenVendorProfileTab3">Redes Sociais</a></li>
@@ -18,7 +19,47 @@
                         <li><a href="#PolenVendorProfileTab6">Configurações Financeiras</a></li>
                         <?php } ?>
                     </ul>
+
                     <!-- Dados da Loja -->
+                    <div id="PolenVendorProfileTab0">
+                        <table class="form-table">
+                            <tr>
+                                <th>
+                                    Slug do Perfil
+                                </th>
+                                <td>
+                                    <input type="text" name="talent_alias" value="<?php echo ( isset( $vendorInfo->talent_alias ) ) ? $vendorInfo->talent_alias : ''; ?>" autocomplete="password" class="widefat" maxlength="255">
+                                    <small>Ex: <?php bloginfo( 'url' ); ?><strong>/nome-do-talento/</strong></small>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Responde em
+                                </th>
+                                <td>
+                                    <input type="text" name="tempo_resposta" value="<?php echo ( isset( $vendorInfo->tempo_resposta ) ) ? $vendorInfo->tempo_resposta : ''; ?>" autocomplete="password" class="widefat" maxlength="255">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Profissão
+                                </th>
+                                <td>
+                                    <input type="text" name="profissao" value="<?php echo ( isset( $vendorInfo->profissao ) ) ? $vendorInfo->profissao : ''; ?>" autocomplete="password" class="widefat" maxlength="255">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Descrição
+                                </th>
+                                <td>
+                                    <textarea name="descricao" rows="5" cols="80" class="widefat" style="width: 100%;"><?php echo ( isset( $vendorInfo->descricao ) ) ? $vendorInfo->descricao : ''; ?></textarea>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <!-- Dados do Talento -->
                     <div id="PolenVendorProfileTab1">
                         <table class="form-table">
                             <tr>

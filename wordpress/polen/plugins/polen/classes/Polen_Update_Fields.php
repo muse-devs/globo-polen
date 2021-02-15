@@ -75,6 +75,14 @@ class Polen_Update_Fields {
             wp_set_object_terms( $user_id, $talent_category, 'talent_category', false );
         }
 
+        // Aba "Geral"
+        $talent_alias = (string) strip_tags( trim( $_POST['razao_social'] ) );
+        $args['talent_alias'] = ( $talent_alias ) ? $talent_alias : sanitize_title( $email );
+        $args['talent_url'] = get_bloginfo('url') . '/talent/' . $args['talent_alias'];
+        $args['tempo_resposta'] = (string) strip_tags( trim( $_POST['tempo_resposta'] ) );
+        $args['profissao'] = (string) strip_tags( trim( $_POST['profissao'] ) );
+        $args['descricao'] = (string) strip_tags( trim( $_POST['descricao'] ) );
+
         // Aba "Dados do Talento"
         $natureza_juridica = (string) strip_tags( trim( $_POST['natureza_juridica'] ) );
         if( $natureza_juridica != 'PJ' && $natureza_juridica != 'PF' ) {
@@ -187,10 +195,6 @@ class Polen_Update_Fields {
         $args['subordinate_merchant_id'] = $subordinate_merchant_id;
         $args['mdr'] = $mdr;
         $args['fee'] = $fee;
-
-        // Estático por enquanto
-        $args['talent_alias'] = sanitize_title( $email );
-        $args['talent_url'] = get_bloginfo('url') . '/talent/' . $args['talent_alias'];
 
         global $wpdb;
         $vendorData = $this->get_vendor_data( $user_id );
