@@ -1,0 +1,13 @@
+.card {
+	padding: 20px;
+	font-size: 20px;
+	border-radius: 10px;
+	background-color: $default-bg-color;
+	&.big {
+		border-radius: 0;
+	}
+	&.small {
+		padding: 50px 20px;
+		text-align: center;
+	}
+}

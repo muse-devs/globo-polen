@@ -9,6 +9,10 @@ class Talent {
             add_filter( 'save_post', array( $this, 'save_talent_on_product' ) );
             add_action( 'rest_api_init', array( $this, 'tallent_rest_itens' ) );   
             add_action( 'user_register', array( $this, 'create_talent_product' ) );
+            add_action( 'admin_menu', array( $this, 'talent_submenu' ) );
+            add_filter( 'manage_users_columns', array( $this, 'talent_filter_column' ),10, 1 );
+            add_filter( 'manage_edit-product_columns', array( $this, 'talent_filter_product_column' ),10, 1 );
+            add_filter( 'manage_users_custom_column', array( $this, 'talent_custom_users_value' ), 10, 3 );
         }
     }
 
@@ -68,6 +72,7 @@ class Talent {
         
         //verify if user is a talent
         if ( in_array( 'user_talent', $user_roles, true ) ) {
+            update_user_meta( $user_id, 'talent_enabled', '0' );
             //verify if the talent has a product
             $user_product = new WP_Query( array( 'author' => $user_id ) );
             if ( !$user_product->have_posts() ) {
@@ -76,6 +81,7 @@ class Talent {
                 $product->set_name( $user->first_name . ' ' . $user->last_name );
                 $product->set_status( 'draft' );
                 $product->set_slug( sanitize_title( $user->first_name . ' ' . $user->last_name ) );
+                $product->set_virtual( true );
                 $product->save();
                 $id = $product->get_id();
                 
@@ -95,7 +101,40 @@ class Talent {
 				'schema' => null,
 			)
 		);
-	} 
+    }
+     
+    public function talent_filter_product_column( $columns ) {
+        unset( $columns[ 'is_in_stock' ] );
+        return $columns;
+    }
+     
+    public function talent_filter_column( $columns ) {
+        unset( $columns[ 'posts' ] );
+        $columns[ 'status' ] = 'Status';
+        return $columns;
+    }
+
+    public function talent_submenu() {
+        if( current_user_can( 'list_users' ) ){
+            add_submenu_page( 'users.php', 'Talento', 'Talento', 'manage_options', 'users.php?role=user_talent'  );
+      }
+    }
+
+    public function talent_custom_users_value( $value, $column, $user_id ) {
+        switch( $column ) {
+            case 'status' :
+                $talent_enabled = get_the_author_meta( 'talent_enabled', $user_id );
+                $str_status = '-';
+                if( $talent_enabled == '0' ){
+                    $str_status = 'Desativado';
+                }else if( $talent_enabled == '1' ){
+                    $str_status = 'Ativo';
+                }
+                return $str_status;
+            default:
+        }
+        return $value;
+    }
 }
 
 $tallent = new Talent( true );
