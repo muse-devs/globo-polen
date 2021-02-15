@@ -76,7 +76,7 @@ class Polen_Update_Fields {
         }
 
         // Aba "Geral"
-        $talent_alias = (string) strip_tags( trim( $_POST['razao_social'] ) );
+        $talent_alias = (string) sanitize_title( strip_tags( trim( $_POST['talent_alias'] ) ) );
         $args['talent_alias'] = ( $talent_alias ) ? $talent_alias : sanitize_title( $email );
         $args['talent_url'] = get_bloginfo('url') . '/talent/' . $args['talent_alias'];
         $args['tempo_resposta'] = (string) strip_tags( trim( $_POST['tempo_resposta'] ) );
