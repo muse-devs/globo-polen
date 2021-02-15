@@ -49,9 +49,7 @@ class Polen_Update_Fields {
     }
 
     public function fields( $user ) {
-        // if( isset( $user->caps['seller'] ) && $user->caps['seller'] == true ) {
-            require_once PLUGIN_POLEN_DIR . '/assets/metaboxes/metabox-talent-data.php';
-        // }
+        require_once PLUGIN_POLEN_DIR . '/assets/metaboxes/metabox-talent-data.php';
     }
 
     public function get_vendor_data( $user_id ) {
