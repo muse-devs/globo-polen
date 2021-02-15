@@ -2,39 +2,39 @@
     <h2>Dados do Talento</h2>
     <?php
     $current_screen = get_current_screen();
-    // $C9_User_WC_Profile_Fields = new C9_User_WC_Profile_Fields();
-    // $vendorInfo = $C9_User_WC_Profile_Fields->getVendorData( intval( $_REQUEST['user_id'] ) );
+    $Polen_Update_Fields = new Polen_Update_Fields();
+    $vendorInfo = $Polen_Update_Fields->get_vendor_data( intval( $_REQUEST['user_id'] ) );
     ?>
     <table class="form-table">
         <tbody>
             <td>
-                <div id="cubo9VendorTabs">
+                <div id="PolenVendorTabs">
                     <ul>
                         <li><a href="#PolenVendorProfileTab1">Dados do Talento</a></li>
                         <li><a href="#PolenVendorProfileTab2">Informações de Contato</a></li>
                         <li><a href="#PolenVendorProfileTab3">Redes Sociais</a></li>
                         <?php if( is_admin() && ( $current_screen->base == 'user-edit' || ( $current_screen->base == 'user' && $current_screen->action == 'add' ) ) ) { ?>
                         <li><a href="#PolenVendorProfileTab5">Dados Bancários</a></li>
-                        <li><a href="#PolenVendorProfileTab5">Configurações Financeiras</a></li>
+                        <li><a href="#PolenVendorProfileTab6">Configurações Financeiras</a></li>
                         <?php } ?>
                     </ul>
                     <!-- Dados da Loja -->
-                    <div id="cubo9VendorProfileTab1">
+                    <div id="PolenVendorProfileTab1">
                         <table class="form-table">
                             <tr>
                                 <th>
                                     Segmento principal
                                 </th>
                                 <td>
-                                    <select name="store_category" id="store_category" class="widefat">
+                                    <select name="talent_category" id="talent_category" class="widefat">
                                         <option value=""><?php echo esc_html__('Choose a store category', 'cubo9-marketplace' );?></option>
                                         <?php 
                                         $terms = get_terms( array(
-                                            'taxonomy' => 'store_category',
+                                            'taxonomy' => 'talent_category',
                                             'hide_empty' => false,
                                         ) );
                                         if( ! is_wp_error( $terms ) && count( $terms ) > 0 ) {
-                                            $storeCategories = wp_get_object_terms( $_REQUEST['user_id'], 'store_category' );
+                                            $storeCategories = wp_get_object_terms( $_REQUEST['user_id'], 'talent_category' );
                                             foreach( $terms as $term) {
                                                 $selected="";
                                                 if( $storeCategories[0]->slug == $term->slug ){
@@ -53,7 +53,7 @@
                                     Natureza Jurídica
                                 </th>
                                 <td>
-                                    <select name="natureza_juridica" id="c9mktplace_natureza_juridica" class="widefat">
+                                    <select name="natureza_juridica" id="polen_natureza_juridica" class="widefat">
                                         <option value="PJ" <?php echo ( isset( $vendorInfo->natureza_juridica ) && $vendorInfo->natureza_juridica == 'PJ' ) ? ' selected' : ''; ?>>Pessoa Jurídica</option>
                                         <option value="PF" <?php echo ( isset( $vendorInfo->natureza_juridica ) && $vendorInfo->natureza_juridica == 'PF' ) ? ' selected' : ''; ?>>Pessoa Física</option>
                                     </select>
@@ -80,7 +80,7 @@
                                     CNPJ
                                 </th>
                                 <td>
-                                    <input type="text" name="cnpj" value="<?php echo ( isset( $vendorInfo->cnpj ) ) ? $vendorInfo->cnpj : ''; ?>" autocomplete="password" class="widefat c9-cnpj" maxlength="18">
+                                    <input type="text" name="cnpj" value="<?php echo ( isset( $vendorInfo->cnpj ) ) ? $vendorInfo->cnpj : ''; ?>" autocomplete="password" class="widefat polen-cnpj" maxlength="18">
                                 </td>
                             </tr>
                             <tr class="natureza-juridica-pj">
@@ -106,14 +106,14 @@
                                     CPF
                                 </th>
                                 <td>
-                                    <input type="text" name="cpf" value="<?php echo ( isset( $vendorInfo->cpf ) ) ? $vendorInfo->cpf : ''; ?>" autocomplete="password" class="widefat c9-cpf" maxlength="14">
+                                    <input type="text" name="cpf" value="<?php echo ( isset( $vendorInfo->cpf ) ) ? $vendorInfo->cpf : ''; ?>" autocomplete="password" class="widefat polen-cpf" maxlength="14">
                                 </td>
                             </tr>
                         </table>
                     </div>
 
                     <!-- Informações de Contato -->
-                    <div id="cubo9VendorProfileTab2">
+                    <div id="PolenVendorProfileTab2">
                         <table class="form-table">
                             <tr>
                                 <th>
@@ -128,7 +128,7 @@
                                     Telefone
                                 </th>
                                 <td>
-                                    <input type="text" name="telefone" value="<?php echo ( isset( $vendorInfo->telefone ) ) ? $vendorInfo->telefone : ''; ?>" autocomplete="password" class="widefat c9-phone" maxlength="15">
+                                    <input type="text" name="telefone" value="<?php echo ( isset( $vendorInfo->telefone ) ) ? $vendorInfo->telefone : ''; ?>" autocomplete="password" class="widefat polen-phone" maxlength="15">
                                 </td>
                             </tr>
                             <tr>
@@ -136,7 +136,7 @@
                                     Celular
                                 </th>
                                 <td>
-                                    <input type="text" name="celular" value="<?php echo ( isset( $vendorInfo->celular ) ) ? $vendorInfo->celular : ''; ?>" autocomplete="password" class="widefat c9-phone" maxlength="15">
+                                    <input type="text" name="celular" value="<?php echo ( isset( $vendorInfo->celular ) ) ? $vendorInfo->celular : ''; ?>" autocomplete="password" class="widefat polen-phone" maxlength="15">
                                 </td>
                             </tr>
                             <tr>
@@ -144,14 +144,14 @@
                                     WhatsApp
                                 </th>
                                 <td>
-                                    <input type="text" name="whatsapp" value="<?php echo ( isset( $vendorInfo->whatsapp ) ) ? $vendorInfo->whatsapp : ''; ?>" autocomplete="password" class="widefat c9-phone" maxlength="15">
+                                    <input type="text" name="whatsapp" value="<?php echo ( isset( $vendorInfo->whatsapp ) ) ? $vendorInfo->whatsapp : ''; ?>" autocomplete="password" class="widefat polen-phone" maxlength="15">
                                 </td>
                             </tr>
                         </table>
                     </div>
 
                     <!-- Redes Sociais -->
-                    <div id="cubo9VendorProfileTab3">
+                    <div id="PolenVendorProfileTab3">
                         <table class="form-table">
                             <tr>
                                 <th>
@@ -206,7 +206,7 @@
 
                     <?php if( is_admin() && ( $current_screen->base == 'user-edit' || ( $current_screen->base == 'user' && $current_screen->action == 'add' ) ) ) { ?>
                     <!-- Dados Bancários -->
-                    <div id="cubo9VendorProfileTab5">
+                    <div id="PolenVendorProfileTab5">
                     <table class="form-table">
                             <tr>
                                 <th>
@@ -214,13 +214,13 @@
                                 </th>
                                 <td>
                                     <?php
-                                    $C9_Bancos = new C9_Bancos();
-                                    $bancos = $C9_Bancos->listar();
+                                    $Polen_Bancos = new Polen_Bancos();
+                                    $bancos = $Polen_Bancos->listar();
                                     ?>
                                     <select name="banco" class="widefat">
                                         <option value="">Selecione...</option>
                                         <?php
-                                        if( count( $bancos ) > 0 ) {
+                                        if( $bancos && is_array( $bancos ) && count( $bancos ) > 0 ) {
                                             foreach( $bancos as $k => $banco ) {
                                                 $codigo_banco = str_pad( $banco->codigo, 3, "0", STR_PAD_LEFT );
                                                 $selected = ( isset( $vendorInfo->codigo_banco ) && strval( $vendorInfo->codigo_banco ) == strval( $codigo_banco ) ) ? ' selected' : '';
@@ -238,7 +238,7 @@
                                     Agência
                                 </th>
                                 <td>
-                                    <input type="text" name="agencia" value="<?php echo ( isset( $vendorInfo->agencia ) ) ? $vendorInfo->agencia : ''; ?>" autocomplete="password" class="widefat c9-digits-only" maxlength="4">
+                                    <input type="text" name="agencia" value="<?php echo ( isset( $vendorInfo->agencia ) ) ? $vendorInfo->agencia : ''; ?>" autocomplete="password" class="widefat polen-digits-only" maxlength="4">
                                 </td>
                             </tr>
                             <tr>
@@ -246,7 +246,7 @@
                                     Conta
                                 </th>
                                 <td>
-                                    <input type="text" name="conta" value="<?php echo ( isset( $vendorInfo->conta ) ) ? $vendorInfo->conta : ''; ?>" autocomplete="password" class="widefat c9-bank-account" maxlength="20">
+                                    <input type="text" name="conta" value="<?php echo ( isset( $vendorInfo->conta ) ) ? $vendorInfo->conta : ''; ?>" autocomplete="password" class="widefat polen-bank-account" maxlength="20">
                                 </td>
                             </tr>
                             <tr>
@@ -265,7 +265,7 @@
                     </div>
 
                     <!-- Configurações -->
-                    <div id="cubo9VendorProfileTab6">
+                    <div id="PolenVendorProfileTab6">
                         <table class="form-table">
                             <tr>
                                 <th>
@@ -288,7 +288,7 @@
                                     Fee
                                 </th>
                                 <td>
-                                    <input type="text" name="fee" value="<?php echo ( isset( $vendorInfo->fee ) ) ? $vendorInfo->fee : ''; ?>" autocomplete="password" class="widefat c9-digits-only" maxlength="5">
+                                    <input type="text" name="fee" value="<?php echo ( isset( $vendorInfo->fee ) ) ? $vendorInfo->fee : ''; ?>" autocomplete="password" class="widefat polen-digits-only" maxlength="5">
                                 </td>
                             </tr>
                         </table>

@@ -2,56 +2,61 @@
 
 class Polen_Update_Fields {
 
-    private $table_vendor;
+    private $table_talent;
 
     public function __construct( $static = false ) {
         if( $static ) {
             /* New User */
             add_action( 'user_new_form',  array( $this, 'fields' ), 10, 1 );
-            add_action( 'user_register', array( $this, 'updateVendorProfile' ) );
+            add_action( 'user_register', array( $this, 'update_vendor_profile' ) );
             
             /* Edit or Profile User */
-            add_action( 'show_user_profile',  array( $this, 'vendorFields' ), 10, 1 );
-            add_action( 'edit_user_profile', array( $this, 'vendorFields' ), 10, 1 );
-            add_action( 'edit_user_profile_update', array( $this, 'updateVendorProfile' ) );
+            add_action( 'show_user_profile',  array( $this, 'fields' ), 10, 1 );
+            add_action( 'edit_user_profile', array( $this, 'fields' ), 10, 1 );
+            add_action( 'edit_user_profile_update', array( $this, 'update_vendor_profile' ) );
             
             if( is_admin() && isset( $_REQUEST['user_id'] ) ) {
                 require_once ABSPATH . '/wp-includes/pluggable.php';
                 $user = get_user_by( 'id', $_REQUEST['user_id'] );
-                if( isset( $user->caps['seller'] ) && $user->caps['seller'] == true ) {
-                    add_filter( 'woocommerce_customer_meta_fields', array( $this, 'removeWooCommerceFields' ), 9999 );
+                if( isset( $user->caps['user_talent'] ) && $user->caps['user_talent'] == true ) {
+                    add_filter( 'woocommerce_customer_meta_fields', array( $this, 'remove_woocommerce_fields' ), 9999 );
                 }
             }
 
+            add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
+
             add_action( 'woocommerce_edit_account_form_start', array( $this, 'add_cpf_to_form' ) );
             add_action( 'woocommerce_edit_account_form_start', array( $this, 'add_phone_to_form' ) );
-            add_filter( 'woocommerce_save_account_details', array( $this, 'c9_save_account_details' ) );
+            add_filter( 'woocommerce_save_account_details', array( $this, 'save_account_details' ) );
 
             add_action( 'woocommerce_before_checkout_billing_form', array( $this, 'add_cpf_and_phone_to_checkout') );
-            //add_action( 'woocommerce_before_checkout_billing_form', array( $this, 'add_is_gift_to_checkout') );
-            //add_action( 'woocommerce_before_checkout_billing_form', array( $this, 'add_gift_fields_to_checkout') );
-            add_action( 'woocommerce_checkout_shipping', array( $this, 'add_is_gift_to_checkout') );
-            add_action( 'woocommerce_checkout_shipping', array( $this, 'add_gift_fields_to_checkout') );
             add_action( 'woocommerce_checkout_update_order_meta', array( $this, 'save_order_meta_from_checkout' ) );
         }
 
         global $wpdb;
-        $this->table_vendor = $wpdb->base_prefix . 'c9_vendor';
+        $this->table_talent = $wpdb->base_prefix . 'polen_talents';
     }
 
     public function remove_woocommerce_fields() {
         return [];
     }
 
+    public function admin_scripts() {
+        global $wp_scripts;
+        wp_enqueue_style( 'jquery-ui', 'https://code.jquery.com/ui/' . $wp_scripts->registered['jquery-ui-core']->ver . '/themes/smoothness/jquery-ui.min.css' );
+        wp_enqueue_script('jquery-maskedinput', PLUGIN_POLEN_URL . 'assets/scripts/vendor/jquery.maskedinput.min.js', array( 'jquery' ), null, true );
+        wp_enqueue_script('polen-admin-script', PLUGIN_POLEN_URL . 'assets/scripts/admin.js', array( 'jquery', 'jquery-ui-core', 'jquery-ui-tabs' ), null, true );
+    }
+
     public function fields( $user ) {
         // if( isset( $user->caps['seller'] ) && $user->caps['seller'] == true ) {
-            require_once PLUGIN_CUBO9_MARKETPLACE_DIR . '/assets/php/metabox-seller-fields.php';
+            require_once PLUGIN_POLEN_DIR . '/assets/metaboxes/metabox-talent-data.php';
         // }
     }
 
     public function get_vendor_data( $user_id ) {
         global $wpdb;
-        $sql = "SELECT * FROM `" . $this->table_vendor . "` WHERE `user_id`=" . intval( $user_id );
+        $sql = "SELECT * FROM `" . $this->table_talent . "` WHERE `user_id`=" . intval( $user_id );
         $res = $wpdb->get_results( $sql );
         if( count( $res ) > 0 ) {
             return $res[0];
@@ -67,12 +72,12 @@ class Polen_Update_Fields {
         $args['user_id'] = $user_id;
 
         // Segmento principal da Loja
-        $store_category = (string) strip_tags( trim( $_POST['store_category'] ) );
-        if( ! empty( $store_category ) ) {
-            wp_set_object_terms( $user_id, $store_category, 'store_category', false );
+        $talent_category = (string) strip_tags( trim( $_POST['talent_category'] ) );
+        if( ! empty( $talent_category ) ) {
+            wp_set_object_terms( $user_id, $talent_category, 'talent_category', false );
         }
 
-        // Aba "Dados da Loja"
+        // Aba "Dados do Talento"
         $natureza_juridica = (string) strip_tags( trim( $_POST['natureza_juridica'] ) );
         if( $natureza_juridica != 'PJ' && $natureza_juridica != 'PF' ) {
             $natureza_juridica = null;
@@ -186,12 +191,11 @@ class Polen_Update_Fields {
         $args['fee'] = $fee;
 
         // Estático por enquanto
-        $args['pais'] = 'BR';
-        $args['store_alias'] = sanitize_title( $email );
-        $args['store_url'] = get_bloginfo('url') . '/loja/' . sanitize_title( $email );
+        $args['talent_alias'] = sanitize_title( $email );
+        $args['talent_url'] = get_bloginfo('url') . '/talent/' . $args['talent_alias'];
 
         global $wpdb;
-        $vendorData = $this->getVendorData( $user_id );
+        $vendorData = $this->get_vendor_data( $user_id );
         if( $vendorData && ! is_null( $vendorData ) && ! empty( $vendorData ) && isset( $vendorData->ID ) ) {
             $statusDate = new DateTime();
             $timeZone = new DateTimeZone( get_option('timezone_string') );
@@ -205,16 +209,14 @@ class Polen_Update_Fields {
                 'user_id' => $vendorData->user_id
             );
             $update = $wpdb->update(
-                $this->table_vendor,
+                $this->table_talent,
                 $args,
                 $where
             );
-
-            
         } else {
             $args['updated'] = null;
             $insert = $wpdb->insert(
-                $this->table_vendor,
+                $this->table_talent,
                 $args
             );
         }
@@ -301,46 +303,6 @@ class Polen_Update_Fields {
             update_post_meta( $order_id, 'billing_cpf', trim( $_POST['billing_cpf'] ) );
         } else if( $billing_cpf && ! is_null( $billing_cpf ) && ! empty( $billing_cpf ) && strlen( $billing_cpf ) == 14 ) {
             update_post_meta( $order_id, 'billing_cpf', $billing_cpf );
-        }
-    }
-
-    /**
-     * Adicionar o campo de "É um presente", "Nome do destinatário" e "Mensagem para o destinatário".
-     */
-    public function add_is_gift_to_checkout() {
-        $WC_Cubo9_MktplaceReduxSettings = get_option( 'WC_Cubo9_MktplaceReduxSettings' );
-        $enable_gifts = ( (int) $WC_Cubo9_MktplaceReduxSettings['enable_gifts'] == (int) 1 ) ? true : false;
-        $enable_gifts_custom_message = ( (int) $WC_Cubo9_MktplaceReduxSettings['enable_gifts_custom_message'] == (int) 1 ) ? true : false;
-        
-        if( $enable_gifts ) {
-    ?>
-        <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-            <span class="woocommerce-input-wrapper">
-                <label class="checkbox">
-                    <input type="checkbox" class="woocommerce-Input input-checkbox" name="c9_is_gift" id="c9_is_gift" value="1" /> &nbsp; <?php _e( 'É um presente?', 'cubonove' ); ?>
-                </label>
-            </span>
-        </p>
-    <?php
-        }
-    }
-
-    public function add_gift_fields_to_checkout( $checkout ) {
-        $WC_Cubo9_MktplaceReduxSettings = get_option( 'WC_Cubo9_MktplaceReduxSettings' );
-        $enable_gifts = ( (int) $WC_Cubo9_MktplaceReduxSettings['enable_gifts'] == (int) 1 ) ? true : false;
-        $enable_gifts_custom_message = ( (int) $WC_Cubo9_MktplaceReduxSettings['enable_gifts_custom_message'] == (int) 1 ) ? true : false;
-        
-        if( $enable_gifts ) {
-            $args = array(
-                "type"     => "chekbox",
-                "required" => false,
-                "class"    => array( "form-control", "form-row", "input-is-gift" ),
-                // 'label_class'   => array('woocommerce-form__label woocommerce-form__label-for-checkbox checkbox'),
-                'input_class'   => array('woocommerce-form__input woocommerce-form__input-checkbox input-checkbox'),
-                "label"    => __( 'É um presente', 'cubonove'),
-                "value"    => '1',
-            );
-            woocommerce_form_field( 'c9_is_gift', $args );
         }
     }
 
