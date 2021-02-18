@@ -1,13 +1,27 @@
-.card {
-	padding: 20px;
-	font-size: 20px;
-	border-radius: 10px;
-	background-color: $default-bg-color;
+.polen-card {
+	.image {
+		padding: 20px;
+		font-size: 20px;
+		border-radius: 10px;
+		box-sizing: border-box;
+		background: no-repeat center/cover $default-bg-color;
+	}
 	&.big {
-		border-radius: 0;
+		.image {
+			border-radius: 0;
+		}
+	}
+	&.medium {
+		.image {
+			height: 330px;
+		}
 	}
 	&.small {
-		padding: 50px 20px;
-		text-align: center;
+	}
+	&.category {
+		.image {
+			padding: 50px 20px;
+			text-align: center;
+		}
 	}
 }

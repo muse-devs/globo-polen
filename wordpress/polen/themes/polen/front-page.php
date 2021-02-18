@@ -20,13 +20,19 @@ get_header();
 
 	<section class="row my-5 py-4 top-banner">
 		<div class="col-md-4">
-			<div class="card big">a</div>
+			<div class="polen-card big">
+				<figure class="image">a</figure>
+			</div>
 		</div>
 		<div class="col-md-4">
-			<div class="card big">a</div>
+			<div class="polen-card big">
+				<figure class="image">a</figure>
+			</div>
 		</div>
 		<div class="col-md-4">
-			<div class="card big">a</div>
+			<div class="polen-card big">
+				<figure class="image">a</figure>
+			</div>
 		</div>
 	</section>
 
@@ -42,16 +48,40 @@ get_header();
 		<div class="col-md-12">
 			<div class="row">
 				<div class="col-md-3">
-					<div class="card">a</div>
+					<div class="polen-card medium">
+						<figure class="image">
+							<span class="price">R$100</span>
+						</figure>
+						<h4 class="title">Nome do Artista</h4>
+						<h5 class="category">Categoria</h5>
+					</div>
 				</div>
 				<div class="col-md-3">
-					<div class="card">a</div>
+					<div class="polen-card medium">
+						<figure class="image">
+							<span class="price">R$100</span>
+						</figure>
+						<h4 class="title">Nome do Artista</h4>
+						<h5 class="category">Categoria</h5>
+					</div>
 				</div>
 				<div class="col-md-3">
-					<div class="card">a</div>
+					<div class="polen-card medium">
+						<figure class="image">
+							<span class="price">R$100</span>
+						</figure>
+						<h4 class="title">Nome do Artista</h4>
+						<h5 class="category">Categoria</h5>
+					</div>
 				</div>
 				<div class="col-md-3">
-					<div class="card">a</div>
+					<div class="polen-card medium">
+						<figure class="image">
+							<span class="price">R$100</span>
+						</figure>
+						<h4 class="title">Nome do Artista</h4>
+						<h5 class="category">Categoria</h5>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -69,16 +99,24 @@ get_header();
 		<div class="col md-12">
 			<div class="row">
 				<div class="col-md-3">
-					<div class="card small">Categoria a</div>
+					<div class="polen-card category">
+						<figure class="image">Categoria a</figure>
+					</div>
 				</div>
 				<div class="col-md-3">
-					<div class="card small">Categoria a</div>
+					<div class="polen-card category">
+						<figure class="image">Categoria a</figure>
+					</div>
 				</div>
 				<div class="col-md-3">
-					<div class="card small">Categoria a</div>
+					<div class="polen-card category">
+						<figure class="image">Categoria a</figure>
+					</div>
 				</div>
 				<div class="col-md-3">
-					<div class="card small">Categoria a</div>
+					<div class="polen-card category">
+						<figure class="image">Categoria a</figure>
+					</div>
 				</div>
 			</div>
 		</div>
