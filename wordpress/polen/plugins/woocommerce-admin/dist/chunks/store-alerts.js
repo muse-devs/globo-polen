@@ -19,7 +19,7 @@ var REACT_ELEMENT_TYPE =
   (typeof Symbol === 'function' && Symbol.for && Symbol.for('react.element')) ||
   0xeac7;
 
-var emptyFunction = __webpack_require__(82);
+var emptyFunction = __webpack_require__(81);
 var invariant = __webpack_require__(107);
 var warning = __webpack_require__(108);
 
@@ -397,7 +397,7 @@ module.exports = invariant;
 
 
 
-var emptyFunction = __webpack_require__(82);
+var emptyFunction = __webpack_require__(81);
 
 /**
  * Similar to invariant but only logs a warning if the condition is not met.
@@ -623,13 +623,13 @@ exports.default = interpolate;
 
 /***/ }),
 
-/***/ 509:
+/***/ 505:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* unused harmony export ALLOWED_TAGS */
 /* unused harmony export ALLOWED_ATTR */
-/* harmony import */ var dompurify__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(515);
+/* harmony import */ var dompurify__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(510);
 /* harmony import */ var dompurify__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(dompurify__WEBPACK_IMPORTED_MODULE_0__);
 /**
  * External dependencies
@@ -648,14 +648,14 @@ var ALLOWED_ATTR = ['target', 'href', 'rel', 'name', 'download'];
 
 /***/ }),
 
-/***/ 535:
+/***/ 530:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ 536:
+/***/ 531:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -679,7 +679,7 @@ var chevronRight = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["creat
 
 /***/ }),
 
-/***/ 601:
+/***/ 597:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -698,7 +698,7 @@ var createClass = __webpack_require__(12);
 var createClass_default = /*#__PURE__*/__webpack_require__.n(createClass);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/assertThisInitialized.js
-var assertThisInitialized = __webpack_require__(8);
+var assertThisInitialized = __webpack_require__(9);
 var assertThisInitialized_default = /*#__PURE__*/__webpack_require__.n(assertThisInitialized);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/inherits.js
@@ -741,7 +741,7 @@ var external_moment_ = __webpack_require__(16);
 var external_moment_default = /*#__PURE__*/__webpack_require__.n(external_moment_);
 
 // EXTERNAL MODULE: ./node_modules/@wordpress/icons/build-module/icon/index.js
-var icon = __webpack_require__(306);
+var icon = __webpack_require__(304);
 
 // EXTERNAL MODULE: ./node_modules/@wordpress/primitives/build-module/svg/index.js
 var svg = __webpack_require__(196);
@@ -762,13 +762,13 @@ var chevronLeft = Object(external_this_wp_element_["createElement"])(svg["b" /* 
 /* harmony default export */ var chevron_left = (chevronLeft);
 //# sourceMappingURL=chevron-left.js.map
 // EXTERNAL MODULE: ./node_modules/@wordpress/icons/build-module/library/chevron-right.js
-var chevron_right = __webpack_require__(536);
+var chevron_right = __webpack_require__(531);
 
 // EXTERNAL MODULE: ./client/settings/index.js
 var settings = __webpack_require__(25);
 
 // EXTERNAL MODULE: external {"this":["wc","data"]}
-var external_this_wc_data_ = __webpack_require__(22);
+var external_this_wc_data_ = __webpack_require__(23);
 
 // EXTERNAL MODULE: external {"this":["wc","tracks"]}
 var external_this_wc_tracks_ = __webpack_require__(28);
@@ -777,7 +777,7 @@ var external_this_wc_tracks_ = __webpack_require__(28);
 var build_module = __webpack_require__(31);
 
 // EXTERNAL MODULE: ./client/lib/sanitize-html/index.js
-var sanitize_html = __webpack_require__(509);
+var sanitize_html = __webpack_require__(505);
 
 // EXTERNAL MODULE: ./node_modules/prop-types/index.js
 var prop_types = __webpack_require__(1);
@@ -855,7 +855,7 @@ placeholder_StoreAlertsPlaceholder.defaultProps = {
   hasMultipleAlerts: false
 };
 // EXTERNAL MODULE: ./client/layout/store-alerts/style.scss
-var style = __webpack_require__(535);
+var style = __webpack_require__(530);
 
 // CONCATENATED MODULE: ./client/layout/store-alerts/index.js
 
@@ -1117,7 +1117,7 @@ var store_alerts_StoreAlerts = /*#__PURE__*/function (_Component) {
 
 /***/ }),
 
-/***/ 82:
+/***/ 81:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

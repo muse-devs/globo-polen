@@ -82,7 +82,7 @@ this["wc"] = this["wc"] || {}; this["wc"]["navigationOptOut"] =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 482);
+/******/ 	return __webpack_require__(__webpack_require__.s = 477);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -133,7 +133,7 @@ module.exports = _createClass;
 /***/ 13:
 /***/ (function(module, exports, __webpack_require__) {
 
-var setPrototypeOf = __webpack_require__(75);
+var setPrototypeOf = __webpack_require__(74);
 
 function _inherits(subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
@@ -159,7 +159,7 @@ module.exports = _inherits;
 
 var _typeof = __webpack_require__(30);
 
-var assertThisInitialized = __webpack_require__(8);
+var assertThisInitialized = __webpack_require__(9);
 
 function _possibleConstructorReturn(self, call) {
   if (call && (_typeof(call) === "object" || typeof call === "function")) {
@@ -210,14 +210,14 @@ module.exports = _typeof;
 
 /***/ }),
 
-/***/ 468:
+/***/ 463:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ 482:
+/***/ 477:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -299,6 +299,10 @@ var container_NavigationOptOutContainer = /*#__PURE__*/function (_Component) {
         return null;
       }
 
+      if (!window.surveyData || !window.surveyData.url) {
+        return null;
+      }
+
       return Object(external_this_wp_element_["createElement"])(external_this_wp_components_["Modal"], {
         title: Object(external_this_wp_i18n_["__"])('Help us improve', 'woocommerce-admin'),
         onRequestClose: function onRequestClose() {
@@ -319,7 +323,7 @@ var container_NavigationOptOutContainer = /*#__PURE__*/function (_Component) {
       }, Object(external_this_wp_i18n_["__"])('No thanks', 'woocommerce-admin')), Object(external_this_wp_element_["createElement"])(external_this_wp_components_["Button"], {
         isPrimary: true,
         target: "_blank",
-        href: "https://automattic.survey.fm/new-navigation-opt-out",
+        href: window.surveyData.url,
         onClick: function onClick() {
           return _this2.setState({
             isModalOpen: false
@@ -332,7 +336,7 @@ var container_NavigationOptOutContainer = /*#__PURE__*/function (_Component) {
   return NavigationOptOutContainer;
 }(external_this_wp_element_["Component"]);
 // EXTERNAL MODULE: ./client/wp-admin-scripts/navigation-opt-out/style.scss
-var style = __webpack_require__(468);
+var style = __webpack_require__(463);
 
 // CONCATENATED MODULE: ./client/wp-admin-scripts/navigation-opt-out/index.js
 
@@ -367,7 +371,7 @@ module.exports = _getPrototypeOf;
 
 /***/ }),
 
-/***/ 75:
+/***/ 74:
 /***/ (function(module, exports) {
 
 function _setPrototypeOf(o, p) {
@@ -383,7 +387,7 @@ module.exports = _setPrototypeOf;
 
 /***/ }),
 
-/***/ 8:
+/***/ 9:
 /***/ (function(module, exports) {
 
 function _assertThisInitialized(self) {

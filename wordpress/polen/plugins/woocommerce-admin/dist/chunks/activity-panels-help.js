@@ -1,6 +1,6 @@
 (window["__wcAdmin_webpackJsonp"] = window["__wcAdmin_webpackJsonp"] || []).push([[7],{
 
-/***/ 517:
+/***/ 512:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -23,7 +23,7 @@
 /* harmony import */ var _woocommerce_experimental__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(31);
 /* harmony import */ var _woocommerce_components__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(47);
 /* harmony import */ var _woocommerce_components__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_components__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(518);
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(513);
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_10__);
 
 
@@ -111,14 +111,14 @@ ActivityHeader.propTypes = {
 
 /***/ }),
 
-/***/ 518:
+/***/ 513:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ 593:
+/***/ 589:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -134,22 +134,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(42);
 /* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(306);
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(594);
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(536);
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(304);
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(590);
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(531);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(3);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _woocommerce_wc_admin_settings__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(25);
 /* harmony import */ var _woocommerce_components__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(47);
 /* harmony import */ var _woocommerce_components__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_components__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _woocommerce_data__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(22);
+/* harmony import */ var _woocommerce_data__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(23);
 /* harmony import */ var _woocommerce_data__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_data__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(571);
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(566);
 /* harmony import */ var _woocommerce_tracks__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(28);
 /* harmony import */ var _woocommerce_tracks__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_tracks__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var _activity_header__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(517);
-/* harmony import */ var _dashboard_utils__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(92);
-/* harmony import */ var _task_list_tasks_payments_methods__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(527);
+/* harmony import */ var _activity_header__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(512);
+/* harmony import */ var _dashboard_utils__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(94);
+/* harmony import */ var _task_list_tasks_payments_methods__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(522);
 
 
 /**
@@ -251,7 +251,7 @@ function getPaymentsItems(props) {
     link: 'https://docs.woocommerce.com/document/stripe/?utm_source=help_panel'
   }, showPayPal && {
     title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('PayPal Checkout Setup and Configuration', 'woocommerce-admin'),
-    link: 'https://docs.woocommerce.com/document/paypal-express-checkout/?utm_source=help_panel'
+    link: 'https://docs.woocommerce.com/document/2-0/woocommerce-paypal-payments/#section-3'
   }, showSquare && {
     title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Square - Get started', 'woocommerce-admin'),
     link: 'https://docs.woocommerce.com/document/woocommerce-square/?utm_source=help_panel'

@@ -174,25 +174,29 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 
             remove_role( 'user_talent' );
             add_role( 'user_talent', 
-                        __( 'Talento', 'polen' ), 
-                        array(
-                            'read'                      => true,
-                            'publish_posts'             => true,
-                            'edit_posts'                => true,
-                            'edit_published_posts'      => true,
-                            'upload_files'              => true,
-                            'edit_product'              => true,
-                            'read_product'              => true,
-                            'manage_product_terms'      => true,
-                            'delete_product_terms'      => true,
-                            'assign_product_terms'      => true,
-                        )
+                __( 'Talento', 'polen' ), 
+                array(
+                    'read'                      => true,
+                    'publish_posts'             => true,
+                    'edit_posts'                => true,
+                    'edit_published_posts'      => true,
+                    'upload_files'              => true,
+                    'edit_product'              => true,
+                    'read_product'              => true,
+                    'manage_product_terms'      => true,
+                    'delete_product_terms'      => true,
+                    'assign_product_terms'      => true,
+                )
             );
         }
 
     }
 
     include_once 'includes/CreateUserProcess.php';
+
     new Polen( true );
+    
     require 'classes/Talent.php';
+    require 'classes/Polen_Bancos.php';
+    require 'classes/Polen_Update_Fields.php';
 }
