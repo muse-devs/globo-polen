@@ -30,6 +30,8 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
     define( 'PLUGIN_POLEN_DIR', plugin_dir_path( __FILE__ ) );
     define( 'PLUGIN_POLEN_URL', plugin_dir_url( __FILE__ ) );
 
+    require_once PLUGIN_POLEN_DIR . '/Polen_Settings.php';
+
     class Polen {
 
         public function __construct( $static = false ) {
@@ -73,6 +75,11 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
                 }
 
                 register_activation_hook( __FILE__, array( $this, 'do_install' ) );
+
+                $Polen_Plugin_Settings = get_option( 'Polen_Plugin_Settings' );
+                if( isset( $Polen_Plugin_Settings['admin_bar'] ) && strval( $Polen_Plugin_Settings['admin_bar'] ) == strval( '1' ) ) {
+                    add_filter( 'show_admin_bar', '__return_false' );
+                }
             }
         }
 
