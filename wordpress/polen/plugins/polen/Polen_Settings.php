@@ -32,8 +32,8 @@ class Polen_Plugin_Settings {
             //Specify if the admin menu should appear or not. Options: menu or submenu (Under appearance only)
             'allow_sub_menu'       => true,
             // Show the sections below the admin menu item or not
-            'menu_title'           => esc_html__( 'Config. do Site', 'toyota' ),
-            'page_title'           => esc_html__( 'Configurações do Site', 'toyota' ),
+            'menu_title'           => esc_html__( 'Config. do Site', 'polen' ),
+            'page_title'           => esc_html__( 'Configurações do Site', 'polen' ),
             // You will need to generate a Google API key to use this feature.
             // Please visit: https://developers.google.com/fonts/docs/developer_api#Auth
             'google_api_key'       => '',
@@ -74,7 +74,7 @@ class Polen_Plugin_Settings {
             // Force your panel to always open to a specific tab (by id)
             'page_icon'            => 'icon-themes',
             // Icon displayed in the admin panel next to your menu_title
-            'page_slug'            => 'toyota-theme-settings',
+            'page_slug'            => 'polen-site-settings',
             // Page slug used to denote the panel, will be based off page title then menu title then opt_name if not provided
             'save_defaults'        => true,
             // On load save the defaults to DB before user clicks save or not
