@@ -62,6 +62,8 @@ class Polen {
 	 */
 	protected $version;
 
+	protected $polen_signIn;
+
 	/**
 	 * Define the core functionality of the plugin.
 	 *
@@ -84,6 +86,13 @@ class Polen {
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
+
+		$this->init_classes();
+	}
+
+	private function init_classes()
+	{
+		$polen_signIn = new Polen_SignInUser();
 	}
 
 	/**
@@ -152,6 +161,9 @@ class Polen {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
+		//Tela de cadastro de usuário
+		$this->loader->add_filter('woocommerce_created_customer', $this->polen_signIn, 'update_user_date', 10, 3);
+		$this->loader->add_action('woocommerce_register_form_start', $this->polen_signIn, 'add_fields_sign_in', 10, 0);
 	}
 
 	/**
