@@ -178,3 +178,8 @@ require get_template_directory() . '/inc/customizer.php';
  * Components.
  */
 require get_template_directory() . '/inc/components.php';
+
+/**
+ * File responsible to get all collection for front
+ */
+require_once get_template_directory() . '/inc/collection-front.php';
