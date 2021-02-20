@@ -13,6 +13,7 @@ class Talent {
             add_filter( 'manage_users_columns', array( $this, 'talent_filter_column' ),10, 1 );
             add_filter( 'manage_edit-product_columns', array( $this, 'talent_filter_product_column' ),10, 1 );
             add_filter( 'manage_users_custom_column', array( $this, 'talent_custom_users_value' ), 10, 3 );
+            add_action( 'init', array( $this, 'talent_taxonomy' ) );
         }
     }
 
@@ -117,7 +118,8 @@ class Talent {
     public function talent_submenu() {
         if( current_user_can( 'list_users' ) ){
             add_submenu_page( 'users.php', 'Talento', 'Talento', 'manage_options', 'users.php?role=user_talent'  );
-      }
+            add_submenu_page( 'users.php', 'Categoria Talento', 'Categoria Talento', 'manage_options', 'edit-tags.php?taxonomy=talent_category' );
+        }
     }
 
     public function talent_custom_users_value( $value, $column, $user_id ) {
@@ -134,6 +136,35 @@ class Talent {
             default:
         }
         return $value;
+    }
+
+    public function talent_taxonomy(){
+        if( ! taxonomy_exists( 'talent_category' ) ) {
+            register_taxonomy(
+                'talent_category',
+                'user',
+                array( 
+                    'public' => true,
+                    'show_ui' => true,
+                    'show_in_menu' => true, 
+                    'query_var' => true,
+                    'show_in_rest' => true, 
+                    'labels' => array(
+                        'name'		=> __( 'Categoria de Talento', 'polen' ),
+                        'singular_name'	=>  __( 'Categoria de Talento', 'polen' ),
+                        'menu_name'	=>  __( 'Categoria de Talento', 'polen' ),
+                        'search_items'	=> __( 'Pesquisar Categoria de Talento', 'polen' ),
+                        'all_items'	=>  __( 'Todas Categorias de Talento', 'polen' ),
+                        'edit_item'	=>  __( 'Editar Categoria de Talento', 'polen' ),
+                        'update_item'	=>  __( 'Atualizar Categoria de Talento', 'polen' ),
+                        'add_new_item'	=>  __( 'Nova Categoria de Talento', 'polen' ),
+                    ),
+                    'update_count_callback' => function() {
+                        return;
+                    }
+                )
+            );
+        }
     }
 }
 

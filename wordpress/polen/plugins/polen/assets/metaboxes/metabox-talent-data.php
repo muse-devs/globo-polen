@@ -68,7 +68,7 @@
                                 </th>
                                 <td>
                                     <select name="talent_category" id="talent_category" class="widefat">
-                                        <option value=""><?php echo esc_html__('Choose a store category', 'cubo9-marketplace' );?></option>
+                                        <option value=""><?php echo esc_html__('Choose a talent category', 'polen' );?></option>
                                         <?php 
                                         $terms = get_terms( array(
                                             'taxonomy' => 'talent_category',
