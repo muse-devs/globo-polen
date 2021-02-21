@@ -64,10 +64,10 @@
                         <table class="form-table">
                             <tr>
                                 <th>
-                                    Segmento principal
+                                    Categorias do Talento
                                 </th>
                                 <td>
-                                    <select name="talent_category" id="talent_category" class="widefat">
+                                    <select name="talent_category[]" id="talent_category" class="widefat" multiple >
                                         <option value=""><?php echo esc_html__('Choose a talent category', 'polen' );?></option>
                                         <?php 
                                         $terms = get_terms( array(
@@ -75,16 +75,17 @@
                                             'hide_empty' => false,
                                         ) );
                                         if( ! is_wp_error( $terms ) && count( $terms ) > 0 ) {
+                                            $arrSelected = array();
                                             $storeCategories = wp_get_object_terms( $_REQUEST['user_id'], 'talent_category' );
+                                            foreach( $storeCategories as $talentCategory ){
+                                                $arrSelected[] = $talentCategory->slug;
+                                            }
+
                                             foreach( $terms as $term) {
-                                                $selected="";
-                                                if( $storeCategories[0]->slug == $term->slug ){
-                                                    $selected = 'selected="selected"';
-                                                }
                                         ?> 
-                                        <option value="<?php echo $term->slug; ?>" <?php echo $selected; ?> >
-                                            <?php echo $term->name; ?>
-                                        </option> 
+                                                <option value="<?php echo $term->slug; ?>" <?php echo selected( in_array( $term->slug, $arrSelected )); ?> >
+                                                    <?php echo $term->name; ?>
+                                                </option> 
                                         <?php } } ?>
                                     </select>
                                 </td>

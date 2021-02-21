@@ -69,11 +69,23 @@ class Polen_Update_Fields {
         $args = array();
         $args['user_id'] = $user_id;
 
-        // Segmento principal da Loja
-        $talent_category = (string) strip_tags( trim( $_POST['talent_category'] ) );
-        if( ! empty( $talent_category ) ) {
+        // Categorias do Talento
+        //$talent_category = (string) strip_tags( trim( $_POST['talent_category'] ) );
+        $talent_category = ( $_POST['talent_category'] );
+        if( is_countable( $talent_category ) && is_array( $talent_category ) && count( $talent_category ) > 0 ){
             wp_set_object_terms( $user_id, $talent_category, 'talent_category', false );
+            /*
+            foreach( $talent_category as $category ){
+                if( ! empty( $category ) ) {
+                    var_dump($category);
+                    wp_set_object_terms( $user_id, $category, 'talent_category', false );
+                }
+            }
+            */
         }
+        //die;
+        //var_dump( $talent_category );die;
+
 
         // Aba "Geral"
         $talent_alias = (string) sanitize_title( strip_tags( trim( $_POST['talent_alias'] ) ) );
