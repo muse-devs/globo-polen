@@ -4,6 +4,7 @@ namespace Polen\Includes;
 
 use Polen\Publics\Polen_Public;
 use Polen\Admin\Polen_Admin;
+use Polen\Includes\Polen_Talent;
 
 class Polen {
 
@@ -39,6 +40,7 @@ class Polen {
 
     private function init_classes() {
         $polen_signIn = new Polen_SignInUser();
+        $tallent = new Polen_Talent( true );
     }
 
     /**
@@ -85,9 +87,11 @@ class Polen {
     private function define_admin_hooks() {
 
         $plugin_admin = new Polen_Admin($this->get_plugin_name(), $this->get_version());
-
+        $plugin_admin->init_classes( true );
+        
         $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
         $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
+
     }
 
     /**

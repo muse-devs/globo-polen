@@ -2,26 +2,8 @@
 
 namespace Polen\Admin;
 
-/**
- * The admin-specific functionality of the plugin.
- *
- * @link       rodolfoneto.com.br
- * @since      1.0.0
- *
- * @package    Polen
- * @subpackage Polen/admin
- */
+use \Polen\Includes\Polen_Update_Fields;
 
-/**
- * The admin-specific functionality of the plugin.
- *
- * Defines the plugin name, version, and two examples hooks for how to
- * enqueue the admin-specific stylesheet and JavaScript.
- *
- * @package    Polen
- * @subpackage Polen/admin
- * @author     Rodolfo <rodolfoneto@gmail.com>
- */
 class Polen_Admin {
 
 
@@ -44,7 +26,8 @@ class Polen_Admin {
         
         public function init_classes( bool $static )
         {
-            new Polen_Admin_DisableMetabox( true );die(':D');
+            new Polen_Admin_DisableMetabox( $static );
+            new Polen_Update_Fields( $static );
         }
 
 	/**
@@ -67,5 +50,11 @@ class Polen_Admin {
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/polen-admin.js', array( 'jquery' ), $this->version, false );
 
 	}
+        
+        public static function get_metabox_path( $file )
+        {
+            $dir_admin = dirname( __FILE__ ) . '/partials/metaboxes/' . $file;
+            return $dir_admin;
+        }
 
 }

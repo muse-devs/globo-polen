@@ -72,7 +72,7 @@ register_deactivation_hook( __FILE__, 'deactivate_polen' );
  */
 function run_polen()
 {
-	new Polen\Admin\Polen_Admin_DisableMetabox( true );
+//	new Polen\Admin\Polen_Admin_DisableMetabox( true );
 	$plugin = new Polen\Includes\Polen();
 	$plugin->run();
 }
