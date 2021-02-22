@@ -47,42 +47,9 @@ get_header();
 		</div>
 		<div class="col-md-12">
 			<div class="row">
-				<div class="col-md-3">
-					<div class="polen-card medium">
-						<figure class="image">
-							<span class="price">R$100</span>
-						</figure>
-						<h4 class="title">Nome do Artista</h4>
-						<h5 class="category">Categoria</h5>
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="polen-card medium">
-						<figure class="image">
-							<span class="price">R$100</span>
-						</figure>
-						<h4 class="title">Nome do Artista</h4>
-						<h5 class="category">Categoria</h5>
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="polen-card medium">
-						<figure class="image">
-							<span class="price">R$100</span>
-						</figure>
-						<h4 class="title">Nome do Artista</h4>
-						<h5 class="category">Categoria</h5>
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="polen-card medium">
-						<figure class="image">
-							<span class="price">R$100</span>
-						</figure>
-						<h4 class="title">Nome do Artista</h4>
-						<h5 class="category">Categoria</h5>
-					</div>
-				</div>
+				<?php for ($i = 0; $i < 4; $i++) : ?>
+					<?php polen_get_card(1); ?>
+				<?php endfor; ?>
 			</div>
 		</div>
 	</section>
