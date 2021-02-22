@@ -37,6 +37,12 @@ if ( ! defined( 'WPINC' ) ) {
  */
 define( 'POLEN_VERSION', '1.0.0' );
 
+/*
+ * Define plugin constants
+ */
+define( 'PLUGIN_POLEN_DIR', plugin_dir_path( __FILE__ ) );
+define( 'PLUGIN_POLEN_URL', plugin_dir_url( __FILE__ ) );
+    
 require_once plugin_dir_path( __FILE__ ) . './autoload.php';
 require_once plugin_dir_path( __FILE__ ) . './includes/Polen.php';
 

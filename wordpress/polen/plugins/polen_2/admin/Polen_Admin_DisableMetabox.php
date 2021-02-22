@@ -26,12 +26,6 @@ if( ! defined( 'ABSPATH' ) ) {
  */
 if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
 
-    /*
-     * Define plugin constants
-     */
-    define( 'PLUGIN_POLEN_DIR', plugin_dir_path( __FILE__ ) );
-    define( 'PLUGIN_POLEN_URL', plugin_dir_url( __FILE__ ) );
-
     class Polen_Admin_DisableMetabox
     {
 
