@@ -37,6 +37,33 @@
             } else {
                 $("#metaboxSellerData").hide();
             }
+
+            if( $('#talent_category').length > 0 ) {
+                $('#talent_category').select2({ 
+                    placeholder: 'Selecione a(s) categoria(s)',
+                    maximumSelectionLength: 5,
+                    allowClear: true,
+                    width: '100%', 
+                });
+            }
+
+            if( $('#charity_enable').length > 0 ) {
+                $('#charity_enable').on( 'click', function() {
+                    if( $('#charity_enable').is(":checked") ) {
+                        $('#tr_charity_to').show();
+                    } else {
+                        $('#tr_charity_to').hide();
+                    }
+                });
+            }
+
+            if( $( '#charity_to').length > 0 ) {
+                $('#charity_to').select2({ 
+                    placeholder: 'Informe a instituição',
+                    selectOnClose: true,
+                    width: '100%', 
+                });
+            }
         }
     });
 
