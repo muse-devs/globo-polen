@@ -3,6 +3,7 @@
 class Polen_Update_Fields {
 
     private $table_talent;
+    private $table_charity;
 
     public function __construct( $static = false ) {
         if( $static ) {
@@ -30,12 +31,13 @@ class Polen_Update_Fields {
             add_action( 'woocommerce_edit_account_form_start', array( $this, 'add_phone_to_form' ) );
             add_filter( 'woocommerce_save_account_details', array( $this, 'save_account_details' ) );
 
-            add_action( 'woocommerce_before_checkout_billing_form', array( $this, 'add_cpf_and_phone_to_checkout') );
+            add_action( 'woocommerce_before_checkout_billing_form', array( $this, 'add_cpf_and_phone_to_checkout' ) );
             add_action( 'woocommerce_checkout_update_order_meta', array( $this, 'save_order_meta_from_checkout' ) );
         }
 
         global $wpdb;
-        $this->table_talent = $wpdb->base_prefix . 'polen_talents';
+        $this->table_talent = $wpdb->base_prefix . 'polen_talent';
+        $this->table_charity = $wpdb->base_prefix . 'polen_charity';
     }
 
     public function remove_woocommerce_fields() {
@@ -45,15 +47,20 @@ class Polen_Update_Fields {
     public function admin_scripts() {
         global $wp_scripts;
         wp_enqueue_style( 'jquery-ui', 'https://code.jquery.com/ui/' . $wp_scripts->registered['jquery-ui-core']->ver . '/themes/smoothness/jquery-ui.min.css' );
-        wp_enqueue_script('jquery-maskedinput', PLUGIN_POLEN_URL . 'assets/scripts/vendor/jquery.maskedinput.min.js', array( 'jquery' ), null, true );
-        wp_enqueue_script('polen-admin-script', PLUGIN_POLEN_URL . 'assets/scripts/admin.js', array( 'jquery', 'jquery-ui-core', 'jquery-ui-tabs' ), null, true );
+        wp_enqueue_script( 'jquery-maskedinput', PLUGIN_POLEN_URL . 'assets/scripts/vendor/jquery.maskedinput.min.js', array( 'jquery' ), null, true );
+        
+        wp_enqueue_style( 'select2-css', Redux_Core::$url . 'assets/css/vendor/select2.min.css', array(), null, 'all' );
+        wp_enqueue_script( 'select2-js', Redux_Core::$url . 'assets/js/vendor/select2/select2.min.js', array( 'jquery' ), null, true );
+
+        wp_enqueue_script( 'polen-admin-script', PLUGIN_POLEN_URL . 'assets/scripts/admin.js', array( 'jquery', 'jquery-ui-core', 'jquery-ui-tabs' ), null, true );
     }
 
     public function fields( $user ) {
-        if( $user->caps['user_talent'] == true ){
+        if( isset( $user->caps['user_talent'] ) && $user->caps['user_talent'] == true ) {
             require_once PLUGIN_POLEN_DIR . '/assets/metaboxes/metabox-talent-data.php';
         }
-        if( $user->caps['user_charity'] == true ){
+
+        if( isset( $user->caps['user_charity'] ) && $user->caps['user_charity'] == true ) {
             require_once PLUGIN_POLEN_DIR . '/assets/metaboxes/metabox-charity-data.php';
         }    
     }
@@ -67,31 +74,48 @@ class Polen_Update_Fields {
         }
     }
 
+    public function get_charity_data( $user_id ) {
+        global $wpdb;
+        $sql = "SELECT * FROM `" . $this->table_charity . "` WHERE `user_id`=" . intval( $user_id );
+        $res = $wpdb->get_results( $sql );
+        if( count( $res ) > 0 ) {
+            return $res[0];
+        }
+    }
+
     public function update_vendor_profile( $user_id ) {
         if ( ! current_user_can( 'edit_user', $user_id ) ) {
             return false;
         }
 
+        $user = get_user_by( 'id', $_REQUEST['user_id'] );
+
         $args = array();
         $args['user_id'] = $user_id;
 
-        // Categorias do Talento
-        if( isset( $_POST['talent_category'] ) && !empty(  $_POST['talent_category'] ) ){
-            //$talent_category = (string) strip_tags( trim( $_POST['talent_category'] ) );
-            $talent_category = $_POST['talent_category'];
-            if( is_countable( $talent_category ) && is_array( $talent_category ) && count( $talent_category ) > 0 ){
-                wp_set_object_terms( $user_id, $talent_category, 'talent_category', false );
+        /*
+         * Aba Geral (Apenas para Talentos)
+         */
+        if( ( isset( $user->caps['user_talent'] ) && $user->caps['user_talent'] == true ) ) {
+            if( isset( $_POST['talent_category'] ) && !empty(  $_POST['talent_category'] ) ) {
+                //$talent_category = (string) strip_tags( trim( $_POST['talent_category'] ) );
+                $talent_category = $_POST['talent_category'];
+                if( is_countable( $talent_category ) && is_array( $talent_category ) && count( $talent_category ) > 0 ) {
+                    wp_set_object_terms( $user_id, $talent_category, 'talent_category', false );
+                }
             }
-        }
-        // Aba "Geral"
-        $talent_alias = (string) sanitize_title( strip_tags( trim( $_POST['talent_alias'] ) ) );
-        $args['talent_alias'] = ( $talent_alias ) ? $talent_alias : sanitize_title( $email );
-        $args['talent_url'] = get_bloginfo('url') . '/talent/' . $args['talent_alias'];
-        $args['tempo_resposta'] = (string) strip_tags( trim( $_POST['tempo_resposta'] ) );
-        $args['profissao'] = (string) strip_tags( trim( $_POST['profissao'] ) );
-        $args['descricao'] = (string) strip_tags( trim( $_POST['descricao'] ) );
 
-        // Aba "Dados do Talento"
+            $talent_alias = (string) sanitize_title( strip_tags( trim( $_POST['talent_alias'] ) ) );
+            $args['talent_alias'] = ( $talent_alias ) ? $talent_alias : sanitize_title( $email );
+            $args['talent_url'] = get_bloginfo('url') . '/talent/' . $args['talent_alias'];
+            $args['tempo_resposta'] = (string) strip_tags( trim( $_POST['tempo_resposta'] ) );
+            $args['profissao'] = (string) strip_tags( trim( $_POST['profissao'] ) );
+            $args['descricao'] = (string) strip_tags( trim( $_POST['descricao'] ) );
+        }
+
+        /*
+         * Aba "Dados do Talento/Instituição"
+         */
         $natureza_juridica = (string) strip_tags( trim( $_POST['natureza_juridica'] ) );
         if( $natureza_juridica != 'PJ' && $natureza_juridica != 'PF' ) {
             $natureza_juridica = null;
@@ -122,9 +146,11 @@ class Polen_Update_Fields {
         } else {
             $reter_iss = 'N';
         }
-        $args['reter_iss'] = $reter_iss;
+        $args['reter_iss'] = $reter_iss;        
 
-        // Aba "Informações de Contato"
+        /* 
+         * Aba "Informações de Contato"
+         */
         $email = (string) strip_tags( trim( $_POST['store_email'] ) );
         $args['email'] = $email;
 
@@ -137,26 +163,32 @@ class Polen_Update_Fields {
         $whatsapp = (string) strip_tags( trim( $_POST['whatsapp'] ) );
         $args['whatsapp'] = $whatsapp;
         
-        // Aba "Redes Sociais"
-        $facebook = (string) strip_tags( trim( $_POST['facebook'] ) );
-        $args['facebook'] = $facebook;
+        /* 
+         * Aba "Redes Sociais" (Apenas para Talentos)
+         */
+        if( ( isset( $user->caps['user_talent'] ) && $user->caps['user_talent'] == true ) ) {
+            $facebook = (string) strip_tags( trim( $_POST['facebook'] ) );
+            $args['facebook'] = $facebook;
 
-        $instagram = (string) strip_tags( trim( $_POST['instagram'] ) );
-        $args['instagram'] = $instagram;
+            $instagram = (string) strip_tags( trim( $_POST['instagram'] ) );
+            $args['instagram'] = $instagram;
 
-        $twitter = (string) strip_tags( trim( $_POST['twitter'] ) );
-        $args['twitter'] = $twitter;
+            $twitter = (string) strip_tags( trim( $_POST['twitter'] ) );
+            $args['twitter'] = $twitter;
 
-        $pinterest = (string) strip_tags( trim( $_POST['pinterest'] ) );
-        $args['pinterest'] = $twitter;
+            $pinterest = (string) strip_tags( trim( $_POST['pinterest'] ) );
+            $args['pinterest'] = $twitter;
 
-        $linkedin = (string) strip_tags( trim( $_POST['linkedin'] ) );
-        $args['linkedin'] = $linkedin;
+            $linkedin = (string) strip_tags( trim( $_POST['linkedin'] ) );
+            $args['linkedin'] = $linkedin;
 
-        $youtube = (string) strip_tags( trim( $_POST['youtube'] ) );
-        $args['youtube'] = $youtube;
+            $youtube = (string) strip_tags( trim( $_POST['youtube'] ) );
+            $args['youtube'] = $youtube;
+        }
 
-        // Aba "Dados Bancários"
+        /* 
+         * Aba "Dados Bancários"
+         */
         $banco = strip_tags( trim( $_POST['banco'] ) );
         list( $codigo_banco, $nome_banco ) = explode( ":", $banco );
         $args['codigo_banco'] = $codigo_banco;
@@ -183,7 +215,9 @@ class Polen_Update_Fields {
             $args['tipo_conta'] = $tipo_conta;
         }
 
-        // Aba "Configurações Financeiras"
+        /* 
+         * Aba "Configurações Financeiras"
+         */
         $subordinate_merchant_id = (string) strip_tags( trim( $_POST['subordinate_merchant_id'] ) );
         $mdr = (float) strip_tags( trim( $_POST['mdr'] ) );
         $fee = (int) strip_tags( trim( $_POST['fee'] ) );
@@ -204,9 +238,45 @@ class Polen_Update_Fields {
         $args['mdr'] = $mdr;
         $args['fee'] = $fee;
 
+        /*
+         * Aba "Doações" (Apenas para Talentos) 
+         */
+        if( ( isset( $user->caps['user_talent'] ) && $user->caps['user_talent'] == true ) ) {
+            if( isset( $_POST['charity_enable'] ) && $_POST['charity_enable'] == 'yes' ) {
+                $args['charity_enable'] = '1';
+                $args['charity_to']     = $_POST['charity_to'];
+            } else {
+                $args['charity_enable'] = '0';
+                $args['charity_to']     = null;
+            }
+        }
+
         global $wpdb;
-        $vendorData = $this->get_vendor_data( $user_id );
-        if( $vendorData && ! is_null( $vendorData ) && ! empty( $vendorData ) && isset( $vendorData->ID ) ) {
+        $where = false;
+
+        if( ( isset( $user->caps['user_talent'] ) && $user->caps['user_talent'] == true ) ) {
+            $vendorData = $this->get_vendor_data( $user_id );
+            if( $vendorData && ! is_null( $vendorData ) && ! empty( $vendorData ) && isset( $vendorData->ID ) ) {
+                $where = array(
+                    'ID'      => $vendorData->ID,
+                    'user_id' => $vendorData->user_id
+                );
+            }
+            $table_name = $this->table_talent;
+        }
+
+        if( ( isset( $user->caps['user_charity'] ) && $user->caps['user_charity'] == true ) ) {
+            $CharityData = $this->get_charity_data( $user_id );
+            if( $CharityData && ! is_null( $CharityData ) && ! empty( $CharityData ) && isset( $CharityData->ID ) ) {
+                $where = array(
+                    'ID'      => $CharityData->ID,
+                    'user_id' => $CharityData->user_id
+                );
+            }
+            $table_name = $this->table_charity;
+        }
+
+        if( $where && is_array( $where ) ) {
             $statusDate = new DateTime();
             $timeZone = new DateTimeZone( get_option('timezone_string') );
             $statusDate->setTimezone( $timeZone );
@@ -214,19 +284,15 @@ class Polen_Update_Fields {
             $args['updated'] = $updated;
 
             unset( $args['user_id'] );
-            $where = array(
-                'ID' => $vendorData->ID,
-                'user_id' => $vendorData->user_id
-            );
             $update = $wpdb->update(
-                $this->table_talent,
+                $table_name,
                 $args,
                 $where
             );
         } else {
             $args['updated'] = null;
             $insert = $wpdb->insert(
-                $this->table_talent,
+                $table_name,
                 $args
             );
         }
