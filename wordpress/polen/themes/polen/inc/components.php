@@ -1,14 +1,8 @@
 <?php
 
 // $size pode ser 'medium' e 'small'
-function polen_get_card($id_produto, $size = "medium")
+function polen_get_card($url, $image, $price, $name, $category, $category_url, $size = "medium")
 {
-	$url = "#opa";
-	$name = "Nome do Artista";
-	$price = "100";
-	$image = "https://picsum.photos/255/350";
-	$category = "Categoria";
-	$category_url = "#cat";
 	ob_start();
 ?>
 	<div class="col-md-3">

@@ -48,7 +48,7 @@ get_header();
 		<div class="col-md-12">
 			<div class="row">
 				<?php for ($i = 0; $i < 4; $i++) : ?>
-					<?php polen_get_card(1); ?>
+					<?php polen_get_card("#opa", "https://picsum.photos/255/350", "100", "Nome do Artista", "Categoria", "#cat"); ?>
 				<?php endfor; ?>
 			</div>
 		</div>
