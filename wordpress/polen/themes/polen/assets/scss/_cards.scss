@@ -1,10 +1,23 @@
 .polen-card {
 	.image {
-		padding: 20px;
+		position: relative;
+		overflow: hidden;
+		// padding: 20px;
 		font-size: 20px;
 		border-radius: 10px;
 		box-sizing: border-box;
-		background: no-repeat center/cover $default-bg-color;
+		// background: no-repeat center/cover $default-bg-color;
+		img {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+		.price {
+			position: absolute;
+			bottom: 10px;
+			right: 20px;
+		}
 	}
 	&.big {
 		.image {
@@ -22,6 +35,11 @@
 		.image {
 			padding: 50px 20px;
 			text-align: center;
+		}
+	}
+	.title, .category {
+		a {
+			color: white;
 		}
 	}
 }
