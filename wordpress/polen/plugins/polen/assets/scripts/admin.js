@@ -32,7 +32,7 @@
             $('.polen-phone').mask("(99) 99999-9999");
             $('.polen-cep').mask("99999-999");
 
-            if( $('#role').val() == 'user_talent' ) {
+            if( $('#role').val() == 'user_talent' || $('#role').val() == 'user_charity' ) {
                 $("#metaboxSellerData").show();
             } else {
                 $("#metaboxSellerData").hide();

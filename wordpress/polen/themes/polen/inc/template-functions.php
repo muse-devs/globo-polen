@@ -25,3 +25,23 @@ function polen_body_classes( $classes ) {
 	return $classes;
 }
 add_filter( 'body_class', 'polen_body_classes' );
+
+/**
+ * Responsible to return a link for all talents
+ * 
+ * @return string link
+ */
+function polen_get_all_new_talents_url()
+{
+	return '#/talents/new';
+}
+
+/**
+ * Responsible to return a link for all categories
+ * 
+ * @return string link
+ */
+function polen_get_all_cetegories_url()
+{
+	return '#/categories/new';
+}

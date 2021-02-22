@@ -18,7 +18,8 @@ class Polen_Update_Fields {
             if( is_admin() && isset( $_REQUEST['user_id'] ) ) {
                 require_once ABSPATH . '/wp-includes/pluggable.php';
                 $user = get_user_by( 'id', $_REQUEST['user_id'] );
-                if( isset( $user->caps['user_talent'] ) && $user->caps['user_talent'] == true ) {
+                if( ( isset( $user->caps['user_talent'] ) && $user->caps['user_talent'] == true ) ||  
+                    ( isset( $user->caps['user_charity'] ) && $user->caps['user_charity'] == true ) ) {
                     add_filter( 'woocommerce_customer_meta_fields', array( $this, 'remove_woocommerce_fields' ), 9999 );
                 }
             }
@@ -49,7 +50,12 @@ class Polen_Update_Fields {
     }
 
     public function fields( $user ) {
-        require_once PLUGIN_POLEN_DIR . '/assets/metaboxes/metabox-talent-data.php';
+        if( $user->caps['user_talent'] == true ){
+            require_once PLUGIN_POLEN_DIR . '/assets/metaboxes/metabox-talent-data.php';
+        }
+        if( $user->caps['user_charity'] == true ){
+            require_once PLUGIN_POLEN_DIR . '/assets/metaboxes/metabox-charity-data.php';
+        }    
     }
 
     public function get_vendor_data( $user_id ) {
@@ -69,12 +75,14 @@ class Polen_Update_Fields {
         $args = array();
         $args['user_id'] = $user_id;
 
-        // Segmento principal da Loja
-        $talent_category = (string) strip_tags( trim( $_POST['talent_category'] ) );
-        if( ! empty( $talent_category ) ) {
-            wp_set_object_terms( $user_id, $talent_category, 'talent_category', false );
+        // Categorias do Talento
+        if( isset( $_POST['talent_category'] ) && !empty(  $_POST['talent_category'] ) ){
+            //$talent_category = (string) strip_tags( trim( $_POST['talent_category'] ) );
+            $talent_category = $_POST['talent_category'];
+            if( is_countable( $talent_category ) && is_array( $talent_category ) && count( $talent_category ) > 0 ){
+                wp_set_object_terms( $user_id, $talent_category, 'talent_category', false );
+            }
         }
-
         // Aba "Geral"
         $talent_alias = (string) sanitize_title( strip_tags( trim( $_POST['talent_alias'] ) ) );
         $args['talent_alias'] = ( $talent_alias ) ? $talent_alias : sanitize_title( $email );

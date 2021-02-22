@@ -30,6 +30,8 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
     define( 'PLUGIN_POLEN_DIR', plugin_dir_path( __FILE__ ) );
     define( 'PLUGIN_POLEN_URL', plugin_dir_url( __FILE__ ) );
 
+    require_once PLUGIN_POLEN_DIR . '/Polen_Settings.php';
+
     class Polen {
 
         public function __construct( $static = false ) {
@@ -64,6 +66,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
                 add_action( 'admin_init', array( $this, 'Remove_Footer_Text' ) );
                 add_filter( 'update_footer', '__return_false', 11 );
                 add_action( 'wp_before_admin_bar_render', array( $this, 'Remove_Admin_Bar_Logo' ), 0, 0 );
+                add_action( 'admin_init', array( $this, 'redirect_access' ) );
 
                 /**
                  * Remove wp-admin dashboard widgets and branding for multisite
@@ -73,6 +76,11 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
                 }
 
                 register_activation_hook( __FILE__, array( $this, 'do_install' ) );
+
+                $Polen_Plugin_Settings = get_option( 'Polen_Plugin_Settings' );
+                if( isset( $Polen_Plugin_Settings['admin_bar'] ) && strval( $Polen_Plugin_Settings['admin_bar'] ) == strval( '1' ) ) {
+                    add_filter( 'show_admin_bar', '__return_false' );
+                }
             }
         }
 
@@ -145,33 +153,6 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
         }
 
         public function do_install(){
-            if( ! taxonomy_exists( 'talent_category' ) ) {
-                register_taxonomy(
-                    'talent_category',
-                    'user_talent',
-                    array( 
-                        'public' => true,
-                        'show_ui' => true,
-                        'show_in_menu' => true, 
-                        'query_var' => true,
-                        'show_in_rest' => true, 
-                        'labels' => array(
-                            'name'		=> __( 'Categoria de Talento', 'polen' ),
-                            'singular_name'	=>  __( 'Categoria de Talento', 'polen' ),
-                            'menu_name'	=>  __( 'Categoria de Talento', 'polen' ),
-                            'search_items'	=> __( 'Pesquisar Categoria de Talento', 'polen' ),
-                            'all_items'	=>  __( 'Todas Categorias de Talento', 'polen' ),
-                            'edit_item'	=>  __( 'Editar Categoria de Talento', 'polen' ),
-                            'update_item'	=>  __( 'Atualizar Categoria de Talento', 'polen' ),
-                            'add_new_item'	=>  __( 'Nova Categoria de Talento', 'polen' ),
-                        ),
-                        'update_count_callback' => function() {
-                            return;
-                        }
-                    )
-                );
-            }
-
             remove_role( 'user_talent' );
             add_role( 'user_talent', 
                 __( 'Talento', 'polen' ), 
@@ -188,6 +169,25 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
                     'assign_product_terms'      => true,
                 )
             );
+
+            remove_role( 'user_charity' );
+            add_role( 'user_charity', 
+                __( 'Charity', 'polen' ), 
+                array(
+                    'read'                      => true,
+                    'read_product'              => true,
+                )
+            );
+        }
+
+        public function redirect_access(){
+            global $pagenow, $current_user;
+    
+            $user_role = reset( $current_user->roles );    
+            if ( is_admin() && ! in_array( $user_role, array( 'administrator' ) ) ) {
+                wp_redirect( home_url() );
+                exit;
+            }
         }
 
     }
