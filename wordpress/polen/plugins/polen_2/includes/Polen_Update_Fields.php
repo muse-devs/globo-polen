@@ -50,8 +50,8 @@ class Polen_Update_Fields
     public function admin_scripts() {
         global $wp_scripts;
         wp_enqueue_style( 'jquery-ui', 'https://code.jquery.com/ui/' . $wp_scripts->registered['jquery-ui-core']->ver . '/themes/smoothness/jquery-ui.min.css' );
-        wp_enqueue_script('jquery-maskedinput', PLUGIN_POLEN_URL . 'admin/js/vendor/jquery.maskedinput.min.js', array( 'jquery' ), null, true );
-        wp_enqueue_script('polen-admin-script', PLUGIN_POLEN_URL . 'admin/js/admin.js', array( 'jquery', 'jquery-ui-core', 'jquery-ui-tabs' ), null, true );
+        wp_enqueue_script('jquery-maskedinput', Polen_Admin::get_js_url( 'vendor/jquery.maskedinput.min.js'), array( 'jquery' ), null, true );
+        wp_enqueue_script('polen-admin-script', Polen_Admin::get_js_url( 'admin.js' ), array( 'jquery', 'jquery-ui-core', 'jquery-ui-tabs' ), null, true );
     }
 
     public function fields( $user ) {
@@ -212,8 +212,8 @@ class Polen_Update_Fields
         global $wpdb;
         $vendorData = $this->get_vendor_data( $user_id );
         if( $vendorData && ! is_null( $vendorData ) && ! empty( $vendorData ) && isset( $vendorData->ID ) ) {
-            $statusDate = new DateTime();
-            $timeZone = new DateTimeZone( get_option('timezone_string') );
+            $statusDate = new \DateTime();
+            $timeZone = new \DateTimeZone( get_option('timezone_string') );
             $statusDate->setTimezone( $timeZone );
             $updated = $statusDate->format( 'Y-m-d H:i:s' );
             $args['updated'] = $updated;

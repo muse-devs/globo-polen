@@ -51,10 +51,27 @@ class Polen_Admin {
 
 	}
         
-        public static function get_metabox_path( $file )
+        
+        /**
+         * Retorna o caminho do arquivo de um metabox
+         * @param type $file
+         * @return string
+         */
+        public static function get_metabox_path( string $file )
         {
-            $dir_admin = dirname( __FILE__ ) . '/partials/metaboxes/' . $file;
+            $dir_admin = PLUGIN_POLEN_DIR . 'admin/partials/metaboxes/' . $file;
             return $dir_admin;
+        }
+        
+        
+        /**
+         * Retorna a url do arquivo de um JS
+         * @param string $file
+         * @return string
+         */
+        public static function get_js_url( string $file )
+        {
+            return PLUGIN_POLEN_URL . 'admin/js/' . $file;
         }
 
 }
