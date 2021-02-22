@@ -1,4 +1,7 @@
 .polen-card {
+	@include media-breakpoint-only(sm) {
+		margin-bottom: 40px;
+	}
 	.image {
 		position: relative;
 		overflow: hidden;
@@ -17,6 +20,8 @@
 			position: absolute;
 			bottom: 10px;
 			right: 20px;
+			font-size: 20px;
+			font-weight: 700;
 		}
 	}
 	&.big {
@@ -27,6 +32,19 @@
 	&.medium {
 		.image {
 			height: 330px;
+			@include media-breakpoint-only(sm) {
+				height: 700px;
+			}
+			@include media-breakpoint-only(md) {
+				height: 205px;
+			}
+			@include media-breakpoint-only(lg) {
+				height: 288px;
+			}
+			img {
+				width: 100%;
+				height: auto;
+			}
 		}
 	}
 	&.small {
@@ -37,9 +55,17 @@
 			text-align: center;
 		}
 	}
-	.title, .category {
+	.title,
+	.category {
+		font-size: 20px;
 		a {
 			color: white;
 		}
+		@include media-breakpoint-only(md) {
+			font-size: 16px;
+		}
+	}
+	.title {
+		font-weight: 700;
 	}
 }
