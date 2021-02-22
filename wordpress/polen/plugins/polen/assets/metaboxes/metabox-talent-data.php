@@ -266,8 +266,8 @@
                                     $Polen_Bancos = new Polen_Bancos();
                                     $bancos = $Polen_Bancos->listar();
                                     ?>
-                                    <select name="banco" class="widefat">
-                                        <option value="">Selecione...</option>
+                                    <select id="polen_banco" name="banco" class="widefat">
+                                        <option></option>
                                         <?php
                                         if( $bancos && is_array( $bancos ) && count( $bancos ) > 0 ) {
                                             foreach( $bancos as $k => $banco ) {

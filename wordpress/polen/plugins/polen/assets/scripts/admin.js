@@ -38,6 +38,14 @@
                 $("#metaboxSellerData").hide();
             }
 
+            if( $( '#polen_banco').length > 0 ) {
+                $('#polen_banco').select2({ 
+                    placeholder: 'Selecione o Banco',
+                    selectOnClose: true,
+                    width: '100%', 
+                });
+            }
+
             if( $('#talent_category').length > 0 ) {
                 $('#talent_category').select2({ 
                     placeholder: 'Selecione a(s) categoria(s)',
