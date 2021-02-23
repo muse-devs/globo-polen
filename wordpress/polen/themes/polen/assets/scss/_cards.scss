@@ -25,7 +25,7 @@
 	&.medium {
 		.image {
 			height: 330px;
-			@include media-breakpoint-only(sm) {
+			@include media-breakpoint-down(sm) {
 				height: 700px;
 			}
 			@include media-breakpoint-only(md) {
@@ -52,7 +52,7 @@
 	&.small {
 		.image {
 			height: 257px;
-			@include media-breakpoint-only(sm) {
+			@include media-breakpoint-down(sm) {
 				height: 700px;
 			}
 			@include media-breakpoint-only(md) {
@@ -81,6 +81,59 @@
 	}
 	@include media-breakpoint-only(sm) {
 		margin-bottom: 40px;
+	}
+}
+
+.top-banner {
+	position: relative;
+	width: 100%;
+	.video {
+		max-width: 100%;
+	}
+	.content {
+		position: absolute;
+		width: 80%;
+		top: 50%;
+		left: 10%;
+		text-align: center;
+		transform: translate(0, -50%);
+		.title {
+			margin-bottom: 30px;
+			font-size: 72px;
+			@include media-breakpoint-down(sm) {
+				font-size: 32px;
+			}
+			@include media-breakpoint-only(md) {
+				font-size: 44px;
+			}
+		}
+		.link {
+			position: relative;
+			display: inline-flex;
+			align-items: center;
+			font-size: 16px;
+			&::before {
+				content: "";
+				display: inline-block;
+				margin-right: 24px;
+				width: 60px;
+				height: 60px;
+				border-radius: 50%;
+				background-color: $primary;
+			}
+			&::after {
+				content: "";
+				position: absolute;
+				display: inline-block;
+				width: 0;
+				height: 0;
+				left: 25px;
+				border-top: 8px solid transparent;
+				border-bottom: 8px solid transparent;
+
+				border-left: 12px solid white;
+			}
+		}
 	}
 }
 

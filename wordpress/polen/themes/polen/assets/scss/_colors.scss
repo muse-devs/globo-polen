@@ -1,9 +1,11 @@
 $body-bg: #12141D;
 $body-color: white;
+$primary: #E61681;
+$danger: #ff4136;
 
 $theme-colors: (
-  "primary": #E61681,
-  "danger": #ff4136
+  "primary": $primary,
+  "danger": $danger
 );
 
 $default-bg-color: #1E2029;

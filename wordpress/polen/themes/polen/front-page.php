@@ -19,7 +19,14 @@ get_header();
 <main id="primary" class="site-main">
 
 	<section class="row my-5 py-4 top-banner">
-
+		<video class="video" autoplay muted>
+			<source src="<?= TEMPLATE_URI; ?>/assets/video.mp4" type="video/mp4">
+			<!-- <source src="movie.ogg" type="video/ogg"> -->
+		</video>
+		<div class="content">
+			<h2 class="title">Presenteie e<br />surpreenda com vídeos personalizados.</h2>
+			<a href="#como" class="link">Como funciona</a>
+		</div>
 	</section>
 
 	<section class="row my-5 py-4 news">
