@@ -30,7 +30,7 @@
 			<?php the_custom_logo(); ?>
 		</div>
 		<div class="col-sm d-flex justify-content-end align-items-center">
-			<?php get_search_form(); ?>
+			<?php //get_search_form(); ?>
 			<div class="ml-2">Login</div>
 		</div>
 	</header><!-- #masthead -->
