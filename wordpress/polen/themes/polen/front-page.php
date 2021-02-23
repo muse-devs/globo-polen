@@ -68,7 +68,7 @@ get_header();
 				<div class="col">
 					<h2>Todos os Artistas</h2>
 				</div>
-				<div class="col d-flex justify-content-end align-items-center"><a href="#">Ver todos</a></div>
+				<div class="col d-flex justify-content-end align-items-center"><a href="#">Ver mais</a></div>
 			</header>
 		</div>
 		<div class="col-md-12">
