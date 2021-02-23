@@ -3,9 +3,13 @@
 // $size pode ser 'medium' e 'small'
 function polen_get_card($url, $image, $price, $name, $category, $category_url, $size = "medium")
 {
+	$class = "col-md-3";
+	if ($size === "small") {
+		$class = "col-flex-20";
+	}
 	ob_start();
 ?>
-	<div class="col-md-3">
+	<div class="<?= $class; ?>">
 		<div class="polen-card <?= $size; ?>">
 			<figure class="image">
 				<a href="<?= $url; ?>">

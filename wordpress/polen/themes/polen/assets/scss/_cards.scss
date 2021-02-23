@@ -1,19 +1,17 @@
 .polen-card {
-	@include media-breakpoint-only(sm) {
-		margin-bottom: 40px;
-	}
 	.image {
 		position: relative;
 		overflow: hidden;
-		// padding: 20px;
+		width: 100%;
 		font-size: 20px;
 		border-radius: 10px;
 		box-sizing: border-box;
-		// background: no-repeat center/cover $default-bg-color;
 		img {
 			position: absolute;
 			top: 50%;
 			left: 50%;
+			width: 100%;
+			height: auto;
 			transform: translate(-50%, -50%);
 		}
 		.price {
@@ -22,11 +20,6 @@
 			right: 20px;
 			font-size: 20px;
 			font-weight: 700;
-		}
-	}
-	&.big {
-		.image {
-			border-radius: 0;
 		}
 	}
 	&.medium {
@@ -41,18 +34,6 @@
 			@include media-breakpoint-only(lg) {
 				height: 288px;
 			}
-			img {
-				width: 100%;
-				height: auto;
-			}
-		}
-	}
-	&.small {
-	}
-	&.category {
-		.image {
-			padding: 50px 20px;
-			text-align: center;
 		}
 	}
 	.title,
@@ -68,4 +49,39 @@
 	.title {
 		font-weight: 700;
 	}
+	&.small {
+		.image {
+			height: 257px;
+			@include media-breakpoint-only(sm) {
+				height: 700px;
+			}
+			@include media-breakpoint-only(md) {
+				height: 162px;
+			}
+			@include media-breakpoint-only(lg) {
+				height: 216px;
+			}
+			.price {
+				font-size: 16px;
+			}
+		}
+		.title, .category {
+			font-size: 16px;
+		}
+	}
+	&.category {
+		background-color: $default-bg-color;
+		.image {
+			padding: 50px 20px;
+			text-align: center;
+		}
+	}
+	@include media-breakpoint-only(sm) {
+		margin-bottom: 40px;
+	}
+}
+
+.col-flex-20 {
+	margin-bottom: 20px;
+	width: 18%;
 }
