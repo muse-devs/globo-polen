@@ -51,26 +51,13 @@ get_header();
 		</div>
 		<div class="col md-12">
 			<div class="row">
-				<div class="col-md-3">
-					<div class="polen-card category">
-						<figure class="image">Categoria a</figure>
+				<?php for ($i = 0; $i < 4; $i++) : ?>
+					<div class="col-md-3">
+						<div class="polen-card category">
+							<a href="#" class="link">Categoria a</a>
+						</div>
 					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="polen-card category">
-						<figure class="image">Categoria a</figure>
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="polen-card category">
-						<figure class="image">Categoria a</figure>
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="polen-card category">
-						<figure class="image">Categoria a</figure>
-					</div>
-				</div>
+				<?php endfor; ?>
 			</div>
 		</div>
 	</section>

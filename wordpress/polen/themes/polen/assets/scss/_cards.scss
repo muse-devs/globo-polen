@@ -65,15 +65,18 @@
 				font-size: 16px;
 			}
 		}
-		.title, .category {
+		.title,
+		.category {
 			font-size: 16px;
 		}
 	}
 	&.category {
+		padding: 50px 20px;
+		border-radius: 10px;
+		text-align: center;
 		background-color: $default-bg-color;
-		.image {
-			padding: 50px 20px;
-			text-align: center;
+		.link {
+			color: white;
 		}
 	}
 	@include media-breakpoint-only(sm) {
