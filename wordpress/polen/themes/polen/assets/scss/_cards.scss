@@ -101,7 +101,7 @@
 			margin-bottom: 30px;
 			font-size: 72px;
 			@include media-breakpoint-down(sm) {
-				font-size: 32px;
+				font-size: 5vw;
 			}
 			@include media-breakpoint-only(md) {
 				font-size: 44px;
