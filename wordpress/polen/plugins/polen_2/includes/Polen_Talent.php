@@ -40,8 +40,7 @@ class Polen_Talent
     function talent_select( $post ) {
         global $user_ID;
 
-        $user_query = new WP_User_Query( array( 'role' => 'user_talent' ) );
-        $tallents = $user_query->get_results();
+        $tallents = get_users( array( 'role' => 'user_talent' ) );
         $current_tallent = empty( $post->ID ) ? '' : $post->post_author;
         ?>
         <select name="polen_choose_talent" id="polen_choose_talent">
