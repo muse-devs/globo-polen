@@ -18,81 +18,15 @@ get_header();
 
 <main id="primary" class="site-main">
 
-	<section class="row my-5 py-4 top-banner">
-		<div class="col-sm-12">
-			<video class="video" autoplay muted>
-				<source src="<?= TEMPLATE_URI; ?>/assets/video.mp4" type="video/mp4">
-				<!-- <source src="movie.ogg" type="video/ogg"> -->
-			</video>
-			<div class="content">
-				<h2 class="title">Presenteie e<br />surpreenda com vídeos personalizados.</h2>
-				<a href="#como" class="link">Como funciona</a>
-			</div>
-		</div>
-	</section>
+	<?php polen_front_get_banner(); ?>
 
-	<section class="row my-5 py-4 news">
-		<div class="col-md-12">
-			<header class="row mb-4">
-				<div class="col">
-					<h2>Novidades</h2>
-				</div>
-				<div class="col d-flex justify-content-end align-items-center"><a href="#">Ver todos</a></div>
-			</header>
-		</div>
-		<div class="col-md-12">
-			<div class="row">
-				<?php for ($i = 0; $i < 4; $i++) : ?>
-					<?php polen_get_card("#opa", "https://picsum.photos/255/350", "100", "Nome do Artista", "Categoria", "#cat"); ?>
-				<?php endfor; ?>
-			</div>
-		</div>
-	</section>
+	<?php polen_front_get_news(); ?>
 
-	<section class="row my-5 py-4 categories">
-		<div class="col-md-12">
-			<header class="row mb-4">
-				<div class="col">
-					<h2>Categorias</h2>
-				</div>
-				<div class="col d-flex justify-content-end align-items-center"><a href="#">Ver todos</a></div>
-			</header>
-		</div>
-		<div class="col md-12">
-			<div class="row">
-				<?php for ($i = 0; $i < 4; $i++) : ?>
-					<div class="col-md-3">
-						<div class="polen-card category">
-							<a href="#" class="link">Categoria a</a>
-						</div>
-					</div>
-				<?php endfor; ?>
-			</div>
-		</div>
-	</section>
+	<?php polen_front_get_categories(); ?>
 
-	<section class="row my-5 py-4 all-artists">
-		<div class="col-md-12">
-			<header class="row mb-4">
-				<div class="col">
-					<h2>Todos os Artistas</h2>
-				</div>
-				<div class="col d-flex justify-content-end align-items-center"><a href="#">Ver mais</a></div>
-			</header>
-		</div>
-		<div class="col-md-12">
-			<div class="row d-flex justify-content-between flex-wrap">
-				<?php for ($i = 0; $i < 10; $i++) : ?>
-					<?php polen_get_card("#opa", "https://picsum.photos/220/276", "100", "Nome do Artista", "Categoria", "#cat", "small"); ?>
-				<?php endfor; ?>
-			</div>
-			<div class="row mt-5">
-				<div class="col-md-12 text-center">
-					<button type="button" class="btn btn-primary btn-lg">Ver mais</button>
-				</div>
-			</div>
-		</div>
-	</section>
+	<?php polen_front_get_artists(); ?>
+
+	<?php polen_front_get_tutorial(); ?>
 
 </main><!-- #main -->
 
