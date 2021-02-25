@@ -7,15 +7,16 @@ class Polen_Plugin_Settings
 
     public function __construct($static=false)
     {
-//        if( $static ) {
-//            $this->init();
+        if( $static ) {
+            $this->init();
+            add_action( 'redux/loaded', array( $this, 'remove_demo' ) );
             add_action('redux/options/Polen_Plugin_Settings/saved', array($this, 'save'), 10, 2);
             add_action('redux/options/Polen_Plugin_Settings/settings/change', array($this, 'save'), 10, 2);
-//        }
+        }
     }
 
     public static function init() {
-        if ( ! class_exists( 'Redux' ) ) {
+        if ( ! class_exists( '\Redux' ) ) {
             return;
         }
 
@@ -133,10 +134,10 @@ class Polen_Plugin_Settings
             )
         );
 
-        Redux::set_args( $opt_name, $args );
+        \Redux::set_args( $opt_name, $args );
 
         // Section: Geral
-        Redux::set_section( $opt_name, array(
+        \Redux::set_section( $opt_name, array(
             'title'            => esc_html__( 'Geral', 'polen' ),
             'id'               => 'general',
             'icon'             => 'el el-align-justify',
@@ -151,26 +152,17 @@ class Polen_Plugin_Settings
                 ),
             ),
         ) );
-        
-        add_action( 'redux/loaded', 'remove_demo' );
-        if ( ! function_exists( 'remove_demo' ) ) {
-            function remove_demo() {
-                if ( class_exists( 'ReduxFrameworkPlugin' ) ) {
-                    remove_filter( 'plugin_row_meta', array( ReduxFrameworkPlugin::instance(), 'plugin_metalinks' ), null, 2 );
-                    remove_action( 'admin_notices', array( ReduxFrameworkPlugin::instance(), 'admin_notices' ) );
-                }
-            }
-        }
     }
 
     public function save( $args ) {
         // Ações a serem executadas após o salvamento das configurações.
     }
 
-}
+    function remove_demo() {
+        if ( class_exists( '\ReduxFrameworkPlugin' ) ) {
+            remove_filter( 'plugin_row_meta', array( \ReduxFrameworkPlugin::instance(), 'plugin_metalinks' ), null, 2 );
+            remove_action( 'admin_notices', array( \ReduxFrameworkPlugin::instance(), 'admin_notices' ) );
+        }
+    }
 
-//function polen_Plugin_Settings_Init() {
-//    $Polen_Plugin_Settings = new Polen_Plugin_Settings( true );
-//}
-//
-//polen_Plugin_Settings_Init();
+}
