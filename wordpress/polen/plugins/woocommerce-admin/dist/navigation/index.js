@@ -82,7 +82,7 @@ this["wc"] = this["wc"] || {}; this["wc"]["navigation"] =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 474);
+/******/ 	return __webpack_require__(__webpack_require__.s = 472);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -255,7 +255,7 @@ module.exports = _unsupportedIterableToArray;
 
 /***/ }),
 
-/***/ 474:
+/***/ 472:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -298,7 +298,7 @@ var external_this_wp_element_ = __webpack_require__(0);
 var external_this_wp_url_ = __webpack_require__(22);
 
 // EXTERNAL MODULE: ./node_modules/qs/lib/index.js
-var lib = __webpack_require__(50);
+var lib = __webpack_require__(49);
 
 // EXTERNAL MODULE: external "lodash"
 var external_lodash_ = __webpack_require__(3);
@@ -966,6 +966,25 @@ build_module_WooNavigationItem.Slot = function (_ref2) {
 
 /***/ }),
 
+/***/ 49:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var stringify = __webpack_require__(87);
+var parse = __webpack_require__(88);
+var formats = __webpack_require__(52);
+
+module.exports = {
+    formats: formats,
+    parse: parse,
+    stringify: stringify
+};
+
+
+/***/ }),
+
 /***/ 5:
 /***/ (function(module, exports) {
 
@@ -985,25 +1004,6 @@ function _defineProperty(obj, key, value) {
 }
 
 module.exports = _defineProperty;
-
-/***/ }),
-
-/***/ 50:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var stringify = __webpack_require__(87);
-var parse = __webpack_require__(88);
-var formats = __webpack_require__(52);
-
-module.exports = {
-    formats: formats,
-    parse: parse,
-    stringify: stringify
-};
-
 
 /***/ }),
 

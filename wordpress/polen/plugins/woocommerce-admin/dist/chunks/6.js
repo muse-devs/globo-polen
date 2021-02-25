@@ -1,6 +1,6 @@
 (window["__wcAdmin_webpackJsonp"] = window["__wcAdmin_webpackJsonp"] || []).push([[6],{
 
-/***/ 504:
+/***/ 502:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -28,7 +28,7 @@ function createNoticesFromResponse(response) {
 
 /***/ }),
 
-/***/ 506:
+/***/ 504:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -298,7 +298,7 @@ var UsageModal = /*#__PURE__*/function (_Component) {
 
 /***/ }),
 
-/***/ 522:
+/***/ 520:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2068,7 +2068,7 @@ var klarna_Klarna = /*#__PURE__*/function (_Component) {
       var _this$props = this.props,
           markConfigured = _this$props.markConfigured,
           plugin = _this$props.plugin;
-      var slug = plugin === 'checkout' ? 'klarna-checkout' : 'klarna-payments';
+      var slug = plugin === 'checkout' ? 'klarna_checkout' : 'klarna_payments';
       markConfigured(slug);
     }
   }, {
@@ -2717,10 +2717,10 @@ var mollie_MollieConnectStep = function MollieConnectStep(_ref2) {
   }, Object(external_this_wp_i18n_["__"])('Continue', 'woocommerce-admin')));
 };
 // EXTERNAL MODULE: ./client/task-list/tasks/payments/wcpay-usage-modal.js
-var wcpay_usage_modal = __webpack_require__(524);
+var wcpay_usage_modal = __webpack_require__(522);
 
 // EXTERNAL MODULE: ./client/lib/notices/index.js
-var notices = __webpack_require__(504);
+var notices = __webpack_require__(502);
 
 // CONCATENATED MODULE: ./client/task-list/tasks/payments/methods.js
 
@@ -3000,7 +3000,7 @@ function getPaymentMethods(_ref) {
 
 /***/ }),
 
-/***/ 524:
+/***/ 522:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3017,7 +3017,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var interpolate_components__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(interpolate_components__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _woocommerce_components__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(47);
 /* harmony import */ var _woocommerce_components__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_components__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _profile_wizard_steps_usage_modal__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(506);
+/* harmony import */ var _profile_wizard_steps_usage_modal__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(504);
 
 
 

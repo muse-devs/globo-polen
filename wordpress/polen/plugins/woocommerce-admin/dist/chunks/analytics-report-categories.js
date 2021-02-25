@@ -1,6 +1,6 @@
 (window["__wcAdmin_webpackJsonp"] = window["__wcAdmin_webpackJsonp"] || []).push([[10],{
 
-/***/ 482:
+/***/ 480:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -48,7 +48,7 @@ var external_this_wp_data_ = __webpack_require__(15);
 var external_this_wp_hooks_ = __webpack_require__(42);
 
 // EXTERNAL MODULE: ./client/lib/async-requests/index.js
-var async_requests = __webpack_require__(497);
+var async_requests = __webpack_require__(495);
 
 // CONCATENATED MODULE: ./client/analytics/report/categories/config.js
 /**
@@ -147,19 +147,19 @@ var external_this_wc_navigation_ = __webpack_require__(21);
 var external_this_wc_components_ = __webpack_require__(47);
 
 // EXTERNAL MODULE: external {"this":["wc","number"]}
-var external_this_wc_number_ = __webpack_require__(142);
+var external_this_wc_number_ = __webpack_require__(143);
 
 // EXTERNAL MODULE: external {"this":["wc","data"]}
 var external_this_wc_data_ = __webpack_require__(23);
 
 // EXTERNAL MODULE: ./client/analytics/report/categories/breadcrumbs.js
-var breadcrumbs = __webpack_require__(528);
+var breadcrumbs = __webpack_require__(526);
 
 // EXTERNAL MODULE: ./client/analytics/components/report-table/index.js + 2 modules
-var report_table = __webpack_require__(503);
+var report_table = __webpack_require__(501);
 
 // EXTERNAL MODULE: ./client/lib/currency-context.js
-var currency_context = __webpack_require__(495);
+var currency_context = __webpack_require__(493);
 
 // CONCATENATED MODULE: ./client/analytics/report/categories/table.js
 
@@ -387,19 +387,19 @@ table_CategoriesReportTable.contextType = currency_context["a" /* CurrencyContex
   };
 }))(table_CategoriesReportTable));
 // EXTERNAL MODULE: ./client/lib/get-selected-chart/index.js
-var get_selected_chart = __webpack_require__(500);
+var get_selected_chart = __webpack_require__(498);
 
 // EXTERNAL MODULE: ./client/analytics/components/report-chart/index.js + 1 modules
-var report_chart = __webpack_require__(499);
+var report_chart = __webpack_require__(497);
 
 // EXTERNAL MODULE: ./client/analytics/components/report-summary/index.js
-var report_summary = __webpack_require__(501);
+var report_summary = __webpack_require__(499);
 
 // EXTERNAL MODULE: ./client/analytics/report/products/table.js
-var products_table = __webpack_require__(527);
+var products_table = __webpack_require__(525);
 
 // EXTERNAL MODULE: ./client/analytics/components/report-filters/index.js
-var report_filters = __webpack_require__(502);
+var report_filters = __webpack_require__(500);
 
 // EXTERNAL MODULE: ./client/customer-effort-score-tracks/data/constants.js
 var constants = __webpack_require__(73);

@@ -1,12 +1,12 @@
 (window["__wcAdmin_webpackJsonp"] = window["__wcAdmin_webpackJsonp"] || []).push([[4],{
 
-/***/ 505:
+/***/ 503:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* unused harmony export ALLOWED_TAGS */
 /* unused harmony export ALLOWED_ATTR */
-/* harmony import */ var dompurify__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(510);
+/* harmony import */ var dompurify__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(508);
 /* harmony import */ var dompurify__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(dompurify__WEBPACK_IMPORTED_MODULE_0__);
 /**
  * External dependencies
@@ -25,7 +25,7 @@ var ALLOWED_ATTR = ['target', 'href', 'rel', 'name', 'download'];
 
 /***/ }),
 
-/***/ 507:
+/***/ 505:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -62,7 +62,7 @@ var classnames = __webpack_require__(7);
 var classnames_default = /*#__PURE__*/__webpack_require__.n(classnames);
 
 // EXTERNAL MODULE: ./node_modules/gridicons/dist/notice-outline.js
-var notice_outline = __webpack_require__(187);
+var notice_outline = __webpack_require__(189);
 var notice_outline_default = /*#__PURE__*/__webpack_require__.n(notice_outline);
 
 // EXTERNAL MODULE: external "moment"
@@ -80,7 +80,7 @@ var external_this_wc_components_ = __webpack_require__(47);
 var external_this_wp_components_ = __webpack_require__(4);
 
 // EXTERNAL MODULE: ./client/header/activity-panel/activity-card/style.scss
-var style = __webpack_require__(537);
+var style = __webpack_require__(535);
 
 // EXTERNAL MODULE: external "lodash"
 var external_lodash_ = __webpack_require__(3);
@@ -307,21 +307,21 @@ activity_card_ActivityCard.defaultProps = {
 
 /***/ }),
 
-/***/ 537:
+/***/ 535:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ 538:
+/***/ 536:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ 576:
+/***/ 574:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -351,13 +351,13 @@ var external_this_wc_data_ = __webpack_require__(23);
 var external_this_wp_data_ = __webpack_require__(15);
 
 // EXTERNAL MODULE: ./node_modules/react-transition-group/esm/TransitionGroup.js + 2 modules
-var TransitionGroup = __webpack_require__(295);
+var TransitionGroup = __webpack_require__(294);
 
 // EXTERNAL MODULE: ./node_modules/react-transition-group/esm/CSSTransition.js + 5 modules
-var CSSTransition = __webpack_require__(294);
+var CSSTransition = __webpack_require__(293);
 
 // EXTERNAL MODULE: ./client/header/activity-panel/activity-card/index.js + 1 modules
-var activity_card = __webpack_require__(507);
+var activity_card = __webpack_require__(505);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/classCallCheck.js
 var classCallCheck = __webpack_require__(11);
@@ -468,7 +468,7 @@ var defineProperty_default = /*#__PURE__*/__webpack_require__.n(defineProperty);
 var external_this_wp_components_ = __webpack_require__(4);
 
 // EXTERNAL MODULE: ./node_modules/react-visibility-sensor/dist/visibility-sensor.js
-var visibility_sensor = __webpack_require__(526);
+var visibility_sensor = __webpack_require__(524);
 var visibility_sensor_default = /*#__PURE__*/__webpack_require__.n(visibility_sensor);
 
 // EXTERNAL MODULE: external "moment"
@@ -654,10 +654,10 @@ action_InboxNoteAction.propTypes = {
   };
 }))(action_InboxNoteAction));
 // EXTERNAL MODULE: ./client/lib/sanitize-html/index.js
-var sanitize_html = __webpack_require__(505);
+var sanitize_html = __webpack_require__(503);
 
 // EXTERNAL MODULE: ./client/inbox-panel/style.scss
-var style = __webpack_require__(538);
+var style = __webpack_require__(536);
 
 // CONCATENATED MODULE: ./client/utils/index.js
 /**
@@ -1057,7 +1057,7 @@ card_InboxNoteCard.propTypes = {
 };
 /* harmony default export */ var card = (card_InboxNoteCard);
 // EXTERNAL MODULE: ./client/inbox-panel/utils.js
-var utils = __webpack_require__(195);
+var utils = __webpack_require__(196);
 
 // CONCATENATED MODULE: ./client/inbox-panel/index.js
 

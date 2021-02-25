@@ -1,6 +1,6 @@
 (window["__wcAdmin_webpackJsonp"] = window["__wcAdmin_webpackJsonp"] || []).push([[12],{
 
-/***/ 483:
+/***/ 481:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -65,7 +65,7 @@ var settings = __webpack_require__(25);
 var external_this_wc_data_ = __webpack_require__(23);
 
 // EXTERNAL MODULE: ./client/lib/async-requests/index.js
-var async_requests = __webpack_require__(497);
+var async_requests = __webpack_require__(495);
 
 // CONCATENATED MODULE: ./client/analytics/report/customers/config.js
 
@@ -443,16 +443,16 @@ var external_this_wp_components_ = __webpack_require__(4);
 var external_this_wc_components_ = __webpack_require__(47);
 
 // EXTERNAL MODULE: external {"this":["wc","number"]}
-var external_this_wc_number_ = __webpack_require__(142);
+var external_this_wc_number_ = __webpack_require__(143);
 
 // EXTERNAL MODULE: external {"this":["wc","date"]}
 var external_this_wc_date_ = __webpack_require__(29);
 
 // EXTERNAL MODULE: ./client/analytics/components/report-table/index.js + 2 modules
-var report_table = __webpack_require__(503);
+var report_table = __webpack_require__(501);
 
 // EXTERNAL MODULE: ./client/lib/currency-context.js
-var currency_context = __webpack_require__(495);
+var currency_context = __webpack_require__(493);
 
 // CONCATENATED MODULE: ./client/analytics/report/customers/table.js
 
@@ -723,7 +723,7 @@ var table_CustomersReportTable = /*#__PURE__*/function (_Component) {
 table_CustomersReportTable.contextType = currency_context["a" /* CurrencyContext */];
 /* harmony default export */ var table = (table_CustomersReportTable);
 // EXTERNAL MODULE: ./client/analytics/components/report-filters/index.js
-var report_filters = __webpack_require__(502);
+var report_filters = __webpack_require__(500);
 
 // CONCATENATED MODULE: ./client/analytics/report/customers/index.js
 
@@ -805,7 +805,7 @@ customers_CustomersReport.propTypes = {
 
 /***/ }),
 
-/***/ 497:
+/***/ 495:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -829,7 +829,7 @@ customers_CustomersReport.propTypes = {
 /* harmony import */ var _woocommerce_data__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(23);
 /* harmony import */ var _woocommerce_data__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_data__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _woocommerce_wc_admin_settings__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(25);
-/* harmony import */ var _analytics_report_taxes_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(498);
+/* harmony import */ var _analytics_report_taxes_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(496);
 /**
  * External dependencies
  */
@@ -955,7 +955,7 @@ var getVariationLabels = getRequestByIdString(function (_ref3) {
 
 /***/ }),
 
-/***/ 498:
+/***/ 496:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

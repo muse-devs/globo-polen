@@ -82,7 +82,7 @@ this["wc"] = this["wc"] || {}; this["wc"]["number"] =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 457);
+/******/ 	return __webpack_require__(__webpack_require__.s = 455);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -141,7 +141,7 @@ module.exports = _unsupportedIterableToArray;
 
 /***/ }),
 
-/***/ 457:
+/***/ 455:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -190,7 +190,7 @@ function _objectSpread(target) {
   return target;
 }
 
-var numberFormatter = __webpack_require__(458);
+var numberFormatter = __webpack_require__(456);
 /**
  * Formats a number using site's current locale
  *
@@ -278,7 +278,7 @@ function calculateDelta(primaryValue, secondaryValue) {
 
 /***/ }),
 
-/***/ 458:
+/***/ 456:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

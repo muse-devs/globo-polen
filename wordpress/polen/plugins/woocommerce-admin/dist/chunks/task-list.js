@@ -1,6 +1,6 @@
 (window["__wcAdmin_webpackJsonp"] = window["__wcAdmin_webpackJsonp"] || []).push([[49],{
 
-/***/ 184:
+/***/ 186:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -47,7 +47,7 @@ var getInAppPurchaseUrl = function getInAppPurchaseUrl(url) {
 
 /***/ }),
 
-/***/ 514:
+/***/ 512:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -110,7 +110,7 @@ var setAllPropsToValue = function setAllPropsToValue(obj, value) {
 
 /***/ }),
 
-/***/ 515:
+/***/ 513:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -342,14 +342,14 @@ function StoreAddress(props) {
 
 /***/ }),
 
-/***/ 570:
+/***/ 568:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ 594:
+/***/ 592:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -406,7 +406,7 @@ var external_this_wc_data_ = __webpack_require__(23);
 var external_this_wc_tracks_ = __webpack_require__(28);
 
 // EXTERNAL MODULE: ./client/task-list/style.scss
-var style = __webpack_require__(525);
+var style = __webpack_require__(523);
 
 // EXTERNAL MODULE: external {"this":["wp","components"]}
 var external_this_wp_components_ = __webpack_require__(4);
@@ -427,10 +427,10 @@ var external_this_wc_components_ = __webpack_require__(47);
 var utils = __webpack_require__(94);
 
 // EXTERNAL MODULE: ./client/lib/sanitize-html/index.js
-var sanitize_html = __webpack_require__(505);
+var sanitize_html = __webpack_require__(503);
 
 // EXTERNAL MODULE: ./client/lib/in-app-purchase.js
-var in_app_purchase = __webpack_require__(184);
+var in_app_purchase = __webpack_require__(186);
 
 // CONCATENATED MODULE: ./client/dashboard/components/cart-modal.js
 
@@ -1121,10 +1121,10 @@ var slicedToArray = __webpack_require__(19);
 var slicedToArray_default = /*#__PURE__*/__webpack_require__.n(slicedToArray);
 
 // EXTERNAL MODULE: ./node_modules/@wordpress/icons/build-module/icon/index.js
-var icon = __webpack_require__(304);
+var icon = __webpack_require__(302);
 
 // EXTERNAL MODULE: ./node_modules/@wordpress/primitives/build-module/svg/index.js
-var svg = __webpack_require__(196);
+var svg = __webpack_require__(197);
 
 // CONCATENATED MODULE: ./node_modules/@wordpress/icons/build-module/library/template-part-sidebar.js
 
@@ -1142,10 +1142,10 @@ var templatePartSidebar = Object(external_this_wp_element_["createElement"])(svg
 /* harmony default export */ var template_part_sidebar = (templatePartSidebar);
 //# sourceMappingURL=template-part-sidebar.js.map
 // EXTERNAL MODULE: ./client/task-list/tasks/products/product-template-modal.scss
-var product_template_modal = __webpack_require__(570);
+var product_template_modal = __webpack_require__(568);
 
 // EXTERNAL MODULE: ./client/lib/notices/index.js
-var notices = __webpack_require__(504);
+var notices = __webpack_require__(502);
 
 // CONCATENATED MODULE: ./client/task-list/tasks/products/product-template-modal.js
 
@@ -1642,7 +1642,7 @@ connect_Connect.defaultProps = {
   };
 }))(connect_Connect));
 // EXTERNAL MODULE: ./client/dashboard/components/settings/general/store-address.js
-var store_address = __webpack_require__(515);
+var store_address = __webpack_require__(513);
 
 // CONCATENATED MODULE: ./client/task-list/tasks/steps/location.js
 
@@ -1785,7 +1785,7 @@ var location_StoreLocation = /*#__PURE__*/function (_Component) {
 
 
 // EXTERNAL MODULE: ./client/lib/currency-context.js
-var currency_context = __webpack_require__(495);
+var currency_context = __webpack_require__(493);
 
 // CONCATENATED MODULE: ./client/task-list/tasks/shipping/rates.js
 
@@ -3069,7 +3069,7 @@ var classnames = __webpack_require__(7);
 var classnames_default = /*#__PURE__*/__webpack_require__.n(classnames);
 
 // EXTERNAL MODULE: ./client/task-list/tasks/payments/methods.js + 15 modules
-var payments_methods = __webpack_require__(522);
+var payments_methods = __webpack_require__(520);
 
 // CONCATENATED MODULE: ./client/task-list/tasks/payments/index.js
 
@@ -3185,9 +3185,15 @@ var payments_Payments = /*#__PURE__*/function (_Component) {
         return;
       }
 
-      return methods.find(function (method) {
+      var currentMethod = methods.find(function (method) {
         return method.key === query.method;
       });
+
+      if (!currentMethod) {
+        throw "Current method ".concat(query.method, " not found in available methods list");
+      }
+
+      return currentMethod;
     }
   }, {
     key: "getInstallStep",
@@ -3239,6 +3245,15 @@ var payments_Payments = /*#__PURE__*/function (_Component) {
                 method = methods.find(function (option) {
                   return option.key === key;
                 });
+
+                if (method) {
+                  _context.next = 5;
+                  break;
+                }
+
+                throw "Method ".concat(key, " not found in available methods list");
+
+              case 5:
                 enabledMethods[key] = !enabledMethods[key];
                 this.setState({
                   enabledMethods: enabledMethods
@@ -3247,15 +3262,15 @@ var payments_Payments = /*#__PURE__*/function (_Component) {
                   enabled: !method.isEnabled,
                   payment_method: key
                 });
-                _context.next = 8;
+                _context.next = 10;
                 return updateOptions(defineProperty_default()({}, method.optionName, payments_objectSpread(payments_objectSpread({}, options[method.optionName]), {}, {
                   enabled: method.isEnabled ? 'no' : 'yes'
                 })));
 
-              case 8:
+              case 10:
                 clearTaskStatusCache();
 
-              case 9:
+              case 11:
               case "end":
                 return _context.stop();
             }
@@ -3512,7 +3527,7 @@ var payments_Payments = /*#__PURE__*/function (_Component) {
   };
 }))(payments_Payments));
 // EXTERNAL MODULE: ./client/lib/collections/index.js
-var collections = __webpack_require__(514);
+var collections = __webpack_require__(512);
 
 // CONCATENATED MODULE: ./client/task-list/tasks.js
 

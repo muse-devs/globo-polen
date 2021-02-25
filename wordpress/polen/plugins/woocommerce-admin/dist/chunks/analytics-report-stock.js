@@ -1,6 +1,6 @@
 (window["__wcAdmin_webpackJsonp"] = window["__wcAdmin_webpackJsonp"] || []).push([[17],{
 
-/***/ 481:
+/***/ 479:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -91,13 +91,13 @@ var external_this_wc_components_ = __webpack_require__(47);
 var external_this_wc_navigation_ = __webpack_require__(21);
 
 // EXTERNAL MODULE: external {"this":["wc","number"]}
-var external_this_wc_number_ = __webpack_require__(142);
+var external_this_wc_number_ = __webpack_require__(143);
 
 // EXTERNAL MODULE: ./client/settings/index.js
 var settings = __webpack_require__(25);
 
 // EXTERNAL MODULE: ./client/analytics/components/report-table/index.js + 2 modules
-var report_table = __webpack_require__(503);
+var report_table = __webpack_require__(501);
 
 // CONCATENATED MODULE: ./client/analytics/report/stock/utils.js
 /**
@@ -115,7 +115,7 @@ function isLowStock(status, quantity, threshold) {
   return status && quantity <= threshold === 'instock';
 }
 // EXTERNAL MODULE: ./client/lib/currency-context.js
-var currency_context = __webpack_require__(495);
+var currency_context = __webpack_require__(493);
 
 // CONCATENATED MODULE: ./client/analytics/report/stock/table.js
 
@@ -301,7 +301,7 @@ var table_StockReportTable = /*#__PURE__*/function (_Component) {
 table_StockReportTable.contextType = currency_context["a" /* CurrencyContext */];
 /* harmony default export */ var table = (table_StockReportTable);
 // EXTERNAL MODULE: ./client/analytics/components/report-filters/index.js
-var report_filters = __webpack_require__(502);
+var report_filters = __webpack_require__(500);
 
 // CONCATENATED MODULE: ./client/analytics/report/stock/index.js
 
