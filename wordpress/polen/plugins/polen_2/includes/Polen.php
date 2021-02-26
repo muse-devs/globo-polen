@@ -43,6 +43,7 @@ class Polen {
         $polen_signIn = new Polen_SignInUser();
         $tallent = new Polen_Talent( true );
         $Polen_Plugin_Settings = new Polen_Plugin_Settings( true );
+        $Polen_Update_Fields = new Polen_Update_Fields( true );
     }
 
     /**
