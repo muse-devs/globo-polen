@@ -10,7 +10,8 @@
 			position: absolute;
 			top: 50%;
 			left: 50%;
-			width: 100%;
+			min-width: 100%;
+			min-height: 100%;
 			height: auto;
 			transform: translate(-50%, -50%);
 		}
@@ -71,11 +72,24 @@
 		}
 	}
 	&.category {
+		position: relative;
 		padding: 50px 20px;
 		border-radius: 10px;
 		text-align: center;
+		overflow: hidden;
 		background-color: $default-bg-color;
+		img {
+			display: block;
+			position: absolute;
+			min-width: 100%;
+			min-height: 100%;
+			height: auto;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
 		.link {
+			position: relative;
 			color: white;
 		}
 	}

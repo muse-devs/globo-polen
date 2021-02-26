@@ -2,6 +2,7 @@
 
 namespace Polen\Includes;
 
+use Polen\Includes\Polen_Plugin_Settings;
 use Polen\Publics\Polen_Public;
 use Polen\Admin\Polen_Admin;
 use Polen\Includes\Polen_Talent;
@@ -41,6 +42,7 @@ class Polen {
     private function init_classes() {
         $polen_signIn = new Polen_SignInUser();
         $tallent = new Polen_Talent( true );
+        $Polen_Plugin_Settings = new Polen_Plugin_Settings( true );
     }
 
     /**

@@ -23,7 +23,7 @@ function polen_front_get_banner()
 }
 
 // $size pode ser 'medium' e 'small'
-function polen_front_get_card($url, $image, $price, $name, $category, $category_url, $size = "medium")
+function polen_front_get_card($item, $size = "medium")
 {
 	$class = "col-md-3";
 	if ($size === "small") {
@@ -34,16 +34,16 @@ function polen_front_get_card($url, $image, $price, $name, $category, $category_
 	<div class="<?= $class; ?>">
 		<div class="polen-card <?= $size; ?>">
 			<figure class="image">
-				<a href="<?= $url; ?>">
-					<img src="<?= $image; ?>" alt="<?= $name; ?>">
+				<a href="<?= $item["talent_url"]; ?>">
+					<img src="<?= $item["image"]; ?>" alt="<?= $item["name"]; ?>">
 				</a>
-				<span class="price">R$<?= $price; ?></span>
+				<span class="price">R$<?= $item["price"]; ?></span>
 			</figure>
 			<h4 class="title">
-				<a href="<?= $url; ?>"><?= $name; ?></a>
+				<a href="<?= $item["talent_url"]; ?>"><?= $item["name"]; ?></a>
 			</h4>
 			<h5 class="category">
-				<a href="<?= $category_url; ?>"><?= $category; ?></a>
+				<a href="<?= $item["category_url"]; ?>"><?= $item["category"]; ?></a>
 			</h5>
 		</div>
 	</div>
@@ -53,8 +53,11 @@ function polen_front_get_card($url, $image, $price, $name, $category, $category_
 	echo $data;
 }
 
-function polen_front_get_news()
+function polen_front_get_news($items)
 {
+	if (!$items) {
+		return;
+	}
 	ob_start();
 ?>
 	<section class="row my-5 py-4 news">
@@ -68,9 +71,9 @@ function polen_front_get_news()
 		</div>
 		<div class="col-md-12">
 			<div class="row">
-				<?php for ($i = 0; $i < 4; $i++) : ?>
-					<?php polen_front_get_card("#opa", "https://picsum.photos/255/350", "100", "Nome do Artista", "Categoria", "#cat"); ?>
-				<?php endfor; ?>
+				<?php foreach ($items as $item) : ?>
+					<?php polen_front_get_card($item); ?>
+				<?php endforeach; ?>
 			</div>
 		</div>
 	</section>
@@ -80,8 +83,11 @@ function polen_front_get_news()
 	echo $data;
 }
 
-function polen_front_get_categories()
+function polen_front_get_categories($items)
 {
+	if (!$items) {
+		return;
+	}
 	ob_start();
 ?>
 	<section class="row my-5 py-4 categories">
@@ -95,13 +101,14 @@ function polen_front_get_categories()
 		</div>
 		<div class="col md-12">
 			<div class="row">
-				<?php for ($i = 0; $i < 4; $i++) : ?>
+				<?php foreach ($items as $item) : ?>
 					<div class="col-md-3">
-						<div class="polen-card category">
-							<a href="#" class="link">Categoria a</a>
-						</div>
+						<figure class="polen-card category">
+							<img src="<?= $item["image"] ?>" alt="<?= $item["title"] ?>">
+							<a href="<?= $item["url"] ?>" class="link"><?= $item["title"] ?></a>
+						</figure>
 					</div>
-				<?php endfor; ?>
+				<?php endforeach; ?>
 			</div>
 		</div>
 	</section>
@@ -111,8 +118,11 @@ function polen_front_get_categories()
 	echo $data;
 }
 
-function polen_front_get_artists()
+function polen_front_get_artists($items)
 {
+	if (!$items) {
+		return;
+	}
 	ob_start();
 ?>
 	<section class="row my-5 py-4 all-artists">
@@ -126,9 +136,9 @@ function polen_front_get_artists()
 		</div>
 		<div class="col-md-12">
 			<div class="row d-flex justify-content-between flex-wrap">
-				<?php for ($i = 0; $i < 10; $i++) : ?>
-					<?php polen_front_get_card("#opa", "https://picsum.photos/220/276", "100", "Nome do Artista", "Categoria", "#cat", "small"); ?>
-				<?php endfor; ?>
+				<?php foreach ($items as $item) : ?>
+					<?php polen_front_get_card($item, "small"); ?>
+				<?php endforeach; ?>
 			</div>
 			<div class="row mt-5">
 				<div class="col-md-12 text-center">

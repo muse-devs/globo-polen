@@ -12,8 +12,8 @@
 
 ?>
 
-<footer id="colophon" class="mt-5 site-footer">
-	<div class="row footer-menu">
+<footer id="colophon" class="mt-5 pt-5 site-footer">
+	<div class="row pb-5">
 		<div class="col-md-6">
 			<div class="row">
 				<div class="col-md-4">
@@ -45,13 +45,19 @@
 		</div>
 		<div class="col-md-6">
 			<h5 class="title">Junte-se à nossa lista</h5>
-			<p>Seja o primeiro a saber sobre as estrelas mais recentes e as melhores ofertas no Polen</p>
+			<p class="description">Seja o primeiro a saber sobre as estrelas mais recentes e as melhores ofertas no Polen</p>
+			<div class="row">
+				<div class="col-md-8">
+					<input type="text" placeholder="Entre com o seu e-mail" class="form-control form-control-lg" />
+				</div>
+				<div class="col-md-4"><button class="btn btn-primary btn-lg btn-block">Enviar</button></div>
+			</div>
 		</div>
 	</div>
-	<div class="row mt-5 pt-5 site-info">
-		<div class="col-md-4"><?php the_custom_logo(); ?></div>
-		<div class="col-md-4 text-center">2021 @ Polen</div>
-		<div class="col-md-4 text-right">social</div>
+	<div class="row mt-5 copyright">
+		<div class="col-md-4 py-5"><?php the_custom_logo(); ?></div>
+		<div class="col-md-4 py-5 text-center">2021 @ Polen</div>
+		<div class="col-md-4 py-5 text-right">social</div>
 	</div><!-- .site-info -->
 </footer><!-- #colophon -->
 </div><!-- #Container -->
