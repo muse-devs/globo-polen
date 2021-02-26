@@ -31,6 +31,12 @@
 		</div>
 		<div class="col-sm-6 d-flex justify-content-end align-items-center">
 			<?php //get_search_form(); ?>
-			<div class="ml-2">Login</div>
+                    <div class="ml-2">
+                        <?php if( is_user_logged_in() ) : ?>
+                            ---
+                        <?php else : ?>
+                            Login
+                        <?php endif; ?>
+                    </div>
 		</div>
 	</header><!-- #masthead -->

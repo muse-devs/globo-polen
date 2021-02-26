@@ -84,10 +84,10 @@ class Polen_Talent
         if ( in_array( 'user_talent', $user_roles, true ) ) {
             update_user_meta( $user_id, 'talent_enabled', '0' );
             //verify if the talent has a product
-            $user_product = new WP_Query( array( 'author' => $user_id ) );
+            $user_product = new \WP_Query( array( 'author' => $user_id ) );
             if ( !$user_product->have_posts() ) {
                 $user = get_user_by( 'ID', $user_id );
-                $product = new WC_Product_Simple();
+                $product = new \WC_Product_Simple();
                 $product->set_name( $user->first_name . ' ' . $user->last_name );
                 $product->set_status( 'draft' );
                 $product->set_slug( sanitize_title( $user->first_name . ' ' . $user->last_name ) );
