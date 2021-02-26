@@ -95,6 +95,8 @@ class Polen_Talent
                 $product->save();
                 $id = $product->get_id();
                 
+                $this->set_product_to_talent($id, $user_id);
+                
                 if( $id <= 0 ){
                     trigger_error( "Falha ao criar produto do usuário" );
                 }
@@ -173,6 +175,23 @@ class Polen_Talent
                     }
                 )
             );
+        }
+    }
+    
+    public function set_product_to_talent($product_id, $talent_id)
+    {
+        global $wpdb;
+        
+        $result = $wpdb->update(
+            'wp_posts',
+            [ 'post_author' => $talent_id ],
+            [ 'ID' => $product_id ]
+        );
+        
+        if ( is_wp_error( $result ) ) {
+            return true;
+        } else {
+            return false;
         }
     }
 }
