@@ -102,90 +102,93 @@ do_action( 'woocommerce_before_cart' ); ?>
 			
 			<tr>
 				<td colspan="4">
-					<div>Esse vídeo é para</div>
-					<div>
-					<?php
-						$video_to = isset( $cart_item['video_to'] ) ? $cart_item['video_to'] : '';
-						$checked_other_one = '';	
-						if( $video_to == 'other_one' ){
-							$checked_other_one = 'checked';
-						}
-						$checked_to_myself = '';	
-						if( $video_to == 'to_myself' ){
-							$checked_to_myself = 'checked';
-						}
 
+				<div class="row">
+					<div class="col-md-12">
+						Esse vídeo é para
+					</div>
+					<div class="col-md-12">
+						<?php
+							$video_to = isset( $cart_item['video_to'] ) ? $cart_item['video_to'] : '';
+							$checked_other_one = '';	
+							if( $video_to == 'other_one' ){
+								$checked_other_one = 'checked';
+							}
+							$checked_to_myself = '';	
+							if( $video_to == 'to_myself' ){
+								$checked_to_myself = 'checked';
+							}
+
+							printf(
+							'<input type="radio" class="%s" id="cart_video_to_%s" data-cart-id="%s" name="video_to" value="other_one" %s > Outra pessoa
+							<input type="radio" class="%s" id="cart_video_to_%s" data-cart-id="%s" name="video_to" value="to_myself" %s > Para mim',
+							'polen-cart-item-data',
+							$cart_item_key,
+							$cart_item_key,
+							$checked_other_one,
+							'polen-cart-item-data',
+							$cart_item_key,
+							$cart_item_key,
+							$checked_to_myself
+							);
+						?>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-12">
+					<?php
+						$offered_by = isset( $cart_item['offered_by'] ) ? $cart_item['offered_by'] : '';
 						printf(
-						'<input type="radio" class="%s" id="cart_video_to_%s" data-cart-id="%s" name="video_to" value="other_one" %s > Outra pessoa <br>
-						 <input type="radio" class="%s" id="cart_video_to_%s" data-cart-id="%s" name="video_to" value="to_myself" %s > Para mim',
+						'<input type="text" placeholder="Vídeo oferecido por" class="%s form-control form-control-lg" id="cart_offered_by_%s" data-cart-id="%s" name="offered_by" value="%s" />',
 						'polen-cart-item-data',
 						$cart_item_key,
 						$cart_item_key,
-						$checked_other_one,
-						'polen-cart-item-data',
-						$cart_item_key,
-						$cart_item_key,
-						$checked_to_myself
+						$offered_by,
 						);
-					?>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="4">
-					<div>
-						<?php
-							$offered_by = isset( $cart_item['offered_by'] ) ? $cart_item['offered_by'] : '';
-							printf(
-							'<input type="text" placeholder="Vídeo oferecido por" class="%s" id="cart_offered_by_%s" data-cart-id="%s" name="offered_by" value="%s" />',
-							'polen-cart-item-data',
-							$cart_item_key,
-							$cart_item_key,
-							$offered_by,
-							);
 						?>
 					</div>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="4">
-					<div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-12">
 						<?php
-							$name_to_video = isset( $cart_item['name_to_video'] ) ? $cart_item['name_to_video'] : '';
-							printf(
-							'<input type="text" placeholder="Para quem é o vídeo?" class="%s" id="cart_name_to_video_%s" data-cart-id="%s" name="name_to_video" value="%s" />',
-							'polen-cart-item-data',
-							$cart_item_key,
-							$cart_item_key,
-							$name_to_video,
-							);
-						?>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="4">
-					<div>
-						<?php
-							$email_to_video = isset( $cart_item['email_to_video'] ) ? $cart_item['email_to_video'] : '';
-							printf(
-							'<input type="text" placeholder="E-mail para receber updates" class="%s" id="cart_email_to_video_%s" data-cart-id="%s" name="email_to_video" value="%s" />',
-							'polen-cart-item-data',
-							$cart_item_key,
-							$cart_item_key,
-							$email_to_video,
-							);
-						?>						
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="4">
-					<div>Qual ocasião do vídeo?</div>
-						<?php
-						 $email_to_video = isset( $cart_item['email_to_video'] ) ? $cart_item['email_to_video'] : '';
+						$name_to_video = isset( $cart_item['name_to_video'] ) ? $cart_item['name_to_video'] : '';
 						printf(
-						'<select class="%s" id="cart_video_category_%s" data-cart-id="%s" name="video_category"/>',
+						'<input type="text" placeholder="Para quem é o vídeo?" class="%s form-control form-control-lg" id="cart_name_to_video_%s" data-cart-id="%s" name="name_to_video" value="%s" />',
+						'polen-cart-item-data',
+						$cart_item_key,
+						$cart_item_key,
+						$name_to_video,
+						);
+						?>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-12">
+						<?php
+						$email_to_video = isset( $cart_item['email_to_video'] ) ? $cart_item['email_to_video'] : '';
+						printf(
+						'<input type="text" placeholder="E-mail para receber updates" class="%s form-control form-control-lg" id="cart_email_to_video_%s" data-cart-id="%s" name="email_to_video" value="%s" />',
+						'polen-cart-item-data',
+						$cart_item_key,
+						$cart_item_key,
+						$email_to_video,
+						);
+						?>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-12">
+						Qual ocasião do vídeo?
+					</div>
+					<div class="col-md-12">
+						<?php
+						$email_to_video = isset( $cart_item['email_to_video'] ) ? $cart_item['email_to_video'] : '';
+						printf(
+						'<select class="%s form-control form-control-lg" id="cart_video_category_%s" data-cart-id="%s" name="video_category"/>',
 						'polen-cart-item-data',
 						$cart_item_key,
 						$cart_item_key
@@ -198,17 +201,18 @@ do_action( 'woocommerce_before_cart' ); ?>
 						endforeach;
 						?>
 						</select>
-				</td>
-			</tr>	
-			<tr>
-				<td colspan="4">
-					<div>Instruções para o vídeo</div>
-					<div>
-						<?php
+					</div>
+				</div>	
+				<div class="row">
+					<div class="col-md-12">
+						Instruções para o vídeo
+					</div>
+					<div class="col-md-12">
+					<?php
 							$instructions_to_video = isset( $cart_item['instructions_to_video'] ) ? $cart_item['instructions_to_video'] : '';
 							printf(
 							'<textarea 	name="instructions_to_video" placeholder="E-mail para receber updates" 
-										class="%s" id="cart_instructions_to_video_%s" 
+										class="%s form-control form-control-lg" id="cart_instructions_to_video_%s" 
 										data-cart-id="%s">%s</textarea>',
 							'polen-cart-item-data',
 							$cart_item_key,
@@ -217,29 +221,32 @@ do_action( 'woocommerce_before_cart' ); ?>
 							);
 						?>
 					</div>
+				</div>		
+				<div class="row">
+					<div class="col-md-12">
+						<?php
+							$allow_video_on_page = isset( $cart_item['allow_video_on_page'] ) ? $cart_item['allow_video_on_page'] : 'on';
+							$checked_allow = '';	
+							if( $allow_video_on_page == 'on' ){
+								$checked_allow = 'checked';
+							}
+
+							printf(
+							'<input type="checkbox" name="allow_video_on_page" class="%s form-control form-control-lg" id="cart_allow_video_on_page_%s" 
+										data-cart-id="%s" %s>',
+							'polen-cart-item-data',
+							$cart_item_key,
+							$cart_item_key,
+							$checked_allow,
+							);
+						?>
+						<span>Permitir que o vídeo seja postado no perfil do artista</span>
+					</div>
+				</div>	
+
 				</td>
 			</tr>
-			<tr>
-				<td colspan="4">
-					<?php
-						$allow_video_on_page = isset( $cart_item['allow_video_on_page'] ) ? $cart_item['allow_video_on_page'] : 'on';
-						$checked_allow = '';	
-						if( $allow_video_on_page == 'on' ){
-							$checked_allow = 'checked';
-						}
-
-						printf(
-						'<input type="checkbox" name="allow_video_on_page" class="%s" id="cart_allow_video_on_page_%s" 
-									data-cart-id="%s" %s>',
-						'polen-cart-item-data',
-						$cart_item_key,
-						$cart_item_key,
-						$checked_allow,
-						);
-					?>
-					<span>Permitir que o vídeo seja postado no perfil do artista</span>
-				</td>
-			</tr>			
+			
 			<tr>
 				<td colspan="4" class="actions">
 					<?php do_action( 'woocommerce_cart_actions' ); ?>
