@@ -1,6 +1,6 @@
 (window["__wcAdmin_webpackJsonp"] = window["__wcAdmin_webpackJsonp"] || []).push([[32],{
 
-/***/ 495:
+/***/ 493:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -31,14 +31,14 @@ var CurrencyContext = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["cr
 
 /***/ }),
 
-/***/ 508:
+/***/ 506:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ 511:
+/***/ 509:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -56,7 +56,7 @@ var CurrencyContext = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["cr
 /* harmony import */ var _woocommerce_data__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_data__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _woocommerce_navigation__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(21);
 /* harmony import */ var _woocommerce_navigation__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_navigation__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _woocommerce_number__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(142);
+/* harmony import */ var _woocommerce_number__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(143);
 /* harmony import */ var _woocommerce_number__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_number__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _woocommerce_wc_admin_settings__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(25);
 
@@ -174,7 +174,7 @@ var getIndicatorData = function getIndicatorData(select, indicators, query, filt
 
 /***/ }),
 
-/***/ 512:
+/***/ 510:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -197,7 +197,7 @@ var getIndicatorData = function getIndicatorData(select, indicators, query, filt
 /* harmony import */ var _woocommerce_experimental__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(31);
 /* harmony import */ var _woocommerce_components__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(47);
 /* harmony import */ var _woocommerce_components__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_components__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(513);
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(511);
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_10__);
 
 
@@ -285,14 +285,14 @@ ActivityHeader.propTypes = {
 
 /***/ }),
 
-/***/ 513:
+/***/ 511:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ 523:
+/***/ 521:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -320,7 +320,7 @@ var lib_default = /*#__PURE__*/__webpack_require__.n(lib);
 var settings = __webpack_require__(25);
 
 // EXTERNAL MODULE: ./node_modules/qs/lib/index.js
-var qs_lib = __webpack_require__(50);
+var qs_lib = __webpack_require__(49);
 
 // EXTERNAL MODULE: external {"this":["wc","components"]}
 var external_this_wc_components_ = __webpack_require__(47);
@@ -472,14 +472,28 @@ var config = Object(external_this_wp_hooks_["applyFilters"])(SETTINGS_FILTER, {
 
 /***/ }),
 
-/***/ 525:
+/***/ 523:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ 536:
+/***/ 534:
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ 537:
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ 538:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
@@ -500,14 +514,14 @@ var config = Object(external_this_wp_hooks_["applyFilters"])(SETTINGS_FILTER, {
 
 /***/ }),
 
-/***/ 541:
+/***/ 542:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ 542:
+/***/ 543:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
@@ -535,21 +549,7 @@ var config = Object(external_this_wp_hooks_["applyFilters"])(SETTINGS_FILTER, {
 
 /***/ }),
 
-/***/ 547:
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-
-/***/ 548:
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-
-/***/ 592:
+/***/ 590:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -613,7 +613,7 @@ var external_this_wc_tracks_ = __webpack_require__(28);
 var build_module = __webpack_require__(31);
 
 // EXTERNAL MODULE: ./client/homescreen/stats-overview/style.scss
-var style = __webpack_require__(536);
+var style = __webpack_require__(534);
 
 // EXTERNAL MODULE: external {"this":["wp","hooks"]}
 var external_this_wp_hooks_ = __webpack_require__(42);
@@ -626,10 +626,10 @@ var external_this_wp_hooks_ = __webpack_require__(42);
 var DEFAULT_STATS = Object(external_this_wp_hooks_["applyFilters"])('woocommerce_admin_homepage_default_stats', ['revenue/total_sales', 'revenue/net_revenue', 'orders/orders_count', 'products/items_sold', 'jetpack/stats/visitors', 'jetpack/stats/views']);
 var DEFAULT_HIDDEN_STATS = ['revenue/net_revenue', 'products/items_sold'];
 // EXTERNAL MODULE: ./client/lib/currency-context.js
-var currency_context = __webpack_require__(495);
+var currency_context = __webpack_require__(493);
 
 // EXTERNAL MODULE: ./client/dashboard/store-performance/utils.js
-var utils = __webpack_require__(511);
+var utils = __webpack_require__(509);
 
 // CONCATENATED MODULE: ./client/homescreen/stats-overview/stats-list.js
 
@@ -1379,7 +1379,7 @@ var stats_overview_StatsOverview = function StatsOverview() {
 };
 /* harmony default export */ var stats_overview = (stats_overview_StatsOverview);
 // EXTERNAL MODULE: ./client/task-list/style.scss
-var task_list_style = __webpack_require__(525);
+var task_list_style = __webpack_require__(523);
 
 // CONCATENATED MODULE: ./client/task-list/placeholder.js
 
@@ -1435,7 +1435,7 @@ var placeholder_TaskListPlaceholder = function TaskListPlaceholder(props) {
 
 /* harmony default export */ var placeholder = (placeholder_TaskListPlaceholder);
 // EXTERNAL MODULE: ./client/inbox-panel/index.js + 4 modules
-var inbox_panel = __webpack_require__(576);
+var inbox_panel = __webpack_require__(574);
 
 // CONCATENATED MODULE: ./client/homescreen/welcome-modal/illustrations/line-chart.js
 
@@ -1718,7 +1718,7 @@ var page_content_PageContent = function PageContent(_ref) {
   }, body));
 };
 // EXTERNAL MODULE: ./client/homescreen/welcome-modal/style.scss
-var welcome_modal_style = __webpack_require__(539);
+var welcome_modal_style = __webpack_require__(537);
 
 // CONCATENATED MODULE: ./client/homescreen/welcome-modal/index.js
 
@@ -1786,7 +1786,7 @@ var lib = __webpack_require__(26);
 var lib_default = /*#__PURE__*/__webpack_require__.n(lib);
 
 // EXTERNAL MODULE: ./client/homescreen/welcome-from-calypso-modal/style.scss
-var welcome_from_calypso_modal_style = __webpack_require__(540);
+var welcome_from_calypso_modal_style = __webpack_require__(538);
 
 // CONCATENATED MODULE: ./client/homescreen/welcome-from-calypso-modal/welcome-from-calypso-modal.js
 
@@ -1859,13 +1859,13 @@ function WelcomeFromCalypsoModal(_ref) {
 // CONCATENATED MODULE: ./client/homescreen/welcome-from-calypso-modal/index.js
 
 // EXTERNAL MODULE: ./client/header/activity-panel/activity-header/index.js
-var activity_header = __webpack_require__(512);
+var activity_header = __webpack_require__(510);
 
 // EXTERNAL MODULE: ./client/homescreen/activity-panel/style.scss
-var activity_panel_style = __webpack_require__(541);
+var activity_panel_style = __webpack_require__(539);
 
 // EXTERNAL MODULE: ./client/analytics/settings/config.js + 1 modules
-var config = __webpack_require__(523);
+var config = __webpack_require__(521);
 
 // CONCATENATED MODULE: ./client/homescreen/activity-panel/orders/utils.js
 /**
@@ -1966,10 +1966,10 @@ var getPrototypeOf = __webpack_require__(6);
 var getPrototypeOf_default = /*#__PURE__*/__webpack_require__.n(getPrototypeOf);
 
 // EXTERNAL MODULE: ./client/header/activity-panel/activity-card/index.js + 1 modules
-var activity_card = __webpack_require__(507);
+var activity_card = __webpack_require__(505);
 
 // EXTERNAL MODULE: ./client/homescreen/activity-panel/orders/style.scss
-var orders_style = __webpack_require__(542);
+var orders_style = __webpack_require__(540);
 
 // CONCATENATED MODULE: ./client/homescreen/activity-panel/orders/index.js
 
@@ -2804,15 +2804,15 @@ stock_StockPanel.defaultProps = {
   };
 }))(stock_StockPanel));
 // EXTERNAL MODULE: ./node_modules/gridicons/dist/star.js
-var star = __webpack_require__(190);
+var star = __webpack_require__(192);
 var star_default = /*#__PURE__*/__webpack_require__.n(star);
 
 // EXTERNAL MODULE: ./node_modules/gridicons/dist/star-outline.js
-var star_outline = __webpack_require__(543);
+var star_outline = __webpack_require__(541);
 var star_outline_default = /*#__PURE__*/__webpack_require__.n(star_outline);
 
 // EXTERNAL MODULE: ./client/homescreen/activity-panel/reviews/style.scss
-var reviews_style = __webpack_require__(544);
+var reviews_style = __webpack_require__(542);
 
 // CONCATENATED MODULE: ./client/homescreen/activity-panel/reviews/checkmark-circle-icon.js
 
@@ -2843,7 +2843,7 @@ var reviews_style = __webpack_require__(544);
   })));
 });
 // EXTERNAL MODULE: ./client/lib/sanitize-html/index.js
-var sanitize_html = __webpack_require__(505);
+var sanitize_html = __webpack_require__(503);
 
 // CONCATENATED MODULE: ./client/homescreen/activity-panel/reviews/utils.js
 /**
@@ -3381,44 +3381,44 @@ var activity_panel_ActivityPanel = function ActivityPanel() {
   }));
 };
 // EXTERNAL MODULE: ./client/homescreen/style.scss
-var homescreen_style = __webpack_require__(545);
+var homescreen_style = __webpack_require__(543);
 
 // EXTERNAL MODULE: ./client/dashboard/style.scss
-var dashboard_style = __webpack_require__(508);
+var dashboard_style = __webpack_require__(506);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/toConsumableArray.js
 var toConsumableArray = __webpack_require__(20);
 var toConsumableArray_default = /*#__PURE__*/__webpack_require__.n(toConsumableArray);
 
 // EXTERNAL MODULE: ./node_modules/@wordpress/icons/build-module/library/megaphone.js
-var megaphone = __webpack_require__(581);
+var megaphone = __webpack_require__(579);
 
 // EXTERNAL MODULE: ./node_modules/@wordpress/icons/build-module/library/box.js
-var box = __webpack_require__(582);
+var box = __webpack_require__(580);
 
 // EXTERNAL MODULE: ./node_modules/@wordpress/icons/build-module/library/brush.js
-var brush = __webpack_require__(583);
+var brush = __webpack_require__(581);
 
 // EXTERNAL MODULE: ./node_modules/@wordpress/icons/build-module/library/home.js
-var home = __webpack_require__(584);
+var home = __webpack_require__(582);
 
 // EXTERNAL MODULE: ./node_modules/@wordpress/icons/build-module/library/pencil.js
-var pencil = __webpack_require__(585);
+var pencil = __webpack_require__(583);
 
 // EXTERNAL MODULE: ./node_modules/@wordpress/icons/build-module/library/payment.js
-var payment = __webpack_require__(586);
+var payment = __webpack_require__(584);
 
 // EXTERNAL MODULE: ./node_modules/@wordpress/icons/build-module/library/percent.js
-var percent = __webpack_require__(587);
+var percent = __webpack_require__(585);
 
 // EXTERNAL MODULE: ./node_modules/@wordpress/icons/build-module/library/shipping.js
-var shipping = __webpack_require__(588);
+var shipping = __webpack_require__(586);
 
 // EXTERNAL MODULE: ./client/store-management-links/style.scss
-var store_management_links_style = __webpack_require__(546);
+var store_management_links_style = __webpack_require__(544);
 
 // EXTERNAL MODULE: ./client/store-management-links/quick-link-category/style.scss
-var quick_link_category_style = __webpack_require__(547);
+var quick_link_category_style = __webpack_require__(545);
 
 // CONCATENATED MODULE: ./client/store-management-links/quick-link-category/index.js
 
@@ -3442,13 +3442,13 @@ var quick_link_category_QuickLinkCategory = function QuickLinkCategory(_ref) {
   }, title), children);
 };
 // EXTERNAL MODULE: ./node_modules/@wordpress/icons/build-module/icon/index.js
-var build_module_icon = __webpack_require__(304);
+var build_module_icon = __webpack_require__(302);
 
 // EXTERNAL MODULE: ./node_modules/@wordpress/icons/build-module/library/external.js
-var external = __webpack_require__(580);
+var external = __webpack_require__(578);
 
 // EXTERNAL MODULE: ./client/store-management-links/quick-link/style.scss
-var quick_link_style = __webpack_require__(548);
+var quick_link_style = __webpack_require__(546);
 
 // CONCATENATED MODULE: ./client/store-management-links/quick-link/index.js
 
@@ -3766,7 +3766,7 @@ var column_Column = function Column(_ref) {
 
 
 var TaskList = Object(external_this_wp_element_["lazy"])(function () {
-  return Promise.all(/* import() | task-list */[__webpack_require__.e(6), __webpack_require__.e(49)]).then(__webpack_require__.bind(null, 594));
+  return Promise.all(/* import() | task-list */[__webpack_require__.e(6), __webpack_require__.e(49)]).then(__webpack_require__.bind(null, 592));
 });
 var WELCOME_FROM_CALYPSO_MODAL_DISMISSED_OPTION_NAME = 'woocommerce_welcome_from_calypso_modal_dismissed';
 var layout_Layout = function Layout(_ref) {

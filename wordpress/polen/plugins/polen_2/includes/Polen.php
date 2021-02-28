@@ -2,6 +2,7 @@
 
 namespace Polen\Includes;
 
+use Polen\Includes\Polen_Plugin_Settings;
 use Polen\Publics\Polen_Public;
 use Polen\Admin\Polen_Admin;
 use Polen\Includes\Polen_Talent;
@@ -45,6 +46,8 @@ class Polen {
         $tallent = new Polen_Talent( true );
         $occasion_list = new Polen_Occasion_List( true );
         $polen_cart = new Polen_Cart( true );
+        $Polen_Plugin_Settings = new Polen_Plugin_Settings( true );
+        $Polen_Update_Fields = new Polen_Update_Fields( true );
     }
 
     /**

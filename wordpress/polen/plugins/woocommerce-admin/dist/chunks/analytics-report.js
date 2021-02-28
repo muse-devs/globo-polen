@@ -1,6 +1,6 @@
 (window["__wcAdmin_webpackJsonp"] = window["__wcAdmin_webpackJsonp"] || []).push([[9],{
 
-/***/ 495:
+/***/ 493:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -31,7 +31,7 @@ var CurrencyContext = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["cr
 
 /***/ }),
 
-/***/ 496:
+/***/ 494:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -148,14 +148,14 @@ ReportError.defaultProps = {
 
 /***/ }),
 
-/***/ 532:
+/***/ 530:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ 578:
+/***/ 576:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -186,11 +186,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _woocommerce_navigation__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_navigation__WEBPACK_IMPORTED_MODULE_11__);
 /* harmony import */ var _woocommerce_data__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(23);
 /* harmony import */ var _woocommerce_data__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_data__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(532);
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(530);
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var _components_report_error__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(496);
-/* harmony import */ var _lib_currency_context__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(495);
-/* harmony import */ var _get_reports__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(136);
+/* harmony import */ var _components_report_error__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(494);
+/* harmony import */ var _lib_currency_context__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(493);
+/* harmony import */ var _get_reports__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(137);
 
 
 

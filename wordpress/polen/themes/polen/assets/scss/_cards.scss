@@ -10,7 +10,8 @@
 			position: absolute;
 			top: 50%;
 			left: 50%;
-			width: 100%;
+			min-width: 100%;
+			min-height: 100%;
 			height: auto;
 			transform: translate(-50%, -50%);
 		}
@@ -71,11 +72,24 @@
 		}
 	}
 	&.category {
+		position: relative;
 		padding: 50px 20px;
 		border-radius: 10px;
 		text-align: center;
+		overflow: hidden;
 		background-color: $default-bg-color;
+		img {
+			display: block;
+			position: absolute;
+			min-width: 100%;
+			min-height: 100%;
+			height: auto;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
 		.link {
+			position: relative;
 			color: white;
 		}
 	}
@@ -88,6 +102,7 @@
 	position: relative;
 	width: 100%;
 	.video {
+		width: 100%;
 		max-width: 100%;
 	}
 	.content {
@@ -100,8 +115,11 @@
 		.title {
 			margin-bottom: 30px;
 			font-size: 72px;
+			@include media-breakpoint-down(xs) {
+				font-size: 6vw;
+			}
 			@include media-breakpoint-down(sm) {
-				font-size: 32px;
+				font-size: 5vw;
 			}
 			@include media-breakpoint-only(md) {
 				font-size: 44px;
@@ -140,4 +158,35 @@
 .col-flex-20 {
 	margin-bottom: 20px;
 	width: 18%;
+}
+
+.tutorial-card {
+	text-align: center;
+	.image {
+		position: relative;
+		margin: 0 auto 40px;
+		width: 200px;
+		height: 200px;
+		overflow: hidden;
+		border-radius: 50%;
+		background-color: $default-bg-color;
+		img {
+			position: absolute;
+			min-width: 100%;
+			height: auto;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+	}
+	.title {
+		margin-bottom: 20px;
+		font-size: 20px;
+		font-weight: 700;
+	}
+	.description {
+		font-size: 20px;
+		line-height: 36px;
+		font-weight: 400;
+	}
 }

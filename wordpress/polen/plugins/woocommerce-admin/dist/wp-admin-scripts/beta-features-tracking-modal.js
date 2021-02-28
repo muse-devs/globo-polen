@@ -82,7 +82,7 @@ this["wc"] = this["wc"] || {}; this["wc"]["betaFeaturesTrackingModal"] =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 478);
+/******/ 	return __webpack_require__(__webpack_require__.s = 476);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -233,14 +233,14 @@ module.exports = _asyncToGenerator;
 
 /***/ }),
 
-/***/ 468:
+/***/ 466:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ 478:
+/***/ 476:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -436,7 +436,7 @@ var BetaFeaturesTrackingContainer = Object(external_this_wp_compose_["compose"])
   };
 }))(container_BetaFeaturesTrackingModal);
 // EXTERNAL MODULE: ./client/wp-admin-scripts/beta-features-tracking-modal/style.scss
-var style = __webpack_require__(468);
+var style = __webpack_require__(466);
 
 // CONCATENATED MODULE: ./client/wp-admin-scripts/beta-features-tracking-modal/index.js
 

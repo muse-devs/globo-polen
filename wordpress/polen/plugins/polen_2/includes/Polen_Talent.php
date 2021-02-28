@@ -84,16 +84,18 @@ class Polen_Talent
         if ( in_array( 'user_talent', $user_roles, true ) ) {
             update_user_meta( $user_id, 'talent_enabled', '0' );
             //verify if the talent has a product
-            $user_product = new WP_Query( array( 'author' => $user_id ) );
+            $user_product = new \WP_Query( array( 'author' => $user_id ) );
             if ( !$user_product->have_posts() ) {
                 $user = get_user_by( 'ID', $user_id );
-                $product = new WC_Product_Simple();
+                $product = new \WC_Product_Simple();
                 $product->set_name( $user->first_name . ' ' . $user->last_name );
                 $product->set_status( 'draft' );
                 $product->set_slug( sanitize_title( $user->first_name . ' ' . $user->last_name ) );
                 $product->set_virtual( true );
                 $product->save();
                 $id = $product->get_id();
+                
+                $this->set_product_to_talent($id, $user_id);
                 
                 if( $id <= 0 ){
                     trigger_error( "Falha ao criar produto do usuário" );
@@ -173,6 +175,23 @@ class Polen_Talent
                     }
                 )
             );
+        }
+    }
+    
+    public function set_product_to_talent($product_id, $talent_id)
+    {
+        global $wpdb;
+        
+        $result = $wpdb->update(
+            'wp_posts',
+            [ 'post_author' => $talent_id ],
+            [ 'ID' => $product_id ]
+        );
+        
+        if ( is_wp_error( $result ) ) {
+            return true;
+        } else {
+            return false;
         }
     }
 }

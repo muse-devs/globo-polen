@@ -623,13 +623,13 @@ exports.default = interpolate;
 
 /***/ }),
 
-/***/ 505:
+/***/ 503:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* unused harmony export ALLOWED_TAGS */
 /* unused harmony export ALLOWED_ATTR */
-/* harmony import */ var dompurify__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(510);
+/* harmony import */ var dompurify__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(508);
 /* harmony import */ var dompurify__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(dompurify__WEBPACK_IMPORTED_MODULE_0__);
 /**
  * External dependencies
@@ -648,20 +648,20 @@ var ALLOWED_ATTR = ['target', 'href', 'rel', 'name', 'download'];
 
 /***/ }),
 
-/***/ 530:
+/***/ 528:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ 531:
+/***/ 529:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(0);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(196);
+/* harmony import */ var _wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(197);
 
 
 /**
@@ -679,7 +679,7 @@ var chevronRight = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["creat
 
 /***/ }),
 
-/***/ 597:
+/***/ 595:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -741,10 +741,10 @@ var external_moment_ = __webpack_require__(16);
 var external_moment_default = /*#__PURE__*/__webpack_require__.n(external_moment_);
 
 // EXTERNAL MODULE: ./node_modules/@wordpress/icons/build-module/icon/index.js
-var icon = __webpack_require__(304);
+var icon = __webpack_require__(302);
 
 // EXTERNAL MODULE: ./node_modules/@wordpress/primitives/build-module/svg/index.js
-var svg = __webpack_require__(196);
+var svg = __webpack_require__(197);
 
 // CONCATENATED MODULE: ./node_modules/@wordpress/icons/build-module/library/chevron-left.js
 
@@ -762,7 +762,7 @@ var chevronLeft = Object(external_this_wp_element_["createElement"])(svg["b" /* 
 /* harmony default export */ var chevron_left = (chevronLeft);
 //# sourceMappingURL=chevron-left.js.map
 // EXTERNAL MODULE: ./node_modules/@wordpress/icons/build-module/library/chevron-right.js
-var chevron_right = __webpack_require__(531);
+var chevron_right = __webpack_require__(529);
 
 // EXTERNAL MODULE: ./client/settings/index.js
 var settings = __webpack_require__(25);
@@ -777,7 +777,7 @@ var external_this_wc_tracks_ = __webpack_require__(28);
 var build_module = __webpack_require__(31);
 
 // EXTERNAL MODULE: ./client/lib/sanitize-html/index.js
-var sanitize_html = __webpack_require__(505);
+var sanitize_html = __webpack_require__(503);
 
 // EXTERNAL MODULE: ./node_modules/prop-types/index.js
 var prop_types = __webpack_require__(1);
@@ -855,7 +855,7 @@ placeholder_StoreAlertsPlaceholder.defaultProps = {
   hasMultipleAlerts: false
 };
 // EXTERNAL MODULE: ./client/layout/store-alerts/style.scss
-var style = __webpack_require__(530);
+var style = __webpack_require__(528);
 
 // CONCATENATED MODULE: ./client/layout/store-alerts/index.js
 

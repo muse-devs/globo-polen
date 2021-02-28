@@ -1,6 +1,6 @@
 (window["__wcAdmin_webpackJsonp"] = window["__wcAdmin_webpackJsonp"] || []).push([[27],{
 
-/***/ 495:
+/***/ 493:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -31,7 +31,7 @@ var CurrencyContext = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["cr
 
 /***/ }),
 
-/***/ 502:
+/***/ 500:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -68,7 +68,7 @@ var CurrencyContext = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["cr
 /* harmony import */ var _woocommerce_date__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_date__WEBPACK_IMPORTED_MODULE_15__);
 /* harmony import */ var _woocommerce_tracks__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(28);
 /* harmony import */ var _woocommerce_tracks__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_tracks__WEBPACK_IMPORTED_MODULE_16__);
-/* harmony import */ var _lib_currency_context__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(495);
+/* harmony import */ var _lib_currency_context__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(493);
 /* harmony import */ var _customer_effort_score_tracks_data_constants__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(73);
 
 
@@ -306,7 +306,7 @@ ReportFilters.propTypes = {
 
 /***/ }),
 
-/***/ 577:
+/***/ 575:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -344,10 +344,10 @@ var external_this_wp_components_ = __webpack_require__(4);
 var external_this_wp_hooks_ = __webpack_require__(42);
 
 // EXTERNAL MODULE: ./node_modules/@wordpress/icons/build-module/icon/index.js
-var icon = __webpack_require__(304);
+var icon = __webpack_require__(302);
 
 // EXTERNAL MODULE: ./node_modules/@wordpress/primitives/build-module/svg/index.js
-var svg = __webpack_require__(196);
+var svg = __webpack_require__(197);
 
 // CONCATENATED MODULE: ./node_modules/@wordpress/icons/build-module/library/plus-circle-filled.js
 
@@ -383,7 +383,7 @@ var external_this_wc_date_ = __webpack_require__(29);
 var external_this_wc_tracks_ = __webpack_require__(28);
 
 // EXTERNAL MODULE: ./client/dashboard/style.scss
-var style = __webpack_require__(508);
+var style = __webpack_require__(506);
 
 // CONCATENATED MODULE: ./client/dashboard/default-sections.js
 
@@ -400,13 +400,13 @@ var style = __webpack_require__(508);
  */
 
 var LazyDashboardCharts = Object(external_this_wp_element_["lazy"])(function () {
-  return Promise.all(/* import() | dashboard-charts */[__webpack_require__.e(5), __webpack_require__.e(29)]).then(__webpack_require__.bind(null, 598));
+  return Promise.all(/* import() | dashboard-charts */[__webpack_require__.e(5), __webpack_require__.e(29)]).then(__webpack_require__.bind(null, 596));
 });
 var LazyLeaderboards = Object(external_this_wp_element_["lazy"])(function () {
-  return Promise.all(/* import() | leaderboards */[__webpack_require__.e(1), __webpack_require__.e(34)]).then(__webpack_require__.bind(null, 599));
+  return Promise.all(/* import() | leaderboards */[__webpack_require__.e(1), __webpack_require__.e(34)]).then(__webpack_require__.bind(null, 597));
 });
 var LazyStorePerformance = Object(external_this_wp_element_["lazy"])(function () {
-  return __webpack_require__.e(/* import() | store-performance */ 48).then(__webpack_require__.bind(null, 591));
+  return __webpack_require__.e(/* import() | store-performance */ 48).then(__webpack_require__.bind(null, 589));
 });
 
 var default_sections_DashboardCharts = function DashboardCharts(props) {
@@ -687,10 +687,10 @@ var section_Section = /*#__PURE__*/function (_Component) {
 
 
 // EXTERNAL MODULE: ./client/analytics/components/report-filters/index.js
-var report_filters = __webpack_require__(502);
+var report_filters = __webpack_require__(500);
 
 // EXTERNAL MODULE: ./client/lib/currency-context.js
-var currency_context = __webpack_require__(495);
+var currency_context = __webpack_require__(493);
 
 // CONCATENATED MODULE: ./client/dashboard/customizable.js
 

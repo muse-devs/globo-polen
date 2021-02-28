@@ -1,6 +1,6 @@
 (window["__wcAdmin_webpackJsonp"] = window["__wcAdmin_webpackJsonp"] || []).push([[29],{
 
-/***/ 188:
+/***/ 190:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9,7 +9,7 @@ var _extends=Object.assign||function(a){for(var c,b=1;b<arguments.length;b++)for
 
 /***/ }),
 
-/***/ 189:
+/***/ 191:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18,7 +18,7 @@ var _extends=Object.assign||function(a){for(var c,b=1;b<arguments.length;b++)for
 
 /***/ }),
 
-/***/ 496:
+/***/ 494:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -135,7 +135,7 @@ ReportError.defaultProps = {
 
 /***/ }),
 
-/***/ 516:
+/***/ 514:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -200,7 +200,7 @@ var advancedFilters = Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__["appl
 
 /***/ }),
 
-/***/ 517:
+/***/ 515:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -211,7 +211,7 @@ var advancedFilters = Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__["appl
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(42);
 /* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _lib_async_requests__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(497);
+/* harmony import */ var _lib_async_requests__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(495);
 /**
  * External dependencies
  */
@@ -339,7 +339,7 @@ var advancedFilters = Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__["appl
 
 /***/ }),
 
-/***/ 519:
+/***/ 517:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -350,7 +350,7 @@ var advancedFilters = Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__["appl
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(42);
 /* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _lib_async_requests__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(497);
+/* harmony import */ var _lib_async_requests__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(495);
 /**
  * External dependencies
  */
@@ -425,7 +425,7 @@ var advancedFilters = Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__["appl
 
 /***/ }),
 
-/***/ 520:
+/***/ 518:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -438,8 +438,8 @@ var advancedFilters = Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__["appl
 /* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _woocommerce_data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(23);
 /* harmony import */ var _woocommerce_data__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_data__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _lib_async_requests__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(497);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(498);
+/* harmony import */ var _lib_async_requests__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(495);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(496);
 /**
  * External dependencies
  */
@@ -517,7 +517,7 @@ var advancedFilters = Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__["appl
 
 /***/ }),
 
-/***/ 521:
+/***/ 519:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -532,7 +532,7 @@ var advancedFilters = Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__["appl
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(42);
 /* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _lib_async_requests__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(497);
+/* harmony import */ var _lib_async_requests__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(495);
 
 
 
@@ -756,21 +756,21 @@ var advancedFilters = Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_3__["appl
 
 /***/ }),
 
-/***/ 571:
+/***/ 569:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ 572:
+/***/ 570:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ 598:
+/***/ 596:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -800,11 +800,11 @@ var classnames = __webpack_require__(7);
 var classnames_default = /*#__PURE__*/__webpack_require__.n(classnames);
 
 // EXTERNAL MODULE: ./node_modules/gridicons/dist/line-graph.js
-var line_graph = __webpack_require__(188);
+var line_graph = __webpack_require__(190);
 var line_graph_default = /*#__PURE__*/__webpack_require__.n(line_graph);
 
 // EXTERNAL MODULE: ./node_modules/gridicons/dist/stats-alt.js
-var stats_alt = __webpack_require__(189);
+var stats_alt = __webpack_require__(191);
 var stats_alt_default = /*#__PURE__*/__webpack_require__.n(stats_alt);
 
 // EXTERNAL MODULE: ./node_modules/prop-types/index.js
@@ -860,10 +860,10 @@ var settings = __webpack_require__(25);
 var build_module = __webpack_require__(31);
 
 // EXTERNAL MODULE: ./client/analytics/components/report-chart/index.js + 1 modules
-var report_chart = __webpack_require__(499);
+var report_chart = __webpack_require__(497);
 
 // EXTERNAL MODULE: ./client/dashboard/dashboard-charts/block.scss
-var block = __webpack_require__(571);
+var block = __webpack_require__(569);
 
 // CONCATENATED MODULE: ./client/dashboard/dashboard-charts/block.js
 
@@ -987,22 +987,22 @@ block_ChartBlock.propTypes = {
 var external_this_wp_hooks_ = __webpack_require__(42);
 
 // EXTERNAL MODULE: ./client/analytics/report/orders/config.js
-var config = __webpack_require__(529);
+var config = __webpack_require__(527);
 
 // EXTERNAL MODULE: ./client/analytics/report/products/config.js
-var products_config = __webpack_require__(517);
+var products_config = __webpack_require__(515);
 
 // EXTERNAL MODULE: ./client/analytics/report/revenue/config.js
-var revenue_config = __webpack_require__(516);
+var revenue_config = __webpack_require__(514);
 
 // EXTERNAL MODULE: ./client/analytics/report/coupons/config.js
-var coupons_config = __webpack_require__(519);
+var coupons_config = __webpack_require__(517);
 
 // EXTERNAL MODULE: ./client/analytics/report/taxes/config.js
-var taxes_config = __webpack_require__(520);
+var taxes_config = __webpack_require__(518);
 
 // EXTERNAL MODULE: ./client/analytics/report/downloads/config.js
-var downloads_config = __webpack_require__(521);
+var downloads_config = __webpack_require__(519);
 
 // CONCATENATED MODULE: ./client/dashboard/dashboard-charts/config.js
 
@@ -1097,7 +1097,7 @@ var uniqCharts = Object(external_this_wp_hooks_["applyFilters"])(DASHBOARD_CHART
   });
 }));
 // EXTERNAL MODULE: ./client/dashboard/dashboard-charts/style.scss
-var style = __webpack_require__(572);
+var style = __webpack_require__(570);
 
 // CONCATENATED MODULE: ./client/dashboard/dashboard-charts/index.js
 

@@ -623,7 +623,7 @@ exports.default = interpolate;
 
 /***/ }),
 
-/***/ 523:
+/***/ 521:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -651,7 +651,7 @@ var lib_default = /*#__PURE__*/__webpack_require__.n(lib);
 var settings = __webpack_require__(25);
 
 // EXTERNAL MODULE: ./node_modules/qs/lib/index.js
-var qs_lib = __webpack_require__(50);
+var qs_lib = __webpack_require__(49);
 
 // EXTERNAL MODULE: external {"this":["wc","components"]}
 var external_this_wc_components_ = __webpack_require__(47);
@@ -803,6 +803,20 @@ var config = Object(external_this_wp_hooks_["applyFilters"])(SETTINGS_FILTER, {
 
 /***/ }),
 
+/***/ 531:
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ 532:
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
 /***/ 533:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -810,21 +824,7 @@ var config = Object(external_this_wp_hooks_["applyFilters"])(SETTINGS_FILTER, {
 
 /***/ }),
 
-/***/ 534:
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-
-/***/ 535:
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-
-/***/ 595:
+/***/ 593:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -868,10 +868,10 @@ var external_this_wc_data_ = __webpack_require__(23);
 var external_this_wc_tracks_ = __webpack_require__(28);
 
 // EXTERNAL MODULE: ./client/analytics/settings/index.scss
-var settings = __webpack_require__(533);
+var settings = __webpack_require__(531);
 
 // EXTERNAL MODULE: ./client/analytics/settings/config.js + 1 modules
-var config = __webpack_require__(523);
+var config = __webpack_require__(521);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/classCallCheck.js
 var classCallCheck = __webpack_require__(11);
@@ -905,7 +905,7 @@ var prop_types_default = /*#__PURE__*/__webpack_require__.n(prop_types);
 var external_lodash_ = __webpack_require__(3);
 
 // EXTERNAL MODULE: ./client/analytics/settings/setting.scss
-var settings_setting = __webpack_require__(534);
+var settings_setting = __webpack_require__(532);
 
 // CONCATENATED MODULE: ./client/analytics/settings/setting.js
 
@@ -1625,7 +1625,7 @@ function HistoricalDataSkipCheckbox(_ref) {
   };
 })(HistoricalDataSkipCheckbox));
 // EXTERNAL MODULE: ./client/analytics/settings/historical-data/style.scss
-var style = __webpack_require__(535);
+var style = __webpack_require__(533);
 
 // CONCATENATED MODULE: ./client/analytics/settings/historical-data/layout.js
 

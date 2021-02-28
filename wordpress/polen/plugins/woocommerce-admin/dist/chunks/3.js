@@ -1,6 +1,6 @@
 (window["__wcAdmin_webpackJsonp"] = window["__wcAdmin_webpackJsonp"] || []).push([[3],{
 
-/***/ 497:
+/***/ 495:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -24,7 +24,7 @@
 /* harmony import */ var _woocommerce_data__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(23);
 /* harmony import */ var _woocommerce_data__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_data__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _woocommerce_wc_admin_settings__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(25);
-/* harmony import */ var _analytics_report_taxes_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(498);
+/* harmony import */ var _analytics_report_taxes_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(496);
 /**
  * External dependencies
  */
@@ -150,7 +150,7 @@ var getVariationLabels = getRequestByIdString(function (_ref3) {
 
 /***/ }),
 
-/***/ 498:
+/***/ 496:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -169,7 +169,7 @@ function getTaxCode(tax) {
 
 /***/ }),
 
-/***/ 499:
+/***/ 497:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -232,10 +232,10 @@ var external_this_wc_data_ = __webpack_require__(23);
 var external_this_wc_date_ = __webpack_require__(29);
 
 // EXTERNAL MODULE: ./client/lib/currency-context.js
-var currency_context = __webpack_require__(495);
+var currency_context = __webpack_require__(493);
 
 // EXTERNAL MODULE: ./client/analytics/components/report-error/index.js
-var report_error = __webpack_require__(496);
+var report_error = __webpack_require__(494);
 
 // EXTERNAL MODULE: external {"this":["wc","navigation"]}
 var external_this_wc_navigation_ = __webpack_require__(21);
@@ -680,7 +680,7 @@ report_chart_ReportChart.defaultProps = {
 
 /***/ }),
 
-/***/ 500:
+/***/ 498:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -715,7 +715,7 @@ function getSelectedChart(chartName) {
 
 /***/ }),
 
-/***/ 501:
+/***/ 499:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -744,7 +744,7 @@ function getSelectedChart(chartName) {
 /* harmony import */ var _woocommerce_navigation__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_navigation__WEBPACK_IMPORTED_MODULE_10__);
 /* harmony import */ var _woocommerce_components__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(47);
 /* harmony import */ var _woocommerce_components__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_components__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var _woocommerce_number__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(142);
+/* harmony import */ var _woocommerce_number__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(143);
 /* harmony import */ var _woocommerce_number__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_number__WEBPACK_IMPORTED_MODULE_12__);
 /* harmony import */ var _woocommerce_data__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(23);
 /* harmony import */ var _woocommerce_data__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_data__WEBPACK_IMPORTED_MODULE_13__);
@@ -752,8 +752,8 @@ function getSelectedChart(chartName) {
 /* harmony import */ var _woocommerce_date__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_date__WEBPACK_IMPORTED_MODULE_14__);
 /* harmony import */ var _woocommerce_tracks__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(28);
 /* harmony import */ var _woocommerce_tracks__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_tracks__WEBPACK_IMPORTED_MODULE_15__);
-/* harmony import */ var _report_error__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(496);
-/* harmony import */ var _lib_currency_context__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(495);
+/* harmony import */ var _report_error__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(494);
+/* harmony import */ var _lib_currency_context__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(493);
 
 
 
@@ -1032,7 +1032,7 @@ ReportSummary.contextType = _lib_currency_context__WEBPACK_IMPORTED_MODULE_17__[
 
 /***/ }),
 
-/***/ 509:
+/***/ 507:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1054,7 +1054,7 @@ function isLowStock(status, quantity, threshold) {
 
 /***/ }),
 
-/***/ 527:
+/***/ 525:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1086,16 +1086,16 @@ function isLowStock(status, quantity, threshold) {
 /* harmony import */ var _woocommerce_navigation__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_navigation__WEBPACK_IMPORTED_MODULE_12__);
 /* harmony import */ var _woocommerce_components__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(47);
 /* harmony import */ var _woocommerce_components__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_components__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var _woocommerce_number__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(142);
+/* harmony import */ var _woocommerce_number__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(143);
 /* harmony import */ var _woocommerce_number__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_number__WEBPACK_IMPORTED_MODULE_14__);
 /* harmony import */ var _woocommerce_wc_admin_settings__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(25);
 /* harmony import */ var _woocommerce_data__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(23);
 /* harmony import */ var _woocommerce_data__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_data__WEBPACK_IMPORTED_MODULE_16__);
-/* harmony import */ var _categories_breadcrumbs__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(528);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(509);
-/* harmony import */ var _components_report_table__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(503);
-/* harmony import */ var _lib_currency_context__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(495);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(564);
+/* harmony import */ var _categories_breadcrumbs__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(526);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(507);
+/* harmony import */ var _components_report_table__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(501);
+/* harmony import */ var _lib_currency_context__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(493);
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(562);
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_21___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_21__);
 
 
@@ -1400,7 +1400,7 @@ ProductsReportTable.contextType = _lib_currency_context__WEBPACK_IMPORTED_MODULE
 
 /***/ }),
 
-/***/ 528:
+/***/ 526:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1515,7 +1515,7 @@ var CategoryBreadcrumbs = /*#__PURE__*/function (_Component) {
 
 /***/ }),
 
-/***/ 564:
+/***/ 562:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin

@@ -259,7 +259,7 @@ this["wc"] = this["wc"] || {}; this["wc"]["app"] =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 296);
+/******/ 	return __webpack_require__(__webpack_require__.s = 295);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -341,6 +341,314 @@ module.exports = _createClass;
 /***/ }),
 
 /***/ 120:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, "a", function() { return /* binding */ build_module_focus; });
+
+// UNUSED EXPORTS: isHorizontalEdge, isVerticalEdge, getRectangleFromRange, computeCaretRect, placeCaretAtHorizontalEdge, placeCaretAtVerticalEdge, isTextField, isNumberInput, documentHasSelection, isEntirelySelected, getScrollContainer, getOffsetParent, replace, remove, insertAfter, unwrap, replaceTag, wrap, __unstableStripHTML
+
+// NAMESPACE OBJECT: ./node_modules/@wordpress/dom/build-module/focusable.js
+var focusable_namespaceObject = {};
+__webpack_require__.r(focusable_namespaceObject);
+__webpack_require__.d(focusable_namespaceObject, "find", function() { return find; });
+
+// NAMESPACE OBJECT: ./node_modules/@wordpress/dom/build-module/tabbable.js
+var tabbable_namespaceObject = {};
+__webpack_require__.r(tabbable_namespaceObject);
+__webpack_require__.d(tabbable_namespaceObject, "isTabbableIndex", function() { return isTabbableIndex; });
+__webpack_require__.d(tabbable_namespaceObject, "find", function() { return tabbable_find; });
+__webpack_require__.d(tabbable_namespaceObject, "findPrevious", function() { return findPrevious; });
+__webpack_require__.d(tabbable_namespaceObject, "findNext", function() { return findNext; });
+
+// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/focusable.js
+/**
+ * References:
+ *
+ * Focusable:
+ *  - https://www.w3.org/TR/html5/editing.html#focus-management
+ *
+ * Sequential focus navigation:
+ *  - https://www.w3.org/TR/html5/editing.html#sequential-focus-navigation-and-the-tabindex-attribute
+ *
+ * Disabled elements:
+ *  - https://www.w3.org/TR/html5/disabled-elements.html#disabled-elements
+ *
+ * getClientRects algorithm (requiring layout box):
+ *  - https://www.w3.org/TR/cssom-view-1/#extension-to-the-element-interface
+ *
+ * AREA elements associated with an IMG:
+ *  - https://w3c.github.io/html/editing.html#data-model
+ */
+var SELECTOR = ['[tabindex]', 'a[href]', 'button:not([disabled])', 'input:not([type="hidden"]):not([disabled])', 'select:not([disabled])', 'textarea:not([disabled])', 'iframe', 'object', 'embed', 'area[href]', '[contenteditable]:not([contenteditable=false])'].join(',');
+/**
+ * Returns true if the specified element is visible (i.e. neither display: none
+ * nor visibility: hidden).
+ *
+ * @param {Element} element DOM element to test.
+ *
+ * @return {boolean} Whether element is visible.
+ */
+
+function isVisible(element) {
+  return element.offsetWidth > 0 || element.offsetHeight > 0 || element.getClientRects().length > 0;
+}
+/**
+ * Returns true if the specified area element is a valid focusable element, or
+ * false otherwise. Area is only focusable if within a map where a named map
+ * referenced by an image somewhere in the document.
+ *
+ * @param {Element} element DOM area element to test.
+ *
+ * @return {boolean} Whether area element is valid for focus.
+ */
+
+
+function isValidFocusableArea(element) {
+  var map = element.closest('map[name]');
+
+  if (!map) {
+    return false;
+  }
+
+  var img = document.querySelector('img[usemap="#' + map.name + '"]');
+  return !!img && isVisible(img);
+}
+/**
+ * Returns all focusable elements within a given context.
+ *
+ * @param {Element} context Element in which to search.
+ *
+ * @return {Element[]} Focusable elements.
+ */
+
+
+function find(context) {
+  var elements = context.querySelectorAll(SELECTOR);
+  return Array.from(elements).filter(function (element) {
+    if (!isVisible(element)) {
+      return false;
+    }
+
+    var nodeName = element.nodeName;
+
+    if ('AREA' === nodeName) {
+      return isValidFocusableArea(element);
+    }
+
+    return true;
+  });
+}
+//# sourceMappingURL=focusable.js.map
+// EXTERNAL MODULE: external "lodash"
+var external_lodash_ = __webpack_require__(3);
+
+// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/tabbable.js
+/**
+ * External dependencies
+ */
+
+/**
+ * Internal dependencies
+ */
+
+
+/**
+ * Returns the tab index of the given element. In contrast with the tabIndex
+ * property, this normalizes the default (0) to avoid browser inconsistencies,
+ * operating under the assumption that this function is only ever called with a
+ * focusable node.
+ *
+ * @see https://bugzilla.mozilla.org/show_bug.cgi?id=1190261
+ *
+ * @param {Element} element Element from which to retrieve.
+ *
+ * @return {?number} Tab index of element (default 0).
+ */
+
+function getTabIndex(element) {
+  var tabIndex = element.getAttribute('tabindex');
+  return tabIndex === null ? 0 : parseInt(tabIndex, 10);
+}
+/**
+ * Returns true if the specified element is tabbable, or false otherwise.
+ *
+ * @param {Element} element Element to test.
+ *
+ * @return {boolean} Whether element is tabbable.
+ */
+
+
+function isTabbableIndex(element) {
+  return getTabIndex(element) !== -1;
+}
+/**
+ * Returns a stateful reducer function which constructs a filtered array of
+ * tabbable elements, where at most one radio input is selected for a given
+ * name, giving priority to checked input, falling back to the first
+ * encountered.
+ *
+ * @return {Function} Radio group collapse reducer.
+ */
+
+function createStatefulCollapseRadioGroup() {
+  var CHOSEN_RADIO_BY_NAME = {};
+  return function collapseRadioGroup(result, element) {
+    var nodeName = element.nodeName,
+        type = element.type,
+        checked = element.checked,
+        name = element.name; // For all non-radio tabbables, construct to array by concatenating.
+
+    if (nodeName !== 'INPUT' || type !== 'radio' || !name) {
+      return result.concat(element);
+    }
+
+    var hasChosen = CHOSEN_RADIO_BY_NAME.hasOwnProperty(name); // Omit by skipping concatenation if the radio element is not chosen.
+
+    var isChosen = checked || !hasChosen;
+
+    if (!isChosen) {
+      return result;
+    } // At this point, if there had been a chosen element, the current
+    // element is checked and should take priority. Retroactively remove
+    // the element which had previously been considered the chosen one.
+
+
+    if (hasChosen) {
+      var hadChosenElement = CHOSEN_RADIO_BY_NAME[name];
+      result = Object(external_lodash_["without"])(result, hadChosenElement);
+    }
+
+    CHOSEN_RADIO_BY_NAME[name] = element;
+    return result.concat(element);
+  };
+}
+/**
+ * An array map callback, returning an object with the element value and its
+ * array index location as properties. This is used to emulate a proper stable
+ * sort where equal tabIndex should be left in order of their occurrence in the
+ * document.
+ *
+ * @param {Element} element Element.
+ * @param {number}  index   Array index of element.
+ *
+ * @return {Object} Mapped object with element, index.
+ */
+
+
+function mapElementToObjectTabbable(element, index) {
+  return {
+    element: element,
+    index: index
+  };
+}
+/**
+ * An array map callback, returning an element of the given mapped object's
+ * element value.
+ *
+ * @param {Object} object Mapped object with index.
+ *
+ * @return {Element} Mapped object element.
+ */
+
+
+function mapObjectTabbableToElement(object) {
+  return object.element;
+}
+/**
+ * A sort comparator function used in comparing two objects of mapped elements.
+ *
+ * @see mapElementToObjectTabbable
+ *
+ * @param {Object} a First object to compare.
+ * @param {Object} b Second object to compare.
+ *
+ * @return {number} Comparator result.
+ */
+
+
+function compareObjectTabbables(a, b) {
+  var aTabIndex = getTabIndex(a.element);
+  var bTabIndex = getTabIndex(b.element);
+
+  if (aTabIndex === bTabIndex) {
+    return a.index - b.index;
+  }
+
+  return aTabIndex - bTabIndex;
+}
+/**
+ * Givin focusable elements, filters out tabbable element.
+ *
+ * @param {Array} focusables Focusable elements to filter.
+ *
+ * @return {Array} Tabbable elements.
+ */
+
+
+function filterTabbable(focusables) {
+  return focusables.filter(isTabbableIndex).map(mapElementToObjectTabbable).sort(compareObjectTabbables).map(mapObjectTabbableToElement).reduce(createStatefulCollapseRadioGroup(), []);
+}
+
+function tabbable_find(context) {
+  return filterTabbable(find(context));
+}
+/**
+ * Given a focusable element, find the preceding tabbable element.
+ *
+ * @param {Element} element The focusable element before which to look. Defaults
+ *                          to the active element.
+ */
+
+function findPrevious() {
+  var element = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document.activeElement;
+  var focusables = find(document.body);
+  var index = focusables.indexOf(element); // Remove all focusables after and including `element`.
+
+  focusables.length = index;
+  return Object(external_lodash_["last"])(filterTabbable(focusables));
+}
+/**
+ * Given a focusable element, find the next tabbable element.
+ *
+ * @param {Element} element The focusable element after which to look. Defaults
+ *                          to the active element.
+ */
+
+function findNext() {
+  var element = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document.activeElement;
+  var focusables = find(document.body);
+  var index = focusables.indexOf(element); // Remove all focusables before and inside `element`.
+
+  var remaining = focusables.slice(index + 1).filter(function (node) {
+    return !element.contains(node);
+  });
+  return Object(external_lodash_["first"])(filterTabbable(remaining));
+}
+//# sourceMappingURL=tabbable.js.map
+// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/index.js
+/**
+ * Internal dependencies
+ */
+
+
+/**
+ * Object grouping `focusable` and `tabbable` utils
+ * under the keys with the same name.
+ */
+
+var build_module_focus = {
+  focusable: focusable_namespaceObject,
+  tabbable: tabbable_namespaceObject
+};
+
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ 121:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -349,7 +657,7 @@ var _extends=Object.assign||function(a){for(var c,b=1;b<arguments.length;b++)for
 
 /***/ }),
 
-/***/ 124:
+/***/ 125:
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -540,14 +848,14 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
-/***/ 125:
+/***/ 126:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 if (true) {
-  module.exports = __webpack_require__(150);
+  module.exports = __webpack_require__(152);
 } else {}
 
 
@@ -577,7 +885,7 @@ module.exports = _inherits;
 
 /***/ }),
 
-/***/ 136:
+/***/ 137:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -606,34 +914,34 @@ var REPORTS_FILTER = 'woocommerce_admin_reports_list';
  */
 
 var RevenueReport = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["lazy"])(function () {
-  return Promise.all(/* import() | analytics-report-revenue */[__webpack_require__.e(0), __webpack_require__.e(16)]).then(__webpack_require__.bind(null, 484));
+  return Promise.all(/* import() | analytics-report-revenue */[__webpack_require__.e(0), __webpack_require__.e(16)]).then(__webpack_require__.bind(null, 482));
 });
 var ProductsReport = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["lazy"])(function () {
-  return Promise.all(/* import() | analytics-report-products */[__webpack_require__.e(0), __webpack_require__.e(3), __webpack_require__.e(15)]).then(__webpack_require__.bind(null, 480));
+  return Promise.all(/* import() | analytics-report-products */[__webpack_require__.e(0), __webpack_require__.e(3), __webpack_require__.e(15)]).then(__webpack_require__.bind(null, 478));
 });
 var VariationsReport = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["lazy"])(function () {
-  return Promise.all(/* import() | analytics-report-variations */[__webpack_require__.e(0), __webpack_require__.e(19)]).then(__webpack_require__.bind(null, 485));
+  return Promise.all(/* import() | analytics-report-variations */[__webpack_require__.e(0), __webpack_require__.e(19)]).then(__webpack_require__.bind(null, 483));
 });
 var OrdersReport = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["lazy"])(function () {
-  return Promise.all(/* import() | analytics-report-orders */[__webpack_require__.e(0), __webpack_require__.e(5), __webpack_require__.e(14)]).then(__webpack_require__.bind(null, 486));
+  return Promise.all(/* import() | analytics-report-orders */[__webpack_require__.e(0), __webpack_require__.e(5), __webpack_require__.e(14)]).then(__webpack_require__.bind(null, 484));
 });
 var CategoriesReport = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["lazy"])(function () {
-  return Promise.all(/* import() | analytics-report-categories */[__webpack_require__.e(0), __webpack_require__.e(3), __webpack_require__.e(10)]).then(__webpack_require__.bind(null, 482));
+  return Promise.all(/* import() | analytics-report-categories */[__webpack_require__.e(0), __webpack_require__.e(3), __webpack_require__.e(10)]).then(__webpack_require__.bind(null, 480));
 });
 var CouponsReport = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["lazy"])(function () {
-  return Promise.all(/* import() | analytics-report-coupons */[__webpack_require__.e(0), __webpack_require__.e(11)]).then(__webpack_require__.bind(null, 487));
+  return Promise.all(/* import() | analytics-report-coupons */[__webpack_require__.e(0), __webpack_require__.e(11)]).then(__webpack_require__.bind(null, 485));
 });
 var TaxesReport = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["lazy"])(function () {
-  return Promise.all(/* import() | analytics-report-taxes */[__webpack_require__.e(0), __webpack_require__.e(18)]).then(__webpack_require__.bind(null, 488));
+  return Promise.all(/* import() | analytics-report-taxes */[__webpack_require__.e(0), __webpack_require__.e(18)]).then(__webpack_require__.bind(null, 486));
 });
 var DownloadsReport = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["lazy"])(function () {
-  return Promise.all(/* import() | analytics-report-downloads */[__webpack_require__.e(0), __webpack_require__.e(13)]).then(__webpack_require__.bind(null, 489));
+  return Promise.all(/* import() | analytics-report-downloads */[__webpack_require__.e(0), __webpack_require__.e(13)]).then(__webpack_require__.bind(null, 487));
 });
 var StockReport = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["lazy"])(function () {
-  return Promise.all(/* import() | analytics-report-stock */[__webpack_require__.e(0), __webpack_require__.e(17)]).then(__webpack_require__.bind(null, 481));
+  return Promise.all(/* import() | analytics-report-stock */[__webpack_require__.e(0), __webpack_require__.e(17)]).then(__webpack_require__.bind(null, 479));
 });
 var CustomersReport = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["lazy"])(function () {
-  return Promise.all(/* import() | analytics-report-customers */[__webpack_require__.e(0), __webpack_require__.e(12)]).then(__webpack_require__.bind(null, 483));
+  return Promise.all(/* import() | analytics-report-customers */[__webpack_require__.e(0), __webpack_require__.e(12)]).then(__webpack_require__.bind(null, 481));
 });
 /* harmony default export */ __webpack_exports__["a"] = (function () {
   var reports = [{
@@ -709,13 +1017,13 @@ var CustomersReport = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["la
 
 /***/ }),
 
-/***/ 137:
+/***/ 138:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var reactIs = __webpack_require__(125);
+var reactIs = __webpack_require__(126);
 
 /**
  * Copyright 2015, Yahoo! Inc.
@@ -820,7 +1128,7 @@ module.exports = hoistNonReactStatics;
 
 /***/ }),
 
-/***/ 138:
+/***/ 139:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -862,13 +1170,6 @@ function useIsScrolled() {
 
 /***/ }),
 
-/***/ 139:
-/***/ (function(module, exports) {
-
-(function() { module.exports = this["wp"]["plugins"]; }());
-
-/***/ }),
-
 /***/ 14:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -889,6 +1190,13 @@ module.exports = _possibleConstructorReturn;
 /***/ }),
 
 /***/ 140:
+/***/ (function(module, exports) {
+
+(function() { module.exports = this["wp"]["plugins"]; }());
+
+/***/ }),
+
+/***/ 141:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1100,7 +1408,7 @@ function speak(message, ariaLive) {
 
 /***/ }),
 
-/***/ 141:
+/***/ 142:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1166,7 +1474,7 @@ var prop_types_default = /*#__PURE__*/__webpack_require__.n(prop_types);
 var esm_history = __webpack_require__(70);
 
 // EXTERNAL MODULE: ./node_modules/mini-create-react-context/dist/esm/index.js
-var esm = __webpack_require__(181);
+var esm = __webpack_require__(183);
 
 // EXTERNAL MODULE: ./node_modules/tiny-invariant/dist/tiny-invariant.esm.js
 var tiny_invariant_esm = __webpack_require__(56);
@@ -1175,17 +1483,17 @@ var tiny_invariant_esm = __webpack_require__(56);
 var esm_extends = __webpack_require__(32);
 
 // EXTERNAL MODULE: ./node_modules/path-to-regexp/index.js
-var path_to_regexp = __webpack_require__(182);
+var path_to_regexp = __webpack_require__(184);
 var path_to_regexp_default = /*#__PURE__*/__webpack_require__.n(path_to_regexp);
 
 // EXTERNAL MODULE: ./node_modules/react-is/index.js
-var react_is = __webpack_require__(125);
+var react_is = __webpack_require__(126);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js
 var objectWithoutPropertiesLoose = __webpack_require__(41);
 
 // EXTERNAL MODULE: ./node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js
-var hoist_non_react_statics_cjs = __webpack_require__(137);
+var hoist_non_react_statics_cjs = __webpack_require__(138);
 var hoist_non_react_statics_cjs_default = /*#__PURE__*/__webpack_require__.n(hoist_non_react_statics_cjs);
 
 // CONCATENATED MODULE: ./node_modules/react-router/esm/react-router.js
@@ -1852,7 +2160,7 @@ if (false) { var secondaryBuildName, initialBuildName, buildNames, react_router_
 var external_lodash_ = __webpack_require__(3);
 
 // EXTERNAL MODULE: ./node_modules/qs/lib/index.js
-var lib = __webpack_require__(50);
+var lib = __webpack_require__(49);
 
 // EXTERNAL MODULE: external {"this":["wc","components"]}
 var external_this_wc_components_ = __webpack_require__(47);
@@ -1870,7 +2178,7 @@ var external_this_wc_data_ = __webpack_require__(23);
 var external_this_wc_tracks_ = __webpack_require__(28);
 
 // EXTERNAL MODULE: ./client/layout/style.scss
-var layout_style = __webpack_require__(299);
+var layout_style = __webpack_require__(298);
 
 // EXTERNAL MODULE: external {"this":["wp","hooks"]}
 var external_this_wp_hooks_ = __webpack_require__(42);
@@ -1879,7 +2187,7 @@ var external_this_wp_hooks_ = __webpack_require__(42);
 var external_this_wp_i18n_ = __webpack_require__(2);
 
 // EXTERNAL MODULE: ./client/analytics/report/get-reports.js
-var get_reports = __webpack_require__(136);
+var get_reports = __webpack_require__(137);
 
 // EXTERNAL MODULE: ./client/dashboard/utils.js
 var utils = __webpack_require__(94);
@@ -1913,22 +2221,22 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 
 var AnalyticsReport = Object(external_this_wp_element_["lazy"])(function () {
-  return __webpack_require__.e(/* import() | analytics-report */ 9).then(__webpack_require__.bind(null, 578));
+  return __webpack_require__.e(/* import() | analytics-report */ 9).then(__webpack_require__.bind(null, 576));
 });
 var AnalyticsSettings = Object(external_this_wp_element_["lazy"])(function () {
-  return __webpack_require__.e(/* import() | analytics-settings */ 20).then(__webpack_require__.bind(null, 595));
+  return __webpack_require__.e(/* import() | analytics-settings */ 20).then(__webpack_require__.bind(null, 593));
 });
 var Dashboard = Object(external_this_wp_element_["lazy"])(function () {
-  return __webpack_require__.e(/* import() | dashboard */ 28).then(__webpack_require__.bind(null, 579));
+  return __webpack_require__.e(/* import() | dashboard */ 28).then(__webpack_require__.bind(null, 577));
 });
 var Homescreen = Object(external_this_wp_element_["lazy"])(function () {
-  return Promise.all(/* import() | homescreen */[__webpack_require__.e(1), __webpack_require__.e(2), __webpack_require__.e(52), __webpack_require__.e(4), __webpack_require__.e(32)]).then(__webpack_require__.bind(null, 592));
+  return Promise.all(/* import() | homescreen */[__webpack_require__.e(1), __webpack_require__.e(2), __webpack_require__.e(52), __webpack_require__.e(4), __webpack_require__.e(32)]).then(__webpack_require__.bind(null, 590));
 });
 var MarketingOverview = Object(external_this_wp_element_["lazy"])(function () {
-  return Promise.all(/* import() | marketing-overview */[__webpack_require__.e(2), __webpack_require__.e(36)]).then(__webpack_require__.bind(null, 596));
+  return Promise.all(/* import() | marketing-overview */[__webpack_require__.e(2), __webpack_require__.e(36)]).then(__webpack_require__.bind(null, 594));
 });
 var ProfileWizard = Object(external_this_wp_element_["lazy"])(function () {
-  return __webpack_require__.e(/* import() | profile-wizard */ 46).then(__webpack_require__.bind(null, 593));
+  return __webpack_require__.e(/* import() | profile-wizard */ 46).then(__webpack_require__.bind(null, 591));
 });
 var PAGES_FILTER = 'woocommerce_admin_pages_list';
 var controller_getPages = function getPages() {
@@ -2150,24 +2458,20 @@ var external_this_wp_htmlEntities_ = __webpack_require__(40);
 var build_module = __webpack_require__(31);
 
 // EXTERNAL MODULE: ./client/header/style.scss
-var header_style = __webpack_require__(300);
-
-// EXTERNAL MODULE: ./node_modules/react-click-outside/dist/index.js
-var dist = __webpack_require__(276);
-var dist_default = /*#__PURE__*/__webpack_require__.n(dist);
+var header_style = __webpack_require__(299);
 
 // EXTERNAL MODULE: external {"this":["wp","components"]}
 var external_this_wp_components_ = __webpack_require__(4);
 
 // EXTERNAL MODULE: ./node_modules/gridicons/dist/cross-small.js
-var cross_small = __webpack_require__(120);
+var cross_small = __webpack_require__(121);
 var cross_small_default = /*#__PURE__*/__webpack_require__.n(cross_small);
 
 // EXTERNAL MODULE: ./node_modules/@wordpress/icons/build-module/icon/index.js
-var build_module_icon = __webpack_require__(304);
+var build_module_icon = __webpack_require__(302);
 
 // EXTERNAL MODULE: ./node_modules/@wordpress/primitives/build-module/svg/index.js
-var svg = __webpack_require__(196);
+var svg = __webpack_require__(197);
 
 // CONCATENATED MODULE: ./node_modules/@wordpress/icons/build-module/library/help.js
 
@@ -2185,7 +2489,7 @@ var help_help = Object(external_this_wp_element_["createElement"])(svg["b" /* SV
 /* harmony default export */ var library_help = (help_help);
 //# sourceMappingURL=help.js.map
 // EXTERNAL MODULE: ./client/header/activity-panel/style.scss
-var activity_panel_style = __webpack_require__(302);
+var activity_panel_style = __webpack_require__(300);
 
 // CONCATENATED MODULE: ./client/header/activity-panel/toggle-bubble.js
 
@@ -2227,7 +2531,7 @@ toggle_bubble_ActivityPanelToggleBubble.propTypes = {
 };
 /* harmony default export */ var toggle_bubble = (toggle_bubble_ActivityPanelToggleBubble);
 // EXTERNAL MODULE: ./client/inbox-panel/utils.js
-var inbox_panel_utils = __webpack_require__(195);
+var inbox_panel_utils = __webpack_require__(196);
 
 // CONCATENATED MODULE: ./client/header/activity-panel/unread-indicators.js
 /**
@@ -2587,7 +2891,7 @@ var close_close = Object(external_this_wp_element_["createElement"])(svg["b" /* 
 /* harmony default export */ var library_close = (close_close);
 //# sourceMappingURL=close.js.map
 // EXTERNAL MODULE: ./client/header/activity-panel/highlight-tooltip/style.scss
-var highlight_tooltip_style = __webpack_require__(303);
+var highlight_tooltip_style = __webpack_require__(301);
 
 // CONCATENATED MODULE: ./client/header/activity-panel/highlight-tooltip/index.js
 
@@ -2777,6 +3081,329 @@ HighlightTooltip.propTypes = {
   onShow: prop_types_default.a.func
 };
 
+// EXTERNAL MODULE: ./node_modules/@wordpress/dom/build-module/index.js + 2 modules
+var dom_build_module = __webpack_require__(120);
+
+// CONCATENATED MODULE: ./client/hooks/useFocusOnMount.js
+/**
+ * This hook was directly copied from https://github.com/WordPress/gutenberg/blob/master/packages/compose/src/hooks/use-focus-on-mount/index.js
+ * to avoid its absence in older versions of WordPress.
+ *
+ * This can be removed once the minimum supported version of WordPress includes this hook.
+ */
+
+/**
+ * External dependencies
+ */
+
+
+/**
+ * Hook used to focus the first tabbable element on mount.
+ *
+ * @param {boolean|string} focusOnMount Focus on mount mode.
+ * @return {Function} Ref callback.
+ *
+ * @example
+ * ```js
+ * import { useFocusOnMount } from '@wordpress/compose';
+ *
+ * const WithFocusOnMount = () => {
+ *     const ref = useFocusOnMount()
+ *     return (
+ *         <div ref={ ref }>
+ *             <Button />
+ *             <Button />
+ *         </div>
+ *     );
+ * }
+ * ```
+ */
+
+function useFocusOnMount() {
+  var focusOnMount = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'firstElement';
+  var focusOnMountRef = Object(external_this_wp_element_["useRef"])(focusOnMount);
+  Object(external_this_wp_element_["useEffect"])(function () {
+    focusOnMountRef.current = focusOnMount;
+  }, [focusOnMount]);
+  return Object(external_this_wp_element_["useCallback"])(function (node) {
+    if (!node || focusOnMountRef.current === false) {
+      return;
+    }
+
+    if (node.contains(node.ownerDocument.activeElement)) {
+      return;
+    }
+
+    var target = node;
+
+    if (focusOnMountRef.current === 'firstElement') {
+      var firstTabbable = dom_build_module["a" /* focus */].tabbable.find(node)[0];
+
+      if (firstTabbable) {
+        target = firstTabbable;
+      }
+    }
+
+    target.focus();
+  }, []);
+}
+// CONCATENATED MODULE: ./client/hooks/useFocusOutside.js
+/**
+ * External dependencies
+ */
+
+
+/**
+ * Input types which are classified as button types, for use in considering
+ * whether element is a (focus-normalized) button.
+ *
+ * @type {string[]}
+ */
+
+var INPUT_BUTTON_TYPES = ['button', 'submit'];
+/**
+ * @typedef {HTMLButtonElement | HTMLLinkElement | HTMLInputElement} FocusNormalizedButton
+ */
+// Disable reason: Rule doesn't support predicate return types
+
+/* eslint-disable jsdoc/valid-types */
+
+/**
+ * Returns true if the given element is a button element subject to focus
+ * normalization, or false otherwise.
+ *
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#Clicking_and_focus
+ *
+ * @param {EventTarget} eventTarget The target from a mouse or touch event.
+ *
+ * @return {eventTarget is FocusNormalizedButton} Whether element is a button.
+ */
+
+function isFocusNormalizedButton(eventTarget) {
+  if (!(eventTarget instanceof window.HTMLElement)) {
+    return false;
+  }
+
+  switch (eventTarget.nodeName) {
+    case 'A':
+    case 'BUTTON':
+      return true;
+
+    case 'INPUT':
+      return Object(external_lodash_["includes"])(INPUT_BUTTON_TYPES,
+      /** @type {HTMLInputElement} */
+      eventTarget.type);
+  }
+
+  return false;
+}
+/* eslint-enable jsdoc/valid-types */
+
+/**
+ * @typedef {import('react').SyntheticEvent} SyntheticEvent
+ */
+
+/**
+ * @callback EventCallback
+ * @param {SyntheticEvent} event input related event.
+ */
+
+/**
+ * @typedef FocusOutsideReactElement
+ * @property {EventCallback} handleFocusOutside callback for a focus outside event.
+ */
+
+/**
+ * @typedef {import('react').MutableRefObject<FocusOutsideReactElement | undefined>} FocusOutsideRef
+ */
+
+/**
+ * @typedef {Object} FocusOutsideReturnValue
+ * @property {EventCallback} onFocus      An event handler for focus events.
+ * @property {EventCallback} onBlur       An event handler for blur events.
+ * @property {EventCallback} onMouseDown  An event handler for mouse down events.
+ * @property {EventCallback} onMouseUp    An event handler for mouse up events.
+ * @property {EventCallback} onTouchStart An event handler for touch start events.
+ * @property {EventCallback} onTouchEnd   An event handler for touch end events.
+ */
+
+/**
+ * A react hook that can be used to check whether focus has moved outside the
+ * element the event handlers are bound to.
+ *
+ * @param {EventCallback} onFocusOutside        A callback triggered when focus moves outside
+ *                                              the element the event handlers are bound to.
+ *
+ * @return {FocusOutsideReturnValue} An object containing event handlers. Bind the event handlers
+ *                                   to a wrapping element element to capture when focus moves
+ *                                   outside that element.
+ */
+
+
+function useFocusOutside(onFocusOutside) {
+  var currentOnFocusOutside = Object(external_this_wp_element_["useRef"])(onFocusOutside);
+  Object(external_this_wp_element_["useEffect"])(function () {
+    currentOnFocusOutside.current = onFocusOutside;
+  }, [onFocusOutside]);
+  var preventBlurCheck = Object(external_this_wp_element_["useRef"])(false);
+  /**
+   * @type {import('react').MutableRefObject<number | undefined>}
+   */
+
+  var blurCheckTimeoutId = Object(external_this_wp_element_["useRef"])();
+  /**
+   * Cancel a blur check timeout.
+   */
+
+  var cancelBlurCheck = Object(external_this_wp_element_["useCallback"])(function () {
+    clearTimeout(blurCheckTimeoutId.current);
+  }, []); // Cancel blur checks on unmount.
+
+  Object(external_this_wp_element_["useEffect"])(function () {
+    return function () {
+      return cancelBlurCheck();
+    };
+  }, []); // Cancel a blur check if the callback or ref is no longer provided.
+
+  Object(external_this_wp_element_["useEffect"])(function () {
+    if (!onFocusOutside) {
+      cancelBlurCheck();
+    }
+  }, [onFocusOutside, cancelBlurCheck]);
+  /**
+   * Handles a mousedown or mouseup event to respectively assign and
+   * unassign a flag for preventing blur check on button elements. Some
+   * browsers, namely Firefox and Safari, do not emit a focus event on
+   * button elements when clicked, while others do. The logic here
+   * intends to normalize this as treating click on buttons as focus.
+   *
+   * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#Clicking_and_focus
+   *
+   * @param {SyntheticEvent} event Event for mousedown or mouseup.
+   */
+
+  var normalizeButtonFocus = Object(external_this_wp_element_["useCallback"])(function (event) {
+    var type = event.type,
+        target = event.target;
+    var isInteractionEnd = Object(external_lodash_["includes"])(['mouseup', 'touchend'], type);
+
+    if (isInteractionEnd) {
+      preventBlurCheck.current = false;
+    } else if (isFocusNormalizedButton(target)) {
+      preventBlurCheck.current = true;
+    }
+  }, []);
+  /**
+   * A callback triggered when a blur event occurs on the element the handler
+   * is bound to.
+   *
+   * Calls the `onFocusOutside` callback in an immediate timeout if focus has
+   * move outside the bound element and is still within the document.
+   *
+   * @param {SyntheticEvent} event Blur event.
+   */
+
+  var queueBlurCheck = Object(external_this_wp_element_["useCallback"])(function (event) {
+    // React does not allow using an event reference asynchronously
+    // due to recycling behavior, except when explicitly persisted.
+    event.persist(); // Skip blur check if clicking button. See `normalizeButtonFocus`.
+
+    if (preventBlurCheck.current) {
+      return;
+    }
+
+    blurCheckTimeoutId.current = setTimeout(function () {
+      // If document is not focused then focus should remain
+      // inside the wrapped component and therefore we cancel
+      // this blur event thereby leaving focus in place.
+      // https://developer.mozilla.org/en-US/docs/Web/API/Document/hasFocus.
+      if (!document.hasFocus()) {
+        event.preventDefault();
+        return;
+      }
+
+      if (typeof currentOnFocusOutside.current === 'function') {
+        currentOnFocusOutside.current(event);
+      }
+    }, 0);
+  }, []);
+  return {
+    onFocus: cancelBlurCheck,
+    onMouseDown: normalizeButtonFocus,
+    onMouseUp: normalizeButtonFocus,
+    onTouchStart: normalizeButtonFocus,
+    onTouchEnd: normalizeButtonFocus,
+    onBlur: queueBlurCheck
+  };
+}
+// CONCATENATED MODULE: ./client/header/activity-panel/panel.js
+
+
+
+/**
+ * External dependencies
+ */
+
+
+
+/**
+ * Internal dependencies
+ */
+
+
+
+var panel_Panel = function Panel(_ref) {
+  var content = _ref.content,
+      isPanelOpen = _ref.isPanelOpen,
+      currentTab = _ref.currentTab,
+      isPanelSwitching = _ref.isPanelSwitching,
+      tab = _ref.tab,
+      closePanel = _ref.closePanel,
+      clearPanel = _ref.clearPanel;
+
+  var handleFocusOutside = function handleFocusOutside(event) {
+    var isClickOnModalOrSnackbar = event.target.closest('.woocommerce-inbox-dismiss-confirmation_modal') || event.target.closest('.components-snackbar__action');
+
+    if (isPanelOpen && !isClickOnModalOrSnackbar) {
+      closePanel();
+    }
+  };
+
+  var ref = useFocusOnMount();
+  var useFocusOutsideProps = useFocusOutside(handleFocusOutside);
+
+  if (!tab) {
+    return Object(external_this_wp_element_["createElement"])("div", {
+      className: "woocommerce-layout__activity-panel-wrapper"
+    });
+  }
+
+  if (!content) {
+    return null;
+  }
+
+  var classNames = classnames_default()('woocommerce-layout__activity-panel-wrapper', {
+    'is-open': isPanelOpen,
+    'is-switching': isPanelSwitching
+  });
+  return Object(external_this_wp_element_["createElement"])("div", extends_default()({
+    className: classNames,
+    tabIndex: 0,
+    role: "tabpanel",
+    "aria-label": tab.title,
+    onTransitionEnd: clearPanel,
+    onAnimationEnd: clearPanel
+  }, useFocusOutsideProps, {
+    ref: ref
+  }), Object(external_this_wp_element_["createElement"])("div", {
+    className: "woocommerce-layout__activity-panel-content",
+    key: 'activity-panel-' + currentTab,
+    id: 'activity-panel-' + currentTab
+  }, Object(external_this_wp_element_["createElement"])(external_this_wp_element_["Suspense"], {
+    fallback: Object(external_this_wp_element_["createElement"])(external_this_wc_components_["Spinner"], null)
+  }, content)));
+};
+/* harmony default export */ var panel = (panel_Panel);
 // CONCATENATED MODULE: ./client/header/activity-panel/index.js
 
 
@@ -2806,7 +3433,6 @@ function activity_panel_isNativeReflectConstruct() { if (typeof Reflect === "und
 
 
 
-
 /**
  * Internal dependencies
  */
@@ -2819,11 +3445,12 @@ function activity_panel_isNativeReflectConstruct() { if (typeof Reflect === "und
 
 
 
+
 var HelpPanel = Object(external_this_wp_element_["lazy"])(function () {
-  return Promise.all(/* import() | activity-panels-help */[__webpack_require__.e(53), __webpack_require__.e(6), __webpack_require__.e(7)]).then(__webpack_require__.bind(null, 589));
+  return Promise.all(/* import() | activity-panels-help */[__webpack_require__.e(53), __webpack_require__.e(6), __webpack_require__.e(7)]).then(__webpack_require__.bind(null, 587));
 });
 var InboxPanel = Object(external_this_wp_element_["lazy"])(function () {
-  return Promise.all(/* import() | activity-panels-inbox */[__webpack_require__.e(1), __webpack_require__.e(2), __webpack_require__.e(4), __webpack_require__.e(8)]).then(__webpack_require__.bind(null, 576));
+  return Promise.all(/* import() | activity-panels-inbox */[__webpack_require__.e(1), __webpack_require__.e(2), __webpack_require__.e(4), __webpack_require__.e(8)]).then(__webpack_require__.bind(null, 574));
 });
 var activity_panel_ActivityPanel = /*#__PURE__*/function (_Component) {
   inherits_default()(ActivityPanel, _Component);
@@ -2924,11 +3551,14 @@ var activity_panel_ActivityPanel = /*#__PURE__*/function (_Component) {
   }, {
     key: "getTabs",
     value: function getTabs() {
+      var _this2 = this;
+
       var _this$props2 = this.props,
           hasUnreadNotes = _this$props2.hasUnreadNotes,
           isEmbedded = _this$props2.isEmbedded,
           setupTaskListComplete = _this$props2.setupTaskListComplete,
-          setupTaskListHidden = _this$props2.setupTaskListHidden;
+          setupTaskListHidden = _this$props2.setupTaskListHidden,
+          updateOptions = _this$props2.updateOptions;
       var isPerformingSetupTask = this.isPerformingSetupTask(); // Don't show the inbox on the Home screen.
 
       var showInbox = (isEmbedded || !this.isHomescreen()) && !isPerformingSetupTask;
@@ -2946,7 +3576,25 @@ var activity_panel_ActivityPanel = /*#__PURE__*/function (_Component) {
       var setup = showStoreSetup ? {
         name: 'setup',
         title: Object(external_this_wp_i18n_["__"])('Store Setup', 'woocommerce-admin'),
-        icon: Object(external_this_wp_element_["createElement"])(setup_progress_SetupProgress, null)
+        icon: Object(external_this_wp_element_["createElement"])(setup_progress_SetupProgress, null),
+        onClick: function onClick() {
+          var currentLocation = window.location.href;
+          var homescreenLocation = Object(settings["f" /* getAdminLink */])('admin.php?page=wc-admin'); // Don't navigate if we're already on the homescreen, this will cause an infinite loop
+
+          if (currentLocation !== homescreenLocation) {
+            // Ensure that if the user is trying to get to the task list they can see it even if
+            // it was dismissed.
+            if (setupTaskListHidden === 'no') {
+              _this2.redirectToHomeScreen();
+            } else {
+              updateOptions({
+                woocommerce_task_list_hidden: 'no'
+              }).then(_this2.redirectToHomeScreen);
+            }
+          }
+
+          return null;
+        }
       } : null;
       var help = showHelp ? {
         name: 'help',
@@ -2980,74 +3628,6 @@ var activity_panel_ActivityPanel = /*#__PURE__*/function (_Component) {
       }
     }
   }, {
-    key: "renderPanel",
-    value: function renderPanel() {
-      var _this2 = this;
-
-      var _this$props3 = this.props,
-          updateOptions = _this$props3.updateOptions,
-          setupTaskListHidden = _this$props3.setupTaskListHidden;
-      var _this$state = this.state,
-          isPanelOpen = _this$state.isPanelOpen,
-          currentTab = _this$state.currentTab,
-          isPanelSwitching = _this$state.isPanelSwitching;
-      var tab = Object(external_lodash_["find"])(this.getTabs(), {
-        name: currentTab
-      });
-
-      if (!tab) {
-        return Object(external_this_wp_element_["createElement"])("div", {
-          className: "woocommerce-layout__activity-panel-wrapper"
-        });
-      }
-
-      var clearPanel = function clearPanel() {
-        _this2.clearPanel();
-      };
-
-      if (currentTab === 'display-options') {
-        return null;
-      }
-
-      if (currentTab === 'setup') {
-        var currentLocation = window.location.href;
-        var homescreenLocation = Object(settings["f" /* getAdminLink */])('admin.php?page=wc-admin'); // Don't navigate if we're already on the homescreen, this will cause an infinite loop
-
-        if (currentLocation !== homescreenLocation) {
-          // Ensure that if the user is trying to get to the task list they can see it even if
-          // it was dismissed.
-          if (setupTaskListHidden === 'no') {
-            this.redirectToHomeScreen();
-          } else {
-            updateOptions({
-              woocommerce_task_list_hidden: 'no'
-            }).then(this.redirectToHomeScreen);
-          }
-        }
-
-        return null;
-      }
-
-      var classNames = classnames_default()('woocommerce-layout__activity-panel-wrapper', {
-        'is-open': isPanelOpen,
-        'is-switching': isPanelSwitching
-      });
-      return Object(external_this_wp_element_["createElement"])("div", {
-        className: classNames,
-        tabIndex: 0,
-        role: "tabpanel",
-        "aria-label": tab.title,
-        onTransitionEnd: clearPanel,
-        onAnimationEnd: clearPanel
-      }, Object(external_this_wp_element_["createElement"])("div", {
-        className: "woocommerce-layout__activity-panel-content",
-        key: 'activity-panel-' + currentTab,
-        id: 'activity-panel-' + currentTab
-      }, Object(external_this_wp_element_["createElement"])(external_this_wp_element_["Suspense"], {
-        fallback: Object(external_this_wp_element_["createElement"])(external_this_wc_components_["Spinner"], null)
-      }, this.getPanelContent(currentTab))));
-    }
-  }, {
     key: "redirectToHomeScreen",
     value: function redirectToHomeScreen() {
       if (Object(utils["f" /* isWCAdmin */])(window.location.href)) {
@@ -3071,10 +3651,10 @@ var activity_panel_ActivityPanel = /*#__PURE__*/function (_Component) {
   }, {
     key: "shouldShowHelpTooltip",
     value: function shouldShowHelpTooltip() {
-      var _this$props4 = this.props,
-          userPreferencesData = _this$props4.userPreferencesData,
-          trackedCompletedTasks = _this$props4.trackedCompletedTasks,
-          query = _this$props4.query;
+      var _this$props3 = this.props,
+          userPreferencesData = _this$props3.userPreferencesData,
+          trackedCompletedTasks = _this$props3.trackedCompletedTasks,
+          query = _this$props3.query;
       var task = query.task;
       var startedTasks = userPreferencesData && userPreferencesData.task_list_tracked_started_tasks;
       var highlightShown = userPreferencesData && userPreferencesData.help_panel_highlight_shown;
@@ -3091,10 +3671,10 @@ var activity_panel_ActivityPanel = /*#__PURE__*/function (_Component) {
       var _this3 = this;
 
       var tabs = this.getTabs();
-      var _this$state2 = this.state,
-          mobileOpen = _this$state2.mobileOpen,
-          currentTab = _this$state2.currentTab,
-          isPanelOpen = _this$state2.isPanelOpen;
+      var _this$state = this.state,
+          mobileOpen = _this$state.mobileOpen,
+          currentTab = _this$state.currentTab,
+          isPanelOpen = _this$state.isPanelOpen;
       var headerId = Object(external_lodash_["uniqueId"])('activity-panel-header_');
       var panelClasses = classnames_default()('woocommerce-layout__activity-panel', {
         'is-mobile-open': this.state.mobileOpen
@@ -3127,9 +3707,28 @@ var activity_panel_ActivityPanel = /*#__PURE__*/function (_Component) {
         tabOpen: isPanelOpen,
         selectedTab: currentTab,
         onTabClick: function onTabClick(tab, tabOpen) {
+          if (tab.onClick) {
+            tab.onClick();
+            return;
+          }
+
           _this3.togglePanel(tab, tabOpen);
         }
-      }), this.renderPanel())), showHelpHighlightTooltip ? Object(external_this_wp_element_["createElement"])(HighlightTooltip, {
+      }), Object(external_this_wp_element_["createElement"])(panel_Panel, {
+        isPanelOpen: true,
+        currentTab: true,
+        isPanelSwitching: true,
+        tab: Object(external_lodash_["find"])(this.getTabs(), {
+          name: currentTab
+        }),
+        content: this.getPanelContent(currentTab),
+        closePanel: function closePanel() {
+          return _this3.closePanel();
+        },
+        clearPanel: function clearPanel() {
+          return _this3.clearPanel();
+        }
+      }))), showHelpHighlightTooltip ? Object(external_this_wp_element_["createElement"])(HighlightTooltip, {
         delay: 1000,
         title: Object(external_this_wp_i18n_["__"])("We're here for help", 'woocommerce-admin'),
         content: Object(external_this_wp_i18n_["__"])('If you have any questions, feel free to explore the WooCommerce docs listed here.', 'woocommerce-admin'),
@@ -3172,7 +3771,7 @@ activity_panel_ActivityPanel.defaultProps = {
   return {
     updateOptions: dispatch(external_this_wc_data_["OPTIONS_STORE_NAME"]).updateOptions
   };
-}), dist_default.a)(activity_panel_ActivityPanel));
+}))(activity_panel_ActivityPanel));
 // CONCATENATED MODULE: ./client/lib/platform/index.js
 var ANDROID_PLATFORM = 'android';
 var IOS_PLATFORM = 'ios';
@@ -3214,7 +3813,7 @@ var app_icon_AppIcon = function AppIcon() {
   }));
 };
 // EXTERNAL MODULE: ./client/mobile-banner/style.scss
-var mobile_banner_style = __webpack_require__(305);
+var mobile_banner_style = __webpack_require__(303);
 
 // CONCATENATED MODULE: ./client/mobile-banner/constants.js
 // The Play Store link is defined as an exported constant mainly for the sake of testing the Mobile App Banner.
@@ -3305,7 +3904,7 @@ var mobile_banner_MobileAppBanner = function MobileAppBanner(_ref) {
   return null;
 };
 // EXTERNAL MODULE: ./client/hooks/useIsScrolled.js
-var useIsScrolled = __webpack_require__(138);
+var useIsScrolled = __webpack_require__(139);
 
 // CONCATENATED MODULE: ./client/header/index.js
 
@@ -3442,7 +4041,7 @@ var asyncToGenerator = __webpack_require__(43);
 var asyncToGenerator_default = /*#__PURE__*/__webpack_require__.n(asyncToGenerator);
 
 // EXTERNAL MODULE: ./node_modules/react-spring/web.cjs.js
-var web_cjs = __webpack_require__(180);
+var web_cjs = __webpack_require__(182);
 
 // EXTERNAL MODULE: ./client/layout/transient-notices/snackbar/index.js
 var snackbar = __webpack_require__(277);
@@ -3596,7 +4195,7 @@ function SnackbarList(_ref) {
 
 /* harmony default export */ var list = (SnackbarList);
 // EXTERNAL MODULE: ./client/layout/transient-notices/style.scss
-var transient_notices_style = __webpack_require__(307);
+var transient_notices_style = __webpack_require__(305);
 
 // CONCATENATED MODULE: ./client/layout/transient-notices/index.js
 
@@ -3685,7 +4284,7 @@ transient_notices_TransientNotices.propTypes = {
   };
 }))(transient_notices_TransientNotices));
 // EXTERNAL MODULE: external {"this":["wp","plugins"]}
-var external_this_wp_plugins_ = __webpack_require__(139);
+var external_this_wp_plugins_ = __webpack_require__(140);
 
 // EXTERNAL MODULE: ./client/navigation/utils.js
 var navigation_utils = __webpack_require__(86);
@@ -3831,10 +4430,10 @@ function layout_isNativeReflectConstruct() { if (typeof Reflect === "undefined" 
 
 
 var StoreAlerts = Object(external_this_wp_element_["lazy"])(function () {
-  return Promise.all(/* import() | store-alerts */[__webpack_require__.e(1), __webpack_require__.e(47)]).then(__webpack_require__.bind(null, 597));
+  return Promise.all(/* import() | store-alerts */[__webpack_require__.e(1), __webpack_require__.e(47)]).then(__webpack_require__.bind(null, 595));
 });
 var WCPayUsageModal = Object(external_this_wp_element_["lazy"])(function () {
-  return __webpack_require__.e(/* import() | wcpay-usage-modal */ 51).then(__webpack_require__.bind(null, 524));
+  return __webpack_require__.e(/* import() | wcpay-usage-modal */ 51).then(__webpack_require__.bind(null, 522));
 });
 var layout_PrimaryLayout = /*#__PURE__*/function (_Component) {
   inherits_default()(PrimaryLayout, _Component);
@@ -4065,7 +4664,7 @@ var EmbedLayout = Object(external_this_wp_compose_["compose"])(window.wcSettings
 
 /***/ }),
 
-/***/ 142:
+/***/ 143:
 /***/ (function(module, exports) {
 
 (function() { module.exports = this["wc"]["number"]; }());
@@ -4079,7 +4678,7 @@ var EmbedLayout = Object(external_this_wp_compose_["compose"])(window.wcSettings
 
 /***/ }),
 
-/***/ 150:
+/***/ 152:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4123,7 +4722,7 @@ exports.isValidElementType=function(a){return"string"===typeof a||"function"===t
 
 /***/ }),
 
-/***/ 180:
+/***/ 182:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4137,7 +4736,7 @@ var _extends = _interopDefault(__webpack_require__(24));
 var _objectWithoutPropertiesLoose = _interopDefault(__webpack_require__(96));
 var React = __webpack_require__(10);
 var React__default = _interopDefault(React);
-var _inheritsLoose = _interopDefault(__webpack_require__(306));
+var _inheritsLoose = _interopDefault(__webpack_require__(304));
 var _assertThisInitialized = _interopDefault(__webpack_require__(9));
 
 var is = {
@@ -6454,7 +7053,7 @@ exports.useSprings = useSprings;
 
 /***/ }),
 
-/***/ 181:
+/***/ 183:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6642,10 +7241,10 @@ var index = react__WEBPACK_IMPORTED_MODULE_0___default.a.createContext || create
 
 /***/ }),
 
-/***/ 182:
+/***/ 184:
 /***/ (function(module, exports, __webpack_require__) {
 
-var isarray = __webpack_require__(308)
+var isarray = __webpack_require__(306)
 
 /**
  * Expose `pathToRegexp`.
@@ -7094,7 +7693,7 @@ module.exports = _slicedToArray;
 
 /***/ }),
 
-/***/ 195:
+/***/ 196:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7144,7 +7743,7 @@ function hasValidNotes(notes) {
 
 /***/ }),
 
-/***/ 196:
+/***/ 197:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7483,90 +8082,6 @@ function getAdminLink(path) {
 
 /***/ }),
 
-/***/ 276:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var hoistNonReactStatic = __webpack_require__(301);
-var React = __webpack_require__(10);
-var ReactDOM = __webpack_require__(48);
-
-module.exports = function enhanceWithClickOutside(WrappedComponent) {
-  var componentName = WrappedComponent.displayName || WrappedComponent.name;
-
-  var EnhancedComponent = function (_React$Component) {
-    _inherits(EnhancedComponent, _React$Component);
-
-    function EnhancedComponent(props) {
-      _classCallCheck(this, EnhancedComponent);
-
-      var _this = _possibleConstructorReturn(this, (EnhancedComponent.__proto__ || Object.getPrototypeOf(EnhancedComponent)).call(this, props));
-
-      _this.handleClickOutside = _this.handleClickOutside.bind(_this);
-      return _this;
-    }
-
-    _createClass(EnhancedComponent, [{
-      key: 'componentDidMount',
-      value: function componentDidMount() {
-        document.addEventListener('click', this.handleClickOutside, true);
-      }
-    }, {
-      key: 'componentWillUnmount',
-      value: function componentWillUnmount() {
-        document.removeEventListener('click', this.handleClickOutside, true);
-      }
-    }, {
-      key: 'handleClickOutside',
-      value: function handleClickOutside(e) {
-        var domNode = this.__domNode;
-        if ((!domNode || !domNode.contains(e.target)) && this.__wrappedInstance && typeof this.__wrappedInstance.handleClickOutside === 'function') {
-          this.__wrappedInstance.handleClickOutside(e);
-        }
-      }
-    }, {
-      key: 'render',
-      value: function render() {
-        var _this2 = this;
-
-        var _props = this.props,
-            wrappedRef = _props.wrappedRef,
-            rest = _objectWithoutProperties(_props, ['wrappedRef']);
-
-        return React.createElement(WrappedComponent, _extends({}, rest, {
-          ref: function ref(c) {
-            _this2.__wrappedInstance = c;
-            _this2.__domNode = ReactDOM.findDOMNode(c);
-            wrappedRef && wrappedRef(c);
-          }
-        }));
-      }
-    }]);
-
-    return EnhancedComponent;
-  }(React.Component);
-
-  EnhancedComponent.displayName = 'clickOutside(' + componentName + ')';
-
-  return hoistNonReactStatic(EnhancedComponent, WrappedComponent);
-};
-
-/***/ }),
-
 /***/ 277:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -7577,7 +8092,7 @@ module.exports = function enhanceWithClickOutside(WrappedComponent) {
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(7);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_a11y__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(140);
+/* harmony import */ var _wordpress_a11y__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(141);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(2);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _wordpress_warning__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(278);
@@ -7715,7 +8230,7 @@ function Snackbar(_ref, ref) {
 }
 
 /* harmony default export */ __webpack_exports__["a"] = (Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["forwardRef"])(Snackbar));
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(124)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(125)))
 
 /***/ }),
 
@@ -7762,7 +8277,7 @@ function warning(message) {
   }
 }
 //# sourceMappingURL=index.js.map
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(124)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(125)))
 
 /***/ }),
 
@@ -8389,7 +8904,7 @@ CustomerEffortScoreTracksContainer.propTypes = {
 var external_this_wp_element_ = __webpack_require__(0);
 
 // EXTERNAL MODULE: external {"this":["wp","plugins"]}
-var external_this_wp_plugins_ = __webpack_require__(139);
+var external_this_wp_plugins_ = __webpack_require__(140);
 
 // EXTERNAL MODULE: external {"this":["wc","navigation"]}
 var external_this_wc_navigation_ = __webpack_require__(21);
@@ -8398,7 +8913,7 @@ var external_this_wc_navigation_ = __webpack_require__(21);
 var external_this_wc_data_ = __webpack_require__(23);
 
 // EXTERNAL MODULE: ./client/navigation/style.scss
-var style = __webpack_require__(309);
+var style = __webpack_require__(307);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/slicedToArray.js
 var slicedToArray = __webpack_require__(19);
@@ -8433,10 +8948,10 @@ var external_this_wp_components_ = __webpack_require__(4);
 var external_this_wp_htmlEntities_ = __webpack_require__(40);
 
 // EXTERNAL MODULE: ./node_modules/@wordpress/icons/build-module/icon/index.js
-var icon = __webpack_require__(304);
+var icon = __webpack_require__(302);
 
 // EXTERNAL MODULE: ./node_modules/@wordpress/primitives/build-module/svg/index.js
-var svg = __webpack_require__(196);
+var svg = __webpack_require__(197);
 
 // CONCATENATED MODULE: ./node_modules/@wordpress/icons/build-module/library/wordpress.js
 
@@ -8464,7 +8979,7 @@ var classnames_default = /*#__PURE__*/__webpack_require__.n(classnames);
 var external_lodash_ = __webpack_require__(3);
 
 // EXTERNAL MODULE: ./client/hooks/useIsScrolled.js
-var useIsScrolled = __webpack_require__(138);
+var useIsScrolled = __webpack_require__(139);
 
 // CONCATENATED MODULE: ./client/navigation/components/header/index.js
 
@@ -8889,19 +9404,19 @@ var HydratedNavigation = Object(external_this_wc_data_["withNavigationHydration"
 
 /***/ }),
 
-/***/ 296:
+/***/ 295:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(global) {/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(0);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_notices__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(471);
+/* harmony import */ var _wordpress_notices__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(469);
 /* harmony import */ var _woocommerce_data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(23);
 /* harmony import */ var _woocommerce_data__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_data__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _stylesheets_index_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(298);
+/* harmony import */ var _stylesheets_index_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(297);
 /* harmony import */ var _stylesheets_index_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_stylesheets_index_scss__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _layout__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(141);
+/* harmony import */ var _layout__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(142);
 /* harmony import */ var _customer_effort_score_tracks__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(286);
 /* harmony import */ var _navigation__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(287);
 
@@ -8981,6 +9496,13 @@ if (window.wcAdminFeatures && window.wcAdminFeatures['customer-effort-score-trac
 
 /***/ }),
 
+/***/ 297:
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
 /***/ 298:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9035,94 +9557,11 @@ module.exports = _typeof;
 /***/ 301:
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-
-/**
- * Copyright 2015, Yahoo! Inc.
- * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
- */
-var REACT_STATICS = {
-    childContextTypes: true,
-    contextTypes: true,
-    defaultProps: true,
-    displayName: true,
-    getDefaultProps: true,
-    getDerivedStateFromProps: true,
-    mixins: true,
-    propTypes: true,
-    type: true
-};
-
-var KNOWN_STATICS = {
-    name: true,
-    length: true,
-    prototype: true,
-    caller: true,
-    callee: true,
-    arguments: true,
-    arity: true
-};
-
-var defineProperty = Object.defineProperty;
-var getOwnPropertyNames = Object.getOwnPropertyNames;
-var getOwnPropertySymbols = Object.getOwnPropertySymbols;
-var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
-var getPrototypeOf = Object.getPrototypeOf;
-var objectPrototype = getPrototypeOf && getPrototypeOf(Object);
-
-function hoistNonReactStatics(targetComponent, sourceComponent, blacklist) {
-    if (typeof sourceComponent !== 'string') { // don't hoist over string (html) components
-
-        if (objectPrototype) {
-            var inheritedComponent = getPrototypeOf(sourceComponent);
-            if (inheritedComponent && inheritedComponent !== objectPrototype) {
-                hoistNonReactStatics(targetComponent, inheritedComponent, blacklist);
-            }
-        }
-
-        var keys = getOwnPropertyNames(sourceComponent);
-
-        if (getOwnPropertySymbols) {
-            keys = keys.concat(getOwnPropertySymbols(sourceComponent));
-        }
-
-        for (var i = 0; i < keys.length; ++i) {
-            var key = keys[i];
-            if (!REACT_STATICS[key] && !KNOWN_STATICS[key] && (!blacklist || !blacklist[key])) {
-                var descriptor = getOwnPropertyDescriptor(sourceComponent, key);
-                try { // Avoid failures from read-only properties
-                    defineProperty(targetComponent, key, descriptor);
-                } catch (e) {}
-            }
-        }
-
-        return targetComponent;
-    }
-
-    return targetComponent;
-}
-
-module.exports = hoistNonReactStatics;
-
+// extracted by mini-css-extract-plugin
 
 /***/ }),
 
 /***/ 302:
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-
-/***/ 303:
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-
-/***/ 304:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9170,14 +9609,14 @@ function Icon(_ref) {
 
 /***/ }),
 
-/***/ 305:
+/***/ 303:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ 306:
+/***/ 304:
 /***/ (function(module, exports) {
 
 function _inheritsLoose(subClass, superClass) {
@@ -9190,14 +9629,14 @@ module.exports = _inheritsLoose;
 
 /***/ }),
 
-/***/ 307:
+/***/ 305:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ 308:
+/***/ 306:
 /***/ (function(module, exports) {
 
 module.exports = Array.isArray || function (arr) {
@@ -9207,7 +9646,7 @@ module.exports = Array.isArray || function (arr) {
 
 /***/ }),
 
-/***/ 309:
+/***/ 307:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
@@ -9454,14 +9893,7 @@ module.exports = _asyncToGenerator;
 
 /***/ }),
 
-/***/ 47:
-/***/ (function(module, exports) {
-
-(function() { module.exports = this["wc"]["components"]; }());
-
-/***/ }),
-
-/***/ 471:
+/***/ 469:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9853,7 +10285,7 @@ function getNotices(state) {
 }
 //# sourceMappingURL=selectors.js.map
 // EXTERNAL MODULE: ./node_modules/@wordpress/a11y/build-module/index.js + 4 modules
-var build_module = __webpack_require__(140);
+var build_module = __webpack_require__(141);
 
 // CONCATENATED MODULE: ./node_modules/@wordpress/notices/build-module/store/controls.js
 /**
@@ -9895,17 +10327,36 @@ var build_module = __webpack_require__(140);
 
 /***/ }),
 
-/***/ 479:
+/***/ 47:
+/***/ (function(module, exports) {
+
+(function() { module.exports = this["wc"]["components"]; }());
+
+/***/ }),
+
+/***/ 477:
 /***/ (function(module, exports) {
 
 (function() { module.exports = this["wc"]["csvExport"]; }());
 
 /***/ }),
 
-/***/ 48:
-/***/ (function(module, exports) {
+/***/ 49:
+/***/ (function(module, exports, __webpack_require__) {
 
-(function() { module.exports = this["ReactDOM"]; }());
+"use strict";
+
+
+var stringify = __webpack_require__(87);
+var parse = __webpack_require__(88);
+var formats = __webpack_require__(52);
+
+module.exports = {
+    formats: formats,
+    parse: parse,
+    stringify: stringify
+};
+
 
 /***/ }),
 
@@ -9932,21 +10383,9 @@ module.exports = _defineProperty;
 /***/ }),
 
 /***/ 50:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-
-
-var stringify = __webpack_require__(87);
-var parse = __webpack_require__(88);
-var formats = __webpack_require__(52);
-
-module.exports = {
-    formats: formats,
-    parse: parse,
-    stringify: stringify
-};
-
+(function() { module.exports = this["ReactDOM"]; }());
 
 /***/ }),
 

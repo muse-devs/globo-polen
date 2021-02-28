@@ -623,7 +623,7 @@ exports.default = interpolate;
 
 /***/ }),
 
-/***/ 506:
+/***/ 504:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -893,7 +893,7 @@ var UsageModal = /*#__PURE__*/function (_Component) {
 
 /***/ }),
 
-/***/ 524:
+/***/ 522:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -910,7 +910,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var interpolate_components__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(interpolate_components__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _woocommerce_components__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(47);
 /* harmony import */ var _woocommerce_components__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_components__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _profile_wizard_steps_usage_modal__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(506);
+/* harmony import */ var _profile_wizard_steps_usage_modal__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(504);
 
 
 

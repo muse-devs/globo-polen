@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The template for displaying the footer
  *
@@ -11,24 +12,58 @@
 
 ?>
 
-	<footer id="colophon" class="site-footer">
-		<div class="site-info">
-			<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'polen' ) ); ?>">
-				<?php
-				/* translators: %s: CMS name, i.e. WordPress. */
-				printf( esc_html__( 'Proudly powered by %s', 'polen' ), 'WordPress' );
-				?>
-			</a>
-			<span class="sep"> | </span>
-				<?php
-				/* translators: 1: Theme name, 2: Theme author. */
-				printf( esc_html__( 'Theme: %1$s by %2$s.', 'polen' ), 'polen', '<a href="http://underscores.me/">Polen</a>' );
-				?>
-		</div><!-- .site-info -->
-	</footer><!-- #colophon -->
+<footer id="colophon" class="mt-5 pt-5 site-footer">
+	<div class="row pb-5">
+		<div class="col-md-6">
+			<div class="row">
+				<div class="col-md-4">
+					<h5 class="title">Polen</h5>
+					<ul class="footer-menu">
+						<li>
+							<a href="#asd">Como funciona</a>
+						</li>
+						<li>
+							<a href="#asd">Política de privacidade</a>
+						</li>
+					</ul>
+				</div>
+				<div class="col-md-8">
+					<h5 class="title">Categorias</h5>
+					<ul class="footer-menu">
+						<li>
+							<a href="#asd">Categoria A</a>
+						</li>
+						<li>
+							<a href="#asd">Categoria B</a>
+						</li>
+						<li>
+							<a href="#asd">Categoria C</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<h5 class="title">Junte-se à nossa lista</h5>
+			<p class="description">Seja o primeiro a saber sobre as estrelas mais recentes e as melhores ofertas no Polen</p>
+			<div class="row">
+				<div class="col-md-8">
+					<input type="text" placeholder="Entre com o seu e-mail" class="form-control form-control-lg" />
+				</div>
+				<div class="col-md-4"><button class="btn btn-primary btn-lg btn-block">Enviar</button></div>
+			</div>
+		</div>
+	</div>
+	<div class="row mt-5 copyright">
+		<div class="col-md-4 py-5"><?php the_custom_logo(); ?></div>
+		<div class="col-md-4 py-5 text-center">2021 @ Polen</div>
+		<div class="col-md-4 py-5 text-right">social</div>
+	</div><!-- .site-info -->
+</footer><!-- #colophon -->
 </div><!-- #Container -->
 
 <?php wp_footer(); ?>
 
 </body>
+
 </html>
