@@ -5,6 +5,8 @@ namespace Polen\Includes;
 use Polen\Publics\Polen_Public;
 use Polen\Admin\Polen_Admin;
 use Polen\Includes\Polen_Talent;
+use Polen\Includes\Polen_Occasion_List;
+use Polen\Includes\Polen_Cart;
 
 class Polen {
 
@@ -41,6 +43,8 @@ class Polen {
     private function init_classes() {
         $polen_signIn = new Polen_SignInUser();
         $tallent = new Polen_Talent( true );
+        $occasion_list = new Polen_Occasion_List( true );
+        $polen_cart = new Polen_Cart( true );
     }
 
     /**

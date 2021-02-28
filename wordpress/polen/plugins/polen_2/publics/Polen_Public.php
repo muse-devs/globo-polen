@@ -97,9 +97,10 @@ class Polen_Public {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/polen-public.js', array( 'jquery' ), $this->version, false );
-
+				
+		wp_register_script( 'polen-script', trailingslashit( plugin_dir_url( __FILE__ ) ) . '/js/polen-public.js', array( 'jquery' ), time(), true );
+		wp_localize_script( 'polen-script',	'polen_ajax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
+		wp_enqueue_script( 'polen-script' );
 	}
 
 }
