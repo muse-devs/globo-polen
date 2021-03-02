@@ -48,6 +48,7 @@ class Polen {
         $polen_cart = new Polen_Cart( true );
         $Polen_Plugin_Settings = new Polen_Plugin_Settings( true );
         $Polen_Update_Fields = new Polen_Update_Fields( true );
+        new Polen_DisableAdminBar();
     }
 
     /**
