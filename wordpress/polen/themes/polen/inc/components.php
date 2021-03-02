@@ -118,7 +118,7 @@ function polen_front_get_categories($items)
 	echo $data;
 }
 
-function polen_front_get_artists($items)
+function polen_front_get_artists($items, $title)
 {
 	if (!$items) {
 		return;
@@ -129,7 +129,7 @@ function polen_front_get_artists($items)
 		<div class="col-md-12">
 			<header class="row mb-4">
 				<div class="col">
-					<h2>Todos os Artistas</h2>
+					<h2><?= $title; ?></h2>
 				</div>
 				<div class="col d-flex justify-content-end align-items-center"><a href="#">Ver mais</a></div>
 			</header>
@@ -202,4 +202,23 @@ function polen_front_get_tutorial()
 	$data = ob_get_contents();
 	ob_end_clean();
 	echo $data;
+}
+
+function polen_icon_share()
+{
+	echo '<i class="bi bi-share-fill"></i>';
+}
+
+function polen_icon_clock()
+{
+	echo '<i class="bi bi-clock"></i>';
+}
+
+function polen_icon_star($active = false)
+{
+	if ($active) {
+		echo '<i class="bi bi-star-fill" style="color: #FFF963;"></i>';
+	} else {
+		echo '<i class="bi bi-star"></i>';
+	}
 }

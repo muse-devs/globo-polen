@@ -26,8 +26,12 @@ class Polen_Admin {
         
         public function init_classes( bool $static )
         {
-            new Polen_Admin_DisableMetabox( $static );
-            new Polen_Update_Fields( $static );
+            if( class_exists( 'Polen_Admin_DisableMetabox' ) ){
+                new Polen_Admin_DisableMetabox( $static );
+            }
+            if( class_exists( 'Polen_Update_Fields' ) ){
+                new Polen_Update_Fields( $static );
+            }
         }
 
 	/**
