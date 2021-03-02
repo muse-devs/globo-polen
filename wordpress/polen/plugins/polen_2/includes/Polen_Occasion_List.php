@@ -104,13 +104,13 @@ class Polen_Occasion_List
     }
 
     /*
-    CREATE TABLE `wp_polen`.`wp_occasion_list` (
-    `id` INT NOT NULL AUTO_INCREMENT,
-    `type` VARCHAR(45) NULL,
-    `description` TEXT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ,
-    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    PRIMARY KEY (`id`));
+  CREATE TABLE `db_polen`.`wp_occasion_list` (
+  `id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `type` VARCHAR(45) CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_unicode_520_ci' NULL,
+  `description` TEXT CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_unicode_520_ci' NULL,
+  `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`));
     */
 
 }
