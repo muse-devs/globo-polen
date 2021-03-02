@@ -15,23 +15,19 @@ class Polen_Admin {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
-
-		
+                
+		$this->init_classes( true );
 	}
         
         public function actions()
         {
-//            add_action('admin_init', [ $this, 'init_classes'], 10 );
+            add_action('admin_init', [ $this, 'init_classes'], 10 );
         }
         
-        public function init_classes( bool $static )
+        public function init_classes( bool $static = true )
         {
-            if( class_exists( 'Polen_Admin_DisableMetabox' ) ){
                 new Polen_Admin_DisableMetabox( $static );
-            }
-            if( class_exists( 'Polen_Update_Fields' ) ){
                 new Polen_Update_Fields( $static );
-            }
         }
 
 	/**
