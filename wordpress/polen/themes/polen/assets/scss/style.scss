@@ -1,10 +1,11 @@
 // Your variable overrides
 @import "colors";
-@import "typography.scss";
 
 // Bootstrap por último
 @import "../bootstrap-4.0.0/scss/bootstrap.scss";
+@import "typography.scss";
 @import "reset";
 @import "forms";
 @import "cards";
+@import "talent";
 @import "footer";

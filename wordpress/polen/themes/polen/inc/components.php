@@ -1,5 +1,24 @@
 <?php
 
+function polen_icon_share()
+{
+	echo '<i class="bi bi-share-fill"></i>';
+}
+
+function polen_icon_clock()
+{
+	echo '<i class="bi bi-clock"></i>';
+}
+
+function polen_icon_star($active = false)
+{
+	if ($active) {
+		echo '<i class="bi bi-star-fill" style="color: #FFF963;"></i>';
+	} else {
+		echo '<i class="bi bi-star"></i>';
+	}
+}
+
 function polen_front_get_banner()
 {
 	ob_start();
@@ -12,7 +31,7 @@ function polen_front_get_banner()
 			</video>
 			<div class="content">
 				<h2 class="title">Presenteie e<br />surpreenda com vídeos personalizados.</h2>
-				<a href="#como" class="link">Como funciona</a>
+				<a href="#como" class="player-button">Como funciona</a>
 			</div>
 		</div>
 	</section>
@@ -155,8 +174,7 @@ function polen_front_get_artists($items, $title)
 
 function polen_front_get_tutorial()
 {
-	ob_start();
-?>
+	echo '
 	<section class="row my-5 py-4 tutorial">
 		<div class="col-md-12">
 			<header class="row mb-4">
@@ -198,27 +216,139 @@ function polen_front_get_tutorial()
 			</div>
 		</div>
 	</section>
+	';
+}
+
+function polen_front_get_talent_header($data = array(
+	"nome" => "Nome do Artista",
+	"response" => "1h",
+	"stars" => "5.0",
+	"price" => "R$ 200",
+	"tags" => array(
+		array("link" => "#tag", "slug" => "Tag"),
+		array("link" => "#tag", "slug" => "Tag"),
+		array("link" => "#tag", "slug" => "Tag"),
+		array("link" => "#tag", "slug" => "Tag"),
+	),
+))
+{
+	ob_start();
+?>
+	<header class="talent-page-header">
+		<div class="row mt-5 pt-5 d-flex justify-content-between align-items-center">
+			<div class="col-md-5">
+				<div class="row">
+					<div class="col-md-12 d-flex justify-content-between align-items-center">
+						<h1 class="talent-name text-truncate" title="Nome do artista"><?= $data['nome']; ?></h1>
+						<div class="talent-share ml-4">
+							<?php polen_icon_share(); ?>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<?php foreach ($data['tags'] as $tag) : ?>
+							<a href="<?= $tag['link'] ?>" class="tag-link mb-2"><?= $tag['slug'] ?></a>
+						<?php endforeach; ?>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="row">
+					<div class="col-md-6 text-center">
+						<span class="skill-title">Responde em</span>
+					</div>
+					<div class="col-md-6 text-center">
+						<span class="skill-title">Reviews</span>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6 text-center">
+						<?php polen_icon_clock(); ?>
+						<span class="skill-value"><?= $data['response']; ?></span>
+					</div>
+					<div class="col-md-6 text-center">
+						<?php polen_icon_star(true); ?>
+						<span class="skill-value"><?= $data['stars']; ?></span>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<button class="btn btn-primary btn-lg btn-block btn-get-video">Pedir vídeo <?= $data['price']; ?></button>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12"><span class="price"><?= $data['price']; ?></span></div>
+		</div>
+	</header>
 <?php
 	$data = ob_get_contents();
 	ob_end_clean();
 	echo $data;
 }
 
-function polen_icon_share()
+function polen_front_get_talent_videos($data = null)
 {
-	echo '<i class="bi bi-share-fill"></i>';
+	ob_start();
+?>
+	<div class="talent-carousel">
+		<div id="myVideo" data-vimeo-url="https://vimeo.com/280815263" data-vimeo-width="800"></div>
+		<!-- <div id="myVideo" data-vimeo-url="https://vimeo.com/518187032/f8fd8f2335" data-vimeo-width="800"></div> -->
+
+		<script src="https://player.vimeo.com/api/player.js"></script>
+		<script>
+			var videoPlayer = new Vimeo.Player('myVideo');
+			videoPlayer.on('play', function() {
+				console.log('Played the video');
+			});
+			videoPlayer.getVideoId().then(function(title) {
+				console.log('id:', title);
+			});
+		</script>
+	</div>
+<?php
+	$data = ob_get_contents();
+	ob_end_clean();
+	echo $data;
 }
 
-function polen_icon_clock()
-{
-	echo '<i class="bi bi-clock"></i>';
-}
+/**
+ * Gets the thumbnail url for a vimeo video using the video id. This only works for public videos.
+ *
+ * @param string $id        The video id.
+ * @param string $thumbType Thumbnail image size. supported sizes: small, medium (default) and large.
+ *
+ * @return string|bool
+ */
 
-function polen_icon_star($active = false)
+function getVimeoVideoThumbnailByVideoId($id = '', $thumbType = 'large')
 {
-	if ($active) {
-		echo '<i class="bi bi-star-fill" style="color: #FFF963;"></i>';
-	} else {
-		echo '<i class="bi bi-star"></i>';
+
+	$id = trim($id);
+
+	if ($id == '') {
+		return FALSE;
 	}
+
+	$apiData = unserialize(file_get_contents("http://vimeo.com/api/v2/video/$id.php"));
+
+	if (is_array($apiData) && count($apiData) > 0) {
+
+		$videoInfo = $apiData[0];
+
+		switch ($thumbType) {
+			case 'small':
+				return $videoInfo['thumbnail_small'];
+				break;
+			case 'large':
+				return $videoInfo['thumbnail_large'];
+				break;
+			case 'medium':
+				return $videoInfo['thumbnail_medium'];
+			default:
+				break;
+		}
+	}
+
+	return FALSE;
 }
