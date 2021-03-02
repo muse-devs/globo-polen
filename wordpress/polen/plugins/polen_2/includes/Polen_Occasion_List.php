@@ -8,6 +8,8 @@
 
 namespace Polen\Includes;
 
+use \Polen\Admin\Partials\Occasions\Polen_Admin_Occasions_Display;
+
 
 class Polen_Occasion_List
 {
@@ -28,31 +30,80 @@ class Polen_Occasion_List
         add_menu_page( 'Categorias de Vídeo - Cadastro', 'Categorias de Vídeos', 'manage_options', 'occasion-list', [ $this, 'list_inserted_occasion' ], 'dashicons-editor-alignright' );
     }
 
+    
+    
     /**
      * Screen to insert occasion and description
      */
     public function list_inserted_occasion(){ 
-        require PLUGIN_POLEN_DIR . '/admin/partials/occasions/occasion-list.php';
+//        require PLUGIN_POLEN_DIR . '/admin/partials/occasions/occasion-list.php';
+        $this->handler_post_create_occasion();
+        add_action( 'admin_notices', [$this, 'my_error_notice'] );
+        $occasion_display = new Polen_Admin_Occasions_Display();
+        $occasion_display->prepare_items();
+        
+        echo '<div class="wrap">';
+        echo '<h2>' . translate('Categorias de Vídeo') . '</h2>';
+        
+        $occasion_display->show_form_create_occasion();
+        $occasion_display->show_form_search_occasion();
+        $occasion_display->display();
+        
+        echo '</div>';
+    }
+    
+    public function my_error_notice()
+    { ?>
+        <div class="error notice">
+            <p><?= 'There has been an error. Bummer!'; ?></p>
+        </div>
+    <?php
+    die('asdgfkajhfgdkajdfgkajhdfg');
+    }
+    
+    
+    /**
+     * Metodo chamado quando uma tentativa de inserir uma Occasion
+     */
+    public function handler_post_create_occasion()
+    {
+        $occasion_category = trim( filter_input( INPUT_POST, 'occasion_category', FILTER_FLAG_EMPTY_STRING_NULL ) );
+        $occasion_description = trim( filter_input( INPUT_POST, 'occasion_description', FILTER_SANITIZE_STRING ) );
+        $_wpnonce = wp_verify_nonce( $_POST['_wpnonce'], 'occasion_new' );
+        
+        if( !empty($occasion_category) && !empty($occasion_description) && $_wpnonce === 1 ) {
+            $this->set_occasion( $occasion_category, $occasion_description );
+        }
     }
 
     /**
      * List all inserted occasions
      */
-    public function get_occasion( $order = null ){
+    public function get_occasion( $_query = null, $_orderby = null, $_order = 'ASC' ){
         global $wpdb;
 
-        $sql = "SELECT * FROM `" . $wpdb->base_prefix . "occasion_list` ";  
-        if( !empty( $order ) ){
-            $sql .= " ORDER BY ". $order. " ASC ";
-        }   
+        $order = ($_order === 'asc') ? 'ASC' : 'DESC';
+        $orderby = ($_orderby === 'type') ? " ORDER BY $_orderby $order " : "";
+        
+        $query = !empty($_query) ? $wpdb->prepare(" AND (type LIKE '%%%s%%') ", $_query) : '';        
+        $sql = "SELECT * FROM `" . $wpdb->base_prefix . "occasion_list` WHERE (1=1) {$query} {$orderby}";  
 
         $results = $wpdb->get_results( $sql );  
         return $results;
     }
-
-    public function get_occasion_by_type( $type ){
+    
+    
+    /**
+     * 
+     * @global type $wpdb
+     * @param string $type
+     * @param string $orderby
+     * @param string $order
+     * @return type
+     */
+    public function get_occasion_by_type( string $type ){
         global $wpdb;
-
+        
         $sql = "SELECT type, description FROM `" . $wpdb->base_prefix . "occasion_list` WHERE type = %s LIMIT 1" ;
         $sql_prepared = $wpdb->prepare( $sql, trim( $type ) );
         $results = $wpdb->get_results( $sql_prepared );  
