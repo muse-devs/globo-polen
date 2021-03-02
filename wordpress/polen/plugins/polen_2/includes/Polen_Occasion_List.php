@@ -53,8 +53,9 @@ class Polen_Occasion_List
     public function get_occasion_by_type( $type ){
         global $wpdb;
 
-        $sql = "SELECT type, description FROM `" . $wpdb->base_prefix . "occasion_list` WHERE type = '". trim( $type ) ."' LIMIT 1" ;  
-        $results = $wpdb->get_results( $sql );  
+        $sql = "SELECT type, description FROM `" . $wpdb->base_prefix . "occasion_list` WHERE type = %s LIMIT 1" ;
+        $sql_prepared = $wpdb->prepare( $sql, trim( $type ) );
+        $results = $wpdb->get_results( $sql_prepared );  
         return $results;
     }
 
@@ -83,9 +84,9 @@ class Polen_Occasion_List
 
     public function check_already_inserted( $type, $description ){
         global $wpdb;
-        $inserted = $wpdb->get_results("SELECT * FROM `" . $wpdb->base_prefix . "occasion_list` WHERE type = '". trim( $type ) ." AND description = '". trim( $description ) ."'");
-
-        if( $inserted > 0 ){
+        $sql_prepared = $wpdb->prepare("SELECT COUNT(*) total  FROM `" . $wpdb->base_prefix . "occasion_list` WHERE type = %s AND description = %s;", trim( $type ), trim( $description ));
+        $inserted = $wpdb->get_var( $sql_prepared );
+        if( (int) $inserted > 0 ){
             return true;
         }else{
             return false;
