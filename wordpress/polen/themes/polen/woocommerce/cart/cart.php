@@ -17,14 +17,16 @@
 
 defined( 'ABSPATH' ) || exit;
 
+//do_action( 'polen_before_cart' );
+
 use Polen\Includes\Polen_Occasion_List;
 $occasion_list = new Polen_Occasion_List();
 
 echo 'Passo 1/3';
+do_action( 'woocommerce_before_cart' );
+?>
 
-do_action( 'woocommerce_before_cart' ); ?>
-
-<form class="woocommerce-cart-form" action="<?php echo esc_url( wc_get_cart_url() ); ?>" method="post">
+<form class="woocommerce-cart-form" action="<?php echo esc_url( wc_get_checkout_url() ); ?>" method="post">
 	<?php do_action( 'woocommerce_before_cart_table' ); ?>
 
 	<table class="shop_table shop_table_responsive cart woocommerce-cart-form__contents" cellspacing="0">
@@ -211,7 +213,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 					<?php
 							$instructions_to_video = isset( $cart_item['instructions_to_video'] ) ? $cart_item['instructions_to_video'] : '';
 							printf(
-							'<textarea 	name="instructions_to_video" placeholder="E-mail para receber updates" 
+							'<textarea 	name="instructions_to_video" placeholder="Instruções" 
 										class="%s form-control form-control-lg" id="cart_instructions_to_video_%s" 
 										data-cart-id="%s">%s</textarea>',
 							'polen-cart-item-data',
@@ -267,8 +269,8 @@ do_action( 'woocommerce_before_cart' ); ?>
 
 					<!--button type="submit" class="button" name="update_cart" value="<?php esc_attr_e( 'Update cart', 'woocommerce' ); ?>"><?php esc_html_e( 'Update cart', 'woocommerce' ); ?></button-->
 
-					<!--button type="submit" class="button" name="update_cart" value="<?php esc_attr_e( 'Update cart', 'woocommerce' ); ?>"><?php esc_html_e( 'Update cart', 'woocommerce' ); ?></button-->
 
+					<button type="submit" class="button" name="update_cart" value="<?php esc_attr_e( 'Update cart', 'woocommerce' ); ?>"><?php esc_html_e( 'Update cart', 'woocommerce' ); ?></button>
 
 					<?php do_action( 'woocommerce_cart_actions' ); ?>
 
