@@ -287,25 +287,34 @@ function polen_front_get_talent_header($data = array(
 	echo $data;
 }
 
-function polen_front_get_talent_videos($data = null)
+function polen_front_get_talent_videos($items = array(
+	array("title" => "Video 1", "image" => "http://i.vimeocdn.com/video/731672459_640.jpg", "video" => "https://vimeo.com/280815263"),
+	array("title" => "Video 2", "image" => "http://i.vimeocdn.com/video/649503401_640.jpg", "video" => "https://vimeo.com/229243103"),
+	array("title" => "Video 3", "image" => "http://i.vimeocdn.com/video/735151132_640.jpg", "video" => "https://vimeo.com/297461374"),
+	array("title" => "Video 1", "image" => "http://i.vimeocdn.com/video/731672459_640.jpg", "video" => "https://vimeo.com/280815263"),
+	array("title" => "Video 2", "image" => "http://i.vimeocdn.com/video/649503401_640.jpg", "video" => "https://vimeo.com/229243103"),
+	array("title" => "Video 3", "image" => "http://i.vimeocdn.com/video/735151132_640.jpg", "video" => "https://vimeo.com/297461374"),
+	array("title" => "Video 1", "image" => "http://i.vimeocdn.com/video/731672459_640.jpg", "video" => "https://vimeo.com/280815263"),
+	array("title" => "Video 2", "image" => "http://i.vimeocdn.com/video/649503401_640.jpg", "video" => "https://vimeo.com/229243103"),
+	array("title" => "Video 3", "image" => "http://i.vimeocdn.com/video/735151132_640.jpg", "video" => "https://vimeo.com/297461374"),
+))
 {
 	ob_start();
 ?>
 	<div class="talent-carousel">
-		<div id="myVideo" data-vimeo-url="https://vimeo.com/280815263" data-vimeo-width="800"></div>
-		<!-- <div id="myVideo" data-vimeo-url="https://vimeo.com/518187032/f8fd8f2335" data-vimeo-width="800"></div> -->
-
-		<script src="https://player.vimeo.com/api/player.js"></script>
-		<script>
-			var videoPlayer = new Vimeo.Player('myVideo');
-			videoPlayer.on('play', function() {
-				console.log('Played the video');
-			});
-			videoPlayer.getVideoId().then(function(title) {
-				console.log('id:', title);
-			});
-		</script>
+		<?php foreach ($items as $item) : ?>
+			<img src="<?= $item['image']; ?>" alt="<?= $item['title']; ?>" data-vimeo-url="<?= $item['video']; ?>">
+		<?php endforeach; ?>
 	</div>
+
+	<div id="polenVideo" data-vimeo-url="https://vimeo.com/297461374" data-vimeo-width="800"></div>
+	<script src="https://player.vimeo.com/api/player.js"></script>
+	<script>
+		var videoPlayer = new Vimeo.Player('polenVideo');
+		videoPlayer.getVideoId().then(function(id) {
+			console.log('id:', id);
+		});
+	</script>
 <?php
 	$data = ob_get_contents();
 	ob_end_clean();
