@@ -92,6 +92,7 @@ class Polen_Talent
                 $product->set_status( 'draft' );
                 $product->set_slug( sanitize_title( $user->first_name . ' ' . $user->last_name ) );
                 $product->set_virtual( true );
+                $product->set_sold_individually( 'yes' );
                 $product->save();
                 $id = $product->get_id();
                 

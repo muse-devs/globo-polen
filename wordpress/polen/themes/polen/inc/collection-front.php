@@ -7,6 +7,61 @@
 
 
 
+
+
+/**
+ * Pegar informações das categorias
+ * @param ints $ids
+ */
+function _get_first_category_object( $ids ) {
+    foreach ($ids as $id) {
+        return get_term( $id, 'product_cat', OBJECT );
+    }
+}
+
+
+/**
+ * Pegar os dados para preenchimento do card de artista pelo Obj Produto do artista
+ * @param \WP_Product $talent_object
+ * @return type
+ */
+function _get_info_talent_by_product_id( \WC_Product $talent_object ) {
+        $talent = [];
+        $talent['ID'] = $talent_object->get_id();
+        $talent['image'] = $talent_object->get_image();
+        //TODO pegar o parma link do artista? qual vai ser
+        $talent['url'] = $talent_object->get_permalink();
+        $talent['price'] = $talent_object->get_price();
+        $talent['price_formatted'] = $talent_object->get_price_html();
+        $talent['name'] = $talent_object->get_title();
+
+        $ids = $talent_object->get_category_ids();
+        $category = _get_first_category_object( $ids );
+        //TODO pegar a URL da categoria, onde isso vai dar?
+        $talent['category_url'] = '/#categorias/' . $category->slug;
+        $talent['category'] = $category->name;
+        return $talent;
+}
+
+
+/**
+ * Usando a funcao _get_info_talent_by_product_id dentro de um loop para 
+ * retornar varios talentos no formato dos cards
+ * 
+ * @param array $args
+ * @return type
+ */
+function _get_ifon_talents_by_args( array $args )
+{
+    $talents_objects = wc_get_products( $args );
+    $talents = [];
+    foreach ( $talents_objects as $talent_object ) {
+        $talents[] = _get_info_talent_by_product_id( $talent_object );
+    }
+    return $talents;
+}
+
+
 /**
  * Pegar os artistas recentes informando qual o maximo de resultado
  *
@@ -15,53 +70,35 @@
  */
 function polen_get_new_talents(int $quantity = 4)
 {
-	$talents = [
-		[
-			'ID' => '182',
-			'talent_url' => '#/annita',
-			'image' => 'https://i.ibb.co/QHwQ3Mj/Captura-de-Tela-2021-02-19-a-s-00-09-30.png',
-			'url' => 'url',
-			'price' => '700',
-			'price_formatted' => 'R$ 700,00',
-			'name' => 'Anitta',
-			'category' => 'Cantora',
-			'category_url' => '#/tag/cantora'
-		],
-		[
-			'ID' => '12',
-			'talent_url' => '#/fabio-pochat',
-			'image' => 'https://i.ibb.co/k6qNWms/20201015115025451971u.jpg',
-			'url' => 'url',
-			'price' => '440',
-			'price_formatted' => 'R$ 440,00',
-			'name' => 'Fabio Porchat',
-			'category' => 'Apresentador',
-			'category_url' => '#/tag/apresentador'
-		],
-		[
-			'ID' => '33',
-			'talent_url' => '#/renato-aragao',
-			'image' => 'https://i.ibb.co/L9HTH6d/Captura-de-Tela-2021-02-18-a-s-23-59-48.png',
-			'url' => 'url',
-			'price' => '122',
-			'price_formatted' => 'R$ 122,00',
-			'name' => 'Renato Aragão',
-			'category' => 'Humorista',
-			'category_url' => '#/tag/humorista'
-		],
-		[
-			'ID' => '75',
-			'talent_url' => '#/grazi-massafera',
-			'image' => 'https://i.ibb.co/1LLcwhV/Captura-de-Tela-2021-02-19-a-s-00-06-00.png',
-			'url' => 'url',
-			'price' => '122',
-			'price_formatted' => 'R$ 122,00',
-			'name' => 'Grazi Massafera',
-			'category' => 'BBB5',
-			'category_url' => '#/tag/bbb5'
-		],
-	];
-	return $talents;
+    $args = [
+        'numberposts' => $quantity,
+        'post_status' => 'publish',
+        'order' => 'date_created',
+        'orderby' => 'DESC'
+    ];
+    $talents = _get_ifon_talents_by_args( $args );
+    return $talents;
+}
+
+
+/**
+ * Pegar dados e formatar para o cord de categorias
+ * 
+ * @param \WP_Term $category_object
+ * @return type
+ */
+function _get_category_info( \WP_Term $category_object )
+{
+    $category = [];
+    $category[ 'ID' ] = $category_object->term_id;
+    $category[ 'title' ] = $category_object->name;
+    //TODO resolver qual vai ser a URL da categoria e onde vai ser o resultado
+    $category[ 'url' ] = '/#catogoria/' . $category_object->slug;
+    
+    $thumbnail_id = get_woocommerce_term_meta( $category_object->term_id, 'thumbnail_id', true );
+    $category[ 'image' ] = wp_get_attachment_url( $thumbnail_id );
+
+    return $category;
 }
 
 
@@ -73,33 +110,23 @@ function polen_get_new_talents(int $quantity = 4)
  */
 function get_categories_home(int $quantity = 4)
 {
-	return [
-		[
-			'ID' => '332',
-			'title' => 'Humor',
-			'url' => '#/tag/humor',
-			'image' => 'http://lorempixel.com/278/144/abstract/1/'
-		],
-		[
-			'ID' => '234',
-			'title' => 'Sertaneijo',
-			'url' => '#/tag/sertanejo',
-			'image' => 'http://lorempixel.com/278/144/abstract/2/'
-		],
-		[
-			'ID' => '4',
-			'title' => 'Funk',
-			'url' => '#/tag/funk',
-			'image' => 'http://lorempixel.com/278/144/abstract/3/'
-		],
-		[
-			'ID' => '109',
-			'title' => 'Balé',
-			'url' => '#/tag/bale',
-			'image' => 'http://lorempixel.com/278/144/abstract/4/'
-		],
-	];
+    $args = [
+        'taxonomy' => 'product_cat',
+        'number' => $quantity,
+        'hide_empty' => true,
+        'order' => 'count',
+        //TODO excluir a categoria 'Uncategorized'
+        'exclude' => '15',
+    ];
+    
+    $categories_object = get_terms( $args );
+    $categories = [];
+    foreach ( $categories_object as $category_object ) {
+        $categories[] = _get_category_info( $category_object );
+    }
+    return $categories;
 }
+
 
 /**
  * Pegar todos os artistas informando qual o maximo de resultado
@@ -107,119 +134,14 @@ function get_categories_home(int $quantity = 4)
  * @param int quantity
  * @return array
  */
-function polen_get_talents(int $quantity = 4)
+function polen_get_talents( int $quantity = 10 )
 {
-	$talents = [
-		[
-			'ID' => '182',
-			'talent_url' => '#/annita',
-			'image' => 'https://i.ibb.co/QHwQ3Mj/Captura-de-Tela-2021-02-19-a-s-00-09-30.png',
-			'url' => 'url',
-			'price' => '700',
-			'price_formatted' => 'R$ 700,00',
-			'name' => 'Anitta',
-			'category' => 'Cantora',
-			'category_url' => '#/tag/cantora'
-		],
-		[
-			'ID' => '12',
-			'talent_url' => '#/fabio-pochat',
-			'image' => 'https://i.ibb.co/k6qNWms/20201015115025451971u.jpg',
-			'url' => 'url',
-			'price' => '440',
-			'price_formatted' => 'R$ 440,00',
-			'name' => 'Fabio Porchat',
-			'category' => 'Apresentador',
-			'category_url' => '#/tag/apresentador'
-		],
-		[
-			'ID' => '33',
-			'talent_url' => '#/renato-aragao',
-			'image' => 'https://i.ibb.co/L9HTH6d/Captura-de-Tela-2021-02-18-a-s-23-59-48.png',
-			'url' => 'url',
-			'price' => '122',
-			'price_formatted' => 'R$ 122,00',
-			'name' => 'Renato Aragão',
-			'category' => 'Humorista',
-			'category_url' => '#/tag/humorista'
-		],
-		[
-			'ID' => '75',
-			'talent_url' => '#/grazi-massafera',
-			'image' => 'https://i.ibb.co/1LLcwhV/Captura-de-Tela-2021-02-19-a-s-00-06-00.png',
-			'url' => 'url',
-			'price' => '122',
-			'price_formatted' => 'R$ 122,00',
-			'name' => 'Grazi Massafera',
-			'category' => 'BBB5',
-			'category_url' => '#/tag/bbb5'
-		],
-		[
-			'ID' => '182',
-			'talent_url' => '#/annita',
-			'image' => 'https://i.ibb.co/QHwQ3Mj/Captura-de-Tela-2021-02-19-a-s-00-09-30.png',
-			'url' => 'url',
-			'price' => '700',
-			'price_formatted' => 'R$ 700,00',
-			'name' => 'Anitta',
-			'category' => 'Cantora',
-			'category_url' => '#/tag/cantora'
-		],
-		[
-			'ID' => '12',
-			'talent_url' => '#/fabio-pochat',
-			'image' => 'https://i.ibb.co/k6qNWms/20201015115025451971u.jpg',
-			'url' => 'url',
-			'price' => '440',
-			'price_formatted' => 'R$ 440,00',
-			'name' => 'Fabio Porchat',
-			'category' => 'Apresentador',
-			'category_url' => '#/tag/apresentador'
-		],
-		[
-			'ID' => '33',
-			'talent_url' => '#/renato-aragao',
-			'image' => 'https://i.ibb.co/L9HTH6d/Captura-de-Tela-2021-02-18-a-s-23-59-48.png',
-			'url' => 'url',
-			'price' => '122',
-			'price_formatted' => 'R$ 122,00',
-			'name' => 'Renato Aragão',
-			'category' => 'Humorista',
-			'category_url' => '#/tag/humorista'
-		],
-		[
-			'ID' => '75',
-			'talent_url' => '#/grazi-massafera',
-			'image' => 'https://i.ibb.co/1LLcwhV/Captura-de-Tela-2021-02-19-a-s-00-06-00.png',
-			'url' => 'url',
-			'price' => '122',
-			'price_formatted' => 'R$ 122,00',
-			'name' => 'Grazi Massafera',
-			'category' => 'BBB5',
-			'category_url' => '#/tag/bbb5'
-		],
-		[
-			'ID' => '33',
-			'talent_url' => '#/renato-aragao',
-			'image' => 'https://i.ibb.co/L9HTH6d/Captura-de-Tela-2021-02-18-a-s-23-59-48.png',
-			'url' => 'url',
-			'price' => '122',
-			'price_formatted' => 'R$ 122,00',
-			'name' => 'Renato Aragão',
-			'category' => 'Humorista',
-			'category_url' => '#/tag/humorista'
-		],
-		[
-			'ID' => '75',
-			'talent_url' => '#/grazi-massafera',
-			'image' => 'https://i.ibb.co/1LLcwhV/Captura-de-Tela-2021-02-19-a-s-00-06-00.png',
-			'url' => 'url',
-			'price' => '122',
-			'price_formatted' => 'R$ 122,00',
-			'name' => 'Grazi Massafera',
-			'category' => 'BBB5',
-			'category_url' => '#/tag/bbb5'
-		],
-	];
-	return $talents;
+    $args = [
+        'numberposts' => $quantity,
+        'post_status' => 'publish',
+        'order' => 'RAND',
+        'orderby' => 'DESC'
+    ];
+    $talents = _get_ifon_talents_by_args( $args );
+    return $talents;
 }
