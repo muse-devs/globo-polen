@@ -303,7 +303,10 @@ function polen_front_get_talent_videos($items = array(
 ?>
 	<div class="talent-carousel">
 		<?php foreach ($items as $item) : ?>
-			<img src="<?= $item['image']; ?>" alt="<?= $item['title']; ?>" data-vimeo-url="<?= $item['video']; ?>">
+			<figure class="item">
+				<img src="<?= $item['image']; ?>" alt="<?= $item['title']; ?>" data-vimeo-url="<?= $item['video']; ?>">
+				<a href="#como" class="player-button"></a>
+			</figure>
 		<?php endforeach; ?>
 	</div>
 
