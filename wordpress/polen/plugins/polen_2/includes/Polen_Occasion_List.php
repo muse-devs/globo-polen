@@ -109,11 +109,14 @@ class Polen_Occasion_List
         
         $offset = ( !empty( $_offset )) ? ",{$_offset}" : '';
         $paged = ($_limit - 1) * $_offset;
-        $limit = ( !empty( $_limit )) ? "LIMIT {$paged}{$offset}" : '';
+
+        $limit = '';
+        if( !empty( $_offset ) ){
+            $limit = ( !empty( $_limit )) ? "LIMIT {$paged}{$offset}" : '';
+        }
         
         $query = !empty($_query) ? $wpdb->prepare(" AND (type LIKE '%%%s%%') ", $_query) : '';        
         $sql = $this->make_sql_select( $wpdb, $query, $orderby, $limit );
-
         $results = $wpdb->get_results( $sql );
         return $results;
     }
