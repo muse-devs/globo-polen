@@ -11,6 +11,7 @@ class Polen_Cart
             add_action( 'wp_ajax_nopriv_polen_update_cart_item', array( $this, 'polen_update_cart_item' ) );
             add_action( 'woocommerce_checkout_create_order_line_item', array( $this, 'polen_cart_line_item' ), 10, 4 );
             add_action( 'polen_before_cart', array( $this, 'polen_save_cart' ), 10 );
+            add_filter( 'woocommerce_add_to_cart_validation', array( $this, 'empty_before_add_to_cart' ), 20 );
         }
     }
 
@@ -90,46 +91,18 @@ class Polen_Cart
                     WC()->cart->set_session();
 
                     $cart_updated = true;
-					/*
-                    $_product = $values['data'];
-
-					// Skip product if no updated quantity was posted.
-					if ( ! isset( $cart_totals[ $cart_item_key ] ) || ! isset( $cart_totals[ $cart_item_key ]['qty'] ) ) {
-                        continue;
-					}
-
-					// Update cart validation.
-					$passed_validation = apply_filters( 'woocommerce_update_cart_validation', true, $cart_item_key, $values, $quantity );
-
-					// is_sold_individually.
-					if ( $_product->is_sold_individually() && $quantity > 1 ) {
-						/* Translators: %s Product title. */
-					//	wc_add_notice( sprintf( __( 'You can only have 1 %s in your cart.', 'woocommerce' ), $_product->get_name() ), 'error' );
-					//	$passed_validation = false;
-				//	}
-                        /*
-					if ( $passed_validation ) {
-						WC()->cart->set_quantity( $cart_item_key, $quantity, false );
-						$cart_updated = true;
-					}
-                    */
 				}
 			}
-
-            // Trigger action - let 3rd parties update the cart if they need to and update the $cart_updated variable.
 			$cart_updated = apply_filters( 'woocommerce_update_cart_action_cart_updated', $cart_updated );
-            /*
-            if ( $cart_updated ) {
-				WC()->cart->calculate_totals();
-                wp_safe_redirect( wc_get_checkout_url() );
-				exit;
-			}else {
-				//wc_add_notice( __( 'Cart updated.', 'woocommerce' ), apply_filters( 'woocommerce_cart_updated_notice_type', 'success' ) );
-				//$referer = remove_query_arg( array( 'remove_coupon', 'add-to-cart' ), ( wp_get_referer() ? wp_get_referer() : wc_get_cart_url() ) );
-				wp_safe_redirect( wc_get_cart_url() );
-				exit;
-			}
-            */
+            WC()->cart->calculate_totals();
 		}
     }
+
+    public function empty_before_add_to_cart( $passed ) {
+        if( !WC()->cart->is_empty() ){
+            WC()->cart->empty_cart();
+        }    
+        return $passed;
+    }
+
 }
