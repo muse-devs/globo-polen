@@ -24,7 +24,35 @@ class Polen_Talent
             add_filter( 'manage_edit-product_columns', array( $this, 'talent_filter_product_column' ),10, 1 );
             add_filter( 'manage_users_custom_column', array( $this, 'talent_custom_users_value' ), 10, 3 );
             add_action( 'init', array( $this, 'talent_taxonomy' ) );
+
+            /**
+             * Modifica a URL do Talento (Usuário)
+             */
+            // add_action( 'init', array( $this, 'rewrites' ) );
+
+            /**
+             * Modifcar o texto do botão comprar
+             */
+            add_filter( 'woocommerce_product_single_add_to_cart_text', array( $this, 'change_single_add_to_cart_text' ) );  // Single de produtos
+            add_filter( 'woocommerce_product_add_to_cart_text', array( $this, 'change_custom_product_add_to_cart_text' ) ); // Archive (listagem) de produtos
+
+            /**
+             * Define que o usuário só pode comprar um produto por vez
+             */
+            add_filter( 'woocommerce_is_sold_individually', array( $this, 'sold_individually' ), 10, 2 );
+
+            /**
+             * Remove o notice ao adicionar o produto no carrinho.
+             */
+            add_filter( 'wc_add_to_cart_message_html', '__return_false' );
         }
+    }
+
+    public function rewrites() {
+        global $wp_rewrite;
+        $wp_rewrite->author_base = $this->tallent_slug ;
+        add_rewrite_rule( $this->tallent_slug . '/([^/]+)/?$', 'index.php?' . $this->tallent_slug . '=$matches[1]', 'top' );
+        add_rewrite_rule( $this->tallent_slug . '/([^/]+)/page/?([0-9]{1,})/?$', 'index.php?' . $this->tallent_slug . '=$matches[1]&paged=$matches[2]', 'top' );
     }
 
     /**
@@ -194,5 +222,33 @@ class Polen_Talent
         } else {
             return false;
         }
+    }
+
+    /**
+     * Modifcar o texto do botão comprar na Single
+     */
+    public function change_single_add_to_cart_text() {
+        global $post;
+        $product = wc_get_product( $post->ID );
+        $label = __( 'Pedir vídeo R$ ', 'polen' ) . number_format( (float) $product->get_price(), 2, ',', '.' );
+        return $label;
+    }
+
+    /**
+     * Modifcar o texto do botão comprar no archive (listagem)
+     */
+    public function change_custom_product_add_to_cart_text() {
+        global $post;
+        $product = wc_get_product( $post->ID );
+        $label = __( 'Pedir vídeo R$ ', 'polen' ) . number_format( (float) $product->get_price(), 2, ',', '.' );
+        return $label;
+    }
+
+    /**
+     * Define que o usuário só pode comprar um produto por vez
+     */
+    public function sold_individually( $return, $product ) {
+        $return = true;
+        return $return;
     }
 }

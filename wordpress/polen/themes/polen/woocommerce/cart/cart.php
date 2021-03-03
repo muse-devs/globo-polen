@@ -17,19 +17,28 @@
 
 defined( 'ABSPATH' ) || exit;
 
-//do_action( 'polen_before_cart' );
+do_action( 'woocommerce_before_cart' ); 
 
 use Polen\Includes\Polen_Occasion_List;
 $occasion_list = new Polen_Occasion_List();
 
 echo 'Passo 1/3';
-do_action( 'woocommerce_before_cart' );
 ?>
 
 <form class="woocommerce-cart-form" action="<?php echo esc_url( wc_get_checkout_url() ); ?>" method="post">
 	<?php do_action( 'woocommerce_before_cart_table' ); ?>
 
 	<table class="shop_table shop_table_responsive cart woocommerce-cart-form__contents" cellspacing="0">
+		<thead>
+			<tr>
+				<th class="product-remove">&nbsp;</th>
+				<th class="product-thumbnail">&nbsp;</th>
+				<th class="product-name"><?php esc_html_e( 'Product', 'woocommerce' ); ?></th>
+				<th class="product-price"><?php esc_html_e( 'Price', 'woocommerce' ); ?></th>
+				<th class="product-quantity"><?php esc_html_e( 'Quantity', 'woocommerce' ); ?></th>
+				<th class="product-subtotal"><?php esc_html_e( 'Subtotal', 'woocommerce' ); ?></th>
+			</tr>
+		</thead>
 		<tbody>
 			<?php do_action( 'woocommerce_before_cart_contents' ); ?>
 
@@ -92,16 +101,14 @@ do_action( 'woocommerce_before_cart' );
 							<div>Review</div> 
 							<div>5.0</div>
 						</td>
-					</tr>
+						</tr>
 					<?php
 				}
 			}
-
-			//var_dump($cart_item);
 			?>
 
 			<?php do_action( 'woocommerce_cart_contents' ); ?>
-			
+
 			<tr>
 				<td colspan="4">
 
@@ -248,15 +255,6 @@ do_action( 'woocommerce_before_cart' );
 
 				</td>
 			</tr>
-			
-			<tr>
-				<td colspan="4" class="actions">
-					<?php do_action( 'woocommerce_cart_actions' ); ?>
-
-					<?php wp_nonce_field( 'woocommerce-cart', 'woocommerce-cart-nonce' ); ?>
-				</td>
-			</tr>
-			<?php do_action( 'woocommerce_after_cart_contents' ); ?>
 			<tr>
 				<td colspan="6" class="actions">
 
@@ -270,13 +268,15 @@ do_action( 'woocommerce_before_cart' );
 					<!--button type="submit" class="button" name="update_cart" value="<?php esc_attr_e( 'Update cart', 'woocommerce' ); ?>"><?php esc_html_e( 'Update cart', 'woocommerce' ); ?></button-->
 
 
-					<button type="submit" class="button" name="update_cart" value="<?php esc_attr_e( 'Update cart', 'woocommerce' ); ?>"><?php esc_html_e( 'Update cart', 'woocommerce' ); ?></button>
+					<button type="submit" class="button" name="" value="<?php esc_attr_e( 'Update cart', 'woocommerce' ); ?>"><?php esc_html_e( 'Update cart', 'woocommerce' ); ?></button>
 
-					<?php do_action( 'woocommerce_cart_actions' ); ?>
+					<?php //do_action( 'woocommerce_cart_actions' ); ?>
 
 					<?php wp_nonce_field( 'woocommerce-cart', 'woocommerce-cart-nonce' ); ?>
 				</td>
 			</tr>
+
+			<?php do_action( 'woocommerce_after_cart_contents' ); ?>
 		</tbody>
 	</table>
 	<?php do_action( 'woocommerce_after_cart_table' ); ?>

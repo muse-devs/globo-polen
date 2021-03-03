@@ -30,7 +30,7 @@ function _get_info_talent_by_product_id( \WC_Product $talent_object ) {
         $talent['ID'] = $talent_object->get_id();
         $talent['image'] = $talent_object->get_image();
         //TODO pegar o parma link do artista? qual vai ser
-        $talent['url'] = $talent_object->get_permalink();
+        $talent['talent_url'] = $talent_object->get_permalink();
         $talent['price'] = $talent_object->get_price();
         $talent['price_formatted'] = $talent_object->get_price_html();
         $talent['name'] = $talent_object->get_title();
