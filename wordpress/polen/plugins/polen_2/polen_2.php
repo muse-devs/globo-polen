@@ -15,7 +15,7 @@
  * @wordpress-plugin
  * Plugin Name:       Polen
  * Plugin URI:        polen.app
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Description:       Plugin da Polen, responsavel por todas as regras de negocio do Polen.app
  * Version:           1.0.0
  * Author:            Rodolfo
  * Author URI:        rodolfoneto.com.br
