@@ -304,19 +304,28 @@ function polen_front_get_talent_videos($items = array(
 	<div class="talent-carousel">
 		<?php foreach ($items as $item) : ?>
 			<figure class="item">
-				<img src="<?= $item['image']; ?>" alt="<?= $item['title']; ?>" data-vimeo-url="<?= $item['video']; ?>">
+				<img src="<?= $item['image']; ?>" alt="<?= $item['title']; ?>" data-url="<?= $item['video']; ?>">
 				<a href="#como" class="player-button"></a>
 			</figure>
 		<?php endforeach; ?>
 	</div>
 
-	<div id="polenVideo" data-vimeo-url="https://vimeo.com/297461374" data-vimeo-width="800"></div>
-	<script src="https://player.vimeo.com/api/player.js"></script>
+	<!-- <div id="polenVideo" data-vimeo-url=""></div> -->
+	<!-- <script src="https://player.vimeo.com/api/player.js"></script> -->
 	<script>
-		var videoPlayer = new Vimeo.Player('polenVideo');
-		videoPlayer.getVideoId().then(function(id) {
-			console.log('id:', id);
+		jQuery(document).ready(function() {
+			jQuery('.talent-carousel').slick({
+				infinite: true,
+				speed: 300,
+				slidesToShow: 1,
+				variableWidth: true
+			});
 		});
+
+		// var videoPlayer = new Vimeo.Player('polenVideo');
+		// videoPlayer.getVideoId().then(function(id) {
+		// 	console.log('id:', id);
+		// });
 	</script>
 <?php
 	$data = ob_get_contents();

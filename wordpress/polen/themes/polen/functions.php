@@ -151,6 +151,7 @@ function polen_scripts() {
 
 	// wp_enqueue_script( 'polen-bootstrap-bundle', 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js', array(), '4.6.0', true );
 	// wp_enqueue_script( 'polen-navigation', TEMPLATE_URI . '/assets/js/navigation.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'slick-slider', TEMPLATE_URI . '/assets/slick/slick.min.js', array("jquery"), _S_VERSION, true );
 
 	// if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 	// 	wp_enqueue_script( 'comment-reply' );
