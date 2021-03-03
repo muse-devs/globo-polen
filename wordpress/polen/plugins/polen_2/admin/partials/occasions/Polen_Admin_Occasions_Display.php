@@ -3,6 +3,7 @@
 namespace Polen\Admin\Partials\Occasions;
 
 use \Polen\Includes\Polen_Occasion_List;
+
 class Polen_Admin_Occasions_Display extends \WP_List_Table
 {
 
