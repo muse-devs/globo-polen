@@ -125,7 +125,7 @@ use Polen\Includes\Polen_Bancos;
                                     <input type="text" name="nome_fantasia" value="<?php echo ( isset( $vendorInfo->nome_fantasia ) ) ? $vendorInfo->nome_fantasia : ''; ?>" autocomplete="password" class="widefat" maxlength="255">
                                 </td>
                             </tr>
-                            <tr class="natureza-juridica-pj">
+                            <tr class="natureza-juridica-pj" id="cnpj-natureza-juridica-pj">
                                 <th>
                                     CNPJ
                                 </th>
@@ -151,7 +151,7 @@ use Polen\Includes\Polen_Bancos;
                                     <input type="text" name="nome" value="<?php echo ( isset( $vendorInfo->nome ) ) ? $vendorInfo->nome : ''; ?>" autocomplete="password" class="widefat" maxlength="255">
                                 </td>
                             </tr>
-                            <tr class="natureza-juridica-pf">
+                            <tr class="natureza-juridica-pf" id="cpf-natureza-juridica-pf">
                                 <th>
                                     CPF
                                 </th>

@@ -21,9 +21,13 @@
                 if( $('#polen_natureza_juridica').val() == 'PJ' ) {
                     $('.natureza-juridica-pj').show();
                     $('.natureza-juridica-pf').hide();
+                    addRequired($('#cnpj-natureza-juridica-pj'));
+                    removeRequired($('#cpf-natureza-juridica-pf'));
                 } else if( $('#polen_natureza_juridica').val() == 'PF' ) {
                     $('.natureza-juridica-pf').show();
                     $('.natureza-juridica-pj').hide();
+                    removeRequired($('#cnpj-natureza-juridica-pj'));
+                    addRequired($('#cpf-natureza-juridica-pf'));
                 }
             });
 
@@ -40,6 +44,15 @@
                 if( $('#tr_talent_alias').length > 0 ) {
                     addRequired( $('#tr_talent_alias') );
                 }
+
+                if( $('#polen_natureza_juridica').val() == 'PJ') {
+                    addRequired($('#cnpj-natureza-juridica-pj'));
+                    removeRequired($('#cpf-natureza-juridica-pf'));
+                } else {
+                    removeRequired($('#cnpj-natureza-juridica-pj'));
+                    addRequired($('#cpf-natureza-juridica-pf'));
+                }
+
             } else {
                 $(".metaboxSellerData").map( (index, element ) => {
                     $(element).hide();
@@ -48,6 +61,8 @@
                 if( $('#tr_talent_alias').length > 0 ) {
                     removeRequired( $('#tr_talent_alias') );
                 }
+                removeRequired($('#cnpj-natureza-juridica-pj'));
+                removeRequired($('#cpf-natureza-juridica-pf'));
             }
 
             if( $( '#polen_banco').length > 0 ) {
@@ -94,12 +109,23 @@
             if( $('#tr_talent_alias').length > 0 ) {
                 addRequired( $('#tr_talent_alias') );
             }
+
+            if( $('#polen_natureza_juridica').val() == 'PJ') {
+                addRequired($('#cnpj-natureza-juridica-pj'));
+                removeRequired($('#cpf-natureza-juridica-pf'));
+            } else {
+                removeRequired($('#cnpj-natureza-juridica-pj'));
+                addRequired($('#cpf-natureza-juridica-pf'));
+            }
+
         } else {
             $("#metaboxSellerData").hide();
             //Tirando o required do slug do talent
             if( $('#tr_talent_alias').length > 0 ) {
                 removeRequired( $('#tr_talent_alias') );
             }
+            removeRequired($('#cnpj-natureza-juridica-pj'));
+            removeRequired($('#cpf-natureza-juridica-pf'));
         }
     });
 
