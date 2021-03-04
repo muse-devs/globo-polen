@@ -36,7 +36,7 @@ use Polen\Includes\Polen_Bancos;
                                     Slug do Perfil
                                 </th>
                                 <td>
-                                    <input type="text" name="talent_alias" value="<?php echo ( isset( $vendorInfo->talent_alias ) ) ? $vendorInfo->talent_alias : ''; ?>" autocomplete="password" class="widefat" maxlength="255">
+                                    <input type="text" name="talent_alias" value="<?php echo ( isset( $vendorInfo->talent_alias ) ) ? $vendorInfo->talent_alias : ''; ?>" aria-required="true" autocomplete="password" class="widefat" maxlength="255">
                                     <small>Ex: <?php bloginfo( 'url' ); ?><strong>/nome-do-talento/</strong></small>
                                 </td>
                             </tr>
@@ -56,14 +56,14 @@ use Polen\Includes\Polen_Bancos;
                                     <input type="text" name="profissao" value="<?php echo ( isset( $vendorInfo->profissao ) ) ? $vendorInfo->profissao : ''; ?>" autocomplete="password" class="widefat" maxlength="255">
                                 </td>
                             </tr>
-                            <tr>
+<!--                            <tr>
                                 <th>
                                     Descrição
                                 </th>
                                 <td>
                                     <textarea name="descricao" rows="5" cols="80" class="widefat" style="width: 100%;"><?php echo ( isset( $vendorInfo->descricao ) ) ? $vendorInfo->descricao : ''; ?></textarea>
                                 </td>
-                            </tr>
+                            </tr>-->
                         </table>
                     </div>
 
@@ -114,7 +114,7 @@ use Polen\Includes\Polen_Bancos;
                                     Razão Social
                                 </th>
                                 <td>
-                                    <input type="text" name="razao_social" value="<?php echo ( isset( $vendorInfo->razao_social ) ) ? $vendorInfo->razao_social : ''; ?>" autocomplete="password" class="widefat" maxlength="255">
+                                    <input type="text" name="razao_social" required value="<?php echo ( isset( $vendorInfo->razao_social ) ) ? $vendorInfo->razao_social : ''; ?>" autocomplete="password" class="widefat" maxlength="255">
                                 </td>
                             </tr>
                             <tr class="natureza-juridica-pj">

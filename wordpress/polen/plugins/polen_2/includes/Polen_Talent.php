@@ -59,7 +59,7 @@ class Polen_Talent
     }
 
     /**
-     * Save tallent
+     * Save tallent as product author
      */
     function save_talent_on_product( $post_id ){
         if( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
@@ -71,8 +71,9 @@ class Polen_Talent
 
             if ( ! $post_author ) { return; }
 
-            global $wpdb;
-            $wpdb->update( 'wp_posts', array( 'post_author' => $post_author ), array( 'ID' => $post_id) );
+//            global $wpdb;
+//            $wpdb->update( 'wp_posts', array( 'post_author' => $post_author ), array( 'ID' => $post_id) );
+            $this->set_product_to_talent( $post_id, $post_author );
         }	
     }
 
@@ -80,9 +81,13 @@ class Polen_Talent
         $user_data = get_userdata( $user_id );
         $user_roles = $user_data->roles;
         
+        $polen_update_field = new Polen_Update_Fields();
+        
         //verify if user is a talent
         if ( in_array( 'user_talent', $user_roles, true ) ) {
             update_user_meta( $user_id, 'talent_enabled', '0' );
+            $vendor_data = $polen_update_field->get_vendor_data( $user_id );
+            $sku = $vendor_data->talent_alias ?? null;
             //verify if the talent has a product
             $user_product = new \WP_Query( array( 'author' => $user_id ) );
             if ( !$user_product->have_posts() ) {
@@ -91,6 +96,7 @@ class Polen_Talent
                 $product->set_name( $user->first_name . ' ' . $user->last_name );
                 $product->set_status( 'draft' );
                 $product->set_slug( sanitize_title( $user->first_name . ' ' . $user->last_name ) );
+                $product->set_sku( $sku );
                 $product->set_virtual( true );
                 $product->set_sold_individually( 'yes' );
                 $product->save();
