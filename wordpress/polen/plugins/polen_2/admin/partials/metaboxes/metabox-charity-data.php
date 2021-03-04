@@ -7,12 +7,12 @@ if ( ! defined( 'WPINC' ) ) {
 use Polen\Includes\Polen_Update_Fields;
 use Polen\Includes\Polen_Bancos;
 ?>
-<div id="metaboxSellerData">
+<div class="metaboxSellerData" id="metaboxSellerData">
     <h2>Dados da Instituição de Caridade</h2>
     <?php
     $current_screen = get_current_screen();
     $Polen_Update_Fields = new Polen_Update_Fields();
-    $vendorInfo = $Polen_Update_Fields->get_vendor_data( intval( $_REQUEST['user_id'] ) );
+    $vendorInfo = $Polen_Update_Fields->get_vendor_data( intval( $_REQUEST['user_id'] ?? null ) );
     ?>
     <table class="form-table">
         <tbody>

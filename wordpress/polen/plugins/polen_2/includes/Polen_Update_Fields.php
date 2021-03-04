@@ -54,13 +54,19 @@ class Polen_Update_Fields
         wp_enqueue_script('polen-admin-script', Polen_Admin::get_js_url( 'admin.js' ), array( 'jquery', 'jquery-ui-core', 'jquery-ui-tabs' ), null, true );
     }
 
-    public function fields( $user ) {
-        if( $user->caps['user_talent'] == true ){
-            require_once Polen_Admin::get_metabox_path( 'metabox-talent-data.php' );;
-        }
-        if( $user->caps['user_charity'] == true ){
+    public function fields( $user )
+    {
+        if( $user instanceof \WP_User ) {
+            if( $user->has_cap('user_talent') == true ){
+                require_once Polen_Admin::get_metabox_path( 'metabox-talent-data.php' );
+            }
+            if( $user->caps('user_charity') == true ){
+                require_once Polen_Admin::get_metabox_path( 'metabox-charity-data.php' );
+            }
+        } else if ( $user === 'add-new-user' ) {
+            require_once Polen_Admin::get_metabox_path( 'metabox-talent-data.php' );
             require_once Polen_Admin::get_metabox_path( 'metabox-charity-data.php' );
-        }    
+        }
     }
 
     public function get_vendor_data( $user_id ) {

@@ -33,9 +33,21 @@
             $('.polen-cep').mask("99999-999");
 
             if( $('#role').val() == 'user_talent' || $('#role').val() == 'user_charity' ) {
-                $("#metaboxSellerData").show();
+                $(".metaboxSellerData").map( (index, element) => {
+                    $(element).show();
+                });
+                // required do slug do talent
+                if( $('#tr_talent_alias').length > 0 ) {
+                    addRequired( $('#tr_talent_alias') );
+                }
             } else {
-                $("#metaboxSellerData").hide();
+                $(".metaboxSellerData").map( (index, element ) => {
+                    $(element).hide();
+                });
+                //Tirando o required do slug do talent
+                if( $('#tr_talent_alias').length > 0 ) {
+                    removeRequired( $('#tr_talent_alias') );
+                }
             }
 
             if( $( '#polen_banco').length > 0 ) {
@@ -78,8 +90,16 @@
     $(document).on('change', '#role', function() {
         if( $(this).val() == 'user_talent' ) {
             $("#metaboxSellerData").show();
+            // required do slug do talent
+            if( $('#tr_talent_alias').length > 0 ) {
+                addRequired( $('#tr_talent_alias') );
+            }
         } else {
             $("#metaboxSellerData").hide();
+            //Tirando o required do slug do talent
+            if( $('#tr_talent_alias').length > 0 ) {
+                removeRequired( $('#tr_talent_alias') );
+            }
         }
     });
 
@@ -88,3 +108,11 @@
         $('#store_email').val( $('#email').val() );
     });
 })(jQuery);
+
+function addRequired( element ) {
+    element.addClass('form-field form-required');
+}
+
+function removeRequired( element ) {
+    element.removeClass('form-field form-required');
+}
