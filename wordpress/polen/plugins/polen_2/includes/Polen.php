@@ -8,6 +8,7 @@ use Polen\Admin\Polen_Admin;
 use Polen\Includes\Polen_Talent;
 use Polen\Includes\Polen_Occasion_List;
 use Polen\Includes\Polen_Cart;
+use Polen\Includes\Polen_Checkout;
 
 class Polen {
 
@@ -49,6 +50,7 @@ class Polen {
         new Polen_Plugin_Settings( true );
         new Polen_Update_Fields( true );
         new Polen_DisableAdminBar();
+        new Polen_Checkout( true );
     }
 
     /**

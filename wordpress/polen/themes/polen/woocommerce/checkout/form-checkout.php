@@ -26,41 +26,107 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 	echo esc_html( apply_filters( 'woocommerce_checkout_must_be_logged_in_message', __( 'You must be logged in to checkout.', 'woocommerce' ) ) );
 	return;
 }
+use Polen\Includes\Polen_Update_Fields;
 
+$Talent_Fields = new Polen_Update_Fields();
 ?>
 
 <form name="checkout" method="post" class="checkout woocommerce-checkout" action="<?php echo esc_url( wc_get_checkout_url() ); ?>" enctype="multipart/form-data">
+	<div class="row">
+		<div class="col-md-8">
 
-	<?php if ( $checkout->get_checkout_fields() ) : ?>
+			<!-- Cabeçalho do Artista -->
+			<header class="talent-page-header">
+				<div class="row mt-5 d-flex justify-content-between align-items-center">
+					<div class="col-md-5">
+						<div class="row">
+							<?php
+							$_talent = '';
+							foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
+								$_talent = apply_filters( 'woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key );
+								$_talent_name = apply_filters( 'woocommerce_cart_item_name', $_talent->get_name(), $cart_item, $cart_item_key );
+								$Talent_Fields = $Talent_Fields->get_vendor_data( $cart_item['product_id'] );
+							}
+							?>
+							<div class="col-md-12 d-flex justify-content-between align-items-center">
+								<h1 class="talent-name text-truncate" title="<?= $_talent_name; ?>"><?= $_talent_name; ?></h1>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="row">
+							<div class="col-md-6 text-center">
+								<span class="skill-title">Responde em</span>
+							</div>
+							<div class="col-md-6 text-center">
+								<span class="skill-title">Reviews</span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 text-center">
+								<?php polen_icon_clock(); ?>
+								<span class="skill-value"><?= $Talent_Fields->tempo_resposta; ?>h</span>
+							</div>
+							<div class="col-md-6 text-center">
+								<?php polen_icon_star(true); ?>
+								<span class="skill-value"><?= "5.0"; ?></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12"><span class="price">R$ 200</span></div>
+				</div>
+			</header>
 
-		<?php do_action( 'woocommerce_checkout_before_customer_details' ); ?>
 
-		<div class="col2-set" id="customer_details">
-			<div class="col-1">
-				<?php do_action( 'woocommerce_checkout_billing' ); ?>
-			</div>
 
-			<div class="col-2">
-				<?php do_action( 'woocommerce_checkout_shipping' ); ?>
-			</div>
+			<?php if ( $checkout->get_checkout_fields() ) : ?>
+
+				<?php do_action( 'woocommerce_checkout_before_customer_details' ); ?>
+
+				<div class="col2-set" id="customer_details">
+					<div class="col-12">
+						<?php do_action( 'woocommerce_checkout_billing' ); ?>
+					</div>
+
+					<div class="col-12">
+						<?php do_action( 'woocommerce_checkout_shipping' ); ?>
+					</div>
+				</div>
+
+				<?php do_action( 'woocommerce_checkout_after_customer_details' ); ?>
+
+			<?php endif; ?>
+
 		</div>
+		<div class="col-md-4">
+				
+			<?php do_action( 'woocommerce_checkout_before_order_review_heading' ); ?>
+			
+			<h3 id="order_review_heading"><?php esc_html_e( 'Resumo da compra', 'polen' ); ?></h3>
+			
+			<?php do_action( 'woocommerce_checkout_before_order_review' ); ?>
 
-		<?php do_action( 'woocommerce_checkout_after_customer_details' ); ?>
+			<?php 
+			/* pagamento está na mesma action do review
+			<div id="order_review" class="woocommerce-checkout-review-order">
+				<?php do_action( 'woocommerce_checkout_order_review' ); ?>
+			</div>
+				*/ 
+				woocommerce_order_review();
+				?>
+			<?php do_action( 'woocommerce_checkout_after_order_review' ); ?>
+		</div>
+	</div>	
 
-	<?php endif; ?>
-	
-	<?php do_action( 'woocommerce_checkout_before_order_review_heading' ); ?>
-	
-	<h3 id="order_review_heading"><?php esc_html_e( 'Your order', 'woocommerce' ); ?></h3>
-	
-	<?php do_action( 'woocommerce_checkout_before_order_review' ); ?>
-
-	<div id="order_review" class="woocommerce-checkout-review-order">
-		<?php do_action( 'woocommerce_checkout_order_review' ); ?>
-	</div>
-
-	<?php do_action( 'woocommerce_checkout_after_order_review' ); ?>
-
+	<div class="row">	
+		<div class="col-md-12">
+			<?php 
+			woocommerce_checkout_payment();
+			?>
+		</div>
+	</div>		
 </form>
 
 <?php do_action( 'woocommerce_after_checkout_form', $checkout ); ?>

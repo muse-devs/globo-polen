@@ -168,5 +168,4 @@ class Polen_Admin_Occasions_Display extends \WP_List_Table
         }
     }
 
-
 }

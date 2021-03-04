@@ -22,7 +22,7 @@ do_action( 'woocommerce_before_cart' );
 use Polen\Includes\Polen_Occasion_List;
 $occasion_list = new Polen_Occasion_List();
 
-echo 'Passo 1/3';
+echo 'Passo 1/2';
 ?>
 
 <form class="woocommerce-cart-form" action="<?php echo esc_url( wc_get_checkout_url() ); ?>" method="post">
