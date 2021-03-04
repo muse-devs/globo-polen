@@ -67,3 +67,9 @@
 </body>
 
 </html>
+
+<?php if( defined( 'DEV_ENV' ) && DEV_ENV ) { ?>
+<!--
+<?php print_r( get_included_files() ); ?>
+-->
+<?php } ?>

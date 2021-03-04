@@ -125,33 +125,34 @@
 				font-size: 44px;
 			}
 		}
-		.link {
-			position: relative;
-			display: inline-flex;
-			align-items: center;
-			font-size: 16px;
-			&::before {
-				content: "";
-				display: inline-block;
-				margin-right: 24px;
-				width: 60px;
-				height: 60px;
-				border-radius: 50%;
-				background-color: $primary;
-			}
-			&::after {
-				content: "";
-				position: absolute;
-				display: inline-block;
-				width: 0;
-				height: 0;
-				left: 25px;
-				border-top: 8px solid transparent;
-				border-bottom: 8px solid transparent;
+	}
+}
 
-				border-left: 12px solid white;
-			}
-		}
+.player-button {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	font-size: 16px;
+	&::before {
+		content: "";
+		display: inline-block;
+		margin-right: 24px;
+		width: 60px;
+		height: 60px;
+		border-radius: 50%;
+		background-color: $primary;
+	}
+	&::after {
+		content: "";
+		position: absolute;
+		display: inline-block;
+		width: 0;
+		height: 0;
+		left: 25px;
+		border-top: 8px solid transparent;
+		border-bottom: 8px solid transparent;
+
+		border-left: 12px solid white;
 	}
 }
 

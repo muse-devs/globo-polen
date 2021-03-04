@@ -1,5 +1,24 @@
 <?php
 
+function polen_icon_share()
+{
+	echo '<i class="bi bi-share-fill"></i>';
+}
+
+function polen_icon_clock()
+{
+	echo '<i class="bi bi-clock"></i>';
+}
+
+function polen_icon_star($active = false)
+{
+	if ($active) {
+		echo '<i class="bi bi-star-fill" style="color: #FFF963;"></i>';
+	} else {
+		echo '<i class="bi bi-star"></i>';
+	}
+}
+
 function polen_front_get_banner()
 {
 	ob_start();
@@ -12,7 +31,7 @@ function polen_front_get_banner()
 			</video>
 			<div class="content">
 				<h2 class="title">Presenteie e<br />surpreenda com vídeos personalizados.</h2>
-				<a href="#como" class="link">Como funciona</a>
+				<a href="#como" class="player-button">Como funciona</a>
 			</div>
 		</div>
 	</section>
@@ -155,8 +174,7 @@ function polen_front_get_artists($items, $title)
 
 function polen_front_get_tutorial()
 {
-	ob_start();
-?>
+	echo '
 	<section class="row my-5 py-4 tutorial">
 		<div class="col-md-12">
 			<header class="row mb-4">
@@ -198,27 +216,92 @@ function polen_front_get_tutorial()
 			</div>
 		</div>
 	</section>
+	';
+}
+
+function polen_front_get_talent_videos($items = array(
+	array("title" => "Video 1", "image" => "http://i.vimeocdn.com/video/731672459_640.jpg", "video" => "https://vimeo.com/280815263"),
+	array("title" => "Video 2", "image" => "http://i.vimeocdn.com/video/649503401_640.jpg", "video" => "https://vimeo.com/229243103"),
+	array("title" => "Video 3", "image" => "http://i.vimeocdn.com/video/735151132_640.jpg", "video" => "https://vimeo.com/297461374"),
+	array("title" => "Video 1", "image" => "http://i.vimeocdn.com/video/731672459_640.jpg", "video" => "https://vimeo.com/280815263"),
+	array("title" => "Video 2", "image" => "http://i.vimeocdn.com/video/649503401_640.jpg", "video" => "https://vimeo.com/229243103"),
+	array("title" => "Video 3", "image" => "http://i.vimeocdn.com/video/735151132_640.jpg", "video" => "https://vimeo.com/297461374"),
+	array("title" => "Video 1", "image" => "http://i.vimeocdn.com/video/731672459_640.jpg", "video" => "https://vimeo.com/280815263"),
+	array("title" => "Video 2", "image" => "http://i.vimeocdn.com/video/649503401_640.jpg", "video" => "https://vimeo.com/229243103"),
+	array("title" => "Video 3", "image" => "http://i.vimeocdn.com/video/735151132_640.jpg", "video" => "https://vimeo.com/297461374"),
+))
+{
+	ob_start();
+?>
+	<div class="talent-carousel">
+		<?php foreach ($items as $item) : ?>
+			<figure class="item">
+				<img src="<?= $item['image']; ?>" alt="<?= $item['title']; ?>" data-url="<?= $item['video']; ?>">
+				<a href="#como" class="player-button"></a>
+			</figure>
+		<?php endforeach; ?>
+	</div>
+
+	<!-- <div id="polenVideo" data-vimeo-url=""></div> -->
+	<!-- <script src="https://player.vimeo.com/api/player.js"></script> -->
+	<script>
+		jQuery(document).ready(function() {
+			jQuery('.talent-carousel').slick({
+				infinite: true,
+				speed: 300,
+				slidesToShow: 1,
+				variableWidth: true
+			});
+		});
+
+		// var videoPlayer = new Vimeo.Player('polenVideo');
+		// videoPlayer.getVideoId().then(function(id) {
+		// 	console.log('id:', id);
+		// });
+	</script>
 <?php
 	$data = ob_get_contents();
 	ob_end_clean();
 	echo $data;
 }
 
-function polen_icon_share()
-{
-	echo '<i class="bi bi-share-fill"></i>';
-}
+/**
+ * Gets the thumbnail url for a vimeo video using the video id. This only works for public videos.
+ *
+ * @param string $id        The video id.
+ * @param string $thumbType Thumbnail image size. supported sizes: small, medium (default) and large.
+ *
+ * @return string|bool
+ */
 
-function polen_icon_clock()
+function getVimeoVideoThumbnailByVideoId($id = '', $thumbType = 'large')
 {
-	echo '<i class="bi bi-clock"></i>';
-}
 
-function polen_icon_star($active = false)
-{
-	if ($active) {
-		echo '<i class="bi bi-star-fill" style="color: #FFF963;"></i>';
-	} else {
-		echo '<i class="bi bi-star"></i>';
+	$id = trim($id);
+
+	if ($id == '') {
+		return FALSE;
 	}
+
+	$apiData = unserialize(file_get_contents("http://vimeo.com/api/v2/video/$id.php"));
+
+	if (is_array($apiData) && count($apiData) > 0) {
+
+		$videoInfo = $apiData[0];
+
+		switch ($thumbType) {
+			case 'small':
+				return $videoInfo['thumbnail_small'];
+				break;
+			case 'large':
+				return $videoInfo['thumbnail_large'];
+				break;
+			case 'medium':
+				return $videoInfo['thumbnail_medium'];
+			default:
+				break;
+		}
+	}
+
+	return FALSE;
 }
