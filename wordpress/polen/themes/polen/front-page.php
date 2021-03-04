@@ -18,12 +18,6 @@ get_header();
 
 <main id="primary" class="site-main">
 
-	<?php polen_front_get_talent_header();
-	?>
-
-	<?php polen_front_get_talent_videos();
-	?>
-
 	<?php polen_front_get_banner();
 	?>
 

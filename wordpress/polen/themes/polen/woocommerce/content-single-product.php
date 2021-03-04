@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The template for displaying product content in the single-product.php template
  *
@@ -15,7 +16,7 @@
  * @version 3.6.0
  */
 
-defined( 'ABSPATH' ) || exit;
+defined('ABSPATH') || exit;
 
 global $product;
 
@@ -24,9 +25,9 @@ global $product;
  *
  * @hooked woocommerce_output_all_notices - 10
  */
-do_action( 'woocommerce_before_single_product' );
+do_action('woocommerce_before_single_product');
 
-if ( post_password_required() ) {
+if (post_password_required()) {
 	echo get_the_password_form(); // WPCS: XSS ok.
 	return;
 }
@@ -35,101 +36,82 @@ use Polen\Includes\Polen_Update_Fields;
 
 global $post;
 $Talent_Fields = new Polen_Update_Fields();
-$Talent_Fields = $Talent_Fields->get_vendor_data( $post->post_author );
-$terms = wp_get_object_terms( get_the_ID(), 'product_cat' );
+$Talent_Fields = $Talent_Fields->get_vendor_data($post->post_author);
+$terms = wp_get_object_terms(get_the_ID(), 'product_cat');
 ?>
-<div id="product-<?php the_ID(); ?>" <?php wc_product_class( '', $product ); ?>>
+<div id="product-<?php the_ID(); ?>" <?php wc_product_class('', $product); ?>>
 
 	<!-- Cabeçalho do Artista -->
-	<div class="row m-4">
-		<div class="col-4">
-			<h2><?php the_title(); ?></h2>
-			<?php 
-			$terms_ids = array();
-			if( count( $terms ) > 0 ) {
-				foreach( $terms as $k => $term ) {
-					$terms_ids[] = $term->term_id;
-					echo '<span style="background-color: #dedede; color: #303030; padding: 3px; margin: 5px;">' . $term->name . '</span>';
-				}
-			}
-			?>
+	<header class="talent-page-header">
+		<div class="row mt-5 d-flex justify-content-between align-items-center">
+			<div class="col-md-5">
+				<div class="row">
+					<div class="col-md-12 d-flex justify-content-between align-items-center">
+						<h1 class="talent-name text-truncate" title="<?= get_the_title(); ?>"><?= get_the_title(); ?></h1>
+						<div class="talent-share ml-4">
+							<?php polen_icon_share(); ?>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+					<?php if (count($terms) > 0) : ?>
+						<?php foreach ($terms as $k => $term) : ?>
+							<a href="<?= get_tag_link($term); ?>" class="tag-link mb-2"><?= $term->name; ?></a>
+						<?php endforeach; ?>
+					</div>
+					<?php endif; ?>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="row">
+					<div class="col-md-6 text-center">
+						<span class="skill-title">Responde em</span>
+					</div>
+					<div class="col-md-6 text-center">
+						<span class="skill-title">Reviews</span>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6 text-center">
+						<?php polen_icon_clock(); ?>
+						<span class="skill-value"><?= $Talent_Fields->tempo_resposta; ?>h</span>
+					</div>
+					<div class="col-md-6 text-center">
+						<?php polen_icon_star(true); ?>
+						<span class="skill-value"><?= "5.0"; ?></span>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<?php //echo woocommerce_template_single_add_to_cart();
+				?>
+				<button class="btn btn-primary btn-lg btn-block btn-get-video">Pedir vídeo R$ 200</button>
+			</div>
 		</div>
-		<div class="col">
-			Responde em<br>
-			<?php echo $Talent_Fields->tempo_resposta; ?>
+		<div class="row">
+			<div class="col-md-12"><span class="price">R$ 200</span></div>
 		</div>
-		<div class="col">
-			Avaliações<br>
-			5
-		</div>
-		<div class="col-3" style="text-align: right;">
-			<?php echo woocommerce_template_single_add_to_cart(); ?>
-		</div>
-	</div>
+	</header>
 
 	<!-- Vídeos -->
-	<div class="row">
-		<div class="col-5" style="height: 300px; background-color: #dedede; vertical-align: middle; text-align: center; padding: 15% 0 15% 0;">
-			Vídeo 1
-		</div>
-		<div class="col" style="height: 300px; background-color: #dedede; vertical-align: middle; text-align: center; padding: 15% 0 15% 0; margin-left: 5px;">
-			Vídeo 2
-		</div>
-		<div class="col" style="height: 300px; background-color: #dedede; vertical-align: middle; text-align: center; padding: 15% 0 15% 0; margin-left: 5px;">
-			Vídeo 3
-		</div>
-	</div>
+	<?php polen_front_get_talent_videos(); ?>
 
 	<!-- Descrição? -->
-	<div class="row">
+	<!-- <div class="row">
 		<div class="col m-5">
 			<h3>Descrição</h3>
 		</div>
 	</div>
 
 	<div class="row">
-		<p><?php echo $Talent_Fields->descricao; ?></p>
-	</div>
+		<p><?php //echo $Talent_Fields->descricao;
+			?></p>
+	</div> -->
 
 	<!-- Como funciona? -->
-	<div class="row">
-		<div class="col m-5 text-center">
-			<h1>Como funciona?</h1>
-		</div>
-	</div>
+	<?php polen_front_get_tutorial(); ?>
 
-	<div class="row">
-		<p>Presenteie e surpreenda com vídeos personalizados.</p>
-	</div>
-
-	<div class="row" style="color: #000 !important;">
-		<div class="col-4">
-			<div class="card">
-				<div class="card-body">
-					<h5 class="card-title">Conecte-se aos ídolos</h5>
-					<p class="card-text">Peça um vídeo personalizado com o seu ídolo para celebar ocasiões especiais.</p>
-				</div>
-			</div>
-		</div>
-		<div class="col-4">
-			<div class="card">
-				<div class="card-body">
-					<h5 class="card-title">Receba sua encomenda</h5>
-					<p class="card-text">Ídolo recebe o seu pedido, atende e entrega pela plataforma.</p>
-				</div>
-			</div>
-		</div>
-		<div class="col-4">
-			<div class="card">
-				<div class="card-body">
-					<h5 class="card-title">Mande para todo mundo</h5>
-					<p class="card-text">Você pode enviar o vídeo para os amigos ou postar nas redes.</p>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<p>&nbsp;</p>
 	<!-- Artistas Relacionados -->
 	<div class="row">
 		<div class="col m-5 text-center">
@@ -140,26 +122,36 @@ $terms = wp_get_object_terms( get_the_ID(), 'product_cat' );
 	<div class="row" style="color: #000 !important;">
 		<div class="col">
 			<?php
-			if( count( $terms_ids ) > 0 ) {
-				$others = get_objects_in_term( $terms_ids, 'product_cat' );
-				if( count( $others ) ) {
-					foreach( $others as $k => $id ) {
-						$product = wc_get_product( $id );
-			?>
-			<div class="card">
-				<div class="card-body">
-					<h5 class="card-title"><?php echo $product->get_title(); ?></h5>
-					<p class="card-text">Você pode enviar o vídeo para os amigos ou postar nas redes.</p>
-				</div>
-			</div>
-			<?php
-					}
+			$terms_ids = array();
+			if (count($terms) > 0) {
+				foreach ($terms as $k => $term) {
+					$terms_ids[] = $term->term_id;
 				}
 			}
-			?>
+			if (count($terms_ids) > 0) : ?>
+				<?php $others = get_objects_in_term($terms_ids, 'product_cat'); ?>
+				<?php if (count($others)) : ?>
+					<div class="row d-flex justify-content-between flex-wrap">
+						<?php foreach ($others as $k => $id) :
+							$product = wc_get_product($id);
+						?>
+							<?php
+							polen_front_get_card(array(
+								"talent_url" => "",
+								"image" => wp_get_attachment_url($product->get_image_id()),
+								"name" => $product->get_title(),
+								"price" => $product->get_regular_price(),
+								"category_url" => "",
+								"category" => ""
+							), "small");
+							?>
+						<?php endforeach; ?>
+					</div>
+				<?php endif; ?>
+			<?php endif; ?>
 		</div>
 	</div>
 
 </div>
 
-<?php do_action( 'woocommerce_after_single_product' ); ?>
+<?php do_action('woocommerce_after_single_product'); ?>
