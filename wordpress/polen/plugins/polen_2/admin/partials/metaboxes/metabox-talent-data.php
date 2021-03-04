@@ -16,7 +16,7 @@ use Polen\Includes\Polen_Bancos;
     <table class="form-table">
         <tbody>
             <td>
-                <div id="PolenVendorTabs">
+                <div id="PolenVendorTabs" class="PolenVendorTabs">
                     <ul>
                         <li><a href="#PolenVendorProfileTab0">Geral</a></li>
                         <li><a href="#PolenVendorProfileTab1">Dados do Talento</a></li>
@@ -36,7 +36,7 @@ use Polen\Includes\Polen_Bancos;
                                     Slug do Perfil
                                 </th>
                                 <td>
-                                    <input type="text" name="talent_alias" value="<?php echo ( isset( $vendorInfo->talent_alias ) ) ? $vendorInfo->talent_alias : ''; ?>" aria-required="true" autocomplete="password" class="widefat" maxlength="255">
+                                    <input type="text" name="talent_alias" value="<?php echo ( isset( $vendorInfo->talent_alias ) ) ? $vendorInfo->talent_alias : ''; ?>" autocomplete="password" class="widefat" maxlength="255">
                                     <small>Ex: <?php bloginfo( 'url' ); ?><strong>/nome-do-talento/</strong></small>
                                 </td>
                             </tr>

@@ -17,7 +17,7 @@ use Polen\Includes\Polen_Bancos;
     <table class="form-table">
         <tbody>
             <td>
-                <div id="PolenVendorTabs">
+                <div id="PolenVendorTabs" class="PolenVendorTabs">
                     <ul>
                         <li><a href="#PolenVendorProfileTab1">Dados da Instituição</a></li>
                         <li><a href="#PolenVendorProfileTab2">Informações de Contato</a></li>
