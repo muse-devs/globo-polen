@@ -39,10 +39,30 @@ class Polen_Update_Fields
             add_action( 'woocommerce_before_checkout_billing_form', array( $this, 'add_cpf_and_phone_to_checkout') );
             add_action( 'woocommerce_checkout_update_order_meta', array( $this, 'save_order_meta_from_checkout' ) );
             */
+            
+            // Validacao do Cadastro do usuário
+            add_action('user_profile_update_errors', array( $this, 'check_role_talent_fields' ), 10, 3);
         }
 
         global $wpdb;
         $this->table_talent = $wpdb->base_prefix . 'polen_talents';
+    }
+
+    public function check_role_talent_fields( \WP_Error $errors, $update, $user )
+    {
+        if( 'user_talent' === $user->role ) {
+            if( empty( $_REQUEST['talent_alias'] )) {
+                $errors->add( 'slug-required', 'Slug é obrigatório para função Talento');
+            }
+
+            if( 'PJ' == $_REQUEST['natureza_juridica'] && empty( $_REQUEST['cnpj'] )) {
+                $errors->add('cnpj-required', 'CNPJ é um dado obrigatório, para talentos PJ');
+            }
+
+            if( 'PF' ==  $_REQUEST['natureza_juridica'] && empty( $_REQUEST['cpf'] )) {
+                $errors->add('cpf-required', 'CPF é um dado obrigatório, para talentos PF');
+            }
+        }
     }
 
     public function remove_woocommerce_fields() {
@@ -56,13 +76,19 @@ class Polen_Update_Fields
         wp_enqueue_script('polen-admin-script', Polen_Admin::get_js_url( 'admin.js' ), array( 'jquery', 'jquery-ui-core', 'jquery-ui-tabs' ), null, true );
     }
 
-    public function fields( $user ) {
-        if( $user->caps['user_talent'] == true ){
-            require_once Polen_Admin::get_metabox_path( 'metabox-talent-data.php' );;
-        }
-        if( $user->caps['user_charity'] == true ){
+    public function fields( $user )
+    {
+        if( $user instanceof \WP_User ) {
+            if( $user->has_cap('user_talent') == true ){
+                require_once Polen_Admin::get_metabox_path( 'metabox-talent-data.php' );
+            }
+            if( $user->caps('user_charity') == true ){
+                require_once Polen_Admin::get_metabox_path( 'metabox-charity-data.php' );
+            }
+        } else if ( $user === 'add-new-user' ) {
+            require_once Polen_Admin::get_metabox_path( 'metabox-talent-data.php' );
             require_once Polen_Admin::get_metabox_path( 'metabox-charity-data.php' );
-        }    
+        }
     }
 
     public function get_vendor_data( $user_id ) {

@@ -6,17 +6,17 @@ if ( ! defined( 'WPINC' ) ) {
 use Polen\Includes\Polen_Update_Fields;
 use Polen\Includes\Polen_Bancos;
 ?>
-<div id="metaboxSellerData">
+<div class="metaboxSellerData" id="metaboxSellerData">
     <h2>Dados do Talento</h2>
     <?php
     $current_screen = get_current_screen();
     $Polen_Update_Fields = new Polen_Update_Fields();
-    $vendorInfo = $Polen_Update_Fields->get_vendor_data( intval( $_REQUEST['user_id'] ) );
+    $vendorInfo = $Polen_Update_Fields->get_vendor_data( intval( $_REQUEST['user_id'] ?? null ) );
     ?>
     <table class="form-table">
         <tbody>
             <td>
-                <div id="PolenVendorTabs">
+                <div id="PolenVendorTabs" class="PolenVendorTabs">
                     <ul>
                         <li><a href="#PolenVendorProfileTab0">Geral</a></li>
                         <li><a href="#PolenVendorProfileTab1">Dados do Talento</a></li>
@@ -31,12 +31,12 @@ use Polen\Includes\Polen_Bancos;
                     <!-- Dados da Loja -->
                     <div id="PolenVendorProfileTab0">
                         <table class="form-table">
-                            <tr>
+                            <tr id="tr_talent_alias">
                                 <th>
                                     Slug do Perfil
                                 </th>
                                 <td>
-                                    <input type="text" name="talent_alias" value="<?php echo ( isset( $vendorInfo->talent_alias ) ) ? $vendorInfo->talent_alias : ''; ?>" aria-required="true" autocomplete="password" class="widefat" maxlength="255">
+                                    <input type="text" name="talent_alias" value="<?php echo ( isset( $vendorInfo->talent_alias ) ) ? $vendorInfo->talent_alias : ''; ?>" autocomplete="password" class="widefat" maxlength="255">
                                     <small>Ex: <?php bloginfo( 'url' ); ?><strong>/nome-do-talento/</strong></small>
                                 </td>
                             </tr>
@@ -125,7 +125,7 @@ use Polen\Includes\Polen_Bancos;
                                     <input type="text" name="nome_fantasia" value="<?php echo ( isset( $vendorInfo->nome_fantasia ) ) ? $vendorInfo->nome_fantasia : ''; ?>" autocomplete="password" class="widefat" maxlength="255">
                                 </td>
                             </tr>
-                            <tr class="natureza-juridica-pj">
+                            <tr class="natureza-juridica-pj" id="cnpj-natureza-juridica-pj">
                                 <th>
                                     CNPJ
                                 </th>
@@ -151,7 +151,7 @@ use Polen\Includes\Polen_Bancos;
                                     <input type="text" name="nome" value="<?php echo ( isset( $vendorInfo->nome ) ) ? $vendorInfo->nome : ''; ?>" autocomplete="password" class="widefat" maxlength="255">
                                 </td>
                             </tr>
-                            <tr class="natureza-juridica-pf">
+                            <tr class="natureza-juridica-pf" id="cpf-natureza-juridica-pf">
                                 <th>
                                     CPF
                                 </th>

@@ -4,26 +4,31 @@
             $('#user_login').parent().parent().hide();
             $('#send_user_notification').prop('checked', false);
 
-            $('#PolenVendorTabs').tabs();
-
-            $('.natureza-juridica-pj').hide();
-            $('.natureza-juridica-pf').hide();
+            if($('.PolenVendorTabs').length > 0) {
+                $('.PolenVendorTabs').map( (index, element) => {
+                    $(element).tabs();
+                })
+            }
 
             if( $('#polen_natureza_juridica').val() == 'PJ' ) {
-                $('.natureza-juridica-pj').show();
-                $('.natureza-juridica-pf').hide();
+                showElement( $('.natureza-juridica-pj') );
+                hideElement( $('.natureza-juridica-pf') );
             } else if( $('#polen_natureza_juridica').val() == 'PF' ) {
-                $('.natureza-juridica-pf').show();
-                $('.natureza-juridica-pj').hide();
+                showElement( $('.natureza-juridica-pf') );
+                hideElement( $('.natureza-juridica-pj') );
             }
 
             $('#polen_natureza_juridica').on( 'change', function(e) {
                 if( $('#polen_natureza_juridica').val() == 'PJ' ) {
-                    $('.natureza-juridica-pj').show();
-                    $('.natureza-juridica-pf').hide();
+                    showElement( $('.natureza-juridica-pj') );
+                    hideElement( $('.natureza-juridica-pf') );
+                    addRequired($('#cnpj-natureza-juridica-pj'));
+                    removeRequired($('#cpf-natureza-juridica-pf'));
                 } else if( $('#polen_natureza_juridica').val() == 'PF' ) {
-                    $('.natureza-juridica-pf').show();
-                    $('.natureza-juridica-pj').hide();
+                    showElement( $('.natureza-juridica-pf') );
+                    hideElement( $('.natureza-juridica-pj') );
+                    removeRequired($('#cnpj-natureza-juridica-pj'));
+                    addRequired($('#cpf-natureza-juridica-pf'));
                 }
             });
 
@@ -33,9 +38,39 @@
             $('.polen-cep').mask("99999-999");
 
             if( $('#role').val() == 'user_talent' || $('#role').val() == 'user_charity' ) {
-                $("#metaboxSellerData").show();
+                if( $('#role').val() == 'user_talent' ) {
+                    showElement( $($(".metaboxSellerData")[ 0 ]) );
+                    hideElement( $($(".metaboxSellerData")[ 1 ]) );
+                }
+
+                if( $('#role').val() == 'user_charity' ) {
+                    hideElement( $($(".metaboxSellerData")[ 0 ]) );
+                    showElement( $($(".metaboxSellerData")[ 1 ]) );
+                }
+
+                // required do slug do talent
+                if( $('#tr_talent_alias').length > 0 ) {
+                    addRequired( $('#tr_talent_alias') );
+                }
+
+                if( $('#polen_natureza_juridica').val() == 'PJ') {
+                    addRequired($('#cnpj-natureza-juridica-pj'));
+                    removeRequired($('#cpf-natureza-juridica-pf'));
+                } else {
+                    removeRequired($('#cnpj-natureza-juridica-pj'));
+                    addRequired($('#cpf-natureza-juridica-pf'));
+                }
+
             } else {
-                $("#metaboxSellerData").hide();
+                $(".metaboxSellerData").map( (index, element ) => {
+                    $(element).hide();
+                });
+                //Tirando o required do slug do talent
+                if( $('#tr_talent_alias').length > 0 ) {
+                    removeRequired( $('#tr_talent_alias') );
+                }
+                removeRequired($('#cnpj-natureza-juridica-pj'));
+                removeRequired($('#cpf-natureza-juridica-pf'));
             }
 
             if( $( '#polen_banco').length > 0 ) {
@@ -58,9 +93,9 @@
             if( $('#charity_enable').length > 0 ) {
                 $('#charity_enable').on( 'click', function() {
                     if( $('#charity_enable').is(":checked") ) {
-                        $('#tr_charity_to').show();
+                        showElement( $('#tr_charity_to'));
                     } else {
-                        $('#tr_charity_to').hide();
+                        hideElement( $('#tr_charity_to'));
                     }
                 });
             }
@@ -77,9 +112,28 @@
 
     $(document).on('change', '#role', function() {
         if( $(this).val() == 'user_talent' ) {
-            $("#metaboxSellerData").show();
+            showElement( $("#metaboxSellerData") );
+            // required do slug do talent
+            if( $('#tr_talent_alias').length > 0 ) {
+                addRequired( $('#tr_talent_alias') );
+            }
+
+            if( $('#polen_natureza_juridica').val() == 'PJ') {
+                addRequired($('#cnpj-natureza-juridica-pj'));
+                removeRequired($('#cpf-natureza-juridica-pf'));
+            } else {
+                removeRequired($('#cnpj-natureza-juridica-pj'));
+                addRequired($('#cpf-natureza-juridica-pf'));
+            }
+
         } else {
-            $("#metaboxSellerData").hide();
+            showElement( $("#metaboxSellerData"));
+            //Tirando o required do slug do talent
+            if( $('#tr_talent_alias').length > 0 ) {
+                removeRequired( $('#tr_talent_alias') );
+            }
+            removeRequired($('#cnpj-natureza-juridica-pj'));
+            removeRequired($('#cpf-natureza-juridica-pf'));
         }
     });
 
@@ -87,4 +141,20 @@
         $('#user_login').val( $('#email').val() );
         $('#store_email').val( $('#email').val() );
     });
+    
+    function addRequired( element ) {
+        element.addClass('form-field form-required');
+    }
+    
+    function removeRequired( element ) {
+        element.removeClass('form-field form-required');
+    }
+    
+    function hideElement( element ) {
+        $(element).hide();
+    }
+    
+    function showElement( element ) {
+        $(element).show();
+    }
 })(jQuery);

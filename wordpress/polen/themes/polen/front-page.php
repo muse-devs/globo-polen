@@ -21,13 +21,13 @@ get_header();
 	<?php polen_front_get_banner();
 	?>
 
-	<?php polen_front_get_news(polen_get_new_talents());
+	<?php polen_front_get_news( polen_get_new_talents() );
 	?>
 
-	<?php polen_front_get_categories(get_categories_home());
+	<?php polen_front_get_categories( polen_get_categories_home() );
 	?>
 
-	<?php polen_front_get_artists(polen_get_talents(), "Todos os Artistas");
+	<?php polen_front_get_artists( polen_get_talents(), "Todos os Artistas" );
 	?>
 
 	<?php polen_front_get_tutorial(); ?>
