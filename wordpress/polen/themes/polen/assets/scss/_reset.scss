@@ -1,6 +1,9 @@
 body {
 	font-family: $font-primary;
 	color: white;
+	&.no-scroll {
+		overflow: hidden;
+	}
 }
 
 ul {

@@ -39,6 +39,7 @@ $Talent_Fields = new Polen_Update_Fields();
 $Talent_Fields = $Talent_Fields->get_vendor_data($post->post_author);
 $terms = wp_get_object_terms(get_the_ID(), 'product_cat');
 ?>
+
 <div id="product-<?php the_ID(); ?>" <?php wc_product_class('', $product); ?>>
 
 	<!-- Cabeçalho do Artista -->
@@ -55,12 +56,12 @@ $terms = wp_get_object_terms(get_the_ID(), 'product_cat');
 				</div>
 				<div class="row">
 					<div class="col-md-12">
-					<?php if (count($terms) > 0) : ?>
-						<?php foreach ($terms as $k => $term) : ?>
-							<a href="<?= get_tag_link($term); ?>" class="tag-link mb-2"><?= $term->name; ?></a>
-						<?php endforeach; ?>
+						<?php if (count($terms) > 0) : ?>
+							<?php foreach ($terms as $k => $term) : ?>
+								<a href="<?= get_tag_link($term); ?>" class="tag-link mb-2"><?= $term->name; ?></a>
+							<?php endforeach; ?>
 					</div>
-					<?php endif; ?>
+				<?php endif; ?>
 				</div>
 			</div>
 			<div class="col-md-3">
@@ -98,16 +99,12 @@ $terms = wp_get_object_terms(get_the_ID(), 'product_cat');
 	<?php polen_front_get_talent_videos(); ?>
 
 	<!-- Descrição? -->
-	<!-- <div class="row">
-		<div class="col m-5">
-			<h3>Descrição</h3>
+	<div class="row mt-5">
+		<div class="col-md-12">
+			<h4>Descrição</h4>
+			<p><?php echo $Talent_Fields->descricao; ?></p>
 		</div>
 	</div>
-
-	<div class="row">
-		<p><?php //echo $Talent_Fields->descricao;
-			?></p>
-	</div> -->
 
 	<!-- Como funciona? -->
 	<?php polen_front_get_tutorial(); ?>
