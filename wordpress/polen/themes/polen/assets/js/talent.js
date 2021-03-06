@@ -49,11 +49,13 @@ function killVideo() {
 }
 
 function showModal() {
+	document.body.classList.add("no-scroll");
 	modal.classList.add("show");
 	video_box.classList.add("show");
 }
 
 function hideModal(e) {
+	document.body.classList.remove("no-scroll");
 	changeHash();
 	killVideo();
 	modal.classList.remove("show");
