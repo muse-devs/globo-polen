@@ -237,28 +237,17 @@ function polen_front_get_talent_videos($items = array(
 		<?php foreach ($items as $item) : ?>
 			<figure class="item">
 				<img src="<?= $item['image']; ?>" alt="<?= $item['title']; ?>" data-url="<?= $item['video']; ?>">
-				<a href="#como" class="player-button"></a>
+				<a href="javascript:openVideoByURL('<?= $item['video']; ?>')" class="player-button"></a>
 			</figure>
 		<?php endforeach; ?>
 	</div>
 
-	<!-- <div id="polenVideo" data-vimeo-url=""></div> -->
-	<!-- <script src="https://player.vimeo.com/api/player.js"></script> -->
-	<script>
-		jQuery(document).ready(function() {
-			jQuery('.talent-carousel').slick({
-				infinite: true,
-				speed: 300,
-				slidesToShow: 1,
-				variableWidth: true
-			});
-		});
-
-		// var videoPlayer = new Vimeo.Player('polenVideo');
-		// videoPlayer.getVideoId().then(function(id) {
-		// 	console.log('id:', id);
-		// });
-	</script>
+	<div id="video-modal" class="video-modal" onclick="hideModal()"></div>
+	<div id="video-box" class="video-box">
+		<header>
+			<button id="share-button" class="share-button"><?php polen_icon_share(); ?></button>
+		</header>
+	</div>
 <?php
 	$data = ob_get_contents();
 	ob_end_clean();

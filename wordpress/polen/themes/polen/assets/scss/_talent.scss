@@ -40,3 +40,49 @@
 		}
 	}
 }
+
+.share-button {
+	border: none;
+	background: none;
+	color: white;
+	cursor: pointer;
+}
+
+.video-modal {
+	position: fixed;
+	display: none;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba($color: #000000, $alpha: 0.5);
+	z-index: 98;
+	&.show {
+		display: block;
+	}
+}
+
+.video-box {
+	position: fixed;
+	display: none;
+	padding: 125px 0;
+	top: 50%;
+	left: 50%;
+	min-width: 300px;
+	transform: translate(-50%, -50%);
+	border-radius: 26px;
+	box-sizing: border-box;
+	background-color: $default-bg-color;
+	z-index: 99;
+	&.show {
+		display: block;
+	}
+	.polen-video {
+		background-color: $secondary-bg-color;
+	}
+	.share-button {
+		position: absolute;
+		top: 50px;
+		right: 20%;
+	}
+}
