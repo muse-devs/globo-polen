@@ -18,6 +18,7 @@ class Polen_Checkout
             add_action( 'woocommerce_checkout_update_order_meta', array( $this, 'save_order_meta_from_checkout' ) );
             add_filter( 'woocommerce_checkout_fields', array( $this, 'remove_woocommerce_fields' ) );
             add_filter( 'woocommerce_enable_order_notes_field', '__return_false' );
+            add_filter( 'the_title',  array( $this, 'remove_thankyou_title' ), 20, 2 );
         }
     }
 
@@ -156,5 +157,12 @@ class Polen_Checkout
     public function save_account_details( $user_id ) {
         update_user_meta( $user_id, 'billing_cpf', sanitize_text_field( $_POST['billing_cpf'] ) );
         update_user_meta( $user_id, 'billing_phone', sanitize_text_field( $_POST['billing_phone'] ) );
+    }
+
+    public function remove_thankyou_title( $title, $id ) {
+        if ( is_order_received_page() && get_the_ID() === $id ) {
+            $title = '';
+        }    
+        return $title;
     }
 }
