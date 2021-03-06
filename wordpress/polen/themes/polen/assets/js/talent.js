@@ -27,6 +27,8 @@ share_button.addEventListener("click", async () => {
 		} catch (err) {
 			alert("Error: " + err);
 		}
+	} else {
+		console.log("Não é compatível com navigator.share");
 	}
 });
 
@@ -47,11 +49,13 @@ function killVideo() {
 }
 
 function showModal() {
+	document.body.classList.add("no-scroll");
 	modal.classList.add("show");
 	video_box.classList.add("show");
 }
 
 function hideModal(e) {
+	document.body.classList.remove("no-scroll");
 	changeHash();
 	killVideo();
 	modal.classList.remove("show");
