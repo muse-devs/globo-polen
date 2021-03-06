@@ -50,7 +50,7 @@ $terms = wp_get_object_terms(get_the_ID(), 'product_cat');
 					<div class="col-md-12 d-flex justify-content-between align-items-center">
 						<h1 class="talent-name text-truncate" title="<?= get_the_title(); ?>"><?= get_the_title(); ?></h1>
 						<div class="talent-share ml-4">
-							<?php polen_icon_share(); ?>
+							<button id="share-button" class="share-button"><?php polen_icon_share(); ?></button>
 						</div>
 					</div>
 				</div>
@@ -85,7 +85,7 @@ $terms = wp_get_object_terms(get_the_ID(), 'product_cat');
 				</div>
 			</div>
 			<div class="col-md-4">
-				<?php echo woocommerce_template_single_add_to_cart();?>
+				<?php echo woocommerce_template_single_add_to_cart(); ?>
 				<!--button class="btn btn-primary btn-lg btn-block btn-get-video">Pedir vídeo R$ 200</button-->
 			</div>
 		</div>

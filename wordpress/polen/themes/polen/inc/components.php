@@ -243,6 +243,7 @@ function polen_front_get_talent_videos($items = array(
 	</div>
 
 	<div id="video-modal" class="video-modal" onclick="hideModal()"></div>
+	<input id="share-input" type="text" class="share-input" />
 	<div id="video-box" class="video-box">
 		<header>
 			<button id="share-button" class="share-button"><?php polen_icon_share(); ?></button>

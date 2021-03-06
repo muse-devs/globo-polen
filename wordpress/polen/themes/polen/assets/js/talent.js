@@ -1,6 +1,6 @@
 var modal = document.getElementById("video-modal");
 var video_box = document.getElementById("video-box");
-var share_button = document.getElementById("share-button");
+var share_button = document.querySelectorAll(".share-button");
 
 jQuery(document).ready(function () {
 	jQuery(".talent-carousel").slick({
@@ -13,13 +13,29 @@ jQuery(document).ready(function () {
 	if (id) {
 		openVideoById(id);
 	}
+
+	if (share_button.length > 0) {
+		share_button.forEach(function (btn) {
+			btn.addEventListener("click", shareVideo);
+		});
+	}
 });
 
-share_button.addEventListener("click", async () => {
+function copyToClipboard(text) {
+	var copyText = document.getElementById("share-input");
+	copyText.value = text;
+	copyText.select();
+	copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+	document.execCommand("copy");
+	alert("Link copiado para Área de transferência");
+}
+
+async function shareVideo(title = "Nome do talento", text = "texto do vídeo") {
 	var shareData = {
-		title: "",
-		text: "",
-		url: "",
+		title: title,
+		text: text,
+		url: window.location.href,
 	};
 	if (navigator.share) {
 		try {
@@ -28,9 +44,10 @@ share_button.addEventListener("click", async () => {
 			alert("Error: " + err);
 		}
 	} else {
-		console.log("Não é compatível com navigator.share");
+		copyToClipboard(shareData.url);
+		console.log("URL: " + shareData.url);
 	}
-});
+}
 
 function changeHash(hash) {
 	window.location.hash = hash || "";
@@ -69,9 +86,10 @@ function openVideoByURL(url) {
 		url: url,
 	});
 	videoPlayer.getVideoId().then(function (id) {
-		console.log("id:", id);
 		changeHash(id);
-		share_button.classList.add("show");
+		document
+			.querySelector(".video-box .share-button")
+			.classList.add("show");
 	});
 }
 
@@ -82,5 +100,5 @@ function openVideoById(id) {
 		id: id,
 	});
 	changeHash(id);
-	share_button.classList.add("show");
+	document.querySelector(".video-box .share-button").classList.add("show");
 }
