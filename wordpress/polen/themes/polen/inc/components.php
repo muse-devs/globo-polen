@@ -191,7 +191,7 @@ function polen_front_get_tutorial()
 						<figure class="image">
 							<img src="https://picsum.photos/200/200" alt="Conect-se aos ídolos">
 						</figure>
-						<h5 class="title">Conecte-se aos ídoles</h5>
+						<h5 class="title">Conecte-se aos ídolos</h5>
 						<p class="description">Peça um vídeo personalizado com o seu ídolo para celebar ocasiões especiais.</p>
 					</div>
 				</div>

@@ -27,6 +27,8 @@ share_button.addEventListener("click", async () => {
 		} catch (err) {
 			alert("Error: " + err);
 		}
+	} else {
+		console.log("Não é compatível com navigator.share");
 	}
 });
 
