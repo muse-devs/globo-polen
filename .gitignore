@@ -33,6 +33,7 @@ wordpress/polen/themes/twenty*/
 
 # Ignorar dependências do node
 node_modules/
+package-lock.json
 
 # Ignorar arquivos descompactados no diretório de uploads padrão
 uploads/*
