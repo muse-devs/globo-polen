@@ -84,7 +84,7 @@ $terms = wp_get_object_terms(get_the_ID(), 'product_cat');
 				</div>
 			</div>
 			<div class="col-md-4">
-				<?php //echo woocommerce_template_single_add_to_cart();
+				<?php echo woocommerce_template_single_add_to_cart();
 				?>
 				<button class="btn btn-primary btn-lg btn-block btn-get-video">Pedir vídeo R$ 200</button>
 			</div>
