@@ -42,7 +42,7 @@ $occasion_list = new Polen_Occasion_List();
 			$product_permalink = apply_filters('woocommerce_cart_item_permalink', $_product->is_visible() ? $_product->get_permalink($cart_item) : '', $cart_item, $cart_item_key);
 	?>
 			<div class="row py-5 px-3 cart-item">
-				<div class="col-md-5 d-flex justify-content-start">
+				<div class="col-md-5 d-flex justify-content-start align-items-center">
 					<figure class="thumbnail mr-4">
 						<?php
 						$thumbnail = apply_filters('woocommerce_cart_item_thumbnail', $_product->get_image(), $cart_item, $cart_item_key);
