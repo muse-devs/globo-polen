@@ -6,15 +6,23 @@ h1,
 h2,
 h3,
 h4 {
-	font-family: $font-secondary
+	font-family: $font-secondary;
 }
 
-h1, h2 {
+h1,
+h2 {
 	font-size: 54px;
 	font-weight: 600;
 }
 
-h4, .h4 {
+h4,
+.h4 {
 	margin-bottom: 20px;
 	font-size: 1.2rem;
+}
+
+.title-alt {
+	font-family: $font-primary;
+	font-size: 26px;
+	font-weight: 700;
 }

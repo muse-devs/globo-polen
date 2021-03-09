@@ -13,7 +13,7 @@
 ?>
 
 <footer id="colophon" class="mt-5 pt-5 site-footer">
-	<?php if (!is_page('cart') || !is_cart()) : ?>
+	<?php if ((!is_page('cart') || !is_cart()) && (!is_page('checkout') || !is_checkout())) : ?>
 		<div class="row pb-5">
 			<div class="col-md-6">
 				<div class="row">

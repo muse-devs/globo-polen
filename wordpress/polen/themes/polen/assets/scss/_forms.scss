@@ -8,3 +8,75 @@
 	}
 }
 
+.step {
+	font-size: 20px;
+	font-weight: 700;
+}
+
+.cart-item,
+.cart-other,
+.woocommerce table.shop_table {
+	border-radius: 20px;
+	background-color: $form-bg-color;
+}
+
+.cart-item {
+	.thumbnail {
+		display: block;
+		width: 54px;
+		height: 54px;
+		overflow: hidden;
+		border-radius: 50%;
+		background-color: $default-bg-color;
+	}
+}
+
+.cart-item-product {
+	.product-name {
+		a {
+			font-size: 20px;
+			font-weight: 700;
+			color: white;
+		}
+	}
+	.product-price {
+		font-size: 60px;
+		font-weight: 400;
+		line-height: 1;
+		color: $font-color2;
+	}
+}
+
+.form-title {
+	font-size: 16px;
+	font-weight: 700;
+}
+
+.cart-other {
+	.form-control {
+		margin-bottom: 20px;
+		padding: 20px 40px;
+		border-radius: 10px;
+		box-sizing: border-box;
+		color: $input-font-color;
+	}
+	select {
+		height: auto !important;
+	}
+	textarea {
+		height: 260px;
+	}
+	input[type="checkbox"] {
+		margin: 0 10px 0;
+		padding: 0;
+		width: auto;
+		display: inline-block;
+	}
+}
+
+.woocommerce-info {
+	display: none !important;
+}
+
+.woocommerce table.shop_table {
+}
