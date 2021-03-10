@@ -154,10 +154,12 @@ function polen_front_get_artists($items, $title)
 			</header>
 		</div>
 		<div class="col-md-12">
-			<div class="row d-flex justify-content-between flex-wrap">
-				<?php foreach ($items as $item) : ?>
-					<?php polen_front_get_card($item, "small"); ?>
-				<?php endforeach; ?>
+			<div class="row">
+				<div class="col-md-12 d-flex flex-wrap">
+					<?php foreach ($items as $item) : ?>
+						<?php polen_front_get_card($item, "small"); ?>
+					<?php endforeach; ?>
+				</div>
 			</div>
 			<div class="row mt-5">
 				<div class="col-md-12 text-center">
