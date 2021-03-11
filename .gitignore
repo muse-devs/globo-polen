@@ -26,6 +26,8 @@ wordpress/polen/*
 # Ignorar determinados plugins
 wordpress/wp-content/plugins/hello.php
 wordpress/polen/plugins/hello.php
+wordpress/wp-content/plugins/debug-bar/*
+wordpress/polen/plugins/debug-bar/*
 
 # Ignorar temas específicos
 wordpress/wp-content/themes/twenty*/
