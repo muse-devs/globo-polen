@@ -57,7 +57,11 @@ class WC_Cubo9_Braspag extends WC_Payment_Gateway {
      * Formulário de pagamento do checkout.
      */
     public function payment_fields() {
-        require_once PLUGIN_CUBO9_BRASPAG_DIR . 'assets/php/form-checkout.php';
+        if( file_exists( TEMPLATEPATH . '/braspag/form-checkout.php' ) ) {
+            require_once TEMPLATEPATH . '/braspag/form-checkout.php';
+        } else {
+            require_once PLUGIN_CUBO9_BRASPAG_DIR . 'assets/php/form-checkout.php';
+        }
     }
 
     /**
