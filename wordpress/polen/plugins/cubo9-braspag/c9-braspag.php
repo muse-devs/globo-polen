@@ -117,6 +117,10 @@ if ( ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins',
     function paymentInfoMetabox() {
         global $post;
         $order = wc_get_order( $post->ID );
-        require_once PLUGIN_CUBO9_BRASPAG_DIR . '/assets/php/metabox-payment-info.php';
+        if( file_exists( TEMPLATEPATH . '/braspag/admin/metabox-payment-info.php' ) ) {
+            require_once TEMPLATEPATH . '/braspag/admin/metabox-payment-info.php';
+        } else {
+            require_once PLUGIN_CUBO9_BRASPAG_DIR . '/assets/php/metabox-payment-info.php';
+        }
     }
 }
