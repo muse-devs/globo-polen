@@ -18,9 +18,8 @@
 
 defined( 'ABSPATH' ) || exit;
 
-echo 'Passo 2/2';
 ?>
-<div class="woocommerce-billing-fields">
+<div class="woocommerce-billing-fields mt-4 pt-4">
 	<?php do_action( 'woocommerce_before_checkout_billing_form', $checkout ); ?>
 
 	<div class="woocommerce-billing-fields__field-wrapper">
