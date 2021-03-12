@@ -28,6 +28,7 @@ wordpress/wp-content/plugins/hello.php
 wordpress/polen/plugins/hello.php
 wordpress/wp-content/plugins/debug-bar/*
 wordpress/polen/plugins/debug-bar/*
+wordpress/polen/plugins/polen_2/test/*
 
 # Ignorar temas específicos
 wordpress/wp-content/themes/twenty*/
