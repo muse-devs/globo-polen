@@ -4,6 +4,10 @@ namespace Polen\Includes;
 
 class Polen_SignInUser
 {
+    public function __construct() {
+        add_action( 'wp_logout', array( $this, 'polen_logout_redirect' ) );
+    }        
+
     public function add_fields_sign_in()
     { ?>
         <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
@@ -23,5 +27,10 @@ class Polen_SignInUser
         wp_update_user(['ID' => $customer_id, 'display_name' => $_POST['name']]);
         update_user_meta($customer_id, 'first_name', $_POST['name']);
         update_user_meta($customer_id, '_phone', $_POST['phone']);
+    }
+
+    public function polen_logout_redirect() {
+            wp_redirect( home_url() );
+            exit();
     }
 }
