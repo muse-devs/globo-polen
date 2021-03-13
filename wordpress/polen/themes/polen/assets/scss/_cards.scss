@@ -101,7 +101,6 @@
 
 .top-banner {
 	position: relative;
-	width: 100%;
 	.video {
 		width: 100%;
 		max-width: 100%;
@@ -126,6 +125,9 @@
 				font-size: 44px;
 			}
 		}
+	}
+	@include media-breakpoint-only(xs) {
+		
 	}
 }
 
@@ -158,8 +160,11 @@
 }
 
 .col-flex-20 {
-	margin-bottom: 20px;
+	margin: 0 2.5% 25px 0;
 	width: 18%;
+	&:nth-child(5n + 0) {
+		margin-right: 0;
+	}
 }
 
 .tutorial-card {

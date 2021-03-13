@@ -2,6 +2,7 @@
 	padding: 15px;
 	font-size: 16px;
 	border: none;
+	color: $input-font-color;
 	background-color: $default-bg-color;
 	&:focus {
 		background-color: $default-bg-color;
@@ -79,4 +80,8 @@
 }
 
 .woocommerce table.shop_table {
+}
+
+.talent-login {
+	background: no-repeat center/cover url(../img/login-bg.png);
 }
