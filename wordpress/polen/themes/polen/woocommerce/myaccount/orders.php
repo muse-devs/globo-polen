@@ -5,16 +5,6 @@ do_action( 'woocommerce_before_account_orders', $has_orders ); ?>
 
 <?php if ( $has_orders ) : ?>
 
-	<table class="woocommerce-orders-table woocommerce-MyAccount-orders shop_table shop_table_responsive my_account_orders account-orders-table">
-		<thead>
-			<tr>
-				<?php foreach ( wc_get_account_orders_columns() as $column_id => $column_name ) : ?>
-					<th class="woocommerce-orders-table__header woocommerce-orders-table__header-<?php echo esc_attr( $column_id ); ?>"><span class="nobr"><?php echo esc_html( $column_name ); ?></span></th>
-				<?php endforeach; ?>
-			</tr>
-		</thead>
-
-		<tbody>
 			<?php
 			foreach ( $customer_orders->orders as $customer_order ) {
 				$order      = wc_get_order( $customer_order ); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
@@ -28,30 +18,37 @@ do_action( 'woocommerce_before_account_orders', $has_orders ); ?>
 				}
 				?>
 				<div class="row mt-5 d-flex justify-content-between align-items-center">
-					<div class="col-md-3">
+					<div class="col-md-1">
 						<div class="row">
-						<?php
-							$thumbnail = get_the_post_thumbnail_url($product_id, 'post-thumbnail');
-						?>	
-							<img src="<?php  echo $thumbnail; ?>" >
+							<span class="order-title"><?php echo esc_html( _x( '#', 'hash before order number', 'woocommerce' ) . $order->get_order_number() ); ?></span>
+						</div>	
+					</div>	
+					<div class="col-md-1">
+						<div class="row">
+							<div class="image-cropper">
+								<?php
+								$thumbnail = get_the_post_thumbnail_url($product_id, 'post-thumbnail');
+								?>	
+								<img src="<?php  echo $thumbnail; ?>" class="profile-pic">
+							</div>
 						</div>		
 					</div>				
 					<div class="col-md-3">
 						<div class="row">
-							<?php echo  $item->get_name(); ?>	
+							<span class="order-title"><?php echo  $item->get_name(); ?></a>	
 						</div>
 						<div class="row">
 							<?php echo $order->get_formatted_order_total( );?>
 						</div>		
 					</div>
-					<div class="col-md-3">
+					<div class="col-md-4">
 						<div class="row">
-							<div class="col-md-6 text-center">
-								<span class="skill-title">Status</span>
+							<div class="col-md-12 text-center">
+								<span class="order-title">Status</span>
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-md-6 text-center">
+							<div class="col-md-12 text-center">
 								<span>
 									<?php 
 									switch ( $order->get_status() ){
@@ -80,7 +77,7 @@ do_action( 'woocommerce_before_account_orders', $has_orders ); ?>
 				</div>
 
 
-				<tr class="woocommerce-orders-table__row woocommerce-orders-table__row--status-<?php echo esc_attr( $order->get_status() ); ?> order">
+				<!--tr class="woocommerce-orders-table__row woocommerce-orders-table__row--status-<?php echo esc_attr( $order->get_status() ); ?> order">
 					<?php foreach ( wc_get_account_orders_columns() as $column_id => $column_name ) : ?>
 						<td class="woocommerce-orders-table__cell woocommerce-orders-table__cell-<?php echo esc_attr( $column_id ); ?>" data-title="<?php echo esc_attr( $column_name ); ?>">
 							<?php if ( has_action( 'woocommerce_my_account_my_orders_column_' . $column_id ) ) : ?>
@@ -116,12 +113,10 @@ do_action( 'woocommerce_before_account_orders', $has_orders ); ?>
 							<?php endif; ?>
 						</td>
 					<?php endforeach; ?>
-				</tr>
+				</tr-->
 				<?php
 			}
 			?>
-		</tbody>
-	</table>
 
 	<?php do_action( 'woocommerce_before_account_orders_pagination' ); ?>
 

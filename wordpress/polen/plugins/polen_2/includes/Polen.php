@@ -51,6 +51,7 @@ class Polen {
         new Polen_Update_Fields( true );
         new Polen_DisableAdminBar();
         new Polen_Checkout( true );
+        new Polen_Account( true );
     }
 
     /**
@@ -112,7 +113,6 @@ class Polen {
      * @access   private
      */
     private function define_public_hooks() {
-
         $plugin_public = new Polen_Public($this->get_plugin_name(), $this->get_version());
 
         $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');

@@ -141,7 +141,7 @@ $occasion_list = new Polen_Occasion_List();
 					<?php
 					$offered_by = isset($cart_item['offered_by']) ? $cart_item['offered_by'] : '';
 					printf(
-						'<input type="text" placeholder="Vídeo oferecido por" class="%s form-control form-control-lg" id="cart_offered_by_%s" data-cart-id="%s" name="offered_by" value="%s" />',
+						'<input type="text" placeholder="Vídeo oferecido por" class="%s form-control form-control-lg" id="cart_offered_by_%s" data-cart-id="%s" name="offered_by" value="%s" required="required" />',
 						'polen-cart-item-data',
 						$cart_item_key,
 						$cart_item_key,
@@ -156,7 +156,7 @@ $occasion_list = new Polen_Occasion_List();
 					<?php
 					$name_to_video = isset($cart_item['name_to_video']) ? $cart_item['name_to_video'] : '';
 					printf(
-						'<input type="text" placeholder="Para quem é o vídeo?" class="%s form-control form-control-lg" id="cart_name_to_video_%s" data-cart-id="%s" name="name_to_video" value="%s" />',
+						'<input type="text" placeholder="Para quem é o vídeo?" class="%s form-control form-control-lg" id="cart_name_to_video_%s" data-cart-id="%s" name="name_to_video" value="%s" required="required"/>',
 						'polen-cart-item-data',
 						$cart_item_key,
 						$cart_item_key,
@@ -171,7 +171,7 @@ $occasion_list = new Polen_Occasion_List();
 					<?php
 					$email_to_video = isset($cart_item['email_to_video']) ? $cart_item['email_to_video'] : '';
 					printf(
-						'<input type="text" placeholder="E-mail para receber updates" class="%s form-control form-control-lg" id="cart_email_to_video_%s" data-cart-id="%s" name="email_to_video" value="%s" />',
+						'<input type="text" placeholder="E-mail para receber updates" class="%s form-control form-control-lg" id="cart_email_to_video_%s" data-cart-id="%s" name="email_to_video" value="%s" required="required" />',
 						'polen-cart-item-data',
 						$cart_item_key,
 						$cart_item_key,
@@ -189,7 +189,7 @@ $occasion_list = new Polen_Occasion_List();
 					<?php
 					$email_to_video = isset($cart_item['email_to_video']) ? $cart_item['email_to_video'] : '';
 					printf(
-						'<select class="%s form-control form-control-lg" id="cart_video_category_%s" data-cart-id="%s" name="video_category"/>',
+						'<select class="%s form-control form-control-lg" id="cart_video_category_%s" data-cart-id="%s" name="video_category" required="required"/>',
 						'polen-cart-item-data',
 						$cart_item_key,
 						$cart_item_key
@@ -214,7 +214,7 @@ $occasion_list = new Polen_Occasion_List();
 					printf(
 						'<textarea 	name="instructions_to_video" placeholder="Instruções" 
 										class="%s form-control form-control-lg" id="cart_instructions_to_video_%s" 
-										data-cart-id="%s">%s</textarea>',
+										data-cart-id="%s" required="required">%s</textarea>',
 						'polen-cart-item-data',
 						$cart_item_key,
 						$cart_item_key,
