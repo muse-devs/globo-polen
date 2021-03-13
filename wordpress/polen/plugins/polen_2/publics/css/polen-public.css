@@ -35,3 +35,33 @@
 .dropdown:hover .dropdown-content {display: block;}
 
 .dropdown:hover .dropbtn { color: white;}
+
+.order-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: white;
+}
+
+.image-cropper{
+    display: block;
+    width: 54px;
+    height: 54px;
+    overflow: hidden;
+    border-radius: 50%;
+    background-color: #1e2029;
+}
+
+.profile-pic{
+    max-width: 50px;
+}
+
+.woocommerce-MyAccount-navigation li a{
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+}
+
+.woocommerce-MyAccount-navigation li{
+    padding: 12px 20px;
+}

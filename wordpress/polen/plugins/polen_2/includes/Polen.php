@@ -51,6 +51,7 @@ class Polen {
         new Polen_Update_Fields( true );
         new Polen_DisableAdminBar();
         new Polen_Checkout( true );
+        new Polen_Account( true );
     }
 
     /**
