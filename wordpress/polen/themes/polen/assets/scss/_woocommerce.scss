@@ -2,3 +2,38 @@
 .woocommerce div.product span.price {
 	color: white;
 }
+
+.form-row {
+	display: block;
+}
+
+#add_payment_method #payment,
+.woocommerce-cart #payment,
+.woocommerce-checkout #payment {
+	background: none;
+}
+
+#add_payment_method #payment div.payment_box,
+.woocommerce-cart #payment div.payment_box,
+.woocommerce-checkout #payment div.payment_box {
+	&::before {
+		display: none;
+	}
+	margin: 10px 0 0;
+	padding: 0;
+	background-color: transparent;
+}
+
+select.form-control:not([size]):not([multiple]) {
+	height: auto;
+}
+
+#add_payment_method #payment div.payment_box input.input-text,
+#add_payment_method #payment div.payment_box textarea,
+.woocommerce-cart #payment div.payment_box input.input-text,
+.woocommerce-cart #payment div.payment_box textarea,
+.woocommerce-checkout #payment div.payment_box input.input-text,
+.woocommerce-checkout #payment div.payment_box textarea {
+	color: $input-font-color;
+	// background-color: $form-bg-color;
+}

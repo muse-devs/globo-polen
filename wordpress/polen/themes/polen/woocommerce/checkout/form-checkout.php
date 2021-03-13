@@ -148,7 +148,7 @@ $Talent_Fields = new Polen_Update_Fields();
 	</div>
 
 	<div class="row">
-		<div class="col-md-12">
+		<div class="col-md-8">
 			<?php
 			woocommerce_checkout_payment();
 			?>
