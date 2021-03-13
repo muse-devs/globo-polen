@@ -21,9 +21,10 @@ defined('ABSPATH') || exit;
 do_action('woocommerce_before_cart');
 
 use Polen\Includes\Polen_Occasion_List;
+use Polen\Includes\Polen_Update_Fields;
 
 $occasion_list = new Polen_Occasion_List();
-
+$Talent_Fields = new Polen_Update_Fields();
 ?>
 
 <span class="step">Passo 1/2</span>
@@ -37,6 +38,8 @@ $occasion_list = new Polen_Occasion_List();
 	foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) :
 		$_product   = apply_filters('woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key);
 		$product_id = apply_filters('woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key);
+		$talent_id = get_post_field( 'post_author', $product_id );
+		$talent_data = $Talent_Fields->get_vendor_data( $talent_id );
 
 		if ($_product && $_product->exists() && $cart_item['quantity'] > 0 && apply_filters('woocommerce_cart_item_visible', true, $cart_item, $cart_item_key)) :
 			$product_permalink = apply_filters('woocommerce_cart_item_permalink', $_product->is_visible() ? $_product->get_permalink($cart_item) : '', $cart_item, $cart_item_key);
@@ -87,7 +90,7 @@ $occasion_list = new Polen_Occasion_List();
 						<div class="col skill-title">Reviews</div>
 					</div>
 					<div class="row">
-						<div class="col"><?php polen_icon_clock(); ?> 1h</div>
+						<div class="col"><?php polen_icon_clock(); ?> <?php echo $talent_data->tempo_resposta; ?>h</div>
 						<div class="col"><?php polen_icon_star(true); ?> 5.0</div>
 					</div>
 				</div>

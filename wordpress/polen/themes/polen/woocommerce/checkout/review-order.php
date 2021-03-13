@@ -39,6 +39,9 @@ defined( 'ABSPATH' ) || exit;
 						if( isset( $cart_item['name_to_video'] ) && !empty( $cart_item['name_to_video'] ) ){
 							echo '<strong>Vídeo para:</strong> '.$cart_item['name_to_video'].'<br/>';
 						}
+						if( isset( $cart_item['email_to_video'] ) && !empty( $cart_item['email_to_video'] ) ){
+							echo '<strong>E-mail:</strong> '.$cart_item['email_to_video'].'<br/>';
+						}
 						if( isset( $cart_item['video_category'] ) && !empty( $cart_item['video_category'] ) ){
 							echo '<strong>Categoria:</strong> '.$cart_item['video_category'].'<br/>';
 						}

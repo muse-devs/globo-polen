@@ -11,11 +11,11 @@ class Polen_Checkout
 
     public function __construct( $static = false ) {
         if( $static ) {
-            add_action( 'woocommerce_edit_account_form_start', array( $this, 'add_cpf_to_form' ) );
-            add_action( 'woocommerce_edit_account_form_start', array( $this, 'add_phone_to_form' ) );
-            add_filter( 'woocommerce_save_account_details', array( $this, 'save_account_details' ) );
-            add_action( 'woocommerce_before_checkout_billing_form', array( $this, 'add_cpf_and_phone_to_checkout') );
-            add_action( 'woocommerce_checkout_update_order_meta', array( $this, 'save_order_meta_from_checkout' ) );
+            //add_action( 'woocommerce_edit_account_form_start', array( $this, 'add_cpf_to_form' ) );
+            //add_action( 'woocommerce_edit_account_form_start', array( $this, 'add_phone_to_form' ) );
+            //add_filter( 'woocommerce_save_account_details', array( $this, 'save_account_details' ) );
+            //add_action( 'woocommerce_before_checkout_billing_form', array( $this, 'add_cpf_and_phone_to_checkout') );
+            //add_action( 'woocommerce_checkout_update_order_meta', array( $this, 'save_order_meta_from_checkout' ) );
             add_filter( 'woocommerce_checkout_fields', array( $this, 'remove_woocommerce_fields' ) );
             add_filter( 'woocommerce_enable_order_notes_field', '__return_false' );
             add_filter( 'the_title',  array( $this, 'remove_thankyou_title' ), 20, 2 );
@@ -24,6 +24,9 @@ class Polen_Checkout
 
     public function remove_woocommerce_fields( $fields ) {
         $removed_keys = array(
+            'billing_email',
+            'billing_first_name',
+            'billing_last_name',
             'billing_company',
             'billing_phone',
             'billing_address_1',
@@ -79,6 +82,7 @@ class Polen_Checkout
      * Adicionar o campo de CPF no Checkout para caso o usuário não possua.
      */
     public function add_cpf_and_phone_to_checkout( $checkout ) {
+        /*
         $billing_cpf = get_user_meta( get_current_user_id(), 'billing_cpf', true );
         if( ! $billing_cpf || is_null( $billing_cpf ) || empty( $billing_cpf ) || strlen( $billing_cpf ) != 14 ) {
             $args = array(
@@ -92,7 +96,7 @@ class Polen_Checkout
             );
             woocommerce_form_field( 'billing_cpf', $args, $checkout->get_value( 'billing_cpf' ) );
         }
-
+        */
         $billing_phone = get_user_meta( get_current_user_id(), 'billing_phone', true );
         if( ! $billing_phone || is_null( $billing_phone ) || empty( $billing_phone ) || strlen( $billing_phone ) != 14 ) {
             $args = array(
@@ -155,7 +159,7 @@ class Polen_Checkout
     }
 
     public function save_account_details( $user_id ) {
-        update_user_meta( $user_id, 'billing_cpf', sanitize_text_field( $_POST['billing_cpf'] ) );
+        //update_user_meta( $user_id, 'billing_cpf', sanitize_text_field( $_POST['billing_cpf'] ) );
         update_user_meta( $user_id, 'billing_phone', sanitize_text_field( $_POST['billing_phone'] ) );
     }
 
