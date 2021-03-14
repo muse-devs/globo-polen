@@ -115,7 +115,7 @@ $terms = wp_get_object_terms(get_the_ID(), 'product_cat');
 		</div>
 	</div>
 
-	<div class="row" style="color: #000 !important;">
+	<div class="row">
 		<div class="col">
 			<?php
 			$terms_ids = array();
@@ -127,7 +127,7 @@ $terms = wp_get_object_terms(get_the_ID(), 'product_cat');
 			if (count($terms_ids) > 0) : ?>
 				<?php $others = get_objects_in_term($terms_ids, 'product_cat'); ?>
 				<?php if (count($others)) : ?>
-					<div class="row d-flex justify-content-between flex-wrap">
+					<div class="row d-flex flex-wrap">
 						<?php foreach ($others as $k => $id) :
 							$product = wc_get_product($id);
 						?>
