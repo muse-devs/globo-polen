@@ -28,7 +28,10 @@
 		.image {
 			height: 330px;
 			@include media-breakpoint-down(sm) {
-				height: 700px;
+				height: 70vw;
+			}
+			@include media-breakpoint-only(sm) {
+				height: 50vw;
 			}
 			@include media-breakpoint-only(md) {
 				height: 205px;
@@ -50,12 +53,18 @@
 	}
 	.title {
 		font-weight: 700;
+		@include media-breakpoint-down(sm) {
+			margin-bottom: 10px;
+		}
 	}
 	&.small {
 		.image {
 			height: 257px;
 			@include media-breakpoint-down(sm) {
-				height: 700px;
+				height: 70vw;
+			}
+			@include media-breakpoint-only(sm) {
+				height: 50vw;
 			}
 			@include media-breakpoint-only(md) {
 				height: 162px;
@@ -94,7 +103,7 @@
 			color: white;
 		}
 	}
-	@include media-breakpoint-only(sm) {
+	@include media-breakpoint-down(sm) {
 		margin-bottom: 40px;
 	}
 }
@@ -127,7 +136,6 @@
 		}
 	}
 	@include media-breakpoint-only(xs) {
-		
 	}
 }
 
@@ -165,6 +173,24 @@
 	&:nth-child(5n + 0) {
 		margin-right: 0;
 	}
+	@include media-breakpoint-down(sm) {
+		width: 48%;
+		&:nth-child(2n + 0) {
+			margin-right: 0;
+		}
+		&:nth-child(5n + 0) {
+			margin-right: 2.5%;
+		}
+	}
+	@include media-breakpoint-only(sm) {
+		width: 48%;
+		&:nth-child(2n + 0) {
+			margin-right: 0;
+		}
+		&:nth-child(5n + 0) {
+			margin-right: 2.5%;
+		}
+	}
 }
 
 .tutorial-card {
@@ -177,6 +203,9 @@
 		overflow: hidden;
 		border-radius: 50%;
 		background-color: $default-bg-color;
+		@include media-breakpoint-down(sm) {
+			margin-bottom: 20px;
+		}
 		img {
 			position: absolute;
 			min-width: 100%;
