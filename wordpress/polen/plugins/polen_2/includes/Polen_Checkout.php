@@ -164,9 +164,9 @@ class Polen_Checkout
     }
 
     public function remove_thankyou_title( $title, $id ) {
-        if ( is_order_received_page() && get_the_ID() === $id ) {
+        if ( ( is_order_received_page() && get_the_ID() === $id ) || is_account_page() ) {
             $title = '';
-        }    
+        }
         return $title;
     }
 }

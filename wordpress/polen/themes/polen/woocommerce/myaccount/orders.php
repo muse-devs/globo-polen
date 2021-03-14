@@ -1,6 +1,12 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 
+$logged_user = wp_get_current_user();
+if( in_array( 'user_talent',  $logged_user->roles ) )
+{ 
+	require get_template_directory() . '/woocommerce/myaccount/orders-talent.php';
+}
+else{	
 do_action( 'woocommerce_before_account_orders', $has_orders ); ?>
 
 <?php if ( $has_orders ) : ?>
@@ -140,3 +146,5 @@ do_action( 'woocommerce_before_account_orders', $has_orders ); ?>
 <?php endif; ?>
 
 <?php do_action( 'woocommerce_after_account_orders', $has_orders ); ?>
+<?php
+}//fim do else da verificação do perfil

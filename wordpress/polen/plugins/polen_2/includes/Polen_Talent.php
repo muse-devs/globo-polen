@@ -24,6 +24,8 @@ class Polen_Talent
             add_filter( 'manage_edit-product_columns', array( $this, 'talent_filter_product_column' ),10, 1 );
             add_filter( 'manage_users_custom_column', array( $this, 'talent_custom_users_value' ), 10, 3 );
             add_action( 'init', array( $this, 'talent_taxonomy' ) );
+            add_filter( 'manage_edit-shop_order_columns', array( $this, 'show_talent_order_column' ), 20 );
+            add_action( 'manage_shop_order_posts_custom_column', array( $this, 'talent_column_content' ), 20, 2 );
 
             /**
              * Modifica a URL do Talento (Usuário)
@@ -256,5 +258,82 @@ class Polen_Talent
     public function sold_individually( $return, $product ) {
         $return = true;
         return $return;
+    }
+
+    public function show_talent_order_column( $columns ){
+        $new_columns = array();
+        foreach( $columns as $key => $column){
+            $new_columns[$key] = $column;
+            if( $key ==  'order_date' ){
+                $new_columns['talent_product'] = __( 'Talento', 'polen');
+            }
+        }
+        return $new_columns;
+    }
+    
+    public function talent_column_content( $column, $post_id )
+    {
+        switch ( $column )
+        {
+            case 'talent_product' :
+                $order = wc_get_order( $post_id );                  
+                if ( $order ) {
+                    foreach ( $order->get_items() as $item_id => $item ) {
+                        echo $name = $item->get_name();
+                    }
+                }else{
+                    echo '-';
+                }
+                break;
+        }
+    }
+
+    public function get_talent_orders( $talent_id, $status = false ){
+        if( $talent_id ) {
+            global $wpdb;
+
+            $sql_product = " SELECT * FROM {$wpdb->prefix}posts WHERE post_type = 'product' and post_author = ".$talent_id;
+            $talent_products = $wpdb->get_results( $sql_product );
+
+            if( is_countable( $talent_products ) && count( $talent_products ) > 0 ){ 
+                $first_product = reset($talent_products);
+
+                if( is_object( $first_product ) && isset( $first_product->ID ) ){
+                    $sql = " SELECT order_items.order_id
+                        FROM {$wpdb->prefix}woocommerce_order_items as order_items
+                        LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta as order_item_meta ON order_items.order_item_id = order_item_meta.order_item_id
+                        LEFT JOIN {$wpdb->posts} AS posts ON order_items.order_id = posts.ID
+                        WHERE posts.post_type = 'shop_order'
+                            AND posts.post_status IN ( 'wc-on-hold' )
+                            AND order_items.order_item_type = 'line_item'
+                            AND order_item_meta.meta_key = '_product_id'
+                            AND order_item_meta.meta_value = '$first_product->ID'";
+                    $order_list = $wpdb->get_results( $sql );
+
+                    if( is_countable( $order_list ) && count( $order_list ) == 0 ){
+                        return false;
+                    }else{
+                        $obj = array();
+                        foreach( $order_list as $obj_order ):
+                            $obj['order_id'] = $obj_order->order_id;
+                            $order = wc_get_order( $obj_order->order_id );
+                            foreach ( $order->get_items() as $item_id => $item ) {
+                                $obj['email'] = $item->get_meta( 'email_to_video', true );
+                                $obj['instructions'] = $item->get_meta( 'instructions_to_video', true );
+                                $obj['name'] = $item->get_meta( 'name_to_video', true );
+                                $obj['from'] = $item->get_meta( 'offered_by', true );
+                                $obj['category'] = $item->get_meta( 'video_category', true );
+                            }
+
+                            $robj[] = $obj;
+                        endforeach;
+                        return $robj;    
+                    }        
+                }
+
+            }
+            
+        return false;
+        }
     }
 }

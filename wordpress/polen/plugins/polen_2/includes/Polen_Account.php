@@ -15,6 +15,7 @@ class Polen_Account
             add_action( 'woocommerce_account_polen-favorite_endpoint', array( $this, 'polen_favorite_content' ) );
             //add_action( 'init', array( $this, 'polen_add_favorite_endpoint' ) );
             add_filter( 'woocommerce_before_account_orders', array( $this, 'my_orders_title' ));
+            add_filter('woocommerce_show_page_title', array( $this, 'wat' ) );
         }
     }
 
@@ -24,7 +25,13 @@ class Polen_Account
     }
 
     public function my_orders_title(){
-        echo '<h1 class="entry-title">Meus pedidos</h1>';
+        $logged_user = wp_get_current_user();
+		if( in_array( 'user_talent',  $logged_user->roles ) )
+		{ 
+            echo '<h1 class="entry-title">Suas solicitações</h1>';
+        }else{
+            echo '<h1 class="entry-title">Meus pedidos</h1>';
+        }    
     }
 
     public function view_order_custom( $title, $endpoint ) {
@@ -33,14 +40,25 @@ class Polen_Account
     }
 
     public function my_account_menu_title( $items ) {
-        $items['orders']       = 'Meus pedidos';
         $items['edit-account'] = 'Meus dados';
-        unset( $items['dashboard'] );
+       // unset( $items['dashboard'] );
         unset( $items['downloads'] );
         unset( $items['edit-address'] );
 
-        $favorite = array( 'polen-favorite' => 'Favoritos' );
-        $items = array_slice( $items, 0, 2, true ) + $favorite + array_slice( $items, 2, NULL, true );
+        $logged_user = wp_get_current_user();
+		if( in_array( 'user_talent',  $logged_user->roles ) )
+		{ 
+            $items['orders'] = 'Suas solicitações';
+            $items['dashboard'] = 'Início';
+        }    
+        else{
+            unset( $items['dashboard'] );
+            $items['orders']       = 'Meus pedidos';
+            $favorite = array( 'polen-favorite' => 'Favoritos' );
+            $items = array_slice( $items, 0, 2, true ) + $favorite + array_slice( $items, 2, NULL, true );
+        }    
+
+
 
         return $items;
     }
