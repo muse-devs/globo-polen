@@ -37,3 +37,9 @@ select.form-control:not([size]):not([multiple]) {
 	color: $input-font-color;
 	// background-color: $form-bg-color;
 }
+
+.woocommerce form.checkout_coupon,
+.woocommerce form.login,
+.woocommerce form.register {
+	border: none;
+}
