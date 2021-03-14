@@ -87,7 +87,7 @@ this["wc"] = this["wc"] || {}; this["wc"]["onboardingTaxNotice"] =
 /************************************************************************/
 /******/ ({
 
-/***/ 15:
+/***/ 11:
 /***/ (function(module, exports) {
 
 (function() { module.exports = this["wp"]["data"]; }());
@@ -115,7 +115,7 @@ this["wc"] = this["wc"] || {}; this["wc"]["onboardingTaxNotice"] =
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return getSetting; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return setSetting; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return getAdminLink; });
-/* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(30);
+/* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(31);
 /* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
@@ -212,7 +212,7 @@ function getAdminLink(path) {
 
 /***/ }),
 
-/***/ 30:
+/***/ 31:
 /***/ (function(module, exports) {
 
 function _typeof(obj) {
@@ -242,7 +242,7 @@ module.exports = _typeof;
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(15);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(11);
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(54);
 /* harmony import */ var _woocommerce_wc_admin_settings__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(25);
@@ -256,16 +256,17 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Returns a promise and resolves when the loader overlay no longer exists.
  *
- * @return {Promise} Promise for overlay existence.
+ * @param {HTMLElement} saveButton Save button DOM element.
+ * @return {Promise} Promise for save status.
  */
 
-var saveCompleted = function saveCompleted() {
-  if (document.querySelector('.blockUI.blockOverlay') !== null) {
+var saveCompleted = function saveCompleted(saveButton) {
+  if (saveButton && !saveButton.disabled) {
     var promise = new Promise(function (resolve) {
       window.requestAnimationFrame(resolve);
     });
     return promise.then(function () {
-      return saveCompleted();
+      return saveCompleted(saveButton);
     });
   }
 
@@ -279,13 +280,18 @@ var saveCompleted = function saveCompleted() {
 var showTaxCompletionNotice = function showTaxCompletionNotice() {
   var saveButton = document.querySelector('.woocommerce-save-button');
 
-  if (saveButton.classList.contains('is-clicked')) {
+  if (saveButton.classList.contains('has-tax')) {
     return;
   }
 
-  saveButton.classList.add('is-clicked');
-  saveCompleted().then(function () {
-    return Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__["dispatch"])('core/notices').createSuccessNotice(Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("You've added your first tax rate!", 'woocommerce-admin'), {
+  saveCompleted(saveButton).then(function () {
+    // Check if a row was added successfully after WooCommerce removes invalid rows.
+    if (!document.querySelector('.wc_tax_rates .tips')) {
+      return;
+    }
+
+    saveButton.classList.add('has-tax');
+    Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__["dispatch"])('core/notices').createSuccessNotice(Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("You've added your first tax rate!", 'woocommerce-admin'), {
       id: 'WOOCOMMERCE_ONBOARDING_TAX_NOTICE',
       actions: [{
         url: Object(_woocommerce_wc_admin_settings__WEBPACK_IMPORTED_MODULE_3__[/* getAdminLink */ "f"])('admin.php?page=wc-admin'),
@@ -298,7 +304,7 @@ var showTaxCompletionNotice = function showTaxCompletionNotice() {
 Object(_wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])(function () {
   var saveButton = document.querySelector('.woocommerce-save-button');
 
-  if (saveButton) {
+  if (window.htmlSettingsTaxLocalizeScript && window.htmlSettingsTaxLocalizeScript.rates && !window.htmlSettingsTaxLocalizeScript.rates.length && saveButton) {
     saveButton.addEventListener('click', showTaxCompletionNotice);
   }
 });

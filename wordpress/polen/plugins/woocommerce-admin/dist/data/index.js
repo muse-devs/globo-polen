@@ -94,7 +94,14 @@ this["wc"] = this["wc"] || {}; this["wc"]["data"] =
 
 /***/ }),
 
-/***/ 119:
+/***/ 11:
+/***/ (function(module, exports) {
+
+(function() { module.exports = this["wp"]["data"]; }());
+
+/***/ }),
+
+/***/ 120:
 /***/ (function(module, exports) {
 
 var charenc = {
@@ -134,14 +141,14 @@ module.exports = charenc;
 
 /***/ }),
 
-/***/ 122:
+/***/ 123:
 /***/ (function(module, exports, __webpack_require__) {
 
 (function(){
   var crypt = __webpack_require__(180),
-      utf8 = __webpack_require__(119).utf8,
+      utf8 = __webpack_require__(120).utf8,
       isBuffer = __webpack_require__(181),
-      bin = __webpack_require__(119).bin,
+      bin = __webpack_require__(120).bin,
 
   // The core
   md5 = function (message, options) {
@@ -301,13 +308,6 @@ module.exports = charenc;
 
 /***/ }),
 
-/***/ 15:
-/***/ (function(module, exports) {
-
-(function() { module.exports = this["wp"]["data"]; }());
-
-/***/ }),
-
 /***/ 16:
 /***/ (function(module, exports) {
 
@@ -323,9 +323,21 @@ module.exports = charenc;
 /***/ }),
 
 /***/ 18:
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-(function() { module.exports = this["wp"]["compose"]; }());
+var arrayWithHoles = __webpack_require__(60);
+
+var iterableToArrayLimit = __webpack_require__(61);
+
+var unsupportedIterableToArray = __webpack_require__(40);
+
+var nonIterableRest = __webpack_require__(62);
+
+function _slicedToArray(arr, i) {
+  return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || unsupportedIterableToArray(arr, i) || nonIterableRest();
+}
+
+module.exports = _slicedToArray;
 
 /***/ }),
 
@@ -463,37 +475,11 @@ function isSlowBuffer (obj) {
 /***/ 19:
 /***/ (function(module, exports, __webpack_require__) {
 
-var arrayWithHoles = __webpack_require__(60);
-
-var iterableToArrayLimit = __webpack_require__(61);
-
-var unsupportedIterableToArray = __webpack_require__(39);
-
-var nonIterableRest = __webpack_require__(62);
-
-function _slicedToArray(arr, i) {
-  return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || unsupportedIterableToArray(arr, i) || nonIterableRest();
-}
-
-module.exports = _slicedToArray;
-
-/***/ }),
-
-/***/ 2:
-/***/ (function(module, exports) {
-
-(function() { module.exports = this["wp"]["i18n"]; }());
-
-/***/ }),
-
-/***/ 20:
-/***/ (function(module, exports, __webpack_require__) {
-
 var arrayWithoutHoles = __webpack_require__(57);
 
 var iterableToArray = __webpack_require__(58);
 
-var unsupportedIterableToArray = __webpack_require__(39);
+var unsupportedIterableToArray = __webpack_require__(40);
 
 var nonIterableSpread = __webpack_require__(59);
 
@@ -505,6 +491,20 @@ module.exports = _toConsumableArray;
 
 /***/ }),
 
+/***/ 2:
+/***/ (function(module, exports) {
+
+(function() { module.exports = this["wp"]["i18n"]; }());
+
+/***/ }),
+
+/***/ 20:
+/***/ (function(module, exports) {
+
+(function() { module.exports = this["wp"]["compose"]; }());
+
+/***/ }),
+
 /***/ 21:
 /***/ (function(module, exports) {
 
@@ -512,14 +512,14 @@ module.exports = _toConsumableArray;
 
 /***/ }),
 
-/***/ 22:
+/***/ 23:
 /***/ (function(module, exports) {
 
 (function() { module.exports = this["wp"]["url"]; }());
 
 /***/ }),
 
-/***/ 27:
+/***/ 26:
 /***/ (function(module, exports) {
 
 (function() { module.exports = this["wp"]["apiFetch"]; }());
@@ -543,7 +543,7 @@ module.exports = _toConsumableArray;
 /***/ 34:
 /***/ (function(module, exports, __webpack_require__) {
 
-var objectWithoutPropertiesLoose = __webpack_require__(96);
+var objectWithoutPropertiesLoose = __webpack_require__(97);
 
 function _objectWithoutProperties(source, excluded) {
   if (source == null) return {};
@@ -585,7 +585,7 @@ module.exports = _arrayLikeToArray;
 
 /***/ }),
 
-/***/ 39:
+/***/ 40:
 /***/ (function(module, exports, __webpack_require__) {
 
 var arrayLikeToArray = __webpack_require__(37);
@@ -603,14 +603,14 @@ module.exports = _unsupportedIterableToArray;
 
 /***/ }),
 
-/***/ 42:
+/***/ 43:
 /***/ (function(module, exports) {
 
 (function() { module.exports = this["wp"]["hooks"]; }());
 
 /***/ }),
 
-/***/ 43:
+/***/ 44:
 /***/ (function(module, exports) {
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
@@ -671,6 +671,7 @@ __webpack_require__.d(__webpack_exports__, "ONBOARDING_STORE_NAME", function() {
 __webpack_require__.d(__webpack_exports__, "withOnboardingHydration", function() { return /* reexport */ with_onboarding_hydration_withOnboardingHydration; });
 __webpack_require__.d(__webpack_exports__, "USER_STORE_NAME", function() { return /* reexport */ USER_STORE_NAME; });
 __webpack_require__.d(__webpack_exports__, "withCurrentUserHydration", function() { return /* reexport */ with_current_user_hydration_withCurrentUserHydration; });
+__webpack_require__.d(__webpack_exports__, "useUser", function() { return /* reexport */ use_user_useUser; });
 __webpack_require__.d(__webpack_exports__, "useUserPreferences", function() { return /* reexport */ use_user_preferences_useUserPreferences; });
 __webpack_require__.d(__webpack_exports__, "OPTIONS_STORE_NAME", function() { return /* reexport */ OPTIONS_STORE_NAME; });
 __webpack_require__.d(__webpack_exports__, "withOptionsHydration", function() { return /* reexport */ with_options_hydration_withOptionsHydration; });
@@ -918,6 +919,8 @@ var navigation_selectors_namespaceObject = {};
 __webpack_require__.r(navigation_selectors_namespaceObject);
 __webpack_require__.d(navigation_selectors_namespaceObject, "getMenuItems", function() { return selectors_getMenuItems; });
 __webpack_require__.d(navigation_selectors_namespaceObject, "getActiveItem", function() { return getActiveItem; });
+__webpack_require__.d(navigation_selectors_namespaceObject, "getFavorites", function() { return getFavorites; });
+__webpack_require__.d(navigation_selectors_namespaceObject, "isNavigationRequesting", function() { return isNavigationRequesting; });
 
 // NAMESPACE OBJECT: ./packages/data/build-module/navigation/actions.js
 var navigation_actions_namespaceObject = {};
@@ -925,6 +928,22 @@ __webpack_require__.r(navigation_actions_namespaceObject);
 __webpack_require__.d(navigation_actions_namespaceObject, "setActiveItem", function() { return setActiveItem; });
 __webpack_require__.d(navigation_actions_namespaceObject, "setMenuItems", function() { return actions_setMenuItems; });
 __webpack_require__.d(navigation_actions_namespaceObject, "addMenuItems", function() { return addMenuItems; });
+__webpack_require__.d(navigation_actions_namespaceObject, "getFavoritesFailure", function() { return getFavoritesFailure; });
+__webpack_require__.d(navigation_actions_namespaceObject, "getFavoritesRequest", function() { return getFavoritesRequest; });
+__webpack_require__.d(navigation_actions_namespaceObject, "getFavoritesSuccess", function() { return getFavoritesSuccess; });
+__webpack_require__.d(navigation_actions_namespaceObject, "addFavoriteRequest", function() { return addFavoriteRequest; });
+__webpack_require__.d(navigation_actions_namespaceObject, "addFavoriteFailure", function() { return addFavoriteFailure; });
+__webpack_require__.d(navigation_actions_namespaceObject, "addFavoriteSuccess", function() { return addFavoriteSuccess; });
+__webpack_require__.d(navigation_actions_namespaceObject, "removeFavoriteRequest", function() { return removeFavoriteRequest; });
+__webpack_require__.d(navigation_actions_namespaceObject, "removeFavoriteFailure", function() { return removeFavoriteFailure; });
+__webpack_require__.d(navigation_actions_namespaceObject, "removeFavoriteSuccess", function() { return removeFavoriteSuccess; });
+__webpack_require__.d(navigation_actions_namespaceObject, "addFavorite", function() { return addFavorite; });
+__webpack_require__.d(navigation_actions_namespaceObject, "removeFavorite", function() { return removeFavorite; });
+
+// NAMESPACE OBJECT: ./packages/data/build-module/navigation/resolvers.js
+var navigation_resolvers_namespaceObject = {};
+__webpack_require__.r(navigation_resolvers_namespaceObject);
+__webpack_require__.d(navigation_resolvers_namespaceObject, "getFavorites", function() { return resolvers_getFavorites; });
 
 // NAMESPACE OBJECT: ./packages/data/build-module/export/selectors.js
 var export_selectors_namespaceObject = {};
@@ -968,7 +987,7 @@ __webpack_require__.d(import_resolvers_namespaceObject, "getImportStatus", funct
 __webpack_require__.d(import_resolvers_namespaceObject, "getImportTotals", function() { return resolvers_getImportTotals; });
 
 // EXTERNAL MODULE: external {"this":["wp","data"]}
-var external_this_wp_data_ = __webpack_require__(15);
+var external_this_wp_data_ = __webpack_require__(11);
 
 // EXTERNAL MODULE: external {"this":["wp","dataControls"]}
 var external_this_wp_dataControls_ = __webpack_require__(17);
@@ -976,7 +995,7 @@ var external_this_wp_dataControls_ = __webpack_require__(17);
 // CONCATENATED MODULE: ./packages/data/build-module/settings/constants.js
 var STORE_NAME = 'wc/admin/settings';
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/toConsumableArray.js
-var toConsumableArray = __webpack_require__(20);
+var toConsumableArray = __webpack_require__(19);
 var toConsumableArray_default = /*#__PURE__*/__webpack_require__.n(toConsumableArray);
 
 // CONCATENATED MODULE: ./packages/data/build-module/utils.js
@@ -1543,7 +1562,7 @@ var SETTINGS_STORE_NAME = STORE_NAME;
 var external_this_wp_element_ = __webpack_require__(0);
 
 // EXTERNAL MODULE: external {"this":["wp","compose"]}
-var external_this_wp_compose_ = __webpack_require__(18);
+var external_this_wp_compose_ = __webpack_require__(20);
 
 // CONCATENATED MODULE: ./packages/data/build-module/settings/with-settings-hydration.js
 
@@ -1590,6 +1609,7 @@ var with_settings_hydration_withSettingsHydration = function withSettingsHydrati
   }, 'withSettingsHydration');
 };
 // CONCATENATED MODULE: ./packages/data/build-module/settings/use-settings.js
+
 
 
 function use_settings_ownKeys(object, enumerableOnly) {
@@ -1653,7 +1673,7 @@ var use_settings_useSettings = function useSettings(group) {
       isRequesting: isUpdateSettingsRequesting(group),
       isDirty: getIsDirty(group, settingsKeys)
     };
-  }, [group, settingsKeys]),
+  }, [group].concat(toConsumableArray_default()(settingsKeys.sort()))),
       requestedSettings = _useSelect.requestedSettings,
       settingsError = _useSelect.settingsError,
       isRequesting = _useSelect.isRequesting,
@@ -2112,7 +2132,7 @@ var actions_formatErrorMessage = function formatErrorMessage(pluginErrors) {
   });
 };
 // EXTERNAL MODULE: external {"this":["wp","url"]}
-var external_this_wp_url_ = __webpack_require__(22);
+var external_this_wp_url_ = __webpack_require__(23);
 
 // CONCATENATED MODULE: ./packages/data/build-module/options/constants.js
 var options_constants_STORE_NAME = 'wc/admin/options';
@@ -2290,7 +2310,7 @@ function updateOptions(data) {
   }, options_actions_marked, null, [[4, 13]]);
 }
 // EXTERNAL MODULE: external {"this":["wp","apiFetch"]}
-var external_this_wp_apiFetch_ = __webpack_require__(27);
+var external_this_wp_apiFetch_ = __webpack_require__(26);
 var external_this_wp_apiFetch_default = /*#__PURE__*/__webpack_require__.n(external_this_wp_apiFetch_);
 
 // CONCATENATED MODULE: ./packages/data/build-module/options/controls.js
@@ -3414,15 +3434,15 @@ var with_onboarding_hydration_withOnboardingHydration = function withOnboardingH
     };
   }, 'withOnboardingHydration');
 };
-// CONCATENATED MODULE: ./packages/data/build-module/user-preferences/constants.js
-var user_preferences_constants_STORE_NAME = 'core';
-// CONCATENATED MODULE: ./packages/data/build-module/user-preferences/index.js
+// CONCATENATED MODULE: ./packages/data/build-module/user/constants.js
+var user_constants_STORE_NAME = 'core';
+// CONCATENATED MODULE: ./packages/data/build-module/user/index.js
 /**
  * Internal dependencies
  */
 
-var USER_STORE_NAME = user_preferences_constants_STORE_NAME;
-// CONCATENATED MODULE: ./packages/data/build-module/user-preferences/with-current-user-hydration.js
+var USER_STORE_NAME = user_constants_STORE_NAME;
+// CONCATENATED MODULE: ./packages/data/build-module/user/with-current-user-hydration.js
 
 /**
  * External dependencies
@@ -3452,11 +3472,11 @@ var with_current_user_hydration_withCurrentUserHydration = function withCurrentU
           return;
         }
 
-        var _select = select(user_preferences_constants_STORE_NAME),
+        var _select = select(user_constants_STORE_NAME),
             isResolving = _select.isResolving,
             hasFinishedResolution = _select.hasFinishedResolution;
 
-        var _registry$dispatch = registry.dispatch(user_preferences_constants_STORE_NAME),
+        var _registry$dispatch = registry.dispatch(user_constants_STORE_NAME),
             startResolution = _registry$dispatch.startResolution,
             finishResolution = _registry$dispatch.finishResolution,
             receiveCurrentUser = _registry$dispatch.receiveCurrentUser;
@@ -3471,11 +3491,55 @@ var with_current_user_hydration_withCurrentUserHydration = function withCurrentU
     };
   }, 'withCurrentUserHydration');
 };
+// CONCATENATED MODULE: ./packages/data/build-module/user/use-user.js
+/**
+ * External dependencies
+ */
+
+/**
+ * Internal dependencies
+ */
+
+
+/**
+ * Custom react hook for shortcut methods around user.
+ *
+ * This is a wrapper around @wordpress/core-data's getCurrentUser().
+ */
+
+var use_user_useUser = function useUser() {
+  var userData = Object(external_this_wp_data_["useSelect"])(function (select) {
+    var _select = select(user_constants_STORE_NAME),
+        getCurrentUser = _select.getCurrentUser,
+        hasStartedResolution = _select.hasStartedResolution,
+        hasFinishedResolution = _select.hasFinishedResolution;
+
+    return {
+      isRequesting: hasStartedResolution('getCurrentUser') && !hasFinishedResolution('getCurrentUser'),
+      user: getCurrentUser(),
+      getCurrentUser: getCurrentUser
+    };
+  });
+
+  var currentUserCan = function currentUserCan(capability) {
+    if (userData.user && userData.user && userData.user.capabilities[capability]) {
+      return true;
+    }
+
+    return false;
+  };
+
+  return {
+    currentUserCan: currentUserCan,
+    user: userData.user,
+    isRequesting: userData.isRequesting
+  };
+};
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/asyncToGenerator.js
-var asyncToGenerator = __webpack_require__(43);
+var asyncToGenerator = __webpack_require__(44);
 var asyncToGenerator_default = /*#__PURE__*/__webpack_require__.n(asyncToGenerator);
 
-// CONCATENATED MODULE: ./packages/data/build-module/user-preferences/use-user-preferences.js
+// CONCATENATED MODULE: ./packages/data/build-module/user/use-user-preferences.js
 
 
 
@@ -3626,13 +3690,13 @@ function _updateUserPrefs() {
 
 var use_user_preferences_useUserPreferences = function useUserPreferences() {
   // Get our dispatch methods now - this can't happen inside the callback below.
-  var dispatch = Object(external_this_wp_data_["useDispatch"])(user_preferences_constants_STORE_NAME);
+  var dispatch = Object(external_this_wp_data_["useDispatch"])(user_constants_STORE_NAME);
   var addEntities = dispatch.addEntities,
       receiveCurrentUser = dispatch.receiveCurrentUser,
       saveEntityRecord = dispatch.saveEntityRecord;
   var saveUser = dispatch.saveUser;
   var userData = Object(external_this_wp_data_["useSelect"])(function (select) {
-    var _select = select(user_preferences_constants_STORE_NAME),
+    var _select = select(user_constants_STORE_NAME),
         getCurrentUser = _select.getCurrentUser,
         getEntity = _select.getEntity,
         getEntityRecord = _select.getEntityRecord,
@@ -3931,7 +3995,7 @@ function reviews_actions_setError(query, error) {
   };
 }
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/slicedToArray.js
-var slicedToArray = __webpack_require__(19);
+var slicedToArray = __webpack_require__(18);
 var slicedToArray_default = /*#__PURE__*/__webpack_require__.n(slicedToArray);
 
 // CONCATENATED MODULE: ./packages/data/build-module/controls.js
@@ -4205,13 +4269,295 @@ var REVIEWS_STORE_NAME = reviews_constants_STORE_NAME;
  * Internal dependencies
  */
 var notes_constants_STORE_NAME = 'wc/admin/notes';
+// CONCATENATED MODULE: ./node_modules/rememo/es/rememo.js
+
+
+var LEAF_KEY, hasWeakMap;
+
+/**
+ * Arbitrary value used as key for referencing cache object in WeakMap tree.
+ *
+ * @type {Object}
+ */
+LEAF_KEY = {};
+
+/**
+ * Whether environment supports WeakMap.
+ *
+ * @type {boolean}
+ */
+hasWeakMap = typeof WeakMap !== 'undefined';
+
+/**
+ * Returns the first argument as the sole entry in an array.
+ *
+ * @param {*} value Value to return.
+ *
+ * @return {Array} Value returned as entry in array.
+ */
+function arrayOf( value ) {
+	return [ value ];
+}
+
+/**
+ * Returns true if the value passed is object-like, or false otherwise. A value
+ * is object-like if it can support property assignment, e.g. object or array.
+ *
+ * @param {*} value Value to test.
+ *
+ * @return {boolean} Whether value is object-like.
+ */
+function isObjectLike( value ) {
+	return !! value && 'object' === typeof value;
+}
+
+/**
+ * Creates and returns a new cache object.
+ *
+ * @return {Object} Cache object.
+ */
+function createCache() {
+	var cache = {
+		clear: function() {
+			cache.head = null;
+		},
+	};
+
+	return cache;
+}
+
+/**
+ * Returns true if entries within the two arrays are strictly equal by
+ * reference from a starting index.
+ *
+ * @param {Array}  a         First array.
+ * @param {Array}  b         Second array.
+ * @param {number} fromIndex Index from which to start comparison.
+ *
+ * @return {boolean} Whether arrays are shallowly equal.
+ */
+function isShallowEqual( a, b, fromIndex ) {
+	var i;
+
+	if ( a.length !== b.length ) {
+		return false;
+	}
+
+	for ( i = fromIndex; i < a.length; i++ ) {
+		if ( a[ i ] !== b[ i ] ) {
+			return false;
+		}
+	}
+
+	return true;
+}
+
+/**
+ * Returns a memoized selector function. The getDependants function argument is
+ * called before the memoized selector and is expected to return an immutable
+ * reference or array of references on which the selector depends for computing
+ * its own return value. The memoize cache is preserved only as long as those
+ * dependant references remain the same. If getDependants returns a different
+ * reference(s), the cache is cleared and the selector value regenerated.
+ *
+ * @param {Function} selector      Selector function.
+ * @param {Function} getDependants Dependant getter returning an immutable
+ *                                 reference or array of reference used in
+ *                                 cache bust consideration.
+ *
+ * @return {Function} Memoized selector.
+ */
+/* harmony default export */ var rememo = (function( selector, getDependants ) {
+	var rootCache, getCache;
+
+	// Use object source as dependant if getter not provided
+	if ( ! getDependants ) {
+		getDependants = arrayOf;
+	}
+
+	/**
+	 * Returns the root cache. If WeakMap is supported, this is assigned to the
+	 * root WeakMap cache set, otherwise it is a shared instance of the default
+	 * cache object.
+	 *
+	 * @return {(WeakMap|Object)} Root cache object.
+	 */
+	function getRootCache() {
+		return rootCache;
+	}
+
+	/**
+	 * Returns the cache for a given dependants array. When possible, a WeakMap
+	 * will be used to create a unique cache for each set of dependants. This
+	 * is feasible due to the nature of WeakMap in allowing garbage collection
+	 * to occur on entries where the key object is no longer referenced. Since
+	 * WeakMap requires the key to be an object, this is only possible when the
+	 * dependant is object-like. The root cache is created as a hierarchy where
+	 * each top-level key is the first entry in a dependants set, the value a
+	 * WeakMap where each key is the next dependant, and so on. This continues
+	 * so long as the dependants are object-like. If no dependants are object-
+	 * like, then the cache is shared across all invocations.
+	 *
+	 * @see isObjectLike
+	 *
+	 * @param {Array} dependants Selector dependants.
+	 *
+	 * @return {Object} Cache object.
+	 */
+	function getWeakMapCache( dependants ) {
+		var caches = rootCache,
+			isUniqueByDependants = true,
+			i, dependant, map, cache;
+
+		for ( i = 0; i < dependants.length; i++ ) {
+			dependant = dependants[ i ];
+
+			// Can only compose WeakMap from object-like key.
+			if ( ! isObjectLike( dependant ) ) {
+				isUniqueByDependants = false;
+				break;
+			}
+
+			// Does current segment of cache already have a WeakMap?
+			if ( caches.has( dependant ) ) {
+				// Traverse into nested WeakMap.
+				caches = caches.get( dependant );
+			} else {
+				// Create, set, and traverse into a new one.
+				map = new WeakMap();
+				caches.set( dependant, map );
+				caches = map;
+			}
+		}
+
+		// We use an arbitrary (but consistent) object as key for the last item
+		// in the WeakMap to serve as our running cache.
+		if ( ! caches.has( LEAF_KEY ) ) {
+			cache = createCache();
+			cache.isUniqueByDependants = isUniqueByDependants;
+			caches.set( LEAF_KEY, cache );
+		}
+
+		return caches.get( LEAF_KEY );
+	}
+
+	// Assign cache handler by availability of WeakMap
+	getCache = hasWeakMap ? getWeakMapCache : getRootCache;
+
+	/**
+	 * Resets root memoization cache.
+	 */
+	function clear() {
+		rootCache = hasWeakMap ? new WeakMap() : createCache();
+	}
+
+	// eslint-disable-next-line jsdoc/check-param-names
+	/**
+	 * The augmented selector call, considering first whether dependants have
+	 * changed before passing it to underlying memoize function.
+	 *
+	 * @param {Object} source    Source object for derivation.
+	 * @param {...*}   extraArgs Additional arguments to pass to selector.
+	 *
+	 * @return {*} Selector result.
+	 */
+	function callSelector( /* source, ...extraArgs */ ) {
+		var len = arguments.length,
+			cache, node, i, args, dependants;
+
+		// Create copy of arguments (avoid leaking deoptimization).
+		args = new Array( len );
+		for ( i = 0; i < len; i++ ) {
+			args[ i ] = arguments[ i ];
+		}
+
+		dependants = getDependants.apply( null, args );
+		cache = getCache( dependants );
+
+		// If not guaranteed uniqueness by dependants (primitive type or lack
+		// of WeakMap support), shallow compare against last dependants and, if
+		// references have changed, destroy cache to recalculate result.
+		if ( ! cache.isUniqueByDependants ) {
+			if ( cache.lastDependants && ! isShallowEqual( dependants, cache.lastDependants, 0 ) ) {
+				cache.clear();
+			}
+
+			cache.lastDependants = dependants;
+		}
+
+		node = cache.head;
+		while ( node ) {
+			// Check whether node arguments match arguments
+			if ( ! isShallowEqual( node.args, args, 1 ) ) {
+				node = node.next;
+				continue;
+			}
+
+			// At this point we can assume we've found a match
+
+			// Surface matched node to head if not already
+			if ( node !== cache.head ) {
+				// Adjust siblings to point to each other.
+				node.prev.next = node.next;
+				if ( node.next ) {
+					node.next.prev = node.prev;
+				}
+
+				node.next = cache.head;
+				node.prev = null;
+				cache.head.prev = node;
+				cache.head = node;
+			}
+
+			// Return immediately
+			return node.val;
+		}
+
+		// No cached value found. Continue to insertion phase:
+
+		node = {
+			// Generate the result from original function
+			val: selector.apply( null, args ),
+		};
+
+		// Avoid including the source object in the cache.
+		args[ 0 ] = null;
+		node.args = args;
+
+		// Don't need to check whether node is already head, since it would
+		// have been returned above already if it was
+
+		// Shift existing head down list
+		if ( cache.head ) {
+			cache.head.prev = node;
+			node.next = cache.head;
+		}
+
+		cache.head = node;
+
+		return node.val;
+	}
+
+	callSelector.getDependants = getDependants;
+	callSelector.clear = clear;
+	clear();
+
+	return callSelector;
+});
+
 // CONCATENATED MODULE: ./packages/data/build-module/notes/selectors.js
-var getNotes = function getNotes(state, query) {
+/**
+ * External dependencies
+ */
+
+var getNotes = rememo(function (state, query) {
   var noteIds = state.noteQueries[JSON.stringify(query)] || [];
   return noteIds.map(function (id) {
     return state.notes[id];
   });
-};
+}, function (state, query) {
+  return [state.noteQueries[JSON.stringify(query)], state.notes];
+});
 var getNotesError = function getNotesError(state, selector) {
   return state.errors[selector] || false;
 };
@@ -5799,7 +6145,7 @@ var ITEMS_STORE_NAME = items_constants_STORE_NAME;
 // CONCATENATED MODULE: ./packages/data/build-module/navigation/constants.js
 var navigation_constants_STORE_NAME = 'woocommerce-navigation';
 // EXTERNAL MODULE: external {"this":["wp","hooks"]}
-var external_this_wp_hooks_ = __webpack_require__(42);
+var external_this_wp_hooks_ = __webpack_require__(43);
 
 // CONCATENATED MODULE: ./packages/data/build-module/navigation/selectors.js
 /**
@@ -5813,17 +6159,44 @@ var selectors_getMenuItems = function getMenuItems(state) {
 var getActiveItem = function getActiveItem(state) {
   return state.activeItem || null;
 };
+var getFavorites = function getFavorites(state) {
+  return state.favorites || [];
+};
+var isNavigationRequesting = function isNavigationRequesting(state, selector) {
+  return state.requesting[selector] || false;
+};
 // CONCATENATED MODULE: ./packages/data/build-module/navigation/action-types.js
 var navigation_action_types_TYPES = {
   ADD_MENU_ITEMS: 'ADD_MENU_ITEMS',
   SET_MENU_ITEMS: 'SET_MENU_ITEMS',
-  SET_ACTIVE_ITEM: 'SET_ACTIVE_ITEM'
+  SET_ACTIVE_ITEM: 'SET_ACTIVE_ITEM',
+  ADD_FAVORITE_FAILURE: 'ADD_FAVORITE_FAILURE',
+  ADD_FAVORITE_REQUEST: 'ADD_FAVORITE_REQUEST',
+  ADD_FAVORITE_SUCCESS: 'ADD_FAVORITE_SUCCESS',
+  GET_FAVORITES_FAILURE: 'GET_FAVORITES_FAILURE',
+  GET_FAVORITES_REQUEST: 'GET_FAVORITES_REQUEST',
+  GET_FAVORITES_SUCCESS: 'GET_FAVORITES_SUCCESS',
+  REMOVE_FAVORITE_FAILURE: 'REMOVE_FAVORITE_FAILURE',
+  REMOVE_FAVORITE_REQUEST: 'REMOVE_FAVORITE_REQUEST',
+  REMOVE_FAVORITE_SUCCESS: 'REMOVE_FAVORITE_SUCCESS'
 };
 /* harmony default export */ var navigation_action_types = (navigation_action_types_TYPES);
 // CONCATENATED MODULE: ./packages/data/build-module/navigation/actions.js
+
+
+var navigation_actions_marked = /*#__PURE__*/regenerator_default.a.mark(addFavorite),
+    navigation_actions_marked2 = /*#__PURE__*/regenerator_default.a.mark(removeFavorite);
+/**
+ * External dependencies
+ */
+
+
+
 /**
  * Internal dependencies
  */
+
+
 
 function setActiveItem(activeItem) {
   return {
@@ -5842,6 +6215,169 @@ function addMenuItems(menuItems) {
     type: navigation_action_types.ADD_MENU_ITEMS,
     menuItems: menuItems
   };
+}
+function getFavoritesFailure(error) {
+  return {
+    type: navigation_action_types.GET_FAVORITES_FAILURE,
+    error: error
+  };
+}
+function getFavoritesRequest(favorites) {
+  return {
+    type: navigation_action_types.GET_FAVORITES_REQUEST,
+    favorites: favorites
+  };
+}
+function getFavoritesSuccess(favorites) {
+  return {
+    type: navigation_action_types.GET_FAVORITES_SUCCESS,
+    favorites: favorites
+  };
+}
+function addFavoriteRequest(favorite) {
+  return {
+    type: navigation_action_types.ADD_FAVORITE_REQUEST,
+    favorite: favorite
+  };
+}
+function addFavoriteFailure(favorite, error) {
+  return {
+    type: navigation_action_types.ADD_FAVORITE_FAILURE,
+    favorite: favorite,
+    error: error
+  };
+}
+function addFavoriteSuccess(favorite) {
+  return {
+    type: navigation_action_types.ADD_FAVORITE_SUCCESS,
+    favorite: favorite
+  };
+}
+function removeFavoriteRequest(favorite) {
+  return {
+    type: navigation_action_types.REMOVE_FAVORITE_REQUEST,
+    favorite: favorite
+  };
+}
+function removeFavoriteFailure(favorite, error) {
+  return {
+    type: navigation_action_types.REMOVE_FAVORITE_FAILURE,
+    favorite: favorite,
+    error: error
+  };
+}
+function removeFavoriteSuccess(favorite, error) {
+  return {
+    type: navigation_action_types.REMOVE_FAVORITE_SUCCESS,
+    favorite: favorite,
+    error: error
+  };
+}
+function addFavorite(favorite) {
+  var results;
+  return regenerator_default.a.wrap(function addFavorite$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          _context.next = 2;
+          return addFavoriteRequest(favorite);
+
+        case 2:
+          _context.prev = 2;
+          _context.next = 5;
+          return external_this_wp_apiFetch_default()({
+            path: "".concat(WC_ADMIN_NAMESPACE, "/navigation/favorites/me"),
+            method: 'POST',
+            data: {
+              item_id: favorite
+            }
+          });
+
+        case 5:
+          results = _context.sent;
+
+          if (!results) {
+            _context.next = 10;
+            break;
+          }
+
+          _context.next = 9;
+          return addFavoriteSuccess(favorite);
+
+        case 9:
+          return _context.abrupt("return", results);
+
+        case 10:
+          throw new Error();
+
+        case 13:
+          _context.prev = 13;
+          _context.t0 = _context["catch"](2);
+          _context.next = 17;
+          return addFavoriteFailure(favorite, _context.t0);
+
+        case 17:
+          throw new Error();
+
+        case 18:
+        case "end":
+          return _context.stop();
+      }
+    }
+  }, navigation_actions_marked, null, [[2, 13]]);
+}
+function removeFavorite(favorite) {
+  var results;
+  return regenerator_default.a.wrap(function removeFavorite$(_context2) {
+    while (1) {
+      switch (_context2.prev = _context2.next) {
+        case 0:
+          _context2.next = 2;
+          return removeFavoriteRequest(favorite);
+
+        case 2:
+          _context2.prev = 2;
+          _context2.next = 5;
+          return external_this_wp_apiFetch_default()({
+            path: "".concat(WC_ADMIN_NAMESPACE, "/navigation/favorites/me"),
+            method: 'DELETE',
+            data: {
+              item_id: favorite
+            }
+          });
+
+        case 5:
+          results = _context2.sent;
+
+          if (!results) {
+            _context2.next = 10;
+            break;
+          }
+
+          _context2.next = 9;
+          return removeFavoriteSuccess(favorite);
+
+        case 9:
+          return _context2.abrupt("return", results);
+
+        case 10:
+          throw new Error();
+
+        case 13:
+          _context2.prev = 13;
+          _context2.t0 = _context2["catch"](2);
+          _context2.next = 17;
+          return removeFavoriteFailure(favorite, _context2.t0);
+
+        case 17:
+          throw new Error();
+
+        case 18:
+        case "end":
+          return _context2.stop();
+      }
+    }
+  }, navigation_actions_marked2, null, [[2, 13]]);
 }
 // CONCATENATED MODULE: ./packages/data/build-module/navigation/reducer.js
 
@@ -5890,12 +6426,18 @@ function navigation_reducer_objectSpread(target) {
 var navigation_reducer_reducer = function reducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
     activeItem: null,
-    menuItems: []
+    error: null,
+    menuItems: [],
+    favorites: [],
+    requesting: {}
   };
 
   var _ref = arguments.length > 1 ? arguments[1] : undefined,
       type = _ref.type,
       activeItem = _ref.activeItem,
+      error = _ref.error,
+      favorite = _ref.favorite,
+      favorites = _ref.favorites,
       menuItems = _ref.menuItems;
 
   switch (type) {
@@ -5916,12 +6458,176 @@ var navigation_reducer_reducer = function reducer() {
         menuItems: [].concat(toConsumableArray_default()(state.menuItems), toConsumableArray_default()(menuItems))
       });
       break;
+
+    case navigation_action_types.GET_FAVORITES_FAILURE:
+      state = navigation_reducer_objectSpread(navigation_reducer_objectSpread({}, state), {}, {
+        requesting: navigation_reducer_objectSpread(navigation_reducer_objectSpread({}, state.requesting), {}, {
+          getFavorites: false
+        })
+      });
+      break;
+
+    case navigation_action_types.GET_FAVORITES_REQUEST:
+      state = navigation_reducer_objectSpread(navigation_reducer_objectSpread({}, state), {}, {
+        requesting: navigation_reducer_objectSpread(navigation_reducer_objectSpread({}, state.requesting), {}, {
+          getFavorites: true
+        })
+      });
+      break;
+
+    case navigation_action_types.GET_FAVORITES_SUCCESS:
+      state = navigation_reducer_objectSpread(navigation_reducer_objectSpread({}, state), {}, {
+        favorites: favorites,
+        requesting: navigation_reducer_objectSpread(navigation_reducer_objectSpread({}, state.requesting), {}, {
+          getFavorites: false
+        })
+      });
+      break;
+
+    case navigation_action_types.ADD_FAVORITE_FAILURE:
+      state = navigation_reducer_objectSpread(navigation_reducer_objectSpread({}, state), {}, {
+        error: error,
+        requesting: navigation_reducer_objectSpread(navigation_reducer_objectSpread({}, state.requesting), {}, {
+          addFavorite: false
+        })
+      });
+      break;
+
+    case navigation_action_types.ADD_FAVORITE_REQUEST:
+      state = navigation_reducer_objectSpread(navigation_reducer_objectSpread({}, state), {}, {
+        requesting: navigation_reducer_objectSpread(navigation_reducer_objectSpread({}, state.requesting), {}, {
+          addFavorite: true
+        })
+      });
+      break;
+
+    case navigation_action_types.ADD_FAVORITE_SUCCESS:
+      var newFavorites = !state.favorites.includes(favorite) ? [].concat(toConsumableArray_default()(state.favorites), [favorite]) : state.favorites;
+      state = navigation_reducer_objectSpread(navigation_reducer_objectSpread({}, state), {}, {
+        favorites: newFavorites,
+        menuItems: state.menuItems.map(function (item) {
+          if (item.id === favorite) {
+            return navigation_reducer_objectSpread(navigation_reducer_objectSpread({}, item), {}, {
+              menuId: 'favorites'
+            });
+          }
+
+          return item;
+        }),
+        requesting: navigation_reducer_objectSpread(navigation_reducer_objectSpread({}, state.requesting), {}, {
+          addFavorite: false
+        })
+      });
+      break;
+
+    case navigation_action_types.REMOVE_FAVORITE_FAILURE:
+      state = navigation_reducer_objectSpread(navigation_reducer_objectSpread({}, state), {}, {
+        requesting: navigation_reducer_objectSpread(navigation_reducer_objectSpread({}, state.requesting), {}, {
+          error: error,
+          removeFavorite: false
+        })
+      });
+      break;
+
+    case navigation_action_types.REMOVE_FAVORITE_REQUEST:
+      state = navigation_reducer_objectSpread(navigation_reducer_objectSpread({}, state), {}, {
+        requesting: navigation_reducer_objectSpread(navigation_reducer_objectSpread({}, state.requesting), {}, {
+          removeFavorite: true
+        })
+      });
+      break;
+
+    case navigation_action_types.REMOVE_FAVORITE_SUCCESS:
+      var filteredFavorites = state.favorites.filter(function (f) {
+        return f !== favorite;
+      });
+      state = navigation_reducer_objectSpread(navigation_reducer_objectSpread({}, state), {}, {
+        favorites: filteredFavorites,
+        menuItems: state.menuItems.map(function (item) {
+          if (item.id === favorite) {
+            return navigation_reducer_objectSpread(navigation_reducer_objectSpread({}, item), {}, {
+              menuId: 'plugins'
+            });
+          }
+
+          return item;
+        }),
+        requesting: navigation_reducer_objectSpread(navigation_reducer_objectSpread({}, state.requesting), {}, {
+          removeFavorite: false
+        })
+      });
+      break;
   }
 
   return state;
 };
 
 /* harmony default export */ var navigation_reducer = (navigation_reducer_reducer);
+// CONCATENATED MODULE: ./packages/data/build-module/navigation/resolvers.js
+
+
+var navigation_resolvers_marked = /*#__PURE__*/regenerator_default.a.mark(resolvers_getFavorites);
+/**
+ * External dependencies
+ */
+
+
+
+/**
+ * Internal dependencies
+ */
+
+
+
+function resolvers_getFavorites() {
+  var results;
+  return regenerator_default.a.wrap(function getFavorites$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          _context.next = 2;
+          return getFavoritesRequest();
+
+        case 2:
+          _context.prev = 2;
+          _context.next = 5;
+          return Object(external_this_wp_dataControls_["apiFetch"])({
+            path: "".concat(WC_ADMIN_NAMESPACE, "/navigation/favorites/me")
+          });
+
+        case 5:
+          results = _context.sent;
+
+          if (!results) {
+            _context.next = 10;
+            break;
+          }
+
+          _context.next = 9;
+          return getFavoritesSuccess(results);
+
+        case 9:
+          return _context.abrupt("return");
+
+        case 10:
+          throw new Error();
+
+        case 13:
+          _context.prev = 13;
+          _context.t0 = _context["catch"](2);
+          _context.next = 17;
+          return getFavoritesFailure(_context.t0);
+
+        case 17:
+          throw new Error();
+
+        case 18:
+        case "end":
+          return _context.stop();
+      }
+    }
+  }, navigation_resolvers_marked, null, [[2, 13]]);
+}
 // CONCATENATED MODULE: ./packages/data/build-module/navigation/index.js
 /**
  * External dependencies
@@ -5936,10 +6642,12 @@ var navigation_reducer_reducer = function reducer() {
 
 
 
+
 Object(external_this_wp_data_["registerStore"])(navigation_constants_STORE_NAME, {
   reducer: navigation_reducer,
   actions: navigation_actions_namespaceObject,
   controls: external_this_wp_dataControls_["controls"],
+  resolvers: navigation_resolvers_namespaceObject,
   selectors: navigation_selectors_namespaceObject
 });
 var NAVIGATION_STORE_NAME = navigation_constants_STORE_NAME;
@@ -6560,7 +7268,7 @@ function getReportTableData(options) {
  */
 var export_constants_STORE_NAME = 'wc/admin/export';
 // EXTERNAL MODULE: ./node_modules/md5/md5.js
-var md5 = __webpack_require__(122);
+var md5 = __webpack_require__(123);
 var md5_default = /*#__PURE__*/__webpack_require__.n(md5);
 
 // CONCATENATED MODULE: ./packages/data/build-module/export/utils.js
@@ -7281,6 +7989,7 @@ var IMPORT_STORE_NAME = import_constants_STORE_NAME;
 
 
 
+
 /***/ }),
 
 /***/ 5:
@@ -7396,7 +8105,7 @@ module.exports = _nonIterableRest;
 
 /***/ }),
 
-/***/ 67:
+/***/ 68:
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -8154,12 +8863,12 @@ try {
 /***/ 8:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(67);
+module.exports = __webpack_require__(68);
 
 
 /***/ }),
 
-/***/ 96:
+/***/ 97:
 /***/ (function(module, exports) {
 
 function _objectWithoutPropertiesLoose(source, excluded) {

@@ -1,12 +1,12 @@
 (window["__wcAdmin_webpackJsonp"] = window["__wcAdmin_webpackJsonp"] || []).push([[4],{
 
-/***/ 503:
+/***/ 508:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* unused harmony export ALLOWED_TAGS */
 /* unused harmony export ALLOWED_ATTR */
-/* harmony import */ var dompurify__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(508);
+/* harmony import */ var dompurify__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(513);
 /* harmony import */ var dompurify__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(dompurify__WEBPACK_IMPORTED_MODULE_0__);
 /**
  * External dependencies
@@ -25,7 +25,7 @@ var ALLOWED_ATTR = ['target', 'href', 'rel', 'name', 'download'];
 
 /***/ }),
 
-/***/ 505:
+/***/ 510:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -35,30 +35,30 @@ __webpack_require__.d(__webpack_exports__, "a", function() { return /* binding *
 __webpack_require__.d(__webpack_exports__, "b", function() { return /* reexport */ placeholder; });
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/classCallCheck.js
-var classCallCheck = __webpack_require__(11);
+var classCallCheck = __webpack_require__(12);
 var classCallCheck_default = /*#__PURE__*/__webpack_require__.n(classCallCheck);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/createClass.js
-var createClass = __webpack_require__(12);
+var createClass = __webpack_require__(13);
 var createClass_default = /*#__PURE__*/__webpack_require__.n(createClass);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/inherits.js
-var inherits = __webpack_require__(13);
+var inherits = __webpack_require__(14);
 var inherits_default = /*#__PURE__*/__webpack_require__.n(inherits);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js
-var possibleConstructorReturn = __webpack_require__(14);
+var possibleConstructorReturn = __webpack_require__(15);
 var possibleConstructorReturn_default = /*#__PURE__*/__webpack_require__.n(possibleConstructorReturn);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/getPrototypeOf.js
-var getPrototypeOf = __webpack_require__(6);
+var getPrototypeOf = __webpack_require__(7);
 var getPrototypeOf_default = /*#__PURE__*/__webpack_require__.n(getPrototypeOf);
 
 // EXTERNAL MODULE: external {"this":["wp","element"]}
 var external_this_wp_element_ = __webpack_require__(0);
 
 // EXTERNAL MODULE: ./node_modules/classnames/index.js
-var classnames = __webpack_require__(7);
+var classnames = __webpack_require__(6);
 var classnames_default = /*#__PURE__*/__webpack_require__.n(classnames);
 
 // EXTERNAL MODULE: ./node_modules/gridicons/dist/notice-outline.js
@@ -80,7 +80,7 @@ var external_this_wc_components_ = __webpack_require__(47);
 var external_this_wp_components_ = __webpack_require__(4);
 
 // EXTERNAL MODULE: ./client/header/activity-panel/activity-card/style.scss
-var style = __webpack_require__(535);
+var style = __webpack_require__(539);
 
 // EXTERNAL MODULE: external "lodash"
 var external_lodash_ = __webpack_require__(3);
@@ -307,26 +307,30 @@ activity_card_ActivityCard.defaultProps = {
 
 /***/ }),
 
-/***/ 535:
+/***/ 539:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ 536:
+/***/ 543:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ 574:
+/***/ 587:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/slicedToArray.js
+var slicedToArray = __webpack_require__(18);
+var slicedToArray_default = /*#__PURE__*/__webpack_require__.n(slicedToArray);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/objectWithoutProperties.js
 var objectWithoutProperties = __webpack_require__(34);
@@ -339,44 +343,44 @@ var external_this_wp_element_ = __webpack_require__(0);
 var external_this_wp_i18n_ = __webpack_require__(2);
 
 // EXTERNAL MODULE: external {"this":["wp","compose"]}
-var external_this_wp_compose_ = __webpack_require__(18);
+var external_this_wp_compose_ = __webpack_require__(20);
 
 // EXTERNAL MODULE: external {"this":["wc","components"]}
 var external_this_wc_components_ = __webpack_require__(47);
 
 // EXTERNAL MODULE: external {"this":["wc","data"]}
-var external_this_wc_data_ = __webpack_require__(23);
+var external_this_wc_data_ = __webpack_require__(22);
 
 // EXTERNAL MODULE: external {"this":["wp","data"]}
-var external_this_wp_data_ = __webpack_require__(15);
+var external_this_wp_data_ = __webpack_require__(11);
 
 // EXTERNAL MODULE: ./node_modules/react-transition-group/esm/TransitionGroup.js + 2 modules
-var TransitionGroup = __webpack_require__(294);
+var TransitionGroup = __webpack_require__(293);
 
 // EXTERNAL MODULE: ./node_modules/react-transition-group/esm/CSSTransition.js + 5 modules
-var CSSTransition = __webpack_require__(293);
+var CSSTransition = __webpack_require__(292);
 
 // EXTERNAL MODULE: ./client/header/activity-panel/activity-card/index.js + 1 modules
-var activity_card = __webpack_require__(505);
+var activity_card = __webpack_require__(510);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/classCallCheck.js
-var classCallCheck = __webpack_require__(11);
+var classCallCheck = __webpack_require__(12);
 var classCallCheck_default = /*#__PURE__*/__webpack_require__.n(classCallCheck);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/createClass.js
-var createClass = __webpack_require__(12);
+var createClass = __webpack_require__(13);
 var createClass_default = /*#__PURE__*/__webpack_require__.n(createClass);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/inherits.js
-var inherits = __webpack_require__(13);
+var inherits = __webpack_require__(14);
 var inherits_default = /*#__PURE__*/__webpack_require__.n(inherits);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js
-var possibleConstructorReturn = __webpack_require__(14);
+var possibleConstructorReturn = __webpack_require__(15);
 var possibleConstructorReturn_default = /*#__PURE__*/__webpack_require__.n(possibleConstructorReturn);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/getPrototypeOf.js
-var getPrototypeOf = __webpack_require__(6);
+var getPrototypeOf = __webpack_require__(7);
 var getPrototypeOf_default = /*#__PURE__*/__webpack_require__.n(getPrototypeOf);
 
 // EXTERNAL MODULE: ./node_modules/prop-types/index.js
@@ -468,7 +472,7 @@ var defineProperty_default = /*#__PURE__*/__webpack_require__.n(defineProperty);
 var external_this_wp_components_ = __webpack_require__(4);
 
 // EXTERNAL MODULE: ./node_modules/react-visibility-sensor/dist/visibility-sensor.js
-var visibility_sensor = __webpack_require__(524);
+var visibility_sensor = __webpack_require__(528);
 var visibility_sensor_default = /*#__PURE__*/__webpack_require__.n(visibility_sensor);
 
 // EXTERNAL MODULE: external "moment"
@@ -476,14 +480,14 @@ var external_moment_ = __webpack_require__(16);
 var external_moment_default = /*#__PURE__*/__webpack_require__.n(external_moment_);
 
 // EXTERNAL MODULE: ./node_modules/classnames/index.js
-var classnames = __webpack_require__(7);
+var classnames = __webpack_require__(6);
 var classnames_default = /*#__PURE__*/__webpack_require__.n(classnames);
 
 // EXTERNAL MODULE: external {"this":["wc","tracks"]}
-var external_this_wc_tracks_ = __webpack_require__(28);
+var external_this_wc_tracks_ = __webpack_require__(27);
 
-// EXTERNAL MODULE: ./client/settings/index.js
-var settings = __webpack_require__(25);
+// EXTERNAL MODULE: ./client/wc-admin-settings/index.js
+var wc_admin_settings = __webpack_require__(25);
 
 // CONCATENATED MODULE: ./client/inbox-panel/action.js
 
@@ -545,7 +549,7 @@ var action_InboxNoteAction = /*#__PURE__*/function (_Component) {
       var href = event.target.href || '';
       var inAction = true;
 
-      if (href.length && !href.startsWith(settings["a" /* ADMIN_URL */])) {
+      if (href.length && !href.startsWith(wc_admin_settings["a" /* ADMIN_URL */])) {
         event.preventDefault();
         inAction = false; // link buttons shouldn't be "busy".
 
@@ -555,7 +559,7 @@ var action_InboxNoteAction = /*#__PURE__*/function (_Component) {
       if (!action) {
         if (noteId) {
           removeNote(noteId).then(function () {
-            createNotice('success', Object(external_this_wp_i18n_["__"])('Message dismissed.', 'woocommerce-admin'), {
+            createNotice('success', Object(external_this_wp_i18n_["__"])('Message dismissed', 'woocommerce-admin'), {
               actions: [{
                 label: Object(external_this_wp_i18n_["__"])('Undo', 'woocommerce-admin'),
                 onClick: function onClick() {
@@ -566,11 +570,11 @@ var action_InboxNoteAction = /*#__PURE__*/function (_Component) {
               }]
             });
           }).catch(function () {
-            createNotice('error', Object(external_this_wp_i18n_["__"])('Message could not be dismissed.', 'woocommerce-admin'));
+            createNotice('error', Object(external_this_wp_i18n_["__"])('Message could not be dismissed', 'woocommerce-admin'));
           });
         } else {
           removeAllNotes().then(function (notes) {
-            createNotice('success', Object(external_this_wp_i18n_["__"])('All messages dismissed.', 'woocommerce-admin'), {
+            createNotice('success', Object(external_this_wp_i18n_["__"])('All messages dismissed', 'woocommerce-admin'), {
               actions: [{
                 label: Object(external_this_wp_i18n_["__"])('Undo', 'woocommerce-admin'),
                 onClick: function onClick() {
@@ -583,7 +587,7 @@ var action_InboxNoteAction = /*#__PURE__*/function (_Component) {
               }]
             });
           }).catch(function () {
-            createNotice('error', Object(external_this_wp_i18n_["__"])('Message could not be dismissed.', 'woocommerce-admin'));
+            createNotice('error', Object(external_this_wp_i18n_["__"])('Message could not be dismissed', 'woocommerce-admin'));
           });
         }
 
@@ -654,10 +658,10 @@ action_InboxNoteAction.propTypes = {
   };
 }))(action_InboxNoteAction));
 // EXTERNAL MODULE: ./client/lib/sanitize-html/index.js
-var sanitize_html = __webpack_require__(503);
+var sanitize_html = __webpack_require__(508);
 
 // EXTERNAL MODULE: ./client/inbox-panel/style.scss
-var style = __webpack_require__(536);
+var style = __webpack_require__(543);
 
 // CONCATENATED MODULE: ./client/utils/index.js
 /**
@@ -769,6 +773,7 @@ var card_InboxNoteCard = /*#__PURE__*/function (_Component) {
     _this.openDismissModal = _this.openDismissModal.bind(assertThisInitialized_default()(_this));
     _this.closeDismissModal = _this.closeDismissModal.bind(assertThisInitialized_default()(_this));
     _this.bodyNotificationRef = Object(external_this_wp_element_["createRef"])();
+    _this.toggleButtonRef = Object(external_this_wp_element_["createRef"])();
     _this.screen = getScreenName();
     return _this;
   }
@@ -856,7 +861,15 @@ var card_InboxNoteCard = /*#__PURE__*/function (_Component) {
     value: function handleBlur(event, onClose) {
       var dropdownClasses = ['woocommerce-admin-dismiss-notification', 'components-popover__content']; // This line is for IE compatibility.
 
-      var relatedTarget = event.relatedTarget ? event.relatedTarget : document.activeElement;
+      var relatedTarget;
+
+      if (event.relatedTarget) {
+        relatedTarget = event.relatedTarget;
+      } else if (this.toggleButtonRef.current) {
+        var ownerDoc = this.toggleButtonRef.current.ownerDocument;
+        relatedTarget = ownerDoc ? ownerDoc.activeElement : null;
+      }
+
       var isClickOutsideDropdown = relatedTarget ? dropdownClasses.some(function (className) {
         return relatedTarget.className.includes(className);
       }) : false;
@@ -887,6 +900,7 @@ var card_InboxNoteCard = /*#__PURE__*/function (_Component) {
           return Object(external_this_wp_element_["createElement"])(external_this_wp_components_["Button"], {
             isTertiary: true,
             onClick: onToggle,
+            ref: _this4.toggleButtonRef,
             onBlur: function onBlur(event) {
               return _this4.handleBlur(event, onClose);
             }
@@ -1063,6 +1077,7 @@ var utils = __webpack_require__(196);
 
 
 
+
 /**
  * External dependencies
  */
@@ -1139,15 +1154,16 @@ var inbox_panel_InboxPanel = function InboxPanel(props) {
       updateUserPreferences = _useUserPreferences.updateUserPreferences,
       userPrefs = objectWithoutProperties_default()(_useUserPreferences, ["updateUserPreferences"]);
 
-  var lastRead = userPrefs.activity_panel_inbox_last_read;
+  var _useState = Object(external_this_wp_element_["useState"])(userPrefs.activity_panel_inbox_last_read),
+      _useState2 = slicedToArray_default()(_useState, 1),
+      lastRead = _useState2[0];
+
   Object(external_this_wp_element_["useEffect"])(function () {
     var mountTime = Date.now();
-    return function () {
-      var userDataFields = {
-        activity_panel_inbox_last_read: mountTime
-      };
-      updateUserPreferences(userDataFields);
+    var userDataFields = {
+      activity_panel_inbox_last_read: mountTime
     };
+    updateUserPreferences(userDataFields);
   }, []);
 
   if (isError) {
@@ -1183,6 +1199,15 @@ var inbox_panel_InboxPanel = function InboxPanel(props) {
   }))));
 };
 
+var INBOX_QUERY = {
+  page: 1,
+  per_page: external_this_wc_data_["QUERY_DEFAULTS"].pageSize,
+  status: 'unactioned',
+  type: external_this_wc_data_["QUERY_DEFAULTS"].noteTypes,
+  orderby: 'date',
+  order: 'desc',
+  _fields: ['id', 'name', 'title', 'content', 'type', 'status', 'actions', 'date_created', 'date_created_gmt', 'layout', 'image', 'is_deleted']
+};
 /* harmony default export */ var inbox_panel = __webpack_exports__["default"] = (Object(external_this_wp_compose_["compose"])(Object(external_this_wp_data_["withSelect"])(function (select) {
   var _select = select(external_this_wc_data_["NOTES_STORE_NAME"]),
       getNotes = _select.getNotes,
@@ -1190,19 +1215,10 @@ var inbox_panel_InboxPanel = function InboxPanel(props) {
       isResolving = _select.isResolving,
       isNotesRequesting = _select.isNotesRequesting;
 
-  var inboxQuery = {
-    page: 1,
-    per_page: external_this_wc_data_["QUERY_DEFAULTS"].pageSize,
-    status: 'unactioned',
-    type: external_this_wc_data_["QUERY_DEFAULTS"].noteTypes,
-    orderby: 'date',
-    order: 'desc',
-    _fields: ['id', 'name', 'title', 'content', 'type', 'status', 'actions', 'date_created', 'date_created_gmt', 'layout', 'image', 'is_deleted']
-  };
   return {
-    notes: getNotes(inboxQuery),
-    isError: Boolean(getNotesError('getNotes', [inboxQuery])),
-    isResolving: isResolving('getNotes', [inboxQuery]),
+    notes: getNotes(INBOX_QUERY),
+    isError: Boolean(getNotesError('getNotes', [INBOX_QUERY])),
+    isResolving: isResolving('getNotes', [INBOX_QUERY]),
     isBatchUpdating: isNotesRequesting('batchUpdateNotes')
   };
 }))(inbox_panel_InboxPanel));
