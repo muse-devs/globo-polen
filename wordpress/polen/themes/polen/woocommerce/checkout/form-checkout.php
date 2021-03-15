@@ -44,12 +44,14 @@ $Talent_Fields = new Polen_Update_Fields();
 			foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) :
 				$_product   = apply_filters('woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key);
 				$product_id = apply_filters('woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key);
-
+				$talent_id = get_post_field( 'post_author', $product_id );
+				$talent_data = $Talent_Fields->get_vendor_data( $talent_id );
+				
 				if ($_product && $_product->exists() && $cart_item['quantity'] > 0 && apply_filters('woocommerce_cart_item_visible', true, $cart_item, $cart_item_key)) :
 					$product_permalink = apply_filters('woocommerce_cart_item_permalink', $_product->is_visible() ? $_product->get_permalink($cart_item) : '', $cart_item, $cart_item_key);
 			?>
 					<div class="row py-4 px-3 cart-item">
-						<div class="col-md-7 d-flex justify-content-start">
+						<div class="col-md-7 d-flex justify-content-start align-items-center">
 							<figure class="thumbnail mr-4">
 								<?php
 								$thumbnail = apply_filters('woocommerce_cart_item_thumbnail', $_product->get_image(), $cart_item, $cart_item_key);
@@ -94,7 +96,7 @@ $Talent_Fields = new Polen_Update_Fields();
 								<div class="col skill-title">Reviews</div>
 							</div>
 							<div class="row">
-								<div class="col"><?php polen_icon_clock(); ?> 1h</div>
+								<div class="col"><?php polen_icon_clock(); ?> <?php echo $talent_data->tempo_resposta; ?>h</div>
 								<div class="col"><?php polen_icon_star(true); ?> 5.0</div>
 							</div>
 						</div>
@@ -126,6 +128,8 @@ $Talent_Fields = new Polen_Update_Fields();
 
 			<?php endif; ?>
 
+			<?php woocommerce_checkout_payment();?>
+
 		</div>
 		<div class="col-md-4">
 
@@ -148,9 +152,9 @@ $Talent_Fields = new Polen_Update_Fields();
 	</div>
 
 	<div class="row">
-		<div class="col-md-12">
+		<div class="col-md-8">
 			<?php
-			woocommerce_checkout_payment();
+			//woocommerce_checkout_payment();
 			?>
 		</div>
 	</div>

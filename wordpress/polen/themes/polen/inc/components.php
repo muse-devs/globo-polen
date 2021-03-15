@@ -23,7 +23,7 @@ function polen_front_get_banner()
 {
 	ob_start();
 ?>
-	<section class="row my-5 py-4 top-banner">
+	<section class="row my-5 py-md-4 top-banner">
 		<div class="col-sm-12">
 			<video class="video" autoplay muted>
 				<source src="<?= TEMPLATE_URI; ?>/assets/video.mp4" type="video/mp4">
@@ -44,7 +44,7 @@ function polen_front_get_banner()
 // $size pode ser 'medium' e 'small'
 function polen_front_get_card($item, $size = "medium")
 {
-	$class = "col-md-3";
+	$class = "col-6 col-md-3";
 	if ($size === "small") {
 		$class = "col-flex-20";
 	}
@@ -79,7 +79,7 @@ function polen_front_get_news($items)
 	}
 	ob_start();
 ?>
-	<section class="row my-5 py-4 news">
+	<section class="row my-5 py-md-4 news">
 		<div class="col-md-12">
 			<header class="row mb-4">
 				<div class="col">
@@ -109,7 +109,7 @@ function polen_front_get_categories($items)
 	}
 	ob_start();
 ?>
-	<section class="row my-5 py-4 categories">
+	<section class="row my-5 py-md-4 categories">
 		<div class="col-md-12">
 			<header class="row mb-4">
 				<div class="col">
@@ -144,7 +144,7 @@ function polen_front_get_artists($items, $title)
 	}
 	ob_start();
 ?>
-	<section class="row my-5 py-4 all-artists">
+	<section class="row my-5 py-md-4 all-artists">
 		<div class="col-md-12">
 			<header class="row mb-4">
 				<div class="col">
@@ -154,12 +154,14 @@ function polen_front_get_artists($items, $title)
 			</header>
 		</div>
 		<div class="col-md-12">
-			<div class="row d-flex justify-content-between flex-wrap">
-				<?php foreach ($items as $item) : ?>
-					<?php polen_front_get_card($item, "small"); ?>
-				<?php endforeach; ?>
+			<div class="row">
+				<div class="col-md-12 d-flex flex-wrap">
+					<?php foreach ($items as $item) : ?>
+						<?php polen_front_get_card($item, "small"); ?>
+					<?php endforeach; ?>
+				</div>
 			</div>
-			<div class="row mt-5">
+			<div class="row mt-md-5">
 				<div class="col-md-12 text-center">
 					<button type="button" class="btn btn-primary btn-lg">Ver mais</button>
 				</div>
@@ -177,7 +179,7 @@ function polen_front_get_tutorial()
 	echo '
 	<section class="row my-5 py-4 tutorial">
 		<div class="col-md-12">
-			<header class="row mb-4">
+			<header class="row mb-md-4">
 				<div class="col text-center">
 					<h2>Como funciona</h2>
 					<p class="mt-4">Presenteie e surpreenda com vídeos personalizados.</p>
@@ -185,8 +187,8 @@ function polen_front_get_tutorial()
 			</header>
 		</div>
 		<div class="col-md-12">
-			<div class="row mt-5">
-				<div class="col-md-4">
+			<div class="row mt-3 mt-md-5">
+				<div class="col-md-4 mb-4">
 					<div class="tutorial-card">
 						<figure class="image">
 							<img src="https://picsum.photos/200/200" alt="Conect-se aos ídolos">
@@ -195,7 +197,7 @@ function polen_front_get_tutorial()
 						<p class="description">Peça um vídeo personalizado com o seu ídolo para celebar ocasiões especiais.</p>
 					</div>
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-4 mb-4">
 					<div class="tutorial-card">
 						<figure class="image">
 							<img src="https://picsum.photos/200/200" alt="Conect-se aos ídolos">
@@ -204,7 +206,7 @@ function polen_front_get_tutorial()
 						<p class="description">Ídolo recebe o seu pedido, atende e entrega pela plataforma. </p>
 					</div>
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-4 mb-4">
 					<div class="tutorial-card">
 						<figure class="image">
 							<img src="https://picsum.photos/200/200" alt="Conect-se aos ídolos">

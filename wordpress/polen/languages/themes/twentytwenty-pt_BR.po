@@ -46,7 +46,7 @@ msgstr "Em"
 msgid "Join the Club"
 msgstr "Participe"
 
-#: inc/starter-content.php:148 inc/block-patterns.php:45
+#: inc/block-patterns.php:45 inc/starter-content.php:148
 msgid "Members get access to exclusive exhibits and sales. Our memberships cost $99.99 and are billed annually."
 msgstr "Os membros têm acesso a exibições e vendas exclusivas. Nossa assinatura custa $99,99 e é cobrada anualmente."
 
@@ -66,7 +66,7 @@ msgstr "\"Ciborgues, como a filósofa Donna Haraway estabeleceu, não são rever
 msgid "From Signac to Matisse"
 msgstr "De Signac para Matisse"
 
-#: inc/starter-content.php:99 inc/block-patterns.php:168
+#: inc/block-patterns.php:168 inc/starter-content.php:99
 msgid "The Life I Deserve"
 msgstr "A vida que eu mereço"
 
@@ -78,10 +78,10 @@ msgstr "1º de outubro - 1º de dezembro"
 msgid "Theatre of Operations"
 msgstr "Teatro de operações"
 
-#: inc/starter-content.php:73 inc/starter-content.php:88
-#: inc/starter-content.php:105 inc/starter-content.php:120
 #: inc/block-patterns.php:78 inc/block-patterns.php:160
-#: inc/block-patterns.php:174
+#: inc/block-patterns.php:174 inc/starter-content.php:73
+#: inc/starter-content.php:88 inc/starter-content.php:105
+#: inc/starter-content.php:120
 msgid "Read More"
 msgstr "Leia mais"
 
@@ -89,7 +89,7 @@ msgstr "Leia mais"
 msgid "August 1 -- December 1"
 msgstr "1º de agosto - 1º de dezembro"
 
-#: inc/starter-content.php:67 inc/block-patterns.php:154
+#: inc/block-patterns.php:154 inc/starter-content.php:67
 msgid "Works and Days"
 msgstr "Trabalhos e dias"
 
@@ -137,7 +137,7 @@ msgstr "Aplique uma cor personalizada nos links, botões e imagens destacadas."
 msgid "Primary Color"
 msgstr "Cor primária"
 
-#: searchform.php:24 template-parts/modal-search.php:20
+#: template-parts/modal-search.php:20 searchform.php:24
 msgid "Search for:"
 msgstr "Pesquisar por:"
 
@@ -258,7 +258,7 @@ msgid "Full Width Template"
 msgstr "Modelo com largura total"
 
 #. translators: %s: Author name.
-#: inc/template-tags.php:357 template-parts/entry-author-bio.php:20
+#: template-parts/entry-author-bio.php:20 inc/template-tags.php:357
 msgid "By %s"
 msgstr "Por %s"
 
@@ -292,8 +292,8 @@ msgstr "Pesquisar &hellip;"
 msgid "Tags"
 msgstr "Tags"
 
-#: inc/template-tags.php:392 template-parts/entry-header.php:36
-#: template-parts/content-cover.php:70
+#: template-parts/content-cover.php:70 template-parts/entry-header.php:36
+#: inc/template-tags.php:392
 msgid "Categories"
 msgstr "Categorias"
 

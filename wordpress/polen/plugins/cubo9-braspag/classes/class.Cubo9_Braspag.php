@@ -167,7 +167,7 @@ class Cubo9_Braspag {
             $order_id    = $order->get_id();
             $amount      = number_format( $order->get_total(), 2, '', '' );
             $user        = $order->get_user();
-            $billing_cpf = ( isset( $user->ID ) ) ? get_user_meta( $user->ID, 'billing_cpf', true ) : $_REQUEST['billing_cpf'];
+            //$billing_cpf = ( isset( $user->ID ) ) ? get_user_meta( $user->ID, 'billing_cpf', true ) : $_REQUEST['billing_cpf'];
             $billing_phone = ( isset( $user->ID ) ) ? get_user_meta( $user->ID, 'billing_phone', true ) : $_REQUEST['billing_phone'];
 
             /**
@@ -179,7 +179,7 @@ class Cubo9_Braspag {
             $order_data['billing']['complement']    = get_post_meta( $order_id, '_billing_complement', true );
             $order_data['billing']['neighborhood']  = get_post_meta( $order_id, '_billing_neighborhood', true );
             $order_data['billing']['phone']         = $billing_phone;
-            $order_data['billing']['cpf']           = $billing_cpf;
+            //$order_data['billing']['cpf']           = $billing_cpf;
 
             if( isset( $order_data['shipping'] ) ) {
                 $order_data['shipping']['number']       = get_post_meta( $order_id, '_shipping_number', true );
@@ -193,7 +193,7 @@ class Cubo9_Braspag {
              */
             $user_display_name = substr( $user->display_name . $this->SANDBOX_NAME_SUFIX, 0, 61 );
             $document_type     = 'CPF';
-            $document_number   = substr( preg_replace( '/[^0-9]/', '', get_user_meta( $user->ID, 'billing_cpf', true ) ), 0, 18 );
+            //$document_number   = substr( preg_replace( '/[^0-9]/', '', get_user_meta( $user->ID, 'billing_cpf', true ) ), 0, 18 );
             $user_phone        = substr( preg_replace( '/[^0-9]/', '', $order_data['billing']['phone'] ), 0, 15 );
             $user_mobile_phone = substr( preg_replace( '/[^0-9]/', '', $order_data['billing']['phone'] ), 0, 15 );
 

@@ -94,7 +94,7 @@ this["wc"] = this["wc"] || {}; this["wc"]["currency"] =
 
 /***/ }),
 
-/***/ 143:
+/***/ 142:
 /***/ (function(module, exports) {
 
 (function() { module.exports = this["wc"]["number"]; }());
@@ -108,14 +108,14 @@ this["wc"] = this["wc"] || {}; this["wc"]["currency"] =
 
 /***/ }),
 
-/***/ 40:
+/***/ 41:
 /***/ (function(module, exports) {
 
 (function() { module.exports = this["wp"]["htmlEntities"]; }());
 
 /***/ }),
 
-/***/ 42:
+/***/ 43:
 /***/ (function(module, exports) {
 
 (function() { module.exports = this["wp"]["hooks"]; }());
@@ -132,13 +132,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(0);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_html_entities__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(40);
+/* harmony import */ var _wordpress_html_entities__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(41);
 /* harmony import */ var _wordpress_html_entities__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_html_entities__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(2);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _woocommerce_number__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(143);
+/* harmony import */ var _woocommerce_number__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(142);
 /* harmony import */ var _woocommerce_number__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_number__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _wordpress_deprecated__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(85);
+/* harmony import */ var _wordpress_deprecated__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(89);
 
 
 
@@ -541,13 +541,13 @@ module.exports = _defineProperty;
 
 /***/ }),
 
-/***/ 85:
+/***/ 89:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* unused harmony export logged */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return deprecated; });
-/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(42);
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(43);
 /* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__);
 /**
  * WordPress dependencies

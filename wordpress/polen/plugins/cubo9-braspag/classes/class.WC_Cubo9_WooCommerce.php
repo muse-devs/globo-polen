@@ -28,7 +28,11 @@ class WC_Cubo9_WooCommerce {
     }
 
     public function my_account_credit_cards_content() {
-        require_once PLUGIN_CUBO9_BRASPAG_DIR . 'assets/php/my-account/payment-options.php';
+        if( file_exists( TEMPLATEPATH . '/braspag/my-account/payment-options.php') ) {
+            require_once TEMPLATEPATH . '/braspag/my-account/payment-options.php';
+        } else {
+            require_once PLUGIN_CUBO9_BRASPAG_DIR . 'assets/php/my-account/payment-options.php';
+        }
     }
 
     public function make_default_payment() {

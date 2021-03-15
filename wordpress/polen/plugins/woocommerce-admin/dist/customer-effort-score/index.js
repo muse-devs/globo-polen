@@ -107,13 +107,13 @@ this["wc"] = this["wc"] || {}; this["wc"]["customerEffortScore"] =
 if (false) { var throwOnDirectAccess, ReactIs; } else {
   // By explicitly using `prop-types` you are opting into new production behavior.
   // http://fb.me/prop-types-in-prod
-  module.exports = __webpack_require__(75)();
+  module.exports = __webpack_require__(77)();
 }
 
 
 /***/ }),
 
-/***/ 15:
+/***/ 11:
 /***/ (function(module, exports) {
 
 (function() { module.exports = this["wp"]["data"]; }());
@@ -121,20 +121,13 @@ if (false) { var throwOnDirectAccess, ReactIs; } else {
 /***/ }),
 
 /***/ 18:
-/***/ (function(module, exports) {
-
-(function() { module.exports = this["wp"]["compose"]; }());
-
-/***/ }),
-
-/***/ 19:
 /***/ (function(module, exports, __webpack_require__) {
 
 var arrayWithHoles = __webpack_require__(60);
 
 var iterableToArrayLimit = __webpack_require__(61);
 
-var unsupportedIterableToArray = __webpack_require__(39);
+var unsupportedIterableToArray = __webpack_require__(40);
 
 var nonIterableRest = __webpack_require__(62);
 
@@ -153,17 +146,24 @@ module.exports = _slicedToArray;
 
 /***/ }),
 
-/***/ 31:
+/***/ 20:
+/***/ (function(module, exports) {
+
+(function() { module.exports = this["wp"]["compose"]; }());
+
+/***/ }),
+
+/***/ 30:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Navigation; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return NavigationBackButton; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return NavigationGroup; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return NavigationMenu; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return NavigationItem; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return Text; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return useSlot; });
+/* unused harmony export NavigationBackButton */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return NavigationGroup; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return NavigationMenu; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return NavigationItem; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return Text; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return useSlot; });
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__);
 /**
@@ -201,7 +201,14 @@ module.exports = _arrayLikeToArray;
 
 /***/ }),
 
-/***/ 39:
+/***/ 4:
+/***/ (function(module, exports) {
+
+(function() { module.exports = this["wp"]["components"]; }());
+
+/***/ }),
+
+/***/ 40:
 /***/ (function(module, exports, __webpack_require__) {
 
 var arrayLikeToArray = __webpack_require__(37);
@@ -219,13 +226,6 @@ module.exports = _unsupportedIterableToArray;
 
 /***/ }),
 
-/***/ 4:
-/***/ (function(module, exports) {
-
-(function() { module.exports = this["wp"]["components"]; }());
-
-/***/ }),
-
 /***/ 473:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -237,7 +237,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.d(__webpack_exports__, "CustomerEffortScore", function() { return /* binding */ CustomerEffortScore; });
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/slicedToArray.js
-var slicedToArray = __webpack_require__(19);
+var slicedToArray = __webpack_require__(18);
 var slicedToArray_default = /*#__PURE__*/__webpack_require__.n(slicedToArray);
 
 // EXTERNAL MODULE: external {"this":["wp","element"]}
@@ -251,16 +251,16 @@ var prop_types_default = /*#__PURE__*/__webpack_require__.n(prop_types);
 var external_this_wp_i18n_ = __webpack_require__(2);
 
 // EXTERNAL MODULE: external {"this":["wp","compose"]}
-var external_this_wp_compose_ = __webpack_require__(18);
+var external_this_wp_compose_ = __webpack_require__(20);
 
 // EXTERNAL MODULE: external {"this":["wp","data"]}
-var external_this_wp_data_ = __webpack_require__(15);
+var external_this_wp_data_ = __webpack_require__(11);
 
 // EXTERNAL MODULE: external {"this":["wp","components"]}
 var external_this_wp_components_ = __webpack_require__(4);
 
 // EXTERNAL MODULE: ./packages/experimental/build-module/index.js
-var build_module = __webpack_require__(31);
+var build_module = __webpack_require__(30);
 
 // CONCATENATED MODULE: ./packages/customer-effort-score/build-module/customer-feedback-modal/index.js
 
@@ -359,7 +359,7 @@ function CustomerFeedbackModal(_ref) {
     title: Object(external_this_wp_i18n_["__"])('Please share your feedback', 'woocommerce-admin'),
     onRequestClose: closeModal,
     shouldCloseOnClickOutside: false
-  }, Object(external_this_wp_element_["createElement"])(build_module["f" /* Text */], {
+  }, Object(external_this_wp_element_["createElement"])(build_module["e" /* Text */], {
     variant: "subtitle.small",
     as: "p"
   }, label), Object(external_this_wp_element_["createElement"])("div", {
@@ -381,7 +381,7 @@ function CustomerFeedbackModal(_ref) {
   })), showNoScoreMessage && Object(external_this_wp_element_["createElement"])("div", {
     className: "woocommerce-customer-effort-score__errors",
     role: "alert"
-  }, Object(external_this_wp_element_["createElement"])(build_module["f" /* Text */], {
+  }, Object(external_this_wp_element_["createElement"])(build_module["e" /* Text */], {
     variant: "body",
     as: "p"
   }, Object(external_this_wp_i18n_["__"])('Please provide feedback by selecting an option above.', 'woocommerce-admin'))), Object(external_this_wp_element_["createElement"])("div", {
@@ -597,7 +597,7 @@ module.exports = _nonIterableRest;
 
 /***/ }),
 
-/***/ 75:
+/***/ 77:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -610,7 +610,7 @@ module.exports = _nonIterableRest;
 
 
 
-var ReactPropTypesSecret = __webpack_require__(76);
+var ReactPropTypesSecret = __webpack_require__(78);
 
 function emptyFunction() {}
 function emptyFunctionWithReset() {}
@@ -669,7 +669,7 @@ module.exports = function() {
 
 /***/ }),
 
-/***/ 76:
+/***/ 78:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

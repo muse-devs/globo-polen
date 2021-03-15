@@ -13,6 +13,9 @@ h1,
 h2 {
 	font-size: 54px;
 	font-weight: 600;
+	@include media-breakpoint-only(xs) {
+		font-size: 2rem;
+	}
 }
 
 h4,

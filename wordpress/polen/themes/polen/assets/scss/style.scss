@@ -1,5 +1,6 @@
 // Your variable overrides
 @import "colors";
+@import "variables";
 
 // Bootstrap por último
 @import "../bootstrap-4.0.0/scss/bootstrap.scss";
@@ -7,6 +8,7 @@
 @import "../slick/slick-theme.scss";
 @import "typography";
 @import "reset";
+@import "header";
 @import "forms";
 @import "cards";
 @import "woocommerce";

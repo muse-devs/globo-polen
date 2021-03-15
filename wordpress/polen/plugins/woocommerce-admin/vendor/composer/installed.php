@@ -1,8 +1,8 @@
 <?php return array (
   'root' => 
   array (
-    'pretty_version' => '2.0.2',
-    'version' => '2.0.2.0',
+    'pretty_version' => '2.1.2',
+    'version' => '2.1.2.0',
     'aliases' => 
     array (
     ),
@@ -22,12 +22,12 @@
     ),
     'composer/installers' => 
     array (
-      'pretty_version' => 'v1.9.0',
-      'version' => '1.9.0.0',
+      'pretty_version' => 'v1.10.0',
+      'version' => '1.10.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'b93bcf0fa1fccb0b7d176b0967d969691cd74cca',
+      'reference' => '1a0357fccad9d1cc1ea0c9a05b8847fbccccb78d',
     ),
     'roundcube/plugin-installer' => 
     array (
@@ -45,8 +45,8 @@
     ),
     'woocommerce/woocommerce-admin' => 
     array (
-      'pretty_version' => '2.0.2',
-      'version' => '2.0.2.0',
+      'pretty_version' => '2.1.2',
+      'version' => '2.1.2.0',
       'aliases' => 
       array (
       ),

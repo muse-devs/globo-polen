@@ -94,14 +94,14 @@ this["wc"] = this["wc"] || {}; this["wc"]["navigation"] =
 
 /***/ }),
 
-/***/ 20:
+/***/ 19:
 /***/ (function(module, exports, __webpack_require__) {
 
 var arrayWithoutHoles = __webpack_require__(57);
 
 var iterableToArray = __webpack_require__(58);
 
-var unsupportedIterableToArray = __webpack_require__(39);
+var unsupportedIterableToArray = __webpack_require__(40);
 
 var nonIterableSpread = __webpack_require__(59);
 
@@ -113,7 +113,7 @@ module.exports = _toConsumableArray;
 
 /***/ }),
 
-/***/ 22:
+/***/ 23:
 /***/ (function(module, exports) {
 
 (function() { module.exports = this["wp"]["url"]; }());
@@ -128,6 +128,37 @@ module.exports = _toConsumableArray;
 /***/ }),
 
 /***/ 30:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Navigation; });
+/* unused harmony export NavigationBackButton */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return NavigationGroup; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return NavigationMenu; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return NavigationItem; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return Text; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return useSlot; });
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__);
+/**
+ * External dependencies
+ */
+
+/**
+ * Prioritize exports of non-experimental components over experimental.
+ */
+
+var Navigation = _wordpress_components__WEBPACK_IMPORTED_MODULE_0__["Navigation"] || _wordpress_components__WEBPACK_IMPORTED_MODULE_0__["__experimentalNavigation"];
+var NavigationBackButton = _wordpress_components__WEBPACK_IMPORTED_MODULE_0__["NavigationBackButton"] || _wordpress_components__WEBPACK_IMPORTED_MODULE_0__["__experimentalNavigationBackButton"];
+var NavigationGroup = _wordpress_components__WEBPACK_IMPORTED_MODULE_0__["NavigationGroup"] || _wordpress_components__WEBPACK_IMPORTED_MODULE_0__["__experimentalNavigationGroup"];
+var NavigationMenu = _wordpress_components__WEBPACK_IMPORTED_MODULE_0__["NavigationMenu"] || _wordpress_components__WEBPACK_IMPORTED_MODULE_0__["__experimentalNavigationMenu"];
+var NavigationItem = _wordpress_components__WEBPACK_IMPORTED_MODULE_0__["NavigationItem"] || _wordpress_components__WEBPACK_IMPORTED_MODULE_0__["__experimentalNavigationItem"];
+var Text = _wordpress_components__WEBPACK_IMPORTED_MODULE_0__["Text"] || _wordpress_components__WEBPACK_IMPORTED_MODULE_0__["__experimentalText"];
+var useSlot = _wordpress_components__WEBPACK_IMPORTED_MODULE_0__["useSlot"] || _wordpress_components__WEBPACK_IMPORTED_MODULE_0__["__experimentalUseSlot"];
+
+/***/ }),
+
+/***/ 31:
 /***/ (function(module, exports) {
 
 function _typeof(obj) {
@@ -147,37 +178,6 @@ function _typeof(obj) {
 }
 
 module.exports = _typeof;
-
-/***/ }),
-
-/***/ 31:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Navigation; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return NavigationBackButton; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return NavigationGroup; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return NavigationMenu; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return NavigationItem; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return Text; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return useSlot; });
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__);
-/**
- * External dependencies
- */
-
-/**
- * Prioritize exports of non-experimental components over experimental.
- */
-
-var Navigation = _wordpress_components__WEBPACK_IMPORTED_MODULE_0__["Navigation"] || _wordpress_components__WEBPACK_IMPORTED_MODULE_0__["__experimentalNavigation"];
-var NavigationBackButton = _wordpress_components__WEBPACK_IMPORTED_MODULE_0__["NavigationBackButton"] || _wordpress_components__WEBPACK_IMPORTED_MODULE_0__["__experimentalNavigationBackButton"];
-var NavigationGroup = _wordpress_components__WEBPACK_IMPORTED_MODULE_0__["NavigationGroup"] || _wordpress_components__WEBPACK_IMPORTED_MODULE_0__["__experimentalNavigationGroup"];
-var NavigationMenu = _wordpress_components__WEBPACK_IMPORTED_MODULE_0__["NavigationMenu"] || _wordpress_components__WEBPACK_IMPORTED_MODULE_0__["__experimentalNavigationMenu"];
-var NavigationItem = _wordpress_components__WEBPACK_IMPORTED_MODULE_0__["NavigationItem"] || _wordpress_components__WEBPACK_IMPORTED_MODULE_0__["__experimentalNavigationItem"];
-var Text = _wordpress_components__WEBPACK_IMPORTED_MODULE_0__["Text"] || _wordpress_components__WEBPACK_IMPORTED_MODULE_0__["__experimentalText"];
-var useSlot = _wordpress_components__WEBPACK_IMPORTED_MODULE_0__["useSlot"] || _wordpress_components__WEBPACK_IMPORTED_MODULE_0__["__experimentalUseSlot"];
 
 /***/ }),
 
@@ -223,7 +223,14 @@ module.exports = _arrayLikeToArray;
 
 /***/ }),
 
-/***/ 39:
+/***/ 4:
+/***/ (function(module, exports) {
+
+(function() { module.exports = this["wp"]["components"]; }());
+
+/***/ }),
+
+/***/ 40:
 /***/ (function(module, exports, __webpack_require__) {
 
 var arrayLikeToArray = __webpack_require__(37);
@@ -241,14 +248,7 @@ module.exports = _unsupportedIterableToArray;
 
 /***/ }),
 
-/***/ 4:
-/***/ (function(module, exports) {
-
-(function() { module.exports = this["wp"]["components"]; }());
-
-/***/ }),
-
-/***/ 42:
+/***/ 43:
 /***/ (function(module, exports) {
 
 (function() { module.exports = this["wp"]["hooks"]; }());
@@ -281,21 +281,21 @@ __webpack_require__.d(__webpack_exports__, "onQueryChange", function() { return 
 __webpack_require__.d(__webpack_exports__, "updateQueryString", function() { return /* binding */ updateQueryString; });
 __webpack_require__.d(__webpack_exports__, "WooNavigationItem", function() { return /* binding */ build_module_WooNavigationItem; });
 __webpack_require__.d(__webpack_exports__, "NavSlotFillProvider", function() { return /* reexport */ external_this_wp_components_["SlotFillProvider"]; });
-__webpack_require__.d(__webpack_exports__, "useNavSlot", function() { return /* reexport */ build_module["g" /* useSlot */]; });
+__webpack_require__.d(__webpack_exports__, "useNavSlot", function() { return /* reexport */ build_module["f" /* useSlot */]; });
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/defineProperty.js
 var defineProperty = __webpack_require__(5);
 var defineProperty_default = /*#__PURE__*/__webpack_require__.n(defineProperty);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/typeof.js
-var helpers_typeof = __webpack_require__(30);
+var helpers_typeof = __webpack_require__(31);
 var typeof_default = /*#__PURE__*/__webpack_require__.n(helpers_typeof);
 
 // EXTERNAL MODULE: external {"this":["wp","element"]}
 var external_this_wp_element_ = __webpack_require__(0);
 
 // EXTERNAL MODULE: external {"this":["wp","url"]}
-var external_this_wp_url_ = __webpack_require__(22);
+var external_this_wp_url_ = __webpack_require__(23);
 
 // EXTERNAL MODULE: ./node_modules/qs/lib/index.js
 var lib = __webpack_require__(49);
@@ -304,13 +304,13 @@ var lib = __webpack_require__(49);
 var external_lodash_ = __webpack_require__(3);
 
 // EXTERNAL MODULE: external {"this":["wp","hooks"]}
-var external_this_wp_hooks_ = __webpack_require__(42);
+var external_this_wp_hooks_ = __webpack_require__(43);
 
 // EXTERNAL MODULE: external {"this":["wp","components"]}
 var external_this_wp_components_ = __webpack_require__(4);
 
 // EXTERNAL MODULE: ./node_modules/history/esm/history.js + 2 modules
-var esm_history = __webpack_require__(70);
+var esm_history = __webpack_require__(71);
 
 // CONCATENATED MODULE: ./packages/navigation/build-module/history.js
 
@@ -458,7 +458,7 @@ function getHistory() {
 
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/toConsumableArray.js
-var toConsumableArray = __webpack_require__(20);
+var toConsumableArray = __webpack_require__(19);
 var toConsumableArray_default = /*#__PURE__*/__webpack_require__.n(toConsumableArray);
 
 // CONCATENATED MODULE: ./packages/navigation/build-module/filters.js
@@ -685,7 +685,7 @@ function getUrlKey(key, rule) {
   return key;
 }
 // EXTERNAL MODULE: ./packages/experimental/build-module/index.js
-var build_module = __webpack_require__(31);
+var build_module = __webpack_require__(30);
 
 // CONCATENATED MODULE: ./packages/navigation/build-module/index.js
 
@@ -972,8 +972,8 @@ build_module_WooNavigationItem.Slot = function (_ref2) {
 "use strict";
 
 
-var stringify = __webpack_require__(87);
-var parse = __webpack_require__(88);
+var stringify = __webpack_require__(90);
+var parse = __webpack_require__(91);
 var formats = __webpack_require__(52);
 
 module.exports = {
@@ -1094,7 +1094,7 @@ module.exports = _nonIterableSpread;
 
 /***/ }),
 
-/***/ 68:
+/***/ 69:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1353,7 +1353,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 70:
+/***/ 71:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2412,13 +2412,13 @@ function createMemoryHistory(props) {
 
 /***/ }),
 
-/***/ 87:
+/***/ 90:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var utils = __webpack_require__(68);
+var utils = __webpack_require__(69);
 var formats = __webpack_require__(52);
 var has = Object.prototype.hasOwnProperty;
 
@@ -2698,13 +2698,13 @@ module.exports = function (object, opts) {
 
 /***/ }),
 
-/***/ 88:
+/***/ 91:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var utils = __webpack_require__(68);
+var utils = __webpack_require__(69);
 
 var has = Object.prototype.hasOwnProperty;
 var isArray = Array.isArray;

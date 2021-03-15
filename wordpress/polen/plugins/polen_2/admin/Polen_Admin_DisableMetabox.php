@@ -136,7 +136,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 
         public function scripts() {
             wp_enqueue_script('jquery-maskedinput', PLUGIN_POLEN_URL . 'assets/scripts/vendor/jquery.maskedinput.min.js', array( 'jquery' ), null, true );
-            wp_enqueue_script('polen-script', PLUGIN_POLEN_URL . 'assets/scripts/scripts.js', array( 'jquery' ), null, true );
+            //wp_enqueue_script('polen-script', PLUGIN_POLEN_URL . 'assets/scripts/scripts.js', array( 'jquery' ), null, true );
         }
 
     }

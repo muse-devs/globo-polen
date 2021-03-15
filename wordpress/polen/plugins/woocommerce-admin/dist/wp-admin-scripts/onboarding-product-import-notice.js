@@ -108,7 +108,7 @@ this["wc"] = this["wc"] || {}; this["wc"]["onboardingProductImportNotice"] =
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return getSetting; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return setSetting; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return getAdminLink; });
-/* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(30);
+/* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(31);
 /* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
@@ -205,7 +205,7 @@ function getAdminLink(path) {
 
 /***/ }),
 
-/***/ 30:
+/***/ 31:
 /***/ (function(module, exports) {
 
 function _typeof(obj) {

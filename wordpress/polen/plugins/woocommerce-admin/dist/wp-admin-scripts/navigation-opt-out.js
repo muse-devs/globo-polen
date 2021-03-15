@@ -94,7 +94,7 @@ this["wc"] = this["wc"] || {}; this["wc"]["navigationOptOut"] =
 
 /***/ }),
 
-/***/ 11:
+/***/ 12:
 /***/ (function(module, exports) {
 
 function _classCallCheck(instance, Constructor) {
@@ -107,7 +107,7 @@ module.exports = _classCallCheck;
 
 /***/ }),
 
-/***/ 12:
+/***/ 13:
 /***/ (function(module, exports) {
 
 function _defineProperties(target, props) {
@@ -130,10 +130,10 @@ module.exports = _createClass;
 
 /***/ }),
 
-/***/ 13:
+/***/ 14:
 /***/ (function(module, exports, __webpack_require__) {
 
-var setPrototypeOf = __webpack_require__(74);
+var setPrototypeOf = __webpack_require__(72);
 
 function _inherits(subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
@@ -154,10 +154,10 @@ module.exports = _inherits;
 
 /***/ }),
 
-/***/ 14:
+/***/ 15:
 /***/ (function(module, exports, __webpack_require__) {
 
-var _typeof = __webpack_require__(30);
+var _typeof = __webpack_require__(31);
 
 var assertThisInitialized = __webpack_require__(9);
 
@@ -180,7 +180,7 @@ module.exports = _possibleConstructorReturn;
 
 /***/ }),
 
-/***/ 30:
+/***/ 31:
 /***/ (function(module, exports) {
 
 function _typeof(obj) {
@@ -228,23 +228,23 @@ __webpack_require__.r(__webpack_exports__);
 var external_this_wp_element_ = __webpack_require__(0);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/classCallCheck.js
-var classCallCheck = __webpack_require__(11);
+var classCallCheck = __webpack_require__(12);
 var classCallCheck_default = /*#__PURE__*/__webpack_require__.n(classCallCheck);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/createClass.js
-var createClass = __webpack_require__(12);
+var createClass = __webpack_require__(13);
 var createClass_default = /*#__PURE__*/__webpack_require__.n(createClass);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/inherits.js
-var inherits = __webpack_require__(13);
+var inherits = __webpack_require__(14);
 var inherits_default = /*#__PURE__*/__webpack_require__.n(inherits);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js
-var possibleConstructorReturn = __webpack_require__(14);
+var possibleConstructorReturn = __webpack_require__(15);
 var possibleConstructorReturn_default = /*#__PURE__*/__webpack_require__.n(possibleConstructorReturn);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/getPrototypeOf.js
-var getPrototypeOf = __webpack_require__(6);
+var getPrototypeOf = __webpack_require__(7);
 var getPrototypeOf_default = /*#__PURE__*/__webpack_require__.n(getPrototypeOf);
 
 // EXTERNAL MODULE: external {"this":["wp","i18n"]}
@@ -357,7 +357,7 @@ Object(external_this_wp_element_["render"])(Object(external_this_wp_element_["cr
 
 /***/ }),
 
-/***/ 6:
+/***/ 7:
 /***/ (function(module, exports) {
 
 function _getPrototypeOf(o) {
@@ -371,7 +371,7 @@ module.exports = _getPrototypeOf;
 
 /***/ }),
 
-/***/ 74:
+/***/ 72:
 /***/ (function(module, exports) {
 
 function _setPrototypeOf(o, p) {

@@ -30,23 +30,26 @@ defined( 'ABSPATH' ) || exit;
 				<tr>
 					<td colspan="2">
 						<?php
-						if( isset( $cart_item['video_to'] ) && !empty( $cart_item['video_to'] ) ){
-							echo 'Vídeo para '.$cart_item['video_to'].'<br/>';
-						}
+						// if( isset( $cart_item['video_to'] ) && !empty( $cart_item['video_to'] ) ){
+						// 	echo 'Vídeo para '.$cart_item['video_to'].'<br/>';
+						// }
 						if( isset( $cart_item['offered_by'] ) && !empty( $cart_item['offered_by'] ) ){
-							echo 'Vídeo por '.$cart_item['offered_by'].'<br/>';
+							echo '<strong>Vídeo por:</strong> '.$cart_item['offered_by'].'<br/>';
 						}
 						if( isset( $cart_item['name_to_video'] ) && !empty( $cart_item['name_to_video'] ) ){
-							echo 'Vídeo para '.$cart_item['name_to_video'].'<br/>';
+							echo '<strong>Vídeo para:</strong> '.$cart_item['name_to_video'].'<br/>';
+						}
+						if( isset( $cart_item['email_to_video'] ) && !empty( $cart_item['email_to_video'] ) ){
+							echo '<strong>E-mail:</strong> '.$cart_item['email_to_video'].'<br/>';
 						}
 						if( isset( $cart_item['video_category'] ) && !empty( $cart_item['video_category'] ) ){
-							echo 'Categoria: '.$cart_item['video_category'].'<br/>';
+							echo '<strong>Categoria:</strong> '.$cart_item['video_category'].'<br/>';
 						}
 						if( isset( $cart_item['instructions_to_video'] ) && !empty( $cart_item['instructions_to_video'] ) ){
-							echo $cart_item['instructions_to_video'].'<br/>';
+							echo '<strong>Instruções: </strong>' . $cart_item['instructions_to_video'].'<br/>';
 						}
 						if( isset( $cart_item['allow_video_on_page'] ) && ( $cart_item['allow_video_on_page'] == 'on' ) ){
-							echo 'Permitir que o vídeo seja postado no perfil do artista<br/>';
+							echo '<div class="mt-3">Permitir que o vídeo seja postado no perfil do artista</div>';
 						}
 						?>
 					</td>

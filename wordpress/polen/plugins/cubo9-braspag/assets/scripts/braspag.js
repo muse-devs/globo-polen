@@ -1,12 +1,13 @@
 (function($) {
     $(document).ready(function() {
+        /*
         if( $( 'input#billing_cpf' ).length > 0 ) {
             $( 'input#billing_cpf' ).inputmask({
                 mask: ['999.999.999-99'],
                 keepStatic: true
             });
         }
-
+        */
         if( $("#braspag_alerts").length > 0 ) {
             $("#braspag_alerts").hide();
             let checkout_form = 'form.woocommerce-checkout';
