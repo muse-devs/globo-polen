@@ -167,7 +167,7 @@ class Cubo9_Braspag {
             $order_id    = $order->get_id();
             $amount      = number_format( $order->get_total(), 2, '', '' );
             $user        = $order->get_user();
-            //$billing_cpf = ( isset( $user->ID ) ) ? get_user_meta( $user->ID, 'billing_cpf', true ) : $_REQUEST['billing_cpf'];
+            $billing_cpf = ( isset( $user->ID ) ) ? get_user_meta( $user->ID, 'billing_cpf', true ) : $_REQUEST['billing_cpf'];
             $billing_phone = ( isset( $user->ID ) ) ? get_user_meta( $user->ID, 'billing_phone', true ) : $_REQUEST['billing_phone'];
 
             /**
@@ -179,7 +179,7 @@ class Cubo9_Braspag {
             $order_data['billing']['complement']    = get_post_meta( $order_id, '_billing_complement', true );
             $order_data['billing']['neighborhood']  = get_post_meta( $order_id, '_billing_neighborhood', true );
             $order_data['billing']['phone']         = $billing_phone;
-            //$order_data['billing']['cpf']           = $billing_cpf;
+            $order_data['billing']['cpf']           = $billing_cpf;
 
             if( isset( $order_data['shipping'] ) ) {
                 $order_data['shipping']['number']       = get_post_meta( $order_id, '_shipping_number', true );

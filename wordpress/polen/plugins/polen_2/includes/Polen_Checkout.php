@@ -12,9 +12,9 @@ class Polen_Checkout
     public function __construct( $static = false ) {
         if( $static ) {
             //add_action( 'woocommerce_edit_account_form_start', array( $this, 'add_cpf_to_form' ) );
-            //add_action( 'woocommerce_edit_account_form_start', array( $this, 'add_phone_to_form' ) );
-            //add_filter( 'woocommerce_save_account_details', array( $this, 'save_account_details' ) );
-            //add_action( 'woocommerce_before_checkout_billing_form', array( $this, 'add_cpf_and_phone_to_checkout') );
+            add_action( 'woocommerce_edit_account_form_start', array( $this, 'add_phone_to_form' ) );
+            add_filter( 'woocommerce_save_account_details', array( $this, 'save_account_details' ) );
+            add_action( 'woocommerce_before_checkout_billing_form', array( $this, 'add_cpf_and_phone_to_checkout') );
             //add_action( 'woocommerce_checkout_update_order_meta', array( $this, 'save_order_meta_from_checkout' ) );
             add_filter( 'woocommerce_checkout_fields', array( $this, 'remove_woocommerce_fields' ) );
             add_filter( 'woocommerce_enable_order_notes_field', '__return_false' );
@@ -24,9 +24,6 @@ class Polen_Checkout
 
     public function remove_woocommerce_fields( $fields ) {
         $removed_keys = array(
-            'billing_email',
-            'billing_first_name',
-            'billing_last_name',
             'billing_company',
             'billing_phone',
             'billing_address_1',
