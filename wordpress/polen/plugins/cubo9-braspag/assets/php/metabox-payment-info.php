@@ -71,7 +71,7 @@
 <div class="clear"></div>
 
 <?php endif; ?>
-
+</div>
 <?php
 /*
 $order_id = ( empty( $order->get_parent_id() ) ) ? $order->ID : $order->get_parent_id();
