@@ -12,9 +12,9 @@ class Polen_Checkout
     public function __construct( $static = false ) {
         if( $static ) {
             //add_action( 'woocommerce_edit_account_form_start', array( $this, 'add_cpf_to_form' ) );
-            //add_action( 'woocommerce_edit_account_form_start', array( $this, 'add_phone_to_form' ) );
-            //add_filter( 'woocommerce_save_account_details', array( $this, 'save_account_details' ) );
-            //add_action( 'woocommerce_before_checkout_billing_form', array( $this, 'add_cpf_and_phone_to_checkout') );
+            add_action( 'woocommerce_edit_account_form_start', array( $this, 'add_phone_to_form' ) );
+            add_filter( 'woocommerce_save_account_details', array( $this, 'save_account_details' ) );
+            add_action( 'woocommerce_before_checkout_billing_form', array( $this, 'add_cpf_and_phone_to_checkout') );
             //add_action( 'woocommerce_checkout_update_order_meta', array( $this, 'save_order_meta_from_checkout' ) );
             add_filter( 'woocommerce_checkout_fields', array( $this, 'remove_woocommerce_fields' ) );
             add_filter( 'woocommerce_enable_order_notes_field', '__return_false' );
@@ -24,9 +24,6 @@ class Polen_Checkout
 
     public function remove_woocommerce_fields( $fields ) {
         $removed_keys = array(
-            'billing_email',
-            'billing_first_name',
-            'billing_last_name',
             'billing_company',
             'billing_phone',
             'billing_address_1',
@@ -56,7 +53,7 @@ class Polen_Checkout
             <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                 <label for="billing_cpf">
                     <?php _e( 'CPF', 'cubo9-marketplace' ); ?> <span class="required">*</span></label>
-                    <input type="text" class="woocommerce-Input input-text" name="billing_cpf" id="billing_cpf" value="<?php echo esc_attr( $user->billing_cpf ); ?>" />
+                    <input type="text" class="woocommerce-Input input-text form-control form-control-lg" name="billing_cpf" id="billing_cpf" value="<?php echo esc_attr( $user->billing_cpf ); ?>" />
                 <div class="error-message"></div>
             </p>
         <?php
@@ -70,7 +67,7 @@ class Polen_Checkout
                 ?>
                 <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                     <label for="billing_cpf"><?php _e( 'CPF', 'woocommerce' ); ?> <span class="required">*</span></label>
-                    <input type="text" class="woocommerce-Input input-text" name="billing_cpf" id="billing_cpf" value="<?php echo esc_attr( $user->billing_cpf ); ?>" />
+                    <input type="text" class="woocommerce-Input input-text form-control form-control-lg" name="billing_cpf" id="billing_cpf" value="<?php echo esc_attr( $user->billing_cpf ); ?>" />
                     <div class="error-message"></div>
                 </p>
             <?php
@@ -136,21 +133,21 @@ class Polen_Checkout
             ?>
             <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                 <label for="billing_phone"><?php _e( 'Celular', 'woocommerce' ); ?> <span class="required">*</span></label>
-                <input type="text" class="woocommerce-Input input-text" name="billing_phone" id="billing_phone" value="<?php echo esc_attr( $user->billing_phone ); ?>" />
+                <input type="text" class="woocommerce-Input input-text form-control form-control-lg" name="billing_phone" id="billing_phone" value="<?php echo esc_attr( $user->billing_phone ); ?>" />
                 <div class="error-message"></div>
             </p>
         <?php
         } else {
             if( ! empty( $user->billing_phone ) ) {
             ?>
-                <input 	type="hidden" class="woocommerce-Input input-text" name="billing_phone" id="billing_phone" value="<?php echo esc_attr( $user->billing_phone ); ?>" />
+                <input 	type="hidden" class="woocommerce-Input input-text form-control form-control-lg" name="billing_phone" id="billing_phone" value="<?php echo esc_attr( $user->billing_phone ); ?>" />
                 <div class="error-message"></div>
             <?php
             } else {
                 ?>
                 <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                     <label for="billing_phone"><?php _e( 'Celular', 'woocommerce' ); ?> <span class="required">*</span></label>
-                    <input type="text" class="woocommerce-Input input-text" name="billing_phone" id="billing_phone" value="<?php echo esc_attr( $user->billing_phone ); ?>" />
+                    <input type="text" class="woocommerce-Input input-text form-control form-control-lg" name="billing_phone" id="billing_phone" value="<?php echo esc_attr( $user->billing_phone ); ?>" />
                     <div class="error-message"></div>
                 </p>
             <?php
