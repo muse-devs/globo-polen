@@ -47,6 +47,11 @@ class Polen_Talent
              * Remove o notice ao adicionar o produto no carrinho.
              */
             add_filter( 'wc_add_to_cart_message_html', '__return_false' );
+            
+            /**
+             * No login do talento redirecionamos para my-account/orders/ e não para o wp_admin
+             */
+            add_filter( 'login_redirect', array( $this, 'login_redirect' ), 11, 3 );
         }
     }
 
@@ -335,5 +340,29 @@ class Polen_Talent
             
         return false;
         }
+    }
+    
+    
+    /**
+     * Se um talento tentar logar pelo wp-login.php sera redirecionado para /my-account/orders/
+     * 
+     * @param string $redirect_to
+     * @param string $requested_redirect_to
+     * @param WP_User | WP_Error $user
+     * @return string
+     */
+    public function login_redirect( $redirect_to, $requested_redirect_to, $user )
+    {
+        if( is_wp_error( $user ) ) {
+            return $requested_redirect_to;
+        }
+        
+        $roles = $user->roles;
+        
+        if( array_search( 'user_talent', $roles ) !== false ) {
+            $redirect_to = site_url( '/my-account/orders/' );
+        }
+        
+        return $redirect_to;
     }
 }
