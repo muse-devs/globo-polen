@@ -357,12 +357,20 @@ class Polen_Talent
             return $requested_redirect_to;
         }
         
-        $roles = $user->roles;
-        
-        if( array_search( 'user_talent', $roles ) !== false ) {
+        if( $this->is_user_talent( $user ) ) {
             $redirect_to = site_url( '/my-account/orders/' );
         }
         
         return $redirect_to;
+    }
+    
+    
+    public function is_user_talent( \WP_User $user )
+    {
+        $roles = $user->roles;
+        if( array_search( 'user_talent', $roles ) !== false ) {
+            return true;
+        }
+        return false;
     }
 }

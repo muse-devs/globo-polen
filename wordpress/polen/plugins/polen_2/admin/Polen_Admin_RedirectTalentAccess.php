@@ -2,6 +2,7 @@
 
 namespace Polen\Admin;
 
+use Polen\Includes\Polen_Talent;
 /**
  * Description of Polen_Admin_DisableTalenAccess
  *
@@ -17,9 +18,8 @@ class Polen_Admin_RedirectTalentAccess
     public function redirect_talent()
     {
         $user = wp_get_current_user();
-        
-        $roles = $user->roles;
-        if( array_search( 'user_talent', $roles ) !== false ) {
+        $polen_talent = new Polen_Talent();
+        if( $polen_talent->is_user_talent( $user ) ) {
             $path = 'my-account';
             wp_redirect( site_url( $path ) );
         }
