@@ -29,16 +29,27 @@
 			</div>
 			<div class="col-md-12">
 				<div class="row msg msg-body">
-					<div class="col-md-4 d-flex align-items-center">
+					<div class="col-md-4">
 						<figure class="icon">
-							<img src="https://via.placeholder.com/194x194" alt="ícone" />
+							<img src="<?= TEMPLATE_URI; ?>/assets/img/ico-selfie.png" alt="ícone" />
 						</figure>
 					</div>
-					<div class="col-md-8">
-						<p class="p">Invista hoje</p>
-						<span class="time">5 horas</span>
-						<p class="p">E receba hoje até</p>
-						<span class="value">R$2000</span>
+					<div class="col-md-8 py-5 my-4">
+						<div class="row">
+							<div class="col-md-12 d-flex justify-content-start">
+								<div>
+									<p class="p small">Invista hoje</p>
+									<span class="time">5 horas</span>
+								</div>
+								<div class="mx-5">
+									<?php polen_icon_arrows(); ?>
+								</div>
+								<div>
+									<p class="p small">E receba até</p>
+									<span class="value small">R$2000</span>
+								</div>
+							</div>
+						</div>
 						<p class="mt-4"><button class="btn btn-primary btn-lg">Ganhar agora</button></p>
 					</div>
 				</div>

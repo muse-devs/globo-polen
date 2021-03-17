@@ -43,3 +43,16 @@ select.form-control:not([size]):not([multiple]) {
 .woocommerce form.register {
 	border: none;
 }
+
+.woocommerce-MyAccount-navigation {
+	li {
+		padding: 16px 20px;
+		border-left: 7px solid transparent;
+		box-sizing: border-box;
+		&.is-active {
+			border-radius: 6px;
+			border-left-color: $primary;
+			background-color: $default-bg-color;
+		}
+	}
+}
