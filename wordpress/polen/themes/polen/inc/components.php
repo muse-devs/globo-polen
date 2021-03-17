@@ -19,6 +19,11 @@ function polen_icon_star($active = false)
 	}
 }
 
+function polen_icon_arrows()
+{
+	echo '<img src="' . TEMPLATE_URI . '/assets/img/arrows.png" />';
+}
+
 function polen_front_get_banner()
 {
 	ob_start();
