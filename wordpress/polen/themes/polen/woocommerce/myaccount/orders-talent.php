@@ -25,50 +25,58 @@ if (in_array('user_talent',  $logged_user->roles)) {
 			if (count($talent_orders) > 0) {
 				foreach ($talent_orders as $order) :
 		?>
-					<div class="container">
+					<div class="container mb-5">
 						<div class="row">
 							<div class="col-md-12">
 								<div class="talent-orders">
-									<header class="row header">
+									<header class="row d-flex align-items-center header">
 										<div class="col-md-4">
 											<p class="p">Valor</p>
 											<span class="value">R$200</span>
 										</div>
-										<div class="col-md-4">
+										<div class="col-md-4 text-center">
 											<p class="p small">Tempo estimado</p>
-											<span class="time">2 minuos</span>
+											<span class="time">2 minutos</span>
 										</div>
-										<div class="col-md-4">
+										<div class="col-md-4 text-center">
 											<p class="p small">Válido por</p>
 											<span class="time">7 dias</span>
 										</div>
 									</header>
-									<div class="row">
-										<div class="col">
-											<div>
+									<div class="body">
+										<div class="row d-flex align-items-center">
+											<div class="col">
 												<p class="p small">Vídeo de</p>
 												<span class="name"><?php echo $order['from']; ?></span>
 											</div>
-											<?php polen_icon_arrows(); ?>
-											<div>
-												<p class="p small">Para</p>
-												<span class="name"><?php echo $order['name']; ?></span>
+											<div class="col text-center">
+												<?php polen_icon_arrows(); ?>
+											</div>
+											<div class="col">
+												<div>
+													<p class="p small">Para</p>
+													<span class="name"><?php echo $order['name']; ?></span>
+												</div>
+											</div>
+										</div>
+										<div class="row mt-4">
+											<div class="col">
+												<p class="p small mb-3">Ocasião</p>
+												<span class="category"><?php echo $order['category']; ?></span>
+											</div>
+										</div>
+										<div class="row mt-4">
+											<div class="col">
+												<p class="p small mb-2">Instruções</p>
+												<p class="text"><?php echo $order['instructions']; ?></p>
 											</div>
 										</div>
 									</div>
-									<div class="row">
-										<div class="col">
-											<p class="p small">Ocasião</p>
-											<span class="category"><?php echo $order['category']; ?></span>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col">
-											<p class="p small">Instruções</p>
-											<p class="text"><?php echo $order['instructions']; ?></p>
-										</div>
-									</div>
 								</div>
+							</div>
+							<div class="col-md-12 d-flex justify-content-center my-5">
+								<button class="icon-button reject mx-3"><?php polen_icon_accept_reject('reject'); ?></button>
+								<button class="icon-button accept mx-3"><?php polen_icon_accept_reject(); ?></button>
 							</div>
 						</div>
 					</div>

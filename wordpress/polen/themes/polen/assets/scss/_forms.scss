@@ -85,3 +85,28 @@
 .talent-login {
 	background: no-repeat center/cover url(../img/login-bg.png);
 }
+
+.icon-button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 121px;
+	height: 121px;
+	cursor: pointer;
+	outline: transparent;
+	border: none;
+	border-radius: 50%;
+	background: none;
+	background-color: $talent-bg-color;
+	&:focus {
+		outline: transparent;
+	}
+	.bi-x {
+		font-size: 110px;
+		color: $primary;
+	}
+	.bi-check {
+		font-size: 110px;
+		color: $accept;
+	}
+}

@@ -24,6 +24,15 @@ function polen_icon_arrows()
 	echo '<img src="' . TEMPLATE_URI . '/assets/img/arrows.png" />';
 }
 
+function polen_icon_accept_reject($type = 'accept')
+{
+	if ($type === 'reject') {
+		echo '<i class="bi bi-x"></i>';
+	} else {
+		echo '<i class="bi bi-check"></i>';
+	}
+}
+
 function polen_front_get_banner()
 {
 	ob_start();

@@ -160,7 +160,12 @@
 		box-sizing: border-box;
 		background-color: $secondary;
 	}
+	.body {
+		padding: 60px;
+		box-sizing: border-box;
+	}
 	.p {
+		margin: 0;
 		font-size: 24px;
 		font-weight: 700;
 		color: $font-transparent;
@@ -188,5 +193,6 @@
 	}
 	.text {
 		font-size: 21px;
+		font-weight: 500;
 	}
 }
