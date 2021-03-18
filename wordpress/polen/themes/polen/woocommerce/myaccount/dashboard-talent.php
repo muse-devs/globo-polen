@@ -50,7 +50,7 @@
 								</div>
 							</div>
 						</div>
-						<p class="mt-4"><button class="btn btn-primary btn-lg">Ganhar agora</button></p>
+						<p class="mt-4"><a class="btn btn-primary btn-lg">Ganhar agora</a></p>
 					</div>
 				</div>
 			</div>

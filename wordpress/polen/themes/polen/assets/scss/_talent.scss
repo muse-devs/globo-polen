@@ -147,3 +147,52 @@
 		font-size: 32px;
 	}
 }
+
+.talent-orders {
+	position: relative;
+	width: 692px;
+	border-radius: 10px;
+	overflow: hidden;
+	background-color: $talent-bg-color;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	.header {
+		padding: 60px;
+		box-sizing: border-box;
+		background-color: $secondary;
+	}
+	.body {
+		padding: 60px;
+		box-sizing: border-box;
+	}
+	.p {
+		margin: 0;
+		font-size: 24px;
+		font-weight: 700;
+		color: $font-transparent;
+		&.small {
+			font-size: 16px;
+		}
+	}
+	.value {
+		font-size: 44px;
+		font-weight: 700;
+	}
+	.time {
+		font-size: 24px;
+		font-weight: 700;
+	}
+	.name {
+		font-size: 32px;
+		font-weight: 700;
+	}
+	.category {
+		padding: 5px 23px;
+		font-size: 16px;
+		border: 1px solid white;
+		border-radius: 90px;
+	}
+	.text {
+		font-size: 21px;
+		font-weight: 500;
+	}
+}
