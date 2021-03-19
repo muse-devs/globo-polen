@@ -145,3 +145,16 @@ function polen_get_talents( int $quantity = 10 )
     $talents = _polen_get_info_talents_by_args( $args );
     return $talents;
 }
+
+
+/**
+ * Retorna a URL do arquivo JSON das occasions para a tela do brief do videos
+ * antes da compara pelo costumer.
+ * 
+ * @return string
+ */
+function polen_get_occasions_json()
+{
+    $occasion_list = new Polen\Includes\Polen_Occasion_List();
+    return $occasion_list->get_url_occasion_json();
+}

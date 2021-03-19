@@ -23,6 +23,9 @@ wordpress/polen/*
 !wordpress/polen/plugins/
 !wordpress/polen/themes/
 
+# Ignorar Arquivo de conteudo gerado dinamicamente podem no acesso ele é estátivo
+wordpress/occasions.json
+
 # Ignorar determinados plugins
 wordpress/wp-content/plugins/hello.php
 wordpress/polen/plugins/hello.php

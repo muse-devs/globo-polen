@@ -50,6 +50,14 @@ class Polen_Occasion_List
         add_screen_option( $option, $args );
     }
     
+    
+    /**
+     * 
+     * @param type $status
+     * @param type $option
+     * @param type $value
+     * @return type
+     */
     public function polen_occasion_table_set_option( $status, $option, $value )
     {
         return $value;
@@ -94,13 +102,14 @@ class Polen_Occasion_List
         
         if( !empty($occasion_category) && !empty($occasion_description) && $_wpnonce === 1 ) {
             $this->set_occasion( $occasion_category, $occasion_description );
+            
         }
     }
 
     /**
      * List all inserted occasions
      */
-    public function get_occasion( $_query = null, $_orderby = null, $_order = 'ASC', int $_limit = 1, int $_offset = 0 )
+    public function get_occasion( $_query = null, $_orderby = null, $_order = 'ASC', int $_limit = 1, int $_offset = 0, $select = null )
     {
         global $wpdb;
 
@@ -116,15 +125,28 @@ class Polen_Occasion_List
         }
         
         $query = !empty($_query) ? $wpdb->prepare(" AND (type LIKE '%%%s%%') ", $_query) : '';        
-        $sql = $this->make_sql_select( $wpdb, $query, $orderby, $limit );
+        $sql = $this->make_sql_select( $wpdb, $query, $orderby, $limit, $select );
         $results = $wpdb->get_results( $sql );
         return $results;
     }
     
-    private function make_sql_select( $wpdb, $query, $orderby, $limit )
+    /**
+     * 
+     * @param $wpdb
+     * @param type $query
+     * @param type $orderby
+     * @param type $limit
+     * @param string $select
+     * @return type
+     */
+    private function make_sql_select( $wpdb, $query, $orderby, $limit, $select = null )
     {
-        return "SELECT * FROM `" . $wpdb->base_prefix . "occasion_list` WHERE (1=1) {$query} {$orderby} {$limit}";
+        if( empty( $select ) ) {
+            $select = '*';
+        }
+        return "SELECT {$select} FROM `" . $wpdb->base_prefix . "occasion_list` WHERE (1=1) {$query} {$orderby} {$limit}";
     }
+    
     
     public function get_occasion_count( $_query = null )
     {
@@ -172,6 +194,7 @@ class Polen_Occasion_List
                 $inserted = $wpdb->insert( $wpdb->base_prefix."occasion_list", array( 'type' => trim( $type ), 'description' => trim( $description ) ) );
 
                 if( $inserted > 0 ){
+                    $this->export_occasion_json();
                     return "Cadastrado com sucesso!";
                 }else{
                     return "Ocorreu um erro ao tentar cadastrar";
@@ -183,7 +206,15 @@ class Polen_Occasion_List
             return "Está faltando dados";
         }   
     }
-
+    
+    /**
+     * Checar se a occasion existe
+     * 
+     * @global \Polen\Includes\type $wpdb
+     * @param type $type
+     * @param type $description
+     * @return boolean
+     */
     public function check_already_inserted( $type, $description ){
         global $wpdb;
         $sql_prepared = $wpdb->prepare("SELECT COUNT(*) total  FROM `" . $wpdb->base_prefix . "occasion_list` WHERE type = %s AND description = %s;", trim( $type ), trim( $description ));
@@ -194,6 +225,7 @@ class Polen_Occasion_List
             return false;
         }
     }
+    
 
     public function get_occasion_description(){
         if( isset( $_POST['occasion_type'] ) ){
@@ -204,6 +236,45 @@ class Polen_Occasion_List
                 die;
             }
         }
+    }
+    
+    
+    /**
+     * Exporta occasions em um arquivo json
+     * @param array $occasions
+     * @return boolean
+     */
+    public function export_occasion_json( array $occasions = null )
+    {
+        if( empty( $occasions ) ) {
+            $occasions = $this->get_occasion( null, 'type', 'ASC', 1, 0, 'id, type, description' );
+        }
+        $path_file = $this->get_path_occasion_json();
+        $occasions_json = json_encode( $occasions );
+        $file = fopen( $path_file, 'w' );
+        fwrite( $file, $occasions_json );
+        fclose( $file );
+        return true;
+    }
+    
+    
+    /**
+     * Pega o caminho do arquivo JSON
+     * @return type
+     */
+    public function get_path_occasion_json()
+    {
+       return ABSPATH . '/occasions.json'; 
+    }
+    
+    
+    /**
+     * Pega a URL do arquivo occasion.json
+     * @return type
+     */
+    public function get_url_occasion_json()
+    {
+        return site_url('occasion.json');
     }
 
     /*
