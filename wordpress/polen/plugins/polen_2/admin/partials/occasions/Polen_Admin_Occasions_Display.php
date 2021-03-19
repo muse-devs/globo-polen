@@ -99,7 +99,7 @@ class Polen_Admin_Occasions_Display extends \WP_List_Table
             <form class="validate" method="post" action="">
                 <?php wp_nonce_field('occasion_new', '_wpnonce', true, true); ?>
                 <div class="form-field form-required term-name-wrap">
-                    <label for="occasion_category">Categoria</label>
+                    <label for="occasion_category">Ocasião</label>
                     <input name="occasion_category" id="occasion_category" type="text" value="" size="45" aria-required="true">
                     <p>Nome da ocasião.</p>
                 </div>

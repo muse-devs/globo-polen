@@ -78,7 +78,7 @@ class Polen_Occasion_List
 
         echo '<div class="wrap">';
         echo '<div id="icon-users" class="icon32"></div>';
-        echo '<h1 class="wp-heading-inline">' . translate('Categorias de Vídeo') . '</h1>';
+        echo '<h1 class="wp-heading-inline">' . translate('Ocasiões de Vídeo') . '</h1>';
         echo '<hr class="wp-header-end">';
         $occasion_display->show_form_create_occasion();
         $occasion_display->show_form_search_occasion();
@@ -98,7 +98,8 @@ class Polen_Occasion_List
     {
         $occasion_category = trim( filter_input( INPUT_POST, 'occasion_category', FILTER_FLAG_EMPTY_STRING_NULL ) );
         $occasion_description = trim( filter_input( INPUT_POST, 'occasion_description', FILTER_SANITIZE_STRING ) );
-        $_wpnonce = wp_verify_nonce( $_POST['_wpnonce'], 'occasion_new' );
+        if( isset( $_POST['_wpnonce']) )
+            $_wpnonce = wp_verify_nonce( $_POST['_wpnonce'], 'occasion_new' );
         
         if( !empty($occasion_category) && !empty($occasion_description) && $_wpnonce === 1 ) {
             $this->set_occasion( $occasion_category, $occasion_description );
