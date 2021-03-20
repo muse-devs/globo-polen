@@ -40,27 +40,25 @@ class Polen_Account
     }
 
     public function my_account_menu_title( $items ) {
-        $items['edit-account'] = 'Meus dados';
-       // unset( $items['dashboard'] );
-        unset( $items['downloads'] );
-        unset( $items['edit-address'] );
-
         $logged_user = wp_get_current_user();
 		if( in_array( 'user_talent',  $logged_user->roles ) )
 		{ 
-            $items['orders'] = 'Suas solicitações';
-            $items['dashboard'] = 'Início';
+            $menu_items = array(
+                'dashboard'       => 'Início',
+                'orders'          => 'Meus pedidos',
+                'payment-options' => 'Pagamento',
+                'edit-account'    => 'Meus dados',
+                'customer-logout' => __( 'Logout', 'woocommerce' ),
+            );
+        }else{
+            $menu_items = array(
+                'orders'          => 'Meus pedidos',
+                'payment-options' => 'Pagamento',
+                'edit-account'    => 'Meus dados',
+                'customer-logout' => __( 'Logout', 'woocommerce' ),
+            );           
         }    
-        else{
-            unset( $items['dashboard'] );
-            $items['orders']       = 'Meus pedidos';
-            $favorite = array( 'polen-favorite' => 'Favoritos' );
-            $items = array_slice( $items, 0, 2, true ) + $favorite + array_slice( $items, 2, NULL, true );
-        }    
-
-
-
-        return $items;
+        return $menu_items;
     }
 
     public function polen_favorite_content() {

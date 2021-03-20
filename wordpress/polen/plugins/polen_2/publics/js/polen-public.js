@@ -1,6 +1,26 @@
 (function( $ ) {
 	'use strict';
     $(document).ready(function(){
+		$('button.talent-check-order').on('click',function(){
+			var wnonce = $(this).parent().attr('button-nonce');
+			var order_id = $(this).parent().attr('order-id');
+			var type = $(this).attr('type');
+			$.ajax(
+				{
+					type: 'POST',
+					url: polen_ajax.ajaxurl,
+						data: {
+						action: 'talent_acceptance',
+						order: order_id,
+						type: type,
+						security: wnonce
+					},
+					success: function( response ) {
+						console.log(response);
+					}
+				});
+		});
+
 		$('.polen-cart-item-data').on('blur change paste click',function(){
 			var cart_id = $(this).data( 'cart-id' );
 			var item_name = $(this).attr('name');
