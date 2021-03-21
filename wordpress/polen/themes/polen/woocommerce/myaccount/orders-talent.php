@@ -21,18 +21,18 @@ if (in_array('user_talent',  $logged_user->roles)) {
 		if (empty($talent_orders)) {
 			echo "<p>Você não possui novas solicitações</p>";
 		} else {
-			echo "<p class='mb-5'>Você tem <strong>" . count($talent_orders) . " pedidos de vídeo</strong>, seus pedidos expiram em até 7 dias.</p>";
+			echo "<p class='mb-5'>Você tem <strong><span id='order-count'>" . count($talent_orders) . "</span> pedidos de vídeo</strong>, seus pedidos expiram em até 7 dias.</p>";
 			if (count($talent_orders) > 0) {
 				foreach ($talent_orders as $order) :
 		?>
-					<div class="container mb-5">
+					<div class="container mb-5" box-id="<?php echo $order['order_id'];?>">
 						<div class="row">
 							<div class="col-md-12">
 								<div class="talent-orders">
 									<header class="row d-flex align-items-center header">
 										<div class="col-md-4">
 											<p class="p">Valor</p>
-											<span class="value">R$200</span>
+											<span class="value"><?php echo $order['total'];?></span>
 										</div>
 										<div class="col-md-4 text-center">
 											<p class="p small">Tempo estimado</p>
@@ -74,9 +74,12 @@ if (in_array('user_talent',  $logged_user->roles)) {
 									</div>
 								</div>
 							</div>
-							<div class="col-md-12 d-flex justify-content-center my-5">
-								<button class="icon-button reject mx-3"><?php polen_icon_accept_reject('reject'); ?></button>
-								<button class="icon-button accept mx-3"><?php polen_icon_accept_reject(); ?></button>
+							<?php
+							$accept_reject_nonce = wp_create_nonce( 'polen-order-accept-nonce' );
+							?>
+							<div class="col-md-12 d-flex justify-content-center my-5" button-nonce="<?php echo $accept_reject_nonce;?>" order-id="<?php echo $order['order_id'];?>">
+								<button class="icon-button reject mx-3 talent-check-order" type="reject"><?php polen_icon_accept_reject('reject'); ?></button>
+								<button class="icon-button accept mx-3 talent-check-order" type="accept"><?php polen_icon_accept_reject(); ?></button>
 							</div>
 						</div>
 					</div>

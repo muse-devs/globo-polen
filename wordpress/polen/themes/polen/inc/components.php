@@ -33,6 +33,11 @@ function polen_icon_accept_reject($type = 'accept')
 	}
 }
 
+function polen_icon_upload()
+{
+	echo '<i class="bi bi-cloud-arrow-up"></i>';
+}
+
 function polen_front_get_banner()
 {
 	ob_start();
