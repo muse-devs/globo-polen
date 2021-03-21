@@ -148,7 +148,30 @@
 	}
 }
 
-.talent-orders {
+.talent-order {
+	padding: 32px;
+	border-radius: 8px;
+	box-sizing: border-box;
+	background-color: $talent-bg-color;
+	.bordered {
+		border-bottom: 1px solid $light-50;
+	}
+	.title,
+	.description {
+		margin: 0;
+		font-family: $font-secondary;
+		font-size: 16px;
+		font-weight: 700;
+	}
+	.title {
+		color: $light-50;
+	}
+
+	.description {
+	}
+}
+
+.talent-order-modal {
 	position: relative;
 	width: 692px;
 	border-radius: 10px;
