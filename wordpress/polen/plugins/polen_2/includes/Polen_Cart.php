@@ -8,6 +8,7 @@ class Polen_Cart
     public function __construct( $static = false ) {
         if( $static ) {
             add_action( 'wp_ajax_polen_update_cart_item', array( $this, 'polen_update_cart_item' ) );
+            add_action( 'wp_ajax_polen_update_cart_item', array( $this, 'polen_update_cart_item' ) );
             add_action( 'wp_ajax_nopriv_polen_update_cart_item', array( $this, 'polen_update_cart_item' ) );
             add_action( 'woocommerce_checkout_create_order_line_item', array( $this, 'polen_cart_line_item' ), 10, 4 );
             add_action( 'polen_before_cart', array( $this, 'polen_save_cart' ), 10 );

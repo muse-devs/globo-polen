@@ -16,9 +16,11 @@ class Polen_Talent_Router
 
     public function init_routes()
     {
-        $this->add_route( 'login', 'login', false );
+     //   $this->add_route( 'login', 'login', false );
 //        add_action( 'wp_ajax_nopriv_login', array( $this->controller, 'login' ) );
 //        add_action( '', array( $this->controller ) );
+        $this->add_route( 'talent_acceptance', 'talent_acceptance', false );
+        $this->add_route( 'talent_acceptance', 'talent_acceptance', true );
     }
     
     public function add_route( string $action, string $handler, $authenticade = true )

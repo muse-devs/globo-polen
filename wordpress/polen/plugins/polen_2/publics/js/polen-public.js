@@ -1,6 +1,35 @@
 (function( $ ) {
 	'use strict';
     $(document).ready(function(){
+		$('button.talent-check-order').on('click',function(){
+			var wnonce = $(this).parent().attr('button-nonce');
+			var order_id = $(this).parent().attr('order-id');
+			var type = $(this).attr('type');
+			$.ajax(
+				{
+					type: 'POST',
+					url: polen_ajax.ajaxurl,
+						data: {
+						action: 'talent_acceptance',
+						order: order_id,
+						type: type,
+						security: wnonce
+					},
+					success: function( response ) {
+						let obj = $.parseJSON( response );
+						console.log(obj['success']);
+						if( type == 'reject' && obj['success'] == true ){
+							$('div[box-id="'+order_id+'"]').remove();
+
+							let qtd = parseInt( $('#order-count').html() );
+							qtd = qtd - 1;
+
+							$('#order-count').html(qtd);
+						}
+					}
+				});
+		});
+
 		$('.polen-cart-item-data').on('blur change paste click',function(){
 			var cart_id = $(this).data( 'cart-id' );
 			var item_name = $(this).attr('name');
@@ -48,29 +77,6 @@
 				});
 			}	
 		});	
-		/*
-		$('.polen-cart-select-data').on('blur change paste click',function(){
-			var cart_id = $(this).data( 'cart-id' );
-			var item_value = $(this).val();
-			var item_name = $(this).attr('name');
 
-			if( item_name == 'video_category' ){	
-				$.ajax(
-					{
-						type: 'POST',
-						url: polen_ajax.ajaxurl,
-							data: {
-							action: 'get_occasion_description',
-							occasion_type: item_value,
-						},
-						success: function( response ) {
-							let obj = $.parseJSON( response );
-							//console.log(obj['response'][0].description);
-							$( '#cart_instructions_to_video_' + cart_id ).html(obj['response'][0].description);
-						}
-					});				
-			}
-		});	
-		*/
 	});
 })( jQuery );

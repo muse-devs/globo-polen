@@ -21,10 +21,10 @@ if (in_array('user_talent',  $logged_user->roles)) {
 		if (empty($talent_orders)) {
 			echo "<p>Você não possui novas solicitações</p>";
 		} else {
-			echo "<p class='mb-5'>Você tem <strong>" . count($talent_orders) . " pedidos de vídeo</strong>, seus pedidos expiram em até 7 dias.</p>";
+			echo "<p class='mb-5'>Você tem <strong><span id='order-count'>" . count($talent_orders) . "</span> pedidos de vídeo</strong>, seus pedidos expiram em até 7 dias.</p>";
 			if (count($talent_orders) > 0) {
 				foreach ($talent_orders as $order) : ?>
-					<div class="row mb-5">
+					<div class="row mb-5" box-id="<?php echo $order['order_id'];?>">
 						<div class="col md-12">
 							<div class="talent-order">
 								<div class="row mb-4 pb-3 bordered">
@@ -32,16 +32,16 @@ if (in_array('user_talent',  $logged_user->roles)) {
 										<div class="row">
 											<div class="col-md-3">
 												<p class="title">Vídeo de</p>
-												<p class="description">Diego J.</p>
+												<p class="description"><?php echo $order['from']; ?></p>
 											</div>
 											<div class="col-md-3"><?php polen_icon_arrows(); ?></div>
 											<div class="col-md-3">
 												<p class="title">Para</p>
-												<p class="description">Aline A.</p>
+												<p class="description"><?php echo $order['name']; ?></p>
 											</div>
 											<div class="col-md-3">
 												<p class="title">Ocasião</p>
-												<p class="description">Aniversário</p>
+												<p class="description"><?php echo $order['category']; ?></p>
 											</div>
 										</div>
 									</div>
@@ -55,7 +55,7 @@ if (in_array('user_talent',  $logged_user->roles)) {
 										<div class="row">
 											<div class="col-md-4">
 												<p class="title">Valor</p>
-												<p class="description">R$200</p>
+												<p class="description"><?php echo $order['total'];?></p>
 											</div>
 											<div class="col-md-4">
 												<p class="title">Tempo estimado</p>
@@ -126,9 +126,12 @@ if (in_array('user_talent',  $logged_user->roles)) {
 					</div>
 				</div>
 			</div>
-			<div class="col-md-12 d-flex justify-content-center my-5">
-				<button class="icon-button reject mx-3"><?php polen_icon_accept_reject('reject'); ?></button>
-				<button class="icon-button accept mx-3"><?php polen_icon_accept_reject(); ?></button>
+			<?php
+			$accept_reject_nonce = wp_create_nonce( 'polen-order-accept-nonce' );
+			?>
+			<div class="col-md-12 d-flex justify-content-center my-5" button-nonce="<?php echo $accept_reject_nonce;?>" order-id="<?php echo $order['order_id'];?>">
+				<button class="icon-button reject mx-3 talent-check-order" type="reject"><?php polen_icon_accept_reject('reject'); ?></button>
+				<button class="icon-button accept mx-3 talent-check-order" type="accept"><?php polen_icon_accept_reject(); ?></button>
 			</div>
 		</div>
 
