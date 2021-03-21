@@ -52,7 +52,7 @@ select.form-control:not([size]):not([multiple]) {
 		&.is-active {
 			border-radius: 6px;
 			border-left-color: $primary;
-			background-color: $default-bg-color;
+			background-color: $form-bg-color;
 		}
 	}
 }

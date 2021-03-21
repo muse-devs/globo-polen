@@ -1,28 +1,31 @@
 $light-100: #fff;
-$light-50: rgba(#ffffff, 50);
-$light-25: rgba(#ffffff, 25);
+$light-50: rgba(#ffffff, 0.5);
+$light-25: rgba(#ffffff, 0.25);
 $dark-100: #000;
-$dark-50: rgba(#000000, 50);
-$dark-25: rgba(#000000, 25);
+$dark-50: rgba(#000000, 0.5);
+$dark-25: rgba(#000000, 0.25);
 
-$body-bg: #12141d;
-$body-color: white;
+$body-bg: #000;
+$body-color: $light-100;
 $primary: #e61681;
 $danger: #ff4136;
 $secondary: #377dff;
-$accept: #74E5BD;
+$accept: #74e5bd;
 
 $theme-colors: (
 	"primary": $primary,
+	"secondary": $secondary,
+	"succes": $accept,
 	"danger": $danger,
+	"light": $light-100,
 );
 
 $progress-bar-bg: $secondary;
 
-$default-bg-color: #1e2029;
-$secondary-bg-color: rgba(196, 196, 196, 0.4);
-$font-transparent: rgba(255,255,255,0.4);
-$talent-bg-color: #323335;
-$form-bg-color: #171922;
-$font-color2: #d0d4ea;
-$input-font-color: #9fa4bc;
+$default-bg-color: $light-25;
+$secondary-bg-color: $light-50;
+$font-transparent: $light-50;
+$talent-bg-color: #262626;
+$form-bg-color: rgba(196, 196, 196, 0.1);
+$font-color2: $light-50;
+$input-font-color: $light-100;

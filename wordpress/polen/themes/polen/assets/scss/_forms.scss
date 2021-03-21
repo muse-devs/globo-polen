@@ -5,6 +5,7 @@
 	color: $input-font-color;
 	background-color: $default-bg-color;
 	&:focus {
+		color: $input-font-color;
 		background-color: $default-bg-color;
 	}
 }
