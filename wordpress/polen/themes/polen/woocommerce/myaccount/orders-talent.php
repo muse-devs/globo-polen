@@ -21,7 +21,7 @@ if (in_array('user_talent',  $logged_user->roles)) {
 		if (empty($talent_orders)) {
 			echo "<p>Você não possui novas solicitações</p>";
 		} else {
-			echo "<p class='mb-5'>Você tem <strong>" . count($talent_orders) . " pedidos de vídeo</strong>, seus pedidos expiram em até 7 dias.</p>";
+			echo "<p class='mb-5'>Você tem <strong><span id='order-count'>" . count($talent_orders) . "</span> pedidos de vídeo</strong>, seus pedidos expiram em até 7 dias.</p>";
 			if (count($talent_orders) > 0) {
 				foreach ($talent_orders as $order) :
 		?>
@@ -32,7 +32,7 @@ if (in_array('user_talent',  $logged_user->roles)) {
 									<header class="row d-flex align-items-center header">
 										<div class="col-md-4">
 											<p class="p">Valor</p>
-											<span class="value">R$200</span>
+											<span class="value"><?php echo $order['total'];?></span>
 										</div>
 										<div class="col-md-4 text-center">
 											<p class="p small">Tempo estimado</p>

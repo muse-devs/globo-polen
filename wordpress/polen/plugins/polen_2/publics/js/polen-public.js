@@ -20,6 +20,11 @@
 						console.log(obj['success']);
 						if( type == 'reject' && obj['success'] == true ){
 							$('div[box-id="'+order_id+'"]').remove();
+
+							let qtd = parseInt( $('#order-count').html() );
+							qtd = qtd - 1;
+
+							$('#order-count').html(qtd);
 						}
 					}
 				});
