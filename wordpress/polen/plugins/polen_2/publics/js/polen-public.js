@@ -16,7 +16,11 @@
 						security: wnonce
 					},
 					success: function( response ) {
-						console.log(response);
+						let obj = $.parseJSON( response );
+						console.log(obj['success']);
+						if( type == 'reject' && obj['success'] == true ){
+							$('div[box-id="'+order_id+'"]').remove();
+						}
 					}
 				});
 		});
@@ -68,29 +72,6 @@
 				});
 			}	
 		});	
-		/*
-		$('.polen-cart-select-data').on('blur change paste click',function(){
-			var cart_id = $(this).data( 'cart-id' );
-			var item_value = $(this).val();
-			var item_name = $(this).attr('name');
 
-			if( item_name == 'video_category' ){	
-				$.ajax(
-					{
-						type: 'POST',
-						url: polen_ajax.ajaxurl,
-							data: {
-							action: 'get_occasion_description',
-							occasion_type: item_value,
-						},
-						success: function( response ) {
-							let obj = $.parseJSON( response );
-							//console.log(obj['response'][0].description);
-							$( '#cart_instructions_to_video_' + cart_id ).html(obj['response'][0].description);
-						}
-					});				
-			}
-		});	
-		*/
 	});
 })( jQuery );

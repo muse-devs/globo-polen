@@ -25,7 +25,7 @@ if (in_array('user_talent',  $logged_user->roles)) {
 			if (count($talent_orders) > 0) {
 				foreach ($talent_orders as $order) :
 		?>
-					<div class="container mb-5">
+					<div class="container mb-5" box-id="<?php echo $order['order_id'];?>">
 						<div class="row">
 							<div class="col-md-12">
 								<div class="talent-orders">
