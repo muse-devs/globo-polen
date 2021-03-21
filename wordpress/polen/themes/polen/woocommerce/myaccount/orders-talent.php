@@ -24,7 +24,7 @@ if (in_array('user_talent',  $logged_user->roles)) {
 			echo "<p class='mb-5'>Você tem <strong><span id='order-count'>" . count($talent_orders) . "</span> pedidos de vídeo</strong>, seus pedidos expiram em até 7 dias.</p>";
 			if (count($talent_orders) > 0) {
 				foreach ($talent_orders as $order) : ?>
-					<div class="row mb-5" box-id="<?php echo $order['order_id'];?>">
+					<div class="row mb-5" box-id="<?php echo $order['order_id']; ?>">
 						<div class="col md-12">
 							<div class="talent-order">
 								<div class="row mb-4 pb-3 bordered">
@@ -55,7 +55,7 @@ if (in_array('user_talent',  $logged_user->roles)) {
 										<div class="row">
 											<div class="col-md-4">
 												<p class="title">Valor</p>
-												<p class="description"><?php echo $order['total'];?></p>
+												<p class="description"><?php echo $order['total']; ?></p>
 											</div>
 											<div class="col-md-4">
 												<p class="title">Tempo estimado</p>
@@ -127,9 +127,9 @@ if (in_array('user_talent',  $logged_user->roles)) {
 				</div>
 			</div>
 			<?php
-			$accept_reject_nonce = wp_create_nonce( 'polen-order-accept-nonce' );
+			$accept_reject_nonce = wp_create_nonce('polen-order-accept-nonce');
 			?>
-			<div class="col-md-12 d-flex justify-content-center my-5" button-nonce="<?php echo $accept_reject_nonce;?>" order-id="<?php echo $order['order_id'];?>">
+			<div class="col-md-12 d-flex justify-content-center my-5" button-nonce="<?php echo $accept_reject_nonce; ?>" order-id="<?php echo $order['order_id']; ?>">
 				<button class="icon-button reject mx-3 talent-check-order" type="reject"><?php polen_icon_accept_reject('reject'); ?></button>
 				<button class="icon-button accept mx-3 talent-check-order" type="accept"><?php polen_icon_accept_reject(); ?></button>
 			</div>
