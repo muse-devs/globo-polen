@@ -170,6 +170,11 @@ function polen_scripts() {
 add_action( 'wp_enqueue_scripts', 'polen_scripts' );
 
 /**
+ * File responsible to utils functions
+ */
+require_once get_template_directory() . '/inc/utils.php';
+
+/**
  * Implement the Custom Header feature.
  */
 require get_template_directory() . '/inc/custom-header.php';
