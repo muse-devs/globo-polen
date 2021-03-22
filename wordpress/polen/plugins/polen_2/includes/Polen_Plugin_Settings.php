@@ -152,6 +152,71 @@ class Polen_Plugin_Settings
                 ),
             ),
         ) );
+
+        // Section: SMTP Settings
+        \Redux::set_section( $opt_name, array(
+            'title'            => esc_html__( 'SMTP', 'polen' ),
+            'id'               => 'polen_smtp',
+            'icon'             => 'el el-align-justify',
+            'subsection'       => false,
+            'fields'           => array(
+                array(
+                    'id'       => 'polen_smtp_on',
+                    'type'     => 'switch',
+                    'title'    => esc_html__('Desativar a barra administrativa do Wordpress', 'polen'),
+                    'desc'     => 'Desativa a barra administrativa do Wordpress (adminbar).',
+                    'default'  => 0,
+                ),
+                array(
+                    'id'       => 'polen_smtp_host',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Endereço do servidor SMTP', 'polen'),
+                    'desc'     => 'Informe o endereço do servidor SMTP.',
+                    'default'  => 'email-smtp.us-east-2.amazonaws.com',
+                    'required' => array( 'polen_smtp_on', '=', '1' ),
+                ),
+                array(
+                    'id'       => 'polen_smtp_port',
+                    'type'     => 'spinner',
+                    'title'    => esc_html__('Porta do servidor SMTP', 'polen'),
+                    'desc'     => 'Informe a porta do servidor SMTP.',
+                    'default'  => '587',
+                    'required' => array( 'polen_smtp_on', '=', '1' ),
+                ),
+                array(
+                    'id'       => 'polen_smtp_user',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Usuário do servidor SMTP', 'polen'),
+                    'desc'     => 'Informe o usuário do servidor SMTP.',
+                    'default'  => 'AKIASWGKUEIQNIMMOAID',
+                    'required' => array( 'polen_smtp_on', '=', '1' ),
+                ),
+                array(
+                    'id'       => 'polen_smtp_pass',
+                    'type'     => 'password',
+                    'title'    => esc_html__('Senha do usuário do servidor SMTP', 'polen'),
+                    'desc'     => 'Informe a senha do usuário do servidor SMTP.',
+                    'default'  => 'BI1e3yLlNCIzJVvNOMt7LTXpUDirxVuzlU39UlWvNLuv',
+                    'required' => array( 'polen_smtp_on', '=', '1' ),
+                ),
+                array(
+                    'id'       => 'polen_smtp_from_name',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Nome do remetente', 'polen'),
+                    'desc'     => 'Informe o nome que deverá aparecer no remetente do e-mail.',
+                    'default'  => 'Muse',
+                    'required' => array( 'polen_smtp_on', '=', '1' ),
+                ),
+                array(
+                    'id'       => 'polen_smtp_from_email',
+                    'type'     => 'text',
+                    'title'    => esc_html__('E-mail do remetente', 'polen'),
+                    'desc'     => 'Informe o e-mail que deverá aparecer como remetente.',
+                    'default'  => 'muse@c9t.pw',
+                    'required' => array( 'polen_smtp_on', '=', '1' ),
+                ),
+            ),
+        ) );
     }
 
     public function save( $args ) {
