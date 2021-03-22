@@ -9,14 +9,21 @@ class Polen_Account
 
     public function __construct( $static = false ) {
         if( $static ) {
+            add_filter( 'wp_pre_insert_user_data', array( $this, 'set_user_login' ), 10, 3 );
             add_filter( 'woocommerce_endpoint_orders_title', array( $this,  'my_account_custom' ), 20, 2 );
             add_filter( 'woocommerce_account_menu_items', array( $this, 'my_account_menu_title' ) );
             add_filter( 'woocommerce_endpoint_view-order_title', array( $this,  'view_order_custom' ), 20, 2 );
             add_action( 'woocommerce_account_polen-favorite_endpoint', array( $this, 'polen_favorite_content' ) );
             //add_action( 'init', array( $this, 'polen_add_favorite_endpoint' ) );
             add_filter( 'woocommerce_before_account_orders', array( $this, 'my_orders_title' ));
-            add_filter('woocommerce_show_page_title', array( $this, 'wat' ) );
+            // add_filter('woocommerce_show_page_title', array( $this, 'wat' ) );
         }
+    }
+
+    public function set_user_login( $data, $update, $id ) {
+        $data['user_nicename'] = $data['user_email'];
+        $data['user_login']    = $data['user_email'];
+        return $data;
     }
 
     public function my_account_custom( $title, $endpoint ) {

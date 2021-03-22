@@ -31,9 +31,10 @@ class Cubo9_Braspag {
             $this->SESSION_ID = $session_id;
             $WC_Cubo9_BraspagReduxSettings = get_option( 'WC_Cubo9_BraspagReduxSettings');
 
-            $this->order = $order;
+            $this->order            = $order;
+            $this->order_id         = $order->get_id();
             $this->braspag_settings = $WC_Cubo9_BraspagReduxSettings;
-            $this->softdescriptor = substr( $WC_Cubo9_BraspagReduxSettings['braspag_softdescriptor'], 0, 13 );
+            $this->softdescriptor   = substr( $WC_Cubo9_BraspagReduxSettings['braspag_softdescriptor'], 0, 13 );
             $this->set_items();
 
             if( intval( $WC_Cubo9_BraspagReduxSettings['enable_braspag_sandbox'] ) == intval( 1 ) ) {
@@ -193,7 +194,7 @@ class Cubo9_Braspag {
              */
             $user_display_name = substr( $user->display_name . $this->SANDBOX_NAME_SUFIX, 0, 61 );
             $document_type     = 'CPF';
-            //$document_number   = substr( preg_replace( '/[^0-9]/', '', get_user_meta( $user->ID, 'billing_cpf', true ) ), 0, 18 );
+            $document_number   = substr( preg_replace( '/[^0-9]/', '', get_user_meta( $user->ID, 'billing_cpf', true ) ), 0, 18 );
             $user_phone        = substr( preg_replace( '/[^0-9]/', '', $order_data['billing']['phone'] ), 0, 15 );
             $user_mobile_phone = substr( preg_replace( '/[^0-9]/', '', $order_data['billing']['phone'] ), 0, 15 );
 
@@ -541,7 +542,7 @@ class Cubo9_Braspag {
 				$sku           = get_post_meta( $product_id, '_sku', true );
 				$this->add_cart_item( $product->get_title(), $quantity, $product_price, $sku );
 
-                $seller_id = $product->post->post_author;
+                $seller_id = get_post_field( 'post_author', $product_id );
 
                 if( ! in_array( $seller_id, $sellers ) ) {
                     $Polen_Update_Fields = new Polen_Update_Fields();

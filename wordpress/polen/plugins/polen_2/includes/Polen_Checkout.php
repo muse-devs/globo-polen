@@ -19,6 +19,7 @@ class Polen_Checkout
             add_filter( 'woocommerce_checkout_fields', array( $this, 'remove_woocommerce_fields' ) );
             add_filter( 'woocommerce_enable_order_notes_field', '__return_false' );
             add_filter( 'the_title',  array( $this, 'remove_thankyou_title' ), 20, 2 );
+            add_action( 'woocommerce_checkout_order_processed', array( $this, 'checkout_set_order_client' ) );
         }
     }
 
@@ -165,5 +166,18 @@ class Polen_Checkout
             $title = '';
         }
         return $title;
+    }
+
+    public function checkout_set_order_client( $order_id ) {
+        if( ! is_user_logged_in() ) {
+            $order = wc_get_order( $order_id );
+            $email = get_post_meta( $order_id, '_billing_email', $order_id );
+            if( $email && ! is_null( $email ) && ! empty( $email ) ) {
+                $user = get_user_by( 'email', $email );
+                if( $user && ! is_null( $user ) && isset( $user->ID ) ) {
+                    update_post_meta( $order_id, '_customer_user', $user->ID );
+                }
+            }
+        }
     }
 }
