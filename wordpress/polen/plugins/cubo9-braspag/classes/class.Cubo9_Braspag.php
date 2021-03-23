@@ -438,7 +438,7 @@ class Cubo9_Braspag {
                     $order->add_order_note( __('Pagamento aprovado pela <strong>Braspag</strong> em ' . date_i18n( $date_time_format , strtotime( $response_body_json->Payment->CapturedDate ) ) . "." , 'cubonove') );
 
                     // Marca como Aguardando ('on-hold')
-                    $order->update_status( 'on-hold' );
+                    $order->update_status( 'payment-approved' );
 
                     // Muda o status para processando
                     // $order->payment_complete();
@@ -459,6 +459,7 @@ class Cubo9_Braspag {
                         'redirect' => $order->get_checkout_order_received_url(),
                     );
                 } elseif( (int) $response_body_json->Payment->FraudAnalysis->Status === (int) 3 && strtoupper( $response_body_json->Payment->FraudAnalysis->StatusDescription ) == strtoupper('REVIEW') ) {
+                    $order->update_status( 'payment-in-revision' );
                     return array(
                         'type' => 'review',
                         'message' => 'Seu pedido está aguardando confirmação de pagamento.',
