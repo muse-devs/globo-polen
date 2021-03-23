@@ -156,11 +156,11 @@ function polen_scripts() {
 		wp_enqueue_script( 'talent-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'talent.js', array("slick-slider", "vimeo"), _S_VERSION, true );
 	}
 
-	if (defined('ENV_DEV') && ENV_DEV) {
-		wp_enqueue_script( 'vuejs', 'https://cdn.jsdelivr.net/npm/vue/dist/vue.js', array(), '2.6.12', false );
-	} else {
-		wp_enqueue_script( 'vuejs', 'https://cdn.jsdelivr.net/npm/vue@2.6.12', array(), '2.6.12', false );
-	}
+	// if (defined('ENV_DEV') && ENV_DEV) {
+	// 	wp_enqueue_script( 'vuejs', 'https://cdn.jsdelivr.net/npm/vue/dist/vue.js', array(), '2.6.12', false );
+	// } else {
+	// 	wp_enqueue_script( 'vuejs', 'https://cdn.jsdelivr.net/npm/vue@2.6.12', array(), '2.6.12', false );
+	// }
 
 
 	// if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
