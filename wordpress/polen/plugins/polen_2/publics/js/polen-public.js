@@ -1,6 +1,29 @@
 (function( $ ) {
 	'use strict';
     $(document).ready(function(){
+		$('button.btn-search-order').on('click',function(e) {
+			e.preventDefault();
+			var wnonce = $('#_wpnonce').val();
+			var order_id = $('#order_number').val();
+			var email = $('#fan_email').val();
+			$.ajax(
+				{
+					type: 'POST',
+					url: polen_ajax.ajaxurl,
+						data: {
+						action: 'search_order_status',
+						order: order_id,
+						email: email,
+						security: wnonce
+					},
+					success: function( response ) {
+						//let obj = $.parseJSON( response );
+						console.log(response);
+					}
+				});
+		});
+
+		/**** talento ****/
 		$('button.talent-check-order').on('click',function(){
 			var wnonce = $(this).parent().attr('button-nonce');
 			var order_id = $(this).parent().attr('order-id');

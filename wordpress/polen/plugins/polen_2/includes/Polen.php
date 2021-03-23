@@ -10,6 +10,7 @@ use Polen\Includes\Polen_Occasion_List;
 use Polen\Includes\Polen_Cart;
 use Polen\Includes\Polen_Checkout;
 use Polen\Includes\Talent\Polen_Talent_Router;
+use Polen\Includes\Polen_Order;
 
 class Polen {
 
@@ -57,6 +58,7 @@ class Polen {
         new Polen_DisableAdminBar();
         new Polen_Checkout( true );
         new Polen_Account( true );
+        new Polen_Order( true );
     }
 
     /**
