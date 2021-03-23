@@ -57,6 +57,8 @@ class Polen {
         new Polen_DisableAdminBar();
         new Polen_Checkout( true );
         new Polen_Account( true );
+        new Polen_Talent( true );
+        new Polen_WooCommerce( true );
     }
 
     /**
