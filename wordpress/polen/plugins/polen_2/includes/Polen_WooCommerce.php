@@ -16,6 +16,14 @@ class Polen_WooCommerce
     public function register_custom_order_statuses() 
     {
         $this->order_statuses = array(
+            'wc-payment-in-revision' => array(
+                'label'                     => __( 'Aguardando confirmação do pagamento', 'polen' ),
+                'public'                    => false,
+                'exclude_from_search'       => false,
+                'show_in_admin_all_list'    => true,
+                'show_in_admin_status_list' => true,
+                'label_count'               => _n_noop( 'Aguardando confirmação do pagamento <span class="count">(%s)</span>', 'Aguardando confirmação do pagamento <span class="count">(%s)</span>', 'polen' ),
+            ),
             'wc-payment-rejected' => array(
                 'label'                     => __( 'Pagamento rejeitado', 'polen' ),
                 'public'                    => false,
