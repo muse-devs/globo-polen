@@ -59,6 +59,7 @@ class Polen {
         new Polen_Checkout( true );
         new Polen_Account( true );
         new Polen_Order( true );
+        new Polen_WooCommerce( true );
     }
 
     /**

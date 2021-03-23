@@ -65,13 +65,13 @@ function polen_front_get_card($item, $size = "medium")
 {
 	$class = "col-6 col-md-3";
 	if ($size === "small") {
-		$class = "col-flex-20";
+		$class = "col-6 col-md-3 col-lg-2";
 	}
 	ob_start();
 ?>
 	<div class="<?= $class; ?>">
 		<div class="polen-card <?= $size; ?>">
-			<figure class="image">
+			<figure class="image" style="background-image: url(<?= $item["image"]; ?>);">
 				<a href="<?= $item["talent_url"]; ?>">
 					<img src="<?= $item["image"]; ?>" alt="<?= $item["name"]; ?>">
 				</a>
@@ -102,7 +102,7 @@ function polen_front_get_news($items)
 		<div class="col-md-12">
 			<header class="row mb-4">
 				<div class="col">
-					<h2>Novidades</h2>
+					<h2>Destaques</h2>
 				</div>
 				<div class="col d-flex justify-content-end align-items-center"><a href="#">Ver todos</a></div>
 			</header>
@@ -210,7 +210,7 @@ function polen_front_get_tutorial()
 				<div class="col-md-4 mb-4">
 					<div class="tutorial-card">
 						<figure class="image">
-							<img src="https://picsum.photos/200/200" alt="Conect-se aos ídolos">
+							<img src="' . TEMPLATE_URI . '/assets/img/tutorial_img_1.png" alt="Conect-se aos ídolos">
 						</figure>
 						<h5 class="title">Conecte-se aos ídolos</h5>
 						<p class="description">Peça um vídeo personalizado com o seu ídolo para celebar ocasiões especiais.</p>
@@ -219,7 +219,7 @@ function polen_front_get_tutorial()
 				<div class="col-md-4 mb-4">
 					<div class="tutorial-card">
 						<figure class="image">
-							<img src="https://picsum.photos/200/200" alt="Conect-se aos ídolos">
+							<img src="' . TEMPLATE_URI . '/assets/img/tutorial_img_2.png" alt="Conect-se aos ídolos">
 						</figure>
 						<h5 class="title">Receba sua encomenda</h5>
 						<p class="description">Ídolo recebe o seu pedido, atende e entrega pela plataforma. </p>
@@ -228,7 +228,7 @@ function polen_front_get_tutorial()
 				<div class="col-md-4 mb-4">
 					<div class="tutorial-card">
 						<figure class="image">
-							<img src="https://picsum.photos/200/200" alt="Conect-se aos ídolos">
+							<img src="' . TEMPLATE_URI . '/assets/img/tutorial_img_3.png" alt="Conect-se aos ídolos">
 						</figure>
 						<h5 class="title">Mande para todo mundo</h5>
 						<p class="description">Você pode enviar o vídeo para os amigos ou postar nas redes.</p>
@@ -241,6 +241,9 @@ function polen_front_get_tutorial()
 }
 
 function polen_front_get_talent_videos($items = array(
+	array("title" => "Video 1", "image" => "http://i.vimeocdn.com/video/731672459_640.jpg", "video" => "https://vimeo.com/280815263"),
+	array("title" => "Video 2", "image" => "http://i.vimeocdn.com/video/649503401_640.jpg", "video" => "https://vimeo.com/229243103"),
+	array("title" => "Video 3", "image" => "http://i.vimeocdn.com/video/735151132_640.jpg", "video" => "https://vimeo.com/297461374"),
 	array("title" => "Video 1", "image" => "http://i.vimeocdn.com/video/731672459_640.jpg", "video" => "https://vimeo.com/280815263"),
 	array("title" => "Video 2", "image" => "http://i.vimeocdn.com/video/649503401_640.jpg", "video" => "https://vimeo.com/229243103"),
 	array("title" => "Video 3", "image" => "http://i.vimeocdn.com/video/735151132_640.jpg", "video" => "https://vimeo.com/297461374"),

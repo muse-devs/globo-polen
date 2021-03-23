@@ -6,13 +6,24 @@
 		font-size: 20px;
 		border-radius: 10px;
 		box-sizing: border-box;
+		&::after {
+			content: "";
+			position: absolute;
+			left: -5px;
+			bottom: -13px;
+			width: calc(100% + 10px);
+			height: 45%;
+			background: linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0) 100%);
+			transform: rotate(-180deg);
+			z-index: 1;
+		}
 		img {
 			position: absolute;
 			top: 50%;
 			left: 50%;
 			min-width: 100%;
 			min-height: 100%;
-			max-width: 160%;
+			max-width: 175%;
 			height: auto;
 			transform: translate(-50%, -50%);
 		}
@@ -20,8 +31,9 @@
 			position: absolute;
 			bottom: 10px;
 			right: 20px;
-			font-size: 20px;
+			font-size: 24px;
 			font-weight: 700;
+			z-index: 2;
 		}
 	}
 	&.medium {
@@ -39,19 +51,21 @@
 			@include media-breakpoint-only(lg) {
 				height: 288px;
 			}
+			@include media-breakpoint-only(xl) {
+				height: 28vw;
+				max-height: 480px;
+			}
 		}
 	}
 	.title,
 	.category {
-		font-size: 20px;
+		font-size: 16px;
 		a {
 			color: white;
 		}
-		@include media-breakpoint-only(md) {
-			font-size: 16px;
-		}
 	}
 	.title {
+		font-size: 24px;
 		font-weight: 700;
 		@include media-breakpoint-down(sm) {
 			margin-bottom: 10px;
@@ -59,7 +73,7 @@
 	}
 	&.small {
 		.image {
-			height: 257px;
+			height: 270px;
 			@include media-breakpoint-down(sm) {
 				height: 70vw;
 			}
@@ -67,7 +81,7 @@
 				height: 50vw;
 			}
 			@include media-breakpoint-only(md) {
-				height: 162px;
+				height: 240px;
 			}
 			@include media-breakpoint-only(lg) {
 				height: 216px;
@@ -167,52 +181,43 @@
 	}
 }
 
-.col-flex-20 {
-	margin: 0 2.5% 25px 0;
-	width: 18%;
-	&:nth-child(5n + 0) {
-		margin-right: 0;
-	}
-	@include media-breakpoint-down(sm) {
-		width: 48%;
-		&:nth-child(2n + 0) {
-			margin-right: 0;
-		}
-		&:nth-child(5n + 0) {
-			margin-right: 2.5%;
-		}
-	}
-	@include media-breakpoint-only(sm) {
-		width: 48%;
-		&:nth-child(2n + 0) {
-			margin-right: 0;
-		}
-		&:nth-child(5n + 0) {
-			margin-right: 2.5%;
-		}
-	}
-}
+// .col-flex-20 {
+// 	margin: 0 2.5% 25px 0;
+// 	width: 18%;
+// 	&:nth-child(5n + 0) {
+// 		margin-right: 0;
+// 	}
+// 	@include media-breakpoint-down(sm) {
+// 		width: 48%;
+// 		&:nth-child(2n + 0) {
+// 			margin-right: 0;
+// 		}
+// 		&:nth-child(5n + 0) {
+// 			margin-right: 2.5%;
+// 		}
+// 	}
+// 	@include media-breakpoint-only(sm) {
+// 		width: 48%;
+// 		&:nth-child(2n + 0) {
+// 			margin-right: 0;
+// 		}
+// 		&:nth-child(5n + 0) {
+// 			margin-right: 2.5%;
+// 		}
+// 	}
+// }
 
 .tutorial-card {
 	text-align: center;
 	.image {
 		position: relative;
-		margin: 0 auto 40px;
-		width: 200px;
-		height: 200px;
-		overflow: hidden;
-		border-radius: 50%;
-		background-color: $default-bg-color;
+		margin: 0 auto 25px;
+		width: 100%;
 		@include media-breakpoint-down(sm) {
 			margin-bottom: 20px;
 		}
 		img {
-			position: absolute;
-			min-width: 100%;
-			height: auto;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
+			max-width: 100%;
 		}
 	}
 	.title {
