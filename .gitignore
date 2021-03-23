@@ -41,6 +41,9 @@ wordpress/polen/themes/twenty*/
 node_modules/
 package-lock.json
 
+# Ignorar dependencias do composer
+wordpress/polen/plugins/polen_2/vendor/*
+
 # Ignorar arquivos descompactados no diretório de uploads padrão
 uploads/*
 !uploads/uploads.tar.gz
