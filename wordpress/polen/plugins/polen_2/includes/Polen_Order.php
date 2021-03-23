@@ -93,11 +93,12 @@ class Polen_Order
     }
 
     public function polen_search_order_shortcode() { 
-        $html = '
+        ob_start();
+    ?>    
         <div id="primary" class="content-area cart-other">
         <main id="main" class="site-main" role="main">
             <form action="#" method="post">
-                '. wp_nonce_field('user_search_order', '_wpnonce', true, true) .'
+                <?php wp_nonce_field('user_search_order', '_wpnonce', true, true );?>
                 <div>
                     <div class="row mt-3">
                         <div class="col-md-6">
@@ -117,8 +118,11 @@ class Polen_Order
                 </div>
             </form>    
         </main>
-        </div>';
-        return $html;
+        </div>
+    <?php
+        $data = ob_get_contents();
+        ob_end_clean();
+        echo $data;
     } 
 
 }
