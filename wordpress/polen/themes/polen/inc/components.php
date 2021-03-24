@@ -67,13 +67,16 @@ function polen_front_get_card($item, $size = "medium")
 	if ($size === "small") {
 		$class = "col-6 col-md-3 col-lg-2";
 	}
+
+	$image = wp_get_attachment_image_src( get_post_thumbnail_id( $item['ID'] ), 'single-post-thumbnail' );
+
 	ob_start();
 ?>
 	<div class="<?= $class; ?>">
 		<div class="polen-card <?= $size; ?>">
-			<figure class="image" style="background-image: url(<?= $item["image"]; ?>);">
-				<a href="<?= $item["talent_url"]; ?>">
-					<img src="<?= $item["image"]; ?>" alt="<?= $item["name"]; ?>">
+			<figure class="image" style="background-image: url(<?php echo $image[0]; ?>);">
+				<a href="<?= $item["talent_url"]; ?>" class="link">
+					<img src="<?php echo $image[0]; ?>" alt="<?= $item["name"]; ?>">
 				</a>
 				<span class="price">R$<?= $item["price"]; ?></span>
 			</figure>
