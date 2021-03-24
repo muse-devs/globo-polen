@@ -38,46 +38,71 @@ class Polen_Order
                                     'message' => 'Número digitado não foi encontrado, confira e tente novamente', 
                                     'found' => 0 );
             }else{
-                $arr_status = array();
-                $order_status = $fan_orders->get_status();
-
-                $arr_status['on-hold'] = array( 'message-title' => 'Pedido feito com sucesso', 'message' => 'Seu número de pedido é '+$_POST['order'] );
-
-                $arr_status['processing'] = array(  'message-title' => 
-                                                    'Aguardando confirmação do talento', 
-                                                    'message' => 'Caso seu pedido não seja aprovado pelo talento o seu dinheiro será devoldido imediatamente' );
-
-                $arr_status['processing'] = array(  'message-title' => 
-                                                    'Aguardando gravação do vídeo', 
-                                                    'message' => 'Quando o artista disponibilizar o vídeo será exibido aqui' );
-
-                $arr_status['completed'] = array(  'message-title' => 
-                                                    'Pedido finalizado', 
-                                                    'message' => 'Agora você pode visualizar e compartilhar' );
-
-                if( $order_status == 'on-hold' ){
-                    $response[] = $arr_status['on-hold'];
-                } 
-
-                if( $order_status == 'processing' ){
-                    $response[] = $arr_status['processing'];
-                } 
-                
-                if( $order_status == 'processing' ){
-                    $response[] = $arr_status['processing'];
-                } 
-
-                if( $order_status == 'completed' ){
-                    $response[] = $arr_status['completed'];
-                }
-
-                $response = $arr_status;
+                $response = array(  'success' => true, 
+                                    'message-title' => 'Possui pedidos', 
+                                    'message' => '', 
+                                    'found' => 1 );
             }
-
         }
+        
         echo wp_json_encode( $response );
-        wp_die();
+        exit();
     }
+
+    public function order_status_track(){
+        if( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'], 'user_search_order' ) ) {
+            wp_send_json( array( 'nonce_fail' => 1 ) );
+            exit;
+        }
+
+        $_wpnonce = wp_verify_nonce( $_POST['_wpnonce'], 'user_search_order' );
+        if( $_wpnonce === 1 ){   
+            $email = strip_tags( $_POST['fan_email'] );
+            $order_number = strip_tags( $_POST['order_number'] );
+            $fan_orders = $this->get_orders_by_user_email( $email, $order_number );
+            $response = array();
+            $arr_status = array();
+            $order_status = $fan_orders->get_status();
+
+            $arr_status['on-hold'] = array( 'message-title' => 'Pedido feito com sucesso', 'message' => 'Seu número de pedido é '+$_POST['order'] );
+
+            $arr_status['processing'] = array(  'message-title' => 
+                                                'Aguardando confirmação do talento', 
+                                                'message' => 'Caso seu pedido não seja aprovado pelo talento o seu dinheiro será devoldido imediatamente' );
+
+            $arr_status['processing'] = array(  'message-title' => 
+                                                'Aguardando gravação do vídeo', 
+                                                'message' => 'Quando o artista disponibilizar o vídeo será exibido aqui' );
+
+            $arr_status['completed'] = array(  'message-title' => 
+                                                'Pedido finalizado', 
+                                                'message' => 'Agora você pode visualizar e compartilhar' );
+
+            if( $order_status == 'on-hold' ){
+                $response['on-hold'] = $arr_status['on-hold'];
+            } 
+
+            if( $order_status == 'processing' ){
+                $response[] = $arr_status['processing'];
+            } 
+            
+            if( $order_status == 'processing' ){
+                $response['on-hold'] = $arr_status['on-hold'];
+                $response['processing'] = $arr_status['processing'];
+            } 
+
+            if( $order_status == 'completed' ){
+                $response['on-hold'] = $arr_status['on-hold'];
+                $response['processing'] = $arr_status['processing'];
+                $response['completed'] = $arr_status['completed'];
+            }
+            
+            return $response;
+        }else{
+            return "Não foi possível realizar a consulta";
+        }    
+    }
+
 
     /**
      * Busca os pedidos por e-mail e número do pedido
@@ -93,11 +118,10 @@ class Polen_Order
     }
 
     public function polen_search_order_shortcode() { 
-        ob_start();
     ?>    
         <div id="primary" class="content-area cart-other">
         <main id="main" class="site-main" role="main">
-            <form action="#" method="post">
+            <form action="/acompanhamento" method="post" class="form_search_order">
                 <?php wp_nonce_field('user_search_order', '_wpnonce', true, true );?>
                 <div>
                     <div class="row mt-3">
@@ -112,7 +136,7 @@ class Polen_Order
                     </div>
                     <div class="row mt-3">
                         <div class="col-md-6">
-                            <button class="btn btn-primary btn-lg btn-block py-4 btn-search-order" name="" value="">Buscar</button>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block py-4 btn-search-order" name="" value="">Buscar</button>
                         </div>
                     </div>    
                 </div>
@@ -120,11 +144,20 @@ class Polen_Order
         </main>
         </div>
     <?php
-        $data = ob_get_contents();
-        ob_end_clean();
-        echo $data;
+    } 
+
+
+    public function polen_search_result_shortcode() { 
+    ?>    
+        <div id="primary" class="content-area cart-other">
+        <main id="main" class="site-main" role="main">
+            <?php var_dump( $this->order_status_track() );?>
+        </main>
+        </div>
+    <?php
     } 
 
 }
 $Polen_Order = new Polen_Order;
 add_shortcode( 'polen_search_order', array( $Polen_Order, 'polen_search_order_shortcode' ) );
+add_shortcode( 'polen_search_result_shortcode', array( $Polen_Order, 'polen_search_result_shortcode' ) );
