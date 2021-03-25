@@ -1,8 +1,11 @@
 (function( $ ) {
 	'use strict';
     $(document).ready(function(){
-		$('button.btn-search-order').on('click',function(e) {
+		$('form.form_search_order').on('submit',function(e) {
+			$(this).off(e); 
 			e.preventDefault();
+			e.stopPropagation();
+
 			var wnonce = $('#_wpnonce').val();
 			var order_id = $('#order_number').val();
 			var email = $('#fan_email').val();
@@ -17,8 +20,10 @@
 						security: wnonce
 					},
 					success: function( response ) {
-						//let obj = $.parseJSON( response );
-						console.log(response);
+						let obj = $.parseJSON( response );
+						if( obj.found != 0 ){
+							$('form.form_search_order').submit();
+						}
 					}
 				});
 		});
