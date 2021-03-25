@@ -33,7 +33,7 @@ get_header();
 				 * If you want to overload this in a child theme then include a file
 				 * called content-search.php and that will be used instead.
 				 */
-				get_template_part( 'template/parts/content', 'search' );
+				get_template_part( 'template-parts/content', 'search' );
 
 			endwhile;
 
@@ -49,5 +49,5 @@ get_header();
 	</main><!-- #main -->
 
 <?php
-get_sidebar();
+//get_sidebar();
 get_footer();

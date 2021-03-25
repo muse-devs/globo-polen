@@ -52,6 +52,12 @@ class Polen_Talent
              * No login do talento redirecionamos para my-account/orders/ e não para o wp_admin
              */
             add_filter( 'login_redirect', array( $this, 'login_redirect' ), 11, 3 );
+
+            /**
+             * Busca por talento
+             */
+            add_filter( 'pre_get_posts', array( $this, 'searchTalent' ) );
+
         }
     }
 
@@ -374,5 +380,12 @@ class Polen_Talent
             return true;
         }
         return false;
+    }
+
+    public function searchTalent( $query ) {
+        if ($query->is_search && !is_admin() ) {
+            $query->set( 'post_type', array('product') );
+        }
+        return $query;
     }
 }
