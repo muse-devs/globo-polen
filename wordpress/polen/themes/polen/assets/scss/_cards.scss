@@ -85,7 +85,7 @@
 		.image {
 			height: 270px;
 			@include media-breakpoint-down(sm) {
-				height: 70vw;
+				height: 60vw;
 			}
 			@include media-breakpoint-only(sm) {
 				height: 50vw;

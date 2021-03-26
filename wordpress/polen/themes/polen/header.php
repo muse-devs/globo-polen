@@ -25,7 +25,7 @@
 <div id="page" class="container site">
 	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'polen' ); ?></a>
 
-	<header id="masthead" class="row py-3">
+	<header id="masthead" class="row pt-4 pb-3">
 		<div class="col-6 col-sm-6 d-flex align-items-center">
 			<?php the_custom_logo(); ?>
 		</div>

@@ -47,7 +47,7 @@ function polen_front_get_banner()
 {
 	ob_start();
 ?>
-	<section class="top-banner">
+	<section class="top-banner mb-2">
 		<video class="video" autoplay muted>
 			<source src="<?= TEMPLATE_URI; ?>/assets/video.mp4" type="video/mp4">
 			<!-- <source src="movie.ogg" type="video/ogg"> -->
@@ -68,7 +68,7 @@ function polen_front_get_card($item, $size = "medium")
 {
 	$class = "col-6 col-md-3";
 	if ($size === "small") {
-		$class = "col-6 col-md-3 col-lg-2";
+		$class = "col-6";
 	}
 
 	$image = wp_get_attachment_image_src(get_post_thumbnail_id($item['ID']), 'single-post-thumbnail');
@@ -180,12 +180,12 @@ function polen_front_get_artists($items, $title)
 		</div>
 		<div class="col-md-12">
 			<div class="row">
-				<div class="col-md-12 d-flex flex-wrap">
-					<?php foreach ($items as $item) : ?>
-						<?php polen_front_get_card($item, "small"); ?>
-					<?php endforeach; ?>
-				</div>
+				<?php foreach ($items as $item) : ?>
+					<?php polen_front_get_card($item, "small"); ?>
+				<?php endforeach; ?>
 			</div>
+		</div>
+		<div class="col-12">
 			<div class="row mt-md-5">
 				<div class="col-md-12 text-center">
 					<button type="button" class="btn btn-primary btn-lg">Ver todos</button>
