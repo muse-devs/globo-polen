@@ -25,8 +25,8 @@
 <div id="page" class="container site">
 	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'polen' ); ?></a>
 
-	<header id="masthead" class="row py-5">
-		<div class="col-6 col-sm-6">
+	<header id="masthead" class="row py-3">
+		<div class="col-6 col-sm-6 d-flex align-items-center">
 			<?php the_custom_logo(); ?>
 		</div>
 		<div class="col-6 col-sm-6 d-flex justify-content-end align-items-center">
@@ -49,7 +49,7 @@
 					<?php	
 					}
 					else{ ?>
-						<a class="dropbtn" href="<?php echo get_permalink( get_option('woocommerce_myaccount_page_id') ); ?>">
+						<a class="btn btn-outline-light" href="<?php echo get_permalink( get_option('woocommerce_myaccount_page_id') ); ?>">
 							Login
 						</a>	
 					<?php	

@@ -38,20 +38,23 @@ function polen_icon_upload()
 	echo '<i class="bi bi-cloud-arrow-up"></i>';
 }
 
+function polen_icon_chevron_right()
+{
+	echo '<i class="bi bi-chevron-right"></i>';
+}
+
 function polen_front_get_banner()
 {
 	ob_start();
 ?>
-	<section class="row my-5 py-md-4 top-banner">
-		<div class="col-sm-12">
-			<video class="video" autoplay muted>
-				<source src="<?= TEMPLATE_URI; ?>/assets/video.mp4" type="video/mp4">
-				<!-- <source src="movie.ogg" type="video/ogg"> -->
-			</video>
-			<div class="content">
-				<h2 class="title">Presenteie e<br />surpreenda com vídeos personalizados.</h2>
-				<a href="#como" class="player-button">Como funciona</a>
-			</div>
+	<section class="top-banner">
+		<video class="video" autoplay muted>
+			<source src="<?= TEMPLATE_URI; ?>/assets/video.mp4" type="video/mp4">
+			<!-- <source src="movie.ogg" type="video/ogg"> -->
+		</video>
+		<div class="content">
+			<h2 class="title">Presenteie e<br />surpreenda com vídeos personalizados.</h2>
+			<a href="#como" class="player-button">Como funciona</a>
 		</div>
 	</section>
 <?php
@@ -68,7 +71,7 @@ function polen_front_get_card($item, $size = "medium")
 		$class = "col-6 col-md-3 col-lg-2";
 	}
 
-	$image = wp_get_attachment_image_src( get_post_thumbnail_id( $item['ID'] ), 'single-post-thumbnail' );
+	$image = wp_get_attachment_image_src(get_post_thumbnail_id($item['ID']), 'single-post-thumbnail');
 
 	ob_start();
 ?>
@@ -101,17 +104,17 @@ function polen_front_get_news($items)
 	}
 	ob_start();
 ?>
-	<section class="row my-5 py-md-4 news">
+	<section class="row pt-4 news">
 		<div class="col-md-12">
-			<header class="row mb-4">
+			<header class="row mb-3">
 				<div class="col">
 					<h2>Destaques</h2>
 				</div>
-				<div class="col d-flex justify-content-end align-items-center"><a href="#">Ver todos</a></div>
+				<div class="col d-flex justify-content-end align-items-center"><a href="#">Ver todos <?php polen_icon_chevron_right(); ?></a></div>
 			</header>
 		</div>
 		<div class="col-md-12">
-			<div class="row">
+			<div class="row slick-padding">
 				<?php foreach ($items as $item) : ?>
 					<?php polen_front_get_card($item); ?>
 				<?php endforeach; ?>
@@ -131,7 +134,7 @@ function polen_front_get_categories($items)
 	}
 	ob_start();
 ?>
-	<section class="row my-5 py-md-4 categories">
+	<section class="row py-4 categories">
 		<div class="col-md-12">
 			<header class="row mb-4">
 				<div class="col">
@@ -166,13 +169,13 @@ function polen_front_get_artists($items, $title)
 	}
 	ob_start();
 ?>
-	<section class="row my-5 py-md-4 all-artists">
+	<section class="row py-4 all-artists">
 		<div class="col-md-12">
 			<header class="row mb-4">
 				<div class="col">
 					<h2><?= $title; ?></h2>
 				</div>
-				<div class="col d-flex justify-content-end align-items-center"><a href="#">Ver mais</a></div>
+				<div class="col d-flex justify-content-end align-items-center"><a href="#">Ver todos <?php polen_icon_chevron_right(); ?></a></div>
 			</header>
 		</div>
 		<div class="col-md-12">
@@ -185,7 +188,7 @@ function polen_front_get_artists($items, $title)
 			</div>
 			<div class="row mt-md-5">
 				<div class="col-md-12 text-center">
-					<button type="button" class="btn btn-primary btn-lg">Ver mais</button>
+					<button type="button" class="btn btn-primary btn-lg">Ver todos</button>
 				</div>
 			</div>
 		</div>
@@ -199,12 +202,11 @@ function polen_front_get_artists($items, $title)
 function polen_front_get_tutorial()
 {
 	echo '
-	<section class="row my-5 py-4 tutorial">
+	<section class="row tutorial">
 		<div class="col-md-12">
-			<header class="row mb-md-4">
+			<header class="row mb-4">
 				<div class="col text-center">
 					<h2>Como funciona</h2>
-					<p class="mt-4">Presenteie e surpreenda com vídeos personalizados.</p>
 				</div>
 			</header>
 		</div>

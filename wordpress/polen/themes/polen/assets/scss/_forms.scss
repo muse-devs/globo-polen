@@ -10,6 +10,11 @@
 	}
 }
 
+.btn-outline-light {
+	color: $light-100;
+	border-color: $light-50;
+}
+
 .step {
 	font-size: 20px;
 	font-weight: 700;
@@ -81,10 +86,6 @@
 }
 
 .woocommerce table.shop_table {
-}
-
-.talent-login {
-	background: no-repeat center/cover url(../img/login-bg.png);
 }
 
 .icon-button {
