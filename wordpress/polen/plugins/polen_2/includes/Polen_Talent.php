@@ -249,7 +249,7 @@ class Polen_Talent
     public function change_single_add_to_cart_text() {
         global $post;
         $product = wc_get_product( $post->ID );
-        $label = __( 'Pedir vídeo R$ ', 'polen' ) . number_format( (float) $product->get_price(), 2, ',', '.' );
+        $label = __( 'Pedir vídeo ', 'polen' );
         return $label;
     }
 

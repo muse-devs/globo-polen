@@ -90,7 +90,7 @@ $terms = wp_get_object_terms(get_the_ID(), 'product_cat');
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-12"><span class="price">R$ 200</span></div>
+			<div class="col-md-12"><span class="price"><?php echo wc_price( $product->get_price() );?></span></div>
 		</div>
 	</header>
 
