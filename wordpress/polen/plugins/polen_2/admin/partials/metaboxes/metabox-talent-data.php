@@ -36,7 +36,7 @@ use Polen\Includes\Polen_Bancos;
                                     Slug do Perfil
                                 </th>
                                 <td>
-                                    <input type="text" name="talent_alias" value="<?php echo ( isset( $vendorInfo->talent_alias ) ) ? $vendorInfo->talent_alias : ''; ?>" autocomplete="password" class="widefat" maxlength="255">
+                                    <input type="text" name="talent_alias" value="<?php echo ( isset( $vendorInfo->talent_alias ) ) ? $vendorInfo->talent_alias : ''; ?>" autocomplete="off" class="widefat" maxlength="255">
                                     <small>Ex: <?php bloginfo( 'url' ); ?><strong>/nome-do-talento/</strong></small>
                                 </td>
                             </tr>
@@ -45,7 +45,7 @@ use Polen\Includes\Polen_Bancos;
                                     Responde em
                                 </th>
                                 <td>
-                                    <input type="text" name="tempo_resposta" value="<?php echo ( isset( $vendorInfo->tempo_resposta ) ) ? $vendorInfo->tempo_resposta : ''; ?>" autocomplete="password" class="widefat" maxlength="255">
+                                    <input type="text" name="tempo_resposta" value="<?php echo ( isset( $vendorInfo->tempo_resposta ) ) ? $vendorInfo->tempo_resposta : ''; ?>" autocomplete="off" class="widefat" maxlength="255">
                                 </td>
                             </tr>
                             <tr>
@@ -53,7 +53,7 @@ use Polen\Includes\Polen_Bancos;
                                     Profissão
                                 </th>
                                 <td>
-                                    <input type="text" name="profissao" value="<?php echo ( isset( $vendorInfo->profissao ) ) ? $vendorInfo->profissao : ''; ?>" autocomplete="password" class="widefat" maxlength="255">
+                                    <input type="text" name="profissao" value="<?php echo ( isset( $vendorInfo->profissao ) ) ? $vendorInfo->profissao : ''; ?>" autocomplete="off" class="widefat" maxlength="255">
                                 </td>
                             </tr>
 <!--                            <tr>
@@ -114,7 +114,7 @@ use Polen\Includes\Polen_Bancos;
                                     Razão Social
                                 </th>
                                 <td>
-                                    <input type="text" name="razao_social" required value="<?php echo ( isset( $vendorInfo->razao_social ) ) ? $vendorInfo->razao_social : ''; ?>" autocomplete="password" class="widefat" maxlength="255">
+                                    <input type="text" name="razao_social" required value="<?php echo ( isset( $vendorInfo->razao_social ) ) ? $vendorInfo->razao_social : ''; ?>" autocomplete="off" class="widefat" maxlength="255">
                                 </td>
                             </tr>
                             <tr class="natureza-juridica-pj">
@@ -122,7 +122,7 @@ use Polen\Includes\Polen_Bancos;
                                     Nome Fantasia
                                 </th>
                                 <td>
-                                    <input type="text" name="nome_fantasia" value="<?php echo ( isset( $vendorInfo->nome_fantasia ) ) ? $vendorInfo->nome_fantasia : ''; ?>" autocomplete="password" class="widefat" maxlength="255">
+                                    <input type="text" name="nome_fantasia" value="<?php echo ( isset( $vendorInfo->nome_fantasia ) ) ? $vendorInfo->nome_fantasia : ''; ?>" autocomplete="off" class="widefat" maxlength="255">
                                 </td>
                             </tr>
                             <tr class="natureza-juridica-pj" id="cnpj-natureza-juridica-pj">
@@ -130,7 +130,7 @@ use Polen\Includes\Polen_Bancos;
                                     CNPJ
                                 </th>
                                 <td>
-                                    <input type="text" name="cnpj" value="<?php echo ( isset( $vendorInfo->cnpj ) ) ? $vendorInfo->cnpj : ''; ?>" autocomplete="password" class="widefat polen-cnpj" maxlength="18">
+                                    <input type="text" name="cnpj" value="<?php echo ( isset( $vendorInfo->cnpj ) ) ? $vendorInfo->cnpj : ''; ?>" autocomplete="off" class="widefat polen-cnpj" maxlength="18">
                                 </td>
                             </tr>
                             <tr class="natureza-juridica-pj">
@@ -148,7 +148,7 @@ use Polen\Includes\Polen_Bancos;
                                     Nome
                                 </th>
                                 <td>
-                                    <input type="text" name="nome" value="<?php echo ( isset( $vendorInfo->nome ) ) ? $vendorInfo->nome : ''; ?>" autocomplete="password" class="widefat" maxlength="255">
+                                    <input type="text" name="nome" value="<?php echo ( isset( $vendorInfo->nome ) ) ? $vendorInfo->nome : ''; ?>" autocomplete="off" class="widefat" maxlength="255">
                                 </td>
                             </tr>
                             <tr class="natureza-juridica-pf" id="cpf-natureza-juridica-pf">
@@ -156,7 +156,7 @@ use Polen\Includes\Polen_Bancos;
                                     CPF
                                 </th>
                                 <td>
-                                    <input type="text" name="cpf" value="<?php echo ( isset( $vendorInfo->cpf ) ) ? $vendorInfo->cpf : ''; ?>" autocomplete="password" class="widefat polen-cpf" maxlength="14">
+                                    <input type="text" name="cpf" value="<?php echo ( isset( $vendorInfo->cpf ) ) ? $vendorInfo->cpf : ''; ?>" autocomplete="off" class="widefat polen-cpf" maxlength="14">
                                 </td>
                             </tr>
                         </table>
@@ -170,7 +170,7 @@ use Polen\Includes\Polen_Bancos;
                                     E-mail
                                 </th>
                                 <td>
-                                    <input type="text" id="store_email" name="store_email" value="<?php echo ( isset( $vendorInfo->email ) ) ? $vendorInfo->email : ''; ?>" autocomplete="password" class="widefat" maxlength="255">
+                                    <input type="text" id="store_email" name="store_email" value="<?php echo ( isset( $vendorInfo->email ) ) ? $vendorInfo->email : ''; ?>" autocomplete="off" class="widefat" maxlength="255">
                                 </td>
                             </tr>
                             <tr>
@@ -178,7 +178,7 @@ use Polen\Includes\Polen_Bancos;
                                     Telefone
                                 </th>
                                 <td>
-                                    <input type="text" name="telefone" value="<?php echo ( isset( $vendorInfo->telefone ) ) ? $vendorInfo->telefone : ''; ?>" autocomplete="password" class="widefat polen-phone" maxlength="15">
+                                    <input type="text" name="telefone" value="<?php echo ( isset( $vendorInfo->telefone ) ) ? $vendorInfo->telefone : ''; ?>" autocomplete="off" class="widefat polen-phone" maxlength="15">
                                 </td>
                             </tr>
                             <tr>
@@ -186,7 +186,7 @@ use Polen\Includes\Polen_Bancos;
                                     Celular
                                 </th>
                                 <td>
-                                    <input type="text" name="celular" value="<?php echo ( isset( $vendorInfo->celular ) ) ? $vendorInfo->celular : ''; ?>" autocomplete="password" class="widefat polen-phone" maxlength="15">
+                                    <input type="text" name="celular" value="<?php echo ( isset( $vendorInfo->celular ) ) ? $vendorInfo->celular : ''; ?>" autocomplete="off" class="widefat polen-phone" maxlength="15">
                                 </td>
                             </tr>
                             <tr>
@@ -194,7 +194,7 @@ use Polen\Includes\Polen_Bancos;
                                     WhatsApp
                                 </th>
                                 <td>
-                                    <input type="text" name="whatsapp" value="<?php echo ( isset( $vendorInfo->whatsapp ) ) ? $vendorInfo->whatsapp : ''; ?>" autocomplete="password" class="widefat polen-phone" maxlength="15">
+                                    <input type="text" name="whatsapp" value="<?php echo ( isset( $vendorInfo->whatsapp ) ) ? $vendorInfo->whatsapp : ''; ?>" autocomplete="off" class="widefat polen-phone" maxlength="15">
                                 </td>
                             </tr>
                         </table>
@@ -208,7 +208,7 @@ use Polen\Includes\Polen_Bancos;
                                     Facebook
                                 </th>
                                 <td>
-                                    <input type="text" name="facebook" value="<?php echo ( isset( $vendorInfo->facebook ) ) ? $vendorInfo->facebook : ''; ?>" autocomplete="password" class="widefat">
+                                    <input type="text" name="facebook" value="<?php echo ( isset( $vendorInfo->facebook ) ) ? $vendorInfo->facebook : ''; ?>" autocomplete="off" class="widefat">
                                 </td>
                             </tr>
                             <tr>
@@ -216,7 +216,7 @@ use Polen\Includes\Polen_Bancos;
                                     Instagram
                                 </th>
                                 <td>
-                                    <input type="text" name="instagram" value="<?php echo ( isset( $vendorInfo->instagram ) ) ? $vendorInfo->instagram : ''; ?>" autocomplete="password" class="widefat">
+                                    <input type="text" name="instagram" value="<?php echo ( isset( $vendorInfo->instagram ) ) ? $vendorInfo->instagram : ''; ?>" autocomplete="off" class="widefat">
                                 </td>
                             </tr>
                             <tr>
@@ -224,7 +224,7 @@ use Polen\Includes\Polen_Bancos;
                                     Twitter
                                 </th>
                                 <td>
-                                    <input type="text" name="twitter" value="<?php echo ( isset( $vendorInfo->twitter ) ) ? $vendorInfo->twitter : ''; ?>" autocomplete="password" class="widefat">
+                                    <input type="text" name="twitter" value="<?php echo ( isset( $vendorInfo->twitter ) ) ? $vendorInfo->twitter : ''; ?>" autocomplete="off" class="widefat">
                                 </td>
                             </tr>
                             <tr>
@@ -232,7 +232,7 @@ use Polen\Includes\Polen_Bancos;
                                     Pinterest
                                 </th>
                                 <td>
-                                    <input type="text" name="pinterest" value="<?php echo ( isset( $vendorInfo->pinterest ) ) ? $vendorInfo->pinterest : ''; ?>" autocomplete="password" class="widefat">
+                                    <input type="text" name="pinterest" value="<?php echo ( isset( $vendorInfo->pinterest ) ) ? $vendorInfo->pinterest : ''; ?>" autocomplete="off" class="widefat">
                                 </td>
                             </tr>
                             <tr>
@@ -240,7 +240,7 @@ use Polen\Includes\Polen_Bancos;
                                     Linked In
                                 </th>
                                 <td>
-                                    <input type="text" name="linkedin" value="<?php echo ( isset( $vendorInfo->linkedin ) ) ? $vendorInfo->linkedin : ''; ?>" autocomplete="password" class="widefat">
+                                    <input type="text" name="linkedin" value="<?php echo ( isset( $vendorInfo->linkedin ) ) ? $vendorInfo->linkedin : ''; ?>" autocomplete="off" class="widefat">
                                 </td>
                             </tr>
                             <tr>
@@ -248,7 +248,7 @@ use Polen\Includes\Polen_Bancos;
                                     YouTube
                                 </th>
                                 <td>
-                                    <input type="text" name="youtube" value="<?php echo ( isset( $vendorInfo->youtube ) ) ? $vendorInfo->youtube : ''; ?>" autocomplete="password" class="widefat">
+                                    <input type="text" name="youtube" value="<?php echo ( isset( $vendorInfo->youtube ) ) ? $vendorInfo->youtube : ''; ?>" autocomplete="off" class="widefat">
                                 </td>
                             </tr>
                         </table>
@@ -288,7 +288,7 @@ use Polen\Includes\Polen_Bancos;
                                     Agência
                                 </th>
                                 <td>
-                                    <input type="text" name="agencia" value="<?php echo ( isset( $vendorInfo->agencia ) ) ? $vendorInfo->agencia : ''; ?>" autocomplete="password" class="widefat polen-digits-only" maxlength="4">
+                                    <input type="text" name="agencia" value="<?php echo ( isset( $vendorInfo->agencia ) ) ? $vendorInfo->agencia : ''; ?>" autocomplete="off" class="widefat polen-digits-only" maxlength="4">
                                 </td>
                             </tr>
                             <tr>
@@ -296,7 +296,7 @@ use Polen\Includes\Polen_Bancos;
                                     Conta
                                 </th>
                                 <td>
-                                    <input type="text" name="conta" value="<?php echo ( isset( $vendorInfo->conta ) ) ? $vendorInfo->conta : ''; ?>" autocomplete="password" class="widefat polen-bank-account" maxlength="20">
+                                    <input type="text" name="conta" value="<?php echo ( isset( $vendorInfo->conta ) ) ? $vendorInfo->conta : ''; ?>" autocomplete="off" class="widefat polen-bank-account" maxlength="20">
                                 </td>
                             </tr>
                             <tr>
@@ -322,7 +322,7 @@ use Polen\Includes\Polen_Bancos;
                                     Subordinate Merchant ID
                                 </th>
                                 <td>
-                                    <input type="text" name="subordinate_merchant_id" value="<?php echo ( isset( $vendorInfo->subordinate_merchant_id ) ) ? $vendorInfo->subordinate_merchant_id : ''; ?>" autocomplete="password" class="widefat">
+                                    <input type="text" name="subordinate_merchant_id" value="<?php echo ( isset( $vendorInfo->subordinate_merchant_id ) ) ? $vendorInfo->subordinate_merchant_id : ''; ?>" autocomplete="off" class="widefat">
                                 </td>
                             </tr>
                             <tr>
@@ -330,7 +330,7 @@ use Polen\Includes\Polen_Bancos;
                                     MDR
                                 </th>
                                 <td>
-                                    <input type="text" name="mdr" value="<?php echo ( isset( $vendorInfo->mdr ) ) ? $vendorInfo->mdr : ''; ?>" autocomplete="password" class="widefat">
+                                    <input type="text" name="mdr" value="<?php echo ( isset( $vendorInfo->mdr ) ) ? $vendorInfo->mdr : ''; ?>" autocomplete="off" class="widefat">
                                 </td>
                             </tr>
                             <tr>
@@ -338,7 +338,7 @@ use Polen\Includes\Polen_Bancos;
                                     Fee
                                 </th>
                                 <td>
-                                    <input type="text" name="fee" value="<?php echo ( isset( $vendorInfo->fee ) ) ? $vendorInfo->fee : ''; ?>" autocomplete="password" class="widefat polen-digits-only" maxlength="5">
+                                    <input type="text" name="fee" value="<?php echo ( isset( $vendorInfo->fee ) ) ? $vendorInfo->fee : ''; ?>" autocomplete="off" class="widefat polen-digits-only" maxlength="5">
                                 </td>
                             </tr>
                         </table>

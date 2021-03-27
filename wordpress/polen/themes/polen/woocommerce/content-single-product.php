@@ -97,11 +97,18 @@ $terms = wp_get_object_terms(get_the_ID(), 'product_cat');
 	<!-- Vídeos -->
 	<?php polen_front_get_talent_videos(); ?>
 
-	<!-- Descrição? -->
+	<!-- Tags -->
 	<div class="row mt-5">
 		<div class="col-md-12">
-			<h4>Descrição</h4>
-			<p><?php echo $Talent_Fields->descricao; ?></p>
+			<h4>Tags</h4>
+			<div>
+				<?php 
+				$talent_tags = get_the_terms( get_the_ID(), 'product_tag' ); 
+				foreach( $talent_tags as $tag ):
+					echo $tag->name;
+				endforeach;	
+				?>
+			</div>
 		</div>
 	</div>
 

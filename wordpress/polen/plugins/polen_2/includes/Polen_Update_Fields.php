@@ -87,7 +87,7 @@ class Polen_Update_Fields
             }
         } else if ( $user === 'add-new-user' ) {
             require_once Polen_Admin::get_metabox_path( 'metabox-talent-data.php' );
-            require_once Polen_Admin::get_metabox_path( 'metabox-charity-data.php' );
+            //require_once Polen_Admin::get_metabox_path( 'metabox-charity-data.php' );
         }
     }
 
