@@ -30,15 +30,6 @@ class Polen_Update_Fields
             }
 
             add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
-            /*
-            [andrea]movi para a classe Polen_Checkout
-            add_action( 'woocommerce_edit_account_form_start', array( $this, 'add_cpf_to_form' ) );
-            add_action( 'woocommerce_edit_account_form_start', array( $this, 'add_phone_to_form' ) );
-            add_filter( 'woocommerce_save_account_details', array( $this, 'save_account_details' ) );
-
-            add_action( 'woocommerce_before_checkout_billing_form', array( $this, 'add_cpf_and_phone_to_checkout') );
-            add_action( 'woocommerce_checkout_update_order_meta', array( $this, 'save_order_meta_from_checkout' ) );
-            */
             
             // Validacao do Cadastro do usuário
             add_action('user_profile_update_errors', array( $this, 'check_role_talent_fields' ), 10, 3);
