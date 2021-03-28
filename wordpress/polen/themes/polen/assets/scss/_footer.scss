@@ -1,9 +1,10 @@
 .site-footer {
+	border-top: 1px solid $light-25;
 	.title,
 	.description,
 	a {
 		font-size: 16px;
-		line-height: 28px;
+		line-height: 24px;
 	}
 	.title {
 		font-weight: 600;
@@ -17,10 +18,24 @@
 	}
 }
 
+.footer-menu {
+	li {
+		margin: 10px 0;
+		a {
+			font-size: 14px;
+			line-height: 21px;
+			font-weight: 400;
+			color: $light-50;
+		}
+	}
+}
+
 .copyright {
-	border-top: 1px solid #41444e;
-	img {
-		width: auto;
-		height: 32px;
+	font-size: 16px;
+	font-weight: 700;
+	.social {
+		> * {
+			margin: 0 8%;
+		}
 	}
 }
