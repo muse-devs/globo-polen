@@ -30,18 +30,9 @@ class Polen_Update_Fields
             }
 
             add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
-            /*
-            [andrea]movi para a classe Polen_Checkout
-            add_action( 'woocommerce_edit_account_form_start', array( $this, 'add_cpf_to_form' ) );
-            add_action( 'woocommerce_edit_account_form_start', array( $this, 'add_phone_to_form' ) );
-            add_filter( 'woocommerce_save_account_details', array( $this, 'save_account_details' ) );
-
-            add_action( 'woocommerce_before_checkout_billing_form', array( $this, 'add_cpf_and_phone_to_checkout') );
-            add_action( 'woocommerce_checkout_update_order_meta', array( $this, 'save_order_meta_from_checkout' ) );
-            */
             
             // Validacao do Cadastro do usuário
-            add_action('user_profile_update_errors', array( $this, 'check_role_talent_fields' ), 10, 3);
+//            add_action('user_profile_update_errors', array( $this, 'check_role_talent_fields' ), 10, 3);
         }
 
         global $wpdb;
@@ -50,19 +41,19 @@ class Polen_Update_Fields
 
     public function check_role_talent_fields( \WP_Error $errors, $update, $user )
     {
-        if( 'user_talent' === $user->role ) {
-            if( empty( $_REQUEST['talent_alias'] )) {
-                $errors->add( 'slug-required', 'Slug é obrigatório para função Talento');
-            }
-
-            if( 'PJ' == $_REQUEST['natureza_juridica'] && empty( $_REQUEST['cnpj'] )) {
-                $errors->add('cnpj-required', 'CNPJ é um dado obrigatório, para talentos PJ');
-            }
-
-            if( 'PF' ==  $_REQUEST['natureza_juridica'] && empty( $_REQUEST['cpf'] )) {
-                $errors->add('cpf-required', 'CPF é um dado obrigatório, para talentos PF');
-            }
-        }
+//        if( 'user_talent' === $user->role ) {
+//            if( empty( $_REQUEST['talent_alias'] )) {
+//                $errors->add( 'slug-required', 'Slug é obrigatório para função Talento');
+//            }
+//
+//            if( 'PJ' == $_REQUEST['natureza_juridica'] && empty( $_REQUEST['cnpj'] )) {
+//                $errors->add('cnpj-required', 'CNPJ é um dado obrigatório, para talentos PJ');
+//            }
+//
+//            if( 'PF' ==  $_REQUEST['natureza_juridica'] && empty( $_REQUEST['cpf'] )) {
+//                $errors->add('cpf-required', 'CPF é um dado obrigatório, para talentos PF');
+//            }
+//        }
     }
 
     public function remove_woocommerce_fields() {
@@ -87,7 +78,7 @@ class Polen_Update_Fields
             }
         } else if ( $user === 'add-new-user' ) {
             require_once Polen_Admin::get_metabox_path( 'metabox-talent-data.php' );
-            require_once Polen_Admin::get_metabox_path( 'metabox-charity-data.php' );
+            //require_once Polen_Admin::get_metabox_path( 'metabox-charity-data.php' );
         }
     }
 
@@ -238,7 +229,9 @@ class Polen_Update_Fields
         $args['fee'] = $fee;
 
         global $wpdb;
+        $wpdb->show_errors = true;
         $vendorData = $this->get_vendor_data( $user_id );
+//        echo '<pre>';var_dump($vendorData);die;
         if( $vendorData && ! is_null( $vendorData ) && ! empty( $vendorData ) && isset( $vendorData->ID ) ) {
             $statusDate = new \DateTime();
             $timeZone = new \DateTimeZone( get_option('timezone_string') );
@@ -262,6 +255,10 @@ class Polen_Update_Fields
                 $this->table_talent,
                 $args
             );
+            if( is_wp_error( $insert ) ) {
+                var_dump( $wpdb->print_error() );die;
+            }
+            echo '<pre>';var_dump($wpdb->print_error(),$args,$wpdb);die;
         }
     }
 

@@ -11,10 +11,11 @@ h4 {
 
 h1,
 h2 {
+	margin: 0;
 	font-size: 54px;
 	font-weight: 600;
 	@include media-breakpoint-only(xs) {
-		font-size: 2rem;
+		font-size: 1.6rem;
 	}
 }
 
@@ -27,6 +28,12 @@ h4,
 p {
 	font-size: 20px;
 	font-weight: 500;
+}
+
+a {
+	font-family: $font-secondary;
+	font-size: 1.1rem;
+	font-weight: 600;
 }
 
 .title-alt {

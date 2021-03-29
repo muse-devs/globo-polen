@@ -156,6 +156,17 @@ function polen_scripts() {
 		wp_enqueue_script( 'talent-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'talent.js', array("slick-slider", "vimeo"), _S_VERSION, true );
 	}
 
+	if( is_front_page()) {
+		wp_enqueue_script( 'slick-slider', TEMPLATE_URI . '/assets/slick/slick.min.js', array("jquery"), _S_VERSION, true );
+		
+		$min = "min/";
+		if (defined('ENV_DEV') && ENV_DEV) {
+			$min = "";
+		}
+
+		wp_enqueue_script( 'home-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'front-page.js', array("slick-slider"), _S_VERSION, true );
+	}
+
 	// if (defined('ENV_DEV') && ENV_DEV) {
 	// 	wp_enqueue_script( 'vuejs', 'https://cdn.jsdelivr.net/npm/vue/dist/vue.js', array(), '2.6.12', false );
 	// } else {
