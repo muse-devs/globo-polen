@@ -5,5 +5,5 @@
         "../slick/slick-theme.scss"
     ],
     "names": [],
-    "file": "slick-theme.css"
+    "file": "slick-theme.min.css"
 }

@@ -144,7 +144,7 @@ add_action( 'widgets_init', 'polen_widgets_init' );
 function polen_scripts() {
 	wp_enqueue_style('font-poppins', 'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap', array(), '1.0.0');
 	wp_enqueue_style('font-inter', 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap', array(), '1.0.0');
-	wp_enqueue_style('polen-custom-styles', TEMPLATE_URI . '/assets/css/style.css', array(), _S_VERSION);
+	wp_enqueue_style('polen-custom-styles', TEMPLATE_URI . '/assets/css/style.min.css', array(), _S_VERSION);
 
 	if(is_singular() && is_product()) {
 		$min = "min/";
@@ -158,7 +158,7 @@ function polen_scripts() {
 
 	if( is_front_page()) {
 		wp_enqueue_script( 'slick-slider', TEMPLATE_URI . '/assets/slick/slick.min.js', array("jquery"), _S_VERSION, true );
-		
+
 		$min = "min/";
 		if (defined('ENV_DEV') && ENV_DEV) {
 			$min = "";

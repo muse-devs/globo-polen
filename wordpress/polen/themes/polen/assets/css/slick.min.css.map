@@ -5,5 +5,5 @@
         "../slick/slick.scss"
     ],
     "names": [],
-    "file": "slick.css"
+    "file": "slick.min.css"
 }

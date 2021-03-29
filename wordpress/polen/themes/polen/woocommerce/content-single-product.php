@@ -44,53 +44,18 @@ $terms = wp_get_object_terms(get_the_ID(), 'product_cat');
 
 	<!-- Cabeçalho do Artista -->
 	<header class="talent-page-header">
-		<div class="row mt-5 d-flex justify-content-between align-items-center">
-			<div class="col-md-5">
+		<div class="row mt-4 d-flex justify-content-between align-items-center">
+			<div class="col-12 col-md-5">
 				<div class="row">
-					<div class="col-md-12 d-flex justify-content-between align-items-center">
+					<div class="col-12 col-md-12">
 						<h1 class="talent-name text-truncate" title="<?= get_the_title(); ?>"><?= get_the_title(); ?></h1>
-						<div class="talent-share ml-4">
+						<span class="price"><?php echo wc_price($product->get_price()); ?></span>
+						<?php /* <div class="talent-share ml-4">
 							<button id="share-button" class="share-button"><?php polen_icon_share(); ?></button>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12">
-						<?php if (count($terms) > 0) : ?>
-							<?php foreach ($terms as $k => $term) : ?>
-								<a href="<?= get_tag_link($term); ?>" class="tag-link mb-2"><?= $term->name; ?></a>
-							<?php endforeach; ?>
-					</div>
-				<?php endif; ?>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="row">
-					<div class="col-md-6 text-center">
-						<span class="skill-title">Responde em</span>
-					</div>
-					<div class="col-md-6 text-center">
-						<span class="skill-title">Reviews</span>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-6 text-center">
-						<?php polen_icon_clock(); ?>
-						<span class="skill-value"><?= $Talent_Fields->tempo_resposta; ?>h</span>
-					</div>
-					<div class="col-md-6 text-center">
-						<?php polen_icon_star(true); ?>
-						<span class="skill-value"><?= "5.0"; ?></span>
+						</div> */ ?>
 					</div>
 				</div>
 			</div>
-			<div class="col-md-4">
-				<?php echo woocommerce_template_single_add_to_cart(); ?>
-				<!--button class="btn btn-primary btn-lg btn-block btn-get-video">Pedir vídeo R$ 200</button-->
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-12"><span class="price"><?php echo wc_price( $product->get_price() );?></span></div>
 		</div>
 	</header>
 
@@ -100,15 +65,43 @@ $terms = wp_get_object_terms(get_the_ID(), 'product_cat');
 	<!-- Tags -->
 	<div class="row mt-5">
 		<div class="col-md-12">
-			<h4>Tags</h4>
-			<div>
-				<?php 
-				$talent_tags = get_the_terms( get_the_ID(), 'product_tag' ); 
-				foreach( $talent_tags as $tag ):
-					echo $tag->name;
-				endforeach;	
-				?>
+			<h4>Descrição</h4>
+			<div class="row">
+				<div class="col-md-12">
+					<?php if (count($terms) > 0) : ?>
+						<?php foreach ($terms as $k => $term) : ?>
+							<a href="<?= get_tag_link($term); ?>" class="tag-link mb-2"><?= $term->name; ?></a>
+						<?php endforeach; ?>
+					<?php endif; ?>
+				</div>
 			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-3">
+			<div class="row">
+				<div class="col-md-6 text-center">
+					<span class="skill-title">Responde em</span>
+				</div>
+				<div class="col-md-6 text-center">
+					<span class="skill-title">Reviews</span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6 text-center">
+					<?php polen_icon_clock(); ?>
+					<span class="skill-value"><?= $Talent_Fields->tempo_resposta; ?>h</span>
+				</div>
+				<div class="col-md-6 text-center">
+					<?php polen_icon_star(true); ?>
+					<span class="skill-value"><?= "5.0"; ?></span>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<?php echo woocommerce_template_single_add_to_cart(); ?>
+			<!--button class="btn btn-primary btn-lg btn-block btn-get-video">Pedir vídeo R$ 200</button-->
 		</div>
 	</div>
 

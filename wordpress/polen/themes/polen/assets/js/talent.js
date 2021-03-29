@@ -4,6 +4,7 @@ var share_button = document.querySelectorAll(".share-button");
 
 jQuery(document).ready(function () {
 	jQuery(".talent-carousel").slick({
+		arrows: false,
 		infinite: true,
 		speed: 300,
 		slidesToShow: 1,
