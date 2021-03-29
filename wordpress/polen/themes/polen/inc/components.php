@@ -73,7 +73,6 @@ function polen_icon_social($ico)
 
 function polen_front_get_banner()
 {
-	ob_start();
 ?>
 	<section class="top-banner mb-2">
 		<video class="video" autoplay muted loop>
@@ -86,9 +85,6 @@ function polen_front_get_banner()
 		</div>
 	</section>
 <?php
-	$data = ob_get_contents();
-	ob_end_clean();
-	echo $data;
 }
 
 // $size pode ser 'medium' e 'small'
@@ -101,7 +97,6 @@ function polen_front_get_card($item, $size = "medium")
 
 	$image = wp_get_attachment_image_src(get_post_thumbnail_id($item['ID']), 'single-post-thumbnail');
 
-	ob_start();
 ?>
 	<div class="<?= $class; ?>">
 		<div class="polen-card <?= $size; ?>">
@@ -120,9 +115,6 @@ function polen_front_get_card($item, $size = "medium")
 		</div>
 	</div>
 <?php
-	$data = ob_get_contents();
-	ob_end_clean();
-	echo $data;
 }
 
 function polen_front_get_news($items)
@@ -130,7 +122,6 @@ function polen_front_get_news($items)
 	if (!$items) {
 		return;
 	}
-	ob_start();
 ?>
 	<section class="row pt-4 news">
 		<div class="col-md-12">
@@ -150,9 +141,6 @@ function polen_front_get_news($items)
 		</div>
 	</section>
 <?php
-	$data = ob_get_contents();
-	ob_end_clean();
-	echo $data;
 }
 
 function polen_front_get_categories($items)
@@ -160,7 +148,6 @@ function polen_front_get_categories($items)
 	if (!$items) {
 		return;
 	}
-	ob_start();
 ?>
 	<section class="row py-4 categories">
 		<div class="col-md-12">
@@ -185,9 +172,6 @@ function polen_front_get_categories($items)
 		</div>
 	</section>
 <?php
-	$data = ob_get_contents();
-	ob_end_clean();
-	echo $data;
 }
 
 function polen_front_get_artists($items, $title)
@@ -195,7 +179,6 @@ function polen_front_get_artists($items, $title)
 	if (!$items) {
 		return;
 	}
-	ob_start();
 ?>
 	<section class="row py-4 all-artists">
 		<div class="col-md-12">
@@ -222,9 +205,6 @@ function polen_front_get_artists($items, $title)
 		</div>
 	</section>
 <?php
-	$data = ob_get_contents();
-	ob_end_clean();
-	echo $data;
 }
 
 function polen_front_get_tutorial()
@@ -288,11 +268,10 @@ function polen_front_get_talent_videos($items = array(
 	array("title" => "Video 3", "image" => "http://i.vimeocdn.com/video/735151132_640.jpg", "video" => "https://vimeo.com/297461374"),
 ))
 {
-	ob_start();
 ?>
 	<div class="talent-carousel">
 		<?php foreach ($items as $item) : ?>
-			<figure class="item">
+			<figure class="item" style="background-image: url(<?= $item['image']; ?>);">
 				<img src="<?= $item['image']; ?>" alt="<?= $item['title']; ?>" data-url="<?= $item['video']; ?>">
 				<a href="javascript:openVideoByURL('<?= $item['video']; ?>')" class="player-button"></a>
 			</figure>
@@ -307,9 +286,6 @@ function polen_front_get_talent_videos($items = array(
 		</header>
 	</div>
 <?php
-	$data = ob_get_contents();
-	ob_end_clean();
-	echo $data;
 }
 
 /**

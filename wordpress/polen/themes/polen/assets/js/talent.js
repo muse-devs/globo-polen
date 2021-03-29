@@ -7,8 +7,8 @@ jQuery(document).ready(function () {
 		arrows: false,
 		infinite: true,
 		speed: 300,
-		slidesToShow: 1,
-		variableWidth: true,
+		slidesToShow: 2,
+		// variableWidth: true,
 	});
 	var id = window.location.hash.substring(1);
 	if (id) {
