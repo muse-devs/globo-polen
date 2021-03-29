@@ -76,7 +76,7 @@ function polen_front_get_banner()
 	ob_start();
 ?>
 	<section class="top-banner mb-2">
-		<video class="video" autoplay muted>
+		<video class="video" autoplay muted loop>
 			<source src="<?= TEMPLATE_URI; ?>/assets/video.mp4" type="video/mp4">
 			<!-- <source src="movie.ogg" type="video/ogg"> -->
 		</video>
