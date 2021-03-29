@@ -114,7 +114,7 @@ class Polen_Occasion_List
     {
         global $wpdb;
 
-        $order = ($_order === 'asc') ? 'ASC' : 'DESC';
+        $order = ($_order === 'ASC') ? 'ASC' : 'DESC';
         $orderby = ($_orderby === 'type') ? " ORDER BY $_orderby $order " : "";
         
         $offset = ( !empty( $_offset )) ? ",{$_offset}" : '';

@@ -80,7 +80,7 @@
                     width: '100%', 
                 });
             }
-
+            /*
             if( $('#talent_category').length > 0 ) {
                 $('#talent_category').select2({ 
                     placeholder: 'Selecione a(s) categoria(s)',
@@ -89,7 +89,7 @@
                     width: '100%', 
                 });
             }
-
+            */
             if( $('#charity_enable').length > 0 ) {
                 $('#charity_enable').on( 'click', function() {
                     if( $('#charity_enable').is(":checked") ) {

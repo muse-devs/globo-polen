@@ -198,7 +198,7 @@ $Talent_Fields = new Polen_Update_Fields();
 						$cart_item_key
 					);
 					echo "<option value=''>Categoria</option>";
-					$arr_occasion = $occasion_list->get_occasion();
+					$arr_occasion = $occasion_list->get_occasion( null, 'type', 'ASC', 1, 0 , 'DISTINCT type' );
 					foreach ($arr_occasion as $occasion) :
 						echo "<option value='" . $occasion->type . "'>" . $occasion->type . "</option>";
 

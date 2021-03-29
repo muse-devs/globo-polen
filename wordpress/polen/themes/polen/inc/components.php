@@ -43,6 +43,34 @@ function polen_icon_chevron_right()
 	echo '<i class="bi bi-chevron-right"></i>';
 }
 
+function polen_icon_social($ico)
+{
+	$ret = '';
+	switch ($ico) {
+		case 'facebook':
+			$ret = '<i class="bi bi-facebook"></i>';
+			break;
+
+		case 'instagram':
+			$ret = '<i class="bi bi-instagram"></i>';
+			break;
+
+		case 'linkedin':
+			$ret = '<i class="bi bi-linkedin"></i>';
+			break;
+
+		case 'twitter':
+			$ret = '<i class="bi bi-twitter"></i>';
+			break;
+
+		default:
+			$ret = '';
+			break;
+	}
+
+	echo $ret;
+}
+
 function polen_front_get_banner()
 {
 	ob_start();
