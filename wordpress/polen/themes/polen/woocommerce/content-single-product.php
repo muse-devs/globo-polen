@@ -60,7 +60,7 @@ $terms = wp_get_object_terms(get_the_ID(), 'product_cat');
 	</header>
 
 	<!-- Vídeos -->
-	<?php polen_front_get_talent_videos(); ?>
+	<?php polen_front_get_talent_videos($Talent_Fields); ?>
 
 	<!-- Tags -->
 	<div class="row mt-4">

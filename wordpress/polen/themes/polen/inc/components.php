@@ -38,9 +38,24 @@ function polen_icon_upload()
 	echo '<i class="bi bi-cloud-arrow-up"></i>';
 }
 
+function polen_icon_download()
+{
+	echo '<i class="bi bi-download"></i>';
+}
+
+function polen_icon_copy()
+{
+	echo '<i class="bi bi-clipboard"></i>';
+}
+
 function polen_icon_chevron_right()
 {
 	echo '<i class="bi bi-chevron-right"></i>';
+}
+
+function polen_icon_close()
+{
+	echo '<i class="bi bi-x"></i>';
 }
 
 function polen_icon_social($ico)
@@ -253,7 +268,7 @@ function polen_front_get_tutorial()
 	';
 }
 
-function polen_front_get_talent_videos($items = array(
+function polen_front_get_talent_videos($talent, $items = array(
 	array("title" => "Video 1", "image" => "http://i.vimeocdn.com/video/731672459_640.jpg", "video" => "https://vimeo.com/280815263"),
 	array("title" => "Video 2", "image" => "http://i.vimeocdn.com/video/649503401_640.jpg", "video" => "https://vimeo.com/229243103"),
 	array("title" => "Video 3", "image" => "http://i.vimeocdn.com/video/735151132_640.jpg", "video" => "https://vimeo.com/297461374"),
@@ -278,11 +293,35 @@ function polen_front_get_talent_videos($items = array(
 		<?php endforeach; ?>
 	</div>
 
-	<div id="video-modal" class="video-modal" onclick="hideModal()"></div>
-	<div id="video-box" class="video-box">
-		<header>
-			<button id="share-button" class="share-button"><?php polen_icon_share(); ?></button>
-		</header>
+	<div id="video-modal" class="video-modal">
+		<div class="video-card">
+			<header>
+				<button id="close-button" class="close-button" onclick="hideModal()"><?php polen_icon_close(); ?></button>
+				<div id="video-box"></div>
+			</header>
+			<div class="content mt-4 mx-3">
+				<header class="row content-header">
+					<div class="col-3">
+						<div class="avatar" style="background-image: url(<?php echo isset($talent->avatar) ? $talent->avatar : TEMPLATE_URI . '/assets/img/avatar.png';  ?>)"></div>
+					</div>
+					<div class="col-9">
+						<h4 class="name"><?php echo $talent->nome; ?></h4>
+						<h5 class="cat"><?php echo $talent->profissao; ?></h5>
+						<a href="www.muse.me/v/600f82be59bee5001dc70ea8" class="url">www.muse.me/v/600f82be59bee5001dc70ea8</a>
+					</div>
+				</header>
+				<div class="row mt-4 share">
+					<div class="col-12">
+						<input type="text" id="share-input" class="share-input" />
+						<a href="javascript:copyToClipboard(window.location.href)" class="btn btn-outline-light btn-lg btn-block share-link"><?php polen_icon_copy(); ?>Copiar link</a>
+						<a href="javascript:void(0)" class="btn btn-outline-light btn-lg btn-block share-link" target="_blank"><?php polen_icon_download(); ?>Download</a>
+						<a href="<?php echo $talent->facebook; ?>" class="btn btn-outline-light btn-lg btn-block share-link" target="_blank"><?php polen_icon_social('facebook'); ?>Facebook</a>
+						<a href="<?php echo $talent->instagram; ?>" class="btn btn-outline-light btn-lg btn-block share-link" target="_blank"><?php polen_icon_social('instagram'); ?>Instagram</a>
+						<a href="<?php echo $talent->twitter; ?>" class="btn btn-outline-light btn-lg btn-block share-link" target="_blank"><?php polen_icon_social('twitter'); ?>Twitter</a>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 <?php
 }
