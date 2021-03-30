@@ -81,7 +81,7 @@ function polen_front_get_banner()
 		</video>
 		<div class="content">
 			<h2 class="title">Presenteie e<br />surpreenda com vídeos personalizados.</h2>
-			<a href="#como" class="player-button">Como funciona</a>
+			<a href="#como" class="player-button-link">Como funciona</a>
 		</div>
 	</section>
 <?php
@@ -279,7 +279,6 @@ function polen_front_get_talent_videos($items = array(
 	</div>
 
 	<div id="video-modal" class="video-modal" onclick="hideModal()"></div>
-	<input id="share-input" type="text" class="share-input" />
 	<div id="video-box" class="video-box">
 		<header>
 			<button id="share-button" class="share-button"><?php polen_icon_share(); ?></button>

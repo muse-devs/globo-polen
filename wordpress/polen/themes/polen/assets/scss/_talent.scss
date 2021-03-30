@@ -1,48 +1,66 @@
-.talent-page-header {
-	.talent-name {
-		font-size: 44px;
-		line-height: 66px;
-	}
-	.price {
-		font-size: 24px;
-		font-weight: 700;
-	}
-	.btn-get-video {
-		height: 90px;
-	}
+.talent-name {
+	font-size: 44px;
+	line-height: 66px;
+}
+.price,
+.subtitle {
+	font-size: 24px;
+	font-weight: 700;
 }
 
 .tag-link {
 	display: inline-block;
-	padding: 3px 40px;
-	font-size: 15px;
-	font-weight: 700;
-	color: white;
-	border-radius: 5px;
-	background-color: $secondary-bg-color;
+	padding: 3px 10px;
+	font-size: 14px;
+	font-weight: 400;
+	color: $light-50;
+	border-radius: 2px;
+	background-color: $light-25;
 }
 
 .talent-carousel {
 	position: relative;
 	// height: 70vw;
-	margin: 25px 0;
+	margin: 25px -15px 0 0;
 	.item {
 		position: relative;
 		display: inline-block;
-		// margin-right: 20px;
-		height: 70vw;
+		margin-right: 15px;
+		height: 63vw;
 		border-radius: 6px;
 		overflow: hidden;
+		background: no-repeat center/cover;
+		&::after {
+			content: "";
+			position: absolute;
+			display: block;
+			width: 100%;
+			height: 100%;
+			background: linear-gradient(360deg, #000000 -17.41%, rgba(0, 0, 0, 0) 55.71%);
+		}
 		img {
 			display: none;
-			// width: auto;
-			// height: 100%;
 		}
 		.player-button {
 			position: absolute;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
+			display: block;
+			width: 100%;
+			height: 100%;
+			z-index: 10;
+			&::after {
+				content: "";
+				position: absolute;
+				display: inline-block;
+				width: 0;
+				height: 0;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				border-top: 12px solid transparent;
+				border-bottom: 12px solid transparent;
+
+				border-left: 16px solid $light-100;
+			}
 		}
 	}
 }
@@ -56,7 +74,7 @@
 
 .video-modal {
 	position: fixed;
-	display: none;
+	// display: none;
 	top: 0;
 	left: 0;
 	width: 100vw;
@@ -70,7 +88,7 @@
 
 .video-box {
 	position: fixed;
-	display: none;
+	// display: none;
 	padding: 125px 0;
 	top: 50%;
 	left: 50%;
@@ -103,7 +121,18 @@
 }
 
 .skill-title {
-	color: $font-color2;
+	font-size: 16px;
+	font-weight: 400;
+	color: $light-100;
+}
+
+.skill-value {
+	font-size: 16px;
+	font-weight: 700;
+}
+
+.talent-page-footer {
+	border-bottom: 1px solid $light-25;
 }
 
 .talent-dashboard-start {

@@ -63,9 +63,9 @@ $terms = wp_get_object_terms(get_the_ID(), 'product_cat');
 	<?php polen_front_get_talent_videos(); ?>
 
 	<!-- Tags -->
-	<div class="row mt-5">
+	<div class="row mt-4">
 		<div class="col-md-12">
-			<h4>Descrição</h4>
+			<h4 class="subtitle">Descrição</h4>
 			<div class="row">
 				<div class="col-md-12">
 					<?php if (count($terms) > 0) : ?>
@@ -78,45 +78,35 @@ $terms = wp_get_object_terms(get_the_ID(), 'product_cat');
 		</div>
 	</div>
 
-	<div class="row">
+	<div class="row my-5 pb-5 talent-page-footer">
+		<div class="col-12 col-md-4">
+			<?php echo woocommerce_template_single_add_to_cart(); ?>
+			<!--button class="btn btn-primary btn-lg btn-block btn-get-video">Pedir vídeo R$ 200</button-->
+		</div>
 		<div class="col-md-3">
 			<div class="row">
 				<div class="col-md-6 text-center">
 					<span class="skill-title">Responde em</span>
 				</div>
 				<div class="col-md-6 text-center">
-					<span class="skill-title">Reviews</span>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-6 text-center">
 					<?php polen_icon_clock(); ?>
 					<span class="skill-value"><?= $Talent_Fields->tempo_resposta; ?>h</span>
 				</div>
-				<div class="col-md-6 text-center">
-					<?php polen_icon_star(true); ?>
-					<span class="skill-value"><?= "5.0"; ?></span>
-				</div>
 			</div>
-		</div>
-		<div class="col-md-4">
-			<?php echo woocommerce_template_single_add_to_cart(); ?>
-			<!--button class="btn btn-primary btn-lg btn-block btn-get-video">Pedir vídeo R$ 200</button-->
 		</div>
 	</div>
 
 	<!-- Como funciona? -->
 	<?php polen_front_get_tutorial(); ?>
 
-	<!-- Artistas Relacionados -->
-	<div class="row">
-		<div class="col m-5 text-center">
-			<h1>Talentos relacionados</h1>
-		</div>
-	</div>
-
-	<div class="row">
+	<header class="row d-flex justify-content-between mb-4">
 		<div class="col">
+			<h2>Relacionados</h2>
+		</div>
+		<div class="col d-flex justify-content-end align-items-center"><a href="#">Ver todos <?php polen_icon_chevron_right(); ?></a></div>
+	</header>
+	<div class="row">
+		<div class="col-12">
 			<?php
 			$terms_ids = array();
 			if (count($terms) > 0) {
@@ -127,7 +117,7 @@ $terms = wp_get_object_terms(get_the_ID(), 'product_cat');
 			if (count($terms_ids) > 0) : ?>
 				<?php $others = get_objects_in_term($terms_ids, 'product_cat'); ?>
 				<?php if (count($others)) : ?>
-					<div class="row d-flex flex-wrap">
+					<div class="row">
 						<?php foreach ($others as $k => $id) :
 							$product = wc_get_product($id);
 						?>

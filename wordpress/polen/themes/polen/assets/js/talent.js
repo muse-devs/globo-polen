@@ -8,6 +8,7 @@ jQuery(document).ready(function () {
 		infinite: true,
 		speed: 300,
 		slidesToShow: 2,
+		slidesToScroll: 2,
 		// variableWidth: true,
 	});
 	var id = window.location.hash.substring(1);
@@ -81,6 +82,7 @@ function hideModal(e) {
 }
 
 function openVideoByURL(url) {
+	console.log(url);
 	addVideo();
 	showModal();
 	var videoPlayer = new Vimeo.Player("polen-video", {
