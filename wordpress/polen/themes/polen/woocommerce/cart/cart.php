@@ -130,6 +130,19 @@ $Talent_Fields = new Polen_Update_Fields();
 				</div>
 			</div>
 
+			<?php
+			if ( is_user_logged_in() ) {
+				$current_user = wp_get_current_user();
+				$email_to_video = $current_user->user_email;
+				printf(
+					'<input type="hidden" placeholder="E-mail para receber updates" class="%s form-control form-control-lg" id="cart_email_to_video_%s" data-cart-id="%s" name="email_to_video" value="%s" required="required" />',
+					'polen-cart-item-data',
+					$cart_item_key,
+					$cart_item_key,
+					$email_to_video,
+				);
+			?>
+			<?php } else { ?>
 			<div class="row">
 				<div class="col-12 col-md-6">
 					<?php
@@ -144,6 +157,7 @@ $Talent_Fields = new Polen_Update_Fields();
 					?>
 				</div>
 			</div>
+			<?php } ?>
 
 			<div class="row mt-3">
 				<div class="col-12 col-md-12 mb-4">
