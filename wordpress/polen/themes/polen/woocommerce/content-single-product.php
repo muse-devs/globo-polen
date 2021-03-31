@@ -40,6 +40,10 @@ $Talent_Fields = $Talent_Fields->get_vendor_data($post->post_author);
 $terms = wp_get_object_terms(get_the_ID(), 'product_cat');
 ?>
 
+<figure class="image-bg">
+	<img src="https://picsum.photos/1280/800" alt="Foto de fundo">
+</figure>
+
 <div id="product-<?php the_ID(); ?>" <?php wc_product_class('', $product); ?>>
 
 	<!-- Cabeçalho do Artista -->
@@ -60,7 +64,7 @@ $terms = wp_get_object_terms(get_the_ID(), 'product_cat');
 	</header>
 
 	<!-- Vídeos -->
-	<?php polen_front_get_talent_videos(); ?>
+	<?php polen_front_get_talent_videos($Talent_Fields); ?>
 
 	<!-- Tags -->
 	<div class="row mt-4">

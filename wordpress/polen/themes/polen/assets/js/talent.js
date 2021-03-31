@@ -70,7 +70,6 @@ function killVideo() {
 function showModal() {
 	document.body.classList.add("no-scroll");
 	modal.classList.add("show");
-	video_box.classList.add("show");
 }
 
 function hideModal(e) {
@@ -78,7 +77,6 @@ function hideModal(e) {
 	changeHash();
 	killVideo();
 	modal.classList.remove("show");
-	video_box.classList.remove("show");
 }
 
 function openVideoByURL(url) {
@@ -90,9 +88,6 @@ function openVideoByURL(url) {
 	});
 	videoPlayer.getVideoId().then(function (id) {
 		changeHash(id);
-		document
-			.querySelector(".video-box .share-button")
-			.classList.add("show");
 	});
 }
 
@@ -100,8 +95,7 @@ function openVideoById(id) {
 	addVideo();
 	showModal();
 	var videoPlayer = new Vimeo.Player("polen-video", {
-		id: id,
+		id: id
 	});
 	changeHash(id);
-	document.querySelector(".video-box .share-button").classList.add("show");
 }
