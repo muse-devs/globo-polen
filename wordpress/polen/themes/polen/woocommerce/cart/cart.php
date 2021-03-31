@@ -50,78 +50,12 @@ $Talent_Fields = new Polen_Update_Fields();
 		if ($_product && $_product->exists() && $cart_item['quantity'] > 0 && apply_filters('woocommerce_cart_item_visible', true, $cart_item, $cart_item_key)) :
 			$product_permalink = apply_filters('woocommerce_cart_item_permalink', $_product->is_visible() ? $_product->get_permalink($cart_item) : '', $cart_item, $cart_item_key);
 	?>
-			<div class="row py-5 px-3 cart-item">
-				<div class="col-md-5 d-flex justify-content-start align-items-center">
-					<figure class="thumbnail mr-4">
-						<?php
-						$thumbnail = apply_filters('woocommerce_cart_item_thumbnail', $_product->get_image(), $cart_item, $cart_item_key);
-
-						if (!$product_permalink) {
-							echo $thumbnail; // PHPCS: XSS ok.
-						} else {
-							printf('<a href="%s">%s</a>', esc_url($product_permalink), $thumbnail); // PHPCS: XSS ok.
-						}
-						?>
-					</figure>
-					<div class="cart-item-product">
-						<header class="row content-header">
-							<div class="col-3">
-								<div class="avatar" style="background-image: url(<?php echo isset($talent->avatar) ? $talent->avatar : TEMPLATE_URI . '/assets/img/avatar.png';  ?>)"></div>
-							</div>
-							<div class="col-9">
-								<h4 class="name"><?php echo $talent->nome; ?></h4>
-								<h5 class="cat"><?php echo $talent->profissao; ?></h5>
-							</div>
-						</header>
-						<div class="product-name text-truncate" data-title="<?php esc_attr_e('Product', 'woocommerce'); ?>">
-							<?php
-							if (!$product_permalink) {
-								echo wp_kses_post(apply_filters('woocommerce_cart_item_name', $_product->get_name(), $cart_item, $cart_item_key) . '&nbsp;');
-							} else {
-								echo wp_kses_post(apply_filters('woocommerce_cart_item_name', sprintf('<a href="%s">%s</a>', esc_url($product_permalink), $_product->get_name()), $cart_item, $cart_item_key));
-							}
-
-							do_action('woocommerce_after_cart_item_name', $cart_item, $cart_item_key);
-
-							// Meta data.
-							echo wc_get_formatted_cart_item_data($cart_item); // PHPCS: XSS ok.
-
-							// Backorder notification.
-							if ($_product->backorders_require_notification() && $_product->is_on_backorder($cart_item['quantity'])) {
-								echo wp_kses_post(apply_filters('woocommerce_cart_item_backorder_notification', '<p class="backorder_notification">' . esc_html__('Available on backorder', 'woocommerce') . '</p>', $product_id));
-							}
-							?>
-							<div class="product-price" data-title="<?php esc_attr_e('Price', 'woocommerce'); ?>">
-								<?php
-								echo apply_filters('woocommerce_cart_item_price', WC()->cart->get_product_price($_product), $cart_item, $cart_item_key); // PHPCS: XSS ok.
-								?>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3 mt-3">
-					<div class="row">
-						<div class="col skill-title">Responde em</div>
-						<div class="col skill-title">Reviews</div>
-					</div>
-					<div class="row">
-						<div class="col"><?php polen_icon_clock(); ?> <?php echo $talent_data->tempo_resposta; ?>h</div>
-						<div class="col"><?php polen_icon_star(true); ?> 5.0</div>
-					</div>
-				</div>
-				<div class="product-quantity" data-title="<?php esc_attr_e('Quantity', 'woocommerce'); ?>">
-					<?php
-					$product_quantity = sprintf('<input type="hidden" name="cart[%s][qty]" value="1" />', $cart_item_key);
-					echo apply_filters('woocommerce_cart_item_quantity', $product_quantity, $cart_item_key, $cart_item); // PHPCS: XSS ok.
-					?>
-				</div>
-			</div>
 		<?php endif; ?>
 	<?php endforeach; ?>
 
-	<div class="row mt-1 py-5 px-5 cart-other">
+	<div class="row mt-1 py-5 cart-other">
 		<?php do_action('woocommerce_cart_contents'); ?>
-		<div class="col-md-12 px-5">
+		<div class="col-12 col-md-12">
 			<div class="row">
 				<div class="col-md-12 mb-4">
 					<span class="form-title">Esse vídeo é para:</span>
@@ -155,7 +89,7 @@ $Talent_Fields = new Polen_Update_Fields();
 			</div>
 
 			<div class="row mt-3">
-				<div class="col-md-6">
+				<div class="col-12 col-md-6">
 					<?php
 					$offered_by = isset($cart_item['offered_by']) ? $cart_item['offered_by'] : '';
 					printf(
@@ -170,7 +104,7 @@ $Talent_Fields = new Polen_Update_Fields();
 			</div>
 
 			<div class="row">
-				<div class="col-md-6">
+				<div class="col-12 col-md-6">
 					<?php
 					$name_to_video = isset($cart_item['name_to_video']) ? $cart_item['name_to_video'] : '';
 					printf(
@@ -185,7 +119,7 @@ $Talent_Fields = new Polen_Update_Fields();
 			</div>
 
 			<div class="row">
-				<div class="col-md-6">
+				<div class="col-12 col-md-6">
 					<?php
 					$email_to_video = isset($cart_item['email_to_video']) ? $cart_item['email_to_video'] : '';
 					printf(
@@ -200,7 +134,7 @@ $Talent_Fields = new Polen_Update_Fields();
 			</div>
 
 			<div class="row mt-3">
-				<div class="col-md-12 mb-4">
+				<div class="col-12 col-md-12 mb-4">
 					<span class="form-title">Qual ocasião do vídeo?</span>
 				</div>
 				<div class="col-md-6">
@@ -223,7 +157,7 @@ $Talent_Fields = new Polen_Update_Fields();
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-12 mb-4 mt-3">
+				<div class="col-12 col-md-12 mb-4 mt-3">
 					<span class="form-title">Instruções para o vídeo</span>
 				</div>
 				<div class="col-md-6">
@@ -242,7 +176,7 @@ $Talent_Fields = new Polen_Update_Fields();
 				</div>
 			</div>
 			<div class="row my-3">
-				<div class="col-md-12">
+				<div class="col-12 col-md-12">
 					<?php
 					$allow_video_on_page = isset($cart_item['allow_video_on_page']) ? $cart_item['allow_video_on_page'] : 'on';
 					$checked_allow = '';
@@ -262,7 +196,7 @@ $Talent_Fields = new Polen_Update_Fields();
 				</div>
 			</div>
 			<div class="row actions">
-				<div class="col-md-6 mb-4 mt-3">
+				<div class="col-12 col-md-6 mb-4 mt-3">
 					<button type="submit" class="btn btn-primary btn-lg btn-block py-4" name="" value="<?php esc_attr_e('Update cart', 'woocommerce'); ?>"><?php esc_html_e('Avançar', 'woocommerce'); ?></button>
 
 					<?php //do_action( 'woocommerce_cart_actions' );
