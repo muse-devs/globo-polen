@@ -53,7 +53,7 @@ class Polen_Talent {
             /**
              * Busca por talento
              */
-            add_filter('pre_get_posts', array($this, 'searchTalent'));
+            add_action('pre_get_posts', array($this, 'searchTalent'), 9 );
         }
     }
 
@@ -382,8 +382,8 @@ class Polen_Talent {
     
 
     public function searchTalent($query) {
-        if ($query->is_search && !is_admin()) {
-            $query->set('post_type', array('product'));
+        if( $query->is_search && !is_admin()) {
+            $query->set( 'post_type', array('product'));
         }
         return $query;
     }
