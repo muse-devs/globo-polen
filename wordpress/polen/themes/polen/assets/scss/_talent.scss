@@ -321,15 +321,22 @@
 	padding: 16px;
 	font-family: $font-secondary;
 	border-radius: 8px;
-	overflow: hidden;
+	// overflow: hidden;
 	box-sizing: border-box;
 	background-color: $secondary;
 	.header {
 		border-bottom: 1px dashed $light-25;
 	}
-	.details {
-		border-top: 1px dashed $light-25;
-		display: none;
+	.details-box {
+		max-height: 0px;
+		overflow: hidden;
+		transition: all ease 250ms;
+		.details {
+			border-top: 1px dashed $light-25;
+		}
+		&.show {
+			max-height: 500px;
+		}
 	}
 	.price-box {
 		position: relative;
@@ -345,7 +352,11 @@
 		border-radius: 50%;
 		color: $light-100;
 		background-color: $light-25;
-		&.active {
+		&:active,
+		&:focus {
+			outline: transparent;
+		}
+		&.-active {
 			transform: rotate(180deg);
 		}
 	}

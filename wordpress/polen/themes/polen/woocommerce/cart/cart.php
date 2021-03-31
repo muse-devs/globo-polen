@@ -35,17 +35,31 @@ $Talent_Fields = new Polen_Update_Fields();
 	</div>
 </div>
 
-<?php polen_get_talent_card(array(
-	"has_details" => true,
-	"name" => "Xuxa",
-	"career" => "Apresentadora",
-	"price" => "R$200",
-	"from" => "Eu Mesmo",
-	"to" => "Você Mesmo",
-	"category" => "Aniversário",
-	"mail" => "eu@mesmo.com",
-	"description" => "Felicidades para você, por este dia tão especial que é o seu aniversário. Parabéns, que possa ter muitos anos de vida, abençoados e felizes"
-)); ?>
+<?php
+foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
+    $product_id = apply_filters('woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key);
+    $_product   = apply_filters('woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key);
+    $talent_id = get_post_field('post_author', $product_id);
+    $thumbnail = wp_get_attachment_image_src($_product->get_image_id(), 'thumbnail')[0];
+    $talent = get_user_by('id', $talent_id);
+    
+    $update_fields = new Polen_Update_Fields();
+    $talent_data = $update_fields->get_vendor_data( $talent_id );
+
+    $talent_cart_detail = array(
+        "has_details" => false,
+        "avatar" => $thumbnail,
+        "name" => $_product->get_title(),
+        "career" => $talent_data->profissao,
+        "price" => $_product->get_price_html(),
+        "from" => "",
+        "to" => "",
+        "category" => "",
+        "mail" => "",
+        "description" => ""
+    );
+}
+polen_get_talent_card( $talent_cart_detail ); ?>
 
 <form class="woocommerce-cart-form" action="<?php echo esc_url(wc_get_checkout_url()); ?>" method="post">
 	<?php do_action('woocommerce_before_cart_table'); ?>
@@ -130,6 +144,19 @@ $Talent_Fields = new Polen_Update_Fields();
 				</div>
 			</div>
 
+			<?php
+			if ( is_user_logged_in() ) {
+				$current_user = wp_get_current_user();
+				$email_to_video = $current_user->user_email;
+				printf(
+					'<input type="hidden" placeholder="E-mail para receber updates" class="%s form-control form-control-lg" id="cart_email_to_video_%s" data-cart-id="%s" name="email_to_video" value="%s" required="required" />',
+					'polen-cart-item-data',
+					$cart_item_key,
+					$cart_item_key,
+					$email_to_video,
+				);
+			?>
+			<?php } else { ?>
 			<div class="row">
 				<div class="col-12 col-md-6">
 					<?php
@@ -144,6 +171,7 @@ $Talent_Fields = new Polen_Update_Fields();
 					?>
 				</div>
 			</div>
+			<?php } ?>
 
 			<div class="row mt-3">
 				<div class="col-12 col-md-12 mb-4">

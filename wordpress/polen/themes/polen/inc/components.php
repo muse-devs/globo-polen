@@ -337,7 +337,7 @@ function polen_get_talent_card($talent)
 	<div class="my-4 talent-card">
 		<header class="row pb-3 header">
 			<div class="col-3">
-				<div class="avatar" style="background-image: url(<?php echo isset($talent->avatar) ? $talent->avatar : TEMPLATE_URI . '/assets/img/avatar.png';  ?>)"></div>
+				<div class="avatar" style="background-image: url(<?php echo isset($talent["avatar"]) ? $talent["avatar"] : TEMPLATE_URI . '/assets/img/avatar.png';  ?>)"></div>
 			</div>
 			<div class="col-9 mt-2">
 				<h4 class="name"><?php echo $talent["name"]; ?></h4>
@@ -348,11 +348,11 @@ function polen_get_talent_card($talent)
 			<span class="cat">Você vai pagar</span>
 			<p class="price mt-2"><?php echo $talent["price"]; ?></p>
 			<?php if ($talent["has_details"]) : ?>
-				<button class="show-details"><?php Icon_Class::polen_icon_chevron("down") ?></button>
+				<button class="show-details" onclick="showDetails()"><?php Icon_Class::polen_icon_chevron("down") ?></button>
 			<?php endif; ?>
 		</div>
-		<footer class="row mt-3 details">
-			<div class="col pt-4">
+		<footer class="row details-box">
+			<div class="col pt-4 mt-3 details">
 				<div class="row personal">
 					<div class="col d-flex">
 						<div class="item">
@@ -389,6 +389,15 @@ function polen_get_talent_card($talent)
 			</div>
 		</footer>
 	</div>
+	<script>
+		var details = document.querySelector(".details-box");
+		var btn = document.querySelector(".show-details");
+
+		function showDetails() {
+			details.classList.toggle("show");
+			btn.classList.toggle("-active");
+		}
+	</script>
 <?php
 }
 
