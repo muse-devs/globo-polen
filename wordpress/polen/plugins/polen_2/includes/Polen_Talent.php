@@ -441,5 +441,33 @@ class Polen_Talent {
         }
     }
 
+    public function get_time_to_videos( $user ){
+        if( $this->is_user_talent( $user ) ) {
+            $pending = $this->get_talent_orders( $user->ID, false, true );
+            if( is_array( $pending ) && isset( $pending['qtd'] ) && (int) $pending['qtd'] > 0  ){
+                $time_to_spend = (int) $pending['qtd']*45;
+                $total_time = $time_to_spend;
+                
+                if( $time_to_spend > 60 ){
+                    $hours = floor($total_time/3600);
+                    $minutes = floor(($total_time/60) % 60);
+                    $seconds = $total_time % 60;
+                    
+                    if( empty( $hours ) && !empty( $minutes ) ){
+                        $total_time = str_pad( $minutes, 2, 0, STR_PAD_LEFT ).':'.str_pad( $seconds, 2, 0, STR_PAD_LEFT ).' minutos ';
+                    }
+
+                    if( empty( $minutes ) && !empty( $seconds ) ){
+                        $total_time = str_pad( $seconds, 2, 0, STR_PAD_LEFT ).' segundos ';
+                    } 
+                }
+
+                return $total_time;
+            }
+        }
+        
+        return false;
+    }
+
 }
     
