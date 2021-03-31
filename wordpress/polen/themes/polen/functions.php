@@ -210,3 +210,8 @@ require get_template_directory() . '/inc/components.php';
  * File responsible to get all collection for front
  */
 require_once get_template_directory() . '/inc/collection-front.php';
+
+/**
+ * Arquivo responsavel por retornos HTML e icones
+ */
+require_once get_template_directory() . '/classes/Icon_Class.php';
