@@ -308,7 +308,7 @@ class Polen_Talent {
             $talent_products = $wpdb->get_results($sql_product);
 
             if( !$status ){
-                $status = 'wc-on-hold';
+                $status = 'wc-payment-approved';
             }
 
             $select = 'order_items.order_id'; 
@@ -416,7 +416,7 @@ class Polen_Talent {
             $talent_products = $wpdb->get_results($sql_product);
 
             if( !$status ){
-                $status = 'wc-on-hold';
+                $status = 'wc-payment-approved';
             }
 
             if (is_countable($talent_products) && count($talent_products) > 0) {
@@ -448,11 +448,15 @@ class Polen_Talent {
                 $time_to_spend = (int) $pending['qtd']*45;
                 $total_time = $time_to_spend;
                 
-                if( $time_to_spend > 60 ){
+                if( $time_to_spend >= 45 ){
                     $hours = floor($total_time/3600);
                     $minutes = floor(($total_time/60) % 60);
                     $seconds = $total_time % 60;
                     
+                    if( !empty( $hours ) ){
+                        $total_time = str_pad( $hours, 2, 0, STR_PAD_LEFT ).':'.str_pad( $minutes, 2, 0, STR_PAD_LEFT ).':'.str_pad( $seconds, 2, 0, STR_PAD_LEFT ).' horas ';
+                    }
+
                     if( empty( $hours ) && !empty( $minutes ) ){
                         $total_time = str_pad( $minutes, 2, 0, STR_PAD_LEFT ).':'.str_pad( $seconds, 2, 0, STR_PAD_LEFT ).' minutos ';
                     }
