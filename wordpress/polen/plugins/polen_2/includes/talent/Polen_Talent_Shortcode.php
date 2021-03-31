@@ -34,19 +34,10 @@ class Polen_Talent_Shortcode
         return $data;
     }
     
-    private function populate_script()
+    private function get_ajax_settings( Polen_Cart_Item $item )
     {
-        $order_id = filter_input( INPUT_GET, 'order_id', FILTER_SANITIZE_NUMBER_INT );
-        if( empty( $order_id ) ) {
-            wp_die();
-        }
-        
-        $order = wc_get_order( $order_id );
-        $item = Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
-        
         $ajax_settings = array(
-//            'ajax_url' => admin_url( 'admin-ajax.php' ),
-            'nonce'    => wp_create_nonce( 'my-action_' ),
+            'nonce'    => wp_create_nonce( 'upload_video_' . $order_id ),
             'action' => 'create_video_slot_vimeo',
             'email_to_video' => $item->get_email_to_video(),
             'instructions_to_video' => $item->get_instructions_to_video(),
@@ -54,7 +45,28 @@ class Polen_Talent_Shortcode
             'offered_by' => $item->get_offered_by(),
             'video_category' => $item->get_video_category(),
             'video_to' => $item->get_video_to(),
+            'order_id' => $order_id,
         );
+        return $ajax_settings;
+    }
+    
+    private function populate_script()
+    {
+        $order_id = filter_input( INPUT_GET, 'order_id', FILTER_SANITIZE_NUMBER_INT );
+        if( empty( $order_id ) ) {
+            //TODO: Quando o ID Não existir
+            wp_die();
+        }
+        
+        $order = wc_get_order( $order_id );
+        
+        if( empty( $order ) ) {
+            //TODO: Quando a $order não existir
+            wp_die();
+        }
+        
+        $item = Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
+        $ajax_settings = $this->get_ajax_settings( $item );
         
         $polen_public = new Polen_Public('', '');
         $plugin_url = $polen_public->get_url_public_js();

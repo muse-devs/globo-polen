@@ -40,9 +40,10 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
         $token = 'ecdf5727a7b96ec6179c5090db5851ba';
 
         $lib = new Vimeo( $client_id, $client_secret, $token );
+        $order_id = filter_input( INPUT_POST, 'order_id', FILTER_SANITIZE_NUMBER_INT );
 //        return 'asdadads';
 //        echo $data;
-        $data = ( [false, true, true] );
+        $data = ( [false, true, true, $order_id] );
         wp_send_json_success( $data );
         wp_die();
     }
