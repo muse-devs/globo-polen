@@ -21,7 +21,7 @@ if (in_array('user_talent',  $logged_user->roles)) {
 		if (empty($talent_orders)) {
 			echo "<p>Você não possui novas solicitações</p>";
 		} else {
-			echo "<p class='mb-5'>Você tem <strong><span id='order-count'>" . count($talent_orders) . "</span> pedidos de vídeo</strong>, seus pedidos expiram em até 7 dias.</p>";
+			echo "<p class='mb-5'>Você tem <strong><span id='order-count'>" . count($talent_orders) . "</span> pedido(s) de vídeo</strong>, seus pedidos expiram em até 7 dias.</p>";
 			if (count($talent_orders) > 0) {
 				foreach ($talent_orders as $order) : ?>
 					<div class="row mb-5" box-id="<?php echo $order['order_id']; ?>">
