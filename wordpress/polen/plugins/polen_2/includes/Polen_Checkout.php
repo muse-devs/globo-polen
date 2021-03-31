@@ -16,10 +16,12 @@ class Polen_Checkout
             add_filter( 'woocommerce_save_account_details', array( $this, 'save_account_details' ) );
             //add_action( 'woocommerce_before_checkout_billing_form', array( $this, 'add_cpf_and_phone_to_checkout') );
             //add_action( 'woocommerce_checkout_update_order_meta', array( $this, 'save_order_meta_from_checkout' ) );
+            add_action( 'woocommerce_before_checkout_billing_form', array( $this, 'add_name_and_email_to_checkout') );
             add_filter( 'woocommerce_checkout_fields', array( $this, 'remove_woocommerce_fields' ) );
             add_filter( 'woocommerce_enable_order_notes_field', '__return_false' );
             add_filter( 'the_title',  array( $this, 'remove_thankyou_title' ), 20, 2 );
             add_action( 'woocommerce_checkout_order_processed', array( $this, 'checkout_set_order_client' ) );
+            //add_filter( 'woocommerce_form_field_args', array( $this, 'teste' ), 11, 2 );
         }
     }
 
@@ -33,6 +35,9 @@ class Polen_Checkout
             'billing_postcode',
             'billing_country',
             'billing_state',
+            'billing_email',
+            'billing_first_name',
+            'billing_last_name'
         );
 
         foreach( $removed_keys as $key ) {
@@ -95,6 +100,7 @@ class Polen_Checkout
             woocommerce_form_field( 'billing_cpf', $args, $checkout->get_value( 'billing_cpf' ) );
         }
         */
+        /*
         $billing_phone = get_user_meta( get_current_user_id(), 'billing_phone', true );
         if( ! $billing_phone || is_null( $billing_phone ) || empty( $billing_phone ) || strlen( $billing_phone ) != 14 ) {
             $args = array(
@@ -108,7 +114,7 @@ class Polen_Checkout
             );
             woocommerce_form_field( 'billing_phone', $args, $checkout->get_value( 'billing_phone' ) );
         }
-
+        */
     }
 
     /**
@@ -178,6 +184,52 @@ class Polen_Checkout
                     update_post_meta( $order_id, '_customer_user', $user->ID );
                 }
             }
+        }
+    }
+
+
+    /**
+     * Adicionar o campo de nome, sobrenome e e-mail no checkout para caso o usuário não possua.
+     */
+    public function add_name_and_email_to_checkout( $checkout ) {
+        $billing_first_name = get_user_meta( get_current_user_id(), 'billing_first_name', true );
+        if( ! $billing_first_name || is_null( $billing_first_name ) || empty( $billing_first_name ) ) {   
+            $args = array(
+                "type"        => "text",
+                "required"    => true,
+                "input_class" => array( "form-control", "input-text" ),
+                "label"       => "Nome",
+                "label_class" => array( 'title-on-checkout-notes' ),
+                "placeholder" => "nome",
+            );
+            woocommerce_form_field( 'billing_first_name', $args, $checkout->get_value( 'billing_first_name' ) );
+        }        
+        
+        $billing_last_name = get_user_meta( get_current_user_id(), 'billing_last_name', true );
+        if( ! $billing_last_name || is_null( $billing_last_name ) || empty( $billing_last_name ) ) {   
+            $args = array(
+                "type"        => "text",
+                "required"    => true,
+                "input_class"       => array( "form-control", "input-text" ),
+                "label"       => "Sobrenome",
+                "label_class" => array( 'title-on-checkout-notes' ),
+                "placeholder" => "Sobrenome",
+            );
+            woocommerce_form_field( 'billing_last_name', $args, $checkout->get_value( 'billing_last_name' ) );
+        }
+
+        $billing_email = get_user_meta( get_current_user_id(), 'billing_email', true );
+        if( ! $billing_email || is_null( $billing_email ) || empty( $billing_email ) ) {   
+            $args = array(
+                "type"        => "text",
+                "required"    => true,
+                "input_class"       => array( "form-control", "input-text" ),
+                "label"       => "E-mail",
+                "label_class" => array( 'title-on-checkout-notes' ),
+                "placeholder" => "Informe seu e-mail",
+                "maxlength"   => 14,
+            );
+            woocommerce_form_field( 'billing_email', $args, $checkout->get_value( 'billing_email' ) );
         }
     }
 }
