@@ -112,4 +112,14 @@ class Polen_Public {
             return dirname( __FILE__ ) . '/partials/';
         }
 
+                
+        
+        /**
+         * 
+         * @return string
+         */
+        public function get_url_public_js()
+        {
+            return plugin_dir_url( __FILE__ ) . 'js/';
+        }
 }

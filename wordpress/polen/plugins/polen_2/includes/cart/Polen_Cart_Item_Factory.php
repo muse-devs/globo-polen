@@ -13,14 +13,14 @@ class Polen_Cart_Item_Factory
      * @return Automattic\WooCommerce\Admin\Overrides\Order
      * @throws Exception
      */
-    public static function cart_item_wc_factory_from_order( Order $order )
-    {
-        $data = $order->get_items();
-        foreach( $data as $item_id => $item ) {
-            return $item;
-        }
-        throw new Exception( 'has no item into the cart', 500 );
-    }
+//    public static function cart_item_wc_factory_from_order( Order $order )
+//    {
+//        $data = $order->get_items();
+//        foreach( $data as $item_id => $item ) {
+//            return $item;
+//        }
+//        throw new Exception( 'has no item into the cart', 500 );
+//    }
     
     
     /**

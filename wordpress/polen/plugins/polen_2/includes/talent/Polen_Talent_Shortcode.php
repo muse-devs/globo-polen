@@ -42,24 +42,28 @@ class Polen_Talent_Shortcode
         }
         
         $order = wc_get_order( $order_id );
-
         $item = Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
-        $item->get_email_to_video();
-        $item->get_instructions_to_video();
-        $item->get_name_to_video();
-        $item->get_offered_by();
-        $item->get_video_category();
-        $item->get_video_to();
         
-        wp_enqueue_script( 'myshortcodejs', '/path/to/js/file.js' );
+        $ajax_settings = array(
+//            'ajax_url' => admin_url( 'admin-ajax.php' ),
+            'nonce'    => wp_create_nonce( 'my-action_' ),
+            'action' => 'create_video_slot_vimeo',
+            'email_to_video' => $item->get_email_to_video(),
+            'instructions_to_video' => $item->get_instructions_to_video(),
+            'name_to_video' => $item->get_name_to_video(),
+            'offered_by' => $item->get_offered_by(),
+            'video_category' => $item->get_video_category(),
+            'video_to' => $item->get_video_to(),
+        );
+        
+        $polen_public = new Polen_Public('', '');
+        $plugin_url = $polen_public->get_url_public_js();
+        wp_enqueue_script( 'polen-upload-video', "{$plugin_url}upload-video.js" );
+        
         wp_localize_script(
-            'myshortcodejs',
-            'my_ajax_obj',
-            array(
-                'ajax_url' => admin_url( 'admin-ajax.php' ),
-                'nonce'    => wp_create_nonce( 'my-action_' ),
-                'action' => 'create_video_slot_vimeo',
-            )
+            'polen-upload-video',
+            'upload_video',
+            $ajax_settings
         );
     }
 }

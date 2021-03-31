@@ -19,7 +19,7 @@ class Polen_Cart_Item
      * Item que está o carrinho padrao do WC
      * @var \WC_Order_Item_Product
      */
-    private $item;
+    public $item;
     
     public function __construct( \WC_Order_Item_Product $item )
     {
