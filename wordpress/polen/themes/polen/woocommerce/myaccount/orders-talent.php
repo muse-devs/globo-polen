@@ -9,6 +9,7 @@ $logged_user = wp_get_current_user();
 if (in_array('user_talent',  $logged_user->roles)) {
 	$talent_id = $logged_user->ID;
 	$talent_orders = $polen_talent->get_talent_orders($talent_id);
+	$video_time = $polen_talent->video_time;
 }
 
 ?>
@@ -46,7 +47,8 @@ if (in_array('user_talent',  $logged_user->roles)) {
 										</div>
 									</div>
 									<div class="col-md-4 text-right">
-										<button class="btn btn-primary btn-sm">Visualizar</button>
+										<a href="<?php echo  wc_get_endpoint_url( 'view-order', $order['order_id'], wc_get_page_permalink( 'myaccount' ) );?>" 
+											class="btn btn-primary btn-sm" >Visualizar</a>
 										<!-- <button class="btn btn-outline-light btn-sm">Visualizar</button> -->
 									</div>
 								</div>
@@ -59,11 +61,11 @@ if (in_array('user_talent',  $logged_user->roles)) {
 											</div>
 											<div class="col-md-4">
 												<p class="title">Tempo estimado</p>
-												<p class="description">2 min</p>
+												<p class="description"><?php echo $video_time.' segundos';?></p>
 											</div>
 											<div class="col-md-4">
 												<p class="title">Válido por</p>
-												<p class="description">24h</p>
+												<p class="description"><?php echo $polen_talent->video_expiration_time( $logged_user, $order['order_id'] );?></p>
 											</div>
 										</div>
 									</div>

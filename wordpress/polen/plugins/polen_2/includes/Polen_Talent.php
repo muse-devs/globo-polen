@@ -467,11 +467,43 @@ class Polen_Talent {
                         $total_time = str_pad( $seconds, 2, 0, STR_PAD_LEFT ).' segundos ';
                     } 
                 }
-
                 return $total_time;
             }
         }
-        
+        return false;
+    }
+
+    /**
+     * Cálculo para tempo de expiração do pedido
+     */
+    public function video_expiration_time( $user, $order_id ){
+        if( $this->is_user_talent( $user ) && !empty( $order_id )) {
+            $order = wc_get_order( $order_id );
+            $first_dateTime = new \DateTime($order->order_date); 
+            $last_dateTime = new \DateTime($order->order_date); 
+
+            $current_date = new \DateTime( "now", new \DateTimeZone( get_option( 'timezone_string' ) ) );
+            $last_dateTime->add(new \DateInterval('P7D'));
+            $fomattedDate = $last_dateTime->format('Y-m-d H:i:s');
+
+            $interval = $current_date->diff($last_dateTime);
+            if( $interval->format('%D') > 1 && $interval->format('%R') == '+' ){
+                return $interval->format('%D dias');
+            }
+
+            if( $interval->format('%D') == 1 && $interval->format('%R') == '+' ){
+                return $interval->format('%D dia e %H:%ih');
+            }    
+
+            if( $interval->format('%D') < 1 && $interval->format('%R') == '+' ){
+                return $interval->format('%H:%ih');
+            }    
+
+            if( $interval->format('%R') == '-' ){
+                return 'Expirado!';
+            }            
+
+        }    
         return false;
     }
 
