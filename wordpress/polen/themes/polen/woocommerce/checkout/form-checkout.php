@@ -39,7 +39,7 @@ $Talent_Fields = new Polen_Update_Fields();
 	<div class="row">
 		<div class="col-md-8">
 			<?php
-				if( get_current_user_id() > 0 ){ ?>
+				if( is_user_logged_in() && get_current_user_id() > 0 ){ ?>
 					<h3>Você está logado como:</h3>
 			<?php   $user_id = get_current_user_id(); 	 
 					$user_data = get_userdata( $user_id );
@@ -48,6 +48,7 @@ $Talent_Fields = new Polen_Update_Fields();
 			?>	
 			<!-- Cabeçalho do Artista -->
 			<?php
+			/*
 			foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) :
 				$_product   = apply_filters('woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key);
 				$product_id = apply_filters('woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key);
@@ -115,7 +116,8 @@ $Talent_Fields = new Polen_Update_Fields();
 						</div>
 					</div>
 				<?php endif; ?>
-			<?php endforeach; ?>
+			<?php endforeach; */ 
+			?>
 
 			<?php if ($checkout->get_checkout_fields()) : ?>
 
