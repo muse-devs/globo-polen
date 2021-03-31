@@ -10,8 +10,10 @@ namespace Polen\Includes;
 class Polen_Talent {
 
     public function __construct($static = false) {
+        $this->video_time = 45;
         if ($static) {
             $this->tallent_slug = 'talent';
+            
             add_action('add_meta_boxes', array($this, 'choose_talent_metabox'));
             add_filter('save_post', array($this, 'save_talent_on_product'));
             add_action('rest_api_init', array($this, 'tallent_rest_itens'));
@@ -445,7 +447,7 @@ class Polen_Talent {
         if( $this->is_user_talent( $user ) ) {
             $pending = $this->get_talent_orders( $user->ID, false, true );
             if( is_array( $pending ) && isset( $pending['qtd'] ) && (int) $pending['qtd'] > 0  ){
-                $time_to_spend = (int) $pending['qtd']*45;
+                $time_to_spend = (int) $pending['qtd'] * (int) $this->video_time;
                 $total_time = $time_to_spend;
                 
                 if( $time_to_spend >= 45 ){
