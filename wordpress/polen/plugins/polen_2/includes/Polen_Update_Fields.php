@@ -41,19 +41,19 @@ class Polen_Update_Fields
 
     public function check_role_talent_fields( \WP_Error $errors, $update, $user )
     {
-//        if( 'user_talent' === $user->role ) {
-//            if( empty( $_REQUEST['talent_alias'] )) {
-//                $errors->add( 'slug-required', 'Slug é obrigatório para função Talento');
-//            }
-//
-//            if( 'PJ' == $_REQUEST['natureza_juridica'] && empty( $_REQUEST['cnpj'] )) {
-//                $errors->add('cnpj-required', 'CNPJ é um dado obrigatório, para talentos PJ');
-//            }
-//
-//            if( 'PF' ==  $_REQUEST['natureza_juridica'] && empty( $_REQUEST['cpf'] )) {
-//                $errors->add('cpf-required', 'CPF é um dado obrigatório, para talentos PF');
-//            }
-//        }
+        if( in_array( 'user_talent', $user->role ) ) {
+            if( empty( $_REQUEST['talent_alias'] )) {
+                $errors->add( 'slug-required', 'Slug é obrigatório para função Talento');
+            }
+
+            if( 'PJ' == $_REQUEST['natureza_juridica'] && empty( $_REQUEST['cnpj'] )) {
+                $errors->add('cnpj-required', 'CNPJ é um dado obrigatório, para talentos PJ');
+            }
+
+            if( 'PF' ==  $_REQUEST['natureza_juridica'] && empty( $_REQUEST['cpf'] )) {
+                $errors->add('cpf-required', 'CPF é um dado obrigatório, para talentos PF');
+            }
+        }
     }
 
     public function remove_woocommerce_fields() {
@@ -258,7 +258,6 @@ class Polen_Update_Fields
             if( is_wp_error( $insert ) ) {
                 var_dump( $wpdb->print_error() );die;
             }
-            echo '<pre>';var_dump($wpdb->print_error(),$args,$wpdb);die;
         }
     }
 

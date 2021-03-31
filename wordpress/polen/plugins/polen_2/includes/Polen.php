@@ -60,6 +60,7 @@ class Polen {
         new Polen_Account( true );
         new Polen_Order( true );
         new Polen_WooCommerce( true );
+        new Talent\Polen_Talent_Shortcode();
     }
 
     /**
