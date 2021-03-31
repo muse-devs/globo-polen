@@ -37,13 +37,20 @@ $Talent_Fields = new Polen_Update_Fields();
 
 <?php
 foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
+    $product_id = apply_filters('woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key);
     $_product   = apply_filters('woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key);
     $talent_id = get_post_field('post_author', $product_id);
+    $thumbnail = wp_get_attachment_image_src($_product->get_image_id(), 'thumbnail')[0];
+    $talent = get_user_by('id', $talent_id);
     
+    $update_fields = new Polen_Update_Fields();
+    $talent_data = $update_fields->get_vendor_data( $talent_id );
+
     $talent_cart_detail = array(
         "has_details" => false,
+        "avatar" => $thumbnail,
         "name" => $_product->get_title(),
-        "career" => "Apresentadora",
+        "career" => $talent_data->profissao,
         "price" => $_product->get_price_html(),
         "from" => "",
         "to" => "",
