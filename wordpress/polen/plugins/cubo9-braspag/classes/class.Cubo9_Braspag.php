@@ -168,8 +168,10 @@ class Cubo9_Braspag {
             $order_id    = $order->get_id();
             $amount      = number_format( $order->get_total(), 2, '', '' );
             $user        = $order->get_user();
-            $billing_cpf = ( isset( $user->ID ) ) ? get_user_meta( $user->ID, 'billing_cpf', true ) : $_REQUEST['billing_cpf'];
-            $billing_phone = ( isset( $user->ID ) ) ? get_user_meta( $user->ID, 'billing_phone', true ) : $_REQUEST['billing_phone'];
+            $billing_cpf = ( isset( $_REQUEST['billing_cpf'] ) ) ? $_REQUEST['billing_cpf'] : '';
+            $billing_cpf = ( isset( $user->ID ) ) ? get_user_meta( $user->ID, 'billing_cpf', true ) : $billing_cpf;
+            $billing_phone = ( isset( $_REQUEST['billing_phone'] ) ) ? $_REQUEST['billing_phone'] : '';
+            $billing_phone = ( isset( $user->ID ) ) ? get_user_meta( $user->ID, 'billing_phone', true ) : $billing_phone;
 
             /**
              * Metadados da compra
@@ -192,11 +194,30 @@ class Cubo9_Braspag {
             /**
              * Dados do usuário comprador.
              */
-            $user_display_name = substr( $user->display_name . $this->SANDBOX_NAME_SUFIX, 0, 61 );
+            if( isset( $user->display_name ) ) {
+                $user_display_name = substr( $user->display_name . $this->SANDBOX_NAME_SUFIX, 0, 61 );
+            } else {
+                $user_display_name = '' . $this->SANDBOX_NAME_SUFIX;
+            }
+
             $document_type     = 'CPF';
-            $document_number   = substr( preg_replace( '/[^0-9]/', '', get_user_meta( $user->ID, 'billing_cpf', true ) ), 0, 18 );
+            $document_number   = substr( preg_replace( '/[^0-9]/', '', $billing_cpf ), 0, 18 );
             $user_phone        = substr( preg_replace( '/[^0-9]/', '', $order_data['billing']['phone'] ), 0, 15 );
             $user_mobile_phone = substr( preg_replace( '/[^0-9]/', '', $order_data['billing']['phone'] ), 0, 15 );
+
+            /**
+             * E-mail do comprador
+             */
+            if( isset( $order_data['billing']['email'] ) && ! empty( $order_data['billing']['email'] ) ) {
+                $billing_email = $order_data['billing']['email'];
+            } elseif ( is_user_logged_in() ) {
+                $current_user = wp_get_current_user();
+                $billing_email = $current_user->user_email;
+            } else {
+                $items = WC()->cart->get_cart();
+                $key = array_key_first( $items );
+                $billing_email = $items[ $key ][ 'email_to_video' ];
+            }
 
             /**
              * Dados do cartão de Crédito ou Débito.
@@ -219,7 +240,11 @@ class Cubo9_Braspag {
                 $creditcard_expiration = substr( str_replace( ' ', '', trim( $_REQUEST['braspag_creditcardValidity'] ) ), 0, 7 );
                 $creditcard_number     = substr( preg_replace( '/[^0-9]/', '', $_REQUEST['braspag_creditcardNumber'] ), 0 , 19 );
                 $creditcard_holder     = substr( trim( strtoupper( $_REQUEST['braspag_creditcardName'] ) ), 0, 50 );
-                $creditcard_holder_cpf = preg_replace( '/[^0-9]/', '', $_REQUEST['braspag_creditcardCpf'] );
+                if( isset ( $_REQUEST['braspag_creditcardCpf'] ) ) {
+                    $creditcard_holder_cpf = preg_replace( '/[^0-9]/', '', $_REQUEST['braspag_creditcardCpf'] );
+                } else {
+                    $creditcard_holder_cpf = '';
+                }
                 $creditcard_save       = ( isset( $_REQUEST['braspag_saveCreditCard'] ) && (bool) $_REQUEST['braspag_saveCreditCard'] === true ) ? true : false;
 
                 $CreditCardData = array(
@@ -257,7 +282,7 @@ class Cubo9_Braspag {
                 'Name'            => $user_display_name,
                 'IdentityType'    => $document_type,
                 'Identity'        => $document_number,
-                'Email'           => substr( $order_data['billing']['email'], 0, 60 ),
+                'Email'           => substr( $billing_email, 0, 60 ),
                 'Phone'           => $user_phone,
                 'Mobile'          => $user_mobile_phone,
                 'DeliveryAddress' => array(
@@ -327,7 +352,7 @@ class Cubo9_Braspag {
 
             $body = json_encode( $request );
 
-            $response = wp_remote_post( $this->URL_CIELO_COMMERCE_API . '/1/sales', array(
+            $response = wp_remote_post( $this->URL_CIELO_COMMERCE_API . '1/sales', array(
                     'method'  => 'POST',
                     'timeout' => 1000,
                     'headers' => $headers,
@@ -353,9 +378,17 @@ class Cubo9_Braspag {
                 add_post_meta( $this->order_id, 'braspag_response_body', $response_body );
                 add_post_meta( $this->order_id, 'braspag_response_body_json', $response_body_json );
 
-                add_post_meta( $this->order_id, 'braspag_payment_status', $response_body_json->Payment->Status );
-                add_post_meta( $this->order_id, 'braspag_payment_fraud_analysis_status', $response_body_json->Payment->FraudAnalysis->Status );
-                add_post_meta( $this->order_id, 'braspag_payment_fraud_analysis_status_description', $response_body_json->Payment->FraudAnalysis->StatusDescription );
+                if( isset( $response_body_json->Payment->Status ) ) {
+                    add_post_meta( $this->order_id, 'braspag_payment_status', $response_body_json->Payment->Status );
+                }
+
+                if( isset( $response_body_json->Payment->FraudAnalysis->Status ) ) {
+                    add_post_meta( $this->order_id, 'braspag_payment_fraud_analysis_status', $response_body_json->Payment->FraudAnalysis->Status );
+                }
+
+                if( isset( $response_body_json->Payment->FraudAnalysis->StatusDescription ) ) {
+                    add_post_meta( $this->order_id, 'braspag_payment_fraud_analysis_status_description', $response_body_json->Payment->FraudAnalysis->StatusDescription );
+                }
 
                 if( 
                     intval( strval( $response[ 'response' ][ 'code' ] ) ) === intval( '201' ) 
@@ -458,7 +491,7 @@ class Cubo9_Braspag {
                         'message'  => 'Sucesso!',
                         'redirect' => $order->get_checkout_order_received_url(),
                     );
-                } elseif( (int) $response_body_json->Payment->FraudAnalysis->Status === (int) 3 && strtoupper( $response_body_json->Payment->FraudAnalysis->StatusDescription ) == strtoupper('REVIEW') ) {
+                } elseif( isset( $response_body_json->Payment->FraudAnalysis->Status ) && (int) $response_body_json->Payment->FraudAnalysis->Status === (int) 3 && strtoupper( $response_body_json->Payment->FraudAnalysis->StatusDescription ) == strtoupper('REVIEW') ) {
                     $order->update_status( 'payment-in-revision' );
                     return array(
                         'type' => 'review',

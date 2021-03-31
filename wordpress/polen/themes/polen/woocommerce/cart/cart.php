@@ -85,8 +85,8 @@ $Talent_Fields = new Polen_Update_Fields();
 					}
 
 					printf(
-						'<input type="radio" class="%s" id="cart_video_to_%s" data-cart-id="%s" name="video_to" value="other_one" %s > Outra pessoa
-						<input type="radio" class="%s ml-4" id="cart_video_to_%s" data-cart-id="%s" name="video_to" value="to_myself" %s > Para mim',
+						'<input type="radio" checked="true" class="%s cart-video-to" id="cart_video_to_%s" data-cart-id="%s" name="video_to" value="other_one" %s > Outra pessoa
+						<input type="radio" class="%s ml-4 cart-video-to" id="cart_video_to_%s" data-cart-id="%s" name="video_to" value="to_myself" %s > Para mim',
 						'polen-cart-item-data',
 						$cart_item_key,
 						$cart_item_key,
@@ -100,7 +100,7 @@ $Talent_Fields = new Polen_Update_Fields();
 				</div>
 			</div>
 
-			<div class="row mt-3">
+			<div class="row mt-3 video-to-info">
 				<div class="col-12 col-md-6">
 					<?php
 					$offered_by = isset($cart_item['offered_by']) ? $cart_item['offered_by'] : '';
@@ -115,7 +115,7 @@ $Talent_Fields = new Polen_Update_Fields();
 				</div>
 			</div>
 
-			<div class="row">
+			<div class="row video-to-info">
 				<div class="col-12 col-md-6">
 					<?php
 					$name_to_video = isset($cart_item['name_to_video']) ? $cart_item['name_to_video'] : '';
@@ -130,6 +130,19 @@ $Talent_Fields = new Polen_Update_Fields();
 				</div>
 			</div>
 
+			<?php
+			if ( is_user_logged_in() ) {
+				$current_user = wp_get_current_user();
+				$email_to_video = $current_user->user_email;
+				printf(
+					'<input type="hidden" placeholder="E-mail para receber updates" class="%s form-control form-control-lg" id="cart_email_to_video_%s" data-cart-id="%s" name="email_to_video" value="%s" required="required" />',
+					'polen-cart-item-data',
+					$cart_item_key,
+					$cart_item_key,
+					$email_to_video,
+				);
+			?>
+			<?php } else { ?>
 			<div class="row">
 				<div class="col-12 col-md-6">
 					<?php
@@ -144,6 +157,7 @@ $Talent_Fields = new Polen_Update_Fields();
 					?>
 				</div>
 			</div>
+			<?php } ?>
 
 			<div class="row mt-3">
 				<div class="col-12 col-md-12 mb-4">

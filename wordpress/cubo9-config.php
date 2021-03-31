@@ -24,7 +24,7 @@ define( 'JWT_AUTH_CORS_ENABLE', true );
  * 
  * ATENÇÃO: Deixe como falso no ambiente de produção.
  */
-define( 'DEV_ENV', true );
+define( 'ENV_DEV', true );
 
 /**
  * Caso o WP_DEBUG esteja ativo
