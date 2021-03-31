@@ -326,6 +326,67 @@ function polen_front_get_talent_videos($talent, $items = array(
 <?php
 }
 
+function polen_get_talent_card($talent)
+{
+?>
+	<div class="my-4 talent-card">
+		<header class="row pb-3 header">
+			<div class="col-3">
+				<div class="avatar" style="background-image: url(<?php echo isset($talent->avatar) ? $talent->avatar : TEMPLATE_URI . '/assets/img/avatar.png';  ?>)"></div>
+			</div>
+			<div class="col-9 mt-2">
+				<h4 class="name"><?php echo $talent["name"]; ?></h4>
+				<h5 class="cat"><?php echo $talent["career"]; ?></h5>
+			</div>
+		</header>
+		<div class="price-box pt-2">
+			<span class="cat">Você vai pagar</span>
+			<p class="price mt-2"><?php echo $talent["price"]; ?></p>
+			<?php if ($talent["has_details"]) : ?>
+				<button class="show-details"><?php Icon_Class::polen_icon_chevron("down") ?></button>
+			<?php endif; ?>
+		</div>
+		<footer class="row mt-3 details">
+			<div class="col pt-4">
+				<div class="row personal">
+					<div class="col d-flex">
+						<div class="item">
+							<span class="title big">Vídeo de</span>
+							<p class="value"><?php echo $talent["from"]; ?></p>
+						</div>
+						<div class="item mx-3">
+							<?php Icon_Class::polen_icon_arrows(); ?>
+						</div>
+						<div class="item">
+							<span class="title big">Vídeo para</span>
+							<p class="value"><?php echo $talent["to"]; ?></p>
+						</div>
+					</div>
+				</div>
+				<div class="row ocasion">
+					<div class="col-12">
+						<span class="title big">Ocasião</span>
+						<p class="value"><?php echo $talent["category"]; ?></p>
+					</div>
+				</div>
+				<div class="row mail">
+					<div class="col-12">
+						<span class="title">e-mail</span>
+						<p class="value"><?php echo $talent["mail"]; ?></p>
+					</div>
+				</div>
+				<div class="row description">
+					<div class="col-12">
+						<span class="title">Instruções</span>
+						<p class="value"><?php echo $talent["description"]; ?></p>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div>
+<?php
+}
+
 /**
  * Gets the thumbnail url for a vimeo video using the video id. This only works for public videos.
  *

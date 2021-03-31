@@ -35,7 +35,19 @@ $Talent_Fields = new Polen_Update_Fields();
 	</div>
 </div>
 
-<form class="woocommerce-cart-form mt-5" action="<?php echo esc_url(wc_get_checkout_url()); ?>" method="post">
+<?php polen_get_talent_card(array(
+	"has_details" => true,
+	"name" => "Xuxa",
+	"career" => "Apresentadora",
+	"price" => "R$200",
+	"from" => "Eu Mesmo",
+	"to" => "Você Mesmo",
+	"category" => "Aniversário",
+	"mail" => "eu@mesmo.com",
+	"description" => "Felicidades para você, por este dia tão especial que é o seu aniversário. Parabéns, que possa ter muitos anos de vida, abençoados e felizes"
+)); ?>
+
+<form class="woocommerce-cart-form" action="<?php echo esc_url(wc_get_checkout_url()); ?>" method="post">
 	<?php do_action('woocommerce_before_cart_table'); ?>
 
 
@@ -53,7 +65,7 @@ $Talent_Fields = new Polen_Update_Fields();
 		<?php endif; ?>
 	<?php endforeach; ?>
 
-	<div class="row mt-1 py-5 cart-other">
+	<div class="row mt-1 py-2 cart-other">
 		<?php do_action('woocommerce_cart_contents'); ?>
 		<div class="col-12 col-md-12">
 			<div class="row">
@@ -202,7 +214,7 @@ $Talent_Fields = new Polen_Update_Fields();
 			</div>
 			<div class="row actions">
 				<div class="col-12 col-md-6 mb-4 mt-3">
-					<button type="submit" class="btn btn-primary btn-lg btn-block py-4" name="" value="<?php esc_attr_e('Update cart', 'woocommerce'); ?>"><?php esc_html_e('Avançar', 'woocommerce'); ?></button>
+					<button type="submit" class="btn btn-primary btn-lg btn-block" name="" value="<?php esc_attr_e('Update cart', 'woocommerce'); ?>"><?php esc_html_e('Avançar', 'woocommerce'); ?></button>
 
 					<?php //do_action( 'woocommerce_cart_actions' );
 					?>
