@@ -175,6 +175,11 @@ $Talent_Fields = new Polen_Update_Fields();
 					?>
 				</div>
 			</div>
+			<div class="row">
+				<div class="col-12">
+					<a href="javascript:void(0)" class="link-alt"><?php Icon_Class::polen_icon_reload(); ?> Outras mensagens</a>
+				</div>
+			</div>
 			<div class="row my-3">
 				<div class="col-12 col-md-12">
 					<?php
