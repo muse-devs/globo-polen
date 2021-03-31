@@ -35,10 +35,17 @@
             });
         }
 
-        $("input#braspag_creditcardCpf").inputmask({
-            mask: ['999.999.999-99'],
+        $("input#braspag_creditcardValidity").inputmask({
+            mask: ['99 / 9999'],
             keepStatic: true
         });
+
+        if( $( 'input#billing_cpf' ).length > 0 ) {
+            $( 'input#billing_cpf' ).inputmask({
+                mask: ['999.999.999-99'],
+                keepStatic: true
+            });
+        }
 
         if( $("#div_brasapag_creditcard_saved").length > 0 ) {
             $('#div_brasapag_creditcard_data').hide();

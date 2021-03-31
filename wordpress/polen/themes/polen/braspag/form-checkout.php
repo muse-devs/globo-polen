@@ -1,7 +1,7 @@
 <?php
 $WC_Cubo9_Braspag_Helper = new WC_Cubo9_Braspag_Helper;
 $brands = $WC_Cubo9_Braspag_Helper->active_credit_card_brands;
-global $woocommerce;
+global $woocommerce, $WC_Cubo9_BraspagReduxSettings;
 $amount = $woocommerce->cart->total;
 if( is_user_logged_in() ) {
     $braspag_card_saved_data = get_user_meta( get_current_user_id(), 'braspag_card_saved_data', true );
@@ -10,6 +10,8 @@ if( is_user_logged_in() ) {
 }
 ?>
 <div class="form-group" id="div_braspag_payment">
+    
+    <?php if( (int) $WC_Cubo9_BraspagReduxSettings['enable_installments'] === (int) 1 ) { ?>
     <!-- Formas de Pagamento Parcelado -->
     <div class="row">
         <div class="col col-12">
@@ -35,6 +37,7 @@ if( is_user_logged_in() ) {
             </div>
         </div>
     </div>
+    <?php } ?>
 
     <?php if( $braspag_card_saved_data && ! is_null( $braspag_card_saved_data ) && ! empty( $braspag_card_saved_data ) && is_array( $braspag_card_saved_data ) && count( $braspag_card_saved_data ) > 0 ) { ?>
     <!-- Cartões Salvos -->
@@ -77,24 +80,26 @@ if( is_user_logged_in() ) {
         <div class="col col-12">
             <div class="row">
                 <div class="col col-12">
-                    <label for="braspag_creditcardNumber"><?php echo __( 'Número do cartão', 'cubo9' ); ?></label>
-                    <input type="text" class="form-control input-text" name="braspag_creditcardNumber" id="braspag_creditcardNumber" aria-describedby="<?php echo __( 'Número do cartão de crédito', 'cubo9' ); ?>">
-                </div>
-                <div class="col col-12">
                     <label for="braspag_creditcardName"><?php echo __( 'Nome impresso no cartão de crédito', 'cubo9' ); ?></label>
                     <input type="text" class="form-control input-text" name="braspag_creditcardName" id="braspag_creditcardName" aria-describedby="<?php echo __( 'Nome impresso no cartão de crédito', 'cubo9' ); ?>" maxlength="50">
                 </div>
+                <!--
                 <div class="col col-12">
                     <label for="braspag_creditcardCpf"><?php echo __( 'CPF do titular do cartão de crédito', 'cubo9' ); ?></label>
                     <input type="text" class="form-control input-text" name="braspag_creditcardCpf" id="braspag_creditcardCpf" aria-describedby="<?php echo __( 'CPF do titular do cartão de crédito', 'cubo9' ); ?>">
                 </div>
-                <div class="col col-6">
+                -->
+                <div class="col col-8">
+                    <label for="braspag_creditcardNumber"><?php echo __( 'Número do cartão', 'cubo9' ); ?></label>
+                    <input type="text" class="form-control input-text" name="braspag_creditcardNumber" id="braspag_creditcardNumber" aria-describedby="<?php echo __( 'Número do cartão de crédito', 'cubo9' ); ?>">
+                </div>
+                <div class="col col-2">
                     <label for="braspag_creditcardValidity"><?php echo __( 'Validade', 'cubo9' ); ?></label>
                     <input type="text" class="form-control input-text" name="braspag_creditcardValidity" id="braspag_creditcardValidity" aria-describedby="<?php echo __( 'Validade', 'cubo9' ); ?>">
                 </div>
-                <div class="col col-6">
-                    <label for="braspag_creditcardCvv"><?php echo __( 'Código de segurança', 'cubo9' ); ?></label>
-                    <input type="text" class="form-control input-text" name="braspag_creditcardCvv" id="braspag_creditcardCvv" aria-describedby="<?php echo __( 'Código de segurança', 'cubo9' ); ?>">
+                <div class="col col-2">
+                    <label for="braspag_creditcardCvv"><?php echo __( 'CVV', 'cubo9' ); ?></label>
+                    <input type="text" class="form-control input-text" name="braspag_creditcardCvv" id="braspag_creditcardCvv" aria-describedby="<?php echo __( 'Código de segurança', 'cubo9' ); ?>" maxlength="4">
                 </div>
                 <input type="hidden" name="braspag_creditcardBrand" id="braspag_creditcardBrand" value="">
                 <?php if( is_user_logged_in() ) { ?>

@@ -110,7 +110,12 @@ function polen_front_get_card($item, $size = "medium")
 		$class = "col-6";
 	}
 
-	$image = wp_get_attachment_image_src(get_post_thumbnail_id($item['ID']), 'single-post-thumbnail');
+	if( isset( $item['ID'] ) ) {
+		$image = wp_get_attachment_image_src( get_post_thumbnail_id( $item['ID'] ), 'single-post-thumbnail' );
+	} else {
+		$image = array();
+		$image[] = '';
+	}
 
 ?>
 	<div class="<?= $class; ?>">
