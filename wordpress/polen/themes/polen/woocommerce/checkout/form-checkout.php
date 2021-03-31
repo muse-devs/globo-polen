@@ -38,7 +38,14 @@ $Talent_Fields = new Polen_Update_Fields();
 <form name="checkout" method="post" class="checkout woocommerce-checkout mt-5" action="<?php echo esc_url(wc_get_checkout_url()); ?>" enctype="multipart/form-data">
 	<div class="row">
 		<div class="col-md-8">
-
+			<?php
+				if( get_current_user_id() > 0 ){ ?>
+					<h3>Você está logado como:</h3>
+			<?php   $user_id = get_current_user_id(); 	 
+					$user_data = get_userdata( $user_id );
+					echo $user_data->display_name;
+				}
+			?>	
 			<!-- Cabeçalho do Artista -->
 			<?php
 			foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) :
