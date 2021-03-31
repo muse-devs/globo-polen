@@ -47,8 +47,7 @@ if (in_array('user_talent',  $logged_user->roles)) {
 										</div>
 									</div>
 									<div class="col-md-4 text-right">
-										<a href="<?php echo  wc_get_endpoint_url( 'view-order', $order['order_id'], wc_get_page_permalink( 'myaccount' ) );?>" 
-											class="btn btn-primary btn-sm" >Visualizar</a>
+										<button class="btn btn-primary btn-sm">Visualizar</button>
 										<!-- <button class="btn btn-outline-light btn-sm">Visualizar</button> -->
 									</div>
 								</div>

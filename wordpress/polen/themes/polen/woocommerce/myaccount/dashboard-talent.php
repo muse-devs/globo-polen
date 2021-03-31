@@ -7,7 +7,7 @@ if( $polen_talent->is_user_talent( $current_user ) ){
 ?>
 <section class="talent-dashboard-start">
 	<header class="page-header">
-		<div class="row">
+		<!--div class="row">
 			<div class="col-md-8">
 				<h1 class="page-title"><?php esc_html_e('Início', 'polen'); ?></h1>
 			</div>
@@ -16,7 +16,7 @@ if( $polen_talent->is_user_talent( $current_user ) ){
 					<option value="">Selecionar todos</option>
 				</select>
 			</div>
-		</div>
+		</div-->
 		<p>Aceite ou recuse seus pedidos de vídeos.</p>
 	</header><!-- .page-header -->
 
