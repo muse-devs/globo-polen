@@ -348,11 +348,11 @@ function polen_get_talent_card($talent)
 			<span class="cat">Você vai pagar</span>
 			<p class="price mt-2"><?php echo $talent["price"]; ?></p>
 			<?php if ($talent["has_details"]) : ?>
-				<button class="show-details"><?php Icon_Class::polen_icon_chevron("down") ?></button>
+				<button class="show-details" onclick="showDetails()"><?php Icon_Class::polen_icon_chevron("down") ?></button>
 			<?php endif; ?>
 		</div>
-		<footer class="row mt-3 details">
-			<div class="col pt-4">
+		<footer class="row details-box">
+			<div class="col pt-4 mt-3 details">
 				<div class="row personal">
 					<div class="col d-flex">
 						<div class="item">
@@ -389,6 +389,15 @@ function polen_get_talent_card($talent)
 			</div>
 		</footer>
 	</div>
+	<script>
+		var details = document.querySelector(".details-box");
+		var btn = document.querySelector(".show-details");
+
+		function showDetails() {
+			details.classList.toggle("show");
+			btn.classList.toggle("-active");
+		}
+	</script>
 <?php
 }
 
