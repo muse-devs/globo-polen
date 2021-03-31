@@ -226,18 +226,21 @@ class Polen_Checkout
                 $current_user = wp_get_current_user();
                 $email = $current_user->user_email;
                 $type = 'hidden';
+                $logged = 'd-none';
             } else {
                 $items = WC()->cart->get_cart();
                 $key = array_key_first( $items );
                 $email = $items[ $key ][ 'email_to_video' ];
                 $type = 'text';
+                $logged = '';
             }
             $args = array(
                 "type"        => $type,
                 "required"    => true,
-                "input_class" => array( "form-control", "input-text" ),
+                "class"       => array( $logged ),
+                "input_class" => array( "form-control", "input-text", $logged ),
                 "label"       => "E-mail",
-                "label_class" => array( 'title-on-checkout-notes' ),
+                "label_class" => array( 'title-on-checkout-notes', $logged ),
                 "placeholder" => "Informe seu e-mail",
                 "maxlength"   => 14,
                 "default"     => $email,
