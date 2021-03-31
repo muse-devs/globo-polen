@@ -88,10 +88,10 @@ class WC_Cubo9_Braspag extends WC_Payment_Gateway {
                 wc_add_notice( $error_message, 'error' );
             }
         } else {
-            if( ! isset( $_REQUEST['braspag_creditcardInstallments'] ) || empty( $_REQUEST['braspag_creditcardInstallments'] ) ) {
+            /* if( ! isset( $_REQUEST['braspag_creditcardInstallments'] ) || empty( $_REQUEST['braspag_creditcardInstallments'] ) ) {
                 $error_message = 'Informe a quantidade de parcelas desejada.';
                 wc_add_notice( $error_message, 'error' );
-            }
+            } */
 
             if( ! isset( $_REQUEST['braspag_creditcardNumber'] ) || empty( $_REQUEST['braspag_creditcardNumber'] ) ) {
                 $error_message = 'Informe o número do cartão de crédito.';
@@ -103,10 +103,10 @@ class WC_Cubo9_Braspag extends WC_Payment_Gateway {
                 wc_add_notice( $error_message, 'error' );
             }
 
-            if(  ! isset( $_REQUEST['braspag_creditcardCpf'] ) || ! $this->verifyCpf( $_REQUEST['braspag_creditcardCpf'] ) ) {
+            /* if(  ! isset( $_REQUEST['braspag_creditcardCpf'] ) || ! $this->verifyCpf( $_REQUEST['braspag_creditcardCpf'] ) ) {
                 $error_message = 'Informe corretamente o CPF do titular do cartão de crédito.';
                 wc_add_notice( $error_message, 'error' );
-            }
+            } */
 
             if(  ! isset( $_REQUEST['braspag_creditcardValidity'] ) || empty( $_REQUEST['braspag_creditcardValidity'] ) ) {
                 $error_message = 'Informe a data de validade do cartão de crédito.';

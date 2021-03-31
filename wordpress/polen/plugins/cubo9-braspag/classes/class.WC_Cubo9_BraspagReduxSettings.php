@@ -362,6 +362,14 @@ class WC_Cubo9_BraspagReduxSettings {
                 'subsection'       => false,
                 'fields'           => array(
                     array(
+                        'id'       => 'enable_installments',
+                        'type'     => 'switch',
+                        'title'    => esc_html__( 'Habilitar parcelamento de compras.', 'cubo9' ),
+                        'subtitle' => esc_html__( 'Ative ou desative o parcelamento de compras na plataforma.', 'cubo9' ),
+                        'desc'     => esc_html__( 'Ative ou desative o parcelamento de compras para os usuários na plataforma.', 'cubo9' ),
+                        'default'  => '0',
+                    ),
+                    array(
                         'id'       => 'max_installments',
                         'type'     => 'spinner',
                         'title'    => esc_html__('Quantidade máxima de parcelas', 'cubo9'),

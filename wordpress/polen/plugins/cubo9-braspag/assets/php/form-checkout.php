@@ -10,6 +10,7 @@ if( is_user_logged_in() ) {
 }
 ?>
 <div class="form-group" id="div_braspag_payment">
+    <?php if( (int) $WC_Cubo9_BraspagReduxSettings['enable_installments'] === (int) 1 ) { ?>
     <!-- Formas de Pagamento Parcelado -->
     <div class="row">
         <div class="col col-12">
@@ -35,6 +36,7 @@ if( is_user_logged_in() ) {
             </div>
         </div>
     </div>
+    <?php } ?>
 
     <?php if( $braspag_card_saved_data && ! is_null( $braspag_card_saved_data ) && ! empty( $braspag_card_saved_data ) && is_array( $braspag_card_saved_data ) && count( $braspag_card_saved_data ) > 0 ) { ?>
     <!-- Cartões Salvos -->
@@ -84,10 +86,12 @@ if( is_user_logged_in() ) {
                     <label for="braspag_creditcardName"><?php echo __( 'Nome impresso no cartão de crédito', 'cubo9' ); ?></label>
                     <input type="text" class="form-control input-text" name="braspag_creditcardName" id="braspag_creditcardName" aria-describedby="<?php echo __( 'Nome impresso no cartão de crédito', 'cubo9' ); ?>" maxlength="50">
                 </div>
+                <!--
                 <div class="col col-12">
                     <label for="braspag_creditcardCpf"><?php echo __( 'CPF do titular do cartão de crédito', 'cubo9' ); ?></label>
                     <input type="text" class="form-control input-text" name="braspag_creditcardCpf" id="braspag_creditcardCpf" aria-describedby="<?php echo __( 'CPF do titular do cartão de crédito', 'cubo9' ); ?>">
                 </div>
+                -->
                 <div class="col col-6">
                     <label for="braspag_creditcardValidity"><?php echo __( 'Validade', 'cubo9' ); ?></label>
                     <input type="text" class="form-control input-text" name="braspag_creditcardValidity" id="braspag_creditcardValidity" aria-describedby="<?php echo __( 'Validade', 'cubo9' ); ?>">

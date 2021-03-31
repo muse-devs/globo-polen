@@ -73,8 +73,8 @@ $Talent_Fields = new Polen_Update_Fields();
 					}
 
 					printf(
-						'<input type="radio" class="%s" id="cart_video_to_%s" data-cart-id="%s" name="video_to" value="other_one" %s > Outra pessoa
-						<input type="radio" class="%s ml-4" id="cart_video_to_%s" data-cart-id="%s" name="video_to" value="to_myself" %s > Para mim',
+						'<input type="radio" checked="true" class="%s cart-video-to" id="cart_video_to_%s" data-cart-id="%s" name="video_to" value="other_one" %s > Outra pessoa
+						<input type="radio" class="%s ml-4 cart-video-to" id="cart_video_to_%s" data-cart-id="%s" name="video_to" value="to_myself" %s > Para mim',
 						'polen-cart-item-data',
 						$cart_item_key,
 						$cart_item_key,
@@ -88,7 +88,7 @@ $Talent_Fields = new Polen_Update_Fields();
 				</div>
 			</div>
 
-			<div class="row mt-3">
+			<div class="row mt-3 video-to-info">
 				<div class="col-12 col-md-6">
 					<?php
 					$offered_by = isset($cart_item['offered_by']) ? $cart_item['offered_by'] : '';
@@ -103,7 +103,7 @@ $Talent_Fields = new Polen_Update_Fields();
 				</div>
 			</div>
 
-			<div class="row">
+			<div class="row video-to-info">
 				<div class="col-12 col-md-6">
 					<?php
 					$name_to_video = isset($cart_item['name_to_video']) ? $cart_item['name_to_video'] : '';
