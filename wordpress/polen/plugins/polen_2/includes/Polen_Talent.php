@@ -53,7 +53,7 @@ class Polen_Talent {
             /**
              * Busca por talento
              */
-            add_action('pre_get_posts', array($this, 'searchTalent'), 9 );
+            add_action('pre_get_posts', array($this, 'search_talent'), 11 );
         }
     }
 
@@ -300,23 +300,32 @@ class Polen_Talent {
     }
     
 
-    public function get_talent_orders($talent_id, $status = false) {
+    public function get_talent_orders($talent_id, $status = false, $count = false ) {
         if ($talent_id) {
             global $wpdb;
 
             $sql_product = " SELECT * FROM {$wpdb->prefix}posts WHERE post_type = 'product' and post_author = " . $talent_id;
             $talent_products = $wpdb->get_results($sql_product);
 
+            if( !$status ){
+                $status = 'wc-payment-approved';
+            }
+
+            $select = 'order_items.order_id'; 
+            if( $count ){
+                $select = "count( order_items.order_id ) as qtd"; 
+            }
+
             if (is_countable($talent_products) && count($talent_products) > 0) {
                 $first_product = reset($talent_products);
 
                 if (is_object($first_product) && isset($first_product->ID)) {
-                    $sql = " SELECT order_items.order_id
+                    $sql = " SELECT {$select}
                     FROM {$wpdb->prefix}woocommerce_order_items as order_items
                     LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta as order_item_meta ON order_items.order_item_id = order_item_meta.order_item_id
                     LEFT JOIN {$wpdb->posts} AS posts ON order_items.order_id = posts.ID
                     WHERE posts.post_type = 'shop_order'
-                        AND posts.post_status IN ( 'wc-on-hold' )
+                        AND posts.post_status IN ( '". $status ."' )
                         AND order_items.order_item_type = 'line_item'
                         AND order_item_meta.meta_key = '_product_id'
                         AND order_item_meta.meta_value = '$first_product->ID'";
@@ -326,6 +335,14 @@ class Polen_Talent {
                         return false;
                     } else {
                         $obj = array();
+
+                        if( $count ){
+                            foreach ($order_list as $obj_order):
+                                $obj['qtd'] = $obj_order->qtd;
+                            endforeach;   
+                            return $obj; 
+                        }
+                        
                         foreach ($order_list as $obj_order):
                             $obj['order_id'] = $obj_order->order_id;
                             $order = wc_get_order($obj_order->order_id);
@@ -381,11 +398,79 @@ class Polen_Talent {
     }
     
 
-    public function searchTalent($query) {
+    public function search_talent($query) {
         if( $query->is_search && !is_admin()) {
             $query->set( 'post_type', array('product'));
         }
         return $query;
+    }
+
+    /**
+     * Totalizador dos pedidos do talento
+     */
+    public function get_total_by_order_status( $talent_id, $status = false ){
+        if ($talent_id) {
+            global $wpdb;
+
+            $sql_product = " SELECT * FROM {$wpdb->prefix}posts WHERE post_type = 'product' and post_author = " . $talent_id;
+            $talent_products = $wpdb->get_results($sql_product);
+
+            if( !$status ){
+                $status = 'wc-payment-approved';
+            }
+
+            if (is_countable($talent_products) && count($talent_products) > 0) {
+                $first_product = reset($talent_products);
+
+                if (is_object($first_product) && isset($first_product->ID)) {
+                    $total_sales = $wpdb->get_var( "SELECT SUM( oim_line_total.meta_value) as order_total 
+                                                    FROM {$wpdb->posts} AS posts
+                                                    INNER JOIN {$wpdb->prefix}woocommerce_order_items AS order_items ON posts.ID = order_items.order_id
+                                                    INNER JOIN {$wpdb->prefix}woocommerce_order_itemmeta AS oim_line_total ON (order_items.order_item_id = oim_line_total.order_item_id)
+                                                        AND (oim_line_total.meta_key = '_line_total')
+                                                    INNER JOIN {$wpdb->prefix}woocommerce_order_itemmeta AS oim_product ON order_items.order_item_id = oim_product.order_item_id 
+                                                    WHERE posts.post_type IN ( 'shop_order' )
+                                                    AND posts.post_status IN ( '{$status}' ) AND ( ( oim_product.meta_key IN ('_product_id','_variation_id') 
+                                                    AND oim_product.meta_value IN ('{$first_product->ID}') ) );" );
+
+                    return wc_price( $total_sales );
+                }
+            }
+
+            return false;
+        }
+    }
+
+    public function get_time_to_videos( $user ){
+        if( $this->is_user_talent( $user ) ) {
+            $pending = $this->get_talent_orders( $user->ID, false, true );
+            if( is_array( $pending ) && isset( $pending['qtd'] ) && (int) $pending['qtd'] > 0  ){
+                $time_to_spend = (int) $pending['qtd']*45;
+                $total_time = $time_to_spend;
+                
+                if( $time_to_spend >= 45 ){
+                    $hours = floor($total_time/3600);
+                    $minutes = floor(($total_time/60) % 60);
+                    $seconds = $total_time % 60;
+                    
+                    if( !empty( $hours ) ){
+                        $total_time = str_pad( $hours, 2, 0, STR_PAD_LEFT ).':'.str_pad( $minutes, 2, 0, STR_PAD_LEFT ).':'.str_pad( $seconds, 2, 0, STR_PAD_LEFT ).' horas ';
+                    }
+
+                    if( empty( $hours ) && !empty( $minutes ) ){
+                        $total_time = str_pad( $minutes, 2, 0, STR_PAD_LEFT ).':'.str_pad( $seconds, 2, 0, STR_PAD_LEFT ).' minutos ';
+                    }
+
+                    if( empty( $minutes ) && !empty( $seconds ) ){
+                        $total_time = str_pad( $seconds, 2, 0, STR_PAD_LEFT ).' segundos ';
+                    } 
+                }
+
+                return $total_time;
+            }
+        }
+        
+        return false;
     }
 
 }
