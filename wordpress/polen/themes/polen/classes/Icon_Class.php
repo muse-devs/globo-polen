@@ -10,10 +10,15 @@ class Icon_Class {
             echo '<i class="bi bi-star"></i>';
         }
     }
-    
+
     public static function polen_icon_clock()
     {
             echo '<i class="bi bi-clock"></i>';
     }
+
+	public static function polen_icon_reload()
+	{
+		echo '<i class="bi bi-arrow-clockwise"></i>';
+	}
 
 }
