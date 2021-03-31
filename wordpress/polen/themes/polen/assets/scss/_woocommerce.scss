@@ -7,6 +7,12 @@
 	display: block;
 }
 
+.woocommerce-cart {
+	.entry-title {
+		display: none !important;
+	}
+}
+
 #add_payment_method #payment,
 .woocommerce-cart #payment,
 .woocommerce-checkout #payment {

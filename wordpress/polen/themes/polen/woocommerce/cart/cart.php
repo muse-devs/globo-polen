@@ -27,7 +27,13 @@ $occasion_list = new Polen_Occasion_List();
 $Talent_Fields = new Polen_Update_Fields();
 ?>
 
-<span class="step">Passo 1/2</span>
+<div class="row mt-2">
+	<div class="col-12">
+		<div class="progress" style="height: 7px;">
+			<div class="progress-bar bg-primary" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+		</div>
+	</div>
+</div>
 
 <form class="woocommerce-cart-form mt-5" action="<?php echo esc_url(wc_get_checkout_url()); ?>" method="post">
 	<?php do_action('woocommerce_before_cart_table'); ?>
@@ -38,8 +44,8 @@ $Talent_Fields = new Polen_Update_Fields();
 	foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) :
 		$_product   = apply_filters('woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key);
 		$product_id = apply_filters('woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key);
-		$talent_id = get_post_field( 'post_author', $product_id );
-		$talent_data = $Talent_Fields->get_vendor_data( $talent_id );
+		$talent_id = get_post_field('post_author', $product_id);
+		$talent_data = $Talent_Fields->get_vendor_data($talent_id);
 
 		if ($_product && $_product->exists() && $cart_item['quantity'] > 0 && apply_filters('woocommerce_cart_item_visible', true, $cart_item, $cart_item_key)) :
 			$product_permalink = apply_filters('woocommerce_cart_item_permalink', $_product->is_visible() ? $_product->get_permalink($cart_item) : '', $cart_item, $cart_item_key);
@@ -58,6 +64,15 @@ $Talent_Fields = new Polen_Update_Fields();
 						?>
 					</figure>
 					<div class="cart-item-product">
+						<header class="row content-header">
+							<div class="col-3">
+								<div class="avatar" style="background-image: url(<?php echo isset($talent->avatar) ? $talent->avatar : TEMPLATE_URI . '/assets/img/avatar.png';  ?>)"></div>
+							</div>
+							<div class="col-9">
+								<h4 class="name"><?php echo $talent->nome; ?></h4>
+								<h5 class="cat"><?php echo $talent->profissao; ?></h5>
+							</div>
+						</header>
 						<div class="product-name text-truncate" data-title="<?php esc_attr_e('Product', 'woocommerce'); ?>">
 							<?php
 							if (!$product_permalink) {
@@ -198,7 +213,7 @@ $Talent_Fields = new Polen_Update_Fields();
 						$cart_item_key
 					);
 					echo "<option value=''>Categoria</option>";
-					$arr_occasion = $occasion_list->get_occasion( null, 'type', 'ASC', 1, 0 , 'DISTINCT type' );
+					$arr_occasion = $occasion_list->get_occasion(null, 'type', 'ASC', 1, 0, 'DISTINCT type');
 					foreach ($arr_occasion as $occasion) :
 						echo "<option value='" . $occasion->type . "'>" . $occasion->type . "</option>";
 
@@ -215,8 +230,8 @@ $Talent_Fields = new Polen_Update_Fields();
 					<?php
 					$instructions_to_video = isset($cart_item['instructions_to_video']) ? $cart_item['instructions_to_video'] : '';
 					printf(
-						'<textarea 	name="instructions_to_video" placeholder="Instruções" 
-										class="%s form-control form-control-lg" id="cart_instructions_to_video_%s" 
+						'<textarea 	name="instructions_to_video" placeholder="Instruções"
+										class="%s form-control form-control-lg" id="cart_instructions_to_video_%s"
 										data-cart-id="%s" required="required">%s</textarea>',
 						'polen-cart-item-data',
 						$cart_item_key,
@@ -236,7 +251,7 @@ $Talent_Fields = new Polen_Update_Fields();
 					}
 
 					printf(
-						'<input type="checkbox" name="allow_video_on_page" class="%s form-control form-control-lg" id="cart_allow_video_on_page_%s" 
+						'<input type="checkbox" name="allow_video_on_page" class="%s form-control form-control-lg" id="cart_allow_video_on_page_%s"
 										data-cart-id="%s" %s> Permitir que o vídeo seja postado no perfil do artista',
 						'polen-cart-item-data',
 						$cart_item_key,
@@ -250,7 +265,7 @@ $Talent_Fields = new Polen_Update_Fields();
 				<div class="col-md-6 mb-4 mt-3">
 					<button type="submit" class="btn btn-primary btn-lg btn-block py-4" name="" value="<?php esc_attr_e('Update cart', 'woocommerce'); ?>"><?php esc_html_e('Avançar', 'woocommerce'); ?></button>
 
-					<?php //do_action( 'woocommerce_cart_actions' ); 
+					<?php //do_action( 'woocommerce_cart_actions' );
 					?>
 
 					<?php wp_nonce_field('woocommerce-cart', 'woocommerce-cart-nonce'); ?>
