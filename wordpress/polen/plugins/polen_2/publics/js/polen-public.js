@@ -72,8 +72,12 @@
 					security: wnonce
 					},
 					success: function( response ) {
-						console.log( response );
-						//let obj = $.parseJSON( response );
+						//console.log( response );
+						let obj = $.parseJSON( response );
+						if( obj['success'] == true ){
+							$('#OrderActions').modal('toggle');
+							location.reload();
+						}
 						//console.log(obj['success']);
 						/*
 						if( type == 'reject' && obj['success'] == true ){

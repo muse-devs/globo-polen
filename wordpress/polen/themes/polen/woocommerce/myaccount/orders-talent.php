@@ -70,23 +70,26 @@ if (in_array('user_talent',  $logged_user->roles)) {
 									<div class="col-12 mt-3">
 										<div class="row">
 											<div class="col-12 col-md-4">
-												<?php 
-												$order_nonce = wp_create_nonce('polen-order-data-nonce');
+												<?php
+												if( $order['status'] == 'talent-accepted' ){
+													?>
+													<button class="btn btn-primary btn-lg btn-block btn-enviar-video" 
+														button-nonce="<?php echo $order_nonce; ?>"
+														order-id="<?php echo $order['order_id']; ?>"
+														data-toggle="" data-target="">Enviar vídeo</button>
+												<?php
+												}
+
+												if( $order['status'] == 'payment-approved' ){
+													$order_nonce = wp_create_nonce('polen-order-data-nonce');
 												?>
-												<button class="btn btn-primary btn-lg btn-block btn-visualizar-pedido" 
+													<button class="btn btn-primary btn-lg btn-block btn-visualizar-pedido" 
 														button-nonce="<?php echo $order_nonce; ?>"
 														order-id="<?php echo $order['order_id']; ?>"
 														data-toggle="modal" data-target="#OrderActions">Visualizar</button>
-
-												<?php /*
-									$order_nonce = wp_create_nonce('polen-order-data-nonce');
-									?>
-									<span class="btn btn-primary btn-sm btn-visualizar-pedido"
-												button-nonce="<?php echo $order_nonce; ?>"
-												order-id="<?php echo $order['order_id']; ?>">Visualizar</span>
-										<!-- <button class="btn btn-outline-light btn-sm">Visualizar</button> -->
-									</div>
-									<?php */ ?>
+												<?php
+												}
+												?>		
 											</div>
 										</div>
 									</div>

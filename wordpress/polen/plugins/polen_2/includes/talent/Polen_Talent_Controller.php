@@ -36,8 +36,6 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
      *
      */
     public function talent_accept_or_reject(){
-        var_dump($_POST);
-
         $response = array();
         if( !isset( $_POST['security'] ) || !wp_verify_nonce( $_POST['security'], 'polen-order-accept-nonce' ) ) {
             $response = array( 'success' => false, 'message' => 'nonce_fail' );     
@@ -84,11 +82,11 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
                     $order = wc_get_order( $order_id );
                     if($order){
                         if( $type == 'accept' ){
-                            $order->update_status( 'processing', '', true );
+                            $order->update_status( 'talent-accepted', '', true );
                             $response = array( 'success' => true, 'message' => 'Vídeo aceito com sucesso' ); 
                         }                            
                         if( $type == 'reject' ){
-                            $order->update_status( 'cancelled', '', true );
+                            $order->update_status( 'talent-rejected', '', true );
                             $response = array( 'success' => true, 'message' => 'Vídeo rejeitado' ); 
                         }  
                        

@@ -315,7 +315,7 @@ class Polen_Talent {
             $talent_products = $wpdb->get_results($sql_product);
 
             if( !$status ){
-                $status = 'wc-payment-approved';
+                $status = "'wc-payment-approved', 'wc-talent-accepted' " ;
             }
 
             $select = 'order_items.order_id'; 
@@ -332,10 +332,12 @@ class Polen_Talent {
                     LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta as order_item_meta ON order_items.order_item_id = order_item_meta.order_item_id
                     LEFT JOIN {$wpdb->posts} AS posts ON order_items.order_id = posts.ID
                     WHERE posts.post_type = 'shop_order'
-                        AND posts.post_status IN ( '". $status ."' )
+                        AND posts.post_status IN ( ". $status ." )
                         AND order_items.order_item_type = 'line_item'
                         AND order_item_meta.meta_key = '_product_id'
                         AND order_item_meta.meta_value = '$first_product->ID'";
+
+
                     $order_list = $wpdb->get_results($sql);
 
                     if (is_countable($order_list) && count($order_list) == 0) {
@@ -353,6 +355,8 @@ class Polen_Talent {
                         foreach ($order_list as $obj_order):
                             $obj['order_id'] = $obj_order->order_id;
                             $order = wc_get_order($obj_order->order_id);
+
+                            $obj['status'] = $order->get_status();
 
                             $obj['total'] = $order->get_formatted_order_total();
                             foreach ($order->get_items() as $item_id => $item) {
