@@ -47,7 +47,12 @@ if (in_array('user_talent',  $logged_user->roles)) {
 										</div>
 									</div>
 									<div class="col-md-4 text-right">
-										<button class="btn btn-primary btn-sm">Visualizar</button>
+									<?php
+									$order_nonce = wp_create_nonce('polen-order-data-nonce');
+									?>
+									<span class="btn btn-primary btn-sm btn-visualizar-pedido" 
+												button-nonce="<?php echo $order_nonce; ?>" 
+												order-id="<?php echo $order['order_id']; ?>">Visualizar</span>
 										<!-- <button class="btn btn-outline-light btn-sm">Visualizar</button> -->
 									</div>
 								</div>

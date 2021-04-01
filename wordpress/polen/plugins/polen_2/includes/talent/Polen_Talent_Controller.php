@@ -28,5 +28,5 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
     public function get_total_a_receber()
     {
         
-    }
+    }   
 }
