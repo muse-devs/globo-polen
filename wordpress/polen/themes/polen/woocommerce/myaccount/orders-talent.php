@@ -47,7 +47,7 @@ if (in_array('user_talent',  $logged_user->roles)) {
 										</div>
 									</div>
 									<div class="col-md-4 text-right">
-										<button class="btn btn-primary btn-sm">Visualizar</button>
+										<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#OrderActions">Visualizar</button>
 										<!-- <button class="btn btn-outline-light btn-sm">Visualizar</button> -->
 									</div>
 								</div>
@@ -79,53 +79,79 @@ if (in_array('user_talent',  $logged_user->roles)) {
 		}
 		?>
 
-		<div class="row" style="display: none;">
-			<div class="col-md-12">
-				<div class="talent-order-modal">
-					<header class="row d-flex align-items-center header">
-						<div class="col-md-4">
-							<p class="p">Valor</p>
-							<span class="value">R$200</span>
-						</div>
-						<div class="col-md-4 text-center">
-							<p class="p small">Tempo estimado</p>
-							<span class="time">2 minutos</span>
-						</div>
-						<div class="col-md-4 text-center">
-							<p class="p small">Válido por</p>
-							<span class="time">7 dias</span>
-						</div>
-					</header>
-					<div class="body">
-						<div class="row d-flex align-items-center">
-							<div class="col">
-								<p class="p small">Vídeo de</p>
-								<span class="name"><?php echo $order['from']; ?></span>
-							</div>
-							<div class="col text-center">
-								<?php polen_icon_arrows(); ?>
-							</div>
-							<div class="col">
-								<div>
-									<p class="p small">Para</p>
-									<span class="name"><?php echo $order['name']; ?></span>
+		<!-- Modal -->
+		<div class="modal fade" id="OrderActions" tabindex="-1" role="dialog" aria-labelledby="OrderActionsTitle" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="OrderActionsTitle">Detalhe do pedido</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+
+						<!-- Início -->
+						<div class="talent-order-modal">
+							<header class="row d-flex align-items-center header">
+								<div class="col-md-4">
+									<p class="p">Valor</p>
+									<span class="value">R$200</span>
+								</div>
+								<div class="col-md-4 text-center">
+									<p class="p small">Tempo estimado</p>
+									<span class="time">2 minutos</span>
+								</div>
+								<div class="col-md-4 text-center">
+									<p class="p small">Válido por</p>
+									<span class="time">7 dias</span>
+								</div>
+							</header>
+							<div class="body">
+								<div class="row d-flex align-items-center">
+									<div class="col">
+										<p class="p small">Vídeo de</p>
+										<span class="name"><?php echo $order['from']; ?></span>
+									</div>
+									<div class="col text-center">
+										<?php polen_icon_arrows(); ?>
+									</div>
+									<div class="col">
+										<div>
+											<p class="p small">Para</p>
+											<span class="name"><?php echo $order['name']; ?></span>
+										</div>
+									</div>
+								</div>
+								<div class="row mt-4">
+									<div class="col">
+										<p class="p small mb-3">Ocasião</p>
+										<span class="category"><?php echo $order['category']; ?></span>
+									</div>
+								</div>
+								<div class="row mt-4">
+									<div class="col">
+										<p class="p small mb-2">Instruções</p>
+										<p class="text"><?php echo $order['instructions']; ?></p>
+									</div>
 								</div>
 							</div>
 						</div>
-						<div class="row mt-4">
-							<div class="col">
-								<p class="p small mb-3">Ocasião</p>
-								<span class="category"><?php echo $order['category']; ?></span>
-							</div>
-						</div>
-						<div class="row mt-4">
-							<div class="col">
-								<p class="p small mb-2">Instruções</p>
-								<p class="text"><?php echo $order['instructions']; ?></p>
-							</div>
-						</div>
+						<!-- Fim -->
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+						<button type="button" class="btn btn-primary">Aceitar</button>
+						<button type="button" class="btn btn-danger">Rejeitar</button>
 					</div>
 				</div>
+			</div>
+		</div>
+
+		<div class="row" style="display: none;">
+			<div class="col-md-12">
+				
 			</div>
 			<?php
 			$accept_reject_nonce = wp_create_nonce('polen-order-accept-nonce');
