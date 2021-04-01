@@ -50,14 +50,15 @@ if (in_array('user_talent',  $logged_user->roles)) {
 
 										<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#OrderActions">Visualizar</button>
 
-									<?php
+									<?php /*
 									$order_nonce = wp_create_nonce('polen-order-data-nonce');
 									?>
-									<span class="btn btn-primary btn-sm btn-visualizar-pedido" 
-												button-nonce="<?php echo $order_nonce; ?>" 
+									<span class="btn btn-primary btn-sm btn-visualizar-pedido"
+												button-nonce="<?php echo $order_nonce; ?>"
 												order-id="<?php echo $order['order_id']; ?>">Visualizar</span>
 										<!-- <button class="btn btn-outline-light btn-sm">Visualizar</button> -->
 									</div>
+									<?php */ ?>
 								</div>
 								<div class="row">
 									<div class="col-md-7">
@@ -159,7 +160,7 @@ if (in_array('user_talent',  $logged_user->roles)) {
 
 		<div class="row" style="display: none;">
 			<div class="col-md-12">
-				
+
 			</div>
 			<?php
 			$accept_reject_nonce = wp_create_nonce('polen-order-accept-nonce');

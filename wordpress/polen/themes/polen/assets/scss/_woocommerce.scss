@@ -62,6 +62,9 @@ select.form-control:not([size]):not([multiple]) {
 			background-color: $form-bg-color;
 		}
 	}
+	@include media-breakpoint-down(xs) {
+		display: none;
+	}
 }
 
 .woocommerce .woocommerce-breadcrumb {
