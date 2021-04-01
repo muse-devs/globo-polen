@@ -22,7 +22,7 @@ class Polen_Talent_Router
 //        $this->add_route( 'talent_acceptance', 'talent_acceptance', false );
         $this->add_route( 'talent_acceptance', 'talent_acceptance', true );
 
-        $this->add_route( 'talent_order_data', 'talent_order_data', true );        
+        //$this->add_route( 'talent_order_data', 'talent_order_data', true );        
     }
     
     

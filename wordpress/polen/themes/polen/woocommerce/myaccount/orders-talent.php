@@ -71,7 +71,7 @@ if (in_array('user_talent',  $logged_user->roles)) {
 										<div class="row">
 											<div class="col-12 col-md-4">
 
-												<button class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#OrderActions">Visualizar</button>
+												<button class="btn btn-primary btn-lg btn-block btn-visualizar-pedido" data-toggle="modal" data-target="#OrderActions">Visualizar</button>
 
 												<?php /*
 									$order_nonce = wp_create_nonce('polen-order-data-nonce');
