@@ -79,7 +79,7 @@ if (in_array('user_talent',  $logged_user->roles)) {
 		}
 		?>
 
-		<div class="row" style="display: none;">
+		<div class="row modal-orders-talent" style="display: none;">
 			<div class="col-md-12">
 				<div class="talent-order-modal">
 					<header class="row d-flex align-items-center header">
