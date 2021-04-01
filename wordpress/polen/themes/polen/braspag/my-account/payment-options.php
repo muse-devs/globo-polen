@@ -1,6 +1,14 @@
 <?php 
 $braspag_card_saved_data = get_user_meta( get_current_user_id(), 'braspag_card_saved_data', true ); 
 $braspag_default_payment = get_user_meta( get_current_user_id(), 'braspag_default_payment', true );
+
+use Polen\Includes\Polen_Talent;
+$polen_talent = new Polen_Talent();
+$current_user = wp_get_current_user();
+
+if( $polen_talent->is_user_talent( $current_user ) ){
+    require get_template_directory() . '/braspag/my-account/payment-talent.php';
+}else{
 ?>
 <div class="u-columns woocommerce-Payment-Options col2-set payment-options">
     <h3>Meus Cartões</h3>
@@ -71,3 +79,6 @@ $braspag_default_payment = get_user_meta( get_current_user_id(), 'braspag_defaul
         <?php } ?>
     </div>
 </div>
+<?php
+}
+?>
