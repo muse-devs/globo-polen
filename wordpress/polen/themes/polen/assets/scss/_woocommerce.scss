@@ -8,8 +8,9 @@
 }
 
 .woocommerce-cart,
-.woocommerce-checkout {
-	.entry-title {
+.woocommerce-checkout,
+.woocommerce-account {
+	.entry-title, .page-title {
 		display: none !important;
 	}
 }
