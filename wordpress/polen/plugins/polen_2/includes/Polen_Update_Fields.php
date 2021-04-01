@@ -258,7 +258,6 @@ class Polen_Update_Fields
             if( is_wp_error( $insert ) ) {
                 var_dump( $wpdb->print_error() );die;
             }
-            echo '<pre>';var_dump($wpdb->print_error(),$args,$wpdb);die;
         }
     }
 
