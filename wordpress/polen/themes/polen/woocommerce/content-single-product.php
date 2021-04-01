@@ -37,7 +37,7 @@ use Polen\Includes\Polen_Update_Fields;
 global $post;
 $Talent_Fields = new Polen_Update_Fields();
 $Talent_Fields = $Talent_Fields->get_vendor_data($post->post_author);
-$terms = wp_get_object_terms(get_the_ID(), 'product_cat');
+$terms = wp_get_object_terms(get_the_ID(), 'product_tag');
 ?>
 
 <figure class="image-bg">
