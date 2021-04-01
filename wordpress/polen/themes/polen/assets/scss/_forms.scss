@@ -84,6 +84,13 @@
 	}
 }
 
+select {
+	option {
+		color: $light-50;
+		background-color: $talent-bg-color;
+	}
+}
+
 .woocommerce-info {
 	display: none !important;
 }
