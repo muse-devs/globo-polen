@@ -29,7 +29,7 @@
 		});
 
 
-		$('span.btn-visualizar-pedido').on('click',function(e){
+		$(document).on('click', '.btn-visualizar-pedido',function(e){
 			e.preventDefault();
 			var wnonce = $(this).attr('button-nonce');
 			var order_id = $(this).attr('order-id');
