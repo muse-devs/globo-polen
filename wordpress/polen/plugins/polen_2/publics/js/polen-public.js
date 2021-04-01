@@ -46,10 +46,11 @@
 					success: function( response ) {
 						let obj = $.parseJSON( response );
 						//console.log(obj['data'][0]);
-						//$('#order-value').html(obj['data'][0]['total']);
+						$('#order-value').html(obj['data'][0]['total']);
 						$('#video-from').html(obj['data'][0]['from']);
 						$('#video-name').html(obj['data'][0]['name']);
 						$('#video-category').html(obj['data'][0]['category']);
+						$('#expiration-time').html(obj['data'][0]['expiration']);
 						$('#video-instructions').html(obj['data'][0]['instructions']);
 						$('.modal-group-buttons').attr('order-id',obj['data'][0]['order_id'] );
 					}

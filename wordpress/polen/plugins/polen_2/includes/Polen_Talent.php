@@ -487,9 +487,9 @@ class Polen_Talent {
      */
     public function video_expiration_time( $user, $order_id ){
         if( $this->is_user_talent( $user ) && !empty( $order_id )) {
-            $order = wc_get_order( $order_id );
-            $first_dateTime = new \DateTime($order->order_date); 
-            $last_dateTime = new \DateTime($order->order_date); 
+            $order = get_post( $order_id );
+            $first_dateTime = new \DateTime($order->post_date); 
+            $last_dateTime = new \DateTime($order->post_date); 
 
             $current_date = new \DateTime( "now", new \DateTimeZone( get_option( 'timezone_string' ) ) );
             $last_dateTime->add(new \DateInterval('P7D'));

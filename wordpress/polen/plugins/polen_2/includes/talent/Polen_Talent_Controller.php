@@ -1,6 +1,7 @@
 <?php
 
 namespace Polen\Includes\Talent;
+use Polen\Includes\Polen_Talent;
 
 class Polen_Talent_Controller extends Polen_Talent_Controller_Base
 {
@@ -115,10 +116,12 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
         }
 
         global $wpdb;
+        $polen_talent = new Polen_Talent();
 
         require_once ABSPATH . '/wp-includes/pluggable.php';
         $talent_id = get_current_user_id();
         $order_id = trim($_POST['order']); 
+        $logged_user = new \WP_User( $talent_id );
 
         $sql_product = " SELECT * FROM {$wpdb->prefix}posts WHERE post_type = 'product' and post_author = " . $talent_id;
         $talent_products = $wpdb->get_results($sql_product);
@@ -146,6 +149,7 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
                     $robj = array();
                     foreach ($order_list as $obj_order):
                         $obj['order_id'] = $obj_order->order_id;
+                        $obj['expiration'] = $polen_talent->video_expiration_time($logged_user, $obj['order_id']); 
                         $order = wc_get_order($obj_order->order_id);
 
                         $obj['total'] = $order->get_formatted_order_total();

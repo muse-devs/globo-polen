@@ -120,7 +120,7 @@ if (in_array('user_talent',  $logged_user->roles)) {
 								<header class="row d-flex align-items-center header">
 									<div class="col-md-4 text-center">
 										<p class="p">Valor</p>
-										<span class="time" id="order-value">R$200</span>
+										<span class="time" id="order-value"></span>
 									</div>
 									<div class="col-md-4 text-center mt-3">
 										<p class="p small">Tempo estimado</p>
@@ -135,23 +135,23 @@ if (in_array('user_talent',  $logged_user->roles)) {
 									<div class="row d-flex align-items-center">
 										<div class="col text-center">
 											<p class="p small">Vídeo de</p>
-											<span class="name" id="video-from"><?php echo $order['from']; ?></span>
+											<span class="name" id="video-from"></span>
 										</div>
 										<div class="col text-center mt-3">
 											<p class="p small">Para</p>
-											<span class="name" id="video-name"><?php echo $order['name']; ?></span>
+											<span class="name" id="video-name"></span>
 										</div>
 									</div>
 									<div class="row mt-4">
 										<div class="col text-center">
 											<p class="p small mb-3">Ocasião</p>
-											<span class="category" id="video-category"><?php echo $order['category']; ?></span>
+											<span class="category" id="video-category"></span>
 										</div>
 									</div>
 									<div class="row mt-4">
 										<div class="col text-center">
 											<p class="p small mb-2">Instruções</p>
-											<p class="text" id="video-instructions"><?php echo $order['instructions']; ?></p>
+											<p class="text" id="video-instructions"></p>
 										</div>
 									</div>
 								</div>
