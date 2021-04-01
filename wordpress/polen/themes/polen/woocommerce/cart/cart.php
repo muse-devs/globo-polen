@@ -128,7 +128,7 @@ polen_get_talent_card( $talent_cart_detail ); ?>
 				</div>
 			</div>
 
-			<div class="row video-to-info">
+			<div class="row">
 				<div class="col-12 col-md-6">
 					<?php
 					$name_to_video = isset($cart_item['name_to_video']) ? $cart_item['name_to_video'] : '';
