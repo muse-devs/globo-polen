@@ -70,8 +70,13 @@ if (in_array('user_talent',  $logged_user->roles)) {
 									<div class="col-12 mt-3">
 										<div class="row">
 											<div class="col-12 col-md-4">
-
-												<button class="btn btn-primary btn-lg btn-block btn-visualizar-pedido" data-toggle="modal" data-target="#OrderActions">Visualizar</button>
+												<?php 
+												$order_nonce = wp_create_nonce('polen-order-data-nonce');
+												?>
+												<button class="btn btn-primary btn-lg btn-block btn-visualizar-pedido" 
+														button-nonce="<?php echo $order_nonce; ?>"
+														order-id="<?php echo $order['order_id']; ?>"
+														data-toggle="modal" data-target="#OrderActions">Visualizar</button>
 
 												<?php /*
 									$order_nonce = wp_create_nonce('polen-order-data-nonce');
@@ -112,38 +117,38 @@ if (in_array('user_talent',  $logged_user->roles)) {
 								<header class="row d-flex align-items-center header">
 									<div class="col-md-4 text-center">
 										<p class="p">Valor</p>
-										<span class="value">R$200</span>
+										<span class="time" id="order-value">R$200</span>
 									</div>
 									<div class="col-md-4 text-center mt-3">
 										<p class="p small">Tempo estimado</p>
-										<span class="time">2 minutos</span>
+										<span class="time">45 segundos</span>
 									</div>
 									<div class="col-md-4 text-center">
 										<p class="p small">Válido por</p>
-										<span class="time">7 dias</span>
+										<span class="time" id="expiration-time">7 dias</span>
 									</div>
 								</header>
 								<div class="body">
 									<div class="row d-flex align-items-center">
 										<div class="col text-center">
 											<p class="p small">Vídeo de</p>
-											<span class="name"><?php echo $order['from']; ?></span>
+											<span class="name" id="video-from"><?php echo $order['from']; ?></span>
 										</div>
 										<div class="col text-center mt-3">
 											<p class="p small">Para</p>
-											<span class="name"><?php echo $order['name']; ?></span>
+											<span class="name" id="video-name"><?php echo $order['name']; ?></span>
 										</div>
 									</div>
 									<div class="row mt-4">
 										<div class="col text-center">
 											<p class="p small mb-3">Ocasião</p>
-											<span class="category"><?php echo $order['category']; ?></span>
+											<span class="category" id="video-category"><?php echo $order['category']; ?></span>
 										</div>
 									</div>
 									<div class="row mt-4">
 										<div class="col text-center">
 											<p class="p small mb-2">Instruções</p>
-											<p class="text"><?php echo $order['instructions']; ?></p>
+											<p class="text" id="video-instructions"><?php echo $order['instructions']; ?></p>
 										</div>
 									</div>
 								</div>
@@ -151,27 +156,30 @@ if (in_array('user_talent',  $logged_user->roles)) {
 							<!-- Fim -->
 
 						</div>
-						<div class="modal-footer">
+						<?php
+						$accept_reject_nonce = wp_create_nonce('polen-order-accept-nonce');
+						?>
+						<div class="modal-footer modal-group-buttons" button-nonce="<?php echo $accept_reject_nonce; ?>" order-id="">
 							<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-							<button type="button" class="btn btn-primary">Aceitar</button>
-							<button type="button" class="btn btn-danger">Rejeitar</button>
+							<button type="button" class="btn btn-primary talent-check-order" action-type="accept">Aceitar</button>
+							<button type="button" class="btn btn-danger talent-check-order" action-type="reject">Rejeitar</button>
 						</div>
 					</div>
 				</div>
 			</div>
 
-			<div class="row" style="display: none;">
+			<!--div class="row" style="display: none;">
 				<div class="col-md-12">
 
 				</div>
 				<?php
-				$accept_reject_nonce = wp_create_nonce('polen-order-accept-nonce');
+				//$accept_reject_nonce = wp_create_nonce('polen-order-accept-nonce');
 				?>
 				<div class="col-md-12 d-flex justify-content-center my-5" button-nonce="<?php echo $accept_reject_nonce; ?>" order-id="<?php echo $order['order_id']; ?>">
 					<button class="icon-button reject mx-3 talent-check-order" type="reject"><?php polen_icon_accept_reject('reject'); ?></button>
 					<button class="icon-button accept mx-3 talent-check-order" type="accept"><?php polen_icon_accept_reject(); ?></button>
 				</div>
-			</div>
+			</div-->
 
 					</div><!-- .page-content -->
 </section><!-- .no-results -->

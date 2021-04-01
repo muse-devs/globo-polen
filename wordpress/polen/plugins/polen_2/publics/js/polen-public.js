@@ -33,19 +33,25 @@
 			e.preventDefault();
 			var wnonce = $(this).attr('button-nonce');
 			var order_id = $(this).attr('order-id');
-			console.log('no console:',wnonce, order_id);
+			//console.log('no console:',wnonce, order_id, polen_ajax.ajaxurl );
 			$.ajax(
 				{
 					type: 'POST',
 					url: polen_ajax.ajaxurl,
 					data: {
-						action: 'talent_order_data',
+						action: 'get_talent_order_data',
 						order: order_id,
 						security: wnonce
 					},
 					success: function( response ) {
-						//let obj = $.parseJSON( response );
-						console.log(response);
+						let obj = $.parseJSON( response );
+						//console.log(obj['data'][0]);
+						//$('#order-value').html(obj['data'][0]['total']);
+						$('#video-from').html(obj['data'][0]['from']);
+						$('#video-name').html(obj['data'][0]['name']);
+						$('#video-category').html(obj['data'][0]['category']);
+						$('#video-instructions').html(obj['data'][0]['instructions']);
+						$('.modal-group-buttons').attr('order-id',obj['data'][0]['order_id'] );
 					}
 				});
 		});
@@ -54,20 +60,22 @@
 		$('button.talent-check-order').on('click',function(){
 			var wnonce = $(this).parent().attr('button-nonce');
 			var order_id = $(this).parent().attr('order-id');
-			var type = $(this).attr('type');
+			var type = $(this).attr('action-type');
 			$.ajax(
 				{
 					type: 'POST',
 					url: polen_ajax.ajaxurl,
 					data: {
-					action: 'talent_acceptance',
+					action: 'get_talent_acceptance',
 					order: order_id,
 					type: type,
 					security: wnonce
 					},
 					success: function( response ) {
-						let obj = $.parseJSON( response );
-						console.log(obj['success']);
+						console.log( response );
+						//let obj = $.parseJSON( response );
+						//console.log(obj['success']);
+						/*
 						if( type == 'reject' && obj['success'] == true ){
 							$('div[box-id="'+order_id+'"]').remove();
 
@@ -76,6 +84,7 @@
 
 							$('#order-count').html(qtd);
 						}
+						*/
 					}
 				});
 		});

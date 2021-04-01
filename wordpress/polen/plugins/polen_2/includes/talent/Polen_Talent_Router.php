@@ -20,9 +20,8 @@ class Polen_Talent_Router
 //        add_action( 'wp_ajax_nopriv_login', array( $this->controller, 'login' ) );
 //        add_action( '', array( $this->controller ) );
 //        $this->add_route( 'talent_acceptance', 'talent_acceptance', false );
-        $this->add_route( 'talent_acceptance', 'talent_acceptance', true );
-
-        //$this->add_route( 'talent_order_data', 'talent_order_data', true );        
+        $this->add_route( 'get_talent_acceptance', 'talent_accept_or_reject', true );
+        $this->add_route( 'get_talent_order_data', 'get_data_description', true );        
     }
     
     
