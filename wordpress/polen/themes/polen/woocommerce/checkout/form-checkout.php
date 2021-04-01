@@ -33,7 +33,13 @@ use Polen\Includes\Polen_Update_Fields;
 $Talent_Fields = new Polen_Update_Fields();
 ?>
 
-<span class="step">Passo 2/2</span>
+<div class="row mt-2">
+	<div class="col-12">
+		<div class="progress" style="height: 7px;">
+			<div class="progress-bar bg-primary" role="progressbar" style="width: 95%;" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
+		</div>
+	</div>
+</div>
 
 <?php
 foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
@@ -42,7 +48,7 @@ foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
     $talent_id = get_post_field('post_author', $product_id);
     $thumbnail = wp_get_attachment_image_src($_product->get_image_id(), 'thumbnail')[0];
     $talent = get_user_by('id', $talent_id);
-    
+
     $talent_data = $Talent_Fields->get_vendor_data( $talent_id );
 
     $talent_cart_detail = array(
@@ -60,17 +66,17 @@ foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
 }
 polen_get_talent_card( $talent_cart_detail ); ?>
 
-<form name="checkout" method="post" class="checkout woocommerce-checkout mt-5" action="<?php echo esc_url(wc_get_checkout_url()); ?>" enctype="multipart/form-data">
+<form name="checkout" method="post" class="checkout woocommerce-checkout" action="<?php echo esc_url(wc_get_checkout_url()); ?>" enctype="multipart/form-data">
 	<div class="row">
 		<div class="col-md-8">
 			<?php
 				if( is_user_logged_in() && get_current_user_id() > 0 ){ ?>
-					<h3>Você está logado como:</h3>
-			<?php   $user_id = get_current_user_id(); 	 
+					<!-- <h3>Você está logado como:</h3> -->
+			<?php   $user_id = get_current_user_id();
 					$user_data = get_userdata( $user_id );
-					echo $user_data->display_name;
+					// echo $user_data->display_name;
 				}
-			?>	
+			?>
 			<!-- Cabeçalho do Artista -->
 			<?php
 			/*
@@ -79,7 +85,7 @@ polen_get_talent_card( $talent_cart_detail ); ?>
 				$product_id = apply_filters('woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key);
 				$talent_id = get_post_field( 'post_author', $product_id );
 				$talent_data = $Talent_Fields->get_vendor_data( $talent_id );
-				
+
 				if ($_product && $_product->exists() && $cart_item['quantity'] > 0 && apply_filters('woocommerce_cart_item_visible', true, $cart_item, $cart_item_key)) :
 					$product_permalink = apply_filters('woocommerce_cart_item_permalink', $_product->is_visible() ? $_product->get_permalink($cart_item) : '', $cart_item, $cart_item_key);
 			?>
@@ -141,14 +147,14 @@ polen_get_talent_card( $talent_cart_detail ); ?>
 						</div>
 					</div>
 				<?php endif; ?>
-			<?php endforeach; */ 
+			<?php endforeach; */
 			?>
 
 			<?php if ($checkout->get_checkout_fields()) : ?>
 
 				<?php do_action('woocommerce_checkout_before_customer_details'); ?>
 
-				<div class="col2-set" id="customer_details">
+				<div class="row" id="customer_details">
 					<div class="col-12">
 						<?php do_action('woocommerce_checkout_billing'); ?>
 					</div>
@@ -165,7 +171,7 @@ polen_get_talent_card( $talent_cart_detail ); ?>
 			<?php woocommerce_checkout_payment();?>
 
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-4" style="display: none;">
 
 			<?php do_action('woocommerce_checkout_before_order_review_heading'); ?>
 

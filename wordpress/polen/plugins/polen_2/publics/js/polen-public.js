@@ -28,6 +28,28 @@
 				});
 		});
 
+
+		$('span.btn-visualizar-pedido').on('click',function(e){
+			e.preventDefault();
+			var wnonce = $(this).attr('button-nonce');
+			var order_id = $(this).attr('order-id');
+			console.log('no console:',wnonce, order_id);
+			$.ajax(
+				{
+					type: 'POST',
+					url: polen_ajax.ajaxurl,
+					data: {
+						action: 'talent_order_data',
+						order: order_id,
+						security: wnonce
+					},
+					success: function( response ) {
+						//let obj = $.parseJSON( response );
+						console.log(response);
+					}
+				});
+		});
+
 		/**** talento ****/
 		$('button.talent-check-order').on('click',function(){
 			var wnonce = $(this).parent().attr('button-nonce');
@@ -37,11 +59,11 @@
 				{
 					type: 'POST',
 					url: polen_ajax.ajaxurl,
-						data: {
-						action: 'talent_acceptance',
-						order: order_id,
-						type: type,
-						security: wnonce
+					data: {
+					action: 'talent_acceptance',
+					order: order_id,
+					type: type,
+					security: wnonce
 					},
 					success: function( response ) {
 						let obj = $.parseJSON( response );
