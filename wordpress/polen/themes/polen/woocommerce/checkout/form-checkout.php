@@ -35,6 +35,31 @@ $Talent_Fields = new Polen_Update_Fields();
 
 <span class="step">Passo 2/2</span>
 
+<?php
+foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
+    $product_id = apply_filters('woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key);
+    $_product   = apply_filters('woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key);
+    $talent_id = get_post_field('post_author', $product_id);
+    $thumbnail = wp_get_attachment_image_src($_product->get_image_id(), 'thumbnail')[0];
+    $talent = get_user_by('id', $talent_id);
+    
+    $talent_data = $Talent_Fields->get_vendor_data( $talent_id );
+
+    $talent_cart_detail = array(
+        "has_details" => true,
+        "avatar" => $thumbnail,
+        "name" => $_product->get_title(),
+        "career" => $talent_data->profissao,
+        "price" => $_product->get_price_html(),
+        "from" => $cart_item['offered_by'],
+        "to" => $cart_item['name_to_video'],
+        "category" => $cart_item['video_category'],
+        "mail" => $cart_item['email_to_video'],
+        "description" => $cart_item['instructions_to_video']
+    );
+}
+polen_get_talent_card( $talent_cart_detail ); ?>
+
 <form name="checkout" method="post" class="checkout woocommerce-checkout mt-5" action="<?php echo esc_url(wc_get_checkout_url()); ?>" enctype="multipart/form-data">
 	<div class="row">
 		<div class="col-md-8">

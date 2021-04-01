@@ -43,8 +43,7 @@ foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
     $thumbnail = wp_get_attachment_image_src($_product->get_image_id(), 'thumbnail')[0];
     $talent = get_user_by('id', $talent_id);
     
-    $update_fields = new Polen_Update_Fields();
-    $talent_data = $update_fields->get_vendor_data( $talent_id );
+    $talent_data = $Talent_Fields->get_vendor_data( $talent_id );
 
     $talent_cart_detail = array(
         "has_details" => false,
