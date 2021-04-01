@@ -10,6 +10,7 @@ use Polen\Includes\Polen_Occasion_List;
 use Polen\Includes\Polen_Cart;
 use Polen\Includes\Polen_Checkout;
 use Polen\Includes\Talent\Polen_Talent_Router;
+use Polen\Includes\Talent\Polen_Talent_Controller;
 use Polen\Includes\Polen_Order;
 
 class Polen {
@@ -43,7 +44,7 @@ class Polen {
 
         $this->init_classes();
         
-        $ctler = new Talent\Polen_Talent_Controller();
+        $ctler = new Polen_Talent_Controller();
         $talent_area_router = new Polen_Talent_Router($ctler);
         $talent_area_router->init_routes();
     }
