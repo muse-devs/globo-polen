@@ -49,8 +49,7 @@ foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
     $thumbnail = wp_get_attachment_image_src($_product->get_image_id(), 'thumbnail')[0];
     $talent = get_user_by('id', $talent_id);
 
-    $update_fields = new Polen_Update_Fields();
-    $talent_data = $update_fields->get_vendor_data( $talent_id );
+    $talent_data = $Talent_Fields->get_vendor_data( $talent_id );
 
     $talent_cart_detail = array(
         "has_details" => true,
@@ -58,11 +57,11 @@ foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
         "name" => $_product->get_title(),
         "career" => $talent_data->profissao,
         "price" => $_product->get_price_html(),
-        "from" => "",
-        "to" => "",
-        "category" => "",
-        "mail" => "",
-        "description" => ""
+        "from" => $cart_item['offered_by'],
+        "to" => $cart_item['name_to_video'],
+        "category" => $cart_item['video_category'],
+        "mail" => $cart_item['email_to_video'],
+        "description" => $cart_item['instructions_to_video']
     );
 }
 polen_get_talent_card( $talent_cart_detail ); ?>
