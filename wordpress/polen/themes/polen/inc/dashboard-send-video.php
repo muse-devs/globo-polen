@@ -18,7 +18,9 @@
 						<p class="info">Gravar Vídeo agora</p>
 					</div>
 					<div id="content-upload" class="content-upload">
-
+						<div class="spinner-border text-secondary" role="status">
+							<span class="sr-only">Loading...</span>
+						</div>
 					</div>
 				</div>
 			</div>
