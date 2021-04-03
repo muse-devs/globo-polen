@@ -55,7 +55,11 @@
 			display: block;
 			width: 100%;
 			height: 100%;
-			background: linear-gradient(360deg, #000000 -17.41%, rgba(0, 0, 0, 0) 55.71%);
+			background: linear-gradient(
+				360deg,
+				#000000 -17.41%,
+				rgba(0, 0, 0, 0) 55.71%
+			);
 		}
 		img {
 			display: none;
@@ -399,4 +403,11 @@
 		line-height: 1.6;
 		font-weight: 700;
 	}
+}
+
+//Talento logado
+
+.box-video {
+	border: 1px dashed $light-100;
+	border-radius: 8px;
 }

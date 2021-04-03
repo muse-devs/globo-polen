@@ -10,14 +10,14 @@
 	<article>
 		<div class="row my-4">
 			<div class="col-12">
-				<div class="box-video">
-					<div class="content-info">
+				<div class="py-5 text-center box-video">
+					<div id="content-info" class="content-info">
 						<figure class="image">
-							<img src="' . TEMPLATE_URI . '/assets/img/upload-info.png" alt="Gravar vídeo agora">
+							<img src="<?php echo TEMPLATE_URI ?>/assets/img/upload-info.png" alt="Gravar vídeo agora">
 						</figure>
 						<p class="info">Gravar Vídeo agora</p>
 					</div>
-					<div class="content-upload">
+					<div id="content-upload" class="content-upload">
 
 					</div>
 				</div>
