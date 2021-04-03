@@ -110,8 +110,8 @@ function polen_front_get_card($item, $size = "medium")
 		$class = "col-6 col-md-2";
 	}
 
-	if( isset( $item['ID'] ) ) {
-		$image = wp_get_attachment_image_src( get_post_thumbnail_id( $item['ID'] ), 'single-post-thumbnail' );
+	if (isset($item['ID'])) {
+		$image = wp_get_attachment_image_src(get_post_thumbnail_id($item['ID']), 'single-post-thumbnail');
 	} else {
 		$image = array();
 		$image[] = '';
@@ -146,10 +146,10 @@ function polen_front_get_news($items)
 	<section class="row pt-4 news">
 		<div class="col-md-12">
 			<header class="row mb-3">
-				<div class="col">
-					<h2>Destaques</h2>
+				<div class="col-12 d-flex justify-content-between align-items-center">
+					<h2 class="mr-2">Destaques</h2>
+					<a href="#">Ver todos <?php polen_icon_chevron_right(); ?></a>
 				</div>
-				<div class="col d-flex justify-content-end align-items-center"><a href="#">Ver todos <?php polen_icon_chevron_right(); ?></a></div>
 			</header>
 		</div>
 		<div class="col-md-12">
@@ -172,10 +172,10 @@ function polen_front_get_categories($items)
 	<section class="row py-4 categories">
 		<div class="col-md-12">
 			<header class="row mb-4">
-				<div class="col">
-					<h2>Categorias</h2>
+				<div class="col-12 d-flex justify-content-between align-items-center">
+					<h2 class="mr-2">Categorias</h2>
+					<a href="#">Ver todos</a>
 				</div>
-				<div class="col d-flex justify-content-end align-items-center"><a href="#">Ver todos</a></div>
 			</header>
 		</div>
 		<div class="col md-12">
@@ -203,10 +203,10 @@ function polen_front_get_artists($items, $title)
 	<section class="row py-4 all-artists">
 		<div class="col-12 col-md-12">
 			<header class="row mb-4">
-				<div class="col">
-					<h2><?= $title; ?></h2>
+				<div class="col-12 d-flex justify-content-between align-items-center">
+					<h2 class="mr-2"><?= $title; ?></h2>
+					<a href="#">Ver todos <?php polen_icon_chevron_right(); ?></a>
 				</div>
-				<div class="col d-flex justify-content-end align-items-center"><a href="#">Ver todos <?php polen_icon_chevron_right(); ?></a></div>
 			</header>
 		</div>
 		<div class="col-md-12">
