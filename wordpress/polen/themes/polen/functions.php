@@ -139,19 +139,24 @@ function polen_widgets_init() {
 }
 add_action( 'widgets_init', 'polen_widgets_init' );
 
+function get_assets_folder() {
+	$min = "min/";
+	if (defined('ENV_DEV') && ENV_DEV) {
+		$min = "";
+	}
+	return $min;
+}
+
 /**
  * Enqueue scripts and styles.
  */
 function polen_scripts() {
+	$min = get_assets_folder();
 	wp_enqueue_style('font-poppins', 'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap', array(), '1.0.0');
 	wp_enqueue_style('font-inter', 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap', array(), '1.0.0');
 	wp_enqueue_style('polen-custom-styles', TEMPLATE_URI . '/assets/css/style.min.css', array(), _S_VERSION);
 
 	if(is_singular() && is_product()) {
-		$min = "min/";
-		if (defined('ENV_DEV') && ENV_DEV) {
-			$min = "";
-		}
 		wp_enqueue_script( 'slick-slider', TEMPLATE_URI . '/assets/slick/slick.min.js', array("jquery"), _S_VERSION, true );
 		wp_enqueue_script( 'vimeo', 'https://player.vimeo.com/api/player.js', array(), '', true );
 		wp_enqueue_script( 'talent-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'talent.js', array("slick-slider", "vimeo"), _S_VERSION, true );
@@ -159,25 +164,14 @@ function polen_scripts() {
 
 	if( is_front_page()) {
 		wp_enqueue_script( 'slick-slider', TEMPLATE_URI . '/assets/slick/slick.min.js', array("jquery"), _S_VERSION, true );
-
-		$min = "min/";
-		if (defined('ENV_DEV') && ENV_DEV) {
-			$min = "";
-		}
-
 		wp_enqueue_script( 'home-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'front-page.js', array("slick-slider"), _S_VERSION, true );
 	}
 
 	if( is_cart() ) {
-		$min = "min/";
-		if (defined('ENV_DEV') && ENV_DEV) {
-			$min = "";
-		}
-
 		wp_enqueue_script( 'polen-cart', TEMPLATE_URI . '/assets/js/cart' . $min . '.js', array("jquery"), _S_VERSION, true );
 	}
 
-	wp_enqueue_script( 'bootstrap-js', TEMPLATE_URI . '/assets/bootstrap-4.0.0/dist/js/bootstrap.js', array("jquery"), _S_VERSION, true );
+	wp_enqueue_script( 'bootstrap-js', TEMPLATE_URI . '/assets/bootstrap-4.6.0/dist/js/bootstrap.js', array("jquery"), _S_VERSION, true );
 
 	// if (defined('ENV_DEV') && ENV_DEV) {
 	// 	wp_enqueue_script( 'vuejs', 'https://cdn.jsdelivr.net/npm/vue/dist/vue.js', array(), '2.6.12', false );
