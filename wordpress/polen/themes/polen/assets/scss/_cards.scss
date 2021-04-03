@@ -70,6 +70,8 @@
 		}
 	}
 	.title {
+		margin-top: 32px;
+		line-height: 0;
 		font-weight: 700;
 		@include media-breakpoint-down(sm) {
 			margin-bottom: 10px;
@@ -164,10 +166,10 @@
 			margin-bottom: 30px;
 			font-size: 72px;
 			@include media-breakpoint-down(xs) {
-				font-size: 8vw;
+				font-size: 1.8rem;
 			}
 			@include media-breakpoint-down(sm) {
-				font-size: 8vw;
+				font-size: 1.8rem;
 			}
 			@include media-breakpoint-only(md) {
 				font-size: 44px;

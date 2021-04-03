@@ -14,9 +14,6 @@ h2 {
 	margin: 0;
 	font-size:1.1rem;
 	font-weight: 600;
-	@include media-breakpoint-only(xs) {
-		font-size: 1.6rem;
-	}
 }
 
 h4,
@@ -32,7 +29,7 @@ p {
 
 a {
 	font-family: $font-secondary;
-	font-size: 1.1rem;
+	font-size: 0.8rem;
 	font-weight: 600;
 }
 
