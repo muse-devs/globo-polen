@@ -230,7 +230,7 @@ function polen_front_get_artists($items, $title)
 function polen_front_get_tutorial()
 {
 	echo '
-	<section class="row tutorial">
+	<section class="row tutorial mt-4">
 		<div class="col-md-12">
 			<header class="row mb-4">
 				<div class="col text-center">

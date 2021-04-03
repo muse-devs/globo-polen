@@ -185,14 +185,14 @@
 	display: inline-flex;
 	align-items: center;
 	font-family: $font-secondary;
-	font-size: 5vw;
+	font-size: 16px;
 	color: $light-100;
 	&::before {
 		content: "";
 		display: inline-block;
 		margin-right: 24px;
-		width: 60px;
-		height: 60px;
+		width: 46px;
+		height: 46px;
 		border-radius: 50%;
 		border: 5px solid $primary;
 	}
@@ -202,11 +202,11 @@
 		display: inline-block;
 		width: 0;
 		height: 0;
-		left: 25px;
-		border-top: 12px solid transparent;
-		border-bottom: 12px solid transparent;
+		left: 19px;
+		border-top: 8px solid transparent;
+		border-bottom: 8px solid transparent;
 
-		border-left: 16px solid $primary;
+		border-left: 12px solid $primary;
 	}
 }
 
