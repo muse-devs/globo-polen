@@ -101,16 +101,12 @@ if (in_array('user_talent',  $logged_user->roles)) {
 		<div class="modal fade" id="OrderActions" tabindex="-1" role="dialog" aria-labelledby="OrderActionsTitle" aria-hidden="true">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="OrderActionsTitle">Detalhe do pedido</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-
+					<div class="row modal-body">
 						<!-- Início -->
-						<div class="talent-order-modal">
+						<div class="col-12 talent-order-modal">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+								<span aria-hidden="true">&times;</span>
+							</button>
 							<header class="row d-flex align-items-center header">
 								<div class="col-md-4 text-center">
 									<p class="p">Valor</p>
@@ -127,11 +123,11 @@ if (in_array('user_talent',  $logged_user->roles)) {
 							</header>
 							<div class="body">
 								<div class="row d-flex align-items-center">
-									<div class="col text-center">
+									<div class="col-12 text-center">
 										<p class="p small">Vídeo de</p>
 										<span class="name" id="video-from"></span>
 									</div>
-									<div class="col text-center mt-3">
+									<div class="col-12 text-center mt-3">
 										<p class="p small">Para</p>
 										<span class="name" id="video-name"></span>
 									</div>
@@ -149,17 +145,18 @@ if (in_array('user_talent',  $logged_user->roles)) {
 									</div>
 								</div>
 							</div>
+							<?php
+							$accept_reject_nonce = wp_create_nonce('polen-order-accept-nonce');
+							?>
+							<div class="row">
+								<div class="col-12 modal-footer modal-group-buttons" button-nonce="<?php echo $accept_reject_nonce; ?>" order-id="">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+									<button type="button" class="btn btn-primary talent-check-order" action-type="accept">Aceitar</button>
+									<button type="button" class="btn btn-danger talent-check-order" action-type="reject">Rejeitar</button>
+								</div>
+							</div>
 						</div>
 						<!-- Fim -->
-
-					</div>
-					<?php
-					$accept_reject_nonce = wp_create_nonce('polen-order-accept-nonce');
-					?>
-					<div class="modal-footer modal-group-buttons" button-nonce="<?php echo $accept_reject_nonce; ?>" order-id="">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-						<button type="button" class="btn btn-primary talent-check-order" action-type="accept">Aceitar</button>
-						<button type="button" class="btn btn-danger talent-check-order" action-type="reject">Rejeitar</button>
 					</div>
 				</div>
 			</div>

@@ -1,3 +1,18 @@
 .spinner-border {
 	border-right-color: $light-100;
 }
+
+.modal {
+	.modal-dialog {
+		margin: 0 0.5rem;
+	}
+	.modal-content {
+		background-color: transparent;
+		.close {
+			position: absolute;
+			top: 6px;
+			right: 12px;
+			color: $light-100;
+		}
+	}
+}
