@@ -65,6 +65,8 @@ class Polen_Talent_Shortcode
             wp_die();
         }
         
+        //TODO: Verificar se o video é do talento legado
+        
         $item = Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
         $ajax_settings = $this->get_ajax_settings( $item );
         
