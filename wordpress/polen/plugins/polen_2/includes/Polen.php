@@ -57,11 +57,11 @@ class Polen {
         new Polen_Account( true );
         new Polen_Order( true );
         new Polen_WooCommerce( true );
+        new Polen_Talent_Part_Theme( true );
 
         $ctler = new Polen_Talent_Controller();
         $talent_area_router = new Polen_Talent_Router($ctler);
         $talent_area_router->init_routes();
-        new Polen_Talent_Part_Theme();
     }
 
     /**

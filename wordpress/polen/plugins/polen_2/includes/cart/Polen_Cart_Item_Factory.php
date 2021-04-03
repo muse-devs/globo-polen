@@ -3,6 +3,7 @@
 namespace Polen\Includes\Cart;
 
 use Automattic\WooCommerce\Admin\Overrides\Order;
+use Polen\Includes\Cart\Polen_Cart_Item;
 
 class Polen_Cart_Item_Factory
 {

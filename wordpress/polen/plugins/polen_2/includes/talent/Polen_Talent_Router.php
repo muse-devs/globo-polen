@@ -19,10 +19,14 @@ class Polen_Talent_Router
      //   $this->add_route( 'login', 'login', false );
 //        add_action( 'wp_ajax_nopriv_login', array( $this->controller, 'login' ) );
 //        add_action( '', array( $this->controller ) );
-        $this->add_route( 'talent_acceptance', 'talent_acceptance', false );
-        $this->add_route( 'talent_acceptance', 'talent_acceptance', true );
+//        $this->add_route( 'talent_acceptance', 'talent_acceptance', false );
+//        $this->add_route( 'talent_acceptance', 'talent_acceptance', true );
 //        $this->add_route( 'create_video_slot_vimeo', 'make_video_slot_vimeo', false );
         $this->add_route( 'create_video_slot_vimeo', 'make_video_slot_vimeo', true );
+        
+//        $_ = new \Polen\Includes\Polen_Talent();
+//        $this->add_route( 'get_talent_order_data', 'get_data_description' );
+//        $this->add_route( 'get_talent_acceptance', 'talent_accept_or_reject' );
     }
     
     public function add_route( string $action, string $handler, $authenticade = true )

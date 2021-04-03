@@ -1,5 +1,6 @@
 let form = document.querySelector('#form-video-upload');
 let file_input = document.querySelector('#file-video');
+let progress = document.querySelector('#progress');
 let response;
 
 window.onload = () => {
@@ -21,7 +22,7 @@ window.onload = () => {
                     xhr: function() {
                         var myXhr = jQuery.ajaxSettings.xhr();
                         if(myXhr.upload){
-                            myXhr.upload.addEventListener('progress',progressFunction, false);
+                            myXhr.upload.addEventListener('progress', progressFunction, false);
                         }
                         return myXhr;
                     },
@@ -36,24 +37,26 @@ window.onload = () => {
             }
         });
         evt.preventDefault();
+        return false;
     }
 }
  let updateProgress = (evt) => {
-     console.log(evt.lengthComputable)
+     console.log(evt.lengthComputable);
+     progress.innerHTML = evt.lengthComputable;
  }
  let completeHandler = (evt) => {
-     console.log('complete')
+     console.log('complete');
  }
  let errorHandler = (jqXHR, textStatus, errorThrown) => {
-     console.log('error', jqXHR, textStatus, errorThrown)
+     console.log('error', jqXHR, textStatus, errorThrown);
  }
  let transferCanceled = (evt) => {
-     console.log('cancelado')
+     console.log('cancelado');
  }
  
  function progressFunction(e){
     if(e.lengthComputable){
-        console.log({value:e.loaded,max:e.total});
+        progress.innerHTML += ' . ' + e.loaded + ' | ' + e.total;
     }
 }
 serialize = function(obj, prefix) {

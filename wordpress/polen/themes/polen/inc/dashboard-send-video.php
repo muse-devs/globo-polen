@@ -1,4 +1,5 @@
 <?php /* Template Name: Envio de Vídeo */ 
+wp_enqueue_script( 'polen-upload-video', TEMPLATE_URI . '/assets/js/' . $min . 'upload-video.js', array("jquery"), _S_VERSION, true );
 do_action( 'polen_before_upload_video' );
 ?>
 
@@ -31,11 +32,19 @@ do_action( 'polen_before_upload_video' );
 		</div>
 		<div class="row">
 			<div class="col-12">
-				<button class="send-video btn btn-primary btn-lg btn-block">Escolher Vídeo</button>
-                                <form>
-                                    <input type="file" class="form-control-file" id="file_data" name="file_data" aria-describedby="videoHelp" accept="video/*"/>
-                                    <button type="submit">Enviar</button>
+				<!--<button class="send-video btn btn-primary btn-lg btn-block">Escolher Vídeo</button>-->
+                                
+                                
+                                <form id="form-video-upload" method="post" enctype="multipart/form-data">
+                                    <div class="form-group">
+                                        <label for="file-data">Example file input</label>
+                                        <input type="file" class="form-control-file" id="file-video" name="file_data" accept="video/*" capture="user">
+                                    </div>
+                                    <button type="submit" class="send-video btn btn-primary btn-lg btn-block">Enviar</button>
                                 </form>
+                                <div id="progress"></div>
+                                
+                                
 			</div>
 		</div>
 		<div class="row" style="display: none;">
