@@ -36,6 +36,7 @@ class Polen_Talent_Shortcode
     
     private function get_ajax_settings( Polen_Cart_Item $item )
     {
+        $order_id = filter_input( INPUT_GET, 'order_id', FILTER_SANITIZE_NUMBER_INT );
         $ajax_settings = array(
             'nonce'    => wp_create_nonce( 'upload_video_' . $order_id ),
             'action' => 'create_video_slot_vimeo',

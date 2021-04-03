@@ -4,5 +4,5 @@ Polen - O grande unicórnio do Brasil
 Virtual Host
 polen.globo
 
-Login: admpolen
+Login: polen@cubo9.com.br
 Senha: #!Polen*#
