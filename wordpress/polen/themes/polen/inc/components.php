@@ -107,7 +107,7 @@ function polen_front_get_card($item, $size = "medium")
 {
 	$class = "col-6 col-md-3";
 	if ($size === "small") {
-		$class = "col-6";
+		$class = "col-6 col-md-2";
 	}
 
 	if( isset( $item['ID'] ) ) {
@@ -201,7 +201,7 @@ function polen_front_get_artists($items, $title)
 	}
 ?>
 	<section class="row py-4 all-artists">
-		<div class="col-md-12">
+		<div class="col-12 col-md-12">
 			<header class="row mb-4">
 				<div class="col">
 					<h2><?= $title; ?></h2>

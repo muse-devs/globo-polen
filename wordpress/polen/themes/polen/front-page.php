@@ -29,7 +29,7 @@ get_header();
 
 	<?php polen_front_get_tutorial(); ?>
 
-	<?php polen_front_get_artists(polen_get_talents(4), "Todos talentos");
+	<?php polen_front_get_artists(polen_get_talents(polen_is_mobile() ?  4 : 12), "Todos talentos");
 	?>
 
 </main><!-- #main -->
