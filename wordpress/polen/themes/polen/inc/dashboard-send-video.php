@@ -11,7 +11,7 @@
 		<div class="row my-4">
 			<div class="col-12">
 				<div class="py-5 text-center box-video">
-					<div id="content-info" class="content-info">
+					<div id="content-info" class="content-info show">
 						<figure class="image">
 							<img src="<?php echo TEMPLATE_URI ?>/assets/img/upload-info.png" alt="Gravar vídeo agora">
 						</figure>
@@ -21,6 +21,8 @@
 						<div class="spinner-border text-secondary" role="status">
 							<span class="sr-only">Loading...</span>
 						</div>
+						<p class="my-4"><strong id="progress-value">Enviando vídeo 75%</strong></p>
+						<button class="btn btn-outline-light btn-lg">Cancelar</button>
 					</div>
 				</div>
 			</div>

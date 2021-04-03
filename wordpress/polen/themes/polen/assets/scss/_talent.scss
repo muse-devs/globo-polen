@@ -410,4 +410,11 @@
 .box-video {
 	border: 1px dashed $light-100;
 	border-radius: 8px;
+	.content-info,
+	.content-upload {
+		display: none;
+		&.show {
+			display: block;
+		}
+	}
 }
