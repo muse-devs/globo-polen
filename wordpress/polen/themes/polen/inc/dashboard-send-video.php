@@ -1,4 +1,6 @@
-<?php /* Template Name: Envio de Vídeo */ ?>
+<?php /* Template Name: Envio de Vídeo */ 
+do_action( 'polen_before_upload_video' );
+?>
 
 <?php get_header(); ?>
 
@@ -30,6 +32,10 @@
 		<div class="row">
 			<div class="col-12">
 				<button class="send-video btn btn-primary btn-lg btn-block">Escolher Vídeo</button>
+                                <form>
+                                    <input type="file" class="form-control-file" id="file_data" name="file_data" aria-describedby="videoHelp" accept="video/*"/>
+                                    <button type="submit">Enviar</button>
+                                </form>
 			</div>
 		</div>
 		<div class="row" style="display: none;">
