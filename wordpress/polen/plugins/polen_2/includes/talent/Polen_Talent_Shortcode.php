@@ -25,7 +25,7 @@ class Polen_Talent_Shortcode
     public function render()
     {
         $this->populate_script();
-
+//
         ob_start();
         include $this->get_path_public_file();
         $data = ob_get_contents();
@@ -53,6 +53,10 @@ class Polen_Talent_Shortcode
     
     private function populate_script()
     {
+        if( is_admin() ) {
+            return true;
+        }
+        
         $order_id = filter_input( INPUT_GET, 'order_id', FILTER_SANITIZE_NUMBER_INT );
         if( empty( $order_id ) ) {
             //TODO: Quando o ID Não existir
