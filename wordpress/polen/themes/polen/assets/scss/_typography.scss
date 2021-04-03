@@ -12,7 +12,7 @@ h4 {
 h1,
 h2 {
 	margin: 0;
-	font-size: 54px;
+	font-size:1.1rem;
 	font-weight: 600;
 	@include media-breakpoint-only(xs) {
 		font-size: 1.6rem;
@@ -48,4 +48,13 @@ a {
 	font-weight: 400;
 	color: white;
 	text-decoration: underline;
+}
+
+
+.btn-lg {
+	font-size: 1rem;
+	font-weight: 600;
+	&.btn-login {
+		font-size: 0.8rem;
+	}
 }

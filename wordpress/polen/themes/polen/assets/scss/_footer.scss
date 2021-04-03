@@ -3,11 +3,11 @@
 	.title,
 	.description,
 	a {
-		font-size: 16px;
+		font-size: 12px;
 		line-height: 24px;
 	}
 	.title {
-		font-weight: 600;
+		font-weight: bold;
 	}
 	.description {
 		font-weight: 500;
@@ -22,7 +22,7 @@
 	li {
 		margin: 10px 0;
 		a {
-			font-size: 14px;
+			font-size: 12px;
 			line-height: 21px;
 			font-weight: 400;
 			color: $light-50;

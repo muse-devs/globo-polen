@@ -9,10 +9,11 @@
 
 if ( ! defined( '_S_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', '1.0.0' );
+	define( '_S_VERSION', '1.0.1' );
 }
 
 define('TEMPLATE_URI', get_template_directory_uri());
+define('TEMPLATE_DIR', get_template_directory());
 
 if ( ! function_exists( 'polen_setup' ) ) :
 	/**

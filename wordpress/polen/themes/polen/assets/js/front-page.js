@@ -4,6 +4,7 @@ $(document).ready(function () {
     $('.slick-padding').slick({
         arrows: false,
         centerMode: true,
+		infinite: false,
         slidesToShow: 4,
 		responsive: [
 			{

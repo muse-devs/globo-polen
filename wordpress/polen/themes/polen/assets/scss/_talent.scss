@@ -19,18 +19,18 @@
 
 .talent-name {
 	font-size: 44px;
-	line-height: 66px;
+	line-height: normal;
 }
 .price,
 .subtitle {
-	font-size: 24px;
+	font-size: 20px;
 	font-weight: 700;
 }
 
 .tag-link {
 	display: inline-block;
 	padding: 3px 10px;
-	font-size: 14px;
+	font-size: 12px;
 	font-weight: 400;
 	color: $light-50;
 	border-radius: 2px;
@@ -179,13 +179,13 @@
 }
 
 .skill-title {
-	font-size: 16px;
+	font-size: 14px;
 	font-weight: 400;
 	color: $light-100;
 }
 
 .skill-value {
-	font-size: 16px;
+	font-size: 14px;
 	font-weight: 700;
 }
 
