@@ -32,7 +32,9 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
     {
         
     }
-     
+<<<<<<< HEAD
+
+            
     /**
      * O Talento aceita ou rejeita um pedido de video
      *
@@ -171,8 +173,7 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
         }
 
         echo wp_json_encode( $response );
-    }
-    
+=======
     
     public function make_video_slot_vimeo()
     {
@@ -187,6 +188,7 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
 //        echo $data;
         $data = ( [false, true, true, $order_id] );
         wp_send_json_success( $data );
+>>>>>>> main_para_120
         wp_die();
     }
 }

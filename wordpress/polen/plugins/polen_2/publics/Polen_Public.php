@@ -101,5 +101,25 @@ class Polen_Public {
 		wp_localize_script( 'polen-item-script',	'polen_ajax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
 		wp_enqueue_script( 'polen-item-script' );
 	}
+        
+        
+        /**
+         * 
+         * @return string
+         */
+        public function get_path_public_patials()
+        {
+            return dirname( __FILE__ ) . '/partials/';
+        }
 
+                
+        
+        /**
+         * 
+         * @return string
+         */
+        public function get_url_public_js()
+        {
+            return plugin_dir_url( __FILE__ ) . 'js/';
+        }
 }

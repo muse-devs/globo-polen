@@ -127,7 +127,7 @@
             }
 
         } else {
-            showElement( $("#metaboxSellerData"));
+            hideElement( $("#metaboxSellerData"));
             //Tirando o required do slug do talent
             if( $('#tr_talent_alias').length > 0 ) {
                 removeRequired( $('#tr_talent_alias') );
