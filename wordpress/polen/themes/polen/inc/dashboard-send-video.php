@@ -16,7 +16,7 @@
                             <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <div class="buttons">
-                            <button class="send-video"><?php polen_icon_upload(); ?>Enviar Vídeo</button>
+                            <button class="send-video"><?php Icon_Class::polen_icon_upload(); ?>Enviar Vídeo</button>
                             <button class="cancel-send">Cancelar</button>
                         </div>
                     </div>

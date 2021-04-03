@@ -58,7 +58,7 @@ if ($polen_talent->is_user_talent($current_user)) {
 												<span class="time"><?php echo $total_time; ?></span>
 											</div>
 											<!-- <div class="mx-5">
-												<?php polen_icon_arrows(); ?>
+												<?php Icon_Class::polen_icon_arrows(); ?>
 											</div> -->
 											<div>
 												<p class="p small">E receba até</p>

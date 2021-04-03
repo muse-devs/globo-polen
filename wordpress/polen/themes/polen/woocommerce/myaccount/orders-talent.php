@@ -173,8 +173,8 @@ if (in_array('user_talent',  $logged_user->roles)) {
 				//$accept_reject_nonce = wp_create_nonce('polen-order-accept-nonce');
 				?>
 				<div class="col-md-12 d-flex justify-content-center my-5" button-nonce="<?php echo $accept_reject_nonce; ?>" order-id="<?php echo $order['order_id']; ?>">
-					<button class="icon-button reject mx-3 talent-check-order" type="reject"><?php polen_icon_accept_reject('reject'); ?></button>
-					<button class="icon-button accept mx-3 talent-check-order" type="accept"><?php polen_icon_accept_reject(); ?></button>
+					<button class="icon-button reject mx-3 talent-check-order" type="reject"><?php Icon_Class::polen_icon_accept_reject('reject'); ?></button>
+					<button class="icon-button accept mx-3 talent-check-order" type="accept"><?php Icon_Class::polen_icon_accept_reject(); ?></button>
 				</div>
 			</div-->
 

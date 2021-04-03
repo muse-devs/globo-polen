@@ -1,91 +1,5 @@
 <?php
 
-function polen_icon_share()
-{
-	echo '<i class="bi bi-share-fill"></i>';
-}
-
-function polen_icon_clock()
-{
-	echo '<i class="bi bi-clock"></i>';
-}
-
-function polen_icon_star($active = false)
-{
-	if ($active) {
-		echo '<i class="bi bi-star-fill" style="color: #FFF963;"></i>';
-	} else {
-		echo '<i class="bi bi-star"></i>';
-	}
-}
-
-function polen_icon_arrows()
-{
-	echo '<img src="' . TEMPLATE_URI . '/assets/img/arrows.png" />';
-}
-
-function polen_icon_accept_reject($type = 'accept')
-{
-	if ($type === 'reject') {
-		echo '<i class="bi bi-x"></i>';
-	} else {
-		echo '<i class="bi bi-check"></i>';
-	}
-}
-
-function polen_icon_upload()
-{
-	echo '<i class="bi bi-cloud-arrow-up"></i>';
-}
-
-function polen_icon_download()
-{
-	echo '<i class="bi bi-download"></i>';
-}
-
-function polen_icon_copy()
-{
-	echo '<i class="bi bi-clipboard"></i>';
-}
-
-function polen_icon_chevron_right()
-{
-	echo '<i class="bi bi-chevron-right"></i>';
-}
-
-function polen_icon_close()
-{
-	echo '<i class="bi bi-x"></i>';
-}
-
-function polen_icon_social($ico)
-{
-	$ret = '';
-	switch ($ico) {
-		case 'facebook':
-			$ret = '<i class="bi bi-facebook"></i>';
-			break;
-
-		case 'instagram':
-			$ret = '<i class="bi bi-instagram"></i>';
-			break;
-
-		case 'linkedin':
-			$ret = '<i class="bi bi-linkedin"></i>';
-			break;
-
-		case 'twitter':
-			$ret = '<i class="bi bi-twitter"></i>';
-			break;
-
-		default:
-			$ret = '';
-			break;
-	}
-
-	echo $ret;
-}
-
 function polen_front_get_banner()
 {
 ?>
@@ -148,7 +62,7 @@ function polen_front_get_news($items)
 			<header class="row mb-3">
 				<div class="col-12 d-flex justify-content-between align-items-center">
 					<h2 class="mr-2">Destaques</h2>
-					<a href="#">Ver todos <?php polen_icon_chevron_right(); ?></a>
+					<a href="#">Ver todos <?php Icon_Class::polen_icon_chevron_right(); ?></a>
 				</div>
 			</header>
 		</div>
@@ -205,7 +119,7 @@ function polen_front_get_artists($items, $title)
 			<header class="row mb-4">
 				<div class="col-12 d-flex justify-content-between align-items-center">
 					<h2 class="mr-2"><?= $title; ?></h2>
-					<a href="#">Ver todos <?php polen_icon_chevron_right(); ?></a>
+					<a href="#">Ver todos <?php Icon_Class::polen_icon_chevron_right(); ?></a>
 				</div>
 			</header>
 		</div>
@@ -301,7 +215,7 @@ function polen_front_get_talent_videos($talent, $items = array(
 	<div id="video-modal" class="video-modal">
 		<div class="video-card">
 			<header>
-				<button id="close-button" class="close-button" onclick="hideModal()"><?php polen_icon_close(); ?></button>
+				<button id="close-button" class="close-button" onclick="hideModal()"><?php Icon_Class::polen_icon_close(); ?></button>
 				<div id="video-box"></div>
 			</header>
 			<div class="content mt-4 mx-3">
@@ -318,11 +232,11 @@ function polen_front_get_talent_videos($talent, $items = array(
 				<div class="row mt-4 share">
 					<div class="col-12">
 						<input type="text" id="share-input" class="share-input" />
-						<a href="javascript:copyToClipboard(window.location.href)" class="btn btn-outline-light btn-lg btn-block share-link"><?php polen_icon_copy(); ?>Copiar link</a>
-						<a href="javascript:void(0)" class="btn btn-outline-light btn-lg btn-block share-link" target="_blank"><?php polen_icon_download(); ?>Download</a>
-						<a href="<?php echo $talent->facebook; ?>" class="btn btn-outline-light btn-lg btn-block share-link" target="_blank"><?php polen_icon_social('facebook'); ?>Facebook</a>
-						<a href="<?php echo $talent->instagram; ?>" class="btn btn-outline-light btn-lg btn-block share-link" target="_blank"><?php polen_icon_social('instagram'); ?>Instagram</a>
-						<a href="<?php echo $talent->twitter; ?>" class="btn btn-outline-light btn-lg btn-block share-link" target="_blank"><?php polen_icon_social('twitter'); ?>Twitter</a>
+						<a href="javascript:copyToClipboard(window.location.href)" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_copy(); ?>Copiar link</a>
+						<a href="javascript:void(0)" class="btn btn-outline-light btn-lg btn-block share-link" target="_blank"><?php Icon_Class::polen_icon_download(); ?>Download</a>
+						<a href="<?php echo $talent->facebook; ?>" class="btn btn-outline-light btn-lg btn-block share-link" target="_blank"><?php Icon_Class::polen_icon_social('facebook'); ?>Facebook</a>
+						<a href="<?php echo $talent->instagram; ?>" class="btn btn-outline-light btn-lg btn-block share-link" target="_blank"><?php Icon_Class::polen_icon_social('instagram'); ?>Instagram</a>
+						<a href="<?php echo $talent->twitter; ?>" class="btn btn-outline-light btn-lg btn-block share-link" target="_blank"><?php Icon_Class::polen_icon_social('twitter'); ?>Twitter</a>
 					</div>
 				</div>
 			</div>

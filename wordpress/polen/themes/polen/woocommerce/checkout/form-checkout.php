@@ -135,8 +135,8 @@ polen_get_talent_card( $talent_cart_detail ); ?>
 								<div class="col skill-title">Reviews</div>
 							</div>
 							<div class="row">
-								<div class="col"><?php polen_icon_clock(); ?> <?php echo $talent_data->tempo_resposta; ?>h</div>
-								<div class="col"><?php polen_icon_star(true); ?> 5.0</div>
+								<div class="col"><?php Icon_Class::polen_icon_clock(); ?> <?php echo $talent_data->tempo_resposta; ?>h</div>
+								<div class="col"><?php Icon_Class::polen_icon_star(true); ?> 5.0</div>
 							</div>
 						</div>
 						<div class="product-quantity" data-title="<?php esc_attr_e('Quantity', 'woocommerce'); ?>">

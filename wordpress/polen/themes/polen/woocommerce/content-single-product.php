@@ -54,9 +54,6 @@ $terms = wp_get_object_terms(get_the_ID(), 'product_tag');
 					<div class="col-12 col-md-12">
 						<h1 class="talent-name text-truncate" title="<?= get_the_title(); ?>"><?= get_the_title(); ?></h1>
 						<span class="price"><?php echo wc_price($product->get_price()); ?></span>
-						<?php /* <div class="talent-share ml-4">
-							<button id="share-button" class="share-button"><?php polen_icon_share(); ?></button>
-						</div> */ ?>
 					</div>
 				</div>
 			</div>
@@ -93,7 +90,7 @@ $terms = wp_get_object_terms(get_the_ID(), 'product_tag');
 					<span class="skill-title">Responde em</span>
 				</div>
 				<div class="col-md-6 text-center">
-					<?php polen_icon_clock(); ?>
+					<?php Icon_Class::polen_icon_clock(); ?>
 					<span class="skill-value"><?= $Talent_Fields->tempo_resposta; ?>h</span>
 				</div>
 			</div>
@@ -107,7 +104,7 @@ $terms = wp_get_object_terms(get_the_ID(), 'product_tag');
 		<div class="col">
 			<h2>Relacionados</h2>
 		</div>
-		<div class="col d-flex justify-content-end align-items-center"><a href="#">Ver todos <?php polen_icon_chevron_right(); ?></a></div>
+		<div class="col d-flex justify-content-end align-items-center"><a href="#">Ver todos <?php Icon_Class::polen_icon_chevron_right(); ?></a></div>
 	</header>
 	<div class="row">
 		<div class="col-12">

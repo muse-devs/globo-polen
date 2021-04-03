@@ -50,10 +50,10 @@
 	<?php endif; ?>
 	<div class="row mt-5 pb-5 copyright">
 		<div class="col-md-4 pb-4 text-center social">
-			<?php polen_icon_social("facebook"); ?>
-			<?php polen_icon_social("instagram"); ?>
-			<?php polen_icon_social("linkedin"); ?>
-			<?php polen_icon_social("twitter"); ?>
+			<?php Icon_Class::polen_icon_social("facebook"); ?>
+			<?php Icon_Class::polen_icon_social("instagram"); ?>
+			<?php Icon_Class::polen_icon_social("linkedin"); ?>
+			<?php Icon_Class::polen_icon_social("twitter"); ?>
 		</div>
 		<div class="col-md-4 pt-3 text-center">2021 @Muse</div>
 	</div><!-- .site-info -->

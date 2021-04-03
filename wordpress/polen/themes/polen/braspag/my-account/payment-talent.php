@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Polen\Includes\Polen_Update_Fields;
 $polen_fields = new Polen_Update_Fields();
@@ -69,7 +69,7 @@ if( $polen_talent->is_user_talent( $current_user ) ){
                         </div>
                     <?php
                     }
-                    ?>    
+                    ?>
                 </div>
             </div>
         </div>
@@ -98,7 +98,7 @@ if( $polen_talent->is_user_talent( $current_user ) ){
 								<span class="name"><?php echo $order['from']; ?></span>
 							</div>
 							<div class="col text-center">
-								<?php polen_icon_arrows(); ?>
+								<?php Icon_Class::polen_icon_arrows(); ?>
 							</div>
 							<div class="col">
 								<div>
@@ -126,13 +126,13 @@ if( $polen_talent->is_user_talent( $current_user ) ){
 			$accept_reject_nonce = wp_create_nonce('polen-order-accept-nonce');
 			?>
 			<div class="col-md-12 d-flex justify-content-center my-5" button-nonce="<?php echo $accept_reject_nonce; ?>" order-id="<?php echo $order['order_id']; ?>">
-				<button class="icon-button reject mx-3 talent-check-order" type="reject"><?php polen_icon_accept_reject('reject'); ?></button>
-				<button class="icon-button accept mx-3 talent-check-order" type="accept"><?php polen_icon_accept_reject(); ?></button>
+				<button class="icon-button reject mx-3 talent-check-order" type="reject"><?php Icon_Class::polen_icon_accept_reject('reject'); ?></button>
+				<button class="icon-button accept mx-3 talent-check-order" type="accept"><?php Icon_Class::polen_icon_accept_reject(); ?></button>
 			</div>
 		</div>
 
 	</div><!-- .page-content -->
-</section>    
+</section>
 <?php
 }
 ?>
