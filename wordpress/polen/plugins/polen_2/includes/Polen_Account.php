@@ -45,8 +45,8 @@ class Polen_Account
 
     public function my_account_menu_title( $items ) {
         $logged_user = wp_get_current_user();
-		if( in_array( 'user_talent',  $logged_user->roles ) )
-		{ 
+        if( in_array( 'user_talent',  $logged_user->roles ) )
+        { 
             $menu_items = array(
                 'dashboard'       => 'Início',
                 'orders'          => 'Meus pedidos',
