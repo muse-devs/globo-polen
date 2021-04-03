@@ -11,7 +11,7 @@ class Polen_Talent_Shortcode
 {
     public function __construct()
     {
-        add_shortcode( 'polen_sjhdfgsjhfgkasdhfgasjhdfgakjdfhgkzsjhdfg', [ $this, 'render' ] );
+//        add_shortcode( 'polen_sjhdfgsjhfgkasdhfgasjhdfgakjdfhgkzsjhdfg', [ $this, 'render' ] );
     }
     
     private function get_path_public_file()
@@ -25,7 +25,7 @@ class Polen_Talent_Shortcode
     public function render()
     {
         $this->populate_script();
-//
+
         ob_start();
         include $this->get_path_public_file();
         $data = ob_get_contents();
