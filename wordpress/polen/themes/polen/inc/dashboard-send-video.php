@@ -1,6 +1,10 @@
 <?php /* Template Name: Envio de Vídeo */ 
 wp_enqueue_script( 'polen-upload-video', TEMPLATE_URI . '/assets/js/' . $min . 'upload-video.js', array("jquery"), _S_VERSION, true );
 do_action( 'polen_before_upload_video' );
+
+$order_id = filter_input( INPUT_GET, 'order_id' );
+$order = wc_get_order( $order_id );
+$polen_order = \Polen\Includes\Cart\Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
 ?>
 
 <?php get_header(); ?>
@@ -52,19 +56,19 @@ do_action( 'polen_before_upload_video' );
 				<div class="row">
 					<div class="col-12">
 						<h4>Mensagem para:</h4>
-						<p class="p">Raul</p>
+                                                <p class="p"><?= $polen_order->get_name_to_video(); ?></p>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-12">
 						<h4>Ocasião:</h4>
-						<p class="p">Aniversário, Comemoração</p>
+                                                <p class="p"><?= $polen_order->get_video_category(); ?></p>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-8">
 				<h4>Instruções:</h4>
-				<p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean egestas eros eget nulla porta efficitur. Etiam id risus ut ipsum efficitur dignissim et id dui. Donec congue id libero vitae feugiat. Nam eget nibh nibh. Nunc hendrerit faucibus leo.</p>
+                                <p class="p"><?= $polen_order->get_instructions_to_video(); ?></p>
 			</div>
 		</div>
 	</article>
