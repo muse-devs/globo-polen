@@ -25,7 +25,7 @@ if (in_array('user_talent',  $logged_user->roles)) {
 			echo "<p class='mb-5'>Você tem <strong><span id='order-count'>" . count($talent_orders) . "</span> pedido(s) de vídeo</strong>, seus pedidos expiram em até 7 dias.</p>";
 			if (count($talent_orders) > 0) {
 				foreach ($talent_orders as $order) : ?>
-					<div class="row mb-5" box-id="<?php echo $order['order_id']; ?>">
+					<div class="row mb-3" box-id="<?php echo $order['order_id']; ?>">
 						<div class="col md-12">
 							<div class="talent-order">
 								<div class="row mb-4">
@@ -71,107 +71,101 @@ if (in_array('user_talent',  $logged_user->roles)) {
 										<div class="row">
 											<div class="col-12 col-md-4">
 												<?php
-												if( $order['status'] == 'talent-accepted' ){
-													?>
-													<button class="btn btn-primary btn-lg btn-block btn-enviar-video" 
-														button-nonce="<?php echo $order_nonce; ?>"
-														order-id="<?php echo $order['order_id']; ?>"
-														data-toggle="" data-target="">Enviar vídeo</button>
+												if ($order['status'] == 'talent-accepted') {
+												?>
+													<button class="btn btn-primary btn-lg btn-block btn-enviar-video" button-nonce="<?php echo $order_nonce; ?>" order-id="<?php echo $order['order_id']; ?>" data-toggle="" data-target="">Enviar vídeo</button>
 												<?php
 												}
 
-												if( $order['status'] == 'payment-approved' ){
+												if ($order['status'] == 'payment-approved') {
 													$order_nonce = wp_create_nonce('polen-order-data-nonce');
 												?>
-													<button class="btn btn-primary btn-lg btn-block btn-visualizar-pedido" 
-														button-nonce="<?php echo $order_nonce; ?>"
-														order-id="<?php echo $order['order_id']; ?>"
-														data-toggle="modal" data-target="#OrderActions">Visualizar</button>
+													<button class="btn btn-primary btn-lg btn-block btn-visualizar-pedido" button-nonce="<?php echo $order_nonce; ?>" order-id="<?php echo $order['order_id']; ?>" data-toggle="modal" data-target="#OrderActions">Visualizar</button>
 												<?php
 												}
-												?>		
+												?>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-
-			<?php
+					</div>
+		<?php
 				endforeach;
 			}
 		}
-			?>
+		?>
 
-			<!-- Modal -->
-			<div class="modal fade" id="OrderActions" tabindex="-1" role="dialog" aria-labelledby="OrderActionsTitle" aria-hidden="true">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="OrderActionsTitle">Detalhe do pedido</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
+		<!-- Modal -->
+		<div class="modal fade" id="OrderActions" tabindex="-1" role="dialog" aria-labelledby="OrderActionsTitle" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="OrderActionsTitle">Detalhe do pedido</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
 
-							<!-- Início -->
-							<div class="talent-order-modal">
-								<header class="row d-flex align-items-center header">
-									<div class="col-md-4 text-center">
-										<p class="p">Valor</p>
-										<span class="time" id="order-value"></span>
+						<!-- Início -->
+						<div class="talent-order-modal">
+							<header class="row d-flex align-items-center header">
+								<div class="col-md-4 text-center">
+									<p class="p">Valor</p>
+									<span class="time" id="order-value"></span>
+								</div>
+								<div class="col-md-4 text-center mt-3">
+									<p class="p small">Tempo estimado</p>
+									<span class="time">45 segundos</span>
+								</div>
+								<div class="col-md-4 text-center">
+									<p class="p small">Válido por</p>
+									<span class="time" id="expiration-time">7 dias</span>
+								</div>
+							</header>
+							<div class="body">
+								<div class="row d-flex align-items-center">
+									<div class="col text-center">
+										<p class="p small">Vídeo de</p>
+										<span class="name" id="video-from"></span>
 									</div>
-									<div class="col-md-4 text-center mt-3">
-										<p class="p small">Tempo estimado</p>
-										<span class="time">45 segundos</span>
+									<div class="col text-center mt-3">
+										<p class="p small">Para</p>
+										<span class="name" id="video-name"></span>
 									</div>
-									<div class="col-md-4 text-center">
-										<p class="p small">Válido por</p>
-										<span class="time" id="expiration-time">7 dias</span>
+								</div>
+								<div class="row mt-4">
+									<div class="col text-center">
+										<p class="p small mb-3">Ocasião</p>
+										<span class="category" id="video-category"></span>
 									</div>
-								</header>
-								<div class="body">
-									<div class="row d-flex align-items-center">
-										<div class="col text-center">
-											<p class="p small">Vídeo de</p>
-											<span class="name" id="video-from"></span>
-										</div>
-										<div class="col text-center mt-3">
-											<p class="p small">Para</p>
-											<span class="name" id="video-name"></span>
-										</div>
-									</div>
-									<div class="row mt-4">
-										<div class="col text-center">
-											<p class="p small mb-3">Ocasião</p>
-											<span class="category" id="video-category"></span>
-										</div>
-									</div>
-									<div class="row mt-4">
-										<div class="col text-center">
-											<p class="p small mb-2">Instruções</p>
-											<p class="text" id="video-instructions"></p>
-										</div>
+								</div>
+								<div class="row mt-4">
+									<div class="col text-center">
+										<p class="p small mb-2">Instruções</p>
+										<p class="text" id="video-instructions"></p>
 									</div>
 								</div>
 							</div>
-							<!-- Fim -->
+						</div>
+						<!-- Fim -->
 
-						</div>
-						<?php
-						$accept_reject_nonce = wp_create_nonce('polen-order-accept-nonce');
-						?>
-						<div class="modal-footer modal-group-buttons" button-nonce="<?php echo $accept_reject_nonce; ?>" order-id="">
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-							<button type="button" class="btn btn-primary talent-check-order" action-type="accept">Aceitar</button>
-							<button type="button" class="btn btn-danger talent-check-order" action-type="reject">Rejeitar</button>
-						</div>
+					</div>
+					<?php
+					$accept_reject_nonce = wp_create_nonce('polen-order-accept-nonce');
+					?>
+					<div class="modal-footer modal-group-buttons" button-nonce="<?php echo $accept_reject_nonce; ?>" order-id="">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+						<button type="button" class="btn btn-primary talent-check-order" action-type="accept">Aceitar</button>
+						<button type="button" class="btn btn-danger talent-check-order" action-type="reject">Rejeitar</button>
 					</div>
 				</div>
 			</div>
+		</div>
 
-			<!--div class="row" style="display: none;">
+		<!--div class="row" style="display: none;">
 				<div class="col-md-12">
 
 				</div>
@@ -184,5 +178,5 @@ if (in_array('user_talent',  $logged_user->roles)) {
 				</div>
 			</div-->
 
-					</div><!-- .page-content -->
+	</div><!-- .page-content -->
 </section><!-- .no-results -->
