@@ -23,57 +23,50 @@ if (in_array('user_talent',  $logged_user->roles)) {
 		?>
 			<div class="row mt-4">
 				<div class="col-12">
-					<div class="row">
-						<span class="order-title"><?php echo esc_html(_x('#', 'hash before order number', 'woocommerce') . $order->get_order_number()); ?></span>
-					</div>
-				</div>
-				<div class="col-12">
-					<div class="row">
-						<div class="image-cropper">
-							<?php
-							$thumbnail = get_the_post_thumbnail_url($product_id, 'post-thumbnail');
-							?>
-							<img src="<?php echo $thumbnail; ?>" class="profile-pic">
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="row">
-						<span class="order-title"><?php echo  $item->get_name(); ?></a>
-					</div>
-					<div class="row">
-						<?php echo $order->get_formatted_order_total(); ?>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="row">
-						<div class="col-md-12 text-center">
-							<span class="order-title">Status</span>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12 text-center">
-							<span>
-								<?php
-								switch ($order->get_status()) {
-									case 'on-hold':
-										echo 'Aguardando aprovação';
-										break;
-									default:
-										echo $order->get_status();
-										break;
-								}
-								?>
-							</span>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="row">
-						<div class="text-center">
-							<a href="<?php echo $order->get_view_order_url(); ?>" class="btn-primary btn">
-								Ver mais
-							</a>
+					<div class="talent-card alt">
+						<div class="row px-3">
+							<div class="col-12">
+								<div class="row d-flex justify-content-start">
+									<div>
+										<div class="image-cropper">
+											<?php
+											$thumbnail = get_the_post_thumbnail_url($product_id, 'post-thumbnail');
+											?>
+											<img src="<?php echo $thumbnail; ?>" class="profile-pic">
+										</div>
+									</div>
+									<div class="col">
+										<div class="order-title"><?php echo  $item->get_name(); ?></div>
+										<div class="cat">Música</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-12 col-md-4 mt-2">
+								<div class="row">
+									<div class="col-md-12 text-center">
+										<span class="status">
+											<?php
+											switch ($order->get_status()) {
+												case 'on-hold':
+													echo 'Aguardando aprovação';
+													break;
+												default:
+													echo $order->get_status();
+													break;
+											}
+											?>
+										</span>
+									</div>
+								</div>
+							</div>
+							<div class="col-12 text-center my-3">
+								<a href="<?php echo $order->get_view_order_url(); ?>" class="btn btn-primary btn-lg btn-block">
+									Ver mais
+								</a>
+							</div>
+							<div class="col-12 text-center">
+								<p>Número do pedido: <?php echo $order->get_order_number(); ?></p>
+							</div>
 						</div>
 					</div>
 				</div>

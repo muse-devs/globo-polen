@@ -326,6 +326,9 @@
 	// overflow: hidden;
 	box-sizing: border-box;
 	background-color: $secondary;
+	&.alt {
+		background-color: $talent-bg-color;
+	}
 	.header {
 		border-bottom: 1px dashed $light-25;
 	}
@@ -403,6 +406,9 @@
 		font-size: 16px;
 		line-height: 1.6;
 		font-weight: 700;
+	}
+	.status {
+
 	}
 }
 
