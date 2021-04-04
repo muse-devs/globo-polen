@@ -240,4 +240,79 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
         }
         wp_die();
     }
+
+    /**
+     * O pedido estará como completo
+     */
+    public function talent_order_completed(){
+        $response = array();
+
+        if( !isset( $_POST['order'] ) ) {
+            $response = array( 'success' => false, 'message' => 'order_fail' );     
+ 
+        }
+ 
+        global $wpdb;
+ 
+        require_once ABSPATH . '/wp-includes/pluggable.php';
+        $talent_id = get_current_user_id();
+        $order_id = trim($_POST['order']); 
+  
+        $checked = $this->check_product_and_order( $talent_id, $order_id );
+
+        if( $checked ){
+            $first_product = reset($talent_products);
+            $order = wc_get_order( $order_id );
+            if( $order ){
+                $order->update_status( 'completed', '', true );
+                $response = array( 'success' => true, 'message' => 'Pedido completo!' );                        
+            }
+        }else{
+            $response = array( 'success' => false, 'message' => 'Falha na relação talento/produto' );     
+        }
+             
+        echo wp_json_encode( $response );
+        wp_die();
+    }
+
+    /**
+     * Verifica produto, pedido e talento
+     */
+    public function check_product_and_order( $talent_id, $order_id ){
+        if( !$talent_id || !$order_id ){
+            return false;
+        }
+
+        global $wpdb;
+        $sql_product = " SELECT * FROM {$wpdb->prefix}posts WHERE post_type = 'product' and post_author = ".$talent_id;
+        $talent_products = $wpdb->get_results( $sql_product );
+        
+        if( is_countable( $talent_products ) && count( $talent_products ) > 0 ){
+            $first_product = reset($talent_products);
+ 
+            if( is_object( $first_product ) && isset( $first_product->ID ) ){
+                $sql = " SELECT order_items.order_id
+                    FROM {$wpdb->prefix}woocommerce_order_items as order_items
+                    LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta as order_item_meta ON order_items.order_item_id = order_item_meta.order_item_id
+                    LEFT JOIN {$wpdb->posts} AS posts ON order_items.order_id = posts.ID
+                    WHERE posts.post_type = 'shop_order'
+                        AND order_items.order_id = ".$order_id."
+                        AND order_items.order_item_type = 'line_item'
+                        AND order_item_meta.meta_key = '_product_id'
+                        AND order_item_meta.meta_value = '$first_product->ID'";
+                $order_list = $wpdb->get_results( $sql );
+ 
+                if( is_countable( $order_list ) && count( $order_list ) == 0 ){
+                    return false;
+                }else{
+                    return true;
+                }
+            }else{
+                return false;
+            }
+        }
+
+        return false;
+    }
+ 
 }
