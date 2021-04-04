@@ -1,11 +1,13 @@
 <?php /* Template Name: Envio de Vídeo */
+
+use \Polen\Includes\Cart\Polen_Cart_Item_Factory;
 $min = get_assets_folder();
 wp_enqueue_script('polen-upload-video', TEMPLATE_URI . '/assets/js/' . $min . 'upload-video.js', array("jquery"), _S_VERSION, true);
 do_action('polen_before_upload_video');
 
 $order_id = filter_input(INPUT_GET, 'order_id');
 $order = wc_get_order($order_id);
-$polen_order = \Polen\Includes\Cart\Polen_Cart_Item_Factory::polen_cart_item_from_order($order);
+$polen_order = Polen_Cart_Item_Factory::polen_cart_item_from_order($order);
 ?>
 
 <?php get_header(); ?>
