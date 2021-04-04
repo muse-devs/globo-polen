@@ -122,3 +122,15 @@ select {
 		color: $accept;
 	}
 }
+
+input[type="file"] {
+	display: none;
+}
+
+.custom-file-upload {
+	padding: 6px 12px;
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: .3rem;
+	cursor: pointer;
+}
