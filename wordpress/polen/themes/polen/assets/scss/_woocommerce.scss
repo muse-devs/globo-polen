@@ -10,7 +10,8 @@
 .woocommerce-cart,
 .woocommerce-checkout,
 .woocommerce-account {
-	.entry-title, .page-title {
+	.entry-title,
+	.page-title {
 		display: none !important;
 	}
 }
@@ -84,4 +85,10 @@ select.form-control:not([size]):not([multiple]) {
 .woocommerce-cart #payment ul.payment_methods,
 .woocommerce-checkout #payment ul.payment_methods {
 	border-color: $light-25;
+}
+
+.woocommerce form.checkout_coupon,
+.woocommerce form.login,
+.woocommerce form.register {
+	margin: 0;
 }
