@@ -4,7 +4,7 @@ class Icon_Class
 {
 
 	public static function polen_icon_reload() {
-		echo '';
+		echo '<i class="bi bi-arrow-clockwise"></i>';
 	}
 
 	public static function polen_icon_share()
@@ -53,6 +53,11 @@ class Icon_Class
 	public static function polen_icon_copy()
 	{
 		echo '<i class="bi bi-clipboard"></i>';
+	}
+
+	public static function polen_icon_chevron()
+	{
+		echo '<i class="bi bi-chevron-down"></i>';
 	}
 
 	public static function polen_icon_chevron_right()
