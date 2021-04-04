@@ -9,12 +9,6 @@ if (in_array('user_talent',  $logged_user->roles)) {
 
 	<?php if ($has_orders) : ?>
 
-		<div class="row mt-3">
-			<div class="col-12">
-				<h1>Meus pedidos</h1>
-			</div>
-		</div>
-
 		<?php
 		foreach ($customer_orders->orders as $customer_order) {
 			$order      = wc_get_order($customer_order); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
