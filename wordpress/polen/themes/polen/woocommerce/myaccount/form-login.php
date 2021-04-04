@@ -33,7 +33,7 @@ if (!defined('ABSPATH')) {
 				<?php endif; ?>
 
 				<div class="col-12 text-center">
-					<h2><?php esc_html_e('Sou um talento', 'woocommerce'); ?></h2>
+					<h2><?php esc_html_e('Login', 'woocommerce'); ?></h2>
 				</div>
 
 				<form class="row woocommerce-form woocommerce-form-login login text-center" method="post">
