@@ -412,9 +412,13 @@
 		color: #D0D4EA;
 	}
 	.status {
+		padding: 2px 6px;
 		font-family: inherit;
-		font-size: 14px;
+		font-size: 13px;
 		text-align: center;
+		color: $dark-100;
+		border-radius: 2px;
+		background-color: $light-100;
 	}
 }
 
