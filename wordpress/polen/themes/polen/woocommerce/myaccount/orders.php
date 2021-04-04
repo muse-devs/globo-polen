@@ -65,7 +65,7 @@ if (in_array('user_talent',  $logged_user->roles)) {
 								</a>
 							</div>
 							<div class="col-12 text-center">
-								<p>Número do pedido: <?php echo $order->get_order_number(); ?></p>
+								<p class="order-number">Número do pedido: <strong><?php echo $order->get_order_number(); ?></strong></p>
 							</div>
 						</div>
 					</div>
