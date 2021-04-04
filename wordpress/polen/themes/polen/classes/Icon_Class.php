@@ -4,7 +4,7 @@ class Icon_Class
 {
 
 	public static function polen_icon_reload() {
-		echo '';
+		echo '<i class="bi bi-arrow-clockwise"></i>';
 	}
 
 	public static function polen_icon_share()
