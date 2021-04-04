@@ -55,6 +55,11 @@ class Icon_Class
 		echo '<i class="bi bi-clipboard"></i>';
 	}
 
+	public static function polen_icon_chevron()
+	{
+		echo '<i class="bi bi-chevron-down"></i>';
+	}
+
 	public static function polen_icon_chevron_right()
 	{
 		echo '<i class="bi bi-chevron-right"></i>';
