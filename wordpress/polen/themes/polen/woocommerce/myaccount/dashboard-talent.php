@@ -10,28 +10,24 @@ if ($polen_talent->is_user_talent($current_user)) {
 	<section class="talent-dashboard-start mt-4">
 		<header class="page-header">
 			<div class="row">
-				<div class="col-md-8">
+				<div class="co-12 col-md-8">
 					<h1 class="page-title"><?php esc_html_e('Início', 'polen'); ?></h1>
-				</div>
-				<div class="col-md-4 text-right">
-					<!--select name="select" id="select" class="form-control">
-					<option value="">Selecionar todos</option>
-				</select-->
+					<h2>Bem-vindo, <?php echo $current_user->display_name; ?></h2>
+					<p>Aceite ou recuse seus pedidos de vídeos.</p>
 				</div>
 			</div>
-			<p>Aceite ou recuse seus pedidos de vídeos.</p>
 		</header><!-- .page-header -->
 
 		<div class="page-content">
-			<div class="row mt-4">
+			<div class="row mt-3">
 				<div class="col-md-12">
 					<div class="msg msg-header">
 						<div class="row">
 							<div class="col-md-6">
-								<p class="p">Você já ganhou no Polen</p>
+								<p class="p">Você já ganhou</p>
 								<span class="value"><?php echo $polen_talent->get_total_by_order_status($current_user->ID, 'wc-completed'); ?></span>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-6 mt-3">
 								<p class="p">Você tem para receber</p>
 								<span class="value"><?php echo $polen_talent->get_total_by_order_status($current_user->ID); ?></span>
 							</div>
@@ -45,28 +41,30 @@ if ($polen_talent->is_user_talent($current_user)) {
 					<div class="col-md-12">
 						<div class="msg msg-body">
 							<div class="row">
-								<!-- <div class="col-md-4">
-									<figure class="icon">
-										<img src="<?= TEMPLATE_URI; ?>/assets/img/ico-selfie.png" alt="ícone" />
+								<div class="col-12">
+									<figure class="icon text-center">
+										<img src="<?= TEMPLATE_URI; ?>/assets/img/tutorial_img_2.png" alt="ícone" />
 									</figure>
-								</div> -->
-								<div class="col-12 col-md-8 py-4 my-4">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-12 col-md-8">
 									<div class="row">
-										<div class="col-12 col-md-12 text-center">
+										<div class="col-12 col-md-12">
 											<div>
 												<p class="p small">Invista hoje</p>
-												<span class="time"><?php echo $total_time; ?></span>
+												<span class="value small"><?php echo $total_time; ?></span>
 											</div>
 											<!-- <div class="mx-5">
 												<?php Icon_Class::polen_icon_arrows(); ?>
 											</div> -->
 											<div>
-												<p class="p small">E receba até</p>
+												<p class="p small mt-3">E receba até</p>
 												<span class="value small"><?php echo $polen_talent->get_total_by_order_status($current_user->ID); ?></span>
 											</div>
 										</div>
 									</div>
-									<p class="mt-4 text-center"><a class="btn btn-primary btn-lg" href="<?php echo wc_get_account_endpoint_url('orders'); ?>">Ganhar agora</a></p>
+									<p class="mt-4 text-center"><a class="btn btn-primary btn-lg btn-block" href="<?php echo wc_get_account_endpoint_url('orders'); ?>">Ganhar agora</a></p>
 								</div>
 							</div>
 						</div>

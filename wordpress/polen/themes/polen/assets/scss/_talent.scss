@@ -212,19 +212,16 @@
 		box-sizing: border-box;
 	}
 	.msg-header {
-		padding: 55px 40px;
+		padding: 25px 20px;
 		background-color: $secondary;
 	}
 	.msg-body {
+		padding: 25px 20px;
 		background-color: rgba(196, 196, 196, 0.2);
 	}
 	.icon {
-		position: absolute;
-		margin: 0;
-		left: 36px;
-		bottom: 0;
 		img {
-			width: auto;
+			width: 40%;
 			height: auto;
 		}
 	}
@@ -235,9 +232,9 @@
 		color: white;
 	}
 	.value {
-		font-size: 50px;
+		font-size: 24px;
 		&.small {
-			font-size: 32px;
+			font-size: 18px;
 		}
 	}
 	.time {
