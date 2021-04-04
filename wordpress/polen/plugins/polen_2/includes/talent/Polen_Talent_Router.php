@@ -25,8 +25,8 @@ class Polen_Talent_Router
         $this->add_route( 'create_video_slot_vimeo', 'make_video_slot_vimeo', true );
         
 //        $_ = new \Polen\Includes\Polen_Talent();
-//        $this->add_route( 'get_talent_order_data', 'get_data_description' );
-//        $this->add_route( 'get_talent_acceptance', 'talent_accept_or_reject' );
+        $this->add_route( 'get_talent_order_data', 'get_data_description' );
+        $this->add_route( 'get_talent_acceptance', 'talent_accept_or_reject' );
     }
     
     public function add_route( string $action, string $handler, $authenticade = true )

@@ -105,73 +105,74 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
 //        
 //     }
 
-//    public function get_data_description(){
-//        $response = array();
-//
-//        if( !isset( $_POST['security'] ) || !wp_verify_nonce( $_POST['security'], 'polen-order-data-nonce' ) ) {
-//            $response = array( 'success' => false, 'message' => 'nonce_fail' );     
-//        }
-//    
-//        if( !isset( $_POST['order'] ) ) {
-//            $response = array( 'success' => false, 'message' => 'order_fail' );     
-//        }
-//
-//        global $wpdb;
-//        $polen_talent = new Polen_Talent();
-//
-//        require_once ABSPATH . '/wp-includes/pluggable.php';
-//        $talent_id = get_current_user_id();
-//        $order_id = trim($_POST['order']); 
-//        $logged_user = new \WP_User( $talent_id );
-//
-//        $sql_product = " SELECT * FROM {$wpdb->prefix}posts WHERE post_type = 'product' and post_author = " . $talent_id;
-//        $talent_products = $wpdb->get_results($sql_product);
-//
-//        if (is_countable($talent_products) && count($talent_products) > 0) {
-//            $first_product = reset($talent_products);
-//
-//            if (is_object($first_product) && isset($first_product->ID)) {
-//                $sql = " SELECT order_items.order_id
-//                FROM {$wpdb->prefix}woocommerce_order_items as order_items
-//                LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta as order_item_meta ON order_items.order_item_id = order_item_meta.order_item_id
-//                LEFT JOIN {$wpdb->posts} AS posts ON order_items.order_id = posts.ID
-//                WHERE posts.post_type = 'shop_order'
-//                    AND posts.post_status IN ( 'wc-payment-approved' )
-//                    AND order_items.order_item_type = 'line_item'
-//                    AND order_item_meta.meta_key = '_product_id'
-//                    AND order_item_meta.meta_value = '$first_product->ID'
-//                    AND order_items.order_id = ".$order_id;
-//                $order_list = $wpdb->get_results($sql);
-//
-//                if (is_countable($order_list) && count($order_list) == 0) {
-//                    $response = array( 'success' => false, 'message' => 'Itens nao encontrados', 'data' => 0 );     
-//                } else {
-//                    $obj = array();
-//                    $robj = array();
-//                    foreach ($order_list as $obj_order):
-//                        $obj['order_id'] = $obj_order->order_id;
-//                        $obj['expiration'] = $polen_talent->video_expiration_time($logged_user, $obj['order_id']); 
-//                        $order = wc_get_order($obj_order->order_id);
-//
-//                        $obj['total'] = $order->get_formatted_order_total();
-//                        foreach ($order->get_items() as $item_id => $item) {
-//                            $obj['email'] = $item->get_meta('email_to_video', true);
-//                            $obj['instructions'] = $item->get_meta('instructions_to_video', true);
-//                            $obj['name'] = $item->get_meta('name_to_video', true);
-//                            $obj['from'] = $item->get_meta('offered_by', true);
-//                            $obj['category'] = $item->get_meta('video_category', true);
-//                        }
-//
-//                        $robj[] = $obj;
-//                    endforeach;
-//
-//                    $response = array( 'success' => true, 'message' => 'Dados obtidos com sucesso', 'data' => $robj );     
-//                }
-//            }
-//        }
-//
-//        echo wp_json_encode( $response );
-//    }
+   public function get_data_description(){
+       $response = array();
+
+       if( !isset( $_POST['security'] ) || !wp_verify_nonce( $_POST['security'], 'polen-order-data-nonce' ) ) {
+           $response = array( 'success' => false, 'message' => 'nonce_fail' );     
+       }
+   
+       if( !isset( $_POST['order'] ) ) {
+           $response = array( 'success' => false, 'message' => 'order_fail' );     
+       }
+
+       global $wpdb;
+       $polen_talent = new Polen_Talent();
+
+       require_once ABSPATH . '/wp-includes/pluggable.php';
+       $talent_id = get_current_user_id();
+       $order_id = trim($_POST['order']); 
+       $logged_user = new \WP_User( $talent_id );
+
+       $sql_product = " SELECT * FROM {$wpdb->prefix}posts WHERE post_type = 'product' and post_author = " . $talent_id;
+       $talent_products = $wpdb->get_results($sql_product);
+
+       if (is_countable($talent_products) && count($talent_products) > 0) {
+           $first_product = reset($talent_products);
+
+           if (is_object($first_product) && isset($first_product->ID)) {
+               $sql = " SELECT order_items.order_id
+               FROM {$wpdb->prefix}woocommerce_order_items as order_items
+               LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta as order_item_meta ON order_items.order_item_id = order_item_meta.order_item_id
+               LEFT JOIN {$wpdb->posts} AS posts ON order_items.order_id = posts.ID
+               WHERE posts.post_type = 'shop_order'
+                   AND posts.post_status IN ( 'wc-payment-approved' )
+                   AND order_items.order_item_type = 'line_item'
+                   AND order_item_meta.meta_key = '_product_id'
+                   AND order_item_meta.meta_value = '$first_product->ID'
+                   AND order_items.order_id = ".$order_id;
+               $order_list = $wpdb->get_results($sql);
+
+               if (is_countable($order_list) && count($order_list) == 0) {
+                   $response = array( 'success' => false, 'message' => 'Itens nao encontrados', 'data' => 0 );     
+               } else {
+                   $obj = array();
+                   $robj = array();
+                   foreach ($order_list as $obj_order):
+                       $obj['order_id'] = $obj_order->order_id;
+                       $obj['expiration'] = $polen_talent->video_expiration_time($logged_user, $obj['order_id']); 
+                       $order = wc_get_order($obj_order->order_id);
+
+                       $obj['total'] = $order->get_formatted_order_total();
+                       foreach ($order->get_items() as $item_id => $item) {
+                           $obj['email'] = $item->get_meta('email_to_video', true);
+                           $obj['instructions'] = $item->get_meta('instructions_to_video', true);
+                           $obj['name'] = $item->get_meta('name_to_video', true);
+                           $obj['from'] = $item->get_meta('offered_by', true);
+                           $obj['category'] = $item->get_meta('video_category', true);
+                       }
+
+                       $robj[] = $obj;
+                   endforeach;
+
+                   $response = array( 'success' => true, 'message' => 'Dados obtidos com sucesso', 'data' => $robj );     
+               }
+           }
+       }
+
+       echo wp_json_encode( $response );
+       wp_die();
+   }
     
     
     public function make_video_slot_vimeo()
