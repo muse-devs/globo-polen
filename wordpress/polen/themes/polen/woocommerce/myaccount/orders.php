@@ -37,7 +37,15 @@ if (in_array('user_talent',  $logged_user->roles)) {
 									</div>
 									<div class="col">
 										<div class="order-title"><?php echo  $item->get_name(); ?></div>
-										<div class="cat">Música</div>
+										<div class="cat">
+										<?php
+											global $post;
+											$terms = get_the_terms( $product_id, 'product_cat' );
+											if( isset( $terms[0]->name ) ){
+												echo $terms[0]->name;
+											}
+										?>
+										</div>
 									</div>
 								</div>
 							</div>
