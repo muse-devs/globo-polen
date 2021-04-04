@@ -37,7 +37,11 @@ $polen_order = \Polen\Includes\Cart\Polen_Cart_Item_Factory::polen_cart_item_fro
 		<div class="row">
 			<div class="col-12">
 				<form id="form-video-upload" method="post" enctype="multipart/form-data">
-					<div class="form-group">
+					<div class="form-group text-center">
+						<label for="file-video" class="custom-file-upload">
+							Escolher arquivo
+						</label>
+						<span id="video-file-name" class="text-truncate ml-2"></span>
 						<input type="file" class="form-control-file" id="file-video" name="file_data" accept="video/*" capture="user">
 					</div>
 					<button type="submit" class="send-video btn btn-primary btn-lg btn-block">Enviar</button>
