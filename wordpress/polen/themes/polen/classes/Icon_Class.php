@@ -3,6 +3,10 @@
 class Icon_Class
 {
 
+	public static function polen_icon_reload() {
+		echo '';
+	}
+
 	public static function polen_icon_share()
 	{
 		echo '<i class="bi bi-share-fill"></i>';
