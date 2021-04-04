@@ -352,7 +352,7 @@ class Polen_Update_Fields
             ?>
             <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                 <label for="billing_phone"><?php _e( 'Celular', 'woocommerce' ); ?> <span class="required">*</span></label>
-                <input type="text" class="woocommerce-Input input-text form-control form-control-lg" name="billing_phone" id="billing_phone" value="<?php echo esc_attr( $user->billing_phone ); ?>" />
+                <input type="text" placeholder="<?php _e( 'Celular', 'woocommerce' ); ?>" class="woocommerce-Input input-text form-control form-control-lg" name="billing_phone" id="billing_phone" value="<?php echo esc_attr( $user->billing_phone ); ?>" />
                 <div class="error-message"></div>
             </p>
         <?php
@@ -366,7 +366,7 @@ class Polen_Update_Fields
                 ?>
                 <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                     <label for="billing_phone"><?php _e( 'Celular', 'woocommerce' ); ?> <span class="required">*</span></label>
-                    <input type="text" class="woocommerce-Input input-text form-control form-control-lg" name="billing_phone" id="billing_phone" value="<?php echo esc_attr( $user->billing_phone ); ?>" />
+                    <input type="text" placeholder="<?php _e( 'Celular', 'woocommerce' ); ?>" class="woocommerce-Input input-text form-control form-control-lg" name="billing_phone" id="billing_phone" value="<?php echo esc_attr( $user->billing_phone ); ?>" />
                     <div class="error-message"></div>
                 </p>
             <?php

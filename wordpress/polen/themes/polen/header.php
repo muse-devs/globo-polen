@@ -32,27 +32,27 @@
 			<?php //get_search_form(); ?>
 			<div class="ml-2">
 				<div class="dropdown">
-					<?php 
-					if( is_user_logged_in() ){ 
+					<?php
+					if( is_user_logged_in() ){
 						$user_name = wp_get_current_user();
 					?>
-						<a class="dropbtn">
+						<a class="dropbtn text-truncate">
 							<i class="bi bi-person-circle"></i>
 							<?php echo $user_name->display_name;?>
-						</a>	
+						</a>
 						<div class="dropdown-content">
 							<a href="<?php echo get_permalink( get_option('woocommerce_myaccount_page_id') ); ?>">Minha conta</a>
 							<a href="<?php echo esc_url( wc_get_account_endpoint_url( 'orders' ) ); ?>">Meus pedidos</a>
 							<a href="<?php echo esc_url( wc_customer_edit_account_url() );?>">Meus dados</a>
 							<a href="<?php echo esc_url( wp_logout_url() );?>">Sair</a>
 						</div>
-					<?php	
+					<?php
 					}
 					else{ ?>
 						<a class="btn btn-outline-light" href="<?php echo get_permalink( get_option('woocommerce_myaccount_page_id') ); ?>">
 							Login
-						</a>	
-					<?php	
+						</a>
+					<?php
 					}
 					?>
 				</div>
