@@ -226,12 +226,14 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
         ];
         try {
             $response = $lib->request('/me/videos', $args, 'POST');
+            Debug::def($response);
 
             $order = wc_get_order( $order_id );
             $order->add_meta_data( Polen_Order::METADATA_VIMEO_VIDEO_ID, $response['body']['uri'], true );
             $order->add_meta_data( Polen_Order::METADATA_VIMEO_VIDEO_URL, $response['body']['link'], true );
             $order->add_meta_data( Polen_Order::METADATA_VIMEO_VIDEO_EMBED_CONTENT, '', true );
-            Debug::def($response);
+            $order->save();
+            
             wp_send_json_success( $response, 200 );
         } catch ( VimeoUploadException $e ) {
             wp_send_json_error( $e->getMessage(), $e->getCode() );
