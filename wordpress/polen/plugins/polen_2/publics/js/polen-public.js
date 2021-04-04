@@ -74,23 +74,12 @@
 					security: wnonce
 					},
 					success: function( response ) {
-						//console.log( response );
 						let obj = $.parseJSON( response );
 						if( obj['success'] == true ){
 							$('#OrderActions').modal('toggle');
-							location.reload();
+							//location.reload();'/enviar-video/?order_id=35
+							location.href='/enviar-video/?order_id=' + order_id;
 						}
-						//console.log(obj['success']);
-						/*
-						if( type == 'reject' && obj['success'] == true ){
-							$('div[box-id="'+order_id+'"]').remove();
-
-							let qtd = parseInt( $('#order-count').html() );
-							qtd = qtd - 1;
-
-							$('#order-count').html(qtd);
-						}
-						*/
 					}
 				});
 		});
