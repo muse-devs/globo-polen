@@ -1,16 +1,22 @@
 let form = document.querySelector('#form-video-upload');
 let file_input = document.querySelector('#file-video');
 let progress = document.querySelector('#progress');
+let content_info = document.getElementById('content-info');
+let content_upload = document.getElementById('content-upload');
+let progress_value = document.getElementById('progress-value');
 let response;
 
 window.onload = () => {
     form.onsubmit = function(evt) {
         if(file_input.files.length == 0) {
             evt.preventDefault();
-            console.log('kd o arquivo meu querido?');
             return false;
         }
-        console.log('mais foi');
+        console.log('Iniciando upload');
+
+		content_info.classList.remove('show');
+		content_upload.classList.add('show');
+
         upload_video.file_size = file_input.files[0].size.toString();
         jQuery.post(polen_ajax.ajaxurl + '?action=make_video_slot_vimeo', upload_video, (data, textStatus, jqXHR) => {
             if(jqXHR.status == 200) {
@@ -41,11 +47,11 @@ window.onload = () => {
     }
 }
  let updateProgress = (evt) => {
-     console.log(evt.lengthComputable);
-     progress.innerHTML = evt.lengthComputable;
+    console.log(evt.lengthComputable);
  }
  let completeHandler = (evt) => {
      console.log('complete');
+	 content_upload.innerHTML = '<p class="my-4"><strong id="progress-value">Enviado</strong></p>';
  }
  let errorHandler = (jqXHR, textStatus, errorThrown) => {
      console.log('error', jqXHR, textStatus, errorThrown);
@@ -53,10 +59,10 @@ window.onload = () => {
  let transferCanceled = (evt) => {
      console.log('cancelado');
  }
- 
+
  function progressFunction(e){
     if(e.lengthComputable){
-        progress.innerHTML += ' . ' + e.loaded + ' | ' + e.total;
+        progress_value.innerText = `Enviando vídeo ${Math.floor(e.loaded/e.total*100)}%`;
     }
 }
 serialize = function(obj, prefix) {

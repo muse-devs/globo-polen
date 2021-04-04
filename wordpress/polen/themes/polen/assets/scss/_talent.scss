@@ -281,7 +281,7 @@
 		background-color: $secondary;
 	}
 	.body {
-		padding: 60px;
+		padding: 35px 0;
 		box-sizing: border-box;
 	}
 	.p {
@@ -304,6 +304,10 @@
 	.name {
 		font-size: 32px;
 		font-weight: 700;
+		&.small {
+			font-size: 20px;
+			font-weight: 500;
+		}
 	}
 	.category {
 		padding: 5px 23px;
@@ -312,7 +316,7 @@
 		border-radius: 90px;
 	}
 	.text {
-		font-size: 21px;
+		font-size: 16px;
 		font-weight: 500;
 	}
 }
