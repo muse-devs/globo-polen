@@ -133,7 +133,7 @@
 .top-banner {
 	position: relative;
 	width: 100%;
-	height: 100 * 1.046511628 + 0vw;
+	height: 89vw;
 	border-radius: 8px;
 	overflow: hidden;
 	&::after {
@@ -164,15 +164,15 @@
 		z-index: 2;
 		.title {
 			margin-bottom: 30px;
-			font-size: 72px;
+			font-size: 1.4rem;
 			@include media-breakpoint-down(xs) {
-				font-size: 1.8rem;
+				// font-size: 1.8rem;
 			}
 			@include media-breakpoint-down(sm) {
-				font-size: 1.8rem;
+				// font-size: 1.8rem;
 			}
 			@include media-breakpoint-only(md) {
-				font-size: 44px;
+				// font-size: 44px;
 			}
 		}
 	}

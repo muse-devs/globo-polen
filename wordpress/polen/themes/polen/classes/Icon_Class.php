@@ -3,7 +3,13 @@
 class Icon_Class
 {
 
-	public static function polen_icon_reload() {
+	public static function polen_icon_checkmark()
+	{
+		echo '<i class="bi bi-check"></i>';
+	}
+
+	public static function polen_icon_reload()
+	{
 		echo '<i class="bi bi-arrow-clockwise"></i>';
 	}
 
