@@ -43,7 +43,7 @@ $polen_order = Polen_Cart_Item_Factory::polen_cart_item_from_order($order);
 						<label for="file-video" class="custom-file-upload">
 							Escolher arquivo
 						</label>
-						<span id="video-file-name" class="text-truncate ml-2"></span>
+						<div id="video-file-name" class="text-truncate ml-2"></div>
 						<input type="file" class="form-control-file" id="file-video" name="file_data" accept="video/*" capture="user">
 					</div>
 					<button type="submit" class="send-video btn btn-primary btn-lg btn-block">Enviar</button>
