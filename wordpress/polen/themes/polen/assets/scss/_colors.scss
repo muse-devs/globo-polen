@@ -7,18 +7,10 @@ $dark-25: rgba(#000000, 0.25);
 
 $body-bg: #000;
 $body-color: $light-100;
-$primary: #EA4C89;
+$primary: #ea4c89;
 $danger: #ff4136;
 $secondary: #377dff;
 $accept: #74e5bd;
-
-$theme-colors: (
-	"primary": $primary,
-	"secondary": $secondary,
-	"succes": $accept,
-	"danger": $danger,
-	"light": $light-100,
-);
 
 $progress-bar-bg: $secondary;
 $nav-tabs-link-active-color: $primary;
@@ -31,3 +23,12 @@ $talent-bg-color: #262626;
 $form-bg-color: rgba(196, 196, 196, 0.1);
 $font-color2: $light-50;
 $input-font-color: $light-100;
+
+$theme-colors: (
+	"primary": $primary,
+	"secondary": $secondary,
+	"succes": $accept,
+	"danger": $danger,
+	"light": $light-100,
+	"gray": $talent-bg-color,
+);

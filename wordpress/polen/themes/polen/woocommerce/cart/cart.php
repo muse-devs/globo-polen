@@ -42,7 +42,7 @@ foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
     $talent_id = get_post_field('post_author', $product_id);
     $thumbnail = wp_get_attachment_image_src($_product->get_image_id(), 'thumbnail')[0];
     $talent = get_user_by('id', $talent_id);
-    
+
     $talent_data = $Talent_Fields->get_vendor_data( $talent_id );
 
     $talent_cart_detail = array(
@@ -85,7 +85,7 @@ polen_get_talent_card( $talent_cart_detail ); ?>
 				<div class="col-md-12 mb-4">
 					<span class="form-title">Esse vídeo é para:</span>
 				</div>
-				<div class="col-md-12 mb-2">
+				<div class="col-md-12 mb-4">
 					<?php
 					$video_to = isset($cart_item['video_to']) ? $cart_item['video_to'] : '';
 					$checked_other_one = '';
@@ -113,7 +113,7 @@ polen_get_talent_card( $talent_cart_detail ); ?>
 				</div>
 			</div>
 
-			<div class="row mt-3 video-to-info">
+			<div class="row video-to-info">
 				<div class="col-12 col-md-6">
 					<?php
 					$offered_by = isset($cart_item['offered_by']) ? $cart_item['offered_by'] : '';
