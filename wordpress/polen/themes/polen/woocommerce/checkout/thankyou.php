@@ -24,7 +24,7 @@ defined('ABSPATH') || exit;
 		<?php else : ?>
 			<div class="row mt-4">
 				<div class="col-12 text-center">
-					<h1>Pedido feito com sucesso</h1>
+					<h1>Pedido realizado com sucesso</h1>
 					<p class="mt-2">Seu número de pedido é <?php echo $order->get_order_number(); ?></p>
 					<a href="<?php echo home_url(); ?>" class="btn btn-primary btn-lg btn-block mt-4">Voltar para a home</a>
 				</div>
