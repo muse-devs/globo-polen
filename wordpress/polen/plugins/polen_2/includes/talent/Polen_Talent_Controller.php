@@ -102,7 +102,6 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
 
        echo wp_json_encode( $response );
        wp_die();
-       
     }
 
    public function get_data_description(){
