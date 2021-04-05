@@ -3,8 +3,8 @@ $ = jQuery;
 $(document).ready(function () {
     $('.slick-padding').slick({
         arrows: false,
-        centerMode: true,
-		infinite: false,
+        // centerMode: true,
+		infinite: true,
         slidesToShow: 4,
 		responsive: [
 			{
@@ -26,7 +26,7 @@ $(document).ready(function () {
 			{
 			  breakpoint: 480,
 			  settings: {
-				slidesToShow: 1,
+				slidesToShow: 2,
 				slidesToScroll: 1
 			  }
 			}
