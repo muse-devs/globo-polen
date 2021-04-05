@@ -91,3 +91,7 @@ select.form-control:not([size]):not([multiple]) {
 .woocommerce form.register {
 	margin: 0;
 }
+
+.woocommerce form.checkout_coupon, .woocommerce form.login, .woocommerce form.register {
+	padding: 20px 0;
+}
