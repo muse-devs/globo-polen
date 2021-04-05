@@ -7,6 +7,7 @@ class Polen_SignInUser
     public function __construct() {
         add_action( 'wp_logout', array( $this, 'polen_logout_redirect' ) );
         add_action( 'user_register', array( $this, 'register_check_user_logged_out_orders'), 999, 1 );
+        // add_action( 'wp_login', array( $this, 'login_check_user_logged_out_orders' ), 999, 2 );
     }        
 
     public function add_fields_sign_in()
@@ -47,4 +48,17 @@ class Polen_SignInUser
             }
         }
     }
+
+    /* public function login_check_user_logged_out_orders( $user_login, $user ) {
+        global $wpdb;
+        if( $user && ! is_null( $user ) && ! empty( $user ) && isset( $user->user_email ) ) {
+            $sql_orders = "SELECT `post_id` AS `order_id` FROM `" . $wpdb->postmeta . "` WHERE `post_id` IN ( SELECT `post_id` FROM `" . $wpdb->postmeta . "` WHERE `meta_key`='_billing_email' AND `meta_value`='" . $user->user_email . "' ) AND `meta_key`='_customer_user' AND `meta_value`='0'";
+            $res_orders = $wpdb->get_results( $sql_orders );
+            if( $res_orders && ! is_null( $res_orders ) && ! empty( $res_orders ) && is_array( $res_orders ) && count( $res_orders ) > 0 ) {
+                foreach( $res_orders as $k => $order ) {
+                    update_post_meta( $order->order_id, '_customer_user', $user->ID );
+                }
+            }
+        }
+    } */
 }
