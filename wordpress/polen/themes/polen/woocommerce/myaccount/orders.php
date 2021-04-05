@@ -46,13 +46,7 @@ if (in_array('user_talent',  $logged_user->roles)) {
 											}
 										?>
 										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-12 col-md-4 mt-2">
-								<div class="row">
-									<div class="col-md-12 text-center">
-										<span class="status">
+										<div class="status mt-2">
 											<?php
 											switch ($order->get_status()) {
 												case 'on-hold':
@@ -63,13 +57,13 @@ if (in_array('user_talent',  $logged_user->roles)) {
 													break;
 											}
 											?>
-										</span>
+										</div>
 									</div>
 								</div>
 							</div>
-							<div class="col-12 text-center my-3">
+							<div class="col-12 text-center mt-4 mb-3">
 								<a href="<?php echo $order->get_view_order_url(); ?>" class="btn btn-primary btn-lg btn-block">
-									Ver mais
+									Acompanhar pedido
 								</a>
 							</div>
 							<div class="col-12 text-center">

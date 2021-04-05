@@ -19,7 +19,7 @@ class Polen_Admin_RedirectTalentAccess
     {
         $user = wp_get_current_user();
         $polen_talent = new Polen_Talent();
-        if( $polen_talent->is_user_talent( $user ) ) {
+        if( ! defined('DOING_AJAX') && $polen_talent->is_user_talent( $user ) ) {
             $path = 'my-account';
             wp_redirect( site_url( $path ) );
         }

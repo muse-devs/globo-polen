@@ -67,6 +67,16 @@ let completeHandler = (evt) => {
 	console.log("complete");
 	content_upload.innerHTML =
 		'<p class="my-4"><strong id="progress-value">Enviado</strong></p>';
+        let obj_complete_order = {
+            'action': 'order_status_completed',
+            'order' : upload_video.order_id,
+        };
+        jQuery.post( polen_ajax.ajaxurl, obj_complete_order, (data, textStatus, jqXHR) => {
+            alert('Video enviado com sucesso');
+            window.location.href = museobj.base_url + '/my-account/orders/';
+        }).fail(function() {
+            alert( "Ocorreu um erro, envie o video novamente" );
+        })
 };
 let errorHandler = (jqXHR, textStatus, errorThrown) => {
 	console.log("error", jqXHR, textStatus, errorThrown);
