@@ -6,6 +6,7 @@
  */
 
 namespace Polen\Includes;
+use Polen\Includes\Polen_Order;
 
 class Polen_Talent {
 
@@ -311,6 +312,8 @@ class Polen_Talent {
 
             if( !$status ){
                 $status = "'wc-payment-approved', 'wc-talent-accepted' " ;
+            }else{
+                $status = "'".$status."'";
             }
 
             $select = 'order_items.order_id'; 
@@ -332,8 +335,7 @@ class Polen_Talent {
                         AND order_item_meta.meta_key = '_product_id'
                         AND order_item_meta.meta_value = '$first_product->ID'";
 
-
-                    $order_list = $wpdb->get_results($sql);
+                        $order_list = $wpdb->get_results($sql);
 
                     if (is_countable($order_list) && count($order_list) == 0) {
                         return false;
@@ -509,6 +511,20 @@ class Polen_Talent {
 
         }    
         return false;
+    }
+
+    /**
+     * Retorna os vídeos pelo id do talento
+     */
+    public function videos_by_talent_id( $talent_id ){
+        $arr_meta_video = array();
+        $arr_completed_orders = $this->get_talent_orders( $talent_id, 'wc-completed' );
+        if( is_array( $arr_completed_orders ) && !empty( $arr_completed_orders ) ){
+            foreach( $arr_completed_orders as $orders ):
+                $arr_meta_video[] = get_post_meta( $orders['order_id'], Polen_Order::METADATA_VIMEO_VIDEO_URL, true );
+            endforeach;
+        }
+        return $arr_meta_video;
     }
 
 }

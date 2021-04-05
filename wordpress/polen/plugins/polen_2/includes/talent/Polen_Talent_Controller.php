@@ -142,7 +142,7 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
                    AND order_item_meta.meta_value = '$first_product->ID'
                    AND order_items.order_id = ".$order_id;
                $order_list = $wpdb->get_results($sql);
-
+                
                if (is_countable($order_list) && count($order_list) == 0) {
                    $response = array( 'success' => false, 'message' => 'Itens nao encontrados', 'data' => 0 );     
                } else {
