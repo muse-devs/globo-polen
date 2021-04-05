@@ -44,7 +44,7 @@
 		.image {
 			height: 330px;
 			@include media-breakpoint-down(sm) {
-				height: 70vw;
+				height: 50vw;
 			}
 			@include media-breakpoint-only(sm) {
 				height: 50vw;
@@ -87,7 +87,7 @@
 		.image {
 			height: 270px;
 			@include media-breakpoint-down(sm) {
-				height: 60vw;
+				height: 50vw;
 			}
 			@include media-breakpoint-only(sm) {
 				height: 50vw;
@@ -190,11 +190,11 @@
 	&::before {
 		content: "";
 		display: inline-block;
-		margin-right: 24px;
-		width: 46px;
-		height: 46px;
+		margin-right: 10px;
+		width: 32px;
+		height: 32px;
 		border-radius: 50%;
-		border: 5px solid $primary;
+		border: 3px solid $primary;
 	}
 	&::after {
 		content: "";
@@ -202,11 +202,11 @@
 		display: inline-block;
 		width: 0;
 		height: 0;
-		left: 19px;
-		border-top: 8px solid transparent;
-		border-bottom: 8px solid transparent;
+		left: 13px;
+		border-top: 6px solid transparent;
+		border-bottom: 6px solid transparent;
 
-		border-left: 12px solid $primary;
+		border-left: 10px solid $primary;
 	}
 }
 

@@ -409,7 +409,7 @@
 	}
 	.order-number {
 		font-size: 14px;
-		color: #D0D4EA;
+		color: #d0d4ea;
 	}
 	.status {
 		padding: 2px 10px;
@@ -426,7 +426,7 @@
 //Talento logado
 
 .box-video {
-	border: 1px dashed $light-100;
+	// border: 1px dashed $light-100;
 	border-radius: 8px;
 	.content-info,
 	.content-upload {
@@ -434,5 +434,14 @@
 		&.show {
 			display: block;
 		}
+	}
+}
+
+#video-rec,
+#video-rec-again,
+#video-send {
+	display: none;
+	&.show {
+		display: block;
 	}
 }

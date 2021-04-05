@@ -6,6 +6,7 @@ let content_upload = document.getElementById("content-upload");
 let progress_value = document.getElementById("progress-value");
 let video_input = document.getElementById("file-video");
 let video_name = document.getElementById("video-file-name");
+let video_rec_click = document.querySelectorAll(".video-rec");
 let response;
 
 window.onload = () => {
@@ -18,6 +19,8 @@ window.onload = () => {
 
 		content_info.classList.remove("show");
 		content_upload.classList.add("show");
+		document.querySelector("#video-rec-again").classList.remove("show");
+		document.querySelector("#video-send").classList.remove("show");
 
 		upload_video.file_size = file_input.files[0].size.toString();
 		jQuery.post(
@@ -56,8 +59,18 @@ window.onload = () => {
 		return false;
 	};
 
+	video_rec_click.forEach(function (item) {
+		item.addEventListener("click", function (e) {
+			e.preventDefault();
+			video_input.click();
+		});
+	});
+
 	video_input.addEventListener("change", function (e) {
-		video_name.innerText = getFullPath(e.target.value);
+		changeText();
+		document.querySelector("#video-rec").classList.remove("show");
+		document.querySelector("#video-rec-again").classList.add("show");
+		document.querySelector("#video-send").classList.add("show");
 	});
 };
 let updateProgress = (evt) => {
@@ -67,16 +80,22 @@ let completeHandler = (evt) => {
 	console.log("complete");
 	content_upload.innerHTML =
 		'<p class="my-4"><strong id="progress-value">Enviado</strong></p>';
-        let obj_complete_order = {
-            'action': 'order_status_completed',
-            'order' : upload_video.order_id,
-        };
-        jQuery.post( polen_ajax.ajaxurl, obj_complete_order, (data, textStatus, jqXHR) => {
-            alert('Video enviado com sucesso');
-            window.location.href = museobj.base_url + '/my-account/orders/';
-        }).fail(function() {
-            alert( "Ocorreu um erro, envie o video novamente" );
-        })
+	let obj_complete_order = {
+		action: "order_status_completed",
+		order: upload_video.order_id,
+	};
+	jQuery
+		.post(
+			polen_ajax.ajaxurl,
+			obj_complete_order,
+			(data, textStatus, jqXHR) => {
+				alert("Video enviado com sucesso");
+				window.location.href = museobj.base_url + "/my-account/orders/";
+			}
+		)
+		.fail(function () {
+			alert("Ocorreu um erro, envie o video novamente");
+		});
 };
 let errorHandler = (jqXHR, textStatus, errorThrown) => {
 	console.log("error", jqXHR, textStatus, errorThrown);
@@ -92,6 +111,11 @@ function progressFunction(e) {
 		)}%`;
 	}
 }
+
+function changeText() {
+	document.getElementById("info").innerText = "Vídeo gravado com sucesso";
+}
+
 serialize = function (obj, prefix) {
 	var str = [],
 		p;

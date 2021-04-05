@@ -18,14 +18,14 @@ $polen_order = Polen_Cart_Item_Factory::polen_cart_item_from_order($order);
 		<button class="btn btn-outline-light btn-lg btn-block mt-4" data-toggle="modal" data-target="#OrderActions">Instruções</button>
 	</header>
 	<article>
-		<div class="row my-4">
+		<div class="row mt-4">
 			<div class="col-12">
-				<div class="py-5 text-center box-video">
+				<div class="py-3 text-center box-video">
 					<div id="content-info" class="content-info show">
 						<figure class="image">
 							<img src="<?php echo TEMPLATE_URI ?>/assets/img/upload-info.png" alt="Gravar vídeo agora">
 						</figure>
-						<p class="info">Gravar Vídeo agora</p>
+						<p id="info" class="info"></p>
 					</div>
 					<div id="content-upload" class="content-upload">
 						<div class="spinner-border text-secondary" role="status">
@@ -40,13 +40,12 @@ $polen_order = Polen_Cart_Item_Factory::polen_cart_item_from_order($order);
 			<div class="col-12">
 				<form id="form-video-upload" method="post" enctype="multipart/form-data">
 					<div class="form-group text-center">
-						<label for="file-video" class="custom-file-upload">
-							Escolher arquivo
-						</label>
+						<button id="video-rec" class="btn btn-primary btn-lg btn-block video-rec show">Gravar vídeo</button>
 						<div id="video-file-name" class="text-truncate ml-2"></div>
 						<input type="file" class="form-control-file" id="file-video" name="file_data" accept="video/*" capture="user">
 					</div>
-					<button type="submit" class="send-video btn btn-primary btn-lg btn-block">Enviar</button>
+					<button type="submit" id="video-send" class="send-video btn btn-primary btn-lg btn-block">Enviar</button>
+					<button id="video-rec-again" class="btn btn-outline-light btn-lg btn-block video-rec">Não gostei, gravar outro video</button>
 				</form>
 			</div>
 		</div>
