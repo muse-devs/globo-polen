@@ -163,8 +163,8 @@ class Polen_Plugin_Settings
                 array(
                     'id'       => 'polen_smtp_on',
                     'type'     => 'switch',
-                    'title'    => esc_html__('Desativar a barra administrativa do Wordpress', 'polen'),
-                    'desc'     => 'Desativa a barra administrativa do Wordpress (adminbar).',
+                    'title'    => esc_html__('Ativar o envio de e-mail através de serviço de SMTP', 'polen'),
+                    'desc'     => 'Ative o envio de e-mails através de um serviço de SMTP.',
                     'default'  => 0,
                 ),
                 array(
