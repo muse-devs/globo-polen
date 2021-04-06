@@ -1,0 +1,75 @@
+.order-flow {
+	.col-flow-icons {
+		.flow {
+			i {
+				font-size: 29px;
+				line-height: 1;
+				color: $accept;
+			}
+		}
+		.line {
+			width: 3px;
+			height: 176px;
+			background-color: $light-50;
+		}
+		.flow-icon {
+			&.complete {
+				.line {
+					background-color: $accept;
+				}
+			}
+			&.in-progress,
+			&.waiting {
+				.flow {
+					width: 30px;
+					height: 30px;
+					border: 3px solid $light-50;
+					border-radius: 50%;
+					box-sizing: border-box;
+					i {
+						display: none;
+					}
+				}
+			}
+			&.in-progress {
+				.flow {
+					background-color: transparent;
+				}
+			}
+			&.waiting {
+				.flow {
+					border-color: transparent;
+					background-color: $light-50;
+				}
+			}
+			&.fail {
+				.flow {
+					i {
+						color: $danger;
+					}
+				}
+			}
+		}
+	}
+	.col-flow-texts {
+		.flow {
+			&.in-progress {
+				.title {
+					font-size: 24px;
+				}
+				.description {
+					margin-top: 12px;
+				}
+			}
+			&.waiting {
+				color: $light-25;
+				.title {
+					font-size: 14px;
+				}
+			}
+		}
+		.flow-2 {
+			height: 315px;
+		}
+	}
+}

@@ -3,6 +3,16 @@
 class Icon_Class
 {
 
+	public static function polen_icon_check_o()
+	{
+		echo '<i class="bi bi-check-circle"></i>';
+	}
+
+	public static function polen_icon_exclamation_o()
+	{
+		echo '<i class="bi bi-exclamation-circle"></i>';
+	}
+
 	public static function polen_icon_checkmark()
 	{
 		echo '<i class="bi bi-check"></i>';
