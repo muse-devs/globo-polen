@@ -157,7 +157,7 @@ class Polen_Plugin_Settings
         \Redux::set_section( $opt_name, array(
             'title'            => esc_html__( 'SMTP', 'polen' ),
             'id'               => 'polen_smtp',
-            'icon'             => 'el el-align-justify',
+            'icon'             => 'el el-envelope',
             'subsection'       => false,
             'fields'           => array(
                 array(
