@@ -78,7 +78,7 @@ polen_get_talent_card( $talent_cart_detail ); ?>
 		<?php endif; ?>
 	<?php endforeach; ?>
 
-	<div class="row mt-1 py-2 cart-other">
+	<div class="row mt-2 py-2 cart-other">
 		<?php do_action('woocommerce_cart_contents'); ?>
 		<div class="col-12 col-md-12">
 			<div class="row">

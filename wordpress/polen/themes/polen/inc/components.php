@@ -253,7 +253,7 @@ function polen_front_get_talent_videos($talent, $items = array(
 function polen_get_talent_card($talent)
 {
 ?>
-	<div class="my-4 talent-card">
+	<div class="talent-card">
 		<header class="row pb-3 header">
 			<div class="col-3">
 				<div class="avatar" style="background-image: url(<?php echo isset($talent["avatar"]) ? $talent["avatar"] : TEMPLATE_URI . '/assets/img/avatar.png';  ?>)"></div>
