@@ -1,3 +1,9 @@
+.box-round {
+	box-sizing: border-box;
+	border-radius: 8px;
+	background-color: $talent-bg-color;
+}
+
 .polen-card {
 	.image {
 		position: relative;
@@ -47,7 +53,8 @@
 	&.responsive {
 		margin-right: 15px;
 	}
-	&.medium, &.responsive {
+	&.medium,
+	&.responsive {
 		.image {
 			height: 330px;
 			@include media-breakpoint-down(sm) {
@@ -255,31 +262,9 @@
 // 	}
 // }
 
-.tutorial-card {
-	text-align: center;
-	.image {
-		position: relative;
-		margin: 0 auto 25px;
-		width: 100%;
-		@include media-breakpoint-down(sm) {
-			margin-bottom: 20px;
-			width: 70%;
-		}
-		img {
-			max-width: 60%;
-		}
-	}
-	.title {
-		margin-bottom: 20px;
-		font-family: $font-secondary;
-		font-size: 16px;
-		font-weight: 700;
-	}
-	.description {
-		font-family: $font-secondary;
-		font-size: 14px;
-		line-height: 24px;
-		font-weight: 400;
+.tutorial {
+	.icon {
+		font-size: 28px;
 		color: $light-50;
 	}
 }
