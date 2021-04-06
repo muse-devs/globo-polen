@@ -157,14 +157,14 @@ class Polen_Plugin_Settings
         \Redux::set_section( $opt_name, array(
             'title'            => esc_html__( 'SMTP', 'polen' ),
             'id'               => 'polen_smtp',
-            'icon'             => 'el el-align-justify',
+            'icon'             => 'el el-envelope',
             'subsection'       => false,
             'fields'           => array(
                 array(
                     'id'       => 'polen_smtp_on',
                     'type'     => 'switch',
-                    'title'    => esc_html__('Desativar a barra administrativa do Wordpress', 'polen'),
-                    'desc'     => 'Desativa a barra administrativa do Wordpress (adminbar).',
+                    'title'    => esc_html__('Ativar o envio de e-mail através de serviço de SMTP', 'polen'),
+                    'desc'     => 'Ative o envio de e-mails através de um serviço de SMTP.',
                     'default'  => 0,
                 ),
                 array(
