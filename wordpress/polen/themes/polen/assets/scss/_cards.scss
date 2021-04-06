@@ -23,7 +23,11 @@
 			bottom: -13px;
 			width: calc(100% + 10px);
 			height: 45%;
-			background: linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0) 100%);
+			background: linear-gradient(
+				180deg,
+				#000000 0%,
+				rgba(0, 0, 0, 0) 100%
+			);
 			transform: rotate(-180deg);
 			z-index: 1;
 		}
@@ -44,7 +48,7 @@
 		.image {
 			height: 330px;
 			@include media-breakpoint-down(sm) {
-				height: 50vw;
+				height: 65vw;
 			}
 			@include media-breakpoint-only(sm) {
 				height: 50vw;
@@ -143,7 +147,11 @@
 		height: 100%;
 		top: 0;
 		left: 0;
-		background: linear-gradient(0deg, rgba($primary, 0.5) 0%, rgba(0, 0, 0, 0) 149.72%);
+		background: linear-gradient(
+			0deg,
+			rgba($primary, 0.5) 0%,
+			rgba(0, 0, 0, 0) 149.72%
+		);
 		z-index: 1;
 	}
 	.video {
@@ -177,6 +185,14 @@
 		}
 	}
 	@include media-breakpoint-only(xs) {
+	}
+}
+
+.slick-alt {
+	width: 100%;
+	overflow: hidden;
+	.slick-padding {
+		width: 130%;
 	}
 }
 

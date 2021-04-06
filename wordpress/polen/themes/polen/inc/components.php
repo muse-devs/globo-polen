@@ -67,10 +67,12 @@ function polen_front_get_news($items)
 			</header>
 		</div>
 		<div class="col-md-12">
-			<div class="row slick-padding">
-				<?php foreach ($items as $item) : ?>
-					<?php polen_front_get_card($item); ?>
-				<?php endforeach; ?>
+			<div class="slick-alt">
+				<div class="row slick-padding">
+					<?php foreach ($items as $item) : ?>
+						<?php polen_front_get_card($item); ?>
+					<?php endforeach; ?>
+				</div>
 			</div>
 		</div>
 	</section>
