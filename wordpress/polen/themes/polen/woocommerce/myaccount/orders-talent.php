@@ -28,7 +28,7 @@ if (in_array('user_talent',  $logged_user->roles)) {
 					<div class="row mb-3" box-id="<?php echo $order['order_id']; ?>">
 						<div class="col md-12">
 							<div class="talent-order">
-								<div class="row mb-4">
+								<div class="row">
 									<div class="col-12 col-md-8">
 										<div class="row">
 											<div class="col-6 col-md-3">
