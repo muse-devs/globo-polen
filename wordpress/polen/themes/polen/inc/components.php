@@ -205,13 +205,15 @@ function polen_front_get_talent_videos($talent, $items = array(
 ))
 {
 ?>
-	<div class="talent-carousel">
-		<?php foreach ($items as $item) : ?>
-			<figure class="item" style="background-image: url(<?= $item['image']; ?>);">
-				<img src="<?= $item['image']; ?>" alt="<?= $item['title']; ?>" data-url="<?= $item['video']; ?>">
-				<a href="javascript:openVideoByURL('<?= $item['video']; ?>')" class="player-button"></a>
-			</figure>
-		<?php endforeach; ?>
+	<div class="slick-alt">
+		<div class="slick-padding talent-carousel">
+			<?php foreach ($items as $item) : ?>
+				<figure class="item" style="background-image: url(<?= $item['image']; ?>);">
+					<img src="<?= $item['image']; ?>" alt="<?= $item['title']; ?>" data-url="<?= $item['video']; ?>">
+					<a href="javascript:openVideoByURL('<?= $item['video']; ?>')" class="player-button"></a>
+				</figure>
+			<?php endforeach; ?>
+		</div>
 	</div>
 
 	<div id="video-modal" class="video-modal">

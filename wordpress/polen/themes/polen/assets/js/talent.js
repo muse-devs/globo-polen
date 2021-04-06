@@ -8,7 +8,7 @@ jQuery(document).ready(function () {
 		infinite: true,
 		speed: 300,
 		slidesToShow: 2,
-		slidesToScroll: 2,
+		slidesToScroll: 1,
 		// variableWidth: true,
 	});
 	var id = window.location.hash.substring(1);
