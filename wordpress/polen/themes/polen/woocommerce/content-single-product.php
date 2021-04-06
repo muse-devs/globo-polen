@@ -46,27 +46,13 @@ $terms = wp_get_object_terms(get_the_ID(), 'product_tag');
 
 <div id="product-<?php the_ID(); ?>" <?php wc_product_class('', $product); ?>>
 
-	<!-- Cabeçalho do Artista -->
-	<header class="talent-page-header">
-		<div class="row mt-4 d-flex justify-content-between align-items-center">
-			<div class="col-12 col-md-5">
-				<div class="row">
-					<div class="col-12 col-md-12">
-						<h1 class="talent-name text-truncate" title="<?= get_the_title(); ?>"><?= get_the_title(); ?></h1>
-						<span class="price"><?php echo wc_price($product->get_price()); ?></span>
-					</div>
-				</div>
-			</div>
-		</div>
-	</header>
-
 	<!-- Vídeos -->
 	<?php polen_front_get_talent_videos($Talent_Fields); ?>
 
 	<!-- Tags -->
-	<div class="row mt-4">
+	<div class="row">
 		<div class="col-md-12">
-			<h4 class="subtitle">Descrição</h4>
+		<h1 class="talent-name text-truncate mb-3" title="<?= get_the_title(); ?>"><?= get_the_title(); ?></h1>
 			<div class="row">
 				<div class="col-md-12">
 					<?php if (count($terms) > 0) : ?>
@@ -79,7 +65,7 @@ $terms = wp_get_object_terms(get_the_ID(), 'product_tag');
 		</div>
 	</div>
 
-	<div class="row my-5 pb-5 talent-page-footer">
+	<div class="row my-3 pb-2 talent-page-footer">
 		<div class="col-12 col-md-4">
 			<?php echo woocommerce_template_single_add_to_cart(); ?>
 			<!--button class="btn btn-primary btn-lg btn-block btn-get-video">Pedir vídeo R$ 200</button-->
@@ -89,7 +75,7 @@ $terms = wp_get_object_terms(get_the_ID(), 'product_tag');
 				<div class="col-md-6 text-center">
 					<span class="skill-title">Responde em</span>
 				</div>
-				<div class="col-md-6 text-center">
+				<div class="col-md-6 text-center mt-2">
 					<?php Icon_Class::polen_icon_clock(); ?>
 					<span class="skill-value"><?= $Talent_Fields->tempo_resposta; ?>h</span>
 				</div>

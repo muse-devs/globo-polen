@@ -40,7 +40,7 @@ function polen_front_get_card($item, $size = "medium")
 				<a href="<?= $item["talent_url"]; ?>" class="link">
 					<img src="<?php echo $image[0]; ?>" alt="<?= $item["name"]; ?>">
 				</a>
-				<span class="price">R$<?= $item["price"]; ?></span>
+				<span class="price"><span class="mr-2"><?php Icon_Class::polen_icon_camera_video(); ?></span>R$<?= $item["price"]; ?></span>
 			</figure>
 			<h4 class="title">
 				<a href="<?= $item["talent_url"]; ?>"><?= $item["name"]; ?></a>
@@ -148,7 +148,7 @@ function polen_front_get_artists($items, $title)
 function polen_front_get_tutorial()
 {
 ?>
-	<section class="row tutorial mt-4">
+	<section class="row tutorial my-4">
 		<div class="col-md-12">
 			<header class="row mb-4">
 				<div class="col">
