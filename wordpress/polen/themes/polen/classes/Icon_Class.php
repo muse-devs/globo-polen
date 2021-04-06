@@ -3,6 +3,21 @@
 class Icon_Class
 {
 
+	public static function polen_icon_phone()
+	{
+		echo '<i class="bi bi-phone"></i>';
+	}
+
+	public static function polen_icon_camera_video()
+	{
+		echo '<i class="bi bi-camera-video"></i>';
+	}
+
+	public static function polen_icon_hand_thumbs_up()
+	{
+		echo '<i class="bi bi-hand-thumbs-up"></i>';
+	}
+
 	public static function polen_icon_check_o()
 	{
 		echo '<i class="bi bi-check-circle"></i>';

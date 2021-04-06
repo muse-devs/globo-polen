@@ -147,48 +147,47 @@ function polen_front_get_artists($items, $title)
 
 function polen_front_get_tutorial()
 {
-	echo '
+?>
 	<section class="row tutorial mt-4">
 		<div class="col-md-12">
 			<header class="row mb-4">
-				<div class="col text-center">
+				<div class="col">
 					<h2>Como funciona</h2>
 				</div>
 			</header>
 		</div>
 		<div class="col-md-12">
-			<div class="row mt-3 mt-md-5">
-				<div class="col-md-4 mb-4">
-					<div class="tutorial-card">
-						<figure class="image">
-							<img src="' . TEMPLATE_URI . '/assets/img/tutorial_img_1.png" alt="Conect-se aos ídolos">
-						</figure>
-						<h5 class="title">Conecte-se aos ídolos</h5>
-						<p class="description">Peça um vídeo personalizado com o seu ídolo para celebar ocasiões especiais.</p>
+			<div class="box-round py-4 px-4">
+				<div class="row">
+					<div class="col-4">
+						<div class="row">
+							<div class="col-12 text-center icon"><?php Icon_Class::polen_icon_phone(); ?></div>
+							<div class="col-12 text-center mt-2">
+								<p>Peça o vídeo para o seu ídolo</p>
+							</div>
+						</div>
 					</div>
-				</div>
-				<div class="col-md-4 mb-4">
-					<div class="tutorial-card">
-						<figure class="image">
-							<img src="' . TEMPLATE_URI . '/assets/img/tutorial_img_2.png" alt="Conect-se aos ídolos">
-						</figure>
-						<h5 class="title">Receba sua encomenda</h5>
-						<p class="description">Ídolo recebe o seu pedido, atende e entrega pela plataforma. </p>
+					<div class="col-4">
+						<div class="row">
+							<div class="col-12 text-center icon"><?php Icon_Class::polen_icon_camera_video(); ?></div>
+							<div class="col-12 text-center mt-2">
+								<p>Receba seu vídeo</p>
+							</div>
+						</div>
 					</div>
-				</div>
-				<div class="col-md-4 mb-4">
-					<div class="tutorial-card">
-						<figure class="image">
-							<img src="' . TEMPLATE_URI . '/assets/img/tutorial_img_3.png" alt="Conect-se aos ídolos">
-						</figure>
-						<h5 class="title">Mande para todo mundo</h5>
-						<p class="description">Você pode enviar o vídeo para os amigos ou postar nas redes.</p>
+					<div class="col-4">
+						<div class="row">
+							<div class="col-12 text-center icon"><?php Icon_Class::polen_icon_hand_thumbs_up(); ?></div>
+							<div class="col-12 text-center mt-2">
+								<p>Compartilhe com todo mundo</p>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
-	';
+<?php
 }
 
 function polen_front_get_talent_videos($talent, $items = array(
