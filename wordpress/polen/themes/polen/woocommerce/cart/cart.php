@@ -27,13 +27,13 @@ $occasion_list = new Polen_Occasion_List();
 $Talent_Fields = new Polen_Update_Fields();
 ?>
 
-<div class="row mt-2">
+<!-- <div class="row mt-2">
 	<div class="col-12">
 		<div class="progress" style="height: 7px;">
 			<div class="progress-bar bg-primary" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
 		</div>
 	</div>
-</div>
+</div> -->
 
 <?php
 foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
