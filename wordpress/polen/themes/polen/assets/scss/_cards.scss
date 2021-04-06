@@ -44,7 +44,10 @@
 			z-index: 3;
 		}
 	}
-	&.medium {
+	&.responsive {
+		margin-right: 15px;
+	}
+	&.medium, &.responsive {
 		.image {
 			height: 330px;
 			@include media-breakpoint-down(sm) {

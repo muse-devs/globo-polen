@@ -22,6 +22,8 @@ function polen_front_get_card($item, $size = "medium")
 	$class = "col-6 col-md-3";
 	if ($size === "small") {
 		$class = "col-6 col-md-2";
+	} elseif ($size === "responsive") {
+		$class = "responsive";
 	}
 
 	if (isset($item['ID'])) {
@@ -68,9 +70,9 @@ function polen_front_get_news($items)
 		</div>
 		<div class="col-md-12">
 			<div class="slick-alt">
-				<div class="row slick-padding">
+				<div class="slick-padding">
 					<?php foreach ($items as $item) : ?>
-						<?php polen_front_get_card($item); ?>
+						<?php polen_front_get_card($item, "responsive"); ?>
 					<?php endforeach; ?>
 				</div>
 			</div>
