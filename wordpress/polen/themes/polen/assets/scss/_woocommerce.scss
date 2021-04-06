@@ -69,6 +69,7 @@ select.form-control:not([size]):not([multiple]) {
 }
 
 .woocommerce .woocommerce-breadcrumb {
+	display: none;
 	margin: 1em 0 0;
 	font-family: $font-secondary;
 	font-size: 0.8rem;

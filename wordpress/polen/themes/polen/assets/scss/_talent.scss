@@ -29,18 +29,19 @@
 
 .tag-link {
 	display: inline-block;
+	margin-right: 10px;
 	padding: 3px 10px;
 	font-size: 12px;
 	font-weight: 400;
 	color: $light-50;
 	border-radius: 2px;
-	background-color: $light-25;
+	background-color: $talent-bg-color;
 }
 
 .talent-carousel {
 	position: relative;
 	// height: 70vw;
-	margin: 25px -15px 0 0;
+	margin: 0 -15px 0 0;
 	.item {
 		position: relative;
 		display: inline-block;
@@ -191,10 +192,6 @@
 .skill-value {
 	font-size: 14px;
 	font-weight: 700;
-}
-
-.talent-page-footer {
-	border-bottom: 1px solid $light-25;
 }
 
 .talent-dashboard-start {
