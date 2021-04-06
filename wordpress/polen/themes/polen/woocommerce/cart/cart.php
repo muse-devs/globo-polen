@@ -180,7 +180,7 @@ polen_get_talent_card( $talent_cart_detail ); ?>
 					<?php
 					$email_to_video = isset($cart_item['email_to_video']) ? $cart_item['email_to_video'] : '';
 					printf(
-						'<select class="%s form-control form-control-lg" id="cart_video_category_%s" data-cart-id="%s" name="video_category" required="required"/>',
+						'<select class="%s form-control form-control-lg custom-select" id="cart_video_category_%s" data-cart-id="%s" name="video_category" required="required"/>',
 						'polen-cart-item-data',
 						$cart_item_key,
 						$cart_item_key
