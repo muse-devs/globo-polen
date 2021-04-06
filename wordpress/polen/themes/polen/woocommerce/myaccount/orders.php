@@ -47,16 +47,7 @@ if (in_array('user_talent',  $logged_user->roles)) {
 										?>
 										</div>
 										<div class="status mt-2">
-											<?php
-											switch ($order->get_status()) {
-												case 'on-hold':
-													echo 'Aguardando aprovação';
-													break;
-												default:
-													echo $order->get_status();
-													break;
-											}
-											?>
+											<?php echo wc_get_order_status_name($order->get_status()); ?>
 										</div>
 									</div>
 								</div>
