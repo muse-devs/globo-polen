@@ -103,7 +103,7 @@ if( is_user_logged_in() ) {
                 </div>
                 <input type="hidden" name="braspag_creditcardBrand" id="braspag_creditcardBrand" value="">
                 <?php if( is_user_logged_in() ) { ?>
-                <div class="col col-12">
+                <div class="col col-12 mt-3">
                     <p>
                         <input class="input-checkbox" type="checkbox" name="braspag_saveCreditCard" id="braspag_saveCreditCard" value="true" checked="checked"> Salvar este cartão de crédito
                     </p>

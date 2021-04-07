@@ -4,7 +4,7 @@ function polen_front_get_banner()
 {
 ?>
 	<section class="top-banner mb-4">
-		<video class="video" autoplay muted loop poster="<?= TEMPLATE_URI; ?>/assets/img/video_poster.jpg">
+		<video class="video" autoplay muted loop playsinline poster="<?= TEMPLATE_URI; ?>/assets/img/video_poster.jpg">
 			<source src="<?= TEMPLATE_URI; ?>/assets/video/home1.m4v" type="video/mp4">
 			<!-- <source src="movie.ogg" type="video/ogg"> -->
 		</video>
@@ -59,7 +59,7 @@ function polen_banner_scrollable($items, $title, $link)
 		return;
 	}
 ?>
-	<section class="row pt-2 mb-4 banner-scrollable">
+	<section class="row mb-4 banner-scrollable">
 		<div class="col-md-12">
 			<header class="row mb-3">
 				<div class="col-12 d-flex justify-content-between align-items-center">
@@ -68,7 +68,7 @@ function polen_banner_scrollable($items, $title, $link)
 				</div>
 			</header>
 		</div>
-		<div class="col-md-12" style="padding-right: 0;">
+		<div class="col-md-12" style="padding: 0;">
 			<div class="banner-wrapper">
 				<div class="banner-content">
 					<?php foreach ($items as $item) : ?>
@@ -222,24 +222,15 @@ function polen_front_get_talent_videos($talent, $items = array(
 	array("title" => "Video 1", "image" => "http://i.vimeocdn.com/video/1100709491_640.jpg", "video" => "https://vimeo.com/534168147"),
 	array("title" => "Video 2", "image" => "http://i.vimeocdn.com/video/1100718923_640.jpg", "video" => "https://vimeo.com/534171508"),
 	array("title" => "Video 3", "image" => "http://i.vimeocdn.com/video/1100721840_640.jpg", "video" => "https://vimeo.com/534173040"),
-	// array("title" => "Video 1", "image" => "http://i.vimeocdn.com/video/1100675420_640.jpg", "video" => "https://vimeo.com/531829173"),
-	// array("title" => "Video 2", "image" => "http://i.vimeocdn.com/video/649503401_640.jpg", "video" => "https://vimeo.com/229243103"),
-	// array("title" => "Video 3", "image" => "http://i.vimeocdn.com/video/735151132_640.jpg", "video" => "https://vimeo.com/297461374"),
-	// array("title" => "Video 1", "image" => "http://i.vimeocdn.com/video/731672459_640.jpg", "video" => "https://vimeo.com/280815263"),
-	// array("title" => "Video 2", "image" => "http://i.vimeocdn.com/video/649503401_640.jpg", "video" => "https://vimeo.com/229243103"),
-	// array("title" => "Video 3", "image" => "http://i.vimeocdn.com/video/735151132_640.jpg", "video" => "https://vimeo.com/297461374"),
-	// array("title" => "Video 1", "image" => "http://i.vimeocdn.com/video/731672459_640.jpg", "video" => "https://vimeo.com/280815263"),
-	// array("title" => "Video 2", "image" => "http://i.vimeocdn.com/video/649503401_640.jpg", "video" => "https://vimeo.com/229243103"),
-	// array("title" => "Video 3", "image" => "http://i.vimeocdn.com/video/735151132_640.jpg", "video" => "https://vimeo.com/297461374"),
 ))
 {
 ?>
-	<section class="row pt-2 mb-4 banner-scrollable">
-		<div class="col-md-12" style="padding-right: 0;">
+	<section class="row mb-4 banner-scrollable">
+		<div class="col-md-12" style="padding: 0;">
 			<div class="banner-wrapper">
 				<div class="banner-content type-video">
 					<?php foreach ($items as $item) : ?>
-						<div class="polen-card">
+						<div class="polen-card type-video">
 							<figure class="video-cover" style="background-image: url(<?= $item['image']; ?>);">
 								<img src="<?= $item['image']; ?>" alt="<?= $item['title']; ?>" data-url="<?= $item['video']; ?>">
 								<a href="javascript:openVideoByURL('<?= $item['video']; ?>')" class="video-player-button"></a>

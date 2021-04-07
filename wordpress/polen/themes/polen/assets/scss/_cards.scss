@@ -200,7 +200,7 @@
 			position: relative;
 			display: flex;
 			flex-direction: row;
-			flex-wrap: nowrap;
+			// flex-wrap: nowrap;
 			width: auto;
 			overflow-y: hidden;
 			overflow-x: auto;
@@ -212,8 +212,10 @@
 			@include media-breakpoint-only(md) {
 				flex-wrap: wrap;
 			}
-			&.type-video {
-				max-height: 290px;
+			.polen-card.type-video, > .responsive {
+				&:first-child {
+					margin-left: 15px;
+				}
 			}
 		}
 	}
