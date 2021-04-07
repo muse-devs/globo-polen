@@ -264,11 +264,12 @@
 
 .talent-order-modal {
 	position: relative;
+	padding: 0 40px;
 	width: 100%;
 	border-radius: 10px;
 	overflow: hidden;
-	background-color: $talent-bg-color;
-	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	background-color: $dark-100;
+	// box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 	.header {
 		padding: 60px;
 		box-sizing: border-box;
@@ -296,7 +297,7 @@
 		font-weight: 700;
 	}
 	.name {
-		font-size: 32px;
+		font-size: 24px;
 		font-weight: 700;
 		&.small {
 			font-size: 20px;
@@ -304,14 +305,26 @@
 		}
 	}
 	.category {
-		padding: 5px 23px;
-		font-size: 16px;
-		border: 1px solid white;
-		border-radius: 90px;
+		font-size: 24px;
+		font-weight: 500;
 	}
 	.text {
 		font-size: 16px;
 		font-weight: 500;
+	}
+}
+
+.talent-check-order {
+	margin: 0 15px;
+	width: 85px;
+	height: 85px;
+	border: none;
+	background: no-repeat center/cover;
+	&.accept {
+		background-image: url(../img/accept.png);
+	}
+	&.reject {
+		background-image: url(../img/reject.png);
 	}
 }
 

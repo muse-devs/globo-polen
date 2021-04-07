@@ -271,3 +271,29 @@ input[type="file"] {
 		}
 	}
 }
+
+.modal {
+	.modal-dialog {
+		margin: 0;
+	}
+	.modal-body {
+		padding: 0;
+	}
+	.modal-content {
+		.close {
+			top: 10px !important;
+			right: 20px !important;
+			opacity: 1 !important;
+			&::after {
+				content: "";
+				display: block;
+				width: 20px;
+				height: 20px;
+				background: no-repeat center/cover url(../img/close.png);
+			}
+		}
+	}
+	.modal-footer {
+		border: none !important;
+	}
+}
