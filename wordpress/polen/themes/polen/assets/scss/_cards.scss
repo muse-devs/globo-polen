@@ -48,6 +48,9 @@
 			font-size: 16px;
 			font-weight: 700;
 			z-index: 3;
+			.icon {
+				font-size: 11px;
+			}
 		}
 	}
 	&.responsive {
@@ -254,5 +257,9 @@
 	.icon {
 		font-size: 28px;
 		color: $light-50;
+		&.icon-camera-video {
+			font-size: 18px;
+			line-height: 40px;
+		}
 	}
 }

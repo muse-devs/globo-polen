@@ -10,7 +10,7 @@ class Icon_Class
 
 	public static function polen_icon_camera_video()
 	{
-		echo '<i class="icon icon-camera-video" style="font-size: 18px; line-height: 40px"></i>';
+		echo '<i class="icon icon-camera-video"></i>';
 	}
 
 	public static function polen_icon_hand_thumbs_up()
