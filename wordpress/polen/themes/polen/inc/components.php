@@ -135,7 +135,7 @@ function polen_front_get_artists($items, $title)
 			</div>
 		</div>
 		<div class="col-12">
-			<div class="row mt-md-5">
+			<div class="row mt-md-5 mt-4">
 				<div class="col-md-12 text-center">
 					<button type="button" class="btn btn-primary btn-lg">Ver todos</button>
 				</div>
