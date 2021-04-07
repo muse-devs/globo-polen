@@ -59,7 +59,7 @@ function polen_banner_scrollable($items, $title, $link)
 		return;
 	}
 ?>
-	<section class="row pt-2 mb-4 banner-scrollable">
+	<section class="row mb-4 banner-scrollable">
 		<div class="col-md-12">
 			<header class="row mb-3">
 				<div class="col-12 d-flex justify-content-between align-items-center">
