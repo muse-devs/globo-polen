@@ -68,7 +68,7 @@ function polen_banner_scrollable($items, $title, $link)
 				</div>
 			</header>
 		</div>
-		<div class="col-md-12" style="padding-right: 0;">
+		<div class="col-md-12" style="padding: 0;">
 			<div class="banner-wrapper">
 				<div class="banner-content">
 					<?php foreach ($items as $item) : ?>
@@ -226,20 +226,15 @@ function polen_front_get_talent_videos($talent, $items = array(
 	array("title" => "Video 2", "image" => "http://i.vimeocdn.com/video/649503401_640.jpg", "video" => "https://vimeo.com/229243103"),
 	array("title" => "Video 3", "image" => "http://i.vimeocdn.com/video/735151132_640.jpg", "video" => "https://vimeo.com/297461374"),
 	array("title" => "Video 1", "image" => "http://i.vimeocdn.com/video/731672459_640.jpg", "video" => "https://vimeo.com/280815263"),
-	array("title" => "Video 2", "image" => "http://i.vimeocdn.com/video/649503401_640.jpg", "video" => "https://vimeo.com/229243103"),
-	array("title" => "Video 3", "image" => "http://i.vimeocdn.com/video/735151132_640.jpg", "video" => "https://vimeo.com/297461374"),
-	array("title" => "Video 1", "image" => "http://i.vimeocdn.com/video/731672459_640.jpg", "video" => "https://vimeo.com/280815263"),
-	array("title" => "Video 2", "image" => "http://i.vimeocdn.com/video/649503401_640.jpg", "video" => "https://vimeo.com/229243103"),
-	array("title" => "Video 3", "image" => "http://i.vimeocdn.com/video/735151132_640.jpg", "video" => "https://vimeo.com/297461374"),
 ))
 {
 ?>
 	<section class="row pt-2 mb-4 banner-scrollable">
-		<div class="col-md-12" style="padding-right: 0;">
+		<div class="col-md-12" style="padding: 0;">
 			<div class="banner-wrapper">
 				<div class="banner-content type-video">
 					<?php foreach ($items as $item) : ?>
-						<div class="polen-card">
+						<div class="polen-card type-video">
 							<figure class="video-cover" style="background-image: url(<?= $item['image']; ?>);">
 								<img src="<?= $item['image']; ?>" alt="<?= $item['title']; ?>" data-url="<?= $item['video']; ?>">
 								<a href="javascript:openVideoByURL('<?= $item['video']; ?>')" class="video-player-button"></a>
