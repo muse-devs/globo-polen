@@ -59,23 +59,23 @@
 	&.medium,
 	&.responsive {
 		.image {
-			height: 330px;
+			width: 156px;
+			height: 190px;
 			@include media-breakpoint-down(sm) {
 				width: 40vw;
 				height: 50vw;
 			}
 			@include media-breakpoint-only(sm) {
-				height: 50vw;
+
 			}
 			@include media-breakpoint-only(md) {
-				height: 205px;
+
 			}
 			@include media-breakpoint-only(lg) {
-				height: 288px;
+
 			}
 			@include media-breakpoint-only(xl) {
-				height: 28vw;
-				max-height: 480px;
+
 			}
 		}
 	}
@@ -204,11 +204,14 @@
 			position: relative;
 			display: flex;
 			width: auto;
-			overflow-x: scroll;
+			overflow-x: auto;
 			-ms-overflow-style: none; /* IE and Edge */
 			scrollbar-width: none; /* Firefox */
 			&::-webkit-scrollbar {
 				display: none;
+			}
+			@include media-breakpoint-only(md) {
+				flex-wrap: wrap;
 			}
 		}
 	}
