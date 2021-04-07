@@ -219,7 +219,7 @@ polen_get_talent_card( $talent_cart_detail ); ?>
 					<a href="javascript:void(0)" class="link-alt"><?php Icon_Class::polen_icon_reload(); ?> Outras mensagens</a>
 				</div>
 			</div>
-			<div class="row my-3">
+			<div class="row mt-5">
 				<div class="col-12 col-md-12">
 					<?php
 					$allow_video_on_page = isset($cart_item['allow_video_on_page']) ? $cart_item['allow_video_on_page'] : 'on';
