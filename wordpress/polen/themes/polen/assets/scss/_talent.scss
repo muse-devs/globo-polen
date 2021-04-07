@@ -15,6 +15,9 @@
 		top: 0;
 		background: linear-gradient(360deg, #000 0%, rgba(0, 0, 0, 0) 100%);
 	}
+	@include media-breakpoint-down(xs) {
+		display: none;
+	}
 }
 
 .talent-name {

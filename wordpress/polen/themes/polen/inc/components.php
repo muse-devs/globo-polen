@@ -4,7 +4,7 @@ function polen_front_get_banner()
 {
 ?>
 	<section class="top-banner mb-4">
-		<video class="video" autoplay muted loop poster="<?= TEMPLATE_URI; ?>/assets/img/video_poster.jpg">
+		<video class="video" autoplay muted loop playsinline poster="<?= TEMPLATE_URI; ?>/assets/img/video_poster.jpg">
 			<source src="<?= TEMPLATE_URI; ?>/assets/video/home1.m4v" type="video/mp4">
 			<!-- <source src="movie.ogg" type="video/ogg"> -->
 		</video>
