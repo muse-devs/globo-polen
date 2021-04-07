@@ -85,6 +85,7 @@ function openVideoByURL(url) {
 	showModal();
 	var videoPlayer = new Vimeo.Player("polen-video", {
 		url: url,
+		autoplay: true,
 		width: document.getElementById("polen-video").offsetWidth,
 	});
 	videoPlayer.getVideoId().then(function (id) {
@@ -97,6 +98,7 @@ function openVideoById(id) {
 	showModal();
 	var videoPlayer = new Vimeo.Player("polen-video", {
 		id: id,
+		autoplay: true,
 		width: document.getElementById("polen-video").offsetWidth,
 	});
 	changeHash(id);
