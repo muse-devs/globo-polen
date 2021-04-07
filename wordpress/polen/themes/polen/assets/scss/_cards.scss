@@ -66,16 +66,12 @@
 				height: 50vw;
 			}
 			@include media-breakpoint-only(sm) {
-
 			}
 			@include media-breakpoint-only(md) {
-
 			}
 			@include media-breakpoint-only(lg) {
-
 			}
 			@include media-breakpoint-only(xl) {
-
 			}
 		}
 	}
@@ -203,7 +199,10 @@
 		.banner-content {
 			position: relative;
 			display: flex;
+			flex-direction: row;
+			flex-wrap: nowrap;
 			width: auto;
+			overflow-y: hidden;
 			overflow-x: auto;
 			-ms-overflow-style: none; /* IE and Edge */
 			scrollbar-width: none; /* Firefox */
@@ -213,7 +212,45 @@
 			@include media-breakpoint-only(md) {
 				flex-wrap: wrap;
 			}
+			&.type-video {
+				max-height: 290px;
+			}
 		}
+	}
+	.video-cover {
+		position: relative;
+		margin: 0 15px 15px 0;
+		width: 53vw;
+		height: 77vw;
+		max-width: 200px;
+		max-height: 290px;
+		border-radius: 8px;
+		background: no-repeat center/cover;
+		img {
+			display: none;
+		}
+	}
+}
+
+.video-player-button {
+	position: absolute;
+	display: block;
+	width: 100%;
+	height: 100%;
+	z-index: 10;
+	&::after {
+		content: "";
+		position: absolute;
+		display: inline-block;
+		width: 0;
+		height: 0;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		border-top: 12px solid transparent;
+		border-bottom: 12px solid transparent;
+
+		border-left: 16px solid $light-100;
 	}
 }
 
