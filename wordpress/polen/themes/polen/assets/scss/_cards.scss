@@ -61,7 +61,8 @@
 		.image {
 			height: 330px;
 			@include media-breakpoint-down(sm) {
-				height: 65vw;
+				width: 40vw;
+				height: 50vw;
 			}
 			@include media-breakpoint-only(sm) {
 				height: 50vw;
@@ -187,10 +188,29 @@
 }
 
 .slick-alt {
-	width: 100%;
+	width: 130%;
 	overflow: hidden;
 	.slick-padding {
-		width: 130%;
+		width: 100%;
+	}
+}
+
+.banner-scrollable {
+	.banner-wrapper {
+		position: relative;
+		width: 100%;
+		overflow: hidden;
+		.banner-content {
+			position: relative;
+			display: flex;
+			width: auto;
+			overflow-x: scroll;
+			-ms-overflow-style: none; /* IE and Edge */
+			scrollbar-width: none; /* Firefox */
+			&::-webkit-scrollbar {
+				display: none;
+			}
+		}
 	}
 }
 
