@@ -5,17 +5,17 @@ class Icon_Class
 
 	public static function polen_icon_phone()
 	{
-		echo '<i class="bi bi-phone"></i>';
+		echo '<i class="icon icon-phone"></i>';
 	}
 
 	public static function polen_icon_camera_video()
 	{
-		echo '<i class="bi bi-camera-video"></i>';
+		echo '<i class="icon icon-camera-video" style="font-size: 18px; line-height: 40px"></i>';
 	}
 
 	public static function polen_icon_hand_thumbs_up()
 	{
-		echo '<i class="bi bi-hand-thumbs-up"></i>';
+		echo '<i class="icon icon-hand-thumbs-up"></i>';
 	}
 
 	public static function polen_icon_check_o()

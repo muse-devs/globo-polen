@@ -26,38 +26,47 @@
 @function icon-char($filename) {
 	$char: "";
 
-	@if $filename == chevron-down {
+	@if $filename == camera-video {
 		$char: "\E001";
 	}
-	@if $filename == clock {
+	@if $filename == chevron-down {
 		$char: "\E002";
 	}
-	@if $filename == close-o {
+	@if $filename == clock {
 		$char: "\E003";
 	}
-	@if $filename == close {
+	@if $filename == close-o {
 		$char: "\E004";
 	}
-	@if $filename == copy {
+	@if $filename == close {
 		$char: "\E005";
 	}
-	@if $filename == facebook {
+	@if $filename == copy {
 		$char: "\E006";
 	}
-	@if $filename == instagram {
+	@if $filename == facebook {
 		$char: "\E007";
 	}
-	@if $filename == linkedin {
+	@if $filename == hand-thumbs-up {
 		$char: "\E008";
 	}
-	@if $filename == search {
+	@if $filename == instagram {
 		$char: "\E009";
 	}
-	@if $filename == software-download {
+	@if $filename == linkedin {
 		$char: "\E00A";
 	}
-	@if $filename == twitter {
+	@if $filename == phone {
 		$char: "\E00B";
+	}
+	@if $filename == search {
+		$char: "\E00C";
+	}
+	@if $filename == software-download {
+		$char: "\E00D";
+	}
+	@if $filename == twitter {
+		$char: "\E00E";
 	}
 
 	@return $char;
@@ -74,6 +83,9 @@
 	}
 }
 
+.icon-camera-video {
+	@include icon(camera-video);
+}
 .icon-chevron-down {
 	@include icon(chevron-down);
 }
@@ -92,11 +104,17 @@
 .icon-facebook {
 	@include icon(facebook);
 }
+.icon-hand-thumbs-up {
+	@include icon(hand-thumbs-up);
+}
 .icon-instagram {
 	@include icon(instagram);
 }
 .icon-linkedin {
 	@include icon(linkedin);
+}
+.icon-phone {
+	@include icon(phone);
 }
 .icon-search {
 	@include icon(search);
