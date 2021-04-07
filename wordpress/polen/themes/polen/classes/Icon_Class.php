@@ -106,19 +106,19 @@ class Icon_Class
 		$ret = '';
 		switch ($ico) {
 			case 'facebook':
-				$ret = '<i class="bi bi-facebook"></i>';
+				$ret = '<i class="icon icon-facebook"></i>';
 				break;
 
 			case 'instagram':
-				$ret = '<i class="bi bi-instagram"></i>';
+				$ret = '<i class="icon icon-instagram"></i>';
 				break;
 
 			case 'linkedin':
-				$ret = '<i class="bi bi-linkedin"></i>';
+				$ret = '<i class="icon icon-linkedin"></i>';
 				break;
 
 			case 'twitter':
-				$ret = '<i class="bi bi-twitter"></i>';
+				$ret = '<i class="icon icon-twitter"></i>';
 				break;
 
 			default:

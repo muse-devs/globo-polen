@@ -1,0 +1,109 @@
+@font-face {
+	font-family: "MuseIcons";
+	src: url('../fonts/MuseIcons.eot');
+	src: url('../fonts/MuseIcons.eot?#iefix') format('eot'),
+		url('../fonts/MuseIcons.woff') format('woff'),
+		url('../fonts/MuseIcons.ttf') format('truetype'),
+		url('../fonts/MuseIcons.svg#MuseIcons') format('svg');
+}
+
+@mixin icon-styles {
+	font-family: "MuseIcons";
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: normal;
+	// speak: none; // only necessary if not using the private unicode range (firstGlyph option)
+	text-decoration: none;
+	text-transform: none;
+}
+
+%icon {
+	@include icon-styles;
+}
+
+@function icon-char($filename) {
+	$char: "";
+
+	@if $filename == chevron-down {
+		$char: "\E001";
+	}
+	@if $filename == clock {
+		$char: "\E002";
+	}
+	@if $filename == close-o {
+		$char: "\E003";
+	}
+	@if $filename == close {
+		$char: "\E004";
+	}
+	@if $filename == copy {
+		$char: "\E005";
+	}
+	@if $filename == facebook {
+		$char: "\E006";
+	}
+	@if $filename == instagram {
+		$char: "\E007";
+	}
+	@if $filename == linkedin {
+		$char: "\E008";
+	}
+	@if $filename == search {
+		$char: "\E009";
+	}
+	@if $filename == software-download {
+		$char: "\E00A";
+	}
+	@if $filename == twitter {
+		$char: "\E00B";
+	}
+
+	@return $char;
+}
+
+@mixin icon($filename, $insert: before, $extend: true) {
+	&:#{$insert} {
+		@if $extend {
+			@extend %icon;
+		} @else {
+			@include icon-styles;
+		}
+		content: icon-char($filename);
+	}
+}
+
+.icon-chevron-down {
+	@include icon(chevron-down);
+}
+.icon-clock {
+	@include icon(clock);
+}
+.icon-close-o {
+	@include icon(close-o);
+}
+.icon-close {
+	@include icon(close);
+}
+.icon-copy {
+	@include icon(copy);
+}
+.icon-facebook {
+	@include icon(facebook);
+}
+.icon-instagram {
+	@include icon(instagram);
+}
+.icon-linkedin {
+	@include icon(linkedin);
+}
+.icon-search {
+	@include icon(search);
+}
+.icon-software-download {
+	@include icon(software-download);
+}
+.icon-twitter {
+	@include icon(twitter);
+}
