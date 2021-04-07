@@ -45,10 +45,11 @@
 					},
 					success: function( response ) {
 						let obj = $.parseJSON( response );
-						if( obj.success == true ){						
+						if( obj.success == true ){
 							$('#order-value').html(obj['data'][0]['total']);
 							$('#video-from').html(obj['data'][0]['from']);
 							$('#video-name').html(obj['data'][0]['name']);
+							$('#video-email').html(obj['data'][0]['email']);
 							$('#video-category').html(obj['data'][0]['category']);
 							$('#expiration-time').html(obj['data'][0]['expiration']);
 							$('#video-instructions').html(obj['data'][0]['instructions']);
