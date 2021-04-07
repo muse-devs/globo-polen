@@ -17,13 +17,13 @@ function polen_front_get_banner()
 }
 
 // $size pode ser 'medium' e 'small'
-function polen_front_get_card($item, $size = "medium")
+function polen_front_get_card($item, $size = "small")
 {
-	$class = "col-6 col-md-3";
+	$class = $size;
 	if ($size === "small") {
 		$class = "col-6 col-md-2";
-	} elseif ($size === "responsive") {
-		$class = "responsive";
+	} elseif ($size === "medium") {
+		$class = "col-6 col-md-3";
 	}
 
 	if (isset($item['ID'])) {
@@ -53,6 +53,34 @@ function polen_front_get_card($item, $size = "medium")
 <?php
 }
 
+function polen_banner_scrollable($items, $title, $link)
+{
+	if (!$items) {
+		return;
+	}
+?>
+	<section class="row pt-2 mb-4 banner-scrollable">
+		<div class="col-md-12">
+			<header class="row mb-3">
+				<div class="col-12 d-flex justify-content-between align-items-center">
+					<h2 class="mr-2"><?php echo $title; ?></h2>
+					<a href="<?php echo $link; ?>">Ver todos <?php Icon_Class::polen_icon_chevron_right(); ?></a>
+				</div>
+			</header>
+		</div>
+		<div class="col-md-12" style="padding-right: 0;">
+			<div class="banner-wrapper">
+				<div class="banner-content">
+					<?php foreach ($items as $item) : ?>
+						<?php polen_front_get_card($item, "responsive"); ?>
+					<?php endforeach; ?>
+				</div>
+			</div>
+		</div>
+	</section>
+<?php
+}
+
 function polen_front_get_news($items)
 {
 	if (!$items) {
@@ -63,7 +91,7 @@ function polen_front_get_news($items)
 		<div class="col-md-12">
 			<header class="row mb-3">
 				<div class="col-12 d-flex justify-content-between align-items-center">
-					<h2 class="mr-2">Destaques</h2>
+					<h2 class="mr-2">Destaque</h2>
 					<a href="#">Ver todos <?php Icon_Class::polen_icon_chevron_right(); ?></a>
 				</div>
 			</header>
@@ -206,16 +234,22 @@ function polen_front_get_talent_videos($talent, $items = array(
 ))
 {
 ?>
-	<div class="slick-alt">
-		<div class="slick-padding talent-carousel">
-			<?php foreach ($items as $item) : ?>
-				<figure class="item" style="background-image: url(<?= $item['image']; ?>);">
-					<img src="<?= $item['image']; ?>" alt="<?= $item['title']; ?>" data-url="<?= $item['video']; ?>">
-					<a href="javascript:openVideoByURL('<?= $item['video']; ?>')" class="player-button"></a>
-				</figure>
-			<?php endforeach; ?>
+	<section class="row pt-2 mb-4 banner-scrollable">
+		<div class="col-md-12" style="padding-right: 0;">
+			<div class="banner-wrapper">
+				<div class="banner-content type-video">
+					<?php foreach ($items as $item) : ?>
+						<div class="polen-card">
+							<figure class="video-cover" style="background-image: url(<?= $item['image']; ?>);">
+								<img src="<?= $item['image']; ?>" alt="<?= $item['title']; ?>" data-url="<?= $item['video']; ?>">
+								<a href="javascript:openVideoByURL('<?= $item['video']; ?>')" class="video-player-button"></a>
+							</figure>
+						</div>
+					<?php endforeach; ?>
+				</div>
+			</div>
 		</div>
-	</div>
+	</section>
 
 	<div id="video-modal" class="video-modal">
 		<div class="video-card">
