@@ -219,9 +219,9 @@ function polen_front_get_tutorial()
 }
 
 function polen_front_get_talent_videos($talent, $items = array(
-	array("title" => "Video 1", "image" => "http://i.vimeocdn.com/video/1100709491_640.jpg", "video" => "https://vimeo.com/532664896"),
-	array("title" => "Video 2", "image" => "http://i.vimeocdn.com/video/1100718923_640.jpg", "video" => "https://vimeo.com/531869940"),
-	array("title" => "Video 3", "image" => "http://i.vimeocdn.com/video/1100721840_640.jpg", "video" => "https://vimeo.com/531871510"),
+	array("title" => "Video 1", "image" => "http://i.vimeocdn.com/video/1100709491_640.jpg", "video" => "https://vimeo.com/534168147"),
+	array("title" => "Video 2", "image" => "http://i.vimeocdn.com/video/1100718923_640.jpg", "video" => "https://vimeo.com/534171508"),
+	array("title" => "Video 3", "image" => "http://i.vimeocdn.com/video/1100721840_640.jpg", "video" => "https://vimeo.com/534173040"),
 	array("title" => "Video 1", "image" => "http://i.vimeocdn.com/video/1100675420_640.jpg", "video" => "https://vimeo.com/531829173"),
 	array("title" => "Video 2", "image" => "http://i.vimeocdn.com/video/649503401_640.jpg", "video" => "https://vimeo.com/229243103"),
 	array("title" => "Video 3", "image" => "http://i.vimeocdn.com/video/735151132_640.jpg", "video" => "https://vimeo.com/297461374"),
