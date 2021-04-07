@@ -229,7 +229,7 @@ function polen_front_get_talent_videos($talent, $items = array(
 ))
 {
 ?>
-	<section class="row pt-2 mb-4 banner-scrollable">
+	<section class="row mb-4 banner-scrollable">
 		<div class="col-md-12" style="padding: 0;">
 			<div class="banner-wrapper">
 				<div class="banner-content type-video">
