@@ -64,32 +64,62 @@
 			var wnonce = $(this).parent().attr('button-nonce');
 			var order_id = $(this).parent().attr('order-id');
 			var type = $(this).attr('action-type');
-			$.ajax(
-				{
-					type: 'POST',
-					url: polen_ajax.ajaxurl,
-					data: {
-					action: 'get_talent_acceptance',
-					order: order_id,
-					type: type,
-					security: wnonce
-					},
-					success: function( response ) {
-						let obj = $.parseJSON( response );
-						//console.log(obj);
-						if( obj['success'] == true ){
-							if( obj['code'] == 1 ){
-								$('#OrderActions').modal('toggle');
-								//location.reload();'/enviar-video/?order_id=35
-								location.href='/enviar-video/?order_id=' + order_id;
+
+			if( type == 'reject' ){
+				var confirm_reject = confirm("Deseja realmente rejeitar o pedido?");
+				if( confirm_reject == true)  {
+					$.ajax(
+						{
+							type: 'POST',
+							url: polen_ajax.ajaxurl,
+							data: {
+							action: 'get_talent_acceptance',
+							order: order_id,
+							type: type,
+							security: wnonce
+							},
+							success: function( response ) {
+								let obj = $.parseJSON( response );
+								if( obj['success'] == true ){
+									if( obj['code'] == 1 ){
+										$('#OrderActions').modal('toggle');
+										location.href='/enviar-video/?order_id=' + order_id;
+									}
+									if( obj['code'] == 2 ){
+										location.reload();
+									}		
+								}
 							}
-							if( obj['code'] == 2 ){
-								//$('#OrderActions').modal('toggle');
-								location.reload();
-							}		
+						});
+				} 
+			}else{
+				$.ajax(
+					{
+						type: 'POST',
+						url: polen_ajax.ajaxurl,
+						data: {
+						action: 'get_talent_acceptance',
+						order: order_id,
+						type: type,
+						security: wnonce
+						},
+						success: function( response ) {
+							let obj = $.parseJSON( response );
+							//console.log(obj);
+							if( obj['success'] == true ){
+								if( obj['code'] == 1 ){
+									$('#OrderActions').modal('toggle');
+									//location.reload();'/enviar-video/?order_id=35
+									location.href='/enviar-video/?order_id=' + order_id;
+								}
+								if( obj['code'] == 2 ){
+									//$('#OrderActions').modal('toggle');
+									location.reload();
+								}		
+							}
 						}
-					}
-				});
+					});
+			}
 		});
 
 		$('.polen-cart-item-data').on('blur change paste click',function(){
