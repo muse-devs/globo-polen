@@ -70,3 +70,8 @@ $flow_3 = array(
 		</div>
 	</div>
 </div>
+<div class="row my-3">
+	<div class="col-12">
+		<button class="btn btn-primary btn-lg btn-block">Ir para login</button>
+	</div>
+</div>
