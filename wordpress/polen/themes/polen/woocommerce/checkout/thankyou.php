@@ -71,7 +71,7 @@ $flow_3 = array(
 	</div>
 </div>
 <?php
-if( !is_user_logged_in()() ) :
+if( !is_user_logged_in() ) :
 ?>
 
 <div class="row my-3">
