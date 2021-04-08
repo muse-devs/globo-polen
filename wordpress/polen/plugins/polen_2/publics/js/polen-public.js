@@ -76,7 +76,7 @@
 					},
 					success: function( response ) {
 						let obj = $.parseJSON( response );
-						console.log(obj);
+						//console.log(obj);
 						if( obj['success'] == true ){
 							if( obj['code'] == 1 ){
 								$('#OrderActions').modal('toggle');
