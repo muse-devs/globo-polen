@@ -45,8 +45,11 @@ use Polen\Includes\Polen_Bancos;
                                     Imagem de capa
                                 </th>
                                 <td>
-                                    <div id="talentCoverData"></div>
-                                    <input type="button" name="talent-profile-video" id="talent-profile-video" class="button button-primary" value="Selecionar Imagem">
+                                    <input type="hidden" name="talent_cover_image_id" class="polen-input-image-id" value="<?php echo ( isset( $vendorInfo->cover_image_id ) && ! empty( $vendorInfo->cover_image_id ) ) ? $vendorInfo->cover_image_id : ''; ?>">
+                                    <input type="hidden" name="talent_cover_image_url" class="polen-input-image-url" value="<?php echo ( isset( $vendorInfo->cover_image_url ) && ! empty( $vendorInfo->cover_image_url ) ) ? $vendorInfo->cover_image_url : ''; ?>">
+                                    <input type="hidden" name="talent_cover_image_thumb" class="polen-input-image-thumb" value="<?php echo ( isset( $vendorInfo->cover_image_thumb ) && ! empty( $vendorInfo->cover_image_thumb ) ) ? $vendorInfo->cover_image_thumb : ''; ?>">
+                                    <div class="polen-image-gallery-data"><?php echo ( isset( $vendorInfo->cover_image_thumb ) && ! empty( $vendorInfo->cover_image_thumb ) ) ? '<img src="' . $vendorInfo->cover_image_thumb . '" alt="Imagem de Capa">' : ''; ?></div>
+                                    <input type="button" name="talent_cover_image" class="button button-primary polen-media-manager" value="Selecionar Imagem">
                                 </td>
                             </tr>
                             <tr id="tr_talent_alias">

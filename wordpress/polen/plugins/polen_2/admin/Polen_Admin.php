@@ -49,7 +49,6 @@ class Polen_Admin {
 	 */
 	public function enqueue_scripts() {
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/polen-admin.js', array( 'jquery' ), $this->version, false );
-
 	}
         
         

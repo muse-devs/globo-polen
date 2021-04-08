@@ -62,9 +62,11 @@ class Polen_Update_Fields
 
     public function admin_scripts() {
         global $wp_scripts;
+        wp_enqueue_media();
         wp_enqueue_style( 'jquery-ui', 'https://code.jquery.com/ui/' . $wp_scripts->registered['jquery-ui-core']->ver . '/themes/smoothness/jquery-ui.min.css' );
         wp_enqueue_script('jquery-maskedinput', Polen_Admin::get_js_url( 'vendor/jquery.maskedinput.min.js'), array( 'jquery' ), null, true );
         wp_enqueue_script('polen-admin-script', Polen_Admin::get_js_url( 'admin.js' ), array( 'jquery', 'jquery-ui-core', 'jquery-ui-tabs' ), null, true );
+        wp_enqueue_script('polen-midia-script', Polen_Admin::get_js_url( 'polen-midia.js' ), array( 'jquery' ), null, true );
     }
 
     public function fields( $user )
@@ -111,6 +113,14 @@ class Polen_Update_Fields
         $talent_alias = (string) sanitize_title( strip_tags( trim( $_POST['talent_alias'] ) ) );
         $args['talent_alias'] = ( $talent_alias ) ? $talent_alias : sanitize_title( $email );
         $args['talent_url'] = get_bloginfo('url') . '/talent/' . $args['talent_alias'];
+        $talent_cover_image_id     = ( isset( $_POST['talent_cover_image_id'] ) && ! empty( $_POST['talent_cover_image_id'] ) ) ? $_POST['talent_cover_image_id'] : false;
+        $args['cover_image_id']    = ( $talent_cover_image_id ) ? $talent_cover_image_id : '';
+        $talent_cover_image_url    = ( isset( $_POST['talent_cover_image_url'] ) && ! empty( $_POST['talent_cover_image_url'] ) ) ? $_POST['talent_cover_image_url'] : false;
+        $args['cover_image_url']   = ( $talent_cover_image_url ) ? $talent_cover_image_url : '';
+        $talent_cover_image_thumb  = ( isset( $_POST['talent_cover_image_thumb'] ) && ! empty( $_POST['talent_cover_image_thumb'] ) ) ? $_POST['talent_cover_image_thumb'] : false;
+        $args['cover_image_thumb'] = ( $talent_cover_image_thumb ) ? $talent_cover_image_thumb : '';
+        $talent_profile_video      = ( isset( $_POST['talent_profile_video'] ) && ! empty( $_POST['talent_profile_video'] ) ) ? $_POST['talent_profile_video'] : '';
+        $args['profile_video']     = ( $talent_profile_video ) ? $talent_profile_video : '';
         $args['tempo_resposta'] = (string) strip_tags( trim( $_POST['tempo_resposta'] ) );
         $args['profissao'] = (string) strip_tags( trim( $_POST['profissao'] ) );
         $args['descricao'] = (string) strip_tags( trim( $_POST['descricao'] ) );
