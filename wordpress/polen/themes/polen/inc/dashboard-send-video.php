@@ -59,9 +59,7 @@ $polen_order = Polen_Cart_Item_Factory::polen_cart_item_from_order($order);
 			<div class="row modal-body">
 				<!-- Início -->
 				<div class="col-12 talent-order-modal">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-						<span aria-hidden="true">&times;</span>
-					</button>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Fechar"></button>
 					<div class="body">
 						<div class="row d-flex align-items-center">
 							<div class="col-12">
