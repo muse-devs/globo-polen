@@ -40,6 +40,24 @@ use Polen\Includes\Polen_Bancos;
                                     <small>Ex: <?php bloginfo( 'url' ); ?><strong>/nome-do-talento/</strong></small>
                                 </td>
                             </tr>
+                            <tr id="tr_talent_alias">
+                                <th>
+                                    Imagem de capa
+                                </th>
+                                <td>
+                                    <div id="talentCoverData"></div>
+                                    <input type="button" name="talent-profile-video" id="talent-profile-video" class="button button-primary" value="Selecionar Imagem">
+                                </td>
+                            </tr>
+                            <tr id="tr_talent_alias">
+                                <th>
+                                    Vídeo do perfil
+                                </th>
+                                <td>
+                                    <input type="text" name="talent_profile_video" value="<?php echo ( isset( $vendorInfo->talent_profile_video ) ) ? $vendorInfo->talent_profile_video : ''; ?>" autocomplete="off" class="widefat">
+                                    <small>Ex: https://vimeo.com/video/1234567890</small>
+                                </td>
+                            </tr>
                             <tr>
                                 <th>
                                     Responde em

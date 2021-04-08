@@ -25,8 +25,8 @@ class InstalledVersions
 private static $installed = array (
   'root' => 
   array (
-    'pretty_version' => '2.1.2',
-    'version' => '2.1.2.0',
+    'pretty_version' => '2.1.4',
+    'version' => '2.1.4.0',
     'aliases' => 
     array (
     ),
@@ -69,8 +69,8 @@ private static $installed = array (
     ),
     'woocommerce/woocommerce-admin' => 
     array (
-      'pretty_version' => '2.1.2',
-      'version' => '2.1.2.0',
+      'pretty_version' => '2.1.4',
+      'version' => '2.1.4.0',
       'aliases' => 
       array (
       ),

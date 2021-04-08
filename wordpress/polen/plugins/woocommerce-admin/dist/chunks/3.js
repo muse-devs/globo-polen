@@ -1,1430 +1,505 @@
 (window["__wcAdmin_webpackJsonp"] = window["__wcAdmin_webpackJsonp"] || []).push([[3],{
 
-/***/ 500:
+/***/ 186:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return getRequestByIdString; });
-/* unused harmony export getAttributeLabels */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return getCategoryLabels; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return getCouponLabels; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return getCustomerLabels; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return getProductLabels; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return getTaxRateLabels; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return getVariationName; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return getVariationLabels; });
-/* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(23);
-/* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_url__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(26);
-/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _woocommerce_navigation__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(21);
-/* harmony import */ var _woocommerce_navigation__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_navigation__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _woocommerce_data__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(22);
-/* harmony import */ var _woocommerce_data__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_data__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _woocommerce_wc_admin_settings__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(25);
-/* harmony import */ var _analytics_report_taxes_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(501);
-/**
- * External dependencies
- */
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(20);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
-
-
-
-
-
-/**
- * Internal dependencies
- */
-
-
-/**
- * Get a function that accepts ids as they are found in url parameter and
- * returns a promise with an optional method applied to results
- *
- * @param {string|Function} path - api path string or a function of the query returning api path string
- * @param {Function} [handleData] - function applied to each iteration of data
- * @return {Function} - a function of ids returning a promise
- */
-
-function getRequestByIdString(path) {
-  var handleData = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : lodash__WEBPACK_IMPORTED_MODULE_2__["identity"];
-  return function () {
-    var queryString = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-    var query = arguments.length > 1 ? arguments[1] : undefined;
-    var pathString = typeof path === 'function' ? path(query) : path;
-    var idList = Object(_woocommerce_navigation__WEBPACK_IMPORTED_MODULE_3__["getIdsFromQuery"])(queryString);
-
-    if (idList.length < 1) {
-      return Promise.resolve([]);
-    }
-
-    var payload = {
-      include: idList.join(','),
-      per_page: idList.length
-    };
-    return _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default()({
-      path: Object(_wordpress_url__WEBPACK_IMPORTED_MODULE_0__["addQueryArgs"])(pathString, payload)
-    }).then(function (data) {
-      return data.map(handleData);
-    });
-  };
-}
-var getAttributeLabels = getRequestByIdString(_woocommerce_data__WEBPACK_IMPORTED_MODULE_4__["NAMESPACE"] + '/products/attributes', function (attribute) {
-  return {
-    key: attribute.id,
-    label: attribute.name
-  };
-});
-var getCategoryLabels = getRequestByIdString(_woocommerce_data__WEBPACK_IMPORTED_MODULE_4__["NAMESPACE"] + '/products/categories', function (category) {
-  return {
-    key: category.id,
-    label: category.name
-  };
-});
-var getCouponLabels = getRequestByIdString(_woocommerce_data__WEBPACK_IMPORTED_MODULE_4__["NAMESPACE"] + '/coupons', function (coupon) {
-  return {
-    key: coupon.id,
-    label: coupon.code
-  };
-});
-var getCustomerLabels = getRequestByIdString(_woocommerce_data__WEBPACK_IMPORTED_MODULE_4__["NAMESPACE"] + '/customers', function (customer) {
-  return {
-    key: customer.id,
-    label: customer.name
-  };
-});
-var getProductLabels = getRequestByIdString(_woocommerce_data__WEBPACK_IMPORTED_MODULE_4__["NAMESPACE"] + '/products', function (product) {
-  return {
-    key: product.id,
-    label: product.name
-  };
-});
-var getTaxRateLabels = getRequestByIdString(_woocommerce_data__WEBPACK_IMPORTED_MODULE_4__["NAMESPACE"] + '/taxes', function (taxRate) {
-  return {
-    key: taxRate.id,
-    label: Object(_analytics_report_taxes_utils__WEBPACK_IMPORTED_MODULE_6__[/* getTaxCode */ "a"])(taxRate)
-  };
-});
-/**
- * Create a variation name by concatenating each of the variation's
- * attribute option strings.
- *
- * @param {Object} variation - variation returned by the api
- * @param {Array} variation.attributes - attribute objects, with option property.
- * @param {string} variation.name - name of variation.
- * @return {string} - formatted variation name
- */
-
-function getVariationName(_ref) {
-  var attributes = _ref.attributes,
-      name = _ref.name;
-  var separator = Object(_woocommerce_wc_admin_settings__WEBPACK_IMPORTED_MODULE_5__[/* getSetting */ "g"])('variationTitleAttributesSeparator', ' - ');
-
-  if (name.indexOf(separator) > -1) {
-    return name;
-  }
-
-  var attributeList = attributes.map(function (_ref2) {
-    var option = _ref2.option;
-    return option;
-  }).join(', ');
-  return attributeList ? name + separator + attributeList : name;
-}
-var getVariationLabels = getRequestByIdString(function (_ref3) {
-  var products = _ref3.products;
-
-  // If a product was specified, get just its variations.
-  if (products) {
-    return _woocommerce_data__WEBPACK_IMPORTED_MODULE_4__["NAMESPACE"] + "/products/".concat(products, "/variations");
-  }
-
-  return _woocommerce_data__WEBPACK_IMPORTED_MODULE_4__["NAMESPACE"] + '/variations';
-}, function (variation) {
-  return {
-    key: variation.id,
-    label: getVariationName(variation)
-  };
-});
+/* harmony default export */ __webpack_exports__["a"] = (react__WEBPACK_IMPORTED_MODULE_0___default.a.createContext(null));
 
 /***/ }),
 
-/***/ 501:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return getTaxCode; });
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/**
- * External dependencies
- */
-
-function getTaxCode(tax) {
-  return [tax.country, tax.state, tax.name || Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('TAX', 'woocommerce-admin'), tax.priority].map(function (item) {
-    return item.toString().toUpperCase().trim();
-  }).filter(Boolean).join('-');
-}
-
-/***/ }),
-
-/***/ 502:
+/***/ 416:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 
-// UNUSED EXPORTS: ReportChart
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/extends.js
+var esm_extends = __webpack_require__(117);
 
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/defineProperty.js
-var defineProperty = __webpack_require__(5);
-var defineProperty_default = /*#__PURE__*/__webpack_require__.n(defineProperty);
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js
+var objectWithoutPropertiesLoose = __webpack_require__(133);
 
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/classCallCheck.js
-var classCallCheck = __webpack_require__(12);
-var classCallCheck_default = /*#__PURE__*/__webpack_require__.n(classCallCheck);
-
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/createClass.js
-var createClass = __webpack_require__(13);
-var createClass_default = /*#__PURE__*/__webpack_require__.n(createClass);
-
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/inherits.js
-var inherits = __webpack_require__(14);
-var inherits_default = /*#__PURE__*/__webpack_require__.n(inherits);
-
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js
-var possibleConstructorReturn = __webpack_require__(15);
-var possibleConstructorReturn_default = /*#__PURE__*/__webpack_require__.n(possibleConstructorReturn);
-
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/getPrototypeOf.js
-var getPrototypeOf = __webpack_require__(7);
-var getPrototypeOf_default = /*#__PURE__*/__webpack_require__.n(getPrototypeOf);
-
-// EXTERNAL MODULE: external {"this":["wp","element"]}
-var external_this_wp_element_ = __webpack_require__(0);
-
-// EXTERNAL MODULE: external {"this":["wp","i18n"]}
-var external_this_wp_i18n_ = __webpack_require__(2);
-
-// EXTERNAL MODULE: external {"this":["wp","compose"]}
-var external_this_wp_compose_ = __webpack_require__(20);
-
-// EXTERNAL MODULE: external {"this":["wp","date"]}
-var external_this_wp_date_ = __webpack_require__(75);
-
-// EXTERNAL MODULE: external {"this":["wp","data"]}
-var external_this_wp_data_ = __webpack_require__(11);
-
-// EXTERNAL MODULE: external "lodash"
-var external_lodash_ = __webpack_require__(3);
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js + 1 modules
+var inheritsLoose = __webpack_require__(128);
 
 // EXTERNAL MODULE: ./node_modules/prop-types/index.js
 var prop_types = __webpack_require__(1);
-var prop_types_default = /*#__PURE__*/__webpack_require__.n(prop_types);
 
-// EXTERNAL MODULE: external {"this":["wc","components"]}
-var external_this_wc_components_ = __webpack_require__(47);
-
-// EXTERNAL MODULE: external {"this":["wc","data"]}
-var external_this_wc_data_ = __webpack_require__(22);
-
-// EXTERNAL MODULE: external {"this":["wc","date"]}
-var external_this_wc_date_ = __webpack_require__(29);
-
-// EXTERNAL MODULE: ./client/lib/currency-context.js
-var currency_context = __webpack_require__(498);
-
-// EXTERNAL MODULE: ./client/analytics/components/report-error/index.js
-var report_error = __webpack_require__(499);
-
-// EXTERNAL MODULE: external {"this":["wc","navigation"]}
-var external_this_wc_navigation_ = __webpack_require__(21);
-
-// CONCATENATED MODULE: ./client/analytics/components/report-chart/utils.js
-/**
- * External dependencies
- */
-
-
-var DEFAULT_FILTER = 'all';
-function getSelectedFilter(filters, query) {
-  var selectedFilterArgs = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-
-  if (!filters || filters.length === 0) {
-    return null;
-  }
-
-  var clonedFilters = filters.slice(0);
-  var filterConfig = clonedFilters.pop();
-
-  if (filterConfig.showFilters(query, selectedFilterArgs)) {
-    var allFilters = Object(external_this_wc_navigation_["flattenFilters"])(filterConfig.filters);
-    var value = query[filterConfig.param] || filterConfig.defaultValue || DEFAULT_FILTER;
-    return Object(external_lodash_["find"])(allFilters, {
-      value: value
-    });
-  }
-
-  return getSelectedFilter(clonedFilters, query, selectedFilterArgs);
+// CONCATENATED MODULE: ./node_modules/dom-helpers/esm/hasClass.js
+function hasClass(element, className) {
+  if (element.classList) return !!className && element.classList.contains(className);
+  return (" " + (element.className.baseVal || element.className) + " ").indexOf(" " + className + " ") !== -1;
 }
-function getChartMode(selectedFilter, query) {
-  if (selectedFilter && query) {
-    var selectedFilterParam = Object(external_lodash_["get"])(selectedFilter, ['settings', 'param']);
+// CONCATENATED MODULE: ./node_modules/dom-helpers/esm/addClass.js
 
-    if (!selectedFilterParam || Object.keys(query).includes(selectedFilterParam)) {
-      return Object(external_lodash_["get"])(selectedFilter, ['chartMode']);
-    }
-  }
-
-  return null;
+function addClass_addClass(element, className) {
+  if (element.classList) element.classList.add(className);else if (!hasClass(element, className)) if (typeof element.className === 'string') element.className = element.className + " " + className;else element.setAttribute('class', (element.className && element.className.baseVal || '') + " " + className);
 }
-// CONCATENATED MODULE: ./client/analytics/components/report-chart/index.js
+// CONCATENATED MODULE: ./node_modules/dom-helpers/esm/removeClass.js
+function replaceClassName(origClass, classToRemove) {
+  return origClass.replace(new RegExp("(^|\\s)" + classToRemove + "(?:\\s|$)", 'g'), '$1').replace(/\s+/g, ' ').replace(/^\s*|\s*$/g, '');
+}
 
-
-
-
-
-
-
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { defineProperty_default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = getPrototypeOf_default()(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = getPrototypeOf_default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return possibleConstructorReturn_default()(this, result); }; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-/**
- * External dependencies
- */
-
-
-
-
-
-
-
-
-
-
-/**
- * Internal dependencies
- */
-
-
-
-
-/**
- * Component that renders the chart in reports.
- */
-
-var report_chart_ReportChart = /*#__PURE__*/function (_Component) {
-  inherits_default()(ReportChart, _Component);
-
-  var _super = _createSuper(ReportChart);
-
-  function ReportChart() {
-    classCallCheck_default()(this, ReportChart);
-
-    return _super.apply(this, arguments);
+function removeClass_removeClass(element, className) {
+  if (element.classList) {
+    element.classList.remove(className);
+  } else if (typeof element.className === 'string') {
+    ;
+    element.className = replaceClassName(element.className, className);
+  } else {
+    element.setAttribute('class', replaceClassName(element.className && element.className.baseVal || '', className));
   }
+}
+// EXTERNAL MODULE: external "React"
+var external_React_ = __webpack_require__(20);
+var external_React_default = /*#__PURE__*/__webpack_require__.n(external_React_);
 
-  createClass_default()(ReportChart, [{
-    key: "shouldComponentUpdate",
-    value: function shouldComponentUpdate(nextProps) {
-      if (nextProps.isRequesting !== this.props.isRequesting || nextProps.primaryData.isRequesting !== this.props.primaryData.isRequesting || nextProps.secondaryData.isRequesting !== this.props.secondaryData.isRequesting || !Object(external_lodash_["isEqual"])(nextProps.query, this.props.query)) {
-        return true;
-      }
+// EXTERNAL MODULE: external "ReactDOM"
+var external_ReactDOM_ = __webpack_require__(163);
+var external_ReactDOM_default = /*#__PURE__*/__webpack_require__.n(external_ReactDOM_);
 
-      return false;
-    }
-  }, {
-    key: "getItemChartData",
-    value: function getItemChartData() {
-      var _this$props = this.props,
-          primaryData = _this$props.primaryData,
-          selectedChart = _this$props.selectedChart;
-      var chartData = primaryData.data.intervals.map(function (interval) {
-        var intervalData = {};
-        interval.subtotals.segments.forEach(function (segment) {
-          if (segment.segment_label) {
-            var label = intervalData[segment.segment_label] ? segment.segment_label + ' (#' + segment.segment_id + ')' : segment.segment_label;
-            intervalData[segment.segment_id] = {
-              label: label,
-              value: segment.subtotals[selectedChart.key] || 0
-            };
-          }
-        });
-        return _objectSpread({
-          date: Object(external_this_wp_date_["format"])('Y-m-d\\TH:i:s', interval.date_start)
-        }, intervalData);
-      });
-      return chartData;
-    }
-  }, {
-    key: "getTimeChartData",
-    value: function getTimeChartData() {
-      var _this$props2 = this.props,
-          query = _this$props2.query,
-          primaryData = _this$props2.primaryData,
-          secondaryData = _this$props2.secondaryData,
-          selectedChart = _this$props2.selectedChart,
-          defaultDateRange = _this$props2.defaultDateRange;
-      var currentInterval = Object(external_this_wc_date_["getIntervalForQuery"])(query);
+// CONCATENATED MODULE: ./node_modules/react-transition-group/esm/config.js
+/* harmony default export */ var config = ({
+  disabled: false
+});
+// EXTERNAL MODULE: ./node_modules/react-transition-group/esm/TransitionGroupContext.js
+var TransitionGroupContext = __webpack_require__(186);
 
-      var _getCurrentDates = Object(external_this_wc_date_["getCurrentDates"])(query, defaultDateRange),
-          primary = _getCurrentDates.primary,
-          secondary = _getCurrentDates.secondary;
+// CONCATENATED MODULE: ./node_modules/react-transition-group/esm/Transition.js
 
-      var chartData = primaryData.data.intervals.map(function (interval, index) {
-        var secondaryDate = Object(external_this_wc_date_["getPreviousDate"])(interval.date_start, primary.after, secondary.after, query.compare, currentInterval);
-        var secondaryInterval = secondaryData.data.intervals[index];
-        return {
-          date: Object(external_this_wp_date_["format"])('Y-m-d\\TH:i:s', interval.date_start),
-          primary: {
-            label: "".concat(primary.label, " (").concat(primary.range, ")"),
-            labelDate: interval.date_start,
-            value: interval.subtotals[selectedChart.key] || 0
-          },
-          secondary: {
-            label: "".concat(secondary.label, " (").concat(secondary.range, ")"),
-            labelDate: secondaryDate.format('YYYY-MM-DD HH:mm:ss'),
-            value: secondaryInterval && secondaryInterval.subtotals[selectedChart.key] || 0
-          }
-        };
-      });
-      return chartData;
-    }
-  }, {
-    key: "getTimeChartTotals",
-    value: function getTimeChartTotals() {
-      var _this$props3 = this.props,
-          primaryData = _this$props3.primaryData,
-          secondaryData = _this$props3.secondaryData,
-          selectedChart = _this$props3.selectedChart;
-      return {
-        primary: Object(external_lodash_["get"])(primaryData, ['data', 'totals', selectedChart.key], null),
-        secondary: Object(external_lodash_["get"])(secondaryData, ['data', 'totals', selectedChart.key], null)
-      };
-    }
-  }, {
-    key: "renderChart",
-    value: function renderChart(mode, isRequesting, chartData, legendTotals) {
-      var _this$props4 = this.props,
-          emptySearchResults = _this$props4.emptySearchResults,
-          filterParam = _this$props4.filterParam,
-          interactiveLegend = _this$props4.interactiveLegend,
-          itemsLabel = _this$props4.itemsLabel,
-          legendPosition = _this$props4.legendPosition,
-          path = _this$props4.path,
-          query = _this$props4.query,
-          selectedChart = _this$props4.selectedChart,
-          showHeaderControls = _this$props4.showHeaderControls,
-          primaryData = _this$props4.primaryData;
-      var currentInterval = Object(external_this_wc_date_["getIntervalForQuery"])(query);
-      var allowedIntervals = Object(external_this_wc_date_["getAllowedIntervalsForQuery"])(query);
-      var formats = Object(external_this_wc_date_["getDateFormatsForInterval"])(currentInterval, primaryData.data.intervals.length);
-      var emptyMessage = emptySearchResults ? Object(external_this_wp_i18n_["__"])('No data for the current search', 'woocommerce-admin') : Object(external_this_wp_i18n_["__"])('No data for the selected date range', 'woocommerce-admin');
-      var _this$context = this.context,
-          formatAmount = _this$context.formatAmount,
-          getCurrencyConfig = _this$context.getCurrencyConfig;
-      return Object(external_this_wp_element_["createElement"])(external_this_wc_components_["Chart"], {
-        allowedIntervals: allowedIntervals,
-        data: chartData,
-        dateParser: '%Y-%m-%dT%H:%M:%S',
-        emptyMessage: emptyMessage,
-        filterParam: filterParam,
-        interactiveLegend: interactiveLegend,
-        interval: currentInterval,
-        isRequesting: isRequesting,
-        itemsLabel: itemsLabel,
-        legendPosition: legendPosition,
-        legendTotals: legendTotals,
-        mode: mode,
-        path: path,
-        query: query,
-        screenReaderFormat: formats.screenReaderFormat,
-        showHeaderControls: showHeaderControls,
-        title: selectedChart.label,
-        tooltipLabelFormat: formats.tooltipLabelFormat,
-        tooltipTitle: mode === 'time-comparison' && selectedChart.label || null,
-        tooltipValueFormat: Object(external_this_wc_data_["getTooltipValueFormat"])(selectedChart.type, formatAmount),
-        chartType: Object(external_this_wc_date_["getChartTypeForQuery"])(query),
-        valueType: selectedChart.type,
-        xFormat: formats.xFormat,
-        x2Format: formats.x2Format,
-        currency: getCurrencyConfig()
-      });
-    }
-  }, {
-    key: "renderItemComparison",
-    value: function renderItemComparison() {
-      var _this$props5 = this.props,
-          isRequesting = _this$props5.isRequesting,
-          primaryData = _this$props5.primaryData;
 
-      if (primaryData.isError) {
-        return Object(external_this_wp_element_["createElement"])(report_error["a" /* default */], {
-          isError: true
-        });
-      }
 
-      var isChartRequesting = isRequesting || primaryData.isRequesting;
-      var chartData = this.getItemChartData();
-      return this.renderChart('item-comparison', isChartRequesting, chartData);
-    }
-  }, {
-    key: "renderTimeComparison",
-    value: function renderTimeComparison() {
-      var _this$props6 = this.props,
-          isRequesting = _this$props6.isRequesting,
-          primaryData = _this$props6.primaryData,
-          secondaryData = _this$props6.secondaryData;
 
-      if (!primaryData || primaryData.isError || secondaryData.isError) {
-        return Object(external_this_wp_element_["createElement"])(report_error["a" /* default */], {
-          isError: true
-        });
-      }
 
-      var isChartRequesting = isRequesting || primaryData.isRequesting || secondaryData.isRequesting;
-      var chartData = this.getTimeChartData();
-      var legendTotals = this.getTimeChartTotals();
-      return this.renderChart('time-comparison', isChartRequesting, chartData, legendTotals);
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var mode = this.props.mode;
 
-      if (mode === 'item-comparison') {
-        return this.renderItemComparison();
-      }
 
-      return this.renderTimeComparison();
-    }
-  }]);
 
-  return ReportChart;
-}(external_this_wp_element_["Component"]);
-report_chart_ReportChart.contextType = currency_context["a" /* CurrencyContext */];
-report_chart_ReportChart.propTypes = {
-  /**
-   * Filters available for that report.
-   */
-  filters: prop_types_default.a.array,
-
-  /**
-   * Whether there is an API call running.
-   */
-  isRequesting: prop_types_default.a.bool,
-
-  /**
-   * Label describing the legend items.
-   */
-  itemsLabel: prop_types_default.a.string,
-
-  /**
-   * Allows specifying properties different from the `endpoint` that will be used
-   * to limit the items when there is an active search.
-   */
-  limitProperties: prop_types_default.a.array,
-
-  /**
-   * `items-comparison` (default) or `time-comparison`, this is used to generate correct
-   * ARIA properties.
-   */
-  mode: prop_types_default.a.string,
-
-  /**
-   * Current path
-   */
-  path: prop_types_default.a.string.isRequired,
-
-  /**
-   * Primary data to display in the chart.
-   */
-  primaryData: prop_types_default.a.object,
-
-  /**
-   * The query string represented in object form.
-   */
-  query: prop_types_default.a.object.isRequired,
-
-  /**
-   * Secondary data to display in the chart.
-   */
-  secondaryData: prop_types_default.a.object,
-
-  /**
-   * Properties of the selected chart.
-   */
-  selectedChart: prop_types_default.a.shape({
-    /**
-     * Key of the selected chart.
-     */
-    key: prop_types_default.a.string.isRequired,
-
-    /**
-     * Chart label.
-     */
-    label: prop_types_default.a.string.isRequired,
-
-    /**
-     * Order query argument.
-     */
-    order: prop_types_default.a.oneOf(['asc', 'desc']),
-
-    /**
-     * Order by query argument.
-     */
-    orderby: prop_types_default.a.string,
-
-    /**
-     * Number type for formatting.
-     */
-    type: prop_types_default.a.oneOf(['average', 'number', 'currency']).isRequired
-  }).isRequired
-};
-report_chart_ReportChart.defaultProps = {
-  isRequesting: false,
-  primaryData: {
-    data: {
-      intervals: []
-    },
-    isError: false,
-    isRequesting: false
-  },
-  secondaryData: {
-    data: {
-      intervals: []
-    },
-    isError: false,
-    isRequesting: false
-  }
-};
-/* harmony default export */ var report_chart = __webpack_exports__["a"] = (Object(external_this_wp_compose_["compose"])(Object(external_this_wp_data_["withSelect"])(function (select, props) {
-  var charts = props.charts,
-      endpoint = props.endpoint,
-      filters = props.filters,
-      isRequesting = props.isRequesting,
-      limitProperties = props.limitProperties,
-      query = props.query,
-      advancedFilters = props.advancedFilters;
-  var limitBy = limitProperties || [endpoint];
-  var selectedFilter = getSelectedFilter(filters, query);
-  var filterParam = Object(external_lodash_["get"])(selectedFilter, ['settings', 'param']);
-  var chartMode = props.mode || getChartMode(selectedFilter, query) || 'time-comparison';
-
-  var _select$getSetting = select(external_this_wc_data_["SETTINGS_STORE_NAME"]).getSetting('wc_admin', 'wcAdminSettings'),
-      defaultDateRange = _select$getSetting.woocommerce_default_date_range;
-
-  var newProps = {
-    mode: chartMode,
-    filterParam: filterParam,
-    defaultDateRange: defaultDateRange
-  };
-
-  if (isRequesting) {
-    return newProps;
-  }
-
-  var hasLimitByParam = limitBy.some(function (item) {
-    return query[item] && query[item].length;
-  });
-
-  if (query.search && !hasLimitByParam) {
-    return _objectSpread(_objectSpread({}, newProps), {}, {
-      emptySearchResults: true
-    });
-  }
-
-  var fields = charts && charts.map(function (chart) {
-    return chart.key;
-  });
-  var primaryData = Object(external_this_wc_data_["getReportChartData"])({
-    endpoint: endpoint,
-    dataType: 'primary',
-    query: query,
-    select: select,
-    limitBy: limitBy,
-    filters: filters,
-    advancedFilters: advancedFilters,
-    defaultDateRange: defaultDateRange,
-    fields: fields
-  });
-
-  if (chartMode === 'item-comparison') {
-    return _objectSpread(_objectSpread({}, newProps), {}, {
-      primaryData: primaryData
-    });
-  }
-
-  var secondaryData = Object(external_this_wc_data_["getReportChartData"])({
-    endpoint: endpoint,
-    dataType: 'secondary',
-    query: query,
-    select: select,
-    limitBy: limitBy,
-    filters: filters,
-    advancedFilters: advancedFilters,
-    defaultDateRange: defaultDateRange,
-    fields: fields
-  });
-  return _objectSpread(_objectSpread({}, newProps), {}, {
-    primaryData: primaryData,
-    secondaryData: secondaryData
-  });
-}))(report_chart_ReportChart));
-
-/***/ }),
-
-/***/ 503:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return getSelectedChart; });
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
+var UNMOUNTED = 'unmounted';
+var EXITED = 'exited';
+var ENTERING = 'entering';
+var ENTERED = 'entered';
+var EXITING = 'exiting';
 /**
- * External dependencies
- */
-
-/**
- * Takes a chart name returns the configuration for that chart from and array
- * of charts. If the chart is not found it will return the first chart.
+ * The Transition component lets you describe a transition from one component
+ * state to another _over time_ with a simple declarative API. Most commonly
+ * it's used to animate the mounting and unmounting of a component, but can also
+ * be used to describe in-place transition states as well.
  *
- * @param {string} chartName - the name of the chart to get configuration for
- * @param {Array} charts - list of charts for a particular report
- * @return {Object} - chart configuration object
- */
-
-function getSelectedChart(chartName) {
-  var charts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
-  var chart = Object(lodash__WEBPACK_IMPORTED_MODULE_0__["find"])(charts, {
-    key: chartName
-  });
-
-  if (chart) {
-    return chart;
-  }
-
-  return charts[0];
-}
-
-/***/ }),
-
-/***/ 504:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony export ReportSummary */
-/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
-/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(13);
-/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(14);
-/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(15);
-/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(7);
-/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(0);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(2);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(20);
-/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_compose__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(11);
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(1);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _woocommerce_navigation__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(21);
-/* harmony import */ var _woocommerce_navigation__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_navigation__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _woocommerce_components__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(47);
-/* harmony import */ var _woocommerce_components__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_components__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var _woocommerce_number__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(142);
-/* harmony import */ var _woocommerce_number__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_number__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var _woocommerce_data__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(22);
-/* harmony import */ var _woocommerce_data__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_data__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var _woocommerce_date__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(29);
-/* harmony import */ var _woocommerce_date__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_date__WEBPACK_IMPORTED_MODULE_14__);
-/* harmony import */ var _woocommerce_tracks__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(27);
-/* harmony import */ var _woocommerce_tracks__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_tracks__WEBPACK_IMPORTED_MODULE_15__);
-/* harmony import */ var _report_error__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(499);
-/* harmony import */ var _lib_currency_context__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(498);
-
-
-
-
-
-
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4___default()(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4___default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3___default()(this, result); }; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-/**
- * External dependencies
- */
-
-
-
-
-
-
-
-
-
-
-
-/**
- * Internal dependencies
- */
-
-
-
-/**
- * Component to render summary numbers in reports.
- */
-
-var ReportSummary = /*#__PURE__*/function (_Component) {
-  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_2___default()(ReportSummary, _Component);
-
-  var _super = _createSuper(ReportSummary);
-
-  function ReportSummary() {
-    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, ReportSummary);
-
-    return _super.apply(this, arguments);
-  }
-
-  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(ReportSummary, [{
-    key: "formatVal",
-    value: function formatVal(val, type) {
-      var _this$context = this.context,
-          formatAmount = _this$context.formatAmount,
-          getCurrencyConfig = _this$context.getCurrencyConfig;
-      return type === 'currency' ? formatAmount(val) : Object(_woocommerce_number__WEBPACK_IMPORTED_MODULE_12__["formatValue"])(getCurrencyConfig(), type, val);
-    }
-  }, {
-    key: "getValues",
-    value: function getValues(key, type) {
-      var _this$props = this.props,
-          emptySearchResults = _this$props.emptySearchResults,
-          summaryData = _this$props.summaryData;
-      var totals = summaryData.totals;
-      var primaryTotal = totals.primary ? totals.primary[key] : 0;
-      var secondaryTotal = totals.secondary ? totals.secondary[key] : 0;
-      var primaryValue = emptySearchResults ? 0 : primaryTotal;
-      var secondaryValue = emptySearchResults ? 0 : secondaryTotal;
-      return {
-        delta: Object(_woocommerce_number__WEBPACK_IMPORTED_MODULE_12__["calculateDelta"])(primaryValue, secondaryValue),
-        prevValue: this.formatVal(secondaryValue, type),
-        value: this.formatVal(primaryValue, type)
-      };
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this = this;
-
-      var _this$props2 = this.props,
-          charts = _this$props2.charts,
-          query = _this$props2.query,
-          selectedChart = _this$props2.selectedChart,
-          summaryData = _this$props2.summaryData,
-          endpoint = _this$props2.endpoint,
-          report = _this$props2.report,
-          defaultDateRange = _this$props2.defaultDateRange;
-      var isError = summaryData.isError,
-          isRequesting = summaryData.isRequesting;
-
-      if (isError) {
-        return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])(_report_error__WEBPACK_IMPORTED_MODULE_16__[/* default */ "a"], {
-          isError: true
-        });
-      }
-
-      if (isRequesting) {
-        return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])(_woocommerce_components__WEBPACK_IMPORTED_MODULE_11__["SummaryListPlaceholder"], {
-          numberOfItems: charts.length
-        });
-      }
-
-      var _getDateParamsFromQue = Object(_woocommerce_date__WEBPACK_IMPORTED_MODULE_14__["getDateParamsFromQuery"])(query, defaultDateRange),
-          compare = _getDateParamsFromQue.compare;
-
-      var renderSummaryNumbers = function renderSummaryNumbers(_ref) {
-        var onToggle = _ref.onToggle;
-        return charts.map(function (chart) {
-          var key = chart.key,
-              order = chart.order,
-              orderby = chart.orderby,
-              label = chart.label,
-              type = chart.type;
-          var newPath = {
-            chart: key
-          };
-
-          if (orderby) {
-            newPath.orderby = orderby;
-          }
-
-          if (order) {
-            newPath.order = order;
-          }
-
-          var href = Object(_woocommerce_navigation__WEBPACK_IMPORTED_MODULE_10__["getNewPath"])(newPath);
-          var isSelected = selectedChart.key === key;
-
-          var _this$getValues = _this.getValues(key, type),
-              delta = _this$getValues.delta,
-              prevValue = _this$getValues.prevValue,
-              value = _this$getValues.value;
-
-          return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])(_woocommerce_components__WEBPACK_IMPORTED_MODULE_11__["SummaryNumber"], {
-            key: key,
-            delta: delta,
-            href: href,
-            label: label,
-            prevLabel: compare === 'previous_period' ? Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('Previous Period:', 'woocommerce-admin') : Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('Previous Year:', 'woocommerce-admin'),
-            prevValue: prevValue,
-            selected: isSelected,
-            value: value,
-            onLinkClickCallback: function onLinkClickCallback() {
-              // Wider than a certain breakpoint, there is no dropdown so avoid calling onToggle.
-              if (onToggle) {
-                onToggle();
-              }
-
-              Object(_woocommerce_tracks__WEBPACK_IMPORTED_MODULE_15__["recordEvent"])('analytics_chart_tab_click', {
-                report: report || endpoint,
-                key: key
-              });
-            }
-          });
-        });
-      };
-
-      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])(_woocommerce_components__WEBPACK_IMPORTED_MODULE_11__["SummaryList"], null, renderSummaryNumbers);
-    }
-  }]);
-
-  return ReportSummary;
-}(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["Component"]);
-ReportSummary.propTypes = {
-  /**
-   * Properties of all the charts available for that report.
-   */
-  charts: prop_types__WEBPACK_IMPORTED_MODULE_9___default.a.array.isRequired,
-
-  /**
-   * The endpoint to use in API calls to populate the Summary Numbers.
-   * For example, if `taxes` is provided, data will be fetched from the report
-   * `taxes` endpoint (ie: `/wc-analytics/reports/taxes/stats`). If the provided endpoint
-   * doesn't exist, an error will be shown to the user with `ReportError`.
-   */
-  endpoint: prop_types__WEBPACK_IMPORTED_MODULE_9___default.a.string.isRequired,
-
-  /**
-   * Allows specifying properties different from the `endpoint` that will be used
-   * to limit the items when there is an active search.
-   */
-  limitProperties: prop_types__WEBPACK_IMPORTED_MODULE_9___default.a.array,
-
-  /**
-   * The query string represented in object form.
-   */
-  query: prop_types__WEBPACK_IMPORTED_MODULE_9___default.a.object.isRequired,
-
-  /**
-   * Properties of the selected chart.
-   */
-  selectedChart: prop_types__WEBPACK_IMPORTED_MODULE_9___default.a.shape({
-    /**
-     * Key of the selected chart.
-     */
-    key: prop_types__WEBPACK_IMPORTED_MODULE_9___default.a.string.isRequired,
-
-    /**
-     * Chart label.
-     */
-    label: prop_types__WEBPACK_IMPORTED_MODULE_9___default.a.string.isRequired,
-
-    /**
-     * Order query argument.
-     */
-    order: prop_types__WEBPACK_IMPORTED_MODULE_9___default.a.oneOf(['asc', 'desc']),
-
-    /**
-     * Order by query argument.
-     */
-    orderby: prop_types__WEBPACK_IMPORTED_MODULE_9___default.a.string,
-
-    /**
-     * Number type for formatting.
-     */
-    type: prop_types__WEBPACK_IMPORTED_MODULE_9___default.a.oneOf(['average', 'number', 'currency']).isRequired
-  }).isRequired,
-
-  /**
-   * Data to display in the SummaryNumbers.
-   */
-  summaryData: prop_types__WEBPACK_IMPORTED_MODULE_9___default.a.object,
-
-  /**
-   * Report name, if different than the endpoint.
-   */
-  report: prop_types__WEBPACK_IMPORTED_MODULE_9___default.a.string
-};
-ReportSummary.defaultProps = {
-  summaryData: {
-    totals: {
-      primary: {},
-      secondary: {}
-    },
-    isError: false
-  }
-};
-ReportSummary.contextType = _lib_currency_context__WEBPACK_IMPORTED_MODULE_17__[/* CurrencyContext */ "a"];
-/* harmony default export */ __webpack_exports__["a"] = (Object(_wordpress_compose__WEBPACK_IMPORTED_MODULE_7__["compose"])(Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_8__["withSelect"])(function (select, props) {
-  var charts = props.charts,
-      endpoint = props.endpoint,
-      limitProperties = props.limitProperties,
-      query = props.query,
-      filters = props.filters,
-      advancedFilters = props.advancedFilters;
-  var limitBy = limitProperties || [endpoint];
-  var hasLimitByParam = limitBy.some(function (item) {
-    return query[item] && query[item].length;
-  });
-
-  if (query.search && !hasLimitByParam) {
-    return {
-      emptySearchResults: true
-    };
-  }
-
-  var fields = charts && charts.map(function (chart) {
-    return chart.key;
-  });
-
-  var _select$getSetting = select(_woocommerce_data__WEBPACK_IMPORTED_MODULE_13__["SETTINGS_STORE_NAME"]).getSetting('wc_admin', 'wcAdminSettings'),
-      defaultDateRange = _select$getSetting.woocommerce_default_date_range;
-
-  var summaryData = Object(_woocommerce_data__WEBPACK_IMPORTED_MODULE_13__["getSummaryNumbers"])({
-    endpoint: endpoint,
-    query: query,
-    select: select,
-    limitBy: limitBy,
-    filters: filters,
-    advancedFilters: advancedFilters,
-    defaultDateRange: defaultDateRange,
-    fields: fields
-  });
-  return {
-    summaryData: summaryData,
-    defaultDateRange: defaultDateRange
-  };
-}))(ReportSummary));
-
-/***/ }),
-
-/***/ 512:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return isLowStock; });
-/**
- * Determine if a product or variation is in low stock.
+ * ---
  *
- * @param {number} threshold - The number at which stock is determined to be low.
- * @return {boolean} - Whether or not the stock is low.
- */
-function isLowStock(status, quantity, threshold) {
-  if (!quantity) {
-    // Sites that don't do inventory tracking will always return false.
-    return false;
-  }
-
-  return status && quantity <= threshold === 'instock';
-}
-
-/***/ }),
-
-/***/ 530:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
-/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(13);
-/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9);
-/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(14);
-/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(15);
-/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(7);
-/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(0);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(2);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(20);
-/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_wordpress_compose__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _wordpress_html_entities__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(41);
-/* harmony import */ var _wordpress_html_entities__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_wordpress_html_entities__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(11);
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(3);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var _woocommerce_navigation__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(21);
-/* harmony import */ var _woocommerce_navigation__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_navigation__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var _woocommerce_components__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(47);
-/* harmony import */ var _woocommerce_components__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_components__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var _woocommerce_number__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(142);
-/* harmony import */ var _woocommerce_number__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_number__WEBPACK_IMPORTED_MODULE_14__);
-/* harmony import */ var _woocommerce_wc_admin_settings__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(25);
-/* harmony import */ var _woocommerce_data__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(22);
-/* harmony import */ var _woocommerce_data__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_data__WEBPACK_IMPORTED_MODULE_16__);
-/* harmony import */ var _categories_breadcrumbs__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(531);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(512);
-/* harmony import */ var _components_report_table__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(506);
-/* harmony import */ var _lib_currency_context__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(498);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(575);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_21___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_21__);
-
-
-
-
-
-
-
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4___default()(this, result); }; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-/**
- * External dependencies
- */
-
-
-
-
-
-
-
-
-
-
-
-/**
- * Internal dependencies
+ * **Note**: `Transition` is a platform-agnostic base component. If you're using
+ * transitions in CSS, you'll probably want to use
+ * [`CSSTransition`](https://reactcommunity.org/react-transition-group/css-transition)
+ * instead. It inherits all the features of `Transition`, but contains
+ * additional features necessary to play nice with CSS transitions (hence the
+ * name of the component).
+ *
+ * ---
+ *
+ * By default the `Transition` component does not alter the behavior of the
+ * component it renders, it only tracks "enter" and "exit" states for the
+ * components. It's up to you to give meaning and effect to those states. For
+ * example we can add styles to a component when it enters or exits:
+ *
+ * ```jsx
+ * import { Transition } from 'react-transition-group';
+ *
+ * const duration = 300;
+ *
+ * const defaultStyle = {
+ *   transition: `opacity ${duration}ms ease-in-out`,
+ *   opacity: 0,
+ * }
+ *
+ * const transitionStyles = {
+ *   entering: { opacity: 1 },
+ *   entered:  { opacity: 1 },
+ *   exiting:  { opacity: 0 },
+ *   exited:  { opacity: 0 },
+ * };
+ *
+ * const Fade = ({ in: inProp }) => (
+ *   <Transition in={inProp} timeout={duration}>
+ *     {state => (
+ *       <div style={{
+ *         ...defaultStyle,
+ *         ...transitionStyles[state]
+ *       }}>
+ *         I'm a fade Transition!
+ *       </div>
+ *     )}
+ *   </Transition>
+ * );
+ * ```
+ *
+ * There are 4 main states a Transition can be in:
+ *  - `'entering'`
+ *  - `'entered'`
+ *  - `'exiting'`
+ *  - `'exited'`
+ *
+ * Transition state is toggled via the `in` prop. When `true` the component
+ * begins the "Enter" stage. During this stage, the component will shift from
+ * its current transition state, to `'entering'` for the duration of the
+ * transition and then to the `'entered'` stage once it's complete. Let's take
+ * the following example (we'll use the
+ * [useState](https://reactjs.org/docs/hooks-reference.html#usestate) hook):
+ *
+ * ```jsx
+ * function App() {
+ *   const [inProp, setInProp] = useState(false);
+ *   return (
+ *     <div>
+ *       <Transition in={inProp} timeout={500}>
+ *         {state => (
+ *           // ...
+ *         )}
+ *       </Transition>
+ *       <button onClick={() => setInProp(true)}>
+ *         Click to Enter
+ *       </button>
+ *     </div>
+ *   );
+ * }
+ * ```
+ *
+ * When the button is clicked the component will shift to the `'entering'` state
+ * and stay there for 500ms (the value of `timeout`) before it finally switches
+ * to `'entered'`.
+ *
+ * When `in` is `false` the same thing happens except the state moves from
+ * `'exiting'` to `'exited'`.
  */
 
+var Transition_Transition = /*#__PURE__*/function (_React$Component) {
+  Object(inheritsLoose["a" /* default */])(Transition, _React$Component);
 
-
-
-
-
-var manageStock = Object(_woocommerce_wc_admin_settings__WEBPACK_IMPORTED_MODULE_15__[/* getSetting */ "g"])('manageStock', 'no');
-var stockStatuses = Object(_woocommerce_wc_admin_settings__WEBPACK_IMPORTED_MODULE_15__[/* getSetting */ "g"])('stockStatuses', {});
-
-var ProductsReportTable = /*#__PURE__*/function (_Component) {
-  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_3___default()(ProductsReportTable, _Component);
-
-  var _super = _createSuper(ProductsReportTable);
-
-  function ProductsReportTable() {
+  function Transition(props, context) {
     var _this;
 
-    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, ProductsReportTable);
+    _this = _React$Component.call(this, props, context) || this;
+    var parentGroup = context; // In the context of a TransitionGroup all enters are really appears
 
-    _this = _super.call(this);
-    _this.getHeadersContent = _this.getHeadersContent.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2___default()(_this));
-    _this.getRowsContent = _this.getRowsContent.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2___default()(_this));
-    _this.getSummary = _this.getSummary.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2___default()(_this));
+    var appear = parentGroup && !parentGroup.isMounting ? props.enter : props.appear;
+    var initialStatus;
+    _this.appearStatus = null;
+
+    if (props.in) {
+      if (appear) {
+        initialStatus = EXITED;
+        _this.appearStatus = ENTERING;
+      } else {
+        initialStatus = ENTERED;
+      }
+    } else {
+      if (props.unmountOnExit || props.mountOnEnter) {
+        initialStatus = UNMOUNTED;
+      } else {
+        initialStatus = EXITED;
+      }
+    }
+
+    _this.state = {
+      status: initialStatus
+    };
+    _this.nextCallback = null;
     return _this;
   }
 
-  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(ProductsReportTable, [{
-    key: "getHeadersContent",
-    value: function getHeadersContent() {
-      return [{
-        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('Product Title', 'woocommerce-admin'),
-        key: 'product_name',
-        required: true,
-        isLeftAligned: true,
-        isSortable: true
-      }, {
-        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('SKU', 'woocommerce-admin'),
-        key: 'sku',
-        hiddenByDefault: true,
-        isSortable: true
-      }, {
-        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('Items Sold', 'woocommerce-admin'),
-        key: 'items_sold',
-        required: true,
-        defaultSort: true,
-        isSortable: true,
-        isNumeric: true
-      }, {
-        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('Net Sales', 'woocommerce-admin'),
-        screenReaderLabel: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('Net Sales', 'woocommerce-admin'),
-        key: 'net_revenue',
-        required: true,
-        isSortable: true,
-        isNumeric: true
-      }, {
-        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('Orders', 'woocommerce-admin'),
-        key: 'orders_count',
-        isSortable: true,
-        isNumeric: true
-      }, {
-        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('Category', 'woocommerce-admin'),
-        key: 'product_cat'
-      }, {
-        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('Variations', 'woocommerce-admin'),
-        key: 'variations',
-        isSortable: true
-      }, manageStock === 'yes' ? {
-        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('Status', 'woocommerce-admin'),
-        key: 'stock_status'
-      } : null, manageStock === 'yes' ? {
-        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('Stock', 'woocommerce-admin'),
-        key: 'stock',
-        isNumeric: true
-      } : null].filter(Boolean);
-    }
-  }, {
-    key: "getRowsContent",
-    value: function getRowsContent() {
-      var _this2 = this;
+  Transition.getDerivedStateFromProps = function getDerivedStateFromProps(_ref, prevState) {
+    var nextIn = _ref.in;
 
-      var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-      var query = this.props.query;
-      var persistedQuery = Object(_woocommerce_navigation__WEBPACK_IMPORTED_MODULE_12__["getPersistedQuery"])(query);
-      var _this$context = this.context,
-          renderCurrency = _this$context.render,
-          getCurrencyFormatDecimal = _this$context.formatDecimal,
-          getCurrencyConfig = _this$context.getCurrencyConfig;
-      var currency = getCurrencyConfig();
-      return Object(lodash__WEBPACK_IMPORTED_MODULE_11__["map"])(data, function (row) {
-        var productId = row.product_id,
-            itemsSold = row.items_sold,
-            netRevenue = row.net_revenue,
-            ordersCount = row.orders_count;
-        var extendedInfo = row.extended_info || {};
-        var categoryIds = extendedInfo.category_ids,
-            lowStockAmount = extendedInfo.low_stock_amount,
-            extendedInfoManageStock = extendedInfo.manage_stock,
-            sku = extendedInfo.sku,
-            extendedInfoStockStatus = extendedInfo.stock_status,
-            stockQuantity = extendedInfo.stock_quantity,
-            _extendedInfo$variati = extendedInfo.variations,
-            variations = _extendedInfo$variati === void 0 ? [] : _extendedInfo$variati;
-        var name = Object(_wordpress_html_entities__WEBPACK_IMPORTED_MODULE_9__["decodeEntities"])(extendedInfo.name);
-        var ordersLink = Object(_woocommerce_navigation__WEBPACK_IMPORTED_MODULE_12__["getNewPath"])(persistedQuery, '/analytics/orders', {
-          filter: 'advanced',
-          product_includes: productId
-        });
-        var productDetailLink = Object(_woocommerce_navigation__WEBPACK_IMPORTED_MODULE_12__["getNewPath"])(persistedQuery, '/analytics/products', {
-          filter: 'single_product',
-          products: productId
-        });
-        var categories = _this2.props.categories;
-        var productCategories = categoryIds && categoryIds.map(function (categoryId) {
-          return categories.get(categoryId);
-        }).filter(Boolean) || [];
-        var stockStatus = Object(_utils__WEBPACK_IMPORTED_MODULE_18__[/* isLowStock */ "a"])(extendedInfoStockStatus, stockQuantity, lowStockAmount) ? Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_woocommerce_components__WEBPACK_IMPORTED_MODULE_13__["Link"], {
-          href: Object(_woocommerce_wc_admin_settings__WEBPACK_IMPORTED_MODULE_15__[/* getAdminLink */ "f"])('post.php?action=edit&post=' + productId),
-          type: "wp-admin"
-        }, Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["_x"])('Low', 'Indication of a low quantity', 'woocommerce-admin')) : stockStatuses[extendedInfoStockStatus];
-        return [{
-          display: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_woocommerce_components__WEBPACK_IMPORTED_MODULE_13__["Link"], {
-            href: productDetailLink,
-            type: "wc-admin"
-          }, name),
-          value: name
-        }, {
-          display: sku,
-          value: sku
-        }, {
-          display: Object(_woocommerce_number__WEBPACK_IMPORTED_MODULE_14__["formatValue"])(currency, 'number', itemsSold),
-          value: itemsSold
-        }, {
-          display: renderCurrency(netRevenue),
-          value: getCurrencyFormatDecimal(netRevenue)
-        }, {
-          display: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_woocommerce_components__WEBPACK_IMPORTED_MODULE_13__["Link"], {
-            href: ordersLink,
-            type: "wc-admin"
-          }, ordersCount),
-          value: ordersCount
-        }, {
-          display: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])("div", {
-            className: "woocommerce-table__product-categories"
-          }, productCategories[0] && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_categories_breadcrumbs__WEBPACK_IMPORTED_MODULE_17__[/* default */ "a"], {
-            category: productCategories[0],
-            categories: categories
-          }), productCategories.length > 1 && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_woocommerce_components__WEBPACK_IMPORTED_MODULE_13__["Tag"], {
-            label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["sprintf"])(Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["_x"])('+%d more', 'categories', 'woocommerce-admin'), productCategories.length - 1),
-            popoverContents: productCategories.map(function (category) {
-              return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_categories_breadcrumbs__WEBPACK_IMPORTED_MODULE_17__[/* default */ "a"], {
-                category: category,
-                categories: categories,
-                key: category.id,
-                query: query
-              });
-            })
-          })),
-          value: productCategories.map(function (category) {
-            return category.name;
-          }).join(', ')
-        }, {
-          display: Object(_woocommerce_number__WEBPACK_IMPORTED_MODULE_14__["formatValue"])(currency, 'number', variations.length),
-          value: variations.length
-        }, manageStock === 'yes' ? {
-          display: extendedInfoManageStock ? stockStatus : Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('N/A', 'woocommerce-admin'),
-          value: extendedInfoManageStock ? stockStatuses[extendedInfoStockStatus] : null
-        } : null, manageStock === 'yes' ? {
-          display: extendedInfoManageStock ? Object(_woocommerce_number__WEBPACK_IMPORTED_MODULE_14__["formatValue"])(currency, 'number', stockQuantity) : Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('N/A', 'woocommerce-admin'),
-          value: stockQuantity
-        } : null].filter(Boolean);
-      });
-    }
-  }, {
-    key: "getSummary",
-    value: function getSummary(totals) {
-      var _totals$products_coun = totals.products_count,
-          productsCount = _totals$products_coun === void 0 ? 0 : _totals$products_coun,
-          _totals$items_sold = totals.items_sold,
-          itemsSold = _totals$items_sold === void 0 ? 0 : _totals$items_sold,
-          _totals$net_revenue = totals.net_revenue,
-          netRevenue = _totals$net_revenue === void 0 ? 0 : _totals$net_revenue,
-          _totals$orders_count = totals.orders_count,
-          ordersCount = _totals$orders_count === void 0 ? 0 : _totals$orders_count;
-      var _this$context2 = this.context,
-          formatAmount = _this$context2.formatAmount,
-          getCurrencyConfig = _this$context2.getCurrencyConfig;
-      var currency = getCurrencyConfig();
-      return [{
-        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["_n"])('product', 'products', productsCount, 'woocommerce-admin'),
-        value: Object(_woocommerce_number__WEBPACK_IMPORTED_MODULE_14__["formatValue"])(currency, 'number', productsCount)
-      }, {
-        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["_n"])('item sold', 'items sold', itemsSold, 'woocommerce-admin'),
-        value: Object(_woocommerce_number__WEBPACK_IMPORTED_MODULE_14__["formatValue"])(currency, 'number', itemsSold)
-      }, {
-        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('net sales', 'woocommerce-admin'),
-        value: formatAmount(netRevenue)
-      }, {
-        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["_n"])('orders', 'orders', ordersCount, 'woocommerce-admin'),
-        value: Object(_woocommerce_number__WEBPACK_IMPORTED_MODULE_14__["formatValue"])(currency, 'number', ordersCount)
-      }];
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this$props = this.props,
-          advancedFilters = _this$props.advancedFilters,
-          baseSearchQuery = _this$props.baseSearchQuery,
-          filters = _this$props.filters,
-          hideCompare = _this$props.hideCompare,
-          isRequesting = _this$props.isRequesting,
-          query = _this$props.query;
-      var labels = {
-        helpText: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('Check at least two products below to compare', 'woocommerce-admin'),
-        placeholder: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('Search by product name or SKU', 'woocommerce-admin')
+    if (nextIn && prevState.status === UNMOUNTED) {
+      return {
+        status: EXITED
       };
-      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_components_report_table__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"], {
-        compareBy: hideCompare ? undefined : 'products',
-        endpoint: "products",
-        getHeadersContent: this.getHeadersContent,
-        getRowsContent: this.getRowsContent,
-        getSummary: this.getSummary,
-        summaryFields: ['products_count', 'items_sold', 'net_revenue', 'orders_count'],
-        itemIdField: "product_id",
-        isRequesting: isRequesting,
-        labels: labels,
-        query: query,
-        searchBy: "products",
-        baseSearchQuery: baseSearchQuery,
-        tableQuery: {
-          orderby: query.orderby || 'items_sold',
-          order: query.order || 'desc',
-          extended_info: true,
-          segmentby: query.segmentby
-        },
-        title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('Products', 'woocommerce-admin'),
-        columnPrefsKey: "products_report_columns",
-        filters: filters,
-        advancedFilters: advancedFilters
+    }
+
+    return null;
+  } // getSnapshotBeforeUpdate(prevProps) {
+  //   let nextStatus = null
+  //   if (prevProps !== this.props) {
+  //     const { status } = this.state
+  //     if (this.props.in) {
+  //       if (status !== ENTERING && status !== ENTERED) {
+  //         nextStatus = ENTERING
+  //       }
+  //     } else {
+  //       if (status === ENTERING || status === ENTERED) {
+  //         nextStatus = EXITING
+  //       }
+  //     }
+  //   }
+  //   return { nextStatus }
+  // }
+  ;
+
+  var _proto = Transition.prototype;
+
+  _proto.componentDidMount = function componentDidMount() {
+    this.updateStatus(true, this.appearStatus);
+  };
+
+  _proto.componentDidUpdate = function componentDidUpdate(prevProps) {
+    var nextStatus = null;
+
+    if (prevProps !== this.props) {
+      var status = this.state.status;
+
+      if (this.props.in) {
+        if (status !== ENTERING && status !== ENTERED) {
+          nextStatus = ENTERING;
+        }
+      } else {
+        if (status === ENTERING || status === ENTERED) {
+          nextStatus = EXITING;
+        }
+      }
+    }
+
+    this.updateStatus(false, nextStatus);
+  };
+
+  _proto.componentWillUnmount = function componentWillUnmount() {
+    this.cancelNextCallback();
+  };
+
+  _proto.getTimeouts = function getTimeouts() {
+    var timeout = this.props.timeout;
+    var exit, enter, appear;
+    exit = enter = appear = timeout;
+
+    if (timeout != null && typeof timeout !== 'number') {
+      exit = timeout.exit;
+      enter = timeout.enter; // TODO: remove fallback for next major
+
+      appear = timeout.appear !== undefined ? timeout.appear : enter;
+    }
+
+    return {
+      exit: exit,
+      enter: enter,
+      appear: appear
+    };
+  };
+
+  _proto.updateStatus = function updateStatus(mounting, nextStatus) {
+    if (mounting === void 0) {
+      mounting = false;
+    }
+
+    if (nextStatus !== null) {
+      // nextStatus will always be ENTERING or EXITING.
+      this.cancelNextCallback();
+
+      if (nextStatus === ENTERING) {
+        this.performEnter(mounting);
+      } else {
+        this.performExit();
+      }
+    } else if (this.props.unmountOnExit && this.state.status === EXITED) {
+      this.setState({
+        status: UNMOUNTED
       });
     }
-  }]);
-
-  return ProductsReportTable;
-}(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["Component"]);
-
-ProductsReportTable.contextType = _lib_currency_context__WEBPACK_IMPORTED_MODULE_20__[/* CurrencyContext */ "a"];
-/* harmony default export */ __webpack_exports__["a"] = (Object(_wordpress_compose__WEBPACK_IMPORTED_MODULE_8__["compose"])(Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_10__["withSelect"])(function (select, props) {
-  var query = props.query,
-      isRequesting = props.isRequesting;
-
-  if (isRequesting || query.search && !(query.products && query.products.length)) {
-    return {};
-  }
-
-  var _select = select(_woocommerce_data__WEBPACK_IMPORTED_MODULE_16__["ITEMS_STORE_NAME"]),
-      getItems = _select.getItems,
-      getItemsError = _select.getItemsError,
-      isResolving = _select.isResolving;
-
-  var tableQuery = {
-    per_page: -1
   };
-  var categories = getItems('categories', tableQuery);
-  var isError = Boolean(getItemsError('categories', tableQuery));
-  var isLoading = isResolving('getItems', ['categories', tableQuery]);
-  return {
-    categories: categories,
-    isError: isError,
-    isRequesting: isLoading
+
+  _proto.performEnter = function performEnter(mounting) {
+    var _this2 = this;
+
+    var enter = this.props.enter;
+    var appearing = this.context ? this.context.isMounting : mounting;
+
+    var _ref2 = this.props.nodeRef ? [appearing] : [external_ReactDOM_default.a.findDOMNode(this), appearing],
+        maybeNode = _ref2[0],
+        maybeAppearing = _ref2[1];
+
+    var timeouts = this.getTimeouts();
+    var enterTimeout = appearing ? timeouts.appear : timeouts.enter; // no enter animation skip right to ENTERED
+    // if we are mounting and running this it means appear _must_ be set
+
+    if (!mounting && !enter || config.disabled) {
+      this.safeSetState({
+        status: ENTERED
+      }, function () {
+        _this2.props.onEntered(maybeNode);
+      });
+      return;
+    }
+
+    this.props.onEnter(maybeNode, maybeAppearing);
+    this.safeSetState({
+      status: ENTERING
+    }, function () {
+      _this2.props.onEntering(maybeNode, maybeAppearing);
+
+      _this2.onTransitionEnd(enterTimeout, function () {
+        _this2.safeSetState({
+          status: ENTERED
+        }, function () {
+          _this2.props.onEntered(maybeNode, maybeAppearing);
+        });
+      });
+    });
   };
-}))(ProductsReportTable));
 
-/***/ }),
+  _proto.performExit = function performExit() {
+    var _this3 = this;
 
-/***/ 531:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+    var exit = this.props.exit;
+    var timeouts = this.getTimeouts();
+    var maybeNode = this.props.nodeRef ? undefined : external_ReactDOM_default.a.findDOMNode(this); // no exit animation skip right to EXITED
 
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CategoryBreadcrumbs; });
-/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
-/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(13);
-/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(14);
-/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(15);
-/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(7);
-/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(0);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(3);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(4);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _woocommerce_components__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(47);
-/* harmony import */ var _woocommerce_components__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_components__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _woocommerce_navigation__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(21);
-/* harmony import */ var _woocommerce_navigation__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_navigation__WEBPACK_IMPORTED_MODULE_9__);
+    if (!exit || config.disabled) {
+      this.safeSetState({
+        status: EXITED
+      }, function () {
+        _this3.props.onExited(maybeNode);
+      });
+      return;
+    }
+
+    this.props.onExit(maybeNode);
+    this.safeSetState({
+      status: EXITING
+    }, function () {
+      _this3.props.onExiting(maybeNode);
+
+      _this3.onTransitionEnd(timeouts.exit, function () {
+        _this3.safeSetState({
+          status: EXITED
+        }, function () {
+          _this3.props.onExited(maybeNode);
+        });
+      });
+    });
+  };
+
+  _proto.cancelNextCallback = function cancelNextCallback() {
+    if (this.nextCallback !== null) {
+      this.nextCallback.cancel();
+      this.nextCallback = null;
+    }
+  };
+
+  _proto.safeSetState = function safeSetState(nextState, callback) {
+    // This shouldn't be necessary, but there are weird race conditions with
+    // setState callbacks and unmounting in testing, so always make sure that
+    // we can cancel any pending setState callbacks after we unmount.
+    callback = this.setNextCallback(callback);
+    this.setState(nextState, callback);
+  };
+
+  _proto.setNextCallback = function setNextCallback(callback) {
+    var _this4 = this;
+
+    var active = true;
+
+    this.nextCallback = function (event) {
+      if (active) {
+        active = false;
+        _this4.nextCallback = null;
+        callback(event);
+      }
+    };
+
+    this.nextCallback.cancel = function () {
+      active = false;
+    };
+
+    return this.nextCallback;
+  };
+
+  _proto.onTransitionEnd = function onTransitionEnd(timeout, handler) {
+    this.setNextCallback(handler);
+    var node = this.props.nodeRef ? this.props.nodeRef.current : external_ReactDOM_default.a.findDOMNode(this);
+    var doesNotHaveTimeoutOrListener = timeout == null && !this.props.addEndListener;
+
+    if (!node || doesNotHaveTimeoutOrListener) {
+      setTimeout(this.nextCallback, 0);
+      return;
+    }
+
+    if (this.props.addEndListener) {
+      var _ref3 = this.props.nodeRef ? [this.nextCallback] : [node, this.nextCallback],
+          maybeNode = _ref3[0],
+          maybeNextCallback = _ref3[1];
+
+      this.props.addEndListener(maybeNode, maybeNextCallback);
+    }
+
+    if (timeout != null) {
+      setTimeout(this.nextCallback, timeout);
+    }
+  };
+
+  _proto.render = function render() {
+    var status = this.state.status;
+
+    if (status === UNMOUNTED) {
+      return null;
+    }
+
+    var _this$props = this.props,
+        children = _this$props.children,
+        _in = _this$props.in,
+        _mountOnEnter = _this$props.mountOnEnter,
+        _unmountOnExit = _this$props.unmountOnExit,
+        _appear = _this$props.appear,
+        _enter = _this$props.enter,
+        _exit = _this$props.exit,
+        _timeout = _this$props.timeout,
+        _addEndListener = _this$props.addEndListener,
+        _onEnter = _this$props.onEnter,
+        _onEntering = _this$props.onEntering,
+        _onEntered = _this$props.onEntered,
+        _onExit = _this$props.onExit,
+        _onExiting = _this$props.onExiting,
+        _onExited = _this$props.onExited,
+        _nodeRef = _this$props.nodeRef,
+        childProps = Object(objectWithoutPropertiesLoose["a" /* default */])(_this$props, ["children", "in", "mountOnEnter", "unmountOnExit", "appear", "enter", "exit", "timeout", "addEndListener", "onEnter", "onEntering", "onEntered", "onExit", "onExiting", "onExited", "nodeRef"]);
+
+    return (
+      /*#__PURE__*/
+      // allows for nested Transitions
+      external_React_default.a.createElement(TransitionGroupContext["a" /* default */].Provider, {
+        value: null
+      }, typeof children === 'function' ? children(status, childProps) : external_React_default.a.cloneElement(external_React_default.a.Children.only(children), childProps))
+    );
+  };
+
+  return Transition;
+}(external_React_default.a.Component);
+
+Transition_Transition.contextType = TransitionGroupContext["a" /* default */];
+Transition_Transition.propTypes =  false ? undefined : {}; // Name the function so it is clearer in the documentation
+
+function noop() {}
+
+Transition_Transition.defaultProps = {
+  in: false,
+  mountOnEnter: false,
+  unmountOnExit: false,
+  appear: false,
+  enter: true,
+  exit: true,
+  onEnter: noop,
+  onEntering: noop,
+  onEntered: noop,
+  onExit: noop,
+  onExiting: noop,
+  onExited: noop
+};
+Transition_Transition.UNMOUNTED = UNMOUNTED;
+Transition_Transition.EXITED = EXITED;
+Transition_Transition.ENTERING = ENTERING;
+Transition_Transition.ENTERED = ENTERED;
+Transition_Transition.EXITING = EXITING;
+/* harmony default export */ var esm_Transition = (Transition_Transition);
+// CONCATENATED MODULE: ./node_modules/react-transition-group/esm/CSSTransition.js
 
 
 
@@ -1432,93 +507,591 @@ ProductsReportTable.contextType = _lib_currency_context__WEBPACK_IMPORTED_MODULE
 
 
 
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4___default()(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4___default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3___default()(this, result); }; }
 
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
+
+var _addClass = function addClass(node, classes) {
+  return node && classes && classes.split(' ').forEach(function (c) {
+    return addClass_addClass(node, c);
+  });
+};
+
+var CSSTransition_removeClass = function removeClass(node, classes) {
+  return node && classes && classes.split(' ').forEach(function (c) {
+    return removeClass_removeClass(node, c);
+  });
+};
 /**
- * External dependencies
+ * A transition component inspired by the excellent
+ * [ng-animate](https://docs.angularjs.org/api/ngAnimate) library, you should
+ * use it if you're using CSS transitions or animations. It's built upon the
+ * [`Transition`](https://reactcommunity.org/react-transition-group/transition)
+ * component, so it inherits all of its props.
+ *
+ * `CSSTransition` applies a pair of class names during the `appear`, `enter`,
+ * and `exit` states of the transition. The first class is applied and then a
+ * second `*-active` class in order to activate the CSS transition. After the
+ * transition, matching `*-done` class names are applied to persist the
+ * transition state.
+ *
+ * ```jsx
+ * function App() {
+ *   const [inProp, setInProp] = useState(false);
+ *   return (
+ *     <div>
+ *       <CSSTransition in={inProp} timeout={200} classNames="my-node">
+ *         <div>
+ *           {"I'll receive my-node-* classes"}
+ *         </div>
+ *       </CSSTransition>
+ *       <button type="button" onClick={() => setInProp(true)}>
+ *         Click to Enter
+ *       </button>
+ *     </div>
+ *   );
+ * }
+ * ```
+ *
+ * When the `in` prop is set to `true`, the child component will first receive
+ * the class `example-enter`, then the `example-enter-active` will be added in
+ * the next tick. `CSSTransition` [forces a
+ * reflow](https://github.com/reactjs/react-transition-group/blob/5007303e729a74be66a21c3e2205e4916821524b/src/CSSTransition.js#L208-L215)
+ * between before adding the `example-enter-active`. This is an important trick
+ * because it allows us to transition between `example-enter` and
+ * `example-enter-active` even though they were added immediately one after
+ * another. Most notably, this is what makes it possible for us to animate
+ * _appearance_.
+ *
+ * ```css
+ * .my-node-enter {
+ *   opacity: 0;
+ * }
+ * .my-node-enter-active {
+ *   opacity: 1;
+ *   transition: opacity 200ms;
+ * }
+ * .my-node-exit {
+ *   opacity: 1;
+ * }
+ * .my-node-exit-active {
+ *   opacity: 0;
+ *   transition: opacity 200ms;
+ * }
+ * ```
+ *
+ * `*-active` classes represent which styles you want to animate **to**, so it's
+ * important to add `transition` declaration only to them, otherwise transitions
+ * might not behave as intended! This might not be obvious when the transitions
+ * are symmetrical, i.e. when `*-enter-active` is the same as `*-exit`, like in
+ * the example above (minus `transition`), but it becomes apparent in more
+ * complex transitions.
+ *
+ * **Note**: If you're using the
+ * [`appear`](http://reactcommunity.org/react-transition-group/transition#Transition-prop-appear)
+ * prop, make sure to define styles for `.appear-*` classes as well.
  */
 
 
+var CSSTransition_CSSTransition = /*#__PURE__*/function (_React$Component) {
+  Object(inheritsLoose["a" /* default */])(CSSTransition, _React$Component);
 
+  function CSSTransition() {
+    var _this;
 
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
 
+    _this = _React$Component.call.apply(_React$Component, [this].concat(args)) || this;
+    _this.appliedClasses = {
+      appear: {},
+      enter: {},
+      exit: {}
+    };
 
-var CategoryBreadcrumbs = /*#__PURE__*/function (_Component) {
-  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_2___default()(CategoryBreadcrumbs, _Component);
+    _this.onEnter = function (maybeNode, maybeAppearing) {
+      var _this$resolveArgument = _this.resolveArguments(maybeNode, maybeAppearing),
+          node = _this$resolveArgument[0],
+          appearing = _this$resolveArgument[1];
 
-  var _super = _createSuper(CategoryBreadcrumbs);
+      _this.removeClasses(node, 'exit');
 
-  function CategoryBreadcrumbs() {
-    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, CategoryBreadcrumbs);
+      _this.addClass(node, appearing ? 'appear' : 'enter', 'base');
 
-    return _super.apply(this, arguments);
+      if (_this.props.onEnter) {
+        _this.props.onEnter(maybeNode, maybeAppearing);
+      }
+    };
+
+    _this.onEntering = function (maybeNode, maybeAppearing) {
+      var _this$resolveArgument2 = _this.resolveArguments(maybeNode, maybeAppearing),
+          node = _this$resolveArgument2[0],
+          appearing = _this$resolveArgument2[1];
+
+      var type = appearing ? 'appear' : 'enter';
+
+      _this.addClass(node, type, 'active');
+
+      if (_this.props.onEntering) {
+        _this.props.onEntering(maybeNode, maybeAppearing);
+      }
+    };
+
+    _this.onEntered = function (maybeNode, maybeAppearing) {
+      var _this$resolveArgument3 = _this.resolveArguments(maybeNode, maybeAppearing),
+          node = _this$resolveArgument3[0],
+          appearing = _this$resolveArgument3[1];
+
+      var type = appearing ? 'appear' : 'enter';
+
+      _this.removeClasses(node, type);
+
+      _this.addClass(node, type, 'done');
+
+      if (_this.props.onEntered) {
+        _this.props.onEntered(maybeNode, maybeAppearing);
+      }
+    };
+
+    _this.onExit = function (maybeNode) {
+      var _this$resolveArgument4 = _this.resolveArguments(maybeNode),
+          node = _this$resolveArgument4[0];
+
+      _this.removeClasses(node, 'appear');
+
+      _this.removeClasses(node, 'enter');
+
+      _this.addClass(node, 'exit', 'base');
+
+      if (_this.props.onExit) {
+        _this.props.onExit(maybeNode);
+      }
+    };
+
+    _this.onExiting = function (maybeNode) {
+      var _this$resolveArgument5 = _this.resolveArguments(maybeNode),
+          node = _this$resolveArgument5[0];
+
+      _this.addClass(node, 'exit', 'active');
+
+      if (_this.props.onExiting) {
+        _this.props.onExiting(maybeNode);
+      }
+    };
+
+    _this.onExited = function (maybeNode) {
+      var _this$resolveArgument6 = _this.resolveArguments(maybeNode),
+          node = _this$resolveArgument6[0];
+
+      _this.removeClasses(node, 'exit');
+
+      _this.addClass(node, 'exit', 'done');
+
+      if (_this.props.onExited) {
+        _this.props.onExited(maybeNode);
+      }
+    };
+
+    _this.resolveArguments = function (maybeNode, maybeAppearing) {
+      return _this.props.nodeRef ? [_this.props.nodeRef.current, maybeNode] // here `maybeNode` is actually `appearing`
+      : [maybeNode, maybeAppearing];
+    };
+
+    _this.getClassNames = function (type) {
+      var classNames = _this.props.classNames;
+      var isStringClassNames = typeof classNames === 'string';
+      var prefix = isStringClassNames && classNames ? classNames + "-" : '';
+      var baseClassName = isStringClassNames ? "" + prefix + type : classNames[type];
+      var activeClassName = isStringClassNames ? baseClassName + "-active" : classNames[type + "Active"];
+      var doneClassName = isStringClassNames ? baseClassName + "-done" : classNames[type + "Done"];
+      return {
+        baseClassName: baseClassName,
+        activeClassName: activeClassName,
+        doneClassName: doneClassName
+      };
+    };
+
+    return _this;
   }
 
-  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(CategoryBreadcrumbs, [{
-    key: "getCategoryAncestorIds",
-    value: function getCategoryAncestorIds(category, categories) {
-      var ancestors = [];
-      var parent = category.parent;
+  var _proto = CSSTransition.prototype;
 
-      while (parent) {
-        ancestors.unshift(parent);
-        parent = categories.get(parent).parent;
-      }
+  _proto.addClass = function addClass(node, type, phase) {
+    var className = this.getClassNames(type)[phase + "ClassName"];
 
-      return ancestors;
+    var _this$getClassNames = this.getClassNames('enter'),
+        doneClassName = _this$getClassNames.doneClassName;
+
+    if (type === 'appear' && phase === 'done' && doneClassName) {
+      className += " " + doneClassName;
+    } // This is for to force a repaint,
+    // which is necessary in order to transition styles when adding a class name.
+
+
+    if (phase === 'active') {
+      /* eslint-disable no-unused-expressions */
+      node && node.scrollTop;
     }
-  }, {
-    key: "getCategoryAncestors",
-    value: function getCategoryAncestors(category, categories) {
-      var ancestorIds = this.getCategoryAncestorIds(category, categories);
 
-      if (!ancestorIds.length) {
-        return;
-      }
+    if (className) {
+      this.appliedClasses[type][phase] = className;
 
-      if (ancestorIds.length === 1) {
-        return categories.get(Object(lodash__WEBPACK_IMPORTED_MODULE_6__["first"])(ancestorIds)).name + ' › ';
-      }
-
-      if (ancestorIds.length === 2) {
-        return categories.get(Object(lodash__WEBPACK_IMPORTED_MODULE_6__["first"])(ancestorIds)).name + ' › ' + categories.get(Object(lodash__WEBPACK_IMPORTED_MODULE_6__["last"])(ancestorIds)).name + ' › ';
-      }
-
-      return categories.get(Object(lodash__WEBPACK_IMPORTED_MODULE_6__["first"])(ancestorIds)).name + ' … ' + categories.get(Object(lodash__WEBPACK_IMPORTED_MODULE_6__["last"])(ancestorIds)).name + ' › ';
+      _addClass(node, className);
     }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this$props = this.props,
-          categories = _this$props.categories,
-          category = _this$props.category,
-          query = _this$props.query;
-      var persistedQuery = Object(_woocommerce_navigation__WEBPACK_IMPORTED_MODULE_9__["getPersistedQuery"])(query);
-      return category ? Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])("div", {
-        className: "woocommerce-table__breadcrumbs"
-      }, this.getCategoryAncestors(category, categories), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])(_woocommerce_components__WEBPACK_IMPORTED_MODULE_8__["Link"], {
-        href: Object(_woocommerce_navigation__WEBPACK_IMPORTED_MODULE_9__["getNewPath"])(persistedQuery, '/analytics/categories', {
-          filter: 'single_category',
-          categories: category.id
-        }),
-        type: "wc-admin"
-      }, category.name)) : Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["Spinner"], null);
+  };
+
+  _proto.removeClasses = function removeClasses(node, type) {
+    var _this$appliedClasses$ = this.appliedClasses[type],
+        baseClassName = _this$appliedClasses$.base,
+        activeClassName = _this$appliedClasses$.active,
+        doneClassName = _this$appliedClasses$.done;
+    this.appliedClasses[type] = {};
+
+    if (baseClassName) {
+      CSSTransition_removeClass(node, baseClassName);
     }
-  }]);
 
-  return CategoryBreadcrumbs;
-}(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["Component"]);
+    if (activeClassName) {
+      CSSTransition_removeClass(node, activeClassName);
+    }
 
+    if (doneClassName) {
+      CSSTransition_removeClass(node, doneClassName);
+    }
+  };
 
+  _proto.render = function render() {
+    var _this$props = this.props,
+        _ = _this$props.classNames,
+        props = Object(objectWithoutPropertiesLoose["a" /* default */])(_this$props, ["classNames"]);
+
+    return /*#__PURE__*/external_React_default.a.createElement(esm_Transition, Object(esm_extends["a" /* default */])({}, props, {
+      onEnter: this.onEnter,
+      onEntered: this.onEntered,
+      onEntering: this.onEntering,
+      onExit: this.onExit,
+      onExiting: this.onExiting,
+      onExited: this.onExited
+    }));
+  };
+
+  return CSSTransition;
+}(external_React_default.a.Component);
+
+CSSTransition_CSSTransition.defaultProps = {
+  classNames: ''
+};
+CSSTransition_CSSTransition.propTypes =  false ? undefined : {};
+/* harmony default export */ var esm_CSSTransition = __webpack_exports__["a"] = (CSSTransition_CSSTransition);
 
 /***/ }),
 
-/***/ 575:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ 417:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-// extracted by mini-css-extract-plugin
+"use strict";
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js
+var objectWithoutPropertiesLoose = __webpack_require__(133);
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/extends.js
+var esm_extends = __webpack_require__(117);
+
+// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/assertThisInitialized.js
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js + 1 modules
+var inheritsLoose = __webpack_require__(128);
+
+// EXTERNAL MODULE: ./node_modules/prop-types/index.js
+var prop_types = __webpack_require__(1);
+
+// EXTERNAL MODULE: external "React"
+var external_React_ = __webpack_require__(20);
+var external_React_default = /*#__PURE__*/__webpack_require__.n(external_React_);
+
+// EXTERNAL MODULE: ./node_modules/react-transition-group/esm/TransitionGroupContext.js
+var TransitionGroupContext = __webpack_require__(186);
+
+// CONCATENATED MODULE: ./node_modules/react-transition-group/esm/utils/ChildMapping.js
+
+/**
+ * Given `this.props.children`, return an object mapping key to child.
+ *
+ * @param {*} children `this.props.children`
+ * @return {object} Mapping of key to child
+ */
+
+function getChildMapping(children, mapFn) {
+  var mapper = function mapper(child) {
+    return mapFn && Object(external_React_["isValidElement"])(child) ? mapFn(child) : child;
+  };
+
+  var result = Object.create(null);
+  if (children) external_React_["Children"].map(children, function (c) {
+    return c;
+  }).forEach(function (child) {
+    // run the map function here instead so that the key is the computed one
+    result[child.key] = mapper(child);
+  });
+  return result;
+}
+/**
+ * When you're adding or removing children some may be added or removed in the
+ * same render pass. We want to show *both* since we want to simultaneously
+ * animate elements in and out. This function takes a previous set of keys
+ * and a new set of keys and merges them with its best guess of the correct
+ * ordering. In the future we may expose some of the utilities in
+ * ReactMultiChild to make this easy, but for now React itself does not
+ * directly have this concept of the union of prevChildren and nextChildren
+ * so we implement it here.
+ *
+ * @param {object} prev prev children as returned from
+ * `ReactTransitionChildMapping.getChildMapping()`.
+ * @param {object} next next children as returned from
+ * `ReactTransitionChildMapping.getChildMapping()`.
+ * @return {object} a key set that contains all keys in `prev` and all keys
+ * in `next` in a reasonable order.
+ */
+
+function mergeChildMappings(prev, next) {
+  prev = prev || {};
+  next = next || {};
+
+  function getValueForKey(key) {
+    return key in next ? next[key] : prev[key];
+  } // For each key of `next`, the list of keys to insert before that key in
+  // the combined list
+
+
+  var nextKeysPending = Object.create(null);
+  var pendingKeys = [];
+
+  for (var prevKey in prev) {
+    if (prevKey in next) {
+      if (pendingKeys.length) {
+        nextKeysPending[prevKey] = pendingKeys;
+        pendingKeys = [];
+      }
+    } else {
+      pendingKeys.push(prevKey);
+    }
+  }
+
+  var i;
+  var childMapping = {};
+
+  for (var nextKey in next) {
+    if (nextKeysPending[nextKey]) {
+      for (i = 0; i < nextKeysPending[nextKey].length; i++) {
+        var pendingNextKey = nextKeysPending[nextKey][i];
+        childMapping[nextKeysPending[nextKey][i]] = getValueForKey(pendingNextKey);
+      }
+    }
+
+    childMapping[nextKey] = getValueForKey(nextKey);
+  } // Finally, add the keys which didn't appear before any key in `next`
+
+
+  for (i = 0; i < pendingKeys.length; i++) {
+    childMapping[pendingKeys[i]] = getValueForKey(pendingKeys[i]);
+  }
+
+  return childMapping;
+}
+
+function getProp(child, prop, props) {
+  return props[prop] != null ? props[prop] : child.props[prop];
+}
+
+function getInitialChildMapping(props, onExited) {
+  return getChildMapping(props.children, function (child) {
+    return Object(external_React_["cloneElement"])(child, {
+      onExited: onExited.bind(null, child),
+      in: true,
+      appear: getProp(child, 'appear', props),
+      enter: getProp(child, 'enter', props),
+      exit: getProp(child, 'exit', props)
+    });
+  });
+}
+function getNextChildMapping(nextProps, prevChildMapping, onExited) {
+  var nextChildMapping = getChildMapping(nextProps.children);
+  var children = mergeChildMappings(prevChildMapping, nextChildMapping);
+  Object.keys(children).forEach(function (key) {
+    var child = children[key];
+    if (!Object(external_React_["isValidElement"])(child)) return;
+    var hasPrev = (key in prevChildMapping);
+    var hasNext = (key in nextChildMapping);
+    var prevChild = prevChildMapping[key];
+    var isLeaving = Object(external_React_["isValidElement"])(prevChild) && !prevChild.props.in; // item is new (entering)
+
+    if (hasNext && (!hasPrev || isLeaving)) {
+      // console.log('entering', key)
+      children[key] = Object(external_React_["cloneElement"])(child, {
+        onExited: onExited.bind(null, child),
+        in: true,
+        exit: getProp(child, 'exit', nextProps),
+        enter: getProp(child, 'enter', nextProps)
+      });
+    } else if (!hasNext && hasPrev && !isLeaving) {
+      // item is old (exiting)
+      // console.log('leaving', key)
+      children[key] = Object(external_React_["cloneElement"])(child, {
+        in: false
+      });
+    } else if (hasNext && hasPrev && Object(external_React_["isValidElement"])(prevChild)) {
+      // item hasn't changed transition states
+      // copy over the last transition props;
+      // console.log('unchanged', key)
+      children[key] = Object(external_React_["cloneElement"])(child, {
+        onExited: onExited.bind(null, child),
+        in: prevChild.props.in,
+        exit: getProp(child, 'exit', nextProps),
+        enter: getProp(child, 'enter', nextProps)
+      });
+    }
+  });
+  return children;
+}
+// CONCATENATED MODULE: ./node_modules/react-transition-group/esm/TransitionGroup.js
+
+
+
+
+
+
+
+
+
+var values = Object.values || function (obj) {
+  return Object.keys(obj).map(function (k) {
+    return obj[k];
+  });
+};
+
+var defaultProps = {
+  component: 'div',
+  childFactory: function childFactory(child) {
+    return child;
+  }
+};
+/**
+ * The `<TransitionGroup>` component manages a set of transition components
+ * (`<Transition>` and `<CSSTransition>`) in a list. Like with the transition
+ * components, `<TransitionGroup>` is a state machine for managing the mounting
+ * and unmounting of components over time.
+ *
+ * Consider the example below. As items are removed or added to the TodoList the
+ * `in` prop is toggled automatically by the `<TransitionGroup>`.
+ *
+ * Note that `<TransitionGroup>`  does not define any animation behavior!
+ * Exactly _how_ a list item animates is up to the individual transition
+ * component. This means you can mix and match animations across different list
+ * items.
+ */
+
+var TransitionGroup_TransitionGroup = /*#__PURE__*/function (_React$Component) {
+  Object(inheritsLoose["a" /* default */])(TransitionGroup, _React$Component);
+
+  function TransitionGroup(props, context) {
+    var _this;
+
+    _this = _React$Component.call(this, props, context) || this;
+
+    var handleExited = _this.handleExited.bind(_assertThisInitialized(_this)); // Initial children should all be entering, dependent on appear
+
+
+    _this.state = {
+      contextValue: {
+        isMounting: true
+      },
+      handleExited: handleExited,
+      firstRender: true
+    };
+    return _this;
+  }
+
+  var _proto = TransitionGroup.prototype;
+
+  _proto.componentDidMount = function componentDidMount() {
+    this.mounted = true;
+    this.setState({
+      contextValue: {
+        isMounting: false
+      }
+    });
+  };
+
+  _proto.componentWillUnmount = function componentWillUnmount() {
+    this.mounted = false;
+  };
+
+  TransitionGroup.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, _ref) {
+    var prevChildMapping = _ref.children,
+        handleExited = _ref.handleExited,
+        firstRender = _ref.firstRender;
+    return {
+      children: firstRender ? getInitialChildMapping(nextProps, handleExited) : getNextChildMapping(nextProps, prevChildMapping, handleExited),
+      firstRender: false
+    };
+  } // node is `undefined` when user provided `nodeRef` prop
+  ;
+
+  _proto.handleExited = function handleExited(child, node) {
+    var currentChildMapping = getChildMapping(this.props.children);
+    if (child.key in currentChildMapping) return;
+
+    if (child.props.onExited) {
+      child.props.onExited(node);
+    }
+
+    if (this.mounted) {
+      this.setState(function (state) {
+        var children = Object(esm_extends["a" /* default */])({}, state.children);
+
+        delete children[child.key];
+        return {
+          children: children
+        };
+      });
+    }
+  };
+
+  _proto.render = function render() {
+    var _this$props = this.props,
+        Component = _this$props.component,
+        childFactory = _this$props.childFactory,
+        props = Object(objectWithoutPropertiesLoose["a" /* default */])(_this$props, ["component", "childFactory"]);
+
+    var contextValue = this.state.contextValue;
+    var children = values(this.state.children).map(childFactory);
+    delete props.appear;
+    delete props.enter;
+    delete props.exit;
+
+    if (Component === null) {
+      return /*#__PURE__*/external_React_default.a.createElement(TransitionGroupContext["a" /* default */].Provider, {
+        value: contextValue
+      }, children);
+    }
+
+    return /*#__PURE__*/external_React_default.a.createElement(TransitionGroupContext["a" /* default */].Provider, {
+      value: contextValue
+    }, /*#__PURE__*/external_React_default.a.createElement(Component, props, children));
+  };
+
+  return TransitionGroup;
+}(external_React_default.a.Component);
+
+TransitionGroup_TransitionGroup.propTypes =  false ? undefined : {};
+TransitionGroup_TransitionGroup.defaultProps = defaultProps;
+/* harmony default export */ var esm_TransitionGroup = __webpack_exports__["a"] = (TransitionGroup_TransitionGroup);
 
 /***/ })
 

@@ -1,6 +1,45 @@
 (window["__wcAdmin_webpackJsonp"] = window["__wcAdmin_webpackJsonp"] || []).push([[5],{
 
-/***/ 500:
+/***/ 319:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var $ = __webpack_require__(12);
+var $trim = __webpack_require__(188).trim;
+var forcedStringTrimMethod = __webpack_require__(404);
+
+// `String.prototype.trim` method
+// https://tc39.es/ecma262/#sec-string.prototype.trim
+$({ target: 'String', proto: true, forced: forcedStringTrimMethod('trim') }, {
+  trim: function trim() {
+    return $trim(this);
+  }
+});
+
+
+/***/ }),
+
+/***/ 404:
+/***/ (function(module, exports, __webpack_require__) {
+
+var fails = __webpack_require__(6);
+var whitespaces = __webpack_require__(189);
+
+var non = '\u200B\u0085\u180E';
+
+// check that a method works with the correct list
+// of whitespaces and has a correct name
+module.exports = function (METHOD_NAME) {
+  return fails(function () {
+    return !!whitespaces[METHOD_NAME]() || non[METHOD_NAME]() != non || whitespaces[METHOD_NAME].name !== METHOD_NAME;
+  });
+};
+
+
+/***/ }),
+
+/***/ 600:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -13,18 +52,34 @@
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return getTaxRateLabels; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return getVariationName; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return getVariationLabels; });
-/* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(23);
-/* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_url__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(26);
-/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _woocommerce_navigation__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(21);
-/* harmony import */ var _woocommerce_navigation__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_navigation__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _woocommerce_data__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(22);
-/* harmony import */ var _woocommerce_data__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_data__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _woocommerce_wc_admin_settings__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(25);
-/* harmony import */ var _analytics_report_taxes_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(501);
+/* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(164);
+/* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(100);
+/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(139);
+/* harmony import */ var core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(51);
+/* harmony import */ var core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(129);
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(78);
+/* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_url__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(95);
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(5);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _woocommerce_navigation__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(50);
+/* harmony import */ var _woocommerce_navigation__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_navigation__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _woocommerce_data__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(59);
+/* harmony import */ var _woocommerce_data__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_data__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _woocommerce_wc_admin_settings__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(85);
+/* harmony import */ var _analytics_report_taxes_utils__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(601);
+
+
+
+
+
+
 /**
  * External dependencies
  */
@@ -49,12 +104,12 @@
  */
 
 function getRequestByIdString(path) {
-  var handleData = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : lodash__WEBPACK_IMPORTED_MODULE_2__["identity"];
+  var handleData = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : lodash__WEBPACK_IMPORTED_MODULE_7__["identity"];
   return function () {
     var queryString = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
     var query = arguments.length > 1 ? arguments[1] : undefined;
     var pathString = typeof path === 'function' ? path(query) : path;
-    var idList = Object(_woocommerce_navigation__WEBPACK_IMPORTED_MODULE_3__["getIdsFromQuery"])(queryString);
+    var idList = Object(_woocommerce_navigation__WEBPACK_IMPORTED_MODULE_8__["getIdsFromQuery"])(queryString);
 
     if (idList.length < 1) {
       return Promise.resolve([]);
@@ -64,47 +119,47 @@ function getRequestByIdString(path) {
       include: idList.join(','),
       per_page: idList.length
     };
-    return _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default()({
-      path: Object(_wordpress_url__WEBPACK_IMPORTED_MODULE_0__["addQueryArgs"])(pathString, payload)
+    return _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_6___default()({
+      path: Object(_wordpress_url__WEBPACK_IMPORTED_MODULE_5__["addQueryArgs"])(pathString, payload)
     }).then(function (data) {
       return data.map(handleData);
     });
   };
 }
-var getAttributeLabels = getRequestByIdString(_woocommerce_data__WEBPACK_IMPORTED_MODULE_4__["NAMESPACE"] + '/products/attributes', function (attribute) {
+var getAttributeLabels = getRequestByIdString(_woocommerce_data__WEBPACK_IMPORTED_MODULE_9__["NAMESPACE"] + '/products/attributes', function (attribute) {
   return {
     key: attribute.id,
     label: attribute.name
   };
 });
-var getCategoryLabels = getRequestByIdString(_woocommerce_data__WEBPACK_IMPORTED_MODULE_4__["NAMESPACE"] + '/products/categories', function (category) {
+var getCategoryLabels = getRequestByIdString(_woocommerce_data__WEBPACK_IMPORTED_MODULE_9__["NAMESPACE"] + '/products/categories', function (category) {
   return {
     key: category.id,
     label: category.name
   };
 });
-var getCouponLabels = getRequestByIdString(_woocommerce_data__WEBPACK_IMPORTED_MODULE_4__["NAMESPACE"] + '/coupons', function (coupon) {
+var getCouponLabels = getRequestByIdString(_woocommerce_data__WEBPACK_IMPORTED_MODULE_9__["NAMESPACE"] + '/coupons', function (coupon) {
   return {
     key: coupon.id,
     label: coupon.code
   };
 });
-var getCustomerLabels = getRequestByIdString(_woocommerce_data__WEBPACK_IMPORTED_MODULE_4__["NAMESPACE"] + '/customers', function (customer) {
+var getCustomerLabels = getRequestByIdString(_woocommerce_data__WEBPACK_IMPORTED_MODULE_9__["NAMESPACE"] + '/customers', function (customer) {
   return {
     key: customer.id,
     label: customer.name
   };
 });
-var getProductLabels = getRequestByIdString(_woocommerce_data__WEBPACK_IMPORTED_MODULE_4__["NAMESPACE"] + '/products', function (product) {
+var getProductLabels = getRequestByIdString(_woocommerce_data__WEBPACK_IMPORTED_MODULE_9__["NAMESPACE"] + '/products', function (product) {
   return {
     key: product.id,
     label: product.name
   };
 });
-var getTaxRateLabels = getRequestByIdString(_woocommerce_data__WEBPACK_IMPORTED_MODULE_4__["NAMESPACE"] + '/taxes', function (taxRate) {
+var getTaxRateLabels = getRequestByIdString(_woocommerce_data__WEBPACK_IMPORTED_MODULE_9__["NAMESPACE"] + '/taxes', function (taxRate) {
   return {
     key: taxRate.id,
-    label: Object(_analytics_report_taxes_utils__WEBPACK_IMPORTED_MODULE_6__[/* getTaxCode */ "a"])(taxRate)
+    label: Object(_analytics_report_taxes_utils__WEBPACK_IMPORTED_MODULE_11__[/* getTaxCode */ "a"])(taxRate)
   };
 });
 /**
@@ -120,7 +175,7 @@ var getTaxRateLabels = getRequestByIdString(_woocommerce_data__WEBPACK_IMPORTED_
 function getVariationName(_ref) {
   var attributes = _ref.attributes,
       name = _ref.name;
-  var separator = Object(_woocommerce_wc_admin_settings__WEBPACK_IMPORTED_MODULE_5__[/* getSetting */ "g"])('variationTitleAttributesSeparator', ' - ');
+  var separator = Object(_woocommerce_wc_admin_settings__WEBPACK_IMPORTED_MODULE_10__[/* getSetting */ "g"])('variationTitleAttributesSeparator', ' - ');
 
   if (name.indexOf(separator) > -1) {
     return name;
@@ -137,10 +192,10 @@ var getVariationLabels = getRequestByIdString(function (_ref3) {
 
   // If a product was specified, get just its variations.
   if (products) {
-    return _woocommerce_data__WEBPACK_IMPORTED_MODULE_4__["NAMESPACE"] + "/products/".concat(products, "/variations");
+    return _woocommerce_data__WEBPACK_IMPORTED_MODULE_9__["NAMESPACE"] + "/products/".concat(products, "/variations");
   }
 
-  return _woocommerce_data__WEBPACK_IMPORTED_MODULE_4__["NAMESPACE"] + '/variations';
+  return _woocommerce_data__WEBPACK_IMPORTED_MODULE_9__["NAMESPACE"] + '/variations';
 }, function (variation) {
   return {
     key: variation.id,
@@ -150,97 +205,166 @@ var getVariationLabels = getRequestByIdString(function (_ref3) {
 
 /***/ }),
 
-/***/ 501:
+/***/ 601:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return getTaxCode; });
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(139);
+/* harmony import */ var core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(41);
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(51);
+/* harmony import */ var core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(129);
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_string_trim_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(319);
+/* harmony import */ var core_js_modules_es_string_trim_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_trim_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(100);
+/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_es_regexp_to_string_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(142);
+/* harmony import */ var core_js_modules_es_regexp_to_string_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_to_string_js__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(2);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__);
+
+
+
+
+
+
+
+
 /**
  * External dependencies
  */
 
 function getTaxCode(tax) {
-  return [tax.country, tax.state, tax.name || Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('TAX', 'woocommerce-admin'), tax.priority].map(function (item) {
+  return [tax.country, tax.state, tax.name || Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('TAX', 'woocommerce-admin'), tax.priority].map(function (item) {
     return item.toString().toUpperCase().trim();
   }).filter(Boolean).join('-');
 }
 
 /***/ }),
 
-/***/ 502:
+/***/ 602:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 
 // UNUSED EXPORTS: ReportChart
 
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.reflect.construct.js
+var es_reflect_construct = __webpack_require__(64);
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.keys.js
+var es_object_keys = __webpack_require__(37);
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.symbol.js
+var es_symbol = __webpack_require__(53);
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.filter.js
+var es_array_filter = __webpack_require__(41);
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.get-own-property-descriptor.js
+var es_object_get_own_property_descriptor = __webpack_require__(60);
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.get-own-property-descriptors.js
+var es_object_get_own_property_descriptors = __webpack_require__(61);
+
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/defineProperty.js
-var defineProperty = __webpack_require__(5);
+var defineProperty = __webpack_require__(7);
 var defineProperty_default = /*#__PURE__*/__webpack_require__.n(defineProperty);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/classCallCheck.js
-var classCallCheck = __webpack_require__(12);
+var classCallCheck = __webpack_require__(22);
 var classCallCheck_default = /*#__PURE__*/__webpack_require__.n(classCallCheck);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/createClass.js
-var createClass = __webpack_require__(13);
+var createClass = __webpack_require__(23);
 var createClass_default = /*#__PURE__*/__webpack_require__.n(createClass);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/inherits.js
-var inherits = __webpack_require__(14);
+var inherits = __webpack_require__(24);
 var inherits_default = /*#__PURE__*/__webpack_require__.n(inherits);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js
-var possibleConstructorReturn = __webpack_require__(15);
+var possibleConstructorReturn = __webpack_require__(25);
 var possibleConstructorReturn_default = /*#__PURE__*/__webpack_require__.n(possibleConstructorReturn);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/getPrototypeOf.js
-var getPrototypeOf = __webpack_require__(7);
+var getPrototypeOf = __webpack_require__(14);
 var getPrototypeOf_default = /*#__PURE__*/__webpack_require__.n(getPrototypeOf);
 
-// EXTERNAL MODULE: external {"this":["wp","element"]}
-var external_this_wp_element_ = __webpack_require__(0);
+// EXTERNAL MODULE: external ["wp","element"]
+var external_wp_element_ = __webpack_require__(0);
 
-// EXTERNAL MODULE: external {"this":["wp","i18n"]}
-var external_this_wp_i18n_ = __webpack_require__(2);
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.map.js
+var es_array_map = __webpack_require__(51);
 
-// EXTERNAL MODULE: external {"this":["wp","compose"]}
-var external_this_wp_compose_ = __webpack_require__(20);
+// EXTERNAL MODULE: ./node_modules/core-js/modules/web.dom-collections.for-each.js
+var web_dom_collections_for_each = __webpack_require__(49);
 
-// EXTERNAL MODULE: external {"this":["wp","date"]}
-var external_this_wp_date_ = __webpack_require__(75);
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
+var es_array_concat = __webpack_require__(66);
 
-// EXTERNAL MODULE: external {"this":["wp","data"]}
-var external_this_wp_data_ = __webpack_require__(11);
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.search.js
+var es_string_search = __webpack_require__(170);
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.regexp.exec.js
+var es_regexp_exec = __webpack_require__(88);
+
+// EXTERNAL MODULE: external ["wp","i18n"]
+var external_wp_i18n_ = __webpack_require__(2);
+
+// EXTERNAL MODULE: external ["wp","compose"]
+var external_wp_compose_ = __webpack_require__(65);
+
+// EXTERNAL MODULE: external ["wp","date"]
+var external_wp_date_ = __webpack_require__(211);
+
+// EXTERNAL MODULE: external ["wp","data"]
+var external_wp_data_ = __webpack_require__(26);
 
 // EXTERNAL MODULE: external "lodash"
-var external_lodash_ = __webpack_require__(3);
+var external_lodash_ = __webpack_require__(5);
 
 // EXTERNAL MODULE: ./node_modules/prop-types/index.js
 var prop_types = __webpack_require__(1);
 var prop_types_default = /*#__PURE__*/__webpack_require__.n(prop_types);
 
-// EXTERNAL MODULE: external {"this":["wc","components"]}
-var external_this_wc_components_ = __webpack_require__(47);
+// EXTERNAL MODULE: external ["wc","components"]
+var external_wc_components_ = __webpack_require__(145);
 
-// EXTERNAL MODULE: external {"this":["wc","data"]}
-var external_this_wc_data_ = __webpack_require__(22);
+// EXTERNAL MODULE: external ["wc","data"]
+var external_wc_data_ = __webpack_require__(59);
 
-// EXTERNAL MODULE: external {"this":["wc","date"]}
-var external_this_wc_date_ = __webpack_require__(29);
+// EXTERNAL MODULE: external ["wc","date"]
+var external_wc_date_ = __webpack_require__(101);
 
 // EXTERNAL MODULE: ./client/lib/currency-context.js
-var currency_context = __webpack_require__(498);
+var currency_context = __webpack_require__(598);
 
 // EXTERNAL MODULE: ./client/analytics/components/report-error/index.js
-var report_error = __webpack_require__(499);
+var report_error = __webpack_require__(599);
 
-// EXTERNAL MODULE: external {"this":["wc","navigation"]}
-var external_this_wc_navigation_ = __webpack_require__(21);
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.slice.js
+var es_array_slice = __webpack_require__(187);
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.includes.js
+var es_array_includes = __webpack_require__(107);
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.includes.js
+var es_string_includes = __webpack_require__(140);
+
+// EXTERNAL MODULE: external ["wc","navigation"]
+var external_wc_navigation_ = __webpack_require__(50);
 
 // CONCATENATED MODULE: ./client/analytics/components/report-chart/utils.js
+
+
+
+
+
 /**
  * External dependencies
  */
@@ -258,7 +382,7 @@ function getSelectedFilter(filters, query) {
   var filterConfig = clonedFilters.pop();
 
   if (filterConfig.showFilters(query, selectedFilterArgs)) {
-    var allFilters = Object(external_this_wc_navigation_["flattenFilters"])(filterConfig.filters);
+    var allFilters = Object(external_wc_navigation_["flattenFilters"])(filterConfig.filters);
     var value = query[filterConfig.param] || filterConfig.defaultValue || DEFAULT_FILTER;
     return Object(external_lodash_["find"])(allFilters, {
       value: value
@@ -287,13 +411,25 @@ function getChartMode(selectedFilter, query) {
 
 
 
+
+
+
+
+
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { defineProperty_default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
+
+
+
+
+
+
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = getPrototypeOf_default()(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = getPrototypeOf_default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return possibleConstructorReturn_default()(this, result); }; }
 
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 /**
  * External dependencies
@@ -357,7 +493,7 @@ var report_chart_ReportChart = /*#__PURE__*/function (_Component) {
           }
         });
         return _objectSpread({
-          date: Object(external_this_wp_date_["format"])('Y-m-d\\TH:i:s', interval.date_start)
+          date: Object(external_wp_date_["format"])('Y-m-d\\TH:i:s', interval.date_start)
         }, intervalData);
       });
       return chartData;
@@ -371,17 +507,17 @@ var report_chart_ReportChart = /*#__PURE__*/function (_Component) {
           secondaryData = _this$props2.secondaryData,
           selectedChart = _this$props2.selectedChart,
           defaultDateRange = _this$props2.defaultDateRange;
-      var currentInterval = Object(external_this_wc_date_["getIntervalForQuery"])(query);
+      var currentInterval = Object(external_wc_date_["getIntervalForQuery"])(query);
 
-      var _getCurrentDates = Object(external_this_wc_date_["getCurrentDates"])(query, defaultDateRange),
+      var _getCurrentDates = Object(external_wc_date_["getCurrentDates"])(query, defaultDateRange),
           primary = _getCurrentDates.primary,
           secondary = _getCurrentDates.secondary;
 
       var chartData = primaryData.data.intervals.map(function (interval, index) {
-        var secondaryDate = Object(external_this_wc_date_["getPreviousDate"])(interval.date_start, primary.after, secondary.after, query.compare, currentInterval);
+        var secondaryDate = Object(external_wc_date_["getPreviousDate"])(interval.date_start, primary.after, secondary.after, query.compare, currentInterval);
         var secondaryInterval = secondaryData.data.intervals[index];
         return {
-          date: Object(external_this_wp_date_["format"])('Y-m-d\\TH:i:s', interval.date_start),
+          date: Object(external_wp_date_["format"])('Y-m-d\\TH:i:s', interval.date_start),
           primary: {
             label: "".concat(primary.label, " (").concat(primary.range, ")"),
             labelDate: interval.date_start,
@@ -422,14 +558,14 @@ var report_chart_ReportChart = /*#__PURE__*/function (_Component) {
           selectedChart = _this$props4.selectedChart,
           showHeaderControls = _this$props4.showHeaderControls,
           primaryData = _this$props4.primaryData;
-      var currentInterval = Object(external_this_wc_date_["getIntervalForQuery"])(query);
-      var allowedIntervals = Object(external_this_wc_date_["getAllowedIntervalsForQuery"])(query);
-      var formats = Object(external_this_wc_date_["getDateFormatsForInterval"])(currentInterval, primaryData.data.intervals.length);
-      var emptyMessage = emptySearchResults ? Object(external_this_wp_i18n_["__"])('No data for the current search', 'woocommerce-admin') : Object(external_this_wp_i18n_["__"])('No data for the selected date range', 'woocommerce-admin');
+      var currentInterval = Object(external_wc_date_["getIntervalForQuery"])(query);
+      var allowedIntervals = Object(external_wc_date_["getAllowedIntervalsForQuery"])(query);
+      var formats = Object(external_wc_date_["getDateFormatsForInterval"])(currentInterval, primaryData.data.intervals.length);
+      var emptyMessage = emptySearchResults ? Object(external_wp_i18n_["__"])('No data for the current search', 'woocommerce-admin') : Object(external_wp_i18n_["__"])('No data for the selected date range', 'woocommerce-admin');
       var _this$context = this.context,
           formatAmount = _this$context.formatAmount,
           getCurrencyConfig = _this$context.getCurrencyConfig;
-      return Object(external_this_wp_element_["createElement"])(external_this_wc_components_["Chart"], {
+      return Object(external_wp_element_["createElement"])(external_wc_components_["Chart"], {
         allowedIntervals: allowedIntervals,
         data: chartData,
         dateParser: '%Y-%m-%dT%H:%M:%S',
@@ -449,8 +585,8 @@ var report_chart_ReportChart = /*#__PURE__*/function (_Component) {
         title: selectedChart.label,
         tooltipLabelFormat: formats.tooltipLabelFormat,
         tooltipTitle: mode === 'time-comparison' && selectedChart.label || null,
-        tooltipValueFormat: Object(external_this_wc_data_["getTooltipValueFormat"])(selectedChart.type, formatAmount),
-        chartType: Object(external_this_wc_date_["getChartTypeForQuery"])(query),
+        tooltipValueFormat: Object(external_wc_data_["getTooltipValueFormat"])(selectedChart.type, formatAmount),
+        chartType: Object(external_wc_date_["getChartTypeForQuery"])(query),
         valueType: selectedChart.type,
         xFormat: formats.xFormat,
         x2Format: formats.x2Format,
@@ -465,7 +601,7 @@ var report_chart_ReportChart = /*#__PURE__*/function (_Component) {
           primaryData = _this$props5.primaryData;
 
       if (primaryData.isError) {
-        return Object(external_this_wp_element_["createElement"])(report_error["a" /* default */], {
+        return Object(external_wp_element_["createElement"])(report_error["a" /* default */], {
           isError: true
         });
       }
@@ -483,7 +619,7 @@ var report_chart_ReportChart = /*#__PURE__*/function (_Component) {
           secondaryData = _this$props6.secondaryData;
 
       if (!primaryData || primaryData.isError || secondaryData.isError) {
-        return Object(external_this_wp_element_["createElement"])(report_error["a" /* default */], {
+        return Object(external_wp_element_["createElement"])(report_error["a" /* default */], {
           isError: true
         });
       }
@@ -507,7 +643,7 @@ var report_chart_ReportChart = /*#__PURE__*/function (_Component) {
   }]);
 
   return ReportChart;
-}(external_this_wp_element_["Component"]);
+}(external_wp_element_["Component"]);
 report_chart_ReportChart.contextType = currency_context["a" /* CurrencyContext */];
 report_chart_ReportChart.propTypes = {
   /**
@@ -604,7 +740,7 @@ report_chart_ReportChart.defaultProps = {
     isRequesting: false
   }
 };
-/* harmony default export */ var report_chart = __webpack_exports__["a"] = (Object(external_this_wp_compose_["compose"])(Object(external_this_wp_data_["withSelect"])(function (select, props) {
+/* harmony default export */ var report_chart = __webpack_exports__["a"] = (Object(external_wp_compose_["compose"])(Object(external_wp_data_["withSelect"])(function (select, props) {
   var charts = props.charts,
       endpoint = props.endpoint,
       filters = props.filters,
@@ -617,7 +753,7 @@ report_chart_ReportChart.defaultProps = {
   var filterParam = Object(external_lodash_["get"])(selectedFilter, ['settings', 'param']);
   var chartMode = props.mode || getChartMode(selectedFilter, query) || 'time-comparison';
 
-  var _select$getSetting = select(external_this_wc_data_["SETTINGS_STORE_NAME"]).getSetting('wc_admin', 'wcAdminSettings'),
+  var _select$getSetting = select(external_wc_data_["SETTINGS_STORE_NAME"]).getSetting('wc_admin', 'wcAdminSettings'),
       defaultDateRange = _select$getSetting.woocommerce_default_date_range;
 
   var newProps = {
@@ -643,7 +779,7 @@ report_chart_ReportChart.defaultProps = {
   var fields = charts && charts.map(function (chart) {
     return chart.key;
   });
-  var primaryData = Object(external_this_wc_data_["getReportChartData"])({
+  var primaryData = Object(external_wc_data_["getReportChartData"])({
     endpoint: endpoint,
     dataType: 'primary',
     query: query,
@@ -661,7 +797,7 @@ report_chart_ReportChart.defaultProps = {
     });
   }
 
-  var secondaryData = Object(external_this_wc_data_["getReportChartData"])({
+  var secondaryData = Object(external_wc_data_["getReportChartData"])({
     endpoint: endpoint,
     dataType: 'secondary',
     query: query,
@@ -680,19 +816,26 @@ report_chart_ReportChart.defaultProps = {
 
 /***/ }),
 
-/***/ 532:
+/***/ 634:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return charts; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return filters; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return advancedFilters; });
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(43);
-/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _woocommerce_wc_admin_settings__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(25);
-/* harmony import */ var _lib_async_requests__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(500);
+/* harmony import */ var core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(51);
+/* harmony import */ var core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(37);
+/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(141);
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _woocommerce_wc_admin_settings__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(85);
+/* harmony import */ var _lib_async_requests__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(600);
+
+
+
 /**
  * External dependencies
  */
@@ -707,260 +850,260 @@ report_chart_ReportChart.defaultProps = {
 var ORDERS_REPORT_CHARTS_FILTER = 'woocommerce_admin_orders_report_charts';
 var ORDERS_REPORT_FILTERS_FILTER = 'woocommerce_admin_orders_report_filters';
 var ORDERS_REPORT_ADVANCED_FILTERS_FILTER = 'woocommerce_admin_orders_report_advanced_filters';
-var charts = Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__["applyFilters"])(ORDERS_REPORT_CHARTS_FILTER, [{
+var charts = Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_3__["applyFilters"])(ORDERS_REPORT_CHARTS_FILTER, [{
   key: 'orders_count',
-  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Orders', 'woocommerce-admin'),
+  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Orders', 'woocommerce-admin'),
   type: 'number'
 }, {
   key: 'net_revenue',
-  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Net Sales', 'woocommerce-admin'),
+  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Net Sales', 'woocommerce-admin'),
   order: 'desc',
   orderby: 'net_total',
   type: 'currency'
 }, {
   key: 'avg_order_value',
-  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Average Order Value', 'woocommerce-admin'),
+  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Average Order Value', 'woocommerce-admin'),
   type: 'currency'
 }, {
   key: 'avg_items_per_order',
-  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Average Items Per Order', 'woocommerce-admin'),
+  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Average Items Per Order', 'woocommerce-admin'),
   order: 'desc',
   orderby: 'num_items_sold',
   type: 'average'
 }]);
-var filters = Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__["applyFilters"])(ORDERS_REPORT_FILTERS_FILTER, [{
-  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Show', 'woocommerce-admin'),
+var filters = Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_3__["applyFilters"])(ORDERS_REPORT_FILTERS_FILTER, [{
+  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Show', 'woocommerce-admin'),
   staticParams: ['chartType', 'paged', 'per_page'],
   param: 'filter',
   showFilters: function showFilters() {
     return true;
   },
   filters: [{
-    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('All Orders', 'woocommerce-admin'),
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('All Orders', 'woocommerce-admin'),
     value: 'all'
   }, {
-    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Advanced Filters', 'woocommerce-admin'),
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Advanced Filters', 'woocommerce-admin'),
     value: 'advanced'
   }]
 }]);
 /*eslint-disable max-len*/
 
-var advancedFilters = Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__["applyFilters"])(ORDERS_REPORT_ADVANCED_FILTERS_FILTER, {
-  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["_x"])('Orders Match {{select /}} Filters', 'A sentence describing filters for Orders. See screen shot for context: https://cloudup.com/cSsUY9VeCVJ', 'woocommerce-admin'),
+var advancedFilters = Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_3__["applyFilters"])(ORDERS_REPORT_ADVANCED_FILTERS_FILTER, {
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["_x"])('Orders Match {{select /}} Filters', 'A sentence describing filters for Orders. See screen shot for context: https://cloudup.com/cSsUY9VeCVJ', 'woocommerce-admin'),
   filters: {
     status: {
       labels: {
-        add: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Order Status', 'woocommerce-admin'),
-        remove: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Remove order status filter', 'woocommerce-admin'),
-        rule: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Select an order status filter match', 'woocommerce-admin'),
+        add: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Order Status', 'woocommerce-admin'),
+        remove: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Remove order status filter', 'woocommerce-admin'),
+        rule: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Select an order status filter match', 'woocommerce-admin'),
 
         /* translators: A sentence describing an Order Status filter. See screen shot for context: https://cloudup.com/cSsUY9VeCVJ */
-        title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('{{title}}Order Status{{/title}} {{rule /}} {{filter /}}', 'woocommerce-admin'),
-        filter: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Select an order status', 'woocommerce-admin')
+        title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('{{title}}Order Status{{/title}} {{rule /}} {{filter /}}', 'woocommerce-admin'),
+        filter: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Select an order status', 'woocommerce-admin')
       },
       rules: [{
         value: 'is',
 
         /* translators: Sentence fragment, logical, "Is" refers to searching for orders matching a chosen order status. Screenshot for context: https://cloudup.com/cSsUY9VeCVJ */
-        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["_x"])('Is', 'order status', 'woocommerce-admin')
+        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["_x"])('Is', 'order status', 'woocommerce-admin')
       }, {
         value: 'is_not',
 
         /* translators: Sentence fragment, logical, "Is Not" refers to searching for orders that don\'t match a chosen order status. Screenshot for context: https://cloudup.com/cSsUY9VeCVJ */
-        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["_x"])('Is Not', 'order status', 'woocommerce-admin')
+        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["_x"])('Is Not', 'order status', 'woocommerce-admin')
       }],
       input: {
         component: 'SelectControl',
-        options: Object.keys(_woocommerce_wc_admin_settings__WEBPACK_IMPORTED_MODULE_2__[/* ORDER_STATUSES */ "d"]).map(function (key) {
+        options: Object.keys(_woocommerce_wc_admin_settings__WEBPACK_IMPORTED_MODULE_4__[/* ORDER_STATUSES */ "d"]).map(function (key) {
           return {
             value: key,
-            label: _woocommerce_wc_admin_settings__WEBPACK_IMPORTED_MODULE_2__[/* ORDER_STATUSES */ "d"][key]
+            label: _woocommerce_wc_admin_settings__WEBPACK_IMPORTED_MODULE_4__[/* ORDER_STATUSES */ "d"][key]
           };
         })
       }
     },
     product: {
       labels: {
-        add: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Products', 'woocommerce-admin'),
-        placeholder: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Search products', 'woocommerce-admin'),
-        remove: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Remove products filter', 'woocommerce-admin'),
-        rule: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Select a product filter match', 'woocommerce-admin'),
+        add: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Products', 'woocommerce-admin'),
+        placeholder: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Search products', 'woocommerce-admin'),
+        remove: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Remove products filter', 'woocommerce-admin'),
+        rule: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Select a product filter match', 'woocommerce-admin'),
 
         /* translators: A sentence describing a Product filter. See screen shot for context: https://cloudup.com/cSsUY9VeCVJ */
-        title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('{{title}}Product{{/title}} {{rule /}} {{filter /}}', 'woocommerce-admin'),
-        filter: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Select products', 'woocommerce-admin')
+        title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('{{title}}Product{{/title}} {{rule /}} {{filter /}}', 'woocommerce-admin'),
+        filter: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Select products', 'woocommerce-admin')
       },
       rules: [{
         value: 'includes',
 
         /* translators: Sentence fragment, logical, "Includes" refers to orders including a given product(s). Screenshot for context: https://cloudup.com/cSsUY9VeCVJ */
-        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["_x"])('Includes', 'products', 'woocommerce-admin')
+        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["_x"])('Includes', 'products', 'woocommerce-admin')
       }, {
         value: 'excludes',
 
         /* translators: Sentence fragment, logical, "Excludes" refers to orders excluding a given product(s). Screenshot for context: https://cloudup.com/cSsUY9VeCVJ */
-        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["_x"])('Excludes', 'products', 'woocommerce-admin')
+        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["_x"])('Excludes', 'products', 'woocommerce-admin')
       }],
       input: {
         component: 'Search',
         type: 'products',
-        getLabels: _lib_async_requests__WEBPACK_IMPORTED_MODULE_3__[/* getProductLabels */ "d"]
+        getLabels: _lib_async_requests__WEBPACK_IMPORTED_MODULE_5__[/* getProductLabels */ "d"]
       }
     },
     variation: {
       labels: {
-        add: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Variations', 'woocommerce-admin'),
-        placeholder: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Search variations', 'woocommerce-admin'),
-        remove: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Remove variations filter', 'woocommerce-admin'),
-        rule: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Select a variation filter match', 'woocommerce-admin'),
+        add: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Variations', 'woocommerce-admin'),
+        placeholder: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Search variations', 'woocommerce-admin'),
+        remove: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Remove variations filter', 'woocommerce-admin'),
+        rule: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Select a variation filter match', 'woocommerce-admin'),
 
         /* translators: A sentence describing a Variation filter. See screen shot for context: https://cloudup.com/cSsUY9VeCVJ */
-        title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('{{title}}Variation{{/title}} {{rule /}} {{filter /}}', 'woocommerce-admin'),
-        filter: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Select variation', 'woocommerce-admin')
+        title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('{{title}}Variation{{/title}} {{rule /}} {{filter /}}', 'woocommerce-admin'),
+        filter: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Select variation', 'woocommerce-admin')
       },
       rules: [{
         value: 'includes',
 
         /* translators: Sentence fragment, logical, "Includes" refers to orders including a given variation(s). Screenshot for context: https://cloudup.com/cSsUY9VeCVJ */
-        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["_x"])('Includes', 'variations', 'woocommerce-admin')
+        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["_x"])('Includes', 'variations', 'woocommerce-admin')
       }, {
         value: 'excludes',
 
         /* translators: Sentence fragment, logical, "Excludes" refers to orders excluding a given variation(s). Screenshot for context: https://cloudup.com/cSsUY9VeCVJ */
-        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["_x"])('Excludes', 'variations', 'woocommerce-admin')
+        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["_x"])('Excludes', 'variations', 'woocommerce-admin')
       }],
       input: {
         component: 'Search',
         type: 'variations',
-        getLabels: _lib_async_requests__WEBPACK_IMPORTED_MODULE_3__[/* getVariationLabels */ "g"]
+        getLabels: _lib_async_requests__WEBPACK_IMPORTED_MODULE_5__[/* getVariationLabels */ "g"]
       }
     },
     coupon: {
       labels: {
-        add: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Coupon Codes', 'woocommerce-admin'),
-        placeholder: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Search coupons', 'woocommerce-admin'),
-        remove: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Remove coupon filter', 'woocommerce-admin'),
-        rule: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Select a coupon filter match', 'woocommerce-admin'),
+        add: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Coupon Codes', 'woocommerce-admin'),
+        placeholder: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Search coupons', 'woocommerce-admin'),
+        remove: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Remove coupon filter', 'woocommerce-admin'),
+        rule: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Select a coupon filter match', 'woocommerce-admin'),
 
         /* translators: A sentence describing a Coupon filter. See screen shot for context: https://cloudup.com/cSsUY9VeCVJ */
-        title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('{{title}}Coupon Code{{/title}} {{rule /}} {{filter /}}', 'woocommerce-admin'),
-        filter: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Select coupon codes', 'woocommerce-admin')
+        title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('{{title}}Coupon Code{{/title}} {{rule /}} {{filter /}}', 'woocommerce-admin'),
+        filter: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Select coupon codes', 'woocommerce-admin')
       },
       rules: [{
         value: 'includes',
 
         /* translators: Sentence fragment, logical, "Includes" refers to orders including a given coupon code(s). Screenshot for context: https://cloudup.com/cSsUY9VeCVJ */
-        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["_x"])('Includes', 'coupon code', 'woocommerce-admin')
+        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["_x"])('Includes', 'coupon code', 'woocommerce-admin')
       }, {
         value: 'excludes',
 
         /* translators: Sentence fragment, logical, "Excludes" refers to orders excluding a given coupon code(s). Screenshot for context: https://cloudup.com/cSsUY9VeCVJ */
-        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["_x"])('Excludes', 'coupon code', 'woocommerce-admin')
+        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["_x"])('Excludes', 'coupon code', 'woocommerce-admin')
       }],
       input: {
         component: 'Search',
         type: 'coupons',
-        getLabels: _lib_async_requests__WEBPACK_IMPORTED_MODULE_3__[/* getCouponLabels */ "b"]
+        getLabels: _lib_async_requests__WEBPACK_IMPORTED_MODULE_5__[/* getCouponLabels */ "b"]
       }
     },
     customer_type: {
       labels: {
-        add: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Customer Type', 'woocommerce-admin'),
-        remove: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Remove customer filter', 'woocommerce-admin'),
-        rule: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Select a customer filter match', 'woocommerce-admin'),
+        add: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Customer Type', 'woocommerce-admin'),
+        remove: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Remove customer filter', 'woocommerce-admin'),
+        rule: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Select a customer filter match', 'woocommerce-admin'),
 
         /* translators: A sentence describing a Customer filter. See screen shot for context: https://cloudup.com/cSsUY9VeCVJ */
-        title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('{{title}}Customer is{{/title}} {{filter /}}', 'woocommerce-admin'),
-        filter: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Select a customer type', 'woocommerce-admin')
+        title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('{{title}}Customer is{{/title}} {{filter /}}', 'woocommerce-admin'),
+        filter: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Select a customer type', 'woocommerce-admin')
       },
       input: {
         component: 'SelectControl',
         options: [{
           value: 'new',
-          label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('New', 'woocommerce-admin')
+          label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('New', 'woocommerce-admin')
         }, {
           value: 'returning',
-          label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Returning', 'woocommerce-admin')
+          label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Returning', 'woocommerce-admin')
         }],
         defaultOption: 'new'
       }
     },
     refunds: {
       labels: {
-        add: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Refunds', 'woocommerce-admin'),
-        remove: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Remove refunds filter', 'woocommerce-admin'),
-        rule: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Select a refund filter match', 'woocommerce-admin'),
-        title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('{{title}}Refunds{{/title}} {{filter /}}', 'woocommerce-admin'),
-        filter: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Select a refund type', 'woocommerce-admin')
+        add: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Refunds', 'woocommerce-admin'),
+        remove: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Remove refunds filter', 'woocommerce-admin'),
+        rule: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Select a refund filter match', 'woocommerce-admin'),
+        title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('{{title}}Refunds{{/title}} {{filter /}}', 'woocommerce-admin'),
+        filter: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Select a refund type', 'woocommerce-admin')
       },
       input: {
         component: 'SelectControl',
         options: [{
           value: 'all',
-          label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('All', 'woocommerce-admin')
+          label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('All', 'woocommerce-admin')
         }, {
           value: 'partial',
-          label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Partially refunded', 'woocommerce-admin')
+          label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Partially refunded', 'woocommerce-admin')
         }, {
           value: 'full',
-          label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Fully refunded', 'woocommerce-admin')
+          label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Fully refunded', 'woocommerce-admin')
         }, {
           value: 'none',
-          label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('None', 'woocommerce-admin')
+          label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('None', 'woocommerce-admin')
         }],
         defaultOption: 'all'
       }
     },
     tax_rate: {
       labels: {
-        add: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Tax Rates', 'woocommerce-admin'),
-        placeholder: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Search tax rates', 'woocommerce-admin'),
-        remove: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Remove tax rate filter', 'woocommerce-admin'),
-        rule: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Select a tax rate filter match', 'woocommerce-admin'),
+        add: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Tax Rates', 'woocommerce-admin'),
+        placeholder: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Search tax rates', 'woocommerce-admin'),
+        remove: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Remove tax rate filter', 'woocommerce-admin'),
+        rule: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Select a tax rate filter match', 'woocommerce-admin'),
 
         /* translators: A sentence describing a tax rate filter. See screen shot for context: https://cloudup.com/cSsUY9VeCVJ */
-        title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('{{title}}Tax Rate{{/title}} {{rule /}} {{filter /}}', 'woocommerce-admin'),
-        filter: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Select tax rates', 'woocommerce-admin')
+        title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('{{title}}Tax Rate{{/title}} {{rule /}} {{filter /}}', 'woocommerce-admin'),
+        filter: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Select tax rates', 'woocommerce-admin')
       },
       rules: [{
         value: 'includes',
 
         /* translators: Sentence fragment, logical, "Includes" refers to orders including a given tax rate(s). Screenshot for context: https://cloudup.com/cSsUY9VeCVJ */
-        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["_x"])('Includes', 'tax rate', 'woocommerce-admin')
+        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["_x"])('Includes', 'tax rate', 'woocommerce-admin')
       }, {
         value: 'excludes',
 
         /* translators: Sentence fragment, logical, "Excludes" refers to orders excluding a given tax rate(s). Screenshot for context: https://cloudup.com/cSsUY9VeCVJ */
-        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["_x"])('Excludes', 'tax rate', 'woocommerce-admin')
+        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["_x"])('Excludes', 'tax rate', 'woocommerce-admin')
       }],
       input: {
         component: 'Search',
         type: 'taxes',
-        getLabels: _lib_async_requests__WEBPACK_IMPORTED_MODULE_3__[/* getTaxRateLabels */ "f"]
+        getLabels: _lib_async_requests__WEBPACK_IMPORTED_MODULE_5__[/* getTaxRateLabels */ "f"]
       }
     },
     attribute: {
       allowMultiple: true,
       labels: {
-        add: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Attribute', 'woocommerce-admin'),
-        placeholder: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Search attributes', 'woocommerce-admin'),
-        remove: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Remove attribute filter', 'woocommerce-admin'),
-        rule: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Select a product attribute filter match', 'woocommerce-admin'),
+        add: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Attribute', 'woocommerce-admin'),
+        placeholder: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Search attributes', 'woocommerce-admin'),
+        remove: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Remove attribute filter', 'woocommerce-admin'),
+        rule: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Select a product attribute filter match', 'woocommerce-admin'),
 
         /* translators: A sentence describing a Product filter. See screen shot for context: https://cloudup.com/cSsUY9VeCVJ */
-        title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('{{title}}Attribute{{/title}} {{rule /}} {{filter /}}', 'woocommerce-admin'),
-        filter: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Select attributes', 'woocommerce-admin')
+        title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('{{title}}Attribute{{/title}} {{rule /}} {{filter /}}', 'woocommerce-admin'),
+        filter: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Select attributes', 'woocommerce-admin')
       },
       rules: [{
         value: 'is',
 
         /* translators: Sentence fragment, logical, "Is" refers to searching for products matching a chosen attribute. Screenshot for context: https://cloudup.com/cSsUY9VeCVJ */
-        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["_x"])('Is', 'product attribute', 'woocommerce-admin')
+        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["_x"])('Is', 'product attribute', 'woocommerce-admin')
       }, {
         value: 'is_not',
 
         /* translators: Sentence fragment, logical, "Is Not" refers to searching for products that don\'t match a chosen attribute. Screenshot for context: https://cloudup.com/cSsUY9VeCVJ */
-        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["_x"])('Is Not', 'product attribute', 'woocommerce-admin')
+        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["_x"])('Is Not', 'product attribute', 'woocommerce-admin')
       }],
       input: {
         component: 'ProductAttribute'

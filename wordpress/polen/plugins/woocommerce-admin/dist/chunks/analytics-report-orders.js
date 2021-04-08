@@ -1,6 +1,6 @@
 (window["__wcAdmin_webpackJsonp"] = window["__wcAdmin_webpackJsonp"] || []).push([[14],{
 
-/***/ 488:
+/***/ 586:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -10,72 +10,87 @@ __webpack_require__.r(__webpack_exports__);
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, "default", function() { return /* binding */ orders_OrdersReport; });
 
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.reflect.construct.js
+var es_reflect_construct = __webpack_require__(64);
+
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/classCallCheck.js
-var classCallCheck = __webpack_require__(12);
+var classCallCheck = __webpack_require__(22);
 var classCallCheck_default = /*#__PURE__*/__webpack_require__.n(classCallCheck);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/createClass.js
-var createClass = __webpack_require__(13);
+var createClass = __webpack_require__(23);
 var createClass_default = /*#__PURE__*/__webpack_require__.n(createClass);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/inherits.js
-var inherits = __webpack_require__(14);
+var inherits = __webpack_require__(24);
 var inherits_default = /*#__PURE__*/__webpack_require__.n(inherits);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js
-var possibleConstructorReturn = __webpack_require__(15);
+var possibleConstructorReturn = __webpack_require__(25);
 var possibleConstructorReturn_default = /*#__PURE__*/__webpack_require__.n(possibleConstructorReturn);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/getPrototypeOf.js
-var getPrototypeOf = __webpack_require__(7);
+var getPrototypeOf = __webpack_require__(14);
 var getPrototypeOf_default = /*#__PURE__*/__webpack_require__.n(getPrototypeOf);
 
-// EXTERNAL MODULE: external {"this":["wp","element"]}
-var external_this_wp_element_ = __webpack_require__(0);
+// EXTERNAL MODULE: external ["wp","element"]
+var external_wp_element_ = __webpack_require__(0);
 
 // EXTERNAL MODULE: ./node_modules/prop-types/index.js
 var prop_types = __webpack_require__(1);
 var prop_types_default = /*#__PURE__*/__webpack_require__.n(prop_types);
 
 // EXTERNAL MODULE: ./client/analytics/report/orders/config.js
-var config = __webpack_require__(532);
+var config = __webpack_require__(634);
 
 // EXTERNAL MODULE: ./client/lib/get-selected-chart/index.js
-var get_selected_chart = __webpack_require__(503);
+var get_selected_chart = __webpack_require__(603);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/assertThisInitialized.js
-var assertThisInitialized = __webpack_require__(9);
+var assertThisInitialized = __webpack_require__(18);
 var assertThisInitialized_default = /*#__PURE__*/__webpack_require__.n(assertThisInitialized);
 
-// EXTERNAL MODULE: external {"this":["wp","i18n"]}
-var external_this_wp_i18n_ = __webpack_require__(2);
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.slice.js
+var es_array_slice = __webpack_require__(187);
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.join.js
+var es_array_join = __webpack_require__(139);
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.map.js
+var es_array_map = __webpack_require__(51);
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.function.name.js
+var es_function_name = __webpack_require__(129);
+
+// EXTERNAL MODULE: external ["wp","i18n"]
+var external_wp_i18n_ = __webpack_require__(2);
 
 // EXTERNAL MODULE: external "lodash"
-var external_lodash_ = __webpack_require__(3);
+var external_lodash_ = __webpack_require__(5);
 
-// EXTERNAL MODULE: external {"this":["wc","components"]}
-var external_this_wc_components_ = __webpack_require__(47);
+// EXTERNAL MODULE: external ["wc","components"]
+var external_wc_components_ = __webpack_require__(145);
 
-// EXTERNAL MODULE: external {"this":["wc","number"]}
-var external_this_wc_number_ = __webpack_require__(142);
+// EXTERNAL MODULE: external ["wc","number"]
+var external_wc_number_ = __webpack_require__(281);
 
 // EXTERNAL MODULE: ./client/wc-admin-settings/index.js
-var wc_admin_settings = __webpack_require__(25);
+var wc_admin_settings = __webpack_require__(85);
 
-// EXTERNAL MODULE: external {"this":["wc","navigation"]}
-var external_this_wc_navigation_ = __webpack_require__(21);
+// EXTERNAL MODULE: external ["wc","navigation"]
+var external_wc_navigation_ = __webpack_require__(50);
 
-// EXTERNAL MODULE: external {"this":["wc","date"]}
-var external_this_wc_date_ = __webpack_require__(29);
+// EXTERNAL MODULE: external ["wc","date"]
+var external_wc_date_ = __webpack_require__(101);
 
 // EXTERNAL MODULE: ./client/analytics/components/report-table/index.js + 2 modules
-var report_table = __webpack_require__(506);
+var report_table = __webpack_require__(606);
 
 // EXTERNAL MODULE: ./client/lib/currency-context.js
-var currency_context = __webpack_require__(498);
+var currency_context = __webpack_require__(598);
 
 // EXTERNAL MODULE: ./client/analytics/report/orders/style.scss
-var style = __webpack_require__(576);
+var style = __webpack_require__(677);
 
 // CONCATENATED MODULE: ./client/analytics/report/orders/table.js
 
@@ -86,9 +101,15 @@ var style = __webpack_require__(576);
 
 
 
+
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = getPrototypeOf_default()(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = getPrototypeOf_default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return possibleConstructorReturn_default()(this, result); }; }
 
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+
+
+
+
 
 /**
  * External dependencies
@@ -134,53 +155,53 @@ var table_OrdersReportTable = /*#__PURE__*/function (_Component) {
     key: "getHeadersContent",
     value: function getHeadersContent() {
       return [{
-        label: Object(external_this_wp_i18n_["__"])('Date', 'woocommerce-admin'),
+        label: Object(external_wp_i18n_["__"])('Date', 'woocommerce-admin'),
         key: 'date',
         required: true,
         defaultSort: true,
         isLeftAligned: true,
         isSortable: true
       }, {
-        label: Object(external_this_wp_i18n_["__"])('Order #', 'woocommerce-admin'),
-        screenReaderLabel: Object(external_this_wp_i18n_["__"])('Order Number', 'woocommerce-admin'),
+        label: Object(external_wp_i18n_["__"])('Order #', 'woocommerce-admin'),
+        screenReaderLabel: Object(external_wp_i18n_["__"])('Order Number', 'woocommerce-admin'),
         key: 'order_number',
         required: true
       }, {
-        label: Object(external_this_wp_i18n_["__"])('Status', 'woocommerce-admin'),
+        label: Object(external_wp_i18n_["__"])('Status', 'woocommerce-admin'),
         key: 'status',
         required: false,
         isSortable: false
       }, {
-        label: Object(external_this_wp_i18n_["__"])('Customer', 'woocommerce-admin'),
+        label: Object(external_wp_i18n_["__"])('Customer', 'woocommerce-admin'),
         key: 'customer_id',
         required: false,
         isSortable: false
       }, {
-        label: Object(external_this_wp_i18n_["__"])('Customer Type', 'woocommerce-admin'),
+        label: Object(external_wp_i18n_["__"])('Customer Type', 'woocommerce-admin'),
         key: 'customer_type',
         required: false,
         isSortable: false
       }, {
-        label: Object(external_this_wp_i18n_["__"])('Product(s)', 'woocommerce-admin'),
-        screenReaderLabel: Object(external_this_wp_i18n_["__"])('Products', 'woocommerce-admin'),
+        label: Object(external_wp_i18n_["__"])('Product(s)', 'woocommerce-admin'),
+        screenReaderLabel: Object(external_wp_i18n_["__"])('Products', 'woocommerce-admin'),
         key: 'products',
         required: false,
         isSortable: false
       }, {
-        label: Object(external_this_wp_i18n_["__"])('Items Sold', 'woocommerce-admin'),
+        label: Object(external_wp_i18n_["__"])('Items Sold', 'woocommerce-admin'),
         key: 'num_items_sold',
         required: false,
         isSortable: true,
         isNumeric: true
       }, {
-        label: Object(external_this_wp_i18n_["__"])('Coupon(s)', 'woocommerce-admin'),
-        screenReaderLabel: Object(external_this_wp_i18n_["__"])('Coupons', 'woocommerce-admin'),
+        label: Object(external_wp_i18n_["__"])('Coupon(s)', 'woocommerce-admin'),
+        screenReaderLabel: Object(external_wp_i18n_["__"])('Coupons', 'woocommerce-admin'),
         key: 'coupons',
         required: false,
         isSortable: false
       }, {
-        label: Object(external_this_wp_i18n_["__"])('Net Sales', 'woocommerce-admin'),
-        screenReaderLabel: Object(external_this_wp_i18n_["__"])('Net Sales', 'woocommerce-admin'),
+        label: Object(external_wp_i18n_["__"])('Net Sales', 'woocommerce-admin'),
+        screenReaderLabel: Object(external_wp_i18n_["__"])('Net Sales', 'woocommerce-admin'),
         key: 'net_total',
         required: true,
         isSortable: true,
@@ -206,8 +227,8 @@ var table_OrdersReportTable = /*#__PURE__*/function (_Component) {
       var _this2 = this;
 
       var query = this.props.query;
-      var persistedQuery = Object(external_this_wc_navigation_["getPersistedQuery"])(query);
-      var dateFormat = Object(wc_admin_settings["g" /* getSetting */])('dateFormat', external_this_wc_date_["defaultTableDateFormat"]);
+      var persistedQuery = Object(external_wc_navigation_["getPersistedQuery"])(query);
+      var dateFormat = Object(wc_admin_settings["g" /* getSetting */])('dateFormat', external_wc_date_["defaultTableDateFormat"]);
       var _this$context = this.context,
           renderCurrency = _this$context.render,
           getCurrencyConfig = _this$context.getCurrencyConfig;
@@ -231,7 +252,7 @@ var table_OrdersReportTable = /*#__PURE__*/function (_Component) {
           return {
             label: item.name,
             quantity: item.quantity,
-            href: Object(external_this_wc_navigation_["getNewPath"])(persistedQuery, '/analytics/products', {
+            href: Object(external_wc_navigation_["getNewPath"])(persistedQuery, '/analytics/products', {
               filter: 'single_product',
               products: item.id
             })
@@ -240,26 +261,26 @@ var table_OrdersReportTable = /*#__PURE__*/function (_Component) {
         var formattedCoupons = coupons.map(function (coupon) {
           return {
             label: coupon.code,
-            href: Object(external_this_wc_navigation_["getNewPath"])(persistedQuery, '/analytics/coupons', {
+            href: Object(external_wc_navigation_["getNewPath"])(persistedQuery, '/analytics/coupons', {
               filter: 'single_coupon',
               coupons: coupon.id
             })
           };
         });
         return [{
-          display: Object(external_this_wp_element_["createElement"])(external_this_wc_components_["Date"], {
+          display: Object(external_wp_element_["createElement"])(external_wc_components_["Date"], {
             date: dateCreated,
             visibleFormat: dateFormat
           }),
           value: dateCreated
         }, {
-          display: Object(external_this_wp_element_["createElement"])(external_this_wc_components_["Link"], {
+          display: Object(external_wp_element_["createElement"])(external_wc_components_["Link"], {
             href: 'post.php?post=' + (parentId ? parentId : orderId) + '&action=edit' + (parentId ? '#order_refunds' : ''),
             type: "wp-admin"
           }, orderNumber),
           value: orderNumber
         }, {
-          display: Object(external_this_wp_element_["createElement"])(external_this_wc_components_["OrderStatus"], {
+          display: Object(external_wp_element_["createElement"])(external_wc_components_["OrderStatus"], {
             className: "woocommerce-orders-table__status",
             order: {
               status: status
@@ -276,17 +297,17 @@ var table_OrdersReportTable = /*#__PURE__*/function (_Component) {
         }, {
           display: _this2.renderList(formattedProducts.length ? [formattedProducts[0]] : [], formattedProducts.map(function (product) {
             return {
-              label: Object(external_this_wp_i18n_["sprintf"])(Object(external_this_wp_i18n_["__"])('%s× %s', 'woocommerce-admin'), product.quantity, product.label),
+              label: Object(external_wp_i18n_["sprintf"])(Object(external_wp_i18n_["__"])('%s× %s', 'woocommerce-admin'), product.quantity, product.label),
               href: product.href
             };
           })),
           value: formattedProducts.map(function (_ref2) {
             var quantity = _ref2.quantity,
                 label = _ref2.label;
-            return Object(external_this_wp_i18n_["sprintf"])(Object(external_this_wp_i18n_["__"])('%s× %s', 'woocommerce-admin'), quantity, label);
+            return Object(external_wp_i18n_["sprintf"])(Object(external_wp_i18n_["__"])('%s× %s', 'woocommerce-admin'), quantity, label);
           }).join(', ')
         }, {
-          display: Object(external_this_wc_number_["formatValue"])(getCurrencyConfig(), 'number', numItemsSold),
+          display: Object(external_wc_number_["formatValue"])(getCurrencyConfig(), 'number', numItemsSold),
           value: numItemsSold
         }, {
           display: _this2.renderList(formattedCoupons.length ? [formattedCoupons[0]] : [], formattedCoupons),
@@ -319,22 +340,22 @@ var table_OrdersReportTable = /*#__PURE__*/function (_Component) {
           getCurrencyConfig = _this$context2.getCurrencyConfig;
       var currency = getCurrencyConfig();
       return [{
-        label: Object(external_this_wp_i18n_["_n"])('order', 'orders', ordersCount, 'woocommerce-admin'),
-        value: Object(external_this_wc_number_["formatValue"])(currency, 'number', ordersCount)
+        label: Object(external_wp_i18n_["_n"])('order', 'orders', ordersCount, 'woocommerce-admin'),
+        value: Object(external_wc_number_["formatValue"])(currency, 'number', ordersCount)
       }, {
-        label: Object(external_this_wp_i18n_["_n"])(' customer', ' customers', totalCustomers, 'woocommerce-admin'),
-        value: Object(external_this_wc_number_["formatValue"])(currency, 'number', totalCustomers)
+        label: Object(external_wp_i18n_["_n"])(' customer', ' customers', totalCustomers, 'woocommerce-admin'),
+        value: Object(external_wc_number_["formatValue"])(currency, 'number', totalCustomers)
       }, {
-        label: Object(external_this_wp_i18n_["_n"])('product', 'products', products, 'woocommerce-admin'),
-        value: Object(external_this_wc_number_["formatValue"])(currency, 'number', products)
+        label: Object(external_wp_i18n_["_n"])('product', 'products', products, 'woocommerce-admin'),
+        value: Object(external_wc_number_["formatValue"])(currency, 'number', products)
       }, {
-        label: Object(external_this_wp_i18n_["_n"])('item sold', 'items sold', numItemsSold, 'woocommerce-admin'),
-        value: Object(external_this_wc_number_["formatValue"])(currency, 'number', numItemsSold)
+        label: Object(external_wp_i18n_["_n"])('item sold', 'items sold', numItemsSold, 'woocommerce-admin'),
+        value: Object(external_wc_number_["formatValue"])(currency, 'number', numItemsSold)
       }, {
-        label: Object(external_this_wp_i18n_["_n"])('coupon', 'coupons', couponsCount, 'woocommerce-admin'),
-        value: Object(external_this_wc_number_["formatValue"])(currency, 'number', couponsCount)
+        label: Object(external_wp_i18n_["_n"])('coupon', 'coupons', couponsCount, 'woocommerce-admin'),
+        value: Object(external_wc_number_["formatValue"])(currency, 'number', couponsCount)
       }, {
-        label: Object(external_this_wp_i18n_["__"])('net sales', 'woocommerce-admin'),
+        label: Object(external_wp_i18n_["__"])('net sales', 'woocommerce-admin'),
         value: formatAmount(netRevenue)
       }];
     }
@@ -343,7 +364,7 @@ var table_OrdersReportTable = /*#__PURE__*/function (_Component) {
     value: function renderLinks() {
       var items = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
       return items.map(function (item, i) {
-        return Object(external_this_wp_element_["createElement"])(external_this_wc_components_["Link"], {
+        return Object(external_wp_element_["createElement"])(external_wc_components_["Link"], {
           href: item.href,
           key: i,
           type: "wc-admin"
@@ -353,7 +374,7 @@ var table_OrdersReportTable = /*#__PURE__*/function (_Component) {
   }, {
     key: "renderList",
     value: function renderList(visibleItems, popoverItems) {
-      return Object(external_this_wp_element_["createElement"])(external_this_wp_element_["Fragment"], null, this.renderLinks(visibleItems), popoverItems.length > 1 && Object(external_this_wp_element_["createElement"])(external_this_wc_components_["ViewMoreList"], {
+      return Object(external_wp_element_["createElement"])(external_wp_element_["Fragment"], null, this.renderLinks(visibleItems), popoverItems.length > 1 && Object(external_wp_element_["createElement"])(external_wc_components_["ViewMoreList"], {
         items: this.renderLinks(popoverItems)
       }));
     }
@@ -364,7 +385,7 @@ var table_OrdersReportTable = /*#__PURE__*/function (_Component) {
           query = _this$props.query,
           filters = _this$props.filters,
           advancedFilters = _this$props.advancedFilters;
-      return Object(external_this_wp_element_["createElement"])(report_table["a" /* default */], {
+      return Object(external_wp_element_["createElement"])(report_table["a" /* default */], {
         endpoint: "orders",
         getHeadersContent: this.getHeadersContent,
         getRowsContent: this.getRowsContent,
@@ -374,7 +395,7 @@ var table_OrdersReportTable = /*#__PURE__*/function (_Component) {
         tableQuery: {
           extended_info: true
         },
-        title: Object(external_this_wp_i18n_["__"])('Orders', 'woocommerce-admin'),
+        title: Object(external_wp_i18n_["__"])('Orders', 'woocommerce-admin'),
         columnPrefsKey: "orders_report_columns",
         filters: filters,
         advancedFilters: advancedFilters
@@ -383,18 +404,18 @@ var table_OrdersReportTable = /*#__PURE__*/function (_Component) {
   }]);
 
   return OrdersReportTable;
-}(external_this_wp_element_["Component"]);
+}(external_wp_element_["Component"]);
 
 table_OrdersReportTable.contextType = currency_context["a" /* CurrencyContext */];
 /* harmony default export */ var table = (table_OrdersReportTable);
 // EXTERNAL MODULE: ./client/analytics/components/report-chart/index.js + 1 modules
-var report_chart = __webpack_require__(502);
+var report_chart = __webpack_require__(602);
 
 // EXTERNAL MODULE: ./client/analytics/components/report-summary/index.js
-var report_summary = __webpack_require__(504);
+var report_summary = __webpack_require__(604);
 
 // EXTERNAL MODULE: ./client/analytics/components/report-filters/index.js
-var report_filters = __webpack_require__(505);
+var report_filters = __webpack_require__(605);
 
 // CONCATENATED MODULE: ./client/analytics/report/orders/index.js
 
@@ -404,9 +425,10 @@ var report_filters = __webpack_require__(505);
 
 
 
+
 function orders_createSuper(Derived) { var hasNativeReflectConstruct = orders_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = getPrototypeOf_default()(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = getPrototypeOf_default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return possibleConstructorReturn_default()(this, result); }; }
 
-function orders_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+function orders_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 /**
  * External dependencies
@@ -441,20 +463,20 @@ var orders_OrdersReport = /*#__PURE__*/function (_Component) {
       var _this$props = this.props,
           path = _this$props.path,
           query = _this$props.query;
-      return Object(external_this_wp_element_["createElement"])(external_this_wp_element_["Fragment"], null, Object(external_this_wp_element_["createElement"])(report_filters["a" /* default */], {
+      return Object(external_wp_element_["createElement"])(external_wp_element_["Fragment"], null, Object(external_wp_element_["createElement"])(report_filters["a" /* default */], {
         query: query,
         path: path,
         filters: config["c" /* filters */],
         advancedFilters: config["a" /* advancedFilters */],
         report: "orders"
-      }), Object(external_this_wp_element_["createElement"])(report_summary["a" /* default */], {
+      }), Object(external_wp_element_["createElement"])(report_summary["a" /* default */], {
         charts: config["b" /* charts */],
         endpoint: "orders",
         query: query,
         selectedChart: Object(get_selected_chart["a" /* default */])(query.chart, config["b" /* charts */]),
         filters: config["c" /* filters */],
         advancedFilters: config["a" /* advancedFilters */]
-      }), Object(external_this_wp_element_["createElement"])(report_chart["a" /* default */], {
+      }), Object(external_wp_element_["createElement"])(report_chart["a" /* default */], {
         charts: config["b" /* charts */],
         endpoint: "orders",
         path: path,
@@ -462,7 +484,7 @@ var orders_OrdersReport = /*#__PURE__*/function (_Component) {
         selectedChart: Object(get_selected_chart["a" /* default */])(query.chart, config["b" /* charts */]),
         filters: config["c" /* filters */],
         advancedFilters: config["a" /* advancedFilters */]
-      }), Object(external_this_wp_element_["createElement"])(table, {
+      }), Object(external_wp_element_["createElement"])(table, {
         query: query,
         filters: config["c" /* filters */],
         advancedFilters: config["a" /* advancedFilters */]
@@ -471,7 +493,7 @@ var orders_OrdersReport = /*#__PURE__*/function (_Component) {
   }]);
 
   return OrdersReport;
-}(external_this_wp_element_["Component"]);
+}(external_wp_element_["Component"]);
 
 
 orders_OrdersReport.propTypes = {
@@ -481,12 +503,12 @@ orders_OrdersReport.propTypes = {
 
 /***/ }),
 
-/***/ 503:
+/***/ 603:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return getSelectedChart; });
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
 /**
  * External dependencies
@@ -516,45 +538,53 @@ function getSelectedChart(chartName) {
 
 /***/ }),
 
-/***/ 504:
+/***/ 604:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* unused harmony export ReportSummary */
-/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
-/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(13);
-/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(14);
-/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(15);
-/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(7);
-/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(0);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(2);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(20);
-/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_compose__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(11);
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(1);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _woocommerce_navigation__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(21);
-/* harmony import */ var _woocommerce_navigation__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_navigation__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _woocommerce_components__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(47);
-/* harmony import */ var _woocommerce_components__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_components__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var _woocommerce_number__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(142);
-/* harmony import */ var _woocommerce_number__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_number__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var _woocommerce_data__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(22);
-/* harmony import */ var _woocommerce_data__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_data__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var _woocommerce_date__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(29);
-/* harmony import */ var _woocommerce_date__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_date__WEBPACK_IMPORTED_MODULE_14__);
-/* harmony import */ var _woocommerce_tracks__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(27);
-/* harmony import */ var _woocommerce_tracks__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_tracks__WEBPACK_IMPORTED_MODULE_15__);
-/* harmony import */ var _report_error__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(499);
-/* harmony import */ var _lib_currency_context__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(498);
+/* harmony import */ var core_js_modules_es_reflect_construct_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(64);
+/* harmony import */ var core_js_modules_es_reflect_construct_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_reflect_construct_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(22);
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(23);
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(24);
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(25);
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(14);
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(0);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(51);
+/* harmony import */ var core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var core_js_modules_es_string_search_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(170);
+/* harmony import */ var core_js_modules_es_string_search_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_search_js__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(88);
+/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(2);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(65);
+/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_wordpress_compose__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(26);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(1);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _woocommerce_navigation__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(50);
+/* harmony import */ var _woocommerce_navigation__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_navigation__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var _woocommerce_components__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(145);
+/* harmony import */ var _woocommerce_components__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_components__WEBPACK_IMPORTED_MODULE_15__);
+/* harmony import */ var _woocommerce_number__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(281);
+/* harmony import */ var _woocommerce_number__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_number__WEBPACK_IMPORTED_MODULE_16__);
+/* harmony import */ var _woocommerce_data__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(59);
+/* harmony import */ var _woocommerce_data__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_data__WEBPACK_IMPORTED_MODULE_17__);
+/* harmony import */ var _woocommerce_date__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(101);
+/* harmony import */ var _woocommerce_date__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_date__WEBPACK_IMPORTED_MODULE_18__);
+/* harmony import */ var _woocommerce_tracks__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(92);
+/* harmony import */ var _woocommerce_tracks__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_tracks__WEBPACK_IMPORTED_MODULE_19__);
+/* harmony import */ var _report_error__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(599);
+/* harmony import */ var _lib_currency_context__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(598);
 
 
 
@@ -562,9 +592,13 @@ function getSelectedChart(chartName) {
 
 
 
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4___default()(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4___default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3___default()(this, result); }; }
 
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4___default()(this, result); }; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 /**
  * External dependencies
@@ -591,23 +625,23 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
  */
 
 var ReportSummary = /*#__PURE__*/function (_Component) {
-  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_2___default()(ReportSummary, _Component);
+  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_3___default()(ReportSummary, _Component);
 
   var _super = _createSuper(ReportSummary);
 
   function ReportSummary() {
-    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, ReportSummary);
+    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1___default()(this, ReportSummary);
 
     return _super.apply(this, arguments);
   }
 
-  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(ReportSummary, [{
+  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2___default()(ReportSummary, [{
     key: "formatVal",
     value: function formatVal(val, type) {
       var _this$context = this.context,
           formatAmount = _this$context.formatAmount,
           getCurrencyConfig = _this$context.getCurrencyConfig;
-      return type === 'currency' ? formatAmount(val) : Object(_woocommerce_number__WEBPACK_IMPORTED_MODULE_12__["formatValue"])(getCurrencyConfig(), type, val);
+      return type === 'currency' ? formatAmount(val) : Object(_woocommerce_number__WEBPACK_IMPORTED_MODULE_16__["formatValue"])(getCurrencyConfig(), type, val);
     }
   }, {
     key: "getValues",
@@ -621,7 +655,7 @@ var ReportSummary = /*#__PURE__*/function (_Component) {
       var primaryValue = emptySearchResults ? 0 : primaryTotal;
       var secondaryValue = emptySearchResults ? 0 : secondaryTotal;
       return {
-        delta: Object(_woocommerce_number__WEBPACK_IMPORTED_MODULE_12__["calculateDelta"])(primaryValue, secondaryValue),
+        delta: Object(_woocommerce_number__WEBPACK_IMPORTED_MODULE_16__["calculateDelta"])(primaryValue, secondaryValue),
         prevValue: this.formatVal(secondaryValue, type),
         value: this.formatVal(primaryValue, type)
       };
@@ -643,18 +677,18 @@ var ReportSummary = /*#__PURE__*/function (_Component) {
           isRequesting = summaryData.isRequesting;
 
       if (isError) {
-        return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])(_report_error__WEBPACK_IMPORTED_MODULE_16__[/* default */ "a"], {
+        return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_report_error__WEBPACK_IMPORTED_MODULE_20__[/* default */ "a"], {
           isError: true
         });
       }
 
       if (isRequesting) {
-        return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])(_woocommerce_components__WEBPACK_IMPORTED_MODULE_11__["SummaryListPlaceholder"], {
+        return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_woocommerce_components__WEBPACK_IMPORTED_MODULE_15__["SummaryListPlaceholder"], {
           numberOfItems: charts.length
         });
       }
 
-      var _getDateParamsFromQue = Object(_woocommerce_date__WEBPACK_IMPORTED_MODULE_14__["getDateParamsFromQuery"])(query, defaultDateRange),
+      var _getDateParamsFromQue = Object(_woocommerce_date__WEBPACK_IMPORTED_MODULE_18__["getDateParamsFromQuery"])(query, defaultDateRange),
           compare = _getDateParamsFromQue.compare;
 
       var renderSummaryNumbers = function renderSummaryNumbers(_ref) {
@@ -677,7 +711,7 @@ var ReportSummary = /*#__PURE__*/function (_Component) {
             newPath.order = order;
           }
 
-          var href = Object(_woocommerce_navigation__WEBPACK_IMPORTED_MODULE_10__["getNewPath"])(newPath);
+          var href = Object(_woocommerce_navigation__WEBPACK_IMPORTED_MODULE_14__["getNewPath"])(newPath);
           var isSelected = selectedChart.key === key;
 
           var _this$getValues = _this.getValues(key, type),
@@ -685,12 +719,12 @@ var ReportSummary = /*#__PURE__*/function (_Component) {
               prevValue = _this$getValues.prevValue,
               value = _this$getValues.value;
 
-          return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])(_woocommerce_components__WEBPACK_IMPORTED_MODULE_11__["SummaryNumber"], {
+          return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_woocommerce_components__WEBPACK_IMPORTED_MODULE_15__["SummaryNumber"], {
             key: key,
             delta: delta,
             href: href,
             label: label,
-            prevLabel: compare === 'previous_period' ? Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('Previous Period:', 'woocommerce-admin') : Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('Previous Year:', 'woocommerce-admin'),
+            prevLabel: compare === 'previous_period' ? Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__["__"])('Previous Period:', 'woocommerce-admin') : Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__["__"])('Previous Year:', 'woocommerce-admin'),
             prevValue: prevValue,
             selected: isSelected,
             value: value,
@@ -700,7 +734,7 @@ var ReportSummary = /*#__PURE__*/function (_Component) {
                 onToggle();
               }
 
-              Object(_woocommerce_tracks__WEBPACK_IMPORTED_MODULE_15__["recordEvent"])('analytics_chart_tab_click', {
+              Object(_woocommerce_tracks__WEBPACK_IMPORTED_MODULE_19__["recordEvent"])('analytics_chart_tab_click', {
                 report: report || endpoint,
                 key: key
               });
@@ -709,17 +743,17 @@ var ReportSummary = /*#__PURE__*/function (_Component) {
         });
       };
 
-      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])(_woocommerce_components__WEBPACK_IMPORTED_MODULE_11__["SummaryList"], null, renderSummaryNumbers);
+      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_woocommerce_components__WEBPACK_IMPORTED_MODULE_15__["SummaryList"], null, renderSummaryNumbers);
     }
   }]);
 
   return ReportSummary;
-}(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["Component"]);
+}(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["Component"]);
 ReportSummary.propTypes = {
   /**
    * Properties of all the charts available for that report.
    */
-  charts: prop_types__WEBPACK_IMPORTED_MODULE_9___default.a.array.isRequired,
+  charts: prop_types__WEBPACK_IMPORTED_MODULE_13___default.a.array.isRequired,
 
   /**
    * The endpoint to use in API calls to populate the Summary Numbers.
@@ -727,58 +761,58 @@ ReportSummary.propTypes = {
    * `taxes` endpoint (ie: `/wc-analytics/reports/taxes/stats`). If the provided endpoint
    * doesn't exist, an error will be shown to the user with `ReportError`.
    */
-  endpoint: prop_types__WEBPACK_IMPORTED_MODULE_9___default.a.string.isRequired,
+  endpoint: prop_types__WEBPACK_IMPORTED_MODULE_13___default.a.string.isRequired,
 
   /**
    * Allows specifying properties different from the `endpoint` that will be used
    * to limit the items when there is an active search.
    */
-  limitProperties: prop_types__WEBPACK_IMPORTED_MODULE_9___default.a.array,
+  limitProperties: prop_types__WEBPACK_IMPORTED_MODULE_13___default.a.array,
 
   /**
    * The query string represented in object form.
    */
-  query: prop_types__WEBPACK_IMPORTED_MODULE_9___default.a.object.isRequired,
+  query: prop_types__WEBPACK_IMPORTED_MODULE_13___default.a.object.isRequired,
 
   /**
    * Properties of the selected chart.
    */
-  selectedChart: prop_types__WEBPACK_IMPORTED_MODULE_9___default.a.shape({
+  selectedChart: prop_types__WEBPACK_IMPORTED_MODULE_13___default.a.shape({
     /**
      * Key of the selected chart.
      */
-    key: prop_types__WEBPACK_IMPORTED_MODULE_9___default.a.string.isRequired,
+    key: prop_types__WEBPACK_IMPORTED_MODULE_13___default.a.string.isRequired,
 
     /**
      * Chart label.
      */
-    label: prop_types__WEBPACK_IMPORTED_MODULE_9___default.a.string.isRequired,
+    label: prop_types__WEBPACK_IMPORTED_MODULE_13___default.a.string.isRequired,
 
     /**
      * Order query argument.
      */
-    order: prop_types__WEBPACK_IMPORTED_MODULE_9___default.a.oneOf(['asc', 'desc']),
+    order: prop_types__WEBPACK_IMPORTED_MODULE_13___default.a.oneOf(['asc', 'desc']),
 
     /**
      * Order by query argument.
      */
-    orderby: prop_types__WEBPACK_IMPORTED_MODULE_9___default.a.string,
+    orderby: prop_types__WEBPACK_IMPORTED_MODULE_13___default.a.string,
 
     /**
      * Number type for formatting.
      */
-    type: prop_types__WEBPACK_IMPORTED_MODULE_9___default.a.oneOf(['average', 'number', 'currency']).isRequired
+    type: prop_types__WEBPACK_IMPORTED_MODULE_13___default.a.oneOf(['average', 'number', 'currency']).isRequired
   }).isRequired,
 
   /**
    * Data to display in the SummaryNumbers.
    */
-  summaryData: prop_types__WEBPACK_IMPORTED_MODULE_9___default.a.object,
+  summaryData: prop_types__WEBPACK_IMPORTED_MODULE_13___default.a.object,
 
   /**
    * Report name, if different than the endpoint.
    */
-  report: prop_types__WEBPACK_IMPORTED_MODULE_9___default.a.string
+  report: prop_types__WEBPACK_IMPORTED_MODULE_13___default.a.string
 };
 ReportSummary.defaultProps = {
   summaryData: {
@@ -789,8 +823,8 @@ ReportSummary.defaultProps = {
     isError: false
   }
 };
-ReportSummary.contextType = _lib_currency_context__WEBPACK_IMPORTED_MODULE_17__[/* CurrencyContext */ "a"];
-/* harmony default export */ __webpack_exports__["a"] = (Object(_wordpress_compose__WEBPACK_IMPORTED_MODULE_7__["compose"])(Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_8__["withSelect"])(function (select, props) {
+ReportSummary.contextType = _lib_currency_context__WEBPACK_IMPORTED_MODULE_21__[/* CurrencyContext */ "a"];
+/* harmony default export */ __webpack_exports__["a"] = (Object(_wordpress_compose__WEBPACK_IMPORTED_MODULE_11__["compose"])(Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_12__["withSelect"])(function (select, props) {
   var charts = props.charts,
       endpoint = props.endpoint,
       limitProperties = props.limitProperties,
@@ -812,10 +846,10 @@ ReportSummary.contextType = _lib_currency_context__WEBPACK_IMPORTED_MODULE_17__[
     return chart.key;
   });
 
-  var _select$getSetting = select(_woocommerce_data__WEBPACK_IMPORTED_MODULE_13__["SETTINGS_STORE_NAME"]).getSetting('wc_admin', 'wcAdminSettings'),
+  var _select$getSetting = select(_woocommerce_data__WEBPACK_IMPORTED_MODULE_17__["SETTINGS_STORE_NAME"]).getSetting('wc_admin', 'wcAdminSettings'),
       defaultDateRange = _select$getSetting.woocommerce_default_date_range;
 
-  var summaryData = Object(_woocommerce_data__WEBPACK_IMPORTED_MODULE_13__["getSummaryNumbers"])({
+  var summaryData = Object(_woocommerce_data__WEBPACK_IMPORTED_MODULE_17__["getSummaryNumbers"])({
     endpoint: endpoint,
     query: query,
     select: select,
@@ -833,7 +867,7 @@ ReportSummary.contextType = _lib_currency_context__WEBPACK_IMPORTED_MODULE_17__[
 
 /***/ }),
 
-/***/ 576:
+/***/ 677:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
