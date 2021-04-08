@@ -11,7 +11,7 @@
 			<p style="font-size: 44px; font-weight: 700;">R$200</p>
 		</div>
 		<div class="col-12 text-center">
-			<a href="" class="btn btn-outline-light btn-lg">Ver mais pedidos</a>
+			<a href="/my-account/orders/" class="btn btn-outline-light btn-lg">Ver mais pedidos</a>
 		</div>
 	</div>
 </main>
