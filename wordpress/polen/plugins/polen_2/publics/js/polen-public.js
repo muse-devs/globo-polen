@@ -33,7 +33,7 @@
 			e.preventDefault();
 			var wnonce = $(this).attr('button-nonce');
 			var order_id = $(this).attr('order-id');
-			//console.log('no console:',wnonce, order_id, polen_ajax.ajaxurl );
+			console.log(order_id);
 			$.ajax(
 				{
 					type: 'POST',
@@ -76,10 +76,17 @@
 					},
 					success: function( response ) {
 						let obj = $.parseJSON( response );
+						console.log(obj);
 						if( obj['success'] == true ){
-							$('#OrderActions').modal('toggle');
-							//location.reload();'/enviar-video/?order_id=35
-							location.href='/enviar-video/?order_id=' + order_id;
+							if( obj['code'] == 1 ){
+								$('#OrderActions').modal('toggle');
+								//location.reload();'/enviar-video/?order_id=35
+								location.href='/enviar-video/?order_id=' + order_id;
+							}
+							if( obj['code'] == 2 ){
+								//$('#OrderActions').modal('toggle');
+								location.reload();
+							}		
 						}
 					}
 				});

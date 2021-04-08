@@ -137,7 +137,7 @@ if (in_array('user_talent',  $logged_user->roles)) {
 							$accept_reject_nonce = wp_create_nonce('polen-order-accept-nonce');
 							?>
 							<div class="row py-4 mb-4">
-								<div class="col-12 text-center" button-nonce="<?php echo $accept_reject_nonce; ?>" order-id="">
+								<div class="col-12 text-center modal-group-buttons" button-nonce="<?php echo $accept_reject_nonce; ?>" order-id="">
 									<button type="button" class="talent-check-order accept" action-type="accept"></button>
 									<button type="button" class="talent-check-order reject" action-type="reject"></button>
 								</div>

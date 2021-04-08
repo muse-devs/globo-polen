@@ -85,11 +85,11 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
                    if($order){
                        if( $type == 'accept' ){
                            $order->update_status( 'talent-accepted', '', true );
-                           $response = array( 'success' => true, 'message' => 'Vídeo aceito com sucesso' ); 
+                           $response = array( 'success' => true, 'message' => 'Vídeo aceito com sucesso', 'code' => 1 ); 
                        }                            
                        if( $type == 'reject' ){
                            $order->update_status( 'talent-rejected', '', true );
-                           $response = array( 'success' => true, 'message' => 'Vídeo rejeitado' ); 
+                           $response = array( 'success' => true, 'message' => 'Vídeo rejeitado', 'code' => 2 ); 
                        }  
                       
                    }
