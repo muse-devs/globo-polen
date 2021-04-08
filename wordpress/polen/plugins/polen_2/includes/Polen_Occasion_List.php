@@ -175,10 +175,14 @@ class Polen_Occasion_List
      * @param string $order
      * @return type
      */
-    public function get_occasion_by_type( string $type ){
+    public function get_occasion_by_type( string $type, $refresh = null ){
         global $wpdb;
         
-        $sql = "SELECT type, description FROM `" . $wpdb->base_prefix . "occasion_list` WHERE type = %s LIMIT 1" ;
+        if( !empty( $refresh ) ){
+            $refresh = " ORDER BY RAND() ";
+        }
+
+        $sql = "SELECT type, description FROM `" . $wpdb->base_prefix . "occasion_list` WHERE type = %s {$refresh} LIMIT 1" ;
         $sql_prepared = $wpdb->prepare( $sql, trim( $type ) );
         $results = $wpdb->get_results( $sql_prepared );  
         return $results;
@@ -230,7 +234,12 @@ class Polen_Occasion_List
 
     public function get_occasion_description(){
         if( isset( $_POST['occasion_type'] ) ){
-            $occasion = $this->get_occasion_by_type( $_POST['occasion_type'] );
+            $refresh = null;
+            if( isset( $_POST['refresh'] ) && $_POST['refresh'] == 1 ){
+                $refresh = 1;
+            }
+
+            $occasion = $this->get_occasion_by_type( $_POST['occasion_type'], $refresh );
 
             if( !empty( $occasion ) ){
                 echo wp_json_encode( array( 'success' => 1, 'response' => $occasion ) );
