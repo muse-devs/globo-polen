@@ -65,13 +65,14 @@ class Polen_Cart
 
     public function polen_save_cart(){
 		wc_nocache_headers();
-        
 		$nonce_value = wc_get_var( $_REQUEST['woocommerce-cart-nonce'], wc_get_var( $_REQUEST['_wpnonce'], '' ) ); // @codingStandardsIgnoreLine.
+
         if ( wp_verify_nonce( $nonce_value, 'woocommerce-cart' ) ) {    
 			$cart_updated = false;
 			$cart_totals  = isset( $_POST['cart'] ) ? wp_unslash( $_POST['cart'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-
-			if ( ! WC()->cart->is_empty() && is_array( $cart_totals ) ) {
+            //TO DO: verificar pq o $cart_totals está chegando null
+            //if ( ! WC()->cart->is_empty() && is_array( $cart_totals ) ) {
+            if ( ! WC()->cart->is_empty() ) {    
 				foreach ( WC()->cart->get_cart() as $cart_item_key => $values ) {
                     $cart = WC()->cart->cart_contents;
                     $cart_id = $cart_item_key;
