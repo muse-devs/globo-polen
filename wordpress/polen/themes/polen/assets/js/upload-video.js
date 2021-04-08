@@ -89,8 +89,8 @@ let completeHandler = (evt) => {
 			polen_ajax.ajaxurl,
 			obj_complete_order,
 			(data, textStatus, jqXHR) => {
-				alert("Vídeo enviado com sucesso, obrigado Angélica!");
-				window.location.href = museobj.base_url + "/my-account/orders/";
+				// alert("Vídeo enviado com sucesso, obrigado Angélica!");
+				window.location.href = museobj.base_url + "/envio-video-sucesso/";
 			}
 		)
 		.fail(function () {
