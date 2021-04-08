@@ -178,7 +178,7 @@ polen_get_talent_card( $talent_cart_detail ); ?>
 				</div>
 				<div class="col-md-6">
 					<?php
-					$email_to_video = isset($cart_item['email_to_video']) ? $cart_item['email_to_video'] : '';
+					//$email_to_video = isset($cart_item['email_to_video']) ? $cart_item['email_to_video'] : ''; 
 					printf(
 						'<select class="%s form-control form-control-lg custom-select" id="cart_video_category_%s" data-cart-id="%s" name="video_category" required="required"/>',
 						'polen-cart-item-data',
@@ -216,7 +216,7 @@ polen_get_talent_card( $talent_cart_detail ); ?>
 			</div>
 			<div class="row">
 				<div class="col-12">
-					<a href="javascript:void(0)" class="link-alt"><?php Icon_Class::polen_icon_reload(); ?> Outras mensagens</a>
+					<a href="javascript:void(0)" class="link-alt video-instruction-refresh"><?php Icon_Class::polen_icon_reload(); ?> Outras mensagens</a>
 				</div>
 			</div>
 			<div class="row mt-5">
