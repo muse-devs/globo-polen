@@ -133,5 +133,36 @@
 			}	
 		});	
 
+
+		$('.video-instruction-refresh').on('click',function(){
+			var category_item = $('select[name="video_category"]');
+			var category_name = category_item.val();
+			var cart_id = category_item.attr('data-cart-id');
+
+			console.log( category_name );
+			if( category_name ){
+				$.ajax(
+				{
+					type: 'POST',
+					url: polen_ajax.ajaxurl,
+						data: {
+						action: 'get_occasion_description',
+						occasion_type: category_name,
+						refresh: 1
+					},
+					success: function( response ) {
+						let obj = $.parseJSON( response );
+						//console.log(obj['response'][0].description);
+
+						if( obj ){
+							if( obj['response'][0].description ){
+								$( '#cart_instructions_to_video_' + cart_id ).html(obj['response'][0].description);
+							}
+						}
+							
+					}
+				});	
+			}	
+		});	
 	});
 })( jQuery );
