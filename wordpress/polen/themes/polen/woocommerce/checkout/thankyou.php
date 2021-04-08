@@ -70,3 +70,25 @@ $flow_3 = array(
 		</div>
 	</div>
 </div>
+<?php
+if( !is_user_logged_in()() ) :
+?>
+
+<div class="row my-3">
+	<div class="col-12">
+		<a href="/my-account/" class="btn btn-primary btn-lg btn-block">Criar uma conta</a>
+	</div>
+</div>
+
+<?php
+else:
+?>
+
+<div class="row my-3">
+	<div class="col-12">
+		<a href="/my-account/" class="btn btn-primary btn-lg btn-block">Meu pedidos</a>
+	</div>
+</div>
+
+<?php
+endif;
