@@ -72,6 +72,6 @@ $flow_3 = array(
 </div>
 <div class="row my-3">
 	<div class="col-12">
-		<button class="btn btn-primary btn-lg btn-block">Ir para login</button>
+		<a href="/my-account/" class="btn btn-primary btn-lg btn-block">Ir para login</a>
 	</div>
 </div>
