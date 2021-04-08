@@ -1,17 +1,40 @@
 .custom-logo {
-    width: 7.3rem;
+	width: 7.3rem;
 	max-width: 165px !important;
-    height: auto;
+	height: auto;
 }
 
 .dropdown {
 	z-index: 97;
-    .dropdown-content {
-        padding: 0.3rem;
-        border-radius: 0.3rem;
-        background-color: $talent-bg-color;
-        a {
-            color: $input-font-color;
-        }
-    }
+	.dropbtn {
+		padding: 0;
+	}
+	.dropdown-content {
+		padding: 0.3rem;
+		right: 0;
+		border-radius: 0.3rem;
+		background-color: $talent-bg-color;
+		a {
+			color: $input-font-color;
+		}
+	}
+	.menu-user-data {
+		display: flex;
+		align-items: center;
+		width: 70px;
+		.bi {
+			margin-left: 10px;
+		}
+	}
+	.user-avatar {
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		box-sizing: border-box;
+		overflow: hidden;
+		img {
+			width: 40px;
+			height: 40px;
+		}
+	}
 }

@@ -48,10 +48,18 @@
 						if (is_user_logged_in()) {
 							$user_name = wp_get_current_user();
 						?>
-							<a class="dropbtn text-truncate">
+							<a class="dropbtn">
+								<div class="menu-user-data">
+									<div class="user-avatar">
+										<?php echo get_wp_user_avatar(get_the_author_meta('ID')); ?>
+									</div>
+									<?php Icon_Class::polen_icon_chevron(); ?>
+								</div>
+							</a>
+							<!-- <a class="dropbtn text-truncate">
 								<i class="bi bi-person-circle"></i>
 								<?php echo $user_name->display_name; ?>
-							</a>
+							</a> -->
 							<div class="dropdown-content">
 								<a href="<?php echo get_permalink(get_option('woocommerce_myaccount_page_id')); ?>">Minha conta</a>
 								<a href="<?php echo esc_url(wc_get_account_endpoint_url('orders')); ?>">Meus pedidos</a>
