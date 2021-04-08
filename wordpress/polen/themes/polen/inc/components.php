@@ -219,9 +219,9 @@ function polen_front_get_tutorial()
 }
 
 function polen_front_get_talent_videos($talent, $items = array(
-	array("title" => "Video 1", "image" => "http://i.vimeocdn.com/video/1100709491_640.jpg", "video" => "https://vimeo.com/534168147"),
-	array("title" => "Video 2", "image" => "https://i.vimeocdn.com/video/1106290977_640.jpg", "video" => "https://vimeo.com/534171508"),
-	array("title" => "Video 3", "image" => "http://i.vimeocdn.com/video/1100721840_640.jpg", "video" => "https://vimeo.com/534173040"),
+	array("title" => "Video 1", "image" => "http://i.vimeocdn.com/video/1106294518_640.jpg", "video" => "https://vimeo.com/534168147"),
+	array("title" => "Video 2", "image" => "https://i.vimeocdn.com/video/1106293939_640.jpg", "video" => "https://vimeo.com/534171508"),
+	array("title" => "Video 3", "image" => "http://i.vimeocdn.com/video/1106294834_640.jpg", "video" => "https://vimeo.com/534173040"),
 ))
 {
 ?>
