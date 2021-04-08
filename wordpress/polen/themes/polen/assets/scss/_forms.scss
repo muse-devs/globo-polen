@@ -287,9 +287,9 @@ input[type="file"] {
 			&::after {
 				content: "";
 				display: block;
-				width: 20px;
-				height: 20px;
-				background: no-repeat center/cover url(../img/close.png);
+				width: 30px;
+				height: 30px;
+				background: no-repeat center/cover url(../icons/close-o.svg);
 			}
 		}
 	}
