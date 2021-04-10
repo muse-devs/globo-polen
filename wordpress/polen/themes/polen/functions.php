@@ -49,6 +49,16 @@ if ( ! function_exists( 'polen_setup' ) ) :
 		 * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
 		 */
 		add_theme_support( 'post-thumbnails' );
+		$fat = 1.5;
+
+		add_image_size( 'polen-thumb-sm', 156*$fat, 190*$fat, false );
+		add_image_size( 'polen-thumb-md', 163*$fat, 190*$fat, false );
+		add_image_size( 'polen-thumb-lg', 200*$fat, 290*$fat, false );
+
+		add_image_size( 'polen-square-crop-sm', 32*$fat, 32*$fat, true );
+		add_image_size( 'polen-square-crop-md', 40*$fat, 40*$fat, true );
+		add_image_size( 'polen-square-crop-lg', 48*$fat, 48*$fat, true );
+		add_image_size( 'polen-square-crop-xl', 120*$fat, 120*$fat, true );
 
 		// This theme uses wp_nav_menu() in one location.
 		register_nav_menus(

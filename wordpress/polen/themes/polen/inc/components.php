@@ -27,7 +27,7 @@ function polen_front_get_card($item, $size = "small")
 	}
 
 	if (isset($item['ID'])) {
-		$image = wp_get_attachment_image_src(get_post_thumbnail_id($item['ID']), 'single-post-thumbnail');
+		$image = wp_get_attachment_image_src(get_post_thumbnail_id($item['ID']), 'polen-thumb-md');
 	} else {
 		$image = array();
 		$image[] = '';
@@ -129,7 +129,7 @@ function polen_front_get_categories($items)
 				<?php foreach ($items as $item) : ?>
 					<div class="col-md-3">
 						<figure class="polen-card category">
-							<img src="<?= $item["image"] ?>" alt="<?= $item["title"] ?>">
+							<img loading="lazy" src="<?= $item["image"] ?>" alt="<?= $item["title"] ?>">
 							<a href="<?= $item["url"] ?>" class="link"><?= $item["title"] ?></a>
 						</figure>
 					</div>
@@ -231,8 +231,8 @@ function polen_front_get_talent_videos($talent, $items = array(
 				<div class="banner-content type-video">
 					<?php foreach ($items as $item) : ?>
 						<div class="polen-card type-video">
-							<figure class="video-cover" style="background-image: url(<?= $item['image']; ?>);">
-								<img src="<?= $item['image']; ?>" alt="<?= $item['title']; ?>" data-url="<?= $item['video']; ?>">
+							<figure class="video-cover">
+								<img loading="lazy" src="<?= $item['image']; ?>" alt="<?= $item['title']; ?>" data-url="<?= $item['video']; ?>">
 								<a href="javascript:openVideoByURL('<?= $item['video']; ?>')" class="video-player-button"></a>
 							</figure>
 						</div>

@@ -230,8 +230,11 @@
 		max-height: 290px;
 		border-radius: 8px;
 		background: no-repeat center/cover;
+		overflow: hidden;
 		img {
-			display: none;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
 		}
 	}
 }
