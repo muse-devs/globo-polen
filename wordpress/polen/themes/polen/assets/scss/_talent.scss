@@ -123,7 +123,7 @@
 	box-sizing: border-box;
 	background-color: $talent-bg-color;
 	overflow: hidden;
-	font-family: $font-secondary;
+	font-family: $font-primary;
 	.polen-video {
 		max-width: 100%;
 		background-color: $secondary-bg-color;
@@ -253,7 +253,7 @@
 	.title,
 	.description {
 		margin: 0;
-		font-family: $font-secondary;
+		font-family: $font-primary;
 		font-size: 16px;
 		font-weight: 700;
 	}
@@ -334,7 +334,7 @@
 .talent-card {
 	position: relative;
 	padding: 16px;
-	font-family: $font-secondary;
+	font-family: $font-primary;
 	border-radius: 8px;
 	// overflow: hidden;
 	box-sizing: border-box;
