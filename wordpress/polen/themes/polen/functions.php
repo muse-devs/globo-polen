@@ -151,9 +151,17 @@ function get_assets_folder() {
  * Enqueue scripts and styles.
  */
 function polen_scripts() {
+	global $wp_styles;
+
+	if(is_front_page()) {
+		foreach( $wp_styles->queue as $style ) {
+			wp_dequeue_style($wp_styles->registered[$style]->handle);
+		}
+	}
+
 	$min = get_assets_folder();
 	wp_enqueue_style('font-poppins', 'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap', array(), '1.0.0');
-	wp_enqueue_style('font-inter', 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap', array(), '1.0.0');
+	// wp_enqueue_style('font-inter', 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap', array(), '1.0.0');
 	wp_enqueue_style('polen-custom-styles', TEMPLATE_URI . '/assets/css/style.min.css', array(), _S_VERSION);
 
 	if(is_singular() && is_product()) {

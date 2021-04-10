@@ -36,9 +36,9 @@ function polen_front_get_card($item, $size = "small")
 ?>
 	<div class="<?= $class; ?>">
 		<div class="polen-card <?= $size; ?>">
-			<figure class="image" style="background-image: url(<?php echo $image[0]; ?>);">
+			<figure class="image">
 				<a href="<?= $item["talent_url"]; ?>" class="link">
-					<img src="<?php echo $image[0]; ?>" alt="<?= $item["name"]; ?>">
+					<img loading="lazy" src="<?php echo $image[0]; ?>" alt="<?= $item["name"]; ?>">
 				</a>
 				<span class="price"><span class="mr-2"><?php Icon_Class::polen_icon_camera_video(); ?></span>R$<?= $item["price"]; ?></span>
 			</figure>

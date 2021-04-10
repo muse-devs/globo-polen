@@ -75,7 +75,7 @@ class Polen_Public {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/polen-public.css', array(), $this->version, 'all' );
+		//wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/polen-public.css', array(), $this->version, 'all' );
 
 	}
 

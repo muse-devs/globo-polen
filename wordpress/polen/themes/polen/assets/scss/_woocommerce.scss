@@ -93,10 +93,34 @@ select.form-control:not([size]):not([multiple]) {
 	margin: 0;
 }
 
-.woocommerce form.checkout_coupon, .woocommerce form.login, .woocommerce form.register {
+.woocommerce form.checkout_coupon,
+.woocommerce form.login,
+.woocommerce form.register {
 	padding: 20px 0;
 }
 
 .woocommerce div.product form.cart {
 	margin-bottom: 1.5em;
+}
+
+.woocommerce-error {
+	border-top-color: $danger;
+	&::before {
+		content: "\e016";
+		color: #b81c23;
+	}
+}
+
+.woocommerce-error,
+.woocommerce-info,
+.woocommerce-message {
+	padding: 1em 2em 1em 3.5em;
+	margin: 2em 0;
+	position: relative;
+	background-color: #f7f6f7;
+	color: #515151;
+	border-top: 3px solid #a46497;
+	list-style: none outside;
+	width: auto;
+	word-wrap: break-word;
 }
