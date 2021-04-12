@@ -30,7 +30,7 @@ if ( ! function_exists( 'polen_setup' ) ) :
 		 * If you're building a theme based on Polen, use a find and replace
 		 * to change 'polen' to the name of your theme in all the template files.
 		 */
-		load_theme_textdomain( 'polen', get_template_directory() . '/languages' );
+		load_theme_textdomain( 'polen', TEMPLATE_DIR . '/languages' );
 
 		// Add default posts and comments RSS feed links to head.
 		//add_theme_support( 'automatic-feed-links' );
@@ -172,7 +172,7 @@ function polen_scripts() {
 
 	// wp_enqueue_style('font-poppins', 'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap', array(), '1.0.0');
 	// wp_enqueue_style('font-inter', 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap', array(), '1.0.0');
-	wp_enqueue_style('polen-custom-styles', TEMPLATE_URI . '/assets/css/style.min.css', array(), _S_VERSION);
+	wp_enqueue_style('polen-custom-styles', TEMPLATE_URI . '/assets/css/style.css', array(), _S_VERSION);
 
 	if(is_singular() && is_product()) {
 		wp_enqueue_script( 'slick-slider', TEMPLATE_URI . '/assets/slick/slick.min.js', array("jquery"), _S_VERSION, true );
@@ -207,35 +207,35 @@ add_action( 'wp_enqueue_scripts', 'polen_scripts' );
 /**
  * File responsible to utils functions
  */
-require_once get_template_directory() . '/inc/utils.php';
+require_once TEMPLATE_DIR . '/inc/utils.php';
 
 /**
  * Implement the Custom Header feature.
  */
-require get_template_directory() . '/inc/custom-header.php';
+require TEMPLATE_DIR . '/inc/custom-header.php';
 
 /**
  * Functions which enhance the theme by hooking into WordPress.
  */
-require get_template_directory() . '/inc/template-functions.php';
+require TEMPLATE_DIR . '/inc/template-functions.php';
 
 /**
  * Customizer additions.
  */
-require get_template_directory() . '/inc/customizer.php';
+require TEMPLATE_DIR . '/inc/customizer.php';
 
 
 /**
  * Components.
  */
-require get_template_directory() . '/inc/components.php';
+require TEMPLATE_DIR . '/inc/components.php';
 
 /**
  * File responsible to get all collection for front
  */
-require_once get_template_directory() . '/inc/collection-front.php';
+require_once TEMPLATE_DIR . '/inc/collection-front.php';
 
 /**
  * Arquivo responsavel por retornos HTML e icones
  */
-require_once get_template_directory() . '/classes/Icon_Class.php';
+require_once TEMPLATE_DIR . '/classes/Icon_Class.php';

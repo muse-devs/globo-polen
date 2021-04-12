@@ -4,8 +4,12 @@ function polen_front_get_banner()
 {
 ?>
 	<section class="top-banner mb-4">
-		<video class="video" autoplay muted loop playsinline poster="<?= TEMPLATE_URI; ?>/assets/img/video_poster.jpg">
+		<video class="video video-mobile" autoplay muted loop playsinline poster="<?= TEMPLATE_URI; ?>/assets/img/video_poster1.jpg">
 			<source src="<?= TEMPLATE_URI; ?>/assets/video/home1.m4v" type="video/mp4">
+			<!-- <source src="movie.ogg" type="video/ogg"> -->
+		</video>
+		<video class="video video-desktop" autoplay muted loop playsinline poster="<?= TEMPLATE_URI; ?>/assets/img/video_poster2.jpg">
+			<source src="<?= TEMPLATE_URI; ?>/assets/video/home2.m4v" type="video/mp4">
 			<!-- <source src="movie.ogg" type="video/ogg"> -->
 		</video>
 		<div class="content">
