@@ -24,7 +24,7 @@ function get_form_login()
 {
 ?>
 	<div class="row">
-		<div class="col-12 tab-login">
+		<div class="col-12 col-md-5 mx-md-auto tab-login">
 
 			<div class="col-12 text-center">
 				<h2><?php esc_html_e('Login', 'woocommerce'); ?></h2>
