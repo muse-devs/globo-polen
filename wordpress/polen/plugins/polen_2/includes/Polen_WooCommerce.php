@@ -4,16 +4,7 @@ namespace Polen\Includes;
 
 class Polen_WooCommerce 
 {
-
     public function __construct( $static = false ) 
-    {
-        if( $static ) {
-            add_action( 'init', array( $this, 'register_custom_order_statuses' ) );
-            add_filter( 'wc_order_statuses', array( $this, 'add_custom_order_statuses' ) );
-        }
-    }
-
-    public function register_custom_order_statuses() 
     {
         $this->order_statuses = array(
             'wc-payment-in-revision' => array(
@@ -58,6 +49,24 @@ class Polen_WooCommerce
             ),
         );
 
+        if( $static ) {
+            add_action( 'init', array( $this, 'register_custom_order_statuses' ) );
+            add_filter( 'wc_order_statuses', array( $this, 'add_custom_order_statuses' ) );
+            add_filter( 'bulk_actions-edit-shop_order', array( $this, 'dropdown_bulk_actions_shop_order' ), 20, 1 );
+            add_filter( 'woocommerce_email_actions', array( $this, 'email_actions' ), 20, 1 );
+
+            add_action( 'init', function( $array ) {
+                foreach ( $this->order_statuses as $order_status => $values ) 
+                {
+                    $action_hook = 'woocommerce_order_status_' . $order_status;
+                    add_action( $action_hook, array( WC(), 'send_transactional_email' ), 10, 1 );
+                }
+            } );
+        }
+    }
+
+    public function register_custom_order_statuses() 
+    {
         foreach ( $this->order_statuses as $order_status => $values ) 
         {
 			register_post_status( $order_status, $values );
@@ -71,6 +80,24 @@ class Polen_WooCommerce
 			$order_statuses[ $order_status ] = $values[ 'label' ];
 		}
         return $order_statuses;
+    }
+
+    function dropdown_bulk_actions_shop_order( $actions ) 
+    {
+        foreach ( $this->order_statuses as $order_status => $values ) 
+        {
+			$actions[ $order_status ] = $values[ 'label' ];
+		}
+        return $actions;
+    }
+
+    function email_actions( $actions ) 
+    {
+        foreach ( $this->order_statuses as $order_status => $values ) 
+        {
+			$actions[] = 'woocommerce_order_status_' . $order_status;
+		}
+        return $actions;
     }
 
 }
