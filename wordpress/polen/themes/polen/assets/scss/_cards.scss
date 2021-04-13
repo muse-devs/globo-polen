@@ -247,11 +247,17 @@
 						}
 						@include media-breakpoint-only(md) {
 							width: 126px;
+							.image {
+								height: 165px;
+							}
 						}
 						@include media-breakpoint-only(lg) {
 							width: 142px;
 						}
 						@include media-breakpoint-only(xl) {
+							.image {
+								height: 200px;
+							}
 						}
 					}
 					@include media-breakpoint-only(md) {
