@@ -21,8 +21,7 @@ get_header();
 	<?php polen_front_get_banner();
 	?>
 
-	<?php polen_banner_scrollable(polen_get_new_talents(12), "Destaque", "#destaque"); ?>
-
+	<?php polen_banner_scrollable(polen_get_new_talents(6), "Destaque", "#destaque"); ?>
 
 	<?php polen_front_get_tutorial(); ?>
 

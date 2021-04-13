@@ -4,17 +4,21 @@ function polen_front_get_banner()
 {
 ?>
 	<section class="top-banner mb-4">
-		<video class="video video-mobile" autoplay muted loop playsinline poster="<?= TEMPLATE_URI; ?>/assets/img/video_poster1.jpg">
-			<source src="<?= TEMPLATE_URI; ?>/assets/video/home1.m4v" type="video/mp4">
-			<!-- <source src="movie.ogg" type="video/ogg"> -->
-		</video>
-		<video class="video video-desktop" autoplay muted loop playsinline poster="<?= TEMPLATE_URI; ?>/assets/img/video_poster2.jpg">
-			<source src="<?= TEMPLATE_URI; ?>/assets/video/home2.m4v" type="video/mp4">
-			<!-- <source src="movie.ogg" type="video/ogg"> -->
-		</video>
+		<?php if (polen_is_mobile()) : ?>
+			<video class="video video-mobile" autoplay muted loop playsinline poster="<?= TEMPLATE_URI; ?>/assets/img/video_poster1.jpg">
+				<source src="<?= TEMPLATE_URI; ?>/assets/video/home1.m4v" type="video/mp4">
+				<!-- <source src="movie.ogg" type="video/ogg"> -->
+			</video>
+		<?php endif; ?>
+		<?php if (!polen_is_mobile()) : ?>
+			<video class="video video-desktop" autoplay muted loop playsinline poster="<?= TEMPLATE_URI; ?>/assets/img/video_poster2.jpg">
+				<source src="<?= TEMPLATE_URI; ?>/assets/video/home2.m4v" type="video/mp4">
+				<!-- <source src="movie.ogg" type="video/ogg"> -->
+			</video>
+		<?php endif; ?>
 		<div class="content">
 			<h2 class="title">Presenteie e<br />surpreenda com vídeos personalizados.</h2>
-			<a href="#como" class="player-button-link">Como funciona</a>
+			<!-- <a href="#como" class="player-button-link">Como funciona</a> -->
 		</div>
 	</section>
 <?php
@@ -46,10 +50,10 @@ function polen_front_get_card($item, $size = "small")
 				</a>
 				<span class="price"><span class="mr-2"><?php Icon_Class::polen_icon_camera_video(); ?></span>R$<?= $item["price"]; ?></span>
 			</figure>
-			<h4 class="title">
+			<h4 class="title text-truncate">
 				<a href="<?= $item["talent_url"]; ?>"><?= $item["name"]; ?></a>
 			</h4>
-			<h5 class="category">
+			<h5 class="category text-truncate">
 				<a href="<?= $item["category_url"]; ?>"><?= $item["category"]; ?></a>
 			</h5>
 		</div>

@@ -180,10 +180,10 @@ function polen_scripts() {
 		wp_enqueue_script( 'talent-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'talent.js', array("slick-slider", "vimeo"), _S_VERSION, true );
 	}
 
-	if( is_front_page()) {
-		wp_enqueue_script( 'slick-slider', TEMPLATE_URI . '/assets/slick/slick.min.js', array("jquery"), _S_VERSION, true );
-		wp_enqueue_script( 'home-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'front-page.js', array("slick-slider"), _S_VERSION, true );
-	}
+	// if( is_front_page()) {
+	// 	wp_enqueue_script( 'slick-slider', TEMPLATE_URI . '/assets/slick/slick.min.js', array("jquery"), _S_VERSION, true );
+	// 	wp_enqueue_script( 'home-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'front-page.js', array("slick-slider"), _S_VERSION, true );
+	// }
 
 	if( is_cart() ) {
 		wp_enqueue_script( 'polen-cart', TEMPLATE_URI . '/assets/js/cart' . $min . '.js', array("jquery"), _S_VERSION, true );

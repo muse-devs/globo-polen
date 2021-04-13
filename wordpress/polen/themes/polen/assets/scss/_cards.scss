@@ -61,19 +61,10 @@
 	&.medium,
 	&.responsive {
 		.image {
-			width: 156px;
+			width: 100%;
 			height: 190px;
 			@include media-breakpoint-down(sm) {
-				width: 40vw;
 				height: 50vw;
-			}
-			@include media-breakpoint-only(sm) {
-			}
-			@include media-breakpoint-only(md) {
-			}
-			@include media-breakpoint-only(lg) {
-			}
-			@include media-breakpoint-only(xl) {
 			}
 		}
 	}
@@ -86,8 +77,8 @@
 		}
 	}
 	.title {
-		margin-top: 32px;
-		line-height: 0;
+		// margin-top: 32px;
+		line-height: 1;
 		font-weight: 700;
 		@include media-breakpoint-down(sm) {
 			margin-bottom: 10px;
@@ -181,7 +172,35 @@
 			}
 		}
 	}
-	@include media-breakpoint-only(xs) {
+	@include media-breakpoint-down(sm) {
+		.video-mobile {
+			display: block;
+		}
+		.video-desktop {
+			display: none;
+		}
+	}
+	@include media-breakpoint-up(md) {
+		height: 269px;
+		max-width: none;
+		.video {
+			width: 100%;
+		}
+		.video-mobile {
+			display: none;
+		}
+		.video-desktop {
+			display: block;
+		}
+	}
+	@include media-breakpoint-only(md) {
+		height: 184px;
+	}
+	@include media-breakpoint-only(lg) {
+		height: 247px;
+	}
+	@include media-breakpoint-only(xl) {
+		height: 269px;
 	}
 }
 
@@ -211,12 +230,56 @@
 			&::-webkit-scrollbar {
 				display: none;
 			}
-			@include media-breakpoint-only(md) {
-				flex-wrap: wrap;
+			.polen-card:not(.type-video) {
+				width: calc(44.13vw - 15px);
 			}
-			.polen-card.type-video, > .responsive {
+			@include media-breakpoint-up(md) {
+				padding-left: 15px;
+				flex-wrap: wrap;
+				.responsive {
+					margin-bottom: 1rem;
+					.polen-card {
+						width: 156px;
+						@include media-breakpoint-down(sm) {
+							width: 40vw;
+						}
+						@include media-breakpoint-only(sm) {
+						}
+						@include media-breakpoint-only(md) {
+							width: 126px;
+						}
+						@include media-breakpoint-only(lg) {
+							width: 142px;
+						}
+						@include media-breakpoint-only(xl) {
+						}
+					}
+					@include media-breakpoint-only(md) {
+						&:nth-child(5n + 0) {
+							.polen-card {
+								margin-right: 0;
+							}
+						}
+					}
+					@include media-breakpoint-up(lg) {
+						&:nth-child(6n + 0) {
+							.polen-card {
+								margin-right: 0;
+							}
+						}
+					}
+				}
+				.polen-card.responsive {
+					margin: 0 15px 0 0;
+				}
+			}
+			.polen-card.type-video,
+			> .responsive {
 				&:first-child {
 					margin-left: 15px;
+					@include media-breakpoint-up(md) {
+						margin-left: 0;
+					}
 				}
 			}
 		}

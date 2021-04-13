@@ -468,7 +468,7 @@ pre {
 
 @media (min-width: 1200px) {
   .container, .container-sm, .container-md, .container-lg, .container-xl {
-    max-width: 1140px; } }
+    max-width: 1040px; } }
 
 .row {
   display: flex;
@@ -8086,11 +8086,10 @@ input[type="file"] {
   margin-right: 15px; }
 
 .polen-card.medium .image, .polen-card.responsive .image {
-  width: 156px;
+  width: 100%;
   height: 190px; }
   @media (max-width: 767.98px) {
     .polen-card.medium .image, .polen-card.responsive .image {
-      width: 40vw;
       height: 50vw; } }
 
 .polen-card .title,
@@ -8102,8 +8101,7 @@ input[type="file"] {
     color: white; }
 
 .polen-card .title {
-  margin-top: 32px;
-  line-height: 0;
+  line-height: 1;
   font-weight: 700; }
   @media (max-width: 767.98px) {
     .polen-card .title {
@@ -8176,6 +8174,30 @@ input[type="file"] {
     .top-banner .content .title {
       margin-bottom: 30px;
       font-size: 24px; }
+  @media (max-width: 767.98px) {
+    .top-banner .video-mobile {
+      display: block; }
+    .top-banner .video-desktop {
+      display: none; } }
+  @media (min-width: 768px) {
+    .top-banner {
+      height: 269px;
+      max-width: none; }
+      .top-banner .video {
+        width: 100%; }
+      .top-banner .video-mobile {
+        display: none; }
+      .top-banner .video-desktop {
+        display: block; } }
+  @media (min-width: 768px) and (max-width: 991.98px) {
+    .top-banner {
+      height: 184px; } }
+  @media (min-width: 992px) and (max-width: 1199.98px) {
+    .top-banner {
+      height: 247px; } }
+  @media (min-width: 1200px) {
+    .top-banner {
+      height: 269px; } }
 
 .slick-alt {
   width: 130%;
@@ -8200,11 +8222,41 @@ input[type="file"] {
     /* Firefox */ }
     .banner-scrollable .banner-wrapper .banner-content::-webkit-scrollbar {
       display: none; }
-    @media (min-width: 768px) and (max-width: 991.98px) {
+    .banner-scrollable .banner-wrapper .banner-content .polen-card:not(.type-video) {
+      width: calc(44.13vw - 15px); }
+    @media (min-width: 768px) {
       .banner-scrollable .banner-wrapper .banner-content {
-        flex-wrap: wrap; } }
-    .banner-scrollable .banner-wrapper .banner-content .polen-card.type-video:first-child, .banner-scrollable .banner-wrapper .banner-content > .responsive:first-child {
+        padding-left: 15px;
+        flex-wrap: wrap; }
+        .banner-scrollable .banner-wrapper .banner-content .responsive {
+          margin-bottom: 1rem; }
+          .banner-scrollable .banner-wrapper .banner-content .responsive .polen-card {
+            width: 156px; } }
+      @media (min-width: 768px) and (max-width: 767.98px) {
+        .banner-scrollable .banner-wrapper .banner-content .responsive .polen-card {
+          width: 40vw; } }
+      @media (min-width: 768px) and (min-width: 768px) and (max-width: 991.98px) {
+        .banner-scrollable .banner-wrapper .banner-content .responsive .polen-card {
+          width: 126px; } }
+      @media (min-width: 768px) and (min-width: 992px) and (max-width: 1199.98px) {
+        .banner-scrollable .banner-wrapper .banner-content .responsive .polen-card {
+          width: 142px; } }
+    @media (min-width: 768px) and (min-width: 768px) and (max-width: 991.98px) {
+      .banner-scrollable .banner-wrapper .banner-content .responsive:nth-child(5n + 0) .polen-card {
+        margin-right: 0; } }
+    @media (min-width: 768px) and (min-width: 992px) {
+      .banner-scrollable .banner-wrapper .banner-content .responsive:nth-child(6n + 0) .polen-card {
+        margin-right: 0; } }
+    @media (min-width: 768px) {
+        .banner-scrollable .banner-wrapper .banner-content .polen-card.responsive {
+          margin: 0 15px 0 0; } }
+    .banner-scrollable .banner-wrapper .banner-content .polen-card.type-video:first-child,
+    .banner-scrollable .banner-wrapper .banner-content > .responsive:first-child {
       margin-left: 15px; }
+      @media (min-width: 768px) {
+        .banner-scrollable .banner-wrapper .banner-content .polen-card.type-video:first-child,
+        .banner-scrollable .banner-wrapper .banner-content > .responsive:first-child {
+          margin-left: 0; } }
 
 .banner-scrollable .video-cover {
   position: relative;
@@ -8830,6 +8882,15 @@ select.form-control:not([size]):not([multiple]) {
   font-size: 16px;
   font-weight: 700; }
   .copyright .social > * {
-    margin: 0 8%; }
+    margin: 0 6%; }
+    @media (min-width: 768px) {
+      .copyright .social > * {
+        margin: 0 10px; } }
+  .copyright .social a {
+    display: inline-block;
+    width: 30px;
+    font-size: 16px; }
+    .copyright .social a:hover {
+      text-decoration: none; }
 
 /*# sourceMappingURL=maps/style.css.map */

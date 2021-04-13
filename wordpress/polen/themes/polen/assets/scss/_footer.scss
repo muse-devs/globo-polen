@@ -35,7 +35,18 @@
 	font-weight: 700;
 	.social {
 		> * {
-			margin: 0 8%;
+			margin: 0 6%;
+			@include media-breakpoint-up(md) {
+				margin: 0 10px;
+			}
+		}
+		a {
+			display: inline-block;
+			width: 30px;
+			font-size: 16px;
+			&:hover {
+				text-decoration: none;
+			}
 		}
 	}
 }
