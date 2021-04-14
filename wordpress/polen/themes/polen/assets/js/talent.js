@@ -3,13 +3,39 @@ var video_box = document.getElementById("video-box");
 var share_button = document.querySelectorAll(".share-button");
 
 jQuery(document).ready(function () {
-	jQuery(".talent-carousel").slick({
+	jQuery(".banner-content.type-video").slick({
 		arrows: false,
-		infinite: true,
+		infinite: false,
 		speed: 300,
-		slidesToShow: 2,
-		slidesToScroll: 1,
-		// variableWidth: true,
+		slidesToShow: 5,
+		slidesToScroll: 3,
+		responsive: [
+			{
+				breakpoint: 1024,
+				settings: {
+					slidesToShow: 4,
+					slidesToScroll: 1,
+				},
+			},
+			{
+				breakpoint: 768,
+				settings: {
+					slidesToShow: 3,
+					slidesToScroll: 1,
+				},
+			},
+			{
+				breakpoint: 600,
+				settings: {
+					slidesToShow: 2,
+					slidesToScroll: 2,
+				},
+			},
+			{
+				breakpoint: 480,
+				settings: "unslick",
+			},
+		],
 	});
 	var id = window.location.hash.substring(1);
 	if (id) {

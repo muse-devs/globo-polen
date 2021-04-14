@@ -4,12 +4,10 @@ function polen_front_get_banner()
 {
 ?>
 	<section class="top-banner mb-4">
-		<?php if (polen_is_mobile()) : ?>
-			<video class="video video-mobile" autoplay muted loop playsinline poster="<?= TEMPLATE_URI; ?>/assets/img/video_poster1.jpg">
-				<source src="<?= TEMPLATE_URI; ?>/assets/video/home1.m4v" type="video/mp4">
-				<!-- <source src="movie.ogg" type="video/ogg"> -->
-			</video>
-		<?php endif; ?>
+		<video class="video video-mobile" autoplay muted loop playsinline poster="<?= TEMPLATE_URI; ?>/assets/img/video_poster1.jpg">
+			<source src="<?= TEMPLATE_URI; ?>/assets/video/home1.m4v" type="video/mp4">
+			<!-- <source src="movie.ogg" type="video/ogg"> -->
+		</video>
 		<?php if (!polen_is_mobile()) : ?>
 			<video class="video video-desktop" autoplay muted loop playsinline poster="<?= TEMPLATE_URI; ?>/assets/img/video_poster2.jpg">
 				<source src="<?= TEMPLATE_URI; ?>/assets/video/home2.m4v" type="video/mp4">
@@ -230,10 +228,17 @@ function polen_front_get_talent_videos($talent, $items = array(
 	array("title" => "Video 1", "image" => "http://i.vimeocdn.com/video/1106294518_640.jpg", "video" => "https://vimeo.com/534168147"),
 	array("title" => "Video 2", "image" => "https://i.vimeocdn.com/video/1106293939_640.jpg", "video" => "https://vimeo.com/534171508"),
 	array("title" => "Video 3", "image" => "http://i.vimeocdn.com/video/1106294834_640.jpg", "video" => "https://vimeo.com/534173040"),
+	array("title" => "Video 1", "image" => "http://i.vimeocdn.com/video/1106294518_640.jpg", "video" => "https://vimeo.com/534168147"),
+	array("title" => "Video 2", "image" => "https://i.vimeocdn.com/video/1106293939_640.jpg", "video" => "https://vimeo.com/534171508"),
+	array("title" => "Video 3", "image" => "http://i.vimeocdn.com/video/1106294834_640.jpg", "video" => "https://vimeo.com/534173040"),
+	array("title" => "Video 1", "image" => "http://i.vimeocdn.com/video/1106294518_640.jpg", "video" => "https://vimeo.com/534168147"),
+	array("title" => "Video 2", "image" => "https://i.vimeocdn.com/video/1106293939_640.jpg", "video" => "https://vimeo.com/534171508"),
+	array("title" => "Video 3", "image" => "http://i.vimeocdn.com/video/1106294834_640.jpg", "video" => "https://vimeo.com/534173040"),
+	array("title" => "Video 3", "image" => "http://i.vimeocdn.com/video/1106294834_640.jpg", "video" => "https://vimeo.com/534173040"),
 ))
 {
 ?>
-	<section class="row mb-4 banner-scrollable">
+	<section class="row my-4 banner-scrollable">
 		<div class="col-md-12" style="padding: 0;">
 			<div class="banner-wrapper">
 				<div class="banner-content type-video">

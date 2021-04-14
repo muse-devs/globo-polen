@@ -10,7 +10,7 @@ if ($polen_talent->is_user_talent($current_user)) {
 	<section class="talent-dashboard-start mt-4">
 		<header class="page-header">
 			<div class="row">
-				<div class="co-12 col-md-8">
+				<div class="co-12 col-md-12">
 					<h1 class="page-title"><?php esc_html_e('Início', 'polen'); ?></h1>
 					<h2>Bem-vindo, <?php echo $current_user->display_name; ?></h2>
 					<p>Aceite ou recuse seus pedidos de vídeos.</p>
@@ -23,11 +23,11 @@ if ($polen_talent->is_user_talent($current_user)) {
 				<div class="col-md-12">
 					<div class="msg msg-header">
 						<div class="row">
-							<div class="col-md-6">
+							<div class="col-md-6 mb-3">
 								<p class="p">Você já ganhou</p>
 								<span class="value"><?php echo $polen_talent->get_total_by_order_status($current_user->ID, 'wc-completed'); ?></span>
 							</div>
-							<div class="col-md-6 mt-3">
+							<div class="col-md-6">
 								<p class="p">Você tem para receber</p>
 								<span class="value"><?php echo $polen_talent->get_total_by_order_status($current_user->ID); ?></span>
 							</div>
@@ -48,17 +48,14 @@ if ($polen_talent->is_user_talent($current_user)) {
 								</div>
 							</div>
 							<div class="row">
-								<div class="col-12 col-md-8">
+								<div class="col-12 col-md-8 mx-md-auto">
 									<div class="row">
 										<div class="col-12 col-md-12">
-											<div>
+											<div class="text-md-center">
 												<p class="p small">Invista hoje</p>
 												<span class="value small"><?php echo $total_time; ?></span>
 											</div>
-											<!-- <div class="mx-5">
-												<?php Icon_Class::polen_icon_arrows(); ?>
-											</div> -->
-											<div>
+											<div class="text-md-center">
 												<p class="p small mt-3">E receba até</p>
 												<span class="value small"><?php echo $polen_talent->get_total_by_order_status($current_user->ID); ?></span>
 											</div>

@@ -53,7 +53,7 @@ class WP_User_Avatar_Functions {
     // First checking custom avatar.
     if( has_wp_user_avatar( $user_id ) ) {
 
-      $url = $this->get_wp_user_avatar_src( $user_id, isset($args['size']) ? $args['size'] : '' );
+      $url = $this->get_wp_user_avatar_src( $user_id );
 
     } else if( $wpua_disable_gravatar ) {
 

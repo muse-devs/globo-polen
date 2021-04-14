@@ -40,46 +40,47 @@ $Talent_Fields = new Polen_Update_Fields();
 		</div>
 	</div>
 </div> -->
+<div class="row">
+	<div class="col-12 col-md-6 order-md-2 mt-md-2">
+		<?php
+		foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
+			$product_id = apply_filters('woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key);
+			$_product   = apply_filters('woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key);
+			$talent_id = get_post_field('post_author', $product_id);
+			$thumbnail = wp_get_attachment_image_src($_product->get_image_id(), 'thumbnail')[0];
+			$talent = get_user_by('id', $talent_id);
 
-<?php
-foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
-    $product_id = apply_filters('woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key);
-    $_product   = apply_filters('woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key);
-    $talent_id = get_post_field('post_author', $product_id);
-    $thumbnail = wp_get_attachment_image_src($_product->get_image_id(), 'thumbnail')[0];
-    $talent = get_user_by('id', $talent_id);
+			$talent_data = $Talent_Fields->get_vendor_data($talent_id);
 
-    $talent_data = $Talent_Fields->get_vendor_data( $talent_id );
-
-    $talent_cart_detail = array(
-        "has_details" => true,
-        "avatar" => $thumbnail,
-        "name" => $_product->get_title(),
-        "career" => $talent_data->profissao,
-        "price" => $_product->get_price_html(),
-        "from" => $cart_item['offered_by'],
-        "to" => $cart_item['name_to_video'],
-        "category" => $cart_item['video_category'],
-        "mail" => $cart_item['email_to_video'],
-        "description" => $cart_item['instructions_to_video']
-    );
-}
-polen_get_talent_card( $talent_cart_detail ); ?>
-
-<form name="checkout" method="post" class="checkout woocommerce-checkout" action="<?php echo esc_url(wc_get_checkout_url()); ?>" enctype="multipart/form-data">
-	<div class="row">
-		<div class="col-md-8">
-			<?php
-				if( is_user_logged_in() && get_current_user_id() > 0 ){ ?>
+			$talent_cart_detail = array(
+				"has_details" => true,
+				"avatar" => $thumbnail,
+				"name" => $_product->get_title(),
+				"career" => $talent_data->profissao,
+				"price" => $_product->get_price_html(),
+				"from" => $cart_item['offered_by'],
+				"to" => $cart_item['name_to_video'],
+				"category" => $cart_item['video_category'],
+				"mail" => $cart_item['email_to_video'],
+				"description" => $cart_item['instructions_to_video']
+			);
+		}
+		polen_get_talent_card($talent_cart_detail); ?>
+	</div>
+	<form name="checkout" method="post" class="checkout woocommerce-checkout col-12 col-md-6 order-md-1" action="<?php echo esc_url(wc_get_checkout_url()); ?>" enctype="multipart/form-data">
+		<div class="row">
+			<div class="col-md-12">
+				<?php
+				if (is_user_logged_in() && get_current_user_id() > 0) { ?>
 					<!-- <h3>Você está logado como:</h3> -->
-			<?php   $user_id = get_current_user_id();
-					$user_data = get_userdata( $user_id );
+				<?php $user_id = get_current_user_id();
+					$user_data = get_userdata($user_id);
 					// echo $user_data->display_name;
 				}
-			?>
-			<!-- Cabeçalho do Artista -->
-			<?php
-			/*
+				?>
+				<!-- Cabeçalho do Artista -->
+				<?php
+				/*
 			foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) :
 				$_product   = apply_filters('woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key);
 				$product_id = apply_filters('woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key);
@@ -148,56 +149,57 @@ polen_get_talent_card( $talent_cart_detail ); ?>
 					</div>
 				<?php endif; ?>
 			<?php endforeach; */
-			?>
+				?>
 
-			<?php if ($checkout->get_checkout_fields()) : ?>
+				<?php if ($checkout->get_checkout_fields()) : ?>
 
-				<?php do_action('woocommerce_checkout_before_customer_details'); ?>
+					<?php do_action('woocommerce_checkout_before_customer_details'); ?>
 
-				<div class="row" id="customer_details">
-					<div class="col-12">
-						<?php do_action('woocommerce_checkout_billing'); ?>
+					<div class="row" id="customer_details">
+						<div class="col-12 col-md-12">
+							<?php do_action('woocommerce_checkout_billing'); ?>
+						</div>
+
+						<div class="col-12 col-md-12">
+							<?php do_action('woocommerce_checkout_shipping'); ?>
+						</div>
 					</div>
 
-					<div class="col-12">
-						<?php do_action('woocommerce_checkout_shipping'); ?>
-					</div>
-				</div>
+					<?php do_action('woocommerce_checkout_after_customer_details'); ?>
 
-				<?php do_action('woocommerce_checkout_after_customer_details'); ?>
+				<?php endif; ?>
 
-			<?php endif; ?>
+				<?php woocommerce_checkout_payment(); ?>
 
-			<?php woocommerce_checkout_payment();?>
+			</div>
+			<div class="col-md-12" style="display: none;">
 
-		</div>
-		<div class="col-md-4" style="display: none;">
+				<?php do_action('woocommerce_checkout_before_order_review_heading'); ?>
 
-			<?php do_action('woocommerce_checkout_before_order_review_heading'); ?>
+				<h3 id="order_review_heading" class="title-alt"><?php esc_html_e('Resumo da compra', 'polen'); ?></h3>
 
-			<h3 id="order_review_heading" class="title-alt"><?php esc_html_e('Resumo da compra', 'polen'); ?></h3>
+				<?php do_action('woocommerce_checkout_before_order_review'); ?>
 
-			<?php do_action('woocommerce_checkout_before_order_review'); ?>
-
-			<?php
-			/* pagamento está na mesma action do review
+				<?php
+				/* pagamento está na mesma action do review
 			<div id="order_review" class="woocommerce-checkout-review-order">
 				<?php do_action( 'woocommerce_checkout_order_review' ); ?>
 			</div>
 				*/
-			woocommerce_order_review();
-			?>
-			<?php do_action('woocommerce_checkout_after_order_review'); ?>
+				woocommerce_order_review();
+				?>
+				<?php do_action('woocommerce_checkout_after_order_review'); ?>
+			</div>
 		</div>
-	</div>
 
-	<div class="row">
-		<div class="col-md-8">
-			<?php
-			//woocommerce_checkout_payment();
-			?>
+		<div class="row">
+			<div class="col-md-12">
+				<?php
+				//woocommerce_checkout_payment();
+				?>
+			</div>
 		</div>
-	</div>
-</form>
+	</form>
+</div>
 
 <?php do_action('woocommerce_after_checkout_form', $checkout); ?>

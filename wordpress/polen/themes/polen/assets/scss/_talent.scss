@@ -15,6 +15,9 @@
 		top: 0;
 		background: linear-gradient(360deg, #000 0%, rgba(0, 0, 0, 0) 100%);
 	}
+	img {
+		width: 100%;
+	}
 	@include media-breakpoint-down(xs) {
 		display: none;
 	}
@@ -103,7 +106,8 @@
 	position: fixed;
 	display: none;
 	top: 0;
-	left: 0;
+	left: 50%;
+	transform: translate(-50%, 0);
 	width: 100vw;
 	height: 100vh;
 	overflow: auto;
@@ -124,6 +128,9 @@
 	background-color: $talent-bg-color;
 	overflow: hidden;
 	font-family: $font-primary;
+	@include media-breakpoint-up(md) {
+		width: 450px;
+	}
 	.polen-video {
 		max-width: 100%;
 		background-color: $secondary-bg-color;
