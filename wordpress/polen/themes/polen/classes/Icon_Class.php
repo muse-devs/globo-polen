@@ -96,6 +96,11 @@ class Icon_Class
 		echo '<i class="bi bi-chevron-right"></i>';
 	}
 
+	public static function polen_icon_chevron_left()
+	{
+		echo '<i class="bi bi-chevron-left"></i>';
+	}
+
 	public static function polen_icon_close()
 	{
 		echo '<i class="bi bi-x"></i>';

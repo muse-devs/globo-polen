@@ -66,16 +66,16 @@ $terms = wp_get_object_terms(get_the_ID(), 'product_tag');
 	</div>
 
 	<div class="row my-3 pb-2 talent-page-footer">
-		<div class="col-12 col-md-6 order-md-2">
+		<div class="col-12 col-md-6 m-md-auto">
 			<?php echo woocommerce_template_single_add_to_cart(); ?>
 			<!--button class="btn btn-primary btn-lg btn-block btn-get-video">Pedir vídeo R$ 200</button-->
 		</div>
-		<div class="col-md-6 order-md-1">
+		<div class="col-md-12">
 			<div class="row">
-				<div class="col-md-12 text-center text-md-right">
+				<div class="col-md-12 text-center text-md-center">
 					<span class="skill-title">Responde em</span>
 				</div>
-				<div class="col-md-12 text-center text-md-right mt-2">
+				<div class="col-md-12 text-center text-md-center mt-2">
 					<?php Icon_Class::polen_icon_clock(); ?>
 					<span class="skill-value"><?= $Talent_Fields->tempo_resposta; ?>h</span>
 				</div>
