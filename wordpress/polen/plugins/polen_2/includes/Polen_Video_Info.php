@@ -108,7 +108,7 @@ class Polen_Video_Info extends Polen_DB
      * @param array $where
      * @return type
      */
-    public function update( array $where = null )
+    public function update( array $_ = null )
     {
         $where = array( 'ID' => $this->ID );
         return parent::update( $where );
