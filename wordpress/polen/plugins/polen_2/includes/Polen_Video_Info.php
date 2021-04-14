@@ -18,6 +18,7 @@ class Polen_Video_Info extends Polen_DB
     public $vimeo_thumbnail;
     public $vimeo_process_complete;
     public $vimeo_url_download;
+    public $vimeo_link;
     
     function __construct( int $id = null )
     {
@@ -33,6 +34,7 @@ class Polen_Video_Info extends Polen_DB
                 $this->vimeo_thumbnail = $object->vimeo_thumbnail;
                 $this->vimeo_process_complete = $object->vimeo_process_complete;
                 $this->vimeo_url_download = $object->vimeo_url_download;
+                $this->vimeo_link = $object->vimeo_link;
                 $this->valid = true;
             }
         }
@@ -63,6 +65,7 @@ class Polen_Video_Info extends Polen_DB
             'vimeo_thumbnail' => $this->vimeo_thumbnail,
             'vimeo_process_complete' => $this->vimeo_process_complete,
             'vimeo_url_download' => $this->vimeo_url_download,
+            'vimeo_link' => $this->vimeo_link
         );
         return $return;
     }
@@ -82,6 +85,7 @@ class Polen_Video_Info extends Polen_DB
             'vimeo_thumbnail' => $this->vimeo_thumbnail,
             'vimeo_process_complete' => $this->vimeo_process_complete,
             'vimeo_url_download' => $this->vimeo_url_download,
+            'vimeo_link' => $this->vimeo_link,
         );
         return $return;
     }
@@ -104,7 +108,7 @@ class Polen_Video_Info extends Polen_DB
      * @param array $where
      * @return type
      */
-    public function update()
+    public function update( array $where = null )
     {
         $where = array( 'ID' => $this->ID );
         return parent::update( $where );
@@ -150,11 +154,17 @@ class Polen_Video_Info extends Polen_DB
         $object->vimeo_process_complete = $data->vimeo_process_complete;
         $object->vimeo_thumbnail = $data->vimeo_thumbnail;
         $object->vimeo_url_download = $data->vimeo_url_download;
+        $object->vimeo_link = $data->vimeo_link;
         return $object;
     }
     
-    
-    static public function create_instance_many($data)
+    /**
+     * Cria um array de objectos do Polen_Video_Info
+     * 
+     * @param array $data
+     * @return array
+     */
+    static public function create_instance_many( $data )
     {
         $many_objects = array();
         foreach ( $data as $item ) {

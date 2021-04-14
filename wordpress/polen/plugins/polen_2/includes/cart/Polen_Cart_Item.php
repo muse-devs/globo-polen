@@ -89,8 +89,25 @@ class Polen_Cart_Item
     }
     
     
+    /**
+     * Pega se o video é permitido ser apresentado na pagina de detalhe do talento
+     * @return type
+     */
     public function get_public_in_detail_page()
     {
         return $this->item->get_meta( 'allow_video_on_page' );
+    }
+    
+    
+    /**
+     * Pega o talent_id
+     * @return type
+     */
+    public function get_talent_id()
+    {
+        $product_id = $this->item->get_product()->get_id();
+        $product_post = get_post( $product_id );
+        return $product_post->post_author;
+        
     }
 }

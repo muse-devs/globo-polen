@@ -517,14 +517,17 @@ class Polen_Talent {
      * Retorna os vídeos pelo id do talento
      */
     public function videos_by_talent_id( $talent_id ){
-        $arr_meta_video = array();
-        $arr_completed_orders = $this->get_talent_orders( $talent_id, 'wc-completed' );
-        if( is_array( $arr_completed_orders ) && !empty( $arr_completed_orders ) ){
-            foreach( $arr_completed_orders as $orders ):
-                $arr_meta_video[] = get_post_meta( $orders['order_id'], Polen_Order::METADATA_VIMEO_VIDEO_URL, true );
+        //TODO: nao é mais por post_meta a url do video
+        $arr_video_url = array();
+        $arr_completed_video_info = Polen_Video_Info::select_by_talent_id( $talent_id );
+//        $arr_completed_orders = $this->get_talent_orders( $talent_id, 'wc-completed' );
+        if( is_array( $arr_completed_video_infos ) && !empty( $arr_completed_video_info ) ){
+            foreach( $arr_completed_video_info as $video_info ):
+//                $arr_meta_video[] = get_post_meta( $orders['order_id'], Polen_Order::METADATA_VIMEO_VIDEO_URL, true );
+                $arr_video_url[] = $video_info->vimeo_link;
             endforeach;
         }
-        return $arr_meta_video;
+        return $arr_video_url;
     }
 
 }

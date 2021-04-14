@@ -231,18 +231,15 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
             $response = new Polen_Vimeo_Response( $lib->request( '/me/videos', $args, 'POST' ) );
 
             $order = wc_get_order( $order_id );
-//            $order->add_meta_data( Polen_Order::METADATA_VIMEO_VIDEO_ID, $response['body']['uri'], true );
-//            $order->add_meta_data( Polen_Order::METADATA_VIMEO_VIDEO_URL, $response['body']['link'], true );
-//            $order->add_meta_data( Polen_Order::METADATA_VIMEO_VIDEO_EMBED_CONTENT, '', true );
-//            $order->save();
+
             $cart_item = Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
             $video_info = new Polen_Video_Info();
             $video_info->is_public = $cart_item->get_public_in_detail_page();
             $video_info->order_id = $order_id;
-            $video_info->talent_id = '';
+            $video_info->talent_id = get_current_user_id();
             $video_info->vimeo_id = $response->get_vimeo_id();
             $video_info->vimeo_process_complete = 0;
-//            $video_info->vimeo_url_download = $response;
+            $video_info->vimeo_link = $response->get_vimeo_link();
             
             $video_info->insert();
             

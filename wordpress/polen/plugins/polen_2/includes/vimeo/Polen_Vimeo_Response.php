@@ -2,6 +2,9 @@
 
 namespace Polen\Includes\Vimeo;
 
+/**
+ * Polen_Vimeo_Response é uma classe para interpretar o response do Vimeo
+ */
 class Polen_Vimeo_Response
 {
     public $response;
