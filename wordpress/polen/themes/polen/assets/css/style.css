@@ -8023,7 +8023,7 @@ input[type="file"] {
   border-right-color: #fff; }
 
 .modal .modal-dialog {
-  margin: 0 0.5rem; }
+  margin: 0 auto; }
 
 .modal .modal-content {
   background-color: transparent; }
