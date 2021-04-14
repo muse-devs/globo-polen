@@ -129,6 +129,37 @@ class Polen_Video_Info extends Polen_DB
     static public function select_by_talent_id( int $talent_id )
     {
         $self_obj = new self();
-        return $self_obj->get_results( 'talent_id', $talent_id );
+        return self::create_instance_many( $self_obj->get_results( 'talent_id', $talent_id ) );
+    }
+    
+    /**
+     * Cria um objeto apartir de um array, geralmente vindo do BD
+     * ou seja transforma um resultado de DB para um Objecto
+     * 
+     * @param array $data
+     * @return Polen_Video_Info
+     */
+    static public function create_instance_one( $data )
+    {
+        $object = new self();
+        $object->is_public = $data->is_public;
+        $object->ID = $data->ID;
+        $object->order_id = $data->order_id;
+        $object->talent_id = $data->talent_id;
+        $object->vimeo_id = $data->vimeo_id;
+        $object->vimeo_process_complete = $data->vimeo_process_complete;
+        $object->vimeo_thumbnail = $data->vimeo_thumbnail;
+        $object->vimeo_url_download = $data->vimeo_url_download;
+        return $object;
+    }
+    
+    
+    static public function create_instance_many($data)
+    {
+        $many_objects = array();
+        foreach ( $data as $item ) {
+            $many_objects[] = self::create_instance_one( $item );
+        }
+        return $many_objects;
     }
 }

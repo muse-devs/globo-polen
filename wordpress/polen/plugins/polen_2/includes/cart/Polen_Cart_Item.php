@@ -87,4 +87,10 @@ class Polen_Cart_Item
     {
         return $this->item->get_meta( 'instructions_to_video' );
     }
+    
+    
+    public function get_public_in_detail_page()
+    {
+        return $this->item->get_meta( 'allow_video_on_page' );
+    }
 }

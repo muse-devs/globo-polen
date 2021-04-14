@@ -97,7 +97,7 @@ class Polen_DB
      */
     public function get_by_id( int $id )
     {
-        return $this->get( 'ID', $id, '%d' );
+        return self::create_instance_one( $this->get( 'ID', $id, '%d' ) );
     }
     
     /**
@@ -109,19 +109,29 @@ class Polen_DB
      */
     public function get( $field, $value, $format = "%s" )
     {
-        return $this->wpdb->get_row(
+        return self::create_instance_one( $this->wpdb->get_row(
             $this->wpdb->prepare( "SELECT * FROM {$this->table_name} WHERE {$field} = {$format};", $value )
-        );
+        ) );
     }
     
     
-    public function get_results( $field, $value )
+    public function get_results( $field, $value, $format = '%s' )
     {
-        return $this->wpdb->get_results(
+        return self::create_instance_many( $this->wpdb->get_results(
                 $this->wpdb->prepare(
-                        "SELECT * FROM {$this->table_name} WHERE {$field} = {$value};"
+                        "SELECT * FROM {$this->table_name} WHERE {$field} = {$format};", $value
                     )
-            );
+            ) );
+    }
+    
+    static public function create_instance_one( $data )
+    {
+        return $data;
+    }
+    
+    static public function create_instance_many( $data )
+    {
+        return $data;
     }
     
     
