@@ -8058,6 +8058,25 @@ input[type="file"] {
     border-top-color: #fff;
     border-right-color: #fff; }
 
+.avatar {
+  display: inline-block;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: no-repeat center/cover; }
+  .avatar.avatar-lg {
+    width: 120px;
+    height: 120px; }
+  .avatar.avatar-md {
+    width: 48px;
+    height: 48px; }
+  .avatar.avatar-sm {
+    width: 40px;
+    height: 40px; }
+  .avatar.avatar-xs {
+    width: 32px;
+    height: 32px; }
+
 .box-round {
   box-sizing: border-box;
   border-radius: 8px;
@@ -8355,6 +8374,18 @@ input[type="file"] {
   .tutorial .icon.icon-camera-video {
     font-size: 18px;
     line-height: 40px; }
+
+.video-promo-card {
+  position: relative;
+  margin: 0 0 15px 0;
+  height: 77vw;
+  max-width: 200px;
+  max-height: 290px;
+  border-radius: 8px;
+  background-color: #262626;
+  transition: all 350ms ease; }
+  .video-promo-card:hover {
+    background-color: #ea4c89; }
 
 .woocommerce div.product p.price,
 .woocommerce div.product span.price {

@@ -400,3 +400,17 @@
 		}
 	}
 }
+
+.video-promo-card {
+	position: relative;
+	margin: 0 0 15px 0;
+	height: 77vw;
+	max-width: 200px;
+	max-height: 290px;
+	border-radius: $input-border-radius;
+	background-color: $talent-bg-color;
+	transition: all 350ms ease;
+	&:hover {
+		background-color: $primary;
+	}
+}
