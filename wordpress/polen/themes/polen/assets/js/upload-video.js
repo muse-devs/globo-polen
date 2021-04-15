@@ -12,8 +12,8 @@ let response;
 window.onload = () => {
 	form.onsubmit = function (evt) {
 		if (file_input.files.length == 0) {
-			evt.preventDefault();
-			return false;
+                    evt.preventDefault();
+                    return false;
 		}
 		console.log("Iniciando upload");
 
@@ -36,9 +36,11 @@ window.onload = () => {
                                         onSuccess: completeHandler,
                                     });
                                     upload.start();
-				}
+				} else {
+                                    console.log('deu ruim');
+                                }
 			}
-		);
+		).fail( errorHandler );
 		evt.preventDefault();
 		return false;
 	};
@@ -71,12 +73,11 @@ let completeHandler = () => {
                 window.location.href = museobj.base_url + "/envio-video-sucesso/?order_id=" + upload_video.order_id;
             }
         )
-        .fail(function () {
-            alert("Ocorreu um erro, envie o video novamente");
-        });
+        .fail( errorHandler );
 };
-let errorHandler = (jqXHR, textStatus, errorThrown) => {
-	console.log("error", jqXHR, textStatus, errorThrown);
+let errorHandler = (data, textStatus, jqXHR) => {
+    alert('Erro no envio do arquivo, tente novamente');
+    document.location.reload();
 };
 
 function progressFunction(loaded, total) {
@@ -86,5 +87,5 @@ function progressFunction(loaded, total) {
 }
 
 function changeText() {
-	document.getElementById("info").innerText = "Vídeo gravado com sucesso";
+    document.getElementById("info").innerText = "Vídeo gravado com sucesso";
 }

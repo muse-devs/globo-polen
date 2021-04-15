@@ -3,9 +3,12 @@
 namespace Polen\Includes\Talent;
 
 use Polen\Includes\{Polen_Talent, Polen_Order, Debug};
+
 use Vimeo\Vimeo;
+use Vimeo\Exceptions\{VimeoException, VimeoRequestException, VimeoUploadException, ExceptionInterface};
+
 use Polen\Includes\Polen_Video_Info;
-use Polen\Includes\Vimeo\Polen_Vimeo_Response;
+use Polen\Includes\Vimeo\{Polen_Vimeo_Response, Polen_Vimeo_Vimeo_Options};
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
 
 class Polen_Talent_Controller extends Polen_Talent_Controller_Base
@@ -190,48 +193,16 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
         $file_size = filter_input( INPUT_POST, 'file_size', FILTER_SANITIZE_NUMBER_INT );
         $name_to_video = filter_input( INPUT_POST, 'name_to_video' );
         
-        $args = [
-            'upload' => [
-                'approach' => 'tus',
-                'size' => $file_size,
-//                'redirect_url' => 'http://polen.globo/pirilipimpim/?order_id=' . $order_id,
-            ],
-            'privacy' => [
-                "view" => "disable",
-                "download" => true,
-            ],
-            'name' => "Video para {$name_to_video}",
-            'embed' => [
-                'color' => '#ef00b8',
-                'buttons' => [
-                    'embed' => false,
-                    'fullscreen' => true,
-                    'hd' => false,
-                    'like' => false,
-                    'scaling' => false,
-                    'share' => false,
-                    'watchlater' => false,
-                ],
-                'logos' => [
-                    'vimeo' => false
-                ],
-                'playbar' => false,
-                'privacy' => [
-                    'download' => true
-                ],
-                'title' => [
-                    'name' => 'hide',
-                    'owner' => 'hide',
-                    'portrait' => 'hide'
-                ],
-                'volume' => false,
-            ]
-        ];
         try {
-            //Polen_Vimeo_Response é uma classe para interpretar o response do Vimeo
+            $args = Polen_Vimeo_Vimeo_Options::get_option_insert_video( $file_size, $name_to_video );
             $vimeo_response = $lib->request( '/me/videos', $args, 'POST' );
+            
             $response = new Polen_Vimeo_Response( $vimeo_response );
-            Debug::def($response);
+            
+            if( $response->is_error() ) {
+                throw new VimeoRequestException( $response->get_developer_message(), 500 );
+            }
+            
             $order = wc_get_order( $order_id );
 
             $cart_item = Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
@@ -246,9 +217,9 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
             $video_info->insert();
             
             wp_send_json_success( $response->response, 200 );
-        } catch ( VimeoUploadException $e ) {
+        } catch ( ExceptionInterface $e ) {
             wp_send_json_error( $e->getMessage(), $e->getCode() );
-        } catch ( VimeoRequestException $e ) {
+        } catch ( \Exception $e ) {
             wp_send_json_error( $e->getMessage(), $e->getCode() );
         }
         wp_die();
