@@ -182,7 +182,7 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
         $client_id = '1306bc73699bfe32ef09370f448c922d62f080d3';
         $client_secret = 'KN1bXutJtv8rYmlxU6Pbo4AhhCl8yhDKd20LHQqWDi0jXxcXGIVsmVHTxkcIVJzsDcrzZ0WNl'
                        . 'y9sP+CGU9gpLZBneKr0VfdpEFL/MSVS7jae0jLAoi/ev/P85gPV4oUS';
-        $token = 'ecdf5727a7b96ec6179c5090db5851ba';
+        $token = 'c341235becba51280401b3fd1567f0c7';
 
         $lib = new Vimeo( $client_id, $client_secret, $token );
         
@@ -192,12 +192,13 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
         
         $args = [
             'upload' => [
-                'approach' => 'post',
+                'approach' => 'tus',
                 'size' => $file_size,
 //                'redirect_url' => 'http://polen.globo/pirilipimpim/?order_id=' . $order_id,
             ],
             'privacy' => [
-                "view" => "disable"
+                "view" => "disable",
+                "download" => true,
             ],
             'name' => "Video para {$name_to_video}",
             'embed' => [
@@ -228,8 +229,9 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
         ];
         try {
             //Polen_Vimeo_Response é uma classe para interpretar o response do Vimeo
-            $response = new Polen_Vimeo_Response( $lib->request( '/me/videos', $args, 'POST' ) );
-
+            $vimeo_response = $lib->request( '/me/videos', $args, 'POST' );
+            $response = new Polen_Vimeo_Response( $vimeo_response );
+            Debug::def($response);
             $order = wc_get_order( $order_id );
 
             $cart_item = Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
@@ -243,7 +245,7 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
             
             $video_info->insert();
             
-            wp_send_json_success( $response, 200 );
+            wp_send_json_success( $response->response, 200 );
         } catch ( VimeoUploadException $e ) {
             wp_send_json_error( $e->getMessage(), $e->getCode() );
         } catch ( VimeoRequestException $e ) {
