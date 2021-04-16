@@ -19,6 +19,8 @@ class Polen_Video_Info extends Polen_DB
     public $vimeo_process_complete;
     public $vimeo_url_download;
     public $vimeo_link;
+    public $created_at;
+    public $updated_at;
     
     function __construct( int $id = null )
     {
@@ -35,6 +37,8 @@ class Polen_Video_Info extends Polen_DB
                 $this->vimeo_process_complete = $object->vimeo_process_complete;
                 $this->vimeo_url_download = $object->vimeo_url_download;
                 $this->vimeo_link = $object->vimeo_link;
+                $this->created_at = $object->created_at;
+                $this->updated_at = $object->updated_at;
                 $this->valid = true;
             }
         }
@@ -65,7 +69,9 @@ class Polen_Video_Info extends Polen_DB
             'vimeo_thumbnail' => $this->vimeo_thumbnail,
             'vimeo_process_complete' => $this->vimeo_process_complete,
             'vimeo_url_download' => $this->vimeo_url_download,
-            'vimeo_link' => $this->vimeo_link
+            'vimeo_link' => $this->vimeo_link,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         );
         return $return;
     }
@@ -86,6 +92,8 @@ class Polen_Video_Info extends Polen_DB
             'vimeo_process_complete' => $this->vimeo_process_complete,
             'vimeo_url_download' => $this->vimeo_url_download,
             'vimeo_link' => $this->vimeo_link,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         );
         return $return;
     }
@@ -137,6 +145,33 @@ class Polen_Video_Info extends Polen_DB
     }
     
     /**
+     * Retorna os videos nao processados pelo Vimeo
+     * @return array [Polen_Video_Info]
+     */
+    static public function select_all_videos_incompleted()
+    {
+        $pvi = new self();
+        $results = $pvi->get_results( 'vimeo_process_complete', '0', '%d' );
+        return self::create_instance_many( $results );
+    }
+    
+    /**
+     * Cria um array de objectos do Polen_Video_Info
+     * 
+     * @param array $data
+     * @return array
+     */
+    static public function create_instance_many( $data )
+    {
+        $many_objects = array();
+        foreach ( $data as $item ) {
+            $many_objects[] = self::create_instance_one( $item );
+        }
+        return $many_objects;
+    }
+    
+    
+    /**
      * Cria um objeto apartir de um array, geralmente vindo do BD
      * ou seja transforma um resultado de DB para um Objecto
      * 
@@ -156,20 +191,5 @@ class Polen_Video_Info extends Polen_DB
         $object->vimeo_url_download = $data->vimeo_url_download;
         $object->vimeo_link = $data->vimeo_link;
         return $object;
-    }
-    
-    /**
-     * Cria um array de objectos do Polen_Video_Info
-     * 
-     * @param array $data
-     * @return array
-     */
-    static public function create_instance_many( $data )
-    {
-        $many_objects = array();
-        foreach ( $data as $item ) {
-            $many_objects[] = self::create_instance_one( $item );
-        }
-        return $many_objects;
     }
 }

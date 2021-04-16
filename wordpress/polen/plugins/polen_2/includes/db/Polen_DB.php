@@ -115,13 +115,13 @@ class Polen_DB
     }
     
     
-    public function get_results( $field, $value, $format = '%s' )
+    public function get_results( $field, $value, $format = '%s', int $limit = 0 )
     {
-        return self::create_instance_many( $this->wpdb->get_results(
-                $this->wpdb->prepare(
-                        "SELECT * FROM {$this->table_name} WHERE {$field} = {$format};", $value
-                    )
-            ) );
+        $limit_format = ( !empty( $limit ) ) ? ' LIMIT %d' : ' -- %d';
+        $sql_prepared = $this->wpdb->prepare( "SELECT * FROM {$this->table_name} WHERE {$field} = {$format} {$limit_format};", $value, $limit );
+        $result = $this->wpdb->get_results( $sql_prepared );
+        $result_converted_into_object = self::create_instance_many( $result );
+        return $result_converted_into_object;
     }
     
     static public function create_instance_one( $data )
@@ -131,7 +131,11 @@ class Polen_DB
     
     static public function create_instance_many( $data )
     {
-        return $data;
+        $result_objects = array();
+        foreach ( $data as $item ) {
+            $result_objects[] = self::create_instance_one( $item );
+        }
+        return $result_objects;
     }
     
     
