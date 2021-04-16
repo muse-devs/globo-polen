@@ -53,7 +53,10 @@
 							<a class="dropbtn">
 								<div class="menu-user-data">
 									<div class="user-avatar">
-										<?php echo get_wp_user_avatar(get_the_author_meta('ID')); ?>
+										<?php 
+										if( is_plugin_active( 'wp-user-avatar/wp-user-avatar.php' ) ){
+											echo get_wp_user_avatar(get_current_user_id());
+										} ?>
 									</div>
 									<?php Icon_Class::polen_icon_chevron(); ?>
 								</div>

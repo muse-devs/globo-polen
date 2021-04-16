@@ -57,6 +57,9 @@ class Polen_Talent {
              * Busca por talento
              */
             add_action('pre_get_posts', array($this, 'search_talent'), 11 );
+
+            add_action( 'init', array( $this, 'my_account_send_video' ) );
+            add_action( 'woocommerce_account_send-video_endpoint', array( $this, 'my_account_send_video_content' ) );
         }
     }
 
@@ -527,5 +530,12 @@ class Polen_Talent {
         return $arr_video_url;
     }
 
+    public function my_account_send_video(){
+        add_rewrite_endpoint( 'send-video', EP_PAGES );
+    }
+
+    public function my_account_send_video_content(){
+        require_once PLUGIN_POLEN_DIR . '/publics/partials/polen_talent_send_video_form.php'; 
+    }
 }
     

@@ -224,21 +224,46 @@ function polen_front_get_tutorial()
 <?php
 }
 
+function polen_get_avatar($url, $size = "md")
+{
+	$url = isset($url) && !empty($url) ? $url : TEMPLATE_URI . '/assets/img/avatar.png';
+	$classes = !empty($size) ? " avatar-" . $size : "";
+?>
+	<div class="avatar<?php echo $classes; ?>" style="background-image: url(<?php echo $url ?>);"></div>
+<?php
+}
+
+function polen_talent_promo_card($talent)
+{
+?>
+	<div class="video-promo-card">
+		<div class="card row px-3 py-2">
+			<div class="col-12 col-md-12 d-flex flex-column justify-content-center align-items-center text-center">
+				<?php polen_get_avatar($talent->avatar); ?>
+				<p class="mt-2">E aí, ficou com vontade de ter um vídeo do <?php echo $talent->nome; ?>?</p>
+				<a href="#pedirvideo" class="btn btn-outline-light btn-lg">Peça o seu vídeo</a>
+			</div>
+		</div>
+	</div>
+<?php
+}
+
 function polen_front_get_talent_videos($talent, $items = array(
 	array("title" => "Video 1", "image" => "http://i.vimeocdn.com/video/1106294518_640.jpg", "video" => "https://vimeo.com/534168147"),
 	array("title" => "Video 2", "image" => "https://i.vimeocdn.com/video/1106293939_640.jpg", "video" => "https://vimeo.com/534171508"),
 	array("title" => "Video 3", "image" => "http://i.vimeocdn.com/video/1106294834_640.jpg", "video" => "https://vimeo.com/534173040"),
 	array("title" => "Video 1", "image" => "http://i.vimeocdn.com/video/1106294518_640.jpg", "video" => "https://vimeo.com/534168147"),
-	array("title" => "Video 2", "image" => "https://i.vimeocdn.com/video/1106293939_640.jpg", "video" => "https://vimeo.com/534171508"),
-	array("title" => "Video 3", "image" => "http://i.vimeocdn.com/video/1106294834_640.jpg", "video" => "https://vimeo.com/534173040"),
-	array("title" => "Video 1", "image" => "http://i.vimeocdn.com/video/1106294518_640.jpg", "video" => "https://vimeo.com/534168147"),
-	array("title" => "Video 2", "image" => "https://i.vimeocdn.com/video/1106293939_640.jpg", "video" => "https://vimeo.com/534171508"),
-	array("title" => "Video 3", "image" => "http://i.vimeocdn.com/video/1106294834_640.jpg", "video" => "https://vimeo.com/534173040"),
-	array("title" => "Video 3", "image" => "http://i.vimeocdn.com/video/1106294834_640.jpg", "video" => "https://vimeo.com/534173040"),
+	// array("title" => "Video 2", "image" => "https://i.vimeocdn.com/video/1106293939_640.jpg", "video" => "https://vimeo.com/534171508"),
+	// array("title" => "Video 3", "image" => "http://i.vimeocdn.com/video/1106294834_640.jpg", "video" => "https://vimeo.com/534173040"),
+	// array("title" => "Video 1", "image" => "http://i.vimeocdn.com/video/1106294518_640.jpg", "video" => "https://vimeo.com/534168147"),
+	// array("title" => "Video 2", "image" => "https://i.vimeocdn.com/video/1106293939_640.jpg", "video" => "https://vimeo.com/534171508"),
+	// array("title" => "Video 3", "image" => "http://i.vimeocdn.com/video/1106294834_640.jpg", "video" => "https://vimeo.com/534173040"),
+	// array("title" => "Video 3", "image" => "http://i.vimeocdn.com/video/1106294834_640.jpg", "video" => "https://vimeo.com/534173040"),
 ))
 {
 ?>
-	<section class="row my-4 banner-scrollable">
+	<section class="row mb-4 banner-scrollable">
+		<div class="d-none d-md-block col-md-12 text-right custom-slick-controls"></div>
 		<div class="col-md-12" style="padding: 0;">
 			<div class="banner-wrapper">
 				<div class="banner-content type-video">
@@ -250,6 +275,7 @@ function polen_front_get_talent_videos($talent, $items = array(
 							</figure>
 						</div>
 					<?php endforeach; ?>
+					<?php polen_talent_promo_card($talent); ?>
 				</div>
 			</div>
 		</div>

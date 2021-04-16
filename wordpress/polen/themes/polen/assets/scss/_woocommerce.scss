@@ -124,3 +124,17 @@ select.form-control:not([size]):not([multiple]) {
 	width: auto;
 	word-wrap: break-word;
 }
+
+.woocommerce-notices-wrapper {
+	margin: auto;
+	max-width: calc(100% - 30px);
+}
+
+.woocommerce-error,
+.woocommerce-info,
+.woocommerce-message {
+	font-size: 12px;
+	border: none;
+	border-radius: $input-border-radius;
+	background-color: $error-box-color;
+}

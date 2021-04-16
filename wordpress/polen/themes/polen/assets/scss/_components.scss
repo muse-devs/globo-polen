@@ -4,7 +4,7 @@
 
 .modal {
 	.modal-dialog {
-		margin: 0 0.5rem;
+		margin: 0 auto;
 	}
 	.modal-content {
 		background-color: transparent;
@@ -20,5 +20,58 @@
 .nav-tabs {
 	.nav-link {
 		color: $light-50;
+	}
+}
+
+.slick-arrow {
+	margin-bottom: 10px;
+	font-size: 0;
+	line-height: 0;
+	border: none;
+	background: none;
+	&::after {
+		content: "";
+		display: inline-block;
+		width: 15px;
+		height: 15px;
+		border: 2px solid transparent;
+		transform: rotate(45deg);
+	}
+	&.slick-prev {
+		margin-right: -10px;
+		&::after {
+			border-bottom-color: $light-100;
+			border-left-color: $light-100;
+		}
+	}
+	&.slick-next {
+		&::after {
+			border-top-color: $light-100;
+			border-right-color: $light-100;
+		}
+	}
+}
+
+.avatar {
+	display: inline-block;
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	background: no-repeat center/cover;
+	&.avatar-lg {
+		width: 120px;
+		height: 120px;
+	}
+	&.avatar-md {
+		width: 48px;
+		height: 48px;
+	}
+	&.avatar-sm {
+		width: 40px;
+		height: 40px;
+	}
+	&.avatar-xs {
+		width: 32px;
+		height: 32px;
 	}
 }
