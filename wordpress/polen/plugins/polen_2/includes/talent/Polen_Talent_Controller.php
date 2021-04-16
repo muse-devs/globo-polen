@@ -3,7 +3,13 @@
 namespace Polen\Includes\Talent;
 
 use Polen\Includes\{Polen_Talent, Polen_Order, Debug};
+
 use Vimeo\Vimeo;
+use Vimeo\Exceptions\{VimeoException, VimeoRequestException, VimeoUploadException, ExceptionInterface};
+
+use Polen\Includes\Polen_Video_Info;
+use Polen\Includes\Vimeo\{Polen_Vimeo_Response, Polen_Vimeo_Vimeo_Options};
+use Polen\Includes\Cart\Polen_Cart_Item_Factory;
 
 class Polen_Talent_Controller extends Polen_Talent_Controller_Base
 {
@@ -179,7 +185,7 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
         $client_id = '1306bc73699bfe32ef09370f448c922d62f080d3';
         $client_secret = 'KN1bXutJtv8rYmlxU6Pbo4AhhCl8yhDKd20LHQqWDi0jXxcXGIVsmVHTxkcIVJzsDcrzZ0WNl'
                        . 'y9sP+CGU9gpLZBneKr0VfdpEFL/MSVS7jae0jLAoi/ev/P85gPV4oUS';
-        $token = 'ecdf5727a7b96ec6179c5090db5851ba';
+        $token = 'c341235becba51280401b3fd1567f0c7';
 
         $lib = new Vimeo( $client_id, $client_secret, $token );
         
@@ -187,56 +193,33 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
         $file_size = filter_input( INPUT_POST, 'file_size', FILTER_SANITIZE_NUMBER_INT );
         $name_to_video = filter_input( INPUT_POST, 'name_to_video' );
         
-        $args = [
-            'upload' => [
-                'approach' => 'post',
-                'size' => $file_size,
-//                'redirect_url' => 'http://polen.globo/pirilipimpim/?order_id=' . $order_id,
-            ],
-            'privacy' => [
-                "view" => "disable"
-            ],
-            'name' => "Video para {$name_to_video}",
-            'embed' => [
-                'color' => '#ef00b8',
-                'buttons' => [
-                    'embed' => false,
-                    'fullscreen' => true,
-                    'hd' => false,
-                    'like' => false,
-                    'scaling' => false,
-                    'share' => false,
-                    'watchlater' => false,
-                ],
-                'logos' => [
-                    'vimeo' => false
-                ],
-                'playbar' => false,
-                'privacy' => [
-                    'download' => true
-                ],
-                'title' => [
-                    'name' => 'hide',
-                    'owner' => 'hide',
-                    'portrait' => 'hide'
-                ],
-                'volume' => false,
-            ]
-        ];
         try {
-            $response = $lib->request('/me/videos', $args, 'POST');
-//            Debug::def($response);
-
-            $order = wc_get_order( $order_id );
-            $order->add_meta_data( Polen_Order::METADATA_VIMEO_VIDEO_ID, $response['body']['uri'], true );
-            $order->add_meta_data( Polen_Order::METADATA_VIMEO_VIDEO_URL, $response['body']['link'], true );
-            $order->add_meta_data( Polen_Order::METADATA_VIMEO_VIDEO_EMBED_CONTENT, '', true );
-            $order->save();
+            $args = Polen_Vimeo_Vimeo_Options::get_option_insert_video( $file_size, $name_to_video );
+            $vimeo_response = $lib->request( '/me/videos', $args, 'POST' );
             
-            wp_send_json_success( $response, 200 );
-        } catch ( VimeoUploadException $e ) {
+            $response = new Polen_Vimeo_Response( $vimeo_response );
+            
+            if( $response->is_error() ) {
+                throw new VimeoRequestException( $response->get_developer_message(), 500 );
+            }
+            
+            $order = wc_get_order( $order_id );
+
+            $cart_item = Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
+            $video_info = new Polen_Video_Info();
+            $video_info->is_public = $cart_item->get_public_in_detail_page();
+            $video_info->order_id = $order_id;
+            $video_info->talent_id = get_current_user_id();
+            $video_info->vimeo_id = $response->get_vimeo_id();
+            $video_info->vimeo_process_complete = 0;
+            $video_info->vimeo_link = $response->get_vimeo_link();
+            
+            $video_info->insert();
+            
+            wp_send_json_success( $response->response, 200 );
+        } catch ( ExceptionInterface $e ) {
             wp_send_json_error( $e->getMessage(), $e->getCode() );
-        } catch ( VimeoRequestException $e ) {
+        } catch ( \Exception $e ) {
             wp_send_json_error( $e->getMessage(), $e->getCode() );
         }
         wp_die();

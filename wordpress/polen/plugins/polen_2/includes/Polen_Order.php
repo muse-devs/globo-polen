@@ -11,9 +11,9 @@ namespace Polen\Includes;
 class Polen_Order
 {
     
-    const METADATA_VIMEO_VIDEO_ID = 'vimeo_video_id';
-    const METADATA_VIMEO_VIDEO_URL = 'vimeo_video_url';
-    const METADATA_VIMEO_VIDEO_EMBED_CONTENT = 'vimeo_video_embed_content';
+//    const METADATA_VIMEO_VIDEO_ID = 'vimeo_video_id';
+//    const METADATA_VIMEO_VIDEO_URL = 'vimeo_video_url';
+//    const METADATA_VIMEO_VIDEO_EMBED_CONTENT = 'vimeo_video_embed_content';
     
     public function __construct( $static = false ) {
         if( $static ) {
