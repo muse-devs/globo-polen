@@ -136,6 +136,14 @@ class Polen_Plugin_Settings
 
         \Redux::set_args( $opt_name, $args );
 
+        global $wpdb;
+        $sql_pages = "SELECT `ID`, `post_title` FROM `" . $wpdb->posts . "` WHERE `post_type`='page' AND `post_status`='publish'";
+        $res_pages = $wpdb->get_results( $sql_pages );
+        $array_pages = array();
+        if( $res_pages && ! is_null( $res_pages ) && is_array( $res_pages ) && count( $res_pages ) )
+        foreach( $res_pages as $k => $page ) {
+            $array_pages[ $page->ID ] = $page->post_title;
+        }
         // Section: Geral
         \Redux::set_section( $opt_name, array(
             'title'            => esc_html__( 'Geral', 'polen' ),
@@ -149,6 +157,15 @@ class Polen_Plugin_Settings
                     'title'    => esc_html__('Desativar a barra administrativa do Wordpress', 'polen'),
                     'desc'     => 'Desativa a barra administrativa do Wordpress (adminbar).',
                     'default'  => true,
+                ),
+                array(
+                    'id'       => 'register_page',
+                    'type'     => 'select',
+                    'title'    => esc_html__('Página de cadastro padrão', 'polen'),
+                    'desc'     => 'Defina qual é a página de cadastro padrão do site.',
+                    'placeholder' => 'Selecione',
+                    'options'  => $array_pages,
+                    'default'  => '',
                 ),
             ),
         ) );

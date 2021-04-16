@@ -7,7 +7,8 @@ class Polen_SignInUser
     public function __construct() {
         add_action( 'wp_logout', array( $this, 'polen_logout_redirect' ) );
         add_action( 'user_register', array( $this, 'register_check_user_logged_out_orders'), 999, 1 );
-        // add_action( 'wp_login', array( $this, 'login_check_user_logged_out_orders' ), 999, 2 );
+        add_shortcode( 'polen_register_form', array( $this, 'register_form' ) );
+        add_filter( 'woocommerce_registration_redirect', function( $redirection_url ) { return get_bloginfo( 'url' ); }, 10, 1 );
     }        
 
     public function add_fields_sign_in()
@@ -49,7 +50,8 @@ class Polen_SignInUser
         }
     }
 
-    /* public function login_check_user_logged_out_orders( $user_login, $user ) {
+    /* 
+    public function login_check_user_logged_out_orders( $user_login, $user ) {
         global $wpdb;
         if( $user && ! is_null( $user ) && ! empty( $user ) && isset( $user->user_email ) ) {
             $sql_orders = "SELECT `post_id` AS `order_id` FROM `" . $wpdb->postmeta . "` WHERE `post_id` IN ( SELECT `post_id` FROM `" . $wpdb->postmeta . "` WHERE `meta_key`='_billing_email' AND `meta_value`='" . $user->user_email . "' ) AND `meta_key`='_customer_user' AND `meta_value`='0'";
@@ -60,5 +62,20 @@ class Polen_SignInUser
                 }
             }
         }
-    } */
+    } 
+    */
+
+    public function register_form() {
+        if ( is_admin() ) {
+            return;
+        } elseif ( is_user_logged_in() ) {
+            return;
+        } else {
+            ob_start();
+            wc_get_template( 'myaccount/form-register.php' );
+            $html = ob_get_contents();
+            ob_end_clean();
+            return $html;
+        }
+    }
 }
