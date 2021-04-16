@@ -275,7 +275,7 @@ function polen_front_get_talent_videos($talent, $items = array(
 							</figure>
 						</div>
 					<?php endforeach; ?>
-					<?php polen_talent_promo_card($talent); ?>
+					<?php //polen_talent_promo_card($talent); ?>
 				</div>
 			</div>
 		</div>

@@ -413,4 +413,8 @@
 	&:hover {
 		background-color: $primary;
 	}
+	@include media-breakpoint-down(xs) {
+		display: block;
+		width: 53vw;
+	}
 }
