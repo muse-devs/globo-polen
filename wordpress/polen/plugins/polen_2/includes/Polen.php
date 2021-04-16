@@ -48,6 +48,7 @@ class Polen {
     private function init_classes() {
         new Polen_SignInUser();
         new Polen_Talent( true );
+        new Polen_SMTP( true );
         new Polen_Occasion_List( true );
         new Polen_Cart( true );
         new Polen_Plugin_Settings( true );
