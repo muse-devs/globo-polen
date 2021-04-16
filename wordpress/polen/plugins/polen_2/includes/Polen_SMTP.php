@@ -2,7 +2,7 @@
 
 namespace Polen\Includes;
 
-class Polen_Talent
+class Polen_SMTP
 {
     
     public function __construct( $static = false ) {
