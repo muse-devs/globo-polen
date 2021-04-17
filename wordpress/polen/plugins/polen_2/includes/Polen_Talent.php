@@ -56,7 +56,6 @@ class Polen_Talent {
             /**
              * Busca por talento
              */
-            //add_action('pre_get_posts', array($this, 'search_talent'), 11 );
             add_filter( 'posts_where', array($this, 'polen_include_tags_categories_in_search' ), 10, 2 );
 
             add_action( 'init', array( $this, 'my_account_send_video' ) );
@@ -409,34 +408,6 @@ class Polen_Talent {
         return false;
     }
     
-
-    public function search_talent($query) {
-
-        if( $query->is_search && !is_admin()) {
-            $query->set( 'post_type', array('product'));
-            /*
-            $query->set( 'tax_query',   array( 
-                                            array( 'taxonomy' => 'product_cat',
-                                                'field'    => 'slug',
-                                                'term'     => array( 'humorista' )
-                                            )
-                                        )
-                        );
-            */
-
-            $query->set( 'tax_query', array(array(
-                'taxonomy' => 'product_tag',
-                'field' => 'name',
-                'terms' => array( $query->query['s'] ),
-                'operator' => 'EXISTS'
-
-            )));
-            
-                                   
-        }
-        return $query;
-    }
-
     public function polen_include_tags_categories_in_search( $where, $query ) {
         if( $query->is_search() ) {
           global $wpdb;
