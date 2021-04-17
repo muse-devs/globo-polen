@@ -56,7 +56,8 @@ class Polen_Talent {
             /**
              * Busca por talento
              */
-            add_action('pre_get_posts', array($this, 'search_talent'), 11 );
+            //add_action('pre_get_posts', array($this, 'search_talent'), 11 );
+            add_filter( 'posts_where', array($this, 'polen_include_tags_categories_in_search' ), 10, 2 );
 
             add_action( 'init', array( $this, 'my_account_send_video' ) );
             add_action( 'woocommerce_account_send-video_endpoint', array( $this, 'my_account_send_video_content' ) );
@@ -410,11 +411,56 @@ class Polen_Talent {
     
 
     public function search_talent($query) {
+
         if( $query->is_search && !is_admin()) {
             $query->set( 'post_type', array('product'));
+            /*
+            $query->set( 'tax_query',   array( 
+                                            array( 'taxonomy' => 'product_cat',
+                                                'field'    => 'slug',
+                                                'term'     => array( 'humorista' )
+                                            )
+                                        )
+                        );
+            */
+
+            $query->set( 'tax_query', array(array(
+                'taxonomy' => 'product_tag',
+                'field' => 'name',
+                'terms' => array( $query->query['s'] ),
+                'operator' => 'EXISTS'
+
+            )));
+            
+                                   
         }
         return $query;
     }
+
+    public function polen_include_tags_categories_in_search( $where, $query ) {
+        if( $query->is_search() ) {
+          global $wpdb;
+          $sql_terms = "
+              SELECT DISTINCT( P.ID )
+              FROM " . $wpdb->posts . " P
+              INNER JOIN " . $wpdb->term_relationships . " TR ON TR.object_id = P.ID
+              INNER JOIN " . $wpdb->term_taxonomy . " TT ON TT.term_taxonomy_id = TR.term_taxonomy_id
+              INNER JOIN " . $wpdb->terms . " T ON T.term_id = TT.term_id
+              WHERE
+                P.post_status = 'publish'
+                AND P.post_type = 'product'
+                AND TT.taxonomy IN ( 'product_tag', 'product_cat' )
+                AND UPPER( T.name ) LIKE UPPER( '" . esc_sql( $_REQUEST['s'] ) . "' )
+                ";
+          $res = $wpdb->get_results( $sql_terms, ARRAY_A );
+          if( $res && ! is_null( $res ) && ! is_wp_error( $res ) && is_array( $res ) && count( $res ) > 0 ) {
+            $values = array_column( $res, 'ID' );
+            $where .= " OR " . $wpdb->posts . ".ID IN ( " . implode( ", ", $values ) . " )";
+          }
+        }
+      
+        return $where;
+      }
 
     /**
      * Totalizador dos pedidos do talento
