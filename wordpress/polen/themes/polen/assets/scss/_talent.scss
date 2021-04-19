@@ -400,9 +400,9 @@
 	}
 	.cat {
 		font-family: inherit;
-		font-size: 14px;
+		font-size: 12px;
 		font-weight: 400;
-		line-height: 21px;
+		line-height: 14px;
 		color: $light-50;
 	}
 	.title {
@@ -428,18 +428,18 @@
 		font-weight: 700;
 	}
 	.order-number {
-		font-size: 14px;
-		color: #d0d4ea;
+		font-size: 12px;
+		color: $light-100;
 	}
 	.status {
-		padding: 2px 10px;
+		padding: 0 10px;
 		display: inline-block;
 		font-family: inherit;
-		font-size: 13px;
+		font-size: 12px;
 		text-align: center;
-		color: $dark-100;
+		color: $light-50;
 		border-radius: 2px;
-		background-color: $light-100;
+		background-color: $black;
 	}
 }
 
