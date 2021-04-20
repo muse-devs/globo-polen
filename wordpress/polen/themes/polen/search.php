@@ -14,7 +14,7 @@ get_header();
 
 		<?php if ( have_posts() ) : ?>
 
-			<header class="page-header">
+			<!--header class="page-header">
 				<h1 class="page-title">
 					<?php
 					/* translators: %s: search query. */
@@ -23,21 +23,44 @@ get_header();
 				</h1>
 			</header><!-- .page-header -->
 
+			<section class="row mb-4 banner-scrollable">
+				<div class="col-md-12">
+					<header class="row mb-3">
+						<div class="col-12 d-flex justify-content-between align-items-center">
+							<h2 class="mr-2"><?php printf( esc_html__( 'Search Results for: %s', 'polen' ), '<span>' . get_search_query() . '</span>' ); ?></h2>
+						</div>
+					</header>
+				</div>
+				<div class="col-md-12" style="padding: 0;">
+					<div class="banner-wrapper">
+						<div class="banner-content">
+						<?php
+							while ( have_posts() ) :
+								the_post();
+								$product = wc_get_product( get_the_ID() );
+								$item_data = _polen_get_info_talent_by_product_id( $product );
+								polen_front_get_card( $item_data, "responsive");
+
+								/**
+								* Run the loop for the search to output the results.
+								* If you want to overload this in a child theme then include a file
+								* called content-search.php and that will be used instead.
+								*/
+								//get_template_part( 'template-parts/content', 'search' );
+
+							endwhile;
+							wp_reset_postdata();
+						?>
+						</div>
+					</div>
+				</div>
+			</section>
+
+
 			<?php
 			/* Start the Loop */
-			while ( have_posts() ) :
-				the_post();
 
-				/**
-				 * Run the loop for the search to output the results.
-				 * If you want to overload this in a child theme then include a file
-				 * called content-search.php and that will be used instead.
-				 */
-				get_template_part( 'template-parts/content', 'search' );
-
-			endwhile;
-
-			the_posts_navigation();
+			//the_posts_navigation();
 
 		else :
 

@@ -43,10 +43,9 @@ function polen_front_get_card($item, $size = "small")
 	<div class="<?= $class; ?>">
 		<div class="polen-card <?= $size; ?>">
 			<figure class="image">
-				<a href="<?= $item["talent_url"]; ?>" class="link">
-					<img loading="lazy" src="<?php echo $image[0]; ?>" alt="<?= $item["name"]; ?>">
-				</a>
+				<img loading="lazy" src="<?php echo $image[0]; ?>" alt="<?= $item["name"]; ?>">
 				<span class="price"><span class="mr-2"><?php Icon_Class::polen_icon_camera_video(); ?></span>R$<?= $item["price"]; ?></span>
+				<a href="<?= $item["talent_url"]; ?>" class="link"></a>
 			</figure>
 			<h4 class="title text-truncate">
 				<a href="<?= $item["talent_url"]; ?>"><?= $item["name"]; ?></a>
@@ -237,8 +236,8 @@ function polen_talent_promo_card($talent)
 {
 ?>
 	<div class="video-promo-card">
-		<div class="row d-flex h-100 align-items-center px-3 py-2">
-			<div class="col-md-12 text-center">
+		<div class="card row px-3 py-2">
+			<div class="col-12 col-md-12 d-flex flex-column justify-content-center align-items-center text-center">
 				<?php polen_get_avatar($talent->avatar); ?>
 				<p class="mt-2">E aí, ficou com vontade de ter um vídeo do <?php echo $talent->nome; ?>?</p>
 				<a href="#pedirvideo" class="btn btn-outline-light btn-lg">Peça o seu vídeo</a>
@@ -248,19 +247,17 @@ function polen_talent_promo_card($talent)
 <?php
 }
 
-function polen_front_get_talent_videos($talent, $items = array(
-	array("title" => "Video 1", "image" => "http://i.vimeocdn.com/video/1106294518_640.jpg", "video" => "https://vimeo.com/534168147"),
-	array("title" => "Video 2", "image" => "https://i.vimeocdn.com/video/1106293939_640.jpg", "video" => "https://vimeo.com/534171508"),
-	array("title" => "Video 3", "image" => "http://i.vimeocdn.com/video/1106294834_640.jpg", "video" => "https://vimeo.com/534173040"),
-	array("title" => "Video 1", "image" => "http://i.vimeocdn.com/video/1106294518_640.jpg", "video" => "https://vimeo.com/534168147"),
-	// array("title" => "Video 2", "image" => "https://i.vimeocdn.com/video/1106293939_640.jpg", "video" => "https://vimeo.com/534171508"),
-	// array("title" => "Video 3", "image" => "http://i.vimeocdn.com/video/1106294834_640.jpg", "video" => "https://vimeo.com/534173040"),
-	// array("title" => "Video 1", "image" => "http://i.vimeocdn.com/video/1106294518_640.jpg", "video" => "https://vimeo.com/534168147"),
-	// array("title" => "Video 2", "image" => "https://i.vimeocdn.com/video/1106293939_640.jpg", "video" => "https://vimeo.com/534171508"),
-	// array("title" => "Video 3", "image" => "http://i.vimeocdn.com/video/1106294834_640.jpg", "video" => "https://vimeo.com/534173040"),
-	// array("title" => "Video 3", "image" => "http://i.vimeocdn.com/video/1106294834_640.jpg", "video" => "https://vimeo.com/534173040"),
-))
+function polen_front_get_talent_videos($talent, $items = array())
 {
+//    $xalala = [];
+    $items_raw = Polen\Includes\Polen_Video_Info::select_by_talent_id($talent->user_id);
+    foreach ($items_raw as $item) {
+        $items[] = [
+            'title' => '',
+            'image' =>  $item->vimeo_thumbnail,
+            'video' => $item->vimeo_link
+        ];
+    }
 ?>
 	<section class="row mb-4 banner-scrollable">
 		<div class="d-none d-md-block col-md-12 text-right custom-slick-controls"></div>
