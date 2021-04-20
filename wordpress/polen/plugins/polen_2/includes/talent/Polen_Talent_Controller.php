@@ -182,11 +182,12 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
     
     public function make_video_slot_vimeo()
     {
-        $client_id = '1306bc73699bfe32ef09370f448c922d62f080d3';
-        $client_secret = 'KN1bXutJtv8rYmlxU6Pbo4AhhCl8yhDKd20LHQqWDi0jXxcXGIVsmVHTxkcIVJzsDcrzZ0WNl'
-                       . 'y9sP+CGU9gpLZBneKr0VfdpEFL/MSVS7jae0jLAoi/ev/P85gPV4oUS';
-        $token = 'c341235becba51280401b3fd1567f0c7';
+        global $Polen_Plugin_Settings;
 
+        $client_id = $Polen_Plugin_Settings['polen_vimeo_client_id'];
+        $client_secret = $Polen_Plugin_Settings['polen_vimeo_client_secret'];
+        $token = $Polen_Plugin_Settings['polen_vimeo_access_token'];
+        
         $lib = new Vimeo( $client_id, $client_secret, $token );
         
         $order_id = filter_input( INPUT_POST, 'order_id', FILTER_SANITIZE_NUMBER_INT );
@@ -213,6 +214,7 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
             $video_info->vimeo_id = $response->get_vimeo_id();
             $video_info->vimeo_process_complete = 0;
             $video_info->vimeo_link = $response->get_vimeo_link();
+            $video_info->created_at = date('Y-m-d H-i-s');
             
             $video_info->insert();
             

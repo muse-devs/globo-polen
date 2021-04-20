@@ -11,6 +11,8 @@ class Polen_Vimeo_Response
     const STATUS_TRANSCODING = 'transcoding';
     const STATUS_AVAILABLE = 'available';
     
+    const URL_IMAGE_640_VIMEO_DEFULT = 'https://i.vimeocdn.com/video/default_640x360?r=pad';
+
     public $response;
     
     public function __construct( $response )
@@ -64,7 +66,10 @@ class Polen_Vimeo_Response
     
     public function video_processing_is_complete()
     {
-        if( $this->response['body']['status'] == self::STATUS_AVAILABLE ) {
+        if( 
+                $this->response['body']['status'] == self::STATUS_AVAILABLE &&
+                $this->response['body']['pictures']['sizes'][3]['link'] != self::URL_IMAGE_640_VIMEO_DEFULT
+            ) {
             return true;
         }
         return false;
@@ -73,5 +78,11 @@ class Polen_Vimeo_Response
     public function get_image_url_640()
     {
         return $this->response['body']['pictures']['sizes'][3]['link'];
+    }
+    
+    
+    public function get_duration()
+    {
+        return $this->response['body']['duration'];
     }
 }

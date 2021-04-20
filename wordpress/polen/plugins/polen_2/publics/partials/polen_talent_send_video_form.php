@@ -3,6 +3,7 @@ use \Polen\Includes\Cart\Polen_Cart_Item_Factory;
 
 if( isset( $_REQUEST['order_id'] ) && ! empty( $_REQUEST['order_id'] ) ) {
     $min = get_assets_folder();
+    wp_enqueue_script('polen-upload-video-tus', TEMPLATE_URI . '/assets/js/' . $min . 'tus.js', array(), _S_VERSION, true);
     wp_enqueue_script('polen-upload-video', TEMPLATE_URI . '/assets/js/' . $min . 'upload-video.js', array("jquery"), _S_VERSION, true);
     do_action('polen_before_upload_video');
 

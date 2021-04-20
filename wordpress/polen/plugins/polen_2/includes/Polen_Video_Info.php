@@ -19,6 +19,7 @@ class Polen_Video_Info extends Polen_DB
     public $vimeo_process_complete;
     public $vimeo_url_download;
     public $vimeo_link;
+    public $duration;
     public $created_at;
     public $updated_at;
     
@@ -37,6 +38,7 @@ class Polen_Video_Info extends Polen_DB
                 $this->vimeo_process_complete = $object->vimeo_process_complete;
                 $this->vimeo_url_download = $object->vimeo_url_download;
                 $this->vimeo_link = $object->vimeo_link;
+                $this->duration = $object->duration;
                 $this->created_at = $object->created_at;
                 $this->updated_at = $object->updated_at;
                 $this->valid = true;
@@ -61,18 +63,7 @@ class Polen_Video_Info extends Polen_DB
      */
     public function get_data_insert()
     {
-        $return = array(
-            'order_id' => $this->order_id,
-            'talent_id' => $this->talent_id,
-            'is_public' => $this->is_public,
-            'vimeo_id' => $this->vimeo_id,
-            'vimeo_thumbnail' => $this->vimeo_thumbnail,
-            'vimeo_process_complete' => $this->vimeo_process_complete,
-            'vimeo_url_download' => $this->vimeo_url_download,
-            'vimeo_link' => $this->vimeo_link,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-        );
+        $return = $this->create_array_fields_db();
         return $return;
     }
     
@@ -83,18 +74,33 @@ class Polen_Video_Info extends Polen_DB
      */
     public function get_data_update()
     {
-        $return = array(
-            'order_id' => $this->order_id,
-            'talent_id' => $this->talent_id,
-            'is_public' => $this->is_public,
-            'vimeo_id' => $this->vimeo_id,
-            'vimeo_thumbnail' => $this->vimeo_thumbnail,
-            'vimeo_process_complete' => $this->vimeo_process_complete,
-            'vimeo_url_download' => $this->vimeo_url_download,
-            'vimeo_link' => $this->vimeo_link,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-        );
+        $return = $this->create_array_fields_db();
+        return $return;
+    }
+    
+    
+    public function create_array_fields_db()
+    {
+        $return = [];
+        
+        $return[ 'order_id' ]               = $this->order_id;
+        $return[ 'talent_id' ]              = $this->talent_id;
+        $return[ 'is_public' ]              = $this->is_public;
+        $return[ 'vimeo_id' ]               = $this->vimeo_id;
+        $return[ 'vimeo_thumbnail' ]        = $this->vimeo_thumbnail;
+        $return[ 'vimeo_process_complete' ] = $this->vimeo_process_complete;
+        $return[ 'vimeo_url_download' ]     = $this->vimeo_url_download;
+        $return[ 'vimeo_link' ]             = $this->vimeo_link;
+        $return[ 'duration' ]               = $this->duration;
+        
+        if ( !empty( $this->created_at ) ) {
+            $return[ 'created_at' ] = $this->created_at;
+        }
+        
+        if ( !empty( $this->updated_at ) ) {
+            $return[ 'updated_at' ] = $this->updated_at;
+        }
+
         return $return;
     }
     
@@ -138,10 +144,11 @@ class Polen_Video_Info extends Polen_DB
     }
     
     
-    static public function select_by_talent_id( int $talent_id )
+    static public function select_by_talent_id( int $talent_id, $limit = 4 )
     {
         $self_obj = new self();
-        return self::create_instance_many( $self_obj->get_results( 'talent_id', $talent_id ) );
+        $result_raw = $self_obj->get_results( 'talent_id', $talent_id, '%s', $limit, 'ORDER BY ID DESC' );
+        return self::create_instance_many( $result_raw );
     }
     
     /**
@@ -181,8 +188,8 @@ class Polen_Video_Info extends Polen_DB
     static public function create_instance_one( $data )
     {
         $object = new self();
-        $object->is_public = $data->is_public;
         $object->ID = $data->ID;
+        $object->is_public = $data->is_public;
         $object->order_id = $data->order_id;
         $object->talent_id = $data->talent_id;
         $object->vimeo_id = $data->vimeo_id;
@@ -190,6 +197,9 @@ class Polen_Video_Info extends Polen_DB
         $object->vimeo_thumbnail = $data->vimeo_thumbnail;
         $object->vimeo_url_download = $data->vimeo_url_download;
         $object->vimeo_link = $data->vimeo_link;
+        $object->duration = $data->duration;
+        $object->created_at = $data->created_at;
+        $object->updated_at = $data->updated_at;
         return $object;
     }
 }

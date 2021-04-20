@@ -29,7 +29,6 @@ function _polen_get_info_talent_by_product_id( \WC_Product $talent_object ) {
         $talent = [];
         $talent['ID'] = $talent_object->get_id();
         $talent['image'] = $talent_object->get_image();
-        //TODO pegar o parma link do artista? qual vai ser
         $talent['talent_url'] = $talent_object->get_permalink();
         $talent['price'] = $talent_object->get_price();
         $talent['price_formatted'] = $talent_object->get_price_html();
@@ -115,7 +114,6 @@ function polen_get_categories_home(int $quantity = 4)
         'number' => $quantity,
         'hide_empty' => true,
         'order' => 'count',
-        //TODO excluir a categoria 'Uncategorized'
         'exclude' => '15',
     ];
     
