@@ -52,6 +52,11 @@ class Polen_Vimeo_Vimeo_Options
                 ],
                 'volume' => false,
                 'uri' => "/presets/120906813",
+                "interactions"=> [
+                    "buy" => [
+                        "download" => "available"
+                    ]
+                ]
             ]
         );
     }

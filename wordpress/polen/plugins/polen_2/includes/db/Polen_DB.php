@@ -115,11 +115,14 @@ class Polen_DB
     }
     
     
-    public function get_results( $field, $value, $format = '%s', int $limit = 0 )
+    public function get_results( $field, $value, $format = '%s', int $limit = 0, $order = '' )
     {
         $limit_format = ( !empty( $limit ) ) ? ' LIMIT %d' : ' -- %d';
-        $sql_prepared = $this->wpdb->prepare( "SELECT * FROM {$this->table_name} WHERE {$field} = {$format} {$limit_format};", $value, $limit );
+        $sql_prepared = $this->wpdb->prepare( "SELECT * FROM {$this->table_name} WHERE {$field} = {$format} {$order} {$limit_format};", $value, $limit );
         $result = $this->wpdb->get_results( $sql_prepared );
+        if( !empty( $this->wpdb->last_error ) ) {
+            throw new \Exception( $this->wpdb->last_error, 500 );
+        }
         $result_converted_into_object = self::create_instance_many( $result );
         return $result_converted_into_object;
     }

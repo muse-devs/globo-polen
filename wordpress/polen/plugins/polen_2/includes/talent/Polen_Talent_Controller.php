@@ -213,6 +213,7 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
             $video_info->vimeo_id = $response->get_vimeo_id();
             $video_info->vimeo_process_complete = 0;
             $video_info->vimeo_link = $response->get_vimeo_link();
+            $video_info->created_at = date('Y-m-d H-i-s');
             
             $video_info->insert();
             
