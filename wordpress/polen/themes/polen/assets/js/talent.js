@@ -4,7 +4,8 @@ var share_button = document.querySelectorAll(".share-button");
 
 jQuery(document).ready(function () {
 	jQuery(".banner-content.type-video").slick({
-		arrows: false,
+		arrows: true,
+		appendArrows: jQuery(".custom-slick-controls"),
 		infinite: false,
 		speed: 300,
 		slidesToShow: 5,

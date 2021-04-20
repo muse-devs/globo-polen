@@ -57,6 +57,18 @@ function get_form_login()
 						<p class="woocommerce-LostPassword lost_password">
 							<a href="<?php echo esc_url(wp_lostpassword_url()); ?>"><?php esc_html_e('Lost your password?', 'woocommerce'); ?></a>
 						</p>
+						<?php
+							global $Polen_Plugin_Settings;
+							if( isset( $Polen_Plugin_Settings['register_page'] ) && ! is_null( $Polen_Plugin_Settings['register_page'] ) && ! empty( $Polen_Plugin_Settings['register_page'] ) ) {
+						?>
+						<p class="woocommerce-LostPassword lost_password">
+							<?php
+							$register_page = $Polen_Plugin_Settings['register_page'];
+							$register_link = get_the_permalink( $register_page );
+							?>
+							<a href="<?php echo esc_url( $register_link ); ?>"><?php esc_html_e('É novo por aqui? Então efetue seu cadastro.', 'woocommerce'); ?></a>
+						</p>
+						<?php } ?>
 
 						<?php do_action('woocommerce_login_form_end'); ?>
 					</div>

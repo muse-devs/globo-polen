@@ -83,7 +83,7 @@
 								if( obj['success'] == true ){
 									if( obj['code'] == 1 ){
 										$('#OrderActions').modal('toggle');
-										location.href='/enviar-video/?order_id=' + order_id;
+										location.href='/my-account/send-video/?order_id=' + order_id;
 									}
 									if( obj['code'] == 2 ){
 										location.reload();
@@ -110,7 +110,7 @@
 								if( obj['code'] == 1 ){
 									$('#OrderActions').modal('toggle');
 									//location.reload();'/enviar-video/?order_id=35
-									location.href='/enviar-video/?order_id=' + order_id;
+									location.href='/my-account/send-video/?order_id=' + order_id;
 								}
 								if( obj['code'] == 2 ){
 									//$('#OrderActions').modal('toggle');

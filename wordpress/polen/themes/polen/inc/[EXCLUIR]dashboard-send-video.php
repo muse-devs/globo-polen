@@ -1,8 +1,10 @@
 <?php /* Template Name: Envio de Vídeo */
 
 use \Polen\Includes\Cart\Polen_Cart_Item_Factory;
+
 $min = get_assets_folder();
-wp_enqueue_script('polen-upload-video', TEMPLATE_URI . '/assets/js/' . $min . 'upload-video.js', array("jquery"), _S_VERSION, true);
+wp_enqueue_script('polen-upload-video-tus', TEMPLATE_URI . '/assets/js/' . $min . 'tus.js', array(), _S_VERSION, true);
+wp_enqueue_script('polen-upload-video', TEMPLATE_URI . '/assets/js/' . $min . 'upload-video.js', array("polen-upload-video-tus"), _S_VERSION, true);
 do_action('polen_before_upload_video');
 
 $order_id = filter_input(INPUT_GET, 'order_id');
@@ -15,11 +17,15 @@ $polen_order = Polen_Cart_Item_Factory::polen_cart_item_from_order($order);
 <main id="primary" class="site-main mt-4">
 	<header class="entry-header">
 		<?php the_title('<h1 class="entry-title">', '</h1>'); ?>
-		<button class="btn btn-outline-light btn-lg btn-block mt-4" data-toggle="modal" data-target="#OrderActions">Instruções</button>
 	</header>
 	<article>
+		<div class="row">
+			<div class="col-12 col-md-5 m-md-auto">
+				<button class="btn btn-outline-light btn-lg btn-block mt-4" data-toggle="modal" data-target="#OrderActions">Instruções</button>
+			</div>
+		</div>
 		<div class="row mt-4">
-			<div class="col-12">
+			<div class="col-12 col-md-5 m-md-auto">
 				<div class="py-3 text-center box-video">
 					<div id="content-info" class="content-info show">
 						<figure class="image">
@@ -37,7 +43,7 @@ $polen_order = Polen_Cart_Item_Factory::polen_cart_item_from_order($order);
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-12">
+			<div class="col-12 col-md-5 m-md-auto">
 				<form id="form-video-upload" method="post" enctype="multipart/form-data">
 					<div class="form-group text-center">
 						<button id="video-rec" class="btn btn-primary btn-lg btn-block video-rec show">Gravar vídeo</button>
@@ -59,7 +65,7 @@ $polen_order = Polen_Cart_Item_Factory::polen_cart_item_from_order($order);
 			<div class="row modal-body">
 				<!-- Início -->
 				<div class="col-12 talent-order-modal">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Fechar"></button>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Fechar"></button>
 					<div class="body">
 						<div class="row d-flex align-items-center">
 							<div class="col-12">

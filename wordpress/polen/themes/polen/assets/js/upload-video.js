@@ -12,8 +12,8 @@ let response;
 window.onload = () => {
 	form.onsubmit = function (evt) {
 		if (file_input.files.length == 0) {
-			evt.preventDefault();
-			return false;
+                    evt.preventDefault();
+                    return false;
 		}
 		console.log("Iniciando upload");
 
@@ -28,33 +28,19 @@ window.onload = () => {
 			upload_video,
 			(data, textStatus, jqXHR) => {
 				if (jqXHR.status == 200) {
-					var formData = new FormData();
-					formData.append("file_data", file_input.files[0]);
-					jQuery.ajax({
-						url: data.data.body.upload.upload_link,
-						type: "POST",
-						xhr: function () {
-							var myXhr = jQuery.ajaxSettings.xhr();
-							if (myXhr.upload) {
-								myXhr.upload.addEventListener(
-									"progress",
-									progressFunction,
-									false
-								);
-							}
-							return myXhr;
-						},
-						success: completeHandler,
-						error: errorHandler,
-						complete: completeHandler,
-						data: formData,
-						cache: false,
-						contentType: false,
-						processData: false,
-					});
-				}
+                                    let file = file_input.files[0];
+                                    let upload = new tus.Upload( file, {
+                                        uploadUrl: data.data.body.upload.upload_link,
+                                        onError: errorHandler,
+                                        onProgress: progressFunction,
+                                        onSuccess: completeHandler,
+                                    });
+                                    upload.start();
+				} else {
+                                    console.log('deu ruim');
+                                }
 			}
-		);
+		).fail( errorHandler );
 		evt.preventDefault();
 		return false;
 	};
@@ -73,77 +59,33 @@ window.onload = () => {
 		document.querySelector("#video-send").classList.add("show");
 	});
 };
-let updateProgress = (evt) => {
-	console.log(evt.lengthComputable);
-};
-let completeHandler = (evt) => {
-	console.log("complete");
-	content_upload.innerHTML =
-		'<p class="my-4"><strong id="progress-value">Enviado</strong></p>';
+
+let completeHandler = () => {
+	content_upload.innerHTML = '<p class="my-4"><strong id="progress-value">Enviado</strong></p>';
 	let obj_complete_order = {
-		action: "order_status_completed",
-		order: upload_video.order_id,
+            action: "order_status_completed",
+            order: upload_video.order_id,
 	};
-	jQuery
-		.post(
-			polen_ajax.ajaxurl,
-			obj_complete_order,
-			(data, textStatus, jqXHR) => {
-				// alert("Vídeo enviado com sucesso, obrigado Angélica!");
-				window.location.href = museobj.base_url + "/envio-video-sucesso/";
-			}
-		)
-		.fail(function () {
-			alert("Ocorreu um erro, envie o video novamente");
-		});
+	jQuery.post(
+            polen_ajax.ajaxurl,
+            obj_complete_order,
+            () => {
+                window.location.href = museobj.base_url + "/envio-video-sucesso/?order_id=" + upload_video.order_id;
+            }
+        )
+        .fail( errorHandler );
 };
-let errorHandler = (jqXHR, textStatus, errorThrown) => {
-	console.log("error", jqXHR, textStatus, errorThrown);
-};
-let transferCanceled = (evt) => {
-	console.log("cancelado");
+let errorHandler = (data, textStatus, jqXHR) => {
+    alert('Erro no envio do arquivo, tente novamente');
+    document.location.reload();
 };
 
-function progressFunction(e) {
-	if (e.lengthComputable) {
-		progress_value.innerText = `Enviando vídeo ${Math.floor(
-			(e.loaded / e.total) * 100
-		)}%`;
-	}
+function progressFunction(loaded, total) {
+    progress_value.innerText = `Enviando vídeo ${Math.floor(
+        (loaded / total) * 100
+    )}%`;
 }
 
 function changeText() {
-	document.getElementById("info").innerText = "Vídeo gravado com sucesso";
-}
-
-serialize = function (obj, prefix) {
-	var str = [],
-		p;
-	for (p in obj) {
-		if (obj.hasOwnProperty(p)) {
-			var k = prefix ? prefix + "[" + p + "]" : p,
-				v = obj[p];
-			str.push(
-				v !== null && typeof v === "object"
-					? serialize(v, k)
-					: encodeURIComponent(k) + "=" + encodeURIComponent(v)
-			);
-		}
-	}
-	return str.join("&");
-};
-
-function getFullPath(str) {
-	if (str) {
-		var startIndex =
-			str.indexOf("\\") >= 0
-				? str.lastIndexOf("\\")
-				: str.lastIndexOf("/");
-		var filename = str.substring(startIndex);
-		if (filename.indexOf("\\") === 0 || filename.indexOf("/") === 0) {
-			filename = filename.substring(1);
-		}
-		return filename;
-	}
-	return false;
+    document.getElementById("info").innerText = "Vídeo gravado com sucesso";
 }
