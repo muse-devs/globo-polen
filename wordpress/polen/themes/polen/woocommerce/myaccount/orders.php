@@ -38,24 +38,26 @@ if (in_array('user_talent',  $logged_user->roles)) {
 									<div class="col">
 										<div class="order-title"><?php echo  $item->get_name(); ?></div>
 										<div class="cat">
-										<?php
+											<?php
 											global $post;
-											$terms = get_the_terms( $product_id, 'product_cat' );
-											if( isset( $terms[0]->name ) ){
+											$terms = get_the_terms($product_id, 'product_cat');
+											if (isset($terms[0]->name)) {
 												echo $terms[0]->name;
 											}
-										?>
+											?>
 										</div>
-										<div class="status mt-2">
+										<div class="status mt-3">
 											<?php echo wc_get_order_status_name($order->get_status()); ?>
 										</div>
 									</div>
 								</div>
 							</div>
 							<div class="col-12 text-center mt-4 mb-3">
-								<a href="<?php echo $order->get_view_order_url(); ?>" class="btn btn-primary btn-lg btn-block">
-									Acompanhar pedido
-								</a>
+								<div class="row">
+									<a href="<?php echo $order->get_view_order_url(); ?>" class="btn btn-primary btn-lg btn-block">
+										Acompanhar pedido
+									</a>
+								</div>
 							</div>
 							<div class="col-12 text-center">
 								<p class="order-number">Número do pedido: <strong><?php echo $order->get_order_number(); ?></strong></p>
