@@ -19,6 +19,7 @@ class Polen_Video_Info extends Polen_DB
     public $vimeo_process_complete;
     public $vimeo_url_download;
     public $vimeo_link;
+    public $duration;
     public $created_at;
     public $updated_at;
     
@@ -37,6 +38,7 @@ class Polen_Video_Info extends Polen_DB
                 $this->vimeo_process_complete = $object->vimeo_process_complete;
                 $this->vimeo_url_download = $object->vimeo_url_download;
                 $this->vimeo_link = $object->vimeo_link;
+                $this->duration = $object->duration;
                 $this->created_at = $object->created_at;
                 $this->updated_at = $object->updated_at;
                 $this->valid = true;
@@ -70,6 +72,7 @@ class Polen_Video_Info extends Polen_DB
             'vimeo_process_complete' => $this->vimeo_process_complete,
             'vimeo_url_download' => $this->vimeo_url_download,
             'vimeo_link' => $this->vimeo_link,
+            'duration' => $this->duration,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         );
@@ -92,6 +95,7 @@ class Polen_Video_Info extends Polen_DB
             'vimeo_process_complete' => $this->vimeo_process_complete,
             'vimeo_url_download' => $this->vimeo_url_download,
             'vimeo_link' => $this->vimeo_link,
+            'duration' => $this->duration,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         );
@@ -190,6 +194,7 @@ class Polen_Video_Info extends Polen_DB
         $object->vimeo_thumbnail = $data->vimeo_thumbnail;
         $object->vimeo_url_download = $data->vimeo_url_download;
         $object->vimeo_link = $data->vimeo_link;
+        $object->duration = $data->duration;
         return $object;
     }
 }

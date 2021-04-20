@@ -74,4 +74,10 @@ class Polen_Vimeo_Response
     {
         return $this->response['body']['pictures']['sizes'][3]['link'];
     }
+    
+    
+    public function get_duration()
+    {
+        return $this->response['body']['duration'];
+    }
 }
