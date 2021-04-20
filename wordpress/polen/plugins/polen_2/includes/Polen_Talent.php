@@ -56,7 +56,10 @@ class Polen_Talent {
             /**
              * Busca por talento
              */
-            add_action('pre_get_posts', array($this, 'search_talent'), 11 );
+            add_filter( 'posts_where', array($this, 'polen_include_tags_categories_in_search' ), 10, 2 );
+
+            add_action( 'init', array( $this, 'my_account_send_video' ) );
+            add_action( 'woocommerce_account_send-video_endpoint', array( $this, 'my_account_send_video_content' ) );
         }
     }
 
@@ -405,13 +408,30 @@ class Polen_Talent {
         return false;
     }
     
-
-    public function search_talent($query) {
-        if( $query->is_search && !is_admin()) {
-            $query->set( 'post_type', array('product'));
+    public function polen_include_tags_categories_in_search( $where, $query ) {
+        if( $query->is_search() ) {
+          global $wpdb;
+          $sql_terms = "
+              SELECT DISTINCT( P.ID )
+              FROM " . $wpdb->posts . " P
+              INNER JOIN " . $wpdb->term_relationships . " TR ON TR.object_id = P.ID
+              INNER JOIN " . $wpdb->term_taxonomy . " TT ON TT.term_taxonomy_id = TR.term_taxonomy_id
+              INNER JOIN " . $wpdb->terms . " T ON T.term_id = TT.term_id
+              WHERE
+                P.post_status = 'publish'
+                AND P.post_type = 'product'
+                AND TT.taxonomy IN ( 'product_tag', 'product_cat' )
+                AND UPPER( T.name ) LIKE UPPER( '" . esc_sql( $_REQUEST['s'] ) . "' )
+                ";
+          $res = $wpdb->get_results( $sql_terms, ARRAY_A );
+          if( $res && ! is_null( $res ) && ! is_wp_error( $res ) && is_array( $res ) && count( $res ) > 0 ) {
+            $values = array_column( $res, 'ID' );
+            $where .= " OR " . $wpdb->posts . ".ID IN ( " . implode( ", ", $values ) . " )";
+          }
         }
-        return $query;
-    }
+      
+        return $where;
+      }
 
     /**
      * Totalizador dos pedidos do talento
@@ -517,15 +537,22 @@ class Polen_Talent {
      * Retorna os vídeos pelo id do talento
      */
     public function videos_by_talent_id( $talent_id ){
-        $arr_meta_video = array();
-        $arr_completed_orders = $this->get_talent_orders( $talent_id, 'wc-completed' );
-        if( is_array( $arr_completed_orders ) && !empty( $arr_completed_orders ) ){
-            foreach( $arr_completed_orders as $orders ):
-                $arr_meta_video[] = get_post_meta( $orders['order_id'], Polen_Order::METADATA_VIMEO_VIDEO_URL, true );
+        $arr_video_url = array();
+        $arr_completed_video_info = Polen_Video_Info::select_by_talent_id( $talent_id );
+        if( is_array( $arr_completed_video_info ) && !empty( $arr_completed_video_info ) ){
+            foreach( $arr_completed_video_info as $video_info ):
+                $arr_video_url[] = $video_info->vimeo_link;
             endforeach;
         }
-        return $arr_meta_video;
+        return $arr_video_url;
     }
 
+    public function my_account_send_video(){
+        add_rewrite_endpoint( 'send-video', EP_PAGES );
+    }
+
+    public function my_account_send_video_content(){
+        require_once PLUGIN_POLEN_DIR . '/publics/partials/polen_talent_send_video_form.php'; 
+    }
 }
     
