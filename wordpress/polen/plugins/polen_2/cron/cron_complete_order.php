@@ -6,8 +6,6 @@ if( strpos(php_sapi_name(), 'cli' ) === false ) {
     die;
 }
 
-include_once dirname( __FILE__ ) . '/init.php';
-
 use Vimeo\Vimeo;
 use Vimeo\Exceptions\{ExceptionInterface, VimeoRequestException};
 use Polen\Includes\Polen_Video_Info;
