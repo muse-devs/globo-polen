@@ -2,14 +2,11 @@
 
 //Se a execução não for pelo CLI gera Exception
 if( strpos(php_sapi_name(), 'cli' ) === false ) {
-    echo 'no CLI';
+    echo 'Silence is Golden';
     die;
 }
 
-global $wp, $wpdb, $wp_query, $wp_the_query, $wp_rewrite, $wp_did_header;
-
-include_once 'polen/plugins/polen_2/autoload.php';
-include_once 'polen/plugins/polen_2/vendor/autoload.php';
+include_once dirname( __FILE__ ) . '/init.php';
 
 use Vimeo\Vimeo;
 use Vimeo\Exceptions\{ExceptionInterface, VimeoRequestException};
@@ -34,7 +31,11 @@ foreach ( $videos as $video ) {
         }
         
         if( $response->video_processing_is_complete() ) {
+            Polen\Includes\Debug::def($response->response);
             $video->vimeo_process_complete = 1;
+            $video->vimeo_thumbnail = $response->get_image_url_640();
+            $video->duration = $response->get_duration();
+            $video->updated_at = date('Y-m-d H:i:s');
             $video->update();
             echo "Achei: {$video->vimeo_id} \n";
         }
@@ -44,4 +45,4 @@ foreach ( $videos as $video ) {
     }
 }
 
-var_dump( "END" );
+echo( "END \n" );
