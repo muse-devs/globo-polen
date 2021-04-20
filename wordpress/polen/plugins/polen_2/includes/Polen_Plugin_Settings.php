@@ -234,6 +234,48 @@ class Polen_Plugin_Settings
                 ),
             ),
         ) );
+        
+        
+        //Credenciais do Vimeo
+        \Redux::set_section( $opt_name, array(
+            'title'            => esc_html__( 'Vimeo', 'polen' ),
+            'id'               => 'vimeo',
+            'icon'             => 'el el-envelope',
+            'subsection'       => false,
+            'fields'           => array(
+                array(
+                    'id'       => 'polen_vimeo_on',
+                    'type'     => 'switch',
+                    'title'    => esc_html__('Ativar a API do Vimeo como processador de videos', 'polen'),
+                    'desc'     => 'Ativar a API do Vimeo como processador de videos',
+                    'default'  => 0,
+                ),
+                array(
+                    'id'       => 'polen_vimeo_client_id',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Vimeo ClientID', 'polen'),
+                    'desc'     => 'Informe do ClientID da Vimeo API.',
+                    'default'  => '',
+                    'required' => array( 'polen_vimeo_on', '=', '1' ),
+                ),
+                array(
+                    'id'       => 'polen_vimeo_client_secret',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Vimeo Client Secret', 'polen'),
+                    'desc'     => 'Informe o Vimeo Client Secret da Vimeo API.',
+                    'default'  => '',
+                    'required' => array( 'polen_vimeo_on', '=', '1' ),
+                ),
+                array(
+                    'id'       => 'polen_vimeo_access_token',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Access Token', 'polen'),
+                    'desc'     => 'Informe o Vimeo Access Token da Vimeo API.',
+                    'default'  => '',
+                    'required' => array( 'polen_vimeo_on', '=', '1' ),
+                ),
+            ),
+        ) );
     }
 
     public function save( $args ) {

@@ -1,20 +1,15 @@
 <?php
 
-//Se a execução não for pelo CLI gera Exception
-if( strpos(php_sapi_name(), 'cli' ) === false ) {
-    echo 'Silence is Golden';
-    die;
-}
+include_once dirname( __FILE__ ) . '/init.php';
 
 use Vimeo\Vimeo;
 use Vimeo\Exceptions\{ExceptionInterface, VimeoRequestException};
 use Polen\Includes\Polen_Video_Info;
 use Polen\Includes\Vimeo\Polen_Vimeo_Response;
 
-$client_id = '1306bc73699bfe32ef09370f448c922d62f080d3';
-$client_secret = 'KN1bXutJtv8rYmlxU6Pbo4AhhCl8yhDKd20LHQqWDi0jXxcXGIVsmVHTxkcIVJzsDcrzZ0WNl'
-               . 'y9sP+CGU9gpLZBneKr0VfdpEFL/MSVS7jae0jLAoi/ev/P85gPV4oUS';
-$access_token = 'c341235becba51280401b3fd1567f0c7';
+$client_id = $Polen_Plugin_Settings['polen_vimeo_client_id'];
+$client_secret = $Polen_Plugin_Settings['polen_vimeo_client_secret'];
+$access_token = $Polen_Plugin_Settings['polen_vimeo_access_token'];
 
 $videos = Polen_Video_Info::select_all_videos_incompleted();
 $vimeo_api = new Vimeo($client_id, $client_secret, $access_token);
