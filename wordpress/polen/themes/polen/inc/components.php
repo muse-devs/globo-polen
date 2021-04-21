@@ -247,9 +247,9 @@ function polen_talent_promo_card($talent)
 <?php
 }
 
-function polen_front_get_talent_videos($talent, $items = array())
+function polen_front_get_talent_videos($talent)
 {
-//    $xalala = [];
+	$items = array();
     $items_raw = Polen\Includes\Polen_Video_Info::select_by_talent_id($talent->user_id);
     foreach ($items_raw as $item) {
         $items[] = [
@@ -258,6 +258,9 @@ function polen_front_get_talent_videos($talent, $items = array())
             'video' => $item->vimeo_link
         ];
     }
+	if (sizeof($items) < 1) {
+		return;
+	}
 ?>
 	<section class="row mb-4 banner-scrollable">
 		<div class="d-none d-md-block col-md-12 text-right custom-slick-controls"></div>
