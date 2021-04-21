@@ -8,7 +8,7 @@ jQuery(document).ready(function () {
 		appendArrows: jQuery(".custom-slick-controls"),
 		infinite: false,
 		speed: 300,
-		slidesToShow: 5,
+		slidesToShow: 6,
 		slidesToScroll: 3,
 		responsive: [
 			{
