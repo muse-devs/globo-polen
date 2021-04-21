@@ -264,11 +264,11 @@ function polen_front_get_talent_videos($talent)
 ?>
 	<section class="row mb-4 banner-scrollable">
 		<div class="d-none d-md-block col-md-12 text-right custom-slick-controls"></div>
-		<div class="col-md-12" style="padding: 0;">
+		<div class="col-md-12 p-0">
 			<div class="banner-wrapper">
 				<div class="banner-content type-video">
 					<?php foreach ($items as $item) : ?>
-						<div class="polen-card type-video">
+						<div class="polen-card-video">
 							<figure class="video-cover">
 								<img loading="lazy" src="<?= $item['image']; ?>" alt="<?= $item['title']; ?>" data-url="<?= $item['video']; ?>">
 								<a href="javascript:openVideoByURL('<?= $item['video']; ?>')" class="video-player-button"></a>

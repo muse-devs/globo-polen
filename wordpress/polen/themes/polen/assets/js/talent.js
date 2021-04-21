@@ -8,18 +8,18 @@ jQuery(document).ready(function () {
 		appendArrows: jQuery(".custom-slick-controls"),
 		infinite: false,
 		speed: 300,
-		slidesToShow: 6,
+		slidesToShow: 4,
 		slidesToScroll: 3,
 		responsive: [
 			{
 				breakpoint: 1024,
 				settings: {
-					slidesToShow: 5,
+					slidesToShow: 4,
 					slidesToScroll: 1,
 				},
 			},
 			{
-				breakpoint: 768,
+				breakpoint: 991,
 				settings: {
 					slidesToShow: 3,
 					slidesToScroll: 1,
