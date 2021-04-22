@@ -384,6 +384,22 @@ function polen_get_talent_card($talent)
 <?php
 }
 
+function polen_box_image_message($image, $text)
+{
+?>
+	<div class="box-round">
+		<div class="row p-4">
+			<div class="col-md-12 text center">
+				<img src="<?php echo $image; ?>" alt="<?php echo $text; ?>">
+			</div>
+			<div class="col-md-12 text center mt-4">
+				<p><?php echo $text; ?></p>
+			</div>
+		</div>
+	</div>
+<?php
+}
+
 /**
  * Gets the thumbnail url for a vimeo video using the video id. This only works for public videos.
  *
