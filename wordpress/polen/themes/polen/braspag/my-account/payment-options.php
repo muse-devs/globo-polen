@@ -73,7 +73,7 @@ if( $polen_talent->is_user_talent( $current_user ) ){
         ?>
         <div class="row">
 			<div class="col-12 text-center mt-3">
-				<?php polen_box_image_message(TEMPLATE_URI . "/assets/img/cards.svg", "Você ainda não adicionou nenhuma<br />forma de pagamento"); ?>
+				<?php polen_box_image_message(TEMPLATE_URI . "/assets/img/cards.png", "Você ainda não adicionou nenhuma<br />forma de pagamento"); ?>
 				<a class="woocommerce-Button btn btn-outline-light btn-lg btn-block mt-3" href="">Adicionar cartão</a>
 			</div>
         </div>
