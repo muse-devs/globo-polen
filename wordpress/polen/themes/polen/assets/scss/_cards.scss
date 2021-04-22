@@ -21,7 +21,7 @@
 			height: 100%;
 			top: 0;
 			left: 0;
-			z-index: 2;
+			z-index: 3;
 		}
 		&::after {
 			content: "";
@@ -40,7 +40,7 @@
 		}
 		img {
 			position: absolute;
-    		overflow: hidden;
+			overflow: hidden;
 			width: 100%;
 			height: 100%;
 			object-fit: cover;
@@ -80,6 +80,7 @@
 		}
 	}
 	.title {
+		margin-bottom: 0;
 		// margin-top: 32px;
 		line-height: 1;
 		font-weight: 700;
@@ -282,7 +283,6 @@
 					margin: 0 15px 0 0;
 				}
 			}
-			.polen-card.type-video,
 			> .responsive {
 				&:first-child {
 					margin-left: 15px;
@@ -293,19 +293,51 @@
 			}
 		}
 	}
-	.video-cover {
-		position: relative;
-		margin: 0 15px 15px 0;
-		height: 77vw;
-		max-width: 200px;
-		max-height: 290px;
-		border-radius: 8px;
-		background: no-repeat center/cover;
-		overflow: hidden;
-		img {
-			width: 100%;
-			height: 100%;
-			object-fit: cover;
+}
+
+.banner-content.type-video {
+	.polen-card-video {
+	}
+}
+
+.video-cover,
+.video-promo-card .card {
+	position: relative;
+	margin: 0 15px 15px 0;
+	width: 20vw;
+	height: 77.3vw;
+	max-width: 200 * 1.2 + 0px;
+	max-height: 290 * 1.2 + 0px;
+	border-radius: $input-border-radius;
+}
+
+.video-cover {
+	background: no-repeat center/cover;
+	overflow: hidden;
+	img {
+		// position: absolute;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+	@include media-breakpoint-down(xs) {
+		width: 53vw;
+	}
+}
+
+.video-promo-card {
+	.card {
+		margin: 0 0 15px 0;
+		background-color: $talent-bg-color;
+		transition: all 350ms ease;
+		@include media-breakpoint-down(xs) {
+			margin-right: 15px;
+		}
+		.btn {
+			font-size: 10px !important;
+		}
+		&:hover {
+			background-color: $primary;
 		}
 		@include media-breakpoint-down(xs) {
 			width: 53vw;
@@ -400,28 +432,6 @@
 		&.icon-camera-video {
 			font-size: 18px;
 			line-height: 40px;
-		}
-	}
-}
-
-.video-promo-card {
-	.card {
-		position: relative;
-		margin: 0 15px 15px 0;
-		max-width: 200px;
-		height: 77vw;
-		max-height: 290px;
-		border-radius: $input-border-radius;
-		background-color: $talent-bg-color;
-		transition: all 350ms ease;
-		.btn {
-			font-size: 10px !important;
-		}
-		&:hover {
-			background-color: $primary;
-		}
-		@include media-breakpoint-down(xs) {
-			width: 53vw;
 		}
 	}
 }
