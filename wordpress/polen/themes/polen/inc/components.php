@@ -3,7 +3,7 @@
 function polen_front_get_banner()
 {
 ?>
-	<section class="top-banner mb-4">
+	<section class="top-banner mb-5">
 		<video class="video video-mobile" autoplay muted loop playsinline poster="<?= TEMPLATE_URI; ?>/assets/img/video_poster1.jpg">
 			<source src="<?= TEMPLATE_URI; ?>/assets/video/home1.m4v" type="video/mp4">
 			<!-- <source src="movie.ogg" type="video/ogg"> -->
@@ -64,7 +64,7 @@ function polen_banner_scrollable($items, $title, $link)
 		return;
 	}
 ?>
-	<section class="row mb-4 banner-scrollable">
+	<section class="row mb-2 banner-scrollable">
 		<div class="col-md-12">
 			<header class="row mb-3">
 				<div class="col-12 d-flex justify-content-between align-items-center">
@@ -92,7 +92,7 @@ function polen_front_get_news($items)
 		return;
 	}
 ?>
-	<section class="row pt-2 mb-4 news">
+	<section class="row pt-2 mb-5 news">
 		<div class="col-md-12">
 			<header class="row mb-3">
 				<div class="col-12 d-flex justify-content-between align-items-center">
@@ -120,7 +120,7 @@ function polen_front_get_categories($items)
 		return;
 	}
 ?>
-	<section class="row pt-2 mb-4 categories">
+	<section class="row pt-2 mb-5 categories">
 		<div class="col-md-12">
 			<header class="row mb-4">
 				<div class="col-12 d-flex justify-content-between align-items-center">
@@ -151,7 +151,7 @@ function polen_front_get_artists($items, $title)
 		return;
 	}
 ?>
-	<section class="row pt-2 mb-4 all-artists">
+	<section class="row pt-2 mb-5 all-artists">
 		<div class="col-12 col-md-12">
 			<header class="row mb-4">
 				<div class="col-12 d-flex justify-content-between align-items-center">
@@ -181,7 +181,7 @@ function polen_front_get_artists($items, $title)
 function polen_front_get_tutorial()
 {
 ?>
-	<section class="row tutorial pt-2 mb-4">
+	<section class="row tutorial pt-2 mb-5">
 		<div class="col-md-12">
 			<header class="row mb-4">
 				<div class="col">

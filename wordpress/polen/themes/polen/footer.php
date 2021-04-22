@@ -21,10 +21,10 @@
 						<h5 class="title">Junte-se à nossa lista</h5>
 						<p class="description">Seja o primeiro a saber sobre as estrelas mais recentes e as melhores ofertas no Muse</p>
 						<div class="row">
-							<div class="col-md-8 mb-2">
+							<div class="col-md-8 mb-2 mb-md-0">
 								<input type="text" placeholder="Entre com o seu e-mail" class="form-control form-control-lg" />
 							</div>
-							<div class="col-md-4 mt-2"><button class="btn btn-outline-light btn-lg btn-block">Enviar</button></div>
+							<div class="col-md-4 mt-2 mt-md-0 d-md-flex align-items-md-center"><button class="btn btn-outline-light btn-lg btn-block">Enviar</button></div>
 						</div>
 					</div>
 					<div class="col-md-4 mt-4 order-md-1">
