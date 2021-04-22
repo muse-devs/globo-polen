@@ -2,6 +2,8 @@
 
 namespace Polen\Includes\Vimeo;
 
+use Polen\Includes\Vimeo\Polen_Vimeo_String_Url;
+
 /**
  * Polen_Vimeo_Response é uma classe para interpretar o response do Vimeo
  */
@@ -80,19 +82,13 @@ class Polen_Vimeo_Response
         return $this->response['body']['pictures']['sizes'][3]['link'];
     }
     
-    
+    /**
+     * 
+     * @return type
+     */
     public function get_image_url_smaller()
     {
         return $this->response['body']['pictures']['sizes'][0]['link'];
-    }
-    
-    
-    public function remove_size_for_image_url()
-    {
-        $img_url = $this->get_image_url_smaller();
-        $splited_url = explode( '_', $img_url );
-        $url_pice = $splited_url[0];
-        return $url_pice;
     }
     
     /**
@@ -104,8 +100,8 @@ class Polen_Vimeo_Response
      */
     public function get_image_url_custom_size( string $size )
     {
-        $url_removed_size = $this->remove_size_for_image_url();
-        $url_removed_size .= '_' . $size . '.jpg';
+        $thumb_url_vimeo = $this->get_image_url_smaller();
+        $url_removed_size = Polen_Vimeo_String_Url::get_image_url_custom_size( $size, $thumb_url_vimeo );
         return $url_removed_size;
     }
     
