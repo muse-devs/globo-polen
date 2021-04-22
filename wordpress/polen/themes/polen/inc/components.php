@@ -338,6 +338,8 @@ function polen_get_talent_card($talent)
 			<div class="col pt-4 mt-3 details">
 				<div class="row personal">
 					<div class="col d-flex">
+                                            <?php
+                                            if ( empty( !$talent["from"] )) : ?>
 						<div class="item">
 							<span class="title big">Vídeo de</span>
 							<p class="value"><?php echo $talent["from"]; ?></p>
@@ -345,6 +347,7 @@ function polen_get_talent_card($talent)
 						<div class="item mx-3">
 							<?php Icon_Class::polen_icon_arrows(); ?>
 						</div>
+                                            <?php endif; ?>
 						<div class="item">
 							<span class="title big">Vídeo para</span>
 							<p class="value"><?php echo $talent["to"]; ?></p>
