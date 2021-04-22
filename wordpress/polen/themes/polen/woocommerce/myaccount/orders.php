@@ -125,9 +125,9 @@ if (in_array('user_talent',  $logged_user->roles)) {
 
 	<?php else : ?>
 		<div class="row">
-			<div class="col-12 col-md-8 m-md-auto text-center mt-5">
-				<p><?php esc_html_e('No order has been made yet.', 'woocommerce'); ?></p>
-				<a class="woocommerce-Button btn btn-outline-light btn-lg btn-block" href="<?php echo esc_url(apply_filters('woocommerce_return_to_shop_redirect', wc_get_page_permalink('shop'))); ?>"><?php esc_html_e('Browse products', 'woocommerce'); ?></a>
+			<div class="col-12 col-md-8 m-md-auto text-center mt-3">
+				<?php polen_box_image_message(TEMPLATE_URI . "/assets/img/list.svg", __('No order has been made yet.', 'woocommerce')); ?>
+				<a class="woocommerce-Button btn btn-outline-light btn-lg btn-block mt-3" href="<?php echo esc_url(apply_filters('woocommerce_return_to_shop_redirect', wc_get_page_permalink('shop'))); ?>"><?php esc_html_e('Browse products', 'woocommerce'); ?></a>
 			</div>
 		</div>
 	<?php endif; ?>

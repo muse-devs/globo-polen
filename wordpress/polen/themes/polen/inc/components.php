@@ -393,7 +393,7 @@ function polen_box_image_message($image, $text)
 				<img src="<?php echo $image; ?>" alt="<?php echo $text; ?>">
 			</div>
 			<div class="col-md-12 text center mt-4">
-				<?php echo $text; ?>
+				<p><?php echo $text; ?></p>
 			</div>
 		</div>
 	</div>

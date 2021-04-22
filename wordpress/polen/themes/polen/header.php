@@ -16,7 +16,7 @@
 
 <head>
 	<meta charset="<?php bloginfo('charset'); ?>">
-	<meta name="viewport" content="width=device-width; initial-scale=1; viewport-fit=cover">
+	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 	<meta name="mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-title" content="Muse">
@@ -53,7 +53,7 @@
 							<a class="dropbtn">
 								<div class="menu-user-data">
 									<div class="user-avatar">
-										<?php 
+										<?php
 										if( is_plugin_active( 'wp-user-avatar/wp-user-avatar.php' ) ){
 											echo get_wp_user_avatar(get_current_user_id());
 										} ?>
