@@ -20,7 +20,13 @@ if (in_array('user_talent',  $logged_user->roles)) {
 	<div class="page-content">
 		<?php
 		if (empty($talent_orders)) {
-			echo "<p>Você não possui novas solicitações</p>";
+		?>
+			<div class="row">
+				<div class="col-12 text-center mt-3">
+					<?php polen_box_image_message(TEMPLATE_URI . "/assets/img/empty_box.png", "Você ainda não tem pedidos<br />de Vídeos"); ?>
+				</div>
+			</div>
+			<?php
 		} else {
 			echo "<p class='mb-5'>Você tem <strong><span id='order-count'>" . count($talent_orders) . "</span> pedido(s) de vídeo</strong>, seus pedidos expiram em até 7 dias.</p>";
 			if (count($talent_orders) > 0) {
