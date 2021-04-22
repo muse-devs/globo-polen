@@ -28,12 +28,12 @@ jQuery(document).ready(function () {
 			{
 				breakpoint: 600,
 				settings: {
-					slidesToShow: 2,
-					slidesToScroll: 2,
+					slidesToShow: 3,
+					slidesToScroll: 1,
 				},
 			},
 			{
-				breakpoint: 480,
+				breakpoint: 576,
 				settings: "unslick",
 			},
 		],
