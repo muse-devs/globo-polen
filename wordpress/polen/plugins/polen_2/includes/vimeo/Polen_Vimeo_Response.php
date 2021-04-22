@@ -81,6 +81,35 @@ class Polen_Vimeo_Response
     }
     
     
+    public function get_image_url_smaller()
+    {
+        return $this->response['body']['pictures']['sizes'][0]['link'];
+    }
+    
+    
+    public function remove_size_for_image_url()
+    {
+        $img_url = $this->get_image_url_smaller();
+        $splited_url = explode( '_', $img_url );
+        $url_pice = $splited_url[0];
+        return $url_pice;
+    }
+    
+    /**
+     * Pegar um tamanho de thumb e adiciona na posicao exata da URL o tamanho que o usuário quer
+     * excluindo a borda preta padrão do vimeo
+     * 
+     * @param string $size "400x600"
+     * @return string url da imagem com tamanho
+     */
+    public function get_image_url_custom_size( string $size )
+    {
+        $url_removed_size = $this->remove_size_for_image_url();
+        $url_removed_size .= '_' . $size . '.jpg';
+        return $url_removed_size;
+    }
+    
+    
     public function get_duration()
     {
         return $this->response['body']['duration'];
