@@ -1,5 +1,5 @@
-<?php 
-$braspag_card_saved_data = get_user_meta( get_current_user_id(), 'braspag_card_saved_data', true ); 
+<?php
+$braspag_card_saved_data = get_user_meta( get_current_user_id(), 'braspag_card_saved_data', true );
 $braspag_default_payment = get_user_meta( get_current_user_id(), 'braspag_default_payment', true );
 
 use Polen\Includes\Polen_Talent;
@@ -11,7 +11,7 @@ if( $polen_talent->is_user_talent( $current_user ) ){
 }else{
 ?>
 <div class="u-columns woocommerce-Payment-Options col2-set payment-options">
-    <h3>Meus Cartões</h3>
+    <h1>Meus Cartões</h1>
     <div id="cards-accordion" class="panel-group" role="tablist" aria-multiselectable="true">
         <?php
         if( ! is_null( $braspag_card_saved_data ) && ! empty( $braspag_card_saved_data ) && is_array( $braspag_card_saved_data ) && count( $braspag_card_saved_data ) > 0 ) {
@@ -68,13 +68,14 @@ if( $polen_talent->is_user_talent( $current_user ) ){
             </div>
         </div>
         <?php
-            } 
+            }
         } else {
         ?>
         <div class="row">
-            <div class="col-md-12 text-center">
-                <h4>Nenhuma opção de pagamento cadastrada.</h4>
-            </div>
+			<div class="col-12 text-center mt-3">
+				<?php polen_box_image_message(TEMPLATE_URI . "/assets/img/cards.svg", "Você ainda não adicionou nenhuma<br />forma de pagamento"); ?>
+				<a class="woocommerce-Button btn btn-outline-light btn-lg btn-block mt-3" href="">Adicionar cartão</a>
+			</div>
         </div>
         <?php } ?>
     </div>

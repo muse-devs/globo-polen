@@ -8086,7 +8086,8 @@ input[type="file"] {
   background-color: #262626; }
   .box-round p {
     font-size: 14px;
-    font-weight: 700; }
+    font-weight: 700;
+    line-height: 18px; }
 
 .polen-card .image {
   position: relative;
