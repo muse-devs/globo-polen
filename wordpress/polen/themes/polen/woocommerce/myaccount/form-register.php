@@ -1,11 +1,10 @@
 <div class="woocommerce">
-	<div class="row mt-4 justify-content-md-center talent-login">
-		<div class="woocommerce-notices-wrapper"></div>
-			<div class="col-3 col-md-3"></div>
-			<div class="col-6 col-md-6" id="customer_register">
+	<div class="talent-login">
+		<div class="row woocommerce-notices-wrapper"></div>
+			<div class="col-12 col-md-10" id="customer_register">
 				<?php do_action( 'woocommerce_before_customer_login_form' ); ?>
 				<div class="row">
-					<h2><?php esc_html_e( 'Register', 'woocommerce' ); ?></h2>
+					<h2><?php //esc_html_e( 'Register', 'woocommerce' ); ?></h2>
 					<form method="post" class="woocommerce-form woocommerce-form-register register" <?php do_action( 'woocommerce_register_form_tag' ); ?> >
 
 						<?php do_action( 'woocommerce_register_form_start' ); ?>
@@ -48,7 +47,6 @@
 					</form>
 				</div>
 			</div>
-			<div class="col-3 col-md-3"></div>
 		</div>
 	</div>
 </div>
