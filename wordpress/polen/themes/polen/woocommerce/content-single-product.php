@@ -102,7 +102,7 @@ $terms = wp_get_object_terms(get_the_ID(), 'product_tag');
 				}
 			}
 			if (count($terms_ids) > 0) : ?>
-				<?php $others = get_objects_in_term($terms_ids, 'product_cat'); ?>
+				<?php $others = get_objects_in_term($terms_ids, 'product_tag'); ?>
 				<?php if (count($others)) : ?>
 					<div class="row">
 						<?php foreach ($others as $k => $id) :
