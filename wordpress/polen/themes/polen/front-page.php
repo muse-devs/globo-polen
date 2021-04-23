@@ -21,11 +21,11 @@ get_header();
 	<?php polen_front_get_banner();
 	?>
 
-	<?php polen_banner_scrollable(polen_get_new_talents(6), "Destaque", "#destaque"); ?>
+	<?php polen_banner_scrollable(polen_get_new_talents(6), "Destaque", home_url().'/shop/?orderby=date' ); ?>
 
 	<?php polen_front_get_tutorial(); ?>
 
-	<?php polen_banner_scrollable(polen_get_talents(12), "Todos talentos", "#todos");
+	<?php polen_banner_scrollable(polen_get_talents(12), "Todos talentos", home_url().'/shop' );
 	?>
 
 </main><!-- #main -->
