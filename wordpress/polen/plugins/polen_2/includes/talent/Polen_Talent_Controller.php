@@ -5,7 +5,7 @@ namespace Polen\Includes\Talent;
 use Polen\Includes\{Polen_Talent, Polen_Order, Debug};
 
 use Vimeo\Vimeo;
-use Vimeo\Exceptions\{VimeoException, VimeoRequestException, VimeoUploadException, ExceptionInterface};
+use Vimeo\Exceptions\{VimeoRequestException, ExceptionInterface};
 
 use Polen\Includes\Polen_Video_Info;
 use Polen\Includes\Vimeo\{Polen_Vimeo_Response, Polen_Vimeo_Vimeo_Options};

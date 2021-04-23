@@ -26,7 +26,7 @@ function get_form_login()
 	<div class="row">
 		<div class="col-12 col-md-5 mx-md-auto tab-login">
 
-			<div class="col-12 text-center">
+			<div class="col-12">
 				<h2><?php esc_html_e('Login', 'woocommerce'); ?></h2>
 			</div>
 
@@ -35,7 +35,7 @@ function get_form_login()
 					<div class="col-12 col-md-12">
 						<?php do_action('woocommerce_login_form_start'); ?>
 
-						<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+						<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide mb-4">
 							<?php /*<label for="username"><?php esc_html_e('Username or email address', 'woocommerce'); ?>&nbsp;<span class="required">*</span></label> */ ?>
 							<input type="text" class="woocommerce-Input woocommerce-Input--text input-text form-control form-control-lg" name="username" id="username" autocomplete="username" placeholder="<?php esc_html_e('Username or email address', 'woocommerce'); ?>" value="<?php echo (!empty($_POST['username'])) ? esc_attr(wp_unslash($_POST['username'])) : ''; ?>" /><?php // @codingStandardsIgnoreLine
 																																																																																													?>
@@ -48,27 +48,27 @@ function get_form_login()
 						<?php do_action('woocommerce_login_form'); ?>
 
 						<p class="form-row text-left">
-							<label class="woocommerce-form__label woocommerce-form__label-for-checkbox woocommerce-form-login__rememberme">
+							<label class="woocommerce-form__label woocommerce-form__label-for-checkbox woocommerce-form-login__rememberme mb-4">
 								<input class="woocommerce-form__input woocommerce-form__input-checkbox" name="rememberme" type="checkbox" id="rememberme" value="forever" /> <span><?php esc_html_e('Remember me', 'woocommerce'); ?></span>
 							</label>
 							<?php wp_nonce_field('woocommerce-login', 'woocommerce-login-nonce'); ?>
 							<button type="submit" class="woocommerce-button woocommerce-form-login__submit btn btn-primary btn-lg btn-block btn-login" name="login" value="<?php esc_attr_e('Log in', 'woocommerce'); ?>"><?php esc_html_e('Log in', 'woocommerce'); ?></button>
 						</p>
-						<p class="woocommerce-LostPassword lost_password">
-							<a href="<?php echo esc_url(wp_lostpassword_url()); ?>"><?php esc_html_e('Lost your password?', 'woocommerce'); ?></a>
-						</p>
 						<?php
 							global $Polen_Plugin_Settings;
-							if( isset( $Polen_Plugin_Settings['register_page'] ) && ! is_null( $Polen_Plugin_Settings['register_page'] ) && ! empty( $Polen_Plugin_Settings['register_page'] ) ) {
+							if( isset( $Polen_Plugin_Settings['register_page'] ) && ! is_null( $Polen_Plugin_Settings['register_page'] ) && ! empty( $Polen_Plugin_Settings['register_page'] ) ) :
 						?>
-						<p class="woocommerce-LostPassword lost_password">
+						<p class="woocommerce-LostPassword lost_password my-4">
 							<?php
 							$register_page = $Polen_Plugin_Settings['register_page'];
 							$register_link = get_the_permalink( $register_page );
 							?>
-							<a href="<?php echo esc_url( $register_link ); ?>"><?php esc_html_e('É novo por aqui? Então efetue seu cadastro.', 'woocommerce'); ?></a>
+							<a href="<?php echo esc_url( $register_link ); ?>" class="btn btn-outline-light btn-lg btn-block"><?php esc_html_e('Criar conta', 'woocommerce'); ?></a>
 						</p>
-						<?php } ?>
+						<?php endif; ?>
+						<p class="woocommerce-LostPassword lost_password">
+							<a href="<?php echo esc_url(wp_lostpassword_url()); ?>"><?php esc_html_e('Lost your password?', 'woocommerce'); ?></a>
+						</p>
 
 						<?php do_action('woocommerce_login_form_end'); ?>
 					</div>
