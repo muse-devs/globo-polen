@@ -2,6 +2,9 @@
 	width: 7.3rem;
 	max-width: 165px !important;
 	height: auto;
+	@include media-breakpoint-down(sm) {
+		width: 6rem;
+	}
 }
 
 /**
