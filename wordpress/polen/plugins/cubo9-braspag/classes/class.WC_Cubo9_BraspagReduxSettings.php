@@ -97,7 +97,7 @@ class WC_Cubo9_BraspagReduxSettings {
             'admin_bar'            => false,
             'admin_bar_icon'       => 'dashicons-admin-settings',
             'admin_bar_priority'   => 51,
-            'global_variable'      => '',
+            'global_variable'      => 'WC_Cubo9_BraspagReduxSettings',
             'dev_mode'             => false,
             'update_notice'        => true,
             'customizer'           => false,
@@ -451,6 +451,25 @@ class WC_Cubo9_BraspagReduxSettings {
                         'subtitle' => esc_html__('Informe o nome da bandeira, slug, ícone e taxas.', 'cubo9'),
                         'add_text' => 'Adicionar novo',
                         'show_empty' => false,
+                    ),
+                )
+            ) );
+
+            Redux::set_section( $opt_name, array(
+                'title'            => esc_html__( 'Cancelamento', 'cubo9' ),
+                'id'               => 'order_void',
+                'icon'             => 'el el-credit-card',
+                'subsection'       => false,
+                'fields'           => array(
+                    array(
+                        'id'       => 'order_expires',
+                        'type'     => 'spinner',
+                        'title'    => esc_html__('Validade do pedido', 'cubo9'),
+                        'subtitle' => esc_html__('Informe o prazo de validade de um pedido em dias.', 'cubo9'),
+                        'desc'     => esc_html__('Utilize essa opção para que os pedidos possam expirar automaticamente e ter o valor estornado.', 'cubo9'),
+                        'default'  => '7',
+                        'min'      => '0',
+                        'max'      => '30',
                     ),
                 )
             ) );

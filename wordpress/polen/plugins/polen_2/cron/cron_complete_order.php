@@ -24,7 +24,6 @@ foreach ( $videos as $video ) {
         }
         
         if( $response->video_processing_is_complete() ) {
-            Polen\Includes\Debug::def($response->response);
             $video->vimeo_process_complete = 1;
             //TODO colocar esse '300x435' em um lugar, tirar o hardcode
             $video->vimeo_thumbnail = $response->get_image_url_custom_size( '300x435' );

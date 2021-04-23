@@ -901,4 +901,78 @@ class Cubo9_Braspag {
             );
         }
     }
+
+    public function get_last_order_meta( $order_id, $meta_key ) {
+        global $wpdb;
+        $sql = "SELECT `meta_value` FROM `" . $wpdb->postmeta . "` WHERE `meta_key`='" . $meta_key . "' AND `post_id`=" . $order_id . ' ORDER BY `meta_id` DESC LIMIT 0, 1';
+        $res = $wpdb->get_results( $sql );
+        if( $res && ! is_wp_error( $res ) ) {
+            return maybe_unserialize( $res[0]->meta_value );
+        }
+    }
+
+    public function void( $amount = false, $VoidSplitPayments = array() ) {
+        $auth = $this->auth();
+        if( $auth['status'] == 'success' && ! is_null( $this->BRASPAG_TOKEN ) ) {
+            $order = $this->order;
+            if( $order && ! is_null( $order ) && is_a( $order, 'WC_Order' ) ) {
+                $order_id = $order->get_id();
+                if( ! $amount ) {
+                    $braspag_order_transaction_id = $this->get_last_order_meta( $order_id, 'braspag_order_transaction_id' );
+                    if( $braspag_order_transaction_id && ! is_null( $braspag_order_transaction_id ) && ! empty( $braspag_order_transaction_id ) ) {
+                        $url = $this->URL_CIELO_COMMERCE_API . '1/sales/' . $braspag_order_transaction_id . '/void';
+                        $headers = array(
+                            'Content-Type'  => 'application/json',
+                            'Authorization' => 'Bearer ' . $this->BRASPAG_TOKEN,
+                            'Content-Length' => 0,
+                        );
+            
+                        $body = array();
+            
+                        $response = wp_remote_post( $url, array(
+                                'method'  => 'PUT',
+                                'timeout' => 1000,
+                                'headers' => $headers,
+                            )
+                        );
+
+                        if( $response['response']['code'] === 200 && strtoupper( $response['response']['message'] ) === strtoupper( 'OK' ) ) {
+                            $str_response_body = $response['body'];
+                            update_post_meta( $order_id, 'braspag_void_response', $str_response_body );
+                            $body = json_decode( $str_response_body );
+
+                            $return = array(
+                                'Status'                => $body->Status,
+                                'ReasonCode'            => $body->ReasonCode,
+                                'ProviderReturnCode'    => $body->ProviderReturnCode,
+                                'ProviderReturnMessage' => $body->ProviderReturnMessage,
+                                'ReturnCode'            => $body->ReturnCode,
+                                'ReturnMessage'         => $body->ReturnMessage,
+                            );
+                            return $return;
+                        } elseif( $response['response']['code'] === 400 && strtoupper( $response['response']['message'] ) === strtoupper( 'Bad Request' ) ) {
+                            $str_response_body = $response['body'];
+                            $body = json_decode( $str_response_body );
+                            if( is_array( $body ) ) {
+                                $return = array(
+                                    'Code'    => $body[0]->Code,
+                                    'Message' => $body[0]->Message,
+                                );
+                            } else {
+                                $return = array(
+                                    'Code'    => $body->Code,
+                                    'Message' => $body->Message,
+                                );
+                            }
+                            return $return;
+                        }
+                    }
+                } elseif( $amount && (int) $amount > 0 && $VoidSplitPayments && is_array( $VoidSplitPayments ) ) {
+
+                }
+            }
+        }
+
+        return false;
+    }
 }
