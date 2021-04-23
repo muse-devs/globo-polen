@@ -37,10 +37,13 @@ if (in_array('user_talent',  $logged_user->roles)) {
 								<div class="row">
 									<div class="col-12 col-md-8">
 										<div class="row">
+                                            <?php
+                                            if( !empty( $order['from'] ) ) : ?>
 											<div class="col-6 col-md-3">
 												<p class="title">Vídeo de</p>
 												<p class="description"><?php echo $order['from']; ?></p>
 											</div>
+                                            <?php endif; ?>
 											<div class="col-6 col-md-3">
 												<p class="title">Para</p>
 												<p class="description"><?php echo $order['name']; ?></p>
@@ -112,7 +115,7 @@ if (in_array('user_talent',  $logged_user->roles)) {
 						<div class="col-12 talent-order-modal">
 							<button type="button" class="close" data-dismiss="modal" aria-label="Fechar"></button>
 							<div class="row body">
-								<div class="col-12">
+                                <div class="col-12" id="item-render-video-from">
 									<p class="p small">Vídeo de</p>
 									<span class="name" id="video-from"></span>
 								</div>
