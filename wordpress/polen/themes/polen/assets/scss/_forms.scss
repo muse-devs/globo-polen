@@ -4,13 +4,13 @@
 	font-size: 14px;
 	border: none;
 	color: $input-font-color;
-	background-color: $default-bg-color;
+	background-color: var(--gray-dark);
 	&::placeholder {
 		font-family: inherit;
 	}
 	&:focus {
 		color: $input-font-color;
-		background-color: $default-bg-color;
+		background-color: var(--gray-dark);
 	}
 }
 
