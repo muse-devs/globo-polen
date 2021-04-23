@@ -138,3 +138,8 @@ select.form-control:not([size]):not([multiple]) {
 	border-radius: $input-border-radius;
 	background-color: $error-box-color;
 }
+
+.woocommerce form .show-password-input,
+.woocommerce-page form .show-password-input {
+	top: 1.4em;
+}

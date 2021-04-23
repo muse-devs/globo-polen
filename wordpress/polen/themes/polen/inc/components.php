@@ -250,17 +250,20 @@ function polen_talent_promo_card($talent)
 function polen_front_get_talent_videos($talent)
 {
 	$items = array();
-    $items_raw = Polen\Includes\Polen_Video_Info::select_by_talent_id($talent->user_id);
-    foreach ($items_raw as $item) {
-        $items[] = [
-            'title' => '',
-            'image' =>  $item->vimeo_thumbnail,
-            'video' => $item->vimeo_link
-        ];
-    }
+	$items_raw = Polen\Includes\Polen_Video_Info::select_by_talent_id($talent->user_id);
+	foreach ($items_raw as $item) {
+		$items[] = [
+			'title' => '',
+			'image' =>  $item->vimeo_thumbnail,
+			'video' => $item->vimeo_link
+		];
+	}
 	if (sizeof($items) < 1) {
 		return;
 	}
+
+	$img_perfil = "https://images.generated.photos/IPGS4BoLiOx_1HOfsRCb93uoRnrC-QH-b1u87wp4u_4/rs:fit:512:512/wm:0.95:sowe:18:18:0.33/Z3M6Ly9nZW5lcmF0/ZWQtcGhvdG9zL3Yz/XzA1ODk4NjIuanBn.jpg";
+	$iniciais = "AA";
 ?>
 	<section class="row mb-4 banner-scrollable">
 		<div class="d-none d-md-block col-md-12 text-right custom-slick-controls"></div>
@@ -272,6 +275,12 @@ function polen_front_get_talent_videos($talent)
 							<figure class="video-cover">
 								<img loading="lazy" src="<?= $item['image']; ?>" alt="<?= $item['title']; ?>" data-url="<?= $item['video']; ?>">
 								<a href="javascript:openVideoByURL('<?= $item['video']; ?>')" class="video-player-button"></a>
+								<div class="video-icons">
+									<figure class="image-cropper small">
+										<img loading="lazy" src="<?php echo $img_perfil; ?>" alt="Foto do Perfil">
+									</figure>
+									<div class="text-cropper small"><?php echo $iniciais; ?></div>
+								</div>
 							</figure>
 						</div>
 					<?php endforeach; ?>
@@ -338,16 +347,16 @@ function polen_get_talent_card($talent)
 			<div class="col pt-4 mt-3 details">
 				<div class="row personal">
 					<div class="col d-flex">
-                                            <?php
-                                            if ( empty( !$talent["from"] )) : ?>
-						<div class="item">
-							<span class="title big">Vídeo de</span>
-							<p class="value"><?php echo $talent["from"]; ?></p>
-						</div>
-						<div class="item mx-3">
-							<?php Icon_Class::polen_icon_arrows(); ?>
-						</div>
-                                            <?php endif; ?>
+						<?php
+						if (empty(!$talent["from"])) : ?>
+							<div class="item">
+								<span class="title big">Vídeo de</span>
+								<p class="value"><?php echo $talent["from"]; ?></p>
+							</div>
+							<div class="item mx-3">
+								<?php Icon_Class::polen_icon_arrows(); ?>
+							</div>
+						<?php endif; ?>
 						<div class="item">
 							<span class="title big">Vídeo para</span>
 							<p class="value"><?php echo $talent["to"]; ?></p>
@@ -401,45 +410,4 @@ function polen_box_image_message($image, $text)
 		</div>
 	</div>
 <?php
-}
-
-/**
- * Gets the thumbnail url for a vimeo video using the video id. This only works for public videos.
- *
- * @param string $id        The video id.
- * @param string $thumbType Thumbnail image size. supported sizes: small, medium (default) and large.
- *
- * @return string|bool
- */
-
-function getVimeoVideoThumbnailByVideoId($id = '', $thumbType = 'large')
-{
-
-	$id = trim($id);
-
-	if ($id == '') {
-		return FALSE;
-	}
-
-	$apiData = unserialize(file_get_contents("http://vimeo.com/api/v2/video/$id.php"));
-
-	if (is_array($apiData) && count($apiData) > 0) {
-
-		$videoInfo = $apiData[0];
-
-		switch ($thumbType) {
-			case 'small':
-				return $videoInfo['thumbnail_small'];
-				break;
-			case 'large':
-				return $videoInfo['thumbnail_large'];
-				break;
-			case 'medium':
-				return $videoInfo['thumbnail_medium'];
-			default:
-				break;
-		}
-	}
-
-	return FALSE;
 }
