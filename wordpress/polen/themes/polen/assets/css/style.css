@@ -7831,30 +7831,52 @@ select {
 
 .dropdown {
   position: relative;
-  display: inline-block;
-  z-index: 97; }
-  .dropdown:hover .dropdown-content {
-    display: block; }
+  display: inline-block; }
   .dropdown:hover .dropbtn {
     color: #fff; }
   .dropdown .dropbtn {
     padding: 0; }
   .dropdown .dropdown-content {
     position: absolute;
-    display: none;
+    display: block;
+    opacity: 0;
     padding: 0.3rem;
     right: 0;
     min-width: 160px;
     border-radius: 0.3rem;
     background-color: #272727;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1; }
+    transition: opacity 250ms ease;
+    z-index: -1; }
+    .dropdown .dropdown-content.show {
+      opacity: 1;
+      z-index: 97; }
     .dropdown .dropdown-content a {
       padding: 5px 10px;
       text-decoration: none;
       display: block;
       font-size: 14px;
       color: #fff; }
+    @media (max-width: 767.98px) {
+      .dropdown .dropdown-content {
+        position: fixed;
+        padding: 1rem;
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        background-color: #000; }
+        .dropdown .dropdown-content a {
+          padding: 10px 0;
+          font-size: 18px; }
+        .dropdown .dropdown-content .menu-close {
+          position: absolute;
+          top: 0;
+          right: 1rem;
+          z-index: 99; }
+          .dropdown .dropdown-content .menu-close i {
+            font-size: 32px;
+            color: #fff; } }
   .dropdown .menu-user-data {
     display: flex;
     align-items: center;
