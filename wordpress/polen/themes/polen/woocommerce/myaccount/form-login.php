@@ -24,10 +24,10 @@ function get_form_login()
 {
 ?>
 	<div class="row">
-		<div class="col-12 col-md-5 mx-md-auto tab-login">
+		<div class="col-12 col-md-6 mx-md-auto">
 
 			<div class="col-12">
-				<h2><?php esc_html_e('Login', 'woocommerce'); ?></h2>
+				<h1><?php esc_html_e('Login', 'woocommerce'); ?></h1>
 			</div>
 
 			<form class="woocommerce-form woocommerce-form-login login" method="post">
