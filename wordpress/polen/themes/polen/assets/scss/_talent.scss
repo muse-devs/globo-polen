@@ -265,7 +265,8 @@
 		font-weight: 700;
 	}
 	.title {
-		color: $light-50;
+		font-size: 12px;
+		font-weight: 400;
 	}
 
 	.description {
@@ -274,12 +275,17 @@
 
 .talent-order-modal {
 	position: relative;
+	margin-top: 3%;
 	padding: 0 40px;
 	width: 100%;
 	border-radius: 10px;
 	overflow: hidden;
-	background-color: $dark-100;
+	background-color: $talent-bg-color;
 	// box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	@include media-breakpoint-down(sm) {
+		margin: 0;
+		background-color: $dark-100;
+	}
 	.header {
 		padding: 60px;
 		box-sizing: border-box;
@@ -289,38 +295,16 @@
 		padding: 35px 0;
 		box-sizing: border-box;
 	}
-	.p {
-		margin: 0;
-		font-size: 24px;
-		font-weight: 700;
-		color: $font-transparent;
-		&.small {
-			font-size: 16px;
-		}
-	}
-	.value {
-		font-size: 44px;
-		font-weight: 700;
-	}
-	.time {
-		font-size: 24px;
-		font-weight: 700;
-	}
 	.name {
-		font-size: 24px;
+		font-size: 16px;
 		font-weight: 700;
-		&.small {
-			font-size: 20px;
-			font-weight: 500;
-		}
-	}
-	.category {
-		font-size: 24px;
-		font-weight: 500;
 	}
 	.text {
 		font-size: 16px;
-		font-weight: 500;
+		font-weight: 400;
+	}
+	.border-bottom {
+		border-color: rgba($color: #ffffff, $alpha: 0.5);
 	}
 }
 
@@ -463,5 +447,20 @@
 	display: none;
 	&.show {
 		display: block;
+	}
+}
+
+.video-sent-success {
+	p {
+		font-size: 15px;
+		font-weight: 400;
+		&.strong {
+			font-size: 16px;
+			font-weight: 700;
+		}
+		&.money {
+			font-size: 24px;
+			font-weight: 700;
+		}
 	}
 }
