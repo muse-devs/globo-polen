@@ -2,6 +2,14 @@
 	box-sizing: border-box;
 	border-radius: 8px;
 	background-color: $talent-bg-color;
+	img {
+		margin-bottom: -30px;
+	}
+	p {
+		font-size: 14px;
+		font-weight: 700;
+		line-height: 18px;
+	}
 }
 
 .polen-card {
@@ -21,7 +29,7 @@
 			height: 100%;
 			top: 0;
 			left: 0;
-			z-index: 2;
+			z-index: 3;
 		}
 		&::after {
 			content: "";
@@ -40,18 +48,19 @@
 		}
 		img {
 			position: absolute;
-    		overflow: hidden;
+			overflow: hidden;
 			width: 100%;
 			height: 100%;
 			object-fit: cover;
 		}
 		.price {
 			position: absolute;
-			bottom: 10px;
-			right: 20px;
+			bottom: 16px;
+			right: 16px;
 			font-family: $font-primary;
 			font-size: 16px;
 			font-weight: 700;
+			line-height: 1;
 			z-index: 3;
 			.icon {
 				font-size: 11px;
@@ -80,6 +89,7 @@
 		}
 	}
 	.title {
+		margin-bottom: 0;
 		// margin-top: 32px;
 		line-height: 1;
 		font-weight: 700;
@@ -239,50 +249,49 @@
 			@include media-breakpoint-up(md) {
 				padding-left: 15px;
 				flex-wrap: wrap;
-				.responsive {
-					margin-bottom: 1rem;
-					.polen-card {
-						width: 156px;
-						@include media-breakpoint-down(sm) {
-							width: 40vw;
-						}
-						@include media-breakpoint-only(sm) {
-						}
-						@include media-breakpoint-only(md) {
-							width: 126px;
-							.image {
-								height: 165px;
-							}
-						}
-						@include media-breakpoint-only(lg) {
-							width: 142px;
-						}
-						@include media-breakpoint-only(xl) {
-							.image {
-								height: 200px;
-							}
-						}
-					}
-					@include media-breakpoint-only(md) {
-						&:nth-child(5n + 0) {
-							.polen-card {
-								margin-right: 0;
-							}
-						}
-					}
-					@include media-breakpoint-up(lg) {
-						&:nth-child(6n + 0) {
-							.polen-card {
-								margin-right: 0;
-							}
-						}
-					}
-				}
 				.polen-card.responsive {
 					margin: 0 15px 0 0;
 				}
 			}
-			.polen-card.type-video,
+			.responsive {
+				margin-bottom: 1rem;
+				.polen-card {
+					width: 156px;
+					@include media-breakpoint-down(sm) {
+						width: 40vw;
+					}
+					@include media-breakpoint-only(sm) {
+					}
+					@include media-breakpoint-only(md) {
+						width: 126px;
+						.image {
+							height: 165px;
+						}
+					}
+					@include media-breakpoint-only(lg) {
+						width: 142px;
+					}
+					@include media-breakpoint-only(xl) {
+						.image {
+							height: 200px;
+						}
+					}
+				}
+				@include media-breakpoint-only(md) {
+					&:nth-child(5n + 0) {
+						.polen-card {
+							margin-right: 0;
+						}
+					}
+				}
+				@include media-breakpoint-up(lg) {
+					&:nth-child(6n + 0) {
+						.polen-card {
+							margin-right: 0;
+						}
+					}
+				}
+			}
 			> .responsive {
 				&:first-child {
 					margin-left: 15px;
@@ -293,22 +302,63 @@
 			}
 		}
 	}
-	.video-cover {
-		position: relative;
-		margin: 0 15px 15px 0;
-		height: 77vw;
-		max-width: 200px;
-		max-height: 290px;
-		border-radius: 8px;
-		background: no-repeat center/cover;
-		overflow: hidden;
-		img {
-			width: 100%;
-			height: 100%;
-			object-fit: cover;
+}
+
+.banner-content.type-video {
+	.polen-card-video {
+		&:first-child {
+			@include media-breakpoint-down(xs) {
+				margin-left: 15px;
+			}
 		}
+	}
+}
+
+.video-cover,
+.video-promo-card .card {
+	position: relative;
+	margin: 0 15px 15px 0;
+	width: 240px;
+	height: 348px;
+	border-radius: $input-border-radius;
+	@include media-breakpoint-down(lg) {
+		width: 220px;
+		height: 340px;
+	}
+	@include media-breakpoint-down(sm) {
+		width: 165px;
+		height: 280px;
+	}
+	@include media-breakpoint-down(xs) {
+		width: 43vw;
+		height: 70vw;
+	}
+}
+
+.video-cover {
+	background: no-repeat center/cover;
+	overflow: hidden;
+	img {
+		// position: absolute;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+}
+
+.video-promo-card {
+	.card {
+		margin: 0 0 15px 0;
+		background-color: $talent-bg-color;
+		transition: all 350ms ease;
 		@include media-breakpoint-down(xs) {
-			width: 53vw;
+			margin-right: 15px;
+		}
+		.btn {
+			font-size: 10px !important;
+		}
+		&:hover {
+			background-color: $primary;
 		}
 	}
 }
@@ -334,6 +384,19 @@
 		border-bottom: 12px solid transparent;
 
 		border-left: 16px solid $light-100;
+	}
+}
+
+.video-icons {
+	position: absolute;
+	left: 16px;
+	bottom: 16px;
+	> * {
+		margin: 0;
+		vertical-align: bottom;
+		&:last-child {
+			margin-left: -15px;
+		}
 	}
 }
 
@@ -400,28 +463,6 @@
 		&.icon-camera-video {
 			font-size: 18px;
 			line-height: 40px;
-		}
-	}
-}
-
-.video-promo-card {
-	.card {
-		position: relative;
-		margin: 0 15px 15px 0;
-		max-width: 200px;
-		height: 77vw;
-		max-height: 290px;
-		border-radius: $input-border-radius;
-		background-color: $talent-bg-color;
-		transition: all 350ms ease;
-		.btn {
-			font-size: 10px !important;
-		}
-		&:hover {
-			background-color: $primary;
-		}
-		@include media-breakpoint-down(xs) {
-			width: 53vw;
 		}
 	}
 }

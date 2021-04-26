@@ -33,7 +33,6 @@
 			e.preventDefault();
 			var wnonce = $(this).attr('button-nonce');
 			var order_id = $(this).attr('order-id');
-			console.log(order_id);
 			$.ajax(
 				{
 					type: 'POST',
@@ -47,7 +46,12 @@
 						let obj = $.parseJSON( response );
 						if( obj.success == true ){
 							$('#order-value').html(obj['data'][0]['total']);
-							$('#video-from').html(obj['data'][0]['from']);
+                            if( obj['data'][0]['from'].length === 0 ) {
+                                $('#item-render-video-from').hide();
+                            } else {
+                                $('#item-render-video-from').show();
+                            }
+                            $('#video-from').html(obj['data'][0]['from'])
 							$('#video-name').html(obj['data'][0]['name']);
 							$('#video-email').html(obj['data'][0]['email']);
 							$('#video-category').html(obj['data'][0]['category']);
