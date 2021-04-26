@@ -73,7 +73,7 @@ function polen_banner_scrollable($items, $title, $link)
 				</div>
 			</header>
 		</div>
-		<div class="col-md-12" style="padding: 0;">
+		<div class="col-md-12 p-0 p-md-0">
 			<div class="banner-wrapper">
 				<div class="banner-content">
 					<?php foreach ($items as $item) : ?>
