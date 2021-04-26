@@ -143,3 +143,10 @@ select.form-control:not([size]):not([multiple]) {
 .woocommerce-page form .show-password-input {
 	top: 1.4em;
 }
+
+.woocommerce .woocommerce-ordering,
+.woocommerce-page .woocommerce-ordering {
+	@include media-breakpoint-down(sm) {
+		float: left;
+	}
+}
