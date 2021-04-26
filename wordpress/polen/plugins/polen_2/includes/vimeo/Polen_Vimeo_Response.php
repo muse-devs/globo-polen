@@ -2,6 +2,8 @@
 
 namespace Polen\Includes\Vimeo;
 
+use Polen\Includes\Vimeo\Polen_Vimeo_String_Url;
+
 /**
  * Polen_Vimeo_Response é uma classe para interpretar o response do Vimeo
  */
@@ -78,6 +80,29 @@ class Polen_Vimeo_Response
     public function get_image_url_640()
     {
         return $this->response['body']['pictures']['sizes'][3]['link'];
+    }
+    
+    /**
+     * 
+     * @return type
+     */
+    public function get_image_url_smaller()
+    {
+        return $this->response['body']['pictures']['sizes'][0]['link'];
+    }
+    
+    /**
+     * Pegar um tamanho de thumb e adiciona na posicao exata da URL o tamanho que o usuário quer
+     * excluindo a borda preta padrão do vimeo
+     * 
+     * @param string $size "400x600"
+     * @return string url da imagem com tamanho
+     */
+    public function get_image_url_custom_size( string $size )
+    {
+        $thumb_url_vimeo = $this->get_image_url_smaller();
+        $url_removed_size = Polen_Vimeo_String_Url::get_image_url_custom_size( $size, $thumb_url_vimeo );
+        return $url_removed_size;
     }
     
     

@@ -16,7 +16,7 @@
 
 <head>
 	<meta charset="<?php bloginfo('charset'); ?>">
-	<meta name="viewport" content="width=device-width; initial-scale=1; viewport-fit=cover">
+	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 	<meta name="mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-title" content="Muse">
@@ -53,23 +53,35 @@
 							<a class="dropbtn">
 								<div class="menu-user-data">
 									<div class="user-avatar">
-										<?php 
-										if( is_plugin_active( 'wp-user-avatar/wp-user-avatar.php' ) ){
+										<?php
+										if (is_plugin_active('wp-user-avatar/wp-user-avatar.php')) {
 											echo get_wp_user_avatar(get_current_user_id());
 										} ?>
 									</div>
 									<?php Icon_Class::polen_icon_chevron(); ?>
 								</div>
 							</a>
-							<!-- <a class="dropbtn text-truncate">
-								<i class="bi bi-person-circle"></i>
-								<?php echo $user_name->display_name; ?>
-							</a> -->
 							<div class="dropdown-content">
-								<a href="<?php echo get_permalink(get_option('woocommerce_myaccount_page_id')); ?>">Minha conta</a>
-								<a href="<?php echo esc_url(wc_get_account_endpoint_url('orders')); ?>">Meus pedidos</a>
-								<a href="<?php echo esc_url(wc_customer_edit_account_url()); ?>">Meus dados</a>
-								<a href="<?php echo esc_url(wp_logout_url()); ?>">Sair</a>
+								<div class="row mb-5 d-md-none">
+									<div class="col-12">
+										<div class="user-avatar mb-1">
+											<?php
+											if (is_plugin_active('wp-user-avatar/wp-user-avatar.php')) {
+												echo get_wp_user_avatar(get_current_user_id());
+											} ?>
+										</div>
+										<?php echo $user_name->display_name; ?>
+									</div>
+									<a class="menu-close"><?php Icon_Class::polen_icon_close(); ?></a>
+								</div>
+								<div class="row">
+									<div class="col-12">
+										<a href="<?php echo get_permalink(get_option('woocommerce_myaccount_page_id')); ?>">Minha conta</a>
+										<a href="<?php echo esc_url(wc_get_account_endpoint_url('orders')); ?>">Meus pedidos</a>
+										<a href="<?php echo esc_url(wc_customer_edit_account_url()); ?>">Meus dados</a>
+										<a href="<?php echo esc_url(wp_logout_url()); ?>">Sair</a>
+									</div>
+								</div>
 							</div>
 						<?php
 						} else { ?>

@@ -62,10 +62,13 @@ if( isset( $_REQUEST['order_id'] ) && ! empty( $_REQUEST['order_id'] ) ) {
                     <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"></button>
                         <div class="body">
                             <div class="row d-flex align-items-center">
-                                <div class="col-12">
-                                    <p class="p small">Vídeo de</p>
-                                    <span class="name"><?= $polen_order->get_offered_by(); ?></span>
-                                </div>
+                                <?php
+                                if( !empty( $polen_order->get_offered_by() ) ) : ?>
+                                    <div class="col-12">
+                                        <p class="p small">Vídeo de</p>
+                                        <span class="name"><?= $polen_order->get_offered_by(); ?></span>
+                                    </div>
+                                <?php endif; ?>
                                 <div class="col-12 mt-3">
                                     <p class="p small">Para</p>
                                     <span class="name"><?= $polen_order->get_name_to_video(); ?></span>

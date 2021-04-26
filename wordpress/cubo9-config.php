@@ -20,13 +20,6 @@ define( 'JWT_AUTH_SECRET_KEY', '90424b7a87b2b4243a0312df61d3e5722b4e87c' );
 define( 'JWT_AUTH_CORS_ENABLE', true );
 
 /**
- * Ambiente de desenvolvimento?
- * 
- * ATENÇÃO: Deixe como falso no ambiente de produção.
- */
-define( 'ENV_DEV', true );
-
-/**
  * Caso o WP_DEBUG esteja ativo
  */
 if( 'WP_DEBUG' ) {
