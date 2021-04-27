@@ -60,7 +60,7 @@ select.form-control:not([size]):not([multiple]) {
 		&.is-active {
 			border-radius: 6px;
 			border-left-color: $primary;
-			background-color: $form-bg-color;
+			background-color: $talent-bg-color;
 		}
 	}
 	@include media-breakpoint-down(xs) {
