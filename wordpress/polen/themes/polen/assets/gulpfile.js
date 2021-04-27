@@ -15,7 +15,8 @@ const fontName = "MuseIcons";
 const sass_dir = "./scss/**/*.scss";
 
 gulp.task("iconfont", function () {
-	gulp.src(["icons/*.svg"])
+	return gulp
+		.src(["icons/*.svg"])
 		.pipe(
 			iconfontCss({
 				fontName: fontName,
