@@ -75,3 +75,11 @@
 		height: 32px;
 	}
 }
+
+.icon {
+	text-decoration: none;
+	&:hover,
+	&:active {
+		text-decoration: none;
+	}
+}

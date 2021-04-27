@@ -467,3 +467,21 @@
 		}
 	}
 }
+
+.svg-icon {
+	display: inline-block;
+}
+
+.payment-method-item {
+	.svg-icon {
+		zoom: 2;
+	}
+	.sufix {
+		font-size: 16px;
+		font-weight: 700;
+	}
+	.icon, .bi {
+		color: $light-100;
+		font-size: 24px;
+	}
+}
