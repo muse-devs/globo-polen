@@ -47,6 +47,14 @@ class Polen_WooCommerce
                 'show_in_admin_status_list' => true,
                 'label_count'               => _n_noop( 'O talento aceitou <span class="count">(%s)</span>', 'O talento aceitou <span class="count">(%s)</span>', 'polen' ),
             ),
+            'wc-order-expired' => array(
+                'label'                     => __( 'Pedido expirado', 'polen' ),
+                'public'                    => false,
+                'exclude_from_search'       => false,
+                'show_in_admin_all_list'    => true,
+                'show_in_admin_status_list' => true,
+                'label_count'               => _n_noop( 'Pedido expirado <span class="count">(%s)</span>', 'Pedido expirado <span class="count">(%s)</span>', 'polen' ),
+            ),
         );
 
         if( $static ) {
