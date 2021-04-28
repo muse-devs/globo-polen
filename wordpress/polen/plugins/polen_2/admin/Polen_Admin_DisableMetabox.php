@@ -113,6 +113,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 
                 remove_meta_box( 'woocommerce_dashboard_recent_reviews', 'dashboard', 'normal' );
                 remove_meta_box( 'woocommerce_dashboard_status', 'dashboard', 'normal' );
+                remove_meta_box( 'wc_admin_dashboard_setup', 'dashboard', 'normal' );
             }
         }
 
