@@ -43,7 +43,7 @@ class Polen_WC_Payment_Approved extends \WC_Email {
 		}
 
 		$this->recipient = $order_email;
-
+        add_post_meta( $order_id, 'mail_order_recipient', $this->get_recipient() );
 
 		if ( ! $this->is_enabled() || ! $this->get_recipient() ) {
 			return;
