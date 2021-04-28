@@ -21,7 +21,7 @@ if ($polen_talent->is_user_talent($current_user)) {
 			<div class="col-md-12">
 				<?php if (!is_null($braspag_card_saved_data) && !empty($braspag_card_saved_data) && is_array($braspag_card_saved_data) && count($braspag_card_saved_data) > 0) : ?>
 					<?php foreach ($braspag_card_saved_data as $p => $data) : $prefix = md5($p); ?>
-						<div class="box-round d-flex justify-content-between align-items-center px-3 py-4 mb-3 payment-method-item">
+						<div id="#payment-<?php echo $prefix; ?>" class="box-round d-flex justify-content-between align-items-center px-3 py-4 mb-3 payment-method-item">
 							<div class="d-flex align-items-center">
 								<?php Icon_Class::polen_icon_card(strtolower($data['brand'])); ?>
 								<span class="sufix">**** <?php echo $data['sufix']; ?></span>

@@ -86,22 +86,14 @@ $terms = wp_get_object_terms(get_the_ID(), 'product_tag');
 	<!-- Como funciona? -->
 	<?php polen_front_get_tutorial(); ?>
 
-	<header class="row d-flex justify-content-between mb-4">
-		<div class="col">
-			<h2>Relacionados</h2>
-		</div>
-		<?php
-		$cat_terms = wp_get_object_terms(get_the_ID(), 'product_cat');
-		$cat_link = '#';
-		if( isset( $cat_terms[0] ) && !empty( $cat_terms[0]->term_id ) ){
-			$cat_link = get_term_link( $cat_terms[0]->term_id );
-		}					
-		?>
-		<div class="col d-flex justify-content-end align-items-center"><a href="<?php echo $cat_link;?>">Ver todos <?php Icon_Class::polen_icon_chevron_right(); ?></a></div>
-	</header>
 	<div class="row">
-		<div class="col-12">
+		<div class="col-12 col-md-12">
 			<?php
+			$cat_terms = wp_get_object_terms(get_the_ID(), 'product_cat');
+			$cat_link = '';
+			if( isset( $cat_terms[0] ) && !empty( $cat_terms[0]->term_id ) ){
+				$cat_link = get_term_link( $cat_terms[0]->term_id );
+			}
 			$terms_ids = array();
 			if (count($cat_terms) > 0) {
 				foreach ($cat_terms as $k => $term) {
@@ -113,27 +105,27 @@ $terms = wp_get_object_terms(get_the_ID(), 'product_tag');
 				$arr_obj = array();
 				$arr_obj[] = get_the_ID();
 				shuffle( $others );
-	
+
 				if (count($others)) : ?>
-					<div class="row">
-						<?php 
+						<?php
+						$args = array();
 						foreach ($others as $k => $id) :
 							if( !in_array( $id, $arr_obj ) ){
 								if( count( $arr_obj ) > 5 ){ exit; }
 								$product = wc_get_product($id);
 								$arr_obj[] = $id;
 
-								polen_front_get_card(array(
-									"talent_url" => "",
-									"image" => wp_get_attachment_url($product->get_image_id()),
+								$args[] = array(
+									"ID" => $id,
+									"talent_url" => get_permalink($id),
 									"name" => $product->get_title(),
 									"price" => $product->get_regular_price(),
-									"category_url" => "",
-									"category" => ""
-								), "small");
+									"category_url" => $cat_link,
+									"category" => wc_get_product_category_list($id)
+								);
 							}
 						endforeach; ?>
-					</div>
+						<?php polen_banner_scrollable($args, "Relacionados", $cat_link); ?>
 				<?php endif; ?>
 			<?php endif; ?>
 		</div>

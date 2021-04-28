@@ -1,9 +1,15 @@
 body {
 	font-family: $font-primary;
 	font-size: 13px;
-	color: white;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	color: white;
+	// color: $black;
+	// background-color: $white;
+	// @media (prefers-color-scheme: dark) {
+	// 	color: $white;
+	// 	background-color: $black;
+	// }
 	&.no-scroll {
 		overflow: hidden;
 	}
