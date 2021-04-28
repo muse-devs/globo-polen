@@ -27,12 +27,12 @@
 
         $(document).on( 'click', '.braspag-remove-payment', function(e) {
             e.preventDefault();
-            braspagRemove( $(this).attr('remove-id') );
-            let remove_id = '#payment-' + $(this).attr('remove-id');
-            $(remove_id).remove();
-            if( $( '#cards-accordion' ).children().length === 0 ) {
-                $( '#cards-accordion' ).html('<div class="row"><div class="col-md-12 text-center"><h4>Nenhuma opção de pagamento cadastrada.</h4></div></div>');
+            if (!confirm("Tem certeza que deseja excluir esse cartão?")) {
+                return;
             }
+            braspagRemove( $(this).attr('remove-id') );
+            let remove_id = document.getElementById('#payment-' + $(this).attr('remove-id'));
+            remove_id.parentNode.removeChild(remove_id);
         });
     });
 
@@ -73,6 +73,9 @@
             },
             success: function( data ) {
                 console.log( data );
+                if( $( '.payment-method-item' ).length === 0 ) {
+                    window.location.reload();
+                }
             },
             error: function( error ) {
                 console.log( error );

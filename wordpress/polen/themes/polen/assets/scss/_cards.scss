@@ -473,6 +473,11 @@
 }
 
 .payment-method-item {
+	a {
+		&:hover {
+			text-decoration: none;
+		}
+	}
 	.svg-icon {
 		zoom: 2;
 	}
