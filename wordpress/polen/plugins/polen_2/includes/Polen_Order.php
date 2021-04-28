@@ -113,7 +113,7 @@ class Polen_Order
      */
     public function get_orders_by_user_email( $email, $order_number ){
         $check_email = get_post_meta( $order_number, '_billing_email', true );
-        if( trim( $check_email ) === trim( $email ) ) {
+        if( trim( $check_email ) === trim( $email ) ){
             $order = wc_get_order( $order_number );
             return $order;
         }
