@@ -155,6 +155,7 @@
 	height: 270px;
 	border-radius: 8px;
 	overflow: hidden;
+	-webkit-mask-image: -webkit-radial-gradient(white, black);
 	.video {
 		position: absolute;
 		height: 100%;
@@ -464,5 +465,23 @@
 			font-size: 18px;
 			line-height: 40px;
 		}
+	}
+}
+
+.svg-icon {
+	display: inline-block;
+}
+
+.payment-method-item {
+	.svg-icon {
+		zoom: 2;
+	}
+	.sufix {
+		font-size: 16px;
+		font-weight: 700;
+	}
+	.icon, .bi {
+		color: $light-100;
+		font-size: 24px;
 	}
 }

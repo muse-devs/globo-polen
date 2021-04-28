@@ -1,85 +1,63 @@
 <?php
-$braspag_card_saved_data = get_user_meta( get_current_user_id(), 'braspag_card_saved_data', true );
-$braspag_default_payment = get_user_meta( get_current_user_id(), 'braspag_default_payment', true );
+$braspag_card_saved_data = get_user_meta(get_current_user_id(), 'braspag_card_saved_data', true);
+$braspag_default_payment = get_user_meta(get_current_user_id(), 'braspag_default_payment', true);
 
 use Polen\Includes\Polen_Talent;
+
 $polen_talent = new Polen_Talent();
 $current_user = wp_get_current_user();
 
-if( $polen_talent->is_user_talent( $current_user ) ){
-    require get_template_directory() . '/braspag/my-account/payment-talent.php';
-}else{
+if ($polen_talent->is_user_talent($current_user)) {
+	require get_template_directory() . '/braspag/my-account/payment-talent.php';
+} else {
 ?>
-<div class="u-columns woocommerce-Payment-Options col2-set payment-options">
-    <h1>Meus Cartões</h1>
-    <div id="cards-accordion" class="panel-group" role="tablist" aria-multiselectable="true">
-        <?php
-        if( ! is_null( $braspag_card_saved_data ) && ! empty( $braspag_card_saved_data ) && is_array( $braspag_card_saved_data ) && count( $braspag_card_saved_data ) > 0 ) {
-            foreach( $braspag_card_saved_data as $p => $data ) {
-                $prefix = md5( $p );
-        ?>
-        <div id="payment-<?php echo $prefix; ?>" class="panel panel-default">
-            <div class="panel-heading" role="tab" id="heading-<?php echo $prefix; ?>">
-                <h4 class="panel-title">
-                    <a class="collapsed" role="button" data-parent="#cards-accordion" data-toggle="collapse" data-target="#collapse-<?php echo $prefix; ?>" aria-expanded="false" aria-controls="collapse-<?php echo $prefix; ?>">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <strong id="braspag-brand-name-<?php echo $prefix; ?>"><?php echo $data['brand']; ?></strong><?php echo ( $braspag_default_payment == $prefix ) ? ' (Padrão)' : ''; ?>
-                                <span class="badge badge-primary badge-pill"><?php echo __( 'Final:', 'cubo9' ); ?> <?php echo $data['sufix']; ?></span>
-                            </div>
-                            <div class="col-md-4 text-center">
-                                <strong>Expira em</strong>:&nbsp;<?php echo $data['expiration_date']; ?>
-                            </div>
-                        </div>
-                    </a>
-                </h4>
-            </div>
-
-            <div id="collapse-<?php echo $prefix; ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-<?php echo $prefix; ?>">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <p class="my-account-card-content">
-                                <strong>Nome no cartão:</strong>&nbsp;<?php echo $data['holder']; ?>
-                            </p>
-                        </div>
-                        <div class="col-md-4 text-center">
-                            <p class="my-account-card-content">
-                                <?php
-                                    if( $braspag_default_payment && ! is_null( $braspag_default_payment ) && ! empty( $braspag_default_payment ) && $prefix == $braspag_default_payment ) {
-                                        $class = 'glyphicon-star';
-                                        $title = 'Desmarcar padrão';
-                                    } else {
-                                        $class = 'glyphicon-ok';
-                                        $title = 'Definir como padrão';
-                                    }
-                                ?>
-                                <a href="#" title="<?php echo $title; ?>" class="braspag-make-default-payment" default-id="<?php echo $prefix; ?>" brand-name="<?php echo $data['brand']; ?>">
-                                    <span class="glyphicon <?php echo $class; ?>" aria-hidden="true"></span>
-                                </a>
-                                &nbsp;
-                                <a href="#" title="Remover" class="braspag-remove-payment" remove-id="<?php echo $prefix; ?>">
-                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                </a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <?php
-            }
-        } else {
-        ?>
-        <div class="row">
-			<div class="col-12 text-center mt-3">
-				<?php polen_box_image_message(TEMPLATE_URI . "/assets/img/cards.png", "Você ainda não adicionou nenhuma<br />forma de pagamento"); ?>
-				<a class="woocommerce-Button btn btn-outline-light btn-lg btn-block mt-3" href="">Adicionar cartão</a>
+	<div class="row mb-3">
+		<div class="col-md-12">
+			<h1>Meus Cartões</h1>
+		</div>
+	</div>
+	<div class="woocommerce-Payment-Options payment-options">
+		<div class="row">
+			<div class="col-md-12">
+				<?php if (!is_null($braspag_card_saved_data) && !empty($braspag_card_saved_data) && is_array($braspag_card_saved_data) && count($braspag_card_saved_data) > 0) : ?>
+					<?php foreach ($braspag_card_saved_data as $p => $data) : $prefix = md5($p); ?>
+						<div class="box-round d-flex justify-content-between align-items-center px-3 py-4 mb-3 payment-method-item">
+							<div class="d-flex align-items-center">
+								<?php Icon_Class::polen_icon_card(strtolower($data['brand'])); ?>
+								<span class="sufix">**** <?php echo $data['sufix']; ?></span>
+							</div>
+							<div>
+								<?php
+								if ($braspag_default_payment && !is_null($braspag_default_payment) && !empty($braspag_default_payment) && $prefix == $braspag_default_payment) {
+									$title = 'Desmarcar padrão';
+								} else {
+									$title = 'Definir como padrão';
+								}
+								?>
+								<?php /* <a href="#" title="<?php echo $title; ?>" class="braspag-make-default-payment" default-id="<?php echo $prefix; ?>" brand-name="<?php echo $data['brand']; ?>">
+									<span class="glyphicon <?php echo $class; ?>" aria-hidden="true">padrao</span>
+								</a> */ ?>
+								<a href="#" title="Remover" class="braspag-remove-payment" remove-id="<?php echo $prefix; ?>">
+									<?php Icon_Class::polen_icon_trash(); ?>
+								</a>
+							</div>
+						</div>
+					<?php endforeach; ?>
+				<?php else : ?>
+					<div class="row">
+						<div class="col-12 text-center my-3">
+							<?php polen_box_image_message(TEMPLATE_URI . "/assets/img/cards.png", "Você ainda não adicionou nenhuma<br />forma de pagamento"); ?>
+						</div>
+					</div>
+				<?php endif; ?>
 			</div>
-        </div>
-        <?php } ?>
-    </div>
-</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<a class="woocommerce-Button btn btn-primary btn-lg btn-block" href="">Adicionar cartão</a>
+			</div>
+		</div>
+	</div>
 <?php
 }
 ?>

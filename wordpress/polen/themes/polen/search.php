@@ -23,7 +23,7 @@ get_header();
 				</h1>
 			</header><!-- .page-header -->
 
-			<section class="row mb-4 banner-scrollable">
+			<section class="row mb-4">
 				<div class="col-md-12">
 					<header class="row mb-3">
 						<div class="col-12 d-flex justify-content-between align-items-center">
@@ -31,7 +31,7 @@ get_header();
 						</div>
 					</header>
 				</div>
-				<div class="col-md-12" style="padding: 0;">
+				<div class="col-md-12 p-0 p-md-0 banner-scrollable">
 					<div class="banner-wrapper">
 						<div class="banner-content">
 						<?php

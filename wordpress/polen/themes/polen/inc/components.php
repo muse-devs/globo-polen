@@ -73,7 +73,7 @@ function polen_banner_scrollable($items, $title, $link)
 				</div>
 			</header>
 		</div>
-		<div class="col-md-12" style="padding: 0;">
+		<div class="col-md-12 p-0 p-md-0">
 			<div class="banner-wrapper">
 				<div class="banner-content">
 					<?php foreach ($items as $item) : ?>
@@ -114,7 +114,7 @@ function polen_front_get_news($items)
 <?php
 }
 
-function polen_front_get_categories($items)
+function polen_front_get_categories($items, $link='#')
 {
 	if (!$items) {
 		return;
@@ -125,7 +125,7 @@ function polen_front_get_categories($items)
 			<header class="row mb-4">
 				<div class="col-12 d-flex justify-content-between align-items-center">
 					<h2 class="mr-2">Categorias</h2>
-					<a href="#">Ver todos</a>
+					<a href="<?php echo $link;?>">Ver todos</a>
 				</div>
 			</header>
 		</div>
