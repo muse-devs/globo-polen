@@ -62,6 +62,7 @@ class Polen_WooCommerce
             add_filter( 'wc_order_statuses', array( $this, 'add_custom_order_statuses' ) );
             add_filter( 'bulk_actions-edit-shop_order', array( $this, 'dropdown_bulk_actions_shop_order' ), 20, 1 );
             add_filter( 'woocommerce_email_actions', array( $this, 'email_actions' ), 20, 1 );
+            add_action( 'woocommerce_checkout_create_order', array( $this, 'order_meta' ), 12, 2 );
 
             add_action( 'init', function( $array ) {
                 foreach ( $this->order_statuses as $order_status => $values ) 
@@ -108,4 +109,15 @@ class Polen_WooCommerce
         return $actions;
     }
 
+    public function order_meta( $order, $data ) 
+    {
+        $items = WC()->cart->get_cart();
+        $key = array_key_first( $items );
+        $billing_email = $items[ $key ][ 'email_to_video' ];
+        if ( $billing_email && ! is_null( $billing_email ) && ! empty( $billing_email ) ) 
+        {
+            $order->update_meta_data( '_polen_customer_email', $billing_email );
+            $order->update_meta_data( '_billing_email', $billing_email );
+        }
+    }
 }

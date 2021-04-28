@@ -339,7 +339,7 @@ class Cubo9_Braspag {
             );
 
             $request_array = $request;
-            // $request_array['payment']['CreditCard'] = array();
+            $request_array['Payment']['CreditCard'] = array();
             $request_json = json_encode( $request_array );
 
             add_post_meta( $order_id, 'braspag_request_array', $request_array );
