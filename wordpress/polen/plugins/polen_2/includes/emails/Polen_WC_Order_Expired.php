@@ -21,6 +21,8 @@ class Polen_WC_Order_Expired extends \WC_Email {
 
 		$this->subject     = sprintf( _x( '[%s] Pedido Expirado', 'E-mail enviado aos usuários quando um pedido é expirado', 'polen' ), '{blogname}' );
     
+		$this->talent_template_html  = 'emails/Polen_WC_Order_Expired_Talent.php';
+		$this->talent_template_plain = 'emails/plain/Polen_WC_Order_Expired_Talent.php';
 		$this->template_html  = 'emails/Polen_WC_Order_Expired.php';
 		$this->template_plain = 'emails/plain/Polen_WC_Order_Expired.php';
 		$this->template_base  = TEMPLATEPATH . 'woocommerce/';
@@ -45,11 +47,56 @@ class Polen_WC_Order_Expired extends \WC_Email {
 				return;
 			}
 
+			/**
+			 * Envio de e-mail para o Fã
+			 */
 			$this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
+
+			/**
+			 * Envio de e-mail para o Talento
+			 */
+			foreach ( $this->object->get_items() as $item_id => $item ) {
+				$product_id = $item->get_product_id();
+			}
+			$Polen_Talent = new Polen_Talent();
+			$talent = $Polen_Talent->get_talent_from_product( $product_id );
+			$this->send( $talent->email, $this->get_subject(), $this->get_content_talent(), $this->get_headers(), $this->get_attachments() );
 		}
 	}
 
-    public function get_content_html() {
+	public function get_content_talent() {
+		$this->sending = true;
+
+		if ( 'plain' === $this->get_email_type() ) {
+			$email_content = wordwrap( preg_replace( $this->plain_search, $this->plain_replace, wp_strip_all_tags( $this->get_content_talent_plain() ) ), 70 );
+		} else {
+			$email_content = $this->get_content_talent_html();
+		}
+
+		return $email_content;
+	}
+
+    public function get_content_talent_html() {
+		return wc_get_template_html( $this->talent_template_html, array(
+			'order'         => $this->object,
+			'email_heading' => $this->get_heading(),
+			'sent_to_admin' => true,
+			'plain_text'    => false,
+			'email'			=> $this
+		), '', $this->template_base );
+	}
+
+	public function get_content_talent_plain() {
+		return wc_get_template_html( $this->talent_template_plain, array(
+			'order'         => $this->object,
+			'email_heading' => $this->get_heading(),
+			'sent_to_admin' => true,
+			'plain_text'    => true,
+			'email'			=> $this
+		), '', $this->template_base );
+	}
+
+	public function get_content_html() {
 		return wc_get_template_html( $this->template_html, array(
 			'order'         => $this->object,
 			'email_heading' => $this->get_heading(),
