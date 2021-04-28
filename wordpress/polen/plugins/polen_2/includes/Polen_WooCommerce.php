@@ -69,6 +69,8 @@ class Polen_WooCommerce
                 {
                     $action_hook = 'woocommerce_order_status_' . $order_status;
                     add_action( $action_hook, array( WC(), 'send_transactional_email' ), 10, 1 );
+                    $action_hook_notification = 'woocommerce_order_' . $order_status . '_notification';
+                    add_action( $action_hook_notification, array( WC(), 'send_transactional_email' ), 10, 1 );
                 }
             } );
         }

@@ -25,31 +25,28 @@ class Polen_WC_Order_Expired extends \WC_Email {
 		$this->template_plain = 'emails/plain/Polen_WC_Order_Expired.php';
 		$this->template_base  = TEMPLATEPATH . 'woocommerce/';
     
-		add_action( 'woocommerce_order_status_pending_to_order-expired_notification', array( $this, 'trigger' ) );
-		add_action( 'woocommerce_order_status_on-hold_to_order-expired_notification', array( $this, 'trigger' ) );
-		add_action( 'woocommerce_order_status_payment-approved_to_order-expired_notification', array( $this, 'trigger' ) );
+		add_action( 'woocommerce_order_status_changed', array( $this, 'trigger' ) );
 
 		parent::__construct();
     }
 
-    function trigger( $order_id ) {
-		add_post_meta( $order_id, 'mail_order_status', 'payment-approved' );
+    public function trigger( $order_id ) {
 		$this->object = wc_get_order( $order_id );
+		if( $this->object->has_status( 'order-expired') ) {
+			if ( version_compare( '3.0.0', WC()->version, '>' ) ) {
+				$order_email = $this->object->billing_email;
+			} else {
+				$order_email = $this->object->get_billing_email();
+			}
 
-		if ( version_compare( '3.0.0', WC()->version, '>' ) ) {
-			$order_email = $this->object->billing_email;
-		} else {
-			$order_email = $this->object->get_billing_email();
+			$this->recipient = $order_email;
+
+			if ( ! $this->is_enabled() || ! $this->get_recipient() ) {
+				return;
+			}
+
+			$this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
 		}
-
-		$this->recipient = $order_email;
-		add_post_meta( $order_id, 'mail_order_recipient', $this->get_recipient() );
-
-		if ( ! $this->is_enabled() || ! $this->get_recipient() ) {
-			return;
-		}
-
-		$this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
 	}
 
     public function get_content_html() {
