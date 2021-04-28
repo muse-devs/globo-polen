@@ -472,6 +472,8 @@ class Cubo9_Braspag {
 
                     // Marca como Aguardando ('on-hold')
                     $order->update_status( 'payment-approved' );
+                    $email = WC()->mailer()->get_emails()['Polen_WC_Payment_Approved'];
+                    $email->trigger( $order_id );
 
                     // Muda o status para processando
                     // $order->payment_complete();
@@ -493,6 +495,8 @@ class Cubo9_Braspag {
                     );
                 } elseif( isset( $response_body_json->Payment->FraudAnalysis->Status ) && (int) $response_body_json->Payment->FraudAnalysis->Status === (int) 3 && strtoupper( $response_body_json->Payment->FraudAnalysis->StatusDescription ) == strtoupper('REVIEW') ) {
                     $order->update_status( 'payment-in-revision' );
+                    $email = WC()->mailer()->get_emails()['Polen_WC_Payment_In_Revision'];
+                    $email->trigger( $order_id );
                     return array(
                         'type' => 'review',
                         'message' => 'Seu pedido está aguardando confirmação de pagamento.',
