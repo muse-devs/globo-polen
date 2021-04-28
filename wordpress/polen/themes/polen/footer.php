@@ -31,7 +31,7 @@
 						<h5 class="title">Muse</h5>
 						<ul class="footer-menu">
 							<li>
-								<a href="#asd">Todos os talentos</a>
+								<a href="<?php echo home_url().'/shop'; ?>">Todos os talentos</a>
 							</li>
 							<li>
 								<a href="#asd">Como funciona</a>
@@ -66,8 +66,8 @@
 
 </html>
 
-<?php if( defined('DEV_ENV') && DEV_ENV ) { ?>
+<?php if( defined('DEV_ENV') && DEV_ENV ) : ?>
 <!--
 <?php print_r( get_included_files() ); ?>
 -->
-<?php } ?>
+<?php endif; ?>
