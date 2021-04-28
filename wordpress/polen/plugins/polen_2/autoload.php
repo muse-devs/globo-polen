@@ -18,6 +18,6 @@ spl_autoload_register (function ( $class_name ) {
     }
     $file = rtrim($base_dir, $php_ds) . $php_ds . str_replace('\\', $php_ds, $arrayNames[sizeOf($arrayNames) - 1]) . '.php';
     if(file_exists( $file )) {
-        include_once $file ;
+        require_once $file ;
     }
 });
