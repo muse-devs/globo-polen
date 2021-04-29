@@ -114,7 +114,7 @@ function polen_front_get_news($items)
 <?php
 }
 
-function polen_front_get_categories($items, $link='#')
+function polen_front_get_categories($items, $link = '#')
 {
 	if (!$items) {
 		return;
@@ -125,7 +125,7 @@ function polen_front_get_categories($items, $link='#')
 			<header class="row mb-4">
 				<div class="col-12 d-flex justify-content-between align-items-center">
 					<h2 class="mr-2">Categorias</h2>
-					<a href="<?php echo $link;?>">Ver todos</a>
+					<a href="<?php echo $link; ?>">Ver todos</a>
 				</div>
 			</header>
 		</div>
@@ -299,7 +299,7 @@ function polen_front_get_talent_videos($talent)
 			<div class="content mt-4 mx-3">
 				<header class="row content-header">
 					<div class="col-3">
-						<div class="avatar" style="background-image: url(<?php echo isset($talent->avatar) ? $talent->avatar : TEMPLATE_URI . '/assets/img/avatar.png';  ?>)"></div>
+						<?php echo polen_get_avatar($talent->avatar);  ?>
 					</div>
 					<div class="col-9">
 						<h4 class="name"><?php echo $talent->nome; ?></h4>
@@ -311,10 +311,57 @@ function polen_front_get_talent_videos($talent)
 					<div class="col-12">
 						<input type="text" id="share-input" class="share-input" />
 						<a href="javascript:copyToClipboard(window.location.href)" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_copy(); ?>Copiar link</a>
-						<a href="javascript:void(0)" class="btn btn-outline-light btn-lg btn-block share-link" target="_blank"><?php Icon_Class::polen_icon_download(); ?>Download</a>
 						<a href="<?php echo $talent->facebook; ?>" class="btn btn-outline-light btn-lg btn-block share-link" target="_blank"><?php Icon_Class::polen_icon_social('facebook'); ?>Facebook</a>
 						<a href="<?php echo $talent->instagram; ?>" class="btn btn-outline-light btn-lg btn-block share-link" target="_blank"><?php Icon_Class::polen_icon_social('instagram'); ?>Instagram</a>
 						<a href="<?php echo $talent->twitter; ?>" class="btn btn-outline-light btn-lg btn-block share-link" target="_blank"><?php Icon_Class::polen_icon_social('twitter'); ?>Twitter</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php
+}
+
+function polen_get_video_player($talent, $video)
+{
+	if(!$talent || !$video) {
+		return;
+	}
+?>
+	<div class="row">
+		<div class="col-12 col-md-8 m-md-auto">
+			<div class="video-card">
+				<header>
+					<div id="video-box">
+						<div id="polen-video" class="polen-video"></div>
+					</div>
+					<script>
+						var videoPlayer = new Vimeo.Player("polen-video", {
+							id: id,
+							autoplay: true,
+							width: document.getElementById("polen-video").offsetWidth,
+						});
+					</script>
+				</header>
+				<div class="content mt-4 mx-3">
+					<header class="row content-header">
+						<div class="col-3">
+							<?php echo polen_get_avatar($talent->avatar);  ?>
+						</div>
+						<div class="col-9">
+							<h4 class="name"><?php echo $talent->nome; ?></h4>
+							<h5 class="cat"><?php echo $talent->profissao; ?></h5>
+							<a href="<?php echo home_url() . "/v/" . $video->hash; ?>" class="url"><?php echo home_url() . "/v/" . $video->hash; ?></a>
+						</div>
+					</header>
+					<div class="row mt-4 share">
+						<div class="col-12">
+							<input type="text" id="share-input" class="share-input" />
+							<a href="javascript:copyToClipboard(window.location.href)" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_copy(); ?>Copiar link</a>
+							<a href="<?php echo $talent->facebook; ?>" class="btn btn-outline-light btn-lg btn-block share-link" target="_blank"><?php Icon_Class::polen_icon_social('facebook'); ?>Facebook</a>
+							<a href="<?php echo $talent->instagram; ?>" class="btn btn-outline-light btn-lg btn-block share-link" target="_blank"><?php Icon_Class::polen_icon_social('instagram'); ?>Instagram</a>
+							<a href="<?php echo $talent->twitter; ?>" class="btn btn-outline-light btn-lg btn-block share-link" target="_blank"><?php Icon_Class::polen_icon_social('twitter'); ?>Twitter</a>
+						</div>
 					</div>
 				</div>
 			</div>
