@@ -402,7 +402,11 @@ class Polen_Talent {
         return $redirect_to;
     }
     
-
+    /**
+     * Verifica se um usuário é um talento
+     * @param \WP_User $user
+     * @return boolean
+     */
     public function is_user_talent(\WP_User $user) {
         $roles = $user->roles;
         if (in_array( self::ROLE_SLUG, $roles ) !== false) {
