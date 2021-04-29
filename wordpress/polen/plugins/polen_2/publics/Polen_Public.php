@@ -22,6 +22,9 @@ namespace Polen\Publics;
  * @subpackage Polen/public
  * @author     Rodolfo <rodolfoneto@gmail.com>
  */
+use Polen\Includes\Polen_Talent;
+
+
 class Polen_Public {
 
 	/**
@@ -97,7 +100,13 @@ class Polen_Public {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-		wp_register_script( 'polen-item-script', trailingslashit( plugin_dir_url( __FILE__ ) ) . 'js/polen-public.js', array( 'jquery' ), time(), true );
+		if( is_account_page() && is_user_logged_in() ){
+			$polen_talent = new Polen_Talent();
+			$current_user = wp_get_current_user();
+			if ($polen_talent->is_user_talent($current_user)) {
+				wp_register_script( 'polen-item-script', trailingslashit( plugin_dir_url( __FILE__ ) ) . 'js/polen-public.js', array( 'jquery' ), time(), true );
+			}
+		}	
 		wp_localize_script( 'polen-item-script',	'polen_ajax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
 		wp_enqueue_script( 'polen-item-script' );
 	}
