@@ -324,6 +324,9 @@ function polen_front_get_talent_videos($talent)
 
 function polen_get_video_player($talent, $video)
 {
+	if(!$talent || !$video) {
+		return;
+	}
 ?>
 	<div class="row">
 		<div class="col-12 col-md-8 m-md-auto">
