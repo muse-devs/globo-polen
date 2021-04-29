@@ -49,6 +49,7 @@ class Polen {
         new Polen_SignInUser();
         new Polen_Talent( true );
         new Polen_SMTP( true );
+        new Polen_Emails();
         new Polen_Occasion_List( true );
         new Polen_Cart( true );
         new Polen_Plugin_Settings( true );

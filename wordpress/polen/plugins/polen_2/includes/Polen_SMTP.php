@@ -2,6 +2,10 @@
 
 namespace Polen\Includes;
 
+if( ! defined( 'ABSPATH' ) ) {
+    die( 'Silence is golden.' );
+}
+
 class Polen_SMTP
 {
     

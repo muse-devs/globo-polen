@@ -609,5 +609,22 @@ class Polen_Talent {
         }
         return $order;
     }
+
+    /**
+     * Pegar o talento pelo ID do Produto
+     */
+    public function get_talent_from_product( $product_id )
+    {
+        global $wpdb;
+        $sql = "
+            SELECT U.`ID`, U.`display_name` AS `name`, U.`user_email` AS `email`, P.`post_title` AS `product`
+            FROM `" . $wpdb->users . "` U
+            LEFT JOIN `" . $wpdb->posts . "` P ON P.`post_author` = U.`ID`
+            WHERE P.`ID`=" . $product_id;
+        $res = $wpdb->get_results( $sql );
+        if( $res && ! is_null( $res ) && is_array( $res ) && ! empty( $res ) ) {
+            return $res[0];
+        }
+    }
 }
     

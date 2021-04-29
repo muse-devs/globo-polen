@@ -2,6 +2,10 @@
 
 class Icon_Class
 {
+	public static function polen_icon_card($name)
+	{
+		echo '<span class="svg-icon svg-' . $name . ' svg-' . $name . '-dims"></span>';
+	}
 
 	public static function polen_icon_phone()
 	{
@@ -104,6 +108,10 @@ class Icon_Class
 	public static function polen_icon_close()
 	{
 		echo '<i class="bi bi-x"></i>';
+	}
+
+	public static function polen_icon_trash() {
+		echo '<i class="icon icon-trash"></i>';
 	}
 
 	public static function polen_icon_social($ico)
