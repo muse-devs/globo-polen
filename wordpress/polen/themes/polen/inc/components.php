@@ -329,7 +329,9 @@ function polen_get_video_player($talent, $video)
 		<div class="col-12 col-md-8 m-md-auto">
 			<div class="video-card">
 				<header>
-					<div id="video-box"></div>
+					<div id="video-box">
+						<div id="polen-video" class="polen-video"></div>
+					</div>
 					<script>
 						var videoPlayer = new Vimeo.Player("polen-video", {
 							id: id,
