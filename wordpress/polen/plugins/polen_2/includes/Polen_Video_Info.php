@@ -179,6 +179,22 @@ class Polen_Video_Info extends Polen_DB
     
     
     /**
+     * Pega um item pela order_id
+     * @param int $order_id
+     * @return Polen_Video_Info
+     */
+    static public function get_by_order_id( int $order_id )
+    {
+        $pvi = new self();
+        $result = $pvi->get( 'order_id', $order_id, '%d' );
+        if( empty( $result ) ) {
+            return null;
+        }
+        return self::create_instance_one( $result );
+    }
+    
+    
+    /**
      * Cria um objeto apartir de um array, geralmente vindo do BD
      * ou seja transforma um resultado de DB para um Objecto
      * 
