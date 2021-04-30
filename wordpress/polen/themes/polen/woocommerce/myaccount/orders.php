@@ -1,10 +1,12 @@
 <?php
 defined('ABSPATH') || exit;
 
-use \Polen\Includes\Polen_Order;
+use \Polen\Includes\{ Polen_Order, Polen_Talent };
 
+$polen_talent = new Polen_Talent();
 $logged_user = wp_get_current_user();
-if (in_array('user_talent',  $logged_user->roles)) {
+
+if( $polen_talent->is_user_talent( $logged_user ) ) {
 	require get_template_directory() . '/woocommerce/myaccount/orders-talent.php';
 } else {
 	do_action('woocommerce_before_account_orders', $has_orders); ?>
