@@ -98,6 +98,12 @@ abstract class Polen_DB
     public function pre_update(){}
     
     
+    /**
+     * 
+     * @param array $where
+     * @return type
+     * @throws \Exception
+     */
     public function delete( array $where )
     {
         $this->wpdb->delete(
@@ -119,8 +125,9 @@ abstract class Polen_DB
      */
     public function get_by_id( int $id )
     {
-        return self::create_instance_one( $this->get( 'ID', $id, '%d' ) );
+        return static::create_instance_one( $this->get( 'ID', $id, '%d' ) );
     }
+    
     
     /**
      * 
@@ -137,6 +144,16 @@ abstract class Polen_DB
     }
     
     
+    /**
+     * 
+     * @param type $field
+     * @param type $value
+     * @param type $format
+     * @param int $limit
+     * @param type $order
+     * @return type
+     * @throws \Exception
+     */
     public function get_results( $field, $value, $format = '%s', int $limit = 0, $order = '' )
     {
         $limit_format = ( !empty( $limit ) ) ? ' LIMIT %d' : ' -- %d';
@@ -145,20 +162,109 @@ abstract class Polen_DB
         if( !empty( $this->wpdb->last_error ) ) {
             throw new \Exception( $this->wpdb->last_error, 500 );
         }
-        $result_converted_into_object = self::create_instance_many( $result );
+        $result_converted_into_object = static::create_instance_many( $result );
         return $result_converted_into_object;
     }
     
+    
+    /**
+     * Pega um resultado passadno varias colunas no WHERE
+     * @param array $fields_values ['id'=>XX, 'date'=>'xxxx-xx-xx']
+     * @param string $limit string
+     * @param string $order completa do order "ORDER BY ID ASC"
+     * @return type
+     */
+    static public function get_result_multi_fields( array $fields_values, string $limit = null, string $order = "" )
+    {
+        $class = new static();
+        
+        $fields = $class->treat_fields( $fields_values );
+        $values = $class->treat_values( $fields_values );
+        
+        if( !empty( $limit ) ) {
+            $values[] = $limit;
+            $limit = $class->treat_limit_field( $limit );
+        }
+        
+        $sql = "SELECT * FROM {$class->table_name} WHERE $fields {$order} {$limit};";
+        $result = $class->wpdb->get_results(
+                $class->wpdb->prepare( $sql, $values )
+            );
+        $result_converted = static::create_instance_many($result);
+        
+        return $result_converted;
+    }
+    
+    
+    /**
+     * 
+     * @param array $fields_values
+     * @return type
+     */
+    public function treat_fields( array $fields_values )
+    {
+        return implode( ' = %s AND ', array_keys( $fields_values ) ) . ' = %s';
+    }
+    
+    
+    /**
+     * 
+     * @param array $fields_values
+     * @return type
+     */
+    public function treat_values( array $fields_values )
+    {
+        return array_values( $fields_values );
+    }
+    
+    
+    /**
+     * 
+     * @param type $limit
+     * @return string
+     */
+    public function treat_limit_field( $limit = null )
+    {
+        if( !empty( $limit ) ) {
+            return "LIMIT %d";
+        }
+        return "";
+    }
+    
+    
+    /**
+     * 
+     * @param type $limit
+     * @return type
+     */
+    public function treat_limit_value( $limit )
+    {
+        if( !empty( $limit ) ) {
+            return $limit;
+        }
+    }
+    
+    
+    /**
+     * 
+     * @param type $data
+     * @return type
+     */
     static public function create_instance_one( $data )
     {
         return $data;
     }
     
+    /**
+     * 
+     * @param type $data
+     * @return type
+     */
     static public function create_instance_many( $data )
     {
         $result_objects = array();
         foreach ( $data as $item ) {
-            $result_objects[] = self::create_instance_one( $item );
+            $result_objects[] = static::create_instance_one( $item );
         }
         return $result_objects;
     }
