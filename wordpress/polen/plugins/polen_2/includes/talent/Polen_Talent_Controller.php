@@ -9,7 +9,7 @@ use Vimeo\Exceptions\{VimeoRequestException, ExceptionInterface};
 
 use Polen\Includes\Polen_Video_Info;
 use Polen\Includes\Vimeo\{Polen_Vimeo_Response, Polen_Vimeo_Vimeo_Options};
-use Polen\Includes\Cart\Polen_Cart_Item_Factory;
+use Polen\Includes\Cart\{Polen_Cart_Item_Factory, Polen_Cart_Item};
 
 class Polen_Talent_Controller extends Polen_Talent_Controller_Base
 {
@@ -212,15 +212,19 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
             }
             
             $order = wc_get_order( $order_id );
-
             $cart_item = Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
-            $video_info = new Polen_Video_Info();
-            $video_info->is_public = $cart_item->get_public_in_detail_page();
-            $video_info->order_id = $order_id;
-            $video_info->talent_id = get_current_user_id();
-            $video_info->vimeo_id = $response->get_vimeo_id();
-            $video_info->vimeo_process_complete = 0;
-            $video_info->vimeo_link = $response->get_vimeo_link();
+            
+            $video_info = $this->mount_video_info( $order, $cart_item, $response);
+            
+//            
+//            $video_info = new Polen_Video_Info();
+//            $video_info->is_public = $cart_item->get_public_in_detail_page();
+//            $video_info->order_id = $order_id;
+//            $video_info->talent_id = get_current_user_id();
+//            $video_info->vimeo_id = $response->get_vimeo_id();
+//            $video_info->vimeo_process_complete = 0;
+//            $video_info->vimeo_link = $response->get_vimeo_link();
+//            $video_info->vimeo_iframe = $response->get_iframe();
             
             $video_info->insert();
             
@@ -231,6 +235,27 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
             wp_send_json_error( $e->getMessage(), $e->getCode() );
         }
         wp_die();
+    }
+    
+    
+    /**
+     * 
+     * @param type $order
+     * @param type $cart_item
+     * @param type $response
+     * @return Polen_Video_Info
+     */
+    public function mount_video_info( \WC_Order $order, Polen_Cart_Item $cart_item, Polen_Vimeo_Response $response )
+    {
+            $video_info = new Polen_Video_Info();
+            $video_info->is_public = $cart_item->get_public_in_detail_page();
+            $video_info->order_id = $order->get_id();
+            $video_info->talent_id = get_current_user_id();
+            $video_info->vimeo_id = $response->get_vimeo_id();
+            $video_info->vimeo_process_complete = 0;
+            $video_info->vimeo_link = $response->get_vimeo_link();
+            $video_info->vimeo_iframe = $response->get_iframe();
+            return $video_info;
     }
 
     /**
