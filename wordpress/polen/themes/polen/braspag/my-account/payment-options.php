@@ -54,7 +54,7 @@ if ($polen_talent->is_user_talent($current_user)) {
 		</div>
 		<div class="row">
 			<div class="col-md-12">
-				<a class="woocommerce-Button btn btn-primary btn-lg btn-block" href="">Adicionar cartão</a>
+				<a class="woocommerce-Button btn btn-primary btn-lg btn-block" href="<?php echo wc_get_account_endpoint_url( 'add-payment-option'); ?>">Adicionar cartão</a>
 			</div>
 		</div>
 	</div>
