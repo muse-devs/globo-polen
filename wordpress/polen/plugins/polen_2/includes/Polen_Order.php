@@ -14,6 +14,8 @@ class Polen_Order
 //    const METADATA_VIMEO_VIDEO_ID = 'vimeo_video_id';
 //    const METADATA_VIMEO_VIDEO_URL = 'vimeo_video_url';
 //    const METADATA_VIMEO_VIDEO_EMBED_CONTENT = 'vimeo_video_embed_content';
+    const SLUG_ORDER_COMPLETE = 'completed';
+    const SLUG_ORDER_COMPLETE_INSIDE = 'wc-completed';
     
     public function __construct( $static = false ) {
         if( $static ) {
@@ -125,6 +127,18 @@ class Polen_Order
 
         return false;
     }
+    
+    
+    static public function is_completed( \WC_Order $order)
+    {
+        if( $order->get_status() == self::SLUG_ORDER_COMPLETE ) {
+            return true;
+        }
+        return false;
+    }
+    
+    
+    
 
     public function polen_search_order_shortcode() { 
     ?>    

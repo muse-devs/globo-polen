@@ -15,6 +15,7 @@ class Polen_Video_Info extends Polen_DB
     public $talent_id;
     public $is_public;
     public $vimeo_id;
+    public $hash;
     public $vimeo_thumbnail;
     public $vimeo_process_complete;
     public $vimeo_url_download;
@@ -33,6 +34,7 @@ class Polen_Video_Info extends Polen_DB
                 $this->order_id = intval( $object->order_id );
                 $this->talent_id = intval( $object->talent_id );
                 $this->vimeo_id = $object->vimeo_id;
+                $this->hash = $object->hash;
                 $this->is_public = intval( $object->is_public );
                 $this->vimeo_thumbnail = $object->vimeo_thumbnail;
                 $this->vimeo_process_complete = $object->vimeo_process_complete;
@@ -87,6 +89,7 @@ class Polen_Video_Info extends Polen_DB
         $return[ 'talent_id' ]              = $this->talent_id;
         $return[ 'is_public' ]              = $this->is_public;
         $return[ 'vimeo_id' ]               = $this->vimeo_id;
+        $return[ 'hash' ]                   = $this->hash;
         $return[ 'vimeo_thumbnail' ]        = $this->vimeo_thumbnail;
         $return[ 'vimeo_process_complete' ] = $this->vimeo_process_complete;
         $return[ 'vimeo_url_download' ]     = $this->vimeo_url_download;
@@ -118,6 +121,16 @@ class Polen_Video_Info extends Polen_DB
     
     
     /**
+     * Funcao com validacoes e acoes antes do insert
+     */
+    public function pre_insert()
+    {
+        $this->hash = $this->get_vimeo_id_only_id();
+        $this->created_at = date('Y-m-d H-i-s');
+    }
+    
+    
+    /**
      * Faz update com os dados que estao na instancia
      * @param array $where
      * @return type
@@ -126,6 +139,14 @@ class Polen_Video_Info extends Polen_DB
     {
         $where = array( 'ID' => $this->ID );
         return parent::update( $where );
+    }
+    
+    /**
+     * 
+     */
+    public function pre_update() {
+        parent::pre_update();
+        $this->updated_at = date('Y-m-d H-i-s');
     }
     
     
@@ -146,9 +167,10 @@ class Polen_Video_Info extends Polen_DB
     
     static public function select_by_talent_id( int $talent_id, $limit = 4 )
     {
-        $self_obj = new self();
-        $result_raw = $self_obj->get_results( 'talent_id', $talent_id, '%s', $limit, 'ORDER BY ID DESC' );
-        return self::create_instance_many( $result_raw );
+        $self_obj = new static();
+        $fields = array( 'talent_id' => $talent_id, 'vimeo_process_complete' => "1" );
+        $result_raw = $self_obj->get_result_multi_fields( $fields, "4", "ORDER BY ID DESC" );
+        return $result_raw;//self::create_instance_many( $result_raw );
     }
     
     /**
@@ -193,6 +215,36 @@ class Polen_Video_Info extends Polen_DB
         return self::create_instance_one( $result );
     }
     
+    /**
+     * Pegar uma linha pelo Hash
+     * 
+     * @param string $hash
+     * @return Polen_Video_Info
+     */
+    static public function get_by_hash( string $hash )
+    {
+        $pvi = new self();
+        $result = $pvi->get( 'hash', $hash, '%s' );
+        if( empty( $result ) ) {
+            return null;
+        }
+        return self::create_instance_one( $result );
+    }
+    
+    
+    /**
+     * Metodo para criacao do uma HASH unica
+     * @param string $param
+     * @return string
+     */
+    public function get_vimeo_id_only_id()
+    {
+        if( empty( $this->vimeo_id ) ) {
+            throw new \Exception( "Can\'t execute this method whithout a vimeo_id", 500 );
+        }
+        return str_replace( '/videos/', '', $this->vimeo_id );
+    }
+    
     
     /**
      * Cria um objeto apartir de um array, geralmente vindo do BD
@@ -201,7 +253,7 @@ class Polen_Video_Info extends Polen_DB
      * @param array $data
      * @return Polen_Video_Info
      */
-    static public function create_instance_one( $data )
+    static public function create_instance_one( $data, $valid = true )
     {
         $object = new self();
         $object->ID = $data->ID;
@@ -209,6 +261,7 @@ class Polen_Video_Info extends Polen_DB
         $object->order_id = $data->order_id;
         $object->talent_id = $data->talent_id;
         $object->vimeo_id = $data->vimeo_id;
+        $object->hash = $data->hash;
         $object->vimeo_process_complete = $data->vimeo_process_complete;
         $object->vimeo_thumbnail = $data->vimeo_thumbnail;
         $object->vimeo_url_download = $data->vimeo_url_download;
@@ -216,6 +269,7 @@ class Polen_Video_Info extends Polen_DB
         $object->duration = $data->duration;
         $object->created_at = $data->created_at;
         $object->updated_at = $data->updated_at;
+        $object->valid = $valid;
         return $object;
     }
 }

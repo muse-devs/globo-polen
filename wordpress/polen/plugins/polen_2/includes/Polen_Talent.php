@@ -11,6 +11,7 @@ use Polen\Includes\Polen_Order;
 class Polen_Talent {
 
     const ROLE_SLUG = 'user_talent';
+    public $tallent_slug;
     
     public function __construct($static = false) {
         $this->video_time = 45;
@@ -32,8 +33,8 @@ class Polen_Talent {
             /**
              * Modifica a URL do Talento (Usuário)
              */
-            // add_action( 'init', array( $this, 'rewrites' ) );
-
+            add_action( 'init', array( $this, 'rewrites' ) );
+            
             /**
              * Modifcar o texto do botão comprar
              */
@@ -69,10 +70,10 @@ class Polen_Talent {
     }
 
     public function rewrites() {
-        global $wp_rewrite;
-        $wp_rewrite->author_base = $this->tallent_slug;
-        add_rewrite_rule($this->tallent_slug . '/([^/]+)/?$', 'index.php?' . $this->tallent_slug . '=$matches[1]', 'top');
-        add_rewrite_rule($this->tallent_slug . '/([^/]+)/page/?([0-9]{1,})/?$', 'index.php?' . $this->tallent_slug . '=$matches[1]&paged=$matches[2]', 'top');
+//        global $wp_rewrite;
+//        $wp_rewrite->author_base = $this->tallent_slug;
+//        add_rewrite_rule($this->tallent_slug . '/([^/]+)/?$', 'index.php?' . $this->tallent_slug . '=$matches[1]', 'top');
+//        add_rewrite_rule($this->tallent_slug . '/([^/]+)/page/?([0-9]{1,})/?$', 'index.php?' . $this->tallent_slug . '=$matches[1]&paged=$matches[2]', 'top');
     }
 
     /**

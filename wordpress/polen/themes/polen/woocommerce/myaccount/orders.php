@@ -1,8 +1,12 @@
 <?php
 defined('ABSPATH') || exit;
 
+use \Polen\Includes\{ Polen_Order, Polen_Talent };
+
+$polen_talent = new Polen_Talent();
 $logged_user = wp_get_current_user();
-if (in_array('user_talent',  $logged_user->roles)) {
+
+if( $polen_talent->is_user_talent( $logged_user ) ) {
 	require get_template_directory() . '/woocommerce/myaccount/orders-talent.php';
 } else {
 	do_action('woocommerce_before_account_orders', $has_orders); ?>
@@ -54,19 +58,21 @@ if (in_array('user_talent',  $logged_user->roles)) {
 							</div>
 							<div class="col-12 text-center mt-4 mb-3">
 								<div class="row">
-									<?php 
-									if( $order->get_status() == 'completed' ){ ?>
-										<a href="/my-account/watch-video" class="btn btn-primary btn-lg btn-block">
-											Visualizar vídeo
-										</a>
-									<?php
-									}else{	?>
-										<a href="<?php echo $order->get_view_order_url(); ?>" class="btn btn-primary btn-lg btn-block">
-											Acompanhar pedido
-										</a>
-									<?php	
-									}
-									?>
+                  <?php
+                  if( $order->get_status() == Polen_Order::is_completed( $order ) ):
+                  ?>
+                      <a href="<?php echo $order->get_view_order_url(); ?>" class="btn btn-primary btn-lg btn-block">
+                        Acompanhar pedido
+                      </a>
+                  <?php
+                  else :
+                      //TODO ADD A URL PARA ASSISTIR O VIDEO
+                  ?>
+                      <a href="<?php echo $order->get_view_order_url(); ?>" class="btn btn-primary btn-lg btn-block">
+                        Ver Video
+                      </a>
+                  <?php
+                  endif;?>
 								</div>
 							</div>
 							<div class="col-12 text-center">
