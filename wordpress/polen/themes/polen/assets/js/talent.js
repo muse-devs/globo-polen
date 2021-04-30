@@ -1,6 +1,9 @@
 var modal = document.getElementById("video-modal");
 var video_box = document.getElementById("video-box");
 var share_button = document.querySelectorAll(".share-button");
+var public_url = document
+	.getElementById("talent-videos")
+	.getAttribute("data-public-url");
 
 jQuery(document).ready(function () {
 	jQuery(".banner-content.type-video").slick({
@@ -38,7 +41,8 @@ jQuery(document).ready(function () {
 			},
 		],
 	});
-	var id = window.location.hash.substring(1);
+
+	var id = getVideoId();
 	if (id) {
 		openVideoById(id);
 	}
@@ -68,6 +72,20 @@ async function shareVideo(title = "Nome do talento", text = "texto do vídeo") {
 	}
 }
 
+function getVideoId() {
+	return window.location.hash.substring(1);
+}
+
+function changeVideoCardUrl(id) {
+	var url = public_url + id;
+	var el_url = document.getElementById("video-url");
+	if (!el_url) {
+		return;
+	}
+	el_url.setAttribute("href", url);
+	el_url.innerText = url;
+}
+
 function addVideo() {
 	var div = document.createElement("DIV");
 	div.id = "polen-video";
@@ -92,6 +110,13 @@ function hideModal(e) {
 	modal.classList.remove("show");
 }
 
+function handleCopyVideoUrl(id) {
+	var btn_copy = document.getElementById('copy-video');
+	btn_copy.addEventListener('click', function() {
+		copyToClipboard(public_url + id);
+	});
+}
+
 function openVideoByURL(url) {
 	console.log(url);
 	addVideo();
@@ -103,6 +128,8 @@ function openVideoByURL(url) {
 	});
 	videoPlayer.getVideoId().then(function (id) {
 		changeHash(id);
+		changeVideoCardUrl(id);
+		handleCopyVideoUrl(id);
 	});
 }
 
@@ -115,4 +142,6 @@ function openVideoById(id) {
 		width: document.getElementById("polen-video").offsetWidth,
 	});
 	changeHash(id);
+	changeVideoCardUrl(id);
+	handleCopyVideoUrl(id);
 }
