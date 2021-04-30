@@ -363,7 +363,7 @@ function polen_get_video_player($talent, $video)
 						jQuery(document).ready(function() {
 							var videoPlayer = new Vimeo.Player("polen-video", {
 								url: "<?php echo $video->vimeo_link; ?>",
-								autoplay: true,
+								autoplay: false,
 								width: document.getElementById("polen-video").offsetWidth,
 							});
 						})
