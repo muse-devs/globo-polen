@@ -3,6 +3,15 @@ get_header();
 use \Polen\Includes\Polen_Video_Info;
 
 $video_info = Polen_Video_Info::get_by_hash( $video_hash );
+
+if( empty( $video_info ) ) {
+    global $wp_query;
+    $wp_query->set_404();
+    status_header( 404 );
+    get_template_part( 404 );
+    exit();
+}
+
 $talent = get_user_by( 'id', $video_info->talent_id );
 
 ?>
