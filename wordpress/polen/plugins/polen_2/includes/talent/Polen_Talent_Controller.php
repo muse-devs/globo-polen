@@ -239,7 +239,8 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
     
     
     /**
-     * 
+     * Criando um Polen_Video_Info para salvar a primeira vez no Banco as info
+     * quando o Vimeo recebo o REQUEST do slot
      * @param type $order
      * @param type $cart_item
      * @param type $response
