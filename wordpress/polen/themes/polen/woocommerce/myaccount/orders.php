@@ -54,9 +54,19 @@ if (in_array('user_talent',  $logged_user->roles)) {
 							</div>
 							<div class="col-12 text-center mt-4 mb-3">
 								<div class="row">
-									<a href="<?php echo $order->get_view_order_url(); ?>" class="btn btn-primary btn-lg btn-block">
-										Acompanhar pedido
-									</a>
+									<?php 
+									if( $order->get_status() == 'completed' ){ ?>
+										<a href="/my-account/watch-video" class="btn btn-primary btn-lg btn-block">
+											Visualizar vídeo
+										</a>
+									<?php
+									}else{	?>
+										<a href="<?php echo $order->get_view_order_url(); ?>" class="btn btn-primary btn-lg btn-block">
+											Acompanhar pedido
+										</a>
+									<?php	
+									}
+									?>
 								</div>
 							</div>
 							<div class="col-12 text-center">
