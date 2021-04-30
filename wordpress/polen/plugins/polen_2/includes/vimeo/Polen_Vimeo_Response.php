@@ -22,19 +22,28 @@ class Polen_Vimeo_Response
         $this->response = $response;
     }
     
-    
+    /**
+     * Pega o ID do vimeo 
+     * @return string '/videos/XXXX
+     */
     public function get_vimeo_id()
     {
         return $this->response['body']['uri'];
     }
     
-    
+    /**
+     * Pega o link completo para o video
+     * @return string URL
+     */
     public function get_vimeo_link()
     {
         return $this->response['body']['link'];
     }
     
-    
+    /**
+     * Se o RESPONSE é um erro, na API não criar uma Exception
+     * @return boolean
+     */
     public function is_error()
     {
         $return = false;
@@ -44,6 +53,10 @@ class Polen_Vimeo_Response
         return $return;
     }
     
+    /**
+     * Pega um erro generico, quando não um erro voltado ao DEV
+     * @return type
+     */
     public function get_error()
     {
         return !empty( $this->get_developer_message() )
@@ -51,7 +64,11 @@ class Polen_Vimeo_Response
             : $this->response['body']['error'];
     }
     
-    
+    /**
+     * Pega a msg de erro do developer, alguns erros são genericos e volta essa
+     * área uma msg especifica para o DEV
+     * @return type
+     */
     public function get_developer_message()
     {
         return isset( $this->response['body']['developer_message'] )
@@ -59,13 +76,19 @@ class Polen_Vimeo_Response
             : null;
     }
     
-    
+    /**
+     * Pega o status do Vimeo da ultima resposta
+     * @return string
+     */
     public function get_status()
     {
         return $this->response['body']['status'];
     }
     
-    
+    /**
+     * Verifica se o processamento do video está completo pelo Vimeo
+     * @return boolean
+     */
     public function video_processing_is_complete()
     {
         if( 
@@ -77,6 +100,10 @@ class Polen_Vimeo_Response
         return false;
     }
     
+    /**
+     * Pega a URL a tamanho 640
+     * @return string URL
+     */
     public function get_image_url_640()
     {
         return $this->response['body']['pictures']['sizes'][3]['link'];
@@ -105,9 +132,21 @@ class Polen_Vimeo_Response
         return $url_removed_size;
     }
     
-    
+    /**
+     * Pega a duração do video
+     * @return int
+     */
     public function get_duration()
     {
         return $this->response['body']['duration'];
+    }
+    
+    /**
+     * Pegar o codigo HTML do iframe
+     * @return string
+     */
+    public function get_iframe()
+    {
+        return $this->response['body']['embed']['html'];
     }
 }

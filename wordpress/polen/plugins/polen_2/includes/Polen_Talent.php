@@ -11,6 +11,7 @@ use Polen\Includes\Polen_Order;
 class Polen_Talent {
 
     const ROLE_SLUG = 'user_talent';
+    public $tallent_slug;
     
     public function __construct($static = false) {
         $this->video_time = 45;

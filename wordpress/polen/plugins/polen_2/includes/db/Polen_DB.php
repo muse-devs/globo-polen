@@ -2,7 +2,7 @@
 
 namespace Polen\Includes\Db;
 
-class Polen_DB
+abstract class Polen_DB
 {
     
     private $wpdb;
@@ -46,6 +46,8 @@ class Polen_DB
     
     public function insert()
     {
+        $this->pre_insert();
+        
         $this->wpdb->insert(
                 $this->table_name,
                 $this->get_data_insert()
@@ -56,6 +58,16 @@ class Polen_DB
             throw new \Exception( $this->wpdb->last_error, 500 );
         }
     }
+
+    
+    /**
+     * Para validação ou ações antes do insert no DB
+     * @throws Exception
+     */
+    public function pre_insert()
+    {
+        throw new \Exception( 'Esse metodo tem que ser sobreecrito', 500);
+    }
     
     
     /**
@@ -64,6 +76,8 @@ class Polen_DB
      */
     public function update( array $where )
     {
+        $this->pre_update();
+        
         $this->wpdb->update(
                 $this->table_name,
                 $this->get_data_update(),
@@ -75,6 +89,14 @@ class Polen_DB
             throw new \Exception( $this->wpdb->last_error, 500 );
         }
     }
+    
+    
+    /**
+     * Para validação ou ações antes do insert no DB
+     * @throws Exception
+     */
+    public function pre_update(){}
+    
     
     public function delete( array $where )
     {
