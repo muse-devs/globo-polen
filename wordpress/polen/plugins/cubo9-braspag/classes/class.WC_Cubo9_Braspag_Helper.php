@@ -3,7 +3,8 @@
 class WC_Cubo9_Braspag_Helper {
 
     public function __construct( $static = false ) {
-        $this->braspag_settings = get_option( 'WC_Cubo9_BraspagReduxSettings' );
+        global $WC_Cubo9_BraspagReduxSettings;
+        $this->braspag_settings = $WC_Cubo9_BraspagReduxSettings;
         if( $static ) {
             // add_action( 'wp_enqueue_scripts', array( $this, 'scripts') );
         } else {
