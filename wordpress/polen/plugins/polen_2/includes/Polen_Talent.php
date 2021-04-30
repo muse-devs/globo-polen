@@ -34,8 +34,6 @@ class Polen_Talent {
              * Modifica a URL do Talento (Usuário)
              */
             add_action( 'init', array( $this, 'rewrites' ) );
-            add_filter( 'query_vars', array( $this, 'query_vars' ) );
-            add_action( 'template_include', array( $this, 'template_include' ) );
             
             /**
              * Modifcar o texto do botão comprar
@@ -74,22 +72,6 @@ class Polen_Talent {
 //        $wp_rewrite->author_base = $this->tallent_slug;
 //        add_rewrite_rule($this->tallent_slug . '/([^/]+)/?$', 'index.php?' . $this->tallent_slug . '=$matches[1]', 'top');
 //        add_rewrite_rule($this->tallent_slug . '/([^/]+)/page/?([0-9]{1,})/?$', 'index.php?' . $this->tallent_slug . '=$matches[1]&paged=$matches[2]', 'top');
-        add_rewrite_rule( 'v/([a-z0-9-]+)[/]?$', 'index.php?video_hash=$matches[1]', 'top' );
-    }
-    
-    public function query_vars( $query_vars )
-    {
-        $query_vars[] = 'video_hash';
-        return $query_vars;
-    }
-    
-    public function template_include( $template ) {
-        if ( get_query_var( 'video_hash' ) == false || get_query_var( 'video_hash' ) == '' ) {
-            return $template;
-        }
-        
-        $video_hash = get_query_var( 'video_hash' );        
-        return get_template_directory() . '/video.php';
     }
 
     /**
