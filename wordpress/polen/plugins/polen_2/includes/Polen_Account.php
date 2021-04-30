@@ -70,7 +70,7 @@ class Polen_Account
      * Faz my-account redirecionar para a lista de pedidos ao invés do dashboard
      */
     public function my_account_redirect() {
-        $logged_user = \wp_get_current_user();
+        $logged_user = wp_get_current_user();
         if( !in_array( 'user_talent',  $logged_user->roles ) )
         { 
             $current_url = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";        
@@ -82,4 +82,5 @@ class Polen_Account
             }
         }    
     }
+
 }

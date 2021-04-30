@@ -58,21 +58,21 @@ if( $polen_talent->is_user_talent( $logged_user ) ) {
 							</div>
 							<div class="col-12 text-center mt-4 mb-3">
 								<div class="row">
-                                    <?php
-                                    if( $order->get_status() == Polen_Order::is_completed( $order ) ):
-                                    ?>
-									<a href="<?php echo $order->get_view_order_url(); ?>" class="btn btn-primary btn-lg btn-block">
-										Acompanhar pedido
-									</a>
-                                    <?php
-                                    else :
-                                        //TODO ADD A URL PARA ASSISTIR O VIDEO
-                                    ?>
-									<a href="<?php echo $order->get_view_order_url(); ?>" class="btn btn-primary btn-lg btn-block">
-										Ver Video
-									</a>
-                                    <?php
-                                    endif;?>
+                  <?php
+                  if( $order->get_status() == Polen_Order::is_completed( $order ) ):
+                  ?>
+                      <a href="<?php echo $order->get_view_order_url(); ?>" class="btn btn-primary btn-lg btn-block">
+                        Acompanhar pedido
+                      </a>
+                  <?php
+                  else :
+                      //TODO ADD A URL PARA ASSISTIR O VIDEO
+                  ?>
+                      <a href="<?php echo $order->get_view_order_url(); ?>" class="btn btn-primary btn-lg btn-block">
+                        Ver Video
+                      </a>
+                  <?php
+                  endif;?>
 								</div>
 							</div>
 							<div class="col-12 text-center">
