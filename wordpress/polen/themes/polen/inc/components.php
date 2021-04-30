@@ -322,6 +322,13 @@ function polen_front_get_talent_videos($talent)
 <?php
 }
 
+
+/**
+ * Cria a tela para assitir video
+ * @param WP_User $talent
+ * @param Polen_Video_Info $video
+ * @return html
+ */
 function polen_get_video_player($talent, $video)
 {
 	if(!$talent || !$video) {
