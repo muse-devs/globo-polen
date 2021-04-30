@@ -30,7 +30,6 @@ class Polen_Video_Player
         if ( get_query_var( 'video_hash' ) == false || get_query_var( 'video_hash' ) == '' ) {
             return $template;
         }
-        
         $video_hash = get_query_var( 'video_hash' );        
         return get_template_directory() . '/video.php';
     }
