@@ -20,7 +20,11 @@ use \Polen\includes\Polen_Talent;
 $user = wp_get_current_user();
 $polen_talent = new Polen_Talent;
 if( $polen_talent->is_user_talent( $user ) ) {
-
+    global $wp_query;
+    $wp_query->set_404();
+    status_header( 404 );
+    get_template_part( 404 );
+    exit();
 }else{
 
 do_action( 'woocommerce_before_edit_account_form' ); ?>

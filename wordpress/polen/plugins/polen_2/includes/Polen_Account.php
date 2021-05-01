@@ -4,6 +4,7 @@ namespace Polen\Includes;
 
 use \Polen\Admin\Polen_Admin;
 use \Polen\includes\Polen_Talent;
+use \Polen\Includes\Polen_Video_Info;
 
 class Polen_Account
 {
@@ -54,7 +55,6 @@ class Polen_Account
                 'dashboard'       => 'Início',
                 'orders'          => 'Meus pedidos',
                 'payment-options' => 'Pagamento',
-                'edit-account'    => 'Meus dados',
                 'customer-logout' => __( 'Logout', 'woocommerce' ),
             );
         }else{
@@ -100,9 +100,19 @@ class Polen_Account
                 exit;
             }
 
-            if( isset( $_GET['v'] ) && !empty( $_GET['v']) ){
-                $video_hash = $_GET['v'];
-                require_once PLUGIN_POLEN_DIR . '/publics/partials/polen_watch_video.php';
+            if( isset( $_GET['order_id'] ) && !empty( $_GET['order_id']) ){
+                $order_id = $_GET['order_id'];
+                $video_info = Polen_Video_Info::get_by_order_id( $order_id );
+                $video_hash = $video_info->hash;
+                if( !empty( $video_hash ) ){
+                    require_once PLUGIN_POLEN_DIR . '/publics/partials/polen_watch_video.php';
+                }else{
+                    global $wp_query;
+                    $wp_query->set_404();
+                    status_header( 404 );
+                    get_template_part( 404 );
+                    exit();
+                }    
             }
         }
     }

@@ -1,6 +1,5 @@
 <?php
 use \Polen\Includes\Polen_Video_Info;
-
 $video_info = Polen_Video_Info::get_by_hash( $video_hash );
 
 if( empty( $video_info ) ) {
