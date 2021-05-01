@@ -64,8 +64,6 @@ class Polen_Talent {
             add_action( 'init', array( $this, 'my_account_send_video' ) );
             add_action( 'woocommerce_account_send-video_endpoint', array( $this, 'my_account_send_video_content' ) );
             add_action( 'woocommerce_account_success-upload_endpoint', array( $this, 'my_account_success_upload_content' ) );
-            add_action( 'woocommerce_account_watch-video_endpoint', array( $this, 'my_account_watch_video' ) );
-
         }
     }
 
@@ -595,21 +593,6 @@ class Polen_Talent {
         }
         $order = $this->get_safe_order_in_param_get();
         require_once PLUGIN_POLEN_DIR . '/publics/partials/polen_talent_success_upload.php';
-    }
-    
-
-    /**
-     * Tela para visualizar o vídeo
-     */
-    public function my_account_watch_video()
-    {
-        $user = wp_get_current_user();
-        if( $this->is_user_talent( $user ) ) {
-            wp_safe_redirect(site_url('my-account/orders'));
-            exit;
-        }
-
-        require_once PLUGIN_POLEN_DIR . '/publics/partials/polen_watch_video.php';
     }
     
     /**

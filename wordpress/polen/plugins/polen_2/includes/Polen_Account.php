@@ -3,6 +3,7 @@
 namespace Polen\Includes;
 
 use \Polen\Admin\Polen_Admin;
+use \Polen\includes\Polen_Talent;
 
 class Polen_Account
 {
@@ -15,6 +16,7 @@ class Polen_Account
             add_filter( 'woocommerce_endpoint_view-order_title', array( $this,  'view_order_custom' ), 20, 2 );
             add_filter( 'woocommerce_before_account_orders', array( $this, 'my_orders_title' ));
             add_action( 'template_redirect', array( $this, 'my_account_redirect' ) );
+            add_action( 'woocommerce_account_watch-video_endpoint', array( $this, 'my_account_watch_video' ) );
         }
     }
 
@@ -70,17 +72,39 @@ class Polen_Account
      * Faz my-account redirecionar para a lista de pedidos ao invés do dashboard
      */
     public function my_account_redirect() {
-        $logged_user = wp_get_current_user();
-        if( !in_array( 'user_talent',  $logged_user->roles ) )
-        { 
-            $current_url = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";        
-            $dashboard_url = get_permalink( get_option('woocommerce_myaccount_page_id'));
-            if( is_user_logged_in() && $dashboard_url == $current_url ){
-                $url = get_home_url() . '/my-account/orders';
-                wp_redirect( $url );
+        if( is_user_logged_in() ){
+            $logged_user = wp_get_current_user();
+            if( !in_array( 'user_talent',  $logged_user->roles ) )
+            { 
+                $current_url = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";        
+                $dashboard_url = get_permalink( get_option('woocommerce_myaccount_page_id'));
+                if( is_user_logged_in() && $dashboard_url == $current_url ){
+                    $url = get_home_url() . '/my-account/orders';
+                    wp_redirect( $url );
+                    exit;
+                }
+            } 
+        }   
+    }
+
+    /**
+     * Tela para visualizar o vídeo
+    */
+    public function my_account_watch_video()
+    {
+        if( is_user_logged_in() ){
+            $user = wp_get_current_user();
+            $polen_talent = new Polen_Talent;
+            if( $polen_talent->is_user_talent( $user ) ) {
+                wp_safe_redirect(site_url('my-account/orders'));
                 exit;
             }
-        }    
+
+            if( isset( $_GET['v'] ) && !empty( $_GET['v']) ){
+                $video_hash = $_GET['v'];
+                require_once PLUGIN_POLEN_DIR . '/publics/partials/polen_watch_video.php';
+            }
+        }
     }
 
 }
