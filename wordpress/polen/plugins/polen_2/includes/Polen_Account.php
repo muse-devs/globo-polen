@@ -54,7 +54,6 @@ class Polen_Account
                 'dashboard'       => 'Início',
                 'orders'          => 'Meus pedidos',
                 'payment-options' => 'Pagamento',
-                'edit-account'    => 'Meus dados',
                 'customer-logout' => __( 'Logout', 'woocommerce' ),
             );
         }else{
