@@ -7,7 +7,6 @@ if( ( isset( $video_hash ) && empty( $video_hash ) ) || empty( $video_hash ) ){
 }
 
 $video_info = Polen_Video_Info::get_by_hash( $video_hash );
-var_dump('here');die;
 if( empty( $video_info ) ) {
     global $wp_query;
     $wp_query->set_404();
