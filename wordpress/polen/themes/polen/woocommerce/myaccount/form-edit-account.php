@@ -14,8 +14,14 @@
  * @package WooCommerce\Templates
  * @version 3.5.0
  */
-
 defined( 'ABSPATH' ) || exit;
+
+use \Polen\includes\Polen_Talent;
+$user = wp_get_current_user();
+$polen_talent = new Polen_Talent;
+if( $polen_talent->is_user_talent( $user ) ) {
+
+}else{
 
 do_action( 'woocommerce_before_edit_account_form' ); ?>
 
@@ -68,3 +74,7 @@ do_action( 'woocommerce_before_edit_account_form' ); ?>
 </form>
 
 <?php do_action( 'woocommerce_after_edit_account_form' ); ?>
+
+<?php
+}
+?>
