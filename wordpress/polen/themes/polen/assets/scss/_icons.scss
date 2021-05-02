@@ -1,14 +1,14 @@
 @font-face {
-	font-family: "MuseIcons";
-	src: url('../fonts/MuseIcons.eot');
-	src: url('../fonts/MuseIcons.eot?#iefix') format('eot'),
-		url('../fonts/MuseIcons.woff') format('woff'),
-		url('../fonts/MuseIcons.ttf') format('truetype'),
-		url('../fonts/MuseIcons.svg#MuseIcons') format('svg');
+	font-family: "PolenIcons";
+	src: url('../fonts/PolenIcons.eot');
+	src: url('../fonts/PolenIcons.eot?#iefix') format('eot'),
+		url('../fonts/PolenIcons.woff') format('woff'),
+		url('../fonts/PolenIcons.ttf') format('truetype'),
+		url('../fonts/PolenIcons.svg#PolenIcons') format('svg');
 }
 
 @mixin icon-styles {
-	font-family: "MuseIcons";
+	font-family: "PolenIcons";
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
 	font-style: normal;
@@ -65,8 +65,11 @@
 	@if $filename == software-download {
 		$char: "\E00D";
 	}
-	@if $filename == twitter {
+	@if $filename == trash {
 		$char: "\E00E";
+	}
+	@if $filename == twitter {
+		$char: "\E00F";
 	}
 
 	@return $char;
@@ -121,6 +124,9 @@
 }
 .icon-software-download {
 	@include icon(software-download);
+}
+.icon-trash {
+	@include icon(trash);
 }
 .icon-twitter {
 	@include icon(twitter);

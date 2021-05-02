@@ -7,7 +7,7 @@ if( ! defined( 'ABSPATH' ) ) {
 class WC_Cubo9_Braspag extends WC_Payment_Gateway {
 
     public function __construct() {
-        $WC_Cubo9_BraspagReduxSettings = get_option( 'WC_Cubo9_BraspagReduxSettings');
+        global $WC_Cubo9_BraspagReduxSettings;
 
         if( intval( $WC_Cubo9_BraspagReduxSettings['enable_braspag_sandbox'] ) == intval( 1 ) ) {
             $this->ORG_ID                       = $WC_Cubo9_BraspagReduxSettings['sandbox_master_org_id'];

@@ -11,11 +11,12 @@ sass.compiler = require("node-sass");
 const sourcemaps = require("gulp-sourcemaps");
 const svgSprite = require("gulp-svg-sprite");
 
-const fontName = "MuseIcons";
+const fontName = "PolenIcons";
 const sass_dir = "./scss/**/*.scss";
 
 gulp.task("iconfont", function () {
-	gulp.src(["icons/*.svg"])
+	return gulp
+		.src(["icons/*.svg"])
 		.pipe(
 			iconfontCss({
 				fontName: fontName,

@@ -11,6 +11,7 @@ use Polen\Includes\Polen_Order;
 class Polen_Talent {
 
     const ROLE_SLUG = 'user_talent';
+    public $tallent_slug;
     
     public function __construct($static = false) {
         $this->video_time = 45;
@@ -32,8 +33,8 @@ class Polen_Talent {
             /**
              * Modifica a URL do Talento (Usuário)
              */
-            // add_action( 'init', array( $this, 'rewrites' ) );
-
+            add_action( 'init', array( $this, 'rewrites' ) );
+            
             /**
              * Modifcar o texto do botão comprar
              */
@@ -67,10 +68,10 @@ class Polen_Talent {
     }
 
     public function rewrites() {
-        global $wp_rewrite;
-        $wp_rewrite->author_base = $this->tallent_slug;
-        add_rewrite_rule($this->tallent_slug . '/([^/]+)/?$', 'index.php?' . $this->tallent_slug . '=$matches[1]', 'top');
-        add_rewrite_rule($this->tallent_slug . '/([^/]+)/page/?([0-9]{1,})/?$', 'index.php?' . $this->tallent_slug . '=$matches[1]&paged=$matches[2]', 'top');
+//        global $wp_rewrite;
+//        $wp_rewrite->author_base = $this->tallent_slug;
+//        add_rewrite_rule($this->tallent_slug . '/([^/]+)/?$', 'index.php?' . $this->tallent_slug . '=$matches[1]', 'top');
+//        add_rewrite_rule($this->tallent_slug . '/([^/]+)/page/?([0-9]{1,})/?$', 'index.php?' . $this->tallent_slug . '=$matches[1]&paged=$matches[2]', 'top');
     }
 
     /**
@@ -402,7 +403,11 @@ class Polen_Talent {
         return $redirect_to;
     }
     
-
+    /**
+     * Verifica se um usuário é um talento
+     * @param \WP_User $user
+     * @return boolean
+     */
     public function is_user_talent(\WP_User $user) {
         $roles = $user->roles;
         if (in_array( self::ROLE_SLUG, $roles ) !== false) {
@@ -556,6 +561,7 @@ class Polen_Talent {
     public function my_account_send_video(){
         add_rewrite_endpoint( 'send-video', EP_PAGES );
         add_rewrite_endpoint( 'success-upload', EP_PAGES );
+        add_rewrite_endpoint( 'watch-video', EP_PAGES );
     }
     
 
@@ -589,7 +595,6 @@ class Polen_Talent {
         require_once PLUGIN_POLEN_DIR . '/publics/partials/polen_talent_success_upload.php';
     }
     
-    
     /**
      * Pegar o Object Order baseado no Parametro GET entro @param
      * @param string $param_name Parametro no $_GET
@@ -604,6 +609,23 @@ class Polen_Talent {
             exit;
         }
         return $order;
+    }
+
+    /**
+     * Pegar o talento pelo ID do Produto
+     */
+    public function get_talent_from_product( $product_id )
+    {
+        global $wpdb;
+        $sql = "
+            SELECT U.`ID`, U.`display_name` AS `name`, U.`user_email` AS `email`, P.`post_title` AS `product`
+            FROM `" . $wpdb->users . "` U
+            LEFT JOIN `" . $wpdb->posts . "` P ON P.`post_author` = U.`ID`
+            WHERE P.`ID`=" . $product_id;
+        $res = $wpdb->get_results( $sql );
+        if( $res && ! is_null( $res ) && is_array( $res ) && ! empty( $res ) ) {
+            return $res[0];
+        }
     }
 }
     

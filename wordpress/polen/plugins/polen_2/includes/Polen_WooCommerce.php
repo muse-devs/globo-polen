@@ -47,6 +47,14 @@ class Polen_WooCommerce
                 'show_in_admin_status_list' => true,
                 'label_count'               => _n_noop( 'O talento aceitou <span class="count">(%s)</span>', 'O talento aceitou <span class="count">(%s)</span>', 'polen' ),
             ),
+            'wc-order-expired' => array(
+                'label'                     => __( 'Pedido expirado', 'polen' ),
+                'public'                    => false,
+                'exclude_from_search'       => false,
+                'show_in_admin_all_list'    => true,
+                'show_in_admin_status_list' => true,
+                'label_count'               => _n_noop( 'Pedido expirado <span class="count">(%s)</span>', 'Pedido expirado <span class="count">(%s)</span>', 'polen' ),
+            ),
         );
 
         if( $static ) {
@@ -54,12 +62,15 @@ class Polen_WooCommerce
             add_filter( 'wc_order_statuses', array( $this, 'add_custom_order_statuses' ) );
             add_filter( 'bulk_actions-edit-shop_order', array( $this, 'dropdown_bulk_actions_shop_order' ), 20, 1 );
             add_filter( 'woocommerce_email_actions', array( $this, 'email_actions' ), 20, 1 );
+            add_action( 'woocommerce_checkout_create_order', array( $this, 'order_meta' ), 12, 2 );
 
             add_action( 'init', function( $array ) {
                 foreach ( $this->order_statuses as $order_status => $values ) 
                 {
                     $action_hook = 'woocommerce_order_status_' . $order_status;
                     add_action( $action_hook, array( WC(), 'send_transactional_email' ), 10, 1 );
+                    $action_hook_notification = 'woocommerce_order_' . $order_status . '_notification';
+                    add_action( $action_hook_notification, array( WC(), 'send_transactional_email' ), 10, 1 );
                 }
             } );
         }
@@ -100,4 +111,15 @@ class Polen_WooCommerce
         return $actions;
     }
 
+    public function order_meta( $order, $data ) 
+    {
+        $items = WC()->cart->get_cart();
+        $key = array_key_first( $items );
+        $billing_email = $items[ $key ][ 'email_to_video' ];
+        if ( $billing_email && ! is_null( $billing_email ) && ! empty( $billing_email ) ) 
+        {
+            $order->update_meta_data( '_polen_customer_email', $billing_email );
+            $order->update_meta_data( '_billing_email', $billing_email );
+        }
+    }
 }
