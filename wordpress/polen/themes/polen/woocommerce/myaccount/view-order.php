@@ -184,6 +184,6 @@ if( isset( $flow_1[ $order_status ] ) ) {
 
 <div class="row my-3">
 	<div class="col-12">
-		<a href="/my-account/" class="btn btn-primary btn-lg btn-block">Assistir vídeo</a>
+		<a href="<?php echo wc_get_account_endpoint_url('watch-video') . '?order_id=' . $order_number; ?>" class="btn btn-primary btn-lg btn-block">Assistir vídeo</a>
 	</div>
 </div>

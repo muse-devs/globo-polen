@@ -197,7 +197,7 @@ else:
 
 <div class="row my-3">
 	<div class="col-12">
-		<a href="/my-account/" class="btn btn-primary btn-lg btn-block">Meu pedidos</a>
+		<a href="<?php echo wc_get_account_endpoint_url('view-order') . $order_number . '/'; ?>" class="btn btn-primary btn-lg btn-block">Acompanhar pedido</a>
 	</div>
 </div>
 
