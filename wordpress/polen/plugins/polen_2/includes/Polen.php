@@ -45,10 +45,12 @@ class Polen {
         
     }
 
-    private function init_classes() {
+    private function init_classes()
+    {
         new Polen_SignInUser();
         new Polen_Talent( true );
         new Polen_SMTP( true );
+        new Polen_Emails();
         new Polen_Occasion_List( true );
         new Polen_Cart( true );
         new Polen_Plugin_Settings( true );
@@ -59,6 +61,7 @@ class Polen {
         new Polen_Order( true );
         new Polen_WooCommerce( true );
         new Polen_Talent_Part_Theme( true );
+        new Polen_Video_Player( true );
 
         $ctler = new Polen_Talent_Controller();
         $talent_area_router = new Polen_Talent_Router($ctler);

@@ -171,15 +171,16 @@ function polen_scripts() {
 	}
 
 	wp_enqueue_style('polen-custom-styles', TEMPLATE_URI . '/assets/css/style.css', array(), _S_VERSION);
+	wp_register_script( 'vimeo', 'https://player.vimeo.com/api/player.js', array(), '', true );
 
 	if(is_singular() && is_product()) {
 		wp_enqueue_script( 'slick-slider', TEMPLATE_URI . '/assets/slick/slick.min.js', array("jquery"), _S_VERSION, true );
-		wp_enqueue_script( 'vimeo', 'https://player.vimeo.com/api/player.js', array(), '', true );
+		wp_enqueue_script( 'vimeo');
 		wp_enqueue_script( 'talent-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'talent.js', array("slick-slider", "vimeo"), _S_VERSION, true );
 	}
 
 	if( is_cart() ) {
-		wp_enqueue_script( 'polen-cart', TEMPLATE_URI . '/assets/js/cart' . $min . '.js', array("jquery"), _S_VERSION, true );
+		wp_enqueue_script( 'polen-cart', TEMPLATE_URI . '/assets/js/' . $min . 'cart.js', array("jquery"), _S_VERSION, true );
 	}
 
 	wp_enqueue_script( 'bootstrap-js', TEMPLATE_URI . '/assets/bootstrap-4.6.0/dist/js/bootstrap.min.js', array("jquery"), _S_VERSION, true );
@@ -187,6 +188,8 @@ function polen_scripts() {
 	if(is_user_logged_in()) {
 		wp_enqueue_script( 'header-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'navigation.js', array("jquery"), _S_VERSION, true );
 	}
+
+	wp_enqueue_script( 'global-js', TEMPLATE_URI . '/assets/js/' . $min . 'global.js', array("jquery"), _S_VERSION, true );
 }
 add_action( 'wp_enqueue_scripts', 'polen_scripts' );
 
