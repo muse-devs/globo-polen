@@ -14,8 +14,18 @@
  * @package WooCommerce\Templates
  * @version 3.5.0
  */
-
 defined( 'ABSPATH' ) || exit;
+
+use \Polen\includes\Polen_Talent;
+$user = wp_get_current_user();
+$polen_talent = new Polen_Talent;
+if( $polen_talent->is_user_talent( $user ) ) {
+    global $wp_query;
+    $wp_query->set_404();
+    status_header( 404 );
+    get_template_part( 404 );
+    exit();
+}else{
 
 do_action( 'woocommerce_before_edit_account_form' ); ?>
 
@@ -23,40 +33,34 @@ do_action( 'woocommerce_before_edit_account_form' ); ?>
 
 	<?php do_action( 'woocommerce_edit_account_form_start' ); ?>
 
-	<p class="woocommerce-form-row woocommerce-form-row--first form-row form-row-first">
-		<label for="account_first_name"><?php esc_html_e( 'First name', 'woocommerce' ); ?>&nbsp;<span class="required">*</span></label>
+	<p class="woocommerce-form-row woocommerce-form-row--first form-row form-row-first mb-3">
 		<input type="text" placeholder="<?php esc_html_e( 'First name', 'woocommerce' ); ?>" class="woocommerce-Input woocommerce-Input--text input-text form-control form-control-lg" name="account_first_name" id="account_first_name" autocomplete="given-name" value="<?php echo esc_attr( $user->first_name ); ?>" />
 	</p>
-	<p class="woocommerce-form-row woocommerce-form-row--last form-row form-row-last">
-		<label for="account_last_name"><?php esc_html_e( 'Last name', 'woocommerce' ); ?>&nbsp;<span class="required">*</span></label>
+	<p class="woocommerce-form-row woocommerce-form-row--last form-row form-row-last mb-3">
 		<input type="text" placeholder="<?php esc_html_e( 'Last name', 'woocommerce' ); ?>" class="woocommerce-Input woocommerce-Input--text input-text form-control form-control-lg" name="account_last_name" id="account_last_name" autocomplete="family-name" value="<?php echo esc_attr( $user->last_name ); ?>" />
 	</p>
 	<div class="clear"></div>
 
-	<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-		<label for="account_display_name"><?php esc_html_e( 'Display name', 'woocommerce' ); ?>&nbsp;<span class="required">*</span></label>
-		<input type="text" placeholder="<?php esc_html_e( 'Display name', 'woocommerce' ); ?>" class="woocommerce-Input woocommerce-Input--text input-text form-control form-control-lg" name="account_display_name" id="account_display_name" value="<?php echo esc_attr( $user->display_name ); ?>" /> <span><em><?php esc_html_e( 'This will be how your name will be displayed in the account section and in reviews', 'woocommerce' ); ?></em></span>
+	<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide mb-3">
+		<input type="text" placeholder="<?php esc_html_e( 'Display name', 'woocommerce' ); ?>" class="woocommerce-Input woocommerce-Input--text input-text form-control form-control-lg" name="account_display_name" id="account_display_name" value="<?php echo esc_attr( $user->display_name ); ?>" />
+		<small><?php esc_html_e( 'This will be how your name will be displayed in the account section and in reviews', 'woocommerce' ); ?></small>
 	</p>
 	<div class="clear"></div>
 
-	<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide mt-4">
-		<label for="account_email"><?php esc_html_e( 'Email address', 'woocommerce' ); ?>&nbsp;<span class="required">*</span></label>
+	<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
 		<input type="email" placeholder="<?php esc_html_e( 'Email address', 'woocommerce' ); ?>" class="woocommerce-Input woocommerce-Input--email input-text form-control form-control-lg" name="account_email" id="account_email" autocomplete="email" value="<?php echo esc_attr( $user->user_email ); ?>" />
 	</p>
 
-	<fieldset class="mt-5">
-		<legend><?php esc_html_e( 'Password change', 'woocommerce' ); ?></legend>
+	<fieldset class="mt-4">
+		<legend class="col-form-label"><?php esc_html_e( 'Password change', 'woocommerce' ); ?></legend>
 
-		<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-			<label for="password_current"><?php esc_html_e( 'Current password (leave blank to leave unchanged)', 'woocommerce' ); ?></label>
+		<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide mb-3">
 			<input type="password" placeholder="<?php esc_html_e( 'Current password (leave blank to leave unchanged)', 'woocommerce' ); ?>" class="woocommerce-Input woocommerce-Input--password input-text form-control form-control-lg" name="password_current" id="password_current" autocomplete="off" />
 		</p>
-		<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-			<label for="password_1"><?php esc_html_e( 'New password (leave blank to leave unchanged)', 'woocommerce' ); ?></label>
+		<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide mb-3">
 			<input type="password" placeholder="<?php esc_html_e( 'New password (leave blank to leave unchanged)', 'woocommerce' ); ?>" class="woocommerce-Input woocommerce-Input--password input-text form-control form-control-lg" name="password_1" id="password_1" autocomplete="off" />
 		</p>
 		<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-			<label for="password_2"><?php esc_html_e( 'Confirm new password', 'woocommerce' ); ?></label>
 			<input type="password" placeholder="<?php esc_html_e( 'Confirm new password', 'woocommerce' ); ?>" class="woocommerce-Input woocommerce-Input--password input-text form-control form-control-lg" name="password_2" id="password_2" autocomplete="off" />
 		</p>
 	</fieldset>
@@ -74,3 +78,7 @@ do_action( 'woocommerce_before_edit_account_form' ); ?>
 </form>
 
 <?php do_action( 'woocommerce_after_edit_account_form' ); ?>
+
+<?php
+}
+?>

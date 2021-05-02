@@ -62,24 +62,27 @@ if( isset( $_REQUEST['order_id'] ) && ! empty( $_REQUEST['order_id'] ) ) {
                     <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"></button>
                         <div class="body">
                             <div class="row d-flex align-items-center">
-                                <div class="col-12">
-                                    <p class="p small">Vídeo de</p>
-                                    <span class="name"><?= $polen_order->get_offered_by(); ?></span>
-                                </div>
+                                <?php
+                                if( !empty( $polen_order->get_offered_by() ) ) : ?>
+                                    <div class="col-12">
+                                        <p class="title">Vídeo de</p>
+                                        <span class="name"><?= $polen_order->get_offered_by(); ?></span>
+                                    </div>
+                                <?php endif; ?>
                                 <div class="col-12 mt-3">
-                                    <p class="p small">Para</p>
+                                    <p class="title">Para</p>
                                     <span class="name"><?= $polen_order->get_name_to_video(); ?></span>
                                 </div>
                             </div>
                             <div class="row mt-4">
                                 <div class="col">
-                                    <p class="p small mb-3">Ocasião</p>
-                                    <span class="name small"><?= $polen_order->get_video_category(); ?></span>
+                                    <p class="title mb-3">Ocasião</p>
+                                    <span class="name"><?= $polen_order->get_video_category(); ?></span>
                                 </div>
                             </div>
                             <div class="row mt-4">
                                 <div class="col">
-                                    <p class="p small mb-3">e-mail de contato</p>
+                                    <p class="title mb-3">e-mail de contato</p>
                                     <span class="name small"><?= $polen_order->get_email_to_video(); ?></span>
                                 </div>
                             </div>

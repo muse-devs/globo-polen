@@ -1,8 +1,12 @@
 <?php
 defined('ABSPATH') || exit;
 
+use \Polen\Includes\{ Polen_Order, Polen_Talent };
+
+$polen_talent = new Polen_Talent();
 $logged_user = wp_get_current_user();
-if (in_array('user_talent',  $logged_user->roles)) {
+
+if( $polen_talent->is_user_talent( $logged_user ) ) {
 	require get_template_directory() . '/woocommerce/myaccount/orders-talent.php';
 } else {
 	do_action('woocommerce_before_account_orders', $has_orders); ?>
@@ -54,9 +58,21 @@ if (in_array('user_talent',  $logged_user->roles)) {
 							</div>
 							<div class="col-12 text-center mt-4 mb-3">
 								<div class="row">
-									<a href="<?php echo $order->get_view_order_url(); ?>" class="btn btn-primary btn-lg btn-block">
-										Acompanhar pedido
-									</a>
+									<?php
+									if( $order->get_status() != Polen_Order::is_completed( $order ) ):
+									?>
+										<a href="<?php echo $order->get_view_order_url(); ?>" class="btn btn-primary btn-lg btn-block">
+											Acompanhar pedido
+										</a>
+									<?php
+									else :
+										//TODO ADD A URL PARA ASSISTIR O VIDEO
+									?>
+										<a href="<?php echo wc_get_page_permalink( 'myaccount' ).'watch-video?order_id='.$order->get_order_number(); ?>" class="btn btn-primary btn-lg btn-block">
+											Ver Video
+										</a>
+									<?php
+									endif;?>
 								</div>
 							</div>
 							<div class="col-12 text-center">
@@ -124,9 +140,11 @@ if (in_array('user_talent',  $logged_user->roles)) {
 		<?php endif; ?>
 
 	<?php else : ?>
-		<div class="text-center mt-5">
-			<p><?php esc_html_e('No order has been made yet.', 'woocommerce'); ?></p>
-			<a class="woocommerce-Button btn btn-primary btn-lg" href="<?php echo esc_url(apply_filters('woocommerce_return_to_shop_redirect', wc_get_page_permalink('shop'))); ?>"><?php esc_html_e('Browse products', 'woocommerce'); ?></a>
+		<div class="row">
+			<div class="col-12 text-center mt-3">
+				<?php polen_box_image_message(TEMPLATE_URI . "/assets/img/list.png", __('No order has been made yet.', 'woocommerce')); ?>
+				<a class="woocommerce-Button btn btn-outline-light btn-lg btn-block mt-3" href="<?php echo esc_url(apply_filters('woocommerce_return_to_shop_redirect', wc_get_page_permalink('shop'))); ?>"><?php esc_html_e('Browse products', 'woocommerce'); ?></a>
+			</div>
 		</div>
 	<?php endif; ?>
 

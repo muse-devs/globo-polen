@@ -8,7 +8,8 @@ $error-box-color: #fdebeb;
 
 $body-bg: #000;
 $body-color: $light-100;
-$primary: #d7198b;
+$primary: #b620e0;
+$primary_hover: #cc30f8;
 $secondary: #377dff;
 $accept: #3cc13b;
 $danger: #ff000f;
@@ -20,7 +21,7 @@ $nav-tabs-border-color: $light-50;
 $default-bg-color: $light-25;
 $secondary-bg-color: $light-50;
 $font-transparent: $light-50;
-$talent-bg-color: #262626;
+$talent-bg-color: #272727;
 $form-bg-color: rgba(196, 196, 196, 0.1);
 $font-color2: $light-50;
 $input-font-color: $light-100;
@@ -32,4 +33,6 @@ $theme-colors: (
 	"danger": $danger,
 	"light": $light-100,
 	"gray": $talent-bg-color,
+	"gray-dark": $talent-bg-color,
+	"dark": $dark-100,
 );

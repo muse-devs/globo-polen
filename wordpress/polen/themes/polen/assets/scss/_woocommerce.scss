@@ -1,6 +1,7 @@
 .woocommerce div.product p.price,
 .woocommerce div.product span.price {
 	color: white;
+	font-size: 16px;
 }
 
 .form-row {
@@ -60,7 +61,7 @@ select.form-control:not([size]):not([multiple]) {
 		&.is-active {
 			border-radius: 6px;
 			border-left-color: $primary;
-			background-color: $form-bg-color;
+			background-color: $talent-bg-color;
 		}
 	}
 	@include media-breakpoint-down(xs) {
@@ -137,4 +138,16 @@ select.form-control:not([size]):not([multiple]) {
 	border: none;
 	border-radius: $input-border-radius;
 	background-color: $error-box-color;
+}
+
+.woocommerce form .show-password-input,
+.woocommerce-page form .show-password-input {
+	top: 1.4em;
+}
+
+.woocommerce .woocommerce-ordering,
+.woocommerce-page .woocommerce-ordering {
+	@include media-breakpoint-down(sm) {
+		float: left;
+	}
 }

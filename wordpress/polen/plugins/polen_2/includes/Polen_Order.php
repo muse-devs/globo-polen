@@ -14,11 +14,16 @@ class Polen_Order
 //    const METADATA_VIMEO_VIDEO_ID = 'vimeo_video_id';
 //    const METADATA_VIMEO_VIDEO_URL = 'vimeo_video_url';
 //    const METADATA_VIMEO_VIDEO_EMBED_CONTENT = 'vimeo_video_embed_content';
+    const SLUG_ORDER_COMPLETE = 'completed';
+    const SLUG_ORDER_COMPLETE_INSIDE = 'wc-completed';
     
     public function __construct( $static = false ) {
         if( $static ) {
             add_action( 'wp_ajax_search_order_status', array( $this, 'check_order_status' ) );
             add_action( 'wp_ajax_nopriv_search_order_status', array( $this, 'check_order_status' ) );
+            add_shortcode( 'polen_search_order', array( $this, 'polen_search_order_shortcode' ) );
+            add_shortcode( 'polen_search_result_shortcode', array( $this, 'polen_search_result_shortcode' ) );
+            add_shortcode( 'polen_video_shortcode', array( $this, 'polen_watch_video' ) );
         }
     }
 
@@ -120,6 +125,18 @@ class Polen_Order
 
         return false;
     }
+    
+    
+    static public function is_completed( \WC_Order $order)
+    {
+        if( $order->get_status() == self::SLUG_ORDER_COMPLETE ) {
+            return true;
+        }
+        return false;
+    }
+    
+    
+    
 
     public function polen_search_order_shortcode() { 
     ?>    
@@ -150,7 +167,6 @@ class Polen_Order
     <?php
     } 
 
-
     public function polen_search_result_shortcode() { 
     ?>    
         <div id="primary" class="content-area cart-other">
@@ -159,9 +175,18 @@ class Polen_Order
         </main>
         </div>
     <?php
-    } 
+    }
 
+    public function polen_watch_video(){ 
+        echo $_SERVER['REQUEST_URI'];
+        global $wp_query;
+
+        if (isset($wp_query->query_vars['yourvarname']))
+        {
+        print $wp_query->query_vars['yourvarname'];
+        }
+    ?>
+        <p>Aqui para assistir ao vídeo</p>
+    <?php
+    }
 }
-$Polen_Order = new Polen_Order;
-add_shortcode( 'polen_search_order', array( $Polen_Order, 'polen_search_order_shortcode' ) );
-add_shortcode( 'polen_search_result_shortcode', array( $Polen_Order, 'polen_search_result_shortcode' ) );

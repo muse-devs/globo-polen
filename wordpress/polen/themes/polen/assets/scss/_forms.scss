@@ -1,16 +1,16 @@
 .form-control {
 	padding: 15px;
 	font-family: $font-primary;
-	font-size: 16px;
+	font-size: 14px;
 	border: none;
 	color: $input-font-color;
-	background-color: $default-bg-color;
+	background-color: var(--gray-dark);
 	&::placeholder {
 		font-family: inherit;
 	}
 	&:focus {
 		color: $input-font-color;
-		background-color: $default-bg-color;
+		background-color: var(--gray-dark);
 	}
 }
 

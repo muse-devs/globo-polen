@@ -10,6 +10,9 @@ use Polen\Includes\Polen_Order;
 
 class Polen_Talent {
 
+    const ROLE_SLUG = 'user_talent';
+    public $tallent_slug;
+    
     public function __construct($static = false) {
         $this->video_time = 45;
         if ($static) {
@@ -30,8 +33,8 @@ class Polen_Talent {
             /**
              * Modifica a URL do Talento (Usuário)
              */
-            // add_action( 'init', array( $this, 'rewrites' ) );
-
+            add_action( 'init', array( $this, 'rewrites' ) );
+            
             /**
              * Modifcar o texto do botão comprar
              */
@@ -60,14 +63,15 @@ class Polen_Talent {
 
             add_action( 'init', array( $this, 'my_account_send_video' ) );
             add_action( 'woocommerce_account_send-video_endpoint', array( $this, 'my_account_send_video_content' ) );
+            add_action( 'woocommerce_account_success-upload_endpoint', array( $this, 'my_account_success_upload_content' ) );
         }
     }
 
     public function rewrites() {
-        global $wp_rewrite;
-        $wp_rewrite->author_base = $this->tallent_slug;
-        add_rewrite_rule($this->tallent_slug . '/([^/]+)/?$', 'index.php?' . $this->tallent_slug . '=$matches[1]', 'top');
-        add_rewrite_rule($this->tallent_slug . '/([^/]+)/page/?([0-9]{1,})/?$', 'index.php?' . $this->tallent_slug . '=$matches[1]&paged=$matches[2]', 'top');
+//        global $wp_rewrite;
+//        $wp_rewrite->author_base = $this->tallent_slug;
+//        add_rewrite_rule($this->tallent_slug . '/([^/]+)/?$', 'index.php?' . $this->tallent_slug . '=$matches[1]', 'top');
+//        add_rewrite_rule($this->tallent_slug . '/([^/]+)/page/?([0-9]{1,})/?$', 'index.php?' . $this->tallent_slug . '=$matches[1]&paged=$matches[2]', 'top');
     }
 
     /**
@@ -83,7 +87,7 @@ class Polen_Talent {
     function talent_select( $post ) {
         global $user_ID;
 
-        $tallents = get_users(array('role' => 'user_talent'));
+        $tallents = get_users(array('role' => self::ROLE_SLUG ));
         $current_tallent = empty($post->ID) ? '' : $post->post_author;
         ?>
         <select name="polen_choose_talent" id="polen_choose_talent">
@@ -130,7 +134,7 @@ class Polen_Talent {
         $polen_update_field = new Polen_Update_Fields();
 
         //verify if user is a talent
-        if (in_array('user_talent', $user_roles, true)) {
+        if ( in_array( self::ROLE_SLUG, $user_roles, true ) ) {
             update_user_meta($user_id, 'talent_enabled', '0');
             $vendor_data = $polen_update_field->get_vendor_data($user_id);
             $sku = $vendor_data->talent_alias ?? null;
@@ -181,7 +185,7 @@ class Polen_Talent {
 
     public function talent_submenu() {
         if (current_user_can('list_users')) {
-            add_submenu_page('users.php', 'Talento', 'Talento', 'manage_options', 'users.php?role=user_talent');
+            add_submenu_page('users.php', 'Talento', 'Talento', 'manage_options', 'users.php?role=' . self::ROLE_SLUG);
             add_submenu_page('users.php', 'Categoria Talento', 'Categoria Talento', 'manage_options', 'edit-tags.php?taxonomy=talent_category');
         }
     }
@@ -399,10 +403,14 @@ class Polen_Talent {
         return $redirect_to;
     }
     
-
+    /**
+     * Verifica se um usuário é um talento
+     * @param \WP_User $user
+     * @return boolean
+     */
     public function is_user_talent(\WP_User $user) {
         $roles = $user->roles;
-        if (array_search('user_talent', $roles) !== false) {
+        if (in_array( self::ROLE_SLUG, $roles ) !== false) {
             return true;
         }
         return false;
@@ -547,12 +555,77 @@ class Polen_Talent {
         return $arr_video_url;
     }
 
+    /**
+     * Criando as Rotas dentro do My-Account
+     */
     public function my_account_send_video(){
         add_rewrite_endpoint( 'send-video', EP_PAGES );
+        add_rewrite_endpoint( 'success-upload', EP_PAGES );
+        add_rewrite_endpoint( 'watch-video', EP_PAGES );
+    }
+    
+
+    public function my_account_send_video_content()
+    {
+        $order = $this->get_safe_order_in_param_get();
+        $order_items = $order->get_items();
+        $order_item = array_pop( $order_items );
+        $product = $order_item->get_product();
+        $post_product = get_post( $product->get_id() );
+
+        if( intval( $post_product->post_author ) !== intval( get_current_user_id() ) ) {
+            wp_safe_redirect( site_url( 'my-account/orders' ) );
+            exit;
+        }
+        require_once PLUGIN_POLEN_DIR . '/publics/partials/polen_talent_send_video_form.php'; 
+    }
+    
+    
+    /**
+     * Apresentação da tela de Video enviado com Sucesso
+     */
+    public function my_account_success_upload_content()
+    {
+        $user = wp_get_current_user();
+        if( !$this->is_user_talent( $user ) ) {
+            wp_safe_redirect(site_url('my-account/orders'));
+            exit;
+        }
+        $order = $this->get_safe_order_in_param_get();
+        require_once PLUGIN_POLEN_DIR . '/publics/partials/polen_talent_success_upload.php';
+    }
+    
+    /**
+     * Pegar o Object Order baseado no Parametro GET entro @param
+     * @param string $param_name Parametro no $_GET
+     * @return WC_Order
+     */
+    private function get_safe_order_in_param_get( string $param_name = 'order_id' )
+    {
+        $order_id = filter_input( INPUT_GET, $param_name, FILTER_SANITIZE_NUMBER_INT );
+        $order = wc_get_order( $order_id );
+        if( empty( $order ) ) {
+            wp_safe_redirect( site_url( 'my-account/orders?no_order' ) );
+            exit;
+        }
+        return $order;
     }
 
-    public function my_account_send_video_content(){
-        require_once PLUGIN_POLEN_DIR . '/publics/partials/polen_talent_send_video_form.php'; 
+    /**
+     * Pegar o talento pelo ID do Produto
+     */
+    public function get_talent_from_product( $product_id )
+    {
+        global $wpdb;
+        $sql = "
+            SELECT U.`ID`, U.`display_name` AS `name`, U.`user_email` AS `email`, P.`post_title` AS `product`
+            FROM `" . $wpdb->users . "` U
+            LEFT JOIN `" . $wpdb->posts . "` P ON P.`post_author` = U.`ID`
+            WHERE P.`ID`=" . $product_id;
+        $res = $wpdb->get_results( $sql );
+        if( $res && ! is_null( $res ) && is_array( $res ) && ! empty( $res ) ) {
+            return $res[0];
+        }
     }
 }
     

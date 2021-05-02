@@ -1,0 +1,1 @@
+function copyToClipboard(e){var a=document.getElementById("share-input");a.value=e,a.select(),a.setSelectionRange(0,99999),document.execCommand("copy"),alert("Link copiado para Área de transferência")}function changeHash(e){window.location.hash=e||""}

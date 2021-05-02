@@ -20,7 +20,13 @@ if (in_array('user_talent',  $logged_user->roles)) {
 	<div class="page-content">
 		<?php
 		if (empty($talent_orders)) {
-			echo "<p>Você não possui novas solicitações</p>";
+		?>
+			<div class="row">
+				<div class="col-12 text-center mt-3">
+					<?php polen_box_image_message(TEMPLATE_URI . "/assets/img/empty_box.png", "Você ainda não tem pedidos<br />de Vídeos"); ?>
+				</div>
+			</div>
+			<?php
 		} else {
 			echo "<p class='mb-5'>Você tem <strong><span id='order-count'>" . count($talent_orders) . "</span> pedido(s) de vídeo</strong>, seus pedidos expiram em até 7 dias.</p>";
 			if (count($talent_orders) > 0) {
@@ -29,13 +35,16 @@ if (in_array('user_talent',  $logged_user->roles)) {
 						<div class="col md-12">
 							<div class="talent-order">
 								<div class="row">
-									<div class="col-12 col-md-8">
+									<div class="col-12 col-md-12">
 										<div class="row">
-											<div class="col-6 col-md-3">
-												<p class="title">Vídeo de</p>
-												<p class="description"><?php echo $order['from']; ?></p>
-											</div>
-											<div class="col-6 col-md-3">
+											<?php
+											if (!empty($order['from'])) : ?>
+												<div class="col-6 col-md-6">
+													<p class="title">Vídeo de</p>
+													<p class="description"><?php echo $order['from']; ?></p>
+												</div>
+											<?php endif; ?>
+											<div class="col-6 col-md-6">
 												<p class="title">Para</p>
 												<p class="description"><?php echo $order['name']; ?></p>
 											</div>
@@ -47,9 +56,9 @@ if (in_array('user_talent',  $logged_user->roles)) {
 											</div>
 										</div>
 									</div>
-									<div class=" col-12">
+									<div class="col-12 col-md-12">
 										<div class="row">
-											<div class="col-md-7">
+											<div class="col-md-12">
 												<div class="row">
 													<div class="col-12 col-md-4 mt-3">
 														<p class="title">Valor</p>
@@ -67,9 +76,9 @@ if (in_array('user_talent',  $logged_user->roles)) {
 											</div>
 										</div>
 									</div>
-									<div class="col-12 mt-3">
+									<div class="col-12 col-md-12 mt-4">
 										<div class="row">
-											<div class="col-12 col-md-4">
+											<div class="col-12 col-md-12">
 												<?php
 												if ($order['status'] == 'talent-accepted') {
 												?>
@@ -106,30 +115,30 @@ if (in_array('user_talent',  $logged_user->roles)) {
 						<div class="col-12 talent-order-modal">
 							<button type="button" class="close" data-dismiss="modal" aria-label="Fechar"></button>
 							<div class="row body">
-								<div class="col-12">
-									<p class="p small">Vídeo de</p>
+								<div class="col-12" id="item-render-video-from">
+									<p class="title">Vídeo de</p>
 									<span class="name" id="video-from"></span>
 								</div>
-								<div class="col-12 mt-3">
-									<p class="p small">Para</p>
+								<div class="col-12 mt-4 pb-4 border-bottom">
+									<p class="title">Para</p>
 									<span class="name" id="video-name"></span>
 								</div>
 							</div>
-							<div class="row mt-4">
+							<div class="row pb-4 border-bottom">
 								<div class="col">
-									<p class="p small mb-3">Ocasião</p>
-									<span class="category" id="video-category"></span>
+									<p class="title mb-3">Ocasião</p>
+									<span class="name" id="video-category"></span>
 								</div>
 							</div>
 							<div class="row mt-4">
 								<div class="col">
-									<p class="p small mb-3">e-mail de contato</p>
-									<span class="category" id="video-email"></span>
+									<p class="title mb-3">e-mail de contato</p>
+									<span class="name" id="video-email"></span>
 								</div>
 							</div>
 							<div class="row mt-4">
 								<div class="col">
-									<p class="p small mb-2">Instruções</p>
+									<p class="title mb-2">Instruções</p>
 									<p class="text" id="video-instructions"></p>
 								</div>
 							</div>

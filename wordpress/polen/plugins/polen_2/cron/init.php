@@ -2,7 +2,7 @@
 
 //Se a execução não for pelo CLI gera Exception
 if( strpos(php_sapi_name(), 'cli' ) === false ) {
-    echo 'no CLI';
+    echo 'Silence is Goldem';
     die;
 }
 

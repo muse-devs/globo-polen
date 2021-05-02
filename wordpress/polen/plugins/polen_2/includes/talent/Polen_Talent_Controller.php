@@ -5,11 +5,11 @@ namespace Polen\Includes\Talent;
 use Polen\Includes\{Polen_Talent, Polen_Order, Debug};
 
 use Vimeo\Vimeo;
-use Vimeo\Exceptions\{VimeoException, VimeoRequestException, VimeoUploadException, ExceptionInterface};
+use Vimeo\Exceptions\{VimeoRequestException, ExceptionInterface};
 
 use Polen\Includes\Polen_Video_Info;
 use Polen\Includes\Vimeo\{Polen_Vimeo_Response, Polen_Vimeo_Vimeo_Options};
-use Polen\Includes\Cart\Polen_Cart_Item_Factory;
+use Polen\Includes\Cart\{Polen_Cart_Item_Factory, Polen_Cart_Item};
 
 class Polen_Talent_Controller extends Polen_Talent_Controller_Base
 {
@@ -179,7 +179,14 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
        wp_die();
    }
     
-    
+    /**
+     * Handler para o AJAX onde é executado quando o Talento, seleciona um video e
+     * envia, antes do envio é criado no Vimeo um Slot para receber o Video com o 
+     * mesmo tamanho em bytes
+     * 
+     * @global type $Polen_Plugin_Settings
+     * @throws VimeoRequestException
+     */
     public function make_video_slot_vimeo()
     {
         global $Polen_Plugin_Settings;
@@ -205,17 +212,9 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
             }
             
             $order = wc_get_order( $order_id );
-
             $cart_item = Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
-            $video_info = new Polen_Video_Info();
-            $video_info->is_public = $cart_item->get_public_in_detail_page();
-            $video_info->order_id = $order_id;
-            $video_info->talent_id = get_current_user_id();
-            $video_info->vimeo_id = $response->get_vimeo_id();
-            $video_info->vimeo_process_complete = 0;
-            $video_info->vimeo_link = $response->get_vimeo_link();
-            $video_info->created_at = date('Y-m-d H-i-s');
             
+            $video_info = $this->mount_video_info( $order, $cart_item, $response);
             $video_info->insert();
             
             wp_send_json_success( $response->response, 200 );
@@ -225,6 +224,28 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
             wp_send_json_error( $e->getMessage(), $e->getCode() );
         }
         wp_die();
+    }
+    
+    
+    /**
+     * Criando um Polen_Video_Info para salvar a primeira vez no Banco as info
+     * quando o Vimeo recebo o REQUEST do slot
+     * @param type $order
+     * @param type $cart_item
+     * @param type $response
+     * @return Polen_Video_Info
+     */
+    public function mount_video_info( \WC_Order $order, Polen_Cart_Item $cart_item, Polen_Vimeo_Response $response )
+    {
+            $video_info = new Polen_Video_Info();
+            $video_info->is_public = $cart_item->get_public_in_detail_page();
+            $video_info->order_id = $order->get_id();
+            $video_info->talent_id = get_current_user_id();
+            $video_info->vimeo_id = $response->get_vimeo_id();
+            $video_info->vimeo_process_complete = 0;
+            $video_info->vimeo_link = $response->get_vimeo_link();
+            $video_info->vimeo_iframe = $response->get_iframe();
+            return $video_info;
     }
 
     /**

@@ -9,12 +9,14 @@ const iconfontCss = require("gulp-iconfont-css");
 const sass = require("gulp-sass");
 sass.compiler = require("node-sass");
 const sourcemaps = require("gulp-sourcemaps");
+const svgSprite = require("gulp-svg-sprite");
 
-const fontName = "MuseIcons";
+const fontName = "PolenIcons";
 const sass_dir = "./scss/**/*.scss";
 
 gulp.task("iconfont", function () {
-	gulp.src(["icons/*.svg"])
+	return gulp
+		.src(["icons/*.svg"])
 		.pipe(
 			iconfontCss({
 				fontName: fontName,
@@ -56,6 +58,22 @@ gulp.task("sass_map", function () {
 
 gulp.task("sass:watch", function () {
 	gulp.watch(sass_dir, { ignoreInitial: false }, gulp.series("sass_map"));
+});
+
+gulp.task("sprite", function () {
+	const svgSpriteConfig = {
+		mode: {
+			css: {
+				render: {
+					css: true,
+				},
+			},
+		},
+	};
+	return gulp
+		.src("**/*.svg", { cwd: "img/cards" })
+		.pipe(svgSprite(svgSpriteConfig))
+		.pipe(gulp.dest("img/sprite"));
 });
 
 exports.compressjs = themeJsUglify;

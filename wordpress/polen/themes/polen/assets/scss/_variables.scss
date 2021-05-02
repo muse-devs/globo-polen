@@ -2,27 +2,37 @@ $grid-columns: 12;
 $grid-gutter-width: 30px;
 
 $grid-breakpoints: (
-    // Extra small screen / phone
-    xs: 0,
-    // Small screen / phone
-    sm: 576px,
-    // Medium screen / tablet
-    md: 768px,
-    // Large screen / desktop
-    lg: 992px,
-    // Extra large screen / wide desktop
-    xl: 1200px
+	// Extra small screen / phone
+	xs: 0,
+	// Small screen / phone
+	sm: 576px,
+	// Medium screen / tablet
+	md: 768px,
+	// Large screen / desktop
+	lg: 992px,
+	// Extra large screen / wide desktop
+	xl: 1200px
 );
 
 $container-max-widths: (
-    sm: 540px,
-    md: 720px,
-    lg: 960px,
-    // xl: 1140px,
-    xl: 1040px,
+	sm: 540px,
+	md: 720px,
+	lg: 960px,
+	// xl: 1140px,
+	xl: 1040px,
 );
 
-$input-border-radius: 8px;
+$border-radius: 6px;
+$border-radius-lg: 8px;
+$border-radius-sm: 6px;
 $input-btn-padding-y-lg: 0.9rem;
 $btn-font-size-lg: 0.8rem;
-$custom-select-background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAHCAYAAADebrddAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABbSURBVHgBfYwBDcAgEAOR8BKQMEeTMAlImQQkIGESJuV5oCEfQvmkCbTXBlW9TTkczvLHFNsj67iXgAl5aR8xfTASAf++DFNgzMIWdCvRFQoFSYGDrnBhWdasArkkkyg3EDHqAAAAAElFTkSuQmCC') right 1rem center/10px 6px no-repeat;
+
+$input-btn-focus-width: 1px;
+$component-active-bg: $light-100;
+
+$link-hover-color: $primary_hover;
+$link-hover-decoration: none;
+
+$custom-select-background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAHCAYAAADebrddAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABbSURBVHgBfYwBDcAgEAOR8BKQMEeTMAlImQQkIGESJuV5oCEfQvmkCbTXBlW9TTkczvLHFNsj67iXgAl5aR8xfTASAf++DFNgzMIWdCvRFQoFSYGDrnBhWdasArkkkyg3EDHqAAAAAElFTkSuQmCC")
+	right 1rem center/10px 6px no-repeat;
