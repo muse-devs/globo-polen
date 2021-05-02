@@ -236,7 +236,7 @@ class Polen_Checkout
                 "type"        => $type,
                 "required"    => true,
                 "class"       => array( $logged ),
-                "input_class" => array( "form-control", "input-text", $logged ),
+                "input_class" => array( "form-control", "form-control-lg", "input-text", $logged ),
                 "label"       => "E-mail",
                 "label_class" => array( 'title-on-checkout-notes', $logged ),
                 "placeholder" => "Informe seu e-mail",
