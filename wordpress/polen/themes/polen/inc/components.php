@@ -286,7 +286,7 @@ function polen_front_get_talent_videos($talent)
 			'image' =>  $item->vimeo_thumbnail,
 			'video' => $item->vimeo_link,
 			'hash' => $item->hash,
-            'iniciais' => strtoupper( substr( $cart_item->get_name_to_video(), 0, 2 ) ),
+            'initials' => strtoupper( substr( $cart_item->get_name_to_video(), 0, 2 ) ),
 		];
 	}
 	if (sizeof($items) < 1) {
@@ -306,7 +306,7 @@ function polen_front_get_talent_videos($talent)
 							<figure class="video-cover">
 								<img loading="lazy" src="<?= $item['image']; ?>" alt="<?= $item['title']; ?>" data-url="<?= $item['video']; ?>">
 								<a href="javascript:openVideoByURL('<?= $item['video']; ?>')" class="video-player-button"></a>
-								<?php polen_video_icons($img_perfil, $item['iniciais']); ?>
+								<?php polen_video_icons($img_perfil, $item['initials']); ?>
 							</figure>
 						</div>
 					<?php endforeach; ?>
