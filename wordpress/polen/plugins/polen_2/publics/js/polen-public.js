@@ -12,7 +12,7 @@
 			$.ajax(
 				{
 					type: 'POST',
-					url: polen_ajax.ajaxurl,
+					url: woocommerce_params.ajaxurl,
 						data: {
 						action: 'search_order_status',
 						order: order_id,
@@ -36,7 +36,7 @@
 			$.ajax(
 				{
 					type: 'POST',
-					url: polen_ajax.ajaxurl + '?action=get_talent_order_data',
+					url: woocommerce_params.ajaxurl + '?action=get_talent_order_data',
 					data: {
 						// action: 'get_talent_order_data',
 						order: order_id,
@@ -75,7 +75,7 @@
 					$.ajax(
 						{
 							type: 'POST',
-							url: polen_ajax.ajaxurl,
+							url: woocommerce_params.ajaxurl,
 							data: {
 							action: 'get_talent_acceptance',
 							order: order_id,
@@ -100,7 +100,7 @@
 				$.ajax(
 					{
 						type: 'POST',
-						url: polen_ajax.ajaxurl,
+						url: woocommerce_params.ajaxurl,
 						data: {
 						action: 'get_talent_acceptance',
 						order: order_id,
