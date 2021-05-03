@@ -391,7 +391,7 @@ function polen_get_video_player($talent, $video)
 					<div class="row mt-4 share">
 						<div class="col-12">
 							<input type="text" id="share-input" class="share-input" />
-							<a href="javascript:copyToClipboard(window.location.href)" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_copy(); ?>Copiar link</a>
+							<a href="javascript:copyToClipboard('<?php echo $video_url; ?>')" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_copy(); ?>Copiar link</a>
 							<?php polen_get_talent_socials($talent); ?>
 						</div>
 					</div>
