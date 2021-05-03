@@ -267,7 +267,7 @@ function polen_video_icons($user_id, $iniciais)
 ?>
 	<div class="video-icons">
 		<figure class="image-cropper small">
-		<?php echo get_avatar($user_id); ?>
+			<?php echo get_avatar($user_id); ?>
 		</figure>
 		<div class="text-cropper small"><?php echo $iniciais; ?></div>
 	</div>
@@ -279,11 +279,14 @@ function polen_front_get_talent_videos($talent)
 	$items = array();
 	$items_raw = Polen\Includes\Polen_Video_Info::select_by_talent_id($talent->user_id);
 	foreach ($items_raw as $item) {
+		$order = wc_get_order($item->order_id);
+		$cart_item = \Polen\Includes\Cart\Polen_Cart_Item_Factory::polen_cart_item_from_order($order);
 		$items[] = [
 			'title' => '',
 			'image' =>  $item->vimeo_thumbnail,
 			'video' => $item->vimeo_link,
-			'hash' => $item->hash
+			'hash' => $item->hash,
+			'initials' => strtoupper(substr($cart_item->get_name_to_video(), 0, 2)),
 		];
 	}
 	if (sizeof($items) < 1) {
@@ -297,12 +300,12 @@ function polen_front_get_talent_videos($talent)
 		<div class="col-md-12 p-0">
 			<div class="banner-wrapper">
 				<div class="banner-content type-video">
-					<?php foreach ($items as $item) : $iniciais_fa = "AA"; ?>
+					<?php foreach ($items as $item) : ?>
 						<div class="polen-card-video">
 							<figure class="video-cover">
 								<img loading="lazy" src="<?= $item['image']; ?>" alt="<?= $item['title']; ?>" data-url="<?= $item['video']; ?>">
 								<a href="javascript:openVideoByURL('<?= $item['video']; ?>')" class="video-player-button"></a>
-								<?php polen_video_icons($talent->user_id, $iniciais_fa); ?>
+								<?php polen_video_icons($talent->user_id, $item['initials']); ?>
 							</figure>
 						</div>
 					<?php endforeach; ?>
