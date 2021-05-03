@@ -291,7 +291,6 @@ function polen_front_get_talent_videos($talent)
 	}
 
 	$img_perfil = $talent->cover_image_thumb;
-	$iniciais = "AA";
 	$video_url = home_url() . "/v/";
 ?>
 	<section id="talent-videos" class="row mb-4 banner-scrollable" data-public-url="<?php echo $video_url; ?>">
@@ -299,12 +298,12 @@ function polen_front_get_talent_videos($talent)
 		<div class="col-md-12 p-0">
 			<div class="banner-wrapper">
 				<div class="banner-content type-video">
-					<?php foreach ($items as $item) : ?>
+					<?php foreach ($items as $item) : $iniciais_fa = "AA"; ?>
 						<div class="polen-card-video">
 							<figure class="video-cover">
 								<img loading="lazy" src="<?= $item['image']; ?>" alt="<?= $item['title']; ?>" data-url="<?= $item['video']; ?>">
 								<a href="javascript:openVideoByURL('<?= $item['video']; ?>')" class="video-player-button"></a>
-								<?php polen_video_icons($img_perfil, $iniciais); ?>
+								<?php polen_video_icons($img_perfil, $iniciais_fa); ?>
 							</figure>
 						</div>
 					<?php endforeach; ?>
