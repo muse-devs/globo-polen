@@ -290,7 +290,7 @@ function polen_front_get_talent_videos($talent)
 		return;
 	}
 
-	$img_perfil = "";
+	$img_perfil = $talent->cover_image_thumb;
 	$iniciais = "AA";
 	$video_url = home_url() . "/v/";
 ?>
