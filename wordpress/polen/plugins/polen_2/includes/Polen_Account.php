@@ -18,9 +18,9 @@ class Polen_Account
             add_filter( 'woocommerce_before_account_orders', array( $this, 'my_orders_title' ));
             add_action( 'template_redirect', array( $this, 'my_account_redirect' ) );
             add_action( 'woocommerce_account_watch-video_endpoint', array( $this, 'my_account_watch_video' ) );
-            add_action( 'init', array( $this, 'watch_video_rewrite' ) ); 
-            add_filter( 'request', array( $this, 'watch_video_request' ) ); 
-            add_filter( 'template_include', array( $this, 'watchmyvideo_template' ) ); 
+           // add_action( 'init', array( $this, 'watch_video_rewrite' ) ); 
+          //  add_filter( 'request', array( $this, 'watch_video_request' ) ); 
+           // add_filter( 'template_include', array( $this, 'watchmyvideo_template' ) ); 
 
         }
     }
@@ -95,7 +95,8 @@ class Polen_Account
      * Tela para visualizar o vídeo
     */
     public function my_account_watch_video()
-    {
+    {   
+        
         if( is_user_logged_in() ){
             $user = wp_get_current_user();
             $polen_talent = new Polen_Talent;
@@ -103,7 +104,7 @@ class Polen_Account
                 wp_safe_redirect(site_url('my-account/orders'));
                 exit;
             }
-
+            
             if( isset( $_GET['order_id'] ) && !empty( $_GET['order_id']) ){
                 $order_id = $_GET['order_id'];
                 $video_info = Polen_Video_Info::get_by_order_id( $order_id );
@@ -120,7 +121,7 @@ class Polen_Account
             }
         }
     }
-
+ /*
     public function watch_video_rewrite(){
         add_rewrite_endpoint( 'v', EP_PAGES );
     }
@@ -131,7 +132,7 @@ class Polen_Account
         }
         return $vars;
     }
-
+   
     public function watchmyvideo_template( $template ) {
         global $wp_query;
         $video_hash = ( !empty( get_query_var('video_hash') ))?get_query_var('video_hash'):get_query_var('v');
@@ -146,5 +147,5 @@ class Polen_Account
         array_push($vars, 'v');
         return $vars;
     }
-
+    */
 }
