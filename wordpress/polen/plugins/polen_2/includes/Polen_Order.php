@@ -24,8 +24,6 @@ class Polen_Order
             add_shortcode( 'polen_search_order', array( $this, 'polen_search_order_shortcode' ) );
             add_shortcode( 'polen_search_result_shortcode', array( $this, 'polen_search_result_shortcode' ) );
             add_shortcode( 'polen_video_shortcode', array( $this, 'polen_watch_video' ) );
-            add_action( 'init', array( $this, 'custom_rewrite_basic' ) );
-            add_filter( 'query_vars', array( $this, 'addnew_query_vars' ), 10, 1 );
         }
     }
 
@@ -180,11 +178,9 @@ class Polen_Order
     }
 
     public function polen_watch_video(){ 
-        //var_dump($_SERVER['REQUEST_URI']);    
         echo $_SERVER['REQUEST_URI'];
         global $wp_query;
 
-        var_dump($wp_query->query_vars);
         if (isset($wp_query->query_vars['yourvarname']))
         {
         print $wp_query->query_vars['yourvarname'];
@@ -193,32 +189,4 @@ class Polen_Order
         <p>Aqui para assistir ao vídeo</p>
     <?php
     }
-
-    public function addnew_query_vars($vars)
-    {   
-        //$vars[] = 'assistir'; // c is the name of variable you want to add       
-        $url_arg = explode( 'assistir/', $_SERVER['REQUEST_URI'] );
-        $vars['video-id'] = $url_arg[1];
-        //var_dump($vars, $_SERVER['REQUEST_URI'], );die;
-
-        return $vars;
-    }
-    
-    public function custom_rewrite_basic() 
-    {
-        
-        //add_rewrite_rule('^assistir-video/([0-9]+)/?', '?assistir-video=$1', 'top');
-        add_rewrite_rule(
-            '^assistir/([-a-z]+)/?$',
-            '?assistir=$1',
-            'top'
-        );
-        global $wp_query;
-
-        
-
-    }
-
 }
-//$Polen_Order = new Polen_Order;
-

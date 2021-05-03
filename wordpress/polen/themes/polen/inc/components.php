@@ -1,7 +1,5 @@
 <?php
 
-use \Polen\Includes\Cart\Polen_Cart_Item_Factory;
-
 function polen_front_get_banner()
 {
 ?>
@@ -264,13 +262,25 @@ function polen_get_talent_socials($talent)
 <?php
 }
 
-function polen_front_get_talent_videos( $talent )
+function polen_video_icons($img_perfil, $iniciais)
+{
+?>
+	<div class="video-icons">
+		<figure class="image-cropper small">
+			<img loading="lazy" src="<?php echo isset($img_perfil) && !empty($img_perfil) ? $img_perfil : TEMPLATE_URI . '/assets/img/avatar.png'; ?>" alt="Foto do Perfil">
+		</figure>
+		<div class="text-cropper small"><?php echo $iniciais; ?></div>
+	</div>
+<?php
+}
+
+function polen_front_get_talent_videos($talent)
 {
 	$items = array();
 	$items_raw = Polen\Includes\Polen_Video_Info::select_by_talent_id($talent->user_id);
 	foreach ($items_raw as $item) {
         $order = wc_get_order( $item->order_id );
-        $cart_item = Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
+        $cart_item = \Polen\Includes\Cart\Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
 		$items[] = [
 			'title' => '',
 			'image' =>  $item->vimeo_thumbnail,
@@ -282,8 +292,8 @@ function polen_front_get_talent_videos( $talent )
 	if (sizeof($items) < 1) {
 		return;
 	}
-    
-	$img_perfil = "https://images.generated.photos/IPGS4BoLiOx_1HOfsRCb93uoRnrC-QH-b1u87wp4u_4/rs:fit:512:512/wm:0.95:sowe:18:18:0.33/Z3M6Ly9nZW5lcmF0/ZWQtcGhvdG9zL3Yz/XzA1ODk4NjIuanBn.jpg";
+
+	$img_perfil = $talent->cover_image_thumb;
 	$video_url = home_url() . "/v/";
 ?>
 	<section id="talent-videos" class="row mb-4 banner-scrollable" data-public-url="<?php echo $video_url; ?>">
@@ -296,12 +306,7 @@ function polen_front_get_talent_videos( $talent )
 							<figure class="video-cover">
 								<img loading="lazy" src="<?= $item['image']; ?>" alt="<?= $item['title']; ?>" data-url="<?= $item['video']; ?>">
 								<a href="javascript:openVideoByURL('<?= $item['video']; ?>')" class="video-player-button"></a>
-								<div class="video-icons">
-									<figure class="image-cropper small">
-										<img loading="lazy" src="<?php echo $img_perfil; ?>" alt="Foto do Perfil">
-									</figure>
-									<div class="text-cropper small"><?php echo $item['iniciais']; ?></div>
-								</div>
+								<?php polen_video_icons($img_perfil, $item['iniciais']); ?>
 							</figure>
 						</div>
 					<?php endforeach; ?>
