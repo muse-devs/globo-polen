@@ -24,7 +24,7 @@ window.onload = () => {
 
 		upload_video.file_size = file_input.files[0].size.toString();
 		jQuery.post(
-			polen_ajax.ajaxurl + "?action=make_video_slot_vimeo",
+			woocommerce_params.ajaxurl + "?action=make_video_slot_vimeo",
 			upload_video,
 			(data, textStatus, jqXHR) => {
 				if (jqXHR.status == 200) {
@@ -67,7 +67,7 @@ let completeHandler = () => {
             order: upload_video.order_id,
 	};
 	jQuery.post(
-            polen_ajax.ajaxurl,
+            woocommerce_params.ajaxurl,
             obj_complete_order,
             () => {
                 window.location.href = museobj.base_url + "/my-account/success-upload/?order_id=" + upload_video.order_id;
