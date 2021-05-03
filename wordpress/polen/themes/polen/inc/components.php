@@ -262,12 +262,12 @@ function polen_get_talent_socials($talent)
 <?php
 }
 
-function polen_video_icons($img_perfil, $iniciais)
+function polen_video_icons($user_id, $iniciais)
 {
 ?>
 	<div class="video-icons">
 		<figure class="image-cropper small">
-			<img loading="lazy" src="<?php echo isset($img_perfil) && !empty($img_perfil) ? $img_perfil : TEMPLATE_URI . '/assets/img/avatar.png'; ?>" alt="Foto do Perfil">
+		<?php echo get_avatar($user_id); ?>
 		</figure>
 		<div class="text-cropper small"><?php echo $iniciais; ?></div>
 	</div>
@@ -290,7 +290,6 @@ function polen_front_get_talent_videos($talent)
 		return;
 	}
 
-	$img_perfil = $talent->cover_image_thumb;
 	$video_url = home_url() . "/v/";
 ?>
 	<section id="talent-videos" class="row mb-4 banner-scrollable" data-public-url="<?php echo $video_url; ?>">
@@ -303,7 +302,7 @@ function polen_front_get_talent_videos($talent)
 							<figure class="video-cover">
 								<img loading="lazy" src="<?= $item['image']; ?>" alt="<?= $item['title']; ?>" data-url="<?= $item['video']; ?>">
 								<a href="javascript:openVideoByURL('<?= $item['video']; ?>')" class="video-player-button"></a>
-								<?php polen_video_icons($img_perfil, $iniciais_fa); ?>
+								<?php polen_video_icons($talent->user_id, $iniciais_fa); ?>
 							</figure>
 						</div>
 					<?php endforeach; ?>
