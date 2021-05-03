@@ -21,7 +21,7 @@
 					$.ajax(
 						{
 							type: 'POST',
-							url: woocommerce_params.ajaxurl,
+							url: woocommerce_params.ajax_url,
 								data: {
 								action: 'get_occasion_description',
 								occasion_type: item_value,
@@ -42,7 +42,7 @@
 				$.ajax(
 				{
 					type: 'POST',
-					url: woocommerce_params.ajaxurl,
+					url: woocommerce_params.ajax_url,
 						data: {
 						action: 'polen_update_cart_item',
 						security: $('#woocommerce-cart-nonce').val(),
@@ -68,7 +68,7 @@
 				$.ajax(
 				{
 					type: 'POST',
-					url: woocommerce_params.ajaxurl,
+					url: woocommerce_params.ajax_url,
 						data: {
 						action: 'get_occasion_description',
 						occasion_type: category_name,
