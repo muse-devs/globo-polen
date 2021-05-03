@@ -361,9 +361,9 @@ function polen_get_video_player($talent, $video)
 	$video_url = home_url() . "/v/" . $video->hash;
 ?>
 	<div class="row">
-		<div class="col-12 col-md-8 m-md-auto">
-			<div class="video-card">
-				<header>
+		<div class="col-12 col-md-12">
+			<div class="row video-card">
+				<header class="col-md-6 p-0">
 					<div id="video-box">
 						<div id="polen-video" class="polen-video"></div>
 					</div>
@@ -377,7 +377,7 @@ function polen_get_video_player($talent, $video)
 						})
 					</script>
 				</header>
-				<div class="content mt-4 mx-3">
+				<div class="content col-md-6 mt-4 mx-3 mx-md-0">
 					<header class="row content-header">
 						<div class="col-3">
 							<?php echo polen_get_avatar($talent->avatar);  ?>
