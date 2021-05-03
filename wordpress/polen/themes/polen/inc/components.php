@@ -262,6 +262,18 @@ function polen_get_talent_socials($talent)
 <?php
 }
 
+function polen_video_icons($img_perfil, $iniciais)
+{
+?>
+	<div class="video-icons">
+		<figure class="image-cropper small">
+			<img loading="lazy" src="<?php echo isset($img_perfil) && !empty($img_perfil) ? $img_perfil : TEMPLATE_URI . '/assets/img/avatar.png'; ?>" alt="Foto do Perfil">
+		</figure>
+		<div class="text-cropper small"><?php echo $iniciais; ?></div>
+	</div>
+<?php
+}
+
 function polen_front_get_talent_videos($talent)
 {
 	$items = array();
@@ -278,7 +290,7 @@ function polen_front_get_talent_videos($talent)
 		return;
 	}
 
-	$img_perfil = "https://images.generated.photos/IPGS4BoLiOx_1HOfsRCb93uoRnrC-QH-b1u87wp4u_4/rs:fit:512:512/wm:0.95:sowe:18:18:0.33/Z3M6Ly9nZW5lcmF0/ZWQtcGhvdG9zL3Yz/XzA1ODk4NjIuanBn.jpg";
+	$img_perfil = "";
 	$iniciais = "AA";
 	$video_url = home_url() . "/v/";
 ?>
@@ -292,12 +304,7 @@ function polen_front_get_talent_videos($talent)
 							<figure class="video-cover">
 								<img loading="lazy" src="<?= $item['image']; ?>" alt="<?= $item['title']; ?>" data-url="<?= $item['video']; ?>">
 								<a href="javascript:openVideoByURL('<?= $item['video']; ?>')" class="video-player-button"></a>
-								<div class="video-icons">
-									<figure class="image-cropper small">
-										<img loading="lazy" src="<?php echo $img_perfil; ?>" alt="Foto do Perfil">
-									</figure>
-									<div class="text-cropper small"><?php echo $iniciais; ?></div>
-								</div>
+								<?php polen_video_icons($img_perfil, $iniciais); ?>
 							</figure>
 						</div>
 					<?php endforeach; ?>
