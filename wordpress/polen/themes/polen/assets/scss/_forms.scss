@@ -12,6 +12,9 @@
 		color: $input-font-color;
 		background-color: var(--gray-dark);
 	}
+	&:disabled, &[read-only] {
+		opacity: 0.5;
+	}
 }
 
 .btn-outline-light {
