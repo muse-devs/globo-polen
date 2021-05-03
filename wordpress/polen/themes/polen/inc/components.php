@@ -1,5 +1,7 @@
 <?php
 
+use \Polen\Includes\Cart\Polen_Cart_Item_Factory;
+
 function polen_front_get_banner()
 {
 ?>
@@ -262,24 +264,26 @@ function polen_get_talent_socials($talent)
 <?php
 }
 
-function polen_front_get_talent_videos($talent)
+function polen_front_get_talent_videos( $talent )
 {
 	$items = array();
 	$items_raw = Polen\Includes\Polen_Video_Info::select_by_talent_id($talent->user_id);
 	foreach ($items_raw as $item) {
+        $order = wc_get_order( $item->order_id );
+        $cart_item = Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
 		$items[] = [
 			'title' => '',
 			'image' =>  $item->vimeo_thumbnail,
 			'video' => $item->vimeo_link,
-			'hash' => $item->hash
+			'hash' => $item->hash,
+            'iniciais' => strtoupper( substr( $cart_item->get_name_to_video(), 0, 2 ) ),
 		];
 	}
 	if (sizeof($items) < 1) {
 		return;
 	}
-
+    
 	$img_perfil = "https://images.generated.photos/IPGS4BoLiOx_1HOfsRCb93uoRnrC-QH-b1u87wp4u_4/rs:fit:512:512/wm:0.95:sowe:18:18:0.33/Z3M6Ly9nZW5lcmF0/ZWQtcGhvdG9zL3Yz/XzA1ODk4NjIuanBn.jpg";
-	$iniciais = "AA";
 	$video_url = home_url() . "/v/";
 ?>
 	<section id="talent-videos" class="row mb-4 banner-scrollable" data-public-url="<?php echo $video_url; ?>">
@@ -296,7 +300,7 @@ function polen_front_get_talent_videos($talent)
 									<figure class="image-cropper small">
 										<img loading="lazy" src="<?php echo $img_perfil; ?>" alt="Foto do Perfil">
 									</figure>
-									<div class="text-cropper small"><?php echo $iniciais; ?></div>
+									<div class="text-cropper small"><?php echo $item['iniciais']; ?></div>
 								</div>
 							</figure>
 						</div>
