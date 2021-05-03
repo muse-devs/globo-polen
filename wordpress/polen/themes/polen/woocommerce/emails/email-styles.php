@@ -59,11 +59,12 @@ body {
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1) !important;
 	background-color: <?php echo esc_attr( $body ); ?>;
 	border: 1px solid <?php echo esc_attr( $bg_darker_10 ); ?>;
-	border-radius: 3px !important;
+	border-radius: 8px !important;
+	overflow: hidden;
 }
 
 #template_header {
-	background-color: <?php echo esc_attr( $base ); ?>;
+	<!-- background-color: <?php //echo esc_attr( $base ); ?>; -->
 	border-radius: 3px 3px 0 0 !important;
 	color: <?php echo esc_attr( $base_text ); ?>;
 	border-bottom: 0;
@@ -75,11 +76,13 @@ body {
 
 #template_header h1,
 #template_header h1 a {
+	text-align: center;
 	color: <?php echo esc_attr( $base_text ); ?>;
 	background-color: inherit;
 }
 
 #template_header_image img {
+	margin-bottom: 40px;
 	margin-left: 0;
 	margin-right: 0;
 }
@@ -169,7 +172,7 @@ body {
 }
 
 #header_wrapper {
-	padding: 36px 48px;
+	padding: 20px 40px;
 	display: block;
 }
 
