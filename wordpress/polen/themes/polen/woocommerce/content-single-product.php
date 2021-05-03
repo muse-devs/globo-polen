@@ -41,7 +41,7 @@ $terms = wp_get_object_terms(get_the_ID(), 'product_tag');
 ?>
 
 <figure class="image-bg">
-	<img src="https://picsum.photos/1280/800" alt="Foto de fundo">
+	<img src="<?php echo wp_get_attachment_image_src($Talent_Fields->cover_image_id, "large")[0]; ?>" alt="<?php echo $Talent_Fields->nome; ?>">
 </figure>
 
 <div id="product-<?php the_ID(); ?>" <?php wc_product_class('', $product); ?>>
@@ -52,7 +52,7 @@ $terms = wp_get_object_terms(get_the_ID(), 'product_tag');
 	<!-- Tags -->
 	<div class="row pb-4">
 		<div class="col-md-12">
-		<h1 class="talent-name text-truncate mb-3" title="<?= get_the_title(); ?>"><?= get_the_title(); ?></h1>
+			<h1 class="talent-name text-truncate mb-3" title="<?= get_the_title(); ?>"><?= get_the_title(); ?></h1>
 			<div class="row">
 				<div class="col-md-12">
 					<?php if (count($terms) > 0) : ?>
@@ -91,8 +91,8 @@ $terms = wp_get_object_terms(get_the_ID(), 'product_tag');
 			<?php
 			$cat_terms = wp_get_object_terms(get_the_ID(), 'product_cat');
 			$cat_link = '';
-			if( isset( $cat_terms[0] ) && !empty( $cat_terms[0]->term_id ) ){
-				$cat_link = get_term_link( $cat_terms[0]->term_id );
+			if (isset($cat_terms[0]) && !empty($cat_terms[0]->term_id)) {
+				$cat_link = get_term_link($cat_terms[0]->term_id);
 			}
 			$terms_ids = array();
 			if (count($cat_terms) > 0) {
@@ -104,28 +104,30 @@ $terms = wp_get_object_terms(get_the_ID(), 'product_tag');
 				$others = get_objects_in_term($terms_ids, 'product_cat');
 				$arr_obj = array();
 				$arr_obj[] = get_the_ID();
-				shuffle( $others );
+				shuffle($others);
 
 				if (count($others)) : ?>
-						<?php
-						$args = array();
-						foreach ($others as $k => $id) :
-							if( !in_array( $id, $arr_obj ) ){
-								if( count( $arr_obj ) > 5 ){ exit; }
-								$product = wc_get_product($id);
-								$arr_obj[] = $id;
-
-								$args[] = array(
-									"ID" => $id,
-									"talent_url" => get_permalink($id),
-									"name" => $product->get_title(),
-									"price" => $product->get_regular_price(),
-									"category_url" => $cat_link,
-									"category" => wc_get_product_category_list($id)
-								);
+					<?php
+					$args = array();
+					foreach ($others as $k => $id) :
+						if (!in_array($id, $arr_obj)) {
+							if (count($arr_obj) > 5) {
+								exit;
 							}
-						endforeach; ?>
-						<?php polen_banner_scrollable($args, "Relacionados", $cat_link); ?>
+							$product = wc_get_product($id);
+							$arr_obj[] = $id;
+
+							$args[] = array(
+								"ID" => $id,
+								"talent_url" => get_permalink($id),
+								"name" => $product->get_title(),
+								"price" => $product->get_regular_price(),
+								"category_url" => $cat_link,
+								"category" => wc_get_product_category_list($id)
+							);
+						}
+					endforeach; ?>
+					<?php polen_banner_scrollable($args, "Relacionados", $cat_link); ?>
 				<?php endif; ?>
 			<?php endif; ?>
 		</div>
