@@ -25,7 +25,7 @@ if( $polen_talent->is_user_talent( $logged_user ) ) {
 				break;
 			}
 		?>
-			<div class="row mt-4">
+			<div class="row mt-3">
 				<div class="col-12">
 					<div class="talent-card alt">
 						<div class="row px-3">

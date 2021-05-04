@@ -480,11 +480,42 @@ function polen_box_image_message($image, $text)
 ?>
 	<div class="box-round">
 		<div class="row p-4">
-			<div class="col-md-12 text center">
+			<div class="col-md-12 text-center">
 				<img src="<?php echo $image; ?>" alt="<?php echo $text; ?>">
 			</div>
-			<div class="col-md-12 text center mt-4">
+			<div class="col-md-12 text-center mt-4">
 				<p><?php echo $text; ?></p>
+			</div>
+		</div>
+	</div>
+<?php
+}
+
+function polen_get_stars($quant)
+{
+	for ($i = 1; $i <= 5; $i++) {
+		Icon_Class::polen_icon_star($i <= $quant);
+	}
+?>
+	<span class="skill-value"><?php echo $quant; ?>.0</span>
+<?php
+}
+
+function polen_comment_card($args)
+{
+?>
+	<div class="box-round mb-3">
+		<div class="row p-4">
+			<div class="col-md-12 box-stars">
+				<?php polen_get_stars(4); ?>
+			</div>
+			<div class="col-md-12 mt-3">
+				<p>Avaliação por Fulano - 01/02/2021</p>
+			</div>
+			<div class="col-md-12 mt-2">
+				<p class="alt truncate-lines-4"><span class="truncate-lines-4">He was blown away! Started telling me how he sent your book to your foundation in hopes to get it signed last week. He wrote you a letter with it talking about his injury and how he. He wrote you a letter with it talking about his injury and how</span>
+					<a href="javascript:void(0)">Exibir mais</a>
+				</p>
 			</div>
 		</div>
 	</div>
