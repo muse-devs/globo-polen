@@ -513,7 +513,7 @@ function polen_comment_card($args)
 				<p>Avaliação por Fulano - 01/02/2021</p>
 			</div>
 			<div class="col-md-12 mt-2">
-				<p class="alt truncate-lines-4"><span class="truncate-lines-4">He was blown away! Started telling me how he sent your book to your foundation in hopes to get it signed last week. He wrote you a letter with it talking about his injury and how he. He wrote you a letter with it talking about his injury and how</span>
+				<p class="alt"><span class="truncate-lines-4">He was blown away! Started telling me how he sent your book to your foundation in hopes to get it signed last week. He wrote you a letter with it talking about his injury and how he. He wrote you a letter with it talking about his injury and how</span>
 					<a href="javascript:void(0)">Exibir mais</a>
 				</p>
 			</div>
