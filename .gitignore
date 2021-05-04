@@ -61,3 +61,6 @@ wordpress/wp-admin/*.log
 sql/*
 !sql/database.sql.gz
 !sql/README.md
+
+#ignorar arquivos temporários de estilos
+*.css.map
