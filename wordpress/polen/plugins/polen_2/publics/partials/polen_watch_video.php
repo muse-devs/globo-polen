@@ -13,7 +13,6 @@ if( empty( $video_info ) ) {
 use \Polen\Includes\Polen_Update_Fields;
 $Talent_Fields = new Polen_Update_Fields();
 $talent = $Talent_Fields->get_vendor_data($video_info->talent_id);
-
 ?>
     <main id="primary" class="site-main">
         <?php

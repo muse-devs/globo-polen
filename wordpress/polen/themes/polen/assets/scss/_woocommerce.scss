@@ -151,3 +151,9 @@ select.form-control:not([size]):not([multiple]) {
 		float: left;
 	}
 }
+
+.woocommerce .cart-collaterals .cross-sells,
+.woocommerce-page .cart-collaterals .cross-sells {
+	width: 100%;
+	float: none;
+}

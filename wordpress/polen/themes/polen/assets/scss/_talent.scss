@@ -121,7 +121,9 @@
 .video-card {
 	position: relative;
 	margin: 24px auto;
-	width: calc(100% - 32px);
+	// width: calc(100% - 32px);
+	width: 100%;
+	max-width: 650px;
 	min-height: 300px;
 	border-radius: 8px;
 	box-sizing: border-box;
@@ -129,7 +131,7 @@
 	overflow: hidden;
 	font-family: $font-primary;
 	@include media-breakpoint-up(md) {
-		width: 450px;
+		// width: 450px;
 	}
 	.polen-video {
 		max-width: 100%;

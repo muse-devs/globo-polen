@@ -262,12 +262,12 @@ function polen_get_talent_socials($talent)
 <?php
 }
 
-function polen_video_icons($img_perfil, $iniciais)
+function polen_video_icons($user_id, $iniciais)
 {
 ?>
 	<div class="video-icons">
 		<figure class="image-cropper small">
-			<img loading="lazy" src="<?php echo isset($img_perfil) && !empty($img_perfil) ? $img_perfil : TEMPLATE_URI . '/assets/img/avatar.png'; ?>" alt="Foto do Perfil">
+			<?php echo get_avatar($user_id); ?>
 		</figure>
 		<div class="text-cropper small"><?php echo $iniciais; ?></div>
 	</div>
@@ -279,18 +279,20 @@ function polen_front_get_talent_videos($talent)
 	$items = array();
 	$items_raw = Polen\Includes\Polen_Video_Info::select_by_talent_id($talent->user_id);
 	foreach ($items_raw as $item) {
+		$order = wc_get_order($item->order_id);
+		$cart_item = \Polen\Includes\Cart\Polen_Cart_Item_Factory::polen_cart_item_from_order($order);
 		$items[] = [
 			'title' => '',
 			'image' =>  $item->vimeo_thumbnail,
 			'video' => $item->vimeo_link,
-			'hash' => $item->hash
+			'hash' => $item->hash,
+			'initials' => strtoupper(substr($cart_item->get_name_to_video(), 0, 2)),
 		];
 	}
 	if (sizeof($items) < 1) {
 		return;
 	}
 
-	$img_perfil = $talent->cover_image_thumb;
 	$video_url = home_url() . "/v/";
 ?>
 	<section id="talent-videos" class="row mb-4 banner-scrollable" data-public-url="<?php echo $video_url; ?>">
@@ -298,12 +300,12 @@ function polen_front_get_talent_videos($talent)
 		<div class="col-md-12 p-0">
 			<div class="banner-wrapper">
 				<div class="banner-content type-video">
-					<?php foreach ($items as $item) : $iniciais_fa = "AA"; ?>
+					<?php foreach ($items as $item) : ?>
 						<div class="polen-card-video">
 							<figure class="video-cover">
 								<img loading="lazy" src="<?= $item['image']; ?>" alt="<?= $item['title']; ?>" data-url="<?= $item['video']; ?>">
 								<a href="javascript:openVideoByURL('<?= $item['video']; ?>')" class="video-player-button"></a>
-								<?php polen_video_icons($img_perfil, $iniciais_fa); ?>
+								<?php polen_video_icons($talent->user_id, $item['initials']); ?>
 							</figure>
 						</div>
 					<?php endforeach; ?>
@@ -359,9 +361,9 @@ function polen_get_video_player($talent, $video)
 	$video_url = home_url() . "/v/" . $video->hash;
 ?>
 	<div class="row">
-		<div class="col-12 col-md-8 m-md-auto">
-			<div class="video-card">
-				<header>
+		<div class="col-12 col-md-12">
+			<div class="row video-card">
+				<header class="col-md-6 p-0">
 					<div id="video-box">
 						<div id="polen-video" class="polen-video"></div>
 					</div>
@@ -375,7 +377,7 @@ function polen_get_video_player($talent, $video)
 						})
 					</script>
 				</header>
-				<div class="content mt-4 mx-3">
+				<div class="content col-md-6 mt-4 mx-3 mx-md-0">
 					<header class="row content-header">
 						<div class="col-3">
 							<?php echo polen_get_avatar($talent->avatar);  ?>
@@ -389,7 +391,7 @@ function polen_get_video_player($talent, $video)
 					<div class="row mt-4 share">
 						<div class="col-12">
 							<input type="text" id="share-input" class="share-input" />
-							<a href="javascript:copyToClipboard(window.location.href)" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_copy(); ?>Copiar link</a>
+							<a href="javascript:copyToClipboard('<?php echo $video_url; ?>')" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_copy(); ?>Copiar link</a>
 							<?php polen_get_talent_socials($talent); ?>
 						</div>
 					</div>

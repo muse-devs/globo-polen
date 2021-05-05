@@ -30,10 +30,13 @@
 			base_url: '<?= site_url(); ?>'
 		};
 	</script>
+    
+    <?php include_once TEMPLATE_DIR . '/inc/analitics_header.php'; ?>
 </head>
 
 <body <?php body_class(); ?>>
 	<?php wp_body_open(); ?>
+    <?php include_once TEMPLATE_DIR . '/inc/analitics_header.php'; ?>
 	<div id="page" class="container site">
 		<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e('Skip to content', 'polen'); ?></a>
 
