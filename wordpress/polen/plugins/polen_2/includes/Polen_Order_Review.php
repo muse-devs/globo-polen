@@ -17,6 +17,12 @@ class Polen_Order_Review
     private $comment_approved;
     
     /**
+     * Para nao ficar indo buscar no banco para várias validacoes
+     * @var type 
+     */
+    private $_order;
+    
+    /**
      * É o order_id
      * @var int
      */
@@ -112,7 +118,7 @@ class Polen_Order_Review
      */
     protected function validate_comment()
     {
-        $this->unique_comment();
+        $this->validate_unique_comment();
         $this->validate_order_is_complete();
     }
     
@@ -123,11 +129,22 @@ class Polen_Order_Review
      * 
      * @throws \Exception
      */
-    protected function unique_comment()
+    protected function validate_unique_comment()
     {
         if( !empty( self::get_comment_by_user_id_order_id( $this->user_id, $this->comment_post_ID ) ) ) {
             throw new \Exception( 'this comment already exist', 500 );
         }
+    }
+    
+    
+    /**
+     * 
+     * @param type $param
+     */
+    protected function validate_same_user_by_order()
+    {
+        $order = wc_get_order( $this->comment_post_ID );
+        $order->get_user_id();
     }
     
     
@@ -165,6 +182,7 @@ class Polen_Order_Review
     {
         $commentdata = $this->prepare_data_db();
         
+        $this->_order = 
         $this->validate_comment();
         
         $comment_id = wp_insert_comment( $commentdata );
