@@ -55,9 +55,9 @@ class Icon_Class
 	public static function polen_icon_star($active = false)
 	{
 		if ($active) {
-			echo '<i class="bi bi-star-fill" style="color: #FFCF34;"></i>';
+			echo '<i class="icon icon-star-fill" style="color: #FFCF34;"></i>';
 		} else {
-			echo '<i class="bi bi-star"></i>';
+			echo '<i class="icon icon-star"></i>';
 		}
 	}
 

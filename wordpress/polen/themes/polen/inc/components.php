@@ -531,9 +531,39 @@ function polen_comment_card($args = array(
 			<div class="col-md-12 mt-2">
 				<p class="alt">
 					<input type="checkbox" name="expanded-<?php echo $args['id']; ?>" id="expanded-<?php echo $args['id']; ?>">
-					<span class="truncate truncate-4"></span>
+					<span class="truncate truncate-4"><?php echo $args['text']; ?></span>
 					<label for="expanded-<?php echo $args['id']; ?>">Exibir mais</label>
 				</p>
+			</div>
+		</div>
+	</div>
+<?php
+}
+
+/* function polen_get_stars_vote_active()
+{
+?>
+	<div class="col-md-12 d-flex justify-content-center box-stars">
+		<span class="icon-star-item" v-for="star in stars" v-bind:class="{active: star.key <= rate}" v-on:click="changeRate(star.key)">
+			<?php Icon_Class::polen_icon_star(false); ?>
+			<?php Icon_Class::polen_icon_star(true); ?>
+		</span>
+		<input type="hidden" name="rate" id="rate" v-model="rate" />
+	</div>
+<?php
+} */
+
+function polen_comment_box()
+{
+	wp_enqueue_script('comment-scripts');
+?>
+	<div id="comment-box" class="box-round mb-3">
+		<div class="row p-4 comment-box">
+			<pol-stars v-bind:rate="rate" v-bind:handle="changeRate"></pol-stars>
+			<div class="col-md-12 mt-3">
+				<h4>Comentário</h4>
+				<textarea name="comment" id="comment" rows="2" class="form-control" placeholder="Escreva sua avaliação" v-model="comment"></textarea>
+				<button id="send-comment" class="btn btn-primary btn-lg btn-block mt-3" v-on:click="sendComment">Avaliar</button>
 			</div>
 		</div>
 	</div>

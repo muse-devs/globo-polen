@@ -26,6 +26,35 @@
 		font-size: 16px;
 		margin-right: 3px;
 	}
+	.bi-star,
+	.icon-star {
+		color: $form-bg-color-contrast;
+	}
+}
+
+.icon-star-item {
+	position: relative;
+	margin: 0 8px;
+	display: inline-block;
+	width: 40px;
+	height: 60px;
+	cursor: pointer;
+	.bi,
+	.icon {
+		margin: 0;
+		position: absolute;
+		font-size: 40px;
+		top: 0;
+		left: 0;
+	}
+	.icon-star-fill {
+		opacity: 0;
+	}
+	&.active {
+		.icon-star-fill {
+			opacity: 1;
+		}
+	}
 }
 
 .comment-box {
@@ -49,6 +78,10 @@
 			color: var(--primary-hover);
 		}
 	}
+	textarea {
+		background-color: $form-bg-color-contrast;
+		resize: none;
+	}
 }
 
 .truncate {
@@ -61,10 +94,8 @@
 	}
 }
 
-$lines: 5;
-@for $i from 1 through $lines {
+@for $i from 1 through 5 {
 	.truncate-#{$i} {
-		// @extend .truncate;
 		-webkit-line-clamp: $i;
 	}
 }

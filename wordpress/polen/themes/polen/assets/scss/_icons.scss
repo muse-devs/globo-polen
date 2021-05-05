@@ -65,11 +65,17 @@
 	@if $filename == software-download {
 		$char: "\E00D";
 	}
-	@if $filename == trash {
+	@if $filename == star-fill {
 		$char: "\E00E";
 	}
-	@if $filename == twitter {
+	@if $filename == star {
 		$char: "\E00F";
+	}
+	@if $filename == trash {
+		$char: "\E010";
+	}
+	@if $filename == twitter {
+		$char: "\E011";
 	}
 
 	@return $char;
@@ -124,6 +130,12 @@
 }
 .icon-software-download {
 	@include icon(software-download);
+}
+.icon-star-fill {
+	@include icon(star-fill);
+}
+.icon-star {
+	@include icon(star);
 }
 .icon-trash {
 	@include icon(trash);
