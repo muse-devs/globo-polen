@@ -1120,7 +1120,7 @@ class Cubo9_Braspag {
             "655050", "655051", "655052", "655053", "655054", "655055", "655056", "655057", "655058"
         );
 
-        $elo_bin = implode("|", $array_elo_bin );
+        $elo_bin = implode( "|", $array_elo_bin );
         
         $regex = array(
             "elo"           => "/^((" . $elo_bin . "[0-9]{10})|(36297[0-9]{11})|(5067|4576|4011[0-9]{12}))/",
@@ -1130,7 +1130,7 @@ class Cubo9_Braspag {
             "hipercard"     => "/^((38|60[0-9]{11,14,17}))/",
             "aura"          => "/^((50[0-9]{14}))/",
             "jcb"           => "/^((35[0-9]{14}))/",
-            "mastercard"    => "/^((5[0-9]{15}))/",
+            "master"        => "/^((5[0-9]{15}))/",
             "visa"          => "/^((4[0-9]{12,15}))/"
         );
 
@@ -1147,31 +1147,93 @@ class Cubo9_Braspag {
         $brand   = $this->get_card_flag( $args['number'] );
         $request = array();
 
-        $request['CustomerName']   = $args['holder'];
-        $request['Number']         = $args['number'];
-        $request['Holder']         = $args['holder'];
-        $request['ExpirationDate'] = $args['validity'];
-        $request['Brand']          = $this->get_card_flag( $args['number'] );
+        $request['CustomerName']   = strval( trim( strtoupper( $args['holder'] ) ) );
+        $request['CardNumber']     = strval( $args['number'] );
+        $request['Holder']         = strval( strtoupper( $args['holder'] ) ) . $this->SANDBOX_NAME_SUFIX;
+        $request['ExpirationDate'] = strval( $args['validity'] );
+        $request['Brand']          = strval( $this->get_card_flag( $args['number'] ) );
 
         $auth = $this->auth();
         $url = $this->URL_CIELO_COMMERCE_API . '1/card/';
 
         $headers = array(
             'Content-Type'  => 'application/json',
-            'MerchantId'    => '3cc5c20f-bfc3-40a6-9c1d-24272bc6e9dd',
-            'MerchantKey'   => '3GE87Nd4Axe9LaVLtWrUf9r9yozDzcDRTIIIZalV',
-            'RequestId'     => time(),
+            'MerchantId'    => $this->MERCHANT_ID,
+            'MerchantKey'   => 'BZYFYPPMCGIMZXSGDMGJELHMXQOYWKTDHHUQOJRG',
         );
 
         $response = wp_remote_post( $url, array(
                 'method'  => 'POST',
                 'timeout' => 1000,
                 'headers' => $headers,
-                'body'    => $request
+                'body'    => wp_json_encode( $request ),
             )
         );
 
-        return $response;
+        if( is_null( $response ) || is_wp_error( $response ) ) {
+            $message = 'Ocorreu um erro ao tentar salvar o seu cartão. Tente novamente em alguns instantes.';
+            $return = array(
+                'result' => 'error',
+                'message' => $message,
+            );
+        } elseif( ( ! is_null( $response ) && ! is_wp_error( $response ) ) || wp_remote_retrieve_response_code( $response ) === 201 ) {
+            if( isset( $response['body'] ) ) {
+                $body = json_decode( $response['body'] );
+                if( isset( $body->CardToken ) && isset( $body->Links->Href ) ) {
+                    $card_saved_data = array (
+                        'card_number'     => substr( $request['CardNumber'], 0, 6 ) . '******' . substr( $request['CardNumber'], -4 ),
+                        'prefix'          => substr( $request['CardNumber'], 0, 6 ),
+                        'sufix'           => substr( $request['CardNumber'], -4 ),
+                        'token'           => $body->CardToken,
+                        'brand'           => ucfirst( $request['Brand'] ),
+                        'expiration_date' => $request['ExpirationDate'],
+                        'holder'          => $request['Holder'],
+                        'card_label'      => strtoupper( $request['Brand'] ) . ' - ' . 2931,
+                    );
+
+                    add_user_meta( get_current_user_id(), 'braspag_card_saved_data', $card_saved_data );
+                    
+                    $return = array(
+                        'result' => 'success',
+                        'message' => 'Cartão salvo com sucesso!',
+                    );
+                }
+            }
+        } else {
+            $message = 'Ocorreu um erro ao tentar salvar o seu cartão. Tente novamente mais tarde.';
+            $return = array(
+                'result' => 'error',
+                'message' => $message,
+            );
+        }
+
+        return $return;
+    }
+
+    public function list_user_cards( $user_id = false ) {
+        if( ! $user_id ) {
+            $user_id = get_current_user_id();
+        }
+
+        if( $user_id && ! is_null( $user_id ) && ! empty( $user_id ) && $user_id > 0 ) {
+            global $wpdb;
+            $sql = "SELECT `umeta_id`, `meta_value` FROM `" . $wpdb->usermeta . "` WHERE `meta_key`='braspag_card_saved_data' AND `user_id`=" . $user_id;
+            $res = $wpdb->get_results( $sql );
+            if( $res && ! is_null( $res ) && ! is_wp_error( $res ) && is_array( $res ) && count( $res ) > 0 ) {
+                $cards = array();
+                foreach( $res as $k => $v ) {
+                    $card_info = unserialize( $v->meta_value );
+                    $cards[] = array(
+                        'id'              => $v->umeta_id,
+                        'brand'           => $card_info['brand'],
+                        'sufix'           => $card_info['sufix'],
+                        'card_label'      => $card_info['card_label'],
+                        'expiration_date' => $card_info['expiration_date'],
+                    );
+                }
+                return $cards;
+            }
+        }
     }
 
     public function verify_card( $args ) {

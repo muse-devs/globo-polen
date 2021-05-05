@@ -1,6 +1,9 @@
 <?php
-$braspag_card_saved_data = get_user_meta(get_current_user_id(), 'braspag_card_saved_data', true);
-$braspag_default_payment = get_user_meta(get_current_user_id(), 'braspag_default_payment', true);
+
+require_once PLUGIN_CUBO9_BRASPAG_DIR . 'classes/class.Cubo9_Braspag.php';
+$braspag = new Cubo9_Braspag( false, false );
+$braspag_card_saved_data = $braspag->list_user_cards();
+$braspag_default_payment = get_user_meta( get_current_user_id(), 'braspag_default_payment', true );
 
 use Polen\Includes\Polen_Talent;
 
@@ -20,11 +23,11 @@ if ($polen_talent->is_user_talent($current_user)) {
 		<div class="row">
 			<div class="col-md-12">
 				<?php if (!is_null($braspag_card_saved_data) && !empty($braspag_card_saved_data) && is_array($braspag_card_saved_data) && count($braspag_card_saved_data) > 0) : ?>
-					<?php foreach ($braspag_card_saved_data as $p => $data) : $prefix = md5($p); ?>
-						<div id="#payment-<?php echo $prefix; ?>" class="box-round d-flex justify-content-between align-items-center px-3 py-4 mb-3 payment-method-item">
+					<?php foreach ($braspag_card_saved_data as $p => $data) : $prefix = md5($data['id']); ?>
+						<div id="#payment-<?php echo $prefix; ?>" class="<?php echo $data['id']; ?> box-round d-flex justify-content-between align-items-center px-3 py-4 mb-3 payment-method-item">
 							<div class="d-flex align-items-center">
-								<?php Icon_Class::polen_icon_card(strtolower($data['brand'])); ?>
-								<span class="sufix">**** <?php echo $data['sufix']; ?></span>
+								<?php Icon_Class::polen_icon_card( strtolower( $data['brand'] ) ); ?>
+								<span class="sufix"><?php echo $data['sufix']; ?></span>
 							</div>
 							<div>
 								<?php

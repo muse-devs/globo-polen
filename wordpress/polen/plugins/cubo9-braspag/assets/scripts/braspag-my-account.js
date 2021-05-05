@@ -58,7 +58,12 @@
 
                 },
                 success: function( response ) {
-                    console.log( response );
+                    console.log( response.result );
+                    if( response.result === 'success' ) {
+                        document.location.href = braspag.myAccountPaymentOptionUrl;
+                    } else {
+                        console.log( response.message );
+                    }
                 },
                 error: function( error ) {
                     console.log( error );
