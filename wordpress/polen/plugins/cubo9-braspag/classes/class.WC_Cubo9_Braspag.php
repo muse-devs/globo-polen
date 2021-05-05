@@ -173,7 +173,10 @@ class WC_Cubo9_Braspag extends WC_Payment_Gateway {
         if( is_account_page() || ( defined('DOING_AJAX') && DOING_AJAX ) ) {
             wp_enqueue_script( 'braspag-my-account', PLUGIN_CUBO9_BRASPAG_URL . 'assets/scripts/braspag-my-account.js', array('jquery'), '', true );
             wp_localize_script( 'braspag-my-account', 'braspag', array(
-                'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+                // payment-options
+                'rootUrl'      => get_bloginfo('url'),
+                'ajaxUrl'      => admin_url( 'admin-ajax.php' ),
+                'myAccountPaymentOptionUrl' => wc_get_account_endpoint_url( 'payment-options' ),
             ) );
         }
 
