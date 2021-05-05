@@ -30,6 +30,8 @@
 			base_url: '<?= site_url(); ?>'
 		};
 	</script>
+    
+    <?php include_once TEMPLATE_DIR . '/inc/analitics_header.php'; ?>
 </head>
 
 <body <?php body_class(); ?>>
