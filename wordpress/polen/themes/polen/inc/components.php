@@ -501,20 +501,28 @@ function polen_get_stars($quant)
 <?php
 }
 
-function polen_comment_card($args)
+function polen_comment_card($args = array(
+	"id" => "string-unica",
+	"name" => "Fulano",
+	"date" => "02/03/2021",
+	"stars" => 4,
+	"text" => "He was blown away! Started telling me how he sent your book to your foundation in hopes to get it signed last week. He wrote you a letter with it talking about his injury and how he. He wrote you a letter with it talking about his injury and how"
+))
 {
 ?>
 	<div class="box-round mb-3">
-		<div class="row p-4">
+		<div class="row p-4 comment-box">
 			<div class="col-md-12 box-stars">
-				<?php polen_get_stars(4); ?>
+				<?php polen_get_stars($args['stars']); ?>
 			</div>
 			<div class="col-md-12 mt-3">
-				<p>Avaliação por Fulano - 01/02/2021</p>
+				<p>Avaliação por <?php echo $args["name"]; ?> - <?php echo $args["date"]; ?></p>
 			</div>
 			<div class="col-md-12 mt-2">
-				<p class="alt"><span class="truncate-lines-4">He was blown away! Started telling me how he sent your book to your foundation in hopes to get it signed last week. He wrote you a letter with it talking about his injury and how he. He wrote you a letter with it talking about his injury and how</span>
-					<a href="javascript:void(0)">Exibir mais</a>
+				<p class="alt">
+					<input type="checkbox" name="expanded-<?php echo $args['id']; ?>" id="expanded-<?php echo $args['id']; ?>">
+					<span class="truncate truncate-4"></span>
+					<label for="expanded-<?php echo $args['id']; ?>">Exibir mais</label>
 				</p>
 			</div>
 		</div>

@@ -11,3 +11,24 @@ function copyToClipboard(text) {
 function changeHash(hash) {
 	window.location.hash = hash || "";
 }
+
+function truncatedItems() {
+	const ps = document.querySelectorAll(".truncate");
+	const observer = new ResizeObserver((entries) => {
+		for (let entry of entries) {
+			entry.target.classList[
+				entry.target.scrollHeight > entry.contentRect.height
+					? "add"
+					: "remove"
+			]("truncated");
+		}
+	});
+
+	ps.forEach((p) => {
+		observer.observe(p);
+	});
+}
+
+jQuery(document).ready(function () {
+	truncatedItems();
+});

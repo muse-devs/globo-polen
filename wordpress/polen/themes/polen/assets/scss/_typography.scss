@@ -55,21 +55,3 @@ a {
 	font-weight: 600;
 	letter-spacing: 0.03rem;
 }
-
-.truncate {
-	display: -webkit-box;
-	-webkit-box-orient: vertical;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	& + a {
-		display: inline-block;
-	}
-}
-
-$lines: 5;
-@for $i from 1 through $lines {
-	.truncate-lines-#{$i} {
-		@extend .truncate;
-		-webkit-line-clamp: $i;
-	}
-}
