@@ -17,6 +17,11 @@ class Polen_Order_Review
     private $comment_approved;
     
     /**
+     * Rate que sera um metadata
+     */
+    private $rate;
+    
+    /**
      * Para nao ficar indo buscar no banco para várias validacoes
      * @var type 
      */
@@ -89,15 +94,14 @@ class Polen_Order_Review
         $this->comment_approved = $comment_approved;
     }
 
-    
-    /**
-     * 
-     * @param type $talent_id
-     * @return void
-     */
     public function set_talent_id( $talent_id ): void
     {
         $this->talent_id = $talent_id;
+    }
+    
+    public function set_rate( $rate )
+    {
+        $this->rate = $rate;
     }
     
     
@@ -108,7 +112,8 @@ class Polen_Order_Review
     private function prepare_metadata_insert_db()
     {
         return array(
-            'talent_id' => $this->talent_id
+            'talent_id' => $this->talent_id,
+            'rate'      => $this->rate,
         );
     }
     
@@ -120,6 +125,7 @@ class Polen_Order_Review
     {
         $this->validate_unique_comment();
         $this->validate_order_is_complete();
+        $this->validate_same_user_by_order();
     }
     
     
@@ -138,13 +144,15 @@ class Polen_Order_Review
     
     
     /**
-     * 
+     * Validacao se o usuário e o mesmo da order
      * @param type $param
      */
     protected function validate_same_user_by_order()
     {
-        $order = wc_get_order( $this->comment_post_ID );
-        $order->get_user_id();
+        $order = $this->_order;
+        if( $this->user_id !== $order->get_user_id() ) {
+            throw new \Exception( 'user order not the same of review_order user', 500 );
+        }
     }
     
     
@@ -154,7 +162,7 @@ class Polen_Order_Review
      */
     protected function validate_order_is_complete()
     {
-        $order = wc_get_order( $this->comment_post_ID );
+        $order = $this->_order;
         if( $order->get_status() !== Polen_Order::SLUG_ORDER_COMPLETE ) {
             throw new \Exception( 'the order isnt completed', 500 );
         }
@@ -164,7 +172,6 @@ class Polen_Order_Review
     /**
      * Pegar um comentário pelo user_id e order_id
      * necessário para saber se o comentátio é unico
-     * 
      * @param int $user_id
      * @param int $order_id
      * @return array [WP_Comment]
@@ -178,21 +185,68 @@ class Polen_Order_Review
         ) );
     }
     
+    
+    static public function get_number_total_reviews_by_talent_id( int $talent_id )
+    {
+        return get_comments( array(
+            'meta_key' => 'talent_id',
+            'meta_value' => $talent_id,
+            'count' => true
+        ));
+    }
+    
+    /**
+     * Devolve o somatorio das notas por talent_id
+     * @param int $talent_id
+     * @return int
+     */
+    static public function get_sum_rate_by_talent( int $talent_id )
+    {
+        $comments = get_comments( array(
+            'meta_key' => 'talent_id',
+            'meta_value' => $talent_id,
+        ));
+        $total_rate = 0;
+        foreach( $comments as $comment ) {
+            $value = get_comment_meta( $comment->comment_ID, 'rate', true);
+            $total_rate += intval( $value );
+        }
+        return $total_rate;
+    }
+    
+    
+    /**
+     * 
+     * @return boolean|$this
+     */
     public function save()
     {
         $commentdata = $this->prepare_data_db();
         
-        $this->_order = 
+        //data for validation
+        $this->_order = wc_get_order( $this->comment_post_ID );
         $this->validate_comment();
         
         $comment_id = wp_insert_comment( $commentdata );
         if( $comment_id === false ) {
-            return false;
+            global $wpdb;
+            $msg = empty( $wpdb->last_error ) ? 'error into insert comment' : $wpdb->last_error;
+            throw new \Exception( $msg , 500 );
         }
+        
+        $number_total_reviews = self::get_number_total_reviews_by_talent_id( $this->talent_id );
+        $sum_rate_talent = self::get_sum_rate_by_talent( $this->talent_id );
+        
+        $cart_item = Cart\Polen_Cart_Item_Factory::polen_cart_item_from_order( $this->_order );
+        $product = $cart_item->get_product();
+        $product->update_meta_data( 'total_review', $number_total_reviews );
+        $product->update_meta_data( 'sum_rate', $sum_rate_talent );
+        $product->save();
         
         $this->comment_id = $comment_id;
         return $this;
     }
+    
     
     /**
      * Prepara a estrutura em array para o insert
