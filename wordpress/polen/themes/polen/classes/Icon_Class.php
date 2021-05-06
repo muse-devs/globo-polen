@@ -24,12 +24,12 @@ class Icon_Class
 
 	public static function polen_icon_check_o()
 	{
-		echo '<i class="bi bi-check-circle"></i>';
+		echo '<i class="bi bi-check-circle" style="color: var(--success)"></i>';
 	}
 
 	public static function polen_icon_exclamation_o()
 	{
-		echo '<i class="bi bi-exclamation-circle"></i>';
+		echo '<i class="icon icon-error-o"></i>';
 	}
 
 	public static function polen_icon_checkmark()
@@ -107,7 +107,7 @@ class Icon_Class
 
 	public static function polen_icon_close()
 	{
-		echo '<i class="bi bi-x"></i>';
+		echo '<i class="icon icon-close"></i>';
 	}
 
 	public static function polen_icon_trash()
