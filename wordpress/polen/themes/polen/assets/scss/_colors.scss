@@ -12,7 +12,9 @@ $primary: #b620e0;
 $primary-hover: #cc30f8;
 $secondary: #377dff;
 $accept: #3cc13b;
+$teal: #ebf9eb;
 $danger: #ff000f;
+$danger-bg: #fdebeb;
 
 $progress-bar-bg: $secondary;
 $nav-tabs-link-active-color: $primary;
@@ -31,8 +33,10 @@ $theme-colors: (
 	"primary": $primary,
 	"primary-hover": $primary-hover,
 	"secondary": $secondary,
-	"succes": $accept,
+	"success": $accept,
+	"teal": $teal,
 	"danger": $danger,
+	"danger-bg": $danger-bg,
 	"light": $light-100,
 	"gray": $talent-bg-color,
 	"gray-dark": $talent-bg-color,
