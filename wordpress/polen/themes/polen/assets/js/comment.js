@@ -33,7 +33,7 @@ const commentbox = new Vue({
 			this.rate = e;
 		},
 		sendComment: function () {
-			console.log(`${this.comment} - ${this.rate}`);
+			console.log(`comentário: ${this.comment}`, `nota: ${this.rate}`);
 		},
 	},
 });

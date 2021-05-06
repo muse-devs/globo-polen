@@ -540,19 +540,6 @@ function polen_comment_card($args = array(
 <?php
 }
 
-/* function polen_get_stars_vote_active()
-{
-?>
-	<div class="col-md-12 d-flex justify-content-center box-stars">
-		<span class="icon-star-item" v-for="star in stars" v-bind:class="{active: star.key <= rate}" v-on:click="changeRate(star.key)">
-			<?php Icon_Class::polen_icon_star(false); ?>
-			<?php Icon_Class::polen_icon_star(true); ?>
-		</span>
-		<input type="hidden" name="rate" id="rate" v-model="rate" />
-	</div>
-<?php
-} */
-
 function polen_comment_box()
 {
 	wp_enqueue_script('comment-scripts');
