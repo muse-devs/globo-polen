@@ -28,6 +28,11 @@ if( $polen_talent->is_user_talent( $user ) ) {
 }else{
 
 do_action( 'woocommerce_before_edit_account_form' ); ?>
+<div class="row mb-3">
+	<div class="col-md-12">
+		<h1>Meus Dados</h1>
+	</div>
+</div>
 
 <form class="woocommerce-EditAccountForm edit-account mt-3" action="" method="post" <?php do_action( 'woocommerce_edit_account_form_tag' ); ?> >
 

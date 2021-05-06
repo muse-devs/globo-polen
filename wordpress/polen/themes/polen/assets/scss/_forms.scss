@@ -12,9 +12,15 @@
 		color: $input-font-color;
 		background-color: var(--gray-dark);
 	}
-	&:disabled, &[read-only] {
+	&:disabled,
+	&[read-only] {
 		opacity: 0.5;
 	}
+}
+
+.btn-primary:hover {
+	background-color: $primary-hover;
+	border-color: $primary-hover;
 }
 
 .btn-outline-light {

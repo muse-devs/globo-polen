@@ -72,12 +72,23 @@ $terms = wp_get_object_terms(get_the_ID(), 'product_tag');
 		</div>
 		<div class="col-md-12">
 			<div class="row">
-				<div class="col-md-12 text-center text-md-center">
-					<span class="skill-title">Responde em</span>
-				</div>
-				<div class="col-md-12 text-center text-md-center mt-2">
-					<?php Icon_Class::polen_icon_clock(); ?>
-					<span class="skill-value"><?= $Talent_Fields->tempo_resposta; ?>h</span>
+				<div class="col-12 col-md-6 m-md-auto">
+					<div class="row">
+						<div class="col-6 col-md-6 text-center text-md-center">
+							<span class="skill-title">Responde em</span>
+						</div>
+						<div class="col-6 col-md-6 text-center text-md-center">
+							<span class="skill-title">Avaliações (2)</span>
+						</div>
+						<div class="col-6 col-md-6 text-center text-md-center mt-2">
+							<?php Icon_Class::polen_icon_clock(); ?>
+							<span class="skill-value"><?= $Talent_Fields->tempo_resposta; ?>h</span>
+						</div>
+						<div class="col-6 col-md-6 text-center text-md-center mt-2">
+							<?php Icon_Class::polen_icon_star(true); ?>
+							<span class="skill-value">5.0</span>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
