@@ -35,40 +35,52 @@
             remove_id.parentNode.removeChild(remove_id);
         });
 
-        $(document).on( 'click', '.braspag_SaveMyCard', function(e) {
-            e.preventDefault();
-
+        $(document).on( 'click', '#braspag-save-my-card', function(e) {
             let braspag_creditcardNumber   = $('#braspag_creditcardNumber').val();
             let braspag_creditcardName     = $('#braspag_creditcardName').val();
             let braspag_creditcardValidity = $('#braspag_creditcardValidity').val();
             let braspag_creditcardCvv      = $('#braspag_creditcardCvv').val();
-
-            $.ajax({
-                url: braspag.ajaxUrl,
-                type: 'post',
-                dataType: 'json',
-                data: {
-                    'action'   : 'braspag-add-card',
-                    'number'   : braspag_creditcardNumber,
-                    'holder'   : braspag_creditcardName,
-                    'validity' : braspag_creditcardValidity,
-                    'cvv'      : braspag_creditcardCvv,
-                },
-                beforeSend: function() {
-
-                },
-                success: function( response ) {
-                    console.log( response.result );
-                    if( response.result === 'success' ) {
-                        document.location.href = braspag.myAccountPaymentOptionUrl;
-                    } else {
-                        console.log( response.message );
-                    }
-                },
-                error: function( error ) {
-                    console.log( error );
-                },
-            });
+            
+            if (braspag_creditcardNumber 
+            && braspag_creditcardName 
+            && braspag_creditcardValidity 
+            && braspag_creditcardCvv) {
+                e.preventDefault();
+                $.ajax({
+                    url: braspag.ajaxUrl,
+                    type: 'post',
+                    dataType: 'json',
+                    data: {
+                        'action'   : 'braspag-add-card',
+                        'number'   : braspag_creditcardNumber,
+                        'holder'   : braspag_creditcardName,
+                        'validity' : braspag_creditcardValidity,
+                        'cvv'      : braspag_creditcardCvv,
+                    },
+                    beforeSend: function() {
+                        polSpinner();
+                    },
+                    success: function( response ) {
+                        polSpinner("hidden");
+                        try {
+                            console.log( response.result );
+                            if( response.result === 'success' ) {
+                                document.location.href = braspag.myAccountPaymentOptionUrl;
+                            } else {
+                                polError(response.message);
+                                console.log( response.message );
+                            }
+                        } catch(error) {
+                            polError(error);
+                        }
+                    },
+                    error: function( error ) {
+                        polSpinner("hidden");
+                        polError(error);
+                        console.log( error );
+                    },
+                });
+            }
         });
     });
 
@@ -96,6 +108,7 @@
     }
 
     function braspagRemove( default_id ) {
+        polSpinner();
         $.ajax({
             url: braspag.ajaxUrl,
             method: 'post',
@@ -114,6 +127,7 @@
                 }
             },
             error: function( error ) {
+                polSpinner("hidden");
                 console.log( error );
             }
         }).done(function() {
