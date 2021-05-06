@@ -27,7 +27,7 @@ if ($polen_talent->is_user_talent($current_user)) {
 						<div id="#payment-<?php echo $prefix; ?>" class="<?php echo $data['id']; ?> box-round d-flex justify-content-between align-items-center px-3 py-4 mb-3 payment-method-item">
 							<div class="d-flex align-items-center">
 								<?php Icon_Class::polen_icon_card( strtolower( $data['brand'] ) ); ?>
-								<span class="sufix"><?php echo $data['sufix']; ?></span>
+								<span class="sufix">****<?php echo $data['sufix']; ?></span>
 							</div>
 							<div>
 								<?php
