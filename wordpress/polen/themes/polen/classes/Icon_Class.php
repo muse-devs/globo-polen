@@ -29,7 +29,7 @@ class Icon_Class
 
 	public static function polen_icon_exclamation_o()
 	{
-		echo '<i class="icon icon-error-o" style="color: var(--danger)"></i>';
+		echo '<i class="icon icon-error-o"></i>';
 	}
 
 	public static function polen_icon_checkmark()
