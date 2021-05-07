@@ -72,6 +72,9 @@ class Polen {
         //Endpoint OrderReview
         $order_review_router = new Polen_Order_Review_Router( new Polen_Order_Review_Controller() );
         $order_review_router->init_routes();
+
+        //OrderReview Theme Area
+        new Polen_Order_Review_Rewrite( true );
     }
 
     /**
