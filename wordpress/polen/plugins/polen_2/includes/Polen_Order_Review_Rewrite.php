@@ -30,6 +30,7 @@ class Polen_Order_Review_Rewrite
                     exit();
                 }
             
+                
                 $product = wc_get_product_id_by_sku( get_query_var( 'talent_review_id' ) );
                 if( empty( $product )) {
                     global $wp_query;

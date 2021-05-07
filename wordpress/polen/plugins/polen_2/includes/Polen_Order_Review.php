@@ -205,6 +205,7 @@ class Polen_Order_Review
         $comments = get_comments( array(
             'meta_key' => 'talent_id',
             'meta_value' => $talent_id,
+            "include_unapproved" => '1',
         ));
         $total_rate = 0;
         foreach( $comments as $comment ) {
@@ -269,6 +270,23 @@ class Polen_Order_Review
             'comment_meta'          => $this->prepare_metadata_insert_db(),
             'user_id'               => $this->user_id
         );
+    }
+
+
+    /**
+     * Pega os reviews pelo talent_id
+     * @param int $talent_id
+     */
+    static public function get_order_reviews_by_talent_id( int $talent_id )
+    {
+        $query = array(
+            'meta_key' => 'talent_id',
+            'meta_value' => $talent_id,
+            'type' => 'order_review',
+            'include_unapproved' => '0',
+        );
+        $reviews = get_comments( $query );
+        return $reviews;
     }
 
 
