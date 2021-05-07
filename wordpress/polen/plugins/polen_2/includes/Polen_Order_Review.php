@@ -283,7 +283,7 @@ class Polen_Order_Review
             'meta_key' => 'talent_id',
             'meta_value' => $talent_id,
             'type' => 'order_review',
-            'include_unapproved' => '0',
+            'status' => 'approve',
         );
         $reviews = get_comments( $query );
         return $reviews;
