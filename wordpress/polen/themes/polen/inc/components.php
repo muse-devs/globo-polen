@@ -262,10 +262,13 @@ function polen_get_talent_socials($talent)
 <?php
 }
 
-function polen_get_talent_video_buttons($args)
+function polen_get_talent_video_buttons($talent, $video_url)
 {
+	$wa_url = "https://wa.me/?text=";
+	$wa_message = htmlentities(urlencode("Veja que legal: "));
+	$wa_link = $video_url;
 ?>
-	<a href="#whatsapp" class="btn btn-outline-light btn-lg btn-block share-link" target="_blank"><?php Icon_Class::polen_icon_social('whatsapp'); ?>Whatsapp</a>
+	<a href="<?php echo $wa_url . $wa_message . $wa_link; ?>" class="btn btn-outline-light btn-lg btn-block share-link" target="_blank"><?php Icon_Class::polen_icon_social('whatsapp'); ?>Whatsapp</a>
 <?php
 }
 
@@ -343,7 +346,7 @@ function polen_front_get_talent_videos($talent)
 					<div class="col-12">
 						<input type="text" id="share-input" class="share-input" />
 						<?php /* <a id="copy-video" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_copy(); ?>Copiar link</a> */ ?>
-						<?php polen_get_talent_video_buttons($talent); ?>
+						<?php //polen_get_talent_video_buttons($talent, null); ?>
 						<?php polen_get_talent_socials($talent); ?>
 					</div>
 				</div>
@@ -401,7 +404,7 @@ function polen_get_video_player($talent, $video)
 							<input type="text" id="share-input" class="share-input" />
 							<a href="#avaliar" class="btn btn-primary btn-lg btn-block">Avaliar vídeo</a>
 							<?php /* <a href="javascript:copyToClipboard('<?php echo $video_url; ?>')" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_copy(); ?>Copiar link</a> */ ?>
-							<?php polen_get_talent_video_buttons($talent); ?>
+							<?php polen_get_talent_video_buttons($talent, $video_url); ?>
 							<?php polen_get_talent_socials($talent); ?>
 						</div>
 					</div>
