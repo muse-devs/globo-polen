@@ -16,23 +16,6 @@ function setImediate(handle) {
 	setTimeout(handle, 1);
 }
 
-function truncatedItems() {
-	const ps = document.querySelectorAll(".truncate");
-	const observer = new ResizeObserver((entries) => {
-		for (let entry of entries) {
-			entry.target.classList[
-				entry.target.scrollHeight > entry.contentRect.height
-					? "add"
-					: "remove"
-			]("truncated");
-		}
-	});
-
-	ps.forEach((p) => {
-		observer.observe(p);
-	});
-}
-
 function polMessageKill(id) {
 	var el = document.getElementById(id);
 	if (el) {
@@ -118,6 +101,23 @@ function polError(message) {
 	document.body.appendChild(messageBox);
 	setImediate(function () {
 		messageBox.classList.add("show");
+	});
+}
+
+function truncatedItems() {
+	const ps = document.querySelectorAll(".truncate");
+	const observer = new ResizeObserver((entries) => {
+		for (let entry of entries) {
+			entry.target.classList[
+				entry.target.scrollHeight > entry.contentRect.height
+					? "add"
+					: "remove"
+			]("truncated");
+		}
+	});
+
+	ps.forEach((p) => {
+		observer.observe(p);
 	});
 }
 

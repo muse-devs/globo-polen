@@ -129,7 +129,7 @@ function openVideoByURL(url) {
 	videoPlayer.getVideoId().then(function (id) {
 		changeHash(id);
 		changeVideoCardUrl(id);
-		handleCopyVideoUrl(id);
+		// handleCopyVideoUrl(id);
 	});
 }
 
@@ -143,5 +143,5 @@ function openVideoById(id) {
 	});
 	changeHash(id);
 	changeVideoCardUrl(id);
-	handleCopyVideoUrl(id);
+	// handleCopyVideoUrl(id);
 }
