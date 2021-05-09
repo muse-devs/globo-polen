@@ -124,3 +124,33 @@ function truncatedItems() {
 jQuery(document).ready(function () {
 	truncatedItems();
 });
+
+(function($) {
+	$(document).on('click', '.signin-newsletter-button',function(e){
+		e.preventDefault();
+		var email = $('input[name="signin_newsletter"]').val();
+		var wnonce = $(this).attr('code');
+
+		if( email !== '' ){
+			$.ajax(
+				{
+					type: 'POST',
+					url: woocommerce_params.ajax_url,
+					data: {
+						action: 'polen_newsletter_signin',
+						security: wnonce,
+						email: email 
+					},
+					success: function( response ) {
+						console.log(response);
+						let obj = $.parseJSON( response );
+						$('.signin-response').html(obj['response']);
+
+					}
+				});
+		}else{
+			$('.signin-response').html( 'Favor digite um e-mail válido' );
+		}	
+	});
+
+})(jQuery);
