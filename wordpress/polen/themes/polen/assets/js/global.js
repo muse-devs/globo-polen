@@ -16,23 +16,6 @@ function setImediate(handle) {
 	setTimeout(handle, 1);
 }
 
-function truncatedItems() {
-	const ps = document.querySelectorAll(".truncate");
-	const observer = new ResizeObserver((entries) => {
-		for (let entry of entries) {
-			entry.target.classList[
-				entry.target.scrollHeight > entry.contentRect.height
-					? "add"
-					: "remove"
-			]("truncated");
-		}
-	});
-
-	ps.forEach((p) => {
-		observer.observe(p);
-	});
-}
-
 function polMessageKill(id) {
 	var el = document.getElementById(id);
 	if (el) {
@@ -121,6 +104,53 @@ function polError(message) {
 	});
 }
 
+function truncatedItems() {
+	const ps = document.querySelectorAll(".truncate");
+	const observer = new ResizeObserver((entries) => {
+		for (let entry of entries) {
+			entry.target.classList[
+				entry.target.scrollHeight > entry.contentRect.height
+					? "add"
+					: "remove"
+			]("truncated");
+		}
+	});
+
+	ps.forEach((p) => {
+		observer.observe(p);
+	});
+}
+
 jQuery(document).ready(function () {
 	truncatedItems();
 });
+
+(function($) {
+	$(document).on('click', '.signin-newsletter-button',function(e){
+		e.preventDefault();
+		var email = $('input[name="signin_newsletter"]').val();
+		var wnonce = $(this).attr('code');
+
+		if( email !== '' ){
+			$.ajax(
+				{
+					type: 'POST',
+					url: woocommerce_params.ajax_url,
+					data: {
+						action: 'polen_newsletter_signin',
+						security: wnonce,
+						email: email 
+					},
+					success: function( response ) {
+						console.log(response);
+						let obj = $.parseJSON( response );
+						$('.signin-response').html(obj['response']);
+
+					}
+				});
+		}else{
+			$('.signin-response').html( 'Favor digite um e-mail válido' );
+		}	
+	});
+
+})(jQuery);

@@ -22,9 +22,15 @@
 						<p class="description">Seja o primeiro a saber sobre as estrelas mais recentes e as melhores ofertas no Muse</p>
 						<div class="row">
 							<div class="col-md-8 mb-2 mb-md-0">
-								<input type="text" placeholder="Entre com o seu e-mail" class="form-control form-control-lg" />
+								<input type="email" name="signin_newsletter" placeholder="Entre com o seu e-mail" class="form-control form-control-lg" />
 							</div>
-							<div class="col-md-4 mt-2 mt-md-0 d-md-flex align-items-md-center"><button class="btn btn-outline-light btn-lg btn-block">Enviar</button></div>
+							<?php			
+								$newsletter_signin_nonce = wp_create_nonce('news-signin');
+							?>
+							<div class="col-md-4 mt-2 mt-md-0 d-md-flex align-items-md-center" >
+								<button class="signin-newsletter-button btn btn-outline-light btn-lg btn-block" code="<?php echo $newsletter_signin_nonce;?>">Enviar</button>
+							</div>
+							<div class="col-md-8 mb-2 mb-md-0 signin-response"></div>	
 						</div>
 					</div>
 					<div class="col-md-4 mt-4 order-md-1">

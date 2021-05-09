@@ -262,11 +262,13 @@ function polen_get_talent_socials($talent)
 <?php
 }
 
-function polen_get_talent_video_buttons($args)
+function polen_get_talent_video_buttons($talent, $video_url)
 {
+	$wa_url = "https://wa.me/?text=";
+	$wa_message = htmlentities(urlencode("Veja que legal: "));
+	$wa_link = $video_url;
 ?>
-	<a href="#avaliar" class="btn btn-primary btn-lg btn-block">Avaliar vídeo</a>
-	<a href="#whatsapp" class="btn btn-outline-light btn-lg btn-block share-link" target="_blank"><?php Icon_Class::polen_icon_social('whatsapp'); ?>Whatsapp</a>
+	<a href="<?php echo $wa_url . $wa_message . $wa_link; ?>" class="btn btn-outline-light btn-lg btn-block share-link" target="_blank"><?php Icon_Class::polen_icon_social('whatsapp'); ?>Whatsapp</a>
 <?php
 }
 
@@ -344,7 +346,7 @@ function polen_front_get_talent_videos($talent)
 					<div class="col-12">
 						<input type="text" id="share-input" class="share-input" />
 						<?php /* <a id="copy-video" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_copy(); ?>Copiar link</a> */ ?>
-						<?php polen_get_talent_video_buttons($talent); ?>
+						<?php //polen_get_talent_video_buttons($talent, null); ?>
 						<?php polen_get_talent_socials($talent); ?>
 					</div>
 				</div>
@@ -400,8 +402,9 @@ function polen_get_video_player($talent, $video)
 					<div class="row mt-4 share">
 						<div class="col-12">
 							<input type="text" id="share-input" class="share-input" />
+							<a href="#avaliar" class="btn btn-primary btn-lg btn-block">Avaliar vídeo</a>
 							<?php /* <a href="javascript:copyToClipboard('<?php echo $video_url; ?>')" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_copy(); ?>Copiar link</a> */ ?>
-							<?php polen_get_talent_video_buttons($talent); ?>
+							<?php polen_get_talent_video_buttons($talent, $video_url); ?>
 							<?php polen_get_talent_socials($talent); ?>
 						</div>
 					</div>
@@ -511,19 +514,16 @@ function polen_get_stars($quant)
 <?php
 }
 
-function polen_comment_card($args = array(
-	"id" => "string-unica",
-	"name" => "Fulano",
-	"date" => "02/03/2021",
-	"stars" => 4,
-	"text" => "He was blown away! Started telling me how he sent your book to your foundation in hopes to get it signed last week. He wrote you a letter with it talking about his injury and how he. He wrote you a letter with it talking about his injury and how"
-))
+function polen_comment_card($args = array())
 {
+	if (empty($args)) {
+		return;
+	}
 ?>
 	<div class="box-round mb-3">
 		<div class="row p-4 comment-box">
 			<div class="col-md-12 box-stars">
-				<?php polen_get_stars($args['stars']); ?>
+				<?php polen_get_stars($args['rate']); ?>
 			</div>
 			<div class="col-md-12 mt-3">
 				<p>Avaliação por <?php echo $args["name"]; ?> - <?php echo $args["date"]; ?></p>
@@ -531,7 +531,7 @@ function polen_comment_card($args = array(
 			<div class="col-md-12 mt-2">
 				<p class="alt">
 					<input type="checkbox" name="expanded-<?php echo $args['id']; ?>" id="expanded-<?php echo $args['id']; ?>">
-					<span class="truncate truncate-4"><?php echo $args['text']; ?></span>
+					<span class="truncate truncate-4"><?php echo $args['comment']; ?></span>
 					<label for="expanded-<?php echo $args['id']; ?>">Exibir mais</label>
 				</p>
 			</div>

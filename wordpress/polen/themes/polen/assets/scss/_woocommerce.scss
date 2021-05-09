@@ -157,3 +157,14 @@ select.form-control:not([size]):not([multiple]) {
 	width: 100%;
 	float: none;
 }
+
+.woocommerce #respond input#submit,
+.woocommerce a.button,
+.woocommerce button.button,
+.woocommerce input.button {
+	margin-top: 1rem;
+	color: var(--light);
+	background-color: transparent;
+	border: 1px solid;
+	border-radius: 6px;
+}
