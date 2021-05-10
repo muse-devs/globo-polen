@@ -41,7 +41,7 @@ const commentbox = new Vue({
 					jQuery("#form-comment").serialize(),
 					function (result) {
 						if (result.success) {
-							setMessage(
+							setSessionMessage(
 								SUCCESS,
 								"Vídeo avaliado com sucesso!",
 								"Seu comentário poderá aparecer na página do Talento"

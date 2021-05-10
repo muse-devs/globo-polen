@@ -131,14 +131,14 @@ function truncatedItems() {
 // Mensagens globais via cookie ----------------------------------------
 //type: success || error
 //title: only in success
-function setMessage(type = "success", title = "Obrigado!", message) {
+function setSessionMessage(type = "success", title = "Obrigado!", message) {
 	sessionStorage.setItem(
 		MESSAGE_COOKIE,
 		JSON.stringify({ type, title, message })
 	);
 }
 
-function getMessage() {
+function getSessionMessage() {
 	var ck = sessionStorage.getItem(MESSAGE_COOKIE);
 	if (!ck) {
 		return;
@@ -156,7 +156,7 @@ function getMessage() {
 
 jQuery(document).ready(function () {
 	truncatedItems();
-	getMessage();
+	getSessionMessage();
 });
 
 (function ($) {
