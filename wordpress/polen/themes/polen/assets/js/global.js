@@ -1,3 +1,7 @@
+const MESSAGE_COOKIE = "message_cookie";
+const SUCCESS = "success";
+const ERROR = "error";
+
 function copyToClipboard(text) {
 	var copyText = document.getElementById("share-input");
 	copyText.value = text;
@@ -6,29 +10,6 @@ function copyToClipboard(text) {
 
 	document.execCommand("copy");
 	alert("Link copiado para Área de transferência");
-}
-
-function setCookie(cname, cvalue, exdays) {
-	var d = new Date();
-	d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
-	var expires = "expires=" + d.toUTCString();
-	document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-
-function getCookie(cname) {
-	var name = cname + "=";
-	var decodedCookie = decodeURIComponent(document.cookie);
-	var ca = decodedCookie.split(";");
-	for (var i = 0; i < ca.length; i++) {
-		var c = ca[i];
-		while (c.charAt(0) == " ") {
-			c = c.substring(1);
-		}
-		if (c.indexOf(name) == 0) {
-			return c.substring(name.length, c.length);
-		}
-	}
-	return "";
 }
 
 function changeHash(hash) {
@@ -129,6 +110,9 @@ function polError(message) {
 
 function truncatedItems() {
 	const ps = document.querySelectorAll(".truncate");
+	if (ps.length < 1) {
+		return;
+	}
 	const observer = new ResizeObserver((entries) => {
 		for (let entry of entries) {
 			entry.target.classList[
@@ -144,8 +128,55 @@ function truncatedItems() {
 	});
 }
 
+function setCookie(cname, cvalue, exdays) {
+	var d = new Date();
+	d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+	var expires = "expires=" + d.toUTCString();
+	document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+	var name = cname + "=";
+	var decodedCookie = decodeURIComponent(document.cookie);
+	var ca = decodedCookie.split(";");
+	for (var i = 0; i < ca.length; i++) {
+		var c = ca[i];
+		while (c.charAt(0) == " ") {
+			c = c.substring(1);
+		}
+		if (c.indexOf(name) == 0) {
+			return c.substring(name.length, c.length);
+		}
+	}
+	return "";
+}
+
+// Mensagens globais via cookie ----------------------------------------
+//type: success || error
+//title: only in success
+function setMessage(type = "success", title = "Obrigado!", message) {
+	setCookie(MESSAGE_COOKIE, JSON.stringify({ type, title, message }));
+}
+
+function getMessage() {
+	var ck = getCookie(MESSAGE_COOKIE);
+	if (ck === "") {
+		return;
+	}
+	var content = JSON.parse(ck);
+	if (content.type === SUCCESS) {
+		polMessage(content.title, content.message);
+	} else if (content.type === ERROR) {
+		polError(content.message);
+	}
+	setCookie(MESSAGE_COOKIE, "");
+}
+
+// -----------------------------------------------------------------------
+
 jQuery(document).ready(function () {
 	truncatedItems();
+	getMessage();
 });
 
 (function ($) {
