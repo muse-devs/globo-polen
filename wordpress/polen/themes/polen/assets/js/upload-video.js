@@ -70,7 +70,7 @@ let completeHandler = () => {
             woocommerce_params.ajax_url,
             obj_complete_order,
             () => {
-                window.location.href = museobj.base_url + "/my-account/success-upload/?order_id=" + upload_video.order_id;
+                window.location.href = polenObj.base_url + "/my-account/success-upload/?order_id=" + upload_video.order_id;
             }
         )
         .fail( errorHandler );

@@ -26,11 +26,12 @@
 	<link rel="profile" href="https://gmpg.org/xfn/11">
 	<?php wp_head(); ?>
 	<script>
-		var museobj = {
-			base_url: '<?= site_url(); ?>'
+		var polenObj = {
+			base_url: '<?= site_url(); ?>',
+			developer: <?php echo DEVELOPER ? 1 : 0; ?>
 		};
 	</script>
-    
+
     <?php include_once TEMPLATE_DIR . '/inc/analitics_header.php'; ?>
 </head>
 

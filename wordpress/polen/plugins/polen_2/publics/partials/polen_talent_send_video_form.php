@@ -95,7 +95,7 @@ if (isset($_REQUEST['order_id']) && !empty($_REQUEST['order_id'])) {
                             </div>
                             <div class="row mt-4">
                                 <div class="col">
-                                    <button id="video-rec" class="btn btn-primary btn-lg btn-block video-rec show">Gravar vídeo</button>
+                                    <button id="video-rec" class="btn btn-primary btn-lg btn-block video-rec show" data-dismiss="modal" aria-label="Fechar">Gravar vídeo</button>
                                 </div>
                             </div>
                         </div>
