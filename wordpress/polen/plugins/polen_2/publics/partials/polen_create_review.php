@@ -1,16 +1,10 @@
 <?php
 
-// if( empty( $video_info ) ) {
-//     global $wp_query;
-//     $wp_query->set_404();
-//     status_header( 404 );
-//     get_template_part( 404 );
-//     exit();
-// }
+$order_id;// = get_query_var('create-review');
+$order;// = wc_get_order( $order_id );
+$item_cart; //Polen\Includes\Cart\Polen_Cart_Item
+$talent_id;//int
 
-// use \Polen\Includes\Polen_Update_Fields;
-// $Talent_Fields = new Polen_Update_Fields();
-// $talent = $Talent_Fields->get_vendor_data($video_info->talent_id);
 ?>
     <main id="primary" class="site-main"> SHOW
         <?php
