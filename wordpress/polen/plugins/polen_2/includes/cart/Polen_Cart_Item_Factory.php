@@ -36,6 +36,6 @@ class Polen_Cart_Item_Factory
         foreach( $data as $item_id => $item ) {
             return new Polen_Cart_Item( $item );
         }
-        throw new Exception( 'has no item into the cart', 500 );
+        throw new \Exception( 'has no item into the cart', 500 );
     }
 }

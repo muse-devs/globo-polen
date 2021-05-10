@@ -2,7 +2,6 @@
 
 namespace Polen\Includes;
 
-use \Polen\Admin\Polen_Admin;
 use \Polen\includes\Polen_Talent;
 use \Polen\Includes\Polen_Video_Info;
 
@@ -20,15 +19,31 @@ class Polen_Account
             add_action( 'woocommerce_account_watch-video_endpoint', array( $this, 'my_account_watch_video' ) );
             add_action( 'woocommerce_account_create-review_endpoint', array( $this, 'my_account_create_review' ) );
             add_action( 'init', function() {
-                add_rewrite_endpoint('create-review', EP_PAGES);
+                add_rewrite_endpoint('watch-video', EP_PAGES, 'watch-video' );
+                add_rewrite_endpoint('create-review', EP_PAGES, 'create-review' );
             });
+            // add_action( 'template_redirect', [$this,'makeplugins_json_template_redirect'] );
            // add_action( 'init', array( $this, 'watch_video_rewrite' ) ); 
           //  add_filter( 'request', array( $this, 'watch_video_request' ) ); 
            // add_filter( 'template_include', array( $this, 'watchmyvideo_template' ) ); 
 
         }
     }
-
+public function makeplugins_json_template_redirect()
+{
+    function makeplugins_json_template_redirect() {
+        global $wp_query;
+     
+        // if this is not a request for json or a singular object then bail
+        if ( ! isset( $wp_query->query_vars['create-review'] ) || ! is_singular() )
+            return;
+     
+        // include custom template
+        include dirname( __FILE__ ) . '/json-template.php';
+        exit;
+    }
+    add_action( 'template_redirect', [$this, 'makeplugins_json_template_redirect'] );
+}
     public function set_user_login( $data, $update, $id ) {
         $data['user_nicename'] = $data['user_email'];
         $data['user_login']    = $data['user_email'];
@@ -131,7 +146,28 @@ class Polen_Account
     */
     public function my_account_create_review()
     {
-        $order_id = filter_input( INPUT_GET, 'order_id' );
+        // $order_id = filter_input( INPUT_GET, 'order_id' );
+        // var_dump(get_query_var('order_id'));
+        // var_dump(get_query_var('create-review'));
+        // echo '<pre>';var_dump($_SERVER);die;
+        $order_id = get_query_var('create-review');
+        $order = wc_get_order( $order_id );
+        if( empty( $order) ) {
+            $this->set_404();
+        }
+        $item_cart = \Polen\Includes\Cart\Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
+        $talent_id = $item_cart->get_talent_id();
+        
         require_once PLUGIN_POLEN_DIR . '/publics/partials/polen_create_review.php';
+    }
+
+
+    private function set_404()
+    {
+        global $wp_query;
+        $wp_query->set_404();
+        status_header( 404 );
+        get_template_part( 404 );
+        exit();
     }
 }
