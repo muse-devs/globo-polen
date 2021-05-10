@@ -101,7 +101,7 @@ class Polen_Cart_Item
     
     /**
      * Pega o talent_id
-     * @return type
+     * @return int
      */
     public function get_talent_id()
     {

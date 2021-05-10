@@ -2,7 +2,6 @@
 
 namespace Polen\Includes;
 
-use \Polen\Admin\Polen_Admin;
 use \Polen\includes\Polen_Talent;
 use \Polen\Includes\Polen_Video_Info;
 
@@ -18,10 +17,11 @@ class Polen_Account
             add_filter( 'woocommerce_before_account_orders', array( $this, 'my_orders_title' ));
             add_action( 'template_redirect', array( $this, 'my_account_redirect' ) );
             add_action( 'woocommerce_account_watch-video_endpoint', array( $this, 'my_account_watch_video' ) );
-           // add_action( 'init', array( $this, 'watch_video_rewrite' ) ); 
-          //  add_filter( 'request', array( $this, 'watch_video_request' ) ); 
-           // add_filter( 'template_include', array( $this, 'watchmyvideo_template' ) ); 
-
+            add_action( 'woocommerce_account_create-review_endpoint', array( $this, 'my_account_create_review' ) );
+            add_action( 'init', function() {
+                add_rewrite_endpoint('watch-video', EP_PAGES, 'watch-video' );
+                add_rewrite_endpoint('create-review', EP_PAGES, 'create-review' );
+            });
         }
     }
 
@@ -95,8 +95,7 @@ class Polen_Account
      * Tela para visualizar o vídeo
     */
     public function my_account_watch_video()
-    {   
-        
+    {
         if( is_user_logged_in() ){
             $user = wp_get_current_user();
             $polen_talent = new Polen_Talent;
@@ -121,31 +120,35 @@ class Polen_Account
             }
         }
     }
- /*
-    public function watch_video_rewrite(){
-        add_rewrite_endpoint( 'v', EP_PAGES );
-    }
 
-    public function watch_video_request( $vars ){
-        if (isset( $vars['pagename'] ) && ( $vars['pagename'] == 'v' ) ) {
-            $vars['v'] = $vars['page'];
-        }
-        return $vars;
-    }
-   
-    public function watchmyvideo_template( $template ) {
-        global $wp_query;
-        $video_hash = ( !empty( get_query_var('video_hash') ))?get_query_var('video_hash'):get_query_var('v');
-    	if( !empty( $video_hash ) ) {
-            return get_template_directory_uri() . '/watch-my-video.php';
-    	}
-    	return $template;
-    }
 
-    public function information_query_vars( $vars )
-    {
-        array_push($vars, 'v');
-        return $vars;
-    }
+    /**
+     * Tela para fã criar um review
     */
+    public function my_account_create_review()
+    {
+        // $order_id = filter_input( INPUT_GET, 'order_id' );
+        // var_dump(get_query_var('order_id'));
+        // var_dump(get_query_var('create-review'));
+        // echo '<pre>';var_dump($_SERVER);die;
+        $order_id = get_query_var('create-review');
+        $order = wc_get_order( $order_id );
+        if( empty( $order) ) {
+            $this->set_404();
+        }
+        $item_cart = \Polen\Includes\Cart\Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
+        $talent_id = $item_cart->get_talent_id();
+        
+        require_once PLUGIN_POLEN_DIR . '/publics/partials/polen_create_review.php';
+    }
+
+
+    private function set_404()
+    {
+        global $wp_query;
+        $wp_query->set_404();
+        status_header( 404 );
+        get_template_part( 404 );
+        exit();
+    }
 }

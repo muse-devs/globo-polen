@@ -3,6 +3,8 @@
 namespace Polen\Includes\Order_Review;
 
 use Polen\Includes\Talent\Polen_Talent_Controller_Base;
+use Polen\Includes\Cart\Polen_Cart_Item_Factory;
+use Polen\Includes\Polen_Order_Review;
 
 class Polen_Order_Review_Controller extends Polen_Talent_Controller_Base
 {
