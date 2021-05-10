@@ -138,7 +138,7 @@ class Polen_Order_Review
     protected function validate_unique_comment()
     {
         if( !empty( self::get_comment_by_user_id_order_id( $this->user_id, $this->comment_post_ID ) ) ) {
-            throw new \Exception( 'this comment already exist', 500 );
+            throw new \Exception( 'Esse comentário já existe', 200 );
         }
     }
     
@@ -151,7 +151,7 @@ class Polen_Order_Review
     {
         $order = $this->_order;
         if( $this->user_id !== $order->get_user_id() ) {
-            throw new \Exception( 'user order not the same of review_order user', 500 );
+            throw new \Exception( 'O usuário do pedido não é o mesmo', 200 );
         }
     }
     
@@ -164,7 +164,7 @@ class Polen_Order_Review
     {
         $order = $this->_order;
         if( $order->get_status() !== Polen_Order::SLUG_ORDER_COMPLETE ) {
-            throw new \Exception( 'the order isnt completed', 500 );
+            throw new \Exception( 'O pedido não está completo, não pode criar review antes do talento enviar o video', 200 );
         }
     }
     
