@@ -68,7 +68,7 @@ if( $polen_talent->is_user_talent( $logged_user ) ) {
 									else :
 										//TODO ADD A URL PARA ASSISTIR O VIDEO
 									?>
-										<a href="<?php echo wc_get_page_permalink( 'myaccount' ).'watch-video?order_id='.$order->get_order_number(); ?>" class="btn btn-primary btn-lg btn-block">
+										<a href="<?php echo wc_get_page_permalink( 'myaccount' ).'watch-video/' . $order->get_order_number(); ?>" class="btn btn-primary btn-lg btn-block">
 											Ver Video
 										</a>
 									<?php

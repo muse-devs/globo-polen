@@ -103,14 +103,13 @@ class Polen_Account
                 wp_safe_redirect(site_url('my-account/orders'));
                 exit;
             }
-            
-            if( isset( $_GET['order_id'] ) && !empty( $_GET['order_id']) ){
-                $order_id = $_GET['order_id'];
+            $order_id = get_query_var('watch-video');
+            if( isset( $order_id ) && !empty( $order_id) ){
                 $video_info = Polen_Video_Info::get_by_order_id( $order_id );
                 $video_hash = $video_info->hash;
                 if( !empty( $video_hash ) ){
                     require_once PLUGIN_POLEN_DIR . '/publics/partials/polen_watch_video.php';
-                }else{
+                } else {
                     global $wp_query;
                     $wp_query->set_404();
                     status_header( 404 );
@@ -127,10 +126,6 @@ class Polen_Account
     */
     public function my_account_create_review()
     {
-        // $order_id = filter_input( INPUT_GET, 'order_id' );
-        // var_dump(get_query_var('order_id'));
-        // var_dump(get_query_var('create-review'));
-        // echo '<pre>';var_dump($_SERVER);die;
         $order_id = get_query_var('create-review');
         $order = wc_get_order( $order_id );
         if( empty( $order) ) {
