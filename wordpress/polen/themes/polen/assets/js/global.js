@@ -128,39 +128,19 @@ function truncatedItems() {
 	});
 }
 
-function setCookie(cname, cvalue, exdays) {
-	var d = new Date();
-	d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
-	var expires = "expires=" + d.toUTCString();
-	document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-
-function getCookie(cname) {
-	var name = cname + "=";
-	var decodedCookie = decodeURIComponent(document.cookie);
-	var ca = decodedCookie.split(";");
-	for (var i = 0; i < ca.length; i++) {
-		var c = ca[i];
-		while (c.charAt(0) == " ") {
-			c = c.substring(1);
-		}
-		if (c.indexOf(name) == 0) {
-			return c.substring(name.length, c.length);
-		}
-	}
-	return "";
-}
-
 // Mensagens globais via cookie ----------------------------------------
 //type: success || error
 //title: only in success
 function setMessage(type = "success", title = "Obrigado!", message) {
-	setCookie(MESSAGE_COOKIE, JSON.stringify({ type, title, message }));
+	sessionStorage.setItem(
+		MESSAGE_COOKIE,
+		JSON.stringify({ type, title, message })
+	);
 }
 
 function getMessage() {
-	var ck = getCookie(MESSAGE_COOKIE);
-	if (ck === "") {
+	var ck = sessionStorage.getItem(MESSAGE_COOKIE);
+	if (!ck) {
 		return;
 	}
 	var content = JSON.parse(ck);
@@ -169,7 +149,7 @@ function getMessage() {
 	} else if (content.type === ERROR) {
 		polError(content.message);
 	}
-	setCookie(MESSAGE_COOKIE, "");
+	sessionStorage.removeItem(MESSAGE_COOKIE);
 }
 
 // -----------------------------------------------------------------------
