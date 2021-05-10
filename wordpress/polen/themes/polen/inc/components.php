@@ -402,7 +402,7 @@ function polen_get_video_player($talent, $video)
 					<div class="row mt-4 share">
 						<div class="col-12">
 							<input type="text" id="share-input" class="share-input" />
-							<a href="#avaliar" class="btn btn-primary btn-lg btn-block">Avaliar vídeo</a>
+							<a href="/my-account/create-review/<?= $video->order_id; ?>" class="btn btn-primary btn-lg btn-block">Avaliar vídeo</a>
 							<?php /* <a href="javascript:copyToClipboard('<?php echo $video_url; ?>')" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_copy(); ?>Copiar link</a> */ ?>
 							<?php polen_get_talent_video_buttons($talent, $video_url); ?>
 							<?php polen_get_talent_socials($talent); ?>
