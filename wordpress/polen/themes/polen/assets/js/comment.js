@@ -41,7 +41,11 @@ const commentbox = new Vue({
 					jQuery("#form-comment").serialize(),
 					function (result) {
 						if (result.success) {
-							// polMessage("Obrigado", result.data);
+							setMessage(
+								SUCCESS,
+								"Vídeo avaliado com sucesso!",
+								"Seu comentário poderá aparecer na página do Talento"
+							);
 							window.location.href = "/my-account/orders";
 						} else {
 							polSpinner("hidden");
