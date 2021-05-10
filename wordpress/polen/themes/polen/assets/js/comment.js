@@ -42,7 +42,7 @@ const commentbox = new Vue({
 					function (result) {
 						if (result.success) {
 							setSessionMessage(
-								SUCCESS,
+								CONSTANTS.SUCCESS,
 								"Vídeo avaliado com sucesso!",
 								"Seu comentário poderá aparecer na página do Talento"
 							);
