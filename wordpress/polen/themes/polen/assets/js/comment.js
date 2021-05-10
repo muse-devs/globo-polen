@@ -32,8 +32,27 @@ const commentbox = new Vue({
 		changeRate: function (e) {
 			this.rate = e;
 		},
-		sendComment: function () {
-			console.log(`comentário: ${this.comment}`, `nota: ${this.rate}`);
+		sendComment: function (e) {
+			e.preventDefault();
+			polSpinner();
+			jQuery
+				.post(
+					woocommerce_params.ajax_url,
+					jQuery("#form-comment").serialize(),
+					function (result) {
+						if (result.success) {
+							// polMessage("Obrigado", result.data);
+							window.location.href = "/my-account/orders";
+						} else {
+							polSpinner("hidden");
+							polError(result.data);
+						}
+					}
+				)
+				.fail(function (e) {
+					polSpinner("hidden");
+					polError(e.statusText);
+				});
 		},
 	},
 });

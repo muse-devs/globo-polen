@@ -8,6 +8,29 @@ function copyToClipboard(text) {
 	alert("Link copiado para Área de transferência");
 }
 
+function setCookie(cname, cvalue, exdays) {
+	var d = new Date();
+	d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+	var expires = "expires=" + d.toUTCString();
+	document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+	var name = cname + "=";
+	var decodedCookie = decodeURIComponent(document.cookie);
+	var ca = decodedCookie.split(";");
+	for (var i = 0; i < ca.length; i++) {
+		var c = ca[i];
+		while (c.charAt(0) == " ") {
+			c = c.substring(1);
+		}
+		if (c.indexOf(name) == 0) {
+			return c.substring(name.length, c.length);
+		}
+	}
+	return "";
+}
+
 function changeHash(hash) {
 	window.location.hash = hash || "";
 }
@@ -125,32 +148,29 @@ jQuery(document).ready(function () {
 	truncatedItems();
 });
 
-(function($) {
-	$(document).on('click', '.signin-newsletter-button',function(e){
+(function ($) {
+	$(document).on("click", ".signin-newsletter-button", function (e) {
 		e.preventDefault();
 		var email = $('input[name="signin_newsletter"]').val();
-		var wnonce = $(this).attr('code');
+		var wnonce = $(this).attr("code");
 
-		if( email !== '' ){
-			$.ajax(
-				{
-					type: 'POST',
-					url: woocommerce_params.ajax_url,
-					data: {
-						action: 'polen_newsletter_signin',
-						security: wnonce,
-						email: email 
-					},
-					success: function( response ) {
-						console.log(response);
-						let obj = $.parseJSON( response );
-						$('.signin-response').html(obj['response']);
-
-					}
-				});
-		}else{
-			$('.signin-response').html( 'Favor digite um e-mail válido' );
-		}	
+		if (email !== "") {
+			$.ajax({
+				type: "POST",
+				url: woocommerce_params.ajax_url,
+				data: {
+					action: "polen_newsletter_signin",
+					security: wnonce,
+					email: email,
+				},
+				success: function (response) {
+					console.log(response);
+					let obj = $.parseJSON(response);
+					$(".signin-response").html(obj["response"]);
+				},
+			});
+		} else {
+			$(".signin-response").html("Favor digite um e-mail válido");
+		}
 	});
-
 })(jQuery);

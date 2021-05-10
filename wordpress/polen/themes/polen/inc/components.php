@@ -346,7 +346,8 @@ function polen_front_get_talent_videos($talent)
 					<div class="col-12">
 						<input type="text" id="share-input" class="share-input" />
 						<?php /* <a id="copy-video" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_copy(); ?>Copiar link</a> */ ?>
-						<?php //polen_get_talent_video_buttons($talent, null); ?>
+						<?php //polen_get_talent_video_buttons($talent, null);
+						?>
 						<?php polen_get_talent_socials($talent); ?>
 					</div>
 				</div>
@@ -540,19 +541,23 @@ function polen_comment_card($args = array())
 <?php
 }
 
-function polen_comment_box()
+function polen_create_review($order_id)
 {
 	wp_enqueue_script('comment-scripts');
 ?>
 	<div id="comment-box" class="box-round mb-3">
-		<div class="row p-4 comment-box">
-			<pol-stars v-bind:rate="rate" v-bind:handle="changeRate"></pol-stars>
-			<div class="col-md-12 mt-3">
-				<h4>Comentário</h4>
-				<textarea name="comment" id="comment" rows="2" class="form-control" placeholder="Escreva sua avaliação" v-model="comment"></textarea>
-				<button id="send-comment" class="btn btn-primary btn-lg btn-block mt-3" v-on:click="sendComment">Avaliar</button>
+		<form action="./" id="form-comment">
+			<div class="row p-4 comment-box">
+				<pol-stars v-bind:rate="rate" v-bind:handle="changeRate"></pol-stars>
+				<input type="hidden" name="action" value="create_order_review">
+				<input type="hidden" name="order_id" value="<?php echo $order_id; ?>">
+				<div class="col-md-12 mt-3">
+					<h4>Comentário</h4>
+					<textarea name="comment" id="comment" rows="2" class="form-control" placeholder="Escreva sua avaliação" v-model="comment"></textarea>
+					<button id="send-comment" class="btn btn-primary btn-lg btn-block mt-3" v-on:click="sendComment">Avaliar</button>
+				</div>
 			</div>
-		</div>
+		</form>
 	</div>
 <?php
 }
