@@ -14,6 +14,7 @@ if ( ! defined( '_S_VERSION' ) ) {
 
 define('TEMPLATE_URI', get_template_directory_uri());
 define('TEMPLATE_DIR', get_template_directory());
+define('DEVELOPER', defined('ENV_DEV') && ENV_DEV);
 
 if ( ! function_exists( 'polen_setup' ) ) :
 	/**
@@ -151,7 +152,7 @@ add_action( 'widgets_init', 'polen_widgets_init' );
 
 function get_assets_folder() {
 	$min = "min/";
-	if (defined('ENV_DEV') && ENV_DEV) {
+	if (DEVELOPER) {
 		$min = "";
 	}
 	return $min;

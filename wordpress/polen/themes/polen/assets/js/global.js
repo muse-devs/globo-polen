@@ -1,6 +1,20 @@
-const MESSAGE_COOKIE = "message_cookie";
-const SUCCESS = "success";
-const ERROR = "error";
+const CONSTANTS = {
+	MESSAGE_COOKIE: "message_cookie",
+	SUCCESS: "success",
+	ERROR: "error",
+	SHOW: "show",
+	HIDDEN: "hidden",
+};
+
+if (!polenObj.developer) {
+	console = {
+		debug: function () {},
+		error: function () {},
+		info: function () {},
+		log: function () {},
+		warn: function () {},
+	};
+}
 
 function copyToClipboard(text) {
 	var copyText = document.getElementById("share-input");
@@ -23,7 +37,7 @@ function setImediate(handle) {
 function polMessageKill(id) {
 	var el = document.getElementById(id);
 	if (el) {
-		el.classList.remove("show");
+		el.classList.remove(CONSTANTS.SHOW);
 		setImediate(function () {
 			el.parentNode.removeChild(el);
 		});
@@ -31,7 +45,7 @@ function polMessageKill(id) {
 }
 
 function polSpinner(action, el) {
-	if (action === "hidden") {
+	if (action === CONSTANTS.HIDDEN) {
 		polMessageKill("pol-fog");
 	} else {
 		polMessageKill("pol-fog");
@@ -54,7 +68,7 @@ function polSpinner(action, el) {
 		}
 		container.appendChild(fog);
 		setImediate(function () {
-			fog.classList.add("show");
+			fog.classList.add(CONSTANTS.SHOW);
 		});
 	}
 }
@@ -66,7 +80,7 @@ function polMessage(title, message) {
 	var messageBox = document.createElement("div");
 	messageBox.id = id;
 	messageBox.classList.add(id);
-	messageBox.classList.add("success");
+	messageBox.classList.add(CONSTANTS.SUCCESS);
 	messageBox.innerHTML = `
 	<div class="row">
 		<div class="col-md-12">
@@ -83,7 +97,7 @@ function polMessage(title, message) {
 	`;
 	document.body.appendChild(messageBox);
 	setImediate(function () {
-		messageBox.classList.add("show");
+		messageBox.classList.add(CONSTANTS.SHOW);
 	});
 }
 
@@ -94,7 +108,7 @@ function polError(message) {
 	var messageBox = document.createElement("div");
 	messageBox.id = id;
 	messageBox.classList.add(id);
-	messageBox.classList.add("fail");
+	messageBox.classList.add(CONSTANTS.ERROR);
 	messageBox.innerHTML = `
 	<i class="icon icon-error-o" style="color: var(--danger);"></i>
 	<p class="message-text px-1">${message}</p>
@@ -104,7 +118,7 @@ function polError(message) {
 	`;
 	document.body.appendChild(messageBox);
 	setImediate(function () {
-		messageBox.classList.add("show");
+		messageBox.classList.add(CONSTANTS.SHOW);
 	});
 }
 
@@ -131,25 +145,29 @@ function truncatedItems() {
 // Mensagens globais via cookie ----------------------------------------
 //type: success || error
 //title: only in success
-function setSessionMessage(type = "success", title = "Obrigado!", message) {
+function setSessionMessage(
+	type = CONSTANTS.SUCCESS,
+	title = "Obrigado!",
+	message
+) {
 	sessionStorage.setItem(
-		MESSAGE_COOKIE,
+		CONSTANTS.MESSAGE_COOKIE,
 		JSON.stringify({ type, title, message })
 	);
 }
 
 function getSessionMessage() {
-	var ck = sessionStorage.getItem(MESSAGE_COOKIE);
+	var ck = sessionStorage.getItem(CONSTANTS.MESSAGE_COOKIE);
 	if (!ck) {
 		return;
 	}
 	var content = JSON.parse(ck);
-	if (content.type === SUCCESS) {
+	if (content.type === CONSTANTS.SUCCESS) {
 		polMessage(content.title, content.message);
-	} else if (content.type === ERROR) {
+	} else if (content.type === CONSTANTS.ERROR) {
 		polError(content.message);
 	}
-	sessionStorage.removeItem(MESSAGE_COOKIE);
+	sessionStorage.removeItem(CONSTANTS.MESSAGE_COOKIE);
 }
 
 // -----------------------------------------------------------------------
@@ -162,22 +180,29 @@ jQuery(document).ready(function () {
 (function ($) {
 	$(document).on("click", ".signin-newsletter-button", function (e) {
 		e.preventDefault();
-		var email = $('input[name="signin_newsletter"]').val();
+		var email = $('input[name="signin_newsletter"]');
 		var wnonce = $(this).attr("code");
 
-		if (email !== "") {
+		if (email.val() !== "") {
+			polSpinner(CONSTANTS.SHOW, "#signin-newsletter");
 			$.ajax({
 				type: "POST",
 				url: woocommerce_params.ajax_url,
 				data: {
 					action: "polen_newsletter_signin",
 					security: wnonce,
-					email: email,
+					email: email.val(),
 				},
 				success: function (response) {
-					console.log(response);
 					let obj = $.parseJSON(response);
-					$(".signin-response").html(obj["response"]);
+					polMessage("Cadastro Efetuado", obj["response"]);
+					email.val("");
+				},
+				complete: function () {
+					polSpinner(CONSTANTS.HIDDEN);
+				},
+				error: function (jqXHR, textStatus, errorThrown) {
+					polError(`${textStatus}: ${errorThrown}`);
 				},
 			});
 		} else {
