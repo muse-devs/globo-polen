@@ -36,8 +36,7 @@ function _polen_get_info_talent_by_product_id( \WC_Product $talent_object ) {
 
         $ids = $talent_object->get_category_ids();
         $category = _polen_get_first_category_object( $ids );
-        //TODO pegar a URL da categoria, onde isso vai dar?
-        $talent['category_url'] = '/#categorias/' . $category->slug;
+        $talent['category_url'] = polen_get_url_category_by_term_id( $category->term_id );
         $talent['category'] = $category->name;
         return $talent;
 }
@@ -91,8 +90,7 @@ function _polen_get_category_info( \WP_Term $category_object )
     $category = [];
     $category[ 'ID' ] = $category_object->term_id;
     $category[ 'title' ] = $category_object->name;
-    //TODO resolver qual vai ser a URL da categoria e onde vai ser o resultado
-    $category[ 'url' ] = '/#catogoria/' . $category_object->slug;
+    $category[ 'url' ] = polen_get_url_category_by_term_id( $category[ 'ID' ] );
     
     $thumbnail_id = get_term_meta( $category_object->term_id, 'thumbnail_id', true );
     $category[ 'image' ] = wp_get_attachment_url( $thumbnail_id );
