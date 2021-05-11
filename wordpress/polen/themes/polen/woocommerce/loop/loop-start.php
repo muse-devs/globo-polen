@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 <div class="clear"></div>
-<section class="row my-4 banner-scrollable">
+<section class="row my-4 card-list">
 <div class="col-md-12 p-0 p-md-0">
 	<div class="banner-wrapper">
 		<div class="banner-content">
