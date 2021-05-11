@@ -110,11 +110,7 @@ class Polen_Account
                 if( !empty( $video_hash ) ){
                     require_once PLUGIN_POLEN_DIR . '/publics/partials/polen_watch_video.php';
                 } else {
-                    global $wp_query;
-                    $wp_query->set_404();
-                    status_header( 404 );
-                    get_template_part( 404 );
-                    exit();
+                    $this->set_404();
                 }    
             }
         }
