@@ -37,16 +37,16 @@ function _polen_get_info_talent_by_product_id( \WC_Product $talent_object ) {
         $ids = $talent_object->get_category_ids();
         $category = _polen_get_first_category_object( $ids );
         //TODO pegar a URL da categoria, onde isso vai dar?
-        $talent['category_url'] = '/#categorias/' . $category->slug;
+        $talent['category_url'] = get_term_link( $category->term_id, 'product_cat' );
         $talent['category'] = $category->name;
         return $talent;
 }
 
 
 /**
- * Usando a funcao _get_info_talent_by_product_id dentro de um loop para 
+ * Usando a funcao _get_info_talent_by_product_id dentro de um loop para
  * retornar varios talentos no formato dos cards
- * 
+ *
  * @param array $args
  * @return type
  */
@@ -82,7 +82,7 @@ function polen_get_new_talents(int $quantity = 4)
 
 /**
  * Pegar dados e formatar para o cord de categorias
- * 
+ *
  * @param \WP_Term $category_object
  * @return type
  */
@@ -93,7 +93,7 @@ function _polen_get_category_info( \WP_Term $category_object )
     $category[ 'title' ] = $category_object->name;
     //TODO resolver qual vai ser a URL da categoria e onde vai ser o resultado
     $category[ 'url' ] = '/#catogoria/' . $category_object->slug;
-    
+
     $thumbnail_id = get_term_meta( $category_object->term_id, 'thumbnail_id', true );
     $category[ 'image' ] = wp_get_attachment_url( $thumbnail_id );
 
@@ -116,7 +116,7 @@ function polen_get_categories_home(int $quantity = 4)
         'order' => 'count',
         'exclude' => '15',
     ];
-    
+
     $categories_object = get_terms( $args );
     $categories = [];
     foreach ( $categories_object as $category_object ) {
@@ -148,7 +148,7 @@ function polen_get_talents( int $quantity = 10 )
 /**
  * Retorna a URL do arquivo JSON das occasions para a tela do brief do videos
  * antes da compara pelo costumer.
- * 
+ *
  * @return string
  */
 function polen_get_occasions_json()
