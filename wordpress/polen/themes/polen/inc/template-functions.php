@@ -81,3 +81,14 @@ function polen_get_url_category_by_term_id( $term_id )
 {
 	return get_term_link( $term_id, 'product_cat' );
 }
+
+function polen_get_url_category_by_product_id ( $product_id )
+{
+	$cat_terms = wp_get_object_terms( $product_id, 'product_cat' );
+    $cat_link = '';
+	$cat = array_pop( $cat_terms );
+    if ( !empty($cat) ) {
+        $cat_link = get_term_link($cat->term_id);
+    }
+	return $cat_link;
+}

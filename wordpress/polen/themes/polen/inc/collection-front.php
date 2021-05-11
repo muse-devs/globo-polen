@@ -154,3 +154,50 @@ function polen_get_occasions_json()
     $occasion_list = new Polen\Includes\Polen_Occasion_List();
     return $occasion_list->get_url_occasion_json();
 }
+
+
+/**
+ * Pega os produtos relacionados (na mesma cat) a retorna um array para a func polen_banner_scrollable
+ * @param int $product_id
+ * @return array [['ID'=>xx,'talent_url'=>'...','name'=>'...','price'=>'...','category_url'=>'...','category'=>'...']]
+ */
+function polen_get_array_related_products( $product_id )
+{
+    $cat_terms = wp_get_object_terms( $product_id, 'product_cat');
+    $cat_link = polen_get_url_category_by_product_id( $product_id );
+    $terms_ids = array();
+    if (count($cat_terms) > 0) {
+        foreach ($cat_terms as $k => $term) {
+            $terms_ids[] = $term->term_id;
+        }
+    }
+    if (count($terms_ids) > 0) {
+        $others = get_objects_in_term($terms_ids, 'product_cat');
+        $arr_obj = array();
+        $arr_obj[] = get_the_ID();
+        shuffle($others);
+
+        if (count($others)) {
+            $args = array();
+            foreach ($others as $k => $id) {
+                if (!in_array($id, $arr_obj)) {
+                    if (count($arr_obj) > 5) {
+                        exit;
+                    }
+                    $product = wc_get_product($id);
+                    $arr_obj[] = $id;
+
+                    $args[] = array(
+                        "ID" => $id,
+                        "talent_url" => get_permalink($id),
+                        "name" => $product->get_title(),
+                        "price" => $product->get_regular_price(),
+                        "category_url" => $cat_link,
+                        "category" => wc_get_product_category_list($id)
+                    );
+                }
+            }
+            return $args;
+        }
+    }
+}

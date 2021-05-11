@@ -58,7 +58,7 @@ function polen_front_get_card($item, $size = "small")
 <?php
 }
 
-function polen_banner_scrollable($items, $title, $link)
+function polen_banner_scrollable( $items, $title, $link )
 {
 	if (!$items) {
 		return;
@@ -505,7 +505,13 @@ function polen_box_image_message($image, $text)
 <?php
 }
 
-function polen_get_stars($quant)
+
+/**
+ * Criar o card com as estrelas da nota do Review especifico
+ * @param int nota
+ * @return HTML
+ */
+function polen_get_stars( $quant )
 {
 	for ($i = 1; $i <= 5; $i++) {
 		Icon_Class::polen_icon_star($i <= $quant);
@@ -515,6 +521,12 @@ function polen_get_stars($quant)
 <?php
 }
 
+
+/**
+ * Criar a tela com a lista dos comentários (Order_Review)
+ * @param array [ ['id'=>xx,'rate'=>x,'name'=>'...','data'=>'...','comment'=>'...'] ]
+ * @return HTML
+ */
 function polen_comment_card($args = array())
 {
 	if (empty($args)) {
@@ -541,6 +553,12 @@ function polen_comment_card($args = array())
 <?php
 }
 
+
+/**
+ * Retorna o HTML com o form para a criação de uma Order_Review
+ * @param int $order_id
+ * @return HTML
+ */
 function polen_create_review($order_id)
 {
 	wp_enqueue_script('comment-scripts');
@@ -559,5 +577,26 @@ function polen_create_review($order_id)
 			</div>
 		</form>
 	</div>
+<?php
+}
+
+
+/**
+ * Cria o box dos produtos relacionados dentro de content-single-product
+ * @param int $product_id
+ * @return HTML
+ */
+function polen_box_related_product_by_product_id( $product_id )
+{
+?>
+	<div class="row">
+		<div class="col-12 col-md-12">
+		<?php
+			$args = polen_get_array_related_products( $product_id );
+			$cat_link = polen_get_url_category_by_product_id( $product_id );
+			polen_banner_scrollable( $args, "Relacionados", $cat_link );
+		?>
+		</div>
+	</div>	
 <?php
 }
