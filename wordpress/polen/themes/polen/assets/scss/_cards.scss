@@ -313,6 +313,81 @@
 	}
 }
 
+.card-list {
+	.banner-wrapper {
+		position: relative;
+		width: 100%;
+		.banner-content {
+			position: relative;
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+			padding-left: 15px;
+			flex-wrap: wrap;
+			width: 100%;
+			.polen-card.responsive {
+				margin: 0 15px 0 0;
+			}
+			.polen-card:not(.type-video) {
+				width: calc(44.13vw - 15px);
+			}
+			.responsive {
+				margin-bottom: 1rem;
+				.polen-card {
+					@include media-breakpoint-down(xs) {
+						width: calc(50vw - 23px);
+						.image {
+							height: 54vw;
+						}
+					}
+					@include media-breakpoint-only(sm) {
+						width: 156px;
+						.image {
+							height: 200px;
+						}
+					}
+					@include media-breakpoint-only(md) {
+						width: 126px;
+						.image {
+							height: 165px;
+						}
+					}
+					@include media-breakpoint-only(lg) {
+						width: 142px;
+					}
+					@include media-breakpoint-only(xl) {
+						width: 156px;
+						.image {
+							height: 200px;
+						}
+					}
+				}
+				@include media-breakpoint-only(md) {
+					&:nth-child(5n + 0) {
+						.polen-card {
+							margin-right: 0;
+						}
+					}
+				}
+				@include media-breakpoint-up(lg) {
+					&:nth-child(6n + 0) {
+						.polen-card {
+							margin-right: 0;
+						}
+					}
+				}
+			}
+			@include media-breakpoint-down(xs) {
+				padding: 0 15px;
+				justify-content: space-between;
+				.polen-card.responsive {
+					margin: 0;
+				}
+			}
+		}
+	}
+}
+
 .banner-scrollable {
 	.banner-wrapper {
 		position: relative;
@@ -347,8 +422,6 @@
 					width: 156px;
 					@include media-breakpoint-down(sm) {
 						width: 40vw;
-					}
-					@include media-breakpoint-only(sm) {
 					}
 					@include media-breakpoint-only(md) {
 						width: 126px;
