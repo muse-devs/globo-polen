@@ -182,8 +182,15 @@ if( isset( $flow_1[ $order_status ] ) ) {
 	</div>
 </div>
 
+<?php
+use \Polen\Includes\Polen_Order;
+$order_is_completed = Polen_Order::is_completed( $order );
+$class_disable  = $order_is_completed == true ? '' : ' disabled ' ;
+$url_watch_video = $order_is_completed == true ? polen_get_link_watch_video_by_order_id( $order_number ) : '';
+?>
+
 <div class="row my-3">
 	<div class="col-12">
-		<a href="<?php echo wc_get_account_endpoint_url('watch-video') . '?order_id=' . $order_number; ?>" class="btn btn-primary btn-lg btn-block">Assistir vídeo</a>
+		<a href="<?php echo $url_watch_video; ?>" class="btn btn-primary btn-lg btn-block<?= $class_disable; ?>">Assistir vídeo</a>
 	</div>
 </div>

@@ -71,6 +71,8 @@ class Polen {
         $talent_area_router = new Polen_Talent_Router($ctler);
         $talent_area_router->init_routes();
         
+        //OrderReview Action
+        new Polen_Order_Review( true );
         //Endpoint OrderReview
         $order_review_router = new Polen_Order_Review_Router( new Polen_Order_Review_Controller() );
         $order_review_router->init_routes();

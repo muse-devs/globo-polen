@@ -103,6 +103,47 @@ class Polen_Order_Review
     {
         $this->rate = $rate;
     }
+
+    public function __construct( bool $static = false )
+    {
+        if( $static ) {
+            add_action( 'wp_set_comment_status', array( $this, 'update_data_order_review_of_product' ), 10, 2);
+        }
+    }
+
+
+    /**
+     * Handler do Add_Action para edição de comentário do tipo order_review
+     */
+    public function update_data_order_review_of_product( $comment_id, $comment_status )
+    {
+        $comment = get_comment( $comment_id );
+        if( $comment->comment_type != self::COMMENT_TYPE ) {
+            return;
+        }  
+        $this->update_order_review_data_of_product( $comment_id, $comment );
+    }
+    
+
+    /**
+     * Atualiza os dados no Product Qtd total de Reviews e Somatorio das Notas
+     * Quando vai para a Lixeira
+     * 
+     * @param int $comment_id
+     * @param WP_Comment $comment
+     */
+    public function update_order_review_data_of_product( $comment_id, $comment )
+    {
+        $talent_id = get_comment_meta( $comment_id, 'talent_id', true );
+        $number_total_reviews = self::get_number_total_reviews_by_talent_id( $talent_id );
+        $sum_rate_talent = self::get_sum_rate_by_talent( $talent_id );
+        $order = wc_get_order( $comment->comment_post_ID );
+        $cart_item = Cart\Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
+        $product = $cart_item->get_product();
+        $product->update_meta_data( 'total_review', $number_total_reviews );
+        $product->update_meta_data( 'sum_rate', $sum_rate_talent );
+        $product->save();
+    }
     
     
     /**
@@ -191,6 +232,8 @@ class Polen_Order_Review
         return get_comments( array(
             'meta_key' => 'talent_id',
             'meta_value' => $talent_id,
+            'status' => 'approve',
+            'type' => self::COMMENT_TYPE,
             'count' => true
         ));
     }
@@ -205,7 +248,8 @@ class Polen_Order_Review
         $comments = get_comments( array(
             'meta_key' => 'talent_id',
             'meta_value' => $talent_id,
-            "include_unapproved" => '1',
+            'status' => 'approve',
+            'type' => self::COMMENT_TYPE,
         ));
         $total_rate = 0;
         foreach( $comments as $comment ) {
@@ -235,15 +279,7 @@ class Polen_Order_Review
             throw new \Exception( $msg , 500 );
         }
         
-        $number_total_reviews = self::get_number_total_reviews_by_talent_id( $this->talent_id );
-        $sum_rate_talent = self::get_sum_rate_by_talent( $this->talent_id );
-        
-        $cart_item = Cart\Polen_Cart_Item_Factory::polen_cart_item_from_order( $this->_order );
-        $product = $cart_item->get_product();
-        $product->update_meta_data( 'total_review', $number_total_reviews );
-        $product->update_meta_data( 'sum_rate', $sum_rate_talent );
-        $product->save();
-        
+        $comment = get_comment( $comment_id );
         $this->comment_id = $comment_id;
         return $this;
     }

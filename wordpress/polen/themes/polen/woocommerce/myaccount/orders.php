@@ -59,7 +59,7 @@ if( $polen_talent->is_user_talent( $logged_user ) ) {
 							<div class="col-12 text-center mt-4 mb-3">
 								<div class="row">
 									<?php
-									if( $order->get_status() != Polen_Order::is_completed( $order ) ):
+									if( !Polen_Order::is_completed( $order ) ):
 									?>
 										<a href="<?php echo $order->get_view_order_url(); ?>" class="btn btn-primary btn-lg btn-block">
 											Acompanhar pedido
@@ -68,7 +68,7 @@ if( $polen_talent->is_user_talent( $logged_user ) ) {
 									else :
 										//TODO ADD A URL PARA ASSISTIR O VIDEO
 									?>
-										<a href="<?php echo wc_get_page_permalink( 'myaccount' ).'watch-video/' . $order->get_order_number(); ?>" class="btn btn-primary btn-lg btn-block">
+										<a href="<?php echo polen_get_link_watch_video_by_order_id( $order->get_order_number() ); ?>" class="btn btn-primary btn-lg btn-block">
 											Ver Video
 										</a>
 									<?php
