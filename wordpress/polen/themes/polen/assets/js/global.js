@@ -182,6 +182,7 @@ jQuery(document).ready(function () {
 		e.preventDefault();
 		var email = $('input[name="signin_newsletter"]');
 		var wnonce = $(this).attr("code");
+		$(".signin-response").html("");
 
 		if (email.val() !== "") {
 			polSpinner(CONSTANTS.SHOW, "#signin-newsletter");
