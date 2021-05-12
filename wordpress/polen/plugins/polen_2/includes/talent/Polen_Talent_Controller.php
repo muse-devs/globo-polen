@@ -321,5 +321,20 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
 
         return false;
     }
+
+
+    public function get_talents_all()
+    {
+        $products = wc_get_products(['status'=>'publish','numberposts'=>0]);
+        $result = [];
+        foreach ($products as $product) {
+            $item = [];
+            $item['id'] = $product->get_id();
+            $item['name'] = $product->get_title();
+            $item['image'] = $product->get_image('polen-thumb-lg');
+            $result[] = $item;
+        }
+        wp_send_json_success($result);
+    }
  
 }
