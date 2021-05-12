@@ -38,11 +38,15 @@ global $post;
 $Talent_Fields = new Polen_Update_Fields();
 $Talent_Fields = $Talent_Fields->get_vendor_data($post->post_author);
 $terms = wp_get_object_terms(get_the_ID(), 'product_tag');
+
+$bg_image = wp_get_attachment_image_src($Talent_Fields->cover_image_id, "large")[0];
 ?>
 
-<figure class="image-bg">
-	<img src="<?php echo wp_get_attachment_image_src($Talent_Fields->cover_image_id, "large")[0]; ?>" alt="<?php echo $Talent_Fields->nome; ?>">
-</figure>
+<?php if($bg_image) : ?>
+	<figure class="image-bg">
+		<img src="<?php echo $bg_image; ?>" alt="<?php echo $Talent_Fields->nome; ?>">
+	</figure>
+<?php endif; ?>
 
 <div id="product-<?php the_ID(); ?>" <?php wc_product_class('', $product); ?>>
 
