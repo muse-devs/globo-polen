@@ -25,10 +25,10 @@ function _polen_get_first_category_object( $ids ) {
  * @param \WP_Product $talent_object
  * @return type
  */
-function _polen_get_info_talent_by_product_id( \WC_Product $talent_object ) {
+function _polen_get_info_talent_by_product_id( \WC_Product $talent_object, $size = 'polen-thumb-lg' ) {
         $talent = [];
         $talent['ID'] = $talent_object->get_id();
-        $talent['image'] = $talent_object->get_image();
+        $talent['image'] = $talent_object->get_image( $size );
         $talent['talent_url'] = $talent_object->get_permalink();
         $talent['price'] = $talent_object->get_price();
         $talent['price_formatted'] = $talent_object->get_price_html();
