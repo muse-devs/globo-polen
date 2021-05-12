@@ -321,17 +321,5 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
 
         return false;
     }
-
-
-    public function get_talents_all()
-    {
-        $products = wc_get_products(['status'=>'publish','numberposts'=>0]);
-        $result = [];
-        foreach ($products as $product) {
-            $item = _polen_get_info_talent_by_product_id($product);
-            $result[] = $item;
-        }
-        wp_send_json_success($result);
-    }
  
 }
