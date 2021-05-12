@@ -328,10 +328,7 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
         $products = wc_get_products(['status'=>'publish','numberposts'=>0]);
         $result = [];
         foreach ($products as $product) {
-            $item = [];
-            $item['id'] = $product->get_id();
-            $item['name'] = $product->get_title();
-            $item['image'] = $product->get_image('polen-thumb-lg');
+            $item = _polen_get_info_talent_by_product_id($product);
             $result[] = $item;
         }
         wp_send_json_success($result);
