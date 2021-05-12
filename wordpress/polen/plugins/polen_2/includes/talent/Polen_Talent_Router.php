@@ -21,8 +21,6 @@ class Polen_Talent_Router
         $this->add_route( 'get_talent_order_data', 'get_data_description' );
         $this->add_route( 'get_talent_acceptance', 'talent_accept_or_reject' );
         $this->add_route( 'order_status_completed', 'talent_order_completed' );
-
-        $this->add_route( 'get_talents', 'get_talents_all', false );
     }
     
     public function add_route( string $action, string $handler, $authenticade = true )
