@@ -49,6 +49,15 @@ a {
 	text-decoration: underline;
 }
 
+.no-underline {
+	color: white;
+	text-decoration: none;
+	&:hover {
+		color: white;
+		text-decoration: underline;
+	}
+}
+
 .btn {
 	font-size: 0.8rem;
 }
