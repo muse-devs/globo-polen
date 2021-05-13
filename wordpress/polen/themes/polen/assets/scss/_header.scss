@@ -33,7 +33,7 @@
 	}
 	.dropdown-content {
 		position: absolute;
-		display:  block;
+		display: block;
 		opacity: 0;
 		padding: 0.3rem;
 		right: 0;
@@ -64,7 +64,7 @@
 			background-color: $dark-100;
 			a {
 				padding: 10px 0;
-				font-size: 18px;
+				font-size: 24px;
 			}
 			.menu-close {
 				position: absolute;
@@ -72,9 +72,13 @@
 				right: 1rem;
 				z-index: 99;
 				i {
-					font-size: 32px;
+					font-size: 15px;
 					color: $light-100;
 				}
+			}
+			.user-name {
+				font-size: 16px;
+				font-weight: 600;
 			}
 		}
 	}
