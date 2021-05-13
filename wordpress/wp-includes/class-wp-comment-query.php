@@ -497,7 +497,7 @@ class WP_Comment_Query {
 		 * @param WP_Comment_Query $query     Current instance of WP_Comment_Query (passed by reference).
 		 */
 		$_comments = apply_filters_ref_array( 'the_comments', array( $_comments, &$this ) );
-		
+
 		// Convert to WP_Comment instances.
 		$comments = array_map( 'get_comment', $_comments );
 
