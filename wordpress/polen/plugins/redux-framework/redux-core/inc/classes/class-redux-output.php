@@ -94,7 +94,11 @@ if ( ! class_exists( 'Redux_Output', false ) ) {
 								}
 
 								if ( Redux_Core::$pro_loaded ) {
-									$pro_path = Redux_Pro::$dir . "core/inc/fields/{$field['type']}/class-redux-{$field_type}.php";
+									$pro_path = '';
+
+									if ( class_exists( 'Redux_Pro' ) ) {
+										$pro_path = Redux_Pro::$dir . "core/inc/fields/{$field['type']}/class-redux-{$field_type}.php";
+									}
 
 									if ( file_exists( $pro_path ) ) {
 										$filter_path = $pro_path;
@@ -387,7 +391,7 @@ if ( ! class_exists( 'Redux_Output', false ) ) {
 						$return       = $core->required_class->compare_value_dependencies( $parent_value, $check_value, $operation );
 					} elseif ( is_array( $field['required'][0] ) ) {
 						foreach ( $field['required'] as $required ) {
-							if ( ! is_array( $required[0] ) && 3 === count( $required ) ) {
+							if ( isset( $required[0] ) && ! is_array( $required[0] ) && 3 === count( $required ) ) {
 								$parent_value = isset( $GLOBALS[ $core->args['global_variable'] ][ $required[0] ] ) ? $GLOBALS[ $core->args['global_variable'] ][ $required[0] ] : '';
 								$check_value  = $required[2];
 								$operation    = $required[1];
