@@ -17,7 +17,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
-}
+} 
 
 ?>
 <form class="woocommerce-ordering" method="get">
