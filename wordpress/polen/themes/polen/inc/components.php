@@ -3,7 +3,7 @@
 function polen_front_get_banner()
 {
 ?>
-	<section class="top-banner mb-5">
+	<section class="top-banner mb-4">
 		<video class="video video-mobile" autoplay muted loop playsinline poster="<?= TEMPLATE_URI; ?>/assets/img/video_poster1.jpg">
 			<source src="<?= TEMPLATE_URI; ?>/assets/video/home1.m4v" type="video/mp4">
 			<!-- <source src="movie.ogg" type="video/ogg"> -->
@@ -181,7 +181,7 @@ function polen_front_get_artists($items, $title)
 function polen_front_get_tutorial()
 {
 ?>
-	<section class="row tutorial pt-2 mb-5">
+	<section class="row tutorial pt-4 mb-4">
 		<div class="col-md-12">
 			<header class="row mb-4">
 				<div class="col">
@@ -236,7 +236,7 @@ function polen_talent_promo_card($talent)
 {
 ?>
 	<div class="video-promo-card">
-		<div class="card row px-3 py-2">
+		<div class="card row p-2">
 			<div class="col-12 col-md-12 d-flex flex-column justify-content-center align-items-center text-center">
 				<?php polen_get_avatar($talent->avatar); ?>
 				<p class="mt-2">E aí, ficou com vontade de ter um vídeo do <?php echo $talent->nome; ?>?</p>
@@ -305,7 +305,7 @@ function polen_front_get_talent_videos($talent)
 
 	$video_url = home_url() . "/v/";
 ?>
-	<section id="talent-videos" class="row mb-4 banner-scrollable" data-public-url="<?php echo $video_url; ?>">
+	<section id="talent-videos" class="row mb-1 banner-scrollable" data-public-url="<?php echo $video_url; ?>">
 		<div class="d-none d-md-block col-md-12 text-right custom-slick-controls"></div>
 		<div class="col-md-12 p-0">
 			<div class="banner-wrapper">
@@ -597,6 +597,6 @@ function polen_box_related_product_by_product_id( $product_id )
 			polen_banner_scrollable( $args, "Relacionados", $cat_link );
 		?>
 		</div>
-	</div>	
+	</div>
 <?php
 }

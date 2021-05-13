@@ -66,7 +66,7 @@
 								</div>
 							</a>
 							<div class="dropdown-content">
-								<div class="row mb-5 d-md-none">
+								<div class="row mb-4 d-md-none">
 									<div class="col-12">
 										<div class="user-avatar mb-1">
 											<?php
@@ -74,7 +74,7 @@
 												echo get_wp_user_avatar(get_current_user_id());
 											} ?>
 										</div>
-										<?php echo $user_name->display_name; ?>
+										<p class="user-name"><?php echo $user_name->display_name; ?></p>
 									</div>
 									<a class="menu-close"><?php Icon_Class::polen_icon_close(); ?></a>
 								</div>

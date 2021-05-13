@@ -130,7 +130,7 @@ function truncatedItems() {
 	const observer = new ResizeObserver((entries) => {
 		for (let entry of entries) {
 			entry.target.classList[
-				entry.target.scrollHeight > entry.contentRect.height
+				entry.target.scrollHeight > entry.contentRect.height + 1
 					? "add"
 					: "remove"
 			]("truncated");
