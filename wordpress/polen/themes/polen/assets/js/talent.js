@@ -1,9 +1,8 @@
 var modal = document.getElementById("video-modal");
 var video_box = document.getElementById("video-box");
 var share_button = document.querySelectorAll(".share-button");
-var public_url = document
-	.getElementById("talent-videos")
-	.getAttribute("data-public-url");
+var talent_videos = document.getElementById("talent-videos");
+var public_url = talent_videos ? talent_videos.getAttribute("data-public-url") : "";
 
 jQuery(document).ready(function () {
 	jQuery(".banner-content.type-video").slick({
