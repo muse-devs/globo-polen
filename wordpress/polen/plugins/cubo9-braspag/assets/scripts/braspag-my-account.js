@@ -62,6 +62,10 @@
                     },
                     success: function( response ) {
                         polSpinner("hidden");
+                        if(!response) {
+                            polError("Erro ao validar seu cartão. Aguarde alguns instantes e tente novamente");
+                            return;
+                        }
                         try {
                             console.log( response.result );
                             if( response.result === 'success' ) {

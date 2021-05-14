@@ -9,11 +9,27 @@ let video_name = document.getElementById("video-file-name");
 let video_rec_click = document.querySelectorAll(".video-rec");
 let response;
 
+const duracaoMinima = 10; //segundos
+const duracaoMaxima = 65; //segundos
+
+window.URL = window.URL || window.webkitURL;
+let videoDuration;
+
 window.onload = () => {
 	form.onsubmit = function (evt) {
 		if (file_input.files.length == 0) {
-                    evt.preventDefault();
-                    return false;
+			evt.preventDefault();
+			return false;
+		}
+
+		if (!videoIsOk()) {
+			evt.preventDefault();
+			polError(
+				`A duração do video deve ficar entre ${duracaoMinima} e ${
+					duracaoMaxima - 5
+				} segundos.`
+			);
+			return false;
 		}
 		console.log("Iniciando upload");
 
@@ -23,24 +39,26 @@ window.onload = () => {
 		document.querySelector("#video-send").classList.remove("show");
 
 		upload_video.file_size = file_input.files[0].size.toString();
-		jQuery.post(
-			woocommerce_params.ajax_url + "?action=make_video_slot_vimeo",
-			upload_video,
-			(data, textStatus, jqXHR) => {
-				if (jqXHR.status == 200) {
-                                    let file = file_input.files[0];
-                                    let upload = new tus.Upload( file, {
-                                        uploadUrl: data.data.body.upload.upload_link,
-                                        onError: errorHandler,
-                                        onProgress: progressFunction,
-                                        onSuccess: completeHandler,
-                                    });
-                                    upload.start();
-				} else {
-                                    console.log('deu ruim');
-                                }
-			}
-		).fail( errorHandler );
+		jQuery
+			.post(
+				woocommerce_params.ajax_url + "?action=make_video_slot_vimeo",
+				upload_video,
+				(data, textStatus, jqXHR) => {
+					if (jqXHR.status == 200) {
+						let file = file_input.files[0];
+						let upload = new tus.Upload(file, {
+							uploadUrl: data.data.body.upload.upload_link,
+							onError: errorHandler,
+							onProgress: progressFunction,
+							onSuccess: completeHandler,
+						});
+						upload.start();
+					} else {
+						console.log("deu ruim");
+					}
+				}
+			)
+			.fail(errorHandler);
 		evt.preventDefault();
 		return false;
 	};
@@ -53,6 +71,7 @@ window.onload = () => {
 	});
 
 	video_input.addEventListener("change", function (e) {
+		setFileInfo();
 		changeText();
 		document.querySelector("#video-rec").classList.remove("show");
 		document.querySelector("#video-rec-again").classList.add("show");
@@ -60,32 +79,52 @@ window.onload = () => {
 	});
 };
 
-let completeHandler = () => {
-	content_upload.innerHTML = '<p class="my-4"><strong id="progress-value">Enviado</strong></p>';
-	let obj_complete_order = {
-            action: "order_status_completed",
-            order: upload_video.order_id,
+function setFileInfo() {
+	var files = file_input.files;
+	var video = document.createElement("video");
+	video.preload = "metadata";
+
+	video.onloadedmetadata = function () {
+		window.URL.revokeObjectURL(video.src);
+		var duration = video.duration;
+		videoDuration = duration;
+		console.log(videoIsOk() ? "Duração Ok" : "Duração Errada");
 	};
-	jQuery.post(
-            woocommerce_params.ajax_url,
-            obj_complete_order,
-            () => {
-                window.location.href = polenObj.base_url + "/my-account/success-upload/?order_id=" + upload_video.order_id;
-            }
-        )
-        .fail( errorHandler );
+
+	video.src = URL.createObjectURL(files[0]);
+}
+
+function videoIsOk() {
+	return videoDuration > duracaoMinima && videoDuration < duracaoMaxima;
+}
+
+let completeHandler = () => {
+	content_upload.innerHTML =
+		'<p class="my-4"><strong id="progress-value">Enviado</strong></p>';
+	let obj_complete_order = {
+		action: "order_status_completed",
+		order: upload_video.order_id,
+	};
+	jQuery
+		.post(woocommerce_params.ajax_url, obj_complete_order, () => {
+			window.location.href =
+				polenObj.base_url +
+				"/my-account/success-upload/?order_id=" +
+				upload_video.order_id;
+		})
+		.fail(errorHandler);
 };
 let errorHandler = (data, textStatus, jqXHR) => {
-    alert('Erro no envio do arquivo, tente novamente');
-    document.location.reload();
+	alert("Erro no envio do arquivo, tente novamente");
+	document.location.reload();
 };
 
 function progressFunction(loaded, total) {
-    progress_value.innerText = `Enviando vídeo ${Math.floor(
-        (loaded / total) * 100
-    )}%`;
+	progress_value.innerText = `Enviando vídeo ${Math.floor(
+		(loaded / total) * 100
+	)}%`;
 }
 
 function changeText() {
-    document.getElementById("info").innerText = "Vídeo gravado com sucesso";
+	document.getElementById("info").innerText = "Vídeo gravado com sucesso";
 }
