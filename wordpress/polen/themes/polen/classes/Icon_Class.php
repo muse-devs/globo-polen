@@ -37,9 +37,9 @@ class Icon_Class
 		echo '<i class="bi bi-check"></i>';
 	}
 
-	public static function polen_icon_reload()
+	public static function polen_icon_reload($id)
 	{
-		echo '<i class="bi bi-arrow-clockwise"></i>';
+		echo '<i id="' . $id . '" class="bi bi-arrow-clockwise"></i>';
 	}
 
 	public static function polen_icon_share()
