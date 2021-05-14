@@ -1,4 +1,7 @@
 <?php
+/**
+ * @version 3.7.0
+ */
 defined('ABSPATH') || exit;
 
 use \Polen\Includes\{ Polen_Order, Polen_Talent };

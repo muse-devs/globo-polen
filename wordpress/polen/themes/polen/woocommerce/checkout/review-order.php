@@ -1,4 +1,7 @@
 <?php
+/**
+ * @version 5.2.0
+ */
 defined( 'ABSPATH' ) || exit;
 ?>
 <table class="shop_table woocommerce-checkout-review-order-table">
