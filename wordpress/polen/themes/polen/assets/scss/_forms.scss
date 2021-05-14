@@ -244,7 +244,8 @@ textarea {
 				top: 4px;
 				transform: rotate(var(--r, 20deg));
 			}
-			&:checked, &:checked:focus {
+			&:checked,
+			&:checked:focus {
 				--r: 43deg;
 				--b: var(--primary);
 				background-color: var(--primary);
@@ -317,6 +318,12 @@ textarea {
 	}
 }
 
+.reload-sugestions {
+	font-size: 16px;
+}
+
 .spin {
-	animation: .75s linear infinite spinner-border;
+	&::before {
+		animation: 0.75s linear infinite spinner-border;
+	}
 }
