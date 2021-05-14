@@ -1152,7 +1152,6 @@ class Cubo9_Braspag {
         $request['Holder']         = strval( strtoupper( $args['holder'] ) ) . $this->SANDBOX_NAME_SUFIX;
         $request['ExpirationDate'] = strval( $args['validity'] );
         $request['Brand']          = strval( $this->get_card_flag( $args['number'] ) );
-
         $auth = $this->auth();
         $url = $this->URL_CIELO_COMMERCE_API . '1/card/';
 
@@ -1197,6 +1196,11 @@ class Cubo9_Braspag {
                         'result' => 'success',
                         'message' => 'Cartão salvo com sucesso!',
                     );
+                }else{
+                    $return = array(
+                        'result' => 'error',
+                        'message' => 'Ocorreu um erro ao tentar salvar o seu cartão. Tente novamente mais tarde.',
+                    );
                 }
             }
         } else {
@@ -1226,9 +1230,10 @@ class Cubo9_Braspag {
                     $cards[] = array(
                         'id'              => $v->umeta_id,
                         'brand'           => $card_info['brand'],
+                        'prefix'           => $card_info['prefix'],
                         'sufix'           => $card_info['sufix'],
                         'card_label'      => $card_info['card_label'],
-                        'expiration_date' => $card_info['expiration_date'],
+                        'expiration_date' => $card_info['expiration_date']
                     );
                 }
                 return $cards;
