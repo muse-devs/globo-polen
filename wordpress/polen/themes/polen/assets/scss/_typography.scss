@@ -47,6 +47,10 @@ a {
 	font-weight: 400;
 	color: white;
 	text-decoration: underline;
+	&:hover, &:active {
+		color: white;
+		text-decoration: underline;
+	}
 }
 
 .no-underline {

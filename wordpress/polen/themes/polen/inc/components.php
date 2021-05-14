@@ -421,15 +421,12 @@ function polen_get_talent_card($talent)
 ?>
 	<div class="talent-card">
 		<header class="row pb-3 header">
-			<div class="col-3">
-				<div class="avatar" style="background-image: url(<?php echo isset($talent["avatar"]) ? $talent["avatar"] : TEMPLATE_URI . '/assets/img/avatar.png';  ?>)"></div>
-			</div>
-			<div class="col-9 mt-2">
-				<h4 class="name"><?php echo $talent["name"]; ?></h4>
-				<h5 class="cat"><?php echo $talent["career"]; ?></h5>
+			<div class="col-md-12 d-flex align-items-center">
+				<div class="avatar avatar-sm" style="background-image: url(<?php echo isset($talent["avatar"]) ? $talent["avatar"] : TEMPLATE_URI . '/assets/img/avatar.png';  ?>)"></div>
+				<h4 class="name ml-3"><?php echo $talent["name"]; ?></h4>
 			</div>
 		</header>
-		<div class="price-box pt-2">
+		<div class="price-box pt-3">
 			<span class="cat">Você vai pagar</span>
 			<p class="price mt-2"><?php echo $talent["price"]; ?></p>
 			<?php if ($talent["has_details"]) : ?>

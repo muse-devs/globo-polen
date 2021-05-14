@@ -79,7 +79,7 @@ $Talent_Fields = new Polen_Update_Fields();
 			<?php endif; ?>
 		<?php endforeach; ?>
 
-		<div class="row mt-2 py-2 cart-other">
+		<div class="row mt-3 py-2 cart-other">
 			<?php do_action('woocommerce_cart_contents'); ?>
 			<div class="col-12 col-md-12">
 				<div class="row">
@@ -97,20 +97,13 @@ $Talent_Fields = new Polen_Update_Fields();
 						if ($video_to == 'to_myself') {
 							$checked_to_myself = 'checked';
 						}
-
-						printf(
-							'<input type="radio" checked="true" class="%s cart-video-to" id="cart_video_to_%s" data-cart-id="%s" name="video_to" value="other_one" %s > Outra pessoa
-						<input type="radio" class="%s ml-4 cart-video-to" id="cart_video_to_%s" data-cart-id="%s" name="video_to" value="to_myself" %s > Para mim',
-							'polen-cart-item-data',
-							$cart_item_key,
-							$cart_item_key,
-							$checked_other_one,
-							'polen-cart-item-data',
-							$cart_item_key,
-							$cart_item_key,
-							$checked_to_myself
-						);
 						?>
+						<label for="cart_video_to_<?php echo $cart_item_key; ?>_other">
+							<input checked type="radio" class="polen-cart-item-data cart-video-to" id="cart_video_to_<?php echo $cart_item_key; ?>_other" data-cart-id="<?php echo $cart_item_key; ?>" name="video_to" value="other_one" <?php echo $checked_other_one; ?> /><span class="ml-2">Outra pessoa</span>
+						</label>
+						<label for="cart_video_to_<?php echo $cart_item_key; ?>_me">
+							<input type="radio" class="polen-cart-item-data cart-video-to ml-4" id="cart_video_to_<?php echo $cart_item_key; ?>_me" data-cart-id="<?php echo $cart_item_key; ?>" name="video_to" value="to_myself" <?php echo $checked_to_myself; ?> /><span class="ml-2">Para mim</span>
+						</label>
 					</div>
 				</div>
 
@@ -118,6 +111,9 @@ $Talent_Fields = new Polen_Update_Fields();
 					<div class="col-12 col-md-12">
 						<?php
 						$offered_by = isset($cart_item['offered_by']) ? $cart_item['offered_by'] : '';
+						?>
+						<label for="<?php echo 'cart_offered_by_' . $cart_item_key; ?>">Vídeo oferecido por</label>
+						<?php
 						printf(
 							'<input type="text" placeholder="Vídeo oferecido por" class="%s form-control form-control-lg" id="cart_offered_by_%s" data-cart-id="%s" name="offered_by" value="%s" required="required" />',
 							'polen-cart-item-data',
@@ -133,6 +129,9 @@ $Talent_Fields = new Polen_Update_Fields();
 					<div class="col-12 col-md-12">
 						<?php
 						$name_to_video = isset($cart_item['name_to_video']) ? $cart_item['name_to_video'] : '';
+						?>
+						<label for="<?php echo 'cart_name_to_video_' . $cart_item_key; ?>">Para quem é o vídeo?</label>
+						<?php
 						printf(
 							'<input type="text" placeholder="Para quem é o vídeo?" class="%s form-control form-control-lg" id="cart_name_to_video_%s" data-cart-id="%s" name="name_to_video" value="%s" required="required"/>',
 							'polen-cart-item-data',
@@ -174,14 +173,14 @@ $Talent_Fields = new Polen_Update_Fields();
 				<?php } ?>
 
 				<div class="row mt-3">
-					<div class="col-12 col-md-12 mb-4">
+					<div class="col-12 col-md-12 mb-3">
 						<span class="form-title">Qual ocasião do vídeo?</span>
 					</div>
 					<div class="col-md-12">
 						<?php
 						//$email_to_video = isset($cart_item['email_to_video']) ? $cart_item['email_to_video'] : '';
 						printf(
-							'<select class="%s form-control form-control-lg custom-select" id="cart_video_category_%s" data-cart-id="%s" name="video_category" required="required"/>',
+							'<select class="%s form-control form-control-lg custom-select select-ocasion" id="cart_video_category_%s" data-cart-id="%s" name="video_category" required="required"/>',
 							'polen-cart-item-data',
 							$cart_item_key,
 							$cart_item_key
@@ -197,7 +196,7 @@ $Talent_Fields = new Polen_Update_Fields();
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-12 col-md-12 mb-4 mt-3">
+					<div class="col-12 col-md-12 mb-3 mt-3">
 						<span class="form-title">Instruções para o vídeo</span>
 					</div>
 					<div class="col-md-12">
@@ -216,8 +215,8 @@ $Talent_Fields = new Polen_Update_Fields();
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-12">
-						<a href="javascript:void(0)" class="link-alt video-instruction-refresh"><?php Icon_Class::polen_icon_reload(); ?> Outras mensagens</a>
+					<div class="col-12 d-flex align-items-center">
+						<?php Icon_Class::polen_icon_reload("reload"); ?><a href="javascript:void(0)" class="link-alt video-instruction-refresh ml-2">Outras mensagens</a>
 					</div>
 				</div>
 				<div class="row mt-5">
@@ -229,15 +228,20 @@ $Talent_Fields = new Polen_Update_Fields();
 							$checked_allow = 'checked';
 						}
 
-						printf(
-							'<input type="checkbox" name="allow_video_on_page" class="%s form-control form-control-lg" id="cart_allow_video_on_page_%s"
-										data-cart-id="%s" %s> Permitir que o vídeo seja postado no perfil do artista',
-							'polen-cart-item-data',
-							$cart_item_key,
-							$cart_item_key,
-							$checked_allow,
-						);
 						?>
+						<label for="cart_allow_video_on_page_<?php echo $cart_item_key; ?>" class="d-flex">
+							<?php
+							printf(
+								'<input type="checkbox" name="allow_video_on_page" class="%s form-control form-control-lg" id="cart_allow_video_on_page_%s"
+											data-cart-id="%s" %s>',
+								'polen-cart-item-data',
+								$cart_item_key,
+								$cart_item_key,
+								$checked_allow,
+							);
+							?>
+							<span>Permitir que o vídeo seja postado no perfil do artista</span>
+						</label>
 					</div>
 				</div>
 				<div class="row actions">
