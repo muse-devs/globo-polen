@@ -214,12 +214,12 @@ $Talent_Fields = new Polen_Update_Fields();
 						?>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-12 d-flex align-items-center">
+				<div class="row pb-2">
+					<div class="col-12 d-flex align-items-center reload-sugestions">
 						<?php Icon_Class::polen_icon_reload("reload"); ?><a href="javascript:void(0)" class="link-alt video-instruction-refresh ml-2">Outras mensagens</a>
 					</div>
 				</div>
-				<div class="row mt-5">
+				<div class="row mt-4">
 					<div class="col-12 col-md-12">
 						<?php
 						$allow_video_on_page = isset($cart_item['allow_video_on_page']) ? $cart_item['allow_video_on_page'] : 'on';
