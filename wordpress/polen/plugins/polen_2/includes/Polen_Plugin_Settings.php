@@ -276,6 +276,26 @@ class Polen_Plugin_Settings
                 ),
             ),
         ) );
+
+        // Prazo para expirar pedidos
+        \Redux::set_section( $opt_name, array(
+            'title'            => esc_html__( 'Cancelamento', 'polen' ),
+            'id'               => 'order_void',
+            'icon'             => 'el el-credit-card',
+            'subsection'       => false,
+            'fields'           => array(
+                array(
+                    'id'       => 'order_expires',
+                    'type'     => 'spinner',
+                    'title'    => esc_html__('Validade do pedido', 'polen'),
+                    'subtitle' => esc_html__('Informe o prazo de validade de um pedido em dias.', 'polen'),
+                    'desc'     => esc_html__('Utilize essa opção para que os pedidos possam expirar automaticamente e ter o valor estornado.', 'polen'),
+                    'default'  => '7',
+                    'min'      => '0',
+                    'max'      => '30',
+                ),
+            )
+        ) );
     }
 
     public function save( $args ) {

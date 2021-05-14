@@ -63,6 +63,8 @@ class Polen_WooCommerce
             add_filter( 'bulk_actions-edit-shop_order', array( $this, 'dropdown_bulk_actions_shop_order' ), 20, 1 );
             add_filter( 'woocommerce_email_actions', array( $this, 'email_actions' ), 20, 1 );
             add_action( 'woocommerce_checkout_create_order', array( $this, 'order_meta' ), 12, 2 );
+            add_action( 'add_meta_boxes', array( $this, 'add_metaboxes' ) );
+            add_action( 'admin_head', array( $this, 'remove_metaboxes' ) );
 
             add_action( 'init', function( $array ) {
                 foreach ( $this->order_statuses as $order_status => $values ) 
@@ -120,6 +122,87 @@ class Polen_WooCommerce
         {
             $order->update_meta_data( '_polen_customer_email', $billing_email );
             $order->update_meta_data( '_billing_email', $billing_email );
+        }
+    }
+
+    public function remove_metaboxes() 
+    {
+        global $current_screen;
+        if( $current_screen && ! is_null( $current_screen ) && isset( $current_screen->id ) && $current_screen->id == 'shop_order' && isset( $_REQUEST['action'] ) && $_REQUEST['action'] == 'edit' ) 
+        {
+            remove_meta_box( 'woocommerce-order-items', 'shop_order', 'normal', 'high' );
+        }
+
+        remove_meta_box( 'postcustom', 'shop_order', 'normal', 'high' );
+        remove_meta_box( 'woocommerce-order-downloads', 'shop_order', 'normal', 'high' );
+        remove_meta_box( 'pageparentdiv', 'shop_order', 'side', 'high' );
+    }
+
+    public function add_metaboxes() {
+        global $current_screen;
+        if( $current_screen && ! is_null( $current_screen ) && isset( $current_screen->id ) && $current_screen->id == 'shop_order' && isset( $_REQUEST['action'] ) && $_REQUEST['action'] == 'edit' ) 
+        {
+            add_meta_box( 'Polen_Order_Details', 'Instruções', array( $this, 'metabox_order_details' ), 'shop_order', 'normal', 'low' );
+        }
+    }
+
+    public function metabox_order_details() {
+        global $post;
+        $order_id = $post->ID;
+        if( file_exists( TEMPLATEPATH . '/woocommerce/admin/metaboxes/metabox-order-details.php' ) ) {
+            require_once TEMPLATEPATH . '/woocommerce/admin/metaboxes/metabox-order-details.php';
+        } else {
+            require_once PLUGIN_POLEN_DIR . '/admin/partials/metaboxes/metabox-order-details.php';
+        }
+    }
+
+    public function get_order_items( $order_id ) 
+    {
+        global $wpdb;
+
+        $sql_items = "SELECT `order_item_id`, `order_item_name` FROM `" . $wpdb->base_prefix . "woocommerce_order_items` WHERE `order_id`=" . $order_id . " AND `order_item_type`='line_item'";
+        $res_items = $wpdb->get_results( $sql_items );
+
+        if( $res_items && ! is_null( $res_items ) && ! is_wp_error( $res_items ) && is_array( $res_items ) && ! empty( $res_items ) ) 
+        {
+            $items = array();
+
+            $meta_labels = array(
+                'offered_by'            => 'Oferecido por', 
+                'video_to'              => 'Vídeo para', 
+                'name_to_video'         => 'Quem vai receber?', 
+                'email_to_video'        => 'E-mail',
+                'video_category'        => 'Ocasião', 
+                'instructions_to_video' => 'Instruções do vídeo', 
+                'allow_video_on_page'   => 'Permite que o vídeo apareça na página do talento?',
+            );
+
+            foreach( $res_items as $k => $item ) 
+            {
+                $sql = "SELECT `meta_key`, `meta_value` FROM `" . $wpdb->base_prefix . "woocommerce_order_itemmeta` WHERE `order_item_id`=" . $item->order_item_id . " AND `meta_key` IN ( 'offered_by', 'video_to', 'name_to_video', 'email_to_video', 'video_category', 'instructions_to_video', 'allow_video_on_page' )";
+                $res = $wpdb->get_results( $sql );
+                
+                $args = array(
+                    'id'   => $item->order_item_id,
+                    'Talento' => $item->order_item_name,
+                );
+
+                if( $res && ! is_null( $res ) && ! is_wp_error( $res ) && is_array( $res ) && ! empty( $res ) ) 
+                {
+                    foreach( $res as $l => $meta ) {
+                        $meta_key   = $meta->meta_key;
+                        $meta_value = $meta->meta_value;
+                        if( $meta_key == 'allow_video_on_page' ) {
+                            $meta_value = ( $meta->meta_value == 'on' ) ? 'Sim' : 'Não';
+                        }
+                        $args[ $meta_labels[ $meta_key ] ] = $meta_value;
+                    }
+                }
+
+                $items[] = $args;
+            }
+
+            return $items;
         }
     }
 }
