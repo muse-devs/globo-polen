@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * @version 5.2.0
+ */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }

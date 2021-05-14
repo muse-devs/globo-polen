@@ -54,9 +54,9 @@ $bg_image = wp_get_attachment_image_src($Talent_Fields->cover_image_id, "large")
 	<?php polen_front_get_talent_videos($Talent_Fields); ?>
 
 	<!-- Tags -->
-	<div class="row pb-4">
+	<div class="row">
 		<div class="col-md-12">
-			<h1 class="talent-name text-truncate mb-3" title="<?= get_the_title(); ?>"><?= get_the_title(); ?></h1>
+			<h1 class="talent-name text-truncate mb-1" title="<?= get_the_title(); ?>"><?= get_the_title(); ?></h1>
 			<div class="row">
 				<div class="col-md-12">
 					<?php if (count($terms) > 0) : ?>
@@ -69,7 +69,7 @@ $bg_image = wp_get_attachment_image_src($Talent_Fields->cover_image_id, "large")
 		</div>
 	</div>
 
-	<div class="row my-3 pb-2 talent-page-footer">
+	<div class="row mt-3 mb-1 talent-page-footer">
 		<div class="col-12 col-md-6 m-md-auto">
 			<?php echo woocommerce_template_single_add_to_cart(); ?>
 			<!--button class="btn btn-primary btn-lg btn-block btn-get-video">Pedir vídeo R$ 200</button-->
@@ -95,7 +95,7 @@ $bg_image = wp_get_attachment_image_src($Talent_Fields->cover_image_id, "large")
 							$sum_rate_reviews = intval( get_post_meta( $post->ID, "sum_rate", true ) );
 							$avg_rate = $total_review > 0 ? ( $sum_rate_reviews / $total_review ) : 0 ;
 							?>
-							<span class="skill-value"><?php echo number_format( $avg_rate, 1 ); ?></span>
+							<a href="./reviews" class="skill-value no-underline"><?php echo number_format( $avg_rate, 1 ); ?></a>
 						</div>
 					</div>
 				</div>

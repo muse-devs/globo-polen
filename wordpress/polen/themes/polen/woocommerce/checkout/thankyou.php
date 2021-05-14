@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * @version 3.7.0
+ */
 defined('ABSPATH') || exit;
 
 function get_icon($bool)
