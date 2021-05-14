@@ -110,7 +110,9 @@ if ( ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins',
 
 
     function addPaymentInfoMetabox() {
-        add_meta_box( 'PaymentInfoMetabox', 'Dados de Pagamento', 'paymentInfoMetabox', 'shop_order', 'normal', 'low' );
+        if( isset( $_REQUEST['action'] ) && $_REQUEST['action'] == 'edit' ) {
+            add_meta_box( 'PaymentInfoMetabox', 'Dados do Pagamento', 'paymentInfoMetabox', 'shop_order', 'normal', 'low' );
+        }
     }
     add_action( 'add_meta_boxes', 'addPaymentInfoMetabox' );
 

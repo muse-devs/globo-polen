@@ -25,10 +25,10 @@ function _polen_get_first_category_object( $ids ) {
  * @param \WP_Product $talent_object
  * @return type
  */
-function _polen_get_info_talent_by_product_id( \WC_Product $talent_object ) {
+function _polen_get_info_talent_by_product_id( \WC_Product $talent_object, $size = 'polen-thumb-md' ) {
         $talent = [];
         $talent['ID'] = $talent_object->get_id();
-        $talent['image'] = $talent_object->get_image();
+        $talent['image'] = $talent_object->get_image( $size );
         $talent['talent_url'] = $talent_object->get_permalink();
         $talent['price'] = $talent_object->get_price();
         $talent['price_formatted'] = $talent_object->get_price_html();
@@ -43,9 +43,9 @@ function _polen_get_info_talent_by_product_id( \WC_Product $talent_object ) {
 
 
 /**
- * Usando a funcao _get_info_talent_by_product_id dentro de um loop para 
+ * Usando a funcao _get_info_talent_by_product_id dentro de um loop para
  * retornar varios talentos no formato dos cards
- * 
+ *
  * @param array $args
  * @return type
  */
@@ -81,7 +81,7 @@ function polen_get_new_talents(int $quantity = 4)
 
 /**
  * Pegar dados e formatar para o cord de categorias
- * 
+ *
  * @param \WP_Term $category_object
  * @return type
  */
@@ -91,7 +91,7 @@ function _polen_get_category_info( \WP_Term $category_object )
     $category[ 'ID' ] = $category_object->term_id;
     $category[ 'title' ] = $category_object->name;
     $category[ 'url' ] = polen_get_url_category_by_term_id( $category[ 'ID' ] );
-    
+
     $thumbnail_id = get_term_meta( $category_object->term_id, 'thumbnail_id', true );
     $category[ 'image' ] = wp_get_attachment_url( $thumbnail_id );
 
@@ -114,7 +114,7 @@ function polen_get_categories_home(int $quantity = 4)
         'order' => 'count',
         'exclude' => '15',
     ];
-    
+
     $categories_object = get_terms( $args );
     $categories = [];
     foreach ( $categories_object as $category_object ) {
@@ -146,7 +146,7 @@ function polen_get_talents( int $quantity = 10 )
 /**
  * Retorna a URL do arquivo JSON das occasions para a tela do brief do videos
  * antes da compara pelo costumer.
- * 
+ *
  * @return string
  */
 function polen_get_occasions_json()
