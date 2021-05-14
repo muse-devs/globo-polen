@@ -1,5 +1,12 @@
 (function($) {
     $(document).ready(function() {
+        if( $("input#braspag_creditcardValidity").length > 0 ){
+            $("input#braspag_creditcardValidity").inputmask({
+                mask: ['99 / 9999'],
+                keepStatic: true
+            });
+        }
+
         $(document).on( 'click', '.braspag-make-default-payment', function(e) {
             e.preventDefault();
             let myChild = $(this).children();

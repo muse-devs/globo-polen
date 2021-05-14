@@ -4,7 +4,9 @@ $brands = $WC_Cubo9_Braspag_Helper->active_credit_card_brands;
 global $woocommerce, $WC_Cubo9_BraspagReduxSettings;
 $amount = $woocommerce->cart->total;
 if( is_user_logged_in() ) {
-    $braspag_card_saved_data = get_user_meta( get_current_user_id(), 'braspag_card_saved_data', true );
+    //$braspag_card_saved_data = get_user_meta( get_current_user_id(), 'braspag_card_saved_data', true );
+    $c9_braspag = new Cubo9_Braspag( false, false );
+    $braspag_card_saved_data = $c9_braspag->list_user_cards( get_current_user_id() );
 } else {
     $braspag_card_saved_data = false;
 }
@@ -48,7 +50,8 @@ if( is_user_logged_in() ) {
         <div class="col col-12" style="padding-bottom: 15px;">
             <select class="form-control form-control-lg custom-select" name="brasapag_creditcard_saved" id="brasapag_creditcard_saved">
                 <?php
-                foreach( $braspag_card_saved_data as $prefix => $data ) {
+                //foreach( $braspag_card_saved_data as $prefix => $data ) {
+                foreach( $braspag_card_saved_data as $data ) {    
                 ?>
                 	<option value="<?php echo $data['prefix'] . md5( time() . $amount . $data['prefix'] ); ?>"><?php echo $data['brand']; ?> <?php echo __( 'final', 'cubo9' ); ?> <?php echo $data['sufix']; ?></option>
                 <?php } ?>
