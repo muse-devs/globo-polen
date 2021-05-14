@@ -41,7 +41,7 @@ if (isset($_REQUEST['order_id']) && !empty($_REQUEST['order_id'])) {
                 <div class="col-12">
                     <form id="form-video-upload" method="post" enctype="multipart/form-data">
                         <div class="form-group text-center">
-                            <button data-toggle="modal" data-target="#OrderActions" class="btn btn-primary btn-lg btn-block show">Gravar vídeo</button>
+                            <button id="video-rec" data-toggle="modal" data-target="#OrderActions" class="btn btn-primary btn-lg btn-block show">Gravar vídeo</button>
                             <div id="video-file-name" class="text-truncate ml-2"></div>
                             <input type="file" class="form-control-file" id="file-video" name="file_data" accept="video/*" capture="user">
                         </div>
@@ -95,7 +95,7 @@ if (isset($_REQUEST['order_id']) && !empty($_REQUEST['order_id'])) {
                             </div>
                             <div class="row mt-4">
                                 <div class="col">
-                                    <button id="video-rec" class="btn btn-primary btn-lg btn-block video-rec show" data-dismiss="modal" aria-label="Fechar">Gravar vídeo</button>
+                                    <button class="btn btn-primary btn-lg btn-block video-rec show" data-dismiss="modal" aria-label="Fechar">Gravar vídeo</button>
                                 </div>
                             </div>
                         </div>
