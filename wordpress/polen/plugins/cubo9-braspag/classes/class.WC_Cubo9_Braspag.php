@@ -171,6 +171,7 @@ class WC_Cubo9_Braspag extends WC_Payment_Gateway {
         }
         
         if( is_account_page() || ( defined('DOING_AJAX') && DOING_AJAX ) ) {
+            wp_enqueue_script( 'inputmask', PLUGIN_CUBO9_BRASPAG_URL . 'assets/vendor/jquery.inputmask.min.js', array('jquery'), '', true );
             wp_enqueue_script( 'braspag-my-account', PLUGIN_CUBO9_BRASPAG_URL . 'assets/scripts/braspag-my-account.js', array('jquery'), '', true );
             wp_localize_script( 'braspag-my-account', 'braspag', array(
                 // payment-options
