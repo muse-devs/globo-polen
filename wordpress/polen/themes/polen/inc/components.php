@@ -58,7 +58,7 @@ function polen_front_get_card($item, $size = "small")
 <?php
 }
 
-function polen_banner_scrollable( $items, $title, $link )
+function polen_banner_scrollable($items, $title, $link)
 {
 	if (!$items) {
 		return;
@@ -364,13 +364,14 @@ function polen_front_get_talent_videos($talent)
  * @param Polen_Video_Info $video
  * @return html
  */
-function polen_get_video_player($talent, $video)
+function polen_get_video_player($talent, $video, $user_id)
 {
 	if (!$talent || !$video) {
 		return;
-	}
+	} var_dump($user_id);
 	wp_enqueue_script('vimeo');
 	$video_url = home_url() . "/v/" . $video->hash;
+	$isRated = \Polen\Includes\Polen_Order_Review::review_alredy_exist($user_id, $video->order_id);
 ?>
 	<div class="row">
 		<div class="col-12 col-md-12">
@@ -402,7 +403,9 @@ function polen_get_video_player($talent, $video)
 					</header>
 					<div class="row mt-4 share">
 						<div class="col-12">
-							<input type="text" id="share-input" class="share-input" />
+							<?php if (!$isRated) : ?>
+								<input type="text" id="share-input" class="share-input" />
+							<?php endif; ?>
 							<a href="/my-account/create-review/<?= $video->order_id; ?>" class="btn btn-primary btn-lg btn-block">Avaliar vídeo</a>
 							<?php /* <a href="javascript:copyToClipboard('<?php echo $video_url; ?>')" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_copy(); ?>Copiar link</a> */ ?>
 							<?php polen_get_talent_video_buttons($talent, $video_url); ?>
@@ -508,7 +511,7 @@ function polen_box_image_message($image, $text)
  * @param int nota
  * @return HTML
  */
-function polen_get_stars( $quant )
+function polen_get_stars($quant)
 {
 	for ($i = 1; $i <= 5; $i++) {
 		Icon_Class::polen_icon_star($i <= $quant);
@@ -583,16 +586,16 @@ function polen_create_review($order_id)
  * @param int $product_id
  * @return HTML
  */
-function polen_box_related_product_by_product_id( $product_id )
+function polen_box_related_product_by_product_id($product_id)
 {
 ?>
 	<div class="row">
 		<div class="col-12 col-md-12">
-		<?php
-			$args = polen_get_array_related_products( $product_id );
-			$cat_link = polen_get_url_category_by_product_id( $product_id );
-			polen_banner_scrollable( $args, "Relacionados", $cat_link );
-		?>
+			<?php
+			$args = polen_get_array_related_products($product_id);
+			$cat_link = polen_get_url_category_by_product_id($product_id);
+			polen_banner_scrollable($args, "Relacionados", $cat_link);
+			?>
 		</div>
 	</div>
 <?php
