@@ -368,7 +368,7 @@ function polen_get_video_player($talent, $video, $user_id)
 {
 	if (!$talent || !$video) {
 		return;
-	} var_dump($user_id);
+	}
 	wp_enqueue_script('vimeo');
 	$video_url = home_url() . "/v/" . $video->hash;
 	$isRated = \Polen\Includes\Polen_Order_Review::review_alredy_exist($user_id, $video->order_id);
@@ -403,10 +403,10 @@ function polen_get_video_player($talent, $video, $user_id)
 					</header>
 					<div class="row mt-4 share">
 						<div class="col-12">
-							<?php if (!$isRated) : ?>
-								<input type="text" id="share-input" class="share-input" />
+							<input type="text" id="share-input" class="share-input" />
+							<?php if ($user_id !== 0 && !$isRated) : ?>
+								<a href="/my-account/create-review/<?= $video->order_id; ?>" class="btn btn-primary btn-lg btn-block">Avaliar vídeo</a>
 							<?php endif; ?>
-							<a href="/my-account/create-review/<?= $video->order_id; ?>" class="btn btn-primary btn-lg btn-block">Avaliar vídeo</a>
 							<?php /* <a href="javascript:copyToClipboard('<?php echo $video_url; ?>')" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_copy(); ?>Copiar link</a> */ ?>
 							<?php polen_get_talent_video_buttons($talent, $video_url); ?>
 							<?php polen_get_talent_socials($talent); ?>
@@ -607,7 +607,8 @@ function polen_box_related_product_by_product_id($product_id)
  * @param WP_Post $post
  * @param stdClass Polen_Update_Fields
  */
-function polen_card_talent_reviews_order( \WP_Post $post, $Talent_Fields ) {
+function polen_card_talent_reviews_order(\WP_Post $post, $Talent_Fields)
+{
 ?>
 	<div class="col-md-12">
 		<div class="row">
@@ -617,12 +618,12 @@ function polen_card_talent_reviews_order( \WP_Post $post, $Talent_Fields ) {
 						<span class="skill-title">Responde em</span>
 					</div>
 					<div class="col-6 col-md-6 text-center text-md-center">
-					<?php
-					$total_reviews = get_post_meta( $post->ID, "total_review", true );
-					if( empty( $total_reviews ) ) {
-						$total_reviews = "0";
-					}
-					?>
+						<?php
+						$total_reviews = get_post_meta($post->ID, "total_review", true);
+						if (empty($total_reviews)) {
+							$total_reviews = "0";
+						}
+						?>
 						<span class="skill-title">Avaliações (<?php echo  $total_reviews; ?>)</span>
 					</div>
 					<div class="col-6 col-md-6 text-center text-md-center mt-2">
@@ -632,11 +633,11 @@ function polen_card_talent_reviews_order( \WP_Post $post, $Talent_Fields ) {
 					<div class="col-6 col-md-6 text-center text-md-center mt-2">
 						<?php Icon_Class::polen_icon_star(true); ?>
 						<?php
-						$total_review = intval( get_post_meta( $post->ID, "total_review", true ) );
-						$sum_rate_reviews = intval( get_post_meta( $post->ID, "sum_rate", true ) );
-						$avg_rate = $total_review > 0 ? ( $sum_rate_reviews / $total_review ) : 0 ;
+						$total_review = intval(get_post_meta($post->ID, "total_review", true));
+						$sum_rate_reviews = intval(get_post_meta($post->ID, "sum_rate", true));
+						$avg_rate = $total_review > 0 ? ($sum_rate_reviews / $total_review) : 0;
 						?>
-						<a href="<?= polen_get_url_review_page(); ?>" class="skill-value no-underline"><?php echo number_format( $avg_rate, 1 ); ?></a>
+						<a href="<?= polen_get_url_review_page(); ?>" class="skill-value no-underline"><?php echo number_format($avg_rate, 1); ?></a>
 					</div>
 				</div>
 			</div>
