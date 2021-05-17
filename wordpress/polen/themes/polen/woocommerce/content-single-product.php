@@ -74,33 +74,8 @@ $bg_image = wp_get_attachment_image_src($Talent_Fields->cover_image_id, "large")
 			<?php echo woocommerce_template_single_add_to_cart(); ?>
 			<!--button class="btn btn-primary btn-lg btn-block btn-get-video">Pedir vídeo R$ 200</button-->
 		</div>
-		<div class="col-md-12">
-			<div class="row">
-				<div class="col-12 col-md-6 m-md-auto">
-					<div class="row">
-						<div class="col-6 col-md-6 text-center text-md-center">
-							<span class="skill-title">Responde em</span>
-						</div>
-						<div class="col-6 col-md-6 text-center text-md-center">
-							<span class="skill-title">Avaliações (<?php echo get_post_meta( $post->ID, "total_review", true ); ?>)</span>
-						</div>
-						<div class="col-6 col-md-6 text-center text-md-center mt-2">
-							<?php Icon_Class::polen_icon_clock(); ?>
-							<span class="skill-value"><?= $Talent_Fields->tempo_resposta; ?>h</span>
-						</div>
-						<div class="col-6 col-md-6 text-center text-md-center mt-2">
-							<?php Icon_Class::polen_icon_star(true); ?>
-							<?php
-							$total_review = intval( get_post_meta( $post->ID, "total_review", true ) );
-							$sum_rate_reviews = intval( get_post_meta( $post->ID, "sum_rate", true ) );
-							$avg_rate = $total_review > 0 ? ( $sum_rate_reviews / $total_review ) : 0 ;
-							?>
-							<a href="./reviews" class="skill-value no-underline"><?php echo number_format( $avg_rate, 1 ); ?></a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+		<!-- Card dos Reviews -->
+		<?php polen_card_talent_reviews_order( $post, $Talent_Fields ); ?>
 	</div>
 
 	<!-- Como funciona? -->

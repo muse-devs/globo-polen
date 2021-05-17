@@ -100,6 +100,7 @@ class Polen_Update_Fields
 
         $args = array();
         $args['user_id'] = $user_id;
+        $email = $_POST['store_email'];
 
         // Categorias do Talento
         if( isset( $_POST['talent_category'] ) && !empty(  $_POST['talent_category'] ) ){
