@@ -77,11 +77,19 @@ function polen_get_url_my_account()
 	return get_permalink( get_option('woocommerce_myaccount_page_id') );
 }
 
+
+/**
+ * Pegar a URL da categoria pela CategoriaID
+ */
 function polen_get_url_category_by_term_id( $term_id )
 {
 	return get_term_link( $term_id, 'product_cat' );
 }
 
+
+/**
+ * Pegar a URL da categoria pelo ProductID
+ */
 function polen_get_url_category_by_product_id ( $product_id )
 {
 	$cat_terms = wp_get_object_terms( $product_id, 'product_cat' );
@@ -91,4 +99,9 @@ function polen_get_url_category_by_product_id ( $product_id )
         $cat_link = get_term_link($cat->term_id);
     }
 	return $cat_link;
+}
+
+function polen_get_url_review_page()
+{
+	return './reviews/';
 }
