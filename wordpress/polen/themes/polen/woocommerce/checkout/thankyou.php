@@ -140,14 +140,14 @@ if( isset( $flow_1[ $order_status ] ) ) {
 
 <div class="row my-4">
 	<div class="col-12">
-		<div class="order-flow d-flex">
+		<div class="order-flow-old d-flex">
 			<div class="col-flow-icons mr-3">
-				<?php 
-				$i=1; 
-				foreach( $flows as $slug => $status ) { 
-					if( $status['subclass'] == 'flow-2' ) { 
+				<?php
+				$i=1;
+				foreach( $flows as $slug => $status ) {
+					if( $status['subclass'] == 'flow-2' ) {
 						$class = '';
-					}elseif( $status['subclass'] == 'flow-3' ) { 
+					}elseif( $status['subclass'] == 'flow-3' ) {
 						$class = '';
 					} else {
 						$class = ' justify-content-start ';
@@ -162,11 +162,11 @@ if( isset( $flow_1[ $order_status ] ) ) {
 				<?php $i++; } ?>
 			</div>
 			<div class="col-flow-texts">
-				<?php 
-				foreach( $flows as $slug => $status ) { 
-					if( $status['subclass'] == 'flow-2' ) { 
+				<?php
+				foreach( $flows as $slug => $status ) {
+					if( $status['subclass'] == 'flow-2' ) {
 						$class = ' d-flex flex-column justify-content-center ';
-					}elseif( $status['subclass'] == 'flow-3' ) { 
+					}elseif( $status['subclass'] == 'flow-3' ) {
 						$class = ' mt-4 ';
 					} else {
 						$class = '';
