@@ -124,6 +124,10 @@ select.form-control:not([size]):not([multiple]) {
 	list-style: none outside;
 	width: auto;
 	word-wrap: break-word;
+	a {
+		font-size: 12px;
+		font-weight: normal;
+	}
 }
 
 .woocommerce-notices-wrapper {
@@ -167,4 +171,23 @@ select.form-control:not([size]):not([multiple]) {
 	background-color: transparent;
 	border: 1px solid;
 	border-radius: 6px;
+}
+
+#add_payment_method #payment div.payment_box,
+.woocommerce-cart #payment div.payment_box,
+.woocommerce-checkout #payment div.payment_box {
+	color: var(--light);
+}
+
+.blockUI.blockOverlay {
+	background-color: $dark-50 !important;
+	&::before {
+		width: 2rem !important;
+		height: 2rem !important;
+		border: .2em solid var(--primary) !important;
+		border-left-color: var(--light) !important;
+		border-radius: 50%;
+		background: none !important;
+		animation: .75s linear infinite spinner-border !important;
+	}
 }
