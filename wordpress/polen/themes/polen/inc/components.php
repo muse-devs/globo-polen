@@ -650,14 +650,12 @@ function polen_card_talent_reviews_order(\WP_Post $post, $Talent_Fields)
 <?php
 }
 
-function polen_get_order_flow($array_status)
+function polen_get_order_flow_layout($array_status)
 {
 	//status: complete, in-progress, pending, fail
-	$array_status = array(
-		array("status" => "complete", "title" => "Pedido feito com sucesso", "description" => "Seu número de pedido é 12345564"),
-		array("status" => "in-progress", "title" => "Aguardando confirmação do talento", "description" => "Caso seu pedido não seja aprovado pelo talento o seu dinheiro será devolvido imediatamente."),
-		array("status" => "pending", "title" => "Pedido feito com sucesso", "description" => "Seu número de pedido é 12345564"),
-	);
+	//title: string
+	//description: string
+
 	if (empty($array_status) || !$array_status) {
 		return;
 	}
@@ -670,13 +668,10 @@ function polen_get_order_flow($array_status)
 	}
 ?>
 	<div class="row">
-		<div class="col-md-12 mb-5">
-			<h1>Acompanhar pedido</h1>
-		</div>
 		<div class="col-md-12">
 			<ul class="order-flow<?php echo $class; ?>">
 				<?php foreach ($array_status as $key => $value) : ?>
-					<li class="item <?php echo $value['status']; ?>">
+					<li class="item <?php echo "item" . $key; ?> <?php echo $value['status']; ?>">
 						<span class="status">
 							<?php Icon_Class::polen_icon_check_o(); ?>
 							<?php Icon_Class::polen_icon_exclamation_o(); ?>
