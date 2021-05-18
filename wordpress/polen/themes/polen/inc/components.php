@@ -58,7 +58,7 @@ function polen_front_get_card($item, $size = "small")
 <?php
 }
 
-function polen_banner_scrollable( $items, $title, $link )
+function polen_banner_scrollable($items, $title, $link)
 {
 	if (!$items) {
 		return;
@@ -86,27 +86,31 @@ function polen_banner_scrollable( $items, $title, $link )
 <?php
 }
 
-function polen_front_get_news($items)
+function polen_front_get_news($items, $title, $link)
 {
 	if (!$items) {
 		return;
 	}
 ?>
-	<section class="row pt-2 mb-5 news">
+	<section class="row mb-2 banner-scrollable">
 		<div class="col-md-12">
 			<header class="row mb-3">
 				<div class="col-12 d-flex justify-content-between align-items-center">
-					<h2 class="mr-2">Destaque</h2>
-					<a href="#">Ver todos <?php Icon_Class::polen_icon_chevron_right(); ?></a>
+					<h2 class="mr-2"><?php echo $title; ?></h2>
+					<a href="<?php echo $link; ?>">Ver todos <?php Icon_Class::polen_icon_chevron_right(); ?></a>
 				</div>
 			</header>
 		</div>
 		<div class="col-md-12">
-			<div class="slick-alt">
-				<div class="slick-padding">
-					<?php foreach ($items as $item) : ?>
-						<?php polen_front_get_card($item, "responsive"); ?>
-					<?php endforeach; ?>
+			<div class="row card-list">
+				<div class="col-md-12 p-0 p-md-0">
+					<div class="banner-wrapper">
+						<div class="banner-content">
+							<?php foreach ($items as $item) : ?>
+								<?php polen_front_get_card($item, "responsive"); ?>
+							<?php endforeach; ?>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -364,13 +368,14 @@ function polen_front_get_talent_videos($talent)
  * @param Polen_Video_Info $video
  * @return html
  */
-function polen_get_video_player($talent, $video)
+function polen_get_video_player($talent, $video, $user_id)
 {
 	if (!$talent || !$video) {
 		return;
 	}
 	wp_enqueue_script('vimeo');
 	$video_url = home_url() . "/v/" . $video->hash;
+	$isRated = \Polen\Includes\Polen_Order_Review::review_alredy_exist($user_id, $video->order_id);
 ?>
 	<div class="row">
 		<div class="col-12 col-md-12">
@@ -403,7 +408,9 @@ function polen_get_video_player($talent, $video)
 					<div class="row mt-4 share">
 						<div class="col-12">
 							<input type="text" id="share-input" class="share-input" />
-							<a href="/my-account/create-review/<?= $video->order_id; ?>" class="btn btn-primary btn-lg btn-block">Avaliar vídeo</a>
+							<?php if ($user_id !== 0 && !$isRated) : ?>
+								<a href="/my-account/create-review/<?= $video->order_id; ?>" class="btn btn-primary btn-lg btn-block">Avaliar vídeo</a>
+							<?php endif; ?>
 							<?php /* <a href="javascript:copyToClipboard('<?php echo $video_url; ?>')" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_copy(); ?>Copiar link</a> */ ?>
 							<?php polen_get_talent_video_buttons($talent, $video_url); ?>
 							<?php polen_get_talent_socials($talent); ?>
@@ -508,7 +515,7 @@ function polen_box_image_message($image, $text)
  * @param int nota
  * @return HTML
  */
-function polen_get_stars( $quant )
+function polen_get_stars($quant)
 {
 	for ($i = 1; $i <= 5; $i++) {
 		Icon_Class::polen_icon_star($i <= $quant);
@@ -583,16 +590,16 @@ function polen_create_review($order_id)
  * @param int $product_id
  * @return HTML
  */
-function polen_box_related_product_by_product_id( $product_id )
+function polen_box_related_product_by_product_id($product_id)
 {
 ?>
 	<div class="row">
 		<div class="col-12 col-md-12">
-		<?php
-			$args = polen_get_array_related_products( $product_id );
-			$cat_link = polen_get_url_category_by_product_id( $product_id );
-			polen_banner_scrollable( $args, "Relacionados", $cat_link );
-		?>
+			<?php
+			$args = polen_get_array_related_products($product_id);
+			$cat_link = polen_get_url_category_by_product_id($product_id);
+			polen_banner_scrollable($args, "Relacionados", $cat_link);
+			?>
 		</div>
 	</div>
 <?php
@@ -604,7 +611,8 @@ function polen_box_related_product_by_product_id( $product_id )
  * @param WP_Post $post
  * @param stdClass Polen_Update_Fields
  */
-function polen_card_talent_reviews_order( \WP_Post $post, $Talent_Fields ) {
+function polen_card_talent_reviews_order(\WP_Post $post, $Talent_Fields)
+{
 ?>
 	<div class="col-md-12">
 		<div class="row">
@@ -614,12 +622,12 @@ function polen_card_talent_reviews_order( \WP_Post $post, $Talent_Fields ) {
 						<span class="skill-title">Responde em</span>
 					</div>
 					<div class="col-6 col-md-6 text-center text-md-center">
-					<?php
-					$total_reviews = get_post_meta( $post->ID, "total_review", true );
-					if( empty( $total_reviews ) ) {
-						$total_reviews = "0";
-					}
-					?>
+						<?php
+						$total_reviews = get_post_meta($post->ID, "total_review", true);
+						if (empty($total_reviews)) {
+							$total_reviews = "0";
+						}
+						?>
 						<span class="skill-title">Avaliações (<?php echo  $total_reviews; ?>)</span>
 					</div>
 					<div class="col-6 col-md-6 text-center text-md-center mt-2">
@@ -629,14 +637,58 @@ function polen_card_talent_reviews_order( \WP_Post $post, $Talent_Fields ) {
 					<div class="col-6 col-md-6 text-center text-md-center mt-2">
 						<?php Icon_Class::polen_icon_star(true); ?>
 						<?php
-						$total_review = intval( get_post_meta( $post->ID, "total_review", true ) );
-						$sum_rate_reviews = intval( get_post_meta( $post->ID, "sum_rate", true ) );
-						$avg_rate = $total_review > 0 ? ( $sum_rate_reviews / $total_review ) : 0 ;
+						$total_review = intval(get_post_meta($post->ID, "total_review", true));
+						$sum_rate_reviews = intval(get_post_meta($post->ID, "sum_rate", true));
+						$avg_rate = $total_review > 0 ? ($sum_rate_reviews / $total_review) : 0;
 						?>
-						<a href="<?= polen_get_url_review_page(); ?>" class="skill-value no-underline"><?php echo number_format( $avg_rate, 1 ); ?></a>
+						<a href="<?= polen_get_url_review_page(); ?>" class="skill-value no-underline"><?php echo number_format($avg_rate, 1); ?></a>
 					</div>
 				</div>
 			</div>
+		</div>
+	</div>
+<?php
+}
+
+function polen_get_order_flow_layout($array_status)
+{
+	//status: complete, in-progress, pending, fail
+	//title: string
+	//description: string
+
+	if (empty($array_status) || !$array_status) {
+		return;
+	}
+
+	$class = "";
+	$new_array = Order_Class::clearArray($array_status);
+
+	if($new_array[0]['status'] === "fail") {
+		$class = " none";
+	}
+	if ($new_array[1]['status'] === "complete" && $new_array[2]['status'] !== "fail") {
+		$class = " half";
+	}
+	if ($new_array[2]['status'] === "complete") {
+		$class = " complete";
+	}
+?>
+	<div class="row">
+		<div class="col-md-12">
+			<ul class="order-flow<?php echo $class; ?>">
+				<?php foreach ($array_status as $key => $value) : ?>
+					<li class="item <?php echo "item" . $key; ?> <?php echo $value['status']; ?>">
+						<span class="status">
+							<?php Icon_Class::polen_icon_check_o(); ?>
+							<?php Icon_Class::polen_icon_exclamation_o(); ?>
+						</span>
+						<span class="text">
+							<h4 class="title"><?php echo $value['title']; ?></h4>
+							<p class="description"><?php echo $value['description']; ?></p>
+						</span>
+					</li>
+				<?php endforeach; ?>
+			</ul>
 		</div>
 	</div>
 <?php

@@ -41,7 +41,7 @@ $Talent_Fields = new Polen_Update_Fields();
 	</div>
 </div> -->
 <div class="row">
-	<div class="col-12 col-md-6 order-md-2 mt-md-2">
+	<div class="col-12 col-md-6 order-md-2 mt-md-2 mb-3">
 		<?php
 		foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
 			$product_id = apply_filters('woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key);

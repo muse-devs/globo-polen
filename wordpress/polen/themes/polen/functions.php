@@ -233,3 +233,8 @@ require_once TEMPLATE_DIR . '/inc/collection-front.php';
  * Arquivo responsavel por retornos HTML e icones
  */
 require_once TEMPLATE_DIR . '/classes/Icon_Class.php';
+
+/**
+ * Arquivo responsavel por retornos da tela de acompanhamento de pedidos
+ */
+require_once TEMPLATE_DIR . '/classes/Order_Class.php';

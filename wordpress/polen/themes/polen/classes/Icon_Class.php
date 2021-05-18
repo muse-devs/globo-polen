@@ -24,7 +24,7 @@ class Icon_Class
 
 	public static function polen_icon_check_o()
 	{
-		echo '<i class="bi bi-check-circle" style="color: var(--success)"></i>';
+		echo '<i class="bi bi-check-circle"></i>';
 	}
 
 	public static function polen_icon_exclamation_o()
