@@ -266,7 +266,7 @@ function polen_get_talent_socials($talent)
 <?php
 }
 
-function polen_get_talent_video_buttons($talent, $video_url)
+function polen_get_talent_video_buttons($talent, $video_url, $video_download)
 {
 	$wa_url = "https://wa.me/?text=";
 	$wa_message = htmlentities(urlencode("Veja que legal: "));
@@ -348,7 +348,7 @@ function polen_front_get_talent_videos($talent)
 				</header>
 				<div class="row mt-4 share">
 					<div class="col-12">
-						<input type="text" id="share-input" class="share-input" />
+						<!-- <input type="text" id="share-input" class="share-input" /> -->
 						<?php /* <a id="copy-video" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_copy(); ?>Copiar link</a> */ ?>
 						<?php //polen_get_talent_video_buttons($talent, null);
 						?>
@@ -407,12 +407,12 @@ function polen_get_video_player($talent, $video, $user_id)
 					</header>
 					<div class="row mt-4 share">
 						<div class="col-12">
-							<input type="text" id="share-input" class="share-input" />
+							<!-- <input type="text" id="share-input" class="share-input" /> -->
 							<?php if ($user_id !== 0 && !$isRated) : ?>
 								<a href="/my-account/create-review/<?= $video->order_id; ?>" class="btn btn-primary btn-lg btn-block">Avaliar vídeo</a>
 							<?php endif; ?>
 							<?php /* <a href="javascript:copyToClipboard('<?php echo $video_url; ?>')" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_copy(); ?>Copiar link</a> */ ?>
-							<?php polen_get_talent_video_buttons($talent, $video_url); ?>
+							<?php polen_get_talent_video_buttons($talent, $video_url, $video->vimeo_url_download); ?>
 							<?php polen_get_talent_socials($talent); ?>
 						</div>
 					</div>
