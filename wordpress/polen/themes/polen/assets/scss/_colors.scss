@@ -9,7 +9,7 @@ $error-box-color: #fdebeb;
 $body-bg: #000;
 $body-color: $light-100;
 $primary: #d7198b;
-$primary-hover: #FBA729;
+$primary-hover: lighten($primary, 10%);
 $secondary: #377dff;
 $accept: #3cc13b;
 $teal: #ebf9eb;
@@ -32,6 +32,7 @@ $input-font-color: $light-100;
 $theme-colors: (
 	"primary": $primary,
 	"primary-hover": $primary-hover,
+	"gradient": #FBA729,
 	"secondary": $secondary,
 	"success": $accept,
 	"teal": $teal,
