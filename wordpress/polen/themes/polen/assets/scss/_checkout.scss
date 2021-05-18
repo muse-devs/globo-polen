@@ -92,9 +92,14 @@
 		background: linear-gradient(
 			180deg,
 			var(--primary) 0%,
-			var(--primary-hover) 100%
+			var(--gradient) 100%
 		);
 		z-index: 2;
+	}
+	&.none {
+		&::after {
+			height: 0;
+		}
 	}
 	&.half {
 		&::after {
@@ -107,7 +112,7 @@
 			background: linear-gradient(
 				180deg,
 				var(--primary) 80%,
-				var(--primary-hover) 100%
+				var(--gradient) 100%
 			);
 		}
 	}

@@ -70,7 +70,7 @@ class Order_Class
 				'_next-step_1' => array(
 					'title' => 'Aguardando confirmação do talento',
 					'description' => 'Caso seu pedido não seja aprovado pelo talento o seu dinheiro será devolvido imediatamente.',
-					'status' => 'in-progress',
+					'status' => $flow_1[$order_status]['status'] === "fail" ? 'pending' : 'in-progress',
 				),
 				'_next-step_2' => array(
 					'title' => 'Aguardando gravação do vídeo',
