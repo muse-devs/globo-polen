@@ -207,7 +207,7 @@ jQuery(document).ready(function () {
 				},
 			});
 		} else {
-			$(".signin-response").html("Favor digite um e-mail válido");
+			$(".signin-response").html("Por favor, digite um e-mail válido");
 		}
 	});
 })(jQuery);
