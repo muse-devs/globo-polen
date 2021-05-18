@@ -65,20 +65,24 @@ class Polen_Signin_Newsletter
         $email = trim( $_POST['email'] );
 
         if ( ! wp_verify_nonce( $nonce, 'news-signin' ) ) {
-            echo wp_json_encode( array( 'success' => 0, 'response' => 'Não foi possível completar a solicitação' ) );
-            die;
+            wp_send_json_error( array( 'response' => 'Não foi possível completar a solicitação' ), 403 );
+            wp_die();
         }
     
         if( isset( $email ) && !empty( $email ) ){
             $newsletter = $this->set_email_to_newsletter( $email );
-
             if( !empty( $newsletter ) ){
-                echo wp_json_encode( array( 'success' => 1, 'response' => $newsletter ) );
-                die;
+                if( $newsletter == "Cadastrado com sucesso!") {
+                    wp_send_json_success( array( 'response' => $newsletter ), 201 );
+                    wp_die();
+                } else {
+                    wp_send_json_error( array( 'response' => $newsletter ), 403 );
+                    wp_die();
+                }
             }
         }else{
-            echo wp_json_encode( array( 'success' => 0, 'response' => 'Não foi possível completar a solicitação' ) );
-            die;
+            wp_send_json_error( array( 'response' => 'Não foi possível completar a solicitação' ), 403 );
+            wp_die();
         }
     }
 
