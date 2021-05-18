@@ -3,8 +3,13 @@ var video_box = document.getElementById("video-box");
 var share_button = document.querySelectorAll(".share-button");
 var talent_videos = document.getElementById("talent-videos");
 var public_url = talent_videos ? talent_videos.getAttribute("data-public-url") : "";
+let get_your_video_banner = document.getElementsByClassName("btn btn-outline-light btn-lg")[0];
 
 jQuery(document).ready(function () {
+	get_your_video_banner.addEventListener('click', evt => {
+		evt.preventDefault();
+		jQuery('.single_add_to_cart_button')[0].click();
+	});
 	jQuery(".banner-content.type-video").slick({
 		arrows: true,
 		appendArrows: jQuery(".custom-slick-controls"),

@@ -242,7 +242,7 @@ function polen_talent_promo_card($talent)
 	<div class="video-promo-card">
 		<div class="card row p-2">
 			<div class="col-12 col-md-12 d-flex flex-column justify-content-center align-items-center text-center">
-				<?php polen_get_avatar($talent->avatar); ?>
+				<?php  polen_get_avatar( get_avatar_url( $talent->user_id ) ); ?>
 				<p class="mt-2">E aí, ficou com vontade de ter um vídeo do <?php echo $talent->nome; ?>?</p>
 				<a href="#pedirvideo" class="btn btn-outline-light btn-lg">Peça o seu vídeo</a>
 			</div>
@@ -338,7 +338,7 @@ function polen_front_get_talent_videos($talent)
 			<div class="content mt-4 mx-3">
 				<header class="row content-header">
 					<div class="col-3">
-						<?php echo polen_get_avatar($talent->avatar);  ?>
+						<?php echo polen_get_avatar( get_avatar_url( $talent->user_id ) );  ?>
 					</div>
 					<div class="col-9">
 						<h4 class="name"><?php echo $talent->nome; ?></h4>
@@ -397,7 +397,7 @@ function polen_get_video_player($talent, $video, $user_id)
 				<div class="content col-md-6 mt-4 mx-3 mx-md-0">
 					<header class="row content-header">
 						<div class="col-3">
-							<?php echo polen_get_avatar($talent->avatar);  ?>
+							<?php echo polen_get_avatar( get_avatar_url( $talent->user_id ) );  ?>
 						</div>
 						<div class="col-9">
 							<h4 class="name"><?php echo $talent->nome; ?></h4>
