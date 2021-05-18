@@ -86,27 +86,31 @@ function polen_banner_scrollable($items, $title, $link)
 <?php
 }
 
-function polen_front_get_news($items)
+function polen_front_get_news($items, $title, $link)
 {
 	if (!$items) {
 		return;
 	}
 ?>
-	<section class="row pt-2 mb-5 news">
+	<section class="row mb-2 banner-scrollable">
 		<div class="col-md-12">
 			<header class="row mb-3">
 				<div class="col-12 d-flex justify-content-between align-items-center">
-					<h2 class="mr-2">Destaque</h2>
-					<a href="#">Ver todos <?php Icon_Class::polen_icon_chevron_right(); ?></a>
+					<h2 class="mr-2"><?php echo $title; ?></h2>
+					<a href="<?php echo $link; ?>">Ver todos <?php Icon_Class::polen_icon_chevron_right(); ?></a>
 				</div>
 			</header>
 		</div>
 		<div class="col-md-12">
-			<div class="slick-alt">
-				<div class="slick-padding">
-					<?php foreach ($items as $item) : ?>
-						<?php polen_front_get_card($item, "responsive"); ?>
-					<?php endforeach; ?>
+			<div class="row card-list">
+				<div class="col-md-12 p-0 p-md-0">
+					<div class="banner-wrapper">
+						<div class="banner-content">
+							<?php foreach ($items as $item) : ?>
+								<?php polen_front_get_card($item, "responsive"); ?>
+							<?php endforeach; ?>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -641,6 +645,44 @@ function polen_card_talent_reviews_order(\WP_Post $post, $Talent_Fields)
 					</div>
 				</div>
 			</div>
+		</div>
+	</div>
+<?php
+}
+
+function polen_get_order_flow_layout($array_status)
+{
+	//status: complete, in-progress, pending, fail
+	//title: string
+	//description: string
+
+	if (empty($array_status) || !$array_status) {
+		return;
+	}
+	$class = "";
+	if ($array_status[1]['status'] === "complete" && $array_status[2]['status'] !== "fail") {
+		$class = " half";
+	}
+	if ($array_status[2]['status'] === "complete") {
+		$class = " complete";
+	}
+?>
+	<div class="row">
+		<div class="col-md-12">
+			<ul class="order-flow<?php echo $class; ?>">
+				<?php foreach ($array_status as $key => $value) : ?>
+					<li class="item <?php echo "item" . $key; ?> <?php echo $value['status']; ?>">
+						<span class="status">
+							<?php Icon_Class::polen_icon_check_o(); ?>
+							<?php Icon_Class::polen_icon_exclamation_o(); ?>
+						</span>
+						<span class="text">
+							<h4 class="title"><?php echo $value['title']; ?></h4>
+							<p class="description"><?php echo $value['description']; ?></p>
+						</span>
+					</li>
+				<?php endforeach; ?>
+			</ul>
 		</div>
 	</div>
 <?php
