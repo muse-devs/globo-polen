@@ -659,11 +659,14 @@ function polen_get_order_flow_layout($array_status)
 	if (empty($array_status) || !$array_status) {
 		return;
 	}
+
 	$class = "";
-	if ($array_status[1]['status'] === "complete" && $array_status[2]['status'] !== "fail") {
+	$new_array = Order_Class::clearArray($array_status);
+
+	if ($new_array[1]['status'] === "complete" && $new_array[2]['status'] !== "fail") {
 		$class = " half";
 	}
-	if ($array_status[2]['status'] === "complete") {
+	if ($new_array[2]['status'] === "complete") {
 		$class = " complete";
 	}
 ?>
