@@ -149,4 +149,60 @@ class Polen_Vimeo_Response
     {
         return $this->response['body']['embed']['html'];
     }
+
+
+    /**
+     * Pegar o array com todas as qualidades possiveis para download
+     */
+    public function get_download_array()
+    {
+        return $this->response['body']['download'];
+    }
+
+
+    /**
+     * Pega do response o array da qualidade Source
+     */
+    public function get_download_source()
+    {
+        $download_array = $this->get_download_array();
+        foreach( $download_array as $download ) {
+            if( $download['quality'] == 'source' ) {
+                return $download;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Pega a URL para download do qualidade Source
+     */
+    public function get_download_source_url()
+    {
+        $download_source = $this->get_download_source();
+        if( !empty( $download_source ) ) {
+            return $download_source['link'];
+        }
+        return null;
+    }
+
+    /**
+     * Pegar o array com a melhor qualidade possivel
+     */
+    public function get_download_best_quality()
+    {
+        $download_array = $this->get_download_array();
+        return $download_array[ count( $download_array ) - 1 ];
+    }
+
+
+    /**
+     * Pegar a URL com a melhor qualidade possivel
+     */
+    public function get_download_best_quality_url()
+    {
+        $download_array = $this->get_download_array();
+        $best_quality_array = $download_array[ count( $download_array ) - 1 ];
+        return $best_quality_array[ 'link' ];
+    }
 }
