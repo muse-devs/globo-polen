@@ -291,6 +291,12 @@ function polen_video_icons($user_id, $iniciais)
 <?php
 }
 
+
+/**
+ * Criar a lista de videos já feitos
+ * @param stdClass Polen_Talent_Fields
+ * @return HTML
+ */
 function polen_front_get_talent_videos($talent)
 {
 	$items = array();
@@ -346,7 +352,7 @@ function polen_front_get_talent_videos($talent)
  * @param int $user_id
  * @return html
  */
-function polen_get_video_player($talent, $video, $user_id)
+function polen_get_video_player( $talent, $video, $user_id )
 {
 	if (!$talent || !$video) {
 		return;
@@ -625,6 +631,9 @@ function polen_card_talent_reviews_order(\WP_Post $post, $Talent_Fields)
 <?php
 }
 
+/**
+ * 
+ */
 function polen_get_order_flow_layout($array_status)
 {
 	//status: complete, in-progress, pending, fail
