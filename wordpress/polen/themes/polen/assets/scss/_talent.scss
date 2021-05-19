@@ -104,17 +104,33 @@
 
 .video-modal {
 	position: fixed;
+	padding: 15px;
 	display: none;
 	top: 0;
 	left: 50%;
 	transform: translate(-50%, 0);
 	width: 100vw;
 	height: 100vh;
+	box-sizing: border-box;
+	background-color: rgba($color: #000000, $alpha: 1);
 	overflow: auto;
-	background-color: rgba($color: #000000, $alpha: 0.5);
 	z-index: 99;
 	&.show {
 		display: block;
+	}
+	.close-button {
+		position: absolute;
+		padding: 0;
+		width: 24px;
+		height: 24px;
+		top: 25px;
+		right: 25px;
+		font-size: 1em;
+		color: $light-100;
+		border: none;
+		border-radius: 50%;
+		background-color: $light-25;
+		z-index: 100;
 	}
 }
 
@@ -146,19 +162,6 @@
 		i {
 			margin-right: 10px;
 		}
-	}
-	.close-button {
-		position: absolute;
-		padding: 0;
-		width: 24px;
-		height: 24px;
-		top: 12px;
-		right: 12px;
-		font-size: 1em;
-		color: $light-100;
-		border: none;
-		border-radius: 50%;
-		background-color: $light-25;
 	}
 }
 
