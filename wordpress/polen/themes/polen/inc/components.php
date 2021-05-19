@@ -242,7 +242,7 @@ function polen_talent_promo_card($talent)
 	<div class="video-promo-card">
 		<div class="card row p-2">
 			<div class="col-12 col-md-12 d-flex flex-column justify-content-center align-items-center text-center">
-				<?php  polen_get_avatar( get_avatar_url( $talent->user_id ) ); ?>
+				<?php polen_get_avatar(get_avatar_url($talent->user_id)); ?>
 				<p class="mt-2">E aí, ficou com vontade de ter um vídeo do <?php echo $talent->nome; ?>?</p>
 				<a href="#pedirvideo" class="btn btn-outline-light btn-lg">Peça o seu vídeo</a>
 			</div>
@@ -273,8 +273,8 @@ function polen_get_talent_video_buttons($talent, $video_url, $video_download)
 	$wa_link = $video_url;
 ?>
 	<a href="<?php echo $wa_url . $wa_message . $wa_link; ?>" class="btn btn-outline-light btn-lg btn-block share-link" target="_blank"><?php Icon_Class::polen_icon_social('whatsapp'); ?>Whatsapp</a>
-	<?php if( !empty( $video_download ) ) : ?>
-		<a href="<?php echo $video_download; ?>" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_social('download'); ?>Download</a>
+	<?php if (!empty($video_download)) : ?>
+		<a href="<?php echo $video_download; ?>" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_download(); ?>Download</a>
 	<?php endif; ?>
 <?php
 }
@@ -306,9 +306,6 @@ function polen_front_get_talent_videos($talent)
 			'initials' => strtoupper(substr($cart_item->get_name_to_video(), 0, 2)),
 		];
 	}
-	if (sizeof($items) < 1) {
-		return;
-	}
 
 	$video_url = home_url() . "/v/";
 ?>
@@ -316,12 +313,12 @@ function polen_front_get_talent_videos($talent)
 		<div class="d-none d-md-block col-md-12 text-right custom-slick-controls"></div>
 		<div class="col-md-12 p-0">
 			<div class="banner-wrapper">
-				<div class="banner-content type-video">
+				<div class="banner-content type-video<?php if (sizeof($items) < 1) echo " ml-3" ?>">
 					<?php foreach ($items as $item) : ?>
 						<div class="polen-card-video">
 							<figure class="video-cover">
 								<img loading="lazy" src="<?= $item['image']; ?>" alt="<?= $item['title']; ?>" data-url="<?= $item['video']; ?>">
-								<a href="javascript:openVideoByURL('<?= $item['video']; ?>')" class="video-player-button"></a>
+								<a href="javascript:openVideoByHash('<?= $item['hash']; ?>')" class="video-player-button"></a>
 								<?php polen_video_icons($talent->user_id, $item['initials']); ?>
 							</figure>
 						</div>
@@ -333,33 +330,10 @@ function polen_front_get_talent_videos($talent)
 	</section>
 
 	<div id="video-modal" class="video-modal">
-		<div class="video-card">
-			<header>
-				<button id="close-button" class="close-button" onclick="hideModal()"><?php Icon_Class::polen_icon_close(); ?></button>
-				<div id="video-box"></div>
-			</header>
-			<div class="content mt-4 mx-3">
-				<header class="row content-header">
-					<div class="col-3">
-						<?php echo polen_get_avatar( get_avatar_url( $talent->user_id ) );  ?>
-					</div>
-					<div class="col-9">
-						<h4 class="name"><?php echo $talent->nome; ?></h4>
-						<h5 class="cat"><?php echo $talent->profissao; ?></h5>
-						<a href="<?php echo $video_url; ?>" id="video-url" class="url"><?php echo $video_url; ?></a>
-					</div>
-				</header>
-				<div class="row mt-4 share">
-					<div class="col-12">
-						<!-- <input type="text" id="share-input" class="share-input" /> -->
-						<?php /* <a id="copy-video" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_copy(); ?>Copiar link</a> */ ?>
-						<?php //polen_get_talent_video_buttons($talent, null);
-						?>
-						<?php polen_get_talent_socials($talent); ?>
-					</div>
-				</div>
-			</div>
-		</div>
+		<header>
+			<button id="close-button" class="close-button" onclick="hideModal()"><?php Icon_Class::polen_icon_close(); ?></button>
+		</header>
+		<div id="video-box"></div>
 	</div>
 <?php
 }
@@ -379,7 +353,7 @@ function polen_get_video_player($talent, $video, $user_id)
 	}
 	wp_enqueue_script('vimeo');
 	$video_url = home_url() . "/v/" . $video->hash;
-	$isRateble = \Polen\Includes\Polen_Order_Review::can_make_review( $user_id, $video->order_id );
+	$isRateble = \Polen\Includes\Polen_Order_Review::can_make_review($user_id, $video->order_id);
 ?>
 	<div class="row">
 		<div class="col-12 col-md-12">
@@ -401,7 +375,7 @@ function polen_get_video_player($talent, $video, $user_id)
 				<div class="content col-md-6 mt-4 mx-3 mx-md-0">
 					<header class="row content-header">
 						<div class="col-3">
-							<?php echo polen_get_avatar( get_avatar_url( $talent->user_id ) );  ?>
+							<?php echo polen_get_avatar(get_avatar_url($talent->user_id));  ?>
 						</div>
 						<div class="col-9">
 							<h4 class="name"><?php echo $talent->nome; ?></h4>
@@ -412,7 +386,7 @@ function polen_get_video_player($talent, $video, $user_id)
 					<div class="row mt-4 share">
 						<div class="col-12">
 							<!-- <input type="text" id="share-input" class="share-input" /> -->
-							<?php if ( $user_id !== 0 && $isRateble ) : ?>
+							<?php if ($user_id !== 0 && $isRateble) : ?>
 								<a href="/my-account/create-review/<?= $video->order_id; ?>" class="btn btn-primary btn-lg btn-block">Avaliar vídeo</a>
 							<?php endif; ?>
 							<?php /* <a href="javascript:copyToClipboard('<?php echo $video_url; ?>')" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_copy(); ?>Copiar link</a> */ ?>
@@ -667,7 +641,7 @@ function polen_get_order_flow_layout($array_status)
 	$class = "";
 	$new_array = Order_Class::clearArray($array_status);
 
-	if($new_array[0]['status'] === "fail") {
+	if ($new_array[0]['status'] === "fail") {
 		$class = " none";
 	}
 	if ($new_array[1]['status'] === "complete" && $new_array[2]['status'] !== "fail") {
@@ -701,7 +675,7 @@ function polen_get_order_flow_layout($array_status)
 
 function polen_player_video_modal_ajax_invalid_hash()
 {
-	?>
-		<h4>Conteúdo indisponível</h4>
-	<?php
+?>
+	<h4>Conteúdo indisponível</h4>
+<?php
 }

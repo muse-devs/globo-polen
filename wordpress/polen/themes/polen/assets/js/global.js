@@ -60,8 +60,9 @@ function polSpinner(action, el) {
 				</div>
 			</div>
 		`;
-		if (el) {
-			container = document.querySelector(el);
+
+		container = document.querySelector(el);
+		if (container) {
 			fog.classList.add("inner");
 		} else {
 			container = document.body;

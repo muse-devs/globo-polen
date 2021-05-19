@@ -48,7 +48,7 @@ jQuery(document).ready(function () {
 
 	var id = getVideoId();
 	if (id) {
-		openVideoById(id);
+		openVideoByHash(id);
 	}
 
 	if (share_button.length > 0) {
@@ -134,6 +134,15 @@ function openVideoByURL(url) {
 		changeVideoCardUrl(id);
 		// handleCopyVideoUrl(id);
 	});
+}
+
+function openVideoByHash(hash) {
+	video_box.innerHTML = "";
+	polSpinner(null, "#video-box");
+	const url = `${woocommerce_params.ajax_url}?action=draw-player-modal&hash=${hash}`;
+	showModal();
+	changeHash(hash);
+	jQuery(video_box).load(url);
 }
 
 function openVideoById(id) {
