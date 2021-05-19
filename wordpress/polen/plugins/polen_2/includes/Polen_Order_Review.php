@@ -178,7 +178,7 @@ class Polen_Order_Review
      */
     protected function validate_unique_comment()
     {
-        if( self::review_alredy_exist( $this->user_id, $this->comment_post_ID ) ) {
+        if( self::review_alredy_exist( $this->user_id, $this->_order ) ) {
             throw new \Exception( 'Esse comentário já existe', 403 );
         }
     }
@@ -191,7 +191,7 @@ class Polen_Order_Review
     protected function validate_same_user_by_order()
     {
         $order = $this->_order;
-        if( $this->user_id !== $order->get_user_id() ) {
+        if( !self::user_order_same_user_id( $this->user_id, $order ) ) {
             throw new \Exception( 'O usuário do pedido não é o mesmo', 403 );
         }
     }
@@ -203,8 +203,7 @@ class Polen_Order_Review
      */
     protected function validate_order_is_complete()
     {
-        $order = $this->_order;
-        if( $order->get_status() !== Polen_Order::SLUG_ORDER_COMPLETE ) {
+        if( !self::verify_order_is_complete( $this->_order ) ) {
             throw new \Exception( 'O pedido não está completo, não pode criar review antes do talento enviar o video', 403 );
         }
     }
@@ -328,6 +327,9 @@ class Polen_Order_Review
 
     /**
      * Verifica se o usuário já fez um review para o pedido
+     * @param int $user_id
+     * @param WC_Order
+     * @return bool
      */
     static public function review_alredy_exist( $user_id, \WC_Order $order )
     {
