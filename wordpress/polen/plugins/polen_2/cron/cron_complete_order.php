@@ -28,6 +28,7 @@ foreach ( $videos as $video ) {
             //TODO colocar esse '300x435' em um lugar, tirar o hardcode
             $video->vimeo_thumbnail = $response->get_image_url_custom_size( '300x435' );
             $video->duration = $response->get_duration();
+            $video->vimeo_url_download = $response->get_download_best_quality_url();
             $video->update();
             echo "Achei: {$video->vimeo_id} \n";
         }

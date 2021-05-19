@@ -195,15 +195,14 @@ jQuery(document).ready(function () {
 					email: email.val(),
 				},
 				success: function (response) {
-					let obj = $.parseJSON(response);
-					polMessage("Cadastro Efetuado", obj["response"]);
+					polMessage("Cadastro Efetuado", response.data.response);
 					email.val("");
 				},
 				complete: function () {
 					polSpinner(CONSTANTS.HIDDEN);
 				},
 				error: function (jqXHR, textStatus, errorThrown) {
-					polError(`${textStatus}: ${errorThrown}`);
+					polError(`Erro: ${jqXHR.responseJSON.data.response}`);
 				},
 			});
 		} else {
