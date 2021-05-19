@@ -54,7 +54,7 @@ window.onload = () => {
 						});
 						upload.start();
 					} else {
-						console.log("deu ruim");
+						console.log("deu error");
 					}
 				}
 			)

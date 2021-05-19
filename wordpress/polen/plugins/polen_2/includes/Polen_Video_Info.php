@@ -250,7 +250,7 @@ class Polen_Video_Info extends Polen_DB
      * Cria um objeto apartir de um array, geralmente vindo do BD
      * ou seja transforma um resultado de DB para um Objecto
      * 
-     * @param array $data
+     * @param stdClass $data
      * @return Polen_Video_Info
      */
     static public function create_instance_one( $data, $valid = true )
