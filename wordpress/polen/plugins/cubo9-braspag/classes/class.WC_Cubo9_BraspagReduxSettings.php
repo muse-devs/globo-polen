@@ -445,6 +445,14 @@ class WC_Cubo9_BraspagReduxSettings {
                 'subsection'       => false,
                 'fields'           => array(
                     array(
+                        'id'       => 'pass_card_rates',
+                        'type'     => 'switch',
+                        'title'    => esc_html__( 'Taxas do cartão pagas pela loja', 'cubo9' ),
+                        'subtitle' => esc_html__( 'Habilite esta opção caso as taxas do Cartão sejam responsabilidade da loja.', 'cubo9' ),
+                        'desc'     => esc_html__( 'Habilite esta opção caso as taxas do Cartão por transação sejam descontadas da loja.', 'cubo9' ),
+                        'default'  => 1,
+                    ),
+                    array(
                         'id'       => 'card_brand',
                         'type'     => 'credit_card_installments',
                         'title'    => esc_html__('Cartão', 'cubo9'),
