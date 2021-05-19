@@ -17,13 +17,38 @@ if (!polenObj.developer) {
 }
 
 function copyToClipboard(text) {
-	var copyText = document.getElementById("share-input");
+	var copyText = document.createElement("input");
+	copyText.id = "share-input";
+	copyText.style = "position: fixed; top: 500vh";
+	document.body.appendChild(copyText);
 	copyText.value = text;
 	copyText.select();
 	copyText.setSelectionRange(0, 99999); /* For mobile devices */
 
 	document.execCommand("copy");
-	alert("Link copiado para Área de transferência");
+	document.body.removeChild(copyText);
+	polMessage("Sucesso", "Link copiado para Área de transferência");
+}
+
+function shareVideo(title, url) {
+	var shareData = {
+		title: title,
+		url: url,
+	};
+	if (navigator.share) {
+		try {
+			navigator
+				.share(shareData)
+				.then(() => {
+					polMessage("Sucesso!", "Link compartilhado com sucesso");
+				})
+				.catch(console.error);
+		} catch (err) {
+			polError("Error: " + err);
+		}
+	} else {
+		copyToClipboard(shareData.url);
+	}
 }
 
 function changeHash(hash) {

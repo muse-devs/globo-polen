@@ -272,7 +272,7 @@ function polen_get_talent_video_buttons($talent, $video_url, $video_download)
 	$wa_message = htmlentities(urlencode("Veja que legal: "));
 	$wa_link = $video_url;
 ?>
-	<a href="<?php echo $wa_url . $wa_message . $wa_link; ?>" class="btn btn-outline-light btn-lg btn-block share-link" target="_blank"><?php Icon_Class::polen_icon_social('whatsapp'); ?>Whatsapp</a>
+	<button onclick="shareVideo('Assista esse vídeo de <?php echo $talent->nome; ?>', '<?php echo $video_url; ?>')" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_share(); ?>Compartilhar</button>
 	<?php if (!empty($video_download)) : ?>
 		<a href="<?php echo $video_download; ?>" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_download(); ?>Download</a>
 	<?php endif; ?>
@@ -385,13 +385,10 @@ function polen_get_video_player($talent, $video, $user_id)
 					</header>
 					<div class="row mt-4 share">
 						<div class="col-12">
-							<!-- <input type="text" id="share-input" class="share-input" /> -->
 							<?php if ($user_id !== 0 && $isRateble) : ?>
 								<a href="/my-account/create-review/<?= $video->order_id; ?>" class="btn btn-primary btn-lg btn-block">Avaliar vídeo</a>
 							<?php endif; ?>
-							<?php /* <a href="javascript:copyToClipboard('<?php echo $video_url; ?>')" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_copy(); ?>Copiar link</a> */ ?>
 							<?php polen_get_talent_video_buttons($talent, $video_url, $video->vimeo_url_download); ?>
-							<?php polen_get_talent_socials($talent); ?>
 						</div>
 					</div>
 				</div>
