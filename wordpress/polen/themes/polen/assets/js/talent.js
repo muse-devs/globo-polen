@@ -122,7 +122,6 @@ function handleCopyVideoUrl(id) {
 }
 
 function openVideoByURL(url) {
-	console.log(url);
 	addVideo();
 	showModal();
 	var videoPlayer = new Vimeo.Player("polen-video", {

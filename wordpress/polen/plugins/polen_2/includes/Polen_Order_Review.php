@@ -329,8 +329,61 @@ class Polen_Order_Review
     /**
      * Verifica se o usuário já fez um review para o pedido
      */
-    static public function review_alredy_exist( $user_id, $order_id )
+    static public function review_alredy_exist( $user_id, \WC_Order $order )
     {
+        $order_id = $order->get_id();
         return !empty( self::get_comment_by_user_id_order_id( $user_id, $order_id ) );
+    }
+
+
+    /**
+     * Varifica se o fã é o mesmo que fez a order
+     * @param int $user_id
+     * @param WC_Order
+     * @return bool
+     */
+    static public function user_order_same_user_id( $user_id, $order )
+    {
+        $order_id = $order->get_id();
+        if( empty( $user_id ) || empty( $order_id ) ) {
+            return false;
+        }
+
+        if( $order->get_user_id() == $user_id ) {
+            return true;
+        }
+        return false;
+    }
+
+
+    /**
+     * Valida se a order está completa para poder criar um review
+     * @param WC_Order
+     * @return bool
+     */
+    static public function verify_order_is_complete( \WC_Order $order )
+    {
+        if( $order->get_status() === Polen_Order::SLUG_ORDER_COMPLETE ) {
+            return true;
+        }
+        return false;
+    }
+
+
+    /**
+     * Verifica se o usuário pode fazer uma review
+     * @param int $user_id
+     * @param int $order_id
+     * @return bool
+     */
+    static public function can_make_review( $user_id, $order_id )
+    {
+        $order = wc_get_order( $order_id );
+        if( !self::review_alredy_exist( $user_id, $order ) &&
+            self::user_order_same_user_id( $user_id, $order ) &&
+            self::verify_order_is_complete( $order ) ) {
+            return true;
+        }
+        return false;
     }
 }

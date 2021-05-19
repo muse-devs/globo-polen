@@ -273,6 +273,9 @@ function polen_get_talent_video_buttons($talent, $video_url, $video_download)
 	$wa_link = $video_url;
 ?>
 	<a href="<?php echo $wa_url . $wa_message . $wa_link; ?>" class="btn btn-outline-light btn-lg btn-block share-link" target="_blank"><?php Icon_Class::polen_icon_social('whatsapp'); ?>Whatsapp</a>
+	<?php if( !empty( $video_download ) ) : ?>
+		<a href="<?php echo $video_download; ?>" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_social('download'); ?>Download</a>
+	<?php endif; ?>
 <?php
 }
 
@@ -364,7 +367,7 @@ function polen_front_get_talent_videos($talent)
 
 /**
  * Cria a tela para assitir video
- * @param WP_User $talent
+ * @param stdClass $talent Polen_Update_Fields
  * @param Polen_Video_Info $video
  * @return html
  */
@@ -375,7 +378,7 @@ function polen_get_video_player($talent, $video, $user_id)
 	}
 	wp_enqueue_script('vimeo');
 	$video_url = home_url() . "/v/" . $video->hash;
-	$isRated = \Polen\Includes\Polen_Order_Review::review_alredy_exist($user_id, $video->order_id);
+	$isRateble = \Polen\Includes\Polen_Order_Review::can_make_review( $user_id, $video->order_id );
 ?>
 	<div class="row">
 		<div class="col-12 col-md-12">
@@ -408,7 +411,7 @@ function polen_get_video_player($talent, $video, $user_id)
 					<div class="row mt-4 share">
 						<div class="col-12">
 							<!-- <input type="text" id="share-input" class="share-input" /> -->
-							<?php if ($user_id !== 0 && !$isRated) : ?>
+							<?php if ( $user_id !== 0 && $isRateble ) : ?>
 								<a href="/my-account/create-review/<?= $video->order_id; ?>" class="btn btn-primary btn-lg btn-block">Avaliar vídeo</a>
 							<?php endif; ?>
 							<?php /* <a href="javascript:copyToClipboard('<?php echo $video_url; ?>')" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_copy(); ?>Copiar link</a> */ ?>
