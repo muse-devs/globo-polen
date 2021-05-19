@@ -369,6 +369,7 @@ function polen_front_get_talent_videos($talent)
  * Cria a tela para assitir video
  * @param stdClass $talent Polen_Update_Fields
  * @param Polen_Video_Info $video
+ * @param int $user_id
  * @return html
  */
 function polen_get_video_player($talent, $video, $user_id)
@@ -695,4 +696,12 @@ function polen_get_order_flow_layout($array_status)
 		</div>
 	</div>
 <?php
+}
+
+
+function polen_player_video_modal_ajax_invalid_hash()
+{
+	?>
+		<h4>Conteúdo indisponível</h4>
+	<?php
 }
