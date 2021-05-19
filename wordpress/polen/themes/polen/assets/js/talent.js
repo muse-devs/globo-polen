@@ -58,24 +58,6 @@ jQuery(document).ready(function () {
 	}
 });
 
-async function shareVideo(title = "Nome do talento", text = "texto do vídeo") {
-	var shareData = {
-		title: title,
-		text: text,
-		url: window.location.href,
-	};
-	if (navigator.share) {
-		try {
-			await navigator.share(shareData);
-		} catch (err) {
-			alert("Error: " + err);
-		}
-	} else {
-		copyToClipboard(shareData.url);
-		console.log("URL: " + shareData.url);
-	}
-}
-
 function getVideoId() {
 	return window.location.hash.substring(1);
 }
@@ -110,7 +92,7 @@ function showModal() {
 function hideModal(e) {
 	document.body.classList.remove("no-scroll");
 	changeHash();
-	killVideo();
+	// killVideo();
 	modal.classList.remove("show");
 }
 
