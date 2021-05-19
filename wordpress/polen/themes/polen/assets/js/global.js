@@ -40,7 +40,7 @@ function shareVideo(title, url) {
 			navigator
 				.share(shareData)
 				.then(() => {
-					polMessage("Sucesso!", "Link compartilhado com sucesso");
+					console.log("Sucesso!", "Link compartilhado com sucesso");
 				})
 				.catch(console.error);
 		} catch (err) {
