@@ -272,7 +272,7 @@ function polen_get_talent_video_buttons($talent, $video_url, $video_download)
 	$wa_message = htmlentities(urlencode("Veja que legal: "));
 	$wa_link = $video_url;
 ?>
-	<button onclick="shareVideo('Assista esse vídeo de <?php echo $talent->nome; ?>', '<?php echo $video_url; ?>')" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_share(); ?>Compartilhar</button>
+	<button onclick="shareVideo('Compartilhar vídeo de <?php echo $talent->nome; ?>', '<?php echo $video_url; ?>')" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_share(); ?>Compartilhar</button>
 	<?php if (!empty($video_download)) : ?>
 		<a href="<?php echo $video_download; ?>" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_download(); ?>Download</a>
 	<?php endif; ?>
