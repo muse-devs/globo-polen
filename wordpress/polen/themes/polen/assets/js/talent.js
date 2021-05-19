@@ -92,7 +92,7 @@ function showModal() {
 function hideModal(e) {
 	document.body.classList.remove("no-scroll");
 	changeHash();
-	killVideo();
+	// killVideo();
 	modal.classList.remove("show");
 }
 
