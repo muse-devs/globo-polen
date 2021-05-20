@@ -272,7 +272,10 @@ function polen_get_talent_video_buttons($talent, $video_url, $video_download)
 	$wa_message = htmlentities(urlencode("Veja que legal: "));
 	$wa_link = $video_url;
 ?>
-	<button onclick="shareVideo('Compartilhar vídeo de <?php echo $talent->nome; ?>', '<?php echo $video_url; ?>')" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_share(); ?>Compartilhar</button>
+	<?php if (wp_is_mobile()) : ?>
+		<button onclick="shareVideo('Compartilhar vídeo de <?php echo $talent->nome; ?>', '<?php echo $video_url; ?>')" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_share(); ?>Compartilhar</button>
+	<?php endif; ?>
+	<button onclick="copyToClipboard('<?php echo $video_url; ?>')" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_clipboard(); ?>Copiar Link</button>
 	<?php if (!empty($video_download)) : ?>
 		<a href="<?php echo $video_download; ?>" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_download(); ?>Download</a>
 	<?php endif; ?>
@@ -319,7 +322,7 @@ function polen_front_get_talent_videos($talent)
 		<div class="d-none d-md-block col-md-12 text-right custom-slick-controls"></div>
 		<div class="col-md-12 p-0">
 			<div class="banner-wrapper">
-				<div class="banner-content type-video<?php if (sizeof($items) < 1) echo " ml-3" ?>">
+				<div class="banner-content type-video<?php if (sizeof($items) < 1) echo " ml-3 ml-md-0" ?>">
 					<?php foreach ($items as $item) : ?>
 						<div class="polen-card-video">
 							<figure class="video-cover">
@@ -352,7 +355,7 @@ function polen_front_get_talent_videos($talent)
  * @param int $user_id
  * @return html
  */
-function polen_get_video_player( $talent, $video, $user_id )
+function polen_get_video_player($talent, $video, $user_id)
 {
 	if (!$talent || !$video) {
 		return;
@@ -480,7 +483,7 @@ function polen_box_image_message($image, $text)
 	<div class="box-round">
 		<div class="row p-4">
 			<div class="col-md-12 text-center">
-				<img src="<?php echo $image; ?>" alt="<?php echo $text; ?>">
+				<img src="<?php echo $image; ?>" alt="<?php echo $text; ?>" class="correct-margin">
 			</div>
 			<div class="col-md-12 text-center mt-4">
 				<p><?php echo $text; ?></p>
@@ -632,7 +635,7 @@ function polen_card_talent_reviews_order(\WP_Post $post, $Talent_Fields)
 }
 
 /**
- * 
+ *
  */
 function polen_get_order_flow_layout($array_status)
 {

@@ -2,7 +2,7 @@
 	box-sizing: border-box;
 	border-radius: 8px;
 	background-color: $talent-bg-color;
-	img {
+	img.correct-margin {
 		margin-bottom: -30px;
 	}
 	p {
@@ -409,7 +409,7 @@
 			}
 			@include media-breakpoint-up(md) {
 				padding-left: 15px;
-				flex-wrap: wrap;
+				// flex-wrap: wrap;
 				.polen-card.responsive {
 					margin: 0 15px 0 0;
 				}

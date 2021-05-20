@@ -212,7 +212,7 @@
 .talent-dashboard-start {
 	.p {
 		margin: 0;
-		color: rgba($color: #ffffff, $alpha: 0.4);
+		color: var(--light);
 		&.small {
 			font-size: 16px;
 		}
@@ -220,7 +220,7 @@
 	.msg {
 		position: relative;
 		margin-bottom: 30px;
-		border-radius: 1rem;
+		border-radius: 8px;
 		box-sizing: border-box;
 	}
 	.msg-header {
@@ -241,7 +241,7 @@
 	.time {
 		font-weight: 700;
 		line-height: 1.2;
-		color: white;
+		color: var(--light);
 	}
 	.value {
 		font-size: 24px;

@@ -47,41 +47,95 @@
 	@if $filename == copy {
 		$char: "\E007";
 	}
-	@if $filename == error-o {
+	@if $filename == credit-card {
 		$char: "\E008";
 	}
-	@if $filename == facebook {
+	@if $filename == down-arrow {
 		$char: "\E009";
 	}
-	@if $filename == hand-thumbs-up {
+	@if $filename == download-alt {
 		$char: "\E00A";
 	}
-	@if $filename == instagram {
+	@if $filename == edit {
 		$char: "\E00B";
 	}
-	@if $filename == linkedin {
+	@if $filename == error-o {
 		$char: "\E00C";
 	}
-	@if $filename == phone {
+	@if $filename == error-outline {
 		$char: "\E00D";
 	}
-	@if $filename == search {
+	@if $filename == facebook {
 		$char: "\E00E";
 	}
-	@if $filename == software-download {
+	@if $filename == filter {
 		$char: "\E00F";
 	}
-	@if $filename == star-fill {
+	@if $filename == hand-thumbs-up {
 		$char: "\E010";
 	}
-	@if $filename == star {
+	@if $filename == instagram {
 		$char: "\E011";
 	}
-	@if $filename == trash {
+	@if $filename == left-arrow {
 		$char: "\E012";
 	}
-	@if $filename == twitter {
+	@if $filename == like {
 		$char: "\E013";
+	}
+	@if $filename == linkedin {
+		$char: "\E014";
+	}
+	@if $filename == load {
+		$char: "\E015";
+	}
+	@if $filename == mobile {
+		$char: "\E016";
+	}
+	@if $filename == no-photo {
+		$char: "\E017";
+	}
+	@if $filename == phone {
+		$char: "\E018";
+	}
+	@if $filename == play {
+		$char: "\E019";
+	}
+	@if $filename == reload {
+		$char: "\E01A";
+	}
+	@if $filename == research {
+		$char: "\E01B";
+	}
+	@if $filename == right-arrow {
+		$char: "\E01C";
+	}
+	@if $filename == search {
+		$char: "\E01D";
+	}
+	@if $filename == software-download {
+		$char: "\E01E";
+	}
+	@if $filename == star-fill {
+		$char: "\E01F";
+	}
+	@if $filename == star {
+		$char: "\E020";
+	}
+	@if $filename == trash {
+		$char: "\E021";
+	}
+	@if $filename == twitter {
+		$char: "\E022";
+	}
+	@if $filename == up-arrow {
+		$char: "\E023";
+	}
+	@if $filename == video-camera {
+		$char: "\E024";
+	}
+	@if $filename == whatsapp {
+		$char: "\E025";
 	}
 
 	@return $char;
@@ -119,11 +173,29 @@
 .icon-copy {
 	@include icon(copy);
 }
+.icon-credit-card {
+	@include icon(credit-card);
+}
+.icon-down-arrow {
+	@include icon(down-arrow);
+}
+.icon-download-alt {
+	@include icon(download-alt);
+}
+.icon-edit {
+	@include icon(edit);
+}
 .icon-error-o {
 	@include icon(error-o);
 }
+.icon-error-outline {
+	@include icon(error-outline);
+}
 .icon-facebook {
 	@include icon(facebook);
+}
+.icon-filter {
+	@include icon(filter);
 }
 .icon-hand-thumbs-up {
 	@include icon(hand-thumbs-up);
@@ -131,11 +203,38 @@
 .icon-instagram {
 	@include icon(instagram);
 }
+.icon-left-arrow {
+	@include icon(left-arrow);
+}
+.icon-like {
+	@include icon(like);
+}
 .icon-linkedin {
 	@include icon(linkedin);
 }
+.icon-load {
+	@include icon(load);
+}
+.icon-mobile {
+	@include icon(mobile);
+}
+.icon-no-photo {
+	@include icon(no-photo);
+}
 .icon-phone {
 	@include icon(phone);
+}
+.icon-play {
+	@include icon(play);
+}
+.icon-reload {
+	@include icon(reload);
+}
+.icon-research {
+	@include icon(research);
+}
+.icon-right-arrow {
+	@include icon(right-arrow);
 }
 .icon-search {
 	@include icon(search);
@@ -154,4 +253,13 @@
 }
 .icon-twitter {
 	@include icon(twitter);
+}
+.icon-up-arrow {
+	@include icon(up-arrow);
+}
+.icon-video-camera {
+	@include icon(video-camera);
+}
+.icon-whatsapp {
+	@include icon(whatsapp);
 }
