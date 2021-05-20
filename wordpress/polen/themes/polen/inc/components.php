@@ -322,7 +322,7 @@ function polen_front_get_talent_videos($talent)
 		<div class="d-none d-md-block col-md-12 text-right custom-slick-controls"></div>
 		<div class="col-md-12 p-0">
 			<div class="banner-wrapper">
-				<div class="banner-content type-video<?php if (sizeof($items) < 1) echo " ml-3" ?>">
+				<div class="banner-content type-video<?php if (sizeof($items) < 1) echo " ml-3 ml-md-0" ?>">
 					<?php foreach ($items as $item) : ?>
 						<div class="polen-card-video">
 							<figure class="video-cover">
