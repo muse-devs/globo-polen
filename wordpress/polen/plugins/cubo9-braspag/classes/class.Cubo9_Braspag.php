@@ -432,8 +432,6 @@ class Cubo9_Braspag {
                      */
                     $save_card = $response_body_json->Payment->CreditCard->SaveCard;
 					if( $save_card ) {
-                        $braspag_card_saved_data = get_user_meta( get_current_user_id(), 'braspag_card_saved_data', true );
-
                         $card_number     = $response_body_json->Payment->CreditCard->CardNumber;
                         $holder          = $response_body_json->Payment->CreditCard->Holder;
                         $expiration_date = $response_body_json->Payment->CreditCard->ExpirationDate;
@@ -443,35 +441,18 @@ class Cubo9_Braspag {
                         $card_sufix      = substr( $card_number, -4 );
                         $card_label      = strtoupper( $brand ) . ' - ' . $card_sufix;
 
-                        if( is_array( $braspag_card_saved_data ) && count( $braspag_card_saved_data ) > 0 ) {
-                            if( ! isset( $braspag_card_saved_data[ $card_prefix ] ) ) {
-                                $braspag_card_saved_data[ $card_prefix ] = array(
-                                    'card_number'     => $card_number,
-                                    'prefix'          => $card_prefix,
-                                    'sufix'           => $card_sufix,
-                                    'token'           => $card_token,
-                                    'brand'           => $brand,
-                                    'expiration_date' => $expiration_date,
-                                    'holder'          => $holder,
-                                    'holder_cpf'      => $creditcard_holder_cpf,
-                                    'card_label'      => $card_label,
-                                );
-                                update_user_meta( get_current_user_id(), 'braspag_card_saved_data', $braspag_card_saved_data );
-                            }
-                        } else {
-                            $card_saved_data[ $card_prefix ] = array(
-                                'card_number'     => $card_number,
-                                'prefix'          => $card_prefix,
-                                'sufix'           => $card_sufix,
-                                'token'           => $card_token,
-                                'brand'           => $brand,
-                                'expiration_date' => $expiration_date,
-                                'holder'          => $holder,
-                                'holder_cpf'      => $creditcard_holder_cpf,
-                                'card_label'      => $card_label,
-                            );
-                            add_user_meta( get_current_user_id(), 'braspag_card_saved_data', $card_saved_data );
-                        }
+                        $card_saved_data = array(
+                            'card_number'     => $card_number,
+                            'prefix'          => $card_prefix,
+                            'sufix'           => $card_sufix,
+                            'token'           => $card_token,
+                            'brand'           => $brand,
+                            'expiration_date' => $expiration_date,
+                            'holder'          => $holder,
+                            'card_label'      => $card_label,
+                        );
+
+                        add_user_meta( get_current_user_id(), 'braspag_card_saved_data', $card_saved_data );
                     }
                     
                     // Dados do pagamento
@@ -505,9 +486,6 @@ class Cubo9_Braspag {
                     $order->update_status( 'payment-approved' );
                     $email = WC()->mailer()->get_emails()['Polen_WC_Payment_Approved'];
                     $email->trigger( $order_id );
-
-                    // Muda o status para processando
-                    // $order->payment_complete();
 
                     // Atualiza o estoque
                     wc_reduce_stock_levels( $order_id );
