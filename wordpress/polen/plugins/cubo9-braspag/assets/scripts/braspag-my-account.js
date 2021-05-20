@@ -133,6 +133,7 @@
             },
             success: function( data ) {
                 console.log( data );
+                polSpinner("hidden");
                 if( $( '.payment-method-item' ).length === 0 ) {
                     window.location.reload();
                 }
