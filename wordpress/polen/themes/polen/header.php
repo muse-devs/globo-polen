@@ -59,7 +59,7 @@
 									<div class="user-avatar">
 										<?php
 										if (is_plugin_active('wp-user-avatar/wp-user-avatar.php')) {
-											echo get_wp_user_avatar(get_current_user_id());
+											echo get_wp_user_avatar(get_current_user_id(), 'polen-square-crop-sm');
 										} ?>
 									</div>
 									<?php Icon_Class::polen_icon_chevron_down(); ?>
@@ -71,7 +71,7 @@
 										<div class="user-avatar mb-1">
 											<?php
 											if (is_plugin_active('wp-user-avatar/wp-user-avatar.php')) {
-												echo get_wp_user_avatar(get_current_user_id());
+												echo get_wp_user_avatar(get_current_user_id(), 'polen-square-crop-sm');
 											} ?>
 										</div>
 										<p class="user-name"><?php echo $user_name->display_name; ?></p>
