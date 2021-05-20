@@ -72,7 +72,7 @@ window.onload = () => {
 
 	video_input.addEventListener("change", function (e) {
 		setFileInfo();
-		changeText();
+		changeIcon();
 		document.querySelector("#video-rec").classList.remove("show");
 		document.querySelector("#video-rec-again").classList.add("show");
 		document.querySelector("#video-send").classList.add("show");
@@ -127,4 +127,9 @@ function progressFunction(loaded, total) {
 
 function changeText() {
 	document.getElementById("info").innerText = "Vídeo gravado com sucesso";
+}
+
+function changeIcon() {
+	document.querySelector(".image.wait").classList.remove("show");
+	document.querySelector(".image.complete").classList.add("show");
 }
