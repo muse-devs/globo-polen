@@ -209,7 +209,9 @@
 	font-weight: 700;
 }
 
-.talent-dashboard-start {
+.talent-dashboard-start,
+.box-round,
+.talent-order-modal {
 	.p {
 		margin: 0;
 		color: var(--light);
@@ -246,7 +248,8 @@
 	.value {
 		font-size: 24px;
 		&.small {
-			font-size: 18px;
+			font-size: 16px;
+			line-height: 28px;
 		}
 	}
 	.time {
@@ -254,34 +257,10 @@
 	}
 }
 
-.talent-order {
-	padding: 32px;
-	border-radius: 8px;
-	box-sizing: border-box;
-	background-color: $talent-bg-color;
-	.bordered {
-		border-bottom: 1px solid $light-50;
-	}
-	.title,
-	.description {
-		margin: 0;
-		font-family: $font-primary;
-		font-size: 16px;
-		font-weight: 700;
-	}
-	.title {
-		font-size: 12px;
-		font-weight: 400;
-	}
-
-	.description {
-	}
-}
-
 .talent-order-modal {
 	position: relative;
 	margin-top: 3%;
-	padding: 0 40px;
+	padding: 0 60px;
 	width: 100%;
 	border-radius: 10px;
 	overflow: hidden;
@@ -297,7 +276,7 @@
 		background-color: $secondary;
 	}
 	.body {
-		padding: 35px 0;
+		padding: 35px 0 0;
 		box-sizing: border-box;
 	}
 	.name {
@@ -309,7 +288,7 @@
 		font-weight: 400;
 	}
 	.border-bottom {
-		border-color: rgba($color: #ffffff, $alpha: 0.5);
+		border-color: rgba($color: #ffffff, $alpha: 0.5) !important;
 	}
 }
 
