@@ -14,35 +14,12 @@
 			var cart_id = $(this).data( 'cart-id' );
 			var item_name = $(this).attr('name');
 
-			if( item_name == 'video_category' ){	
-				var item_value = $(this).val();
-
-				if( item_value ){
-					$.ajax(
-						{
-							type: 'POST',
-							url: polen_ajax.ajaxurl,
-								data: {
-								action: 'get_occasion_description',
-								occasion_type: item_value,
-							},
-							success: function( response ) {
-								let obj = $.parseJSON( response );
-								//console.log(obj['response'][0].description);
-								if( obj ){
-									$( '#cart_instructions_to_video_' + cart_id ).html(obj['response'][0].description);
-								}	
-							}
-						});	
-				}				
-			}
-
 			var allowed_item = [ 'offered_by', 'video_to', 'name_to_video', 'email_to_video', 'video_category', 'instructions_to_video', 'allow_video_on_page' ];
 			if( $.inArray( item_name, allowed_item ) !== -1 ){
 				$.ajax(
 				{
 					type: 'POST',
-					url: polen_ajax.ajaxurl,
+					url: woocommerce_params.ajax_url,
 						data: {
 						action: 'polen_update_cart_item',
 						security: $('#woocommerce-cart-nonce').val(),
@@ -55,20 +32,33 @@
 						//$( '.woocommerce-cart-form' ).find( ':input[name="update_cart"]' ).prop( 'disabled', false ).attr( 'aria-disabled', false );
 					}
 				});
-			}	
-		});	
+			}
+		});
+
+		$('.select-ocasion').on('change',function() {
+			var item_value = $(this).val();
+
+			if( item_value ){
+				$('.video-instruction-refresh').click();
+			}
+		});
+
+		function messagesPreloader(active) {
+			var loader = document.getElementById("reload");
+			loader.classList[active ? "add" : "remove"]("spin");
+		}
 
         $('.video-instruction-refresh').on('click',function(){
 			var category_item = $('select[name="video_category"]');
 			var category_name = category_item.val();
 			var cart_id = category_item.attr('data-cart-id');
 
-			console.log( category_name );
 			if( category_name ){
+				messagesPreloader(true);
 				$.ajax(
 				{
 					type: 'POST',
-					url: polen_ajax.ajaxurl,
+					url: woocommerce_params.ajax_url,
 						data: {
 						action: 'get_occasion_description',
 						occasion_type: category_name,
@@ -83,10 +73,13 @@
 								$( '#cart_instructions_to_video_' + cart_id ).html(obj['response'][0].description);
 							}
 						}
-							
+
+					},
+					complete: function() {
+						messagesPreloader(false);
 					}
-				});	
-			}	
-		});	
-    });    
+				});
+			}
+		});
+    });
 })(jQuery);

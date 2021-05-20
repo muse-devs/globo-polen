@@ -82,21 +82,27 @@ class WC_Cubo9_WooCommerce {
             'success' => 0,
         );
         if( is_user_logged_in() && isset( $_POST['id'] ) && strlen( $_POST['id'] ) == 32 ) {
-            $braspag_card_saved_data = get_user_meta( get_current_user_id(), 'braspag_card_saved_data' );
-            $braspag_default_payment = get_user_meta( get_current_user_id(), 'braspag_default_payment', true );
-            if( ! is_null( $braspag_card_saved_data ) && ! empty( $braspag_card_saved_data ) && is_array( $braspag_card_saved_data ) && count( $braspag_card_saved_data ) > 0 ) {
-                foreach( $braspag_card_saved_data as $k => $cards ) {
-                    foreach( $cards as $p => $data ) {
-                        $prefix = md5( $p );
-                        if( $prefix == $_POST['id'] ) {
-                            unset( $cards[ $p ] );
-                            if( $braspag_default_payment && ! is_null( $braspag_default_payment ) && ! empty( $braspag_default_payment ) && $prefix == $braspag_default_payment ) {
-                                delete_user_meta( get_current_user_id(), 'braspag_default_payment' );
-                            }
-                        }
-                    }
+            global $wpdb;
+
+            $sql_delete = "SELECT `umeta_id` FROM `" . $wpdb->usermeta . "` WHERE  `meta_key`='braspag_card_saved_data' AND  `user_id`=" . get_current_user_id() . " AND MD5( `umeta_id` ) = '" . $_POST['id'] . "'";
+            $res_delete = $wpdb->get_results( $sql_delete );
+            
+            if( $res_delete && ! is_null( $res_delete ) && ! is_wp_error( $res_delete ) && is_array( $res_delete ) && ! empty( $res_delete ) && count( $res_delete ) == 1 ) {
+                $sql_default = "SELECT `umeta_id` FROM `" . $wpdb->usermeta . "` WHERE  `meta_key`='braspag_default_payment' AND  `user_id`=" . get_current_user_id();
+                $res_default = $wpdb->get_results( $sql_default );
+                if( $res_default && ! is_null( $res_default ) && ! is_wp_error( $res_default ) && is_array( $res_default ) && ! empty( $res_default ) && count( $res_default ) == 1 ) {
+
                 }
-                update_user_meta( get_current_user_id(), 'braspag_card_saved_data', $cards );
+                $delete = $wpdb->delete(
+                    $wpdb->usermeta,
+                    array(
+                        'umeta_id' => $res_delete[0]->umeta_id,
+                    ),
+                    array(
+                        '%d'
+                    ),
+                );
+
                 $return = array(
                     'success' => 1,
                 );

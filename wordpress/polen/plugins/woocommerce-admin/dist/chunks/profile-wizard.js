@@ -2302,9 +2302,9 @@ var currency_context = __webpack_require__(598);
 
 var extensionBenefits = [{
   slug: 'mailpoet',
-  title: Object(external_wp_i18n_["__"])('Email Marketing by WooCommerce', 'woocommerce-admin'),
+  title: Object(external_wp_i18n_["__"])('MailPoet', 'woocommerce-admin'),
   icon: 'onboarding/mailpoet.png',
-  description: Object(external_wp_i18n_["__"])('The default all-in-one solution for WooCommerce email. Powered by MailPoet.', 'woocommerce-admin')
+  description: Object(external_wp_i18n_["__"])('The default all-in-one solution for WooCommerce email.', 'woocommerce-admin')
 }, {
   slug: 'facebook-for-woocommerce',
   title: Object(external_wp_i18n_["__"])('Market on Facebook', 'woocommerce-admin'),
@@ -3375,6 +3375,7 @@ var selective_extensions_bundle_SelectiveExtensionsBundle = function SelectiveEx
       onSubmit(values);
     },
     isBusy: isInstallingActivating,
+    disabled: isInstallingActivating,
     isPrimary: true
   }, "Continue"))), selective_extensions_bundle_renderBusinessExtensionHelpText(values, isInstallingActivating));
 };

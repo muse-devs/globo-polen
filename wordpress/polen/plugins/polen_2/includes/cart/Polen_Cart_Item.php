@@ -95,19 +95,38 @@ class Polen_Cart_Item
      */
     public function get_public_in_detail_page()
     {
-        return $this->item->get_meta( 'allow_video_on_page' );
+        return $this->item->get_meta( 'allow_video_on_page' ) == 'on' ? '1' : '0';
     }
     
     
     /**
      * Pega o talent_id
-     * @return type
+     * @return int
      */
     public function get_talent_id()
     {
         $product_id = $this->item->get_product()->get_id();
         $product_post = get_post( $product_id );
         return $product_post->post_author;
-        
+    }
+    
+    
+    /**
+     * Pegar um product ID
+     */
+    public function get_product_id()
+    {
+        $product_id = $this->item->get_product()->get_id();
+        return $product_id;
+    }
+    
+    
+    /**
+     * Get o object product
+     * @return WC_Product
+     */
+    public function get_product()
+    {
+        return $this->item->get_product();
     }
 }

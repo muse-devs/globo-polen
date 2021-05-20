@@ -1,11 +1,15 @@
 var modal = document.getElementById("video-modal");
 var video_box = document.getElementById("video-box");
 var share_button = document.querySelectorAll(".share-button");
-var public_url = document
-	.getElementById("talent-videos")
-	.getAttribute("data-public-url");
+var talent_videos = document.getElementById("talent-videos");
+var public_url = talent_videos ? talent_videos.getAttribute("data-public-url") : "";
+let get_your_video_banner = document.getElementsByClassName("btn btn-outline-light btn-lg")[0];
 
 jQuery(document).ready(function () {
+	get_your_video_banner.addEventListener('click', evt => {
+		evt.preventDefault();
+		jQuery('.single_add_to_cart_button')[0].click();
+	});
 	jQuery(".banner-content.type-video").slick({
 		arrows: true,
 		appendArrows: jQuery(".custom-slick-controls"),
@@ -44,7 +48,7 @@ jQuery(document).ready(function () {
 
 	var id = getVideoId();
 	if (id) {
-		openVideoById(id);
+		openVideoByHash(id);
 	}
 
 	if (share_button.length > 0) {
@@ -53,24 +57,6 @@ jQuery(document).ready(function () {
 		});
 	}
 });
-
-async function shareVideo(title = "Nome do talento", text = "texto do vídeo") {
-	var shareData = {
-		title: title,
-		text: text,
-		url: window.location.href,
-	};
-	if (navigator.share) {
-		try {
-			await navigator.share(shareData);
-		} catch (err) {
-			alert("Error: " + err);
-		}
-	} else {
-		copyToClipboard(shareData.url);
-		console.log("URL: " + shareData.url);
-	}
-}
 
 function getVideoId() {
 	return window.location.hash.substring(1);
@@ -106,7 +92,7 @@ function showModal() {
 function hideModal(e) {
 	document.body.classList.remove("no-scroll");
 	changeHash();
-	killVideo();
+	// killVideo();
 	modal.classList.remove("show");
 }
 
@@ -118,7 +104,6 @@ function handleCopyVideoUrl(id) {
 }
 
 function openVideoByURL(url) {
-	console.log(url);
 	addVideo();
 	showModal();
 	var videoPlayer = new Vimeo.Player("polen-video", {
@@ -129,8 +114,17 @@ function openVideoByURL(url) {
 	videoPlayer.getVideoId().then(function (id) {
 		changeHash(id);
 		changeVideoCardUrl(id);
-		handleCopyVideoUrl(id);
+		// handleCopyVideoUrl(id);
 	});
+}
+
+function openVideoByHash(hash) {
+	video_box.innerHTML = "";
+	polSpinner(null, "#video-box");
+	const url = `${woocommerce_params.ajax_url}?action=draw-player-modal&hash=${hash}`;
+	showModal();
+	changeHash(hash);
+	jQuery(video_box).load(url);
 }
 
 function openVideoById(id) {
@@ -143,5 +137,5 @@ function openVideoById(id) {
 	});
 	changeHash(id);
 	changeVideoCardUrl(id);
-	handleCopyVideoUrl(id);
+	// handleCopyVideoUrl(id);
 }

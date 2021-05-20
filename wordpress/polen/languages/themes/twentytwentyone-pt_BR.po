@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Themes - Twenty Twenty-One package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2020-12-11 17:36:25+0000\n"
+"PO-Revision-Date: 2021-04-19 14:40:37+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,6 +19,19 @@ msgstr "O Twenty Twenty-One é uma tela em branco para suas idéias e faz do edi
 #: inc/block-patterns.php:20
 msgid "Twenty Twenty-One"
 msgstr "Twenty Twenty-One"
+
+#: inc/template-tags.php:245
+msgid "Older <span class=\"nav-short\">posts</span>"
+msgstr "<span class=\"nav-short\">Posts</span> mais antigos"
+
+#: inc/template-tags.php:234
+msgid "Newer <span class=\"nav-short\">posts</span>"
+msgstr "<span class=\"nav-short\">Posts</span> mais recentes"
+
+#: classes/class-twenty-twenty-one-dark-mode.php:189
+#: classes/class-twenty-twenty-one-customize-notice-control.php:42
+msgid "https://wordpress.org/support/article/twenty-twenty-one/#dark-mode-support"
+msgstr "https://wordpress.org/support/article/twenty-twenty-one/#dark-mode-support"
 
 #. translators: %s: Twenty Twenty-One support article URL.
 #: classes/class-twenty-twenty-one-dark-mode.php:188
@@ -108,9 +121,9 @@ msgid "This theme requires WordPress 5.3 or newer. You are running version %s. P
 msgstr "Este tema requer o WordPress 5.3 ou mais recente. Você está executando a versão %s, é necessário atualizar."
 
 #. translators: %: Page number.
-#: image.php:46 template-parts/content/content-single.php:30
-#: template-parts/content/content-page.php:36
 #: template-parts/content/content.php:36
+#: template-parts/content/content-page.php:36
+#: template-parts/content/content-single.php:30 image.php:46
 msgid "Page %"
 msgstr "Página %"
 
@@ -198,6 +211,11 @@ msgstr "&#8220;Auto-retrato&#8221; de Berthe Morisot"
 msgid "&#8220;Daffodils&#8221; by Berthe Morisot"
 msgstr "&#8220;Daffodils&#8221; de Berthe Morisot"
 
+#: inc/block-patterns.php:72 inc/block-patterns.php:107
+#: inc/starter-content.php:43
+msgid "&#8220;Roses Trémières&#8221; by Berthe Morisot"
+msgstr "&#8220;Roses Trémières&#8221; por Berthe Morisot"
+
 #: inc/template-functions.php:399
 msgctxt "Post password form"
 msgid "Enter"
@@ -273,6 +291,10 @@ msgstr "No Bois de Boulogne"
 msgid "Villa with Orange Trees, Nice"
 msgstr "Villa com Laranjeiras, Nice"
 
+#: inc/block-patterns.php:107
+msgid "Roses Trémières"
+msgstr "Roses Trémières"
+
 #: inc/block-patterns.php:96
 msgid "&#8220;Villa with Orange Trees, Nice&#8221; by Berthe Morisot"
 msgstr "&#8220;Villa com Laranjeiras, Nice&#8221; de Berthe Morisot"
@@ -285,13 +307,13 @@ msgstr "Belos jardins pintados por Berthe Morisot no final do século XIX"
 msgid "&#8220;The Garden at Bougival&#8221; by Berthe Morisot"
 msgstr "&#8220;O jardim em Bougival&#8221; de Berthe Morisot"
 
-#: inc/starter-content.php:61 inc/block-patterns.php:72
-#: inc/block-patterns.php:107
+#: inc/block-patterns.php:72 inc/block-patterns.php:107
+#: inc/starter-content.php:61
 msgid "&#8220;Young Woman in Mauve&#8221; by Berthe Morisot"
 msgstr "&#8220;Jovem mulher em Mauve&#8221; de Berthe Morisot"
 
-#: inc/starter-content.php:51 inc/block-patterns.php:72
-#: inc/block-patterns.php:107
+#: inc/block-patterns.php:72 inc/block-patterns.php:107
+#: inc/starter-content.php:51
 msgid "&#8220;In the Bois de Boulogne&#8221; by Berthe Morisot"
 msgstr "&#8220;No Bois de Boulogne&#8221; de Berthe Morisot"
 
@@ -329,7 +351,12 @@ msgid "On Archive Pages, posts show:"
 msgstr "Nas páginas de arquivo, os posts mostram:"
 
 #. translators: %s: Author name.
-#: inc/template-tags.php:49 template-parts/post/author-bio.php:19
+#: template-parts/post/author-bio.php:31
+msgid "View all of %s's posts."
+msgstr "Ver todos os posts de %s."
+
+#. translators: %s: Author name.
+#: template-parts/post/author-bio.php:19 inc/template-tags.php:49
 msgid "By %s"
 msgstr "Por %s"
 
@@ -340,6 +367,19 @@ msgstr "Parece que não conseguimos encontrar o que você está procurando. Talv
 #: template-parts/content/content-none.php:56
 msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
 msgstr "Nada foi encontrado com os termos da sua pesquisa. Tente novamente com algumas palavras-chaves diferentes."
+
+#. translators: %s: Link to WP admin new post page.
+#: template-parts/content/content-none.php:43
+msgid "Ready to publish your first post? <a href=\"%s\">Get started here</a>."
+msgstr "Pronto para publicar o seu primeiro post? <a href=\"%s\">Comece por aqui</a>."
+
+#: single.php:40
+msgid "Previous post"
+msgstr "Post anterior"
+
+#: single.php:39
+msgid "Next post"
+msgstr "Próximo post"
 
 #. translators: %s: Parent post link.
 #: single.php:25
@@ -384,8 +424,8 @@ msgid ", "
 msgstr ", "
 
 #. translators: %s: Name of current post. Only visible to screen readers.
-#: inc/template-tags.php:92 inc/template-tags.php:135 image.php:68 image.php:93
-#: template-parts/content/content-page.php:48
+#: template-parts/content/content-page.php:48 image.php:68 image.php:93
+#: inc/template-tags.php:92 inc/template-tags.php:135
 msgid "Edit %s"
 msgstr "Editar %s"
 
@@ -512,10 +552,10 @@ msgstr "Tamanho completo"
 msgid "Published %s"
 msgstr "%s publicado"
 
-#: comments.php:62 inc/template-tags.php:228 image.php:43
-#: template-parts/content/content-single.php:27
-#: template-parts/content/content-page.php:33
 #: template-parts/content/content.php:33
+#: template-parts/content/content-page.php:33
+#: template-parts/content/content-single.php:27 comments.php:62 image.php:43
+#: inc/template-tags.php:228
 msgid "Page"
 msgstr "Página"
 
@@ -527,8 +567,8 @@ msgstr "Fechar"
 msgid "Menu"
 msgstr "Menu"
 
-#: inc/starter-content.php:154 functions.php:76
-#: template-parts/header/site-nav.php:13
+#: template-parts/header/site-nav.php:13 functions.php:76
+#: inc/starter-content.php:154
 msgid "Primary menu"
 msgstr "Menu primário"
 
@@ -608,7 +648,7 @@ msgstr "Verde"
 msgid "Gray"
 msgstr "Cinza"
 
-#: inc/block-styles.php:107 functions.php:223
+#: functions.php:223 inc/block-styles.php:107
 msgid "Dark gray"
 msgstr "Cinza escuro"
 
@@ -649,7 +689,7 @@ msgstr "Extra pequeno"
 msgid "Proudly powered by %s."
 msgstr "Orgulhosamente desenvolvido com %s."
 
-#: footer.php:24 inc/starter-content.php:165 functions.php:77
+#: functions.php:77 inc/starter-content.php:165 footer.php:24
 msgid "Secondary menu"
 msgstr "Menu secundário"
 
@@ -677,7 +717,7 @@ msgstr "Exibir o título do site e descrição"
 msgid "It looks like nothing was found at this location. Maybe try a search?"
 msgstr "Parece que nada foi encontrado neste local. Que tal tentar uma pesquisa?"
 
-#: 404.php:16 template-parts/content/content-none.php:30
+#: template-parts/content/content-none.php:30 404.php:16
 msgid "Nothing here"
 msgstr "Nada aqui"
 

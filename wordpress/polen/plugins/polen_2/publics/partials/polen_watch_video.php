@@ -13,10 +13,9 @@ if( empty( $video_info ) ) {
 use \Polen\Includes\Polen_Update_Fields;
 $Talent_Fields = new Polen_Update_Fields();
 $talent = $Talent_Fields->get_vendor_data($video_info->talent_id);
-
 ?>
     <main id="primary" class="site-main">
         <?php
-        polen_get_video_player( $talent, $video_info );
+        polen_get_video_player( $talent, $video_info, get_current_user_id() );
         ?>
     </main><!-- #main -->

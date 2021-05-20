@@ -174,7 +174,8 @@
 								}
 							}
 						);
-						$( this ).find( 'textarea' ).focusout(
+						$( this ).find( 'textarea' ).on(
+							'focusout',
 							function() {
 								var $id = $( this ).attr( 'id' );
 								var $el = $( this );
@@ -242,5 +243,3 @@
 		);
 	};
 })( jQuery );
-
-

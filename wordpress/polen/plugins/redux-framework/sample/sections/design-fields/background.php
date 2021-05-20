@@ -1,7 +1,7 @@
 <?php
 /**
  * Redux Framework background config.
- * For full documentation, please visit: http://docs.redux.io/
+ * For full documentation, please visit: http://devs.redux.io/
  *
  * @package Redux Framework
  */
@@ -13,13 +13,16 @@ Redux::set_section(
 	array(
 		'title'      => esc_html__( 'Background', 'your-textdomain-here' ),
 		'id'         => 'design-background',
-		'desc'       => esc_html__( 'For full documentation on this field, visit: ', 'your-textdomain-here' ) . '<a href="//docs.redux.io/core/fields/background/" target="_blank">docs.redux.io/core/fields/background/</a>',
+		'desc'       => esc_html__( 'For full documentation on this field, visit: ', 'your-textdomain-here' ) . '<a href="https://devs.redux.io/core-fields/background.html" target="_blank">https://devs.redux.io/core-fields/background.html</a>',
 		'subsection' => true,
 		'fields'     => array(
 			array(
 				'id'       => 'opt-background',
 				'type'     => 'background',
-				'output'   => array( 'body' ),
+				'output'   => array(
+					'background-color' => 'body',
+					'important'        => true,
+				),
 				'title'    => __( 'Body Background', 'your-textdomain-here' ),
 				'subtitle' => __( 'Body background with image, color, etc.', 'your-textdomain-here' ),
 			),
