@@ -36,7 +36,8 @@ class Cubo9_Braspag {
 
         if( intval( $WC_Cubo9_BraspagReduxSettings['enable_braspag_sandbox'] ) == intval( 1 ) ) {
             $this->MERCHANT_ID                      = $WC_Cubo9_BraspagReduxSettings['sandbox_master_subordinate_merchant_id'];
-            $this->MERCHANT_KEY                     = $WC_Cubo9_BraspagReduxSettings['sandbox_master_client_secret'];
+            $this->CLIENT_SECRET                    = $WC_Cubo9_BraspagReduxSettings['sandbox_master_client_secret'];
+            $this->MERCHANT_KEY                     = $WC_Cubo9_BraspagReduxSettings['sandbox_master_merchant_key'];
             $this->SESSION_ID_PREFIX                = $WC_Cubo9_BraspagReduxSettings['sandbox_master_session_id_prefix'];
             $this->URL_CIELO_COMMERCE_API           = self::SANDBOX_CIELO_COMMERCE_API;
             $this->URL_CIELO_COMMERCE_API_QUERY     = self::SANDBOX_CIELO_COMMERCE_API_QUERY;
@@ -46,7 +47,8 @@ class Cubo9_Braspag {
             $this->SANDBOX_NAME_SUFIX               = ' ACCEPT';
         } else {
             $this->MERCHANT_ID                      = $WC_Cubo9_BraspagReduxSettings['master_subordinate_merchant_id'];
-            $this->MERCHANT_KEY                     = $WC_Cubo9_BraspagReduxSettings['master_client_secret'];
+            $this->CLIENT_SECRET                    = $WC_Cubo9_BraspagReduxSettings['master_client_secret'];
+            $this->MERCHANT_KEY                     = $WC_Cubo9_BraspagReduxSettings['master_merchant_key'];
             $this->SESSION_ID_PREFIX                = $WC_Cubo9_BraspagReduxSettings['master_session_id_prefix'];
             $this->URL_CIELO_COMMERCE_API           = self::CIELO_COMMERCE_API;
             $this->URL_CIELO_COMMERCE_API_QUERY     = self::CIELO_COMMERCE_API_QUERY;
@@ -69,7 +71,7 @@ class Cubo9_Braspag {
      * Autenticação Braspag
      */
     private function auth() {
-        $base64_encode = base64_encode( $this->MERCHANT_ID . ':' . $this->MERCHANT_KEY );
+        $base64_encode = base64_encode( $this->MERCHANT_ID . ':' . $this->CLIENT_SECRET );
 		$headers = array(
 			'Authorization' => 'Basic ' . $base64_encode,
 			'Content-Type' => 'application/x-www-form-urlencoded'
@@ -1184,7 +1186,7 @@ class Cubo9_Braspag {
         $headers = array(
             'Content-Type'  => 'application/json',
             'MerchantId'    => $this->MERCHANT_ID,
-            'MerchantKey'   => 'BZYFYPPMCGIMZXSGDMGJELHMXQOYWKTDHHUQOJRG',
+            'MerchantKey'   => $this->MERCHANT_KEY,
         );
 
         $response = wp_remote_post( $url, array(
@@ -1222,12 +1224,17 @@ class Cubo9_Braspag {
                         'result' => 'success',
                         'message' => 'Cartão salvo com sucesso!',
                     );
-                }else{
+                } else {
                     $return = array(
                         'result' => 'error',
                         'message' => 'Ocorreu um erro ao tentar salvar o seu cartão. Tente novamente mais tarde.',
                     );
                 }
+            } else {
+                $return = array(
+                    'result' => 'error',
+                    'message' => 'Ocorreu um erro ao tentar salvar o seu cartão. Tente novamente mais tarde.',
+                );
             }
         } else {
             $message = 'Ocorreu um erro ao tentar salvar o seu cartão. Tente novamente mais tarde.';
@@ -1256,7 +1263,7 @@ class Cubo9_Braspag {
                     $cards[] = array(
                         'id'              => $v->umeta_id,
                         'brand'           => $card_info['brand'],
-                        'prefix'           => $card_info['prefix'],
+                        'prefix'          => $card_info['prefix'],
                         'sufix'           => $card_info['sufix'],
                         'card_label'      => $card_info['card_label'],
                         'expiration_date' => $card_info['expiration_date']

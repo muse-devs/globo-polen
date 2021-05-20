@@ -22,7 +22,6 @@
             let selection =  image_frame.state().get('selection');
             selection.each( function( attachment ) {
                 let attachment_data = attachment['attributes'];
-                console.log( attachment_data['sizes']['thumbnail']['url'] );
                 $('.polen-input-image-id').val( attachment_data['id'] );
                 $('.polen-input-image-url').val( attachment_data['url'] );
                 $('.polen-input-image-thumb').val( attachment_data['sizes']['thumbnail']['url'] );
