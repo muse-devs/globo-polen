@@ -254,17 +254,21 @@ class Cubo9_Braspag {
              * Dados do cartão de Crédito ou Débito.
              */
             if( isset( $_REQUEST['braspag_use_saved_card'] ) && ! empty( $_REQUEST['braspag_use_saved_card'] ) && (int) $_REQUEST['braspag_use_saved_card'] === (int) 1 ) {
-                $brasapag_creditcard_saved = substr( $_REQUEST['brasapag_creditcard_saved'], 0, 6 );
-                $braspag_card_saved_data = get_user_meta( get_current_user_id(), 'braspag_card_saved_data', true );
-                $card_info = $braspag_card_saved_data[ $brasapag_creditcard_saved ];
-                $CreditCardData = array(
-                    'CardToken'    => $card_info['token'],
-                    'Brand'        => $card_info['brand'],
-                    // 'SecurityCode' => preg_replace( '/[^0-9]/', '', strip_tags( $_REQUEST['brasapag_creditcard_saved_cvv'] ) ),
-                );
-                $creditcard_number = $card_info['card_number'];
-                $creditcard_holder = $card_info['holder'];
-                $creditcard_brand  = $card_info['brand'];
+                $brasapag_creditcard_saved = substr( $_REQUEST['brasapag_creditcard_saved'], 38, ( strlen( $_REQUEST['brasapag_creditcard_saved'] ) - 38 ) );
+                global $wpdb;
+                $sql_card = "SELECT `meta_value` FROM `" . $wpdb->usermeta . "` WHERE `umeta_id`=" . $brasapag_creditcard_saved . " AND `user_id`=" . get_current_user_id() . " AND `meta_key`='braspag_card_saved_data'";
+                $res_card = $wpdb->get_results( $sql_card );
+                var_dump( $res_card );
+                if( $res_card && ! is_null( $res_card ) && is_array( $res_card ) && ! empty( $res_card ) ) {
+                    $card_info = unserialize( $res_card[0]->meta_value );
+                    $CreditCardData = array(
+                        'CardToken'    => $card_info['token'],
+                        'Brand'        => $card_info['brand'],
+                    );
+                    $creditcard_number = $card_info['card_number'];
+                    $creditcard_holder = $card_info['holder'];
+                    $creditcard_brand  = $card_info['brand'];
+                }
             } else {
                 $creditcard_cvv        = substr( preg_replace( '/[^0-9]/', '', $_REQUEST['braspag_creditcardCvv'] ), 0, 4 );
                 $creditcard_brand      = substr( $_REQUEST['braspag_creditcardBrand'], 0, 10 );

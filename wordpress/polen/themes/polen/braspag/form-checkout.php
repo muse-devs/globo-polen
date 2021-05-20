@@ -53,7 +53,7 @@ if( is_user_logged_in() ) {
                 //foreach( $braspag_card_saved_data as $prefix => $data ) {
                 foreach( $braspag_card_saved_data as $data ) {    
                 ?>
-                	<option value="<?php echo $data['prefix'] . md5( time() . $amount . $data['prefix'] ); ?>"><?php echo $data['brand']; ?> <?php echo __( 'final', 'cubo9' ); ?> <?php echo $data['sufix']; ?></option>
+                	<option value="<?php echo $data['prefix'] . md5( time() . $amount . $data['prefix'] ) . $data['id']; ?>"><?php echo $data['brand']; ?> <?php echo __( 'final', 'cubo9' ); ?> <?php echo $data['sufix']; ?></option>
                 <?php } ?>
             </select>
         </div>
