@@ -34,20 +34,11 @@
 						</div>
 					</div>
 					<div class="col-md-4 mt-4 order-md-1">
-						<h5 class="title">Muse</h5>
+						<h5 class="title"><?= get_bloginfo('name'); ?></h5>
 						<ul class="footer-menu">
-							<li>
-								<a href="<?php echo home_url().'/shop'; ?>">Todos os talentos</a>
-							</li>
-							<li>
-								<a href="#asd">Como funciona</a>
-							</li>
-							<li>
-								<a href="#asd">Política de privacidade</a>
-							</li>
-							<li>
-								<a href="#asd">Termos e condições</a>
-							</li>
+							<?php
+								wp_nav_menu('');
+							?>
 						</ul>
 					</div>
 				</div>
