@@ -113,3 +113,63 @@ function polen_get_url_review_page()
 {
 	return './reviews/';
 }
+
+/**
+ * Pegar a URL da Custom Logo
+ */
+function polen_get_custom_logo_url() {
+	$custom_logo_id = get_theme_mod( 'custom_logo' );
+	if( $custom_logo_id && ! is_null( $custom_logo_id ) && ! empty( $custom_logo_id ) ) {
+		$image_url = wp_get_attachment_image_url( $custom_logo_id, 'full', true );
+		$protocol = ( isset( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] != 'off' ) ? 'https:' : 'http:';
+		return $protocol . $image_url;
+	}
+}
+
+/**
+ * Tags Open Graph
+ */
+if ( ! in_array( 'all-in-one-seo-pack/all_in_one_seo_pack.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+	add_action( 'wp_head', function() {
+		global $post;
+		if( $post->post_type == 'product' ) {
+			echo "\n\n";
+			echo "\t" . '<meta property="og:title" content="' . get_the_title() . '">' . "\n";
+			echo "\t" . '<meta property="og:description" content="' . get_the_excerpt() . '">' . "\n";
+			echo "\t" . '<meta property="og:url" content="' . get_the_permalink() . '">' . "\n";
+			echo "\t" . '<meta property="og:locale" content="' . get_locale() . '">' . "\n";
+			echo "\t" . '<meta property="og:site_name" content="' . get_bloginfo( 'title' ) . '">' . "\n";
+			$thumbnail = get_the_post_thumbnail_url( get_the_ID() );
+			if( $thumbnail && ! is_null( $thumbnail ) && ! empty( $thumbnail) ) {
+				echo "\t" . '<meta property="og:image" content="' . $thumbnail . '">' . "\n";
+			} else {
+				echo "\t" . '<meta property="og:image" content="' . polen_get_custom_logo_url() . '">' . "\n";
+			}
+			echo "\n";
+		} elseif( $post->post_type == 'page' && $post->post_name == 'v' ) {
+			echo "\n\n";
+			echo "\t" . '<meta property="og:title" content="' . get_the_title() . '">' . "\n";
+			echo "\t" . '<meta property="og:description" content="' . get_the_excerpt() . '">' . "\n";
+			echo "\t" . '<meta property="og:url" content="' . get_the_permalink() . '?' . $_SERVER['QUERY_STRING'] . '">' . "\n";
+			echo "\t" . '<meta property="og:locale" content="' . get_locale() . '">' . "\n";
+			echo "\t" . '<meta property="og:site_name" content="' . get_bloginfo( 'title' ) . '">' . "\n";
+			echo "\t" . '<meta property="og:video" content="' . get_the_permalink() . '?' . $_SERVER['QUERY_STRING'] . '">' . "\n";
+			$thumbnail = get_the_post_thumbnail_url( get_the_ID() );
+			if( $thumbnail && ! is_null( $thumbnail ) && ! empty( $thumbnail) ) {
+				echo "\t" . '<meta property="og:image" content="' . $thumbnail . '">' . "\n";
+			} else {
+				echo "\t" . '<meta property="og:image" content="' . polen_get_custom_logo_url() . '">' . "\n";
+			}
+			echo "\n";
+		} else {
+			echo "\n\n";
+			echo "\t" . '<meta property="og:title" content="' . get_bloginfo( 'title' ) . '">' . "\n";
+			echo "\t" . '<meta property="og:description" content="' . get_bloginfo( 'description' ) . '">' . "\n";
+			echo "\t" . '<meta property="og:url" content="' . get_bloginfo( 'url' ) . '">' . "\n";
+			echo "\t" . '<meta property="og:image" content="' . polen_get_custom_logo_url() . '">' . "\n";
+			echo "\t" . '<meta property="og:locale" content="' . get_locale() . '">' . "\n";
+			echo "\t" . '<meta property="og:site_name" content="' . get_bloginfo( 'title' ) . '">' . "\n";
+			echo "\n";
+		}
+	} );
+}

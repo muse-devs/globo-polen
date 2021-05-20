@@ -37,6 +37,7 @@ class Cubo9_Braspag {
         if( intval( $WC_Cubo9_BraspagReduxSettings['enable_braspag_sandbox'] ) == intval( 1 ) ) {
             $this->MERCHANT_ID                      = $WC_Cubo9_BraspagReduxSettings['sandbox_master_subordinate_merchant_id'];
             $this->MERCHANT_KEY                     = $WC_Cubo9_BraspagReduxSettings['sandbox_master_client_secret'];
+            $this->SESSION_ID_PREFIX                = $WC_Cubo9_BraspagReduxSettings['sandbox_master_session_id_prefix'];
             $this->URL_CIELO_COMMERCE_API           = self::SANDBOX_CIELO_COMMERCE_API;
             $this->URL_CIELO_COMMERCE_API_QUERY     = self::SANDBOX_CIELO_COMMERCE_API_QUERY;
             $this->URL_BRASPAG_SPLIT_API            = self::SANDBOX_BRASPAG_SPLIT_API;
@@ -46,6 +47,7 @@ class Cubo9_Braspag {
         } else {
             $this->MERCHANT_ID                      = $WC_Cubo9_BraspagReduxSettings['master_subordinate_merchant_id'];
             $this->MERCHANT_KEY                     = $WC_Cubo9_BraspagReduxSettings['master_client_secret'];
+            $this->SESSION_ID_PREFIX                = $WC_Cubo9_BraspagReduxSettings['master_session_id_prefix'];
             $this->URL_CIELO_COMMERCE_API           = self::CIELO_COMMERCE_API;
             $this->URL_CIELO_COMMERCE_API_QUERY     = self::CIELO_COMMERCE_API_QUERY;
             $this->URL_BRASPAG_SPLIT_API            = self::BRASPAG_SPLIT_API;
@@ -55,9 +57,10 @@ class Cubo9_Braspag {
         }
         
         if( $order instanceof WC_Order ) {
-            $this->SESSION_ID = $session_id;
-            $this->order      = $order;
-            $this->order_id   = $order->get_id();
+            $this->SESSION_ID           = $session_id;
+            $this->BROWSER_FINGER_PRINT = str_replace( $this->SESSION_ID_PREFIX, '', $session_id );
+            $this->order                = $order;
+            $this->order_id             = $order->get_id();
             $this->set_items();
         }
     }
@@ -118,10 +121,15 @@ class Cubo9_Braspag {
         $fee_gateway                = (int) $this->braspag_settings['fee_gateway'];
         $fee_antifraude             = (int) $this->braspag_settings['fee_antifraude'];
         $pass_rates                 = (bool) $this->braspag_settings['pass_rates'];
+        $pass_card_rates            = (bool) $this->braspag_settings['pass_card_rates'];
         $default_mdr                = (float) $this->braspag_settings['default_mdr'];
         $default_fee                = (int) $this->braspag_settings['default_fee'];
 
-        $mdr = (float) $default_mdr + $installment_rate;
+        $mdr = (float) $default_mdr;
+
+        if( $pass_card_rates ) {
+            $mdr = (float) $mdr + $installment_rate;
+        }
 
         if( $pass_rates ) {
             $fee = (int) $fee_gateway + $fee_antifraude + $default_fee;
@@ -132,12 +140,29 @@ class Cubo9_Braspag {
             }
         }
 
-        // Como pegar na tabela talents?
-
         if( is_array( $this->order_sellers  ) && count( $this->order_sellers  ) > 0 ) {
             foreach( $this->order_sellers as $k => $seller_data ) {
                 $Polen_Update_Fields = new Polen_Update_Fields();
                 $row_seller = $Polen_Update_Fields->get_vendor_data( $seller_data[ 'id' ] );
+                
+                if( $row_seller->mdr && ! is_null( $row_seller->mdr ) && $row_seller->mdr != '' ) {
+                    $mdr = (float) $row_seller->mdr;
+                    if( $pass_card_rates ) {
+                        $mdr = (float) $mdr + $installment_rate;
+                    }
+                }
+
+                if( $row_seller->fee && ! is_null( $row_seller->fee ) && $row_seller->fee != '' ) {
+                    if( $pass_rates ) {
+                        $fee = (int) $fee_gateway + $fee_antifraude + $row_seller->fee;
+                    } else {
+                        $fee = (int) $row_seller->fee;
+                        if( $default_mdr == (float) 0 ) {
+                            $fee = (int) $fee_gateway + $fee_antifraude + $row_seller->fee;
+                        }
+                    }
+                }
+
                 $splitpayments[] = array(
                     'subordinatemerchantid' => $row_seller->subordinate_merchant_id,
                     'amount'                => $seller_data['amount'],
@@ -148,16 +173,10 @@ class Cubo9_Braspag {
                 );
             }
         }
-        
 
         $taxes_and_shipping_split = $this->set_taxes_and_shipping_split();
         if( $taxes_and_shipping_split && is_array( $taxes_and_shipping_split ) && isset( $taxes_and_shipping_split['subordinatemerchantid'] ) ) {
             $splitpayments[] = $taxes_and_shipping_split;
-            $seller_info[1] = array(
-                'id'                    => 1,
-                'amount'                => $taxes_and_shipping_split['amount'],
-                'subordinatemerchantid' => $taxes_and_shipping_split['subordinatemerchantid'],
-            );
         }
 
         return $splitpayments;
@@ -207,8 +226,13 @@ class Cubo9_Braspag {
 
             $document_type     = 'CPF';
             $document_number   = substr( preg_replace( '/[^0-9]/', '', $billing_cpf ), 0, 18 );
-            $user_phone        = substr( preg_replace( '/[^0-9]/', '', $order_data['billing']['phone'] ), 0, 15 );
-            $user_mobile_phone = substr( preg_replace( '/[^0-9]/', '', $order_data['billing']['phone'] ), 0, 15 );
+            if( isset( $order_data['billing']['phone'] ) && ! empty( $order_data['billing']['phone'] ) ) {
+                $user_phone        = '55' . substr( preg_replace( '/[^0-9]/', '', $order_data['billing']['phone'] ), 0, 15 );
+                $user_mobile_phone = '55' . substr( preg_replace( '/[^0-9]/', '', $order_data['billing']['phone'] ), 0, 15 );
+            } else {
+                $user_phone        = '';
+                $user_mobile_phone = '';
+            }
 
             /**
              * E-mail do comprador
@@ -327,8 +351,8 @@ class Cubo9_Braspag {
                     'CaptureOnLowRisk' => false, 
                     'VoidOnHighRisk'   => false,
                     'Browser'          => array(
-                        'IpAddress'          => $_SERVER['REMOTE_ADDR'], // Endereço IP do Comprador
-                        'BrowserFingerPrint' => $this->SESSION_ID,       // Impressão digital do dispositivo do usuário, deve ser o mesmo SESSION ID do JavaScript incluído na página.
+                        'IpAddress'          => $_SERVER['REMOTE_ADDR'],     // Endereço IP do Comprador
+                        'BrowserFingerPrint' => $this->BROWSER_FINGER_PRINT, // Impressão digital do dispositivo do usuário, deve ser o mesmo SESSION ID do JavaScript incluído na página.
                     ),
                     'Shipping'         => array(
                         'Addressee' => $user_display_name, // Nome e sobrenome do usuário comprador
@@ -650,7 +674,7 @@ class Cubo9_Braspag {
     }
 
     public function set_merchant_defined_fields( array $args ) {
-        $user_id            = get_current_user_id();
+        $user_id            = ( is_user_logged_in() ) ? get_current_user_id() : null;
         $order_id           = $this->order->get_id();
         $installments       = $args['installments'];
         $credit_card_prefix = $args['credit_card_prefix'];
@@ -660,27 +684,29 @@ class Cubo9_Braspag {
         /**
 		 * Campos para envio de análise antifraudes.
 		 */
-        $current_user = get_user_by( 'id', $user_id );
-        $wordpress_timezone = new DateTimeZone( get_option('timezone_string') );
-		if( isset( $current_user->ID ) ) {
-			$user_registered = new DateTime( $current_user->user_registered, $wordpress_timezone );
-			$current_date = new DateTime( "now", $wordpress_timezone );
-			$date_interval = $user_registered->diff( $current_date );
+        if( ! is_null( $user_id ) ) {
+            $current_user = get_user_by( 'id', $user_id );
+            $wordpress_timezone = new DateTimeZone( get_option('timezone_string') );
+            if( isset( $current_user->ID ) ) {
+                $user_registered = new DateTime( $current_user->user_registered, $wordpress_timezone );
+                $current_date = new DateTime( "now", $wordpress_timezone );
+                $date_interval = $user_registered->diff( $current_date );
 
-			/**
-			 * Login do usuário
-			 */ 
-			if( isset( $current_user->user_login ) && ! is_null( $current_user->user_login ) && ! empty( $current_user->user_login ) ) {
-				$this->add_merchant_defined_fields( '1', $current_user->user_login );
-			}
+                /**
+                 * Login do usuário
+                 */ 
+                if( isset( $current_user->user_login ) && ! is_null( $current_user->user_login ) && ! empty( $current_user->user_login ) ) {
+                    $this->add_merchant_defined_fields( '1', $current_user->user_login );
+                }
 
-			/**
-			 * Quanto tempo em dias o usuário é cadastrado na plataforma
-			 */ 
-			if( (int) $date_interval->days > (int) 0 ) {
-				$this->add_merchant_defined_fields( '2', $date_interval->days );
-			}
-		}
+                /**
+                 * Quanto tempo em dias o usuário é cadastrado na plataforma
+                 */ 
+                if( (int) $date_interval->days > (int) 0 ) {
+                    $this->add_merchant_defined_fields( '2', $date_interval->days );
+                }
+            }
+        }
 
 		/**
 		 * Quantidade de parcelas do pedido
