@@ -11,6 +11,8 @@ use Polen\Includes\Polen_Cart;
 use Polen\Includes\Polen_Checkout;
 use Polen\Includes\Talent\{Polen_Talent_Router, Polen_Talent_Controller, Polen_Talent_Part_Theme};
 use Polen\Includes\Polen_Order;
+use Polen\Includes\Order_Review\{Polen_Order_Review_Controller, Polen_Order_Review_Router};
+use Polen\Includes\Polen_Signin_Newsletter;
 
 class Polen {
 
@@ -62,10 +64,21 @@ class Polen {
         new Polen_WooCommerce( true );
         new Polen_Talent_Part_Theme( true );
         new Polen_Video_Player( true );
+        new Polen_Signin_Newsletter( true );
 
+        //Endpoints Talent Logged
         $ctler = new Polen_Talent_Controller();
         $talent_area_router = new Polen_Talent_Router($ctler);
         $talent_area_router->init_routes();
+        
+        //OrderReview Action
+        new Polen_Order_Review( true );
+        //Endpoint OrderReview
+        $order_review_router = new Polen_Order_Review_Router( new Polen_Order_Review_Controller() );
+        $order_review_router->init_routes();
+
+        //OrderReview Theme Area
+        new Polen_Order_Review_Rewrite( true );
     }
 
     /**

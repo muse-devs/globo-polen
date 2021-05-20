@@ -9,11 +9,12 @@
 
 if ( ! defined( '_S_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', '1.0.3' );
+	define( '_S_VERSION', '1.0.5' );
 }
 
 define('TEMPLATE_URI', get_template_directory_uri());
 define('TEMPLATE_DIR', get_template_directory());
+define('DEVELOPER', defined('ENV_DEV') && ENV_DEV);
 
 if ( ! function_exists( 'polen_setup' ) ) :
 	/**
@@ -151,7 +152,7 @@ add_action( 'widgets_init', 'polen_widgets_init' );
 
 function get_assets_folder() {
 	$min = "min/";
-	if (defined('ENV_DEV') && ENV_DEV) {
+	if (DEVELOPER) {
 		$min = "";
 	}
 	return $min;
@@ -170,11 +171,15 @@ function polen_scripts() {
 		}
 	}
 
-	wp_enqueue_style('polen-custom-styles', TEMPLATE_URI . '/assets/css/style.css', array(), _S_VERSION);
+	// Registrando Scripts ------------------------------------------------------------------------------
 	wp_register_script( 'vimeo', 'https://player.vimeo.com/api/player.js', array(), '', true );
+	wp_register_script('vuejs', TEMPLATE_URI . '/assets/vuejs/' . $min . 'vue.js', array(), '', false);
+	wp_register_script( 'comment-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'comment.js', array("vuejs"), _S_VERSION, true );
+	// --------------------------------------------------------------------------------------------------
 
+	wp_enqueue_style('polen-custom-styles', TEMPLATE_URI . '/assets/css/style.css', array(), _S_VERSION);
 	if(is_singular() && is_product()) {
-		wp_enqueue_script( 'slick-slider', TEMPLATE_URI . '/assets/slick/slick.min.js', array("jquery"), _S_VERSION, true );
+		wp_enqueue_script( 'slick-slider', TEMPLATE_URI . '/assets/slick/slick.min.js', array("jquery"), '', true );
 		wp_enqueue_script( 'vimeo');
 		wp_enqueue_script( 'talent-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'talent.js', array("slick-slider", "vimeo"), _S_VERSION, true );
 	}
@@ -228,3 +233,8 @@ require_once TEMPLATE_DIR . '/inc/collection-front.php';
  * Arquivo responsavel por retornos HTML e icones
  */
 require_once TEMPLATE_DIR . '/classes/Icon_Class.php';
+
+/**
+ * Arquivo responsavel por retornos da tela de acompanhamento de pedidos
+ */
+require_once TEMPLATE_DIR . '/classes/Order_Class.php';

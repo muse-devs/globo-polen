@@ -29,47 +29,59 @@
 	@if $filename == camera-video {
 		$char: "\E001";
 	}
-	@if $filename == chevron-down {
+	@if $filename == check-o {
 		$char: "\E002";
 	}
-	@if $filename == clock {
+	@if $filename == chevron-down {
 		$char: "\E003";
 	}
-	@if $filename == close-o {
+	@if $filename == clock {
 		$char: "\E004";
 	}
-	@if $filename == close {
+	@if $filename == close-o {
 		$char: "\E005";
 	}
-	@if $filename == copy {
+	@if $filename == close {
 		$char: "\E006";
 	}
-	@if $filename == facebook {
+	@if $filename == copy {
 		$char: "\E007";
 	}
-	@if $filename == hand-thumbs-up {
+	@if $filename == error-o {
 		$char: "\E008";
 	}
-	@if $filename == instagram {
+	@if $filename == facebook {
 		$char: "\E009";
 	}
-	@if $filename == linkedin {
+	@if $filename == hand-thumbs-up {
 		$char: "\E00A";
 	}
-	@if $filename == phone {
+	@if $filename == instagram {
 		$char: "\E00B";
 	}
-	@if $filename == search {
+	@if $filename == linkedin {
 		$char: "\E00C";
 	}
-	@if $filename == software-download {
+	@if $filename == phone {
 		$char: "\E00D";
 	}
-	@if $filename == trash {
+	@if $filename == search {
 		$char: "\E00E";
 	}
-	@if $filename == twitter {
+	@if $filename == software-download {
 		$char: "\E00F";
+	}
+	@if $filename == star-fill {
+		$char: "\E010";
+	}
+	@if $filename == star {
+		$char: "\E011";
+	}
+	@if $filename == trash {
+		$char: "\E012";
+	}
+	@if $filename == twitter {
+		$char: "\E013";
 	}
 
 	@return $char;
@@ -89,6 +101,9 @@
 .icon-camera-video {
 	@include icon(camera-video);
 }
+.icon-check-o {
+	@include icon(check-o);
+}
 .icon-chevron-down {
 	@include icon(chevron-down);
 }
@@ -103,6 +118,9 @@
 }
 .icon-copy {
 	@include icon(copy);
+}
+.icon-error-o {
+	@include icon(error-o);
 }
 .icon-facebook {
 	@include icon(facebook);
@@ -124,6 +142,12 @@
 }
 .icon-software-download {
 	@include icon(software-download);
+}
+.icon-star-fill {
+	@include icon(star-fill);
+}
+.icon-star {
+	@include icon(star);
 }
 .icon-trash {
 	@include icon(trash);

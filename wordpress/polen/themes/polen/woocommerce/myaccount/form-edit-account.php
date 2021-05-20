@@ -28,6 +28,25 @@ if( $polen_talent->is_user_talent( $user ) ) {
 }else{
 
 do_action( 'woocommerce_before_edit_account_form' ); ?>
+<div class="row mb-3">
+	<div class="col-md-12">
+		<h1>Meus Dados</h1>
+	</div>
+</div>
+
+<?php
+if (is_plugin_active('wp-user-avatar/wp-user-avatar.php')) {
+	global $current_user;
+
+	//echo get_wp_user_avatar(get_current_user_id());
+
+	//$profile = null;
+	//$wpua = new WP_User_Avatar();
+	//echo $wpua->wpua_core_show_user_profile($profile);
+
+	echo do_shortcode( '[avatar_upload]');
+	//do_action('edit_user_avatar', wp_get_current_user());
+} ?>
 
 <form class="woocommerce-EditAccountForm edit-account mt-3" action="" method="post" <?php do_action( 'woocommerce_edit_account_form_tag' ); ?> >
 

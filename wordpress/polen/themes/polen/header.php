@@ -26,14 +26,18 @@
 	<link rel="profile" href="https://gmpg.org/xfn/11">
 	<?php wp_head(); ?>
 	<script>
-		var museobj = {
-			base_url: '<?= site_url(); ?>'
+		var polenObj = {
+			base_url: '<?= site_url(); ?>',
+			developer: <?php echo DEVELOPER ? 1 : 0; ?>
 		};
 	</script>
+
+    <?php include_once TEMPLATE_DIR . '/inc/analitics_header.php'; ?>
 </head>
 
 <body <?php body_class(); ?>>
 	<?php wp_body_open(); ?>
+    <?php include_once TEMPLATE_DIR . '/inc/analitics_init_body.php'; ?>
 	<div id="page" class="container site">
 		<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e('Skip to content', 'polen'); ?></a>
 
@@ -62,7 +66,7 @@
 								</div>
 							</a>
 							<div class="dropdown-content">
-								<div class="row mb-5 d-md-none">
+								<div class="row mb-4 d-md-none">
 									<div class="col-12">
 										<div class="user-avatar mb-1">
 											<?php
@@ -70,7 +74,7 @@
 												echo get_wp_user_avatar(get_current_user_id());
 											} ?>
 										</div>
-										<?php echo $user_name->display_name; ?>
+										<p class="user-name"><?php echo $user_name->display_name; ?></p>
 									</div>
 									<a class="menu-close"><?php Icon_Class::polen_icon_close(); ?></a>
 								</div>

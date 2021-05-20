@@ -19,10 +19,6 @@ If you would like to interact with us directly, you can join our Slack workspace
 
 Please check back nightly for new code pushes.
 
-## We still need your support!
-
-It is difficult and time consuming to continue development and support for this free plugin without contributions from users like yourself.  If you enjoy using Redux Framework, find it useful, and if it's saved you hours upon hours of development time, please consider [donating and helping us hit our fundraising goal](https://www.gofundme.com/development-of-redux-framework-v4). Your donations will help encourage and support the plugin’s continued development and better user support.
-
 ## Changelog ##
 
 See [Changelog.md](https://github.com/reduxframework/redux-framework-4/blob/master/CHANGELOG.md)
@@ -84,5 +80,5 @@ Future development of our extension library for new features and updates for Red
 #### What happens to Redux v3 when v4 is finished?
 Upon completion, Redux v4 will completely replace v3 in our primary repository and at wp.org.  At that time, we will no longer be offering v3 in any form nor will we be maintaining any code v3.  Any copies or forks out there will be considered deprecated and should be considered 'as is'. 
 
-#### Is Redux v4 free?
-Yes.  This is the 'core' and it remains free to use, fork, embed, etc.  However, what you see is what you get.  All new features, extensions, add-ons, etc will come in the form of Redux Pro, which will require a maintained subscription for licensed usage.  We do not yet have details to offer about availability or pricing at this time.  Please join our mailing list for updates on this and other Redux related news as it becomes available: [https://redux.io/subscribe-to-redux-framework](https://redux.io/subscribe-to-redux-framework)
+<!--#### Is Redux v4 free?
+Yes.  This is the 'core' and it remains free to use, fork, embed, etc.  However, what you see is what you get.  All new features, extensions, add-ons, etc will come in the form of Redux Pro, which will require a maintained subscription for licensed usage.  We do not yet have details to offer about availability or pricing at this time.  Please join our mailing list for updates on this and other Redux related news as it becomes available: [https://redux.io/subscribe-to-redux-framework](https://redux.io/subscribe-to-redux-framework) -->

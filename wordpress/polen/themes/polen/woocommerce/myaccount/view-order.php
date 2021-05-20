@@ -1,72 +1,37 @@
 <?php
 
+/**
+ * @version 3.0.0
+ */
 defined('ABSPATH') || exit;
-
-function get_icon($bool)
-{
-	if ($bool) {
-		return Icon_Class::polen_icon_check_o();
-	} else {
-		return Icon_Class::polen_icon_exclamation_o();
-	}
-}
 
 $notes = $order->get_customer_order_notes();
 $order_number = $order->get_order_number();
-$order_status = wc_get_order_status_name($order->get_status());
+$order_status = $order->get_status();
 
-$flow_1 = array(
-	"success" => true,
-	"title" => "Pedido feito com sucesso",
-	"description" => "Seu número de pedido é " . $order_number,
-	"class" => "complete"
-);
-
-$flow_2 = array(
-	"success" => true,
-	"title" => "Aguardando confirmação do talento",
-	"description" => "Caso seu pedido não seja aprovado pelo talento o seu dinheiro será devolvido imediatamente.",
-	"class" => "in-progress"
-);
-
-$flow_3 = array(
-	"success" => true,
-	"title" => "Aguardando gravação do vídeo",
-	"description" => "Quando o artista disponibilizar o vídeo ele será exibido aqui",
-	"class" => "waiting"
-); //se falhar, "class" => "fail"
+$order_array = Order_Class::polen_get_order_flow_obj($order_number, $order_status);
 ?>
-
-<div class="row my-4">
-	<div class="col-12">
-		<div class="order-flow d-flex">
-			<div class="col-flow-icons mr-3">
-				<div class="flow-icon d-flex flex-column justify-content-start align-items-center <?php echo $flow_1["class"]; ?>">
-					<div class="flow flow-1"><?php get_icon($flow_1["success"]); ?></div>
-					<div class="line line-1"></div>
-				</div>
-				<div class="flow-icon d-flex flex-column align-items-center <?php echo $flow_2["class"]; ?>">
-					<div class="flow flow-2"><?php get_icon($flow_2["success"]); ?></div>
-					<div class="line line-2"></div>
-				</div>
-				<div class="flow-icon d-flex flex-column align-items-center <?php echo $flow_3["class"]; ?>">
-					<div class="flow flow-3"><?php get_icon($flow_3["success"]); ?></div>
-				</div>
-			</div>
-			<div class="col-flow-texts">
-				<div class="flow flow-1 <?php echo $flow_1["class"]; ?>">
-					<h2 class="title mb-2"><?php echo $flow_1["title"]; ?></h2>
-					<p class="description"><?php echo $flow_1["description"]; ?></p>
-				</div>
-				<div class="flow flow-2 d-flex flex-column justify-content-center <?php echo $flow_2["class"]; ?>">
-					<h2 class="title mb-2"><?php echo $flow_2["title"]; ?></h2>
-					<p class="description"><?php echo $flow_2["description"]; ?></p>
-				</div>
-				<div class="flow flow-3 mt-4 <?php echo $flow_3["class"]; ?>">
-					<h2 class="title mb-2"><?php echo $flow_3["title"]; ?></h2>
-					<p class="description"><?php echo $flow_3["description"]; ?></p>
-				</div>
-			</div>
-		</div>
+<div class="row">
+	<div class="col-md-12 mb-5">
+		<h1>Acompanhar pedido</h1>
+	</div>
+	<div class="col-md-12">
+		<?php polen_get_order_flow_layout($order_array); ?>
 	</div>
 </div>
+
+<?php
+
+use \Polen\Includes\Polen_Order;
+
+$order_is_completed = Polen_Order::is_completed($order);
+$url_watch_video = $order_is_completed == true ? polen_get_link_watch_video_by_order_id($order_number) : '';
+?>
+
+<?php if ($order_is_completed) : ?>
+	<div class="row my-3">
+		<div class="col-12">
+			<a href="<?php echo $url_watch_video; ?>" class="btn btn-outline-light btn-lg btn-block">Assistir vídeo</a>
+		</div>
+	</div>
+<?php endif; ?>

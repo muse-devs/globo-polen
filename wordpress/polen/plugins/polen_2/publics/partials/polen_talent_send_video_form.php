@@ -1,7 +1,8 @@
-<?php 
+<?php
+
 use \Polen\Includes\Cart\Polen_Cart_Item_Factory;
 
-if( isset( $_REQUEST['order_id'] ) && ! empty( $_REQUEST['order_id'] ) ) {
+if (isset($_REQUEST['order_id']) && !empty($_REQUEST['order_id'])) {
     $min = get_assets_folder();
     wp_enqueue_script('polen-upload-video-tus', TEMPLATE_URI . '/assets/js/' . $min . 'tus.js', array(), _S_VERSION, true);
     wp_enqueue_script('polen-upload-video', TEMPLATE_URI . '/assets/js/' . $min . 'upload-video.js', array("jquery"), _S_VERSION, true);
@@ -10,7 +11,7 @@ if( isset( $_REQUEST['order_id'] ) && ! empty( $_REQUEST['order_id'] ) ) {
     $order_id = filter_input(INPUT_GET, 'order_id');
     $order = wc_get_order($order_id);
     $polen_order = Polen_Cart_Item_Factory::polen_cart_item_from_order($order);
-    ?>
+?>
 
     <main id="primary" class="site-main mt-4">
         <header class="entry-header">
@@ -40,7 +41,7 @@ if( isset( $_REQUEST['order_id'] ) && ! empty( $_REQUEST['order_id'] ) ) {
                 <div class="col-12">
                     <form id="form-video-upload" method="post" enctype="multipart/form-data">
                         <div class="form-group text-center">
-                            <button id="video-rec" class="btn btn-primary btn-lg btn-block video-rec show">Gravar vídeo</button>
+                            <button id="video-rec" data-toggle="modal" data-target="#OrderActions" class="btn btn-primary btn-lg btn-block show">Gravar vídeo</button>
                             <div id="video-file-name" class="text-truncate ml-2"></div>
                             <input type="file" class="form-control-file" id="file-video" name="file_data" accept="video/*" capture="user">
                         </div>
@@ -59,11 +60,11 @@ if( isset( $_REQUEST['order_id'] ) && ! empty( $_REQUEST['order_id'] ) ) {
                 <div class="row modal-body">
                     <!-- Início -->
                     <div class="col-12 talent-order-modal">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"></button>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"></button>
                         <div class="body">
                             <div class="row d-flex align-items-center">
                                 <?php
-                                if( !empty( $polen_order->get_offered_by() ) ) : ?>
+                                if (!empty($polen_order->get_offered_by())) : ?>
                                     <div class="col-12">
                                         <p class="title">Vídeo de</p>
                                         <span class="name"><?= $polen_order->get_offered_by(); ?></span>
@@ -90,6 +91,11 @@ if( isset( $_REQUEST['order_id'] ) && ! empty( $_REQUEST['order_id'] ) ) {
                                 <div class="col">
                                     <p class="p small mb-2">Instruções</p>
                                     <p class="text"><?= $polen_order->get_instructions_to_video(); ?></p>
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col">
+                                    <button class="btn btn-primary btn-lg btn-block video-rec show" data-dismiss="modal" aria-label="Fechar">Gravar vídeo</button>
                                 </div>
                             </div>
                         </div>
