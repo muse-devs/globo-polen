@@ -276,7 +276,7 @@
 		background-color: $secondary;
 	}
 	.body {
-		padding: 35px 0 0;
+		padding: 35px 0;
 		box-sizing: border-box;
 	}
 	.name {
@@ -414,6 +414,30 @@
 		&.show {
 			display: block;
 		}
+	}
+	.image {
+		display: none;
+		&.show {
+			display: block;
+		}
+	}
+	.progress-text {
+		font-size: 16px;
+	}
+}
+
+.box-video-success {
+	.text {
+		font-size: 15px;
+		font-weight: 400;
+		strong {
+			font-size: 16px;
+			font-weight: 700;
+		}
+	}
+	.value {
+		font-size: 24px;
+		font-weight: 700;
 	}
 }
 

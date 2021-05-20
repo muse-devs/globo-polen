@@ -18,13 +18,16 @@ if (isset($_REQUEST['order_id']) && !empty($_REQUEST['order_id'])) {
             <?php the_title('<h1 class="entry-title">', '</h1>'); ?>
             <button class="btn btn-outline-light btn-lg btn-block mt-4" data-toggle="modal" data-target="#OrderActions">Instruções</button>
         </header>
-        <article>
-            <div class="row mt-4">
+        <article class="box-round mt-3 px-3 pb-2 pt-4">
+            <div class="row">
                 <div class="col-12">
                     <div class="py-3 text-center box-video">
                         <div id="content-info" class="content-info show">
-                            <figure class="image">
-                                <img src="<?php echo TEMPLATE_URI ?>/assets/img/upload-info.png" alt="Gravar vídeo agora">
+                            <figure class="image wait show">
+                                <img src="<?php echo TEMPLATE_URI ?>/assets/img/upload-info.png" alt="Gravar vídeo agora" class="correct-margin" />
+                            </figure>
+                            <figure class="image complete">
+                                <img src="<?php echo TEMPLATE_URI ?>/assets/img/upload-complete.png" alt="Gravar vídeo agora" class="correct-margin" />
                             </figure>
                             <p id="info" class="info"></p>
                         </div>
@@ -32,7 +35,7 @@ if (isset($_REQUEST['order_id']) && !empty($_REQUEST['order_id'])) {
                             <div class="spinner-border text-secondary" role="status">
                                 <span class="sr-only">Loading...</span>
                             </div>
-                            <p class="my-4"><strong id="progress-value">Enviando vídeo 0%</strong></p>
+                            <p class="my-4 progress-text"><strong id="progress-value">Enviando vídeo 0%</strong></p>
                         </div>
                     </div>
                 </div>
@@ -46,7 +49,7 @@ if (isset($_REQUEST['order_id']) && !empty($_REQUEST['order_id'])) {
                             <input type="file" class="form-control-file" id="file-video" name="file_data" accept="video/*" capture="user">
                         </div>
                         <button type="submit" id="video-send" class="send-video btn btn-primary btn-lg btn-block">Enviar</button>
-                        <button id="video-rec-again" class="btn btn-outline-light btn-lg btn-block video-rec">Não gostei, gravar outro video</button>
+                        <button id="video-rec-again" class="btn btn-outline-light btn-lg btn-block mt-3 video-rec">Não gostei, gravar outro video</button>
                     </form>
                 </div>
             </div>
@@ -60,36 +63,38 @@ if (isset($_REQUEST['order_id']) && !empty($_REQUEST['order_id'])) {
                 <div class="row modal-body">
                     <!-- Início -->
                     <div class="col-12 talent-order-modal">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"></button>
+                        <button type="button" class="modal-close" data-dismiss="modal" aria-label="Fechar">
+                            <i class="icon icon-close"></i>
+                        </button>
                         <div class="body">
                             <div class="row d-flex align-items-center">
                                 <?php
                                 if (!empty($polen_order->get_offered_by())) : ?>
                                     <div class="col-12">
-                                        <p class="title">Vídeo de</p>
-                                        <span class="name"><?= $polen_order->get_offered_by(); ?></span>
+                                        <p class="p">Vídeo de</p>
+                                        <span class="value small"><?= $polen_order->get_offered_by(); ?></span>
                                     </div>
                                 <?php endif; ?>
                                 <div class="col-12 mt-3">
-                                    <p class="title">Para</p>
-                                    <span class="name"><?= $polen_order->get_name_to_video(); ?></span>
+                                    <p class="p">Para</p>
+                                    <span class="value small"><?= $polen_order->get_name_to_video(); ?></span>
                                 </div>
                             </div>
                             <div class="row mt-4">
                                 <div class="col">
-                                    <p class="title mb-3">Ocasião</p>
-                                    <span class="name"><?= $polen_order->get_video_category(); ?></span>
+                                    <p class="p">Ocasião</p>
+                                    <span class="value small"><?= $polen_order->get_video_category(); ?></span>
                                 </div>
                             </div>
                             <div class="row mt-4">
                                 <div class="col">
-                                    <p class="title mb-3">e-mail de contato</p>
-                                    <span class="name small"><?= $polen_order->get_email_to_video(); ?></span>
+                                    <p class="p">e-mail de contato</p>
+                                    <span class="value small"><?= $polen_order->get_email_to_video(); ?></span>
                                 </div>
                             </div>
                             <div class="row mt-4">
                                 <div class="col">
-                                    <p class="p small mb-2">Instruções</p>
+                                    <p class="p">Instruções</p>
                                     <p class="text"><?= $polen_order->get_instructions_to_video(); ?></p>
                                 </div>
                             </div>
