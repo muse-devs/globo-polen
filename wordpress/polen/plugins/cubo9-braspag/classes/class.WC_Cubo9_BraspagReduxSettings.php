@@ -241,6 +241,17 @@ class WC_Cubo9_BraspagReduxSettings {
                                             array( 'enable_braspag_sandbox', 'equals', '0' ) 
                                         ),
                     ),
+                    array(
+                        'id'           => 'master_merchant_key',
+                        'type'         => 'text',
+                        'title'        => __( 'Produção: Merchant Key (Master)', 'cubo9' ),
+                        'subtitle'     => __( 'Informe o Merchant Key do usuário Master.', 'cubo9' ),
+                        'desc'         => esc_html__( 'Informe o Merchant Key do usuário Master no ambiente de produção.', 'cubo9' ),
+                        'default'      => false,
+                        'required'     => array( 
+                                            array( 'enable_braspag_sandbox', 'equals', '0' ) 
+                                        ),
+                    ),
 
                     // Ambiente de Sandbox
                     array(
@@ -282,6 +293,17 @@ class WC_Cubo9_BraspagReduxSettings {
                         'title'        => __( 'Sandbox: Client Secret (Master)', 'cubo9' ),
                         'subtitle'     => __( 'Informe o client secret do usuário Master.', 'cubo9' ),
                         'desc'         => esc_html__( 'Informe o client secret do usuário Master no ambiente de sandbox.', 'cubo9' ),
+                        'default'      => false,
+                        'required'     => array( 
+                                            array( 'enable_braspag_sandbox', 'equals', '1' ) 
+                                        ),
+                    ),
+                    array(
+                        'id'           => 'sandbox_master_merchant_key',
+                        'type'         => 'text',
+                        'title'        => __( 'Sandbox: Merchant Key (Master)', 'cubo9' ),
+                        'subtitle'     => __( 'Informe o Merchant Key do usuário Master.', 'cubo9' ),
+                        'desc'         => esc_html__( 'Informe o Merchant Key do usuário Master no ambiente de sandbox.', 'cubo9' ),
                         'default'      => false,
                         'required'     => array( 
                                             array( 'enable_braspag_sandbox', 'equals', '1' ) 
@@ -445,31 +467,20 @@ class WC_Cubo9_BraspagReduxSettings {
                 'subsection'       => false,
                 'fields'           => array(
                     array(
+                        'id'       => 'pass_card_rates',
+                        'type'     => 'switch',
+                        'title'    => esc_html__( 'Taxas do cartão pagas pela loja', 'cubo9' ),
+                        'subtitle' => esc_html__( 'Habilite esta opção caso as taxas do Cartão sejam responsabilidade da loja.', 'cubo9' ),
+                        'desc'     => esc_html__( 'Habilite esta opção caso as taxas do Cartão por transação sejam descontadas da loja.', 'cubo9' ),
+                        'default'  => 1,
+                    ),
+                    array(
                         'id'       => 'card_brand',
                         'type'     => 'credit_card_installments',
                         'title'    => esc_html__('Cartão', 'cubo9'),
                         'subtitle' => esc_html__('Informe o nome da bandeira, slug, ícone e taxas.', 'cubo9'),
                         'add_text' => 'Adicionar novo',
                         'show_empty' => false,
-                    ),
-                )
-            ) );
-
-            Redux::set_section( $opt_name, array(
-                'title'            => esc_html__( 'Cancelamento', 'cubo9' ),
-                'id'               => 'order_void',
-                'icon'             => 'el el-credit-card',
-                'subsection'       => false,
-                'fields'           => array(
-                    array(
-                        'id'       => 'order_expires',
-                        'type'     => 'spinner',
-                        'title'    => esc_html__('Validade do pedido', 'cubo9'),
-                        'subtitle' => esc_html__('Informe o prazo de validade de um pedido em dias.', 'cubo9'),
-                        'desc'     => esc_html__('Utilize essa opção para que os pedidos possam expirar automaticamente e ter o valor estornado.', 'cubo9'),
-                        'default'  => '7',
-                        'min'      => '0',
-                        'max'      => '30',
                     ),
                 )
             ) );

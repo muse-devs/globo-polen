@@ -25,10 +25,10 @@ function _polen_get_first_category_object( $ids ) {
  * @param \WP_Product $talent_object
  * @return type
  */
-function _polen_get_info_talent_by_product_id( \WC_Product $talent_object ) {
+function _polen_get_info_talent_by_product_id( \WC_Product $talent_object, $size = 'polen-thumb-md' ) {
         $talent = [];
         $talent['ID'] = $talent_object->get_id();
-        $talent['image'] = $talent_object->get_image();
+        $talent['image'] = $talent_object->get_image( $size );
         $talent['talent_url'] = $talent_object->get_permalink();
         $talent['price'] = $talent_object->get_price();
         $talent['price_formatted'] = $talent_object->get_price_html();
@@ -36,17 +36,16 @@ function _polen_get_info_talent_by_product_id( \WC_Product $talent_object ) {
 
         $ids = $talent_object->get_category_ids();
         $category = _polen_get_first_category_object( $ids );
-        //TODO pegar a URL da categoria, onde isso vai dar?
-        $talent['category_url'] = '/#categorias/' . $category->slug;
+        $talent['category_url'] = polen_get_url_category_by_term_id( $category->term_id );
         $talent['category'] = $category->name;
         return $talent;
 }
 
 
 /**
- * Usando a funcao _get_info_talent_by_product_id dentro de um loop para 
+ * Usando a funcao _get_info_talent_by_product_id dentro de um loop para
  * retornar varios talentos no formato dos cards
- * 
+ *
  * @param array $args
  * @return type
  */
@@ -82,7 +81,7 @@ function polen_get_new_talents(int $quantity = 4)
 
 /**
  * Pegar dados e formatar para o cord de categorias
- * 
+ *
  * @param \WP_Term $category_object
  * @return type
  */
@@ -91,9 +90,8 @@ function _polen_get_category_info( \WP_Term $category_object )
     $category = [];
     $category[ 'ID' ] = $category_object->term_id;
     $category[ 'title' ] = $category_object->name;
-    //TODO resolver qual vai ser a URL da categoria e onde vai ser o resultado
-    $category[ 'url' ] = '/#catogoria/' . $category_object->slug;
-    
+    $category[ 'url' ] = polen_get_url_category_by_term_id( $category[ 'ID' ] );
+
     $thumbnail_id = get_term_meta( $category_object->term_id, 'thumbnail_id', true );
     $category[ 'image' ] = wp_get_attachment_url( $thumbnail_id );
 
@@ -116,7 +114,7 @@ function polen_get_categories_home(int $quantity = 4)
         'order' => 'count',
         'exclude' => '15',
     ];
-    
+
     $categories_object = get_terms( $args );
     $categories = [];
     foreach ( $categories_object as $category_object ) {
@@ -148,11 +146,58 @@ function polen_get_talents( int $quantity = 10 )
 /**
  * Retorna a URL do arquivo JSON das occasions para a tela do brief do videos
  * antes da compara pelo costumer.
- * 
+ *
  * @return string
  */
 function polen_get_occasions_json()
 {
     $occasion_list = new Polen\Includes\Polen_Occasion_List();
     return $occasion_list->get_url_occasion_json();
+}
+
+
+/**
+ * Pega os produtos relacionados (na mesma cat) a retorna um array para a func polen_banner_scrollable
+ * @param int $product_id
+ * @return array [['ID'=>xx,'talent_url'=>'...','name'=>'...','price'=>'...','category_url'=>'...','category'=>'...']]
+ */
+function polen_get_array_related_products( $product_id )
+{
+    $cat_terms = wp_get_object_terms( $product_id, 'product_cat');
+    $cat_link = polen_get_url_category_by_product_id( $product_id );
+    $terms_ids = array();
+    if (count($cat_terms) > 0) {
+        foreach ($cat_terms as $k => $term) {
+            $terms_ids[] = $term->term_id;
+        }
+    }
+    if (count($terms_ids) > 0) {
+        $others = get_objects_in_term($terms_ids, 'product_cat');
+        $arr_obj = array();
+        $arr_obj[] = get_the_ID();
+        shuffle($others);
+
+        if (count($others)) {
+            $args = array();
+            foreach ($others as $k => $id) {
+                if (!in_array($id, $arr_obj)) {
+                    if (count($arr_obj) > 5) {
+                        exit;
+                    }
+                    $product = wc_get_product($id);
+                    $arr_obj[] = $id;
+
+                    $args[] = array(
+                        "ID" => $id,
+                        "talent_url" => get_permalink($id),
+                        "name" => $product->get_title(),
+                        "price" => $product->get_regular_price(),
+                        "category_url" => $cat_link,
+                        "category" => wc_get_product_category_list($id)
+                    );
+                }
+            }
+            return $args;
+        }
+    }
 }

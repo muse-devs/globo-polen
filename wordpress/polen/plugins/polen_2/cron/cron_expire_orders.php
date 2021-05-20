@@ -24,12 +24,12 @@ echo "\n\n";
 global $wpdb, $Polen_Plugin_Settings, $WC_Cubo9_BraspagReduxSettings;
 
 $current_date = new DateTime( 'now', new DateTimeZone( wp_timezone_string() ) );
-$date_minus_one_hour = new DateInterval( 'P' . $WC_Cubo9_BraspagReduxSettings['order_expires'] . 'D' );
+$date_minus_one_hour = new DateInterval( 'P' . $Polen_Plugin_Settings['order_expires'] . 'D' );
 $current_date_string = $current_date->format( 'Y-m-d H:i:s' );
 $current_date->sub( $date_minus_one_hour );
 $date_string_expires = $current_date->format( 'Y-m-d H:i:s' );
 
-$sql = "SELECT `ID` FROM `" . $wpdb->posts . "` WHERE `post_type`='shop_order' AND `post_status`='wc-payment-approved' AND `post_date` <= '" . $date_string_expires . "'";
+$sql = "SELECT `ID` FROM `" . $wpdb->posts . "` WHERE `post_type`='shop_order' AND `post_status` IN ( 'wc-payment-approved', 'wc-talent-accepted' ) AND `post_date` <= '" . $date_string_expires . "'";
 $res = $wpdb->get_results( $sql );
 if( $res && ! is_null( $res ) && ! is_wp_error( $res ) && is_array( $res ) && count( $res ) > 0 ) {
     foreach( $res as $k => $row ) {
@@ -40,13 +40,13 @@ if( $res && ! is_null( $res ) && ! is_wp_error( $res ) && is_array( $res ) && co
 
         if( isset( $return['ProviderReturnMessage'] ) && $return['ProviderReturnMessage'] == 'Operation Successful' ) {
             if( $order->get_status() != 'talent-rejected' ) {
-                $order->update_status( 'talent-rejected', 'order_note' );
-                echo '#' . $order_id . ': Cancelado e estornado.'; 
+                $order->update_status( 'order-expired', 'order_note' );
+                echo '#' . $order_id . ': Cancelado e estornado.' . "\n";
             }
         } else {
             echo '#' . $order_id . ': ' . $return['Message'] . "\n";
             if( $return['Message'] == 'Transaction not available to refund' ) {
-                $order->update_status( 'talent-rejected', 'order_note' );
+                $order->update_status( 'order-expired', 'order_note' );
                 echo '#' . $order_id . ': Marcado como cancelado e estornado.' . "\n"; 
             }
         }

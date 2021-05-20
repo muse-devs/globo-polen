@@ -26,8 +26,12 @@ pre {
 }
 
 select {
-	padding: 10px 15px !important;
+	padding: 15px 15px !important;
 	-webkit-appearance: none;
+}
+
+iframe {
+	display: block;
 }
 
 .screen-reader-text {

@@ -1,4 +1,7 @@
 <?php
+/**
+ * @version 3.7.0
+ */
 defined('ABSPATH') || exit;
 
 use \Polen\Includes\{ Polen_Order, Polen_Talent };
@@ -25,7 +28,7 @@ if( $polen_talent->is_user_talent( $logged_user ) ) {
 				break;
 			}
 		?>
-			<div class="row mt-4">
+			<div class="row mt-3">
 				<div class="col-12">
 					<div class="talent-card alt">
 						<div class="row px-3">
@@ -59,7 +62,7 @@ if( $polen_talent->is_user_talent( $logged_user ) ) {
 							<div class="col-12 text-center mt-4 mb-3">
 								<div class="row">
 									<?php
-									if( $order->get_status() != Polen_Order::is_completed( $order ) ):
+									if( !Polen_Order::is_completed( $order ) ):
 									?>
 										<a href="<?php echo $order->get_view_order_url(); ?>" class="btn btn-primary btn-lg btn-block">
 											Acompanhar pedido
@@ -68,7 +71,7 @@ if( $polen_talent->is_user_talent( $logged_user ) ) {
 									else :
 										//TODO ADD A URL PARA ASSISTIR O VIDEO
 									?>
-										<a href="<?php echo wc_get_page_permalink( 'myaccount' ).'watch-video?order_id='.$order->get_order_number(); ?>" class="btn btn-primary btn-lg btn-block">
+										<a href="<?php echo polen_get_link_watch_video_by_order_id( $order->get_order_number() ); ?>" class="btn btn-primary btn-lg btn-block">
 											Ver Video
 										</a>
 									<?php

@@ -2,6 +2,11 @@
 
 class Icon_Class
 {
+	public static function polen_icon_clipboard()
+	{
+		echo '<i class="bi bi-clipboard"></i>';
+	}
+
 	public static function polen_icon_card($name)
 	{
 		echo '<span class="svg-icon svg-' . $name . ' svg-' . $name . '-dims"></span>';
@@ -29,7 +34,7 @@ class Icon_Class
 
 	public static function polen_icon_exclamation_o()
 	{
-		echo '<i class="bi bi-exclamation-circle"></i>';
+		echo '<i class="icon icon-error-o"></i>';
 	}
 
 	public static function polen_icon_checkmark()
@@ -37,9 +42,9 @@ class Icon_Class
 		echo '<i class="bi bi-check"></i>';
 	}
 
-	public static function polen_icon_reload()
+	public static function polen_icon_reload($id)
 	{
-		echo '<i class="bi bi-arrow-clockwise"></i>';
+		echo '<i id="' . $id . '" class="bi bi-arrow-clockwise"></i>';
 	}
 
 	public static function polen_icon_share()
@@ -55,9 +60,9 @@ class Icon_Class
 	public static function polen_icon_star($active = false)
 	{
 		if ($active) {
-			echo '<i class="bi bi-star-fill" style="color: #FFF963;"></i>';
+			echo '<i class="icon icon-star-fill" style="color: #FFCF34;"></i>';
 		} else {
-			echo '<i class="bi bi-star"></i>';
+			echo '<i class="icon icon-star"></i>';
 		}
 	}
 
@@ -107,10 +112,11 @@ class Icon_Class
 
 	public static function polen_icon_close()
 	{
-		echo '<i class="bi bi-x"></i>';
+		echo '<i class="icon icon-close"></i>';
 	}
 
-	public static function polen_icon_trash() {
+	public static function polen_icon_trash()
+	{
 		echo '<i class="icon icon-trash"></i>';
 	}
 
@@ -132,6 +138,10 @@ class Icon_Class
 
 			case 'twitter':
 				$ret = '<i class="icon icon-twitter"></i>';
+				break;
+
+			case 'whatsapp':
+				$ret = '<i class="bi bi-whatsapp"></i>';
 				break;
 
 			default:

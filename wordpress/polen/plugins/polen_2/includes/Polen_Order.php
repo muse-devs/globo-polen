@@ -8,6 +8,8 @@
 
 namespace Polen\Includes;
 
+use Polen\Publics\Polen_Public;
+
 class Polen_Order
 {
     
@@ -138,43 +140,47 @@ class Polen_Order
     
     
 
-    public function polen_search_order_shortcode() { 
-    ?>    
-        <div id="primary" class="content-area cart-other">
-        <main id="main" class="site-main" role="main">
-            <form action="/acompanhamento" method="post" class="form_search_order">
-                <?php wp_nonce_field('user_search_order', '_wpnonce', true, true );?>
-                <div>
-                    <div class="row mt-3">
-                        <div class="col-md-6">
-                            <input id="fan_email" class="form-control form-control-lg" name="fan_email" value="" placeholder="E-mail" required="required"/>
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-md-6">
-                            <input id="order_number" class="form-control" name="order_number" value="" placeholder="Número do pedido" required="required"/>
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-md-6">
-                            <button type="submit" class="btn btn-primary btn-lg btn-block py-4 btn-search-order" name="" value="">Buscar</button>
-                        </div>
-                    </div>    
-                </div>
-            </form>    
-        </main>
-        </div>
-    <?php
+    public function polen_search_order_shortcode() {
+        $url_page_tracking = get_permalink( get_page_by_path( 'acompanhar-pedido-detalhes' ));
+        
+        ob_start();
+        wp_nonce_field('user_search_order', '_wpnonce', true, true );
+        $nonce_html = ob_get_contents();
+        ob_end_clean();
+        
+        $html_raw = file_get_contents( Polen_Public::static_get_path_public_patials() . 'polen_order_tracking_anonimous_credentials.php' );
+        $html = vsprintf( $html_raw, [$url_page_tracking, $nonce_html] );
+        return $html;
     } 
 
-    public function polen_search_result_shortcode() { 
-    ?>    
-        <div id="primary" class="content-area cart-other">
-        <main id="main" class="site-main" role="main">
-            <?php var_dump( $this->order_status_track() );?>
-        </main>
-        </div>
-    <?php
+
+
+
+    public function polen_search_result_shortcode()
+    {
+        $order_number = filter_input( INPUT_POST, 'order_number', FILTER_VALIDATE_INT );
+        $fan_email = filter_input( INPUT_POST, 'fan_email', FILTER_VALIDATE_EMAIL );
+        if( !$order_number || !$fan_email ) {
+            wc_add_notice( 'Email ou numero do pedidos inválidos', 'error' );
+            wp_safe_redirect( get_permalink( get_page_by_path( 'acompanhar-pedido' ) ) );
+            exit;
+        }
+
+        $order = wc_get_order( $order_number );
+        $email_inside_order = $order->get_billing_email();
+
+        if( $fan_email != $email_inside_order ) {
+            wc_add_notice( 'Email e pedido não são iguais', 'error' );
+            wp_safe_redirect( get_permalink( get_page_by_path( 'acompanhar-pedido' ) ) );
+            exit;
+        }
+
+        // $order = wc_get_order(77);
+        $notes = $order->get_customer_order_notes();
+        $order_number = $order->get_order_number();
+        $order_status = $order->get_status();
+        include_once TEMPLATE_DIR . '/woocommerce/checkout/thankyou.php'; 
+
     }
 
     public function polen_watch_video(){ 

@@ -121,6 +121,15 @@ class Polen_Public {
             return dirname( __FILE__ ) . '/partials/';
         }
 
+        /**
+         * 
+         * @return string
+         */
+        static public function static_get_path_public_patials()
+        {
+            return dirname( __FILE__ ) . '/partials/';
+        }
+
                 
         
         /**

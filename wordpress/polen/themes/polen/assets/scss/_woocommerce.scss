@@ -124,6 +124,10 @@ select.form-control:not([size]):not([multiple]) {
 	list-style: none outside;
 	width: auto;
 	word-wrap: break-word;
+	a {
+		font-size: 12px;
+		font-weight: normal;
+	}
 }
 
 .woocommerce-notices-wrapper {
@@ -149,5 +153,41 @@ select.form-control:not([size]):not([multiple]) {
 .woocommerce-page .woocommerce-ordering {
 	@include media-breakpoint-down(sm) {
 		float: left;
+	}
+}
+
+.woocommerce .cart-collaterals .cross-sells,
+.woocommerce-page .cart-collaterals .cross-sells {
+	width: 100%;
+	float: none;
+}
+
+.woocommerce #respond input#submit,
+.woocommerce a.button,
+.woocommerce button.button,
+.woocommerce input.button {
+	margin-top: 1rem;
+	color: var(--light);
+	background-color: transparent;
+	border: 1px solid;
+	border-radius: 6px;
+}
+
+#add_payment_method #payment div.payment_box,
+.woocommerce-cart #payment div.payment_box,
+.woocommerce-checkout #payment div.payment_box {
+	color: var(--light);
+}
+
+.blockUI.blockOverlay {
+	background-color: $dark-50 !important;
+	&::before {
+		width: 2rem !important;
+		height: 2rem !important;
+		border: .2em solid var(--primary) !important;
+		border-left-color: var(--light) !important;
+		border-radius: 50%;
+		background: none !important;
+		animation: .75s linear infinite spinner-border !important;
 	}
 }

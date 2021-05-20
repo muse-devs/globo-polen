@@ -8,11 +8,13 @@ $error-box-color: #fdebeb;
 
 $body-bg: #000;
 $body-color: $light-100;
-$primary: #b620e0;
-$primary-hover: #cc30f8;
+$primary: #d7198b;
+$primary-hover: lighten($primary, 10%);
 $secondary: #377dff;
 $accept: #3cc13b;
+$teal: #ebf9eb;
 $danger: #ff000f;
+$danger-bg: #fdebeb;
 
 $progress-bar-bg: $secondary;
 $nav-tabs-link-active-color: $primary;
@@ -22,17 +24,24 @@ $default-bg-color: $light-25;
 $secondary-bg-color: $light-50;
 $font-transparent: $light-50;
 $talent-bg-color: #272727;
-$form-bg-color: rgba(196, 196, 196, 0.1);
+$form-bg-color: $talent-bg-color;
+$form-bg-color-contrast: #404040;
 $font-color2: $light-50;
 $input-font-color: $light-100;
 
 $theme-colors: (
 	"primary": $primary,
+	"primary-hover": $primary-hover,
+	"gradient": #FBA729,
 	"secondary": $secondary,
-	"succes": $accept,
+	"success": $accept,
+	"teal": $teal,
 	"danger": $danger,
+	"danger-bg": $danger-bg,
 	"light": $light-100,
+	"gray-light": $light-50,
 	"gray": $talent-bg-color,
 	"gray-dark": $talent-bg-color,
 	"dark": $dark-100,
+	"subtext": #767676,
 );

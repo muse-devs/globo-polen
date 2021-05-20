@@ -4,7 +4,9 @@ $brands = $WC_Cubo9_Braspag_Helper->active_credit_card_brands;
 global $woocommerce, $WC_Cubo9_BraspagReduxSettings;
 $amount = $woocommerce->cart->total;
 if( is_user_logged_in() ) {
-    $braspag_card_saved_data = get_user_meta( get_current_user_id(), 'braspag_card_saved_data', true );
+    //$braspag_card_saved_data = get_user_meta( get_current_user_id(), 'braspag_card_saved_data', true );
+    $c9_braspag = new Cubo9_Braspag( false, false );
+    $braspag_card_saved_data = $c9_braspag->list_user_cards( get_current_user_id() );
 } else {
     $braspag_card_saved_data = false;
 }
@@ -25,7 +27,7 @@ if( is_user_logged_in() ) {
                             foreach( $installments as $installment => $value ) {
                                 $label = ( $installment == 1 ) ? ' parcela' : ' parcelas';
                         ?>
-                        <option value="<?php echo $installment; ?>"><?php echo $installment . ' ' . $label; ?> de R$ <?php echo $value; ?></option>
+                        	<option value="<?php echo $installment; ?>"><?php echo $installment . ' ' . $label; ?> de R$ <?php echo $value; ?></option>
                         <?php
                             }
                         }
@@ -46,16 +48,17 @@ if( is_user_logged_in() ) {
             <h4>Pagar utilizando o </h4>
         </div>
         <div class="col col-12" style="padding-bottom: 15px;">
-            <select class="form-control form-control-lg" name="brasapag_creditcard_saved" id="brasapag_creditcard_saved">
+            <select class="form-control form-control-lg custom-select" name="brasapag_creditcard_saved" id="brasapag_creditcard_saved">
                 <?php
-                foreach( $braspag_card_saved_data as $prefix => $data ) {
+                //foreach( $braspag_card_saved_data as $prefix => $data ) {
+                foreach( $braspag_card_saved_data as $data ) {    
                 ?>
-                <option value="<?php echo $data['prefix'] . md5( time() . $amount . $data['prefix'] ); ?>"><?php echo $data['brand']; ?> <?php echo __( 'final', 'cubo9' ); ?> <?php echo $data['sufix']; ?></option>
+                	<option value="<?php echo $data['prefix'] . md5( time() . $amount . $data['prefix'] ); ?>"><?php echo $data['brand']; ?> <?php echo __( 'final', 'cubo9' ); ?> <?php echo $data['sufix']; ?></option>
                 <?php } ?>
             </select>
         </div>
         <div class="col col-12">
-            <button type="button" class="button" name="braspag_pay_with_new_card" id="braspag_pay_with_new_card">
+            <button type="button" class="btn btn-outline-light btn-lg" name="braspag_pay_with_new_card" id="braspag_pay_with_new_card">
                 Pagar utilizando outro cartão
             </button>
         </div>
@@ -67,7 +70,7 @@ if( is_user_logged_in() ) {
     <div class="row" id="div_brasapag_creditcard_data">
         <?php if( ! is_null( $braspag_card_saved_data ) && ! empty( $braspag_card_saved_data ) && is_array( $braspag_card_saved_data ) && count( $braspag_card_saved_data ) > 0 ) { ?>
         <div class="col col-12" style="padding-bottom: 15px;">
-            <button type="button" class="button" name="braspag_pay_with_saved_cards" id="braspag_pay_with_saved_cards">
+            <button type="button" class="btn btn-outline-light btn-lg" name="braspag_pay_with_saved_cards" id="braspag_pay_with_saved_cards">
                 Pagar utilizando um dos cartões salvos
             </button>
         </div>
