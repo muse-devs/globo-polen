@@ -7,18 +7,22 @@ $current_user = wp_get_current_user();
 
 if ($polen_talent->is_user_talent($current_user)) {
 ?>
-	<section class="talent-dashboard-start mt-4">
+	<section class="talent-dashboard-start">
 		<header class="page-header">
 			<div class="row">
 				<div class="co-12 col-md-12">
-					<h1 class="page-title"><?php esc_html_e('Início', 'polen'); ?></h1>
-					<h2>Bem-vindo, <?php echo $current_user->display_name; ?></h2>
-					<p>Aceite ou recuse seus pedidos de vídeos.</p>
+					<h1>Bem-vindo, <?php echo $current_user->display_name; ?></h1>
+					<p class="mt-2">Aceite ou recuse seus pedidos de vídeos.</p>
 				</div>
 			</div>
 		</header><!-- .page-header -->
 
 		<div class="page-content">
+			<div class="row">
+				<div class="col-md-12">
+
+				</div>
+			</div>
 			<div class="row mt-3">
 				<div class="col-md-12">
 					<div class="msg msg-header">
