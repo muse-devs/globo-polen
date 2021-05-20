@@ -80,7 +80,7 @@
 								</div>
 								<div class="row">
 									<div class="col-12">
-										<a href="<?php echo get_permalink(get_option('woocommerce_myaccount_page_id')); ?>">Minha conta</a>
+										<!-- <a href="<?php echo get_permalink(get_option('woocommerce_myaccount_page_id')); ?>">Minha conta</a> -->
 										<a href="<?php echo esc_url(wc_get_account_endpoint_url('orders')); ?>">Meus pedidos</a>
 										<a href="<?php echo esc_url(wc_get_account_endpoint_url('payment-options')); ?>">Pagamentos</a>
 										<a href="<?php echo esc_url(wc_customer_edit_account_url()); ?>">Meus dados</a>

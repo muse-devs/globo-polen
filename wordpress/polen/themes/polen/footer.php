@@ -39,14 +39,17 @@
 							<li>
 								<a href="<?php echo home_url().'/shop'; ?>">Todos os talentos</a>
 							</li>
-							<li>
+							<!-- <li>
 								<a href="#asd">Como funciona</a>
+							</li> -->
+							<li>
+								<?php
+								$link = get_page_link(get_page_by_path('politica-de-privacidade'));
+								?>
+								<a href="<?= $link; ?>">Política de privacidade</a>
 							</li>
 							<li>
-								<a href="#asd">Política de privacidade</a>
-							</li>
-							<li>
-								<a href="#asd">Termos e condições</a>
+								<a href="<?= $link; ?>">Termos e condições</a>
 							</li>
 						</ul>
 					</div>
