@@ -1224,12 +1224,17 @@ class Cubo9_Braspag {
                         'result' => 'success',
                         'message' => 'Cartão salvo com sucesso!',
                     );
-                }else{
+                } else {
                     $return = array(
                         'result' => 'error',
                         'message' => 'Ocorreu um erro ao tentar salvar o seu cartão. Tente novamente mais tarde.',
                     );
                 }
+            } else {
+                $return = array(
+                    'result' => 'error',
+                    'message' => 'Ocorreu um erro ao tentar salvar o seu cartão. Tente novamente mais tarde.',
+                );
             }
         } else {
             $message = 'Ocorreu um erro ao tentar salvar o seu cartão. Tente novamente mais tarde.';
@@ -1258,7 +1263,7 @@ class Cubo9_Braspag {
                     $cards[] = array(
                         'id'              => $v->umeta_id,
                         'brand'           => $card_info['brand'],
-                        'prefix'           => $card_info['prefix'],
+                        'prefix'          => $card_info['prefix'],
                         'sufix'           => $card_info['sufix'],
                         'card_label'      => $card_info['card_label'],
                         'expiration_date' => $card_info['expiration_date']
