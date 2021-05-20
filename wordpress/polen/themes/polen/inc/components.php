@@ -483,7 +483,7 @@ function polen_box_image_message($image, $text)
 	<div class="box-round">
 		<div class="row p-4">
 			<div class="col-md-12 text-center">
-				<img src="<?php echo $image; ?>" alt="<?php echo $text; ?>">
+				<img src="<?php echo $image; ?>" alt="<?php echo $text; ?>" class="correct-margin">
 			</div>
 			<div class="col-md-12 text-center mt-4">
 				<p><?php echo $text; ?></p>

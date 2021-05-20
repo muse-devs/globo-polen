@@ -11,16 +11,45 @@ if ($polen_talent->is_user_talent($current_user)) {
 		<header class="page-header">
 			<div class="row">
 				<div class="co-12 col-md-12">
-					<h1>Bem-vindo, <?php echo $current_user->display_name; ?></h1>
-					<p class="mt-2">Aceite ou recuse seus pedidos de vídeos.</p>
+					<h1>Olá, <?php echo $current_user->display_name; ?></h1>
+					<p class="muted mt-2">Aceite ou recuse seus pedidos de vídeos.</p>
 				</div>
 			</div>
 		</header><!-- .page-header -->
 
 		<div class="page-content">
-			<div class="row">
+			<div class="row mt-3">
 				<div class="col-md-12">
-
+					<div class="box-round p-3">
+						<div class="row p-2">
+							<div class="col-md-12 text-center">
+								<img src="<?php echo TEMPLATE_URI; ?>/assets/img/upload-info.png" alt="Imagem pessoa com celular na mão" width="94" height="90" />
+							</div>
+						</div>
+						<div class="row my-2">
+							<div class="col-5">
+								<p class="p">Invista hoje</p>
+							</div>
+							<div class="col-2">&nbsp;</div>
+							<div class="col-5">
+								<p class="p">E receba até</p>
+							</div>
+						</div>
+						<div class="row mb-4">
+							<div class="col-5">
+								<span class="value">5 horas</span>
+							</div>
+							<div class="col-2 d-flex align-items-end"><?php Icon_Class::polen_icon_chevron_right(); ?></div>
+							<div class="col-5">
+								<span class="value">R$1.000</span>
+							</div>
+						</div>
+						<div class="row mb-2">
+							<div class="col-md-12">
+								<a href="<?php echo polen_get_url_my_orders(); ?>" class="btn btn-primary btn-lg btn-block">Ganhar agora</a>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="row mt-3">
