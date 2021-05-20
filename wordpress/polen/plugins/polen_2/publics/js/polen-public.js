@@ -29,10 +29,16 @@
 		});
 
 
-		$(document).on('click', '.btn-visualizar-pedido',function(e){
+		$(document).on('click', '.btn-visualizar-pedido',function(e) {
 			e.preventDefault();
 			var wnonce = $(this).attr('button-nonce');
 			var order_id = $(this).attr('order-id');
+			$('#video-from').text("---")
+			$('#video-name').text("---");
+			$('#video-email').text("---");
+			$('#video-category').text("---");
+			$('#expiration-time').text("---");
+			$('#video-instructions').text("---");
 			$.ajax(
 				{
 					type: 'POST',
@@ -44,19 +50,19 @@
 					},
 					success: function( response ) {
 						let obj = $.parseJSON( response );
-						if( obj.success == true ){
+						if( obj.success == true ) {
 							$('#order-value').html(obj['data'][0]['total']);
                             if( obj['data'][0]['from'].length === 0 ) {
                                 $('#item-render-video-from').hide();
                             } else {
                                 $('#item-render-video-from').show();
                             }
-                            $('#video-from').html(obj['data'][0]['from'])
-							$('#video-name').html(obj['data'][0]['name']);
-							$('#video-email').html(obj['data'][0]['email']);
-							$('#video-category').html(obj['data'][0]['category']);
-							$('#expiration-time').html(obj['data'][0]['expiration']);
-							$('#video-instructions').html(obj['data'][0]['instructions']);
+                            $('#video-from').text(obj['data'][0]['from'])
+							$('#video-name').text(obj['data'][0]['name']);
+							$('#video-email').text(obj['data'][0]['email']);
+							$('#video-category').text(obj['data'][0]['category']);
+							$('#expiration-time').text(obj['data'][0]['expiration']);
+							$('#video-instructions').text(obj['data'][0]['instructions']);
 							$('.modal-group-buttons').attr('order-id',obj['data'][0]['order_id'] );
 						}
 					}
@@ -64,66 +70,42 @@
 		});
 
 		/**** talento ****/
-		$('button.talent-check-order').on('click',function(){
+		$('button.talent-check-order').on('click',function() {
 			var wnonce = $(this).parent().attr('button-nonce');
 			var order_id = $(this).parent().attr('order-id');
 			var type = $(this).attr('action-type');
 
-			if( type == 'reject' ){
+			if(type == 'reject') {
 				var confirm_reject = confirm("Deseja realmente rejeitar o pedido?");
-				if( confirm_reject == true)  {
-					$.ajax(
-						{
-							type: 'POST',
-							url: woocommerce_params.ajax_url,
-							data: {
-							action: 'get_talent_acceptance',
-							order: order_id,
-							type: type,
-							security: wnonce
-							},
-							success: function( response ) {
-								let obj = $.parseJSON( response );
-								if( obj['success'] == true ){
-									if( obj['code'] == 1 ){
-										$('#OrderActions').modal('toggle');
-										location.href='/my-account/send-video/?order_id=' + order_id;
-									}
-									if( obj['code'] == 2 ){
-										location.reload();
-									}		
-								}
-							}
-						});
+				if(!confirm_reject)  {
+					return;
 				} 
-			}else{
-				$.ajax(
-					{
-						type: 'POST',
-						url: woocommerce_params.ajax_url,
-						data: {
-						action: 'get_talent_acceptance',
-						order: order_id,
-						type: type,
-						security: wnonce
-						},
-						success: function( response ) {
-							let obj = $.parseJSON( response );
-							//console.log(obj);
-							if( obj['success'] == true ){
-								if( obj['code'] == 1 ){
-									$('#OrderActions').modal('toggle');
-									//location.reload();'/enviar-video/?order_id=35
-									location.href='/my-account/send-video/?order_id=' + order_id;
-								}
-								if( obj['code'] == 2 ){
-									//$('#OrderActions').modal('toggle');
-									location.reload();
-								}		
-							}
-						}
-					});
 			}
+			$('#OrderActions').modal('toggle');
+			polSpinner();
+			$.ajax(
+				{
+					type: 'POST',
+					url: woocommerce_params.ajax_url,
+					data: {
+					action: 'get_talent_acceptance',
+					order: order_id,
+					type: type,
+					security: wnonce
+					},
+					success: function( response ) {
+						let obj = $.parseJSON( response );
+						if( obj['success'] == true ){
+							if( obj['code'] == 1 ){
+								$('#OrderActions').modal('toggle');
+								location.href='/my-account/send-video/?order_id=' + order_id;
+							}
+							if( obj['code'] == 2 ){
+								location.reload();
+							}		
+						}
+					}
+				});
 		});
 
 	});
