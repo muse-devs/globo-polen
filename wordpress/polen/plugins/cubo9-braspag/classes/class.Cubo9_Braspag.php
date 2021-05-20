@@ -254,17 +254,21 @@ class Cubo9_Braspag {
              * Dados do cartão de Crédito ou Débito.
              */
             if( isset( $_REQUEST['braspag_use_saved_card'] ) && ! empty( $_REQUEST['braspag_use_saved_card'] ) && (int) $_REQUEST['braspag_use_saved_card'] === (int) 1 ) {
-                $brasapag_creditcard_saved = substr( $_REQUEST['brasapag_creditcard_saved'], 0, 6 );
-                $braspag_card_saved_data = get_user_meta( get_current_user_id(), 'braspag_card_saved_data', true );
-                $card_info = $braspag_card_saved_data[ $brasapag_creditcard_saved ];
-                $CreditCardData = array(
-                    'CardToken'    => $card_info['token'],
-                    'Brand'        => $card_info['brand'],
-                    // 'SecurityCode' => preg_replace( '/[^0-9]/', '', strip_tags( $_REQUEST['brasapag_creditcard_saved_cvv'] ) ),
-                );
-                $creditcard_number = $card_info['card_number'];
-                $creditcard_holder = $card_info['holder'];
-                $creditcard_brand  = $card_info['brand'];
+                $brasapag_creditcard_saved = substr( $_REQUEST['brasapag_creditcard_saved'], 38, ( strlen( $_REQUEST['brasapag_creditcard_saved'] ) - 38 ) );
+                global $wpdb;
+                $sql_card = "SELECT `meta_value` FROM `" . $wpdb->usermeta . "` WHERE `umeta_id`=" . $brasapag_creditcard_saved . " AND `user_id`=" . get_current_user_id() . " AND `meta_key`='braspag_card_saved_data'";
+                $res_card = $wpdb->get_results( $sql_card );
+                var_dump( $res_card );
+                if( $res_card && ! is_null( $res_card ) && is_array( $res_card ) && ! empty( $res_card ) ) {
+                    $card_info = unserialize( $res_card[0]->meta_value );
+                    $CreditCardData = array(
+                        'CardToken'    => $card_info['token'],
+                        'Brand'        => $card_info['brand'],
+                    );
+                    $creditcard_number = $card_info['card_number'];
+                    $creditcard_holder = $card_info['holder'];
+                    $creditcard_brand  = $card_info['brand'];
+                }
             } else {
                 $creditcard_cvv        = substr( preg_replace( '/[^0-9]/', '', $_REQUEST['braspag_creditcardCvv'] ), 0, 4 );
                 $creditcard_brand      = substr( $_REQUEST['braspag_creditcardBrand'], 0, 10 );
@@ -432,8 +436,6 @@ class Cubo9_Braspag {
                      */
                     $save_card = $response_body_json->Payment->CreditCard->SaveCard;
 					if( $save_card ) {
-                        $braspag_card_saved_data = get_user_meta( get_current_user_id(), 'braspag_card_saved_data', true );
-
                         $card_number     = $response_body_json->Payment->CreditCard->CardNumber;
                         $holder          = $response_body_json->Payment->CreditCard->Holder;
                         $expiration_date = $response_body_json->Payment->CreditCard->ExpirationDate;
@@ -443,35 +445,18 @@ class Cubo9_Braspag {
                         $card_sufix      = substr( $card_number, -4 );
                         $card_label      = strtoupper( $brand ) . ' - ' . $card_sufix;
 
-                        if( is_array( $braspag_card_saved_data ) && count( $braspag_card_saved_data ) > 0 ) {
-                            if( ! isset( $braspag_card_saved_data[ $card_prefix ] ) ) {
-                                $braspag_card_saved_data[ $card_prefix ] = array(
-                                    'card_number'     => $card_number,
-                                    'prefix'          => $card_prefix,
-                                    'sufix'           => $card_sufix,
-                                    'token'           => $card_token,
-                                    'brand'           => $brand,
-                                    'expiration_date' => $expiration_date,
-                                    'holder'          => $holder,
-                                    'holder_cpf'      => $creditcard_holder_cpf,
-                                    'card_label'      => $card_label,
-                                );
-                                update_user_meta( get_current_user_id(), 'braspag_card_saved_data', $braspag_card_saved_data );
-                            }
-                        } else {
-                            $card_saved_data[ $card_prefix ] = array(
-                                'card_number'     => $card_number,
-                                'prefix'          => $card_prefix,
-                                'sufix'           => $card_sufix,
-                                'token'           => $card_token,
-                                'brand'           => $brand,
-                                'expiration_date' => $expiration_date,
-                                'holder'          => $holder,
-                                'holder_cpf'      => $creditcard_holder_cpf,
-                                'card_label'      => $card_label,
-                            );
-                            add_user_meta( get_current_user_id(), 'braspag_card_saved_data', $card_saved_data );
-                        }
+                        $card_saved_data = array(
+                            'card_number'     => $card_number,
+                            'prefix'          => $card_prefix,
+                            'sufix'           => $card_sufix,
+                            'token'           => $card_token,
+                            'brand'           => $brand,
+                            'expiration_date' => $expiration_date,
+                            'holder'          => $holder,
+                            'card_label'      => $card_label,
+                        );
+
+                        add_user_meta( get_current_user_id(), 'braspag_card_saved_data', $card_saved_data );
                     }
                     
                     // Dados do pagamento
@@ -505,9 +490,6 @@ class Cubo9_Braspag {
                     $order->update_status( 'payment-approved' );
                     $email = WC()->mailer()->get_emails()['Polen_WC_Payment_Approved'];
                     $email->trigger( $order_id );
-
-                    // Muda o status para processando
-                    // $order->payment_complete();
 
                     // Atualiza o estoque
                     wc_reduce_stock_levels( $order_id );
