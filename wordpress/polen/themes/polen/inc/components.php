@@ -272,7 +272,10 @@ function polen_get_talent_video_buttons($talent, $video_url, $video_download)
 	$wa_message = htmlentities(urlencode("Veja que legal: "));
 	$wa_link = $video_url;
 ?>
-	<button onclick="shareVideo('Compartilhar vídeo de <?php echo $talent->nome; ?>', '<?php echo $video_url; ?>')" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_share(); ?>Compartilhar</button>
+	<?php if (wp_is_mobile()) : ?>
+		<button onclick="shareVideo('Compartilhar vídeo de <?php echo $talent->nome; ?>', '<?php echo $video_url; ?>')" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_share(); ?>Compartilhar</button>
+	<?php endif; ?>
+	<button onclick="copyToClipboard('<?php echo $video_url; ?>')" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_clipboard(); ?>Copiar Link</button>
 	<?php if (!empty($video_download)) : ?>
 		<a href="<?php echo $video_download; ?>" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_download(); ?>Download</a>
 	<?php endif; ?>
@@ -291,6 +294,12 @@ function polen_video_icons($user_id, $iniciais)
 <?php
 }
 
+
+/**
+ * Criar a lista de videos já feitos
+ * @param stdClass Polen_Talent_Fields
+ * @return HTML
+ */
 function polen_front_get_talent_videos($talent)
 {
 	$items = array();
@@ -625,6 +634,9 @@ function polen_card_talent_reviews_order(\WP_Post $post, $Talent_Fields)
 <?php
 }
 
+/**
+ *
+ */
 function polen_get_order_flow_layout($array_status)
 {
 	//status: complete, in-progress, pending, fail
