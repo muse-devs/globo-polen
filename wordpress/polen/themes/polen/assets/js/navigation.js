@@ -4,6 +4,9 @@ var menu_content = document.querySelector(".dropdown-content");
 var menu_close = document.querySelector(".menu-close");
 
 jQuery(document).ready(function () {
+	if (!menu) {
+		return;
+	}
 	menu.addEventListener("mouseover", function () {
 		if (screen.width < 540) {
 			return;

@@ -29,7 +29,7 @@ add_filter( 'body_class', 'polen_body_classes' );
 
 /**
  * Responsible to return a link for all talents
- * 
+ *
  * @return string link
  */
 function polen_get_all_new_talents_url()
@@ -39,7 +39,7 @@ function polen_get_all_new_talents_url()
 
 /**
  * Retorna a URL de todos os talentos
- * 
+ *
  * @return string link
  */
 function polen_get_all_talents_url()
@@ -50,10 +50,10 @@ function polen_get_all_talents_url()
 
 /**
  * Responsible to return a link for all categories
- * 
+ *
  * @return string link
  */
-function polen_get_all_cetegories_url()
+function polen_get_all_categories_url()
 {
 	return site_url( get_option( 'category_base', null ) );
 }
@@ -75,6 +75,14 @@ function polen_get_link_watch_video_by_order_id( $order_id )
 function polen_get_url_my_account()
 {
 	return get_permalink( get_option('woocommerce_myaccount_page_id') );
+}
+
+/**
+ * Funcao para pegar a URL dos Pedidos (Talento)
+ */
+function polen_get_url_my_orders()
+{
+	return polen_get_url_my_account() . "/orders";
 }
 
 

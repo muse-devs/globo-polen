@@ -30,6 +30,10 @@
 	}
 	.dropbtn {
 		padding: 0;
+		.icon {
+			margin-left: 5px;
+			font-size: 24px;
+		}
 	}
 	.dropdown-content {
 		position: absolute;
@@ -71,8 +75,8 @@
 				top: 0;
 				right: 1rem;
 				z-index: 99;
-				i {
-					font-size: 15px;
+				.icon, .bi {
+					font-size: 24px;
 					color: $light-100;
 				}
 			}
