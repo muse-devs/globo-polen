@@ -55,7 +55,11 @@ const commentbox = new Vue({
 				)
 				.fail(function (e) {
 					polSpinner("hidden");
-					polError(e.statusText);
+					if(e.responseJSON) {
+						polError(e.responseJSON.data);
+					} else {
+						polError(e.statusText);
+					}
 				});
 		},
 	},
