@@ -229,7 +229,7 @@ class Polen_Checkout
                 $items = WC()->cart->get_cart();
                 $key = array_key_first( $items );
                 $email = $items[ $key ][ 'email_to_video' ];
-                $type = 'text';
+                $type = 'hidden';
                 $logged = '';
             }
             $args = array(
@@ -237,10 +237,10 @@ class Polen_Checkout
                 "required"    => true,
                 "class"       => array( $logged ),
                 "input_class" => array( "form-control", "form-control-lg", "input-text", $logged ),
-                "label"       => "E-mail",
+                "label"       => "",
                 "label_class" => array( 'title-on-checkout-notes', $logged ),
-                "placeholder" => "Informe seu e-mail",
-                "maxlength"   => 14,
+                "placeholder" => "",
+                // "maxlength"   => 14,
                 "default"     => $email,
             );
             woocommerce_form_field( 'billing_email', $args, $checkout->get_value( 'billing_email' ) );
