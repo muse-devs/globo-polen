@@ -92,7 +92,7 @@ function polen_front_get_news($items, $title, $link)
 		return;
 	}
 ?>
-	<section class="row mb-2 banner-scrollable">
+	<section class="row mb-2">
 		<div class="col-md-12">
 			<header class="row mb-3">
 				<div class="col-12 d-flex justify-content-between align-items-center">
@@ -322,7 +322,7 @@ function polen_front_get_talent_videos($talent)
 		<div class="d-none d-md-block col-md-12 text-right custom-slick-controls"></div>
 		<div class="col-md-12 p-0">
 			<div class="banner-wrapper">
-				<div class="banner-content type-video<?php if (sizeof($items) < 1) echo " ml-3" ?>">
+				<div class="banner-content type-video<?php if (sizeof($items) < 1) echo " ml-3 ml-md-0" ?>">
 					<?php foreach ($items as $item) : ?>
 						<div class="polen-card-video">
 							<figure class="video-cover">
@@ -483,7 +483,7 @@ function polen_box_image_message($image, $text)
 	<div class="box-round">
 		<div class="row p-4">
 			<div class="col-md-12 text-center">
-				<img src="<?php echo $image; ?>" alt="<?php echo $text; ?>">
+				<img src="<?php echo $image; ?>" alt="<?php echo $text; ?>" class="correct-margin">
 			</div>
 			<div class="col-md-12 text-center mt-4">
 				<p><?php echo $text; ?></p>

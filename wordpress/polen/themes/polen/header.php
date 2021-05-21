@@ -59,10 +59,10 @@
 									<div class="user-avatar">
 										<?php
 										if (is_plugin_active('wp-user-avatar/wp-user-avatar.php')) {
-											echo get_wp_user_avatar(get_current_user_id());
+											echo get_wp_user_avatar(get_current_user_id(), 'polen-square-crop-sm');
 										} ?>
 									</div>
-									<?php Icon_Class::polen_icon_chevron(); ?>
+									<?php Icon_Class::polen_icon_chevron_down(); ?>
 								</div>
 							</a>
 							<div class="dropdown-content">
@@ -71,7 +71,7 @@
 										<div class="user-avatar mb-1">
 											<?php
 											if (is_plugin_active('wp-user-avatar/wp-user-avatar.php')) {
-												echo get_wp_user_avatar(get_current_user_id());
+												echo get_wp_user_avatar(get_current_user_id(), 'polen-square-crop-sm');
 											} ?>
 										</div>
 										<p class="user-name"><?php echo $user_name->display_name; ?></p>
@@ -80,8 +80,9 @@
 								</div>
 								<div class="row">
 									<div class="col-12">
-										<a href="<?php echo get_permalink(get_option('woocommerce_myaccount_page_id')); ?>">Minha conta</a>
+										<!-- <a href="<?php echo get_permalink(get_option('woocommerce_myaccount_page_id')); ?>">Minha conta</a> -->
 										<a href="<?php echo esc_url(wc_get_account_endpoint_url('orders')); ?>">Meus pedidos</a>
+										<a href="<?php echo esc_url(wc_get_account_endpoint_url('payment-options')); ?>">Pagamentos</a>
 										<a href="<?php echo esc_url(wc_customer_edit_account_url()); ?>">Meus dados</a>
 										<a href="<?php echo esc_url(wp_logout_url()); ?>">Sair</a>
 									</div>

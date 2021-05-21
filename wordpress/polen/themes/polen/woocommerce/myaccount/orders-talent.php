@@ -28,49 +28,49 @@ if (in_array('user_talent',  $logged_user->roles)) {
 			</div>
 			<?php
 		} else {
-			echo "<p class='mb-5'>Você tem <strong><span id='order-count'>" . count($talent_orders) . "</span> pedido(s) de vídeo</strong>, seus pedidos expiram em até 7 dias.</p>";
+			echo "<p class='mt-2 mb-4'>Você tem <strong><span id='order-count'>" . count($talent_orders) . "</span> pedido(s) de vídeo</strong>, seus pedidos expiram em até 7 dias.</p>";
 			if (count($talent_orders) > 0) {
 				foreach ($talent_orders as $order) : ?>
 					<div class="row mb-3" box-id="<?php echo $order['order_id']; ?>">
 						<div class="col md-12">
-							<div class="talent-order">
-								<div class="row">
+							<div class="box-round p-3">
+								<div class="row py-2">
 									<div class="col-12 col-md-12">
 										<div class="row">
 											<?php
 											if (!empty($order['from'])) : ?>
-												<div class="col-6 col-md-6">
-													<p class="title">Vídeo de</p>
-													<p class="description"><?php echo $order['from']; ?></p>
+												<div class="col-12 col-md-12">
+													<p class="p">Vídeo de</p>
+													<p class="value small"><?php echo $order['from']; ?></p>
 												</div>
 											<?php endif; ?>
-											<div class="col-6 col-md-6">
-												<p class="title">Para</p>
-												<p class="description"><?php echo $order['name']; ?></p>
+											<div class="col-12 col-md-12">
+												<p class="p">Para</p>
+												<p class="value small"><?php echo $order['name']; ?></p>
 											</div>
 										</div>
-										<div class="row mt-3">
-											<div class="col-12 col-md-3">
-												<p class="title">Ocasião</p>
-												<p class="description"><?php echo $order['category']; ?></p>
+										<div class="row mt-2">
+											<div class="col-6 col-md-6">
+												<p class="p">Ocasião</p>
+												<p class="value small"><?php echo $order['category']; ?></p>
+											</div>
+											<div class="col-6 col-md-6">
+												<p class="p">Valor</p>
+												<p class="value small"><?php echo $order['total']; ?></p>
 											</div>
 										</div>
 									</div>
 									<div class="col-12 col-md-12">
 										<div class="row">
 											<div class="col-md-12">
-												<div class="row">
-													<div class="col-12 col-md-4 mt-3">
-														<p class="title">Valor</p>
-														<p class="description"><?php echo $order['total']; ?></p>
+												<div class="row mt-2">
+													<div class="col-6 col-md-4">
+														<p class="p">Tempo estimado</p>
+														<p class="value small"><?php echo $video_time . ' segundos'; ?></p>
 													</div>
-													<div class="col-12 col-md-4 mt-3">
-														<p class="title">Tempo estimado</p>
-														<p class="description"><?php echo $video_time . ' segundos'; ?></p>
-													</div>
-													<div class="col-12 col-md-4 mt-3">
-														<p class="title">Válido por</p>
-														<p class="description"><?php echo $polen_talent->video_expiration_time($logged_user, $order['order_id']); ?></p>
+													<div class="col-6 col-md-4">
+														<p class="p">Válido por</p>
+														<p class="value small"><?php echo $polen_talent->video_expiration_time($logged_user, $order['order_id']); ?></p>
 													</div>
 												</div>
 											</div>
@@ -113,32 +113,34 @@ if (in_array('user_talent',  $logged_user->roles)) {
 					<div class="row modal-body">
 						<!-- Início -->
 						<div class="col-12 talent-order-modal">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Fechar"></button>
+							<button type="button" class="modal-close" data-dismiss="modal" aria-label="Fechar">
+								<?php Icon_Class::polen_icon_close(); ?>
+							</button>
 							<div class="row body">
 								<div class="col-12" id="item-render-video-from">
-									<p class="title">Vídeo de</p>
-									<span class="name" id="video-from"></span>
+									<p class="p">Vídeo de</p>
+									<span class="value small" id="video-from"></span>
 								</div>
 								<div class="col-12 mt-4 pb-4 border-bottom">
-									<p class="title">Para</p>
-									<span class="name" id="video-name"></span>
+									<p class="p">Para</p>
+									<span class="value small" id="video-name"></span>
 								</div>
 							</div>
-							<div class="row pb-4 border-bottom">
+							<div class="row mt-4 pb-4 border-bottom">
 								<div class="col">
-									<p class="title mb-3">Ocasião</p>
-									<span class="name" id="video-category"></span>
-								</div>
-							</div>
-							<div class="row mt-4">
-								<div class="col">
-									<p class="title mb-3">e-mail de contato</p>
-									<span class="name" id="video-email"></span>
+									<p class="p">Ocasião</p>
+									<span class="value small" id="video-category"></span>
 								</div>
 							</div>
 							<div class="row mt-4">
 								<div class="col">
-									<p class="title mb-2">Instruções</p>
+									<p class="p">e-mail de contato</p>
+									<span class="value small" id="video-email"></span>
+								</div>
+							</div>
+							<div class="row mt-5">
+								<div class="col">
+									<p class="p mb-2">Instruções</p>
 									<p class="text" id="video-instructions"></p>
 								</div>
 							</div>

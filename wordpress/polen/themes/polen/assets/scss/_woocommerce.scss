@@ -184,10 +184,18 @@ select.form-control:not([size]):not([multiple]) {
 	&::before {
 		width: 2rem !important;
 		height: 2rem !important;
-		border: .2em solid var(--primary) !important;
+		border: 0.2em solid var(--primary) !important;
 		border-left-color: var(--light) !important;
 		border-radius: 50%;
 		background: none !important;
-		animation: .75s linear infinite spinner-border !important;
+		animation: 0.75s linear infinite spinner-border !important;
 	}
+}
+
+.woocommerce form .form-row {
+	padding: 0;
+}
+
+.woocommerce-Price-currencySymbol {
+	margin-right: 3px;
 }
