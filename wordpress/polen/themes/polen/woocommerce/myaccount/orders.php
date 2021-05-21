@@ -4,7 +4,7 @@
  */
 defined('ABSPATH') || exit;
 
-use \Polen\Includes\{ Polen_Order, Polen_Talent };
+use \Polen\Includes\{ Polen_Order, Polen_Talent, Polen_Video_Info};
 
 $polen_talent = new Polen_Talent();
 $logged_user = wp_get_current_user();
@@ -22,6 +22,12 @@ if( $polen_talent->is_user_talent( $logged_user ) ) {
 			$item_count = $order->get_item_count() - $order->get_item_count_refunded();
 			$product_name = '';
 			$product_id = '';
+			$video_info = Polen_Video_Info::get_by_order_id( $order->get_id() );
+			$is_vimeo_process_complete = false;
+			if( !empty( $video_info ) ) {
+				$is_vimeo_process_complete = $video_info->is_vimeo_process_complete();
+			}
+
 			foreach ($order->get_items() as $item_id => $item) {
 				$product_name = $item->get_name();
 				$product_id = $item->get_product_id();
@@ -69,10 +75,16 @@ if( $polen_talent->is_user_talent( $logged_user ) ) {
 										</a>
 									<?php
 									else :
-										//TODO ADD A URL PARA ASSISTIR O VIDEO
+										//Quando a order está completa mais o Vimeo ainda não processou o video
+										$button_enabled = "";
+										$text_button = "Ver Video";
+										if( !$is_vimeo_process_complete ) {
+											$button_enabled = "disabled";
+											$text_button = "Video sendo processado aguarde.";
+										}
 									?>
-										<a href="<?php echo polen_get_link_watch_video_by_order_id( $order->get_order_number() ); ?>" class="btn btn-primary btn-lg btn-block">
-											Ver Video
+										<a href="<?php echo polen_get_link_watch_video_by_order_id( $order->get_order_number() ); ?>" class="btn btn-primary btn-lg btn-block <?= $button_enabled; ?>">
+											<?= $text_button; ?>
 										</a>
 									<?php
 									endif;?>
