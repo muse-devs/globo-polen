@@ -272,4 +272,17 @@ class Polen_Video_Info extends Polen_DB
         $object->valid = $valid;
         return $object;
     }
+
+
+    /**
+     * Verifica se o processamento do vimeo está completo.
+     * @return bool
+     */
+    public function is_vimeo_process_complete()
+    {
+        if( $this->vimeo_process_complete == "1" ) {
+            return true;
+        }
+        return false;
+    }
 }

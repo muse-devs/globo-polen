@@ -13,7 +13,8 @@
 ?>
 
 <footer id="colophon" class="pt-4 mt-5 site-footer">
-	<?php if ((!is_page('cart') || !is_cart()) && (!is_page('checkout') || !is_checkout())) : ?>
+	<?php if ( (!is_page('cart') || !is_cart()) && 
+			 (!is_page('checkout') || !is_checkout()) ) : ?>
 		<div class="row pb-5">
 			<div class="col-12">
 				<div class="row justify-content-md-between">
@@ -33,13 +34,33 @@
 							<div class="col-md-8 mb-2 mb-md-0 small signin-response"></div>
 						</div>
 					</div>
+
 					<div class="col-md-4 mt-4 order-md-1">
 						<h5 class="title"><?= get_bloginfo('name'); ?></h5>
-						<ul class="footer-menu">
 							<?php
-								wp_nav_menu('');
+								$menu = wp_nav_menu(
+									array(
+										'menu'              => 'menu-1',
+										'theme_location'    => 'primary',
+										'depth'             => 0,
+										'menu_class' 		=> 'footer-menu',
+										'container_class' 	=> ' ',
+										'items_wrap' 		=> '<ul class="%2$s">%3$s</ul>',
+										'container' 		=> ' ',
+										'echo'				=> false,
+									)
+								);
+								if( !is_account_page() ) {
+									echo $menu;
+								} else { ?>
+									<ul class="footer-menu">
+										<li><a href="<?php echo home_url().'/shop'; ?>">Todos os talentos</a></li>
+										<li><a href="/">Como funciona</a></li>
+										<li><a href="/politica-de-privacidade">Política de privacidade</a></li>
+										<li><a href="/politica-de-privacidade">Termos e condições</a></li>
+									</ul>
+								<?php }
 							?>
-						</ul>
 					</div>
 				</div>
 			</div>
