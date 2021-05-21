@@ -79,10 +79,14 @@ class Polen_Cart
 
                     $allowed_item = [ 'offered_by', 'video_to', 'name_to_video', 'email_to_video', 'video_category', 'instructions_to_video', 'allow_video_on_page' ];
                     foreach( $allowed_item as $p_item ):
-                        if( isset( $_POST[$p_item] ) ){
+                        if( isset( $_POST[ $p_item ] ) ) {
                             $item_name = $p_item;
-                            $item_data = $_POST[$p_item];
-                            $cart_item[$item_name] = $item_data;
+                            if( $p_item == 'allow_video_on_page' ) {
+                                $item_data = ( $_POST['allow_video_on_page'] == 'on' ) ? 'on' : 'off';
+                            } else {
+                                $item_data = $_POST[ $p_item ];
+                            }
+                            $cart_item[ $item_name ] = $item_data;
                         }    
                     endforeach;
             

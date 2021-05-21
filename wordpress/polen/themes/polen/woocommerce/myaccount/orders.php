@@ -90,8 +90,14 @@ if( $polen_talent->is_user_talent( $logged_user ) ) {
 									endif;?>
 								</div>
 							</div>
-							<div class="col-12 text-center">
+							<div class="col-4 text-center">
 								<p class="order-number">Número do pedido: <strong><?php echo $order->get_order_number(); ?></strong></p>
+							</div>
+							<div class="col-4 text-center">
+								<p class="order-number">Data: <strong><?php echo $order->get_date_created()->format ('d/m/Y');; ?></strong></p>
+							</div>
+							<div class="col-4 text-center">
+								<p class="order-number">Valor: <strong><?php echo $order->get_formatted_order_total(); ?></strong></p>
 							</div>
 						</div>
 					</div>
