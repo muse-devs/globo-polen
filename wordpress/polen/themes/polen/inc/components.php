@@ -92,7 +92,7 @@ function polen_front_get_news($items, $title, $link)
 		return;
 	}
 ?>
-	<section class="row mb-2 banner-scrollable">
+	<section class="row mb-2">
 		<div class="col-md-12">
 			<header class="row mb-3">
 				<div class="col-12 d-flex justify-content-between align-items-center">
