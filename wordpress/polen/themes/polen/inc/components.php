@@ -421,7 +421,7 @@ function polen_get_talent_card($talent)
 			<span class="cat">Você vai pagar</span>
 			<p class="price mt-2"><?php echo $talent["price"]; ?></p>
 			<?php if ($talent["has_details"]) : ?>
-				<button class="show-details" onclick="showDetails()"><?php Icon_Class::polen_icon_chevron("down") ?></button>
+				<button class="show-details d-flex justify-content-center" onclick="showDetails()"><?php Icon_Class::polen_icon_chevron("down") ?></button>
 			<?php endif; ?>
 		</div>
 		<footer class="row details-box">
