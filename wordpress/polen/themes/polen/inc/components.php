@@ -185,9 +185,9 @@ function polen_front_get_artists($items, $title)
 function polen_front_get_tutorial()
 {
 ?>
-	<section class="row tutorial pt-4 mb-4">
+	<section class="row tutorial mt-4 mb-4">
 		<div class="col-md-12">
-			<header class="row mb-4">
+			<header class="row mb-3">
 				<div class="col">
 					<h2>Como funciona</h2>
 				</div>
@@ -601,6 +601,12 @@ function polen_card_talent_reviews_order(\WP_Post $post, $Talent_Fields)
 				<div class="row">
 					<div class="col-6 col-md-6 text-center text-md-center">
 						<span class="skill-title">Responde em</span>
+						<p class="p mb-0 mt-2">
+							<span class="skill-value">
+								<?php Icon_Class::polen_icon_clock(); ?>
+								<?= $Talent_Fields->tempo_resposta; ?>h
+							</span>
+						</p>
 					</div>
 					<div class="col-6 col-md-6 text-center text-md-center">
 						<?php
@@ -609,20 +615,18 @@ function polen_card_talent_reviews_order(\WP_Post $post, $Talent_Fields)
 							$total_reviews = "0";
 						}
 						?>
-						<span class="skill-title">Avaliações (<?php echo  $total_reviews; ?>)</span>
-					</div>
-					<div class="col-6 col-md-6 text-center text-md-center mt-2">
-						<?php Icon_Class::polen_icon_clock(); ?>
-						<span class="skill-value"><?= $Talent_Fields->tempo_resposta; ?>h</span>
-					</div>
-					<div class="col-6 col-md-6 text-center text-md-center mt-2">
-						<?php Icon_Class::polen_icon_star(true); ?>
-						<?php
-						$total_review = intval(get_post_meta($post->ID, "total_review", true));
-						$sum_rate_reviews = intval(get_post_meta($post->ID, "sum_rate", true));
-						$avg_rate = $total_review > 0 ? ($sum_rate_reviews / $total_review) : 0;
-						?>
-						<a href="<?= polen_get_url_review_page(); ?>" class="skill-value no-underline"><?php echo number_format($avg_rate, 1); ?></a>
+						<a href="<?= polen_get_url_review_page(); ?>" class="no-underline">
+							<span class="skill-title">Avaliações (<?php echo  $total_reviews; ?>)</span>
+							<p class="p mb-0 mt-2 skill-value">
+								<?php Icon_Class::polen_icon_star(true); ?>
+								<?php
+								$total_review = intval(get_post_meta($post->ID, "total_review", true));
+								$sum_rate_reviews = intval(get_post_meta($post->ID, "sum_rate", true));
+								$avg_rate = $total_review > 0 ? ($sum_rate_reviews / $total_review) : 0;
+								?>
+								<?php echo number_format($avg_rate, 1); ?>
+							</p>
+						</a>
 					</div>
 				</div>
 			</div>

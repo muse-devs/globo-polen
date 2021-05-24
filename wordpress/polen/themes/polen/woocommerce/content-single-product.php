@@ -56,7 +56,7 @@ $bg_image = wp_get_attachment_image_src($Talent_Fields->cover_image_id, "large")
 	<!-- Tags -->
 	<div class="row">
 		<div class="col-md-12">
-			<h1 class="talent-name text-truncate mb-1" title="<?= get_the_title(); ?>"><?= get_the_title(); ?></h1>
+			<h1 class="talent-name text-truncate mb-3" title="<?= get_the_title(); ?>"><?= get_the_title(); ?></h1>
 			<div class="row">
 				<div class="col-md-12">
 					<?php if (count($terms) > 0) : ?>
