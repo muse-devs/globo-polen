@@ -266,7 +266,7 @@ function polen_get_talent_socials($talent)
 <?php
 }
 
-function polen_get_talent_video_buttons($talent, $video_url, $video_download)
+function polen_get_talent_video_buttons( $talent, $video_url, $video_download, $hash = null )
 {
 	$wa_url = "https://wa.me/?text=";
 	$wa_message = htmlentities(urlencode("Veja que legal: "));
@@ -276,8 +276,8 @@ function polen_get_talent_video_buttons($talent, $video_url, $video_download)
 		<button onclick="shareVideo('Compartilhar vídeo de <?php echo $talent->nome; ?>', '<?php echo $video_url; ?>')" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_share(); ?>Compartilhar</button>
 	<?php endif; ?>
 	<button onclick="copyToClipboard('<?php echo $video_url; ?>')" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_clipboard(); ?>Copiar Link</button>
-	<?php if (!empty($video_download)) : ?>
-		<a href="<?php echo $video_download; ?>" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_download(); ?>Download</a>
+	<?php if ( !empty( $video_download )) : ?>
+		<a href="#" id="video-download" data-download="<?= $hash; ?>" onclick="downloadClick_handler(event);" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_download(); ?>Download</a>
 	<?php endif; ?>
 <?php
 }
@@ -397,7 +397,7 @@ function polen_get_video_player($talent, $video, $user_id)
 							<?php if ($user_id !== 0 && $isRateble) : ?>
 								<a href="/my-account/create-review/<?= $video->order_id; ?>" class="btn btn-primary btn-lg btn-block">Avaliar vídeo</a>
 							<?php endif; ?>
-							<?php polen_get_talent_video_buttons($talent, $video_url, $video->vimeo_url_download); ?>
+							<?php polen_get_talent_video_buttons( $talent, $video_url, $video->vimeo_url_download, $video->hash ); ?>
 						</div>
 					</div>
 				</div>
