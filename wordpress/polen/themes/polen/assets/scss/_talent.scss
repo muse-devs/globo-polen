@@ -35,7 +35,7 @@
 
 .tag-link {
 	display: inline-block;
-	margin-right: 10px;
+	margin-right: 12px;
 	padding: 3px 10px;
 	font-size: 12px;
 	font-weight: 400;
@@ -207,6 +207,9 @@
 .skill-value {
 	font-size: 14px;
 	font-weight: 700;
+	.bi, .icon {
+		padding-right: 3px;
+	}
 }
 
 .talent-dashboard-start,
