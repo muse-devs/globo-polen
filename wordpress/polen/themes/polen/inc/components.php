@@ -268,16 +268,13 @@ function polen_get_talent_socials($talent)
 
 function polen_get_talent_video_buttons($talent, $video_url, $video_download)
 {
-	$wa_url = "https://wa.me/?text=";
-	$wa_message = htmlentities(urlencode("Veja que legal: "));
-	$wa_link = $video_url;
 ?>
 	<?php if (wp_is_mobile()) : ?>
-		<button onclick="shareVideo('Compartilhar vídeo de <?php echo $talent->nome; ?>', '<?php echo $video_url; ?>')" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_share(); ?>Compartilhar</button>
+		<button onclick="shareVideo('Compartilhar vídeo de <?php echo $talent->nome; ?>', '<?php echo $video_url; ?>')" class="btn btn-outline-light btn-lg btn-block share-link mb-4"><?php Icon_Class::polen_icon_share(); ?>Compartilhar</button>
 	<?php endif; ?>
-	<button onclick="copyToClipboard('<?php echo $video_url; ?>')" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_clipboard(); ?>Copiar Link</button>
+	<button onclick="copyToClipboard('<?php echo $video_url; ?>')" class="btn btn-outline-light btn-lg btn-block share-link mb-4"><?php Icon_Class::polen_icon_clipboard(); ?>Copiar Link</button>
 	<?php if (!empty($video_download)) : ?>
-		<a href="<?php echo $video_download; ?>" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_download(); ?>Download</a>
+		<a href="<?php echo $video_download; ?>" class="btn btn-outline-light btn-lg btn-block share-link mb-4"><?php Icon_Class::polen_icon_download(); ?>Download</a>
 	<?php endif; ?>
 <?php
 }
@@ -381,21 +378,21 @@ function polen_get_video_player($talent, $video, $user_id)
 						})
 					</script>
 				</header>
-				<div class="content col-md-6 mt-4 mx-3 mx-md-0">
+				<div class="content col-md-6 mt-4">
 					<header class="row content-header">
 						<div class="col-3">
 							<?php echo polen_get_avatar(get_avatar_url($talent->user_id));  ?>
 						</div>
 						<div class="col-9">
 							<h4 class="name"><?php echo $talent->nome; ?></h4>
-							<h5 class="cat"><?php echo $talent->profissao; ?></h5>
+							<h5 class="cat my-2"><?php echo $talent->profissao; ?></h5>
 							<a href="<?php echo $video_url; ?>" class="url"><?php echo $video_url; ?></a>
 						</div>
 					</header>
 					<div class="row mt-4 share">
 						<div class="col-12">
 							<?php if ($user_id !== 0 && $isRateble) : ?>
-								<a href="/my-account/create-review/<?= $video->order_id; ?>" class="btn btn-primary btn-lg btn-block">Avaliar vídeo</a>
+								<a href="/my-account/create-review/<?= $video->order_id; ?>" class="btn btn-primary btn-lg btn-block mb-4">Avaliar vídeo</a>
 							<?php endif; ?>
 							<?php polen_get_talent_video_buttons($talent, $video_url, $video->vimeo_url_download); ?>
 						</div>

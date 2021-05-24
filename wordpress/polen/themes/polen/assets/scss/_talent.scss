@@ -129,7 +129,7 @@
 		color: $light-100;
 		border: none;
 		border-radius: 50%;
-		// background-color: $light-25;
+		background-color: transparent;
 		z-index: 100;
 	}
 }
@@ -155,12 +155,11 @@
 		// background-color: $secondary-bg-color;
 	}
 	.share-link {
-		margin-bottom: 20px;
 		font-family: inherit;
 		font-size: 16px;
 		font-weight: 600;
 		border-color: $light-50;
-		i {
+		.bi, .icon {
 			margin-right: 10px;
 		}
 	}
@@ -177,12 +176,12 @@
 	.name {
 		margin: 0;
 		font-family: inherit;
-		font-size: 24px;
+		font-size: 16px;
 		font-weight: 700;
 	}
 	.cat {
 		font-family: inherit;
-		font-size: 16px;
+		font-size: 14px;
 		font-weight: 400;
 		color: $light-50;
 	}
