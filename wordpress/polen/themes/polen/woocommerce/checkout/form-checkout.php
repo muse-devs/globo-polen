@@ -41,7 +41,7 @@ $Talent_Fields = new Polen_Update_Fields();
 	</div>
 </div> -->
 <div class="row">
-	<div class="col-12 col-md-6 order-md-2 mt-md-2 mb-3">
+	<div class="col-12 col-md-6 order-md-2 mt-md-2 mb-2">
 		<?php
 		foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
 			$product_id = apply_filters('woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key);
@@ -77,78 +77,6 @@ $Talent_Fields = new Polen_Update_Fields();
 					$user_data = get_userdata($user_id);
 					// echo $user_data->display_name;
 				}
-				?>
-				<!-- Cabeçalho do Artista -->
-				<?php
-				/*
-			foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) :
-				$_product   = apply_filters('woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key);
-				$product_id = apply_filters('woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key);
-				$talent_id = get_post_field( 'post_author', $product_id );
-				$talent_data = $Talent_Fields->get_vendor_data( $talent_id );
-
-				if ($_product && $_product->exists() && $cart_item['quantity'] > 0 && apply_filters('woocommerce_cart_item_visible', true, $cart_item, $cart_item_key)) :
-					$product_permalink = apply_filters('woocommerce_cart_item_permalink', $_product->is_visible() ? $_product->get_permalink($cart_item) : '', $cart_item, $cart_item_key);
-			?>
-					<div class="row py-4 px-3 cart-item">
-						<div class="col-md-7 d-flex justify-content-start align-items-center">
-							<figure class="thumbnail mr-4">
-								<?php
-								$thumbnail = apply_filters('woocommerce_cart_item_thumbnail', $_product->get_image(), $cart_item, $cart_item_key);
-
-								if (!$product_permalink) {
-									echo $thumbnail; // PHPCS: XSS ok.
-								} else {
-									printf('<a href="%s">%s</a>', esc_url($product_permalink), $thumbnail); // PHPCS: XSS ok.
-								}
-								?>
-							</figure>
-							<div class="cart-item-product">
-								<div class="product-name text-truncate" data-title="<?php esc_attr_e('Product', 'woocommerce'); ?>">
-									<?php
-									if (!$product_permalink) {
-										echo wp_kses_post(apply_filters('woocommerce_cart_item_name', $_product->get_name(), $cart_item, $cart_item_key) . '&nbsp;');
-									} else {
-										echo wp_kses_post(apply_filters('woocommerce_cart_item_name', sprintf('<a href="%s">%s</a>', esc_url($product_permalink), $_product->get_name()), $cart_item, $cart_item_key));
-									}
-
-									do_action('woocommerce_after_cart_item_name', $cart_item, $cart_item_key);
-
-									// Meta data.
-									echo wc_get_formatted_cart_item_data($cart_item); // PHPCS: XSS ok.
-
-									// Backorder notification.
-									if ($_product->backorders_require_notification() && $_product->is_on_backorder($cart_item['quantity'])) {
-										echo wp_kses_post(apply_filters('woocommerce_cart_item_backorder_notification', '<p class="backorder_notification">' . esc_html__('Available on backorder', 'woocommerce') . '</p>', $product_id));
-									}
-									?>
-									<div class="product-price" data-title="<?php esc_attr_e('Price', 'woocommerce'); ?>">
-										<?php
-										echo apply_filters('woocommerce_cart_item_price', WC()->cart->get_product_price($_product), $cart_item, $cart_item_key); // PHPCS: XSS ok.
-										?>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-5 mt-3">
-							<div class="row">
-								<div class="col skill-title">Responde em</div>
-								<div class="col skill-title">Reviews</div>
-							</div>
-							<div class="row">
-								<div class="col"><?php Icon_Class::polen_icon_clock(); ?> <?php echo $talent_data->tempo_resposta; ?>h</div>
-								<div class="col"><?php Icon_Class::polen_icon_star(true); ?> 5.0</div>
-							</div>
-						</div>
-						<div class="product-quantity" data-title="<?php esc_attr_e('Quantity', 'woocommerce'); ?>">
-							<?php
-							$product_quantity = sprintf('<input type="hidden" name="cart[%s][qty]" value="1" />', $cart_item_key);
-							echo apply_filters('woocommerce_cart_item_quantity', $product_quantity, $cart_item_key, $cart_item); // PHPCS: XSS ok.
-							?>
-						</div>
-					</div>
-				<?php endif; ?>
-			<?php endforeach; */
 				?>
 
 				<?php if ($checkout->get_checkout_fields()) : ?>

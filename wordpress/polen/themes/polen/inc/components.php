@@ -185,9 +185,9 @@ function polen_front_get_artists($items, $title)
 function polen_front_get_tutorial()
 {
 ?>
-	<section class="row tutorial pt-4 mb-4">
+	<section class="row tutorial mt-4 mb-4">
 		<div class="col-md-12">
-			<header class="row mb-4">
+			<header class="row mb-3">
 				<div class="col">
 					<h2>Como funciona</h2>
 				</div>
@@ -266,18 +266,15 @@ function polen_get_talent_socials($talent)
 <?php
 }
 
-function polen_get_talent_video_buttons( $talent, $video_url, $video_download, $hash = null )
+function polen_get_talent_video_buttons($talent, $video_url, $video_download, $hash = null)
 {
-	$wa_url = "https://wa.me/?text=";
-	$wa_message = htmlentities(urlencode("Veja que legal: "));
-	$wa_link = $video_url;
 ?>
 	<?php if (wp_is_mobile()) : ?>
-		<button onclick="shareVideo('Compartilhar vídeo de <?php echo $talent->nome; ?>', '<?php echo $video_url; ?>')" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_share(); ?>Compartilhar</button>
+		<button onclick="shareVideo('Compartilhar vídeo de <?php echo $talent->nome; ?>', '<?php echo $video_url; ?>')" class="btn btn-outline-light btn-lg btn-block share-link mb-4"><?php Icon_Class::polen_icon_share(); ?>Compartilhar</button>
 	<?php endif; ?>
-	<button onclick="copyToClipboard('<?php echo $video_url; ?>')" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_clipboard(); ?>Copiar Link</button>
-	<?php if ( !empty( $video_download )) : ?>
-		<a href="#" id="video-download" data-download="<?= $hash; ?>" onclick="downloadClick_handler(event);" class="btn btn-outline-light btn-lg btn-block share-link"><?php Icon_Class::polen_icon_download(); ?>Download</a>
+	<button onclick="copyToClipboard('<?php echo $video_url; ?>')" class="btn btn-outline-light btn-lg btn-block share-link mb-4"><?php Icon_Class::polen_icon_clipboard(); ?>Copiar Link</button>
+	<?php if (!empty($video_download)) : ?>
+		<a href="#" onclick="downloadClick_handler(event)" data-download="<?= $hash; ?>" class="btn btn-outline-light btn-lg btn-block share-link mb-4"><?php Icon_Class::polen_icon_download(); ?>Download</a>
 	<?php endif; ?>
 <?php
 }
@@ -366,7 +363,7 @@ function polen_get_video_player($talent, $video, $user_id)
 ?>
 	<div class="row">
 		<div class="col-12 col-md-12">
-			<div class="row video-card">
+			<div class="row mb-5 video-card">
 				<header class="col-md-6 p-0">
 					<div id="video-box">
 						<div id="polen-video" class="polen-video"></div>
@@ -375,29 +372,29 @@ function polen_get_video_player($talent, $video, $user_id)
 						jQuery(document).ready(function() {
 							var videoPlayer = new Vimeo.Player("polen-video", {
 								url: "<?php echo $video->vimeo_link; ?>",
-								autoplay: false,
+								autoplay: true,
 								width: document.getElementById("polen-video").offsetWidth,
 							});
 						})
 					</script>
 				</header>
-				<div class="content col-md-6 mt-4 mx-3 mx-md-0">
+				<div class="content col-md-6 mt-4">
 					<header class="row content-header">
 						<div class="col-3">
 							<?php echo polen_get_avatar(get_avatar_url($talent->user_id));  ?>
 						</div>
 						<div class="col-9">
 							<h4 class="name"><?php echo $talent->nome; ?></h4>
-							<h5 class="cat"><?php echo $talent->profissao; ?></h5>
+							<h5 class="cat my-2"><?php echo $talent->profissao; ?></h5>
 							<a href="<?php echo $video_url; ?>" class="url"><?php echo $video_url; ?></a>
 						</div>
 					</header>
 					<div class="row mt-4 share">
 						<div class="col-12">
 							<?php if ($user_id !== 0 && $isRateble) : ?>
-								<a href="/my-account/create-review/<?= $video->order_id; ?>" class="btn btn-primary btn-lg btn-block">Avaliar vídeo</a>
+								<a href="/my-account/create-review/<?= $video->order_id; ?>" class="btn btn-primary btn-lg btn-block mb-4">Avaliar vídeo</a>
 							<?php endif; ?>
-							<?php polen_get_talent_video_buttons( $talent, $video_url, $video->vimeo_url_download, $video->hash ); ?>
+							<?php polen_get_talent_video_buttons($talent, $video_url, $video->vimeo_url_download, $video->hash); ?>
 						</div>
 					</div>
 				</div>
@@ -421,45 +418,45 @@ function polen_get_talent_card($talent)
 			<span class="cat">Você vai pagar</span>
 			<p class="price mt-2"><?php echo $talent["price"]; ?></p>
 			<?php if ($talent["has_details"]) : ?>
-				<button class="show-details" onclick="showDetails()"><?php Icon_Class::polen_icon_chevron("down") ?></button>
+				<button class="show-details d-flex justify-content-center" onclick="showDetails()"><?php Icon_Class::polen_icon_chevron("down") ?></button>
 			<?php endif; ?>
 		</div>
 		<footer class="row details-box">
 			<div class="col pt-4 mt-3 details">
 				<div class="row personal">
-					<div class="col d-flex">
+					<div class="col d-flex justify-content-between">
 						<?php
 						if (empty(!$talent["from"])) : ?>
 							<div class="item">
-								<span class="title big">Vídeo de</span>
-								<p class="value"><?php echo $talent["from"]; ?></p>
+								<span class="title">Vídeo de</span>
+								<p class="value mt-2"><?php echo $talent["from"]; ?></p>
 							</div>
-							<div class="item mx-3">
+							<div class="item">
 								<?php Icon_Class::polen_icon_arrows(); ?>
 							</div>
 						<?php endif; ?>
 						<div class="item">
-							<span class="title big">Vídeo para</span>
-							<p class="value"><?php echo $talent["to"]; ?></p>
+							<span class="title">Para</span>
+							<p class="value mt-2"><?php echo $talent["to"]; ?></p>
 						</div>
 					</div>
 				</div>
-				<div class="row ocasion">
+				<div class="row ocasion mt-4">
 					<div class="col-12">
-						<span class="title big">Ocasião</span>
-						<p class="value"><?php echo $talent["category"]; ?></p>
+						<span class="title">Ocasião</span>
+						<p class="value mt-2"><?php echo $talent["category"]; ?></p>
 					</div>
 				</div>
-				<div class="row mail">
+				<div class="row mail mt-4">
 					<div class="col-12">
 						<span class="title">e-mail</span>
-						<p class="value"><?php echo $talent["mail"]; ?></p>
+						<p class="value mt-2"><?php echo $talent["mail"]; ?></p>
 					</div>
 				</div>
-				<div class="row description">
+				<div class="row description mt-4">
 					<div class="col-12">
 						<span class="title">Instruções</span>
-						<p class="value"><?php echo $talent["description"]; ?></p>
+						<p class="value mt-2"><?php echo $talent["description"]; ?></p>
 					</div>
 				</div>
 			</div>
@@ -604,6 +601,12 @@ function polen_card_talent_reviews_order(\WP_Post $post, $Talent_Fields)
 				<div class="row">
 					<div class="col-6 col-md-6 text-center text-md-center">
 						<span class="skill-title">Responde em</span>
+						<p class="p mb-0 mt-2">
+							<span class="skill-value">
+								<?php Icon_Class::polen_icon_clock(); ?>
+								<?= $Talent_Fields->tempo_resposta; ?>h
+							</span>
+						</p>
 					</div>
 					<div class="col-6 col-md-6 text-center text-md-center">
 						<?php
@@ -612,20 +615,18 @@ function polen_card_talent_reviews_order(\WP_Post $post, $Talent_Fields)
 							$total_reviews = "0";
 						}
 						?>
-						<span class="skill-title">Avaliações (<?php echo  $total_reviews; ?>)</span>
-					</div>
-					<div class="col-6 col-md-6 text-center text-md-center mt-2">
-						<?php Icon_Class::polen_icon_clock(); ?>
-						<span class="skill-value"><?= $Talent_Fields->tempo_resposta; ?>h</span>
-					</div>
-					<div class="col-6 col-md-6 text-center text-md-center mt-2">
-						<?php Icon_Class::polen_icon_star(true); ?>
-						<?php
-						$total_review = intval(get_post_meta($post->ID, "total_review", true));
-						$sum_rate_reviews = intval(get_post_meta($post->ID, "sum_rate", true));
-						$avg_rate = $total_review > 0 ? ($sum_rate_reviews / $total_review) : 0;
-						?>
-						<a href="<?= polen_get_url_review_page(); ?>" class="skill-value no-underline"><?php echo number_format($avg_rate, 1); ?></a>
+						<a href="<?= polen_get_url_review_page(); ?>" class="no-underline">
+							<span class="skill-title">Avaliações (<?php echo  $total_reviews; ?>)</span>
+							<p class="p mb-0 mt-2 skill-value">
+								<?php Icon_Class::polen_icon_star(true); ?>
+								<?php
+								$total_review = intval(get_post_meta($post->ID, "total_review", true));
+								$sum_rate_reviews = intval(get_post_meta($post->ID, "sum_rate", true));
+								$avg_rate = $total_review > 0 ? ($sum_rate_reviews / $total_review) : 0;
+								?>
+								<?php echo number_format($avg_rate, 1); ?>
+							</p>
+						</a>
 					</div>
 				</div>
 			</div>

@@ -53,6 +53,7 @@
             && braspag_creditcardValidity 
             && braspag_creditcardCvv) {
                 e.preventDefault();
+                blockUnblockInputs("#form-add-card", true);
                 $.ajax({
                     url: braspag.ajaxUrl,
                     type: 'post',
@@ -90,6 +91,9 @@
                         polError(error);
                         console.log( error );
                     },
+                    complete: function() {
+                        blockUnblockInputs("#form-add-card", false);
+                    }
                 });
             }
         });
