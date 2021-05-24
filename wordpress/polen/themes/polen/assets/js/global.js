@@ -196,6 +196,18 @@ function getSessionMessage() {
 	sessionStorage.removeItem(CONSTANTS.MESSAGE_COOKIE);
 }
 
+function blockUnblockInputs(el, block) {
+	const allEl = document.querySelectorAll(
+		`${el} input, ${el} select, ${el} textarea`
+	);
+	allEl.forEach(function (element, key, parent) {
+		block
+			? element.setAttribute("readonly", block)
+			: element.removeAttribute("readonly");
+	});
+	console.log("blocked inputs", block);
+}
+
 // -----------------------------------------------------------------------
 
 jQuery(document).ready(function () {

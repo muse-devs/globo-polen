@@ -2,7 +2,7 @@
 	<!-- Dados do cartão -->
 	<div class="col-md-12">
 		<h1 class="mb-4">Adicionar Cartão</h1>
-		<form action="/">
+		<form id="form-add-card" action="/">
 			<div id="form-add-card" class="row">
 				<div class="col-12 mb-3">
 					<label><?php echo __('Número do cartão', 'cubo9'); ?></label>
