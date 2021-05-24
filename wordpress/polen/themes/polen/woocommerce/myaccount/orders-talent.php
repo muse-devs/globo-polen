@@ -138,7 +138,7 @@ if (in_array('user_talent',  $logged_user->roles)) {
 									<span class="value small" id="video-email"></span>
 								</div>
 							</div>
-							<div class="row mt-5">
+							<div class="row mt-4">
 								<div class="col">
 									<p class="p mb-2">Instruções</p>
 									<p class="text" id="video-instructions"></p>

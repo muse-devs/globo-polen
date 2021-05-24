@@ -8428,6 +8428,9 @@ a {
   font-weight: 600;
   letter-spacing: 0.03rem; }
 
+legend {
+  font-weight: bold; }
+
 body {
   font-family: "Poppins", sans-serif;
   font-size: 13px;
@@ -8663,7 +8666,6 @@ iframe {
   height: 103px; }
 
 .cart-other input[type="checkbox"] {
-  margin: 0 10px 0 0;
   padding: 0;
   width: auto;
   display: inline-block; }
@@ -8780,8 +8782,7 @@ textarea {
       line-height: 21px;
       display: inline-block;
       vertical-align: top;
-      cursor: pointer;
-      margin-left: 4px; }
+      cursor: pointer; }
   input[type="checkbox"]:not(.switch) {
     border-radius: 7px; }
     input[type="checkbox"]:not(.switch):after {
@@ -9675,6 +9676,15 @@ select.form-control:not([size]):not([multiple]) {
 .woocommerce-Price-currencySymbol {
   margin-right: 3px; }
 
+.woocommerce form .form-row label {
+  line-height: inherit; }
+
+.woocommerce form .form-row.woocommerce-invalid label {
+  color: var(--light); }
+
+.woocommerce-invalid #terms {
+  outline: transparent !important; }
+
 .image-bg {
   position: fixed;
   width: 100vw;
@@ -9928,7 +9938,7 @@ select.form-control:not([size]):not([multiple]) {
     box-sizing: border-box;
     background-color: #377dff; }
   .talent-order-modal .body {
-    padding: 35px 0;
+    padding: 35px 0 0;
     box-sizing: border-box; }
   .talent-order-modal .name {
     font-size: 16px;
@@ -9993,18 +10003,11 @@ select.form-control:not([size]):not([multiple]) {
     font-family: inherit;
     font-size: 16px;
     font-weight: 700; }
-  .talent-card .cat {
+  .talent-card .cat, .talent-card .title {
     font-family: inherit;
     font-size: 12px;
     font-weight: 400;
     line-height: 14px; }
-  .talent-card .title {
-    font-family: inherit;
-    font-size: 14px;
-    font-weight: 700;
-    color: #c4c4c4; }
-    .talent-card .title.big {
-      font-size: 16px; }
   .talent-card .price {
     margin: 0;
     font-family: inherit;
@@ -10012,9 +10015,9 @@ select.form-control:not([size]):not([multiple]) {
     line-height: 1;
     font-weight: 700; }
   .talent-card .value {
+    margin: 0;
     font-family: inherit;
     font-size: 14px;
-    line-height: 1.6;
     font-weight: 700; }
   .talent-card .order-number {
     font-size: 12px;

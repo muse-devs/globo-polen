@@ -243,7 +243,7 @@ $Talent_Fields = new Polen_Update_Fields();
 								$checked_allow,
 							);
 							?>
-							<span>Permitir que o vídeo seja postado no perfil do artista</span>
+							<span class="ml-2">Permitir que o vídeo seja postado no perfil do artista</span>
 						</label>
 					</div>
 				</div>
