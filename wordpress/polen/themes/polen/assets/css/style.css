@@ -10026,7 +10026,7 @@ select.form-control:not([size]):not([multiple]) {
     padding: 0 10px;
     display: inline-block;
     font-family: inherit;
-    font-size: 12px;
+    font-size: 10px;
     text-align: center;
     color: #c4c4c4;
     border-radius: 2px;
