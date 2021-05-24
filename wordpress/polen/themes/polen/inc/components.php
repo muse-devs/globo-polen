@@ -366,7 +366,7 @@ function polen_get_video_player($talent, $video, $user_id)
 ?>
 	<div class="row">
 		<div class="col-12 col-md-12">
-			<div class="row video-card">
+			<div class="row mb-5 video-card">
 				<header class="col-md-6 p-0">
 					<div id="video-box">
 						<div id="polen-video" class="polen-video"></div>

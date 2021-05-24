@@ -121,15 +121,15 @@
 	.close-button {
 		position: absolute;
 		padding: 0;
-		width: 24px;
-		height: 24px;
+		width: 30px;
+		height: 30px;
 		top: 25px;
 		right: 25px;
-		font-size: 1em;
+		font-size: 25px;
 		color: $light-100;
 		border: none;
 		border-radius: 50%;
-		background-color: $light-25;
+		// background-color: $light-25;
 		z-index: 100;
 	}
 }
@@ -146,6 +146,7 @@
 	background-color: $talent-bg-color;
 	overflow: hidden;
 	font-family: $font-primary;
+	-webkit-mask-image: -webkit-radial-gradient(white, black);
 	@include media-breakpoint-up(md) {
 		// width: 450px;
 	}
