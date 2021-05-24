@@ -288,6 +288,9 @@ textarea {
 		}
 		&:checked {
 			--s: 0.5;
+			& + span {
+				font-weight: bold;
+			}
 		}
 	}
 }
