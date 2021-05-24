@@ -266,7 +266,7 @@ function polen_get_talent_socials($talent)
 <?php
 }
 
-function polen_get_talent_video_buttons($talent, $video_url, $video_download)
+function polen_get_talent_video_buttons($talent, $video_url, $video_download, $hash = null)
 {
 ?>
 	<?php if (wp_is_mobile()) : ?>
@@ -274,7 +274,7 @@ function polen_get_talent_video_buttons($talent, $video_url, $video_download)
 	<?php endif; ?>
 	<button onclick="copyToClipboard('<?php echo $video_url; ?>')" class="btn btn-outline-light btn-lg btn-block share-link mb-4"><?php Icon_Class::polen_icon_clipboard(); ?>Copiar Link</button>
 	<?php if (!empty($video_download)) : ?>
-		<a href="<?php echo $video_download; ?>" class="btn btn-outline-light btn-lg btn-block share-link mb-4"><?php Icon_Class::polen_icon_download(); ?>Download</a>
+		<a href="#" onclick="downloadClick_handler(event)" data-download="<?= $hash; ?>" class="btn btn-outline-light btn-lg btn-block share-link mb-4"><?php Icon_Class::polen_icon_download(); ?>Download</a>
 	<?php endif; ?>
 <?php
 }
@@ -372,7 +372,7 @@ function polen_get_video_player($talent, $video, $user_id)
 						jQuery(document).ready(function() {
 							var videoPlayer = new Vimeo.Player("polen-video", {
 								url: "<?php echo $video->vimeo_link; ?>",
-								autoplay: false,
+								autoplay: true,
 								width: document.getElementById("polen-video").offsetWidth,
 							});
 						})
@@ -394,7 +394,7 @@ function polen_get_video_player($talent, $video, $user_id)
 							<?php if ($user_id !== 0 && $isRateble) : ?>
 								<a href="/my-account/create-review/<?= $video->order_id; ?>" class="btn btn-primary btn-lg btn-block mb-4">Avaliar vídeo</a>
 							<?php endif; ?>
-							<?php polen_get_talent_video_buttons($talent, $video_url, $video->vimeo_url_download); ?>
+							<?php polen_get_talent_video_buttons($talent, $video_url, $video->vimeo_url_download, $video->hash); ?>
 						</div>
 					</div>
 				</div>

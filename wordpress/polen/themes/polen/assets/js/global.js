@@ -210,6 +210,22 @@ function blockUnblockInputs(el, block) {
 
 // -----------------------------------------------------------------------
 
+// ----------------------------
+// Handler do Download do Video
+function downloadClick_handler( evt ) {
+	
+	evt.preventDefault();
+	let hash = jQuery( evt.currentTarget ).attr( 'data-download' );
+	let data = { 'hash': hash };
+	jQuery.post(woocommerce_params.ajax_url + '?action=video-download-link', data, response => {
+		if( response.success ) {
+			window.location.href = response.data;
+		}
+	});
+}
+// ---------------------------
+
+
 jQuery(document).ready(function () {
 	truncatedItems();
 	getSessionMessage();
