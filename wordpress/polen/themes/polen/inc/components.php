@@ -427,39 +427,39 @@ function polen_get_talent_card($talent)
 		<footer class="row details-box">
 			<div class="col pt-4 mt-3 details">
 				<div class="row personal">
-					<div class="col d-flex">
+					<div class="col d-flex justify-content-between">
 						<?php
 						if (empty(!$talent["from"])) : ?>
 							<div class="item">
-								<span class="title big">Vídeo de</span>
-								<p class="value"><?php echo $talent["from"]; ?></p>
+								<span class="title">Vídeo de</span>
+								<p class="value mt-2"><?php echo $talent["from"]; ?></p>
 							</div>
-							<div class="item mx-3">
+							<div class="item">
 								<?php Icon_Class::polen_icon_arrows(); ?>
 							</div>
 						<?php endif; ?>
 						<div class="item">
-							<span class="title big">Vídeo para</span>
-							<p class="value"><?php echo $talent["to"]; ?></p>
+							<span class="title">Para</span>
+							<p class="value mt-2"><?php echo $talent["to"]; ?></p>
 						</div>
 					</div>
 				</div>
-				<div class="row ocasion">
+				<div class="row ocasion mt-4">
 					<div class="col-12">
-						<span class="title big">Ocasião</span>
-						<p class="value"><?php echo $talent["category"]; ?></p>
+						<span class="title">Ocasião</span>
+						<p class="value mt-2"><?php echo $talent["category"]; ?></p>
 					</div>
 				</div>
-				<div class="row mail">
+				<div class="row mail mt-4">
 					<div class="col-12">
 						<span class="title">e-mail</span>
-						<p class="value"><?php echo $talent["mail"]; ?></p>
+						<p class="value mt-2"><?php echo $talent["mail"]; ?></p>
 					</div>
 				</div>
-				<div class="row description">
+				<div class="row description mt-4">
 					<div class="col-12">
 						<span class="title">Instruções</span>
-						<p class="value"><?php echo $talent["description"]; ?></p>
+						<p class="value mt-2"><?php echo $talent["description"]; ?></p>
 					</div>
 				</div>
 			</div>

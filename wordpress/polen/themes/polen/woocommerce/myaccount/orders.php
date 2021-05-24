@@ -16,6 +16,12 @@ if( $polen_talent->is_user_talent( $logged_user ) ) {
 
 	<?php if ($has_orders) : ?>
 
+		<div class="row">
+			<div class="col-12 my-1">
+				<p class="muted m-0"><?php echo (int) sizeof($customer_orders->orders); ?> pedidos</p>
+			</div>
+		</div>
+
 		<?php
 		foreach ($customer_orders->orders as $customer_order) {
 			$order      = wc_get_order($customer_order); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
@@ -41,7 +47,7 @@ if( $polen_talent->is_user_talent( $logged_user ) ) {
 							<div class="col-12">
 								<div class="row d-flex justify-content-start">
 									<div>
-										<div class="image-cropper">
+										<div class="image-cropper d-block">
 											<?php
 											$thumbnail = get_the_post_thumbnail_url($product_id, 'post-thumbnail');
 											?>
@@ -50,22 +56,19 @@ if( $polen_talent->is_user_talent( $logged_user ) ) {
 									</div>
 									<div class="col">
 										<div class="order-title"><?php echo  $item->get_name(); ?></div>
-										<div class="cat">
-											<?php
-											global $post;
-											$terms = get_the_terms($product_id, 'product_cat');
-											if (isset($terms[0]->name)) {
-												echo $terms[0]->name;
-											}
-											?>
-										</div>
-										<div class="status mt-3">
+										<div class="status mt-2">
 											<?php echo wc_get_order_status_name($order->get_status()); ?>
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="col-12 text-center mt-4 mb-3">
+							<div class="col-12 mt-3">
+								<div class="row d-block">
+									<p class="m-0"><strong><?php echo $order->get_formatted_order_total(); ?></strong> - <?php echo $order->get_date_created()->format ('d/m/Y'); ?></p>
+									<p class="order-number m-0">Número do pedido: <strong><?php echo $order->get_order_number(); ?></strong></p>
+								</div>
+							</div>
+							<div class="col-12 text-center mt-3">
 								<div class="row">
 									<?php
 									if( !Polen_Order::is_completed( $order ) ):
@@ -89,15 +92,6 @@ if( $polen_talent->is_user_talent( $logged_user ) ) {
 									<?php
 									endif;?>
 								</div>
-							</div>
-							<div class="col-4 text-center">
-								<p class="order-number">Número do pedido: <strong><?php echo $order->get_order_number(); ?></strong></p>
-							</div>
-							<div class="col-4 text-center">
-								<p class="order-number">Data: <strong><?php echo $order->get_date_created()->format ('d/m/Y');; ?></strong></p>
-							</div>
-							<div class="col-4 text-center">
-								<p class="order-number">Valor: <strong><?php echo $order->get_formatted_order_total(); ?></strong></p>
 							</div>
 						</div>
 					</div>

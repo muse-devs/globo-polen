@@ -199,3 +199,15 @@ select.form-control:not([size]):not([multiple]) {
 .woocommerce-Price-currencySymbol {
 	margin-right: 3px;
 }
+
+.woocommerce form .form-row label {
+	line-height: inherit;
+}
+
+.woocommerce form .form-row.woocommerce-invalid label {
+	color: var(--light);
+}
+
+.woocommerce-invalid #terms {
+	outline: transparent !important;
+}
