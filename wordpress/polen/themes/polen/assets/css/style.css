@@ -9789,15 +9789,14 @@ select.form-control:not([size]):not([multiple]) {
   .video-modal .close-button {
     position: absolute;
     padding: 0;
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    height: 30px;
     top: 25px;
     right: 25px;
-    font-size: 1em;
+    font-size: 25px;
     color: #fff;
     border: none;
     border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.25);
     z-index: 100; }
 
 .video-card {
@@ -9810,7 +9809,8 @@ select.form-control:not([size]):not([multiple]) {
   box-sizing: border-box;
   background-color: #272727;
   overflow: hidden;
-  font-family: "Poppins", sans-serif; }
+  font-family: "Poppins", sans-serif;
+  -webkit-mask-image: -webkit-radial-gradient(white, black); }
   .video-card .polen-video {
     max-width: 100%; }
   .video-card .share-link {
