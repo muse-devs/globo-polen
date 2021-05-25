@@ -60,9 +60,10 @@ a {
 .no-underline {
 	color: white;
 	text-decoration: none;
-	&:hover {
+	cursor: pointer;
+	&:hover, &:active {
 		color: white;
-		text-decoration: underline;
+		text-decoration: none;
 	}
 }
 
@@ -74,4 +75,8 @@ a {
 	font-size: 0.8rem;
 	font-weight: 600;
 	letter-spacing: 0.03rem;
+}
+
+legend {
+	font-weight: bold;
 }

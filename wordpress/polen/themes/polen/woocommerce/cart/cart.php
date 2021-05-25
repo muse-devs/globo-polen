@@ -160,6 +160,9 @@ $Talent_Fields = new Polen_Update_Fields();
 						<div class="col-12 col-md-12">
 							<?php
 							$email_to_video = isset($cart_item['email_to_video']) ? $cart_item['email_to_video'] : '';
+							?>
+							<label for="<?php echo 'cart_email_to_video_' . $cart_item_key; ?>">E-mail para receber updates</label>
+							<?php
 							printf(
 								'<input type="email" placeholder="E-mail para receber updates" class="%s form-control form-control-lg" id="cart_email_to_video_%s" data-cart-id="%s" name="email_to_video" value="%s" required="required"  />',
 								'polen-cart-item-data',
@@ -240,7 +243,7 @@ $Talent_Fields = new Polen_Update_Fields();
 								$checked_allow,
 							);
 							?>
-							<span>Permitir que o vídeo seja postado no perfil do artista</span>
+							<span class="ml-2">Permitir que o vídeo seja postado no perfil do artista</span>
 						</label>
 					</div>
 				</div>
