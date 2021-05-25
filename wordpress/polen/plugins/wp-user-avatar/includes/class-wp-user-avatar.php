@@ -35,6 +35,9 @@ class WP_User_Avatar {
           if(is_admin()) return;
           $this->wpua_action_show_user_profile($user);
       });
+      
+      //hook para salvar na edição dos dados de usuário(minha conta->meus dados)
+      add_action('woocommerce_save_account_details', array($this, 'wpua_action_process_option_update'));
 
       add_action('personal_options_update', array($this, 'wpua_action_process_option_update'));
       add_action('edit_user_profile_update', array($this, 'wpua_action_process_option_update'));
