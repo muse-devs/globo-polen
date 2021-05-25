@@ -82,7 +82,7 @@ if (in_array('user_talent',  $logged_user->roles)) {
 												<?php
 												if ($order['status'] == 'talent-accepted') {
 												?>
-													<button class="btn btn-primary btn-lg btn-block btn-enviar-video" button-nonce="<?php echo $order_nonce; ?>" order-id="<?php echo $order['order_id']; ?>" data-toggle="" data-target="" onclick="window.location.href = '/my-account/send-video/?order_id=<?php echo $order['order_id']; ?>'">Enviar vídeo</button>
+													<button class="btn btn-outline-light btn-lg btn-block btn-enviar-video" button-nonce="<?php echo $order_nonce; ?>" order-id="<?php echo $order['order_id']; ?>" data-toggle="" data-target="" onclick="window.location.href = '/my-account/send-video/?order_id=<?php echo $order['order_id']; ?>'">Enviar vídeo</button>
 												<?php
 												}
 
