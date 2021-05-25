@@ -216,8 +216,10 @@ function downloadClick_handler( evt ) {
 	
 	evt.preventDefault();
 	let hash = jQuery( evt.currentTarget ).attr( 'data-download' );
-	let data = { 'hash': hash };
-	jQuery.post(woocommerce_params.ajax_url + '?action=video-download-link', data, response => {
+	let security = jQuery( evt.currentTarget ).attr( 'data-nonce' );
+	let action = 'video-download-link';
+	let data = { hash, security, action };
+	jQuery.post(woocommerce_params.ajax_url, data, response => {
 		if( response.success ) {
 			window.location.href = response.data;
 		}
