@@ -165,7 +165,7 @@ function polen_scripts() {
 	global $wp_styles;
 	$min = get_assets_folder();
 
-	if(is_front_page()) {
+	if(is_front_page() || is_page_template( 'inc/landpage.php' )) {
 		foreach( $wp_styles->queue as $style ) {
 			wp_dequeue_style($wp_styles->registered[$style]->handle);
 		}
@@ -179,13 +179,17 @@ function polen_scripts() {
 
 	wp_enqueue_style('polen-custom-styles', TEMPLATE_URI . '/assets/css/style.css', array(), _S_VERSION);
 	if(is_singular() && is_product()) {
-		wp_enqueue_script( 'slick-slider', TEMPLATE_URI . '/assets/slick/slick.min.js', array("jquery"), '', true );
+		// wp_enqueue_script( 'slick-slider', TEMPLATE_URI . '/assets/slick/slick.min.js', array("jquery"), '', true );
 		wp_enqueue_script( 'vimeo');
-		wp_enqueue_script( 'talent-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'talent.js', array("slick-slider", "vimeo"), _S_VERSION, true );
+		wp_enqueue_script( 'talent-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'talent.js', array("vimeo"), _S_VERSION, true );
 	}
 
 	if( is_cart() ) {
 		wp_enqueue_script( 'polen-cart', TEMPLATE_URI . '/assets/js/' . $min . 'cart.js', array("jquery"), _S_VERSION, true );
+	}
+
+	if( is_checkout() ) {
+		wp_enqueue_script( 'polen-checkout', TEMPLATE_URI . '/assets/js/' . $min . 'checkout.js', array("jquery"), _S_VERSION, true );
 	}
 
 	wp_enqueue_script( 'bootstrap-js', TEMPLATE_URI . '/assets/bootstrap-4.6.0/dist/js/bootstrap.min.js', array("jquery"), _S_VERSION, true );

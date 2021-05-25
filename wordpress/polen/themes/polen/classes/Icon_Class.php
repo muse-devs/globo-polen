@@ -97,17 +97,27 @@ class Icon_Class
 
 	public static function polen_icon_chevron()
 	{
-		echo '<i class="bi bi-chevron-down"></i>';
+		echo '<i class="icon icon-down-arrow"></i>';
+	}
+
+	public static function polen_icon_chevron_down()
+	{
+		echo '<i class="icon icon-down-arrow"></i>';
+	}
+
+	public static function polen_icon_chevron_up()
+	{
+		echo '<i class="icon icon-up-arrow"></i>';
 	}
 
 	public static function polen_icon_chevron_right()
 	{
-		echo '<i class="bi bi-chevron-right"></i>';
+		echo '<i class="icon icon-right-arrow"></i>';
 	}
 
 	public static function polen_icon_chevron_left()
 	{
-		echo '<i class="bi bi-chevron-left"></i>';
+		echo '<i class="icon icon-left-arrow"></i>';
 	}
 
 	public static function polen_icon_close()

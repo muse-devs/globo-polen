@@ -13,18 +13,28 @@
 		$('.polen-cart-item-data').on('blur change paste click',function(){
 			var cart_id = $(this).data( 'cart-id' );
 			var item_name = $(this).attr('name');
-
 			var allowed_item = [ 'offered_by', 'video_to', 'name_to_video', 'email_to_video', 'video_category', 'instructions_to_video', 'allow_video_on_page' ];
-			if( $.inArray( item_name, allowed_item ) !== -1 ){
-				$.ajax(
-				{
+			if( $.inArray( item_name, allowed_item ) !== -1 ) {
+				let item_value;
+				
+				if( item_name == 'allow_video_on_page' ) {
+					if( $( '#cart_'+ item_name + '_' + cart_id ).is(':checked') ) {
+						item_value = 'on';
+					} else {
+						item_value = 'off';
+					}
+				} else {
+					item_value = $( '#cart_'+ item_name + '_' + cart_id ).val();
+				}
+
+				$.ajax({
 					type: 'POST',
 					url: woocommerce_params.ajax_url,
 						data: {
 						action: 'polen_update_cart_item',
 						security: $('#woocommerce-cart-nonce').val(),
 						polen_data_name: item_name,
-						polen_data_value: $('#cart_'+ item_name + '_' + cart_id).val(),
+						polen_data_value: item_value,
 						cart_id: cart_id
 					},
 					success: function( response ) {

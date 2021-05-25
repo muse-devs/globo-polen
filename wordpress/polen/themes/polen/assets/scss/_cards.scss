@@ -2,7 +2,7 @@
 	box-sizing: border-box;
 	border-radius: 8px;
 	background-color: $talent-bg-color;
-	img {
+	img.correct-margin {
 		margin-bottom: -30px;
 	}
 	p {
@@ -409,7 +409,7 @@
 			}
 			@include media-breakpoint-up(md) {
 				padding-left: 15px;
-				flex-wrap: wrap;
+				// flex-wrap: wrap;
 				.polen-card.responsive {
 					margin: 0 15px 0 0;
 				}
@@ -503,6 +503,17 @@
 		height: 100%;
 		object-fit: cover;
 	}
+	&::after {
+		content: "";
+		position: absolute;
+		display: block;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(360deg, #000000 -17.41%, rgba(0, 0, 0, 0) 55.71%);
+		z-index: 1;
+	}
 }
 
 .video-promo-card {
@@ -550,6 +561,7 @@
 	position: absolute;
 	left: 8px;
 	bottom: 8px;
+	z-index: 2;
 	> * {
 		margin: 0;
 		vertical-align: bottom;

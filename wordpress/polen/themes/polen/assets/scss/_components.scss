@@ -147,8 +147,9 @@
 		}
 		.message-close {
 			position: absolute;
+			padding: 0;
 			top: 10px;
-			right: 8px;
+			right: 12px;
 			border: none;
 			background: none;
 			i {
@@ -183,4 +184,14 @@
 			}
 		}
 	}
+}
+
+.modal-close {
+	position: absolute;
+	top: 10px;
+	right: 20px;
+	font-size: 24px;
+	color: var(--light);
+	background-color: transparent;
+	border: none;
 }

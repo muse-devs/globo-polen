@@ -35,7 +35,7 @@
 
 .tag-link {
 	display: inline-block;
-	margin-right: 10px;
+	margin-right: 12px;
 	padding: 3px 10px;
 	font-size: 12px;
 	font-weight: 400;
@@ -104,7 +104,7 @@
 
 .video-modal {
 	position: fixed;
-	padding: 15px;
+	padding: 15px 15px 120px;
 	display: none;
 	top: 0;
 	left: 50%;
@@ -121,15 +121,15 @@
 	.close-button {
 		position: absolute;
 		padding: 0;
-		width: 24px;
-		height: 24px;
+		width: 30px;
+		height: 30px;
 		top: 25px;
 		right: 25px;
-		font-size: 1em;
+		font-size: 25px;
 		color: $light-100;
 		border: none;
 		border-radius: 50%;
-		background-color: $light-25;
+		background-color: transparent;
 		z-index: 100;
 	}
 }
@@ -146,6 +146,7 @@
 	background-color: $talent-bg-color;
 	overflow: hidden;
 	font-family: $font-primary;
+	-webkit-mask-image: -webkit-radial-gradient(white, black);
 	@include media-breakpoint-up(md) {
 		// width: 450px;
 	}
@@ -154,12 +155,11 @@
 		// background-color: $secondary-bg-color;
 	}
 	.share-link {
-		margin-bottom: 20px;
 		font-family: inherit;
 		font-size: 16px;
 		font-weight: 600;
 		border-color: $light-50;
-		i {
+		.bi, .icon {
 			margin-right: 10px;
 		}
 	}
@@ -176,12 +176,12 @@
 	.name {
 		margin: 0;
 		font-family: inherit;
-		font-size: 24px;
+		font-size: 16px;
 		font-weight: 700;
 	}
 	.cat {
 		font-family: inherit;
-		font-size: 16px;
+		font-size: 14px;
 		font-weight: 400;
 		color: $light-50;
 	}
@@ -207,12 +207,17 @@
 .skill-value {
 	font-size: 14px;
 	font-weight: 700;
+	.bi, .icon {
+		padding-right: 3px;
+	}
 }
 
-.talent-dashboard-start {
+.talent-dashboard-start,
+.box-round,
+.talent-order-modal {
 	.p {
 		margin: 0;
-		color: rgba($color: #ffffff, $alpha: 0.4);
+		color: var(--light);
 		&.small {
 			font-size: 16px;
 		}
@@ -220,7 +225,7 @@
 	.msg {
 		position: relative;
 		margin-bottom: 30px;
-		border-radius: 1rem;
+		border-radius: 8px;
 		box-sizing: border-box;
 	}
 	.msg-header {
@@ -241,12 +246,13 @@
 	.time {
 		font-weight: 700;
 		line-height: 1.2;
-		color: white;
+		color: var(--light);
 	}
 	.value {
 		font-size: 24px;
 		&.small {
-			font-size: 18px;
+			font-size: 16px;
+			line-height: 28px;
 		}
 	}
 	.time {
@@ -254,34 +260,10 @@
 	}
 }
 
-.talent-order {
-	padding: 32px;
-	border-radius: 8px;
-	box-sizing: border-box;
-	background-color: $talent-bg-color;
-	.bordered {
-		border-bottom: 1px solid $light-50;
-	}
-	.title,
-	.description {
-		margin: 0;
-		font-family: $font-primary;
-		font-size: 16px;
-		font-weight: 700;
-	}
-	.title {
-		font-size: 12px;
-		font-weight: 400;
-	}
-
-	.description {
-	}
-}
-
 .talent-order-modal {
 	position: relative;
 	margin-top: 3%;
-	padding: 0 40px;
+	padding: 0 60px;
 	width: 100%;
 	border-radius: 10px;
 	overflow: hidden;
@@ -297,7 +279,7 @@
 		background-color: $secondary;
 	}
 	.body {
-		padding: 35px 0;
+		padding: 35px 0 0;
 		box-sizing: border-box;
 	}
 	.name {
@@ -309,7 +291,7 @@
 		font-weight: 400;
 	}
 	.border-bottom {
-		border-color: rgba($color: #ffffff, $alpha: 0.5);
+		border-color: rgba($color: #ffffff, $alpha: 0.5) !important;
 	}
 }
 
@@ -373,6 +355,9 @@
 		&.-active {
 			transform: rotate(180deg);
 		}
+		.icon {
+			font-size: 24px;
+		}
 	}
 	.name {
 		margin: 0;
@@ -380,20 +365,11 @@
 		font-size: 16px;
 		font-weight: 700;
 	}
-	.cat {
+	.cat, .title {
 		font-family: inherit;
 		font-size: 12px;
 		font-weight: 400;
 		line-height: 14px;
-	}
-	.title {
-		font-family: inherit;
-		font-size: 14px;
-		font-weight: 700;
-		color: $light-50;
-		&.big {
-			font-size: 16px;
-		}
 	}
 	.price {
 		margin: 0;
@@ -403,9 +379,10 @@
 		font-weight: 700;
 	}
 	.value {
+		margin: 0;
 		font-family: inherit;
 		font-size: 14px;
-		line-height: 1.6;
+		// line-height: 1.6;
 		font-weight: 700;
 	}
 	.order-number {
@@ -416,7 +393,7 @@
 		padding: 0 10px;
 		display: inline-block;
 		font-family: inherit;
-		font-size: 12px;
+		font-size: 10px;
 		text-align: center;
 		color: $light-50;
 		border-radius: 2px;
@@ -435,6 +412,30 @@
 		&.show {
 			display: block;
 		}
+	}
+	.image {
+		display: none;
+		&.show {
+			display: block;
+		}
+	}
+	.progress-text {
+		font-size: 16px;
+	}
+}
+
+.box-video-success {
+	.text {
+		font-size: 15px;
+		font-weight: 400;
+		strong {
+			font-size: 16px;
+			font-weight: 700;
+		}
+	}
+	.value {
+		font-size: 24px;
+		font-weight: 700;
 	}
 }
 

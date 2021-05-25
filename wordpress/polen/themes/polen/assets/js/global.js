@@ -196,7 +196,35 @@ function getSessionMessage() {
 	sessionStorage.removeItem(CONSTANTS.MESSAGE_COOKIE);
 }
 
+function blockUnblockInputs(el, block) {
+	const allEl = document.querySelectorAll(
+		`${el} input, ${el} select, ${el} textarea`
+	);
+	allEl.forEach(function (element, key, parent) {
+		block
+			? element.setAttribute("readonly", block)
+			: element.removeAttribute("readonly");
+	});
+	console.log("blocked inputs", block);
+}
+
 // -----------------------------------------------------------------------
+
+// ----------------------------
+// Handler do Download do Video
+function downloadClick_handler( evt ) {
+	
+	evt.preventDefault();
+	let hash = jQuery( evt.currentTarget ).attr( 'data-download' );
+	let data = { 'hash': hash };
+	jQuery.post(woocommerce_params.ajax_url + '?action=video-download-link', data, response => {
+		if( response.success ) {
+			window.location.href = response.data;
+		}
+	});
+}
+// ---------------------------
+
 
 jQuery(document).ready(function () {
 	truncatedItems();

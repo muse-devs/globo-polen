@@ -4,7 +4,7 @@
  */
 defined('ABSPATH') || exit;
 
-use \Polen\Includes\{ Polen_Order, Polen_Talent };
+use \Polen\Includes\{ Polen_Order, Polen_Talent, Polen_Video_Info};
 
 $polen_talent = new Polen_Talent();
 $logged_user = wp_get_current_user();
@@ -16,12 +16,24 @@ if( $polen_talent->is_user_talent( $logged_user ) ) {
 
 	<?php if ($has_orders) : ?>
 
+		<div class="row">
+			<div class="col-12 my-1">
+				<p class="muted m-0"><?php echo (int) sizeof($customer_orders->orders); ?> pedidos</p>
+			</div>
+		</div>
+
 		<?php
 		foreach ($customer_orders->orders as $customer_order) {
 			$order      = wc_get_order($customer_order); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
 			$item_count = $order->get_item_count() - $order->get_item_count_refunded();
 			$product_name = '';
 			$product_id = '';
+			$video_info = Polen_Video_Info::get_by_order_id( $order->get_id() );
+			$is_vimeo_process_complete = false;
+			if( !empty( $video_info ) ) {
+				$is_vimeo_process_complete = $video_info->is_vimeo_process_complete();
+			}
+
 			foreach ($order->get_items() as $item_id => $item) {
 				$product_name = $item->get_name();
 				$product_id = $item->get_product_id();
@@ -35,7 +47,7 @@ if( $polen_talent->is_user_talent( $logged_user ) ) {
 							<div class="col-12">
 								<div class="row d-flex justify-content-start">
 									<div>
-										<div class="image-cropper">
+										<div class="image-cropper d-block">
 											<?php
 											$thumbnail = get_the_post_thumbnail_url($product_id, 'post-thumbnail');
 											?>
@@ -44,22 +56,19 @@ if( $polen_talent->is_user_talent( $logged_user ) ) {
 									</div>
 									<div class="col">
 										<div class="order-title"><?php echo  $item->get_name(); ?></div>
-										<div class="cat">
-											<?php
-											global $post;
-											$terms = get_the_terms($product_id, 'product_cat');
-											if (isset($terms[0]->name)) {
-												echo $terms[0]->name;
-											}
-											?>
-										</div>
-										<div class="status mt-3">
+										<div class="status mt-2">
 											<?php echo wc_get_order_status_name($order->get_status()); ?>
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="col-12 text-center mt-4 mb-3">
+							<div class="col-12 mt-3">
+								<div class="row d-block">
+									<p class="m-0"><strong><?php echo $order->get_formatted_order_total(); ?></strong> - <?php echo $order->get_date_created()->format ('d/m/Y'); ?></p>
+									<p class="order-number m-0">Número do pedido: <strong><?php echo $order->get_order_number(); ?></strong></p>
+								</div>
+							</div>
+							<div class="col-12 text-center mt-3">
 								<div class="row">
 									<?php
 									if( !Polen_Order::is_completed( $order ) ):
@@ -69,17 +78,20 @@ if( $polen_talent->is_user_talent( $logged_user ) ) {
 										</a>
 									<?php
 									else :
-										//TODO ADD A URL PARA ASSISTIR O VIDEO
+										//Quando a order está completa mais o Vimeo ainda não processou o video
+										$button_enabled = "";
+										$text_button = "Ver Video";
+										if( !$is_vimeo_process_complete ) {
+											$button_enabled = "disabled";
+											$text_button = "Video sendo processado aguarde.";
+										}
 									?>
-										<a href="<?php echo polen_get_link_watch_video_by_order_id( $order->get_order_number() ); ?>" class="btn btn-primary btn-lg btn-block">
-											Ver Video
+										<a href="<?php echo polen_get_link_watch_video_by_order_id( $order->get_order_number() ); ?>" class="btn btn-primary btn-lg btn-block <?= $button_enabled; ?>">
+											<?= $text_button; ?>
 										</a>
 									<?php
 									endif;?>
 								</div>
-							</div>
-							<div class="col-12 text-center">
-								<p class="order-number">Número do pedido: <strong><?php echo $order->get_order_number(); ?></strong></p>
 							</div>
 						</div>
 					</div>

@@ -116,7 +116,7 @@ select.form-control:not([size]):not([multiple]) {
 .woocommerce-info,
 .woocommerce-message {
 	padding: 1em 2em 1em 3.5em;
-	margin: 2em 0;
+	margin: 1em 0 0;
 	position: relative;
 	background-color: #f7f6f7;
 	color: #515151;
@@ -184,10 +184,30 @@ select.form-control:not([size]):not([multiple]) {
 	&::before {
 		width: 2rem !important;
 		height: 2rem !important;
-		border: .2em solid var(--primary) !important;
+		border: 0.15em solid var(--primary) !important;
 		border-left-color: var(--light) !important;
 		border-radius: 50%;
 		background: none !important;
-		animation: .75s linear infinite spinner-border !important;
+		animation: 0.75s linear infinite spinner-border !important;
 	}
+}
+
+.woocommerce form .form-row {
+	padding: 0;
+}
+
+.woocommerce-Price-currencySymbol {
+	margin-right: 3px;
+}
+
+.woocommerce form .form-row label {
+	line-height: inherit;
+}
+
+.woocommerce form .form-row.woocommerce-invalid label {
+	color: var(--light);
+}
+
+.woocommerce-invalid #terms {
+	outline: transparent !important;
 }

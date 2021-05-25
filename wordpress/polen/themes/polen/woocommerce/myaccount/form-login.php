@@ -47,9 +47,9 @@ function get_form_login()
 
 						<?php do_action('woocommerce_login_form'); ?>
 
-						<p class="form-row text-left">
+						<p class="form-row text-left mt-2">
 							<label class="woocommerce-form__label woocommerce-form__label-for-checkbox woocommerce-form-login__rememberme mb-4">
-								<input class="woocommerce-form__input woocommerce-form__input-checkbox" name="rememberme" type="checkbox" id="rememberme" value="forever" /> <span><?php esc_html_e('Remember me', 'woocommerce'); ?></span>
+								<input class="woocommerce-form__input woocommerce-form__input-checkbox" name="rememberme" type="checkbox" id="rememberme" value="forever" /> <span class="ml-2 align-bottom"><?php esc_html_e('Remember me', 'woocommerce'); ?></span>
 							</label>
 							<?php wp_nonce_field('woocommerce-login', 'woocommerce-login-nonce'); ?>
 							<button type="submit" class="woocommerce-button woocommerce-form-login__submit btn btn-primary btn-lg btn-block btn-login" name="login" value="<?php esc_attr_e('Log in', 'woocommerce'); ?>"><?php esc_html_e('Log in', 'woocommerce'); ?></button>
