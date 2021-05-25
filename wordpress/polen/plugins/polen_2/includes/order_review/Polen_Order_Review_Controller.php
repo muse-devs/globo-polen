@@ -25,6 +25,7 @@ class Polen_Order_Review_Controller extends Polen_Talent_Controller_Base
             $order_review = new Polen_Order_Review();
             $order_review->set_user_id( $user_id );
             $order_review->set_comment_karma( $rate );
+            $order_review->set_rate( $rate );
             $order_review->set_comment_content( $comment );
             $order_review->set_order_id( $order_id );
             $order_review->set_comment_approved( $approved );
