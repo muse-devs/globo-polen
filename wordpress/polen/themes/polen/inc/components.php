@@ -344,7 +344,6 @@ function polen_front_get_talent_videos($talent)
 <?php
 }
 
-
 /**
  * Cria a tela para assitir video
  * @param stdClass $talent Polen_Update_Fields
@@ -363,7 +362,7 @@ function polen_get_video_player($talent, $video, $user_id)
 ?>
 	<div class="row">
 		<div class="col-12 col-md-12">
-			<div class="row mb-5 video-card">
+			<div class="row video-card">
 				<header class="col-md-6 p-0">
 					<div id="video-box">
 						<div id="polen-video" class="polen-video"></div>
