@@ -63,6 +63,9 @@ class Polen_Signin_Newsletter
     public function newsletter_signin(){
         $nonce = esc_attr( $_POST['security'] );
         $email = trim( $_POST['email'] );
+        $event = trim( $_POST['event'] );
+        $page_source = trim( $_POST['page_source'] );
+        $is_mobile = trim( $_POST['is_mobile'] );
 
         if ( ! wp_verify_nonce( $nonce, 'news-signin' ) ) {
             wp_send_json_error( array( 'response' => 'Não foi possível completar a solicitação' ), 403 );
@@ -70,7 +73,7 @@ class Polen_Signin_Newsletter
         }
     
         if( isset( $email ) && !empty( $email ) ){
-            $newsletter = $this->set_email_to_newsletter( $email );
+            $newsletter = $this->set_email_to_newsletter( $email, $event, $page_source, $is_mobile );
             if( !empty( $newsletter ) ){
                 if( $newsletter == "Cadastrado com sucesso!") {
                     wp_send_json_success( array( 'response' => $newsletter ), 201 );
@@ -89,12 +92,13 @@ class Polen_Signin_Newsletter
     /**
      * Insert email to newsletter table
      */
-    public function set_email_to_newsletter( $email ){
+    public function set_email_to_newsletter( $email, $event, $page_source, $is_mobile = "0" ){
         if( !empty( $email ) ){
             global $wpdb;
             $exists = $this->check_already_inserted( $email );
             if( !$exists ){
-                $inserted = $wpdb->insert( $wpdb->base_prefix."newsletter_emails", array( 'email' => ( $email )) );
+                $insert_args = array( 'email' => $email, 'event' => $event, 'page_source' => $page_source, 'is_mobile' => $is_mobile ) ;
+                $inserted = $wpdb->insert( $wpdb->base_prefix."newsletter_emails", $insert_args);
 
                 if( $inserted > 0 ){
                     //$this->export_occasion_json();
@@ -127,7 +131,7 @@ class Polen_Signin_Newsletter
     public function list_newsletter_emails()
     {         
         if( isset( $_GET['export'] ) &&  $_GET['export'] == 'true' ){
-            $this->export_email_to_csv();
+            $this->export_to_csv();
         }
 
         $newsletter_display = new Polen_Newsletter_Display();

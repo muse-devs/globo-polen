@@ -372,6 +372,8 @@ function polen_get_video_player($talent, $video, $user_id)
 							var videoPlayer = new Vimeo.Player("polen-video", {
 								url: "<?php echo $video->vimeo_link; ?>",
 								autoplay: true,
+								muted: true,
+								loop: true,
 								width: document.getElementById("polen-video").offsetWidth,
 							});
 						})
@@ -687,4 +689,37 @@ function polen_player_video_modal_ajax_invalid_hash()
 ?>
 	<h4>Conteúdo indisponível</h4>
 <?php
+}
+
+
+/**
+ * Criar form para cadastro da newsletter ou outro lugar
+ * no site onde pode-se cadastrar no table da newsletter
+ * @param string $newsletter
+ * @return HTML
+ */
+function polen_form_signin_newsletter( string $event = 'newsletter' )
+{
+	?>
+	
+		<div id="signin-newsletter" class="col-md-6 mt-4 order-md-2">
+			<h5 class="title">Junte-se à nossa lista</h5>
+			<p class="description">Seja o primeiro a saber sobre as estrelas mais recentes e as melhores ofertas no Muse</p>
+			<div class="row">
+				<div class="col-md-8 mb-2 mb-md-0">
+					<input type="email"  name="signin_newsletter" placeholder="Entre com o seu e-mail" class="form-control form-control-lg" />
+					<input type="hidden" name="signin_newsletter_page_source" value="<?= filter_input( INPUT_SERVER, 'REQUEST_URI' ); ?>" />
+					<input type="hidden" name="signin_newsletter_event"  value="<?= $event; ?>" />
+					<input type="hidden" name="signin_newsletter_is_mobile" value="<?= polen_is_mobile() ? "1" : "0"; ?>"/>
+				</div>
+				<?php
+					$newsletter_signin_nonce = wp_create_nonce('news-signin');
+				?>
+				<div class="col-md-4 mt-2 mt-md-0 d-md-flex align-items-md-center" >
+					<button class="signin-newsletter-button btn btn-outline-light btn-lg btn-block" code="<?php echo $newsletter_signin_nonce;?>">Enviar</button>
+				</div>
+				<div class="col-md-8 mb-2 mb-md-0 small signin-response"></div>
+			</div>
+		</div>
+	<?php
 }
