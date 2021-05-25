@@ -380,11 +380,11 @@ function polen_get_video_player($talent, $video, $user_id)
 				<div class="content col-md-6 mt-4">
 					<header class="row content-header">
 						<div class="col-3">
-							<?php echo polen_get_avatar(get_avatar_url($talent->user_id));  ?>
+							<a href="#" class="no-underline"><?php echo polen_get_avatar(get_avatar_url($talent->user_id));  ?></a>
 						</div>
 						<div class="col-9">
-							<h4 class="name"><?php echo $talent->nome; ?></h4>
-							<h5 class="cat my-2"><?php echo $talent->profissao; ?></h5>
+							<h4 class="name"><a href="#" class="no-underline"><?php echo $talent->nome; ?></a></h4>
+							<h5 class="cat my-2"><a href="#" class="no-underline"><?php echo $talent->profissao; ?></a></h5>
 							<a href="<?php echo $video_url; ?>" class="url"><?php echo $video_url; ?></a>
 						</div>
 					</header>
