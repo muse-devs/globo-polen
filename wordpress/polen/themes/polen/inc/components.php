@@ -240,8 +240,8 @@ function polen_talent_promo_card($talent)
 {
 ?>
 	<div class="video-promo-card">
-		<div class="card row p-2">
-			<div class="col-12 col-md-12 d-flex flex-column justify-content-center align-items-center text-center">
+		<div class="card row">
+			<div class="col-12 col-md-12 d-flex flex-column justify-content-center align-items-center text-center p-2">
 				<?php polen_get_avatar(get_avatar_url($talent->user_id)); ?>
 				<p class="mt-2">E aí, ficou com vontade de ter um vídeo do <?php echo $talent->nome; ?>?</p>
 				<a href="#pedirvideo" class="btn btn-outline-light btn-lg">Peça o seu vídeo</a>
@@ -344,7 +344,6 @@ function polen_front_get_talent_videos($talent)
 <?php
 }
 
-
 /**
  * Cria a tela para assitir video
  * @param stdClass $talent Polen_Update_Fields
@@ -363,7 +362,7 @@ function polen_get_video_player($talent, $video, $user_id)
 ?>
 	<div class="row">
 		<div class="col-12 col-md-12">
-			<div class="row mb-5 video-card">
+			<div class="row video-card">
 				<header class="col-md-6 p-0">
 					<div id="video-box">
 						<div id="polen-video" class="polen-video"></div>
