@@ -383,11 +383,11 @@ function polen_get_video_player($talent, $video, $user_id)
 				<div class="content col-md-6 mt-4">
 					<header class="row content-header">
 						<div class="col-3">
-							<a href="#" class="no-underline"><?php echo polen_get_avatar(get_avatar_url($talent->user_id));  ?></a>
+							<a href="<?php echo $talent->talent_url; ?>" class="no-underline"><?php echo polen_get_avatar(get_avatar_url($talent->user_id));  ?></a>
 						</div>
 						<div class="col-9">
-							<h4 class="name"><a href="#" class="no-underline"><?php echo $talent->nome; ?></a></h4>
-							<h5 class="cat my-2"><a href="#" class="no-underline"><?php echo $talent->profissao; ?></a></h5>
+							<h4 class="m-0"><a href="<?php echo $talent->talent_url; ?>" class="name"><?php echo $talent->nome; ?></a></h4>
+							<h5 class="m-0"><a href="#" class="d-block my-2 cat"><?php echo $talent->profissao; ?></a></h5>
 							<a href="<?php echo $video_url; ?>" class="url"><?php echo $video_url; ?></a>
 						</div>
 					</header>
@@ -702,7 +702,7 @@ function polen_player_video_modal_ajax_invalid_hash()
 function polen_form_signin_newsletter( string $event = 'newsletter' )
 {
 	?>
-	
+
 		<div id="signin-newsletter" class="col-md-6 mt-4 order-md-2">
 			<h5 class="title">Junte-se à nossa lista</h5>
 			<p class="description">Seja o primeiro a saber sobre as estrelas mais recentes e as melhores ofertas no Muse</p>
