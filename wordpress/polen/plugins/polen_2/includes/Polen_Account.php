@@ -142,4 +142,50 @@ class Polen_Account
         get_template_part( 404 );
         exit();
     }
+
+    public function polen_core_show_user_profile($user)
+    {
+        /** wp user avatar customized function **/
+        global $blog_id, $current_user, $show_avatars, $wpdb, $wp_user_avatar, $wpua_edit_avatar, $wpua_functions, $wpua_upload_size_limit_with_units;
+
+        $has_wp_user_avatar = has_wp_user_avatar(@$user->ID);
+        // Get WPUA attachment ID
+        $wpua = get_user_meta(@$user->ID, $wpdb->get_blog_prefix($blog_id) . 'user_avatar', true);
+        // Show remove button if WPUA is set
+        $hide_remove = ! $has_wp_user_avatar ? 'wpua-hide' : "";
+        // Hide image tags if show avatars is off
+        $hide_images = ! $has_wp_user_avatar && (bool)$show_avatars == 0 ? 'wpua-no-avatars' : "";
+        // If avatars are enabled, get original avatar image or show blank
+        $avatar_medium_src = (bool)$show_avatars == 1 ? $wpua_functions->wpua_get_avatar_original(@$user->user_email, 'medium') : includes_url() . 'images/blank.gif';
+        // Check if user has wp_user_avatar, if not show image from above
+        $avatar_medium = $has_wp_user_avatar ? get_wp_user_avatar_src($user->ID, 'medium') : $avatar_medium_src;
+        // Check if user has wp_user_avatar, if not show image from above
+        $avatar_thumbnail     = $has_wp_user_avatar ? get_wp_user_avatar_src($user->ID, 96) : $avatar_medium_src;
+        $edit_attachment_link = esc_url(add_query_arg(array('post' => $wpua, 'action' => 'edit'), admin_url('post.php')));
+        // Chck if admin page
+        ?>
+        <input type="hidden" name="wp-user-avatar" id="<?php echo ($user == 'add-new-user') ? 'wp-user-avatar' : 'wp-user-avatar-existing' ?>" value="<?php echo $wpua; ?>"/>
+        <?php if ($wp_user_avatar->wpua_is_author_or_above()) : // Button to launch Media Uploader ?>
+
+        <p id="<?php echo ($user == 'add-new-user') ? 'wpua-add-button' : 'wpua-add-button-existing' ?>">
+            <button type="button" class="button" id="<?php echo ($user == 'add-new-user') ? 'wpua-add' : 'wpua-add-existing' ?>" name="<?php echo ($user == 'add-new-user') ? 'wpua-add' : 'wpua-add-existing' ?>" data-title="<?php _e('Choose Image', 'wp-user-avatar'); ?>: <?php echo(! empty($user->display_name) ? $user->display_name : ''); ?>"><?php _e('Choose Image', 'wp-user-avatar'); ?></button>
+        </p>
+
+    <?php elseif ( ! $wp_user_avatar->wpua_is_author_or_above()) : // Upload button ?>
+        <p id="<?php echo ($user == 'add-new-user') ? 'wpua-upload-button' : 'wpua-upload-button-existing' ?>">
+            <input name="wpua-file" id="<?php echo ($user == 'add-new-user') ? 'wpua-file' : 'wpua-file-existing' ?>" type="file"/>
+            <button type="submit" class="button" id="<?php echo ($user == 'add-new-user') ? 'wpua-upload' : 'wpua-upload-existing' ?>" name="submit" value="<?php _e('Upload', 'wp-user-avatar'); ?>"><?php _e('Upload', 'wp-user-avatar'); ?></button>
+        </p>
+        <p id="<?php echo ($user == 'add-new-user') ? 'wpua-upload-messages' : 'wpua-upload-messages-existing' ?>">
+            <span id="<?php echo ($user == 'add-new-user') ? 'wpua-max-upload' : 'wpua-max-upload-existing' ?>" class="description"><?php printf(__('Maximum upload file size: %d%s.', 'wp-user-avatar'), esc_html($wpua_upload_size_limit_with_units), esc_html('KB')); ?></span>
+            <span id="<?php echo ($user == 'add-new-user') ? 'wpua-allowed-files' : 'wpua-allowed-files-existing' ?>" class="description"><?php _e('Allowed Files', 'wp-user-avatar'); ?>: <?php _e('<code>jpg jpeg png gif</code>', 'wp-user-avatar'); ?></span>
+        </p>
+    <?php endif; ?>
+        <div id="<?php echo ($user == 'add-new-user') ? 'wpua-images' : 'wpua-images-existing' ?>" class="<?php echo $hide_images; ?>">
+            <p id="<?php echo ($user == 'add-new-user') ? 'wpua-preview' : 'wpua-preview-existing' ?>">
+                <img src="<?php echo $avatar_medium; ?>" alt=""/>
+            </p>
+        </div>
+        <?php
+    }
 }
