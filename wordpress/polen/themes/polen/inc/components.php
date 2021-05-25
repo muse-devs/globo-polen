@@ -274,7 +274,8 @@ function polen_get_talent_video_buttons($talent, $video_url, $video_download, $h
 	<?php endif; ?>
 	<button onclick="copyToClipboard('<?php echo $video_url; ?>')" class="btn btn-outline-light btn-lg btn-block share-link mb-4"><?php Icon_Class::polen_icon_clipboard(); ?>Copiar Link</button>
 	<?php if (!empty($video_download)) : ?>
-		<a href="#" onclick="downloadClick_handler(event)" data-download="<?= $hash; ?>" class="btn btn-outline-light btn-lg btn-block share-link mb-4"><?php Icon_Class::polen_icon_download(); ?>Download</a>
+	<?php $video_download_nonce = wp_create_nonce('generate-download-video-url'); ?>
+		<a href="#" onclick="downloadClick_handler(event)" data-download="<?= $hash; ?>" data-nonce="<?= $video_download_nonce; ?>" class="btn btn-outline-light btn-lg btn-block share-link mb-4"><?php Icon_Class::polen_icon_download(); ?>Download</a>
 	<?php endif; ?>
 <?php
 }
@@ -372,7 +373,7 @@ function polen_get_video_player($talent, $video, $user_id)
 							var videoPlayer = new Vimeo.Player("polen-video", {
 								url: "<?php echo $video->vimeo_link; ?>",
 								autoplay: true,
-								muted: true,
+								muted: <?= polen_is_mobile() ? "true" : "false"; ?>,
 								loop: true,
 								width: document.getElementById("polen-video").offsetWidth,
 							});
