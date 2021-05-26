@@ -46,7 +46,7 @@ if (isset($_REQUEST['order_id']) && !empty($_REQUEST['order_id'])) {
                         <div class="form-group text-center">
                             <button id="video-rec" data-toggle="modal" data-target="#OrderActions" class="btn btn-primary btn-lg btn-block show">Gravar vídeo</button>
                             <div id="video-file-name" class="text-truncate ml-2"></div>
-                            <input type="file" class="form-control-file" id="file-video" name="file_data" accept="video/*">
+                            <input type="file" class="form-control-file" id="file-video" name="file_data" accept="video/*" capture="user">
                         </div>
                         <button type="submit" id="video-send" class="send-video btn btn-primary btn-lg btn-block">Enviar</button>
                         <button id="video-rec-again" class="btn btn-outline-light btn-lg btn-block mt-3 video-rec">Não gostei, gravar outro video</button>
