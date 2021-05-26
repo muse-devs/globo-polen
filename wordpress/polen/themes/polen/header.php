@@ -58,7 +58,7 @@ use Polen\Includes\Polen_Talent;
 						?>
 							<a class="dropbtn">
 								<div class="menu-user-data">
-									<div class="user-avatar">
+									<div class="user-avatar d-flex flex-wrap align-items-center justify-content-center">
 										<?php echo polen_get_avatar( get_current_user_id(), "polen-square-crop-sm" ); ?>
 									</div>
 									<?php Icon_Class::polen_icon_chevron_down(); ?>
