@@ -242,14 +242,3 @@ require_once TEMPLATE_DIR . '/classes/Icon_Class.php';
  * Arquivo responsavel por retornos da tela de acompanhamento de pedidos
  */
 require_once TEMPLATE_DIR . '/classes/Order_Class.php';
-
-add_filter( 'get_avatar' , 'my_custom_avatar' , 100 , 5 );
-
-function my_custom_avatar( $avatar, $id_or_email, $size, $default, $alt ) {
-	$user = get_current_user();
-	if(in_array('customer', $user->roles))
-	{
-		return '<span>II</span>';
-	}
-	return $avatar;
-}
