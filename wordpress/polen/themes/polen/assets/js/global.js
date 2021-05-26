@@ -4,6 +4,7 @@ const CONSTANTS = {
 	ERROR: "error",
 	SHOW: "show",
 	HIDDEN: "hidden",
+	THEME: "theme_mode",
 };
 
 if (!polenObj.developer) {
@@ -212,21 +213,19 @@ function blockUnblockInputs(el, block) {
 
 // ----------------------------
 // Handler do Download do Video
-function downloadClick_handler( evt ) {
-	
+function downloadClick_handler(evt) {
 	evt.preventDefault();
-	let hash = jQuery( evt.currentTarget ).attr( 'data-download' );
-	let security = jQuery( evt.currentTarget ).attr( 'data-nonce' );
-	let action = 'video-download-link';
+	let hash = jQuery(evt.currentTarget).attr("data-download");
+	let security = jQuery(evt.currentTarget).attr("data-nonce");
+	let action = "video-download-link";
 	let data = { hash, security, action };
-	jQuery.post(woocommerce_params.ajax_url, data, response => {
-		if( response.success ) {
+	jQuery.post(woocommerce_params.ajax_url, data, (response) => {
+		if (response.success) {
 			window.location.href = response.data;
 		}
 	});
 }
 // ---------------------------
-
 
 jQuery(document).ready(function () {
 	truncatedItems();
