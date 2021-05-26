@@ -13,6 +13,12 @@
 	.box-round {
 		background-color: var(--box-color-light);
 	}
+	.text {
+		color: var(--dark);
+	}
+	.background {
+		background-color: var(--light);
+	}
 	.subtitle,
 	.footer-menu li a {
 		color: var(--subtitle-dark);
@@ -37,6 +43,12 @@
 	}
 	.box-round {
 		background-color: var(--box-color-dark);
+	}
+	.text {
+		color: var(--light);
+	}
+	.background {
+		background-color: var(--dark);
 	}
 	.subtitle,
 	.footer-menu li a {

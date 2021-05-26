@@ -8862,7 +8862,7 @@ a {
     text-decoration: underline; }
 
 .no-underline {
-  color: white;
+  color: inherit;
   text-decoration: none;
   cursor: pointer; }
   .no-underline:hover, .no-underline:active {
@@ -8895,6 +8895,10 @@ body {
       background-color: var(--dark); }
   body .box-round {
     background-color: var(--box-color-light); }
+  body .text {
+    color: var(--dark); }
+  body .background {
+    background-color: var(--light); }
   body .subtitle,
   body .footer-menu li a {
     color: var(--subtitle-dark); }
@@ -8963,7 +8967,6 @@ iframe {
     right: 0;
     min-width: 160px;
     border-radius: 0.3rem;
-    background-color: #272727;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     transition: opacity 250ms ease;
     z-index: -1; }
@@ -8975,7 +8978,7 @@ iframe {
       text-decoration: none;
       display: block;
       font-size: 14px;
-      color: #fff; }
+      color: inherit; }
     @media (max-width: 767.98px) {
       .dropdown .dropdown-content {
         position: fixed;
@@ -8983,8 +8986,7 @@ iframe {
         width: 100vw;
         height: 100vh;
         top: 0;
-        left: 0;
-        background-color: #000; }
+        left: 0; }
         .dropdown .dropdown-content a {
           padding: 10px 0;
           font-size: 24px; }
@@ -8995,10 +8997,11 @@ iframe {
           z-index: 99; }
           .dropdown .dropdown-content .menu-close .icon, .dropdown .dropdown-content .menu-close .bi {
             font-size: 24px;
-            color: #fff; }
+            color: inherit; }
         .dropdown .dropdown-content .user-name {
           font-size: 16px;
-          font-weight: 600; } }
+          font-weight: 600;
+          color: inherit; } }
   .dropdown .menu-user-data {
     display: flex;
     align-items: center;
@@ -9016,7 +9019,7 @@ iframe {
       width: 40px;
       height: 40px; }
     .dropdown .user-avatar span {
-      font-size: 14px;
+      font-size: 12px;
       font-weight: 600;
       color: var(--light); }
 
@@ -9050,7 +9053,8 @@ iframe {
   font-weight: 600;
   line-height: 1;
   text-align: center;
-  background-color: #d7198b; }
+  color: var(--light);
+  background-color: var(--primary); }
 
 .profile-pic {
   max-width: 50px; }
@@ -10320,11 +10324,12 @@ select.form-control:not([size]):not([multiple]) {
 .skill-title {
   font-size: 14px;
   font-weight: 400;
-  color: #fff; }
+  color: inherit; }
 
 .skill-value {
   font-size: 14px;
-  font-weight: 700; }
+  font-weight: 700;
+  color: inherit; }
   .skill-value .bi, .skill-value .icon {
     padding-right: 3px; }
 
