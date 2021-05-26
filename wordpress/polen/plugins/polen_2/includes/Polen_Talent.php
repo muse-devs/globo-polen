@@ -415,6 +415,20 @@ class Polen_Talent {
         }
         return false;
     }
+
+    
+    /**
+     * Funcao Estática Verifica se um usuário é um talento
+     * @param \WP_User $user
+     * @return boolean
+     */
+    static public function static_is_user_talent(\WP_User $user) {
+        $roles = $user->roles;
+        if (in_array( self::ROLE_SLUG, $roles ) !== false) {
+            return true;
+        }
+        return false;
+    }
     
     public function polen_include_tags_categories_in_search( $where, $query ) {
         if( $query->is_search() ) {
