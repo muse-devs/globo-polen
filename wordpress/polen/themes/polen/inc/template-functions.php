@@ -5,6 +5,8 @@
  * @package Polen
  */
 
+use Polen\Includes\Cart\Polen_Cart_Item_Factory;
+
 /**
  * Adds custom classes to the array of body classes.
  *
@@ -108,6 +110,26 @@ function polen_get_url_category_by_product_id ( $product_id )
     }
 	return $cat_link;
 }
+
+
+/**
+ * Pegar a URL da categoria pelo OrderID
+ */
+function polen_get_url_category_by_order_id ( $order_id )
+{
+	$order = wc_get_order( $order_id );
+	$car_item = Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
+	$category_ids = $car_item->get_product()->get_category_ids();
+	$category_id = array_pop( $category_ids );
+	$cat_terms = wp_get_object_terms( $category_id, 'product_cat' );
+    $cat_link = '';
+	$cat = array_pop( $cat_terms );
+    if ( !empty($cat) ) {
+        $cat_link = get_term_link($cat->term_id);
+    }
+	return $cat_link;
+}
+
 
 function polen_get_url_review_page()
 {

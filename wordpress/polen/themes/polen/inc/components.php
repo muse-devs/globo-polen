@@ -387,7 +387,7 @@ function polen_get_video_player($talent, $video, $user_id)
 						</div>
 						<div class="col-9">
 							<h4 class="m-0"><a href="<?php echo $talent->talent_url; ?>" class="name"><?php echo $talent->nome; ?></a></h4>
-							<h5 class="m-0"><a href="#" class="d-block my-2 cat"><?php echo $talent->profissao; ?></a></h5>
+							<h5 class="m-0"><a href="<?= polen_get_url_category_by_order_id( $video->order_id ); ?>" class="d-block my-2 cat"><?php echo $talent->profissao; ?></a></h5>
 							<a href="<?php echo $video_url; ?>" class="url"><?php echo $video_url; ?></a>
 						</div>
 					</header>
