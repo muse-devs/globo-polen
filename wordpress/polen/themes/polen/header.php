@@ -10,6 +10,8 @@
  * @package Polen
  */
 
+use Polen\Includes\Polen_Talent;
+
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
@@ -56,11 +58,8 @@
 						?>
 							<a class="dropbtn">
 								<div class="menu-user-data">
-									<div class="user-avatar d-flex flex-wrap align-items-center justify-content-center">
-										<?php
-										if (is_plugin_active('wp-user-avatar/wp-user-avatar.php')) {
-											echo get_wp_user_avatar(get_current_user_id(), 'polen-square-crop-sm');
-										} ?>
+									<div class="user-avatar">
+										<?php echo polen_get_avatar( get_current_user_id(), "polen-square-crop-sm" ); ?>
 									</div>
 									<?php Icon_Class::polen_icon_chevron_down(); ?>
 								</div>
@@ -69,10 +68,7 @@
 								<div class="row mb-4 d-md-none">
 									<div class="col-12">
 										<div class="user-avatar mb-1">
-											<?php
-											if (is_plugin_active('wp-user-avatar/wp-user-avatar.php')) {
-												echo get_wp_user_avatar(get_current_user_id(), 'polen-square-crop-sm');
-											} ?>
+											<?php echo polen_get_avatar( get_current_user_id(), "polen-square-crop-sm" ); ?>
 										</div>
 										<p class="user-name"><?php echo $user_name->display_name; ?></p>
 									</div>
@@ -80,7 +76,9 @@
 								</div>
 								<div class="row">
 									<div class="col-12">
-										<!-- <a href="<?php echo get_permalink(get_option('woocommerce_myaccount_page_id')); ?>">Minha conta</a> -->
+									<?php if( Polen_Talent::static_is_user_talent( wp_get_current_user() ) ) : ?>
+										<a href="<?php echo get_permalink(get_option('woocommerce_myaccount_page_id')); ?>">Dashboard</a>
+									<?php endif; ?>
 										<a href="<?php echo esc_url(wc_get_account_endpoint_url('orders')); ?>">Meus pedidos</a>
 										<a href="<?php echo esc_url(wc_get_account_endpoint_url('payment-options')); ?>">Pagamentos</a>
 										<a href="<?php echo esc_url(wc_customer_edit_account_url()); ?>">Meus dados</a>
