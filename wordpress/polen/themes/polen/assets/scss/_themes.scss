@@ -4,14 +4,21 @@
 	.btn-outline-light {
 		color: var(--dark);
 		border-color: var(--gray);
+		&:hover,
+		&:active {
+			color: var(--light);
+			background-color: var(--dark);
+		}
 	}
 	.box-round {
 		background-color: var(--box-color-light);
 	}
-	.subtitle, .footer-menu li a {
+	.subtitle,
+	.footer-menu li a {
 		color: var(--subtitle-dark);
 	}
-	.form-control, .form-control:focus {
+	.form-control,
+	.form-control:focus {
 		background-color: var(--box-color-light);
 	}
 }
@@ -22,14 +29,21 @@
 	.btn-outline-light {
 		color: var(--light);
 		border-color: var(--gray-light);
+		&:hover,
+		&:active {
+			color: var(--dark);
+			background-color: var(--light);
+		}
 	}
 	.box-round {
 		background-color: var(--box-color-dark);
 	}
-	.subtitle, .footer-menu li a {
+	.subtitle,
+	.footer-menu li a {
 		color: var(--subtitle-light);
 	}
-	.form-control, .form-control:focus {
+	.form-control,
+	.form-control:focus {
 		background-color: var(--gray-dark);
 	}
 }

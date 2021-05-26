@@ -12,7 +12,7 @@
 
 ?>
 
-<footer id="colophon" class="site-footer">
+<footer id="colophon" class="site-footer pb-4">
 	<?php if ( (!is_page('cart') || !is_cart()) &&
 			 (!is_page('checkout') || !is_checkout()) ) : ?>
 		<div class="row">

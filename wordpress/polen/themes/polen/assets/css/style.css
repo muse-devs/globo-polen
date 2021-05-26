@@ -8890,11 +8890,16 @@ body {
   body .btn-outline-light {
     color: var(--dark);
     border-color: var(--gray); }
+    body .btn-outline-light:hover, body .btn-outline-light:active {
+      color: var(--light);
+      background-color: var(--dark); }
   body .box-round {
     background-color: var(--box-color-light); }
-  body .subtitle, body .footer-menu li a {
+  body .subtitle,
+  body .footer-menu li a {
     color: var(--subtitle-dark); }
-  body .form-control, body .form-control:focus {
+  body .form-control,
+  body .form-control:focus {
     background-color: var(--box-color-light); }
   body.no-scroll {
     overflow: hidden; }
