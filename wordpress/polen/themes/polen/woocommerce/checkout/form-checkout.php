@@ -58,11 +58,11 @@ $Talent_Fields = new Polen_Update_Fields();
 				"name" => $_product->get_title(),
 				"career" => $talent_data->profissao,
 				"price" => $_product->get_price_html(),
-				"from" => $cart_item['offered_by'],
-				"to" => $cart_item['name_to_video'],
-				"category" => $cart_item['video_category'],
-				"mail" => $cart_item['email_to_video'],
-				"description" => $cart_item['instructions_to_video']
+				"from" => $cart_item['offered_by'] ? $cart_item['offered_by'] : null,
+				"to" => $cart_item['name_to_video'] ? $cart_item['name_to_video'] : null,
+				"category" => $cart_item['video_category'] ? $cart_item['video_category'] : null,
+				"mail" => $cart_item['email_to_video'] ? $cart_item['email_to_video'] : null,
+				"description" => $cart_item['instructions_to_video'] ? $cart_item['instructions_to_video'] : null
 			);
 		}
 		polen_get_talent_card($talent_cart_detail); ?>

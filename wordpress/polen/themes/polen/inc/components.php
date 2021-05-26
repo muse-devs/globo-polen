@@ -1,5 +1,7 @@
 <?php
 
+use Polen\Includes\Debug;
+
 function polen_front_get_banner()
 {
 ?>
@@ -227,22 +229,31 @@ function polen_front_get_tutorial()
 <?php
 }
 
-function polen_get_avatar($url, $size = "md")
+/**
+ * Funcao que retorna ou uma tag IMG ou um SPAN com as iniciais
+ * @param int
+ * @param string
+ * @return IMG|SPAN
+ */
+function polen_get_avatar( $user_id, $size = 'polen-square-crop-sm' )
 {
-	$url = isset($url) && !empty($url) ? $url : TEMPLATE_URI . '/assets/img/avatar.png';
-	$classes = !empty($size) ? " avatar-" . $size : "";
-?>
-	<div class="avatar<?php echo $classes; ?>" style="background-image: url(<?php echo $url ?>);"></div>
-<?php
+	if ( is_plugin_active('wp-user-avatar/wp-user-avatar.php') && has_wp_user_avatar( $user_id )) {
+		return get_wp_user_avatar( $user_id, $size );
+	} else {
+		$user = get_user_by('id', $user_id);
+		$initials_name = polen_get_initials_name_by_user( $user );
+		return '<span>' . $initials_name   . '</span>';
+	}
 }
 
-function polen_talent_promo_card($talent)
+
+function polen_talent_promo_card( $talent )
 {
 ?>
 	<div class="video-promo-card">
 		<div class="card row">
 			<div class="col-12 col-md-12 d-flex flex-column justify-content-center align-items-center text-center p-2">
-				<?php polen_get_avatar(get_avatar_url($talent->user_id)); ?>
+				<?php echo polen_get_avatar( $talent->user_id, 'polen-square-crop-sm' ); ?>
 				<p class="mt-2">E aí, ficou com vontade de ter um vídeo do <?php echo $talent->nome; ?>?</p>
 				<a href="#pedirvideo" class="btn btn-outline-light btn-lg">Peça o seu vídeo</a>
 			</div>
@@ -280,12 +291,12 @@ function polen_get_talent_video_buttons($talent, $video_url, $video_download, $h
 <?php
 }
 
-function polen_video_icons($user_id, $iniciais)
+function polen_video_icons( $user_id, $iniciais )
 {
 ?>
 	<div class="video-icons">
 		<figure class="image-cropper small">
-			<?php echo get_avatar($user_id); ?>
+			<?php echo polen_get_avatar( $user_id, 'polen-square-crop-sm' ); ?>
 		</figure>
 		<div class="text-cropper small"><?php echo $iniciais; ?></div>
 	</div>
@@ -310,7 +321,7 @@ function polen_front_get_talent_videos($talent)
 			'image' =>  $item->vimeo_thumbnail,
 			'video' => $item->vimeo_link,
 			'hash' => $item->hash,
-			'initials' => strtoupper(substr($cart_item->get_name_to_video(), 0, 2)),
+			'initials' => polen_get_initials_name($cart_item->get_name_to_video() ),
 		];
 	}
 
