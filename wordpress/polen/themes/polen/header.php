@@ -56,7 +56,7 @@
 						?>
 							<a class="dropbtn">
 								<div class="menu-user-data">
-									<div class="user-avatar">
+									<div class="user-avatar d-flex align-items-center justify-content-center">
 										<?php
 										if (is_plugin_active('wp-user-avatar/wp-user-avatar.php')) {
 											echo get_wp_user_avatar(get_current_user_id(), 'polen-square-crop-sm');
