@@ -50,7 +50,7 @@ function polen_front_get_card($item, $size = "small")
 			<h4 class="title text-truncate">
 				<a href="<?= $item["talent_url"]; ?>"><?= $item["name"]; ?></a>
 			</h4>
-			<h5 class="category text-truncate">
+			<h5 class="category subtitle text-truncate">
 				<a href="<?= $item["category_url"]; ?>"><?= $item["category"]; ?></a>
 			</h5>
 		</div>
@@ -198,7 +198,7 @@ function polen_front_get_tutorial()
 				<div class="row">
 					<div class="col-4">
 						<div class="row">
-							<div class="col-12 text-center icon"><?php Icon_Class::polen_icon_phone(); ?></div>
+							<div class="col-12 text-center icon subtitle"><?php Icon_Class::polen_icon_phone(); ?></div>
 							<div class="col-12 text-center mt-2">
 								<p>Peça o vídeo para o seu ídolo</p>
 							</div>
@@ -206,7 +206,7 @@ function polen_front_get_tutorial()
 					</div>
 					<div class="col-4">
 						<div class="row">
-							<div class="col-12 text-center icon"><?php Icon_Class::polen_icon_camera_video(); ?></div>
+							<div class="col-12 text-center icon subtitle"><?php Icon_Class::polen_icon_camera_video(); ?></div>
 							<div class="col-12 text-center mt-2">
 								<p>Receba seu vídeo</p>
 							</div>
@@ -214,7 +214,7 @@ function polen_front_get_tutorial()
 					</div>
 					<div class="col-4">
 						<div class="row">
-							<div class="col-12 text-center icon"><?php Icon_Class::polen_icon_hand_thumbs_up(); ?></div>
+							<div class="col-12 text-center icon subtitle"><?php Icon_Class::polen_icon_hand_thumbs_up(); ?></div>
 							<div class="col-12 text-center mt-2">
 								<p>Compartilhe com todo mundo</p>
 							</div>

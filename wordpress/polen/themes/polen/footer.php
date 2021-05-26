@@ -12,13 +12,13 @@
 
 ?>
 
-<footer id="colophon" class="pt-4 mt-5 site-footer">
-	<?php if ( (!is_page('cart') || !is_cart()) && 
+<footer id="colophon" class="site-footer">
+	<?php if ( (!is_page('cart') || !is_cart()) &&
 			 (!is_page('checkout') || !is_checkout()) ) : ?>
-		<div class="row pb-5">
+		<div class="row">
 			<div class="col-12">
 				<div class="row justify-content-md-between">
-					
+
 					<?php
 						polen_form_signin_newsletter();
 					?>
@@ -54,7 +54,7 @@
 			</div>
 		</div>
 	<?php endif; ?>
-	<div class="row mt-5 pb-5 copyright">
+	<div class="row mt-4 copyright">
 		<div class="col-md-12 pb-4 text-center social">
 			<a href="#facebook"><?php Icon_Class::polen_icon_social("facebook"); ?></a>
 			<a href="#instagram"><?php Icon_Class::polen_icon_social("instagram"); ?></a>

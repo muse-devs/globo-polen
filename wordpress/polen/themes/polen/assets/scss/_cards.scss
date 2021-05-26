@@ -1,7 +1,6 @@
 .box-round {
 	box-sizing: border-box;
 	border-radius: 8px;
-	background-color: $talent-bg-color;
 	img.correct-margin {
 		margin-bottom: -30px;
 	}
@@ -149,6 +148,7 @@
 			font-size: 16px;
 			font-weight: 700;
 			line-height: 1;
+			color: var(--light);
 			z-index: 3;
 			.icon {
 				font-size: 11px;
@@ -174,7 +174,7 @@
 		font-family: $font-primary;
 		font-size: 14px;
 		a {
-			color: white;
+			color: inherit;
 		}
 	}
 	.title {
@@ -186,7 +186,6 @@
 		font-size: 12px;
 		a {
 			font-weight: 400;
-			color: $light-50;
 		}
 	}
 	&.small {
@@ -260,6 +259,7 @@
 		.title {
 			// margin-bottom: 30px;
 			font-size: 24px;
+			color: var(--light);
 			@include media-breakpoint-down(xs) {
 				// font-size: 1.8rem;
 			}
@@ -630,7 +630,6 @@
 .tutorial {
 	.icon {
 		font-size: 28px;
-		color: $light-50;
 		&.icon-camera-video {
 			font-size: 18px;
 			line-height: 40px;

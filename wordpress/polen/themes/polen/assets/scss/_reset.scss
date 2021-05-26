@@ -3,13 +3,7 @@ body {
 	font-size: 13px;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	color: white;
-	// color: $black;
-	// background-color: $white;
-	// @media (prefers-color-scheme: dark) {
-	// 	color: $white;
-	// 	background-color: $black;
-	// }
+	@include theme-light();
 	&.no-scroll {
 		overflow: hidden;
 	}
