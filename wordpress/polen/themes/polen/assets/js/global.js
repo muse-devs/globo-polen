@@ -4,8 +4,11 @@ const CONSTANTS = {
 	ERROR: "error",
 	SHOW: "show",
 	HIDDEN: "hidden",
+	MESSAGE_TIME: 5,
 	THEME: "theme_mode",
 };
+
+var interval = setInterval;
 
 if (!polenObj.developer) {
 	console = {
@@ -61,6 +64,7 @@ function setImediate(handle) {
 }
 
 function polMessageKill(id) {
+	clearInterval(interval);
 	var el = document.getElementById(id);
 	if (el) {
 		el.classList.remove(CONSTANTS.SHOW);
@@ -68,6 +72,12 @@ function polMessageKill(id) {
 			el.parentNode.removeChild(el);
 		});
 	}
+}
+
+function polMessageAutoKill(id) {
+	interval = setInterval(function () {
+		polMessageKill(id);
+	}, CONSTANTS.MESSAGE_TIME * 1000);
 }
 
 function polSpinner(action, el) {
@@ -125,6 +135,7 @@ function polMessage(title, message) {
 	document.body.appendChild(messageBox);
 	setImediate(function () {
 		messageBox.classList.add(CONSTANTS.SHOW);
+		polMessageAutoKill(id);
 	});
 }
 
@@ -146,6 +157,7 @@ function polError(message) {
 	document.body.appendChild(messageBox);
 	setImediate(function () {
 		messageBox.classList.add(CONSTANTS.SHOW);
+		polMessageAutoKill(id);
 	});
 }
 
