@@ -99,6 +99,7 @@ function videoIsOk() {
 }
 
 let completeHandler = () => {
+	polSpinner();
 	content_upload.innerHTML =
 		'<p class="my-4"><strong id="progress-value">Enviado</strong></p>';
 	let obj_complete_order = {
@@ -112,7 +113,10 @@ let completeHandler = () => {
 				"/my-account/success-upload/?order_id=" +
 				upload_video.order_id;
 		})
-		.fail(errorHandler);
+		.fail(errorHandler)
+		.complete(function(){
+			polSpinner(CONSTANTS.HIDDEN);
+		});
 };
 let errorHandler = (data, textStatus, jqXHR) => {
 	alert("Erro no envio do arquivo, tente novamente");

@@ -42,7 +42,7 @@ if ($polen_talent->is_user_talent($current_user)) {
 								<div class="col-5">
 									<span class="value small"><?php echo $total_time; ?></span>
 								</div>
-								<div class="col-2 d-flex align-items-end"><?php Icon_Class::polen_icon_chevron_right(); ?></div>
+								<div class="col-2 d-flex align-items-center"><?php Icon_Class::polen_icon_chevron_right(); ?></div>
 								<div class="col-5">
 									<span class="value small"><?php echo $polen_talent->get_total_by_order_status($current_user->ID, array( 'wc-payment-approved', 'wc-talent-accepted' )); ?></span>
 								</div>
