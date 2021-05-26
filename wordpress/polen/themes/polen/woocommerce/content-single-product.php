@@ -70,7 +70,7 @@ $bg_image = wp_get_attachment_image_src($Talent_Fields->cover_image_id, "large")
 	</div>
 
 	<div class="row mt-3 mb-1 talent-page-footer">
-		<div class="col-12 col-md-6 m-md-auto">
+		<div class="col-12 col-md-6 m-md-auto pb-3">
 			<?php echo woocommerce_template_single_add_to_cart(); ?>
 			<!--button class="btn btn-primary btn-lg btn-block btn-get-video">Pedir vídeo R$ 200</button-->
 		</div>
