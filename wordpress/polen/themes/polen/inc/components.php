@@ -422,7 +422,7 @@ function polen_get_video_player( $talent, $video, $user_id )
 function polen_get_talent_card($talent)
 {
 ?>
-	<div class="talent-card">
+	<div class="talent-card alt">
 		<header class="row pb-3 header">
 			<div class="col-md-12 d-flex align-items-center">
 				<div class="avatar avatar-sm" style="background-image: url(<?php echo isset($talent["avatar"]) ? $talent["avatar"] : TEMPLATE_URI . '/assets/img/avatar.png';  ?>)"></div>
@@ -681,7 +681,7 @@ function polen_get_order_flow_layout($array_status)
 			<ul class="order-flow<?php echo $class; ?>">
 				<?php foreach ($array_status as $key => $value) : ?>
 					<li class="item <?php echo "item" . $key; ?> <?php echo $value['status']; ?>">
-						<span class="status">
+						<span class="background status">
 							<?php Icon_Class::polen_icon_check_o(); ?>
 							<?php Icon_Class::polen_icon_exclamation_o(); ?>
 						</span>

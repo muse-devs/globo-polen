@@ -6,7 +6,7 @@
 	color: inherit;
 	&::placeholder {
 		font-family: inherit;
-		color: inherit;
+		color: inherit !important;
 	}
 	&:focus {
 		color: inherit;

@@ -3,7 +3,7 @@ body {
 	font-size: 13px;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	@include theme-dark();
+	@include theme-light();
 	&.no-scroll {
 		overflow: hidden;
 	}

@@ -318,9 +318,9 @@
 	border-radius: 8px;
 	// overflow: hidden;
 	box-sizing: border-box;
-	background-color: $secondary;
 	&.alt {
-		background-color: $talent-bg-color;
+		color: var(--light);
+		background-color: $secondary;
 	}
 	.header {
 		border-bottom: 1px dashed $light-25;
@@ -348,7 +348,7 @@
 		right: 0;
 		border: none;
 		border-radius: 50%;
-		color: $light-100;
+		color: var(--light);
 		background-color: $light-25;
 		&:active,
 		&:focus {
@@ -364,13 +364,13 @@
 	.name {
 		margin: 0;
 		font-family: inherit;
-		color: var(--light);
+		color: inherit;
 		font-size: 16px;
 		font-weight: 700;
 	}
 	.cat, .title {
 		font-family: inherit;
-		color: var(--light);
+		color: inherit;
 		font-size: 12px;
 		font-weight: 400;
 		line-height: 14px;
@@ -378,7 +378,7 @@
 	.price {
 		margin: 0;
 		font-family: inherit;
-		color: var(--light);
+		color: inherit;
 		font-size: 24px;
 		line-height: 1;
 		font-weight: 700;
@@ -386,15 +386,17 @@
 	.value {
 		margin: 0;
 		font-family: inherit;
-		color: var(--light);
+		color: inherit;
 		font-size: 14px;
 		// line-height: 1.6;
 		font-weight: 700;
 	}
+	.order-title {
+		color: inherit;
+	}
 	.order-number {
 		font-size: 12px;
-		color: var(--light);
-		color: $light-100;
+		color: inherit;
 	}
 	.status {
 		padding: 0 10px;
@@ -405,7 +407,7 @@
 		text-align: center;
 		color: $light-50;
 		border-radius: 2px;
-		background-color: $black;
+		background-color: var(--dark);
 	}
 }
 

@@ -42,7 +42,7 @@ if( $polen_talent->is_user_talent( $logged_user ) ) {
 		?>
 			<div class="row mt-3">
 				<div class="col-12">
-					<div class="talent-card alt">
+					<div class="box-color talent-card">
 						<div class="row px-3">
 							<div class="col-12">
 								<div class="row d-flex justify-content-start">
