@@ -41,6 +41,10 @@
 			);
 		}
 	}
+	input[type="checkbox"],
+	input[type="radio"] {
+		--background: var(--box-color-light);
+	}
 }
 
 @mixin theme-dark {
@@ -81,6 +85,10 @@
 		&::after {
 			background: linear-gradient(360deg, #000 0%, rgba(0, 0, 0, 0) 100%);
 		}
+	}
+	input[type="checkbox"],
+	input[type="radio"] {
+		--background: var(--gray);
 	}
 }
 
