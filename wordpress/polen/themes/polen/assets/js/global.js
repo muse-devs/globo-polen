@@ -110,6 +110,15 @@ function polSpinner(action, el) {
 	}
 }
 
+const polMessages = {
+	message: function(title, message) {
+		polMessage(title, message);
+	},
+	error: function(message) {
+		polError(message);
+	}
+}
+
 function polMessage(title, message) {
 	var id = "message-box";
 	polMessageKill(id);

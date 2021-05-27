@@ -45,7 +45,7 @@ use Polen\Includes\Polen_Talent;
 
 		<header id="masthead" class="row pt-3 pb-4">
 			<div class="col-6 col-sm-6 d-flex align-items-center">
-				<?php the_custom_logo(); ?>
+				<?php polen_the_theme_logos(); ?>
 			</div>
 			<div class="col-6 col-sm-6 d-flex justify-content-end align-items-center">
 				<?php //get_search_form();
