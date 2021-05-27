@@ -393,8 +393,8 @@ function polen_get_video_player( $talent, $video, $user_id )
 				</header>
 				<div class="content col-md-6 mt-4">
 					<header class="row content-header">
-						<div class="col-2">
-							<a href="<?php echo $talent->talent_url; ?>" class="no-underline"><?php echo polen_get_avatar( $talent->user_id, "polen-square-crop-md" ); ?></a>
+						<div class="col-3">
+							<a href="<?php echo $talent->talent_url; ?>" class="no-underline"><?php echo polen_get_avatar( $talent->user_id, "polen-square-crop-lg" ); ?></a>
 						</div>
 						<div class="col-9">
 							<h4 class="m-0"><a href="<?php echo $talent->talent_url; ?>" class="name"><?php echo $talent->nome; ?></a></h4>
