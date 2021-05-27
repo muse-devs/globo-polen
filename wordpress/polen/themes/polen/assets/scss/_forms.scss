@@ -34,7 +34,6 @@
 .cart-item,
 .woocommerce table.shop_table {
 	border-radius: 20px;
-	background-color: $form-bg-color;
 }
 
 .cart-item {
@@ -153,7 +152,7 @@ textarea {
 		--focus: 2px rgba(39, 94, 254, 0.3);
 		--border: var(--subtext);
 		--border-hover: var(--primary);
-		--background: var(--gray);
+		// --background: var(--gray);
 		--disabled: #f6f8ff;
 		--disabled-inner: #e1e6f9;
 		-webkit-appearance: none;
