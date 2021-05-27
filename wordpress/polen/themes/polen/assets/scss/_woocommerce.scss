@@ -56,12 +56,18 @@ select.form-control:not([size]):not([multiple]) {
 .woocommerce-MyAccount-navigation {
 	li {
 		padding: 16px 20px;
+		color: inherit;
 		border-left: 7px solid transparent;
 		box-sizing: border-box;
 		&.is-active {
 			border-radius: 6px;
 			border-left-color: $primary;
-			background-color: $talent-bg-color;
+		}
+		a {
+			text-decoration: none;
+			font-size: 18px;
+			font-weight: 600;
+			color: inherit;
 		}
 	}
 	@include media-breakpoint-down(xs) {
@@ -210,4 +216,11 @@ select.form-control:not([size]):not([multiple]) {
 
 .woocommerce-invalid #terms {
 	outline: transparent !important;
+}
+
+.woocommerce .cart-collaterals .cart_totals,
+.woocommerce-page .cart-collaterals .cart_totals {
+	width: 0;
+	height: 0;
+	overflow: hidden;
 }
