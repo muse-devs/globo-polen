@@ -251,9 +251,11 @@ function polen_talent_promo_card( $talent )
 {
 ?>
 	<div class="video-promo-card">
-		<div class="card row">
+		<div class="box-color card row">
 			<div class="col-12 col-md-12 d-flex flex-column justify-content-center align-items-center text-center p-2">
-				<?php echo polen_get_avatar( $talent->user_id, 'polen-square-crop-sm' ); ?>
+				<div class="image-cropper">
+					<?php echo polen_get_avatar( $talent->user_id, 'polen-square-crop-sm' ); ?>
+				</div>
 				<p class="mt-2">E aí, ficou com vontade de ter um vídeo do <?php echo $talent->nome; ?>?</p>
 				<a href="#pedirvideo" class="btn btn-outline-light btn-lg">Peça o seu vídeo</a>
 			</div>
@@ -295,7 +297,7 @@ function polen_video_icons( $user_id, $iniciais )
 {
 ?>
 	<div class="video-icons">
-		<figure class="image-cropper small">
+		<figure class="image-cropper color small">
 			<?php echo polen_get_avatar( $user_id, 'polen-square-crop-sm' ); ?>
 		</figure>
 		<div class="text-cropper small"><?php echo $iniciais; ?></div>

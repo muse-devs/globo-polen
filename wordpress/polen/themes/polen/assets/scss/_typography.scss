@@ -48,11 +48,11 @@ a {
 	font-family: $font-primary;
 	font-size: 14px;
 	font-weight: 400;
-	color: white;
+	color: inherit;
 	text-decoration: underline;
 	&:hover,
 	&:active {
-		color: white;
+		color: inherit;
 		text-decoration: underline;
 	}
 }

@@ -123,12 +123,22 @@
 
 .image-cropper {
 	position: relative;
-	display: inline-block;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 12px;
+	font-weight: 600;
+	line-height: 1;
+	text-align: center;
+	color: var(--light);
 	width: 54px;
 	height: 54px;
 	overflow: hidden;
 	border-radius: 50%;
-	background-color: #1e2029;
+	background-color: var(--primary);
+	&.color {
+		background-color: var(--gray-dark);
+	}
 	&.small {
 		width: 48px;
 		height: 48px;
@@ -143,14 +153,6 @@
 
 .text-cropper {
 	@extend .image-cropper;
-	display: inline-flex;
-	justify-content: center;
-	align-items: center;
-	font-size: 12px;
-	font-weight: 600;
-	line-height: 1;
-	text-align: center;
-	color: var(--light);
 	background-color: var(--primary);
 }
 

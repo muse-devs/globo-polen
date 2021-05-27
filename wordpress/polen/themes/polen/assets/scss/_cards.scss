@@ -511,7 +511,11 @@
 		left: 0;
 		width: 100%;
 		height: 100%;
-		background: linear-gradient(360deg, #000000 -17.41%, rgba(0, 0, 0, 0) 55.71%);
+		background: linear-gradient(
+			360deg,
+			#000000 -17.41%,
+			rgba(0, 0, 0, 0) 55.71%
+		);
 		z-index: 1;
 	}
 }
@@ -519,8 +523,7 @@
 .video-promo-card {
 	.card {
 		margin: 0 0 15px 0;
-		background-color: $talent-bg-color;
-		transition: all 350ms ease;
+		// transition: all 350ms ease;
 		@include media-breakpoint-down(xs) {
 			margin-right: 15px;
 		}
@@ -528,7 +531,16 @@
 			font-size: 10px !important;
 		}
 		&:hover {
-			background-color: $primary;
+			color: var(--light);
+			background-color: var(--primary);
+			.image-cropper {
+				color: var(--dark);
+				background-color: var(--gray-light);
+			}
+			.btn-outline-light {
+				color: var(--light);
+				border-color: var(--gray-light);
+			}
 		}
 	}
 }
