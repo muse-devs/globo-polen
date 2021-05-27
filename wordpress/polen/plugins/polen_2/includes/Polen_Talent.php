@@ -64,6 +64,8 @@ class Polen_Talent {
             add_action( 'init', array( $this, 'my_account_send_video' ) );
             add_action( 'woocommerce_account_send-video_endpoint', array( $this, 'my_account_send_video_content' ) );
             add_action( 'woocommerce_account_success-upload_endpoint', array( $this, 'my_account_success_upload_content' ) );
+
+            add_filter( 'woocommerce_get_availability_text', array( $this, 'remove_stock_text' ) );
         }
     }
 
@@ -651,6 +653,13 @@ class Polen_Talent {
         if( $res && ! is_null( $res ) && is_array( $res ) && ! empty( $res ) ) {
             return $res[0];
         }
+    }
+
+    /**
+     * Remove texto de quantidade em estoque e de indisponível no estoque
+     */
+    public function remove_stock_text( $text ){
+        return '';
     }
 }
     
