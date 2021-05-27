@@ -10,7 +10,10 @@
 			background-color: var(--dark);
 		}
 	}
-	.box-round, .tag-link, .box-color {
+	.box-round,
+	.tag-link,
+	.box-color,
+	.woocommerce-MyAccount-navigation li.is-active {
 		background-color: var(--box-color-light);
 	}
 	.text {
@@ -24,8 +27,19 @@
 		color: var(--subtitle-dark);
 	}
 	.form-control,
-	.form-control:focus {
+	.form-control:focus,
+	.form-control:disabled,
+	.form-control[readonly] {
 		background-color: var(--box-color-light);
+	}
+	.image-bg {
+		&::after {
+			background: linear-gradient(
+				360deg,
+				#fff 0%,
+				rgba(255, 255, 255, 0) 100%
+			);
+		}
 	}
 }
 
@@ -41,7 +55,10 @@
 			background-color: var(--light);
 		}
 	}
-	.box-round, .tag-link, .box-color {
+	.box-round,
+	.tag-link,
+	.box-color,
+	.woocommerce-MyAccount-navigation li.is-active {
 		background-color: var(--box-color-dark);
 	}
 	.text {
@@ -55,8 +72,15 @@
 		color: var(--subtitle-light);
 	}
 	.form-control,
-	.form-control:focus {
+	.form-control:focus,
+	.form-control:disabled,
+	.form-control[readonly] {
 		background-color: var(--gray-dark);
+	}
+	.image-bg {
+		&::after {
+			background: linear-gradient(360deg, #000 0%, rgba(0, 0, 0, 0) 100%);
+		}
 	}
 }
 

@@ -61,7 +61,7 @@
 			<a href="#linkedin"><?php Icon_Class::polen_icon_social("linkedin"); ?></a>
 			<a href="#twitter"><?php Icon_Class::polen_icon_social("twitter"); ?></a>
 		</div>
-		<div class="col-md-12 pt-3 text-center">2021 @Polen</div>
+		<div class="col-md-12 pt-3 text-center">2021 @<?= get_bloginfo('name'); ?></div>
 	</div><!-- .site-info -->
 </footer><!-- #colophon -->
 </div><!-- #Container -->
