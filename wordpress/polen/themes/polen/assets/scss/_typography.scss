@@ -62,7 +62,7 @@ a {
 	text-decoration: none;
 	cursor: pointer;
 	&:hover, &:active {
-		color: white;
+		color: inherit;
 		text-decoration: none;
 	}
 }

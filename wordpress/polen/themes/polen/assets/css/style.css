@@ -8866,7 +8866,7 @@ a {
   text-decoration: none;
   cursor: pointer; }
   .no-underline:hover, .no-underline:active {
-    color: white;
+    color: inherit;
     text-decoration: none; }
 
 .btn {
