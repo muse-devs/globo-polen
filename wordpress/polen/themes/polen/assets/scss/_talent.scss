@@ -219,7 +219,7 @@
 .talent-order-modal {
 	.p {
 		margin: 0;
-		color: var(--light);
+		color: inherit;
 		&.small {
 			font-size: 16px;
 		}
@@ -232,6 +232,7 @@
 	}
 	.msg-header {
 		padding: 25px 20px;
+		color: var(--light);
 		background-color: $secondary;
 	}
 	.msg-body {
@@ -248,7 +249,7 @@
 	.time {
 		font-weight: 700;
 		line-height: 1.2;
-		color: var(--light);
+		color: inherit;
 	}
 	.value {
 		font-size: 24px;
@@ -273,7 +274,6 @@
 	// box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 	@include media-breakpoint-down(sm) {
 		margin: 0;
-		background-color: $dark-100;
 	}
 	.header {
 		padding: 60px;
