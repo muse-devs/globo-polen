@@ -148,6 +148,25 @@ function polen_get_custom_logo_url() {
 	}
 }
 
+/**
+ * Pegar as duas logos para thema claro e escuro
+ */
+function polen_get_theme_logos() {
+	$logo_dark = get_theme_mod( 'custom_logo' );
+	$logo_dark = wp_get_attachment_image_url( $logo_dark, 'full' );
+	$logo_light = get_theme_mod( 'logo_theme_white' );
+
+	$html = '<a href="' . get_site_url() . '" class="custom-logo-link" rel="home" aria-current="page">';
+	$html .= '<img width="168" height="88" src="'. $logo_dark . '" class="custom-logo dark" alt="Polen">';
+	$html .= '<img width="168" height="88" src="'. $logo_light . '" class="custom-logo light" alt="Polen">';
+	$html .= '</a>';
+
+	return $html;
+}
+
+function polen_the_theme_logos() {
+	echo polen_get_theme_logos();
+}
 
 /**
  * Funcao que pegar a URL de login e completa com ?redirect= se estiver no cart ou checkout
@@ -163,7 +182,7 @@ function polen_get_login_url() {
 
 
 /**
- * 
+ *
  */
 function polen_get_querystring_redirect()
 {
