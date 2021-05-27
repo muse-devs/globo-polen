@@ -61,13 +61,13 @@ use Polen\Includes\Polen_Talent;
 									<div class="user-avatar d-flex flex-wrap align-items-center justify-content-center">
 										<?php echo polen_get_avatar( get_current_user_id(), "polen-square-crop-sm" ); ?>
 									</div>
-									<?php Icon_Class::polen_icon_chevron_down(); ?>
+									<span class="text"><?php Icon_Class::polen_icon_chevron_down(); ?></span>
 								</div>
 							</a>
-							<div class="dropdown-content">
+							<div class="dropdown-content background text">
 								<div class="row mb-4 d-md-none">
 									<div class="col-12">
-										<div class="user-avatar mb-1">
+										<div class="user-avatar d-flex flex-wrap align-items-center justify-content-center mb-1">
 											<?php echo polen_get_avatar( get_current_user_id(), "polen-square-crop-sm" ); ?>
 										</div>
 										<p class="user-name"><?php echo $user_name->display_name; ?></p>

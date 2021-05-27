@@ -52,7 +52,7 @@ function polen_front_get_card($item, $size = "small")
 			<h4 class="title text-truncate">
 				<a href="<?= $item["talent_url"]; ?>"><?= $item["name"]; ?></a>
 			</h4>
-			<h5 class="category text-truncate">
+			<h5 class="category subtitle text-truncate">
 				<a href="<?= $item["category_url"]; ?>"><?= $item["category"]; ?></a>
 			</h5>
 		</div>
@@ -200,7 +200,7 @@ function polen_front_get_tutorial()
 				<div class="row">
 					<div class="col-4">
 						<div class="row">
-							<div class="col-12 text-center icon"><?php Icon_Class::polen_icon_phone(); ?></div>
+							<div class="col-12 text-center icon subtitle"><?php Icon_Class::polen_icon_phone(); ?></div>
 							<div class="col-12 text-center mt-2">
 								<p>Peça o vídeo para o seu ídolo</p>
 							</div>
@@ -208,7 +208,7 @@ function polen_front_get_tutorial()
 					</div>
 					<div class="col-4">
 						<div class="row">
-							<div class="col-12 text-center icon"><?php Icon_Class::polen_icon_camera_video(); ?></div>
+							<div class="col-12 text-center icon subtitle"><?php Icon_Class::polen_icon_camera_video(); ?></div>
 							<div class="col-12 text-center mt-2">
 								<p>Receba seu vídeo</p>
 							</div>
@@ -216,7 +216,7 @@ function polen_front_get_tutorial()
 					</div>
 					<div class="col-4">
 						<div class="row">
-							<div class="col-12 text-center icon"><?php Icon_Class::polen_icon_hand_thumbs_up(); ?></div>
+							<div class="col-12 text-center icon subtitle"><?php Icon_Class::polen_icon_hand_thumbs_up(); ?></div>
 							<div class="col-12 text-center mt-2">
 								<p>Compartilhe com todo mundo</p>
 							</div>
@@ -251,9 +251,11 @@ function polen_talent_promo_card( $talent )
 {
 ?>
 	<div class="video-promo-card">
-		<div class="card row">
+		<div class="box-color card row">
 			<div class="col-12 col-md-12 d-flex flex-column justify-content-center align-items-center text-center p-2">
-				<?php echo polen_get_avatar( $talent->user_id, 'polen-square-crop-sm' ); ?>
+				<div class="image-cropper">
+					<?php echo polen_get_avatar( $talent->user_id, 'polen-square-crop-sm' ); ?>
+				</div>
 				<p class="mt-2">E aí, ficou com vontade de ter um vídeo do <?php echo $talent->nome; ?>?</p>
 				<a href="#pedirvideo" class="btn btn-outline-light btn-lg">Peça o seu vídeo</a>
 			</div>
@@ -295,7 +297,7 @@ function polen_video_icons( $user_id, $iniciais )
 {
 ?>
 	<div class="video-icons">
-		<figure class="image-cropper small">
+		<figure class="image-cropper color small">
 			<?php echo polen_get_avatar( $user_id, 'polen-square-crop-sm' ); ?>
 		</figure>
 		<div class="text-cropper small"><?php echo $iniciais; ?></div>

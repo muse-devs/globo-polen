@@ -1,5 +1,4 @@
 .site-footer {
-	border-top: 1px solid $light-25;
 	.title,
 	.description,
 	a {
@@ -25,7 +24,6 @@
 			font-size: 12px;
 			line-height: 21px;
 			font-weight: 400;
-			color: $light-50;
 		}
 	}
 }
@@ -35,15 +33,22 @@
 	font-weight: 700;
 	.social {
 		> * {
-			margin: 0 6%;
+			margin: 0 3%;
 			@include media-breakpoint-up(md) {
 				margin: 0 10px;
 			}
 		}
 		a {
-			display: inline-block;
-			width: 30px;
-			font-size: 16px;
+			display: inline-flex;
+			font-size: 20px;
+			width: 43px;
+			height: 43px;
+			border-radius: 50%;
+			flex-wrap: nowrap;
+			align-content: center;
+			justify-content: center;
+			align-items: center;
+			background-color: var(--dark);
 			&:hover {
 				text-decoration: none;
 			}

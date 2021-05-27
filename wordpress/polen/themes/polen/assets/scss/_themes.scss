@@ -1,0 +1,68 @@
+@mixin theme-light {
+	color: var(--dark);
+	background-color: var(--light);
+	.btn-outline-light {
+		color: var(--dark);
+		border-color: var(--gray);
+		&:hover,
+		&:active {
+			color: var(--light);
+			background-color: var(--dark);
+		}
+	}
+	.box-round, .tag-link, .box-color {
+		background-color: var(--box-color-light);
+	}
+	.text {
+		color: var(--dark);
+	}
+	.background {
+		background-color: var(--light);
+	}
+	.subtitle,
+	.footer-menu li a {
+		color: var(--subtitle-dark);
+	}
+	.form-control,
+	.form-control:focus {
+		background-color: var(--box-color-light);
+	}
+}
+
+@mixin theme-dark {
+	color: var(--light);
+	background-color: var(--dark);
+	.btn-outline-light {
+		color: var(--light);
+		border-color: var(--gray-light);
+		&:hover,
+		&:active {
+			color: var(--dark);
+			background-color: var(--light);
+		}
+	}
+	.box-round, .tag-link, .box-color {
+		background-color: var(--box-color-dark);
+	}
+	.text {
+		color: var(--light);
+	}
+	.background {
+		background-color: var(--dark);
+	}
+	.subtitle,
+	.footer-menu li a {
+		color: var(--subtitle-light);
+	}
+	.form-control,
+	.form-control:focus {
+		background-color: var(--gray-dark);
+	}
+}
+
+@mixin theme-auto {
+	@include theme-light();
+	@media (prefers-color-scheme: dark) {
+		@include theme-dark();
+	}
+}

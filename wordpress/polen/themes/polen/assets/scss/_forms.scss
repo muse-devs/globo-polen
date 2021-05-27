@@ -3,14 +3,13 @@
 	font-family: $font-primary;
 	font-size: 14px;
 	border: none;
-	color: $input-font-color;
-	background-color: var(--gray-dark);
+	color: inherit;
 	&::placeholder {
 		font-family: inherit;
+		color: inherit;
 	}
 	&:focus {
-		color: $input-font-color;
-		background-color: var(--gray-dark);
+		color: inherit;
 	}
 	&:disabled,
 	&[read-only] {
@@ -21,11 +20,6 @@
 .btn-primary:hover {
 	background-color: $primary-hover;
 	border-color: $primary-hover;
-}
-
-.btn-outline-light {
-	color: $light-100;
-	border-color: $light-50;
 }
 
 .step {
@@ -81,7 +75,6 @@
 		// padding: 20px 40px;
 		border-radius: 10px;
 		box-sizing: border-box;
-		color: $input-font-color;
 	}
 	select {
 		height: auto !important;
