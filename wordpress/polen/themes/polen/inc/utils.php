@@ -29,11 +29,11 @@ function polen_get_initials_name_by_user( $user )
  * @param string $name
  * @return string
  */
-function polen_get_initials_name(string $name) : string
+function polen_get_initials_name( $name )
 {
-    $words = explode(' ', $name);
+    $words = explode( ' ', $name );
     if (count($words) >= 2) {
-        return strtoupper(substr($words[0], 0, 1) . substr(end($words), 0, 1));
+        return strtoupper( substr( $words[ 0 ], 0, 1 ) . substr( end( $words ), 0, 1 ) );
     }
     return _polen_makeInitialsFromSingleWord( $name );
 }
@@ -45,7 +45,7 @@ function polen_get_initials_name(string $name) : string
  * @param string $name
  * @return string
  */
-function _polen_makeInitialsFromSingleWord(string $name) : string
+function _polen_makeInitialsFromSingleWord( $name )
 {
     preg_match_all( '#([A-Z]+)#', $name, $capitals );
     if ( count( $capitals[ 1 ] ) >= 2 ) {
