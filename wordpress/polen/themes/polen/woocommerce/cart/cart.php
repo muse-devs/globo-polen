@@ -59,7 +59,7 @@ $Talent_Fields = new Polen_Update_Fields();
 				"description" => ""
 			);
 		}
-		polen_get_talent_card($talent_cart_detail); ?>
+		polen_get_talent_card( $talent_cart_detail ); ?>
 	</div>
 	<form class="woocommerce-cart-form col-12 col-md-6 order-md-1" action="<?php echo esc_url(wc_get_checkout_url()); ?>" method="post">
 		<?php do_action('woocommerce_before_cart_table'); ?>
@@ -90,7 +90,7 @@ $Talent_Fields = new Polen_Update_Fields();
 						<?php
 						$video_to = isset($cart_item['video_to']) ? $cart_item['video_to'] : '';
 						$checked_other_one = '';
-						if ($video_to == 'other_one') {
+						if ($video_to == 'other_one' || empty( $video_to )) {
 							$checked_other_one = 'checked';
 						}
 						$checked_to_myself = '';
@@ -99,7 +99,7 @@ $Talent_Fields = new Polen_Update_Fields();
 						}
 						?>
 						<label for="cart_video_to_<?php echo $cart_item_key; ?>_other">
-							<input checked type="radio" class="polen-cart-item-data cart-video-to" id="cart_video_to_<?php echo $cart_item_key; ?>_other" data-cart-id="<?php echo $cart_item_key; ?>" name="video_to" value="other_one" <?php echo $checked_other_one; ?> /><span class="ml-2">Outra pessoa</span>
+							<input type="radio" class="polen-cart-item-data cart-video-to" id="cart_video_to_<?php echo $cart_item_key; ?>_other" data-cart-id="<?php echo $cart_item_key; ?>" name="video_to" value="other_one" <?php echo $checked_other_one; ?> /><span class="ml-2">Outra pessoa</span>
 						</label>
 						<label for="cart_video_to_<?php echo $cart_item_key; ?>_me">
 							<input type="radio" class="polen-cart-item-data cart-video-to ml-4" id="cart_video_to_<?php echo $cart_item_key; ?>_me" data-cart-id="<?php echo $cart_item_key; ?>" name="video_to" value="to_myself" <?php echo $checked_to_myself; ?> /><span class="ml-2">Para mim</span>
@@ -181,7 +181,7 @@ $Talent_Fields = new Polen_Update_Fields();
 					</div>
 					<div class="col-md-12">
 						<?php
-						//$email_to_video = isset($cart_item['email_to_video']) ? $cart_item['email_to_video'] : '';
+						$video_category = isset( $cart_item['video_category' ] ) ? $cart_item[ 'video_category' ] : '';
 						printf(
 							'<select class="%s form-control form-control-lg custom-select select-ocasion" id="cart_video_category_%s" data-cart-id="%s" name="video_category" required="required"/>',
 							'polen-cart-item-data',
@@ -191,7 +191,8 @@ $Talent_Fields = new Polen_Update_Fields();
 						echo "<option value=''>Categoria</option>";
 						$arr_occasion = $occasion_list->get_occasion(null, 'type', 'ASC', 1, 0, 'DISTINCT type');
 						foreach ($arr_occasion as $occasion) :
-							echo "<option value='" . $occasion->type . "'>" . $occasion->type . "</option>";
+							$selected = ( $occasion->type == $video_category ) ? 'selected ' : null;
+							echo "<option value='" . $occasion->type . "' {$selected}>" . $occasion->type . "</option>";
 
 						endforeach;
 						?>

@@ -148,13 +148,40 @@ function polen_get_custom_logo_url() {
 	}
 }
 
+
+/**
+ * Funcao que pegar a URL de login e completa com ?redirect= se estiver no cart ou checkout
+ */
+function polen_get_login_url() {
+	$complement = '';
+	if( is_cart() || is_checkout() ) {
+		$url_complement = is_cart() ? urlencode( wc_get_cart_url() ) : urlencode( wc_get_checkout_url() );
+		$complement = '?redirect_to=' . $url_complement;
+	}
+	return polen_get_url_my_account() . $complement;
+}
+
+
+/**
+ * 
+ */
+function polen_get_querystring_redirect()
+{
+	$redirect_to = urlencode( filter_input( INPUT_GET, 'redirect_to' ) );
+	if( !empty( $redirect_to ) ) {
+		return "?redirect_to={$redirect_to}";
+	}
+	return null;
+}
+
+
 /**
  * Tags Open Graph
  */
 if ( ! in_array( 'all-in-one-seo-pack/all_in_one_seo_pack.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
 	add_action( 'wp_head', function() {
 		global $post;
-		if( $post->post_type == 'product' ) {
+		if( !empty( $post ) && $post->post_type == 'product' ) {
 			echo "\n\n";
 			echo "\t" . '<meta property="og:title" content="' . get_the_title() . '">' . "\n";
 			echo "\t" . '<meta property="og:description" content="' . get_the_excerpt() . '">' . "\n";
@@ -168,7 +195,7 @@ if ( ! in_array( 'all-in-one-seo-pack/all_in_one_seo_pack.php', apply_filters( '
 				echo "\t" . '<meta property="og:image" content="' . polen_get_custom_logo_url() . '">' . "\n";
 			}
 			echo "\n";
-		} elseif( $post->post_type == 'page' && $post->post_name == 'v' ) {
+		} elseif( !empty( $post ) && $post->post_type == 'page' && $post->post_name == 'v' ) {
 			echo "\n\n";
 			echo "\t" . '<meta property="og:title" content="' . get_the_title() . '">' . "\n";
 			echo "\t" . '<meta property="og:description" content="' . get_the_excerpt() . '">' . "\n";

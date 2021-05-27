@@ -122,9 +122,9 @@ class Polen_Update_Fields
         $args['cover_image_thumb'] = ( $talent_cover_image_thumb ) ? $talent_cover_image_thumb : '';
         $talent_profile_video      = ( isset( $_POST['talent_profile_video'] ) && ! empty( $_POST['talent_profile_video'] ) ) ? $_POST['talent_profile_video'] : '';
         $args['profile_video']     = ( $talent_profile_video ) ? $talent_profile_video : '';
-        $args['tempo_resposta'] = (string) strip_tags( trim( $_POST['tempo_resposta'] ) );
-        $args['profissao'] = (string) strip_tags( trim( $_POST['profissao'] ) );
-        $args['descricao'] = (string) strip_tags( trim( $_POST['descricao'] ) );
+        $args['tempo_resposta']    = (string) strip_tags( trim( $_POST['tempo_resposta'] ) );
+        $args['profissao']         = (string) strip_tags( trim( $_POST['profissao'] ) );
+        // $args['descricao']         = (string) strip_tags( trim( $_POST['descricao'] ) );
 
         // Aba "Dados do Talento"
         $natureza_juridica = (string) strip_tags( trim( $_POST['natureza_juridica'] ) );
@@ -192,10 +192,17 @@ class Polen_Update_Fields
         $args['youtube'] = $youtube;
 
         // Aba "Dados Bancários"
+        
         $banco = strip_tags( trim( $_POST['banco'] ) );
-        list( $codigo_banco, $nome_banco ) = explode( ":", $banco );
-        $args['codigo_banco'] = $codigo_banco;
-        $args['banco'] = $nome_banco;
+        if( !empty( $banco ) ) {
+            list( $codigo_banco, $nome_banco ) = explode( ":", $banco );
+            $args['codigo_banco'] = $codigo_banco;
+            $args['banco'] = $nome_banco;
+        } else {
+            $args['codigo_banco'] = null;
+            $args['banco'] = null;
+        }
+
         
         $agencia = (string) strip_tags( trim( $_POST['agencia'] ) );
         if( (int) $agencia == (int) 0 ) {

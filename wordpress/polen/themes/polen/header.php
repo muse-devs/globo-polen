@@ -88,7 +88,7 @@ use Polen\Includes\Polen_Talent;
 							</div>
 						<?php
 						} else { ?>
-							<a class="btn btn-outline-light" href="<?php echo get_permalink(get_option('woocommerce_myaccount_page_id')); ?>">
+							<a class="btn btn-outline-light" href="<?php echo polen_get_login_url(); ?>">
 								Login
 							</a>
 						<?php
