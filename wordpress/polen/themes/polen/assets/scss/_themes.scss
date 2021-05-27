@@ -1,6 +1,14 @@
 @mixin theme-light {
 	color: var(--dark);
 	background-color: var(--light);
+	.custom-logo {
+		&.light {
+			display: inline-block;
+		}
+		&.dark {
+			display: none;
+		}
+	}
 	.btn-outline-light {
 		color: var(--dark);
 		border-color: var(--gray);
@@ -50,6 +58,14 @@
 @mixin theme-dark {
 	color: var(--light);
 	background-color: var(--dark);
+	.custom-logo {
+		&.light {
+			display: none;
+		}
+		&.dark {
+			display: inline-block;
+		}
+	}
 	.btn-outline-light {
 		color: var(--light);
 		border-color: var(--gray-light);
