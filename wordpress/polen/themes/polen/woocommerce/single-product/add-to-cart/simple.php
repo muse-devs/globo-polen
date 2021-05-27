@@ -52,7 +52,7 @@ if ( $product->is_in_stock() ) : ?>
 
 		<button type="submit"
 				name="add-to-cart" value="<?php echo esc_attr( $product->get_id() ); ?>"
-				class="single_add_to_cart_button alt btn btn-primary btn-lg btn-block btn-get-video py-3">
+				class="single_add_to_cart_button alt btn btn-primary btn-lg btn-block btn-get-video py-3 disabled">
 				Indisponível
 		</button>
 
