@@ -240,7 +240,7 @@ function polen_get_avatar( $user_id, $size = 'polen-square-crop-sm' )
 	if ( is_plugin_active('wp-user-avatar/wp-user-avatar.php') && has_wp_user_avatar( $user_id )) {
 		return get_wp_user_avatar( $user_id, $size );
 	} else {
-		$user = get_user_by('id', $user_id);
+		$user = get_user_by( 'id', $user_id );
 		$initials_name = polen_get_initials_name_by_user( $user );
 		return '<span>' . $initials_name   . '</span>';
 	}
@@ -363,7 +363,7 @@ function polen_front_get_talent_videos($talent)
  * @param int $user_id
  * @return html
  */
-function polen_get_video_player($talent, $video, $user_id)
+function polen_get_video_player( $talent, $video, $user_id )
 {
 	if (!$talent || !$video) {
 		return;
@@ -394,7 +394,7 @@ function polen_get_video_player($talent, $video, $user_id)
 				<div class="content col-md-6 mt-4">
 					<header class="row content-header">
 						<div class="col-3">
-							<a href="<?php echo $talent->talent_url; ?>" class="no-underline"><?php echo polen_get_avatar(get_avatar_url($talent->user_id));  ?></a>
+							<a href="<?php echo $talent->talent_url; ?>" class="no-underline"><?php echo polen_get_avatar( $talent->user_id ); ?></a>
 						</div>
 						<div class="col-9">
 							<h4 class="m-0"><a href="<?php echo $talent->talent_url; ?>" class="name"><?php echo $talent->nome; ?></a></h4>
