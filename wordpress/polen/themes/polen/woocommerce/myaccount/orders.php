@@ -33,19 +33,19 @@ if( $polen_talent->is_user_talent( $logged_user ) ) {
 			$item       = $cart_item->get_product();
 			$item_id    = $cart_item->get_product_id();
 			$is_vimeo_process_complete = false;
-			
+
 			if( !empty( $video_info ) ) {
 				$is_vimeo_process_complete = $video_info->is_vimeo_process_complete();
 			}
 		?>
 			<div class="row mt-3">
 				<div class="col-12">
-					<div class="talent-card alt">
+					<div class="box-color talent-card">
 						<div class="row px-3">
 							<div class="col-12">
 								<div class="row d-flex justify-content-start">
 									<div>
-										<div class="image-cropper d-block">
+										<div class="image-cropper">
 											<?php echo polen_get_avatar( $talent_id ); ?>
 										</div>
 									</div>

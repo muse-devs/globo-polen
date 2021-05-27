@@ -112,7 +112,7 @@ if (in_array('user_talent',  $logged_user->roles)) {
 				<div class="modal-content">
 					<div class="row modal-body">
 						<!-- Início -->
-						<div class="col-12 talent-order-modal">
+						<div class="col-12 background talent-order-modal">
 							<button type="button" class="modal-close" data-dismiss="modal" aria-label="Fechar">
 								<?php Icon_Class::polen_icon_close(); ?>
 							</button>
