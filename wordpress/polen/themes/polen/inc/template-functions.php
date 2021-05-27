@@ -148,6 +148,33 @@ function polen_get_custom_logo_url() {
 	}
 }
 
+
+/**
+ * Funcao que pegar a URL de login e completa com ?redirect= se estiver no cart ou checkout
+ */
+function polen_get_login_url() {
+	$complement = '';
+	if( is_cart() || is_checkout() ) {
+		$url_complement = is_cart() ? urlencode( wc_get_cart_url() ) : urlencode( wc_get_checkout_url() );
+		$complement = '?redirect_to=' . $url_complement;
+	}
+	return polen_get_url_my_account() . $complement;
+}
+
+
+/**
+ * 
+ */
+function polen_get_querystring_redirect()
+{
+	$redirect_to = urlencode( filter_input( INPUT_GET, 'redirect_to' ) );
+	if( !empty( $redirect_to ) ) {
+		return "?redirect_to={$redirect_to}";
+	}
+	return null;
+}
+
+
 /**
  * Tags Open Graph
  */
