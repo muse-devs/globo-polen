@@ -41,7 +41,8 @@
 
 						<p class="woocommerce-form-row form-row">
 							<?php wp_nonce_field('woocommerce-register', 'woocommerce-register-nonce'); ?>
-							<button type="submit" class="woocommerce-button btn btn-primary btn-lg btn-block btn-login woocommerce-form-register__submit" name="register" value="<?php esc_attr_e('Register', 'woocommerce'); ?>"><?php esc_html_e('Register', 'woocommerce'); ?></button>
+							<button type="submit" class="woocommerce-button btn btn-primary btn-lg btn-block btn-login woocommerce-form-register__submit g-recaptcha" data-sitekey="6LdDkPMaAAAAANmJ1fuoYu0dWelkrW30XYe5QKUF" data-callback='polen_onSubmit' data-action='submit' name="register" value="<?php esc_attr_e('Register', 'woocommerce'); ?>"><?php esc_html_e('Register GR', 'woocommerce'); ?></button>
+							<input type="hidden" name="register" value="Cadastre-se" />
 						</p>
 					</div>
 				</div>

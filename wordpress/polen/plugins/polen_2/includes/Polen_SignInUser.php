@@ -67,10 +67,13 @@ class Polen_SignInUser
 
     public function register_form() {
         if ( is_admin() ) {
-            return;
+            wp_safe_redirect( polen_get_url_my_account() );
+            exit;
         } elseif ( is_user_logged_in() ) {
-            return;
+            wp_safe_redirect( polen_get_url_my_account() );
+            exit;
         } else {
+            do_action('polen_register_form');
             ob_start();
             wc_get_template( 'myaccount/form-register.php' );
             $html = ob_get_contents();
