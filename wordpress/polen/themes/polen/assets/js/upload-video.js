@@ -95,7 +95,7 @@ function setFileInfo() {
 }
 
 function videoIsOk() {
-	return videoDuration > duracaoMinima && videoDuration < duracaoMaxima;
+	return true;//videoDuration > duracaoMinima && videoDuration < duracaoMaxima;
 }
 
 let completeHandler = () => {
