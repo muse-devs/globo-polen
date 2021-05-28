@@ -172,12 +172,12 @@ class Polen_Account
         </p>
 
     <?php elseif ( ! $wp_user_avatar->wpua_is_author_or_above()) : // Upload button ?>
-        <p id="<?php echo ($user == 'add-new-user') ? 'wpua-upload-button' : 'wpua-upload-button-existing' ?>">
+        <p style="display: none;" id="<?php echo ($user == 'add-new-user') ? 'wpua-upload-button' : 'wpua-upload-button-existing' ?>">
             <input name="wpua-file" id="<?php echo ($user == 'add-new-user') ? 'wpua-file' : 'wpua-file-existing' ?>" type="file"/>
             <button type="submit" class="button" id="<?php echo ($user == 'add-new-user') ? 'wpua-upload' : 'wpua-upload-existing' ?>" name="submit" value="<?php _e('Upload', 'wp-user-avatar'); ?>"><?php _e('Upload', 'wp-user-avatar'); ?></button>
         </p>
     <?php endif; ?>
-        <div id="<?php echo ($user == 'add-new-user') ? 'wpua-images' : 'wpua-images-existing' ?>" class="<?php echo $hide_images; ?>">
+        <div style="display:none;" id="<?php echo ($user == 'add-new-user') ? 'wpua-images' : 'wpua-images-existing' ?>" class="<?php echo $hide_images; ?>">
             <p id="<?php echo ($user == 'add-new-user') ? 'wpua-preview' : 'wpua-preview-existing' ?>">
                 <img src="<?php echo $avatar_medium; ?>" alt=""/>
             </p>
