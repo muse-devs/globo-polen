@@ -41,7 +41,7 @@ class Polen_Messages_Handler
     public function woocommerce_add_error( $message )
     {
         Polen_Messages::set_message( $message, Polen_Messages::TYPE_ERROR );
-        return null;
+        return $message;
     }
 
 
@@ -52,7 +52,7 @@ class Polen_Messages_Handler
     public function woocommerce_add_success( $message )
     {
         Polen_Messages::set_message( $message, Polen_Messages::TYPE_SUCCESS );
-        return null;
+        return $message;
     }
 
 
