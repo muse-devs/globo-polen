@@ -249,6 +249,7 @@ function polen_get_avatar( $user_id, $size = 'polen-square-crop-sm' )
 
 function polen_talent_promo_card( $talent )
 {
+	global $product;
 ?>
 	<div class="video-promo-card">
 		<div class="box-color card row">
@@ -257,7 +258,11 @@ function polen_talent_promo_card( $talent )
 					<?php echo polen_get_avatar( $talent->user_id, 'polen-square-crop-sm' ); ?>
 				</div>
 				<p class="mt-2">E aí, ficou com vontade de ter um vídeo do <?php echo $talent->nome; ?>?</p>
-				<a href="#pedirvideo" class="btn btn-outline-light btn-lg">Peça o seu vídeo</a>
+				<?php if ( $product->is_in_stock() ) : ?>
+					<a href="#pedirvideo" class="btn btn-outline-light btn-lg">Peça o seu vídeo</a>
+				<?php else: ?>
+					<a href="#pedirvideo" class="btn btn-outline-light btn-lg disabled">Indisponível</a>
+				<?php endif; ?>
 			</div>
 		</div>
 	</div>
