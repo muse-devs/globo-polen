@@ -176,10 +176,6 @@ class Polen_Account
             <input name="wpua-file" id="<?php echo ($user == 'add-new-user') ? 'wpua-file' : 'wpua-file-existing' ?>" type="file"/>
             <button type="submit" class="button" id="<?php echo ($user == 'add-new-user') ? 'wpua-upload' : 'wpua-upload-existing' ?>" name="submit" value="<?php _e('Upload', 'wp-user-avatar'); ?>"><?php _e('Upload', 'wp-user-avatar'); ?></button>
         </p>
-        <p id="<?php echo ($user == 'add-new-user') ? 'wpua-upload-messages' : 'wpua-upload-messages-existing' ?>">
-            <span id="<?php echo ($user == 'add-new-user') ? 'wpua-max-upload' : 'wpua-max-upload-existing' ?>" class="description"><?php printf(__('Maximum upload file size: %d%s.', 'wp-user-avatar'), esc_html($wpua_upload_size_limit_with_units), esc_html('KB')); ?></span>
-            <span id="<?php echo ($user == 'add-new-user') ? 'wpua-allowed-files' : 'wpua-allowed-files-existing' ?>" class="description"><?php _e('Allowed Files', 'wp-user-avatar'); ?>: <?php _e('<code>jpg jpeg png gif</code>', 'wp-user-avatar'); ?></span>
-        </p>
     <?php endif; ?>
         <div id="<?php echo ($user == 'add-new-user') ? 'wpua-images' : 'wpua-images-existing' ?>" class="<?php echo $hide_images; ?>">
             <p id="<?php echo ($user == 'add-new-user') ? 'wpua-preview' : 'wpua-preview-existing' ?>">
