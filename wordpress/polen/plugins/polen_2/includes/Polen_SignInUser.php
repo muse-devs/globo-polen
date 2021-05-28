@@ -5,7 +5,7 @@ namespace Polen\Includes;
 class Polen_SignInUser
 {
     public function __construct() {
-        add_action( 'wp_logout', array( $this, 'polen_logout_redirect' ) );
+        add_action( 'wp_logout', array( $this, 'polen_logout_redirect' ), 10, 1 );
         add_action( 'user_register', array( $this, 'register_check_user_logged_out_orders'), 999, 1 );
         add_shortcode( 'polen_register_form', array( $this, 'register_form' ) );
         add_filter( 'woocommerce_registration_redirect', function( $redirection_url ) { return get_bloginfo( 'url' ); }, 10, 1 );
@@ -31,7 +31,7 @@ class Polen_SignInUser
         update_user_meta($customer_id, '_phone', $_POST['phone']);
     }
 
-    public function polen_logout_redirect() {
+    public function polen_logout_redirect( $_ ) {
             wp_redirect( home_url() );
             exit();
     }
