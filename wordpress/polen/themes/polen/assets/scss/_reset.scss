@@ -8,7 +8,7 @@ body {
 	font-size: 13px;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	@include theme-light();
+	@include theme-dark();
 	&.theme-dark {
 		@include theme-dark();
 	}
