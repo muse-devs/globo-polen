@@ -171,12 +171,12 @@ class Polen_Account
             <button type="button" class="button" id="<?php echo ($user == 'add-new-user') ? 'wpua-add' : 'wpua-add-existing' ?>" name="<?php echo ($user == 'add-new-user') ? 'wpua-add' : 'wpua-add-existing' ?>" data-title="<?php _e('Choose Image', 'wp-user-avatar'); ?>: <?php echo(! empty($user->display_name) ? $user->display_name : ''); ?>"><?php _e('Choose Image', 'wp-user-avatar'); ?></button>
         </p>
 
-    <?php elseif ( ! $wp_user_avatar->wpua_is_author_or_above()) : // Upload button ?>
-        <p style="display: none;" id="<?php echo ($user == 'add-new-user') ? 'wpua-upload-button' : 'wpua-upload-button-existing' ?>">
-            <input name="wpua-file" id="<?php echo ($user == 'add-new-user') ? 'wpua-file' : 'wpua-file-existing' ?>" type="file"/>
-            <button type="submit" class="button" id="<?php echo ($user == 'add-new-user') ? 'wpua-upload' : 'wpua-upload-existing' ?>" name="submit" value="<?php _e('Upload', 'wp-user-avatar'); ?>"><?php _e('Upload', 'wp-user-avatar'); ?></button>
-        </p>
-    <?php endif; ?>
+        <?php elseif ( ! $wp_user_avatar->wpua_is_author_or_above()) : // Upload button ?>
+            <p style="display: none;" id="<?php echo ($user == 'add-new-user') ? 'wpua-upload-button' : 'wpua-upload-button-existing' ?>">
+                <input name="wpua-file" id="<?php echo ($user == 'add-new-user') ? 'wpua-file' : 'wpua-file-existing' ?>" type="file"/>
+                <button type="submit" class="button" id="<?php echo ($user == 'add-new-user') ? 'wpua-upload' : 'wpua-upload-existing' ?>" name="submit" value="<?php _e('Upload', 'wp-user-avatar'); ?>"><?php _e('Upload', 'wp-user-avatar'); ?></button>
+            </p>
+        <?php endif; ?>
         <div style="display:none;" id="<?php echo ($user == 'add-new-user') ? 'wpua-images' : 'wpua-images-existing' ?>" class="<?php echo $hide_images; ?>">
             <p id="<?php echo ($user == 'add-new-user') ? 'wpua-preview' : 'wpua-preview-existing' ?>">
                 <img src="<?php echo $avatar_medium; ?>" alt=""/>
