@@ -36,7 +36,7 @@ do_action( 'woocommerce_before_edit_account_form' ); ?>
 	</div>
 </div>
 
-<form class="woocommerce-EditAccountForm edit-account mt-3" action="" method="post" <?php do_action( 'woocommerce_edit_account_form_tag' ); ?> >
+<form class="woocommerce-EditAccountForm edit-account mt-3" action="" method="post" <?php do_action( 'woocommerce_edit_account_form_tag' ); ?> enctype="multipart/form-data" >
 	<input type="hidden" name="wpua_action" value="update" />
 	<input type="hidden" name="user_id" id="user_id" value="<?php echo esc_attr($user->ID); ?>" />
 	<?php wp_nonce_field('update-user_'.$user->ID); ?>
