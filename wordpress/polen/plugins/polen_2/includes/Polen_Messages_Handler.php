@@ -26,10 +26,11 @@ class Polen_Messages_Handler
     public function init()
     {
         if( !is_admin() ) {
-            add_filter( 'woocommerce_add_error',          [ $this, 'woocommerce_add_error'          ], 10, 1 );
-            add_filter( 'woocommerce_add_success',        [ $this, 'woocommerce_add_success'        ], 10, 1 );
-            add_action( 'polen_messages_service_success', [ $this, 'polen_messages_service_success' ], 10, 0 );
-            add_action( 'polen_messages_service_error',   [ $this, 'polen_messages_service_error'   ], 10, 0 );
+            add_filter( 'woocommerce_add_error',                [ $this, 'woocommerce_add_error'          ], 10, 1 );
+            add_filter( 'woocommerce_add_success',              [ $this, 'woocommerce_add_success'        ], 10, 1 );
+            add_action( 'polen_messages_service_success',       [ $this, 'polen_messages_service_success' ], 10, 0 );
+            add_action( 'polen_messages_service_error',         [ $this, 'polen_messages_service_error'   ], 10, 0 );
+            add_filter( 'woocommerce_kses_notice_allowed_tags', [ $this, 'polen_kses_notice_allowed_tags' ], 10, 1 );
         }
     }
 
@@ -64,7 +65,6 @@ class Polen_Messages_Handler
     {
         if( Polen_Messages::has_message_success() ) {
             $js_complete = $this->polen_messages_service( Polen_Messages::get_type(), Polen_Messages::get_message() );
-            Polen_Messages::clear_messages();
             echo $js_complete;
         }
     }
@@ -78,7 +78,6 @@ class Polen_Messages_Handler
     {
         if( Polen_Messages::has_message_error() ) {
             $js_complete = $this->polen_messages_service( Polen_Messages::get_type(), Polen_Messages::get_message() );
-            Polen_Messages::clear_messages();
             echo $js_complete;
         }
     }
@@ -128,5 +127,11 @@ class Polen_Messages_Handler
         $return = sprintf( $call_function_js, $type, $message );
 
         return $return;
+    }
+
+    public function polen_kses_notice_allowed_tags( $allowed_tags )
+    {
+        $allowed_tags = array_merge( $allowed_tags, array( 'script' => array( 'tabindex' => true ) ) );
+        return $allowed_tags;
     }
 }

@@ -24,10 +24,14 @@ if ( ! $notices ) {
 }
 
 ?>
-<ul class="woocommerce-error" role="alert">
+<ul class="woocommerce-error d-none" role="alert">
 	<?php foreach ( $notices as $notice ) : ?>
 		<li<?php echo wc_get_notice_data_attr( $notice ); ?>>
 			<?php echo wc_kses_notice( $notice['notice'] ); ?>
 		</li>
 	<?php endforeach; ?>
 </ul>
+
+<?php
+$obj = new Polen\Includes\Polen_Messages_Handler();
+echo $obj->polen_messages_service_error();

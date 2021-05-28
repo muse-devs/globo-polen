@@ -69,6 +69,7 @@
 <?php wp_footer(); ?>
 <?php do_action( 'polen_messages_service_error' ); ?>
 <?php do_action( 'polen_messages_service_success' ); ?>
+<?php Polen\Includes\Polen_Messages::clear_messages(); ?>
 
 </body>
 
