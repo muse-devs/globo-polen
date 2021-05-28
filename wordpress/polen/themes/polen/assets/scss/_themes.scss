@@ -53,6 +53,9 @@
 	input[type="radio"] {
 		--background: var(--box-color-light);
 	}
+	.fog, .blockUI.blockOverlay {
+		background-color: rgba(255, 255, 255, 0.5) !important;
+	}
 }
 
 @mixin theme-dark {
@@ -105,6 +108,9 @@
 	input[type="checkbox"],
 	input[type="radio"] {
 		--background: var(--gray);
+	}
+	.fog, .blockUI.blockOverlay {
+		background-color: rgba(0, 0, 0, 0.5) !important;
 	}
 }
 

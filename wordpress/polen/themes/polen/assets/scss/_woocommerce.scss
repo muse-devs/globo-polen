@@ -186,7 +186,6 @@ select.form-control:not([size]):not([multiple]) {
 }
 
 .blockUI.blockOverlay {
-	background-color: $dark-50 !important;
 	&::before {
 		width: 2rem !important;
 		height: 2rem !important;
@@ -211,7 +210,7 @@ select.form-control:not([size]):not([multiple]) {
 }
 
 .woocommerce form .form-row.woocommerce-invalid label {
-	color: var(--light);
+	color: inherit;
 }
 
 .woocommerce-invalid #terms {
