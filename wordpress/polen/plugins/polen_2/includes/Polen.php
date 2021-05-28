@@ -83,6 +83,9 @@ class Polen {
         //User Register Validations
         new Polen_SignInUser_Google_ReCaptcha( true );
         new Polen_SignInUser_Strong_Password( true );
+
+        //Mensageria
+        new Polen_Messages_Handler( true );
     }
 
     /**

@@ -67,6 +67,8 @@
 </div><!-- #Container -->
 
 <?php wp_footer(); ?>
+<?php do_action( 'polen_messages_service_error' ); ?>
+<?php do_action( 'polen_messages_service_success' ); ?>
 
 </body>
 

@@ -7,7 +7,7 @@
 			<?php do_action('woocommerce_before_customer_login_form'); ?>
 			<form method="post" class="woocommerce-form woocommerce-form-register register" <?php do_action('woocommerce_register_form_tag'); ?>>
 
-				<?php do_action('woocommerce_register_form_start'); ?>
+				<?php //do_action('woocommerce_register_form_start'); ?>
 
 				<div class="row">
 					<div class="col-12 col-md-12">
@@ -41,7 +41,7 @@
 
 						<p class="woocommerce-form-row form-row">
 							<?php wp_nonce_field('woocommerce-register', 'woocommerce-register-nonce'); ?>
-							<button type="submit" class="woocommerce-button btn btn-primary btn-lg btn-block btn-login woocommerce-form-register__submit g-recaptcha" data-sitekey="6LdDkPMaAAAAANmJ1fuoYu0dWelkrW30XYe5QKUF" data-callback='polen_onSubmit' data-action='submit' name="register" value="<?php esc_attr_e('Register', 'woocommerce'); ?>"><?php esc_html_e('Register GR', 'woocommerce'); ?></button>
+							<button type="submit" class="woocommerce-button btn btn-primary btn-lg btn-block btn-login woocommerce-form-register__submit g-recaptcha" data-sitekey="6LdDkPMaAAAAANmJ1fuoYu0dWelkrW30XYe5QKUF" data-callback='polen_onSubmit' data-action='submit' name="register" value="<?php esc_attr_e('Register', 'woocommerce'); ?>"><?php esc_html_e('Register', 'woocommerce'); ?></button>
 							<input type="hidden" name="register" value="Cadastre-se" />
 						</p>
 					</div>
