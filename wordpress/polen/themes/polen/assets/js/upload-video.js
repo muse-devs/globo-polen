@@ -73,11 +73,16 @@ window.onload = () => {
 	video_input.addEventListener("change", function (e) {
 		setFileInfo();
 		changeIcon();
+		showFileName();
 		document.querySelector("#video-rec").classList.remove("show");
 		document.querySelector("#video-rec-again").classList.add("show");
 		document.querySelector("#video-send").classList.add("show");
 	});
 };
+
+function showFileName() {
+	document.getElementById("info").innerText = file_input.files[0].name;
+}
 
 function setFileInfo() {
 	var files = file_input.files;
@@ -86,16 +91,15 @@ function setFileInfo() {
 
 	video.onloadedmetadata = function () {
 		window.URL.revokeObjectURL(video.src);
-		var duration = video.duration;
-		videoDuration = duration;
-		console.log(videoIsOk() ? "Duração Ok" : "Duração Errada");
+		videoDuration = video.duration;
+		// console.log(videoIsOk() ? "Duração Ok" : "Duração Errada");
 	};
 
 	video.src = URL.createObjectURL(files[0]);
 }
 
 function videoIsOk() {
-	return true;//videoDuration > duracaoMinima && videoDuration < duracaoMaxima;
+	return true; //videoDuration > duracaoMinima && videoDuration < duracaoMaxima;
 }
 
 let completeHandler = () => {
@@ -114,7 +118,7 @@ let completeHandler = () => {
 				upload_video.order_id;
 		})
 		.fail(errorHandler)
-		.complete(function(){
+		.complete(function () {
 			polSpinner(CONSTANTS.HIDDEN);
 		});
 };
