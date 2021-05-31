@@ -223,3 +223,16 @@ select.form-control:not([size]):not([multiple]) {
 	height: 0;
 	overflow: hidden;
 }
+
+#wpua-preview img,
+#wpua-thumbnail img,
+#wpua-preview-existing img,
+#wpua-thumbnail-existing img {
+	max-height: 120px !important;
+	border: none !important;
+}
+
+// #wpua-upload-button-existing {
+// 	height: 0;
+// 	overflow: hidden;
+// }
