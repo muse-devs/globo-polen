@@ -62,7 +62,7 @@ if (isset($_REQUEST['order_id']) && !empty($_REQUEST['order_id'])) {
             <div class="modal-content">
                 <div class="row modal-body">
                     <!-- Início -->
-                    <div class="box-color col-12 talent-order-modal">
+                    <div class="background col-12 talent-order-modal">
                         <button type="button" class="modal-close" data-dismiss="modal" aria-label="Fechar">
                             <i class="icon icon-close"></i>
                         </button>
