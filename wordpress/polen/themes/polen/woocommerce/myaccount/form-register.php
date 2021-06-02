@@ -1,8 +1,10 @@
 <div class="woocommerce">
-	<div class="row mt-4 justify-content-md-center talent-login">
+	<div class="row justify-content-md-center talent-login">
 		<div class="col-12 col-md-6 mx-md-auto" id="customer_register">
-			<div class="col-12 col-md-12">
-				<h1><?php esc_html_e('Register', 'woocommerce'); ?></h1>
+			<div class="row">
+				<div class="col-12 col-md-12">
+					<h1><?php esc_html_e('Register', 'woocommerce'); ?></h1>
+				</div>
 			</div>
 			<?php do_action('woocommerce_before_customer_login_form'); ?>
 			<form method="post" class="woocommerce-form woocommerce-form-register register" <?php do_action('woocommerce_register_form_tag'); ?>>

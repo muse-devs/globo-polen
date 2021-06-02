@@ -21,12 +21,14 @@ defined('ABSPATH') || exit;
 do_action('woocommerce_before_lost_password_form');
 ?>
 
-<div class="row my-2 py-5 justify-content-md-center">
-	<div class="col-md-6">
-		<form method="post" class="woocommerce-ResetPassword lost_reset_password text-center">
-
-			<p><?php echo apply_filters('woocommerce_lost_password_message', esc_html__('Lost your password? Please enter your username or email address. You will receive a link to create a new password via email.', 'woocommerce')); ?></p><?php // @codingStandardsIgnoreLine 
-																																																												?>
+<div class="row">
+	<div class="col-12 col-md-6 m-md-auto">
+		<h1>Esqueci minha senha</h1>
+	</div>
+</div>
+<div class="row justify-content-md-center">
+	<div class="col-md-6 mt-4">
+		<form method="post" class="woocommerce-ResetPassword lost_reset_password">
 
 			<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide mb-3">
 				<?php /* <label for="user_login"><?php esc_html_e( 'Username or email', 'woocommerce' ); ?></label>*/ ?>
@@ -35,11 +37,13 @@ do_action('woocommerce_before_lost_password_form');
 
 			<div class="clear"></div>
 
+			<p class="text-center"><?php echo apply_filters('woocommerce_lost_password_message', esc_html__('Lost your password? Please enter your username or email address. You will receive a link to create a new password via email.', 'woocommerce')); ?></p>
+
 			<?php do_action('woocommerce_lostpassword_form'); ?>
 
 			<p class="woocommerce-form-row form-row">
 				<input type="hidden" name="wc_reset_password" value="true" />
-				<button type="submit" class="woocommerce-Button btn btn-primary btn-lg" value="<?php esc_attr_e('Reset password', 'woocommerce'); ?>"><?php esc_html_e('Reset password', 'woocommerce'); ?></button>
+				<button type="submit" class="woocommerce-Button btn btn-primary btn-lg btn-block" value="<?php esc_attr_e('Reset password', 'woocommerce'); ?>"><?php esc_html_e('Reset password', 'woocommerce'); ?></button>
 			</p>
 
 			<?php wp_nonce_field('lost_password', 'woocommerce-lost-password-nonce'); ?>

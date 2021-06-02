@@ -26,8 +26,10 @@ function get_form_login()
 	<div class="row">
 		<div class="col-12 col-md-6 mx-md-auto">
 
-			<div class="col-12">
-				<h1><?php esc_html_e('Login', 'woocommerce'); ?></h1>
+			<div class="row">
+				<div class="col-12">
+					<h1><?php esc_html_e('Login', 'woocommerce'); ?></h1>
+				</div>
 			</div>
 
 			<form class="woocommerce-form woocommerce-form-login login" method="post">
@@ -79,7 +81,7 @@ function get_form_login()
 <?php
 }
 ?>
-<div class="row mt-4 justify-content-md-center talent-login">
+<div class="row justify-content-md-center talent-login">
 	<?php do_action('woocommerce_before_customer_login_form'); ?>
 
 	<div class="col-12 col-md-12" id="customer_login">
