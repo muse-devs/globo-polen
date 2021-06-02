@@ -26,8 +26,8 @@ do_action('woocommerce_before_lost_password_form');
 		<h1>Esqueci minha senha</h1>
 	</div>
 </div>
-<div class="row py-3 justify-content-md-center">
-	<div class="col-md-6">
+<div class="row justify-content-md-center">
+	<div class="col-md-6 mt-4">
 		<form method="post" class="woocommerce-ResetPassword lost_reset_password">
 
 			<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide mb-3">
