@@ -28,9 +28,9 @@ class Polen_Messages_Handler
         if( !is_admin() ) {
             add_filter( 'woocommerce_add_error',                [ $this, 'woocommerce_add_error'          ], 10, 1 );
             add_filter( 'woocommerce_add_success',              [ $this, 'woocommerce_add_success'        ], 10, 1 );
+            add_filter( 'woocommerce_kses_notice_allowed_tags', [ $this, 'polen_kses_notice_allowed_tags' ], 10, 1 );
             add_action( 'polen_messages_service_success',       [ $this, 'polen_messages_service_success' ], 10, 0 );
             add_action( 'polen_messages_service_error',         [ $this, 'polen_messages_service_error'   ], 10, 0 );
-            add_filter( 'woocommerce_kses_notice_allowed_tags', [ $this, 'polen_kses_notice_allowed_tags' ], 10, 1 );
         }
     }
 
@@ -71,7 +71,7 @@ class Polen_Messages_Handler
 
 
     /**
-     * Handler do polen_messages_service_success
+     * Handler do polen_messages_service_error
      * que fica no themes/polen/footer.php
      */
     public function polen_messages_service_error()
