@@ -41,7 +41,8 @@
 	.form-control:focus,
 	.form-control:disabled,
 	.form-control[readonly] {
-		background-color: var(--box-color-light);
+		border: 1px solid #818181;
+		background-color: var(--light);
 	}
 	.image-bg {
 		&::after {
