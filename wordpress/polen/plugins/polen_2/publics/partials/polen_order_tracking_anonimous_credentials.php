@@ -1,7 +1,7 @@
 <div id="primary" class="content-area cart-other">
     <main id="main" class="site-main" role="main">
         <div class="row">
-            <div class="col-12 col-md-6 m-md-auto mb-3">
+            <div class="col-12 col-md-6 mb-3 ml-md-auto mr-md-auto">
                 <h1>Número do pedido</h1>
             </div>
         </div>
