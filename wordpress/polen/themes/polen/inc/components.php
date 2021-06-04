@@ -10,12 +10,12 @@ function polen_front_get_banner()
 			<source src="<?= TEMPLATE_URI; ?>/assets/video/home1.m4v" type="video/mp4">
 			<!-- <source src="movie.ogg" type="video/ogg"> -->
 		</video>
-		<?php if (!polen_is_mobile()) : ?>
+		<?php //if (!polen_is_mobile()) : ?>
 			<video class="video video-desktop" autoplay muted loop playsinline poster="<?= TEMPLATE_URI; ?>/assets/img/video_poster2.jpg">
 				<source src="<?= TEMPLATE_URI; ?>/assets/video/home2.m4v" type="video/mp4">
 				<!-- <source src="movie.ogg" type="video/ogg"> -->
 			</video>
-		<?php endif; ?>
+		<?php //endif; ?>
 		<div class="content">
 			<h2 class="title">Presenteie e<br />surpreenda com vídeos personalizados.</h2>
 			<!-- <a href="#como" class="player-button-link">Como funciona</a> -->
@@ -52,7 +52,7 @@ function polen_front_get_card($item, $size = "small")
 			<h4 class="title text-truncate">
 				<a href="<?= $item["talent_url"]; ?>"><?= $item["name"]; ?></a>
 			</h4>
-			<h5 class="category subtitle text-truncate">
+			<h5 class="category text-truncate">
 				<a href="<?= $item["category_url"]; ?>"><?= $item["category"]; ?></a>
 			</h5>
 		</div>
