@@ -83,10 +83,10 @@ $Talent_Fields = new Polen_Update_Fields();
 			<?php do_action('woocommerce_cart_contents'); ?>
 			<div class="col-12 col-md-12">
 				<div class="row">
-					<div class="col-md-12 mb-4">
+					<div class="col-md-12 mb-3">
 						<span class="form-title">Esse vídeo é para:</span>
 					</div>
-					<div class="col-md-12 mb-4">
+					<div class="col-md-12 mb-3">
 						<?php
 						$video_to = isset($cart_item['video_to']) ? $cart_item['video_to'] : '';
 						$checked_other_one = '';
@@ -125,7 +125,7 @@ $Talent_Fields = new Polen_Update_Fields();
 					</div>
 				</div>
 
-				<div class="row">
+				<div class="row mt-3">
 					<div class="col-12 col-md-12">
 						<?php
 						$name_to_video = isset($cart_item['name_to_video']) ? $cart_item['name_to_video'] : '';
@@ -156,7 +156,7 @@ $Talent_Fields = new Polen_Update_Fields();
 					);
 				?>
 				<?php } else { ?>
-					<div class="row">
+					<div class="row mt-3">
 						<div class="col-12 col-md-12">
 							<?php
 							$email_to_video = isset($cart_item['email_to_video']) ? $cart_item['email_to_video'] : '';
@@ -175,7 +175,7 @@ $Talent_Fields = new Polen_Update_Fields();
 					</div>
 				<?php } ?>
 
-				<div class="row mt-3">
+				<div class="row mt-4">
 					<div class="col-12 col-md-12 mb-3">
 						<span class="form-title">Qual ocasião do vídeo?</span>
 					</div>
@@ -199,8 +199,8 @@ $Talent_Fields = new Polen_Update_Fields();
 						</select>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-12 col-md-12 mb-3 mt-3">
+				<div class="row mt-4">
+					<div class="col-12 col-md-12 mb-3">
 						<span class="form-title">Instruções para o vídeo</span>
 					</div>
 					<div class="col-md-12">
