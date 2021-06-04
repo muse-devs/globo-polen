@@ -171,6 +171,10 @@ function polen_scripts() {
 		}
 	}
 
+	if(is_front_page()) {
+		wp_enqueue_script( 'home-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'front-page.js', array(), _S_VERSION, true );
+	}
+
 	// Registrando Scripts ------------------------------------------------------------------------------
 	wp_register_script( 'vimeo', 'https://player.vimeo.com/api/player.js', array(), '', true );
 	wp_register_script('vuejs', TEMPLATE_URI . '/assets/vuejs/' . $min . 'vue.js', array(), '', false);
