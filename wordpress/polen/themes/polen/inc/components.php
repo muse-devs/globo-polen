@@ -4,22 +4,30 @@ use Polen\Includes\Debug;
 
 function polen_front_get_banner()
 {
+	$mobile_video = array(
+		"poster" => TEMPLATE_URI . "/assets/img/video_poster1.jpg",
+		"video" => TEMPLATE_URI . "/assets/video/home1.m4v",
+		"class" => "video-mobile"
+	);
+	$desktop_video = array(
+		"poster" => TEMPLATE_URI . "/assets/img/video_poster2.jpg",
+		"video" => TEMPLATE_URI . "/assets/video/home2.m4v",
+		"class" => "video-desktop"
+	);
 ?>
 	<section class="top-banner mb-4">
-		<video class="video video-mobile" autoplay muted loop playsinline poster="<?= TEMPLATE_URI; ?>/assets/img/video_poster1.jpg">
-			<source src="<?= TEMPLATE_URI; ?>/assets/video/home1.m4v" type="video/mp4">
-			<!-- <source src="movie.ogg" type="video/ogg"> -->
+		<video id="video-banner" class="video" autoplay muted loop playsinline poster="<?php echo polen_is_mobile() ? $mobile_video['poster'] : $desktop_video['poster']; ?>">
+			<source src="<?php echo polen_is_mobile() ? $mobile_video['video'] : $desktop_video['video']; ?>" type="video/mp4">
 		</video>
-		<?php //if (!polen_is_mobile()) : ?>
-			<video class="video video-desktop" autoplay muted loop playsinline poster="<?= TEMPLATE_URI; ?>/assets/img/video_poster2.jpg">
-				<source src="<?= TEMPLATE_URI; ?>/assets/video/home2.m4v" type="video/mp4">
-				<!-- <source src="movie.ogg" type="video/ogg"> -->
-			</video>
-		<?php //endif; ?>
 		<div class="content">
 			<h2 class="title">Presenteie e<br />surpreenda com vídeos personalizados.</h2>
-			<!-- <a href="#como" class="player-button-link">Como funciona</a> -->
 		</div>
+		<script>
+			const home_video = {
+				mobile: <?php echo json_encode($mobile_video); ?>,
+				desktop: <?php echo json_encode($desktop_video); ?>
+			}
+		</script>
 	</section>
 <?php
 }
