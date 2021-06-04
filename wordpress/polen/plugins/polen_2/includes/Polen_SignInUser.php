@@ -105,11 +105,13 @@ class Polen_SignInUser
     
     public function save_name_and_birthday( $data )
     {
-        Debug::def($data);die;
-        $birthday = filter_input( INPUT_POST, 'birthday' );
+        $birthday_str = filter_input( INPUT_POST, 'birthday' );
         $name     = filter_input( INPUT_POST, 'fullname' );
-        $data['first_name'];
-        $data['last_name'];
+        
+        $birthday = \DateTime::createFromFormat( 'd/m/Y', $birthday_str );
+        
+        $data['first_name'] = $name;
+        $data['birthday'] = $birthday->format('Y-m-d');
         
         return $data;
     }
