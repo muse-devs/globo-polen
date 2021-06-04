@@ -9,6 +9,8 @@ class Polen_SignInUser
         add_action( 'user_register', array( $this, 'register_check_user_logged_out_orders'), 999, 1 );
         add_shortcode( 'polen_register_form', array( $this, 'register_form' ) );
         add_filter( 'woocommerce_registration_redirect', function( $redirection_url ) { return get_bloginfo( 'url' ); }, 10, 1 );
+//        add_filter( 'woocommerce_new_customer_data', array($this, 'save_name_and_birthday'), 10, 1);
+//        add_filter( 'woocommerce_registration_errors', array($this, 'required_name_birthday'), 10, 3 );
     }        
 
     public function add_fields_sign_in()
@@ -80,5 +82,35 @@ class Polen_SignInUser
             ob_end_clean();
             return $html;
         }
+    }
+    
+    public function required_name_birthday( $errors, $username, $email )
+    {
+        $birthday = filter_input( INPUT_POST, 'birthday' );
+        $name     = filter_input( INPUT_POST, 'fullname' );
+        
+        if( empty( $birthday ) || empty( $name ) ) {
+            $errors->add( 'registration-error-missing-birthday', 'Todos os compos são obrigatórios' );
+        }
+        
+       if( \DateTime::createFromFormat( 'd/m/Y', $birthday ) == false ) {
+           $errors->add( 'registration-error-invalid-birthday', 'Data inválida' );
+       }
+       
+       if( strlen( $name ) < 4 ) {
+           $errors->add( 'registration-error-missing-name', 'Digite o nome completo' );
+       }
+        return $errors;
+    }
+    
+    public function save_name_and_birthday( $data )
+    {
+        Debug::def($data);die;
+        $birthday = filter_input( INPUT_POST, 'birthday' );
+        $name     = filter_input( INPUT_POST, 'fullname' );
+        $data['first_name'];
+        $data['last_name'];
+        
+        return $data;
     }
 }
