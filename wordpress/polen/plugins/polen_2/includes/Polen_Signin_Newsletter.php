@@ -71,6 +71,11 @@ class Polen_Signin_Newsletter
             wp_send_json_error( array( 'response' => 'Não foi possível completar a solicitação' ), 403 );
             wp_die();
         }
+
+        if( !filter_var( $email, FILTER_VALIDATE_EMAIL ) ) {
+            wp_send_json_error( array( 'response' => 'Email inválido' ), 403 );
+            wp_die();
+        }
     
         if( isset( $email ) && !empty( $email ) ){
             $newsletter = $this->set_email_to_newsletter( $email, $event, $page_source, $is_mobile );
