@@ -52,6 +52,9 @@
 								<div class="row mt-3 mt-md-4">
 									<div class="col-12 col-md-12 col-xl-8">
 										<input type="email" name="signin_newsletter" placeholder="Entre com o seu e-mail" class="form-control form-control-lg" />
+										<input type="hidden" name="page_source" value="landing-page"/>
+										<input type="hidden" name="is_mobile" value="<?= polen_is_mobile() ? '1' : '0'; ?>"/>
+										<input type="hidden" name="event" value="pre-signin"/>
 									</div>
 									<?php
 									$newsletter_signin_nonce = wp_create_nonce('news-signin');
