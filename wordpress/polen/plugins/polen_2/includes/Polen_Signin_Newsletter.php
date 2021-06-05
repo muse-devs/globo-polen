@@ -80,7 +80,7 @@ class Polen_Signin_Newsletter
         if( isset( $email ) && !empty( $email ) ){
             $newsletter = $this->set_email_to_newsletter( $email, $event, $page_source, $is_mobile );
             if( !empty( $newsletter ) ){
-                if( $newsletter == "Cadastrado com sucesso!") {
+                if( $newsletter == "Te enviamos um email com mais informações") {
                     wp_send_json_success( array( 'response' => $newsletter ), 201 );
                     wp_die();
                 } else {
@@ -107,7 +107,7 @@ class Polen_Signin_Newsletter
 
                 if( $inserted > 0 ){
                     //$this->export_occasion_json();
-                    return "Cadastrado com sucesso!";
+                    return "Te enviamos um email com mais informações";
                 }else{
                     return "Ocorreu um erro ao tentar cadastrar";
                 }
