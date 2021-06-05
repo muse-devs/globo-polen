@@ -52,9 +52,9 @@
 								<div class="row mt-3 mt-md-4">
 									<div class="col-12 col-md-12 col-xl-8">
 										<input type="email" name="signin_newsletter" placeholder="Entre com o seu e-mail" class="form-control form-control-lg" />
-										<input type="hidden" name="page_source" value="landing-page"/>
-										<input type="hidden" name="is_mobile" value="<?= polen_is_mobile() ? '1' : '0'; ?>"/>
-										<input type="hidden" name="event" value="pre-signin"/>
+										<input type="hidden" name="signin_newsletter_page_source" value="landing-page"/>
+										<input type="hidden" name="signin_newsletter_is_mobile" value="<?= polen_is_mobile() ? '1' : '0'; ?>"/>
+										<input type="hidden" name="signin_newsletter_event" value="pre-signin"/>
 									</div>
 									<?php
 									$newsletter_signin_nonce = wp_create_nonce('news-signin');
@@ -78,9 +78,10 @@
 				</div>
 				<div class="col-12 col-md-4 pb-4 pb-md-0 order-md-1 text-center text-md-right social">
 					<a href="#facebook"><?php Icon_Class::polen_icon_social("facebook"); ?></a>
+					<a href="#ticktok"><?php Icon_Class::polen_icon_social("facebook"); ?></a>
 					<a href="#instagram"><?php Icon_Class::polen_icon_social("instagram"); ?></a>
-					<a href="#linkedin"><?php Icon_Class::polen_icon_social("linkedin"); ?></a>
-					<a href="#twitter"><?php Icon_Class::polen_icon_social("twitter"); ?></a>
+					<!-- <a href="#linkedin"><?php Icon_Class::polen_icon_social("linkedin"); ?></a> -->
+					<!-- <a href="#twitter"><?php Icon_Class::polen_icon_social("twitter"); ?></a> -->
 				</div>
 				<div class="col-12 col-md-4 pt-3 pt-md-0 order-md-0 text-center">2021 @Polen</div>
 			</div><!-- .site-info -->
