@@ -1,5 +1,9 @@
 const home = function () {
 	const video_banner = document.getElementById("video-banner");
+	if(!video_banner) {
+		return;
+	}
+
 	let currentVideo = polIsSmall()
 		? home_video.mobile.class
 		: home_video.desktop.class;
