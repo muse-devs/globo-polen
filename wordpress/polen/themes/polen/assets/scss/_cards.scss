@@ -271,25 +271,11 @@
 			}
 		}
 	}
-	@include media-breakpoint-down(sm) {
-		.video-mobile {
-			display: block;
-		}
-		.video-desktop {
-			display: none;
-		}
-	}
-	@include media-breakpoint-up(md) {
+	@include media-breakpoint-up(sm) {
 		height: 269px;
 		max-width: none;
 		.video {
 			width: 100%;
-		}
-		.video-mobile {
-			display: none;
-		}
-		.video-desktop {
-			display: block;
 		}
 	}
 	@include media-breakpoint-only(md) {
