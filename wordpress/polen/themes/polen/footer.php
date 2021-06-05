@@ -62,6 +62,7 @@
 			<a href="#instagram"><?php Icon_Class::polen_icon_social("instagram"); ?></a>
 			<a href="#linkedin"><?php Icon_Class::polen_icon_social("linkedin"); ?></a>
 			<a href="#twitter"><?php Icon_Class::polen_icon_social("twitter"); ?></a>
+			<a href="#tiktok"><?php Icon_Class::polen_icon_social("tiktok"); ?></a>
 		</div>
 		<div class="col-md-12 pt-3 text-center">2021 @<?= get_bloginfo('name'); ?></div>
 	</div><!-- .site-info -->
