@@ -276,7 +276,7 @@ jQuery(document).ready(function () {
 					is_mobile: is_mobile.val(),
 				},
 				success: function (response) {
-					polMessage("Cadastro Efetuado", response.data.response);
+					polMessage("Seu email foi adicionado à lista", response.data.response);
 					email.val("");
 				},
 				complete: function () {
