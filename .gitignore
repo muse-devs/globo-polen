@@ -64,3 +64,5 @@ sql/*
 
 #ignorar arquivos temporários de estilos
 *.css.map
+
+wordpress/polen/plugins/woo-preview-emails
