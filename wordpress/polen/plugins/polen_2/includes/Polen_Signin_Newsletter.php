@@ -82,6 +82,8 @@ class Polen_Signin_Newsletter
             if( !empty( $newsletter ) ){
                 if( $newsletter == "Te enviamos um email com mais informações") {
                     wp_send_json_success( array( 'response' => $newsletter ), 201 );
+                    $email_service = new Polen_Email_Signin_Prerelease( $email );
+                    $email_service->trigger();
                     wp_die();
                 } else {
                     wp_send_json_error( array( 'response' => $newsletter ), 403 );
