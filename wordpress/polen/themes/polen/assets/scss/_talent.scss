@@ -13,7 +13,6 @@
 		height: 100%;
 		left: 0;
 		top: 0;
-		background: linear-gradient(360deg, #000 0%, rgba(0, 0, 0, 0) 100%);
 	}
 	img {
 		width: 100%;
@@ -39,9 +38,8 @@
 	padding: 3px 10px;
 	font-size: 12px;
 	font-weight: 400;
-	color: $light-50;
+	color: inherit;
 	border-radius: 2px;
-	background-color: $talent-bg-color;
 }
 
 .talent-carousel {
@@ -104,13 +102,13 @@
 
 .video-modal {
 	position: fixed;
-	padding: 15px 15px 120px;
+	padding: 15px;
 	display: none;
 	top: 0;
 	left: 50%;
 	transform: translate(-50%, 0);
-	width: 100vw;
-	height: 100vh;
+	width: 100%;
+	height: 100%;
 	box-sizing: border-box;
 	background-color: rgba($color: #000000, $alpha: 1);
 	overflow: auto;
@@ -130,6 +128,7 @@
 		border: none;
 		border-radius: 50%;
 		background-color: transparent;
+		text-shadow: 0px 0px 1px var(--dark);
 		z-index: 100;
 	}
 }
@@ -159,31 +158,41 @@
 		font-size: 16px;
 		font-weight: 600;
 		border-color: $light-50;
-		.bi, .icon {
+		.bi,
+		.icon {
 			margin-right: 10px;
+		}
+	}
+	.btn-outline-light {
+		font-size: 12px;
+		color: var(--light);
+		&:hover, &:active {
+			color: var(--dark);
+			background-color: var(--light);
 		}
 	}
 }
 
 .content-header {
 	.avatar {
-		padding-bottom: 100%;
+		// padding-bottom: 100%;
 		width: 100%;
-		height: 0;
-		border-radius: 50%;
-		background: no-repeat center/cover;
+		height: auto;
+		// border-radius: 50%;
+		// background: no-repeat center/cover;
 	}
 	.name {
 		margin: 0;
 		font-family: inherit;
 		font-size: 16px;
 		font-weight: 700;
+		color: var(--light);
 	}
 	.cat {
 		font-family: inherit;
 		font-size: 14px;
 		font-weight: 400;
-		color: $light-50;
+		color: var(--gray-light);
 	}
 	.url {
 		font-family: inherit;
@@ -201,13 +210,15 @@
 .skill-title {
 	font-size: 14px;
 	font-weight: 400;
-	color: $light-100;
+	color: inherit;
 }
 
 .skill-value {
 	font-size: 14px;
 	font-weight: 700;
-	.bi, .icon {
+	color: inherit;
+	.bi,
+	.icon {
 		padding-right: 3px;
 	}
 }
@@ -217,7 +228,7 @@
 .talent-order-modal {
 	.p {
 		margin: 0;
-		color: var(--light);
+		color: inherit;
 		&.small {
 			font-size: 16px;
 		}
@@ -230,6 +241,7 @@
 	}
 	.msg-header {
 		padding: 25px 20px;
+		color: var(--light);
 		background-color: $secondary;
 	}
 	.msg-body {
@@ -246,7 +258,7 @@
 	.time {
 		font-weight: 700;
 		line-height: 1.2;
-		color: var(--light);
+		color: inherit;
 	}
 	.value {
 		font-size: 24px;
@@ -267,11 +279,10 @@
 	width: 100%;
 	border-radius: 10px;
 	overflow: hidden;
-	background-color: $talent-bg-color;
+	// background-color: $talent-bg-color;
 	// box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 	@include media-breakpoint-down(sm) {
 		margin: 0;
-		background-color: $dark-100;
 	}
 	.header {
 		padding: 60px;
@@ -290,9 +301,6 @@
 		font-size: 16px;
 		font-weight: 400;
 	}
-	.border-bottom {
-		border-color: rgba($color: #ffffff, $alpha: 0.5) !important;
-	}
 }
 
 .talent-check-order {
@@ -300,7 +308,10 @@
 	width: 85px;
 	height: 85px;
 	border: none;
+	border-radius: 50%;
+	overflow: hidden;
 	background: no-repeat center/cover;
+	box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.25);
 	&.accept {
 		background-image: url(../img/accept.png);
 	}
@@ -316,9 +327,9 @@
 	border-radius: 8px;
 	// overflow: hidden;
 	box-sizing: border-box;
-	background-color: $secondary;
 	&.alt {
-		background-color: $talent-bg-color;
+		color: var(--light);
+		background-color: $secondary;
 	}
 	.header {
 		border-bottom: 1px dashed $light-25;
@@ -346,7 +357,7 @@
 		right: 0;
 		border: none;
 		border-radius: 50%;
-		color: $light-100;
+		color: var(--light);
 		background-color: $light-25;
 		&:active,
 		&:focus {
@@ -362,11 +373,14 @@
 	.name {
 		margin: 0;
 		font-family: inherit;
+		color: inherit;
 		font-size: 16px;
 		font-weight: 700;
 	}
-	.cat, .title {
+	.cat,
+	.title {
 		font-family: inherit;
+		color: inherit;
 		font-size: 12px;
 		font-weight: 400;
 		line-height: 14px;
@@ -374,6 +388,7 @@
 	.price {
 		margin: 0;
 		font-family: inherit;
+		color: inherit;
 		font-size: 24px;
 		line-height: 1;
 		font-weight: 700;
@@ -381,13 +396,17 @@
 	.value {
 		margin: 0;
 		font-family: inherit;
+		color: inherit;
 		font-size: 14px;
 		// line-height: 1.6;
 		font-weight: 700;
 	}
+	.order-title {
+		color: inherit;
+	}
 	.order-number {
 		font-size: 12px;
-		color: $light-100;
+		color: inherit;
 	}
 	.status {
 		padding: 0 10px;
@@ -395,9 +414,8 @@
 		font-family: inherit;
 		font-size: 10px;
 		text-align: center;
-		color: $light-50;
+		color: inherit;
 		border-radius: 2px;
-		background-color: $black;
 	}
 }
 

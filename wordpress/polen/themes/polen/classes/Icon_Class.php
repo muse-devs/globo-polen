@@ -154,6 +154,10 @@ class Icon_Class
 				$ret = '<i class="bi bi-whatsapp"></i>';
 				break;
 
+			case 'tiktok':
+				$ret = '<i class="icon icon-tiktok"></i>';
+				break;
+
 			default:
 				$ret = '';
 				break;

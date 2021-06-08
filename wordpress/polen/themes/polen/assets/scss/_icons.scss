@@ -122,20 +122,23 @@
 	@if $filename == star {
 		$char: "\E020";
 	}
-	@if $filename == trash {
+	@if $filename == tiktok {
 		$char: "\E021";
 	}
-	@if $filename == twitter {
+	@if $filename == trash {
 		$char: "\E022";
 	}
-	@if $filename == up-arrow {
+	@if $filename == twitter {
 		$char: "\E023";
 	}
-	@if $filename == video-camera {
+	@if $filename == up-arrow {
 		$char: "\E024";
 	}
-	@if $filename == whatsapp {
+	@if $filename == video-camera {
 		$char: "\E025";
+	}
+	@if $filename == whatsapp {
+		$char: "\E026";
 	}
 
 	@return $char;
@@ -247,6 +250,9 @@
 }
 .icon-star {
 	@include icon(star);
+}
+.icon-tiktok {
+	@include icon(tiktok);
 }
 .icon-trash {
 	@include icon(trash);

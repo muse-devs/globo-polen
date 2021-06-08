@@ -17,6 +17,8 @@
 defined( 'ABSPATH' ) || exit;
 
 use \Polen\includes\Polen_Talent;
+use \Polen\includes\Polen_Account;
+
 $user = wp_get_current_user();
 $polen_talent = new Polen_Talent;
 if( $polen_talent->is_user_talent( $user ) ) {
@@ -34,21 +36,20 @@ do_action( 'woocommerce_before_edit_account_form' ); ?>
 	</div>
 </div>
 
-<?php
-if (is_plugin_active('wp-user-avatar/wp-user-avatar.php')) {
-	global $current_user;
+<form class="woocommerce-EditAccountForm edit-account mt-3" action="" method="post" <?php do_action( 'woocommerce_edit_account_form_tag' ); ?> enctype="multipart/form-data" >
+	<input type="hidden" name="wpua_action" value="update" />
+	<input type="hidden" name="user_id" id="user_id" value="<?php echo esc_attr($user->ID); ?>" />
+	<?php wp_nonce_field('update-user_'.$user->ID); ?>
 
-	//echo get_wp_user_avatar(get_current_user_id());
+	<?php
+	if (is_plugin_active('wp-user-avatar/wp-user-avatar.php')) {	
+		$polen_account = new Polen_Account;
 
-	//$profile = null;
-	//$wpua = new WP_User_Avatar();
-	//echo $wpua->wpua_core_show_user_profile($profile);
-
-	echo do_shortcode( '[avatar_upload]');
-	//do_action('edit_user_avatar', wp_get_current_user());
-} ?>
-
-<form class="woocommerce-EditAccountForm edit-account mt-3" action="" method="post" <?php do_action( 'woocommerce_edit_account_form_tag' ); ?> >
+		$wpuavatar = new WP_User_Avatar();
+		$wpuavatar->wpua_media_upload_scripts();
+		$polen_account->polen_core_show_user_profile($user);
+	}
+	?>
 
 	<?php do_action( 'woocommerce_edit_account_form_start' ); ?>
 

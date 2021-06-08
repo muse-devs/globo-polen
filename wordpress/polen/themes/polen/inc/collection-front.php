@@ -66,7 +66,7 @@ function _polen_get_info_talents_by_args( array $args )
  * @param int quantity
  * @return array
  */
-function polen_get_new_talents(int $quantity = 4)
+function polen_get_new_talents( int $quantity = 4 )
 {
     $args = [
         'numberposts' => $quantity,

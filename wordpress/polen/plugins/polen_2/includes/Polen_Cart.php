@@ -27,7 +27,7 @@ class Polen_Cart
         $cart_item = $cart[$cart_id];
         if( isset( $_POST['polen_data_name'] ) && !empty( $_POST['polen_data_name'] ) ){
             $item_name = $_POST['polen_data_name'];
-            $item_data = $_POST['polen_data_value'];
+            $item_data = isset( $_POST['polen_data_value'] ) ? $_POST['polen_data_value'] : '';
             $cart_item[$item_name] = $item_data;
         }
 

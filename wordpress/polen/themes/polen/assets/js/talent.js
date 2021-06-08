@@ -94,6 +94,7 @@ function hideModal(e) {
 	changeHash();
 	// killVideo();
 	modal.classList.remove("show");
+	video_box.innerHTML = "";
 }
 
 function handleCopyVideoUrl(id) {

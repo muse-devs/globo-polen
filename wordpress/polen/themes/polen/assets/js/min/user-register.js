@@ -1,0 +1,1 @@
+"use strict";function polen_onSubmit(e){document.querySelector("form.register").submit()}

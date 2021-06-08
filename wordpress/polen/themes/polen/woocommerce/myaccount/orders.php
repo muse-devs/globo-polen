@@ -4,7 +4,8 @@
  */
 defined('ABSPATH') || exit;
 
-use \Polen\Includes\{ Polen_Order, Polen_Talent, Polen_Video_Info};
+use \Polen\Includes\{ Polen_Order, Polen_Talent, Polen_Video_Info };
+use \Polen\Includes\Cart\Polen_Cart_Item_Factory;
 
 $polen_talent = new Polen_Talent();
 $logged_user = wp_get_current_user();
@@ -26,32 +27,26 @@ if( $polen_talent->is_user_talent( $logged_user ) ) {
 		foreach ($customer_orders->orders as $customer_order) {
 			$order      = wc_get_order($customer_order); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
 			$item_count = $order->get_item_count() - $order->get_item_count_refunded();
-			$product_name = '';
-			$product_id = '';
 			$video_info = Polen_Video_Info::get_by_order_id( $order->get_id() );
+			$cart_item  = Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
+			$talent_id  = $cart_item->get_talent_id();
+			$item       = $cart_item->get_product();
+			$item_id    = $cart_item->get_product_id();
 			$is_vimeo_process_complete = false;
+
 			if( !empty( $video_info ) ) {
 				$is_vimeo_process_complete = $video_info->is_vimeo_process_complete();
-			}
-
-			foreach ($order->get_items() as $item_id => $item) {
-				$product_name = $item->get_name();
-				$product_id = $item->get_product_id();
-				break;
 			}
 		?>
 			<div class="row mt-3">
 				<div class="col-12">
-					<div class="talent-card alt">
+					<div class="box-color talent-card">
 						<div class="row px-3">
 							<div class="col-12">
 								<div class="row d-flex justify-content-start">
 									<div>
-										<div class="image-cropper d-block">
-											<?php
-											$thumbnail = get_the_post_thumbnail_url($product_id, 'post-thumbnail');
-											?>
-											<img src="<?php echo $thumbnail; ?>" class="profile-pic">
+										<div class="image-cropper">
+											<?php echo polen_get_avatar( $talent_id ); ?>
 										</div>
 									</div>
 									<div class="col">
@@ -83,7 +78,7 @@ if( $polen_talent->is_user_talent( $logged_user ) ) {
 										$text_button = "Ver Video";
 										if( !$is_vimeo_process_complete ) {
 											$button_enabled = "disabled";
-											$text_button = "Video sendo processado aguarde.";
+											$text_button = "Video sendo processado aguarde";
 										}
 									?>
 										<a href="<?php echo polen_get_link_watch_video_by_order_id( $order->get_order_number() ); ?>" class="btn btn-primary btn-lg btn-block <?= $button_enabled; ?>">

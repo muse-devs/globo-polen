@@ -1,23 +1,33 @@
 <?php
 
+use Polen\Includes\Debug;
+
 function polen_front_get_banner()
 {
+	$mobile_video = array(
+		"poster" => TEMPLATE_URI . "/assets/img/video_poster1.jpg",
+		"video" => TEMPLATE_URI . "/assets/video/home1.m4v",
+		"class" => "video-mobile"
+	);
+	$desktop_video = array(
+		"poster" => TEMPLATE_URI . "/assets/img/video_poster2.jpg",
+		"video" => TEMPLATE_URI . "/assets/video/home2.m4v",
+		"class" => "video-desktop"
+	);
 ?>
 	<section class="top-banner mb-4">
-		<video class="video video-mobile" autoplay muted loop playsinline poster="<?= TEMPLATE_URI; ?>/assets/img/video_poster1.jpg">
-			<source src="<?= TEMPLATE_URI; ?>/assets/video/home1.m4v" type="video/mp4">
-			<!-- <source src="movie.ogg" type="video/ogg"> -->
+		<video id="video-banner" class="video" autoplay muted loop playsinline poster="<?php echo polen_is_mobile() ? $mobile_video['poster'] : $desktop_video['poster']; ?>">
+			<source src="<?php echo polen_is_mobile() ? $mobile_video['video'] : $desktop_video['video']; ?>" type="video/mp4">
 		</video>
-		<?php if (!polen_is_mobile()) : ?>
-			<video class="video video-desktop" autoplay muted loop playsinline poster="<?= TEMPLATE_URI; ?>/assets/img/video_poster2.jpg">
-				<source src="<?= TEMPLATE_URI; ?>/assets/video/home2.m4v" type="video/mp4">
-				<!-- <source src="movie.ogg" type="video/ogg"> -->
-			</video>
-		<?php endif; ?>
 		<div class="content">
 			<h2 class="title">Presenteie e<br />surpreenda com vídeos personalizados.</h2>
-			<!-- <a href="#como" class="player-button-link">Como funciona</a> -->
 		</div>
+		<script>
+			const home_video = {
+				mobile: <?php echo json_encode($mobile_video); ?>,
+				desktop: <?php echo json_encode($desktop_video); ?>
+			}
+		</script>
 	</section>
 <?php
 }
@@ -198,7 +208,7 @@ function polen_front_get_tutorial()
 				<div class="row">
 					<div class="col-4">
 						<div class="row">
-							<div class="col-12 text-center icon"><?php Icon_Class::polen_icon_phone(); ?></div>
+							<div class="col-12 text-center icon subtitle"><?php Icon_Class::polen_icon_phone(); ?></div>
 							<div class="col-12 text-center mt-2">
 								<p>Peça o vídeo para o seu ídolo</p>
 							</div>
@@ -206,7 +216,7 @@ function polen_front_get_tutorial()
 					</div>
 					<div class="col-4">
 						<div class="row">
-							<div class="col-12 text-center icon"><?php Icon_Class::polen_icon_camera_video(); ?></div>
+							<div class="col-12 text-center icon subtitle"><?php Icon_Class::polen_icon_camera_video(); ?></div>
 							<div class="col-12 text-center mt-2">
 								<p>Receba seu vídeo</p>
 							</div>
@@ -214,7 +224,7 @@ function polen_front_get_tutorial()
 					</div>
 					<div class="col-4">
 						<div class="row">
-							<div class="col-12 text-center icon"><?php Icon_Class::polen_icon_hand_thumbs_up(); ?></div>
+							<div class="col-12 text-center icon subtitle"><?php Icon_Class::polen_icon_hand_thumbs_up(); ?></div>
 							<div class="col-12 text-center mt-2">
 								<p>Compartilhe com todo mundo</p>
 							</div>
@@ -227,24 +237,40 @@ function polen_front_get_tutorial()
 <?php
 }
 
-function polen_get_avatar($url, $size = "md")
+/**
+ * Funcao que retorna ou uma tag IMG ou um SPAN com as iniciais
+ * @param int
+ * @param string
+ * @return IMG|SPAN
+ */
+function polen_get_avatar($user_id, $size = 'polen-square-crop-sm')
 {
-	$url = isset($url) && !empty($url) ? $url : TEMPLATE_URI . '/assets/img/avatar.png';
-	$classes = !empty($size) ? " avatar-" . $size : "";
-?>
-	<div class="avatar<?php echo $classes; ?>" style="background-image: url(<?php echo $url ?>);"></div>
-<?php
+	if (is_plugin_active('wp-user-avatar/wp-user-avatar.php') && has_wp_user_avatar($user_id)) {
+		return get_wp_user_avatar($user_id, $size);
+	} else {
+		$user = get_user_by('id', $user_id);
+		$initials_name = polen_get_initials_name_by_user($user);
+		return '<span>' . $initials_name   . '</span>';
+	}
 }
+
 
 function polen_talent_promo_card($talent)
 {
+	global $product;
 ?>
 	<div class="video-promo-card">
-		<div class="card row">
+		<div class="box-color card row">
 			<div class="col-12 col-md-12 d-flex flex-column justify-content-center align-items-center text-center p-2">
-				<?php polen_get_avatar(get_avatar_url($talent->user_id)); ?>
+				<div class="image-cropper">
+					<?php echo polen_get_avatar($talent->user_id, 'polen-square-crop-sm'); ?>
+				</div>
 				<p class="mt-2">E aí, ficou com vontade de ter um vídeo do <?php echo $talent->nome; ?>?</p>
-				<a href="#pedirvideo" class="btn btn-outline-light btn-lg">Peça o seu vídeo</a>
+				<?php if ($product->is_in_stock()) : ?>
+					<a href="#pedirvideo" class="btn btn-outline-light btn-lg">Peça o seu vídeo</a>
+				<?php else : ?>
+					<a href="#pedirvideo" class="btn btn-outline-light btn-lg disabled">Indisponível</a>
+				<?php endif; ?>
 			</div>
 		</div>
 	</div>
@@ -274,7 +300,8 @@ function polen_get_talent_video_buttons($talent, $video_url, $video_download, $h
 	<?php endif; ?>
 	<button onclick="copyToClipboard('<?php echo $video_url; ?>')" class="btn btn-outline-light btn-lg btn-block share-link mb-4"><?php Icon_Class::polen_icon_clipboard(); ?>Copiar Link</button>
 	<?php if (!empty($video_download)) : ?>
-		<a href="#" onclick="downloadClick_handler(event)" data-download="<?= $hash; ?>" class="btn btn-outline-light btn-lg btn-block share-link mb-4"><?php Icon_Class::polen_icon_download(); ?>Download</a>
+		<?php $video_download_nonce = wp_create_nonce('generate-download-video-url'); ?>
+		<a href="#" onclick="downloadClick_handler(event)" data-download="<?= $hash; ?>" data-nonce="<?= $video_download_nonce; ?>" class="btn btn-outline-light btn-lg btn-block share-link mb-4"><?php Icon_Class::polen_icon_download(); ?>Download</a>
 	<?php endif; ?>
 <?php
 }
@@ -283,8 +310,8 @@ function polen_video_icons($user_id, $iniciais)
 {
 ?>
 	<div class="video-icons">
-		<figure class="image-cropper small">
-			<?php echo get_avatar($user_id); ?>
+		<figure class="image-cropper color small">
+			<?php echo polen_get_avatar($user_id, 'polen-square-crop-sm'); ?>
 		</figure>
 		<div class="text-cropper small"><?php echo $iniciais; ?></div>
 	</div>
@@ -309,7 +336,7 @@ function polen_front_get_talent_videos($talent)
 			'image' =>  $item->vimeo_thumbnail,
 			'video' => $item->vimeo_link,
 			'hash' => $item->hash,
-			'initials' => strtoupper(substr($cart_item->get_name_to_video(), 0, 2)),
+			'initials' => polen_get_initials_name($cart_item->get_name_to_video()),
 		];
 	}
 
@@ -372,6 +399,8 @@ function polen_get_video_player($talent, $video, $user_id)
 							var videoPlayer = new Vimeo.Player("polen-video", {
 								url: "<?php echo $video->vimeo_link; ?>",
 								autoplay: true,
+								muted: <?= polen_is_mobile() ? "true" : "false"; ?>,
+								loop: true,
 								width: document.getElementById("polen-video").offsetWidth,
 							});
 						})
@@ -380,11 +409,15 @@ function polen_get_video_player($talent, $video, $user_id)
 				<div class="content col-md-6 mt-4">
 					<header class="row content-header">
 						<div class="col-3">
-							<?php echo polen_get_avatar(get_avatar_url($talent->user_id));  ?>
+							<a href="<?php echo $talent->talent_url; ?>" class="no-underline">
+								<span class="image-cropper">
+									<?php echo polen_get_avatar($talent->user_id, "polen-square-crop-lg"); ?>
+								</span>
+							</a>
 						</div>
 						<div class="col-9">
-							<h4 class="name"><?php echo $talent->nome; ?></h4>
-							<h5 class="cat my-2"><?php echo $talent->profissao; ?></h5>
+							<h4 class="m-0"><a href="<?php echo $talent->talent_url; ?>" class="name"><?php echo $talent->nome; ?></a></h4>
+							<h5 class="m-0"><a href="<?= polen_get_url_category_by_order_id($video->order_id); ?>" class="d-block my-2 cat"><?php echo $talent->profissao; ?></a></h5>
 							<a href="<?php echo $video_url; ?>" class="url"><?php echo $video_url; ?></a>
 						</div>
 					</header>
@@ -406,7 +439,7 @@ function polen_get_video_player($talent, $video, $user_id)
 function polen_get_talent_card($talent)
 {
 ?>
-	<div class="talent-card">
+	<div class="talent-card alt">
 		<header class="row pb-3 header">
 			<div class="col-md-12 d-flex align-items-center">
 				<div class="avatar avatar-sm" style="background-image: url(<?php echo isset($talent["avatar"]) ? $talent["avatar"] : TEMPLATE_URI . '/assets/img/avatar.png';  ?>)"></div>
@@ -665,7 +698,7 @@ function polen_get_order_flow_layout($array_status)
 			<ul class="order-flow<?php echo $class; ?>">
 				<?php foreach ($array_status as $key => $value) : ?>
 					<li class="item <?php echo "item" . $key; ?> <?php echo $value['status']; ?>">
-						<span class="status">
+						<span class="background status">
 							<?php Icon_Class::polen_icon_check_o(); ?>
 							<?php Icon_Class::polen_icon_exclamation_o(); ?>
 						</span>
@@ -686,5 +719,38 @@ function polen_player_video_modal_ajax_invalid_hash()
 {
 ?>
 	<h4>Conteúdo indisponível</h4>
+<?php
+}
+
+
+/**
+ * Criar form para cadastro da newsletter ou outro lugar
+ * no site onde pode-se cadastrar no table da newsletter
+ * @param string $newsletter
+ * @return HTML
+ */
+function polen_form_signin_newsletter(string $event = 'newsletter')
+{
+?>
+
+	<div id="signin-newsletter" class="col-md-6 mt-4 order-md-2">
+		<h5 class="title">Junte-se à nossa lista</h5>
+		<p class="description">Seja o primeiro a saber sobre as estrelas mais recentes e as melhores ofertas no Muse</p>
+		<div class="row">
+			<div class="col-md-8 mb-2 mb-md-0">
+				<input type="email" name="signin_newsletter" placeholder="Entre com o seu e-mail" class="form-control form-control-lg" />
+				<input type="hidden" name="signin_newsletter_page_source" value="<?= filter_input(INPUT_SERVER, 'REQUEST_URI'); ?>" />
+				<input type="hidden" name="signin_newsletter_event" value="<?= $event; ?>" />
+				<input type="hidden" name="signin_newsletter_is_mobile" value="<?= polen_is_mobile() ? "1" : "0"; ?>" />
+			</div>
+			<?php
+			$newsletter_signin_nonce = wp_create_nonce('news-signin');
+			?>
+			<div class="col-md-4 mt-2 mt-md-0 d-md-flex align-items-md-center">
+				<button class="signin-newsletter-button btn btn-outline-light btn-lg btn-block" code="<?php echo $newsletter_signin_nonce; ?>">Enviar</button>
+			</div>
+			<div class="col-md-8 mb-2 mb-md-0 small signin-response"></div>
+		</div>
+	</div>
 <?php
 }
