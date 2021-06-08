@@ -7,6 +7,10 @@ defined( 'ABSPATH' ) || exit;
 
 do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
 
+<p class="img_wrap">
+	<img src="<?php echo get_template_directory_uri() . "/assets/img/email/boas-vindas.png"; ?>" alt="Menina segurando celular">
+</p>
+
 <?php /* translators: %s: Customer username */ ?>
 <p><?php printf( esc_html__( 'Hi %s,', 'woocommerce' ), esc_html( $user_login ) ); ?></p>
 <?php /* translators: %1$s: Site title, %2$s: Username, %3$s: My account link */ ?>
@@ -23,5 +27,11 @@ do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
 if ( $additional_content ) {
 	echo wp_kses_post( wpautop( wptexturize( $additional_content ) ) );
 }
+
+?>
+	<p class="btn_wrap">
+		<a href="<?php echo home_url(); ?>" class="btn" target="_blank">Ir para o <?= get_bloginfo('name'); ?></a>
+	</p>
+<?php
 
 do_action( 'woocommerce_email_footer', $email );

@@ -154,6 +154,12 @@
 				font-size: 11px;
 			}
 		}
+		.donate-badge {
+			position: absolute;
+			top: 10px;
+			left: 11px;
+			z-index: 3;
+		}
 	}
 	&.responsive {
 		margin-right: 15px;
@@ -655,5 +661,33 @@
 	.icon,
 	.bi {
 		font-size: 24px;
+	}
+}
+
+.donate-badge {
+	padding: 1px 8px;
+	font-size: 10px;
+	color: var(--dark);
+	border-radius: 60px;
+	background-color: var(--light);
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	&.alt {
+		box-shadow: -1px 2px 4px rgba(0, 0, 0, 0.1);
+	}
+	.icon {
+		font-size: 10px;
+		color: #ff4040;
+	}
+}
+
+.donation-box {
+	.icon {
+		font-size: 28px;
+	}
+	.image {
+		img {
+			width: auto;
+			height: 40px;
+		}
 	}
 }
