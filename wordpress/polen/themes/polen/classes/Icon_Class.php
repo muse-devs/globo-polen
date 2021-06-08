@@ -130,6 +130,11 @@ class Icon_Class
 		echo '<i class="icon icon-trash"></i>';
 	}
 
+	public static function polen_icon_donate()
+	{
+		echo '<i class="icon icon-donate"></i>';
+	}
+
 	public static function polen_icon_social($ico)
 	{
 		$ret = '';
