@@ -1,8 +1,11 @@
 <?php
 
 namespace Polen\Includes;
+
 use \Polen\Includes\Polen_Newsletter_Display;
 
+include_once WP_PLUGIN_DIR . '/woocommerce/includes/abstracts/abstract-wc-settings-api.php';
+include_once WP_PLUGIN_DIR . '/woocommerce/includes/emails/class-wc-email.php';
 class Polen_Signin_Newsletter
 {
     public function __construct( $static = false ) {
@@ -81,9 +84,10 @@ class Polen_Signin_Newsletter
             $newsletter = $this->set_email_to_newsletter( $email, $event, $page_source, $is_mobile );
             if( !empty( $newsletter ) ){
                 if( $newsletter == "Te enviamos um email com mais informações") {
-                    wp_send_json_success( array( 'response' => $newsletter ), 201 );
+                    //Enviar email para o recem cadastrado
                     $email_service = new Polen_Email_Signin_Prerelease( $email );
                     $email_service->trigger();
+                    wp_send_json_success( array( 'response' => $newsletter ), 201 );
                     wp_die();
                 } else {
                     wp_send_json_error( array( 'response' => $newsletter ), 403 );
@@ -95,6 +99,7 @@ class Polen_Signin_Newsletter
             wp_die();
         }
     }
+
 
     /**
      * Insert email to newsletter table
