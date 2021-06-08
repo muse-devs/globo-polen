@@ -46,7 +46,7 @@ foreach ( $order->get_items() as $item_id => $item ) {
 	<hr style="margin: 0 -16px 6px;border-style: dashed; opacity: 0.3;">
 	<footer>
 		<p class="card_subtitle">Você pagou</p>
-		<span class="card_price"><?php echo $talent['price_formatted']; ?></span>
+		<span class="card_price"><?php echo $order->get_formatted_order_total(); ?></span>
 	</footer>
 </div>
 
