@@ -68,7 +68,7 @@ $donate_text = get_post_meta( get_the_ID(), '_description_charity', true );
 			<?php if ($donate) : ?>
 				<div class="row">
 					<div class="col-md-12 mb-1">
-						<?php polen_donate_badge("100% do cachê doado para " . $donate_name, false); ?>
+						<?php polen_donate_badge("100% DO CACHÊ DOADO PARA " . strtoupper($donate_name), false); ?>
 					</div>
 				</div>
 			<?php endif; ?>
