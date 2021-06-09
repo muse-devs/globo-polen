@@ -25,7 +25,7 @@
 						}
 					?>
 
-					<div class="mt-4 col-md-4 order-md-1">
+					<div class="mt-4 <?php echo is_front_page() ? "col-md-4" : "col-md-8" ?> order-md-1">
 						<h5 class="title"><?= get_bloginfo('name'); ?></h5>
 							<?php
 								$menu = wp_nav_menu(

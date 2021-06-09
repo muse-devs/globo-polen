@@ -106,7 +106,7 @@ body {
 }
 
 #template_footer #credit p {
-	margin: 0 0 16px;
+	margin: 0 0 10px;
 }
 
 #body_content {
@@ -142,7 +142,7 @@ body {
 }
 
 #body_content p {
-	margin: 0 0 16px;
+	margin: 0 0 10px;
 }
 
 #body_content_inner {
@@ -254,6 +254,7 @@ p {
 	font-size: 16px;
 	line-height: 2;
 	font-weight: 400;
+	color: <?php echo esc_attr( $base_text ); ?>;
 }
 
 a {
@@ -325,6 +326,28 @@ img {
 .order_number {
 	font-size: 24px;
 	font-weight: 700;
+}
+
+.details_title {
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 1;
+	color: <?php echo esc_attr( $text ); ?>;
+	opacity: 0.4;
+}
+
+.details_value {
+	margin: 0;
+	font-size: 32px;
+	font-weight: 700;
+	color: <?php echo esc_attr( $text ); ?>;
+}
+
+.details_value_small {
+	margin: 0;
+	font-size: 21px;
+	font-weight: 500;
+	color: <?php echo esc_attr( $text ); ?>;
 }
 
 <?php
