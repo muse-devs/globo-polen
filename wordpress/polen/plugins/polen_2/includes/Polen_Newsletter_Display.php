@@ -100,6 +100,11 @@ class Polen_Newsletter_Display extends \WP_List_Table
             'email' => [ 'email', true ]
         ];
     }
+
+    public function get_hiden_column()
+    {
+        return [];
+    }
     
     private function get_orderby()
     {
