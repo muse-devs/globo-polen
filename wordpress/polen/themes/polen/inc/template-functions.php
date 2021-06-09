@@ -84,7 +84,7 @@ function polen_get_url_my_account()
  */
 function polen_get_url_my_orders()
 {
-	return polen_get_url_my_account() . "/orders";
+	return polen_get_url_my_account() . "orders";
 }
 
 

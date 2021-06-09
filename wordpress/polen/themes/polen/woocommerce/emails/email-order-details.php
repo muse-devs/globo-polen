@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Order details table shown in emails.
  *
@@ -15,78 +16,81 @@
  * @version 3.7.0
  */
 
-defined( 'ABSPATH' ) || exit;
+defined('ABSPATH') || exit;
 
-$text_align = is_rtl() ? 'right' : 'left';
-
-do_action( 'woocommerce_email_before_order_table', $order, $sent_to_admin, $plain_text, $email ); ?>
-
-<?php /*
-<h2>
-	<?php
-	if ( $sent_to_admin ) {
-		$before = '<a class="link" href="' . esc_url( $order->get_edit_order_url() ) . '">';
-		$after  = '</a>';
-	} else {
-		$before = '';
-		$after  = '';
-	}
-	// translators: %s: Order ID.
-	echo wp_kses_post( $before . sprintf( __( '[Order #%s]', 'woocommerce' ) . $after . ' (<time datetime="%s">%s</time>)', $order->get_order_number(), $order->get_date_created()->format( 'c' ), wc_format_datetime( $order->get_date_created() ) ) );
-	?>
-</h2>
-*/ ?>
+$item = Polen\Includes\Cart\Polen_Cart_Item_Factory::polen_cart_item_from_order($order);
+?>
 
 <div style="margin-bottom: 40px;">
-	<table class="td" cellspacing="0" cellpadding="6" style="width: 100%; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;" border="1">
+	<table cellspacing="0" cellpadding="0" width="100%">
 		<thead>
 			<tr>
-				<th class="td" scope="col" style="text-align:<?php echo esc_attr( $text_align ); ?>;"><?php esc_html_e( 'Product', 'woocommerce' ); ?></th>
-				<th class="td" scope="col" style="text-align:<?php echo esc_attr( $text_align ); ?>;"><?php esc_html_e( 'Quantity', 'woocommerce' ); ?></th>
-				<th class="td" scope="col" style="text-align:<?php echo esc_attr( $text_align ); ?>;"><?php esc_html_e( 'Price', 'woocommerce' ); ?></th>
+				<td width="33.3333333%">&nbsp;</td>
+				<td width="33.3333333%">&nbsp;</td>
+				<td width="33.3333333%">&nbsp;</td>
 			</tr>
 		</thead>
 		<tbody>
-			<?php
-			echo wc_get_email_order_items( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				$order,
-				array(
-					'show_sku'      => $sent_to_admin,
-					'show_image'    => false,
-					'image_size'    => array( 32, 32 ),
-					'plain_text'    => $plain_text,
-					'sent_to_admin' => $sent_to_admin,
-				)
-			);
-			?>
+			<tr>
+				<td>
+					<p class="details_title">Valor</p>
+					<span class="details_value"><?php echo $order->get_formatted_order_total(); ?></span>
+				</td>
+				<td>
+					<p class="details_title">Tempo estimado</p>
+					<span class="details_value">-</span>
+				</td>
+				<td>
+					<p class="details_title">Válido por</p>
+					<span class="details_value">-</span>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<span class="details_line"></span>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p class="details_title">Vídeo de</p>
+					<span class="details_value"><?php echo $item->get_offered_by(); ?></span>
+				</td>
+				<td valign="center">
+					<img src="<?php echo get_template_directory_uri(); ?>/assets/img/email/arrow.png ?>" alt="Seta para a direita">
+				</td>
+				<td>
+					<p class="details_title">Para</p>
+					<span class="details_value"><?php echo $item->get_name_to_video(); ?></span>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<span class="details_line"></span>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<p class="details_title">Ocasião</p>
+					<span class="details_value_small"><?php echo $item->get_video_category(); ?></span>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<span class="details_line"></span>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<p class="details_title">e-mail de contato</p>
+					<span class="details_value_small"><?php echo $item->get_email_to_video(); ?></span>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<p class="details_title">Instruções</p>
+					<span class="details_value_small"><?php echo $item->get_instructions_to_video(); ?></span>
+				</td>
+			</tr>
 		</tbody>
-		<tfoot>
-			<?php
-			$item_totals = $order->get_order_item_totals();
-
-			if ( $item_totals ) {
-				$i = 0;
-				foreach ( $item_totals as $total ) {
-					$i++;
-					?>
-					<tr>
-						<th class="td" scope="row" colspan="2" style="text-align:<?php echo esc_attr( $text_align ); ?>; <?php echo ( 1 === $i ) ? 'border-top-width: 4px;' : ''; ?>"><?php echo wp_kses_post( $total['label'] ); ?></th>
-						<td class="td" style="text-align:<?php echo esc_attr( $text_align ); ?>; <?php echo ( 1 === $i ) ? 'border-top-width: 4px;' : ''; ?>"><?php echo wp_kses_post( $total['value'] ); ?></td>
-					</tr>
-					<?php
-				}
-			}
-			if ( $order->get_customer_note() ) {
-				?>
-				<tr>
-					<th class="td" scope="row" colspan="2" style="text-align:<?php echo esc_attr( $text_align ); ?>;"><?php esc_html_e( 'Note:', 'woocommerce' ); ?></th>
-					<td class="td" style="text-align:<?php echo esc_attr( $text_align ); ?>;"><?php echo wp_kses_post( nl2br( wptexturize( $order->get_customer_note() ) ) ); ?></td>
-				</tr>
-				<?php
-			}
-			?>
-		</tfoot>
 	</table>
 </div>
-
-<?php do_action( 'woocommerce_email_after_order_table', $order, $sent_to_admin, $plain_text, $email ); ?>
