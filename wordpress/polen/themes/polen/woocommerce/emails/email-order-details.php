@@ -38,11 +38,11 @@ $item = Polen\Includes\Cart\Polen_Cart_Item_Factory::polen_cart_item_from_order(
 				</td>
 				<td>
 					<p class="details_title">Tempo estimado</p>
-					<span class="details_value">2 min</span>
+					<span class="details_value">-</span>
 				</td>
 				<td>
 					<p class="details_title">Válido por</p>
-					<span class="details_value">30:00h</span>
+					<span class="details_value">-</span>
 				</td>
 			</tr>
 			<tr>
