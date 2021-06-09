@@ -49,7 +49,7 @@ function polen_front_get_card($item, $size = "small")
 		$image[] = '';
 	}
 
-	$donate = get_post_meta( get_the_ID(), '_is_charity', true );
+	$donate = get_post_meta( $item['ID'], '_is_charity', true );
 
 ?>
 	<div class="<?= $class; ?>">
