@@ -787,10 +787,10 @@ function polen_front_get_donation_box(string $img = "", string $text = "")
 		<div class="col-md-12">
 			<div class="box-round py-4 px-4">
 				<div class="row">
-					<div class="col-2">
+					<div class="col-2 col-md-1 text-center">
 						<?php Icon_Class::polen_icon_donate(); ?>
 					</div>
-					<div class="col-10">
+					<div class="col-10 col-md-11">
 						<figure class="image">
 							<img src="<?php echo $img; ?>" alt="Logo da empresa de doação">
 						</figure>
