@@ -40,9 +40,16 @@ $Talent_Fields = $Talent_Fields->get_vendor_data($post->post_author);
 $terms = wp_get_object_terms(get_the_ID(), 'product_tag');
 
 $bg_image = wp_get_attachment_image_src($Talent_Fields->cover_image_id, "large")[0];
+
+$donate = false;
+$donate_name = "GRAACC";
+$donate_image = "https://kmsolidario.com.br/img/institutions/graacc.png";
+$donate_text = "Todas as doações desta semana vão diretamente para a instituição. Melhore a qualidade de vida de pacientes com câncer e fornecer cuidados, educação
+e oportunidades para crianças e famílias necessitadas.";
+
 ?>
 
-<?php if($bg_image) : ?>
+<?php if ($bg_image) : ?>
 	<figure class="image-bg">
 		<img src="<?php echo $bg_image; ?>" alt="<?php echo $Talent_Fields->nome; ?>">
 	</figure>
@@ -56,8 +63,17 @@ $bg_image = wp_get_attachment_image_src($Talent_Fields->cover_image_id, "large")
 	<!-- Tags -->
 	<div class="row">
 		<div class="col-md-12">
-			<h1 class="talent-name text-truncate mb-3" title="<?= get_the_title(); ?>"><?= get_the_title(); ?></h1>
-			<div class="row">
+			<h1 class="talent-name text-truncate" title="<?= get_the_title(); ?>"><?= get_the_title(); ?></h1>
+			<!-- Se for doação -->
+			<?php if ($donate) : ?>
+				<div class="row">
+					<div class="col-md-12 mb-1">
+						<?php polen_donate_badge("Doação para " . $donate_name, false); ?>
+					</div>
+				</div>
+			<?php endif; ?>
+			<!-- /------------ -->
+			<div class="row mt-3">
 				<div class="col-md-12">
 					<?php if (count($terms) > 0) : ?>
 						<?php foreach ($terms as $k => $term) : ?>
@@ -75,14 +91,19 @@ $bg_image = wp_get_attachment_image_src($Talent_Fields->cover_image_id, "large")
 			<!--button class="btn btn-primary btn-lg btn-block btn-get-video">Pedir vídeo R$ 200</button-->
 		</div>
 		<!-- Card dos Reviews -->
-		<?php polen_card_talent_reviews_order( $post, $Talent_Fields ); ?>
+		<?php polen_card_talent_reviews_order($post, $Talent_Fields); ?>
 	</div>
+
+	<!-- Doação -->
+	<?php $donate ?
+		polen_front_get_donation_box($donate_image, $donate_text) :
+		null; ?>
 
 	<!-- Como funciona? -->
 	<?php polen_front_get_tutorial(); ?>
 
 	<!-- Produtos Relacionados -->
-	<?php polen_box_related_product_by_product_id( get_The_ID() ); ?>
+	<?php polen_box_related_product_by_product_id(get_The_ID()); ?>
 
 </div>
 

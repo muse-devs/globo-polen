@@ -100,6 +100,11 @@ class Polen_Newsletter_Display extends \WP_List_Table
             'email' => [ 'email', true ]
         ];
     }
+
+    public function get_hiden_column()
+    {
+        return [];
+    }
     
     private function get_orderby()
     {
@@ -115,7 +120,7 @@ class Polen_Newsletter_Display extends \WP_List_Table
     
     public function column_email( $item )
     {
-        return sprintf( '%1$s %2$s', $item->email, $this->row_actions( $actions, true ) );
+        return sprintf( '%1$s', $item->email );
     }
     
     public function column_created_at($param)
@@ -127,7 +132,7 @@ class Polen_Newsletter_Display extends \WP_List_Table
     {
         $page = filter_input( INPUT_GET, 'page' );
         $delete_nonce = wp_create_nonce( 'polen_delete_email' );
-         $actions = [
+        $actions = [
             'delete' => sprintf('<a href="?page=%s&action=%s&id=%s&_wpnonce=%s">Apagar', $page, 'delete', $item->id, $delete_nonce )
         ];
         
