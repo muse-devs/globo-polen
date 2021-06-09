@@ -154,7 +154,7 @@ body {
 }
 
 #body_content_inner table, #body_content_inner table td {
-	border: 1px solid <?php echo esc_attr( $text_lighter_20 ); ?>;
+	border: none;
 }
 
 .td {
@@ -186,6 +186,11 @@ body {
 .img_wrap {
 	padding: 0 0 20px;
 	text-align: center;
+}
+
+.image-icon {
+	margin-right: 0;
+	vertical-align: bottom;
 }
 
 .btn {
