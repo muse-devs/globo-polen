@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Customer completed order email
  *
@@ -15,27 +16,23 @@
  * @version 3.7.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (!defined('ABSPATH')) {
 	exit;
 }
 
 /*
  * @hooked WC_Emails::email_header() Output the email header
  */
-do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
+do_action('woocommerce_email_header', $email_heading, $email); ?>
 
 <?php
-foreach ( $order->get_items() as $item_id => $item ) {
-	$product_id = $item->get_product_id();
-	$product = $item->get_product();
- }
- $talent = _polen_get_info_talent_by_product_id($product, "polen-square-crop-md");
- ?>
+$item = Polen\Includes\Cart\Polen_Cart_Item_Factory::polen_cart_item_from_order($order);
+$talent = _polen_get_info_talent_by_product_id($item->get_product(), "polen-square-crop-md");
+?>
 
 <div class="talent_card">
 	<header>
-		<div class="card_thumb"
-			style="background-image: url(<?php echo get_the_post_thumbnail_url( $product_id, "polen-square-crop-md" ); ?>)">
+		<div class="card_thumb" style="background-image: url(<?php echo get_the_post_thumbnail_url($item->get_product_id(), "polen-square-crop-md"); ?>)">
 		</div>
 		<div style="padding-top: 3px;">
 			<span class="card_title" style="display: block;"><?php echo $talent['name']; ?></span>
@@ -56,8 +53,8 @@ foreach ( $order->get_items() as $item_id => $item ) {
 </div>
 
 <?php /* translators: %s: Customer first name */ ?>
-<p><?php printf( esc_html__( 'Hi %s,', 'woocommerce' ), esc_html( $order->get_billing_first_name() ) ); ?></p>
-<p><?php esc_html_e( 'We have finished processing your order.', 'woocommerce' ); ?></p>
+<p><?php printf(esc_html__('Hi %s,', 'woocommerce'), esc_html($order->get_billing_first_name())); ?></p>
+<p><?php esc_html_e('We have finished processing your order.', 'woocommerce'); ?></p>
 <?php
 
 /*
@@ -82,11 +79,11 @@ foreach ( $order->get_items() as $item_id => $item ) {
 /**
  * Show user-defined additional content - this is set in each email's settings.
  */
-if ( $additional_content ) {
-	echo wp_kses_post( wpautop( wptexturize( $additional_content ) ) );
+if ($additional_content) {
+	echo wp_kses_post(wpautop(wptexturize($additional_content)));
 }
 
 /*
  * @hooked WC_Emails::email_footer() Output the email footer
  */
-do_action( 'woocommerce_email_footer', $email );
+do_action('woocommerce_email_footer', $email);
