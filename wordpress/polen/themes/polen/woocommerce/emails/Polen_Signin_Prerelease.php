@@ -3,10 +3,14 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-$email_heading = '';
-$email = '';
-do_action( 'woocommerce_email_header', $email_heading, $email ); 
 
+// $email_heading = '';
+// $email = '';
+// do_action( 'woocommerce_email_header', $email_heading, $email ); 
+// include_once WP_PLUGIN_DIR . '/woocommerce/includes/class-wc-emails.php';
+// $e = \WC_Emails::instance();
+// $e->email_header('');
+// wc_get_template( 'emails/email-header.php', array( 'email_heading' => $email_heading ) );
 ?>
 
 <p>
@@ -25,9 +29,14 @@ Polen
 </p>
 
 <?php
+// wc_get_template( 'emails/email-footer.php', array( 'email_heading' => $email_heading ) );
+// $e->email_footer('');
+// do_action( 'woocommerce_email_order_details', $order, $sent_to_admin, $plain_text, $email );
+// do_action( 'woocommerce_email_order_meta', $order, $sent_to_admin, $plain_text, $email );
+// do_action( 'woocommerce_email_customer_details', $order, $sent_to_admin, $plain_text, $email );
 
-if( isset( $additional_content ) && ! empty( $additional_content ) ) {
-	echo wp_kses_post( wpautop( wptexturize( $additional_content ) ) );
-}
+// if( isset( $additional_content ) && ! empty( $additional_content ) ) {
+// 	echo wp_kses_post( wpautop( wptexturize( $additional_content ) ) );
+// }
 
-do_action( 'woocommerce_email_footer', 'noreply@polen.me' );
+// do_action( 'woocommerce_email_footer', $email );
