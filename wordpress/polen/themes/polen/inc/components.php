@@ -365,7 +365,7 @@ function polen_front_get_talent_videos($talent)
 		</div>
 	</section>
 
-	<div id="video-modal" class="video-modal">
+	<div id="video-modal" class="background video-modal">
 		<header>
 			<button id="close-button" class="close-button" onclick="hideModal()"><?php Icon_Class::polen_icon_close(); ?></button>
 		</header>

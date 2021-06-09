@@ -46,6 +46,11 @@ $item = Polen\Includes\Cart\Polen_Cart_Item_Factory::polen_cart_item_from_order(
 				</td>
 			</tr>
 			<tr>
+				<td colspan="3">
+					<span class="details_line"></span>
+				</td>
+			</tr>
+			<tr>
 				<td>
 					<p class="details_title">Vídeo de</p>
 					<span class="details_value"><?php echo $item->get_offered_by(); ?></span>
@@ -60,8 +65,18 @@ $item = Polen\Includes\Cart\Polen_Cart_Item_Factory::polen_cart_item_from_order(
 			</tr>
 			<tr>
 				<td colspan="3">
+					<span class="details_line"></span>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
 					<p class="details_title">Ocasião</p>
 					<span class="details_value_small"><?php echo $item->get_video_category(); ?></span>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<span class="details_line"></span>
 				</td>
 			</tr>
 			<tr>

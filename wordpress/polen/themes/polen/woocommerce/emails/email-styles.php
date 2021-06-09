@@ -338,7 +338,7 @@ img {
 
 .details_value {
 	margin: 0;
-	font-size: 32px;
+	font-size: 26px;
 	font-weight: 700;
 	color: <?php echo esc_attr( $text ); ?>;
 }
@@ -348,6 +348,14 @@ img {
 	font-size: 21px;
 	font-weight: 500;
 	color: <?php echo esc_attr( $text ); ?>;
+}
+
+.details_line {
+	display: block;
+	width: 100%;
+	height: 2px;
+	background-color: <?php echo esc_attr( $text ); ?>;
+	opacity: 0.5;
 }
 
 <?php

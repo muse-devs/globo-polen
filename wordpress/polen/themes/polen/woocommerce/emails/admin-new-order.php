@@ -54,11 +54,17 @@ do_action( 'woocommerce_email_order_details', $order, $sent_to_admin, $plain_tex
  */
 // do_action( 'woocommerce_email_customer_details', $order, $sent_to_admin, $plain_text, $email );
 
+?>
+<p class="btn_wrap">
+	<a href="<?php echo polen_get_url_my_orders() . "/#" . $order->get_id(); ?>" class="btn" target="_blank">Visualizar</a>
+</p>
+<?php
+
 /**
  * Show user-defined additional content - this is set in each email's settings.
  */
 if ( $additional_content ) {
-	echo wp_kses_post( wpautop( wptexturize( $additional_content ) ) );
+	//echo wp_kses_post( wpautop( wptexturize( $additional_content ) ) );
 }
 
 /*
