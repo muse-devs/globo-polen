@@ -156,9 +156,9 @@ function polen_get_theme_logos() {
 	$logo_dark = wp_get_attachment_image_url( $logo_dark, 'full' );
 	$logo_light = get_theme_mod( 'logo_theme_white' );
 
-	$html = '<a href="' . get_site_url() . '" class="custom-logo-link" rel="home" aria-current="page">';
-	$html .= '<img width="168" height="88" src="'. $logo_dark . '" class="custom-logo dark" alt="Polen">';
-	$html .= '<img width="168" height="88" src="'. $logo_light . '" class="custom-logo light" alt="Polen">';
+	$html =  '<a href="' . get_site_url() . '" class="custom-logo-link" rel="home" aria-current="page">';
+	$html .= 	'<img width="168" height="88" src="'. $logo_dark . '" class="custom-logo dark" alt="Polen">';
+	$html .= 	'<img width="168" height="88" src="'. $logo_light . '" class="custom-logo light" alt="Polen">';
 	$html .= '</a>';
 
 	return $html;
