@@ -1,4 +1,11 @@
-const home = function () {
+const home_carrousel = function() {
+
+}
+
+home_carrousel();
+
+
+const home_video = function () {
 	const video_banner = document.getElementById("video-banner");
 	if(!video_banner) {
 		return;
@@ -34,4 +41,6 @@ const home = function () {
 	window.onresize = checkSize;
 };
 
-home();
+// home_video();
+
+
