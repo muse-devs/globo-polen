@@ -18,6 +18,10 @@
 			border-color: var(--dark) !important;
 			background-color: var(--dark);
 		}
+		&:disabled {
+			color: var(--dark);
+			opacity: 0.5;
+		}
 	}
 	.custom-select {
 		background-image: url(../img/down-arrow-black.png);
@@ -87,6 +91,10 @@
 		&:active {
 			color: var(--dark) !important;
 			background-color: var(--light);
+		}
+		&:disabled {
+			color: var(--light);
+			opacity: 0.5;
 		}
 	}
 	.custom-select {
