@@ -1,5 +1,6 @@
 const home_carrousel = function() {
-
+	const images = document.querySelectorAll(".top-banner .carrousel .image");
+	console.log(images);
 }
 
 home_carrousel();

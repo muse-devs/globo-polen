@@ -4,21 +4,27 @@ use Polen\Includes\Debug;
 
 function polen_front_get_banner()
 {
-	$mobile_video = array(
-		"poster" => TEMPLATE_URI . "/assets/img/video_poster1.jpg",
-		"video" => TEMPLATE_URI . "/assets/video/home1.m4v",
-		"class" => "video-mobile"
-	);
-	$desktop_video = array(
-		"poster" => TEMPLATE_URI . "/assets/img/video_poster2.jpg",
-		"video" => TEMPLATE_URI . "/assets/video/home2.m4v",
-		"class" => "video-desktop"
-	);
+	// $mobile_video = array(
+	// 	"poster" => TEMPLATE_URI . "/assets/img/video_poster1.jpg",
+	// 	"video" => TEMPLATE_URI . "/assets/video/home1.m4v",
+	// 	"class" => "video-mobile"
+	// );
+	// $desktop_video = array(
+	// 	"poster" => TEMPLATE_URI . "/assets/img/video_poster2.jpg",
+	// 	"video" => TEMPLATE_URI . "/assets/video/home2.m4v",
+	// 	"class" => "video-desktop"
+	// );
 
-	$carrousel = array(array(
-		"mobile" => TEMPLATE_URI . "/assets/img/img-home-mobile.png",
-		"desktop" => TEMPLATE_URI . "/assets/img/img-home-desktop.jpeg"
-	));
+	$carrousel = array(
+		array(
+			"mobile" => TEMPLATE_URI . "/assets/img/img-home-mobile.png",
+			"desktop" => TEMPLATE_URI . "/assets/img/img-home-desktop.jpeg"
+		),
+		array(
+			"mobile" => TEMPLATE_URI . "/assets/img/img-home-mobile2.jpeg",
+			"desktop" => TEMPLATE_URI . "/assets/img/img-home-desktop.jpeg"
+		)
+	);
 
 ?>
 	<section class="top-banner mb-4">
@@ -29,8 +35,8 @@ function polen_front_get_banner()
 		<div class="carrousel">
 			<?php foreach ($carrousel as $item) : ?>
 				<figure class="image">
-					<img src="<?php echo $item['mobile']; ?>" alt="Banner da home" class="mobile" />
-					<img src="<?php echo $item['desktop']; ?>" alt="Banner da home" class="desktop" />
+					<img loading="lazy" src="<?php echo $item['mobile']; ?>" alt="Banner da home" class="mobile" />
+					<img loading="lazy" src="<?php echo $item['desktop']; ?>" alt="Banner da home" class="desktop" />
 				</figure>
 			<?php endforeach; ?>
 		</div>
