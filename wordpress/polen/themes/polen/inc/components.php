@@ -288,11 +288,11 @@ function polen_talent_promo_card($talent)
 				<div class="image-cropper">
 					<?php echo polen_get_avatar($talent->user_id, 'polen-square-crop-lg'); ?>
 				</div>
-				<p class="mt-2">E aí, ficou com vontade de ter um vídeo do <?php echo $talent->nome; ?>?</p>
+				<p class="mt-2">E aí, ficou com vontade de ter um vídeo?</p>
 				<?php if ($product->is_in_stock()) : ?>
 					<a href="#pedirvideo" class="btn btn-outline-light btn-lg">Peça o seu vídeo</a>
 				<?php else : ?>
-					<a href="#pedirvideo" class="btn btn-outline-light btn-lg disabled">Indisponível</a>
+					<a href="#pedirvideo" class="btn btn-outline-light btn-lg">Indisponível</a>
 				<?php endif; ?>
 			</div>
 		</div>
@@ -785,7 +785,7 @@ function polen_donate_badge(string $text = "", bool $inside_card = true)
 ?>
 	<span class="donate-badge<?php echo $inside_card ? "" : " alt"; ?>">
 		<?php Icon_Class::polen_icon_donate(); ?>
-		<?php echo $text; ?>
+		<strong><?php echo $text; ?></strong>
 	</span>
 <?php
 }
