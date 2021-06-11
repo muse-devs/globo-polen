@@ -85,7 +85,7 @@
 		border-color: var(--gray-light);
 		&:hover,
 		&:active {
-			color: var(--dark);
+			color: var(--dark) !important;
 			background-color: var(--light);
 		}
 	}
