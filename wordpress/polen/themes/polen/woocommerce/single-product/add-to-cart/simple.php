@@ -34,10 +34,15 @@ if ( $product->is_in_stock() ) : ?>
 		do_action( 'woocommerce_after_add_to_cart_quantity' );
 		?>
 
+		<?php $donate = get_post_meta( get_the_ID(), '_is_charity', true ); ?>
+
 		<button type="submit"
 				name="add-to-cart" value="<?php echo esc_attr( $product->get_id() ); ?>"
 				class="single_add_to_cart_button alt btn btn-primary btn-lg btn-block btn-get-video py-3">
-				<?php echo esc_html( $product->single_add_to_cart_text() ); ?>
+					<?php if($donate) : ?>
+						<span class="mr-2"><?php Icon_Class::polen_icon_donate(); ?></span>
+					<?php endif; ?>
+					<?php echo esc_html( $product->single_add_to_cart_text() ); ?>
 		</button>
 
 		<?php do_action( 'woocommerce_after_add_to_cart_button' ); ?>

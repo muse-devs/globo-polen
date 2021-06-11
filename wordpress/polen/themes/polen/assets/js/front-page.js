@@ -1,4 +1,12 @@
-const home = function () {
+const home_carrousel = function() {
+	const images = document.querySelectorAll(".top-banner .carrousel .image");
+	console.log(images);
+}
+
+home_carrousel();
+
+
+const home_video = function () {
 	const video_banner = document.getElementById("video-banner");
 	if(!video_banner) {
 		return;
@@ -34,4 +42,6 @@ const home = function () {
 	window.onresize = checkSize;
 };
 
-home();
+// home_video();
+
+

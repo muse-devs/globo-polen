@@ -43,7 +43,7 @@ use Polen\Includes\Polen_Talent;
 	<div id="page" class="container site">
 		<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e('Skip to content', 'polen'); ?></a>
 
-		<header id="masthead" class="row pt-3 pb-4">
+		<header id="masthead" class="row pt-3 pb-4<?php echo is_front_page() ? " header-home" : ""; ?>">
 			<div class="col-6 col-sm-6 d-flex align-items-center">
 				<?php polen_the_theme_logos(); ?>
 			</div>
@@ -59,7 +59,7 @@ use Polen\Includes\Polen_Talent;
 							<a class="dropbtn">
 								<div class="menu-user-data">
 									<div class="user-avatar d-flex flex-wrap align-items-center justify-content-center">
-										<?php echo polen_get_avatar( get_current_user_id(), "polen-square-crop-sm" ); ?>
+										<?php echo polen_get_avatar( get_current_user_id(), "polen-square-crop-lg" ); ?>
 									</div>
 									<span class="text"><?php Icon_Class::polen_icon_chevron_down(); ?></span>
 								</div>
@@ -68,7 +68,7 @@ use Polen\Includes\Polen_Talent;
 								<div class="row mb-4 d-md-none">
 									<div class="col-12">
 										<div class="user-avatar d-flex flex-wrap align-items-center justify-content-center mb-1">
-											<?php echo polen_get_avatar( get_current_user_id(), "polen-square-crop-sm" ); ?>
+											<?php echo polen_get_avatar( get_current_user_id(), "polen-square-crop-lg" ); ?>
 										</div>
 										<p class="user-name"><?php echo $user_name->display_name; ?></p>
 									</div>

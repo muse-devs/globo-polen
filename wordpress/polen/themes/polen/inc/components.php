@@ -4,30 +4,56 @@ use Polen\Includes\Debug;
 
 function polen_front_get_banner()
 {
-	$mobile_video = array(
-		"poster" => TEMPLATE_URI . "/assets/img/video_poster1.jpg",
-		"video" => TEMPLATE_URI . "/assets/video/home1.m4v",
-		"class" => "video-mobile"
+	// $mobile_video = array(
+	// 	"poster" => TEMPLATE_URI . "/assets/img/video_poster1.jpg",
+	// 	"video" => TEMPLATE_URI . "/assets/video/home1.m4v",
+	// 	"class" => "video-mobile"
+	// );
+	// $desktop_video = array(
+	// 	"poster" => TEMPLATE_URI . "/assets/img/video_poster2.jpg",
+	// 	"video" => TEMPLATE_URI . "/assets/video/home2.m4v",
+	// 	"class" => "video-desktop"
+	// );
+
+	$carrousel = array(
+		array(
+			"mobile" => TEMPLATE_URI . "/assets/img/img-home-mobile.png",
+			"desktop" => TEMPLATE_URI . "/assets/img/img-home-desktop.jpeg"
+		),
+		array(
+			"mobile" => TEMPLATE_URI . "/assets/img/img-home-mobile2.jpeg",
+			"desktop" => TEMPLATE_URI . "/assets/img/img-home-desktop.jpeg"
+		)
 	);
-	$desktop_video = array(
-		"poster" => TEMPLATE_URI . "/assets/img/video_poster2.jpg",
-		"video" => TEMPLATE_URI . "/assets/video/home2.m4v",
-		"class" => "video-desktop"
-	);
+
 ?>
 	<section class="top-banner mb-4">
-		<video id="video-banner" class="video" autoplay muted loop playsinline poster="<?php echo polen_is_mobile() ? $mobile_video['poster'] : $desktop_video['poster']; ?>">
+		<?php /* <video id="video-banner" class="video" autoplay muted loop playsinline poster="<?php echo polen_is_mobile() ? $mobile_video['poster'] : $desktop_video['poster']; ?>">
 			<source src="<?php echo polen_is_mobile() ? $mobile_video['video'] : $desktop_video['video']; ?>" type="video/mp4">
 		</video>
-		<div class="content">
-			<h2 class="title">Presenteie e<br />surpreenda com vídeos personalizados.</h2>
+		*/ ?>
+		<div class="carrousel">
+			<?php foreach ($carrousel as $item) : ?>
+				<figure class="image">
+					<img loading="lazy" src="<?php echo $item['mobile']; ?>" alt="Banner da home" class="mobile" />
+					<img loading="lazy" src="<?php echo $item['desktop']; ?>" alt="Banner da home" class="desktop" />
+				</figure>
+			<?php endforeach; ?>
 		</div>
-		<script>
+		<div class="content">
+			<h2 class="title mb-5">Presenteie e<br />surpreenda com vídeos personalizados.</h2>
+			<a href="<?php echo polen_get_all_talents_url(); ?>" class="banner-button-link">
+				<span class="mr-3">Ver todos os artistas</span>
+				<?php Icon_Class::polen_icon_chevron_right(); ?>
+			</a>
+		</div>
+		<?php /* <script>
 			const home_video = {
 				mobile: <?php echo json_encode($mobile_video); ?>,
 				desktop: <?php echo json_encode($desktop_video); ?>
 			}
 		</script>
+		*/ ?>
 	</section>
 <?php
 }
@@ -49,7 +75,7 @@ function polen_front_get_card($item, $size = "small")
 		$image[] = '';
 	}
 
-	$donate = get_post_meta( $item['ID'], '_is_charity', true );
+	$donate = get_post_meta($item['ID'], '_is_charity', true);
 
 ?>
 	<div class="<?= $class; ?>">
@@ -246,7 +272,7 @@ function polen_front_get_tutorial()
  * @param string
  * @return IMG|SPAN
  */
-function polen_get_avatar($user_id, $size = 'polen-square-crop-sm')
+function polen_get_avatar($user_id, $size = 'polen-square-crop-lg')
 {
 	if (is_plugin_active('wp-user-avatar/wp-user-avatar.php') && has_wp_user_avatar($user_id)) {
 		return get_wp_user_avatar($user_id, $size);
@@ -266,13 +292,13 @@ function polen_talent_promo_card($talent)
 		<div class="box-color card row">
 			<div class="col-12 col-md-12 d-flex flex-column justify-content-center align-items-center text-center p-2">
 				<div class="image-cropper">
-					<?php echo polen_get_avatar($talent->user_id, 'polen-square-crop-sm'); ?>
+					<?php echo polen_get_avatar($talent->user_id, 'polen-square-crop-lg'); ?>
 				</div>
-				<p class="mt-2">E aí, ficou com vontade de ter um vídeo do <?php echo $talent->nome; ?>?</p>
+				<p class="mt-2">E aí, ficou com vontade de ter um vídeo?</p>
 				<?php if ($product->is_in_stock()) : ?>
 					<a href="#pedirvideo" class="btn btn-outline-light btn-lg">Peça o seu vídeo</a>
 				<?php else : ?>
-					<a href="#pedirvideo" class="btn btn-outline-light btn-lg disabled">Indisponível</a>
+					<a href="#pedirvideo" class="btn btn-outline-light btn-lg">Indisponível</a>
 				<?php endif; ?>
 			</div>
 		</div>
@@ -314,7 +340,7 @@ function polen_video_icons($user_id, $iniciais)
 ?>
 	<div class="video-icons">
 		<figure class="image-cropper color small">
-			<?php echo polen_get_avatar($user_id, 'polen-square-crop-sm'); ?>
+			<?php echo polen_get_avatar($user_id, 'polen-square-crop-lg'); ?>
 		</figure>
 		<div class="text-cropper small"><?php echo $iniciais; ?></div>
 	</div>
@@ -365,7 +391,7 @@ function polen_front_get_talent_videos($talent)
 		</div>
 	</section>
 
-	<div id="video-modal" class="video-modal">
+	<div id="video-modal" class="background video-modal">
 		<header>
 			<button id="close-button" class="close-button" onclick="hideModal()"><?php Icon_Class::polen_icon_close(); ?></button>
 		</header>
@@ -765,7 +791,7 @@ function polen_donate_badge(string $text = "", bool $inside_card = true)
 ?>
 	<span class="donate-badge<?php echo $inside_card ? "" : " alt"; ?>">
 		<?php Icon_Class::polen_icon_donate(); ?>
-		<?php echo $text; ?>
+		<strong><?php echo $text; ?></strong>
 	</span>
 <?php
 }
