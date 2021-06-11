@@ -30,7 +30,7 @@
 	<div id="page" class="container site landing">
 		<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e('Skip to content', 'polen'); ?></a>
 
-		<div class="row pt-md-5">
+		<div class="row pt-md-5 px-4">
 			<div class="d-none d-md-block col-md-6">
 				<img src="<?php echo TEMPLATE_URI; ?>/assets/img/image_landing.png" alt="Print tirado do site">
 			</div>
@@ -45,7 +45,7 @@
 					<div class="col-12 mt-4 text-center text-md-left d-md-none">
 						<img src="<?php echo TEMPLATE_URI; ?>/assets/img/image_landing_mobile.png" width="233" height="292" alt="Print tirado do site">
 					</div>
-					<div class="col-12 col-md-10 mt-5">
+					<div class="col-12 col-md-12 mt-5">
 						<div class="row justify-content-md-between">
 							<div id="signin-newsletter" class="col-12">
 								<h5 class="description">Experimente um novo jeito de se relacionar com seu artista favorito. Entre na lista de espera:</h5>
@@ -71,7 +71,7 @@
 			</div>
 		</div>
 
-		<footer id="colophon" class="mt-5 site-footer landing-footer">
+		<footer id="colophon" class="mt-5 px-4 site-footer landing-footer">
 			<div class="row mt-5 pb-5 copyright">
 				<div class="d-none d-md-block col-12 col-md-4 text-center text-md-left">
 					<?php the_custom_logo(); ?>
