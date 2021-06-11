@@ -50,7 +50,7 @@
 							<div id="signin-newsletter" class="col-12">
 								<h5 class="description">Experimente um novo jeito de se relacionar com seu artista favorito. Entre na lista de espera:</h5>
 								<div class="row mt-3 mt-md-4">
-									<div class="col-12 col-md-12 col-xl-8">
+									<div class="col-12 col-md-12 col-xl-7">
 										<input type="email"  name="signin_newsletter" placeholder="Deixe seu email" class="form-control form-control-lg" />
 										<input type="hidden" name="signin_newsletter_page_source" value="landing-page"/>
 										<input type="hidden" name="signin_newsletter_is_mobile" value="<?= polen_is_mobile() ? '1' : '0'; ?>"/>
@@ -59,7 +59,7 @@
 									<?php
 									$newsletter_signin_nonce = wp_create_nonce('news-signin');
 									?>
-									<div class="col-12 col-md-12 col-xl-4 mt-3 mt-md-3 mt-xl-0 d-md-flex align-items-md-center">
+									<div class="col-12 col-md-12 col-xl-5 mt-3 mt-md-3 mt-xl-0 d-md-flex align-items-md-center">
 										<button class="signin-newsletter-button btn btn-primary btn-lg btn-block" code="<?php echo $newsletter_signin_nonce; ?>">Quero Experimentar</button>
 									</div>
 									<div class="col-12 col-md-12 mb-2 mb-md-0 text-center small signin-response"></div>
