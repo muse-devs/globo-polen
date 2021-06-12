@@ -145,6 +145,13 @@ select.form-control:not([size]):not([multiple]) {
 	max-width: calc(100% - 30px);
 }
 
+.woocommerce-result-count {
+	@include media-breakpoint-down(sm) {
+		float: none !important;
+		display: block;
+	}
+}
+
 .woocommerce-error,
 .woocommerce-info,
 .woocommerce-message {
