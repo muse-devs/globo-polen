@@ -60,8 +60,8 @@
 		<div class="col-md-12 pb-4 text-center social">
 			<a href="#facebook" target="_blank"><?php Icon_Class::polen_icon_social("facebook"); ?></a>
 			<a href="#instagram" target="_blank"><?php Icon_Class::polen_icon_social("instagram"); ?></a>
-			<a href="#linkedin" target="_blank"><?php Icon_Class::polen_icon_social("linkedin"); ?></a>
-			<a href="#twitter" target="_blank"><?php Icon_Class::polen_icon_social("twitter"); ?></a>
+			<!-- <a href="#linkedin" target="_blank"><?php Icon_Class::polen_icon_social("linkedin"); ?></a> -->
+			<!-- <a href="#twitter" target="_blank"><?php Icon_Class::polen_icon_social("twitter"); ?></a> -->
 			<a href="#tiktok" target="_blank"><?php Icon_Class::polen_icon_social("tiktok"); ?></a>
 		</div>
 		<div class="col-md-12 pt-3 text-center">2021 @<?= get_bloginfo('name'); ?></div>
