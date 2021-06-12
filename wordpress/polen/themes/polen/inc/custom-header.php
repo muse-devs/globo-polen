@@ -80,6 +80,8 @@ endif;
 
 add_filter('body_class', 'polen_body_class_mode', 10, 2);
 function polen_body_class_mode($classes, $class) {
-	$classes[] = 'theme-dark';
+	if(is_page_template( 'inc/landpage.php' )) {
+		$classes[] = 'theme-dark';
+	}
 	return $classes;
 }
