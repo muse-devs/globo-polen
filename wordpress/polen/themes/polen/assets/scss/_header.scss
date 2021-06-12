@@ -25,11 +25,11 @@
 }
 
 .custom-logo {
-	width: 6rem;
+	width: 5rem;
 	max-width: 165px !important;
 	height: auto;
 	@include media-breakpoint-down(sm) {
-		width: 5rem;
+		width: 4rem;
 	}
 }
 
