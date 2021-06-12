@@ -241,13 +241,13 @@
 .top-banner {
 	position: relative;
 	margin: 0 -15px;
-	height: 98vw;
+	height: 94.6vw;
 	overflow: hidden;
 	background-color: var(--primary);
 	@include media-breakpoint-up(md) {
 		height: 396px;
 	}
-	@include media-breakpoint-down(md) {
+	@include media-breakpoint-only(md) {
 		height: 315px;
 	}
 	.carrousel {
