@@ -423,9 +423,9 @@ function polen_get_video_player($talent, $video, $user_id)
 						jQuery(document).ready(function() {
 							var videoPlayer = new Vimeo.Player("polen-video", {
 								url: "<?php echo $video->vimeo_link; ?>",
-								autoplay: true,
+								autoplay: false,
 								muted: <?= polen_is_mobile() ? "true" : "false"; ?>,
-								loop: true,
+								loop: false,
 								width: document.getElementById("polen-video").offsetWidth,
 							});
 						})
