@@ -19,10 +19,6 @@ function polen_front_get_banner()
 		array(
 			"mobile" => TEMPLATE_URI . "/assets/img/img-home-mobile.png",
 			"desktop" => TEMPLATE_URI . "/assets/img/img-home-desktop.jpeg"
-		),
-		array(
-			"mobile" => TEMPLATE_URI . "/assets/img/img-home-mobile2.jpeg",
-			"desktop" => TEMPLATE_URI . "/assets/img/img-home-desktop.jpeg"
 		)
 	);
 
