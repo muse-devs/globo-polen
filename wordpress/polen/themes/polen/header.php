@@ -43,7 +43,7 @@ use Polen\Includes\Polen_Talent;
 	<div id="page" class="container site">
 		<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e('Skip to content', 'polen'); ?></a>
 
-		<header id="masthead" class="row pt-3 pb-4<?php echo is_page_template( 'inc/home.php' ) ? " header-home" : ""; ?>">
+		<header id="masthead" class="row pt-3 pb-4<?php echo is_front_page() ? " header-home" : ""; ?>">
 			<div class="col-6 col-sm-6 d-flex align-items-center">
 				<?php polen_the_theme_logos(); ?>
 			</div>
