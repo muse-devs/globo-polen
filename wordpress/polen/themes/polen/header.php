@@ -81,7 +81,9 @@ use Polen\Includes\Polen_Talent;
 									<?php endif; ?>
 										<a href="<?php echo esc_url(wc_get_account_endpoint_url('orders')); ?>">Meus pedidos</a>
 										<a href="<?php echo esc_url(wc_get_account_endpoint_url('payment-options')); ?>">Pagamentos</a>
+									<?php if( !Polen_Talent::static_is_user_talent( wp_get_current_user() ) ) : ?>
 										<a href="<?php echo esc_url(wc_customer_edit_account_url()); ?>">Meus dados</a>
+									<?php endif; ?>
 										<a href="<?php echo esc_url(wp_logout_url()); ?>">Sair</a>
 									</div>
 								</div>
