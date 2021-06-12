@@ -763,7 +763,7 @@ function polen_form_signin_newsletter(string $event = 'newsletter')
 ?>
 	<div id="signin-newsletter" class="col-md-6 mt-4 order-md-2">
 		<h5 class="title">Junte-se à nossa lista</h5>
-		<p class="description">Seja o primeiro a saber sobre as estrelas mais recentes e as melhores ofertas no Muse</p>
+		<p class="description">Seja o primeiro a saber sobre as estrelas mais recentes e as melhores ofertas no <?php bloginfo('name'); ?></p>
 		<div class="row">
 			<div class="col-md-8 mb-2 mb-md-0">
 				<input type="email" name="signin_newsletter" placeholder="Entre com o seu e-mail" class="form-control form-control-lg" />
