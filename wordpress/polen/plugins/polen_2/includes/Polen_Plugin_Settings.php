@@ -221,7 +221,7 @@ class Polen_Plugin_Settings
                     'type'     => 'text',
                     'title'    => esc_html__('Nome do remetente', 'polen'),
                     'desc'     => 'Informe o nome que deverá aparecer no remetente do e-mail.',
-                    'default'  => 'Muse',
+                    'default'  => 'Polen',
                     'required' => array( 'polen_smtp_on', '=', '1' ),
                 ),
                 array(
@@ -229,7 +229,7 @@ class Polen_Plugin_Settings
                     'type'     => 'text',
                     'title'    => esc_html__('E-mail do remetente', 'polen'),
                     'desc'     => 'Informe o e-mail que deverá aparecer como remetente.',
-                    'default'  => 'muse@c9t.pw',
+                    'default'  => 'polen@c9t.pw',
                     'required' => array( 'polen_smtp_on', '=', '1' ),
                 ),
             ),
