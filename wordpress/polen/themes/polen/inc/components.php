@@ -65,7 +65,7 @@ function polen_front_get_card($item, $size = "small")
 	}
 
 	if (isset($item['ID'])) {
-		$image = wp_get_attachment_image_src(get_post_thumbnail_id($item['ID']), 'polen-thumb-md');
+		$image = wp_get_attachment_image_src(get_post_thumbnail_id($item['ID']), 'polen-thumb-lg');
 	} else {
 		$image = array();
 		$image[] = '';
