@@ -22,8 +22,6 @@ class Polen_SignInUser_Strong_Password
     public function enqueue_scripts()
     {
         $min = get_assets_folder();
-        wp_register_script( 'user-register-js', TEMPLATE_URI . '/assets/js/' . $min . 'user-register.js', array("global-js"), _S_VERSION, true );
-        wp_enqueue_script( 'user-register-js' );
     }
 
 

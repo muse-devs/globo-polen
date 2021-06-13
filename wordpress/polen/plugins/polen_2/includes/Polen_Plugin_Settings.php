@@ -296,6 +296,75 @@ class Polen_Plugin_Settings
                 ),
             )
         ) );
+
+        // Recaptcha do google
+        \Redux::set_section( $opt_name, array(
+            'title'            => esc_html__( 'Google Recapcha Key', 'polen' ),
+            'id'               => 'g_recaptcha',
+            'icon'             => 'el el-credit-card',
+            'subsection'       => false,
+            'fields'           => array(
+                array(
+                    'id'       => 'polen_recaptcha_secret_key',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Secret Key', 'polen'),
+                    'desc'     => 'Informa a Secret do google.',
+                    'default'  => '',
+                ),
+                array(
+                    'id'       => 'polen_recaptcha_site_key',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Site Key', 'polen'),
+                    'desc'     => 'Informe o site key do google',
+                    'default'  => '',
+                ),
+            )
+        ) );
+
+        // Key Analitics
+        \Redux::set_section( $opt_name, array(
+            'title'            => esc_html__( 'Analitics Keys', 'polen' ),
+            'id'               => 'analitcs_keys',
+            'icon'             => 'el el-credit-card',
+            'subsection'       => false,
+            'fields'           => array(
+                array(
+                    'id'       => 'polen_google_analitics_key',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Google Analitics Keys', 'polen'),
+                    'desc'     => 'Informa o Google Analitics Keys.',
+                    'default'  => '',
+                ),
+                array(
+                    'id'       => 'polen_google_tagmanager_key',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Tag Manager Key', 'polen'),
+                    'desc'     => 'Informe o Tag Manager Key',
+                    'default'  => '',
+                ),
+                array(
+                    'id'       => 'polen_heapio_key',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Heap.IO Key', 'polen'),
+                    'desc'     => 'Informe o Heap.IO Key',
+                    'default'  => '',
+                ),
+                array(
+                    'id'       => 'polen_hotjar_key',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Hotjar Site Key', 'polen'),
+                    'desc'     => 'Informe o Hotjar Site Key',
+                    'default'  => '',
+                ),
+                array(
+                    'id'       => 'polen_facebookpixel_key',
+                    'type'     => 'text',
+                    'title'    => esc_html__('FB Pixel Code', 'polen'),
+                    'desc'     => 'Informe o Facebook Pixel Code',
+                    'default'  => '',
+                ),
+            )
+        ) );
     }
 
     public function save( $args ) {
