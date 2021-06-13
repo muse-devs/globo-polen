@@ -38,7 +38,6 @@ class Polen_SignInUser_Google_ReCaptcha
         global $Polen_Plugin_Settings;
 
         $gRecaptchaResponse = filter_input( INPUT_POST, 'g-recaptcha-response' );
-        Debug::def($Polen_Plugin_Settings);
         $recaptcha = new ReCaptcha( $Polen_Plugin_Settings['polen_recaptcha_secret_key'] );
         $resp = $recaptcha->setScoreThreshold(0.5)->verify($gRecaptchaResponse, $_SERVER[ 'SERVER_ADDR' ]);
         if (!$resp->isSuccess()) {
