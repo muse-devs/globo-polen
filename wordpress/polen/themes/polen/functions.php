@@ -165,10 +165,10 @@ function polen_scripts() {
 	global $wp_styles;
 	$min = get_assets_folder();
 
-	if(is_front_page() || is_page_template( 'inc/landpage.php' )) {
+	if( is_front_page() || is_page_template( 'inc/landpage.php' ) ) {
 		foreach( $wp_styles->queue as $style ) {
-			if(!str_contains($style, 'cookie-law-info')) {
-				wp_dequeue_style($wp_styles->registered[$style]->handle);
+			if( strpos( $style, 'cookie-law-info' ) ) {
+				wp_dequeue_style( $wp_styles->registered[$style]->handle );
 			}
 		}
 	}
