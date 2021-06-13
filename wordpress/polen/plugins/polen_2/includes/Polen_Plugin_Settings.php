@@ -296,6 +296,30 @@ class Polen_Plugin_Settings
                 ),
             )
         ) );
+
+        // Prazo para expirar pedidos
+        \Redux::set_section( $opt_name, array(
+            'title'            => esc_html__( 'Google Recapcha Key', 'polen' ),
+            'id'               => 'g_recaptcha',
+            'icon'             => 'el el-credit-card',
+            'subsection'       => false,
+            'fields'           => array(
+                array(
+                    'id'       => 'polen_recaptcha_secret_key',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Secret Key', 'polen'),
+                    'desc'     => 'Informa a Secret do google.',
+                    'default'  => '',
+                ),
+                array(
+                    'id'       => 'polen_recaptcha_site_key',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Site Key', 'polen'),
+                    'desc'     => 'Informe o site key do google',
+                    'default'  => '',
+                ),
+            )
+        ) );
     }
 
     public function save( $args ) {
