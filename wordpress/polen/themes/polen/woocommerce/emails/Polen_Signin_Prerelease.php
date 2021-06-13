@@ -27,16 +27,3 @@ Para você ir preparando suas primeiras encomendas, aqui vão algumas boas suges
 Gostou? Muito, né? E claro, quando o site estiver no ar eu volto aqui para te contar em primeira mão. Até já!<br />
 Polen
 </p>
-
-<?php
-// wc_get_template( 'emails/email-footer.php', array( 'email_heading' => $email_heading ) );
-// $e->email_footer('');
-// do_action( 'woocommerce_email_order_details', $order, $sent_to_admin, $plain_text, $email );
-// do_action( 'woocommerce_email_order_meta', $order, $sent_to_admin, $plain_text, $email );
-// do_action( 'woocommerce_email_customer_details', $order, $sent_to_admin, $plain_text, $email );
-
-// if( isset( $additional_content ) && ! empty( $additional_content ) ) {
-// 	echo wp_kses_post( wpautop( wptexturize( $additional_content ) ) );
-// }
-
-// do_action( 'woocommerce_email_footer', $email );
