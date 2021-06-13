@@ -4,9 +4,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 $email_heading='';
-// echo "= " . $email_heading . " =\n\n";
-// $e = \WC_Emails::get_instance();
-// $e->email_header('');
 
 ?>
 <p>
@@ -22,14 +19,3 @@ Para você ir preparando suas primeiras encomendas, aqui vão algumas boas suges
 </ul>
 Gostou? Muito, né? E claro, quando o site estiver no ar eu volto aqui para te contar em primeira mão. Até já!<br />
 Polen
-<?
-// $e->email_footer();
-// echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n\n";
-
-// do_action( 'woocommerce_email_order_meta', $order, $sent_to_admin, $plain_text, $email );
-
-// do_action( 'woocommerce_email_customer_details', $order, $sent_to_admin, $plain_text, $email );
-
-// echo "\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n\n";
-
-echo apply_filters( 'woocommerce_email_footer_text', get_option( 'woocommerce_email_footer_text' ) );
