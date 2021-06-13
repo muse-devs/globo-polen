@@ -75,6 +75,11 @@ class Polen_SignInUser
             wp_safe_redirect( polen_get_url_my_account() );
             exit;
         } else {
+            
+            $min = get_assets_folder();
+            wp_register_script( 'user-register-js', TEMPLATE_URI . '/assets/js/' . $min . 'user-register.js', array("global-js"), _S_VERSION, true );
+            wp_enqueue_script( 'user-register-js' );
+
             do_action('polen_register_form');
             ob_start();
             wc_get_template( 'myaccount/form-register.php' );

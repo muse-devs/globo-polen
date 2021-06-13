@@ -35,9 +35,11 @@ class Polen_SignInUser_Google_ReCaptcha
      */
     public function validate_recaptcha( $errors, $username, $email )
     {
-        $gRecaptchaResponse = filter_input( INPUT_POST, 'g-recaptcha-response' );
+        global $Polen_Plugin_Settings;
 
-        $recaptcha = new ReCaptcha( '6LdDkPMaAAAAAAZZe_Tzja79ei5aREGaFCjnv_Zn' );
+        $gRecaptchaResponse = filter_input( INPUT_POST, 'g-recaptcha-response' );
+        Debug::def($Polen_Plugin_Settings);
+        $recaptcha = new ReCaptcha( $Polen_Plugin_Settings['polen_recaptcha_secret_key'] );
         $resp = $recaptcha->setScoreThreshold(0.5)->verify($gRecaptchaResponse, $_SERVER[ 'SERVER_ADDR' ]);
         if (!$resp->isSuccess()) {
             $errors->add('registration-error', 'Você é um robô? Se não tente novamente', 'woocommerce');
