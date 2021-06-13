@@ -82,7 +82,7 @@ class Polen_Signin_Newsletter
             wp_die();
         }
     
-        if( isset( $email ) && !empty( $email ) ){
+        if( isset( $email ) && !empty( $email ) ) {
             $newsletter = $this->set_email_to_newsletter( $email, $event, $page_source, $is_mobile );
             if( !empty( $newsletter ) ){
                 if( $newsletter == "Te enviamos um email com mais informações") {
@@ -98,7 +98,7 @@ class Polen_Signin_Newsletter
                     wp_die();
                 }
             }
-        }else{
+        } else {
             wp_send_json_error( array( 'response' => 'Não foi possível completar a solicitação' ), 403 );
             wp_die();
         }

@@ -2,74 +2,39 @@
 
 namespace Polen\Includes\Emails;
 
-class Polen_Email_Signin_Prerelease extends \WC_Email
+class Polen_Email_Signin_Prerelease
 {
 
     public function __construct()
     {
-        // Email slug we can use to filter other data.
-        $this->id          = 'polen_signin_prelounch';
-        $this->title       = 'Email cadastro de prelançamento';
-        $this->description = 'Email para cadastro de prelançamento';
-        // For admin area to let the user know we are sending this email to customers.
-        $this->customer_email = true;
-        $this->heading     = 'Prelançamento';
-        // translators: placeholder is {blogname}, a variable that will be substituted when email is sent out
-        $this->subject     = sprintf( 'Você está na lista de espera da %s' , '{blogname}' );
-        $this->email_type = 'html';
-        // Template paths.
-		$this->template_html  = 'emails/Polen_Signin_Prerelease.php';
-		$this->template_plain = 'emails/plain/Polen_Signin_Prerelease.php';
-		$this->template_base  = TEMPLATEPATH . 'woocommerce/';
-
-        // $this->recipient = $email;
-        $this->placeholders   = array(
-            '{site_title}'              => 'rodolfro',
-        );
-
-        parent::__construct();
+        $this->subject = sprintf( 'Você está na lista de espera da %s', get_bloginfo( 'name' ) );
+        $this->template_base  = TEMPLATEPATH . '/woocommerce/';
     }
 
+    function css( $css, $email ) {
+        ob_start();
+        include $this->template_base . 'emails/email-styles.php';
+        $this->include = true;
+        $css = ob_get_contents();
+        ob_end_clean();
+        return $css;
+    }
 
 	function trigger( $email )
     {
-        $this->recipient = $email;
-        $this->setup_locale();
-        $this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
+        // add_action( 'woocommerce_email_header', array( $this, 'email_css' ) );
+        add_filter( 'woocommerce_email_styles', array( $this, 'css' ), 999, 2 );
+
+        global $woocommerce;
+        $mailer = $woocommerce->mailer();
+        $message = $this->get_content_html( $email );
+        $mailer->send( $email, $this->subject, $message );
     }
 
-    public function get_content_html()
+    public function get_content_html( $email )
     {
-        $body = wc_get_template_html( 'emails/email-header.php', array(
-			'sent_to_admin' => false,
-			'plain_text'    => false,
-            'email_heading'      => $this->get_heading(),
-            'additional_content' => $this->get_additional_content(),
-		), '', $this->template_base );
-		$body .= wc_get_template_html( $this->template_plain, array(
-			'sent_to_admin' => false,
-			'plain_text'    => false,
-            'email_heading'      => $this->get_heading(),
-            'additional_content' => $this->get_additional_content(),
-		), '', $this->template_base );
-		$body .= wc_get_template_html( 'emails/email-footer.php', array(
-			'sent_to_admin' => false,
-			'plain_text'    => false,
-            'email_heading'      => $this->get_heading(),
-            'additional_content' => $this->get_additional_content(),
-		), '', $this->template_base );
-        return $body;
+        return wc_get_template_html( 'emails/Polen_Signin_Prerelease.php', array( 'email_heading' => 'Prelançamento', 'email' => $email ), '', $this->template_base );
 	}
-
-	public function get_content_plain() {
-		return wc_get_template_html( $this->template_plain, array(
-			'email_heading' => $this->get_heading(),
-			'sent_to_admin' => true,
-			'plain_text'    => true,
-			'email'			=> $this
-		), '', $this->template_base );
-	}    
-
 }
 
 new Polen_Email_Signin_Prerelease();

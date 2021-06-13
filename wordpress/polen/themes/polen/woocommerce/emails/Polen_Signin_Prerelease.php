@@ -4,15 +4,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-// $email_heading = '';
-// $email = '';
-// do_action( 'woocommerce_email_header', $email_heading, $email ); 
-// include_once WP_PLUGIN_DIR . '/woocommerce/includes/class-wc-emails.php';
-// $e = \WC_Emails::instance();
-// $e->email_header('');
-// wc_get_template( 'emails/email-header.php', array( 'email_heading' => $email_heading ) );
-?>
+do_action( 'woocommerce_email_header', $email_heading, $email );
 
+?>
+<div class="wrapper">
 <p>
 Olá,<br />
 Obrigada por entrar em nossa lista de espera para experimentar um novo jeito de se relacionar com seus artistas favoritos. Na Polen, você vai poder encomendar vídeos de artistas com mensagens gravadas por eles do jeito que você quiser.
@@ -27,3 +22,5 @@ Para você ir preparando suas primeiras encomendas, aqui vão algumas boas suges
 Gostou? Muito, né? E claro, quando o site estiver no ar eu volto aqui para te contar em primeira mão. Até já!<br />
 Polen
 </p>
+</div>
+<?php do_action( 'woocommerce_email_footer', $email ); ?>
