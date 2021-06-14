@@ -250,4 +250,8 @@ add_action('wc_gateway_stripe_process_response', function($response, $order) {
 	if( $response->status == 'succeeded' ) {
 		$order->update_status( 'payment-approved', 'Pago com Sucesso' );
 	}
+
+	if ( $response->status == 'failed') {
+		$order->update_status( 'payment-rejected', 'Erro no Pagamento' );
+	}
 }, 10, 3);
