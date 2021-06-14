@@ -248,3 +248,12 @@ require_once TEMPLATE_DIR . '/classes/Icon_Class.php';
  * Arquivo responsavel por retornos da tela de acompanhamento de pedidos
  */
 require_once TEMPLATE_DIR . '/classes/Order_Class.php';
+
+
+add_action('wc_gateway_stripe_process_response', function($response, $order) {
+	// $response
+	// $order
+	if( $response->status == 'succeeded' ) {
+		$order->update_status( 'payment-approved', 'Pago com Sucesso' );
+	}
+}, 10, 3);
