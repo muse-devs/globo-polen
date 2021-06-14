@@ -32,7 +32,7 @@ $talent = _polen_get_info_talent_by_product_id($item->get_product(), "polen-squa
 
 <div class="talent_card">
 	<header>
-		<div class="card_thumb" style="background-image: url(<?php echo get_the_post_thumbnail_url($item->get_product_id(), "polen-square-crop-md"); ?>)">
+		<div class="card_thumb" style="background-image: url(<?php echo polen_get_avatar($talent->user_id, 'polen-square-crop-md'); ?>)">
 		</div>
 		<div style="padding-top: 3px;">
 			<span class="card_title" style="display: block;"><?php echo $talent['name']; ?></span>
