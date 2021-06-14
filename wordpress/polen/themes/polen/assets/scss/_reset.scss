@@ -1,15 +1,20 @@
+* {
+	transition: color 250ms ease;
+	transition: background-color 250ms ease;
+}
+
 body {
 	font-family: $font-primary;
 	font-size: 13px;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	color: white;
-	// color: $black;
-	// background-color: $white;
-	// @media (prefers-color-scheme: dark) {
-	// 	color: $white;
-	// 	background-color: $black;
-	// }
+	@include theme-light();
+	&.theme-dark {
+		@include theme-dark();
+	}
+	&.theme-auto {
+		@include theme-auto();
+	}
 	&.no-scroll {
 		overflow: hidden;
 	}

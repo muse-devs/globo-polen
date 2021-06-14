@@ -21,11 +21,11 @@ class Polen_Order
     
     public function __construct( $static = false ) {
         if( $static ) {
-            add_action( 'wp_ajax_search_order_status', array( $this, 'check_order_status' ) );
-            add_action( 'wp_ajax_nopriv_search_order_status', array( $this, 'check_order_status' ) );
-            add_shortcode( 'polen_search_order', array( $this, 'polen_search_order_shortcode' ) );
-            add_shortcode( 'polen_search_result_shortcode', array( $this, 'polen_search_result_shortcode' ) );
-            add_shortcode( 'polen_video_shortcode', array( $this, 'polen_watch_video' ) );
+            add_action(    'wp_ajax_search_order_status',        array( $this, 'check_order_status' ) );
+            add_action(    'wp_ajax_nopriv_search_order_status', array( $this, 'check_order_status' ) );
+            add_shortcode( 'polen_search_order',                 array( $this, 'polen_search_order_shortcode' ) );
+            add_shortcode( 'polen_search_result_shortcode',      array( $this, 'polen_search_result_shortcode' ) );
+            add_shortcode( 'polen_video_shortcode',              array( $this, 'polen_watch_video' ) );
         }
     }
 
@@ -43,16 +43,16 @@ class Polen_Order
             $email = strip_tags( $_POST['email'] );
             $order_number = strip_tags( $_POST['order'] );
             $fan_orders = $this->get_orders_by_user_email( $email, $order_number );
-            if( empty( $fan_orders ) ){
-                $response = array(  'success' => true, 
+            if( empty( $fan_orders ) ) {
+                $response = array(  'success'       => true, 
                                     'message-title' => 'Nenhum não encontrado', 
-                                    'message' => 'Número digitado não foi encontrado, confira e tente novamente', 
-                                    'found' => 0 );
-            }else{
-                $response = array(  'success' => true, 
-                                    'message-title' => 'Possui pedidos', 
-                                    'message' => '', 
-                                    'found' => 1 );
+                                    'message'       => 'Número digitado não foi encontrado, confira e tente novamente', 
+                                    'found'         => 0 );
+            } else {
+                $response = array(  'success'       => true,
+                                    'message-title' => 'Possui pedidos',
+                                    'message'       => '',
+                                    'found'         => 1 );
             }
         }
         
@@ -161,16 +161,27 @@ class Polen_Order
         $order_number = filter_input( INPUT_POST, 'order_number', FILTER_VALIDATE_INT );
         $fan_email = filter_input( INPUT_POST, 'fan_email', FILTER_VALIDATE_EMAIL );
         if( !$order_number || !$fan_email ) {
-            wc_add_notice( 'Email ou numero do pedidos inválidos', 'error' );
+            if( function_exists( 'wc_add_notice' ) ) {
+                wc_add_notice( 'Email ou numero do pedidos inválidos', 'error' );
+            }
             wp_safe_redirect( get_permalink( get_page_by_path( 'acompanhar-pedido' ) ) );
             exit;
         }
 
         $order = wc_get_order( $order_number );
+        if( empty( $order ) ) {
+            if( function_exists( 'wc_add_notice' ) ) {
+                wc_add_notice( 'Email e pedido não são iguais (2)', 'error' );
+            }
+            wp_safe_redirect( get_permalink( get_page_by_path( 'acompanhar-pedido' ) ) );
+            exit;
+        }
         $email_inside_order = $order->get_billing_email();
 
         if( $fan_email != $email_inside_order ) {
-            wc_add_notice( 'Email e pedido não são iguais', 'error' );
+            if( function_exists( 'wc_add_notice' ) ) {
+                wc_add_notice( 'Email e pedido não são iguais', 'error' );
+            }
             wp_safe_redirect( get_permalink( get_page_by_path( 'acompanhar-pedido' ) ) );
             exit;
         }

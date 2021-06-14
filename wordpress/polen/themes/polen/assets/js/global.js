@@ -4,17 +4,11 @@ const CONSTANTS = {
 	ERROR: "error",
 	SHOW: "show",
 	HIDDEN: "hidden",
+	MESSAGE_TIME: 5,
+	THEME: "theme_mode",
 };
 
-if (!polenObj.developer) {
-	console = {
-		debug: function () {},
-		error: function () {},
-		info: function () {},
-		log: function () {},
-		warn: function () {},
-	};
-}
+var interval = setInterval;
 
 function copyToClipboard(text) {
 	var copyText = document.createElement("input");
@@ -60,6 +54,7 @@ function setImediate(handle) {
 }
 
 function polMessageKill(id) {
+	clearInterval(interval);
 	var el = document.getElementById(id);
 	if (el) {
 		el.classList.remove(CONSTANTS.SHOW);
@@ -67,6 +62,12 @@ function polMessageKill(id) {
 			el.parentNode.removeChild(el);
 		});
 	}
+}
+
+function polMessageAutoKill(id) {
+	interval = setInterval(function () {
+		polMessageKill(id);
+	}, CONSTANTS.MESSAGE_TIME * 1000);
 }
 
 function polSpinner(action, el) {
@@ -99,6 +100,15 @@ function polSpinner(action, el) {
 	}
 }
 
+const polMessages = {
+	message: function(title, message) {
+		polMessage(title, message);
+	},
+	error: function(message) {
+		polError(message);
+	}
+}
+
 function polMessage(title, message) {
 	var id = "message-box";
 	polMessageKill(id);
@@ -124,6 +134,7 @@ function polMessage(title, message) {
 	document.body.appendChild(messageBox);
 	setImediate(function () {
 		messageBox.classList.add(CONSTANTS.SHOW);
+		polMessageAutoKill(id);
 	});
 }
 
@@ -145,6 +156,7 @@ function polError(message) {
 	document.body.appendChild(messageBox);
 	setImediate(function () {
 		messageBox.classList.add(CONSTANTS.SHOW);
+		polMessageAutoKill(id);
 	});
 }
 
@@ -212,19 +224,19 @@ function blockUnblockInputs(el, block) {
 
 // ----------------------------
 // Handler do Download do Video
-function downloadClick_handler( evt ) {
-	
+function downloadClick_handler(evt) {
 	evt.preventDefault();
-	let hash = jQuery( evt.currentTarget ).attr( 'data-download' );
-	let data = { 'hash': hash };
-	jQuery.post(woocommerce_params.ajax_url + '?action=video-download-link', data, response => {
-		if( response.success ) {
+	let hash = jQuery(evt.currentTarget).attr("data-download");
+	let security = jQuery(evt.currentTarget).attr("data-nonce");
+	let action = "video-download-link";
+	let data = { hash, security, action };
+	jQuery.post(woocommerce_params.ajax_url, data, (response) => {
+		if (response.success) {
 			window.location.href = response.data;
 		}
 	});
 }
 // ---------------------------
-
 
 jQuery(document).ready(function () {
 	truncatedItems();
@@ -235,9 +247,11 @@ jQuery(document).ready(function () {
 	$(document).on("click", ".signin-newsletter-button", function (e) {
 		e.preventDefault();
 		var email = $('input[name="signin_newsletter"]');
+		var page_source = $('input[name="signin_newsletter_page_source"]');
+		var event = $('input[name="signin_newsletter_event"]');
+		var is_mobile = $('input[name="signin_newsletter_is_mobile"]');
 		var wnonce = $(this).attr("code");
 		$(".signin-response").html("");
-
 		if (email.val() !== "") {
 			polSpinner(CONSTANTS.SHOW, "#signin-newsletter");
 			$.ajax({
@@ -247,9 +261,12 @@ jQuery(document).ready(function () {
 					action: "polen_newsletter_signin",
 					security: wnonce,
 					email: email.val(),
+					page_source: page_source.val(),
+					event: event.val(),
+					is_mobile: is_mobile.val(),
 				},
 				success: function (response) {
-					polMessage("Cadastro Efetuado", response.data.response);
+					polMessage("Seu email foi adicionado à lista", response.data.response);
 					email.val("");
 				},
 				complete: function () {
@@ -260,7 +277,7 @@ jQuery(document).ready(function () {
 				},
 			});
 		} else {
-			$(".signin-response").html("Por favor, digite um e-mail válido");
+			polError("Por favor, digite um e-mail válido");
 		}
 	});
 })(jQuery);

@@ -130,6 +130,11 @@ class Icon_Class
 		echo '<i class="icon icon-trash"></i>';
 	}
 
+	public static function polen_icon_donate()
+	{
+		echo '<i class="icon icon-donate"></i>';
+	}
+
 	public static function polen_icon_social($ico)
 	{
 		$ret = '';
@@ -152,6 +157,10 @@ class Icon_Class
 
 			case 'whatsapp':
 				$ret = '<i class="bi bi-whatsapp"></i>';
+				break;
+
+			case 'tiktok':
+				$ret = '<i class="icon icon-tiktok"></i>';
 				break;
 
 			default:

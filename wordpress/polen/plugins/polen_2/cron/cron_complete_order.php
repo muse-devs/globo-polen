@@ -30,6 +30,7 @@ foreach ( $videos as $video ) {
             $video->duration = $response->get_duration();
             $video->vimeo_url_download = $response->get_download_best_quality_url();
             $video->update();
+            $vimeo_api->request( $video->vimeo_id . '/presets/120906813', [], 'PUT');
             echo "Achei: {$video->vimeo_id} \n";
         }
         

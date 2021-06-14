@@ -75,6 +75,10 @@ class Polen_WooCommerce
                     add_action( $action_hook_notification, array( WC(), 'send_transactional_email' ), 10, 1 );
                 }
             } );
+
+            add_filter( 'woocommerce_product_data_tabs', array( $this, 'charity_tab' ) );
+            add_filter( 'woocommerce_product_data_panels', array( $this, 'charity_product_data_product_tab_content' ) );
+            add_action( 'woocommerce_update_product', array( $this, 'on_product_save' ) );
         }
     }
 
@@ -204,5 +208,114 @@ class Polen_WooCommerce
 
             return $items;
         }
+    }
+
+    public function charity_tab( $array ){
+        $array['charity'] = array(
+            'label'    => 'Caridade',
+            'target'   => 'charity_product_data',
+            'class'    => array(),
+            'priority' => 90,
+        );
+        return $array;
+    }
+
+    public function charity_product_data_product_tab_content() {
+        global $product_object;
+    ?>
+        <div id="charity_product_data" class="panel woocommerce_options_panel hidden">
+            <div class='options_group'>
+            <?php
+                woocommerce_wp_checkbox(
+                    array(
+                        'id'      => '_is_charity',
+                        'value'   => $product_object->get_meta( '_is_charity' ) == 'yes' ? 'yes' : 'no',
+                        'label'   => 'Para Caridade',
+                        'cbvalue' => 'yes',
+                    )
+                );
+            ?>
+            </div>
+        
+            <div class="options_group">
+                <?php
+                woocommerce_wp_text_input(
+                    array(
+                        'id'                => '_charity_name',
+                        'value'             => $product_object->get_meta( '_charity_name' ),
+                        'label'             => 'Charity Name',
+                        'desc_tip'          => true,
+                        'description'       => 'Nome da instituição de Caridade',
+                        'type'              => 'text',
+                    )
+                );
+                ?>
+            </div>
+        
+            <div class="options_group">
+                <?php
+                woocommerce_wp_text_input(
+                    array(
+                        'id'                => '_url_charity_logo',
+                        'value'             => $product_object->get_meta( '_url_charity_logo' ),
+                        'label'             => 'Logo da instituição',
+                        'desc_tip'          => true,
+                        'description'       => 'Logo da instituição de Caridade',
+                        'type'              => 'text',
+                    )
+                );
+                ?>
+            </div>
+        
+            <div class="options_group">
+                <?php
+                woocommerce_wp_textarea_input(
+                    array(
+                        'id'          => '_description_charity',
+                        'value'       => $product_object->get_meta( '_description_charity' ),
+                        'label'       => 'Descrição da instituição',
+                        'desc_tip'    => true,
+                        'description' => 'Descrição da instituição de caridade.',
+                    )
+                );
+                ?>
+            </div>
+
+            <div class="options_group">
+                <?php
+                woocommerce_wp_text_input(
+                    array(
+                        'id'          => '_charity_subordinate_merchant_id',
+                        'value'       => $product_object->get_meta( '_charity_subordinate_merchant_id' ),
+                        'label'       => 'Subordinate Merchant ID',
+                        'desc_tip'    => true,
+                        'description' => 'Código Braspag para a instituição de caridade.',
+                        'type'        => 'text',
+                    )
+                );
+                ?>
+            </div>
+        </div>
+    <?php
+    }
+
+    public function on_product_save( $product_id ) {
+        $product = wc_get_product( $product_id );
+
+        $charity = strip_tags( $_POST['_is_charity'] );
+        $charity_name = strip_tags( $_POST['_charity_name'] );
+        $charity_url = strip_tags( $_POST['_url_charity_logo'] );
+        $charity_description = strip_tags( $_POST['_description_charity'] );
+        $charity_subordinate_id = strip_tags( $_POST['_charity_subordinate_merchant_id'] );
+
+        $product->update_meta_data( '_is_charity', $charity );
+        $product->update_meta_data( '_charity_name', $charity_name );
+        $product->update_meta_data( '_url_charity_logo', $charity_url );
+        $product->update_meta_data( '_description_charity', $charity_description );
+        $product->update_meta_data( '_charity_subordinate_merchant_id', $charity_subordinate_id );
+
+        remove_action( 'woocommerce_update_product', array( $this, 'on_product_save' ) );
+        $product->save();
+        add_action( 'woocommerce_update_product', array( $this, 'on_product_save' ) );
     }
 }

@@ -25,6 +25,7 @@ $body      = get_option( 'woocommerce_email_body_background_color' );
 $base      = get_option( 'woocommerce_email_base_color' );
 $base_text = wc_light_or_dark( $base, '#202020', '#ffffff' );
 $text      = get_option( 'woocommerce_email_text_color' );
+$secondary = "#377dff";
 
 // Pick a contrasting color for links.
 $link_color = wc_hex_is_light( $base ) ? $base : $base_text;
@@ -45,6 +46,8 @@ $text_lighter_40 = wc_hex_lighter( $text, 40 );
 ?>
 body {
 	padding: 0;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 #wrapper {
@@ -71,7 +74,7 @@ body {
 	font-weight: bold;
 	line-height: 100%;
 	vertical-align: middle;
-	font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+	font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 #template_header h1,
@@ -95,7 +98,7 @@ body {
 #template_footer #credit {
 	border: 0;
 	color: <?php echo esc_attr( $text_lighter_40 ); ?>;
-	font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+	font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 12px;
 	line-height: 150%;
 	text-align: center;
@@ -103,7 +106,7 @@ body {
 }
 
 #template_footer #credit p {
-	margin: 0 0 16px;
+	margin: 0 0 10px;
 }
 
 #body_content {
@@ -111,7 +114,7 @@ body {
 }
 
 #body_content table td {
-	padding: 48px 48px 32px;
+	padding: 20px 48px 32px;
 }
 
 #body_content table td td {
@@ -139,15 +142,19 @@ body {
 }
 
 #body_content p {
-	margin: 0 0 16px;
+	margin: 0 0 10px;
 }
 
 #body_content_inner {
 	color: <?php echo esc_attr( $text_lighter_20 ); ?>;
-	font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+	font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 14px;
 	line-height: 150%;
 	text-align: <?php echo is_rtl() ? 'right' : 'left'; ?>;
+}
+
+#body_content_inner table, #body_content_inner table td {
+	border: none;
 }
 
 .td {
@@ -164,11 +171,42 @@ body {
 
 .text {
 	color: <?php echo esc_attr( $text ); ?>;
-	font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+	font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .link {
 	color: <?php echo esc_attr( $link_color ); ?>;
+}
+
+.btn_wrap {
+	padding: 20px 0 0;
+	text-align: center;
+}
+
+.img_wrap {
+	padding: 0 0 20px;
+	text-align: center;
+}
+
+.image-icon {
+	margin-right: 0;
+	vertical-align: bottom;
+}
+
+.btn {
+	display: inline-block;
+    padding: 1rem;
+	width: 70%;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.5;
+    color: #fff;
+    text-align: center;
+	cursor: pointer;
+    text-decoration: none;
+    border: 1px solid transparent;
+    border-radius: 8px;
+	background-color: <?php echo esc_attr( $base ); ?>;
 }
 
 #header_wrapper {
@@ -177,20 +215,23 @@ body {
 }
 
 h1 {
-	color: <?php echo esc_attr( $base ); ?>;
-	font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
-	font-size: 30px;
-	font-weight: 300;
-	line-height: 150%;
 	margin: 0;
+	padding-top: 20px;
+	color: <?php echo esc_attr( $base ); ?>;
+	font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 44px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 45px;
+	letter-spacing: -0.03em;
 	text-align: <?php echo is_rtl() ? 'right' : 'left'; ?>;
-	text-shadow: 0 1px 0 <?php echo esc_attr( $base_lighter_20 ); ?>;
+	#text-shadow: 0 1px 0 <?php echo esc_attr( $base_lighter_20 ); ?>;
 }
 
 h2 {
 	color: <?php echo esc_attr( $base ); ?>;
 	display: block;
-	font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+	font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 18px;
 	font-weight: bold;
 	line-height: 130%;
@@ -201,12 +242,19 @@ h2 {
 h3 {
 	color: <?php echo esc_attr( $base ); ?>;
 	display: block;
-	font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+	font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 16px;
 	font-weight: bold;
 	line-height: 130%;
 	margin: 16px 0 8px;
 	text-align: <?php echo is_rtl() ? 'right' : 'left'; ?>;
+}
+
+p {
+	font-size: 16px;
+	line-height: 2;
+	font-weight: 400;
+	color: <?php echo esc_attr( $base_text ); ?>;
 }
 
 a {
@@ -229,4 +277,85 @@ img {
 	max-width: 100%;
 	height: auto;
 }
+
+.talent_card {
+	padding: 16px;
+	border-radius: 8px;
+	box-sizing: border-box;
+	background-color: <?php echo esc_attr( $secondary ); ?>
+}
+
+.card_thumb {
+	float: left;
+	margin-right: 16px;
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	overflow: hidden;
+	background: no-repeat center/cover <?php echo esc_attr( $base ); ?>;
+}
+
+.card_title {
+	font-size: 16px;
+	font-weight: 700;
+	color: #fff;
+}
+
+.card_subtitle {
+	font-size: 14px;
+	font-weight: 400;
+	color: #fff;
+	opacity: 0.4;
+}
+
+.card_price {
+	font-size: 32px;
+	font-weight: 700;
+	color: #fff;
+}
+
+.order_card {
+	margin: 20px 0;
+	padding: 16px;
+	border-radius: 8px;
+	box-sizing: border-box;
+	border: 1px solid rgba(255,255,255,0.3);
+	text-align: center;
+}
+
+.order_number {
+	font-size: 24px;
+	font-weight: 700;
+}
+
+.details_title {
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 1;
+	color: <?php echo esc_attr( $text ); ?>;
+	opacity: 0.4;
+}
+
+.details_value {
+	margin: 0;
+	font-size: 26px;
+	font-weight: 700;
+	color: <?php echo esc_attr( $text ); ?>;
+}
+
+.details_value_small {
+	margin: 0;
+	font-size: 21px;
+	font-weight: 500;
+	color: <?php echo esc_attr( $text ); ?>;
+}
+
+.details_line {
+	display: block;
+	width: 100%;
+	height: 2px;
+	background-color: <?php echo esc_attr( $text ); ?>;
+	opacity: 0.5;
+}
+
 <?php

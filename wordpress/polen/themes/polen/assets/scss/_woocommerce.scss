@@ -16,6 +16,10 @@
 	}
 }
 
+.form-group {
+	margin: 0;
+}
+
 #add_payment_method #payment,
 .woocommerce-cart #payment,
 .woocommerce-checkout #payment {
@@ -56,12 +60,18 @@ select.form-control:not([size]):not([multiple]) {
 .woocommerce-MyAccount-navigation {
 	li {
 		padding: 16px 20px;
+		color: inherit;
 		border-left: 7px solid transparent;
 		box-sizing: border-box;
 		&.is-active {
 			border-radius: 6px;
 			border-left-color: $primary;
-			background-color: $talent-bg-color;
+		}
+		a {
+			text-decoration: none;
+			font-size: 18px;
+			font-weight: 600;
+			color: inherit;
 		}
 	}
 	@include media-breakpoint-down(xs) {
@@ -101,7 +111,7 @@ select.form-control:not([size]):not([multiple]) {
 }
 
 .woocommerce div.product form.cart {
-	margin-bottom: 1.5em;
+	margin-bottom: 0;
 }
 
 .woocommerce-error {
@@ -133,6 +143,13 @@ select.form-control:not([size]):not([multiple]) {
 .woocommerce-notices-wrapper {
 	margin: auto;
 	max-width: calc(100% - 30px);
+}
+
+.woocommerce-result-count {
+	@include media-breakpoint-down(sm) {
+		float: none !important;
+		display: block;
+	}
 }
 
 .woocommerce-error,
@@ -167,7 +184,7 @@ select.form-control:not([size]):not([multiple]) {
 .woocommerce button.button,
 .woocommerce input.button {
 	margin-top: 1rem;
-	color: var(--light);
+	color: var(--dark);
 	background-color: transparent;
 	border: 1px solid;
 	border-radius: 6px;
@@ -176,11 +193,10 @@ select.form-control:not([size]):not([multiple]) {
 #add_payment_method #payment div.payment_box,
 .woocommerce-cart #payment div.payment_box,
 .woocommerce-checkout #payment div.payment_box {
-	color: var(--light);
+	color: inherit;
 }
 
 .blockUI.blockOverlay {
-	background-color: $dark-50 !important;
 	&::before {
 		width: 2rem !important;
 		height: 2rem !important;
@@ -205,9 +221,29 @@ select.form-control:not([size]):not([multiple]) {
 }
 
 .woocommerce form .form-row.woocommerce-invalid label {
-	color: var(--light);
+	color: inherit;
 }
 
 .woocommerce-invalid #terms {
 	outline: transparent !important;
 }
+
+.woocommerce .cart-collaterals .cart_totals,
+.woocommerce-page .cart-collaterals .cart_totals {
+	width: 0;
+	height: 0;
+	overflow: hidden;
+}
+
+#wpua-preview img,
+#wpua-thumbnail img,
+#wpua-preview-existing img,
+#wpua-thumbnail-existing img {
+	max-height: 120px !important;
+	border: none !important;
+}
+
+// #wpua-upload-button-existing {
+// 	height: 0;
+// 	overflow: hidden;
+// }

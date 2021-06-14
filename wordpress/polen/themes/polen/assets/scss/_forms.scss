@@ -3,14 +3,14 @@
 	font-family: $font-primary;
 	font-size: 14px;
 	border: none;
-	color: $input-font-color;
-	background-color: var(--gray-dark);
+	color: inherit;
 	&::placeholder {
 		font-family: inherit;
+		color: inherit !important;
 	}
 	&:focus {
-		color: $input-font-color;
-		background-color: var(--gray-dark);
+		color: inherit;
+		border-color: var(--primary) !important;
 	}
 	&:disabled,
 	&[read-only] {
@@ -21,11 +21,6 @@
 .btn-primary:hover {
 	background-color: $primary-hover;
 	border-color: $primary-hover;
-}
-
-.btn-outline-light {
-	color: $light-100;
-	border-color: $light-50;
 }
 
 .step {
@@ -40,7 +35,6 @@
 .cart-item,
 .woocommerce table.shop_table {
 	border-radius: 20px;
-	background-color: $form-bg-color;
 }
 
 .cart-item {
@@ -77,11 +71,10 @@
 
 .cart-other {
 	.form-control {
-		margin-bottom: 20px;
+		// margin-bottom: 20px;
 		// padding: 20px 40px;
 		border-radius: 10px;
 		box-sizing: border-box;
-		color: $input-font-color;
 	}
 	select {
 		height: auto !important;
@@ -136,7 +129,7 @@ select {
 	}
 }
 
-input[type="file"] {
+input[type="file"]#file-video {
 	display: none;
 }
 
@@ -160,7 +153,7 @@ textarea {
 		--focus: 2px rgba(39, 94, 254, 0.3);
 		--border: var(--subtext);
 		--border-hover: var(--primary);
-		--background: var(--gray);
+		// --background: var(--gray);
 		--disabled: #f6f8ff;
 		--disabled-inner: #e1e6f9;
 		-webkit-appearance: none;

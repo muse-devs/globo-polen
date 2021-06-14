@@ -3,12 +3,16 @@
 class Order_Class
 {
 
-	public static function polen_get_order_flow_obj($order_number, $order_status)
+	public static function polen_get_order_flow_obj($order_number, $order_status, $email_billing = null )
 	{
+		$flow_1_complement_email = '';
+		if( !empty( $email_billing ) ) {
+			$flow_1_complement_email = "<br />Todas as atualizações serão enviadas para o email <strong>{$email_billing}</strong>.";
+		}
 		$flow_1 = array(
 			'pending' => array(
 				'title' => 'Pendente de pagamento',
-				'description' => 'Seu número de pedido #' . $order_number . ' está aguardando pagamento.',
+				'description' => 'Seu número de pedido #' . $order_number . ' está aguardando pagamento. ' . $flow_1_complement_email,
 				'status' => 'fail',
 			),
 			'payment-in-analysis' => array(
@@ -23,7 +27,7 @@ class Order_Class
 			),
 			'payment-approved' => array(
 				'title' => 'Pagamento aprovado',
-				'description' => 'Seu número de pedido #' . $order_number . ' foi aprovado.',
+				'description' => 'Seu número de pedido #' . $order_number . ' foi aprovado. ' . $flow_1_complement_email,
 				'status' => 'complete',
 			),
 		);
