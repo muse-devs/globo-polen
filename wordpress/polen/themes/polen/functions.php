@@ -167,7 +167,7 @@ function polen_scripts() {
 
 	if( is_front_page() || is_page_template( 'inc/landpage.php' ) ) {
 		foreach( $wp_styles->queue as $style ) {
-			if( strpos( $style, 'cookie-law-info' ) ) {
+			if( !strpos( $style, 'cookie-law-info' ) ) {
 				wp_dequeue_style( $wp_styles->registered[$style]->handle );
 			}
 		}
