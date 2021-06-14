@@ -114,13 +114,4 @@ class Order_Class
 
 		return $flows;
 	}
-
-	public static function clearArray($arr)
-	{
-		$new_array = array();
-		foreach ($arr as $value) {
-			$new_array[] = $value;
-		}
-		return $new_array;
-	}
 }
