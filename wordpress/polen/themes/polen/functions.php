@@ -261,3 +261,7 @@ add_action('wc_gateway_stripe_process_response', function($response, $order) {
 		$order->update_status( 'payment-rejected', 'Erro no Pagamento' );
 	}
 }, 10, 3);
+
+add_action('wc_gateway_stripe_process_webhook_payment_error', function($order, $notification){
+	$order->update_status( 'payment-rejected', 'Erro no Pagamento' );
+}, 10, 2);
