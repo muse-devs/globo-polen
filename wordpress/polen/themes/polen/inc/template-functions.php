@@ -5,6 +5,8 @@
  * @package Polen
  */
 
+use Polen\Includes\Cart\Polen_Cart_Item_Factory;
+
 /**
  * Adds custom classes to the array of body classes.
  *
@@ -82,7 +84,7 @@ function polen_get_url_my_account()
  */
 function polen_get_url_my_orders()
 {
-	return polen_get_url_my_account() . "/orders";
+	return polen_get_url_my_account() . "orders";
 }
 
 
@@ -109,6 +111,26 @@ function polen_get_url_category_by_product_id ( $product_id )
 	return $cat_link;
 }
 
+
+/**
+ * Pegar a URL da categoria pelo OrderID
+ */
+function polen_get_url_category_by_order_id ( $order_id )
+{
+	$order = wc_get_order( $order_id );
+	$car_item = Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
+	$category_ids = $car_item->get_product()->get_category_ids();
+	$category_id = array_pop( $category_ids );
+	$cat_terms = wp_get_object_terms( $category_id, 'product_cat' );
+    $cat_link = '';
+	$cat = array_pop( $cat_terms );
+    if ( !empty($cat) ) {
+        $cat_link = get_term_link($cat->term_id);
+    }
+	return $cat_link;
+}
+
+
 function polen_get_url_review_page()
 {
 	return './reviews/';
@@ -127,12 +149,62 @@ function polen_get_custom_logo_url() {
 }
 
 /**
+ * Pegar as duas logos para thema claro e escuro
+ */
+function polen_get_theme_logos() {
+	$logo_dark = get_theme_mod( 'custom_logo' );
+	$logo_dark = wp_get_attachment_image_url( $logo_dark, 'full' );
+	$logo_light = get_theme_mod( 'logo_theme_white' );
+
+	$html =  '<a href="' . get_site_url() . '" class="custom-logo-link" rel="home" aria-current="page">';
+	if(is_front_page()) {
+		$html .= 	'<img width="168" height="88" src="'. $logo_dark . '" class="custom-logo" alt="Polen">';
+	} else {
+		$html .= 	'<img width="168" height="88" src="'. $logo_dark . '" class="custom-logo dark" alt="Polen">';
+		$html .= 	'<img width="168" height="88" src="'. $logo_light . '" class="custom-logo light" alt="Polen">';
+	}
+	$html .= '</a>';
+
+	return $html;
+}
+
+function polen_the_theme_logos() {
+	echo polen_get_theme_logos();
+}
+
+/**
+ * Funcao que pegar a URL de login e completa com ?redirect= se estiver no cart ou checkout
+ */
+function polen_get_login_url() {
+	$complement = '';
+	if( is_cart() || is_checkout() ) {
+		$url_complement = is_cart() ? urlencode( wc_get_cart_url() ) : urlencode( wc_get_checkout_url() );
+		$complement = '?redirect_to=' . $url_complement;
+	}
+	return polen_get_url_my_account() . $complement;
+}
+
+
+/**
+ *
+ */
+function polen_get_querystring_redirect()
+{
+	$redirect_to = urlencode( filter_input( INPUT_GET, 'redirect_to' ) );
+	if( !empty( $redirect_to ) ) {
+		return "?redirect_to={$redirect_to}";
+	}
+	return null;
+}
+
+
+/**
  * Tags Open Graph
  */
 if ( ! in_array( 'all-in-one-seo-pack/all_in_one_seo_pack.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
 	add_action( 'wp_head', function() {
 		global $post;
-		if( $post->post_type == 'product' ) {
+		if( !empty( $post ) && $post->post_type == 'product' ) {
 			echo "\n\n";
 			echo "\t" . '<meta property="og:title" content="' . get_the_title() . '">' . "\n";
 			echo "\t" . '<meta property="og:description" content="' . get_the_excerpt() . '">' . "\n";
@@ -146,7 +218,7 @@ if ( ! in_array( 'all-in-one-seo-pack/all_in_one_seo_pack.php', apply_filters( '
 				echo "\t" . '<meta property="og:image" content="' . polen_get_custom_logo_url() . '">' . "\n";
 			}
 			echo "\n";
-		} elseif( $post->post_type == 'page' && $post->post_name == 'v' ) {
+		} elseif( !empty( $post ) && $post->post_type == 'page' && $post->post_name == 'v' ) {
 			echo "\n\n";
 			echo "\t" . '<meta property="og:title" content="' . get_the_title() . '">' . "\n";
 			echo "\t" . '<meta property="og:description" content="' . get_the_excerpt() . '">' . "\n";

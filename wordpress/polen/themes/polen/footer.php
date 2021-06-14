@@ -12,30 +12,20 @@
 
 ?>
 
-<footer id="colophon" class="pt-4 mt-5 site-footer">
-	<?php if ( (!is_page('cart') || !is_cart()) && 
+<footer id="colophon" class="site-footer pb-4">
+	<?php if ( (!is_page('cart') || !is_cart()) &&
 			 (!is_page('checkout') || !is_checkout()) ) : ?>
-		<div class="row pb-5">
+		<div class="row">
 			<div class="col-12">
 				<div class="row justify-content-md-between">
-					<div id="signin-newsletter" class="col-md-6 mt-4 order-md-2">
-						<h5 class="title">Junte-se à nossa lista</h5>
-						<p class="description">Seja o primeiro a saber sobre as estrelas mais recentes e as melhores ofertas no Muse</p>
-						<div class="row">
-							<div class="col-md-8 mb-2 mb-md-0">
-								<input type="email" name="signin_newsletter" placeholder="Entre com o seu e-mail" class="form-control form-control-lg" />
-							</div>
-							<?php
-								$newsletter_signin_nonce = wp_create_nonce('news-signin');
-							?>
-							<div class="col-md-4 mt-2 mt-md-0 d-md-flex align-items-md-center" >
-								<button class="signin-newsletter-button btn btn-outline-light btn-lg btn-block" code="<?php echo $newsletter_signin_nonce;?>">Enviar</button>
-							</div>
-							<div class="col-md-8 mb-2 mb-md-0 small signin-response"></div>
-						</div>
-					</div>
 
-					<div class="col-md-4 mt-4 order-md-1">
+					<?php
+						if(is_front_page()) {
+							polen_form_signin_newsletter();
+						}
+					?>
+
+					<div class="mt-4 <?php echo is_front_page() ? "col-md-4" : "col-md-8" ?> order-md-1">
 						<h5 class="title"><?= get_bloginfo('name'); ?></h5>
 							<?php
 								$menu = wp_nav_menu(
@@ -66,19 +56,23 @@
 			</div>
 		</div>
 	<?php endif; ?>
-	<div class="row mt-5 pb-5 copyright">
+	<div class="row mt-4 copyright">
 		<div class="col-md-12 pb-4 text-center social">
-			<a href="#facebook"><?php Icon_Class::polen_icon_social("facebook"); ?></a>
-			<a href="#instagram"><?php Icon_Class::polen_icon_social("instagram"); ?></a>
-			<a href="#linkedin"><?php Icon_Class::polen_icon_social("linkedin"); ?></a>
-			<a href="#twitter"><?php Icon_Class::polen_icon_social("twitter"); ?></a>
+			<a href="https://www.facebook.com/Polen-107879504782470/" target="_blank"><?php Icon_Class::polen_icon_social("facebook"); ?></a>
+			<a href="https://www.instagram.com/polen.me" target="_blank"><?php Icon_Class::polen_icon_social("instagram"); ?></a>
+			<!-- <a href="#linkedin" target="_blank"><?php Icon_Class::polen_icon_social("linkedin"); ?></a> -->
+			<!-- <a href="#twitter" target="_blank"><?php Icon_Class::polen_icon_social("twitter"); ?></a> -->
+			<a href="https://vm.tiktok.com/ZMeKtWr1H/" target="_blank"><?php Icon_Class::polen_icon_social("tiktok"); ?></a>
 		</div>
-		<div class="col-md-12 pt-3 text-center">2021 @Polen</div>
+		<div class="col-md-12 pt-3 text-center">2021 @<?= get_bloginfo('name'); ?></div>
 	</div><!-- .site-info -->
 </footer><!-- #colophon -->
 </div><!-- #Container -->
 
 <?php wp_footer(); ?>
+<?php do_action( 'polen_messages_service_error' ); ?>
+<?php do_action( 'polen_messages_service_success' ); ?>
+<?php Polen\Includes\Polen_Messages::clear_messages(); ?>
 
 </body>
 

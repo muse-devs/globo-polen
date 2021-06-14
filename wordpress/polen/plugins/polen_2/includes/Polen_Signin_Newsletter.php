@@ -1,8 +1,13 @@
 <?php
 
 namespace Polen\Includes;
+
+use Polen\Includes\Emails\Polen_Email_Signin_Prerelease;
 use \Polen\Includes\Polen_Newsletter_Display;
 
+include_once WP_PLUGIN_DIR . '/woocommerce/includes/abstracts/abstract-wc-settings-api.php';
+include_once WP_PLUGIN_DIR . '/woocommerce/includes/emails/class-wc-email.php';
+include_once WP_PLUGIN_DIR . '/woocommerce/includes/class-wc-emails.php';
 class Polen_Signin_Newsletter
 {
     public function __construct( $static = false ) {
@@ -63,16 +68,29 @@ class Polen_Signin_Newsletter
     public function newsletter_signin(){
         $nonce = esc_attr( $_POST['security'] );
         $email = trim( $_POST['email'] );
+        $event = trim( $_POST['event'] );
+        $page_source = trim( $_POST['page_source'] );
+        $is_mobile = trim( $_POST['is_mobile'] );
 
         if ( ! wp_verify_nonce( $nonce, 'news-signin' ) ) {
             wp_send_json_error( array( 'response' => 'Não foi possível completar a solicitação' ), 403 );
             wp_die();
         }
+
+        if( !filter_var( $email, FILTER_VALIDATE_EMAIL ) ) {
+            wp_send_json_error( array( 'response' => 'Email inválido' ), 403 );
+            wp_die();
+        }
     
-        if( isset( $email ) && !empty( $email ) ){
-            $newsletter = $this->set_email_to_newsletter( $email );
+        if( isset( $email ) && !empty( $email ) ) {
+            $newsletter = $this->set_email_to_newsletter( $email, $event, $page_source, $is_mobile );
             if( !empty( $newsletter ) ){
-                if( $newsletter == "Cadastrado com sucesso!") {
+                if( $newsletter == "Te enviamos um email com mais informações") {
+                    //Enviar email para o recem cadastrado
+                    // add_filter( 'woocommerce_defer_transactional_emails', '__return_true' ); 
+                    // \WC_Emails::instance();
+                    $email_service = new Polen_Email_Signin_Prerelease();
+                    $email_service->trigger( $email );
                     wp_send_json_success( array( 'response' => $newsletter ), 201 );
                     wp_die();
                 } else {
@@ -80,25 +98,27 @@ class Polen_Signin_Newsletter
                     wp_die();
                 }
             }
-        }else{
+        } else {
             wp_send_json_error( array( 'response' => 'Não foi possível completar a solicitação' ), 403 );
             wp_die();
         }
     }
 
+
     /**
      * Insert email to newsletter table
      */
-    public function set_email_to_newsletter( $email ){
+    public function set_email_to_newsletter( $email, $event, $page_source, $is_mobile = "0" ){
         if( !empty( $email ) ){
             global $wpdb;
             $exists = $this->check_already_inserted( $email );
             if( !$exists ){
-                $inserted = $wpdb->insert( $wpdb->base_prefix."newsletter_emails", array( 'email' => ( $email )) );
+                $insert_args = array( 'email' => $email, 'event' => $event, 'page_source' => $page_source, 'is_mobile' => $is_mobile ) ;
+                $inserted = $wpdb->insert( $wpdb->base_prefix."newsletter_emails", $insert_args);
 
                 if( $inserted > 0 ){
                     //$this->export_occasion_json();
-                    return "Cadastrado com sucesso!";
+                    return "Te enviamos um email com mais informações";
                 }else{
                     return "Ocorreu um erro ao tentar cadastrar";
                 }
@@ -127,7 +147,7 @@ class Polen_Signin_Newsletter
     public function list_newsletter_emails()
     {         
         if( isset( $_GET['export'] ) &&  $_GET['export'] == 'true' ){
-            $this->export_email_to_csv();
+            $this->export_to_csv();
         }
 
         $newsletter_display = new Polen_Newsletter_Display();

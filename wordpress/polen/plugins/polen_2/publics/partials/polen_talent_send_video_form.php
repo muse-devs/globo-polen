@@ -62,7 +62,7 @@ if (isset($_REQUEST['order_id']) && !empty($_REQUEST['order_id'])) {
             <div class="modal-content">
                 <div class="row modal-body">
                     <!-- Início -->
-                    <div class="col-12 talent-order-modal">
+                    <div class="background col-12 talent-order-modal">
                         <button type="button" class="modal-close" data-dismiss="modal" aria-label="Fechar">
                             <i class="icon icon-close"></i>
                         </button>
@@ -98,7 +98,7 @@ if (isset($_REQUEST['order_id']) && !empty($_REQUEST['order_id'])) {
                                     <p class="text"><?= $polen_order->get_instructions_to_video(); ?></p>
                                 </div>
                             </div>
-                            <div class="row mt-4">
+                            <div class="row my-4">
                                 <div class="col">
                                     <button class="btn btn-primary btn-lg btn-block video-rec show" data-dismiss="modal" aria-label="Fechar">Gravar vídeo</button>
                                 </div>

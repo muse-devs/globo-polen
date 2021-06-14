@@ -34,6 +34,21 @@ function polen_customize_register( $wp_customize ) {
 }
 add_action( 'customize_register', 'polen_customize_register' );
 
+
+function your_theme_customizer_setting($wp_customize) {
+	// add a setting
+		$wp_customize->add_setting('logo_theme_white');
+	// Add a control to upload the hover logo
+		$wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'logo_theme_white', array(
+			'label' => 'Logo tema Branco',
+			'section' => 'title_tagline', //this is the section where the custom-logo from WordPress is
+			'settings' => 'logo_theme_white',
+			'priority' => 8 // show it just below the custom-logo
+		)));
+}
+
+add_action('customize_register', 'your_theme_customizer_setting');
+
 /**
  * Render the site title for the selective refresh partial.
  *

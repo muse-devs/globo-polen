@@ -166,7 +166,7 @@ class Cubo9_Braspag {
                 }
 
                 $splitpayments[] = array(
-                    'subordinatemerchantid' => $row_seller->subordinate_merchant_id,
+                    'subordinatemerchantid' => $seller_data['subordinatemerchantid'],
                     'amount'                => $seller_data['amount'],
                     'fares'                 => array(
                         'mdr' => $mdr,
@@ -595,14 +595,24 @@ class Cubo9_Braspag {
 
                 $seller_id = get_post_field( 'post_author', $product_id );
 
+                $_is_charity                      = get_post_meta( $product_id, '_is_charity', true );
+                $_charity_subordinate_merchant_id = get_post_meta( $product_id, '_charity_subordinate_merchant_id', true );
+
                 if( ! in_array( $seller_id, $sellers ) ) {
                     $Polen_Update_Fields = new Polen_Update_Fields();
                     $row_seller = $Polen_Update_Fields->get_vendor_data( $seller_id );
                     $sellers[] = $seller_id;
+                    
+                    if( $_is_charity == 'yes' && $_charity_subordinate_merchant_id && ! is_null( $_charity_subordinate_merchant_id ) && ! empty( $_charity_subordinate_merchant_id ) ) {
+                        $subordinate_merchant_id = $_charity_subordinate_merchant_id;
+                    } else {
+                        $subordinate_merchant_id = $row_seller->subordinate_merchant_id;
+                    }
+
                     $seller_info[ $seller_id ] = array(
                         'id'                    => $seller_id,
                         'amount'                => number_format( $item->get_subtotal(), 2, '', '' ),
-                        'subordinatemerchantid' => $row_seller->subordinate_merchant_id,
+                        'subordinatemerchantid' => $subordinate_merchant_id,
                     );
                 } else {
                     $seller_info[ $seller_id ]['amount'] = ( $seller_info[ $seller_id ]['amount'] +  number_format( $item->get_subtotal(), 2, '', '' ) );

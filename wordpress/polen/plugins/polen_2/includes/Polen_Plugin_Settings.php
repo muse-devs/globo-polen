@@ -221,7 +221,7 @@ class Polen_Plugin_Settings
                     'type'     => 'text',
                     'title'    => esc_html__('Nome do remetente', 'polen'),
                     'desc'     => 'Informe o nome que deverá aparecer no remetente do e-mail.',
-                    'default'  => 'Muse',
+                    'default'  => 'Polen',
                     'required' => array( 'polen_smtp_on', '=', '1' ),
                 ),
                 array(
@@ -229,7 +229,7 @@ class Polen_Plugin_Settings
                     'type'     => 'text',
                     'title'    => esc_html__('E-mail do remetente', 'polen'),
                     'desc'     => 'Informe o e-mail que deverá aparecer como remetente.',
-                    'default'  => 'muse@c9t.pw',
+                    'default'  => 'polen@c9t.pw',
                     'required' => array( 'polen_smtp_on', '=', '1' ),
                 ),
             ),
@@ -293,6 +293,75 @@ class Polen_Plugin_Settings
                     'default'  => '7',
                     'min'      => '0',
                     'max'      => '30',
+                ),
+            )
+        ) );
+
+        // Recaptcha do google
+        \Redux::set_section( $opt_name, array(
+            'title'            => esc_html__( 'Google Recapcha Key', 'polen' ),
+            'id'               => 'g_recaptcha',
+            'icon'             => 'el el-credit-card',
+            'subsection'       => false,
+            'fields'           => array(
+                array(
+                    'id'       => 'polen_recaptcha_secret_key',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Secret Key', 'polen'),
+                    'desc'     => 'Informa a Secret do google.',
+                    'default'  => '',
+                ),
+                array(
+                    'id'       => 'polen_recaptcha_site_key',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Site Key', 'polen'),
+                    'desc'     => 'Informe o site key do google',
+                    'default'  => '',
+                ),
+            )
+        ) );
+
+        // Key Analitics
+        \Redux::set_section( $opt_name, array(
+            'title'            => esc_html__( 'Analitics Keys', 'polen' ),
+            'id'               => 'analitcs_keys',
+            'icon'             => 'el el-credit-card',
+            'subsection'       => false,
+            'fields'           => array(
+                array(
+                    'id'       => 'polen_google_analitics_key',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Google Analitics Keys', 'polen'),
+                    'desc'     => 'Informa o Google Analitics Keys.',
+                    'default'  => '',
+                ),
+                array(
+                    'id'       => 'polen_google_tagmanager_key',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Tag Manager Key', 'polen'),
+                    'desc'     => 'Informe o Tag Manager Key',
+                    'default'  => '',
+                ),
+                array(
+                    'id'       => 'polen_heapio_key',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Heap.IO Key', 'polen'),
+                    'desc'     => 'Informe o Heap.IO Key',
+                    'default'  => '',
+                ),
+                array(
+                    'id'       => 'polen_hotjar_key',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Hotjar Site Key', 'polen'),
+                    'desc'     => 'Informe o Hotjar Site Key',
+                    'default'  => '',
+                ),
+                array(
+                    'id'       => 'polen_facebookpixel_key',
+                    'type'     => 'text',
+                    'title'    => esc_html__('FB Pixel Code', 'polen'),
+                    'desc'     => 'Informe o Facebook Pixel Code',
+                    'default'  => '',
                 ),
             )
         ) );
