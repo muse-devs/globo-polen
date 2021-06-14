@@ -706,7 +706,7 @@ function polen_get_order_flow_layout($array_status)
 	}
 
 	$class = "";
-	$new_array = Order_Class::clearArray($array_status);
+	$new_array = array_values($array_status);
 
 	if ($new_array[0]['status'] === "fail" || $new_array[0]['status'] === "in-progress") {
 		$class = " none";
