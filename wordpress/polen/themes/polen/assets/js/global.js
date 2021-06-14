@@ -10,16 +10,6 @@ const CONSTANTS = {
 
 var interval = setInterval;
 
-if (!polenObj.developer) {
-	console = {
-		debug: function () {},
-		error: function () {},
-		info: function () {},
-		log: function () {},
-		warn: function () {},
-	};
-}
-
 function copyToClipboard(text) {
 	var copyText = document.createElement("input");
 	copyText.id = "share-input";
