@@ -424,7 +424,7 @@ function polen_get_video_player($talent, $video, $user_id)
 							var videoPlayer = new Vimeo.Player("polen-video", {
 								url: "<?php echo $video->vimeo_link; ?>",
 								autoplay: false,
-								muted: <?= polen_is_mobile() ? "true" : "false"; ?>,
+								muted: false,
 								loop: false,
 								width: document.getElementById("polen-video").offsetWidth,
 							});
@@ -706,9 +706,9 @@ function polen_get_order_flow_layout($array_status)
 	}
 
 	$class = "";
-	$new_array = Order_Class::clearArray($array_status);
+	$new_array = array_values($array_status);
 
-	if ($new_array[0]['status'] === "fail") {
+	if ($new_array[0]['status'] === "fail" || $new_array[0]['status'] === "in-progress") {
 		$class = " none";
 	}
 	if ($new_array[1]['status'] === "complete" && $new_array[2]['status'] !== "fail") {

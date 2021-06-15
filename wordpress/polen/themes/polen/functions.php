@@ -165,9 +165,9 @@ function polen_scripts() {
 	global $wp_styles;
 	$min = get_assets_folder();
 
-	if( is_front_page() || is_page_template( 'inc/landpage.php' ) ) {
+	if( is_front_page() || is_page_template( 'inc/landpage.php' ) || (is_singular() && is_product())) {
 		foreach( $wp_styles->queue as $style ) {
-			if( strpos( $style, 'cookie-law-info' ) ) {
+			if( strpos( $style, 'cookie-law-info' ) === false) {
 				wp_dequeue_style( $wp_styles->registered[$style]->handle );
 			}
 		}
@@ -248,3 +248,24 @@ require_once TEMPLATE_DIR . '/classes/Icon_Class.php';
  * Arquivo responsavel por retornos da tela de acompanhamento de pedidos
  */
 require_once TEMPLATE_DIR . '/classes/Order_Class.php';
+
+
+add_action('wc_gateway_stripe_process_response', function($response, $order) {
+	// $response
+	// $order
+	if( $response->status == 'succeeded' ) {
+		$order->update_status( 'payment-approved', 'Pago com Sucesso' );
+	}
+
+	if ( $response->status == 'failed') {
+		$order->update_status( 'payment-rejected', 'Erro no Pagamento' );
+	}
+}, 10, 3);
+
+add_action('wc_gateway_stripe_process_webhook_payment_error', function($order, $notification){
+	$order->update_status( 'payment-rejected', 'Erro no Pagamento' );
+}, 10, 2);
+
+add_filter('wc_stripe_save_to_account_text', function(){
+	return 'Salvar os dados do cartão de credito para proximas compras.';
+});

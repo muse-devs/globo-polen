@@ -32,6 +32,15 @@ use Polen\Includes\Polen_Talent;
 			base_url: '<?= site_url(); ?>',
 			developer: <?php echo DEVELOPER ? 1 : 0; ?>
 		};
+		if (!polenObj.developer) {
+			console = {
+				debug: function () {},
+				error: function () {},
+				info: function () {},
+				log: function () {},
+				warn: function () {},
+			};
+		}
 	</script>
 
     <?php include_once TEMPLATE_DIR . '/inc/analitics_header.php'; ?>
@@ -80,7 +89,7 @@ use Polen\Includes\Polen_Talent;
 										<a href="<?php echo get_permalink(get_option('woocommerce_myaccount_page_id')); ?>">Dashboard</a>
 									<?php endif; ?>
 										<a href="<?php echo esc_url(wc_get_account_endpoint_url('orders')); ?>">Meus pedidos</a>
-										<a href="<?php echo esc_url(wc_get_account_endpoint_url('payment-options')); ?>">Pagamentos</a>
+										<?php /* <a href="<?php echo esc_url(wc_get_account_endpoint_url('payment-options')); ?>">Pagamentos</a> */ ?>
 									<?php if( !Polen_Talent::static_is_user_talent( wp_get_current_user() ) ) : ?>
 										<a href="<?php echo esc_url(wc_customer_edit_account_url()); ?>">Meus dados</a>
 									<?php endif; ?>
