@@ -37,12 +37,11 @@ $item = Polen\Includes\Cart\Polen_Cart_Item_Factory::polen_cart_item_from_order(
 					<span class="details_value"><?php echo $order->get_formatted_order_total(); ?></span>
 				</td>
 				<td>
-					<p class="details_title">Tempo estimado</p>
-					<span class="details_value">-</span>
+					&nbsp;
 				</td>
 				<td>
 					<p class="details_title">Válido por</p>
-					<span class="details_value">-</span>
+					<span class="details_value">7 dias</span>
 				</td>
 			</tr>
 			<tr>
@@ -51,14 +50,17 @@ $item = Polen\Includes\Cart\Polen_Cart_Item_Factory::polen_cart_item_from_order(
 				</td>
 			</tr>
 			<tr>
-				<td>
-					<p class="details_title">Vídeo de</p>
-					<span class="details_value"><?php echo $item->get_offered_by(); ?></span>
-				</td>
-				<td valign="center">
-					<img src="<?php echo get_template_directory_uri(); ?>/assets/img/email/arrow.png ?>" alt="Seta para a direita">
-				</td>
-				<td>
+				<?php $video_de = $item->get_offered_by(); ?>
+				<?php if (!empty($video_de)) : ?>
+					<td>
+						<p class="details_title">Vídeo de</p>
+						<span class="details_value"><?php echo $item->get_offered_by(); ?></span>
+					</td>
+					<td valign="center">
+						<img src="<?php echo get_template_directory_uri(); ?>/assets/img/email/arrow.png ?>" alt="Seta para a direita">
+					</td>
+				<?php endif; ?>
+				<td <?php echo empty($video_de) ? " colspan='3'" : ""; ?>>
 					<p class="details_title">Para</p>
 					<span class="details_value"><?php echo $item->get_name_to_video(); ?></span>
 				</td>
