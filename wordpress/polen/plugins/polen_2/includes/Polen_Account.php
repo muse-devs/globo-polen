@@ -64,7 +64,7 @@ class Polen_Account
         }else{
             $menu_items = array(
                 'orders'          => 'Meus pedidos',
-                'payment-options' => 'Pagamento',
+                // 'payment-options' => 'Pagamento',
                 'edit-account'    => 'Meus dados',
                 'customer-logout' => __( 'Logout', 'woocommerce' ),
             );           

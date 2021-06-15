@@ -207,7 +207,7 @@ textarea {
 			box-shadow: 0 0 0 var(--focus);
 		}
 		&:not(.switch) {
-			width: 21px;
+			width: 21px !important;
 			&:after {
 				opacity: var(--o, 0);
 			}
