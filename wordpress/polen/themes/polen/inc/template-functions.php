@@ -148,6 +148,24 @@ function polen_get_custom_logo_url() {
 	}
 }
 
+
+/**
+ * Pegar a URL da Custom Logo
+ * a unica funcao dessa function é corrigir um erro que está dando em producao
+ * tem que ser removido e corrigido.
+ * o problema é que está apresentado https:https://polen.m
+ */
+function polen_get_custom_logo_url_() {
+	$custom_logo_id = get_theme_mod( 'custom_logo' );
+	if( $custom_logo_id && ! is_null( $custom_logo_id ) && ! empty( $custom_logo_id ) ) {
+		$image_url = wp_get_attachment_image_url( $custom_logo_id, 'full', true );
+		$protocol = ( isset( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] != 'off' ) ? 'https:' : 'http:';
+		$protocol = '';
+		return $protocol . $image_url;
+	}
+}
+
+
 /**
  * Pegar as duas logos para thema claro e escuro
  */
@@ -238,7 +256,7 @@ if ( ! in_array( 'all-in-one-seo-pack/all_in_one_seo_pack.php', apply_filters( '
 			echo "\t" . '<meta property="og:title" content="' . get_bloginfo( 'title' ) . '">' . "\n";
 			echo "\t" . '<meta property="og:description" content="' . get_bloginfo( 'description' ) . '">' . "\n";
 			echo "\t" . '<meta property="og:url" content="' . get_bloginfo( 'url' ) . '">' . "\n";
-			echo "\t" . '<meta property="og:image" content="' . polen_get_custom_logo_url() . '">' . "\n";
+			echo "\t" . '<meta property="og:image" content="' . polen_get_custom_logo_url_() . '">' . "\n";
 			echo "\t" . '<meta property="og:locale" content="' . get_locale() . '">' . "\n";
 			echo "\t" . '<meta property="og:site_name" content="' . get_bloginfo( 'title' ) . '">' . "\n";
 			echo "\n";
