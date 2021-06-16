@@ -254,7 +254,6 @@ if ( ! in_array( 'all-in-one-seo-pack/all_in_one_seo_pack.php', apply_filters( '
 			$url = site_url( 'v/' . $video_info->hash );
 			$thumbnail = $video_info->vimeo_thumbnail;
 
-			$title = 'Video de ' . $product->get_title() . ' para ' . $title;
 			echo "\n\n";
 			echo "\t" . '<meta property="og:title" content="' . $title . '">' . "\n";
 			echo "\t" . '<meta property="og:description" content="' . $description . '">' . "\n";
