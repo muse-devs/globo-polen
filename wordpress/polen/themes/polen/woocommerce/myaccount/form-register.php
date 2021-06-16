@@ -1,13 +1,19 @@
+<?php
+global $Polen_Plugin_Settings;
+$site_key = $Polen_Plugin_Settings['polen_recaptcha_site_key'];
+?>
 <div class="woocommerce">
-	<div class="row mt-4 justify-content-md-center talent-login">
+	<div class="row justify-content-md-center talent-login">
 		<div class="col-12 col-md-6 mx-md-auto" id="customer_register">
-			<div class="col-12 col-md-12">
-				<h1><?php esc_html_e('Register', 'woocommerce'); ?></h1>
+			<div class="row">
+				<div class="col-12 col-md-12">
+					<h1><?php esc_html_e('Register', 'woocommerce'); ?></h1>
+				</div>
 			</div>
 			<?php do_action('woocommerce_before_customer_login_form'); ?>
 			<form method="post" class="woocommerce-form woocommerce-form-register register" <?php do_action('woocommerce_register_form_tag'); ?>>
 
-				<?php do_action('woocommerce_register_form_start'); ?>
+				<?php //do_action('woocommerce_register_form_start'); ?>
 
 				<div class="row">
 					<div class="col-12 col-md-12">
@@ -38,10 +44,18 @@
 						<?php endif; ?>
 
 						<?php do_action('woocommerce_register_form'); ?>
+						<p class="form-row validate-required woocommerce-invalid woocommerce-invalid-required-field">
+							<label class="woocommerce-form__label woocommerce-form__label-for-checkbox checkbox d-flex">
+							<input type="checkbox" class="form-control form-control-lg" name="terms" id="terms" value="1" >
+								<span class="woocommerce-terms-and-conditions-checkbox-text ml-2"><?= wc_terms_and_conditions_checkbox_text(); ?>*</span>
+							</label>
+							<input type="hidden" name="terms-field" value="1">
+						</p>
 
 						<p class="woocommerce-form-row form-row">
 							<?php wp_nonce_field('woocommerce-register', 'woocommerce-register-nonce'); ?>
-							<button type="submit" class="woocommerce-button btn btn-primary btn-lg btn-block btn-login woocommerce-form-register__submit" name="register" value="<?php esc_attr_e('Register', 'woocommerce'); ?>"><?php esc_html_e('Register', 'woocommerce'); ?></button>
+							<button type="submit" class="woocommerce-button btn btn-primary btn-lg btn-block btn-login woocommerce-form-register__submit g-recaptcha" data-sitekey="<?= $site_key; ?>" data-callback='polen_onSubmit' data-action='submit' name="register" value="<?php esc_attr_e('Register', 'woocommerce'); ?>"><?php esc_html_e('Register', 'woocommerce'); ?></button>
+							<input type="hidden" name="register" value="Cadastre-se" />
 						</p>
 					</div>
 				</div>

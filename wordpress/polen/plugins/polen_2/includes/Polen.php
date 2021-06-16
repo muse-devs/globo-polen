@@ -79,6 +79,14 @@ class Polen {
 
         //OrderReview Theme Area
         new Polen_Order_Review_Rewrite( true );
+
+        //User Register Validations
+        new Polen_SignInUser_Google_ReCaptcha( true );
+        new Polen_SignInUser_Strong_Password( true );
+        new Polen_SignInUser_Terms_Use( true );
+
+        //Mensageria
+        new Polen_Messages_Handler( true );
     }
 
     /**

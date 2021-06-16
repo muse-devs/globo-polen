@@ -21,7 +21,7 @@ get_header();
 
 		<div class="page-content text-center mt-4">
 			<p><?php esc_html_e('Nada encontrado no endereço digitado. Por favor tente outro endereço.', 'polen'); ?></p>
-			<button class="btn btn-outline-light btn-lg mt-4">Voltar para home</button>
+			<a href="<?php echo get_home_url(); ?>" class="btn btn-outline-light btn-lg mt-4">Voltar para home</a>
 		</div><!-- .page-content -->
 	</section><!-- .error-404 -->
 

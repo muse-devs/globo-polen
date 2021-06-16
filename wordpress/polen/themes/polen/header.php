@@ -10,16 +10,18 @@
  * @package Polen
  */
 
+use Polen\Includes\Polen_Talent;
+
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
 
 <head>
 	<meta charset="<?php bloginfo('charset'); ?>">
-	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
 	<meta name="mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="apple-mobile-web-app-title" content="Muse">
+	<meta name="apple-mobile-web-app-title" content="<?php bloginfo('name'); ?>">
 	<meta name="apple-touch-fullscreen" content="yes">
 	<!-- <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"> -->
 	<meta name="theme-color" content="#000000">
@@ -30,6 +32,15 @@
 			base_url: '<?= site_url(); ?>',
 			developer: <?php echo DEVELOPER ? 1 : 0; ?>
 		};
+		if (!polenObj.developer) {
+			console = {
+				debug: function () {},
+				error: function () {},
+				info: function () {},
+				log: function () {},
+				warn: function () {},
+			};
+		}
 	</script>
 
     <?php include_once TEMPLATE_DIR . '/inc/analitics_header.php'; ?>
@@ -41,9 +52,9 @@
 	<div id="page" class="container site">
 		<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e('Skip to content', 'polen'); ?></a>
 
-		<header id="masthead" class="row pt-3 pb-4">
+		<header id="masthead" class="row pt-3 pb-4<?php echo is_front_page() ? " header-home" : ""; ?>">
 			<div class="col-6 col-sm-6 d-flex align-items-center">
-				<?php the_custom_logo(); ?>
+				<?php polen_the_theme_logos(); ?>
 			</div>
 			<div class="col-6 col-sm-6 d-flex justify-content-end align-items-center">
 				<?php //get_search_form();
@@ -56,23 +67,17 @@
 						?>
 							<a class="dropbtn">
 								<div class="menu-user-data">
-									<div class="user-avatar">
-										<?php
-										if (is_plugin_active('wp-user-avatar/wp-user-avatar.php')) {
-											echo get_wp_user_avatar(get_current_user_id(), 'polen-square-crop-sm');
-										} ?>
+									<div class="user-avatar d-flex flex-wrap align-items-center justify-content-center">
+										<?php echo polen_get_avatar( get_current_user_id(), "polen-square-crop-lg" ); ?>
 									</div>
-									<?php Icon_Class::polen_icon_chevron_down(); ?>
+									<span class="text"><?php Icon_Class::polen_icon_chevron_down(); ?></span>
 								</div>
 							</a>
-							<div class="dropdown-content">
+							<div class="dropdown-content background text">
 								<div class="row mb-4 d-md-none">
 									<div class="col-12">
-										<div class="user-avatar mb-1">
-											<?php
-											if (is_plugin_active('wp-user-avatar/wp-user-avatar.php')) {
-												echo get_wp_user_avatar(get_current_user_id(), 'polen-square-crop-sm');
-											} ?>
+										<div class="user-avatar d-flex flex-wrap align-items-center justify-content-center mb-1">
+											<?php echo polen_get_avatar( get_current_user_id(), "polen-square-crop-lg" ); ?>
 										</div>
 										<p class="user-name"><?php echo $user_name->display_name; ?></p>
 									</div>
@@ -80,17 +85,21 @@
 								</div>
 								<div class="row">
 									<div class="col-12">
-										<!-- <a href="<?php echo get_permalink(get_option('woocommerce_myaccount_page_id')); ?>">Minha conta</a> -->
+									<?php if( Polen_Talent::static_is_user_talent( wp_get_current_user() ) ) : ?>
+										<a href="<?php echo get_permalink(get_option('woocommerce_myaccount_page_id')); ?>">Dashboard</a>
+									<?php endif; ?>
 										<a href="<?php echo esc_url(wc_get_account_endpoint_url('orders')); ?>">Meus pedidos</a>
-										<a href="<?php echo esc_url(wc_get_account_endpoint_url('payment-options')); ?>">Pagamentos</a>
+										<?php /* <a href="<?php echo esc_url(wc_get_account_endpoint_url('payment-options')); ?>">Pagamentos</a> */ ?>
+									<?php if( !Polen_Talent::static_is_user_talent( wp_get_current_user() ) ) : ?>
 										<a href="<?php echo esc_url(wc_customer_edit_account_url()); ?>">Meus dados</a>
+									<?php endif; ?>
 										<a href="<?php echo esc_url(wp_logout_url()); ?>">Sair</a>
 									</div>
 								</div>
 							</div>
 						<?php
 						} else { ?>
-							<a class="btn btn-outline-light" href="<?php echo get_permalink(get_option('woocommerce_myaccount_page_id')); ?>">
+							<a class="btn btn-outline-light" href="<?php echo polen_get_login_url(); ?>">
 								Login
 							</a>
 						<?php

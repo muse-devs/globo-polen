@@ -40,7 +40,7 @@ if ($polen_talent->is_user_talent($current_user)) {
 								<?php /* <a href="#" title="<?php echo $title; ?>" class="braspag-make-default-payment" default-id="<?php echo $prefix; ?>" brand-name="<?php echo $data['brand']; ?>">
 									<span class="glyphicon <?php echo $class; ?>" aria-hidden="true">padrao</span>
 								</a> */ ?>
-								<a href="#" title="Remover" class="braspag-remove-payment" remove-id="<?php echo $prefix; ?>">
+								<a href="#" title="Remover" class="text braspag-remove-payment" remove-id="<?php echo $prefix; ?>">
 									<?php Icon_Class::polen_icon_trash(); ?>
 								</a>
 							</div>

@@ -79,6 +79,12 @@ class Polen_Video_Player
     public function get_link_vimeo_download()
     {
         $hash = filter_input( INPUT_POST, 'hash' );
+        $nonce = sanitize_text_field( filter_input( INPUT_POST, 'security' ) );
+
+        if ( ! wp_verify_nonce( $nonce, 'generate-download-video-url' ) ) {
+            wp_send_json_error( array( 'response' => 'Não foi possível completar a solicitação' ), 403 );
+            wp_die();
+        }
 
         if( empty( $hash ) ) {
             wp_send_json_error( 'Video não encontrado', 404 );

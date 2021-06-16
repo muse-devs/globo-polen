@@ -1,15 +1,25 @@
+function verify_checkbox_selected_to_hidde_or_show_fields() {
+	let value_checked = ''
+	if( document.querySelectorAll('input[name="video_to"')[1].checked ) {
+		value_checked = document.querySelectorAll('input[name="video_to"')[1].value;
+	} else {
+		value_checked = document.querySelectorAll('input[name="video_to"')[0].value;
+	}
+
+	if(  value_checked == 'to_myself' ) {
+		jQuery('.video-to-info').hide();
+		jQuery('input[name=offered_by]').prop( 'required', false );
+	} else {
+		jQuery('.video-to-info').show();
+		jQuery('input[name=offered_by]').prop( 'required', true );
+	}
+}
+
 (function($) {
-    $(document).on('click', '.cart-video-to', function(e) {
-        if( $(this).val() == 'to_myself' ) {
-            $('.video-to-info').hide();
-            $('input[name=offered_by]').prop( 'required', false );
-        } else {
-            $('.video-to-info').show();
-            $('input[name=offered_by]').prop( 'required', true );
-        }
-    });
+    $(document).on('click', '.cart-video-to', verify_checkbox_selected_to_hidde_or_show_fields);
 
     $(document).ready(function(){
+		verify_checkbox_selected_to_hidde_or_show_fields();
 		$('.polen-cart-item-data').on('blur change paste click',function(){
 			var cart_id = $(this).data( 'cart-id' );
 			var item_name = $(this).attr('name');

@@ -100,7 +100,8 @@
 								$('#OrderActions').modal('toggle');
 								location.href='/my-account/send-video/?order_id=' + order_id;
 							}
-							if( obj['code'] == 2 ){
+							if( obj['code'] == 2 ) {
+								setSessionMessage(CONSTANTS.SUCCESS, "Sucesso", "Você recusou o pedido com sucesso");
 								location.reload();
 							}		
 						}

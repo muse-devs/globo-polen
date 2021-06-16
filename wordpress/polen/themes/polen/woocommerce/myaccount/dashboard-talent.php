@@ -5,6 +5,13 @@ use Polen\Includes\Polen_Talent;
 $polen_talent = new Polen_Talent();
 $current_user = wp_get_current_user();
 
+$total_amount = $polen_talent->get_total_by_order_status_return_raw($current_user->ID, array( 'wc-payment-approved', 'wc-talent-accepted' ));
+$amount_discount = ( $total_amount * 1 ) * 0.75;
+$total_to_recive = $polen_talent->get_total_by_order_status_return_raw($current_user->ID);
+$total_to_recive_discount = ( $total_to_recive * 1 ) * 0.75;
+$all_amount_alredy_win = $polen_talent->get_total_by_order_status_return_raw( $current_user->ID, 'wc-completed' );
+$all_amount_alredy_win_discount = ( $all_amount_alredy_win * 1 ) * 0.75;
+
 if ($polen_talent->is_user_talent($current_user)) {
 ?>
 	<section class="talent-dashboard-start">
@@ -42,9 +49,9 @@ if ($polen_talent->is_user_talent($current_user)) {
 								<div class="col-5">
 									<span class="value small"><?php echo $total_time; ?></span>
 								</div>
-								<div class="col-2 d-flex align-items-end"><?php Icon_Class::polen_icon_chevron_right(); ?></div>
+								<div class="col-2 d-flex align-items-center"><?php Icon_Class::polen_icon_chevron_right(); ?></div>
 								<div class="col-5">
-									<span class="value small"><?php echo $polen_talent->get_total_by_order_status($current_user->ID); ?></span>
+									<span class="value small"><?php echo wc_price( $amount_discount ); ?></span>
 								</div>
 							</div>
 							<div class="row mb-2">
@@ -62,11 +69,11 @@ if ($polen_talent->is_user_talent($current_user)) {
 						<div class="row">
 							<div class="col-md-6 mb-3">
 								<p class="p">Você já ganhou</p>
-								<span class="value"><?php echo $polen_talent->get_total_by_order_status($current_user->ID, 'wc-completed'); ?></span>
+								<span class="value"><?php echo wc_price( $all_amount_alredy_win_discount ); ?></span>
 							</div>
 							<div class="col-md-6">
 								<p class="p">Você tem para receber</p>
-								<span class="value"><?php echo $polen_talent->get_total_by_order_status($current_user->ID); ?></span>
+								<span class="value"><?php echo wc_price( $total_to_recive_discount ); ?></span>
 							</div>
 						</div>
 					</div>

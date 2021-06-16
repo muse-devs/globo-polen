@@ -40,9 +40,16 @@ $Talent_Fields = $Talent_Fields->get_vendor_data($post->post_author);
 $terms = wp_get_object_terms(get_the_ID(), 'product_tag');
 
 $bg_image = wp_get_attachment_image_src($Talent_Fields->cover_image_id, "large")[0];
+
+$donate = get_post_meta( get_the_ID(), '_is_charity', true );
+$donate_name = get_post_meta( get_the_ID(), '_charity_name', true );
+$donate_image =  get_post_meta( get_the_ID(), '_url_charity_logo', true );
+$donate_text = get_post_meta( get_the_ID(), '_description_charity', true );
 ?>
 
-<?php if($bg_image) : ?>
+
+
+<?php if ($bg_image) : ?>
 	<figure class="image-bg">
 		<img src="<?php echo $bg_image; ?>" alt="<?php echo $Talent_Fields->nome; ?>">
 	</figure>
@@ -56,8 +63,17 @@ $bg_image = wp_get_attachment_image_src($Talent_Fields->cover_image_id, "large")
 	<!-- Tags -->
 	<div class="row">
 		<div class="col-md-12">
-			<h1 class="talent-name text-truncate mb-3" title="<?= get_the_title(); ?>"><?= get_the_title(); ?></h1>
-			<div class="row">
+			<h1 class="talent-name text-truncate" title="<?= get_the_title(); ?>"><?= get_the_title(); ?></h1>
+			<!-- Se for doação -->
+			<?php if ($donate) : ?>
+				<div class="row">
+					<div class="col-md-12 mb-1">
+						<?php polen_donate_badge("100% DO CACHÊ DOADO PARA " . strtoupper($donate_name), false); ?>
+					</div>
+				</div>
+			<?php endif; ?>
+			<!-- /------------ -->
+			<div class="row mt-3">
 				<div class="col-md-12">
 					<?php if (count($terms) > 0) : ?>
 						<?php foreach ($terms as $k => $term) : ?>
@@ -70,19 +86,24 @@ $bg_image = wp_get_attachment_image_src($Talent_Fields->cover_image_id, "large")
 	</div>
 
 	<div class="row mt-3 mb-1 talent-page-footer">
-		<div class="col-12 col-md-6 m-md-auto">
+		<div class="col-12 col-md-6 m-md-auto pb-3">
 			<?php echo woocommerce_template_single_add_to_cart(); ?>
 			<!--button class="btn btn-primary btn-lg btn-block btn-get-video">Pedir vídeo R$ 200</button-->
 		</div>
 		<!-- Card dos Reviews -->
-		<?php polen_card_talent_reviews_order( $post, $Talent_Fields ); ?>
+		<?php polen_card_talent_reviews_order($post, $Talent_Fields); ?>
 	</div>
+
+	<!-- Doação -->
+	<?php $donate ?
+		polen_front_get_donation_box($donate_image, $donate_text) :
+		null; ?>
 
 	<!-- Como funciona? -->
 	<?php polen_front_get_tutorial(); ?>
 
 	<!-- Produtos Relacionados -->
-	<?php polen_box_related_product_by_product_id( get_The_ID() ); ?>
+	<?php //polen_box_related_product_by_product_id(get_the_ID()); ?>
 
 </div>
 

@@ -3,12 +3,12 @@ $light-50: #c4c4c4;
 $light-25: rgba(#ffffff, 0.25);
 $dark-100: #000;
 $dark-50: rgba(#000000, 0.5);
-$dark-25: rgba(#000000, 0.25);
+$dark-25: #707070;
 $error-box-color: #fdebeb;
 
 $body-bg: #000;
 $body-color: $light-100;
-$primary: #d7198b;
+$primary: #FD6C36;
 $primary-hover: lighten($primary, 10%);
 $secondary: #377dff;
 $accept: #3cc13b;
@@ -40,8 +40,12 @@ $theme-colors: (
 	"danger-bg": $danger-bg,
 	"light": $light-100,
 	"gray-light": $light-50,
-	"gray": $talent-bg-color,
+	"gray": $dark-25,
 	"gray-dark": $talent-bg-color,
+	"subtitle-light": #c4c4c4,
+	"subtitle-dark": #9c9c9c,
+	"box-color-light": #e9e9e9,
+	"box-color-dark": #272727,
 	"dark": $dark-100,
 	"subtext": #767676,
 );

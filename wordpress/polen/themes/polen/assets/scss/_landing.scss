@@ -1,7 +1,3 @@
-@function calcWidth($w) {
-	@return $w / 1920 * 100 + 0vw;
-}
-
 .landing {
 	max-width: 1440px;
 	img {
@@ -10,18 +6,17 @@
 	}
 	.custom-logo {
 		width: 95px;
-		@include media-breakpoint-up(md) {
-			width: calcWidth(148);
-		}
 	}
 	.title {
 		font-size: 24px;
 		font-weight: 700;
-		line-height: 32px;
+		line-height: 1.2;
 		letter-spacing: -0.05em;
 		@include media-breakpoint-up(md) {
-			font-size: calcWidth(62);
-			line-height: calcWidth(80);
+			font-size: 30px;
+		}
+		@include media-breakpoint-up(lg) {
+			font-size: 40px;
 		}
 		span {
 			font-size: 21px;
@@ -29,8 +24,10 @@
 			line-height: 28px;
 			letter-spacing: -0.05em;
 			@include media-breakpoint-up(md) {
-				font-size: calcWidth(59);
-				line-height: calcWidth(80);
+				font-size: 28px;
+			}
+			@include media-breakpoint-up(lg) {
+				font-size: 38px;
 			}
 		}
 	}
@@ -42,8 +39,9 @@
 	}
 
 	.site-footer {
+		border-top: 2px solid #404040;
 		.custom-logo {
-			width: 79px;
+			width: 70px;
 		}
 		@include media-breakpoint-down(sm) {
 			border: none;

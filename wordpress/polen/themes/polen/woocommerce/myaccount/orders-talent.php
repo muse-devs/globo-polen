@@ -64,11 +64,11 @@ if (in_array('user_talent',  $logged_user->roles)) {
 										<div class="row">
 											<div class="col-md-12">
 												<div class="row mt-2">
-													<div class="col-6 col-md-4">
+													<div class="col-6 col-md-6">
 														<p class="p">Tempo estimado</p>
 														<p class="value small"><?php echo $video_time . ' segundos'; ?></p>
 													</div>
-													<div class="col-6 col-md-4">
+													<div class="col-6 col-md-6">
 														<p class="p">Válido por</p>
 														<p class="value small"><?php echo $polen_talent->video_expiration_time($logged_user, $order['order_id']); ?></p>
 													</div>
@@ -82,7 +82,7 @@ if (in_array('user_talent',  $logged_user->roles)) {
 												<?php
 												if ($order['status'] == 'talent-accepted') {
 												?>
-													<button class="btn btn-primary btn-lg btn-block btn-enviar-video" button-nonce="<?php echo $order_nonce; ?>" order-id="<?php echo $order['order_id']; ?>" data-toggle="" data-target="" onclick="window.location.href = '/my-account/send-video/?order_id=<?php echo $order['order_id']; ?>'">Enviar vídeo</button>
+													<button class="btn btn-outline-light btn-lg btn-block btn-enviar-video" button-nonce="<?php echo $order_nonce; ?>" order-id="<?php echo $order['order_id']; ?>" data-toggle="" data-target="" onclick="window.location.href = '/my-account/send-video/?order_id=<?php echo $order['order_id']; ?>'">Enviar vídeo</button>
 												<?php
 												}
 
@@ -112,7 +112,7 @@ if (in_array('user_talent',  $logged_user->roles)) {
 				<div class="modal-content">
 					<div class="row modal-body">
 						<!-- Início -->
-						<div class="col-12 talent-order-modal">
+						<div class="col-12 background talent-order-modal">
 							<button type="button" class="modal-close" data-dismiss="modal" aria-label="Fechar">
 								<?php Icon_Class::polen_icon_close(); ?>
 							</button>

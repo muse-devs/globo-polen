@@ -35,6 +35,9 @@ class WP_User_Avatar {
           if(is_admin()) return;
           $this->wpua_action_show_user_profile($user);
       });
+      
+      //hook para salvar na edição dos dados de usuário(minha conta->meus dados)
+      add_action('woocommerce_save_account_details', array($this, 'wpua_action_process_option_update'));
 
       add_action('personal_options_update', array($this, 'wpua_action_process_option_update'));
       add_action('edit_user_profile_update', array($this, 'wpua_action_process_option_update'));
@@ -369,7 +372,8 @@ class WP_User_Avatar {
         update_user_meta($user_id, $wpdb->get_blog_prefix($blog_id).'user_avatar', "");
       }
       // Create attachment from upload
-      if(isset($_POST['submit']) && $_POST['submit'] && !empty($_FILES['wpua-file'])) {
+      if(isset($_POST['submit']) && $_POST['submit'] && !empty($_FILES['wpua-file']) 
+        || ( !empty($_FILES['wpua-file']) && isset( $_POST['action'] ) && $_POST['action'] == 'save_account_details' ) ) {
         $name = $_FILES['wpua-file']['name'];
         $file = wp_handle_upload($_FILES['wpua-file'], array('test_form' => false));
         $type = $_FILES['wpua-file']['type'];
