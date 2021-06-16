@@ -281,6 +281,7 @@ if ( ! in_array( 'all-in-one-seo-pack/all_in_one_seo_pack.php', apply_filters( '
 		} else {
 			echo "\n\n";
 			echo "\t" . '<meta property="og:title" content="' . get_bloginfo( 'title' ) . '">' . "\n";
+			echo "\t" . '<meta property="og:type" content="site">' . "\n";
 			echo "\t" . '<meta property="og:description" content="' . get_bloginfo( 'description' ) . '">' . "\n";
 			echo "\t" . '<meta property="og:url" content="' . get_bloginfo( 'url' ) . '">' . "\n";
 			echo "\t" . '<meta property="og:image" content="http://polen.me/polen/uploads/2021/06/cropped-logo.png">' . "\n";
