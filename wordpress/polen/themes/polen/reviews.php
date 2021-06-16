@@ -24,10 +24,15 @@ $reviews = Polen_Order_Review::get_order_reviews_by_talent_id($talent->ID);
 		$review_id = $review->comment_ID;
 		$date = new DateTime($review->comment_date);
 		$rate = get_comment_meta($review_id, "rate");
-
+		
+		$user_name = $review->comment_author;
+		if( empty( $user_name ) ) {
+			$user = get_user_by( 'id', $review->user_id );
+			$user_name = $user->display_name;
+		}
 		polen_comment_card(array(
 			"id" => $review_id,
-			"name" => $review->comment_author,
+			"name" => $user_name,
 			"date" => $date->format('d/m/Y'),
 			"rate" => (int) $rate[0],
 			"comment" => $review->comment_content

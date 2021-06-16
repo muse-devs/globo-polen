@@ -365,6 +365,7 @@ class Polen_Talent {
                             $obj['status'] = $order->get_status();
 
                             $obj['total'] = $order->get_formatted_order_total();
+                            $obj['total_raw'] = $order->get_total();
                             foreach ($order->get_items() as $item_id => $item) {
                                 $obj['email'] = $item->get_meta('email_to_video', true);
                                 $obj['instructions'] = $item->get_meta('instructions_to_video', true);
@@ -497,6 +498,53 @@ class Polen_Talent {
                     $total_sales = $wpdb->get_var( $sql );
 
                     return wc_price( $total_sales );
+                }
+            }
+
+            return false;
+        }
+    }
+
+    /**
+     * Totalizador dos pedidos do talento
+     * @param int $talent_id
+     * @param string|array default array('wc-payment-approved', 'wc-talent-accepted')
+     * @return string wc_price()
+     */
+    public function get_total_by_order_status_return_raw( $talent_id, $status = false ){
+        if ($talent_id) {
+            global $wpdb;
+
+            $sql_product = " SELECT * FROM {$wpdb->prefix}posts WHERE post_type = 'product' and post_author = " . $talent_id;
+            $talent_products = $wpdb->get_results($sql_product);
+
+            if( !$status ){
+                $status = array( 'wc-payment-approved', 'wc-talent-accepted' );
+            }
+
+            if( is_string( $status )) {
+                $status = array( $status );
+            }
+            if( is_array( $status )) {
+                $status = '"' . implode( '","' , $status ) . '"';
+            }
+
+            if (is_countable($talent_products) && count($talent_products) > 0) {
+                $first_product = reset($talent_products);
+
+                if (is_object($first_product) && isset($first_product->ID)) {
+                    $sql = "SELECT SUM( oim_line_total.meta_value ) as order_total 
+                        FROM {$wpdb->posts} AS posts
+                        INNER JOIN {$wpdb->prefix}woocommerce_order_items AS order_items ON posts.ID = order_items.order_id
+                        INNER JOIN {$wpdb->prefix}woocommerce_order_itemmeta AS oim_line_total ON (order_items.order_item_id = oim_line_total.order_item_id)
+                            AND (oim_line_total.meta_key = '_line_total')
+                        INNER JOIN {$wpdb->prefix}woocommerce_order_itemmeta AS oim_product ON order_items.order_item_id = oim_product.order_item_id 
+                        WHERE posts.post_type IN ( 'shop_order' )
+                        AND posts.post_status IN ( {$status} ) AND ( ( oim_product.meta_key IN ('_product_id','_variation_id') 
+                        AND oim_product.meta_value IN ('{$first_product->ID}') ) );";
+                    $total_sales = $wpdb->get_var( $sql );
+
+                    return $total_sales;
                 }
             }
 
