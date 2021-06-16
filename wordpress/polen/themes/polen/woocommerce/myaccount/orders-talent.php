@@ -30,7 +30,10 @@ if (in_array('user_talent',  $logged_user->roles)) {
 		} else {
 			echo "<p class='mt-2 mb-4'>Você tem <strong><span id='order-count'>" . count($talent_orders) . "</span> pedido(s) de vídeo</strong>, seus pedidos expiram em até 7 dias.</p>";
 			if (count($talent_orders) > 0) {
-				foreach ($talent_orders as $order) : ?>
+				foreach ($talent_orders as $order) : 
+					$total_order_value = $order['total_raw'];
+					$discounted_value_order = ( $total_order_value * 1) * 0.75;
+				?>
 					<div class="row mb-3" box-id="<?php echo $order['order_id']; ?>">
 						<div class="col md-12">
 							<div class="box-round p-3">
@@ -56,7 +59,7 @@ if (in_array('user_talent',  $logged_user->roles)) {
 											</div>
 											<div class="col-6 col-md-6">
 												<p class="p">Valor</p>
-												<p class="value small"><?php echo $order['total']; ?></p>
+												<p class="value small"><?php echo wc_price( $discounted_value_order ); ?></p>
 											</div>
 										</div>
 									</div>

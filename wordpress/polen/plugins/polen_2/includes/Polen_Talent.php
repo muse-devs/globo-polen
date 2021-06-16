@@ -365,6 +365,7 @@ class Polen_Talent {
                             $obj['status'] = $order->get_status();
 
                             $obj['total'] = $order->get_formatted_order_total();
+                            $obj['total_raw'] = $order->get_total();
                             foreach ($order->get_items() as $item_id => $item) {
                                 $obj['email'] = $item->get_meta('email_to_video', true);
                                 $obj['instructions'] = $item->get_meta('instructions_to_video', true);
