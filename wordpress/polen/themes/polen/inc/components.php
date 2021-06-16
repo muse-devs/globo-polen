@@ -408,6 +408,7 @@ function polen_get_video_player($talent, $video, $user_id)
 	if (!$talent || !$video) {
 		return;
 	}
+	$user_talent = get_user_by('id', $user_id);
 	wp_enqueue_script('vimeo');
 	$video_url = home_url() . "/v/" . $video->hash;
 	$isRateble = \Polen\Includes\Polen_Order_Review::can_make_review($user_id, $video->order_id);
@@ -441,7 +442,7 @@ function polen_get_video_player($talent, $video, $user_id)
 							</a>
 						</div>
 						<div class="col-9">
-							<h4 class="m-0"><a href="<?php echo $talent->talent_url; ?>" class="name"><?php echo $talent->nome; ?></a></h4>
+							<h4 class="m-0"><a href="<?php echo $talent->talent_url; ?>" class="name"><?php echo $user_talent->display_name; ?></a></h4>
 							<h5 class="m-0"><a href="<?= polen_get_url_category_by_order_id($video->order_id); ?>" class="d-block my-2 cat"><?php echo $talent->profissao; ?></a></h5>
 							<a href="<?php echo $video_url; ?>" class="url"><?php echo $video_url; ?></a>
 						</div>
