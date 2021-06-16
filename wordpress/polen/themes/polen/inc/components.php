@@ -388,10 +388,10 @@ function polen_front_get_talent_videos($talent)
 	</section>
 
 	<div id="video-modal" class="background video-modal">
-		<header>
+		<div class="video-card-body">
 			<button id="close-button" class="close-button" onclick="hideModal()"><?php Icon_Class::polen_icon_close(); ?></button>
-		</header>
-		<div id="video-box"></div>
+			<div id="video-box"></div>
+		</div>
 	</div>
 <?php
 }
@@ -413,48 +413,44 @@ function polen_get_video_player($talent, $video, $user_id)
 	$video_url = home_url() . "/v/" . $video->hash;
 	$isRateble = \Polen\Includes\Polen_Order_Review::can_make_review($user_id, $video->order_id);
 ?>
-	<div class="row">
-		<div class="col-12 col-md-12">
-			<div class="row video-card">
-				<header class="col-md-6 p-0">
-					<div id="video-box">
-						<div id="polen-video" class="polen-video"></div>
-					</div>
-					<script>
-						jQuery(document).ready(function() {
-							var videoPlayer = new Vimeo.Player("polen-video", {
-								url: "<?php echo $video->vimeo_link; ?>",
-								autoplay: false,
-								muted: false,
-								loop: false,
-								width: document.getElementById("polen-video").offsetWidth,
-							});
-						})
-					</script>
-				</header>
-				<div class="content col-md-6 mt-4">
-					<header class="row content-header">
-						<div class="col-3">
-							<a href="<?php echo $talent->talent_url; ?>" class="no-underline">
-								<span class="image-cropper">
-									<?php echo polen_get_avatar($talent->user_id, "polen-square-crop-lg"); ?>
-								</span>
-							</a>
-						</div>
-						<div class="col-9">
-							<h4 class="m-0"><a href="<?php echo $talent->talent_url; ?>" class="name"><?php echo $user_talent->display_name; ?></a></h4>
-							<h5 class="m-0"><a href="<?= polen_get_url_category_by_order_id($video->order_id); ?>" class="d-block my-2 cat"><?php echo $talent->profissao; ?></a></h5>
-							<a href="<?php echo $video_url; ?>" class="url"><?php echo $video_url; ?></a>
-						</div>
-					</header>
-					<div class="row mt-4 share">
-						<div class="col-12">
-							<?php if ($user_id !== 0 && $isRateble) : ?>
-								<a href="/my-account/create-review/<?= $video->order_id; ?>" class="btn btn-primary btn-lg btn-block mb-4">Avaliar vídeo</a>
-							<?php endif; ?>
-							<?php polen_get_talent_video_buttons($talent, $video_url, $video->vimeo_url_download, $video->hash); ?>
-						</div>
-					</div>
+	<div class="row video-card">
+		<header class="col-md-6 p-0">
+			<div id="video-box">
+				<div id="polen-video" class="polen-video"></div>
+			</div>
+			<script>
+				jQuery(document).ready(function() {
+					var videoPlayer = new Vimeo.Player("polen-video", {
+						url: "<?php echo $video->vimeo_link; ?>",
+						autoplay: false,
+						muted: false,
+						loop: false,
+						width: document.getElementById("polen-video").offsetWidth,
+					});
+				})
+			</script>
+		</header>
+		<div class="content col-md-6 mt-4">
+			<header class="row content-header">
+				<div class="col-3">
+					<a href="<?php echo $talent->talent_url; ?>" class="no-underline">
+						<span class="image-cropper">
+							<?php echo polen_get_avatar($talent->user_id, "polen-square-crop-lg"); ?>
+						</span>
+					</a>
+				</div>
+				<div class="col-9">
+					<h4 class="m-0"><a href="<?php echo $talent->talent_url; ?>" class="name"><?php echo $user_talent->display_name; ?></a></h4>
+					<h5 class="m-0"><a href="<?= polen_get_url_category_by_order_id($video->order_id); ?>" class="d-block my-2 cat"><?php echo $talent->profissao; ?></a></h5>
+					<a href="<?php echo $video_url; ?>" class="url"><?php echo $video_url; ?></a>
+				</div>
+			</header>
+			<div class="row mt-4 share">
+				<div class="col-12">
+					<?php if ($user_id !== 0 && $isRateble) : ?>
+						<a href="/my-account/create-review/<?= $video->order_id; ?>" class="btn btn-primary btn-lg btn-block mb-4">Avaliar vídeo</a>
+					<?php endif; ?>
+					<?php polen_get_talent_video_buttons($talent, $video_url, $video->vimeo_url_download, $video->hash); ?>
 				</div>
 			</div>
 		</div>
