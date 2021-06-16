@@ -252,3 +252,18 @@ select.form-control:not([size]):not([multiple]) {
 .woocommerce-checkout #payment div.payment_box .form-row {
 	padding: 0;
 }
+
+.woocommerce-SavedPaymentMethods-saveNew {
+	display: flex;
+	flex-wrap: nowrap;
+}
+
+#add_payment_method #payment ul.payment_methods li input,
+.woocommerce-cart #payment ul.payment_methods li input,
+.woocommerce-checkout #payment ul.payment_methods li input {
+	margin-right: 0.5rem;
+	width: 24px !important;
+	@include media-breakpoint-up(sm) {
+		width: 21px !important;
+	}
+}
