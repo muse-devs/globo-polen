@@ -250,7 +250,7 @@ if ( ! in_array( 'all-in-one-seo-pack/all_in_one_seo_pack.php', apply_filters( '
 			$product = wc_get_product( $product_id );
 			$title = 'Direto, Próximo, Íntimo.';//$item_cart->get_name_to_video();
 			$talent_name = $product->get_title();
-			$description = "Olha esse novo vídeo-polen dx {$talent_name}.";
+			$description = "Olha esse novo vídeo-polen de {$talent_name}.";
 			$url = site_url( 'v/' . $video_info->hash );
 			$thumbnail = $video_info->vimeo_thumbnail;
 
@@ -283,7 +283,7 @@ if ( ! in_array( 'all-in-one-seo-pack/all_in_one_seo_pack.php', apply_filters( '
 			echo "\t" . '<meta property="og:title" content="' . get_bloginfo( 'title' ) . '">' . "\n";
 			echo "\t" . '<meta property="og:description" content="' . get_bloginfo( 'description' ) . '">' . "\n";
 			echo "\t" . '<meta property="og:url" content="' . get_bloginfo( 'url' ) . '">' . "\n";
-			echo "\t" . '<meta property="og:image" content="' . polen_get_custom_logo_url_() . '">' . "\n";
+			echo "\t" . '<meta property="og:image" content="http://polen.me/polen/uploads/2021/06/cropped-logo.png">' . "\n";
 			echo "\t" . '<meta property="og:locale" content="' . get_locale() . '">' . "\n";
 			echo "\t" . '<meta property="og:site_name" content="' . get_bloginfo( 'title' ) . '">' . "\n";
 			echo "\n";
