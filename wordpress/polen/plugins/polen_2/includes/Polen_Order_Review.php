@@ -15,7 +15,9 @@ class Polen_Order_Review
     private $comment_type;
     private $comment_meta;
     private $comment_approved;
-    
+    private $comment_author;
+    private $comment_author_email;
+    private $comment_author_IP;
     /**
      * Rate que sera um metadata
      */
@@ -290,12 +292,14 @@ class Polen_Order_Review
      */
     public function prepare_data_db()
     {
+        $user = wp_get_current_user();
+        $ip = filter_input( INPUT_SERVER, 'REMOTE_ADDR' );
         return array(
             'comment_agent'         => $this->talent_id,
             'comment_approved'      => $this->comment_approved,
-            'comment_author'        => '',
-            'comment_author_email'  => '',
-            'comment_author_IP'     => '',
+            'comment_author'        => $user->display_name,
+            'comment_author_email'  => $user->user_email,
+            'comment_author_IP'     => $ip,
             'comment_author_url'    => '',
             'comment_content'       => $this->comment_content,
             'comment_karma'         => $this->comment_karma,
