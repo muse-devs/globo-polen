@@ -263,7 +263,7 @@ select.form-control:not([size]):not([multiple]) {
 .woocommerce-checkout #payment ul.payment_methods li input {
 	margin-right: 0.5rem;
 	width: 24px !important;
-	@include media-breakpoint-up(sm) {
+	@include media-breakpoint-up(lg) {
 		width: 21px !important;
 	}
 }
