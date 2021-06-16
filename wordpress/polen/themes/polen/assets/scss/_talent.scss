@@ -130,13 +130,15 @@
 		background-color: transparent;
 		text-shadow: 0px 0px 1px var(--dark);
 		z-index: 100;
+		@include media-breakpoint-up(md) {
+			color: inherit;
+		}
 	}
 }
 
 .video-card {
 	position: relative;
 	margin: auto;
-	// width: calc(100% - 32px);
 	width: 100%;
 	max-width: 650px;
 	min-height: 300px;
@@ -146,12 +148,8 @@
 	overflow: hidden;
 	font-family: $font-primary;
 	-webkit-mask-image: -webkit-radial-gradient(white, black);
-	@include media-breakpoint-up(md) {
-		// width: 450px;
-	}
 	.polen-video {
 		max-width: 100%;
-		// background-color: $secondary-bg-color;
 	}
 	.share-link {
 		font-family: inherit;
