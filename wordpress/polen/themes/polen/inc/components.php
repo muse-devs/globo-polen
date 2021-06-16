@@ -474,7 +474,10 @@ function polen_get_talent_card($talent)
 		</header>
 		<div class="price-box pt-3">
 			<span class="cat">Você vai pagar</span>
-			<p class="price mt-2"><?php echo $talent["price"]; ?></p>
+			<p class="price mt-2">
+				<?php //echo $talent["price"]; 
+					echo wc_cart_totals_order_total_html(); ?>
+			</p>
 			<?php if ($talent["has_details"]) : ?>
 				<button class="show-details d-flex justify-content-center" onclick="showDetails()"><?php Icon_Class::polen_icon_chevron("down") ?></button>
 			<?php endif; ?>
