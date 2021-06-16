@@ -408,7 +408,7 @@ function polen_get_video_player($talent, $video, $user_id)
 	if (!$talent || !$video) {
 		return;
 	}
-	$user_talent = get_user_by('id', $user_id);
+	$user_talent = get_user_by('id', $talent->user_id);
 	wp_enqueue_script('vimeo');
 	$video_url = home_url() . "/v/" . $video->hash;
 	$isRateble = \Polen\Includes\Polen_Order_Review::can_make_review($user_id, $video->order_id);
