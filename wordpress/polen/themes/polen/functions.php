@@ -173,6 +173,12 @@ function polen_scripts() {
 		}
 	}
 
+	if ( current_theme_supports( 'wc-product-gallery-lightbox' ) ) {
+		remove_theme_support( 'wc-product-gallery-zoom' );
+		remove_theme_support( 'wc-product-gallery-lightbox' );
+		remove_theme_support( 'wc-product-gallery-slider' );
+	}
+
 	if(is_front_page()) {
 		wp_enqueue_script( 'home-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'front-page.js', array(), _S_VERSION, true );
 	}
