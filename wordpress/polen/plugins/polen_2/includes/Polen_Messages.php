@@ -42,7 +42,9 @@ abstract class Polen_Messages
     // clear
     static public function clear_messages()
     {
-        unset( $_SESSION[ self::SESSION_NAME ] );
+        if( isset( $_SESSION[ self::SESSION_NAME ] ) ) {
+            unset( $_SESSION[ self::SESSION_NAME ] );
+        }
     }
 
 
