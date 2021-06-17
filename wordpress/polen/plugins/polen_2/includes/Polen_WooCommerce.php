@@ -300,22 +300,26 @@ class Polen_WooCommerce
     }
 
     public function on_product_save( $product_id ) {
-        $product = wc_get_product( $product_id );
+        if( is_admin() ){
+            $screen = get_current_screen();
+            if ( $screen->base == 'post' && $screen->post_type == 'product' ){            
+                $product = wc_get_product( $product_id );
+                $charity = strip_tags( $_POST['_is_charity'] );
+                $charity_name = strip_tags( $_POST['_charity_name'] );
+                $charity_url = strip_tags( $_POST['_url_charity_logo'] );
+                $charity_description = strip_tags( $_POST['_description_charity'] );
+                $charity_subordinate_id = strip_tags( $_POST['_charity_subordinate_merchant_id'] );
 
-        $charity = strip_tags( $_POST['_is_charity'] );
-        $charity_name = strip_tags( $_POST['_charity_name'] );
-        $charity_url = strip_tags( $_POST['_url_charity_logo'] );
-        $charity_description = strip_tags( $_POST['_description_charity'] );
-        $charity_subordinate_id = strip_tags( $_POST['_charity_subordinate_merchant_id'] );
+                $product->update_meta_data( '_is_charity', $charity );
+                $product->update_meta_data( '_charity_name', $charity_name );
+                $product->update_meta_data( '_url_charity_logo', $charity_url );
+                $product->update_meta_data( '_description_charity', $charity_description );
+                $product->update_meta_data( '_charity_subordinate_merchant_id', $charity_subordinate_id );
 
-        $product->update_meta_data( '_is_charity', $charity );
-        $product->update_meta_data( '_charity_name', $charity_name );
-        $product->update_meta_data( '_url_charity_logo', $charity_url );
-        $product->update_meta_data( '_description_charity', $charity_description );
-        $product->update_meta_data( '_charity_subordinate_merchant_id', $charity_subordinate_id );
-
-        remove_action( 'woocommerce_update_product', array( $this, 'on_product_save' ) );
-        $product->save();
-        add_action( 'woocommerce_update_product', array( $this, 'on_product_save' ) );
+                remove_action( 'woocommerce_update_product', array( $this, 'on_product_save' ) );
+                $product->save();
+                add_action( 'woocommerce_update_product', array( $this, 'on_product_save' ) );
+            }
+        }  
     }
 }
