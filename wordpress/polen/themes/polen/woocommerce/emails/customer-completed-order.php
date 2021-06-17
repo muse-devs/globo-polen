@@ -32,7 +32,8 @@ $talent = _polen_get_info_talent_by_product_id($item->get_product(), "polen-squa
 
 <div class="talent_card">
 	<header>
-		<div class="card_thumb" style="background-image: url(https://<?php echo get_wp_user_avatar_src($item->get_talent_id(), 'polen-square-crop-md'); ?>)">
+		<div class="card_thumb">
+			<img src="<?php echo get_wp_user_avatar_src($item->get_talent_id(), 'polen-square-crop-md'); ?>" alt="Foto do artista" class="thumb" />
 		</div>
 		<div style="padding-top: 3px;">
 			<span class="card_title" style="display: block;"><?php echo $talent['name']; ?></span>
@@ -51,6 +52,8 @@ $talent = _polen_get_info_talent_by_product_id($item->get_product(), "polen-squa
 	<p>Número do pedido:</p>
 	<span class="order_number"><?php echo $order->get_id(); ?></span>
 </div>
+
+<!-- Assistir vídeo -->
 
 <?php /* translators: %s: Customer first name */ ?>
 <p><?php printf(esc_html__('Hi %s,', 'woocommerce'), esc_html($order->get_billing_first_name())); ?></p>
