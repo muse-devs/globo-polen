@@ -33,7 +33,7 @@ $talent = _polen_get_info_talent_by_product_id($item->get_product(), "polen-squa
 <div class="talent_card">
 	<header>
 		<div class="card_thumb">
-			<img src="https:<?php echo get_wp_user_avatar_src($item->get_talent_id(), 'polen-square-crop-md'); ?>" alt="Foto do artista" class="thumb" />
+			<img src="<?php echo polen_get_protocol() . get_wp_user_avatar_src($item->get_talent_id(), 'polen-square-crop-md'); ?>" alt="Foto do artista" class="thumb" />
 		</div>
 		<div style="padding-top: 3px;">
 			<span class="card_title" style="display: block;"><?php echo $talent['name']; ?></span>
@@ -53,11 +53,10 @@ $talent = _polen_get_info_talent_by_product_id($item->get_product(), "polen-squa
 	<span class="order_number"><?php echo $order->get_id(); ?></span>
 </div>
 
-<!-- Assistir vídeo -->
+<p class="btn_wrap">
+	<a href="<?php echo polen_get_link_watch_video_by_order_id( $order->get_id() ); ?>" class="btn" target="_blank" style="width: 100%">Assistir vídeo</a>
+</p>
 
-<?php /* translators: %s: Customer first name */ ?>
-<p><?php printf(esc_html__('Hi %s,', 'woocommerce'), esc_html($order->get_billing_first_name())); ?></p>
-<p><?php esc_html_e('We have finished processing your order.', 'woocommerce'); ?></p>
 <?php
 
 /*
@@ -83,7 +82,7 @@ $talent = _polen_get_info_talent_by_product_id($item->get_product(), "polen-squa
  * Show user-defined additional content - this is set in each email's settings.
  */
 if ($additional_content) {
-	echo wp_kses_post(wpautop(wptexturize($additional_content)));
+	//echo wp_kses_post(wpautop(wptexturize($additional_content)));
 }
 
 /*
