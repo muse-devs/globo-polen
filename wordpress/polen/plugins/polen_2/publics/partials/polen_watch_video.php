@@ -2,7 +2,12 @@
 use \Polen\Includes\Polen_Video_Info;
 $video_info = Polen_Video_Info::get_by_hash( $video_hash );
 
-if( empty( $video_info ) ) {
+global $current_user;
+$user_id = $current_user->ID;
+$order = wc_get_order($video_info->order_id);
+$order_user_id = $order->get_user_id();
+
+if( empty( $video_info ) || $user_id !== $order_user_id) {
     global $wp_query;
     $wp_query->set_404();
     status_header( 404 );
