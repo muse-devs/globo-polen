@@ -206,6 +206,7 @@ body {
     text-decoration: none;
     border: 1px solid transparent;
     border-radius: 8px;
+	box-sizing: border-box;
 	background-color: <?php echo esc_attr( $base ); ?>;
 }
 
