@@ -179,7 +179,6 @@ function polen_scripts() {
 		remove_theme_support( 'wc-product-gallery-slider' );
 	}
 
-	wp_enqueue_script( 'pre-render-js', TEMPLATE_URI . '/assets/js/' . $min . 'pre-render.js', array(), _S_VERSION, false );
 	wp_enqueue_script( 'global-js', TEMPLATE_URI . '/assets/js/' . $min . 'global.js', array("jquery"), _S_VERSION, false );
 
 	if(is_front_page()) {
