@@ -6,6 +6,8 @@
  */
 
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
+use Polen\Includes\Debug;
+use Polen\Includes\Polen_Video_Info;
 
 /**
  * Adds custom classes to the array of body classes.
@@ -222,6 +224,9 @@ function polen_get_querystring_redirect()
 if ( ! in_array( 'all-in-one-seo-pack/all_in_one_seo_pack.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
 	add_action( 'wp_head', function() {
 		global $post;
+		global $is_video;
+
+		$video_hash = get_query_var( 'video_hash' );
 		if( !empty( $post ) && $post->post_type == 'product' ) {
 			echo "\n\n";
 			echo "\t" . '<meta property="og:title" content="' . get_the_title() . '">' . "\n";
@@ -235,6 +240,28 @@ if ( ! in_array( 'all-in-one-seo-pack/all_in_one_seo_pack.php', apply_filters( '
 			} else {
 				echo "\t" . '<meta property="og:image" content="' . polen_get_custom_logo_url() . '">' . "\n";
 			}
+			echo "\n";
+		} elseif ( $is_video === true && !empty( $video_hash ) ) {
+			$video_info = Polen_Video_Info::get_by_hash( $video_hash );
+			$order = wc_get_order( $video_info->order_id );
+			$item_cart = Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
+
+			$product_id = $item_cart->get_product_id();
+			$product = wc_get_product( $product_id );
+			$title = 'Direto, Próximo, Íntimo.';//$item_cart->get_name_to_video();
+			$talent_name = $product->get_title();
+			$description = "Olha esse novo vídeo-polen de {$talent_name}.";
+			$url = site_url( 'v/' . $video_info->hash );
+			$thumbnail = $video_info->vimeo_thumbnail;
+
+			echo "\n\n";
+			echo "\t" . '<meta property="og:title" content="' . $title . '">' . "\n";
+			echo "\t" . '<meta property="og:description" content="' . $description . '">' . "\n";
+			echo "\t" . '<meta property="og:url" content="' . $url . '">' . "\n";
+			echo "\t" . '<meta property="og:locale" content="' . get_locale() . '">' . "\n";
+			echo "\t" . '<meta property="og:site_name" content="' . get_bloginfo( 'title' ) . '">' . "\n";
+			echo "\t" . '<meta property="og:image" content="' . $thumbnail . '">' . "\n";
+			// echo "\t" . '<meta property="og:type" content="video">' . "\n";
 			echo "\n";
 		} elseif( !empty( $post ) && $post->post_type == 'page' && $post->post_name == 'v' ) {
 			echo "\n\n";
@@ -254,9 +281,10 @@ if ( ! in_array( 'all-in-one-seo-pack/all_in_one_seo_pack.php', apply_filters( '
 		} else {
 			echo "\n\n";
 			echo "\t" . '<meta property="og:title" content="' . get_bloginfo( 'title' ) . '">' . "\n";
+			echo "\t" . '<meta property="og:type" content="site">' . "\n";
 			echo "\t" . '<meta property="og:description" content="' . get_bloginfo( 'description' ) . '">' . "\n";
 			echo "\t" . '<meta property="og:url" content="' . get_bloginfo( 'url' ) . '">' . "\n";
-			echo "\t" . '<meta property="og:image" content="' . polen_get_custom_logo_url_() . '">' . "\n";
+			echo "\t" . '<meta property="og:image" content="https://polen.me/polen/uploads/2021/06/cropped-logo.png">' . "\n";
 			echo "\t" . '<meta property="og:locale" content="' . get_locale() . '">' . "\n";
 			echo "\t" . '<meta property="og:site_name" content="' . get_bloginfo( 'title' ) . '">' . "\n";
 			echo "\n";
