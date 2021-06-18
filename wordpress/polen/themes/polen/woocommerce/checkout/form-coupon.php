@@ -31,7 +31,7 @@ if (!wc_coupons_enabled()) { // @codingStandardsIgnoreLine.
 				<div class="row">
 					<div class="col-12 d-flex">
 						<input type="text" name="coupon_code" class="form-control form-control-lg mr-3" placeholder="<?php //esc_attr_e('Coupon code', 'woocommerce'); ?>" id="coupon_code" value="" />
-						<button type="submit" class="btn btn-primary btn-lg" name="apply_coupon" value="<?php esc_attr_e('Apply coupon', 'woocommerce'); ?>"><?php esc_html_e('Ok', 'woocommerce'); ?></button>
+						<button type="submit" class="btn btn-outline-light btn-lg" name="apply_coupon" value="<?php esc_attr_e('Apply coupon', 'woocommerce'); ?>"><?php esc_html_e('Apply', 'woocommerce'); ?></button>
 					</div>
 				</div>
 			</div>
