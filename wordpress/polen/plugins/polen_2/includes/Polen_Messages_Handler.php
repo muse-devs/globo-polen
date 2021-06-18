@@ -124,7 +124,7 @@ class Polen_Messages_Handler
         $funcao_js = ( Polen_Messages::TYPE_ERROR == $type ) ? 'error' : 'message' ;
         $call_function_js = ( $funcao_js == 'error' ) ? "polMessages.%s('%s');" : "polMessages.%s('','%s');";
         $call_function_js =  apply_filters( "polen_messages_create_function_call_js`", $call_function_js );
-        $return = sprintf( $call_function_js, $type, $message );
+        $return = sprintf( $call_function_js, $funcao_js, $message );
 
         return $return;
     }

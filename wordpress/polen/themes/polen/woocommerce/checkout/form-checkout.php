@@ -59,6 +59,7 @@ $Talent_Fields = new Polen_Update_Fields();
 				"name" => $_product->get_title(),
 				"career" => $talent_data->profissao,
 				"price" => $_product->get_price_html(),
+				"discount" => null,
 				"from" => $cart_item['offered_by'] ? $cart_item['offered_by'] : null,
 				"to" => $cart_item['name_to_video'] ? $cart_item['name_to_video'] : null,
 				"category" => $cart_item['video_category'] ? $cart_item['video_category'] : null,
@@ -118,14 +119,6 @@ $Talent_Fields = new Polen_Update_Fields();
 				woocommerce_order_review();
 				?>
 				<?php do_action('woocommerce_checkout_after_order_review'); ?>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-md-12">
-				<?php
-				//woocommerce_checkout_payment();
-				?>
 			</div>
 		</div>
 	</form>
