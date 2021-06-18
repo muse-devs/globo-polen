@@ -31,8 +31,16 @@ use Polen\Includes\Polen_Talent;
 			base_url: '<?= site_url(); ?>',
 			developer: <?php echo DEVELOPER ? 1 : 0; ?>
 		};
+		if (!polenObj.developer) {
+			console = {
+				debug: function () {},
+				error: function () {},
+				info: function () {},
+				log: function () {},
+				warn: function () {},
+			};
+		}
 	</script>
-	<script src="<?php echo TEMPLATE_URI . '/assets/js/' . get_assets_folder() . 'pre-render.js'; ?>"></script>
 	<?php wp_head(); ?>
     <?php include_once TEMPLATE_DIR . '/inc/analitics_header.php'; ?>
 </head>

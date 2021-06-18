@@ -110,7 +110,7 @@ class Polen_Messages_Handler
      */
     protected function create_js_tag( $body )
     {
-        $tags = "<script>docReady(function() {%s});</script>";
+        $tags = "<script>window.onload=function(){%s};</script>";
         $js_complete = sprintf( $tags, $body );
         return apply_filters( "polen_messages_create_script_tag", $js_complete );
     }
