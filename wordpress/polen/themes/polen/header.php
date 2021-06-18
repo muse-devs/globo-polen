@@ -26,7 +26,6 @@ use Polen\Includes\Polen_Talent;
 	<!-- <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"> -->
 	<meta name="theme-color" content="#000000">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
-	<?php wp_head(); ?>
 	<script>
 		var polenObj = {
 			base_url: '<?= site_url(); ?>',
@@ -42,7 +41,7 @@ use Polen\Includes\Polen_Talent;
 			};
 		}
 	</script>
-
+	<?php wp_head(); ?>
     <?php include_once TEMPLATE_DIR . '/inc/analitics_header.php'; ?>
 </head>
 

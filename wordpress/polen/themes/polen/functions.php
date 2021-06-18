@@ -179,6 +179,8 @@ function polen_scripts() {
 		remove_theme_support( 'wc-product-gallery-slider' );
 	}
 
+	wp_enqueue_script( 'global-js', TEMPLATE_URI . '/assets/js/' . $min . 'global.js', array("jquery"), _S_VERSION, false );
+
 	if(is_front_page()) {
 		wp_enqueue_script( 'home-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'front-page.js', array(), _S_VERSION, true );
 	}
@@ -209,8 +211,6 @@ function polen_scripts() {
 	if(is_user_logged_in()) {
 		wp_enqueue_script( 'header-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'navigation.js', array("jquery"), _S_VERSION, true );
 	}
-
-	wp_enqueue_script( 'global-js', TEMPLATE_URI . '/assets/js/' . $min . 'global.js', array("jquery"), _S_VERSION, true );
 }
 add_action( 'wp_enqueue_scripts', 'polen_scripts' );
 

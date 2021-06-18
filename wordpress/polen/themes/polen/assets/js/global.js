@@ -10,19 +10,6 @@ const CONSTANTS = {
 
 var interval = setInterval;
 
-function docReady(fn) {
-	// see if DOM is already available
-	if (
-		document.readyState === "complete" ||
-		document.readyState === "interactive"
-	) {
-		// call on next available tick
-		setImediate(fn);
-	} else {
-		document.addEventListener("DOMContentLoaded", fn);
-	}
-}
-
 function copyToClipboard(text) {
 	var copyText = document.createElement("input");
 	copyText.id = "share-input";
@@ -35,6 +22,17 @@ function copyToClipboard(text) {
 	document.execCommand("copy");
 	document.body.removeChild(copyText);
 	polMessage("Sucesso", "Link copiado para Área de transferência");
+}
+
+function docReady(fn) {
+	if (
+		document.readyState === "complete" ||
+		document.readyState === "interactive"
+	) {
+		setImediate(fn);
+	} else {
+		document.addEventListener("DOMContentLoaded", fn);
+	}
 }
 
 function shareVideo(title, url) {
