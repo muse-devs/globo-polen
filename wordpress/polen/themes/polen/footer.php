@@ -73,7 +73,7 @@
 <?php do_action( 'polen_messages_service_error' ); ?>
 <?php do_action( 'polen_messages_service_success' ); ?>
 <?php Polen\Includes\Polen_Messages::clear_messages(); ?>
-
+<?php include_once TEMPLATE_DIR . '/inc/analitics_footer.php'; ?>
 </body>
 
 </html>
