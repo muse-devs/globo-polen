@@ -4,7 +4,7 @@ const CONSTANTS = {
 	ERROR: "error",
 	SHOW: "show",
 	HIDDEN: "hidden",
-	MESSAGE_TIME: 5,
+	MESSAGE_TIME: 10,
 	THEME: "theme_mode",
 };
 
