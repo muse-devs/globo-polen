@@ -17,7 +17,7 @@ function docReady(fn) {
 		document.readyState === "interactive"
 	) {
 		// call on next available tick
-		setTimeout(fn, 1);
+		setImediate(fn);
 	} else {
 		document.addEventListener("DOMContentLoaded", fn);
 	}
