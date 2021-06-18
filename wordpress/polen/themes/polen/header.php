@@ -32,6 +32,7 @@ use Polen\Includes\Polen_Talent;
 			developer: <?php echo DEVELOPER ? 1 : 0; ?>
 		};
 	</script>
+	<script src="<?php echo TEMPLATE_URI . '/assets/js/' . get_assets_folder() . 'pre-render.js'; ?>"></script>
 	<?php wp_head(); ?>
     <?php include_once TEMPLATE_DIR . '/inc/analitics_header.php'; ?>
 </head>
