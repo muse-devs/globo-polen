@@ -11,7 +11,6 @@ if( is_user_logged_in() ) {
     $braspag_card_saved_data = false;
 }
 ?>
-<?php woocommerce_checkout_coupon_form(); ?>
 
 <div class="form-group" id="div_braspag_payment">
     <?php if( (int) $WC_Cubo9_BraspagReduxSettings['enable_installments'] === (int) 1 ) : ?>
