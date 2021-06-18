@@ -365,6 +365,24 @@ class Polen_Plugin_Settings
                 ),
             )
         ) );
+
+
+        // Key Analitics
+        \Redux::set_section( $opt_name, array(
+            'title'            => esc_html__( 'ChatBot Keys', 'polen' ),
+            'id'               => 'chatbot_keys',
+            'icon'             => 'el el-mic-alt',
+            'subsection'       => false,
+            'fields'           => array(
+                array(
+                    'id'       => 'polen_chatport_key',
+                    'type'     => 'text',
+                    'title'    => esc_html__('ChatPort AppID', 'polen'),
+                    'desc'     => 'Informe o AppID que o ChatPort Entregou',
+                    'default'  => '',
+                ),
+            )
+        ) );
     }
 
     public function save( $args ) {

@@ -20,6 +20,7 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 do_action('polen_before_cart');
+remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10 );
 do_action('woocommerce_before_checkout_form', $checkout);
 
 // If checkout registration is disabled and not logged in, the user cannot checkout.
@@ -58,6 +59,7 @@ $Talent_Fields = new Polen_Update_Fields();
 				"name" => $_product->get_title(),
 				"career" => $talent_data->profissao,
 				"price" => $_product->get_price_html(),
+				"discount" => wc_price( WC()->cart->get_discount_total() ),
 				"from" => $cart_item['offered_by'] ? $cart_item['offered_by'] : null,
 				"to" => $cart_item['name_to_video'] ? $cart_item['name_to_video'] : null,
 				"category" => $cart_item['video_category'] ? $cart_item['video_category'] : null,
@@ -117,14 +119,6 @@ $Talent_Fields = new Polen_Update_Fields();
 				woocommerce_order_review();
 				?>
 				<?php do_action('woocommerce_checkout_after_order_review'); ?>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-md-12">
-				<?php
-				//woocommerce_checkout_payment();
-				?>
 			</div>
 		</div>
 	</form>
