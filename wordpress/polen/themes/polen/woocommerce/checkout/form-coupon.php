@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Checkout coupon form
  *
@@ -15,33 +16,21 @@
  * @version 3.4.4
  */
 
-defined( 'ABSPATH' ) || exit;
+defined('ABSPATH') || exit;
 
-if ( ! wc_coupons_enabled() ) { // @codingStandardsIgnoreLine.
+if (!wc_coupons_enabled()) { // @codingStandardsIgnoreLine.
 	return;
 }
 
 ?>
-<div class="woocommerce-form-coupon-toggle">
-	<?php wc_print_notice( apply_filters( 'woocommerce_checkout_coupon_message', esc_html__( 'Have a coupon?', 'woocommerce' ) . ' <a href="#" class="showcoupon">' . esc_html__( 'Click here to enter your code', 'woocommerce' ) . '</a>' ), 'notice' ); ?>
-</div>
-
-<form class="checkout_coupon woocommerce-form-coupon" method="post">
+<form class="checkout_coupon woocommerce-form-coupon box-color mt-4 px-3" method="post">
 	<div class="row">
 		<div class="col-12">
+			<label for="coupon_code" class="form-title"><?php echo __('Adicionar Cupom de desconto', 'cubo9-marketplace'); ?></label>
 			<div class="row">
-				<div class="col col-12">
-					<label for="coupon_code"><?php echo __( 'Código do cupom', 'cubo9-marketplace' ); ?></label>
-					<input type="text" name="coupon_code" class="form-control form-control-lg" placeholder="<?php esc_attr_e( 'Coupon code', 'woocommerce' ); ?>" id="coupon_code" value="" />
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-12">
-			<div class="row">
-				<div class="col col-12">
-					<button type="submit" class="button" name="apply_coupon" value="<?php esc_attr_e( 'Apply coupon', 'woocommerce' ); ?>"><?php esc_html_e( 'Apply coupon', 'woocommerce' ); ?></button>
+				<div class="col-12 d-flex">
+					<input type="text" name="coupon_code" class="form-control form-control-lg mr-3" placeholder="<?php esc_attr_e('Coupon code', 'woocommerce'); ?>" id="coupon_code" value="" />
+					<button type="submit" class="btn btn-primary btn-lg" name="apply_coupon" value="<?php esc_attr_e('Apply coupon', 'woocommerce'); ?>"><?php esc_html_e('Ok', 'woocommerce'); ?></button>
 				</div>
 			</div>
 		</div>
