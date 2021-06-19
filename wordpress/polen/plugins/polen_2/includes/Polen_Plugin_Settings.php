@@ -392,7 +392,7 @@ class Polen_Plugin_Settings
             'subsection'       => false,
             'fields'           => array(
                 array(
-                    'id'       => 'polen_phone',
+                    'id'       => 'polen_whastsapp_phone',
                     'type'     => 'text',
                     'title'    => esc_html__('Numero do Telefone', 'polen'),
                     'subtitle' => esc_html__('Formato: 5521911111111 (codigo do pais, ddd, e telefone)', 'polen'),
