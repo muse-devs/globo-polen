@@ -68,12 +68,15 @@
 	</div><!-- .site-info -->
 </footer><!-- #colophon -->
 
-<?php
-global $Polen_Plugin_Settings;
-$phone_number = $Polen_Plugin_Settings['polen_whatsapp_number'];
-?>
+<?php if( !empty( $Polen_Plugin_Settings['polen_whatsapp_number'] )) : ?>
+	<?php
+	global $Polen_Plugin_Settings;
+	$phone_number = $Polen_Plugin_Settings['polen_whatsapp_number'];
+	?>
 
-<a href="https://wa.me/<?php echo $phone_number ?>?text=Oi,%20estou%20com%20uma%20dúvida" class="whatsapp_link" target="_blank"><?php Icon_Class::polen_icon_social("whatsapp") ?></a>
+	<a href="https://wa.me/<?php echo $phone_number ?>?text=Oi,%20estou%20com%20uma%20dúvida" class="whatsapp_link" target="_blank"><?php Icon_Class::polen_icon_social("whatsapp") ?></a>
+<?php endif; ?>
+
 </div><!-- #Container -->
 
 <?php wp_footer(); ?>
