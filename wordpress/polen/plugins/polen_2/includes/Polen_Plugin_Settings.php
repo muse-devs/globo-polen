@@ -399,6 +399,14 @@ class Polen_Plugin_Settings
                     'desc'     => 'Informe o Numero de telefone do Whastaspp',
                     'default'  => '',
                 ),
+                array(
+                    'id'       => 'polen_whastsapp_text',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Mensagem Inicial', 'polen'),
+                    'subtitle' => esc_html__('Mensagem inicial para começar o chat', 'polen'),
+                    'desc'     => 'Informe a Mensagem inicial para começar o chat',
+                    'default'  => '',
+                ),
             )
         ) );
     }

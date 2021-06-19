@@ -73,9 +73,11 @@ if( !empty( $Polen_Plugin_Settings['polen_whastsapp_phone'] )) : ?>
 	<?php
 	global $Polen_Plugin_Settings;
 	$phone_number = $Polen_Plugin_Settings['polen_whastsapp_phone'];
+	$mensagem = $Polen_Plugin_Settings['polen_whastsapp_text'];
+	$message_query = http_build_query( [ 'text' => $mensagem ] );
 	?>
 
-	<a href="https://wa.me/<?php echo $phone_number ?>?text=Olá,%20preciso%20de%20uma%20ajuda" class="whatsapp_link" target="_blank"><?php Icon_Class::polen_icon_social("whatsapp") ?></a>
+	<a href="https://wa.me/<?php echo $phone_number ?>?<?= $message_query; ?>" class="whatsapp_link" target="_blank"><?php Icon_Class::polen_icon_social("whatsapp") ?></a>
 <?php endif; ?>
 
 </div><!-- #Container -->
