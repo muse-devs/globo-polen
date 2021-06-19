@@ -54,3 +54,31 @@ else :
 
 <?php
 endif;
+ 
+$items = $order->get_items();
+$item = array_pop( $items );
+$product = $item->get_product();
+$category_ids = $product->get_category_ids();
+$category_id = array_pop( $category_ids );
+$category_name = get_term_by( 'id', $category_id, 'product_cat' );
+?>
+<script>
+gtag('event', 'purchase', {
+  "transaction_id": "<?= $order->get_id(); ?>",
+  "affiliation": "Polen.me",
+  "value": <?= $order->get_total(); ?>,
+  "currency": "BRL",
+  "tax": 0.0,
+  "shipping": 0,
+  "items": [
+    {
+      "id": "<?= $item->get_product_id(); ?>",
+      "name": "<?= $item->get_name(); ?>",
+      "category": "<?= $category_name->name; ?>",
+      "list_position": 1,
+      "quantity": <?= $item->get_quantity(); ?>,
+      "price": "<?=  $item->get_subtotal(); ?>"
+    }
+  ]
+});
+</script>
