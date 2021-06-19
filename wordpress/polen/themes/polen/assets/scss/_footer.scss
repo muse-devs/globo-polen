@@ -63,3 +63,23 @@
 		}
 	}
 }
+
+.whatsapp_link {
+	position: fixed;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 30px;
+	bottom: 20px;
+	right: 20px;
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	color: var(--light);
+	background-color: var(--green);
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+	z-index: 999999;
+	&:hover {
+		color: var(--white);
+	}
+}
