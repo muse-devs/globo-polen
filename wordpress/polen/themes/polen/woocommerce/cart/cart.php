@@ -207,9 +207,9 @@ $Talent_Fields = new Polen_Update_Fields();
 						<?php
 						$instructions_to_video = isset($cart_item['instructions_to_video']) ? $cart_item['instructions_to_video'] : '';
 						printf(
-							'<textarea 	name="instructions_to_video" placeholder="Instruções"
-										class="%s form-control form-control-lg" id="cart_instructions_to_video_%s"
-										data-cart-id="%s" required="required">%s</textarea>',
+							"<textarea 	name=\"instructions_to_video\" placeholder=\"Escreva aqui o que você gostaria que {$_product->get_title()} falasse nesse vídeo\"
+										class=\"%s form-control form-control-lg\" id=\"cart_instructions_to_video_%s\"
+										data-cart-id=\"%s\" required=\"required\">%s</textarea>",
 							'polen-cart-item-data',
 							$cart_item_key,
 							$cart_item_key,
@@ -218,11 +218,11 @@ $Talent_Fields = new Polen_Update_Fields();
 						?>
 					</div>
 				</div>
-				<div class="row pb-2">
+				<!-- <div class="row pb-2">
 					<div class="col-12 d-flex align-items-center reload-sugestions">
 						<?php Icon_Class::polen_icon_reload("reload"); ?><a href="javascript:void(0)" class="link-alt video-instruction-refresh ml-2">Outra sugestão de instrução</a>
 					</div>
-				</div>
+				</div> -->
 				<div class="row mt-4">
 					<div class="col-12 col-md-12">
 						<?php
