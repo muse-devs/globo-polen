@@ -9,9 +9,6 @@
  *
  * @package Polen
  */
-
-use Polen\Includes\Debug;
-
 ?>
 
 <footer id="colophon" class="site-footer pb-4">
