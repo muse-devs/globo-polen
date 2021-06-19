@@ -367,7 +367,7 @@ class Polen_Plugin_Settings
         ) );
 
 
-        // Key Analitics
+        // Key ChatBot
         \Redux::set_section( $opt_name, array(
             'title'            => esc_html__( 'ChatBot Keys', 'polen' ),
             'id'               => 'chatbot_keys',
@@ -379,6 +379,24 @@ class Polen_Plugin_Settings
                     'type'     => 'text',
                     'title'    => esc_html__('ChatPort AppID', 'polen'),
                     'desc'     => 'Informe o AppID que o ChatPort Entregou',
+                    'default'  => '',
+                ),
+            )
+        ) );
+
+        // Telefone do Atendimento Online
+        \Redux::set_section( $opt_name, array(
+            'title'            => esc_html__( 'Telefone Whatsapp', 'polen' ),
+            'id'               => 'polen_whatsapp_number',
+            'icon'             => 'el el-mic-alt',
+            'subsection'       => false,
+            'fields'           => array(
+                array(
+                    'id'       => 'polen_phone',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Numero do Telefone', 'polen'),
+                    'subtitle' => esc_html__('Formato: 5521911111111 (codigo do pais, ddd, e telefone)', 'polen'),
+                    'desc'     => 'Informe o Numero de telefone do Whastaspp',
                     'default'  => '',
                 ),
             )
