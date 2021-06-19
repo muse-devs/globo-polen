@@ -11,8 +11,8 @@ if( is_user_logged_in() ) {
     $braspag_card_saved_data = false;
 }
 ?>
-<div class="form-group" id="div_braspag_payment">
 
+<div class="form-group" id="div_braspag_payment">
     <?php if( (int) $WC_Cubo9_BraspagReduxSettings['enable_installments'] === (int) 1 ) : ?>
 		<!-- Formas de Pagamento Parcelado -->
 		<div class="row">

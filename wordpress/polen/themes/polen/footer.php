@@ -9,7 +9,6 @@
  *
  * @package Polen
  */
-
 ?>
 
 <footer id="colophon" class="site-footer pb-4">
@@ -67,13 +66,25 @@
 		<div class="col-md-12 pt-3 text-center">2021 @<?= get_bloginfo('name'); ?></div>
 	</div><!-- .site-info -->
 </footer><!-- #colophon -->
+
+<?php
+global $Polen_Plugin_Settings;
+if( !empty( $Polen_Plugin_Settings['polen_whastsapp_phone'] )) : ?>
+	<?php
+	global $Polen_Plugin_Settings;
+	$phone_number = $Polen_Plugin_Settings['polen_whastsapp_phone'];
+	?>
+
+	<a href="https://wa.me/<?php echo $phone_number ?>?text=Oi,%20estou%20com%20uma%20dúvida" class="whatsapp_link" target="_blank"><?php Icon_Class::polen_icon_social("whatsapp") ?></a>
+<?php endif; ?>
+
 </div><!-- #Container -->
 
 <?php wp_footer(); ?>
 <?php do_action( 'polen_messages_service_error' ); ?>
 <?php do_action( 'polen_messages_service_success' ); ?>
 <?php Polen\Includes\Polen_Messages::clear_messages(); ?>
-
+<?php include_once TEMPLATE_DIR . '/inc/analitics_footer.php'; ?>
 </body>
 
 </html>

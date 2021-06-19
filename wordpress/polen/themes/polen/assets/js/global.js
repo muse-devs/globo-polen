@@ -4,7 +4,7 @@ const CONSTANTS = {
 	ERROR: "error",
 	SHOW: "show",
 	HIDDEN: "hidden",
-	MESSAGE_TIME: 5,
+	MESSAGE_TIME: 10,
 	THEME: "theme_mode",
 };
 
@@ -22,6 +22,17 @@ function copyToClipboard(text) {
 	document.execCommand("copy");
 	document.body.removeChild(copyText);
 	polMessage("Sucesso", "Link copiado para Área de transferência");
+}
+
+function docReady(fn) {
+	if (
+		document.readyState === "complete" ||
+		document.readyState === "interactive"
+	) {
+		setImediate(fn);
+	} else {
+		document.addEventListener("DOMContentLoaded", fn);
+	}
 }
 
 function shareVideo(title, url) {
@@ -101,13 +112,13 @@ function polSpinner(action, el) {
 }
 
 const polMessages = {
-	message: function(title, message) {
+	message: function (title, message) {
 		polMessage(title, message);
 	},
-	error: function(message) {
+	error: function (message) {
 		polError(message);
-	}
-}
+	},
+};
 
 function polMessage(title, message) {
 	var id = "message-box";
@@ -238,6 +249,38 @@ function downloadClick_handler(evt) {
 }
 // ---------------------------
 
+// Analytics ----------------------------------
+const GA_EVENTS = {
+	PURCHASE: "purchase",
+};
+
+function polenGA(type, value) {
+	gtag("event", type, value);
+
+	// gtag("event", "purchase", {
+	// 	transaction_id: "24.031608523954162",
+	// 	affiliation: "Google online store",
+	// 	value: 23.07,
+	// 	currency: "USD",
+	// 	tax: 1.24,
+	// 	shipping: 0,
+	// 	items: [
+	// 		{
+	// 			id: "P12345",
+	// 			name: "Android Warhol T-Shirt",
+	// 			list_name: "Search Results",
+	// 			brand: "Google",
+	// 			category: "Apparel/T-Shirts",
+	// 			variant: "Black",
+	// 			list_position: 1,
+	// 			quantity: 2,
+	// 			price: "2.0",
+	// 		},
+	// 	],
+	// });
+}
+// --------------------------------------------
+
 jQuery(document).ready(function () {
 	truncatedItems();
 	getSessionMessage();
@@ -266,7 +309,10 @@ jQuery(document).ready(function () {
 					is_mobile: is_mobile.val(),
 				},
 				success: function (response) {
-					polMessage("Seu email foi adicionado à lista", response.data.response);
+					polMessage(
+						"Seu email foi adicionado à lista",
+						response.data.response
+					);
 					email.val("");
 				},
 				complete: function () {
