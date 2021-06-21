@@ -201,8 +201,8 @@ $Talent_Fields = new Polen_Update_Fields();
 					</div>
 				</div>
 				<div class="row mt-4">
-					<div class="col-12 col-md-12 mb-3">
-						<span class="form-title">Instruções para o vídeo</span>
+					<div class="col-12 col-md-12">
+						<label for="cart_instructions_to_video_<?php echo $cart_item_key; ?>">Instruções para o vídeo</label>
 					</div>
 					<div class="col-md-12">
 						<?php
