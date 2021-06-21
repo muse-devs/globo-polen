@@ -24,6 +24,10 @@ global $Polen_Plugin_Settings;
     </script>
 <?php endif; ?>
 
+<?php if( !empty( $Polen_Plugin_Settings['polen_google_optimize_key'] )) : ?>
+    <script src="https://www.googleoptimize.com/optimize.js?id=<?= $Polen_Plugin_Settings['polen_google_optimize_key']; ?>"></script>
+<?php endif; ?>
+
 <?php if( !empty( $Polen_Plugin_Settings['polen_google_analitics_key'] )) : ?>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=<?= $Polen_Plugin_Settings['polen_google_analitics_key']; ?>"></script>

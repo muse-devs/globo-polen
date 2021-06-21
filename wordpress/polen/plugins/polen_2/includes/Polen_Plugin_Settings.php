@@ -343,6 +343,13 @@ class Polen_Plugin_Settings
                     'default'  => '',
                 ),
                 array(
+                    'id'       => 'polen_google_optimize_key',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Google Optmize Keys', 'polen'),
+                    'desc'     => 'Informa o Google Optmize Keys.',
+                    'default'  => '',
+                ),
+                array(
                     'id'       => 'polen_google_tagmanager_key',
                     'type'     => 'text',
                     'title'    => esc_html__('Tag Manager Key', 'polen'),
