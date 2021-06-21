@@ -69,7 +69,7 @@
 
 <?php
 global $Polen_Plugin_Settings;
-if( !empty( $Polen_Plugin_Settings['polen_whastsapp_phone'] )) : ?>
+if( !empty( $Polen_Plugin_Settings['polen_whastsapp_phone'] ) && !is_front_page() ) : ?>
 	<?php
 	global $Polen_Plugin_Settings;
 	$phone_number = $Polen_Plugin_Settings['polen_whastsapp_phone'];
