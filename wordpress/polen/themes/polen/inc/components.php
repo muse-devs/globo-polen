@@ -473,7 +473,7 @@ function polen_get_talent_card($talent)
 			<p class="price mt-2">
 				<?php wc_cart_totals_order_total_html(); ?>
 			</p>
-			<?php if ($talent['discount']) : ?>
+			<?php if (!empty($talent['discount'])) : ?>
 				<div class="row">
 					<div class="col-12 mt-3">
 						<table style="width: 60%;">
