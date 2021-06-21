@@ -83,3 +83,14 @@
 		color: var(--white);
 	}
 }
+
+.policies-box {
+	position: fixed;
+	width: 100%;
+	bottom: 15px;
+	left: 0;
+	z-index: 120;
+	.box-round {
+		background-color: var(--light);
+	}
+}

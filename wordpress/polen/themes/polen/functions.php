@@ -15,6 +15,9 @@ if ( ! defined( '_S_VERSION' ) ) {
 define('TEMPLATE_URI', get_template_directory_uri());
 define('TEMPLATE_DIR', get_template_directory());
 define('DEVELOPER', defined('ENV_DEV') && ENV_DEV);
+define('POL_COOKIES', array(
+	'POLICIES' => 'policies',
+));
 
 if ( ! function_exists( 'polen_setup' ) ) :
 	/**

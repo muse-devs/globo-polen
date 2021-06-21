@@ -67,17 +67,7 @@
 	</div><!-- .site-info -->
 </footer><!-- #colophon -->
 
-<?php
-global $Polen_Plugin_Settings;
-if( !empty( $Polen_Plugin_Settings['polen_whastsapp_phone'] )) : ?>
-	<?php
-	global $Polen_Plugin_Settings;
-	$phone_number = $Polen_Plugin_Settings['polen_whastsapp_phone'];
-	$mensagem = $Polen_Plugin_Settings['polen_whastsapp_text'];
-	?>
-
-	<a href="https://wa.me/<?php echo $phone_number ?>?text=<?= urlencode( $mensagem ); ?>" class="whatsapp_link" target="_blank"><?php Icon_Class::polen_icon_social("whatsapp") ?></a>
-<?php endif; ?>
+<?php include_once TEMPLATE_DIR . '/inc/custom-footer.php'; ?>
 
 </div><!-- #Container -->
 

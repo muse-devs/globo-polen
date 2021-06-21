@@ -409,6 +409,23 @@ class Polen_Plugin_Settings
                 ),
             )
         ) );
+
+        // Política de cookies
+        \Redux::set_section( $opt_name, array(
+            'title'            => esc_html__( 'Políticas de Cookies', 'polen' ),
+            'id'               => 'polen_cookies_policities',
+            'icon'             => 'el el-mic-alt',
+            'subsection'       => false,
+            'fields'           => array(
+                array(
+                    'id'       => 'polen_cookies_policities_text',
+                    'type'     => 'editor',
+                    'title'    => esc_html__('Texto com o link para as Políticas', 'polen'),
+                    'desc'     => 'Texto que aparece no box de aceite de cookies',
+                    'default'  => '',
+                ),
+            )
+        ) );
     }
 
     public function save( $args ) {
