@@ -29,7 +29,8 @@ use Polen\Includes\Polen_Talent;
 	<script>
 		var polenObj = {
 			base_url: '<?= site_url(); ?>',
-			developer: <?php echo DEVELOPER ? 1 : 0; ?>
+			developer: <?php echo DEVELOPER ? 1 : 0; ?>,
+			COOKIES: <?php echo json_encode(POL_COOKIES); ?>
 		};
 		if (!polenObj.developer) {
 			console = {
