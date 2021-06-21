@@ -250,35 +250,36 @@ function downloadClick_handler(evt) {
 // ---------------------------
 
 // Analytics ----------------------------------
-const GA_EVENTS = {
-	PURCHASE: "purchase",
+const polenGtag = {
+	type: {
+		purchase: "purchase",
+	},
+	sendEvent: function (type, value) {
+		// gtag("event", type, value);
+		console.log(type, value);
+	},
 };
-
-function polenGA(type, value) {
-	gtag("event", type, value);
-
-	// gtag("event", "purchase", {
-	// 	transaction_id: "24.031608523954162",
-	// 	affiliation: "Google online store",
-	// 	value: 23.07,
-	// 	currency: "USD",
-	// 	tax: 1.24,
-	// 	shipping: 0,
-	// 	items: [
-	// 		{
-	// 			id: "P12345",
-	// 			name: "Android Warhol T-Shirt",
-	// 			list_name: "Search Results",
-	// 			brand: "Google",
-	// 			category: "Apparel/T-Shirts",
-	// 			variant: "Black",
-	// 			list_position: 1,
-	// 			quantity: 2,
-	// 			price: "2.0",
-	// 		},
-	// 	],
-	// });
-}
+// gtag("event", "purchase", {
+// 	transaction_id: "24.031608523954162",
+// 	affiliation: "Google online store",
+// 	value: 23.07,
+// 	currency: "USD",
+// 	tax: 1.24,
+// 	shipping: 0,
+// 	items: [
+// 		{
+// 			id: "P12345",
+// 			name: "Android Warhol T-Shirt",
+// 			list_name: "Search Results",
+// 			brand: "Google",
+// 			category: "Apparel/T-Shirts",
+// 			variant: "Black",
+// 			list_position: 1,
+// 			quantity: 2,
+// 			price: "2.0",
+// 		},
+// 	],
+// });
 // --------------------------------------------
 
 // Funções de Cookie -------------------------------------------------------
