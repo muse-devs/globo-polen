@@ -5,7 +5,7 @@ $mensagem = $Polen_Plugin_Settings['polen_whastsapp_text'];
 $policies = $Polen_Plugin_Settings['polen_cookies_policities_text'];
 ?>
 
-<?php if (!empty($phone_number)) : ?>
+<?php if( !empty($phone_number) && !is_front_page() ) : ?>
 	<a href="https://wa.me/<?php echo $phone_number ?>?text=<?= urlencode($mensagem); ?>" class="whatsapp_link" target="_blank"><?php Icon_Class::polen_icon_social("whatsapp") ?></a>
 <?php endif; ?>
 
