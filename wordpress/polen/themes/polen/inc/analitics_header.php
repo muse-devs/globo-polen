@@ -36,6 +36,18 @@ global $Polen_Plugin_Settings;
     </script>
 <?php endif; ?>
 
+<?php if( !empty( $Polen_Plugin_Settings['polen_google_analitics_universal_key'] )) : ?>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=<?= $Polen_Plugin_Settings['polen_google_analitics_universal_key']; ?>"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '<?= $Polen_Plugin_Settings['polen_google_analitics_universal_key']; ?>');
+    </script>
+<?php endif; ?>
+
+
 <?php if( !empty( $Polen_Plugin_Settings['polen_hotjar_key'] )) : ?>
     <!-- Hotjar Tracking Code for https://polen-homolog.c9t.pw/ -->
     <script>
