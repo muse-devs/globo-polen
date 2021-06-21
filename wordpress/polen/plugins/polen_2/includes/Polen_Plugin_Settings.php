@@ -336,6 +336,13 @@ class Polen_Plugin_Settings
                     'default'  => '',
                 ),
                 array(
+                    'id'       => 'polen_google_analitics_universal_key',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Google Analitics Universal Keys', 'polen'),
+                    'desc'     => 'Informa o Google Analitics Universal Keys.',
+                    'default'  => '',
+                ),
+                array(
                     'id'       => 'polen_google_tagmanager_key',
                     'type'     => 'text',
                     'title'    => esc_html__('Tag Manager Key', 'polen'),
