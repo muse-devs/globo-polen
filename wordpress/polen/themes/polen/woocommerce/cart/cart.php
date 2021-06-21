@@ -162,10 +162,10 @@ $Talent_Fields = new Polen_Update_Fields();
 							<?php
 							$email_to_video = isset($cart_item['email_to_video']) ? $cart_item['email_to_video'] : '';
 							?>
-							<label for="<?php echo 'cart_email_to_video_' . $cart_item_key; ?>">E-mail</label>
+							<label for="<?php echo 'cart_email_to_video_' . $cart_item_key; ?>">e-mail</label>
 							<?php
 							printf(
-								'<input type="email" placeholder="E-mail de atualizações do seu pedido" class="%s form-control form-control-lg" id="cart_email_to_video_%s" data-cart-id="%s" name="email_to_video" value="%s" required="required"  />',
+								'<input type="email" placeholder="e-mail para atualizações do seu pedido" class="%s form-control form-control-lg" id="cart_email_to_video_%s" data-cart-id="%s" name="email_to_video" value="%s" required="required"  />',
 								'polen-cart-item-data',
 								$cart_item_key,
 								$cart_item_key,
