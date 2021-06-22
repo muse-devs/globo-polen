@@ -147,6 +147,7 @@ class Polen_WooCommerce
         if( $current_screen && ! is_null( $current_screen ) && isset( $current_screen->id ) && $current_screen->id == 'shop_order' && isset( $_REQUEST['action'] ) && $_REQUEST['action'] == 'edit' ) 
         {
             add_meta_box( 'Polen_Order_Details', 'Instruções', array( $this, 'metabox_order_details' ), 'shop_order', 'normal', 'low' );
+            add_meta_box( 'Polen_Order_Details_Video_Info', 'Info do Video', array( $this, 'metabox_order_details_video_info' ), 'shop_order', 'normal', 'low' );
         }
     }
 
@@ -157,6 +158,16 @@ class Polen_WooCommerce
             require_once TEMPLATEPATH . '/woocommerce/admin/metaboxes/metabox-order-details.php';
         } else {
             require_once PLUGIN_POLEN_DIR . '/admin/partials/metaboxes/metabox-order-details.php';
+        }
+    }
+
+    public function metabox_order_details_video_info() {
+        global $post;
+        $order_id = $post->ID;
+        if( file_exists( TEMPLATEPATH . '/woocommerce/admin/metaboxes/metabox-video-info.php' ) ) {
+            require_once TEMPLATEPATH . '/woocommerce/admin/metaboxes/metabox-video-info.php';
+        } else {
+            require_once PLUGIN_POLEN_DIR . '/admin/partials/metaboxes/metabox-video-info.php';
         }
     }
 
