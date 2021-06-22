@@ -3,7 +3,7 @@
 namespace Polen\Includes;
 
 use Polen\Includes\Emails\Polen_Email_Signin_Prerelease;
-use \Polen\Includes\Polen_Newsletter_Display;
+use \Polen\Admin\Partials\Polen_Newsletter_Display;
 
 include_once WP_PLUGIN_DIR . '/woocommerce/includes/abstracts/abstract-wc-settings-api.php';
 include_once WP_PLUGIN_DIR . '/woocommerce/includes/emails/class-wc-email.php';
