@@ -284,7 +284,7 @@ function polen_talent_promo_card($talent)
 {
 	global $product;
 ?>
-	<div class="video-promo-card">
+	<div id="video-promo-card" class="video-promo-card">
 		<div class="box-color card row">
 			<div class="col-12 col-md-12 d-flex flex-column justify-content-center align-items-center text-center p-2">
 				<div class="image-cropper">

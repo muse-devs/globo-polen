@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Funcao que criar uma chamada JS quando um compra é dada como sucesso
- * 
+ *
  * @param WC_Order
  */
 function polen_create_ga_order( $order )
@@ -21,7 +21,7 @@ function polen_create_ga_order( $order )
 
     $output = <<<EOL
     <script>
-    gtag('event', 'purchase', {
+    polenGtag.sendEvent(polenGtag.type.purchase, {
     "transaction_id": "{$order->get_id()}",
     "affiliation": "Polen.me",
     "value": {$order->get_total()},
