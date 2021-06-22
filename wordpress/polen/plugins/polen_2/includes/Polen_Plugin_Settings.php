@@ -336,6 +336,13 @@ class Polen_Plugin_Settings
                     'default'  => '',
                 ),
                 array(
+                    'id'       => 'polen_ca_pub_key',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Google Ad Sense', 'polen'),
+                    'desc'     => 'Informa o Google Ad Sense Keys.',
+                    'default'  => '',
+                ),
+                array(
                     'id'       => 'polen_google_analitics_universal_key',
                     'type'     => 'text',
                     'title'    => esc_html__('Google Analitics Universal Keys', 'polen'),
