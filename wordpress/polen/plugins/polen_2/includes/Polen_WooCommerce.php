@@ -164,8 +164,8 @@ class Polen_WooCommerce
     public function metabox_order_details_video_info() {
         global $post;
         $order_id = $post->ID;
-        if( file_exists( TEMPLATEPATH . '/woocommerce/admin/metaboxes/metabox-order-details.php' ) ) {
-            require_once TEMPLATEPATH . '/woocommerce/admin/metaboxes/metabox-order-details.php';
+        if( file_exists( TEMPLATEPATH . '/woocommerce/admin/metaboxes/metabox-video-info.php' ) ) {
+            require_once TEMPLATEPATH . '/woocommerce/admin/metaboxes/metabox-video-info.php';
         } else {
             require_once PLUGIN_POLEN_DIR . '/admin/partials/metaboxes/metabox-video-info.php';
         }
