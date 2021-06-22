@@ -30,4 +30,4 @@ if( !empty( $video_info ) ) :
     <div class="clear"></div>
 </div>
 
-<?php endif; ?>
+<?php endif;
