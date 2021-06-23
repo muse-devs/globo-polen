@@ -79,8 +79,23 @@ class Polen_WooCommerce
             add_filter( 'woocommerce_product_data_tabs', array( $this, 'charity_tab' ) );
             add_filter( 'woocommerce_product_data_panels', array( $this, 'charity_product_data_product_tab_content' ) );
             add_action( 'woocommerce_update_product', array( $this, 'on_product_save' ) );
+
+            //Todas as compras gratis vão para o status payment-approved
+            add_action( 'woocommerce_checkout_no_payment_needed_redirect', [ $this, 'set_free_order_payment_approved' ], 10, 3 );
         }
     }
+    
+
+    /**
+     * Colocar os status de uma order gratis como pagamento aprovado
+     */
+    public function set_free_order_payment_approved( $order_received_url, $order )
+    {
+        $order->set_status('payment-approved');
+        $order->save();
+        return $order_received_url;
+    }
+
 
     public function register_custom_order_statuses() 
     {
