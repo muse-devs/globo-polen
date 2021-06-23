@@ -6,7 +6,6 @@
  */
 
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
-use Polen\Includes\Debug;
 use Polen\Includes\Polen_Video_Info;
 
 /**
@@ -215,6 +214,27 @@ function polen_get_querystring_redirect()
 		return "?redirect_to={$redirect_to}";
 	}
 	return null;
+}
+
+
+/**
+ * Se o email que será enviado for para um Talento
+ * será mostrado o Valor Total sem desconto só é tratado nessa funcao 
+ * emails Polen\Includes\Polen_WC_Payment_Approved
+ * 
+ * @param WC_Order
+ * @param \WC_Email
+ */
+function polen_get_total_order_email_detail_to_talent( $order, $email )
+{
+	if ( ( 'Polen\Includes\Polen_WC_Payment_Approved' === get_class( $email ) )
+		&& !empty( $email->get_recipient_talent())
+	) {
+		$total_order = floatval( $order->get_total() );
+		$discount = floatval( $order->get_discount_total() );
+		return ( $total_order + $discount );
+	}
+	return $order->get_total();
 }
 
 
