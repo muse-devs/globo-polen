@@ -410,6 +410,18 @@
 	}
 	.order-title {
 		color: inherit;
+		&.new {
+			&::after {
+				content: "";
+				margin-left: 5px;
+				display: inline-block;
+				width: 6px;
+				height: 6px;
+				border-radius: 3px;
+				background-color: var(--success);
+				vertical-align: middle;
+			}
+		}
 	}
 	.order-number {
 		font-size: 12px;
@@ -423,6 +435,14 @@
 		text-align: center;
 		color: inherit;
 		border-radius: 2px;
+		&.secondary {
+			color: var(--light);
+			background-color: var(--secondary);
+		}
+		&.success {
+			color: var(--light);
+			background-color: var(--success);
+		}
 	}
 }
 
