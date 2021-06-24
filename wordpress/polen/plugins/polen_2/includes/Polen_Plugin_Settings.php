@@ -336,6 +336,27 @@ class Polen_Plugin_Settings
                     'default'  => '',
                 ),
                 array(
+                    'id'       => 'polen_ca_pub_key',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Google Ad Sense', 'polen'),
+                    'desc'     => 'Informa o Google Ad Sense Keys.',
+                    'default'  => '',
+                ),
+                array(
+                    'id'       => 'polen_google_analitics_universal_key',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Google Analitics Universal Keys', 'polen'),
+                    'desc'     => 'Informa o Google Analitics Universal Keys.',
+                    'default'  => '',
+                ),
+                array(
+                    'id'       => 'polen_google_optimize_key',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Google Optmize Keys', 'polen'),
+                    'desc'     => 'Informa o Google Optmize Keys.',
+                    'default'  => '',
+                ),
+                array(
                     'id'       => 'polen_google_tagmanager_key',
                     'type'     => 'text',
                     'title'    => esc_html__('Tag Manager Key', 'polen'),
@@ -361,6 +382,67 @@ class Polen_Plugin_Settings
                     'type'     => 'text',
                     'title'    => esc_html__('FB Pixel Code', 'polen'),
                     'desc'     => 'Informe o Facebook Pixel Code',
+                    'default'  => '',
+                ),
+            )
+        ) );
+
+
+        // Key ChatBot
+        \Redux::set_section( $opt_name, array(
+            'title'            => esc_html__( 'ChatBot Keys', 'polen' ),
+            'id'               => 'chatbot_keys',
+            'icon'             => 'el el-mic-alt',
+            'subsection'       => false,
+            'fields'           => array(
+                array(
+                    'id'       => 'polen_chatport_key',
+                    'type'     => 'text',
+                    'title'    => esc_html__('ChatPort AppID', 'polen'),
+                    'desc'     => 'Informe o AppID que o ChatPort Entregou',
+                    'default'  => '',
+                ),
+            )
+        ) );
+
+        // Telefone do Atendimento Online
+        \Redux::set_section( $opt_name, array(
+            'title'            => esc_html__( 'Telefone Whatsapp', 'polen' ),
+            'id'               => 'polen_whatsapp_number',
+            'icon'             => 'el el-mic-alt',
+            'subsection'       => false,
+            'fields'           => array(
+                array(
+                    'id'       => 'polen_whastsapp_phone',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Numero do Telefone', 'polen'),
+                    'subtitle' => esc_html__('Formato: 5521911111111 (codigo do pais, ddd, e telefone)', 'polen'),
+                    'desc'     => 'Informe o Numero de telefone do Whastaspp',
+                    'default'  => '',
+                ),
+                array(
+                    'id'       => 'polen_whastsapp_text',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Mensagem Inicial', 'polen'),
+                    'subtitle' => esc_html__('Mensagem inicial para começar o chat', 'polen'),
+                    'desc'     => 'Informe a Mensagem inicial para começar o chat',
+                    'default'  => '',
+                ),
+            )
+        ) );
+
+        // Política de cookies
+        \Redux::set_section( $opt_name, array(
+            'title'            => esc_html__( 'Políticas de Cookies', 'polen' ),
+            'id'               => 'polen_cookies_policities',
+            'icon'             => 'el el-mic-alt',
+            'subsection'       => false,
+            'fields'           => array(
+                array(
+                    'id'       => 'polen_cookies_policities_text',
+                    'type'     => 'editor',
+                    'title'    => esc_html__('Texto com o link para as Políticas', 'polen'),
+                    'desc'     => 'Texto que aparece no box de aceite de cookies',
                     'default'  => '',
                 ),
             )

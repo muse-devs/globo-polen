@@ -31,17 +31,17 @@ abstract class Polen_DB
      */
     public function table_name()
     {
-        throw new Exception('Esse metodo tem que ser sobreecrito', 500);
+        throw new \Exception('Esse metodo tem que ser sobreecrito', 500);
     }
     
     public function get_data_insert()
     {
-        throw new Exception('Esse metodo tem que ser sobreecrito', 500);
+        throw new \Exception('Esse metodo tem que ser sobreecrito', 500);
     }
     
     public function get_data_update()
     {
-        throw new Exception('Esse metodo tem que ser sobreecrito', 500);
+        throw new \Exception('Esse metodo tem que ser sobreecrito', 500);
     }
     
     public function insert()
@@ -127,6 +127,17 @@ abstract class Polen_DB
     {
         return static::create_instance_one( $this->get( 'ID', $id, '%d' ) );
     }
+
+
+    /**
+     * Retona uma linha do banco de dados, buscando pelo ID
+     * @param int $id
+     * @return stdClass
+     */
+    public static function get_by_id_static( int $id )
+    {
+        return static::create_instance_one( static::get_static( 'ID', $id, '%d' ) );
+    }
     
     
     /**
@@ -140,6 +151,23 @@ abstract class Polen_DB
     {
         return self::create_instance_one( $this->wpdb->get_row(
             $this->wpdb->prepare( "SELECT * FROM {$this->table_name} WHERE {$field} = {$format};", $value )
+        ) );
+    }
+
+
+    /**
+     * 
+     * @param type $field
+     * @param type $value
+     * @param type $format
+     * @return type
+     */
+    public static function get_static( $field, $value, $format = "%s" )
+    {
+        global $wpdb;
+        $obj = new static();
+        return self::create_instance_one( $obj->wpdb->get_row(
+            $wpdb->prepare( "SELECT * FROM {$obj->table_name} WHERE {$field} = {$format};", $value )
         ) );
     }
     

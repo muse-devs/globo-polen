@@ -56,6 +56,7 @@ function verify_checkbox_selected_to_hidde_or_show_fields() {
 		});
 
 		$('.select-ocasion').on('change',function() {
+			return;
 			var item_value = $(this).val();
 
 			if( item_value ){
@@ -69,6 +70,7 @@ function verify_checkbox_selected_to_hidde_or_show_fields() {
 		}
 
         $('.video-instruction-refresh').on('click',function(){
+			return;
 			var category_item = $('select[name="video_category"]');
 			var category_name = category_item.val();
 			var cart_id = category_item.attr('data-cart-id');

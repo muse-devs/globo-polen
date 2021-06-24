@@ -16,9 +16,12 @@
  * @version 3.7.0
  */
 
+use Polen\Includes\Cart\Polen_Cart_Item_Factory;
+
 defined('ABSPATH') || exit;
 
-$item = Polen\Includes\Cart\Polen_Cart_Item_Factory::polen_cart_item_from_order($order);
+$item  = Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
+$total = polen_get_total_order_email_detail_to_talent( $order, $email );
 ?>
 
 <div style="margin-bottom: 40px;">
@@ -34,7 +37,7 @@ $item = Polen\Includes\Cart\Polen_Cart_Item_Factory::polen_cart_item_from_order(
 			<tr>
 				<td>
 					<p class="details_title">Valor</p>
-					<span class="details_value"><?php echo $order->get_formatted_order_total(); ?></span>
+					<span class="details_value"><?php echo wc_price( $total ); ?></span>
 				</td>
 				<td>
 					&nbsp;

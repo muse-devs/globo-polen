@@ -3,7 +3,7 @@ var video_box = document.getElementById("video-box");
 var share_button = document.querySelectorAll(".share-button");
 var talent_videos = document.getElementById("talent-videos");
 var public_url = talent_videos ? talent_videos.getAttribute("data-public-url") : "";
-let get_your_video_banner = document.getElementsByClassName("btn btn-outline-light btn-lg")[0];
+let get_your_video_banner = document.getElementById("video-promo-card");
 
 jQuery(document).ready(function () {
 	get_your_video_banner.addEventListener('click', evt => {

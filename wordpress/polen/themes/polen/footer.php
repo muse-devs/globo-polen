@@ -9,7 +9,6 @@
  *
  * @package Polen
  */
-
 ?>
 
 <footer id="colophon" class="site-footer pb-4">
@@ -67,13 +66,16 @@
 		<div class="col-md-12 pt-3 text-center">2021 @<?= get_bloginfo('name'); ?></div>
 	</div><!-- .site-info -->
 </footer><!-- #colophon -->
+
+<?php include_once TEMPLATE_DIR . '/inc/custom-footer.php'; ?>
+
 </div><!-- #Container -->
 
 <?php wp_footer(); ?>
 <?php do_action( 'polen_messages_service_error' ); ?>
 <?php do_action( 'polen_messages_service_success' ); ?>
 <?php Polen\Includes\Polen_Messages::clear_messages(); ?>
-
+<?php include_once TEMPLATE_DIR . '/inc/analitics_footer.php'; ?>
 </body>
 
 </html>
