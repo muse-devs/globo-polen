@@ -43,7 +43,7 @@ if( !empty( $cupons ) ) {
 				<div class="row">
 					<div class="col-12 d-flex">
 						<input type="text" name="coupon_code" class="form-control form-control-lg mr-3" placeholder="<?php //esc_attr_e('Coupon code', 'woocommerce'); ?>" id="coupon_code" value="<?= $cupon_field_value; ?>" />
-						<button type="submit" class="btn btn-outline-light btn-lg" name="apply_coupon" value="<?php esc_attr_e('Apply coupon', 'woocommerce'); ?>" $disable_apply_cupom_button><?php esc_html_e($apply_cupom_label_button, 'woocommerce'); ?></button>
+						<button type="submit" class="btn btn-outline-light btn-lg" name="apply_coupon" value="<?php esc_attr_e('Apply coupon', 'woocommerce'); ?>" <?= $disable_apply_cupom_button; ?>><?php esc_html_e($apply_cupom_label_button, 'woocommerce'); ?></button>
 					</div>
 				</div>
 			</div>
