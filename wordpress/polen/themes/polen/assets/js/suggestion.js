@@ -16,7 +16,7 @@ form.addEventListener("submit", function (evt) {
 						"Sugestão enviada",
 						"Obrigado por nos enviar sua sugestão"
 					);
-					window.location.reload();
+					form.reset();
 				} else {
 					polError(result.data);
 				}
