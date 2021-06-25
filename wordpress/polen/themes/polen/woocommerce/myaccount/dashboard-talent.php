@@ -6,11 +6,11 @@ $polen_talent = new Polen_Talent();
 $current_user = wp_get_current_user();
 
 $total_amount = $polen_talent->get_total_by_order_status_return_raw($current_user->ID, array( 'wc-payment-approved', 'wc-talent-accepted' ));
-$amount_discount = ( $total_amount * 1 ) * 0.75;
+$amount_discount = polen_apply_polen_part_price( $total_amount );
 $total_to_recive = $polen_talent->get_total_by_order_status_return_raw($current_user->ID);
-$total_to_recive_discount = ( $total_to_recive * 1 ) * 0.75;
+$total_to_recive_discount = polen_apply_polen_part_price( $total_to_recive );
 $all_amount_alredy_win = $polen_talent->get_total_by_order_status_return_raw( $current_user->ID, 'wc-completed' );
-$all_amount_alredy_win_discount = ( $all_amount_alredy_win * 1 ) * 0.75;
+$all_amount_alredy_win_discount = polen_apply_polen_part_price( $all_amount_alredy_win );
 
 if ($polen_talent->is_user_talent($current_user)) {
 ?>
