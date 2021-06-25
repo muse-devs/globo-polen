@@ -21,6 +21,11 @@
 		&:disabled {
 			color: var(--dark);
 			opacity: 0.5;
+			&:hover,
+			&:active {
+				border-color: var(--gray) !important;
+				background-color: transparent;
+			}
 		}
 	}
 	.custom-select {
@@ -67,7 +72,8 @@
 	.border-bottom {
 		border-color: rgba($color: #000000, $alpha: 0.5) !important;
 	}
-	.fog, .blockUI.blockOverlay {
+	.fog,
+	.blockUI.blockOverlay {
 		background-color: rgba(255, 255, 255, 0.5) !important;
 	}
 }
@@ -136,7 +142,8 @@
 	.border-bottom {
 		border-color: rgba($color: #ffffff, $alpha: 0.5) !important;
 	}
-	.fog, .blockUI.blockOverlay {
+	.fog,
+	.blockUI.blockOverlay {
 		background-color: rgba(0, 0, 0, 0.5) !important;
 	}
 }

@@ -192,6 +192,7 @@ function polen_scripts() {
 	wp_register_script( 'vimeo', 'https://player.vimeo.com/api/player.js', array(), '', true );
 	wp_register_script('vuejs', TEMPLATE_URI . '/assets/vuejs/' . $min . 'vue.js', array(), '', false);
 	wp_register_script( 'comment-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'comment.js', array("vuejs"), _S_VERSION, true );
+	wp_register_script( 'suggestion-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'suggestion.js', array("jquery"), _S_VERSION, true );
 	// --------------------------------------------------------------------------------------------------
 
 	wp_enqueue_style('polen-custom-styles', TEMPLATE_URI . '/assets/css/style.css', array(), _S_VERSION);
