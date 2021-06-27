@@ -33,6 +33,9 @@ class Polen_Update_Fields
             
             // Validacao do Cadastro do usuário
 //            add_action('user_profile_update_errors', array( $this, 'check_role_talent_fields' ), 10, 3);
+
+            //quando o usuário é apagado os dados de table_talent também são
+            add_action( 'delete_user',  array( $this, 'on_delete_talent' ), 10, 1 );
         }
 
         global $wpdb;
@@ -393,5 +396,21 @@ class Polen_Update_Fields
     public function save_account_details( $user_id ) {
         update_user_meta( $user_id, 'billing_cpf', sanitize_text_field( $_POST['billing_cpf'] ) );
         update_user_meta( $user_id, 'billing_phone', sanitize_text_field( $_POST['billing_phone'] ) );
+    }
+
+    //apaga o registro do talento na tabela auxiliar ao apagar o talento
+    //manda para a lixeira os produtos do talento apagado
+    public function on_delete_talent( $user_id ){
+        $user = get_user_by( 'id', $user_id );
+        if( ( isset( $user->caps['user_talent'] ) && $user->caps['user_talent'] == true ) ) {
+            global $wpdb;    
+            $wpdb->delete( $this->table_talent, array( 'user_id' => $user_id ) );
+
+            $sqlProducts = "SELECT * FROM {$wpdb->base_prefix}posts WHERE `post_author`=" . intval( $user_id );
+            $resultProducts = $wpdb->get_results($sqlProducts);
+            foreach( $resultProducts as $product ):
+                wp_update_post( array( 'ID' => $product->ID, 'post_status' => 'trash' ));
+            endforeach;    
+        }         
     }
 }
