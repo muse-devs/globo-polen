@@ -874,16 +874,19 @@ function polen_front_get_suggestion_form()
 			<h1>Pedir artista</h1>
 		</div>
 		<div class="col-12 col-md-12">
-			<form id="talent-suggestion" action="./" method="POST">
+			<form id="talent-suggestion">
 				<input type="hidden" name="action" value="aindanaosei">
 				<p class="mb-4">
-					<input type="text" id="name" name="name" placeholder="Seu nome" class="form-control form-control-lg" required />
+					<input type="text" id="fan_name" name="fan_name" placeholder="Seu nome" class="form-control form-control-lg" required />
 				</p>
 				<p class="mb-4">
-					<input type="text" id="talent" name="talent" placeholder="Nome do seu ídolo" class="form-control form-control-lg" required />
+					<input type="email" id="fan_email" name="fan_email" placeholder="Seu e-mail" class="form-control form-control-lg" required />
 				</p>
 				<p class="mb-4">
-					<input type="text" id="instagram" name="instagram" placeholder="Instagram do seu ídolo" class="form-control form-control-lg" />
+					<input type="text" id="talent_name" name="talent_name" placeholder="Nome do seu ídolo" class="form-control form-control-lg" required />
+				</p>
+				<p class="mb-4">
+					<input type="text" id="talent_instagram" name="talent_instagram" placeholder="Instagram do seu ídolo" class="form-control form-control-lg" />
 				</p>
 				<p class="mb-4">
 					<input type="submit" class="btn btn-primary btn-lg btn-block" />
