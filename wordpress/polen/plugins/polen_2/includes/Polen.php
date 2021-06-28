@@ -88,6 +88,9 @@ class Polen {
 
         //Mensageria
         new Polen_Messages_Handler( true );
+
+        //Landing Page Product
+        new Polen_Signin_LP_Lead( true );
     }
 
     /**
