@@ -232,10 +232,25 @@ function polen_get_total_order_email_detail_to_talent( $order, $email )
 	) {
 		$total_order = floatval( $order->get_total() );
 		$discount = floatval( $order->get_discount_total() );
-		return ( $total_order + $discount );
+		return polen_apply_polen_part_price( ( $total_order + $discount ) );
 	}
 	return $order->get_total();
 }
+
+
+
+
+/**
+ * Aplica a parte da polen no valor de entrada (valor produto)
+ * 25%
+ * 
+ * @param float $full_price
+ */
+function polen_apply_polen_part_price( $full_price )
+{
+    return ( floatval( $full_price ) * 0.75 );
+}
+
 
 
 /**
