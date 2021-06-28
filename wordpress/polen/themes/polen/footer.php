@@ -11,9 +11,11 @@
  */
 ?>
 
+<?php global $lp_sigin_lead; ?>
+
 <footer id="colophon" class="site-footer pb-4">
 	<?php if ( (!is_page('cart') || !is_cart()) &&
-			 (!is_page('checkout') || !is_checkout()) ) : ?>
+			 (!is_page('checkout') || !is_checkout()) && !$lp_sigin_lead) : ?>
 		<div class="row">
 			<div class="col-12">
 				<div class="row justify-content-md-between">
