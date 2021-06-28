@@ -908,9 +908,9 @@ function polen_front_get_landpage($product = null)
 			<div class="col-12 col-md-12 col-lg-10">
 				<div class="row">
 					<div class="col-7 m-auto m-md-0 col-md-4">
-						<div class="image-cropper">
+						<figure class="image-cropper">
 							<?php echo polen_get_avatar($product->user_id, 'polen-square-crop-xl'); ?>
-						</div>
+						</figure>
 					</div>
 					<div class="col-12 mt-3 col-md-8 pl-md-5">
 						<h1 class="title">Você sabia que Cauã Reymond apoia o projeto XPTO?</h1>
