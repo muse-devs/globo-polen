@@ -688,6 +688,8 @@ class Polen_Talent {
 
     /**
      * Pegar o talento pelo ID do Produto
+     * @param int $product_id
+     * @return stdClass Polen\Includes\Polen_Talent
      */
     public function get_talent_from_product( $product_id )
     {

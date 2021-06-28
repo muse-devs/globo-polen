@@ -48,7 +48,7 @@ if (in_array('user_talent',  $logged_user->roles)) {
 												</div>
 											<?php endif; ?>
 											<div class="col-12 col-md-12">
-												<p class="p">Para</p>
+												<p class="p">Para (ID: <?php echo $order['order_id']; ?>) </p>
 												<p class="value small"><?php echo $order['name']; ?></p>
 											</div>
 										</div>

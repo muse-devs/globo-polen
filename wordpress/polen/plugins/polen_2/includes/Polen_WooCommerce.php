@@ -4,6 +4,13 @@ namespace Polen\Includes;
 
 class Polen_WooCommerce 
 {
+    const ORDER_STATUS_PAYMENT_IN_REVISION = 'payment-in-revision';
+    const ORDER_STATUS_PAYMENT_REJECTED    = 'payment-rejected';
+    const ORDER_STATUS_PAYMENT_APPROVED    = 'payment-approved';
+    const ORDER_STATUS_TALENT_REJECTED     = 'talent-rejected';
+    const ORDER_STATUS_TALENT_ACCEPTED     = 'talent-accepted';
+    const ORDER_STATUS_ORDER_EXPIRED       = 'order-expired';
+
     public function __construct( $static = false ) 
     {
         $this->order_statuses = array(
