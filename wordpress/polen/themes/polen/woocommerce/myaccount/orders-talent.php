@@ -32,7 +32,7 @@ if (in_array('user_talent',  $logged_user->roles)) {
 			if (count($talent_orders) > 0) {
 				foreach ($talent_orders as $order) : 
 					$total_order_value = $order['total_raw'];
-					$discounted_value_order = ( $total_order_value * 1) * 0.75;
+					$discounted_value_order = polen_apply_polen_part_price( $total_order_value );
 				?>
 					<div class="row mb-3" box-id="<?php echo $order['order_id']; ?>">
 						<div class="col md-12">

@@ -19,6 +19,8 @@ get_header();
 	<?php polen_front_get_news(polen_get_talents(12), "Todos talentos", polen_get_all_talents_url());
 	?>
 
+	<?php //polen_front_get_suggestion_box(); ?>
+
 </main><!-- #main -->
 
 <?php

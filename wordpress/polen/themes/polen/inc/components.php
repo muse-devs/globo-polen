@@ -79,7 +79,7 @@ function polen_front_get_card($item, $size = "small")
 			<figure class="image">
 				<?php $donate ? polen_donate_badge("Social") : null; ?>
 				<img loading="lazy" src="<?php echo $image[0]; ?>" alt="<?= $item["name"]; ?>">
-				<span class="price"><span class="mr-2"><?php Icon_Class::polen_icon_camera_video(); ?></span>R$<?= $item["price"]; ?></span>
+				<span class="price"><span class="mr-2"><?php Icon_Class::polen_icon_camera_video(); ?></span><?php echo $item["price"] == "0" ? 'GRÁTIS' : $item['price_formatted']; ?></span>
 				<a href="<?= $item["talent_url"]; ?>" class="link"></a>
 			</figure>
 			<h4 class="title text-truncate">
@@ -841,5 +841,58 @@ function polen_front_get_donation_box(string $img = "", string $text = "")
 			</div>
 		</div>
 	</section>
+<?php
+}
+
+function polen_front_get_suggestion_box()
+{
+?>
+	<div class="row">
+		<div class="col-12">
+			<div class="box-round p-4">
+				<div class="row">
+					<div class="col-3 col-md-2 col-lg-1">
+						<img src="<?php echo TEMPLATE_URI; ?>/assets/img/logo-round.svg" alt="Logo redonda">
+					</div>
+					<div class="col-9 col-md-10 col-lg-11">
+						<p><strong>E aí, ficou com vontade de ver seu artista favorito no Polen?</strong></p>
+						<a href="#pedirartista" class="btn btn-outline-light btn-md">Pedir artista</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php
+}
+
+function polen_front_get_suggestion_form()
+{
+	wp_enqueue_script('suggestion-scripts');
+?>
+	<div class="row">
+		<div class="col-12 col-md-12 mb-3">
+			<h1>Pedir artista</h1>
+		</div>
+		<div class="col-12 col-md-12">
+			<form id="talent-suggestion">
+				<input type="hidden" name="action" value="aindanaosei">
+				<p class="mb-4">
+					<input type="text" id="fan_name" name="fan_name" placeholder="Seu nome" class="form-control form-control-lg" required />
+				</p>
+				<p class="mb-4">
+					<input type="email" id="fan_email" name="fan_email" placeholder="Seu e-mail" class="form-control form-control-lg" required />
+				</p>
+				<p class="mb-4">
+					<input type="text" id="talent_name" name="talent_name" placeholder="Nome do seu ídolo" class="form-control form-control-lg" required />
+				</p>
+				<p class="mb-4">
+					<input type="text" id="talent_instagram" name="talent_instagram" placeholder="Instagram do seu ídolo" class="form-control form-control-lg" />
+				</p>
+				<p class="mb-4">
+					<input type="submit" class="btn btn-primary btn-lg btn-block" />
+				</p>
+			</form>
+		</div>
+	</div>
 <?php
 }
