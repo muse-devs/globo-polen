@@ -9,12 +9,11 @@
  *
  * @package Polen
  */
-
 ?>
 
 <footer id="colophon" class="site-footer pb-4">
 	<?php if ( (!is_page('cart') || !is_cart()) &&
-			 (!is_page('checkout') || !is_checkout()) ) : ?>
+			 (!is_page('checkout') || !is_checkout()) && !polen_is_landingpage()) : ?>
 		<div class="row">
 			<div class="col-12">
 				<div class="row justify-content-md-between">
@@ -60,20 +59,21 @@
 		<div class="col-md-12 pb-4 text-center social">
 			<a href="https://www.facebook.com/Polen-107879504782470/" target="_blank"><?php Icon_Class::polen_icon_social("facebook"); ?></a>
 			<a href="https://www.instagram.com/polen.me" target="_blank"><?php Icon_Class::polen_icon_social("instagram"); ?></a>
-			<!-- <a href="#linkedin" target="_blank"><?php Icon_Class::polen_icon_social("linkedin"); ?></a> -->
-			<!-- <a href="#twitter" target="_blank"><?php Icon_Class::polen_icon_social("twitter"); ?></a> -->
 			<a href="https://vm.tiktok.com/ZMeKtWr1H/" target="_blank"><?php Icon_Class::polen_icon_social("tiktok"); ?></a>
 		</div>
 		<div class="col-md-12 pt-3 text-center">2021 @<?= get_bloginfo('name'); ?></div>
 	</div><!-- .site-info -->
 </footer><!-- #colophon -->
+
+<?php include_once TEMPLATE_DIR . '/inc/custom-footer.php'; ?>
+
 </div><!-- #Container -->
 
 <?php wp_footer(); ?>
 <?php do_action( 'polen_messages_service_error' ); ?>
 <?php do_action( 'polen_messages_service_success' ); ?>
 <?php Polen\Includes\Polen_Messages::clear_messages(); ?>
-
+<?php include_once TEMPLATE_DIR . '/inc/analitics_footer.php'; ?>
 </body>
 
 </html>

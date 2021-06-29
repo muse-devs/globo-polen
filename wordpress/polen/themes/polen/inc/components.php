@@ -79,7 +79,7 @@ function polen_front_get_card($item, $size = "small")
 			<figure class="image">
 				<?php $donate ? polen_donate_badge("Social") : null; ?>
 				<img loading="lazy" src="<?php echo $image[0]; ?>" alt="<?= $item["name"]; ?>">
-				<span class="price"><span class="mr-2"><?php Icon_Class::polen_icon_camera_video(); ?></span>R$<?= $item["price"]; ?></span>
+				<span class="price"><span class="mr-2"><?php Icon_Class::polen_icon_camera_video(); ?></span><?php echo $item["price"] == "0" ? 'GRÁTIS' : $item['price_formatted']; ?></span>
 				<a href="<?= $item["talent_url"]; ?>" class="link"></a>
 			</figure>
 			<h4 class="title text-truncate">
@@ -284,7 +284,7 @@ function polen_talent_promo_card($talent)
 {
 	global $product;
 ?>
-	<div class="video-promo-card">
+	<div id="video-promo-card" class="video-promo-card">
 		<div class="box-color card row">
 			<div class="col-12 col-md-12 d-flex flex-column justify-content-center align-items-center text-center p-2">
 				<div class="image-cropper">
@@ -388,10 +388,10 @@ function polen_front_get_talent_videos($talent)
 	</section>
 
 	<div id="video-modal" class="background video-modal">
-		<header>
+		<div class="video-card-body">
 			<button id="close-button" class="close-button" onclick="hideModal()"><?php Icon_Class::polen_icon_close(); ?></button>
-		</header>
-		<div id="video-box"></div>
+			<div id="video-box"></div>
+		</div>
 	</div>
 <?php
 }
@@ -408,53 +408,49 @@ function polen_get_video_player($talent, $video, $user_id)
 	if (!$talent || !$video) {
 		return;
 	}
-	$user_talent = get_user_by('id', $user_id);
+	$user_talent = get_user_by('id', $talent->user_id);
 	wp_enqueue_script('vimeo');
 	$video_url = home_url() . "/v/" . $video->hash;
 	$isRateble = \Polen\Includes\Polen_Order_Review::can_make_review($user_id, $video->order_id);
 ?>
-	<div class="row">
-		<div class="col-12 col-md-12">
-			<div class="row video-card">
-				<header class="col-md-6 p-0">
-					<div id="video-box">
-						<div id="polen-video" class="polen-video"></div>
-					</div>
-					<script>
-						jQuery(document).ready(function() {
-							var videoPlayer = new Vimeo.Player("polen-video", {
-								url: "<?php echo $video->vimeo_link; ?>",
-								autoplay: false,
-								muted: false,
-								loop: false,
-								width: document.getElementById("polen-video").offsetWidth,
-							});
-						})
-					</script>
-				</header>
-				<div class="content col-md-6 mt-4">
-					<header class="row content-header">
-						<div class="col-3">
-							<a href="<?php echo $talent->talent_url; ?>" class="no-underline">
-								<span class="image-cropper">
-									<?php echo polen_get_avatar($talent->user_id, "polen-square-crop-lg"); ?>
-								</span>
-							</a>
-						</div>
-						<div class="col-9">
-							<h4 class="m-0"><a href="<?php echo $talent->talent_url; ?>" class="name"><?php echo $user_talent->display_name; ?></a></h4>
-							<h5 class="m-0"><a href="<?= polen_get_url_category_by_order_id($video->order_id); ?>" class="d-block my-2 cat"><?php echo $talent->profissao; ?></a></h5>
-							<a href="<?php echo $video_url; ?>" class="url"><?php echo $video_url; ?></a>
-						</div>
-					</header>
-					<div class="row mt-4 share">
-						<div class="col-12">
-							<?php if ($user_id !== 0 && $isRateble) : ?>
-								<a href="/my-account/create-review/<?= $video->order_id; ?>" class="btn btn-primary btn-lg btn-block mb-4">Avaliar vídeo</a>
-							<?php endif; ?>
-							<?php polen_get_talent_video_buttons($talent, $video_url, $video->vimeo_url_download, $video->hash); ?>
-						</div>
-					</div>
+	<div class="row video-card">
+		<header class="col-md-6 p-0">
+			<div id="video-box">
+				<div id="polen-video" class="polen-video"></div>
+			</div>
+			<script>
+				jQuery(document).ready(function() {
+					var videoPlayer = new Vimeo.Player("polen-video", {
+						url: "<?php echo $video->vimeo_link; ?>",
+						autoplay: false,
+						muted: false,
+						loop: false,
+						width: document.getElementById("polen-video").offsetWidth,
+					});
+				})
+			</script>
+		</header>
+		<div class="content col-md-6 mt-4">
+			<header class="row content-header">
+				<div class="col-3">
+					<a href="<?php echo $talent->talent_url; ?>" class="no-underline">
+						<span class="image-cropper">
+							<?php echo polen_get_avatar($talent->user_id, "polen-square-crop-lg"); ?>
+						</span>
+					</a>
+				</div>
+				<div class="col-9">
+					<h4 class="m-0"><a href="<?php echo $talent->talent_url; ?>" class="name"><?php echo $user_talent->display_name; ?></a></h4>
+					<h5 class="m-0"><a href="<?= polen_get_url_category_by_order_id($video->order_id); ?>" class="d-block my-2 cat"><?php echo $talent->profissao; ?></a></h5>
+					<a href="<?php echo $video_url; ?>" class="url"><?php echo $video_url; ?></a>
+				</div>
+			</header>
+			<div class="row mt-4 share">
+				<div class="col-12">
+					<?php if ($user_id !== 0 && $isRateble) : ?>
+						<a href="/my-account/create-review/<?= $video->order_id; ?>" class="btn btn-primary btn-lg btn-block mb-4">Avaliar vídeo</a>
+					<?php endif; ?>
+					<?php polen_get_talent_video_buttons($talent, $video_url, $video->vimeo_url_download, $video->hash); ?>
 				</div>
 			</div>
 		</div>
@@ -474,7 +470,29 @@ function polen_get_talent_card($talent)
 		</header>
 		<div class="price-box pt-3">
 			<span class="cat">Você vai pagar</span>
-			<p class="price mt-2"><?php echo $talent["price"]; ?></p>
+			<p class="price mt-2">
+				<?php wc_cart_totals_order_total_html(); ?>
+			</p>
+			<?php if (!empty($talent['discount'])) : ?>
+				<div class="row">
+					<div class="col-12 mt-3">
+						<table style="width: 60%;">
+							<tr>
+								<td>Valor:</td>
+								<td><?php echo $talent['price']; ?></td>
+							</tr>
+							<tr>
+								<td>Desconto:</td>
+								<td><?php echo $talent['discount']; ?></td>
+							</tr>
+							<tr>
+								<td>Total:</td>
+								<td><?php wc_cart_totals_order_total_html(); ?></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			<?php endif; ?>
 			<?php if ($talent["has_details"]) : ?>
 				<button class="show-details d-flex justify-content-center" onclick="showDetails()"><?php Icon_Class::polen_icon_chevron("down") ?></button>
 			<?php endif; ?>
@@ -823,5 +841,58 @@ function polen_front_get_donation_box(string $img = "", string $text = "")
 			</div>
 		</div>
 	</section>
+<?php
+}
+
+function polen_front_get_suggestion_box()
+{
+?>
+	<div class="row">
+		<div class="col-12">
+			<div class="box-round p-4">
+				<div class="row">
+					<div class="col-3 col-md-2 col-lg-1">
+						<img src="<?php echo TEMPLATE_URI; ?>/assets/img/logo-round.svg" alt="Logo redonda">
+					</div>
+					<div class="col-9 col-md-10 col-lg-11">
+						<p><strong>E aí, ficou com vontade de ver seu artista favorito no Polen?</strong></p>
+						<a href="#pedirartista" class="btn btn-outline-light btn-md">Pedir artista</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php
+}
+
+function polen_front_get_suggestion_form()
+{
+	wp_enqueue_script('suggestion-scripts');
+?>
+	<div class="row">
+		<div class="col-12 col-md-12 mb-3">
+			<h1>Pedir artista</h1>
+		</div>
+		<div class="col-12 col-md-12">
+			<form id="talent-suggestion">
+				<input type="hidden" name="action" value="aindanaosei">
+				<p class="mb-4">
+					<input type="text" id="fan_name" name="fan_name" placeholder="Seu nome" class="form-control form-control-lg" required />
+				</p>
+				<p class="mb-4">
+					<input type="email" id="fan_email" name="fan_email" placeholder="Seu e-mail" class="form-control form-control-lg" required />
+				</p>
+				<p class="mb-4">
+					<input type="text" id="talent_name" name="talent_name" placeholder="Nome do seu ídolo" class="form-control form-control-lg" required />
+				</p>
+				<p class="mb-4">
+					<input type="text" id="talent_instagram" name="talent_instagram" placeholder="Instagram do seu ídolo" class="form-control form-control-lg" />
+				</p>
+				<p class="mb-4">
+					<input type="submit" class="btn btn-primary btn-lg btn-block" />
+				</p>
+			</form>
+		</div>
+	</div>
 <?php
 }

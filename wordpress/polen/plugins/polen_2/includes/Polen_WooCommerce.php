@@ -79,8 +79,23 @@ class Polen_WooCommerce
             add_filter( 'woocommerce_product_data_tabs', array( $this, 'charity_tab' ) );
             add_filter( 'woocommerce_product_data_panels', array( $this, 'charity_product_data_product_tab_content' ) );
             add_action( 'woocommerce_update_product', array( $this, 'on_product_save' ) );
+
+            //Todas as compras gratis vão para o status payment-approved
+            add_action( 'woocommerce_checkout_no_payment_needed_redirect', [ $this, 'set_free_order_payment_approved' ], 10, 3 );
         }
     }
+    
+
+    /**
+     * Colocar os status de uma order gratis como pagamento aprovado
+     */
+    public function set_free_order_payment_approved( $order_received_url, $order )
+    {
+        $order->set_status('payment-approved');
+        $order->save();
+        return $order_received_url;
+    }
+
 
     public function register_custom_order_statuses() 
     {
@@ -147,6 +162,7 @@ class Polen_WooCommerce
         if( $current_screen && ! is_null( $current_screen ) && isset( $current_screen->id ) && $current_screen->id == 'shop_order' && isset( $_REQUEST['action'] ) && $_REQUEST['action'] == 'edit' ) 
         {
             add_meta_box( 'Polen_Order_Details', 'Instruções', array( $this, 'metabox_order_details' ), 'shop_order', 'normal', 'low' );
+            add_meta_box( 'Polen_Order_Details_Video_Info', 'Info do Video', array( $this, 'metabox_order_details_video_info' ), 'shop_order', 'normal', 'low' );
         }
     }
 
@@ -157,6 +173,16 @@ class Polen_WooCommerce
             require_once TEMPLATEPATH . '/woocommerce/admin/metaboxes/metabox-order-details.php';
         } else {
             require_once PLUGIN_POLEN_DIR . '/admin/partials/metaboxes/metabox-order-details.php';
+        }
+    }
+
+    public function metabox_order_details_video_info() {
+        global $post;
+        $order_id = $post->ID;
+        if( file_exists( TEMPLATEPATH . '/woocommerce/admin/metaboxes/metabox-video-info.php' ) ) {
+            require_once TEMPLATEPATH . '/woocommerce/admin/metaboxes/metabox-video-info.php';
+        } else {
+            require_once PLUGIN_POLEN_DIR . '/admin/partials/metaboxes/metabox-video-info.php';
         }
     }
 
@@ -300,22 +326,26 @@ class Polen_WooCommerce
     }
 
     public function on_product_save( $product_id ) {
-        $product = wc_get_product( $product_id );
+        if( is_admin() ){
+            $screen = get_current_screen();
+            if ( $screen->base == 'post' && $screen->post_type == 'product' ){            
+                $product = wc_get_product( $product_id );
+                $charity = strip_tags( $_POST['_is_charity'] );
+                $charity_name = strip_tags( $_POST['_charity_name'] );
+                $charity_url = strip_tags( $_POST['_url_charity_logo'] );
+                $charity_description = strip_tags( $_POST['_description_charity'] );
+                $charity_subordinate_id = strip_tags( $_POST['_charity_subordinate_merchant_id'] );
 
-        $charity = strip_tags( $_POST['_is_charity'] );
-        $charity_name = strip_tags( $_POST['_charity_name'] );
-        $charity_url = strip_tags( $_POST['_url_charity_logo'] );
-        $charity_description = strip_tags( $_POST['_description_charity'] );
-        $charity_subordinate_id = strip_tags( $_POST['_charity_subordinate_merchant_id'] );
+                $product->update_meta_data( '_is_charity', $charity );
+                $product->update_meta_data( '_charity_name', $charity_name );
+                $product->update_meta_data( '_url_charity_logo', $charity_url );
+                $product->update_meta_data( '_description_charity', $charity_description );
+                $product->update_meta_data( '_charity_subordinate_merchant_id', $charity_subordinate_id );
 
-        $product->update_meta_data( '_is_charity', $charity );
-        $product->update_meta_data( '_charity_name', $charity_name );
-        $product->update_meta_data( '_url_charity_logo', $charity_url );
-        $product->update_meta_data( '_description_charity', $charity_description );
-        $product->update_meta_data( '_charity_subordinate_merchant_id', $charity_subordinate_id );
-
-        remove_action( 'woocommerce_update_product', array( $this, 'on_product_save' ) );
-        $product->save();
-        add_action( 'woocommerce_update_product', array( $this, 'on_product_save' ) );
+                remove_action( 'woocommerce_update_product', array( $this, 'on_product_save' ) );
+                $product->save();
+                add_action( 'woocommerce_update_product', array( $this, 'on_product_save' ) );
+            }
+        }  
     }
 }

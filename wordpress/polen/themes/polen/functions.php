@@ -15,6 +15,9 @@ if ( ! defined( '_S_VERSION' ) ) {
 define('TEMPLATE_URI', get_template_directory_uri());
 define('TEMPLATE_DIR', get_template_directory());
 define('DEVELOPER', defined('ENV_DEV') && ENV_DEV);
+define('POL_COOKIES', array(
+	'POLICIES' => 'policies',
+));
 
 if ( ! function_exists( 'polen_setup' ) ) :
 	/**
@@ -179,6 +182,8 @@ function polen_scripts() {
 		remove_theme_support( 'wc-product-gallery-slider' );
 	}
 
+	wp_enqueue_script( 'global-js', TEMPLATE_URI . '/assets/js/' . $min . 'global.js', array("jquery"), _S_VERSION, false );
+
 	if(is_front_page()) {
 		wp_enqueue_script( 'home-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'front-page.js', array(), _S_VERSION, true );
 	}
@@ -187,7 +192,12 @@ function polen_scripts() {
 	wp_register_script( 'vimeo', 'https://player.vimeo.com/api/player.js', array(), '', true );
 	wp_register_script('vuejs', TEMPLATE_URI . '/assets/vuejs/' . $min . 'vue.js', array(), '', false);
 	wp_register_script( 'comment-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'comment.js', array("vuejs"), _S_VERSION, true );
+	wp_register_script( 'suggestion-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'suggestion.js', array("jquery"), _S_VERSION, true );
 	// --------------------------------------------------------------------------------------------------
+
+	if (polen_is_landingpage()) {
+		wp_enqueue_script( 'landpage-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'landpage.js', array("jquery"), _S_VERSION, true );
+	}
 
 	wp_enqueue_style('polen-custom-styles', TEMPLATE_URI . '/assets/css/style.css', array(), _S_VERSION);
 	if(is_singular() && is_product()) {
@@ -209,8 +219,6 @@ function polen_scripts() {
 	if(is_user_logged_in()) {
 		wp_enqueue_script( 'header-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'navigation.js', array("jquery"), _S_VERSION, true );
 	}
-
-	wp_enqueue_script( 'global-js', TEMPLATE_URI . '/assets/js/' . $min . 'global.js', array("jquery"), _S_VERSION, true );
 }
 add_action( 'wp_enqueue_scripts', 'polen_scripts' );
 
@@ -244,6 +252,11 @@ require TEMPLATE_DIR . '/inc/components.php';
  * File responsible to get all collection for front
  */
 require_once TEMPLATE_DIR . '/inc/collection-front.php';
+
+/**
+ * File responsible to analitics functions
+ */
+require_once TEMPLATE_DIR . '/inc/analitics_function.php';
 
 /**
  * Arquivo responsavel por retornos HTML e icones

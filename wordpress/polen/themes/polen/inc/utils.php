@@ -41,7 +41,7 @@ function polen_get_initials_name( $name )
 /**
  * Make initials from a word with no spaces
  * https://chrisblackwell.me/generate-perfect-initials-using-php/
- * 
+ *
  * @param string $name
  * @return string
  */
@@ -52,4 +52,20 @@ function _polen_makeInitialsFromSingleWord( $name )
         return substr( implode( '', $capitals[ 1 ] ), 0, 2 );
     }
     return strtoupper( substr( $name, 0, 2 ) );
+}
+
+
+function polen_get_protocol()
+{
+	return (!empty($_SERVER['HTTPS']) &&
+				$_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443)
+				? "https:"
+				: "http:";
+}
+
+
+function polen_is_landingpage()
+{
+	global $lp_sigin_lead;
+	return isset($lp_sigin_lead) && $lp_sigin_lead === true;
 }

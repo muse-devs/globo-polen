@@ -65,6 +65,7 @@ class Polen {
         new Polen_Talent_Part_Theme( true );
         new Polen_Video_Player( true );
         new Polen_Signin_Newsletter( true );
+        new Polen_Invite_Talent( true );
 
         //Endpoints Talent Logged
         $ctler = new Polen_Talent_Controller();
@@ -87,6 +88,9 @@ class Polen {
 
         //Mensageria
         new Polen_Messages_Handler( true );
+
+        //Landing Page Product
+        new Polen_Signin_LP_Lead( true );
     }
 
     /**

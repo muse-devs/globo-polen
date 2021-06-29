@@ -62,3 +62,46 @@
 		}
 	}
 }
+
+.landpage-card {
+	padding: 4rem 0 8rem;
+	border: 1px solid #E6E6E6;
+	border-left: none;
+	border-right: none;
+	.image-cropper {
+		padding-top: 100%;
+		width: 100%;
+		height: initial;
+		img {
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+	}
+	.title {
+		font-size: 32px;
+		line-height: 1.5;
+	}
+	.subtitle {
+		font-size: 24px;
+		font-weight: 400;
+		line-height: 1.5;
+		color: inherit;
+	}
+	.label {
+		font-size: 19px;
+		font-weight: 700;
+	}
+	@include media-breakpoint-down(sm) {
+		padding: 2rem 0 6rem;
+		.title {
+			font-size: 28px;
+		}
+		.subtitle {
+			font-size: 18px;
+		}
+		.label {
+			font-size: 16px;
+		}
+	}
+}

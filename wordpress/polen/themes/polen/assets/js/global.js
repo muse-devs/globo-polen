@@ -4,7 +4,7 @@ const CONSTANTS = {
 	ERROR: "error",
 	SHOW: "show",
 	HIDDEN: "hidden",
-	MESSAGE_TIME: 5,
+	MESSAGE_TIME: 10,
 	THEME: "theme_mode",
 };
 
@@ -22,6 +22,17 @@ function copyToClipboard(text) {
 	document.execCommand("copy");
 	document.body.removeChild(copyText);
 	polMessage("Sucesso", "Link copiado para Área de transferência");
+}
+
+function docReady(fn) {
+	if (
+		document.readyState === "complete" ||
+		document.readyState === "interactive"
+	) {
+		setImediate(fn);
+	} else {
+		document.addEventListener("DOMContentLoaded", fn);
+	}
 }
 
 function shareVideo(title, url) {
@@ -101,13 +112,13 @@ function polSpinner(action, el) {
 }
 
 const polMessages = {
-	message: function(title, message) {
+	message: function (title, message) {
 		polMessage(title, message);
 	},
-	error: function(message) {
+	error: function (message) {
 		polError(message);
-	}
-}
+	},
+};
 
 function polMessage(title, message) {
 	var id = "message-box";
@@ -238,6 +249,52 @@ function downloadClick_handler(evt) {
 }
 // ---------------------------
 
+// Analytics ----------------------------------
+const polenGtag = {
+	type: {
+		purchase: "purchase",
+	},
+	sendEvent: function (type, value) {
+		if (typeof gtag === "function") {
+			gtag("event", type, value);
+		} else {
+			console.log("GTAG", type, value);
+		}
+	},
+};
+// --------------------------------------------
+
+// Funções de Cookie -------------------------------------------------------
+function polSetCookie(cname, cvalue, exdays) {
+	const d = new Date();
+	d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+	let expires = "expires=" + d.toUTCString();
+	document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function polGetCookie(cname) {
+	let name = cname + "=";
+	let decodedCookie = decodeURIComponent(document.cookie);
+	let ca = decodedCookie.split(";");
+	for (let i = 0; i < ca.length; i++) {
+		let c = ca[i];
+		while (c.charAt(0) == " ") {
+			c = c.substring(1);
+		}
+		if (c.indexOf(name) == 0) {
+			return c.substring(name.length, c.length);
+		}
+	}
+	return "";
+}
+
+function polAcceptCookies() {
+	polSetCookie(polenObj.COOKIES.POLICIES, "true");
+	const policies_box = document.getElementById("policies-box");
+	policies_box.parentNode.removeChild(policies_box);
+}
+// -------------------------------------------------------------------------
+
 jQuery(document).ready(function () {
 	truncatedItems();
 	getSessionMessage();
@@ -266,7 +323,10 @@ jQuery(document).ready(function () {
 					is_mobile: is_mobile.val(),
 				},
 				success: function (response) {
-					polMessage("Seu email foi adicionado à lista", response.data.response);
+					polMessage(
+						"Seu email foi adicionado à lista",
+						response.data.response
+					);
 					email.val("");
 				},
 				complete: function () {

@@ -54,3 +54,6 @@ else :
 
 <?php
 endif;
+
+// JS do GA
+echo polen_create_ga_order( $order );

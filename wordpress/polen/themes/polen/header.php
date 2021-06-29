@@ -26,11 +26,11 @@ use Polen\Includes\Polen_Talent;
 	<!-- <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"> -->
 	<meta name="theme-color" content="#000000">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
-	<?php wp_head(); ?>
 	<script>
 		var polenObj = {
 			base_url: '<?= site_url(); ?>',
-			developer: <?php echo DEVELOPER ? 1 : 0; ?>
+			developer: <?php echo DEVELOPER ? 1 : 0; ?>,
+			COOKIES: <?php echo json_encode(POL_COOKIES); ?>
 		};
 		if (!polenObj.developer) {
 			console = {
@@ -42,7 +42,7 @@ use Polen\Includes\Polen_Talent;
 			};
 		}
 	</script>
-
+	<?php wp_head(); ?>
     <?php include_once TEMPLATE_DIR . '/inc/analitics_header.php'; ?>
 </head>
 
@@ -50,12 +50,11 @@ use Polen\Includes\Polen_Talent;
 	<?php wp_body_open(); ?>
     <?php include_once TEMPLATE_DIR . '/inc/analitics_init_body.php'; ?>
 	<div id="page" class="container site">
-		<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e('Skip to content', 'polen'); ?></a>
-
 		<header id="masthead" class="row pt-3 pb-4<?php echo is_front_page() ? " header-home" : ""; ?>">
 			<div class="col-6 col-sm-6 d-flex align-items-center">
 				<?php polen_the_theme_logos(); ?>
 			</div>
+			<?php if(!polen_is_landingpage()) : ?>
 			<div class="col-6 col-sm-6 d-flex justify-content-end align-items-center">
 				<?php //get_search_form();
 				?>
@@ -108,4 +107,5 @@ use Polen\Includes\Polen_Talent;
 					</div>
 				</div>
 			</div>
+			<?php endif; ?>
 		</header><!-- #masthead -->
