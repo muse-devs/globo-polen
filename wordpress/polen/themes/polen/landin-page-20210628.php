@@ -1,9 +1,27 @@
 <?php
+
 $product_sku = get_query_var( 'lp_product_sku' );
 $product_id = wc_get_product_id_by_sku(['sku' => $product_sku]);
 $product = wc_get_product( $product_id );
 $event = "landpage";
-$landpage_signin_nonce = wp_create_nonce('landpage-signin');
+
+$utm_source = filter_input( INPUT_GET, 'utm_source' );
+$utm_medium = filter_input( INPUT_GET, 'utm_medium' );
+$utm_campaign = filter_input( INPUT_GET, 'utm_campaign' );
+
+$cat_terms = wp_get_object_terms( $product_id, 'product_cat' );
+$cat_term = $cat_terms[ 0 ];
+
+$terms = wp_get_object_terms( $product_id, 'product_tag' );
+$tags_arr = [];
+foreach( $terms as $term ) {
+    $tags_arr[] = $term->name;
+}
+$tags = implode( ',', $tags_arr );
+
+$utm_source   = filter_input( INPUT_GET, 'utm_source' );
+$utm_medium   = filter_input( INPUT_GET, 'utm_medium' );
+$utm_campaign = filter_input( INPUT_GET, 'utm_campaign' );
 
 get_header();
 ?>
@@ -17,19 +35,28 @@ get_header();
 						</figure>
 					</div>
 					<div class="col-12 mt-3 col-md-8 pl-md-5">
-						<h1 class="title">Você sabia que Cauã Reymond apoia o projeto XPTO?</h1>
-						<p class="subtitle">Pedindo um vídeo na Polen todo o valor será revertido nesta causa.</p>
+                    <?= $product->get_description(); ?>
 						<form action="./" method="POST" id="landpage-form" class="landpage-form">
 							<div class="row">
 								<div class="mt-4 col-md-9 mt-md-5">
 									<div class="row">
 										<div class="mb-3 col-md-12">
 											<label for="signin_landpage" class="label">Você quer apoiar o Cauã nesta causa?</label>
-											<input type="email" name="signin_landpage" id="signin_landpage" placeholder="Entre com o seu e-mail" class="form-control form-control-lg" />
-											<input type="hidden" name="signin_landpage_page_source" value="<?= filter_input(INPUT_SERVER, 'REQUEST_URI'); ?>" />
+                                            <input type="hidden" name="action" value="polen_signin_lp_lead" />
+											<input type="email" name="fan_email" id="fan_email" placeholder="Entre com o seu e-mail" class="form-control form-control-lg" required/>
+											<input type="hidden" name="product_id" value="<?= $product_id; ?>" />
+											<input type="hidden" name="is_mobile" value="<?= polen_is_mobile() ? "1" : "0"; ?>" />
+											<input type="hidden" name="page_source" value="<?= $_SERVER['REQUEST_URI']; ?>" />
+											<input type="hidden" name="category" value="<?= $cat_term->name; ?>" />
+											<input type="hidden" name="tags" value="<?= $tags; ?>" />
+											<input type="hidden" name="utm_source" value="<?= $utm_source; ?>" />
+											<input type="hidden" name="utm_medium" value="<?= $utm_medium; ?>" />
+											<input type="hidden" name="utm_campaign" value="<?= $utm_campaign; ?>" />
 											<input type="hidden" name="signin_landpage_event" value="<?= $event; ?>" />
-											<input type="hidden" name="signin_landpage_is_mobile" value="<?= polen_is_mobile() ? "1" : "0"; ?>" />
-											<input type="hidden" name="wnonce" value="<?php echo $landpage_signin_nonce; ?>" />
+											<input type="hidden" name="utm_source" value="<?= $utm_source; ?>" />
+											<input type="hidden" name="utm_medium" value="<?= $utm_medium; ?>" />
+											<input type="hidden" name="utm_campaign" value="<?= $utm_campaign; ?>" />
+                                            <?php wp_nonce_field( 'landpage-signin', 'security' , true, true ); ?>
 										</div>
 										<div class="col-md-12">
 											<button class="signin-landpage-button btn btn-primary btn-lg btn-block">Quero um vídeo Polen</button>
