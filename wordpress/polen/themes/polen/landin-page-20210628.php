@@ -41,8 +41,9 @@ get_header();
 								<div class="mt-4 col-md-9 mt-md-5">
 									<div class="row">
 										<div class="mb-3 col-md-12">
-											<label for="signin_landpage" class="label">Você quer apoiar o Cauã nesta causa?</label>
+											<label for="signin_landpage" class="label">Deixe seu nome, email e participe:</label>
                                             <input type="hidden" name="action" value="polen_signin_lp_lead" />
+											<input type="text" name="fan_name" id="fan_name" placeholder="Entre com o seu nome" class="form-control form-control-lg mb-3" required/>
 											<input type="email" name="fan_email" id="fan_email" placeholder="Entre com o seu e-mail" class="form-control form-control-lg" required/>
 											<input type="hidden" name="product_id" value="<?= $product_id; ?>" />
 											<input type="hidden" name="is_mobile" value="<?= polen_is_mobile() ? "1" : "0"; ?>" />
