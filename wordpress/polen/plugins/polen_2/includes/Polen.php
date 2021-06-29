@@ -13,7 +13,6 @@ use Polen\Includes\Talent\{Polen_Talent_Router, Polen_Talent_Controller, Polen_T
 use Polen\Includes\Polen_Order;
 use Polen\Includes\Order_Review\{Polen_Order_Review_Controller, Polen_Order_Review_Router};
 use Polen\Includes\Polen_Signin_Newsletter;
-use Polen\Tributes\{ Tributes, Tributes_API_Router };
 
 class Polen {
 
