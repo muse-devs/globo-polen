@@ -288,3 +288,11 @@ add_action('wc_gateway_stripe_process_webhook_payment_error', function($order, $
 add_filter('wc_stripe_save_to_account_text', function(){
 	return 'Salvar os dados do cartão de credito para proximas compras.';
 });
+
+function restrict_rest_api_to_localhost() {
+    $whitelist = [];//[ '127.0.0.1', "::1" ];
+    if( ! in_array($_SERVER['REMOTE_ADDR'], $whitelist ) ){
+        die( 'Silence is Golden' );
+    }
+}
+add_action( 'rest_api_init', 'restrict_rest_api_to_localhost', 0 );
