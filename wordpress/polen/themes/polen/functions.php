@@ -161,20 +161,33 @@ function get_assets_folder() {
 	return $min;
 }
 
+function polen_remove_all()
+{
+	global $wp_styles;
+	global $wp_scripts;
+
+	if(
+		is_front_page() ||
+		is_page_template( 'inc/landpage.php' ) ||
+		(is_singular() && is_product()) ||
+		polen_is_landingpage() ||
+		polen_is_tributes_page()
+		) {
+		foreach( $wp_styles->queue as $style ) {
+			wp_dequeue_style( $wp_styles->registered[$style]->handle );
+		}
+		foreach( $wp_scripts->queue as $scripts ) {
+			wp_dequeue_script( $wp_scripts->registered[$scripts]->handle );
+		}
+	}
+}
+
 /**
  * Enqueue scripts and styles.
  */
 function polen_scripts() {
-	global $wp_styles;
 	$min = get_assets_folder();
-
-	if( is_front_page() || is_page_template( 'inc/landpage.php' ) || (is_singular() && is_product())) {
-		foreach( $wp_styles->queue as $style ) {
-			if( strpos( $style, 'cookie-law-info' ) === false) {
-				wp_dequeue_style( $wp_styles->registered[$style]->handle );
-			}
-		}
-	}
+	polen_remove_all();
 
 	if ( current_theme_supports( 'wc-product-gallery-lightbox' ) ) {
 		remove_theme_support( 'wc-product-gallery-zoom' );
