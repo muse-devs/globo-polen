@@ -54,6 +54,7 @@ use Polen\Includes\Polen_Talent;
 			<div class="col-6 col-sm-6 d-flex align-items-center">
 				<?php polen_the_theme_logos(); ?>
 			</div>
+			<?php if(!polen_is_landingpage()) : ?>
 			<div class="col-6 col-sm-6 d-flex justify-content-end align-items-center">
 				<?php //get_search_form();
 				?>
@@ -106,4 +107,5 @@ use Polen\Includes\Polen_Talent;
 					</div>
 				</div>
 			</div>
+			<?php endif; ?>
 		</header><!-- #masthead -->

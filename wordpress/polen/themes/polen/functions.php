@@ -195,6 +195,10 @@ function polen_scripts() {
 	wp_register_script( 'suggestion-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'suggestion.js', array("jquery"), _S_VERSION, true );
 	// --------------------------------------------------------------------------------------------------
 
+	if (polen_is_landingpage()) {
+		wp_enqueue_script( 'landpage-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'landpage.js', array("jquery"), _S_VERSION, true );
+	}
+
 	wp_enqueue_style('polen-custom-styles', TEMPLATE_URI . '/assets/css/style.css', array(), _S_VERSION);
 	if(is_singular() && is_product()) {
 		// wp_enqueue_script( 'slick-slider', TEMPLATE_URI . '/assets/slick/slick.min.js', array("jquery"), '', true );
