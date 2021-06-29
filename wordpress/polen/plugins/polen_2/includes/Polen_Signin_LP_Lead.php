@@ -13,8 +13,8 @@ class Polen_Signin_LP_Lead
     public function __construct( $static = false ) {
         if( $static ) {
             add_action( 'admin_menu', array( $this, 'signin_lp_lead_menu' ) );
-            add_action( 'wp_ajax_polen_newsletter_signin', array( $this, 'handler_ajax_signin_lp_lead' ) );
-            add_action( 'wp_ajax_nopriv_polen_newsletter_signin', array( $this, 'handler_ajax_signin_lp_lead' ) );
+            add_action( 'wp_ajax_polen_signin_lp_lead', array( $this, 'handler_ajax_signin_lp_lead' ) );
+            add_action( 'wp_ajax_nopriv_polen_signin_lp_lead', array( $this, 'handler_ajax_signin_lp_lead' ) );
 
             //ROUTES /lp/SLUG-ARTISTA
             add_action( 'init',             array( $this, 'rewrites' ) );
@@ -58,6 +58,14 @@ class Polen_Signin_LP_Lead
             return $template;
         }
         $GLOBALS['lp_sigin_lead'] = true;
+
+        $product_sku = get_query_var( 'lp_product_sku' );
+        $product_id = wc_get_product_id_by_sku(['sku' => $product_sku]);
+       if( empty( $product_id ) ) {
+           wp_redirect( site_url() );
+           exit;
+       }
+
         wp_enqueue_script('landpage-scripts');
         return get_template_directory() . '/landin-page-20210628.php';
 
@@ -65,7 +73,7 @@ class Polen_Signin_LP_Lead
 
     public function table_name() {
         global $wpdb;
-        return $wpdb->base_prefix . 'wp_signin_lps';
+        return $wpdb->base_prefix . 'signin_lps';
     }
     
     public function signin_lp_lead_menu(){
@@ -99,23 +107,21 @@ class Polen_Signin_LP_Lead
         add_screen_option( $option, $args );
     }
 
-    public function newsletter_signin(){
-        $nonce = esc_attr( $_POST['security'] );
+    public function handler_ajax_signin_lp_lead(){
+        $nonce = $_POST['security'];
 
         $fan_name     = filter_input( INPUT_POST, 'fan_name' );
         $fan_email    = filter_input( INPUT_POST, 'fan_email' );
-        $talent_id    = filter_input( INPUT_POST, 'talent_id' );
+        $product_id   = filter_input( INPUT_POST, 'product_id' );
         $page_source  = filter_input( INPUT_POST, 'page_source' );
         $is_mobile    = filter_input( INPUT_POST, 'is_mobile' );
         $category     = filter_input( INPUT_POST, 'category' );
         $tags         = filter_input( INPUT_POST, 'tags' );
-        $utm_source   = filter_input( INPUT_GET, 'utm_source' );
-        $utm_medium   = filter_input( INPUT_GET, 'utm_medium' );
-        $utm_campaign = filter_input( INPUT_GET, 'utm_campaign' );
+        $utm_source   = filter_input( INPUT_POST, 'utm_source' );
+        $utm_medium   = filter_input( INPUT_POST, 'utm_medium' );
+        $utm_campaign = filter_input( INPUT_POST, 'utm_campaign' );
 
-
-
-        if ( ! wp_verify_nonce( $nonce, 'news-signin' ) ) {
+        if ( ! wp_verify_nonce( $nonce, 'landpage-signin' ) ) {
             wp_send_json_error( array( 'response' => 'Não foi possível completar a solicitação' ), 403 );
             wp_die();
         }
@@ -125,11 +131,11 @@ class Polen_Signin_LP_Lead
             wp_die();
         }
     
-        if( isset( $email ) && !empty( $email ) ) {
+        if( isset( $fan_email ) && !empty( $fan_email ) ) {
             $newsletter = $this->set_email_to_newsletter(
                 $fan_name,
                 $fan_email,
-                $talent_id,
+                $product_id,
                 $page_source,
                 $is_mobile,
                 $category,
@@ -148,7 +154,7 @@ class Polen_Signin_LP_Lead
                 }
             }
         } else {
-            wp_send_json_error( array( 'response' => 'Não foi possível completar a solicitação' ), 403 );
+            wp_send_json_error( array( 'response' => 'Não foi possível completar a solicitação(2)' ), 403 );
             wp_die();
         }
     }
@@ -160,7 +166,7 @@ class Polen_Signin_LP_Lead
     public function set_email_to_newsletter(
         $fan_name,
         $fan_email,
-        $talent_id,
+        $product_id,
         $page_source,
         $is_mobile,
         $category,
@@ -169,12 +175,12 @@ class Polen_Signin_LP_Lead
         $utm_medium,
         $utm_campaign
     ) {
-        if( !empty( $email ) ){
+        if( !empty( $fan_email ) ){
             global $wpdb;
             $insert_args = array (
                 'fan_name'     => $fan_name,
                 'fan_email'    => $fan_email,
-                'talent_id'    => $talent_id,
+                'product_id'   => $product_id,
                 'page_source'  => $page_source,
                 'is_mobile'    => $is_mobile,
                 'category'     => $category,
@@ -186,7 +192,6 @@ class Polen_Signin_LP_Lead
             $inserted = $wpdb->insert( $this->table_name(), $insert_args);
 
             if( $inserted > 0 ) {
-                //$this->export_occasion_json();
                 return "Te enviamos um email com mais informações";
             } else {
                 return "Ocorreu um erro ao tentar cadastrar";
