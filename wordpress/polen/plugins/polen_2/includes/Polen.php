@@ -13,8 +13,6 @@ use Polen\Includes\Talent\{Polen_Talent_Router, Polen_Talent_Controller, Polen_T
 use Polen\Includes\Polen_Order;
 use Polen\Includes\Order_Review\{Polen_Order_Review_Controller, Polen_Order_Review_Router};
 use Polen\Includes\Polen_Signin_Newsletter;
-use Polen\Tributes\Tribute;
-use Polen\Tributes\Tributes;
 
 class Polen {
 
@@ -94,8 +92,8 @@ class Polen {
         //Landing Page Product
         new Polen_Signin_LP_Lead( true );
 
-        //Tributes
-        new Tributes( true );
+        //Disabled API REST
+        new Polen_Disable_API_REST( true );
     }
 
     /**
