@@ -10,7 +10,7 @@ form_landpage.addEventListener("submit", function (evt) {
 			jQuery(formName).serialize(),
 			function (result) {
 				if (result.success) {
-					setSessionMessage(
+					polMessages.message(
 						CONSTANTS.SUCCESS,
 						"Enviado com sucesso",
 						"Seu cadastro foi efetuado com sucesso"
