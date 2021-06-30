@@ -11,7 +11,7 @@
  */
 ?>
 
-<div class="container">
+<div class="container mt-5">
 	<footer id="colophon" class="site-footer border-top pb-4">
 		<div class="row mt-4 copyright">
 			<div class="col-md-12 pb-4 text-center social">

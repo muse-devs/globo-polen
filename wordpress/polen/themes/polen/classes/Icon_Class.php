@@ -7,6 +7,11 @@ class Icon_Class
 		echo '<i class="bi bi-clipboard"></i>';
 	}
 
+	public static function polen_icon_play()
+	{
+		echo '<i class="bi bi-play"></i>';
+	}
+
 	public static function polen_icon_card($name)
 	{
 		echo '<span class="svg-icon svg-' . $name . ' svg-' . $name . '-dims"></span>';

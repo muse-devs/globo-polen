@@ -1,0 +1,70 @@
+.logo-tribute-wrap {
+	.custom-logo {
+		width: 56px;
+	}
+}
+
+.tribute-container {
+	max-width: 860px;
+}
+
+.presentation-wrap {
+	.presentation {
+		position: relative;
+		width: 309px;
+		height: 531px;
+		border-radius: 19px;
+		overflow: hidden;
+		video, img {
+			position: absolute;
+			display: block;
+			height: 100%;
+			object-fit: contain;
+		}
+	}
+	.btn-play {
+		position: absolute;
+		width: 43px;
+		height: 49px;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		border: none;
+		background: none;
+	}
+}
+
+.tribute-home {
+	.title {
+		font-size: 32px;
+		line-height: 1.5;
+		color: inherit;
+		.color {
+			color: var(--primary);
+		}
+	}
+	p {
+		font-size: 16px;
+		line-height: 1.5;
+		color: inherit;
+	}
+	.box-round {
+		&.how-to-tribute {
+			padding: 50px 25px;
+			width: 31%;
+			text-align: center;
+			background-color: var(--yellow);
+			.ico {
+				margin-bottom: 2rem;
+			}
+		}
+		.title {
+			font-size: 24px;
+			font-weight: 400;
+		}
+		.description {
+			font-size: 16px;
+			font-weight: 400;
+		}
+	}
+}
