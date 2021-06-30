@@ -3,37 +3,21 @@ namespace Polen\Tributes;
 
 class Tributes_API_Router extends \WP_REST_Controller
 {
-    protected $namespace = 'tributes/v1';
-    protected $rest_base = 'products';
-    protected $post_type = 'product';
 
     public function __construct( bool $static = false )
     {
         if( $static ) {
-            add_action( 'rest_api_init', [ $this, 'register_routes'] );
+            $this->create_routes_create_tributes();
         }
     }
 
-
-    public function register_routes()
+    public function create_routes_create_tributes()
     {
-        register_rest_route(
-            $this->namespace,
-            '/' . $this->rest_base,
-            array(
-                array(
-                    'methods' => \WP_REST_Server::READABLE,
-                    'callback' => array( $this, 'get_items' ),
-                    'permission_callback' => '__RETURN_TRUE',
-                    'args' => $this->get_collection_params(),
-                ),
-            ),
-            false,
-        );
-    }
+        $controller = new Tributes_Controller();
+        add_action( 'create_routes_create_tributes', [ $controller, 'create_tribute' ] );
+        add_action( 'wp_ajax_nopriv_create_tribute', [ $controller, 'create_tribute' ] );
 
-    public function get_items( $request )
-    {
-        return new \WP_REST_Response( 'haehehaehae', 200 );
+        add_action( 'wp_ajax_nopriv_check_slug_exists', [ $controller, 'check_slug_exists' ] );
+        add_action( 'wp_ajax_nopriv_check_hash_exists', [ $controller, 'check_hash_exists' ] );
     }
 }
