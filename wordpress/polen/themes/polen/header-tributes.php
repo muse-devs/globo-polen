@@ -47,7 +47,7 @@
 <body <?php body_class(); ?>>
 	<?php wp_body_open(); ?>
 	<?php include_once TEMPLATE_DIR . '/inc/analitics_init_body.php'; ?>
-	<div id="page" class="container-fluid site">
+	<div id="page" class="container-fluid tributes">
 		<header id="masthead" class="header border-bottom">
 			<div class="container">
 				<div class="row pt-3 pb-4">

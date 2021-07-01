@@ -11297,6 +11297,9 @@ label[for="wc-stripe-new-payment-method"] {
       .landpage-card .label {
         font-size: 16px; } }
 
+.tributes {
+  padding: 0; }
+
 .logo-tribute-wrap .custom-logo {
   width: 56px; }
 
@@ -11304,7 +11307,9 @@ label[for="wc-stripe-new-payment-method"] {
   max-width: 860px; }
 
 .presentation-wrap {
-  position: relative; }
+  position: relative;
+  margin-left: 50px;
+  overflow: visible; }
   .presentation-wrap::before, .presentation-wrap::after {
     content: "";
     position: absolute;
@@ -11331,20 +11336,37 @@ label[for="wc-stripe-new-payment-method"] {
     overflow: hidden;
     -webkit-mask-image: -webkit-radial-gradient(white, black);
     z-index: 3; }
-    .presentation-wrap .presentation video, .presentation-wrap .presentation img {
+    .presentation-wrap .presentation video,
+    .presentation-wrap .presentation img {
       position: absolute;
       display: block;
       height: 100%;
       object-fit: contain; }
   .presentation-wrap .btn-play {
     position: absolute;
-    width: 43px;
-    height: 49px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
     border: none;
-    background: none; }
+    background: none;
+    transition: opacity 230ms ease;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.7) 0%, rgba(196, 196, 196, 0) 100%); }
+    .presentation-wrap .btn-play.hidden {
+      opacity: 0; }
+    .presentation-wrap .btn-play img {
+      width: 43px;
+      height: 49px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%); }
+
+.presentation-extra-area {
+  position: absolute;
+  display: flex;
+  top: 0;
+  left: 310px;
+  opacity: 0.2; }
+  .presentation-extra-area .presentation {
+    margin-left: 20px; }
 
 .tribute-home .title {
   font-size: 32px;
