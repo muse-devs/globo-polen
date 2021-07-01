@@ -11375,6 +11375,10 @@ label[for="wc-stripe-new-payment-method"] {
   .tribute-app .title .color {
     color: var(--primary); }
 
+.tribute-app label {
+  font-size: 16px;
+  font-weight: 700; }
+
 .tribute-app p {
   font-size: 16px;
   line-height: 1.5;
@@ -11395,5 +11399,11 @@ label[for="wc-stripe-new-payment-method"] {
 .tribute-app .box-round .description {
   font-size: 16px;
   font-weight: 400; }
+
+.input-tribute-url {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  outline: transparent !important; }
 
 /*# sourceMappingURL=maps/style.css.map */

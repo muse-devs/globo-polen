@@ -104,6 +104,10 @@
 			color: var(--primary);
 		}
 	}
+	label {
+		font-size: 16px;
+		font-weight: 700;
+	}
 	p {
 		font-size: 16px;
 		line-height: 1.5;
@@ -128,4 +132,11 @@
 			font-weight: 400;
 		}
 	}
+}
+
+.input-tribute-url {
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	outline: transparent !important;
 }
