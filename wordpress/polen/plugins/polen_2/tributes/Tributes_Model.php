@@ -6,6 +6,9 @@ class Tributes_Model
 
     const TABLE_NAME = 'tributes';
 
+    const ERROR_SLUG_UNIQUE = 'tribute_slug_uniq';
+    const ERROR_HASH_UNIQUE = 'tribute_hash_unique';
+
     /**
      * 
      */
@@ -28,7 +31,7 @@ class Tributes_Model
             $data
         );
         if( $result_insert === false ) {
-            throw new \Exception( $wpdb->last_error, 500 );
+            throw new \Exception( $wpdb->last_error, 401 );
         }
         return $wpdb->insert_id;
     }

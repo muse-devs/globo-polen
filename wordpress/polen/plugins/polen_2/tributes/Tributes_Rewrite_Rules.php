@@ -45,16 +45,28 @@ class Tributes_Rewrite_Rules
         }
 
         //se for /tribute/tribute-hash
-        
         if( strlen( $tribute_hash ) === 32 ) {
+            
             $GLOBALS['tribute_hash']  = $tribute_hash;
             return get_template_directory() . '/tributes/invites.php';
-        } else if( strlen( $tribute_hash ) > 0 && strlen( $tribute_hash ) < 32 ) {
-            echo 'Isso não existe';
-            return '404';
+
+        } else if ( strlen( $tribute_hash ) > 0 && strlen( $tribute_hash ) < 32 ) {
+            return $this->set_404();
         }
         $GLOBALS['tributes_root'] = true;
         return get_template_directory() . '/tributes/index.php';
 
+    }
+
+
+    /**
+     * Set 404 para Tributos não encontrados
+     */
+    public function set_404()
+    {
+        global $wp_query;
+        $wp_query->set_404();
+        status_header( 404 );
+        return get_template_directory() . '/tributes/404.php';
     }
 }

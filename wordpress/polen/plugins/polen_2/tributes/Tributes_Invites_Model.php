@@ -1,13 +1,16 @@
 <?php
 namespace Polen\Tributes;
 
-class Tributes_Model
+class Tributes_Invites_Model
 {
 
     const TABLE_NAME = 'tributes_invites';
 
+    const ERROR_EMAIL_UNIQUE = 'tribute_email_unique';
+    const ERROR_HASH_UNIQUE = 'tribute_hash_unique';
+
     /**
-     * 
+     * Pega o nome da Tabela
      */
      public static function table_name()
      {
@@ -17,7 +20,9 @@ class Tributes_Model
 
 
     /**
-     *
+     * Insere um Invite
+     * 
+     * @param array
      */
     public static function insert( $data )
     {
@@ -28,14 +33,16 @@ class Tributes_Model
             $data
         );
         if( $result_insert === false ) {
-            throw new \Exception( $wpdb->last_error, 500 );
+            throw new \Exception( $wpdb->last_error, 401 );
         }
-        return $result_insert;
+        return $wpdb->insert_id;
     }
 
 
     /**
-     *
+     * Pegar Invite pelo ID
+     * 
+     * @param int
      */
      public static function get_by_id( $id )
      {
@@ -49,7 +56,9 @@ class Tributes_Model
 
 
     /**
-     *
+     * Pega um Invite pega Hash Unica
+     * 
+     * @param string
      */
     public static function get_by_hash( $hash )
     {
@@ -61,24 +70,14 @@ class Tributes_Model
         return $result;
     }
 
-
     /**
-     *
+     * Criar um Hash unica para o amigo criar um video
+     * 
+     * @param int
      */
-    public static function get_by_slug( $slug )
+    public static function create_hash( $tribute_id )
     {
-        global $wpdb;
-        $table_name = self::table_name();
-        $result = $wpdb->get_row(
-            $wpdb->prepare("SELECT * FROM `{$table_name}` WHERE `slug` = %s", $slug )
-        );
-        return $result;
-    }
-
-
-    public static function create_hash()
-    {
-        return md5( rand( 0, 10000 ) . date( 'Y-m-d H:i:s' ) );
+        return md5( $tribute_id . rand( 0, 100000 ) . date( 'Y-m-d H:i:s' ) );
     }
 
 }
