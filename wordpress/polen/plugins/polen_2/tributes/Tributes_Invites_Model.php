@@ -4,7 +4,7 @@ namespace Polen\Tributes;
 class Tributes_Model
 {
 
-    const TABLE_NAME = 'tributes';
+    const TABLE_NAME = 'tributes_invites';
 
     /**
      * 
@@ -30,7 +30,7 @@ class Tributes_Model
         if( $result_insert === false ) {
             throw new \Exception( $wpdb->last_error, 500 );
         }
-        return $wpdb->insert_id;
+        return $result_insert;
     }
 
 
@@ -76,9 +76,6 @@ class Tributes_Model
     }
 
 
-    /**
-     * 
-     */
     public static function create_hash()
     {
         return md5( rand( 0, 10000 ) . date( 'Y-m-d H:i:s' ) );
