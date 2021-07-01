@@ -19,7 +19,7 @@
 			<div class="presentation-wrap">
 				<div class="presentation with-video">
 					<video id="tribute-home-video" src="<?php echo TEMPLATE_URI; ?>/tributes/assets/video-presentation.mp4"></video>
-					<button class="btn-play">
+					<button id="btn-play" class="btn-play">
 						<img src="<?php echo TEMPLATE_URI; ?>/tributes/assets/img/play.svg" alt="Botão play">
 					</button>
 				</div>
