@@ -1,7 +1,7 @@
 <?php get_header('tributes'); ?>
 
 <main class="overflow-hidden">
-	<div class="container py-3 tribute-container tribute-home">
+	<div class="container py-3 tribute-container tribute-app">
 		<section class="row mt-2 pb-5">
 			<div class="col-md-6 d-flex align-items-center">
 				<div class="row">

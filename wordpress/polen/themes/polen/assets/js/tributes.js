@@ -14,3 +14,4 @@ function playVideo(evt) {
 if (btn_play) {
 	btn_play.addEventListener("click", playVideo);
 }
+

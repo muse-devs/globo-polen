@@ -11368,31 +11368,31 @@ label[for="wc-stripe-new-payment-method"] {
   .presentation-extra-area .presentation {
     margin-left: 20px; }
 
-.tribute-home .title {
+.tribute-app .title {
   font-size: 32px;
   line-height: 1.5;
   color: inherit; }
-  .tribute-home .title .color {
+  .tribute-app .title .color {
     color: var(--primary); }
 
-.tribute-home p {
+.tribute-app p {
   font-size: 16px;
   line-height: 1.5;
   color: inherit; }
 
-.tribute-home .box-round.how-to-tribute {
+.tribute-app .box-round.how-to-tribute {
   padding: 50px 25px;
   width: 31%;
   text-align: center;
   background-color: var(--yellow); }
-  .tribute-home .box-round.how-to-tribute .ico {
+  .tribute-app .box-round.how-to-tribute .ico {
     margin-bottom: 2rem; }
 
-.tribute-home .box-round .title {
+.tribute-app .box-round .title {
   font-size: 24px;
   font-weight: 400; }
 
-.tribute-home .box-round .description {
+.tribute-app .box-round .description {
   font-size: 16px;
   font-weight: 400; }
 
