@@ -289,7 +289,7 @@ function polGetCookie(cname) {
 }
 
 function polAcceptCookies() {
-	polSetCookie(polenObj.COOKIES.POLICIES, "true");
+	polSetCookie(polenObj.COOKIES.POLICIES, "true", 30);
 	const policies_box = document.getElementById("policies-box");
 	policies_box.parentNode.removeChild(policies_box);
 }
