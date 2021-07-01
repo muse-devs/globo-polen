@@ -6,6 +6,9 @@ class Tributes_Model
 
     const TABLE_NAME = 'tributes';
 
+    const ERROR_SLUG_UNIQUE = 'tribute_slug_uniq';
+    const ERROR_HASH_UNIQUE = 'tribute_hash_unique';
+
     /**
      * 
      */
@@ -27,10 +30,10 @@ class Tributes_Model
             $table_name,
             $data
         );
-        if( is_wp_error( $result_insert ) ) {
-            throw new \Exception( $wpdb->last_error, 500 );
+        if( $result_insert === false ) {
+            throw new \Exception( $wpdb->last_error, 401 );
         }
-        return $result_insert;
+        return $wpdb->insert_id;
     }
 
 
@@ -42,7 +45,7 @@ class Tributes_Model
          global $wpdb;
          $table_name = self::table_name();
          $result = $wpdb->get_row(
-             $wpdb->prepare( "SELECT * FROM `{$table_name}` WHERE `id` = %s", $id )
+             $wpdb->prepare( "SELECT * FROM `{$table_name}` WHERE `ID` = %s", $id )
          );
          return $result;
      }
@@ -76,6 +79,9 @@ class Tributes_Model
     }
 
 
+    /**
+     * 
+     */
     public static function create_hash()
     {
         return md5( rand( 0, 10000 ) . date( 'Y-m-d H:i:s' ) );
