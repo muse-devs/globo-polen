@@ -11,6 +11,7 @@ class Tributes_Rewrite_Rules
     const TRIBUTES_OPERATION_SEND_VIDEO    = 'send_video';
     const TRIBUTES_OPERATION_INVITES       = 'invites';
     const TRIBUTES_OPERATION_CREATE        = 'create';
+    const TRIBUTES_OPERATION_HOME          = 'home';
 
     const TRIBUTES_OPERATIONS = array(
         self::TRIBUTES_OPERATION_EMAIL_READED,
@@ -18,12 +19,24 @@ class Tributes_Rewrite_Rules
         self::TRIBUTES_OPERATION_SEND_VIDEO,
         self::TRIBUTES_OPERATION_INVITES,
         self::TRIBUTES_OPERATION_CREATE,
+        self::TRIBUTES_OPERATION_HOME,
     );
+
+    const TRIBUTES_QUERY_VAR_TRUBITES_APP                             = 'tributes_app';
+    const TRIBUTES_QUERY_VAR_TRIBUTES_OPERAION                        = 'tribute_operation';
+    const TRIBUTES_QUERY_VAR_TRIBUTES_HASH                            = 'tributes_hash';
+    const TRIBUTES_QUERY_VAR_TRIBUTES_INVITE_HASH                     = 'tributes_invite_hash';
+    const TRIBUTES_QUERY_VAR_TRIBUTES_SET_EMAIL_READED_HASH           = 'tributes_set_email_readed_hash';
+    const TRIBUTES_QUERY_VAR_TRIBUTES_OPERAION_SET_EMAIL_CLICKED_HASH = 'tributes_set_email_clicked_hash';
+    const TRIBUTES_QUERY_VAR_TRIBUTES_OPERAION_SEND_VIDEO             = 'tributes_send_video';
     
+
+    /**
+     * 
+     */
     public function __construct( bool $static = false )
     {
         if( $static ) {
-            //ROUTES /lp/SLUG-ARTISTA
             add_action( 'init',             array( $this, 'rewrites' ) );
             add_filter( 'query_vars',       array( $this, 'query_vars' ) );
             add_action( 'template_include', array( $this, 'template_include' ) );
@@ -38,8 +51,9 @@ class Tributes_Rewrite_Rules
         add_rewrite_rule( self::BASE_PATH . '/([^/]*)/?/set-email-readed',  'index.php?tributes_app=1&tribute_operation='.self::TRIBUTES_OPERATION_EMAIL_READED.'&tributes_set_email_readed_hash=$matches[1]', 'top' );
         add_rewrite_rule( self::BASE_PATH . '/([^/]*)/?/set-email-clicked', 'index.php?tributes_app=1&tribute_operation='.self::TRIBUTES_OPERATION_EMAIL_CLICKED.'&tributes_set_email_clicked_hash=$matches[1]', 'top' );
         add_rewrite_rule( self::BASE_PATH . '/([^/]*)/?/invite/([^/]*)/?',  'index.php?tributes_app=1&tribute_operation='.self::TRIBUTES_OPERATION_SEND_VIDEO.'&tributes_hash=$matches[1]&tributes_invite_hash=$matches[2]&tributes_send_video=1', 'top' );
+        add_rewrite_rule( self::BASE_PATH . '/create/?',                    'index.php?tributes_app=1&tribute_operation='.self::TRIBUTES_OPERATION_CREATE, 'top' );
         add_rewrite_rule( self::BASE_PATH . '/([^/]*)/?',                   'index.php?tributes_app=1&tribute_operation='.self::TRIBUTES_OPERATION_INVITES.'&tributes_hash=$matches[1]', 'top' );
-        add_rewrite_rule( self::BASE_PATH . '[/]?$',                        'index.php?tributes_app=1&tribute_operation='.self::TRIBUTES_OPERATION_CREATE, 'top' );
+        add_rewrite_rule( self::BASE_PATH . '[/]?$',                        'index.php?tributes_app=1&tribute_operation='.self::TRIBUTES_OPERATION_HOME, 'top' );
     }
 
 
@@ -48,13 +62,13 @@ class Tributes_Rewrite_Rules
      */
     public function query_vars( $query_vars )
     {
-        $query_vars[] = 'tributes_app';
-        $query_vars[] = 'tributes_hash';
-        $query_vars[] = 'tributes_invite_hash';
-        $query_vars[] = 'tributes_set_email_readed_hash';
-        $query_vars[] = 'tributes_set_email_clicked_hash';
-        $query_vars[] = 'tributes_send_video';
-        $query_vars[] = 'tribute_operation';
+        $query_vars[] = self::TRIBUTES_QUERY_VAR_TRUBITES_APP;
+        $query_vars[] = self::TRIBUTES_QUERY_VAR_TRIBUTES_HASH;
+        $query_vars[] = self::TRIBUTES_QUERY_VAR_TRIBUTES_INVITE_HASH;
+        $query_vars[] = self::TRIBUTES_QUERY_VAR_TRIBUTES_SET_EMAIL_READED_HASH;
+        $query_vars[] = self::TRIBUTES_QUERY_VAR_TRIBUTES_OPERAION_SET_EMAIL_CLICKED_HASH;
+        $query_vars[] = self::TRIBUTES_QUERY_VAR_TRIBUTES_OPERAION_SEND_VIDEO;
+        $query_vars[] = self::TRIBUTES_QUERY_VAR_TRIBUTES_OPERAION;
         return $query_vars;
     }
 
@@ -64,13 +78,13 @@ class Tributes_Rewrite_Rules
      */
     public function template_include( $template )
     {
-        $tributes_app           = get_query_var( 'tributes_app' );
-        $tribute_operation      = get_query_var( 'tribute_operation' );
-        $tribute_hash           = get_query_var( 'tributes_hash' );
-        $invites_hash           = get_query_var( 'tributes_invite_hash' );
-        $set_email_readed_hash  = get_query_var( 'tributes_set_email_readed_hash' );
-        $set_email_clicked_hash = get_query_var( 'tributes_set_email_clicked_hash' );
-        $tribute_send_video     = get_query_var( 'tributes_send_video' );
+        $tributes_app           = get_query_var( self::TRIBUTES_QUERY_VAR_TRUBITES_APP );
+        $tribute_hash           = get_query_var( self::TRIBUTES_QUERY_VAR_TRIBUTES_HASH );
+        $invites_hash           = get_query_var( self::TRIBUTES_QUERY_VAR_TRIBUTES_INVITE_HASH );
+        $set_email_readed_hash  = get_query_var( self::TRIBUTES_QUERY_VAR_TRIBUTES_SET_EMAIL_READED_HASH );
+        $set_email_clicked_hash = get_query_var( self::TRIBUTES_QUERY_VAR_TRIBUTES_OPERAION_SET_EMAIL_CLICKED_HASH );
+        $tribute_send_video     = get_query_var( self::TRIBUTES_QUERY_VAR_TRIBUTES_OPERAION_SEND_VIDEO );
+        $tribute_operation      = get_query_var( self::TRIBUTES_QUERY_VAR_TRIBUTES_OPERAION );
 
         // echo'<pre>';var_dump([
         //     'tributes_app' => $tributes_app,
@@ -88,8 +102,12 @@ class Tributes_Rewrite_Rules
 
         $GLOBALS['tributes_app'] = true;
         
-        if( $tribute_operation == self::TRIBUTES_OPERATION_CREATE ) {
+        if( $tribute_operation == self::TRIBUTES_OPERATION_HOME ) {
             return get_template_directory() . '/tributes/index.php';
+        }
+
+        if( $tribute_operation == self::TRIBUTES_OPERATION_CREATE ) {
+            return get_template_directory() . '/tributes/create_tribute.php';
         }
 
         if( $tribute_operation == self::TRIBUTES_OPERATION_SEND_VIDEO ) {
