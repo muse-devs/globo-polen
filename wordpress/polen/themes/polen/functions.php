@@ -171,7 +171,7 @@ function polen_remove_all()
 		is_page_template( 'inc/landpage.php' ) ||
 		(is_singular() && is_product()) ||
 		polen_is_landingpage() ||
-		polen_is_tributes_page()
+		is_tribute_app()
 		) {
 		foreach( $wp_styles->queue as $style ) {
 			wp_dequeue_style( $wp_styles->registered[$style]->handle );
@@ -212,7 +212,7 @@ function polen_scripts() {
 		wp_enqueue_script( 'landpage-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'landpage.js', array("jquery"), _S_VERSION, true );
 	}
 
-	if (polen_is_tributes_page()) {
+	if (is_tribute_app()) {
 		wp_enqueue_script( 'tributes-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'tributes.js', array("jquery", "vuejs"), _S_VERSION, true );
 	}
 
@@ -284,6 +284,11 @@ require_once TEMPLATE_DIR . '/classes/Icon_Class.php';
  * Arquivo responsavel por retornos da tela de acompanhamento de pedidos
  */
 require_once TEMPLATE_DIR . '/classes/Order_Class.php';
+
+/**
+ * Funcoes do Tributes APP
+ */
+require_once TEMPLATE_DIR . '/tributes/tributes_functions.php';
 
 
 add_action('wc_gateway_stripe_process_response', function($response, $order) {

@@ -18,7 +18,7 @@ class Tributes_API_Router extends \WP_REST_Controller
     public function create_routes_create_tributes()
     {
         $controller = new Tributes_Controller();
-        add_action( 'create_routes_create_tribute', [ $controller, 'create_tribute' ] );
+        add_action( 'create_routes_create_tribute',  [ $controller, 'create_tribute' ] );
         add_action( 'wp_ajax_nopriv_create_tribute', [ $controller, 'create_tribute' ] );
 
         add_action( 'wp_ajax_nopriv_check_tribute_slug_exists', [ $controller, 'check_slug_exists' ] );
