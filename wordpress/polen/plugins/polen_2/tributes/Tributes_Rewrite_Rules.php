@@ -8,9 +8,9 @@ class Tributes_Rewrite_Rules
 
     const TRIBUTES_OPERATION_EMAIL_READED  = 'email_readed';
     const TRIBUTES_OPERATION_EMAIL_CLICKED = 'email_clicked';
-    const TRIBUTES_OPERATION_SEND_VIDEO = 'send_video';
-    const TRIBUTES_OPERATION_INVITES = 'invites';
-    const TRIBUTES_OPERATION_CREATE = 'create';
+    const TRIBUTES_OPERATION_SEND_VIDEO    = 'send_video';
+    const TRIBUTES_OPERATION_INVITES       = 'invites';
+    const TRIBUTES_OPERATION_CREATE        = 'create';
 
     const TRIBUTES_OPERATIONS = array(
         self::TRIBUTES_OPERATION_EMAIL_READED,
@@ -72,15 +72,15 @@ class Tributes_Rewrite_Rules
         $set_email_clicked_hash = get_query_var( 'tributes_set_email_clicked_hash' );
         $tribute_send_video     = get_query_var( 'tributes_send_video' );
 
-        echo'<pre>';var_dump([
-            'tributes_app' => $tributes_app,
-            'tribute_hash' => $tribute_hash,
-            'invites_hash' => $invites_hash,
-            'set_email_readed_hash' => $set_email_readed_hash,
-            'set_email_clicked_hash' => $set_email_clicked_hash,
-            'tribute_send_video' => $tribute_send_video,
-            'tribute_operation' => $tribute_operation,
-        ]);die;
+        // echo'<pre>';var_dump([
+        //     'tributes_app' => $tributes_app,
+        //     'tribute_hash' => $tribute_hash,
+        //     'invites_hash' => $invites_hash,
+        //     'set_email_readed_hash' => $set_email_readed_hash,
+        //     'set_email_clicked_hash' => $set_email_clicked_hash,
+        //     'tribute_send_video' => $tribute_send_video,
+        //     'tribute_operation' => $tribute_operation,
+        // ]);die;
         
         if ( $tributes_app != '1' || !in_array( $tribute_operation, self::TRIBUTES_OPERATIONS ) ) {
             return $template;
