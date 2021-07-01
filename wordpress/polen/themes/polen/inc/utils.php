@@ -69,9 +69,3 @@ function polen_is_landingpage()
 	global $lp_sigin_lead;
 	return isset($lp_sigin_lead) && $lp_sigin_lead === true;
 }
-
-function polen_is_tributes_page()
-{
-	global $tributes_root;
-	return isset($tributes_root) && $tributes_root === true;
-}

@@ -1,0 +1,3 @@
+<?php
+
+echo 'FORM DE CRIACAO DE TRIBUTE';
