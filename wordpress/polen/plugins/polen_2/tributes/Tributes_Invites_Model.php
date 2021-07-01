@@ -38,6 +38,61 @@ class Tributes_Invites_Model
         return $wpdb->insert_id;
     }
 
+    /**
+     * Update em um Registro baseado no ID
+     * 
+     * @param array
+     */
+    public static function update( $data )
+    {
+        global $wpdb;
+        $table_name = self::table_name();
+
+        $result_update = $wpdb->update(
+            $table_name,
+            $data,
+            array( 'ID' => $data[ 'ID' ])
+        );
+        if( $result_update === false ) {
+            throw new \Exception( $wpdb->last_error, 401 );
+        }
+        return $data[ 'ID' ];
+    }
+
+
+    /**
+     * Seta um Invite como Email_Lido 
+     * 
+     * @param int
+     * @return bool
+     */
+    public static function set_invite_email_opened( $invite_id )
+    {
+        $data_update = array(
+            'ID' => $invite_id,
+            'email_opened' => '1'
+        );
+        self::update( $data_update );
+        return true;
+    }
+
+
+    /**
+     * Seta um Invite como Email_Lido 
+     * 
+     * @param int
+     * @return bool
+     */
+    public static function set_invite_email_clicked( $invite_id )
+    {
+        $data_update = array(
+            'ID' => $invite_id,
+            'email_clicked' => '1'
+        );
+        self::update( $data_update );
+        return true;
+    }
+
 
     /**
      * Pegar Invite pelo ID

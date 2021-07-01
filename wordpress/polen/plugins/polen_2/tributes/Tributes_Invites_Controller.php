@@ -5,6 +5,10 @@ use Polen\Includes\Debug;
 
 class Tributes_Invites_Controller
 {
+
+    /**
+     * Inseri na base um Invite inicial
+     */
     public function create_tribute_invites()
     {
         $tribute_hash = filter_input( INPUT_POST, 'tribute_hash' );
