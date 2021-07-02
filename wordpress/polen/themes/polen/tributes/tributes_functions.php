@@ -44,3 +44,10 @@ function tribute_create_link_email_send_video( $invite_hash ) {
 function tribute_create_link_set_email_opened( $invite_hash ) {
     return site_url( "tributes/{$invite_hash}/set-email-readed" ) . '/';
 }
+
+/**
+ * Pega a URL da pagina que faz os convites
+ */
+function tribute_get_url_invites( $hash ) {
+    return return site_url( "tributes/{$invite_hash}" );
+}
