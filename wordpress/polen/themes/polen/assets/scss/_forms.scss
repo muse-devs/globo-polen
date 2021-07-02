@@ -18,6 +18,10 @@
 	}
 }
 
+input.error {
+	border-color: var(--danger);
+}
+
 .btn-primary:hover {
 	background-color: $primary-hover;
 	border-color: $primary-hover;

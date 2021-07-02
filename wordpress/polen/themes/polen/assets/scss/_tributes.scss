@@ -95,7 +95,7 @@
 	}
 }
 
-.tribute-home {
+.tribute-app {
 	.title {
 		font-size: 32px;
 		line-height: 1.5;
@@ -103,6 +103,10 @@
 		.color {
 			color: var(--primary);
 		}
+	}
+	label {
+		font-size: 16px;
+		font-weight: 700;
 	}
 	p {
 		font-size: 16px;
@@ -128,4 +132,24 @@
 			font-weight: 400;
 		}
 	}
+}
+
+.slug-wrap {
+	position: relative;
+}
+
+.slug-message {
+	color: var(--success);
+	&.error {
+		color: var(--danger);
+	}
+}
+
+.input-tribute-url {
+	width: 100%;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	border-radius: 0 !important;
+	outline: transparent !important;
 }
