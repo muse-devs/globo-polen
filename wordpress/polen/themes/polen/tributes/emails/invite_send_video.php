@@ -7,6 +7,8 @@
     <title>Convite para Tributo</title>
 </head>
 <body>
+    <h1>Envie sua homonagem</h1>
+    <p>ICONE DO EMAIL</p>
     <p>Oi %s,</p>
     <p>%s o convidou a participar da criação de uma vídeo montagem para %s.</p>
     <p><strong>Seu prazo para envio é %s.</strong></p>
