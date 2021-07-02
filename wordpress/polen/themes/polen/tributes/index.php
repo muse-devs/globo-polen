@@ -1,5 +1,7 @@
 <?php get_header('tributes'); ?>
 
+<?php $create_url = "./create"; ?>
+
 <main class="overflow-hidden">
 	<div class="container py-3 tribute-container tribute-app">
 		<section class="row mt-2 pb-5">
@@ -10,7 +12,7 @@
 						<p class="mt-4">O Tributo simplifica a criação de um vídeo-presente em grupo que você pode dar em qualquer ocasião importante.</p>
 						<div class="row">
 							<div class="col-10 mt-4">
-								<a href="#start" class="btn btn-primary btn-lg btn-block">Comece uma homenagem</a>
+								<a href="<?php echo $create_url; ?>" class="btn btn-primary btn-lg btn-block">Comece uma homenagem</a>
 							</div>
 						</div>
 					</div>
@@ -75,7 +77,7 @@
 							<div class="title">Comece uma homenagem em 60 segundos ou menos!</div>
 						</div>
 						<div class="col-5">
-							<a href="#start" class="btn btn-primary btn-lg btn-block">Comece uma homenagem</a>
+							<a href="<?php echo $create_url; ?>" class="btn btn-primary btn-lg btn-block">Comece uma homenagem</a>
 						</div>
 					</div>
 				</div>

@@ -33,7 +33,7 @@
 					</p>
 					<p class="mb-4">
 						<label for="creator_name">Qual o seu nome?</label>
-						<input type="email" name="creator_name" id="creator_name" placeholder="Seu nome" class="form-control form-control-lg" required />
+						<input type="text" name="creator_name" id="creator_name" placeholder="Seu nome" class="form-control form-control-lg" required />
 					</p>
 					<p class="mb-4">
 						<label for="creator_email">Qual o seu e-mail?</label>

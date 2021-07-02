@@ -11416,6 +11416,7 @@ label[for="wc-stripe-new-payment-method"] {
   border-top: none;
   border-left: none;
   border-right: none;
+  border-radius: 0 !important;
   outline: transparent !important; }
 
 /*# sourceMappingURL=maps/style.css.map */

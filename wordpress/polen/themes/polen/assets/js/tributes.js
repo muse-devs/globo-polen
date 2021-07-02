@@ -1,6 +1,7 @@
 const btn_play = document.getElementById("btn-play");
 const video_tribute = document.getElementById("tribute-home-video");
-const formName = "form#form-create-tribute";
+const formCreateName = "form#form-create-tribute";
+const formCreate = document.querySelector(formCreateName);
 const slug = document.getElementById("slug");
 
 function playVideo(evt) {
@@ -50,16 +51,21 @@ function checkSlug() {
 	});
 }
 
-function createTribute() {
+function createTribute(evt) {
+	evt.preventDefault();
+	if (slug.classList.contains("error")) {
+		polError("É preciso uma URL válida para seu Tributo");
+		return;
+	}
 	polSpinner();
 	jQuery
 		.post(
 			polenObj.ajax_url,
-			jQuery(formName).serialize(),
+			jQuery(formCreateName).serialize(),
 			function (result) {
 				if (result.success) {
-					setSessionMessage(CONSTANTS.SUCCESS, "", "");
-					window.location.href = result.redirect;
+					setSessionMessage(CONSTANTS.SUCCESS, "Tributo criado", "Agora convide seus amigos para essa homenagem");
+					window.location.href = result.data.url_redirect;
 				} else {
 					polError(result.data);
 				}
@@ -84,4 +90,8 @@ if (btn_play) {
 
 if (slug) {
 	slug.addEventListener("focusout", checkSlug);
+}
+
+if (formCreate) {
+	formCreate.addEventListener("submit", createTribute);
 }
