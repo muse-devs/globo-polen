@@ -30,6 +30,29 @@ function polen_body_classes( $classes ) {
 add_filter( 'body_class', 'polen_body_classes' );
 
 
+function polen_get_header_objects()
+{
+	?>
+	<script>
+		var polenObj = {
+			base_url: '<?= site_url(); ?>',
+			developer: <?php echo DEVELOPER ? 1 : 0; ?>,
+			ajax_url: "/wp-admin/admin-ajax.php",
+			COOKIES: <?php echo json_encode(POL_COOKIES); ?>
+		};
+		if (!polenObj.developer) {
+			console = {
+				debug: function() {},
+				error: function() {},
+				info: function() {},
+				log: function() {},
+				warn: function() {},
+			};
+		}
+	</script>
+	<?php
+}
+
 /**
  * Responsible to return a link for all talents
  *
@@ -219,9 +242,9 @@ function polen_get_querystring_redirect()
 
 /**
  * Se o email que será enviado for para um Talento
- * será mostrado o Valor Total sem desconto só é tratado nessa funcao 
+ * será mostrado o Valor Total sem desconto só é tratado nessa funcao
  * emails Polen\Includes\Polen_WC_Payment_Approved
- * 
+ *
  * @param WC_Order
  * @param \WC_Email
  */
@@ -243,7 +266,7 @@ function polen_get_total_order_email_detail_to_talent( $order, $email )
 /**
  * Aplica a parte da polen no valor de entrada (valor produto)
  * 25%
- * 
+ *
  * @param float $full_price
  */
 function polen_apply_polen_part_price( $full_price )

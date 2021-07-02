@@ -24,22 +24,7 @@
 	<!-- <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"> -->
 	<meta name="theme-color" content="#000000">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
-	<script>
-		var polenObj = {
-			base_url: '<?= site_url(); ?>',
-			developer: <?php echo DEVELOPER ? 1 : 0; ?>,
-			COOKIES: <?php echo json_encode(POL_COOKIES); ?>
-		};
-		if (!polenObj.developer) {
-			console = {
-				debug: function() {},
-				error: function() {},
-				info: function() {},
-				log: function() {},
-				warn: function() {},
-			};
-		}
-	</script>
+	<?php polen_get_header_objects(); ?>
 	<?php wp_head(); ?>
 	<?php include_once TEMPLATE_DIR . '/inc/analitics_header.php'; ?>
 </head>

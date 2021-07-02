@@ -134,7 +134,19 @@
 	}
 }
 
+.slug-wrap {
+	position: relative;
+}
+
+.slug-message {
+	color: var(--success);
+	&.error {
+		color: var(--danger);
+	}
+}
+
 .input-tribute-url {
+	width: 100%;
 	border-top: none;
 	border-left: none;
 	border-right: none;

@@ -9392,6 +9392,9 @@ iframe {
   .form-control:disabled, .form-control[read-only] {
     opacity: 0.5; }
 
+input.error {
+  border-color: var(--danger); }
+
 .btn-primary:hover {
   background-color: #fe9168;
   border-color: #fe9168; }
@@ -11400,7 +11403,16 @@ label[for="wc-stripe-new-payment-method"] {
   font-size: 16px;
   font-weight: 400; }
 
+.slug-wrap {
+  position: relative; }
+
+.slug-message {
+  color: var(--success); }
+  .slug-message.error {
+    color: var(--danger); }
+
 .input-tribute-url {
+  width: 100%;
   border-top: none;
   border-left: none;
   border-right: none;
