@@ -64,7 +64,11 @@ function createTribute(evt) {
 			jQuery(formCreateName).serialize(),
 			function (result) {
 				if (result.success) {
-					setSessionMessage(CONSTANTS.SUCCESS, "Tributo criado", "Agora convide seus amigos para essa homenagem");
+					setSessionMessage(
+						CONSTANTS.SUCCESS,
+						"Tributo criado",
+						"Agora convide seus amigos para essa homenagem"
+					);
 					window.location.href = result.data.url_redirect;
 				} else {
 					polError(result.data);
@@ -80,7 +84,6 @@ function createTribute(evt) {
 		})
 		.complete(function (e) {
 			polSpinner("hidden");
-			console.log("complete event");
 		});
 }
 
@@ -94,4 +97,60 @@ if (slug) {
 
 if (formCreate) {
 	formCreate.addEventListener("submit", createTribute);
+}
+
+if (document.getElementById("invite-friends")) {
+	const inviteFriends = new Vue({
+		el: "#invite-friends",
+		data: {
+			name: "",
+			email: "",
+			friends: [],
+		},
+		methods: {
+			resetAddFriend: function () {
+				this.name = this.email = "";
+			},
+			addFriend: function () {
+				this.friends.push({ name: this.name, email: this.email });
+				this.resetAddFriend();
+			},
+			removeFriend: function (email) {
+				this.friends = this.friends.filter(
+					(friend) => friend.email != email
+				);
+			},
+			sendFriends: function () {
+				const formName = "form#friends-form";
+				// console.log(jQuery(formName).serialize());
+				polSpinner();
+				jQuery
+					.post(
+						polenObj.ajax_url,
+						jQuery(formName).serialize(),
+						function (result) {
+							if (result.success) {
+								polMessage(
+									"Amigos adicionados",
+									"Amigos adicionados com sucesso"
+								);
+								this.friends = [];
+							} else {
+								polError(result.data);
+							}
+						}
+					)
+					.fail(function (e) {
+						if (e.responseJSON) {
+							polError(e.responseJSON.data);
+						} else {
+							polError(e.statusText);
+						}
+					})
+					.complete(function (e) {
+						polSpinner("hidden");
+					});
+			},
+		},
+	});
 }
