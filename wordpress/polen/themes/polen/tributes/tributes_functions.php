@@ -24,9 +24,12 @@ function is_tribute_create() {
 
 /**
  * Pega a URL da pagina que faz os convites
+ * 
+ * @param string $tribute_hash
+ * @return string URL completa
  */
-function tribute_get_url_invites( $hash ) {
-    return site_url( "tributes/{$hash}" );
+function tribute_get_url_invites( $tribute_hash ) {
+    return site_url( "tributes/{$tribute_hash}" );
 }
 
 /**

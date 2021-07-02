@@ -7,24 +7,19 @@
     <title>Convite para Tributo</title>
 </head>
 <body>
-Oi %s,
-seu convite foi enviado para: 
-%s
+<h1>Seus convites foram enviados</h1>
+<p>IMAGO DO EMAIL</p>
+<p>Oi %s,</p>
+<p>seu convite foi enviado para: </p>
+<p>%s</p>
 
-O prazo para vídeo estar pronto é %s.
+<p>O prazo para vídeo estar pronto é %s.</p>
 
-Mensagem de boas-vindas e instruções de %d:
-%d
+<p>Mensagem de boas-vindas e instruções de %d:</p>
+<p>%d</p>
 
-Perguntas a serem respondidas em seu vídeo:
-%s
+<p>Perguntas a serem respondidas em seu vídeo:</p>
+<p>%s</p>
 <a href="%s">Revisar convites</a>
 </body>
 </html>
-nome_do_invitador,
-lista de nomes nos inites
-data "30 de junho de 2021",
-nome_do_invitador,
-tribute mensagem,
-pergunta do tributo,
-link para revisar convites

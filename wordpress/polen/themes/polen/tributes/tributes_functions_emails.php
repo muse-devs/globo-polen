@@ -44,12 +44,29 @@ function tributes_create_link_set_email_opened( $invite_hash ) {
     return site_url( "tributes/{$invite_hash}/set-email-readed" ) . '/';
 }
 
-function tributes_send_email( $email_content) {
-    $headers[] = 'From: Polen No-reply <polen@example.net>';
+/**
+ * Enviar um email do tributo
+ * @param string
+ * @param string
+ * @param string
+ */
+function tributes_send_email( $email_content, $to_name, $to_email ) {
+    global $Polen_Plugin_Settings;
+    $headers[] = "From: {$Polen_Plugin_Settings['polen_smtp_from_name']} <{$Polen_Plugin_Settings['polen_smtp_from_email']}>";
     $headers[] = 'Content-Type: text/html; charset=UTF-8';
-    $to = "Rodolfo Neto <rodolfoneto@gmail.com>";
-    var_dump(wp_mail($to, 'Convite para Tributo a', $email_content, $headers));
+    $to = "{$to_name} <{$to_email}>";
+    return wp_mail( $to, 'Video Tributo Polen.me', $email_content, $headers );
 }
+
+
+
+
+
+
+/************************************************************
+ **************** Conteudo dos Emails ***********************
+ ************************************************************/
+
 
 /**
  * Cria o conteudo do email de convite
@@ -75,6 +92,34 @@ function tributes_email_create_content_invite( $invite_hash ) {
         $tribute->question,
         tributes_create_link_email_send_video( $invites->hash ),
         tributes_create_link_set_email_opened( $invites->hash ),
+    );
+    return $content_formatted;
+}
+
+/**
+ * Cria o conteudo do email de convites enviados
+ * @param sdtClass wp_tributes
+ * @return string
+ */
+function tributes_email_content_invites_sended( $tribute ) {
+    $path_email = tributes_get_path_email_sended_complete();
+    $email_content = file_get_contents( $path_email );
+
+    $invites = Tributes_Invites_Model::get_all_by_tribute_ai( $tribute->ID );
+    foreach( $invites as $invite ) {
+        $names[] = $invite->name_inviter;
+    }
+
+    $date = date('d \d\e F \d\e o', strtotime( $tribute->deadline ));
+    $content_formatted = sprintf(
+        $email_content,
+        $tribute->creator_name,// nome_do_invitador,
+        implode( ', ', $names ),// lista de nomes nos inites
+        $date,// data "30 de junho de 2021",
+        $tribute->creator_name,// nome_do_invitador,
+        $tribute->welcome_message,// tribute mensagem,
+        $tribute->question,// pergunta do tributo,
+        tribute_get_url_invites( $tribute->hash )// link para revisar convites
     );
     return $content_formatted;
 }
