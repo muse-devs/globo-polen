@@ -20,7 +20,11 @@ class Tributes_Controller
         try {
             $new_id = Tributes_Model::insert( $data_input );
             $new_tribute = Tributes_Model::get_by_id( $new_id );
-            wp_send_json_success( $new_tribute->hash, 201 );
+            $return_ajax = array(
+                'hash' => $new_tribute->hash,
+                'url_redirect' => tribute_get_url_invites( $new_tribute->hash ),
+            );
+            wp_send_json_success( $return_ajax, 201 );
         } catch ( \Exception $e ) {
             wp_send_json_error( $e->getMessage(), $e->getCode() );
         }
