@@ -99,15 +99,33 @@ class Tributes_Invites_Model
      * 
      * @param int
      */
-     public static function get_by_id( $id )
-     {
-         global $wpdb;
-         $table_name = self::table_name();
-         $result = $wpdb->get_row(
-             $wpdb->prepare( "SELECT * FROM `{$table_name}` WHERE `ID` = %s", $id )
-         );
-         return $result;
-     }
+    public static function get_by_id( $id )
+    {
+        global $wpdb;
+        $table_name = self::table_name();
+        $result = $wpdb->get_row(
+            $wpdb->prepare( "SELECT * FROM `{$table_name}` WHERE `ID` = %s", $id )
+        );
+        return $result;
+    }
+
+
+    /**
+     * Pega todos so invites pelo tribute_id
+     * 
+     * @param int
+     * @return array stdClass[] wp_tributes_invites
+     */
+    public static function get_all_by_tribute_ai( $tribute_id )
+    {
+        global $wpdb;
+        $table_name = self::table_name();
+        $result = $wpdb->get_results(
+            $wpdb->prepare( "SELECT * FROM {$table_name} WHERE tribute_id = %d;", $tribute_id )
+        );
+        return $result;
+    }
+     
 
 
     /**
