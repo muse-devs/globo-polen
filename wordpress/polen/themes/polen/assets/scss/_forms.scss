@@ -27,6 +27,16 @@ input.error {
 	border-color: $primary-hover;
 }
 
+.button-icon-only {
+	font-size: 22px;
+	border: none;
+	background: none;
+	outline: transparent;
+	align-content: center;
+    align-items: center;
+    height: 100%;
+}
+
 .step {
 	font-size: 20px;
 	font-weight: 700;
