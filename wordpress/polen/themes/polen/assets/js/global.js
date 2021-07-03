@@ -293,6 +293,33 @@ function polAcceptCookies() {
 	const policies_box = document.getElementById("policies-box");
 	policies_box.parentNode.removeChild(policies_box);
 }
+
+function polAjaxForm(formName, callBack, callBackError) {
+	polSpinner();
+	jQuery
+		.post(
+			polenObj.ajax_url,
+			jQuery(formName).serialize(),
+			function (result) {
+				if (result.success) {
+					callBack();
+				} else {
+					callBackError(result.data);
+				}
+			}
+		)
+		.fail(function (e) {
+			if (e.responseJSON) {
+				callBackError(e.responseJSON.data);
+			} else {
+				callBackError(e.statusText);
+			}
+		})
+		.complete(function (e) {
+			polSpinner(CONSTANTS.HIDDEN);
+		});
+}
+
 // -------------------------------------------------------------------------
 
 jQuery(document).ready(function () {

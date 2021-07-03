@@ -83,7 +83,7 @@ function createTribute(evt) {
 			}
 		})
 		.complete(function (e) {
-			polSpinner("hidden");
+			polSpinner(CONSTANTS.HIDDEN);
 		});
 }
 
@@ -148,7 +148,7 @@ if (document.getElementById("invite-friends")) {
 						}
 					})
 					.complete(function (e) {
-						polSpinner("hidden");
+						polSpinner(CONSTANTS.HIDDEN);
 					});
 			},
 		},
