@@ -76,14 +76,12 @@ function createTribute(evt) {
 			}
 		)
 		.fail(function (e) {
+			polSpinner(CONSTANTS.HIDDEN);
 			if (e.responseJSON) {
 				polError(e.responseJSON.data);
 			} else {
 				polError(e.statusText);
 			}
-		})
-		.complete(function (e) {
-			polSpinner(CONSTANTS.HIDDEN);
 		});
 }
 

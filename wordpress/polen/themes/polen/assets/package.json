@@ -8,7 +8,8 @@
     "iconfont": "gulp iconfont",
     "sprite": "gulp sprite",
     "sass": "gulp sass",
-    "sass:watch": "gulp sass:watch"
+    "sass:watch": "gulp sass:watch",
+    "deploy": "gulp sass; gulp compressjs"
   },
   "devDependencies": {
     "fancy-log": "^1.3.3",
