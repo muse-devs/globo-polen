@@ -36,7 +36,7 @@
 		<header id="masthead" class="header border-bottom">
 			<div class="container">
 				<div class="row pt-3 pb-4">
-					<div class="col-6 col-sm-6 logo-tribute-wrap">
+					<div class="col-12 logo-tribute-wrap<?php echo is_tribute_home() ? '' : ' text-center'; ?>">
 						<?php polen_the_theme_logos(); ?>
 					</div>
 				</div>

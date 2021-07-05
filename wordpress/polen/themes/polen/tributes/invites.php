@@ -40,10 +40,10 @@ if (empty($tribute)) {
 						<div v-for="friend in friends" v-bind:key="friend.email" class="card-invite">
 							<div class="row">
 								<div class="col-md-5">
-									<input type="text" name="friends[name]" v-model="friend.name" class="form-control form-control-lg" />
+									<input type="text" name="friends[name][]" v-model="friend.name" class="form-control form-control-lg" />
 								</div>
 								<div class="col-md-5">
-									<input type="email" name="friends[email]" v-model="friend.email" class="form-control form-control-lg" />
+									<input type="email" name="friends[email][]" v-model="friend.email" class="form-control form-control-lg" />
 								</div>
 								<div class="col-md-2">
 									<button class="button-icon-only" v-on:click="removeFriend(friend.email)"><i class="icon icon-trash"></i></button>
