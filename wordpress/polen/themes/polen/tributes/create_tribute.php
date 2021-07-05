@@ -1,5 +1,10 @@
-<?php get_header('tributes'); ?>
+<?php
 
+use Polen\Tributes\Tributes_Occasions_Model;
+
+get_header('tributes');
+$occasions = Tributes_Occasions_Model::get_all();
+?>
 <main id="create-tribute">
 	<div class="container py-3 tribute-container tribute-app">
 		<div class="row">
@@ -18,7 +23,9 @@
 					<p class="mb-4">
 						<label for="occasion">Qual é a ocasião?</label>
 						<select name="occasion" id="occasion" class="form-control form-control-lg custom-select">
-							<option value="">Selecione a ocasião</option>
+							<?php foreach( $occasions as $occasion ) : ?>
+								<option value="<?= $occasion->occasion; ?>"><?= $occasion->occasion; ?></option>
+							<?php endforeach; ?>
 						</select>
 					</p>
 					<div class="mb-4">
