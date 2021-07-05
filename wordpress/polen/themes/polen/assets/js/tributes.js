@@ -120,7 +120,7 @@ if (document.getElementById("invite-friends")) {
 			},
 			sendFriends: function () {
 				const formName = "form#friends-form";
-				// console.log(jQuery(formName).serialize());
+				console.log(jQuery(formName).serialize());
 				polSpinner();
 				jQuery
 					.post(
