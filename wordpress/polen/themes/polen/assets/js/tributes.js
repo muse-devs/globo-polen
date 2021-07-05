@@ -109,6 +109,24 @@ if (document.getElementById("invite-friends")) {
 		return st ? JSON.parse(st) : [];
 	}
 
+	function submitFriends(_this) {
+		const formName = "form#friends-form";
+		polAjaxForm(
+			formName,
+			function () {
+				sessionStorage.removeItem(SESSION_OBJ_INVITES);
+				polMessage(
+					"Amigos adicionados com sucesso",
+					"Seus amigos receberão as instruções por e-mail"
+				);
+				_this.friends = [];
+			},
+			function (e) {
+				polError(e);
+			}
+		);
+	}
+
 	const inviteFriends = new Vue({
 		el: "#invite-friends",
 		data: {
@@ -135,35 +153,7 @@ if (document.getElementById("invite-friends")) {
 				this.updateDisk();
 			},
 			sendFriends: function () {
-				const formName = "form#friends-form";
-				polSpinner();
-				jQuery
-					.post(
-						polenObj.ajax_url,
-						jQuery(formName).serialize(),
-						function (result) {
-							if (result.success) {
-								sessionStorage.removeItem(SESSION_OBJ_INVITES);
-								polMessage(
-									"Amigos adicionados",
-									"Amigos adicionados com sucesso"
-								);
-								this.friends = [];
-							} else {
-								polError(result.data);
-							}
-						}
-					)
-					.fail(function (e) {
-						if (e.responseJSON) {
-							polError(e.responseJSON.data);
-						} else {
-							polError(e.statusText);
-						}
-					})
-					.complete(function (e) {
-						polSpinner(CONSTANTS.HIDDEN);
-					});
+				submitFriends(this);
 			},
 		},
 	});
