@@ -4,6 +4,8 @@ const formCreateName = "form#form-create-tribute";
 const formCreate = document.querySelector(formCreateName);
 const slug = document.getElementById("slug");
 
+const SESSION_OBJ_INVITES = "polen_tributes_invites";
+
 function playVideo(evt) {
 	if (video_tribute.paused) {
 		btn_play.classList.add("hidden");
@@ -98,29 +100,42 @@ if (formCreate) {
 }
 
 if (document.getElementById("invite-friends")) {
+	function saveToDisk(obj) {
+		sessionStorage.setItem(SESSION_OBJ_INVITES, JSON.stringify(obj));
+	}
+
+	function getToDisk() {
+		const st = sessionStorage.getItem(SESSION_OBJ_INVITES);
+		return st ? JSON.parse(st) : [];
+	}
+
 	const inviteFriends = new Vue({
 		el: "#invite-friends",
 		data: {
 			name: "",
 			email: "",
-			friends: [],
+			friends: getToDisk(),
 		},
 		methods: {
 			resetAddFriend: function () {
 				this.name = this.email = "";
 			},
+			updateDisk: function () {
+				saveToDisk(this.friends);
+			},
 			addFriend: function () {
 				this.friends.push({ name: this.name, email: this.email });
 				this.resetAddFriend();
+				this.updateDisk();
 			},
 			removeFriend: function (email) {
 				this.friends = this.friends.filter(
 					(friend) => friend.email != email
 				);
+				this.updateDisk();
 			},
 			sendFriends: function () {
 				const formName = "form#friends-form";
-				console.log(jQuery(formName).serialize());
 				polSpinner();
 				jQuery
 					.post(
@@ -128,6 +143,7 @@ if (document.getElementById("invite-friends")) {
 						jQuery(formName).serialize(),
 						function (result) {
 							if (result.success) {
+								sessionStorage.removeItem(SESSION_OBJ_INVITES);
 								polMessage(
 									"Amigos adicionados",
 									"Amigos adicionados com sucesso"
