@@ -2,7 +2,7 @@
 
 <?php //TODO ajustar URLs ?>
 <?php $create_url = "./create"; ?>
-<?php $dashboard_url = "./create"; ?>
+<?php $dashboard_url = "./meus-tributos"; ?>
 
 <main class="overflow-hidden">
 	<div class="container py-3 tribute-container tribute-app">
@@ -104,8 +104,8 @@
 							<div class="title">Já pediu o seu tributo?<br /><small>Acompanhe o seu pedido</small></div>
 						</div>
 						<div class="col-md-5 mt-3">
-							<form action="<?php echo $dashboard_url; ?>" method="GET">
-								<input type="email" name="d-mail" id="d-mail" placeholder="Seu e-mail" class="form-control form-control-lg" required />
+							<form action="<?php echo $dashboard_url; ?>" method="POST">
+								<input type="email" name="email" id="email" placeholder="Seu e-mail" class="form-control form-control-lg" required />
 								<button type="submit" class="btn btn-primary btn-lg btn-block mt-2">Acompanhar</button>
 							</form>
 						</div>
