@@ -1,7 +1,11 @@
 <?php
+
+use Polen\Tributes\Tributes_Invites_Model;
+
 defined('ABSPATH') || exit;
 
 global $tribute, $tribute_hash;
+list( $sent, $not_sent ) = Tributes_Invites_Model::get_videos_sent_and_not( $tribute->ID );
 ?>
 
 <?php get_header('tributes'); ?>

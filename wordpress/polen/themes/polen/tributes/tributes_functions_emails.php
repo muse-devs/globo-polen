@@ -105,7 +105,7 @@ function tributes_email_content_invites_sended( $tribute ) {
     $path_email = tributes_get_path_email_sended_complete();
     $email_content = file_get_contents( $path_email );
 
-    $invites = Tributes_Invites_Model::get_all_by_tribute_ai( $tribute->ID );
+    $invites = Tributes_Invites_Model::get_all_by_tribute_id( $tribute->ID );
     foreach( $invites as $invite ) {
         $names[] = $invite->name_inviter;
     }
