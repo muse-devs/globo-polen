@@ -1,16 +1,7 @@
 <?php
+defined('ABSPATH') || exit;
 
-use Polen\Tributes\Tributes_Model;
-use Polen\Tributes\Tributes_Rewrite_Rules;
-
-$tribute_hash = get_query_var(Tributes_Rewrite_Rules::TRIBUTES_QUERY_VAR_TRIBUTES_HASH);
-$tribute = Tributes_Model::get_by_hash($tribute_hash);
-
-if (empty($tribute)) {
-	echo 'SET 404';
-	exit;
-}
-
+global $tribute, $tribute_hash;
 ?>
 
 <?php get_header('tributes'); ?>
