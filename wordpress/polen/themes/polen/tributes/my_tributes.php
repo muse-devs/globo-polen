@@ -17,7 +17,7 @@
 				</div>
 				<div class="col-md-3">
 					<p>Data de Vencimento</p>
-					<p><strong>01/01/2021</strong></p>
+					<p><strong><?php echo date('d/m/Y', strtotime( $tribute->deadline ) ); ?></strong></p>
 				</div>
 				<div class="col-md-3">
 					<p>% de sucesso</p>
