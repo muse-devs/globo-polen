@@ -1,10 +1,15 @@
 .tributes {
 	padding: 0;
+	.custom-logo {
+		width: 56px;
+	}
 }
 
 .logo-tribute-wrap {
-	.custom-logo {
-		width: 56px;
+	.logo-text {
+		font-size: 16px;
+		font-weight: 700;
+		color: var(--dark);
 	}
 }
 
@@ -151,7 +156,7 @@
 		}
 	}
 	.spinner-border {
-		border-right-color: #E5E9F2;
+		border-right-color: #e5e9f2;
 	}
 }
 
