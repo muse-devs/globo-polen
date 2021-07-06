@@ -1,23 +1,21 @@
-const formName = "form#talent-suggestion";
-const form = document.querySelector(formName);
+const formName = "form#landpage-form";
+const form_landpage = document.querySelector(formName);
 
-form.addEventListener("submit", function (evt) {
+form_landpage.addEventListener("submit", function (evt) {
 	evt.preventDefault();
-	blockUnblockInputs(formName, true);
 	polSpinner();
-
 	jQuery
 		.post(
 			woocommerce_params.ajax_url,
 			jQuery(formName).serialize(),
 			function (result) {
 				if (result.success) {
-					setSessionMessage(
+					polMessages.message(
 						CONSTANTS.SUCCESS,
-						"Sugestão enviada",
-						"Obrigado por nos enviar sua sugestão"
+						"Enviado com sucesso",
+						"Seu cadastro foi efetuado com sucesso"
 					);
-					form.reset();
+					form_landpage.reset();
 				} else {
 					polError(result.data);
 				}
@@ -31,7 +29,6 @@ form.addEventListener("submit", function (evt) {
 			}
 		})
 		.complete(function (e) {
-			blockUnblockInputs(formName, false);
 			polSpinner("hidden");
 		});
 });

@@ -88,6 +88,12 @@ class Polen {
 
         //Mensageria
         new Polen_Messages_Handler( true );
+
+        //Landing Page Product
+        new Polen_Signin_LP_Lead( true );
+
+        //Disabled API REST
+        new Polen_Disable_API_REST( true );
     }
 
     /**

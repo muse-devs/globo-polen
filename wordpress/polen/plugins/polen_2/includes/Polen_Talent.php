@@ -259,7 +259,11 @@ class Polen_Talent {
     public function change_single_add_to_cart_text() {
         global $post;
         $product = wc_get_product($post->ID);
-        $label = __('Pedir vídeo R$ ', 'polen') . number_format((float) $product->get_price(), 2, ',', '.');
+        if( $product->get_price() == 0 ) {
+            $label = __( 'Pedir vídeo grátis' );
+        } else {
+            $label = __('Pedir vídeo R$ ', 'polen') . number_format((float) $product->get_price(), 2, ',', '.');
+        }
         return $label;
     }
     
@@ -270,7 +274,11 @@ class Polen_Talent {
     public function change_custom_product_add_to_cart_text() {
         global $post;
         $product = wc_get_product($post->ID);
-        $label = __('Pedir vídeo R$ ', 'polen') . number_format((float) $product->get_price(), 2, ',', '.');
+        if( $product->get_price() == 0 ) {
+            $label = __( 'Pedir vídeo grátis' );
+        } else {
+            $label = __('Pedir vídeo R$ ', 'polen') . number_format((float) $product->get_price(), 2, ',', '.');
+        }
         return $label;
     }
     

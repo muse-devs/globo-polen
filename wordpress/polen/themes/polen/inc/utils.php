@@ -62,3 +62,10 @@ function polen_get_protocol()
 				? "https:"
 				: "http:";
 }
+
+
+function polen_is_landingpage()
+{
+	global $lp_sigin_lead;
+	return isset($lp_sigin_lead) && $lp_sigin_lead === true;
+}
