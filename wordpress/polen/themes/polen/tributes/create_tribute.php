@@ -23,6 +23,7 @@ $occasions = Tributes_Occasions_Model::get_all();
 					<p class="mb-4">
 						<label for="occasion">Qual é a ocasião?</label>
 						<select name="occasion" id="occasion" class="form-control form-control-lg custom-select">
+							<option value="">Selecione a ocasião</option>
 							<?php foreach( $occasions as $occasion ) : ?>
 								<option value="<?= $occasion->occasion; ?>"><?= $occasion->occasion; ?></option>
 							<?php endforeach; ?>

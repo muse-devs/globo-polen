@@ -37,7 +37,10 @@
 			<div class="container">
 				<div class="row pt-3 pb-4">
 					<div class="col-12 logo-tribute-wrap<?php echo is_tribute_home() ? '' : ' text-center'; ?>">
-						<?php polen_the_theme_logos(); ?>
+						<a href="/tributes" class="custom-logo-link" rel="home" aria-current="page">
+							<img width="37" height="37" src="<?php echo TEMPLATE_URI; ?>/tributes/assets/img/logo-icon.svg" class="custom-logo light" alt="Polen" />
+							<span class="logo-text ml-2">Tributo</span>
+						</a>
 					</div>
 				</div>
 			</div>

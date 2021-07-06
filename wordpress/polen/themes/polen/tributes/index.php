@@ -1,6 +1,8 @@
 <?php get_header('tributes'); ?>
 
+<?php //TODO ajustar URLs ?>
 <?php $create_url = "./create"; ?>
+<?php $dashboard_url = "./create"; ?>
 
 <main class="overflow-hidden">
 	<div class="container py-3 tribute-container tribute-app">
@@ -89,6 +91,23 @@
 						</div>
 						<div class="col-md-5 mt-3">
 							<a href="<?php echo $create_url; ?>" class="btn btn-primary btn-lg btn-block">Comece uma homenagem</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="row mt-0 mt-md-4">
+			<div class="col-12">
+				<div class="box-round p-4 p-md-5">
+					<div class="row align-items-center">
+						<div class="text-center text-md-left col-md-7">
+							<div class="title">Já pediu o seu tributo?<br /><small>Acompanhe o seu pedido</small></div>
+						</div>
+						<div class="col-md-5 mt-3">
+							<form action="<?php echo $dashboard_url; ?>" method="GET">
+								<input type="email" name="d-mail" id="d-mail" placeholder="Seu e-mail" class="form-control form-control-lg" required />
+								<button type="submit" class="btn btn-primary btn-lg btn-block mt-2">Acompanhar</button>
+							</form>
 						</div>
 					</div>
 				</div>
