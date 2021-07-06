@@ -80,6 +80,20 @@ class Tributes_Model
 
 
     /**
+     * Pega todos os tributos pelo email do criador
+     */
+    public static function get_all_by_email_creator( $email_creator )
+    {
+        global $wpdb;
+        $table_name = self::table_name();
+        $result = $wpdb->get_results(
+            $wpdb->prepare("SELECT * FROM `{$table_name}` WHERE `creator_email` = %s", $email_creator )
+        );
+        return $result;
+    }
+
+
+    /**
      * 
      */
     public static function create_hash()
