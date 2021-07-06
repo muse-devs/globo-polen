@@ -133,9 +133,10 @@ class Tributes_Rewrite_Rules
 
             $email_creator = filter_input( INPUT_POST, 'email', FILTER_VALIDATE_EMAIL );
             if( empty( $email_creator ) ) {
+                // wc_add_notice( 'Email inválido', 'error' );
                 Polen_Messages::set_message( 'Email inválido', Polen_Messages::TYPE_ERROR );
                 wp_redirect( site_url( self::BASE_PATH ) );
-                wp_die();
+                exit;
             }
             $tribute_list = Tributes_Model::get_all_by_email_creator( $email_creator );
             $GLOBALS['my_tributes'] = $tribute_list;
