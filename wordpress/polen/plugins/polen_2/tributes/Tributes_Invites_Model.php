@@ -116,7 +116,7 @@ class Tributes_Invites_Model
      * @param int
      * @return array stdClass[] wp_tributes_invites
      */
-    public static function get_all_by_tribute_ai( $tribute_id )
+    public static function get_all_by_tribute_id( $tribute_id )
     {
         global $wpdb;
         $table_name = self::table_name();
@@ -126,7 +126,6 @@ class Tributes_Invites_Model
         return $result;
     }
      
-
 
     /**
      * Pega um Invite pega Hash Unica
@@ -142,6 +141,28 @@ class Tributes_Invites_Model
         );
         return $result;
     }
+
+
+    /**
+     * Pega o total de videos enviados 
+     * 
+     * @param string
+     */
+    public static function get_videos_sent_and_not( $tribute_id )
+    {
+        global $wpdb;
+        $table_name = self::table_name();
+        $result = $wpdb->get_row(
+            $wpdb->prepare(
+                "SELECT ( SELECT COUNT( * ) FROM `{$table_name}` WHERE tribute_id = %s AND video_sent = '1' ) video_sent,
+                        ( SELECT COUNT( * ) FROM `{$table_name}` WHERE tribute_id = %s AND video_sent = '0' ) video_not_sent;",
+                        $tribute_id,
+                        $tribute_id
+            )
+        );
+        return $result;
+    }
+
 
     /**
      * Criar um Hash unica para o amigo criar um video

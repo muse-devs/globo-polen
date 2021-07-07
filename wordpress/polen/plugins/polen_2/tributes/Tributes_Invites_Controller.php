@@ -31,9 +31,9 @@ class Tributes_Invites_Controller
         try {
             for( $i = 0; $i < count( $emails ); $i++ ) {
                 $email = filter_var( $emails[ $i ], FILTER_VALIDATE_EMAIL );
-                $name = $names[ $i ];
+                $name  = $names[ $i ];
                 if( !empty( $email ) ) {
-                    $invite = $this->create_a_invites( $name, $email, $tribute->ID );
+                    $invite               = $this->create_a_invites( $name, $email, $tribute->ID );
                     $email_invite_content = \tributes_email_create_content_invite( $invite->hash );
                     tributes_send_email( $email_invite_content, $invite->name_inviter, $invite->email_inviter );
                 }
@@ -56,8 +56,21 @@ class Tributes_Invites_Controller
         $data_input[ 'email_inviter' ] = filter_var( $email_inviter, FILTER_VALIDATE_EMAIL );
         $data_input[ 'tribute_id' ]    = $tribute_id;
         $data_input[ 'hash' ]          = Tributes_Invites_Model::create_hash( $tribute_id );
-        $new_id = Tributes_Invites_Model::insert( $data_input );
+        $new_id      = Tributes_Invites_Model::insert( $data_input );
         $new_tribute = Tributes_Invites_Model::get_by_id( $new_id );
         return $new_tribute;
+    }
+
+
+    /**
+     * 
+     */
+    public function get_all_invite_by_tribute_id()
+    {
+        $tribute_id = filter_input( INPUT_POST, 'tribute_id' );
+        $nonce      = filter_input( INPUT_POST, 'security' );
+        $tributes   = Tributes_Invites_Model::get_all_by_tribute_id( $tribute_id );
+        wp_send_json_success( $tributes, 200 );
+        wp_die();
     }
 }

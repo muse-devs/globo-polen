@@ -1,4 +1,7 @@
 <?php
+
+use Polen\Tributes\Tributes_Invites_Model;
+
 defined('ABSPATH') || exit;
 
 global $tribute, $tribute_hash;
