@@ -90,6 +90,16 @@ class Polen_Cart_Item
     
     
     /**
+     * Retorna se a compra é referente a primeira compra
+     * @return string
+     */
+    public function get_first_order()
+    {
+        return $this->item->get_meta( 'first_order' );
+    }
+    
+    
+    /**
      * Pega se o video é permitido ser apresentado na pagina de detalhe do talento
      * @return type
      */

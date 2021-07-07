@@ -255,7 +255,7 @@ class Polen_Order
         //Polen Custom Meta Order_Item
         wc_add_order_item_meta( $order_item_id, 'offered_by'            , '', true );
         wc_add_order_item_meta( $order_item_id, 'video_to'              , 'to_myself', true );
-        wc_add_order_item_meta( $order_item_id, 'first_video'           , '1', true );
+        wc_add_order_item_meta( $order_item_id, 'first_order'           , '1', true );
         wc_add_order_item_meta( $order_item_id, 'name_to_video'         , 'Polen.me', true );
         wc_add_order_item_meta( $order_item_id, 'email_to_video'        , 'polen@polen.me', true );
         wc_add_order_item_meta( $order_item_id, 'video_category'        , 'Novidade', true );
