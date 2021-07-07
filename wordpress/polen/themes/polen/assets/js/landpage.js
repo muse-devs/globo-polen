@@ -15,7 +15,7 @@ form_landpage.addEventListener("submit", function (evt) {
 						"Enviado com sucesso",
 						"Seu cadastro foi efetuado com sucesso"
 					);
-					form_landpage.reset();
+					window.location.href = "success";
 				} else {
 					polError(result.data);
 				}
