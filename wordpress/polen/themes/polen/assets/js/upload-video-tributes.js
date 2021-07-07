@@ -44,7 +44,7 @@ window.onload = () => {
 		upload_video.file_size = file_input.files[0].size.toString();
 		jQuery
 			.post(
-				woocommerce_params.ajax_url + "?action=make_video_slot_vimeo",
+				woocommerce_params.ajax_url + "?action=upload-video-tribute",
 				upload_video,
 				(data, textStatus, jqXHR) => {
 					if (jqXHR.status == 200) {
@@ -57,7 +57,7 @@ window.onload = () => {
 						});
 						upload.start();
 					} else {
-						console.log("deu error");
+						console.log("deu erro");
 					}
 				}
 			)
