@@ -214,6 +214,7 @@ function polen_scripts() {
 
 	if (is_tribute_app()) {
 		wp_enqueue_script( 'tributes-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'tributes.js', array("jquery", "vuejs"), _S_VERSION, true );
+		wp_enqueue_script( 'tributes-scripts-video', TEMPLATE_URI . '/assets/js/' . $min . 'upload-video-tributes.js', array("jquery"), _S_VERSION, true );
 	}
 
 	wp_enqueue_style('polen-custom-styles', TEMPLATE_URI . '/assets/css/style.css', array(), _S_VERSION);

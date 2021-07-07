@@ -192,4 +192,24 @@
 	padding: 1.5rem;
 	border-radius: 9px;
 	border: 1px solid var(--dark);
+	.status {
+		display: inline-block;
+		font-size: 14px;
+	}
+	.bi,
+	.icon {
+		margin-right: 4px;
+	}
+	.icon-check-o {
+		font-size: 22px;
+	}
+}
+
+.invites-list {
+	a {
+		font-size: inherit;
+		font-weight: 400;
+		color: inherit;
+		text-decoration: underline;
+	}
 }
