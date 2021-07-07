@@ -192,4 +192,14 @@
 	padding: 1.5rem;
 	border-radius: 9px;
 	border: 1px solid var(--dark);
+	.status {
+		display: inline-block;
+		font-size: 16px;
+	}
+	.bi, .icon {
+		margin-right: 4px;
+	}
+	.icon-check-o {
+		font-size: 24px;
+	}
 }
