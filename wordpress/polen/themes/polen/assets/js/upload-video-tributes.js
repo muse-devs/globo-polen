@@ -44,7 +44,7 @@ window.onload = () => {
 		upload_video.file_size = file_input.files[0].size.toString();
 		jQuery
 			.post(
-				woocommerce_params.ajax_url + "?action=make_video_slot_vimeo",
+				woocommerce_params.ajax_url + "?action=tribute_create_vimeo_slot",
 				upload_video,
 				(data, textStatus, jqXHR) => {
 					if (jqXHR.status == 200) {
