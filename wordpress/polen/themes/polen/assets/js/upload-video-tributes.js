@@ -57,7 +57,7 @@ window.onload = () => {
 						});
 						upload.start();
 					} else {
-						console.log("deu error");
+						console.log("deu erro");
 					}
 				}
 			)
