@@ -203,6 +203,7 @@ class Polen_WooCommerce
     public function metabox_create_first_order()
     {
         global $post;
+        $product_id = $post->ID;
         if( file_exists( TEMPLATEPATH . '/woocommerce/admin/metaboxes/metabox-first-order.php' ) ) {
             require_once TEMPLATEPATH . '/woocommerce/admin/metaboxes/metabox-first-order.php';
         } else {

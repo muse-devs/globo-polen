@@ -214,7 +214,6 @@ class Polen_Order
      */
     public function create_first_order()
     {
-        Debug::def($_POST);
         $user = wp_get_current_user();
         if( !in_array( 'administrator', $user->roles ) ) {
             wp_send_json_error( false, 403 );
@@ -226,7 +225,8 @@ class Polen_Order
             'customer_note' => 'Primeiro Video',
             'created_via'   => 'creation_talent',
         );
-        $product_id = 48;//ID_OF_TALENT_CHOSEN :D;
+        $product_id = filter_input( INPUT_POST, 'product_id' );
+        // $product_id = 48;//ID_OF_TALENT_CHOSEN :D;
         $order = wc_create_order( $args );
         $order_id = $order->get_id();
         $product = wc_get_product( $product_id );
