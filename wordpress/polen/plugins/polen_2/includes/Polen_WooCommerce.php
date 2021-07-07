@@ -166,10 +166,17 @@ class Polen_WooCommerce
 
     public function add_metaboxes() {
         global $current_screen;
+
         if( $current_screen && ! is_null( $current_screen ) && isset( $current_screen->id ) && $current_screen->id == 'shop_order' && isset( $_REQUEST['action'] ) && $_REQUEST['action'] == 'edit' ) 
         {
             add_meta_box( 'Polen_Order_Details', 'Instruções', array( $this, 'metabox_order_details' ), 'shop_order', 'normal', 'low' );
             add_meta_box( 'Polen_Order_Details_Video_Info', 'Info do Video', array( $this, 'metabox_order_details_video_info' ), 'shop_order', 'normal', 'low' );
+        }
+
+        if( $current_screen && ! is_null( $current_screen ) && isset( $current_screen->id ) && $current_screen->id == 'product' && isset( $_REQUEST['action'] ) && $_REQUEST['action'] == 'edit' )  {
+            global $post;
+            $product_id = $post->ID;
+            add_meta_box( 'Polen_Product_First_Order', 'Primeira Order', array( $this, 'metabox_create_first_order' ), 'product', 'side', 'default' );
         }
     }
 
@@ -190,6 +197,16 @@ class Polen_WooCommerce
             require_once TEMPLATEPATH . '/woocommerce/admin/metaboxes/metabox-video-info.php';
         } else {
             require_once PLUGIN_POLEN_DIR . '/admin/partials/metaboxes/metabox-video-info.php';
+        }
+    }
+
+    public function metabox_create_first_order()
+    {
+        global $post;
+        if( file_exists( TEMPLATEPATH . '/woocommerce/admin/metaboxes/metabox-first-order.php' ) ) {
+            require_once TEMPLATEPATH . '/woocommerce/admin/metaboxes/metabox-first-order.php';
+        } else {
+            require_once PLUGIN_POLEN_DIR . '/admin/partials/metaboxes/metabox-first-order.php';
         }
     }
 
