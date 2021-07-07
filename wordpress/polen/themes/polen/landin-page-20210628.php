@@ -54,9 +54,6 @@ get_header();
 											<input type="hidden" name="utm_medium" value="<?= $utm_medium; ?>" />
 											<input type="hidden" name="utm_campaign" value="<?= $utm_campaign; ?>" />
 											<input type="hidden" name="signin_landpage_event" value="<?= $event; ?>" />
-											<input type="hidden" name="utm_source" value="<?= $utm_source; ?>" />
-											<input type="hidden" name="utm_medium" value="<?= $utm_medium; ?>" />
-											<input type="hidden" name="utm_campaign" value="<?= $utm_campaign; ?>" />
                                             <?php wp_nonce_field( 'landpage-signin', 'security' , true, true ); ?>
 										</div>
 										<div class="col-md-12">
