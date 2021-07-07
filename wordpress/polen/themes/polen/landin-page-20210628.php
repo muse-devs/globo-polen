@@ -23,6 +23,8 @@ $utm_source   = filter_input( INPUT_GET, 'utm_source' );
 $utm_medium   = filter_input( INPUT_GET, 'utm_medium' );
 $utm_campaign = filter_input( INPUT_GET, 'utm_campaign' );
 
+$lp_signin_success = get_query_var( 'lp_signin_success' );
+
 get_header();
 ?>
 <div class="landpage-card">
@@ -35,7 +37,15 @@ get_header();
 						</figure>
 					</div>
 					<div class="col-12 mt-3 col-md-8 pl-md-5">
-                    <?= $product->get_description(); ?>
+                    <?php
+						if( !empty( $lp_signin_success ) && $lp_signin_success == '1' ) {
+							echo "<h1 class='title'>Inscrição realizada com sucesso!</h1><p class='subtitle'>Enviaremos novidades para seu email.</p>";
+						} else {
+							echo $product->get_description();
+						}
+					?>
+
+					<?php if( empty( $lp_signin_success ) ) : ?>
 						<form action="./" method="POST" id="landpage-form" class="landpage-form">
 							<div class="row">
 								<div class="mt-4 col-md-9 mt-md-5">
@@ -63,6 +73,7 @@ get_header();
 								</div>
 							</div>
 						</form>
+					<?php endif; ?>
 					</div>
 				</div>
 			</div>
