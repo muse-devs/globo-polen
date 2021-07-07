@@ -194,12 +194,22 @@
 	border: 1px solid var(--dark);
 	.status {
 		display: inline-block;
-		font-size: 16px;
+		font-size: 14px;
 	}
-	.bi, .icon {
+	.bi,
+	.icon {
 		margin-right: 4px;
 	}
 	.icon-check-o {
-		font-size: 24px;
+		font-size: 22px;
+	}
+}
+
+.invites-list {
+	a {
+		font-size: inherit;
+		font-weight: 400;
+		color: inherit;
+		text-decoration: underline;
 	}
 }

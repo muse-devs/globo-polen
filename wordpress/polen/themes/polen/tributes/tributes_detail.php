@@ -42,17 +42,21 @@ function getIcon($done)
 				<h2 class="subtitle subtitle-tribute">Pessoas</h2>
 			</div>
 			<div class="col-md-12">
-				<div class="card-invite">
+				<div class="card-invite invites-list">
 					<?php foreach ($invites as $invite) : ?>
 						<div class="row mb-4">
 							<div class="col-md-5">
 								<input type="text" name="" id="" value="<?php echo $invite->name_inviter; ?>" class="form-control form-control-lg" disabled />
-								<span class="status"><?php getIcon($invite->video_sent); ?>Vídeo já foi enviado.</span>
+								<?php if ($invite->video_sent) : ?>
+									<span class="status"><?php getIcon(true); ?>Vídeo já foi enviado. <a href="#">Visualizar vídeo</a></span>
+								<?php else : ?>
+									<span class="status mt-1"><?php getIcon(false); ?><?php echo $invite->email_opened ? "Usuário abriu o e-mail" : "Usuário não finalizou o vídeo"; ?></span>
+								<?php endif; ?>
 							</div>
 							<div class="col-md-5">
 								<input type="email" name="" id="" value="<?php echo $invite->email_inviter; ?>" class="form-control form-control-lg" disabled />
 							</div>
-							<div class="col-md-2"></div>
+							<div class="col-md-2"><a href="#" class="d-inline-block pt-3">Reenviar e-mail</a></div>
 						</div>
 					<?php endforeach; ?>
 				</div>
