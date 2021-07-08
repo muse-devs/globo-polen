@@ -48,7 +48,7 @@ function getIcon($done)
 							<div class="col-md-5">
 								<input type="text" name="" id="" value="<?php echo $invite->name_inviter; ?>" class="form-control form-control-lg" disabled />
 								<?php if ($invite->video_sent) : ?>
-									<span class="status"><?php getIcon(true); ?>Vídeo já foi enviado. <a href="#">Visualizar vídeo</a></span>
+									<span class="status"><?php getIcon(true); ?>Vídeo já foi enviado.</span>
 								<?php else : ?>
 									<span class="status mt-1"><?php getIcon(false); ?><?php echo $invite->email_opened ? "Usuário abriu o e-mail" : "Usuário não finalizou o vídeo"; ?></span>
 								<?php endif; ?>
