@@ -4,6 +4,7 @@ const formCreateName = "form#form-create-tribute";
 const formCreate = document.querySelector(formCreateName);
 const slug = document.getElementById("slug");
 const nameInput = document.getElementById("name_honored");
+const formsResend = document.querySelectorAll(".resend-email");
 
 const SESSION_OBJ_INVITES = "polen_tributes_invites";
 
@@ -109,6 +110,15 @@ function createTribute(evt) {
 		});
 }
 
+function reSendEmail(evt) {
+	evt.preventDefault();
+	polAjaxForm(`#${evt.target.id}`, function(){
+		polMessage("Enviado", "e-mail foi enviado com sucesso");
+	}, function(res){
+		polError(res);
+	});
+}
+
 if (btn_play) {
 	btn_play.addEventListener("click", playVideo);
 }
@@ -120,6 +130,12 @@ if (slug) {
 
 if (formCreate) {
 	formCreate.addEventListener("submit", createTribute);
+}
+
+if (formsResend.length) {
+	formsResend.forEach(function (item) {
+		item.addEventListener("submit", reSendEmail);
+	});
 }
 
 if (document.getElementById("invite-friends")) {
@@ -176,8 +192,8 @@ if (document.getElementById("invite-friends")) {
 				);
 				this.updateDisk();
 			},
-			onChangeEmail: function(evt) {
-				if(evt.key == "Enter") {
+			onChangeEmail: function (evt) {
+				if (evt.key == "Enter") {
 					this.addFriend();
 				}
 			},

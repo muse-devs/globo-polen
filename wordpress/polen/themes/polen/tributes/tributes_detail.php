@@ -46,7 +46,7 @@ function getIcon($done)
 					<?php foreach ($invites as $invite) : ?>
 						<div class="row mb-4">
 							<div class="col-md-5">
-								<input type="text" name="" id="" value="<?php echo $invite->name_inviter; ?>" class="form-control form-control-lg" disabled />
+								<input type="text" value="<?php echo $invite->name_inviter; ?>" class="form-control form-control-lg" disabled />
 								<?php if ($invite->video_sent) : ?>
 									<span class="status"><?php getIcon(true); ?>Vídeo já foi enviado.</span>
 								<?php else : ?>
@@ -54,9 +54,15 @@ function getIcon($done)
 								<?php endif; ?>
 							</div>
 							<div class="col-md-5">
-								<input type="email" name="" id="" value="<?php echo $invite->email_inviter; ?>" class="form-control form-control-lg" disabled />
+								<input type="email" value="<?php echo $invite->email_inviter; ?>" class="form-control form-control-lg" disabled />
 							</div>
-							<div class="col-md-2"><a href="#" class="d-inline-block pt-3">Reenviar e-mail</a></div>
+							<div class="col-md-2">
+								<form action="./" id="form-<?php echo $invite->ID; ?>" method="POST" class="resend-email">
+									<input type="hidden" name="action" value="tribute_resend_email" />
+									<input type="hidden" name="invite_hash" value="<?php echo $invite->hash; ?>" />
+									<input type="submit" class="d-inline-block pt-3 send-button" value="Reenviar e-mail" />
+								</form>
+							</div>
 						</div>
 					<?php endforeach; ?>
 				</div>
