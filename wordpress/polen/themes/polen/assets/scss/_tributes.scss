@@ -213,3 +213,10 @@
 		text-decoration: underline;
 	}
 }
+
+.final-button {
+	display: none;
+	&.show {
+		display: block;
+	}
+}
