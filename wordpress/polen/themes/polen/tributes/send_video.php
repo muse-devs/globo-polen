@@ -1,6 +1,16 @@
 <?php
-$tribute_hash = get_query_var('tributes_hash');
-$invite_hash  = get_query_var('invite_hash');
+
+use Polen\Tributes\Tributes_Invites_Model;
+use Polen\Tributes\Tributes_Model;
+use Polen\Tributes\Tributes_Rewrite_Rules;
+
+$tribute_hash = get_query_var( Tributes_Rewrite_Rules::TRIBUTES_QUERY_VAR_TRIBUTES_HASH );
+$invite_hash  = get_query_var( Tributes_Rewrite_Rules::TRIBUTES_QUERY_VAR_TRIBUTES_INVITE_HASH );
+$invite = Tributes_Invites_Model::get_by_hash( $invite_hash );
+$tribute = Tributes_Model::get_by_hash( $tribute_hash );
+if( empty( $invite ) ) {
+	die('error to find invite');
+}
 // echo "Send Video: {$tributes_hash} {$invite_hash}";
 ?>
 
@@ -52,6 +62,9 @@ $invite_hash  = get_query_var('invite_hash');
 									<div id="video-file-name" class="text-truncate ml-2"></div>
 									<input type="file" class="form-control-file" id="file-video" name="file_data" accept="video/*">
 								</div>
+								<input type="hidden" id="tribute_hash" name="tribute_hash" value="<?= $tribute_hash; ?>">
+								<input type="hidden" id="tribute_invite_hash" name="invite_hash" value="<?= $invite->hash; ?>">
+								<input type="hidden" id="tribute_invite_id"   name="invite_id" value="<?= $invite->ID; ?>">
 								<button type="submit" id="video-send" class="send-video btn btn-primary btn-lg btn-block">Enviar</button>
 								<button id="video-rec-again" class="btn btn-outline-light btn-lg btn-block mt-3 video-rec">Não gostei, gravar outro video</button>
 							</form>
@@ -75,31 +88,31 @@ $invite_hash  = get_query_var('invite_hash');
 					</button>
 					<div class="body">
 						<div class="row d-flex align-items-center">
-							<div class="col-12">
+							<!-- <div class="col-12">
 								<p class="p">Vídeo de</p>
 								<span class="value small">asd</span>
-							</div>
+							</div> -->
 							<div class="col-12 mt-3">
 								<p class="p">Para</p>
-								<span class="value small">asd</span>
+								<span class="value small"><?= $tribute->name_honored; ?></span>
 							</div>
 						</div>
 						<div class="row mt-4 py-4 border-bottom border-top">
 							<div class="col">
 								<p class="p">Ocasião</p>
-								<span class="value small">asd</span>
+								<span class="value small"><?= $tribute->occasion; ?></span>
 							</div>
 						</div>
-						<div class="row mt-4">
+						<!-- <div class="row mt-4">
 							<div class="col">
 								<p class="p">e-mail de contato</p>
 								<span class="value small">asd</span>
 							</div>
-						</div>
+						</div> -->
 						<div class="row mt-4">
 							<div class="col">
 								<p class="p">Instruções</p>
-								<p class="text">asd</p>
+								<p class="text"><?= $tribute->welcome_message; ?></p>
 							</div>
 						</div>
 						<div class="row my-4">
