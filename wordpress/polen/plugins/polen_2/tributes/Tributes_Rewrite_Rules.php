@@ -119,6 +119,18 @@ class Tributes_Rewrite_Rules
         }
 
         if( $tribute_operation == self::TRIBUTES_OPERATION_SEND_VIDEO ) {
+            $tribute = Tributes_Model::get_by_hash( $tribute_hash );
+            $invite = Tributes_Invites_Model::get_by_hash( $invites_hash );
+
+            if( empty( $tribute ) || empty( $invite ) ) {
+                wp_safe_redirect( tribute_get_url_base_url( $tribute->hash, $invite->hash ) );
+                exit;
+            }
+
+            if ( $invite->video_sent == '1' ) {
+                wp_safe_redirect( tribute_get_url_send_video_success( $tribute->hash, $invite->hash ) );
+                exit;
+            }
             return get_template_directory() . '/tributes/send_video.php';
         }
 
