@@ -43,12 +43,14 @@ class Polen_Signin_LP_Lead
      */
     public function rewrites()
     {
-        add_rewrite_rule( 'lp/([a-z0-9-]+)[/]?$', 'index.php?lp_product_sku=$matches[1]', 'top' );
+        add_rewrite_rule( 'lp/([^/]*)/?/success', 'index.php?lp_product_sku=$matches[1]&lp_signin_success=1', 'top' );
+        add_rewrite_rule( 'lp/([^/]*)/?',         'index.php?lp_product_sku=$matches[1]', 'top' );
     }
 
     public function query_vars( $query_vars )
     {
         $query_vars[] = 'lp_product_sku';
+        $query_vars[] = 'lp_signin_success';
         return $query_vars;
     }
 

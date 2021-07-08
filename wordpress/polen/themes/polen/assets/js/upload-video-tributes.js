@@ -112,7 +112,7 @@ function videoIsOk() {
 }
 
 let completeHandler = () => {
-	polSpinner();
+	// polSpinner();
 	// content_upload.innerHTML =
 	// 	'<p class="my-4"><strong id="progress-value">Enviado</strong></p>';
 	// let obj_complete_order = {
@@ -127,14 +127,15 @@ let completeHandler = () => {
 		// })
 		// .fail(errorHandler)
 		// .complete(function () {
-			polSpinner(CONSTANTS.HIDDEN);
+			// polSpinner(CONSTANTS.HIDDEN);
 		// });
-		changeIcon();
 		changeText();
-		alert('AASSS');
+		changeIcon(true);
 };
+
 let errorHandler = (data, textStatus, jqXHR) => {
-	alert("Erro no envio do arquivo, tente novamente");
+	console.log(data);
+	setSessionMessage(CONSTANTS.ERROR, null, "Erro no envio do arquivo, tente novamente");
 	document.location.reload();
 };
 
@@ -145,10 +146,15 @@ function progressFunction(loaded, total) {
 }
 
 function changeText() {
-	document.getElementById("info").innerText = "Vídeo gravado com sucesso";
+	document.getElementById("video-message").innerText = "Vídeo enviado com sucesso";
 }
 
-function changeIcon() {
+function changeIcon(final) {
 	document.querySelector(".image.wait").classList.remove("show");
+	document.querySelector("#content-upload").classList.remove("show");
 	document.querySelector(".image.complete").classList.add("show");
+	document.querySelector(".content-info").classList.add("show");
+	if(final) {
+		document.querySelector(".final-button").classList.add("show");
+	}
 }
