@@ -206,11 +206,13 @@
 }
 
 .invites-list {
-	a {
+	a, .send-button {
 		font-size: inherit;
 		font-weight: 400;
 		color: inherit;
 		text-decoration: underline;
+		background: none;
+		border: none;
 	}
 }
 
