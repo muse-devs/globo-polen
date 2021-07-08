@@ -57,7 +57,7 @@ function tribute_get_url_invites( $tribute_hash ) {
  * @return string URL completa
  */
 function tribute_get_url_send_video_success( $tribute_hash, $invite_hash ) {
-    return site_url( Tributes_Rewrite_Rules::BASE_PATH . "/{$tribute_hash}/{$invite_hash}/sucesso" );
+    return site_url( Tributes_Rewrite_Rules::BASE_PATH . "/{$tribute_hash}/invite/{$invite_hash}/sucesso" );
 }
 
 
