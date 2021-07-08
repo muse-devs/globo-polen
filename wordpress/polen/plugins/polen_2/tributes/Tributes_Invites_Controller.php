@@ -97,18 +97,23 @@ class Tributes_Invites_Controller
         $client_id = $Polen_Plugin_Settings['polen_vimeo_client_id'];
         $client_secret = $Polen_Plugin_Settings['polen_vimeo_client_secret'];
         $token = $Polen_Plugin_Settings['polen_vimeo_access_token'];
-        
-        // $order_id = filter_input( INPUT_POST, 'order_id', FILTER_SANITIZE_NUMBER_INT );
-        // $file_size = filter_input( INPUT_POST, 'file_size', FILTER_SANITIZE_NUMBER_INT );
-        // $name_to_video = filter_input( INPUT_POST, 'name_to_video' );
+
         //TODO:
+        $tribute_hash = filter_input( INPUT_POST, 'tribute_hash' );
         $invite_hash = filter_input( INPUT_POST, 'invite_hash' );
         $invite_id   = filter_input( INPUT_POST, 'invite_id', FILTER_SANITIZE_NUMBER_INT );
         $file_size   = filter_input( INPUT_POST, 'file_size', FILTER_SANITIZE_NUMBER_INT );
+
+        $tribute = Tributes_Model::get_by_hash( $tribute_hash );
+        $invite = Tributes_Invites_Model::get_by_id( $invite_id );
+
+        // TODO: ver se o tribute é o mesmo do invite
+
         $name_to_video = '';
         try {
             $lib = new Vimeo( $client_id, $client_secret, $token );
             $args = Polen_Vimeo_Vimeo_Options::get_option_insert_video( $file_size, $name_to_video );
+            $args[ 'name' ] = "Tributo para {$tribute->name_honored}";
             $vimeo_response = $lib->request( '/me/videos', $args, 'POST' );
             
             $response = new Polen_Vimeo_Response( $vimeo_response );
@@ -117,21 +122,14 @@ class Tributes_Invites_Controller
                 throw new VimeoRequestException( $response->get_developer_message(), 500 );
             }
             
-            // $order = wc_get_order( $order_id );
-            // $cart_item = Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
-            
             $data_invite_update = array(
+                'ID'                     => $invite->ID,
                 'vimeo_id'               => $response->get_vimeo_id(),
-                // 'vimeo_thumbnail'        => '',
                 'vimeo_process_complete' => '0',
                 'vimeo_link'             => $response->get_vimeo_link(),
-                // 'vimeo_url_file_play'    => ''
             );
 
-            // $video_info = $this->mount_video_info( $order, $cart_item, $response);
-            // $video_info->insert();
-            //TODO: Update o invite
-            
+            Tributes_Invites_Model::update( $data_invite_update );
             wp_send_json_success( $response->response, 200 );
         } catch ( ExceptionInterface $e ) {
             wp_send_json_error( $e->getMessage(), $e->getCode() );
