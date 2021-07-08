@@ -37,7 +37,7 @@ $occasions = Tributes_Occasions_Model::get_all();
 					<p class="mb-4">
 						<label for="deadline">Qual o prazo?</label>
 						<br />Recomendamos vários dias antes da entrega do tributo para que você tenha tempo de editar seu vídeo.
-						<input type="text" name="deadline" id="deadline" placeholder="dd/mm/aaaa" class="form-control form-control-lg" required />
+						<input type="text" name="deadline" id="deadline" placeholder="dd/mm/aaaa" maxlength="10" onkeypress="mascaraData( this, event )" class="form-control form-control-lg masc-data" required />
 					</p>
 					<p class="mb-4">
 						<label for="creator_name">Qual o seu nome?</label>
@@ -50,10 +50,6 @@ $occasions = Tributes_Occasions_Model::get_all();
 					<p class="mb-4">
 						<label for="welcome_message">Instruções</label>
 						<textarea name="welcome_message" id="welcome_message" cols="30" rows="5" class="form-control form-control-lg" required></textarea>
-					</p>
-					<p class="mb-5">
-						<label for="question">Que perguntas você deseja que as pessoas respondam em seus vídeos Tributo?</label>
-						<input type="text" name="question" id="question" placeholder="Qual sua coisa favorita sobre Fulano?" class="form-control form-control-lg" required />
 					</p>
 					<div class="row">
 						<div class="col-md-4 m-md-auto">
