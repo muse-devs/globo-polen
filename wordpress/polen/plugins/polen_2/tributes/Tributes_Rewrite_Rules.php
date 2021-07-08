@@ -177,6 +177,10 @@ class Tributes_Rewrite_Rules
         if( $tribute_operation == self::TRIBUTES_OPERATION_SUCCESS ) {
             $tribute = Tributes_Model::get_by_hash( $tribute_hash );
             $invite = Tributes_Invites_Model::get_by_hash( $invites_hash );
+            if( $invite->video_sent == '0' ) {
+                $data_update = array('ID' => $invite->ID, 'video_sent' => '1');
+                Tributes_Invites_Model::update( $data_update );
+            }
             $GLOBALS[ 'tribute' ] = $tribute;
             $GLOBALS[ 'invite' ]  = $invite;
             return get_template_directory() . '/tributes/send_video_success.php';
