@@ -33,7 +33,7 @@
 	<?php wp_body_open(); ?>
 	<?php include_once TEMPLATE_DIR . '/inc/analitics_init_body.php'; ?>
 	<div id="page" class="container-fluid tributes">
-		<header id="masthead" class="header border-bottom">
+		<header id="masthead" class="header border-bottom mb-4">
 			<div class="container">
 				<div class="row pt-3 pb-4">
 					<div class="col-12 logo-tribute-wrap<?php echo is_tribute_home() ? '' : ' text-center'; ?>">
