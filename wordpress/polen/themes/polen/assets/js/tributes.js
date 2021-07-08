@@ -112,7 +112,7 @@ function createTribute(evt) {
 
 function reSendEmail(evt) {
 	evt.preventDefault();
-	polAjaxForm(`#${evt.target.id}`, function(){
+	polAjaxForm(`form#${evt.target.id}`, function(){
 		polMessage("Enviado", "e-mail foi enviado com sucesso");
 	}, function(res){
 		polError(res);
