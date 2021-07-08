@@ -33,7 +33,7 @@ class Tributes_Invites_Controller
         }
 
         $emails = $_POST[ 'friends' ][ 'email' ];
-        $names = $_POST[ 'friends' ][ 'name' ];
+        $names  = $_POST[ 'friends' ][ 'name' ];
         try {
             for( $i = 0; $i < count( $emails ); $i++ ) {
                 $email = filter_var( $emails[ $i ], FILTER_VALIDATE_EMAIL );
@@ -149,10 +149,26 @@ class Tributes_Invites_Controller
         //TODO: NONCE
         $invite_hash = filter_input( INPUT_POST, 'invite_hash' );
         $invite      = Tributes_Invites_Model::get_by_hash( $invite_hash );
+
         if( empty( $invite ) ) {
             wp_send_json_error( 'Convite inválido', 404 );
             wp_die();
         }
+        
+        $last_email = strtotime( $invite->last_send_email );
+        $current_time = strtotime( 'now' );
+        $diff = $current_time - $last_email;
+        if( 3600 > $diff ) {
+            wp_send_json_error( 'Aguarde 1h para reenviar um email', 500 );
+            wp_die();
+        }
+        
+        $data_update = array(
+            'ID' => $invite->ID,
+            'last_send_email' => date('Y-m-d H:i:s')
+        );
+        Tributes_Invites_Model::update( $data_update );
+
         $email_invite_content = \tributes_email_create_content_invite( $invite->hash );
         if( tributes_send_email( $email_invite_content, $invite->name_inviter, $invite->email_inviter ) ) {
             wp_send_json_success( 'Convite enviado com sucesso', 200 );
