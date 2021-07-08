@@ -41,7 +41,7 @@ class Tributes_API_Router extends \WP_REST_Controller
         add_action( 'wp_ajax_nopriv_get_invites_by_tribute', [ $controller, 'get_all_invite_by_tribute_id' ] );
 
         add_action( 'wp_ajax_tribute_resend_email',        [ $controller, 'resend_email' ] );
-        add_action( 'wp_ajax_nopriv_tribute__resend_email', [ $controller, 'resend_email' ] );
+        add_action( 'wp_ajax_nopriv_tribute_resend_email', [ $controller, 'resend_email' ] );
 
         add_action( 'wp_ajax_tribute_create_vimeo_slot',        [ $controller, 'make_video_slot_vimeo' ] );
         add_action( 'wp_ajax_nopriv_tribute_create_vimeo_slot', [ $controller, 'make_video_slot_vimeo' ] );

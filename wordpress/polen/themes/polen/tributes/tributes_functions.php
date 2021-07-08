@@ -1,6 +1,6 @@
 <?php
 
-use Polen\Tributes\{ Tributes, Tributes_Occasions_Model, Tributes_Questions_Model };
+use Polen\Tributes\{ Tributes, Tributes_Occasions_Model, Tributes_Questions_Model, Tributes_Rewrite_Rules};
 
 if( !defined( 'ABSPATH' ) ) {
     echo 'Silence is Golden';
@@ -22,6 +22,22 @@ function is_tribute_create() {
     return Tributes::is_tributes_create();
 }
 
+
+
+/****************************************
+ ******************** URLs **************
+ ****************************************/
+
+ /**
+ * Pega a URL da pagina que faz os convites
+ * 
+ * @param string $tribute_hash
+ * @return string URL completa
+ */
+function tribute_get_url_base_url() {
+    return site_url( Tributes_Rewrite_Rules::BASE_PATH );
+}
+
 /**
  * Pega a URL da pagina que faz os convites
  * 
@@ -29,8 +45,26 @@ function is_tribute_create() {
  * @return string URL completa
  */
 function tribute_get_url_invites( $tribute_hash ) {
-    return site_url( "tributes/{$tribute_hash}" );
+    return site_url( Tributes_Rewrite_Rules::BASE_PATH . "/{$tribute_hash}" );
 }
+
+
+/**
+ * Pega a URL da pagina de sucesso depois que envia o video
+ * 
+ * @param string $tribute_hash
+ * @param string $invite_hash
+ * @return string URL completa
+ */
+function tribute_get_url_send_video_success( $tribute_hash, $invite_hash ) {
+    return site_url( Tributes_Rewrite_Rules::BASE_PATH . "/{$tribute_hash}/{$invite_hash}/sucesso" );
+}
+
+
+
+//*****************************************/
+
+
 
 /**
  * Pega todas as questões cadastradas

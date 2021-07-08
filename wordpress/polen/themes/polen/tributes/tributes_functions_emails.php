@@ -1,6 +1,6 @@
 <?php
 
-use Polen\Tributes\{ Tributes_Invites_Model, Tributes_Model };
+use Polen\Tributes\{ Tributes_Invites_Model, Tributes_Model, Tributes_Rewrite_Rules};
 
 if( !defined( 'ABSPATH' ) ) {
     echo 'Silence is Golden';
@@ -34,14 +34,14 @@ function tributes_get_path_email_sended_complete() {
  * Cria o link para o Botao Envie Seu Video no email do invite
  */
 function tributes_create_link_email_send_video( $invite_hash ) {
-    return site_url( "tributes/{$invite_hash}/set-email-clicked" );
+    return site_url( Tributes_Rewrite_Rules::BASE_PATH . "/{$invite_hash}/set-email-clicked" );
 }
 
 /**
  * Cria o link da imagem de 1px 1px que seta o email como aberto
  */
 function tributes_create_link_set_email_opened( $invite_hash ) {
-    return site_url( "tributes/{$invite_hash}/set-email-readed" ) . '/';
+    return site_url( Tributes_Rewrite_Rules::BASE_PATH . "/{$invite_hash}/set-email-readed" ) . '/';
 }
 
 /**
@@ -113,13 +113,13 @@ function tributes_email_content_invites_sended( $tribute ) {
     $date = date('d \d\e F \d\e o', strtotime( $tribute->deadline ));
     $content_formatted = sprintf(
         $email_content,
-        $tribute->creator_name,// nome_do_invitador,
-        implode( ', ', $names ),// lista de nomes nos inites
-        $date,// data "30 de junho de 2021",
-        $tribute->creator_name,// nome_do_invitador,
-        $tribute->welcome_message,// tribute mensagem,
-        $tribute->question,// pergunta do tributo,
-        tribute_get_url_invites( $tribute->hash )// link para revisar convites
+        $tribute->creator_name,
+        implode( ', ', $names ),
+        $date,
+        $tribute->creator_name,
+        $tribute->welcome_message,
+        $tribute->question,
+        tribute_get_url_invites( $tribute->hash )
     );
     return $content_formatted;
 }
