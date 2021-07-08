@@ -3,6 +3,7 @@ const video_tribute = document.getElementById("tribute-home-video");
 const formCreateName = "form#form-create-tribute";
 const formCreate = document.querySelector(formCreateName);
 const slug = document.getElementById("slug");
+const nameInput = document.getElementById("name_honored");
 
 const SESSION_OBJ_INVITES = "polen_tributes_invites";
 
@@ -26,6 +27,27 @@ function slugValidate(valid, message) {
 		slug_message.classList.add("error");
 	}
 	slug_message.innerText = message;
+}
+
+function getSlug() {
+	if (slug.value) {
+		return;
+	}
+	slug.value = polSlugfy(nameInput.value);
+	checkSlug();
+}
+
+function mascaraData(campo, e) {
+	var kC = document.all ? event.keyCode : e.keyCode;
+	var data = campo.value;
+
+	if (kC != 8 && kC != 46) {
+		if (data.length == 2) {
+			campo.value = data += "/";
+		} else if (data.length == 5) {
+			campo.value = data += "/";
+		} else campo.value = data;
+	}
 }
 
 function checkSlug() {
@@ -93,6 +115,7 @@ if (btn_play) {
 
 if (slug) {
 	slug.addEventListener("focusout", checkSlug);
+	nameInput.addEventListener("focusout", getSlug);
 }
 
 if (formCreate) {
@@ -145,12 +168,18 @@ if (document.getElementById("invite-friends")) {
 				this.friends.push({ name: this.name, email: this.email });
 				this.resetAddFriend();
 				this.updateDisk();
+				document.getElementById("add-name").focus();
 			},
 			removeFriend: function (email) {
 				this.friends = this.friends.filter(
 					(friend) => friend.email != email
 				);
 				this.updateDisk();
+			},
+			onChangeEmail: function(evt) {
+				if(evt.key == "Enter") {
+					this.addFriend();
+				}
 			},
 			sendFriends: function () {
 				submitFriends(this);
