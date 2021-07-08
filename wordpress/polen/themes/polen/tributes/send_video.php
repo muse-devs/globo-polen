@@ -43,8 +43,6 @@ if( empty( $invite ) ) {
 									<figure class="image complete">
 										<img src="<?php echo TEMPLATE_URI ?>/tributes/assets/img/done.svg" alt="Gravar vídeo agora" />
 										<p id="video-message" class="py-2">Vídeo carregado com sucesso</p>
-										<?php //TODO link final ?>
-										<a href="#" id="final-button" class="btn btn-primary btn-lg btn-block final-button">Finalizar</a>
 									</figure>
 								</div>
 								<div id="content-upload" class="mt-4 content-upload">

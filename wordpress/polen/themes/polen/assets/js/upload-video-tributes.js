@@ -129,6 +129,7 @@ let completeHandler = () => {
 		// .complete(function () {
 			// polSpinner(CONSTANTS.HIDDEN);
 		// });
+		window.location.href = "./sucesso";
 		changeText();
 		changeIcon(true);
 };
