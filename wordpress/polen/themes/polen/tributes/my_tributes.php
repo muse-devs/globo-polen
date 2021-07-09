@@ -17,7 +17,7 @@ get_header('tributes');
             $result_sucess = Tributes_Invites_Model::get_videos_sent_and_not( $tribute->ID );
             $sent = $result_sucess->video_sent;
             $not_sent = $result_sucess->video_not_sent;
-            
+
             $total_success = ( $sent / ( $sent + $not_sent ) ) * 100;
             if( ( $sent + $not_sent ) == 0 ) {//divisão por zero
                 $total_success = 0;
@@ -25,7 +25,7 @@ get_header('tributes');
         ?>
 			<div class="row mb-4 pb-3 border-bottom">
 				<div class="col-md-3">
-					<p>Pra quem é o tributo?</p>
+					<p>Pra quem é o Colab?</p>
 					<p><strong><?php echo $tribute->name_honored; ?></strong></p>
 				</div>
 				<div class="col-md-3">

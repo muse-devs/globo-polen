@@ -45,7 +45,7 @@ function tributes_create_link_set_email_opened( $invite_hash ) {
 }
 
 /**
- * Enviar um email do tributo
+ * Enviar um email do Colab
  * @param string
  * @param string
  * @param string

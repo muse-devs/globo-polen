@@ -10,7 +10,7 @@
 			<div class="col-md-6 d-flex align-items-center">
 				<div class="row">
 					<div class="col-md-12">
-						<h1 class="title text-center text-md-left">Dê o <span class="color">presente mais significativo</span> do mundo</h1>
+						<h1 class="title main-title text-center text-md-left">Dê o <span class="color">presente mais significativo</span> do mundo</h1>
 						<p class="mt-4 text-center text-md-left">O Tributo simplifica a criação de um vídeo-presente em grupo que você pode dar em qualquer ocasião importante.</p>
 						<div class="row d-none d-md-block">
 							<div class="col-10 mt-4">
@@ -102,7 +102,7 @@
 				<div class="box-round p-4 p-md-5">
 					<div class="row align-items-center">
 						<div class="text-center text-md-left col-md-7">
-							<div class="title">Já pediu o seu tributo?<br /><small>Acompanhe o seu pedido</small></div>
+							<div class="title">Já pediu o seu Colab?<br /><small>Acompanhe o seu pedido</small></div>
 						</div>
 						<div class="col-md-5 mt-3">
 							<form action="<?php echo $dashboard_url; ?>" method="POST">

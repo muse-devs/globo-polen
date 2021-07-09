@@ -5,15 +5,15 @@ use Polen\Tributes\Tributes_Model;
 
 global $tribute;
 
-$invites = Tributes_Invites_Model::get_all_by_tribute_id( $tribute->ID );
+$invites = Tributes_Invites_Model::get_all_by_tribute_id($tribute->ID);
 $hash = $tribute->hash;
 
-$result_sucess = Tributes_Invites_Model::get_videos_sent_and_not( $tribute->ID );
+$result_sucess = Tributes_Invites_Model::get_videos_sent_and_not($tribute->ID);
 $sent = $result_sucess->video_sent;
 $not_sent = $result_sucess->video_not_sent;
 
-$total_success = ( $sent / ( $sent + $not_sent ) ) * 100;
-if( ( $sent + $not_sent ) == 0 ) {//divisão por zero
+$total_success = ($sent / ($sent + $not_sent)) * 100;
+if (($sent + $not_sent) == 0) { //divisão por zero
 	$total_success = 0;
 }
 
@@ -26,6 +26,8 @@ function getIcon($done)
 	}
 }
 
+$is_complete = true;
+
 ?>
 
 <?php get_header('tributes'); ?>
@@ -34,7 +36,7 @@ function getIcon($done)
 	<div class="container py-3 tribute-container tribute-app">
 		<div class="row mb-4 py-3 border-bottom">
 			<div class="col-md-3">
-				<p>Pra quem é o tributo?</p>
+				<p>Pra quem é o Colab?</p>
 				<p><strong><?php echo $tribute->name_honored; ?></strong></p>
 			</div>
 			<div class="col-md-3">
@@ -65,15 +67,24 @@ function getIcon($done)
 							<div class="col-md-5">
 								<input type="email" value="<?php echo $invite->email_inviter; ?>" class="form-control form-control-lg" disabled />
 							</div>
-							<div class="col-md-2">
-								<form action="./" id="form-<?php echo $invite->ID; ?>" method="POST" class="resend-email">
-									<input type="hidden" name="action" value="tribute_resend_email" />
-									<input type="hidden" name="invite_hash" value="<?php echo $invite->hash; ?>" />
-									<input type="submit" class="d-inline-block pt-3 send-button" value="Reenviar e-mail" />
-								</form>
-							</div>
+							<?php if (!$invite->video_sent) : $is_complete = false; ?>
+								<div class="col-md-2">
+									<form action="./" id="form-<?php echo $invite->ID; ?>" method="POST" class="resend-email">
+										<input type="hidden" name="action" value="tribute_resend_email" />
+										<input type="hidden" name="invite_hash" value="<?php echo $invite->hash; ?>" />
+										<input type="submit" class="d-inline-block pt-3 send-button" value="Reenviar e-mail" />
+									</form>
+								</div>
+							<?php endif; ?>
 						</div>
 					<?php endforeach; ?>
+					<?php if ($is_complete) : ?>
+						<div class="row">
+							<div class="col-12">
+								<p>Todos os vídeos já foram enviados. Você receberá um e-mail quando seu Colab estiver pronto</p>
+							</div>
+						</div>
+					<?php endif; ?>
 				</div>
 			</div>
 		</div>
