@@ -545,7 +545,7 @@ class Polen_Talent {
                         FROM {$wpdb->posts} AS posts
                         INNER JOIN {$wpdb->prefix}woocommerce_order_items AS order_items ON posts.ID = order_items.order_id
                         INNER JOIN {$wpdb->prefix}woocommerce_order_itemmeta AS oim_line_total ON (order_items.order_item_id = oim_line_total.order_item_id)
-                            AND (oim_line_total.meta_key = '_line_total')
+                            AND (oim_line_total.meta_key = '_line_subtotal')
                         INNER JOIN {$wpdb->prefix}woocommerce_order_itemmeta AS oim_product ON order_items.order_item_id = oim_product.order_item_id 
                         WHERE posts.post_type IN ( 'shop_order' )
                         AND posts.post_status IN ( {$status} ) AND ( ( oim_product.meta_key IN ('_product_id','_variation_id') 
