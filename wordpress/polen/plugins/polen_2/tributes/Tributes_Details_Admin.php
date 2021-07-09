@@ -71,17 +71,22 @@ class Tributes_Details_Admin
                     <tr>
                         <th>Nome</th>
                         <th>Email</th>
+                        <th>Abriu Email</th>
+                        <th>Clicou Email</th>
                         <th>Enviado</th>
                         <th>Completo</th>
                         <th>Link download</th>
                     </tr>
                 <?php foreach( $invites as $invite ) : ?>
+                    <?php $download_element = ($invite->vimeo_process_complete == '1' ) ? '<a href="#" class="download_vimeo_link" data="'.$invite->ID.'">Download</a>' : ''; ?>
                     <tr>
-                        <td><?= $invite->email_inviter;?></td>
                         <td><?= $invite->name_inviter;?></td>
+                        <td><?= $invite->email_inviter;?></td>
+                        <td><?= $this->show_icon_if_row_table_is_1( $invite->email_opened );?></td>
+                        <td><?= $this->show_icon_if_row_table_is_1( $invite->email_clicked );?></td>
                         <td><?= $this->show_icon_if_row_table_is_1( $invite->video_sent );?></td>
                         <td><?= $this->show_icon_if_row_table_is_1( $invite->vimeo_process_complete );?></td>
-                        <td><a href="#" class="download_vimeo_link" data="<?= $invite->ID;?>">Download</a></td>
+                        <td><?= $download_element; ?></td>
                     </tr>
                 <?php endforeach; ?>
                 </table>
@@ -95,7 +100,7 @@ class Tributes_Details_Admin
                             <p>
                                 <label>Depois de editar o video final e subir no Vimeo, adicionar o VimeoID aqui: ex /videos/572785228:</label>
                                 <br />
-                                <input type="text" name="vimeo_id" size="50" placeholder="" value="/videos/572838785"/>
+                                <input type="text" name="vimeo_id" size="50" placeholder="" value=""/>
                                 <input type="hidden" name="tribute_id" value="<?= $tribute_id; ?>"/>
                             </p>
                         </div><!-- #universal-message-container -->
@@ -187,10 +192,12 @@ class Tributes_Details_Admin
             );
             Tributes_Model::update( $data_update );
 
-            if( !$this->resend_email_complete_success( $tribute_id ) ) {
-                throw new \Exception( 'Erro no envio do email mas o Colab foi concluído. Reenvie o email', 500 );
-            }
+            // if( !$this->resend_email_complete_success( $tribute_id ) ) {
+            //     throw new \Exception( 'Erro no envio do email mas o Colab foi concluído. Reenvie o email', 500 );
+            // }
 
+            
+            $this->resend_email_complete_success( $tribute_id );
             wp_send_json_success( 'success', 200 );
         } catch ( \Exception $e ) {
             wp_send_json_error( $e->getMessage(), $e->getCode() );
@@ -203,7 +210,13 @@ class Tributes_Details_Admin
     {
         $tribute = Tributes_Model::get_by_id( $tribute_id );
         $email_content = tributes_email_content_complete_tribute( $tribute );
-        return tributes_send_email( $email_content, $tribute->creator_name, $tribute->creator_email );
+        tributes_send_email( $email_content, $tribute->creator_name, $tribute->creator_email );
+        $invites = Tributes_Invites_Model::get_all_video_sent_by_tribute_id( $tribute_id );
+        foreach( $invites as $invite ) {
+            $email_content_invites = tributes_email_content_complete_tribute_to_invites( $tribute, $invite );
+            tributes_send_email( $email_content_invites, $invite->name_inviter, $invite->email_inviter );
+        }
+        return true;
     }
 
 
