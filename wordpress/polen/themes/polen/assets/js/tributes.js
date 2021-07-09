@@ -206,7 +206,7 @@ if (document.getElementById("form-create-tribute")) {
 		},
 		methods: {
 			maskDate: function (evt) {
-				if (!/\d/.test(evt.key)) {
+				if (/\D/.test(evt.key)) {
 					this.date = this.date.replace(evt.key, "");
 					return;
 				}
