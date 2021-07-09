@@ -38,6 +38,17 @@ function tribute_get_url_base_url() {
     return site_url( Tributes_Rewrite_Rules::BASE_PATH );
 }
 
+
+ /**
+ * Pega a URL da pagina de detalhes do tributo
+ * 
+ * @param string $tribute_hash
+ * @return string URL completa
+ */
+function tribute_get_url_tribute_detail( $tribute_hash ) {
+    return site_url( Tributes_Rewrite_Rules::BASE_PATH . "/{$tribute_hash}/detalhes" );
+}
+
 /**
  * Pega a URL da pagina que faz os convites
  * 
