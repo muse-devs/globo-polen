@@ -1,11 +1,21 @@
 <?php
 
 use Polen\Tributes\Tributes_Invites_Model;
+use Polen\Tributes\Tributes_Model;
 
 global $tribute;
 
-$invites = Tributes_Invites_Model::get_all_by_tribute_id($tribute->ID);
+$invites = Tributes_Invites_Model::get_all_by_tribute_id( $tribute->ID );
 $hash = $tribute->hash;
+
+$result_sucess = Tributes_Invites_Model::get_videos_sent_and_not( $tribute->ID );
+$sent = $result_sucess->video_sent;
+$not_sent = $result_sucess->video_not_sent;
+
+$total_success = ( $sent / ( $sent + $not_sent ) ) * 100;
+if( ( $sent + $not_sent ) == 0 ) {//divisão por zero
+	$total_success = 0;
+}
 
 function getIcon($done)
 {
@@ -16,7 +26,6 @@ function getIcon($done)
 	}
 }
 
-//video_sent / email_opened / email_clicked
 ?>
 
 <?php get_header('tributes'); ?>
