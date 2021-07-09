@@ -1,7 +1,7 @@
 <?php get_header('tributes'); ?>
 
 <?php //TODO ajustar URLs ?>
-<?php $create_url = "./create"; ?>
+<?php $create_url = tribute_get_url_new_tribute(); ?>
 <?php $dashboard_url = "./meus-tributos"; ?>
 
 <main class="overflow-hidden">

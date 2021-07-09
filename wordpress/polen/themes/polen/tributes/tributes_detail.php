@@ -47,6 +47,16 @@ $is_complete = true;
 				<p>% de sucesso</p>
 				<p><strong><?php echo number_format($total_success); ?>%</strong></p>
 			</div>
+			<div class="col-md-3">
+				<p>Concluido</p>
+				<p><strong><?php echo $tribute->completed == '1' ? 'Sim' : 'Não'; ?></strong></p>
+			</div>
+		<?php if( $tribute->completed == '1' ) : ?>
+			<div class="col-md-3">
+				<p>Link para o Video</p>
+				<p><strong><a href="<?php echo tribute_get_url_final_video( $tribute->slug ); ?>"><?php echo tribute_get_url_final_video( $tribute->slug ); ?></a></strong></p>
+			</div>
+		<?php endif; ?>
 		</div>
 		<div class="row">
 			<div class="col-md-12 mt-4">

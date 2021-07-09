@@ -18,8 +18,6 @@
 <p>Mensagem de boas-vindas e instruções de %d:</p>
 <p>%d</p>
 
-<p>Perguntas a serem respondidas em seu vídeo:</p>
-<p>%s</p>
 <a href="%s">Revisar convites</a>
 </body>
 </html>
