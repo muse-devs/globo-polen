@@ -47,12 +47,16 @@ class Tributes_Details_Admin
             <div>
                 <table class="wp-list-table widefat fixed table-view-list">
                     <tr>
+                        <th>Criador</th>
+                        <th>Email</th>
                         <th>Tx sucesso</th>
                         <th>Link</th>
                         <th>Prazo</th>
                         <th>Concluido</th>
                     </tr>
                     <tr>
+                        <td><?= $tribute->creator_name;?></td>
+                        <td><?= $tribute->creator_email;?></td>
                         <td><?= $tribute_success;?></td>
                         <td><a href="<?= tribute_get_url_tribute_detail( $tribute->hash );?>" target="_blank">Ir para o tributo</a></td>
                         <td><?= $deadline;?></td>
@@ -111,10 +115,6 @@ class Tributes_Details_Admin
                                 Video final: <a href="http://vimeo.com<?= $tribute->vimeo_id; ?>" target="_blank"><?= $tribute->vimeo_id; ?></a>
                             </p>
                         </div><!-- #universal-message-container -->
-                        <?php
-                            wp_nonce_field( 'complete_tribute', 'security' );
-                            submit_button( 'Finalizar Colab' );
-                        ?>
                     </div>
             </div>
         <?php endif; ?>
@@ -174,7 +174,6 @@ class Tributes_Details_Admin
         try {
             $response = new Polen_Vimeo_Response( $lib->request( $vimeo_id ) );
             if( $response->is_error() ) {
-                Debug::def($response->get_error());
                 throw new \Exception( 'Erro no Vimeo', 500 );
             }
             $data_update = array(
@@ -187,6 +186,11 @@ class Tributes_Details_Admin
                 'completed_at' => date( 'Y-m-d H:i:s' ),
             );
             Tributes_Model::update( $data_update );
+
+            if( !$this->resend_email_complete_success( $tribute_id ) ) {
+                throw new \Exception( 'Erro no envio do email mas o Colab foi concluído. Reenvie o email', 500 );
+            }
+
             wp_send_json_success( 'success', 200 );
         } catch ( \Exception $e ) {
             wp_send_json_error( $e->getMessage(), $e->getCode() );
@@ -194,6 +198,18 @@ class Tributes_Details_Admin
         wp_die();
     }
 
+
+    public function resend_email_complete_success( $tribute_id )
+    {
+        $tribute = Tributes_Model::get_by_id( $tribute_id );
+        $email_content = tributes_email_content_complete_tribute( $tribute );
+        return tributes_send_email( $email_content, $tribute->creator_name, $tribute->creator_email );
+    }
+
+
+    /**
+     * 
+     */
     public function get_link_download()
     {
         global $Polen_Plugin_Settings;
