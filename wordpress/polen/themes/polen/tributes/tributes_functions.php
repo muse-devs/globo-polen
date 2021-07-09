@@ -40,6 +40,17 @@ function tribute_get_url_base_url() {
 
 
  /**
+ * Pega a URL da pagina que faz os convites
+ *
+ * @param string $tribute_hash
+ * @return string URL completa
+ */
+function tribute_get_url_new_tribute() {
+    return site_url( Tributes_Rewrite_Rules::BASE_PATH . '/novo/' );
+}
+
+
+ /**
  * Pega a URL da pagina de detalhes do Colab
  *
  * @param string $tribute_hash
@@ -59,6 +70,26 @@ function tribute_get_url_invites( $tribute_hash ) {
     return site_url( Tributes_Rewrite_Rules::BASE_PATH . "/{$tribute_hash}" );
 }
 
+/**
+ * Pega a URL dos meus tributos
+ *
+ * @param string $tribute_hash
+ * @return string URL completa
+ */
+function tribute_get_url_my_tributes() {
+    return site_url( Tributes_Rewrite_Rules::BASE_PATH . "/meus-colabs" );
+}
+
+/**
+ * Pega a URL da pagina de sucesso depois que envia o video
+ *
+ * @param string $tribute_hash
+ * @param string $invite_hash
+ * @return string URL completa
+ */
+function tribute_get_url_send_video( $tribute_hash, $invite_hash ) {
+    return site_url( Tributes_Rewrite_Rules::BASE_PATH . "/{$tribute_hash}/invite/{$invite_hash}/" );
+}
 
 /**
  * Pega a URL da pagina de sucesso depois que envia o video

@@ -53,6 +53,7 @@ function mascaraData(campo, e) {
 
 function checkSlug() {
 	polSpinner(CONSTANTS.SHOW, ".slug-wrap");
+	slug.value = polSlugfy(slug.value);
 	jQuery.ajax({
 		type: "POST",
 		url: polenObj.ajax_url,

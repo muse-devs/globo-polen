@@ -7,7 +7,7 @@ use Polen\Includes\Polen_Messages;
 
 class Tributes_Rewrite_Rules
 {
-    const BASE_PATH = 'tributes';
+    const BASE_PATH = 'colab';
 
     const TRIBUTES_OPERATION_EMAIL_READED  = 'email_readed';
     const TRIBUTES_OPERATION_EMAIL_CLICKED = 'email_clicked';
@@ -18,6 +18,7 @@ class Tributes_Rewrite_Rules
     const TRIBUTES_OPERATION_MY_TRIBUTES   = 'my_tributes';
     const TRIBUTES_OPERATION_DETAILS       = 'details';
     const TRIBUTES_OPERATION_SUCCESS       = 'success_video';
+    const TRIBUTES_OPERATION_VIDEOPLAY     = 'videoplay';
 
     const TRIBUTES_OPERATIONS = array(
         self::TRIBUTES_OPERATION_EMAIL_READED,
@@ -29,6 +30,7 @@ class Tributes_Rewrite_Rules
         self::TRIBUTES_OPERATION_MY_TRIBUTES,
         self::TRIBUTES_OPERATION_DETAILS,
         self::TRIBUTES_OPERATION_SUCCESS,
+        self::TRIBUTES_OPERATION_VIDEOPLAY,
     );
 
     const TRIBUTES_QUERY_VAR_TRUBITES_APP                             = 'tributes_app';
@@ -41,6 +43,7 @@ class Tributes_Rewrite_Rules
     const TRIBUTES_QUERY_VAR_TRIBUTES_MY_TRIBUTES                     = 'tributes_my_tributes';
     const TRIBUTES_QUERY_VAR_TRIBUTES_DETAILS                         = 'tributes_details';
     const TRIBUTES_QUERY_VAR_TRIBUTES_SUCCESS                         = 'tributes_success';
+    const TRIBUTES_QUERY_VAR_TRIBUTES_VIDEOPLAY                       = 'tribute_videoplay';
     
 
     /**
@@ -65,8 +68,9 @@ class Tributes_Rewrite_Rules
         add_rewrite_rule( self::BASE_PATH . '/([^/]*)/?/detalhes',                  'index.php?tributes_app=1&tribute_operation='.self::TRIBUTES_OPERATION_DETAILS.'&tributes_hash=$matches[1]', 'top' );
         add_rewrite_rule( self::BASE_PATH . '/([^/]*)/?/invite/([^/]*)/?/sucesso',  'index.php?tributes_app=1&tribute_operation='.self::TRIBUTES_OPERATION_SUCCESS.'&tributes_hash=$matches[1]&tributes_invite_hash=$matches[2]&tributes_send_video=1', 'top' );
         add_rewrite_rule( self::BASE_PATH . '/([^/]*)/?/invite/([^/]*)/?',          'index.php?tributes_app=1&tribute_operation='.self::TRIBUTES_OPERATION_SEND_VIDEO.'&tributes_hash=$matches[1]&tributes_invite_hash=$matches[2]&tributes_send_video=1', 'top' );
-        add_rewrite_rule( self::BASE_PATH . '/create/?',                            'index.php?tributes_app=1&tribute_operation='.self::TRIBUTES_OPERATION_CREATE, 'top' );
-        add_rewrite_rule( self::BASE_PATH . '/meus-tributos/?',                     'index.php?tributes_app=1&tribute_operation='.self::TRIBUTES_OPERATION_MY_TRIBUTES, 'top' );
+        add_rewrite_rule( self::BASE_PATH . '/novo/?',                              'index.php?tributes_app=1&tribute_operation='.self::TRIBUTES_OPERATION_CREATE, 'top' );
+        add_rewrite_rule( self::BASE_PATH . '/meus-colabs/?',                       'index.php?tributes_app=1&tribute_operation='.self::TRIBUTES_OPERATION_MY_TRIBUTES, 'top' );
+        add_rewrite_rule( self::BASE_PATH . '/v/([^/]*)/?',                         'index.php?tributes_app=1&tribute_operation='.self::TRIBUTES_OPERATION_VIDEOPLAY.'&'.self::TRIBUTES_QUERY_VAR_TRIBUTES_VIDEOPLAY.'=$matches[1]', 'top' );
         add_rewrite_rule( self::BASE_PATH . '/([^/]*)/?',                           'index.php?tributes_app=1&tribute_operation='.self::TRIBUTES_OPERATION_INVITES.'&tributes_hash=$matches[1]', 'top' );
         add_rewrite_rule( self::BASE_PATH . '[/]?$',                                'index.php?tributes_app=1&tribute_operation='.self::TRIBUTES_OPERATION_HOME, 'top' );
     }
@@ -87,6 +91,7 @@ class Tributes_Rewrite_Rules
         $query_vars[] = self::TRIBUTES_QUERY_VAR_TRIBUTES_MY_TRIBUTES;
         $query_vars[] = self::TRIBUTES_QUERY_VAR_TRIBUTES_DETAILS;
         $query_vars[] = self::TRIBUTES_QUERY_VAR_TRIBUTES_SUCCESS;
+        $query_vars[] = self::TRIBUTES_QUERY_VAR_TRIBUTES_VIDEOPLAY;
         return $query_vars;
     }
 
@@ -103,6 +108,7 @@ class Tributes_Rewrite_Rules
         $set_email_clicked_hash = get_query_var( self::TRIBUTES_QUERY_VAR_TRIBUTES_OPERAION_SET_EMAIL_CLICKED_HASH );
         $tribute_send_video     = get_query_var( self::TRIBUTES_QUERY_VAR_TRIBUTES_OPERAION_SEND_VIDEO );
         $tribute_operation      = get_query_var( self::TRIBUTES_QUERY_VAR_TRIBUTES_OPERAION );
+        $tribute_slug           = get_query_var( self::TRIBUTES_QUERY_VAR_TRIBUTES_VIDEOPLAY );
 
         if ( $tributes_app != '1' || !in_array( $tribute_operation, self::TRIBUTES_OPERATIONS ) ) {
             return $template;
@@ -121,6 +127,11 @@ class Tributes_Rewrite_Rules
         if( $tribute_operation == self::TRIBUTES_OPERATION_SEND_VIDEO ) {
             $tribute = Tributes_Model::get_by_hash( $tribute_hash );
             $invite = Tributes_Invites_Model::get_by_hash( $invites_hash );
+            
+            if( $tribute->completed == '1' ) {
+                return wp_safe_redirect( tribute_get_url_tribute_detail( $tribute_hash ) );
+                exit;
+            }
 
             if( empty( $tribute ) || empty( $invite ) ) {
                 wp_safe_redirect( tribute_get_url_base_url( $tribute->hash, $invite->hash ) );
@@ -145,6 +156,11 @@ class Tributes_Rewrite_Rules
                 return get_template_directory() . '/tributes/404';
             }
 
+            if( $tribute->completed == '1' ) {
+                return wp_safe_redirect( tribute_get_url_tribute_detail( $tribute_hash ) );
+                exit;
+            }
+
             $GLOBALS[ 'tribute' ] = $tribute;
             $GLOBALS[ 'tribute_hash' ] = $tribute_hash;
             return get_template_directory() . '/tributes/invites.php';
@@ -155,7 +171,6 @@ class Tributes_Rewrite_Rules
 
             $email_creator = filter_input( INPUT_POST, 'email', FILTER_VALIDATE_EMAIL );
             if( empty( $email_creator ) ) {
-                // wc_add_notice( 'Email inválido', 'error' );
                 Polen_Messages::set_message( 'Email inválido', Polen_Messages::TYPE_ERROR );
                 wp_redirect( site_url( self::BASE_PATH ) );
                 exit;
@@ -184,6 +199,15 @@ class Tributes_Rewrite_Rules
             $GLOBALS[ 'tribute' ] = $tribute;
             $GLOBALS[ 'invite' ]  = $invite;
             return get_template_directory() . '/tributes/send_video_success.php';
+        }
+
+        if( self::TRIBUTES_OPERATION_VIDEOPLAY == $tribute_operation ) {
+            $tribute = Tributes_Model::get_by_slug( $tribute_slug );
+            if( empty( $tribute ) ) {
+                return $this->set_404();
+            }
+            $GLOBALS['tribute'] = $tribute;
+            return get_template_directory() . '/tributes/video_play.php';
         }
 
         if( $tribute_operation == self::TRIBUTES_OPERATION_EMAIL_READED ) {
@@ -228,8 +252,8 @@ class Tributes_Rewrite_Rules
             Tributes_Invites_Model::set_invite_email_clicked( $invite->ID );
         }
         $tribute = Tributes_Model::get_by_id( $invite->tribute_id );
-        $retalive_url = "tributes/{$tribute->hash}/invite/{$invite->hash}";
-        return wp_safe_redirect( site_url( $retalive_url ) );
+        $retalive_url = tribute_get_url_send_video( $tribute->hash, $invite->hash );
+        return wp_safe_redirect( $retalive_url );
     }
 
 
