@@ -58,7 +58,7 @@ class Tributes_Details_Admin
                         <td><?= $tribute->creator_name;?></td>
                         <td><?= $tribute->creator_email;?></td>
                         <td><?= $tribute_success;?></td>
-                        <td><a href="<?= tribute_get_url_tribute_detail( $tribute->hash );?>" target="_blank">Ir para o tributo</a></td>
+                        <td><a href="<?= tribute_get_url_tribute_detail( $tribute->hash );?>" target="_blank">Ir para o Colab</a></td>
                         <td><?= $deadline;?></td>
                         <td><?= $this->show_icon_if_row_table_is_1( $tribute->completed );?></td>
                     </tr>

@@ -118,6 +118,11 @@
 		.color {
 			color: var(--primary);
 		}
+		@include media-breakpoint-down(sm) {
+			&:not(.main-title) {
+				font-size: 24px;
+			}
+		}
 	}
 	label {
 		font-size: 16px;
