@@ -143,6 +143,15 @@ class Tributes_Invites_Model
     }
 
 
+    public static function get_vimeo_not_processed_yet()
+    {
+        global $wpdb;
+        $table_name = self::table_name();
+        $result = $wpdb->get_results( "SELECT * FROM `{$table_name}` WHERE `video_sent` = 1 AND `vimeo_process_complete` = 0;" );
+        return $result;
+    }
+
+
     /**
      * Pega o total de videos enviados 
      * 
