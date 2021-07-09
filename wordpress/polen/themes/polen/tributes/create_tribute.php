@@ -31,7 +31,8 @@ $occasions = Tributes_Occasions_Model::get_all();
 					</p>
 					<div class="mb-4">
 						<label for="slug">Qual a URL do seu Colab?</label>
-						<p class="d-flex mb-0 slug-wrap">https://polen.me/tributes/<input type="text" name="slug" id="slug" placeholder="nome-do-Colab" class="input-tribute-url" required /></p>
+						<?php //TODO usar função pra pegar a URL ?>
+						<p class="d-flex mb-0 slug-wrap">https://polen.me/colab/v/<input type="text" name="slug" id="slug" placeholder="nome-do-Colab" class="input-tribute-url" required /></p>
 						<small id="slug-message" class="slug-message"></small>
 					</div>
 					<p class="mb-4">
