@@ -97,7 +97,6 @@ function tributes_email_create_content_invite( $invite_hash ) {
         $date,
         $tribute->creator_name,
         $tribute->welcome_message,
-        $tribute->question,
         tributes_create_link_email_send_video( $invites->hash ),
         tributes_create_link_set_email_opened( $invites->hash ),
     );
@@ -126,7 +125,6 @@ function tributes_email_content_invites_sended( $tribute ) {
         $date,
         $tribute->creator_name,
         $tribute->welcome_message,
-        $tribute->question,
         tribute_get_url_invites( $tribute->hash )
     );
     return $content_formatted;

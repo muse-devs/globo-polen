@@ -16,9 +16,6 @@
     <p>Mensagem de boas-vindas e instruções de %s:</p>
     <p>%s</p>
 
-    <p>Perguntas a serem respondidas em seu vídeo:</p>
-    <p>%d</p>
-
     <p>Para saber mais e enviar seu vídeo, clique no botão abaixo.</p>
     <p>Leva apenas um minuto e você pode fazer isso de qualquer dispositivo.</p>
     <a href="%s">Enviar Tributo</a>
