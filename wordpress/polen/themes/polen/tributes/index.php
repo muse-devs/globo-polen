@@ -82,7 +82,7 @@
 				</div>
 			</div>
 		</section>
-		<section class="row mt-0 mt-md-5">
+		<section class="row mb-4 mt-0 mt-md-5 mb-md-0">
 			<div class="col-12">
 				<div class="box-round p-4 p-md-5">
 					<div class="row align-items-center">
