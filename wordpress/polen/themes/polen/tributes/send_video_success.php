@@ -18,7 +18,7 @@ global $invite, $trbute;
 			<div class="col-md-6 m-md-auto">
 				<?php //TODO link final
 				?>
-				<a href="#" class="btn btn-outline-light btn-lg btn-block">Quero saber mais sobre os vídeos de presente</a>
+				<a href="<?= tribute_get_url_base_url(); ?>" class="btn btn-outline-light btn-lg btn-block">Quero saber mais sobre os vídeos de presente</a>
 			</div>
 		</div>
 	</div>
