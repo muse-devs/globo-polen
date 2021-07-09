@@ -38,7 +38,7 @@ $occasions = Tributes_Occasions_Model::get_all();
 					<p class="mb-4">
 						<label for="deadline">Qual o prazo?</label>
 						<br />Recomendamos vários dias antes da entrega do Colab para que você tenha tempo de editar seu vídeo.
-						<input type="text" name="deadline" id="deadline" placeholder="dd/mm/aaaa" maxlength="10" onkeypress="mascaraData( this, event )" class="form-control form-control-lg masc-data" required />
+						<input type="text" name="deadline" id="deadline" placeholder="dd/mm/aaaa" maxlength="10" v-on:keyup="maskDate" v-model="date" class="form-control form-control-lg masc-data" required />
 					</p>
 					<p class="mb-4">
 						<label for="creator_name">Qual o seu nome?</label>

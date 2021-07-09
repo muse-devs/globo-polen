@@ -38,19 +38,6 @@ function getSlug() {
 	checkSlug();
 }
 
-function mascaraData(campo, e) {
-	var kC = document.all ? event.keyCode : e.keyCode;
-	var data = campo.value;
-
-	if (kC != 8 && kC != 46) {
-		if (data.length == 2) {
-			campo.value = data += "/";
-		} else if (data.length == 5) {
-			campo.value = data += "/";
-		} else campo.value = data;
-	}
-}
-
 function checkSlug() {
 	polSpinner(CONSTANTS.SHOW, ".slug-wrap");
 	jQuery.ajax({
@@ -112,11 +99,15 @@ function createTribute(evt) {
 
 function reSendEmail(evt) {
 	evt.preventDefault();
-	polAjaxForm(`form#${evt.target.id}`, function(){
-		polMessage("Enviado", "e-mail foi enviado com sucesso");
-	}, function(res){
-		polError(res);
-	});
+	polAjaxForm(
+		`form#${evt.target.id}`,
+		function () {
+			polMessage("Enviado", "e-mail foi enviado com sucesso");
+		},
+		function (res) {
+			polError(res);
+		}
+	);
 }
 
 if (btn_play) {
@@ -201,6 +192,28 @@ if (document.getElementById("invite-friends")) {
 			},
 			sendFriends: function () {
 				submitFriends(this);
+			},
+		},
+	});
+}
+
+if (document.getElementById("form-create-tribute")) {
+	const formValidate = new Vue({
+		el: "#form-create-tribute",
+		data: {
+			date: "",
+		},
+		methods: {
+			maskDate: function (evt) {
+				if (!/\d/.test(evt.key)) {
+					this.date = this.date.replace(evt.key, "");
+					return;
+				}
+				if (this.date.length == 2) {
+					this.date = this.date += "/";
+				} else if (this.date.length == 5) {
+					this.date = this.date += "/";
+				}
 			},
 		},
 	});
