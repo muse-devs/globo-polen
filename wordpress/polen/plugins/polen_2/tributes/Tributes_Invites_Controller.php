@@ -82,7 +82,7 @@ class Tributes_Invites_Controller
 
 
     /**
-     * Handler para o admin-ajax onde é executado quando o convidado ao tributo,
+     * Handler para o admin-ajax onde é executado quando o convidado ao Colab,
      * seleciona um video e
      * envia, antes do envio é criado no Vimeo um Slot para receber o Video com o 
      * mesmo tamanho em bytes

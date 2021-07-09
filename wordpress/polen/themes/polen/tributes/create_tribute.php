@@ -17,7 +17,7 @@ $occasions = Tributes_Occasions_Model::get_all();
 				<form id="form-create-tribute" action="./" method="POST">
 					<input type="hidden" name="action" value="create_tribute" />
 					<p class="mb-4">
-						<label for="name_honored">Para quem é o tributo?</label>
+						<label for="name_honored">Para quem é o Colab?</label>
 						<input type="text" name="name_honored" id="name_honored" placeholder="Ex: Diego, Rodolfo" class="form-control form-control-lg" required>
 					</p>
 					<p class="mb-4">
@@ -30,13 +30,13 @@ $occasions = Tributes_Occasions_Model::get_all();
 						</select>
 					</p>
 					<div class="mb-4">
-						<label for="slug">Qual a URL do seu tributo?</label>
-						<p class="d-flex mb-0 slug-wrap">https://polen.me/tributes/<input type="text" name="slug" id="slug" placeholder="nome-do-tributo" class="input-tribute-url" required /></p>
+						<label for="slug">Qual a URL do seu Colab?</label>
+						<p class="d-flex mb-0 slug-wrap">https://polen.me/tributes/<input type="text" name="slug" id="slug" placeholder="nome-do-Colab" class="input-tribute-url" required /></p>
 						<small id="slug-message" class="slug-message"></small>
 					</div>
 					<p class="mb-4">
 						<label for="deadline">Qual o prazo?</label>
-						<br />Recomendamos vários dias antes da entrega do tributo para que você tenha tempo de editar seu vídeo.
+						<br />Recomendamos vários dias antes da entrega do Colab para que você tenha tempo de editar seu vídeo.
 						<input type="text" name="deadline" id="deadline" placeholder="dd/mm/aaaa" maxlength="10" onkeypress="mascaraData( this, event )" class="form-control form-control-lg masc-data" required />
 					</p>
 					<p class="mb-4">

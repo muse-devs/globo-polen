@@ -30,7 +30,7 @@ function is_tribute_create() {
 
  /**
  * Pega a URL da pagina que faz os convites
- * 
+ *
  * @param string $tribute_hash
  * @return string URL completa
  */
@@ -40,8 +40,8 @@ function tribute_get_url_base_url() {
 
 
  /**
- * Pega a URL da pagina de detalhes do tributo
- * 
+ * Pega a URL da pagina de detalhes do Colab
+ *
  * @param string $tribute_hash
  * @return string URL completa
  */
@@ -51,7 +51,7 @@ function tribute_get_url_tribute_detail( $tribute_hash ) {
 
 /**
  * Pega a URL da pagina que faz os convites
- * 
+ *
  * @param string $tribute_hash
  * @return string URL completa
  */
@@ -62,7 +62,7 @@ function tribute_get_url_invites( $tribute_hash ) {
 
 /**
  * Pega a URL da pagina de sucesso depois que envia o video
- * 
+ *
  * @param string $tribute_hash
  * @param string $invite_hash
  * @return string URL completa
@@ -95,7 +95,7 @@ function tribute_get_occasions() {
 
 
 /**
- * Pega a taxa de sucesso de um tributo pelo tribute_id
+ * Pega a taxa de sucesso de um Colab pelo tribute_id
  * @param int
  * @return float
  */
@@ -103,7 +103,7 @@ function tributes_tax_success_tribute( $tribute_id ) {
     $result_sucess = Tributes_Invites_Model::get_videos_sent_and_not( $tribute_id );
     $sent = $result_sucess->video_sent;
     $not_sent = $result_sucess->video_not_sent;
-    
+
     $total_success = ( $sent / ( $sent + $not_sent ) ) * 100;
     if( ( $sent + $not_sent ) == 0 ) {//divisão por zero
         $total_success = 0;
