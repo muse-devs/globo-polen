@@ -122,7 +122,7 @@ function openVideoByURL(url) {
 function openVideoByHash(hash) {
 	video_box.innerHTML = "";
 	polSpinner(null, "#video-box");
-	const url = `${woocommerce_params.ajax_url}?action=draw-player-modal&hash=${hash}`;
+	const url = `${polenObj.ajax_url}?action=draw-player-modal&hash=${hash}`;
 	showModal();
 	changeHash(hash);
 	jQuery(video_box).load(url);
