@@ -36,11 +36,14 @@
 		<header id="masthead" class="header border-bottom mb-4">
 			<div class="container">
 				<div class="row pt-3 pb-4">
-					<div class="col-12 logo-tribute-wrap<?php echo is_tribute_home() ? '' : ' text-center'; ?>">
-						<a href="/tributes" class="custom-logo-link" rel="home" aria-current="page">
+					<div class="col-6 logo-tribute-wrap<?php echo is_tribute_home() ? '' : ' text-center'; ?>">
+						<a href="<?= tribute_get_url_base_url(); ?>" class="custom-logo-link" rel="home" aria-current="page">
 							<img width="37" height="37" src="<?php echo TEMPLATE_URI; ?>/tributes/assets/img/logo-icon.svg" class="custom-logo light" alt="Polen" />
-							<span class="logo-text ml-2">Tributo</span>
+							<span class="logo-text ml-2">Colab</span>
 						</a>
+					</div>
+					<div class="col-6 text-right">
+						<p class="pt-4"><a href="#acompanheseupedido">acompanhe seu pedido</a></p>
 					</div>
 				</div>
 			</div>

@@ -1,6 +1,6 @@
 <?php
 
-use Polen\Tributes\{ Tributes, Tributes_Occasions_Model, Tributes_Questions_Model, Tributes_Rewrite_Rules};
+use Polen\Tributes\{ Tributes, Tributes_Invites_Model, Tributes_Occasions_Model, Tributes_Questions_Model, Tributes_Rewrite_Rules};
 
 if( !defined( 'ABSPATH' ) ) {
     echo 'Silence is Golden';
@@ -91,4 +91,22 @@ function tribute_get_questions() {
  */
 function tribute_get_occasions() {
     return Tributes_Occasions_Model::get_all();
+}
+
+
+/**
+ * Pega a taxa de sucesso de um tributo pelo tribute_id
+ * @param int
+ * @return float
+ */
+function tributes_tax_success_tribute( $tribute_id ) {
+    $result_sucess = Tributes_Invites_Model::get_videos_sent_and_not( $tribute_id );
+    $sent = $result_sucess->video_sent;
+    $not_sent = $result_sucess->video_not_sent;
+    
+    $total_success = ( $sent / ( $sent + $not_sent ) ) * 100;
+    if( ( $sent + $not_sent ) == 0 ) {//divisão por zero
+        $total_success = 0;
+    }
+    return $total_success;
 }
