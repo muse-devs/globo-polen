@@ -135,7 +135,7 @@ class Tributes_Display extends \WP_List_Table
     public function column_tx_success($item)
     {
         $tx_success_value = tributes_tax_success_tribute( $item->ID );
-        return sprintf( '%1$s', $tx_success_value );
+        return sprintf( '%1$s', $tx_success_value ) . '%';
     }
     
 }

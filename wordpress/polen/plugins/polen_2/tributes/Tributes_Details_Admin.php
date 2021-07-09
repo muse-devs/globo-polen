@@ -14,7 +14,8 @@ class Tributes_Details_Admin
         if( $static ) {
             add_action( 'admin_menu', array( $this, 'tributes_add_admin_menu' ) );
 
-            add_action( 'wp_ajax_tributes_download_video', [ $this, 'check_hash_exists' ] );
+            add_action( 'wp_ajax_tributes_download_video', [ $this, 'get_link_download' ] );
+            add_action( 'wp_ajax_complete_tribute', [ $this, 'complete_tribute' ] );
         }
     }
 
@@ -49,11 +50,13 @@ class Tributes_Details_Admin
                         <th>Tx sucesso</th>
                         <th>Link</th>
                         <th>Prazo</th>
+                        <th>Concluido</th>
                     </tr>
                     <tr>
                         <td><?= $tribute_success;?></td>
                         <td><a href="<?= tribute_get_url_tribute_detail( $tribute->hash );?>" target="_blank">Ir para o tributo</a></td>
                         <td><?= $deadline;?></td>
+                        <td><?= $this->show_icon_if_row_table_is_1( $tribute->completed );?></td>
                     </tr>
                 </table>
             </div>
@@ -79,6 +82,42 @@ class Tributes_Details_Admin
                 <?php endforeach; ?>
                 </table>
             </div>
+        <?php if( $tribute->completed == '0' ) : ?>
+            <div>
+                <form method="post" id="tribute-complete-tribute" action="<?php echo esc_html( admin_url( 'admin-post.php' ) ); ?>">
+                    <div id="universal-message-container">
+                        <h2>Completar o Colab</h2>
+                        <div class="options">
+                            <p>
+                                <label>Depois de editar o video final e subir no Vimeo, adicionar o VimeoID aqui: ex /videos/572785228:</label>
+                                <br />
+                                <input type="text" name="vimeo_id" size="50" placeholder="" value="/videos/572838785"/>
+                                <input type="hidden" name="tribute_id" value="<?= $tribute_id; ?>"/>
+                            </p>
+                        </div><!-- #universal-message-container -->
+                        <?php
+                            wp_nonce_field( 'complete_tribute', 'security' );
+                            submit_button( 'Finalizar Colab' );
+                        ?>
+                    </div>
+                </form>
+            </div>
+        <?php else: ?>
+            <div>
+                    <div id="universal-message-container">
+                        <h2>Colab Finalizado</h2>
+                        <div class="options">
+                            <p>
+                                Video final: <a href="http://vimeo.com<?= $tribute->vimeo_id; ?>" target="_blank"><?= $tribute->vimeo_id; ?></a>
+                            </p>
+                        </div><!-- #universal-message-container -->
+                        <?php
+                            wp_nonce_field( 'complete_tribute', 'security' );
+                            submit_button( 'Finalizar Colab' );
+                        ?>
+                    </div>
+            </div>
+        <?php endif; ?>
         </div>
 
         <script>
@@ -90,6 +129,18 @@ class Tributes_Details_Admin
                     jQuery.post("<?= $url_admin; ?>", {invite_id}, function(data){
                         if( data.success == true ) {
                             window.location.href = data.data;
+                        }
+                    });
+                });
+                jQuery('#tribute-complete-tribute').submit(function(evt){
+                    evt.preventDefault()
+                    <?php $url_admin_ct = admin_url('admin-ajax.php') . '?action=complete_tribute'; ?>
+                    jQuery.post("<?= $url_admin_ct; ?>", jQuery(evt.currentTarget).serialize(), function(data){
+                        if( data.success == true ) {
+                            alert('Colab encerrado');
+                            document.location.reload(true);
+                        } else {
+                            alert( data.data );
                         }
                     });
                 });
@@ -106,9 +157,44 @@ class Tributes_Details_Admin
             return '<span class="dashicons dashicons-no-alt"></span>';
         }
     }
+    
+    
+    public function complete_tribute()
+    {
+        global $Polen_Plugin_Settings;
 
+        $client_id = $Polen_Plugin_Settings['polen_vimeo_client_id'];
+        $client_secret = $Polen_Plugin_Settings['polen_vimeo_client_secret'];
+        $token = $Polen_Plugin_Settings['polen_vimeo_access_token'];
 
-    public function check_hash_exists()
+        $vimeo_id = filter_input( INPUT_POST, 'vimeo_id' );
+        $tribute_id = filter_input( INPUT_POST, 'tribute_id' );
+        $nonce = filter_input( INPUT_POST, 'security' );
+        $lib = new Vimeo( $client_id, $client_secret, $token );
+        try {
+            $response = new Polen_Vimeo_Response( $lib->request( $vimeo_id ) );
+            if( $response->is_error() ) {
+                Debug::def($response->get_error());
+                throw new \Exception( 'Erro no Vimeo', 500 );
+            }
+            $data_update = array(
+                'ID' => $tribute_id,
+                'vimeo_id' => $vimeo_id,
+                'vimeo_thumbnail' => $response->get_image_url_640(),
+                'vimeo_link' => $response->get_vimeo_link(),
+                'vimeo_url_file_play' => $response->get_play_link(),
+                'completed' => '1',
+                'completed_at' => date( 'Y-m-d H:i:s' ),
+            );
+            Tributes_Model::update( $data_update );
+            wp_send_json_success( 'success', 200 );
+        } catch ( \Exception $e ) {
+            wp_send_json_error( $e->getMessage(), $e->getCode() );
+        }
+        wp_die();
+    }
+
+    public function get_link_download()
     {
         global $Polen_Plugin_Settings;
 
