@@ -94,6 +94,30 @@ class Tributes_Model
 
 
     /**
+     * Pega todos os tributos
+     */
+    public static function get_all()
+    {
+        global $wpdb;
+        $table_name = self::table_name();
+        $result = $wpdb->get_results( "SELECT * FROM `{$table_name}`;" );
+        return $result;
+    }
+
+
+    /**
+     * Pega total de tributos
+     */
+    public static function get_total()
+    {
+        global $wpdb;
+        $table_name = self::table_name();
+        $result = $wpdb->get_var( "SELECT COUNT(*) FROM `{$table_name}`;" );
+        return $result;
+    }
+
+
+    /**
      * 
      */
     public static function create_hash()
