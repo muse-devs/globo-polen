@@ -396,14 +396,14 @@ function polen_front_get_talent_videos($talent)
 <?php
 }
 
-function polen_get_video_player_html($data, $video, $user_id = null)
+function polen_get_video_player_html($data, $user_id = null)
 {
-	if (!$data || $video) {
+	if (!$data) {
 		return;
 	}
+	wp_enqueue_script("vimeo");
 
-	$video_url = tribute_get_url_base_url() . "/v/" . $video->hash;
-	$isRateble = false;
+	$video_url = tribute_get_url_base_url() . "/v/" . $data->slug;
 ?>
 	<div class="row video-card">
 		<header class="col-md-6 p-0">
@@ -413,7 +413,7 @@ function polen_get_video_player_html($data, $video, $user_id = null)
 			<script>
 				jQuery(document).ready(function() {
 					var videoPlayer = new Vimeo.Player("polen-video", {
-						url: "<?php echo $video->vimeo_link; ?>",
+						url: "<?php echo $data->vimeo_link; ?>",
 						autoplay: false,
 						muted: false,
 						loop: false,
@@ -424,27 +424,14 @@ function polen_get_video_player_html($data, $video, $user_id = null)
 		</header>
 		<div class="content col-md-6 mt-4">
 			<header class="row content-header">
-				<?php if ($user_id) : ?>
-					<div class="col-3">
-						<a href="<?php echo $data->talent_url; ?>" class="no-underline">
-							<span class="image-cropper">
-								<?php echo polen_get_avatar($user_id, "polen-square-crop-lg"); ?>
-							</span>
-						</a>
-					</div>
-				<?php endif; ?>
 				<div class="col-9">
-					<h4 class="m-0"><a href="<?php echo $data->talent_url; ?>" class="name"><?php echo $data->display_name; ?></a></h4>
-					<h5 class="m-0"><a href="<?= polen_get_url_category_by_order_id($video->order_id); ?>" class="d-block my-2 cat"><?php echo $data->profissao; ?></a></h5>
-					<a href="<?php echo $video_url; ?>" class="url"><?php echo $video_url; ?></a>
+					<h4 class="m-0 name">Seu vídeo</h4>
+					<h5 class="mt-3 cat">Colab para <?php echo $data->name_honored; ?></h5>
 				</div>
 			</header>
 			<div class="row mt-4 share">
 				<div class="col-12">
-					<?php if ($user_id !== 0 && $isRateble) : ?>
-						<a href="/my-account/create-review/<?= $video->order_id; ?>" class="btn btn-primary btn-lg btn-block mb-4">Avaliar vídeo</a>
-					<?php endif; ?>
-					<?php polen_get_talent_video_buttons($data, $video_url, $video->vimeo_url_download, $video->hash); ?>
+					<?php polen_get_talent_video_buttons($data, $video_url, $data->vimeo_url_download, $data->hash); ?>
 				</div>
 			</div>
 		</div>
