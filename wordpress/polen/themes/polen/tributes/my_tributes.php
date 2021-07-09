@@ -37,7 +37,7 @@ get_header('tributes');
 					<p><strong><?php echo number_format( $total_success ); ?>%</strong></p>
 				</div>
 				<div class="col-md-3">
-					<a href="<?php echo tribute_get_url_invites( $tribute->hash ); ?>" class="btn btn-primary btn-lg btn-block">Visualizar</a>
+					<a href="<?php echo tribute_get_url_tribute_detail( $tribute->hash ); ?>" class="btn btn-primary btn-lg btn-block">Visualizar</a>
 				</div>
 			</div>
 		<?php endforeach; ?>
