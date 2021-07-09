@@ -154,6 +154,11 @@ class Tributes_Invites_Controller
             wp_send_json_error( 'Convite inválido', 404 );
             wp_die();
         }
+
+        if( $invite->video_sent == '1' ) {
+            wp_send_json_error( 'Video já foi enviado', 401 );
+            wp_die();
+        }
         
         $last_email = strtotime( $invite->last_send_email );
         $current_time = strtotime( 'now' );

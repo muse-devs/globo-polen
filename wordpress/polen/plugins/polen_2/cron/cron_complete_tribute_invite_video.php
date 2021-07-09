@@ -4,7 +4,6 @@ include_once dirname( __FILE__ ) . '/init.php';
 
 use Vimeo\Vimeo;
 use Vimeo\Exceptions\{ExceptionInterface, VimeoRequestException};
-// use Polen\Includes\Polen_Video_Info;
 use Polen\Includes\Vimeo\Polen_Vimeo_Response;
 use Polen\Tributes\Tributes_Invites_Model;
 
@@ -12,7 +11,6 @@ $client_id = $Polen_Plugin_Settings['polen_vimeo_client_id'];
 $client_secret = $Polen_Plugin_Settings['polen_vimeo_client_secret'];
 $access_token = $Polen_Plugin_Settings['polen_vimeo_access_token'];
 
-// $videos = Polen_Video_Info::select_all_videos_incompleted();
 $vimeo_api = new Vimeo($client_id, $client_secret, $access_token);
 $invites = Tributes_Invites_Model::get_vimeo_not_processed_yet();
 
