@@ -154,11 +154,13 @@ if (document.getElementById("invite-friends")) {
 			formName,
 			function () {
 				sessionStorage.removeItem(SESSION_OBJ_INVITES);
-				polMessage(
+				setSessionMessage(
+					CONSTANTS.SUCCESS,
 					"Amigos adicionados com sucesso",
 					"Seus amigos receberão as instruções por e-mail"
 				);
 				_this.friends = [];
+				window.location.href = "./detalhes";
 			},
 			function (e) {
 				polError(e);
