@@ -142,7 +142,7 @@ function tributes_email_content_complete_tribute( $tribute ) {
     $path_email = tributes_get_path_email_complete_trubute();
     $email_content = file_get_contents( $path_email );
 
-    $invites = Tributes_Invites_Model::get_all_by_tribute_id( $tribute->ID );
+    $invites = Tributes_Invites_Model::get_all_video_sent_by_tribute_id( $tribute->ID );
     foreach( $invites as $invite ) {
         $names[] = $invite->name_inviter;
     }
@@ -150,6 +150,29 @@ function tributes_email_content_complete_tribute( $tribute ) {
     $content_formatted = sprintf(
         $email_content,
         $tribute->creator_name,
+        implode( ', ', $names ),
+        tribute_get_url_final_video( $tribute->slug ),
+    );
+    return $content_formatted;
+}
+
+/**
+ * Cria o conteudo do email de completo com sucesso para os convidados
+ * @param sdtClass wp_tributes
+ * @return string
+ */
+function tributes_email_content_complete_tribute_to_invites( $tribute, $invite_param ) {
+    $path_email = tributes_get_path_email_complete_trubute();
+    $email_content = file_get_contents( $path_email );
+
+    $invites = Tributes_Invites_Model::get_all_video_sent_by_tribute_id( $tribute->ID );
+    foreach( $invites as $invite ) {
+        $names[] = $invite->name_inviter;
+    }
+
+    $content_formatted = sprintf(
+        $email_content,
+        $invite_param->name_inviter,
         implode( ', ', $names ),
         tribute_get_url_final_video( $tribute->slug ),
     );

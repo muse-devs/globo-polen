@@ -125,6 +125,23 @@ class Tributes_Invites_Model
         );
         return $result;
     }
+
+
+    /**
+     * Pega todos so invites que enviaram o video pelo tribute_id
+     * 
+     * @param int
+     * @return array stdClass[] wp_tributes_invites
+     */
+    public static function get_all_video_sent_by_tribute_id( $tribute_id )
+    {
+        global $wpdb;
+        $table_name = self::table_name();
+        $result = $wpdb->get_results(
+            $wpdb->prepare( "SELECT * FROM {$table_name} WHERE video_sent = 1 AND tribute_id = %d;", $tribute_id )
+        );
+        return $result;
+    }
      
 
     /**

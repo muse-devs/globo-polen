@@ -19,7 +19,7 @@ class Tributes_Controller
         
         if( !$this->validate_slug_not_empty( $data_input[ 'slug' ] ) ) {
             //TODO: Esse nome "Slug" é ruim pra o usuário pensar num melhor
-            wp_send_json_error( 'Slug não pode ser nulo', 401 );
+            wp_send_json_error( 'Endereço não pode ser em branco', 401 );
             die;
         }
         try {
@@ -51,17 +51,17 @@ class Tributes_Controller
 
         if( !$this->validate_slug_not_empty( $slug ) ) {
             //TODO: Esse nome "Slug" é ruim pra o usuário pensar num melhor
-            wp_send_json_error( 'Slug não pode ser nulo', 401 );
+            wp_send_json_error( 'Porfavor escolha um endereço', 401 );
             wp_die();
         }
         $tribute = Tributes_Model::get_by_slug( $slug );
         if( !empty( $tribute ) ) {
             //TODO: Esse nome "Slug" é ruim pra o usuário pensar num melhor
-            wp_send_json_error( 'Slug já existe, tente outro', 403 );
+            wp_send_json_error( 'Esse endereço já existe, tente outro', 403 );
             wp_die();
         }
         //TODO: Esse nome "Slug" é ruim pra o usuário pensar num melhor
-        wp_send_json_success( 'Slug livre', 200 );
+        wp_send_json_success( 'Endereço disponível', 200 );
         wp_die();       
     }
 
@@ -88,6 +88,10 @@ class Tributes_Controller
     private function treat_deadline_date( $deadline )
     {
         $date_time = \DateTime::createFromFormat( 'd/m/Y', $deadline );
+        if( $date_time === false ) {
+            wp_send_json_error( 'Data inválida', 401 );
+            wp_die();
+        }
         return $date_time->format( 'Y-m-d' );
     }
     
