@@ -36,6 +36,27 @@ class Tributes_Model
         return $wpdb->insert_id;
     }
 
+    /**
+     * Update em um Registro baseado no ID
+     * 
+     * @param array
+     */
+    public static function update( $data )
+    {
+        global $wpdb;
+        $table_name = self::table_name();
+
+        $result_update = $wpdb->update(
+            $table_name,
+            $data,
+            array( 'ID' => $data[ 'ID' ])
+        );
+        if( $result_update === false ) {
+            throw new \Exception( $wpdb->last_error, 401 );
+        }
+        return $data[ 'ID' ];
+    }
+
 
     /**
      *
