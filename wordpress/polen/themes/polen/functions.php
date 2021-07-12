@@ -7,17 +7,17 @@
  * @package Polen
  */
 
-if ( ! defined( '_S_VERSION' ) ) {
-	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', '1.0.5' );
-}
-
 define('TEMPLATE_URI', get_template_directory_uri());
 define('TEMPLATE_DIR', get_template_directory());
 define('DEVELOPER', defined('ENV_DEV') && ENV_DEV);
 define('POL_COOKIES', array(
 	'POLICIES' => 'pol_policies',
 ));
+
+if ( ! defined( '_S_VERSION' ) ) {
+	// Replace the version number of the theme on each release.
+	define( '_S_VERSION', DEVELOPER ? time() : '1.0.5' );
+}
 
 if ( ! function_exists( 'polen_setup' ) ) :
 	/**
