@@ -65,7 +65,7 @@ $is_complete = true;
 			<div class="col-md-12">
 				<div class="card-invite invites-list">
 					<?php foreach ($invites as $invite) : ?>
-						<div class="row mb-4">
+						<div class="row mb-5 mb-md-4">
 							<div class="col-md-5">
 								<input type="text" value="<?php echo $invite->name_inviter; ?>" class="form-control form-control-lg" disabled />
 								<?php if ($invite->video_sent) : ?>
@@ -74,11 +74,11 @@ $is_complete = true;
 									<span class="status mt-1"><?php getIcon(false); ?><?php echo $invite->email_opened ? "Usuário abriu o e-mail" : "Usuário não finalizou o vídeo"; ?></span>
 								<?php endif; ?>
 							</div>
-							<div class="col-md-5">
+							<div class="col-md-5 mt-3">
 								<input type="email" value="<?php echo $invite->email_inviter; ?>" class="form-control form-control-lg" disabled />
 							</div>
 							<?php if (!$invite->video_sent) : $is_complete = false; ?>
-								<div class="col-md-2">
+								<div class="col-md-2 text-right">
 									<form action="./" id="form-<?php echo $invite->ID; ?>" method="POST" class="resend-email">
 										<input type="hidden" name="action" value="tribute_resend_email" />
 										<input type="hidden" name="invite_hash" value="<?php echo $invite->hash; ?>" />
