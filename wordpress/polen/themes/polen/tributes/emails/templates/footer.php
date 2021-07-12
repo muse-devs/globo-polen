@@ -3,7 +3,7 @@
 		<td>
 			<table style="
 								margin: auto;
-								width: 98%;
+								width: 98%%;
 								height: 120px;
 								max-width: 847px;
 								border-top: 1px solid #e6e6e6;
