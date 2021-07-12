@@ -108,9 +108,12 @@ function tributes_email_create_content_invite( $invite_hash ) {
     $invites = Tributes_Invites_Model::get_by_hash( $invite_hash );
     $tribute = Tributes_Model::get_by_id( $invites->tribute_id );
 
+	$top_image = TEMPLATE_URI . "/tributes/assets/img/carousel-video.png";
+
     $date = date('d \d\e F \d\e o', strtotime($tribute->deadline));
     $content_formatted = sprintf(
         $email_content,
+		$top_image,
         $invites->name_inviter,
         $tribute->creator_name,
         $tribute->name_honored,
