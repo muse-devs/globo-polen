@@ -198,9 +198,9 @@ if (document.getElementById("invite-friends")) {
 	});
 }
 
-if (document.getElementById("form-create-tribute")) {
+if (document.getElementById("deadline-wrapp")) {
 	const formValidate = new Vue({
-		el: "#form-create-tribute",
+		el: "#deadline-wrapp",
 		data: {
 			date: "",
 		},

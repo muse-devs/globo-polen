@@ -1,6 +1,7 @@
 <?php get_header('tributes'); ?>
 
-<?php //TODO ajustar URLs ?>
+<?php //TODO ajustar URLs
+?>
 <?php $create_url = tribute_get_url_new_tribute(); ?>
 <?php $dashboard_url = "./meus-tributos"; ?>
 
@@ -23,7 +24,10 @@
 			<div class="col-md-6">
 				<div class="presentation-wrap">
 					<div class="presentation with-video">
-						<video id="tribute-home-video" src="<?php echo TEMPLATE_URI; ?>/tributes/assets/video-presentation.mp4"></video>
+						<video id="tribute-home-video" playsinline>
+							<source src="<?php echo TEMPLATE_URI; ?>/tributes/assets/video-presentation.mp4#t=0.1" type="video/mp4">
+							</source>
+						</video>
 						<button id="btn-play" class="btn-play">
 							<img src="<?php echo TEMPLATE_URI; ?>/tributes/assets/img/play.svg" alt="Botão play">
 						</button>

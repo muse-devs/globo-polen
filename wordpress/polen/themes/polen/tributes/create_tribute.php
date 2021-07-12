@@ -35,7 +35,7 @@ $occasions = Tributes_Occasions_Model::get_all();
 						<p class="d-flex mb-0 slug-wrap">https://polen.me/colab/v/<input type="text" name="slug" id="slug" placeholder="nome-do-Colab" class="input-tribute-url" required /></p>
 						<small id="slug-message" class="slug-message"></small>
 					</div>
-					<p class="mb-4">
+					<p id="deadline-wrapp" class="mb-4">
 						<label for="deadline">Qual o prazo?</label>
 						<br />Recomendamos vários dias antes da entrega do Colab para que você tenha tempo de editar seu vídeo.
 						<input type="text" name="deadline" id="deadline" placeholder="dd/mm/aaaa" maxlength="10" v-on:keyup="maskDate" v-model="date" class="form-control form-control-lg masc-data" required />
