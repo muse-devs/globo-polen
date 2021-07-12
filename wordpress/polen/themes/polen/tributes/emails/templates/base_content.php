@@ -13,7 +13,7 @@ include_once("components.php");
 		</tr>
 		<tr>
 			<td style="height: 200px; text-align: center">
-				<img width="185" height="185" src="<?php Tributes_Email_Class::get_assets_url(); ?>/carousel-video.svg" alt="" />
+				<img width="185" height="185" src="<?php Tributes_Email_Class::get_assets_url(); ?>/carousel-video.png" alt="" />
 			</td>
 		</tr>
 		<?php Tributes_Email_Class::get_margin("40px"); ?>
