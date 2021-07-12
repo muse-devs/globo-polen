@@ -38,7 +38,7 @@ $occasions = Tributes_Occasions_Model::get_all();
 					<p id="deadline-wrapp" class="mb-4">
 						<label for="deadline">Qual o prazo?</label>
 						<br />Recomendamos vários dias antes da entrega do Colab para que você tenha tempo de editar seu vídeo.
-						<input type="text" name="deadline" id="deadline" placeholder="dd/mm/aaaa" maxlength="10" v-on:keyup="maskDate" v-model="date" class="form-control form-control-lg masc-data" required />
+						<input type="text" name="deadline" id="deadline" placeholder="dd/mm/aaaa" maxlength="10" v-on:keyup="maskDate" v-model="date" autocapitalize="off" class="form-control form-control-lg masc-data" required />
 					</p>
 					<p class="mb-4">
 						<label for="creator_name">Qual o seu nome?</label>
@@ -46,7 +46,7 @@ $occasions = Tributes_Occasions_Model::get_all();
 					</p>
 					<p class="mb-4">
 						<label for="creator_email">Qual o seu e-mail?</label>
-						<input type="email" name="creator_email" id="creator_email" placeholder="Entre com seu e-mail" class="form-control form-control-lg" required />
+						<input type="email" name="creator_email" id="creator_email" placeholder="Entre com seu e-mail" autocapitalize="off" class="form-control form-control-lg" required />
 					</p>
 					<p class="mb-4">
 						<label for="welcome_message">Instruções</label>
