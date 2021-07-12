@@ -77,15 +77,23 @@ function tributes_send_email( $email_content, $to_name, $to_email ) {
 
  function get_mail_header()
  {
-	 $header_file = tributes_get_email_path() . "templates/header.php";
-	 $header_content = file_get_contents($header_file);
-	 $header = sprintf($header_content, TEMPLATE_URI . "/tributes/assets/img/logo.svg");
+	 $header_file 		= tributes_get_email_path() . "templates/header.php";
+	 $header_content 	= file_get_contents($header_file);
+	 $logo 				= TEMPLATE_URI . "/tributes/assets/img/logo.png";
+	 $header 			= sprintf($header_content, $logo);
 	 return $header;
  }
 
  function get_mail_footer()
  {
-	 return file_get_contents(TEMPLATE_DIR . '/tributes/emails/templates/footer.php');
+	$footer_file 		= tributes_get_email_path() . "templates/footer.php";
+	$footer_content 	= file_get_contents($footer_file);
+	$logo 				= TEMPLATE_URI . "/tributes/assets/img/logo-black.png";
+	$facebook 			= TEMPLATE_URI . "/tributes/assets/img/facebook.png";
+	$instagram 			= TEMPLATE_URI . "/tributes/assets/img/instagram.png";
+	$tiktok 			= TEMPLATE_URI . "/tributes/assets/img/tiktok.png";
+	$footer 			= sprintf($footer_content, $logo, $facebook, $instagram, $tiktok);
+	return $footer;
  }
 
 /**
@@ -139,7 +147,7 @@ function tributes_email_content_invites_sended( $tribute ) {
         $tribute->welcome_message,
         tribute_get_url_invites( $tribute->hash )
     );
-    return $content_formatted;
+    return get_mail_header() . $content_formatted . get_mail_footer();
 }
 
 
@@ -163,7 +171,7 @@ function tributes_email_content_complete_tribute( $tribute ) {
         implode( ', ', $names ),
         tribute_get_url_final_video( $tribute->slug ),
     );
-    return $content_formatted;
+    return get_mail_header() . $content_formatted . get_mail_footer();
 }
 
 /**
@@ -186,5 +194,5 @@ function tributes_email_content_complete_tribute_to_invites( $tribute, $invite_p
         implode( ', ', $names ),
         tribute_get_url_final_video( $tribute->slug ),
     );
-    return $content_formatted;
+    return get_mail_header() . $content_formatted . get_mail_footer();
 }
