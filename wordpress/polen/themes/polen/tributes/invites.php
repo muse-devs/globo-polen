@@ -18,7 +18,7 @@ global $tribute, $tribute_hash;
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-12 mt-5 pt-5 border-top">
+			<div class="mt-4 pt-5 col-md-12 border-top">
 				<h2 class="subtitle subtitle-tribute">Adicionar pessoas</h2>
 			</div>
 		</div>
@@ -33,13 +33,13 @@ global $tribute, $tribute_hash;
 						<!-- --------------------- -->
 						<div v-for="friend in friends" v-bind:key="friend.email" class="card-invite">
 							<div class="row">
-								<div class="col-md-5">
+								<div class="mb-3 col-md-5">
 									<input type="text" name="friends[name][]" v-model="friend.name" class="form-control form-control-lg" />
 								</div>
-								<div class="col-md-5">
-									<input type="email" name="friends[email][]" v-model="friend.email" class="form-control form-control-lg" />
+								<div class="mb-3 col-md-5">
+									<input type="email" name="friends[email][]" v-model="friend.email" autocapitalize="off" class="form-control form-control-lg" />
 								</div>
-								<div class="col-md-2">
+								<div class="col-md-2 text-right">
 									<button class="button-icon-only" v-on:click="removeFriend(friend.email)"><i class="icon icon-trash"></i></button>
 								</div>
 							</div>
@@ -48,12 +48,12 @@ global $tribute, $tribute_hash;
 				</div>
 			</div>
 		</div>
-		<div class="row mt-5">
-			<div class="col-md-5">
+		<div class="row mt-4">
+			<div class="col-md-5 mb-3">
 				<label for="">Nome</label>
 				<input id="add-name" type="text" v-model="name" class="form-control form-control-lg" />
 			</div>
-			<div class="col-md-5">
+			<div class="col-md-5 mb-3">
 				<label for="">e-mail</label>
 				<input type="email" v-model="email" v-on:keydown="onChangeEmail" class="form-control form-control-lg" />
 			</div>
