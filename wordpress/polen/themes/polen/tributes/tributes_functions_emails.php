@@ -75,6 +75,18 @@ function tributes_send_email( $email_content, $to_name, $to_email ) {
  **************** Conteudo dos Emails ***********************
  ************************************************************/
 
+ function get_mail_header()
+ {
+	 $header_file = tributes_get_email_path() . "templates/header.php";
+	 $header_content = file_get_contents($header_file);
+	 $header = sprintf($header_content, TEMPLATE_URI . "/tributes/assets/img/logo.svg");
+	 return $header;
+ }
+
+ function get_mail_footer()
+ {
+	 return file_get_contents(TEMPLATE_DIR . '/tributes/emails/templates/footer.php');
+ }
 
 /**
  * Cria o conteudo do email de convite
@@ -100,7 +112,7 @@ function tributes_email_create_content_invite( $invite_hash ) {
         tributes_create_link_email_send_video( $invites->hash ),
         tributes_create_link_set_email_opened( $invites->hash ),
     );
-    return $content_formatted;
+    return get_mail_header() . $content_formatted . get_mail_footer();
 }
 
 /**

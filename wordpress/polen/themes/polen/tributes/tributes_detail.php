@@ -74,7 +74,7 @@ $is_complete = true;
 									<span class="status mt-1"><?php getIcon(false); ?><?php echo $invite->email_opened ? "Usuário abriu o e-mail" : "Usuário não finalizou o vídeo"; ?></span>
 								<?php endif; ?>
 							</div>
-							<div class="col-md-5 mt-3">
+							<div class="col-md-5 mt-3 mt-md-0">
 								<input type="email" value="<?php echo $invite->email_inviter; ?>" class="form-control form-control-lg" disabled />
 							</div>
 							<?php if (!$invite->video_sent) : $is_complete = false; ?>
