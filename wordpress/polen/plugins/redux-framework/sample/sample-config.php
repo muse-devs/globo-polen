@@ -18,19 +18,11 @@ $opt_name = 'redux_demo';  // YOU MUST CHANGE THIS.  DO NOT USE 'redux_demo' IN 
 // Uncomment to disable demo mode.
 /* Redux::disable_demo(); */  // phpcs:ignore Squiz.PHP.CommentedOutCode
 
-$dir = dirname( __FILE__ ) . '/';
+$dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 
 /*
  * --> Used within different fields. Simply examples. Search for ACTUAL DECLARATION for field examples
  */
-
-$sample_html = '';
-if ( file_exists( $dir . '/info-html.html' ) ) {
-	$fs = Redux_Filesystem::get_instance();
-	if ( method_exists( $fs, 'get_contents' ) ) {
-		$sample_html = $fs->execute( 'get_contents', $dir . '/info-html.html' );
-	}
-}
 
 // Background Patterns Reader.
 $sample_patterns_path = Redux_Core::$dir . '../sample/patterns/';
@@ -651,10 +643,10 @@ if ( ! function_exists( 'redux_validate_callback_function' ) ) {
 		$warning = false;
 
 		// Do your validation.
-		if ( 1 === $value ) {
+		if ( 1 === (int) $value ) {
 			$error = true;
 			$value = $existing_value;
-		} elseif ( 2 === $value ) {
+		} elseif ( 2 === (int) $value ) {
 			$warning = true;
 			$value   = $existing_value;
 		}

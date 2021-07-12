@@ -1,4 +1,4 @@
-/*global redux_change, redux*/
+/*global redux_change, redux, jQuery*/
 
 (function( $ ) {
 	'use strict';
@@ -165,7 +165,8 @@
 						);
 
 						if ( displayValue === DISPLAY_TEXT ) {
-							inputOne.keydown(
+							inputOne.on(
+								'keydown',
 								function( e ) {
 									var sliderOne = slider.val();
 									var value     = parseInt( sliderOne[0] );
@@ -185,7 +186,8 @@
 							);
 
 							if ( 2 === handles ) {
-								inputTwo.keydown(
+								inputTwo.on(
+									'keydown',
 									function( e ) {
 										var sliderTwo = slider.val();
 										var value     = parseInt( sliderTwo[1] );
