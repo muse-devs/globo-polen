@@ -62,6 +62,9 @@ class Polen_Talent {
 
             add_filter( 'woocommerce_get_availability_text', array( $this, 'remove_stock_text' ) );
         }
+
+        global $wpdb;
+        $this->table_talent = $wpdb->base_prefix . 'polen_talents';
     }
 
     /**
@@ -112,6 +115,7 @@ class Polen_Talent {
             }
 
             $this->set_product_to_talent($post_id, $post_author);
+            $this->update_talent_alias( $post_id );
         }
     }
 
@@ -705,6 +709,26 @@ class Polen_Talent {
      */
     public function remove_stock_text( $text ){
         return '';
+    }
+
+    /**
+     * Salva o slug do produto no talento
+     */
+    public function update_talent_alias( $post_id ) {
+        if( $post_id && ! is_null( $post_id ) && $post_id > 0 ) {
+            $product = get_post( $post_id );
+            global $wpdb;
+            $wpdb->update(
+                $this->table_talent,
+                array(
+                    'talent_alias' => $product->post_name,
+                    'talent_url'   => get_permalink( $post_id ),
+                ),
+                array(
+                    'user_id' => $product->post_author,
+                )
+            );
+        }
     }
 }
     

@@ -36,8 +36,17 @@ use Polen\Includes\Polen_Bancos;
                                     Slug do Perfil
                                 </th>
                                 <td>
+                                    <?php 
+                                    $current_screen = get_current_screen();
+                                    if( isset( $current_screen->base ) && $current_screen->base == 'user-edit' ) {
+                                    ?>
+                                    <?php bloginfo( 'url' ); ?>/<strong><?php echo ( isset( $vendorInfo->talent_alias ) ) ? $vendorInfo->talent_alias : ''; ?></strong>
+                                    <?php  
+                                    } else {
+                                    ?>
                                     <input type="text" name="talent_alias" value="<?php echo ( isset( $vendorInfo->talent_alias ) ) ? $vendorInfo->talent_alias : ''; ?>" autocomplete="off" class="widefat" maxlength="255">
                                     <small>Ex: <?php bloginfo( 'url' ); ?><strong>/nome-do-talento/</strong></small>
+                                    <?php } ?>
                                 </td>
                             </tr>
                             <tr id="tr_talent_alias">
