@@ -96,6 +96,9 @@ function tributes_send_email( $email_content, $to_name, $to_email ) {
 	return $footer;
  }
 
+ const VIDEO_IMAGE = TEMPLATE_URI . "/tributes/assets/img/carousel-video.png";
+ const SUCCESS_IMAGE = TEMPLATE_URI . "/tributes/assets/img/check-circle.png";
+
 /**
  * Cria o conteudo do email de convite
  * @param string
@@ -108,12 +111,10 @@ function tributes_email_create_content_invite( $invite_hash ) {
     $invites = Tributes_Invites_Model::get_by_hash( $invite_hash );
     $tribute = Tributes_Model::get_by_id( $invites->tribute_id );
 
-	$top_image = TEMPLATE_URI . "/tributes/assets/img/carousel-video.png";
-
     $date = date('d \d\e F \d\e o', strtotime($tribute->deadline));
     $content_formatted = sprintf(
         $email_content,
-		$top_image,
+		VIDEO_IMAGE,
         $invites->name_inviter,
         $tribute->creator_name,
         $tribute->name_honored,
@@ -143,6 +144,7 @@ function tributes_email_content_invites_sended( $tribute ) {
     $date = date('d \d\e F \d\e o', strtotime( $tribute->deadline ));
     $content_formatted = sprintf(
         $email_content,
+		VIDEO_IMAGE,
         $tribute->creator_name,
         implode( ', ', $names ),
         $date,
@@ -170,6 +172,7 @@ function tributes_email_content_complete_tribute( $tribute ) {
 
     $content_formatted = sprintf(
         $email_content,
+		SUCCESS_IMAGE,
         $tribute->creator_name,
         implode( ', ', $names ),
         tribute_get_url_final_video( $tribute->slug ),
