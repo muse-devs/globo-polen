@@ -3,7 +3,7 @@ defined( 'ABSPATH' ) || die;
 ?>
 <div class="wrap">
     <div>
-        <a href="#" id="polen_create_first_order" onclick="polen_create_first_order()">Criar uma Order</a>
+        <a href="#" id="polen_create_first_order" onclick="polen_create_first_order()">Criar a primeira Order</a>
     </div>
     <div class="clear"></div>
     <form id="form-create-first-order" action="./" method="post">
@@ -23,10 +23,10 @@ document.getElementById('polen_create_first_order').addEventListener("click", fu
 			product_id: <?= $product_id; ?>
 		},
 		success: function (response) {
-            alert('bom')
+            alert('Primeiro pedido (gratis e para o usuário polen) criado com sucesso')
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
-			alert('ruim');
+			alert('Algum problema, verifique se o pedido gratis foi criado e tente novamente');
 		},
 		complete: function () {
 			
