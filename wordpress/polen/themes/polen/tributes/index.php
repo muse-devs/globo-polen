@@ -3,7 +3,7 @@
 <?php //TODO ajustar URLs
 ?>
 <?php $create_url = tribute_get_url_new_tribute(); ?>
-<?php $dashboard_url = "./meus-tributos"; ?>
+<?php $dashboard_url = tribute_get_url_my_tributes(); ?>
 
 <main class="overflow-hidden">
 	<div class="container py-3 tribute-container tribute-app">
