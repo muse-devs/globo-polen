@@ -403,6 +403,49 @@ function polen_front_get_talent_videos($talent)
 <?php
 }
 
+function polen_get_video_player_html($data, $user_id = null)
+{
+	if (!$data) {
+		return;
+	}
+	wp_enqueue_script("vimeo");
+
+	$video_url = tribute_get_url_base_url() . "/v/" . $data->slug;
+?>
+	<div class="row video-card">
+		<header class="col-md-6 p-0">
+			<div id="video-box">
+				<div id="polen-video" class="polen-video"></div>
+			</div>
+			<script>
+				jQuery(document).ready(function() {
+					var videoPlayer = new Vimeo.Player("polen-video", {
+						url: "<?php echo $data->vimeo_link; ?>",
+						autoplay: false,
+						muted: false,
+						loop: false,
+						width: document.getElementById("polen-video").offsetWidth,
+					});
+				})
+			</script>
+		</header>
+		<div class="content col-md-6 mt-4">
+			<header class="row content-header">
+				<div class="col-9">
+					<h4 class="m-0 name">Seu vídeo</h4>
+					<h5 class="mt-3 cat">Colab para <?php echo $data->name_honored; ?></h5>
+				</div>
+			</header>
+			<div class="row mt-4 share">
+				<div class="col-12">
+					<?php polen_get_talent_video_buttons($data, $video_url, $data->vimeo_url_download, $data->hash); ?>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php
+}
+
 /**
  * Cria a tela para assitir video
  * @param stdClass $talent Polen_Update_Fields

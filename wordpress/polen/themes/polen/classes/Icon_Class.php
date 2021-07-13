@@ -7,6 +7,11 @@ class Icon_Class
 		echo '<i class="bi bi-clipboard"></i>';
 	}
 
+	public static function polen_icon_play()
+	{
+		echo '<i class="bi bi-play"></i>';
+	}
+
 	public static function polen_icon_card($name)
 	{
 		echo '<span class="svg-icon svg-' . $name . ' svg-' . $name . '-dims"></span>';
@@ -30,6 +35,11 @@ class Icon_Class
 	public static function polen_icon_check_o()
 	{
 		echo '<i class="bi bi-check-circle"></i>';
+	}
+
+	public static function polen_icon_check_o_alt()
+	{
+		echo '<i class="icon icon-check-o" style="color: var(--success)"></i>';
 	}
 
 	public static function polen_icon_exclamation_o()
