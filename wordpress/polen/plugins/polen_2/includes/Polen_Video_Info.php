@@ -149,7 +149,7 @@ class Polen_Video_Info extends Polen_DB
      */
     public function pre_update() {
         parent::pre_update();
-        $this->updated_at = date('Y-m-d H-i-s');
+        $this->updated_at = date('Y-m-d H:i:s');
     }
     
     

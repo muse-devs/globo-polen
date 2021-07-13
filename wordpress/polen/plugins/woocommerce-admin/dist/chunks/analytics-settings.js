@@ -1,777 +1,62 @@
-(window["__wcAdmin_webpackJsonp"] = window["__wcAdmin_webpackJsonp"] || []).push([[20],{
-
-/***/ 219:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- * 
- */
-
-function makeEmptyFunction(arg) {
-  return function () {
-    return arg;
-  };
-}
-
-/**
- * This function accepts and discards inputs; it has no side effects. This is
- * primarily useful idiomatically for overridable function endpoints which
- * always need to be callable, since JS lacks a null-call idiom ala Cocoa.
- */
-var emptyFunction = function emptyFunction() {};
-
-emptyFunction.thatReturns = makeEmptyFunction;
-emptyFunction.thatReturnsFalse = makeEmptyFunction(false);
-emptyFunction.thatReturnsTrue = makeEmptyFunction(true);
-emptyFunction.thatReturnsNull = makeEmptyFunction(null);
-emptyFunction.thatReturnsThis = function () {
-  return this;
-};
-emptyFunction.thatReturnsArgument = function (arg) {
-  return arg;
-};
-
-module.exports = emptyFunction;
-
-/***/ }),
-
-/***/ 243:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Copyright (c) 2015-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-
-
-var React = __webpack_require__(20);
-
-var REACT_ELEMENT_TYPE =
-  (typeof Symbol === 'function' && Symbol.for && Symbol.for('react.element')) ||
-  0xeac7;
-
-var emptyFunction = __webpack_require__(219);
-var invariant = __webpack_require__(244);
-var warning = __webpack_require__(245);
-
-var SEPARATOR = '.';
-var SUBSEPARATOR = ':';
-
-var didWarnAboutMaps = false;
-
-var ITERATOR_SYMBOL = typeof Symbol === 'function' && Symbol.iterator;
-var FAUX_ITERATOR_SYMBOL = '@@iterator'; // Before Symbol spec.
-
-function getIteratorFn(maybeIterable) {
-  var iteratorFn =
-    maybeIterable &&
-    ((ITERATOR_SYMBOL && maybeIterable[ITERATOR_SYMBOL]) ||
-      maybeIterable[FAUX_ITERATOR_SYMBOL]);
-  if (typeof iteratorFn === 'function') {
-    return iteratorFn;
-  }
-}
-
-function escape(key) {
-  var escapeRegex = /[=:]/g;
-  var escaperLookup = {
-    '=': '=0',
-    ':': '=2'
-  };
-  var escapedString = ('' + key).replace(escapeRegex, function(match) {
-    return escaperLookup[match];
-  });
-
-  return '$' + escapedString;
-}
-
-function getComponentKey(component, index) {
-  // Do some typechecking here since we call this blindly. We want to ensure
-  // that we don't block potential future ES APIs.
-  if (component && typeof component === 'object' && component.key != null) {
-    // Explicit key
-    return escape(component.key);
-  }
-  // Implicit key determined by the index in the set
-  return index.toString(36);
-}
-
-function traverseAllChildrenImpl(
-  children,
-  nameSoFar,
-  callback,
-  traverseContext
-) {
-  var type = typeof children;
-
-  if (type === 'undefined' || type === 'boolean') {
-    // All of the above are perceived as null.
-    children = null;
-  }
-
-  if (
-    children === null ||
-    type === 'string' ||
-    type === 'number' ||
-    // The following is inlined from ReactElement. This means we can optimize
-    // some checks. React Fiber also inlines this logic for similar purposes.
-    (type === 'object' && children.$$typeof === REACT_ELEMENT_TYPE)
-  ) {
-    callback(
-      traverseContext,
-      children,
-      // If it's the only child, treat the name as if it was wrapped in an array
-      // so that it's consistent if the number of children grows.
-      nameSoFar === '' ? SEPARATOR + getComponentKey(children, 0) : nameSoFar
-    );
-    return 1;
-  }
-
-  var child;
-  var nextName;
-  var subtreeCount = 0; // Count of children found in the current subtree.
-  var nextNamePrefix = nameSoFar === '' ? SEPARATOR : nameSoFar + SUBSEPARATOR;
-
-  if (Array.isArray(children)) {
-    for (var i = 0; i < children.length; i++) {
-      child = children[i];
-      nextName = nextNamePrefix + getComponentKey(child, i);
-      subtreeCount += traverseAllChildrenImpl(
-        child,
-        nextName,
-        callback,
-        traverseContext
-      );
-    }
-  } else {
-    var iteratorFn = getIteratorFn(children);
-    if (iteratorFn) {
-      if (false) {}
-
-      var iterator = iteratorFn.call(children);
-      var step;
-      var ii = 0;
-      while (!(step = iterator.next()).done) {
-        child = step.value;
-        nextName = nextNamePrefix + getComponentKey(child, ii++);
-        subtreeCount += traverseAllChildrenImpl(
-          child,
-          nextName,
-          callback,
-          traverseContext
-        );
-      }
-    } else if (type === 'object') {
-      var addendum = '';
-      if (false) {}
-      var childrenString = '' + children;
-      invariant(
-        false,
-        'Objects are not valid as a React child (found: %s).%s',
-        childrenString === '[object Object]'
-          ? 'object with keys {' + Object.keys(children).join(', ') + '}'
-          : childrenString,
-        addendum
-      );
-    }
-  }
-
-  return subtreeCount;
-}
-
-function traverseAllChildren(children, callback, traverseContext) {
-  if (children == null) {
-    return 0;
-  }
-
-  return traverseAllChildrenImpl(children, '', callback, traverseContext);
-}
-
-var userProvidedKeyEscapeRegex = /\/+/g;
-function escapeUserProvidedKey(text) {
-  return ('' + text).replace(userProvidedKeyEscapeRegex, '$&/');
-}
-
-function cloneAndReplaceKey(oldElement, newKey) {
-  return React.cloneElement(
-    oldElement,
-    {key: newKey},
-    oldElement.props !== undefined ? oldElement.props.children : undefined
-  );
-}
-
-var DEFAULT_POOL_SIZE = 10;
-var DEFAULT_POOLER = oneArgumentPooler;
-
-var oneArgumentPooler = function(copyFieldsFrom) {
-  var Klass = this;
-  if (Klass.instancePool.length) {
-    var instance = Klass.instancePool.pop();
-    Klass.call(instance, copyFieldsFrom);
-    return instance;
-  } else {
-    return new Klass(copyFieldsFrom);
-  }
-};
-
-var addPoolingTo = function addPoolingTo(CopyConstructor, pooler) {
-  // Casting as any so that flow ignores the actual implementation and trusts
-  // it to match the type we declared
-  var NewKlass = CopyConstructor;
-  NewKlass.instancePool = [];
-  NewKlass.getPooled = pooler || DEFAULT_POOLER;
-  if (!NewKlass.poolSize) {
-    NewKlass.poolSize = DEFAULT_POOL_SIZE;
-  }
-  NewKlass.release = standardReleaser;
-  return NewKlass;
-};
-
-var standardReleaser = function standardReleaser(instance) {
-  var Klass = this;
-  invariant(
-    instance instanceof Klass,
-    'Trying to release an instance into a pool of a different type.'
-  );
-  instance.destructor();
-  if (Klass.instancePool.length < Klass.poolSize) {
-    Klass.instancePool.push(instance);
-  }
-};
-
-var fourArgumentPooler = function fourArgumentPooler(a1, a2, a3, a4) {
-  var Klass = this;
-  if (Klass.instancePool.length) {
-    var instance = Klass.instancePool.pop();
-    Klass.call(instance, a1, a2, a3, a4);
-    return instance;
-  } else {
-    return new Klass(a1, a2, a3, a4);
-  }
-};
-
-function MapBookKeeping(mapResult, keyPrefix, mapFunction, mapContext) {
-  this.result = mapResult;
-  this.keyPrefix = keyPrefix;
-  this.func = mapFunction;
-  this.context = mapContext;
-  this.count = 0;
-}
-MapBookKeeping.prototype.destructor = function() {
-  this.result = null;
-  this.keyPrefix = null;
-  this.func = null;
-  this.context = null;
-  this.count = 0;
-};
-addPoolingTo(MapBookKeeping, fourArgumentPooler);
-
-function mapSingleChildIntoContext(bookKeeping, child, childKey) {
-  var result = bookKeeping.result;
-  var keyPrefix = bookKeeping.keyPrefix;
-  var func = bookKeeping.func;
-  var context = bookKeeping.context;
-
-  var mappedChild = func.call(context, child, bookKeeping.count++);
-  if (Array.isArray(mappedChild)) {
-    mapIntoWithKeyPrefixInternal(
-      mappedChild,
-      result,
-      childKey,
-      emptyFunction.thatReturnsArgument
-    );
-  } else if (mappedChild != null) {
-    if (React.isValidElement(mappedChild)) {
-      mappedChild = cloneAndReplaceKey(
-        mappedChild,
-        // Keep both the (mapped) and old keys if they differ, just as
-        // traverseAllChildren used to do for objects as children
-        keyPrefix +
-          (mappedChild.key && (!child || child.key !== mappedChild.key)
-            ? escapeUserProvidedKey(mappedChild.key) + '/'
-            : '') +
-          childKey
-      );
-    }
-    result.push(mappedChild);
-  }
-}
-
-function mapIntoWithKeyPrefixInternal(children, array, prefix, func, context) {
-  var escapedPrefix = '';
-  if (prefix != null) {
-    escapedPrefix = escapeUserProvidedKey(prefix) + '/';
-  }
-  var traverseContext = MapBookKeeping.getPooled(
-    array,
-    escapedPrefix,
-    func,
-    context
-  );
-  traverseAllChildren(children, mapSingleChildIntoContext, traverseContext);
-  MapBookKeeping.release(traverseContext);
-}
-
-var numericPropertyRegex = /^\d+$/;
-
-var warnedAboutNumeric = false;
-
-function createReactFragment(object) {
-  if (typeof object !== 'object' || !object || Array.isArray(object)) {
-    warning(
-      false,
-      'React.addons.createFragment only accepts a single object. Got: %s',
-      object
-    );
-    return object;
-  }
-  if (React.isValidElement(object)) {
-    warning(
-      false,
-      'React.addons.createFragment does not accept a ReactElement ' +
-        'without a wrapper object.'
-    );
-    return object;
-  }
-
-  invariant(
-    object.nodeType !== 1,
-    'React.addons.createFragment(...): Encountered an invalid child; DOM ' +
-      'elements are not valid children of React components.'
-  );
-
-  var result = [];
-
-  for (var key in object) {
-    if (false) {}
-    mapIntoWithKeyPrefixInternal(
-      object[key],
-      result,
-      key,
-      emptyFunction.thatReturnsArgument
-    );
-  }
-
-  return result;
-}
-
-module.exports = createReactFragment;
-
-
-/***/ }),
-
-/***/ 244:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
-
-
-/**
- * Use invariant() to assert state which your program assumes to be true.
- *
- * Provide sprintf-style format (only %s is supported) and arguments
- * to provide information about what broke and what you were
- * expecting.
- *
- * The invariant message will be stripped in production, but the invariant
- * will remain to ensure logic does not differ in production.
- */
-
-var validateFormat = function validateFormat(format) {};
-
-if (false) {}
-
-function invariant(condition, format, a, b, c, d, e, f) {
-  validateFormat(format);
-
-  if (!condition) {
-    var error;
-    if (format === undefined) {
-      error = new Error('Minified exception occurred; use the non-minified dev environment ' + 'for the full error message and additional helpful warnings.');
-    } else {
-      var args = [a, b, c, d, e, f];
-      var argIndex = 0;
-      error = new Error(format.replace(/%s/g, function () {
-        return args[argIndex++];
-      }));
-      error.name = 'Invariant Violation';
-    }
-
-    error.framesToPop = 1; // we don't care about invariant's own frame
-    throw error;
-  }
-}
-
-module.exports = invariant;
-
-/***/ }),
-
-/***/ 245:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Copyright (c) 2014-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
-
-
-var emptyFunction = __webpack_require__(219);
-
-/**
- * Similar to invariant but only logs a warning if the condition is not met.
- * This can be used to log issues in development environments in critical
- * paths. Removing the logging code for production environments will keep the
- * same logic and follow the same code paths.
- */
-
-var warning = emptyFunction;
-
-if (false) { var printWarning; }
-
-module.exports = warning;
-
-/***/ }),
-
-/***/ 246:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-function identifyToken(item) {
-	// {{/example}}
-	if (item.match(/^\{\{\//)) {
-		return {
-			type: 'componentClose',
-			value: item.replace(/\W/g, '')
-		};
-	}
-	// {{example /}}
-	if (item.match(/\/\}\}$/)) {
-		return {
-			type: 'componentSelfClosing',
-			value: item.replace(/\W/g, '')
-		};
-	}
-	// {{example}}
-	if (item.match(/^\{\{/)) {
-		return {
-			type: 'componentOpen',
-			value: item.replace(/\W/g, '')
-		};
-	}
-	return {
-		type: 'string',
-		value: item
-	};
-}
-
-module.exports = function (mixedString) {
-	var tokenStrings = mixedString.split(/(\{\{\/?\s*\w+\s*\/?\}\})/g); // split to components and strings
-	return tokenStrings.map(identifyToken);
-};
-//# sourceMappingURL=tokenize.js.map
-
-/***/ }),
-
-/***/ 629:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, "a", function() { return /* binding */ DEFAULT_ACTIONABLE_STATUSES; });
-__webpack_require__.d(__webpack_exports__, "b", function() { return /* binding */ config; });
-
-// UNUSED EXPORTS: DEFAULT_ORDER_STATUSES, DEFAULT_DATE_RANGE
-
-// EXTERNAL MODULE: external ["wp","element"]
-var external_wp_element_ = __webpack_require__(0);
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.map.js
-var es_array_map = __webpack_require__(51);
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.filter.js
-var es_array_filter = __webpack_require__(41);
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.keys.js
-var es_object_keys = __webpack_require__(37);
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.includes.js
-var es_array_includes = __webpack_require__(107);
-
-// EXTERNAL MODULE: external ["wp","i18n"]
-var external_wp_i18n_ = __webpack_require__(2);
-
-// EXTERNAL MODULE: external ["wp","hooks"]
-var external_wp_hooks_ = __webpack_require__(141);
-
-// EXTERNAL MODULE: ./node_modules/interpolate-components/lib/index.js
-var lib = __webpack_require__(99);
-var lib_default = /*#__PURE__*/__webpack_require__.n(lib);
-
-// EXTERNAL MODULE: ./client/wc-admin-settings/index.js
-var wc_admin_settings = __webpack_require__(85);
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.replace.js
-var es_string_replace = __webpack_require__(135);
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.regexp.exec.js
-var es_regexp_exec = __webpack_require__(88);
-
-// EXTERNAL MODULE: ./node_modules/qs/lib/index.js
-var qs_lib = __webpack_require__(162);
-
-// EXTERNAL MODULE: external ["wc","components"]
-var external_wc_components_ = __webpack_require__(145);
-
-// EXTERNAL MODULE: external ["wc","data"]
-var external_wc_data_ = __webpack_require__(59);
-
-// EXTERNAL MODULE: external ["wc","date"]
-var external_wc_date_ = __webpack_require__(101);
-
-// CONCATENATED MODULE: ./client/analytics/settings/default-date.js
-
-
-
-
-/**
- * External dependencies
- */
-
-
-
-
-
-var default_date_DefaultDate = function DefaultDate(_ref) {
-  var value = _ref.value,
-      onChange = _ref.onChange;
-
-  var _useSettings = Object(external_wc_data_["useSettings"])('wc_admin', ['wcAdminSettings']),
-      wcAdminSettings = _useSettings.wcAdminSettings;
-
-  var defaultDateRange = wcAdminSettings.woocommerce_default_date_range;
-
-  var change = function change(query) {
-    onChange({
-      target: {
-        name: 'woocommerce_default_date_range',
-        value: Object(qs_lib["stringify"])(query)
-      }
+(window["__wcAdmin_webpackJsonp"] = window["__wcAdmin_webpackJsonp"] || []).push([[17],{
+
+/***/ 43:
+/***/ (function(module, exports) {
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
     });
-  };
-
-  var query = Object(qs_lib["parse"])(value.replace(/&amp;/g, '&'));
-
-  var _getDateParamsFromQue = Object(external_wc_date_["getDateParamsFromQuery"])(query, defaultDateRange),
-      period = _getDateParamsFromQue.period,
-      compare = _getDateParamsFromQue.compare,
-      before = _getDateParamsFromQue.before,
-      after = _getDateParamsFromQue.after;
-
-  var _getCurrentDates = Object(external_wc_date_["getCurrentDates"])(query, defaultDateRange),
-      primaryDate = _getCurrentDates.primary,
-      secondaryDate = _getCurrentDates.secondary;
-
-  var dateQuery = {
-    period: period,
-    compare: compare,
-    before: before,
-    after: after,
-    primaryDate: primaryDate,
-    secondaryDate: secondaryDate
-  };
-  return Object(external_wp_element_["createElement"])(external_wc_components_["DateRangeFilterPicker"], {
-    query: query,
-    onRangeSelect: change,
-    dateQuery: dateQuery,
-    isoDateFormat: external_wc_date_["isoDateFormat"]
-  });
-};
-
-/* harmony default export */ var default_date = (default_date_DefaultDate);
-// CONCATENATED MODULE: ./client/analytics/settings/config.js
-
-
-
-
-
-
-/**
- * External dependencies
- */
-
-
-
-
-/**
- * Internal dependencies
- */
-
-
-var SETTINGS_FILTER = 'woocommerce_admin_analytics_settings';
-var DEFAULT_ACTIONABLE_STATUSES = ['processing', 'on-hold'];
-var DEFAULT_ORDER_STATUSES = ['completed', 'processing', 'refunded', 'cancelled', 'failed', 'pending', 'on-hold'];
-var DEFAULT_DATE_RANGE = 'period=month&compare=previous_year';
-var filteredOrderStatuses = Object.keys(wc_admin_settings["d" /* ORDER_STATUSES */]).filter(function (status) {
-  return status !== 'refunded';
-}).map(function (key) {
-  return {
-    value: key,
-    label: wc_admin_settings["d" /* ORDER_STATUSES */][key],
-    description: Object(external_wp_i18n_["sprintf"])(Object(external_wp_i18n_["__"])('Exclude the %s status from reports', 'woocommerce-admin'), wc_admin_settings["d" /* ORDER_STATUSES */][key])
-  };
-});
-var unregisteredOrderStatuses = Object(wc_admin_settings["g" /* getSetting */])('unregisteredOrderStatuses', {});
-var orderStatusOptions = [{
-  key: 'defaultStatuses',
-  options: filteredOrderStatuses.filter(function (status) {
-    return DEFAULT_ORDER_STATUSES.includes(status.value);
-  })
-}, {
-  key: 'customStatuses',
-  label: Object(external_wp_i18n_["__"])('Custom Statuses', 'woocommerce-admin'),
-  options: filteredOrderStatuses.filter(function (status) {
-    return !DEFAULT_ORDER_STATUSES.includes(status.value);
-  })
-}, {
-  key: 'unregisteredStatuses',
-  label: Object(external_wp_i18n_["__"])('Unregistered Statuses', 'woocommerce-admin'),
-  options: Object.keys(unregisteredOrderStatuses).map(function (key) {
-    return {
-      value: key,
-      label: key,
-      description: Object(external_wp_i18n_["sprintf"])(Object(external_wp_i18n_["__"])('Exclude the %s status from reports', 'woocommerce-admin'), key)
-    };
-  })
-}];
-var config = Object(external_wp_hooks_["applyFilters"])(SETTINGS_FILTER, {
-  woocommerce_excluded_report_order_statuses: {
-    label: Object(external_wp_i18n_["__"])('Excluded Statuses:', 'woocommerce-admin'),
-    inputType: 'checkboxGroup',
-    options: orderStatusOptions,
-    helpText: lib_default()({
-      mixedString: Object(external_wp_i18n_["__"])('Orders with these statuses are excluded from the totals in your reports. ' + 'The {{strong}}Refunded{{/strong}} status can not be excluded.', 'woocommerce-admin'),
-      components: {
-        strong: Object(external_wp_element_["createElement"])("strong", null)
-      }
-    }),
-    defaultValue: ['pending', 'cancelled', 'failed']
-  },
-  woocommerce_actionable_order_statuses: {
-    label: Object(external_wp_i18n_["__"])('Actionable Statuses:', 'woocommerce-admin'),
-    inputType: 'checkboxGroup',
-    options: orderStatusOptions,
-    helpText: Object(external_wp_i18n_["__"])('Orders with these statuses require action on behalf of the store admin. ' + 'These orders will show up in the Home Screen - Orders task.', 'woocommerce-admin'),
-    defaultValue: DEFAULT_ACTIONABLE_STATUSES
-  },
-  woocommerce_default_date_range: {
-    name: 'woocommerce_default_date_range',
-    label: Object(external_wp_i18n_["__"])('Default Date Range:', 'woocommerce-admin'),
-    inputType: 'component',
-    component: default_date,
-    helpText: Object(external_wp_i18n_["__"])('Select a default date range. When no range is selected, reports will be viewed by ' + 'the default date range.', 'woocommerce-admin'),
-    defaultValue: DEFAULT_DATE_RANGE
+  } else {
+    obj[key] = value;
   }
-});
+
+  return obj;
+}
+
+module.exports = _defineProperty;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
 
-/***/ 638:
+/***/ 590:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ 639:
+/***/ 591:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ 640:
+/***/ 592:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ 711:
+/***/ 653:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.symbol.js
-var es_symbol = __webpack_require__(53);
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.get-own-property-descriptor.js
-var es_object_get_own_property_descriptor = __webpack_require__(60);
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/web.dom-collections.for-each.js
-var web_dom_collections_for_each = __webpack_require__(49);
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.get-own-property-descriptors.js
-var es_object_get_own_property_descriptors = __webpack_require__(61);
-
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/extends.js
-var helpers_extends = __webpack_require__(80);
+var helpers_extends = __webpack_require__(13);
 var extends_default = /*#__PURE__*/__webpack_require__.n(helpers_extends);
-
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/toConsumableArray.js
-var toConsumableArray = __webpack_require__(44);
-var toConsumableArray_default = /*#__PURE__*/__webpack_require__.n(toConsumableArray);
-
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/defineProperty.js
-var defineProperty = __webpack_require__(7);
-var defineProperty_default = /*#__PURE__*/__webpack_require__.n(defineProperty);
 
 // EXTERNAL MODULE: external ["wp","element"]
 var external_wp_element_ = __webpack_require__(0);
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.keys.js
-var es_object_keys = __webpack_require__(37);
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.function.name.js
-var es_function_name = __webpack_require__(129);
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
-var es_array_concat = __webpack_require__(66);
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.filter.js
-var es_array_filter = __webpack_require__(41);
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.map.js
-var es_array_map = __webpack_require__(51);
 
 // EXTERNAL MODULE: external ["wp","i18n"]
 var external_wp_i18n_ = __webpack_require__(2);
@@ -780,96 +65,44 @@ var external_wp_i18n_ = __webpack_require__(2);
 var external_wp_components_ = __webpack_require__(4);
 
 // EXTERNAL MODULE: external ["wp","compose"]
-var external_wp_compose_ = __webpack_require__(65);
+var external_wp_compose_ = __webpack_require__(15);
 
 // EXTERNAL MODULE: external ["wp","data"]
-var external_wp_data_ = __webpack_require__(26);
+var external_wp_data_ = __webpack_require__(7);
 
 // EXTERNAL MODULE: external ["wc","components"]
-var external_wc_components_ = __webpack_require__(145);
+var external_wc_components_ = __webpack_require__(23);
 
 // EXTERNAL MODULE: external ["wc","data"]
-var external_wc_data_ = __webpack_require__(59);
+var external_wc_data_ = __webpack_require__(11);
 
 // EXTERNAL MODULE: external ["wc","tracks"]
-var external_wc_tracks_ = __webpack_require__(92);
+var external_wc_tracks_ = __webpack_require__(18);
 
 // EXTERNAL MODULE: ./client/analytics/settings/index.scss
-var settings = __webpack_require__(638);
+var settings = __webpack_require__(590);
 
 // EXTERNAL MODULE: ./client/analytics/settings/config.js + 1 modules
-var config = __webpack_require__(629);
+var config = __webpack_require__(300);
 
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.reflect.construct.js
-var es_reflect_construct = __webpack_require__(64);
-
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/classCallCheck.js
-var classCallCheck = __webpack_require__(22);
-var classCallCheck_default = /*#__PURE__*/__webpack_require__.n(classCallCheck);
-
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/createClass.js
-var createClass = __webpack_require__(23);
-var createClass_default = /*#__PURE__*/__webpack_require__.n(createClass);
-
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/assertThisInitialized.js
-var assertThisInitialized = __webpack_require__(18);
-var assertThisInitialized_default = /*#__PURE__*/__webpack_require__.n(assertThisInitialized);
-
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/inherits.js
-var inherits = __webpack_require__(24);
-var inherits_default = /*#__PURE__*/__webpack_require__.n(inherits);
-
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js
-var possibleConstructorReturn = __webpack_require__(25);
-var possibleConstructorReturn_default = /*#__PURE__*/__webpack_require__.n(possibleConstructorReturn);
-
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/getPrototypeOf.js
-var getPrototypeOf = __webpack_require__(14);
-var getPrototypeOf_default = /*#__PURE__*/__webpack_require__.n(getPrototypeOf);
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.promise.js
-var es_promise = __webpack_require__(164);
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.to-string.js
-var es_object_to_string = __webpack_require__(100);
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.includes.js
-var es_array_includes = __webpack_require__(107);
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.includes.js
-var es_string_includes = __webpack_require__(140);
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/defineProperty.js
+var defineProperty = __webpack_require__(43);
+var defineProperty_default = /*#__PURE__*/__webpack_require__.n(defineProperty);
 
 // EXTERNAL MODULE: ./node_modules/prop-types/index.js
 var prop_types = __webpack_require__(1);
 var prop_types_default = /*#__PURE__*/__webpack_require__.n(prop_types);
 
 // EXTERNAL MODULE: external "lodash"
-var external_lodash_ = __webpack_require__(5);
+var external_lodash_ = __webpack_require__(3);
 
 // EXTERNAL MODULE: ./client/analytics/settings/setting.scss
-var settings_setting = __webpack_require__(639);
+var settings_setting = __webpack_require__(591);
 
 // CONCATENATED MODULE: ./client/analytics/settings/setting.js
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = getPrototypeOf_default()(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = getPrototypeOf_default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return possibleConstructorReturn_default()(this, result); }; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 /**
  * External dependencies
@@ -886,61 +119,54 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 
 
-var setting_Setting = /*#__PURE__*/function (_Component) {
-  inherits_default()(Setting, _Component);
+class setting_Setting extends external_wp_element_["Component"] {
+  constructor(props) {
+    super(props);
 
-  var _super = _createSuper(Setting);
-
-  function Setting(props) {
-    var _this;
-
-    classCallCheck_default()(this, Setting);
-
-    _this = _super.call(this, props);
-
-    defineProperty_default()(assertThisInitialized_default()(_this), "renderInput", function () {
-      var _this$props = _this.props,
-          handleChange = _this$props.handleChange,
-          name = _this$props.name,
-          inputText = _this$props.inputText,
-          inputType = _this$props.inputType,
-          options = _this$props.options,
-          value = _this$props.value,
-          component = _this$props.component;
-      var disabled = _this.state.disabled;
+    defineProperty_default()(this, "renderInput", () => {
+      const {
+        handleChange,
+        name,
+        inputText,
+        inputType,
+        options,
+        value,
+        component
+      } = this.props;
+      const {
+        disabled
+      } = this.state;
 
       switch (inputType) {
         case 'checkboxGroup':
-          return options.map(function (optionGroup) {
-            return optionGroup.options.length > 0 && Object(external_wp_element_["createElement"])("div", {
-              className: "woocommerce-setting__options-group",
-              key: optionGroup.key,
-              "aria-labelledby": name + '-label'
-            }, optionGroup.label && Object(external_wp_element_["createElement"])("span", {
-              className: "woocommerce-setting__options-group-label"
-            }, optionGroup.label), _this.renderCheckboxOptions(optionGroup.options));
-          });
+          return options.map(optionGroup => optionGroup.options.length > 0 && Object(external_wp_element_["createElement"])("div", {
+            className: "woocommerce-setting__options-group",
+            key: optionGroup.key,
+            "aria-labelledby": name + '-label'
+          }, optionGroup.label && Object(external_wp_element_["createElement"])("span", {
+            className: "woocommerce-setting__options-group-label"
+          }, optionGroup.label), this.renderCheckboxOptions(optionGroup.options)));
 
         case 'checkbox':
-          return _this.renderCheckboxOptions(options);
+          return this.renderCheckboxOptions(options);
 
         case 'button':
           return Object(external_wp_element_["createElement"])(external_wp_components_["Button"], {
             isSecondary: true,
-            onClick: _this.handleInputCallback,
+            onClick: this.handleInputCallback,
             disabled: disabled
           }, inputText);
 
         case 'component':
-          var SettingComponent = component;
+          const SettingComponent = component;
           return Object(external_wp_element_["createElement"])(SettingComponent, extends_default()({
             value: value,
             onChange: handleChange
-          }, _this.props));
+          }, this.props));
 
         case 'text':
         default:
-          var id = Object(external_lodash_["uniqueId"])(name);
+          const id = Object(external_lodash_["uniqueId"])(name);
           return Object(external_wp_element_["createElement"])("input", {
             id: id,
             type: "text",
@@ -953,88 +179,84 @@ var setting_Setting = /*#__PURE__*/function (_Component) {
       }
     });
 
-    defineProperty_default()(assertThisInitialized_default()(_this), "handleInputCallback", function () {
-      var _this$props2 = _this.props,
-          createNotice = _this$props2.createNotice,
-          callback = _this$props2.callback;
+    defineProperty_default()(this, "handleInputCallback", () => {
+      const {
+        createNotice,
+        callback
+      } = this.props;
 
       if (typeof callback !== 'function') {
         return;
       }
 
-      return new Promise(function (resolve, reject) {
-        _this.setState({
+      return new Promise((resolve, reject) => {
+        this.setState({
           disabled: true
         });
-
         callback(resolve, reject, createNotice);
-      }).then(function () {
-        _this.setState({
+      }).then(() => {
+        this.setState({
           disabled: false
         });
-      }).catch(function () {
-        _this.setState({
+      }).catch(() => {
+        this.setState({
           disabled: false
         });
       });
     });
 
-    _this.state = {
+    this.state = {
       disabled: false
     };
-    return _this;
   }
 
-  createClass_default()(Setting, [{
-    key: "renderCheckboxOptions",
-    value: function renderCheckboxOptions(options) {
-      var _this$props3 = this.props,
-          handleChange = _this$props3.handleChange,
-          name = _this$props3.name,
-          value = _this$props3.value;
-      var disabled = this.state.disabled;
-      return options.map(function (option) {
-        return Object(external_wp_element_["createElement"])(external_wp_components_["CheckboxControl"], {
-          key: name + '-' + option.value,
-          label: option.label,
-          name: name,
-          checked: value && value.includes(option.value),
-          onChange: function onChange(checked) {
-            return handleChange({
-              target: {
-                checked: checked,
-                name: name,
-                type: 'checkbox',
-                value: option.value
-              }
-            });
-          },
-          disabled: disabled
-        });
+  renderCheckboxOptions(options) {
+    const {
+      handleChange,
+      name,
+      value
+    } = this.props;
+    const {
+      disabled
+    } = this.state;
+    return options.map(option => {
+      return Object(external_wp_element_["createElement"])(external_wp_components_["CheckboxControl"], {
+        key: name + '-' + option.value,
+        label: option.label,
+        name: name,
+        checked: value && value.includes(option.value),
+        onChange: checked => handleChange({
+          target: {
+            checked,
+            name,
+            type: 'checkbox',
+            value: option.value
+          }
+        }),
+        disabled: disabled
       });
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this$props4 = this.props,
-          helpText = _this$props4.helpText,
-          label = _this$props4.label,
-          name = _this$props4.name;
-      return Object(external_wp_element_["createElement"])("div", {
-        className: "woocommerce-setting"
-      }, Object(external_wp_element_["createElement"])("div", {
-        className: "woocommerce-setting__label",
-        id: name + '-label'
-      }, label), Object(external_wp_element_["createElement"])("div", {
-        className: "woocommerce-setting__input"
-      }, this.renderInput(), helpText && Object(external_wp_element_["createElement"])("span", {
-        className: "woocommerce-setting__help"
-      }, helpText)));
-    }
-  }]);
+    });
+  }
 
-  return Setting;
-}(external_wp_element_["Component"]);
+  render() {
+    const {
+      helpText,
+      label,
+      name
+    } = this.props;
+    return Object(external_wp_element_["createElement"])("div", {
+      className: "woocommerce-setting"
+    }, Object(external_wp_element_["createElement"])("div", {
+      className: "woocommerce-setting__label",
+      id: name + '-label'
+    }, label), Object(external_wp_element_["createElement"])("div", {
+      className: "woocommerce-setting__input"
+    }, this.renderInput(), helpText && Object(external_wp_element_["createElement"])("span", {
+      className: "woocommerce-setting__help"
+    }, helpText)));
+  }
+
+}
 
 setting_Setting.propTypes = {
   /**
@@ -1107,19 +329,16 @@ setting_Setting.propTypes = {
    */
   value: prop_types_default.a.oneOfType([prop_types_default.a.string, prop_types_default.a.array])
 };
-/* harmony default export */ var analytics_settings_setting = (Object(external_wp_compose_["compose"])(Object(external_wp_data_["withDispatch"])(function (dispatch) {
-  var _dispatch = dispatch('core/notices'),
-      createNotice = _dispatch.createNotice;
-
+/* harmony default export */ var analytics_settings_setting = (Object(external_wp_compose_["compose"])(Object(external_wp_data_["withDispatch"])(dispatch => {
+  const {
+    createNotice
+  } = dispatch('core/notices');
   return {
-    createNotice: createNotice
+    createNotice
   };
 }))(setting_Setting));
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.find.js
-var es_array_find = __webpack_require__(192);
-
 // EXTERNAL MODULE: external "moment"
-var external_moment_ = __webpack_require__(29);
+var external_moment_ = __webpack_require__(9);
 var external_moment_default = /*#__PURE__*/__webpack_require__.n(external_moment_);
 
 // CONCATENATED MODULE: ./client/analytics/settings/historical-data/utils.js
@@ -1128,8 +347,8 @@ var external_moment_default = /*#__PURE__*/__webpack_require__.n(external_moment
  */
 
 
-var utils_formatParams = function formatParams(dateFormat, period, skipChecked) {
-  var params = {};
+const formatParams = (dateFormat, period, skipChecked) => {
+  const params = {};
 
   if (skipChecked) {
     params.skip_existing = true;
@@ -1137,7 +356,7 @@ var utils_formatParams = function formatParams(dateFormat, period, skipChecked) 
 
   if (period.label !== 'all') {
     if (period.label === 'custom') {
-      var daysDifference = external_moment_default()().diff(external_moment_default()(period.date, dateFormat), 'days', true);
+      const daysDifference = external_moment_default()().diff(external_moment_default()(period.date, dateFormat), 'days', true);
       params.days = Math.floor(daysDifference);
     } else {
       params.days = parseInt(period.label, 10);
@@ -1146,15 +365,15 @@ var utils_formatParams = function formatParams(dateFormat, period, skipChecked) 
 
   return params;
 };
-var utils_getStatus = function getStatus(_ref) {
-  var cacheNeedsClearing = _ref.cacheNeedsClearing,
-      customersProgress = _ref.customersProgress,
-      customersTotal = _ref.customersTotal,
-      isError = _ref.isError,
-      inProgress = _ref.inProgress,
-      ordersProgress = _ref.ordersProgress,
-      ordersTotal = _ref.ordersTotal;
-
+const getStatus = ({
+  cacheNeedsClearing,
+  customersProgress,
+  customersTotal,
+  isError,
+  inProgress,
+  ordersProgress,
+  ordersTotal
+}) => {
   if (isError) {
     return 'error';
   }
@@ -1186,10 +405,9 @@ var utils_getStatus = function getStatus(_ref) {
   return 'nothing';
 };
 // EXTERNAL MODULE: external ["wp","url"]
-var external_wp_url_ = __webpack_require__(78);
+var external_wp_url_ = __webpack_require__(16);
 
 // CONCATENATED MODULE: ./client/analytics/settings/historical-data/actions.js
-
 
 
 /**
@@ -1209,41 +427,40 @@ var external_wp_url_ = __webpack_require__(78);
 
 
 
-function HistoricalDataActions(_ref) {
-  var clearStatusAndTotalsCache = _ref.clearStatusAndTotalsCache,
-      createNotice = _ref.createNotice,
-      dateFormat = _ref.dateFormat,
-      importDate = _ref.importDate,
-      onImportStarted = _ref.onImportStarted,
-      selectedPeriod = _ref.selectedPeriod,
-      stopImport = _ref.stopImport,
-      skipChecked = _ref.skipChecked,
-      status = _ref.status,
-      setImportStarted = _ref.setImportStarted,
-      updateImportation = _ref.updateImportation;
+function HistoricalDataActions({
+  clearStatusAndTotalsCache,
+  createNotice,
+  dateFormat,
+  importDate,
+  onImportStarted,
+  selectedPeriod,
+  stopImport,
+  skipChecked,
+  status,
+  setImportStarted,
+  updateImportation
+}) {
+  const onStartImport = () => {
+    const path = Object(external_wp_url_["addQueryArgs"])('/wc-analytics/reports/import', formatParams(dateFormat, selectedPeriod, skipChecked));
 
-  var onStartImport = function onStartImport() {
-    var path = Object(external_wp_url_["addQueryArgs"])('/wc-analytics/reports/import', utils_formatParams(dateFormat, selectedPeriod, skipChecked));
+    const errorMessage = Object(external_wp_i18n_["__"])('There was a problem rebuilding your report data.', 'woocommerce-admin');
 
-    var errorMessage = Object(external_wp_i18n_["__"])('There was a problem rebuilding your report data.', 'woocommerce-admin');
-
-    var importStarted = true;
+    const importStarted = true;
     makeQuery(path, errorMessage, importStarted);
     onImportStarted();
   };
 
-  var onStopImport = function onStopImport() {
+  const onStopImport = () => {
     stopImport();
-    var path = '/wc-analytics/reports/import/cancel';
+    const path = '/wc-analytics/reports/import/cancel';
 
-    var errorMessage = Object(external_wp_i18n_["__"])('There was a problem stopping your current import.', 'woocommerce-admin');
+    const errorMessage = Object(external_wp_i18n_["__"])('There was a problem stopping your current import.', 'woocommerce-admin');
 
     makeQuery(path, errorMessage);
   };
 
-  var makeQuery = function makeQuery(path, errorMessage) {
-    var importStarted = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    updateImportation(path, importStarted).then(function (response) {
+  const makeQuery = (path, errorMessage, importStarted = false) => {
+    updateImportation(path, importStarted).then(response => {
       if (response.status === 'success') {
         createNotice('success', response.message);
       } else {
@@ -1251,7 +468,7 @@ function HistoricalDataActions(_ref) {
         setImportStarted(false);
         stopImport();
       }
-    }).catch(function (error) {
+    }).catch(error => {
       if (error && error.message) {
         createNotice('error', error.message);
         setImportStarted(false);
@@ -1260,24 +477,24 @@ function HistoricalDataActions(_ref) {
     });
   };
 
-  var deletePreviousData = function deletePreviousData() {
-    var path = '/wc-analytics/reports/import/delete';
+  const deletePreviousData = () => {
+    const path = '/wc-analytics/reports/import/delete';
 
-    var errorMessage = Object(external_wp_i18n_["__"])('There was a problem deleting your previous data.', 'woocommerce-admin');
+    const errorMessage = Object(external_wp_i18n_["__"])('There was a problem deleting your previous data.', 'woocommerce-admin');
 
     makeQuery(path, errorMessage);
     Object(external_wc_tracks_["recordEvent"])('analytics_import_delete_previous');
     setImportStarted(false);
   };
 
-  var reimportData = function reimportData() {
+  const reimportData = () => {
     setImportStarted(false); // We need to clear the cache of the selectors `getImportTotals` and `getImportStatus`
 
     clearStatusAndTotalsCache();
   };
 
-  var getActions = function getActions() {
-    var importDisabled = status !== 'ready'; // An import is currently in progress
+  const getActions = () => {
+    const importDisabled = status !== 'ready'; // An import is currently in progress
 
     if (['initializing', 'customers', 'orders', 'finalizing'].includes(status)) {
       return Object(external_wp_element_["createElement"])(external_wp_element_["Fragment"], null, Object(external_wp_element_["createElement"])(external_wp_components_["Button"], {
@@ -1327,34 +544,34 @@ function HistoricalDataActions(_ref) {
   }, getActions());
 }
 
-/* harmony default export */ var actions = (Object(external_wp_compose_["compose"])([Object(external_wp_data_["withSelect"])(function (select) {
-  var _select = select(external_wc_data_["IMPORT_STORE_NAME"]),
-      getFormSettings = _select.getFormSettings;
-
-  var _getFormSettings = getFormSettings(),
-      selectedPeriod = _getFormSettings.period,
-      skipChecked = _getFormSettings.skipPrevious;
-
+/* harmony default export */ var actions = (Object(external_wp_compose_["compose"])([Object(external_wp_data_["withSelect"])(select => {
+  const {
+    getFormSettings
+  } = select(external_wc_data_["IMPORT_STORE_NAME"]);
+  const {
+    period: selectedPeriod,
+    skipPrevious: skipChecked
+  } = getFormSettings();
   return {
-    selectedPeriod: selectedPeriod,
-    skipChecked: skipChecked
+    selectedPeriod,
+    skipChecked
   };
-}), Object(external_wp_data_["withDispatch"])(function (dispatch) {
-  var _dispatch = dispatch(external_wc_data_["IMPORT_STORE_NAME"]),
-      updateImportation = _dispatch.updateImportation,
-      setImportStarted = _dispatch.setImportStarted;
-
-  var _dispatch2 = dispatch('core/notices'),
-      createNotice = _dispatch2.createNotice;
-
+}), Object(external_wp_data_["withDispatch"])(dispatch => {
+  const {
+    updateImportation,
+    setImportStarted
+  } = dispatch(external_wc_data_["IMPORT_STORE_NAME"]);
+  const {
+    createNotice
+  } = dispatch('core/notices');
   return {
-    createNotice: createNotice,
-    setImportStarted: setImportStarted,
-    updateImportation: updateImportation
+    createNotice,
+    setImportStarted,
+    updateImportation
   };
 })])(HistoricalDataActions));
 // EXTERNAL MODULE: external ["wc","date"]
-var external_wc_date_ = __webpack_require__(101);
+var external_wc_date_ = __webpack_require__(21);
 
 // CONCATENATED MODULE: ./client/analytics/settings/historical-data/period-selector.js
 
@@ -1370,18 +587,18 @@ var external_wc_date_ = __webpack_require__(101);
 
 
 
-function HistoricalDataPeriodSelector(_ref) {
-  var dateFormat = _ref.dateFormat,
-      disabled = _ref.disabled,
-      setImportPeriod = _ref.setImportPeriod,
-      value = _ref.value;
-
-  var onSelectChange = function onSelectChange(val) {
+function HistoricalDataPeriodSelector({
+  dateFormat,
+  disabled,
+  setImportPeriod,
+  value
+}) {
+  const onSelectChange = val => {
     setImportPeriod(val);
   };
 
-  var onDatePickerChange = function onDatePickerChange(val) {
-    var dateModified = true;
+  const onDatePickerChange = val => {
+    const dateModified = true;
 
     if (val.date && val.date.isValid) {
       setImportPeriod(val.date.format(dateFormat), dateModified);
@@ -1390,7 +607,7 @@ function HistoricalDataPeriodSelector(_ref) {
     }
   };
 
-  var getDatePickerError = function getDatePickerError(momentDate) {
+  const getDatePickerError = momentDate => {
     if (!momentDate.isValid() || value.date.length !== dateFormat.length) {
       return external_wc_date_["dateValidationMessages"].invalid;
     }
@@ -1402,8 +619,8 @@ function HistoricalDataPeriodSelector(_ref) {
     return null;
   };
 
-  var getDatePicker = function getDatePicker() {
-    var momentDate = external_moment_default()(value.date, dateFormat);
+  const getDatePicker = () => {
+    const momentDate = external_moment_default()(value.date, dateFormat);
     return Object(external_wp_element_["createElement"])("div", {
       className: "woocommerce-settings-historical-data__column"
     }, Object(external_wp_element_["createElement"])("div", {
@@ -1413,9 +630,7 @@ function HistoricalDataPeriodSelector(_ref) {
       dateFormat: dateFormat,
       disabled: disabled,
       error: getDatePickerError(momentDate),
-      isInvalidDate: function isInvalidDate(date) {
-        return external_moment_default()(date).isAfter(new Date(), 'day');
-      },
+      isInvalidDate: date => external_moment_default()(date).isAfter(new Date(), 'day'),
       onUpdate: onDatePickerChange,
       text: value.date
     }));
@@ -1455,12 +670,12 @@ function HistoricalDataPeriodSelector(_ref) {
   })), value.label === 'custom' && getDatePicker());
 }
 
-/* harmony default export */ var period_selector = (Object(external_wp_data_["withDispatch"])(function (dispatch) {
-  var _dispatch = dispatch(external_wc_data_["IMPORT_STORE_NAME"]),
-      setImportPeriod = _dispatch.setImportPeriod;
-
+/* harmony default export */ var period_selector = (Object(external_wp_data_["withDispatch"])(dispatch => {
+  const {
+    setImportPeriod
+  } = dispatch(external_wc_data_["IMPORT_STORE_NAME"]);
   return {
-    setImportPeriod: setImportPeriod
+    setImportPeriod
   };
 })(HistoricalDataPeriodSelector));
 // CONCATENATED MODULE: ./client/analytics/settings/historical-data/progress.js
@@ -1472,16 +687,17 @@ function HistoricalDataPeriodSelector(_ref) {
 
 
 
-function HistoricalDataProgress(_ref) {
-  var label = _ref.label,
-      progress = _ref.progress,
-      total = _ref.total;
-  var labelText = Object(external_wp_i18n_["sprintf"])(Object(external_wp_i18n_["__"])('Imported %(label)s', 'woocommerce-admin'), {
-    label: label
+function HistoricalDataProgress({
+  label,
+  progress,
+  total
+}) {
+  const labelText = Object(external_wp_i18n_["sprintf"])(Object(external_wp_i18n_["__"])('Imported %(label)s', 'woocommerce-admin'), {
+    label
   });
-  var labelCounters = !Object(external_lodash_["isNil"])(total) ? Object(external_wp_i18n_["sprintf"])(Object(external_wp_i18n_["__"])('%(progress)s of %(total)s', 'woocommerce-admin'), {
+  const labelCounters = !Object(external_lodash_["isNil"])(total) ? Object(external_wp_i18n_["sprintf"])(Object(external_wp_i18n_["__"])('%(progress)s of %(total)s', 'woocommerce-admin'), {
     progress: progress || 0,
-    total: total
+    total
   }) : null;
   return Object(external_wp_element_["createElement"])("div", {
     className: "woocommerce-settings-historical-data__progress"
@@ -1498,7 +714,7 @@ function HistoricalDataProgress(_ref) {
 
 /* harmony default export */ var historical_data_progress = (HistoricalDataProgress);
 // EXTERNAL MODULE: external ["wp","hooks"]
-var external_wp_hooks_ = __webpack_require__(141);
+var external_wp_hooks_ = __webpack_require__(34);
 
 // CONCATENATED MODULE: ./client/analytics/settings/historical-data/status.js
 
@@ -1510,12 +726,13 @@ var external_wp_hooks_ = __webpack_require__(141);
 
 
 
-var HISTORICAL_DATA_STATUS_FILTER = 'woocommerce_admin_import_status';
+const HISTORICAL_DATA_STATUS_FILTER = 'woocommerce_admin_import_status';
 
-function HistoricalDataStatus(_ref) {
-  var importDate = _ref.importDate,
-      status = _ref.status;
-  var statusLabels = Object(external_wp_hooks_["applyFilters"])(HISTORICAL_DATA_STATUS_FILTER, {
+function HistoricalDataStatus({
+  importDate,
+  status
+}) {
+  const statusLabels = Object(external_wp_hooks_["applyFilters"])(HISTORICAL_DATA_STATUS_FILTER, {
     nothing: Object(external_wp_i18n_["__"])('Nothing To Import', 'woocommerce-admin'),
     ready: Object(external_wp_i18n_["__"])('Ready To Import', 'woocommerce-admin'),
     initializing: [Object(external_wp_i18n_["__"])('Initializing', 'woocommerce-admin'), Object(external_wp_element_["createElement"])(external_wp_components_["Spinner"], {
@@ -1551,12 +768,12 @@ function HistoricalDataStatus(_ref) {
 
 
 
-function HistoricalDataSkipCheckbox(_ref) {
-  var checked = _ref.checked,
-      disabled = _ref.disabled,
-      setSkipPrevious = _ref.setSkipPrevious;
-
-  var skipChange = function skipChange(value) {
+function HistoricalDataSkipCheckbox({
+  checked,
+  disabled,
+  setSkipPrevious
+}) {
+  const skipChange = value => {
     setSkipPrevious(value);
   };
 
@@ -1569,40 +786,19 @@ function HistoricalDataSkipCheckbox(_ref) {
   });
 }
 
-/* harmony default export */ var skip_checkbox = (Object(external_wp_data_["withDispatch"])(function (dispatch) {
-  var _dispatch = dispatch(external_wc_data_["IMPORT_STORE_NAME"]),
-      setSkipPrevious = _dispatch.setSkipPrevious;
-
+/* harmony default export */ var skip_checkbox = (Object(external_wp_data_["withDispatch"])(dispatch => {
+  const {
+    setSkipPrevious
+  } = dispatch(external_wc_data_["IMPORT_STORE_NAME"]);
   return {
-    setSkipPrevious: setSkipPrevious
+    setSkipPrevious
   };
 })(HistoricalDataSkipCheckbox));
 // EXTERNAL MODULE: ./client/analytics/settings/historical-data/style.scss
-var style = __webpack_require__(640);
+var style = __webpack_require__(592);
 
 // CONCATENATED MODULE: ./client/analytics/settings/historical-data/layout.js
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { defineProperty_default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function layout_createSuper(Derived) { var hasNativeReflectConstruct = layout_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = getPrototypeOf_default()(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = getPrototypeOf_default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return possibleConstructorReturn_default()(this, result); }; }
-
-function layout_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 /**
  * External dependencies
@@ -1625,141 +821,129 @@ function layout_isNativeReflectConstruct() { if (typeof Reflect === "undefined" 
 
 
 
-var layout_HistoricalDataLayout = /*#__PURE__*/function (_Component) {
-  inherits_default()(HistoricalDataLayout, _Component);
-
-  var _super = layout_createSuper(HistoricalDataLayout);
-
-  function HistoricalDataLayout() {
-    classCallCheck_default()(this, HistoricalDataLayout);
-
-    return _super.apply(this, arguments);
+class layout_HistoricalDataLayout extends external_wp_element_["Component"] {
+  render() {
+    const {
+      customersProgress,
+      customersTotal,
+      dateFormat,
+      importDate,
+      inProgress,
+      lastImportStartTimestamp,
+      clearStatusAndTotalsCache,
+      ordersProgress,
+      ordersTotal,
+      onImportStarted,
+      period,
+      stopImport,
+      skipChecked,
+      status
+    } = this.props;
+    return Object(external_wp_element_["createElement"])(external_wp_element_["Fragment"], null, Object(external_wp_element_["createElement"])(external_wc_components_["SectionHeader"], {
+      title: Object(external_wp_i18n_["__"])('Import Historical Data', 'woocommerce-admin')
+    }), Object(external_wp_element_["createElement"])("div", {
+      className: "woocommerce-settings__wrapper"
+    }, Object(external_wp_element_["createElement"])("div", {
+      className: "woocommerce-setting"
+    }, Object(external_wp_element_["createElement"])("div", {
+      className: "woocommerce-setting__input"
+    }, Object(external_wp_element_["createElement"])("span", {
+      className: "woocommerce-setting__help"
+    }, Object(external_wp_i18n_["__"])('This tool populates historical analytics data by processing customers ' + 'and orders created prior to activating WooCommerce Admin.', 'woocommerce-admin')), status !== 'finished' && Object(external_wp_element_["createElement"])(external_wp_element_["Fragment"], null, Object(external_wp_element_["createElement"])(period_selector, {
+      dateFormat: dateFormat,
+      disabled: inProgress,
+      value: period
+    }), Object(external_wp_element_["createElement"])(skip_checkbox, {
+      disabled: inProgress,
+      checked: skipChecked
+    }), Object(external_wp_element_["createElement"])(historical_data_progress, {
+      label: Object(external_wp_i18n_["__"])('Registered Customers', 'woocommerce-admin'),
+      progress: customersProgress,
+      total: customersTotal
+    }), Object(external_wp_element_["createElement"])(historical_data_progress, {
+      label: Object(external_wp_i18n_["__"])('Orders and Refunds', 'woocommerce-admin'),
+      progress: ordersProgress,
+      total: ordersTotal
+    })), Object(external_wp_element_["createElement"])(historical_data_status, {
+      importDate: importDate,
+      status: status
+    })))), Object(external_wp_element_["createElement"])(actions, {
+      clearStatusAndTotalsCache: clearStatusAndTotalsCache,
+      dateFormat: dateFormat,
+      importDate: importDate,
+      lastImportStartTimestamp: lastImportStartTimestamp,
+      onImportStarted: onImportStarted,
+      stopImport: stopImport,
+      status: status
+    }));
   }
 
-  createClass_default()(HistoricalDataLayout, [{
-    key: "render",
-    value: function render() {
-      var _this$props = this.props,
-          customersProgress = _this$props.customersProgress,
-          customersTotal = _this$props.customersTotal,
-          dateFormat = _this$props.dateFormat,
-          importDate = _this$props.importDate,
-          inProgress = _this$props.inProgress,
-          lastImportStartTimestamp = _this$props.lastImportStartTimestamp,
-          clearStatusAndTotalsCache = _this$props.clearStatusAndTotalsCache,
-          ordersProgress = _this$props.ordersProgress,
-          ordersTotal = _this$props.ordersTotal,
-          onImportStarted = _this$props.onImportStarted,
-          period = _this$props.period,
-          stopImport = _this$props.stopImport,
-          skipChecked = _this$props.skipChecked,
-          status = _this$props.status;
-      return Object(external_wp_element_["createElement"])(external_wp_element_["Fragment"], null, Object(external_wp_element_["createElement"])(external_wc_components_["SectionHeader"], {
-        title: Object(external_wp_i18n_["__"])('Import Historical Data', 'woocommerce-admin')
-      }), Object(external_wp_element_["createElement"])("div", {
-        className: "woocommerce-settings__wrapper"
-      }, Object(external_wp_element_["createElement"])("div", {
-        className: "woocommerce-setting"
-      }, Object(external_wp_element_["createElement"])("div", {
-        className: "woocommerce-setting__input"
-      }, Object(external_wp_element_["createElement"])("span", {
-        className: "woocommerce-setting__help"
-      }, Object(external_wp_i18n_["__"])('This tool populates historical analytics data by processing customers ' + 'and orders created prior to activating WooCommerce Admin.', 'woocommerce-admin')), status !== 'finished' && Object(external_wp_element_["createElement"])(external_wp_element_["Fragment"], null, Object(external_wp_element_["createElement"])(period_selector, {
-        dateFormat: dateFormat,
-        disabled: inProgress,
-        value: period
-      }), Object(external_wp_element_["createElement"])(skip_checkbox, {
-        disabled: inProgress,
-        checked: skipChecked
-      }), Object(external_wp_element_["createElement"])(historical_data_progress, {
-        label: Object(external_wp_i18n_["__"])('Registered Customers', 'woocommerce-admin'),
-        progress: customersProgress,
-        total: customersTotal
-      }), Object(external_wp_element_["createElement"])(historical_data_progress, {
-        label: Object(external_wp_i18n_["__"])('Orders and Refunds', 'woocommerce-admin'),
-        progress: ordersProgress,
-        total: ordersTotal
-      })), Object(external_wp_element_["createElement"])(historical_data_status, {
-        importDate: importDate,
-        status: status
-      })))), Object(external_wp_element_["createElement"])(actions, {
-        clearStatusAndTotalsCache: clearStatusAndTotalsCache,
-        dateFormat: dateFormat,
-        importDate: importDate,
-        lastImportStartTimestamp: lastImportStartTimestamp,
-        onImportStarted: onImportStarted,
-        stopImport: stopImport,
-        status: status
-      }));
-    }
-  }]);
+}
 
-  return HistoricalDataLayout;
-}(external_wp_element_["Component"]);
-
-/* harmony default export */ var layout = (Object(external_wp_data_["withSelect"])(function (select, props) {
-  var _select = select(external_wc_data_["IMPORT_STORE_NAME"]),
-      getImportError = _select.getImportError,
-      getImportStatus = _select.getImportStatus,
-      getImportTotals = _select.getImportTotals;
-
-  var activeImport = props.activeImport,
-      cacheNeedsClearing = props.cacheNeedsClearing,
-      dateFormat = props.dateFormat,
-      inProgress = props.inProgress,
-      onImportStarted = props.onImportStarted,
-      onImportFinished = props.onImportFinished,
-      period = props.period,
-      startStatusCheckInterval = props.startStatusCheckInterval,
-      skipChecked = props.skipChecked;
-  var params = utils_formatParams(dateFormat, period, skipChecked);
-
-  var _getImportTotals = getImportTotals(params),
-      customers = _getImportTotals.customers,
-      orders = _getImportTotals.orders,
-      lastImportStartTimestamp = _getImportTotals.lastImportStartTimestamp;
-
-  var _getImportStatus = getImportStatus(lastImportStartTimestamp),
-      customersStatus = _getImportStatus.customers,
-      importDate = _getImportStatus.imported_from,
-      isImporting = _getImportStatus.is_importing,
-      ordersStatus = _getImportStatus.orders;
-
-  var _ref = customersStatus || {},
-      customersProgress = _ref.imported,
-      customersTotal = _ref.total;
-
-  var _ref2 = ordersStatus || {},
-      ordersProgress = _ref2.imported,
-      ordersTotal = _ref2.total;
-
-  var isError = Boolean(getImportError(lastImportStartTimestamp) || getImportError(params));
-  var hasImportStarted = Boolean(!lastImportStartTimestamp && !inProgress && isImporting === true);
+/* harmony default export */ var layout = (Object(external_wp_data_["withSelect"])((select, props) => {
+  const {
+    getImportError,
+    getImportStatus,
+    getImportTotals
+  } = select(external_wc_data_["IMPORT_STORE_NAME"]);
+  const {
+    activeImport,
+    cacheNeedsClearing,
+    dateFormat,
+    inProgress,
+    onImportStarted,
+    onImportFinished,
+    period,
+    startStatusCheckInterval,
+    skipChecked
+  } = props;
+  const params = formatParams(dateFormat, period, skipChecked);
+  const {
+    customers,
+    orders,
+    lastImportStartTimestamp
+  } = getImportTotals(params);
+  const {
+    customers: customersStatus,
+    imported_from: importDate,
+    is_importing: isImporting,
+    orders: ordersStatus
+  } = getImportStatus(lastImportStartTimestamp);
+  const {
+    imported: customersProgress,
+    total: customersTotal
+  } = customersStatus || {};
+  const {
+    imported: ordersProgress,
+    total: ordersTotal
+  } = ordersStatus || {};
+  const isError = Boolean(getImportError(lastImportStartTimestamp) || getImportError(params));
+  const hasImportStarted = Boolean(!lastImportStartTimestamp && !inProgress && isImporting === true);
 
   if (hasImportStarted) {
     onImportStarted();
   }
 
-  var hasImportFinished = Boolean(inProgress && !cacheNeedsClearing && isImporting === false && (customersTotal > 0 || ordersTotal > 0) && customersProgress === customersTotal && ordersProgress === ordersTotal);
-  var response = {
+  const hasImportFinished = Boolean(inProgress && !cacheNeedsClearing && isImporting === false && (customersTotal > 0 || ordersTotal > 0) && customersProgress === customersTotal && ordersProgress === ordersTotal);
+  let response = {
     customersTotal: customers,
-    isError: isError,
+    isError,
     ordersTotal: orders
   };
 
   if (activeImport) {
     response = {
-      cacheNeedsClearing: cacheNeedsClearing,
-      customersProgress: customersProgress,
+      cacheNeedsClearing,
+      customersProgress,
       customersTotal: Object(external_lodash_["isNil"])(customersTotal) ? customers : customersTotal,
-      inProgress: inProgress,
-      isError: isError,
-      ordersProgress: ordersProgress,
+      inProgress,
+      isError,
+      ordersProgress,
       ordersTotal: Object(external_lodash_["isNil"])(ordersTotal) ? orders : ordersTotal
     };
   }
 
-  var status = utils_getStatus(response);
+  const status = getStatus(response);
 
   if (status === 'initializing') {
     startStatusCheckInterval();
@@ -1769,26 +953,13 @@ var layout_HistoricalDataLayout = /*#__PURE__*/function (_Component) {
     onImportFinished();
   }
 
-  return _objectSpread(_objectSpread({}, response), {}, {
-    importDate: importDate,
-    status: status
-  });
+  return { ...response,
+    importDate,
+    status
+  };
 })(layout_HistoricalDataLayout));
 // CONCATENATED MODULE: ./client/analytics/settings/historical-data/index.js
 
-
-
-
-
-
-
-
-
-
-
-function historical_data_createSuper(Derived) { var hasNativeReflectConstruct = historical_data_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = getPrototypeOf_default()(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = getPrototypeOf_default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return possibleConstructorReturn_default()(this, result); }; }
-
-function historical_data_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 /**
  * External dependencies
@@ -1806,207 +977,171 @@ function historical_data_isNativeReflectConstruct() { if (typeof Reflect === "un
 
 
 
-var historical_data_HistoricalData = /*#__PURE__*/function (_Component) {
-  inherits_default()(HistoricalData, _Component);
-
-  var _super = historical_data_createSuper(HistoricalData);
-
-  function HistoricalData() {
-    var _this;
-
-    classCallCheck_default()(this, HistoricalData);
-
-    _this = _super.apply(this, arguments);
-    _this.dateFormat = Object(external_wp_i18n_["__"])('MM/DD/YYYY', 'woocommerce-admin');
-    _this.intervalId = -1;
-    _this.lastImportStopTimestamp = 0;
-    _this.cacheNeedsClearing = true;
-    _this.onImportFinished = _this.onImportFinished.bind(assertThisInitialized_default()(_this));
-    _this.onImportStarted = _this.onImportStarted.bind(assertThisInitialized_default()(_this));
-    _this.clearStatusAndTotalsCache = _this.clearStatusAndTotalsCache.bind(assertThisInitialized_default()(_this));
-    _this.stopImport = _this.stopImport.bind(assertThisInitialized_default()(_this));
-    _this.startStatusCheckInterval = _this.startStatusCheckInterval.bind(assertThisInitialized_default()(_this));
-    _this.cancelStatusCheckInterval = _this.cancelStatusCheckInterval.bind(assertThisInitialized_default()(_this));
-    return _this;
+class historical_data_HistoricalData extends external_wp_element_["Component"] {
+  constructor() {
+    super(...arguments);
+    this.dateFormat = Object(external_wp_i18n_["__"])('MM/DD/YYYY', 'woocommerce-admin');
+    this.intervalId = -1;
+    this.lastImportStopTimestamp = 0;
+    this.cacheNeedsClearing = true;
+    this.onImportFinished = this.onImportFinished.bind(this);
+    this.onImportStarted = this.onImportStarted.bind(this);
+    this.clearStatusAndTotalsCache = this.clearStatusAndTotalsCache.bind(this);
+    this.stopImport = this.stopImport.bind(this);
+    this.startStatusCheckInterval = this.startStatusCheckInterval.bind(this);
+    this.cancelStatusCheckInterval = this.cancelStatusCheckInterval.bind(this);
   }
 
-  createClass_default()(HistoricalData, [{
-    key: "startStatusCheckInterval",
-    value: function startStatusCheckInterval() {
-      var _this2 = this;
-
-      if (this.intervalId < 0) {
-        this.cacheNeedsClearing = true;
-        this.intervalId = setInterval(function () {
-          _this2.clearCache('getImportStatus');
-        }, 3 * external_wc_data_["SECOND"]);
-      }
+  startStatusCheckInterval() {
+    if (this.intervalId < 0) {
+      this.cacheNeedsClearing = true;
+      this.intervalId = setInterval(() => {
+        this.clearCache('getImportStatus');
+      }, 3 * external_wc_data_["SECOND"]);
     }
-  }, {
-    key: "cancelStatusCheckInterval",
-    value: function cancelStatusCheckInterval() {
-      clearInterval(this.intervalId);
-      this.intervalId = -1;
-    }
-  }, {
-    key: "clearCache",
-    value: function clearCache(resolver, query) {
-      var _this3 = this;
+  }
 
-      var _this$props = this.props,
-          invalidateResolution = _this$props.invalidateResolution,
-          lastImportStartTimestamp = _this$props.lastImportStartTimestamp;
-      var preparedQuery = resolver === 'getImportStatus' ? lastImportStartTimestamp : query;
-      invalidateResolution(resolver, [preparedQuery]).then(function () {
-        _this3.cacheNeedsClearing = false;
+  cancelStatusCheckInterval() {
+    clearInterval(this.intervalId);
+    this.intervalId = -1;
+  }
+
+  clearCache(resolver, query) {
+    const {
+      invalidateResolution,
+      lastImportStartTimestamp
+    } = this.props;
+    const preparedQuery = resolver === 'getImportStatus' ? lastImportStartTimestamp : query;
+    invalidateResolution(resolver, [preparedQuery]).then(() => {
+      this.cacheNeedsClearing = false;
+    });
+  }
+
+  stopImport() {
+    this.cancelStatusCheckInterval();
+    this.lastImportStopTimestamp = Date.now();
+  }
+
+  onImportFinished() {
+    const {
+      debouncedSpeak
+    } = this.props;
+
+    if (!this.cacheNeedsClearing) {
+      debouncedSpeak('Import complete');
+      this.stopImport();
+    }
+  }
+
+  onImportStarted() {
+    const {
+      notes,
+      setImportStarted,
+      updateNote
+    } = this.props;
+    const historicalDataNote = notes.find(note => note.name === 'wc-admin-historical-data');
+
+    if (historicalDataNote) {
+      updateNote(historicalDataNote.id, {
+        status: 'actioned'
       });
     }
-  }, {
-    key: "stopImport",
-    value: function stopImport() {
-      this.cancelStatusCheckInterval();
-      this.lastImportStopTimestamp = Date.now();
-    }
-  }, {
-    key: "onImportFinished",
-    value: function onImportFinished() {
-      var debouncedSpeak = this.props.debouncedSpeak;
 
-      if (!this.cacheNeedsClearing) {
-        debouncedSpeak('Import complete');
-        this.stopImport();
-      }
-    }
-  }, {
-    key: "onImportStarted",
-    value: function onImportStarted() {
-      var _this$props2 = this.props,
-          notes = _this$props2.notes,
-          setImportStarted = _this$props2.setImportStarted,
-          updateNote = _this$props2.updateNote;
-      var historicalDataNote = notes.find(function (note) {
-        return note.name === 'wc-admin-historical-data';
-      });
+    setImportStarted(true);
+  }
 
-      if (historicalDataNote) {
-        updateNote(historicalDataNote.id, {
-          status: 'actioned'
-        });
-      }
+  clearStatusAndTotalsCache() {
+    const {
+      selectedPeriod,
+      skipChecked
+    } = this.props;
+    const params = formatParams(this.dateFormat, selectedPeriod, skipChecked);
+    this.clearCache('getImportTotals', params);
+    this.clearCache('getImportStatus');
+  }
 
-      setImportStarted(true);
-    }
-  }, {
-    key: "clearStatusAndTotalsCache",
-    value: function clearStatusAndTotalsCache() {
-      var _this$props3 = this.props,
-          selectedPeriod = _this$props3.selectedPeriod,
-          skipChecked = _this$props3.skipChecked;
-      var params = utils_formatParams(this.dateFormat, selectedPeriod, skipChecked);
-      this.clearCache('getImportTotals', params);
-      this.clearCache('getImportStatus');
-    }
-  }, {
-    key: "isImportationInProgress",
-    value: function isImportationInProgress() {
-      var lastImportStartTimestamp = this.props.lastImportStartTimestamp;
-      return typeof lastImportStartTimestamp !== 'undefined' && typeof this.lastImportStopTimestamp === 'undefined' || lastImportStartTimestamp > this.lastImportStopTimestamp;
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this$props4 = this.props,
-          activeImport = _this$props4.activeImport,
-          createNotice = _this$props4.createNotice,
-          lastImportStartTimestamp = _this$props4.lastImportStartTimestamp,
-          selectedPeriod = _this$props4.selectedPeriod,
-          skipChecked = _this$props4.skipChecked;
-      return Object(external_wp_element_["createElement"])(layout, {
-        activeImport: activeImport,
-        cacheNeedsClearing: this.cacheNeedsClearing,
-        createNotice: createNotice,
-        dateFormat: this.dateFormat,
-        inProgress: this.isImportationInProgress(),
-        onImportFinished: this.onImportFinished,
-        onImportStarted: this.onImportStarted,
-        lastImportStartTimestamp: lastImportStartTimestamp,
-        clearStatusAndTotalsCache: this.clearStatusAndTotalsCache,
-        period: selectedPeriod,
-        skipChecked: skipChecked,
-        startStatusCheckInterval: this.startStatusCheckInterval,
-        stopImport: this.stopImport
-      });
-    }
-  }]);
+  isImportationInProgress() {
+    const {
+      lastImportStartTimestamp
+    } = this.props;
+    return typeof lastImportStartTimestamp !== 'undefined' && typeof this.lastImportStopTimestamp === 'undefined' || lastImportStartTimestamp > this.lastImportStopTimestamp;
+  }
 
-  return HistoricalData;
-}(external_wp_element_["Component"]);
+  render() {
+    const {
+      activeImport,
+      createNotice,
+      lastImportStartTimestamp,
+      selectedPeriod,
+      skipChecked
+    } = this.props;
+    return Object(external_wp_element_["createElement"])(layout, {
+      activeImport: activeImport,
+      cacheNeedsClearing: this.cacheNeedsClearing,
+      createNotice: createNotice,
+      dateFormat: this.dateFormat,
+      inProgress: this.isImportationInProgress(),
+      onImportFinished: this.onImportFinished,
+      onImportStarted: this.onImportStarted,
+      lastImportStartTimestamp: lastImportStartTimestamp,
+      clearStatusAndTotalsCache: this.clearStatusAndTotalsCache,
+      period: selectedPeriod,
+      skipChecked: skipChecked,
+      startStatusCheckInterval: this.startStatusCheckInterval,
+      stopImport: this.stopImport
+    });
+  }
 
-/* harmony default export */ var historical_data = (Object(external_wp_compose_["compose"])([Object(external_wp_data_["withSelect"])(function (select) {
-  var _select = select(external_wc_data_["NOTES_STORE_NAME"]),
-      getNotes = _select.getNotes;
+}
 
-  var _select2 = select(external_wc_data_["IMPORT_STORE_NAME"]),
-      getImportStarted = _select2.getImportStarted,
-      getFormSettings = _select2.getFormSettings;
-
-  var notesQuery = {
+/* harmony default export */ var historical_data = (Object(external_wp_compose_["compose"])([Object(external_wp_data_["withSelect"])(select => {
+  const {
+    getNotes
+  } = select(external_wc_data_["NOTES_STORE_NAME"]);
+  const {
+    getImportStarted,
+    getFormSettings
+  } = select(external_wc_data_["IMPORT_STORE_NAME"]);
+  const notesQuery = {
     page: 1,
     per_page: external_wc_data_["QUERY_DEFAULTS"].pageSize,
     type: 'update',
     status: 'unactioned'
   };
-  var notes = getNotes(notesQuery);
-
-  var _getImportStarted = getImportStarted(),
-      activeImport = _getImportStarted.activeImport,
-      lastImportStartTimestamp = _getImportStarted.lastImportStartTimestamp;
-
-  var _getFormSettings = getFormSettings(),
-      selectedPeriod = _getFormSettings.period,
-      skipChecked = _getFormSettings.skipPrevious;
-
+  const notes = getNotes(notesQuery);
+  const {
+    activeImport,
+    lastImportStartTimestamp
+  } = getImportStarted();
+  const {
+    period: selectedPeriod,
+    skipPrevious: skipChecked
+  } = getFormSettings();
   return {
-    activeImport: activeImport,
-    lastImportStartTimestamp: lastImportStartTimestamp,
-    notes: notes,
-    selectedPeriod: selectedPeriod,
-    skipChecked: skipChecked
+    activeImport,
+    lastImportStartTimestamp,
+    notes,
+    selectedPeriod,
+    skipChecked
   };
-}), Object(external_wp_data_["withDispatch"])(function (dispatch) {
-  var _dispatch = dispatch(external_wc_data_["NOTES_STORE_NAME"]),
-      updateNote = _dispatch.updateNote;
-
-  var _dispatch2 = dispatch(external_wc_data_["IMPORT_STORE_NAME"]),
-      invalidateResolution = _dispatch2.invalidateResolution,
-      setImportStarted = _dispatch2.setImportStarted;
-
+}), Object(external_wp_data_["withDispatch"])(dispatch => {
+  const {
+    updateNote
+  } = dispatch(external_wc_data_["NOTES_STORE_NAME"]);
+  const {
+    invalidateResolution,
+    setImportStarted
+  } = dispatch(external_wc_data_["IMPORT_STORE_NAME"]);
   return {
-    invalidateResolution: invalidateResolution,
-    setImportStarted: setImportStarted,
-    updateNote: updateNote
+    invalidateResolution,
+    setImportStarted,
+    updateNote
   };
 }), external_wp_components_["withSpokenMessages"]])(historical_data_HistoricalData));
 // CONCATENATED MODULE: ./client/analytics/settings/index.js
 
 
 
-
-
-
-
-
-
-function settings_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function settings_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { settings_ownKeys(Object(source), true).forEach(function (key) { defineProperty_default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { settings_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-
-
-
-
-
-
 /**
  * External dependencies
  */
@@ -2027,21 +1162,21 @@ function settings_objectSpread(target) { for (var i = 1; i < arguments.length; i
 
 
 
-var settings_Settings = function Settings(_ref) {
-  var createNotice = _ref.createNotice,
-      query = _ref.query;
-
-  var _useSettings = Object(external_wc_data_["useSettings"])('wc_admin', ['wcAdminSettings']),
-      settingsError = _useSettings.settingsError,
-      isRequesting = _useSettings.isRequesting,
-      isDirty = _useSettings.isDirty,
-      persistSettings = _useSettings.persistSettings,
-      updateAndPersistSettings = _useSettings.updateAndPersistSettings,
-      updateSettings = _useSettings.updateSettings,
-      wcAdminSettings = _useSettings.wcAdminSettings;
-
-  var hasSaved = Object(external_wp_element_["useRef"])(false);
-  Object(external_wp_element_["useEffect"])(function () {
+const Settings = ({
+  createNotice,
+  query
+}) => {
+  const {
+    settingsError,
+    isRequesting,
+    isDirty,
+    persistSettings,
+    updateAndPersistSettings,
+    updateSettings,
+    wcAdminSettings
+  } = Object(external_wc_data_["useSettings"])('wc_admin', ['wcAdminSettings']);
+  const hasSaved = Object(external_wp_element_["useRef"])(false);
+  Object(external_wp_element_["useEffect"])(() => {
     function warnIfUnsavedChanges(event) {
       if (isDirty) {
         event.returnValue = Object(external_wp_i18n_["__"])('You have unsaved changes. If you proceed, they will be lost.', 'woocommerce-admin');
@@ -2050,11 +1185,9 @@ var settings_Settings = function Settings(_ref) {
     }
 
     window.addEventListener('beforeunload', warnIfUnsavedChanges);
-    return function () {
-      return window.removeEventListener('beforeunload', warnIfUnsavedChanges);
-    };
+    return () => window.removeEventListener('beforeunload', warnIfUnsavedChanges);
   }, [isDirty]);
-  Object(external_wp_element_["useEffect"])(function () {
+  Object(external_wp_element_["useEffect"])(() => {
     if (isRequesting) {
       hasSaved.current = true;
       return;
@@ -2071,10 +1204,10 @@ var settings_Settings = function Settings(_ref) {
     }
   }, [isRequesting, settingsError, createNotice]);
 
-  var resetDefaults = function resetDefaults() {
+  const resetDefaults = () => {
     if ( // eslint-disable-next-line no-alert
     window.confirm(Object(external_wp_i18n_["__"])('Are you sure you want to reset all settings to default values?', 'woocommerce-admin'))) {
-      var resetSettings = Object.keys(config["b" /* config */]).reduce(function (result, setting) {
+      const resetSettings = Object.keys(config["b" /* config */]).reduce((result, setting) => {
         result[setting] = config["b" /* config */][setting].defaultValue;
         return result;
       }, {});
@@ -2083,7 +1216,7 @@ var settings_Settings = function Settings(_ref) {
     }
   };
 
-  var saveChanges = function saveChanges() {
+  const saveChanges = () => {
     persistSettings();
     Object(external_wc_tracks_["recordEvent"])('analytics_settings_save', wcAdminSettings); // On save, reset persisted query properties of Nav Menu links to default
 
@@ -2096,22 +1229,21 @@ var settings_Settings = function Settings(_ref) {
     window.wpNavMenuUrlUpdate(query);
   };
 
-  var handleInputChange = function handleInputChange(e) {
-    var _e$target = e.target,
-        checked = _e$target.checked,
-        name = _e$target.name,
-        type = _e$target.type,
-        value = _e$target.value;
-
-    var nextSettings = settings_objectSpread({}, wcAdminSettings);
+  const handleInputChange = e => {
+    const {
+      checked,
+      name,
+      type,
+      value
+    } = e.target;
+    const nextSettings = { ...wcAdminSettings
+    };
 
     if (type === 'checkbox') {
       if (checked) {
-        nextSettings[name] = [].concat(toConsumableArray_default()(nextSettings[name]), [value]);
+        nextSettings[name] = [...nextSettings[name], value];
       } else {
-        nextSettings[name] = nextSettings[name].filter(function (v) {
-          return v !== value;
-        });
+        nextSettings[name] = nextSettings[name].filter(v => v !== value);
       }
     } else {
       nextSettings[name] = value;
@@ -2124,14 +1256,12 @@ var settings_Settings = function Settings(_ref) {
     title: Object(external_wp_i18n_["__"])('Analytics Settings', 'woocommerce-admin')
   }), Object(external_wp_element_["createElement"])("div", {
     className: "woocommerce-settings__wrapper"
-  }, Object.keys(config["b" /* config */]).map(function (setting) {
-    return Object(external_wp_element_["createElement"])(analytics_settings_setting, extends_default()({
-      handleChange: handleInputChange,
-      value: wcAdminSettings[setting],
-      key: setting,
-      name: setting
-    }, config["b" /* config */][setting]));
-  }), Object(external_wp_element_["createElement"])("div", {
+  }, Object.keys(config["b" /* config */]).map(setting => Object(external_wp_element_["createElement"])(analytics_settings_setting, extends_default()({
+    handleChange: handleInputChange,
+    value: wcAdminSettings[setting],
+    key: setting,
+    name: setting
+  }, config["b" /* config */][setting]))), Object(external_wp_element_["createElement"])("div", {
     className: "woocommerce-settings__actions"
   }, Object(external_wp_element_["createElement"])(external_wp_components_["Button"], {
     isSecondary: true,
@@ -2149,181 +1279,14 @@ var settings_Settings = function Settings(_ref) {
   }));
 };
 
-/* harmony default export */ var analytics_settings = __webpack_exports__["default"] = (Object(external_wp_compose_["compose"])(Object(external_wp_data_["withDispatch"])(function (dispatch) {
-  var _dispatch = dispatch('core/notices'),
-      createNotice = _dispatch.createNotice;
-
+/* harmony default export */ var analytics_settings = __webpack_exports__["default"] = (Object(external_wp_compose_["compose"])(Object(external_wp_data_["withDispatch"])(dispatch => {
+  const {
+    createNotice
+  } = dispatch('core/notices');
   return {
-    createNotice: createNotice
+    createNotice
   };
-}))(settings_Settings));
-
-/***/ }),
-
-/***/ 99:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; /**
-                                                                                                                                                                                                                                                                               * External Dependencies
-                                                                                                                                                                                                                                                                               */
-
-
-/**
- * Internal Dependencies
- */
-
-
-var _react = __webpack_require__(20);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactAddonsCreateFragment = __webpack_require__(243);
-
-var _reactAddonsCreateFragment2 = _interopRequireDefault(_reactAddonsCreateFragment);
-
-var _tokenize = __webpack_require__(246);
-
-var _tokenize2 = _interopRequireDefault(_tokenize);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var currentMixedString = void 0;
-
-function getCloseIndex(openIndex, tokens) {
-	var openToken = tokens[openIndex],
-	    nestLevel = 0,
-	    token,
-	    i;
-	for (i = openIndex + 1; i < tokens.length; i++) {
-		token = tokens[i];
-		if (token.value === openToken.value) {
-			if (token.type === 'componentOpen') {
-				nestLevel++;
-				continue;
-			}
-			if (token.type === 'componentClose') {
-				if (nestLevel === 0) {
-					return i;
-				}
-				nestLevel--;
-			}
-		}
-	}
-	// if we get this far, there was no matching close token
-	throw new Error('Missing closing component token `' + openToken.value + '`');
-}
-
-function buildChildren(tokens, components) {
-	var children = [],
-	    childrenObject = {},
-	    openComponent,
-	    clonedOpenComponent,
-	    openIndex,
-	    closeIndex,
-	    token,
-	    i,
-	    grandChildTokens,
-	    grandChildren,
-	    siblingTokens,
-	    siblings;
-
-	for (i = 0; i < tokens.length; i++) {
-		token = tokens[i];
-		if (token.type === 'string') {
-			children.push(token.value);
-			continue;
-		}
-		// component node should at least be set
-		if (!components.hasOwnProperty(token.value) || typeof components[token.value] === 'undefined') {
-			throw new Error('Invalid interpolation, missing component node: `' + token.value + '`');
-		}
-		// should be either ReactElement or null (both type "object"), all other types deprecated
-		if (_typeof(components[token.value]) !== 'object') {
-			throw new Error('Invalid interpolation, component node must be a ReactElement or null: `' + token.value + '`', '\n> ' + currentMixedString);
-		}
-		// we should never see a componentClose token in this loop
-		if (token.type === 'componentClose') {
-			throw new Error('Missing opening component token: `' + token.value + '`');
-		}
-		if (token.type === 'componentOpen') {
-			openComponent = components[token.value];
-			openIndex = i;
-			break;
-		}
-		// componentSelfClosing token
-		children.push(components[token.value]);
-		continue;
-	}
-
-	if (openComponent) {
-		closeIndex = getCloseIndex(openIndex, tokens);
-		grandChildTokens = tokens.slice(openIndex + 1, closeIndex);
-		grandChildren = buildChildren(grandChildTokens, components);
-		clonedOpenComponent = _react2.default.cloneElement(openComponent, {}, grandChildren);
-		children.push(clonedOpenComponent);
-
-		if (closeIndex < tokens.length - 1) {
-			siblingTokens = tokens.slice(closeIndex + 1);
-			siblings = buildChildren(siblingTokens, components);
-			children = children.concat(siblings);
-		}
-	}
-
-	if (children.length === 1) {
-		return children[0];
-	}
-
-	children.forEach(function (child, index) {
-		if (child) {
-			childrenObject['interpolation-child-' + index] = child;
-		}
-	});
-
-	return (0, _reactAddonsCreateFragment2.default)(childrenObject);
-}
-
-function interpolate(options) {
-	var mixedString = options.mixedString,
-	    components = options.components,
-	    throwErrors = options.throwErrors;
-
-
-	currentMixedString = mixedString;
-
-	if (!components) {
-		return mixedString;
-	}
-
-	if ((typeof components === 'undefined' ? 'undefined' : _typeof(components)) !== 'object') {
-		if (throwErrors) {
-			throw new Error('Interpolation Error: unable to process `' + mixedString + '` because components is not an object');
-		}
-
-		return mixedString;
-	}
-
-	var tokens = (0, _tokenize2.default)(mixedString);
-
-	try {
-		return buildChildren(tokens, components);
-	} catch (error) {
-		if (throwErrors) {
-			throw new Error('Interpolation Error: unable to process `' + mixedString + '` because of error `' + error.message + '`');
-		}
-
-		return mixedString;
-	}
-};
-
-exports.default = interpolate;
-//# sourceMappingURL=index.js.map
+}))(Settings));
 
 /***/ })
 
