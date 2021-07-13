@@ -196,6 +196,7 @@ function tributes_email_content_complete_tribute_to_invites( $tribute, $invite_p
 
     $content_formatted = sprintf(
         $email_content,
+        TEMPLATE_URI . "/tributes/assets/img/check-circle.png",
         $invite_param->name_inviter,
         implode( ', ', $names ),
         tribute_get_url_final_video( $tribute->slug ),
