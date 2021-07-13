@@ -331,14 +331,20 @@ function polen_get_talent_video_buttons($talent, $video_url, $video_download, $h
 <?php
 }
 
-function polen_video_icons($user_id, $iniciais)
+function polen_video_icons($user_id, $iniciais, $first = false)
 {
 ?>
 	<div class="video-icons">
 		<figure class="image-cropper color small">
 			<?php echo polen_get_avatar($user_id, 'polen-square-crop-lg'); ?>
 		</figure>
-		<div class="text-cropper small"><?php echo $iniciais; ?></div>
+		<?php if ($first) : ?>
+			<figure class="image-cropper small">
+				<img src="<?php echo TEMPLATE_URI . "/assets/img/logo-round-orange.svg" ?>" alt="Logo redonda">
+			</figure>
+		<?php else : ?>
+			<div class="text-cropper small"><?php echo $iniciais; ?></div>
+		<?php endif; ?>
 	</div>
 <?php
 }
@@ -361,6 +367,7 @@ function polen_front_get_talent_videos($talent)
 			'image' =>  $item->vimeo_thumbnail,
 			'video' => $item->vimeo_link,
 			'hash' => $item->hash,
+			'first_order' => $item->first_order,
 			'initials' => polen_get_initials_name($cart_item->get_name_to_video()),
 		];
 	}
@@ -377,7 +384,7 @@ function polen_front_get_talent_videos($talent)
 							<figure class="video-cover">
 								<img loading="lazy" src="<?= $item['image']; ?>" alt="<?= $item['title']; ?>" data-url="<?= $item['video']; ?>">
 								<a href="javascript:openVideoByHash('<?= $item['hash']; ?>')" class="video-player-button"></a>
-								<?php polen_video_icons($talent->user_id, $item['initials']); ?>
+								<?php polen_video_icons($talent->user_id, $item['initials'], $item['first_order'] == "1"); ?>
 							</figure>
 						</div>
 					<?php endforeach; ?>
