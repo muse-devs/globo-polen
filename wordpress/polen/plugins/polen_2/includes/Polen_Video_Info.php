@@ -21,6 +21,7 @@ class Polen_Video_Info extends Polen_DB
     public $vimeo_url_download;
     public $vimeo_link;
     public $duration;
+    public $first_order;
     public $created_at;
     public $updated_at;
     
@@ -41,6 +42,7 @@ class Polen_Video_Info extends Polen_DB
                 $this->vimeo_url_download = $object->vimeo_url_download;
                 $this->vimeo_link = $object->vimeo_link;
                 $this->duration = $object->duration;
+                $this->first_order = $object->first_order;
                 $this->created_at = $object->created_at;
                 $this->updated_at = $object->updated_at;
                 $this->valid = true;
@@ -94,6 +96,7 @@ class Polen_Video_Info extends Polen_DB
         $return[ 'vimeo_process_complete' ] = $this->vimeo_process_complete;
         $return[ 'vimeo_url_download' ]     = $this->vimeo_url_download;
         $return[ 'vimeo_link' ]             = $this->vimeo_link;
+        $return[ 'first_order' ]            = $this->first_order;
         $return[ 'duration' ]               = $this->duration;
         
         if ( !empty( $this->created_at ) ) {
@@ -169,7 +172,7 @@ class Polen_Video_Info extends Polen_DB
     {
         $self_obj = new static();
         $fields = array( 'talent_id' => $talent_id, 'vimeo_process_complete' => "1", 'is_public' => '1' );
-        $result_raw = $self_obj->get_result_multi_fields( $fields, "4", "ORDER BY ID DESC" );
+        $result_raw = $self_obj->get_result_multi_fields( $fields, "4", "ORDER BY first_order DESC, ID DESC" );
         return $result_raw;//self::create_instance_many( $result_raw );
     }
     
@@ -268,6 +271,7 @@ class Polen_Video_Info extends Polen_DB
         $object->vimeo_link = $data->vimeo_link;
         $object->duration = $data->duration;
         $object->created_at = $data->created_at;
+        $object->first_order = $data->first_order;
         $object->updated_at = $data->updated_at;
         $object->valid = $valid;
         return $object;
