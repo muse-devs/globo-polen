@@ -226,7 +226,7 @@ class Polen_Order
             'created_via'   => 'creation_talent',
         );
         $product_id = filter_input( INPUT_POST, 'product_id' );
-        // $product_id = 48;//ID_OF_TALENT_CHOSEN :D;
+        
         $order = wc_create_order( $args );
         $order_id = $order->get_id();
         $product = wc_get_product( $product_id );
@@ -266,7 +266,7 @@ class Polen_Order
         $order = new \WC_Order( $order_id );
         $order->calculate_totals();
         // $order->set_status( Polen_WooCommerce::ORDER_STATUS_TALENT_ACCEPTED );
-        var_dump( $order->get_status() );
-        die;
+        wp_send_json_success( 'ok', 201 );
+        wp_die();
     }
 }
