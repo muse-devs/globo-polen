@@ -52,14 +52,14 @@ $is_complete = true;
 				<p><strong><?php echo $tribute->completed == '1' ? 'Sim' : 'Não'; ?></strong></p>
 			</div>
 		</div>
-		<div class="row">
-		<?php if( $tribute->completed == '1' ) : ?>
-			<div class="col-md-12">
-				<p>Link para o Video</p>
-				<p><strong><a href="<?php echo tribute_get_url_final_video( $tribute->slug ); ?>"><?php echo tribute_get_url_final_video( $tribute->slug ); ?></a></strong></p>
+		<?php if ($tribute->completed == '1') : ?>
+			<div class="row">
+				<div class="col-md-12">
+					<p>Link para o Video</p>
+					<p><strong><a href="<?php echo tribute_get_url_final_video($tribute->slug); ?>"><?php echo tribute_get_url_final_video($tribute->slug); ?></a></strong></p>
+				</div>
 			</div>
 		<?php endif; ?>
-		</div>
 		<div class="row">
 			<div class="col-md-12 mt-4">
 				<h2 class="subtitle subtitle-tribute">Pessoas</h2>
