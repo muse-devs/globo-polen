@@ -41,6 +41,7 @@ use Polen\Includes\Polen_Bancos;
                                     if( isset( $current_screen->base ) && $current_screen->base == 'user-edit' ) {
                                     ?>
                                     <?php bloginfo( 'url' ); ?>/<strong><?php echo ( isset( $vendorInfo->talent_alias ) ) ? $vendorInfo->talent_alias : ''; ?></strong>
+                                    <input type="hidden" name="talent_alias" value="<?php echo ( isset( $vendorInfo->talent_alias ) ) ? $vendorInfo->talent_alias : ''; ?>">
                                     <?php  
                                     } else {
                                     ?>
