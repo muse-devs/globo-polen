@@ -37,17 +37,17 @@ if ( ! class_exists( 'Redux_Radio', false ) ) {
 
 			$this->field['data_class'] = ( isset( $this->field['multi_layout'] ) ) ? 'data-' . $this->field['multi_layout'] : 'data-full';
 
-			if ( ! empty( $this->field['options'] ) ) {
+			if ( isset( $this->field['options'] ) && ! empty( $this->field['options'] ) ) {
 				echo '<ul class="' . esc_attr( $this->field['data_class'] ) . '">';
 
 				foreach ( $this->field['options'] as $k => $v ) {
 					echo '<li>';
 					echo '<label for="' . esc_attr( $this->field['id'] . '_' . array_search( $k, array_keys( $this->field['options'] ), true ) ) . '">';
-					echo '<input 
-							type="radio" 
-							class="radio ' . esc_attr( $this->field['class'] ) . '" 
-							id="' . esc_attr( $this->field['id'] . '_' . array_search( $k, array_keys( $this->field['options'] ), true ) ) . '" 
-							name="' . esc_attr( $this->field['name'] . $this->field['name_suffix'] ) . '" 
+					echo '<input
+							type="radio"
+							class="radio ' . esc_attr( $this->field['class'] ) . '"
+							id="' . esc_attr( $this->field['id'] . '_' . array_search( $k, array_keys( $this->field['options'] ), true ) ) . '"
+							name="' . esc_attr( $this->field['name'] . $this->field['name_suffix'] ) . '"
 							value="' . esc_attr( $k ) . '" ' . checked( $this->value, $k, false ) . '/>';
 
 					echo ' <span>' . esc_html( $v ) . '</span>';

@@ -1,646 +1,619 @@
-(window["__wcAdmin_webpackJsonp"] = window["__wcAdmin_webpackJsonp"] || []).push([[8],{
+(window["__wcAdmin_webpackJsonp"] = window["__wcAdmin_webpackJsonp"] || []).push([[5],{
 
-/***/ 325:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ 558:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var _extends=Object.assign||function(a){for(var c,b=1;b<arguments.length;b++)for(var d in c=arguments[b],c)Object.prototype.hasOwnProperty.call(c,d)&&(a[d]=c[d]);return a};Object.defineProperty(exports,'__esModule',{value:!0});exports.default=function(a){var b=a.size,c=b===void 0?24:b,d=a.onClick,e=a.icon,f=a.className,g=_objectWithoutProperties(a,['size','onClick','icon','className']),j=['gridicon','gridicons-notice-outline',f,!!function h(k){return 0==k%18}(c)&&'needs-offset',!1,!1].filter(Boolean).join(' ');return _react2.default.createElement('svg',_extends({className:j,height:c,width:c,onClick:d},g,{xmlns:'http://www.w3.org/2000/svg',viewBox:'0 0 24 24'}),_react2.default.createElement('g',null,_react2.default.createElement('path',{d:'M12 4c4.41 0 8 3.59 8 8s-3.59 8-8 8-8-3.59-8-8 3.59-8 8-8m0-2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm1 13h-2v2h2v-2zm-2-2h2l.5-6h-3l.5 6z'})))};var _react=__webpack_require__(20),_react2=_interopRequireDefault(_react);function _interopRequireDefault(a){return a&&a.__esModule?a:{default:a}}function _objectWithoutProperties(a,b){var d={};for(var c in a)0<=b.indexOf(c)||Object.prototype.hasOwnProperty.call(a,c)&&(d[c]=a[c]);return d}module.exports=exports['default'];
 
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, "a", function() { return /* binding */ activity_card_ActivityCard; });
+__webpack_require__.d(__webpack_exports__, "b", function() { return /* reexport */ placeholder; });
 
-/***/ }),
+// EXTERNAL MODULE: external ["wp","element"]
+var external_wp_element_ = __webpack_require__(0);
 
-/***/ 631:
-/***/ (function(module, exports, __webpack_require__) {
+// EXTERNAL MODULE: ./node_modules/classnames/index.js
+var classnames = __webpack_require__(6);
+var classnames_default = /*#__PURE__*/__webpack_require__.n(classnames);
 
-(function webpackUniversalModuleDefinition(root, factory) {
-	if(true)
-		module.exports = factory(__webpack_require__(20), __webpack_require__(163));
-	else {}
-})(this, function(__WEBPACK_EXTERNAL_MODULE__1__, __WEBPACK_EXTERNAL_MODULE__2__) {
-return /******/ (function(modules) { // webpackBootstrap
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
-/******/
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId]) {
-/******/ 			return installedModules[moduleId].exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			i: moduleId,
-/******/ 			l: false,
-/******/ 			exports: {}
-/******/ 		};
-/******/
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
-/******/ 		// Flag the module as loaded
-/******/ 		module.l = true;
-/******/
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/
-/******/
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
-/******/
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
-/******/
-/******/ 	// define getter function for harmony exports
-/******/ 	__webpack_require__.d = function(exports, name, getter) {
-/******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
-/******/ 		}
-/******/ 	};
-/******/
-/******/ 	// define __esModule on exports
-/******/ 	__webpack_require__.r = function(exports) {
-/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 		}
-/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 	};
-/******/
-/******/ 	// create a fake namespace object
-/******/ 	// mode & 1: value is a module id, require it
-/******/ 	// mode & 2: merge all properties of value into the ns
-/******/ 	// mode & 4: return value when already ns object
-/******/ 	// mode & 8|1: behave like require
-/******/ 	__webpack_require__.t = function(value, mode) {
-/******/ 		if(mode & 1) value = __webpack_require__(value);
-/******/ 		if(mode & 8) return value;
-/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
-/******/ 		var ns = Object.create(null);
-/******/ 		__webpack_require__.r(ns);
-/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
-/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
-/******/ 		return ns;
-/******/ 	};
-/******/
-/******/ 	// getDefaultExport function for compatibility with non-harmony modules
-/******/ 	__webpack_require__.n = function(module) {
-/******/ 		var getter = module && module.__esModule ?
-/******/ 			function getDefault() { return module['default']; } :
-/******/ 			function getModuleExports() { return module; };
-/******/ 		__webpack_require__.d(getter, 'a', getter);
-/******/ 		return getter;
-/******/ 	};
-/******/
-/******/ 	// Object.prototype.hasOwnProperty.call
-/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-/******/
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
-/******/
-/******/
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
-/******/ })
-/************************************************************************/
-/******/ ([
-/* 0 */
-/***/ (function(module, exports, __webpack_require__) {
+// EXTERNAL MODULE: ./node_modules/gridicons/dist/notice-outline.js
+var notice_outline = __webpack_require__(71);
+var notice_outline_default = /*#__PURE__*/__webpack_require__.n(notice_outline);
+
+// EXTERNAL MODULE: external "moment"
+var external_moment_ = __webpack_require__(9);
+var external_moment_default = /*#__PURE__*/__webpack_require__.n(external_moment_);
+
+// EXTERNAL MODULE: ./node_modules/prop-types/index.js
+var prop_types = __webpack_require__(1);
+var prop_types_default = /*#__PURE__*/__webpack_require__.n(prop_types);
+
+// EXTERNAL MODULE: external ["wc","components"]
+var external_wc_components_ = __webpack_require__(23);
+
+// EXTERNAL MODULE: external ["wp","components"]
+var external_wp_components_ = __webpack_require__(4);
+
+// EXTERNAL MODULE: ./client/header/activity-panel/activity-card/style.scss
+var style = __webpack_require__(567);
+
+// EXTERNAL MODULE: external "lodash"
+var external_lodash_ = __webpack_require__(3);
+
+// CONCATENATED MODULE: ./client/header/activity-panel/activity-card/placeholder.js
+
 
 /**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
+ * External dependencies
  */
 
-if (false) { var throwOnDirectAccess, ReactIs; } else {
-  // By explicitly using `prop-types` you are opting into new production behavior.
-  // http://fb.me/prop-types-in-prod
-  module.exports = __webpack_require__(5)();
+
+
+
+
+class placeholder_ActivityCardPlaceholder extends external_wp_element_["Component"] {
+  render() {
+    const {
+      className,
+      hasAction,
+      hasDate,
+      hasSubtitle,
+      lines
+    } = this.props;
+    const cardClassName = classnames_default()('woocommerce-activity-card is-loading', className);
+    return Object(external_wp_element_["createElement"])("div", {
+      className: cardClassName,
+      "aria-hidden": true
+    }, Object(external_wp_element_["createElement"])("span", {
+      className: "woocommerce-activity-card__icon"
+    }, Object(external_wp_element_["createElement"])("span", {
+      className: "is-placeholder"
+    })), Object(external_wp_element_["createElement"])("div", {
+      className: "woocommerce-activity-card__header"
+    }, Object(external_wp_element_["createElement"])("div", {
+      className: "woocommerce-activity-card__title is-placeholder"
+    }), hasSubtitle && Object(external_wp_element_["createElement"])("div", {
+      className: "woocommerce-activity-card__subtitle is-placeholder"
+    }), hasDate && Object(external_wp_element_["createElement"])("div", {
+      className: "woocommerce-activity-card__date"
+    }, Object(external_wp_element_["createElement"])("span", {
+      className: "is-placeholder"
+    }))), Object(external_wp_element_["createElement"])("div", {
+      className: "woocommerce-activity-card__body"
+    }, Object(external_lodash_["range"])(lines).map(i => Object(external_wp_element_["createElement"])("span", {
+      className: "is-placeholder",
+      key: i
+    }))), hasAction && Object(external_wp_element_["createElement"])("div", {
+      className: "woocommerce-activity-card__actions"
+    }, Object(external_wp_element_["createElement"])("span", {
+      className: "is-placeholder"
+    })));
+  }
+
 }
 
+placeholder_ActivityCardPlaceholder.propTypes = {
+  className: prop_types_default.a.string,
+  hasAction: prop_types_default.a.bool,
+  hasDate: prop_types_default.a.bool,
+  hasSubtitle: prop_types_default.a.bool,
+  lines: prop_types_default.a.number
+};
+placeholder_ActivityCardPlaceholder.defaultProps = {
+  hasAction: false,
+  hasDate: false,
+  hasSubtitle: false,
+  lines: 1
+};
+/* harmony default export */ var placeholder = (placeholder_ActivityCardPlaceholder);
+// CONCATENATED MODULE: ./client/header/activity-panel/activity-card/index.js
 
-/***/ }),
-/* 1 */
-/***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE__1__;
+/**
+ * External dependencies
+ */
 
-/***/ }),
-/* 2 */
-/***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE__2__;
 
-/***/ }),
-/* 3 */
-/***/ (function(module, exports) {
 
-// Tell whether the rect is visible, given an offset
-//
-// return: boolean
-module.exports = function (offset, rect, containmentRect) {
-  var offsetDir = offset.direction;
-  var offsetVal = offset.value; // Rules for checking different kind of offsets. In example if the element is
-  // 90px below viewport and offsetTop is 100, it is considered visible.
 
-  switch (offsetDir) {
-    case 'top':
-      return containmentRect.top + offsetVal < rect.top && containmentRect.bottom > rect.bottom && containmentRect.left < rect.left && containmentRect.right > rect.right;
 
-    case 'left':
-      return containmentRect.left + offsetVal < rect.left && containmentRect.bottom > rect.bottom && containmentRect.top < rect.top && containmentRect.right > rect.right;
 
-    case 'bottom':
-      return containmentRect.bottom - offsetVal > rect.bottom && containmentRect.left < rect.left && containmentRect.right > rect.right && containmentRect.top < rect.top;
+/**
+ * Internal dependencies
+ */
 
-    case 'right':
-      return containmentRect.right - offsetVal > rect.right && containmentRect.left < rect.left && containmentRect.top < rect.top && containmentRect.bottom > rect.bottom;
+
+/**
+ * Determine if the provided string is a date, as
+ * formatted by wc_rest_prepare_date_response().
+ *
+ * @param {string} value String value
+ */
+
+const isDateString = value => // PHP date format: Y-m-d\TH:i:s.
+/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/.test(value);
+
+class activity_card_ActivityCard extends external_wp_element_["Component"] {
+  getCard() {
+    const {
+      actions,
+      className,
+      children,
+      date,
+      icon,
+      subtitle,
+      title,
+      unread
+    } = this.props;
+    const cardClassName = classnames_default()('woocommerce-activity-card', className);
+    const actionsList = Array.isArray(actions) ? actions : [actions];
+    const dateString = isDateString(date) ? external_moment_default.a.utc(date).fromNow() : date;
+    return Object(external_wp_element_["createElement"])("section", {
+      className: cardClassName
+    }, unread && Object(external_wp_element_["createElement"])("span", {
+      className: "woocommerce-activity-card__unread"
+    }), icon && Object(external_wp_element_["createElement"])("span", {
+      className: "woocommerce-activity-card__icon",
+      "aria-hidden": true
+    }, icon), title && Object(external_wp_element_["createElement"])("header", {
+      className: "woocommerce-activity-card__header"
+    }, Object(external_wp_element_["createElement"])(external_wc_components_["H"], {
+      className: "woocommerce-activity-card__title"
+    }, title), subtitle && Object(external_wp_element_["createElement"])("div", {
+      className: "woocommerce-activity-card__subtitle"
+    }, subtitle), dateString && Object(external_wp_element_["createElement"])("span", {
+      className: "woocommerce-activity-card__date"
+    }, dateString)), children && Object(external_wp_element_["createElement"])(external_wc_components_["Section"], {
+      className: "woocommerce-activity-card__body"
+    }, children), actions && Object(external_wp_element_["createElement"])("footer", {
+      className: "woocommerce-activity-card__actions"
+    }, actionsList.map((item, i) => Object(external_wp_element_["cloneElement"])(item, {
+      key: i
+    }))));
   }
+
+  render() {
+    const {
+      onClick
+    } = this.props;
+
+    if (onClick) {
+      return Object(external_wp_element_["createElement"])(external_wp_components_["Button"], {
+        className: "woocommerce-activity-card__button",
+        onClick: onClick
+      }, this.getCard());
+    }
+
+    return this.getCard();
+  }
+
+}
+
+activity_card_ActivityCard.propTypes = {
+  actions: prop_types_default.a.oneOfType([prop_types_default.a.arrayOf(prop_types_default.a.element), prop_types_default.a.element]),
+  onClick: prop_types_default.a.func,
+  className: prop_types_default.a.string,
+  children: prop_types_default.a.node,
+  date: prop_types_default.a.string,
+  icon: prop_types_default.a.node,
+  subtitle: prop_types_default.a.node,
+  title: prop_types_default.a.oneOfType([prop_types_default.a.string, prop_types_default.a.node]),
+  unread: prop_types_default.a.bool
+};
+activity_card_ActivityCard.defaultProps = {
+  icon: Object(external_wp_element_["createElement"])(notice_outline_default.a, {
+    size: 48
+  }),
+  unread: false
 };
 
+
+
 /***/ }),
-/* 4 */
+
+/***/ 561:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return getUrlParams; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return getScreenName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return sift; });
+/**
+ * Get the URL params.
+ *
+ * @param {string} locationSearch - Querystring part of a URL, including the question mark (?).
+ * @return {Object} - URL params.
+ */
+function getUrlParams(locationSearch) {
+  if (locationSearch) {
+    return locationSearch.substr(1).split('&').reduce((params, query) => {
+      const chunks = query.split('=');
+      const key = chunks[0];
+      let value = decodeURIComponent(chunks[1]);
+      value = isNaN(Number(value)) ? value : Number(value);
+      return params[key] = value, params;
+    }, {});
+  }
+
+  return {};
+}
+/**
+ * Get the current screen name.
+ *
+ * @return {string} - Screen name.
+ */
+
+function getScreenName() {
+  let screenName = '';
+  const {
+    page,
+    path,
+    post_type: postType
+  } = getUrlParams(window.location.search);
+
+  if (page) {
+    const currentPage = page === 'wc-admin' ? 'home_screen' : page;
+    screenName = path ? path.replace(/\//g, '_').substring(1) : currentPage;
+  } else if (postType) {
+    screenName = postType;
+  }
+
+  return screenName;
+}
+/**
+ * Similar to filter, but return two arrays separated by a partitioner function
+ *
+ * @param {Array} arr - Original array of values.
+ * @param {Function} partitioner - Function to return truthy/falsy values to separate items in array.
+ *
+ * @return {Array} - Array of two arrays, first including truthy values, and second including falsy.
+ */
+
+const sift = (arr, partitioner) => arr.reduce((all, curr) => {
+  all[!!partitioner(curr) ? 0 : 1].push(curr);
+  return all;
+}, [[], []]);
+
+/***/ }),
+
+/***/ 567:
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ 568:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(0);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _woocommerce_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(23);
+/* harmony import */ var _woocommerce_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _woocommerce_data__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(11);
+/* harmony import */ var _woocommerce_data__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_data__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(7);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _woocommerce_tracks__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(18);
+/* harmony import */ var _woocommerce_tracks__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_tracks__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var react_transition_group__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(196);
+/* harmony import */ var react_transition_group__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(193);
+/* harmony import */ var _woocommerce_experimental__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(22);
+/* harmony import */ var _woocommerce_experimental__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_experimental__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _header_activity_panel_activity_card__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(558);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(188);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(561);
+/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(569);
+/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_index_scss__WEBPACK_IMPORTED_MODULE_12__);
+
+
+/**
+ * External dependencies
+ */
+
+
+
+
+
+
+
+
+/**
+ * Internal dependencies
+ */
+
+
+
+
+
+
+const renderEmptyCard = () => Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_header_activity_panel_activity_card__WEBPACK_IMPORTED_MODULE_9__[/* ActivityCard */ "a"], {
+  className: "woocommerce-empty-activity-card",
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Your inbox is empty', 'woocommerce-admin'),
+  icon: false
+}, Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('As things begin to happen in your store your inbox will start to fill up. ' + "You'll see things like achievements, new feature announcements, extension recommendations and more!", 'woocommerce-admin'));
+
+const onBodyLinkClick = (note, innerLink) => {
+  Object(_woocommerce_tracks__WEBPACK_IMPORTED_MODULE_5__["recordEvent"])('inbox_action_click', {
+    note_name: note.name,
+    note_title: note.title,
+    note_content_inner_link: innerLink
+  });
+};
+
+const renderNotes = ({
+  hasNotes,
+  isBatchUpdating,
+  lastRead,
+  notes,
+  onDismiss,
+  onNoteActionClick
+}) => {
+  if (isBatchUpdating) {
+    return;
+  }
+
+  if (!hasNotes) {
+    return renderEmptyCard();
+  }
+
+  const screen = Object(_utils__WEBPACK_IMPORTED_MODULE_11__[/* getScreenName */ "a"])();
+
+  const onNoteVisible = note => {
+    Object(_woocommerce_tracks__WEBPACK_IMPORTED_MODULE_5__["recordEvent"])('inbox_note_view', {
+      note_content: note.content,
+      note_name: note.name,
+      note_title: note.title,
+      note_type: note.type,
+      screen
+    });
+  };
+
+  const notesArray = Object.keys(notes).map(key => notes[key]);
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_transition_group__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"], {
+    role: "menu"
+  }, notesArray.map(note => {
+    const {
+      id: noteId,
+      is_deleted: isDeleted
+    } = note;
+
+    if (isDeleted) {
+      return null;
+    }
+
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_transition_group__WEBPACK_IMPORTED_MODULE_7__[/* default */ "a"], {
+      key: noteId,
+      timeout: 500,
+      classNames: "woocommerce-inbox-message"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_woocommerce_experimental__WEBPACK_IMPORTED_MODULE_8__["InboxNoteCard"], {
+      key: noteId,
+      note: note,
+      lastRead: lastRead,
+      onDismiss: onDismiss,
+      onNoteActionClick: onNoteActionClick,
+      onBodyLinkClick: onBodyLinkClick,
+      onNoteVisible: onNoteVisible
+    }));
+  }));
+};
+
+const INBOX_QUERY = {
+  page: 1,
+  per_page: _woocommerce_data__WEBPACK_IMPORTED_MODULE_3__["QUERY_DEFAULTS"].pageSize,
+  status: 'unactioned',
+  type: _woocommerce_data__WEBPACK_IMPORTED_MODULE_3__["QUERY_DEFAULTS"].noteTypes,
+  orderby: 'date',
+  order: 'desc',
+  _fields: ['id', 'name', 'title', 'content', 'type', 'status', 'actions', 'date_created', 'date_created_gmt', 'layout', 'image', 'is_deleted']
+};
+
+const InboxPanel = () => {
+  const {
+    createNotice
+  } = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_4__["useDispatch"])('core/notices');
+  const {
+    batchUpdateNotes,
+    removeAllNotes,
+    removeNote,
+    updateNote,
+    triggerNoteAction
+  } = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_4__["useDispatch"])(_woocommerce_data__WEBPACK_IMPORTED_MODULE_3__["NOTES_STORE_NAME"]);
+  const {
+    isError,
+    isResolvingNotes,
+    isBatchUpdating,
+    notes
+  } = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_4__["useSelect"])(select => {
+    const {
+      getNotes,
+      getNotesError,
+      isResolving,
+      isNotesRequesting
+    } = select(_woocommerce_data__WEBPACK_IMPORTED_MODULE_3__["NOTES_STORE_NAME"]);
+    return {
+      notes: getNotes(INBOX_QUERY),
+      isError: Boolean(getNotesError('getNotes', [INBOX_QUERY])),
+      isResolvingNotes: isResolving('getNotes', [INBOX_QUERY]),
+      isBatchUpdating: isNotesRequesting('batchUpdateNotes')
+    };
+  });
+  const {
+    updateUserPreferences,
+    ...userPrefs
+  } = Object(_woocommerce_data__WEBPACK_IMPORTED_MODULE_3__["useUserPreferences"])();
+  const [lastRead] = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useState"])(userPrefs.activity_panel_inbox_last_read);
+  const [dismiss, setDismiss] = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useState"])();
+  Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    const mountTime = Date.now();
+    const userDataFields = {
+      activity_panel_inbox_last_read: mountTime
+    };
+    updateUserPreferences(userDataFields);
+  }, []);
+
+  const onDismiss = (note, type) => {
+    setDismiss({
+      note,
+      type
+    });
+  };
+
+  const closeDismissModal = async (confirmed = false) => {
+    const noteNameDismissAll = dismiss.type === 'all' ? true : false;
+    const screen = Object(_utils__WEBPACK_IMPORTED_MODULE_11__[/* getScreenName */ "a"])();
+    Object(_woocommerce_tracks__WEBPACK_IMPORTED_MODULE_5__["recordEvent"])('inbox_action_dismiss', {
+      note_name: dismiss.note.name,
+      note_title: dismiss.note.title,
+      note_name_dismiss_all: noteNameDismissAll,
+      note_name_dismiss_confirmation: confirmed,
+      screen
+    });
+
+    if (confirmed) {
+      const noteId = dismiss.note.id;
+      const removeAll = !noteId || noteNameDismissAll;
+
+      try {
+        let notesRemoved = [];
+
+        if (removeAll) {
+          notesRemoved = await removeAllNotes();
+        } else {
+          const noteRemoved = await removeNote(noteId);
+          notesRemoved = [noteRemoved];
+        }
+
+        setDismiss(undefined);
+        createNotice('success', notesRemoved.length > 1 ? Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('All messages dismissed', 'woocommerce-admin') : Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Message dismissed', 'woocommerce-admin'), {
+          actions: [{
+            label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Undo', 'woocommerce-admin'),
+            onClick: () => {
+              if (notesRemoved.length > 1) {
+                batchUpdateNotes(notesRemoved.map(note => note.id), {
+                  is_deleted: 0
+                });
+              } else {
+                updateNote(noteId, {
+                  is_deleted: 0
+                });
+              }
+            }
+          }]
+        });
+      } catch (e) {
+        const numberOfNotes = removeAll ? notes.length : 1;
+        createNotice('error', Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["_n"])('Message could not be dismissed', 'Messages could not be dismissed', numberOfNotes, 'woocommerce-admin'));
+        setDismiss(undefined);
+      }
+    } else {
+      setDismiss(undefined);
+    }
+  };
+
+  const onNoteActionClick = (note, action) => {
+    triggerNoteAction(note.id, action.id);
+  };
+
+  if (isError) {
+    const title = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('There was an error getting your inbox. Please try again.', 'woocommerce-admin');
+
+    const actionLabel = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Reload', 'woocommerce-admin');
+
+    const actionCallback = () => {
+      // @todo Add tracking for how often an error is displayed, and the reload action is clicked.
+      window.location.reload();
+    };
+
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_woocommerce_components__WEBPACK_IMPORTED_MODULE_2__["EmptyContent"], {
+      title: title,
+      actionLabel: actionLabel,
+      actionURL: null,
+      actionCallback: actionCallback
+    });
+  }
+
+  const hasNotes = Object(_utils__WEBPACK_IMPORTED_MODULE_10__[/* hasValidNotes */ "b"])(notes); // @todo After having a pagination implemented we should call the method "getNotes" with a different query since
+  // the current one is only getting 25 notes and the count of unread notes only will refer to this 25 and not all the existing ones.
+
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+    className: "woocommerce-homepage-notes-wrapper"
+  }, (isResolvingNotes || isBatchUpdating) && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_woocommerce_components__WEBPACK_IMPORTED_MODULE_2__["Section"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_woocommerce_experimental__WEBPACK_IMPORTED_MODULE_8__["InboxNotePlaceholder"], {
+    className: "banner message-is-unread"
+  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_woocommerce_components__WEBPACK_IMPORTED_MODULE_2__["Section"], null, !isResolvingNotes && !isBatchUpdating && renderNotes({
+    hasNotes,
+    isBatchUpdating,
+    lastRead,
+    notes,
+    onDismiss,
+    onNoteActionClick
+  })), dismiss && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_woocommerce_experimental__WEBPACK_IMPORTED_MODULE_8__["InboxDismissConfirmationModal"], {
+    onClose: closeDismissModal,
+    onDismiss: () => closeDismissModal(true)
+  })));
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (InboxPanel);
+
+/***/ }),
+
+/***/ 569:
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ 629:
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ 647:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return VisibilitySensor; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(0);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _lib_is_visible_with_offset__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3);
-/* harmony import */ var _lib_is_visible_with_offset__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_lib_is_visible_with_offset__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "InboxPanel", function() { return InboxPanel; });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(0);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _inbox_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(629);
+/* harmony import */ var _inbox_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_inbox_scss__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _inbox_panel__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(568);
+/* harmony import */ var _abbreviated_notifications_panel__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(299);
 
 
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-
-
-
-
-function normalizeRect(rect) {
-  if (rect.width === undefined) {
-    rect.width = rect.right - rect.left;
-  }
-
-  if (rect.height === undefined) {
-    rect.height = rect.bottom - rect.top;
-  }
-
-  return rect;
-}
-
-var VisibilitySensor =
-/*#__PURE__*/
-function (_React$Component) {
-  _inherits(VisibilitySensor, _React$Component);
-
-  function VisibilitySensor(props) {
-    var _this;
-
-    _classCallCheck(this, VisibilitySensor);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(VisibilitySensor).call(this, props));
-
-    _defineProperty(_assertThisInitialized(_this), "getContainer", function () {
-      return _this.props.containment || window;
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "addEventListener", function (target, event, delay, throttle) {
-      if (!_this.debounceCheck) {
-        _this.debounceCheck = {};
-      }
-
-      var timeout;
-      var func;
-
-      var later = function later() {
-        timeout = null;
-
-        _this.check();
-      };
-
-      if (throttle > -1) {
-        func = function func() {
-          if (!timeout) {
-            timeout = setTimeout(later, throttle || 0);
-          }
-        };
-      } else {
-        func = function func() {
-          clearTimeout(timeout);
-          timeout = setTimeout(later, delay || 0);
-        };
-      }
-
-      var info = {
-        target: target,
-        fn: func,
-        getLastTimeout: function getLastTimeout() {
-          return timeout;
-        }
-      };
-      target.addEventListener(event, info.fn);
-      _this.debounceCheck[event] = info;
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "startWatching", function () {
-      if (_this.debounceCheck || _this.interval) {
-        return;
-      }
-
-      if (_this.props.intervalCheck) {
-        _this.interval = setInterval(_this.check, _this.props.intervalDelay);
-      }
-
-      if (_this.props.scrollCheck) {
-        _this.addEventListener(_this.getContainer(), "scroll", _this.props.scrollDelay, _this.props.scrollThrottle);
-      }
-
-      if (_this.props.resizeCheck) {
-        _this.addEventListener(window, "resize", _this.props.resizeDelay, _this.props.resizeThrottle);
-      } // if dont need delayed call, check on load ( before the first interval fires )
-
-
-      !_this.props.delayedCall && _this.check();
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "stopWatching", function () {
-      if (_this.debounceCheck) {
-        // clean up event listeners and their debounce callers
-        for (var debounceEvent in _this.debounceCheck) {
-          if (_this.debounceCheck.hasOwnProperty(debounceEvent)) {
-            var debounceInfo = _this.debounceCheck[debounceEvent];
-            clearTimeout(debounceInfo.getLastTimeout());
-            debounceInfo.target.removeEventListener(debounceEvent, debounceInfo.fn);
-            _this.debounceCheck[debounceEvent] = null;
-          }
-        }
-      }
-
-      _this.debounceCheck = null;
-
-      if (_this.interval) {
-        _this.interval = clearInterval(_this.interval);
-      }
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "check", function () {
-      var el = _this.node;
-      var rect;
-      var containmentRect; // if the component has rendered to null, dont update visibility
-
-      if (!el) {
-        return _this.state;
-      }
-
-      rect = normalizeRect(_this.roundRectDown(el.getBoundingClientRect()));
-
-      if (_this.props.containment) {
-        var containmentDOMRect = _this.props.containment.getBoundingClientRect();
-
-        containmentRect = {
-          top: containmentDOMRect.top,
-          left: containmentDOMRect.left,
-          bottom: containmentDOMRect.bottom,
-          right: containmentDOMRect.right
-        };
-      } else {
-        containmentRect = {
-          top: 0,
-          left: 0,
-          bottom: window.innerHeight || document.documentElement.clientHeight,
-          right: window.innerWidth || document.documentElement.clientWidth
-        };
-      } // Check if visibility is wanted via offset?
-
-
-      var offset = _this.props.offset || {};
-      var hasValidOffset = _typeof(offset) === "object";
-
-      if (hasValidOffset) {
-        containmentRect.top += offset.top || 0;
-        containmentRect.left += offset.left || 0;
-        containmentRect.bottom -= offset.bottom || 0;
-        containmentRect.right -= offset.right || 0;
-      }
-
-      var visibilityRect = {
-        top: rect.top >= containmentRect.top,
-        left: rect.left >= containmentRect.left,
-        bottom: rect.bottom <= containmentRect.bottom,
-        right: rect.right <= containmentRect.right
-      }; // https://github.com/joshwnj/react-visibility-sensor/pull/114
-
-      var hasSize = rect.height > 0 && rect.width > 0;
-      var isVisible = hasSize && visibilityRect.top && visibilityRect.left && visibilityRect.bottom && visibilityRect.right; // check for partial visibility
-
-      if (hasSize && _this.props.partialVisibility) {
-        var partialVisible = rect.top <= containmentRect.bottom && rect.bottom >= containmentRect.top && rect.left <= containmentRect.right && rect.right >= containmentRect.left; // account for partial visibility on a single edge
-
-        if (typeof _this.props.partialVisibility === "string") {
-          partialVisible = visibilityRect[_this.props.partialVisibility];
-        } // if we have minimum top visibility set by props, lets check, if it meets the passed value
-        // so if for instance element is at least 200px in viewport, then show it.
-
-
-        isVisible = _this.props.minTopValue ? partialVisible && rect.top <= containmentRect.bottom - _this.props.minTopValue : partialVisible;
-      } // Deprecated options for calculating offset.
-
-
-      if (typeof offset.direction === "string" && typeof offset.value === "number") {
-        console.warn("[notice] offset.direction and offset.value have been deprecated. They still work for now, but will be removed in next major version. Please upgrade to the new syntax: { %s: %d }", offset.direction, offset.value);
-        isVisible = _lib_is_visible_with_offset__WEBPACK_IMPORTED_MODULE_3___default()(offset, rect, containmentRect);
-      }
-
-      var state = _this.state; // notify the parent when the value changes
-
-      if (_this.state.isVisible !== isVisible) {
-        state = {
-          isVisible: isVisible,
-          visibilityRect: visibilityRect
-        };
-
-        _this.setState(state);
-
-        if (_this.props.onChange) _this.props.onChange(isVisible);
-      }
-
-      return state;
-    });
-
-    _this.state = {
-      isVisible: null,
-      visibilityRect: {}
-    };
-    return _this;
-  }
-
-  _createClass(VisibilitySensor, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.node = react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.findDOMNode(this);
-
-      if (this.props.active) {
-        this.startWatching();
-      }
-    }
-  }, {
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {
-      this.stopWatching();
-    }
-  }, {
-    key: "componentDidUpdate",
-    value: function componentDidUpdate(prevProps) {
-      // re-register node in componentDidUpdate if children diffs [#103]
-      this.node = react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.findDOMNode(this);
-
-      if (this.props.active && !prevProps.active) {
-        this.setState({
-          isVisible: null,
-          visibilityRect: {}
-        });
-        this.startWatching();
-      } else if (!this.props.active) {
-        this.stopWatching();
-      }
-    }
-  }, {
-    key: "roundRectDown",
-    value: function roundRectDown(rect) {
-      return {
-        top: Math.floor(rect.top),
-        left: Math.floor(rect.left),
-        bottom: Math.floor(rect.bottom),
-        right: Math.floor(rect.right)
-      };
-    }
-    /**
-     * Check if the element is within the visible viewport
-     */
-
-  }, {
-    key: "render",
-    value: function render() {
-      if (this.props.children instanceof Function) {
-        return this.props.children({
-          isVisible: this.state.isVisible,
-          visibilityRect: this.state.visibilityRect
-        });
-      }
-
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.Children.only(this.props.children);
-    }
-  }]);
-
-  return VisibilitySensor;
-}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
-
-_defineProperty(VisibilitySensor, "defaultProps", {
-  active: true,
-  partialVisibility: false,
-  minTopValue: 0,
-  scrollCheck: false,
-  scrollDelay: 250,
-  scrollThrottle: -1,
-  resizeCheck: false,
-  resizeDelay: 250,
-  resizeThrottle: -1,
-  intervalCheck: true,
-  intervalDelay: 100,
-  delayedCall: false,
-  offset: {},
-  containment: null,
-  children: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null)
-});
-
-_defineProperty(VisibilitySensor, "propTypes", {
-  onChange: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
-  active: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool,
-  partialVisibility: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool, prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.oneOf(["top", "right", "bottom", "left"])]),
-  delayedCall: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool,
-  offset: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.shape({
-    top: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number,
-    left: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number,
-    bottom: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number,
-    right: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number
-  }), // deprecated offset property
-  prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.shape({
-    direction: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.oneOf(["top", "right", "bottom", "left"]),
-    value: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number
-  })]),
-  scrollCheck: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool,
-  scrollDelay: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number,
-  scrollThrottle: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number,
-  resizeCheck: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool,
-  resizeDelay: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number,
-  resizeThrottle: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number,
-  intervalCheck: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool,
-  intervalDelay: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number,
-  containment: typeof window !== "undefined" ? prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.instanceOf(window.Element) : prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.any,
-  children: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.element, prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func]),
-  minTopValue: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number
-});
-
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
 /**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
+ * Internal dependencies
  */
 
 
 
-var ReactPropTypesSecret = __webpack_require__(6);
-
-function emptyFunction() {}
-function emptyFunctionWithReset() {}
-emptyFunctionWithReset.resetWarningCache = emptyFunction;
-
-module.exports = function() {
-  function shim(props, propName, componentName, location, propFullName, secret) {
-    if (secret === ReactPropTypesSecret) {
-      // It is still safe when called from React.
-      return;
-    }
-    var err = new Error(
-      'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +
-      'Use PropTypes.checkPropTypes() to call them. ' +
-      'Read more at http://fb.me/use-check-prop-types'
-    );
-    err.name = 'Invariant Violation';
-    throw err;
-  };
-  shim.isRequired = shim;
-  function getShim() {
-    return shim;
-  };
-  // Important!
-  // Keep this list in sync with production version in `./factoryWithTypeCheckers.js`.
-  var ReactPropTypes = {
-    array: shim,
-    bool: shim,
-    func: shim,
-    number: shim,
-    object: shim,
-    string: shim,
-    symbol: shim,
-
-    any: shim,
-    arrayOf: getShim,
-    element: shim,
-    elementType: shim,
-    instanceOf: getShim,
-    node: shim,
-    objectOf: getShim,
-    oneOf: getShim,
-    oneOfType: getShim,
-    shape: getShim,
-    exact: getShim,
-
-    checkPropTypes: emptyFunctionWithReset,
-    resetWarningCache: emptyFunction
-  };
-
-  ReactPropTypes.PropTypes = ReactPropTypes;
-
-  return ReactPropTypes;
+const InboxPanel = ({
+  hasAbbreviatedNotifications,
+  thingsToDoNextCount
+}) => {
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+    className: "woocommerce-notification-panels"
+  }, hasAbbreviatedNotifications && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_abbreviated_notifications_panel__WEBPACK_IMPORTED_MODULE_3__[/* AbbreviatedNotificationsPanel */ "b"], {
+    thingsToDoNextCount: thingsToDoNextCount
+  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_inbox_panel__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"], null));
 };
-
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-
-
-var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
-
-module.exports = ReactPropTypesSecret;
-
-
-/***/ })
-/******/ ]);
-});
+/* harmony default export */ __webpack_exports__["default"] = (InboxPanel);
 
 /***/ }),
 
-/***/ 632:
+/***/ 71:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
-var $ = __webpack_require__(12);
-var getOwnPropertyDescriptor = __webpack_require__(33).f;
-var toLength = __webpack_require__(34);
-var notARegExp = __webpack_require__(207);
-var requireObjectCoercible = __webpack_require__(32);
-var correctIsRegExpLogic = __webpack_require__(208);
-var IS_PURE = __webpack_require__(57);
-
-var nativeStartsWith = ''.startsWith;
-var min = Math.min;
-
-var CORRECT_IS_REGEXP_LOGIC = correctIsRegExpLogic('startsWith');
-// https://github.com/zloirock/core-js/pull/702
-var MDN_POLYFILL_BUG = !IS_PURE && !CORRECT_IS_REGEXP_LOGIC && !!function () {
-  var descriptor = getOwnPropertyDescriptor(String.prototype, 'startsWith');
-  return descriptor && !descriptor.writable;
-}();
-
-// `String.prototype.startsWith` method
-// https://tc39.es/ecma262/#sec-string.prototype.startswith
-$({ target: 'String', proto: true, forced: !MDN_POLYFILL_BUG && !CORRECT_IS_REGEXP_LOGIC }, {
-  startsWith: function startsWith(searchString /* , position = 0 */) {
-    var that = String(requireObjectCoercible(this));
-    notARegExp(searchString);
-    var index = toLength(min(arguments.length > 1 ? arguments[1] : undefined, that.length));
-    var search = String(searchString);
-    return nativeStartsWith
-      ? nativeStartsWith.call(that, search, index)
-      : that.slice(index, index + search.length) === search;
-  }
-});
+var _extends=Object.assign||function(a){for(var c,b=1;b<arguments.length;b++)for(var d in c=arguments[b],c)Object.prototype.hasOwnProperty.call(c,d)&&(a[d]=c[d]);return a};Object.defineProperty(exports,'__esModule',{value:!0});exports.default=function(a){var b=a.size,c=b===void 0?24:b,d=a.onClick,e=a.icon,f=a.className,g=_objectWithoutProperties(a,['size','onClick','icon','className']),j=['gridicon','gridicons-notice-outline',f,!!function h(k){return 0==k%18}(c)&&'needs-offset',!1,!1].filter(Boolean).join(' ');return _react2.default.createElement('svg',_extends({className:j,height:c,width:c,onClick:d},g,{xmlns:'http://www.w3.org/2000/svg',viewBox:'0 0 24 24'}),_react2.default.createElement('g',null,_react2.default.createElement('path',{d:'M12 4c4.41 0 8 3.59 8 8s-3.59 8-8 8-8-3.59-8-8 3.59-8 8-8m0-2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm1 13h-2v2h2v-2zm-2-2h2l.5-6h-3l.5 6z'})))};var _react=__webpack_require__(5),_react2=_interopRequireDefault(_react);function _interopRequireDefault(a){return a&&a.__esModule?a:{default:a}}function _objectWithoutProperties(a,b){var d={};for(var c in a)0<=b.indexOf(c)||Object.prototype.hasOwnProperty.call(a,c)&&(d[c]=a[c]);return d}module.exports=exports['default'];
 
 
 /***/ })

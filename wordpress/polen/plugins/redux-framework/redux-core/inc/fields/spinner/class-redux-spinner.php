@@ -21,9 +21,9 @@ if ( ! class_exists( 'Redux_Spinner', false ) ) {
 		 */
 		public function set_defaults() {
 			$params = array(
-				'min'     => '',
-				'max'     => '',
-				'step'    => '',
+				'min'     => 0,
+				'max'     => 1,
+				'step'    => 1,
 				'default' => '',
 				'edit'    => true,
 				'plus'    => '+',
@@ -140,8 +140,7 @@ if ( ! class_exists( 'Redux_Spinner', false ) ) {
 					'redux-field-spinner-css',
 					Redux_Core::$url . 'inc/fields/spinner/redux-spinner.css',
 					array(),
-					$this->timestamp,
-					'all'
+					$this->timestamp
 				);
 			}
 		}
@@ -171,15 +170,15 @@ if ( ! class_exists( 'Redux_Spinner', false ) ) {
 		 * Compile CSS data for output.
 		 *
 		 * @param mixed $value Value.
-		 * @param array $output .
+		 * @param mixed $output .
 		 *
 		 * @return string
 		 */
-		private function parse_css( $value, $output ) {
+		private function parse_css( $value, $output ): string {
 			// No notices.
 			$css = '';
 
-			$unit = isset( $this->field['output_unit'] ) ? $this->field['output_unit'] : 'px';
+			$unit = $this->field['output_unit'] ?? 'px';
 
 			// Must be an array.
 			if ( is_array( $output ) ) {

@@ -31,11 +31,6 @@ class Polen_Talent {
             add_action('manage_shop_order_posts_custom_column', array($this, 'talent_column_content'), 20, 2);
 
             /**
-             * Modifica a URL do Talento (Usuário)
-             */
-            add_action( 'init', array( $this, 'rewrites' ) );
-            
-            /**
              * Modifcar o texto do botão comprar
              */
             add_filter('woocommerce_product_single_add_to_cart_text', array($this, 'change_single_add_to_cart_text'));  // Single de produtos
@@ -67,13 +62,9 @@ class Polen_Talent {
 
             add_filter( 'woocommerce_get_availability_text', array( $this, 'remove_stock_text' ) );
         }
-    }
 
-    public function rewrites() {
-//        global $wp_rewrite;
-//        $wp_rewrite->author_base = $this->tallent_slug;
-//        add_rewrite_rule($this->tallent_slug . '/([^/]+)/?$', 'index.php?' . $this->tallent_slug . '=$matches[1]', 'top');
-//        add_rewrite_rule($this->tallent_slug . '/([^/]+)/page/?([0-9]{1,})/?$', 'index.php?' . $this->tallent_slug . '=$matches[1]&paged=$matches[2]', 'top');
+        global $wpdb;
+        $this->table_talent = $wpdb->base_prefix . 'polen_talents';
     }
 
     /**
@@ -103,7 +94,7 @@ class Polen_Talent {
                 <option value="<?php echo esc_attr($user->ID) ?>" <?php echo $selected; ?> ><?php echo $user->display_name; ?></option>
         <?php endforeach ?>
         </select>
-            <?php
+        <?php
         }
 
     /**
@@ -123,41 +114,43 @@ class Polen_Talent {
                 return;
             }
 
-//            global $wpdb;
-//            $wpdb->update( 'wp_posts', array( 'post_author' => $post_author ), array( 'ID' => $post_id) );
             $this->set_product_to_talent($post_id, $post_author);
+            $this->update_talent_alias( $post_id );
         }
     }
 
     public function create_talent_product($user_id) {
-        $user_data = get_userdata($user_id);
-        $user_roles = $user_data->roles;
+        if( $user_id && ! is_null( $user_id ) && ! empty( $user_id ) ) {
+            $user_data = get_userdata( $user_id );
+            $user_roles = $user_data->roles;
 
-        $polen_update_field = new Polen_Update_Fields();
+            // verify if user is a talent
+            if ( in_array( self::ROLE_SLUG, $user_roles, true ) ) {
+                update_user_meta( $user_id, 'talent_enabled', '0' );
+                $sku = $vendor_data->talent_alias ?? null;
+                // verify if the talent has a product
+                $user_product = new \WP_Query( array( 'author' => $user_id ) );
+                if( ! $user_product->have_posts() ) {
+                    $polen_update_field = new Polen_Update_Fields();
+                    $vendor_data = $polen_update_field->get_vendor_data( $user_id );
+                    $talent_alias = ( isset( $vendor_data->talent_alias ) && ! is_null( $vendor_data->talent_alias ) && ! empty( $vendor_data->talent_alias ) ) ? $vendor_data->talent_alias : sanitize_title( $user_data->first_name . ' ' . $user_data->last_name );
+                    $product = new \WC_Product_Simple();
+                    $product->set_name( $user_data->first_name . ' ' . $user_data->last_name );
+                    $product->set_status( 'draft' );
+                    $product->set_slug( $talent_alias );
+                    $product->set_sku( $sku );
+                    $product->set_virtual( true );
+                    $product->set_sold_individually( 'yes' );
+                    $product->save();
+                    $id = $product->get_id();
 
-        //verify if user is a talent
-        if ( in_array( self::ROLE_SLUG, $user_roles, true ) ) {
-            update_user_meta($user_id, 'talent_enabled', '0');
-            $vendor_data = $polen_update_field->get_vendor_data($user_id);
-            $sku = $vendor_data->talent_alias ?? null;
-            //verify if the talent has a product
-            $user_product = new \WP_Query(array('author' => $user_id));
-            if (!$user_product->have_posts()) {
-                $user = get_user_by('ID', $user_id);
-                $product = new \WC_Product_Simple();
-                $product->set_name($user->first_name . ' ' . $user->last_name);
-                $product->set_status('draft');
-                $product->set_slug(sanitize_title($user->first_name . ' ' . $user->last_name));
-                $product->set_sku($sku);
-                $product->set_virtual(true);
-                $product->set_sold_individually('yes');
-                $product->save();
-                $id = $product->get_id();
+                    if( $id && ! is_null( $id ) && ! empty( $id ) && $id > 0 ) {
+                        $this->set_product_to_talent( $id, $user_id );
+                    }
 
-                $this->set_product_to_talent($id, $user_id);
-
-                if ($id <= 0) {
-                    trigger_error("Falha ao criar produto do usuário");
+                    if( $id <= 0 ) {
+                        trigger_error("Falha ao criar produto do usuário");
+                    }
                 }
             }
         }
@@ -716,6 +709,26 @@ class Polen_Talent {
      */
     public function remove_stock_text( $text ){
         return '';
+    }
+
+    /**
+     * Salva o slug do produto no talento
+     */
+    public function update_talent_alias( $post_id ) {
+        if( $post_id && ! is_null( $post_id ) && $post_id > 0 ) {
+            $product = get_post( $post_id );
+            global $wpdb;
+            $wpdb->update(
+                $this->table_talent,
+                array(
+                    'talent_alias' => $product->post_name,
+                    'talent_url'   => get_permalink( $post_id ),
+                ),
+                array(
+                    'user_id' => $product->post_author,
+                )
+            );
+        }
     }
 }
     
