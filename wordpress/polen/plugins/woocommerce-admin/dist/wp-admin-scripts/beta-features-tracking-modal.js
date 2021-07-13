@@ -82,7 +82,7 @@ this["wc"] = this["wc"] || {}; this["wc"]["betaFeaturesTrackingModal"] =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 578);
+/******/ 	return __webpack_require__(__webpack_require__.s = 515);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -94,144 +94,31 @@ this["wc"] = this["wc"] || {}; this["wc"]["betaFeaturesTrackingModal"] =
 
 /***/ }),
 
-/***/ 124:
+/***/ 11:
 /***/ (function(module, exports) {
 
-function _arrayLikeToArray(arr, len) {
-  if (len == null || len > arr.length) len = arr.length;
-
-  for (var i = 0, arr2 = new Array(len); i < len; i++) {
-    arr2[i] = arr[i];
-  }
-
-  return arr2;
-}
-
-module.exports = _arrayLikeToArray;
+(function() { module.exports = window["wc"]["data"]; }());
 
 /***/ }),
 
-/***/ 131:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ 140:
+/***/ (function(module, exports) {
 
-var arrayLikeToArray = __webpack_require__(124);
-
-function _unsupportedIterableToArray(o, minLen) {
-  if (!o) return;
-  if (typeof o === "string") return arrayLikeToArray(o, minLen);
-  var n = Object.prototype.toString.call(o).slice(8, -1);
-  if (n === "Object" && o.constructor) n = o.constructor.name;
-  if (n === "Map" || n === "Set") return Array.from(o);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return arrayLikeToArray(o, minLen);
-}
-
-module.exports = _unsupportedIterableToArray;
+(function() { module.exports = window["wc"]["explat"]; }());
 
 /***/ }),
 
-/***/ 134:
+/***/ 15:
 /***/ (function(module, exports) {
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
-  try {
-    var info = gen[key](arg);
-    var value = info.value;
-  } catch (error) {
-    reject(error);
-    return;
-  }
-
-  if (info.done) {
-    resolve(value);
-  } else {
-    Promise.resolve(value).then(_next, _throw);
-  }
-}
-
-function _asyncToGenerator(fn) {
-  return function () {
-    var self = this,
-        args = arguments;
-    return new Promise(function (resolve, reject) {
-      var gen = fn.apply(self, args);
-
-      function _next(value) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
-      }
-
-      function _throw(err) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
-      }
-
-      _next(undefined);
-    });
-  };
-}
-
-module.exports = _asyncToGenerator;
+(function() { module.exports = window["wp"]["compose"]; }());
 
 /***/ }),
 
-/***/ 16:
+/***/ 18:
 /***/ (function(module, exports) {
 
-(function() { module.exports = window["regeneratorRuntime"]; }());
-
-/***/ }),
-
-/***/ 182:
-/***/ (function(module, exports) {
-
-function _arrayWithHoles(arr) {
-  if (Array.isArray(arr)) return arr;
-}
-
-module.exports = _arrayWithHoles;
-
-/***/ }),
-
-/***/ 183:
-/***/ (function(module, exports) {
-
-function _iterableToArrayLimit(arr, i) {
-  if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
-  var _arr = [];
-  var _n = true;
-  var _d = false;
-  var _e = undefined;
-
-  try {
-    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
-      _arr.push(_s.value);
-
-      if (i && _arr.length === i) break;
-    }
-  } catch (err) {
-    _d = true;
-    _e = err;
-  } finally {
-    try {
-      if (!_n && _i["return"] != null) _i["return"]();
-    } finally {
-      if (_d) throw _e;
-    }
-  }
-
-  return _arr;
-}
-
-module.exports = _iterableToArrayLimit;
-
-/***/ }),
-
-/***/ 184:
-/***/ (function(module, exports) {
-
-function _nonIterableRest() {
-  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
-
-module.exports = _nonIterableRest;
+(function() { module.exports = window["wc"]["tracks"]; }());
 
 /***/ }),
 
@@ -242,13 +129,6 @@ module.exports = _nonIterableRest;
 
 /***/ }),
 
-/***/ 26:
-/***/ (function(module, exports) {
-
-(function() { module.exports = window["wp"]["data"]; }());
-
-/***/ }),
-
 /***/ 4:
 /***/ (function(module, exports) {
 
@@ -256,33 +136,14 @@ module.exports = _nonIterableRest;
 
 /***/ }),
 
-/***/ 43:
-/***/ (function(module, exports, __webpack_require__) {
-
-var arrayWithHoles = __webpack_require__(182);
-
-var iterableToArrayLimit = __webpack_require__(183);
-
-var unsupportedIterableToArray = __webpack_require__(131);
-
-var nonIterableRest = __webpack_require__(184);
-
-function _slicedToArray(arr, i) {
-  return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || unsupportedIterableToArray(arr, i) || nonIterableRest();
-}
-
-module.exports = _slicedToArray;
-
-/***/ }),
-
-/***/ 569:
+/***/ 505:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ 578:
+/***/ 515:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -292,18 +153,6 @@ __webpack_require__.r(__webpack_exports__);
 // EXTERNAL MODULE: external ["wp","element"]
 var external_wp_element_ = __webpack_require__(0);
 
-// EXTERNAL MODULE: external "regeneratorRuntime"
-var external_regeneratorRuntime_ = __webpack_require__(16);
-var external_regeneratorRuntime_default = /*#__PURE__*/__webpack_require__.n(external_regeneratorRuntime_);
-
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/asyncToGenerator.js
-var asyncToGenerator = __webpack_require__(134);
-var asyncToGenerator_default = /*#__PURE__*/__webpack_require__.n(asyncToGenerator);
-
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/slicedToArray.js
-var slicedToArray = __webpack_require__(43);
-var slicedToArray_default = /*#__PURE__*/__webpack_require__.n(slicedToArray);
-
 // EXTERNAL MODULE: external ["wp","i18n"]
 var external_wp_i18n_ = __webpack_require__(2);
 
@@ -311,21 +160,21 @@ var external_wp_i18n_ = __webpack_require__(2);
 var external_wp_components_ = __webpack_require__(4);
 
 // EXTERNAL MODULE: external ["wp","data"]
-var external_wp_data_ = __webpack_require__(26);
+var external_wp_data_ = __webpack_require__(7);
 
 // EXTERNAL MODULE: external ["wp","compose"]
-var external_wp_compose_ = __webpack_require__(65);
+var external_wp_compose_ = __webpack_require__(15);
 
 // EXTERNAL MODULE: external ["wc","data"]
-var external_wc_data_ = __webpack_require__(59);
+var external_wc_data_ = __webpack_require__(11);
 
 // EXTERNAL MODULE: external ["wc","tracks"]
-var external_wc_tracks_ = __webpack_require__(92);
+var external_wc_tracks_ = __webpack_require__(18);
+
+// EXTERNAL MODULE: external ["wc","explat"]
+var external_wc_explat_ = __webpack_require__(140);
 
 // CONCATENATED MODULE: ./client/wp-admin-scripts/beta-features-tracking-modal/container.js
-
-
-
 
 
 /**
@@ -339,73 +188,49 @@ var external_wc_tracks_ = __webpack_require__(92);
 
 
 
-var container_BetaFeaturesTrackingModal = function BetaFeaturesTrackingModal(_ref) {
-  var updateOptions = _ref.updateOptions;
 
-  var _useState = Object(external_wp_element_["useState"])(false),
-      _useState2 = slicedToArray_default()(_useState, 2),
-      isModalOpen = _useState2[0],
-      setIsModalOpen = _useState2[1];
+const BetaFeaturesTrackingModal = ({
+  updateOptions
+}) => {
+  const [isModalOpen, setIsModalOpen] = Object(external_wp_element_["useState"])(false);
+  const [isChecked, setIsChecked] = Object(external_wp_element_["useState"])(false);
+  const enableNavigationCheckbox = Object(external_wp_element_["useRef"])(document.querySelector('#woocommerce_navigation_enabled'));
 
-  var _useState3 = Object(external_wp_element_["useState"])(false),
-      _useState4 = slicedToArray_default()(_useState3, 2),
-      isChecked = _useState4[0],
-      setIsChecked = _useState4[1];
+  const setTracking = async allow => {
+    if (typeof window.wcTracks.enable === 'function') {
+      if (allow) {
+        window.wcTracks.enable(() => {
+          Object(external_wc_explat_["initializeExPlat"])();
+        });
+      } else {
+        window.wcTracks.isEnabled = false;
+      }
+    }
 
-  var enableNavigationCheckbox = Object(external_wp_element_["useRef"])(document.querySelector('#woocommerce_navigation_enabled'));
+    if (allow) {
+      Object(external_wc_tracks_["recordEvent"])('settings_features_tracking_enabled');
+    }
 
-  var setTracking = /*#__PURE__*/function () {
-    var _ref2 = asyncToGenerator_default()( /*#__PURE__*/external_regeneratorRuntime_default.a.mark(function _callee(allow) {
-      return external_regeneratorRuntime_default.a.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              if (typeof window.wcTracks.enable === 'function') {
-                if (allow) {
-                  window.wcTracks.enable();
-                } else {
-                  window.wcTracks.isEnabled = false;
-                }
-              }
+    return updateOptions({
+      woocommerce_allow_tracking: allow ? 'yes' : 'no'
+    });
+  };
 
-              if (allow) {
-                Object(external_wc_tracks_["recordEvent"])('settings_features_tracking_enabled');
-              }
-
-              return _context.abrupt("return", updateOptions({
-                woocommerce_allow_tracking: allow ? 'yes' : 'no'
-              }));
-
-            case 3:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }));
-
-    return function setTracking(_x) {
-      return _ref2.apply(this, arguments);
-    };
-  }();
-
-  Object(external_wp_element_["useEffect"])(function () {
+  Object(external_wp_element_["useEffect"])(() => {
     if (!enableNavigationCheckbox.current) {
       return;
     }
 
-    var listener = function listener(e) {
+    const listener = e => {
       if (e.target.checked) {
         e.target.checked = false;
         setIsModalOpen(true);
       }
     };
 
-    var checkbox = enableNavigationCheckbox.current;
+    const checkbox = enableNavigationCheckbox.current;
     checkbox.addEventListener('change', listener, false);
-    return function () {
-      return checkbox.removeEventListener('change', listener);
-    };
+    return () => checkbox.removeEventListener('change', listener);
   }, []);
 
   if (!enableNavigationCheckbox.current) {
@@ -418,9 +243,7 @@ var container_BetaFeaturesTrackingModal = function BetaFeaturesTrackingModal(_re
 
   return Object(external_wp_element_["createElement"])(external_wp_components_["Modal"], {
     title: Object(external_wp_i18n_["__"])('Build a Better WooCommerce', 'woocommerce-admin'),
-    onRequestClose: function onRequestClose() {
-      return setIsModalOpen(false);
-    },
+    onRequestClose: () => setIsModalOpen(false),
     className: "woocommerce-beta-features-tracking-modal"
   }, Object(external_wp_element_["createElement"])("p", null, Object(external_wp_i18n_["__"])('Testing new features requires sharing non-sensitive data via ', 'woocommerce-admin'), Object(external_wp_element_["createElement"])("a", {
     href: "https://woocommerce.com/usage-tracking"
@@ -434,51 +257,29 @@ var container_BetaFeaturesTrackingModal = function BetaFeaturesTrackingModal(_re
     className: "woocommerce-beta-features-tracking-modal__actions"
   }, Object(external_wp_element_["createElement"])(external_wp_components_["Button"], {
     isPrimary: true,
-    onClick: /*#__PURE__*/asyncToGenerator_default()( /*#__PURE__*/external_regeneratorRuntime_default.a.mark(function _callee2() {
-      return external_regeneratorRuntime_default.a.wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              if (!isChecked) {
-                _context2.next = 6;
-                break;
-              }
+    onClick: async () => {
+      if (isChecked) {
+        await setTracking(true);
+        enableNavigationCheckbox.current.checked = true;
+      } else {
+        await setTracking(false);
+      }
 
-              _context2.next = 3;
-              return setTracking(true);
-
-            case 3:
-              enableNavigationCheckbox.current.checked = true;
-              _context2.next = 8;
-              break;
-
-            case 6:
-              _context2.next = 8;
-              return setTracking(false);
-
-            case 8:
-              setIsModalOpen(false);
-
-            case 9:
-            case "end":
-              return _context2.stop();
-          }
-        }
-      }, _callee2);
-    }))
+      setIsModalOpen(false);
+    }
   }, Object(external_wp_i18n_["__"])('Save', 'woocommerce-admin'))));
 };
 
-var BetaFeaturesTrackingContainer = Object(external_wp_compose_["compose"])(Object(external_wp_data_["withDispatch"])(function (dispatch) {
-  var _dispatch = dispatch(external_wc_data_["OPTIONS_STORE_NAME"]),
-      updateOptions = _dispatch.updateOptions;
-
+const BetaFeaturesTrackingContainer = Object(external_wp_compose_["compose"])(Object(external_wp_data_["withDispatch"])(dispatch => {
+  const {
+    updateOptions
+  } = dispatch(external_wc_data_["OPTIONS_STORE_NAME"]);
   return {
-    updateOptions: updateOptions
+    updateOptions
   };
-}))(container_BetaFeaturesTrackingModal);
+}))(BetaFeaturesTrackingModal);
 // EXTERNAL MODULE: ./client/wp-admin-scripts/beta-features-tracking-modal/style.scss
-var style = __webpack_require__(569);
+var style = __webpack_require__(505);
 
 // CONCATENATED MODULE: ./client/wp-admin-scripts/beta-features-tracking-modal/index.js
 
@@ -493,30 +294,16 @@ var style = __webpack_require__(569);
 
 
 
-var betaFeaturesRoot = document.createElement('div');
+const betaFeaturesRoot = document.createElement('div');
 betaFeaturesRoot.setAttribute('id', 'beta-features-tracking');
 Object(external_wp_element_["render"])(Object(external_wp_element_["createElement"])(BetaFeaturesTrackingContainer, null), document.body.appendChild(betaFeaturesRoot));
 
 /***/ }),
 
-/***/ 59:
+/***/ 7:
 /***/ (function(module, exports) {
 
-(function() { module.exports = window["wc"]["data"]; }());
-
-/***/ }),
-
-/***/ 65:
-/***/ (function(module, exports) {
-
-(function() { module.exports = window["wp"]["compose"]; }());
-
-/***/ }),
-
-/***/ 92:
-/***/ (function(module, exports) {
-
-(function() { module.exports = window["wc"]["tracks"]; }());
+(function() { module.exports = window["wp"]["data"]; }());
 
 /***/ })
 

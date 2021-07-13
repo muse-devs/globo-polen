@@ -185,7 +185,7 @@ if ( ! class_exists( 'Redux_Media', false ) ) {
 			}
 
 			$alt = wp_prepare_attachment_for_js( $this->value['id'] );
-			$alt = isset( $alt['alt'] ) ? $alt['alt'] : '';
+			$alt = $alt['alt'] ?? '';
 
 			echo '<div class="screenshot" style="' . esc_attr( $hide ) . '">';
 			echo '<a class="of-uploaded-image" href="' . esc_url( $this->value['url'] ) . '" target="_blank">';
@@ -256,9 +256,7 @@ if ( ! class_exists( 'Redux_Media', false ) ) {
 		public function css_style( $data ) {
 			if ( Redux_Core::$pro_loaded ) {
 				// phpcs:ignore WordPress.NamingConventions.ValidHookName
-				$pro_data = apply_filters( 'redux/pro/media/output', $data );
-
-				return $pro_data;
+				return apply_filters( 'redux/pro/media/output', $data );
 			}
 
 			return null;
