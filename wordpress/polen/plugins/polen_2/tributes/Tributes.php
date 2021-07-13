@@ -4,42 +4,58 @@ namespace Polen\Tributes;
 
 class Tributes
 {
-
     public function __construct( bool $static = false )
     {
-        if( $static ) {
-            //ROUTES /lp/SLUG-ARTISTA
-            add_action( 'init',             array( $this, 'rewrites' ) );
-            add_filter( 'query_vars',       array( $this, 'query_vars' ) );
-            add_action( 'template_include', array( $this, 'template_include' ) );
-        }
+        new Tributes_Rewrite_Rules( $static );
+        new Tributes_API_Router( $static );
     }
 
-    /**
-     * Rewrite Rules lp/sku-talent
-     */
-    public function rewrites()
-    {
-        add_rewrite_rule( 'tributes[/]?$', 'index.php?tributes_root=1', 'top' );
-    }
 
     /**
+     * Se esta em alguma das paginas do Tribute APP /trbutes/*
      * 
+     * @return bool
      */
-    public function query_vars( $query_vars )
+    public static function is_tributes_app()
     {
-        $query_vars[] = 'tributes_root';
-        return $query_vars;
+        $tributes_app      = get_query_var( 'tributes_app' );
+        $tribute_operation = get_query_var( 'tribute_operation' );
+        if( $tributes_app == '1' && in_array( $tribute_operation, Tributes_Rewrite_Rules::TRIBUTES_OPERATIONS ) ) {
+            return true;
+        }
+        return false;
     }
 
 
-    public function template_include( $template )
+    /**
+     * Se esta na Home de tributos /tributes
+     * 
+     * @return bool
+     */
+    public static function is_tributes_home()
     {
-        if ( get_query_var( 'tributes_root' ) != '1' ) {
-            return $template;
+        $tributes_app      = get_query_var( 'tributes_app' );
+        $tribute_operation = get_query_var( 'tribute_operation' );
+        if( $tributes_app == '1' && $tribute_operation == Tributes_Rewrite_Rules::TRIBUTES_OPERATION_HOME) {
+            return true;
         }
-        $GLOBALS['tributes_root'] = true;
-        return get_template_directory() . '/tributes/index.php';
+        return false;
+    }
 
+
+
+    /**
+     * Se está no form de criacao de um tribute /tribute/create
+     * 
+     * @return bool
+     */
+    public static function is_tributes_create()
+    {
+        $tributes_app      = get_query_var( 'tributes_app' );
+        $tribute_operation = get_query_var( 'tribute_operation' );
+        if( $tributes_app == '1' && $tribute_operation == Tributes_Rewrite_Rules::TRIBUTES_OPERATION_CREATE ) {
+            return true;
+        }
+        return false;
     }
 }

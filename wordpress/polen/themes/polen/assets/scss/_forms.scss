@@ -18,9 +18,23 @@
 	}
 }
 
+input.error {
+	border-color: var(--danger);
+}
+
 .btn-primary:hover {
 	background-color: $primary-hover;
 	border-color: $primary-hover;
+}
+
+.button-icon-only {
+	font-size: 22px;
+	border: none;
+	background: none;
+	outline: transparent;
+	align-content: center;
+    align-items: center;
+    height: 100%;
 }
 
 .step {
