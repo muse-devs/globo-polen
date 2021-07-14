@@ -49,11 +49,11 @@ global $tribute, $tribute_hash;
 			</div>
 		</div>
 		<div class="row mt-4">
-			<div class="col-md-5 mb-3">
+			<div class="col-md-5 mb-3 mb-md-0">
 				<label for="">Nome</label>
 				<input id="add-name" type="text" v-model="name" class="form-control form-control-lg" />
 			</div>
-			<div class="col-md-5 mb-3">
+			<div class="col-md-5 mb-3 mb-md-0">
 				<label for="">e-mail</label>
 				<input type="email" v-model="email" v-on:keydown="onChangeEmail" class="form-control form-control-lg" />
 			</div>
