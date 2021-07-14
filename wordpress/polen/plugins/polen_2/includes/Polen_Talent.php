@@ -327,8 +327,11 @@ class Polen_Talent {
             }
 
             $select = 'order_items.order_id'; 
+            $limit = '';
             if( $count ){
                 $select = "count( order_items.order_id ) as qtd"; 
+            } else {
+                $limit = ' LIMIT 50 ';
             }
 
             if (is_countable($talent_products) && count($talent_products) > 0) {
@@ -343,7 +346,8 @@ class Polen_Talent {
                         AND posts.post_status IN ( ". $status ." )
                         AND order_items.order_item_type = 'line_item'
                         AND order_item_meta.meta_key = '_product_id'
-                        AND order_item_meta.meta_value = '$first_product->ID'";
+                        AND order_item_meta.meta_value = '$first_product->ID'
+                        {$limit};";
 
                         $order_list = $wpdb->get_results($sql);
 
