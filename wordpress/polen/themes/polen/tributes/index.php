@@ -71,7 +71,7 @@
 						</div>
 						<div class="text text-left text-md-center">
 							<h4 class="title">Colete vídeos</h4>
-							<p class="description">Todo mundo recebe um prompt, faz um vídeo e o carrega.</p>
+							<p class="description">Todo mundo recebe um convite, faz um vídeo e o envia.</p>
 						</div>
 					</div>
 					<div class="box-round how-to-tribute d-flex justify-content-between d-md-block">
