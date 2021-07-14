@@ -22,7 +22,10 @@
 					<br /><strong>Seu prazo para envio é %s.</strong>
 				</p>
 
-				<p><strong>Mensagem de boas-vindas e instruções de %s:</strong><br />%s</p>
+				<p style="padding: 10px 15px; border-radius: 8px; background-color: #e9e9e9;">
+					<strong>Mensagem de boas-vindas e instruções de %s:</strong>
+					<br />%s
+				</p>
 
 				<p>Para saber mais e enviar seu vídeo, clique no botão abaixo.<br />
 				Leva apenas um minuto e você pode fazer isso de qualquer dispositivo.</p>
