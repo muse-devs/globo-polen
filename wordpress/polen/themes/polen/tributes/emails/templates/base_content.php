@@ -29,7 +29,7 @@ include_once("components.php");
 
 				<strong>Mensagem de boas-vindas e instruções de Diego
 					Jovanholi:</strong><br />
-				Estamos criando uma montagem de vídeo (ou "Tributo")
+				Estamos criando uma montagem de vídeo (ou "Colab")
 				para diego. Você levará apenas um minuto para filmar
 				e enviar seu vídeo. Deve ser um presente
 				inesquecível que compartilha nosso amor e apreço
@@ -42,7 +42,7 @@ include_once("components.php");
 		<?php Tributes_Email_Class::get_margin("60px"); ?>
 		<tr>
 			<td style="text-align: center">
-				<?php Tributes_Email_Class::get_button_link("Enviar tributo", "#urlenviartributo"); ?>
+				<?php Tributes_Email_Class::get_button_link("Enviar Colab", "#urlenviartributo"); ?>
 			</td>
 		</tr>
 		<?php Tributes_Email_Class::get_margin("80px"); ?>

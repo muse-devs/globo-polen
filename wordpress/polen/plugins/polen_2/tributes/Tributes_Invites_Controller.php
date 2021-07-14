@@ -23,7 +23,7 @@ class Tributes_Invites_Controller
         $friends_list = $_POST[ 'friends' ];
         
         if ( empty( $tribute ) || $tribute->ID !== $tribute_id ) {
-            wp_send_json_error( 'Tributo Inválido', 401 );
+            wp_send_json_error( 'Colab Inválido', 401 );
             wp_die();
         }
 
@@ -113,7 +113,7 @@ class Tributes_Invites_Controller
         try {
             $lib = new Vimeo( $client_id, $client_secret, $token );
             $args = Polen_Vimeo_Vimeo_Options::get_option_insert_video( $file_size, $name_to_video );
-            $args[ 'name' ] = "Tributo para {$tribute->name_honored}";
+            $args[ 'name' ] = "Colab para {$tribute->name_honored}";
             $vimeo_response = $lib->request( '/me/videos', $args, 'POST' );
             
             $response = new Polen_Vimeo_Response( $vimeo_response );
