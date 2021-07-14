@@ -14,7 +14,7 @@ global $tribute, $tribute_hash;
 		<div class="row">
 			<div class="col-md-12">
 				<h1 class="title text-center">Convites por e-mail</h1>
-				<p class="mt-3">Cada pessoa que você adicionar receberá um e-mail de convite que contém um link para sua página de Tributo. Os convidados também receberão lembretes automáticos até que enviem um vídeo.</p>
+				<p class="mt-3">Cada pessoa que você adicionar receberá um e-mail de convite que contém um link para sua página de Colab. Os convidados também receberão lembretes automáticos até que enviem um vídeo.</p>
 			</div>
 		</div>
 		<div class="row">

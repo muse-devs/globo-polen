@@ -40,7 +40,7 @@
 									color: white;
 									background-color: #fd6c36;
 									border-radius: 8px;
-								" target="_blank">Enviar tributo</a>
+								" target="_blank">Enviar Colab</a>
 			</td>
 		</tr>
 		<tr>
