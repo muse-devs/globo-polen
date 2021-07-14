@@ -12,7 +12,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<h1 class="title main-title text-center text-md-left">Dê o <span class="color">presente mais significativo</span> do mundo</h1>
-						<p class="mt-4 text-center text-md-left">O Tributo simplifica a criação de um vídeo-presente em grupo que você pode dar em qualquer ocasião importante.</p>
+						<p class="mt-4 text-center text-md-left">O Colab simplifica a criação de um vídeo-presente em grupo que você pode dar em qualquer ocasião importante.</p>
 						<div class="row d-none d-md-block">
 							<div class="col-10 mt-4">
 								<a href="<?php echo $create_url; ?>" class="btn btn-primary btn-lg btn-block">Comece uma homenagem</a>
@@ -54,7 +54,7 @@
 		<section class="row tutorial mt-md-4 mb-4 pt-md-4 border-md-top">
 			<div class="col-12">
 				<h2 class="title text-center">Como funciona?</h2>
-				<p class="text-center">Leva 60 segundos para começar e você pode criar seu Tributo em qualquer dispositivo!</p>
+				<p class="text-center">Leva 60 segundos para começar e você pode criar seu Colab em qualquer dispositivo!</p>
 				<div class="d-block d-md-flex justify-content-md-between mt-5">
 					<div class="box-round how-to-tribute d-flex justify-content-between d-md-block">
 						<div class="ico mr-4 d-flex align-items-center text-md-center d-md-block mr-md-0">
@@ -71,7 +71,7 @@
 						</div>
 						<div class="text text-left text-md-center">
 							<h4 class="title">Colete vídeos</h4>
-							<p class="description">Todo mundo recebe um prompt, faz um vídeo e o carrega.</p>
+							<p class="description">Todo mundo recebe um convite, faz um vídeo e o envia.</p>
 						</div>
 					</div>
 					<div class="box-round how-to-tribute d-flex justify-content-between d-md-block">
