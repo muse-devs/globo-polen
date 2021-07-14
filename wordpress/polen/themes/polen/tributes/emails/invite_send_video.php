@@ -17,15 +17,15 @@
 		</tr>
 		<tr>
 			<td id="content">
-				<p>Oi %s,</p>
-				<p>%s o convidou a participar da criação de uma vídeo montagem para %s.</p>
-				<p><strong>Seu prazo para envio é %s.</strong></p>
+				<p>Oi %s,<br />
+				%s o convidou a participar da criação de uma vídeo montagem para %s.
+					<br /><strong>Seu prazo para envio é %s.</strong>
+				</p>
 
-				<p>Mensagem de boas-vindas e instruções de %s:</p>
-				<p>%s</p>
+				<p><strong>Mensagem de boas-vindas e instruções de %s:</strong><br />%s</p>
 
-				<p>Para saber mais e enviar seu vídeo, clique no botão abaixo.</p>
-				<p>Leva apenas um minuto e você pode fazer isso de qualquer dispositivo.</p>
+				<p>Para saber mais e enviar seu vídeo, clique no botão abaixo.<br />
+				Leva apenas um minuto e você pode fazer isso de qualquer dispositivo.</p>
 			</td>
 		</tr>
 		<tr>
