@@ -24,6 +24,9 @@ class Tributes_Controller
         }
         try {
             $new_id = Tributes_Model::insert( $data_input );
+
+            
+
             $new_tribute = Tributes_Model::get_by_id( $new_id );
             $return_ajax = array(
                 'hash' => $new_tribute->hash,

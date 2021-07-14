@@ -3,6 +3,7 @@ namespace Polen\Tributes;
 
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
 use Polen\Includes\Debug;
+use Polen\Includes\Vimeo\Polen_Vimeo_Factory;
 use Polen\Includes\Vimeo\Polen_Vimeo_Response;
 use Polen\Includes\Vimeo\Polen_Vimeo_Vimeo_Options;
 use Vimeo\Exceptions\ExceptionInterface;
@@ -111,7 +112,7 @@ class Tributes_Invites_Controller
 
         $name_to_video = '';
         try {
-            $lib = new Vimeo( $client_id, $client_secret, $token );
+            $lib = Polen_Vimeo_Factory::create_vimeo_colab_instance_with_redux();
             $args = Polen_Vimeo_Vimeo_Options::get_option_insert_video( $file_size, $name_to_video );
             $args[ 'name' ] = "Colab para {$tribute->name_honored}";
             $vimeo_response = $lib->request( '/me/videos', $args, 'POST' );
