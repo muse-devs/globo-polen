@@ -2,6 +2,9 @@
 
 namespace Polen\Tributes;
 
+use Polen\Includes\Vimeo\Polen_Vimeo_Create_Folder;
+use Polen\Includes\Vimeo\Polen_Vimeo_Factory;
+
 class Tributes_Controller
 {
     
@@ -18,16 +21,22 @@ class Tributes_Controller
         $data_input[ 'welcome_message' ] = filter_input( INPUT_POST, 'welcome_message' );
         
         if( !$this->validate_slug_not_empty( $data_input[ 'slug' ] ) ) {
-            //TODO: Esse nome "Slug" é ruim pra o usuário pensar num melhor
             wp_send_json_error( 'Endereço não pode ser em branco', 401 );
             die;
         }
         try {
             $new_id = Tributes_Model::insert( $data_input );
-
-            
-
             $new_tribute = Tributes_Model::get_by_id( $new_id );
+
+            $folder_name = "{$new_id}_{$data_input[ 'slug' ]}";
+            $create_folder_tribute = $this->create_folder_to_new_tribute( $folder_name );
+
+            $data_update_tribute_folder = array(
+                'ID' => $new_id,
+                'vimeo_folder_uri' => $create_folder_tribute,
+            );
+            Tributes_Model::update( $data_update_tribute_folder );
+
             $return_ajax = array(
                 'hash' => $new_tribute->hash,
                 'url_redirect' => tribute_get_url_invites( $new_tribute->hash ),
@@ -53,17 +62,14 @@ class Tributes_Controller
         $slug    = filter_input( INPUT_POST, 'slug' );
 
         if( !$this->validate_slug_not_empty( $slug ) ) {
-            //TODO: Esse nome "Slug" é ruim pra o usuário pensar num melhor
             wp_send_json_error( 'Porfavor escolha um endereço', 401 );
             wp_die();
         }
         $tribute = Tributes_Model::get_by_slug( $slug );
         if( !empty( $tribute ) ) {
-            //TODO: Esse nome "Slug" é ruim pra o usuário pensar num melhor
             wp_send_json_error( 'Esse endereço já existe, tente outro', 403 );
             wp_die();
         }
-        //TODO: Esse nome "Slug" é ruim pra o usuário pensar num melhor
         wp_send_json_success( 'Endereço disponível', 200 );
         wp_die();       
     }
@@ -105,6 +111,20 @@ class Tributes_Controller
     private function validate_slug_not_empty( $slug )
     {
         return ( empty( trim( $slug ) ) ) ? false : true;
+    }
+
+
+    /**
+     * Criar uma pasta para os videos de um novo tributo
+     * @param \Vimeo\Vimeo $vimeo_api
+     * @param string $folder_name
+     * @return string uri_da_folder
+     */
+    private function create_folder_to_new_tribute( $folder_name )
+    {
+        $vimeo_api = Polen_Vimeo_Factory::create_vimeo_colab_instance_with_redux();
+        $result_viemo_create_folder = Polen_Vimeo_Create_Folder::create_folder( $vimeo_api, $folder_name );
+        return $result_viemo_create_folder->get_folder_uri();
     }
 
 }

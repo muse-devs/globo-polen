@@ -7,6 +7,14 @@ use Vimeo\Vimeo;
 class Polen_Vimeo_Factory
 {
 
+    /**
+     * Criar uma instancia da API do Vimeo
+     * @param string
+     * @param string
+     * @param string
+     * 
+     * @return \Vimeo\Vimeo
+     */
     static public function create_vimeo_instance(
         string $client_id,
         string $client_secret,
@@ -16,6 +24,11 @@ class Polen_Vimeo_Factory
         return $vimeo_instance;
     }
 
+
+    /**
+     * Criar um instancia da API do Vimeo para o polen com os dados do Redux
+     * @return \Vimeo\Vimeo
+     */
     static public function create_vimeo_instance_with_redux()
     {
         global $Polen_Plugin_Settings;
@@ -28,6 +41,11 @@ class Polen_Vimeo_Factory
         return $vimeo_instance;
     }
 
+
+    /**
+     * Criar uma instancia da API do Vimeo para Triutos
+     * @return \Vimeo\Vimeo
+     */
     static public function create_vimeo_colab_instance_with_redux()
     {
         global $Polen_Plugin_Settings;
