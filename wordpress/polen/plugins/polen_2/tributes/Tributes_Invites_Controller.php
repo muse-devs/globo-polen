@@ -6,7 +6,6 @@ use Polen\Includes\Vimeo\Polen_Vimeo_Response;
 use Polen\Includes\Vimeo\Polen_Vimeo_Vimeo_Options;
 use Vimeo\Exceptions\ExceptionInterface;
 use Vimeo\Exceptions\VimeoRequestException;
-use Vimeo\Vimeo;
 
 class Tributes_Invites_Controller
 {
@@ -31,8 +30,8 @@ class Tributes_Invites_Controller
             wp_die();
         }
 
-        $emails = $_POST[ 'friends' ][ 'email' ];
-        $names  = $_POST[ 'friends' ][ 'name' ];
+        $emails = filter_var( $_POST[ 'friends' ][ 'email' ], FILTER_SANITIZE_SPECIAL_CHARS );
+        $names  = filter_var( $_POST[ 'friends' ][ 'name' ],  FILTER_SANITIZE_SPECIAL_CHARS );
         try {
             for( $i = 0; $i < count( $emails ); $i++ ) {
                 $email = filter_var( $emails[ $i ], FILTER_VALIDATE_EMAIL );

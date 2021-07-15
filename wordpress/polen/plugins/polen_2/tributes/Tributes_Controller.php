@@ -135,7 +135,7 @@ class Tributes_Controller
         $vimeo_api = Polen_Vimeo_Factory::create_vimeo_colab_instance_with_redux();
         $result_viemo_create_folder = Polen_Vimeo_Create_Folder::create_folder( $vimeo_api, $folder_name );
         if( $result_viemo_create_folder->is_error() ) {
-            throw new Exception( $result_viemo_create_folder->get_error(), 403 );
+            throw new \Exception( $result_viemo_create_folder->get_error(), 403 );
         }
         return $result_viemo_create_folder->get_folder_uri();
     }
