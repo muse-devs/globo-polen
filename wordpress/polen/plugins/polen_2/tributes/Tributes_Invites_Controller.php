@@ -30,8 +30,8 @@ class Tributes_Invites_Controller
             wp_die();
         }
 
-        $emails = filter_var( $_POST[ 'friends' ][ 'email' ], FILTER_SANITIZE_SPECIAL_CHARS );
-        $names  = filter_var( $_POST[ 'friends' ][ 'name' ],  FILTER_SANITIZE_SPECIAL_CHARS );
+        $emails = $_POST[ 'friends' ][ 'email' ];
+        $names  = $_POST[ 'friends' ][ 'name' ] ;
         try {
             for( $i = 0; $i < count( $emails ); $i++ ) {
                 $email = filter_var( $emails[ $i ], FILTER_VALIDATE_EMAIL );
