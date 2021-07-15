@@ -1,8 +1,6 @@
 <?php
 namespace Polen\Tributes;
 
-use Polen\Includes\Cart\Polen_Cart_Item_Factory;
-use Polen\Includes\Debug;
 use Polen\Includes\Vimeo\Polen_Vimeo_Factory;
 use Polen\Includes\Vimeo\Polen_Vimeo_Response;
 use Polen\Includes\Vimeo\Polen_Vimeo_Vimeo_Options;
@@ -18,9 +16,9 @@ class Tributes_Invites_Controller
      */
     public function create_tribute_invites()
     {
-        $tribute_hash = filter_input( INPUT_POST, 'tribute_hash' );
+        $tribute_hash = filter_input( INPUT_POST, 'tribute_hash', FILTER_SANITIZE_SPECIAL_CHARS );
         $tribute      = Tributes_Model::get_by_hash( $tribute_hash );
-        $tribute_id   = filter_input( INPUT_POST, 'tribute_id' );
+        $tribute_id   = filter_input( INPUT_POST, 'tribute_id', FILTER_SANITIZE_SPECIAL_CHARS );
         $friends_list = $_POST[ 'friends' ];
         
         if ( empty( $tribute ) || $tribute->ID !== $tribute_id ) {
@@ -38,7 +36,7 @@ class Tributes_Invites_Controller
         try {
             for( $i = 0; $i < count( $emails ); $i++ ) {
                 $email = filter_var( $emails[ $i ], FILTER_VALIDATE_EMAIL );
-                $name  = $names[ $i ];
+                $name  = filter_var($names[ $i ], FILTER_SANITIZE_SPECIAL_CHARS );
                 if( !empty( $email ) ) {
                     $invite               = $this->create_a_invites( $name, $email, $tribute->ID );
                     $email_invite_content = \tributes_email_create_content_invite( $invite->hash );
@@ -94,8 +92,8 @@ class Tributes_Invites_Controller
     public function make_video_slot_vimeo()
     {
         //TODO:
-        $tribute_hash = filter_input( INPUT_POST, 'tribute_hash' );
-        $invite_hash = filter_input( INPUT_POST, 'invite_hash' );
+        $tribute_hash = filter_input( INPUT_POST, 'tribute_hash', FILTER_SANITIZE_SPECIAL_CHARS );
+        $invite_hash = filter_input( INPUT_POST, 'invite_hash', FILTER_SANITIZE_SPECIAL_CHARS );
         $invite_id   = filter_input( INPUT_POST, 'invite_id', FILTER_SANITIZE_NUMBER_INT );
         $file_size   = filter_input( INPUT_POST, 'file_size', FILTER_SANITIZE_NUMBER_INT );
 

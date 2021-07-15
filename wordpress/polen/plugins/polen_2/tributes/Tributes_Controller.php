@@ -2,6 +2,7 @@
 
 namespace Polen\Tributes;
 
+use Exception;
 use Polen\Includes\Vimeo\Polen_Vimeo_Create_Folder;
 use Polen\Includes\Vimeo\Polen_Vimeo_Factory;
 
@@ -11,18 +12,27 @@ class Tributes_Controller
     public function create_tribute()
     {
         $data_input = [];
-        $data_input[ 'name_honored' ]    = filter_input( INPUT_POST, 'name_honored' );
-        $data_input[ 'slug' ]            = filter_input( INPUT_POST, 'slug' );
+        $data_input[ 'name_honored' ]    = filter_input( INPUT_POST, 'name_honored', FILTER_SANITIZE_SPECIAL_CHARS );
+        $data_input[ 'slug' ]            = filter_input( INPUT_POST, 'slug', FILTER_SANITIZE_SPECIAL_CHARS );
         $data_input[ 'hash' ]            = Tributes_Model::create_hash();
         $data_input[ 'deadline' ]        = $this->treat_deadline_date( filter_input( INPUT_POST, 'deadline' ) );
-        $data_input[ 'occasion' ]        = filter_input( INPUT_POST, 'occasion' );;
-        $data_input[ 'creator_name' ]    = filter_input( INPUT_POST, 'creator_name' );
+        $data_input[ 'occasion' ]        = filter_input( INPUT_POST, 'occasion', FILTER_SANITIZE_SPECIAL_CHARS );;
+        $data_input[ 'creator_name' ]    = filter_input( INPUT_POST, 'creator_name', FILTER_SANITIZE_SPECIAL_CHARS );
         $data_input[ 'creator_email' ]   = filter_input( INPUT_POST, 'creator_email', FILTER_VALIDATE_EMAIL );
-        $data_input[ 'welcome_message' ] = filter_input( INPUT_POST, 'welcome_message' );
+        $data_input[ 'welcome_message' ] = filter_input( INPUT_POST, 'welcome_message', FILTER_SANITIZE_SPECIAL_CHARS );
         
         if( !$this->validate_slug_not_empty( $data_input[ 'slug' ] ) ) {
             wp_send_json_error( 'Endereço não pode ser em branco', 401 );
-            die;
+            wp_die();
+        }
+        
+        if( !$this->validate_slug_not_empty( $data_input[ 'welcome_message' ] ) ) {
+            wp_send_json_error( 'Instruções não pode ser em branco', 401 );
+            wp_die();
+        }
+        if( !$this->validate_slug_not_empty( $data_input[ 'creator_email' ] ) ) {
+            wp_send_json_error( 'Seu email não pode ser em branco', 401 );
+            wp_die();
         }
         try {
             $new_id = Tributes_Model::insert( $data_input );
@@ -124,6 +134,9 @@ class Tributes_Controller
     {
         $vimeo_api = Polen_Vimeo_Factory::create_vimeo_colab_instance_with_redux();
         $result_viemo_create_folder = Polen_Vimeo_Create_Folder::create_folder( $vimeo_api, $folder_name );
+        if( $result_viemo_create_folder->is_error() ) {
+            throw new Exception( $result_viemo_create_folder->get_error(), 403 );
+        }
         return $result_viemo_create_folder->get_folder_uri();
     }
 

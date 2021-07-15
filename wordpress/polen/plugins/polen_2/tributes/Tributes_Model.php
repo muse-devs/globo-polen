@@ -31,7 +31,7 @@ class Tributes_Model
             $data
         );
         if( $result_insert === false ) {
-            throw new \Exception( self::create_exception_message( $wpdb->last_error ), 401 );
+            throw new \Exception( $wpdb->last_error, 401 );
         }
         return $wpdb->insert_id;
     }
