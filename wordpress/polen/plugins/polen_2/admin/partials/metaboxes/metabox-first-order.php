@@ -13,6 +13,9 @@ defined( 'ABSPATH' ) || die;
 <script>
 document.getElementById('polen_create_first_order').addEventListener("click", function(evt){
     evt.preventDefault();
+	if ( !window.confirm("Deseja realmente criar um primeiro pedido?") ) {
+		return;
+	}
     let url = '<?= admin_url('admin-ajax.php'); ?>';
     const formCreate = document.querySelector('#form-create-first-order');
 	jQuery.ajax({

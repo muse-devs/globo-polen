@@ -17,15 +17,18 @@
 		</tr>
 		<tr>
 			<td id="content">
-				<p>Oi %s,</p>
-				<p>%s o convidou a participar da criação de uma vídeo montagem para %s.</p>
-				<p><strong>Seu prazo para envio é %s.</strong></p>
+				<p>Oi %s,<br />
+				%s o convidou a participar da criação de uma vídeo montagem para %s.
+					<br /><strong>Seu prazo para envio é %s.</strong>
+				</p>
 
-				<p>Mensagem de boas-vindas e instruções de %s:</p>
-				<p>%s</p>
+				<p style="padding: 10px 15px; border-radius: 8px; background-color: #e9e9e9;">
+					<strong>Mensagem de boas-vindas e instruções de %s:</strong>
+					<br />%s
+				</p>
 
-				<p>Para saber mais e enviar seu vídeo, clique no botão abaixo.</p>
-				<p>Leva apenas um minuto e você pode fazer isso de qualquer dispositivo.</p>
+				<p>Para saber mais e enviar seu vídeo, clique no botão abaixo.<br />
+				Leva apenas um minuto e você pode fazer isso de qualquer dispositivo.</p>
 			</td>
 		</tr>
 		<tr>
@@ -40,7 +43,7 @@
 									color: white;
 									background-color: #fd6c36;
 									border-radius: 8px;
-								" target="_blank">Enviar tributo</a>
+								" target="_blank">Enviar Colab</a>
 			</td>
 		</tr>
 		<tr>

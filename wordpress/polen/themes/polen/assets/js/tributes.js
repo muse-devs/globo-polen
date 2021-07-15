@@ -67,7 +67,7 @@ function checkSlug() {
 function createTribute(evt) {
 	evt.preventDefault();
 	if (slug.classList.contains("error")) {
-		polError("É preciso uma URL válida para seu Tributo");
+		polError("É preciso uma URL válida para seu Colab");
 		return;
 	}
 	polSpinner();
@@ -79,7 +79,7 @@ function createTribute(evt) {
 				if (result.success) {
 					setSessionMessage(
 						CONSTANTS.SUCCESS,
-						"Tributo criado",
+						"Colab criado",
 						"Agora convide seus amigos para essa homenagem"
 					);
 					window.location.href = result.data.url_redirect;

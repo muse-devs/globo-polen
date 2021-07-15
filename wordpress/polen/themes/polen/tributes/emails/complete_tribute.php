@@ -18,7 +18,7 @@
 		<tr>
 			<td id="content">
 				<p>Oi %s,</p>
-				<p>Sua homenagem está pronta, quem participou do tributo foi: </p>
+				<p>Sua homenagem está pronta, quem participou do Colab foi: </p>
 				<p>%s</p>
 			</td>
 		</tr>

@@ -63,7 +63,7 @@ function tributes_send_email( $email_content, $to_name, $to_email ) {
     $headers[] = "From: {$Polen_Plugin_Settings['polen_smtp_from_name']} <{$Polen_Plugin_Settings['polen_smtp_from_email']}>";
     $headers[] = 'Content-Type: text/html; charset=UTF-8';
     $to = "{$to_name} <{$to_email}>";
-    return wp_mail( $to, 'Video Tributo Polen.me', $email_content, $headers );
+    return wp_mail( $to, 'Video Colab Polen.me', $email_content, $headers );
 }
 
 
