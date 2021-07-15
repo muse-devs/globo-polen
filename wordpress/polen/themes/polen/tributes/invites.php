@@ -14,7 +14,7 @@ global $tribute, $tribute_hash;
 		<div class="row">
 			<div class="col-md-12">
 				<h1 class="title text-center">Convites por e-mail</h1>
-				<p class="mt-3">Cada pessoa que você adicionar receberá um e-mail de convite que contém um link para sua página de Tributo. Os convidados também receberão lembretes automáticos até que enviem um vídeo.</p>
+				<p class="mt-3">Cada pessoa que você adicionar receberá um e-mail de convite que contém um link para sua página de Colab. Os convidados também receberão lembretes automáticos até que enviem um vídeo.</p>
 			</div>
 		</div>
 		<div class="row">
@@ -49,11 +49,11 @@ global $tribute, $tribute_hash;
 			</div>
 		</div>
 		<div class="row mt-4">
-			<div class="col-md-5 mb-3">
+			<div class="col-md-5 mb-3 mb-md-0">
 				<label for="">Nome</label>
 				<input id="add-name" type="text" v-model="name" class="form-control form-control-lg" />
 			</div>
-			<div class="col-md-5 mb-3">
+			<div class="col-md-5 mb-3 mb-md-0">
 				<label for="">e-mail</label>
 				<input type="email" v-model="email" v-on:keydown="onChangeEmail" class="form-control form-control-lg" />
 			</div>
