@@ -70,6 +70,10 @@ function createTribute(evt) {
 		polError("É preciso uma URL válida para seu Colab");
 		return;
 	}
+	if (document.getElementById("deadline").classList.contains("error")) {
+		polError("Data inválida. A data precisa ser futura.");
+		return;
+	}
 	polSpinner();
 	jQuery
 		.post(
@@ -215,6 +219,22 @@ if (document.getElementById("deadline-wrapp")) {
 				} else if (this.date.length == 5) {
 					this.date = this.date += "/";
 				}
+			},
+			checkDate: function (evt) {
+				evt.target.classList.remove("error");
+
+				const d = new Date();
+
+				const df = evt.target.value.split("/");
+				const d2 = new Date(df[2], df[1] - 1, df[0]);
+
+				const t1 = d.getTime();
+				const t2 = d2.getTime();
+
+				if(!t2 || t2 < t1) {
+					evt.target.classList.add("error");
+				}
+
 			},
 		},
 	});
