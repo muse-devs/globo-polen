@@ -7,6 +7,8 @@
 
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
 use Polen\Includes\Polen_Video_Info;
+use Polen\Tributes\Tributes_Model;
+use Polen\Tributes\Tributes_Rewrite_Rules;
 
 /**
  * Adds custom classes to the array of body classes.
@@ -283,6 +285,7 @@ if ( ! in_array( 'all-in-one-seo-pack/all_in_one_seo_pack.php', apply_filters( '
 	add_action( 'wp_head', function() {
 		global $post;
 		global $is_video;
+		$tribute_app = get_query_var( Tributes_Rewrite_Rules::TRIBUTES_QUERY_VAR_TRUBITES_APP );
 
 		$video_hash = get_query_var( 'video_hash' );
 		if( !empty( $post ) && $post->post_type == 'product' ) {
@@ -336,6 +339,30 @@ if ( ! in_array( 'all-in-one-seo-pack/all_in_one_seo_pack.php', apply_filters( '
 				echo "\t" . '<meta property="og:image" content="' . polen_get_custom_logo_url() . '">' . "\n";
 			}
 			echo "\n";
+		} elseif( !empty( $tribute_app ) && $tribute_app == '1' ) {
+			$tribute_operation = get_query_var( Tributes_Rewrite_Rules::TRIBUTES_QUERY_VAR_TRIBUTES_OPERAION );
+			if( $tribute_operation == Tributes_Rewrite_Rules::TRIBUTES_OPERATION_VIDEOPLAY ) {
+				$slug_tribute = get_query_var( Tributes_Rewrite_Rules::TRIBUTES_QUERY_VAR_TRIBUTES_VIDEOPLAY );
+				$tribute = Tributes_Model::get_by_slug( $slug_tribute );
+				echo "\n\n";
+				echo "\t" . '<meta property="og:title" content="Colab">' . "\n";
+				echo "\t" . '<meta property="og:description" content="' . $tribute->welcome_message . '">' . "\n";
+				echo "\t" . '<meta property="og:url" content="' . tribute_get_url_final_video( $slug_tribute ) . '">' . "\n";
+				echo "\t" . '<meta property="og:locale" content="' . get_locale() . '">' . "\n";
+				echo "\t" . '<meta property="og:site_name" content="Colab">' . "\n";
+				echo "\t" . '<meta property="og:video" content="' . $tribute->vimeo_link . '">' . "\n";
+				echo "\t" . '<meta property="og:image" content="' . $tribute->vimeo_thumbnail . '">' . "\n";
+				echo "\n";
+			} else {
+				echo "\n\n";
+				echo "\t" . '<meta property="og:title" content="Colab">' . "\n";
+				echo "\t" . '<meta property="og:description" content="O Colab simplifica a criação de um vídeo-presente em grupo que você pode dar em qualquer ocasião importante.">' . "\n";
+				echo "\t" . '<meta property="og:url" content="' . tribute_get_url_base_url() . '">' . "\n";
+				echo "\t" . '<meta property="og:locale" content="' . get_locale() . '">' . "\n";
+				echo "\t" . '<meta property="og:site_name" content="Colab">' . "\n";
+				echo "\t" . '<meta property="og:image" content="' . TEMPLATE_URI . '/tributes/assets/img/logo-black.png">' . "\n";
+				echo "\n";
+			}
 		} else {
 			echo "\n\n";
 			echo "\t" . '<meta property="og:title" content="' . get_bloginfo( 'title' ) . '">' . "\n";
