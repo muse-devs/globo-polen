@@ -111,7 +111,7 @@ class Polen_Vimeo_Response
     
     /**
      * 
-     * @return type
+     * @return string
      */
     public function get_image_url_smaller()
     {
@@ -215,6 +215,15 @@ class Polen_Vimeo_Response
     public function get_play_array()
     {
         return $this->response['body']['files'];
+    }
+
+
+    /**
+     * Pega a URI da folder recem criada
+     */
+    public function get_folder_uri()
+    {
+        return $this->response['body']['uri'];
     }
 
 
