@@ -33,20 +33,25 @@
 	<?php wp_body_open(); ?>
 	<?php include_once TEMPLATE_DIR . '/inc/analitics_init_body.php'; ?>
 	<div id="page" class="container-fluid tributes">
-		<header id="masthead" class="header border-bottom mb-4">
-			<div class="container">
-				<div class="row pt-3 pb-4">
-					<div class="logo-tribute-wrap<?php echo is_tribute_home() ? ' col-6' : ' col-12 text-center'; ?>">
-						<a href="<?= tribute_get_url_base_url(); ?>" class="custom-logo-link" rel="home" aria-current="page">
-							<img width="37" height="37" src="<?php echo TEMPLATE_URI; ?>/tributes/assets/img/logo-icon.svg" class="custom-logo light" alt="Polen" />
-							<span class="logo-text ml-2">Colab</span>
-						</a>
-					</div>
-					<?php if (is_tribute_home()) : ?>
-						<div class="col-6 d-flex align-items-center justify-content-end">
-							<a href="#acompanheseupedido" class="btn btn-outline-light btn-sm">acompanhe seu pedido</a>
+		<?php
+		global $is_tribute_player;
+		if (!$is_tribute_player) :
+		?>
+			<header id="masthead" class="header border-bottom mb-4">
+				<div class="container">
+					<div class="row pt-3 pb-4">
+						<div class="logo-tribute-wrap<?php echo is_tribute_home() ? ' col-6' : ' col-12 text-center'; ?>">
+							<a href="<?= tribute_get_url_base_url(); ?>" class="custom-logo-link" rel="home" aria-current="page">
+								<img width="37" height="37" src="<?php echo TEMPLATE_URI; ?>/tributes/assets/img/logo-icon.svg" class="custom-logo light" alt="Polen" />
+								<span class="logo-text ml-2">Colab</span>
+							</a>
 						</div>
-					<?php endif; ?>
+						<?php if (is_tribute_home()) : ?>
+							<div class="col-6 d-flex align-items-center justify-content-end">
+								<a href="#acompanheseupedido" class="btn btn-outline-light btn-sm">acompanhe seu pedido</a>
+							</div>
+						<?php endif; ?>
+					</div>
 				</div>
-			</div>
-		</header><!-- #masthead -->
+			</header><!-- #masthead -->
+		<?php endif; ?>
