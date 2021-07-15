@@ -83,7 +83,7 @@ function polen_front_get_card($item, $size = "small")
 				<a href="<?= $item["talent_url"]; ?>" class="link"></a>
 			</figure>
 			<h4 class="title text-truncate">
-				<a href="<?= $item["talent_url"]; ?>"><?= $item["name"]; ?></a>
+				<a href="<?= $item["talent_url"]; ?>" title="<?= $item["name"]; ?>"><?= $item["name"]; ?></a>
 			</h4>
 			<h5 class="category text-truncate">
 				<a href="<?= $item["category_url"]; ?>"><?= $item["category"]; ?></a>
