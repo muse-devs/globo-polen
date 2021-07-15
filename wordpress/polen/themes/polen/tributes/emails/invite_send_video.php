@@ -9,7 +9,7 @@
 								">
 					Grave uma mensagem<br />para
 					<strong>%s</strong><br />
-					<small style="font-size: 16px">(é rapidinho!)</small>
+					<small style="font-size: 16px">(é rapidinho, leva menos de 1 minuto!)</small>
 				</h1>
 			</td>
 		</tr>
