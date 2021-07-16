@@ -52,10 +52,10 @@ $is_complete = true;
 				<p><strong><?php echo tributes_get_tribute_status( $tribute ); ?></strong></p>
 			</div>
 		</div>
-		<?php if ($tribute->completed == '1') : ?>
+		<?php if ( $tribute->completed == '1' && !empty( $tribute->vimeo_id ) ) : ?>
 			<div class="row">
 				<div class="col-md-12">
-					<p>Link para o Video</p>
+					<p>Link para o Colab</p>
 					<p><strong><a href="<?php echo tribute_get_url_final_video($tribute->slug); ?>"><?php echo tribute_get_url_final_video($tribute->slug); ?></a></strong></p>
 				</div>
 			</div>
