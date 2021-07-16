@@ -103,7 +103,7 @@ class Polen_Talent {
     function save_talent_on_product($post_id) {
         if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)
             return;
-        if (!current_user_can('edit_post'))
+        if (!current_user_can('edit_post', $post_id))
             return;
 
         if (isset($_POST['post_type']) && ( $_POST['post_type'] == 'product' )) {
@@ -127,7 +127,7 @@ class Polen_Talent {
             // verify if user is a talent
             if ( in_array( self::ROLE_SLUG, $user_roles, true ) ) {
                 update_user_meta( $user_id, 'talent_enabled', '0' );
-                $sku = $vendor_data->talent_alias ?? null;
+                $sku = ( isset( $vendor_data->talent_alias ) && ! is_null( $vendor_data->talent_alias ) && ! empty( $vendor_data->talent_alias ) ) ? $vendor_data->talent_alias : $user_data->user_nicename;
                 // verify if the talent has a product
                 $user_product = new \WP_Query( array( 'author' => $user_id ) );
                 if( ! $user_product->have_posts() ) {
@@ -732,6 +732,16 @@ class Polen_Talent {
                 ),
                 array(
                     'user_id' => $product->post_author,
+                )
+            );
+
+            $wpdb->update(
+                $wpdb->users,
+                array(
+                    'user_nicename' => $product->post_name,
+                ),
+                array(
+                    'ID' => $product->post_author,
                 )
             );
         }
