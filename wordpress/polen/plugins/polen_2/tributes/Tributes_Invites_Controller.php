@@ -22,7 +22,7 @@ class Tributes_Invites_Controller
         $tribute_id   = filter_input( INPUT_POST, 'tribute_id' );
         $friends_list = $_POST[ 'friends' ];
         $security     = filter_input( INPUT_POST, 'security' );
-        if( !wp_verify_nonce( $security, 'tributes_create_invitess' ) ) {
+        if( !wp_verify_nonce( $security, 'tributes_create_invites' ) ) {
             wp_send_json_error( 'Erro de segurança', 403 );
             wp_die();
         }
@@ -41,7 +41,7 @@ class Tributes_Invites_Controller
         try {
             for( $i = 0; $i < count( $emails ); $i++ ) {
                 $email = filter_var( $emails[ $i ], FILTER_VALIDATE_EMAIL );
-                $name  = $names[ $i ];
+                $name  = filter_var( $names[ $i ], FILTER_SANITIZE_SPECIAL_CHARS );
                 if( !empty( $email ) ) {
                     $invite               = $this->create_a_invites( $name, $email, $tribute->ID );
                     $email_invite_content = \tributes_email_create_content_invite( $invite->hash );
