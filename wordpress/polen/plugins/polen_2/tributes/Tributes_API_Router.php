@@ -45,5 +45,8 @@ class Tributes_API_Router extends \WP_REST_Controller
 
         add_action( 'wp_ajax_tribute_create_vimeo_slot',        [ $controller, 'make_video_slot_vimeo' ] );
         add_action( 'wp_ajax_nopriv_tribute_create_vimeo_slot', [ $controller, 'make_video_slot_vimeo' ] );
+
+        add_action( 'wp_ajax_tribute_delete_invite',        [ $controller, 'delete_invite' ] );
+        add_action( 'wp_ajax_nopriv_tribute_delete_invite', [ $controller, 'delete_invite' ] );
     }
 }
