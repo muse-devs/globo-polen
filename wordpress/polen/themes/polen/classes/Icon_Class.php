@@ -17,6 +17,11 @@ class Icon_Class
 		echo '<span class="svg-icon svg-' . $name . ' svg-' . $name . '-dims"></span>';
 	}
 
+	public static function polen_icon_company()
+	{
+		echo '<span class="icon icon-company"></span>';
+	}
+
 	public static function polen_icon_phone()
 	{
 		echo '<i class="icon icon-phone"></i>';
