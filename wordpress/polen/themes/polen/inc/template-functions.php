@@ -356,11 +356,12 @@ if ( ! in_array( 'all-in-one-seo-pack/all_in_one_seo_pack.php', apply_filters( '
 			} else {
 				echo "\n\n";
 				echo "\t" . '<meta property="og:title" content="Colab">' . "\n";
+				echo "\t" . '<meta property="og:type" content="Colab">' . "\n";
 				echo "\t" . '<meta property="og:description" content="O Colab te ajuda a criar um vídeo-presente em grupo para você emocionar quem você ama!">' . "\n";
 				echo "\t" . '<meta property="og:url" content="' . tribute_get_url_base_url() . '">' . "\n";
 				echo "\t" . '<meta property="og:locale" content="' . get_locale() . '">' . "\n";
 				echo "\t" . '<meta property="og:site_name" content="Colab">' . "\n";
-				echo "\t" . '<meta property="og:image" content="' . TEMPLATE_URI . '/tributes/assets/img/logo-black.png">' . "\n";
+				echo "\t" . '<meta property="og:image" content="' . TEMPLATE_URI . '/tributes/assets/img/logo-to-share.png">' . "\n";
 				echo "\n";
 			}
 		} else {

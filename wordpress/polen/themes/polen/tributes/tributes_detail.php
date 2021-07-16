@@ -48,8 +48,8 @@ $is_complete = true;
 				<p><strong><?php echo number_format($total_success); ?>%</strong></p>
 			</div>
 			<div class="col-md-3">
-				<p>Concluido</p>
-				<p><strong><?php echo $tribute->completed == '1' ? 'Sim' : 'Não'; ?></strong></p>
+				<p>Status</p>
+				<p><strong><?php echo tributes_get_tribute_status( $tribute ); ?></strong></p>
 			</div>
 		</div>
 		<?php if ($tribute->completed == '1') : ?>
