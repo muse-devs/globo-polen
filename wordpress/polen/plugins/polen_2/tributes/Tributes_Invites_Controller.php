@@ -182,4 +182,48 @@ class Tributes_Invites_Controller
         }
         wp_die();
     }
+
+
+    /**
+     * Handler de deletar invites no Tributes Detalhes
+     */
+    public function delete_invite()
+    {
+        // var_dump($_POST);die;
+        $tribute_hash = filter_input( INPUT_POST, 'tribute_hash' );
+        $invite_hash  = filter_input( INPUT_POST, 'invite_hash' );
+        $security     = filter_input( INPUT_POST, 'security' );
+        if( !wp_verify_nonce( $security, 'tributes_delete_invite' ) ) {
+            wp_send_json_error( 'Inválido', 401 );
+            wp_die();
+        }
+        $tribute = Tributes_Model::get_by_hash( $tribute_hash );
+        if( empty( $tribute ) ) {
+            wp_send_json_error( 'Colab inválido', 401 );
+            wp_die();
+        }
+        $invite = Tributes_Invites_Model::get_by_hash( $invite_hash );
+        if( empty( $invite ) ) {
+            wp_send_json_error( 'Convite inválido', 401 );
+            wp_die();
+        }
+        if( $invite->tribute_id != $tribute->ID ) {
+            wp_send_json_error( 'Exclusão inválida', 401 );
+            wp_die();
+        }
+        if( !empty( $invite->vimeo_id ) && $invite->vimeo_error != '0' ) {
+            wp_send_json_error( 'Impossível excluir um convite com o video já enviado', 401 );
+            wp_die();
+        }
+        $data_input = array(
+            'ID' => $invite->ID
+        );
+        $result_delete = Tributes_Invites_Model::delete( $data_input );
+        if( !$result_delete ) {
+            wp_send_json_error( 'Erro, tente novamente', 401 );
+            wp_die();
+        }
+        wp_send_json_success( 'Excluido com sucesso', 200 );
+        wp_die();
+    }
 }
