@@ -16,6 +16,7 @@ $occasions = Tributes_Occasions_Model::get_all();
 			<div class="col-md-12 mt-5">
 				<form id="form-create-tribute" action="./" method="POST">
 					<input type="hidden" name="action" value="create_tribute" />
+					<input type="hidden" name="security" value="<?= wp_create_nonce( 'tributes_add' );?>">
 					<p class="mb-4">
 						<label for="name_honored">Para quem é o Colab?</label>
 						<input type="text" name="name_honored" id="name_honored" placeholder="Ex: Diego, Rodolfo" class="form-control form-control-lg" required>
