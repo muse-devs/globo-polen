@@ -200,6 +200,18 @@
 	.status {
 		display: inline-block;
 		font-size: 14px;
+		&.not-view {
+			.bi,
+			.icon {
+				color: var(--primary);
+			}
+		}
+		&.not-open {
+			.bi,
+			.icon {
+				color: var(--gray);
+			}
+		}
 	}
 	.bi,
 	.icon {
@@ -211,13 +223,17 @@
 }
 
 .invites-list {
-	a, .send-button {
+	a:not(.tribute_delete_invite),
+	.send-button {
 		font-size: inherit;
 		font-weight: 400;
 		color: inherit;
 		text-decoration: underline;
 		background: none;
 		border: none;
+	}
+	.tribute_delete_invite {
+		font-size: 18px;
 	}
 }
 
