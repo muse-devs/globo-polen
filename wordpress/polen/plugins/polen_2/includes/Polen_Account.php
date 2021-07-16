@@ -26,7 +26,9 @@ class Polen_Account
     }
 
     public function set_user_login( $data, $update, $id ) {
-        $data['user_nicename'] = $data['user_email'];
+        if( isset( $_REQUEST['talent_alias'] ) && ! empty( $_REQUEST['talent_alias'] ) ) {
+            $data['user_nicename'] = $_REQUEST['talent_alias'];
+        }
         $data['user_login']    = $data['user_email'];
         return $data;
     }

@@ -26,7 +26,7 @@ function getIcon($done)
 	}
 }
 
-$is_complete = true;
+$is_complete = $total_success === 100;
 
 ?>
 
@@ -49,10 +49,10 @@ $is_complete = true;
 			</div>
 			<div class="col-md-3">
 				<p>Status</p>
-				<p><strong><?php echo tributes_get_tribute_status( $tribute ); ?></strong></p>
+				<p><strong><?php echo tributes_get_tribute_status($tribute); ?></strong></p>
 			</div>
 		</div>
-		<?php if ( $tribute->completed == '1' && !empty( $tribute->vimeo_id ) ) : ?>
+		<?php if ($tribute->completed == '1' && !empty($tribute->vimeo_id)) : ?>
 			<div class="row">
 				<div class="col-md-12">
 					<p>Link para o Colab</p>
@@ -72,20 +72,22 @@ $is_complete = true;
 								<input type="text" value="<?php echo $invite->name_inviter; ?>" class="form-control form-control-lg" disabled />
 								<?php if ($invite->video_sent) : ?>
 									<span class="status"><?php getIcon(true); ?>Vídeo já foi enviado.</span>
+								<?php elseif ($invite->email_opened) : ?>
+									<span class="status mt-1 not-view"><?php getIcon(false); ?>Usuário não finalizou o vídeo</span>
 								<?php else : ?>
-									<span class="status mt-1"><?php getIcon(false); ?><?php echo $invite->email_opened ? "Usuário abriu o e-mail" : "Usuário não finalizou o vídeo"; ?></span>
+									<span class="status mt-1 not-open"><?php getIcon(false); ?>Usuário não abriu o e-mail</span>
 								<?php endif; ?>
 							</div>
 							<div class="col-md-5 mt-3 mt-md-0">
 								<input type="email" value="<?php echo $invite->email_inviter; ?>" class="form-control form-control-lg" disabled />
 							</div>
 							<?php if (!$invite->video_sent) : $is_complete = false; ?>
-								<div class="col-md-2 text-right">
+								<div class="col-md-2 d-flex flex-column align-items-end justify-content-center align-items-md-start" style="height: 50px;">
+									<a href="#" data_invite="<?php echo $invite->hash; ?>" data_tribute="<?php echo $tribute->hash; ?>" class="tribute_delete_invite"><?php Icon_Class::polen_icon_trash(); ?></a>
 									<form action="./" id="form-<?php echo $invite->ID; ?>" method="POST" class="resend-email">
 										<input type="hidden" name="action" value="tribute_resend_email" />
 										<input type="hidden" name="invite_hash" value="<?php echo $invite->hash; ?>" />
-										<a href="#" data_invite="<?php echo $invite->hash; ?>" data_tribute="<?php echo $tribute->hash; ?>" class="tribute_delete_invite">Excluir</a>
-										<input type="submit" class="d-inline-block pt-3 send-button" value="Reenviar e-mail" />
+										<input type="submit" class="d-inline-block send-button" value="Reenviar e-mail" />
 									</form>
 								</div>
 							<?php endif; ?>
@@ -98,35 +100,17 @@ $is_complete = true;
 							</div>
 						</div>
 					<?php endif; ?>
+					<input type="hidden" id="wpnonce" name="wpnonce" value="<?= wp_create_nonce('tributes_delete_invite'); ?>" />
 				</div>
 			</div>
 		</div>
-		<?php if( tributes_get_tribute_status( $tribute ) == 'Aguardando videos' ) :?>
-		<div class="col-md-12">
-			<div class="col-md-5 mt-3">
-				<a href="<?php echo tribute_get_url_invites( $tribute->hash ); ?>" class="btn btn-primary btn-lg btn-block">Convite mais amigos</a>
+		<?php if (tributes_get_tribute_status($tribute) == 'Aguardando videos') : ?>
+			<div class="row">
+				<div class="col-12 mt-4 col-md-5 ml-md-auto mr-md-auto">
+					<a href="<?php echo tribute_get_url_invites($tribute->hash); ?>" class="btn btn-primary btn-lg btn-block">Convite mais amigos</a>
+				</div>
 			</div>
-		</div>
-		<?php endif;?>
+		<?php endif; ?>
 	</div>
 </main>
-<script>
-jQuery(function(){
-	jQuery('.tribute_delete_invite').click(function(evt){
-		evt.preventDefault();
-		let invite_hash = jQuery(evt.currentTarget).attr('data_invite');
-		let tribute_hash = jQuery(evt.currentTarget).attr('data_tribute');
-		let action = "tribute_delete_invite";
-		let security = "<?= wp_create_nonce( 'tributes_delete_invite' ); ?>";
-		jQuery.post(polenObj.ajax_url, { action, invite_hash, tribute_hash, security }, function(data, status, b){
-			if( data.success ) {
-				polMessage('Sucesso', data.data);
-				document.location.reload();
-			} else {
-				polError(data.data);
-			}
-		});
-	});
-});
-</script>
 <?php get_footer('tributes'); ?>

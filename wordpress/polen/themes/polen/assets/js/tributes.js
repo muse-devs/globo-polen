@@ -231,11 +231,38 @@ if (document.getElementById("deadline-wrapp")) {
 				const t1 = d.getTime();
 				const t2 = d2.getTime();
 
-				if(!t2 || t2 < t1) {
+				if (!t2 || t2 < t1) {
 					evt.target.classList.add("error");
 				}
-
 			},
 		},
+	});
+}
+
+if (document.querySelectorAll(".tribute_delete_invite").length) {
+	jQuery(".tribute_delete_invite").click(function (evt) {
+		evt.preventDefault();
+		polSpinner();
+		let invite_hash = jQuery(evt.currentTarget).attr("data_invite");
+		let tribute_hash = jQuery(evt.currentTarget).attr("data_tribute");
+		let action = "tribute_delete_invite";
+		let security = jQuery("#wpnonce").val();
+		jQuery
+			.post(
+				polenObj.ajax_url,
+				{ action, invite_hash, tribute_hash, security },
+				function (data, status, b) {
+					if (data.success) {
+						setSessionMessage(CONSTANTS.SUCCESS, "Sucesso", data.data);
+						document.location.reload();
+					} else {
+						polError(data.data);
+					}
+				}
+			)
+			.fail(function (jqxhr, settings, ex) {
+				polSpinner(CONSTANTS.HIDDEN);
+				polError("failed, " + ex);
+			});
 	});
 }
