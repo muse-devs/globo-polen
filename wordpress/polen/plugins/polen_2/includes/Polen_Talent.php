@@ -331,7 +331,7 @@ class Polen_Talent {
             if( $count ){
                 $select = "count( order_items.order_id ) as qtd"; 
             } else {
-                $limit = ' LIMIT 50 ';
+                $limit = ' LIMIT 300 ';
             }
 
             if (is_countable($talent_products) && count($talent_products) > 0) {
