@@ -18,9 +18,8 @@ class Tributes_Controller
         $data_input[ 'welcome_message' ] = filter_input( INPUT_POST, 'welcome_message' );
         
         if( !$this->validate_slug_not_empty( $data_input[ 'slug' ] ) ) {
-            //TODO: Esse nome "Slug" é ruim pra o usuário pensar num melhor
             wp_send_json_error( 'Endereço não pode ser em branco', 401 );
-            die;
+            wp_die();
         }
         try {
             $new_id = Tributes_Model::insert( $data_input );
