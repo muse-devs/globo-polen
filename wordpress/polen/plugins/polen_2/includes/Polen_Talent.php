@@ -103,7 +103,7 @@ class Polen_Talent {
     function save_talent_on_product($post_id) {
         if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)
             return;
-        if (!current_user_can('edit_post'))
+        if (!current_user_can('edit_post', $post_id))
             return;
 
         if (isset($_POST['post_type']) && ( $_POST['post_type'] == 'product' )) {
