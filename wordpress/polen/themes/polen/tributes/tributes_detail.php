@@ -84,6 +84,7 @@ $is_complete = true;
 									<form action="./" id="form-<?php echo $invite->ID; ?>" method="POST" class="resend-email">
 										<input type="hidden" name="action" value="tribute_resend_email" />
 										<input type="hidden" name="invite_hash" value="<?php echo $invite->hash; ?>" />
+										<a href="#" data_invite="<?php echo $invite->hash; ?>" data_tribute="<?php echo $tribute->hash; ?>" class="tribute_delete_invite">Excluir</a>
 										<input type="submit" class="d-inline-block pt-3 send-button" value="Reenviar e-mail" />
 									</form>
 								</div>
@@ -102,5 +103,23 @@ $is_complete = true;
 		</div>
 	</div>
 </main>
-
+<script>
+jQuery(function(){
+	jQuery('.tribute_delete_invite').click(function(evt){
+		evt.preventDefault();
+		let invite_hash = jQuery(evt.currentTarget).attr('data_invite');
+		let tribute_hash = jQuery(evt.currentTarget).attr('data_tribute');
+		let action = "tribute_delete_invite";
+		let security = "<?= wp_create_nonce( 'tributes_delete_invite' ); ?>";
+		jQuery.post(polenObj.ajax_url, { action, invite_hash, tribute_hash, security }, function(data, status, b){
+			if( data.success ) {
+				polMessage('Sucesso', data.data);
+				document.location.reload();
+			} else {
+				polError(data.data);
+			}
+		});
+	});
+});
+</script>
 <?php get_footer('tributes'); ?>
