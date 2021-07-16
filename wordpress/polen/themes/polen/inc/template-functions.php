@@ -360,7 +360,7 @@ if ( ! in_array( 'all-in-one-seo-pack/all_in_one_seo_pack.php', apply_filters( '
 				echo "\t" . '<meta property="og:url" content="' . tribute_get_url_base_url() . '">' . "\n";
 				echo "\t" . '<meta property="og:locale" content="' . get_locale() . '">' . "\n";
 				echo "\t" . '<meta property="og:site_name" content="Colab">' . "\n";
-				echo "\t" . '<meta property="og:image" content="' . TEMPLATE_URI . '/tributes/assets/img/logo-black.png">' . "\n";
+				echo "\t" . '<meta property="og:image" content="' . TEMPLATE_URI . '/tributes/assets/img/logo_to_meta_og.png">' . "\n";
 				echo "\n";
 			}
 		} else {
