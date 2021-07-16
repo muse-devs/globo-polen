@@ -30,6 +30,7 @@ global $tribute, $tribute_hash;
 						<input type="hidden" name="action" value="create_tribute_invites" />
 						<input type="hidden" name="tribute_hash" value="<?php echo $tribute_hash; ?>" />
 						<input type="hidden" name="tribute_id" value="<?php echo $tribute->ID; ?>" />
+						<input type="hidden" name="security" value="<?= wp_create_nonce( 'tributes_create_invites' ); ?>">
 						<!-- --------------------- -->
 						<div v-for="friend in friends" v-bind:key="friend.email" class="card-invite">
 							<div class="row">

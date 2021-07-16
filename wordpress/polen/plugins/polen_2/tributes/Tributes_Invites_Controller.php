@@ -21,7 +21,11 @@ class Tributes_Invites_Controller
         $tribute      = Tributes_Model::get_by_hash( $tribute_hash );
         $tribute_id   = filter_input( INPUT_POST, 'tribute_id' );
         $friends_list = $_POST[ 'friends' ];
-        
+        $security     = filter_input( INPUT_POST, 'security' );
+        if( !wp_verify_nonce( $security, 'tributes_create_invitess' ) ) {
+            wp_send_json_error( 'Erro de segurança', 403 );
+            wp_die();
+        }
         if ( empty( $tribute ) || $tribute->ID !== $tribute_id ) {
             wp_send_json_error( 'Colab Inválido', 401 );
             wp_die();
