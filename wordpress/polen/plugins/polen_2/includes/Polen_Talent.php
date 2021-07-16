@@ -734,6 +734,16 @@ class Polen_Talent {
                     'user_id' => $product->post_author,
                 )
             );
+
+            $wpdb->update(
+                $wpdb->users,
+                array(
+                    'user_nicename' => $product->post_name,
+                ),
+                array(
+                    'ID' => $product->post_author,
+                )
+            );
         }
     }
 }
