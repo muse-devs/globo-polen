@@ -5,9 +5,7 @@
  * dado do banco de dados para o Front
  */
 
-
-
-
+use Polen\Includes\Debug;
 
 /**
  * Pegar informações das categorias
@@ -31,7 +29,11 @@ function _polen_get_info_talent_by_product_id( \WC_Product $talent_object, $size
         $talent['image'] = $talent_object->get_image( $size );
         $talent['talent_url'] = $talent_object->get_permalink();
         $talent['price'] = $talent_object->get_price();
-        $talent['price_formatted'] = $talent_object->get_price_html();
+        if( 'WC_Product_Variable' == get_class( $talent_object ) ) {
+            $talent['price_formatted'] = wc_price( $talent_object->get_variation_price('min') );
+        } else {
+            $talent['price_formatted'] = $talent_object->get_price_html();
+        }
         $talent['name'] = $talent_object->get_title();
 
         $ids = $talent_object->get_category_ids();
