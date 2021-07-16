@@ -127,7 +127,7 @@ class Polen_Talent {
             // verify if user is a talent
             if ( in_array( self::ROLE_SLUG, $user_roles, true ) ) {
                 update_user_meta( $user_id, 'talent_enabled', '0' );
-                $sku = $vendor_data->talent_alias ?? null;
+                $sku = ( isset( $vendor_data->talent_alias ) && ! is_null( $vendor_data->talent_alias ) && ! empty( $vendor_data->talent_alias ) ) ? $vendor_data->talent_alias : $user_data->user_nicename;
                 // verify if the talent has a product
                 $user_product = new \WP_Query( array( 'author' => $user_id ) );
                 if( ! $user_product->have_posts() ) {
