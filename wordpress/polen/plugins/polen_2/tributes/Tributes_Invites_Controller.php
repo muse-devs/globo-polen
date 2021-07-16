@@ -1,8 +1,6 @@
 <?php
 namespace Polen\Tributes;
 
-use Polen\Includes\Cart\Polen_Cart_Item_Factory;
-use Polen\Includes\Debug;
 use Polen\Includes\Vimeo\Polen_Vimeo_Response;
 use Polen\Includes\Vimeo\Polen_Vimeo_Vimeo_Options;
 use Vimeo\Exceptions\ExceptionInterface;
@@ -57,7 +55,11 @@ class Tributes_Invites_Controller
 
 
     /**
-     * 
+     * Criar um registro de Invites
+     * @param string $name_inviter
+     * @param string $email_inviter
+     * @param int $tribute_id
+     * @return stdClass wp_tributes_invites
      */
     public function create_a_invites( $name_inviter, $email_inviter, $tribute_id )
     {
@@ -102,7 +104,6 @@ class Tributes_Invites_Controller
         $client_secret = $Polen_Plugin_Settings['polen_vimeo_client_secret'];
         $token = $Polen_Plugin_Settings['polen_vimeo_access_token'];
 
-        //TODO:
         $tribute_hash = filter_input( INPUT_POST, 'tribute_hash' );
         $invite_hash = filter_input( INPUT_POST, 'invite_hash' );
         $invite_id   = filter_input( INPUT_POST, 'invite_id', FILTER_SANITIZE_NUMBER_INT );
@@ -111,7 +112,10 @@ class Tributes_Invites_Controller
         $tribute = Tributes_Model::get_by_hash( $tribute_hash );
         $invite = Tributes_Invites_Model::get_by_id( $invite_id );
 
-        // TODO: ver se o tribute é o mesmo do invite
+        if( $tribute->ID != $invite->tribute_id || $invite->hash != $invite_hash ) {
+            wp_send_json_error( 'Dados do Colab inválidos', 403 );
+            wp_die();
+        }
 
         $name_to_video = '';
         try {
