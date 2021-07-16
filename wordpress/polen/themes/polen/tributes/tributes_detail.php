@@ -101,6 +101,13 @@ $is_complete = true;
 				</div>
 			</div>
 		</div>
+		<?php if( tributes_get_tribute_status( $tribute ) == 'Aguardando videos' ) :?>
+		<div class="col-md-12">
+			<div class="col-md-5 mt-3">
+				<a href="<?php echo tribute_get_url_invites( $tribute->hash ); ?>" class="btn btn-primary btn-lg btn-block">Convite mais amigos</a>
+			</div>
+		</div>
+		<?php endif;?>
 	</div>
 </main>
 <script>
