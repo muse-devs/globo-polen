@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Variable product add to cart
  *
@@ -15,70 +16,42 @@
  * @version 3.5.5
  */
 
-defined( 'ABSPATH' ) || exit;
+defined('ABSPATH') || exit;
 
 global $product;
 
-$attribute_keys  = array_keys( $attributes );
-$variations_json = wp_json_encode( $available_variations );
-$variations_attr = function_exists( 'wc_esc_json' ) ? wc_esc_json( $variations_json ) : _wp_specialchars( $variations_json, ENT_QUOTES, 'UTF-8', true );
+$attribute_keys  = array_keys($attributes);
+$variations_json = wp_json_encode($available_variations);
+$variations_attr = function_exists('wc_esc_json') ? wc_esc_json($variations_json) : _wp_specialchars($variations_json, ENT_QUOTES, 'UTF-8', true);
+$donate = get_post_meta(get_the_ID(), '_is_charity', true);
 
-do_action( 'woocommerce_before_add_to_cart_form' ); ?>
+function clean_p($text)
+{
+	$remove_list = array("<p>", "</p>");
+	return str_replace($remove_list, "", $text);
+}
 
-<form class="variations_form cart" action="<?php echo esc_url( apply_filters( 'woocommerce_add_to_cart_form_action', $product->get_permalink() ) ); ?>" method="post" enctype='multipart/form-data' data-product_id="<?php echo absint( $product->get_id() ); ?>" data-product_variations="<?php echo $variations_attr; // WPCS: XSS ok. ?>">
-	<?php do_action( 'woocommerce_before_variations_form' ); ?>
+foreach ($available_variations as $variation) :
+	$name_input_1 = array_keys($variation['attributes'])[0];
+	$id = str_replace('attribute_', '', $name_input_1);
+	$value = $variation['attributes'][$name_input_1];
+	$is_corp = strtolower($value) == "empresa";
+	$btn_class = $is_corp ? "btn-outline-light" : "btn-primary";
+?>
 
-	<?php if ( empty( $available_variations ) && false !== $available_variations ) : ?>
-		<p class="stock out-of-stock"><?php echo esc_html( apply_filters( 'woocommerce_out_of_stock_message', __( 'This product is currently out of stock and unavailable.', 'woocommerce' ) ) ); ?></p>
-	<?php else : ?>
-		<table class="variations" cellspacing="0">
-			<tbody>
-				<?php foreach ( $attributes as $attribute_name => $options ) : ?>
-					<tr>
-						<td class="label"><label for="<?php echo esc_attr( sanitize_title( $attribute_name ) ); ?>"><?php echo wc_attribute_label( $attribute_name ); // WPCS: XSS ok. ?></label></td>
-						<td class="value">
-							<?php
-								wc_dropdown_variation_attribute_options(
-									array(
-										'options'   => $options,
-										'attribute' => $attribute_name,
-										'product'   => $product,
-									)
-								);
-								echo end( $attribute_keys ) === $attribute_name ? wp_kses_post( apply_filters( 'woocommerce_reset_variations_link', '<a class="reset_variations" href="#">' . esc_html__( 'Clear', 'woocommerce' ) . '</a>' ) ) : '';
-							?>
-						</td>
-					</tr>
-				<?php endforeach; ?>
-			</tbody>
-		</table>
-
-		<div class="single_variation_wrap">
-			<?php
-				/**
-				 * Hook: woocommerce_before_single_variation.
-				 */
-				do_action( 'woocommerce_before_single_variation' );
-
-				/**
-				 * Hook: woocommerce_single_variation. Used to output the cart button and placeholder for variation data.
-				 *
-				 * @since 2.4.0
-				 * @hooked woocommerce_single_variation - 10 Empty div for variation data.
-				 * @hooked woocommerce_single_variation_add_to_cart_button - 20 Qty and cart button.
-				 */
-				do_action( 'woocommerce_single_variation' );
-
-				/**
-				 * Hook: woocommerce_after_single_variation.
-				 */
-				do_action( 'woocommerce_after_single_variation' );
-			?>
-		</div>
-	<?php endif; ?>
-
-	<?php do_action( 'woocommerce_after_variations_form' ); ?>
-</form>
-
+	<form class="mt-3" action="<?php echo esc_url(apply_filters('woocommerce_add_to_cart_form_action', $product->get_permalink())); ?>" method="post" enctype='multipart/form-data' data-product_id="<?php echo absint($product->get_id()); ?>">
+		<input type="hidden" name="<?= $name_input_1; ?>" id="<?= $id; ?>" data-attribute_name="<?= $name_input_1; ?>" data-show_option_none="yes" value="<?= $value; ?>">
+		<input type="hidden" name="add-to-cart" value="<?php echo absint($product->get_id()); ?>" />
+		<input type="hidden" name="product_id" value="<?php echo absint($product->get_id()); ?>" />
+		<input type="hidden" name="variation_id" class="variation_id" value="<?= $variation['variation_id']; ?>" />
+		<button type="submit" class="btn <?php echo $btn_class; ?> btn-lg btn-block">
+			<?php if ($donate) : ?>
+				<span class="mr-2"><?php Icon_Class::polen_icon_donate(); ?></span>
+			<?php elseif ($is_corp) :  ?>
+				<span class="mr-2"><?php Icon_Class::polen_icon_company(); ?></span>
+			<?php endif; ?>
+			<?php echo clean_p($variation['variation_description']) . ' ' . wc_price($variation['display_price']); ?>
+		</button>
+	</form>
+<?php endforeach; ?>
 <?php
-do_action( 'woocommerce_after_add_to_cart_form' );

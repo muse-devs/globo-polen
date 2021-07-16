@@ -207,8 +207,9 @@ $Talent_Fields = new Polen_Update_Fields();
 					<div class="col-md-12">
 						<?php
 						$instructions_to_video = isset($cart_item['instructions_to_video']) ? $cart_item['instructions_to_video'] : '';
+						$product_name = str_replace( '%', '&#37;', $_product->get_title() );
 						printf(
-							"<textarea 	name=\"instructions_to_video\" placeholder=\"Escreva aqui o que você gostaria que {$_product->get_title()} falasse nesse vídeo\"
+							"<textarea 	name=\"instructions_to_video\" placeholder=\"Escreva aqui o que você gostaria que {$product_name} falasse nesse vídeo\"
 										class=\"%s form-control form-control-lg\" id=\"cart_instructions_to_video_%s\"
 										data-cart-id=\"%s\" required=\"required\">%s</textarea>",
 							'polen-cart-item-data',
