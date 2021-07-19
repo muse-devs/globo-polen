@@ -231,7 +231,7 @@ function blockUnblockInputs(el, block) {
 	);
 	allEl.forEach(function (element, key, parent) {
 		block
-			? element.setAttribute("readonly", block)
+			? element.setAttribute("readonly", true)
 			: element.removeAttribute("readonly");
 	});
 	console.log("blocked inputs", block);
@@ -302,6 +302,7 @@ function polAcceptCookies() {
 
 function polAjaxForm(formName, callBack, callBackError) {
 	polSpinner();
+	blockUnblockInputs(formName, true);
 	jQuery
 		.post(
 			polenObj.ajax_url,
@@ -323,6 +324,7 @@ function polAjaxForm(formName, callBack, callBackError) {
 		})
 		.complete(function (e) {
 			polSpinner(CONSTANTS.HIDDEN);
+			blockUnblockInputs(formName, false);
 		});
 }
 
