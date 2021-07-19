@@ -925,7 +925,8 @@ function polen_front_get_suggestion_form()
 		</div>
 		<div class="col-12 col-md-12">
 			<form id="talent-suggestion">
-				<input type="hidden" name="action" value="aindanaosei">
+				<input type="hidden" name="action" value="invite_talent">
+				<input type="hidden" name="security" value=<?php echo wp_create_nonce(‘invite_talent’); ?>>
 				<p class="mb-4">
 					<input type="text" id="fan_name" name="fan_name" placeholder="Seu nome" class="form-control form-control-lg" required />
 				</p>
@@ -939,7 +940,7 @@ function polen_front_get_suggestion_form()
 					<input type="text" id="talent_instagram" name="talent_instagram" placeholder="Instagram do seu ídolo" class="form-control form-control-lg" />
 				</p>
 				<p class="mb-4">
-					<input type="submit" class="btn btn-primary btn-lg btn-block" />
+					<input type="submit" value="Enviar" class="btn btn-primary btn-lg btn-block" />
 				</p>
 			</form>
 		</div>
