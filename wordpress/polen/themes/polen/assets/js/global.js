@@ -118,6 +118,9 @@ const polMessages = {
 	error: function (message) {
 		polError(message);
 	},
+	toString: function() {
+		return "message(title, message), error(message)";
+	}
 };
 
 function polMessage(title, message) {
