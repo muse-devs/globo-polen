@@ -118,8 +118,11 @@ const polMessages = {
 	error: function (message) {
 		polError(message);
 	},
+	sessionMessage: function(type, title, message) {
+		setSessionMessage(type, title, message);
+	},
 	toString: function() {
-		return "message(title, message), error(message)";
+		return "message(title, message), error(message), sessionMessage(type, title, message)";
 	}
 };
 
