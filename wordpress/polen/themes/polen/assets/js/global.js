@@ -348,7 +348,7 @@ jQuery(document).ready(function () {
 			polSpinner(CONSTANTS.SHOW, "#signin-newsletter");
 			$.ajax({
 				type: "POST",
-				url: woocommerce_params.ajax_url,
+				url: polenObj.ajax_url,
 				data: {
 					action: "polen_newsletter_signin",
 					security: wnonce,
