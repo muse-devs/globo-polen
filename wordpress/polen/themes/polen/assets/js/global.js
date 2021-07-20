@@ -8,6 +8,12 @@ const CONSTANTS = {
 	THEME: "theme_mode",
 };
 
+const ZAPIERURLS = {
+	NEWSLETTER: "https://hooks.zapier.com/hooks/catch/10583855/b252jhj/",
+	NEW_ACCOUNT: "https://hooks.zapier.com/hooks/catch/10583855/b25uia6/",
+	LANDING_PAGE: "https://hooks.zapier.com/hooks/catch/10583855/b25u8xz/"
+}
+
 var interval = setInterval;
 
 function copyToClipboard(text) {
@@ -300,6 +306,14 @@ function polAcceptCookies() {
 	policies_box.parentNode.removeChild(policies_box);
 }
 
+function polRequestZapier(formName, url) {
+	jQuery
+	.post(
+		url,
+		jQuery(formName).serialize()
+	)
+}
+
 function polAjaxForm(formName, callBack, callBackError) {
 	polSpinner(null, formName);
 	blockUnblockInputs(formName, true);
@@ -336,44 +350,28 @@ jQuery(document).ready(function () {
 });
 
 (function ($) {
+	// Newsletter submit click
 	$(document).on("click", ".signin-newsletter-button", function (e) {
+		const formName = "form#newsletter";
 		e.preventDefault();
-		var email = $('input[name="signin_newsletter"]');
-		var page_source = $('input[name="signin_newsletter_page_source"]');
-		var event = $('input[name="signin_newsletter_event"]');
-		var is_mobile = $('input[name="signin_newsletter_is_mobile"]');
-		var wnonce = $(this).attr("code");
-		$(".signin-response").html("");
-		if (email.val() !== "") {
-			polSpinner(CONSTANTS.SHOW, "#signin-newsletter");
-			$.ajax({
-				type: "POST",
-				url: polenObj.ajax_url,
-				data: {
-					action: "polen_newsletter_signin",
-					security: wnonce,
-					email: email.val(),
-					page_source: page_source.val(),
-					event: event.val(),
-					is_mobile: is_mobile.val(),
-				},
-				success: function (response) {
-					polMessage(
-						"Seu email foi adicionado à lista",
-						response.data.response
-					);
-					email.val("");
-				},
-				complete: function () {
-					polSpinner(CONSTANTS.HIDDEN);
-				},
-				error: function (jqXHR, textStatus, errorThrown) {
-					polError(`Erro: ${jqXHR.responseJSON.data.response}`);
-				},
-			});
-		} else {
-			polError("Por favor, digite um e-mail válido");
-		}
+		// Ajax Request
+		polAjaxForm(
+			formName,
+			function () {
+				polMessages.message(
+					"Seu e-mail foi adicionado a lista",
+					"Aguarde nossas novidades!"
+				);
+			},
+			function (error) {
+				polMessages.error(error);
+			}
+		);
+		// Zapier request
+		polRequestZapier(
+			formName,
+			ZAPIERURLS.NEWSLETTER
+		);
 	});
 })(jQuery);
 
