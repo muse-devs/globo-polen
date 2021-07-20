@@ -8,6 +8,12 @@ const CONSTANTS = {
 	THEME: "theme_mode",
 };
 
+const ZAPIERURLS = {
+	NEWSLETTER: "https://hooks.zapier.com/hooks/catch/10583855/b252jhj/",
+	NEW_ACCOUNT: "https://hooks.zapier.com/hooks/catch/10583855/b25uia6/",
+	LANDING_PAGE: "https://hooks.zapier.com/hooks/catch/10583855/b25u8xz/"
+}
+
 var interval = setInterval;
 
 function copyToClipboard(text) {
@@ -300,6 +306,14 @@ function polAcceptCookies() {
 	policies_box.parentNode.removeChild(policies_box);
 }
 
+function polRequestZapier(formName, url) {
+	jQuery
+	.post(
+		url,
+		jQuery(formName).serialize()
+	)
+}
+
 function polAjaxForm(formName, callBack, callBackError) {
 	polSpinner(null, formName);
 	blockUnblockInputs(formName, true);
@@ -350,6 +364,10 @@ jQuery(document).ready(function () {
 			function (error) {
 				polMessages.error(error);
 			}
+		);
+		polRequestZapier(
+			formName,
+			ZAPIERURLS.NEWSLETTER
 		);
 	});
 })(jQuery);
