@@ -102,6 +102,12 @@ function tributes_send_email( $email_content, $to_name, $to_email ) {
 	return $footer;
  }
 
+ function translate_date($date)
+ {
+	 $en_months = array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+	 $pt_months = array("Janeiro");
+ }
+
 /**
  * Cria o conteudo do email de convite
  * @param string
