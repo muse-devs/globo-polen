@@ -350,9 +350,11 @@ jQuery(document).ready(function () {
 });
 
 (function ($) {
+	// Newsletter submit click
 	$(document).on("click", ".signin-newsletter-button", function (e) {
 		const formName = "form#newsletter";
 		e.preventDefault();
+		// Ajax Request
 		polAjaxForm(
 			formName,
 			function () {
@@ -365,6 +367,7 @@ jQuery(document).ready(function () {
 				polMessages.error(error);
 			}
 		);
+		// Zapier request
 		polRequestZapier(
 			formName,
 			ZAPIERURLS.NEWSLETTER
