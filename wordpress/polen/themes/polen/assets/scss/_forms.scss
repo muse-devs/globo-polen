@@ -13,9 +13,8 @@
 		border-color: var(--primary) !important;
 	}
 	&:disabled,
-	&[read-only],
-	&:read-only {
-		opacity: 0.5 !important;
+	&[read-only] {
+		opacity: 0.5;
 	}
 }
 
