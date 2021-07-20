@@ -482,9 +482,6 @@ function polen_form_signin_newsletter(string $event = 'newsletter')
 					<input type="hidden" name="security" value=<?php echo wp_create_nonce('news-signin'); ?>>
 					<input type="email" name="email" placeholder="Entre com o seu e-mail" class="form-control form-control-lg" />
 				</div>
-				<?php
-				$newsletter_signin_nonce = wp_create_nonce('news-signin');
-				?>
 				<div class="col-md-4 mt-2 mt-md-0 d-md-flex align-items-md-center">
 					<input type="submit" value="Enviar" class="signin-newsletter-button btn btn-outline-light btn-lg btn-block" />
 				</div>
