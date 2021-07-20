@@ -105,7 +105,8 @@ function tributes_send_email( $email_content, $to_name, $to_email ) {
  function translate_date($date)
  {
 	 $en_months = array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
-	 $pt_months = array("Janeiro");
+	 $pt_months = array("Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro");
+	 return str_ireplace($en_months, $pt_months, $date);
  }
 
 /**
@@ -127,7 +128,7 @@ function tributes_email_create_content_invite( $invite_hash ) {
         $invites->name_inviter,
         $tribute->creator_name,
         $tribute->name_honored,
-        $date,
+        translate_date($date),
 		RECORD_IMAGE,
 		EDIT_IMAGE,
 		EMOTION_IMAGE,
