@@ -301,7 +301,7 @@ function polAcceptCookies() {
 }
 
 function polAjaxForm(formName, callBack, callBackError) {
-	polSpinner();
+	polSpinner(null, formName);
 	blockUnblockInputs(formName, true);
 	jQuery
 		.post(
