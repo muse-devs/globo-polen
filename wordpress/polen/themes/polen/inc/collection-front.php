@@ -137,8 +137,8 @@ function polen_get_talents( int $quantity = 10 )
     $args = [
         'numberposts' => $quantity,
         'post_status' => 'publish',
-        'order' => 'RAND',
-        'orderby' => 'DESC'
+        // 'order' => 'RAND',
+        'orderby' => 'rand'
     ];
     $talents = _polen_get_info_talents_by_args( $args );
     return $talents;
