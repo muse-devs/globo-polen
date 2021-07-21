@@ -40,6 +40,9 @@ jQuery(function(){
     jQuery('.edit-video-instruction').click(function(evt){
         evt.preventDefault();
         let new_value = prompt( 'Nova instrução', jQuery(evt.currentTarget).attr('data-old-value') );
+        if (new_value === null) {
+            return;
+        }
         let data_update = {
             action : 'polen_edit_order_custom_fields',
             field : 'instructions_to_video',
