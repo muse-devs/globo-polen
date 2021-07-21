@@ -238,8 +238,8 @@ class Polen_Order
         $talent_name = $product->get_title();
         $instruction = "
         Bem-vindo <nome>, nós da Polen estamos MUITO felizes em ter você na plataforma!<br />
-            Pronto para conhecer nosso sistema e ver como é divertido gravar vídeo-polens personalizados?<br />
-            O seu primeiro vídeo-polen é um vídeo de apresentação bem simples!<br />
+            Pronto para conhecer nosso sistema e ver como é divertido gravar Vídeos-Polen personalizados?<br />
+            O seu primeiro Vídeo-Polen é um vídeo de apresentação bem simples!<br />
             Nesse vídeo-polen lembre-se de dizer:<br />
             - seu nome<br />
             - que agora faz parte da Polen<br />
