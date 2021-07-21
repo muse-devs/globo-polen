@@ -71,7 +71,7 @@ function createTribute(evt) {
 		return;
 	}
 	if (document.getElementById("deadline").classList.contains("error")) {
-		polError("Data inválida.");
+		polError("Data inválida. A data não pode ser anterior a hoje.");
 		return;
 	}
 	polSpinner();
@@ -257,20 +257,22 @@ if (document.getElementById("deadline-wrapp")) {
 				this.date = formatDate(
 					new Date(this.year, this.month, this.day)
 				);
+				this.checkDate();
 			},
-			checkDate: function (evt) {
-				evt.target.classList.remove("error");
+			checkDate: function () {
+				const el = document.getElementById('deadline');
+				el.classList.remove("error");
 
-				const d = new Date();
+				const d = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
 
-				const df = evt.target.value.split("/");
+				const df = this.date.split("/");
 				const d2 = new Date(df[2], df[1] - 1, df[0]);
 
 				const t1 = d.getTime();
 				const t2 = d2.getTime();
 
 				if (!t2 || t2 < t1) {
-					evt.target.classList.add("error");
+					el.classList.add("error");
 				}
 			},
 		},
