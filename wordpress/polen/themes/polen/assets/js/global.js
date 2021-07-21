@@ -323,6 +323,7 @@ function polAjaxForm(formName, callBack, callBackError) {
 			jQuery(formName).serialize(),
 			function (result) {
 				if (result.success) {
+					document.querySelector(formName).reset();
 					callBack();
 				} else {
 					callBackError(result.data);
@@ -330,8 +331,9 @@ function polAjaxForm(formName, callBack, callBackError) {
 			}
 		)
 		.fail(function (e) {
+			console.log(e);
 			if (e.responseJSON) {
-				callBackError(e.responseJSON.data);
+				callBackError(e.responseJSON.data.response || e.responseJSON.data);
 			} else {
 				callBackError(e.statusText);
 			}
