@@ -242,8 +242,8 @@ class Polen_Order
             O seu primeiro vídeo-polen é um vídeo de apresentação bem simples!<br />
             Nesse vídeo-polen lembre-se de dizer:<br />
             - seu nome<br />
-            - que agora faz parte da polen<br />
-            - que esta pronto para gravar vídeo-polens para todos os fãs<br />
+            - que agora faz parte da Polen<br />
+            - que esta pronto para gravar Vídeos-Polen para todos os fãs<br />
             Para continuar basta aceitar no botão verde! E aí <nome>, pronto para se conectar com seus fãs!?
         ";
         $final_instruction = str_replace( '<nome>', $product->get_title(), $instruction );
