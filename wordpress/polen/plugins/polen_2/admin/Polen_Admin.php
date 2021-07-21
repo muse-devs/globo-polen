@@ -35,6 +35,7 @@ class Polen_Admin {
                 new Polen_Admin_DisableMetabox( $static );
                 new Polen_Update_Fields( $static );
                 new Polen_Admin_RedirectTalentAccess();
+                new Polen_Admin_Order_Custom_Fields( true );
         }
 
 	/**
