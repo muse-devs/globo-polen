@@ -18,6 +18,13 @@
 	}
 }
 
+input[type="date"] {
+	display: block;
+	-webkit-appearance: none;
+	-moz-appearance: textfield;
+	min-height: 1.2em;
+}
+
 input.error {
 	border-color: var(--danger);
 }
@@ -33,8 +40,8 @@ input.error {
 	background: none;
 	outline: transparent;
 	align-content: center;
-    align-items: center;
-    height: 100%;
+	align-items: center;
+	height: 100%;
 }
 
 .step {
