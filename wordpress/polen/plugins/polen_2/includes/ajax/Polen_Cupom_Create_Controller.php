@@ -19,7 +19,7 @@ class Polen_Cupom_Create_Controller
 
     public function create_cupom()
     {
-        if( current_user_can('administrator') ) {
+        if( !current_user_can('administrator') ) {
             wp_send_json_error( 'Usuário sem permissão', 403 );
             wp_die();
         }
