@@ -69,7 +69,7 @@ class Polen_Cupom_Create
     public function complete_if_empty( $data )
     {
         if( !isset( $data[ 'cupom_code' ] ) || empty( $data[ 'cupom_code' ] ) ) {
-            return $this->create_code( 4 );
+            return $this->create_code( 8 );
         }
         return $data[ 'cupom_code' ];
     }
