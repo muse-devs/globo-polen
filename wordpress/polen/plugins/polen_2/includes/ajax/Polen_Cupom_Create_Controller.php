@@ -15,11 +15,14 @@ class Polen_Cupom_Create_Controller
     public function add_routes()
     {
         add_action( 'wp_ajax_polen_create_cupom', [ $this, 'create_cupom' ] );
-        add_action( 'wp_ajax_nopriv_polen_create_cupom', [ $this, 'create_cupom' ] );
     }
 
     public function create_cupom()
     {
+        if( current_user_can('administrator') ) {
+            wp_send_json_error( 'Usuário sem permissão', 403 );
+            wp_die();
+        }
         $data = array();
         $data[ 'prefix_name' ]   = filter_input( INPUT_POST, 'prefix_name' );
         $data[ 'cupom_code' ]    = filter_input( INPUT_POST, 'cupom_code' );
