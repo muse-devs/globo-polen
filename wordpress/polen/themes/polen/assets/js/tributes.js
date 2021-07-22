@@ -71,7 +71,7 @@ function createTribute(evt) {
 		return;
 	}
 	if (document.getElementById("deadline").classList.contains("error")) {
-		polError("Data inválida. A data não pode ser anterior a hoje.");
+		polError("Data inválida. A data não pode ser anterior a de hoje.");
 		return;
 	}
 	polSpinner();
@@ -221,10 +221,7 @@ if (document.getElementById("deadline-wrapp")) {
 			day: new Date().getDate(),
 			month: new Date().getMonth(),
 			year: new Date().getFullYear(),
-			days: daysOfMonth(
-				new Date().getMonth(),
-				new Date().getFullYear()
-			),
+			days: daysOfMonth(new Date().getMonth(), new Date().getFullYear()),
 			months: [
 				{ index: 0, name: "Janeiro" },
 				{ index: 1, name: "Fevereiro" },
@@ -260,10 +257,14 @@ if (document.getElementById("deadline-wrapp")) {
 				this.checkDate();
 			},
 			checkDate: function () {
-				const el = document.getElementById('deadline');
+				const el = document.getElementById("deadline");
 				el.classList.remove("error");
 
-				const d = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+				const d = new Date(
+					new Date().getFullYear(),
+					new Date().getMonth(),
+					new Date().getDate()
+				);
 
 				const df = this.date.split("/");
 				const d2 = new Date(df[2], df[1] - 1, df[0]);

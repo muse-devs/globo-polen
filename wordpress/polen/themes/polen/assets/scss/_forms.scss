@@ -25,6 +25,10 @@ input[type="date"] {
 	min-height: 1.2em;
 }
 
+.custom-select-sm {
+	max-width: 32%;
+}
+
 input.error {
 	border-color: var(--danger);
 }

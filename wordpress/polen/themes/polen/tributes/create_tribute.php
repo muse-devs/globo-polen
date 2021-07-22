@@ -43,15 +43,15 @@ $occasions = Tributes_Occasions_Model::get_all();
 						<input type="hidden" name="deadline" id="deadline" maxlength="10" v-model="date" />
 						<div class="row mt-2">
 							<div class="col-12 d-flex justify-content-between col-md-8">
-								<select id="date_day" class="form-control custom-select" v-model="day" v-on:change="updateDate">
+								<select id="date_day" class="form-control custom-select custom-select-sm" v-model="day" v-on:change="updateDate">
 									<option value="">Dia</option>
 									<option v-for="d in days">{{d}}</option>
 								</select>
-								<select id="date_month" class="form-control custom-select" v-model="month" v-on:change="updateDate">
+								<select id="date_month" class="form-control custom-select custom-select-sm" v-model="month" v-on:change="updateDate">
 									<option value="">Mês</option>
 									<option v-for="m in months" v-bind:value="m.index">{{m.name}}</option>
 								</select>
-								<select id="date_year" class="form-control custom-select" v-model="year" v-on:change="updateDate">
+								<select id="date_year" class="form-control custom-select custom-select-sm" v-model="year" v-on:change="updateDate">
 									<option value="">Ano</option>
 									<option v-for="y in years">{{y}}</option>
 								</select>
