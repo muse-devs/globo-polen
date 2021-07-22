@@ -276,6 +276,9 @@ select.form-control:not([size]):not([multiple]) {
 	overflow: hidden;
 	textarea {
 		height: 180px;
+		@media only screen and (max-width: 600px) {
+			height: 260px;
+		}
 	}
 }
 
