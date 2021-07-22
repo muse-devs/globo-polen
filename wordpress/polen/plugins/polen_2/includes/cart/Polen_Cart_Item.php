@@ -189,4 +189,20 @@ class Polen_Cart_Item
     {
         return $this->item->get_product();
     }
+
+
+    /**
+     * Get o object product parent if tiver para produtos variaveis é para retornar o pai
+     * @return WC_Product
+     */
+    public function get_product_parent_if_has()
+    {
+        if( $this->item->get_product() instanceof \WC_Product_Variation ) {
+            return wc_get_product( $this->item->get_product()->get_parent_id() );
+        } elseif( $this->item->get_product() instanceof \WC_Product_Variable ) {
+            return $this->item->get_product();
+        } else {
+            return $this->item->get_product();
+        }
+    }
 }
