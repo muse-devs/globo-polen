@@ -324,7 +324,7 @@ function polAjaxForm(formName, callBack, callBackError) {
 			function (result) {
 				if (result.success) {
 					document.querySelector(formName).reset();
-					callBack();
+					callBack(result.data);
 				} else {
 					callBackError(result.data);
 				}
