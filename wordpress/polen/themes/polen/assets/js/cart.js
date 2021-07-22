@@ -103,5 +103,13 @@ function verify_checkbox_selected_to_hidde_or_show_fields() {
 				});
 			}
 		});
+
+		// Tratando a div que funciona como Placeholder no textarea
+		const ta = document.querySelector('textarea[name=instructions_to_video]');
+		const pp = document.querySelector('.placeholder');
+
+		ta.addEventListener('input', () => {
+			pp.classList.toggle('d-none', ta.value !== '');
+		});
     });
 })(jQuery);
