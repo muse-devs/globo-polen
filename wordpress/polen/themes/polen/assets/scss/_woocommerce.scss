@@ -270,3 +270,20 @@ select.form-control:not([size]):not([multiple]) {
 		width: 21px !important;
 	}
 }
+
+.holder {
+	position: relative;
+	overflow: hidden;
+	textarea {
+		height: 180px;
+	}
+}
+
+.placeholder {
+	pointer-events: none;
+	user-select: none;
+	position: absolute;
+	color: #929298;
+	padding: 15px;
+	font-size: 14px;
+}
