@@ -2,6 +2,7 @@
 
 namespace Polen\Admin;
 
+use Polen\Includes\Ajax\Polen_Cupom_Create_Controller;
 use \Polen\Includes\Polen_Update_Fields;
 use Polen\Tributes\Tributes_Admin;
 use Polen\Tributes\Tributes_Details_Admin;
@@ -35,6 +36,8 @@ class Polen_Admin {
                 new Polen_Admin_DisableMetabox( $static );
                 new Polen_Update_Fields( $static );
                 new Polen_Admin_RedirectTalentAccess();
+                new Polen_Admin_Order_Custom_Fields( $static );
+                new Polen_Cupom_Create_Controller( $static );
         }
 
 	/**

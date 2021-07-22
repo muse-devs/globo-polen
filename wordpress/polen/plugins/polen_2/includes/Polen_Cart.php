@@ -4,7 +4,25 @@ namespace Polen\Includes;
 
 class Polen_Cart
 {
-    
+    const ITEM_OFFERED_BY = 'offered_by';
+    const ITEM_VIDEO_TO = 'video_to';
+    const ITEM_NAME_TO_VIDEO = 'name_to_video';
+    const ITEM_EMAIL_TO_VIDEO = 'email_to_video';
+    const ITEM_VIDEO_CATEGORY = 'video_category';
+    const ITEM_INSTRUCTION_TO_VIDEO = 'instructions_to_video';
+    const ITEM_ALLOW_VIDEO_ON_PAGE = 'allow_video_on_page';
+    const ITEM_FIRST_ORDER = 'first_order';
+    const ALLOWED_ITEM = [
+        self::ITEM_OFFERED_BY,
+        self::ITEM_VIDEO_TO,
+        self::ITEM_NAME_TO_VIDEO,
+        self::ITEM_EMAIL_TO_VIDEO,
+        self::ITEM_VIDEO_CATEGORY,
+        self::ITEM_INSTRUCTION_TO_VIDEO,
+        self::ITEM_ALLOW_VIDEO_ON_PAGE,
+        self::ITEM_FIRST_ORDER
+    ];
+
     public function __construct( $static = false ) {
         if( $static ) {
             add_action( 'wp_ajax_polen_update_cart_item', array( $this, 'polen_update_cart_item' ) );

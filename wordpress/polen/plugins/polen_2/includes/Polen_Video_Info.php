@@ -211,6 +211,7 @@ class Polen_Video_Info extends Polen_DB
     static public function get_by_order_id( int $order_id )
     {
         $pvi = new self();
+        //TODO: ORDER BY ID DESC
         $result = $pvi->get( 'order_id', $order_id, '%d' );
         if( empty( $result ) ) {
             return null;
