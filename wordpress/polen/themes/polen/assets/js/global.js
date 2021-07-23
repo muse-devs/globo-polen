@@ -253,7 +253,7 @@ function downloadClick_handler(evt) {
 	let security = jQuery(evt.currentTarget).attr("data-nonce");
 	let action = "video-download-link";
 	let data = { hash, security, action };
-	jQuery.post(woocommerce_params.ajax_url, data, (response) => {
+	jQuery.post(polenObj.ajax_url, data, (response) => {
 		if (response.success) {
 			window.location.href = response.data;
 		}
