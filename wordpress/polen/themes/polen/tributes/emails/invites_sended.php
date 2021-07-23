@@ -33,8 +33,12 @@
 		<tr>
 			<td style="text-align: center">
 				<a href="%s" style="
-									padding: 15px 100px;
+									display: block;
+									margin: auto;
+									max-width: 300px;
+									padding: 15px;
 									font-site: 14px;
+									text-align: center;
 									text-decoration: none;
 									color: white;
 									background-color: #fd6c36;

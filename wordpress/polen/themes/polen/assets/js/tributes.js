@@ -70,6 +70,10 @@ function createTribute(evt) {
 		polError("É preciso uma URL válida para seu Colab");
 		return;
 	}
+	if (document.getElementById("deadline").classList.contains("error")) {
+		polError("Data inválida. A data não pode ser anterior a de hoje.");
+		return;
+	}
 	polSpinner();
 	jQuery
 		.post(
@@ -198,24 +202,112 @@ if (document.getElementById("invite-friends")) {
 	});
 }
 
+function formatDate(date) {
+	return (
+		date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear()
+	);
+}
+
+function daysOfMonth(month, year) {
+	var date = new Date(year, parseInt(month) + 1, 0);
+	return date.getDate();
+}
+
 if (document.getElementById("deadline-wrapp")) {
 	const formValidate = new Vue({
 		el: "#deadline-wrapp",
 		data: {
-			date: "",
+			date: formatDate(new Date()),
+			day: new Date().getDate(),
+			month: new Date().getMonth(),
+			year: new Date().getFullYear(),
+			days: daysOfMonth(new Date().getMonth(), new Date().getFullYear()),
+			months: [
+				{ index: 0, name: "Janeiro" },
+				{ index: 1, name: "Fevereiro" },
+				{ index: 2, name: "Março" },
+				{ index: 3, name: "Abril" },
+				{ index: 4, name: "Maio" },
+				{ index: 5, name: "Junho" },
+				{ index: 6, name: "Julho" },
+				{ index: 7, name: "Agosto" },
+				{ index: 8, name: "Setembro" },
+				{ index: 9, name: "Outubro" },
+				{ index: 10, name: "Novembro" },
+				{ index: 11, name: "Dezembro" },
+			],
+			years: [new Date().getFullYear(), new Date().getFullYear() + 1],
 		},
 		methods: {
-			maskDate: function (evt) {
-				if (/\D/.test(evt.key)) {
-					this.date = this.date.replace(evt.key, "");
-					return;
+			updateDate: function (evt) {
+				const obj = evt.target;
+				if (obj.id === "date_day") {
+					this.day = obj.value;
+				} else {
+					if (obj.id === "date_year") {
+						this.year = obj.value;
+					} else if (obj.id === "date_month") {
+						this.month = obj.value;
+					}
+					this.days = daysOfMonth(this.month, this.year);
 				}
-				if (this.date.length == 2) {
-					this.date = this.date += "/";
-				} else if (this.date.length == 5) {
-					this.date = this.date += "/";
+				this.date = formatDate(
+					new Date(this.year, this.month, this.day)
+				);
+				this.checkDate();
+			},
+			checkDate: function () {
+				const el = document.getElementById("deadline");
+				el.classList.remove("error");
+
+				const d = new Date(
+					new Date().getFullYear(),
+					new Date().getMonth(),
+					new Date().getDate()
+				);
+
+				const df = this.date.split("/");
+				const d2 = new Date(df[2], df[1] - 1, df[0]);
+
+				const t1 = d.getTime();
+				const t2 = d2.getTime();
+
+				if (!t2 || t2 < t1) {
+					el.classList.add("error");
 				}
 			},
 		},
+	});
+}
+
+if (document.querySelectorAll(".tribute_delete_invite").length) {
+	jQuery(".tribute_delete_invite").click(function (evt) {
+		evt.preventDefault();
+		polSpinner();
+		let invite_hash = jQuery(evt.currentTarget).attr("data_invite");
+		let tribute_hash = jQuery(evt.currentTarget).attr("data_tribute");
+		let action = "tribute_delete_invite";
+		let security = jQuery("#wpnonce").val();
+		jQuery
+			.post(
+				polenObj.ajax_url,
+				{ action, invite_hash, tribute_hash, security },
+				function (data, status, b) {
+					if (data.success) {
+						setSessionMessage(
+							CONSTANTS.SUCCESS,
+							"Sucesso",
+							data.data
+						);
+						document.location.reload();
+					} else {
+						polError(data.data);
+					}
+				}
+			)
+			.fail(function (jqxhr, settings, ex) {
+				polSpinner(CONSTANTS.HIDDEN);
+				polError("failed, " + ex);
+			});
 	});
 }

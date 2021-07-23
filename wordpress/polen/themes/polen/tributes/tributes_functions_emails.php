@@ -75,6 +75,12 @@ function tributes_send_email( $email_content, $to_name, $to_email ) {
  **************** Conteudo dos Emails ***********************
  ************************************************************/
 
+ const VIDEO_IMAGE = TEMPLATE_URI . "/tributes/assets/img/carousel-video.png";
+ const SUCCESS_IMAGE = TEMPLATE_URI . "/tributes/assets/img/check-circle.png";
+ const RECORD_IMAGE = TEMPLATE_URI . "/tributes/assets/img/ilustra-gravar.png";
+ const EDIT_IMAGE = TEMPLATE_URI . "/tributes/assets/img/ilustra-editar.png";
+ const EMOTION_IMAGE = TEMPLATE_URI . "/tributes/assets/img/ilustra-emocionar.png";
+
  function get_mail_header()
  {
 	 $header_file 		= tributes_get_email_path() . "templates/header.php";
@@ -96,8 +102,12 @@ function tributes_send_email( $email_content, $to_name, $to_email ) {
 	return $footer;
  }
 
- const VIDEO_IMAGE = TEMPLATE_URI . "/tributes/assets/img/carousel-video.png";
- const SUCCESS_IMAGE = TEMPLATE_URI . "/tributes/assets/img/check-circle.png";
+ function translate_date($date)
+ {
+	 $en_months = array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+	 $pt_months = array("Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro");
+	 return str_ireplace($en_months, $pt_months, $date);
+ }
 
 /**
  * Cria o conteudo do email de convite
@@ -114,11 +124,14 @@ function tributes_email_create_content_invite( $invite_hash ) {
     $date = date('d \d\e F \d\e o', strtotime($tribute->deadline));
     $content_formatted = sprintf(
         $email_content,
-		VIDEO_IMAGE,
+        $tribute->name_honored,
         $invites->name_inviter,
         $tribute->creator_name,
         $tribute->name_honored,
-        $date,
+        translate_date($date),
+		RECORD_IMAGE,
+		EDIT_IMAGE,
+		EMOTION_IMAGE,
         $tribute->creator_name,
         $tribute->welcome_message,
         tributes_create_link_email_send_video( $invites->hash ),

@@ -1,8 +1,8 @@
 <?php
 // $order vem do controller Polen_Talent::my_account_success_upload_content()
 // $order é um Automattic\WooCommerce\Admin\Overrides\Order
-$order_total = $order->get_total();
-$order_partial = $order_total * 0.75;
+$order_total = $order->get_subtotal();
+$order_partial = polen_apply_polen_part_price( $order_total );
 ?>
 <main id="primary" class="site-main mt-5">
 	<div class="row box-video-success">

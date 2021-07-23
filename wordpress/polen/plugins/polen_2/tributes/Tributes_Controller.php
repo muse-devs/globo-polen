@@ -16,10 +16,16 @@ class Tributes_Controller
         $data_input[ 'slug' ]            = filter_input( INPUT_POST, 'slug', FILTER_SANITIZE_SPECIAL_CHARS );
         $data_input[ 'hash' ]            = Tributes_Model::create_hash();
         $data_input[ 'deadline' ]        = $this->treat_deadline_date( filter_input( INPUT_POST, 'deadline' ) );
-        $data_input[ 'occasion' ]        = filter_input( INPUT_POST, 'occasion', FILTER_SANITIZE_SPECIAL_CHARS );;
-        $data_input[ 'creator_name' ]    = filter_input( INPUT_POST, 'creator_name', FILTER_SANITIZE_SPECIAL_CHARS );
+        $data_input[ 'occasion' ]        = filter_input( INPUT_POST, 'occasion', FILTER_SANITIZE_SPECIAL_CHARS );
+        $data_input[ 'creator_name' ]    = filter_input( INPUT_POST, 'creator_name', FILTER_SANITIZE_SPECIAL_CHARS);
         $data_input[ 'creator_email' ]   = filter_input( INPUT_POST, 'creator_email', FILTER_VALIDATE_EMAIL );
         $data_input[ 'welcome_message' ] = filter_input( INPUT_POST, 'welcome_message', FILTER_SANITIZE_SPECIAL_CHARS );
+        $security                        = filter_input( INPUT_POST, 'security' );
+
+        if( !wp_verify_nonce( $security, 'tributes_add' ) ) {
+            wp_send_json_error( 'Erro de segurança', 403 );
+            wp_die();
+        }
         
         if( !$this->validate_slug_not_empty( $data_input[ 'slug' ] ) ) {
             wp_send_json_error( 'Endereço não pode ser em branco', 401 );

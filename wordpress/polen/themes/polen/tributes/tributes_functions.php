@@ -153,3 +153,21 @@ function tributes_tax_success_tribute( $tribute_id ) {
     }
     return $total_success;
 }
+
+
+/**
+ * 
+ */
+function tributes_get_tribute_status( $tribute )
+{
+    $tax_sucess = tributes_tax_success_tribute( $tribute->ID );
+    if( $tribute->completed == '1' && !empty( $tribute->vimeo_url_file_play ) ) {
+        return 'Colab pronto';
+    } elseif ( $tribute->completed == '1' && empty( $tribute->vimeo_url_file_play ) ) {
+        return 'Processando o Colab';
+    } elseif ( $tribute->completed == '0' && $tax_sucess == 100 ) {
+        return 'Processando o Colab';
+    } else {
+        return 'Aguardando videos';
+    }
+}
