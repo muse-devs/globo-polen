@@ -13,6 +13,7 @@ use Polen\Includes\Talent\{Polen_Talent_Router, Polen_Talent_Controller, Polen_T
 use Polen\Includes\Polen_Order;
 use Polen\Includes\Order_Review\{Polen_Order_Review_Controller, Polen_Order_Review_Router};
 use Polen\Includes\Polen_Signin_Newsletter;
+use Polen\Includes\Polen_Cupom_Create_Admin_Menu;
 use Polen\Tributes\Tributes;
 
 class Polen {
@@ -67,6 +68,7 @@ class Polen {
         new Polen_Video_Player( true );
         new Polen_Signin_Newsletter( true );
         new Polen_Invite_Talent( true );
+        new Polen_Cupom_Create_Admin_Menu( true );
 
         //Endpoints Talent Logged
         $ctler = new Polen_Talent_Controller();
