@@ -46,3 +46,15 @@ function polen_get_order_flow_layout($array_status)
 	</div>
 <?php
 }
+
+
+/**
+ * Funcao que seta uma order como já visualizada pelo usuário fã
+ * @param \WC_Order
+ */
+function polen_set_fan_viewed( $order ) {
+	if( !$order->meta_exists('polen_fan_viewed') ) {
+		$order->add_meta_data('polen_fan_viewed', 1, true);
+		$order->save();
+	}
+}
