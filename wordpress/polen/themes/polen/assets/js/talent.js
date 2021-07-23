@@ -2,13 +2,15 @@ var modal = document.getElementById("video-modal");
 var video_box = document.getElementById("video-box");
 var share_button = document.querySelectorAll(".share-button");
 var talent_videos = document.getElementById("talent-videos");
-var public_url = talent_videos ? talent_videos.getAttribute("data-public-url") : "";
+var public_url = talent_videos
+	? talent_videos.getAttribute("data-public-url")
+	: "";
 let get_your_video_banner = document.getElementById("video-promo-card");
 
 jQuery(document).ready(function () {
-	get_your_video_banner.addEventListener('click', evt => {
+	get_your_video_banner.addEventListener("click", (evt) => {
 		evt.preventDefault();
-		jQuery('.single_add_to_cart_button')[0].click();
+		jQuery(".single_add_to_cart_button")[0].click();
 	});
 	// jQuery(".banner-content.type-video").slick({
 	// 	arrows: true,
@@ -98,8 +100,8 @@ function hideModal(e) {
 }
 
 function handleCopyVideoUrl(id) {
-	var btn_copy = document.getElementById('copy-video');
-	btn_copy.addEventListener('click', function() {
+	var btn_copy = document.getElementById("copy-video");
+	btn_copy.addEventListener("click", function () {
 		copyToClipboard(public_url + id);
 	});
 }
@@ -122,7 +124,8 @@ function openVideoByURL(url) {
 function openVideoByHash(hash) {
 	video_box.innerHTML = "";
 	polSpinner(null, "#video-box");
-	const url = `${polenObj.ajax_url}?action=draw-player-modal&hash=${hash}`;
+	var product_id = document.getElementById("product_id").value;
+	const url = `${polenObj.ajax_url}?action=draw-player-modal&hash=${hash}&product_id=${product_id}`;
 	showModal();
 	changeHash(hash);
 	jQuery(video_box).load(url);

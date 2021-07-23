@@ -1,8 +1,17 @@
 <?php
 
-function polen_get_talent_video_buttons($talent, $video_url, $video_download, $hash = null)
+function polen_get_talent_video_buttons($talent, $video_url, $video_download, $hash = null, $product = null)
 {
+	$donate = $product ? get_post_meta($product->get_id(), '_is_charity', true) : false;
 ?>
+	<?php if ($product && $product->is_in_stock()) : ?>
+		<button onclick="document.querySelector('.single_add_to_cart_button').click()" class="btn btn-primary btn-lg btn-block mb-4">
+			<?php if ($donate) : ?>
+				<span class="mr-2"><?php Icon_Class::polen_icon_donate(); ?></span>
+			<?php endif; ?>
+			Pedir vídeo <?php echo $product->get_price(); ?>
+		</button>
+	<?php endif; ?>
 	<?php if (wp_is_mobile()) : ?>
 		<button onclick="shareVideo('Compartilhar vídeo de <?php echo $talent->nome; ?>', '<?php echo $video_url; ?>')" class="btn btn-outline-light btn-lg btn-block share-link mb-4"><?php Icon_Class::polen_icon_share(); ?>Compartilhar</button>
 	<?php endif; ?>
@@ -82,7 +91,7 @@ function polen_get_video_player_html($data, $user_id = null)
  * @param int $user_id
  * @return html
  */
-function polen_get_video_player($talent, $video, $user_id)
+function polen_get_video_player($talent, $video, $user_id, $product = null)
 {
 	if (!$talent || !$video) {
 		return;
@@ -129,7 +138,7 @@ function polen_get_video_player($talent, $video, $user_id)
 					<?php if ($user_id !== 0 && $isRateble) : ?>
 						<a href="/my-account/create-review/<?= $video->order_id; ?>" class="btn btn-primary btn-lg btn-block mb-4">Avaliar vídeo</a>
 					<?php endif; ?>
-					<?php polen_get_talent_video_buttons($talent, $video_url, $video->vimeo_url_download, $video->hash); ?>
+					<?php polen_get_talent_video_buttons($talent, $video_url, $video->vimeo_url_download, $video->hash, $product); ?>
 				</div>
 			</div>
 		</div>
