@@ -47,8 +47,6 @@ if( $polen_talent->is_user_talent( $logged_user ) ) {
 
 			$new = '';
 			if( !$order->meta_exists('polen_fan_viewed') ) {
-				$order->add_meta_data('polen_fan_viewed', 1, true);
-				$order->save();
 				$new = ' new';
 			}
 		?>

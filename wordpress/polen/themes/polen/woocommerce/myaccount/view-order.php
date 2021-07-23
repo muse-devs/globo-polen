@@ -16,6 +16,8 @@ $order_item_cart = Polen_Cart_Item_Factory::polen_cart_item_from_order( $order )
 $email_billing = $order_item_cart->get_email_to_video();
 
 $order_array = Order_Class::polen_get_order_flow_obj($order_number, $order_status, $email_billing);
+polen_set_fan_viewed( $oder );
+
 ?>
 <div class="row">
 	<div class="col-md-12 mb-5">
