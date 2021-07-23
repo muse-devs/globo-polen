@@ -15,7 +15,7 @@ if( empty( $video_info ) || $user_id !== $order_user_id) {
     exit();
 }
 
-polen_set_fan_viewed( $oder );
+polen_set_fan_viewed( $order );
 
 use \Polen\Includes\Polen_Update_Fields;
 $Talent_Fields = new Polen_Update_Fields();
