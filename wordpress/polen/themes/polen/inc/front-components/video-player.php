@@ -9,7 +9,7 @@ function polen_get_talent_video_buttons($talent, $video_url, $video_download, $h
 			<?php if ($donate) : ?>
 				<span class="mr-2"><?php Icon_Class::polen_icon_donate(); ?></span>
 			<?php endif; ?>
-			Pedir vídeo <?php echo $product->get_price(); ?>
+			Pedir vídeo R$<?php echo $product->get_price(); ?>
 		</button>
 	<?php endif; ?>
 	<?php if (wp_is_mobile()) : ?>
