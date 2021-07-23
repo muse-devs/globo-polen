@@ -26,7 +26,7 @@ function verify_checkbox_selected_to_hidde_or_show_fields() {
 			var allowed_item = [ 'offered_by', 'video_to', 'name_to_video', 'email_to_video', 'video_category', 'instructions_to_video', 'allow_video_on_page' ];
 			if( $.inArray( item_name, allowed_item ) !== -1 ) {
 				let item_value;
-				
+
 				if( item_name == 'allow_video_on_page' ) {
 					if( $( '#cart_'+ item_name + '_' + cart_id ).is(':checked') ) {
 						item_value = 'on';
@@ -39,7 +39,7 @@ function verify_checkbox_selected_to_hidde_or_show_fields() {
 
 				$.ajax({
 					type: 'POST',
-					url: woocommerce_params.ajax_url,
+					url: polenObj.ajax_url,
 						data: {
 						action: 'polen_update_cart_item',
 						security: $('#woocommerce-cart-nonce').val(),
@@ -80,7 +80,7 @@ function verify_checkbox_selected_to_hidde_or_show_fields() {
 				$.ajax(
 				{
 					type: 'POST',
-					url: woocommerce_params.ajax_url,
+					url: polenObj.ajax_url,
 						data: {
 						action: 'get_occasion_description',
 						occasion_type: category_name,
