@@ -41,7 +41,7 @@ window.onload = () => {
 		upload_video.file_size = file_input.files[0].size.toString();
 		jQuery
 			.post(
-				woocommerce_params.ajax_url + "?action=make_video_slot_vimeo",
+				polenObj.ajax_url + "?action=make_video_slot_vimeo",
 				upload_video,
 				(data, textStatus, jqXHR) => {
 					if (jqXHR.status == 200) {
@@ -111,7 +111,7 @@ let completeHandler = () => {
 		order: upload_video.order_id,
 	};
 	jQuery
-		.post(woocommerce_params.ajax_url, obj_complete_order, () => {
+		.post(polenObj.ajax_url, obj_complete_order, () => {
 			window.location.href =
 				polenObj.base_url +
 				"/my-account/success-upload/?order_id=" +
