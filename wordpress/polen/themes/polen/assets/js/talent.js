@@ -5,49 +5,8 @@ var talent_videos = document.getElementById("talent-videos");
 var public_url = talent_videos
 	? talent_videos.getAttribute("data-public-url")
 	: "";
-let get_your_video_banner = document.getElementById("video-promo-card");
 
 jQuery(document).ready(function () {
-	get_your_video_banner.addEventListener("click", (evt) => {
-		evt.preventDefault();
-		jQuery(".single_add_to_cart_button")[0].click();
-	});
-	// jQuery(".banner-content.type-video").slick({
-	// 	arrows: true,
-	// 	appendArrows: jQuery(".custom-slick-controls"),
-	// 	infinite: false,
-	// 	speed: 300,
-	// 	slidesToShow: 4,
-	// 	slidesToScroll: 3,
-	// 	responsive: [
-	// 		{
-	// 			breakpoint: 1024,
-	// 			settings: {
-	// 				slidesToShow: 4,
-	// 				slidesToScroll: 1,
-	// 			},
-	// 		},
-	// 		{
-	// 			breakpoint: 991,
-	// 			settings: {
-	// 				slidesToShow: 3,
-	// 				slidesToScroll: 1,
-	// 			},
-	// 		},
-	// 		{
-	// 			breakpoint: 600,
-	// 			settings: {
-	// 				slidesToShow: 3,
-	// 				slidesToScroll: 1,
-	// 			},
-	// 		},
-	// 		{
-	// 			breakpoint: 576,
-	// 			settings: "unslick",
-	// 		},
-	// 	],
-	// });
-
 	var id = getVideoId();
 	if (id) {
 		openVideoByHash(id);
@@ -142,4 +101,8 @@ function openVideoById(id) {
 	changeHash(id);
 	changeVideoCardUrl(id);
 	// handleCopyVideoUrl(id);
+}
+
+function clickToBuy() {
+	document.querySelector(".single_add_to_cart_button").click();
 }

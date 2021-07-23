@@ -12,9 +12,9 @@ function polen_talent_promo_card($talent)
 				</div>
 				<p class="mt-2">E aí, ficou com vontade de ter um vídeo?</p>
 				<?php if ($product->is_in_stock()) : ?>
-					<a href="#pedirvideo" class="btn btn-outline-light btn-lg">Peça o seu vídeo</a>
+					<button onclick="clickToBuy()" class="btn btn-outline-light btn-lg">Peça o seu vídeo</button>
 				<?php else : ?>
-					<a href="#pedirvideo" class="btn btn-outline-light btn-lg">Indisponível</a>
+					<button class="btn btn-outline-light btn-lg">Indisponível</button>
 				<?php endif; ?>
 			</div>
 		</div>
