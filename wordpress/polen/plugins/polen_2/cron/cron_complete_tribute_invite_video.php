@@ -2,16 +2,12 @@
 
 include_once dirname( __FILE__ ) . '/init.php';
 
-use Vimeo\Vimeo;
+use Polen\Includes\Vimeo\Polen_Vimeo_Factory;
 use Vimeo\Exceptions\{ExceptionInterface, VimeoRequestException};
 use Polen\Includes\Vimeo\Polen_Vimeo_Response;
 use Polen\Tributes\Tributes_Invites_Model;
 
-$client_id = $Polen_Plugin_Settings['polen_vimeo_client_id'];
-$client_secret = $Polen_Plugin_Settings['polen_vimeo_client_secret'];
-$access_token = $Polen_Plugin_Settings['polen_vimeo_access_token'];
-
-$vimeo_api = new Vimeo($client_id, $client_secret, $access_token);
+$vimeo_api = Polen_Vimeo_Factory::create_vimeo_colab_instance_with_redux();
 $invites = Tributes_Invites_Model::get_vimeo_not_processed_yet();
 
 echo "Total Colabs: " . count( $invites ) . "\n";
@@ -38,6 +34,13 @@ foreach ( $invites as $invite ) {
         }
         
     } catch ( ExceptionInterface $e ) {
+        // if( "The requested video couldn\'t be found" == $e->getMessage() ) {
+            $update_remove = array(
+                'ID' => $invite->ID,
+                'vimeo_error' => '1'
+            );
+            Tributes_Invites_Model::update( $update_remove );
+        // }
         echo "Triste dia: {$invite->vimeo_id} -> {$e->getMessage()}\n";
     }
 }

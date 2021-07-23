@@ -44,7 +44,7 @@ $bg_image = wp_get_attachment_image_src($Talent_Fields->cover_image_id, "large")
 $donate = get_post_meta( get_the_ID(), '_is_charity', true );
 $donate_name = get_post_meta( get_the_ID(), '_charity_name', true );
 $donate_image =  get_post_meta( get_the_ID(), '_url_charity_logo', true );
-$donate_text = get_post_meta( get_the_ID(), '_description_charity', true );
+$donate_text = stripslashes( get_post_meta( get_the_ID(), '_description_charity', true ) );
 ?>
 
 

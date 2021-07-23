@@ -15,8 +15,8 @@ function polen_front_get_banner()
 
 	$carrousel = array(
 		array(
-			"mobile" => TEMPLATE_URI . "/assets/img/banner-home-mobile.png",
-			"desktop" => TEMPLATE_URI . "/assets/img/img-home-desktop.jpeg"
+			"mobile" => TEMPLATE_URI . "/assets/img/banner-home-mobile-new.png",
+			"desktop" => TEMPLATE_URI . "/assets/img/img-home-desktop-new.jpeg"
 		)
 	);
 
