@@ -61,6 +61,26 @@ class Tributes_Invites_Model
 
 
     /**
+     * Deletar um registro
+     * @param array
+     */
+    public static function delete( $data )
+    {
+        global $wpdb;
+        $table_name = self::table_name();
+
+        $result_delete = $wpdb->delete(
+            $table_name,
+            array( 'ID' => $data[ 'ID' ])
+        );
+        if( $result_delete === false ) {
+            throw new \Exception( $wpdb->last_error, 401 );
+        }
+        return $data[ 'ID' ];
+    }
+
+
+    /**
      * Seta um Invite como Email_Lido 
      * 
      * @param int

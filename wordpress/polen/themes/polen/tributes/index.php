@@ -24,7 +24,7 @@
 			<div class="col-md-6">
 				<div class="presentation-wrap">
 					<div class="presentation with-video">
-						<video id="tribute-home-video" playsinline>
+						<video id="tribute-home-video">
 							<source src="<?php echo TEMPLATE_URI; ?>/tributes/assets/video-presentation.mp4#t=0.1" type="video/mp4">
 							</source>
 						</video>

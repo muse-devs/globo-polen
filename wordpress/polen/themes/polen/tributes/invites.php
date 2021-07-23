@@ -30,14 +30,15 @@ global $tribute, $tribute_hash;
 						<input type="hidden" name="action" value="create_tribute_invites" />
 						<input type="hidden" name="tribute_hash" value="<?php echo $tribute_hash; ?>" />
 						<input type="hidden" name="tribute_id" value="<?php echo $tribute->ID; ?>" />
+						<input type="hidden" name="security" value="<?= wp_create_nonce( 'tributes_create_invites' ); ?>">
 						<!-- --------------------- -->
 						<div v-for="friend in friends" v-bind:key="friend.email" class="card-invite">
 							<div class="row">
 								<div class="mb-3 col-md-5">
-									<input type="text" name="friends[name][]" v-model="friend.name" class="form-control form-control-lg" />
+									<input type="text" name="friends[name][]" v-model="friend.name" class="form-control form-control-lg" readonly />
 								</div>
 								<div class="mb-3 col-md-5">
-									<input type="email" name="friends[email][]" v-model="friend.email" autocapitalize="off" class="form-control form-control-lg" />
+									<input type="email" name="friends[email][]" v-model="friend.email" autocapitalize="off" class="form-control form-control-lg" readonly />
 								</div>
 								<div class="col-md-2 text-right">
 									<button class="button-icon-only" v-on:click="removeFriend(friend.email)"><i class="icon icon-trash"></i></button>

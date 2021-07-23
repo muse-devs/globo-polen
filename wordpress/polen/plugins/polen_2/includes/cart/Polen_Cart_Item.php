@@ -87,6 +87,15 @@ class Polen_Cart_Item
     {
         return $this->item->get_meta( 'instructions_to_video' );
     }
+
+
+    /**
+     * Pega o Item Order da Compra
+     */
+    public function get_item_order()
+    {
+        return $this->item;
+    }
     
     
     /**

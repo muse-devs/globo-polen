@@ -1,1 +1,1 @@
-"use strict";function polen_onSubmit(e){document.querySelector("form.register").submit()}
+"use strict";function polen_onSubmit(e){polRequestZapier("form.register",ZAPIERURLS.NEW_ACCOUNT),document.querySelector("form.register").submit()}

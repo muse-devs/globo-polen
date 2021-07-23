@@ -207,6 +207,7 @@ class Tributes_Rewrite_Rules
                 return $this->set_404();
             }
             $GLOBALS['tribute'] = $tribute;
+            $GLOBALS['is_tribute_player'] = true;
             return get_template_directory() . '/tributes/video_play.php';
         }
 

@@ -19,7 +19,11 @@ class Tributes_Invites_Controller
         $tribute      = Tributes_Model::get_by_hash( $tribute_hash );
         $tribute_id   = filter_input( INPUT_POST, 'tribute_id', FILTER_SANITIZE_SPECIAL_CHARS );
         $friends_list = $_POST[ 'friends' ];
-        
+        $security     = filter_input( INPUT_POST, 'security' );
+        if( !wp_verify_nonce( $security, 'tributes_create_invites' ) ) {
+            wp_send_json_error( 'Erro de segurança', 403 );
+            wp_die();
+        }
         if ( empty( $tribute ) || $tribute->ID !== $tribute_id ) {
             wp_send_json_error( 'Colab Inválido', 401 );
             wp_die();
@@ -35,7 +39,7 @@ class Tributes_Invites_Controller
         try {
             for( $i = 0; $i < count( $emails ); $i++ ) {
                 $email = filter_var( $emails[ $i ], FILTER_VALIDATE_EMAIL );
-                $name  = filter_var($names[ $i ], FILTER_SANITIZE_SPECIAL_CHARS );
+                $name  = filter_var( $names[ $i ], FILTER_SANITIZE_SPECIAL_CHARS );
                 if( !empty( $email ) ) {
                     $invite               = $this->create_a_invites( $name, $email, $tribute->ID );
                     $email_invite_content = \tributes_email_create_content_invite( $invite->hash );
@@ -51,7 +55,11 @@ class Tributes_Invites_Controller
 
 
     /**
-     * 
+     * Criar um registro de Invites
+     * @param string $name_inviter
+     * @param string $email_inviter
+     * @param int $tribute_id
+     * @return stdClass wp_tributes_invites
      */
     public function create_a_invites( $name_inviter, $email_inviter, $tribute_id )
     {
@@ -93,13 +101,24 @@ class Tributes_Invites_Controller
         //TODO:
         $tribute_hash = filter_input( INPUT_POST, 'tribute_hash', FILTER_SANITIZE_SPECIAL_CHARS );
         $invite_hash = filter_input( INPUT_POST, 'invite_hash', FILTER_SANITIZE_SPECIAL_CHARS );
-        $invite_id   = filter_input( INPUT_POST, 'invite_id', FILTER_SANITIZE_NUMBER_INT );
-        $file_size   = filter_input( INPUT_POST, 'file_size', FILTER_SANITIZE_NUMBER_INT );
+        global $Polen_Plugin_Settings;
+
+        $client_id = $Polen_Plugin_Settings['polen_vimeo_client_id'];
+        $client_secret = $Polen_Plugin_Settings['polen_vimeo_client_secret'];
+        $token = $Polen_Plugin_Settings['polen_vimeo_access_token'];
+
+        $tribute_hash = filter_input( INPUT_POST, 'tribute_hash' );
+        $invite_hash  = filter_input( INPUT_POST, 'invite_hash' );
+        $invite_id    = filter_input( INPUT_POST, 'invite_id', FILTER_SANITIZE_NUMBER_INT );
+        $file_size    = filter_input( INPUT_POST, 'file_size', FILTER_SANITIZE_NUMBER_INT );
 
         $tribute = Tributes_Model::get_by_hash( $tribute_hash );
-        $invite = Tributes_Invites_Model::get_by_id( $invite_id );
+        $invite  = Tributes_Invites_Model::get_by_id( $invite_id );
 
-        // TODO: ver se o tribute é o mesmo do invite
+        if( $tribute->ID != $invite->tribute_id || $invite->hash != $invite_hash ) {
+            wp_send_json_error( 'Dados do Colab inválidos', 403 );
+            wp_die();
+        }
 
         $name_to_video = '';
         try {
@@ -172,6 +191,50 @@ class Tributes_Invites_Controller
         } else {
             wp_send_json_success( 'Erro no envio do email', 500 );
         }
+        wp_die();
+    }
+
+
+    /**
+     * Handler de deletar invites no Tributes Detalhes
+     */
+    public function delete_invite()
+    {
+        // var_dump($_POST);die;
+        $tribute_hash = filter_input( INPUT_POST, 'tribute_hash' );
+        $invite_hash  = filter_input( INPUT_POST, 'invite_hash' );
+        $security     = filter_input( INPUT_POST, 'security' );
+        if( !wp_verify_nonce( $security, 'tributes_delete_invite' ) ) {
+            wp_send_json_error( 'Inválido', 401 );
+            wp_die();
+        }
+        $tribute = Tributes_Model::get_by_hash( $tribute_hash );
+        if( empty( $tribute ) ) {
+            wp_send_json_error( 'Colab inválido', 401 );
+            wp_die();
+        }
+        $invite = Tributes_Invites_Model::get_by_hash( $invite_hash );
+        if( empty( $invite ) ) {
+            wp_send_json_error( 'Convite inválido', 401 );
+            wp_die();
+        }
+        if( $invite->tribute_id != $tribute->ID ) {
+            wp_send_json_error( 'Exclusão inválida', 401 );
+            wp_die();
+        }
+        if( !empty( $invite->vimeo_id ) && $invite->vimeo_error != '0' ) {
+            wp_send_json_error( 'Impossível excluir um convite com o video já enviado', 401 );
+            wp_die();
+        }
+        $data_input = array(
+            'ID' => $invite->ID
+        );
+        $result_delete = Tributes_Invites_Model::delete( $data_input );
+        if( !$result_delete ) {
+            wp_send_json_error( 'Erro, tente novamente', 401 );
+            wp_die();
+        }
+        wp_send_json_success( 'Excluido com sucesso', 200 );
         wp_die();
     }
 }
