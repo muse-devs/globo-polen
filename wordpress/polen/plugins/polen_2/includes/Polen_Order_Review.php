@@ -141,7 +141,7 @@ class Polen_Order_Review
         $sum_rate_talent = self::get_sum_rate_by_talent( $talent_id );
         $order = wc_get_order( $comment->comment_post_ID );
         $cart_item = Cart\Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
-        $product = $cart_item->get_product();
+        $product = $cart_item->get_product_parent_if_has();
         $product->update_meta_data( 'total_review', $number_total_reviews );
         $product->update_meta_data( 'sum_rate', $sum_rate_talent );
         $product->save();
