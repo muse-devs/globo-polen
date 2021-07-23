@@ -33,7 +33,7 @@ class Tributes_Invites_Model
             $data
         );
         if( $result_insert === false ) {
-            throw new \Exception( $wpdb->last_error, 401 );
+            throw new \Exception( self::create_exception_message( $wpdb->last_error ), 401 );
         }
         return $wpdb->insert_id;
     }
@@ -184,7 +184,7 @@ class Tributes_Invites_Model
     {
         global $wpdb;
         $table_name = self::table_name();
-        $result = $wpdb->get_results( "SELECT * FROM `{$table_name}` WHERE `video_sent` = 1 AND `vimeo_process_complete` = 0;" );
+        $result = $wpdb->get_results( "SELECT * FROM `{$table_name}` WHERE `video_sent` = 1 AND `vimeo_process_complete` = 0 AND `vimeo_error` = 0;" );
         return $result;
     }
 
@@ -207,6 +207,22 @@ class Tributes_Invites_Model
             )
         );
         return $result;
+    }
+
+
+    /**
+     * Trata a msg que vem na excptiond o DB
+     */
+    public static function create_exception_message( $error_message )
+    {
+        if( strpos( $error_message, self::ERROR_EMAIL_UNIQUE ) !== false ) {
+            return 'Esse email já foi convidado';
+        }
+
+        if( strpos( $error_message, self::ERROR_HASH_UNIQUE) !== false ) {
+            return 'Hash já existe, tente novamente';
+        }
+        return $error_message;
     }
 
 
