@@ -1,43 +1,22 @@
-(window["__wcAdmin_webpackJsonp"] = window["__wcAdmin_webpackJsonp"] || []).push([[7],{
+(window["__wcAdmin_webpackJsonp"] = window["__wcAdmin_webpackJsonp"] || []).push([[4],{
 
-/***/ 616:
+/***/ 565:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var core_js_modules_es_reflect_construct_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(64);
-/* harmony import */ var core_js_modules_es_reflect_construct_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_reflect_construct_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(22);
-/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(23);
-/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(24);
-/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(25);
-/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(14);
-/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(0);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(15);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(1);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _woocommerce_experimental__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(105);
-/* harmony import */ var _woocommerce_components__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(145);
-/* harmony import */ var _woocommerce_components__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_components__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(617);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(0);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(1);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _woocommerce_experimental__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(22);
+/* harmony import */ var _woocommerce_experimental__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_experimental__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _woocommerce_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(23);
+/* harmony import */ var _woocommerce_components__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_components__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(566);
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_5__);
 
-
-
-
-
-
-
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4___default()(this, result); }; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 /**
  * External dependencies
@@ -53,124 +32,866 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 
 
-var ActivityHeader = /*#__PURE__*/function (_Component) {
-  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_3___default()(ActivityHeader, _Component);
-
-  var _super = _createSuper(ActivityHeader);
-
-  function ActivityHeader() {
-    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1___default()(this, ActivityHeader);
-
-    return _super.apply(this, arguments);
+class ActivityHeader extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+  render() {
+    const {
+      className,
+      menu,
+      subtitle,
+      title,
+      unreadMessages
+    } = this.props;
+    const cardClassName = classnames__WEBPACK_IMPORTED_MODULE_1___default()({
+      'woocommerce-layout__inbox-panel-header': subtitle,
+      'woocommerce-layout__activity-panel-header': !subtitle
+    }, className);
+    const countUnread = unreadMessages ? unreadMessages : 0;
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: cardClassName
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: "woocommerce-layout__inbox-title"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_woocommerce_experimental__WEBPACK_IMPORTED_MODULE_3__["Text"], {
+      variant: "title.small",
+      size: "20",
+      lineHeight: "28px"
+    }, title), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_woocommerce_experimental__WEBPACK_IMPORTED_MODULE_3__["Text"], {
+      variant: "button",
+      weight: "600",
+      size: "14",
+      lineHeight: "20px"
+    }, countUnread > 0 && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("span", {
+      className: "woocommerce-layout__inbox-badge"
+    }, unreadMessages))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: "woocommerce-layout__inbox-subtitle"
+    }, subtitle && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_woocommerce_experimental__WEBPACK_IMPORTED_MODULE_3__["Text"], {
+      variant: "body.small",
+      size: "14",
+      lineHeight: "20px"
+    }, subtitle)), menu && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: "woocommerce-layout__activity-panel-header-menu"
+    }, menu));
   }
 
-  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2___default()(ActivityHeader, [{
-    key: "render",
-    value: function render() {
-      var _this$props = this.props,
-          className = _this$props.className,
-          menu = _this$props.menu,
-          subtitle = _this$props.subtitle,
-          title = _this$props.title,
-          unreadMessages = _this$props.unreadMessages;
-      var cardClassName = classnames__WEBPACK_IMPORTED_MODULE_7___default()({
-        'woocommerce-layout__inbox-panel-header': subtitle,
-        'woocommerce-layout__activity-panel-header': !subtitle
-      }, className);
-      var countUnread = unreadMessages ? unreadMessages : 0;
-      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])("div", {
-        className: cardClassName
-      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])("div", {
-        className: "woocommerce-layout__inbox-title"
-      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_woocommerce_experimental__WEBPACK_IMPORTED_MODULE_9__[/* Text */ "e"], {
-        variant: "title.small"
-      }, title), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_woocommerce_experimental__WEBPACK_IMPORTED_MODULE_9__[/* Text */ "e"], {
-        variant: "button"
-      }, countUnread > 0 && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])("span", {
-        className: "woocommerce-layout__inbox-badge"
-      }, unreadMessages))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])("div", {
-        className: "woocommerce-layout__inbox-subtitle"
-      }, subtitle && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_woocommerce_experimental__WEBPACK_IMPORTED_MODULE_9__[/* Text */ "e"], {
-        variant: "body.small"
-      }, subtitle)), menu && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])("div", {
-        className: "woocommerce-layout__activity-panel-header-menu"
-      }, menu));
-    }
-  }]);
-
-  return ActivityHeader;
-}(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["Component"]);
+}
 
 ActivityHeader.propTypes = {
-  className: prop_types__WEBPACK_IMPORTED_MODULE_8___default.a.string,
-  unreadMessages: prop_types__WEBPACK_IMPORTED_MODULE_8___default.a.number,
-  title: prop_types__WEBPACK_IMPORTED_MODULE_8___default.a.string.isRequired,
-  subtitle: prop_types__WEBPACK_IMPORTED_MODULE_8___default.a.string,
-  menu: prop_types__WEBPACK_IMPORTED_MODULE_8___default.a.shape({
-    type: prop_types__WEBPACK_IMPORTED_MODULE_8___default.a.oneOf([_woocommerce_components__WEBPACK_IMPORTED_MODULE_10__["EllipsisMenu"]])
+  className: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
+  unreadMessages: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number,
+  title: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string.isRequired,
+  subtitle: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
+  menu: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.shape({
+    type: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.oneOf([_woocommerce_components__WEBPACK_IMPORTED_MODULE_4__["EllipsisMenu"]])
   })
 };
 /* harmony default export */ __webpack_exports__["a"] = (ActivityHeader);
 
 /***/ }),
 
-/***/ 617:
+/***/ 566:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ 705:
+/***/ 626:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* WEBPACK VAR INJECTION */(function(global, module) {/* harmony import */ var _ponyfill_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(628);
+/* global window */
+
+
+var root;
+
+if (typeof self !== 'undefined') {
+  root = self;
+} else if (typeof window !== 'undefined') {
+  root = window;
+} else if (typeof global !== 'undefined') {
+  root = global;
+} else if (true) {
+  root = module;
+} else {}
+
+var result = Object(_ponyfill_js__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])(root);
+/* harmony default export */ __webpack_exports__["a"] = (result);
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(80), __webpack_require__(627)(module)))
+
+/***/ }),
+
+/***/ 627:
+/***/ (function(module, exports) {
+
+module.exports = function(originalModule) {
+	if (!originalModule.webpackPolyfill) {
+		var module = Object.create(originalModule);
+		// module.parent = undefined by default
+		if (!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function() {
+				return module.i;
+			}
+		});
+		Object.defineProperty(module, "exports", {
+			enumerable: true
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
+};
+
+
+/***/ }),
+
+/***/ 628:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return symbolObservablePonyfill; });
+function symbolObservablePonyfill(root) {
+	var result;
+	var Symbol = root.Symbol;
+
+	if (typeof Symbol === 'function') {
+		if (Symbol.observable) {
+			result = Symbol.observable;
+		} else {
+			result = Symbol('observable');
+			Symbol.observable = result;
+		}
+	} else {
+		result = '@@observable';
+	}
+
+	return result;
+};
+
+
+/***/ }),
+
+/***/ 657:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SETUP_TASK_HELP_ITEMS_FILTER", function() { return SETUP_TASK_HELP_ITEMS_FILTER; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HelpPanel", function() { return HelpPanel; });
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(0);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(192);
-/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(41);
-/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(107);
-/* harmony import */ var core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(140);
-/* harmony import */ var core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_string_link_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(405);
-/* harmony import */ var core_js_modules_es_string_link_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_link_js__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(51);
-/* harmony import */ var core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(2);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _woocommerce_experimental__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(105);
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(26);
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(141);
-/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(426);
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(706);
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(630);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(5);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_14__);
-/* harmony import */ var _woocommerce_wc_admin_settings__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(85);
-/* harmony import */ var _woocommerce_components__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(145);
-/* harmony import */ var _woocommerce_components__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_components__WEBPACK_IMPORTED_MODULE_16__);
-/* harmony import */ var _woocommerce_data__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(59);
-/* harmony import */ var _woocommerce_data__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_data__WEBPACK_IMPORTED_MODULE_17__);
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(678);
-/* harmony import */ var _woocommerce_tracks__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(92);
-/* harmony import */ var _woocommerce_tracks__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_tracks__WEBPACK_IMPORTED_MODULE_19__);
-/* harmony import */ var _activity_header__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(616);
-/* harmony import */ var _dashboard_utils__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(231);
-/* harmony import */ var _task_list_tasks_payments_methods__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(635);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, "SETUP_TASK_HELP_ITEMS_FILTER", function() { return /* binding */ SETUP_TASK_HELP_ITEMS_FILTER; });
+__webpack_require__.d(__webpack_exports__, "HelpPanel", function() { return /* binding */ HelpPanel; });
+
+// EXTERNAL MODULE: external ["wp","element"]
+var external_wp_element_ = __webpack_require__(0);
+
+// EXTERNAL MODULE: external ["wp","i18n"]
+var external_wp_i18n_ = __webpack_require__(2);
+
+// EXTERNAL MODULE: external ["wc","experimental"]
+var external_wc_experimental_ = __webpack_require__(22);
+
+// EXTERNAL MODULE: external ["wp","data"]
+var external_wp_data_ = __webpack_require__(7);
+
+// EXTERNAL MODULE: external ["wp","hooks"]
+var external_wp_hooks_ = __webpack_require__(34);
+
+// EXTERNAL MODULE: ./node_modules/@wordpress/icons/build-module/icon/index.js
+var icon = __webpack_require__(147);
+
+// EXTERNAL MODULE: ./node_modules/@wordpress/icons/build-module/library/page.js
+var page = __webpack_require__(541);
+
+// EXTERNAL MODULE: ./node_modules/@wordpress/icons/build-module/library/chevron-right.js
+var chevron_right = __webpack_require__(588);
+
+// EXTERNAL MODULE: external "lodash"
+var external_lodash_ = __webpack_require__(3);
+
+// EXTERNAL MODULE: ./client/wc-admin-settings/index.js
+var wc_admin_settings = __webpack_require__(17);
+
+// EXTERNAL MODULE: external ["wc","components"]
+var external_wc_components_ = __webpack_require__(23);
+
+// EXTERNAL MODULE: external ["wc","data"]
+var external_wc_data_ = __webpack_require__(11);
+
+// EXTERNAL MODULE: ./node_modules/symbol-observable/es/index.js
+var es = __webpack_require__(626);
+
+// CONCATENATED MODULE: ./node_modules/redux/es/redux.js
+
+
+/**
+ * These are private action types reserved by Redux.
+ * For any unknown actions, you must return the current state.
+ * If the current state is undefined, you must return the initial state.
+ * Do not reference these action types directly in your code.
+ */
+var randomString = function randomString() {
+  return Math.random().toString(36).substring(7).split('').join('.');
+};
+
+var ActionTypes = {
+  INIT: "@@redux/INIT" + randomString(),
+  REPLACE: "@@redux/REPLACE" + randomString(),
+  PROBE_UNKNOWN_ACTION: function PROBE_UNKNOWN_ACTION() {
+    return "@@redux/PROBE_UNKNOWN_ACTION" + randomString();
+  }
+};
+
+/**
+ * @param {any} obj The object to inspect.
+ * @returns {boolean} True if the argument appears to be a plain object.
+ */
+function isPlainObject(obj) {
+  if (typeof obj !== 'object' || obj === null) return false;
+  var proto = obj;
+
+  while (Object.getPrototypeOf(proto) !== null) {
+    proto = Object.getPrototypeOf(proto);
+  }
+
+  return Object.getPrototypeOf(obj) === proto;
+}
+
+/**
+ * Creates a Redux store that holds the state tree.
+ * The only way to change the data in the store is to call `dispatch()` on it.
+ *
+ * There should only be a single store in your app. To specify how different
+ * parts of the state tree respond to actions, you may combine several reducers
+ * into a single reducer function by using `combineReducers`.
+ *
+ * @param {Function} reducer A function that returns the next state tree, given
+ * the current state tree and the action to handle.
+ *
+ * @param {any} [preloadedState] The initial state. You may optionally specify it
+ * to hydrate the state from the server in universal apps, or to restore a
+ * previously serialized user session.
+ * If you use `combineReducers` to produce the root reducer function, this must be
+ * an object with the same shape as `combineReducers` keys.
+ *
+ * @param {Function} [enhancer] The store enhancer. You may optionally specify it
+ * to enhance the store with third-party capabilities such as middleware,
+ * time travel, persistence, etc. The only store enhancer that ships with Redux
+ * is `applyMiddleware()`.
+ *
+ * @returns {Store} A Redux store that lets you read the state, dispatch actions
+ * and subscribe to changes.
+ */
+
+function createStore(reducer, preloadedState, enhancer) {
+  var _ref2;
+
+  if (typeof preloadedState === 'function' && typeof enhancer === 'function' || typeof enhancer === 'function' && typeof arguments[3] === 'function') {
+    throw new Error('It looks like you are passing several store enhancers to ' + 'createStore(). This is not supported. Instead, compose them ' + 'together to a single function.');
+  }
+
+  if (typeof preloadedState === 'function' && typeof enhancer === 'undefined') {
+    enhancer = preloadedState;
+    preloadedState = undefined;
+  }
+
+  if (typeof enhancer !== 'undefined') {
+    if (typeof enhancer !== 'function') {
+      throw new Error('Expected the enhancer to be a function.');
+    }
+
+    return enhancer(createStore)(reducer, preloadedState);
+  }
+
+  if (typeof reducer !== 'function') {
+    throw new Error('Expected the reducer to be a function.');
+  }
+
+  var currentReducer = reducer;
+  var currentState = preloadedState;
+  var currentListeners = [];
+  var nextListeners = currentListeners;
+  var isDispatching = false;
+  /**
+   * This makes a shallow copy of currentListeners so we can use
+   * nextListeners as a temporary list while dispatching.
+   *
+   * This prevents any bugs around consumers calling
+   * subscribe/unsubscribe in the middle of a dispatch.
+   */
+
+  function ensureCanMutateNextListeners() {
+    if (nextListeners === currentListeners) {
+      nextListeners = currentListeners.slice();
+    }
+  }
+  /**
+   * Reads the state tree managed by the store.
+   *
+   * @returns {any} The current state tree of your application.
+   */
+
+
+  function getState() {
+    if (isDispatching) {
+      throw new Error('You may not call store.getState() while the reducer is executing. ' + 'The reducer has already received the state as an argument. ' + 'Pass it down from the top reducer instead of reading it from the store.');
+    }
+
+    return currentState;
+  }
+  /**
+   * Adds a change listener. It will be called any time an action is dispatched,
+   * and some part of the state tree may potentially have changed. You may then
+   * call `getState()` to read the current state tree inside the callback.
+   *
+   * You may call `dispatch()` from a change listener, with the following
+   * caveats:
+   *
+   * 1. The subscriptions are snapshotted just before every `dispatch()` call.
+   * If you subscribe or unsubscribe while the listeners are being invoked, this
+   * will not have any effect on the `dispatch()` that is currently in progress.
+   * However, the next `dispatch()` call, whether nested or not, will use a more
+   * recent snapshot of the subscription list.
+   *
+   * 2. The listener should not expect to see all state changes, as the state
+   * might have been updated multiple times during a nested `dispatch()` before
+   * the listener is called. It is, however, guaranteed that all subscribers
+   * registered before the `dispatch()` started will be called with the latest
+   * state by the time it exits.
+   *
+   * @param {Function} listener A callback to be invoked on every dispatch.
+   * @returns {Function} A function to remove this change listener.
+   */
+
+
+  function subscribe(listener) {
+    if (typeof listener !== 'function') {
+      throw new Error('Expected the listener to be a function.');
+    }
+
+    if (isDispatching) {
+      throw new Error('You may not call store.subscribe() while the reducer is executing. ' + 'If you would like to be notified after the store has been updated, subscribe from a ' + 'component and invoke store.getState() in the callback to access the latest state. ' + 'See https://redux.js.org/api-reference/store#subscribelistener for more details.');
+    }
+
+    var isSubscribed = true;
+    ensureCanMutateNextListeners();
+    nextListeners.push(listener);
+    return function unsubscribe() {
+      if (!isSubscribed) {
+        return;
+      }
+
+      if (isDispatching) {
+        throw new Error('You may not unsubscribe from a store listener while the reducer is executing. ' + 'See https://redux.js.org/api-reference/store#subscribelistener for more details.');
+      }
+
+      isSubscribed = false;
+      ensureCanMutateNextListeners();
+      var index = nextListeners.indexOf(listener);
+      nextListeners.splice(index, 1);
+      currentListeners = null;
+    };
+  }
+  /**
+   * Dispatches an action. It is the only way to trigger a state change.
+   *
+   * The `reducer` function, used to create the store, will be called with the
+   * current state tree and the given `action`. Its return value will
+   * be considered the **next** state of the tree, and the change listeners
+   * will be notified.
+   *
+   * The base implementation only supports plain object actions. If you want to
+   * dispatch a Promise, an Observable, a thunk, or something else, you need to
+   * wrap your store creating function into the corresponding middleware. For
+   * example, see the documentation for the `redux-thunk` package. Even the
+   * middleware will eventually dispatch plain object actions using this method.
+   *
+   * @param {Object} action A plain object representing “what changed”. It is
+   * a good idea to keep actions serializable so you can record and replay user
+   * sessions, or use the time travelling `redux-devtools`. An action must have
+   * a `type` property which may not be `undefined`. It is a good idea to use
+   * string constants for action types.
+   *
+   * @returns {Object} For convenience, the same action object you dispatched.
+   *
+   * Note that, if you use a custom middleware, it may wrap `dispatch()` to
+   * return something else (for example, a Promise you can await).
+   */
+
+
+  function dispatch(action) {
+    if (!isPlainObject(action)) {
+      throw new Error('Actions must be plain objects. ' + 'Use custom middleware for async actions.');
+    }
+
+    if (typeof action.type === 'undefined') {
+      throw new Error('Actions may not have an undefined "type" property. ' + 'Have you misspelled a constant?');
+    }
+
+    if (isDispatching) {
+      throw new Error('Reducers may not dispatch actions.');
+    }
+
+    try {
+      isDispatching = true;
+      currentState = currentReducer(currentState, action);
+    } finally {
+      isDispatching = false;
+    }
+
+    var listeners = currentListeners = nextListeners;
+
+    for (var i = 0; i < listeners.length; i++) {
+      var listener = listeners[i];
+      listener();
+    }
+
+    return action;
+  }
+  /**
+   * Replaces the reducer currently used by the store to calculate the state.
+   *
+   * You might need this if your app implements code splitting and you want to
+   * load some of the reducers dynamically. You might also need this if you
+   * implement a hot reloading mechanism for Redux.
+   *
+   * @param {Function} nextReducer The reducer for the store to use instead.
+   * @returns {void}
+   */
+
+
+  function replaceReducer(nextReducer) {
+    if (typeof nextReducer !== 'function') {
+      throw new Error('Expected the nextReducer to be a function.');
+    }
+
+    currentReducer = nextReducer; // This action has a similiar effect to ActionTypes.INIT.
+    // Any reducers that existed in both the new and old rootReducer
+    // will receive the previous state. This effectively populates
+    // the new state tree with any relevant data from the old one.
+
+    dispatch({
+      type: ActionTypes.REPLACE
+    });
+  }
+  /**
+   * Interoperability point for observable/reactive libraries.
+   * @returns {observable} A minimal observable of state changes.
+   * For more information, see the observable proposal:
+   * https://github.com/tc39/proposal-observable
+   */
+
+
+  function observable() {
+    var _ref;
+
+    var outerSubscribe = subscribe;
+    return _ref = {
+      /**
+       * The minimal observable subscription method.
+       * @param {Object} observer Any object that can be used as an observer.
+       * The observer object should have a `next` method.
+       * @returns {subscription} An object with an `unsubscribe` method that can
+       * be used to unsubscribe the observable from the store, and prevent further
+       * emission of values from the observable.
+       */
+      subscribe: function subscribe(observer) {
+        if (typeof observer !== 'object' || observer === null) {
+          throw new TypeError('Expected the observer to be an object.');
+        }
+
+        function observeState() {
+          if (observer.next) {
+            observer.next(getState());
+          }
+        }
+
+        observeState();
+        var unsubscribe = outerSubscribe(observeState);
+        return {
+          unsubscribe: unsubscribe
+        };
+      }
+    }, _ref[es["a" /* default */]] = function () {
+      return this;
+    }, _ref;
+  } // When a store is created, an "INIT" action is dispatched so that every
+  // reducer returns their initial state. This effectively populates
+  // the initial state tree.
+
+
+  dispatch({
+    type: ActionTypes.INIT
+  });
+  return _ref2 = {
+    dispatch: dispatch,
+    subscribe: subscribe,
+    getState: getState,
+    replaceReducer: replaceReducer
+  }, _ref2[es["a" /* default */]] = observable, _ref2;
+}
+
+/**
+ * Prints a warning in the console if it exists.
+ *
+ * @param {String} message The warning message.
+ * @returns {void}
+ */
+function warning(message) {
+  /* eslint-disable no-console */
+  if (typeof console !== 'undefined' && typeof console.error === 'function') {
+    console.error(message);
+  }
+  /* eslint-enable no-console */
+
+
+  try {
+    // This error was thrown as a convenience so that if you enable
+    // "break on all exceptions" in your console,
+    // it would pause the execution at this line.
+    throw new Error(message);
+  } catch (e) {} // eslint-disable-line no-empty
+
+}
+
+function getUndefinedStateErrorMessage(key, action) {
+  var actionType = action && action.type;
+  var actionDescription = actionType && "action \"" + String(actionType) + "\"" || 'an action';
+  return "Given " + actionDescription + ", reducer \"" + key + "\" returned undefined. " + "To ignore an action, you must explicitly return the previous state. " + "If you want this reducer to hold no value, you can return null instead of undefined.";
+}
+
+function getUnexpectedStateShapeWarningMessage(inputState, reducers, action, unexpectedKeyCache) {
+  var reducerKeys = Object.keys(reducers);
+  var argumentName = action && action.type === ActionTypes.INIT ? 'preloadedState argument passed to createStore' : 'previous state received by the reducer';
+
+  if (reducerKeys.length === 0) {
+    return 'Store does not have a valid reducer. Make sure the argument passed ' + 'to combineReducers is an object whose values are reducers.';
+  }
+
+  if (!isPlainObject(inputState)) {
+    return "The " + argumentName + " has unexpected type of \"" + {}.toString.call(inputState).match(/\s([a-z|A-Z]+)/)[1] + "\". Expected argument to be an object with the following " + ("keys: \"" + reducerKeys.join('", "') + "\"");
+  }
+
+  var unexpectedKeys = Object.keys(inputState).filter(function (key) {
+    return !reducers.hasOwnProperty(key) && !unexpectedKeyCache[key];
+  });
+  unexpectedKeys.forEach(function (key) {
+    unexpectedKeyCache[key] = true;
+  });
+  if (action && action.type === ActionTypes.REPLACE) return;
+
+  if (unexpectedKeys.length > 0) {
+    return "Unexpected " + (unexpectedKeys.length > 1 ? 'keys' : 'key') + " " + ("\"" + unexpectedKeys.join('", "') + "\" found in " + argumentName + ". ") + "Expected to find one of the known reducer keys instead: " + ("\"" + reducerKeys.join('", "') + "\". Unexpected keys will be ignored.");
+  }
+}
+
+function assertReducerShape(reducers) {
+  Object.keys(reducers).forEach(function (key) {
+    var reducer = reducers[key];
+    var initialState = reducer(undefined, {
+      type: ActionTypes.INIT
+    });
+
+    if (typeof initialState === 'undefined') {
+      throw new Error("Reducer \"" + key + "\" returned undefined during initialization. " + "If the state passed to the reducer is undefined, you must " + "explicitly return the initial state. The initial state may " + "not be undefined. If you don't want to set a value for this reducer, " + "you can use null instead of undefined.");
+    }
+
+    if (typeof reducer(undefined, {
+      type: ActionTypes.PROBE_UNKNOWN_ACTION()
+    }) === 'undefined') {
+      throw new Error("Reducer \"" + key + "\" returned undefined when probed with a random type. " + ("Don't try to handle " + ActionTypes.INIT + " or other actions in \"redux/*\" ") + "namespace. They are considered private. Instead, you must return the " + "current state for any unknown actions, unless it is undefined, " + "in which case you must return the initial state, regardless of the " + "action type. The initial state may not be undefined, but can be null.");
+    }
+  });
+}
+/**
+ * Turns an object whose values are different reducer functions, into a single
+ * reducer function. It will call every child reducer, and gather their results
+ * into a single state object, whose keys correspond to the keys of the passed
+ * reducer functions.
+ *
+ * @param {Object} reducers An object whose values correspond to different
+ * reducer functions that need to be combined into one. One handy way to obtain
+ * it is to use ES6 `import * as reducers` syntax. The reducers may never return
+ * undefined for any action. Instead, they should return their initial state
+ * if the state passed to them was undefined, and the current state for any
+ * unrecognized action.
+ *
+ * @returns {Function} A reducer function that invokes every reducer inside the
+ * passed object, and builds a state object with the same shape.
+ */
+
+
+function combineReducers(reducers) {
+  var reducerKeys = Object.keys(reducers);
+  var finalReducers = {};
+
+  for (var i = 0; i < reducerKeys.length; i++) {
+    var key = reducerKeys[i];
+
+    if (false) {}
+
+    if (typeof reducers[key] === 'function') {
+      finalReducers[key] = reducers[key];
+    }
+  }
+
+  var finalReducerKeys = Object.keys(finalReducers); // This is used to make sure we don't warn about the same
+  // keys multiple times.
+
+  var unexpectedKeyCache;
+
+  if (false) {}
+
+  var shapeAssertionError;
+
+  try {
+    assertReducerShape(finalReducers);
+  } catch (e) {
+    shapeAssertionError = e;
+  }
+
+  return function combination(state, action) {
+    if (state === void 0) {
+      state = {};
+    }
+
+    if (shapeAssertionError) {
+      throw shapeAssertionError;
+    }
+
+    if (false) { var warningMessage; }
+
+    var hasChanged = false;
+    var nextState = {};
+
+    for (var _i = 0; _i < finalReducerKeys.length; _i++) {
+      var _key = finalReducerKeys[_i];
+      var reducer = finalReducers[_key];
+      var previousStateForKey = state[_key];
+      var nextStateForKey = reducer(previousStateForKey, action);
+
+      if (typeof nextStateForKey === 'undefined') {
+        var errorMessage = getUndefinedStateErrorMessage(_key, action);
+        throw new Error(errorMessage);
+      }
+
+      nextState[_key] = nextStateForKey;
+      hasChanged = hasChanged || nextStateForKey !== previousStateForKey;
+    }
+
+    hasChanged = hasChanged || finalReducerKeys.length !== Object.keys(state).length;
+    return hasChanged ? nextState : state;
+  };
+}
+
+function bindActionCreator(actionCreator, dispatch) {
+  return function () {
+    return dispatch(actionCreator.apply(this, arguments));
+  };
+}
+/**
+ * Turns an object whose values are action creators, into an object with the
+ * same keys, but with every function wrapped into a `dispatch` call so they
+ * may be invoked directly. This is just a convenience method, as you can call
+ * `store.dispatch(MyActionCreators.doSomething())` yourself just fine.
+ *
+ * For convenience, you can also pass an action creator as the first argument,
+ * and get a dispatch wrapped function in return.
+ *
+ * @param {Function|Object} actionCreators An object whose values are action
+ * creator functions. One handy way to obtain it is to use ES6 `import * as`
+ * syntax. You may also pass a single function.
+ *
+ * @param {Function} dispatch The `dispatch` function available on your Redux
+ * store.
+ *
+ * @returns {Function|Object} The object mimicking the original object, but with
+ * every action creator wrapped into the `dispatch` call. If you passed a
+ * function as `actionCreators`, the return value will also be a single
+ * function.
+ */
+
+
+function bindActionCreators(actionCreators, dispatch) {
+  if (typeof actionCreators === 'function') {
+    return bindActionCreator(actionCreators, dispatch);
+  }
+
+  if (typeof actionCreators !== 'object' || actionCreators === null) {
+    throw new Error("bindActionCreators expected an object or a function, instead received " + (actionCreators === null ? 'null' : typeof actionCreators) + ". " + "Did you write \"import ActionCreators from\" instead of \"import * as ActionCreators from\"?");
+  }
+
+  var boundActionCreators = {};
+
+  for (var key in actionCreators) {
+    var actionCreator = actionCreators[key];
+
+    if (typeof actionCreator === 'function') {
+      boundActionCreators[key] = bindActionCreator(actionCreator, dispatch);
+    }
+  }
+
+  return boundActionCreators;
+}
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+function ownKeys(object, enumerableOnly) {
+  var keys = Object.keys(object);
+
+  if (Object.getOwnPropertySymbols) {
+    keys.push.apply(keys, Object.getOwnPropertySymbols(object));
+  }
+
+  if (enumerableOnly) keys = keys.filter(function (sym) {
+    return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+  });
+  return keys;
+}
+
+function _objectSpread2(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    if (i % 2) {
+      ownKeys(source, true).forEach(function (key) {
+        _defineProperty(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys(source).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+  }
+
+  return target;
+}
+
+/**
+ * Composes single-argument functions from right to left. The rightmost
+ * function can take multiple arguments as it provides the signature for
+ * the resulting composite function.
+ *
+ * @param {...Function} funcs The functions to compose.
+ * @returns {Function} A function obtained by composing the argument functions
+ * from right to left. For example, compose(f, g, h) is identical to doing
+ * (...args) => f(g(h(...args))).
+ */
+function compose() {
+  for (var _len = arguments.length, funcs = new Array(_len), _key = 0; _key < _len; _key++) {
+    funcs[_key] = arguments[_key];
+  }
+
+  if (funcs.length === 0) {
+    return function (arg) {
+      return arg;
+    };
+  }
+
+  if (funcs.length === 1) {
+    return funcs[0];
+  }
+
+  return funcs.reduce(function (a, b) {
+    return function () {
+      return a(b.apply(void 0, arguments));
+    };
+  });
+}
+
+/**
+ * Creates a store enhancer that applies middleware to the dispatch method
+ * of the Redux store. This is handy for a variety of tasks, such as expressing
+ * asynchronous actions in a concise manner, or logging every action payload.
+ *
+ * See `redux-thunk` package as an example of the Redux middleware.
+ *
+ * Because middleware is potentially asynchronous, this should be the first
+ * store enhancer in the composition chain.
+ *
+ * Note that each middleware will be given the `dispatch` and `getState` functions
+ * as named arguments.
+ *
+ * @param {...Function} middlewares The middleware chain to be applied.
+ * @returns {Function} A store enhancer applying the middleware.
+ */
+
+function applyMiddleware() {
+  for (var _len = arguments.length, middlewares = new Array(_len), _key = 0; _key < _len; _key++) {
+    middlewares[_key] = arguments[_key];
+  }
+
+  return function (createStore) {
+    return function () {
+      var store = createStore.apply(void 0, arguments);
+
+      var _dispatch = function dispatch() {
+        throw new Error('Dispatching while constructing your middleware is not allowed. ' + 'Other middleware would not be applied to this dispatch.');
+      };
+
+      var middlewareAPI = {
+        getState: store.getState,
+        dispatch: function dispatch() {
+          return _dispatch.apply(void 0, arguments);
+        }
+      };
+      var chain = middlewares.map(function (middleware) {
+        return middleware(middlewareAPI);
+      });
+      _dispatch = compose.apply(void 0, chain)(store.dispatch);
+      return _objectSpread2({}, store, {
+        dispatch: _dispatch
+      });
+    };
+  };
+}
+
+/*
+ * This is a dummy function to check if the function name has been altered by minification.
+ * If the function has been minified and NODE_ENV !== 'production', warn the user.
+ */
+
+function isCrushed() {}
+
+if (false) {}
 
 
 
+// EXTERNAL MODULE: external ["wc","tracks"]
+var external_wc_tracks_ = __webpack_require__(18);
 
+// EXTERNAL MODULE: ./client/header/activity-panel/activity-header/index.js
+var activity_header = __webpack_require__(565);
 
+// EXTERNAL MODULE: ./client/dashboard/utils.js
+var utils = __webpack_require__(70);
 
+// EXTERNAL MODULE: ./client/task-list/tasks/payments/methods/index.js + 13 modules
+var methods = __webpack_require__(585);
+
+// CONCATENATED MODULE: ./client/header/activity-panel/panels/help.js
 
 
 /**
@@ -195,167 +916,168 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var SETUP_TASK_HELP_ITEMS_FILTER = 'woocommerce_admin_setup_task_help_items';
+const SETUP_TASK_HELP_ITEMS_FILTER = 'woocommerce_admin_setup_task_help_items';
 
 function getHomeItems() {
   return [{
-    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('Get Support', 'woocommerce-admin'),
+    title: Object(external_wp_i18n_["__"])('Get Support', 'woocommerce-admin'),
     link: 'https://woocommerce.com/my-account/create-a-ticket/'
   }, {
-    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('Home Screen', 'woocommerce-admin'),
+    title: Object(external_wp_i18n_["__"])('Home Screen', 'woocommerce-admin'),
     link: 'https://docs.woocommerce.com/document/home-screen'
   }, {
-    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('Inbox', 'woocommerce-admin'),
+    title: Object(external_wp_i18n_["__"])('Inbox', 'woocommerce-admin'),
     link: 'https://docs.woocommerce.com/document/home-screen/#section-2'
   }, {
-    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('Stats Overview', 'woocommerce-admin'),
+    title: Object(external_wp_i18n_["__"])('Stats Overview', 'woocommerce-admin'),
     link: 'https://docs.woocommerce.com/document/home-screen/#section-4'
   }, {
-    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('Store Management', 'woocommerce-admin'),
+    title: Object(external_wp_i18n_["__"])('Store Management', 'woocommerce-admin'),
     link: 'https://docs.woocommerce.com/document/home-screen/#section-5'
   }, {
-    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('Store Setup Checklist', 'woocommerce-admin'),
+    title: Object(external_wp_i18n_["__"])('Store Setup Checklist', 'woocommerce-admin'),
     link: 'https://docs.woocommerce.com/document/woocommerce-setup-wizard/#store-setup-checklist'
   }];
 }
 
 function getAppearanceItems() {
   return [{
-    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('Showcase your products and tailor your shopping experience using Blocks', 'woocommerce-admin'),
+    title: Object(external_wp_i18n_["__"])('Showcase your products and tailor your shopping experience using Blocks', 'woocommerce-admin'),
     link: 'https://docs.woocommerce.com/document/woocommerce-blocks/?utm_source=help_panel'
   }, {
-    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('Manage Store Notice, Catalog View and Product Images', 'woocommerce-admin'),
+    title: Object(external_wp_i18n_["__"])('Manage Store Notice, Catalog View and Product Images', 'woocommerce-admin'),
     link: 'https://docs.woocommerce.com/document/woocommerce-customizer/?utm_source=help_panel'
   }, {
-    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('How to choose and change a theme', 'woocommerce-admin'),
+    title: Object(external_wp_i18n_["__"])('How to choose and change a theme', 'woocommerce-admin'),
     link: 'https://docs.woocommerce.com/document/choose-change-theme/?utm_source=help_panel'
   }];
 }
 
 function getPaymentsItems(props) {
-  var countryCode = props.countryCode,
-      onboardingStatus = props.onboardingStatus,
-      profileItems = props.profileItems;
-  var paymentMethods = props.getPaymentMethods({
+  const {
+    countryCode,
+    onboardingStatus,
+    profileItems
+  } = props;
+  const paymentMethods = props.getPaymentMethods({
     activePlugins: [],
-    countryCode: countryCode,
-    onboardingStatus: onboardingStatus,
+    countryCode,
+    onboardingStatus,
     options: {},
-    profileItems: profileItems
+    profileItems
   });
 
-  var methodIsVisible = function methodIsVisible(methodKey) {
-    return Boolean(paymentMethods.find(function (method) {
-      return method.key === methodKey;
-    }));
-  };
+  const methodIsVisible = methodKey => Boolean(paymentMethods.find(method => method.key === methodKey));
 
-  var showWCPay = methodIsVisible('wcpay');
-  var showStripe = methodIsVisible('stripe');
-  var showKlarnaCheckout = methodIsVisible('klarna_checkout');
-  var showKlarnaPayments = methodIsVisible('klarna_payments');
-  var showPayPal = methodIsVisible('paypal');
-  var showSquare = methodIsVisible('square');
-  var showPayFast = methodIsVisible('payfast');
-  var showEway = methodIsVisible('eway');
+  const showWCPay = methodIsVisible('wcpay');
+  const showStripe = methodIsVisible('stripe');
+  const showKlarnaCheckout = methodIsVisible('klarna_checkout');
+  const showKlarnaPayments = methodIsVisible('klarna_payments');
+  const showPayPal = methodIsVisible('paypal');
+  const showSquare = methodIsVisible('square');
+  const showPayFast = methodIsVisible('payfast');
+  const showEway = methodIsVisible('eway');
   return [{
-    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('Which Payment Option is Right for Me?', 'woocommerce-admin'),
+    title: Object(external_wp_i18n_["__"])('Which Payment Option is Right for Me?', 'woocommerce-admin'),
     link: 'https://docs.woocommerce.com/document/premium-payment-gateway-extensions/?utm_source=help_panel'
   }, showWCPay && {
-    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('WooCommerce Payments Start Up Guide', 'woocommerce-admin'),
+    title: Object(external_wp_i18n_["__"])('WooCommerce Payments Start Up Guide', 'woocommerce-admin'),
     link: 'https://docs.woocommerce.com/document/payments//?utm_source=help_panel'
   }, showWCPay && {
-    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('WooCommerce Payments FAQs', 'woocommerce-admin'),
+    title: Object(external_wp_i18n_["__"])('WooCommerce Payments FAQs', 'woocommerce-admin'),
     link: 'https://docs.woocommerce.com/documentation/woocommerce-payments/woocommerce-payments-faqs/?utm_source=help_panel'
   }, showStripe && {
-    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('Stripe Setup and Configuration', 'woocommerce-admin'),
+    title: Object(external_wp_i18n_["__"])('Stripe Setup and Configuration', 'woocommerce-admin'),
     link: 'https://docs.woocommerce.com/document/stripe/?utm_source=help_panel'
   }, showPayPal && {
-    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('PayPal Checkout Setup and Configuration', 'woocommerce-admin'),
+    title: Object(external_wp_i18n_["__"])('PayPal Checkout Setup and Configuration', 'woocommerce-admin'),
     link: 'https://docs.woocommerce.com/document/2-0/woocommerce-paypal-payments/#section-3'
   }, showSquare && {
-    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('Square - Get started', 'woocommerce-admin'),
+    title: Object(external_wp_i18n_["__"])('Square - Get started', 'woocommerce-admin'),
     link: 'https://docs.woocommerce.com/document/woocommerce-square/?utm_source=help_panel'
   }, showKlarnaCheckout && {
-    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('Klarna - Introduction', 'woocommerce-admin'),
+    title: Object(external_wp_i18n_["__"])('Klarna - Introduction', 'woocommerce-admin'),
     link: 'https://docs.woocommerce.com/document/klarna-checkout/?utm_source=help_panel'
   }, showKlarnaPayments && {
-    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('Klarna - Introduction', 'woocommerce-admin'),
+    title: Object(external_wp_i18n_["__"])('Klarna - Introduction', 'woocommerce-admin'),
     link: 'https://docs.woocommerce.com/document/klarna-payments/?utm_source=help_panel'
   }, showPayFast && {
-    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('PayFast Setup and Configuration', 'woocommerce-admin'),
+    title: Object(external_wp_i18n_["__"])('PayFast Setup and Configuration', 'woocommerce-admin'),
     link: 'https://docs.woocommerce.com/document/payfast-payment-gateway/?utm_source=help_panel'
   }, showEway && {
-    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('eWAY Setup and Configuration', 'woocommerce-admin'),
+    title: Object(external_wp_i18n_["__"])('eWAY Setup and Configuration', 'woocommerce-admin'),
     link: 'https://docs.woocommerce.com/document/eway/?utm_source=help_panel'
   }, {
-    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('Direct Bank Transfer (BACS)', 'woocommerce-admin'),
+    title: Object(external_wp_i18n_["__"])('Direct Bank Transfer (BACS)', 'woocommerce-admin'),
     link: 'https://docs.woocommerce.com/document/bacs/?utm_source=help_panel'
   }, {
-    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('Cash on Delivery', 'woocommerce-admin'),
+    title: Object(external_wp_i18n_["__"])('Cash on Delivery', 'woocommerce-admin'),
     link: 'https://docs.woocommerce.com/document/cash-on-delivery/?utm_source=help_panel'
   }].filter(Boolean);
 }
 
 function getProductsItems() {
   return [{
-    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('Adding and Managing Products', 'woocommerce-admin'),
+    title: Object(external_wp_i18n_["__"])('Adding and Managing Products', 'woocommerce-admin'),
     link: 'https://docs.woocommerce.com/document/managing-products/?utm_source=help_panel'
   }, {
-    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('Import products using the CSV Importer and Exporter', 'woocommerce-admin'),
+    title: Object(external_wp_i18n_["__"])('Import products using the CSV Importer and Exporter', 'woocommerce-admin'),
     link: 'https://docs.woocommerce.com/document/product-csv-importer-exporter/?utm_source=help_panel'
   }, {
-    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('Migrate products using Cart2Cart', 'woocommerce-admin'),
+    title: Object(external_wp_i18n_["__"])('Migrate products using Cart2Cart', 'woocommerce-admin'),
     link: 'https://woocommerce.com/products/cart2cart/?utm_source=help_panel'
   }, {
-    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('Learn more about setting up products', 'woocommerce-admin'),
+    title: Object(external_wp_i18n_["__"])('Learn more about setting up products', 'woocommerce-admin'),
     link: 'https://docs.woocommerce.com/documentation/plugins/woocommerce/getting-started/setup-products/?utm_source=help_panel'
   }];
 }
 
-function getShippingItems(_ref) {
-  var activePlugins = _ref.activePlugins,
-      countryCode = _ref.countryCode;
-  var showWCS = countryCode === 'US' && !activePlugins.includes('woocommerce-services');
+function getShippingItems({
+  activePlugins,
+  countryCode
+}) {
+  const showWCS = countryCode === 'US' && !activePlugins.includes('woocommerce-services');
   return [{
-    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('Setting up Shipping Zones', 'woocommerce-admin'),
+    title: Object(external_wp_i18n_["__"])('Setting up Shipping Zones', 'woocommerce-admin'),
     link: 'https://docs.woocommerce.com/document/setting-up-shipping-zones/?utm_source=help_panel'
   }, {
-    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('Core Shipping Options', 'woocommerce-admin'),
+    title: Object(external_wp_i18n_["__"])('Core Shipping Options', 'woocommerce-admin'),
     link: 'https://docs.woocommerce.com/documentation/plugins/woocommerce/getting-started/shipping/core-shipping-options/?utm_source=help_panel'
   }, {
-    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('Product Shipping Classes', 'woocommerce-admin'),
+    title: Object(external_wp_i18n_["__"])('Product Shipping Classes', 'woocommerce-admin'),
     link: 'https://docs.woocommerce.com/document/product-shipping-classes/?utm_source=help_panel'
   }, showWCS && {
-    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('WooCommerce Shipping setup and configuration', 'woocommerce-admin'),
+    title: Object(external_wp_i18n_["__"])('WooCommerce Shipping setup and configuration', 'woocommerce-admin'),
     link: 'https://docs.woocommerce.com/document/woocommerce-services/#section-3/?utm_source=help_panel'
   }, {
-    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('Learn more about configuring your shipping settings', 'woocommerce-admin'),
+    title: Object(external_wp_i18n_["__"])('Learn more about configuring your shipping settings', 'woocommerce-admin'),
     link: 'https://docs.woocommerce.com/documentation/plugins/woocommerce/getting-started/shipping/?utm_source=help_panel'
   }].filter(Boolean);
 }
 
 function getTaxItems(props) {
-  var countryCode = props.countryCode;
-
-  var _props$getSetting = props.getSetting('onboarding', {}),
-      _props$getSetting$aut = _props$getSetting.automatedTaxSupportedCountries,
-      automatedTaxSupportedCountries = _props$getSetting$aut === void 0 ? [] : _props$getSetting$aut,
-      taxJarActivated = _props$getSetting.taxJarActivated;
-
-  var showWCS = !taxJarActivated && // WCS integration doesn't work with the official TaxJar plugin.
+  const {
+    countryCode
+  } = props;
+  const {
+    automatedTaxSupportedCountries = [],
+    taxJarActivated
+  } = props.getSetting('onboarding', {});
+  const showWCS = !taxJarActivated && // WCS integration doesn't work with the official TaxJar plugin.
   automatedTaxSupportedCountries.includes(countryCode);
   return [{
-    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('Setting up Taxes in WooCommerce', 'woocommerce-admin'),
+    title: Object(external_wp_i18n_["__"])('Setting up Taxes in WooCommerce', 'woocommerce-admin'),
     link: 'https://docs.woocommerce.com/document/setting-up-taxes-in-woocommerce/?utm_source=help_panel'
   }, showWCS && {
-    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('Automated Tax calculation using WooCommerce Tax', 'woocommerce-admin'),
+    title: Object(external_wp_i18n_["__"])('Automated Tax calculation using WooCommerce Tax', 'woocommerce-admin'),
     link: 'https://docs.woocommerce.com/document/woocommerce-services/?utm_source=help_panel#section-10'
   }].filter(Boolean);
 }
 
 function getItems(props) {
-  var taskName = props.taskName;
+  const {
+    taskName
+  } = props;
 
   switch (taskName) {
     case 'products':
@@ -379,7 +1101,9 @@ function getItems(props) {
 }
 
 function handleOnItemClick(props, event) {
-  var taskName = props.taskName; // event isn't initially set when triggering link with the keyboard.
+  const {
+    taskName
+  } = props; // event isn't initially set when triggering link with the keyboard.
 
   if (!event) {
     return;
@@ -392,87 +1116,87 @@ function handleOnItemClick(props, event) {
 }
 
 function getListItems(props) {
-  var itemsByType = getItems(props);
-  var genericDocsLink = {
-    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('WooCommerce Docs', 'woocommerce-admin'),
+  const itemsByType = getItems(props);
+  const genericDocsLink = {
+    title: Object(external_wp_i18n_["__"])('WooCommerce Docs', 'woocommerce-admin'),
     link: 'https://docs.woocommerce.com/?utm_source=help_panel'
   };
   itemsByType.push(genericDocsLink);
-  var filteredItems = Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_10__["applyFilters"])(SETUP_TASK_HELP_ITEMS_FILTER, itemsByType, props.taskName, props); // Filter out items that aren't objects without `title` and `link` properties.
+  const filteredItems = Object(external_wp_hooks_["applyFilters"])(SETUP_TASK_HELP_ITEMS_FILTER, itemsByType, props.taskName, props); // Filter out items that aren't objects without `title` and `link` properties.
 
-  var validatedItems = Array.isArray(filteredItems) ? filteredItems.filter(function (item) {
-    return item instanceof Object && item.title && item.link;
-  }) : []; // Default empty array to the generic docs link.
+  let validatedItems = Array.isArray(filteredItems) ? filteredItems.filter(item => item instanceof Object && item.title && item.link) : []; // Default empty array to the generic docs link.
 
   if (!validatedItems.length) {
     validatedItems = [genericDocsLink];
   }
 
-  var onClick = Object(lodash__WEBPACK_IMPORTED_MODULE_14__["partial"])(handleOnItemClick, props);
-  return validatedItems.map(function (item) {
-    return {
-      title: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_woocommerce_experimental__WEBPACK_IMPORTED_MODULE_8__[/* Text */ "e"], {
-        as: "div",
-        variant: "button"
-      }, item.title),
-      before: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_icons__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"], {
-        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_12__[/* default */ "a"]
-      }),
-      after: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_icons__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"], {
-        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_13__[/* default */ "a"]
-      }),
-      linkType: 'external',
-      target: '_blank',
-      href: item.link,
-      onClick: onClick
-    };
-  });
+  const onClick = Object(external_lodash_["partial"])(handleOnItemClick, props);
+  return validatedItems.map(item => ({
+    title: Object(external_wp_element_["createElement"])(external_wc_experimental_["Text"], {
+      as: "div",
+      variant: "button",
+      weight: "600",
+      size: "14",
+      lineHeight: "20px"
+    }, item.title),
+    before: Object(external_wp_element_["createElement"])(icon["a" /* default */], {
+      icon: page["a" /* default */]
+    }),
+    after: Object(external_wp_element_["createElement"])(icon["a" /* default */], {
+      icon: chevron_right["a" /* default */]
+    }),
+    linkType: 'external',
+    target: '_blank',
+    href: item.link,
+    onClick
+  }));
 }
 
-var HelpPanel = function HelpPanel(props) {
-  var taskName = props.taskName;
-  Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+const HelpPanel = props => {
+  const {
+    taskName
+  } = props;
+  Object(external_wp_element_["useEffect"])(() => {
     props.recordEvent('help_panel_open', {
       task_name: taskName || 'homescreen'
     });
   }, [taskName]);
-  var listItems = getListItems(props);
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_activity_header__WEBPACK_IMPORTED_MODULE_20__[/* default */ "a"], {
-    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('Documentation', 'woocommerce-admin')
-  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_woocommerce_components__WEBPACK_IMPORTED_MODULE_16__["Section"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_woocommerce_components__WEBPACK_IMPORTED_MODULE_16__["List"], {
+  const listItems = getListItems(props);
+  return Object(external_wp_element_["createElement"])(external_wp_element_["Fragment"], null, Object(external_wp_element_["createElement"])(activity_header["a" /* default */], {
+    title: Object(external_wp_i18n_["__"])('Documentation', 'woocommerce-admin')
+  }), Object(external_wp_element_["createElement"])(external_wc_components_["Section"], null, Object(external_wp_element_["createElement"])(external_wc_components_["List"], {
     items: listItems,
     className: "woocommerce-quick-links__list"
   })));
 };
 HelpPanel.defaultProps = {
-  getPaymentMethods: _task_list_tasks_payments_methods__WEBPACK_IMPORTED_MODULE_22__[/* getPaymentMethods */ "a"],
-  getSetting: _woocommerce_wc_admin_settings__WEBPACK_IMPORTED_MODULE_15__[/* getSetting */ "g"],
-  recordEvent: _woocommerce_tracks__WEBPACK_IMPORTED_MODULE_19__["recordEvent"]
+  getPaymentMethods: methods["a" /* getPaymentMethods */],
+  getSetting: wc_admin_settings["h" /* getSetting */],
+  recordEvent: external_wc_tracks_["recordEvent"]
 };
-/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_18__[/* compose */ "a"])(Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_9__["withSelect"])(function (select) {
-  var _select = select(_woocommerce_data__WEBPACK_IMPORTED_MODULE_17__["ONBOARDING_STORE_NAME"]),
-      getProfileItems = _select.getProfileItems,
-      getTasksStatus = _select.getTasksStatus;
-
-  var _select2 = select(_woocommerce_data__WEBPACK_IMPORTED_MODULE_17__["SETTINGS_STORE_NAME"]),
-      getSettings = _select2.getSettings;
-
-  var _select3 = select(_woocommerce_data__WEBPACK_IMPORTED_MODULE_17__["PLUGINS_STORE_NAME"]),
-      getActivePlugins = _select3.getActivePlugins;
-
-  var _getSettings = getSettings('general'),
-      _getSettings$general = _getSettings.general,
-      generalSettings = _getSettings$general === void 0 ? {} : _getSettings$general;
-
-  var activePlugins = getActivePlugins();
-  var onboardingStatus = getTasksStatus();
-  var profileItems = getProfileItems();
-  var countryCode = Object(_dashboard_utils__WEBPACK_IMPORTED_MODULE_21__[/* getCountryCode */ "b"])(generalSettings.woocommerce_default_country);
+/* harmony default export */ var help = __webpack_exports__["default"] = (compose(Object(external_wp_data_["withSelect"])(select => {
+  const {
+    getProfileItems,
+    getTasksStatus
+  } = select(external_wc_data_["ONBOARDING_STORE_NAME"]);
+  const {
+    getSettings
+  } = select(external_wc_data_["SETTINGS_STORE_NAME"]);
+  const {
+    getActivePlugins
+  } = select(external_wc_data_["PLUGINS_STORE_NAME"]);
+  const {
+    general: generalSettings = {}
+  } = getSettings('general');
+  const activePlugins = getActivePlugins();
+  const onboardingStatus = getTasksStatus();
+  const profileItems = getProfileItems();
+  const countryCode = Object(utils["b" /* getCountryCode */])(generalSettings.woocommerce_default_country);
   return {
-    activePlugins: activePlugins,
-    countryCode: countryCode,
-    onboardingStatus: onboardingStatus,
-    profileItems: profileItems
+    activePlugins,
+    countryCode,
+    onboardingStatus,
+    profileItems
   };
 }))(HelpPanel));
 

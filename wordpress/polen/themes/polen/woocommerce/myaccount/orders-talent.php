@@ -10,6 +10,7 @@ if (in_array('user_talent',  $logged_user->roles)) {
 	$talent_id = $logged_user->ID;
 	$talent_orders = $polen_talent->get_talent_orders($talent_id);
 	$video_time = $polen_talent->video_time;
+	$count_total = $polen_talent->get_talent_orders($talent_id, false, true );
 }
 
 ?>
@@ -28,7 +29,7 @@ if (in_array('user_talent',  $logged_user->roles)) {
 			</div>
 			<?php
 		} else {
-			echo "<p class='mt-2 mb-4'>Você tem <strong><span id='order-count'>" . count($talent_orders) . "</span> pedido(s) de vídeo</strong>, seus pedidos expiram em até 7 dias.</p>";
+			echo "<p class='mt-2 mb-4'>Você tem <strong><span id='order-count'>" . $count_total['qtd'] . "</span> pedido(s) de vídeo</strong>, seus pedidos expiram em até 7 dias.</p>";
 			if (count($talent_orders) > 0) {
 				foreach ($talent_orders as $order) : 
 					$total_order_value = $order['total_raw'];
@@ -48,7 +49,7 @@ if (in_array('user_talent',  $logged_user->roles)) {
 												</div>
 											<?php endif; ?>
 											<div class="col-12 col-md-12">
-												<p class="p">Para</p>
+												<p class="p">Para <?php echo ( ENV_DEV === true ) ? '(ID: ' . $order['order_id'] . ')' : ''; ?></p>
 												<p class="value small"><?php echo $order['name']; ?></p>
 											</div>
 										</div>

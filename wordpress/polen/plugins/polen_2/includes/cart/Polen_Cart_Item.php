@@ -87,6 +87,25 @@ class Polen_Cart_Item
     {
         return $this->item->get_meta( 'instructions_to_video' );
     }
+
+
+    /**
+     * Pega o Item Order da Compra
+     */
+    public function get_item_order()
+    {
+        return $this->item;
+    }
+    
+    
+    /**
+     * Retorna se a compra é referente a primeira compra
+     * @return string
+     */
+    public function get_first_order()
+    {
+        return $this->item->get_meta( 'first_order' );
+    }
     
     
     /**

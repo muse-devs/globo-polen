@@ -485,7 +485,11 @@ abstract class AbstractProductGrid extends AbstractDynamicBlock {
 			'class'            => 'wp-block-button__link add_to_cart_button',
 		);
 
-		if ( $product->supports( 'ajax_add_to_cart' ) ) {
+		if (
+			$product->supports( 'ajax_add_to_cart' ) &&
+			$product->is_purchasable() &&
+			( $product->is_in_stock() || $product->backorders_allowed() )
+		) {
 			$attributes['class'] .= ' ajax_add_to_cart';
 		}
 
@@ -495,5 +499,22 @@ abstract class AbstractProductGrid extends AbstractDynamicBlock {
 			wc_implode_html_attributes( $attributes ),
 			esc_html( $product->add_to_cart_text() )
 		);
+	}
+
+	/**
+	 * Extra data passed through from server to client for block.
+	 *
+	 * @param array $attributes  Any attributes that currently are available from the block.
+	 *                           Note, this will be empty in the editor context when the block is
+	 *                           not in the post content on editor load.
+	 */
+	protected function enqueue_data( array $attributes = [] ) {
+		parent::enqueue_data( $attributes );
+		$this->asset_data_registry->add( 'min_columns', wc_get_theme_support( 'product_blocks::min_columns', 1 ), true );
+		$this->asset_data_registry->add( 'max_columns', wc_get_theme_support( 'product_blocks::max_columns', 6 ), true );
+		$this->asset_data_registry->add( 'default_columns', wc_get_theme_support( 'product_blocks::default_columns', 3 ), true );
+		$this->asset_data_registry->add( 'min_rows', wc_get_theme_support( 'product_blocks::min_rows', 1 ), true );
+		$this->asset_data_registry->add( 'max_rows', wc_get_theme_support( 'product_blocks::max_rows', 6 ), true );
+		$this->asset_data_registry->add( 'default_rows', wc_get_theme_support( 'product_blocks::default_rows', 3 ), true );
 	}
 }

@@ -1,12 +1,12 @@
 (window["__wcAdmin_webpackJsonp"] = window["__wcAdmin_webpackJsonp"] || []).push([[4],{
 
-/***/ 608:
+/***/ 640:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* unused harmony export ALLOWED_TAGS */
 /* unused harmony export ALLOWED_ATTR */
-/* harmony import */ var dompurify__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(321);
+/* harmony import */ var dompurify__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(324);
 /* harmony import */ var dompurify__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(dompurify__WEBPACK_IMPORTED_MODULE_0__);
 /**
  * External dependencies
@@ -25,7 +25,7 @@ var ALLOWED_ATTR = ['target', 'href', 'rel', 'name', 'download'];
 
 /***/ }),
 
-/***/ 611:
+/***/ 644:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -35,36 +35,36 @@ __webpack_require__.d(__webpack_exports__, "a", function() { return /* binding *
 __webpack_require__.d(__webpack_exports__, "b", function() { return /* reexport */ placeholder; });
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.reflect.construct.js
-var es_reflect_construct = __webpack_require__(64);
+var es_reflect_construct = __webpack_require__(174);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/classCallCheck.js
-var classCallCheck = __webpack_require__(22);
+var classCallCheck = __webpack_require__(13);
 var classCallCheck_default = /*#__PURE__*/__webpack_require__.n(classCallCheck);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/createClass.js
-var createClass = __webpack_require__(23);
+var createClass = __webpack_require__(14);
 var createClass_default = /*#__PURE__*/__webpack_require__.n(createClass);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/inherits.js
-var inherits = __webpack_require__(24);
+var inherits = __webpack_require__(16);
 var inherits_default = /*#__PURE__*/__webpack_require__.n(inherits);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js
-var possibleConstructorReturn = __webpack_require__(25);
+var possibleConstructorReturn = __webpack_require__(17);
 var possibleConstructorReturn_default = /*#__PURE__*/__webpack_require__.n(possibleConstructorReturn);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/getPrototypeOf.js
-var getPrototypeOf = __webpack_require__(14);
+var getPrototypeOf = __webpack_require__(7);
 var getPrototypeOf_default = /*#__PURE__*/__webpack_require__.n(getPrototypeOf);
 
 // EXTERNAL MODULE: external ["wp","element"]
 var external_wp_element_ = __webpack_require__(0);
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.map.js
-var es_array_map = __webpack_require__(51);
+var es_array_map = __webpack_require__(117);
 
 // EXTERNAL MODULE: ./node_modules/classnames/index.js
-var classnames = __webpack_require__(15);
+var classnames = __webpack_require__(9);
 var classnames_default = /*#__PURE__*/__webpack_require__.n(classnames);
 
 // EXTERNAL MODULE: ./node_modules/gridicons/dist/notice-outline.js
@@ -72,7 +72,7 @@ var notice_outline = __webpack_require__(325);
 var notice_outline_default = /*#__PURE__*/__webpack_require__.n(notice_outline);
 
 // EXTERNAL MODULE: external "moment"
-var external_moment_ = __webpack_require__(29);
+var external_moment_ = __webpack_require__(21);
 var external_moment_default = /*#__PURE__*/__webpack_require__.n(external_moment_);
 
 // EXTERNAL MODULE: ./node_modules/prop-types/index.js
@@ -80,16 +80,16 @@ var prop_types = __webpack_require__(1);
 var prop_types_default = /*#__PURE__*/__webpack_require__.n(prop_types);
 
 // EXTERNAL MODULE: external ["wc","components"]
-var external_wc_components_ = __webpack_require__(145);
+var external_wc_components_ = __webpack_require__(112);
 
 // EXTERNAL MODULE: external ["wp","components"]
-var external_wp_components_ = __webpack_require__(4);
+var external_wp_components_ = __webpack_require__(5);
 
 // EXTERNAL MODULE: ./client/header/activity-panel/activity-card/style.scss
-var style = __webpack_require__(642);
+var style = __webpack_require__(679);
 
 // EXTERNAL MODULE: external "lodash"
-var external_lodash_ = __webpack_require__(5);
+var external_lodash_ = __webpack_require__(3);
 
 // CONCATENATED MODULE: ./client/header/activity-panel/activity-card/placeholder.js
 
@@ -317,21 +317,104 @@ activity_card_ActivityCard.defaultProps = {
 
 /***/ }),
 
-/***/ 642:
+/***/ 668:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export getUrlParams */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return getScreenName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return sift; });
+/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(118);
+/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_string_split_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(238);
+/* harmony import */ var core_js_modules_es_string_split_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_split_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(257);
+/* harmony import */ var core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_string_search_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(253);
+/* harmony import */ var core_js_modules_es_string_search_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_search_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_string_replace_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(159);
+/* harmony import */ var core_js_modules_es_string_replace_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_replace_js__WEBPACK_IMPORTED_MODULE_4__);
+
+
+
+
+
+
+/**
+ * Get the URL params.
+ *
+ * @param {string} locationSearch - Querystring part of a URL, including the question mark (?).
+ * @return {Object} - URL params.
+ */
+function getUrlParams(locationSearch) {
+  if (locationSearch) {
+    return locationSearch.substr(1).split('&').reduce(function (params, query) {
+      var chunks = query.split('=');
+      var key = chunks[0];
+      var value = decodeURIComponent(chunks[1]);
+      value = isNaN(Number(value)) ? value : Number(value);
+      return params[key] = value, params;
+    }, {});
+  }
+
+  return {};
+}
+/**
+ * Get the current screen name.
+ *
+ * @return {string} - Screen name.
+ */
+
+function getScreenName() {
+  var screenName = '';
+
+  var _getUrlParams = getUrlParams(window.location.search),
+      page = _getUrlParams.page,
+      path = _getUrlParams.path,
+      postType = _getUrlParams.post_type;
+
+  if (page) {
+    var currentPage = page === 'wc-admin' ? 'home_screen' : page;
+    screenName = path ? path.replace(/\//g, '_').substring(1) : currentPage;
+  } else if (postType) {
+    screenName = postType;
+  }
+
+  return screenName;
+}
+/**
+ * Similar to filter, but return two arrays separated by a partitioner function
+ *
+ * @param {Array} arr - Original array of values.
+ * @param {Function} partitioner - Function to return truthy/falsy values to separate items in array.
+ *
+ * @return {Array} - Array of two arrays, first including truthy values, and second including falsy.
+ */
+
+var sift = function sift(arr, partitioner) {
+  return arr.reduce(function (all, curr) {
+    all[!!partitioner(curr) ? 0 : 1].push(curr);
+    return all;
+  }, [[], []]);
+};
+
+/***/ }),
+
+/***/ 679:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ 646:
+/***/ 685:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ 689:
+/***/ 733:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -339,67 +422,67 @@ activity_card_ActivityCard.defaultProps = {
 __webpack_require__.r(__webpack_exports__);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/slicedToArray.js
-var slicedToArray = __webpack_require__(43);
+var slicedToArray = __webpack_require__(30);
 var slicedToArray_default = /*#__PURE__*/__webpack_require__.n(slicedToArray);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/objectWithoutProperties.js
-var objectWithoutProperties = __webpack_require__(116);
+var objectWithoutProperties = __webpack_require__(66);
 var objectWithoutProperties_default = /*#__PURE__*/__webpack_require__.n(objectWithoutProperties);
 
 // EXTERNAL MODULE: external ["wp","element"]
 var external_wp_element_ = __webpack_require__(0);
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.map.js
-var es_array_map = __webpack_require__(51);
+var es_array_map = __webpack_require__(117);
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.keys.js
-var es_object_keys = __webpack_require__(37);
+var es_object_keys = __webpack_require__(83);
 
 // EXTERNAL MODULE: external ["wp","i18n"]
 var external_wp_i18n_ = __webpack_require__(2);
 
 // EXTERNAL MODULE: external ["wp","compose"]
-var external_wp_compose_ = __webpack_require__(65);
+var external_wp_compose_ = __webpack_require__(34);
 
 // EXTERNAL MODULE: external ["wc","components"]
-var external_wc_components_ = __webpack_require__(145);
+var external_wc_components_ = __webpack_require__(112);
 
 // EXTERNAL MODULE: external ["wc","data"]
-var external_wc_data_ = __webpack_require__(59);
+var external_wc_data_ = __webpack_require__(33);
 
 // EXTERNAL MODULE: external ["wp","data"]
-var external_wp_data_ = __webpack_require__(26);
+var external_wp_data_ = __webpack_require__(15);
 
 // EXTERNAL MODULE: ./node_modules/react-transition-group/esm/TransitionGroup.js + 2 modules
-var TransitionGroup = __webpack_require__(417);
+var TransitionGroup = __webpack_require__(444);
 
 // EXTERNAL MODULE: ./node_modules/react-transition-group/esm/CSSTransition.js + 5 modules
-var CSSTransition = __webpack_require__(416);
+var CSSTransition = __webpack_require__(443);
 
 // EXTERNAL MODULE: ./client/header/activity-panel/activity-card/index.js + 1 modules
-var activity_card = __webpack_require__(611);
+var activity_card = __webpack_require__(644);
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.reflect.construct.js
-var es_reflect_construct = __webpack_require__(64);
+var es_reflect_construct = __webpack_require__(174);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/classCallCheck.js
-var classCallCheck = __webpack_require__(22);
+var classCallCheck = __webpack_require__(13);
 var classCallCheck_default = /*#__PURE__*/__webpack_require__.n(classCallCheck);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/createClass.js
-var createClass = __webpack_require__(23);
+var createClass = __webpack_require__(14);
 var createClass_default = /*#__PURE__*/__webpack_require__.n(createClass);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/inherits.js
-var inherits = __webpack_require__(24);
+var inherits = __webpack_require__(16);
 var inherits_default = /*#__PURE__*/__webpack_require__.n(inherits);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js
-var possibleConstructorReturn = __webpack_require__(25);
+var possibleConstructorReturn = __webpack_require__(17);
 var possibleConstructorReturn_default = /*#__PURE__*/__webpack_require__.n(possibleConstructorReturn);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/getPrototypeOf.js
-var getPrototypeOf = __webpack_require__(14);
+var getPrototypeOf = __webpack_require__(7);
 var getPrototypeOf_default = /*#__PURE__*/__webpack_require__.n(getPrototypeOf);
 
 // EXTERNAL MODULE: ./node_modules/prop-types/index.js
@@ -481,45 +564,45 @@ placeholder_InboxNotePlaceholder.propTypes = {
 };
 /* harmony default export */ var placeholder = (placeholder_InboxNotePlaceholder);
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/assertThisInitialized.js
-var assertThisInitialized = __webpack_require__(18);
+var assertThisInitialized = __webpack_require__(10);
 var assertThisInitialized_default = /*#__PURE__*/__webpack_require__.n(assertThisInitialized);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/defineProperty.js
-var defineProperty = __webpack_require__(7);
+var defineProperty = __webpack_require__(4);
 var defineProperty_default = /*#__PURE__*/__webpack_require__.n(defineProperty);
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.function.name.js
-var es_function_name = __webpack_require__(129);
+var es_function_name = __webpack_require__(276);
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.includes.js
-var es_array_includes = __webpack_require__(107);
+var es_array_includes = __webpack_require__(108);
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.includes.js
-var es_string_includes = __webpack_require__(140);
+var es_string_includes = __webpack_require__(205);
 
 // EXTERNAL MODULE: external ["wp","components"]
-var external_wp_components_ = __webpack_require__(4);
+var external_wp_components_ = __webpack_require__(5);
 
 // EXTERNAL MODULE: ./node_modules/react-visibility-sensor/dist/visibility-sensor.js
-var visibility_sensor = __webpack_require__(631);
+var visibility_sensor = __webpack_require__(666);
 var visibility_sensor_default = /*#__PURE__*/__webpack_require__.n(visibility_sensor);
 
 // EXTERNAL MODULE: external "moment"
-var external_moment_ = __webpack_require__(29);
+var external_moment_ = __webpack_require__(21);
 var external_moment_default = /*#__PURE__*/__webpack_require__.n(external_moment_);
 
 // EXTERNAL MODULE: ./node_modules/classnames/index.js
-var classnames = __webpack_require__(15);
+var classnames = __webpack_require__(9);
 var classnames_default = /*#__PURE__*/__webpack_require__.n(classnames);
 
 // EXTERNAL MODULE: external ["wc","tracks"]
-var external_wc_tracks_ = __webpack_require__(92);
+var external_wc_tracks_ = __webpack_require__(44);
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.starts-with.js
-var es_string_starts_with = __webpack_require__(632);
+var es_string_starts_with = __webpack_require__(667);
 
 // EXTERNAL MODULE: ./client/wc-admin-settings/index.js
-var wc_admin_settings = __webpack_require__(85);
+var wc_admin_settings = __webpack_require__(42);
 
 // CONCATENATED MODULE: ./client/inbox-panel/action.js
 
@@ -693,75 +776,14 @@ action_InboxNoteAction.propTypes = {
   };
 }))(action_InboxNoteAction));
 // EXTERNAL MODULE: ./client/lib/sanitize-html/index.js
-var sanitize_html = __webpack_require__(608);
+var sanitize_html = __webpack_require__(640);
 
 // EXTERNAL MODULE: ./client/inbox-panel/style.scss
-var style = __webpack_require__(646);
+var style = __webpack_require__(685);
 
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.split.js
-var es_string_split = __webpack_require__(177);
+// EXTERNAL MODULE: ./client/utils/index.js
+var utils = __webpack_require__(668);
 
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.regexp.exec.js
-var es_regexp_exec = __webpack_require__(88);
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.number.constructor.js
-var es_number_constructor = __webpack_require__(178);
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.search.js
-var es_string_search = __webpack_require__(170);
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.replace.js
-var es_string_replace = __webpack_require__(135);
-
-// CONCATENATED MODULE: ./client/utils/index.js
-
-
-
-
-
-
-/**
- * Get the URL params.
- *
- * @param {string} locationSearch - Querystring part of a URL, including the question mark (?).
- * @return {Object} - URL params.
- */
-function getUrlParams(locationSearch) {
-  if (locationSearch) {
-    return locationSearch.substr(1).split('&').reduce(function (params, query) {
-      var chunks = query.split('=');
-      var key = chunks[0];
-      var value = decodeURIComponent(chunks[1]);
-      value = isNaN(Number(value)) ? value : Number(value);
-      return params[key] = value, params;
-    }, {});
-  }
-
-  return {};
-}
-/**
- * Get the current screen name.
- *
- * @return {string} - Screen name.
- */
-
-function getScreenName() {
-  var screenName = '';
-
-  var _getUrlParams = getUrlParams(window.location.search),
-      page = _getUrlParams.page,
-      path = _getUrlParams.path,
-      postType = _getUrlParams.post_type;
-
-  if (page) {
-    var currentPage = page === 'wc-admin' ? 'home_screen' : page;
-    screenName = path ? path.replace(/\//g, '_').substring(1) : currentPage;
-  } else if (postType) {
-    screenName = postType;
-  }
-
-  return screenName;
-}
 // CONCATENATED MODULE: ./client/inbox-panel/card.js
 
 
@@ -835,7 +857,7 @@ var card_InboxNoteCard = /*#__PURE__*/function (_Component) {
     _this.closeDismissModal = _this.closeDismissModal.bind(assertThisInitialized_default()(_this));
     _this.bodyNotificationRef = Object(external_wp_element_["createRef"])();
     _this.toggleButtonRef = Object(external_wp_element_["createRef"])();
-    _this.screen = getScreenName();
+    _this.screen = Object(utils["a" /* getScreenName */])();
     return _this;
   }
 
@@ -1132,7 +1154,7 @@ card_InboxNoteCard.propTypes = {
 };
 /* harmony default export */ var card = (card_InboxNoteCard);
 // EXTERNAL MODULE: ./client/inbox-panel/utils.js
-var utils = __webpack_require__(332);
+var inbox_panel_utils = __webpack_require__(336);
 
 // CONCATENATED MODULE: ./client/inbox-panel/index.js
 
@@ -1247,7 +1269,7 @@ var inbox_panel_InboxPanel = function InboxPanel(props) {
     });
   }
 
-  var hasNotes = Object(utils["b" /* hasValidNotes */])(notes); // @todo After having a pagination implemented we should call the method "getNotes" with a different query since
+  var hasNotes = Object(inbox_panel_utils["b" /* hasValidNotes */])(notes); // @todo After having a pagination implemented we should call the method "getNotes" with a different query since
   // the current one is only getting 25 notes and the count of unread notes only will refer to this 25 and not all the existing ones.
 
   return Object(external_wp_element_["createElement"])(external_wp_element_["Fragment"], null, Object(external_wp_element_["createElement"])("div", {

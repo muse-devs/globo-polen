@@ -7,6 +7,8 @@
 
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
 use Polen\Includes\Polen_Video_Info;
+use Polen\Tributes\Tributes_Model;
+use Polen\Tributes\Tributes_Rewrite_Rules;
 
 /**
  * Adds custom classes to the array of body classes.
@@ -29,6 +31,29 @@ function polen_body_classes( $classes ) {
 }
 add_filter( 'body_class', 'polen_body_classes' );
 
+
+function polen_get_header_objects()
+{
+	?>
+	<script>
+		var polenObj = {
+			base_url: '<?= site_url(); ?>',
+			developer: <?php echo DEVELOPER ? 1 : 0; ?>,
+			ajax_url: "/wp-admin/admin-ajax.php",
+			COOKIES: <?php echo json_encode(POL_COOKIES); ?>
+		};
+		if (!polenObj.developer) {
+			console = {
+				debug: function() {},
+				error: function() {},
+				info: function() {},
+				log: function() {},
+				warn: function() {},
+			};
+		}
+	</script>
+	<?php
+}
 
 /**
  * Responsible to return a link for all talents
@@ -219,9 +244,9 @@ function polen_get_querystring_redirect()
 
 /**
  * Se o email que será enviado for para um Talento
- * será mostrado o Valor Total sem desconto só é tratado nessa funcao 
+ * será mostrado o Valor Total sem desconto só é tratado nessa funcao
  * emails Polen\Includes\Polen_WC_Payment_Approved
- * 
+ *
  * @param WC_Order
  * @param \WC_Email
  */
@@ -243,7 +268,7 @@ function polen_get_total_order_email_detail_to_talent( $order, $email )
 /**
  * Aplica a parte da polen no valor de entrada (valor produto)
  * 25%
- * 
+ *
  * @param float $full_price
  */
 function polen_apply_polen_part_price( $full_price )
@@ -260,6 +285,7 @@ if ( ! in_array( 'all-in-one-seo-pack/all_in_one_seo_pack.php', apply_filters( '
 	add_action( 'wp_head', function() {
 		global $post;
 		global $is_video;
+		$tribute_app = get_query_var( Tributes_Rewrite_Rules::TRIBUTES_QUERY_VAR_TRUBITES_APP );
 
 		$video_hash = get_query_var( 'video_hash' );
 		if( !empty( $post ) && $post->post_type == 'product' ) {
@@ -313,6 +339,31 @@ if ( ! in_array( 'all-in-one-seo-pack/all_in_one_seo_pack.php', apply_filters( '
 				echo "\t" . '<meta property="og:image" content="' . polen_get_custom_logo_url() . '">' . "\n";
 			}
 			echo "\n";
+		} elseif( !empty( $tribute_app ) && $tribute_app == '1' ) {
+			$tribute_operation = get_query_var( Tributes_Rewrite_Rules::TRIBUTES_QUERY_VAR_TRIBUTES_OPERAION );
+			if( $tribute_operation == Tributes_Rewrite_Rules::TRIBUTES_OPERATION_VIDEOPLAY ) {
+				$slug_tribute = get_query_var( Tributes_Rewrite_Rules::TRIBUTES_QUERY_VAR_TRIBUTES_VIDEOPLAY );
+				$tribute = Tributes_Model::get_by_slug( $slug_tribute );
+				echo "\n\n";
+				echo "\t" . '<meta property="og:title" content="Colab">' . "\n";
+				echo "\t" . '<meta property="og:description" content="' . $tribute->welcome_message . '">' . "\n";
+				echo "\t" . '<meta property="og:url" content="' . tribute_get_url_final_video( $slug_tribute ) . '">' . "\n";
+				echo "\t" . '<meta property="og:locale" content="' . get_locale() . '">' . "\n";
+				echo "\t" . '<meta property="og:site_name" content="Colab">' . "\n";
+				echo "\t" . '<meta property="og:video" content="' . $tribute->vimeo_link . '">' . "\n";
+				echo "\t" . '<meta property="og:image" content="' . $tribute->vimeo_thumbnail . '">' . "\n";
+				echo "\n";
+			} else {
+				echo "\n\n";
+				echo "\t" . '<meta property="og:title" content="Colab">' . "\n";
+				echo "\t" . '<meta property="og:type" content="Colab">' . "\n";
+				echo "\t" . '<meta property="og:description" content="O Colab te ajuda a criar um vídeo-presente em grupo para você emocionar quem você ama!">' . "\n";
+				echo "\t" . '<meta property="og:url" content="' . tribute_get_url_base_url() . '">' . "\n";
+				echo "\t" . '<meta property="og:locale" content="' . get_locale() . '">' . "\n";
+				echo "\t" . '<meta property="og:site_name" content="Colab">' . "\n";
+				echo "\t" . '<meta property="og:image" content="' . TEMPLATE_URI . '/tributes/assets/img/logo-to-share.png">' . "\n";
+				echo "\n";
+			}
 		} else {
 			echo "\n\n";
 			echo "\t" . '<meta property="og:title" content="' . get_bloginfo( 'title' ) . '">' . "\n";

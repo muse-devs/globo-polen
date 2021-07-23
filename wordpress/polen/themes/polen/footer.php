@@ -57,9 +57,10 @@
 	<?php endif; ?>
 	<div class="row mt-4 copyright">
 		<div class="col-md-12 pb-4 text-center social">
-			<a href="https://www.facebook.com/Polen-107879504782470/" target="_blank"><?php Icon_Class::polen_icon_social("facebook"); ?></a>
-			<a href="https://www.instagram.com/polen.me" target="_blank"><?php Icon_Class::polen_icon_social("instagram"); ?></a>
-			<a href="https://vm.tiktok.com/ZMeKtWr1H/" target="_blank"><?php Icon_Class::polen_icon_social("tiktok"); ?></a>
+			<a href="https://www.facebook.com/Polen-107879504782470/" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("facebook"); ?></a>
+			<a href="https://www.instagram.com/polen.me" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("instagram"); ?></a>
+			<a href="https://vm.tiktok.com/ZMeKtWr1H/" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("tiktok"); ?></a>
+			<a href="https://twitter.com/polen_me" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("twitter"); ?></a>
 		</div>
 		<div class="col-md-12 pt-3 text-center">2021 @<?= get_bloginfo('name'); ?></div>
 	</div><!-- .site-info -->

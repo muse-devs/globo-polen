@@ -2,6 +2,7 @@
 
 include_once dirname( __FILE__ ) . '/init.php';
 
+use Polen\Includes\Debug;
 use Vimeo\Vimeo;
 use Vimeo\Exceptions\{ExceptionInterface, VimeoRequestException};
 use Polen\Includes\Polen_Video_Info;
@@ -28,7 +29,7 @@ foreach ( $videos as $video ) {
             //TODO colocar esse '300x435' em um lugar, tirar o hardcode
             $video->vimeo_thumbnail = $response->get_image_url_custom_size( '300x435' );
             $video->duration = $response->get_duration();
-            $video->vimeo_url_download = $response->get_download_best_quality_url();
+            $video->vimeo_url_download = 'get_in_time';
             $video->update();
             $vimeo_api->request( $video->vimeo_id . '/presets/120906813', [], 'PUT');
             echo "Achei: {$video->vimeo_id} \n";

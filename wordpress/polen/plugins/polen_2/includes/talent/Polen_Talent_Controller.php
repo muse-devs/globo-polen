@@ -217,6 +217,9 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
             $video_info = $this->mount_video_info( $order, $cart_item, $response);
             $video_info->insert();
             
+            //recalcula o tempo de resposta do talento
+            $this->average_video_response( get_current_user_id() );
+
             wp_send_json_success( $response->response, 200 );
         } catch ( ExceptionInterface $e ) {
             wp_send_json_error( $e->getMessage(), $e->getCode() );
@@ -244,6 +247,7 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
             $video_info->vimeo_id = $response->get_vimeo_id();
             $video_info->vimeo_process_complete = 0;
             $video_info->vimeo_link = $response->get_vimeo_link();
+            $video_info->first_order = $cart_item->get_first_order();
             $video_info->vimeo_url_download = $response->get_download_source_url();
             $video_info->vimeo_iframe = $response->get_iframe();
             return $video_info;
@@ -322,5 +326,52 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
 
         return false;
     }
- 
+
+    /**
+     * Recalcula o tempo médio que o talento atende o vídeo
+     */
+    public function average_video_response( $talent_id ){
+        if( !empty( $talent_id ) ){
+            global $wpdb;
+
+            $sql = "SELECT TIMESTAMPDIFF(HOUR, p.post_date, vi.updated_at) as average_time 
+                    FROM {$wpdb->prefix}video_info vi 
+                    INNER JOIN {$wpdb->posts} p on p.id = order_id 
+                    WHERE vi.talent_id = {$talent_id} and vi.vimeo_process_complete = 1 AND vi.updated_at is not null
+                    ORDER BY vi.created_at DESC LIMIT 2 ";
+            $all_times = $wpdb->get_results( $sql );
+
+            if( $all_times ){
+                try{
+                    if( count($all_times) == 2 ){
+                        $average_hour = 0;
+                        foreach( $all_times as $this_time ){
+                            $average_hour += $this_time->average_time;
+                        }
+
+                        $average_time = ceil( $average_hour/2 );
+                        if( floor( $average_time ) < 48 ){
+                            $average_time = 48;
+                        }else if( floor( $average_time ) > 72 ){
+                            $average_time = ceil( $average_time );
+                        }
+                    }  
+
+                    if( count( $all_times ) == 1 ){
+                        if( isset( $all_times[0] ) ){
+                            if( isset( $all_times[0]->average_time ) ){
+                                $average_time = ceil( $all_times[0]->average_time );
+                            }
+                        }
+                    }
+
+                    $update = $wpdb->update(
+                        $wpdb->base_prefix . 'polen_talents',
+                        array( 'tempo_resposta' => $average_time ),
+                        array( 'user_id' => $talent_id ),
+                    );
+                }catch( Exception $e ){}
+            }
+        }
+    } 
 }

@@ -18,9 +18,34 @@
 	}
 }
 
+input[type="date"] {
+	display: block;
+	-webkit-appearance: none;
+	-moz-appearance: textfield;
+	min-height: 1.2em;
+}
+
+.custom-select-sm {
+	max-width: 32%;
+}
+
+input.error {
+	border-color: var(--danger);
+}
+
 .btn-primary:hover {
 	background-color: $primary-hover;
 	border-color: $primary-hover;
+}
+
+.button-icon-only {
+	font-size: 22px;
+	border: none;
+	background: none;
+	outline: transparent;
+	align-content: center;
+	align-items: center;
+	height: 100%;
 }
 
 .step {

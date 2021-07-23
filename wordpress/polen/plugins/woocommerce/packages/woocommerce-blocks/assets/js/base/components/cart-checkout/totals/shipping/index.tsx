@@ -3,12 +3,13 @@
  */
 import classnames from 'classnames';
 import { __ } from '@wordpress/i18n';
-import { DISPLAY_CART_PRICES_INCLUDING_TAX } from '@woocommerce/block-settings';
 import { useState } from '@wordpress/element';
 import { useStoreCart } from '@woocommerce/base-context/hooks';
 import { TotalsItem } from '@woocommerce/blocks-checkout';
 import type { Currency } from '@woocommerce/price-format';
 import type { ReactElement } from 'react';
+import { getSetting, EnteredAddress } from '@woocommerce/settings';
+import { ShippingVia } from '@woocommerce/base-components/cart-checkout/totals/shipping/shipping-via';
 
 /**
  * Internal dependencies
@@ -47,7 +48,7 @@ interface ShippingAddressProps {
 	showCalculator: boolean;
 	isShippingCalculatorOpen: boolean;
 	setIsShippingCalculatorOpen: CalculatorButtonProps[ 'setIsShippingCalculatorOpen' ];
-	shippingAddress: Record< string, unknown >;
+	shippingAddress: EnteredAddress;
 }
 
 const ShippingAddress = ( {
@@ -133,7 +134,10 @@ const TotalsShipping = ( {
 		shippingRatesLoading,
 	} = useStoreCart();
 
-	const totalShippingValue = DISPLAY_CART_PRICES_INCLUDING_TAX
+	const totalShippingValue = getSetting(
+		'displayCartPricesIncludingTax',
+		false
+	)
 		? parseInt( values.total_shipping, 10 ) +
 		  parseInt( values.total_shipping_tax, 10 )
 		: parseInt( values.total_shipping, 10 );
@@ -142,6 +146,14 @@ const TotalsShipping = ( {
 		isShippingCalculatorOpen,
 		setIsShippingCalculatorOpen,
 	};
+
+	const selectedShippingRates = shippingRates.flatMap(
+		( shippingPackage ) => {
+			return shippingPackage.shipping_rates
+				.filter( ( rate ) => rate.selected )
+				.flatMap( ( rate ) => rate.name );
+		}
+	);
 
 	return (
 		<div
@@ -165,11 +177,18 @@ const TotalsShipping = ( {
 				description={
 					<>
 						{ cartHasCalculatedShipping && (
-							<ShippingAddress
-								shippingAddress={ shippingAddress }
-								showCalculator={ showCalculator }
-								{ ...calculatorButtonProps }
-							/>
+							<>
+								<ShippingVia
+									selectedShippingRates={
+										selectedShippingRates
+									}
+								/>
+								<ShippingAddress
+									shippingAddress={ shippingAddress }
+									showCalculator={ showCalculator }
+									{ ...calculatorButtonProps }
+								/>
+							</>
 						) }
 					</>
 				}

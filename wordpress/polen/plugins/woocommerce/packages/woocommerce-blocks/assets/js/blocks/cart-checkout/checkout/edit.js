@@ -16,9 +16,8 @@ import {
 	PRIVACY_URL,
 	TERMS_URL,
 	CHECKOUT_PAGE_ID,
-	CHECKOUT_ALLOWS_SIGNUP,
 } from '@woocommerce/block-settings';
-import { isWcVersion, getAdminLink } from '@woocommerce/settings';
+import { isWcVersion, getAdminLink, getSetting } from '@woocommerce/settings';
 import { createInterpolateElement } from 'wordpress-element';
 import { useRef } from '@wordpress/element';
 import {
@@ -53,6 +52,7 @@ const BlockSettings = ( { attributes, setAttributes } ) => {
 		showReturnToCart,
 		cartPageId,
 		hasDarkControls,
+		showRateAfterTaxName,
 	} = attributes;
 	const { currentPostId } = useEditorContext();
 	const { current: savedCartPageId } = useRef( cartPageId );
@@ -62,7 +62,8 @@ const BlockSettings = ( { attributes, setAttributes } ) => {
 	// Also implicitly gated to feature plugin, because Checkout
 	// block is gated to plugin
 	const showCreateAccountOption =
-		CHECKOUT_ALLOWS_SIGNUP && isWcVersion( '4.7.0', '>=' );
+		getSetting( 'checkoutAllowsSignup', false ) &&
+		isWcVersion( '4.7.0', '>=' );
 	return (
 		<InspectorControls>
 			{ currentPostId !== CHECKOUT_PAGE_ID && (
@@ -297,6 +298,30 @@ const BlockSettings = ( { attributes, setAttributes } ) => {
 							),
 						} }
 					/>
+				) }
+			{ getSetting( 'taxesEnabled' ) &&
+				getSetting( 'displayItemizedTaxes', false ) &&
+				! getSetting( 'displayCartPricesIncludingTax', false ) && (
+					<PanelBody
+						title={ __( 'Taxes', 'woocommerce' ) }
+					>
+						<ToggleControl
+							label={ __(
+								'Show rate after tax name',
+								'woocommerce'
+							) }
+							help={ __(
+								'Show the percentage rate alongside each tax line in the summary.',
+								'woocommerce'
+							) }
+							checked={ showRateAfterTaxName }
+							onChange={ () =>
+								setAttributes( {
+									showRateAfterTaxName: ! showRateAfterTaxName,
+								} )
+							}
+						/>
+					</PanelBody>
 				) }
 			<PanelBody title={ __( 'Style', 'woocommerce' ) }>
 				<ToggleControl

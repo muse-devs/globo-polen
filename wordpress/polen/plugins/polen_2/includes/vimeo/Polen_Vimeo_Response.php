@@ -111,7 +111,7 @@ class Polen_Vimeo_Response
     
     /**
      * 
-     * @return type
+     * @return string
      */
     public function get_image_url_smaller()
     {
@@ -204,5 +204,38 @@ class Polen_Vimeo_Response
         $download_array = $this->get_download_array();
         $best_quality_array = $download_array[ count( $download_array ) - 1 ];
         return $best_quality_array[ 'link' ];
+    }
+
+
+
+
+    /**
+     * Pegar o array com todas as qualidades possiveis para play
+     */
+    public function get_play_array()
+    {
+        return $this->response['body']['files'];
+    }
+
+
+    /**
+     * Pega a URI da folder recem criada
+     */
+    public function get_folder_uri()
+    {
+        return $this->response['body']['uri'];
+    }
+
+
+    /**
+     * Pega do link do arquivo para play
+     */
+    public function get_play_link()
+    {
+        $files = $this->get_play_array();
+        foreach( $files as $file ) {
+            return $file[ 'link' ];
+        }
+        return null;
     }
 }

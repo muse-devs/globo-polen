@@ -21,6 +21,7 @@ class Polen_Order
     
     public function __construct( $static = false ) {
         if( $static ) {
+            add_action(    'wp_ajax_create_first_order',         array( $this, 'create_first_order' ) );
             add_action(    'wp_ajax_search_order_status',        array( $this, 'check_order_status' ) );
             add_action(    'wp_ajax_nopriv_search_order_status', array( $this, 'check_order_status' ) );
             add_shortcode( 'polen_search_order',                 array( $this, 'polen_search_order_shortcode' ) );
@@ -205,5 +206,67 @@ class Polen_Order
     ?>
         <p>Aqui para assistir ao vídeo</p>
     <?php
+    }
+
+
+    /**
+     * Criar uma primeira ORDER
+     */
+    public function create_first_order()
+    {
+        $user = wp_get_current_user();
+        if( !in_array( 'administrator', $user->roles ) ) {
+            wp_send_json_error( false, 403 );
+            die;
+        }
+        $args = array(
+            'status'        => Polen_WooCommerce::ORDER_STATUS_PAYMENT_APPROVED,
+            'customer_id'   => 1,
+            'customer_note' => 'Primeiro Video',
+            'created_via'   => 'creation_talent',
+        );
+        $product_id = filter_input( INPUT_POST, 'product_id' );
+        
+        $order = wc_create_order( $args );
+        $order_id = $order->get_id();
+        $product = wc_get_product( $product_id );
+        $order_item_id = wc_add_order_item( $order_id, array(
+            'order_item_name' => $product->get_title(),
+            'order_item_type' => 'line_item', // product
+        ));
+        
+        $talent_name = $product->get_title();
+        $instruction = "
+        Bem-vindo <nome>, nós da Polen estamos MUITO felizes em ter você na plataforma!<br />
+            Pronto para conhecer nosso sistema e ver como é divertido gravar Vídeos-Polen personalizados?<br />
+            O seu primeiro Vídeo-Polen é um vídeo de apresentação bem simples!<br />
+            Nesse vídeo-polen lembre-se de dizer:<br />
+            - seu nome<br />
+            - que agora faz parte da Polen<br />
+            - que esta pronto para gravar Vídeos-Polen para todos os fãs<br />
+            Para continuar basta aceitar no botão verde! E aí <nome>, pronto para se conectar com seus fãs!?
+        ";
+        $final_instruction = str_replace( '<nome>', $product->get_title(), $instruction );
+        
+        wc_add_order_item_meta( $order_item_id, '_qty', 1, true );
+        wc_add_order_item_meta( $order_item_id, '_product_id', $product->get_id(), true );
+        wc_add_order_item_meta( $order_item_id, '_line_subtotal', 0, true );
+        wc_add_order_item_meta( $order_item_id, '_line_total', 0, true );
+        //Polen Custom Meta Order_Item
+        wc_add_order_item_meta( $order_item_id, 'offered_by'            , '', true );
+        wc_add_order_item_meta( $order_item_id, 'video_to'              , 'to_myself', true );
+        wc_add_order_item_meta( $order_item_id, 'first_order'           , '1', true );
+        wc_add_order_item_meta( $order_item_id, 'name_to_video'         , 'Polen.me', true );
+        wc_add_order_item_meta( $order_item_id, 'email_to_video'        , 'polen@polen.me', true );
+        wc_add_order_item_meta( $order_item_id, 'video_category'        , 'Novidade', true );
+        wc_add_order_item_meta( $order_item_id, 'instructions_to_video' , $final_instruction, true );
+        wc_add_order_item_meta( $order_item_id, 'allow_video_on_page'   , 'on', true );
+        wc_add_order_item_meta( $order_item_id, '_fee_amount'           , 0, true );
+        wc_add_order_item_meta( $order_item_id, '_line_total'           , 0, true );
+        $order = new \WC_Order( $order_id );
+        $order->calculate_totals();
+        // $order->set_status( Polen_WooCommerce::ORDER_STATUS_TALENT_ACCEPTED );
+        wp_send_json_success( 'ok', 201 );
+        wp_die();
     }
 }

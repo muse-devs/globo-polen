@@ -62,7 +62,7 @@
 							$('#video-email').text(obj['data'][0]['email']);
 							$('#video-category').text(obj['data'][0]['category']);
 							$('#expiration-time').text(obj['data'][0]['expiration']);
-							$('#video-instructions').text(obj['data'][0]['instructions']);
+							$('#video-instructions').html(obj['data'][0]['instructions']);
 							$('.modal-group-buttons').attr('order-id',obj['data'][0]['order_id'] );
 						}
 					}

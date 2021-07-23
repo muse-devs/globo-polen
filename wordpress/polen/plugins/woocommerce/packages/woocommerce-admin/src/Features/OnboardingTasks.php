@@ -365,7 +365,7 @@ class OnboardingTasks {
 	 *
 	 * @return array
 	 */
-	private static function get_stripe_supported_countries() {
+	public static function get_stripe_supported_countries() {
 		// https://stripe.com/global.
 		return array(
 			'AU',
@@ -443,6 +443,7 @@ class OnboardingTasks {
 	 */
 	public static function track_task_completion( $old_value, $new_value ) {
 		$old_value       = is_array( $old_value ) ? $old_value : array();
+		$new_value       = is_array( $new_value ) ? $new_value : array();
 		$untracked_tasks = array_diff( $new_value, $old_value );
 
 		foreach ( $untracked_tasks as $task ) {

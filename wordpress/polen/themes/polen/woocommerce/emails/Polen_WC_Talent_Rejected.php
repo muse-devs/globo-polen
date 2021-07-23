@@ -12,17 +12,31 @@ $talent = _polen_get_info_talent_by_product_id($item->get_product(), "polen-squa
 ?>
 
 <p>
-	<?php printf(
-		esc_html__( 'O artista %1$s recusou o seu pedido de vídeo #%2$s. O valor será extornado em até 24 horas.', 'woocommerce' ),
-		esc_html( $talent['name'] ),
-		esc_html( $order->get_order_number() )
-	); ?>
+	Olá, <?php echo $item->get_offered_by(); ?><br />
+	Infelizmente, <strong><?php echo $talent['name']; ?></strong> não poderá gravar o vídeo solicitado por você.
 </p>
 
-<p>Mas não se preocupe, procure outros talentos no <?= get_bloginfo('name'); ?></p>
+<p>De acordo com nossos termos de uso (<a href="https://polen.me/termos-de-uso/" target="_blank">https://polen.me/termos-de-uso/</a>), é direito de cada talento decidir não gravar um vídeo solicitado e, nestes casos, nós devolvemos integralmente o valor pago por você (consulte o estorno integral em seu cartão de crédito).</p>
+
+<p>Uma outra razão pela qual o seu vídeo pode vir a não ser gravado é se nas suas instruções você pediu:</p>
+
+<ol>
+	<li>Que o talento leia, cante ou declame trechos de obras musicais ou literárias, mesmo que sejam dele próprio.</li>
+	<li>Que o talento se manifeste em assuntos ligados à política partidária e afins. </li>
+	<li>Que o talento incite, promova, facilite e/ou incentive ações que sejam ofensivas, perigosas, gratuitamente violentas, difamatórias e ilegais.</li>
+	<li>Que o talento envie mensagem de cunho ameaçador, odioso, racista, homofóbico, transfóbico, sexista e/ou depreciativo.</li>
+	<li>Que o talento envie nudez ou pornografia.</li>
+	<li>Que o talento faça publicidade de marca, comércio, produto ou serviço.</li>
+</ol>
+
+<p>Caso seu pedido eventualmente tenha se enquadrado num desses casos, o valor pago por você também será devolvido integralmente.</p>
+<p>Esperamos que entenda que essas pequenas regras servem para que a Polen cumpra a sua missão de levar boas emoções a todos.</p>
+<p>Se desejar, entre em contato com nosso atendimento: atendimento@polen.me</p>
+
+<p>Atenciosamente,<br />Equipe Polen</p>
 
 <p class="btn_wrap">
-	<a href="<?php echo polen_get_all_talents_url(); ?>" class="btn" target="_blank">Procurar outro talento</a>
+	<a href="<?php echo polen_get_all_talents_url(); ?>" class="btn" target="_blank">Ver todos os Talentos</a>
 </p>
 
 <?php
