@@ -16,7 +16,7 @@ define('POL_COOKIES', array(
 
 if ( ! defined( '_S_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', DEVELOPER ? time() : '1.0.8' );
+	define( '_S_VERSION', DEVELOPER ? time() : '1.0.9' );
 }
 
 if ( ! function_exists( 'polen_setup' ) ) :
