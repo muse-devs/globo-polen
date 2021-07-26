@@ -3,7 +3,7 @@ const home_carrousel = function() {
 	console.log(images);
 }
 
-home_carrousel();
+// home_carrousel();
 
 
 const home_video = function () {
