@@ -25,11 +25,11 @@ class Polen_Cupom_Create_Admin_Menu
         <h1>Cupons em Lote</h1>
         <div id="batch-coupon" class="container mt-4">
             <form>
+                <input type="hidden" name="action" value="polen_create_cupom" />
                 <div class="row mb-2">
                     <div class="col">
-                        <input type="hidden" name="action" value="polen_create_cupom" />
-                        <input type="text" v-model="prefix_name" required />
-                        <input type="number" v-model="amount" required />
+                        <input type="text" v-model="prefix_name" placeholder="prefixo" required />
+                        <input type="number" v-model="amount" placeholder="valor" required />
                     </div>
                 </div>
                 <div class="row mb-2">
@@ -41,13 +41,13 @@ class Polen_Cupom_Create_Admin_Menu
                 </div>
                 <div class="row mb-2">
                     <div class="col">
-                        <textarea cols="30" rows="10" v-model="description" required></textarea>
+                        <textarea cols="30" rows="10" v-model="description" placeholder="descrição" required></textarea>
                     </div>
                 </div>
                 <div class="row mb-2">
                     <div class="col">
-                        <input type="text" v-model="expiry_date" required />
-                        <input type="text" v-model="usage_limit" required />
+                        <input type="text" v-model="expiry_date" placeholder="01/11/2021" required />
+                        <input type="text" v-model="usage_limit" placeholder="limite" required />
 
                     </div>
                 </div>
