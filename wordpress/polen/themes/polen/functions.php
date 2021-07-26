@@ -198,7 +198,6 @@ function polen_scripts() {
 	wp_enqueue_script( 'global-js', TEMPLATE_URI . '/assets/js/' . $min . 'global.js', array("jquery"), _S_VERSION, false );
 
 	if(is_front_page()) {
-		wp_enqueue_script( 'owl-carousel', TEMPLATE_URI . '/assets/js/vendor/' . $min . 'owl.carousel.min.js', array(), _S_VERSION, true );
 		wp_enqueue_script( 'home-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'front-page.js', array('owl-carousel'), _S_VERSION, true );
 	}
 
@@ -208,6 +207,7 @@ function polen_scripts() {
 	wp_register_script('vuejs', TEMPLATE_URI . '/assets/vuejs/' . $min . 'vue.js', array(), '', false);
 	wp_register_script( 'comment-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'comment.js', array("vuejs"), _S_VERSION, true );
 	wp_register_script( 'suggestion-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'suggestion.js', array("jquery"), _S_VERSION, true );
+	wp_register_script( 'owl-carousel', TEMPLATE_URI . '/assets/js/vendor/owl.carousel.min.js', array(), _S_VERSION, true );
 	// --------------------------------------------------------------------------------------------------
 
 	if (polen_is_landingpage()) {
