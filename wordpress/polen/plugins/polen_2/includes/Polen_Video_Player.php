@@ -54,6 +54,7 @@ class Polen_Video_Player
     public function draw_player_modal()
     {
         $video_hash = filter_input( INPUT_GET, 'hash' );
+        $product_id = filter_input( INPUT_GET, 'product_id' );
         if( empty( $video_hash ) ) {
             polen_player_video_modal_ajax_invalid_hash();
             wp_die();
@@ -68,7 +69,8 @@ class Polen_Video_Player
         $Talent_Fields = new Polen_Update_Fields();
         $talent = $Talent_Fields->get_vendor_data( $video_info->talent_id );
         $user_id = get_current_user_id();
-        polen_get_video_player( $talent, $video_info, $user_id );
+        $product = wc_get_product($product_id);
+        polen_get_video_player( $talent, $video_info, $user_id, $product );
         wp_die();
     }
 

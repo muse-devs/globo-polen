@@ -16,7 +16,7 @@ define('POL_COOKIES', array(
 
 if ( ! defined( '_S_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', DEVELOPER ? time() : '1.0.7' );
+	define( '_S_VERSION', DEVELOPER ? time() : '1.0.8' );
 }
 
 if ( ! function_exists( 'polen_setup' ) ) :
@@ -198,7 +198,8 @@ function polen_scripts() {
 	wp_enqueue_script( 'global-js', TEMPLATE_URI . '/assets/js/' . $min . 'global.js', array("jquery"), _S_VERSION, false );
 
 	if(is_front_page()) {
-		wp_enqueue_script( 'home-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'front-page.js', array(), _S_VERSION, true );
+		wp_enqueue_script( 'owl-carousel', TEMPLATE_URI . '/assets/js/vendor/' . $min . 'owl.carousel.min.js', array(), _S_VERSION, true );
+		wp_enqueue_script( 'home-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'front-page.js', array('owl-carousel'), _S_VERSION, true );
 	}
 
 	// Registrando Scripts ------------------------------------------------------------------------------
