@@ -2,6 +2,11 @@
 
 class Icon_Class
 {
+	public static function polen_icon_criesp()
+	{
+		echo '<span class="icon icon-criesp"></span>';
+	}
+
 	public static function polen_icon_clipboard()
 	{
 		echo '<i class="bi bi-clipboard"></i>';
