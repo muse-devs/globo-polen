@@ -58,11 +58,14 @@ $donate_text = stripslashes( get_post_meta( get_the_ID(), '_description_charity'
 <div id="product-<?php the_ID(); ?>" <?php wc_product_class('', $product); ?>>
 
 	<!-- Vídeos -->
-	<?php polen_front_get_talent_videos($Talent_Fields); ?>
+	<?php //polen_front_get_talent_videos($Talent_Fields); ?>
 
 	<!-- Tags -->
 	<div class="row">
-		<div class="col-md-12">
+		<div class="col-md-2 d-flex justify-content-center">
+			<?php polen_front_get_talent_stories(); ?>
+		</div>
+		<div class="col-md-8">
 			<h1 class="talent-name text-truncate" title="<?= get_the_title(); ?>"><?= get_the_title(); ?></h1>
 			<!-- Se for doação -->
 			<?php if ($donate) : ?>
