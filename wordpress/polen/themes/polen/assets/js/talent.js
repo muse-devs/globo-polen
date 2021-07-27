@@ -6,6 +6,59 @@ var public_url = talent_videos
 	? talent_videos.getAttribute("data-public-url")
 	: "";
 
+var timestamp = function() {
+	var timeIndex = 0;
+	var shifts = [35, 60, 60 * 3, 60 * 60 * 2, 60 * 60 * 25, 60 * 60 * 24 * 4, 60 * 60 * 24 * 10];
+
+	var now = new Date();
+	var shift = shifts[timeIndex++] || 0;
+	var date = new Date(now - shift * 1000);
+
+	return date.getTime() / 1000;
+};
+
+var stories = new Zuck('stories', {
+	backNative: true,
+	previousTap: true,
+	backButton: true,
+	skin: 'Snapgram',
+	avatars: true,
+    paginationArrows: true,
+    list: false,
+    cubeEffect: true,
+	localStorage: true,
+	language: {
+		unmute: 'Toque para ouvir',
+		keyboardTip: 'Clique para ver o próximo',
+		visitLink: 'Visite o Link',
+		time: {
+			ago:'atrás', 
+			hour:'hora', 
+			hours:'horas', 
+			minute:'minuto', 
+			minutes:'minutos', 
+			fromnow: 'from now', 
+			seconds:'segundos', 
+			yesterday: 'ontem', 
+			tomorrow: 'amanhã', 
+			days:'dias'
+		}
+	},
+	stories: [
+		Zuck.buildTimelineItem(
+		"Afonso Padilha", 
+		"https://raw.githubusercontent.com/ramon82/assets/master/zuck.js/users/1.jpg",
+		"Afonso Padilha",
+		"",
+		timestamp(),
+		[
+			["ramon-1", "video", 0, "https://raw.githubusercontent.com/ramon82/assets/master/zuck.js/stories/2.mp4", "https://raw.githubusercontent.com/ramon82/assets/master/zuck.js/stories/2.jpg", '', false, false, timestamp()],
+			["ramon-2", "video", 0, "https://raw.githubusercontent.com/ramon82/assets/master/zuck.js/stories/4.mp4", "https://raw.githubusercontent.com/ramon82/assets/master/zuck.js/stories/4.jpg", '', false, false, timestamp()],
+		]
+		),
+	]
+});
+
 jQuery(document).ready(function () {
 	var id = getVideoId();
 	if (id) {

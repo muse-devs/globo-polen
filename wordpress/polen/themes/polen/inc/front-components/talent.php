@@ -37,6 +37,13 @@ function polen_get_talent_socials($talent)
 <?php
 }
 
+function polen_front_get_talent_stories()
+{
+	?>
+		<div id="stories"></div>
+	<?php
+}
+
 /**
  * Criar a lista de videos já feitos
  * @param stdClass Polen_Talent_Fields
