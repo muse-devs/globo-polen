@@ -119,12 +119,53 @@ class Polen_Cart_Item
     
     
     /**
-     * Pega o talent_id
+     * Pega o talent_id já tratando o tipo de produto \WC_Product_Variation ou
+     * \WC_Product_Variable ou WC_Product_Simple
      * @return int
      */
     public function get_talent_id()
     {
+        if( $this->item->get_product() instanceof \WC_Product_Variation ) {
+            return $this->get_talent_id_in_product_variation();
+        } elseif( $this->item->get_product() instanceof \WC_Product_Variable ) {
+            return $this->get_talent_id_in_product_variable();
+        } else {
+            return $this->get_talent_id_in_product_simple();
+        }
+    }
+
+    /**
+     * Pega o talent_id quando um produto é Simple
+     * @return int
+     */
+    public function get_talent_id_in_product_simple()
+    {
         $product_id = $this->item->get_product()->get_id();
+        $product_post = get_post( $product_id );
+        return $product_post->post_author;
+    }
+
+
+    /**
+     * Pega o talent_id quando um produto é um Produto Variavel
+     * @return int
+     */
+    public function get_talent_id_in_product_variable()
+    {
+        $product_id = $this->item->get_product()->get_id();
+        $product_post = get_post( $product_id );
+        return $product_post->post_author;
+    }
+
+
+    /**
+     * Pega o talent_id quando um produto é uma Variação
+     * o talent_id é o do Produto pai
+     * @return int
+     */
+    public function get_talent_id_in_product_variation()
+    {
+        $product_id = $this->item->get_product()->get_parent_id();
         $product_post = get_post( $product_id );
         return $product_post->post_author;
     }
@@ -147,5 +188,21 @@ class Polen_Cart_Item
     public function get_product()
     {
         return $this->item->get_product();
+    }
+
+
+    /**
+     * Get o object product parent if tiver para produtos variaveis é para retornar o pai
+     * @return WC_Product
+     */
+    public function get_product_parent_if_has()
+    {
+        if( $this->item->get_product() instanceof \WC_Product_Variation ) {
+            return wc_get_product( $this->item->get_product()->get_parent_id() );
+        } elseif( $this->item->get_product() instanceof \WC_Product_Variable ) {
+            return $this->item->get_product();
+        } else {
+            return $this->item->get_product();
+        }
     }
 }

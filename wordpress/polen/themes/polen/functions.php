@@ -295,6 +295,12 @@ require_once TEMPLATE_DIR . '/classes/Order_Class.php';
 require_once TEMPLATE_DIR . '/tributes/tributes_functions.php';
 
 
+/**
+ * Funcoes do Social APP
+ */
+require_once TEMPLATE_DIR . '/social/social_function.php';
+
+
 add_action('wc_gateway_stripe_process_response', function($response, $order) {
 	// $response
 	// $order
