@@ -16,7 +16,7 @@ define('POL_COOKIES', array(
 
 if ( ! defined( '_S_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', DEVELOPER ? time() : '1.0.7' );
+	define( '_S_VERSION', DEVELOPER ? time() : '1.0.9' );
 }
 
 if ( ! function_exists( 'polen_setup' ) ) :
@@ -198,7 +198,7 @@ function polen_scripts() {
 	wp_enqueue_script( 'global-js', TEMPLATE_URI . '/assets/js/' . $min . 'global.js', array("jquery"), _S_VERSION, false );
 
 	if(is_front_page()) {
-		wp_enqueue_script( 'home-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'front-page.js', array(), _S_VERSION, true );
+		wp_enqueue_script( 'home-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'front-page.js', array('owl-carousel'), _S_VERSION, true );
 	}
 
 	// Registrando Scripts ------------------------------------------------------------------------------
@@ -207,6 +207,8 @@ function polen_scripts() {
 	wp_register_script('vuejs', TEMPLATE_URI . '/assets/vuejs/' . $min . 'vue.js', array(), '', false);
 	wp_register_script( 'comment-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'comment.js', array("vuejs"), _S_VERSION, true );
 	wp_register_script( 'suggestion-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'suggestion.js', array("jquery"), _S_VERSION, true );
+	wp_register_script( 'owl-carousel', TEMPLATE_URI . '/assets/js/vendor/owl.carousel.min.js', array(), _S_VERSION, true );
+	wp_register_script( 'zuck', TEMPLATE_URI . '/assets/js/vendor/zuck.min.js', array(), _S_VERSION, true );
 	// --------------------------------------------------------------------------------------------------
 
 	if (polen_is_landingpage()) {
@@ -222,7 +224,7 @@ function polen_scripts() {
 	if(is_singular() && is_product()) {
 		// wp_enqueue_script( 'slick-slider', TEMPLATE_URI . '/assets/slick/slick.min.js', array("jquery"), '', true );
 		wp_enqueue_script( 'vimeo');
-		wp_enqueue_script( 'talent-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'talent.js', array("vimeo"), _S_VERSION, true );
+		wp_enqueue_script( 'talent-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'talent.js', array("vimeo", "zuck"), _S_VERSION, true );
 	}
 
 	if( is_cart() ) {

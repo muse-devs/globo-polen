@@ -37,7 +37,7 @@ const commentbox = new Vue({
 			polSpinner();
 			jQuery
 				.post(
-					woocommerce_params.ajax_url,
+					polenObj.ajax_url,
 					jQuery("#form-comment").serialize(),
 					function (result) {
 						if (result.success) {
