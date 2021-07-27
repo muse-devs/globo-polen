@@ -7,6 +7,12 @@ function polen_front_get_banner_with_carousel() {
 			"desktop" => TEMPLATE_URI . "/assets/img/img-home-desktop-new.jpeg"
 		)
 	);
+	$carrousel2 = array(
+		array(
+			"mobile" => TEMPLATE_URI . "/assets/img/criesp/bg-criesp.jpg",
+			"desktop" => TEMPLATE_URI . "/assets/img/criesp/bg-criesp.jpg"
+		)
+	);
 ?>
 	<section class="top-banner mb-4">
 		<div class="owl-carousel owl-theme">
@@ -29,7 +35,7 @@ function polen_front_get_banner_with_carousel() {
 			</div>
 			<div class="item">
 				<div class="carrousel">
-					<?php foreach ($carrousel as $item) : ?>
+					<?php foreach ($carrousel2 as $item) : ?>
 						<figure class="image">
 							<img loading="lazy" src="<?php echo $item['mobile']; ?>" alt="Banner da home" class="mobile" />
 							<img loading="lazy" src="<?php echo $item['desktop']; ?>" alt="Banner da home" class="desktop" />
@@ -37,9 +43,9 @@ function polen_front_get_banner_with_carousel() {
 					<?php endforeach; ?>
 				</div>
 				<div class="content">
-					<h2 class="title mb-5">Presenteie e<br />surpreenda com vídeos personalizados.</h2>
-					<a href="<?php echo polen_get_all_talents_url(); ?>" class="banner-button-link">
-						<span class="mr-3">Ver todos os artistas</span>
+					<h2 class="title mb-5">Aqui sua doação para<br />o Criança Esperança vira um vídeo.</h2>
+					<a href="#criesp" class="banner-button-link">
+						<span class="mr-3">Doe Agora</span>
 						<?php Icon_Class::polen_icon_chevron_right(); ?>
 					</a>
 				</div>

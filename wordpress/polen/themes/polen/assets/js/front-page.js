@@ -9,7 +9,9 @@ jQuery(document).ready(function ($) {
 	$('.owl-carousel').owlCarousel({
 		loop: true,
 		items: 1,
-		autoplayTimeout: 15000,
+		autoplayTimeout: 5000,
+		animateOut: 'fadeOut',
+		autoplayHoverPause:true,
 		margin: 0,
 		nav: true,
 		autoplay: true,
