@@ -44,20 +44,7 @@ function polen_get_talent_socials($talent)
  */
 function polen_front_get_talent_videos($talent)
 {
-	$items = array();
-	$items_raw = Polen\Includes\Polen_Video_Info::select_by_talent_id($talent->user_id);
-	foreach ($items_raw as $item) {
-		$order = wc_get_order($item->order_id);
-		$cart_item = \Polen\Includes\Cart\Polen_Cart_Item_Factory::polen_cart_item_from_order($order);
-		$items[] = [
-			'title' => '',
-			'image' =>  $item->vimeo_thumbnail,
-			'video' => $item->vimeo_link,
-			'hash' => $item->hash,
-			'first_order' => $item->first_order,
-			'initials' => polen_get_initials_name($cart_item->get_name_to_video()),
-		];
-	}
+	$items = polen_get_videos_by_talent($talent);
 
 	global $product;
 	$video_url = home_url() . "/v/";
