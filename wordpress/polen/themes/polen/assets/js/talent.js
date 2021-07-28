@@ -17,47 +17,61 @@ var timestamp = function() {
 	return date.getTime() / 1000;
 };
 
-var stories = new Zuck('stories', {
-	backNative: true,
-	previousTap: true,
-	backButton: true,
-	skin: 'Snapgram',
-	avatars: true,
-    paginationArrows: true,
-    list: false,
-    cubeEffect: true,
-	localStorage: true,
-	language: {
-		unmute: 'Toque para ouvir',
-		keyboardTip: 'Clique para ver o próximo',
-		visitLink: 'Visite o Link',
-		time: {
-			ago:'atrás', 
-			hour:'hora', 
-			hours:'horas', 
-			minute:'minuto', 
-			minutes:'minutos', 
-			fromnow: 'from now', 
-			seconds:'segundos', 
-			yesterday: 'ontem', 
-			tomorrow: 'amanhã', 
-			days:'dias'
-		}
-	},
-	stories: [
-		Zuck.buildTimelineItem(
-		"Afonso Padilha", 
-		"https://raw.githubusercontent.com/ramon82/assets/master/zuck.js/users/1.jpg",
-		"Afonso Padilha",
-		"",
-		timestamp(),
-		[
-			["ramon-1", "video", 0, "https://raw.githubusercontent.com/ramon82/assets/master/zuck.js/stories/2.mp4", "https://raw.githubusercontent.com/ramon82/assets/master/zuck.js/stories/2.jpg", '', false, false, timestamp()],
-			["ramon-2", "video", 0, "https://raw.githubusercontent.com/ramon82/assets/master/zuck.js/stories/4.mp4", "https://raw.githubusercontent.com/ramon82/assets/master/zuck.js/stories/4.jpg", '', false, false, timestamp()],
+function generateStoriesArray(videos) {
+	const array = [];
+	videos.map((item, i) => {
+		array.push([`video-`+i, "video", 0, item.video, item.thumb, '', false, false, timestamp()],);
+	})
+	return array;
+}
+
+function renderStories(videos, name, avatar) {
+	var stories = new Zuck('stories', {
+		backNative: true,
+		previousTap: true,
+		backButton: true,
+		skin: 'Snapgram',
+		avatars: true,
+		paginationArrows: true,
+		list: false,
+		cubeEffect: true,
+		localStorage: true,
+		language: {
+			unmute: 'Toque para ouvir',
+			keyboardTip: 'Clique para ver o próximo',
+			visitLink: 'Visite o Link',
+			time: {
+				ago:'atrás', 
+				hour:'hora', 
+				hours:'horas', 
+				minute:'minuto', 
+				minutes:'minutos', 
+				fromnow: 'from now', 
+				seconds:'segundos', 
+				yesterday: 'ontem', 
+				tomorrow: 'amanhã', 
+				days:'dias'
+			}
+		},
+		stories: [
+			Zuck.buildTimelineItem(
+				name, 
+				avatar,
+				name,
+				"",
+				timestamp(),
+				generateStoriesArray(videos)
+			),
 		]
-		),
-	]
-});
+	});
+	if (videos.length === 0) {
+		document.getElementById("stories").setAttribute("id", "");
+	}
+}
+
+function teste() {
+	
+}
 
 jQuery(document).ready(function () {
 	var id = getVideoId();

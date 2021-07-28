@@ -48,6 +48,12 @@ $donate_text = stripslashes( get_post_meta( get_the_ID(), '_description_charity'
 ?>
 
 <script>const TALENT_VIDEOS = <?php echo polen_get_videos_by_talent($Talent_Fields, true); ?>;</script>
+<script>
+	// params
+	jQuery(document).ready(function () {
+		renderStories(<?php echo polen_get_videos_by_talent($Talent_Fields, true);?>,<?php echo json_encode(get_the_title()); ?>,<?php echo json_encode(wp_get_attachment_image_src(get_post_thumbnail_id(get_the_ID()), 'polen-thumb-lg')[0]); ?>)
+	});
+</script>
 
 <?php if ($bg_image) : ?>
 	<figure class="image-bg">
@@ -66,7 +72,16 @@ $donate_text = stripslashes( get_post_meta( get_the_ID(), '_description_charity'
 			<?php polen_front_get_talent_stories(); ?>
 			<div class="ml-2">
 				<h1 class="talent-name text-truncate" title="<?= get_the_title(); ?>"><?= get_the_title(); ?></h1>
-				<h5 class="talent-count-videos text-truncate">20 vídeos disponíveis</h5>
+				<h5 class="talent-count-videos text-truncate">
+					<?php
+						$videosCount = json_decode(polen_get_videos_by_talent($Talent_Fields, true),true);
+						if (count($videosCount) === 1) {
+							echo count($videosCount)." vídeo disponível";
+						} else {
+							echo count($videosCount)." vídeos disponíveis";
+						}
+					?>
+				</h5>
 			</div>
 		</div>
 	</div>
