@@ -92,7 +92,6 @@ $donate_text = stripslashes( get_post_meta( get_the_ID(), '_description_charity'
 			<?php if ($donate) : ?>
 				<div class="row">
 					<div class="col-md-12 mb-1">
-						<?php //polen_front_get_donation_box_criesp(); ?>
 						<?php polen_donate_badge("100% DO CACHÊ DOADO PARA " . strtoupper($donate_name), false); ?>
 					</div>
 				</div>

@@ -43,15 +43,21 @@ function polen_front_get_donation_box_criesp()
 						<p><strong>Fotos</strong></p>
 						<div class="image-slider">
 							<div class="image-slider-content">
-								<figure class="item">
-									<img width="107" height="102" src="https://loremflickr.com/107/102" alt="Foto">
-								</figure>
-								<figure class="item">
-									<img width="107" height="102" src="https://loremflickr.com/107/102" alt="Foto">
-								</figure>
-								<figure class="item">
-									<img width="107" height="102" src="https://loremflickr.com/107/102" alt="Foto">
-								</figure>
+								<div>
+									<figure class="item">
+										<img width="107" height="102" src="https://loremflickr.com/107/102" alt="Foto">
+									</figure>
+								</div>
+								<div>
+									<figure class="item">
+										<img width="107" height="102" src="https://loremflickr.com/107/102" alt="Foto">
+									</figure>
+								</div>
+								<div>
+									<figure class="item">
+										<img width="107" height="102" src="https://loremflickr.com/107/102" alt="Foto">
+									</figure>
+								</div>
 							</div>
 						</div>
 					</div>
