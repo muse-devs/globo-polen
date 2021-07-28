@@ -47,7 +47,7 @@ $donate_image =  get_post_meta( get_the_ID(), '_url_charity_logo', true );
 $donate_text = stripslashes( get_post_meta( get_the_ID(), '_description_charity', true ) );
 ?>
 
-
+<script>const TALENT_VIDEOS = <?php echo polen_get_videos_by_talent($Talent_Fields, true); ?></script>
 
 <?php if ($bg_image) : ?>
 	<figure class="image-bg">
