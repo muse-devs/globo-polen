@@ -47,7 +47,7 @@ $donate_image =  get_post_meta( get_the_ID(), '_url_charity_logo', true );
 $donate_text = stripslashes( get_post_meta( get_the_ID(), '_description_charity', true ) );
 ?>
 
-<script>const TALENT_VIDEOS = <?php echo polen_get_videos_by_talent($Talent_Fields, true); ?></script>
+<script>const TALENT_VIDEOS = <?php echo polen_get_videos_by_talent($Talent_Fields, true); ?>;</script>
 
 <?php if ($bg_image) : ?>
 	<figure class="image-bg">
@@ -70,14 +70,15 @@ $donate_text = stripslashes( get_post_meta( get_the_ID(), '_description_charity'
 			</div>
 		</div>
 	</div>
-	
+
 	<div class="row">
 		<div class="col-12 col-md-6 m-md-auto d-flex">
 			<!-- Se for doação -->
 			<?php if ($donate) : ?>
 				<div class="row">
 					<div class="col-md-12 mb-1">
-						<?php polen_donate_badge("100% DO CACHÊ DOADO PARA " . strtoupper($donate_name), false); ?>
+						<?php polen_front_get_donation_box_criesp(); ?>
+						<?php //polen_donate_badge("100% DO CACHÊ DOADO PARA " . strtoupper($donate_name), false); ?>
 					</div>
 				</div>
 			<?php endif; ?>

@@ -21,7 +21,7 @@ function criesp_get_home_banner($link)
 function polen_front_get_donation_box_criesp()
 {
 ?>
-	<section class="row donation-box mt-4 mb-4">
+	<section class="row donation-box custom-donation-box mt-4 mb-4">
 		<div class="col-md-12">
 			<header class="row mb-3">
 				<div class="col">
@@ -37,13 +37,31 @@ function polen_front_get_donation_box_criesp()
 							<img src="<?php echo TEMPLATE_URI . '/assets/img/criesp/logo-criesp-color.png';  ?>" alt="Logo da empresa de doação">
 						</figure>
 						<p><strong>Sobre o Criança Esperança</strong></p>
-						<p>Criança Esperança (anteriormente SOS Nordeste) é uma campanha nacional de mobilização social que busca a conscientização em prol dos direitos da criança e do adolescente, promovida pela Globo, inicialmente em parceria com a UNICEF e atualmente com a UNESCO.</p>
+						<p class="small">Criança Esperança (anteriormente SOS Nordeste) é uma campanha nacional de mobilização social que busca a conscientização em prol dos direitos da criança e do adolescente, promovida pela Globo, inicialmente em parceria com a UNICEF e atualmente com a UNESCO.</p>
 					</div>
-					<div class="col-md-12">
+					<div class="col-md-12 mt-3">
 						<p><strong>Fotos</strong></p>
+						<div class="image-slider">
+							<div class="image-slider-content">
+								<figure class="item">
+									<img width="107" height="102" src="https://loremflickr.com/107/102" alt="Foto">
+								</figure>
+								<figure class="item">
+									<img width="107" height="102" src="https://loremflickr.com/107/102" alt="Foto">
+								</figure>
+								<figure class="item">
+									<img width="107" height="102" src="https://loremflickr.com/107/102" alt="Foto">
+								</figure>
+							</div>
+						</div>
 					</div>
-					<div class="col-md-12">
+					<div class="col-md-12 mt-3">
 						<p><strong>Videos</strong></p>
+						<div class="video-slider">
+							<video muted="" autoplay="" loop="" playsinline="" poster="https://especiaiscomunicacaoprod.s3.amazonaws.com/criesp/doacoes/crianca/doacao/maik-doacao.png?Expires=1627496328&amp;AWSAccessKeyId=AKIAJXGK6DAEMAYESHFQ&amp;Signature=a1SxmAD%2BObKTL06O%2FhkTZUIu3dE%3D" data-fallback="/static/img/Maik-Doar.jpg">
+								<source src="https://especiaiscomunicacaoprod.s3.amazonaws.com/criesp/doacoes/crianca/doacao/maik-doacao.mp4?Expires=1627496328&amp;AWSAccessKeyId=AKIAJXGK6DAEMAYESHFQ&amp;Signature=ye%2FCEcntuMo9XhQW0pkDoy7SYTI%3D" type="video/mp4">
+							</video>
+						</div>
 					</div>
 				</div>
 			</div>

@@ -1,0 +1,37 @@
+.custom-donation-box {
+	img,
+	video {
+		max-width: 100%;
+	}
+	.video-slider {
+		border-radius: 8px;
+		overflow: hidden;
+		-webkit-mask-image: -webkit-radial-gradient(white, black);
+	}
+	p {
+		&.small {
+			font-size: 10px;
+		}
+	}
+}
+
+.image-slider {
+	position: relative;
+	width: calc(100% + 1.5rem);
+	overflow: hidden;
+	.image-slider-content {
+		position: relative;
+		display: flex;
+		flex-direction: row;
+		width: auto;
+		overflow-y: hidden;
+		overflow-x: auto;
+		.item {
+			display: block;
+			width: 107px;
+			margin-right: 13px;
+			border-radius: 8px;
+			overflow: hidden;
+		}
+	}
+}
