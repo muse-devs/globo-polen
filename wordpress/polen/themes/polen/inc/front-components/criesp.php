@@ -18,7 +18,7 @@ function criesp_get_home_banner($link)
 <?php
 }
 
-function polen_front_get_donation_box_criesp()
+function criesp_get_donation_box()
 {
 ?>
 	<section class="row donation-box custom-donation-box mt-4 mb-4">
@@ -73,5 +73,24 @@ function polen_front_get_donation_box_criesp()
 			</div>
 		</div>
 	</section>
+<?php
+}
+
+function criesp_get_thankyou_box()
+{
+?>
+	<div class="row mb-5">
+		<div class="col-md-12">
+			<div class="box-round p-4 criesp-thankyou-box">
+				<div class="row">
+					<div class="mt-2 mb-4 col-md-12 text-center">
+						<img width="192" src="<?php echo TEMPLATE_URI . '/assets/img/criesp/logo-criesp.png';  ?>" alt="Logo Criança Esperança" />
+					</div>
+				</div>
+				<h4 class="title">Obrigado por ajudar o Criança Esperança.</h4>
+				<p class="description m-0">Na Polen 100% do cachê dos vídeos serão revertidos em doações para o Criança Esperança.</p>
+			</div>
+		</div>
+	</div>
 <?php
 }
