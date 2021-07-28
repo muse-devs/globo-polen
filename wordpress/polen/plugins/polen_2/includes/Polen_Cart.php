@@ -80,6 +80,10 @@ class Polen_Cart
                 $item->add_meta_data( 'allow_video_on_page', $cart_item['allow_video_on_page'], true );
             }
         }
+        if( social_product_is_social( $item->get_product(), social_get_category_base() ) ) {
+            $order->add_meta_data( 'social', '1' );
+            $order->add_meta_data( 'campaing', 'criesp' );
+        }
     }
 
     public function polen_save_cart(){
