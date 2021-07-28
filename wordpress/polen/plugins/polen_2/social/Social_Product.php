@@ -7,7 +7,8 @@ class Social_Product
 {
     public static function product_is_social( $product, $category )
     {
-        if( in_array( $category->term_id, $product->get_categories_ids() ) ) {
+        $product_categories_ids = wc_get_product_cat_ids( $product->get_id() );
+        if( in_array( $category->term_id, $product_categories_ids ) ) {
             return true;
         }
         return false;
