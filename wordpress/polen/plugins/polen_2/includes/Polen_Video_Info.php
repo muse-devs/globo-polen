@@ -307,7 +307,7 @@ class Polen_Video_Info extends Polen_DB
     {
         global $wpdb;
         return self::create_instance_many( $wpdb->get_results(
-            "SELECT * FROM wp_video_info WHERE vimeo_process_complete=1 AND vimeo_file_play IS NULL LIMIT 20;"
+            "SELECT * FROM wp_video_info WHERE vimeo_process_complete=1 AND vimeo_file_play IS NULL LIMIT 100;"
         ) );
     }
 }
