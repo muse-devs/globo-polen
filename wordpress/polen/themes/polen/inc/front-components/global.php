@@ -1,6 +1,7 @@
 <?php
 
-function polen_front_get_banner_with_carousel() {
+function polen_front_get_banner_with_carousel()
+{
 	$carrousel = array(
 		array(
 			"mobile" => TEMPLATE_URI . "/assets/img/banner-home-mobile-new.png",
@@ -108,13 +109,17 @@ function polen_front_get_banner()
 }
 
 // $size pode ser 'medium' e 'small'
-function polen_front_get_card($item, $size = "small")
+function polen_front_get_card($item, $size = "small", $social = false)
 {
 	$class = $size;
 	if ($size === "small") {
 		$class = "col-6 col-md-2";
 	} elseif ($size === "medium") {
 		$class = "col-6 col-md-3";
+	}
+
+	if ($social) {
+		$size .= " criesp";
 	}
 
 	if (isset($item['ID'])) {
@@ -130,9 +135,20 @@ function polen_front_get_card($item, $size = "small")
 	<div class="<?= $class; ?>">
 		<div class="polen-card <?= $size; ?>">
 			<figure class="image">
-				<?php $donate ? polen_donate_badge("Social") : null; ?>
+				<?php if ($social) {
+					polen_donate_badge("Criança Esperança", true, true);
+				} else {
+					$donate ? polen_donate_badge("Social") : null;
+				} ?>
 				<img loading="lazy" src="<?php echo $image[0]; ?>" alt="<?= $item["name"]; ?>">
-				<span class="price"><span class="mr-2"><?php Icon_Class::polen_icon_camera_video(); ?></span><?php echo $item["price"] == "0" ? 'GRÁTIS' : $item['price_formatted']; ?></span>
+				<div class="price text-right">
+					<?php if ($social) : ?>
+						<span class="text">DOAR</span><br />
+					<?php else : ?>
+						<span class="mr-2"><?php Icon_Class::polen_icon_camera_video(); ?></span>
+					<?php endif; ?>
+					<?php echo $item["price"] == "0" ? 'GRÁTIS' : $item['price_formatted']; ?>
+					</div>
 				<a href="<?= $item["talent_url"]; ?>" class="link"></a>
 			</figure>
 			<h4 class="title text-truncate">
@@ -146,7 +162,7 @@ function polen_front_get_card($item, $size = "small")
 <?php
 }
 
-function polen_banner_scrollable($items, $title, $link)
+function polen_banner_scrollable($items, $title, $link, $social = false)
 {
 	if (!$items) {
 		return;
@@ -165,7 +181,8 @@ function polen_banner_scrollable($items, $title, $link)
 			<div class="banner-wrapper">
 				<div class="banner-content">
 					<?php foreach ($items as $item) : ?>
-						<?php polen_front_get_card($item, "responsive"); ?>
+						<?php $social == false ? $social = social_product_is_social(wc_get_product($item['ID']), social_get_category_base()) : false; ?>
+						<?php polen_front_get_card($item, "responsive", $social); ?>
 					<?php endforeach; ?>
 				</div>
 			</div>
@@ -174,7 +191,7 @@ function polen_banner_scrollable($items, $title, $link)
 <?php
 }
 
-function polen_front_get_news($items, $title, $link)
+function polen_front_get_news($items, $title, $link, $social = false)
 {
 	if (!$items) {
 		return;
@@ -185,7 +202,9 @@ function polen_front_get_news($items, $title, $link)
 			<header class="row mb-3">
 				<div class="col-12 d-flex justify-content-between align-items-center">
 					<h2 class="mr-2"><?php echo $title; ?></h2>
-					<a href="<?php echo $link; ?>">Ver todos <?php Icon_Class::polen_icon_chevron_right(); ?></a>
+					<?php if ($link) : ?>
+						<a href="<?php echo $link; ?>">Ver todos <?php Icon_Class::polen_icon_chevron_right(); ?></a>
+					<?php endif; ?>
 				</div>
 			</header>
 		</div>
@@ -195,7 +214,8 @@ function polen_front_get_news($items, $title, $link)
 					<div class="banner-wrapper">
 						<div class="banner-content">
 							<?php foreach ($items as $item) : ?>
-								<?php polen_front_get_card($item, "responsive"); ?>
+								<?php $social == false ? $social = social_product_is_social(wc_get_product($item['ID']), social_get_category_base()) : false; ?>
+								<?php polen_front_get_card($item, "responsive", $social); ?>
 							<?php endforeach; ?>
 						</div>
 					</div>

@@ -153,6 +153,12 @@
 			.icon {
 				font-size: 11px;
 			}
+			.text {
+				display: inline-block;
+				margin-bottom: 5px;
+				color: var(--light);
+				font-weight: 400;
+			}
 		}
 		.donate-badge {
 			position: absolute;
