@@ -41,21 +41,21 @@ function renderStories(videos, name, avatar) {
 			keyboardTip: 'Clique para ver o próximo',
 			visitLink: 'Visite o Link',
 			time: {
-				ago:'atrás', 
-				hour:'hora', 
-				hours:'horas', 
-				minute:'minuto', 
-				minutes:'minutos', 
-				fromnow: 'from now', 
-				seconds:'segundos', 
-				yesterday: 'ontem', 
-				tomorrow: 'amanhã', 
+				ago:'atrás',
+				hour:'hora',
+				hours:'horas',
+				minute:'minuto',
+				minutes:'minutos',
+				fromnow: 'from now',
+				seconds:'segundos',
+				yesterday: 'ontem',
+				tomorrow: 'amanhã',
 				days:'dias'
 			}
 		},
 		stories: [
 			Zuck.buildTimelineItem(
-				name, 
+				name,
 				avatar,
 				name,
 				"",
@@ -67,10 +67,6 @@ function renderStories(videos, name, avatar) {
 	if (videos.length === 0) {
 		document.getElementById("stories").setAttribute("id", "");
 	}
-}
-
-function teste() {
-	
 }
 
 jQuery(document).ready(function () {
