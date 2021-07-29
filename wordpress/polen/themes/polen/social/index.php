@@ -19,6 +19,8 @@ get_header();
 
 </main><!-- #main -->
 
+<?php isset($_COOKIE[POL_COOKIES['CRIESP_BANNER_HOME']]) || criesp_get_modal(); ?>
+
 <?php
 get_footer();
 

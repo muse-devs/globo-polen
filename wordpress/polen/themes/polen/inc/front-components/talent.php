@@ -86,7 +86,7 @@ function polen_front_get_talent_videos($talent)
 <?php
 }
 
-function polen_get_talent_card($talent)
+function polen_get_talent_card($talent, $social = false)
 {
 ?>
 	<div class="talent-card alt">
@@ -97,7 +97,7 @@ function polen_get_talent_card($talent)
 			</div>
 		</header>
 		<div class="price-box pt-3">
-			<span class="cat">Você vai pagar</span>
+			<span class="cat">Você vai <?php echo $social ? "doar" : "pagar" ?></span>
 			<p class="price mt-2">
 				<?php wc_cart_totals_order_total_html(); ?>
 			</p>
@@ -121,7 +121,7 @@ function polen_get_talent_card($talent)
 					</div>
 				</div>
 			<?php endif; ?>
-			<?php if ($talent["has_details"]) : ?>
+			<?php if ($talent["has_details"] && !$social) : ?>
 				<button class="show-details d-flex justify-content-center" onclick="showDetails()"><?php Icon_Class::polen_icon_chevron("down") ?></button>
 			<?php endif; ?>
 		</div>
