@@ -89,7 +89,7 @@ function polen_front_get_talent_videos($talent)
 function polen_get_talent_card($talent, $social = false)
 {
 ?>
-	<div class="talent-card alt">
+	<div class="talent-card alt<?php if($social) { echo ' criesp'; } ?>">
 		<header class="row pb-3 header">
 			<div class="col-md-12 d-flex align-items-center">
 				<div class="avatar avatar-sm" style="background-image: url(<?php echo isset($talent["avatar"]) ? $talent["avatar"] : TEMPLATE_URI . '/assets/img/avatar.png';  ?>)"></div>
