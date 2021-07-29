@@ -377,6 +377,11 @@ jQuery(document).ready(function () {
 	});
 })(jQuery);
 
+function closeModal() {
+	let modal = document.querySelector(".show");
+	modal.classList.remove("show");
+}
+
 function polSlugfy(s, opt) {
 	s = String(s);
 	opt = Object(opt);

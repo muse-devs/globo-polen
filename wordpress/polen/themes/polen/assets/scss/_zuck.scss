@@ -142,6 +142,12 @@
 #zuck-modal-content .story-viewer.loading .head .loading {
     display: block;
 }
+
+#zuck-modal-content .story-viewer.muted .tip.muted {
+    top: 50%;
+    bottom: auto;
+}
+
 #zuck-modal-content .story-viewer.loading .head .right .time,
 #zuck-modal-content .story-viewer.loading .head .right .close {
     display: none;
@@ -334,6 +340,16 @@
 #zuck-modal-content .story-viewer .slides .item.active,
 #zuck-modal-content .story-viewer .slides .item.active .tip.link {
     display: block;
+}
+
+#zuck-modal-content .story-viewer .slides .item.active .tip.link {
+    background: linear-gradient(99.05deg, #FD6939 30.31%, #FF1A7A 79.33%);
+    border-radius: 98px;
+    font-style: normal;
+    font-weight: bold;
+    text-transform: capitalize;
+    padding: 10px 50px;
+    font-size: 22px;
 }
 
 #zuck-modal-content .story-viewer .tip {
@@ -659,9 +675,15 @@
 .stories.snapgram .story.seen {
     opacity: 0.75;
 }
+
 .stories.snapgram .story.seen > a > .item-preview {
     background: #999;
 }
+
 .stories.snapgram .story.seen > a {
     color: #999 !important;
+}
+
+.no-link {
+    cursor: auto;
 }

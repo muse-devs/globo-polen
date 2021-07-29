@@ -20,19 +20,19 @@ var timestamp = function() {
 function generateStoriesArray(videos) {
 	const array = [];
 	videos.map((item, i) => {
-		array.push([`video-`+i, "video", 0, item.video, item.thumb, '', false, false, timestamp()],);
+		array.push([`video-`+i, "video", 0, item.video, '', '#', 'Doe Agora', false, timestamp()],);
 	})
 	return array;
 }
 
 function renderStories(videos, name, avatar) {
-	var stories = new Zuck('stories', {
+	let stories = new Zuck('stories', {
 		backNative: true,
 		previousTap: true,
 		backButton: true,
 		skin: 'Snapgram',
 		avatars: true,
-		paginationArrows: true,
+		paginationArrows: false,
 		list: false,
 		cubeEffect: true,
 		localStorage: true,
@@ -62,10 +62,15 @@ function renderStories(videos, name, avatar) {
 				timestamp(),
 				generateStoriesArray(videos)
 			),
-		]
+		],
 	});
+	// Customizando a lib quando nao houver vídeos
 	if (videos.length === 0) {
 		document.getElementById("stories").setAttribute("id", "");
+		let story = document.getElementsByClassName("story");
+		story[0].classList.add("seen");
+		let link = document.getElementsByClassName("item-link");
+		link[0].classList.add("no-link");
 	}
 }
 

@@ -18,6 +18,63 @@ function criesp_get_home_banner($link)
 <?php
 }
 
+function criesp_get_modal()
+{
+?>
+	<div class="modal fade show" id="criespModal" tabindex="-1" role="dialog" aria-labelledby="criespLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content white-modal">
+				<div class="modal-header">
+					<div class="col-12 modal-logo">
+						<img class="img-responsive" src="<?php echo TEMPLATE_URI . '/assets/img/logo-black.png';  ?>"></img>
+						<img class="img-responsive criesp-logo" src="<?php echo TEMPLATE_URI . '/assets/img/criesp/logo-criesp-color.png';  ?>"></img>
+					</div>
+					<button onclick="closeModal()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-12 d-flex justify-content-center">
+							<img class="img-responsive" src="<?php echo TEMPLATE_URI . '/assets/img/criesp/modal-doe.png';  ?>"></img>
+						</div>
+						<div class="col-12">
+							<h2>Seja bem-vindo à Polen</h2>
+							<p>Aqui sua doação vira um vídeo-Polen personalizado do seu artista favorito! Além de se emocionar com seu ídolo, 100% do valor da doação vai para a UNESCO e ajuda causas sociais que mudam o Brasil e o mundo! ahh para DOAR é MUITO fácil!</p>
+							<h3>Como funciona</h3>
+						</div>
+						<div class="col-md-12">
+							<ul class="order-flow half">
+								<li class="item itempayment-approved complete">
+									<span class="background status">1</span>
+									<span class="text">
+										<p class="description">Escolha aqui no site um dos artistas Polen | Criança Esperança</p>
+									</span>
+								</li>
+								<li class="item itempayment-approved complete">
+									<span class="background status">2</span>
+									<span class="text">
+										<p class="description">Faça a sua doação através do botão DOAR</p>
+									</span>
+								</li>
+								<li class="item itempayment-approved complete">
+									<span class="background status">3</span>
+									<span class="text">
+										<p class="description">Você recebe um vídeo de agradecimento personalizado do seu ídolo</p>
+									</span>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer d-flef justify-content-center">
+					<button onclick="closeModal()" type="button" class="btn btn-secondary" data-dismiss="modal">Começar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php
+}
+
 function criesp_get_donation_box()
 {
 ?>
