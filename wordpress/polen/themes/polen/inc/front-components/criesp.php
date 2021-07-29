@@ -29,7 +29,7 @@ function criesp_get_modal()
 						<img class="img-responsive" src="<?php echo TEMPLATE_URI . '/assets/img/logo-black.png';  ?>"></img>
 						<img class="img-responsive criesp-logo" src="<?php echo TEMPLATE_URI . '/assets/img/criesp/logo-criesp-color.png';  ?>"></img>
 					</div>
-					<button onclick="closeModal()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<button onclick="closeCriespModal()" type="button" class="close" data-dismiss="modal" aria-label="Close">
 					</button>
 				</div>
 				<div class="modal-body">
@@ -67,7 +67,7 @@ function criesp_get_modal()
 					</div>
 				</div>
 				<div class="modal-footer d-flef justify-content-center">
-					<button onclick="closeModal()" type="button" class="btn btn-secondary" data-dismiss="modal">Começar</button>
+					<button onclick="closeCriespModal()" type="button" class="btn btn-secondary" data-dismiss="modal">Começar</button>
 				</div>
 			</div>
 		</div>

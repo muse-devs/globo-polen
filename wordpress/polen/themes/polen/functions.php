@@ -12,6 +12,7 @@ define('TEMPLATE_DIR', get_template_directory());
 define('DEVELOPER', defined('ENV_DEV') && ENV_DEV);
 define('POL_COOKIES', array(
 	'POLICIES' => 'pol_policies',
+	'CRIESP_BANNER_HOME' => 'criesp-banner-home',
 ));
 
 if ( ! defined( '_S_VERSION' ) ) {
@@ -218,6 +219,11 @@ function polen_scripts() {
 	if (is_tribute_app()) {
 		wp_enqueue_script( 'tributes-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'tributes.js', array("jquery", "vuejs"), _S_VERSION, true );
 		wp_enqueue_script( 'tributes-scripts-video', TEMPLATE_URI . '/assets/js/' . $min . 'upload-video-tributes.js', array("jquery", "polen-upload-video-tus"), _S_VERSION, true );
+	}
+
+	if(social_is_in_social_app())
+	{
+		wp_enqueue_script( 'polen-cart', TEMPLATE_URI . '/assets/js/' . $min . 'criesp.js', array(), _S_VERSION, true );
 	}
 
 	wp_enqueue_style('polen-custom-styles', TEMPLATE_URI . '/assets/css/style.css', array(), _S_VERSION);
