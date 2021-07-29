@@ -201,7 +201,11 @@ function polen_get_theme_logos() {
 	$logo_light = get_theme_mod( 'logo_theme_white' );
 
 	$html =  '<a href="' . get_site_url() . '" class="custom-logo-link" rel="home" aria-current="page">';
-	if(is_front_page() || social_is_in_social_app()) {
+	if(social_is_in_social_app())
+	{
+		$html .= 	'<img width="207" height="40" src="'. TEMPLATE_URI . '/assets/img/criesp/logo-polen-criesp.png" class="custom-logo custom-logo-criesp" alt="Polen">';
+	}
+	else if(is_front_page()) {
 		$html .= 	'<img width="168" height="88" src="'. $logo_dark . '" class="custom-logo" alt="Polen">';
 	} else {
 		$html .= 	'<img width="168" height="88" src="'. $logo_dark . '" class="custom-logo dark" alt="Polen">';
