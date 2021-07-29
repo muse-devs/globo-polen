@@ -1,6 +1,6 @@
 <?php
 
-function polen_front_get_banner_with_carousel()
+function polen_front_get_banner_with_carousel($social = false)
 {
 	$carrousel = array(
 		array(
@@ -17,23 +17,25 @@ function polen_front_get_banner_with_carousel()
 ?>
 	<section class="top-banner mb-4">
 		<div class="owl-carousel owl-theme">
-			<div class="item">
-				<div class="carrousel">
-					<?php foreach ($carrousel as $item) : ?>
-						<figure class="image">
-							<img loading="lazy" src="<?php echo $item['mobile']; ?>" alt="Banner da home" class="mobile" />
-							<img loading="lazy" src="<?php echo $item['desktop']; ?>" alt="Banner da home" class="desktop" />
-						</figure>
-					<?php endforeach; ?>
+			<?php if (!$social) : ?>
+				<div class="item">
+					<div class="carrousel">
+						<?php foreach ($carrousel as $item) : ?>
+							<figure class="image">
+								<img loading="lazy" src="<?php echo $item['mobile']; ?>" alt="Banner da home" class="mobile" />
+								<img loading="lazy" src="<?php echo $item['desktop']; ?>" alt="Banner da home" class="desktop" />
+							</figure>
+						<?php endforeach; ?>
+					</div>
+					<div class="content">
+						<h2 class="title mb-5">Presenteie e<br />surpreenda com vídeos personalizados.</h2>
+						<a href="<?php echo polen_get_all_talents_url(); ?>" class="banner-button-link">
+							<span class="mr-3">Ver todos os artistas</span>
+							<?php Icon_Class::polen_icon_chevron_right(); ?>
+						</a>
+					</div>
 				</div>
-				<div class="content">
-					<h2 class="title mb-5">Presenteie e<br />surpreenda com vídeos personalizados.</h2>
-					<a href="<?php echo polen_get_all_talents_url(); ?>" class="banner-button-link">
-						<span class="mr-3">Ver todos os artistas</span>
-						<?php Icon_Class::polen_icon_chevron_right(); ?>
-					</a>
-				</div>
-			</div>
+			<?php endif; ?>
 			<div class="item">
 				<div class="carrousel">
 					<?php foreach ($carrousel2 as $item) : ?>
@@ -44,11 +46,13 @@ function polen_front_get_banner_with_carousel()
 					<?php endforeach; ?>
 				</div>
 				<div class="content">
-					<h2 class="title mb-5">Aqui sua doação para<br />o Criança Esperança vira um vídeo.</h2>
-					<a href="#criesp" class="banner-button-link">
-						<span class="mr-3">Doe Agora</span>
-						<?php Icon_Class::polen_icon_chevron_right(); ?>
-					</a>
+					<h2 class="title m<?php echo $social ? 't' : 'b'; ?>-5">Aqui sua doação para<br />o Criança Esperança vira um vídeo.</h2>
+					<?php if (!$social) : ?>
+						<a href="#criesp" class="banner-button-link">
+							<span class="mr-3">Doe Agora</span>
+							<?php Icon_Class::polen_icon_chevron_right(); ?>
+						</a>
+					<?php endif; ?>
 				</div>
 			</div>
 		</div>
@@ -148,7 +152,7 @@ function polen_front_get_card($item, $size = "small", $social = false)
 						<span class="mr-2"><?php Icon_Class::polen_icon_camera_video(); ?></span>
 					<?php endif; ?>
 					<?php echo $item["price"] == "0" ? 'GRÁTIS' : $item['price_formatted']; ?>
-					</div>
+				</div>
 				<a href="<?= $item["talent_url"]; ?>" class="link"></a>
 			</figure>
 			<h4 class="title text-truncate">

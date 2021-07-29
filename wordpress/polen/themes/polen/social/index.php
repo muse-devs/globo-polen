@@ -6,7 +6,7 @@ get_header();
 
 <main id="primary" class="site-main">
 
-	<?php polen_front_get_banner_with_carousel();
+	<?php polen_front_get_banner_with_carousel(true);
 	?>
 
 	<?php polen_front_get_news(social_get_products_by_category_slug(social_get_category_base()), "Os artistas que apoiam essa causa", null, true);
