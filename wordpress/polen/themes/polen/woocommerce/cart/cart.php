@@ -60,7 +60,7 @@ $Talent_Fields = new Polen_Update_Fields();
 				"description" => ""
 			);
 		}
-		polen_get_talent_card( $talent_cart_detail ); ?>
+		polen_get_talent_card( $talent_cart_detail, $is_social ); ?>
 	</div>
 	<form class="woocommerce-cart-form col-12 col-md-6 order-md-1" action="<?php echo esc_url(wc_get_checkout_url()); ?>" method="post">
 		<?php do_action('woocommerce_before_cart_table'); ?>
@@ -237,19 +237,24 @@ $Talent_Fields = new Polen_Update_Fields();
 				<div class="row mt-4">
 					<div class="col-12 col-md-12">
 						<?php
+						$social_class = '';
 						$allow_video_on_page = isset($cart_item['allow_video_on_page']) ? $cart_item['allow_video_on_page'] : 'on';
 						$checked_allow = '';
 						if ($allow_video_on_page == 'on') {
 							$checked_allow = 'checked';
 						}
-
+						if($is_social)
+						{
+							$social_class = 'criesp';
+						}
 						?>
 						<label for="cart_allow_video_on_page_<?php echo $cart_item_key; ?>" class="d-flex">
 							<?php
 							printf(
-								'<input type="checkbox" name="allow_video_on_page" class="%s form-control form-control-lg" id="cart_allow_video_on_page_%s"
+								'<input type="checkbox" name="allow_video_on_page" class="%s %s form-control form-control-lg" id="cart_allow_video_on_page_%s"
 											data-cart-id="%s" %s>',
 								'polen-cart-item-data',
+								$social_class,
 								$cart_item_key,
 								$cart_item_key,
 								$checked_allow,
@@ -261,7 +266,7 @@ $Talent_Fields = new Polen_Update_Fields();
 				</div>
 				<div class="row actions">
 					<div class="col-12 col-md-12 mb-4 mt-3">
-						<button type="submit" class="btn btn-primary btn-lg btn-block" name="" value="<?php esc_attr_e('Update cart', 'woocommerce'); ?>"><?php esc_html_e('Avançar', 'woocommerce'); ?></button>
+						<button type="submit" class="btn btn-<?php echo $is_social ? 'success' : 'primary'; ?> btn-lg btn-block" name="" value="<?php esc_attr_e('Update cart', 'woocommerce'); ?>"><?php esc_html_e('Avançar', 'woocommerce'); ?></button>
 
 						<?php //do_action( 'woocommerce_cart_actions' );
 						?>

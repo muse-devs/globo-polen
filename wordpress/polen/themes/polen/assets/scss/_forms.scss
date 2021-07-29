@@ -293,6 +293,15 @@ textarea {
 				}
 			}
 		}
+		&.criesp {
+			border-color: var(--success) !important;
+			&:checked,
+			&:checked:focus {
+				--r: 43deg;
+				--b: var(--primary);
+				background-color: var(--success);
+			}
+		}
 	}
 	input[type="radio"] {
 		border-radius: 50%;

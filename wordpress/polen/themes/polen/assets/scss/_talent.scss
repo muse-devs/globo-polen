@@ -342,7 +342,10 @@
 	box-sizing: border-box;
 	&.alt {
 		color: var(--light);
-		background-color: $secondary;
+		background-color: var(--secondary);
+	}
+	&.criesp {
+		background: var(--success);
 	}
 	.header {
 		border-bottom: 1px dashed $light-25;
