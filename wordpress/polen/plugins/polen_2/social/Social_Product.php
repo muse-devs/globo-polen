@@ -22,7 +22,7 @@ class Social_Product
             'orderby' => 'stock_quantity',
             'order' => 'DESC',
         );
-        $products = wc_get_products( $args );
+        $products = _polen_get_info_talents_by_args( $args );
         return $products;
     }
 }

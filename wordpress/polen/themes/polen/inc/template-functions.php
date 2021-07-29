@@ -201,7 +201,7 @@ function polen_get_theme_logos() {
 	$logo_light = get_theme_mod( 'logo_theme_white' );
 
 	$html =  '<a href="' . get_site_url() . '" class="custom-logo-link" rel="home" aria-current="page">';
-	if(is_front_page()) {
+	if(is_front_page() || social_is_in_social_app()) {
 		$html .= 	'<img width="168" height="88" src="'. $logo_dark . '" class="custom-logo" alt="Polen">';
 	} else {
 		$html .= 	'<img width="168" height="88" src="'. $logo_dark . '" class="custom-logo dark" alt="Polen">';

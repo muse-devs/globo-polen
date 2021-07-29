@@ -197,7 +197,7 @@ function polen_scripts() {
 
 	wp_enqueue_script( 'global-js', TEMPLATE_URI . '/assets/js/' . $min . 'global.js', array("jquery"), _S_VERSION, false );
 
-	if(is_front_page()) {
+	if(is_front_page() || social_is_in_social_app()) {
 		wp_enqueue_script( 'home-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'front-page.js', array('owl-carousel'), _S_VERSION, true );
 	}
 
