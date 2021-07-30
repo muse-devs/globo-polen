@@ -102,17 +102,17 @@ function criesp_get_donation_box()
 							<div class="image-slider-content">
 								<div>
 									<figure class="item">
-										<img width="107" height="102" src="https://loremflickr.com/107/102" alt="Foto">
+										<img width="107" height="102" src="<?php echo TEMPLATE_URI; ?>/assets/img/criesp/criesp1.png" alt="Foto 1">
 									</figure>
 								</div>
 								<div>
 									<figure class="item">
-										<img width="107" height="102" src="https://loremflickr.com/107/102" alt="Foto">
+										<img width="107" height="102" src="<?php echo TEMPLATE_URI; ?>/assets/img/criesp/criesp2.png" alt="Foto 2">
 									</figure>
 								</div>
 								<div>
 									<figure class="item">
-										<img width="107" height="102" src="https://loremflickr.com/107/102" alt="Foto">
+										<img width="107" height="102" src="<?php echo TEMPLATE_URI; ?>/assets/img/criesp/criesp3.png" alt="Foto 3">
 									</figure>
 								</div>
 							</div>
