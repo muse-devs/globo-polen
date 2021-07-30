@@ -261,7 +261,7 @@ function polen_front_get_categories($items, $link = '#')
 <?php
 }
 
-function polen_front_get_artists($items, $title)
+function polen_front_get_artists($items, $title, $social = false)
 {
 	if (!$items) {
 		return;
@@ -279,7 +279,8 @@ function polen_front_get_artists($items, $title)
 		<div class="col-md-12">
 			<div class="row">
 				<?php foreach ($items as $item) : ?>
-					<?php polen_front_get_card($item, "small"); ?>
+					<?php $social == false ? $social = social_product_is_social(wc_get_product($item['ID']), social_get_category_base()) : false; ?>
+					<?php polen_front_get_card($item, "small", $social); ?>
 				<?php endforeach; ?>
 			</div>
 		</div>
