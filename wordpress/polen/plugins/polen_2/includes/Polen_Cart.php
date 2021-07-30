@@ -67,6 +67,7 @@ class Polen_Cart
             }
             if( isset( $cart_item['name_to_video'] ) ) {
                 $item->add_meta_data( 'name_to_video', $cart_item['name_to_video'], true );
+                $name = $cart_item['name_to_video'];
             }
             if( isset( $cart_item['email_to_video'] ) ) {
                 $item->add_meta_data( 'email_to_video', $cart_item['email_to_video'], true );
@@ -77,6 +78,7 @@ class Polen_Cart
             if( isset( $cart_item['instructions_to_video'] ) ) {
                 $instructions_to_video = filter_var( $cart_item['instructions_to_video'], FILTER_SANITIZE_SPECIAL_CHARS );
                 $item->add_meta_data( 'instructions_to_video', $instructions_to_video, true );
+                $city = $cart_item['instructions_to_video'];
             }
             if( isset( $cart_item['allow_video_on_page'] ) ) {
                 $item->add_meta_data( 'allow_video_on_page', $cart_item['allow_video_on_page'], true );
@@ -88,7 +90,7 @@ class Polen_Cart
             $order->add_meta_data( Social_Order::ORDER_META_KEY_SOCIAL, '1' );
             $order->add_meta_data( Social_Order::ORDER_META_KEY_CAMPAING, 'criesp' );
 
-            $instructions_to_video = "Agradecer {$cart_item['name_to_video']} de {$cart_item['instructions_to_video']} pela doação ao criança esperança 2021!";
+            $instructions_to_video = "Agradecer {$name} de {$city} pela doação ao criança esperança 2021!";
             $item->add_meta_data( 'instructions_to_video', $instructions_to_video, true );
         }
     }
