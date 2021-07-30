@@ -67,7 +67,7 @@ $Talent_Fields = new Polen_Update_Fields();
 				"description" => $cart_item['instructions_to_video'] ? $cart_item['instructions_to_video'] : null
 			);
 		}
-		polen_get_talent_card($talent_cart_detail); ?>
+		polen_get_talent_card($talent_cart_detail, $is_social); ?>
 	</div>
 	<form name="checkout" method="post" class="checkout woocommerce-checkout col-12 col-md-6 order-md-1" action="<?php echo esc_url(wc_get_checkout_url()); ?>" enctype="multipart/form-data">
 		<div class="row">
