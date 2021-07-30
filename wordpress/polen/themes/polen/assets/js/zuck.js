@@ -512,7 +512,8 @@ var Zuck = (function (t) {
                                         if (u("openEffect")) {
                                             var l = a("#".concat(y, ' [data-id="').concat(t, '"] .item-preview')),
                                                 p = f(l);
-                                            (i.style.marginLeft = "".concat(p[0] + l.offsetWidth / 2, "px")),
+                                            if (l) {
+                                                (i.style.marginLeft = "".concat(p[0] + l.offsetWidth / 2, "px")),
                                                 (i.style.marginTop = "".concat(p[1] + l.offsetHeight / 2, "px")),
                                                 (i.style.display = "block"),
                                                 (i.slideWidth = a("#zuck-modal .story-viewer").offsetWidth),
@@ -522,6 +523,7 @@ var Zuck = (function (t) {
                                                 setTimeout(function () {
                                                     s();
                                                 }, 300);
+                                            }
                                         } else (i.style.display = "block"), (i.slideWidth = a("#zuck-modal .story-viewer").offsetWidth), s();
                                         u("callbacks", "onView")(t);
                                     });
