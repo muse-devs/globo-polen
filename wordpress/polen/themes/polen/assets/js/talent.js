@@ -20,7 +20,7 @@ var timestamp = function() {
 function generateStoriesArray(videos) {
 	const array = [];
 	videos.map((item, i) => {
-		array.push([`video-`+i, "video", 0, item.video, '','javacript:clickToBuy()', 'Doe Agora', false, timestamp()]);
+		array.push([`video-`+i, "video", 0, item.video, '','javascript:clickToBuy()', 'Doe Agora', false, timestamp()]);
 	})
 	return array;
 }
