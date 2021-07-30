@@ -181,7 +181,7 @@ function polen_banner_scrollable($items, $title, $link, $subtitle = "", $social 
 				</div>
 				<?php if ($subtitle != "") : ?>
 					<div class="col-12">
-						<p class="mb-1"><?php echo $subtitle; ?></p>
+						<p class="my-1"><?php echo $subtitle; ?></p>
 					</div>
 				<?php endif; ?>
 			</header>
