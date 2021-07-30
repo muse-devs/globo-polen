@@ -259,7 +259,7 @@ var Zuck = (function (t) {
                                         .concat(
                                             i(n, "link")
                                                 ? '<a class="tip link" href="'
-                                                      .concat(i(n, "link"), '" rel="noopener" target="_blank">\n                            ')
+                                                      .concat(i(n, "link"), '">\n                            ')
                                                       .concat(i(n, "linkText") && "" !== i(n, "linkText") ? i(n, "linkText") : u("language", "visitLink"), "\n                          </a>")
                                                 : "",
                                             "\n                  </div>"
