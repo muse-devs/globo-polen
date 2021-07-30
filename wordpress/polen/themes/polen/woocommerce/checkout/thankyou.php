@@ -26,9 +26,11 @@ $order_array = Order_Class::polen_get_order_flow_obj($order_number, $order_statu
 $social = social_order_is_social($order);
 ?>
 <div class="row">
-	<div class="col-md-12 mb-4">
-		<h1>Seu vídeo foi solicitado com Sucesso</h1>
-	</div>
+	<?php if( ! $social ) : ?>
+		<div class="col-md-12 mb-4">
+			<h1>Seu vídeo foi solicitado com Sucesso</h1>
+		</div>
+	<?php endif; ?>
 	<div class="col-12">
 		<?php $social && criesp_get_thankyou_box(); ?>
 	</div>

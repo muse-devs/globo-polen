@@ -12,6 +12,10 @@ $total_to_recive_discount = polen_apply_polen_part_price( $total_to_recive );
 $all_amount_alredy_win = $polen_talent->get_total_by_order_status_return_raw( $current_user->ID, 'wc-completed' );
 $all_amount_alredy_win_discount = polen_apply_polen_part_price( $all_amount_alredy_win );
 
+if( social_user_is_social( $current_user->ID ) ) {
+	wp_safe_redirect( site_url( 'my-account/orders/' ) );
+}
+
 if ($polen_talent->is_user_talent($current_user)) {
 ?>
 	<section class="talent-dashboard-start">
