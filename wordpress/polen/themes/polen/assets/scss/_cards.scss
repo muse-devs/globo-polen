@@ -331,10 +331,16 @@
 		padding: 15px;
 		top: 25%;
 		width: 100%;
+		@include media-breakpoint-down(sm) {
+			padding: 0px 40px;
+		}
 		.title {
 			font-size: 1.7rem;
 			font-weight: 700;
 			color: var(--light);
+			@include media-breakpoint-down(sm) {
+				font-size: 1.4rem;
+			}
 		}
 		.banner-button-link {
 			padding: 0.8rem 1.8rem;
@@ -343,6 +349,12 @@
 			color: var(--light);
 			border-radius: 140px;
 			background-color: var(--dark);
+			@include media-breakpoint-down(sm) {
+				font-size: 1rem;
+			}
+			@include media-breakpoint-down(xs) {
+				font-size: 0.8rem;
+			}
 			.icon,
 			.bi {
 				font-size: 12px;
