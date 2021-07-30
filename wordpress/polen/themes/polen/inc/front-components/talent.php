@@ -159,7 +159,11 @@ function polen_get_talent_card($talent, $social = false)
 				</div>
 				<div class="row description mt-4">
 					<div class="col-12">
-						<span class="title">Instruções</span>
+						<?php if( !$social ) : ?>
+							<span class="title">Instruções</span>
+						<?php else : ?>
+							<span class="title">Sua cidade</span>
+						<?php endif; ?>
 						<p class="value mt-2"><?php echo $talent["description"]; ?></p>
 					</div>
 				</div>

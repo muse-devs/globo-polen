@@ -32,8 +32,14 @@ if (in_array('user_talent',  $logged_user->roles)) {
 			echo "<p class='mt-2 mb-4'>Você tem <strong><span id='order-count'>" . $count_total['qtd'] . "</span> pedido(s) de vídeo</strong>, seus pedidos expiram em até 7 dias.</p>";
 			if (count($talent_orders) > 0) {
 				foreach ($talent_orders as $order) : 
+					$order_obj = new \WC_Order( $order['order_id'] );
+					$is_social = social_order_is_social( $order_obj );
+
 					$total_order_value = $order['total_raw'];
 					$discounted_value_order = polen_apply_polen_part_price( $total_order_value );
+					if( $is_social ) {
+						$discounted_value_order = $total_order_value;
+					}
 				?>
 					<div class="row mb-3" box-id="<?php echo $order['order_id']; ?>">
 						<div class="col md-12">

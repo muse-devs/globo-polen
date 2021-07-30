@@ -1,7 +1,9 @@
 <?php
 
+use Polen\Includes\Polen_Talent;
 use Polen\Social\Social;
 use Polen\Social\Social_Category;
+use Polen\Social\Social_Order;
 use Polen\Social\Social_Product;
 
 define( 'CATEGORY_SLUG_CRIESP', 'criesp' );
@@ -48,4 +50,31 @@ function social_get_products_by_category_slug( $category )
 function social_product_is_social( $producty, $category )
 {
     return Social_Product::product_is_social( $producty, $category );
+}
+
+
+/**
+ * Verifica se a ORDER é social
+ * @param \WC_Order
+ * @return bool
+ */
+function social_order_is_social( $order )
+{
+    return Social_Order::is_social( $order );
+}
+
+/**
+ * Verifica se o Talento é social.
+ * Verificando se o Produto é social
+ * pelo User_ID
+ * @param int
+ * @return bool
+ */
+function social_user_is_social( $user_id )
+{
+    $product = Polen_Talent::get_product_by_user_id( $user_id );
+    if( empty( $product ) ) {
+        return false;
+    }
+    return social_product_is_social( $product, social_get_category_base() );
 }

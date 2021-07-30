@@ -13,7 +13,7 @@ class Social
 
     static public function is_social_app()
     {
-        $social_app = $GLOBALS[ Social_Rewrite::QUERY_VARS_SOCIAL_APP ];
+        $social_app = isset( $GLOBALS[ Social_Rewrite::QUERY_VARS_SOCIAL_APP ] ) ? $GLOBALS[ Social_Rewrite::QUERY_VARS_SOCIAL_APP ] : false;
         if( $social_app === '1' ) {
             return true;
         }
