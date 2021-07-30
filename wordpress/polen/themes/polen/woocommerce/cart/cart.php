@@ -134,8 +134,13 @@ $Talent_Fields = new Polen_Update_Fields();
 						?>
 						<label for="<?php echo 'cart_name_to_video_' . $cart_item_key; ?>">Nome</label>
 						<?php
+						if ($is_social) {
+							$name_placeholder = "Como você gostaria de ser chamado?";
+						} else {
+							$name_placeholder = "Para quem é esse vídeo-polen";
+						}
 						printf(
-							'<input type="text" placeholder="Para quem é esse vídeo-polen" class="%s form-control form-control-lg" id="cart_name_to_video_%s" data-cart-id="%s" name="name_to_video" value="%s" required="required"/>',
+							'<input type="text" placeholder="'.$name_placeholder.'" class="%s form-control form-control-lg" id="cart_name_to_video_%s" data-cart-id="%s" name="name_to_video" value="%s" required="required"/>',
 							'polen-cart-item-data',
 							$cart_item_key,
 							$cart_item_key,
@@ -203,29 +208,50 @@ $Talent_Fields = new Polen_Update_Fields();
 				</div>
 				<div class="row mt-4">
 					<div class="col-12 col-md-12">
-						<label for="cart_instructions_to_video_<?php echo $cart_item_key; ?>">Instruções para o vídeo</label>
+						<label for="cart_instructions_to_video_<?php echo $cart_item_key; ?>">
+							<?php 
+								if($is_social) {
+									echo("Cidade");
+								} else {
+									echo("Instruções para o vídeo");
+								}
+							?>
+						</label>
 					</div>
 					<div class="col-md-12">
 						<?php
 						$instructions_to_video = isset($cart_item['instructions_to_video']) ? $cart_item['instructions_to_video'] : '';
 						$product_name = str_replace( '%', '&#37;', $_product->get_title() );
-						printf(
-							"
-							<div class=\"holder\">
-								<div class=\"placeholder\">
-									Escreva aqui o que você gostaria que <b>{$product_name}</b> falasse. Lembre-se:</b><br><br>
-									1. <b>Não são permitidos pedidos comerciais</b>, nem menções à marcas.<br>
-									2. Músicos <b>não</b> tem autorização para <b>cantar trechos de músicas</b> com direitos autorais.
-								</div>
-								<textarea 	name=\"instructions_to_video\"  rows=\"7\"
-								class=\"%s form-control form-control-lg\" id=\"cart_instructions_to_video_%s\"
-								data-cart-id=\"%s\" required=\"required\">%s</textarea>
-							</div>",
-							'polen-cart-item-data',
-							$cart_item_key,
-							$cart_item_key,
-							$instructions_to_video,
-						);
+						if ($is_social) {
+							printf(
+								"
+								<input 	name=\"instructions_to_video\" placeholder=\"Sua cidade\"
+									class=\"%s form-control form-control-lg\" id=\"cart_instructions_to_video_%s\"
+									data-cart-id=\"%s\" required=\"required\">%s</input>",
+								'polen-cart-item-data',
+								$cart_item_key,
+								$cart_item_key,
+								$instructions_to_video,
+							);
+						} else {
+							printf(
+								"
+								<div class=\"holder\">
+									<div class=\"placeholder\">
+										Escreva aqui o que você gostaria que <b>{$product_name}</b> falasse. Lembre-se:</b><br><br>
+										1. <b>Não são permitidos pedidos comerciais</b>, nem menções à marcas.<br>
+										2. Músicos <b>não</b> tem autorização para <b>cantar trechos de músicas</b> com direitos autorais.
+									</div>
+									<textarea 	name=\"instructions_to_video\"  rows=\"7\"
+									class=\"%s form-control form-control-lg\" id=\"cart_instructions_to_video_%s\"
+									data-cart-id=\"%s\" required=\"required\">%s</textarea>
+								</div>",
+								'polen-cart-item-data',
+								$cart_item_key,
+								$cart_item_key,
+								$instructions_to_video,
+							);
+						}
 						?>
 					</div>
 				</div>
