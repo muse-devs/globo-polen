@@ -94,7 +94,7 @@ function criesp_get_donation_box()
 							<img src="<?php echo TEMPLATE_URI . '/assets/img/criesp/logo-criesp-color.png';  ?>" alt="Logo da empresa de doação">
 						</figure>
 						<p><strong>Sobre o Criança Esperança</strong></p>
-						<p class="small">Criança Esperança (anteriormente SOS Nordeste) é uma campanha nacional de mobilização social que busca a conscientização em prol dos direitos da criança e do adolescente, promovida pela Globo, inicialmente em parceria com a UNICEF e atualmente com a UNESCO.</p>
+						<p class="small">Há 36 anos, o Criança Esperança cria oportunidades de desenvolvimento para crianças e jovens em todo o país. Os recursos arrecadados pela campanha são depositados na conta da UNESCO que os repassa aos projetos selecionados, anualmente, por meio de um edital público.</p>
 					</div>
 					<div class="col-md-12 mt-3">
 						<p><strong>Fotos</strong></p>
