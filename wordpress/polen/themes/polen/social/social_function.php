@@ -17,6 +17,10 @@ function social_is_in_social_app()
     return Social::is_social_app();
 }
 
+function social_get_criesp_url()
+{
+	return home_url( '/social/crianca-esperanca' );
+}
 
 /**
  * Pega o object da Categoria Social
