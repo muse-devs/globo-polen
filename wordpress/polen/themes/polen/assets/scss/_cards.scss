@@ -331,6 +331,9 @@
 		padding: 15px;
 		top: 25%;
 		width: 100%;
+		@include media-breakpoint-down(sm) {
+			padding: 50px;
+		}
 		.title {
 			font-size: 1.7rem;
 			font-weight: 700;
