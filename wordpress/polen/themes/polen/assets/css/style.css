@@ -11032,11 +11032,14 @@ textarea {
     width: 100%; }
     @media (max-width: 767.98px) {
       .top-banner .content {
-        padding: 50px; } }
+        padding: 0px 40px; } }
     .top-banner .content .title {
       font-size: 1.7rem;
       font-weight: 700;
       color: var(--light); }
+      @media (max-width: 767.98px) {
+        .top-banner .content .title {
+          font-size: 1.4rem; } }
     .top-banner .content .banner-button-link {
       padding: 0.8rem 1.8rem;
       font-size: 1.1rem;
@@ -11044,6 +11047,12 @@ textarea {
       color: var(--light);
       border-radius: 140px;
       background-color: var(--dark); }
+      @media (max-width: 767.98px) {
+        .top-banner .content .banner-button-link {
+          font-size: 1rem; } }
+      @media (max-width: 575.98px) {
+        .top-banner .content .banner-button-link {
+          font-size: 0.8rem; } }
       .top-banner .content .banner-button-link .icon,
       .top-banner .content .banner-button-link .bi {
         font-size: 12px; }
