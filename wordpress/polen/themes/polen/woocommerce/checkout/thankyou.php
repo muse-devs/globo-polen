@@ -22,6 +22,9 @@ $order_item_cart = \Polen\Includes\Cart\Polen_Cart_Item_Factory::polen_cart_item
 $email_billing = $order_item_cart->get_email_to_video();
 
 $order_array = Order_Class::polen_get_order_flow_obj($order_number, $order_status, $email_billing);
+
+//FRONT AQUI O TRUE OR FALSE SE FOR SOCIAL PS. REMOVER ESSE COMENTÁRIO
+var_dump( social_order_is_social( $order ));
 ?>
 <div class="row">
 	<div class="col-md-12 mb-5">

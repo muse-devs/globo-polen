@@ -54,6 +54,20 @@ function social_product_is_social( $producty, $category )
 
 
 /**
+ * Verifica se o carrinho é social, se o produto é social
+ * @return bool
+ */
+function social_cart_is_social()
+{
+    foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
+        $_product   = apply_filters('woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key);
+        $is_social = social_product_is_social( $_product, social_get_category_base() );
+    }
+    return $is_social;
+}
+
+
+/**
  * Verifica se a ORDER é social
  * @param \WC_Order
  * @return bool
