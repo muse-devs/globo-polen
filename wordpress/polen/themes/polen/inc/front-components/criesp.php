@@ -121,8 +121,8 @@ function criesp_get_donation_box()
 					<div class="col-md-12 mt-3">
 						<p><strong>Videos</strong></p>
 						<div class="video-slider">
-							<video muted="" autoplay="" loop="" playsinline="" poster="https://especiaiscomunicacaoprod.s3.amazonaws.com/criesp/doacoes/crianca/doacao/maik-doacao.png?Expires=1627496328&amp;AWSAccessKeyId=AKIAJXGK6DAEMAYESHFQ&amp;Signature=a1SxmAD%2BObKTL06O%2FhkTZUIu3dE%3D" data-fallback="/static/img/Maik-Doar.jpg">
-								<source src="https://especiaiscomunicacaoprod.s3.amazonaws.com/criesp/doacoes/crianca/doacao/maik-doacao.mp4?Expires=1627496328&amp;AWSAccessKeyId=AKIAJXGK6DAEMAYESHFQ&amp;Signature=ye%2FCEcntuMo9XhQW0pkDoy7SYTI%3D" type="video/mp4">
+							<video muted="" autoplay="" loop="" playsinline="" controls="" poster="https://especiaiscomunicacaoprod.s3.amazonaws.com/criesp/doacoes/crianca/doacao/maik-doacao.png?Expires=1627496328&amp;AWSAccessKeyId=AKIAJXGK6DAEMAYESHFQ&amp;Signature=a1SxmAD%2BObKTL06O%2FhkTZUIu3dE%3D">
+								<source src="https://player.vimeo.com/external/581340431.hd.mp4?s=b5409bc8aef8c09550fb041a6db6dc5a2c324c15&profile_id=174" type="video/mp4">
 							</video>
 						</div>
 					</div>
