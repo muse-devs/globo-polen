@@ -332,7 +332,7 @@
 		top: 25%;
 		width: 100%;
 		@include media-breakpoint-down(sm) {
-			padding: 0px 40px;
+			padding: 0px 30px;
 			top: 60%;
   			left: 0;
   			right: 0;
@@ -343,22 +343,16 @@
 			font-weight: 700;
 			color: var(--light);
 			@media screen and (max-width: 376px) {
-				font-size: 1.4rem;
+				font-size: 1.5rem;
 			}
 		}
 		.banner-button-link {
 			padding: 0.8rem 1.8rem;
-			font-size: 1.1rem;
+			font-size: 1rem;
 			font-weight: 400;
 			color: var(--light);
 			border-radius: 140px;
 			background-color: var(--dark);
-			@include media-breakpoint-down(sm) {
-				font-size: 1rem;
-			}
-			@include media-breakpoint-down(xs) {
-				font-size: 0.8rem;
-			}
 			.icon,
 			.bi {
 				font-size: 12px;

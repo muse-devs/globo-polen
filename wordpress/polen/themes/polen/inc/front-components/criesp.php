@@ -145,7 +145,10 @@ function criesp_get_thankyou_box()
 					</div>
 				</div>
 				<h4 class="title">Obrigado por ajudar o Criança Esperança.</h4>
-				<p class="description m-0">Na Polen 100% do cachê dos vídeos serão revertidos em doações para o Criança Esperança.</p>
+				<p class="description m-0">
+					Na Polen 100% do cachê dos vídeos serão revertidos em doações para o Criança Esperança.
+					Em até 15 dias o seu ídolo vai enviar o seu video-agradecimento.
+				</p>
 			</div>
 		</div>
 	</div>
