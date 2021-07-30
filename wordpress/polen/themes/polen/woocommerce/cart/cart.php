@@ -184,24 +184,38 @@ $Talent_Fields = new Polen_Update_Fields();
 
 				<div class="row mt-4">
 					<div class="col-12 col-md-12">
-						<label for="cart_video_category_<?php echo $cart_item_key; ?>">Qual ocasião do vídeo?</label>
+						<?php if( !$is_social ) : ?>
+							<label for="cart_video_category_<?php echo $cart_item_key; ?>">Qual ocasião do vídeo?</label>
+						<?php else: ?>
+							<label for="cart_video_category_<?php echo $cart_item_key; ?>">Ocasião do vídeo</label>
+						<?php endif; ?>
 					</div>
 					<div class="col-md-12">
 						<?php
-						$video_category = isset( $cart_item['video_category' ] ) ? $cart_item[ 'video_category' ] : '';
-						printf(
-							'<select class="%s form-control form-control-lg custom-select select-ocasion" id="cart_video_category_%s" data-cart-id="%s" name="video_category" required="required"/>',
-							'polen-cart-item-data',
-							$cart_item_key,
-							$cart_item_key
-						);
-						echo "<option value=''>Categoria</option>";
-						$arr_occasion = $occasion_list->get_occasion(null, 'type', 'ASC', 1, 0, 'DISTINCT type');
-						foreach ($arr_occasion as $occasion) :
-							$selected = ( $occasion->type == $video_category ) ? 'selected ' : null;
-							echo "<option value='" . $occasion->type . "' {$selected}>" . $occasion->type . "</option>";
+						if( !$is_social ) :
+							$video_category = isset( $cart_item['video_category' ] ) ? $cart_item[ 'video_category' ] : '';
+							printf(
+								'<select class="%s form-control form-control-lg custom-select select-ocasion" id="cart_video_category_%s" data-cart-id="%s" name="video_category" required="required"/>',
+								'polen-cart-item-data',
+								$cart_item_key,
+								$cart_item_key
+							);
+							echo "<option value=''>Categoria</option>";
+							$arr_occasion = $occasion_list->get_occasion(null, 'type', 'ASC', 1, 0, 'DISTINCT type');
+							foreach ($arr_occasion as $occasion) :
+								$selected = ( $occasion->type == $video_category ) ? 'selected ' : null;
+								echo "<option value='" . $occasion->type . "' {$selected}>" . $occasion->type . "</option>";
 
-						endforeach;
+							endforeach;
+						else:
+							printf(
+								'<input type="text" placeholder="" class="%s form-control form-control-lg" id="cart_video_category_%s" data-cart-id="%s" name="video_category" value="%s" required="required" readonly />',
+								'polen-cart-item-data',
+								$cart_item_key,
+								$cart_item_key,
+								'Doação para o Criança Esperança',
+							);
+						endif;
 						?>
 						</select>
 					</div>
@@ -227,7 +241,7 @@ $Talent_Fields = new Polen_Update_Fields();
 								"
 								<input 	name=\"instructions_to_video\" placeholder=\"Sua cidade\"
 									class=\"%s form-control form-control-lg\" id=\"cart_instructions_to_video_%s\"
-									data-cart-id=\"%s\" required=\"required\">%s</input>",
+									data-cart-id=\"%s\" required=\"required\" value=\"%s\" />",
 								'polen-cart-item-data',
 								$cart_item_key,
 								$cart_item_key,

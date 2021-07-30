@@ -746,5 +746,25 @@ class Polen_Talent {
             );
         }
     }
+
+
+    /**
+     * Pega o produto pelo User_ID
+     * @param int
+     */
+    static public function get_product_by_user_id( $user_id )
+    {
+        $args = array(
+            'post_type' => 'product',
+            'post_status' => 'any',
+            'author' => $user_id,
+        );
+        $posts = get_posts( $args );
+        if( empty( $posts ) ) {
+            return null;
+        }
+        $post = $posts[ 0 ];
+        return wc_get_product( $post );
+    }
 }
     
