@@ -23,7 +23,6 @@ global $product;
 if ( empty( $product ) || ! $product->is_visible() ) {
 	return;
 }
-$item = _polen_get_info_talent_by_product_id( $product );
-$social == false ? $social = social_product_is_social(wc_get_product($item['ID']), social_get_category_base()) : false;
-polen_front_get_card( $item, "responsive", $social);
+$item_data = _polen_get_info_talent_by_product_id( $product );
+polen_front_get_card( $item_data, "responsive");
 ?>

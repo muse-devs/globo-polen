@@ -115,6 +115,7 @@ function polen_front_get_banner()
 // $size pode ser 'medium' e 'small'
 function polen_front_get_card($item, $size = "small", $social = false)
 {
+	$social == false ? $social = social_product_is_social(wc_get_product($item['ID']), social_get_category_base()) : false;
 	$class = $size;
 	if ($size === "small") {
 		$class = "col-6 col-md-2";
@@ -132,7 +133,6 @@ function polen_front_get_card($item, $size = "small", $social = false)
 		$image = array();
 		$image[] = '';
 	}
-
 	$donate = get_post_meta($item['ID'], '_is_charity', true);
 
 ?>
@@ -185,7 +185,6 @@ function polen_banner_scrollable($items, $title, $link, $social = false)
 			<div class="banner-wrapper">
 				<div class="banner-content">
 					<?php foreach ($items as $item) : ?>
-						<?php $social == false ? $social = social_product_is_social(wc_get_product($item['ID']), social_get_category_base()) : false; ?>
 						<?php polen_front_get_card($item, "responsive", $social); ?>
 					<?php endforeach; ?>
 				</div>
@@ -218,7 +217,6 @@ function polen_front_get_news($items, $title, $link, $social = false)
 					<div class="banner-wrapper">
 						<div class="banner-content">
 							<?php foreach ($items as $item) : ?>
-								<?php $social == false ? $social = social_product_is_social(wc_get_product($item['ID']), social_get_category_base()) : false; ?>
 								<?php polen_front_get_card($item, "responsive", $social); ?>
 							<?php endforeach; ?>
 						</div>
@@ -279,7 +277,6 @@ function polen_front_get_artists($items, $title, $social = false)
 		<div class="col-md-12">
 			<div class="row">
 				<?php foreach ($items as $item) : ?>
-					<?php $social == false ? $social = social_product_is_social(wc_get_product($item['ID']), social_get_category_base()) : false; ?>
 					<?php polen_front_get_card($item, "small", $social); ?>
 				<?php endforeach; ?>
 			</div>
