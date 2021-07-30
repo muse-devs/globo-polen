@@ -11032,12 +11032,16 @@ textarea {
     width: 100%; }
     @media (max-width: 767.98px) {
       .top-banner .content {
-        padding: 0px 40px; } }
+        padding: 0px 40px;
+        top: 60%;
+        left: 0;
+        right: 0;
+        transform: translateY(-50%); } }
     .top-banner .content .title {
       font-size: 1.7rem;
       font-weight: 700;
       color: var(--light); }
-      @media (max-width: 767.98px) {
+      @media screen and (max-width: 376px) {
         .top-banner .content .title {
           font-size: 1.4rem; } }
     .top-banner .content .banner-button-link {

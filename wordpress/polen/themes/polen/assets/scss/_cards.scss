@@ -333,12 +333,16 @@
 		width: 100%;
 		@include media-breakpoint-down(sm) {
 			padding: 0px 40px;
+			top: 60%;
+  			left: 0;
+  			right: 0;
+  			transform: translateY(-50%);
 		}
 		.title {
 			font-size: 1.7rem;
 			font-weight: 700;
 			color: var(--light);
-			@include media-breakpoint-down(sm) {
+			@media screen and (max-width: 376px) {
 				font-size: 1.4rem;
 			}
 		}

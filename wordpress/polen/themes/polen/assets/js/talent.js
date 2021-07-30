@@ -55,7 +55,7 @@ function renderStories(videos, name, avatar) {
 		},
 		stories: [
 			Zuck.buildTimelineItem(
-				"1",
+				videos.length > 0 ? "1" : null,
 				avatar,
 				name,
 				"",
@@ -73,13 +73,6 @@ function renderStories(videos, name, avatar) {
 		link[0].classList.add("no-link");
 	}
 }
-
-// (function ($) {
-// 	$(document).on("click", ".link", function (e) {
-// 		console.log("passou")
-// 		clickToBuy();
-// 	});
-// })(jQuery);
 
 jQuery(document).ready(function () {
 	var id = getVideoId();
