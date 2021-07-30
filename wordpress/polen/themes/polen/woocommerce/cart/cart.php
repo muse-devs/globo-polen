@@ -60,7 +60,7 @@ $Talent_Fields = new Polen_Update_Fields();
 				"description" => ""
 			);
 		}
-		polen_get_talent_card( $talent_cart_detail ); ?>
+		polen_get_talent_card( $talent_cart_detail, $is_social ); ?>
 	</div>
 	<form class="woocommerce-cart-form col-12 col-md-6 order-md-1" action="<?php echo esc_url(wc_get_checkout_url()); ?>" method="post">
 		<?php do_action('woocommerce_before_cart_table'); ?>
@@ -134,8 +134,13 @@ $Talent_Fields = new Polen_Update_Fields();
 						?>
 						<label for="<?php echo 'cart_name_to_video_' . $cart_item_key; ?>">Nome</label>
 						<?php
+						if ($is_social) {
+							$name_placeholder = "Como você gostaria de ser chamado?";
+						} else {
+							$name_placeholder = "Para quem é esse vídeo-polen";
+						}
 						printf(
-							'<input type="text" placeholder="Para quem é esse vídeo-polen" class="%s form-control form-control-lg" id="cart_name_to_video_%s" data-cart-id="%s" name="name_to_video" value="%s" required="required"/>',
+							'<input type="text" placeholder="'.$name_placeholder.'" class="%s form-control form-control-lg" id="cart_name_to_video_%s" data-cart-id="%s" name="name_to_video" value="%s" required="required"/>',
 							'polen-cart-item-data',
 							$cart_item_key,
 							$cart_item_key,
@@ -204,7 +209,7 @@ $Talent_Fields = new Polen_Update_Fields();
 							endforeach;
 						else:
 							printf(
-								'<input type="" placeholder="" class="%s form-control form-control-lg" id="cart_video_category_%s" data-cart-id="%s" name="video_category" value="%s" required="required" readonly />',
+								'<input type="text" placeholder="" class="%s form-control form-control-lg" id="cart_video_category_%s" data-cart-id="%s" name="video_category" value="%s" required="required" readonly />',
 								'polen-cart-item-data',
 								$cart_item_key,
 								$cart_item_key,
@@ -217,17 +222,32 @@ $Talent_Fields = new Polen_Update_Fields();
 				</div>
 				<div class="row mt-4">
 					<div class="col-12 col-md-12">
-						<?php if( !$is_social ) : ?>
-							<label for="cart_instructions_to_video_<?php echo $cart_item_key; ?>">Instruções para o vídeo</label>
-						<?php else : ?>
-							<label for="cart_instructions_to_video_<?php echo $cart_item_key; ?>">Cidade</label>
-						<?php endif; ?>
+						<label for="cart_instructions_to_video_<?php echo $cart_item_key; ?>">
+							<?php 
+								if($is_social) {
+									echo("Cidade");
+								} else {
+									echo("Instruções para o vídeo");
+								}
+							?>
+						</label>
 					</div>
 					<div class="col-md-12">
 						<?php
-						if( !$is_social ) {
-							$instructions_to_video = isset($cart_item['instructions_to_video']) ? $cart_item['instructions_to_video'] : '';
-							$product_name = str_replace( '%', '&#37;', $_product->get_title() );
+						$instructions_to_video = isset($cart_item['instructions_to_video']) ? $cart_item['instructions_to_video'] : '';
+						$product_name = str_replace( '%', '&#37;', $_product->get_title() );
+						if ($is_social) {
+							printf(
+								"
+								<input 	name=\"instructions_to_video\" placeholder=\"Sua cidade\"
+									class=\"%s form-control form-control-lg\" id=\"cart_instructions_to_video_%s\"
+									data-cart-id=\"%s\" required=\"required\" value=\"%s\" />",
+								'polen-cart-item-data',
+								$cart_item_key,
+								$cart_item_key,
+								$instructions_to_video,
+							);
+						} else {
 							printf(
 								"
 								<div class=\"holder\">
@@ -245,14 +265,6 @@ $Talent_Fields = new Polen_Update_Fields();
 								$cart_item_key,
 								$instructions_to_video,
 							);
-						} else {
-							printf(
-								'<input type="" placeholder="" class="%s form-control form-control-lg" id="cart_video_category_%s" data-cart-id="%s" name="video_category" value="%s" required="required" readonly />',
-								'polen-cart-item-data',
-								$cart_item_key,
-								$cart_item_key,
-								'Doação para o Criança Esperança',
-							);
 						}
 						?>
 					</div>
@@ -265,19 +277,24 @@ $Talent_Fields = new Polen_Update_Fields();
 				<div class="row mt-4">
 					<div class="col-12 col-md-12">
 						<?php
+						$social_class = '';
 						$allow_video_on_page = isset($cart_item['allow_video_on_page']) ? $cart_item['allow_video_on_page'] : 'on';
 						$checked_allow = '';
 						if ($allow_video_on_page == 'on') {
 							$checked_allow = 'checked';
 						}
-
+						if($is_social)
+						{
+							$social_class = 'criesp';
+						}
 						?>
 						<label for="cart_allow_video_on_page_<?php echo $cart_item_key; ?>" class="d-flex">
 							<?php
 							printf(
-								'<input type="checkbox" name="allow_video_on_page" class="%s form-control form-control-lg" id="cart_allow_video_on_page_%s"
+								'<input type="checkbox" name="allow_video_on_page" class="%s %s form-control form-control-lg" id="cart_allow_video_on_page_%s"
 											data-cart-id="%s" %s>',
 								'polen-cart-item-data',
+								$social_class,
 								$cart_item_key,
 								$cart_item_key,
 								$checked_allow,
@@ -289,7 +306,7 @@ $Talent_Fields = new Polen_Update_Fields();
 				</div>
 				<div class="row actions">
 					<div class="col-12 col-md-12 mb-4 mt-3">
-						<button type="submit" class="btn btn-primary btn-lg btn-block" name="" value="<?php esc_attr_e('Update cart', 'woocommerce'); ?>"><?php esc_html_e('Avançar', 'woocommerce'); ?></button>
+						<button type="submit" class="btn btn-<?php echo $is_social ? 'success' : 'primary'; ?> btn-lg btn-block" name="" value="<?php esc_attr_e('Update cart', 'woocommerce'); ?>"><?php esc_html_e('Avançar', 'woocommerce'); ?></button>
 
 						<?php //do_action( 'woocommerce_cart_actions' );
 						?>
