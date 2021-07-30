@@ -20,7 +20,7 @@ var timestamp = function() {
 function generateStoriesArray(videos) {
 	const array = [];
 	videos.map((item, i) => {
-		array.push([`video-`+i, "video", 0, item.video, '', '#', 'Doe Agora', false, timestamp()],);
+		array.push([`video-`+i, "video", 0, item.video, '','javacript:clickToBuy()', 'Doe Agora', false, timestamp()]);
 	})
 	return array;
 }
@@ -34,7 +34,7 @@ function renderStories(videos, name, avatar) {
 		avatars: true,
 		paginationArrows: false,
 		list: false,
-		cubeEffect: true,
+		cubeEffect: false,
 		localStorage: true,
 		language: {
 			unmute: 'Toque para ouvir',
@@ -55,7 +55,7 @@ function renderStories(videos, name, avatar) {
 		},
 		stories: [
 			Zuck.buildTimelineItem(
-				name,
+				"1",
 				avatar,
 				name,
 				"",
@@ -73,6 +73,13 @@ function renderStories(videos, name, avatar) {
 		link[0].classList.add("no-link");
 	}
 }
+
+// (function ($) {
+// 	$(document).on("click", ".link", function (e) {
+// 		console.log("passou")
+// 		clickToBuy();
+// 	});
+// })(jQuery);
 
 jQuery(document).ready(function () {
 	var id = getVideoId();
