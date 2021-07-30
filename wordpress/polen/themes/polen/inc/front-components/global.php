@@ -46,7 +46,7 @@ function polen_front_get_banner_with_carousel($social = false)
 					<?php endforeach; ?>
 				</div>
 				<div class="content">
-					<h2 class="title m<?php echo $social ? 't' : 'b'; ?>-5">Aqui sua doação para<br />o Criança Esperança vira um vídeo.</h2>
+					<h2 class="title m<?php echo $social ? 't' : 'b'; ?>-5">Aqui sua doação para o Criança Esperança vira um vídeo.</h2>
 					<?php if (!$social) : ?>
 						<a href="/social/crianca-esperanca" class="banner-button-link">
 							<span class="mr-3">Doe Agora</span>
