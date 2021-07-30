@@ -166,7 +166,7 @@ function polen_front_get_card($item, $size = "small", $social = false)
 <?php
 }
 
-function polen_banner_scrollable($items, $title, $link, $social = false)
+function polen_banner_scrollable($items, $title, $link, $subtitle = "", $social = false)
 {
 	if (!$items) {
 		return;
@@ -179,6 +179,11 @@ function polen_banner_scrollable($items, $title, $link, $social = false)
 					<h2 class="mr-2"><?php echo $title; ?></h2>
 					<a href="<?php echo $link; ?>">Ver todos <?php Icon_Class::polen_icon_chevron_right(); ?></a>
 				</div>
+				<?php if ($subtitle != "") : ?>
+					<div class="col-12">
+						<p class="mb-1"><?php echo $subtitle; ?></p>
+					</div>
+				<?php endif; ?>
 			</header>
 		</div>
 		<div class="col-md-12 p-0 p-md-0">
