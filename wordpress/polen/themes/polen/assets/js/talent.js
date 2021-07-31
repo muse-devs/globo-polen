@@ -6,6 +6,74 @@ var public_url = talent_videos
 	? talent_videos.getAttribute("data-public-url")
 	: "";
 
+var timestamp = function() {
+	var timeIndex = 0;
+	var shifts = [35, 60, 60 * 3, 60 * 60 * 2, 60 * 60 * 25, 60 * 60 * 24 * 4, 60 * 60 * 24 * 10];
+
+	var now = new Date();
+	var shift = shifts[timeIndex++] || 0;
+	var date = new Date(now - shift * 1000);
+
+	return date.getTime() / 1000;
+};
+
+function generateStoriesArray(videos) {
+	const array = [];
+	videos.map((item, i) => {
+		array.push([`video-`+i, "video", 0, item.video, '','javascript:clickToBuy()', 'Doe Agora', false, timestamp()]);
+	})
+	return array;
+}
+
+function renderStories(videos, name, avatar) {
+	let stories = new Zuck('stories', {
+		backNative: true,
+		previousTap: true,
+		backButton: true,
+		skin: 'Snapgram',
+		avatars: true,
+		paginationArrows: false,
+		list: false,
+		cubeEffect: false,
+		localStorage: true,
+		language: {
+			unmute: 'Toque para ouvir',
+			keyboardTip: 'Clique para ver o próximo',
+			visitLink: 'Visite o Link',
+			time: {
+				ago:'atrás',
+				hour:'hora',
+				hours:'horas',
+				minute:'minuto',
+				minutes:'minutos',
+				fromnow: 'from now',
+				seconds:'segundos',
+				yesterday: 'ontem',
+				tomorrow: 'amanhã',
+				days:'dias'
+			}
+		},
+		stories: [
+			Zuck.buildTimelineItem(
+				videos.length > 0 ? "1" : null,
+				avatar,
+				name,
+				"",
+				timestamp(),
+				generateStoriesArray(videos)
+			),
+		],
+	});
+	// Customizando a lib quando nao houver vídeos
+	if (videos.length === 0) {
+		document.getElementById("stories").setAttribute("id", "");
+		let story = document.getElementsByClassName("story");
+		story[0].classList.add("seen");
+		let link = document.getElementsByClassName("item-link");
+		link[0].classList.add("no-link");
+	}
+}
+
 jQuery(document).ready(function () {
 	var id = getVideoId();
 	if (id) {

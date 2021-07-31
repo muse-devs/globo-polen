@@ -26,7 +26,7 @@ class Polen_Cart_Item_Factory
     
     /**
      * Pega o item da Order ja nos formato Polen_Cart_Item
-     * @param Order $order
+     * @param \WC_Order $order
      * @return \Polen\Includes\Cart\Polen_Cart_Item
      * @throws Exception
      */

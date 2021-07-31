@@ -37,6 +37,13 @@ function polen_get_talent_socials($talent)
 <?php
 }
 
+function polen_front_get_talent_stories()
+{
+	?>
+		<div id="stories"></div>
+	<?php
+}
+
 /**
  * Criar a lista de videos já feitos
  * @param stdClass Polen_Talent_Fields
@@ -44,20 +51,7 @@ function polen_get_talent_socials($talent)
  */
 function polen_front_get_talent_videos($talent)
 {
-	$items = array();
-	$items_raw = Polen\Includes\Polen_Video_Info::select_by_talent_id($talent->user_id);
-	foreach ($items_raw as $item) {
-		$order = wc_get_order($item->order_id);
-		$cart_item = \Polen\Includes\Cart\Polen_Cart_Item_Factory::polen_cart_item_from_order($order);
-		$items[] = [
-			'title' => '',
-			'image' =>  $item->vimeo_thumbnail,
-			'video' => $item->vimeo_link,
-			'hash' => $item->hash,
-			'first_order' => $item->first_order,
-			'initials' => polen_get_initials_name($cart_item->get_name_to_video()),
-		];
-	}
+	$items = polen_get_videos_by_talent($talent);
 
 	global $product;
 	$video_url = home_url() . "/v/";
@@ -92,10 +86,10 @@ function polen_front_get_talent_videos($talent)
 <?php
 }
 
-function polen_get_talent_card($talent)
+function polen_get_talent_card($talent, $social = false)
 {
 ?>
-	<div class="talent-card alt">
+	<div class="talent-card alt<?php if($social) { echo ' criesp'; } ?>">
 		<header class="row pb-3 header">
 			<div class="col-md-12 d-flex align-items-center">
 				<div class="avatar avatar-sm" style="background-image: url(<?php echo isset($talent["avatar"]) ? $talent["avatar"] : TEMPLATE_URI . '/assets/img/avatar.png';  ?>)"></div>
@@ -103,11 +97,11 @@ function polen_get_talent_card($talent)
 			</div>
 		</header>
 		<div class="price-box pt-3">
-			<span class="cat">Você vai pagar</span>
+			<span class="cat">Você vai <?php echo $social ? "doar" : "pagar" ?></span>
 			<p class="price mt-2">
 				<?php wc_cart_totals_order_total_html(); ?>
 			</p>
-			<?php if (!empty($talent['discount'])) : ?>
+			<?php if (!empty($talent['discount']) && !$social) : ?>
 				<div class="row">
 					<div class="col-12 mt-3">
 						<table style="width: 60%;">
@@ -127,7 +121,7 @@ function polen_get_talent_card($talent)
 					</div>
 				</div>
 			<?php endif; ?>
-			<?php if ($talent["has_details"]) : ?>
+			<?php if ($talent["has_details"] && !$social) : ?>
 				<button class="show-details d-flex justify-content-center" onclick="showDetails()"><?php Icon_Class::polen_icon_chevron("down") ?></button>
 			<?php endif; ?>
 		</div>
@@ -165,7 +159,11 @@ function polen_get_talent_card($talent)
 				</div>
 				<div class="row description mt-4">
 					<div class="col-12">
-						<span class="title">Instruções</span>
+						<?php if( !$social ) : ?>
+							<span class="title">Instruções</span>
+						<?php else : ?>
+							<span class="title">Sua cidade</span>
+						<?php endif; ?>
 						<p class="value mt-2"><?php echo $talent["description"]; ?></p>
 					</div>
 				</div>

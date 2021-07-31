@@ -2,6 +2,7 @@
 
 namespace Polen\Includes\Vimeo;
 
+use Polen\Includes\Debug;
 use Polen\Includes\Vimeo\Polen_Vimeo_String_Url;
 
 /**
@@ -111,7 +112,7 @@ class Polen_Vimeo_Response
     
     /**
      * 
-     * @return type
+     * @return string
      */
     public function get_image_url_smaller()
     {
@@ -214,7 +215,17 @@ class Polen_Vimeo_Response
      */
     public function get_play_array()
     {
-        return $this->response['body']['files'];
+        $array = $this->response['body']['files'];
+        return $array;
+    }
+
+
+    /**
+     * Pega a URI da folder recem criada
+     */
+    public function get_folder_uri()
+    {
+        return $this->response['body']['uri'];
     }
 
 
@@ -224,9 +235,12 @@ class Polen_Vimeo_Response
     public function get_play_link()
     {
         $files = $this->get_play_array();
+        $result = array( 'height' => PHP_INT_MIN );
         foreach( $files as $file ) {
-            return $file[ 'link' ];
+            if( isset( $file['height'] ) && $file['height'] >= $result['height'] ) {
+                $result = $file;
+            }
         }
-        return null;
+        return $result[ 'link' ];
     }
 }
