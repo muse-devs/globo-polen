@@ -12,11 +12,12 @@ define('TEMPLATE_DIR', get_template_directory());
 define('DEVELOPER', defined('ENV_DEV') && ENV_DEV);
 define('POL_COOKIES', array(
 	'POLICIES' => 'pol_policies',
+	'CRIESP_BANNER_HOME' => 'criesp-banner-home',
 ));
 
 if ( ! defined( '_S_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', DEVELOPER ? time() : '1.0.8' );
+	define( '_S_VERSION', DEVELOPER ? time() : '1.0.9' );
 }
 
 if ( ! function_exists( 'polen_setup' ) ) :
@@ -197,8 +198,7 @@ function polen_scripts() {
 
 	wp_enqueue_script( 'global-js', TEMPLATE_URI . '/assets/js/' . $min . 'global.js', array("jquery"), _S_VERSION, false );
 
-	if(is_front_page()) {
-		wp_enqueue_script( 'owl-carousel', TEMPLATE_URI . '/assets/js/vendor/' . $min . 'owl.carousel.min.js', array(), _S_VERSION, true );
+	if(is_front_page() || social_is_in_social_app()) {
 		wp_enqueue_script( 'home-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'front-page.js', array('owl-carousel'), _S_VERSION, true );
 	}
 
@@ -208,6 +208,8 @@ function polen_scripts() {
 	wp_register_script('vuejs', TEMPLATE_URI . '/assets/vuejs/' . $min . 'vue.js', array(), '', false);
 	wp_register_script( 'comment-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'comment.js', array("vuejs"), _S_VERSION, true );
 	wp_register_script( 'suggestion-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'suggestion.js', array("jquery"), _S_VERSION, true );
+	wp_register_script( 'owl-carousel', TEMPLATE_URI . '/assets/js/vendor/owl.carousel.min.js', array(), _S_VERSION, true );
+	wp_register_script( 'zuck', TEMPLATE_URI . '/assets/js/' . $min . 'zuck.js', array(), _S_VERSION, true );
 	// --------------------------------------------------------------------------------------------------
 
 	if (polen_is_landingpage()) {
@@ -219,11 +221,16 @@ function polen_scripts() {
 		wp_enqueue_script( 'tributes-scripts-video', TEMPLATE_URI . '/assets/js/' . $min . 'upload-video-tributes.js', array("jquery", "polen-upload-video-tus"), _S_VERSION, true );
 	}
 
+	if(social_is_in_social_app())
+	{
+		wp_enqueue_script( 'polen-cart', TEMPLATE_URI . '/assets/js/' . $min . 'criesp.js', array(), _S_VERSION, true );
+	}
+
 	wp_enqueue_style('polen-custom-styles', TEMPLATE_URI . '/assets/css/style.css', array(), _S_VERSION);
 	if(is_singular() && is_product()) {
 		// wp_enqueue_script( 'slick-slider', TEMPLATE_URI . '/assets/slick/slick.min.js', array("jquery"), '', true );
 		wp_enqueue_script( 'vimeo');
-		wp_enqueue_script( 'talent-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'talent.js', array("vimeo"), _S_VERSION, true );
+		wp_enqueue_script( 'talent-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'talent.js', array("vimeo", "zuck"), _S_VERSION, true );
 	}
 
 	if( is_cart() ) {
@@ -292,6 +299,12 @@ require_once TEMPLATE_DIR . '/classes/Order_Class.php';
  * Funcoes do Tributes APP
  */
 require_once TEMPLATE_DIR . '/tributes/tributes_functions.php';
+
+
+/**
+ * Funcoes do Social APP
+ */
+require_once TEMPLATE_DIR . '/social/social_function.php';
 
 
 add_action('wc_gateway_stripe_process_response', function($response, $order) {

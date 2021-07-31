@@ -28,6 +28,10 @@
 	width: 5rem;
 	max-width: 165px !important;
 	height: auto;
+	&.custom-logo-criesp {
+		width: 207px;
+		max-width: 207px !important;
+	}
 	@include media-breakpoint-down(sm) {
 		width: 4rem;
 	}

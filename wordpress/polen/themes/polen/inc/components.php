@@ -9,3 +9,4 @@ require TEMPLATE_DIR . '/inc/front-components/comments.php';
 require TEMPLATE_DIR . '/inc/front-components/donation.php';
 require TEMPLATE_DIR . '/inc/front-components/orders.php';
 require TEMPLATE_DIR . '/inc/front-components/suggestion.php';
+require TEMPLATE_DIR . '/inc/front-components/criesp.php';

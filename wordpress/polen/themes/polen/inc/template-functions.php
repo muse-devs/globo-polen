@@ -201,7 +201,11 @@ function polen_get_theme_logos() {
 	$logo_light = get_theme_mod( 'logo_theme_white' );
 
 	$html =  '<a href="' . get_site_url() . '" class="custom-logo-link" rel="home" aria-current="page">';
-	if(is_front_page()) {
+	if(social_is_in_social_app())
+	{
+		$html .= 	'<img width="207" height="40" src="'. TEMPLATE_URI . '/assets/img/criesp/logo-polen-criesp.png" class="custom-logo custom-logo-criesp" alt="Polen">';
+	}
+	else if(is_front_page()) {
 		$html .= 	'<img width="168" height="88" src="'. $logo_dark . '" class="custom-logo" alt="Polen">';
 	} else {
 		$html .= 	'<img width="168" height="88" src="'. $logo_dark . '" class="custom-logo dark" alt="Polen">';
@@ -263,6 +267,27 @@ function polen_get_total_order_email_detail_to_talent( $order, $email )
 }
 
 
+function polen_get_videos_by_talent($talent, $json = false)
+{
+	$items = array();
+	$items_raw = Polen\Includes\Polen_Video_Info::select_by_talent_id($talent->user_id);
+	foreach ($items_raw as $item) {
+		$order = wc_get_order($item->order_id);
+		$cart_item = \Polen\Includes\Cart\Polen_Cart_Item_Factory::polen_cart_item_from_order($order);
+		$items[] = [
+			'title' => '',
+			'name' => $talent->nome,
+			'thumb' => polen_get_avatar($talent->user_id, 'polen-square-crop-lg'),
+			'cover' =>  $item->vimeo_thumbnail,
+			'video' => $item->vimeo_file_play,
+			'hash' => $item->hash,
+			'first_order' => $item->first_order,
+			'initials' => polen_get_initials_name($cart_item->get_name_to_video()),
+		];
+	}
+
+	return $json ? json_encode($items) : $items;
+}
 
 
 /**

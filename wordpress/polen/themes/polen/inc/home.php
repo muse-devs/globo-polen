@@ -9,10 +9,12 @@ get_header();
 
 <main id="primary" class="site-main">
 
-	<?php polen_front_get_banner();
+	<?php polen_front_get_banner_with_carousel();
 	?>
 
-	<?php polen_banner_scrollable(polen_get_new_talents(6), "Destaque", polen_get_all_new_talents_url()); ?>
+	<?php polen_banner_scrollable(social_get_products_by_category_slug(social_get_category_base()), "Criança Esperança", social_get_criesp_url(), "Aqui seu Vídeo Polen vira uma doação", true); ?>
+
+	<?php criesp_get_home_banner(social_get_criesp_url()); ?>
 
 	<?php polen_front_get_tutorial(); ?>
 

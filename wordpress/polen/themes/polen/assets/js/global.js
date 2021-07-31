@@ -277,7 +277,7 @@ const polenGtag = {
 // --------------------------------------------
 
 // Funções de Cookie -------------------------------------------------------
-function polSetCookie(cname, cvalue, exdays) {
+function polSetCookie(cname, cvalue, exdays = 30) {
 	const d = new Date();
 	d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
 	let expires = "expires=" + d.toUTCString();
@@ -376,6 +376,11 @@ jQuery(document).ready(function () {
 		);
 	});
 })(jQuery);
+
+function closeModal() {
+	let modal = document.querySelector(".show");
+	modal.classList.remove("show");
+}
 
 function polSlugfy(s, opt) {
 	s = String(s);
