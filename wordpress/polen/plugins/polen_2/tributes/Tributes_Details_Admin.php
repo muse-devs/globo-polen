@@ -4,7 +4,6 @@ namespace Polen\Tributes;
 
 use Polen\Admin\Partials\Tributes_Display;
 use Polen\Includes\Debug;
-use Polen\Includes\Vimeo\Polen_Vimeo_Factory;
 use Polen\Includes\Vimeo\Polen_Vimeo_Response;
 use Vimeo\Vimeo;
 
@@ -167,10 +166,16 @@ class Tributes_Details_Admin
     
     public function complete_tribute()
     {
+        global $Polen_Plugin_Settings;
+
+        $client_id = $Polen_Plugin_Settings['polen_vimeo_client_id'];
+        $client_secret = $Polen_Plugin_Settings['polen_vimeo_client_secret'];
+        $token = $Polen_Plugin_Settings['polen_vimeo_access_token'];
+
         $vimeo_id = filter_input( INPUT_POST, 'vimeo_id' );
         $tribute_id = filter_input( INPUT_POST, 'tribute_id' );
         $nonce = filter_input( INPUT_POST, 'security' );
-        $lib = Polen_Vimeo_Factory::create_vimeo_colab_instance_with_redux();
+        $lib = new Vimeo( $client_id, $client_secret, $token );
         try {
             $response = new Polen_Vimeo_Response( $lib->request( $vimeo_id ) );
             if( $response->is_error() ) {
@@ -220,11 +225,16 @@ class Tributes_Details_Admin
      */
     public function get_link_download()
     {
+        global $Polen_Plugin_Settings;
+
+        $client_id = $Polen_Plugin_Settings['polen_vimeo_client_id'];
+        $client_secret = $Polen_Plugin_Settings['polen_vimeo_client_secret'];
+        $token = $Polen_Plugin_Settings['polen_vimeo_access_token'];
 
         $invite_id = filter_input( INPUT_POST, 'invite_id' );
         $invite = Tributes_Invites_Model::get_by_id( $invite_id );
 
-        $lib = Polen_Vimeo_Factory::create_vimeo_colab_instance_with_redux();
+        $lib = new Vimeo( $client_id, $client_secret, $token );
         try {
             $response = new Polen_Vimeo_Response( $lib->request( $invite->vimeo_id ) );
             wp_send_json_success( $response->get_download_source_url(), 200 );
