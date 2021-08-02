@@ -91,7 +91,7 @@ if (!defined('ABSPATH')) {
 			</tr>
 			<tr>
 				<td>
-					<a href="https://redeglobo.globo.com/criancaesperanca/noticia/confira-as-instituicoes-apoiadas-nesta-edicao-do-crianca-esperanca.ghtml">
+					<a style="text-decoration: none" href="https://redeglobo.globo.com/criancaesperanca/noticia/confira-as-instituicoes-apoiadas-nesta-edicao-do-crianca-esperanca.ghtml">
 						<img src="<?php echo get_template_directory_uri(); ?>/assets/img/email/criesp-art.jpg" alt="Arte Criança Esperança" style="display: block; max-width: 100%" />
 					</a>
 				</td>
