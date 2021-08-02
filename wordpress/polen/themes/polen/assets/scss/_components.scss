@@ -195,6 +195,10 @@
 	border: none;
 }
 
+.btn {
+	display: inline-flex;
+}
+
 .btn-md, .btn-group-md > .btn {
 	font-size: 12px;
 	font-weight: 600;
@@ -269,5 +273,5 @@
 				font-size: 18px;
 			}
 		}
-	}	
+	}
 }
