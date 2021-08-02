@@ -46,6 +46,9 @@ $donate_name = get_post_meta(get_the_ID(), '_charity_name', true);
 $donate_image =  get_post_meta(get_the_ID(), '_url_charity_logo', true);
 $donate_text = stripslashes(get_post_meta(get_the_ID(), '_description_charity', true));
 $social = social_product_is_social($product, social_get_category_base());
+
+$stock = $product->get_stock_quantity();
+
 ?>
 
 <script>
@@ -75,13 +78,13 @@ $social = social_product_is_social($product, social_get_category_base());
 				<h1 class="talent-name" title="<?= get_the_title(); ?>"><?= get_the_title(); ?></h1>
 				<h5 class="talent-count-videos text-truncate">
 					<?php
-					$videosCount = json_decode(polen_get_videos_by_talent($Talent_Fields, true), true);
-					if (count($videosCount) === 1) {
-						echo count($videosCount) . " vídeo disponível";
-					} else if (count($videosCount) === 0) {
+					$videosCount = $stock;
+					if ($videosCount === 1) {
+						echo $videosCount . " vídeo disponível";
+					} else if ($videosCount === 0) {
 						echo "Nenhum vídeo disponível";
 					} else {
-						echo count($videosCount) . " vídeos disponíveis";
+						echo $videosCount . " vídeos disponíveis";
 					}
 					?>
 				</h5>
@@ -91,8 +94,16 @@ $social = social_product_is_social($product, social_get_category_base());
 
 	<div class="row mt-3 mb-1 talent-page-footer">
 		<div class="col-12 col-md-6 m-md-auto pb-3">
-			<?php echo woocommerce_template_single_add_to_cart(); ?>
-			<!--button class="btn btn-primary btn-lg btn-block btn-get-video">Pedir vídeo R$ 200</button-->
+			<?php if($stock > 0) : ?>
+				<?php echo woocommerce_template_single_add_to_cart(); ?>
+			<?php else: ?>
+				<a href="<?php echo $social ? social_get_criesp_url() : home_url( 'shop' ); ?>" class="btn btn-<?php echo $social ? 'success' : 'primary'; ?> btn-lg btn-block btn-get-video">
+					<?php if($social) : ?>
+						<span class="mr-2"><?php Icon_Class::polen_icon_criesp(); ?></span>
+					<?php endif; ?>
+					Escolher outro artista
+				</a>
+			<?php endif; ?>
 		</div>
 	</div>
 
