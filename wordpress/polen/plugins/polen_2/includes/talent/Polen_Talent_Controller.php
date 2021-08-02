@@ -261,22 +261,21 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
 
         if( !isset( $_POST['order'] ) ) {
             $response = array( 'success' => false, 'message' => 'order_fail' );     
- 
         }
  
         global $wpdb;
  
         require_once ABSPATH . '/wp-includes/pluggable.php';
         $talent_id = get_current_user_id();
-        $order_id = trim($_POST['order']); 
+        $order_id = trim( $_POST['order'] ); 
   
         $checked = $this->check_product_and_order( $talent_id, $order_id );
 
         if( $checked ){
-            $first_product = reset($talent_products);
+            // $first_product = reset($talent_products);
             $order = wc_get_order( $order_id );
             if( $order ){
-                $order->update_status( 'completed', '', true );
+                $order->update_status( Polen_Order::SLUG_ORDER_COMPLETE, 'talento enviou o video', true );
                 $response = array( 'success' => true, 'message' => 'Pedido completo!' );                        
             }
         }else{

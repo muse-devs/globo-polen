@@ -18,14 +18,21 @@ $notes = $order->get_customer_order_notes();
 $order_number = $order->get_order_number();
 $order_status = $order->get_status();
 
-$order_item_cart = \Polen\Includes\Cart\Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
+$order_item_cart = \Polen\Includes\Cart\Polen_Cart_Item_Factory::polen_cart_item_from_order($order);
 $email_billing = $order_item_cart->get_email_to_video();
 
 $order_array = Order_Class::polen_get_order_flow_obj($order_number, $order_status, $email_billing);
+
+$social = social_order_is_social($order);
 ?>
 <div class="row">
-	<div class="col-md-12 mb-5">
-		<h1>Seu vídeo foi solicitado com Sucesso</h1>
+	<?php if( ! $social ) : ?>
+		<div class="col-md-12 mb-4">
+			<h1>Seu vídeo foi solicitado com Sucesso</h1>
+		</div>
+	<?php endif; ?>
+	<div class="col-12">
+		<?php $social && criesp_get_thankyou_box(); ?>
 	</div>
 	<div class="col-md-12">
 		<?php polen_get_order_flow_layout($order_array); ?>
@@ -56,4 +63,4 @@ else :
 endif;
 
 // JS do GA
-echo polen_create_ga_order( $order );
+echo polen_create_ga_order($order);

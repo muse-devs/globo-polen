@@ -3,8 +3,23 @@ const home_carrousel = function() {
 	console.log(images);
 }
 
-home_carrousel();
+// home_carrousel();
 
+jQuery(document).ready(function ($) {
+	$('.owl-carousel').owlCarousel({
+		loop: true,
+		items: 1,
+		autoplayTimeout: 5000,
+		animateOut: 'fadeOut',
+		autoplayHoverPause:true,
+		margin: 0,
+		nav: true,
+		autoplay: true,
+		dots: true,
+		autoHeight:false,
+		navText: ["<i class='icon icon-left-arrow'></i>", "<i class='icon icon-right-arrow'></i>"],
+	});
+});
 
 const home_video = function () {
 	const video_banner = document.getElementById("video-banner");

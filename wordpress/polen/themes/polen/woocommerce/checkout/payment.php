@@ -35,7 +35,7 @@ if ( ! is_ajax() ) {
 			?>
 		</ul>
 	<?php endif; ?>
-	<div class="col-12 form-row place-order">
+	<div class="col-12 form-row place-order <?php if(social_cart_is_social()) {echo "criesp-text";}  else {echo "";} ?>">
 		<noscript>
 			<?php
 			/* translators: $1 and $2 opening and closing emphasis tags respectively */
@@ -50,7 +50,13 @@ if ( ! is_ajax() ) {
 
 		<?php woocommerce_checkout_coupon_form(); ?>
 
-		<?php echo apply_filters( 'woocommerce_order_button_html', '<button type="submit" class="btn btn-primary btn-lg btn-block mt-3" name="woocommerce_checkout_place_order" id="place_order" value="' . esc_attr( $order_button_text ) . '" data-value="' . esc_attr( $order_button_text ) . '">' . esc_html( $order_button_text ) . '</button>' ); // @codingStandardsIgnoreLine ?>
+		<?php 
+			$button = '<button type="submit" class="btn btn-primary btn-lg btn-block mt-3" name="woocommerce_checkout_place_order" id="place_order" value="' . esc_attr( $order_button_text ) . '" data-value="' . esc_attr( $order_button_text ) . '">' . esc_html( $order_button_text ) . '</button>';
+			if (social_cart_is_social()) {
+				$button = '<button type="submit" class="criesp btn btn-success btn-lg btn-block mt-3" name="woocommerce_checkout_place_order" id="place_order" value="Finalizar doação" data-value="Finalizar doação">Finalizar doação</button>';
+			}
+			echo apply_filters( 'woocommerce_order_button_html', $button); // @codingStandardsIgnoreLine 
+		?>
 
 		<?php do_action( 'woocommerce_review_order_after_submit' ); ?>
 

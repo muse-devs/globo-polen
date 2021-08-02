@@ -5,7 +5,7 @@
   },
   "scripts": {
     "compress": "gulp compressjs",
-    "iconfont": "gulp iconfont",
+    "iconfont": "gulp iconfont; gulp sass",
     "sprite": "gulp sprite",
     "sass": "gulp sass",
     "sass:watch": "gulp sass:watch",
