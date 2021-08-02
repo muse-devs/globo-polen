@@ -51,7 +51,7 @@ $social = social_product_is_social($product, social_get_category_base());
 <script>
 	// params
 	jQuery(document).ready(function() {
-		renderStories(<?php echo polen_get_videos_by_talent($Talent_Fields, true); ?>, <?php echo json_encode(get_the_title()); ?>, <?php echo json_encode(wp_get_attachment_image_src(get_post_thumbnail_id(get_the_ID()), 'polen-thumb-lg')[0]); ?>)
+		renderStories(<?php echo polen_get_videos_by_talent($Talent_Fields, true); ?>, <?php echo json_encode(get_the_title()); ?>, <?php echo json_encode(wp_get_attachment_image_src(get_post_thumbnail_id(get_the_ID()), 'polen-thumb-lg')[0]); ?>, <?php echo $social; ?>)
 	});
 </script>
 
