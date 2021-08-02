@@ -77,6 +77,8 @@
 }
 
 .icon {
+	display: inline-block;
+	line-height: 0.8;
 	text-decoration: none;
 	vertical-align: middle;
 	&:hover,
