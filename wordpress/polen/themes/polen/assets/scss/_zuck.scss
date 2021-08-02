@@ -523,6 +523,10 @@
     overflow: auto;
     -webkit-overflow-scrolling: touch;
     overflow-scrolling: touch;
+    min-width: 100px;
+    @include media-breakpoint-down(xs) {
+        min-width: 70px;
+    }
 }
 .stories.carousel::-webkit-scrollbar {
     width: 0px;
