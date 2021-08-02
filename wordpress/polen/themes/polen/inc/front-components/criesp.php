@@ -64,6 +64,9 @@ function criesp_get_modal()
 								</li>
 							</ul>
 						</div>
+						<div class="col-md-12">
+							<p><b>Os vídeos serão entregues em até 15 dias após confirmação da doação.</b></p>
+						</div>
 					</div>
 				</div>
 				<div class="modal-footer d-flef justify-content-center">
