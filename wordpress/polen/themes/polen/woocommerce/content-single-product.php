@@ -131,7 +131,9 @@ $stock = $product->get_stock_quantity();
 	<!-- Card dos Reviews -->
 	<?php $social || polen_card_talent_reviews_order($post, $Talent_Fields); ?>
 
-	<?php if (!$social) : ?>
+	<?php 
+		if (!$social) {
+	?>
 		<div class="row mt-4">
 			<div class="col-md-12">
 				<?php if (count($terms) > 0) : ?>
@@ -141,7 +143,11 @@ $stock = $product->get_stock_quantity();
 				<?php endif; ?>
 			</div>
 		</div>
-	<?php endif; ?>
+	<?php 
+		} else { 
+			criesp_get_send_video_date();
+		}
+	?>
 
 	<!-- Doação -->
 	<?php $donate && !$social ?
