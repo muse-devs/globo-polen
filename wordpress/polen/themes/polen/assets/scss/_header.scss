@@ -29,11 +29,19 @@
 	max-width: 165px !important;
 	height: auto;
 	&.custom-logo-criesp {
-		width: 207px;
-		max-width: 207px !important;
+		margin-left: 1rem;
+		padding-left: 1rem;
+		width: 140px;
+		border-left: 1px solid var(--light);
+		&.light {
+			border-color: var(--dark);
+		}
 	}
 	@include media-breakpoint-down(sm) {
 		width: 4rem;
+		&.custom-logo-criesp {
+			width: 106px;
+		}
 	}
 }
 
