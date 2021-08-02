@@ -72,7 +72,7 @@ $social = social_product_is_social($product, social_get_category_base());
 		<div class="col-12 col-md-6 m-md-auto d-flex align-items-center">
 			<?php polen_front_get_talent_stories(); ?>
 			<div class="ml-2">
-				<h1 class="talent-name text-truncate" title="<?= get_the_title(); ?>"><?= get_the_title(); ?></h1>
+				<h1 class="talent-name" title="<?= get_the_title(); ?>"><?= get_the_title(); ?></h1>
 				<h5 class="talent-count-videos text-truncate">
 					<?php
 					$videosCount = json_decode(polen_get_videos_by_talent($Talent_Fields, true), true);
