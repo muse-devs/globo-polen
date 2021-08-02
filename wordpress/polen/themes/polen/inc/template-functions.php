@@ -200,16 +200,27 @@ function polen_get_theme_logos() {
 	$logo_dark = wp_get_attachment_image_url( $logo_dark, 'full' );
 	$logo_light = get_theme_mod( 'logo_theme_white' );
 
+	// Provisório CRIESP
+	$logo_criesp_dark = TEMPLATE_URI . '/assets/img/criesp/logo-criesp.png';
+	$logo_criesp_light = TEMPLATE_URI . '/assets/img/criesp/logo-criesp-color.png';
+
 	$html =  '<a href="' . get_site_url() . '" class="custom-logo-link" rel="home" aria-current="page">';
-	if(social_is_in_social_app())
-	{
-		$html .= 	'<img width="207" height="40" src="'. TEMPLATE_URI . '/assets/img/criesp/logo-polen-criesp.png" class="custom-logo custom-logo-criesp" alt="Polen">';
-	}
-	else if(is_front_page()) {
-		$html .= 	'<img width="168" height="88" src="'. $logo_dark . '" class="custom-logo" alt="Polen">';
+
+	if(is_front_page() || social_is_in_social_app()) {
+		$html .= 	'<img width="67" height="40" src="'. $logo_dark . '" class="custom-logo" alt="Polen">';
 	} else {
-		$html .= 	'<img width="168" height="88" src="'. $logo_dark . '" class="custom-logo dark" alt="Polen">';
-		$html .= 	'<img width="168" height="88" src="'. $logo_light . '" class="custom-logo light" alt="Polen">';
+		$html .= 	'<img width="67" height="40" src="'. $logo_dark . '" class="custom-logo dark" alt="Polen">';
+		$html .= 	'<img width="67" height="40" src="'. $logo_light . '" class="custom-logo light" alt="Polen">';
+	}
+	$html .= '</a>';
+
+	// Provisório CRIESP
+	$html .= '<a href="' . social_get_criesp_url() . '">';
+	if(is_front_page() || social_is_in_social_app()) {
+		$html .= 	'<img width="106" height="31" src="'. $logo_criesp_dark . '" class="custom-logo custom-logo-criesp" alt="Logo Criança Esperança">';
+	} else {
+		$html .= 	'<img width="106" height="31" src="'. $logo_criesp_dark . '" class="custom-logo custom-logo-criesp dark" alt="Logo Criança Esperança">';
+		$html .= 	'<img width="106" height="31" src="'. $logo_criesp_light . '" class="custom-logo custom-logo-criesp light" alt="Logo Criança Esperança">';
 	}
 	$html .= '</a>';
 
