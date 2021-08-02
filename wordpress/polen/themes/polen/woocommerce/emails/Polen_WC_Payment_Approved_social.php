@@ -30,16 +30,7 @@ if (!defined('ABSPATH')) {
 		<thead>
 			<tr>
 				<td>
-					<table style="width: 100%">
-						<tr>
-							<td>
-								<img src="<?php echo get_template_directory_uri(); ?>/assets/img/email/logo-polen-criesp.png" alt="Logos Polen e Criança Esperança" style="display: block; max-width: 80%" />
-							</td>
-							<td style="text-align: right">
-								<img src="<?php echo get_template_directory_uri(); ?>/assets/img/email/logo-globo-unesco.png" alt="Logos Globo e Unesco" style="display: block; max-width: 100%" />
-							</td>
-						</tr>
-					</table>
+					<img src="<?php echo get_template_directory_uri(); ?>/assets/img/email/logo-polen-criesp.png" alt="Logos Polen e Criança Esperança" style="display: block; margin: auto; max-width: 80%" />
 				</td>
 			</tr>
 			<tr>
