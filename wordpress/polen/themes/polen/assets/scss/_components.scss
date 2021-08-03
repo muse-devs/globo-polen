@@ -77,6 +77,8 @@
 }
 
 .icon {
+	display: inline-block;
+	line-height: 0.8;
 	text-decoration: none;
 	vertical-align: middle;
 	&:hover,
@@ -199,4 +201,75 @@
 	font-size: 12px;
 	font-weight: 600;
 	border-radius: 48px;
+}
+
+.show {
+	display: block;
+}
+
+#criespModal {
+	background-color: rgba(0, 0, 0, 0.75);
+	overflow-y: scroll;
+	.white-modal {
+		margin: 10px 0px;
+		background: #fff!important;
+		.modal-header {
+			border-bottom: none;
+			.close {
+				color: #000;
+			}
+			.modal-logo {
+				img {
+					width: 100px;
+					height: auto;
+				}
+				.criesp-logo {
+					height: 40px;
+					margin-left: 20px;
+				}
+			}
+		}
+		.modal-body {
+			padding: 0px 20px;
+			h2 {
+				font-size: 20px;
+				margin-bottom: 1em;
+			}
+			h3 {
+				font-size: 18px;
+				margin-bottom: 1em;
+			}
+			p {
+				letter-spacing: -0.03em;
+				color: #000000;
+				font-size: 14px;
+			}
+			.order-flow .item {
+				min-height: 60px;
+			}
+			.order-flow::after {
+				background: #E2E2E2;
+			}
+			.order-flow .status {
+				background: #E2E2E2;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: #1B1A1A;
+				font-weight: 600;
+				border: none;
+			}
+		}
+		.modal-footer {
+			button {
+				width: 100%;
+				border: none;
+				background: #3CC13B;
+				border-radius: 8px;
+				font-weight: 600;
+				padding: 10px;
+				font-size: 18px;
+			}
+		}
+	}
 }

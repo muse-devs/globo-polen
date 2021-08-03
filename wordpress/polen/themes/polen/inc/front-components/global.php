@@ -1,5 +1,65 @@
 <?php
 
+function polen_front_get_banner_with_carousel($social = false)
+{
+	$carrousel = array(
+		array(
+			"mobile" => TEMPLATE_URI . "/assets/img/banner-home-mobile-new.png",
+			"desktop" => TEMPLATE_URI . "/assets/img/img-home-desktop-new.jpeg"
+		)
+	);
+	$carrousel2 = array(
+		array(
+			"mobile" => TEMPLATE_URI . "/assets/img/criesp/bg-criesp.jpg",
+			"desktop" => TEMPLATE_URI . "/assets/img/criesp/bg-criesp.jpg"
+		)
+	);
+?>
+	<section class="top-banner mb-4">
+		<div class="owl-carousel owl-theme">
+			<?php if (!$social) : ?>
+				<div class="item">
+					<div class="carrousel">
+						<?php foreach ($carrousel as $item) : ?>
+							<figure class="image">
+								<img loading="lazy" src="<?php echo $item['mobile']; ?>" alt="Banner da home" class="mobile" />
+								<img loading="lazy" src="<?php echo $item['desktop']; ?>" alt="Banner da home" class="desktop" />
+							</figure>
+						<?php endforeach; ?>
+					</div>
+					<div class="content">
+						<h2 class="title mb-5">Presenteie e<br />surpreenda com vídeos personalizados.</h2>
+						<a href="<?php echo polen_get_all_talents_url(); ?>" class="banner-button-link">
+							<span class="mr-3">Ver todos os artistas</span>
+							<?php Icon_Class::polen_icon_chevron_right(); ?>
+						</a>
+					</div>
+				</div>
+			<?php endif; ?>
+			<div class="item">
+				<div class="carrousel">
+					<?php foreach ($carrousel2 as $item) : ?>
+						<figure class="image">
+							<img loading="lazy" src="<?php echo $item['mobile']; ?>" alt="Banner da home" class="mobile" />
+							<img loading="lazy" src="<?php echo $item['desktop']; ?>" alt="Banner da home" class="desktop" />
+						</figure>
+					<?php endforeach; ?>
+				</div>
+				<div class="content">
+					<h2 class="title m<?php echo $social ? 't' : 'b'; ?>-5">Aqui sua doação para o Criança Esperança vira um vídeo.</h2>
+					<?php if (!$social) : ?>
+						<a href="<?php echo social_get_criesp_url(); ?>" class="banner-button-link">
+							<span class="mr-3">Doe Agora</span>
+							<?php Icon_Class::polen_icon_chevron_right(); ?>
+						</a>
+					<?php endif; ?>
+				</div>
+			</div>
+		</div>
+	</section>
+<?php
+}
+
 function polen_front_get_banner()
 {
 	// $mobile_video = array(
@@ -53,13 +113,18 @@ function polen_front_get_banner()
 }
 
 // $size pode ser 'medium' e 'small'
-function polen_front_get_card($item, $size = "small")
+function polen_front_get_card($item, $size = "small", $social = false)
 {
+	$social == false ? $social = social_product_is_social(wc_get_product($item['ID']), social_get_category_base()) : false;
 	$class = $size;
 	if ($size === "small") {
 		$class = "col-6 col-md-2";
 	} elseif ($size === "medium") {
 		$class = "col-6 col-md-3";
+	}
+
+	if ($social) {
+		$size .= " criesp";
 	}
 
 	if (isset($item['ID'])) {
@@ -68,16 +133,30 @@ function polen_front_get_card($item, $size = "small")
 		$image = array();
 		$image[] = '';
 	}
-
 	$donate = get_post_meta($item['ID'], '_is_charity', true);
 
 ?>
 	<div class="<?= $class; ?>">
 		<div class="polen-card <?= $size; ?>">
 			<figure class="image">
-				<?php $donate ? polen_donate_badge("Social") : null; ?>
+				<?php if ($social) {
+					polen_donate_badge("Criança Esperança", true, true);
+				} else {
+					$donate ? polen_donate_badge("Social") : null;
+				} ?>
 				<img loading="lazy" src="<?php echo $image[0]; ?>" alt="<?= $item["name"]; ?>">
-				<span class="price"><span class="mr-2"><?php Icon_Class::polen_icon_camera_video(); ?></span><?php echo $item["price"] == "0" ? 'GRÁTIS' : $item['price_formatted']; ?></span>
+				<div class="price text-right">
+					<?php if ($social && $item['in_stock']) : ?>
+						<span class="text">DOAR</span><br />
+					<?php else : ?>
+						<?php if($item['in_stock']) : ?><span class="mr-2"><?php Icon_Class::polen_icon_camera_video(); ?></span><?php endif; ?>
+					<?php endif; ?>
+					<?php if($item['in_stock']) : ?>
+						<?php echo $item["price"] == "0" ? 'GRÁTIS' : $item['price_formatted']; ?>
+					<?php else: ?>
+						<span>Esgotado</span>
+					<?php endif; ?>
+				</div>
 				<a href="<?= $item["talent_url"]; ?>" class="link"></a>
 			</figure>
 			<h4 class="title text-truncate">
@@ -91,7 +170,7 @@ function polen_front_get_card($item, $size = "small")
 <?php
 }
 
-function polen_banner_scrollable($items, $title, $link)
+function polen_banner_scrollable($items, $title, $link, $subtitle = "", $social = false)
 {
 	if (!$items) {
 		return;
@@ -104,13 +183,18 @@ function polen_banner_scrollable($items, $title, $link)
 					<h2 class="mr-2"><?php echo $title; ?></h2>
 					<a href="<?php echo $link; ?>">Ver todos <?php Icon_Class::polen_icon_chevron_right(); ?></a>
 				</div>
+				<?php if ($subtitle != "") : ?>
+					<div class="col-12">
+						<p class="my-1"><?php echo $subtitle; ?></p>
+					</div>
+				<?php endif; ?>
 			</header>
 		</div>
 		<div class="col-md-12 p-0 p-md-0">
 			<div class="banner-wrapper">
 				<div class="banner-content">
 					<?php foreach ($items as $item) : ?>
-						<?php polen_front_get_card($item, "responsive"); ?>
+						<?php polen_front_get_card($item, "responsive", $social); ?>
 					<?php endforeach; ?>
 				</div>
 			</div>
@@ -119,7 +203,7 @@ function polen_banner_scrollable($items, $title, $link)
 <?php
 }
 
-function polen_front_get_news($items, $title, $link)
+function polen_front_get_news($items, $title, $link, $social = false)
 {
 	if (!$items) {
 		return;
@@ -130,7 +214,9 @@ function polen_front_get_news($items, $title, $link)
 			<header class="row mb-3">
 				<div class="col-12 d-flex justify-content-between align-items-center">
 					<h2 class="mr-2"><?php echo $title; ?></h2>
-					<a href="<?php echo $link; ?>">Ver todos <?php Icon_Class::polen_icon_chevron_right(); ?></a>
+					<?php if ($link) : ?>
+						<a href="<?php echo $link; ?>">Ver todos <?php Icon_Class::polen_icon_chevron_right(); ?></a>
+					<?php endif; ?>
 				</div>
 			</header>
 		</div>
@@ -140,7 +226,7 @@ function polen_front_get_news($items, $title, $link)
 					<div class="banner-wrapper">
 						<div class="banner-content">
 							<?php foreach ($items as $item) : ?>
-								<?php polen_front_get_card($item, "responsive"); ?>
+								<?php polen_front_get_card($item, "responsive", $social); ?>
 							<?php endforeach; ?>
 						</div>
 					</div>
@@ -182,7 +268,7 @@ function polen_front_get_categories($items, $link = '#')
 <?php
 }
 
-function polen_front_get_artists($items, $title)
+function polen_front_get_artists($items, $title, $social = false)
 {
 	if (!$items) {
 		return;
@@ -200,7 +286,7 @@ function polen_front_get_artists($items, $title)
 		<div class="col-md-12">
 			<div class="row">
 				<?php foreach ($items as $item) : ?>
-					<?php polen_front_get_card($item, "small"); ?>
+					<?php polen_front_get_card($item, "small", $social); ?>
 				<?php endforeach; ?>
 			</div>
 		</div>

@@ -1,14 +1,14 @@
 <?php
 
 
-function polen_donate_badge(string $text = "", bool $inside_card = true)
+function polen_donate_badge(string $text = "", bool $inside_card = true, bool $criesp = false)
 {
 	if ($text === "") {
 		return;
 	}
 ?>
 	<span class="donate-badge<?php echo $inside_card ? "" : " alt"; ?>">
-		<?php Icon_Class::polen_icon_donate(); ?>
+		<?php $criesp ? Icon_Class::polen_icon_criesp() : Icon_Class::polen_icon_donate(); ?>
 		<strong><?php echo $text; ?></strong>
 	</span>
 <?php

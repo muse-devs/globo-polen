@@ -50,7 +50,7 @@ $Talent_Fields = new Polen_Update_Fields();
 			$talent_id = get_post_field('post_author', $product_id);
 			$thumbnail = wp_get_attachment_image_src($_product->get_image_id(), 'thumbnail')[0];
 			$talent = get_user_by('id', $talent_id);
-
+			$is_social = social_product_is_social( $_product, social_get_category_base() );
 			$talent_data = $Talent_Fields->get_vendor_data($talent_id);
 
 			$talent_cart_detail = array(
@@ -67,7 +67,7 @@ $Talent_Fields = new Polen_Update_Fields();
 				"description" => $cart_item['instructions_to_video'] ? $cart_item['instructions_to_video'] : null
 			);
 		}
-		polen_get_talent_card($talent_cart_detail); ?>
+		polen_get_talent_card($talent_cart_detail, $is_social); ?>
 	</div>
 	<form name="checkout" method="post" class="checkout woocommerce-checkout col-12 col-md-6 order-md-1" action="<?php echo esc_url(wc_get_checkout_url()); ?>" enctype="multipart/form-data">
 		<div class="row">

@@ -22,6 +22,10 @@ if (!wc_coupons_enabled()) { // @codingStandardsIgnoreLine.
 	return;
 }
 
+if( social_cart_is_social() ) {
+	return;
+}
+
 //Tratamento para que se um cupom estiver aplicado
 // deixa ele escrito no field e desabilita o botao
 $cupons = WC()->cart->get_coupons();
