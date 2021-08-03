@@ -120,7 +120,7 @@ if (!defined('ABSPATH')) {
 												Caso você não tenha feito o pedido com a conta logada,
 												você pode acessar o
 												<?php $order_number = $order->get_order_number(); ?>
-												<a href="<?= site_url( "my-account/view-order/{$order_number}/"); ?>" style="color: #d7198b">acompanhamento do pedido</a>
+												<a href="<?= site_url( "acompanhamento-pedido/"); ?>" style="color: #d7198b">acompanhamento do pedido</a>
 												e colocar seu email e o numero do pedido que é <strong><?php echo $order_number; ?></strong>. <br />
 												Mas se você não criou a sua conta ou tem dúvidas sobre o sua
 												doação, fique tranquilo! Você pode enviar um e-email
