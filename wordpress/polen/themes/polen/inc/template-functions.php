@@ -38,6 +38,7 @@ function polen_get_header_objects()
 	<script>
 		var polenObj = {
 			base_url: '<?= site_url(); ?>',
+			template_uri: '<?php echo TEMPLATE_URI; ?>',
 			developer: <?php echo DEVELOPER ? 1 : 0; ?>,
 			ajax_url: "/wp-admin/admin-ajax.php",
 			COOKIES: <?php echo json_encode(POL_COOKIES); ?>
