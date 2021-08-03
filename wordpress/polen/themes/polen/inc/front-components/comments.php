@@ -96,13 +96,13 @@ function polen_card_talent_reviews_order(\WP_Post $post, $Talent_Fields)
 						</p>
 					</div>
 					<div class="col-4 col-md-4 text-center text-md-center">
-						<span class="skill-title">Data de Validade</span>
+						<span class="skill-title">Prazo de entrega</span>
 						<p class="p mb-0 mt-2">
 							<span class="skill-value">
 								<?php Icon_Class::polen_icon_calendar(); ?>
 								<?php 
 									$date = date("d/m/Y");
-									echo date( "d/m/Y", strtotime('+7 days') );
+									echo date( "d/m/y", strtotime('+7 days') );
 								?>
 							</span>
 						</p>

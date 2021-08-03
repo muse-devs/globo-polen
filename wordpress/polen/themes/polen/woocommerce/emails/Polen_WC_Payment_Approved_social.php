@@ -91,7 +91,9 @@ if (!defined('ABSPATH')) {
 			</tr>
 			<tr>
 				<td>
-					<img src="<?php echo get_template_directory_uri(); ?>/assets/img/email/criesp-art.jpg" alt="Arte Criança Esperança" style="display: block; max-width: 100%" />
+					<a style="text-decoration: none" href="https://redeglobo.globo.com/criancaesperanca/noticia/confira-as-instituicoes-apoiadas-nesta-edicao-do-crianca-esperanca.ghtml">
+						<img src="<?php echo get_template_directory_uri(); ?>/assets/img/email/criesp-art.jpg" alt="Arte Criança Esperança" style="display: block; max-width: 100%" />
+					</a>
 				</td>
 			</tr>
 			<tr>
@@ -111,18 +113,18 @@ if (!defined('ABSPATH')) {
 									<tr>
 										<td>
 											<p style="margin-bottom: 40px">
-												Caso seu pedido não seja aprovado pelo artista o seu
-												dinheiro será devolvido imediatamente. O talento tem
-												até x dias para responder a sua solicitação.
+												O talento tem até 15 dias para responder
+												a sua solicitação.
 											</p>
 											<p>
 												Caso você não tenha feito o pedido com a conta logada,
 												você pode acessar o
-												<a href="#<?php echo $order->get_order_number(); ?>" style="color: #d7198b">número do pedido</a>.
-												Mas se você não criou a sua conta ou tem dúvidas sobre
-												o seu pedido, fique tranquilo! Você pode responder
-												esse e-mail, ou mandar uma mensagem no WhatsApp, para
-												(11) 0000-0000.
+												<?php $order_number = $order->get_order_number(); ?>
+												<a href="<?= site_url( "acompanhamento-pedido/"); ?>" style="color: #d7198b">acompanhamento do pedido</a>
+												e colocar seu email e o numero do pedido que é <strong><?php echo $order_number; ?></strong>. <br />
+												Mas se você não criou a sua conta ou tem dúvidas sobre o sua
+												doação, fique tranquilo! Você pode enviar um e-email
+												para <a href="mailto:atendimento@polen.me">atendimento@polen.me</a>.
 											</p>
 										</td>
 									</tr>
