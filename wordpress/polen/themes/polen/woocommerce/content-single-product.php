@@ -54,6 +54,9 @@ $stock = $product->get_stock_quantity();
 <script>
 	// params
 	jQuery(document).ready(function() {
+		if(!document.querySelector("#stories")) {
+			return;
+		}
 		renderStories(<?php echo polen_get_videos_by_talent($Talent_Fields, true); ?>, <?php echo json_encode(get_the_title()); ?>, <?php echo json_encode(wp_get_attachment_image_src(get_post_thumbnail_id(get_the_ID()), 'polen-thumb-lg')[0]); ?>, <?php echo $social; ?>)
 	});
 </script>
@@ -66,15 +69,11 @@ $stock = $product->get_stock_quantity();
 
 <div id="product-<?php the_ID(); ?>" <?php wc_product_class('', $product); ?>>
 
-	<!-- Vídeos -->
-	<?php //polen_front_get_talent_videos($Talent_Fields);
-	?>
-
 	<!-- Tags -->
 	<div class="row">
 		<div class="col-12 col-md-6 m-md-auto d-flex align-items-center">
-			<?php polen_front_get_talent_stories(); ?>
-			<div class="ml-2">
+			<?php $social && polen_front_get_talent_stories(); ?>
+			<div>
 				<h1 class="talent-name" title="<?= get_the_title(); ?>"><?= get_the_title(); ?></h1>
 				<?php if($social) : ?>
 					<h5 class="talent-count-videos text-truncate">
@@ -91,6 +90,9 @@ $stock = $product->get_stock_quantity();
 					</h5>
 				<?php endif; ?>
 			</div>
+		</div>
+		<div class="col-12 mt-3">
+			<?php $social || polen_front_get_talent_videos($Talent_Fields); ?>
 		</div>
 	</div>
 
