@@ -105,6 +105,11 @@ class Icon_Class
 		echo '<i class="bi bi-cloud-arrow-up"></i>';
 	}
 
+	public static function polen_icon_calendar()
+	{
+		echo '<i class="bi bi-calendar"></i>';
+	}
+
 	public static function polen_icon_download()
 	{
 		echo '<i class="bi bi-download"></i>';
