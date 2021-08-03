@@ -39,7 +39,7 @@ function criesp_get_modal()
 						</div>
 						<div class="col-12">
 							<h2>Seja bem-vindo à Polen</h2>
-							<p>Aqui sua doação vira um vídeo-Polen personalizado do seu artista favorito! Além de se emocionar com seu ídolo, 100% do valor da doação vai para a UNESCO e ajuda causas sociais que mudam o Brasil e o mundo! ahh para DOAR é MUITO fácil!</p>
+							<p>Aqui sua doação vira um vídeo-Polen personalizado do seu artista favorito! Além de se emocionar com seu ídolo, 100% do valor da doação vai para a UNESCO. Ahh para DOAR é MUITO fácil!</p>
 							<h3>Como funciona</h3>
 						</div>
 						<div class="col-md-12">
@@ -63,6 +63,9 @@ function criesp_get_modal()
 									</span>
 								</li>
 							</ul>
+						</div>
+						<div class="col-md-12">
+							<p><b>Os vídeos serão entregues em até 15 dias após confirmação da doação.</b></p>
 						</div>
 					</div>
 				</div>
@@ -149,6 +152,37 @@ function criesp_get_thankyou_box()
 					Na Polen 100% do cachê dos vídeos serão revertidos em doações para o Criança Esperança.
 					Em até 15 dias o seu ídolo vai enviar o seu video-agradecimento.
 				</p>
+			</div>
+		</div>
+	</div>
+<?php
+}
+
+/**
+ * Cria o card do CRIESP onde mostra
+ * @param WP_Post $post
+ * @param stdClass Polen_Update_Fields
+ */
+function criesp_get_send_video_date()
+{
+?>
+	<div class="col-md-12 mt-3">
+		<div class="row">
+			<div class="col-12 col-md-12 m-md-auto">
+				<div class="row">
+					<div class="col-12 col-md-12 text-center text-md-center">
+						<span class="skill-title">Você receberá seu vídeo até</span>
+						<p class="p mb-0 mt-2">
+							<span class="skill-value">
+								<?php Icon_Class::polen_icon_clock(); ?>
+								<?php 
+									$date = date("d/m/Y");
+									echo date( "d/m/Y", strtotime('+15 days') );
+								?>
+							</span>
+						</p>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

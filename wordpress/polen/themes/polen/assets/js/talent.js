@@ -17,15 +17,15 @@ var timestamp = function() {
 	return date.getTime() / 1000;
 };
 
-function generateStoriesArray(videos) {
+function generateStoriesArray(videos, category) {
 	const array = [];
 	videos.map((item, i) => {
-		array.push([`video-`+i, "video", 0, item.video, '','javascript:clickToBuy()', 'Doe Agora', false, timestamp()]);
+		array.push([`video-`+i, "video", 0, item.video, '','javascript:clickToBuy()', category ? 'Doe Agora' : "Peça Agora", false, timestamp()]);
 	})
 	return array;
 }
 
-function renderStories(videos, name, avatar) {
+function renderStories(videos, name, avatar, category) {
 	let stories = new Zuck('stories', {
 		backNative: true,
 		previousTap: true,
@@ -60,7 +60,7 @@ function renderStories(videos, name, avatar) {
 				name,
 				"",
 				timestamp(),
-				generateStoriesArray(videos)
+				generateStoriesArray(videos, category)
 			),
 		],
 	});

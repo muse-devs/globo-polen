@@ -53,7 +53,7 @@ if ( ! is_ajax() ) {
 		<?php 
 			$button = '<button type="submit" class="btn btn-primary btn-lg btn-block mt-3" name="woocommerce_checkout_place_order" id="place_order" value="' . esc_attr( $order_button_text ) . '" data-value="' . esc_attr( $order_button_text ) . '">' . esc_html( $order_button_text ) . '</button>';
 			if (social_cart_is_social()) {
-				$button = '<button type="submit" class="criesp btn btn-success btn-lg btn-block mt-3" name="woocommerce_checkout_place_order" id="place_order" value="' . esc_attr( $order_button_text ) . '" data-value="' . esc_attr( $order_button_text ) . '">' . esc_html( $order_button_text ) . '</button>';
+				$button = '<button type="submit" class="criesp btn btn-success btn-lg btn-block mt-3" name="woocommerce_checkout_place_order" id="place_order" value="Finalizar doação" data-value="Finalizar doação">Finalizar doação</button>';
 			}
 			echo apply_filters( 'woocommerce_order_button_html', $button); // @codingStandardsIgnoreLine 
 		?>

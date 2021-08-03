@@ -46,7 +46,7 @@ function polen_front_get_banner_with_carousel($social = false)
 					<?php endforeach; ?>
 				</div>
 				<div class="content">
-					<h2 class="title m<?php echo $social ? 't' : 'b'; ?>-5">Aqui sua doação para o Criança Esperança vira um vídeo.</h2>
+					<h2 class="title m<?php echo $social ? 't' : 'b'; ?>-5">Aqui sua doação para o Criança Esperança vira um vídeo do seu ídolo.</h2>
 					<?php if (!$social) : ?>
 						<a href="<?php echo social_get_criesp_url(); ?>" class="banner-button-link">
 							<span class="mr-3">Doe Agora</span>
@@ -146,12 +146,16 @@ function polen_front_get_card($item, $size = "small", $social = false)
 				} ?>
 				<img loading="lazy" src="<?php echo $image[0]; ?>" alt="<?= $item["name"]; ?>">
 				<div class="price text-right">
-					<?php if ($social) : ?>
+					<?php if ($social && $item['in_stock']) : ?>
 						<span class="text">DOAR</span><br />
 					<?php else : ?>
-						<span class="mr-2"><?php Icon_Class::polen_icon_camera_video(); ?></span>
+						<?php if($item['in_stock']) : ?><span class="mr-2"><?php Icon_Class::polen_icon_camera_video(); ?></span><?php endif; ?>
 					<?php endif; ?>
-					<?php echo $item["price"] == "0" ? 'GRÁTIS' : $item['price_formatted']; ?>
+					<?php if($item['in_stock']) : ?>
+						<?php echo $item["price"] == "0" ? 'GRÁTIS' : $item['price_formatted']; ?>
+					<?php else: ?>
+						<span>Esgotado</span>
+					<?php endif; ?>
 				</div>
 				<a href="<?= $item["talent_url"]; ?>" class="link"></a>
 			</figure>

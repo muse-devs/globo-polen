@@ -46,12 +46,18 @@ $donate_name = get_post_meta(get_the_ID(), '_charity_name', true);
 $donate_image =  get_post_meta(get_the_ID(), '_url_charity_logo', true);
 $donate_text = stripslashes(get_post_meta(get_the_ID(), '_description_charity', true));
 $social = social_product_is_social($product, social_get_category_base());
+
+$stock = $product->get_stock_quantity();
+
 ?>
 
 <script>
 	// params
 	jQuery(document).ready(function() {
-		renderStories(<?php echo polen_get_videos_by_talent($Talent_Fields, true); ?>, <?php echo json_encode(get_the_title()); ?>, <?php echo json_encode(wp_get_attachment_image_src(get_post_thumbnail_id(get_the_ID()), 'polen-thumb-lg')[0]); ?>)
+		if(!document.querySelector("#stories")) {
+			return;
+		}
+		renderStories(<?php echo polen_get_videos_by_talent($Talent_Fields, true); ?>, <?php echo json_encode(get_the_title()); ?>, <?php echo json_encode(wp_get_attachment_image_src(get_post_thumbnail_id(get_the_ID()), 'polen-thumb-lg')[0]); ?>, <?php echo $social; ?>)
 	});
 </script>
 
@@ -63,36 +69,43 @@ $social = social_product_is_social($product, social_get_category_base());
 
 <div id="product-<?php the_ID(); ?>" <?php wc_product_class('', $product); ?>>
 
-	<!-- Vídeos -->
-	<?php //polen_front_get_talent_videos($Talent_Fields);
-	?>
-
 	<!-- Tags -->
 	<div class="row">
 		<div class="col-12 col-md-6 m-md-auto d-flex align-items-center">
-			<?php polen_front_get_talent_stories(); ?>
-			<div class="ml-2">
-				<h1 class="talent-name text-truncate" title="<?= get_the_title(); ?>"><?= get_the_title(); ?></h1>
-				<h5 class="talent-count-videos text-truncate">
-					<?php
-					$videosCount = json_decode(polen_get_videos_by_talent($Talent_Fields, true), true);
-					if (count($videosCount) === 1) {
-						echo count($videosCount) . " vídeo disponível";
-					} else if (count($videosCount) === 0) {
-						echo "Nenhum vídeo disponível";
-					} else {
-						echo count($videosCount) . " vídeos disponíveis";
-					}
-					?>
-				</h5>
+			<?php $social && polen_front_get_talent_stories(); ?>
+			<div>
+				<h1 class="talent-name" title="<?= get_the_title(); ?>"><?= get_the_title(); ?></h1>
+				<?php if($social) : ?>
+					<h5 class="talent-count-videos text-truncate">
+						<?php
+						$videosCount = $stock;
+						if ($videosCount === 1) {
+							echo $videosCount . " vídeo disponível";
+						} else if ($videosCount === 0) {
+							echo "Nenhum vídeo disponível";
+						} else {
+							echo $videosCount . " vídeos disponíveis";
+						}
+						?>
+					</h5>
+				<?php endif; ?>
 			</div>
+		</div>
+		<div class="col-12 mt-3">
+			<?php $social || polen_front_get_talent_videos($Talent_Fields); ?>
 		</div>
 	</div>
 
 	<div class="row mt-3 mb-1 talent-page-footer">
 		<div class="col-12 col-md-6 m-md-auto pb-3">
-			<?php echo woocommerce_template_single_add_to_cart(); ?>
-			<!--button class="btn btn-primary btn-lg btn-block btn-get-video">Pedir vídeo R$ 200</button-->
+			<?php if(!$social || $stock > 0) : ?>
+				<?php echo woocommerce_template_single_add_to_cart(); ?>
+			<?php else: ?>
+				<a href="<?php echo social_get_criesp_url(); ?>" class="btn btn-success btn-lg btn-block btn-get-video">
+					<span class="mr-2"><?php Icon_Class::polen_icon_criesp(); ?></span>
+					Escolher outro artista
+				</a>
+			<?php endif; ?>
 		</div>
 	</div>
 
@@ -120,7 +133,9 @@ $social = social_product_is_social($product, social_get_category_base());
 	<!-- Card dos Reviews -->
 	<?php $social || polen_card_talent_reviews_order($post, $Talent_Fields); ?>
 
-	<?php if (!$social) : ?>
+	<?php
+		if (!$social) {
+	?>
 		<div class="row mt-4">
 			<div class="col-md-12">
 				<?php if (count($terms) > 0) : ?>
@@ -130,7 +145,11 @@ $social = social_product_is_social($product, social_get_category_base());
 				<?php endif; ?>
 			</div>
 		</div>
-	<?php endif; ?>
+	<?php
+		} else {
+			criesp_get_send_video_date();
+		}
+	?>
 
 	<!-- Doação -->
 	<?php $donate && !$social ?

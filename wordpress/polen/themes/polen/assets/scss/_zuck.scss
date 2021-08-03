@@ -523,6 +523,10 @@
     overflow: auto;
     -webkit-overflow-scrolling: touch;
     overflow-scrolling: touch;
+    min-width: 100px;
+    @include media-breakpoint-down(xs) {
+        min-width: 70px;
+    }
 }
 .stories.carousel::-webkit-scrollbar {
     width: 0px;
@@ -568,7 +572,8 @@
     object-fit: cover;
 }
 .stories.carousel .story > .item-link > .info {
-    display: inline-block;
+    // display: inline-block;
+	display: none;
     margin-top: 0.5em;
     line-height: 1.2em;
     width: 100%;

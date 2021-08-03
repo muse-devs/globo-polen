@@ -30,16 +30,7 @@ if (!defined('ABSPATH')) {
 		<thead>
 			<tr>
 				<td>
-					<table style="width: 100%">
-						<tr>
-							<td>
-								<img src="<?php echo get_template_directory_uri(); ?>/assets/img/email/logo-polen-criesp.png" alt="Logos Polen e Criança Esperança" style="display: block; max-width: 80%" />
-							</td>
-							<td style="text-align: right">
-								<img src="<?php echo get_template_directory_uri(); ?>/assets/img/email/logo-globo-unesco.png" alt="Logos Globo e Unesco" style="display: block; max-width: 100%" />
-							</td>
-						</tr>
-					</table>
+					<img src="<?php echo get_template_directory_uri(); ?>/assets/img/email/logo-polen-criesp.png" alt="Logos Polen e Criança Esperança" style="display: block; margin: auto; max-width: 80%" />
 				</td>
 			</tr>
 			<tr>
@@ -68,6 +59,7 @@ if (!defined('ABSPATH')) {
                             font-weight: 700;
                             color: #d7198b;
                             text-align: center;
+                            margin-bottom: 30px;
                           ">
 												Obrigado por ajudar o Criança Experança
 											</h1>
@@ -82,10 +74,10 @@ if (!defined('ABSPATH')) {
                             line-height: 1.2;
                             text-align: center;
                           ">
-												Na Polen 100% do cachê dos vídeos serão revertidos em
+												Na Polen 100% do valor dos vídeos serão revertidos em
 												doações para o Criança Esperança.
-												<strong style="font-weight: 400">Em ate 15 dias o seu idolo vai enviar o seu
-													video-agradecimento.</strong>
+												<strong style="font-weight: 400">Em até 15 dias o seu ídolo vai enviar o seu
+													vídeo-agradecimento.</strong>
 											</p>
 										</td>
 									</tr>
@@ -100,7 +92,9 @@ if (!defined('ABSPATH')) {
 			</tr>
 			<tr>
 				<td>
-					<img src="<?php echo get_template_directory_uri(); ?>/assets/img/email/criesp-art.jpg" alt="Arte Criança Esperança" style="display: block; max-width: 100%" />
+					<a style="text-decoration: none" href="https://redeglobo.globo.com/criancaesperanca/noticia/confira-as-instituicoes-apoiadas-nesta-edicao-do-crianca-esperanca.ghtml">
+						<img src="<?php echo get_template_directory_uri(); ?>/assets/img/email/criesp-art.jpg" alt="Arte Criança Esperança" style="display: block; max-width: 100%" />
+					</a>
 				</td>
 			</tr>
 			<tr>
@@ -119,19 +113,12 @@ if (!defined('ABSPATH')) {
 									</tr>
 									<tr>
 										<td>
-											<p style="margin-bottom: 40px">
-												Caso seu pedido não seja aprovado pelo artista o seu
-												dinheiro será devolvido imediatamente. O talento tem
-												até x dias para responder a sua solicitação.
-											</p>
 											<p>
-												Caso você não tenha feito o pedido com a conta logada,
-												você pode acessar o
-												<a href="#<?php echo $order->get_order_number(); ?>" style="color: #d7198b">número do pedido</a>.
-												Mas se você não criou a sua conta ou tem dúvidas sobre
-												o seu pedido, fique tranquilo! Você pode responder
-												esse e-mail, ou mandar uma mensagem no WhatsApp, para
-												(11) 0000-0000.
+												<?php $order_number = $order->get_order_number(); ?>
+												<strong style="font-size: 25px">Pedido número: <?= $order_number; ?></strong><br><br>
+												Para acompanhar seu pedido <a href="<?= site_url( "acompanhamento-pedido/"); ?>" style="color: #d7198b">clique aqui</a>.<br><br>
+												Em caso de dúvidas sobre o sua doação, você pode enviar
+												um <br>e-mail para <a href="mailto:atendimento@polen.me">atendimento@polen.me</a>
 											</p>
 										</td>
 									</tr>

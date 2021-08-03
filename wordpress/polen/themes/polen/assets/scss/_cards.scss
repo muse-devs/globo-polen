@@ -4,6 +4,10 @@
 	img.correct-margin {
 		margin-bottom: -30px;
 	}
+	h4 {
+		font-size: 16px;
+		padding: 15px 0px;
+	}
 	p {
 		font-size: 14px;
 		font-weight: 700;
@@ -165,6 +169,9 @@
 			top: 10px;
 			left: 11px;
 			z-index: 3;
+			@media (max-width: 322px) {
+				left: 1px;
+			}
 		}
 	}
 	&.responsive {
@@ -777,7 +784,7 @@
 		font-size: 28px;
 		&.icon-camera-video {
 			font-size: 18px;
-			line-height: 45px;
+			line-height: 24px;
 		}
 	}
 }
