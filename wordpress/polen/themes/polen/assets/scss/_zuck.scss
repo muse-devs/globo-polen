@@ -373,6 +373,7 @@
         opacity: 0.5;
         width: 160px;
         height: 50px;
+        margin-right: 40px;
         @include media-breakpoint-down(sm) {
             width: 130px;
             height: 40px;
@@ -381,7 +382,6 @@
     .polen-mw {
         opacity: 0.5;
         width: 140px;
-        margin-right: 40px;
         @include media-breakpoint-down(sm) {
             width: 100px;
         }
