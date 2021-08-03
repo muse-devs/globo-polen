@@ -20,7 +20,7 @@ class Social_Product
             'status' => 'publish',
             'category' => $category->slug,
             'meta_key' => '_stock',
-            'orderby' => 'meta_value_num',
+            'orderby' => 'menu_order',
             'order' => 'DESC',
         );
         $products = _polen_get_info_talents_by_args( $args );
