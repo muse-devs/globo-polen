@@ -122,7 +122,7 @@ function polen_get_talent_card($talent, $social = false)
 				</div>
 			<?php endif; ?>
 			<?php if ($talent["has_details"] && !$social) : ?>
-				<button class="show-details d-flex justify-content-center" onclick="showDetails()"><?php Icon_Class::polen_icon_chevron("down") ?></button>
+				<button class="show-details d-flex justify-content-center align-items-center" onclick="showDetails()"><?php Icon_Class::polen_icon_chevron("down") ?></button>
 			<?php endif; ?>
 		</div>
 		<footer class="row details-box">
