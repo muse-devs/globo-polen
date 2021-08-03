@@ -19,7 +19,8 @@ class Social_Product
         $args = array(
             'status' => 'publish',
             'category' => $category->slug,
-            'orderby' => 'stock_quantity',
+            'meta_key' => '_stock',
+            'orderby' => 'meta_value_num',
             'order' => 'DESC',
         );
         $products = _polen_get_info_talents_by_args( $args );
