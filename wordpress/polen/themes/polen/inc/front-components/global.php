@@ -146,12 +146,16 @@ function polen_front_get_card($item, $size = "small", $social = false)
 				} ?>
 				<img loading="lazy" src="<?php echo $image[0]; ?>" alt="<?= $item["name"]; ?>">
 				<div class="price text-right">
-					<?php if ($social) : ?>
+					<?php if ($social && $item['in_stock']) : ?>
 						<span class="text">DOAR</span><br />
 					<?php else : ?>
-						<span class="mr-2"><?php Icon_Class::polen_icon_camera_video(); ?></span>
+						<?php if($item['in_stock']) : ?><span class="mr-2"><?php Icon_Class::polen_icon_camera_video(); ?></span><?php endif; ?>
 					<?php endif; ?>
-					<?php echo $item["price"] == "0" ? 'GRÁTIS' : $item['price_formatted']; ?>
+					<?php if($item['in_stock']) : ?>
+						<?php echo $item["price"] == "0" ? 'GRÁTIS' : $item['price_formatted']; ?>
+					<?php else: ?>
+						<span>Esgotado</span>
+					<?php endif; ?>
 				</div>
 				<a href="<?= $item["talent_url"]; ?>" class="link"></a>
 			</figure>
