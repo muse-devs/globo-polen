@@ -73,10 +73,10 @@ if (!defined('ABSPATH')) {
                             line-height: 1.2;
                             text-align: center;
                           ">
-												Na Polen 100% do cachê dos vídeos serão revertidos em
+												Na Polen 100% do valor dos vídeos serão revertidos em
 												doações para o Criança Esperança.
-												<strong style="font-weight: 400">Em ate 15 dias o seu idolo vai enviar o seu
-													video-agradecimento.</strong>
+												<strong style="font-weight: 400">Em até 15 dias o seu ídolo vai enviar o seu
+													vídeo-agradecimento.</strong>
 											</p>
 										</td>
 									</tr>
@@ -112,19 +112,12 @@ if (!defined('ABSPATH')) {
 									</tr>
 									<tr>
 										<td>
-											<p style="margin-bottom: 40px">
-												O talento tem até 15 dias para responder
-												a sua solicitação.
-											</p>
 											<p>
-												Caso você não tenha feito o pedido com a conta logada,
-												você pode acessar o
 												<?php $order_number = $order->get_order_number(); ?>
-												<a href="<?= site_url( "acompanhamento-pedido/"); ?>" style="color: #d7198b">acompanhamento do pedido</a>
-												e colocar seu email e o numero do pedido que é <strong><?php echo $order_number; ?></strong>. <br />
-												Mas se você não criou a sua conta ou tem dúvidas sobre o sua
-												doação, fique tranquilo! Você pode enviar um e-email
-												para <a href="mailto:atendimento@polen.me">atendimento@polen.me</a>.
+												<strong style="font-size: 25px">Pedido número: <?= $order_number; ?></strong><br><br>
+												Para acompanhar seu pedido <a href="<?= site_url( "acompanhamento-pedido/"); ?>" style="color: #d7198b">clique aqui</a>.<br><br>
+												Em caso de dúvidas sobre o sua doação, você pode enviar
+												um <br>e-mail para <a href="mailto:atendimento@polen.me">atendimento@polen.me</a>
 											</p>
 										</td>
 									</tr>
