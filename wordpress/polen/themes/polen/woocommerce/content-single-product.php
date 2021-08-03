@@ -76,31 +76,31 @@ $stock = $product->get_stock_quantity();
 			<?php polen_front_get_talent_stories(); ?>
 			<div class="ml-2">
 				<h1 class="talent-name" title="<?= get_the_title(); ?>"><?= get_the_title(); ?></h1>
-				<h5 class="talent-count-videos text-truncate">
-					<?php
-					$videosCount = $stock;
-					if ($videosCount === 1) {
-						echo $videosCount . " vídeo disponível";
-					} else if ($videosCount === 0) {
-						echo "Nenhum vídeo disponível";
-					} else {
-						echo $videosCount . " vídeos disponíveis";
-					}
-					?>
-				</h5>
+				<?php if($social) : ?>
+					<h5 class="talent-count-videos text-truncate">
+						<?php
+						$videosCount = $stock;
+						if ($videosCount === 1) {
+							echo $videosCount . " vídeo disponível";
+						} else if ($videosCount === 0) {
+							echo "Nenhum vídeo disponível";
+						} else {
+							echo $videosCount . " vídeos disponíveis";
+						}
+						?>
+					</h5>
+				<?php endif; ?>
 			</div>
 		</div>
 	</div>
 
 	<div class="row mt-3 mb-1 talent-page-footer">
 		<div class="col-12 col-md-6 m-md-auto pb-3">
-			<?php if($stock > 0) : ?>
+			<?php if(!$social || $stock > 0) : ?>
 				<?php echo woocommerce_template_single_add_to_cart(); ?>
 			<?php else: ?>
-				<a href="<?php echo $social ? social_get_criesp_url() : home_url( 'shop' ); ?>" class="btn btn-<?php echo $social ? 'success' : 'primary'; ?> btn-lg btn-block btn-get-video">
-					<?php if($social) : ?>
-						<span class="mr-2"><?php Icon_Class::polen_icon_criesp(); ?></span>
-					<?php endif; ?>
+				<a href="<?php echo social_get_criesp_url(); ?>" class="btn btn-success btn-lg btn-block btn-get-video">
+					<span class="mr-2"><?php Icon_Class::polen_icon_criesp(); ?></span>
 					Escolher outro artista
 				</a>
 			<?php endif; ?>
@@ -131,7 +131,7 @@ $stock = $product->get_stock_quantity();
 	<!-- Card dos Reviews -->
 	<?php $social || polen_card_talent_reviews_order($post, $Talent_Fields); ?>
 
-	<?php 
+	<?php
 		if (!$social) {
 	?>
 		<div class="row mt-4">
@@ -143,8 +143,8 @@ $stock = $product->get_stock_quantity();
 				<?php endif; ?>
 			</div>
 		</div>
-	<?php 
-		} else { 
+	<?php
+		} else {
 			criesp_get_send_video_date();
 		}
 	?>
