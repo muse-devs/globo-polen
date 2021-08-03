@@ -59,6 +59,7 @@ if (!defined('ABSPATH')) {
                             font-weight: 700;
                             color: #d7198b;
                             text-align: center;
+							margin-bottom: 30px;
                           ">
 												Obrigado por ajudar o Criança Experança
 											</h1>
