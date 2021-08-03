@@ -594,14 +594,17 @@ class Polen_Talent {
     /**
      * Cálculo para tempo de expiração do pedido
      */
-    public function video_expiration_time( $user, $order_id ){
+    public function video_expiration_time( $user, $order_id, $social = false ){
         if( $this->is_user_talent( $user ) && !empty( $order_id )) {
             $order = get_post( $order_id );
             $first_dateTime = new \DateTime($order->post_date); 
             $last_dateTime = new \DateTime($order->post_date); 
 
             $current_date = new \DateTime( "now", new \DateTimeZone( get_option( 'timezone_string' ) ) );
-            $last_dateTime->add(new \DateInterval('P7D'));
+
+            //Produto Social do crianca esperanca é 15dias
+            $interval_days = ( !$social ) ? 'P7D' : 'P15D';
+            $last_dateTime->add(new \DateInterval( $interval_days ));
             $fomattedDate = $last_dateTime->format('Y-m-d H:i:s');
 
             $interval = $current_date->diff($last_dateTime);
