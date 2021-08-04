@@ -62,6 +62,27 @@ function shareVideo(title, url) {
 	}
 }
 
+function shareVideoStories(url) {
+	var shareData = {
+		title: "Olha só",
+		url: url,
+	};
+	if (navigator.share) {
+		try {
+			navigator
+				.share(shareData)
+				.then(() => {
+					console.log("Sucesso!", "Link compartilhado com sucesso");
+				})
+				.catch(console.error);
+		} catch (err) {
+			polError("Error: " + err);
+		}
+	} else {
+		copyToClipboard(shareData.url);
+	}
+}
+
 function changeHash(hash) {
 	window.location.hash = hash || "";
 }

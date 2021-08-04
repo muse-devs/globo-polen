@@ -240,6 +240,7 @@ var Zuck = (function (t) {
                                         .concat("" === i(n, "length") ? "3" : i(n, "length"), 's"></b>\n                  </span>');
                                 },
                                 viewerItemBody: function (t, e, n) {
+                                    let hash = n.hash;
                                     return '<div \n                    class="item '
                                         .concat(!0 === i(n, "seen") ? "seen" : "", " ")
                                         .concat(e === t ? "active" : "", '"\n                    data-time="')
@@ -247,6 +248,9 @@ var Zuck = (function (t) {
                                         .concat(i(n, "type"), '" data-index="')
                                         .concat(t, '" data-item-id="')
                                         .concat(i(n, "id"), '">\n                    ')
+                                        .concat(
+                                            '<a class="share-storie" href="javascript:shareVideo(`Olha só que legal esse vídeo Polen!`,`'+polenObj.base_url+"/v/"+hash+'`)"><i class="bi bi-share"></i></a>'
+                                        )
                                         .concat(
                                             "video" === i(n, "type")
                                                 ? '<video class="media" muted webkit-playsinline playsinline preload="auto" src="'
@@ -787,7 +791,7 @@ var Zuck = (function (t) {
                     );
                 }),
                 (d.buildItem = d.buildStoryItem = function (t, e, n, a, i, o, c, r, s) {
-                    return { id: t, type: e, length: n, src: a, preview: i, link: o, linkText: c, seen: r, time: s };
+                    return { id: t, type: e, length: n, src: a, preview: i, link: o, linkText: c, seen: r, time: s, hash: t };
                 }),
                 t.exports && (e = t.exports = d),
                 (e.ZuckJS = d),
