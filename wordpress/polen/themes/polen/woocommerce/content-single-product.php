@@ -122,7 +122,7 @@ $stock = $product->get_stock_quantity();
 			<?php if ($social) : ?>
 				<div class="row">
 					<div class="col-md-12 mb-1">
-						<?php polen_donate_badge("100% DO CACHÊ DOADO PARA O CRIANÇA ESPERANÇA", false, true); ?>
+						<?php polen_donate_badge("100% DO VALOR DOADO PARA O CRIANÇA ESPERANÇA", false, true); ?>
 					</div>
 				</div>
 			<?php endif; ?>

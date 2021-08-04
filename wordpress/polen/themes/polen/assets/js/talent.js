@@ -19,9 +19,9 @@ var timestamp = function() {
 
 function generateStoriesArray(videos, category) {
 	const array = [];
-	videos.map((item, i) => {
-		array.push([`video-`+i, "video", 0, item.video, '','javascript:clickToBuy()', category ? 'Doe Agora' : "Peça Agora", false, timestamp()]);
-	})
+	videos.map((item) => {
+		array.push([item.hash, "video", 0, item.video, '','javascript:clickToBuy()', category ? 'Doe Agora' : "Peça Agora", false, timestamp()]);
+	});
 	return array;
 }
 
