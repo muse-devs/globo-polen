@@ -2553,9 +2553,9 @@ const ActivityPanel = ({
 
   function isAbbreviatedPanelVisible(select, setupTaskListHidden, thingsToDoNextCount) {
     const orderStatuses = Object(orders_utils["c" /* getOrderStatuses */])(select);
-    const isOrdersCardVisible = setupTaskListHidden ? Object(orders_utils["d" /* getUnreadOrders */])(select, orderStatuses) > 0 : false;
-    const isReviewsCardVisible = setupTaskListHidden ? Object(reviews_utils["b" /* getUnapprovedReviews */])(select) : false;
-    const isLowStockCardVisible = setupTaskListHidden ? Object(orders_utils["a" /* getLowStockCount */])(select) : false;
+    const isOrdersCardVisible = setupTaskListHidden && isPanelOpen ? Object(orders_utils["d" /* getUnreadOrders */])(select, orderStatuses) > 0 : false;
+    const isReviewsCardVisible = setupTaskListHidden && isPanelOpen ? Object(reviews_utils["b" /* getUnapprovedReviews */])(select) : false;
+    const isLowStockCardVisible = setupTaskListHidden && isPanelOpen ? Object(orders_utils["a" /* getLowStockCount */])(select) : false;
     return thingsToDoNextCount > 0 || isOrdersCardVisible || isReviewsCardVisible || isLowStockCardVisible || hasExtendedNotifications;
   }
 
@@ -2629,6 +2629,14 @@ const ActivityPanel = ({
 
   const isPerformingSetupTask = () => {
     return query.task && !query.path && (requestingTaskListOptions === true || setupTaskListHidden === false && setupTaskListComplete === false);
+  };
+
+  const redirectToHomeScreen = () => {
+    if (Object(utils["f" /* isWCAdmin */])(window.location.href)) {
+      Object(external_wc_navigation_["getHistory"])().push(Object(external_wc_navigation_["getNewPath"])({}, '/', {}));
+    } else {
+      window.location.href = Object(wc_admin_settings["g" /* getAdminLink */])('admin.php?page=wc-admin');
+    }
   }; // @todo Pull in dynamic unread status/count
 
 
@@ -2713,14 +2721,6 @@ const ActivityPanel = ({
 
       default:
         return null;
-    }
-  };
-
-  const redirectToHomeScreen = () => {
-    if (Object(utils["f" /* isWCAdmin */])(window.location.href)) {
-      Object(external_wc_navigation_["getHistory"])().push(Object(external_wc_navigation_["getNewPath"])({}, '/', {}));
-    } else {
-      window.location.href = Object(wc_admin_settings["g" /* getAdminLink */])('admin.php?page=wc-admin');
     }
   };
 
@@ -12338,9 +12338,9 @@ function getLowStockCount(select) {
   // depend on `getItemsTotalCount` to have been called.
   // eslint-disable-next-line @wordpress/no-unused-vars-before-return
 
-  const totalLowStockProducts = getItemsTotalCount('products', getLowStockCountQuery, defaultValue);
-  const isError = Boolean(getItemsError('products', getLowStockCountQuery));
-  const isRequesting = isResolving('getItemsTotalCount', ['products', getLowStockCountQuery, defaultValue]);
+  const totalLowStockProducts = getItemsTotalCount('products/low-in-stock', getLowStockCountQuery, defaultValue);
+  const isError = Boolean(getItemsError('products/low-in-stock', getLowStockCountQuery));
+  const isRequesting = isResolving('getItemsTotalCount', ['products/low-in-stock', getLowStockCountQuery, defaultValue]);
 
   if (isError || isRequesting && totalLowStockProducts === defaultValue) {
     return null;

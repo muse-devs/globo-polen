@@ -92,10 +92,7 @@ $args = array(
 	// The text to appear on the page title.
 	'page_title'                => esc_html__( 'Sample Options', 'your-textdomain-here' ),
 
-	// Enabled the Webfonts typography module to use asynchronous fonts.
-	'async_typography'          => false,
-
-	// Disable to create your own google fonts loader.
+	// Disable to create your own Google fonts loader.
 	'disable_google_fonts_link' => false,
 
 	// Show the panel pages on the admin bar.
@@ -108,15 +105,15 @@ $args = array(
 	'admin_bar_priority'        => 50,
 
 	// Sets a different name for your global variable other than the opt_name.
-	'global_variable'           => '',
+	'global_variable'           => $opt_name,
 
-	// Show the time the page took to load, etc (forced on while on localhost or when WP_DEBUG is enabled).
+	// Show the time the page took to load, etc. (forced on while on localhost or when WP_DEBUG is enabled).
 	'dev_mode'                  => true,
 
 	// Enable basic customizer support.
 	'customizer'                => true,
 
-	// Allow the panel to opened expanded.
+	// Allow the panel to open expanded.
 	'open_expanded'             => false,
 
 	// Disable the save warning when a user changes a field.
@@ -174,6 +171,13 @@ $args = array(
 
 	// Set the theme of the option panel.  Use 'wp' to use a more modern style, default is classic.
 	'admin_theme'               => 'wp',
+
+	// Enable or disable flyout menus when hovering over a menu with submenus.
+	'flyout_submenus'           => true,
+
+	// Mode to display fonts (auto|block|swap|fallback|optional)
+	// See: https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display.
+	'font_display'              => 'swap',
 
 	// HINTS.
 	'hints'                     => array(
@@ -359,6 +363,7 @@ require_once Redux_Core::$dir . '../sample/sections/color-selection/color-gradie
 require_once Redux_Core::$dir . '../sample/sections/color-selection/color-rgba.php';
 require_once Redux_Core::$dir . '../sample/sections/color-selection/link-color.php';
 require_once Redux_Core::$dir . '../sample/sections/color-selection/palette.php';
+require_once Redux_Core::$dir . '../sample/sections/color-selection/color-palette.php';
 
 // -> START Design Fields.
 Redux::set_section(
@@ -371,6 +376,7 @@ Redux::set_section(
 );
 
 require_once Redux_Core::$dir . '../sample/sections/design-fields/background.php';
+require_once Redux_Core::$dir . '../sample/sections/design-fields/box-shadow.php';
 require_once Redux_Core::$dir . '../sample/sections/design-fields/border.php';
 require_once Redux_Core::$dir . '../sample/sections/design-fields/dimensions.php';
 require_once Redux_Core::$dir . '../sample/sections/design-fields/spacing.php';
@@ -515,16 +521,12 @@ if ( class_exists( 'Redux_Pro' ) ) {
 	);
 
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/accordion.php';
-	require_once Redux_Core::$dir . '../sample/sections/pro-fields/box-shadow.php';
-	require_once Redux_Core::$dir . '../sample/sections/pro-fields/color-gradient.php';
-	require_once Redux_Core::$dir . '../sample/sections/pro-fields/color-palette.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/color-scheme.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/custom-fonts.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/date-time-picker.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/google-maps.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/icon-select.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/js-button.php';
-	require_once Redux_Core::$dir . '../sample/sections/pro-fields/media.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/metaboxes.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/multi-media.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/repeater.php';
@@ -532,7 +534,6 @@ if ( class_exists( 'Redux_Pro' ) ) {
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/shortcodes.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/social-profiles.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/taxonomy.php';
-	require_once Redux_Core::$dir . '../sample/sections/pro-fields/typography.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/users.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/widget-areas.php';
 }
@@ -607,15 +608,14 @@ Redux::set_section(
 // .
 if ( ! function_exists( 'compiler_action' ) ) {
 	/**
-	 *
 	 * This is a test function that will let you see when the compiler hook occurs.
 	 * It only runs if a field's value has changed and compiler=>true is set.
 	 *
 	 * @param array  $options        Options values.
 	 * @param string $css            Compiler selector CSS values  compiler => array( CSS SELECTORS ).
-	 * @param array  $changed_values Values changed since last save.
+	 * @param array  $changed_values Any values changed since last save.
 	 */
-	function compiler_action( $options, $css, $changed_values ) {
+	function compiler_action( array $options, string $css, array $changed_values ) {
 		echo '<h1>The compiler hook has run!</h1>';
 		echo '<pre>';
 		// phpcs:ignore WordPress.PHP.DevelopmentFunctions
@@ -636,9 +636,9 @@ if ( ! function_exists( 'redux_validate_callback_function' ) ) {
 	 * @param mixed $value          New value.
 	 * @param mixed $existing_value Existing value.
 	 *
-	 * @return mixed
+	 * @return array
 	 */
-	function redux_validate_callback_function( $field, $value, $existing_value ) {
+	function redux_validate_callback_function( array $field, $value, $existing_value ): array {
 		$error   = false;
 		$warning = false;
 
@@ -673,13 +673,13 @@ if ( ! function_exists( 'dynamic_section' ) ) {
 	 * Custom function for filtering the sections array. Good for child themes to override or add to the sections.
 	 * Simply include this function in the child themes functions.php file.
 	 * NOTE: the defined constants for URLs, and directories will NOT be available at this point in a child theme,
-	 * so you must use get_template_directory_uri() if you want to use any of the built in icons.
+	 * so you must use get_template_directory_uri() if you want to use any of the built-in icons.
 	 *
 	 * @param array $sections Section array.
 	 *
 	 * @return array
 	 */
-	function dynamic_section( $sections ) {
+	function dynamic_section( array $sections ): array {
 		$sections[] = array(
 			'title'  => esc_html__( 'Section via hook', 'your-textdomain-here' ),
 			'desc'   => '<p class="description">' . esc_html__( 'This is a section created by adding a filter to the sections array. Can be used by child themes to add/remove sections from the options.', 'your-textdomain-here' ) . '</p>',
@@ -702,7 +702,7 @@ if ( ! function_exists( 'change_arguments' ) ) {
 	 *
 	 * @return array
 	 */
-	function change_arguments( $args ) {
+	function change_arguments( array $args ): array {
 		$args['dev_mode'] = true;
 
 		return $args;
@@ -717,7 +717,7 @@ if ( ! function_exists( 'change_defaults' ) ) {
 	 *
 	 * @return array
 	 */
-	function change_defaults( $defaults ) {
+	function change_defaults( array $defaults ): array {
 		$defaults['str_replace'] = esc_html__( 'Testing filter hook!', 'your-textdomain-here' );
 
 		return $defaults;
@@ -727,14 +727,13 @@ if ( ! function_exists( 'change_defaults' ) ) {
 if ( ! function_exists( 'redux_custom_sanitize' ) ) {
 	/**
 	 * Function to be used if the field santize argument.
-	 *
 	 * Return value MUST be the formatted or cleaned text to display.
 	 *
 	 * @param string $value Value to evaluate or clean.  Required.
 	 *
 	 * @return string
 	 */
-	function redux_custom_sanitize( $value ) {
+	function redux_custom_sanitize( string $value ): string {
 		$return = '';
 
 		foreach ( explode( ' ', $value ) as $w ) {
@@ -745,6 +744,7 @@ if ( ! function_exists( 'redux_custom_sanitize' ) ) {
 					$return .= $v;
 				}
 			}
+
 			$return .= ' ';
 		}
 
