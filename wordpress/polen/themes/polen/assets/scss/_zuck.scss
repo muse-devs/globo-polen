@@ -355,6 +355,39 @@
     }
 }
 
+#zuck-modal-content .story-viewer .slides .item.active .mark-water {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    bottom: 100px;
+    @include media-breakpoint-down(sm) {
+        justify-content: space-between;
+        width: 90%;
+    }
+    .criesp-mw {
+        opacity: 0.5;
+        width: 160px;
+        height: 50px;
+        margin-right: 40px;
+        @include media-breakpoint-down(sm) {
+            width: 130px;
+            height: 40px;
+        }
+    }
+    .polen-mw {
+        opacity: 0.5;
+        width: 140px;
+        @include media-breakpoint-down(sm) {
+            width: 100px;
+        }
+    }
+}
+
 #zuck-modal-content .story-viewer .tip {
     z-index: 5;
     text-decoration: none;
