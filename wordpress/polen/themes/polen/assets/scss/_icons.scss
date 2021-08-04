@@ -53,98 +53,104 @@
 	@if $filename == credit-card {
 		$char: "\E009";
 	}
-	@if $filename == donate {
+	@if $filename == criesp {
 		$char: "\E00A";
 	}
-	@if $filename == down-arrow {
+	@if $filename == donate {
 		$char: "\E00B";
 	}
-	@if $filename == download-alt {
+	@if $filename == down-arrow {
 		$char: "\E00C";
 	}
-	@if $filename == edit {
+	@if $filename == download-alt {
 		$char: "\E00D";
 	}
-	@if $filename == error-o {
+	@if $filename == edit {
 		$char: "\E00E";
 	}
-	@if $filename == error-outline {
+	@if $filename == error-o {
 		$char: "\E00F";
 	}
-	@if $filename == facebook {
+	@if $filename == error-outline {
 		$char: "\E010";
 	}
-	@if $filename == filter {
+	@if $filename == facebook {
 		$char: "\E011";
 	}
-	@if $filename == hand-thumbs-up {
+	@if $filename == filter {
 		$char: "\E012";
 	}
-	@if $filename == instagram {
+	@if $filename == hand-thumbs-up {
 		$char: "\E013";
 	}
-	@if $filename == left-arrow {
+	@if $filename == instagram {
 		$char: "\E014";
 	}
-	@if $filename == like {
+	@if $filename == left-arrow {
 		$char: "\E015";
 	}
-	@if $filename == linkedin {
+	@if $filename == like {
 		$char: "\E016";
 	}
-	@if $filename == load {
+	@if $filename == linkedin {
 		$char: "\E017";
 	}
-	@if $filename == mobile {
+	@if $filename == load {
 		$char: "\E018";
 	}
-	@if $filename == no-photo {
+	@if $filename == mobile {
 		$char: "\E019";
 	}
-	@if $filename == phone {
+	@if $filename == no-photo {
 		$char: "\E01A";
 	}
-	@if $filename == play {
+	@if $filename == paypal {
 		$char: "\E01B";
 	}
-	@if $filename == reload {
+	@if $filename == phone {
 		$char: "\E01C";
 	}
-	@if $filename == research {
+	@if $filename == play {
 		$char: "\E01D";
 	}
-	@if $filename == right-arrow {
+	@if $filename == reload {
 		$char: "\E01E";
 	}
-	@if $filename == search {
+	@if $filename == research {
 		$char: "\E01F";
 	}
-	@if $filename == software-download {
+	@if $filename == right-arrow {
 		$char: "\E020";
 	}
-	@if $filename == star-fill {
+	@if $filename == search {
 		$char: "\E021";
 	}
-	@if $filename == star {
+	@if $filename == software-download {
 		$char: "\E022";
 	}
-	@if $filename == tiktok {
+	@if $filename == star-fill {
 		$char: "\E023";
 	}
-	@if $filename == trash {
+	@if $filename == star {
 		$char: "\E024";
 	}
-	@if $filename == twitter {
+	@if $filename == tiktok {
 		$char: "\E025";
 	}
-	@if $filename == up-arrow {
+	@if $filename == trash {
 		$char: "\E026";
 	}
-	@if $filename == video-camera {
+	@if $filename == twitter {
 		$char: "\E027";
 	}
-	@if $filename == whatsapp {
+	@if $filename == up-arrow {
 		$char: "\E028";
+	}
+	@if $filename == video-camera {
+		$char: "\E029";
+	}
+	@if $filename == whatsapp {
+		$char: "\E02A";
 	}
 
 	@return $char;
@@ -187,6 +193,9 @@
 }
 .icon-credit-card {
 	@include icon(credit-card);
+}
+.icon-criesp {
+	@include icon(criesp);
 }
 .icon-donate {
 	@include icon(donate);
@@ -235,6 +244,9 @@
 }
 .icon-no-photo {
 	@include icon(no-photo);
+}
+.icon-paypal {
+	@include icon(paypal);
 }
 .icon-phone {
 	@include icon(phone);

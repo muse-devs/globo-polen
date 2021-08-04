@@ -1,11 +1,11 @@
 <?php
 namespace Polen\Tributes;
 
-use Polen\Includes\Vimeo\Polen_Vimeo_Factory;
 use Polen\Includes\Vimeo\Polen_Vimeo_Response;
 use Polen\Includes\Vimeo\Polen_Vimeo_Vimeo_Options;
 use Vimeo\Exceptions\ExceptionInterface;
 use Vimeo\Exceptions\VimeoRequestException;
+use Vimeo\Vimeo;
 
 class Tributes_Invites_Controller
 {
@@ -15,9 +15,9 @@ class Tributes_Invites_Controller
      */
     public function create_tribute_invites()
     {
-        $tribute_hash = filter_input( INPUT_POST, 'tribute_hash', FILTER_SANITIZE_SPECIAL_CHARS );
+        $tribute_hash = filter_input( INPUT_POST, 'tribute_hash' );
         $tribute      = Tributes_Model::get_by_hash( $tribute_hash );
-        $tribute_id   = filter_input( INPUT_POST, 'tribute_id', FILTER_SANITIZE_SPECIAL_CHARS );
+        $tribute_id   = filter_input( INPUT_POST, 'tribute_id' );
         $friends_list = $_POST[ 'friends' ];
         $security     = filter_input( INPUT_POST, 'security' );
         if( !wp_verify_nonce( $security, 'tributes_create_invites' ) ) {
@@ -35,7 +35,7 @@ class Tributes_Invites_Controller
         }
 
         $emails = $_POST[ 'friends' ][ 'email' ];
-        $names  = $_POST[ 'friends' ][ 'name' ] ;
+        $names  = $_POST[ 'friends' ][ 'name' ];
         try {
             for( $i = 0; $i < count( $emails ); $i++ ) {
                 $email = filter_var( $emails[ $i ], FILTER_VALIDATE_EMAIL );
@@ -98,9 +98,6 @@ class Tributes_Invites_Controller
      */
     public function make_video_slot_vimeo()
     {
-        //TODO:
-        $tribute_hash = filter_input( INPUT_POST, 'tribute_hash', FILTER_SANITIZE_SPECIAL_CHARS );
-        $invite_hash = filter_input( INPUT_POST, 'invite_hash', FILTER_SANITIZE_SPECIAL_CHARS );
         global $Polen_Plugin_Settings;
 
         $client_id = $Polen_Plugin_Settings['polen_vimeo_client_id'];
@@ -108,12 +105,12 @@ class Tributes_Invites_Controller
         $token = $Polen_Plugin_Settings['polen_vimeo_access_token'];
 
         $tribute_hash = filter_input( INPUT_POST, 'tribute_hash' );
-        $invite_hash  = filter_input( INPUT_POST, 'invite_hash' );
-        $invite_id    = filter_input( INPUT_POST, 'invite_id', FILTER_SANITIZE_NUMBER_INT );
-        $file_size    = filter_input( INPUT_POST, 'file_size', FILTER_SANITIZE_NUMBER_INT );
+        $invite_hash = filter_input( INPUT_POST, 'invite_hash' );
+        $invite_id   = filter_input( INPUT_POST, 'invite_id', FILTER_SANITIZE_NUMBER_INT );
+        $file_size   = filter_input( INPUT_POST, 'file_size', FILTER_SANITIZE_NUMBER_INT );
 
         $tribute = Tributes_Model::get_by_hash( $tribute_hash );
-        $invite  = Tributes_Invites_Model::get_by_id( $invite_id );
+        $invite = Tributes_Invites_Model::get_by_id( $invite_id );
 
         if( $tribute->ID != $invite->tribute_id || $invite->hash != $invite_hash ) {
             wp_send_json_error( 'Dados do Colab inválidos', 403 );
@@ -122,17 +119,17 @@ class Tributes_Invites_Controller
 
         $name_to_video = '';
         try {
-            $lib = Polen_Vimeo_Factory::create_vimeo_colab_instance_with_redux();
+            $lib = new Vimeo( $client_id, $client_secret, $token );
             $args = Polen_Vimeo_Vimeo_Options::get_option_insert_video( $file_size, $name_to_video );
-            $args[ 'name' ] = "De: {$invite->email_inviter}";
-            $response = new Polen_Vimeo_Response( $lib->request( '/me/videos', $args, 'POST' ) );
+            $args[ 'name' ] = "Colab para {$tribute->name_honored}";
+            $vimeo_response = $lib->request( '/me/videos', $args, 'POST' );
+            
+            $response = new Polen_Vimeo_Response( $vimeo_response );
+            
             if( $response->is_error() ) {
                 throw new VimeoRequestException( $response->get_developer_message(), 500 );
             }
-            $move_folder = new Polen_Vimeo_Response( $lib->request( "{$tribute->vimeo_folder_uri}{$response->get_vimeo_id()}", [], 'PUT' ) );
-            if( $move_folder->is_error() ) {
-                throw new VimeoRequestException( $response->get_developer_message(), 500 );
-            }
+            
             $data_invite_update = array(
                 'ID'                     => $invite->ID,
                 'vimeo_id'               => $response->get_vimeo_id(),

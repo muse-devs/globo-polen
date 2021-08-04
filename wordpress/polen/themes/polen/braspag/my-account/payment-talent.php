@@ -17,6 +17,8 @@ if ($polen_talent->is_user_talent($current_user)) {
 
 	$total_will_gain = $polen_talent->get_total_by_order_status_return_raw($current_user->ID);
 	$discounted_will_gain = polen_apply_polen_part_price( $total_will_gain );
+
+	$user_is_social = social_user_is_social( $current_user->ID )
 ?>
 	<section>
 		<header class="page-header">
@@ -28,6 +30,7 @@ if ($polen_talent->is_user_talent($current_user)) {
 			<div class="row mt-3">
 				<div class="col-md-12">
 					<div class="talent-order box-round px-3 py-4">
+						<?php if( !$user_is_social ) : ?>
 						<div class="row">
 							<div class="col-md-12">
 								<p class="p">Valor pago até agora</p>
@@ -38,6 +41,7 @@ if ($polen_talent->is_user_talent($current_user)) {
 								<span class="value small"><?php echo wc_price( $discounted_will_gain ); ?></span>
 							</div>
 						</div>
+						<?php endif; ?>
 						<?php
 						if (!empty($bank_data)) : ?>
 							<div class="row">

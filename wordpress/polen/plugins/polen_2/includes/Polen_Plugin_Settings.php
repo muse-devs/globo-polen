@@ -277,55 +277,6 @@ class Polen_Plugin_Settings
             ),
         ) );
 
-        //Credenciais do Vimeo para Tribute
-        \Redux::set_section( $opt_name, array(
-            'title'            => esc_html__( 'Vimeo Colab', 'polen' ),
-            'id'               => 'vimeo_colab',
-            'icon'             => 'el el-envelope',
-            'subsection'       => false,
-            'fields'           => array(
-                array(
-                    'id'       => 'polen_vimeo_tribute_on',
-                    'type'     => 'switch',
-                    'title'    => esc_html__('Ativar a API do Vimeo como processador de videos', 'polen'),
-                    'desc'     => 'Ativar a API do Vimeo para Colab como processador de videos',
-                    'default'  => 0,
-                ),
-                array(
-                    'id'       => 'polen_vimeo_tribute_user_id',
-                    'type'     => 'text',
-                    'title'    => esc_html__('Vimeo Colab User ID', 'polen'),
-                    'desc'     => 'Informe do User ID da Vimeo Colab API.',
-                    'default'  => '',
-                    'required' => array( 'polen_vimeo_tribute_on', '=', '1' ),
-                ),
-                array(
-                    'id'       => 'polen_vimeo_tribute_client_id',
-                    'type'     => 'text',
-                    'title'    => esc_html__('Vimeo Colab ClientID', 'polen'),
-                    'desc'     => 'Informe do ClientID da Vimeo Colab API.',
-                    'default'  => '',
-                    'required' => array( 'polen_vimeo_tribute_on', '=', '1' ),
-                ),
-                array(
-                    'id'       => 'polen_vimeo_tribute_client_secret',
-                    'type'     => 'text',
-                    'title'    => esc_html__('Vimeo Colab Client Secret', 'polen'),
-                    'desc'     => 'Informe o Vimeo Client Secret da Vimeo Colab API.',
-                    'default'  => '',
-                    'required' => array( 'polen_vimeo_tribute_on', '=', '1' ),
-                ),
-                array(
-                    'id'       => 'polen_vimeo_tribute_access_token',
-                    'type'     => 'text',
-                    'title'    => esc_html__('Access Token Colab', 'polen'),
-                    'desc'     => 'Informe o Vimeo Access Token da Vimeo Colab API.',
-                    'default'  => '',
-                    'required' => array( 'polen_vimeo_tribute_on', '=', '1' ),
-                ),
-            ),
-        ) );
-
         // Prazo para expirar pedidos
         \Redux::set_section( $opt_name, array(
             'title'            => esc_html__( 'Cancelamento', 'polen' ),

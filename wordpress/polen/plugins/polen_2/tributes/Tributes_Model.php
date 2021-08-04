@@ -52,7 +52,7 @@ class Tributes_Model
             array( 'ID' => $data[ 'ID' ])
         );
         if( $result_update === false ) {
-            throw new \Exception( self::create_exception_message( $wpdb->last_error ), 401 );
+            throw new \Exception( $wpdb->last_error, 401 );
         }
         return $data[ 'ID' ];
     }
@@ -135,22 +135,6 @@ class Tributes_Model
         $table_name = self::table_name();
         $result = $wpdb->get_var( "SELECT COUNT(*) FROM `{$table_name}`;" );
         return $result;
-    }
-
-
-    /**
-     * Trata a msg que vem na excptiond o DB
-     */
-    public static function create_exception_message( $error_message )
-    {
-        if( strpos( $error_message, self::ERROR_SLUG_UNIQUE ) !== false ) {
-            return 'Endereço já existe, tente outro';
-        }
-
-        if( strpos( $error_message, self::ERROR_HASH_UNIQUE ) !== false ) {
-            return 'Hash já existe, tente novamente';
-        }
-        return $error_message;
     }
 
 

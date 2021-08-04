@@ -1,5 +1,65 @@
 <?php
 
+function polen_front_get_banner_with_carousel($social = false)
+{
+	$carrousel = array(
+		array(
+			"mobile" => TEMPLATE_URI . "/assets/img/banner-home-mobile-new.png",
+			"desktop" => TEMPLATE_URI . "/assets/img/img-home-desktop-new.jpeg"
+		)
+	);
+	$carrousel2 = array(
+		array(
+			"mobile" => TEMPLATE_URI . "/assets/img/criesp/bg-criesp.jpg",
+			"desktop" => TEMPLATE_URI . "/assets/img/criesp/bg-criesp.jpg"
+		)
+	);
+?>
+	<section class="top-banner mb-4">
+		<div class="owl-carousel owl-theme">
+			<?php if (!$social) : ?>
+				<div class="item">
+					<div class="carrousel">
+						<?php foreach ($carrousel as $item) : ?>
+							<figure class="image">
+								<img loading="lazy" src="<?php echo $item['mobile']; ?>" alt="Banner da home" class="mobile" />
+								<img loading="lazy" src="<?php echo $item['desktop']; ?>" alt="Banner da home" class="desktop" />
+							</figure>
+						<?php endforeach; ?>
+					</div>
+					<div class="content">
+						<h2 class="title mb-5">Presenteie e<br />surpreenda com vídeos personalizados.</h2>
+						<a href="<?php echo polen_get_all_talents_url(); ?>" class="banner-button-link">
+							<span class="mr-3">Ver todos os artistas</span>
+							<?php Icon_Class::polen_icon_chevron_right(); ?>
+						</a>
+					</div>
+				</div>
+			<?php endif; ?>
+			<div class="item">
+				<div class="carrousel">
+					<?php foreach ($carrousel2 as $item) : ?>
+						<figure class="image">
+							<img loading="lazy" src="<?php echo $item['mobile']; ?>" alt="Banner da home" class="mobile" />
+							<img loading="lazy" src="<?php echo $item['desktop']; ?>" alt="Banner da home" class="desktop" />
+						</figure>
+					<?php endforeach; ?>
+				</div>
+				<div class="content">
+					<h2 class="title m<?php echo $social ? 't' : 'b'; ?>-5">Aqui sua doação para o Criança Esperança vira um vídeo do seu ídolo.</h2>
+					<?php if (!$social) : ?>
+						<a href="<?php echo social_get_criesp_url(); ?>" class="banner-button-link">
+							<span class="mr-3">Doe Agora</span>
+							<?php Icon_Class::polen_icon_chevron_right(); ?>
+						</a>
+					<?php endif; ?>
+				</div>
+			</div>
+		</div>
+	</section>
+<?php
+}
+
 function polen_front_get_banner()
 {
 	// $mobile_video = array(
@@ -53,13 +113,18 @@ function polen_front_get_banner()
 }
 
 // $size pode ser 'medium' e 'small'
-function polen_front_get_card($item, $size = "small")
+function polen_front_get_card($item, $size = "small", $social = false)
 {
+	$social == false ? $social = social_product_is_social(wc_get_product($item['ID']), social_get_category_base()) : false;
 	$class = $size;
 	if ($size === "small") {
 		$class = "col-6 col-md-2";
 	} elseif ($size === "medium") {
 		$class = "col-6 col-md-3";
+	}
+
+	if ($social) {
+		$size .= " criesp";
 	}
 
 	if (isset($item['ID'])) {
@@ -68,16 +133,30 @@ function polen_front_get_card($item, $size = "small")
 		$image = array();
 		$image[] = '';
 	}
-
 	$donate = get_post_meta($item['ID'], '_is_charity', true);
 
 ?>
 	<div class="<?= $class; ?>">
 		<div class="polen-card <?= $size; ?>">
 			<figure class="image">
-				<?php $donate ? polen_donate_badge("Social") : null; ?>
+				<?php if ($social) {
+					polen_donate_badge("Criança Esperança", true, true);
+				} else {
+					$donate ? polen_donate_badge("Social") : null;
+				} ?>
 				<img loading="lazy" src="<?php echo $image[0]; ?>" alt="<?= $item["name"]; ?>">
-				<span class="price"><span class="mr-2"><?php Icon_Class::polen_icon_camera_video(); ?></span><?php echo $item["price"] == "0" ? 'GRÁTIS' : $item['price_formatted']; ?></span>
+				<div class="price text-right">
+					<?php if ($social && $item['in_stock']) : ?>
+						<span class="text">DOAR</span><br />
+					<?php else : ?>
+						<?php if($item['in_stock']) : ?><span class="mr-2"><?php Icon_Class::polen_icon_camera_video(); ?></span><?php endif; ?>
+					<?php endif; ?>
+					<?php if($item['in_stock']) : ?>
+						<?php echo $item["price"] == "0" ? 'GRÁTIS' : $item['price_formatted']; ?>
+					<?php else: ?>
+						<span>Esgotado</span>
+					<?php endif; ?>
+				</div>
 				<a href="<?= $item["talent_url"]; ?>" class="link"></a>
 			</figure>
 			<h4 class="title text-truncate">
@@ -91,7 +170,7 @@ function polen_front_get_card($item, $size = "small")
 <?php
 }
 
-function polen_banner_scrollable($items, $title, $link)
+function polen_banner_scrollable($items, $title, $link, $subtitle = "", $social = false)
 {
 	if (!$items) {
 		return;
@@ -104,13 +183,18 @@ function polen_banner_scrollable($items, $title, $link)
 					<h2 class="mr-2"><?php echo $title; ?></h2>
 					<a href="<?php echo $link; ?>">Ver todos <?php Icon_Class::polen_icon_chevron_right(); ?></a>
 				</div>
+				<?php if ($subtitle != "") : ?>
+					<div class="col-12">
+						<p class="my-1"><?php echo $subtitle; ?></p>
+					</div>
+				<?php endif; ?>
 			</header>
 		</div>
 		<div class="col-md-12 p-0 p-md-0">
 			<div class="banner-wrapper">
 				<div class="banner-content">
 					<?php foreach ($items as $item) : ?>
-						<?php polen_front_get_card($item, "responsive"); ?>
+						<?php polen_front_get_card($item, "responsive", $social); ?>
 					<?php endforeach; ?>
 				</div>
 			</div>
@@ -119,7 +203,7 @@ function polen_banner_scrollable($items, $title, $link)
 <?php
 }
 
-function polen_front_get_news($items, $title, $link)
+function polen_front_get_news($items, $title, $link, $social = false)
 {
 	if (!$items) {
 		return;
@@ -130,7 +214,9 @@ function polen_front_get_news($items, $title, $link)
 			<header class="row mb-3">
 				<div class="col-12 d-flex justify-content-between align-items-center">
 					<h2 class="mr-2"><?php echo $title; ?></h2>
-					<a href="<?php echo $link; ?>">Ver todos <?php Icon_Class::polen_icon_chevron_right(); ?></a>
+					<?php if ($link) : ?>
+						<a href="<?php echo $link; ?>">Ver todos <?php Icon_Class::polen_icon_chevron_right(); ?></a>
+					<?php endif; ?>
 				</div>
 			</header>
 		</div>
@@ -140,7 +226,7 @@ function polen_front_get_news($items, $title, $link)
 					<div class="banner-wrapper">
 						<div class="banner-content">
 							<?php foreach ($items as $item) : ?>
-								<?php polen_front_get_card($item, "responsive"); ?>
+								<?php polen_front_get_card($item, "responsive", $social); ?>
 							<?php endforeach; ?>
 						</div>
 					</div>
@@ -182,7 +268,7 @@ function polen_front_get_categories($items, $link = '#')
 <?php
 }
 
-function polen_front_get_artists($items, $title)
+function polen_front_get_artists($items, $title, $social = false)
 {
 	if (!$items) {
 		return;
@@ -200,7 +286,7 @@ function polen_front_get_artists($items, $title)
 		<div class="col-md-12">
 			<div class="row">
 				<?php foreach ($items as $item) : ?>
-					<?php polen_front_get_card($item, "small"); ?>
+					<?php polen_front_get_card($item, "small", $social); ?>
 				<?php endforeach; ?>
 			</div>
 		</div>
@@ -275,152 +361,6 @@ function polen_get_avatar($user_id, $size = 'polen-square-crop-lg')
 		$initials_name = polen_get_initials_name_by_user($user);
 		return '<span>' . $initials_name   . '</span>';
 	}
-}
-
-
-/**
- * Criar a lista de videos já feitos
- * @param stdClass Polen_Talent_Fields
- * @return HTML
- */
-function polen_front_get_talent_videos($talent)
-{
-	$items = array();
-	$items_raw = Polen\Includes\Polen_Video_Info::select_by_talent_id($talent->user_id);
-	foreach ($items_raw as $item) {
-		$order = wc_get_order($item->order_id);
-		$cart_item = \Polen\Includes\Cart\Polen_Cart_Item_Factory::polen_cart_item_from_order($order);
-		$items[] = [
-			'title' => '',
-			'image' =>  $item->vimeo_thumbnail,
-			'video' => $item->vimeo_link,
-			'hash' => $item->hash,
-			'first_order' => $item->first_order,
-			'initials' => polen_get_initials_name($cart_item->get_name_to_video()),
-		];
-	}
-
-	$video_url = home_url() . "/v/";
-?>
-	<section id="talent-videos" class="row mb-1 banner-scrollable" data-public-url="<?php echo $video_url; ?>">
-		<div class="d-none d-md-block col-md-12 text-right custom-slick-controls"></div>
-		<div class="col-md-12 p-0">
-			<div class="banner-wrapper">
-				<div class="banner-content type-video<?php if (sizeof($items) < 1) echo " ml-3 ml-md-0" ?>">
-					<?php foreach ($items as $item) : ?>
-						<div class="polen-card-video">
-							<figure class="video-cover">
-								<img loading="lazy" src="<?= $item['image']; ?>" alt="<?= $item['title']; ?>" data-url="<?= $item['video']; ?>">
-								<a href="javascript:openVideoByHash('<?= $item['hash']; ?>')" class="video-player-button"></a>
-								<?php polen_video_icons($talent->user_id, $item['initials'], $item['first_order'] == "1"); ?>
-							</figure>
-						</div>
-					<?php endforeach; ?>
-					<?php polen_talent_promo_card($talent); ?>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<div id="video-modal" class="background video-modal">
-		<div class="video-card-body">
-			<button id="close-button" class="close-button" onclick="hideModal()"><?php Icon_Class::polen_icon_close(); ?></button>
-			<div id="video-box"></div>
-		</div>
-	</div>
-<?php
-}
-
-function polen_get_talent_card($talent)
-{
-?>
-	<div class="talent-card alt">
-		<header class="row pb-3 header">
-			<div class="col-md-12 d-flex align-items-center">
-				<div class="avatar avatar-sm" style="background-image: url(<?php echo isset($talent["avatar"]) ? $talent["avatar"] : TEMPLATE_URI . '/assets/img/avatar.png';  ?>)"></div>
-				<h4 class="name ml-3"><?php echo $talent["name"]; ?></h4>
-			</div>
-		</header>
-		<div class="price-box pt-3">
-			<span class="cat">Você vai pagar</span>
-			<p class="price mt-2">
-				<?php wc_cart_totals_order_total_html(); ?>
-			</p>
-			<?php if (!empty($talent['discount'])) : ?>
-				<div class="row">
-					<div class="col-12 mt-3">
-						<table style="width: 60%;">
-							<tr>
-								<td>Valor:</td>
-								<td><?php echo $talent['price']; ?></td>
-							</tr>
-							<tr>
-								<td>Desconto:</td>
-								<td><?php echo $talent['discount']; ?></td>
-							</tr>
-							<tr>
-								<td>Total:</td>
-								<td><?php wc_cart_totals_order_total_html(); ?></td>
-							</tr>
-						</table>
-					</div>
-				</div>
-			<?php endif; ?>
-			<?php if ($talent["has_details"]) : ?>
-				<button class="show-details d-flex justify-content-center" onclick="showDetails()"><?php Icon_Class::polen_icon_chevron("down") ?></button>
-			<?php endif; ?>
-		</div>
-		<footer class="row details-box">
-			<div class="col pt-4 mt-3 details">
-				<div class="row personal">
-					<div class="col d-flex justify-content-between">
-						<?php
-						if (empty(!$talent["from"])) : ?>
-							<div class="item">
-								<span class="title">Vídeo de</span>
-								<p class="value mt-2"><?php echo $talent["from"]; ?></p>
-							</div>
-							<div class="item">
-								<?php Icon_Class::polen_icon_arrows(); ?>
-							</div>
-						<?php endif; ?>
-						<div class="item">
-							<span class="title">Para</span>
-							<p class="value mt-2"><?php echo $talent["to"]; ?></p>
-						</div>
-					</div>
-				</div>
-				<div class="row ocasion mt-4">
-					<div class="col-12">
-						<span class="title">Ocasião</span>
-						<p class="value mt-2"><?php echo $talent["category"]; ?></p>
-					</div>
-				</div>
-				<div class="row mail mt-4">
-					<div class="col-12">
-						<span class="title">e-mail</span>
-						<p class="value mt-2"><?php echo $talent["mail"]; ?></p>
-					</div>
-				</div>
-				<div class="row description mt-4">
-					<div class="col-12">
-						<span class="title">Instruções</span>
-						<p class="value mt-2"><?php echo $talent["description"]; ?></p>
-					</div>
-				</div>
-			</div>
-		</footer>
-	</div>
-	<script>
-		var details = document.querySelector(".details-box");
-		var btn = document.querySelector(".show-details");
-
-		function showDetails() {
-			details.classList.toggle("show");
-			btn.classList.toggle("-active");
-		}
-	</script>
-<?php
 }
 
 function polen_box_image_message($image, $text)
