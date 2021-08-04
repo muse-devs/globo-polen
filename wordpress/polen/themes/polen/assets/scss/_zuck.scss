@@ -25,7 +25,7 @@
     width: 100vw;
     height: 100%;
     background: rgba(0, 0, 0, 0.75);
-    z-index: 9999999;
+    z-index: 998;
     font-size: 14px;
     font-family: inherit;
 }
@@ -275,6 +275,9 @@
 }
 #zuck-modal-content .story-viewer .head .right {
     float: right;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
 #zuck-modal-content .story-viewer .head .right .close,
 #zuck-modal-content .story-viewer .head .back {
@@ -285,6 +288,7 @@
     cursor: pointer;
     text-align: center;
     color: #fff;
+    opacity: 0.5;
 }
 #zuck-modal-content .story-viewer .head .left .back {
     display: none;
@@ -501,6 +505,7 @@
     font-size: 15px;
     margin: 15px 0;
     line-height: 30px;
+    display: none;
     }
     #zuck-modal-content .story-viewer .head .left > .back {
         display: none;
@@ -508,7 +513,7 @@
         z-index: 20;
         visibility: visible;
         position: absolute;
-        font-size: 22px;
+        font-size: 27px;
         line-height: 32px;
         vertical-align: top;
         text-shadow: none;
@@ -519,6 +524,7 @@
         position: absolute;
         right: 20px;
     }
+
     #zuck-modal-content .story-viewer.with-back-button .head .left .item-preview {
     margin-left: 18px;
     }
@@ -727,4 +733,21 @@
 
 .no-link {
     cursor: auto;
+}
+
+.share-storie {
+    font-size: 20px;
+    cursor: pointer;
+    text-align: center;
+    color: #fff;
+    opacity: 0.5;
+    position: absolute;
+    z-index: 100012;
+    right: 60px;
+    top: 15px;
+    cursor: pointer;
+    :hover {
+        opacity: 1;
+        color: #fff;
+    }
 }
