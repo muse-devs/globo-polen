@@ -11914,6 +11914,18 @@ label[for="wc-stripe-new-payment-method"] {
   .skill-value .icon {
     padding-right: 3px; }
 
+.talent-dashboard-start .title,
+.box-round .title,
+.talent-order-modal .title {
+  font-size: 32px; }
+
+.talent-dashboard-start .subtitle,
+.box-round .subtitle,
+.talent-order-modal .subtitle {
+  font-size: 25px;
+  font-weight: 400;
+  color: #000; }
+
 .talent-dashboard-start .p,
 .box-round .p,
 .talent-order-modal .p {
