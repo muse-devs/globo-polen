@@ -2079,7 +2079,6 @@ class card_ProductStockCard extends external_wp_element_["Component"] {
 const productsQuery = {
   page: 1,
   per_page: 5,
-  low_in_stock: true,
   status: 'publish',
   _fields: ['attributes', 'id', 'images', 'last_order_date', 'low_stock_amount', 'name', 'parent_id', 'stock_quantity', 'type']
 };
@@ -2099,7 +2098,7 @@ class stock_StockPanel extends external_wp_element_["Component"] {
 
     if (success) {
       // Request more low stock products.
-      invalidateResolution('getItems', ['products', productsQuery]);
+      invalidateResolution('getItems', ['products/low-in-stock', productsQuery]);
 
       if (products.length < 2) {
         invalidateResolution('getItemsTotalCount', ['products', utils["b" /* getLowStockCountQuery */], null]);
@@ -2181,9 +2180,9 @@ stock_StockPanel.defaultProps = {
     getItemsError,
     isResolving
   } = select(external_wc_data_["ITEMS_STORE_NAME"]);
-  const products = Array.from(getItems('products', productsQuery).values());
-  const isError = Boolean(getItemsError('products', productsQuery));
-  const isRequesting = isResolving('getItems', ['products', productsQuery]);
+  const products = Array.from(getItems('products/low-in-stock', productsQuery).values());
+  const isError = Boolean(getItemsError('products/low-in-stock', productsQuery));
+  const isRequesting = isResolving('getItems', ['products/low-in-stock', productsQuery]);
   return {
     products,
     isError,

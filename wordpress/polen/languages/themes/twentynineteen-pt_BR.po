@@ -38,14 +38,16 @@ msgctxt "Parent post link"
 msgid "<span class=\"meta-nav\">Published in</span><br><span class=\"post-title\">%title</span>"
 msgstr "<span class=\"meta-nav\">Publicado em</span><br><span class=\"post-title\">%title</span>"
 
-#: template-parts/content/content.php:18
 #: template-parts/content/content-excerpt.php:18
+#: template-parts/content/content.php:18
 msgctxt "post"
 msgid "Featured"
 msgstr "Em destaque"
 
 #. translators: %s: WordPress version.
-#: inc/back-compat.php:40 inc/back-compat.php:55 inc/back-compat.php:76
+#. translators: %s: WordPress version.
+#. translators: %s: WordPress version.
+#: inc/back-compat.php:43 inc/back-compat.php:60 inc/back-compat.php:83
 msgid "Twenty Nineteen requires at least WordPress version 4.7. You are running version %s. Please upgrade and try again."
 msgstr "O Twenty Nineteen requer pelo menos a versão 4.7 do WordPress. Você está usando a versão %s. Atualize e tente novamente."
 
@@ -119,7 +121,7 @@ msgstr "Pequeno"
 msgid "S"
 msgstr "P"
 
-#: functions.php:60 footer.php:37
+#: footer.php:37 functions.php:60
 msgid "Footer Menu"
 msgstr "Menu do rodapé"
 
@@ -127,7 +129,7 @@ msgstr "Menu do rodapé"
 msgid "Primary Color"
 msgstr "Cor primária"
 
-#: template-parts/footer/footer-widgets.php:12 functions.php:194
+#: functions.php:194 template-parts/footer/footer-widgets.php:12
 msgid "Footer"
 msgstr "Rodapé"
 
@@ -160,9 +162,9 @@ msgstr "Anteriores"
 msgid "Next"
 msgstr "Próximo"
 
+#: image.php:52 template-parts/content/content-page.php:27
+#: template-parts/content/content-single.php:40
 #: template-parts/content/content.php:49
-#: template-parts/content/content-page.php:27
-#: template-parts/content/content-single.php:40 image.php:52
 msgid "Pages:"
 msgstr "Páginas"
 
@@ -170,7 +172,7 @@ msgstr "Páginas"
 msgid "Skip to content"
 msgstr "Pular para o conteúdo"
 
-#: template-parts/header/site-branding.php:46 functions.php:61
+#: functions.php:61 template-parts/header/site-branding.php:46
 msgid "Social Links Menu"
 msgstr "Menu de links sociais"
 
@@ -190,10 +192,11 @@ msgstr "Parece que nada foi encontrado por aqui. Tente uma busca talvez?"
 msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
 msgstr "Aparentemente não pudemos encontrar o que você está procurando. Talvez uma busca ajude."
 
-#. translators: %s: Post title. Only visible to screen readers.
 #. translators: %s: Post title.
+#. translators: %s: Post title. Only visible to screen readers.
+#. translators: %s: Post title. Only visible to screen readers.
+#: functions.php:225 template-parts/content/content-single.php:27
 #: template-parts/content/content.php:36
-#: template-parts/content/content-single.php:27 functions.php:225
 msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
 msgstr "Continue lendo<span class=\"screen-reader-text\"> \"%s\"</span>"
 
@@ -201,6 +204,7 @@ msgstr "Continue lendo<span class=\"screen-reader-text\"> \"%s\"</span>"
 msgid "Next Post"
 msgstr "Próximo post"
 
+#. translators: Used between list items, there is a space after the comma.
 #. translators: Used between list items, there is a space after the comma.
 #: inc/template-tags.php:86 inc/template-tags.php:98
 msgid ", "
@@ -280,8 +284,10 @@ msgid "Post Type Archives: "
 msgstr "Arquivos de tipo de post:"
 
 #. translators: %s: Post title. Only visible to screen readers.
-#: template-parts/content/content-page.php:41
-#: template-parts/header/entry-header.php:32 inc/template-tags.php:120
+#. translators: %s: Post title. Only visible to screen readers.
+#. translators: %s: Post title. Only visible to screen readers.
+#: inc/template-tags.php:120 template-parts/content/content-page.php:41
+#: template-parts/header/entry-header.php:32
 msgid "Edit <span class=\"screen-reader-text\">%s</span>"
 msgstr "Editar <span class=\"screen-reader-text\">%s</span>"
 
