@@ -1,0 +1,24 @@
+2020-06-28 - 1.6.0
+New: Added ability for vendors to connect wiith Stripe Express accounts.
+New: Added option to enable CVC field on saved cards.
+Fix: Issues when changing subscription payment method.
+
+2020-11-19 - 1.5.0
+New: Automatic Commission transfers can be disabled and switched to manual transfers.
+New: Ability to pay vendors directly from commissions page using "Transfer with Stripe Connect".
+
+2020-11-03 - 1.4.0
+Fix: wasn't accounting for new taxes settings from WC Product Vendors 2.1.21 and above.
+
+2020-06-20 - 1.3.0
+Added: Support SCA (Strong Customer Authentication)
+
+2020-06-20 - 1.2.0
+Added: Support for tokenization
+Added: Support for WC Subscriptions
+
+2020-05-14 - 1.0.1
+Fix: Removed is_woocommerce_active() and replaced with  class_exists('WooCommerce')
+
+2020-05-02 - 1.0.0
+Plugin Created.
