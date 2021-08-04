@@ -59,11 +59,9 @@ if ( $product->is_in_stock() ) : ?>
 <?php if ( !$product->is_in_stock() ) : ?>
 	<?php do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 
-		<button type="submit"
-				name="add-to-cart" value="<?php echo esc_attr( $product->get_id() ); ?>"
-				class="single_add_to_cart_button alt btn btn-primary btn-lg btn-block btn-get-video py-3 disabled">
-				Temporariamente Indisponível
-		</button>
+		<a href="<?php echo home_url( 'shop' ); ?>" class="single_add_to_cart_button alt btn btn-primary btn-lg btn-block btn-get-video py-3">
+				Escolher outro artista
+		</a>
 
 		<?php do_action( 'woocommerce_after_add_to_cart_button' ); ?>
 <?php endif; ?>

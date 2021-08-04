@@ -25,7 +25,7 @@ if( ! $is_social ) :
 	<div class="row box-video-success">
 		<div class="col-12 text-center">
 			<img src="<?php echo TEMPLATE_URI; ?>/assets/img/video-sucesso.png" alt="Imagem de sucesso de video" />
-			<p class="text mt-5"><strong>Pronto!<br />Seu vídeo foi enviado.</strong><br />Você ajudou na doação com:</p>
+			<p class="text mt-5"><strong>Pronto!<br />Seu vídeo foi enviado.</strong><br />Obrigado pela sua doação:</p>
             <p class="value">R$<?= number_format( $order_total, 2, ',', '' ); ?></p>
 		</div>
 		<div class="col-12 text-center mt-3">
