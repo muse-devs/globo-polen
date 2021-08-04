@@ -20,6 +20,7 @@ class Polen_Video_Info extends Polen_DB
     public $vimeo_process_complete;
     public $vimeo_url_download;
     public $vimeo_link;
+    public $vimeo_file_play;
     public $duration;
     public $first_order;
     public $created_at;
@@ -41,6 +42,7 @@ class Polen_Video_Info extends Polen_DB
                 $this->vimeo_process_complete = $object->vimeo_process_complete;
                 $this->vimeo_url_download = $object->vimeo_url_download;
                 $this->vimeo_link = $object->vimeo_link;
+                $this->vimeo_file_play = $object->vimeo_file_play;
                 $this->duration = $object->duration;
                 $this->first_order = $object->first_order;
                 $this->created_at = $object->created_at;
@@ -96,6 +98,7 @@ class Polen_Video_Info extends Polen_DB
         $return[ 'vimeo_process_complete' ] = $this->vimeo_process_complete;
         $return[ 'vimeo_url_download' ]     = $this->vimeo_url_download;
         $return[ 'vimeo_link' ]             = $this->vimeo_link;
+        $return[ 'vimeo_file_play' ]        = $this->vimeo_file_play;
         $return[ 'first_order' ]            = $this->first_order;
         $return[ 'duration' ]               = $this->duration;
         
@@ -211,6 +214,7 @@ class Polen_Video_Info extends Polen_DB
     static public function get_by_order_id( int $order_id )
     {
         $pvi = new self();
+        //TODO: ORDER BY ID DESC
         $result = $pvi->get( 'order_id', $order_id, '%d' );
         if( empty( $result ) ) {
             return null;
@@ -269,6 +273,7 @@ class Polen_Video_Info extends Polen_DB
         $object->vimeo_thumbnail = $data->vimeo_thumbnail;
         $object->vimeo_url_download = $data->vimeo_url_download;
         $object->vimeo_link = $data->vimeo_link;
+        $object->vimeo_file_play = $data->vimeo_file_play;
         $object->duration = $data->duration;
         $object->created_at = $data->created_at;
         $object->first_order = $data->first_order;
@@ -288,5 +293,21 @@ class Polen_Video_Info extends Polen_DB
             return true;
         }
         return false;
+    }
+
+
+    /**
+     * 
+     * @param type $field
+     * @param type $value
+     * @param type $format
+     * @return type
+     */
+    static public function get_all_vimeo_file_play_empty()
+    {
+        global $wpdb;
+        return self::create_instance_many( $wpdb->get_results(
+            "SELECT * FROM wp_video_info WHERE vimeo_process_complete=1 AND vimeo_file_play IS NULL LIMIT 100;"
+        ) );
     }
 }

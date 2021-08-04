@@ -8,6 +8,12 @@ const CONSTANTS = {
 	THEME: "theme_mode",
 };
 
+const ZAPIERURLS = {
+	NEWSLETTER: "https://hooks.zapier.com/hooks/catch/10583855/b252jhj/",
+	NEW_ACCOUNT: "https://hooks.zapier.com/hooks/catch/10583855/b25uia6/",
+	LANDING_PAGE: "https://hooks.zapier.com/hooks/catch/10583855/b25u8xz/"
+}
+
 var interval = setInterval;
 
 function copyToClipboard(text) {
@@ -38,6 +44,27 @@ function docReady(fn) {
 function shareVideo(title, url) {
 	var shareData = {
 		title: title,
+		url: url,
+	};
+	if (navigator.share) {
+		try {
+			navigator
+				.share(shareData)
+				.then(() => {
+					console.log("Sucesso!", "Link compartilhado com sucesso");
+				})
+				.catch(console.error);
+		} catch (err) {
+			polError("Error: " + err);
+		}
+	} else {
+		copyToClipboard(shareData.url);
+	}
+}
+
+function shareVideoStories(url) {
+	var shareData = {
+		title: "Olha só",
 		url: url,
 	};
 	if (navigator.share) {
@@ -247,7 +274,7 @@ function downloadClick_handler(evt) {
 	let security = jQuery(evt.currentTarget).attr("data-nonce");
 	let action = "video-download-link";
 	let data = { hash, security, action };
-	jQuery.post(woocommerce_params.ajax_url, data, (response) => {
+	jQuery.post(polenObj.ajax_url, data, (response) => {
 		if (response.success) {
 			window.location.href = response.data;
 		}
@@ -271,7 +298,7 @@ const polenGtag = {
 // --------------------------------------------
 
 // Funções de Cookie -------------------------------------------------------
-function polSetCookie(cname, cvalue, exdays) {
+function polSetCookie(cname, cvalue, exdays = 30) {
 	const d = new Date();
 	d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
 	let expires = "expires=" + d.toUTCString();
@@ -300,6 +327,14 @@ function polAcceptCookies() {
 	policies_box.parentNode.removeChild(policies_box);
 }
 
+function polRequestZapier(formName, url) {
+	jQuery
+	.post(
+		url,
+		jQuery(formName).serialize()
+	)
+}
+
 function polAjaxForm(formName, callBack, callBackError) {
 	polSpinner(null, formName);
 	blockUnblockInputs(formName, true);
@@ -309,15 +344,17 @@ function polAjaxForm(formName, callBack, callBackError) {
 			jQuery(formName).serialize(),
 			function (result) {
 				if (result.success) {
-					callBack();
+					document.querySelector(formName).reset();
+					callBack(result.data);
 				} else {
 					callBackError(result.data);
 				}
 			}
 		)
 		.fail(function (e) {
+			console.log(e);
 			if (e.responseJSON) {
-				callBackError(e.responseJSON.data);
+				callBackError(e.responseJSON.data.response || e.responseJSON.data);
 			} else {
 				callBackError(e.statusText);
 			}
@@ -336,46 +373,35 @@ jQuery(document).ready(function () {
 });
 
 (function ($) {
+	// Newsletter submit click
 	$(document).on("click", ".signin-newsletter-button", function (e) {
+		const formName = "form#newsletter";
 		e.preventDefault();
-		var email = $('input[name="signin_newsletter"]');
-		var page_source = $('input[name="signin_newsletter_page_source"]');
-		var event = $('input[name="signin_newsletter_event"]');
-		var is_mobile = $('input[name="signin_newsletter_is_mobile"]');
-		var wnonce = $(this).attr("code");
-		$(".signin-response").html("");
-		if (email.val() !== "") {
-			polSpinner(CONSTANTS.SHOW, "#signin-newsletter");
-			$.ajax({
-				type: "POST",
-				url: polenObj.ajax_url,
-				data: {
-					action: "polen_newsletter_signin",
-					security: wnonce,
-					email: email.val(),
-					page_source: page_source.val(),
-					event: event.val(),
-					is_mobile: is_mobile.val(),
-				},
-				success: function (response) {
-					polMessage(
-						"Seu email foi adicionado à lista",
-						response.data.response
-					);
-					email.val("");
-				},
-				complete: function () {
-					polSpinner(CONSTANTS.HIDDEN);
-				},
-				error: function (jqXHR, textStatus, errorThrown) {
-					polError(`Erro: ${jqXHR.responseJSON.data.response}`);
-				},
-			});
-		} else {
-			polError("Por favor, digite um e-mail válido");
-		}
+		// Ajax Request
+		polAjaxForm(
+			formName,
+			function () {
+				polMessages.message(
+					"Seu e-mail foi adicionado a lista",
+					"Aguarde nossas novidades!"
+				);
+			},
+			function (error) {
+				polMessages.error(error);
+			}
+		);
+		// Zapier request
+		polRequestZapier(
+			formName,
+			ZAPIERURLS.NEWSLETTER
+		);
 	});
 })(jQuery);
+
+function closeModal() {
+	let modal = document.querySelector(".show");
+	modal.classList.remove("show");
+}
 
 function polSlugfy(s, opt) {
 	s = String(s);

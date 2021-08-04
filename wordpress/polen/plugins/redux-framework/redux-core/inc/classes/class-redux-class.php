@@ -40,7 +40,7 @@ if ( ! class_exists( 'Redux_Class', false ) ) {
 		/**
 		 * Redux_Class constructor.
 		 *
-		 * @param null|ReduxFramework $parent Pointer to ReduxFramework object.
+		 * @param null|object $parent Pointer to ReduxFramework object.
 		 */
 		public function __construct( $parent = null ) {
 			if ( null !== $parent && is_object( $parent ) ) {

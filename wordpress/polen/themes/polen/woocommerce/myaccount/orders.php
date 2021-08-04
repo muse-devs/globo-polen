@@ -4,7 +4,7 @@
  */
 defined('ABSPATH') || exit;
 
-use \Polen\Includes\{ Polen_Order, Polen_Talent, Polen_Video_Info };
+use \Polen\Includes\{ Polen_Order, Polen_Order_Review, Polen_Talent, Polen_Video_Info };
 use \Polen\Includes\Cart\Polen_Cart_Item_Factory;
 
 $polen_talent = new Polen_Talent();
@@ -33,9 +33,21 @@ if( $polen_talent->is_user_talent( $logged_user ) ) {
 			$item       = $cart_item->get_product();
 			$item_id    = $cart_item->get_product_id();
 			$is_vimeo_process_complete = false;
+			$isRateble = Polen_Order_Review::can_make_review($user_id, $order->get_id());
 
 			if( !empty( $video_info ) ) {
 				$is_vimeo_process_complete = $video_info->is_vimeo_process_complete();
+			}
+			$class_status = '';
+			if( $isRateble ) {
+				$class_status = 'secondary';
+			} elseif( $is_vimeo_process_complete ) {
+				$class_status = 'success';
+			}
+
+			$new = '';
+			if( !$order->meta_exists('polen_fan_viewed') ) {
+				$new = ' new';
 			}
 		?>
 			<div class="row mt-3">
@@ -50,8 +62,8 @@ if( $polen_talent->is_user_talent( $logged_user ) ) {
 										</div>
 									</div>
 									<div class="col">
-										<div class="order-title"><?php echo  $item->get_name(); ?></div>
-										<div class="status mt-2">
+										<div class="order-title<?= $new; ?>"><?php echo  $item->get_name(); ?></div>
+										<div class="status mt-2 <?= $class_status; ?>">
 											<?php echo wc_get_order_status_name($order->get_status()); ?>
 										</div>
 									</div>

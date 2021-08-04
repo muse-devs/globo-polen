@@ -6,6 +6,8 @@
  */
 
 namespace Polen\Includes;
+
+use Polen\Includes\Cart\Polen_Cart_Item_Factory;
 use Polen\Includes\Polen_Order;
 
 class Polen_Talent {
@@ -252,10 +254,12 @@ class Polen_Talent {
     public function change_single_add_to_cart_text() {
         global $post;
         $product = wc_get_product($post->ID);
+        $social = social_product_is_social($product, social_get_category_base());
         if( $product->get_price() == 0 ) {
             $label = __( 'Pedir vídeo grátis' );
         } else {
-            $label = __('Pedir vídeo R$ ', 'polen') . number_format((float) $product->get_price(), 2, ',', '.');
+            $text = $social ? "Doar R$ " : "Pedir vídeo R$ ";
+            $label = __($text, 'polen') . number_format((float) $product->get_price(), 2, ',', '.');
         }
         return $label;
     }
@@ -590,14 +594,17 @@ class Polen_Talent {
     /**
      * Cálculo para tempo de expiração do pedido
      */
-    public function video_expiration_time( $user, $order_id ){
+    public function video_expiration_time( $user, $order_id, $social = false ){
         if( $this->is_user_talent( $user ) && !empty( $order_id )) {
             $order = get_post( $order_id );
             $first_dateTime = new \DateTime($order->post_date); 
             $last_dateTime = new \DateTime($order->post_date); 
 
             $current_date = new \DateTime( "now", new \DateTimeZone( get_option( 'timezone_string' ) ) );
-            $last_dateTime->add(new \DateInterval('P7D'));
+
+            //Produto Social do crianca esperanca é 15dias
+            $interval_days = ( !$social ) ? 'P7D' : 'P15D';
+            $last_dateTime->add(new \DateInterval( $interval_days ));
             $fomattedDate = $last_dateTime->format('Y-m-d H:i:s');
 
             $interval = $current_date->diff($last_dateTime);
@@ -648,12 +655,10 @@ class Polen_Talent {
     public function my_account_send_video_content()
     {
         $order = $this->get_safe_order_in_param_get();
-        $order_items = $order->get_items();
-        $order_item = array_pop( $order_items );
-        $product = $order_item->get_product();
-        $post_product = get_post( $product->get_id() );
+        $cart_item = Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
+        $talent_id = $cart_item->get_talent_id();
 
-        if( intval( $post_product->post_author ) !== intval( get_current_user_id() ) ) {
+        if( intval( $talent_id ) !== intval( get_current_user_id() ) ) {
             wp_safe_redirect( site_url( 'my-account/orders' ) );
             exit;
         }
@@ -678,7 +683,7 @@ class Polen_Talent {
     /**
      * Pegar o Object Order baseado no Parametro GET entro @param
      * @param string $param_name Parametro no $_GET
-     * @return WC_Order
+     * @return \WC_Order
      */
     private function get_safe_order_in_param_get( string $param_name = 'order_id' )
     {
@@ -745,6 +750,26 @@ class Polen_Talent {
                 )
             );
         }
+    }
+
+
+    /**
+     * Pega o produto pelo User_ID
+     * @param int
+     */
+    static public function get_product_by_user_id( $user_id )
+    {
+        $args = array(
+            'post_type' => 'product',
+            'post_status' => 'any',
+            'author' => $user_id,
+        );
+        $posts = get_posts( $args );
+        if( empty( $posts ) ) {
+            return null;
+        }
+        $post = $posts[ 0 ];
+        return wc_get_product( $post );
     }
 }
     

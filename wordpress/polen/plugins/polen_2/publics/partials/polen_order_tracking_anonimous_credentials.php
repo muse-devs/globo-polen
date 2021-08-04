@@ -2,7 +2,7 @@
     <main id="main" class="site-main" role="main">
         <div class="row">
             <div class="col-12 col-md-6 m-md-auto">
-                <h1>Número do pedido</h1>
+                <h1>Acompanhe seu pedido</h1>
             </div>
         </div>
         <form action="%1$s" method="post" class="form_search_order">

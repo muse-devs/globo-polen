@@ -2,50 +2,79 @@ var modal = document.getElementById("video-modal");
 var video_box = document.getElementById("video-box");
 var share_button = document.querySelectorAll(".share-button");
 var talent_videos = document.getElementById("talent-videos");
-var public_url = talent_videos ? talent_videos.getAttribute("data-public-url") : "";
-let get_your_video_banner = document.getElementById("video-promo-card");
+var public_url = talent_videos
+	? talent_videos.getAttribute("data-public-url")
+	: "";
+
+var timestamp = function() {
+	var timeIndex = 0;
+	var shifts = [35, 60, 60 * 3, 60 * 60 * 2, 60 * 60 * 25, 60 * 60 * 24 * 4, 60 * 60 * 24 * 10];
+
+	var now = new Date();
+	var shift = shifts[timeIndex++] || 0;
+	var date = new Date(now - shift * 1000);
+
+	return date.getTime() / 1000;
+};
+
+function generateStoriesArray(videos, category) {
+	const array = [];
+	videos.map((item) => {
+		array.push([item.hash, "video", 0, item.video, '','javascript:clickToBuy()', category ? 'Doe Agora' : "Peça Agora", false, timestamp()]);
+	});
+	return array;
+}
+
+function renderStories(videos, name, avatar, category) {
+	let stories = new Zuck('stories', {
+		backNative: true,
+		previousTap: true,
+		backButton: true,
+		skin: 'Snapgram',
+		avatars: true,
+		paginationArrows: false,
+		list: false,
+		cubeEffect: false,
+		localStorage: true,
+		language: {
+			unmute: 'Toque para ouvir',
+			keyboardTip: 'Clique para ver o próximo',
+			visitLink: 'Visite o Link',
+			time: {
+				ago:'atrás',
+				hour:'hora',
+				hours:'horas',
+				minute:'minuto',
+				minutes:'minutos',
+				fromnow: 'from now',
+				seconds:'segundos',
+				yesterday: 'ontem',
+				tomorrow: 'amanhã',
+				days:'dias'
+			}
+		},
+		stories: [
+			Zuck.buildTimelineItem(
+				videos.length > 0 ? "1" : null,
+				avatar,
+				name,
+				"",
+				timestamp(),
+				generateStoriesArray(videos, category)
+			),
+		],
+	});
+	// Customizando a lib quando nao houver vídeos
+	if (videos.length === 0) {
+		document.getElementById("stories").setAttribute("id", "");
+		let story = document.getElementsByClassName("story");
+		story[0].classList.add("seen");
+		let link = document.getElementsByClassName("item-link");
+		link[0].classList.add("no-link");
+	}
+}
 
 jQuery(document).ready(function () {
-	get_your_video_banner.addEventListener('click', evt => {
-		evt.preventDefault();
-		jQuery('.single_add_to_cart_button')[0].click();
-	});
-	// jQuery(".banner-content.type-video").slick({
-	// 	arrows: true,
-	// 	appendArrows: jQuery(".custom-slick-controls"),
-	// 	infinite: false,
-	// 	speed: 300,
-	// 	slidesToShow: 4,
-	// 	slidesToScroll: 3,
-	// 	responsive: [
-	// 		{
-	// 			breakpoint: 1024,
-	// 			settings: {
-	// 				slidesToShow: 4,
-	// 				slidesToScroll: 1,
-	// 			},
-	// 		},
-	// 		{
-	// 			breakpoint: 991,
-	// 			settings: {
-	// 				slidesToShow: 3,
-	// 				slidesToScroll: 1,
-	// 			},
-	// 		},
-	// 		{
-	// 			breakpoint: 600,
-	// 			settings: {
-	// 				slidesToShow: 3,
-	// 				slidesToScroll: 1,
-	// 			},
-	// 		},
-	// 		{
-	// 			breakpoint: 576,
-	// 			settings: "unslick",
-	// 		},
-	// 	],
-	// });
-
 	var id = getVideoId();
 	if (id) {
 		openVideoByHash(id);
@@ -98,8 +127,8 @@ function hideModal(e) {
 }
 
 function handleCopyVideoUrl(id) {
-	var btn_copy = document.getElementById('copy-video');
-	btn_copy.addEventListener('click', function() {
+	var btn_copy = document.getElementById("copy-video");
+	btn_copy.addEventListener("click", function () {
 		copyToClipboard(public_url + id);
 	});
 }
@@ -122,7 +151,8 @@ function openVideoByURL(url) {
 function openVideoByHash(hash) {
 	video_box.innerHTML = "";
 	polSpinner(null, "#video-box");
-	const url = `${polenObj.ajax_url}?action=draw-player-modal&hash=${hash}`;
+	var product_id = document.getElementById("product_id").value;
+	const url = `${polenObj.ajax_url}?action=draw-player-modal&hash=${hash}&product_id=${product_id}`;
 	showModal();
 	changeHash(hash);
 	jQuery(video_box).load(url);
@@ -139,4 +169,8 @@ function openVideoById(id) {
 	changeHash(id);
 	changeVideoCardUrl(id);
 	// handleCopyVideoUrl(id);
+}
+
+function clickToBuy() {
+	document.querySelector(".single_add_to_cart_button").click();
 }

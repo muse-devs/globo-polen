@@ -2,9 +2,29 @@
 
 namespace Polen\Includes;
 
+use Polen\Social\Social_Order;
+
 class Polen_Cart
 {
-    
+    const ITEM_OFFERED_BY = 'offered_by';
+    const ITEM_VIDEO_TO = 'video_to';
+    const ITEM_NAME_TO_VIDEO = 'name_to_video';
+    const ITEM_EMAIL_TO_VIDEO = 'email_to_video';
+    const ITEM_VIDEO_CATEGORY = 'video_category';
+    const ITEM_INSTRUCTION_TO_VIDEO = 'instructions_to_video';
+    const ITEM_ALLOW_VIDEO_ON_PAGE = 'allow_video_on_page';
+    const ITEM_FIRST_ORDER = 'first_order';
+    const ALLOWED_ITEM = [
+        self::ITEM_OFFERED_BY,
+        self::ITEM_VIDEO_TO,
+        self::ITEM_NAME_TO_VIDEO,
+        self::ITEM_EMAIL_TO_VIDEO,
+        self::ITEM_VIDEO_CATEGORY,
+        self::ITEM_INSTRUCTION_TO_VIDEO,
+        self::ITEM_ALLOW_VIDEO_ON_PAGE,
+        self::ITEM_FIRST_ORDER
+    ];
+
     public function __construct( $static = false ) {
         if( $static ) {
             add_action( 'wp_ajax_polen_update_cart_item', array( $this, 'polen_update_cart_item' ) );
@@ -47,6 +67,7 @@ class Polen_Cart
             }
             if( isset( $cart_item['name_to_video'] ) ) {
                 $item->add_meta_data( 'name_to_video', $cart_item['name_to_video'], true );
+                $name = $cart_item['name_to_video'];
             }
             if( isset( $cart_item['email_to_video'] ) ) {
                 $item->add_meta_data( 'email_to_video', $cart_item['email_to_video'], true );
@@ -57,10 +78,20 @@ class Polen_Cart
             if( isset( $cart_item['instructions_to_video'] ) ) {
                 $instructions_to_video = filter_var( $cart_item['instructions_to_video'], FILTER_SANITIZE_SPECIAL_CHARS );
                 $item->add_meta_data( 'instructions_to_video', $instructions_to_video, true );
+                $city = $cart_item['instructions_to_video'];
             }
             if( isset( $cart_item['allow_video_on_page'] ) ) {
                 $item->add_meta_data( 'allow_video_on_page', $cart_item['allow_video_on_page'], true );
             }
+        }
+        //PARA CAMPANHAS SOCIAIS
+        $product_is_social = social_product_is_social( $item->get_product(), social_get_category_base() );
+        if( $product_is_social ) {
+            $order->add_meta_data( Social_Order::ORDER_META_KEY_SOCIAL, '1' );
+            $order->add_meta_data( Social_Order::ORDER_META_KEY_CAMPAING, 'criesp' );
+
+            $instructions_to_video = "Agradecer {$name} de {$city} pela doação ao criança esperança 2021!";
+            $item->add_meta_data( 'instructions_to_video', $instructions_to_video, true );
         }
     }
 

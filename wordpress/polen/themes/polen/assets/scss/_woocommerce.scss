@@ -270,3 +270,36 @@ select.form-control:not([size]):not([multiple]) {
 		width: 21px !important;
 	}
 }
+
+.holder {
+	position: relative;
+	overflow: hidden;
+	textarea {
+		height: 180px;
+		@media only screen and (max-width: 600px) {
+			height: 260px;
+		}
+	}
+}
+
+.placeholder {
+	pointer-events: none;
+	user-select: none;
+	position: absolute;
+	color: #929298;
+	padding: 15px;
+	font-size: 14px;
+}
+
+.criesp {
+	color: white;
+	border-radius: 10px;
+	background-color: var(--success);
+	border: none;
+}
+
+button.criesp {
+	:hover {
+		background-color: var(--success);
+	}
+}

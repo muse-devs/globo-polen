@@ -43,7 +43,8 @@ $Talent_Fields = new Polen_Update_Fields();
 			$talent_id = get_post_field('post_author', $product_id);
 			$thumbnail = wp_get_attachment_image_src($_product->get_image_id(), 'thumbnail')[0];
 			$talent = get_user_by('id', $talent_id);
-
+			//AQUI RICARDO: DEPOIS REMOVE ESSA LINHA DE COMENTARIO
+			$is_social = social_product_is_social( $_product, social_get_category_base() );
 			$talent_data = $Talent_Fields->get_vendor_data($talent_id);
 
 			$talent_cart_detail = array(
@@ -59,7 +60,7 @@ $Talent_Fields = new Polen_Update_Fields();
 				"description" => ""
 			);
 		}
-		polen_get_talent_card( $talent_cart_detail ); ?>
+		polen_get_talent_card( $talent_cart_detail, $is_social ); ?>
 	</div>
 	<form class="woocommerce-cart-form col-12 col-md-6 order-md-1" action="<?php echo esc_url(wc_get_checkout_url()); ?>" method="post">
 		<?php do_action('woocommerce_before_cart_table'); ?>
@@ -133,8 +134,13 @@ $Talent_Fields = new Polen_Update_Fields();
 						?>
 						<label for="<?php echo 'cart_name_to_video_' . $cart_item_key; ?>">Nome</label>
 						<?php
+						if ($is_social) {
+							$name_placeholder = "Como você gostaria de ser chamado?";
+						} else {
+							$name_placeholder = "Para quem é esse vídeo-polen";
+						}
 						printf(
-							'<input type="text" placeholder="Para quem é esse vídeo-polen" class="%s form-control form-control-lg" id="cart_name_to_video_%s" data-cart-id="%s" name="name_to_video" value="%s" required="required"/>',
+							'<input type="text" placeholder="'.$name_placeholder.'" class="%s form-control form-control-lg" id="cart_name_to_video_%s" data-cart-id="%s" name="name_to_video" value="%s" required="required"/>',
 							'polen-cart-item-data',
 							$cart_item_key,
 							$cart_item_key,
@@ -178,45 +184,88 @@ $Talent_Fields = new Polen_Update_Fields();
 
 				<div class="row mt-4">
 					<div class="col-12 col-md-12">
-						<label for="cart_video_category_<?php echo $cart_item_key; ?>">Qual ocasião do vídeo?</label>
+						<?php if( !$is_social ) : ?>
+							<label for="cart_video_category_<?php echo $cart_item_key; ?>">Qual ocasião do vídeo?</label>
+						<?php else: ?>
+							<label for="cart_video_category_<?php echo $cart_item_key; ?>">Ocasião do vídeo</label>
+						<?php endif; ?>
 					</div>
 					<div class="col-md-12">
 						<?php
-						$video_category = isset( $cart_item['video_category' ] ) ? $cart_item[ 'video_category' ] : '';
-						printf(
-							'<select class="%s form-control form-control-lg custom-select select-ocasion" id="cart_video_category_%s" data-cart-id="%s" name="video_category" required="required"/>',
-							'polen-cart-item-data',
-							$cart_item_key,
-							$cart_item_key
-						);
-						echo "<option value=''>Categoria</option>";
-						$arr_occasion = $occasion_list->get_occasion(null, 'type', 'ASC', 1, 0, 'DISTINCT type');
-						foreach ($arr_occasion as $occasion) :
-							$selected = ( $occasion->type == $video_category ) ? 'selected ' : null;
-							echo "<option value='" . $occasion->type . "' {$selected}>" . $occasion->type . "</option>";
+						if( !$is_social ) :
+							$video_category = isset( $cart_item['video_category' ] ) ? $cart_item[ 'video_category' ] : '';
+							printf(
+								'<select class="%s form-control form-control-lg custom-select select-ocasion" id="cart_video_category_%s" data-cart-id="%s" name="video_category" required="required"/>',
+								'polen-cart-item-data',
+								$cart_item_key,
+								$cart_item_key
+							);
+							echo "<option value=''>Categoria</option>";
+							$arr_occasion = $occasion_list->get_occasion(null, 'type', 'ASC', 1, 0, 'DISTINCT type');
+							foreach ($arr_occasion as $occasion) :
+								$selected = ( $occasion->type == $video_category ) ? 'selected ' : null;
+								echo "<option value='" . $occasion->type . "' {$selected}>" . $occasion->type . "</option>";
 
-						endforeach;
+							endforeach;
+						else:
+							printf(
+								'<input type="text" placeholder="" class="%s form-control form-control-lg" id="cart_video_category_%s" data-cart-id="%s" name="video_category" value="%s" required="required" readonly />',
+								'polen-cart-item-data',
+								$cart_item_key,
+								$cart_item_key,
+								'Doação para o Criança Esperança',
+							);
+						endif;
 						?>
 						</select>
 					</div>
 				</div>
 				<div class="row mt-4">
 					<div class="col-12 col-md-12">
-						<label for="cart_instructions_to_video_<?php echo $cart_item_key; ?>">Instruções para o vídeo</label>
+						<label for="cart_instructions_to_video_<?php echo $cart_item_key; ?>">
+							<?php 
+								if($is_social) {
+									echo("Cidade");
+								} else {
+									echo("Instruções para o vídeo");
+								}
+							?>
+						</label>
 					</div>
 					<div class="col-md-12">
 						<?php
 						$instructions_to_video = isset($cart_item['instructions_to_video']) ? $cart_item['instructions_to_video'] : '';
 						$product_name = str_replace( '%', '&#37;', $_product->get_title() );
-						printf(
-							"<textarea 	name=\"instructions_to_video\" placeholder=\"Escreva aqui o que você gostaria que {$product_name} falasse nesse vídeo\"
-										class=\"%s form-control form-control-lg\" id=\"cart_instructions_to_video_%s\"
-										data-cart-id=\"%s\" required=\"required\">%s</textarea>",
-							'polen-cart-item-data',
-							$cart_item_key,
-							$cart_item_key,
-							$instructions_to_video,
-						);
+						if ($is_social) {
+							printf(
+								"
+								<input 	name=\"instructions_to_video\" placeholder=\"Sua cidade\"
+									class=\"%s form-control form-control-lg\" id=\"cart_instructions_to_video_%s\"
+									data-cart-id=\"%s\" required=\"required\" value=\"%s\" />",
+								'polen-cart-item-data',
+								$cart_item_key,
+								$cart_item_key,
+								$instructions_to_video,
+							);
+						} else {
+							printf(
+								"
+								<div class=\"holder\">
+									<div class=\"placeholder\">
+										Escreva aqui o que você gostaria que <b>{$product_name}</b> falasse. Lembre-se:</b><br><br>
+										1. <b>Não são permitidos pedidos comerciais</b>, nem menções à marcas.<br>
+										2. Músicos <b>não</b> tem autorização para <b>cantar trechos de músicas</b> com direitos autorais.
+									</div>
+									<textarea 	name=\"instructions_to_video\"  rows=\"7\"
+									class=\"%s form-control form-control-lg\" id=\"cart_instructions_to_video_%s\"
+									data-cart-id=\"%s\" required=\"required\">%s</textarea>
+								</div>",
+								'polen-cart-item-data',
+								$cart_item_key,
+								$cart_item_key,
+								$instructions_to_video,
+							);
+						}
 						?>
 					</div>
 				</div>
@@ -228,19 +277,24 @@ $Talent_Fields = new Polen_Update_Fields();
 				<div class="row mt-4">
 					<div class="col-12 col-md-12">
 						<?php
+						$social_class = '';
 						$allow_video_on_page = isset($cart_item['allow_video_on_page']) ? $cart_item['allow_video_on_page'] : 'on';
 						$checked_allow = '';
 						if ($allow_video_on_page == 'on') {
 							$checked_allow = 'checked';
 						}
-
+						if($is_social)
+						{
+							$social_class = 'criesp';
+						}
 						?>
 						<label for="cart_allow_video_on_page_<?php echo $cart_item_key; ?>" class="d-flex">
 							<?php
 							printf(
-								'<input type="checkbox" name="allow_video_on_page" class="%s form-control form-control-lg" id="cart_allow_video_on_page_%s"
+								'<input type="checkbox" name="allow_video_on_page" class="%s %s form-control form-control-lg" id="cart_allow_video_on_page_%s"
 											data-cart-id="%s" %s>',
 								'polen-cart-item-data',
+								$social_class,
 								$cart_item_key,
 								$cart_item_key,
 								$checked_allow,
@@ -252,7 +306,7 @@ $Talent_Fields = new Polen_Update_Fields();
 				</div>
 				<div class="row actions">
 					<div class="col-12 col-md-12 mb-4 mt-3">
-						<button type="submit" class="btn btn-primary btn-lg btn-block" name="" value="<?php esc_attr_e('Update cart', 'woocommerce'); ?>"><?php esc_html_e('Avançar', 'woocommerce'); ?></button>
+						<button type="submit" class="btn btn-<?php echo $is_social ? 'success' : 'primary'; ?> btn-lg btn-block" name="" value="<?php esc_attr_e('Update cart', 'woocommerce'); ?>"><?php esc_html_e('Avançar', 'woocommerce'); ?></button>
 
 						<?php //do_action( 'woocommerce_cart_actions' );
 						?>
