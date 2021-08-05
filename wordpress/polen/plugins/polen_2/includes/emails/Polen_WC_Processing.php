@@ -1,49 +1,47 @@
 <?php
 /**
- * Class WC_Email_Customer_Processing_Order file.
+ * Class Polen_WC_Processing file.
  *
  * @package WooCommerce\Emails
  */
-
+namespace Polen\Includes\Emails;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-if ( ! class_exists( 'WC_Email_Customer_Processing_Order', false ) ) :
+if ( ! class_exists( 'Polen_WC_Processing', false ) ) :
 
 	/**
-	 * Customer Processing Order Email.
+	 * Customer On-hold Order Email.
 	 *
-	 * An email sent to the customer when a new order is paid for.
+	 * An email sent to the customer when a new order is on-hold for.
 	 *
-	 * @class       WC_Email_Customer_Processing_Order
-	 * @version     3.5.0
+	 * @class       WC_Email_Customer_On_Hold_Order
+	 * @version     2.6.0
 	 * @package     WooCommerce\Classes\Emails
 	 * @extends     WC_Email
 	 */
-	class WC_Email_Customer_Processing_Order extends WC_Email {
+	class Polen_WC_Processing extends \WC_Email {
 
 		/**
 		 * Constructor.
 		 */
 		public function __construct() {
-			$this->id             = 'customer_processing_order';
+			$this->id             = 'customer_on_hold_order';
 			$this->customer_email = true;
-
-			$this->title          = __( 'Processing order', 'woocommerce' );
-			$this->description    = __( 'This is an order notification sent to customers containing order details after payment.', 'woocommerce' );
-			$this->template_html  = 'emails/customer-processing-order.php';
-			$this->template_plain = 'emails/plain/customer-processing-order.php';
+			$this->title          = __( 'Order on-hold', 'woocommerce' );
+			$this->description    = __( 'This is an order notification sent to customers containing order details after an order is placed on-hold.', 'woocommerce' );
+			$this->template_html  = 'emails/customer-on-hold-order.php';
+			$this->template_plain = 'emails/plain/customer-on-hold-order.php';
 			$this->placeholders   = array(
 				'{order_date}'   => '',
 				'{order_number}' => '',
 			);
 
 			// Triggers for this email.
-			add_action( 'woocommerce_order_status_cancelled_to_processing_notification', array( $this, 'trigger' ), 10, 2 );
-			add_action( 'woocommerce_order_status_failed_to_processing_notification', array( $this, 'trigger' ), 10, 2 );
-			add_action( 'woocommerce_order_status_on-hold_to_processing_notification', array( $this, 'trigger' ), 10, 2 );
-			add_action( 'woocommerce_order_status_pending_to_processing_notification', array( $this, 'trigger' ), 10, 2 );
+			add_action( 'woocommerce_order_status_pending_to_on-hold_notification', array( $this, 'trigger' ), 10, 2 );
+			add_action( 'woocommerce_order_status_failed_to_on-hold_notification', array( $this, 'trigger' ), 10, 2 );
+			add_action( 'woocommerce_order_status_cancelled_to_on-hold_notification', array( $this, 'trigger' ), 10, 2 );
 
 			// Call parent constructor.
 			parent::__construct();
@@ -142,10 +140,8 @@ if ( ! class_exists( 'WC_Email_Customer_Processing_Order', false ) ) :
 		 * @return string
 		 */
 		public function get_default_additional_content() {
-			return __( 'Thanks for using {site_url}!', 'woocommerce' );
+			return __( 'We look forward to fulfilling your order soon.', 'woocommerce' );
 		}
 	}
 
 endif;
-
-return new WC_Email_Customer_Processing_Order();

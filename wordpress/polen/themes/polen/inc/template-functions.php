@@ -7,6 +7,7 @@
 
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
 use Polen\Includes\Polen_Video_Info;
+use Polen\Social\Social_Rewrite;
 use Polen\Tributes\Tributes_Model;
 use Polen\Tributes\Tributes_Rewrite_Rules;
 
@@ -328,6 +329,7 @@ if ( ! in_array( 'all-in-one-seo-pack/all_in_one_seo_pack.php', apply_filters( '
 		global $post;
 		global $is_video;
 		$tribute_app = get_query_var( Tributes_Rewrite_Rules::TRIBUTES_QUERY_VAR_TRUBITES_APP );
+		$social_app = get_query_var( Social_Rewrite::QUERY_VARS_SOCIAL_APP );
 
 		$video_hash = get_query_var( 'video_hash' );
 		if( !empty( $post ) && $post->post_type == 'product' ) {
@@ -406,6 +408,17 @@ if ( ! in_array( 'all-in-one-seo-pack/all_in_one_seo_pack.php', apply_filters( '
 				echo "\t" . '<meta property="og:image" content="' . TEMPLATE_URI . '/tributes/assets/img/logo-to-share.png">' . "\n";
 				echo "\n";
 			}
+		} elseif ( !empty( $social_app ) && $social_app == '1' ) {
+			$image = social_get_image_by_category( social_get_category_base() );
+			echo "\n\n";
+			echo "\t" . '<meta property="og:title" content="' . get_bloginfo( 'title' ) . '">' . "\n";
+			echo "\t" . '<meta property="og:type" content="site">' . "\n";
+			echo "\t" . '<meta property="og:description" content="' . get_bloginfo( 'description' ) . '">' . "\n";
+			echo "\t" . '<meta property="og:url" content="' . get_bloginfo( 'url' ) . '">' . "\n";
+			echo "\t" . '<meta property="og:image" content="'.$image.'">' . "\n";
+			echo "\t" . '<meta property="og:locale" content="' . get_locale() . '">' . "\n";
+			echo "\t" . '<meta property="og:site_name" content="' . get_bloginfo( 'title' ) . '">' . "\n";
+			echo "\n";
 		} else {
 			echo "\n\n";
 			echo "\t" . '<meta property="og:title" content="' . get_bloginfo( 'title' ) . '">' . "\n";
