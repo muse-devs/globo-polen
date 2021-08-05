@@ -13,6 +13,13 @@ if (in_array('user_talent',  $logged_user->roles)) {
 	$count_total = $polen_talent->get_talent_orders($talent_id, false, true );
 }
 
+$talent_is_social = social_user_is_social( $logged_user->ID );
+if( ! $talent_is_social ) {
+	$days_expires = 7;
+} else {
+	$days_expires = 15;
+}
+
 ?>
 <section class="mt-2">
 	<header class="page-header">
@@ -29,7 +36,7 @@ if (in_array('user_talent',  $logged_user->roles)) {
 			</div>
 			<?php
 		} else {
-			echo "<p class='mt-2 mb-4'>Você tem <strong><span id='order-count'>" . $count_total['qtd'] . "</span> pedido(s) de vídeo</strong>, seus pedidos expiram em até 7 dias.</p>";
+			echo "<p class='mt-2 mb-4'>Você tem <strong><span id='order-count'>" . $count_total['qtd'] . "</span> pedido(s) de vídeo</strong>, seus pedidos expiram em até {$days_expires} dias.</p>";
 			if (count($talent_orders) > 0) {
 				foreach ($talent_orders as $order) : 
 					$order_obj = new \WC_Order( $order['order_id'] );
@@ -80,7 +87,7 @@ if (in_array('user_talent',  $logged_user->roles)) {
 													</div>
 													<div class="col-6 col-md-6">
 														<p class="p">Válido por</p>
-														<p class="value small"><?php echo $polen_talent->video_expiration_time($logged_user, $order['order_id']); ?></p>
+														<p class="value small"><?php echo $polen_talent->video_expiration_time( $logged_user, $order['order_id'], $is_social ); ?></p>
 													</div>
 												</div>
 											</div>

@@ -40,7 +40,7 @@ function polen_get_talent_socials($talent)
 function polen_front_get_talent_stories()
 {
 	?>
-		<div id="stories"></div>
+		<div id="stories" class="mr-2"></div>
 	<?php
 }
 
@@ -64,7 +64,7 @@ function polen_front_get_talent_videos($talent)
 					<?php foreach ($items as $item) : ?>
 						<div class="polen-card-video">
 							<figure class="video-cover">
-								<img loading="lazy" src="<?= $item['image']; ?>" alt="<?= $item['title']; ?>" data-url="<?= $item['video']; ?>">
+								<img loading="lazy" src="<?= $item['cover']; ?>" alt="<?= $item['title']; ?>" data-url="<?= $item['video']; ?>">
 								<a href="javascript:openVideoByHash('<?= $item['hash']; ?>')" class="video-player-button"></a>
 								<?php polen_video_icons($talent->user_id, $item['initials'], $item['first_order'] == "1"); ?>
 							</figure>
@@ -122,7 +122,7 @@ function polen_get_talent_card($talent, $social = false)
 				</div>
 			<?php endif; ?>
 			<?php if ($talent["has_details"] && !$social) : ?>
-				<button class="show-details d-flex justify-content-center" onclick="showDetails()"><?php Icon_Class::polen_icon_chevron("down") ?></button>
+				<button class="show-details d-flex justify-content-center align-items-center" onclick="showDetails()"><?php Icon_Class::polen_icon_chevron("down") ?></button>
 			<?php endif; ?>
 		</div>
 		<footer class="row details-box">
