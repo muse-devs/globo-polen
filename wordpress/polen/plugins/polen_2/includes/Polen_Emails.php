@@ -2,6 +2,8 @@
 
 namespace Polen\Includes;
 
+use Polen\Includes\Emails\Polen_WC_Processing;
+
 if( ! defined( 'ABSPATH' ) ) {
     die( 'Silence is golden.' );
 }
@@ -13,6 +15,9 @@ class Polen_Emails {
     }
 
     public function register_emails( $emails ) {
+
+        $emails['WC_Email_Customer_Processing_Order'] = new Polen_WC_Processing();
+
 		require_once PLUGIN_POLEN_DIR . '/includes/emails/Polen_WC_Payment_Approved.php';
 		$emails['Polen_WC_Payment_Approved'] = new Polen_WC_Payment_Approved();
 
