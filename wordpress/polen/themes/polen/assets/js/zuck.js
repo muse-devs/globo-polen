@@ -216,13 +216,13 @@ var Zuck = (function (t) {
                                 },
                                 viewerItem: function (t, e) {
                                     return '<div class="story-viewer">\n                    <div class="head">\n                      <div class="left">\n                        '
-                                        .concat(u("backButton") ? '<a class="back">X</a>' : "", '\n\n                        <span class="item-preview">\n                          <img lazy="eager" class="profilePhoto" src="')
+                                        .concat(u("backButton") ? '<a class="back"><i class="bi bi-x"></i></a>' : "", '\n\n                        <span class="item-preview">\n                          <img lazy="eager" class="profilePhoto" src="')
                                         .concat(i(t, "photo"), '" />\n                        </span>\n\n                        <div class="info">\n                          <strong class="name">')
                                         .concat(i(t, "name"), '</strong>\n                          <span class="time">')
                                         .concat(i(t, "timeAgo"), '</span>\n                        </div>\n                      </div>\n\n                      <div class="right">\n                        <span class="time">')
                                         .concat(
                                             i(e, "timeAgo"),
-                                            '</span>\n                        <span class="loading"></span>\n                        <a class="close" tabIndex="2">&times;</a>\n                      </div>\n                    </div>\n\n                    <div class="slides-pointers">\n                      <div class="wrap"></div>\n                    </div>\n\n                    '
+                                            '</span>\n                        <span class="loading"></span>\n                        <a class="close"><i class="bi bi-x"></i></a>\n                      </div>\n                    </div>\n\n                    <div class="slides-pointers">\n                      <div class="wrap"></div>\n                    </div>\n\n                    '
                                         )
                                         .concat(
                                             u("paginationArrows")
