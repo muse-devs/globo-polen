@@ -37,12 +37,11 @@ class Tributes_Invites_Controller
 
         $emails = $_POST[ 'friends' ][ 'email' ];
         $names  = $_POST[ 'friends' ][ 'name' ];
-        $max_invites = Tributes_Controller::tribute_max_invites();
         try {
+            self::validate_max_number_invites( $tribute_id, count( $emails ) );
             for( $i = 0; $i < count( $emails ); $i++ ) {
                 $email = filter_var( $emails[ $i ], FILTER_VALIDATE_EMAIL );
                 $name  = filter_var( $names[ $i ], FILTER_SANITIZE_SPECIAL_CHARS );
-                self::validate_max_number_invites( $tribute_id );
                 if( !empty( $email ) ) {
                     $invite               = $this->create_a_invites( $name, $email, $tribute->ID );
                     $email_invite_content = \tributes_email_create_content_invite( $invite->hash );
@@ -152,7 +151,7 @@ class Tributes_Invites_Controller
 
             Tributes_Invites_Model::update( $data_invite_update );
             wp_send_json_success( $response->response, 200 );
-        } catch ( ExceptionInterface $e ) {
+        } catch ( VimeoRequestException $e ) {
             wp_send_json_error( $e->getMessage(), $e->getCode() );
         } catch ( \Exception $e ) {
             wp_send_json_error( $e->getMessage(), $e->getCode() );
@@ -166,10 +165,12 @@ class Tributes_Invites_Controller
      * @param int
      * @throws \Exception
      */
-    static public function validate_max_number_invites( $tribute_id )
+    static public function validate_max_number_invites( $tribute_id, $count_emails )
     {
-        $max_invites = self::validate_max_number_invites( $tribute_id );
-        if( $max_invites > Tributes_Invites_Model::get_count_by_tribute_id( $tribute_id ) ) {
+        $max_invites = Tributes_Controller::tribute_max_invites();
+        $total_alredy_invites = Tributes_Invites_Model::get_count_by_tribute_id( $tribute_id );
+        if( $max_invites < ( $total_alredy_invites + $count_emails ) ) {
+            $max_invites -= 1;
             throw new \Exception( "Limite de convites ({$max_invites}) atingidos.", 403 );
         }
     }

@@ -111,12 +111,12 @@ class Tributes_Controller
 
 
     /**
-     * Pega o maximo de Invites possiveis poro colab
+     * Pega o maximo de Invites possiveis por Tribute
      * @return int
      */
     static public function tribute_max_invites()
     {
-        return 3;
+        return 9;
     }
 
 }
