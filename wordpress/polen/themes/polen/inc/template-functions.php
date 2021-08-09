@@ -414,7 +414,7 @@ if ( ! in_array( 'all-in-one-seo-pack/all_in_one_seo_pack.php', apply_filters( '
 			echo "\t" . '<meta property="og:title" content="' . get_bloginfo( 'title' ) . '">' . "\n";
 			echo "\t" . '<meta property="og:type" content="site">' . "\n";
 			echo "\t" . '<meta property="og:description" content="' . get_bloginfo( 'description' ) . '">' . "\n";
-			echo "\t" . '<meta property="og:url" content="' . get_bloginfo( 'url' ) . '">' . "\n";
+			echo "\t" . '<meta property="og:url" content="' . site_url( 'social/crianca-esperanca' ) . '">' . "\n";
 			echo "\t" . '<meta property="og:image" content="'.$image.'">' . "\n";
 			echo "\t" . '<meta property="og:locale" content="' . get_locale() . '">' . "\n";
 			echo "\t" . '<meta property="og:site_name" content="' . get_bloginfo( 'title' ) . '">' . "\n";
