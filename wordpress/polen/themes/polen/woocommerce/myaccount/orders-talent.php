@@ -62,7 +62,7 @@ if( ! $talent_is_social ) {
 												</div>
 											<?php endif; ?>
 											<div class="col-12 col-md-12">
-												<p class="p">Para <?php echo ( ENV_DEV === true ) ? '(ID: ' . $order['order_id'] . ')' : ''; ?></p>
+												<p class="p">Para <?php echo ( defined( 'ENV_DEV' ) && ( ENV_DEV === true ) ) ? '(ID: ' . $order['order_id'] . ')' : ''; ?></p>
 												<p class="value small"><?php echo $order['name']; ?></p>
 											</div>
 										</div>
