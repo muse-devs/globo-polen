@@ -17,15 +17,19 @@ var timestamp = function() {
 	return date.getTime() / 1000;
 };
 
-function generateStoriesArray(videos, category) {
+function generateStoriesArray(videos, category, soldOut) {
 	const array = [];
+	let buttonText = "Peça Agora"
+	if (category) {
+		buttonText = "Doe Agora"
+	}
 	videos.map((item) => {
-		array.push([item.hash, "video", 0, item.video, '','javascript:clickToBuy()', category ? 'Doe Agora' : "Peça Agora", false, timestamp()]);
+		array.push([item.hash, "video", 0, item.video, '',soldOut ? '' : 'javascript:clickToBuy()', soldOut ? '' : buttonText, false, timestamp()]);
 	});
 	return array;
 }
 
-function renderStories(videos, name, avatar, category) {
+function renderStories(videos, name, avatar, category, soldOut) {
 	let stories = new Zuck('stories', {
 		backNative: true,
 		previousTap: true,
@@ -60,7 +64,7 @@ function renderStories(videos, name, avatar, category) {
 				name,
 				"",
 				timestamp(),
-				generateStoriesArray(videos, category)
+				generateStoriesArray(videos, category, soldOut === 0 ? true : false)
 			),
 		],
 	});

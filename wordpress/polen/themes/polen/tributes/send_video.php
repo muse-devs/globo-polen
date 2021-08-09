@@ -36,7 +36,7 @@ if( empty( $invite ) ) {
 										<img src="<?php echo TEMPLATE_URI ?>/tributes/assets/img/upload-ico.svg" alt="Gravar vídeo agora" />
 										<div class="row mt-4">
 											<div class="col-9 m-auto">
-												<p id="info" class="info">Grave um vídeo na vertical em seu celular com seu aplicativo de gravação predileto.</p>
+												<p id="info" class="info">Grave um vídeo na vertical em seu celular de <b>até 15 segundos</b> com seu aplicativo de gravação preferido.</p>
 											</div>
 										</div>
 									</figure>
@@ -88,10 +88,15 @@ if( empty( $invite ) ) {
 					</button>
 					<div class="body">
 						<div class="row d-flex align-items-center">
-							<!-- <div class="col-12">
-								<p class="p">Vídeo de</p>
-								<span class="value small">asd</span>
-							</div> -->
+							<div class="col-12">
+								<h1 class="title text-center">Envie sua homenagem para <?= $tribute->name_honored; ?>.</h1>
+							</div>
+							<div class="col-12 mt-3">
+								<p class="p text-center">Grave um vídeo de <b>até 15 segundos</b> para participar desse Colab.</p>
+							</div>
+							<div class="col-12 mt-3">
+								<h2 class="subtitle text-center">Veja as instruções:</h2>
+							</div>
 							<div class="col-12 mt-3">
 								<p class="p">Para</p>
 								<span class="value small"><?= $tribute->name_honored; ?></span>

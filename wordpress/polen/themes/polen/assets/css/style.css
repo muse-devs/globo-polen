@@ -10176,13 +10176,16 @@ textarea {
 #zuck-modal-content .story-viewer .head .right .close,
 #zuck-modal-content .story-viewer .head .back {
   font-size: 42px;
-  width: 48px;
-  height: 48px;
+  width: 55px;
+  height: 55px;
   line-height: 48px;
   cursor: pointer;
   text-align: center;
   color: #fff;
   opacity: 0.5; }
+  #zuck-modal-content .story-viewer .head .right .close i,
+  #zuck-modal-content .story-viewer .head .back i {
+    color: #fff; }
 
 #zuck-modal-content .story-viewer .head .left .back {
   display: none;
@@ -10391,14 +10394,15 @@ textarea {
     z-index: 20;
     visibility: visible;
     position: absolute;
-    font-size: 27px;
+    font-size: 37px;
     line-height: 32px;
     vertical-align: top;
-    text-shadow: none; }
+    text-shadow: none;
+    top: 17px; }
   #zuck-modal-content .story-viewer.with-back-button .head .left > .back {
     display: block;
     position: absolute;
-    right: 20px; }
+    right: 30px; }
   #zuck-modal-content .story-viewer.with-back-button .head .left .item-preview {
     margin-left: 18px; }
   #zuck-modal-content .story-viewer .slides-pointers {
@@ -11913,6 +11917,18 @@ label[for="wc-stripe-new-payment-method"] {
   .skill-value .bi,
   .skill-value .icon {
     padding-right: 3px; }
+
+.talent-dashboard-start .title,
+.box-round .title,
+.talent-order-modal .title {
+  font-size: 32px; }
+
+.talent-dashboard-start .subtitle,
+.box-round .subtitle,
+.talent-order-modal .subtitle {
+  font-size: 25px;
+  font-weight: 400;
+  color: #000; }
 
 .talent-dashboard-start .p,
 .box-round .p,

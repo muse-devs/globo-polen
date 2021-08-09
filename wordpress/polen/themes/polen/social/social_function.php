@@ -96,3 +96,17 @@ function social_user_is_social( $user_id )
     }
     return social_product_is_social( $product, social_get_category_base() );
 }
+
+
+/**
+ * Paga a imagem padrao setada na categoria
+ * @param \WP_Term
+ * @return string
+ */
+function social_get_image_by_category( $category )
+{
+    $category = social_get_category_base();
+    $thumbnail_id = get_term_meta( $category->term_id, 'thumbnail_id', true );
+    $image = wp_get_attachment_url( $thumbnail_id );
+    return $image;
+}
