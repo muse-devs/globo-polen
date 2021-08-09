@@ -147,6 +147,24 @@ class Tributes_Invites_Model
     }
 
 
+
+    /**
+     * Pega a qtd de invites pelo TributeID
+     * 
+     * @param int
+     * @return int
+     */
+    public static function get_count_by_tribute_id( $tribute_id )
+    {
+        global $wpdb;
+        $table_name = self::table_name();
+        $result = $wpdb->get_var(
+            $wpdb->prepare( "SELECT COUNT(*) total FROM {$table_name} WHERE tribute_id = %d;", $tribute_id )
+        );
+        return $result;
+    }
+
+
     /**
      * Pega todos so invites que enviaram o video pelo tribute_id
      * 

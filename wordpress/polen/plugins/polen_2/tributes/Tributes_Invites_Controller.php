@@ -1,6 +1,7 @@
 <?php
 namespace Polen\Tributes;
 
+use Exception;
 use Polen\Includes\Vimeo\Polen_Vimeo_Response;
 use Polen\Includes\Vimeo\Polen_Vimeo_Vimeo_Options;
 use Vimeo\Exceptions\ExceptionInterface;
@@ -36,10 +37,12 @@ class Tributes_Invites_Controller
 
         $emails = $_POST[ 'friends' ][ 'email' ];
         $names  = $_POST[ 'friends' ][ 'name' ];
+        $max_invites = Tributes_Controller::tribute_max_invites();
         try {
             for( $i = 0; $i < count( $emails ); $i++ ) {
                 $email = filter_var( $emails[ $i ], FILTER_VALIDATE_EMAIL );
                 $name  = filter_var( $names[ $i ], FILTER_SANITIZE_SPECIAL_CHARS );
+                self::validate_max_number_invites( $tribute_id );
                 if( !empty( $email ) ) {
                     $invite               = $this->create_a_invites( $name, $email, $tribute->ID );
                     $email_invite_content = \tributes_email_create_content_invite( $invite->hash );
@@ -84,6 +87,16 @@ class Tributes_Invites_Controller
         $tributes   = Tributes_Invites_Model::get_all_by_tribute_id( $tribute_id );
         wp_send_json_success( $tributes, 200 );
         wp_die();
+    }
+
+
+    /**
+     * @param int
+     * @return int
+     */
+    public function get_count_invites_by_tribute_id( $tribute_id )
+    {
+        return Tributes_Invites_Model::get_count_by_tribute_id( $tribute_id );
     }
 
 
@@ -145,6 +158,20 @@ class Tributes_Invites_Controller
             wp_send_json_error( $e->getMessage(), $e->getCode() );
         }
         wp_die();
+    }
+
+
+    /**
+     * Valida se ainda pode criar mais convites
+     * @param int
+     * @throws \Exception
+     */
+    static public function validate_max_number_invites( $tribute_id )
+    {
+        $max_invites = self::validate_max_number_invites( $tribute_id );
+        if( $max_invites > Tributes_Invites_Model::get_count_by_tribute_id( $tribute_id ) ) {
+            throw new \Exception( "Limite de convites ({$max_invites}) atingidos.", 403 );
+        }
     }
 
 

@@ -109,4 +109,14 @@ class Tributes_Controller
         return ( empty( trim( $slug ) ) ) ? false : true;
     }
 
+
+    /**
+     * Pega o maximo de Invites possiveis poro colab
+     * @return int
+     */
+    static public function tribute_max_invites()
+    {
+        return 3;
+    }
+
 }
