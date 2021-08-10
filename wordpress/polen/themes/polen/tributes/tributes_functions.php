@@ -111,7 +111,7 @@ function tribute_get_url_send_video_success( $tribute_hash, $invite_hash ) {
  * @return string URL completa
  */
 function tribute_get_url_final_video( $slug ) {
-    return site_url( Tributes_Rewrite_Rules::BASE_PATH . "/v/{$slug}" );
+    return site_url( Tributes_Rewrite_Rules::BASE_PATH . "/video/{$slug}" );
 }
 
 
