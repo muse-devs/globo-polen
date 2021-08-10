@@ -106,7 +106,7 @@ class Tributes_Display extends \WP_List_Table
         return sprintf( '%1$s', $item->slug );
     }
 
-    public function column_occasion( $param )
+    public function column_occasion( $item )
     {
         return sprintf( '%1$s', $item->occasion );
     }
