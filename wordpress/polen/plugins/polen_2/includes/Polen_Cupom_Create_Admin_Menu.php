@@ -35,8 +35,15 @@ class Polen_Cupom_Create_Admin_Menu
                     <div class="col ml-2">
                         <label for="discount_type" class="bc-label">Tipo de Desconto</label>
                         <select v-model="discount_type" v-on:change="handleChangeSelect" id="discount_type" required>
-                            <option disabled value="">Escolha um item</option>
+                            <option disabled value="">Escolha um tipo</option>
                             <option v-for="option in distount_type_list" v-bind:value="option.TYPE">{{option.NAME}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-2" v-bind:class="discount_type.indexOf('product') > -1 ? 'show': 'hidden'">
+                    <div class="col">
+                        <label><?php _e('Products', 'woocommerce'); ?></label>
+                        <select class="wc-product-search" multiple="multiple" style="width: 100%;" name="product_ids[]" data-placeholder="<?php esc_attr_e('Search for a product&hellip;', 'woocommerce'); ?>" data-action="woocommerce_json_search_products_and_variations">
                         </select>
                     </div>
                 </div>
@@ -44,11 +51,6 @@ class Polen_Cupom_Create_Admin_Menu
                     <div class="col">
                         <label for="amount" class="bc-label">Valor do Cupom<span v-if="symbol" class="ml-1">{{symbol}}</span></label>
                         <input type="number" id="amount" v-model="amount" placeholder="valor" required />
-                    </div>
-                    <div class="col ml-2">
-                        <label><?php _e('Products', 'woocommerce'); ?></label>
-                        <select class="wc-product-search" multiple="multiple" style="width: 100%;" name="product_ids[]" data-placeholder="<?php esc_attr_e('Search for a product&hellip;', 'woocommerce'); ?>" data-action="woocommerce_json_search_products_and_variations">
-                        </select>
                     </div>
                 </div>
                 <div class="row mb-2">

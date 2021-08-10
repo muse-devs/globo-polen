@@ -68,6 +68,10 @@
   opacity: 0.5;
 }
 
+.batch-coupon .hidden {
+  display: none;
+}
+
 .bc-label {
   display: block;
 }
