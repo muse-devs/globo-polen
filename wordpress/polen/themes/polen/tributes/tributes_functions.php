@@ -147,9 +147,10 @@ function tributes_tax_success_tribute( $tribute_id ) {
     $sent = $result_sucess->video_sent;
     $not_sent = $result_sucess->video_not_sent;
 
-    $total_success = ( $sent / ( $sent + $not_sent ) ) * 100;
     if( ( $sent + $not_sent ) == 0 ) {//divisão por zero
         $total_success = 0;
+    } else {
+        $total_success = ( $sent / ( $sent + $not_sent ) ) * 100;
     }
     return $total_success;
 }
