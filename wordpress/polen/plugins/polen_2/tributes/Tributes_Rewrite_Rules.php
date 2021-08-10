@@ -71,6 +71,7 @@ class Tributes_Rewrite_Rules
         add_rewrite_rule( self::BASE_PATH . '/novo/?',                              'index.php?tributes_app=1&tribute_operation='.self::TRIBUTES_OPERATION_CREATE, 'top' );
         add_rewrite_rule( self::BASE_PATH . '/meus-colabs/?',                       'index.php?tributes_app=1&tribute_operation='.self::TRIBUTES_OPERATION_MY_TRIBUTES, 'top' );
         add_rewrite_rule( self::BASE_PATH . '/v/([^/]*)/?',                         'index.php?tributes_app=1&tribute_operation='.self::TRIBUTES_OPERATION_VIDEOPLAY.'&'.self::TRIBUTES_QUERY_VAR_TRIBUTES_VIDEOPLAY.'=$matches[1]', 'top' );
+        add_rewrite_rule( self::BASE_PATH . '/video/([^/]*)/?',                     'index.php?tributes_app=1&tribute_operation='.self::TRIBUTES_OPERATION_VIDEOPLAY.'&'.self::TRIBUTES_QUERY_VAR_TRIBUTES_VIDEOPLAY.'=$matches[1]', 'top' );
         add_rewrite_rule( self::BASE_PATH . '/([^/]*)/?',                           'index.php?tributes_app=1&tribute_operation='.self::TRIBUTES_OPERATION_INVITES.'&tributes_hash=$matches[1]', 'top' );
         add_rewrite_rule( self::BASE_PATH . '[/]?$',                                'index.php?tributes_app=1&tribute_operation='.self::TRIBUTES_OPERATION_HOME, 'top' );
     }
