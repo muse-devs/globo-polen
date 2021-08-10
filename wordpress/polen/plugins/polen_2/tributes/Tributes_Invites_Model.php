@@ -189,6 +189,17 @@ class Tributes_Invites_Model
     }
 
 
+    public static function get_vimeo_processed_by_trubute_id( $tribute_id )
+    {
+        global $wpdb;
+        $table_name = self::table_name();
+        $result = $wpdb->get_results( 
+            $wpdb->prepare( "SELECT * FROM `{$table_name}` WHERE `vimeo_process_complete` = 1 AND tribute_id = %d;", $tribute_id )
+        );
+        return $result;
+    }
+
+
     /**
      * Pega o total de videos enviados 
      * 

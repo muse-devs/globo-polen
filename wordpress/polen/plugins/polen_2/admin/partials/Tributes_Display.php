@@ -2,6 +2,7 @@
 
 namespace Polen\Admin\Partials;
 
+use Polen\Tributes\Tributes_Controller;
 use Polen\Tributes\Tributes_Model;
 
 if ( ! class_exists('WP_List_Table')) {
@@ -63,6 +64,7 @@ class Tributes_Display extends \WP_List_Table
             'creator_name' => 'Nome do resp.',
             'deadline' => 'Dt Final',
             'tx_success' => 'Tx Sucesso',
+            'links_download' => 'Download',
         ];
     }
 
@@ -130,6 +132,13 @@ class Tributes_Display extends \WP_List_Table
     {
         $date = date( 'd/m/Y', strtotime( $param->deadline ) );
         return $date;
+    }
+
+    public function column_links_download($param)
+    {
+        $link_end_point = admin_url( 'admin-ajax.php?action=tribute_get_links_downloads' );
+        $nonce = wp_create_nonce( Tributes_Controller::NONCE_ACTION_GET_LINKS_DOWNLOADS );
+        return sprintf( '<a class="link-downloads-btn" data-tribute-id="%2$s" nonce="%3$s" href="%1$s">Downloads</a>', $link_end_point, $param->ID, $nonce );
     }
 
     public function column_tx_success($item)
