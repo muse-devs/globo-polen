@@ -43,10 +43,7 @@ if( ! $talent_is_social ) {
 					$is_social = social_order_is_social( $order_obj );
 
 					$total_order_value = $order['total_raw'];
-					$discounted_value_order = polen_apply_polen_part_price( $total_order_value );
-					if( $is_social ) {
-						$discounted_value_order = $total_order_value;
-					}
+					$discounted_value_order = polen_apply_polen_part_price( $total_order_value, $is_social );
 				?>
 					<div class="row mb-3" box-id="<?php echo $order['order_id']; ?>">
 						<div class="col md-12">
