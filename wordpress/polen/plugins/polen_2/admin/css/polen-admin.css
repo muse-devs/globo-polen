@@ -15,6 +15,49 @@
   margin-bottom: 1rem !important;
 }
 
+.ml-1 {
+  margin-left: 0.5rem !important;
+}
+
+.ml-2 {
+  margin-left: 1rem !important;
+}
+
 .text-right {
   text-align: right;
+}
+
+.batch-coupon {
+  width: 350px;
+}
+
+.batch-coupon .row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.batch-coupon .col {
+  display: block;
+  width: 100%;
+}
+
+.batch-coupon textarea {
+  width: 100%;
+}
+
+.batch-coupon .btn-send {
+  padding: 10px 30px;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.batch-coupon input::placeholder,
+.batch-coupon textarea::placeholder {
+  opacity: 0.5;
+}
+
+.bc-label {
+  display: block;
 }
