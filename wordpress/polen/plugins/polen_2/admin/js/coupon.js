@@ -30,7 +30,7 @@ const DISCOUNT_TYPES = [
 ];
 
 function getSymbol(type) {
-  const item = DISCOUNT_TYPES.filter((ITEM) => (ITEM.TYPE === type));
+  const item = DISCOUNT_TYPES.filter((ITEM) => ITEM.TYPE === type);
   return item[0].SYMBOL;
 }
 
@@ -44,6 +44,10 @@ const maskDate = (value) => {
   return v;
 };
 
+function getProducts(el) {
+  return jQuery(el).val().join();
+}
+
 const createCoupon = (data) => {
   const send_data = {
     prefix_name: data.prefix_name,
@@ -51,6 +55,7 @@ const createCoupon = (data) => {
     discount_type: data.discount_type,
     description: data.description,
     expiry_date: data.expiry_date,
+    product_ids: getProducts(".wc-product-search"),
     usage_limit: data.usage_limit,
   };
   return new Promise((resolve, reject) => {
@@ -73,12 +78,14 @@ const batch_coupon = new Vue({
   data: {
     prefix_name: "",
     amount: 0,
+    product_ids: [],
     discount_type: "",
     distount_type_list: DISCOUNT_TYPES,
     description: "",
     expiry_date: "",
     usage_limit: "1",
     symbol: "",
+    loading: false,
     message: MESSAGES.INITIAL,
   },
   methods: {
@@ -90,8 +97,10 @@ const batch_coupon = new Vue({
     },
     createCoupon: function () {
       this.message = MESSAGES.WAIT;
-      createCoupon(this).then((ret) => {
-        console.log(ret);
+      this.loading = true;
+      createCoupon(this).then((res) => {
+        console.log(res);
+        this.loading = false;
         this.message = MESSAGES.INITIAL;
       });
     },
