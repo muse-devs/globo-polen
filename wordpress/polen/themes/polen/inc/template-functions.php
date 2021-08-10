@@ -279,7 +279,8 @@ function polen_get_total_order_email_detail_to_talent( $order, $email )
 	) {
 		$total_order = floatval( $order->get_total() );
 		$discount = floatval( $order->get_discount_total() );
-		return polen_apply_polen_part_price( ( $total_order + $discount ) );
+		$order_is_social = social_order_is_social( $order );
+		return polen_apply_polen_part_price( ( $total_order + $discount ), $order_is_social );
 	}
 	return $order->get_total();
 }
@@ -314,9 +315,13 @@ function polen_get_videos_by_talent($talent, $json = false)
  *
  * @param float $full_price
  */
-function polen_apply_polen_part_price( $full_price )
+function polen_apply_polen_part_price( $full_price, $social = false )
 {
-    return ( floatval( $full_price ) * 0.75 );
+	if( $social ) {
+		return $full_price;
+	} else {
+		return ( floatval( $full_price ) * 0.75 );
+	}
 }
 
 

@@ -9,7 +9,7 @@ function criesp_get_home_banner($link)
 				<img class="image" src="<?php echo TEMPLATE_URI . '/assets/img/criesp/bg-criesp.jpg'; ?>" alt="Fundo Criança Esperança">
 				<div class="content">
 					<img src="<?php echo TEMPLATE_URI . '/assets/img/criesp/logo-criesp.png';  ?>" alt="Logo Criança Esperança" />
-					<p class="mt-3">Na Polen 100% do cachê dos vídeos serão revertidos em doações para o Criança Esperança.</p>
+					<p class="mt-3">Na Polen 100% do valor dos vídeos serão revertidos em doações para o Criança Esperança.</p>
 					<a href="<?php echo $link; ?>" class="btn btn-primary btn-md">Doe agora<span class="ml-2"><?php Icon_Class::polen_icon_chevron_right(); ?></span></a>
 				</div>
 			</div>
@@ -149,7 +149,7 @@ function criesp_get_thankyou_box()
 				</div>
 				<h4 class="title">Obrigado por ajudar o Criança Esperança.</h4>
 				<p class="description m-0">
-					Na Polen 100% do cachê dos vídeos serão revertidos em doações para o Criança Esperança.
+					Na Polen 100% do valor dos vídeos serão revertidos em doações para o Criança Esperança.
 					Em até 15 dias o seu ídolo vai enviar o seu video-agradecimento.
 				</p>
 			</div>
