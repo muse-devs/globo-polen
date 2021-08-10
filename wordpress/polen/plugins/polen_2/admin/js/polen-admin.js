@@ -7,7 +7,7 @@
 				evt.preventDefault();
 				let tribute_id = jQuery( evt.currentTarget ).attr('data-tribute-id');
 				let security = jQuery( evt.currentTarget ).attr('nonce');
-				jQuery.post()
+				jQuery.post('',{tribute_id,security},function(data){});
 			});
 		}
 	});
