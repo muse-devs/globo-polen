@@ -13,6 +13,13 @@ if (in_array('user_talent',  $logged_user->roles)) {
 	$count_total = $polen_talent->get_talent_orders($talent_id, false, true );
 }
 
+$talent_is_social = social_user_is_social( $logged_user->ID );
+if( ! $talent_is_social ) {
+	$days_expires = 7;
+} else {
+	$days_expires = 15;
+}
+
 ?>
 <section class="mt-2">
 	<header class="page-header">
@@ -29,11 +36,17 @@ if (in_array('user_talent',  $logged_user->roles)) {
 			</div>
 			<?php
 		} else {
-			echo "<p class='mt-2 mb-4'>Você tem <strong><span id='order-count'>" . $count_total['qtd'] . "</span> pedido(s) de vídeo</strong>, seus pedidos expiram em até 7 dias.</p>";
+			echo "<p class='mt-2 mb-4'>Você tem <strong><span id='order-count'>" . $count_total['qtd'] . "</span> pedido(s) de vídeo</strong>, seus pedidos expiram em até {$days_expires} dias.</p>";
 			if (count($talent_orders) > 0) {
 				foreach ($talent_orders as $order) : 
+					$order_obj = new \WC_Order( $order['order_id'] );
+					$is_social = social_order_is_social( $order_obj );
+
 					$total_order_value = $order['total_raw'];
 					$discounted_value_order = polen_apply_polen_part_price( $total_order_value );
+					if( $is_social ) {
+						$discounted_value_order = $total_order_value;
+					}
 				?>
 					<div class="row mb-3" box-id="<?php echo $order['order_id']; ?>">
 						<div class="col md-12">
@@ -49,7 +62,7 @@ if (in_array('user_talent',  $logged_user->roles)) {
 												</div>
 											<?php endif; ?>
 											<div class="col-12 col-md-12">
-												<p class="p">Para <?php echo ( ENV_DEV === true ) ? '(ID: ' . $order['order_id'] . ')' : ''; ?></p>
+												<p class="p">Para <?php echo ( defined( 'ENV_DEV' ) && ( ENV_DEV === true ) ) ? '(ID: ' . $order['order_id'] . ')' : ''; ?></p>
 												<p class="value small"><?php echo $order['name']; ?></p>
 											</div>
 										</div>
@@ -74,7 +87,7 @@ if (in_array('user_talent',  $logged_user->roles)) {
 													</div>
 													<div class="col-6 col-md-6">
 														<p class="p">Válido por</p>
-														<p class="value small"><?php echo $polen_talent->video_expiration_time($logged_user, $order['order_id']); ?></p>
+														<p class="value small"><?php echo $polen_talent->video_expiration_time( $logged_user, $order['order_id'], $is_social ); ?></p>
 													</div>
 												</div>
 											</div>
@@ -86,7 +99,7 @@ if (in_array('user_talent',  $logged_user->roles)) {
 												<?php
 												if ($order['status'] == 'talent-accepted') {
 												?>
-													<button class="btn btn-outline-light btn-lg btn-block btn-enviar-video" button-nonce="<?php echo $order_nonce; ?>" order-id="<?php echo $order['order_id']; ?>" data-toggle="" data-target="" onclick="window.location.href = '/my-account/send-video/?order_id=<?php echo $order['order_id']; ?>'">Enviar vídeo</button>
+													<button class="btn btn-outline-light btn-lg btn-block btn-enviar-video" data-toggle="" data-target="" onclick="window.location.href = '/my-account/send-video/?order_id=<?php echo $order['order_id']; ?>'">Enviar vídeo</button>
 												<?php
 												}
 

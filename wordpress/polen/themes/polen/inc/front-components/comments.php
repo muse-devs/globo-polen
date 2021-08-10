@@ -82,11 +82,11 @@ function polen_create_review($order_id)
 function polen_card_talent_reviews_order(\WP_Post $post, $Talent_Fields)
 {
 ?>
-	<div class="col-md-12">
+	<div class="col-md-12 mt-3">
 		<div class="row">
 			<div class="col-12 col-md-6 m-md-auto">
 				<div class="row">
-					<div class="col-6 col-md-6 text-center text-md-center">
+					<div class="col-4 col-md-4 text-center text-md-center">
 						<span class="skill-title">Responde em</span>
 						<p class="p mb-0 mt-2">
 							<span class="skill-value">
@@ -95,7 +95,19 @@ function polen_card_talent_reviews_order(\WP_Post $post, $Talent_Fields)
 							</span>
 						</p>
 					</div>
-					<div class="col-6 col-md-6 text-center text-md-center">
+					<div class="col-4 col-md-4 text-center text-md-center">
+						<span class="skill-title">Prazo de entrega</span>
+						<p class="p mb-0 mt-2">
+							<span class="skill-value">
+								<?php Icon_Class::polen_icon_calendar(); ?>
+								<?php 
+									$date = date("d/m/Y");
+									echo date( "d/m/y", strtotime('+7 days') );
+								?>
+							</span>
+						</p>
+					</div>
+					<div class="col-4 col-md-4 text-center text-md-center">
 						<?php
 						$total_reviews = get_post_meta($post->ID, "total_review", true);
 						if (empty($total_reviews)) {

@@ -20,6 +20,13 @@ if ( ! class_exists( 'Redux_Color_Gradient', false ) ) {
 	class Redux_Color_Gradient extends Redux_Field {
 
 		/**
+		 * Fileters enabled flag.
+		 *
+		 * @var bool
+		 */
+		private $filters_enabled = false;
+
+		/**
 		 * Redux_Field constructor.
 		 *
 		 * @param array  $field Field array.
@@ -36,8 +43,14 @@ if ( ! class_exists( 'Redux_Color_Gradient', false ) ) {
 		public function set_defaults() {
 			// No errors please.
 			$defaults = array(
-				'from' => '',
-				'to'   => '',
+				'from'           => '',
+				'to'             => '',
+				'gradient-type'  => 'linear',
+				'gradient-angle' => 0,
+				'gradient-reach' => array(
+					'from' => 0,
+					'to'   => 100,
+				),
 			);
 
 			$this->value = Redux_Functions::parse_args( $this->value, $defaults );
@@ -47,16 +60,18 @@ if ( ! class_exists( 'Redux_Color_Gradient', false ) ) {
 				'preview_height' => '150px',
 				'transparent'    => true,
 				'alpha'          => false,
+				'gradient-type'  => false,
+				'gradient-reach' => false,
+				'gradient-angle' => false,
 			);
 
 			$this->field = wp_parse_args( $this->field, $defaults );
 
-			if ( Redux_Core::$pro_loaded ) {
-				// phpcs:ignore WordPress.NamingConventions.ValidHookName
-				$this->field = apply_filters( 'redux/pro/color_gradient/field/set_defaults', $this->field );
+			include_once Redux_Core::$dir . 'inc/lib/gradient-filters/class-redux-gradient-filters.php';
 
-				// phpcs:ignore WordPress.NamingConventions.ValidHookName
-				$this->value = apply_filters( 'redux/pro/color_gradient/value/set_defaults', $this->value );
+			if ( $this->field['gradient-reach'] || $this->field['gradient-angle'] || $this->field['gradient-type'] ) {
+				include_once Redux_Core::$dir . 'inc/lib/gradient-filters/class-redux-gradient-filters.php';
+				$this->filters_enabled = true;
 			}
 		}
 
@@ -69,10 +84,14 @@ if ( ! class_exists( 'Redux_Color_Gradient', false ) ) {
 		 * @return      void
 		 */
 		public function render() {
-			if ( Redux_Core::$pro_loaded ) {
-				// phpcs:ignore WordPress.NamingConventions.ValidHookName, WordPress.Security.EscapeOutput
-				echo apply_filters( 'redux/pro/color_gradient/render/gradient_type', null );
-			}
+			$data = array(
+				'field' => $this->field,
+				'value' => $this->value,
+			);
+
+			// Escaping done in function.
+			// phpcs:ignore WordPress.Security.EscapeOutput
+			echo Redux_Gradient_Filters::render_select( $data );
 
 			$mode_arr = array(
 				'from',
@@ -93,15 +112,14 @@ if ( ! class_exists( 'Redux_Color_Gradient', false ) ) {
 				echo 'type="text"';
 				echo 'data-default-color="' . esc_attr( $this->field['default'][ $mode ] ) . '"';
 
-				if ( Redux_Core::$pro_loaded ) {
-					$data = array(
-						'field' => $this->field,
-						'index' => $mode,
-					);
+				$data = array(
+					'field' => $this->field,
+					'value' => $this->value,
+				);
 
-					// phpcs:ignore WordPress.NamingConventions.ValidHookName, WordPress.Security.EscapeOutput
-					echo apply_filters( 'redux/pro/render/color_alpha', $data );
-				}
+				// Escaping done in function.
+				// phpcs:ignore WordPress.Security.EscapeOutput
+				echo Redux_Functions_Ex::output_alpha_data( $data );
 
 				echo '>';
 
@@ -122,18 +140,18 @@ if ( ! class_exists( 'Redux_Color_Gradient', false ) ) {
 				echo '</div>';
 			}
 
-			if ( Redux_Core::$pro_loaded ) {
-				// phpcs:ignore WordPress.NamingConventions.ValidHookName, WordPress.Security.EscapeOutput
-				echo apply_filters( 'redux/pro/color_gradient/render/preview', null );
+			// Escaping done in function.
+			// phpcs:ignore WordPress.Security.EscapeOutput
+			echo Redux_Gradient_Filters::render_preview( $data );
 
-				// phpcs:ignore WordPress.NamingConventions.ValidHookName, WordPress.Security.EscapeOutput
-				echo apply_filters( 'redux/pro/color_gradient/render/extra_inputs', null );
-			}
+			// Escaping done in function.
+			// phpcs:ignore WordPress.Security.EscapeOutput
+			echo Redux_Gradient_Filters::render_sliders( $data );
 		}
 
 		/**
 		 * Enqueue Function.
-		 * If this field requires any scripts, or css define this function and register/enqueue the scripts/css
+		 * If this field requires any scripts, or CSS define this function and register/enqueue the scripts/css
 		 *
 		 * @since       1.0.0
 		 * @access      public
@@ -150,9 +168,24 @@ if ( ! class_exists( 'Redux_Color_Gradient', false ) ) {
 				true
 			);
 
-			if ( Redux_Core::$pro_loaded ) {
-				// phpcs:ignore WordPress.NamingConventions.ValidHookName
-				do_action( 'redux/pro/color_gradient/enqueue' );
+			$min = Redux_Functions::isMin();
+
+			Redux_Gradient_Filters::enqueue( $this->field, $this->filters_enabled );
+
+			if ( isset( $this->field['color_alpha'] ) && ( $this->field['color_alpha'] || ( $this->field['color_alpha']['from'] || $this->field['color_alpha']['to'] ) ) ) {
+				if ( ! wp_script_is( 'redux-wp-color-picker-alpha-js' ) ) {
+					wp_enqueue_script( 'redux-wp-color-picker-alpha-js' );
+				}
+			}
+
+			if ( $this->filters_enabled ) {
+				wp_enqueue_script(
+					'redux-field-color-gradient-js',
+					Redux_Core::$url . 'inc/fields/color_gradient/redux-color-gradient' . $min . '.js',
+					array( 'jquery', 'wp-color-picker' ),
+					Redux_Core::$version,
+					true
+				);
 			}
 
 			if ( $this->parent->args['dev_mode'] ) {
@@ -172,14 +205,10 @@ if ( ! class_exists( 'Redux_Color_Gradient', false ) ) {
 		 *
 		 * @param string $data CSS data.
 		 *
-		 * @return mixed|void
+		 * @return string
 		 */
-		public function css_style( $data ) {
-			if ( Redux_Core::$pro_loaded ) {
-
-				// phpcs:ignore WordPress.NamingConventions.ValidHookName
-				return apply_filters( 'redux/pro/color_gradient/output', $data );
-			}
+		public function css_style( $data ): string {
+			return Redux_Gradient_Filters::get_output( $data );
 		}
 
 		/**

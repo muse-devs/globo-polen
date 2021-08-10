@@ -2,6 +2,11 @@
 
 class Icon_Class
 {
+	public static function polen_icon_criesp()
+	{
+		echo '<span class="icon icon-criesp"></span>';
+	}
+
 	public static function polen_icon_clipboard()
 	{
 		echo '<i class="bi bi-clipboard"></i>';
@@ -98,6 +103,11 @@ class Icon_Class
 	public static function polen_icon_upload()
 	{
 		echo '<i class="bi bi-cloud-arrow-up"></i>';
+	}
+
+	public static function polen_icon_calendar()
+	{
+		echo '<i class="bi bi-calendar"></i>';
 	}
 
 	public static function polen_icon_download()

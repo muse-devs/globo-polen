@@ -290,3 +290,16 @@ select.form-control:not([size]):not([multiple]) {
 	padding: 15px;
 	font-size: 14px;
 }
+
+.criesp {
+	color: white;
+	border-radius: 10px;
+	background-color: var(--success);
+	border: none;
+}
+
+button.criesp {
+	:hover {
+		background-color: var(--success);
+	}
+}

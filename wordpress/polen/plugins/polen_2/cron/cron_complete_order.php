@@ -27,9 +27,10 @@ foreach ( $videos as $video ) {
         if( $response->video_processing_is_complete() ) {
             $video->vimeo_process_complete = 1;
             //TODO colocar esse '300x435' em um lugar, tirar o hardcode
-            $video->vimeo_thumbnail = $response->get_image_url_custom_size( '300x435' );
-            $video->duration = $response->get_duration();
+            $video->vimeo_thumbnail    = $response->get_image_url_custom_size( '300x435' );
+            $video->duration           = $response->get_duration();
             $video->vimeo_url_download = 'get_in_time';
+            $video->vimeo_file_play    = $response->get_play_link();
             $video->update();
             $vimeo_api->request( $video->vimeo_id . '/presets/120906813', [], 'PUT');
             echo "Achei: {$video->vimeo_id} \n";
