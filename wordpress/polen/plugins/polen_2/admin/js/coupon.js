@@ -8,22 +8,22 @@ const MESSAGES = {
 
 const DISCOUNT_TYPES = [
   {
-    NAME: "Fixo no carrinho",
+    NAME: "Fixo de carrinho",
     TYPE: "fixed_cart",
     SYMBOL: "R$",
   },
   {
-    NAME: "Percentual no carrinho",
+    NAME: "Percentual de carrinho",
     TYPE: "percent",
     SYMBOL: "%",
   },
   {
-    NAME: "Fixo no produto",
+    NAME: "Fixo de produto",
     TYPE: "fixed_product",
     SYMBOL: "R$",
   },
   {
-    NAME: "Percentual no produto",
+    NAME: "Percentual de produto",
     TYPE: "percent_product",
     SYMBOL: "%",
   },
