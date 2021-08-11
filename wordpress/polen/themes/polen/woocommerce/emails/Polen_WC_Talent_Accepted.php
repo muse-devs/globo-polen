@@ -8,7 +8,12 @@ do_action( 'woocommerce_email_header', $email_heading, $email );
 
 ?>
 
-<p><?php printf( esc_html__( 'A sua compra #%1$s de %2$s foi aceita. Detalhes da compra:', 'woocommerce' ), esc_html( $order->get_order_number() ), esc_html( $order->get_formatted_billing_full_name() ) ); ?></p>
+<?php
+$item = Polen\Includes\Cart\Polen_Cart_Item_Factory::polen_cart_item_from_order($order);
+$talent = _polen_get_info_talent_by_product_id($item->get_product(), "polen-square-crop-md");
+?>
+
+<p><?php printf( esc_html__( 'A sua compra #%1$s foi aceita por %2$s. Detalhes da compra:', 'woocommerce' ), esc_html( $order->get_order_number() ), esc_html($talent['name']) ); ?></p>
 
 <?php
 
