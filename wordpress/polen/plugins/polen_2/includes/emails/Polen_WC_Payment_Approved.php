@@ -43,6 +43,7 @@ class Polen_WC_Payment_Approved extends \WC_Email {
 		$this->subject     = sprintf( _x( '[%s] Pagamento Aprovado', 'E-mail que será enviado ao usuário quando o pagamento do pedido é aprovado', 'polen' ), '{blogname}' );
     
 		$this->talent_template_html  = 'emails/Polen_WC_Payment_Approved_Talent.php';
+		$this->talent_social_template_html  = 'emails/Polen_WC_Payment_Approved_Talent_social.php';
 		$this->talent_template_plain = 'emails/plain/Polen_WC_Payment_Approved_Talent.php';
 		$this->social_template_html  = 'emails/Polen_WC_Payment_Approved_social.php';
 		$this->social_template_plain = 'emails/plain/Polen_WC_Payment_Approved_social.php';
@@ -51,6 +52,7 @@ class Polen_WC_Payment_Approved extends \WC_Email {
 		$this->template_base  = TEMPLATEPATH . 'woocommerce/';
 
 		$this->subject_talent = 'Você está a um passo de receber mais R$!';
+		$this->subject_talent_social = 'Você está a um passo de mais uma doação';
 		$this->subject_social = 'Obrigado por ajudar o Criança Esperança.';
     
 		add_action( 'woocommerce_order_status_changed', array( $this, 'trigger' ) );
@@ -87,7 +89,11 @@ class Polen_WC_Payment_Approved extends \WC_Email {
 			$Polen_Talent = new Polen_Talent();
 			$talent = $Polen_Talent->get_talent_from_product( $product_id );
 			$this->recipient_talent = $talent->email;
-			$this->send( $this->get_recipient_talent(), $this->get_subject_talent(), $this->get_content_talent(), $this->get_headers(), $this->get_attachments() );
+			if( !social_order_is_social( $this->object ) ) {
+				$this->send( $this->get_recipient_talent(), $this->get_subject_talent(), $this->get_content_talent(), $this->get_headers(), $this->get_attachments() );
+			} else {
+				$this->send( $this->get_recipient_talent(), $this->get_subject_talent_social(), $this->get_content_talent_social(), $this->get_headers(), $this->get_attachments() );
+			}
 		}
 	}
 
@@ -99,6 +105,11 @@ class Polen_WC_Payment_Approved extends \WC_Email {
 	public function get_subject_talent()
 	{
 		return $this->subject_talent;
+	}
+
+	public function get_subject_talent_social()
+	{
+		return $this->subject_talent_social;
 	}
 
 	public function get_subject_social()
@@ -118,6 +129,18 @@ class Polen_WC_Payment_Approved extends \WC_Email {
 		return $email_content;
 	}
 
+	public function get_content_talent_social() {
+		$this->sending = true;
+
+		if ( 'plain' === $this->get_email_type() ) {
+			$email_content = wordwrap( preg_replace( $this->plain_search, $this->plain_replace, wp_strip_all_tags( $this->get_content_talent_plain() ) ), 70 );
+		} else {
+			$email_content = $this->get_content_talent_social_html();
+		}
+
+		return $email_content;
+	}
+
 	public function get_content_social() {
 		$this->sending = true;
 
@@ -132,6 +155,16 @@ class Polen_WC_Payment_Approved extends \WC_Email {
 
     public function get_content_talent_html() {
 		return wc_get_template_html( $this->talent_template_html, array(
+			'order'         => $this->object,
+			'email_heading' => $this->get_heading(),
+			'sent_to_admin' => true,
+			'plain_text'    => false,
+			'email'			=> $this
+		), '', $this->template_base );
+	}
+
+	public function get_content_talent_social_html() {
+		return wc_get_template_html( $this->talent_social_template_html, array(
 			'order'         => $this->object,
 			'email_heading' => $this->get_heading(),
 			'sent_to_admin' => true,
