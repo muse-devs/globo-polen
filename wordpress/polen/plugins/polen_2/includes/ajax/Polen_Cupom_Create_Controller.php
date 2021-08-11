@@ -28,6 +28,7 @@ class Polen_Cupom_Create_Controller
         $data[ 'cupom_code' ]    = filter_input( INPUT_POST, 'cupom_code' );
         $data[ 'amount' ]        = filter_input( INPUT_POST, 'amount' ); // Amount
         $data[ 'discount_type' ] = filter_input( INPUT_POST, 'discount_type' ); // Type: fixed_cart, percent, fixed_product, percent_product
+        $data[ 'product_ids' ]   = filter_input( INPUT_POST, 'product_ids' );
         $data[ 'description' ]   = filter_input( INPUT_POST, 'description' );
         $data[ 'expiry_date' ]   = filter_input( INPUT_POST, 'expiry_date' );
         $data[ 'usage_limit' ]   = filter_input( INPUT_POST, 'usage_limit' );
