@@ -117,7 +117,7 @@ if (!defined('ABSPATH')) {
 												<?php $order_number = $order->get_order_number(); ?>
 												<strong style="font-size: 25px">Pedido número: <?= $order_number; ?></strong><br><br>
 												Para acompanhar seu pedido <a href="<?= site_url( "acompanhamento-pedido/"); ?>" style="color: #d7198b">clique aqui</a>.<br><br>
-												Em caso de dúvidas sobre o sua doação, você pode enviar
+												Em caso de dúvidas sobre a sua doação, você pode enviar
 												um <br>e-mail para <a href="mailto:atendimento@polen.me">atendimento@polen.me</a>
 											</p>
 										</td>

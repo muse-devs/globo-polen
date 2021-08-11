@@ -282,13 +282,16 @@
 #zuck-modal-content .story-viewer .head .right .close,
 #zuck-modal-content .story-viewer .head .back {
     font-size: 42px;
-    width: 48px;
-    height: 48px;
+    width: 55px;
+    height: 55px;
     line-height: 48px;
     cursor: pointer;
     text-align: center;
     color: #fff;
     opacity: 0.5;
+    i {
+        color: #fff;
+    }
 }
 #zuck-modal-content .story-viewer .head .left .back {
     display: none;
@@ -513,16 +516,17 @@
         z-index: 20;
         visibility: visible;
         position: absolute;
-        font-size: 27px;
+        font-size: 37px;
         line-height: 32px;
         vertical-align: top;
         text-shadow: none;
+        top: 17px;
     }
 
     #zuck-modal-content .story-viewer.with-back-button .head .left > .back {
         display: block;
         position: absolute;
-        right: 20px;
+        right: 30px;
     }
 
     #zuck-modal-content .story-viewer.with-back-button .head .left .item-preview {

@@ -2,8 +2,13 @@
 
 namespace Polen\Tributes;
 
+use Polen\Includes\Vimeo\Polen_Vimeo_Factory;
+use Polen\Includes\Vimeo\Polen_Vimeo_Response;
+
 class Tributes_Controller
 {
+
+    const NONCE_ACTION_GET_LINKS_DOWNLOADS = 'tributes_nonce_get_links_downloads';
     
     public function create_tribute()
     {
@@ -48,42 +53,66 @@ class Tributes_Controller
     }
 
     /**
-     *
+     * Verifica se o Slug já existe
      */
     public function check_slug_exists()
     {
         $slug    = filter_input( INPUT_POST, 'slug' );
 
         if( !$this->validate_slug_not_empty( $slug ) ) {
-            //TODO: Esse nome "Slug" é ruim pra o usuário pensar num melhor
             wp_send_json_error( 'Porfavor escolha um endereço', 401 );
             wp_die();
         }
         $tribute = Tributes_Model::get_by_slug( $slug );
         if( !empty( $tribute ) ) {
-            //TODO: Esse nome "Slug" é ruim pra o usuário pensar num melhor
             wp_send_json_error( 'Esse endereço já existe, tente outro', 403 );
             wp_die();
         }
-        //TODO: Esse nome "Slug" é ruim pra o usuário pensar num melhor
         wp_send_json_success( 'Endereço disponível', 200 );
         wp_die();       
     }
 
 
     /**
-     *
+     * 
      */
     public function check_hash_exists( $hash )
     {
-        $slug    = filter_input( INPUT_POST, 'slug' );
-        $tribute = Tributes_Model::get_by_hash( $slug );
+        $hash    = filter_input( INPUT_POST, 'hash' );
+        $tribute = Tributes_Model::get_by_hash( $hash );
         if( !empty( $tribute ) ) {
-            wp_send_json_error( 'Slug já existe', 403 );
+            wp_send_json_error( 'Código já existe', 403 );
             wp_die();
         }
-        wp_send_json_success( 'Slug livre', 200 );
+        wp_send_json_success( 'Código livre', 200 );
         wp_die();   
+    }
+
+
+    /**
+     * Handler do endpoint para pegar a lista de links de downloads
+     */
+    public function get_links_downloads()
+    {
+        $tribute_id = filter_input( INPUT_POST, 'tribute_id', FILTER_SANITIZE_NUMBER_INT );
+        $nonce      = filter_input( INPUT_POST, 'security' );
+        try {
+            $this->validate_nonce( $nonce, self::NONCE_ACTION_GET_LINKS_DOWNLOADS );
+            $invites_completed = Tributes_Invites_Model::get_vimeo_processed_by_trubute_id( $tribute_id );
+            $result = [];
+            $vimeo_api = Polen_Vimeo_Factory::create_vimeo_instance_with_redux();
+            foreach( $invites_completed as $invite ) {
+                $vimeo_response = new Polen_Vimeo_Response( $vimeo_api->request( $invite->vimeo_id ) );
+                if( !$vimeo_response->is_error() ) {
+                    $result[] = $vimeo_response->get_download_best_quality_url();
+                }
+            }
+            wp_send_json_success( $result, 200 );
+            wp_die();
+        } catch ( \Exception $e ) {
+            wp_send_json_error( $e->getMessage(), $e->getCode() );
+            wp_die();
+        }
     }
 
 
@@ -117,6 +146,19 @@ class Tributes_Controller
     static public function tribute_max_invites()
     {
         return 9;
+    }
+
+    /**
+     * Validacao de Nonce
+     * @param string
+     * @param string
+     * @throws \Exception
+     */
+    private function validate_nonce( $nonce, $action )
+    {
+        if( ! wp_verify_nonce( $nonce, $action ) ) {
+            throw new \Exception( 'Erro na segurança', 403 );
+        }
     }
 
 }
