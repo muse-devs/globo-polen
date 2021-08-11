@@ -98,6 +98,15 @@ function polen_get_link_watch_video_by_order_id( $order_id )
 	return wc_get_account_endpoint_url('watch-video') . "{$order_id}";
 }
 
+/**
+ * Get a URL para acompanhar o pedido passando a $order_id
+ * @param int $order_id
+ */
+function polen_get_link_order_status( $order_id )
+{
+	return polen_get_url_my_account() . "view-order/" . "{$order_id}";
+}
+
 
 /**
  * Funcao para pegar a URL do My-Account
