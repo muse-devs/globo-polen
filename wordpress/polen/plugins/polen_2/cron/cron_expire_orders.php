@@ -46,8 +46,18 @@ if( $res && ! is_null( $res ) && ! is_wp_error( $res ) && is_array( $res ) && co
         // } else {
         //     echo '#' . $order_id . ': ' . $return['Message'] . "\n";
         //     if( $return['Message'] == 'Transaction not available to refund' ) {
+            if( !social_order_is_social( $order ) ) {
                 $order->update_status( 'order-expired', 'order_note' );
                 echo '#' . $order_id . ': Marcado como expirado extorno manual.' . "\n"; 
+            } else {
+                $interval_time = new DateInterval( 'P15D' );
+                $cd = new DateTime( 'now', new DateTimeZone( wp_timezone_string() ) );
+                $diff = $order->get_date_created()->add( $interval_time )->diff( $cd );
+                if( $diff->invert == 0) {
+                    $order->update_status( 'order-expired', 'order_note' );
+                    echo '#' . $order_id . ': Marcado como expirado extorno manual CRIESP.' . "\n"; 
+                }
+            }
         //     }
         // }
     }
