@@ -3,7 +3,7 @@
 /**
  *
  */
-function polen_get_order_flow_layout($array_status)
+function polen_get_order_flow_layout($array_status, $order_number, $whatsapp_number = "", $redux_whatsapp = 0)
 {
 	//status: complete, in-progress, pending, fail
 	//title: string
@@ -25,6 +25,7 @@ function polen_get_order_flow_layout($array_status)
 	if ($new_array[2]['status'] === "complete") {
 		$class = " complete";
 	}
+
 ?>
 	<div class="row">
 		<div class="col-md-12">
@@ -39,9 +40,9 @@ function polen_get_order_flow_layout($array_status)
 							<h4 class="title"><?php echo $value['title']; ?></h4>
 							<p class="description"><?php echo $value['description']; ?></p>
 							<?php
-							if (!isset($first)) {
+							if ($redux_whatsapp == "1" && !isset($first)) {
 								$first = true;
-								//polen_form_add_whatsapp();
+								polen_form_add_whatsapp($order_number, $whatsapp_number);
 							}
 							?>
 						</span>

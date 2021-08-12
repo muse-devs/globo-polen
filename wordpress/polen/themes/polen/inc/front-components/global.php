@@ -433,7 +433,7 @@ function polen_form_signin_newsletter(string $event = 'newsletter')
 }
 
 
-function polen_form_add_whatsapp($number = "")
+function polen_form_add_whatsapp($order_number, $whatsapp_number = "")
 {
 	wp_enqueue_script('form-whatsapp');
 ?>
@@ -454,11 +454,13 @@ function polen_form_add_whatsapp($number = "")
 					<form action="/" method="POST" v-bind:class="edit ? '' : 'd-none'" v-on:submit.prevent="handleSubmit" id="form-add-whatsapp">
 						<?php //TODO botar o value que precisa ser enviado ao endpoint
 						?>
-						<input type="hidden" name="action" value="">
-						<input type="hidden" id="phone_cache" value="<?php echo $number; ?>" />
-						<?php //TODO botar o name que precisa ser enviado ao endpoint
-						?>
-						<input type="text" name="" v-model="phone" v-on:keyup="handleChange" placeholder="(00) 00000-0000" maxlength="15" class="form-control form-control-lg" style="background-color: transparent;" required />
+						<input type="hidden" name="action" value="polen_whatsapp_form">
+						<input type="hidden" name="page_source" value="<?= filter_input(INPUT_SERVER, 'REQUEST_URI'); ?>" />
+						<input type="hidden" name="is_mobile" value="<?= polen_is_mobile() ? "1" : "0"; ?>" />
+						<input type="hidden" name="security" value=<?php echo wp_create_nonce('whatsapp-form'); ?>>
+						<input type="hidden" name="order" value="<?php echo $order_number; ?>" />
+						<input type="hidden" id="phone_cache" value="<?php echo $whatsapp_number; ?>" />
+						<input type="text" name="phone_number" v-model="phone" v-on:keyup="handleChange" placeholder="(00) 00000-0000" maxlength="15" class="form-control form-control-lg" style="background-color: transparent;" required />
 						<button type="submit" class="btn btn-outline-light btn-lg mt-3 px-5">Salvar</button>
 					</form>
 				</div>

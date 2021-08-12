@@ -88,13 +88,13 @@
 		content: " ";
 		@extend .v-line;
 		left: 30px;
-		height: 33%;
+		height: 0%;
 		background: linear-gradient(
 			180deg,
 			var(--primary) 0%,
 			var(--gradient) 100%
 		);
-		z-index: 2;
+		z-index: 3;
 	}
 	&.none {
 		&::after {
@@ -103,12 +103,12 @@
 	}
 	&.half {
 		&::after {
-			height: 66%;
+			height: 0%;
 		}
 	}
 	&.complete {
 		&::after {
-			height: 66%;
+			height: calc(100% - 140px);
 			background: linear-gradient(
 				180deg,
 				var(--primary) 80%,
@@ -138,6 +138,18 @@
 					display: block;
 				}
 			}
+			&::after {
+				content: " ";
+				@extend .v-line;
+				left: 15px;
+				height: 100%;
+				background: linear-gradient(
+					180deg,
+					var(--primary) 0%,
+					var(--gradient) 100%
+				);
+				z-index: 2;
+			}
 		}
 		&.pending {
 			.text {
@@ -161,7 +173,7 @@
 		border: 3px solid var(--gray-light);
 		border-radius: 50%;
 		box-sizing: border-box;
-		z-index: 3;
+		z-index: 4;
 		.icon,
 		.bi {
 			font-size: 30px;
