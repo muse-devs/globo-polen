@@ -24,6 +24,8 @@ class Polen_Order
             add_action(    'wp_ajax_create_first_order',         array( $this, 'create_first_order' ) );
             add_action(    'wp_ajax_search_order_status',        array( $this, 'check_order_status' ) );
             add_action(    'wp_ajax_nopriv_search_order_status', array( $this, 'check_order_status' ) );
+            add_action(    'wp_ajax_nopriv_polen_whatsapp_form', array( $this, 'set_whatsapp_into_order' ) );
+            add_action(    'wp_ajax_polen_whatsapp_form',        array( $this, 'set_whatsapp_into_order' ) );
             add_shortcode( 'polen_search_order',                 array( $this, 'polen_search_order_shortcode' ) );
             add_shortcode( 'polen_search_result_shortcode',      array( $this, 'polen_search_result_shortcode' ) );
             add_shortcode( 'polen_video_shortcode',              array( $this, 'polen_watch_video' ) );
@@ -268,5 +270,17 @@ class Polen_Order
         // $order->set_status( Polen_WooCommerce::ORDER_STATUS_TALENT_ACCEPTED );
         wp_send_json_success( 'ok', 201 );
         wp_die();
+    }
+
+
+    /**
+     * Salvar na Order o numero de whatsapp para
+     * recebimento do video final
+     */
+    public function set_whatsapp_into_order()
+    {
+        $nonce = filter_input( INPUT_POST, 'security' );
+        $order_id = filter_input( INPUT_POST, 'order', FILTER_SANITIZE_NUMBER_INT );
+        $phone_number = filter_input( INPUT_POST, 'phone_number' );
     }
 }
