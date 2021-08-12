@@ -3,10 +3,10 @@ Contributors: dovyp, redux, kprovance
 Tags: gutenberg, blocks, gutenberg blocks, editor, block, page builder, block editor, block library, editor, templates, library
 Requires at least: 4.0
 Requires PHP: 7.1
-Tested up to: 5.7.3
-Stable tag: 4.1.29
-License: GPL-2.0+
-License URI: http://www.gnu.org/licenses/gpl-2.0.txt
+Tested up to: 5.8
+Stable tag: 4.2.11
+License: GPL-3.0+
+License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
 Supercharge the Gutenberg editor with our ever-growing library of block-based templates!
 
@@ -152,15 +152,72 @@ If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg
 
 == Changelog ==
 
-== 4.1.29 ==
+= 4.2.11 =
+Fixed: Removed type declarations on core return values to support improperly written third-party extensions.
+Fixed: Added shim to prevent errors on functions calls outdated extensions are still using.
+Fixed: Removed type declarations on field code to support outdated versions of PHP (PHP 7.4 is the minimum recommendation from WordPress...please update if you are able. [https://wordpress.org/about/requirements](https://wordpress.org/about/requirements) ).
+Fixed: Support URL button kicking back a JavaScript error.
+
+= 4.2.10 =
+Fixed: Output on the frontend triggering error.
+Fixed: Updated shims to support older extensions not authored by Redux.io
+
+= 4.2.9 =
+Fixed: WordPress data class now works properly.
+
+= 4.2.8 =
+Redux instances returning null.  Saved options now show on the front end.
+
+= 4.2.7 =
+Fixed: Options reverting or not saving.
+
+= 4.2.6 =
+Fixed: Fatal error if passing null as an option section.
+Fixed: Error in connection banner routine.
+
+= 4.2.5 =
+Fixed: Type mismatch in Redux Helpers.
+
+= 4.2.4 =
+Fixed: Taxonomy WordPress data not handled properly in fields that support WordPress data.
+
+= 4.2.3 =
+Fixed: Return type error in Redux templates.
+
+= 4.2.2 =
+Fixed: WordPress data options not handling WP_Error properly.
+
+= 4.2.1 =
+Fixed: Type mismatch regarding select boxes and callbacks.
+
+= 4.2.0 =
+* New: Typography features:  Top and bottom margins, text-shadow.
+* New: Media Image Filters (greyscale, sepia, opacity, contrast, invert, blur, saturate, brightness, hue-rotate).
+* New: Filters (type, reach, angle) for Gradient color field.
+* New: Box Shadow field.
+* New: Flyout Submenus: `flyout_submenus` global arg.
+* New: Alpha color option for color field: `color_alpha` field arg for fields that support color pickers.
+* Updated: select2 library to 4.1.0.
+* Updated: readme.txt to conform to wp.org standards.
+* Fixed: Remove PHP 7.2 syntax to keep older versions of PHP 7 happy.
+* Fixed: Redux templates not showing on 'page attributes' for some.
+* Fixed: Additional PHP 8.0 compatibility.
+* Fixed: Widget screen would not load due to conflict with template library.
+* Added:  WordPress 5.8 compatibility.
+* Improved: Better Gutenberg block editor detection.
+* Modified: Redux Pro no longer required for automatic Google font updates.
+* Modified: Rename Parsedown class for raw field to avoid conflicts with other plugins.
+* Removed: `async_typography` global arg.  Google no longer supports it.  Use `font_display` with one of the following `auto|block|swap|fallback|optional`.  See: [https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display)
+
+= 4.1.29 =
 * Fixed: All PHP 7.4 specific syntax backed out.  It caused older versions of PHP to report fatal errors.
 * Fixed: Index error in the image_select field.
 
-== 4.1.28 ==
-* Fixed: #217 - Redux templates loading on post types with no block editor.
-* Fixed: #158 - Redux theme checks no longer prevent theme check plugin from functioning.
-* Fixed: #215 - Heatbeat check no longer eats the function if disregarded.
-* Fixed: #222 - Background field image now hides preview image upon removal.
+= 4.1.28 =
+* Fixed: Redux templates loading on post types with no block editor.
+* Fixed: Redux theme checks no longer prevent theme check plugin from functioning.
+* Fixed: Heatbeat check no longer eats the function if disregarded.
+* Fixed: Background field image now hides preview image upon removal.
 * Fixed: RAW field in sample config now works.
 * Fixed: Helper function is_field_in_use now returns false, instead of null.
 * Fixed: Palette field rendering improperly.
@@ -168,15 +225,15 @@ If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg
 * Modified: buttonset() jQuery widget deprecated.  Replaced with controlgroup().
 * Modified: Additional JavaScript updates to fix jQuery deprecation notices.
 
-== 4.1.27 ==
+= 4.1.27 =
 * Fixed: Image select not selecting default value.
-* Modified: #209 - Link color field overridden by theme.  Added 'important' arg to the output array to fix.  See sample config.
-* Fixed: #208 - Same config not setting footer background in Twenty-twenty theme due to incorrect class.
-* Fixed: #207 - Radio field not displaying text after save/refresh when displaying WordPress data.
-* Modified: #210 - Donation text removed.
-* Fixed: #206 - Link color CSS compiling incorrectly due to late escaping.
+* Modified: Link color field overridden by theme.  Added 'important' arg to the output array to fix.  See sample config.
+* Fixed: Same config not setting footer background in Twenty-twenty theme due to incorrect class.
+* Fixed: Radio field not displaying text after save/refresh when displaying WordPress data.
+* Modified: Donation text removed.
+* Fixed: Link color CSS compiling incorrectly due to late escaping.
 
-== 4.1.26 ==
+= 4.1.26 =
 * Added: Menu accent introduced in WordPress 5.7.
 * Updated: ACE Editor 1.4.12.
 * Updated select2 to support cssContainer.
@@ -189,14 +246,14 @@ If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg
 * Fixed: Malformed SCSS.
 * Release date: March 17, 2021
 
-== 4.1.25 ==
+= 4.1.25 =
 * Fixed: Erroneous icon on button_set field after WP 5.6 update.
 * Fixed: Erroneous icon on palette field after WP 5.6 update.
 * Fixed: PHP error in init_delay function during heartbeat API.
 * Fixed: Options object field not rendering.
 * Release date: Jan 21, 2021
 
-== 4.1.24 ==
+= 4.1.24 =
 * Fixed: Select2 callback fix for select fields.
 * Added: Shim: empty field_*.php files to fix developers including files improperly.
 * Fixed: Changed use of ctype_xdigit to account for hosts where it's disabled.
@@ -209,7 +266,7 @@ If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg
 * Fixed: Pro template count error if previously activated and Redux Pro not enabled.
 * Release date: Dec 12, 2020
 
-== 4.1.23 ==
+= 4.1.23 =
 * Fixed: Massive speed improvement to the library.
 * Fixed: Pro template count error if previously activated and Redux Pro not enabled.
 * Release date: Oct 24, 2020
@@ -230,7 +287,7 @@ If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg
 * Fixed: Custom callback with select field.
 * Fixed: Typography bug when style was hidden.
 * Fixed: Issue with text labels.
-* Fixed: Google fonts html validation issues.
+* Fixed: Google fonts HTML validation issues.
 * Added: Feedback modal.
 * Fixed: Import logic flaw.
 * Fixed: Security bug. Thanks, @lenonleite of www.lenonleite.com.br.

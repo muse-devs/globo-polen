@@ -57,7 +57,8 @@ class Polen_Admin {
 	 * @since    1.0.0
 	 */
 	public function enqueue_scripts() {
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/polen-admin.js', array( 'jquery' ), $this->version, false );
+        wp_register_script( 'vuejs', plugin_dir_url( __FILE__ ) . 'js/vendor/' . get_assets_folder() . 'vue.js', array(), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/polen-admin.js', array( 'jquery', 'vuejs' ), $this->version, false );
 	}
         
         
