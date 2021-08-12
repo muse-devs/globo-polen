@@ -26,6 +26,8 @@ class Tributes_API_Router extends \WP_REST_Controller
 
         add_action( 'wp_ajax_check_tribute_hash_exists',        [ $controller, 'check_hash_exists' ] );
         add_action( 'wp_ajax_nopriv_check_tribute_hash_exists', [ $controller, 'check_hash_exists' ] );
+
+        add_action( 'wp_ajax_tribute_get_links_downloads', [ $controller, 'get_links_downloads' ] );
     }
 
     /**

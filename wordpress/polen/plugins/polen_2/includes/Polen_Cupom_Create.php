@@ -42,6 +42,7 @@ class Polen_Cupom_Create
         $amount = $this->validate_amount( $data );
         $discount_type = $this->validate_discount_type( $data );
         $description = $data[ 'description' ];
+        $product_ids = $data['product_ids'];
         $expiry_date = isset( $data[ 'expiry_date' ] ) ? $this->treat_expiry_date( $data[ 'expiry_date' ] ) : '';
         $usage_limit = $data[ 'usage_limit' ];
         $coupon_data = array(
@@ -57,7 +58,7 @@ class Polen_Cupom_Create
         update_post_meta( $new_coupon_id, 'discount_type', $discount_type );
         update_post_meta( $new_coupon_id, 'coupon_amount', $amount );
         update_post_meta( $new_coupon_id, 'individual_use', 'no' );
-        update_post_meta( $new_coupon_id, 'product_ids', '' );
+        update_post_meta( $new_coupon_id, 'product_ids', $product_ids );
         update_post_meta( $new_coupon_id, 'exclude_product_ids', '' );
         update_post_meta( $new_coupon_id, 'exclude_sale_items', 'no' );
         update_post_meta( $new_coupon_id, 'usage_limit', $usage_limit );
