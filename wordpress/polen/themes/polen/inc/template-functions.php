@@ -7,6 +7,7 @@
 
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
 use Polen\Includes\Polen_Video_Info;
+use Polen\Social\Social_Rewrite;
 use Polen\Tributes\Tributes_Model;
 use Polen\Tributes\Tributes_Rewrite_Rules;
 
@@ -95,6 +96,15 @@ function polen_get_all_categories_url()
 function polen_get_link_watch_video_by_order_id( $order_id )
 {
 	return wc_get_account_endpoint_url('watch-video') . "{$order_id}";
+}
+
+/**
+ * Get a URL para acompanhar o pedido passando a $order_id
+ * @param int $order_id
+ */
+function polen_get_link_order_status( $order_id )
+{
+	return polen_get_url_my_account() . "view-order/" . "{$order_id}";
 }
 
 
@@ -278,7 +288,8 @@ function polen_get_total_order_email_detail_to_talent( $order, $email )
 	) {
 		$total_order = floatval( $order->get_total() );
 		$discount = floatval( $order->get_discount_total() );
-		return polen_apply_polen_part_price( ( $total_order + $discount ) );
+		$order_is_social = social_order_is_social( $order );
+		return polen_apply_polen_part_price( ( $total_order + $discount ), $order_is_social );
 	}
 	return $order->get_total();
 }
@@ -313,9 +324,13 @@ function polen_get_videos_by_talent($talent, $json = false)
  *
  * @param float $full_price
  */
-function polen_apply_polen_part_price( $full_price )
+function polen_apply_polen_part_price( $full_price, $social = false )
 {
-    return ( floatval( $full_price ) * 0.75 );
+	if( $social ) {
+		return $full_price;
+	} else {
+		return ( floatval( $full_price ) * 0.75 );
+	}
 }
 
 
@@ -328,6 +343,7 @@ if ( ! in_array( 'all-in-one-seo-pack/all_in_one_seo_pack.php', apply_filters( '
 		global $post;
 		global $is_video;
 		$tribute_app = get_query_var( Tributes_Rewrite_Rules::TRIBUTES_QUERY_VAR_TRUBITES_APP );
+		$social_app = get_query_var( Social_Rewrite::QUERY_VARS_SOCIAL_APP );
 
 		$video_hash = get_query_var( 'video_hash' );
 		if( !empty( $post ) && $post->post_type == 'product' ) {
@@ -406,6 +422,17 @@ if ( ! in_array( 'all-in-one-seo-pack/all_in_one_seo_pack.php', apply_filters( '
 				echo "\t" . '<meta property="og:image" content="' . TEMPLATE_URI . '/tributes/assets/img/logo-to-share.png">' . "\n";
 				echo "\n";
 			}
+		} elseif ( !empty( $social_app ) && $social_app == '1' ) {
+			$image = social_get_image_by_category( social_get_category_base() );
+			echo "\n\n";
+			echo "\t" . '<meta property="og:title" content="' . get_bloginfo( 'title' ) . '">' . "\n";
+			echo "\t" . '<meta property="og:type" content="site">' . "\n";
+			echo "\t" . '<meta property="og:description" content="' . get_bloginfo( 'description' ) . '">' . "\n";
+			echo "\t" . '<meta property="og:url" content="' . site_url( 'social/crianca-esperanca' ) . '">' . "\n";
+			echo "\t" . '<meta property="og:image" content="'.$image.'">' . "\n";
+			echo "\t" . '<meta property="og:locale" content="' . get_locale() . '">' . "\n";
+			echo "\t" . '<meta property="og:site_name" content="' . get_bloginfo( 'title' ) . '">' . "\n";
+			echo "\n";
 		} else {
 			echo "\n\n";
 			echo "\t" . '<meta property="og:title" content="' . get_bloginfo( 'title' ) . '">' . "\n";
