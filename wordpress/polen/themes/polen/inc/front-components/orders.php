@@ -3,7 +3,7 @@
 /**
  *
  */
-function polen_get_order_flow_layout($array_status)
+function polen_get_order_flow_layout($array_status, $order_number, $whatsapp_number = "", $redux_whatsapp = 0)
 {
 	//status: complete, in-progress, pending, fail
 	//title: string
@@ -25,6 +25,7 @@ function polen_get_order_flow_layout($array_status)
 	if ($new_array[2]['status'] === "complete") {
 		$class = " complete";
 	}
+
 ?>
 	<div class="row">
 		<div class="col-md-12">
@@ -38,6 +39,12 @@ function polen_get_order_flow_layout($array_status)
 						<span class="text">
 							<h4 class="title"><?php echo $value['title']; ?></h4>
 							<p class="description"><?php echo $value['description']; ?></p>
+							<?php
+							if ($redux_whatsapp == "1" && !isset($first)) {
+								$first = true;
+								polen_form_add_whatsapp($order_number, $whatsapp_number);
+							}
+							?>
 						</span>
 					</li>
 				<?php endforeach; ?>
@@ -52,8 +59,9 @@ function polen_get_order_flow_layout($array_status)
  * Funcao que seta uma order como já visualizada pelo usuário fã
  * @param \WC_Order
  */
-function polen_set_fan_viewed( $order ) {
-	if( !$order->meta_exists('polen_fan_viewed') ) {
+function polen_set_fan_viewed($order)
+{
+	if (!$order->meta_exists('polen_fan_viewed')) {
 		$order->add_meta_data('polen_fan_viewed', 1, true);
 		$order->save();
 	}

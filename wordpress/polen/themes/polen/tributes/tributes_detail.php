@@ -71,7 +71,7 @@ $is_complete = $total_success === 100;
 							<div class="col-md-5">
 								<input type="text" value="<?php echo $invite->name_inviter; ?>" class="form-control form-control-lg" disabled />
 								<?php if ($invite->video_sent) : ?>
-									<span class="status"><?php getIcon(true); ?>Vídeo já foi enviado.</span>
+									<span class="status mt-2"><?php getIcon(true); ?>Vídeo já foi enviado.</span>
 								<?php elseif ($invite->email_opened) : ?>
 									<span class="status mt-1 not-view"><?php getIcon(false); ?>Usuário não finalizou o vídeo</span>
 								<?php else : ?>
