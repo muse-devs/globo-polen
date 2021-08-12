@@ -13,6 +13,13 @@ if (isset($_REQUEST['order_id']) && !empty($_REQUEST['order_id'])) {
     $polen_order = Polen_Cart_Item_Factory::polen_cart_item_from_order($order);
 ?>
 
+    <script>
+        let instruction = replaceLineBreakString("<?= $polen_order->get_instructions_to_video(); ?>");
+        jQuery(document).ready(function ($) {
+            $("#video-instructions").html(instruction);
+        });
+    </script>
+
     <main id="primary" class="site-main mt-4">
         <header class="entry-header">
             <?php the_title('<h1 class="entry-title">', '</h1>'); ?>
@@ -95,7 +102,7 @@ if (isset($_REQUEST['order_id']) && !empty($_REQUEST['order_id'])) {
                             <div class="row mt-4">
                                 <div class="col">
                                     <p class="p">Instruções</p>
-                                    <p class="text"><?= $polen_order->get_instructions_to_video(); ?></p>
+                                    <p id="video-instructions" class="text"></p>
                                 </div>
                             </div>
                             <div class="row my-4">

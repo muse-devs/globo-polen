@@ -327,6 +327,11 @@ function polAcceptCookies() {
 	policies_box.parentNode.removeChild(policies_box);
 }
 
+function replaceLineBreakString(string) {
+	let instruction = string.replace(/&#38;#13;/g, "<br>").replace(/&#38;#10;/g, "<br>");
+	return instruction;
+}
+
 function polRequestZapier(formName, url) {
 	jQuery
 	.post(
