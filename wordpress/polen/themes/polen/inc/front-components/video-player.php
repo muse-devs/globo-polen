@@ -100,11 +100,18 @@ function polen_get_video_player($talent, $video, $user_id, $product = null)
 	wp_enqueue_script('vimeo');
 	$video_url = home_url() . "/v/" . $video->hash;
 	$isRateble = \Polen\Includes\Polen_Order_Review::can_make_review($user_id, $video->order_id);
+	$is_social = social_user_is_social($talent->user_id);
 ?>
 	<div class="row video-card">
 		<header class="col-md-6 p-0">
-			<div id="video-box">
+			<div id="video-box" class="video-box">
 				<div id="polen-video" class="polen-video"></div>
+				<div class="water-mark">
+					<?php if ($is_social) : ?>
+						<img src="<?php echo TEMPLATE_URI ?>/assets/img/criesp/logo-criesp.png" class="logo social" alt="Logo Criança Esperança" />
+					<?php endif; ?>
+					<img src="<?php echo TEMPLATE_URI ?>/assets/img/logo.png" class="logo polen" alt="Logo Polen" />
+				</div>
 			</div>
 			<script>
 				jQuery(document).ready(function() {
