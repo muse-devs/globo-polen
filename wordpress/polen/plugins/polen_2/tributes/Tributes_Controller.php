@@ -138,6 +138,16 @@ class Tributes_Controller
         return ( empty( trim( $slug ) ) ) ? false : true;
     }
 
+
+    /**
+     * Pega o maximo de Invites possiveis por Tribute
+     * @return int
+     */
+    static public function tribute_max_invites()
+    {
+        return 9;
+    }
+
     /**
      * Validacao de Nonce
      * @param string
