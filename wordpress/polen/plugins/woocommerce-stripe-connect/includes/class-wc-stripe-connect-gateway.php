@@ -562,7 +562,6 @@ class ZCWC_Stripe_Connect_Gateway extends WC_Payment_Gateway_CC {
 					if ( function_exists( 'wc_increase_stock_levels' ) ) {
 						wc_increase_stock_levels( $order->get_id() );
 					}
-					
 					break;
 				default :
 					break;
