@@ -3,8 +3,8 @@ Contributors: dovyp, redux, kprovance
 Tags: gutenberg, blocks, gutenberg blocks, editor, block, page builder, block editor, block library, editor, templates, library
 Requires at least: 4.0
 Requires PHP: 7.1
-Tested up to: 5.8
-Stable tag: 4.2.11
+Tested up to: 5.8.1
+Stable tag: 4.2.14
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -151,6 +151,17 @@ If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg
 6. Within each template kit you can see the full page template types.
 
 == Changelog ==
+
+= 4.2.14 =
+Fixed: Parse error in Import/Export module due to old versions of PHP.
+
+= 4.2.13 =
+Fixed: #3822 - Default value function returns string or array to prevent type error.
+Modified: #3820 - Better support for Redux embedded in themes.
+Modified: `install_plugins` security level now required to install Template blocks that require additional plugins.  This was done for security reasons.
+Added: New global arg `load_on_cron`.  Set to true if you require Redux to run within a cron initiated function.
+Removed: URL based  Import/Export option due to security concerns.  Manual Import/Export features remain.
+Removed: Support URL feature due to security issues.  Please use WordPress Site Health 'copy to clipboard' compiler to submit system data when reporting issues.
 
 = 4.2.11 =
 Fixed: Removed type declarations on core return values to support improperly written third-party extensions.
