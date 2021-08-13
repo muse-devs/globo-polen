@@ -179,17 +179,16 @@ class ZCWC_Stripe_Connect {
 
 		add_action( 'woocommerce_admin_order_data_after_shipping_address', array( $this, 'admin_order_display_stripe_transfers' ) );
 
-		add_action( 'wcpv_commission_added', array( $this, 'handle_commission' ) );
+		// add_action( 'wcpv_commission_added', array( $this, 'handle_commission' ) );
 
-		add_filter( 'bulk_actions-toplevel_page_wcpv-commissions', array( $this, 'add_commission_bulk_actions' ) );
+		// add_filter( 'bulk_actions-toplevel_page_wcpv-commissions', array( $this, 'add_commission_bulk_actions' ) );
 
-		add_action( 'wcpv_commission_list_bulk_action', array( $this, 'process_bulk_action' ) );
+		// add_action( 'wcpv_commission_list_bulk_action', array( $this, 'process_bulk_action' ) );
 
 		add_action( 'woocommerce_process_product_meta_subscription', array( $this, 'save_product_pass_shipping_tax_field_general' ) );
 		add_action( 'woocommerce_process_product_meta_variable-subscription', array( $this, 'save_product_pass_shipping_tax_field_general' ) );
 
-		add_action( 'wc_ajax_wc_stripe_connect_verify_intent', 
-			array( $this, 'verify_intent' ) );
+		add_action( 'wc_ajax_wc_stripe_connect_verify_intent', array( $this, 'verify_intent' ) );
 
 		// Modify emails emails.
 		add_filter( 'woocommerce_email_classes', array( $this, 'add_emails' ), 20 );
@@ -579,7 +578,6 @@ class ZCWC_Stripe_Connect {
 	 */
 	public function handle_commission( $order ) {
 
-
 		if( 'zcwc_stripe_connect' != $order->get_payment_method() ) {
 			return;
 		}
@@ -597,21 +595,20 @@ class ZCWC_Stripe_Connect {
 
 		$gateway->set_current_order_id( $order->get_id() );
 
-		$commission 	= new WC_Product_Vendors_Commission( new WC_Product_Vendors_Stripe_Connect_MassPay );
-		$commissions 	= $commission->get_commission_by_order_id( $order->get_id() , 'unpaid' );
+		// $commission 	= new WC_Product_Vendors_Commission( new WC_Product_Vendors_Stripe_Connect_MassPay );
+		// $commissions = $commission->get_commission_by_order_id( $order->get_id() , 'unpaid' );
 
 		$commission_ids = array();
 		foreach( $commissions as $c ) {
 			$commission_ids[ $c->id ] = absint( $c->id );
 		}
 		
-		//this will allow all commissions to be transferred separately.
-		add_filter( 'wcpv_combine_total_commission_payout_per_vendor', '__return_false' );
+		// this will allow all commissions to be transferred separately.
+		// add_filter( 'wcpv_combine_total_commission_payout_per_vendor', '__return_false' );
 		
 		if ( ! empty( $commission_ids ) ) {
 			try {
 				$commission->pay( $commission_ids );
-
 			} catch ( Exception $e ) {
 				if( 'yes' === $gateway->debug ) {
 					$gateway->log->add( $gateway->id, $e->getMessage() );
@@ -655,8 +652,8 @@ class ZCWC_Stripe_Connect {
 
 			$ids = array_map( 'absint', $_REQUEST['ids'] );
 
-			//this will allow all commissions to be transferred separately.
-			add_filter( 'wcpv_combine_total_commission_payout_per_vendor', '__return_false' );
+			// this will allow all commissions to be transferred separately.
+			// add_filter( 'wcpv_combine_total_commission_payout_per_vendor', '__return_false' );
 			
 			try {
 				$commission->pay( $ids );

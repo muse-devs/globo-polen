@@ -139,14 +139,14 @@ try {
 		} else {
 		
 			$payment_params = array(
-			  'amount' => $this->money_format( $order->get_total() ),
-			  'currency' => $order->get_currency(),
-			  'customer' => $customer->id,
-			  'payment_method' => $payment_method_id,
-			  'transfer_group' => 'order_' . $order->get_id(),
-			  'confirm' => true,
-			  'description' => sprintf('%s%s', $this->invoice_prefix, $order->get_id() ),
-			  'metadata' => array( 'order' => $order->get_id() )
+				'amount' => $this->money_format( $order->get_total() ),
+				'currency' => $order->get_currency(),
+				'customer' => $customer->id,
+				'payment_method' => $payment_method_id,
+				'transfer_group' => 'order_' . $order->get_id(),
+				'confirm' => true,
+				'description' => sprintf('%s%s', $this->invoice_prefix, $order->get_id() ),
+				'metadata' => array( 'order' => $order->get_id() )
 			);
 
 			if( $using_saved_card && 'yes' == $this->cvc_on_saved ) {
@@ -172,15 +172,36 @@ try {
 				$this->log->add( $this->id, 'PaymentIntent Response: ' . print_r( $paymentIntent, true ) );
 			}
 
-			if( $this->has_subscription( $order->get_id() ) ) {
+			/* if( $this->has_subscription( $order->get_id() ) ) {
 		   		$this->save_subscription_payment_method( $order->get_id(), $customer->id, $payment_method_id );
-		   	}
+		   	} */
 
 		    if( 'succeeded' === $paymentIntent->status ) {
 
-			   	$this->update_order_status( $order, $paymentIntent, $transfers, $commissions_paid );
+				$order->update_status( 'payment-approved' );
+				wc_reduce_stock_levels( $order->get_id() );
+				$order->save();
 		   	
 		    	WC()->cart->empty_cart();
+
+				$args = array(
+					'amount' => 25000,
+					'currency' => get_woocommerce_currency(),
+					'destination' => 'acct_1JFPftQroOyCBfrs',
+					'description' => sprintf( 
+						esc_html__('Transfer from %s (%s) to (%s)', 'woocommerce-stripe-connect' ),
+						get_bloginfo('name'),
+						home_url('/'),
+						'Cubo9'
+					),
+					'metadata' => array(
+						'from_name' => get_bloginfo('name'),
+						'from_url' => home_url('/'),
+						'to_vendor' => 'Cubo9',
+					),
+					'source_transaction' => get_post_meta( $order->get_id(), '_stripe_charge', true ),
+				);
+				$commission = \Stripe\Transfer::create( $args );
 	    	
 		    	return array(
 		    		'result' => 'success',
