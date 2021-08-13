@@ -1,6 +1,6 @@
 (window["__wcAdmin_webpackJsonp"] = window["__wcAdmin_webpackJsonp"] || []).push([[8],{
 
-/***/ 527:
+/***/ 480:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -18,31 +18,31 @@ var prop_types_default = /*#__PURE__*/__webpack_require__.n(prop_types);
 var external_wp_i18n_ = __webpack_require__(2);
 
 // EXTERNAL MODULE: ./client/analytics/report/coupons/config.js
-var config = __webpack_require__(579);
+var config = __webpack_require__(531);
 
 // EXTERNAL MODULE: external "lodash"
 var external_lodash_ = __webpack_require__(3);
 
 // EXTERNAL MODULE: external ["wc","components"]
-var external_wc_components_ = __webpack_require__(23);
+var external_wc_components_ = __webpack_require__(21);
 
 // EXTERNAL MODULE: external ["wc","navigation"]
 var external_wc_navigation_ = __webpack_require__(12);
 
 // EXTERNAL MODULE: external ["wc","number"]
-var external_wc_number_ = __webpack_require__(139);
+var external_wc_number_ = __webpack_require__(120);
 
-// EXTERNAL MODULE: ./client/wc-admin-settings/index.js
-var wc_admin_settings = __webpack_require__(17);
+// EXTERNAL MODULE: ./packages/wc-admin-settings/build-module/index.js
+var build_module = __webpack_require__(15);
 
 // EXTERNAL MODULE: external ["wc","date"]
-var external_wc_date_ = __webpack_require__(21);
+var external_wc_date_ = __webpack_require__(19);
 
 // EXTERNAL MODULE: ./client/analytics/components/report-table/index.js + 2 modules
-var report_table = __webpack_require__(550);
+var report_table = __webpack_require__(502);
 
 // EXTERNAL MODULE: ./client/lib/currency-context.js
-var currency_context = __webpack_require__(545);
+var currency_context = __webpack_require__(497);
 
 // CONCATENATED MODULE: ./client/analytics/report/coupons/table.js
 
@@ -109,7 +109,7 @@ class table_CouponsReportTable extends external_wp_element_["Component"] {
       query
     } = this.props;
     const persistedQuery = Object(external_wc_navigation_["getPersistedQuery"])(query);
-    const dateFormat = Object(wc_admin_settings["h" /* getSetting */])('dateFormat', external_wc_date_["defaultTableDateFormat"]);
+    const dateFormat = Object(build_module["f" /* getSetting */])('dateFormat', external_wc_date_["defaultTableDateFormat"]);
     const {
       formatAmount,
       formatDecimal: getCurrencyFormatDecimal,
@@ -239,16 +239,16 @@ class table_CouponsReportTable extends external_wp_element_["Component"] {
 table_CouponsReportTable.contextType = currency_context["a" /* CurrencyContext */];
 /* harmony default export */ var table = (table_CouponsReportTable);
 // EXTERNAL MODULE: ./client/lib/get-selected-chart/index.js
-var get_selected_chart = __webpack_require__(555);
+var get_selected_chart = __webpack_require__(504);
 
 // EXTERNAL MODULE: ./client/analytics/components/report-chart/index.js + 1 modules
-var report_chart = __webpack_require__(552);
+var report_chart = __webpack_require__(503);
 
 // EXTERNAL MODULE: ./client/analytics/components/report-summary/index.js
-var report_summary = __webpack_require__(556);
+var report_summary = __webpack_require__(505);
 
 // EXTERNAL MODULE: ./client/analytics/components/report-filters/index.js
-var report_filters = __webpack_require__(549);
+var report_filters = __webpack_require__(501);
 
 // CONCATENATED MODULE: ./client/analytics/report/coupons/index.js
 
@@ -345,7 +345,7 @@ coupons_CouponsReport.propTypes = {
 
 /***/ }),
 
-/***/ 546:
+/***/ 498:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -358,9 +358,9 @@ coupons_CouponsReport.propTypes = {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return getTaxRateLabels; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return getVariationName; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return getVariationLabels; });
-/* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(16);
+/* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(14);
 /* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_url__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(20);
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(17);
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_2__);
@@ -368,8 +368,8 @@ coupons_CouponsReport.propTypes = {
 /* harmony import */ var _woocommerce_navigation__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_navigation__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _woocommerce_data__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(11);
 /* harmony import */ var _woocommerce_data__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_data__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _woocommerce_wc_admin_settings__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(17);
-/* harmony import */ var _analytics_report_taxes_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(547);
+/* harmony import */ var _woocommerce_wc_admin_settings__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(15);
+/* harmony import */ var _analytics_report_taxes_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(499);
 /**
  * External dependencies
  */
@@ -449,7 +449,7 @@ function getVariationName({
   attributes,
   name
 }) {
-  const separator = Object(_woocommerce_wc_admin_settings__WEBPACK_IMPORTED_MODULE_5__[/* getSetting */ "h"])('variationTitleAttributesSeparator', ' - ');
+  const separator = Object(_woocommerce_wc_admin_settings__WEBPACK_IMPORTED_MODULE_5__[/* getSetting */ "f"])('variationTitleAttributesSeparator', ' - ');
 
   if (name.indexOf(separator) > -1) {
     return name;
@@ -478,7 +478,7 @@ const getVariationLabels = getRequestByIdString(({
 
 /***/ }),
 
-/***/ 547:
+/***/ 499:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -495,21 +495,21 @@ function getTaxCode(tax) {
 
 /***/ }),
 
-/***/ 579:
+/***/ 531:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return charts; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return filters; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return advancedFilters; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return filters; });
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(34);
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(30);
 /* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(7);
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _lib_async_requests__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(546);
-/* harmony import */ var _customer_effort_score_tracks_data_constants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(62);
+/* harmony import */ var _lib_async_requests__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(498);
+/* harmony import */ var _customer_effort_score_tracks_data_constants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(53);
 /**
  * External dependencies
  */
@@ -541,50 +541,62 @@ const charts = Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__["applyFilter
   orderby: 'amount',
   type: 'currency'
 }]);
-const filters = Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__["applyFilters"])(COUPON_REPORT_FILTERS_FILTER, [{
-  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Show', 'woocommerce-admin'),
-  staticParams: ['chartType', 'paged', 'per_page'],
-  param: 'filter',
-  showFilters: () => true,
-  filters: [{
-    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('All Coupons', 'woocommerce-admin'),
-    value: 'all'
-  }, {
-    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Single Coupon', 'woocommerce-admin'),
-    value: 'select_coupon',
+const advancedFilters = Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__["applyFilters"])(COUPON_REPORT_ADVANCED_FILTERS_FILTER, {
+  filters: {},
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["_x"])('Coupons Match {{select /}} Filters', 'A sentence describing filters for Coupons. See screen shot for context: https://cloudup.com/cSsUY9VeCVJ', 'woocommerce-admin')
+});
+const filterValues = [{
+  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('All Coupons', 'woocommerce-admin'),
+  value: 'all'
+}, {
+  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Single Coupon', 'woocommerce-admin'),
+  value: 'select_coupon',
+  chartMode: 'item-comparison',
+  subFilters: [{
+    component: 'Search',
+    value: 'single_coupon',
     chartMode: 'item-comparison',
-    subFilters: [{
-      component: 'Search',
-      value: 'single_coupon',
-      chartMode: 'item-comparison',
-      path: ['select_coupon'],
-      settings: {
-        type: 'coupons',
-        param: 'coupons',
-        getLabels: _lib_async_requests__WEBPACK_IMPORTED_MODULE_3__[/* getCouponLabels */ "b"],
-        labels: {
-          placeholder: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Type to search for a coupon', 'woocommerce-admin'),
-          button: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Single Coupon', 'woocommerce-admin')
-        }
-      }
-    }]
-  }, {
-    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Comparison', 'woocommerce-admin'),
-    value: 'compare-coupons',
+    path: ['select_coupon'],
     settings: {
       type: 'coupons',
       param: 'coupons',
       getLabels: _lib_async_requests__WEBPACK_IMPORTED_MODULE_3__[/* getCouponLabels */ "b"],
       labels: {
-        title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Compare Coupon Codes', 'woocommerce-admin'),
-        update: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Compare', 'woocommerce-admin'),
-        helpText: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Check at least two coupon codes below to compare', 'woocommerce-admin')
-      },
-      onClick: addCesSurveyForAnalytics
+        placeholder: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Type to search for a coupon', 'woocommerce-admin'),
+        button: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Single Coupon', 'woocommerce-admin')
+      }
     }
   }]
+}, {
+  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Comparison', 'woocommerce-admin'),
+  value: 'compare-coupons',
+  settings: {
+    type: 'coupons',
+    param: 'coupons',
+    getLabels: _lib_async_requests__WEBPACK_IMPORTED_MODULE_3__[/* getCouponLabels */ "b"],
+    labels: {
+      title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Compare Coupon Codes', 'woocommerce-admin'),
+      update: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Compare', 'woocommerce-admin'),
+      helpText: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Check at least two coupon codes below to compare', 'woocommerce-admin')
+    },
+    onClick: addCesSurveyForAnalytics
+  }
+}];
+
+if (Object.keys(advancedFilters.filters).length) {
+  filterValues.push({
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Advanced Filters', 'woocommerce-admin'),
+    value: 'advanced'
+  });
+}
+
+const filters = Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__["applyFilters"])(COUPON_REPORT_FILTERS_FILTER, [{
+  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Show', 'woocommerce-admin'),
+  staticParams: ['chartType', 'paged', 'per_page'],
+  param: 'filter',
+  showFilters: () => true,
+  filters: filterValues
 }]);
-const advancedFilters = Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__["applyFilters"])(COUPON_REPORT_ADVANCED_FILTERS_FILTER, {});
 
 /***/ })
 
