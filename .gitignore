@@ -32,6 +32,7 @@ wordpress/polen/plugins/hello.php
 wordpress/wp-content/plugins/debug-bar/*
 wordpress/polen/plugins/debug-bar/*
 wordpress/polen/plugins/polen_2/test/*
+wordpress/polen/plugins/polen_2/composer.lock
 
 # Ignorar temas específicos
 wordpress/wp-content/themes/twenty*/
