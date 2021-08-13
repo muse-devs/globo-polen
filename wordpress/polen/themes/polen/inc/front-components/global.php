@@ -149,10 +149,10 @@ function polen_front_get_card($item, $size = "small", $social = false)
 					<?php if ($social && $item['in_stock']) : ?>
 						<span class="text">DOAR</span><br />
 					<?php else : ?>
-						<?php if($item['in_stock']) : ?><span class="mr-2"><?php Icon_Class::polen_icon_camera_video(); ?></span><?php endif; ?>
+						<?php if ($item['in_stock']) : ?><span class="mr-2"><?php Icon_Class::polen_icon_camera_video(); ?></span><?php endif; ?>
 					<?php endif; ?>
 					<?php if($item['in_stock']) : ?>
-						<?php echo $item["price"] == "0" ? 'GRÁTIS' : $item['price_formatted']; ?>
+						<?php if(!$social) echo $item["price"] == "0" ? 'GRÁTIS' : $item['price_formatted']; ?>
 					<?php else: ?>
 						<span>Esgotado</span>
 					<?php endif; ?>
@@ -428,6 +428,45 @@ function polen_form_signin_newsletter(string $event = 'newsletter')
 				<div class="col-md-8 mb-2 mb-md-0 small signin-response"></div>
 			</div>
 		</form>
+	</div>
+<?php
+}
+
+
+function polen_form_add_whatsapp($order_number, $whatsapp_number = "")
+{
+	wp_enqueue_script('form-whatsapp');
+?>
+	<div id="add-whatsapp" class="add-whatsapp row">
+		<div class="col-12 col-md-6">
+			<div class="box-round d-flex p-4 my-3">
+				<div class="mr-2">
+					<img width="57" src="<?php echo TEMPLATE_URI; ?>/assets/img/icon-whatsapp.png" alt="Ícone do Whatsapp" />
+				</div>
+				<div>
+					<?php if (!$whatsapp_number) : ?>
+						<p class="mb-2"><strong>Receba seu vídeo no Whatsapp</strong></p>
+						<p>Caso você queira receber o seu vídeo via whatsapp, preencha o campo abaixo:</p>
+					<?php else : ?>
+						<p>Você vai receber o vídeo no seu Whatsapp <?php echo $number; ?></p>
+						<p><button class="btn-link alt" v-on:click="handleEdit" v-bind:class="edit ? 'd-none' : ''">Editar</button></p>
+					<?php endif; ?>
+					<form action="/" method="POST" v-bind:class="edit ? '' : 'd-none'" v-on:submit.prevent="handleSubmit" id="form-add-whatsapp">
+						<?php //TODO botar o value que precisa ser enviado ao endpoint
+						?>
+						<input type="hidden" name="action" value="polen_whatsapp_form">
+						<input type="hidden" name="page_source" value="<?= filter_input(INPUT_SERVER, 'REQUEST_URI'); ?>" />
+						<input type="hidden" name="is_mobile" value="<?= polen_is_mobile() ? "1" : "0"; ?>" />
+						<input type="hidden" name="security" value=<?php echo wp_create_nonce('whatsapp-form'); ?>>
+						<input type="hidden" name="order" value="<?php echo $order_number; ?>" />
+
+						<input type="hidden" id="phone_cache" value="<?php echo $whatsapp_number; ?>" />
+						<input type="text" name="phone_number" v-model="phone" v-on:keyup="handleChange" placeholder="(00) 00000-0000" maxlength="15" class="form-control form-control-lg" style="background-color: transparent;" required />
+						<button type="submit" class="btn btn-outline-light btn-lg mt-3 px-5">Salvar</button>
+					</form>
+				</div>
+			</div>
+		</div>
 	</div>
 <?php
 }

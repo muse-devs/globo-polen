@@ -62,7 +62,8 @@
 							$('#video-email').text(obj['data'][0]['email']);
 							$('#video-category').text(obj['data'][0]['category']);
 							$('#expiration-time').text(obj['data'][0]['expiration']);
-							$('#video-instructions').html(obj['data'][0]['instructions']);
+							let instruction = obj['data'][0]['instructions'].replace(/&#38;#13;/g, "<br>").replace(/&#38;#10;/g, "<br>"); // Trata os caracteres referentes a quebra de linha
+							$('#video-instructions').html(instruction);
 							$('.modal-group-buttons').attr('order-id',obj['data'][0]['order_id'] );
 						}
 					}

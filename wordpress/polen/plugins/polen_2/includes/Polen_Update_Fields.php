@@ -68,6 +68,8 @@ class Polen_Update_Fields
         wp_enqueue_media();
         wp_enqueue_style( 'jquery-ui', 'https://code.jquery.com/ui/' . $wp_scripts->registered['jquery-ui-core']->ver . '/themes/smoothness/jquery-ui.min.css' );
         wp_enqueue_script('jquery-maskedinput', Polen_Admin::get_js_url( 'vendor/jquery.maskedinput.min.js'), array( 'jquery' ), null, true );
+        wp_enqueue_script('StreamSaver', Polen_Admin::get_js_url( 'vendor/StreamSaver.js'), array( 'jquery' ), null, true );
+        wp_enqueue_script('zip-stream', Polen_Admin::get_js_url( 'vendor/zip-stream.js'), array( 'jquery' ), null, true );
         wp_enqueue_script('polen-admin-script', Polen_Admin::get_js_url( 'admin.js' ), array( 'jquery', 'jquery-ui-core', 'jquery-ui-tabs' ), null, true );
         wp_enqueue_script('polen-midia-script', Polen_Admin::get_js_url( 'polen-midia.js' ), array( 'jquery' ), null, true );
     }

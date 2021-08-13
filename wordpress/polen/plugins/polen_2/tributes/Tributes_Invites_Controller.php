@@ -1,6 +1,7 @@
 <?php
 namespace Polen\Tributes;
 
+use Exception;
 use Polen\Includes\Vimeo\Polen_Vimeo_Response;
 use Polen\Includes\Vimeo\Polen_Vimeo_Vimeo_Options;
 use Vimeo\Exceptions\ExceptionInterface;
@@ -37,6 +38,7 @@ class Tributes_Invites_Controller
         $emails = $_POST[ 'friends' ][ 'email' ];
         $names  = $_POST[ 'friends' ][ 'name' ];
         try {
+            self::validate_max_number_invites( $tribute_id, count( $emails ) );
             for( $i = 0; $i < count( $emails ); $i++ ) {
                 $email = filter_var( $emails[ $i ], FILTER_VALIDATE_EMAIL );
                 $name  = filter_var( $names[ $i ], FILTER_SANITIZE_SPECIAL_CHARS );
@@ -84,6 +86,16 @@ class Tributes_Invites_Controller
         $tributes   = Tributes_Invites_Model::get_all_by_tribute_id( $tribute_id );
         wp_send_json_success( $tributes, 200 );
         wp_die();
+    }
+
+
+    /**
+     * @param int
+     * @return int
+     */
+    public function get_count_invites_by_tribute_id( $tribute_id )
+    {
+        return Tributes_Invites_Model::get_count_by_tribute_id( $tribute_id );
     }
 
 
@@ -139,12 +151,28 @@ class Tributes_Invites_Controller
 
             Tributes_Invites_Model::update( $data_invite_update );
             wp_send_json_success( $response->response, 200 );
-        } catch ( ExceptionInterface $e ) {
+        } catch ( VimeoRequestException $e ) {
             wp_send_json_error( $e->getMessage(), $e->getCode() );
         } catch ( \Exception $e ) {
             wp_send_json_error( $e->getMessage(), $e->getCode() );
         }
         wp_die();
+    }
+
+
+    /**
+     * Valida se ainda pode criar mais convites
+     * @param int
+     * @throws \Exception
+     */
+    static public function validate_max_number_invites( $tribute_id, $count_emails )
+    {
+        $max_invites = Tributes_Controller::tribute_max_invites();
+        $total_alredy_invites = Tributes_Invites_Model::get_count_by_tribute_id( $tribute_id );
+        if( $max_invites < ( $total_alredy_invites + $count_emails ) ) {
+            $max_invites -= 1;
+            throw new \Exception( "Limite de convites ({$max_invites}) atingidos.", 403 );
+        }
     }
 
 
