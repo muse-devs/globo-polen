@@ -3,6 +3,9 @@
 /**
  * @version 3.7.0
  */
+
+use Polen\Includes\Polen_Order;
+
 defined('ABSPATH') || exit;
 
 function get_icon($bool)
@@ -27,8 +30,8 @@ $social = social_order_is_social($order);
 
 global $Polen_Plugin_Settings;
 $whatsapp_form = $Polen_Plugin_Settings['polen_whatsapp_form'];
-//TODO número de telefone cadastrado do usuário
-$number = "";
+
+$number = $order->get_meta( Polen_Order::WHATSAPP_NUMBER_META_KEY );
 
 ?>
 <div class="row">

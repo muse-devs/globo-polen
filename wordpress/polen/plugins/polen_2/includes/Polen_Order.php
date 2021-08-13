@@ -18,12 +18,17 @@ class Polen_Order
 //    const METADATA_VIMEO_VIDEO_EMBED_CONTENT = 'vimeo_video_embed_content';
     const SLUG_ORDER_COMPLETE = 'completed';
     const SLUG_ORDER_COMPLETE_INSIDE = 'wc-completed';
+
+    const WHATSAPP_NUMBER_META_KEY = 'polen_whatsapp_number';
+    const WHATSAPP_NUMBER_NONCE_ACTION = 'polen_whatsapp_nonce_action';
     
     public function __construct( $static = false ) {
         if( $static ) {
             add_action(    'wp_ajax_create_first_order',         array( $this, 'create_first_order' ) );
             add_action(    'wp_ajax_search_order_status',        array( $this, 'check_order_status' ) );
             add_action(    'wp_ajax_nopriv_search_order_status', array( $this, 'check_order_status' ) );
+            add_action(    'wp_ajax_nopriv_polen_whatsapp_form', array( $this, 'set_whatsapp_into_order' ) );
+            add_action(    'wp_ajax_polen_whatsapp_form',        array( $this, 'set_whatsapp_into_order' ) );
             add_shortcode( 'polen_search_order',                 array( $this, 'polen_search_order_shortcode' ) );
             add_shortcode( 'polen_search_result_shortcode',      array( $this, 'polen_search_result_shortcode' ) );
             add_shortcode( 'polen_video_shortcode',              array( $this, 'polen_watch_video' ) );
@@ -268,5 +273,54 @@ class Polen_Order
         // $order->set_status( Polen_WooCommerce::ORDER_STATUS_TALENT_ACCEPTED );
         wp_send_json_success( 'ok', 201 );
         wp_die();
+    }
+
+
+    /**
+     * Salvar na Order o numero de whatsapp para
+     * recebimento do video final
+     */
+    public function set_whatsapp_into_order()
+    {
+        $nonce = filter_input( INPUT_POST, 'security' );
+        $order_id = filter_input( INPUT_POST, 'order', FILTER_SANITIZE_NUMBER_INT );
+        $phone_number = filter_input( INPUT_POST, 'phone_number' );
+
+        try {
+            $this->validate_nonce( $nonce, self::WHATSAPP_NUMBER_NONCE_ACTION );
+            $order = wc_get_order( $order_id );
+            $this->validate_order_empty( $order );
+        } catch ( \Exception $e ) {
+            wp_send_json_error( $e->getMessage(), $e->getCode() );
+            wp_die();
+        }
+
+        //TODO: Validação do Numero de telefone
+        
+        $order->add_meta_data( self::WHATSAPP_NUMBER_META_KEY, $phone_number, true );
+        $order->save();
+        wp_send_json_success();
+        wp_die();
+    }
+
+
+    /**
+     * Validacao de Nonce
+     * @param string
+     * @param string
+     * @throws \Exception
+     */
+    private function validate_nonce( $nonce, $action )
+    {
+        if( ! wp_verify_nonce( $nonce, $action ) ) {
+            throw new \Exception( 'Erro na segurança', 403 );
+        }
+    }
+
+    private function validate_order_empty( $order )
+    {
+        if( empty( $order ) ) {
+            throw new \Exception( 'Pedido não encontrado', 403 );
+        }
     }
 }
