@@ -446,20 +446,21 @@ function polen_form_add_whatsapp($order_number, $whatsapp_number = "")
 					<img width="57" src="<?php echo TEMPLATE_URI; ?>/assets/img/icon-whatsapp.png" alt="Ícone do Whatsapp" />
 				</div>
 				<div>
-					<?php if (!$whatsapp_number) : ?>
+					<span v-if="!savedPhone">
 						<p class="mb-2"><strong>Receba seu vídeo no Whatsapp</strong></p>
 						<p>Caso você queira receber o seu vídeo via whatsapp, preencha o campo abaixo:</p>
-					<?php else : ?>
-						<p>Você vai receber o vídeo no seu Whatsapp <?php echo $whatsapp_number; ?></p>
+					</span>
+					<span v-if="savedPhone">
+						<p>Você vai receber o vídeo no seu Whatsapp {{savedPhone}}</p>
 						<p><button class="btn-link alt" v-on:click="handleEdit" v-bind:class="edit ? 'd-none' : ''">Editar</button></p>
-					<?php endif; ?>
+					</span>
 					<form action="/" method="POST" v-bind:class="edit ? '' : 'd-none'" v-on:submit.prevent="handleSubmit" id="form-add-whatsapp">
 						<?php //TODO botar o value que precisa ser enviado ao endpoint
 						?>
 						<input type="hidden" name="action" value="polen_whatsapp_form">
 						<input type="hidden" name="page_source" value="<?= filter_input(INPUT_SERVER, 'REQUEST_URI'); ?>" />
 						<input type="hidden" name="is_mobile" value="<?= polen_is_mobile() ? "1" : "0"; ?>" />
-						<input type="hidden" name="security" value=<?php echo wp_create_nonce( Polen_Order::WHATSAPP_NUMBER_NONCE_ACTION ); ?>>
+						<input type="hidden" name="security" value=<?php echo wp_create_nonce(Polen_Order::WHATSAPP_NUMBER_NONCE_ACTION); ?>>
 						<input type="hidden" name="order" value="<?php echo $order_number; ?>" />
 
 						<input type="hidden" id="phone_cache" value="<?php echo $whatsapp_number; ?>" />
