@@ -185,19 +185,19 @@ try {
 		    	WC()->cart->empty_cart();
 
 				$args = array(
-					'amount' => 25000,
+					'amount' => 25000, // Valor sem pontos ou virguras. Ex: 1.000,00 = 100000, 100,00 = 10000
 					'currency' => get_woocommerce_currency(),
-					'destination' => 'acct_1JFPftQroOyCBfrs',
+					'destination' => 'acct_1JFPftQroOyCBfrs', // ID do Lojista no Stripe
 					'description' => sprintf( 
 						esc_html__('Transfer from %s (%s) to (%s)', 'woocommerce-stripe-connect' ),
 						get_bloginfo('name'),
 						home_url('/'),
-						'Cubo9'
+						'Cubo9' // Nome do Lojista
 					),
 					'metadata' => array(
 						'from_name' => get_bloginfo('name'),
 						'from_url' => home_url('/'),
-						'to_vendor' => 'Cubo9',
+						'to_vendor' => 'Cubo9', // Nome do Lojista
 					),
 					'source_transaction' => get_post_meta( $order->get_id(), '_stripe_charge', true ),
 				);
