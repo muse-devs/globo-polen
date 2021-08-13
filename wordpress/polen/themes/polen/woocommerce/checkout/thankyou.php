@@ -24,6 +24,12 @@ $email_billing = $order_item_cart->get_email_to_video();
 $order_array = Order_Class::polen_get_order_flow_obj($order_number, $order_status, $email_billing);
 
 $social = social_order_is_social($order);
+
+global $Polen_Plugin_Settings;
+$whatsapp_form = $Polen_Plugin_Settings['polen_whatsapp_form'];
+//TODO número de telefone cadastrado do usuário
+$number = "";
+
 ?>
 <div class="row">
 	<?php if( ! $social ) : ?>
@@ -35,7 +41,7 @@ $social = social_order_is_social($order);
 		<?php $social && criesp_get_thankyou_box(); ?>
 	</div>
 	<div class="col-md-12">
-		<?php polen_get_order_flow_layout($order_array); ?>
+		<?php polen_get_order_flow_layout($order_array, $order_number, $number, $whatsapp_form); ?>
 	</div>
 </div>
 
