@@ -340,7 +340,7 @@ function polRequestZapier(formName, url) {
 	)
 }
 
-function polAjaxForm(formName, callBack, callBackError) {
+function polAjaxForm(formName, callBack, callBackError, reset = true) {
 	polSpinner(null, formName);
 	blockUnblockInputs(formName, true);
 	jQuery
@@ -349,7 +349,7 @@ function polAjaxForm(formName, callBack, callBackError) {
 			jQuery(formName).serialize(),
 			function (result) {
 				if (result.success) {
-					document.querySelector(formName).reset();
+					reset && document.querySelector(formName).reset();
 					callBack(result.data);
 				} else {
 					callBackError(result.data);
