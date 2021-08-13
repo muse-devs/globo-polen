@@ -1,5 +1,7 @@
 <?php
 
+use Polen\Includes\Polen_Order;
+
 function polen_front_get_banner_with_carousel($social = false)
 {
 	$carrousel = array(
@@ -448,7 +450,7 @@ function polen_form_add_whatsapp($order_number, $whatsapp_number = "")
 						<p class="mb-2"><strong>Receba seu vídeo no Whatsapp</strong></p>
 						<p>Caso você queira receber o seu vídeo via whatsapp, preencha o campo abaixo:</p>
 					<?php else : ?>
-						<p>Você vai receber o vídeo no seu Whatsapp <?php echo $number; ?></p>
+						<p>Você vai receber o vídeo no seu Whatsapp <?php echo $whatsapp_number; ?></p>
 						<p><button class="btn-link alt" v-on:click="handleEdit" v-bind:class="edit ? 'd-none' : ''">Editar</button></p>
 					<?php endif; ?>
 					<form action="/" method="POST" v-bind:class="edit ? '' : 'd-none'" v-on:submit.prevent="handleSubmit" id="form-add-whatsapp">
@@ -457,7 +459,7 @@ function polen_form_add_whatsapp($order_number, $whatsapp_number = "")
 						<input type="hidden" name="action" value="polen_whatsapp_form">
 						<input type="hidden" name="page_source" value="<?= filter_input(INPUT_SERVER, 'REQUEST_URI'); ?>" />
 						<input type="hidden" name="is_mobile" value="<?= polen_is_mobile() ? "1" : "0"; ?>" />
-						<input type="hidden" name="security" value=<?php echo wp_create_nonce('whatsapp-form'); ?>>
+						<input type="hidden" name="security" value=<?php echo wp_create_nonce( Polen_Order::WHATSAPP_NUMBER_NONCE_ACTION ); ?>>
 						<input type="hidden" name="order" value="<?php echo $order_number; ?>" />
 
 						<input type="hidden" id="phone_cache" value="<?php echo $whatsapp_number; ?>" />
