@@ -93,9 +93,14 @@ $total = polen_get_total_order_email_detail_to_talent( $order, $email );
 			<tr>
 				<td colspan="3">
 					<p class="details_title">Instruções</p>
-					<span class="details_value_small"><?php echo $item->get_instructions_to_video(); ?></span>
+					<span id="video-instructions" class="details_value_small"></span>
 				</td>
 			</tr>
 		</tbody>
 	</table>
 </div>
+
+<script>
+	let instruction = "<?php echo $item->get_instructions_to_video(); ?>";
+	document.getElementById('video-instructions').innerHTML = instruction.replace(/&#38;#13;/g, "<br>").replace(/&#38;#10;/g, "<br>");
+</script>

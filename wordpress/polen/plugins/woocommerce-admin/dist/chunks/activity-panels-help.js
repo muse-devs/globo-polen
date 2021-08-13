@@ -1,6 +1,31 @@
 (window["__wcAdmin_webpackJsonp"] = window["__wcAdmin_webpackJsonp"] || []).push([[4],{
 
-/***/ 565:
+/***/ 470:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(0);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8);
+/* harmony import */ var _wordpress_primitives__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__);
+
+
+/**
+ * WordPress dependencies
+ */
+
+var chevronRight = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__["SVG"], {
+  xmlns: "http://www.w3.org/2000/svg",
+  viewBox: "0 0 24 24"
+}, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__["Path"], {
+  d: "M10.6 6L9.4 7l4.6 5-4.6 5 1.2 1 5.4-6z"
+}));
+/* harmony default export */ __webpack_exports__["a"] = (chevronRight);
+//# sourceMappingURL=chevron-right.js.map
+
+/***/ }),
+
+/***/ 517:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -10,11 +35,11 @@
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(1);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _woocommerce_experimental__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(22);
+/* harmony import */ var _woocommerce_experimental__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(20);
 /* harmony import */ var _woocommerce_experimental__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_experimental__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _woocommerce_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(23);
+/* harmony import */ var _woocommerce_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(21);
 /* harmony import */ var _woocommerce_components__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_components__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(566);
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(518);
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_5__);
 
 
@@ -87,18 +112,18 @@ ActivityHeader.propTypes = {
 
 /***/ }),
 
-/***/ 566:
+/***/ 518:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ 626:
+/***/ 577:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(global, module) {/* harmony import */ var _ponyfill_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(628);
+/* WEBPACK VAR INJECTION */(function(global, module) {/* harmony import */ var _ponyfill_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(579);
 /* global window */
 
 
@@ -117,11 +142,11 @@ if (typeof self !== 'undefined') {
 var result = Object(_ponyfill_js__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])(root);
 /* harmony default export */ __webpack_exports__["a"] = (result);
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(80), __webpack_require__(627)(module)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(78), __webpack_require__(578)(module)))
 
 /***/ }),
 
-/***/ 627:
+/***/ 578:
 /***/ (function(module, exports) {
 
 module.exports = function(originalModule) {
@@ -152,7 +177,7 @@ module.exports = function(originalModule) {
 
 /***/ }),
 
-/***/ 628:
+/***/ 579:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -178,7 +203,7 @@ function symbolObservablePonyfill(root) {
 
 /***/ }),
 
-/***/ 657:
+/***/ 607:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -196,37 +221,37 @@ var external_wp_element_ = __webpack_require__(0);
 var external_wp_i18n_ = __webpack_require__(2);
 
 // EXTERNAL MODULE: external ["wc","experimental"]
-var external_wc_experimental_ = __webpack_require__(22);
+var external_wc_experimental_ = __webpack_require__(20);
 
 // EXTERNAL MODULE: external ["wp","data"]
 var external_wp_data_ = __webpack_require__(7);
 
 // EXTERNAL MODULE: external ["wp","hooks"]
-var external_wp_hooks_ = __webpack_require__(34);
+var external_wp_hooks_ = __webpack_require__(30);
 
-// EXTERNAL MODULE: ./node_modules/@wordpress/icons/build-module/icon/index.js
-var icon = __webpack_require__(147);
+// EXTERNAL MODULE: ./node_modules/@wordpress/icons/build-module/icon/index.js + 2 modules
+var icon = __webpack_require__(115);
 
 // EXTERNAL MODULE: ./node_modules/@wordpress/icons/build-module/library/page.js
-var page = __webpack_require__(541);
+var page = __webpack_require__(494);
 
 // EXTERNAL MODULE: ./node_modules/@wordpress/icons/build-module/library/chevron-right.js
-var chevron_right = __webpack_require__(588);
+var chevron_right = __webpack_require__(470);
 
 // EXTERNAL MODULE: external "lodash"
 var external_lodash_ = __webpack_require__(3);
 
-// EXTERNAL MODULE: ./client/wc-admin-settings/index.js
-var wc_admin_settings = __webpack_require__(17);
+// EXTERNAL MODULE: ./packages/wc-admin-settings/build-module/index.js
+var build_module = __webpack_require__(15);
 
 // EXTERNAL MODULE: external ["wc","components"]
-var external_wc_components_ = __webpack_require__(23);
+var external_wc_components_ = __webpack_require__(21);
 
 // EXTERNAL MODULE: external ["wc","data"]
 var external_wc_data_ = __webpack_require__(11);
 
 // EXTERNAL MODULE: ./node_modules/symbol-observable/es/index.js
-var es = __webpack_require__(626);
+var es = __webpack_require__(577);
 
 // CONCATENATED MODULE: ./node_modules/redux/es/redux.js
 
@@ -880,16 +905,13 @@ if (false) {}
 
 
 // EXTERNAL MODULE: external ["wc","tracks"]
-var external_wc_tracks_ = __webpack_require__(18);
+var external_wc_tracks_ = __webpack_require__(16);
 
 // EXTERNAL MODULE: ./client/header/activity-panel/activity-header/index.js
-var activity_header = __webpack_require__(565);
+var activity_header = __webpack_require__(517);
 
 // EXTERNAL MODULE: ./client/dashboard/utils.js
-var utils = __webpack_require__(70);
-
-// EXTERNAL MODULE: ./client/task-list/tasks/payments/methods/index.js + 13 modules
-var methods = __webpack_require__(585);
+var utils = __webpack_require__(59);
 
 // CONCATENATED MODULE: ./client/header/activity-panel/panels/help.js
 
@@ -912,7 +934,6 @@ var methods = __webpack_require__(585);
 /**
  * Internal dependencies
  */
-
 
 
 
@@ -953,58 +974,38 @@ function getAppearanceItems() {
   }];
 }
 
-function getPaymentsItems(props) {
+function getPaymentGatewaySuggestions(props) {
   const {
-    countryCode,
-    onboardingStatus,
-    profileItems
+    paymentGatewaySuggestions
   } = props;
-  const paymentMethods = props.getPaymentMethods({
-    activePlugins: [],
-    countryCode,
-    onboardingStatus,
-    options: {},
-    profileItems
-  });
-
-  const methodIsVisible = methodKey => Boolean(paymentMethods.find(method => method.key === methodKey));
-
-  const showWCPay = methodIsVisible('wcpay');
-  const showStripe = methodIsVisible('stripe');
-  const showKlarnaCheckout = methodIsVisible('klarna_checkout');
-  const showKlarnaPayments = methodIsVisible('klarna_payments');
-  const showPayPal = methodIsVisible('paypal');
-  const showSquare = methodIsVisible('square');
-  const showPayFast = methodIsVisible('payfast');
-  const showEway = methodIsVisible('eway');
   return [{
     title: Object(external_wp_i18n_["__"])('Which Payment Option is Right for Me?', 'woocommerce-admin'),
     link: 'https://docs.woocommerce.com/document/premium-payment-gateway-extensions/?utm_source=help_panel'
-  }, showWCPay && {
+  }, paymentGatewaySuggestions.woocommerce_payments && {
     title: Object(external_wp_i18n_["__"])('WooCommerce Payments Start Up Guide', 'woocommerce-admin'),
     link: 'https://docs.woocommerce.com/document/payments//?utm_source=help_panel'
-  }, showWCPay && {
+  }, paymentGatewaySuggestions.woocommerce_payments && {
     title: Object(external_wp_i18n_["__"])('WooCommerce Payments FAQs', 'woocommerce-admin'),
     link: 'https://docs.woocommerce.com/documentation/woocommerce-payments/woocommerce-payments-faqs/?utm_source=help_panel'
-  }, showStripe && {
+  }, paymentGatewaySuggestions.stripe && {
     title: Object(external_wp_i18n_["__"])('Stripe Setup and Configuration', 'woocommerce-admin'),
     link: 'https://docs.woocommerce.com/document/stripe/?utm_source=help_panel'
-  }, showPayPal && {
+  }, paymentGatewaySuggestions['ppcp-gateway'] && {
     title: Object(external_wp_i18n_["__"])('PayPal Checkout Setup and Configuration', 'woocommerce-admin'),
     link: 'https://docs.woocommerce.com/document/2-0/woocommerce-paypal-payments/#section-3'
-  }, showSquare && {
+  }, paymentGatewaySuggestions.square_credit_card && {
     title: Object(external_wp_i18n_["__"])('Square - Get started', 'woocommerce-admin'),
     link: 'https://docs.woocommerce.com/document/woocommerce-square/?utm_source=help_panel'
-  }, showKlarnaCheckout && {
+  }, paymentGatewaySuggestions.kco && {
     title: Object(external_wp_i18n_["__"])('Klarna - Introduction', 'woocommerce-admin'),
     link: 'https://docs.woocommerce.com/document/klarna-checkout/?utm_source=help_panel'
-  }, showKlarnaPayments && {
+  }, paymentGatewaySuggestions.klarna_payments && {
     title: Object(external_wp_i18n_["__"])('Klarna - Introduction', 'woocommerce-admin'),
     link: 'https://docs.woocommerce.com/document/klarna-payments/?utm_source=help_panel'
-  }, showPayFast && {
+  }, paymentGatewaySuggestions.payfast && {
     title: Object(external_wp_i18n_["__"])('PayFast Setup and Configuration', 'woocommerce-admin'),
     link: 'https://docs.woocommerce.com/document/payfast-payment-gateway/?utm_source=help_panel'
-  }, showEway && {
+  }, paymentGatewaySuggestions.eway && {
     title: Object(external_wp_i18n_["__"])('eWAY Setup and Configuration', 'woocommerce-admin'),
     link: 'https://docs.woocommerce.com/document/eway/?utm_source=help_panel'
   }, {
@@ -1093,7 +1094,7 @@ function getItems(props) {
       return getTaxItems(props);
 
     case 'payments':
-      return getPaymentsItems(props);
+      return getPaymentGatewaySuggestions(props);
 
     default:
       return getHomeItems();
@@ -1170,15 +1171,10 @@ const HelpPanel = props => {
   })));
 };
 HelpPanel.defaultProps = {
-  getPaymentMethods: methods["a" /* getPaymentMethods */],
-  getSetting: wc_admin_settings["h" /* getSetting */],
+  getSetting: build_module["f" /* getSetting */],
   recordEvent: external_wc_tracks_["recordEvent"]
 };
 /* harmony default export */ var help = __webpack_exports__["default"] = (compose(Object(external_wp_data_["withSelect"])(select => {
-  const {
-    getProfileItems,
-    getTasksStatus
-  } = select(external_wc_data_["ONBOARDING_STORE_NAME"]);
   const {
     getSettings
   } = select(external_wc_data_["SETTINGS_STORE_NAME"]);
@@ -1189,14 +1185,18 @@ HelpPanel.defaultProps = {
     general: generalSettings = {}
   } = getSettings('general');
   const activePlugins = getActivePlugins();
-  const onboardingStatus = getTasksStatus();
-  const profileItems = getProfileItems();
+  const paymentGatewaySuggestions = select(external_wc_data_["ONBOARDING_STORE_NAME"]).getPaymentGatewaySuggestions().reduce((suggestions, suggestion) => {
+    const {
+      id
+    } = suggestion;
+    suggestions[id] = true;
+    return suggestions;
+  }, {});
   const countryCode = Object(utils["b" /* getCountryCode */])(generalSettings.woocommerce_default_country);
   return {
     activePlugins,
     countryCode,
-    onboardingStatus,
-    profileItems
+    paymentGatewaySuggestions
   };
 }))(HelpPanel));
 

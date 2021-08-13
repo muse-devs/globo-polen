@@ -29,7 +29,7 @@ defined( 'ABSPATH' ) || exit;
 
 require_once dirname( __FILE__ ) . '/class-redux-core.php';
 
-Redux_Core::$version    = '4.2.11';
+Redux_Core::$version    = '4.2.14';
 Redux_Core::$redux_path = dirname( __FILE__ );
 Redux_Core::instance();
 
@@ -420,7 +420,13 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 				return;
 			}
 
-			if ( 'wp-cron.php' === $pagenow || empty( $args ) || ! isset( $args['opt_name'] ) || ( isset( $args['opt_name'] ) && empty( $args['opt_name'] ) ) ) {
+			$args['load_on_cron'] = $args['load_on_cron'] ?? false;
+
+			if ( false === $args['load_on_cron'] && 'wp-cron.php' === $pagenow ) {
+				return;
+			}
+
+			if ( empty( $args ) || ! isset( $args['opt_name'] ) || ( isset( $args['opt_name'] ) && empty( $args['opt_name'] ) ) ) {
 				return;
 			}
 
@@ -616,7 +622,12 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 * @return array
 		 */
 		public function get_default_values( $key, $array_key = false ) {
-			return $this->options_defaults_class->default_values( $key, $array_key );
+			if ( ! isset( $this->options_class ) ) {
+				$this->options_defaults_class = new Redux_Options_Defaults();
+				$this->options_class          = new Redux_Options_Constructor( $this );
+			}
+
+			return $this->options_class->get_default_value( $key, $array_key );
 		}
 
 		/**
@@ -628,7 +639,12 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 * @return array
 		 */
 		public function get_default_value( $key, $array_key = false ) {
-			return $this->options_defaults_class->default_values( $key, $array_key );
+			if ( ! isset( $this->options_class ) ) {
+				$this->options_defaults_class = new Redux_Options_Defaults();
+				$this->options_class          = new Redux_Options_Constructor( $this );
+			}
+
+			return $this->options_class->get_default_value( $key, $array_key );
 		}
 
 		/**
