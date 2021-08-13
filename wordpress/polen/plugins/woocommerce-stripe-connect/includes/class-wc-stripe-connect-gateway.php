@@ -281,7 +281,7 @@ class ZCWC_Stripe_Connect_Gateway extends WC_Payment_Gateway_CC {
 				'default'     => 'no',
 				'description' => esc_html__( 'Some countries require CVC verification on saved cards. A payment may succeed even with a failed CVC check. If this isn’t what you want, you may want to configure your Radar rules to block payments when CVC verification fails.', 'woocommerce-stripe-connect' ),
 			),
-			'manual_transfers' => array(
+			/* 'manual_transfers' => array(
 				'title'       => esc_html__( 'Commission Transfers', 'woocommerce-stripe-connect' ),
 				'type'        => 'checkbox',
 				'label'       => esc_html__( 'Disable Automatic Transfers', 'woocommerce-stripe-connect' ),
@@ -295,7 +295,7 @@ class ZCWC_Stripe_Connect_Gateway extends WC_Payment_Gateway_CC {
 					'<br/><strong>',
 					'</strong>',
 				),
-			),
+			), */
 			'invoice_prefix' => array(
 				'title'       => esc_html__( 'Order Prefix', 'woocommerce-stripe-connect' ),
 				'type'        => 'text',
