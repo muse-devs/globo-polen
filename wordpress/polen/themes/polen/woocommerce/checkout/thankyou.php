@@ -31,11 +31,11 @@ $social = social_order_is_social($order);
 global $Polen_Plugin_Settings;
 $whatsapp_form = $Polen_Plugin_Settings['polen_whatsapp_form'];
 
-$number = $order->get_meta( Polen_Order::WHATSAPP_NUMBER_META_KEY );
+$number = $order->get_meta(Polen_Order::WHATSAPP_NUMBER_META_KEY);
 
 ?>
 <div class="row">
-	<?php if( ! $social ) : ?>
+	<?php if (!$social) : ?>
 		<div class="col-md-12 mb-4">
 			<h1>Seu vídeo foi solicitado com Sucesso</h1>
 		</div>
@@ -73,3 +73,11 @@ endif;
 
 // JS do GA
 echo polen_create_ga_order($order);
+?>
+
+<form id="zapier-purchase-data">
+	<input type="hidden" name="nome" />
+	<input type="hidden" name="email" />
+	<input type="hidden" name="artista" />
+	<input type="hidden" name="data_compra" />
+</form>
