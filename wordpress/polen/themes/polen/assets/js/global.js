@@ -11,7 +11,8 @@ const CONSTANTS = {
 const ZAPIERURLS = {
 	NEWSLETTER: "https://hooks.zapier.com/hooks/catch/10583855/b252jhj/",
 	NEW_ACCOUNT: "https://hooks.zapier.com/hooks/catch/10583855/b25uia6/",
-	LANDING_PAGE: "https://hooks.zapier.com/hooks/catch/10583855/b25u8xz/"
+	LANDING_PAGE: "https://hooks.zapier.com/hooks/catch/10583855/b25u8xz/",
+	PURCHASE: "https://hooks.zapier.com/hooks/catch/10583855/buaf22k/",
 }
 
 var interval = setInterval;
