@@ -222,6 +222,11 @@ function polen_scripts() {
 		wp_enqueue_script( 'tributes-scripts-video', TEMPLATE_URI . '/assets/js/' . $min . 'upload-video-tributes.js', array("jquery", "polen-upload-video-tus"), _S_VERSION, true );
 	}
 
+	//TODO - Criar função para identificar página do Vídeo Autógrafo
+	if(true) {
+		wp_enqueue_script( 'tributes-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'video-autografo.js', array("jquery"), _S_VERSION, true );
+	}
+
 	if(social_is_in_social_app())
 	{
 		wp_enqueue_script( 'polen-cart', TEMPLATE_URI . '/assets/js/' . $min . 'criesp.js', array(), _S_VERSION, true );
