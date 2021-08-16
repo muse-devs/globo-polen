@@ -74,7 +74,8 @@ class Polen_WC_Payment_Approved extends \WC_Email {
 			if ( ! $this->is_enabled() || ! $this->get_recipient() ) {
 				return;
 			}
-			if( !social_order_is_social( $this->object ) ) {
+			$order_is_social = social_order_is_social( $this->object );
+			if( ! $order_is_social ) {
 				$this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
 			} else {
 				$this->send( $this->get_recipient(), $this->get_subject_social(), $this->get_content_social(), $this->get_headers(), $this->get_attachments() );
@@ -89,7 +90,7 @@ class Polen_WC_Payment_Approved extends \WC_Email {
 			$Polen_Talent = new Polen_Talent();
 			$talent = $Polen_Talent->get_talent_from_product( $product_id );
 			$this->recipient_talent = $talent->email;
-			if( !social_order_is_social( $this->object ) ) {
+			if( ! $order_is_social ) {
 				$this->send( $this->get_recipient_talent(), $this->get_subject_talent(), $this->get_content_talent(), $this->get_headers(), $this->get_attachments() );
 			} else {
 				$this->send( $this->get_recipient_talent(), $this->get_subject_talent_social(), $this->get_content_talent_social(), $this->get_headers(), $this->get_attachments() );
