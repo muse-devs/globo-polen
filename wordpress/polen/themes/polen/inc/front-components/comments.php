@@ -91,7 +91,13 @@ function polen_card_talent_reviews_order(\WP_Post $post, $Talent_Fields)
 						<p class="p mb-0 mt-2">
 							<span class="skill-value">
 								<?php Icon_Class::polen_icon_clock(); ?>
-								<?= $Talent_Fields->tempo_resposta; ?>h
+								<?php 
+									if($Talent_Fields->tempo_resposta) {
+										echo $Talent_Fields->tempo_resposta."h";
+									} else {
+										echo "7 dias";
+									}
+								?>
 							</span>
 						</p>
 					</div>
