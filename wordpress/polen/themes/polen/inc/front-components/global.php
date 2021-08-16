@@ -153,9 +153,9 @@ function polen_front_get_card($item, $size = "small", $social = false)
 					<?php else : ?>
 						<?php if ($item['in_stock']) : ?><span class="mr-2"><?php Icon_Class::polen_icon_camera_video(); ?></span><?php endif; ?>
 					<?php endif; ?>
-					<?php if($item['in_stock']) : ?>
-						<?php if(!$social) echo $item["price"] == "0" ? 'GRÁTIS' : $item['price_formatted']; ?>
-					<?php else: ?>
+					<?php if ($item['in_stock']) : ?>
+						<?php if (!$social) echo $item["price"] == "0" ? 'GRÁTIS' : $item['price_formatted']; ?>
+					<?php else : ?>
 						<span>Esgotado</span>
 					<?php endif; ?>
 				</div>
@@ -471,5 +471,6 @@ function polen_form_add_whatsapp($order_number, $whatsapp_number = "")
 			</div>
 		</div>
 	</div>
-<?php
+	<?php
 }
+

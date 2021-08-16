@@ -71,13 +71,15 @@ else :
 <?php
 endif;
 
-// JS do GA
-echo polen_create_ga_order($order);
-?>
+session_start();
+$order_name = "order_{$order_number}";
+if (!isset($_SESSION[$order_name])) {
+	$_SESSION[$order_name] = 1;
 
-<form id="zapier-purchase-data">
-	<input type="hidden" name="nome" />
-	<input type="hidden" name="email" />
-	<input type="hidden" name="artista" />
-	<input type="hidden" name="data_compra" />
-</form>
+	// JS do GA
+	echo polen_create_ga_order($order);
+
+	// Zapier de compra finalizada
+	polen_zapier_thankyou($order_item_cart);
+
+}
