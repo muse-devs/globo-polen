@@ -3,6 +3,9 @@
 /**
  * @version 3.7.0
  */
+
+use Polen\Includes\Polen_Order;
+
 defined('ABSPATH') || exit;
 
 function get_icon($bool)
@@ -27,12 +30,12 @@ $social = social_order_is_social($order);
 
 global $Polen_Plugin_Settings;
 $whatsapp_form = $Polen_Plugin_Settings['polen_whatsapp_form'];
-//TODO número de telefone cadastrado do usuário
-$number = "";
+
+$number = $order->get_meta(Polen_Order::WHATSAPP_NUMBER_META_KEY);
 
 ?>
 <div class="row">
-	<?php if( ! $social ) : ?>
+	<?php if (!$social) : ?>
 		<div class="col-md-12 mb-4">
 			<h1>Seu vídeo foi solicitado com Sucesso</h1>
 		</div>
@@ -68,5 +71,15 @@ else :
 <?php
 endif;
 
-// JS do GA
-echo polen_create_ga_order($order);
+session_start();
+$order_name = "order_{$order_number}";
+if (!isset($_SESSION[$order_name])) {
+	$_SESSION[$order_name] = 1;
+
+	// JS do GA
+	echo polen_create_ga_order($order);
+
+	// Zapier de compra finalizada
+	polen_zapier_thankyou($order_item_cart);
+
+}

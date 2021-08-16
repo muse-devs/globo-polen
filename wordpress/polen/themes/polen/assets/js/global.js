@@ -11,7 +11,8 @@ const CONSTANTS = {
 const ZAPIERURLS = {
 	NEWSLETTER: "https://hooks.zapier.com/hooks/catch/10583855/b252jhj/",
 	NEW_ACCOUNT: "https://hooks.zapier.com/hooks/catch/10583855/b25uia6/",
-	LANDING_PAGE: "https://hooks.zapier.com/hooks/catch/10583855/b25u8xz/"
+	LANDING_PAGE: "https://hooks.zapier.com/hooks/catch/10583855/b25u8xz/",
+	PURCHASE: "https://hooks.zapier.com/hooks/catch/10583855/buaf22k/",
 }
 
 var interval = setInterval;
@@ -340,7 +341,7 @@ function polRequestZapier(formName, url) {
 	)
 }
 
-function polAjaxForm(formName, callBack, callBackError) {
+function polAjaxForm(formName, callBack, callBackError, reset = true) {
 	polSpinner(null, formName);
 	blockUnblockInputs(formName, true);
 	jQuery
@@ -349,7 +350,7 @@ function polAjaxForm(formName, callBack, callBackError) {
 			jQuery(formName).serialize(),
 			function (result) {
 				if (result.success) {
-					document.querySelector(formName).reset();
+					reset && document.querySelector(formName).reset();
 					callBack(result.data);
 				} else {
 					callBackError(result.data);
