@@ -19,7 +19,7 @@ class Polen_Video_Info_Display extends \WP_List_Table
         parent::__construct();
         $this->_column_headers = array( 
             $this->get_columns(),           // columns
-            $this->get_hiden_column(),      // hidden
+            $this->get_hidden_columns(),      // hidden
             $this->get_sortable_columns(),  // sortable
         );
     }
