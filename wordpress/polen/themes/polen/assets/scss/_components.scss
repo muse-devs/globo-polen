@@ -273,3 +273,12 @@
 		}
 	}
 }
+
+.btn-link {
+	&.alt {
+		padding: 0;
+		border: none;
+		color: inherit;
+		text-decoration: underline;
+	}
+}

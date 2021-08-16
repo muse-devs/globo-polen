@@ -333,7 +333,24 @@ function polen_apply_polen_part_price( $full_price, $social = false )
 	}
 }
 
-
+function polen_zapier_thankyou($order_item_cart)
+{
+	if(empty($order_item_cart)) {
+		return;
+	}
+	$product = $order_item_cart->get_product();
+	?>
+		<form id="zapier-purchase-data">
+			<input type="hidden" name="nome" value="<?php echo $order_item_cart->get_name_to_video(); ?>" />
+			<input type="hidden" name="email" value="<?php echo $order_item_cart->get_email_to_video(); ?>" />
+			<input type="hidden" name="artista" value="<?php echo $product->get_name(); ?>" />
+			<input type="hidden" name="data_compra" value="<?php echo date("d/m/Y"); ?>" />
+		</form>
+		<script>
+			polRequestZapier("#zapier-purchase-data", ZAPIERURLS.PURCHASE);
+		</script>
+	<?php
+}
 
 /**
  * Tags Open Graph
