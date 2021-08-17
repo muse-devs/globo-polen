@@ -15,7 +15,7 @@ class Polen_Cupom_Create_Admin_Menu
 
     public function create_menu()
     {
-        add_submenu_page('woocommerce-marketing', 'Cupons em Lote', 'Cupons em Lote', 'manage_options', 'batch-coupon', [$this, 'coupon_layout'], 'none', 2);
+        add_submenu_page('woocommerce-marketing', 'Cupons em Lote', 'Cupons em Lote', 'manage_options', 'batch-coupon', [$this, 'coupon_layout'], 2);
     }
 
     public function coupon_layout()
