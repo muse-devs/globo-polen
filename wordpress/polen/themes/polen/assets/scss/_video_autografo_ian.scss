@@ -66,3 +66,74 @@
 		}
 	}
 }
+
+.magalu-box {
+	background: var(--secondary);
+	border-radius: 8px;
+	padding: 10px;
+	.header-box {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: relative;
+		::after {
+			content: "";
+			position: absolute;
+			display: block;
+			width: 100%;
+			height: 2px;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			background: #FFFFFF;
+			opacity: 0.25;
+		}
+		img {
+			margin-right: 10px;
+		}
+		h3 {
+			color: #fff;
+			font-size: 14px;
+		}
+	}
+	.content-box {
+		p {
+			font-size: 14px;
+			line-height: 20px;
+			text-align: center;
+			letter-spacing: -0.01em;
+			color: #FFFFFF;
+			padding: 20px;
+			margin-bottom: 0;
+		}
+		.description {
+			text-align: left;
+			padding: 0px;
+			b {
+				color: #14c7ff;
+			}
+		}
+		.order-flow {
+			.item {
+				min-height: 80px;
+			}
+			.status {
+				display: flex;
+				align-items: center;
+        		justify-content: center;
+				border-color: #fff;
+				color: var(--secondary);
+				font-weight: 700;
+				font-size: 12px;
+			}
+			.item.complete::after {
+				background: #FFFFFF;
+
+			}
+			.v-line, .order-flow::after, .order-flow .item::before, .order-flow .item.complete::after {
+				width: 2px;
+				opacity: 0.25;
+			}
+		}
+	}
+}
