@@ -80,6 +80,8 @@ if (!isset($_SESSION[$order_name])) {
 	echo polen_create_ga_order($order);
 
 	// Zapier de compra finalizada
-	polen_zapier_thankyou($order_item_cart);
+	if( isset( $Polen_Plugin_Settings['polen_zapier_new_order'] ) && $Polen_Plugin_Settings['polen_zapier_new_order'] == '1' ) {
+		polen_zapier_thankyou($order_item_cart);
+	}
 
 }
