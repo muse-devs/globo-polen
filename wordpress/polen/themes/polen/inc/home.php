@@ -16,8 +16,6 @@ get_header();
 
 	<?php va_get_home_banner(social_get_criesp_url()); ?>
 
-	<?php va_partners_footer(); ?>
-
 	<?php polen_front_get_tutorial(); ?>
 
 	<?php polen_front_get_news(polen_get_talents(12), "Todos os talentos", polen_get_all_talents_url());
