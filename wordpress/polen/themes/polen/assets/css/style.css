@@ -12755,6 +12755,115 @@ label[for="wc-stripe-new-payment-method"] {
     left: calc(50% + 9px);
     background-color: var(--dark); }
 
+.va-banner {
+  position: relative;
+  min-height: 220px;
+  border-radius: 10px;
+  overflow: hidden; }
+  .va-banner .image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 0 0; }
+  .va-banner .desktop-img {
+    display: none; }
+  .va-banner .mobile-img {
+    display: block; }
+  .va-banner .content {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0px 0 0 22px;
+    width: 70%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    color: var(--light);
+    box-sizing: border-box;
+    z-index: 2;
+    background: linear-gradient(90deg, #000000 0%, rgba(0, 0, 0, 0) 100%); }
+    .va-banner .content h2 {
+      font-size: 20px; }
+    .va-banner .content img {
+      width: 95px; }
+    .va-banner .content .btn-md {
+      font-weight: 400;
+      width: 100px; }
+  @media (min-width: 768px) {
+    .va-banner {
+      height: 350px; }
+      .va-banner .desktop-img {
+        display: block; }
+      .va-banner .mobile-img {
+        display: none; }
+      .va-banner .content {
+        padding: 0px 0 0 35px; }
+        .va-banner .content p {
+          font-size: 16px;
+          font-weight: 500; }
+        .va-banner .content img {
+          width: 184px; }
+        .va-banner .content .btn-md {
+          padding: 12px 20px;
+          font-size: 17px;
+          width: 180px; } }
+
+.magalu-box {
+  background: var(--secondary);
+  border-radius: 8px;
+  padding: 10px; }
+  .magalu-box .header-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative; }
+    .magalu-box .header-box ::after {
+      content: "";
+      position: absolute;
+      display: block;
+      width: 100%;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #FFFFFF;
+      opacity: 0.25; }
+    .magalu-box .header-box img {
+      margin-right: 10px; }
+    .magalu-box .header-box h3 {
+      color: #fff;
+      font-size: 14px; }
+  .magalu-box .content-box p {
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    letter-spacing: -0.01em;
+    color: #FFFFFF;
+    padding: 20px;
+    margin-bottom: 0; }
+  .magalu-box .content-box .description {
+    text-align: left;
+    padding: 0px; }
+    .magalu-box .content-box .description b {
+      color: #14c7ff; }
+  .magalu-box .content-box .order-flow .item {
+    min-height: 80px; }
+  .magalu-box .content-box .order-flow .status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-color: #fff;
+    color: var(--secondary);
+    font-weight: 700;
+    font-size: 12px; }
+  .magalu-box .content-box .order-flow .item.complete::after {
+    background: #FFFFFF; }
+  .magalu-box .content-box .order-flow .v-line, .magalu-box .content-box .order-flow .order-flow::after, .magalu-box .content-box .order-flow .item::before, .magalu-box .content-box .order-flow .item.complete::after, .magalu-box .content-box .order-flow .order-flow::after, .magalu-box .content-box .order-flow .order-flow .item::before, .magalu-box .content-box .order-flow .order-flow .item.complete::after {
+    width: 2px;
+    opacity: 0.25; }
+
 .custom-donation-box img,
 .custom-donation-box video {
   display: block;
