@@ -1,20 +1,20 @@
 <?php
 
-function va_get_banner_book()
+function va_get_banner_book($small = false)
 {
 	$img_bg = TEMPLATE_URI . "/assets/img/video-autografo/bg_lh_right.png";
 	$img_book = TEMPLATE_URI . "/assets/img/video-autografo/book_cover.png";
 
 ?>
-	<div class="row mb-4">
+	<div class="row<?php echo $small ? ' mb-2' : ' mb-4'; ?>">
 		<div class="col-12">
-			<div class="va-top-banner">
+			<div class="va-top-banner<?php echo $small ? ' small' : ''; ?>">
 				<div class="box-round">
 					<img src="<?php echo $img_bg; ?>" alt="Fundo do Box" class="img-bg" />
 				</div>
-				<div class="content pb-2">
+				<div class="content<?php echo $small ? '' : ' pb-2'; ?>">
 					<img src="<?php echo $img_book; ?>" alt="Capa do Livro" class="book-cover" />
-					<h1 class="title">De porta em porta</h1>
+					<h1 class="title"><?php echo $small ? 'Livro - ' : ''; ?>De porta em porta</h1>
 				</div>
 			</div>
 		</div>
