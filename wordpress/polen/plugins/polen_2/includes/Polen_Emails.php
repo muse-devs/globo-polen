@@ -10,8 +10,10 @@ if( ! defined( 'ABSPATH' ) ) {
 
 class Polen_Emails {
 
-    public function __construct() {
-        add_filter( 'woocommerce_email_classes', array( $this, 'register_emails' ), 99, 1 );
+    public function __construct( bool $static = false ) {
+        if( $static ) {
+            add_filter( 'woocommerce_email_classes', array( $this, 'register_emails' ), 99, 1 );
+        }
     }
 
     public function register_emails( $emails ) {

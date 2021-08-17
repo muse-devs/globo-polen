@@ -11,12 +11,13 @@ if (isset($_REQUEST['order_id']) && !empty($_REQUEST['order_id'])) {
     $order_id = filter_input(INPUT_GET, 'order_id');
     $order = wc_get_order($order_id);
     $polen_order = Polen_Cart_Item_Factory::polen_cart_item_from_order($order);
+    $instruction = $polen_order->get_instructions_to_video();
 ?>
 
     <script>
-        let instruction = replaceLineBreakString("<?= $polen_order->get_instructions_to_video(); ?>");
+        let instruction = <?php echo json_encode($instruction); ?>;
         jQuery(document).ready(function ($) {
-            $("#video-instructions").html(instruction);
+            $("#video-instructions").html(replaceLineBreakString(instruction.toString()));
         });
     </script>
 

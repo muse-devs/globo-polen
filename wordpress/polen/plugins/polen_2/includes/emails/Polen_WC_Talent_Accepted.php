@@ -32,7 +32,7 @@ class Polen_WC_Talent_Accepted extends \WC_Email {
 
 	public function trigger( $order_id ) {
 		$this->object = wc_get_order( $order_id );
-		if( $this->object->has_status( 'talent-accepted') ) {
+		if( $this->object->get_status() === Polen_WooCommerce::ORDER_STATUS_TALENT_ACCEPTED ) {
 			if ( version_compare( '3.0.0', WC()->version, '>' ) ) {
 				$order_email = $this->object->billing_email;
 			} else {
