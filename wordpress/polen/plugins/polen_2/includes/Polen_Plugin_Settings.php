@@ -454,6 +454,23 @@ class Polen_Plugin_Settings
                 ),
             )
         ) );
+
+        // Política de cookies
+        \Redux::set_section( $opt_name, array(
+            'title'            => esc_html__( 'Integrações Zapier', 'polen' ),
+            'id'               => 'polen_zapier_integrations',
+            'icon'             => 'el el-mic-alt',
+            'subsection'       => false,
+            'fields'           => array(
+                array(
+                    'id'       => 'polen_zapier_new_order',
+                    'type'     => 'switch',
+                    'title'    => esc_html__('Integração para novas compras', 'polen'),
+                    'desc'     => 'Envio de informações de marketig para novas compras',
+                    'default'  => '',
+                ),
+            )
+        ) );
     }
 
     public function save( $args ) {
