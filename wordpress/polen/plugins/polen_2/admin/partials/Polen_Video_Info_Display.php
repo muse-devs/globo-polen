@@ -72,8 +72,11 @@ class Polen_Video_Info_Display extends \WP_List_Table
     public function column_vimeo_id( $param )
     {
         $order = wc_get_order( $param->order_id );
-        $car_item = Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
-        return $car_item->get_name_to_video();
+        if( !empty( $order )) {
+            $car_item = Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
+            return $car_item->get_name_to_video();
+        }
+        return 'ORDER_ERROR';
     }
 
     public function column_video_link( $param )

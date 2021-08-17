@@ -24,15 +24,15 @@ class Polen_Admin_Video_Info
      * Admin Menu
      */
     public function polen_video_info(){
-        // add_submenu_page(
-        //     'woocommerce-marketing',
-        //     'Ultimos Vídeos - Cadastro',
-        //     'Ultimos Vídeos',
-        //     'manage_options',
-        //     'videoinfo-list',
-        //     [$this, 'show_video_info_details'],
-        //     2
-        // );
+        add_submenu_page(
+            'woocommerce-marketing',
+            'Ultimos Vídeos - Cadastro',
+            'Ultimos Vídeos',
+            'manage_options',
+            'videoinfo-list',
+            [$this, 'show_video_info_details'],
+            5
+        );
     }
 
     public function show_video_info_details()
