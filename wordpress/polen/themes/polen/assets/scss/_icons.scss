@@ -1,9 +1,10 @@
+$version: "?v=1.0";
 @font-face {
 	font-family: "PolenIcons";
-	src: url('../fonts/PolenIcons.eot');
+	src: url('../fonts/PolenIcons.eot' + $version);
 	src: url('../fonts/PolenIcons.eot?#iefix') format('eot'),
-		url('../fonts/PolenIcons.woff') format('woff'),
-		url('../fonts/PolenIcons.ttf') format('truetype'),
+		url('../fonts/PolenIcons.woff' + $version) format('woff'),
+		url('../fonts/PolenIcons.ttf' + $version) format('truetype'),
 		url('../fonts/PolenIcons.svg#PolenIcons') format('svg');
 }
 
