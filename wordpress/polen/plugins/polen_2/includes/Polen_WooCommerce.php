@@ -136,6 +136,8 @@ class Polen_WooCommerce
         {
 			$actions[] = 'woocommerce_order_status_' . $order_status;
 		}
+        $actions[] = 'woocommerce_order_status_wc-payment-approved_to_wc-talent-rejected';
+        $actions[] = 'woocommerce_order_status_wc-payment-approved_to_wc-talent-accepted';
         return $actions;
     }
 
