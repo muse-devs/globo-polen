@@ -82,4 +82,18 @@ function va_magalu_box_cart()
     </div>
 <?php
 }  
+function va_partners_footer()
+{
+?>  
+    <div class="row mt-3">
+        <div class="col-12">
+            <h2>Esse produto é feito em parceria com:</h2>
+        </div>
+        <div class="col-12">
+            <img src="<?php echo TEMPLATE_URI . '/assets/img/video-autografo/magalu-logo.png'; ?>" alt="Magazine Luiza">
+            <img src="<?php echo TEMPLATE_URI . '/assets/img/video-autografo/cia-das-letras-logo.png'; ?>" alt="Cia das Letras">
+        </div>
+    </div>
+<?php  
+}
 ?>
