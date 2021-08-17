@@ -152,6 +152,10 @@ class ZCWC_Stripe_Connect_Gateway extends WC_Payment_Gateway_CC {
 	public function get_current_order_id() {
 		return $this->current_order_id;
 	}
+
+	public function get_mdr() {
+		return $this->mdr;
+	}
 	
 	/**
 	 * Returns a value indicating the the Gateway is available or not. It's called
@@ -209,6 +213,12 @@ class ZCWC_Stripe_Connect_Gateway extends WC_Payment_Gateway_CC {
 				'type'        => 'text',
 				'description' => esc_html__( 'What shows up on the credit card statement for the customer', 'woocommerce-stripe-connect' ),
 				'default'     => get_bloginfo('name'),
+			),
+			'mdr' => array(
+				'title'       => esc_html__( 'Comissão Padrão (%)', 'woocommerce-stripe-connect' ),
+				'type'        => 'text',
+				'description' => esc_html__( 'Comissão padrão (porcentagem) sobre venda efetuada a ser descontada do talento', 'woocommerce-stripe-connect' ),
+				'default'     => '25',
 			),
 			'sandbox' => array(
 				'title'       => esc_html__( 'Sandbox', 'woocommerce-stripe-connect' ),

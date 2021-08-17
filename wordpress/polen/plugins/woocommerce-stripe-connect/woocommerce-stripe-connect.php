@@ -193,6 +193,9 @@ class ZCWC_Stripe_Connect {
 		// Modify emails emails.
 		add_filter( 'woocommerce_email_classes', array( $this, 'add_emails' ), 20 );
 
+		// Estorno quando o talento rejeita ou a compra expira
+		add_action( 'woocommerce_order_status_changed', array( $this, 'void_order' ) );
+		add_action( 'woocommerce_order_status_completed', array( $this, 'split_order' ) );
 	}
 
 
@@ -769,6 +772,124 @@ class ZCWC_Stripe_Connect {
 		$email_classes['WC_Stripe_Connect_Email_Failed_Authentication_Retry'] = new WC_Stripe_Connect_Email_Failed_Authentication_Retry( $email_classes );
 
 		return $email_classes;
+	}
+
+	public function void_order( $order_id ) {
+		$order = wc_get_order( $order_id );
+		$order_status = $order->get_status();
+		if( in_array( $order_status, [ 'refunded', 'cancelled', 'talent-rejected', 'order-expired' ] ) ) {
+			$woocommerce_zcwc_stripe_connect_settings = get_option( 'woocommerce_zcwc_stripe_connect_settings' );
+			$stripe_secret_key = ( 'yes' === $woocommerce_zcwc_stripe_connect_settings['sandbox'] ) ? $woocommerce_zcwc_stripe_connect_settings['stripe_test_secret_key'] : $woocommerce_zcwc_stripe_connect_settings['stripe_live_secret_key'];
+			// Send request and get response from server.
+			\Stripe\Stripe::setAppInfo(
+				'WooCommerce Stripe Connect',
+				'1.0.0',
+				site_url(),
+				'pp_partner_HF4cic88ihICiq'
+			);
+			\Stripe\Stripe::setApiKey( $stripe_secret_key );
+			\Stripe\Stripe::setApiVersion("2019-05-16");
+			
+			// Se já houver sido efetuada a transferência, reverte ela.
+			$stripe_split_response = json_decode( get_post_meta( $order_id, 'stripe_split_response_json', true ) );
+			if( $stripe_split_response && ! is_null( $stripe_split_response ) && ! empty( $stripe_split_response ) ) {
+				$reversal = \Stripe\Transfer::createReversal(
+					$stripe_split_response->id,
+					[
+					  'amount' => $stripe_split_response->amount,
+					]
+				);
+				update_post_meta( $order_id, 'stripe_split_reversal_response', $reversal->__toJSON() );
+			} else {
+				update_post_meta( $order_id, 'stripe_split_no', true );
+			}
+
+			// Estorno para o usuário final
+			$_stripe_charge = get_post_meta( $order_id, '_stripe_charge', true );
+			if( $_stripe_charge && ! is_null( $_stripe_charge ) && ! empty( $_stripe_charge ) ) {
+				$refund = \Stripe\Refund::create([
+					'charge' => $_stripe_charge,
+				]);
+				update_post_meta( $order_id, 'stripe_split_refund_response', $refund->__toJSON() );
+			}
+		}
+	}
+
+	public function split_order( $order_id ) {
+		$woocommerce_zcwc_stripe_connect_settings = get_option( 'woocommerce_zcwc_stripe_connect_settings' );
+		$stripe_secret_key = ( 'yes' === $woocommerce_zcwc_stripe_connect_settings['sandbox'] ) ? $woocommerce_zcwc_stripe_connect_settings['stripe_test_secret_key'] : $woocommerce_zcwc_stripe_connect_settings['stripe_live_secret_key'];
+		// Send request and get response from server.
+		\Stripe\Stripe::setAppInfo(
+			'WooCommerce Stripe Connect',
+			'1.0.0',
+			site_url(),
+			'pp_partner_HF4cic88ihICiq'
+		);
+		\Stripe\Stripe::setApiKey( $stripe_secret_key );
+		\Stripe\Stripe::setApiVersion("2019-05-16");
+
+		$order = wc_get_order( $order_id );
+		if( 'completed' == $order->get_status() ) {
+			$_stripe_charge = get_post_meta( $order->get_id(), '_stripe_charge', true );
+			$stripe_split_response = get_post_meta( $order_id, 'stripe_split_response_json', true );
+			if( $_stripe_charge && ! is_null( $_stripe_charge ) && ! empty( $_stripe_charge ) && ( ! $stripe_split_response || empty( $stripe_split_response ) ) ) {
+				$seller_id = false;
+				$items = $order->get_items();
+				if( $items && ! is_null( $items ) && is_array( $items ) && count( $items ) > 0 ) {
+					foreach( $items as $k => $item ) {
+						$seller_id = get_post_field( 'post_author', $item['product_id'] );
+					}
+				
+					if( $seller_id && ! is_null( $seller_id ) && ! empty( $seller_id ) && (int) $seller_id > (int) 0 ) {
+						$seller              = get_user_by( 'id', $seller_id );
+						global $wpdb;
+						$sql = "SELECT `stripe_account_id`, `mdr`, `fee` FROM `" . $wpdb->base_prefix . "polen_talents` WHERE `user_id`=" . $seller_id;
+						$res = $wpdb->get_results( $sql );
+
+						if( $res && ! is_wp_error( $res ) && ! is_null( $res ) && is_array( $res ) && count( $res ) > 0 ) {
+							$vendorData          = $res[0];
+							$stripe_account_id   = $vendorData->stripe_account_id;
+							if( $stripe_account_id && ! is_null( $stripe_account_id ) && ! empty( $stripe_account_id ) ) {
+								$mdr = (float) $vendorData->mdr;
+								if( ! $mdr || is_null( $mdr ) ) {
+									$mdr = (float) $woocommerce_zcwc_stripe_connect_settings['mdr'];
+								}
+
+								$amount = ( $order->get_total() - ( ( $mdr * $order->get_total() ) / 100 ) );
+								$amount = intval( number_format( $amount, 2, '', '' ) );
+
+								$args = array(
+									'amount'      => $amount, // Valor sem pontos ou virgulas. Ex: 1.000,00 = 100000, 100,00 = 10000
+									'currency'    => get_woocommerce_currency(),
+									'destination' => $stripe_account_id, // ID do Lojista no Stripe
+									'description' => sprintf( 
+										esc_html__('Transfer from %s (%s) to (%s)', 'woocommerce-stripe-connect' ),
+										get_bloginfo('name'),
+										home_url('/'),
+										$seller->display_name,
+									),
+									'metadata' => array(
+										'from_name' => get_bloginfo('name'),
+										'from_url'  => home_url('/'),
+										'to_vendor' => $seller->display_name,
+									),
+									'source_transaction' => $_stripe_charge,
+									'transfer_group'     => 'order_' . $order->get_id(),
+								);
+
+								update_post_meta( $order->get_id(), 'stripe_split_resquest', $args );
+
+								$commission = \Stripe\Transfer::create( $args );
+
+								if( $commission && ! is_null( $commission ) ) {
+									update_post_meta( $order->get_id(), 'stripe_split_response_json', $commission->__toJSON() );
+								}
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 }
 

@@ -350,7 +350,15 @@ use Polen\Includes\Polen_Bancos;
                         <table class="form-table">
                             <tr>
                                 <th>
-                                    Subordinate Merchant ID
+                                    Stripe Account ID
+                                </th>
+                                <td>
+                                    <input type="text" name="stripe_account_id" value="<?php echo ( isset( $vendorInfo->stripe_account_id ) ) ? $vendorInfo->stripe_account_id : ''; ?>" autocomplete="off" class="widefat">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Braspag Subordinate Merchant ID
                                 </th>
                                 <td>
                                     <input type="text" name="subordinate_merchant_id" value="<?php echo ( isset( $vendorInfo->subordinate_merchant_id ) ) ? $vendorInfo->subordinate_merchant_id : ''; ?>" autocomplete="off" class="widefat">
