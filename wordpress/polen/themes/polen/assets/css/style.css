@@ -12755,6 +12755,11 @@ label[for="wc-stripe-new-payment-method"] {
     left: calc(50% + 9px);
     background-color: var(--dark); }
 
+p.more-text, .link-more-text {
+  display: none; }
+  p.more-text.show, .link-more-text.show {
+    display: inline-block; }
+
 .va-banner {
   position: relative;
   min-height: 220px;

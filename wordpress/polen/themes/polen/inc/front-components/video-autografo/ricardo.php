@@ -32,7 +32,7 @@ function va_get_book_infos()
 					<div class="col-12">
 						<h4 class="title">Sobre o Livro</h4>
 						<p>Em seu novo livro, Luciano Huck compila memórias pessoais, aprendizados e conversas com representantes de várias áreas do conhecimento para trazer luz ao debate sobre a responsabilidade individual para a construção de uma sociedade mais igualitária.<br />
-							<a href="#" class="link-more-text">Mostrar mais</a>
+							<a href="javascript:showMoreText()" class="link-more-text show">Mostrar mais</a>
 						</p>
 						<p class="more-text">De porta em porta reúne as contribuições de figuras como Yuval Noah Harari, Esther Duflo, Michael Sandel e Anne Applebaum, além de memórias muito pessoais de Huck e relatos de encontros com brasileiros anônimos, mas cheios de histórias para contar.</p>
 					</div>
