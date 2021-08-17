@@ -6,14 +6,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 do_action( 'woocommerce_email_header', $email_heading, $email );
 
+$order_is_social = social_order_is_social( $order );
 ?>
-
-<p><?php printf( esc_html__( 'Olá, acabamos de receber mais uma doação para o Criança Esperança! O pedido #%1$s de %2$s, foi aprovado! Envie um vídeo para agradecer!', 'woocommerce' ), esc_html( $order->get_order_number() ), esc_html( $order->get_formatted_billing_full_name() ) ); ?></p>
-
+<p>
+	Olá, <br />
+	Acabamos de receber mais uma doação para o Criança Esperança.<br />
+	Envie um vídeo para agradecer!<br />
+</p>
+<p>
+	Número do pedido: <?php echo $order->get_id(); ?><br />
+	Valor doado: <?php echo wc_price( polen_apply_polen_part_price( $order->get_subtotal(), $order_is_social ) ); ?><br />
+	Válido por 15 dias <br />
+</p>
 <?php
 
-do_action( 'woocommerce_email_order_details', $order, $sent_to_admin, $plain_text, $email );
-do_action( 'woocommerce_email_order_meta', $order, $sent_to_admin, $plain_text, $email );
+// do_action( 'woocommerce_email_order_details', $order, $sent_to_admin, $plain_text, $email );
+// do_action( 'woocommerce_email_order_meta', $order, $sent_to_admin, $plain_text, $email );
 // do_action( 'woocommerce_email_customer_details', $order, $sent_to_admin, $plain_text, $email );
 
 if( isset( $additional_content ) && ! empty( $additional_content ) ) {
