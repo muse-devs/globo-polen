@@ -1,4 +1,3 @@
-
 <?php
 /**
  * Class to handle coupon operations
