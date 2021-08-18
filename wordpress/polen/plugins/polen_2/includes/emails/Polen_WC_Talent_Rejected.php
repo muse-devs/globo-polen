@@ -26,13 +26,13 @@ class Polen_WC_Talent_Rejected extends \WC_Email {
 		$this->template_base  = TEMPLATEPATH . 'woocommerce/';
     
 		add_action( 'woocommerce_order_status_changed', array( $this, 'trigger' ) );
-
+		
 		parent::__construct();
     }
 
 	public function trigger( $order_id ) {
 		$this->object = wc_get_order( $order_id );
-		if( $this->object->has_status( 'talent-rejected') ) {
+		if( $this->object->get_status() === Polen_WooCommerce::ORDER_STATUS_TALENT_REJECTED ) {
 			if ( version_compare( '3.0.0', WC()->version, '>' ) ) {
 				$order_email = $this->object->billing_email;
 			} else {
@@ -44,7 +44,6 @@ class Polen_WC_Talent_Rejected extends \WC_Email {
 			if ( ! $this->is_enabled() || ! $this->get_recipient() ) {
 				return;
 			}
-
 			$this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
 		}
 	}

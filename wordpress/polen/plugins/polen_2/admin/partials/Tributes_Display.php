@@ -1,6 +1,7 @@
 <?php
 
 namespace Polen\Admin\Partials;
+defined( 'ABSPATH' ) || die;
 
 use Polen\Tributes\Tributes_Controller;
 use Polen\Tributes\Tributes_Model;
