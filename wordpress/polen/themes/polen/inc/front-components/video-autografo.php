@@ -7,13 +7,13 @@ function va_get_home_banner($link)
 		<div class="col-12">
 			<div class="va-banner">
 				<img class="image mobile-img" src="<?php echo TEMPLATE_URI . '/assets/img/video-autografo/va-banner-mobile.png'; ?>" alt="De Porta em Porta">
-                <img class="image desktop-img" src="<?php echo TEMPLATE_URI . '/assets/img/video-autografo/va-banner-desktop.png'; ?>" alt="De Porta em Porta">
+				<img class="image desktop-img" src="<?php echo TEMPLATE_URI . '/assets/img/video-autografo/va-banner-desktop.png'; ?>" alt="De Porta em Porta">
 				<div class="content">
-                    <h2>De porta em porta</h2>
+					<h2>De porta em porta</h2>
 					<p class="mt-3">
-                        Agora você pode comprar o livro<br>
-                        e ter um autógrafo em vídeo do Luciano Huck.
-                    </p>
+						Agora você pode comprar o livro<br>
+						e ter um autógrafo em vídeo do Luciano Huck.
+					</p>
 					<a href="<?php echo $link; ?>" class="btn btn-primary btn-md">Conheça<span class="ml-2"><?php Icon_Class::polen_icon_chevron_right(); ?></span></a>
 				</div>
 			</div>
@@ -25,19 +25,19 @@ function va_get_home_banner($link)
 function va_magalu_box_thank_you()
 {
 ?>
-    <div class="row mt-4">
-        <div class="col-12">
-            <div class="magalu-box">
-                <div class="header-box">
-                    <img src="<?php echo TEMPLATE_URI . '/assets/img/video-autografo/lu.png'; ?>" alt="Lu"></img>
-                    <h3>Obrigada por pedir seu<br>vídeo-autógrafo</h3>
-                </div>
-                <div class="content-box">
-                    <p>Luciano vai enviar um vídeo<br>personalizado em até 15 dias.</p>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="row mt-4">
+		<div class="col-12">
+			<div class="magalu-box">
+				<div class="header-box">
+					<img src="<?php echo TEMPLATE_URI . '/assets/img/video-autografo/lu.png'; ?>" alt="Lu"></img>
+					<h3>Obrigada por pedir seu<br>vídeo-autógrafo</h3>
+				</div>
+				<div class="content-box">
+					<p>Luciano vai enviar um vídeo<br>personalizado em até 15 dias.</p>
+				</div>
+			</div>
+		</div>
+	</div>
 <?php
 }
 
@@ -86,15 +86,15 @@ function va_magalu_box_cart()
 function va_partners_footer()
 {
 ?>
-    <div class="row mt-3">
-        <div class="col-12">
-            <h2>Esse produto é feito em parceria com:</h2>
-        </div>
-        <div class="col-12">
-            <img src="<?php echo TEMPLATE_URI . '/assets/img/video-autografo/magalu-logo.png'; ?>" alt="Magazine Luiza">
-            <img src="<?php echo TEMPLATE_URI . '/assets/img/video-autografo/cia-das-letras-logo.png'; ?>" alt="Cia das Letras">
-        </div>
-    </div>
+	<div class="row mt-3">
+		<div class="col-12">
+			<h2>Esse produto é feito em parceria com:</h2>
+		</div>
+		<div class="col-12">
+			<img src="<?php echo TEMPLATE_URI . '/assets/img/video-autografo/magalu-logo.png'; ?>" alt="Magazine Luiza">
+			<img src="<?php echo TEMPLATE_URI . '/assets/img/video-autografo/cia-das-letras-logo.png'; ?>" alt="Cia das Letras">
+		</div>
+	</div>
 <?php
 }
 
@@ -104,7 +104,7 @@ function va_get_banner_book($small = false)
 	$img_book = TEMPLATE_URI . "/assets/img/video-autografo/book_cover.png";
 
 ?>
-	<div class="row<?php echo $small ? ' mb-2' : ' mb-4'; ?>">
+	<div class="row mb-3">
 		<div class="col-12">
 			<div class="va-top-banner<?php echo $small ? ' small' : ''; ?>">
 				<div class="box-round">
@@ -181,6 +181,79 @@ function va_get_book_infos()
 					</div>
 				</div>
 			</div>
+		</div>
+	</div>
+<?php
+}
+
+function va_ctas()
+{
+?>
+	<div class="row mb-4">
+		<div class="col 12">
+			<div class="row mb-3">
+				<div class="col-12">
+					<a href="#" class="btn btn-primary btn-lg btn-block">Quero meu Vídeo-autógrafo</a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<a href="#" class="btn btn-outline-primary btn-lg btn-block" target="_blank">Comprar na Magalu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php
+}
+
+function va_what_is()
+{
+?>
+	<div class="row va-what-is">
+		<div class="col-12 text-center">
+			<h3 class="title"><span class="ico mr-2"><?php Icon_Class::polen_icon_camera_video(); ?></span>O que é o Vídeo-autógrafo</h3>
+			<p>O vídeo-autógrafo é uma nova maneira de conectar e criar novas experiências digitais entre leitores e seus autores favoritos. Ao adquirir uma cópia do livro De porta em porta na Magalu, você pode ganhar um vídeo exclusivo e personalizado gravado pelo Luciano Huck.</p>
+		</div>
+	</div>
+<?php
+}
+
+function va_front_get_talent_videos($talent, $product_id = 15)
+{
+	if (!$talent) {
+		return;
+	}
+	$items = polen_get_videos_by_talent($talent);
+
+	$video_url = home_url() . "/v/";
+?>
+	<div class="row">
+		<div class="col-12">
+			<h3 class="title">Vídeos-autógrafo</h3>
+		</div>
+	</div>
+	<section id="talent-videos" class="row mb-1 banner-scrollable" data-public-url="<?php echo $video_url; ?>">
+		<div class="col-md-12 p-0">
+			<div class="banner-wrapper">
+				<div class="banner-content type-video<?php if (sizeof($items) < 1) echo " ml-3 ml-md-0" ?>">
+					<?php foreach ($items as $item) : ?>
+						<div class="polen-card-video">
+							<figure class="video-cover large">
+								<img loading="lazy" src="<?= $item['cover']; ?>" alt="<?= $item['title']; ?>" data-url="<?= $item['video']; ?>">
+								<a href="javascript:openVideoByHash('<?= $item['hash']; ?>')" class="video-player-button"></a>
+							</figure>
+						</div>
+					<?php endforeach; ?>
+				</div>
+			</div>
+		</div>
+	</section>
+	<input type="hidden" id="product_id" value="<?php echo $product_id; ?>" />
+
+	<div id="video-modal" class="background video-modal">
+		<div class="video-card-body">
+			<button id="close-button" class="close-button" onclick="hideModal()"><?php Icon_Class::polen_icon_close(); ?></button>
+			<div id="video-box"></div>
 		</div>
 	</div>
 <?php
