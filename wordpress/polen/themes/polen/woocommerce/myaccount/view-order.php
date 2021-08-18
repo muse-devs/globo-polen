@@ -5,6 +5,7 @@
  */
 defined('ABSPATH') || exit;
 
+use Polen\Includes\Polen_Order;
 use Polen\Includes\Polen_Video_Info;
 use \Polen\Includes\Cart\Polen_Cart_Item_Factory;
 
@@ -18,19 +19,22 @@ $email_billing = $order_item_cart->get_email_to_video();
 $order_array = Order_Class::polen_get_order_flow_obj($order_number, $order_status, $email_billing);
 polen_set_fan_viewed( $order );
 
+global $Polen_Plugin_Settings;
+$whatsapp_form = $Polen_Plugin_Settings['polen_whatsapp_form'];
+
+$number = $order->get_meta( Polen_Order::WHATSAPP_NUMBER_META_KEY );
+
 ?>
 <div class="row">
 	<div class="col-md-12 mb-5">
 		<h1>Acompanhar pedido</h1>
 	</div>
 	<div class="col-md-12">
-		<?php polen_get_order_flow_layout( $order_array ); ?>
+		<?php polen_get_order_flow_layout( $order_array, $order_number, $number, $whatsapp_form ); ?>
 	</div>
 </div>
 
 <?php
-
-use \Polen\Includes\Polen_Order;
 
 $order_is_completed = Polen_Order::is_completed($order);
 $url_watch_video = $order_is_completed == true ? polen_get_link_watch_video_by_order_id($order_number) : '';

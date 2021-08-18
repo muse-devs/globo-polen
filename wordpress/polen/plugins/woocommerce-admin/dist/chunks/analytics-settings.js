@@ -1,6 +1,6 @@
 (window["__wcAdmin_webpackJsonp"] = window["__wcAdmin_webpackJsonp"] || []).push([[17],{
 
-/***/ 43:
+/***/ 38:
 /***/ (function(module, exports) {
 
 function _defineProperty(obj, key, value) {
@@ -23,28 +23,28 @@ module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
 
-/***/ 590:
+/***/ 541:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ 591:
+/***/ 542:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ 592:
+/***/ 543:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ 653:
+/***/ 603:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -52,7 +52,7 @@ module.exports["default"] = module.exports, module.exports.__esModule = true;
 __webpack_require__.r(__webpack_exports__);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/extends.js
-var helpers_extends = __webpack_require__(13);
+var helpers_extends = __webpack_require__(35);
 var extends_default = /*#__PURE__*/__webpack_require__.n(helpers_extends);
 
 // EXTERNAL MODULE: external ["wp","element"]
@@ -65,28 +65,28 @@ var external_wp_i18n_ = __webpack_require__(2);
 var external_wp_components_ = __webpack_require__(4);
 
 // EXTERNAL MODULE: external ["wp","compose"]
-var external_wp_compose_ = __webpack_require__(15);
+var external_wp_compose_ = __webpack_require__(13);
 
 // EXTERNAL MODULE: external ["wp","data"]
 var external_wp_data_ = __webpack_require__(7);
 
 // EXTERNAL MODULE: external ["wc","components"]
-var external_wc_components_ = __webpack_require__(23);
+var external_wc_components_ = __webpack_require__(21);
 
 // EXTERNAL MODULE: external ["wc","data"]
 var external_wc_data_ = __webpack_require__(11);
 
 // EXTERNAL MODULE: external ["wc","tracks"]
-var external_wc_tracks_ = __webpack_require__(18);
+var external_wc_tracks_ = __webpack_require__(16);
 
 // EXTERNAL MODULE: ./client/analytics/settings/index.scss
-var settings = __webpack_require__(590);
+var settings = __webpack_require__(541);
 
 // EXTERNAL MODULE: ./client/analytics/settings/config.js + 1 modules
-var config = __webpack_require__(300);
+var config = __webpack_require__(254);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/defineProperty.js
-var defineProperty = __webpack_require__(43);
+var defineProperty = __webpack_require__(38);
 var defineProperty_default = /*#__PURE__*/__webpack_require__.n(defineProperty);
 
 // EXTERNAL MODULE: ./node_modules/prop-types/index.js
@@ -97,7 +97,7 @@ var prop_types_default = /*#__PURE__*/__webpack_require__.n(prop_types);
 var external_lodash_ = __webpack_require__(3);
 
 // EXTERNAL MODULE: ./client/analytics/settings/setting.scss
-var settings_setting = __webpack_require__(591);
+var settings_setting = __webpack_require__(542);
 
 // CONCATENATED MODULE: ./client/analytics/settings/setting.js
 
@@ -405,7 +405,7 @@ const getStatus = ({
   return 'nothing';
 };
 // EXTERNAL MODULE: external ["wp","url"]
-var external_wp_url_ = __webpack_require__(16);
+var external_wp_url_ = __webpack_require__(14);
 
 // CONCATENATED MODULE: ./client/analytics/settings/historical-data/actions.js
 
@@ -571,7 +571,7 @@ function HistoricalDataActions({
   };
 })])(HistoricalDataActions));
 // EXTERNAL MODULE: external ["wc","date"]
-var external_wc_date_ = __webpack_require__(21);
+var external_wc_date_ = __webpack_require__(19);
 
 // CONCATENATED MODULE: ./client/analytics/settings/historical-data/period-selector.js
 
@@ -714,7 +714,7 @@ function HistoricalDataProgress({
 
 /* harmony default export */ var historical_data_progress = (HistoricalDataProgress);
 // EXTERNAL MODULE: external ["wp","hooks"]
-var external_wp_hooks_ = __webpack_require__(34);
+var external_wp_hooks_ = __webpack_require__(30);
 
 // CONCATENATED MODULE: ./client/analytics/settings/historical-data/status.js
 
@@ -795,7 +795,7 @@ function HistoricalDataSkipCheckbox({
   };
 })(HistoricalDataSkipCheckbox));
 // EXTERNAL MODULE: ./client/analytics/settings/historical-data/style.scss
-var style = __webpack_require__(592);
+var style = __webpack_require__(543);
 
 // CONCATENATED MODULE: ./client/analytics/settings/historical-data/layout.js
 

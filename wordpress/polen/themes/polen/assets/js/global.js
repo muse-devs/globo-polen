@@ -11,7 +11,8 @@ const CONSTANTS = {
 const ZAPIERURLS = {
 	NEWSLETTER: "https://hooks.zapier.com/hooks/catch/10583855/b252jhj/",
 	NEW_ACCOUNT: "https://hooks.zapier.com/hooks/catch/10583855/b25uia6/",
-	LANDING_PAGE: "https://hooks.zapier.com/hooks/catch/10583855/b25u8xz/"
+	LANDING_PAGE: "https://hooks.zapier.com/hooks/catch/10583855/b25u8xz/",
+	PURCHASE: "https://hooks.zapier.com/hooks/catch/10583855/buaf22k/",
 }
 
 var interval = setInterval;
@@ -327,6 +328,11 @@ function polAcceptCookies() {
 	policies_box.parentNode.removeChild(policies_box);
 }
 
+function replaceLineBreakString(string) {
+	let instruction = string.replace(/&#38;#13;/g, "<br>").replace(/&#38;#10;/g, "<br>");
+	return instruction;
+}
+
 function polRequestZapier(formName, url) {
 	jQuery
 	.post(
@@ -335,7 +341,7 @@ function polRequestZapier(formName, url) {
 	)
 }
 
-function polAjaxForm(formName, callBack, callBackError) {
+function polAjaxForm(formName, callBack, callBackError, reset = true) {
 	polSpinner(null, formName);
 	blockUnblockInputs(formName, true);
 	jQuery
@@ -344,7 +350,7 @@ function polAjaxForm(formName, callBack, callBackError) {
 			jQuery(formName).serialize(),
 			function (result) {
 				if (result.success) {
-					document.querySelector(formName).reset();
+					reset && document.querySelector(formName).reset();
 					callBack(result.data);
 				} else {
 					callBackError(result.data);
@@ -515,4 +521,11 @@ function polSlugfy(s, opt) {
 	s = s.replace(RegExp('(^' + opt.delimiter + '|' + opt.delimiter + '$)', 'g'), '');
 
 	return opt.lowercase ? s.toLowerCase() : s;
+}
+
+function mtel(v) {
+	v = v.replace(/\D/g, ""); //Remove tudo o que não é dígito
+	v = v.replace(/^(\d{2})(\d)/g, "($1) $2"); //Coloca parênteses em volta dos dois primeiros dígitos
+	v = v.replace(/(\d)(\d{4})$/, "$1-$2"); //Coloca hífen entre o quarto e o quinto dígitos
+	return v;
 }

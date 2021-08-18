@@ -407,7 +407,7 @@ class Polen_Plugin_Settings
 
         // Telefone do Atendimento Online
         \Redux::set_section( $opt_name, array(
-            'title'            => esc_html__( 'Telefone Whatsapp', 'polen' ),
+            'title'            => esc_html__( 'Whatsapp', 'polen' ),
             'id'               => 'polen_whatsapp_number',
             'icon'             => 'el el-mic-alt',
             'subsection'       => false,
@@ -427,6 +427,13 @@ class Polen_Plugin_Settings
                     'subtitle' => esc_html__('Mensagem inicial para começar o chat', 'polen'),
                     'desc'     => 'Informe a Mensagem inicial para começar o chat',
                     'default'  => '',
+                ),
+                array(
+                    'id'       => 'polen_whatsapp_form',
+                    'type'     => 'switch',
+                    'title'    => esc_html__('Exibir formulário para usuário', 'polen'),
+                    'subtitle'     => 'Exibe um formulário para o usuário adicionar seu whatsapp',
+                    'default'  => false,
                 ),
             )
         ) );
