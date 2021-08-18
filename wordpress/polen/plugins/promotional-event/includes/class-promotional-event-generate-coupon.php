@@ -19,9 +19,8 @@ class Promotional_Event_Generate_Coupon {
      * @return string
      * @throws Exception
      */
-    static public function generate($options = []) {
+    public function generate($options = []) {
 
-        // to accept options as function arguments like on README
         if (!is_array($options) && func_num_args() > 0) {
             $keys = ['length', 'prefix', 'suffix', 'letters', 'numbers', 'symbols', 'mixed_case', 'mask'];
             $opt = [];
@@ -86,7 +85,7 @@ class Promotional_Event_Generate_Coupon {
      * @param array $options
      * @return array
      */
-    static public function generate_coupons($maxNumberOfCoupons = 1, $options = []) {
+    public function generate_coupons($maxNumberOfCoupons = 1, $options = []) {
         $coupons = [];
         for ($i = 0; $i < $maxNumberOfCoupons; $i++) {
             $temp = self::generate($options);
@@ -100,7 +99,7 @@ class Promotional_Event_Generate_Coupon {
      * @param $filename
      * @param array $options
      */
-    static public function generate_coupons_to_xls($maxNumberOfCoupons = 1, $filename, $options = []) {
+    public function generate_coupons_to_xls($maxNumberOfCoupons = 1, $filename, $options = []) {
         $filename = (empty(trim($filename)) ? 'coupons' : trim($filename));
 
         header('Content-Type: application/vnd.ms-excel');
@@ -121,7 +120,7 @@ class Promotional_Event_Generate_Coupon {
      * @return string
      * @throws Exception
      */
-    static private function cleanString($string, $options = []) {
+    private function cleanString($string, $options = []) {
         $toUpper = (isset($options['uppercase']) ? filter_var($options['uppercase'], FILTER_VALIDATE_BOOLEAN) : false);
         $toLower = (isset($options['lowercase']) ? filter_var($options['lowercase'], FILTER_VALIDATE_BOOLEAN) : false);
 
