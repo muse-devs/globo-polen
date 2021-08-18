@@ -8,13 +8,16 @@ class Promotional_Event_Rewrite
     const QUERY_VARS_EVENT_PROMOTIONAL_APP     = 'event_promotinal_app';
     const QUERY_VARS_EVENT_PROMOTIONAL_IS_HOME = 'event_promotinal_is_home';
 
-    public function __construct( $static = false )
+    public function __construct()
     {
-        if( $static ) {
-            add_action( 'init',             array( $this, 'rewrites' ) );
-            add_filter( 'query_vars',       array( $this, 'query_vars' ), 10, 1 );
-            add_action( 'template_include', array( $this, 'template_include' ) );
-        }
+        $this->init();
+    }
+
+    public function init()
+    {
+        add_action( 'init',             array( $this, 'rewrites' ) );
+        add_filter( 'query_vars',       array( $this, 'query_vars' ), 10, 1 );
+        add_action( 'template_include', array( $this, 'template_include' ) );
     }
 
 
