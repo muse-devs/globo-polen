@@ -65,6 +65,12 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
        $order_id = trim($_POST['order']); 
        $type = strip_tags( $_POST['type'] );
 
+       if( empty( $order_id ) ) {
+        //    wp_send_json_error( 'Erro na order', 403 );
+           echo wp_json_encode( array( 'success' => false, 'message' => 'Sem order_id' ) );
+           wp_die();
+       }
+
        $sql_product = " SELECT * FROM {$wpdb->prefix}posts WHERE post_type = 'product' and post_author = ".$talent_id;
        $talent_products = $wpdb->get_results( $sql_product );
 
@@ -88,6 +94,7 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
                    $response = array( 'success' => false, 'message' => 'Pedido não é desse talento' );        
                }else{
                    $order = wc_get_order( $order_id );
+                   \WC_Emails::instance();
                    if($order){
                        if( $type == 'accept' ){
                            $order->update_status( 'talent-accepted', '', true );

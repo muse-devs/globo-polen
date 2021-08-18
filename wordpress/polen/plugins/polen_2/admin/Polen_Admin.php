@@ -1,6 +1,6 @@
 <?php
-
 namespace Polen\Admin;
+defined( 'ABSPATH' ) || die;
 
 use Polen\Includes\Ajax\Polen_Cupom_Create_Controller;
 use \Polen\Includes\Polen_Update_Fields;
@@ -19,7 +19,7 @@ class Polen_Admin {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
         
-		$this->init_classes( true );
+		$this->actions( true );
         if( is_admin() ) {
             new Tributes_Admin( true );
             new Tributes_Details_Admin( true );
@@ -34,10 +34,11 @@ class Polen_Admin {
         public function init_classes( bool $static = true )
         {
                 new Polen_Admin_DisableMetabox( $static );
-                new Polen_Update_Fields( $static );
+                // new Polen_Update_Fields( $static );
                 new Polen_Admin_RedirectTalentAccess();
                 new Polen_Admin_Order_Custom_Fields( $static );
                 new Polen_Cupom_Create_Controller( $static );
+                new Polen_Admin_Video_Info( $static );
         }
 
 	/**
