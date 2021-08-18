@@ -124,6 +124,8 @@ class Promotional_Event {
 
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-promotional-event-generate-coupon.php';
 
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-promotional-event-rewrite.php';
+
 		$this->loader = new Promotional_Event_Loader();
 
 	}
@@ -172,7 +174,7 @@ class Promotional_Event {
 	private function define_public_hooks()
     {
 		$plugin_public = new Promotional_Event_Public( $this->get_plugin_name(), $this->get_version() );
-
+		$rewrite = new Promotional_Event_Rewrite();
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 	}
