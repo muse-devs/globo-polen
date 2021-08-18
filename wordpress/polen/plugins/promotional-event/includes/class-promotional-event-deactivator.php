@@ -36,12 +36,7 @@ class Promotional_Event_Deactivator {
 
     public static function drop_table_promotinal_event()
     {
-        global $wpdb;
 
-        $table_name = $wpdb->prefix . 'promotional_event';
-
-        $sql = "DROP TABLE $table_name";
-        $wpdb->query($sql);
     }
 
 }

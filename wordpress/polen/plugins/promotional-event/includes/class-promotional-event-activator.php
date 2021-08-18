@@ -24,7 +24,7 @@ class Promotional_Event_Activator {
 
     /**
      * Estartar todas as funções
-     *
+     *  
      * @throws Exception
      * @since    1.0.0
      */
@@ -33,16 +33,16 @@ class Promotional_Event_Activator {
     {
         global $wpdb;
         $table_name = $wpdb->prefix . 'promotional_event';
-        $charset_collate = $wpdb->get_charset_collate();
-
-        $sql = "CREATE TABLE IF NOT EXISTS $table_name (
-			  `id` INT(11) NOT NULL AUTO_INCREMENT,
-			  `code` VARCHAR(255) NOT NULL,
-			  `is_used` bit NOT NULL DEFAULT (0),
-			  `order_id` INT(11),
-			  PRIMARY KEY (`id`),
-			  UNIQUE INDEX `id_UNIQUE` (`id` ASC))
-			  $charset_collate;";
+        $sql = "CREATE TABLE IF NOT EXISTS {$table_name} ( 
+            `ID` BIGINT(20) NOT NULL AUTO_INCREMENT, 
+            `code` VARCHAR(32) NOT NULL, 
+            `is_used` bit NOT NULL DEFAULT (0), 
+            `order_id` INT(11), 
+            `used_at` DATETIME NULL, 
+            `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY (`ID`), 
+            UNIQUE INDEX `code_UNIQUE` (`code` ASC)) 
+            DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci;";
 
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
         dbDelta( $sql );
