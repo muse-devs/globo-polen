@@ -26,6 +26,7 @@
                     <th class="text-center">#</th>
                     <th class="text-center">Código</th>
                     <th class="text-center">Status</th>
+                    <th class="text-center">ID Produto</th>
                 </tr>
                 </thead>
                 <tfoot>
@@ -33,6 +34,7 @@
                     <th class="text-center">#</th>
                     <th class="text-center">Código</th>
                     <th class="text-center">Status</th>
+                    <th class="text-center">ID Produto</th>
                 </tr>
                 </tfoot>
                 <tbody>
@@ -45,6 +47,7 @@
                         <?php else: ?>
                             <td><?php echo "Não Utilizado"; ?></td>
                         <?php endif; ?>
+                        <td><?php echo !empty($code->product_id) ? $code->product_id : '--'; ?></td>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>

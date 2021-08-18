@@ -61,7 +61,7 @@ class Promotional_Event_Admin {
 	public function enqueue_styles()
     {
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/promotional-event-admin.css', array(), $this->version, 'all' );
-		wp_enqueue_style( 'bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css', array(), $this->version, 'all' );
+		wp_enqueue_style( 'bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.2.0/css/bootstrap.min.css', array(), $this->version, 'all' );
 	}
 
 	/**
@@ -101,25 +101,14 @@ class Promotional_Event_Admin {
     }
 
     /**
-     * Retornar todos os códigos
-     *
-     * @since    1.0.0
-     */
-    public function get_codes()
-    {
-        global $wpdb;
-        $table_name = $wpdb->prefix . 'promotional_event';
-        return $wpdb->get_results( "SELECT * FROM {$table_name}");
-    }
-
-    /**
      * View página principal do plugin
      *
      * @since    1.0.0
      */
     public function show_promotions()
     {
-        $values_code = $this->get_codes();
+        $sql = new Coupons();
+        $values_code = $sql->get_codes();
         require 'partials/promotional-event-admin-display.php';
     }
 
@@ -130,6 +119,8 @@ class Promotional_Event_Admin {
      */
     public function show_options()
     {
+        $sql = new Coupons();
+        $count = $sql->count_rows();
         require 'partials/promotional-event-options.php';
     }
 
@@ -137,9 +128,7 @@ class Promotional_Event_Admin {
     {
         $foo = addslashes($_POST['qty']);
         $sql = new Coupons();
-        // $sql->insert_coupons($foo);
-
-        wp_die();
+        $sql->insert_coupons($foo);
     }
 
 }
