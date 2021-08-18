@@ -58,7 +58,7 @@ function va_magalu_box_cart()
                                 <li class="item itempayment-approved complete">
                                     <span class="background status">1</span>
                                     <span class="text">
-                                        <p class="description">Comprar o livro no site da <b>Magalu</b></p>
+                                        <p class="description">Comprar o livro no site da <a href="#" target="_blank"><b>Magalu</b></a></p>
                                     </span>
                                 </li>
                                 <li class="item itempayment-approved complete">
