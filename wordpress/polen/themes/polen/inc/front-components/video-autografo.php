@@ -1,4 +1,187 @@
 <?php
 
-require TEMPLATE_DIR . '/inc/front-components/video-autografo/ian.php';
-require TEMPLATE_DIR . '/inc/front-components/video-autografo/ricardo.php';
+function va_get_home_banner($link)
+{
+?>
+	<div class="row mt-4">
+		<div class="col-12">
+			<div class="va-banner">
+				<img class="image mobile-img" src="<?php echo TEMPLATE_URI . '/assets/img/video-autografo/va-banner-mobile.png'; ?>" alt="De Porta em Porta">
+                <img class="image desktop-img" src="<?php echo TEMPLATE_URI . '/assets/img/video-autografo/va-banner-desktop.png'; ?>" alt="De Porta em Porta">
+				<div class="content">
+                    <h2>De porta em porta</h2>
+					<p class="mt-3">
+                        Agora você pode comprar o livro<br>
+                        e ter um autógrafo em vídeo do Luciano Huck.
+                    </p>
+					<a href="<?php echo $link; ?>" class="btn btn-primary btn-md">Conheça<span class="ml-2"><?php Icon_Class::polen_icon_chevron_right(); ?></span></a>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php
+}
+
+function va_magalu_box_thank_you()
+{
+?>
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="magalu-box">
+                <div class="header-box">
+                    <img src="<?php echo TEMPLATE_URI . '/assets/img/video-autografo/lu.png'; ?>" alt="Lu"></img>
+                    <h3>Obrigada por pedir seu<br>vídeo-autógrafo</h3>
+                </div>
+                <div class="content-box">
+                    <p>Luciano vai enviar um vídeo<br>personalizado em até 15 dias.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php
+}
+
+function va_magalu_box_cart()
+{
+?>
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="magalu-box">
+                <div class="header-box">
+                    <img src="<?php echo TEMPLATE_URI . '/assets/img/video-autografo/lu.png'; ?>" alt="Lu"></img>
+                    <h3>Para pedir um Vídeo-autógrafo você precisa:</h3>
+                </div>
+                <div class="content-box mt-3">
+                    <div class="row">
+                        <div class="col-12 col-md-6 m-md-auto d-flex align-items-center">
+                            <ul class="order-flow half">
+                                <li class="item itempayment-approved complete">
+                                    <span class="background status">1</span>
+                                    <span class="text">
+                                        <p class="description">Comprar o livro no site da <b>Magalu</b></p>
+                                    </span>
+                                </li>
+                                <li class="item itempayment-approved complete">
+                                    <span class="background status">2</span>
+                                    <span class="text">
+                                        <p class="description">Confira o e-mail da Magalu com o código de vídeo-autógrafo</p>
+                                    </span>
+                                </li>
+                                <li class="item itempayment-approved complete">
+                                    <span class="background status">3</span>
+                                    <span class="text">
+                                        <p class="description">Adicione o código que você recebeu abaixo</p>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php
+}
+
+function va_partners_footer()
+{
+?>
+    <div class="row mt-3">
+        <div class="col-12">
+            <h2>Esse produto é feito em parceria com:</h2>
+        </div>
+        <div class="col-12">
+            <img src="<?php echo TEMPLATE_URI . '/assets/img/video-autografo/magalu-logo.png'; ?>" alt="Magazine Luiza">
+            <img src="<?php echo TEMPLATE_URI . '/assets/img/video-autografo/cia-das-letras-logo.png'; ?>" alt="Cia das Letras">
+        </div>
+    </div>
+<?php
+}
+
+function va_get_banner_book($small = false)
+{
+	$img_bg = TEMPLATE_URI . "/assets/img/video-autografo/bg_lh_right.png";
+	$img_book = TEMPLATE_URI . "/assets/img/video-autografo/book_cover.png";
+
+?>
+	<div class="row<?php echo $small ? ' mb-2' : ' mb-4'; ?>">
+		<div class="col-12">
+			<div class="va-top-banner<?php echo $small ? ' small' : ''; ?>">
+				<div class="box-round">
+					<img src="<?php echo $img_bg; ?>" alt="Fundo do Box" class="img-bg" />
+				</div>
+				<div class="content<?php echo $small ? '' : ' pb-2'; ?>">
+					<img src="<?php echo $img_book; ?>" alt="Capa do Livro" class="book-cover" />
+					<h1 class="title"><?php echo $small ? 'Livro - ' : ''; ?>De porta em porta</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php
+}
+
+function va_get_book_infos()
+{
+?>
+	<div class="row mb-4">
+		<div class="col-12">
+			<div class="box-round book-info-wrapp py-3 px-3">
+				<div class="row">
+					<div class="col-12">
+						<h4 class="title">Sobre o Livro</h4>
+						<p>Em seu novo livro, Luciano Huck compila memórias pessoais, aprendizados e conversas com representantes de várias áreas do conhecimento para trazer luz ao debate sobre a responsabilidade individual para a construção de uma sociedade mais igualitária.<br />
+							<a href="javascript:showMoreText()" class="link-more-text show">Mostrar mais</a>
+						</p>
+						<p class="more-text">De porta em porta reúne as contribuições de figuras como Yuval Noah Harari, Esther Duflo, Michael Sandel e Anne Applebaum, além de memórias muito pessoais de Huck e relatos de encontros com brasileiros anônimos, mas cheios de histórias para contar.</p>
+					</div>
+				</div>
+				<div class="row mb-4">
+					<div class="col-12 col-md-6">
+						<h4 class="title">Informações do livro</h4>
+						<div class="row">
+							<div class="col-3">
+								<div class="book-info">
+									<div class="title">Páginas</div>
+									<?php Icon_Class::va_icons("pages"); ?>
+									<div class="description">264 páginas</div>
+								</div>
+							</div>
+							<div class="col-3">
+								<div class="book-info">
+									<div class="title">Idioma</div>
+									<?php Icon_Class::va_icons("language"); ?>
+									<div class="description">Português</div>
+								</div>
+							</div>
+							<div class="col-3">
+								<div class="book-info">
+									<div class="title">Editora</div>
+									<?php Icon_Class::va_icons("books"); ?>
+									<div class="description">Objetiva</div>
+								</div>
+							</div>
+							<div class="col-3">
+								<div class="book-info">
+									<div class="title">Publicação</div>
+									<?php Icon_Class::va_icons("calendar"); ?>
+									<div class="description">20 agosto 2021</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row mb-3">
+					<div class="col-12">
+						<h4 class="title text-md-center">Avaliação</h4>
+						<div class="row book-rate text-center">
+							<div class="col-12">
+								<?php polen_get_stars(4.2); ?>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php
+}
