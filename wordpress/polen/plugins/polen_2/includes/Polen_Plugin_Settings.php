@@ -472,7 +472,7 @@ class Polen_Plugin_Settings
             )
         ) );
         
-                // Configurar produto promocional
+         // Configurar produto promocional
         \Redux::set_section( $opt_name, array(
             'title'            => esc_html__( 'Configurar produto promocional', 'polen' ),
             'id'               => 'promotional-event',
