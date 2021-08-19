@@ -25,7 +25,7 @@ function va_get_home_banner($link)
 function va_magalu_box_thank_you()
 {
 ?>
-	<div class="row mt-4">
+	<div class="row mb-4">
 		<div class="col-12">
 			<div class="magalu-box">
 				<div class="header-box text-center py-4 px-5">
@@ -86,7 +86,7 @@ function va_magalu_box_cart()
 function va_partners_footer()
 {
 ?>
-	<div class="row mt-3">
+	<div class="row mb-3">
 		<div class="col-12">
 			<h2>Esse produto é feito em parceria com:</h2>
 		</div>
