@@ -42,6 +42,7 @@ class Promotional_Event_Admin {
 
 	const ORDER_METAKEY = 'promotional_event';
     const SESSION_KEY_CUPOM_CODE = 'event_promotion_cupom_code';
+    const NONCE_ACTION = 'promotional_event_2hj3g42jhg43';
 
 	/**
 	 * Initialize the class and set its properties.
@@ -152,7 +153,12 @@ class Promotional_Event_Admin {
             $city = sanitize_text_field($_POST['city']);
             $email = sanitize_text_field($_POST['email']);
             $term = sanitize_text_field( $_POST['terms'] );
+            $nonce = $_POST['security'];
 
+            if( !wp_verify_nonce( $nonce, self::NONCE_ACTION )) {
+                throw new Exception('Erro na verificação de segurança', 422);
+            }
+            
             if( empty( $term ) || $term !== 'on' ) {
                 throw new Exception('Aceite os termos e condições', 422);
             }

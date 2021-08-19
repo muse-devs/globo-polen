@@ -308,6 +308,7 @@ function va_cart_form($coupon = "")
 					</label>
 				</p>
 				<p>
+					<input type="hidden" name="security" value="<?= wp_create_nonce( Promotional_Event_Admin::NONCE_ACTION ); ?>" />
 					<input type="submit" class="btn btn-primary btn-lg btn-block" value="Pedir meu vídeo-autógrafo" />
 				</p>
 			</form>
