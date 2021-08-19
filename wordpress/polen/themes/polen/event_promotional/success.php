@@ -12,7 +12,8 @@ if( empty( $order ) ) {
 
 $order_item_cart = Polen_Cart_Item_Factory::polen_cart_item_from_order($order);
 $email_billing = $order_item_cart->get_email_to_video();
-$order_array = Order_Class::polen_get_order_flow_obj($order->get_id(), $order->get_status(), $email_billing);
+
+$order_array = event_promotional_get_order_flow_obj($order->get_id(), $order->get_status(), 'rodolfoneto@gmail.com');
 $order_number = $order->get_id();
 
 get_header();
@@ -24,7 +25,7 @@ get_header();
 			<?php
                 va_magalu_box_thank_you();
 
-				polen_get_order_flow_layout($order_array, $order_number );
+				event_promotional_get_order_flow_layout($order_array, $order_number );
 
                 va_partners_footer();
 			?>
