@@ -302,8 +302,8 @@ function va_cart_form($coupon = "")
 					</label>
 				</p>
 				<p>
-					<label>
-						<input type="checkbox" class="form-control form-control-lg" name="terms" id="terms" required />
+					<label class="d-flex">
+						<input type="checkbox" class="form-control form-control-lg" name="terms" id="terms" style="width: 33px !important;" required />
 						<span class="woocommerce-terms-and-conditions-checkbox-text ml-2">Li e concordo com o(s) <a href="http://polen.globo/politica-de-privacidade/" class="woocommerce-terms-and-conditions-link" target="_blank">termos e condições</a>  e com o <a href="<?= site_url('regulamento-da-promocao-video-autografo-do-livro-de-porta-em-porta'); ?>" class="woocommerce-terms-and-conditions-link" target="_blank">Regulamento da Promoção</a>&nbsp;<span class="required">*</span></span>
 					</label>
 				</p>
