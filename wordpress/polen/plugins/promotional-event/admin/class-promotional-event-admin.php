@@ -124,11 +124,97 @@ class Promotional_Event_Admin {
         require 'partials/promotional-event-options.php';
     }
 
+    /**
+     * Criar cupons
+     *
+     * @throws Exception
+     */
     public function create_coupons()
     {
         $foo = addslashes($_POST['qty']);
         $sql = new Coupons();
         $sql->insert_coupons($foo);
+        wp_send_json_success( 'ok', 200 );
+        wp_die();
     }
 
+    /**
+     * Criar uma nova order e salvar cupom
+     */
+    function create_orders_video_autograph()
+    {
+        try{
+            $coupon_code = !empty($_POST['coupon']) ? sanitize_text_field($_POST['coupon']) : null;
+
+            $address = array(
+                'first_name' => sanitize_text_field($_POST['name']),
+                'email' => sanitize_text_field($_POST['email']),
+                'city' => sanitize_text_field($_POST['city']),
+                'state' => sanitize_text_field($_POST['state']),
+                'country' => 'Brasil',
+                'phone' => sanitize_text_field($_POST['phone']),
+            );
+
+            $coupon = new Coupons();
+            $check = $coupon->check_coupoun_exist($coupon_code);
+            $check_is_used = $coupon->check_coupoun_is_used($coupon_code);
+
+            if (empty($coupon_code)) {
+                throw new Exception('Cupon é obrigatório', 422);
+                wp_die();
+            }
+
+            if (empty($check)) {
+                throw new Exception('Cupon está incorreto ou não existe', 404);
+                wp_die();
+            }
+
+            if ($check_is_used == 1) {
+                throw new Exception('Cupon já foi utilizado', 401);
+                wp_die();
+            }
+
+
+            $order = wc_create_order();
+            $coupon->update_coupoun($coupon_code, $order->get_id());
+
+            // ID Product
+            $productId = 472;
+            $quantity = 1;
+            $product = wc_get_product($productId);
+            $order->add_product($product, $quantity);
+            $order->set_address($address, 'billing');
+            $order->set_address($address, 'shipping');
+
+            $order_item_id = wc_add_order_item( $order->get_id(), array(
+                'order_item_name' => $product->get_title(),
+                'order_item_type' => 'line_item',
+            ));
+
+            wc_add_order_item_meta( $order_item_id, '_qty', $quantity, true );
+            wc_add_order_item_meta( $order_item_id, '_product_id', $product->get_id(), true );
+            wc_add_order_item_meta( $order_item_id, '_line_subtotal', 0, true );
+            wc_add_order_item_meta( $order_item_id, '_line_total', 0, true );
+            //Polen Custom Meta Order_Item
+            wc_add_order_item_meta( $order_item_id, 'offered_by'            , '', true );
+            wc_add_order_item_meta( $order_item_id, 'video_to'              , 'to_myself', true );
+            wc_add_order_item_meta( $order_item_id, 'name_to_video'         , 'Polen.me', true );
+            wc_add_order_item_meta( $order_item_id, 'email_to_video'        , 'polen@polen.me', true );
+            wc_add_order_item_meta( $order_item_id, 'video_category'        , 'Novidade', true );
+            // wc_add_order_item_meta( $order_item_id, 'instructions_to_video' , $final_instruction, true );
+            wc_add_order_item_meta( $order_item_id, 'allow_video_on_page'   , 0, true );
+            wc_add_order_item_meta( $order_item_id, '_fee_amount'           , 0, true );
+            wc_add_order_item_meta( $order_item_id, '_line_total'           , 0, true );
+
+            $order = new \WC_Order($order->get_id());
+            $order->calculate_totals();
+
+            wp_send_json_success( 'ok', 200 );
+            wp_die();
+
+        } catch (\Exception $e) {
+            wp_send_json_error(array('Error' => $e->getMessage()), 422);
+            wp_die();
+        }
+    }
 }
