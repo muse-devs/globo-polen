@@ -5,6 +5,7 @@
  */
 
 get_header();
+$coupon = "";
 ?>
 
 <main id="primary" class="site-main">
@@ -13,7 +14,7 @@ get_header();
 		<div class="col-12 col-md-8 m-md-auto">
 			<?php
 			va_get_banner_book(true);
-			va_cart_form();
+			va_cart_form($coupon);
 			?>
 		</div>
 	</div>
