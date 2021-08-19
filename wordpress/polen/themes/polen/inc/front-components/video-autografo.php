@@ -58,7 +58,7 @@ function va_magalu_box_cart()
 								<li class="item itempayment-approved complete">
 									<span class="background status">1</span>
 									<span class="text">
-										<p class="description">Comprar o livro De Porta em Porta no site da <a href="https://www.magazineluiza.com.br/livro-de-porta-em-porta-luciano-huck-com-brinde/p/231238100/li/adml/" target="_blank"><b>Magalu</b></a></p>
+										<p class="description">Comprar o livro De Porta em Porta no site da <a href="<?php echo event_get_magalu_url(); ?>" target="_blank"><b>Magalu</b></a></p>
 									</span>
 								</li>
 								<li class="item itempayment-approved complete">
@@ -302,8 +302,8 @@ function va_cart_form($coupon = "")
 					</label>
 				</p>
 				<p>
-					<label class="woocommerce-form__label woocommerce-form__label-for-checkbox checkbox d-flex">
-						<input type="checkbox" class="form-control form-control-lg" name="terms" id="terms" required />
+					<label class="d-flex">
+						<input type="checkbox" class="form-control form-control-lg" name="terms" id="terms" style="width: 33px !important;" required />
 						<span class="woocommerce-terms-and-conditions-checkbox-text ml-2">Li e concordo com o(s) <a href="http://polen.globo/politica-de-privacidade/" class="woocommerce-terms-and-conditions-link" target="_blank">termos e condições</a>  e com o <a href="<?= site_url('regulamento-da-promocao-video-autografo-do-livro-de-porta-em-porta'); ?>" class="woocommerce-terms-and-conditions-link" target="_blank">Regulamento da Promoção</a>&nbsp;<span class="required">*</span></span>
 					</label>
 				</p>
