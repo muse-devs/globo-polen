@@ -217,4 +217,40 @@ class Promotional_Event_Admin {
             wp_die();
         }
     }
+
+    /**
+     * Verificar cupon
+     */
+    function check_coupon()
+    {
+        try{
+            $coupon_code = !empty($_POST['coupon']) ? sanitize_text_field($_POST['coupon']) : null;
+
+            $coupon = new Coupons();
+            $check = $coupon->check_coupoun_exist($coupon_code);
+            $check_is_used = $coupon->check_coupoun_is_used($coupon_code);
+
+            if (empty($coupon_code)) {
+                throw new Exception('Cupon é obrigatório', 422);
+                wp_die();
+            }
+
+            if (empty($check)) {
+                throw new Exception('Cupon está incorreto ou não existe', 404);
+                wp_die();
+            }
+
+            if ($check_is_used == 1) {
+                throw new Exception('Cupon já foi utilizado', 401);
+                wp_die();
+            }
+
+            wp_send_json_success( 'Cupon Disponivél', 200 );
+            wp_die();
+
+        } catch (\Exception $e) {
+            wp_send_json_error(array('Error' => $e->getMessage()), 422);
+            wp_die();
+        }
+    }
 }

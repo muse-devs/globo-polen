@@ -167,6 +167,8 @@ class Promotional_Event {
 		$this->loader->add_action( 'wp_ajax_create_coupons', $plugin_admin, 'create_coupons' );
 		$this->loader->add_action( 'wp_ajax_create_orders_video_autograph', $plugin_admin, 'create_orders_video_autograph' );
         $this->loader->add_action( 'wp_ajax_nopriv_create_orders_video_autograph', $plugin_admin, 'create_orders_video_autograph' );
+        $this->loader->add_action( 'wp_ajax_check_coupon', $plugin_admin, 'check_coupon' );
+        $this->loader->add_action( 'wp_ajax_nopriv_check_coupon', $plugin_admin, 'check_coupon' );
 	}
 
 	/**
