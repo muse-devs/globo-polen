@@ -159,6 +159,10 @@ class Promotional_Event_Admin {
             if( !wp_verify_nonce( $nonce, self::NONCE_ACTION )) {
                 throw new Exception('Erro na verificação de segurança', 422);
             }
+
+            if( !filter_input( INPUT_POST, 'email', FILTER_VALIDATE_EMAIL ) ) {
+                throw new Exception('Email inválido', 422);
+            }
             
             if( empty( $term ) || $term !== 'on' ) {
                 throw new Exception('Aceite os termos e condições', 422);
@@ -194,7 +198,7 @@ class Promotional_Event_Admin {
 
             $order = wc_create_order();
             $coupon->update_coupoun($coupon_code, $order->get_id());
-
+            $order->update_meta_data( '_polen_customer_email', $email );
             $order->add_meta_data(self::ORDER_METAKEY, 1, true);
             $order->add_meta_data('campaign', 'de-porta-em-porta', true);
 
