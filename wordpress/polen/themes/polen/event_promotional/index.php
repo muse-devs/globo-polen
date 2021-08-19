@@ -13,7 +13,7 @@ get_header();
 		<div class="col-12 col-md-8 m-md-auto">
 			<?php
 			va_get_banner_book();
-			va_ctas();
+			va_ctas(event_promotional_url_code_validation(), "");
 			va_what_is();
 			va_get_book_infos();
 
