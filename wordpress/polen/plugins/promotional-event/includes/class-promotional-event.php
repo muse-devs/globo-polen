@@ -129,6 +129,8 @@ class Promotional_Event {
 
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/models/class-coupons.php';
 
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-promotional-event-rewrite.php';
+
 		$this->loader = new Promotional_Event_Loader();
 
 	}
