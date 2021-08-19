@@ -58,7 +58,7 @@ function va_magalu_box_cart()
 								<li class="item itempayment-approved complete">
 									<span class="background status">1</span>
 									<span class="text">
-										<p class="description">Comprar o livro De Porta em Porta no site da <a href="https://www.magazineluiza.com.br/livro-de-porta-em-porta-luciano-huck-com-brinde/p/231238100/li/adml/" target="_blank"><b>Magalu</b></a></p>
+										<p class="description">Comprar o livro De Porta em Porta no site da <a href="<?php echo event_get_magalu_url(); ?>" target="_blank"><b>Magalu</b></a></p>
 									</span>
 								</li>
 								<li class="item itempayment-approved complete">

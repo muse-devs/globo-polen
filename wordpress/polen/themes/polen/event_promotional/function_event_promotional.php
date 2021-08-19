@@ -27,3 +27,8 @@ function event_promotional_is_home()
     }
     return false;
 }
+
+function event_get_magalu_url()
+{
+	return "https://www.magazineluiza.com.br/livro-de-porta-em-porta-luciano-huck-com-brinde/p/231238100/li/adml/";
+}
