@@ -30,7 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                                     <table border="0" cellpadding="0" cellspacing="0" width="100%" id="template_header" style='color: #ffffff; border-bottom: 0; font-weight: bold; line-height: 100%; vertical-align: middle; font-family: Poppins, "Helvetica Neue", Helvetica, Arial, sans-serif;'>
                                         <tr>
                                             <td style="display: flex; justify-content: center;border-bottom: 1px solid rgba(255, 255, 255, 0.2);">
-                                                <img src="<?php echo TEMPLATE_URI.'/assets/img/video-autografo/lu-email.png'?>" style="height: 250px;"></img>
+                                                <img src="<?php echo TEMPLATE_URI.'/assets/img/video-autografo/book_cover.png'?>" style="height: 250px;"></img>
                                             </td>
                                         </tr>
                                     </table>
