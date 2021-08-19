@@ -347,7 +347,7 @@ function va_coupon()
 			polAjaxForm(formId, function() {
 				console.log("foi");
 			}, function(e) {
-				polMessages.error(e);
+				polMessages.error(e.Error);
 			});
 		});
 	</script>
