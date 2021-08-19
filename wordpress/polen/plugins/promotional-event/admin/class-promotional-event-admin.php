@@ -41,6 +41,7 @@ class Promotional_Event_Admin {
 	private $version;
 
 	const ORDER_METAKEY = 'promotional_event';
+    const SESSION_KEY_CUPOM_CODE = 'event_promotion_cupom_code';
 
 	/**
 	 * Initialize the class and set its properties.
@@ -262,6 +263,8 @@ class Promotional_Event_Admin {
                 wp_die();
             }
 
+            session_start();
+            $_SESSION[ self::SESSION_KEY_CUPOM_CODE ] = $coupon_code;
             wp_send_json_success( 'Cupon Disponivél', 200 );
             wp_die();
 
