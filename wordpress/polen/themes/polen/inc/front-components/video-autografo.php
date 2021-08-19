@@ -28,8 +28,8 @@ function va_magalu_box_thank_you()
 	<div class="row mt-4">
 		<div class="col-12">
 			<div class="magalu-box">
-				<div class="header-box">
-					<img src="<?php echo TEMPLATE_URI . '/assets/img/video-autografo/lu.png'; ?>" alt="Lu"></img>
+				<div class="header-box text-center py-4 px-5">
+					<?php /*<img src="<?php echo TEMPLATE_URI . '/assets/img/video-autografo/lu.png'; ?>" alt="Lu"></img>*/ ?>
 					<h3>Obrigada por pedir seu<br>vídeo-autógrafo</h3>
 				</div>
 				<div class="content-box">
@@ -47,8 +47,8 @@ function va_magalu_box_cart()
 	<div class="row mb-4">
 		<div class="col-12">
 			<div class="magalu-box">
-				<div class="header-box">
-					<img src="<?php echo TEMPLATE_URI . '/assets/img/video-autografo/lu.png'; ?>" alt="Lu"></img>
+				<div class="header-box text-center py-4 px-5">
+					<?php /*<img src="<?php echo TEMPLATE_URI . '/assets/img/video-autografo/lu.png'; ?>" alt="Lu"></img>*/ ?>
 					<h3>Para pedir um Vídeo-autógrafo você precisa:</h3>
 				</div>
 				<div class="content-box mt-3 px-2">
