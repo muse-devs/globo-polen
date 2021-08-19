@@ -42,6 +42,7 @@ class Promotional_Event_Admin {
 
 	const ORDER_METAKEY = 'promotional_event';
     const SESSION_KEY_CUPOM_CODE = 'event_promotion_cupom_code';
+    const SESSION_KEY_SUCCESS_ORDER_ID = 'event_promotion_cupom_code';
     const NONCE_ACTION = 'promotional_event_2hj3g42jhg43';
 
 	/**
@@ -237,6 +238,9 @@ class Promotional_Event_Admin {
 
             $order = new \WC_Order($order->get_id());
             $order->calculate_totals();
+            
+            session_start();
+            $_SESSION[ self::SESSION_KEY_SUCCESS_ORDER_ID ] = $order->get_id();
 
             wp_send_json_success( 'ok', 200 );
             wp_die();
