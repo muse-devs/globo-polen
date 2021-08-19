@@ -13,17 +13,8 @@ get_header();
 			<?php
 			va_get_banner_book(true);
 			va_magalu_box_cart();
+			va_coupon();
 			?>
-			<div class="row mb-3">
-				<div class="col-12">
-					<h1 class="title mb-3">Inserir código</h1>
-					<form id="va-check-code">
-						<input type="hidden" name="action" value="" />
-						<input type="text" class="form-control form-control-lg mb-2" placeholder="Inserir código fornecido pela Magalu" required />
-						<input type="submit" class="btn btn-primary btn-lg btn-block" value="Checar" />
-					</form>
-				</div>
-			</div>
 		</div>
 	</div>
 </main><!-- #main -->
