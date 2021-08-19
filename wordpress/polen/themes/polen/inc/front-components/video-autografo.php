@@ -301,14 +301,12 @@ function va_cart_form($coupon = "")
 						<span class="woocommerce-terms-and-conditions-checkbox-text ml-2">Desejo receber novidade da Polen</span>
 					</label>
 				</p>
-				<?php if (wc_terms_and_conditions_checkbox_enabled()) : ?>
-					<p>
-						<label class="woocommerce-form__label woocommerce-form__label-for-checkbox checkbox d-flex">
-							<input type="checkbox" class="form-control form-control-lg" name="terms" id="terms" required />
-							<span class="woocommerce-terms-and-conditions-checkbox-text ml-2"><?php wc_terms_and_conditions_checkbox_text(); ?>&nbsp;<span class="required">*</span></span>
-						</label>
-					</p>
-				<?php endif; ?>
+				<p>
+					<label class="woocommerce-form__label woocommerce-form__label-for-checkbox checkbox d-flex">
+						<input type="checkbox" class="form-control form-control-lg" name="terms" id="terms" required />
+						<span class="woocommerce-terms-and-conditions-checkbox-text ml-2">Li e concordo com o(s) <a href="http://polen.globo/politica-de-privacidade/" class="woocommerce-terms-and-conditions-link" target="_blank">termos e condições</a>  e com o <a href="<?= site_url('regulamento-da-promocao-video-autografo-do-livro-de-porta-em-porta'); ?>" class="woocommerce-terms-and-conditions-link" target="_blank">Regulamento da Promoção</a>&nbsp;<span class="required">*</span></span>
+					</label>
+				</p>
 				<p>
 					<input type="submit" class="btn btn-primary btn-lg btn-block" value="Pedir meu vídeo-autógrafo" />
 				</p>
