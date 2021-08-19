@@ -33,7 +33,7 @@ function va_magalu_box_thank_you()
 					<h3>Obrigada por pedir seu<br>vídeo-autógrafo</h3>
 				</div>
 				<div class="content-box">
-					<p>Luciano vai enviar um vídeo<br>personalizado em até 15 dias.</p>
+					<p>Luciano vai enviar um vídeo<br>personalizado em até 30 dias.</p>
 				</div>
 			</div>
 		</div>
