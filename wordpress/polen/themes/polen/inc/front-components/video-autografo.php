@@ -58,7 +58,7 @@ function va_magalu_box_cart()
 								<li class="item itempayment-approved complete">
 									<span class="background status">1</span>
 									<span class="text">
-										<p class="description">Comprar o livro no site da <a href="#" target="_blank"><b>Magalu</b></a></p>
+										<p class="description">Comprar o livro no site da <a href="https://www.magazineluiza.com.br/livro-de-porta-em-porta-luciano-huck-com-brinde/p/231238100/li/adml/" target="_blank"><b>Magalu</b></a></p>
 									</span>
 								</li>
 								<li class="item itempayment-approved complete">
@@ -192,19 +192,19 @@ function va_get_book_infos()
 <?php
 }
 
-function va_ctas()
+function va_ctas($link = "#", $link_magalu = "#")
 {
 ?>
 	<div class="row mb-4">
 		<div class="col 12">
 			<div class="row mb-3">
 				<div class="col-12">
-					<a href="#" class="btn btn-primary btn-lg btn-block">Quero meu Vídeo-autógrafo</a>
+					<a href="<?php echo $link; ?>" class="btn btn-primary btn-lg btn-block">Quero meu Vídeo-autógrafo</a>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-12">
-					<a href="#" class="btn btn-outline-primary btn-lg btn-block" target="_blank">Comprar na Magalu</a>
+					<a href="<?php echo $link_magalu; ?>" class="btn btn-outline-primary btn-lg btn-block" target="_blank">Comprar na Magalu</a>
 				</div>
 			</div>
 		</div>
@@ -295,14 +295,18 @@ function va_cart_form($coupon = "")
 					<label for="" class="lg">e-mail</label>
 					<input type="email" name="email" class="form-control form-control-lg" placeholder="e-mail de acompanhamento do pedido" required />
 				</p>
+				<p class="mb-2">
+					<label>
+						<input type="checkbox" class="form-control form-control-lg" name="accept_news" />
+						<span class="woocommerce-terms-and-conditions-checkbox-text ml-2">Desejo receber novidade da Polen</span>
+					</label>
+				</p>
 				<?php if (wc_terms_and_conditions_checkbox_enabled()) : ?>
-					<p class="form-row validate-required">
+					<p>
 						<label class="woocommerce-form__label woocommerce-form__label-for-checkbox checkbox d-flex">
-							<input type="checkbox" class="form-control form-control-lg" name="terms" <?php checked(apply_filters('woocommerce_terms_is_checked_default', isset($_POST['terms'])), true); // WPCS: input var ok, csrf ok.
-																										?> id="terms" />
+							<input type="checkbox" class="form-control form-control-lg" name="terms" id="terms" required />
 							<span class="woocommerce-terms-and-conditions-checkbox-text ml-2"><?php wc_terms_and_conditions_checkbox_text(); ?>&nbsp;<span class="required">*</span></span>
 						</label>
-						<input type="hidden" name="terms-field" value="1" />
 					</p>
 				<?php endif; ?>
 				<p>
@@ -317,9 +321,9 @@ function va_cart_form($coupon = "")
 		form.addEventListener("submit", function(e) {
 			e.preventDefault();
 			polAjaxForm(formId, function() {
-				console.log("foi");
+				alert("mensagem temporária");
 			}, function(e) {
-				polMessages.error(e);
+				polMessages.error(e.Error);
 			});
 		});
 	</script>
@@ -345,10 +349,12 @@ function va_coupon()
 		form.addEventListener("submit", function(e) {
 			e.preventDefault();
 			polAjaxForm(formId, function() {
-				console.log("foi");
+				polSpinner();
+				blockUnblockInputs(formId, true);
+				window.location.href = "<?php echo event_promotional_url_order(); ?>"
 			}, function(e) {
 				polMessages.error(e.Error);
-			});
+			}, false);
 		});
 	</script>
 <?php
