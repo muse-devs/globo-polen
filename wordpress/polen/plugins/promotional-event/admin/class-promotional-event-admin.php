@@ -203,7 +203,7 @@ class Promotional_Event_Admin {
                 'order_item_type' => 'line_item',
             ));
 
-            $instruction = "{$name} de {$city} já garantiu sua cópia do livro 'De porta em porta'! 
+            $instruction = "{$name} de {$city} já garantiu sua cópia do livro 'De Porta em Porta'! 
             Envie um vídeo para agradecer e mande um alô para toda cidade.";
 
             wc_add_order_item_meta( $order_item_id, '_qty', $quantity, true );
