@@ -8,15 +8,16 @@ get_header();
 ?>
 
 <main id="primary" class="site-main">
+
 	<div class="row">
 		<div class="col-12 col-md-8 m-md-auto">
 			<?php
 			va_get_banner_book(true);
-			va_magalu_box_cart();
-			va_coupon();
+			va_cart_form();
 			?>
 		</div>
 	</div>
+
 </main><!-- #main -->
 
 <?php

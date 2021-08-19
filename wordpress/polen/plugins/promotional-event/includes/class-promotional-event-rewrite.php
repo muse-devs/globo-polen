@@ -8,6 +8,8 @@ class Promotional_Event_Rewrite
     const QUERY_VARS_EVENT_PROMOTIONAL_APP     = 'event_promotinal_app';
     const QUERY_VARS_EVENT_PROMOTIONAL_IS_HOME = 'event_promotinal_is_home';
     const QUERY_VARS_EVENT_PROMOTIONAL_VALIDATION = 'event_promotinal_validation';
+    const QUERY_VARS_EVENT_PROMOTIONAL_ORDER = 'event_promotinal_order';
+    const QUERY_VARS_EVENT_PROMOTIONAL_SUCCESS = 'event_promotinal_success';
 
     public function __construct()
     {
@@ -28,6 +30,8 @@ class Promotional_Event_Rewrite
      */
     public function rewrites()
     {
+        add_rewrite_rule( self::BASE_URL . '/de-porta-em-porta/confirmado', 'index.php?'.self::QUERY_VARS_EVENT_PROMOTIONAL_APP.'=1&'.self::QUERY_VARS_EVENT_PROMOTIONAL_SUCCESS.'=1', 'top' );
+        add_rewrite_rule( self::BASE_URL . '/de-porta-em-porta/pedido', 'index.php?'.self::QUERY_VARS_EVENT_PROMOTIONAL_APP.'=1&'.self::QUERY_VARS_EVENT_PROMOTIONAL_ORDER.'=1', 'top' );
         add_rewrite_rule( self::BASE_URL . '/de-porta-em-porta/validar-codigo', 'index.php?'.self::QUERY_VARS_EVENT_PROMOTIONAL_APP.'=1&'.self::QUERY_VARS_EVENT_PROMOTIONAL_VALIDATION.'=1', 'top' );
         add_rewrite_rule( self::BASE_URL . '/de-porta-em-porta', 'index.php?'.self::QUERY_VARS_EVENT_PROMOTIONAL_APP.'=1&'.self::QUERY_VARS_EVENT_PROMOTIONAL_IS_HOME.'=1', 'top' );
     }
@@ -41,6 +45,8 @@ class Promotional_Event_Rewrite
         $query_vars[] = self::QUERY_VARS_EVENT_PROMOTIONAL_APP;
         $query_vars[] = self::QUERY_VARS_EVENT_PROMOTIONAL_IS_HOME;
         $query_vars[] = self::QUERY_VARS_EVENT_PROMOTIONAL_VALIDATION;
+        $query_vars[] = self::QUERY_VARS_EVENT_PROMOTIONAL_ORDER;
+        $query_vars[] = self::QUERY_VARS_EVENT_PROMOTIONAL_SUCCESS;
         return $query_vars;
     }
 
@@ -66,6 +72,16 @@ class Promotional_Event_Rewrite
             $GLOBALS[ self::QUERY_VARS_EVENT_PROMOTIONAL_VALIDATION ] = '1';
             return get_template_directory() . '/event_promotional/validation.php';
         }
+
+        if( $this->is_page_order() ) {
+            $GLOBALS[ self::QUERY_VARS_EVENT_PROMOTIONAL_ORDER ] = '1';
+            return get_template_directory() . '/event_promotional/order.php';
+        }
+
+        if( $this->is_page_success() ) {
+            $GLOBALS[ self::QUERY_VARS_EVENT_PROMOTIONAL_ORDER ] = '1';
+            return get_template_directory() . '/event_promotional/success.php';
+        }
     }
 
 
@@ -89,6 +105,33 @@ class Promotional_Event_Rewrite
     private function is_page_validation()
     {
         $page = get_query_var( self::QUERY_VARS_EVENT_PROMOTIONAL_VALIDATION );
+        if( !empty( $page ) || $page == '1' ) {
+            return true;
+        }
+        return false;
+    }
+
+
+    /**
+     * 
+     */
+    private function is_page_order()
+    {
+        $page = get_query_var( self::QUERY_VARS_EVENT_PROMOTIONAL_ORDER );
+        if( !empty( $page ) || $page == '1' ) {
+            return true;
+        }
+        return false;
+    }
+
+
+
+    /**
+     * 
+     */
+    private function is_page_success()
+    {
+        $page = get_query_var( self::QUERY_VARS_EVENT_PROMOTIONAL_SUCCESS );
         if( !empty( $page ) || $page == '1' ) {
             return true;
         }
