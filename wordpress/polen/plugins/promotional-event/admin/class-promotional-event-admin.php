@@ -151,6 +151,11 @@ class Promotional_Event_Admin {
             $name = sanitize_text_field($_POST['name']);
             $city = sanitize_text_field($_POST['city']);
             $email = sanitize_text_field($_POST['email']);
+            $term = sanitize_text_field( $_POST['terms-field'] );
+
+            if( empty( $term ) || $term !== '1' ) {
+                throw new Exception('Aceite os termos e condições', 422);
+            }
 
             $address = array(
                 'first_name' => $name,
