@@ -309,6 +309,7 @@ require_once TEMPLATE_DIR . '/tributes/tributes_functions.php';
  */
 require_once TEMPLATE_DIR . '/social/social_function.php';
 
+require_once TEMPLATE_DIR . '/event_promotional/function_event_promotional.php';
 
 add_action('wc_gateway_stripe_process_response', function($response, $order) {
 	// $response
