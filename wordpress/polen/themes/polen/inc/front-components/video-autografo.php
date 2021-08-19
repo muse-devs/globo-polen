@@ -265,7 +265,7 @@ function va_front_get_talent_videos($talent, $product_id = 15)
 <?php
 }
 
-function va_cart_form()
+function va_cart_form($coupon = "")
 {
 ?>
 	<div class="row mb-3">
@@ -281,18 +281,19 @@ function va_cart_form()
 				</div>
 			</div>
 			<form id="va-cart-form">
-				<input type="hidden" name="action" value="" />
+				<input type="hidden" name="action" value="create_orders_video_autograph" />
+				<input type="hidden" name="coupon" value="<?php echo $coupon; ?>" />
 				<p>
 					<label for="" class="lg">Nome</label>
-					<input type="text" class="form-control form-control-lg" placeholder="Para quem é esse vídeo-autógrafo" required />
+					<input type="text" name="name" class="form-control form-control-lg" placeholder="Para quem é esse vídeo-autógrafo" required />
 				</p>
 				<p>
 					<label for="" class="lg">Cidade</label>
-					<input type="text" class="form-control form-control-lg" placeholder="Digite a cidade do homenageado" required />
+					<input type="text" name="city" class="form-control form-control-lg" placeholder="Digite a cidade do homenageado" required />
 				</p>
 				<p>
 					<label for="" class="lg">e-mail</label>
-					<input type="email" class="form-control form-control-lg" placeholder="e-mail de acompanhamento do pedido" required />
+					<input type="email" name="email" class="form-control form-control-lg" placeholder="e-mail de acompanhamento do pedido" required />
 				</p>
 				<?php if (wc_terms_and_conditions_checkbox_enabled()) : ?>
 					<p class="form-row validate-required">
@@ -332,8 +333,8 @@ function va_coupon()
 		<div class="col-12">
 			<h1 class="title mb-3">Inserir código</h1>
 			<form id="va-check-code">
-				<input type="hidden" name="action" value="" />
-				<input type="text" class="form-control form-control-lg mb-2" placeholder="Inserir código fornecido pela Magalu" required />
+				<input type="hidden" name="action" value="check_coupon" />
+				<input type="text" name="coupon" class="form-control form-control-lg mb-2" placeholder="Inserir código fornecido pela Magalu" required />
 				<input type="submit" class="btn btn-primary btn-lg btn-block" value="Checar" />
 			</form>
 		</div>
