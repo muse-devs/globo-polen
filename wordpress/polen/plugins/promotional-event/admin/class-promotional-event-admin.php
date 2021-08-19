@@ -40,6 +40,8 @@ class Promotional_Event_Admin {
 	 */
 	private $version;
 
+	const ORDER_METAKEY = 'promotional_event';
+
 	/**
 	 * Initialize the class and set its properties.
 	 *
@@ -145,11 +147,14 @@ class Promotional_Event_Admin {
     {
         try{
             $coupon_code = !empty($_POST['coupon']) ? sanitize_text_field($_POST['coupon']) : null;
+            $name = sanitize_text_field($_POST['name']);
+            $city = sanitize_text_field($_POST['city']);
+            $email = sanitize_text_field($_POST['email']);
 
             $address = array(
-                'first_name' => sanitize_text_field($_POST['name']),
-                'email' => sanitize_text_field($_POST['email']),
-                'city' => sanitize_text_field($_POST['city']),
+                'first_name' => $name,
+                'email' => $email,
+                'city' => $city,
                 'state' => sanitize_text_field($_POST['state']),
                 'country' => 'Brasil',
                 'phone' => sanitize_text_field($_POST['phone']),
@@ -174,14 +179,20 @@ class Promotional_Event_Admin {
                 wp_die();
             }
 
-
             $order = wc_create_order();
             $coupon->update_coupoun($coupon_code, $order->get_id());
 
+            $order->add_meta_data(self::ORDER_METAKEY, 1, true);
+            $order->add_meta_data('campaign', 'de-porta-em-porta', true);
+
+            $order->update_status('wc-payment-approved');
+
             // ID Product
-            $productId = 472;
+            global $Polen_Plugin_Settings;
+            $product_id = $Polen_Plugin_Settings['promotional-event-text'];
+
             $quantity = 1;
-            $product = wc_get_product($productId);
+            $product = wc_get_product($product_id);
             $order->add_product($product, $quantity);
             $order->set_address($address, 'billing');
             $order->set_address($address, 'shipping');
@@ -191,25 +202,67 @@ class Promotional_Event_Admin {
                 'order_item_type' => 'line_item',
             ));
 
+            $instruction = "{$name} de {$city} já garantiu sua cópia do livro 'De porta em porta'! 
+            Envie um vídeo para agradecer e mande um alô para toda cidade.";
+
             wc_add_order_item_meta( $order_item_id, '_qty', $quantity, true );
             wc_add_order_item_meta( $order_item_id, '_product_id', $product->get_id(), true );
             wc_add_order_item_meta( $order_item_id, '_line_subtotal', 0, true );
             wc_add_order_item_meta( $order_item_id, '_line_total', 0, true );
             //Polen Custom Meta Order_Item
             wc_add_order_item_meta( $order_item_id, 'offered_by'            , '', true );
+
             wc_add_order_item_meta( $order_item_id, 'video_to'              , 'to_myself', true );
-            wc_add_order_item_meta( $order_item_id, 'name_to_video'         , 'Polen.me', true );
-            wc_add_order_item_meta( $order_item_id, 'email_to_video'        , 'polen@polen.me', true );
-            wc_add_order_item_meta( $order_item_id, 'video_category'        , 'Novidade', true );
-            // wc_add_order_item_meta( $order_item_id, 'instructions_to_video' , $final_instruction, true );
-            wc_add_order_item_meta( $order_item_id, 'allow_video_on_page'   , 0, true );
+            wc_add_order_item_meta( $order_item_id, 'name_to_video'         , $name, true );
+            wc_add_order_item_meta( $order_item_id, 'email_to_video'        , $email, true );
+            wc_add_order_item_meta( $order_item_id, 'video_category'        , 'video-autografo', true );
+            wc_add_order_item_meta( $order_item_id, 'instructions_to_video' , $instruction, true );
+
+            wc_add_order_item_meta( $order_item_id, 'allow_video_on_page'   , 1, true );
             wc_add_order_item_meta( $order_item_id, '_fee_amount'           , 0, true );
             wc_add_order_item_meta( $order_item_id, '_line_total'           , 0, true );
+            $order->save();
 
             $order = new \WC_Order($order->get_id());
             $order->calculate_totals();
 
             wp_send_json_success( 'ok', 200 );
+            wp_die();
+
+        } catch (\Exception $e) {
+            wp_send_json_error(array('Error' => $e->getMessage()), 422);
+            wp_die();
+        }
+    }
+
+    /**
+     * Verificar cupon
+     */
+    function check_coupon()
+    {
+        try{
+            $coupon_code = !empty($_POST['coupon']) ? sanitize_text_field($_POST['coupon']) : null;
+
+            $coupon = new Coupons();
+            $check = $coupon->check_coupoun_exist($coupon_code);
+            $check_is_used = $coupon->check_coupoun_is_used($coupon_code);
+
+            if (empty($coupon_code)) {
+                throw new Exception('Cupon é obrigatório', 422);
+                wp_die();
+            }
+
+            if (empty($check)) {
+                throw new Exception('Cupon está incorreto ou não existe', 404);
+                wp_die();
+            }
+
+            if ($check_is_used == 1) {
+                throw new Exception('Cupon já foi utilizado', 401);
+                wp_die();
+            }
+
+            wp_send_json_success( 'Cupon Disponivél', 200 );
             wp_die();
 
         } catch (\Exception $e) {
