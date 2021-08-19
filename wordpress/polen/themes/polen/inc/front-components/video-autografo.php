@@ -192,19 +192,19 @@ function va_get_book_infos()
 <?php
 }
 
-function va_ctas()
+function va_ctas($link = "#", $link_magalu = "#")
 {
 ?>
 	<div class="row mb-4">
 		<div class="col 12">
 			<div class="row mb-3">
 				<div class="col-12">
-					<a href="#" class="btn btn-primary btn-lg btn-block">Quero meu Vídeo-autógrafo</a>
+					<a href="<?php echo $link; ?>" class="btn btn-primary btn-lg btn-block">Quero meu Vídeo-autógrafo</a>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-12">
-					<a href="#" class="btn btn-outline-primary btn-lg btn-block" target="_blank">Comprar na Magalu</a>
+					<a href="<?php echo $link_magalu; ?>" class="btn btn-outline-primary btn-lg btn-block" target="_blank">Comprar na Magalu</a>
 				</div>
 			</div>
 		</div>
@@ -317,9 +317,9 @@ function va_cart_form($coupon = "")
 		form.addEventListener("submit", function(e) {
 			e.preventDefault();
 			polAjaxForm(formId, function() {
-				console.log("foi");
+				alert("mensagem temporária");
 			}, function(e) {
-				polMessages.error(e);
+				polMessages.error(e.Error);
 			});
 		});
 	</script>
@@ -345,10 +345,12 @@ function va_coupon()
 		form.addEventListener("submit", function(e) {
 			e.preventDefault();
 			polAjaxForm(formId, function() {
-				console.log("foi");
+				polSpinner();
+				blockUnblockInputs(formId, true);
+				window.location.href = "<?php echo event_promotional_url_order(); ?>"
 			}, function(e) {
 				polMessages.error(e.Error);
-			});
+			}, false);
 		});
 	</script>
 <?php
