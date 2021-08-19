@@ -9,7 +9,7 @@ function va_get_home_banner($link)
 				<img class="image mobile-img" src="<?php echo TEMPLATE_URI . '/assets/img/video-autografo/va-banner-mobile.png'; ?>" alt="De Porta em Porta">
 				<img class="image desktop-img" src="<?php echo TEMPLATE_URI . '/assets/img/video-autografo/va-banner-desktop.png'; ?>" alt="De Porta em Porta">
 				<div class="content">
-					<h2>De porta em porta</h2>
+					<h2>De Porta em Porta</h2>
 					<p class="mt-3">
 						Agora você pode comprar o livro<br>
 						e ter um autógrafo em vídeo do Luciano Huck.
@@ -49,7 +49,7 @@ function va_magalu_box_cart()
 			<div class="magalu-box">
 				<div class="header-box text-center py-4 px-5">
 					<?php /*<img src="<?php echo TEMPLATE_URI . '/assets/img/video-autografo/lu.png'; ?>" alt="Lu"></img>*/ ?>
-					<h3>Para pedir um Vídeo-autógrafo você precisa:</h3>
+					<h3>Para receber seu vídeo-autógrafo personalizado do Luciano Huck, você precisa:</h3>
 				</div>
 				<div class="content-box mt-3 px-2">
 					<div class="row">
@@ -58,19 +58,19 @@ function va_magalu_box_cart()
 								<li class="item itempayment-approved complete">
 									<span class="background status">1</span>
 									<span class="text">
-										<p class="description">Comprar o livro no site da <a href="https://www.magazineluiza.com.br/livro-de-porta-em-porta-luciano-huck-com-brinde/p/231238100/li/adml/" target="_blank"><b>Magalu</b></a></p>
+										<p class="description">Comprar o livro De Porta em Porta no site da <a href="https://www.magazineluiza.com.br/livro-de-porta-em-porta-luciano-huck-com-brinde/p/231238100/li/adml/" target="_blank"><b>Magalu</b></a></p>
 									</span>
 								</li>
 								<li class="item itempayment-approved complete">
 									<span class="background status">2</span>
 									<span class="text">
-										<p class="description">Confira o e-mail da Magalu com o código de vídeo-autógrafo</p>
+										<p class="description">Após a compra, você receberá um e-mail da Magalu contendo o código único para resgatar seu vídeo-autógrafo</p>
 									</span>
 								</li>
 								<li class="item itempayment-approved complete">
 									<span class="background status">3</span>
 									<span class="text">
-										<p class="description">Adicione o código que você recebeu abaixo</p>
+										<p class="description">Insira seu código no campo abaixo</p>
 									</span>
 								</li>
 							</ul>
@@ -112,7 +112,7 @@ function va_get_banner_book($small = false)
 				</div>
 				<div class="content<?php echo $small ? '' : ' pb-2'; ?>">
 					<img src="<?php echo $img_book; ?>" alt="Capa do Livro" class="book-cover" />
-					<h1 class="title"><?php echo $small ? 'Livro - ' : ''; ?>De porta em porta</h1>
+					<h1 class="title"><?php echo $small ? 'Livro - ' : ''; ?>De Porta em Porta</h1>
 				</div>
 			</div>
 		</div>
@@ -218,7 +218,7 @@ function va_what_is()
 	<div class="row va-what-is">
 		<div class="col-12 text-center">
 			<h3 class="title"><span class="ico mr-2"><?php Icon_Class::polen_icon_camera_video(); ?></span>O que é o Vídeo-autógrafo</h3>
-			<p>O vídeo-autógrafo é uma nova maneira de conectar e criar novas experiências digitais entre leitores e seus autores favoritos. Ao adquirir uma cópia do livro De porta em porta na Magalu, você pode ganhar um vídeo exclusivo e personalizado gravado pelo Luciano Huck.</p>
+			<p>O vídeo-autógrafo é uma nova maneira de conectar e criar novas experiências digitais entre leitores e seus autores favoritos. Ao adquirir uma cópia do livro De Porta em Porta na Magalu, você pode ganhar um vídeo exclusivo e personalizado gravado pelo Luciano Huck.</p>
 		</div>
 	</div>
 <?php
@@ -285,15 +285,15 @@ function va_cart_form($coupon = "")
 				<input type="hidden" name="coupon" value="<?php echo $coupon; ?>" />
 				<p>
 					<label for="" class="lg">Nome</label>
-					<input type="text" name="name" class="form-control form-control-lg" placeholder="Para quem é esse vídeo-autógrafo" required />
+					<input type="text" name="name" class="form-control form-control-lg" placeholder="Para quem é esse vídeo-autógrafo?" required />
 				</p>
 				<p>
 					<label for="" class="lg">Cidade</label>
-					<input type="text" name="city" class="form-control form-control-lg" placeholder="Digite a cidade do homenageado" required />
+					<input type="text" name="city" class="form-control form-control-lg" placeholder="Onde a pessoa homenageada mora?" required />
 				</p>
 				<p>
-					<label for="" class="lg">e-mail</label>
-					<input type="email" name="email" class="form-control form-control-lg" placeholder="e-mail de acompanhamento do pedido" required />
+					<label for="" class="lg">E-mail</label>
+					<input type="email" name="email" class="form-control form-control-lg" placeholder="E-mail para acompanhar o pedido" required />
 				</p>
 				<p class="mb-2">
 					<label>
@@ -319,8 +319,10 @@ function va_cart_form($coupon = "")
 		const form = document.querySelector(formId);
 		form.addEventListener("submit", function(e) {
 			e.preventDefault();
-			polAjaxForm(formId, function() {
-				alert("mensagem temporária");
+			polAjaxForm(formId, function(e) {
+				polSpinner();
+				blockUnblockInputs(formId, true);
+				window.location.href = "<?php echo event_promotional_url_success(); ?>";
 			}, function(e) {
 				polMessages.error(e.Error);
 			});
