@@ -256,3 +256,15 @@ p.more-text, .link-more-text {
 		color: var(--primary);
 	}
 }
+
+.va-check-o {
+	.icon, .bi {
+		font-size: 26px;
+		color: var(--success);
+	}
+}
+
+label.lg {
+	font-size: 14px;
+	font-weight: 700;
+}

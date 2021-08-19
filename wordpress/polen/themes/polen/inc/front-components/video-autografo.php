@@ -44,42 +44,42 @@ function va_magalu_box_thank_you()
 function va_magalu_box_cart()
 {
 ?>
-    <div class="row mt-4">
-        <div class="col-12">
-            <div class="magalu-box">
-                <div class="header-box">
-                    <img src="<?php echo TEMPLATE_URI . '/assets/img/video-autografo/lu.png'; ?>" alt="Lu"></img>
-                    <h3>Para pedir um Vídeo-autógrafo você precisa:</h3>
-                </div>
-                <div class="content-box mt-3">
-                    <div class="row">
-                        <div class="col-12 col-md-6 m-md-auto d-flex align-items-center">
-                            <ul class="order-flow half">
-                                <li class="item itempayment-approved complete">
-                                    <span class="background status">1</span>
-                                    <span class="text">
-                                        <p class="description">Comprar o livro no site da <a href="#" target="_blank"><b>Magalu</b></a></p>
-                                    </span>
-                                </li>
-                                <li class="item itempayment-approved complete">
-                                    <span class="background status">2</span>
-                                    <span class="text">
-                                        <p class="description">Confira o e-mail da Magalu com o código de vídeo-autógrafo</p>
-                                    </span>
-                                </li>
-                                <li class="item itempayment-approved complete">
-                                    <span class="background status">3</span>
-                                    <span class="text">
-                                        <p class="description">Adicione o código que você recebeu abaixo</p>
-                                    </span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="row mb-4">
+		<div class="col-12">
+			<div class="magalu-box">
+				<div class="header-box">
+					<img src="<?php echo TEMPLATE_URI . '/assets/img/video-autografo/lu.png'; ?>" alt="Lu"></img>
+					<h3>Para pedir um Vídeo-autógrafo você precisa:</h3>
+				</div>
+				<div class="content-box mt-3 px-2">
+					<div class="row">
+						<div class="col-12 col-md-6 m-md-auto d-flex align-items-center">
+							<ul class="order-flow half">
+								<li class="item itempayment-approved complete">
+									<span class="background status">1</span>
+									<span class="text">
+										<p class="description">Comprar o livro no site da <a href="#" target="_blank"><b>Magalu</b></a></p>
+									</span>
+								</li>
+								<li class="item itempayment-approved complete">
+									<span class="background status">2</span>
+									<span class="text">
+										<p class="description">Confira o e-mail da Magalu com o código de vídeo-autógrafo</p>
+									</span>
+								</li>
+								<li class="item itempayment-approved complete">
+									<span class="background status">3</span>
+									<span class="text">
+										<p class="description">Adicione o código que você recebeu abaixo</p>
+									</span>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 <?php
 }
 
@@ -183,6 +183,12 @@ function va_get_book_infos()
 			</div>
 		</div>
 	</div>
+	<script>
+		function showMoreText() {
+			document.querySelector(".link-more-text").classList.remove("show");
+			document.querySelector(".more-text").classList.add("show");
+		}
+	</script>
 <?php
 }
 
@@ -256,5 +262,93 @@ function va_front_get_talent_videos($talent, $product_id = 15)
 			<div id="video-box"></div>
 		</div>
 	</div>
+<?php
+}
+
+function va_cart_form()
+{
+?>
+	<div class="row mb-3">
+		<div class="col-12">
+			<div class="row">
+				<div class="col-12 d-flex">
+					<div class="mr-3 va-check-o">
+						<?php Icon_Class::polen_icon_check_o(); ?>
+					</div>
+					<div>
+						<p><strong>Seu Código foi validado!</strong><br />Para continuar, preencha os dados abaixo</p>
+					</div>
+				</div>
+			</div>
+			<form id="va-cart-form">
+				<input type="hidden" name="action" value="" />
+				<p>
+					<label for="" class="lg">Nome</label>
+					<input type="text" class="form-control form-control-lg" placeholder="Para quem é esse vídeo-autógrafo" required />
+				</p>
+				<p>
+					<label for="" class="lg">Cidade</label>
+					<input type="text" class="form-control form-control-lg" placeholder="Digite a cidade do homenageado" required />
+				</p>
+				<p>
+					<label for="" class="lg">e-mail</label>
+					<input type="email" class="form-control form-control-lg" placeholder="e-mail de acompanhamento do pedido" required />
+				</p>
+				<?php if (wc_terms_and_conditions_checkbox_enabled()) : ?>
+					<p class="form-row validate-required">
+						<label class="woocommerce-form__label woocommerce-form__label-for-checkbox checkbox d-flex">
+							<input type="checkbox" class="form-control form-control-lg" name="terms" <?php checked(apply_filters('woocommerce_terms_is_checked_default', isset($_POST['terms'])), true); // WPCS: input var ok, csrf ok.
+																										?> id="terms" />
+							<span class="woocommerce-terms-and-conditions-checkbox-text ml-2"><?php wc_terms_and_conditions_checkbox_text(); ?>&nbsp;<span class="required">*</span></span>
+						</label>
+						<input type="hidden" name="terms-field" value="1" />
+					</p>
+				<?php endif; ?>
+				<p>
+					<input type="submit" class="btn btn-primary btn-lg btn-block" value="Pedir meu vídeo-autógrafo" />
+				</p>
+			</form>
+		</div>
+	</div>
+	<script>
+		const formId = '#va-cart-form';
+		const form = document.querySelector(formId);
+		form.addEventListener("submit", function(e) {
+			e.preventDefault();
+			polAjaxForm(formId, function() {
+				console.log("foi");
+			}, function(e) {
+				polMessages.error(e);
+			});
+		});
+	</script>
+<?php
+}
+
+function va_coupon()
+{
+?>
+	<div class="row mb-3">
+		<div class="col-12">
+			<h1 class="title mb-3">Inserir código</h1>
+			<form id="va-check-code">
+				<input type="hidden" name="action" value="" />
+				<input type="text" class="form-control form-control-lg mb-2" placeholder="Inserir código fornecido pela Magalu" required />
+				<input type="submit" class="btn btn-primary btn-lg btn-block" value="Checar" />
+			</form>
+		</div>
+	</div>
+	<script>
+		const formId = '#va-check-code';
+		const form = document.querySelector(formId);
+		form.addEventListener("submit", function(e) {
+			e.preventDefault();
+			polAjaxForm(formId, function() {
+				console.log("foi");
+			}, function(e) {
+				polMessages.error(e);
+			});
+		});
+	</script>
 <?php
 }
