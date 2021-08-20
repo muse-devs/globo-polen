@@ -81,12 +81,12 @@ class Polen_WC_Payment_Approved extends \WC_Email {
 			}
 			$order_is_social = social_order_is_social( $this->object );
 			$order_is_ep = event_promotional_order_is_event_promotional( $this->object );
-			if( ! $order_is_social ) {
-				$this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
+			if( $order_is_social ) {
+				$this->send( $this->get_recipient(), $this->get_subject_social(), $this->get_content_social(), $this->get_headers(), $this->get_attachments() );
 			} elseif( $order_is_ep ) {
 				$this->send( $this->get_recipient(), $this->get_subject_ep(), $this->get_content_ep(), $this->get_headers(), $this->get_attachments() );
 			} else {
-				$this->send( $this->get_recipient(), $this->get_subject_social(), $this->get_content_social(), $this->get_headers(), $this->get_attachments() );
+				$this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
 			}
 
 			/**
