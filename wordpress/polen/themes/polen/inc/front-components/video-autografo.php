@@ -61,7 +61,7 @@ function va_magalu_box_cart()
 										<p class="description">Comprar o livro De Porta em Porta no site da <a href="<?php echo event_get_magalu_url(); ?>" target="_blank"><b>Magalu</b></a></p>
 									</span>
 								</li>
-								<li class="item itempayment-approved complete">
+								<li class="item itempayment-approved complete" style="height: 120px;">
 									<span class="background status">2</span>
 									<span class="text">
 										<!-- <p class="description">Após a compra, você receberá um e-mail da Magalu contendo o código único para resgatar seu vídeo-autógrafo</p> -->
