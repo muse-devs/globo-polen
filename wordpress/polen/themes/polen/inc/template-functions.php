@@ -450,6 +450,16 @@ if ( ! in_array( 'all-in-one-seo-pack/all_in_one_seo_pack.php', apply_filters( '
 			echo "\t" . '<meta property="og:locale" content="' . get_locale() . '">' . "\n";
 			echo "\t" . '<meta property="og:site_name" content="' . get_bloginfo( 'title' ) . '">' . "\n";
 			echo "\n";
+		} elseif ( event_promotional_is_app() ) {
+			echo "\n\n";
+			echo "\t" . '<meta property="og:title" content="Luciano Huck - De porta em porta">' . "\n";
+			echo "\t" . '<meta property="og:type" content="site">' . "\n";
+			echo "\t" . '<meta property="og:description" content="Luciano Huck - De porta em porta">' . "\n";
+			echo "\t" . '<meta property="og:url" content="' . event_promotional_url_home() . '">' . "\n";
+			echo "\t" . '<meta property="og:image" content="//polen.me/polen/uploads/2021/08/book_cover.png">' . "\n";
+			echo "\t" . '<meta property="og:locale" content="' . get_locale() . '">' . "\n";
+			echo "\t" . '<meta property="og:site_name" content="Polen.me - Luciano Huck - De porta em porta">' . "\n";
+			echo "\n";
 		} else {
 			echo "\n\n";
 			echo "\t" . '<meta property="og:title" content="' . get_bloginfo( 'title' ) . '">' . "\n";
