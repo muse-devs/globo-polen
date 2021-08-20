@@ -298,7 +298,7 @@ function va_cart_form($coupon = "")
 				<p class="mb-2">
 					<label>
 						<input type="checkbox" class="form-control form-control-lg" name="accept_news" />
-						<span class="woocommerce-terms-and-conditions-checkbox-text ml-2">Desejo receber novidade da Polen</span>
+						<span class="woocommerce-terms-and-conditions-checkbox-text ml-2">Desejo receber novidades da Polen</span>
 					</label>
 				</p>
 				<p>
