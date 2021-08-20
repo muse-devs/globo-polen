@@ -215,7 +215,7 @@ class Promotional_Event_Admin {
             $coupon->update_coupoun($coupon_code, $order->get_id());
             $order->update_meta_data( '_polen_customer_email', $email );
             $order->add_meta_data(self::ORDER_METAKEY, 1, true);
-            $order->add_meta_data('campaign', 'de-porta-em-porta', true);
+            $order->add_meta_data('campaign', 'de-porta-em-porta', true); 
 
             $order->update_status('wc-payment-approved');
 
