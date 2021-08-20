@@ -30,10 +30,10 @@ function va_magalu_box_thank_you()
 			<div class="magalu-box">
 				<div class="header-box text-center py-4 px-5">
 					<?php /*<img src="<?php echo TEMPLATE_URI . '/assets/img/video-autografo/lu.png'; ?>" alt="Lu"></img>*/ ?>
-					<h3>Obrigada por pedir seu<br>vídeo-autógrafo</h3>
+					<h3 style="line-height: 24px;">Obrigado por pedir seu<br>vídeo-autógrafo</h3>
 				</div>
 				<div class="content-box">
-					<p>Luciano vai enviar um vídeo<br>personalizado em até 30 dias.</p>
+					<p>Você receberá seu vídeo-autógrafo<br>em até 30 dias.</p>
 				</div>
 			</div>
 		</div>
@@ -49,7 +49,7 @@ function va_magalu_box_cart()
 			<div class="magalu-box">
 				<div class="header-box text-center py-4 px-5">
 					<?php /*<img src="<?php echo TEMPLATE_URI . '/assets/img/video-autografo/lu.png'; ?>" alt="Lu"></img>*/ ?>
-					<h3>Para receber seu vídeo-autógrafo personalizado do Luciano Huck, você precisa:</h3>
+					<h3 style="line-height:20px;">Para receber seu vídeo-autógrafo personalizado do Luciano Huck, você precisa:</h3>
 				</div>
 				<div class="content-box mt-3 px-2">
 					<div class="row">
@@ -64,13 +64,14 @@ function va_magalu_box_cart()
 								<li class="item itempayment-approved complete">
 									<span class="background status">2</span>
 									<span class="text">
-										<p class="description">Após a compra, você receberá um e-mail da Magalu contendo o código único para resgatar seu vídeo-autógrafo</p>
+										<!-- <p class="description">Após a compra, você receberá um e-mail da Magalu contendo o código único para resgatar seu vídeo-autógrafo</p> -->
+										<p class="description">Copiar o código enviado para o seu e-mail.</p>
 									</span>
 								</li>
 								<li class="item itempayment-approved complete">
 									<span class="background status">3</span>
 									<span class="text">
-										<p class="description">Insira seu código no campo abaixo</p>
+										<p class="description">Validar o código no campo abaixo</p>
 									</span>
 								</li>
 							</ul>
@@ -276,7 +277,7 @@ function va_cart_form($coupon = "")
 						<?php Icon_Class::polen_icon_check_o(); ?>
 					</div>
 					<div>
-						<p><strong>Seu Código foi validado!</strong><br />Para continuar, preencha os dados abaixo</p>
+						<p><strong>Seu código foi validado!</strong><br />Para continuar, preencha os dados abaixo:</p>
 					</div>
 				</div>
 			</div>
@@ -289,22 +290,22 @@ function va_cart_form($coupon = "")
 				</p>
 				<p>
 					<label for="" class="lg">Cidade</label>
-					<input type="text" name="city" class="form-control form-control-lg" placeholder="Onde a pessoa homenageada mora?" required />
+					<input type="text" name="city" class="form-control form-control-lg" placeholder="Cidade da pessoa homenageada" required />
 				</p>
 				<p>
 					<label for="" class="lg">E-mail</label>
 					<input type="email" name="email" class="form-control form-control-lg" placeholder="E-mail para acompanhar o pedido" required />
 				</p>
-				<p class="mb-2">
+				<!-- <p class="mb-2">
 					<label>
 						<input type="checkbox" class="form-control form-control-lg" name="accept_news" />
-						<span class="woocommerce-terms-and-conditions-checkbox-text ml-2">Desejo receber novidade da Polen</span>
+						<span class="woocommerce-terms-and-conditions-checkbox-text ml-2">Quero ficar por dentro de novidades como essa.</span>
 					</label>
-				</p>
+				</p> -->
 				<p>
 					<label>
 						<input type="checkbox" class="form-control form-control-lg" name="terms" id="terms" required />
-						<span class="woocommerce-terms-and-conditions-checkbox-text ml-2">Li e concordo com o(s) <a href="http://polen.globo/politica-de-privacidade/" class="woocommerce-terms-and-conditions-link" target="_blank">termos e condições</a>  e com o <a href="<?= site_url('regulamento-da-promocao-video-autografo-do-livro-de-porta-em-porta'); ?>" class="woocommerce-terms-and-conditions-link" target="_blank">Regulamento da Promoção</a>&nbsp;<span class="required">*</span></span>
+						<span class="woocommerce-terms-and-conditions-checkbox-text ml-2" style="line-height: 24px;">Li e concordo com o(s) <a href="http://polen.globo/politica-de-privacidade/" class="woocommerce-terms-and-conditions-link" target="_blank">termos e condições</a>  e com o <a href="<?= site_url('regulamento-da-promocao-video-autografo-do-livro-de-porta-em-porta'); ?>" class="woocommerce-terms-and-conditions-link" target="_blank">Regulamento da Promoção</a>.&nbsp;<span class="required">*</span></span>
 					</label>
 				</p>
 				<p>

@@ -202,6 +202,14 @@ class Promotional_Event_Admin {
                 'status'        => Polen_WooCommerce::ORDER_STATUS_PAYMENT_APPROVED,
                 'customer_email'   => $email,
             );
+            if( !empty(get_current_user_id())) {
+                $args['customer_id'] = get_current_user_id();
+            } else {
+                $user_c = get_user_by('email', $email);
+                if(!empty($user_c)) {
+                    $args['customer_id'] = $user_c->ID;
+                }
+            }
 
             $order = wc_create_order( $args );
             $coupon->update_coupoun($coupon_code, $order->get_id());
