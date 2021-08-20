@@ -30,7 +30,7 @@ function va_magalu_box_thank_you()
 			<div class="magalu-box">
 				<div class="header-box text-center py-4 px-5">
 					<?php /*<img src="<?php echo TEMPLATE_URI . '/assets/img/video-autografo/lu.png'; ?>" alt="Lu"></img>*/ ?>
-					<h3>Obrigada por pedir seu<br>vídeo-autógrafo</h3>
+					<h3>Obrigado por pedir seu<br>vídeo-autógrafo</h3>
 				</div>
 				<div class="content-box">
 					<p>Luciano vai enviar um vídeo<br>personalizado em até 30 dias.</p>
@@ -61,7 +61,7 @@ function va_magalu_box_cart()
 										<p class="description">Comprar o livro De Porta em Porta no site da <a href="<?php echo event_get_magalu_url(); ?>" target="_blank"><b>Magalu</b></a></p>
 									</span>
 								</li>
-								<li class="item itempayment-approved complete">
+								<li class="item itempayment-approved complete" style="height: 120px;">
 									<span class="background status">2</span>
 									<span class="text">
 										<p class="description">Após a compra, você receberá um e-mail da Magalu contendo o código único para resgatar seu vídeo-autógrafo</p>
