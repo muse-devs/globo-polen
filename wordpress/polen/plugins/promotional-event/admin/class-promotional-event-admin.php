@@ -10,6 +10,7 @@
  * @subpackage Promotional_Event/admin
  */
 
+use Polen\Includes\Debug;
 use Polen\Includes\Polen_WooCommerce;
 
 /**
@@ -176,7 +177,7 @@ class Promotional_Event_Admin {
                 'city' => $city,
                 'state' => '',
                 'country' => 'Brasil',
-                'phone' => sanitize_text_field($_POST['phone']),
+                // 'phone' => sanitize_text_field($_POST['phone']),
             );
 
             $coupon = new Coupons();
@@ -198,10 +199,7 @@ class Promotional_Event_Admin {
                 wp_die();
             }
             
-            $args = array(
-                'status'        => Polen_WooCommerce::ORDER_STATUS_PAYMENT_APPROVED,
-                'customer_email'   => $email,
-            );
+            $args = array();
             if( !empty(get_current_user_id())) {
                 $args['customer_id'] = get_current_user_id();
             } else {
@@ -217,7 +215,7 @@ class Promotional_Event_Admin {
             $order->add_meta_data(self::ORDER_METAKEY, 1, true);
             $order->add_meta_data('campaign', 'de-porta-em-porta', true);
 
-            $order->update_status('wc-payment-approved');
+            // $order->update_status('wc-payment-approved');
 
             // ID Product
             global $Polen_Plugin_Settings;
@@ -254,9 +252,12 @@ class Promotional_Event_Admin {
             wc_add_order_item_meta( $order_item_id, '_line_total'           , 0, true );
             $order->save();
 
+            $email = WC_Emails::instance();
+            $order->update_status( Polen_WooCommerce::ORDER_STATUS_PAYMENT_APPROVED, 'order_note', true );
+            
             $order = new \WC_Order($order->get_id());
             $order->calculate_totals();
-            
+
             session_start();
             $_SESSION[ self::SESSION_KEY_SUCCESS_ORDER_ID ] = $order->get_id();
 

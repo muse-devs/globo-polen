@@ -22,7 +22,8 @@ function event_promotional_url_success()
 
 function event_promotional_is_home()
 {
-    if( $GLOBALS[ Promotional_Event_Rewrite::QUERY_VARS_EVENT_PROMOTIONAL_IS_HOME ] == '1' ) {
+    $is_set = isset( $GLOBALS[ Promotional_Event_Rewrite::QUERY_VARS_EVENT_PROMOTIONAL_IS_HOME ] );
+    if( $is_set && $GLOBALS[ Promotional_Event_Rewrite::QUERY_VARS_EVENT_PROMOTIONAL_IS_HOME ] == '1' ) {
         return true;
     }
     return false;
@@ -30,7 +31,18 @@ function event_promotional_is_home()
 
 function event_promotional_is_app()
 {
-    if( $GLOBALS[ Promotional_Event_Rewrite::QUERY_VARS_EVENT_PROMOTIONAL_APP ] == '1' ) {
+    $is_set = isset( $GLOBALS[ Promotional_Event_Rewrite::QUERY_VARS_EVENT_PROMOTIONAL_APP ] );
+    if( $is_set && $GLOBALS[ Promotional_Event_Rewrite::QUERY_VARS_EVENT_PROMOTIONAL_APP ] == '1' ) {
+        return true;
+    }
+    return false;
+}
+
+
+function event_promotional_order_is_event_promotional( $order )
+{
+    $is_ep = $order->get_meta( Promotional_Event_Admin::ORDER_METAKEY, true );
+    if( $is_ep && $is_ep == '1' ) {
         return true;
     }
     return false;
