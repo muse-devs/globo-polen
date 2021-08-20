@@ -159,19 +159,35 @@ class Promotional_Event_Admin {
             if( !wp_verify_nonce( $nonce, self::NONCE_ACTION )) {
                 throw new Exception('Erro na verificação de segurança', 422);
             }
-            
+
             if( empty( $term ) || $term !== 'on' ) {
                 throw new Exception('Aceite os termos e condições', 422);
+            }
+
+            $userdata = array(
+                'user_login' => $email,
+                'user_email' => $email,
+                'user_pass' => wp_generate_password(),
+                'first_name' => $name,
+                'nickname' => $name,
+                'role' => 'customer',
+            );
+
+            $userId = wp_insert_user($userdata);
+            $user = get_user_by('id', $userId);
+
+            if (empty($user)) {
+                $user = get_user_by('login', $email);
             }
 
             $address = array(
                 'first_name' => $name,
                 'email' => $email,
                 'city' => $city,
-                'state' => '',
                 'country' => 'Brasil',
                 'phone' => sanitize_text_field($_POST['phone']),
             );
+
 
             $coupon = new Coupons();
             $check = $coupon->check_coupoun_exist($coupon_code);
@@ -192,7 +208,7 @@ class Promotional_Event_Admin {
                 wp_die();
             }
 
-            $order = wc_create_order();
+            $order = wc_create_order(array('customer_id' => $user->ID));
             $coupon->update_coupoun($coupon_code, $order->get_id());
 
             $order->add_meta_data(self::ORDER_METAKEY, 1, true);
@@ -238,7 +254,7 @@ class Promotional_Event_Admin {
 
             $order = new \WC_Order($order->get_id());
             $order->calculate_totals();
-            
+
             session_start();
             $_SESSION[ self::SESSION_KEY_SUCCESS_ORDER_ID ] = $order->get_id();
 
