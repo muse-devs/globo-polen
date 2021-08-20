@@ -53,13 +53,13 @@ if ( ! defined( 'ABSPATH' ) ) {
                                                             </div>
                                                         </td>
                                                     </tr>
-                                                    <tr align="center" style='color: #ffffff; font-family: Poppins, "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 14px; line-height: 100%; text-align: left;'>
-                                                        <td style="display: flex; justify-content: center;">
+                                                    <tr style='color: #ffffff; font-family: Poppins, "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 14px; line-height: 100%; text-align: left;'>
+                                                        <td align="center">
                                                             <span style="padding: 20px 40px; background-color: #18a2e4; font-size: 16px; font-weight: 900;border-radius: 8px;">Número do pedido: <?php echo $order->get_order_number(); ?></span>
                                                         </td>
                                                     </tr>
                                                     <tr align="center" style='color: #ffffff; font-family: Poppins, "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 14px; line-height: 100%; text-align: left;'>
-                                                        <td style="display: flex; justify-content: center;">
+                                                        <td align="center">
                                                             <p style="font-size: 16px; line-height: 2; font-weight: 400; color: #ffffff; margin: 0 0 10px; text-align: center;">Para acompanhar seu pedido <a href="<?php echo polen_get_link_order_status( $order->get_id() ); ?>" target="_blank" style="color: #6cdcff; font-weight: 600; text-decoration: none;">clique aqui.</a></p>
                                                         </td>
                                                     </tr>
