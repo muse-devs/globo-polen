@@ -1,0 +1,566 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Project-Id-Version: WooCommerce Stripe Connect\n"
+"POT-Creation-Date: 2020-11-20 11:19-0500\n"
+"PO-Revision-Date: 2020-05-03 23:42-0400\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: woocommerce-stripe-connect.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: includes/admin/views/html-stripe-store-settings-page.php:12
+#: woocommerce-stripe-connect.php:235
+msgid "Stripe Settings"
+msgstr ""
+
+#: includes/admin/views/html-stripe-store-settings-page.php:32
+msgid "Stripe Account ID"
+msgstr ""
+
+#: includes/admin/views/html-stripe-store-settings-page.php:40
+msgid "Stripe Live Mode"
+msgstr ""
+
+#: includes/admin/views/html-stripe-store-settings-page.php:48
+msgid "Authorize Stripe"
+msgstr ""
+
+#: includes/admin/views/html-stripe-store-settings-page.php:51
+msgid "Authorize"
+msgstr ""
+
+#: includes/admin/views/html-stripe-store-settings-page.php:53
+msgid "Click the button to authorize access to you Stripe account."
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:47
+msgid "Stripe Connect"
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:48
+msgid "Accept payments by credit card using Stripe."
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:49
+msgid "Proceed to payment"
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:177
+msgid "System Status &gt; Logs"
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:189
+msgid "Enable/Disable"
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:191
+msgid "Enable Stripe Marketplace"
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:195
+msgid "Title"
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:197
+msgid "This controls the title which the user sees during checkout."
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:199
+msgid "Credit Card"
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:202
+msgid "Description"
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:204
+msgid "This controls the description which the user sees during checkout."
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:205
+msgid "Pay with credit card"
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:208
+msgid "Statement Descriptor"
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:210
+msgid "What shows up on the credit card statement for the customer"
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:214
+msgid "Sandbox"
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:216
+msgid "Enable Sandbox"
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:219
+msgid "Sandbox can be used to test the payments."
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:222
+msgid "Sandbox/Test Credentials"
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:227
+msgid "Stripe Connect Test client_id"
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:228
+msgid "Test client_id"
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:230
+msgid "Enter Stripe Connect Test Client Id "
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:234
+msgid "Stripe Test Publishable Key"
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:236
+msgid ""
+"This is the API Stripe Test Publishable Key generated within the Stripe Payment "
+"gateway."
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:240
+msgid "Stripe Test Secret Key"
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:242
+msgid ""
+"This is the API Stripe Test Secret Key generated within the Stripe Payment gateway."
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:247
+msgid "Production Credentials"
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:252
+msgid "Stripe Connect Live client_id"
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:253
+msgid "Live client_id"
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:255
+msgid "Enter Stripe Connect Live Client Id "
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:259
+msgid "Stripe Live Publishable Key"
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:261
+msgid ""
+"This is the API Stripe Live Publishable Key generated within the Stripe Payment "
+"gateway."
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:265
+msgid "Stripe Live Secret Key"
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:267
+msgid ""
+"This is the API Stripe Live Secret Key generated within the Stripe Payment gateway."
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:272
+msgid "Integration Behavior"
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:277
+msgid "Commission Transfers"
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:279
+msgid "Enable Manual Transfers"
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:282
+#, php-format
+msgid ""
+"Activate this option to make manual transfers using Stripe Connect. %sATENTION%s: "
+"Automatic transfers during checkout will be bypassed and you will need to manually "
+"transfer funds from the %sCommissions%s tab. Your Stripe account must have funds in "
+"order to make manual transfers. %sYou may need to set your Stripe payout schedule "
+"to \"manual%s\"."
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:292
+msgid "Order Prefix"
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:294
+msgid ""
+"Please enter a prefix for your order numbers on stripe. This will show up on the "
+"description field of your transaction on Stripe. ie.: WC-8749"
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:299
+msgid "Gateway Testing"
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:304
+msgid "Debug Log"
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:306
+msgid "Enable logging"
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:308
+#, php-format
+msgid "Log events, such as API requests, inside %s"
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:349
+msgid "The card number is not a valid credit card number."
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:350
+msgid "The card's expiration month is invalid."
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:351
+msgid "The card's expiration year is invalid."
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:352
+msgid "The card's security code is invalid."
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:353
+msgid "The card number is incorrect."
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:354
+msgid "The card number is incomplete."
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:355
+msgid "The card's security code is incomplete."
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:356
+msgid "The card's expiration date is incomplete."
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:357
+msgid "The card has expired."
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:358
+msgid "The card's security code is incorrect."
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:359
+msgid "The card's zip code failed validation."
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:360
+msgid "The card's expiration year is in the past"
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:361
+msgid "The card was declined."
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:362
+msgid "There is no card on a customer that is being charged."
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:363
+msgid "An error occurred while processing the card."
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:364
+msgid "Unable to process this payment, please try again or use alternative method."
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:365
+msgid "The billing country is not accepted by SOFORT. Please try another country."
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:366
+msgid "Invalid email address, please correct and try again."
+msgstr ""
+
+#. translators: link to Stripe testing page
+#: includes/class-wc-stripe-connect-gateway.php:415
+#, php-format
+msgid ""
+"TEST MODE ENABLED. In test mode, you can use the card number 4242424242424242 with "
+"any CVC and a valid expiration date or check the <a href=\"%s\" target=\"_blank"
+"\">Testing Stripe documentation</a> for more card numbers."
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:453
+msgid "Card Number"
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:464
+msgid "Expiry Date"
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:472
+msgid "Card Code (CVC)"
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:530
+msgid "Stripe: Payment authorized."
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:535
+msgid "Stripe: Payment cancelled."
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:843
+msgid ""
+"Almost there!\n"
+"\n"
+"Your order has already been created, the only thing that still needs to be done is "
+"for you to authorize the payment with your bank."
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:861
+msgid "Payment Intent not found for order #"
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:991
+msgid "CSRF verification failed."
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:1004
+msgid "Missing order ID for payment confirmation"
+msgstr ""
+
+#. translators: 1) The error message that was received from Stripe.
+#: includes/class-wc-stripe-connect-gateway.php:1117
+#, php-format
+msgid "Stripe SCA authentication failed. Reason: %s"
+msgstr ""
+
+#: includes/class-wc-stripe-connect-gateway.php:1118
+msgid "Stripe SCA authentication failed."
+msgstr ""
+
+#: includes/class-wc-stripe-connect-subs-gateway.php:67
+#, php-format
+msgid "Stripe Renewal Payment Failed (%s)"
+msgstr ""
+
+#: includes/class-wc-stripe-connect-subs-gateway.php:87
+msgid "Stripe Customer ID"
+msgstr ""
+
+#: includes/class-wc-stripe-connect-subs-gateway.php:91
+msgid "Stripe Payment Method ID"
+msgstr ""
+
+#: includes/class-wc-stripe-connect-subs-gateway.php:110
+msgid "Stripe Customer ID is required"
+msgstr ""
+
+#: includes/class-wc-stripe-connect-subs-gateway.php:114
+msgid "Stripe Payment Method ID is required"
+msgstr ""
+
+#: includes/class-wc-stripe-connect-subs-gateway.php:182
+#: includes/process-renewal.php:84
+msgid "Stripe charge awaiting authentication by user."
+msgstr ""
+
+#: includes/emails/class-wc-stripe-connect-email-failed-authentication-retry.php:29
+msgid "Payment Authentication Requested Email"
+msgstr ""
+
+#: includes/emails/class-wc-stripe-connect-email-failed-authentication-retry.php:30
+msgid ""
+"Payment authentication requested emails are sent to chosen recipient(s) when an "
+"attempt to automatically process a subscription renewal payment fails because the "
+"transaction requires an SCA verification, the customer is requested to authenticate "
+"the payment, and a retry rule has been applied to notify the customer again within "
+"a certain time period."
+msgstr ""
+
+#: includes/emails/class-wc-stripe-connect-email-failed-authentication-retry.php:32
+msgid "Automatic renewal payment failed due to authentication required"
+msgstr ""
+
+#: includes/emails/class-wc-stripe-connect-email-failed-authentication-retry.php:33
+msgid ""
+"[{site_title}] Automatic payment failed for {order_number}. Customer asked to "
+"authenticate payment and will be notified again {retry_time}"
+msgstr ""
+
+#: includes/emails/class-wc-stripe-connect-email-failed-authentication.php:84
+msgctxt "an email notification"
+msgid "Enable/Disable"
+msgstr ""
+
+#: includes/emails/class-wc-stripe-connect-email-failed-authentication.php:86
+msgid "Enable this email notification"
+msgstr ""
+
+#: includes/emails/class-wc-stripe-connect-email-failed-renewal-authentication.php:19
+msgid "Failed Subscription Renewal SCA Authentication"
+msgstr ""
+
+#: includes/emails/class-wc-stripe-connect-email-failed-renewal-authentication.php:20
+msgid ""
+"Sent to a customer when a renewal fails because the transaction requires an SCA "
+"verification. The email contains renewal order information and payment links."
+msgstr ""
+
+#: includes/emails/class-wc-stripe-connect-email-failed-renewal-authentication.php:67
+msgid "Payment authorization needed for renewal of {site_title} order {order_number}"
+msgstr ""
+
+#: includes/emails/class-wc-stripe-connect-email-failed-renewal-authentication.php:76
+msgid "Payment authorization needed for renewal of order {order_number}"
+msgstr ""
+
+#: includes/masspay/class-wc-product-vendors-stripe-masspay.php:133
+#, php-format
+msgid "Some transfers failed: %s"
+msgstr ""
+
+#: includes/process-add-payment-method.php:58 includes/process-payment.php:81
+msgid ""
+"Problem encrypting your credit card. Please verify your credit card information."
+msgstr ""
+
+#: includes/process-add-payment-method.php:61 includes/process-payment-change.php:96
+#: includes/process-payment.php:205 includes/process-renewal.php:93
+msgid "Problem creating customer on Stripe. Please try again later."
+msgstr ""
+
+#: includes/process-payment-change.php:56 includes/process-payment.php:64
+msgid "Payment method does not belong to current user."
+msgstr ""
+
+#: includes/process-payment.php:201 includes/process-renewal.php:90
+msgid "Problem creating charge for customer. Please try again later."
+msgstr ""
+
+#: includes/process-renewal.php:26
+msgid "Sorry, the minimum allowed order total is 0.01 to use this payment method."
+msgstr ""
+
+#: includes/process-renewal.php:82
+msgid "This transaction requires authentication."
+msgstr ""
+
+#: templates/emails/failed-renewal-authentication-requested.php:24
+#: templates/emails/plain/failed-renewal-authentication-requested.php:18
+#, php-format
+msgctxt "In admin renewal failed email"
+msgid ""
+"The automatic recurring payment for order %1$s from %2$s has failed. The customer "
+"was sent an email requesting authentication of payment. If the customer does not "
+"authenticate the payment, they will be requested by email again %3$s."
+msgstr ""
+
+#: templates/emails/failed-renewal-authentication-requested.php:35
+#: templates/emails/plain/failed-renewal-authentication-requested.php:26
+msgid "The renewal order is as follows:"
+msgstr ""
+
+#. translators: %1$s: name of the blog, %2$s: link to payment re-authentication URL, note: no full stop due to url at the end
+#. translators: %1$s: name of the blog, %2$s: link to checkout payment url, note: no full stop due to url at the end
+#: templates/emails/failed-renewal-authentication.php:12
+#: templates/emails/plain/failed-renewal-authentication.php:9
+#, php-format
+msgctxt "In failed renewal authentication email"
+msgid ""
+"The automatic payment to renew your subscription with %1$s has failed. To "
+"reactivate the subscription, please login and authorize the renewal from your "
+"account page: %2$s"
+msgstr ""
+
+#: templates/emails/failed-renewal-authentication.php:12
+msgid "Authorize the payment &raquo;"
+msgstr ""
+
+#: woocommerce-stripe-connect.php:59 woocommerce-stripe-connect.php:71
+msgid "Cheatin&#8217; huh?"
+msgstr ""
+
+#: woocommerce-stripe-connect.php:210
+msgid "Settings"
+msgstr ""
+
+#: woocommerce-stripe-connect.php:332
+msgid "Connected Successfully"
+msgstr ""
+
+#: woocommerce-stripe-connect.php:387
+#, php-format
+msgid ""
+"WooCommerce Stripe Connect requires WooCommerce to be installed and active. You can "
+"download %s here."
+msgstr ""
+
+#: woocommerce-stripe-connect.php:399
+#, php-format
+msgid ""
+"WooCommerce Stripe Connect requires WooCommerce Product Vendors to be installed and "
+"active. You can download %s here."
+msgstr ""
+
+#: woocommerce-stripe-connect.php:411
+#, php-format
+msgid ""
+"WooCommerce Stripe Connect requires PHP 5.5 and above. <a href=\"%s\">How to update "
+"your PHP version</a>"
+msgstr ""
+
+#: woocommerce-stripe-connect.php:502
+msgid "Transfer with Stripe Connect"
+msgstr ""
+
+#. translators: Error message text
+#: woocommerce-stripe-connect.php:585
+#, php-format
+msgid "Payment verification error: %s"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "WooCommerce Stripe Connect"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://codecanyon.net/item/stripe-connect-for-woocommerce-product-vendors"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "WooCommerce Stripe Connect plugin integration for WooCommerce Product Vendors."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Felipe Rinaldi"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://codecanyon.net/user/feliperinaldi"
+msgstr ""

@@ -231,6 +231,7 @@ class Polen_Update_Fields
         }
 
         // Aba "Configurações Financeiras"
+        $stripe_account_id = (string) strip_tags( trim( $_POST['stripe_account_id'] ) );
         $subordinate_merchant_id = (string) strip_tags( trim( $_POST['subordinate_merchant_id'] ) );
         $mdr = (float) strip_tags( trim( $_POST['mdr'] ) );
         $fee = (int) strip_tags( trim( $_POST['fee'] ) );
@@ -247,6 +248,7 @@ class Polen_Update_Fields
             $fee = null;
         }
     
+        $args['stripe_account_id'] = $stripe_account_id;
         $args['subordinate_merchant_id'] = $subordinate_merchant_id;
         $args['mdr'] = $mdr;
         $args['fee'] = $fee;
