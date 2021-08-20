@@ -139,7 +139,7 @@ function event_promotional_get_order_flow_obj($order_number, $order_status, $ema
     $flow_3 = array(
         'completed' => array(
             'title' => 'Seu vídeo está pronto!',
-            'description' => 'Corre lá e confere <a href="'.$url_user_order.'">aqui</a>.',
+            'description' => 'Corre lá e confira seu vídeo-autógrafo.',
             'status' => 'complete',
         ),
         'cancelled' => array(
