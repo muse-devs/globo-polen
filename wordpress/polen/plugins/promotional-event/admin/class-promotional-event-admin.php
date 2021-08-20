@@ -10,6 +10,8 @@
  * @subpackage Promotional_Event/admin
  */
 
+use Polen\Includes\Polen_WooCommerce;
+
 /**
  * The admin-specific functionality of the plugin.
  *
@@ -195,8 +197,13 @@ class Promotional_Event_Admin {
                 throw new Exception('Cupon já foi utilizado', 401);
                 wp_die();
             }
+            
+            $args = array(
+                'status'        => Polen_WooCommerce::ORDER_STATUS_PAYMENT_APPROVED,
+                'customer_email'   => $email,
+            );
 
-            $order = wc_create_order();
+            $order = wc_create_order( $args );
             $coupon->update_coupoun($coupon_code, $order->get_id());
             $order->update_meta_data( '_polen_customer_email', $email );
             $order->add_meta_data(self::ORDER_METAKEY, 1, true);
@@ -210,32 +217,31 @@ class Promotional_Event_Admin {
 
             $quantity = 1;
             $product = wc_get_product($product_id);
-            $order->add_product($product, $quantity);
+            $order_item_id = $order->add_product($product, $quantity);
             $order->set_address($address, 'billing');
-            $order->set_address($address, 'shipping');
 
-            $order_item_id = wc_add_order_item( $order->get_id(), array(
-                'order_item_name' => $product->get_title(),
-                'order_item_type' => 'line_item',
-            ));
+            // $order_item_id = wc_add_order_item( $order->get_id(), array(
+            //     'order_item_name' => $product->get_title(),
+            //     'order_item_type' => 'line_item',
+            // ));
 
             $instruction = "{$name} de {$city} já garantiu sua cópia do livro 'De Porta em Porta'! 
             Envie um vídeo para agradecer e mande um alô para toda cidade.";
 
             wc_add_order_item_meta( $order_item_id, '_qty', $quantity, true );
             wc_add_order_item_meta( $order_item_id, '_product_id', $product->get_id(), true );
-            wc_add_order_item_meta( $order_item_id, '_line_subtotal', 0, true );
-            wc_add_order_item_meta( $order_item_id, '_line_total', 0, true );
+            wc_add_order_item_meta( $order_item_id, '_line_subtotal', '0', true );
+            wc_add_order_item_meta( $order_item_id, '_line_total', '0', true );
             //Polen Custom Meta Order_Item
             wc_add_order_item_meta( $order_item_id, 'offered_by'            , '', true );
 
             wc_add_order_item_meta( $order_item_id, 'video_to'              , 'to_myself', true );
             wc_add_order_item_meta( $order_item_id, 'name_to_video'         , $name, true );
             wc_add_order_item_meta( $order_item_id, 'email_to_video'        , $email, true );
-            wc_add_order_item_meta( $order_item_id, 'video_category'        , 'video-autografo', true );
+            wc_add_order_item_meta( $order_item_id, 'video_category'        , 'Vídeo-Autógrafo', true );
             wc_add_order_item_meta( $order_item_id, 'instructions_to_video' , $instruction, true );
 
-            wc_add_order_item_meta( $order_item_id, 'allow_video_on_page'   , 1, true );
+            wc_add_order_item_meta( $order_item_id, 'allow_video_on_page'   , 'on', true );
             wc_add_order_item_meta( $order_item_id, '_fee_amount'           , 0, true );
             wc_add_order_item_meta( $order_item_id, '_line_total'           , 0, true );
             $order->save();
