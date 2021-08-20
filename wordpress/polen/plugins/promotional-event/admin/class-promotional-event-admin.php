@@ -274,23 +274,23 @@ class Promotional_Event_Admin {
             $check_is_used = $coupon->check_coupoun_is_used($coupon_code);
 
             if (empty($coupon_code)) {
-                throw new Exception('Cupon é obrigatório', 422);
+                throw new Exception('Cupom é obrigatório', 422);
                 wp_die();
             }
 
             if (empty($check)) {
-                throw new Exception('Cupon está incorreto ou não existe', 404);
+                throw new Exception('Cupom está incorreto ou não existe', 404);
                 wp_die();
             }
 
             if ($check_is_used == 1) {
-                throw new Exception('Cupon já foi utilizado', 401);
+                throw new Exception('Cupom já foi utilizado', 401);
                 wp_die();
             }
 
             session_start();
             $_SESSION[ self::SESSION_KEY_CUPOM_CODE ] = $coupon_code;
-            wp_send_json_success( 'Cupon Disponivél', 200 );
+            wp_send_json_success( 'Cupom Disponivél', 200 );
             wp_die();
 
         } catch (\Exception $e) {
