@@ -160,11 +160,6 @@ class Icon_Class
 		echo '<i class="icon icon-donate"></i>';
 	}
 
-	public static function va_icons($ico)
-	{
-		echo "<i class='icon icon-{$ico}'></i>";
-	}
-
 	public static function polen_icon_social($ico)
 	{
 		$ret = '';

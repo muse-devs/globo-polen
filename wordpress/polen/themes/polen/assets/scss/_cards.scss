@@ -341,9 +341,9 @@
 		@include media-breakpoint-down(sm) {
 			padding: 0px 30px;
 			top: 60%;
-			left: 0;
-			right: 0;
-			transform: translateY(-50%);
+  			left: 0;
+  			right: 0;
+  			transform: translateY(-50%);
 		}
 		.title {
 			font-size: 1.7rem;
@@ -631,9 +631,6 @@
 	@include media-breakpoint-down(xs) {
 		width: 43vw;
 		height: 70vw;
-		&.large {
-			width: 50vw;
-		}
 	}
 }
 

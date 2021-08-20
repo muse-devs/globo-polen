@@ -471,23 +471,6 @@ class Polen_Plugin_Settings
                 ),
             )
         ) );
-        
-         // Configurar produto promocional
-        \Redux::set_section( $opt_name, array(
-            'title'            => esc_html__( 'Configurar produto promocional', 'polen' ),
-            'id'               => 'promotional-event',
-            'icon'             => 'dashicons-edit-page',
-            'subsection'       => false,
-            'fields'           => array(
-                array(
-                    'id'       => 'promotional-event-text',
-                    'type'     => 'text',
-                    'title'    => esc_html__('Adicionar produto promocional', 'polen'),
-                    'desc'     => 'APENAS O ID DO PRODUTO',
-                    'default'  => '',
-                ),
-            )
-        ) );
     }
 
     public function save( $args ) {

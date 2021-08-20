@@ -14,7 +14,7 @@ get_header();
 
 	<?php polen_banner_scrollable(social_get_products_by_category_slug(social_get_category_base()), "Criança Esperança", social_get_criesp_url(), "Aqui seu Vídeo Polen vira uma doação", true); ?>
 
-	<?php va_get_home_banner(event_promotional_url_home()); ?>
+	<?php criesp_get_home_banner(social_get_criesp_url()); ?>
 
 	<?php polen_front_get_tutorial(); ?>
 

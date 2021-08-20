@@ -299,73 +299,12 @@ class Polen_Talent {
         }
         return $new_columns;
     }
-
-    /**
-     * Calcular diferença entre data do pedido e prazo total para envio do vídeo
-     *
-     * @param $order_date
-     * @param int $days
-     * @return false|float
-     */
-    private function calculate_diff_date($order_date, $days = 7)
-    {
-        $day = date('Y-m-d');
-        $date_start = date('Y-m-d', strtotime($order_date));
-        $deadline = date('Y-m-d', strtotime("$days days", strtotime($order_date)));
-        $interval = strtotime($deadline) - strtotime($day);
-
-        return floor($interval / (60 * 60 * 24));
-    }
-
-    /**
-     * Retornar prazo limite para envio do vídeo
-     *
-     * @param $order
-     * @return string
-     */
-    private function get_messenger($order): string
-    {
-        $status = $order->get_status();
-        $status_fail = [
-            'talent-rejected',
-            'cancelled',
-            'failed',
-            'payment-rejected',
-            'order-expired'
-        ];
-
-        if (in_array($status, $status_fail)) {
-            return 'Sem data';
-        }
-
-        $order_date = $order->get_date_created()->date( 'Ymd');
-
-        $social = get_post_meta($order->get_id(), 'social');
-        $defaultDeadline = 7;
-        $socialDeadline = 15;
-
-        $number_of_days = isset($social[0]) ? $socialDeadline : $defaultDeadline;
-        $deadline = $this->calculate_diff_date($order_date, $number_of_days);
-        $msg = 'Prazo expirado';
-
-        if ($deadline > 0) {
-            $msg = "{$deadline} dia(s) para o fim do prazo";
-        }
-
-        return $msg;
-    }
+    
 
     public function talent_column_content($column, $post_id) {
-
-        $order = wc_get_order($post_id);
-        $message = 'Vídeo já foi enviado!';
-
-        if (!$order->has_status('completed')) {
-            $message = $this->get_messenger($order);
-        }
-
         switch ($column) {
             case 'talent_product' :
+                $order = wc_get_order($post_id);
                 if ($order) {
                     foreach ($order->get_items() as $item_id => $item) {
                         echo $name = $item->get_name();
@@ -373,9 +312,6 @@ class Polen_Talent {
                 } else {
                     echo '-';
                 }
-                break;
-            case 'expiration_invite' :
-                echo $message;
                 break;
         }
     }
