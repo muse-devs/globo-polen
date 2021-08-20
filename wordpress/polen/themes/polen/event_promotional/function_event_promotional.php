@@ -28,6 +28,14 @@ function event_promotional_is_home()
     return false;
 }
 
+function event_promotional_is_app()
+{
+    if( $GLOBALS[ Promotional_Event_Rewrite::QUERY_VARS_EVENT_PROMOTIONAL_APP ] == '1' ) {
+        return true;
+    }
+    return false;
+}
+
 
 /**
  *
