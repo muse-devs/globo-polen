@@ -17,8 +17,8 @@ if ( ! defined( 'ABSPATH' ) ) {
                 <table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%">
                     <tr>
                     <td align="center" valign="top">
-                        <div style="display: flex; justify-content: center; align-items: center;">
-                        <img src="<?php echo TEMPLATE_URI.'/assets/img/video-autografo/polen-email.png'?>" style="height: 50px; margin: 1em;"></img>
+                        <div style="">
+                            <img src="<?php echo TEMPLATE_URI.'/assets/img/video-autografo/polen-email.png'?>" style="height: 50px; margin: 1em;"></img>
                             <img src="<?php echo TEMPLATE_URI.'/assets/img/video-autografo/magalu-email.png'?>" style="height: 30px; margin: 1em;"></img>
                             <img src="<?php echo TEMPLATE_URI.'/assets/img/video-autografo/cia-email.png'?>" style="height: 64px; margin: 1em;"></img>
                         </div>
@@ -28,8 +28,8 @@ if ( ! defined( 'ABSPATH' ) ) {
                                     <!-- Header -->
                                     <table border="0" cellpadding="0" cellspacing="0" width="100%" style='color: #ffffff; border-bottom: 0; font-weight: bold; line-height: 100%; vertical-align: middle; font-family: Poppins, "Helvetica Neue", Helvetica, Arial, sans-serif;'>
                                         <tr>
-                                            <td style="display: flex; justify-content: center;border-bottom: 1px solid rgba(255, 255, 255, 0.2);">
-                                            <img src="<?php echo TEMPLATE_URI.'/assets/img/video-autografo/book_cover.png'?>" style="height: 250px;"></img>
+                                            <td align="center" style="border-bottom: 1px solid rgba(255, 255, 255, 0.2);">
+                                                <img src="<?php echo TEMPLATE_URI.'/assets/img/video-autografo/book_cover.png'?>" style="height: 350px;"></img>
                                             </td>
                                         </tr>
                                     </table>
@@ -45,7 +45,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                                                 <!-- Content -->
                                                 <table border="0" cellpadding="20" cellspacing="0" width="100%">
                                                     <tr>
-                                                        <td valign="top">
+                                                        <td align="center" valign="top">
                                                             <div id="body_content_inner" style='color: #ffffff; font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 14px; line-height: 100%; text-align: left;'>
                                                                 <h2 style="text-align: center; color: #fff; font-weight: 900;">Seu vídeo-autógrafo chegou!</h2>
                                                                 <p style="font-size: 16px; line-height: 2; font-weight: 400; color: #ffffff; margin: 0 0 10px; text-align: center;">Seu vídeo-autógrafo já está disponível, selecione o botão abaixo para visualizar e aproveitar!</p>
@@ -53,7 +53,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                                                         </td>
                                                     </tr>
                                                     <tr style='color: #ffffff; font-family: Poppins, "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 14px; line-height: 100%; text-align: left;'>
-                                                        <td style="display: flex;justify-content: center;">
+                                                        <td align="center">
                                                             <a href="<?php echo polen_get_link_order_status( $order->get_id() ); ?>" target="_blank" style="font-size: 16px;color: #fff; font-weight: 600; text-decoration: none; border: 1px solid #fff; padding: 15px 40px; border-radius: 10px;margin-bottom: 30px;">Visualizar vídeo</a>
                                                         </td>
                                                     </tr>
