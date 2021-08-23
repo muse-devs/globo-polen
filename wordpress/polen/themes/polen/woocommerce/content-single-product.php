@@ -54,10 +54,9 @@ $stock = $product->get_stock_quantity();
 <script>
 	// params
 	jQuery(document).ready(function() {
-		if(!document.querySelector("#stories")) {
-			return;
+		if(document.querySelector("#stories")) {
+			renderStories(<?php echo polen_get_videos_by_talent($Talent_Fields, true); ?>, <?php echo json_encode(get_the_title()); ?>, <?php echo json_encode(wp_get_attachment_image_src(get_post_thumbnail_id(get_the_ID()), 'polen-thumb-lg')[0]); ?>, <?php echo $social; ?>, <?php echo $stock; ?>)
 		}
-		renderStories(<?php echo polen_get_videos_by_talent($Talent_Fields, true); ?>, <?php echo json_encode(get_the_title()); ?>, <?php echo json_encode(wp_get_attachment_image_src(get_post_thumbnail_id(get_the_ID()), 'polen-thumb-lg')[0]); ?>, <?php echo $social; ?>, <?php echo $stock; ?>)
 	});
 </script>
 
@@ -71,7 +70,7 @@ $stock = $product->get_stock_quantity();
 
 	<!-- Tags -->
 	<div class="row">
-		<div class="col-12 col-md-6 m-md-auto d-flex align-items-center">
+		<div class="col-12<?php echo $social ? ' col-md-6 m-md-auto' : ''; ?> d-flex align-items-center">
 			<?php $social && polen_front_get_talent_stories(); ?>
 			<div>
 				<h1 class="talent-name" title="<?= get_the_title(); ?>"><?= get_the_title(); ?></h1>
