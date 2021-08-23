@@ -13,4 +13,12 @@ class Social_Order
         }
         return false;
     }
+
+    static function is_campaing( $order )
+    {
+        if( $order->get_meta( self::ORDER_META_KEY_CAMPAING, true ) == 'de-porta-em-porta' ) {
+            return true;
+        }
+        return false;
+    }
 }
