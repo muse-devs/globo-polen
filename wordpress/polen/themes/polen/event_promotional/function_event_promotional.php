@@ -22,7 +22,27 @@ function event_promotional_url_success()
 
 function event_promotional_is_home()
 {
-    if( $GLOBALS[ Promotional_Event_Rewrite::QUERY_VARS_EVENT_PROMOTIONAL_IS_HOME ] == '1' ) {
+    $is_set = isset( $GLOBALS[ Promotional_Event_Rewrite::QUERY_VARS_EVENT_PROMOTIONAL_IS_HOME ] );
+    if( $is_set && $GLOBALS[ Promotional_Event_Rewrite::QUERY_VARS_EVENT_PROMOTIONAL_IS_HOME ] == '1' ) {
+        return true;
+    }
+    return false;
+}
+
+function event_promotional_is_app()
+{
+    $is_set = isset( $GLOBALS[ Promotional_Event_Rewrite::QUERY_VARS_EVENT_PROMOTIONAL_APP ] );
+    if( $is_set && $GLOBALS[ Promotional_Event_Rewrite::QUERY_VARS_EVENT_PROMOTIONAL_APP ] == '1' ) {
+        return true;
+    }
+    return false;
+}
+
+
+function event_promotional_order_is_event_promotional( $order )
+{
+    $is_ep = $order->get_meta( Promotional_Event_Admin::ORDER_METAKEY, true );
+    if( $is_ep && $is_ep == '1' ) {
         return true;
     }
     return false;
@@ -124,8 +144,8 @@ function event_promotional_get_order_flow_obj($order_number, $order_status, $ema
             'status' => 'fail',
         ),
         'talent-accepted' => array(
-            'title' => 'O talento aceitou',
-            'description' => 'O talento aceitou o seu pedido.',
+            'title' => 'O Luciano aceitou',
+            'description' => 'O Luciano aceitou o seu pedido.',
             'status' => 'complete',
         ),
         '_next-step' => array(
@@ -135,10 +155,11 @@ function event_promotional_get_order_flow_obj($order_number, $order_status, $ema
         ),
     );
 
+    $url_user_order = site_url('my-account/view-order/' . $order_number);
     $flow_3 = array(
         'completed' => array(
             'title' => 'Seu vídeo está pronto!',
-            'description' => 'O talento aceitou o seu pedido.',
+            'description' => 'Corre lá e confira seu vídeo-autógrafo.',
             'status' => 'complete',
         ),
         'cancelled' => array(
@@ -172,7 +193,7 @@ function event_promotional_get_order_flow_obj($order_number, $order_status, $ema
             $flow_2[$order_status],
             '_next-step_2' => array(
                 'title' => 'Aguardando gravação do vídeo',
-                'description' => 'Quando o artista disponibilizar o vídeo ele será exibido aqui.',
+                'description' => 'Quando o Luciano disponibilizar o vídeo ele será exibido aqui.',
                 'status' => 'in-progress',
             ),
         );

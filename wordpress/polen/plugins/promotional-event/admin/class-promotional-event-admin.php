@@ -10,6 +10,7 @@
  * @subpackage Promotional_Event/admin
  */
 
+use Polen\Includes\Debug;
 use Polen\Includes\Polen_WooCommerce;
 
 /**
@@ -176,7 +177,7 @@ class Promotional_Event_Admin {
                 'city' => $city,
                 'state' => '',
                 'country' => 'Brasil',
-                'phone' => sanitize_text_field($_POST['phone']),
+                // 'phone' => sanitize_text_field($_POST['phone']),
             );
 
             $coupon = new Coupons();
@@ -184,24 +185,29 @@ class Promotional_Event_Admin {
             $check_is_used = $coupon->check_coupoun_is_used($coupon_code);
 
             if (empty($coupon_code)) {
-                throw new Exception('Cupon é obrigatório', 422);
+                throw new Exception('Cupom é obrigatório', 422);
                 wp_die();
             }
 
             if (empty($check)) {
-                throw new Exception('Cupon está incorreto ou não existe', 404);
+                throw new Exception('Cupom está incorreto ou não existe', 404);
                 wp_die();
             }
 
             if ($check_is_used == 1) {
-                throw new Exception('Cupon já foi utilizado', 401);
+                throw new Exception('Cupom já foi utilizado', 401);
                 wp_die();
             }
             
-            $args = array(
-                'status'        => Polen_WooCommerce::ORDER_STATUS_PAYMENT_APPROVED,
-                'customer_email'   => $email,
-            );
+            $args = array();
+            if( !empty(get_current_user_id())) {
+                $args['customer_id'] = get_current_user_id();
+            } else {
+                $user_c = get_user_by('email', $email);
+                if(!empty($user_c)) {
+                    $args['customer_id'] = $user_c->ID;
+                }
+            }
 
             $order = wc_create_order( $args );
             $coupon->update_coupoun($coupon_code, $order->get_id());
@@ -209,7 +215,7 @@ class Promotional_Event_Admin {
             $order->add_meta_data(self::ORDER_METAKEY, 1, true);
             $order->add_meta_data('campaign', 'de-porta-em-porta', true);
 
-            $order->update_status('wc-payment-approved');
+            // $order->update_status('wc-payment-approved');
 
             // ID Product
             global $Polen_Plugin_Settings;
@@ -246,9 +252,12 @@ class Promotional_Event_Admin {
             wc_add_order_item_meta( $order_item_id, '_line_total'           , 0, true );
             $order->save();
 
+            $email = WC_Emails::instance();
+            $order->update_status( Polen_WooCommerce::ORDER_STATUS_PAYMENT_APPROVED, 'order_note', true );
+            
             $order = new \WC_Order($order->get_id());
             $order->calculate_totals();
-            
+
             session_start();
             $_SESSION[ self::SESSION_KEY_SUCCESS_ORDER_ID ] = $order->get_id();
 
@@ -274,23 +283,23 @@ class Promotional_Event_Admin {
             $check_is_used = $coupon->check_coupoun_is_used($coupon_code);
 
             if (empty($coupon_code)) {
-                throw new Exception('Cupon é obrigatório', 422);
+                throw new Exception('Cupom é obrigatório', 422);
                 wp_die();
             }
 
             if (empty($check)) {
-                throw new Exception('Cupon está incorreto ou não existe', 404);
+                throw new Exception('Cupom está incorreto ou não existe', 404);
                 wp_die();
             }
 
             if ($check_is_used == 1) {
-                throw new Exception('Cupon já foi utilizado', 401);
+                throw new Exception('Cupom já foi utilizado', 401);
                 wp_die();
             }
 
             session_start();
             $_SESSION[ self::SESSION_KEY_CUPOM_CODE ] = $coupon_code;
-            wp_send_json_success( 'Cupon Disponivél', 200 );
+            wp_send_json_success( 'Cupom Disponivél', 200 );
             wp_die();
 
         } catch (\Exception $e) {

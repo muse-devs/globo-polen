@@ -101,6 +101,9 @@ function polen_get_video_player($talent, $video, $user_id, $product = null)
 	$video_url = home_url() . "/v/" . $video->hash;
 	$isRateble = \Polen\Includes\Polen_Order_Review::can_make_review($user_id, $video->order_id);
 	$is_social = social_user_is_social($talent->user_id);
+
+	//TODO falta backend
+	$is_video_autografo = false;
 ?>
 	<div class="row video-card">
 		<header class="col-md-6 p-0">
@@ -109,6 +112,8 @@ function polen_get_video_player($talent, $video, $user_id, $product = null)
 				<div class="water-mark">
 					<?php if ($is_social) : ?>
 						<img src="<?php echo TEMPLATE_URI ?>/assets/img/criesp/logo-criesp.png" class="logo social" alt="Logo Criança Esperança" />
+					<?php elseif($is_video_autografo) : ?>
+						<img src="<?php echo TEMPLATE_URI ?>/assets/img/video-autografo/logo-de-porta-em-porta.png" class="logo video-autografo" alt="Logo Vídeo Autógrafo" />
 					<?php endif; ?>
 					<img src="<?php echo TEMPLATE_URI ?>/assets/img/logo.png" class="logo polen" alt="Logo Polen" />
 				</div>
