@@ -303,9 +303,15 @@
 			background-color: var(--box-color-light);
 			&.facebook{
 				background-color: #3b5998;
+				.icon {
+					margin-top: 2px;
+				}
 			}
 			&.twitter{
 				background-color: #00acee;
+				.icon {
+					margin-top: 2px;
+				}
 			}
 			&.whatsapp{
 				background-color: #25D366;
