@@ -24,7 +24,7 @@ function generateStoriesArray(videos, category, soldOut) {
 		buttonText = "Doe Agora"
 	}
 	videos.map((item) => {
-		array.push([item.hash, "video", 0, item.video, '',soldOut ? '' : 'javascript:clickToBuy()', soldOut ? '' : buttonText, false, timestamp()]);
+		array.push([item.hash, "video", 0, item.video, '','', '', false, timestamp()]);
 	});
 	return array;
 }
