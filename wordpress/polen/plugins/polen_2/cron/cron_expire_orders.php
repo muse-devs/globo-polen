@@ -46,10 +46,7 @@ if( $res && ! is_null( $res ) && ! is_wp_error( $res ) && is_array( $res ) && co
         // } else {
         //     echo '#' . $order_id . ': ' . $return['Message'] . "\n";
         //     if( $return['Message'] == 'Transaction not available to refund' ) {
-            // if($order->get_id() == 271) {
-            //     var_dump(event_promotional_order_is_event_promotional( $order ),social_order_is_social( $order ));
-            //     die;
-            // }
+
             if( social_order_is_social( $order ) ) {
                 $interval_time = new DateInterval( 'P15D' );
                 $cd = new DateTime( 'now', new DateTimeZone( wp_timezone_string() ) );
