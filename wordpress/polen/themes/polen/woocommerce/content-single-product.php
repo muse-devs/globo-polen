@@ -89,6 +89,7 @@ $stock = $product->get_stock_quantity();
 					</h5>
 				<?php endif; ?>
 			</div>
+			<?php polen_get_share_button(); ?>
 		</div>
 		<div class="col-12 mt-3">
 			<?php $social || polen_front_get_talent_videos($Talent_Fields); ?>
@@ -149,6 +150,8 @@ $stock = $product->get_stock_quantity();
 			criesp_get_send_video_date();
 		}
 	?>
+
+	<?php polen_get_share_icons(); ?>
 
 	<!-- Doação -->
 	<?php $donate && !$social ?
