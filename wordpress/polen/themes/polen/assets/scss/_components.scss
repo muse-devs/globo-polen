@@ -282,3 +282,50 @@
 		text-decoration: underline;
 	}
 }
+
+.share-options {
+	.share-icons {
+		display: none;
+		&.show {
+			display: block;
+		}
+	}
+	.share-icons {
+		.share-icons__icon {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 40px;
+			height: 40px;
+			border-radius: 50%;
+			font-size: 18px;
+			color: white;
+			background-color: var(--box-color-light);
+			&.facebook{
+				background-color: #3b5998;
+				.icon {
+					margin-top: 2px;
+				}
+			}
+			&.twitter{
+				background-color: #00acee;
+				.icon {
+					margin-top: 2px;
+				}
+			}
+			&.whatsapp{
+				background-color: #25D366;
+			}
+		}
+	}
+}
+
+.share-button {
+	position: absolute;
+	display: none;
+	right: 15px;
+	font-size: 18px;
+	&.show {
+		display: block;
+	}
+}
