@@ -3,7 +3,7 @@
 // $order é um Automattic\WooCommerce\Admin\Overrides\Order
 $order_total = $order->get_subtotal();
 $is_social = social_order_is_social( $order );
-$is_campain = social_order_is_campain( $order );
+$is_campain = event_promotional_order_is_event_promotional( $order );
 $order_partial = polen_apply_polen_part_price( $order_total, $is_social );
 
 if( ! $is_social && ! $is_campain ) :

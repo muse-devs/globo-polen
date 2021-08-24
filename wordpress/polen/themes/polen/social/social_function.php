@@ -81,15 +81,6 @@ function social_order_is_social( $order )
     return Social_Order::is_social( $order );
 }
 
-/**
- * Verifica se a ORDER é Campanha
- * @param \WC_Order
- * @return bool
- */
-function social_order_is_campain( $order )
-{
-	return Social_Order::is_campaing( $order );
-}
 
 /**
  * Verifica se o Talento é social.
