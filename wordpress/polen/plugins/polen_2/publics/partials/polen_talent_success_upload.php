@@ -5,7 +5,7 @@ $order_total = $order->get_subtotal();
 $is_social = social_order_is_social( $order );
 $is_campain = event_promotional_order_is_event_promotional( $order );
 $order_partial = polen_apply_polen_part_price( $order_total, $is_social );
-// var_dump($is_social,$is_campain);die;
+
 if( ! $is_social && ! $is_campain ) :
     ?>
     <main id="primary" class="site-main mt-5">
