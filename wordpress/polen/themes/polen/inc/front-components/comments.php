@@ -92,10 +92,30 @@ function polen_card_talent_reviews_order(\WP_Post $post, $Talent_Fields)
 							<span class="skill-value">
 								<?php Icon_Class::polen_icon_clock(); ?>
 								<?php
-									if($Talent_Fields->tempo_resposta) {
-										echo $Talent_Fields->tempo_resposta."h";
-									} else {
-										echo "7 dias";
+									switch (true) {
+										case $Talent_Fields->tempo_resposta <= 24:
+											echo "até 1 dia";
+											break;
+									
+										case $Talent_Fields->tempo_resposta <= 48:
+											echo "até 2 dias";
+											break;
+									
+										case $Talent_Fields->tempo_resposta <= 72:
+											echo "até 3 dias";
+											break;
+
+										case $Talent_Fields->tempo_resposta <= 96:
+											echo "até 4 dias";
+											break;
+
+										case $Talent_Fields->tempo_resposta <= 120:
+											echo "até 5 dias";
+											break;
+									
+										default:
+											echo "até 7 dias";
+											break;
 									}
 								?>
 							</span>
