@@ -394,7 +394,7 @@ function polen_box_related_product_by_product_id($product_id)
 			<?php
 			$args = polen_get_array_related_products($product_id);
 			$cat_link = polen_get_url_category_by_product_id($product_id);
-			polen_banner_scrollable($args, "Relacionados", $cat_link);
+			polen_banner_scrollable($args, "Veja também", $cat_link);
 			?>
 		</div>
 	</div>

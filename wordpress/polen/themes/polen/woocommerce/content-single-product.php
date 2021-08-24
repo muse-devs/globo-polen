@@ -55,7 +55,7 @@ $stock = $product->get_stock_quantity();
 	// params
 	jQuery(document).ready(function() {
 		if(document.querySelector("#stories")) {
-			renderStories(<?php echo polen_get_videos_by_talent($Talent_Fields, true); ?>, <?php echo json_encode(get_the_title()); ?>, <?php echo json_encode(wp_get_attachment_image_src(get_post_thumbnail_id(get_the_ID()), 'polen-thumb-lg')[0]); ?>, <?php echo $social; ?>, <?php echo $stock; ?>)
+			renderStories(<?php echo polen_get_videos_by_talent($Talent_Fields, true); ?>, <?php echo json_encode(get_the_title()); ?>, <?php echo json_encode(wp_get_attachment_image_src(get_post_thumbnail_id(get_the_ID()), 'polen-thumb-lg')[0]); ?>, <?php echo $social || 'null'; ?>, <?php echo $stock || 'null'; ?>)
 		}
 	});
 </script>
@@ -162,7 +162,7 @@ $stock = $product->get_stock_quantity();
 	<?php $social || polen_front_get_tutorial(); ?>
 
 	<!-- Produtos Relacionados -->
-	<?php //polen_box_related_product_by_product_id(get_the_ID());
+	<?php polen_box_related_product_by_product_id(get_the_ID());
 	?>
 
 </div>
