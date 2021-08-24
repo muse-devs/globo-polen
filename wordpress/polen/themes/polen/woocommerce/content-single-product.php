@@ -150,6 +150,8 @@ $stock = $product->get_stock_quantity();
 		}
 	?>
 
+	<?php polen_get_share_icons(); ?>
+
 	<!-- Doação -->
 	<?php $donate && !$social ?
 		polen_front_get_donation_box($donate_image, $donate_text) :

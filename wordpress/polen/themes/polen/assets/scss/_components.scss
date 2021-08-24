@@ -282,3 +282,34 @@
 		text-decoration: underline;
 	}
 }
+
+.share-options {
+	.share-button, .share-icons {
+		display: none;
+		&.show {
+			display: block;
+		}
+	}
+	.share-icons {
+		.share-icons__icon {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 40px;
+			height: 40px;
+			border-radius: 50%;
+			font-size: 18px;
+			color: white;
+			background-color: var(--box-color-light);
+			&.facebook{
+				background-color: #3b5998;
+			}
+			&.twitter{
+				background-color: #00acee;
+			}
+			&.whatsapp{
+				background-color: #25D366;
+			}
+		}
+	}
+}

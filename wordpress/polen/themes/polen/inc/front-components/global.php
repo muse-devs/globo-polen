@@ -471,6 +471,43 @@ function polen_form_add_whatsapp($order_number, $whatsapp_number = "")
 			</div>
 		</div>
 	</div>
-	<?php
+<?php
 }
 
+function polen_get_share_icons()
+{
+?>
+	<div class="share-options row mt-3 mb-2">
+		<div class="share-button col-12 text-center">
+			<button class="btn btn-outline-light btn-md" onclick="shareVideo('Compartilhado', null)"><span class="mr-2"><?php Icon_Class::polen_icon_share(); ?></span>Compartilhar</button>
+		</div>
+		<div class="share-icons col-12">
+			<div class="row">
+				<div class="col-12 text-center">
+					<span class="mr-2"><?php Icon_Class::polen_icon_share(); ?></span>Compartilhar
+				</div>
+				<div class="col-12 d-flex justify-content-center mt-3">
+					<div class="row">
+						<div class="col-4 text-center">
+							<a href="javascript:shareSocial.send(shareSocial.network.facebook);" class="share-icons__icon facebook"><?php Icon_Class::polen_icon_social("facebook"); ?></a>
+						</div>
+						<div class="col-4 text-center">
+							<a href="javascript:shareSocial.send(shareSocial.network.twitter);" class="share-icons__icon twitter"><?php Icon_Class::polen_icon_social("twitter"); ?></a>
+						</div>
+						<div class="col-4 text-center">
+							<a href="javascript:shareSocial.send(shareSocial.network.whatsapp);" class="share-icons__icon whatsapp"><?php Icon_Class::polen_icon_social("whatsapp"); ?></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		if(navigator.share) {
+			document.querySelector('.share-button').classList.add("show");
+		} else {
+			document.querySelector('.share-icons').classList.add("show");
+		}
+	</script>
+<?php
+}
