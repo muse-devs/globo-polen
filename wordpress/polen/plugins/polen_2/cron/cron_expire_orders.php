@@ -46,10 +46,11 @@ if( $res && ! is_null( $res ) && ! is_wp_error( $res ) && is_array( $res ) && co
         // } else {
         //     echo '#' . $order_id . ': ' . $return['Message'] . "\n";
         //     if( $return['Message'] == 'Transaction not available to refund' ) {
-            if( !social_order_is_social( $order ) ) {
-                $order->update_status( 'order-expired', 'order_note' );
-                echo '#' . $order_id . ': Marcado como expirado extorno manual.' . "\n"; 
-            } else {
+            // if($order->get_id() == 271) {
+            //     var_dump(event_promotional_order_is_event_promotional( $order ),social_order_is_social( $order ));
+            //     die;
+            // }
+            if( social_order_is_social( $order ) ) {
                 $interval_time = new DateInterval( 'P15D' );
                 $cd = new DateTime( 'now', new DateTimeZone( wp_timezone_string() ) );
                 $diff = $order->get_date_created()->add( $interval_time )->diff( $cd );
@@ -57,6 +58,17 @@ if( $res && ! is_null( $res ) && ! is_wp_error( $res ) && is_array( $res ) && co
                     $order->update_status( 'order-expired', 'order_note' );
                     echo '#' . $order_id . ': Marcado como expirado extorno manual CRIESP.' . "\n"; 
                 }
+            } elseif( event_promotional_order_is_event_promotional( $order ) ) {
+                $interval_time = new DateInterval( 'P30D' );
+                $cd = new DateTime( 'now', new DateTimeZone( wp_timezone_string() ) );
+                $diff = $order->get_date_created()->add( $interval_time )->diff( $cd );
+                if( $diff->invert == 0) {
+                    $order->update_status( 'order-expired', 'order_note', true );
+                    echo '#' . $order_id . ': Marcado como expirado extorno manual Video-Autografo.' . "\n"; 
+                }
+            } else {
+                $order->update_status( 'order-expired', 'order_note' );
+                echo '#' . $order_id . ': Marcado como expirado extorno manual.' . "\n"; 
             }
         //     }
         // }
