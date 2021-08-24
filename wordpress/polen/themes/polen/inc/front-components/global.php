@@ -477,7 +477,7 @@ function polen_form_add_whatsapp($order_number, $whatsapp_number = "")
 function polen_get_share_icons()
 {
 ?>
-	<div class="share-options row mt-3 mb-2">
+	<div class="share-options row mt-4 mb-4">
 		<div class="share-button col-12 text-center">
 			<button class="btn btn-outline-light btn-md" onclick="shareVideo('Compartilhado', null)"><span class="mr-2"><?php Icon_Class::polen_icon_share(); ?></span>Compartilhar</button>
 		</div>
