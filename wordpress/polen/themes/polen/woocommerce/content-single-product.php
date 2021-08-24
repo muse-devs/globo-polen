@@ -89,6 +89,7 @@ $stock = $product->get_stock_quantity();
 					</h5>
 				<?php endif; ?>
 			</div>
+			<?php polen_get_share_button(); ?>
 		</div>
 		<div class="col-12 mt-3">
 			<?php $social || polen_front_get_talent_videos($Talent_Fields); ?>

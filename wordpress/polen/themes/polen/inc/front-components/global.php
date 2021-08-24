@@ -503,10 +503,20 @@ function polen_get_share_icons()
 		</div>
 	</div>
 	<script>
-		if(navigator.share) {
-			document.querySelector('.share-button').classList.add("show");
-		} else {
+		if (!navigator.share) {
 			document.querySelector('.share-icons').classList.add("show");
+		}
+	</script>
+<?php
+}
+
+function polen_get_share_button()
+{
+?>
+	<button class="share-button btn btn-outline-light btn-md" onclick="shareVideo('Compartilhado', null)"><?php Icon_Class::polen_icon_share(); ?></button>
+	<script>
+		if (navigator.share) {
+			document.querySelector('.share-button').classList.add("show");
 		}
 	</script>
 <?php
