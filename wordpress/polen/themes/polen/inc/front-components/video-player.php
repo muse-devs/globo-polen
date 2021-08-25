@@ -140,7 +140,7 @@ function polen_get_video_player( $video_info, $product, $order, $user_talent )
 			<div class="row mt-4 share">
 				<div class="col-12">
 					<?php if (get_current_user_id() !== 0 && $isRateble) : ?>
-						<a href="/my-account/create-review/<?= $order->get_id(); ?>" class="btn btn-primary btn-lg btn-block mb-4">Avaliar vídeo</a>
+						<a href="<?= polen_get_url_create_review( $order->get_id() ); ?>" class="btn btn-primary btn-lg btn-block mb-4">Avaliar vídeo</a>
 					<?php endif; ?>
 					<?php 
 					$Talent_Fields = new Polen_Update_Fields();

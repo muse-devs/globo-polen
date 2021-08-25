@@ -180,10 +180,20 @@ function polen_get_url_category_by_order_id ( $order_id )
 	return $cat_link;
 }
 
-
+/**
+ * 
+ */
 function polen_get_url_review_page()
 {
 	return './reviews/';
+}
+
+/**
+ * 
+ */
+function polen_get_url_create_review( $order_id )
+{
+	return polen_get_url_my_account() . 'create-review/' . $order_id;
 }
 
 /**
