@@ -63,16 +63,31 @@ if( ! $talent_is_social ) {
 												<p class="value small"><?php echo $order['name']; ?></p>
 											</div>
 										</div>
-										<div class="row mt-2">
-											<div class="col-6 col-md-6">
-												<p class="p">Ocasião</p>
-												<p class="value small"><?php echo $order['category']; ?></p>
+										<?php 
+											if (event_promotional_order_is_event_promotional($order_obj)) {
+										?>
+											<div class="row mt-2">
+												<div class="col-12">
+													<p class="p">Ocasião</p>
+													<p class="value small">Vídeo-autógrafo De porta em porta</p>
+												</div>
 											</div>
-											<div class="col-6 col-md-6">
-												<p class="p">Valor</p>
-												<p class="value small"><?php echo wc_price( $discounted_value_order ); ?></p>
+										<?php
+											} else {
+										?>
+											<div class="row mt-2">
+												<div class="col-6 col-md-6">
+													<p class="p">Ocasião</p>
+													<p class="value small"><?php echo $order['category']; ?></p>
+												</div>
+												<div class="col-6 col-md-6">
+													<p class="p">Valor</p>
+													<p class="value small"><?php echo wc_price( $discounted_value_order ); ?></p>
+												</div>
 											</div>
-										</div>
+										<?php		
+											}
+										?>
 									</div>
 									<div class="col-12 col-md-12">
 										<div class="row">
@@ -84,7 +99,15 @@ if( ! $talent_is_social ) {
 													</div>
 													<div class="col-6 col-md-6">
 														<p class="p">Válido por</p>
-														<p class="value small"><?php echo $polen_talent->video_expiration_time( $logged_user, $order['order_id'], $is_social ); ?></p>
+														<p class="value small">
+															<?php 
+																if (event_promotional_order_is_event_promotional($order_obj)) {
+																	echo "30 dias";
+																} else {
+																	echo $polen_talent->video_expiration_time( $logged_user, $order['order_id'], $is_social );
+																}
+															?>
+														</p>
 													</div>
 												</div>
 											</div>
