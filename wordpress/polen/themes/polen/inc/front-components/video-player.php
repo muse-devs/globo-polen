@@ -92,7 +92,7 @@ function polen_get_video_player_html($data, $user_id = null)
  * Cria a tela para assitir video
  * @param Polen\Includes\Polen_Video_Info
  * @param WC_Product
- * @param WC_Order 
+ * @param WC_Order
  * @param WP_User Usuario talento
  * @return html
  */
@@ -142,7 +142,7 @@ function polen_get_video_player( $video_info, $product, $order, $user_talent )
 					<?php if (get_current_user_id() !== 0 && $isRateble) : ?>
 						<a href="<?= polen_get_url_create_review( $order->get_id() ); ?>" class="btn btn-primary btn-lg btn-block mb-4">Avaliar vídeo</a>
 					<?php endif; ?>
-					<?php 
+					<?php
 					$Talent_Fields = new Polen_Update_Fields();
 					$talent = $Talent_Fields->get_vendor_data( $video_info->talent_id );
 					polen_get_talent_video_buttons($talent, $video_url, $video_info->vimeo_url_download, $video_info->hash, $product); ?>
@@ -169,18 +169,18 @@ function polen_get_url_watermark_video_player( $order )
 {
 	$is_social = social_order_is_social( $order );
 	$is_event_promotional = event_promotional_order_is_event_promotional( $order );
-	
+
 	if ($is_social) : ?>
-	
+
 		<img src="<?php echo TEMPLATE_URI ?>/assets/img/criesp/logo-criesp.png" class="logo social" alt="Logo Criança Esperança" />
-	
+
 	<?php elseif( $is_event_promotional ) : ?>
-	
-		<img src="<?php echo TEMPLATE_URI ?>/assets/img/criesp/logo-criesp.png" class="logo social" alt="Logo Criança Esperança" />
-	
+
+		<img src="<?php echo TEMPLATE_URI ?>/assets/img/video-autografo/logo-de-porta-em-porta.png" class="logo social" alt="Logo Criança Esperança" style="height: 40px" />
+
 	<?php endif; ?>
 
 	<img src="<?php echo TEMPLATE_URI ?>/assets/img/logo.png" class="logo polen" alt="Logo Polen" />
-	
+
 	<?php
 }
