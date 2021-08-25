@@ -1,5 +1,7 @@
 <?php
 get_header();
+
+use Polen\Includes\Cart\Polen_Cart_Item_Factory;
 use \Polen\Includes\Polen_Video_Info;
 
 $video_info = Polen_Video_Info::get_by_hash( $video_hash );
@@ -12,14 +14,15 @@ if( empty( $video_info ) ) {
     exit();
 }
 
-use \Polen\Includes\Polen_Update_Fields;
-$Talent_Fields = new Polen_Update_Fields();
-$talent = $Talent_Fields->get_vendor_data($video_info->talent_id);
+$order = wc_get_order($video_info->order_id);
+$cart_item = Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
+$product = $cart_item->get_product();
+$user_talent = get_user_by( 'ID', $video_info->talent_id );
 
 ?>
     <main id="primary" class="site-main">
         <?php
-        polen_get_video_player( $talent, $video_info, get_current_user_id() );
+        polen_get_video_player( $video_info, $product, $order, $user_talent );
         ?>
     </main><!-- #main -->
 <?php
