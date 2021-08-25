@@ -51,11 +51,11 @@ if (
 
 				$product_id = $item_cart->get_product_id();
 				$product = wc_get_product($product_id);
-				$header['title'] = 'Direto, Próximo, Íntimo.';
+				$headers['title'] = 'Direto, Próximo, Íntimo.';
 				$talent_name = $product->get_title();
-				$header['description'] = "Olha esse novo vídeo-polen de {$talent_name}.";
-				$header['url'] = site_url('v/' . $video_info->hash);
-				$header['image'] = $video_info->vimeo_thumbnail;
+				$headers['description'] = "Olha esse novo vídeo-polen de {$talent_name}.";
+				$headers['url'] = site_url('v/' . $video_info->hash);
+				$headers['image'] = $video_info->vimeo_thumbnail;
 
 			} elseif (!empty($post) && $post->post_type == 'page' && $post->post_name == 'v') {
 
