@@ -66,11 +66,11 @@ class Polen_Video_Player
             wp_die();
         }
 
-        $Talent_Fields = new Polen_Update_Fields();
-        $talent = $Talent_Fields->get_vendor_data( $video_info->talent_id );
-        $user_id = get_current_user_id();
         $product = wc_get_product($product_id);
-        polen_get_video_player( $talent, $video_info, $user_id, $product );
+        $order = wc_get_order( $video_info->order_id );
+        $user_talent = get_user_by( 'ID', $video_info->talent_id );
+        polen_get_video_player( $video_info, $product, $order, $user_talent );
+
         wp_die();
     }
 
