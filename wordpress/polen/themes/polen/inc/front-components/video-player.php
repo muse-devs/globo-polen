@@ -27,6 +27,7 @@ function polen_get_talent_video_buttons_button_buy_one( $donate, $product, $orde
 	$is_event_promotional = false;
 	if( !empty( $order ) ) {
 		$is_event_promotional = event_promotional_order_is_event_promotional( $order );
+		$is_social = social_order_is_social( $order );
 	}
 	if( $is_event_promotional ) : ?>
 		<?php //TODO: Se Tiver algum botao quando for video-autogrado ?>
@@ -39,6 +40,37 @@ function polen_get_talent_video_buttons_button_buy_one( $donate, $product, $orde
 		</button>
 	<?php endif; ?>
 <?php
+}
+
+function polen_get_video_player_links_button_header( $product, $order, $video_url )
+{
+	$is_event_promotional = false;
+	if( !empty( $order ) ){
+		$is_event_promotional = event_promotional_order_is_event_promotional( $order );
+	}
+	if( $is_event_promotional ) : ?>
+		<h4 class="m-0"><a href="<?= polen_get_url_category_by_order_id( $order->get_id() ); ?>" class="name"><?php echo $product->get_title(); ?></a></h4>
+		<h5 class="m-0"><a href="<?= polen_get_url_category_by_order_id( $order->get_id() ); ?>" class="d-block my-2 cat"><?php echo polen_get_title_category_by_product( $product ); ?></a></h5>
+		<a href="<?php echo $video_url; ?>" class="url"><?php echo $video_url; ?></a>
+	<?php else: ?>
+		<h4 class="m-0"><a href="<?php echo $product->get_permalink(); ?>" class="name"><?php echo $product->get_title(); ?></a></h4>
+		<h5 class="m-0"><a href="<?= polen_get_url_category_by_order_id( $order->get_id() ); ?>" class="d-block my-2 cat"><?php echo polen_get_title_category_by_product( $product ); ?></a></h5>
+		<a href="<?php echo $video_url; ?>" class="url"><?php echo $video_url; ?></a>
+	<?php endif; ?>
+<?php
+}
+
+function polen_get_video_player_url_link_img_profile( $product, $order = null )
+{
+	$is_event_promotional = false;
+	if( !empty( $order ) ) {
+		$is_event_promotional = event_promotional_order_is_event_promotional( $order );
+	}
+	if( $is_event_promotional ) {
+		return polen_get_url_category_by_order_id( $order->get_id() );
+	} else {
+		return $product->get_permalink();
+	}
 }
 
 
@@ -141,16 +173,14 @@ function polen_get_video_player( $video_info, $product, $order, $user_talent )
 		<div class="content col-md-6 mt-4">
 			<header class="row content-header">
 				<div class="col-3">
-					<a href="<?php echo $product->get_permalink(); ?>" class="no-underline">
+					<a href="<?php echo polen_get_video_player_url_link_img_profile( $product, $order ); ?>" class="no-underline">
 						<span class="image-cropper">
 							<?php echo polen_get_avatar($user_talent->ID, "polen-square-crop-lg"); ?>
 						</span>
 					</a>
 				</div>
 				<div class="col-9">
-					<h4 class="m-0"><a href="<?php echo $product->get_permalink(); ?>" class="name"><?php echo $product->get_title(); ?></a></h4>
-					<h5 class="m-0"><a href="<?= polen_get_url_category_by_order_id( $order->get_id() ); ?>" class="d-block my-2 cat"><?php echo polen_get_title_category_by_product( $product ); ?></a></h5>
-					<a href="<?php echo $video_url; ?>" class="url"><?php echo $video_url; ?></a>
+					<?php polen_get_video_player_links_button_header( $product, $order, $video_url ); ?>
 				</div>
 			</header>
 			<div class="row mt-4 share">
@@ -176,10 +206,12 @@ function polen_player_video_modal_ajax_invalid_hash()
 <?php
 }
 
+
 function polen_get_video_url_by_video_info( $video_info )
 {
 	return site_url( "v/" . $video_info->hash );
 }
+
 
 function polen_get_url_watermark_video_player( $order )
 {
@@ -187,16 +219,11 @@ function polen_get_url_watermark_video_player( $order )
 	$is_event_promotional = event_promotional_order_is_event_promotional( $order );
 
 	if ($is_social) : ?>
-
 		<img src="<?php echo TEMPLATE_URI ?>/assets/img/criesp/logo-criesp.png" class="logo social" alt="Logo Criança Esperança" />
-
 	<?php elseif( $is_event_promotional ) : ?>
-
-		<img src="<?php echo TEMPLATE_URI ?>/assets/img/video-autografo/logo-de-porta-em-porta.png" class="logo social" alt="Logo Criança Esperança" style="height: 40px" />
-
+		<img src="<?php echo TEMPLATE_URI ?>/assets/img/video-autografo/logo-de-porta-em-porta.png" class="logo social" alt="Logo Criança Esperança" style="" />
 	<?php endif; ?>
-
+	
 	<img src="<?php echo TEMPLATE_URI ?>/assets/img/logo.png" class="logo polen" alt="Logo Polen" />
-
 	<?php
 }
