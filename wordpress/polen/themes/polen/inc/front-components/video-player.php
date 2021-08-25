@@ -169,7 +169,6 @@ function polen_get_url_watermark_video_player( $order )
 {
 	$is_social = social_order_is_social( $order );
 	$is_event_promotional = event_promotional_order_is_event_promotional( $order );
-	$is_event_promotional = true;
 
 	if ($is_social) : ?>
 
