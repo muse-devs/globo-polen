@@ -513,7 +513,7 @@ function polen_get_share_button()
 ?>
 	<button class="share-button btn btn-outline-light btn-md" onclick="shareVideo('Compartilhado', null)"><?php Icon_Class::polen_icon_share(); ?></button>
 	<script>
-		if (!navigator.share) {
+		if (navigator.share) {
 			document.querySelector('.share-button').classList.add("show");
 		}
 	</script>
