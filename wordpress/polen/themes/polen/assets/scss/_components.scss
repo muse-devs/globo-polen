@@ -323,9 +323,15 @@
 .share-button {
 	position: absolute;
 	display: none;
+	width: 40px;
+	height: 40px;
 	right: 15px;
 	font-size: 18px;
+	border-radius: 50%;
 	&.show {
 		display: block;
+	}
+	.icon, .bi {
+		margin-left: -2px;
 	}
 }
