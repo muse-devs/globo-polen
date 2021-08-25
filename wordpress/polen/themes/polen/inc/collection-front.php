@@ -184,8 +184,8 @@ function polen_get_array_related_products( $product_id )
             $args = array();
             foreach ($others as $k => $id) {
                 if (!in_array($id, $arr_obj)) {
-                    if (count($arr_obj) > 5) {
-                        exit;
+                    if (count($arr_obj) > 6) {
+                        return;
                     }
                     $product = wc_get_product($id);
                     $arr_obj[] = $id;

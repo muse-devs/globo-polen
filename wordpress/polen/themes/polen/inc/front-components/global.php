@@ -388,14 +388,12 @@ function polen_box_image_message($image, $text)
  */
 function polen_box_related_product_by_product_id($product_id)
 {
+	$args = polen_get_array_related_products($product_id);
+	$cat_link = polen_get_url_category_by_product_id($product_id);
 ?>
 	<div class="row">
 		<div class="col-12 col-md-12">
-			<?php
-			$args = polen_get_array_related_products($product_id);
-			$cat_link = polen_get_url_category_by_product_id($product_id);
-			polen_banner_scrollable($args, "Veja também", $cat_link);
-			?>
+			<?php polen_banner_scrollable($args, "Veja também", $cat_link); ?>
 		</div>
 	</div>
 <?php
@@ -477,7 +475,7 @@ function polen_form_add_whatsapp($order_number, $whatsapp_number = "")
 function polen_get_share_icons()
 {
 ?>
-	<div class="share-options row mt-3 mb-2">
+	<div class="share-options row mt-4 mb-4">
 		<div class="share-button col-12 text-center">
 			<button class="btn btn-outline-light btn-md" onclick="shareVideo('Compartilhado', null)"><span class="mr-2"><?php Icon_Class::polen_icon_share(); ?></span>Compartilhar</button>
 		</div>
