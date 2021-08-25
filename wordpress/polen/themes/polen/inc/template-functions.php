@@ -135,6 +135,19 @@ function polen_get_url_category_by_term_id( $term_id )
 
 
 /**
+ * Pegar o nome da categoria pelo WC_Product
+ * @param WC_Product
+ * @return string
+ */
+function polen_get_title_category_by_product( $product )
+{
+	$ids = $product->get_category_ids();
+	$category = _polen_get_first_category_object( $ids );
+	return $category->name;
+}
+
+
+/**
  * Pegar a URL da categoria pelo ProductID
  */
 function polen_get_url_category_by_product_id ( $product_id )
@@ -167,10 +180,20 @@ function polen_get_url_category_by_order_id ( $order_id )
 	return $cat_link;
 }
 
-
+/**
+ * 
+ */
 function polen_get_url_review_page()
 {
 	return './reviews/';
+}
+
+/**
+ * 
+ */
+function polen_get_url_create_review( $order_id )
+{
+	return polen_get_url_my_account() . 'create-review/' . $order_id;
 }
 
 /**
