@@ -24,12 +24,9 @@ if( empty( $video_info ) || $user_id !== $order_user_id) {
 
 polen_set_fan_viewed( $order );
 
-// use \Polen\Includes\Polen_Update_Fields;
-// $Talent_Fields = new Polen_Update_Fields();
-// $talent = $Talent_Fields->get_vendor_data( $video_info->talent_id );
 ?>
     <main id="primary" class="site-main">
         <?php
-        polen_get_video_player2($video_info,$product,$order,$user_talent);
+        polen_get_video_player($video_info,$product,$order,$user_talent);
         ?>
     </main><!-- #main -->
