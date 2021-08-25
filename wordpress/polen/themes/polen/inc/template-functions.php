@@ -231,14 +231,14 @@ function polen_get_theme_logos() {
 	}
 
 	// Provisório CRIESP
-	$html .= '<a href="' . social_get_criesp_url() . '">';
-	if(is_front_page() || social_is_in_social_app()) {
-		$html .= 	'<img width="106" height="31" src="'. $logo_criesp_dark . '" class="custom-logo custom-logo-criesp" alt="Logo Criança Esperança">';
-	} else {
-		$html .= 	'<img width="106" height="31" src="'. $logo_criesp_dark . '" class="custom-logo custom-logo-criesp dark" alt="Logo Criança Esperança">';
-		$html .= 	'<img width="106" height="31" src="'. $logo_criesp_light . '" class="custom-logo custom-logo-criesp light" alt="Logo Criança Esperança">';
-	}
-	$html .= '</a>';
+	// $html .= '<a href="' . social_get_criesp_url() . '">';
+	// if(is_front_page() || social_is_in_social_app()) {
+	// 	$html .= 	'<img width="106" height="31" src="'. $logo_criesp_dark . '" class="custom-logo custom-logo-criesp" alt="Logo Criança Esperança">';
+	// } else {
+	// 	$html .= 	'<img width="106" height="31" src="'. $logo_criesp_dark . '" class="custom-logo custom-logo-criesp dark" alt="Logo Criança Esperança">';
+	// 	$html .= 	'<img width="106" height="31" src="'. $logo_criesp_light . '" class="custom-logo custom-logo-criesp light" alt="Logo Criança Esperança">';
+	// }
+	// $html .= '</a>';
 
 	return $html;
 }
