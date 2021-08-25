@@ -135,6 +135,19 @@ function polen_get_url_category_by_term_id( $term_id )
 
 
 /**
+ * Pegar o nome da categoria pelo WC_Product
+ * @param WC_Product
+ * @return string
+ */
+function polen_get_title_category_by_product( $product )
+{
+	$ids = $product->get_category_ids();
+	$category = _polen_get_first_category_object( $ids );
+	return $category->name;
+}
+
+
+/**
  * Pegar a URL da categoria pelo ProductID
  */
 function polen_get_url_category_by_product_id ( $product_id )

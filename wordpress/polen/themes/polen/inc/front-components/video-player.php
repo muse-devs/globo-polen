@@ -1,5 +1,8 @@
 <?php
 
+use Polen\Includes\Polen_Order_Review;
+use Polen\Includes\Polen_Update_Fields;
+
 function polen_get_talent_video_buttons($talent, $video_url, $video_download, $hash = null, $product = null)
 {
 	$donate = $product ? get_post_meta($product->get_id(), '_is_charity', true) : false;
@@ -153,9 +156,88 @@ function polen_get_video_player($talent, $video, $user_id, $product = null)
 <?php
 }
 
+
+
+/**
+ * Cria a tela para assitir video
+ * @param Polen\Includes\Polen_Video_Info
+ * @param WC_Product
+ * @param WC_Order 
+ * @param WP_User Usuario talento
+ * @return html
+ */
+function polen_get_video_player2( $video_info, $product, $order, $user_talent )
+{
+	wp_enqueue_script('vimeo');
+	$is_social = social_order_is_social( $order );
+	$is_event_promotional = event_promotional_order_is_event_promotional( $order );
+	$video_url = polen_get_video_url_by_video_info( $video_info );
+	$isRateble = Polen_Order_Review::can_make_review(get_current_user_id(), $order->get_id());
+?>
+	<div class="row video-card">
+		<header class="col-md-6 p-0">
+			<div id="video-box" class="video-box">
+				<div id="polen-video" class="polen-video"></div>
+				<div class="water-mark">
+					<?php if ($is_social) : ?>
+						<img src="<?php echo TEMPLATE_URI ?>/assets/img/criesp/logo-criesp.png" class="logo social" alt="Logo Criança Esperança" />
+					<?php elseif( $is_event_promotional ) : ?>
+						<img src="<?php echo TEMPLATE_URI ?>/assets/img/criesp/logo-criesp.png" class="logo social" alt="Logo Criança Esperança" />
+					<?php endif; ?>
+					<img src="<?php echo TEMPLATE_URI ?>/assets/img/logo.png" class="logo polen" alt="Logo Polen" />
+				</div>
+			</div>
+			<script>
+				jQuery(document).ready(function() {
+					var videoPlayer = new Vimeo.Player("polen-video", {
+						url: "<?php echo $video_info->vimeo_link; ?>",
+						autoplay: false,
+						muted: false,
+						loop: false,
+						width: document.getElementById("polen-video").offsetWidth,
+					});
+				})
+			</script>
+		</header>
+		<div class="content col-md-6 mt-4">
+			<header class="row content-header">
+				<div class="col-3">
+					<a href="<?php echo $product->get_permalink(); ?>" class="no-underline">
+						<span class="image-cropper">
+							<?php echo polen_get_avatar($user_talent->ID, "polen-square-crop-lg"); ?>
+						</span>
+					</a>
+				</div>
+				<div class="col-9">
+					<h4 class="m-0"><a href="<?php echo $product->get_permalink(); ?>" class="name"><?php echo $user_talent->display_name; ?></a></h4>
+					<h5 class="m-0"><a href="<?= polen_get_url_category_by_order_id( $order->get_id() ); ?>" class="d-block my-2 cat"><?php echo polen_get_title_category_by_product( $product ); ?></a></h5>
+					<a href="<?php echo $video_url; ?>" class="url"><?php echo $video_url; ?></a>
+				</div>
+			</header>
+			<div class="row mt-4 share">
+				<div class="col-12">
+					<?php if (get_current_user_id() !== 0 && $isRateble) : ?>
+						<a href="/my-account/create-review/<?= $order->get_id(); ?>" class="btn btn-primary btn-lg btn-block mb-4">Avaliar vídeo</a>
+					<?php endif; ?>
+					<?php 
+					$Talent_Fields = new Polen_Update_Fields();
+					$talent = $Talent_Fields->get_vendor_data( $video_info->talent_id );
+					polen_get_talent_video_buttons($talent, $video_url, $video_info->vimeo_url_download, $video_info->hash, $product); ?>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php
+}
+
 function polen_player_video_modal_ajax_invalid_hash()
 {
 ?>
 	<h4>Conteúdo indisponível</h4>
 <?php
+}
+
+function polen_get_video_url_by_video_info( $video_info )
+{
+	return site_url( "v/" . $video_info->hash );
 }
