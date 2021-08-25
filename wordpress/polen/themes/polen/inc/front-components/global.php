@@ -38,25 +38,6 @@ function polen_front_get_banner_with_carousel($social = false)
 					</div>
 				</div>
 			<?php endif; ?>
-			<div class="item">
-				<div class="carrousel">
-					<?php foreach ($carrousel2 as $item) : ?>
-						<figure class="image">
-							<img loading="lazy" src="<?php echo $item['mobile']; ?>" alt="Banner da home" class="mobile" />
-							<img loading="lazy" src="<?php echo $item['desktop']; ?>" alt="Banner da home" class="desktop" />
-						</figure>
-					<?php endforeach; ?>
-				</div>
-				<div class="content">
-					<h2 class="title m<?php echo $social ? 't' : 'b'; ?>-5">Aqui sua doação para o Criança Esperança vira um vídeo do seu ídolo.</h2>
-					<?php if (!$social) : ?>
-						<a href="<?php echo social_get_criesp_url(); ?>" class="banner-button-link">
-							<span class="mr-3">Doe Agora</span>
-							<?php Icon_Class::polen_icon_chevron_right(); ?>
-						</a>
-					<?php endif; ?>
-				</div>
-			</div>
 		</div>
 	</section>
 <?php
