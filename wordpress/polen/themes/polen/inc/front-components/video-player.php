@@ -3,17 +3,12 @@
 use Polen\Includes\Polen_Order_Review;
 use Polen\Includes\Polen_Update_Fields;
 
-function polen_get_talent_video_buttons($talent, $video_url, $video_download, $hash = null, $product = null)
+function polen_get_talent_video_buttons($talent, $video_url, $video_download, $hash = null, $product = null, $order = null)
 {
 	$donate = $product ? get_post_meta($product->get_id(), '_is_charity', true) : false;
 ?>
 	<?php if ($product && $product->is_in_stock()) : ?>
-		<button onclick="clickToBuy()" class="btn btn-primary btn-lg btn-block mb-4">
-			<?php if ($donate) : ?>
-				<span class="mr-2"><?php Icon_Class::polen_icon_donate(); ?></span>
-			<?php endif; ?>
-			Pedir vídeo R$<?php echo $product->get_price(); ?>
-		</button>
+		<?php polen_get_talent_video_buttons_button_buy_one($donate, $product, $order ); ?>
 	<?php endif; ?>
 	<?php if (wp_is_mobile()) : ?>
 		<button onclick="shareVideo('Compartilhar vídeo de <?php echo $talent->nome; ?>', '<?php echo $video_url; ?>')" class="btn btn-outline-light btn-lg btn-block share-link mb-4"><?php Icon_Class::polen_icon_share(); ?>Compartilhar</button>
@@ -25,6 +20,27 @@ function polen_get_talent_video_buttons($talent, $video_url, $video_download, $h
 	<?php endif; ?>
 <?php
 }
+
+
+function polen_get_talent_video_buttons_button_buy_one( $donate, $product, $order = null )
+{
+	$is_event_promotional = false;
+	if( !empty( $order ) ) {
+		$is_event_promotional = event_promotional_order_is_event_promotional( $order );
+	}
+	if( $is_event_promotional ) : ?>
+		<?php //TODO: Se Tiver algum botao quando for video-autogrado ?>
+	<?php else: ?>
+		<button onclick="clickToBuy()" class="btn btn-primary btn-lg btn-block mb-4">
+			<?php if ($donate) : ?>
+				<span class="mr-2"><?php Icon_Class::polen_icon_donate(); ?></span>
+			<?php endif; ?>
+			Pedir vídeo R$<?php echo $product->get_price(); ?>
+		</button>
+	<?php endif; ?>
+<?php
+}
+
 
 function polen_video_icons($user_id, $iniciais, $first = false)
 {
@@ -132,7 +148,7 @@ function polen_get_video_player( $video_info, $product, $order, $user_talent )
 					</a>
 				</div>
 				<div class="col-9">
-					<h4 class="m-0"><a href="<?php echo $product->get_permalink(); ?>" class="name"><?php echo $user_talent->display_name; ?></a></h4>
+					<h4 class="m-0"><a href="<?php echo $product->get_permalink(); ?>" class="name"><?php echo $product->get_title(); ?></a></h4>
 					<h5 class="m-0"><a href="<?= polen_get_url_category_by_order_id( $order->get_id() ); ?>" class="d-block my-2 cat"><?php echo polen_get_title_category_by_product( $product ); ?></a></h5>
 					<a href="<?php echo $video_url; ?>" class="url"><?php echo $video_url; ?></a>
 				</div>
@@ -145,7 +161,7 @@ function polen_get_video_player( $video_info, $product, $order, $user_talent )
 					<?php
 					$Talent_Fields = new Polen_Update_Fields();
 					$talent = $Talent_Fields->get_vendor_data( $video_info->talent_id );
-					polen_get_talent_video_buttons($talent, $video_url, $video_info->vimeo_url_download, $video_info->hash, $product); ?>
+					polen_get_talent_video_buttons($talent, $video_url, $video_info->vimeo_url_download, $video_info->hash, $product, $order); ?>
 				</div>
 			</div>
 		</div>

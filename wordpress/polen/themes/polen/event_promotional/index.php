@@ -4,6 +4,9 @@
  * Template name: Página Inicial Vídeo Autógrafo
  */
 
+use Polen\Includes\Polen_Talent;
+use Polen\Includes\Polen_Update_Fields;
+
 get_header();
 ?>
 
@@ -17,11 +20,15 @@ get_header();
 			va_what_is();
 			va_get_book_infos();
 
-			use Polen\Includes\Polen_Update_Fields;
+			global $Polen_Plugin_Settings;
+			$product_id = $Polen_Plugin_Settings[ 'promotional-event-text' ];
+			
+			$Polen_Talent = new Polen_Talent();
+			$talent = $Polen_Talent->get_talent_from_product( $product_id );
 
 			$Talent_Fields = new Polen_Update_Fields();
-			$Talent_Fields = $Talent_Fields->get_vendor_data(15);
-			va_front_get_talent_videos($Talent_Fields);
+			$Talent_Fields = $Talent_Fields->get_vendor_data( $talent->ID );
+			va_front_get_talent_videos( $Talent_Fields, $product_id );
 			?>
 		</div>
 	</div>
