@@ -99,8 +99,6 @@ function polen_get_video_player_html($data, $user_id = null)
 function polen_get_video_player( $video_info, $product, $order, $user_talent )
 {
 	wp_enqueue_script('vimeo');
-	$is_social = social_order_is_social( $order );
-	$is_event_promotional = event_promotional_order_is_event_promotional( $order );
 	$video_url = polen_get_video_url_by_video_info( $video_info );
 	$isRateble = Polen_Order_Review::can_make_review(get_current_user_id(), $order->get_id());
 ?>
@@ -109,12 +107,7 @@ function polen_get_video_player( $video_info, $product, $order, $user_talent )
 			<div id="video-box" class="video-box">
 				<div id="polen-video" class="polen-video"></div>
 				<div class="water-mark">
-					<?php if ($is_social) : ?>
-						<img src="<?php echo TEMPLATE_URI ?>/assets/img/criesp/logo-criesp.png" class="logo social" alt="Logo Criança Esperança" />
-					<?php elseif( $is_event_promotional ) : ?>
-						<img src="<?php echo TEMPLATE_URI ?>/assets/img/criesp/logo-criesp.png" class="logo social" alt="Logo Criança Esperança" />
-					<?php endif; ?>
-					<img src="<?php echo TEMPLATE_URI ?>/assets/img/logo.png" class="logo polen" alt="Logo Polen" />
+					<?php polen_get_url_watermark_video_player( $order ) ;?>
 				</div>
 			</div>
 			<script>
@@ -170,4 +163,24 @@ function polen_player_video_modal_ajax_invalid_hash()
 function polen_get_video_url_by_video_info( $video_info )
 {
 	return site_url( "v/" . $video_info->hash );
+}
+
+function polen_get_url_watermark_video_player( $order )
+{
+	$is_social = social_order_is_social( $order );
+	$is_event_promotional = event_promotional_order_is_event_promotional( $order );
+	
+	if ($is_social) : ?>
+	
+		<img src="<?php echo TEMPLATE_URI ?>/assets/img/criesp/logo-criesp.png" class="logo social" alt="Logo Criança Esperança" />
+	
+	<?php elseif( $is_event_promotional ) : ?>
+	
+		<img src="<?php echo TEMPLATE_URI ?>/assets/img/criesp/logo-criesp.png" class="logo social" alt="Logo Criança Esperança" />
+	
+	<?php endif; ?>
+
+	<img src="<?php echo TEMPLATE_URI ?>/assets/img/logo.png" class="logo polen" alt="Logo Polen" />
+	
+	<?php
 }
