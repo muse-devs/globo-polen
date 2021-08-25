@@ -78,10 +78,13 @@ if (!isset($_SESSION[$order_name])) {
 
 	// JS do GA
 	echo polen_create_ga_order($order);
+}
 
-	// Zapier de compra finalizada
-	if( isset( $Polen_Plugin_Settings['polen_zapier_new_order'] ) && $Polen_Plugin_Settings['polen_zapier_new_order'] == '1' ) {
-		polen_zapier_thankyou($order_item_cart);
+// Zapier de compra finalizada
+if( isset( $Polen_Plugin_Settings['polen_zapier_new_order'] ) && $Polen_Plugin_Settings['polen_zapier_new_order'] == '1' ) {
+	if( empty( $order->get_meta( 'zapier_create_order_send_email' ) ) ) {
+		$order->add_meta_data( 'zapier_create_order_send_email', '1', true );
+		$order->save();
+		polen_zapier_thankyou( $order );
 	}
-
 }

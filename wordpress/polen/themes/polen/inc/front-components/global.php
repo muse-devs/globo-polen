@@ -388,14 +388,12 @@ function polen_box_image_message($image, $text)
  */
 function polen_box_related_product_by_product_id($product_id)
 {
+	$args = polen_get_array_related_products($product_id);
+	$cat_link = polen_get_url_category_by_product_id($product_id);
 ?>
 	<div class="row">
 		<div class="col-12 col-md-12">
-			<?php
-			$args = polen_get_array_related_products($product_id);
-			$cat_link = polen_get_url_category_by_product_id($product_id);
-			polen_banner_scrollable($args, "Relacionados", $cat_link);
-			?>
+			<?php polen_banner_scrollable($args, "Veja também", $cat_link); ?>
 		</div>
 	</div>
 <?php
@@ -471,6 +469,53 @@ function polen_form_add_whatsapp($order_number, $whatsapp_number = "")
 			</div>
 		</div>
 	</div>
-	<?php
+<?php
 }
 
+function polen_get_share_icons()
+{
+?>
+	<div class="share-options row mt-4 mb-4">
+		<div class="share-button col-12 text-center">
+			<button class="btn btn-outline-light btn-md" onclick="shareVideo('Compartilhado', null)"><span class="mr-2"><?php Icon_Class::polen_icon_share(); ?></span>Compartilhar</button>
+		</div>
+		<div class="share-icons col-12">
+			<div class="row">
+				<div class="col-12 text-center">
+					<span class="mr-2"><?php Icon_Class::polen_icon_share(); ?></span>Compartilhar
+				</div>
+				<div class="col-12 d-flex justify-content-center mt-3">
+					<div class="row">
+						<div class="col-4 text-center">
+							<a href="javascript:shareSocial.send(shareSocial.network.facebook);" class="share-icons__icon facebook"><?php Icon_Class::polen_icon_social("facebook"); ?></a>
+						</div>
+						<div class="col-4 text-center">
+							<a href="javascript:shareSocial.send(shareSocial.network.twitter);" class="share-icons__icon twitter"><?php Icon_Class::polen_icon_social("twitter"); ?></a>
+						</div>
+						<div class="col-4 text-center">
+							<a href="javascript:shareSocial.send(shareSocial.network.whatsapp);" class="share-icons__icon whatsapp"><?php Icon_Class::polen_icon_social("whatsapp"); ?></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		if (!navigator.share) {
+			document.querySelector('.share-icons').classList.add("show");
+		}
+	</script>
+<?php
+}
+
+function polen_get_share_button()
+{
+?>
+	<button class="share-button btn btn-outline-light btn-md" onclick="shareVideo('Compartilhado', null)"><?php Icon_Class::polen_icon_share(); ?></button>
+	<script>
+		if (navigator.share) {
+			document.querySelector('.share-button').classList.add("show");
+		}
+	</script>
+<?php
+}

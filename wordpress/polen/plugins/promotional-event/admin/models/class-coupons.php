@@ -74,8 +74,14 @@ class Coupons{
     {
         global $wpdb;
         $table_name = $wpdb->prefix . 'promotional_event';
-
-        return $wpdb->update($table_name, array('is_used' => 1, 'order_id' => $order_id), array('code' => $coupon));
+        return $wpdb->update($table_name,
+            array(
+                'is_used' => 1,
+                'order_id' => $order_id,
+                'used_at' => date('Y-m-d H:i:s')),
+            array(
+                'code' => $coupon)
+        );
     }
 
     /**

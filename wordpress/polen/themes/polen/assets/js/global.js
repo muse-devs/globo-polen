@@ -43,6 +43,9 @@ function docReady(fn) {
 }
 
 function shareVideo(title, url) {
+	if(!url) {
+		url = window.location.href;
+	}
 	var shareData = {
 		title: title,
 		url: url,
@@ -63,25 +66,22 @@ function shareVideo(title, url) {
 	}
 }
 
-function shareVideoStories(url) {
-	var shareData = {
-		title: "Olha só",
-		url: url,
-	};
-	if (navigator.share) {
-		try {
-			navigator
-				.share(shareData)
-				.then(() => {
-					console.log("Sucesso!", "Link compartilhado com sucesso");
-				})
-				.catch(console.error);
-		} catch (err) {
-			polError("Error: " + err);
+const shareSocial = {
+	network: {
+		facebook: "https://www.facebook.com/share.php?u=",
+		twitter: "https://twitter.com/intent/tweet?text=",
+		whatsapp: "https://wa.me/5581997075300/?text=",
+	},
+	send: function(url, content) {
+		if(!content) {
+			content = window.location.href;
 		}
-	} else {
-		copyToClipboard(shareData.url);
+		window.open(url + content);
 	}
+}
+
+function toggleShowClass(child) {
+	document.querySelector(child).classList.toggle('show');
 }
 
 function changeHash(hash) {
