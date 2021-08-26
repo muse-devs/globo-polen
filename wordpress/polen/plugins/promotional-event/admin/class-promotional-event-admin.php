@@ -260,7 +260,12 @@ class Promotional_Event_Admin {
             $order->calculate_totals();
 
             session_start();
-            $_SESSION[ self::SESSION_KEY_SUCCESS_ORDER_ID ] = $order->get_id();
+            // $_SESSION[ self::SESSION_KEY_SUCCESS_ORDER_ID ] = $order->get_id();
+            $result = array(
+                'url' => event_promotional_url_success( $order->get_id(), $order->get_order_key() ),
+                'order_id' => $order->get_id(),
+                'compra_success_code' => $order->get_order_key(),
+            );
 
             wp_send_json_success( 'ok', 200 );
             wp_die();
