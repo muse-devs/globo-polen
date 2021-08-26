@@ -259,8 +259,6 @@ class Promotional_Event_Admin {
             $order = new \WC_Order($order->get_id());
             $order->calculate_totals();
 
-            session_start();
-            // $_SESSION[ self::SESSION_KEY_SUCCESS_ORDER_ID ] = $order->get_id();
             $url_redirect = event_promotional_url_success( $order->get_id(), $order->get_order_key() );
             $result = array(
                 'url' => $url_redirect,
@@ -309,8 +307,6 @@ class Promotional_Event_Admin {
                 wp_die();
             }
 
-            // session_start();
-            // $_SESSION[ self::SESSION_KEY_CUPOM_CODE ] = $coupon_code;
             $result = array(
                 'url' => event_promotional_url_order( $coupon_code ),
                 'cupom_code' => $coupon_code,
