@@ -320,10 +320,10 @@ function va_cart_form($coupon = "")
 		const form = document.querySelector(formId);
 		form.addEventListener("submit", function(e) {
 			e.preventDefault();
-			polAjaxForm(formId, function(e) {
+			polAjaxForm(formId, function(res) {
 				polSpinner();
 				blockUnblockInputs(formId, true);
-				window.location.href = "<?php echo event_promotional_url_success(); ?>";
+				window.location.href = res.url;
 			}, function(e) {
 				polMessages.error(e.Error);
 			});
