@@ -303,7 +303,7 @@ class Promotional_Event_Admin {
                 wp_die();
             }
 
-            session_start();
+            // session_start();
             // $_SESSION[ self::SESSION_KEY_CUPOM_CODE ] = $coupon_code;
             $result = array(
                 'url' => event_promotional_url_order( $coupon_code ),
