@@ -74,6 +74,7 @@ $stock = $product->get_stock_quantity();
 			<?php $social && polen_front_get_talent_stories(); ?>
 			<div>
 				<h1 class="talent-name" title="<?= get_the_title(); ?>"><?= get_the_title(); ?></h1>
+				<p><?= $product->get_description(); ?></p>
 				<?php if($social) : ?>
 					<h5 class="talent-count-videos text-truncate">
 						<?php
