@@ -2,6 +2,7 @@
 
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
 use Polen\Includes\Polen_Video_Info;
+use Polen\Includes\Polen_Update_Fields;
 use Polen\Social\Social_Rewrite;
 use Polen\Tributes\Tributes_Model;
 use Polen\Tributes\Tributes_Rewrite_Rules;
@@ -48,10 +49,23 @@ if (
 			'keywords' => 'Vídeos Personalizados',
 		);
 
+		// Single de Produto - Página do Artista
 		if (!empty($post) && $post->post_type == 'product') {
 
+			$talent = new Polen_Update_Fields();
+			$talent = $talent->get_vendor_data($post->post_author);
+
+			$headers['title'] = "Vídeos Personalizados com {$talent->nome} - Polen.me";
+			$headers['description'] = "Experimente um novo jeito de se relacionar através de videos personalizados com {$talent->nome}";
 			$headers['image'] = safeImage(get_the_post_thumbnail_url(get_the_ID()));
 
+		// Página Todos os Artistas - /shop
+		} elseif (is_shop()) {
+
+			$headers['title'] = 'Videos personalizados do seu artista favorito, do seu jeito!';
+			$headers['description'] = 'Experimente um novo jeito de se relacionar através de videos personalizados. Emocione com videos personalizados de famosos.';
+
+		// Página do Video player - /v
 		} elseif ($is_video === true && !empty($video_hash)) {
 
 			$video_info = Polen_Video_Info::get_by_hash($video_hash);
@@ -60,19 +74,23 @@ if (
 
 			$product_id = $item_cart->get_product_id();
 			$product = wc_get_product($product_id);
-			$headers['title'] = 'Direto, Próximo, Íntimo.';
 			$talent_name = $product->get_title();
+
+			$headers['title'] = 'Direto, Próximo, Íntimo.';
 			$headers['description'] = "Olha esse novo vídeo-polen de {$talent_name}.";
 			$headers['url'] = site_url('v/' . $video_info->hash);
 			$headers['image'] = $video_info->vimeo_thumbnail;
 
+		// Não sei oq é essa página
 		} elseif (!empty($post) && $post->post_type == 'page' && $post->post_name == 'v') {
 
 			$video_url = get_the_permalink() . '?' . $_SERVER['QUERY_STRING'];
+			$headers['type'] = null;
 			$headers['url'] = $video_url;
 			$headers['video'] = $video_url;
 			$headers['image'] = safeImage(get_the_post_thumbnail_url(get_the_ID()));
 
+		// Página do Colab
 		} elseif (!empty($tribute_app) && $tribute_app == '1') {
 
 			$tribute_operation = get_query_var(Tributes_Rewrite_Rules::TRIBUTES_QUERY_VAR_TRIBUTES_OPERAION);
@@ -98,6 +116,8 @@ if (
 				$headers['image'] = "' . TEMPLATE_URI . '/tributes/assets/img/logo-to-share.png";
 
 			}
+
+		// Página Criança Esperança
 		} elseif (!empty($social_app) && $social_app == '1') {
 
 			$image = social_get_image_by_category(social_get_category_base());
@@ -105,14 +125,16 @@ if (
 			$headers['image'] = $image;
 			$headers['url'] = site_url('social/crianca-esperanca');
 
+		// Página do Livro De porta em porta
 		} elseif (event_promotional_is_app()) {
 
-			$headers['title'] = 'Luciano Huck - De porta em porta';
-			$headers['description'] = 'Luciano Huck - De porta em porta';
+			$headers['title'] = 'Compre o livro &quot;De porta em porta&quot; e ganhe um vídeo personalizado.';
+			$headers['description'] = 'Compre o livro &quot;De porta em porta&quot; e ganhe um vídeo personalizado com Luciano Hulk.';
 			$headers['url'] = event_promotional_url_home();
 			$headers['image'] = '//polen.me/polen/uploads/2021/08/book_cover.png';
 			$headers['site_name'] = 'Polen.me - Luciano Huck - De porta em porta';
 
+		// Imagem padrão - Logo Polen grande
 		} else {
 
 			$headers['image'] = 'https://polen.me/polen/uploads/2021/06/cropped-logo.png';

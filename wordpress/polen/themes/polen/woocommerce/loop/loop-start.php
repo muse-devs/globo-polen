@@ -20,6 +20,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 <div class="clear"></div>
+<div class="row my-3">
+	<div class="col-12">
+		<h1>Escolha seu ídolo e garanta seu video personalizado.</h1>
+	</div>
+</div>
 <section class="row my-4 card-list">
 <div class="col-md-12 p-0 p-md-0">
 	<div class="banner-wrapper">
