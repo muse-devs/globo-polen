@@ -3,15 +3,22 @@
 /**
  * Template name: Página Inicial Vídeo Autógrafo
  */
-session_start();
-if( !isset( $_SESSION[ Promotional_Event_Admin::SESSION_KEY_CUPOM_CODE ])
-	|| empty( $_SESSION[ Promotional_Event_Admin::SESSION_KEY_CUPOM_CODE ] ))
-{
+// session_start();
+// if( !isset( $_SESSION[ Promotional_Event_Admin::SESSION_KEY_CUPOM_CODE ])
+// 	|| empty( $_SESSION[ Promotional_Event_Admin::SESSION_KEY_CUPOM_CODE ] ))
+// {
+// 	wp_safe_redirect( event_promotional_url_code_validation() );
+// 	exit;
+// }
+
+$cupom_code = filter_input( INPUT_GET, 'cupom_code', FILTER_SANITIZE_STRING );
+if( empty( $cupom_code) ) {
 	wp_safe_redirect( event_promotional_url_code_validation() );
 	exit;
 }
+
 get_header();
-$coupon = $_SESSION[ Promotional_Event_Admin::SESSION_KEY_CUPOM_CODE ];
+$coupon = $cupom_code;
 ?>
 
 <main id="primary" class="site-main">

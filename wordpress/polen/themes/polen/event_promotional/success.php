@@ -1,12 +1,20 @@
 <?php
 
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
+use Polen\Includes\Debug;
 
 session_start();
-$order_id = $_SESSION[ Promotional_Event_Admin::SESSION_KEY_SUCCESS_ORDER_ID ];
+$order_id  = filter_input( INPUT_GET, 'order', FILTER_SANITIZE_STRING );
+$order_key = filter_input( INPUT_GET, 'order_key', FILTER_SANITIZE_STRING );
 $order = wc_get_order( $order_id );
+
 if( empty( $order ) ) {
     wp_safe_redirect( event_promotional_url_home() );
+    exit;
+}
+
+if( $order->get_order_key() != $order_key ) {
+	wp_safe_redirect( event_promotional_url_code_validation() );
     exit;
 }
 
