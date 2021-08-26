@@ -6,8 +6,8 @@ use Polen\Includes\Debug;
 session_start();
 $order_id = $_SESSION[ \Promotional_Event_Admin::SESSION_KEY_SUCCESS_ORDER_ID ];
 $order = wc_get_order( $order_id );
+Debug::def($order, $_SESSION,$_SERVER);
 if( empty( $order ) ) {
-	Debug::def($order, $_SESSION,$_SERVER);
     wp_safe_redirect( event_promotional_url_home() );
     exit;
 }
