@@ -261,13 +261,14 @@ class Promotional_Event_Admin {
 
             session_start();
             // $_SESSION[ self::SESSION_KEY_SUCCESS_ORDER_ID ] = $order->get_id();
+            $url_redirect = event_promotional_url_success( $order->get_id(), $order->get_order_key() );
             $result = array(
-                'url' => event_promotional_url_success( $order->get_id(), $order->get_order_key() ),
+                'url' => $url_redirect,
                 'order_id' => $order->get_id(),
                 'compra_success_code' => $order->get_order_key(),
             );
 
-            wp_send_json_success( 'ok', 200 );
+            wp_send_json_success( $result, 200 );
             wp_die();
 
         } catch (\Exception $e) {
