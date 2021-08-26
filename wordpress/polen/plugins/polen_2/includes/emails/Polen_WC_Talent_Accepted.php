@@ -60,7 +60,7 @@ class Polen_WC_Talent_Accepted extends \WC_Email {
 	}
 
 	public function get_content_ep_html() {
-		return wc_get_template_html( $this->template_html, array(
+		return wc_get_template_html( $this->template_ep_html, array(
 			'order'         => $this->object,
 			'email_heading' => $this->get_heading(),
 			'sent_to_admin' => true,
