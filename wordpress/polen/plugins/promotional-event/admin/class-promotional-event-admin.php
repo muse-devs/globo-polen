@@ -45,7 +45,7 @@ class Promotional_Event_Admin {
 
 	const ORDER_METAKEY = 'promotional_event';
     const SESSION_KEY_CUPOM_CODE = 'event_promotion_cupom_code';
-    const SESSION_KEY_SUCCESS_ORDER_ID = 'event_promotion_cupom_code';
+    const SESSION_KEY_SUCCESS_ORDER_ID = 'event_promotion_order_id';
     const NONCE_ACTION = 'promotional_event_2hj3g42jhg43';
 
 	/**
