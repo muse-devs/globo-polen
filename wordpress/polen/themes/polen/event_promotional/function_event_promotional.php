@@ -10,9 +10,9 @@ function event_promotional_url_code_validation()
     return event_promotional_url_home() . '/validar-codigo';
 }
 
-function event_promotional_url_order()
+function event_promotional_url_order( $cupom_code )
 {
-    return event_promotional_url_home() . '/pedido';
+    return event_promotional_url_home() . '/pedido?cupom_code=' . $cupom_code;
 }
 
 function event_promotional_url_success()

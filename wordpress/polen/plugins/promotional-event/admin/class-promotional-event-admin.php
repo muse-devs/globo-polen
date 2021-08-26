@@ -47,6 +47,7 @@ class Promotional_Event_Admin {
     const SESSION_KEY_CUPOM_CODE = 'event_promotion_cupom_code';
     const SESSION_KEY_SUCCESS_ORDER_ID = 'event_promotion_order_id';
     const NONCE_ACTION = 'promotional_event_2hj3g42jhg43';
+    const NONCE_ACTION_CUPOM_VALIDATION = 'check-coupon';
 
 	/**
 	 * Initialize the class and set its properties.
@@ -281,6 +282,11 @@ class Promotional_Event_Admin {
             $coupon = new Coupons();
             $check = $coupon->check_coupoun_exist($coupon_code);
             $check_is_used = $coupon->check_coupoun_is_used($coupon_code);
+            $nonce = $_POST['security'];
+
+            if( !wp_verify_nonce( $nonce, self::NONCE_ACTION_CUPOM_VALIDATION )) {
+                throw new Exception('Erro na verificação de segurança', 422);
+            }
 
             if (empty($coupon_code)) {
                 throw new Exception('Cupom é obrigatório', 422);
@@ -298,8 +304,12 @@ class Promotional_Event_Admin {
             }
 
             session_start();
-            $_SESSION[ self::SESSION_KEY_CUPOM_CODE ] = $coupon_code;
-            wp_send_json_success( 'Cupom Disponivél', 200 );
+            // $_SESSION[ self::SESSION_KEY_CUPOM_CODE ] = $coupon_code;
+            $result = array(
+                'url' => event_promotional_url_order( $coupon_code ),
+                'cupom_code' => $coupon_code,
+            );
+            wp_send_json_success( $result, 200 );
             wp_die();
 
         } catch (\Exception $e) {
