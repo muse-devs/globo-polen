@@ -15,7 +15,7 @@ class Coupons{
             $wpdb->insert(
                 $table_name,
                 array(
-                    'code' => Promotional_Event_Generate_Coupon::generate(['length' =>4,'prefix'=>'REBELDES']),
+                    'code' => Promotional_Event_Generate_Coupon::generate(8),
                 )
             );
         }
