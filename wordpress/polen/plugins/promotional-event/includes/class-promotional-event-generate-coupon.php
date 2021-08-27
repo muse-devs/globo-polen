@@ -76,7 +76,7 @@ class Promotional_Event_Generate_Coupon {
             }
         }
 
-        return $prefix . $coupon . $suffix;
+        return $prefix . '-' . $coupon . $suffix;
     }
 
     /**
