@@ -8,6 +8,7 @@ get_header();
 ?>
 
 <main id="primary" class="site-main">
+	<h1 class="d-none">Presenteie e supreenda com Vídeos Personalizados.</h1>
 
 	<?php polen_front_get_banner_with_carousel();
 	?>

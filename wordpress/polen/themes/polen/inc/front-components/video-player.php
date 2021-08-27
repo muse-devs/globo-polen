@@ -223,7 +223,7 @@ function polen_get_url_watermark_video_player( $order )
 	<?php elseif( $is_event_promotional ) : ?>
 		<img src="<?php echo TEMPLATE_URI ?>/assets/img/video-autografo/logo-de-porta-em-porta.png" class="logo social" alt="Logo Criança Esperança" style="" />
 	<?php endif; ?>
-	
+
 	<img src="<?php echo TEMPLATE_URI ?>/assets/img/logo.png" class="logo polen" alt="Logo Polen" />
 	<?php
 }

@@ -268,6 +268,11 @@ require TEMPLATE_DIR . '/inc/custom-header.php';
 require TEMPLATE_DIR . '/inc/template-functions.php';
 
 /**
+ * SEO functions
+ */
+require TEMPLATE_DIR . '/inc/seo.php';
+
+/**
  * Customizer additions.
  */
 require TEMPLATE_DIR . '/inc/customizer.php';
