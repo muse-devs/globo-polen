@@ -320,10 +320,10 @@ function va_cart_form($coupon = "")
 		const form = document.querySelector(formId);
 		form.addEventListener("submit", function(e) {
 			e.preventDefault();
-			polAjaxForm(formId, function(e) {
+			polAjaxForm(formId, function(res) {
 				polSpinner();
 				blockUnblockInputs(formId, true);
-				window.location.href = "<?php echo event_promotional_url_success(); ?>";
+				window.location.href = res.url;
 			}, function(e) {
 				polMessages.error(e.Error);
 			});
@@ -340,6 +340,7 @@ function va_coupon()
 			<h1 class="title mb-3">Inserir código</h1>
 			<form id="va-check-code">
 				<input type="hidden" name="action" value="check_coupon" />
+				<input type="hidden" name="security" value=<?php echo wp_create_nonce('check-coupon'); ?>>
 				<input type="text" name="coupon" class="form-control form-control-lg mb-2" placeholder="Inserir código fornecido pela Magalu" required />
 				<input type="submit" class="btn btn-primary btn-lg btn-block" value="Checar" />
 			</form>
@@ -350,10 +351,10 @@ function va_coupon()
 		const form = document.querySelector(formId);
 		form.addEventListener("submit", function(e) {
 			e.preventDefault();
-			polAjaxForm(formId, function() {
+			polAjaxForm(formId, function(res) {
 				polSpinner();
 				blockUnblockInputs(formId, true);
-				window.location.href = "<?php echo event_promotional_url_order(); ?>"
+				window.location.href = res.url;
 			}, function(e) {
 				polMessages.error(e.Error);
 			}, false);
