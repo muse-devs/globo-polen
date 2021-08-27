@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.0/css/bootstrap.min.css">
 <form method="post" id="create" action="/">
     <h1>Criar Cupons</h1>
     <p>Adicionar a quantidade de cupons</p>
