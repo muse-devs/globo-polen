@@ -1,7 +1,5 @@
 <?php
 
-use Polen\Includes\Debug;
-
 require TEMPLATE_DIR . '/inc/front-components/global.php';
 require TEMPLATE_DIR . '/inc/front-components/video-player.php';
 require TEMPLATE_DIR . '/inc/front-components/talent.php';
