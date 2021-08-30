@@ -165,7 +165,7 @@ $stock = $product->get_stock_quantity();
 	<?php $social || polen_front_get_tutorial(); ?>
 
 	<!-- Produtos Relacionados -->
-	<?php //polen_box_related_product_by_product_id(get_the_ID());
+	<?php polen_box_related_product_by_product_id(get_the_ID());
 	?>
 
 </div>
