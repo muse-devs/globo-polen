@@ -11,7 +11,6 @@ get_header();
 	<h1 class="d-none">Presenteie e supreenda com Vídeos Personalizados.</h1>
 
 	<?php polen_front_get_banner_with_carousel();
-	mc_get_top_banner();
 	?>
 
 	<?php polen_banner_scrollable(polen_get_new_talents(6), "Destaque", polen_get_all_new_talents_url()); ?>
