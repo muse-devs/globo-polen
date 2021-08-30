@@ -16,7 +16,18 @@ get_header();
 
 	<?php polen_banner_scrollable(polen_get_new_talents(6), "Destaque", polen_get_all_new_talents_url()); ?>
 
-	<?php mc_get_home_banner(event_promotional_url_home()); ?>
+	<div class="row">
+		<div class="col-12">
+			<div id="product-carousel" class="owl-carousel owl-theme">
+				<div class="item">
+					<?php mc_get_home_banner(event_promotional_url_home()); ?>
+				</div>
+				<div class="item">
+					<?php va_get_home_banner(event_promotional_url_home()); ?>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<?php polen_front_get_tutorial(); ?>
 

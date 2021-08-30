@@ -6,7 +6,7 @@ const home_carrousel = function() {
 // home_carrousel();
 
 jQuery(document).ready(function ($) {
-	$('.owl-carousel').owlCarousel({
+	$('#top-carousel').owlCarousel({
 		loop: true,
 		items: 1,
 		autoplayTimeout: 5000,
@@ -18,6 +18,18 @@ jQuery(document).ready(function ($) {
 		dots: true,
 		autoHeight:false,
 		navText: ["<i class='icon icon-left-arrow'></i>", "<i class='icon icon-right-arrow'></i>"],
+	});
+	$('#product-carousel').owlCarousel({
+		loop: true,
+		items: 1,
+		autoplayTimeout: 5000,
+		animateOut: 'fadeOut',
+		autoplayHoverPause:true,
+		margin: 0,
+		nav: false,
+		autoplay: true,
+		dots: true,
+		autoHeight:false,
 	});
 });
 
