@@ -82,3 +82,43 @@
 		}
 	}
 }
+
+.mc-content {
+    h3 {
+        font-size: 22px;
+        font-weight: 700;
+        margin: 20px 0px;
+    }
+    p {
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 23px;
+        color: #707070;
+        letter-spacing: -0.05em;
+    }
+    ul {
+        padding: 20px;
+        li {
+            list-style: disc;
+            text-align: left;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 23px;
+            color: #707070;
+            letter-spacing: -0.05em;
+        }
+    }
+    img {
+        margin: 1em;
+    }
+    .btn {
+        font-size: 15px;
+        padding: 15px 25px;
+        font-weight: 600;
+        @include media-breakpoint-down(sm) {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+        }
+    }
+}
