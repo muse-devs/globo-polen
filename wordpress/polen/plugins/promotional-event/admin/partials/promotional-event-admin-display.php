@@ -26,7 +26,7 @@
                     <th class="text-center">#</th>
                     <th class="text-center">Código</th>
                     <th class="text-center">Status</th>
-                    <th class="text-center">ID Produto</th>
+                    <th class="text-center">ID do pedido</th>
                 </tr>
                 </thead>
                 <tfoot>
@@ -34,20 +34,35 @@
                     <th class="text-center">#</th>
                     <th class="text-center">Código</th>
                     <th class="text-center">Status</th>
-                    <th class="text-center">ID Produto</th>
+                    <th class="text-center">ID do pedido</th>
                 </tr>
                 </tfoot>
                 <tbody>
-                <?php foreach ($values_code as $code): ?>
+                <?php foreach ($values_code as $code) : ?>
+                    <?php
+                    $status = "Não Utilizado";
+                    $order_id = $code->order_id;
+                    ?>
+
                     <tr class="text-center">
-                        <td><?php echo $code->id; ?></td>
+                        <td><?php echo $code->ID; ?></td>
                         <td><?php echo $code->code; ?></td>
+
                         <?php if ($code->is_used == 1) : ?>
-                            <td><?php echo "Utilizado"; ?></td>
-                        <?php else: ?>
-                            <td><?php echo "Não Utilizado"; ?></td>
+                            <?php $status =  "Utilizado"; ?>
                         <?php endif; ?>
-                        <td><?php echo !empty($code->product_id) ? $code->product_id : '--'; ?></td>
+
+                        <td><?php echo $status; ?></td>
+
+                        <?php if ($order_id) : ?>
+                            <td>
+                                <a href="<?php echo admin_url("/post.php?post={$order_id}&action=edit") ?>">
+                                    #<?php echo !empty($order_id) ? $order_id : '--'; ?>
+                                </a>
+                            </td>
+                        <?php else : ?>
+                            <td> -- </td>
+                        <?php endif ?>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>
@@ -68,5 +83,6 @@
 </script>
 
 </script>
+
 
 

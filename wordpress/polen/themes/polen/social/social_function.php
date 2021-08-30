@@ -81,6 +81,7 @@ function social_order_is_social( $order )
     return Social_Order::is_social( $order );
 }
 
+
 /**
  * Verifica se o Talento é social.
  * Verificando se o Produto é social

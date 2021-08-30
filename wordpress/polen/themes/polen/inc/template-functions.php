@@ -231,14 +231,14 @@ function polen_get_theme_logos() {
 	}
 
 	// Provisório CRIESP
-	$html .= '<a href="' . social_get_criesp_url() . '">';
-	if(is_front_page() || social_is_in_social_app()) {
-		$html .= 	'<img width="106" height="31" src="'. $logo_criesp_dark . '" class="custom-logo custom-logo-criesp" alt="Logo Criança Esperança">';
-	} else {
-		$html .= 	'<img width="106" height="31" src="'. $logo_criesp_dark . '" class="custom-logo custom-logo-criesp dark" alt="Logo Criança Esperança">';
-		$html .= 	'<img width="106" height="31" src="'. $logo_criesp_light . '" class="custom-logo custom-logo-criesp light" alt="Logo Criança Esperança">';
-	}
-	$html .= '</a>';
+	// $html .= '<a href="' . social_get_criesp_url() . '">';
+	// if(is_front_page() || social_is_in_social_app()) {
+	// 	$html .= 	'<img width="106" height="31" src="'. $logo_criesp_dark . '" class="custom-logo custom-logo-criesp" alt="Logo Criança Esperança">';
+	// } else {
+	// 	$html .= 	'<img width="106" height="31" src="'. $logo_criesp_dark . '" class="custom-logo custom-logo-criesp dark" alt="Logo Criança Esperança">';
+	// 	$html .= 	'<img width="106" height="31" src="'. $logo_criesp_light . '" class="custom-logo custom-logo-criesp light" alt="Logo Criança Esperança">';
+	// }
+	// $html .= '</a>';
 
 	return $html;
 }
@@ -333,18 +333,22 @@ function polen_apply_polen_part_price( $full_price, $social = false )
 	}
 }
 
-function polen_zapier_thankyou($order_item_cart)
+function polen_zapier_thankyou( $order )
 {
-	if(empty($order_item_cart)) {
+	if(empty($order)) {
 		return;
 	}
+	$order_item_cart = Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
 	$product = $order_item_cart->get_product();
 	?>
 		<form id="zapier-purchase-data">
+			<input type="hidden" name="order_id" value="<?php echo $order->get_id(); ?>" />
 			<input type="hidden" name="nome" value="<?php echo $order_item_cart->get_name_to_video(); ?>" />
 			<input type="hidden" name="email" value="<?php echo $order_item_cart->get_email_to_video(); ?>" />
 			<input type="hidden" name="artista" value="<?php echo $product->get_name(); ?>" />
-			<input type="hidden" name="data_compra" value="<?php echo date("d/m/Y"); ?>" />
+			<input type="hidden" name="data_compra" value="<?php echo $order->order_date; ?>" />
+			<input type="hidden" name="data_atual" value="<?php echo date("Y-m-d H:i:s"); ?>" />
+			<input type="hidden" name="url_source" value="<?php echo site_url( $_SERVER[ 'REDIRECT_URL' ] ); ?>" />
 		</form>
 		<script>
 			polRequestZapier("#zapier-purchase-data", ZAPIERURLS.PURCHASE);
