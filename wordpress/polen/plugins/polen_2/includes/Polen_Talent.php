@@ -296,6 +296,10 @@ class Polen_Talent {
             if ($key == 'order_date') {
                 $new_columns['talent_product'] = __('Talento', 'polen');
             }
+
+            if ($key == 'shipping_address') {
+                $new_columns['expiration_invite'] = __('Data Limite', 'polen');
+            }
         }
         return $new_columns;
     }
@@ -323,7 +327,7 @@ class Polen_Talent {
      * @param $order
      * @return string
      */
-    private function get_messenger($order): string
+private function get_messenger($order): string
     {
         $status = $order->get_status();
         $status_fail = [
@@ -340,12 +344,24 @@ class Polen_Talent {
 
         $order_date = $order->get_date_created()->date( 'Ymd');
 
+        $autograph_video = get_post_meta($order->get_id(), 'campaign');
         $social = get_post_meta($order->get_id(), 'social');
-        $defaultDeadline = 7;
-        $socialDeadline = 15;
 
-        $number_of_days = isset($social[0]) ? $socialDeadline : $defaultDeadline;
+        $social_deadline = 15;
+        $autograph_deadline = 30;
+
+        $number_of_days = 7;
+
+        if (isset($social[0])) {
+            $number_of_days = $social_deadline;
+        }
+
+        if (isset($autograph_video[0])) {
+            $number_of_days = $autograph_deadline;
+        }
+
         $deadline = $this->calculate_diff_date($order_date, $number_of_days);
+
         $msg = 'Prazo expirado';
 
         if ($deadline > 0) {
