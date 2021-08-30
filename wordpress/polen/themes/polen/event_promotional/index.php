@@ -20,12 +20,15 @@ get_header();
 			va_what_is();
 			va_get_book_infos();
 
+			global $Polen_Plugin_Settings;
+			$product_id = $Polen_Plugin_Settings[ 'promotional-event-text' ];
+			
+			$Polen_Talent = new Polen_Talent();
+			$talent = $Polen_Talent->get_talent_from_product( $product_id );
+
 			$Talent_Fields = new Polen_Update_Fields();
-			$product_id = 409;
-			$polen_talent_class = new Polen_Talent();
-			$talent_stdClass = $polen_talent_class->get_talent_from_product( $product_id );
-			$Talent_Fields = $Talent_Fields->get_vendor_data( $talent_stdClass->ID );
-			// va_front_get_talent_videos($Talent_Fields, $product_id);
+			$Talent_Fields = $Talent_Fields->get_vendor_data( $talent->ID );
+			va_front_get_talent_videos( $Talent_Fields, $product_id );
 			?>
 		</div>
 	</div>
