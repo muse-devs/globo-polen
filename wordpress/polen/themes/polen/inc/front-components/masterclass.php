@@ -26,4 +26,15 @@ function mc_get_home_banner($link)
 	</div>
 <?php
 }
-?>
+
+
+function mc_get_top_banner()
+{
+	?>
+	<div class="row">
+		<div class="col-12">
+
+		</div>
+	</div>
+	<?php
+}
