@@ -120,7 +120,7 @@ function polen_front_get_card($item, $size = "small", $social = false)
 
 ?>
 	<div class="<?= $class; ?>">
-		<div class="polen-card <?= $size; ?>">
+		<div class="polen-card <?= $size; ?>" itemscope itemtype="https://schema.org/Offer">
 			<figure class="image">
 				<?php if ($social) {
 					polen_donate_badge("Criança Esperança", true, true);
@@ -128,7 +128,7 @@ function polen_front_get_card($item, $size = "small", $social = false)
 					$donate ? polen_donate_badge("Social") : null;
 				} ?>
 				<img loading="lazy" src="<?php echo $image[0]; ?>" alt="<?= $item["name"]; ?>">
-				<div class="price text-right">
+				<div class="price text-right" itemprop="price">
 					<?php if ($social && $item['in_stock']) : ?>
 						<span class="text">DOAR</span><br />
 					<?php else : ?>
@@ -143,7 +143,7 @@ function polen_front_get_card($item, $size = "small", $social = false)
 				<a href="<?= $item["talent_url"]; ?>" class="link"></a>
 			</figure>
 			<h4 class="title text-truncate">
-				<a href="<?= $item["talent_url"]; ?>" title="<?= $item["name"]; ?>"><?= $item["name"]; ?></a>
+				<a href="<?= $item["talent_url"]; ?>" title="<?= $item["name"]; ?>" itemprop="name"><?= $item["name"]; ?></a>
 			</h4>
 			<h5 class="category text-truncate">
 				<a href="<?= $item["category_url"]; ?>"><?= $item["category"]; ?></a>
