@@ -33,7 +33,22 @@ function mc_get_top_banner()
 	?>
 	<div class="row">
 		<div class="col-12">
-
+			<div class="mc-top-banner">
+				<figure class="mc-logo">
+					<img src="" alt="">
+					<h1 class="title">Aprenda a escolher, apreciar e harmonizar vinhos com Ronnie Von</h1>
+				</figure>
+				<video src="" class="mc-home-video"></video>
+				<h2 class="subtitle">Participe do grupo do Whatsapp para ter um desconto exclusivo no dia das inscrições.</h2>
+				<div class="row">
+					<div class="col-12">
+						<form action="" id="form-email-masterclass">
+							<input type="text" name="" />
+							<input type="submit" value="Quero participar do grupo de Whatsapp" />
+						</form>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 	<?php
