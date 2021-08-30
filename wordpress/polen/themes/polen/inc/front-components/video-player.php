@@ -147,15 +147,24 @@ function polen_get_video_player_html($data, $user_id = null)
 function polen_get_video_player( $video_info, $product, $order, $user_talent )
 {
 	wp_enqueue_script('vimeo');
-	$video_url = polen_get_video_url_by_video_info( $video_info );
-	$isRateble = Polen_Order_Review::can_make_review(get_current_user_id(), $order->get_id());
+	$video_url = home_url() . "/v/" . $video->hash;
+	$isRateble = \Polen\Includes\Polen_Order_Review::can_make_review($user_id, $video->order_id);
+	$is_social = social_user_is_social($talent->user_id);
+
+	//TODO falta backend
+	$is_video_autografo = false;
 ?>
 	<div class="row video-card">
 		<header class="col-md-6 p-0">
 			<div id="video-box" class="video-box">
 				<div id="polen-video" class="polen-video"></div>
 				<div class="water-mark">
-					<?php polen_get_url_watermark_video_player( $order ) ;?>
+					<?php if ($is_social) : ?>
+						<img src="<?php echo TEMPLATE_URI ?>/assets/img/criesp/logo-criesp.png" class="logo social" alt="Logo Criança Esperança" />
+					<?php elseif($is_video_autografo) : ?>
+						<img src="<?php echo TEMPLATE_URI ?>/assets/img/video-autografo/logo-de-porta-em-porta.png" class="logo video-autografo" alt="Logo Vídeo Autógrafo" />
+					<?php endif; ?>
+					<img src="<?php echo TEMPLATE_URI ?>/assets/img/logo.png" class="logo polen" alt="Logo Polen" />
 				</div>
 			</div>
 			<script>

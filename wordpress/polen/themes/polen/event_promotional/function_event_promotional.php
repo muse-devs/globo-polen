@@ -10,14 +10,14 @@ function event_promotional_url_code_validation()
     return event_promotional_url_home() . '/validar-codigo';
 }
 
-function event_promotional_url_order()
+function event_promotional_url_order( $cupom_code )
 {
-    return event_promotional_url_home() . '/pedido';
+    return event_promotional_url_home() . '/pedido?cupom_code=' . $cupom_code;
 }
 
-function event_promotional_url_success()
+function event_promotional_url_success( $order_id, $order_key )
 {
-    return event_promotional_url_home() . '/confirmado';
+    return event_promotional_url_home() . "/confirmado?order={$order_id}&order_key={$order_key}";
 }
 
 function event_promotional_is_home()

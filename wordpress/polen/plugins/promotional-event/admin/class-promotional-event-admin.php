@@ -45,8 +45,9 @@ class Promotional_Event_Admin {
 
 	const ORDER_METAKEY = 'promotional_event';
     const SESSION_KEY_CUPOM_CODE = 'event_promotion_cupom_code';
-    const SESSION_KEY_SUCCESS_ORDER_ID = 'event_promotion_cupom_code';
+    const SESSION_KEY_SUCCESS_ORDER_ID = 'event_promotion_order_id';
     const NONCE_ACTION = 'promotional_event_2hj3g42jhg43';
+    const NONCE_ACTION_CUPOM_VALIDATION = 'check-coupon';
 
 	/**
 	 * Initialize the class and set its properties.
@@ -69,7 +70,6 @@ class Promotional_Event_Admin {
 	public function enqueue_styles()
     {
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/promotional-event-admin.css', array(), $this->version, 'all' );
-		wp_enqueue_style( 'bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.2.0/css/bootstrap.min.css', array(), $this->version, 'all' );
 	}
 
 	/**
@@ -258,10 +258,14 @@ class Promotional_Event_Admin {
             $order = new \WC_Order($order->get_id());
             $order->calculate_totals();
 
-            session_start();
-            $_SESSION[ self::SESSION_KEY_SUCCESS_ORDER_ID ] = $order->get_id();
+            $url_redirect = event_promotional_url_success( $order->get_id(), $order->get_order_key() );
+            $result = array(
+                'url' => $url_redirect,
+                'order_id' => $order->get_id(),
+                'compra_success_code' => $order->get_order_key(),
+            );
 
-            wp_send_json_success( 'ok', 200 );
+            wp_send_json_success( $result, 200 );
             wp_die();
 
         } catch (\Exception $e) {
@@ -281,6 +285,11 @@ class Promotional_Event_Admin {
             $coupon = new Coupons();
             $check = $coupon->check_coupoun_exist($coupon_code);
             $check_is_used = $coupon->check_coupoun_is_used($coupon_code);
+            $nonce = $_POST['security'];
+
+            if( !wp_verify_nonce( $nonce, self::NONCE_ACTION_CUPOM_VALIDATION )) {
+                throw new Exception('Erro na verificação de segurança', 422);
+            }
 
             if (empty($coupon_code)) {
                 throw new Exception('Cupom é obrigatório', 422);
@@ -297,9 +306,11 @@ class Promotional_Event_Admin {
                 wp_die();
             }
 
-            session_start();
-            $_SESSION[ self::SESSION_KEY_CUPOM_CODE ] = $coupon_code;
-            wp_send_json_success( 'Cupom Disponivél', 200 );
+            $result = array(
+                'url' => event_promotional_url_order( $coupon_code ),
+                'cupom_code' => $coupon_code,
+            );
+            wp_send_json_success( $result, 200 );
             wp_die();
 
         } catch (\Exception $e) {
