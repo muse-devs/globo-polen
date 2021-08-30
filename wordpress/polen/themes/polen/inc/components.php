@@ -10,3 +10,4 @@ require TEMPLATE_DIR . '/inc/front-components/suggestion.php';
 require TEMPLATE_DIR . '/inc/front-components/criesp.php';
 require TEMPLATE_DIR . '/inc/front-components/video-autografo.php';
 require TEMPLATE_DIR . '/inc/front-components/masterclass.php';
+require TEMPLATE_DIR . '/inc/front-components/masterclass-ian.php';
