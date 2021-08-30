@@ -2,6 +2,7 @@
 defined( 'ABSPATH' ) || die;
 
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
+use Polen\Includes\Debug;
 use \Polen\Includes\Polen_Video_Info;
 
 global $current_user;
@@ -27,6 +28,6 @@ polen_set_fan_viewed( $order );
 ?>
     <main id="primary" class="site-main">
         <?php
-        polen_get_video_player($video_info,$product,$order,$user_talent);
+        polen_get_video_player( $video_info, $product, $order, $user_talent );
         ?>
     </main><!-- #main -->

@@ -15,6 +15,49 @@ function safeImage($thumbnail)
 	return $thumbnail;
 }
 
+function pol_print_schema_data($data = array())
+{
+	if(!$data || empty($data)) {
+		return;
+	}
+?>
+	<script type="application/ld+json">
+		{
+			"@context": "http://schema.org/",
+			"@type": "TalentProfile",
+			"mainEntityOfPage": {
+				"@type": "WebPage",
+				"@id": "<?php echo $data['url']; ?>"
+			},
+			"headline": "<?php echo $data['title']; ?>",
+			"image": [
+				"<?php echo $data['image']; ?>"
+			],
+			"datePublished": "<?php echo $data['date_published']; ?>",
+			"dateModified": "<?php echo $data['date_modified']; ?>",
+			"dateCreated": "<?php echo $data['date_created']; ?>",
+			"author": {
+				"@type": "Person",
+				"name": "<?php echo $data['talent_name']; ?>",
+				"url": "<?php echo $data['talent_url']; ?>",
+				"image": "<?php echo $data['talent_image']; ?>",
+				"sameAs": <?php echo $data['talent_social_links_array']; ?>
+			},
+			"publisher": {
+				"@type": "Organization",
+				"name": "Polen.me",
+				"url": "https://polen.me",
+				"logo": {
+					"@type": "ImageObject",
+					"url": "<?php echo $data['logo']; ?>"
+				}
+			},
+			"description": "<?php echo $data['description']; ?>"
+		}
+	</script>
+	<?php
+}
+
 /**
  * Tags Open Graph
  */
@@ -59,13 +102,13 @@ if (
 			$headers['description'] = "Experimente um novo jeito de se relacionar através de videos personalizados com {$talent->nome}";
 			$headers['image'] = safeImage(get_the_post_thumbnail_url(get_the_ID()));
 
-		// Página Todos os Artistas - /shop
+			// Página Todos os Artistas - /shop
 		} elseif (is_shop()) {
 
 			$headers['title'] = 'Videos personalizados do seu artista favorito, do seu jeito!';
 			$headers['description'] = 'Experimente um novo jeito de se relacionar através de videos personalizados. Emocione com videos personalizados de famosos.';
 
-		// Página do Video player - /v
+			// Página do Video player - /v
 		} elseif ($is_video === true && !empty($video_hash)) {
 
 			$video_info = Polen_Video_Info::get_by_hash($video_hash);
@@ -81,7 +124,7 @@ if (
 			$headers['url'] = site_url('v/' . $video_info->hash);
 			$headers['image'] = $video_info->vimeo_thumbnail;
 
-		// Não sei oq é essa página
+			// Não sei oq é essa página
 		} elseif (!empty($post) && $post->post_type == 'page' && $post->post_name == 'v') {
 
 			$video_url = get_the_permalink() . '?' . $_SERVER['QUERY_STRING'];
@@ -90,7 +133,7 @@ if (
 			$headers['video'] = $video_url;
 			$headers['image'] = safeImage(get_the_post_thumbnail_url(get_the_ID()));
 
-		// Página do Colab
+			// Página do Colab
 		} elseif (!empty($tribute_app) && $tribute_app == '1') {
 
 			$tribute_operation = get_query_var(Tributes_Rewrite_Rules::TRIBUTES_QUERY_VAR_TRIBUTES_OPERAION);
@@ -107,17 +150,15 @@ if (
 				$headers['url'] = tribute_get_url_final_video($slug_tribute);
 				$headers['video'] = $tribute->vimeo_link;
 				$headers['image'] = $tribute->vimeo_thumbnail;
-
 			} else {
 
 				$headers['type'] = 'Colab';
 				$headers['description'] = 'O Colab te ajuda a criar um vídeo-presente em grupo para você emocionar quem você ama!';
 				$headers['url'] = tribute_get_url_base_url();
 				$headers['image'] = "' . TEMPLATE_URI . '/tributes/assets/img/logo-to-share.png";
-
 			}
 
-		// Página Criança Esperança
+			// Página Criança Esperança
 		} elseif (!empty($social_app) && $social_app == '1') {
 
 			$image = social_get_image_by_category(social_get_category_base());
@@ -125,7 +166,7 @@ if (
 			$headers['image'] = $image;
 			$headers['url'] = site_url('social/crianca-esperanca');
 
-		// Página do Livro De porta em porta
+			// Página do Livro De porta em porta
 		} elseif (event_promotional_is_app()) {
 
 			$headers['title'] = 'Compre o livro &quot;De porta em porta&quot; e ganhe um vídeo personalizado.';
@@ -134,13 +175,13 @@ if (
 			$headers['image'] = '//polen.me/polen/uploads/2021/08/book_cover.png';
 			$headers['site_name'] = 'Polen.me - Luciano Huck - De porta em porta';
 
-		// Imagem padrão - Logo Polen grande
+			// Imagem padrão - Logo Polen grande
 		} else {
 
 			$headers['image'] = 'https://polen.me/polen/uploads/2021/06/cropped-logo.png';
 		}
 
-?>
+	?>
 		<meta name="title" content="<?php echo $headers['title']; ?>">
 		<meta name="description" content="<?php echo $headers['description']; ?>">
 		<meta name="keywords" content="<?php echo $headers['keywords']; ?>">
