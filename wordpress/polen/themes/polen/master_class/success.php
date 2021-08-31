@@ -53,7 +53,7 @@ get_header();
 			</div>
 		</div>
 	</div>
-	<div class="row my-5 mc-content">
+	<div class="row my-4 mc-content">
 		<div class="col-12">
 			<h3 class="title text-center mb-4">Realização</h3>
 		</div>
