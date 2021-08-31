@@ -22,7 +22,7 @@ get_header();
 			va_get_banner_book( $product );
 			va_ctas(event_promotional_url_code_validation( $product ), event_get_magalu_url() );
 			va_what_is( $product );
-			va_get_book_infos( $product );
+			va_get_book_infos( $product, 4.2 );
 
 			// global $Polen_Plugin_Settings;
 			// $product_id = $Polen_Plugin_Settings[ 'promotional-event-text' ];

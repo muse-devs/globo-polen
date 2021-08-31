@@ -126,8 +126,8 @@ function va_partners_footer()
 }
 
 function va_get_banner_book(
-	$small = false,
 	$product,
+	$small = false,
 	$img_bg = TEMPLATE_URI . "/assets/img/video-autografo/bg_lh_right.png"
 	)
 {
@@ -149,7 +149,7 @@ function va_get_banner_book(
 <?php
 }
 
-function va_get_book_infos( $product )
+function va_get_book_infos( $product, $stars )
 {
 ?>
 	<div class="row mb-4">
@@ -204,7 +204,7 @@ function va_get_book_infos( $product )
 						<h4 class="title text-md-center">Avaliação</h4>
 						<div class="row book-rate text-center">
 							<div class="col-12">
-								<?php polen_get_stars(4.2); ?>
+								<?php $stars && polen_get_stars($stars); ?>
 							</div>
 						</div>
 					</div>
