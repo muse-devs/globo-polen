@@ -4,6 +4,7 @@ namespace Polen\Includes;
 
 use Polen\Admin\Polen_Admin;
 use Polen\Includes\Polen_Plugin_Settings;
+use Polen\Master_class\Master_Class;
 use Polen\Master_class\Master_Class_Rewrite;
 use Polen\Publics\Polen_Public;
 use Polen\Includes\Polen_Talent;
@@ -107,7 +108,8 @@ class Polen {
         new Social( true );
 
         // Master class
-        new Master_Class_Rewrite(true);
+        new Master_Class(true);
+
     }
 
     /**
