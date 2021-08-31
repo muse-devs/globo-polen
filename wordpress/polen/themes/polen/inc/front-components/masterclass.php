@@ -35,7 +35,7 @@ function mc_get_top_banner()
 		<div class="col-12">
 			<div class="mc-landing-banner">
 				<figure class="mc-logo">
-					<img class="image" src="<?php echo TEMPLATE_URI; ?>/assets/img/masterclass/logo-beaba-do-vinho.png" alt="Logo Beabá do Vinho" />
+					<img class="image" src="<?php echo TEMPLATE_URI; ?>/assets/img/masterclass/ronnievon-logo.png" alt="Logo Beabá do Vinho" />
 				</figure>
 				<div class="row">
 					<div class="col-12 col-md-6 m-md-auto">
