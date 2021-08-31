@@ -316,6 +316,13 @@ require_once TEMPLATE_DIR . '/social/social_function.php';
 
 require_once TEMPLATE_DIR . '/event_promotional/function_event_promotional.php';
 
+/**
+* Funções para master-class
+*/
+// flush_rewrite_rules();
+require_once TEMPLATE_DIR . '/master_class/function_master_class.php';
+
+
 add_action('wc_gateway_stripe_process_response', function($response, $order) {
 	// $response
 	// $order
