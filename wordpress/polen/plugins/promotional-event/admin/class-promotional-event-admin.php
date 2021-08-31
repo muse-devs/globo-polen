@@ -23,7 +23,8 @@ use Polen\Includes\Polen_WooCommerce;
  * @subpackage Promotional_Event/admin
  * @author     Polen.me <glaydson.queiroz@polen.me>
  */
-class Promotional_Event_Admin {
+class Promotional_Event_Admin
+{
 
 	/**
 	 * The ID of this plugin.
@@ -44,10 +45,11 @@ class Promotional_Event_Admin {
 	private $version;
 
 	const ORDER_METAKEY = 'promotional_event';
-    const SESSION_KEY_CUPOM_CODE = 'event_promotion_cupom_code';
-    const SESSION_KEY_SUCCESS_ORDER_ID = 'event_promotion_order_id';
+    // const SESSION_KEY_CUPOM_CODE = 'event_promotion_cupom_code';
+    // const SESSION_KEY_SUCCESS_ORDER_ID = 'event_promotion_order_id';
     const NONCE_ACTION = 'promotional_event_2hj3g42jhg43';
     const NONCE_ACTION_CUPOM_VALIDATION = 'check-coupon';
+    const TAG_SLUG = 'event-promotional';
 
 	/**
 	 * Initialize the class and set its properties.
