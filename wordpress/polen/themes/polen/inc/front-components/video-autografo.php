@@ -1,6 +1,32 @@
 <?php
 
-function va_get_home_banner($link)
+function va_get_home_banner($title, $description, $link, $images = array("mobile" => "", "desktop" => ""))
+{
+	if (!$title || !$description) {
+		return;
+	}
+?>
+	<div class="row mt-4">
+		<div class="col-12">
+			<div class="va-banner">
+				<img class="image mobile-img" src="<?php echo $images['mobile']; ?>" alt="<?php echo $title; ?>" />
+				<img class="image desktop-img" src="<?php echo $images['desktop']; ?>" alt="<?php echo $title; ?>" />
+				<div class="content">
+					<div class="row">
+						<div class="col-12 col-md-6">
+							<h2><?php echo $title; ?></h2>
+							<p class="mt-3"><?php echo $description; ?></p>
+							<a href="<?php echo $link; ?>" class="btn btn-primary btn-md">Conheça<span class="ml-2"><?php Icon_Class::polen_icon_chevron_right(); ?></span></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php
+}
+
+function va_get_home_banner_de_porta_em_porta($link)
 {
 ?>
 	<div class="row mt-4">
@@ -99,10 +125,13 @@ function va_partners_footer()
 <?php
 }
 
-function va_get_banner_book($small = false)
+function va_get_banner_book(
+	$small = false,
+	$title = "De Porta em Porta",
+	$img_bg = TEMPLATE_URI . "/assets/img/video-autografo/bg_lh_right.png",
+	$img_book = TEMPLATE_URI . "/assets/img/video-autografo/book_cover.png"
+	)
 {
-	$img_bg = TEMPLATE_URI . "/assets/img/video-autografo/bg_lh_right.png";
-	$img_book = TEMPLATE_URI . "/assets/img/video-autografo/book_cover.png";
 
 ?>
 	<div class="row mb-3">
@@ -113,7 +142,7 @@ function va_get_banner_book($small = false)
 				</div>
 				<div class="content<?php echo $small ? '' : ' pb-2'; ?>">
 					<img src="<?php echo $img_book; ?>" alt="Capa do Livro" class="book-cover" />
-					<h1 class="title"><?php echo $small ? 'Livro - ' : ''; ?>De Porta em Porta</h1>
+					<h1 class="title"><?php echo $small ? 'Livro - ' : ''; ?><?php echo $title; ?></h1>
 				</div>
 			</div>
 		</div>
@@ -305,11 +334,11 @@ function va_cart_form($coupon = "")
 				<p>
 					<label>
 						<input type="checkbox" class="form-control form-control-lg" name="terms" id="terms" required />
-						<span class="woocommerce-terms-and-conditions-checkbox-text ml-2" style="line-height: 24px;">Li e concordo com o(s) <a href="http://polen.globo/politica-de-privacidade/" class="woocommerce-terms-and-conditions-link" target="_blank">termos e condições</a>  e com o <a href="<?= site_url('regulamento-da-promocao-video-autografo-do-livro-de-porta-em-porta'); ?>" class="woocommerce-terms-and-conditions-link" target="_blank">Regulamento da Promoção</a>.&nbsp;<span class="required">*</span></span>
+						<span class="woocommerce-terms-and-conditions-checkbox-text ml-2" style="line-height: 24px;">Li e concordo com o(s) <a href="http://polen.me/politica-de-privacidade/" class="woocommerce-terms-and-conditions-link" target="_blank">termos e condições</a> e com o <a href="<?= site_url('regulamento-da-promocao-video-autografo-do-livro-de-porta-em-porta'); ?>" class="woocommerce-terms-and-conditions-link" target="_blank">Regulamento da Promoção</a>.&nbsp;<span class="required">*</span></span>
 					</label>
 				</p>
 				<p>
-					<input type="hidden" name="security" value="<?= wp_create_nonce( Promotional_Event_Admin::NONCE_ACTION ); ?>" />
+					<input type="hidden" name="security" value="<?= wp_create_nonce(Promotional_Event_Admin::NONCE_ACTION); ?>" />
 					<input type="submit" class="btn btn-primary btn-lg btn-block" value="Pedir meu vídeo-autógrafo" />
 				</p>
 			</form>
