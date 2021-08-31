@@ -35,7 +35,7 @@ function mc_get_top_banner()
 		<div class="col-12">
 			<div class="mc-landing-banner">
 				<figure class="mc-logo">
-					<img class="image" src="<?php echo TEMPLATE_URI; ?>/assets/img/masterclass/logo-beaba-do-vinho.png" alt="Logo Beabá do Vinho" />
+					<img class="image" src="<?php echo TEMPLATE_URI; ?>/assets/img/masterclass/ronnievon-logo.png" alt="Logo Beabá do Vinho" />
 				</figure>
 				<div class="row">
 					<div class="col-12 col-md-6 m-md-auto">
@@ -43,25 +43,26 @@ function mc_get_top_banner()
 					</div>
 				</div>
 				<div class="mc-home-video mb-4">
-					<video playsinline poster="<?php echo TEMPLATE_URI; ?>/assets/img/masterclass/player-poster.png" onclick="this.play(); this.controls = true" onended="this.load(); this.controls = false">
-						<source src="https://player.vimeo.com/external/583399720.sd.mp4?s=a75cd8b15311bde2625160de949f78cc20a19cdf&profile_id=164&oauth2_token_id=1511981636" type="video/mp4">
+					<video id="mc-video" playsinline poster="<?php echo TEMPLATE_URI; ?>/assets/img/masterclass/player-poster.jpg?v=2">
+						<source src="https://player.vimeo.com/external/595532426.sd.mp4?s=ab2b9eebb3b1c17cd060ebe49d31ed2949472cea&profile_id=164" type="video/mp4">
 					</video>
 				</div>
 				<div class="row">
 					<div class="col-12 col-md-6 m-md-auto">
-						<h2 class="subtitle">Participe do grupo do Whatsapp para ter um desconto exclusivo no dia das inscrições.</h2>
+						<h2 class="subtitle">Participe do grupo de pré-inscrição no WhatsApp para ter um desconto exclusivo no primeiro dia das inscrições.</h2>
 					</div>
 				</div>
 				<div class="row mt-4">
 					<div class="col-12 col-md-6 m-md-auto">
 						<form action="" id="form-email-masterclass">
-							<?php //TODO action e nonce ?>
-							<input type="hidden" name="action" value="polen_123">
+							<?php //TODO action e nonce
+							?>
+							<input type="hidden" name="action" value="send_form_request">
 							<input type="hidden" name="page_source" value="<?= filter_input(INPUT_SERVER, 'REQUEST_URI'); ?>" />
 							<input type="hidden" name="is_mobile" value="<?= polen_is_mobile() ? "1" : "0"; ?>" />
-							<input type="hidden" name="security" value=<?php echo wp_create_nonce("mudar-123"); ?>>
-							<input type="email" name="email" class="form-control form-control-lg" placeholder="Entre com seu e-mail" required />
-							<input type="submit" value="Quero participar do grupo de Whatsapp" class="btn btn-primary btn-lg btn-block mt-4 gradient" />
+							<input type="hidden" name="security" value=<?php echo wp_create_nonce("send-form-request"); ?>>
+							<input type="email" name="email" class="form-control form-control-lg" placeholder="Digite seu e-mail" required />
+							<input type="submit" value="Quero ganhar desconto" class="btn btn-primary btn-lg btn-block mt-4 gradient" />
 						</form>
 					</div>
 				</div>
@@ -69,12 +70,29 @@ function mc_get_top_banner()
 		</div>
 	</div>
 	<script>
+		const video = document.querySelector("#mc-video");
+		const success = "<?php echo master_class_url_success(); ?>";
+
+		function addVideoListener() {
+			video.load();
+			video.addEventListener("click", playVideo);
+		}
+
+		function playVideo() {
+			video.play();
+			video.controls = true;
+			video.removeEventListener("click", playVideo);
+		}
+
+		addVideoListener();
+		video.addEventListener("ended", addVideoListener);
+
 		const formName = "form#form-email-masterclass";
 		document.querySelector(formName).addEventListener("submit", function(evt) {
 			evt.preventDefault();
-			polAjaxForm(formName, function(){
-				polMessages.message("Obrigado", "e-mail cadastrado com sucesso");
-			}, function(err){
+			polAjaxForm(formName, function() {
+				window.location.href = success;
+			}, function(err) {
 				polMessages.error(err);
 			});
 		});

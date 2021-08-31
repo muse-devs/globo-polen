@@ -130,7 +130,7 @@
 		var(--dark);
 	.mc-logo {
 		margin: auto;
-		width: 100px;
+		width: 130px;
 		height: auto;
 	}
 
@@ -151,8 +151,10 @@
 	.mc-home-video {
 		position: relative;
 		margin: auto;
-		width: 200px;
-		height: 290px;
+		width: 100%;
+		max-width: 800px;
+		height: 50vh;
+		max-height: 650px;
 		border-radius: 20px;
 		overflow: hidden;
 		-webkit-mask-image: -webkit-radial-gradient(white, black);
