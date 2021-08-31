@@ -39,6 +39,7 @@ class Polen_WC_Payment_Approved extends \WC_Email {
 		$this->description = __( 'E-mail que será enviado ao usuário quando o pagamento do pedido é aprovado.', 'polen' );
 		$this->customer_email = true;
 		$this->heading     = __( 'Pagamento Aprovado', 'polen' );
+		$this->heading_ep     = 'Vídeo-autógrafo';
 		$this->heading_talent_social = __( 'Doação recebida', 'polen' );
 
 		$this->subject     = sprintf( _x( '[%s] Pagamento Aprovado', 'E-mail que será enviado ao usuário quando o pagamento do pedido é aprovado', 'polen' ), '{blogname}' );
@@ -47,6 +48,8 @@ class Polen_WC_Payment_Approved extends \WC_Email {
 		$this->talent_social_template_html  = 'emails/Polen_WC_Payment_Approved_Talent_social.php';
 		$this->talent_template_plain = 'emails/plain/Polen_WC_Payment_Approved_Talent.php';
 		$this->social_template_html  = 'emails/Polen_WC_Payment_Approved_social.php';
+		$this->ep_template_html  = 'emails/video-autografo/Polen_WC_Payment_Approved.php';
+		$this->social_template_plain = 'emails/plain/Polen_WC_Payment_Approved_social.php';
 		$this->social_template_plain = 'emails/plain/Polen_WC_Payment_Approved_social.php';
 		$this->template_html  = 'emails/Polen_WC_Payment_Approved.php';
 		$this->template_plain = 'emails/plain/Polen_WC_Payment_Approved.php';
@@ -55,6 +58,7 @@ class Polen_WC_Payment_Approved extends \WC_Email {
 		$this->subject_talent = 'Você está a um passo de receber mais R$!';
 		$this->subject_talent_social = 'Recebemos mais uma doação para o Criança Esperança!';
 		$this->subject_social = 'Obrigado por ajudar o Criança Esperança.';
+		$this->subject_ep = 'Vídeo-autógrafo solicitado.';
     
 		add_action( 'woocommerce_order_status_changed', array( $this, 'trigger' ) );
 
@@ -76,10 +80,13 @@ class Polen_WC_Payment_Approved extends \WC_Email {
 				return;
 			}
 			$order_is_social = social_order_is_social( $this->object );
-			if( ! $order_is_social ) {
-				$this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
-			} else {
+			$order_is_ep = event_promotional_order_is_event_promotional( $this->object );
+			if( $order_is_social ) {
 				$this->send( $this->get_recipient(), $this->get_subject_social(), $this->get_content_social(), $this->get_headers(), $this->get_attachments() );
+			} elseif( $order_is_ep ) {
+				$this->send( $this->get_recipient(), $this->get_subject_ep(), $this->get_content_ep(), $this->get_headers(), $this->get_attachments() );
+			} else {
+				$this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
 			}
 
 			/**
@@ -91,6 +98,7 @@ class Polen_WC_Payment_Approved extends \WC_Email {
 			$Polen_Talent = new Polen_Talent();
 			$talent = $Polen_Talent->get_talent_from_product( $product_id );
 			$this->recipient_talent = $talent->email;
+			
 			if( ! $order_is_social ) {
 				$this->send( $this->get_recipient_talent(), $this->get_subject_talent(), $this->get_content_talent(), $this->get_headers(), $this->get_attachments() );
 			} else {
@@ -117,6 +125,11 @@ class Polen_WC_Payment_Approved extends \WC_Email {
 	public function get_subject_social()
 	{
 		return $this->subject_social;
+	}
+
+	public function get_subject_ep()
+	{
+		return $this->subject_ep;
 	}
 
 	public function get_content_talent() {
@@ -155,6 +168,12 @@ class Polen_WC_Payment_Approved extends \WC_Email {
 		return $email_content;
 	}
 
+	public function get_content_ep() {
+		$this->sending = true;
+		$email_content = $this->get_content_ep_html();
+		return $email_content;
+	}
+
     public function get_content_talent_html() {
 		return wc_get_template_html( $this->talent_template_html, array(
 			'order'         => $this->object,
@@ -177,6 +196,16 @@ class Polen_WC_Payment_Approved extends \WC_Email {
 
 	public function get_content_social_html() {
 		return wc_get_template_html( $this->social_template_html, array(
+			'order'         => $this->object,
+			'email_heading' => $this->get_heading(),
+			'sent_to_admin' => true,
+			'plain_text'    => false,
+			'email'			=> $this
+		), '', $this->template_base );
+	}
+
+	public function get_content_ep_html() {
+		return wc_get_template_html( $this->ep_template_html, array(
 			'order'         => $this->object,
 			'email_heading' => $this->get_heading(),
 			'sent_to_admin' => true,

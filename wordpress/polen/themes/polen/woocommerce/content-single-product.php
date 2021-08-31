@@ -54,10 +54,9 @@ $stock = $product->get_stock_quantity();
 <script>
 	// params
 	jQuery(document).ready(function() {
-		if(!document.querySelector("#stories")) {
-			return;
+		if(document.querySelector("#stories")) {
+			renderStories(<?php echo polen_get_videos_by_talent($Talent_Fields, true); ?>, <?php echo json_encode(get_the_title()); ?>, <?php echo json_encode(wp_get_attachment_image_src(get_post_thumbnail_id(get_the_ID()), 'polen-thumb-lg')[0]); ?>, <?php echo $social || 'null'; ?>, <?php echo $stock || 'null'; ?>)
 		}
-		renderStories(<?php echo polen_get_videos_by_talent($Talent_Fields, true); ?>, <?php echo json_encode(get_the_title()); ?>, <?php echo json_encode(wp_get_attachment_image_src(get_post_thumbnail_id(get_the_ID()), 'polen-thumb-lg')[0]); ?>, <?php echo $social; ?>, <?php echo $stock; ?>)
 	});
 </script>
 
@@ -71,7 +70,7 @@ $stock = $product->get_stock_quantity();
 
 	<!-- Tags -->
 	<div class="row">
-		<div class="col-12 col-md-6 m-md-auto d-flex align-items-center">
+		<div class="col-12<?php echo $social ? ' col-md-6 m-md-auto' : ''; ?> d-flex align-items-center">
 			<?php $social && polen_front_get_talent_stories(); ?>
 			<div>
 				<h1 class="talent-name" title="<?= get_the_title(); ?>"><?= get_the_title(); ?></h1>
@@ -90,6 +89,7 @@ $stock = $product->get_stock_quantity();
 					</h5>
 				<?php endif; ?>
 			</div>
+			<?php polen_get_share_button(); ?>
 		</div>
 		<div class="col-12 mt-3">
 			<?php $social || polen_front_get_talent_videos($Talent_Fields); ?>
@@ -151,6 +151,16 @@ $stock = $product->get_stock_quantity();
 		}
 	?>
 
+	<!-- Bio -->
+	<div class="row mt-4">
+		<div class="col-12 col-md-6 m-md-auto d-flex">
+			<p><?= $product->get_description(); ?></p>
+		</div>
+	</div>
+
+	<!-- Share -->
+	<?php polen_get_share_icons(); ?>
+
 	<!-- Doação -->
 	<?php $donate && !$social ?
 		polen_front_get_donation_box($donate_image, $donate_text) :
@@ -163,7 +173,7 @@ $stock = $product->get_stock_quantity();
 	<?php $social || polen_front_get_tutorial(); ?>
 
 	<!-- Produtos Relacionados -->
-	<?php //polen_box_related_product_by_product_id(get_the_ID());
+	<?php polen_box_related_product_by_product_id(get_the_ID());
 	?>
 
 </div>

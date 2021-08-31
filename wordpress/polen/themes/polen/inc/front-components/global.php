@@ -18,7 +18,7 @@ function polen_front_get_banner_with_carousel($social = false)
 	);
 ?>
 	<section class="top-banner mb-4">
-		<div class="owl-carousel owl-theme">
+		<div id="top-carousel" class="owl-carousel owl-theme">
 			<?php if (!$social) : ?>
 				<div class="item">
 					<div class="carrousel">
@@ -38,25 +38,6 @@ function polen_front_get_banner_with_carousel($social = false)
 					</div>
 				</div>
 			<?php endif; ?>
-			<div class="item">
-				<div class="carrousel">
-					<?php foreach ($carrousel2 as $item) : ?>
-						<figure class="image">
-							<img loading="lazy" src="<?php echo $item['mobile']; ?>" alt="Banner da home" class="mobile" />
-							<img loading="lazy" src="<?php echo $item['desktop']; ?>" alt="Banner da home" class="desktop" />
-						</figure>
-					<?php endforeach; ?>
-				</div>
-				<div class="content">
-					<h2 class="title m<?php echo $social ? 't' : 'b'; ?>-5">Aqui sua doação para o Criança Esperança vira um vídeo do seu ídolo.</h2>
-					<?php if (!$social) : ?>
-						<a href="<?php echo social_get_criesp_url(); ?>" class="banner-button-link">
-							<span class="mr-3">Doe Agora</span>
-							<?php Icon_Class::polen_icon_chevron_right(); ?>
-						</a>
-					<?php endif; ?>
-				</div>
-			</div>
 		</div>
 	</section>
 <?php
@@ -139,7 +120,7 @@ function polen_front_get_card($item, $size = "small", $social = false)
 
 ?>
 	<div class="<?= $class; ?>">
-		<div class="polen-card <?= $size; ?>">
+		<div class="polen-card <?= $size; ?>" itemscope itemtype="https://schema.org/Offer">
 			<figure class="image">
 				<?php if ($social) {
 					polen_donate_badge("Criança Esperança", true, true);
@@ -147,14 +128,14 @@ function polen_front_get_card($item, $size = "small", $social = false)
 					$donate ? polen_donate_badge("Social") : null;
 				} ?>
 				<img loading="lazy" src="<?php echo $image[0]; ?>" alt="<?= $item["name"]; ?>">
-				<div class="price text-right">
+				<div class="price text-right" itemprop="price">
 					<?php if ($social && $item['in_stock']) : ?>
 						<span class="text">DOAR</span><br />
 					<?php else : ?>
 						<?php if ($item['in_stock']) : ?><span class="mr-2"><?php Icon_Class::polen_icon_camera_video(); ?></span><?php endif; ?>
 					<?php endif; ?>
 					<?php if ($item['in_stock']) : ?>
-						<?php if (!$social) echo $item["price"] == "0" ? 'GRÁTIS' : $item['price_formatted']; ?>
+						<?php if (!$social) echo $item["price"] == "0" ? 'GRÁTIS' : wc_price( $item['price'] ); ?>
 					<?php else : ?>
 						<span>Esgotado</span>
 					<?php endif; ?>
@@ -162,7 +143,7 @@ function polen_front_get_card($item, $size = "small", $social = false)
 				<a href="<?= $item["talent_url"]; ?>" class="link"></a>
 			</figure>
 			<h4 class="title text-truncate">
-				<a href="<?= $item["talent_url"]; ?>" title="<?= $item["name"]; ?>"><?= $item["name"]; ?></a>
+				<a href="<?= $item["talent_url"]; ?>" title="<?= $item["name"]; ?>" itemprop="name"><?= $item["name"]; ?></a>
 			</h4>
 			<h5 class="category text-truncate">
 				<a href="<?= $item["category_url"]; ?>"><?= $item["category"]; ?></a>
@@ -388,14 +369,12 @@ function polen_box_image_message($image, $text)
  */
 function polen_box_related_product_by_product_id($product_id)
 {
+	$args = polen_get_array_related_products($product_id);
+	$cat_link = polen_get_url_category_by_product_id($product_id);
 ?>
 	<div class="row">
 		<div class="col-12 col-md-12">
-			<?php
-			$args = polen_get_array_related_products($product_id);
-			$cat_link = polen_get_url_category_by_product_id($product_id);
-			polen_banner_scrollable($args, "Relacionados", $cat_link);
-			?>
+			<?php polen_banner_scrollable($args, "Veja também", $cat_link); ?>
 		</div>
 	</div>
 <?php
@@ -471,6 +450,53 @@ function polen_form_add_whatsapp($order_number, $whatsapp_number = "")
 			</div>
 		</div>
 	</div>
-	<?php
+<?php
 }
 
+function polen_get_share_icons()
+{
+?>
+	<div class="share-options row mt-4 mb-4">
+		<div class="share-button col-12 text-center">
+			<button class="btn btn-outline-light btn-md" onclick="shareVideo('Compartilhado', null)"><span class="mr-2"><?php Icon_Class::polen_icon_share(); ?></span>Compartilhar</button>
+		</div>
+		<div class="share-icons col-12">
+			<div class="row">
+				<div class="col-12 text-center">
+					<span class="mr-2"><?php Icon_Class::polen_icon_share(); ?></span>Compartilhar
+				</div>
+				<div class="col-12 d-flex justify-content-center mt-3">
+					<div class="row">
+						<div class="col-4 text-center">
+							<a href="javascript:shareSocial.send(shareSocial.network.facebook);" class="share-icons__icon facebook"><?php Icon_Class::polen_icon_social("facebook"); ?></a>
+						</div>
+						<div class="col-4 text-center">
+							<a href="javascript:shareSocial.send(shareSocial.network.twitter);" class="share-icons__icon twitter"><?php Icon_Class::polen_icon_social("twitter"); ?></a>
+						</div>
+						<div class="col-4 text-center">
+							<a href="javascript:shareSocial.send(shareSocial.network.whatsapp);" class="share-icons__icon whatsapp"><?php Icon_Class::polen_icon_social("whatsapp"); ?></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		if (!navigator.share) {
+			document.querySelector('.share-icons').classList.add("show");
+		}
+	</script>
+<?php
+}
+
+function polen_get_share_button()
+{
+?>
+	<button class="share-button btn btn-outline-light btn-md" onclick="shareVideo('Compartilhado', null)"><?php Icon_Class::polen_icon_share(); ?></button>
+	<script>
+		if (navigator.share) {
+			document.querySelector('.share-button').classList.add("show");
+		}
+	</script>
+<?php
+}

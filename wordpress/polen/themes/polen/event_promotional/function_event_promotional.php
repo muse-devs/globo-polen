@@ -2,27 +2,52 @@
 
 function event_promotional_url_home()
 {
-    return site_url( Promotional_Event_Rewrite::BASE_URL . '/de-porta-em-porta' );
+    return site_url( Promotional_Event_Rewrite::BASE_URL . '/' );
 }
 
-function event_promotional_url_code_validation()
+function event_promotional_url_detail_product( $product )
 {
-    return event_promotional_url_home() . '/validar-codigo';
+    return event_promotional_url_home() . $product->get_sku();
 }
 
-function event_promotional_url_order()
+function event_promotional_url_code_validation( $product )
 {
-    return event_promotional_url_home() . '/pedido';
+    return event_promotional_url_detail_product( $product ) . '/validar-codigo';
 }
 
-function event_promotional_url_success()
+function event_promotional_url_order( $product, $cupom_code )
 {
-    return event_promotional_url_home() . '/confirmado';
+    return event_promotional_url_detail_product( $product ) . '/pedido?cupom_code=' . $cupom_code;
+}
+
+function event_promotional_url_success( $product, $order_id, $order_key )
+{
+    return event_promotional_url_detail_product( $product ) . "/confirmado?order={$order_id}&order_key={$order_key}";
 }
 
 function event_promotional_is_home()
 {
-    if( $GLOBALS[ Promotional_Event_Rewrite::QUERY_VARS_EVENT_PROMOTIONAL_IS_HOME ] == '1' ) {
+    $is_set = isset( $GLOBALS[ Promotional_Event_Rewrite::QUERY_VARS_EVENT_PROMOTIONAL_IS_HOME ] );
+    if( $is_set && $GLOBALS[ Promotional_Event_Rewrite::QUERY_VARS_EVENT_PROMOTIONAL_IS_HOME ] == '1' ) {
+        return true;
+    }
+    return false;
+}
+
+function event_promotional_is_app()
+{
+    $is_set = isset( $GLOBALS[ Promotional_Event_Rewrite::QUERY_VARS_EVENT_PROMOTIONAL_APP ] );
+    if( $is_set && $GLOBALS[ Promotional_Event_Rewrite::QUERY_VARS_EVENT_PROMOTIONAL_APP ] == '1' ) {
+        return true;
+    }
+    return false;
+}
+
+
+function event_promotional_order_is_event_promotional( $order )
+{
+    $is_ep = $order->get_meta( Promotional_Event_Admin::ORDER_METAKEY, true );
+    if( $is_ep && $is_ep == '1' ) {
         return true;
     }
     return false;
@@ -139,7 +164,7 @@ function event_promotional_get_order_flow_obj($order_number, $order_status, $ema
     $flow_3 = array(
         'completed' => array(
             'title' => 'Seu vídeo está pronto!',
-            'description' => 'Corre lá e confere <a href="'.$url_user_order.'">aqui</a>.',
+            'description' => 'Corre lá e confira seu vídeo-autógrafo.',
             'status' => 'complete',
         ),
         'cancelled' => array(

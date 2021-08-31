@@ -6,10 +6,6 @@
  */
 
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
-use Polen\Includes\Polen_Video_Info;
-use Polen\Social\Social_Rewrite;
-use Polen\Tributes\Tributes_Model;
-use Polen\Tributes\Tributes_Rewrite_Rules;
 
 /**
  * Adds custom classes to the array of body classes.
@@ -135,6 +131,19 @@ function polen_get_url_category_by_term_id( $term_id )
 
 
 /**
+ * Pegar o nome da categoria pelo WC_Product
+ * @param WC_Product
+ * @return string
+ */
+function polen_get_title_category_by_product( $product )
+{
+	$ids = $product->get_category_ids();
+	$category = _polen_get_first_category_object( $ids );
+	return $category->name;
+}
+
+
+/**
  * Pegar a URL da categoria pelo ProductID
  */
 function polen_get_url_category_by_product_id ( $product_id )
@@ -167,10 +176,20 @@ function polen_get_url_category_by_order_id ( $order_id )
 	return $cat_link;
 }
 
-
+/**
+ *
+ */
 function polen_get_url_review_page()
 {
 	return './reviews/';
+}
+
+/**
+ *
+ */
+function polen_get_url_create_review( $order_id )
+{
+	return polen_get_url_my_account() . 'create-review/' . $order_id;
 }
 
 /**
@@ -215,11 +234,17 @@ function polen_get_theme_logos() {
 	$logo_criesp_dark = TEMPLATE_URI . '/assets/img/criesp/logo-criesp.png';
 	$logo_criesp_light = TEMPLATE_URI . '/assets/img/criesp/logo-criesp-color.png';
 
+	// Masterclass
+	$logo_masterclass = TEMPLATE_URI . "/assets/img/masterclass/logo-masterclass.svg";
+
 	$html =  '<a href="' . get_site_url() . '" class="custom-logo-link" rel="home" aria-current="page">';
 
 	if(is_front_page() || social_is_in_social_app()) {
 		$html .= 	'<img width="67" height="40" src="'. $logo_dark . '" class="custom-logo" alt="Polen">';
-	} else {
+	} elseif(master_class_is_home()) {
+		$html .= 	'<img width="208" height="36" src="'. $logo_masterclass . '" class="dark" alt="Polen">';
+	}
+	 else {
 		$html .= 	'<img width="67" height="40" src="'. $logo_dark . '" class="custom-logo dark" alt="Polen">';
 		$html .= 	'<img width="67" height="40" src="'. $logo_light . '" class="custom-logo light" alt="Polen">';
 	}
@@ -231,14 +256,14 @@ function polen_get_theme_logos() {
 	}
 
 	// Provisório CRIESP
-	$html .= '<a href="' . social_get_criesp_url() . '">';
-	if(is_front_page() || social_is_in_social_app()) {
-		$html .= 	'<img width="106" height="31" src="'. $logo_criesp_dark . '" class="custom-logo custom-logo-criesp" alt="Logo Criança Esperança">';
-	} else {
-		$html .= 	'<img width="106" height="31" src="'. $logo_criesp_dark . '" class="custom-logo custom-logo-criesp dark" alt="Logo Criança Esperança">';
-		$html .= 	'<img width="106" height="31" src="'. $logo_criesp_light . '" class="custom-logo custom-logo-criesp light" alt="Logo Criança Esperança">';
-	}
-	$html .= '</a>';
+	// $html .= '<a href="' . social_get_criesp_url() . '">';
+	// if(is_front_page() || social_is_in_social_app()) {
+	// 	$html .= 	'<img width="106" height="31" src="'. $logo_criesp_dark . '" class="custom-logo custom-logo-criesp" alt="Logo Criança Esperança">';
+	// } else {
+	// 	$html .= 	'<img width="106" height="31" src="'. $logo_criesp_dark . '" class="custom-logo custom-logo-criesp dark" alt="Logo Criança Esperança">';
+	// 	$html .= 	'<img width="106" height="31" src="'. $logo_criesp_light . '" class="custom-logo custom-logo-criesp light" alt="Logo Criança Esperança">';
+	// }
+	// $html .= '</a>';
 
 	return $html;
 }
@@ -333,133 +358,25 @@ function polen_apply_polen_part_price( $full_price, $social = false )
 	}
 }
 
-function polen_zapier_thankyou($order_item_cart)
+function polen_zapier_thankyou( $order )
 {
-	if(empty($order_item_cart)) {
+	if(empty($order)) {
 		return;
 	}
+	$order_item_cart = Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
 	$product = $order_item_cart->get_product();
 	?>
 		<form id="zapier-purchase-data">
+			<input type="hidden" name="order_id" value="<?php echo $order->get_id(); ?>" />
 			<input type="hidden" name="nome" value="<?php echo $order_item_cart->get_name_to_video(); ?>" />
 			<input type="hidden" name="email" value="<?php echo $order_item_cart->get_email_to_video(); ?>" />
 			<input type="hidden" name="artista" value="<?php echo $product->get_name(); ?>" />
-			<input type="hidden" name="data_compra" value="<?php echo date("d/m/Y"); ?>" />
+			<input type="hidden" name="data_compra" value="<?php echo $order->order_date; ?>" />
+			<input type="hidden" name="data_atual" value="<?php echo date("Y-m-d H:i:s"); ?>" />
+			<input type="hidden" name="url_source" value="<?php echo site_url( $_SERVER[ 'REDIRECT_URL' ] ); ?>" />
 		</form>
 		<script>
 			polRequestZapier("#zapier-purchase-data", ZAPIERURLS.PURCHASE);
 		</script>
 	<?php
-}
-
-/**
- * Tags Open Graph
- */
-if ( ! in_array( 'all-in-one-seo-pack/all_in_one_seo_pack.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
-	add_action( 'wp_head', function() {
-		global $post;
-		global $is_video;
-		$tribute_app = get_query_var( Tributes_Rewrite_Rules::TRIBUTES_QUERY_VAR_TRUBITES_APP );
-		$social_app = get_query_var( Social_Rewrite::QUERY_VARS_SOCIAL_APP );
-
-		$video_hash = get_query_var( 'video_hash' );
-		if( !empty( $post ) && $post->post_type == 'product' ) {
-			echo "\n\n";
-			echo "\t" . '<meta property="og:title" content="' . get_the_title() . '">' . "\n";
-			echo "\t" . '<meta property="og:description" content="' . get_the_excerpt() . '">' . "\n";
-			echo "\t" . '<meta property="og:url" content="' . get_the_permalink() . '">' . "\n";
-			echo "\t" . '<meta property="og:locale" content="' . get_locale() . '">' . "\n";
-			echo "\t" . '<meta property="og:site_name" content="' . get_bloginfo( 'title' ) . '">' . "\n";
-			$thumbnail = get_the_post_thumbnail_url( get_the_ID() );
-			if( $thumbnail && ! is_null( $thumbnail ) && ! empty( $thumbnail) ) {
-				echo "\t" . '<meta property="og:image" content="' . $thumbnail . '">' . "\n";
-			} else {
-				echo "\t" . '<meta property="og:image" content="' . polen_get_custom_logo_url() . '">' . "\n";
-			}
-			echo "\n";
-		} elseif ( $is_video === true && !empty( $video_hash ) ) {
-			$video_info = Polen_Video_Info::get_by_hash( $video_hash );
-			$order = wc_get_order( $video_info->order_id );
-			$item_cart = Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
-
-			$product_id = $item_cart->get_product_id();
-			$product = wc_get_product( $product_id );
-			$title = 'Direto, Próximo, Íntimo.';//$item_cart->get_name_to_video();
-			$talent_name = $product->get_title();
-			$description = "Olha esse novo vídeo-polen de {$talent_name}.";
-			$url = site_url( 'v/' . $video_info->hash );
-			$thumbnail = $video_info->vimeo_thumbnail;
-
-			echo "\n\n";
-			echo "\t" . '<meta property="og:title" content="' . $title . '">' . "\n";
-			echo "\t" . '<meta property="og:description" content="' . $description . '">' . "\n";
-			echo "\t" . '<meta property="og:url" content="' . $url . '">' . "\n";
-			echo "\t" . '<meta property="og:locale" content="' . get_locale() . '">' . "\n";
-			echo "\t" . '<meta property="og:site_name" content="' . get_bloginfo( 'title' ) . '">' . "\n";
-			echo "\t" . '<meta property="og:image" content="' . $thumbnail . '">' . "\n";
-			// echo "\t" . '<meta property="og:type" content="video">' . "\n";
-			echo "\n";
-		} elseif( !empty( $post ) && $post->post_type == 'page' && $post->post_name == 'v' ) {
-			echo "\n\n";
-			echo "\t" . '<meta property="og:title" content="' . get_the_title() . '">' . "\n";
-			echo "\t" . '<meta property="og:description" content="' . get_the_excerpt() . '">' . "\n";
-			echo "\t" . '<meta property="og:url" content="' . get_the_permalink() . '?' . $_SERVER['QUERY_STRING'] . '">' . "\n";
-			echo "\t" . '<meta property="og:locale" content="' . get_locale() . '">' . "\n";
-			echo "\t" . '<meta property="og:site_name" content="' . get_bloginfo( 'title' ) . '">' . "\n";
-			echo "\t" . '<meta property="og:video" content="' . get_the_permalink() . '?' . $_SERVER['QUERY_STRING'] . '">' . "\n";
-			$thumbnail = get_the_post_thumbnail_url( get_the_ID() );
-			if( $thumbnail && ! is_null( $thumbnail ) && ! empty( $thumbnail) ) {
-				echo "\t" . '<meta property="og:image" content="' . $thumbnail . '">' . "\n";
-			} else {
-				echo "\t" . '<meta property="og:image" content="' . polen_get_custom_logo_url() . '">' . "\n";
-			}
-			echo "\n";
-		} elseif( !empty( $tribute_app ) && $tribute_app == '1' ) {
-			$tribute_operation = get_query_var( Tributes_Rewrite_Rules::TRIBUTES_QUERY_VAR_TRIBUTES_OPERAION );
-			if( $tribute_operation == Tributes_Rewrite_Rules::TRIBUTES_OPERATION_VIDEOPLAY ) {
-				$slug_tribute = get_query_var( Tributes_Rewrite_Rules::TRIBUTES_QUERY_VAR_TRIBUTES_VIDEOPLAY );
-				$tribute = Tributes_Model::get_by_slug( $slug_tribute );
-				echo "\n\n";
-				echo "\t" . '<meta property="og:title" content="Colab">' . "\n";
-				echo "\t" . '<meta property="og:description" content="' . $tribute->welcome_message . '">' . "\n";
-				echo "\t" . '<meta property="og:url" content="' . tribute_get_url_final_video( $slug_tribute ) . '">' . "\n";
-				echo "\t" . '<meta property="og:locale" content="' . get_locale() . '">' . "\n";
-				echo "\t" . '<meta property="og:site_name" content="Colab">' . "\n";
-				echo "\t" . '<meta property="og:video" content="' . $tribute->vimeo_link . '">' . "\n";
-				echo "\t" . '<meta property="og:image" content="' . $tribute->vimeo_thumbnail . '">' . "\n";
-				echo "\n";
-			} else {
-				echo "\n\n";
-				echo "\t" . '<meta property="og:title" content="Colab">' . "\n";
-				echo "\t" . '<meta property="og:type" content="Colab">' . "\n";
-				echo "\t" . '<meta property="og:description" content="O Colab te ajuda a criar um vídeo-presente em grupo para você emocionar quem você ama!">' . "\n";
-				echo "\t" . '<meta property="og:url" content="' . tribute_get_url_base_url() . '">' . "\n";
-				echo "\t" . '<meta property="og:locale" content="' . get_locale() . '">' . "\n";
-				echo "\t" . '<meta property="og:site_name" content="Colab">' . "\n";
-				echo "\t" . '<meta property="og:image" content="' . TEMPLATE_URI . '/tributes/assets/img/logo-to-share.png">' . "\n";
-				echo "\n";
-			}
-		} elseif ( !empty( $social_app ) && $social_app == '1' ) {
-			$image = social_get_image_by_category( social_get_category_base() );
-			echo "\n\n";
-			echo "\t" . '<meta property="og:title" content="' . get_bloginfo( 'title' ) . '">' . "\n";
-			echo "\t" . '<meta property="og:type" content="site">' . "\n";
-			echo "\t" . '<meta property="og:description" content="' . get_bloginfo( 'description' ) . '">' . "\n";
-			echo "\t" . '<meta property="og:url" content="' . site_url( 'social/crianca-esperanca' ) . '">' . "\n";
-			echo "\t" . '<meta property="og:image" content="'.$image.'">' . "\n";
-			echo "\t" . '<meta property="og:locale" content="' . get_locale() . '">' . "\n";
-			echo "\t" . '<meta property="og:site_name" content="' . get_bloginfo( 'title' ) . '">' . "\n";
-			echo "\n";
-		} else {
-			echo "\n\n";
-			echo "\t" . '<meta property="og:title" content="' . get_bloginfo( 'title' ) . '">' . "\n";
-			echo "\t" . '<meta property="og:type" content="site">' . "\n";
-			echo "\t" . '<meta property="og:description" content="' . get_bloginfo( 'description' ) . '">' . "\n";
-			echo "\t" . '<meta property="og:url" content="' . get_bloginfo( 'url' ) . '">' . "\n";
-			echo "\t" . '<meta property="og:image" content="https://polen.me/polen/uploads/2021/06/cropped-logo.png">' . "\n";
-			echo "\t" . '<meta property="og:locale" content="' . get_locale() . '">' . "\n";
-			echo "\t" . '<meta property="og:site_name" content="' . get_bloginfo( 'title' ) . '">' . "\n";
-			echo "\n";
-		}
-	} );
 }

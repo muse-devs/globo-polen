@@ -74,8 +74,8 @@ function polen_get_new_talents( int $quantity = 4 )
     $args = [
         'numberposts' => $quantity,
         'post_status' => 'publish',
-        'order' => 'date_created',
-        'orderby' => 'DESC'
+        // 'order' => 'menu_order',
+        'orderby' => 'menu_order',
     ];
     $talents = _polen_get_info_talents_by_args( $args );
     return $talents;
@@ -184,8 +184,8 @@ function polen_get_array_related_products( $product_id )
             $args = array();
             foreach ($others as $k => $id) {
                 if (!in_array($id, $arr_obj)) {
-                    if (count($arr_obj) > 5) {
-                        exit;
+                    if (count($arr_obj) > 6) {
+                        return;
                     }
                     $product = wc_get_product($id);
                     $arr_obj[] = $id;
@@ -196,7 +196,8 @@ function polen_get_array_related_products( $product_id )
                         "name" => $product->get_title(),
                         "price" => $product->get_regular_price(),
                         "category_url" => $cat_link,
-                        "category" => wc_get_product_category_list($id)
+                        "category" => wc_get_product_category_list($id),
+                        "in_stock" => $product->is_in_stock(),
                     );
                 }
             }
