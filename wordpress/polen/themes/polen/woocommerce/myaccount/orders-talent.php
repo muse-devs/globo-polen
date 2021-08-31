@@ -69,7 +69,7 @@ if( ! $talent_is_social ) {
 											<div class="row mt-2">
 												<div class="col-12">
 													<p class="p">Ocasião</p>
-													<p class="value small">Vídeo-autógrafo De porta em porta</p>
+													<p class="value small">Vídeo-autógrafo</p>
 												</div>
 											</div>
 										<?php
