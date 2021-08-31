@@ -15,7 +15,7 @@ get_header();
 	<div class="row">
 		<div class="col-12 col-md-8 m-md-auto">
 			<?php
-			
+
 			$product = $GLOBALS[ Promotional_Event_Rewrite::GLOBAL_KEY_PRODUCT_OBJECT ];
 			$product_id = $product->get_id();
 
@@ -26,8 +26,8 @@ get_header();
 
 			// global $Polen_Plugin_Settings;
 			// $product_id = $Polen_Plugin_Settings[ 'promotional-event-text' ];
-			
-			
+
+
 			$Polen_Talent = new Polen_Talent();
 			$talent = $Polen_Talent->get_talent_from_product( $product_id );
 			$Talent_Fields = new Polen_Update_Fields();

@@ -127,11 +127,11 @@ function va_partners_footer()
 
 function va_get_banner_book(
 	$small = false,
-	$title = "De Porta em Porta",
-	$img_bg = TEMPLATE_URI . "/assets/img/video-autografo/bg_lh_right.png",
-	$img_book = TEMPLATE_URI . "/assets/img/video-autografo/book_cover.png"
+	$product,
+	$img_bg = TEMPLATE_URI . "/assets/img/video-autografo/bg_lh_right.png"
 	)
 {
+	$img_book = wp_get_attachment_image_src( $product->get_image_id() )[ 0 ];
 ?>
 	<div class="row mb-3">
 		<div class="col-12">
@@ -141,7 +141,7 @@ function va_get_banner_book(
 				</div>
 				<div class="content<?php echo $small ? '' : ' pb-2'; ?>">
 					<img src="<?php echo $img_book; ?>" alt="Capa do Livro" class="book-cover" />
-					<h1 class="title"><?php echo $small ? 'Livro - ' : ''; ?><?php echo $title; ?></h1>
+					<h1 class="title"><?php echo $small ? 'Livro - ' : ''; ?><?php echo $product->get_title(); ?></h1>
 				</div>
 			</div>
 		</div>
