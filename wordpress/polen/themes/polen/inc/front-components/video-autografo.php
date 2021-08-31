@@ -67,7 +67,7 @@ function va_magalu_box_thank_you()
 <?php
 }
 
-function va_magalu_box_cart()
+function va_magalu_box_cart( $product )
 {
 ?>
 	<div class="row mb-4">
@@ -75,7 +75,7 @@ function va_magalu_box_cart()
 			<div class="magalu-box">
 				<div class="header-box text-center py-4 px-5">
 					<?php /*<img src="<?php echo TEMPLATE_URI . '/assets/img/video-autografo/lu.png'; ?>" alt="Lu"></img>*/ ?>
-					<h3 style="line-height:20px;">Para receber seu vídeo-autógrafo personalizado do Luciano Huck, você precisa:</h3>
+					<h3 style="line-height:20px;">Para receber seu vídeo-autógrafo personalizado do utor, você precisa:</h3>
 				</div>
 				<div class="content-box mt-3 px-2">
 					<div class="row">
@@ -132,7 +132,6 @@ function va_get_banner_book(
 	$img_book = TEMPLATE_URI . "/assets/img/video-autografo/book_cover.png"
 	)
 {
-
 ?>
 	<div class="row mb-3">
 		<div class="col-12">
@@ -150,7 +149,7 @@ function va_get_banner_book(
 <?php
 }
 
-function va_get_book_infos()
+function va_get_book_infos( $product )
 {
 ?>
 	<div class="row mb-4">
@@ -159,10 +158,10 @@ function va_get_book_infos()
 				<div class="row">
 					<div class="col-12">
 						<h4 class="title">Sobre o Livro</h4>
-						<p>Em seu novo livro, Luciano Huck compila memórias pessoais, aprendizados e conversas com representantes de várias áreas do conhecimento para trazer luz ao debate sobre a responsabilidade individual para a construção de uma sociedade mais igualitária.<br />
+						<p>Em seu novo livro, O Autor compila memórias pessoais, aprendizados e conversas com representantes de várias áreas do conhecimento para trazer luz ao debate sobre a responsabilidade individual para a construção de uma sociedade mais igualitária.<br />
 							<a href="javascript:showMoreText()" class="link-more-text show">Mostrar mais</a>
 						</p>
-						<p class="more-text">De porta em porta reúne as contribuições de figuras como Yuval Noah Harari, Esther Duflo, Michael Sandel e Anne Applebaum, além de memórias muito pessoais de Huck e relatos de encontros com brasileiros anônimos, mas cheios de histórias para contar.</p>
+						<p class="more-text"><?= $product->get_title(); ?> reúne as contribuições de figuras como Yuval Noah Harari, Esther Duflo, Michael Sandel e Anne Applebaum, além de memórias muito pessoais de Huck e relatos de encontros com brasileiros anônimos, mas cheios de histórias para contar.</p>
 					</div>
 				</div>
 				<div class="row mb-4">
@@ -242,13 +241,13 @@ function va_ctas($link = "#", $link_magalu = "#")
 <?php
 }
 
-function va_what_is()
+function va_what_is( $product )
 {
 ?>
 	<div class="row va-what-is">
 		<div class="col-12 text-center">
 			<h3 class="title"><span class="ico mr-2"><?php Icon_Class::polen_icon_camera_video(); ?></span>O que é o Vídeo-autógrafo</h3>
-			<p>O vídeo-autógrafo é uma nova maneira de conectar e criar novas experiências digitais entre leitores e seus autores favoritos. Ao adquirir uma cópia do livro De Porta em Porta na Magalu, você pode ganhar um vídeo exclusivo e personalizado gravado pelo Luciano Huck.</p>
+			<p>O vídeo-autógrafo é uma nova maneira de conectar e criar novas experiências digitais entre leitores e seus autores favoritos. Ao adquirir uma cópia do livro <?= $product->get_title(); ?> na Magalu, você pode ganhar um vídeo exclusivo e personalizado gravado pelo Autor.</p>
 		</div>
 	</div>
 <?php
@@ -295,7 +294,7 @@ function va_front_get_talent_videos($talent, $product_id = 15)
 <?php
 }
 
-function va_cart_form($coupon = "")
+function va_cart_form( $product, $coupon = "")
 {
 ?>
 	<div class="row mb-3">
@@ -313,6 +312,7 @@ function va_cart_form($coupon = "")
 			<form id="va-cart-form">
 				<input type="hidden" name="action" value="create_orders_video_autograph" />
 				<input type="hidden" name="coupon" value="<?php echo $coupon; ?>" />
+				<input type="hidden" name="product" value="<?php echo $product->get_sku(); ?>" />
 				<p>
 					<label for="" class="lg">Nome</label>
 					<input type="text" name="name" class="form-control form-control-lg" placeholder="Para quem é esse vídeo-autógrafo?" required />
@@ -361,7 +361,7 @@ function va_cart_form($coupon = "")
 <?php
 }
 
-function va_coupon()
+function va_coupon( $product )
 {
 ?>
 	<div class="row mb-3">
@@ -369,7 +369,9 @@ function va_coupon()
 			<h1 class="title mb-3">Inserir código</h1>
 			<form id="va-check-code">
 				<input type="hidden" name="action" value="check_coupon" />
-				<input type="hidden" name="security" value=<?php echo wp_create_nonce('check-coupon'); ?>>
+				<input type="hidden" name="product" value="<?= $product->get_sku(); ?>" />
+				<?php wp_nonce_field( 'check-coupon', 'security', true ); ?>
+				<!-- <input type="hidden" name="security" value=<?php echo wp_create_nonce('check-coupon'); ?>> -->
 				<input type="text" name="coupon" class="form-control form-control-lg mb-2" placeholder="Inserir código fornecido pela Magalu" required />
 				<input type="submit" class="btn btn-primary btn-lg btn-block" value="Checar" />
 			</form>

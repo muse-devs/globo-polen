@@ -185,7 +185,7 @@ if (
 		<meta name="title" content="<?php echo $headers['title']; ?>">
 		<meta name="description" content="<?php echo $headers['description']; ?>">
 		<meta name="keywords" content="<?php echo $headers['keywords']; ?>">
-		<meta name="author" content="<?php echo $headers['author']; ?>">
+		<meta name="author" content="<?php echo isset( $headers['author'] ) ? $headers['author'] : ''; ?>">
 
 		<meta property="og:title" content="<?php echo $headers['title']; ?>">
 		<meta property="og:description" content="<?php echo $headers['description']; ?>">

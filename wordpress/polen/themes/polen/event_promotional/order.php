@@ -16,7 +16,7 @@ if( empty( $cupom_code) ) {
 	wp_safe_redirect( event_promotional_url_code_validation() );
 	exit;
 }
-
+$product = $GLOBALS[ Promotional_Event_Rewrite::GLOBAL_KEY_PRODUCT_OBJECT ];
 get_header();
 $coupon = $cupom_code;
 ?>
@@ -26,8 +26,8 @@ $coupon = $cupom_code;
 	<div class="row">
 		<div class="col-12 col-md-8 m-md-auto">
 			<?php
-			va_get_banner_book(true);
-			va_cart_form($coupon);
+			va_get_banner_book( $product, true );
+			va_cart_form( $product, $coupon );
 			?>
 		</div>
 	</div>
