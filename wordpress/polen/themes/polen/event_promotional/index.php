@@ -20,7 +20,8 @@ get_header();
 			$product_id = $product->get_id();
 
 			va_get_banner_book( $product );
-			va_ctas(event_promotional_url_code_validation( $product ), event_get_magalu_url() );
+			$url_to_buy = $product->get_meta( '_promotional_event_link_buy', true );
+			va_ctas(event_promotional_url_code_validation( $product ), $url_to_buy );
 			va_what_is( $product );
 			va_get_book_infos( $product, 4.2 );
 

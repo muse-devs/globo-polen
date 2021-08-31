@@ -1,7 +1,8 @@
 <?php
 
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
-use Polen\Includes\Debug;
+
+$product = $GLOBALS[ Promotional_Event_Rewrite::GLOBAL_KEY_PRODUCT_OBJECT ];
 
 session_start();
 $order_id  = filter_input( INPUT_GET, 'order', FILTER_SANITIZE_STRING );
@@ -35,7 +36,7 @@ get_header();
 
 				event_promotional_get_order_flow_layout($order_array, $order_number );
 
-                va_partners_footer();
+                va_partners_footer( $product );
 			?>
 		</div>
 	</div>

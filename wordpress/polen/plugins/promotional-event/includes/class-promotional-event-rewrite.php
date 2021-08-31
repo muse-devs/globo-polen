@@ -170,4 +170,9 @@ class Promotional_Event_Rewrite
         return false;
     }
 
+    public function get_current_product()
+    {
+        return $GLOBALS[ self::GLOBAL_KEY_PRODUCT_OBJECT ];
+    }
+
 }
