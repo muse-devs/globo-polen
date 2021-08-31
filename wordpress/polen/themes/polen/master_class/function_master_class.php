@@ -29,5 +29,11 @@ function master_class_is_app()
 	if( $is_set && $GLOBALS[ Master_Class_Rewrite::QUERY_VARS_MASTER_CLASS_IS_HOME ] == '1' ) {
 		return true;
 	}
+
+	$is_sucess = isset( $GLOBALS[ Master_Class_Rewrite::QUERY_VARS_MASTER_CLASS_SUCCESS ] );
+	if( $is_sucess && $GLOBALS[ Master_Class_Rewrite::QUERY_VARS_MASTER_CLASS_SUCCESS ] == '1' ) {
+		return true;
+	}
+
 	return false;
 }

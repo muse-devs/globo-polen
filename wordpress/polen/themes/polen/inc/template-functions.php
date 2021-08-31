@@ -241,7 +241,7 @@ function polen_get_theme_logos() {
 
 	if(is_front_page() || social_is_in_social_app()) {
 		$html .= 	'<img width="67" height="40" src="'. $logo_dark . '" class="custom-logo" alt="Polen">';
-	} elseif(master_class_is_home()) {
+	} elseif(master_class_is_app()) {
 		$html .= 	'<img width="208" height="36" src="'. $logo_masterclass . '" class="dark" alt="Polen">';
 	}
 	 else {
