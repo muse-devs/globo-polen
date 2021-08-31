@@ -74,8 +74,8 @@ function polen_get_new_talents( int $quantity = 4 )
     $args = [
         'numberposts' => $quantity,
         'post_status' => 'publish',
-        'order' => 'date_created',
-        'orderby' => 'DESC'
+        // 'order' => 'menu_order',
+        'orderby' => 'menu_order',
     ];
     $talents = _polen_get_info_talents_by_args( $args );
     return $talents;
