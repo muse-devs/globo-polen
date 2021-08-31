@@ -177,7 +177,7 @@ function polen_get_url_category_by_order_id ( $order_id )
 }
 
 /**
- * 
+ *
  */
 function polen_get_url_review_page()
 {
@@ -185,7 +185,7 @@ function polen_get_url_review_page()
 }
 
 /**
- * 
+ *
  */
 function polen_get_url_create_review( $order_id )
 {
@@ -234,11 +234,17 @@ function polen_get_theme_logos() {
 	$logo_criesp_dark = TEMPLATE_URI . '/assets/img/criesp/logo-criesp.png';
 	$logo_criesp_light = TEMPLATE_URI . '/assets/img/criesp/logo-criesp-color.png';
 
+	// Masterclass
+	$logo_masterclass = TEMPLATE_URI . "/assets/img/masterclass/logo-masterclass.svg";
+
 	$html =  '<a href="' . get_site_url() . '" class="custom-logo-link" rel="home" aria-current="page">';
 
 	if(is_front_page() || social_is_in_social_app()) {
 		$html .= 	'<img width="67" height="40" src="'. $logo_dark . '" class="custom-logo" alt="Polen">';
-	} else {
+	} elseif(master_class_is_home()) {
+		$html .= 	'<img width="208" height="36" src="'. $logo_masterclass . '" class="dark" alt="Polen">';
+	}
+	 else {
 		$html .= 	'<img width="67" height="40" src="'. $logo_dark . '" class="custom-logo dark" alt="Polen">';
 		$html .= 	'<img width="67" height="40" src="'. $logo_light . '" class="custom-logo light" alt="Polen">';
 	}

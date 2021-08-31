@@ -19,7 +19,7 @@ get_header();
 		<div class="col-12">
 			<div id="product-carousel" class="owl-carousel owl-theme">
 				<div class="item">
-					<?php mc_get_home_banner(event_promotional_url_home()); ?>
+					<?php mc_get_home_banner(master_class_url_home()); ?>
 				</div>
 				<div class="item">
 					<?php va_get_home_banner_de_porta_em_porta(event_promotional_url_home()); ?>
