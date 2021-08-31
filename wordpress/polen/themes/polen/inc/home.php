@@ -19,28 +19,23 @@ get_header();
 		<div class="col-12">
 			<div id="product-carousel" class="owl-carousel owl-theme">
 				<div class="item">
-					<?php 
-						$title = "Rebeldes têm asas";
-						$subtitle = "Agora você pode comprar o livro e " ."<br>". "ter um autógrafo em vídeo do Rony Meisler.";
-						$bg = array(
-							"mobile" => TEMPLATE_URI . "/assets/img/video-autografo/rebeldes-banner-book-mobile.png",
-							"desktop" => TEMPLATE_URI . "/assets/img/video-autografo/rebeldes-banner-book-desktop.png"
-						);
-						va_get_home_banner(event_promotional_url_home(), $title, $subtitle, $bg['desktop'], $bg['mobile']); 
-					?>
-				</div>
-				<div class="item">
 					<?php mc_get_home_banner(event_promotional_url_home()); ?>
 				</div>
 				<div class="item">
-					<?php 
-						$title = "De Porta em Porta";
-						$subtitle = "Agora você pode comprar o livro" ."<br>". "e ter um autógrafo em vídeo do Luciano Huck.";
-						$bg = array(
-							"mobile" => TEMPLATE_URI . "/assets/img/video-autografo/va-banner-mobile.png",
-							"desktop" => TEMPLATE_URI . "/assets/img/video-autografo/va-banner-desktop.png"
-						);
-						va_get_home_banner(event_promotional_url_home(), $title, $subtitle, $bg['desktop'], $bg['mobile']); 
+					<?php va_get_home_banner_de_porta_em_porta(event_promotional_url_home()); ?>
+				</div>
+				<div class="item">
+					<?php
+					//TODO link da landpage
+					va_get_home_banner(
+						"Rebeldes têm asas",
+						"Agora você pode comprar o livro e ter um autógrafo em vídeo do Rony Meisler.",
+						"#link",
+						array(
+							"mobile" => TEMPLATE_URI . '/assets/img/video-autografo/rta-banner-home-mobile.jpeg',
+							"desktop" => TEMPLATE_URI . '/assets/img/video-autografo/rta-banner-home-desktop.jpeg',
+						)
+					);
 					?>
 				</div>
 			</div>
@@ -52,7 +47,8 @@ get_header();
 	<?php polen_front_get_news(polen_get_talents(12), "Todos os talentos", polen_get_all_talents_url());
 	?>
 
-	<?php //polen_front_get_suggestion_box(); ?>
+	<?php //polen_front_get_suggestion_box();
+	?>
 
 </main><!-- #main -->
 

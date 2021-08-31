@@ -2,22 +2,27 @@
 
 function event_promotional_url_home()
 {
-    return site_url( Promotional_Event_Rewrite::BASE_URL . '/de-porta-em-porta' );
+    return site_url( Promotional_Event_Rewrite::BASE_URL . '/' );
 }
 
-function event_promotional_url_code_validation()
+function event_promotional_url_detail_product( $product )
 {
-    return event_promotional_url_home() . '/validar-codigo';
+    return event_promotional_url_home() . $product->get_sku();
 }
 
-function event_promotional_url_order( $cupom_code )
+function event_promotional_url_code_validation( $product )
 {
-    return event_promotional_url_home() . '/pedido?cupom_code=' . $cupom_code;
+    return event_promotional_url_detail_product( $product ) . '/validar-codigo';
 }
 
-function event_promotional_url_success( $order_id, $order_key )
+function event_promotional_url_order( $product, $cupom_code )
 {
-    return event_promotional_url_home() . "/confirmado?order={$order_id}&order_key={$order_key}";
+    return event_promotional_url_detail_product( $product ) . '/pedido?cupom_code=' . $cupom_code;
+}
+
+function event_promotional_url_success( $product, $order_id, $order_key )
+{
+    return event_promotional_url_detail_product( $product ) . "/confirmado?order={$order_id}&order_key={$order_key}";
 }
 
 function event_promotional_is_home()
