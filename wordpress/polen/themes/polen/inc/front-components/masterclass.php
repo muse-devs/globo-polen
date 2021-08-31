@@ -91,11 +91,6 @@ function mc_get_top_banner()
 		document.querySelector(formName).addEventListener("submit", function(evt) {
 			evt.preventDefault();
 			polAjaxForm(formName, function() {
-				setSessionMessage(
-					CONSTANTS.SUCCESS,
-					"Obrigado!",
-					"e-mail cadastrado com sucesso"
-				)
 				window.location.href = success;
 			}, function(err) {
 				polMessages.error(err);
