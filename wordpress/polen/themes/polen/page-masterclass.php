@@ -16,7 +16,7 @@ get_header();
 ?>
 
 <main id="primary" class="site-main">
-
+    <?php mc_get_top_banner(); ?>
 	<div class="row">
 		<div class="col-12 col-md-8 m-md-auto mc-content">
             <div class="row">
