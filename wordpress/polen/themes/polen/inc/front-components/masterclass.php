@@ -71,6 +71,7 @@ function mc_get_top_banner()
 	</div>
 	<script>
 		const video = document.querySelector("#mc-video");
+		const success = "<?php echo master_class_url_success(); ?>";
 
 		function addVideoListener() {
 			video.load();
@@ -90,7 +91,12 @@ function mc_get_top_banner()
 		document.querySelector(formName).addEventListener("submit", function(evt) {
 			evt.preventDefault();
 			polAjaxForm(formName, function() {
-				polMessages.message("Obrigado", "e-mail cadastrado com sucesso");
+				setSessionMessage(
+					CONSTANTS.SUCCESS,
+					"Obrigado!",
+					"e-mail cadastrado com sucesso"
+				)
+				window.location.href = success;
 			}, function(err) {
 				polMessages.error(err);
 			});
