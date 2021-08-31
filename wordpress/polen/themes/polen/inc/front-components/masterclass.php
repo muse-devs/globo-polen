@@ -43,13 +43,13 @@ function mc_get_top_banner()
 					</div>
 				</div>
 				<div class="mc-home-video mb-4">
-					<video id="mc-video" playsinline poster="<?php echo TEMPLATE_URI; ?>/assets/img/masterclass/player-poster.png">
+					<video id="mc-video" playsinline poster="<?php echo TEMPLATE_URI; ?>/assets/img/masterclass/player-poster.jpg">
 						<source src="https://player.vimeo.com/external/595532426.sd.mp4?s=ab2b9eebb3b1c17cd060ebe49d31ed2949472cea&profile_id=164" type="video/mp4">
 					</video>
 				</div>
 				<div class="row">
 					<div class="col-12 col-md-6 m-md-auto">
-						<h2 class="subtitle">Participe do grupo do Whatsapp para ter um desconto exclusivo no dia das inscrições.</h2>
+						<h2 class="subtitle">Participe do grupo de pré-inscrição no WhatsApp para ter um desconto exclusivo no primeiro dia das inscrições.</h2>
 					</div>
 				</div>
 				<div class="row mt-4">
@@ -61,8 +61,8 @@ function mc_get_top_banner()
 							<input type="hidden" name="page_source" value="<?= filter_input(INPUT_SERVER, 'REQUEST_URI'); ?>" />
 							<input type="hidden" name="is_mobile" value="<?= polen_is_mobile() ? "1" : "0"; ?>" />
 							<input type="hidden" name="security" value=<?php echo wp_create_nonce("send-form-request"); ?>>
-							<input type="email" name="email" class="form-control form-control-lg" placeholder="Entre com seu e-mail" required />
-							<input type="submit" value="Quero participar do grupo de Whatsapp" class="btn btn-primary btn-lg btn-block mt-4 gradient" />
+							<input type="email" name="email" class="form-control form-control-lg" placeholder="Digite seu e-mail" required />
+							<input type="submit" value="Quero ganhar desconto" class="btn btn-primary btn-lg btn-block mt-4 gradient" />
 						</form>
 					</div>
 				</div>
