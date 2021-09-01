@@ -2,6 +2,8 @@
 
 namespace Polen\Includes;
 
+use Polen\Includes\Cart\Polen_Cart_Item_Factory;
+
 if( ! defined( 'ABSPATH') ) {
     die( 'Silence is golden.' );
 }
@@ -48,12 +50,13 @@ class Polen_WC_Payment_Approved extends \WC_Email {
 		$this->talent_social_template_html  = 'emails/Polen_WC_Payment_Approved_Talent_social.php';
 		$this->talent_template_plain = 'emails/plain/Polen_WC_Payment_Approved_Talent.php';
 		$this->social_template_html  = 'emails/Polen_WC_Payment_Approved_social.php';
-		$this->ep_template_html  = 'emails/video-autografo/Polen_WC_Payment_Approved.php';
 		$this->social_template_plain = 'emails/plain/Polen_WC_Payment_Approved_social.php';
 		$this->social_template_plain = 'emails/plain/Polen_WC_Payment_Approved_social.php';
 		$this->template_html  = 'emails/Polen_WC_Payment_Approved.php';
 		$this->template_plain = 'emails/plain/Polen_WC_Payment_Approved.php';
 		$this->template_base  = TEMPLATEPATH . 'woocommerce/';
+
+		$this->ep_template_html  = 'emails/video-autografo/%s/Polen_WC_Payment_Approved.php';
 
 		$this->subject_talent = 'Você está a um passo de receber mais R$!';
 		$this->subject_talent_social = 'Recebemos mais uma doação para o Criança Esperança!';
@@ -79,6 +82,9 @@ class Polen_WC_Payment_Approved extends \WC_Email {
 			if ( ! $this->is_enabled() || ! $this->get_recipient() ) {
 				return;
 			}
+			$cart_item = Polen_Cart_Item_Factory::polen_cart_item_from_order( $this->object );
+			$this->product = $cart_item->get_product();
+			
 			$order_is_social = social_order_is_social( $this->object );
 			$order_is_ep = event_promotional_order_is_event_promotional( $this->object );
 			if( $order_is_social ) {
@@ -205,7 +211,7 @@ class Polen_WC_Payment_Approved extends \WC_Email {
 	}
 
 	public function get_content_ep_html() {
-		return wc_get_template_html( $this->ep_template_html, array(
+		return wc_get_template_html( sprintf( $this->ep_template_html, $this->product->get_sku() ), array(
 			'order'         => $this->object,
 			'email_heading' => $this->get_heading(),
 			'sent_to_admin' => true,

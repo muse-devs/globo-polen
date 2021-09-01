@@ -18,10 +18,10 @@
 	.content {
 		position: relative;
 		margin: auto;
-		max-width: 200px;
+		max-width: 150px;
 		text-align: center;
 		.title {
-			margin: -15px 0 0;
+			margin: 10px 0 0;
 			font-size: 20px;
 			font-weight: 700;
 			color: var(--light);
@@ -123,10 +123,10 @@ p.more-text, .link-more-text {
 		object-position: 0 0;
 	}
     .desktop-img {
-        display: none;
+        display: none !important;
     }
     .mobile-img {
-        display: block;
+        display: block !important;
     }
 	.content {
 		position: absolute;
@@ -156,10 +156,10 @@ p.more-text, .link-more-text {
 	@include media-breakpoint-up(md) {
 		height: 350px;
         .desktop-img {
-            display: block;
+            display: block !important;
         }
         .mobile-img {
-            display: none;
+            display: none !important;
         }
 		.content {
 			padding: 0px 0 0 35px;

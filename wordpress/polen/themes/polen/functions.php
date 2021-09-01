@@ -229,8 +229,7 @@ function polen_scripts() {
 
 	wp_enqueue_style('polen-custom-styles', TEMPLATE_URI . '/assets/css/style.css', array(), filemtime(TEMPLATE_DIR . '/assets/css/style.css'));
 
-	//TODO - Colocar função para identificar video-autografo
-	if((is_singular() && is_product()) || event_promotional_is_home()) {
+	if((is_singular() && is_product()) || event_promotional_is_detail_product()) {
 		// wp_enqueue_script( 'slick-slider', TEMPLATE_URI . '/assets/slick/slick.min.js', array("jquery"), '', true );
 		wp_enqueue_script( 'vimeo');
 		wp_enqueue_script( 'talent-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'talent.js', array("vimeo", "zuck"), _S_VERSION, true );
@@ -315,6 +314,13 @@ require_once TEMPLATE_DIR . '/tributes/tributes_functions.php';
 require_once TEMPLATE_DIR . '/social/social_function.php';
 
 require_once TEMPLATE_DIR . '/event_promotional/function_event_promotional.php';
+
+/**
+* Funções para master-class
+*/
+// flush_rewrite_rules();
+require_once TEMPLATE_DIR . '/master_class/function_master_class.php';
+
 
 add_action('wc_gateway_stripe_process_response', function($response, $order) {
 	// $response

@@ -2,6 +2,8 @@
 
 namespace Polen\Includes;
 
+use Polen\Includes\Cart\Polen_Cart_Item_Factory;
+
 if( ! defined( 'ABSPATH') ) {
     die( 'Silence is golden.' );
 }
@@ -22,12 +24,12 @@ class Polen_WC_Talent_Accepted extends \WC_Email {
 		$this->heading     = __( 'Luciano aceitou', 'polen' );
 
 		$this->subject     = sprintf( _x( '[%s] O talento aceitou', 'E-mail que será enviado ao usuário quando o talento aceitar o pedido.', 'polen' ), '{blogname}' );
-		$this->subject_ep  = 'Luciano aceitou seu pedido e logo fará seu vídeo-autógrafo' ;
+		$this->subject_ep  = '%s aceitou seu pedido e logo fará seu vídeo-autógrafo' ;
     
 		$this->template_html  = 'emails/Polen_WC_Talent_Accepted.php';
 		$this->template_plain = 'emails/plain/Polen_WC_Talent_Accepted.php';
 
-		$this->template_ep_html  = 'emails/video-autografo/Polen_WC_Talent_Accepted.php';
+		$this->template_ep_html  = 'emails/video-autografo/%s/Polen_WC_Talent_Accepted.php';
 
 		$this->template_base  = TEMPLATEPATH . 'woocommerce/';
     
@@ -50,17 +52,27 @@ class Polen_WC_Talent_Accepted extends \WC_Email {
 			if ( ! $this->is_enabled() || ! $this->get_recipient() ) {
 				return;
 			}
+			
+			$cart_item = Polen_Cart_Item_Factory::polen_cart_item_from_order( $this->object );
+			$this->product = $cart_item->get_product();
+
 			$order_is_ep = event_promotional_order_is_event_promotional( $this->object );
 			if( $order_is_ep ) {
-				$this->send( $this->get_recipient(), $this->subject_ep, $this->get_content_ep_html(), $this->get_headers(), $this->get_attachments() );
+				$this->send( $this->get_recipient(), $this->get_subject_ep(), $this->get_content_ep_html(), $this->get_headers(), $this->get_attachments() );
 			} else {
 				$this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
 			}
 		}
 	}
 
+	public function get_subject_ep()
+	{
+		$author = $this->product->get_meta( '_promotional_event_author', true );
+		return sprintf( $this->subject_ep, $author );
+	}
+
 	public function get_content_ep_html() {
-		return wc_get_template_html( $this->template_ep_html, array(
+		return wc_get_template_html( sprintf( $this->template_ep_html, $this->product->get_sku() ), array(
 			'order'         => $this->object,
 			'email_heading' => $this->get_heading(),
 			'sent_to_admin' => true,
