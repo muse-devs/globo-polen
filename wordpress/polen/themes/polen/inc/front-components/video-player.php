@@ -1,5 +1,6 @@
 <?php
 
+use Polen\Includes\Cart\Polen_Cart_Item_Factory;
 use Polen\Includes\Polen_Order_Review;
 use Polen\Includes\Polen_Update_Fields;
 
@@ -217,11 +218,19 @@ function polen_get_url_watermark_video_player( $order )
 {
 	$is_social = social_order_is_social( $order );
 	$is_event_promotional = event_promotional_order_is_event_promotional( $order );
+	$cart_item = Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
+	$product = $cart_item->get_product();
 
 	if ($is_social) : ?>
 		<img src="<?php echo TEMPLATE_URI ?>/assets/img/criesp/logo-criesp.png" class="logo social" alt="Logo Criança Esperança" />
-	<?php elseif( $is_event_promotional ) : ?>
-		<img src="<?php echo TEMPLATE_URI ?>/assets/img/video-autografo/logo-de-porta-em-porta.png" class="logo social" alt="Logo Criança Esperança" style="" />
+	<?php elseif( $is_event_promotional ) :
+			if( empty( $product ) ) {
+				return false;
+			}
+			$pep = new Promotional_Event_Product( $product );
+			$url_warter_mark = $pep->get_url_wartermark_video_player();
+	?>
+		<img src="<?= $url_warter_mark; ?>" class="logo social" alt="Logo Criança Esperança" style="" />
 	<?php endif; ?>
 	
 	<img src="<?php echo TEMPLATE_URI ?>/assets/img/logo.png" class="logo polen" alt="Logo Polen" />

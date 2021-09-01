@@ -34,6 +34,15 @@ function event_promotional_is_home()
     return false;
 }
 
+function event_promotional_is_detail_product()
+{
+    $is_set = isset( $GLOBALS[ Promotional_Event_Rewrite::QUERY_VARS_EVENT_PROMOTIONAL_DETAIL_PRODUCT ] );
+    if( $is_set && $GLOBALS[ Promotional_Event_Rewrite::QUERY_VARS_EVENT_PROMOTIONAL_DETAIL_PRODUCT ] == '1' ) {
+        return true;
+    }
+    return false;
+}
+
 function event_promotional_is_app()
 {
     $is_set = isset( $GLOBALS[ Promotional_Event_Rewrite::QUERY_VARS_EVENT_PROMOTIONAL_APP ] );
