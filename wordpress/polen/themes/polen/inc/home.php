@@ -22,7 +22,7 @@ get_header();
 					<?php mc_get_home_banner(master_class_url_home()); ?>
 				</div>
 				<div class="item">
-					<?php va_get_home_banner_de_porta_em_porta(event_promotional_url_home()); ?>
+					<?php va_get_home_banner_de_porta_em_porta('/produtos/de-porta-em-porta'); ?>
 				</div>
 				<div class="item">
 					<?php
@@ -30,7 +30,7 @@ get_header();
 					va_get_home_banner(
 						"Rebeldes têm asas",
 						"Agora você pode comprar o livro e ter um autógrafo em vídeo do Rony Meisler.",
-						"#link",
+						"/produtos/rebeldes-tem-asas",
 						array(
 							"mobile" => TEMPLATE_URI . '/assets/img/video-autografo/rta-banner-home-mobile.jpeg',
 							"desktop" => TEMPLATE_URI . '/assets/img/video-autografo/rta-banner-home-desktop.jpeg',

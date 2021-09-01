@@ -75,7 +75,7 @@ function va_magalu_box_cart( $product )
 			<div class="magalu-box">
 				<div class="header-box text-center py-4 px-5">
 					<?php /*<img src="<?php echo TEMPLATE_URI . '/assets/img/video-autografo/lu.png'; ?>" alt="Lu"></img>*/ ?>
-					<h3 style="line-height:20px;">Para receber seu vídeo-autógrafo personalizado do utor, você precisa:</h3>
+					<h3 style="line-height:20px;">Para receber seu vídeo-autógrafo personalizado do autor, você precisa:</h3>
 				</div>
 				<div class="content-box mt-3 px-2">
 					<div class="row">
@@ -84,7 +84,13 @@ function va_magalu_box_cart( $product )
 								<li class="item itempayment-approved complete">
 									<span class="background status">1</span>
 									<span class="text">
-										<p class="description">Comprar o livro De Porta em Porta no site da <a href="<?php echo event_get_magalu_url(); ?>" target="_blank"><b>Magalu</b></a></p>
+										<?php if( 'de-porta-em-porta' == $product->get_sku() ) : ?>
+											<p class="description">Comprar o livro De Porta em Porta no site da <a href="<?php echo event_get_magalu_url(); ?>" target="_blank"><b>Magalu</b></a></p>
+										<?php else: ?>
+											<?php
+												$link = $product->get_meta( '_promotional_event_link_buy', true ); ?>
+											<p class="description">Comprar o livro<?= !empty( $link ) ? " <a href='{$link}' target='_blank'><b>aqui</b></a>" : ''; ?></p>
+										<?php endif; ?>
 									</span>
 								</li>
 								<li class="item itempayment-approved complete">
@@ -110,8 +116,11 @@ function va_magalu_box_cart( $product )
 <?php
 }
 
-function va_partners_footer()
+function va_partners_footer( $product )
 {
+	if( empty( $product ) || $product->get_sku() != "de-porta-em-porta" ) {
+		return false;
+	}
 ?>
 	<div class="row mb-3">
 		<div class="col-12">
@@ -149,7 +158,7 @@ function va_get_banner_book(
 <?php
 }
 
-function va_get_book_infos( $product, $stars )
+function va_get_book_infos( $product )
 {
 ?>
 	<div class="row mb-4">
@@ -158,10 +167,8 @@ function va_get_book_infos( $product, $stars )
 				<div class="row">
 					<div class="col-12">
 						<h4 class="title">Sobre o Livro</h4>
-						<p>Em seu novo livro, O Autor compila memórias pessoais, aprendizados e conversas com representantes de várias áreas do conhecimento para trazer luz ao debate sobre a responsabilidade individual para a construção de uma sociedade mais igualitária.<br />
-							<a href="javascript:showMoreText()" class="link-more-text show">Mostrar mais</a>
-						</p>
-						<p class="more-text"><?= $product->get_title(); ?> reúne as contribuições de figuras como Yuval Noah Harari, Esther Duflo, Michael Sandel e Anne Applebaum, além de memórias muito pessoais de Huck e relatos de encontros com brasileiros anônimos, mas cheios de histórias para contar.</p>
+						<?php echo $product->get_description(); ?>
+							<!-- <a href="javascript:showMoreText()" class="link-more-text show">Mostrar mais</a> -->
 					</div>
 				</div>
 				<div class="row mb-4">
@@ -172,28 +179,29 @@ function va_get_book_infos( $product, $stars )
 								<div class="book-info">
 									<div class="title">Páginas</div>
 									<?php Icon_Class::va_icons("pages"); ?>
-									<div class="description">264 páginas</div>
+									<div class="description"><?= $product->get_meta( '_promotional_event_pages_quantity', true ); ?></div>
 								</div>
 							</div>
 							<div class="col-3">
 								<div class="book-info">
 									<div class="title">Idioma</div>
 									<?php Icon_Class::va_icons("language"); ?>
-									<div class="description">Português</div>
+									<div class="description"><?= $product->get_meta( '_promotional_event_language', true ); ?></div>
 								</div>
 							</div>
 							<div class="col-3">
 								<div class="book-info">
 									<div class="title">Editora</div>
 									<?php Icon_Class::va_icons("books"); ?>
-									<div class="description">Objetiva</div>
+									<div class="description"><?= $product->get_meta( '_promotional_event_publishing', true ); ?></div>
 								</div>
 							</div>
 							<div class="col-3">
 								<div class="book-info">
 									<div class="title">Publicação</div>
 									<?php Icon_Class::va_icons("calendar"); ?>
-									<div class="description">20 agosto 2021</div>
+									<?php $published_in = date( 'd/m/Y', strtotime( $product->get_meta( '_promotional_event_published_in', true ) ) ); ?>
+									<div class="description"><?= $published_in; ?></div>
 								</div>
 							</div>
 						</div>
@@ -204,7 +212,8 @@ function va_get_book_infos( $product, $stars )
 						<h4 class="title text-md-center">Avaliação</h4>
 						<div class="row book-rate text-center">
 							<div class="col-12">
-								<?php $stars && polen_get_stars($stars); ?>
+								<?php $stars = $product->get_meta( '_promotional_event_rating', true ); ?>
+								<?php $stars && polen_get_stars( $stars ); ?>
 							</div>
 						</div>
 					</div>
@@ -221,7 +230,7 @@ function va_get_book_infos( $product, $stars )
 <?php
 }
 
-function va_ctas($link = "#", $link_magalu = "#")
+function va_ctas($link = "#", $link_to_buy = "")
 {
 ?>
 	<div class="row mb-4">
@@ -231,11 +240,13 @@ function va_ctas($link = "#", $link_magalu = "#")
 					<a href="<?php echo $link; ?>" class="btn btn-primary btn-lg btn-block">Quero meu Vídeo-autógrafo</a>
 				</div>
 			</div>
+			<?php if( !empty( $link_to_buy ) ) : ?>
 			<div class="row">
 				<div class="col-12">
-					<a href="<?php echo $link_magalu; ?>" class="btn btn-outline-primary btn-lg btn-block" target="_blank">Comprar na Magalu</a>
+					<a href="<?php echo $link_to_buy; ?>" class="btn btn-outline-primary btn-lg btn-block" target="_blank">Comprar na Magalu</a>
 				</div>
 			</div>
+			<?php endif; ?>
 		</div>
 	</div>
 <?php
@@ -259,6 +270,10 @@ function va_front_get_talent_videos($talent, $product_id = 15)
 		return;
 	}
 	$items = polen_get_videos_by_talent($talent);
+	
+	if( empty( $items ) ) {
+		return false;
+	}
 
 	$video_url = home_url() . "/v/";
 ?>

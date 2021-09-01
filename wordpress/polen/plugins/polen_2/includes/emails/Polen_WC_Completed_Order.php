@@ -1,6 +1,8 @@
 <?php
 namespace Polen\Includes\Emails;
 
+use Polen\Includes\Cart\Polen_Cart_Item_Factory;
+
 class Polen_WC_Completed_Order extends \WC_Email_Customer_Completed_Order
 {
     public function __construct() {
@@ -11,7 +13,7 @@ class Polen_WC_Completed_Order extends \WC_Email_Customer_Completed_Order
         $this->template_html  = 'emails/customer-completed-order.php';
         $this->template_plain = 'emails/plain/customer-completed-order.php';
         
-        $this->template_ep_html = 'emails/video-autografo/customer-completed-order.php';
+        $this->template_ep_html = 'emails/video-autografo/%s/customer-completed-order.php';
 
         $this->placeholders   = array(
             '{order_date}'   => '',
@@ -45,6 +47,9 @@ class Polen_WC_Completed_Order extends \WC_Email_Customer_Completed_Order
             $this->placeholders['{order_number}'] = $this->object->get_order_number();
         }
 
+        $cart_item = Polen_Cart_Item_Factory::polen_cart_item_from_order( $this->object );
+        $this->product = $cart_item->get_product();
+
         $is_event_promotional = event_promotional_order_is_event_promotional( $order );
         if ( $this->is_enabled() && $this->get_recipient() ) {
             if( $is_event_promotional ) {
@@ -64,7 +69,7 @@ class Polen_WC_Completed_Order extends \WC_Email_Customer_Completed_Order
    public function get_content_ep()
    {
         return wc_get_template_html(
-            $this->template_ep_html,
+            sprintf( $this->template_ep_html, $this->product->get_sku() ),
             array(
                 'order'              => $this->object,
                 'email_heading'      => $this->get_heading(),

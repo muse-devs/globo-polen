@@ -1,5 +1,7 @@
 <?php
 
+use Polen\Includes\Polen_404;
+
 class Promotional_Event_Rewrite
 {
 
@@ -78,8 +80,9 @@ class Promotional_Event_Rewrite
         $ep_object_id = wc_get_product_id_by_sku( $ep_object_sku );
         $ep_object = wc_get_product( $ep_object_id );
 
-        //TODO: Verificar se o produto é válido
-        //SE EXISTE E É UM VIDEO-AUTOGRAFO
+        if( !self::is_promotional_event( $ep_object ) ) {
+            return Polen_404::set_default_404();
+        }
         $GLOBALS[ self::GLOBAL_KEY_PRODUCT_OBJECT ] = $ep_object;
 
         if( $this->is_page_detail() ) {
@@ -168,6 +171,23 @@ class Promotional_Event_Rewrite
             return true;
         }
         return false;
+    }
+
+    static public function get_current_product()
+    {
+        return $GLOBALS[ self::GLOBAL_KEY_PRODUCT_OBJECT ];
+    }
+
+    static public function is_promotional_event( $product )
+    {
+        if( empty( $product ) ) {
+            return false;
+        }
+        $promotional_event = $product->get_meta( '_promotional_event', true );
+        if( $promotional_event != 'yes' ){
+            return false;
+        }
+        return true;
     }
 
 }
