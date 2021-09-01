@@ -169,7 +169,7 @@ function va_get_book_infos( $product )
 		<div class="col-12">
 			<div class="box-round book-info-wrapp py-3 px-3">
 				<div class="row">
-					<div class="col-12 comment-box">
+					<div class="col-12 truncate-wrapper">
 						<h4 class="title">Sobre o Livro</h4>
 						<input type="checkbox" name="expanded-1" id="expanded-1">
 						<div class="truncate truncate-4">
