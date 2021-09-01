@@ -500,6 +500,9 @@ class Polen_WooCommerce
                 );
                 ?>
             </div>
+
+
+            
         </div>
         <?php
     }
