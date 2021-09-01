@@ -169,9 +169,13 @@ function va_get_book_infos( $product )
 		<div class="col-12">
 			<div class="box-round book-info-wrapp py-3 px-3">
 				<div class="row">
-					<div class="col-12">
+					<div class="col-12 comment-box">
 						<h4 class="title">Sobre o Livro</h4>
-						<?php echo $product->get_description(); ?>
+						<input type="checkbox" name="expanded-1" id="expanded-1">
+						<div class="truncate truncate-4">
+							<?php echo $product->get_description(); ?>
+						</div>
+						<label for="expanded-1">Ver mais</label>
 							<!-- <a href="javascript:showMoreText()" class="link-more-text show">Mostrar mais</a> -->
 					</div>
 				</div>
