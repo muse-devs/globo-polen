@@ -85,11 +85,11 @@ function va_magalu_box_cart( $product )
 									<span class="background status">1</span>
 									<span class="text">
 										<?php if( 'de-porta-em-porta' == $product->get_sku() ) : ?>
-											<p class="description">Comprar o livro De Porta em Porta no site da <a href="<?php echo event_get_magalu_url(); ?>" target="_blank"><b>Magalu</b></a></p>
+											<p class="description">Compre o livro De Porta em Porta no site da <a href="<?php echo event_get_magalu_url(); ?>" target="_blank"><b>Magalu</b></a></p>
 										<?php else: ?>
 											<?php
 												$link = $product->get_meta( '_promotional_event_link_buy', true ); ?>
-											<p class="description">Comprar o livro<?= !empty( $link ) ? " <a href='{$link}' target='_blank'><b>aqui</b></a>" : ''; ?></p>
+											<p class="description">Compre o livro<?= !empty( $link ) ? " <a href='{$link}' target='_blank'><b>aqui</b></a>" : ''; ?></p>
 										<?php endif; ?>
 									</span>
 								</li>
@@ -97,13 +97,13 @@ function va_magalu_box_cart( $product )
 									<span class="background status">2</span>
 									<span class="text">
 										<!-- <p class="description">Após a compra, você receberá um e-mail da Magalu contendo o código único para resgatar seu vídeo-autógrafo</p> -->
-										<p class="description">Copiar o código enviado para o seu e-mail.</p>
+										<p class="description">Copie o código enviado para o seu e-mail.</p>
 									</span>
 								</li>
 								<li class="item itempayment-approved complete">
 									<span class="background status">3</span>
 									<span class="text">
-										<p class="description">Validar o código no campo abaixo</p>
+										<p class="description">Valide o código no campo abaixo</p>
 									</span>
 								</li>
 							</ul>
@@ -247,13 +247,13 @@ function va_ctas($link = "#", $link_to_buy = "")
 		<div class="col 12">
 			<div class="row mb-3">
 				<div class="col-12">
-					<a href="<?php echo $link; ?>" class="btn btn-primary btn-lg btn-block">Quero meu Vídeo-autógrafo</a>
+					<a href="<?php echo $link; ?>" class="btn btn-primary btn-lg btn-block">Resgatar Vídeo-autógrafo</a>
 				</div>
 			</div>
 			<?php if( !empty( $link_to_buy ) ) : ?>
 			<div class="row">
 				<div class="col-12">
-					<a href="<?php echo $link_to_buy; ?>" class="btn btn-outline-primary btn-lg btn-block" target="_blank">Comprar na Magalu</a>
+					<a href="<?php echo $link_to_buy; ?>" class="btn btn-outline-primary btn-lg btn-block" target="_blank">Comprar o livro</a>
 				</div>
 			</div>
 			<?php endif; ?>
