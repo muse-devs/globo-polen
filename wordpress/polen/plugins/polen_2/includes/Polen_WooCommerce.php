@@ -84,7 +84,9 @@ class Polen_WooCommerce
             } );
 
             add_filter( 'woocommerce_product_data_tabs', array( $this, 'charity_tab' ) );
+            add_filter( 'woocommerce_product_data_tabs', array( $this, 'promotional_event' ) );
             add_filter( 'woocommerce_product_data_panels', array( $this, 'charity_product_data_product_tab_content' ) );
+            add_filter( 'woocommerce_product_data_panels', array( $this, 'promotional_event_product_data_product_tab_content' ) );
             add_action( 'woocommerce_update_product', array( $this, 'on_product_save' ) );
 
             //Todas as compras gratis vão para o status payment-approved
@@ -272,6 +274,15 @@ class Polen_WooCommerce
         );
         return $array;
     }
+    public function promotional_event( $array ){
+        $array['promotional_event'] = array(
+            'label'    => 'Video-Autógrafo',
+            'target'   => 'promotional_event_product_data',
+            'class'    => array(),
+            'priority' => 90,
+        );
+        return $array;
+    }
 
     public function charity_product_data_product_tab_content() {
         global $product_object;
@@ -352,6 +363,133 @@ class Polen_WooCommerce
     <?php
     }
 
+    public function promotional_event_product_data_product_tab_content()
+    {
+        global $product_object; ?>
+
+        <div id="promotional_event_product_data" class="panel woocommerce_options_panel hidden">
+            <div class='options_group'>
+            <?php
+                woocommerce_wp_checkbox(
+                    array(
+                        'id'      => '_promotional_event',
+                        'value'   => $product_object->get_meta( '_promotional_event' ) == 'yes' ? 'yes' : 'no',
+                        'label'   => 'É um Vídeo-Autógrafo',
+                        'cbvalue' => 'yes',
+                    )
+                );
+            ?>
+            </div>
+            
+            <div class="options_group">
+                <?php
+                woocommerce_wp_text_input(
+                    array(
+                        'id'                => '_promotional_event_pages_quantity',
+                        'value'             => $product_object->get_meta( '_promotional_event_pages_quantity' ),
+                        'label'             => 'Qtd de Paginas',
+                        'desc_tip'          => true,
+                        'description'       => 'Quantidade de pagidas do Livro',
+                        'type'              => 'text',
+                    )
+                );
+                ?>
+            </div>
+            
+            <div class="options_group">
+                <?php
+                woocommerce_wp_text_input(
+                    array(
+                        'id'                => '_promotional_event_language',
+                        'value'             => $product_object->get_meta( '_promotional_event_language' ),
+                        'label'             => 'Idioma',
+                        'desc_tip'          => true,
+                        'description'       => 'Idioma do Livro',
+                        'type'              => 'text',
+                    )
+                );
+                ?>
+            </div>
+            
+            <div class="options_group">
+                <?php
+                woocommerce_wp_text_input(
+                    array(
+                        'id'          => '_promotional_event_publishing',
+                        'value'       => $product_object->get_meta( '_promotional_event_publishing' ),
+                        'label'       => 'Editora',
+                        'desc_tip'    => true,
+                        'description' => 'Editora do livro.',
+                        'type'        => 'text',
+                    )
+                );
+                ?>
+            </div>
+            
+            <div class="options_group">
+                <?php
+                woocommerce_wp_text_input(
+                    array(
+                        'id'          => '_promotional_event_published_in',
+                        'value'       => $product_object->get_meta( '_promotional_event_published_in' ),
+                        'label'       => 'Publicado em',
+                        'desc_tip'    => true,
+                        'description' => 'Data de publicação.',
+                        'type'        => 'date',
+                    )
+                );
+                ?>
+            </div>
+            
+            <div class="options_group">
+                <?php
+                woocommerce_wp_text_input(
+                    array(
+                        'id'          => '_promotional_event_rating',
+                        'value'       => $product_object->get_meta( '_promotional_event_rating' ),
+                        'label'       => 'Score do Livro ex: <b>4.2</b>',
+                        'desc_tip'    => true,
+                        'description' => 'Nota dos leitores do livro.',
+                        'type'        => 'text',
+                    )
+                );
+                ?>
+            </div>
+
+            <div class="options_group">
+                <?php
+                woocommerce_wp_text_input(
+                    array(
+                        'id'          => '_promotional_event_link_buy',
+                        'value'       => $product_object->get_meta( '_promotional_event_link_buy' ),
+                        'label'       => 'Link de compra',
+                        'desc_tip'    => true,
+                        'description' => 'Link para comprar o livro.',
+                        'type'        => 'text',
+                    )
+                );
+                ?>
+            </div>
+
+            <div class="options_group">
+                <?php
+                woocommerce_wp_text_input(
+                    array(
+                        'id'          => '_promotional_event_author',
+                        'value'       => $product_object->get_meta( '_promotional_event_author' ),
+                        'label'       => 'Autor',
+                        'desc_tip'    => true,
+                        'description' => 'Autor do livro.',
+                        'type'        => 'text',
+                    )
+                );
+                ?>
+            </div>
+        </div>
+
+        <?php
+    }
+
     public function on_product_save( $product_id ) {
         if( is_admin() ){
             $screen = get_current_screen();
@@ -363,12 +501,32 @@ class Polen_WooCommerce
                 $charity_description = strip_tags( $_POST['_description_charity'] );
                 $charity_subordinate_id = strip_tags( $_POST['_charity_subordinate_merchant_id'] );
 
+                $promotional_event = strip_tags( $_POST[ '_promotional_event' ] );
+                $promotional_event_pages_quantity = strip_tags( $_POST[ '_promotional_event_pages_quantity' ] );
+                $promotional_event_language = strip_tags( $_POST[ '_promotional_event_language' ] );
+                $promotional_event_publishing = strip_tags( $_POST[ '_promotional_event_publishing' ] );
+                $promotional_event_published_in = strip_tags( $_POST[ '_promotional_event_published_in' ] );
+                $promotional_event_rating = strip_tags( $_POST[ '_promotional_event_rating' ] );
+                $promotional_event_link_buy = strip_tags( $_POST[ '_promotional_event_link_buy' ] );
+                $promotional_event_author = strip_tags( $_POST[ '_promotional_event_author' ] );
+
                 $product->update_meta_data( '_is_charity', $charity );
                 $product->update_meta_data( '_charity_name', $charity_name );
                 $product->update_meta_data( '_url_charity_logo', $charity_url );
                 $product->update_meta_data( '_description_charity', $charity_description );
                 $product->update_meta_data( '_charity_subordinate_merchant_id', $charity_subordinate_id );
 
+                $product->update_meta_data( '_promotional_event', $promotional_event );
+                $product->update_meta_data( '_promotional_event_pages_quantity', $promotional_event_pages_quantity );
+                $product->update_meta_data( '_promotional_event_language', $promotional_event_language );
+                $product->update_meta_data( '_promotional_event_publishing', $promotional_event_publishing );
+                $product->update_meta_data( '_promotional_event_published_in', $promotional_event_published_in );
+                $product->update_meta_data( '_promotional_event_rating', $promotional_event_rating );
+                $product->update_meta_data( '_promotional_event_link_buy', $promotional_event_link_buy );
+                $product->update_meta_data( '_promotional_event_author', $promotional_event_author );
+
+
+                remove_action( 'woocommerce_update_product', array( $this, 'on_product_save' ) );
                 remove_action( 'woocommerce_update_product', array( $this, 'on_product_save' ) );
                 $product->save();
                 add_action( 'woocommerce_update_product', array( $this, 'on_product_save' ) );

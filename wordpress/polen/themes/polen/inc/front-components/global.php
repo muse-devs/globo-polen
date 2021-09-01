@@ -18,7 +18,7 @@ function polen_front_get_banner_with_carousel($social = false)
 	);
 ?>
 	<section class="top-banner mb-4">
-		<div class="owl-carousel owl-theme">
+		<div id="top-carousel" class="owl-carousel owl-theme">
 			<?php if (!$social) : ?>
 				<div class="item">
 					<div class="carrousel">

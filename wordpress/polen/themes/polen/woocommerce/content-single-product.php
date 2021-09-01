@@ -151,6 +151,14 @@ $stock = $product->get_stock_quantity();
 		}
 	?>
 
+	<!-- Bio -->
+	<div class="row mt-4">
+		<div class="col-12 col-md-6 m-md-auto d-flex">
+			<p><?= $product->get_description(); ?></p>
+		</div>
+	</div>
+
+	<!-- Share -->
 	<?php polen_get_share_icons(); ?>
 
 	<!-- Doação -->

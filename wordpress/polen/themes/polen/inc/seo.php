@@ -166,14 +166,19 @@ if (
 			$headers['image'] = $image;
 			$headers['url'] = site_url('social/crianca-esperanca');
 
-			// Página do Livro De porta em porta
+			// Página de Video-Autografo
 		} elseif (event_promotional_is_app()) {
-
-			$headers['title'] = 'Compre o livro &quot;De porta em porta&quot; e ganhe um vídeo personalizado.';
-			$headers['description'] = 'Compre o livro &quot;De porta em porta&quot; e ganhe um vídeo personalizado com Luciano Hulk.';
-			$headers['url'] = event_promotional_url_home();
-			$headers['image'] = '//polen.me/polen/uploads/2021/08/book_cover.png';
-			$headers['site_name'] = 'Polen.me - Luciano Huck - De porta em porta';
+			$product = Promotional_Event_Rewrite::get_current_product();
+			$pep = new Promotional_Event_Product( $product );
+			$image_url = $pep->get_url_image_product_with_size( 'polen-thumb-lg' );
+			$author_name = $product->get_meta( '_promotional_event_author', true );
+			$product_name = $product->get_title();
+			
+			$headers['title'] = "Compre o livro &quot;{$product_name}&quot; e ganhe um vídeo personalizado.";
+			$headers['description'] = "Compre o livro &quot;{$product_name}&quot; e ganhe um vídeo personalizado com {$author_name}.";
+			$headers['url'] = event_promotional_url_detail_product( $product );
+			$headers['image'] = $image_url;
+			$headers['site_name'] = "Polen.me - {$author_name} - {$product_name}";
 
 			// Imagem padrão - Logo Polen grande
 		} else {
@@ -185,7 +190,7 @@ if (
 		<meta name="title" content="<?php echo $headers['title']; ?>">
 		<meta name="description" content="<?php echo $headers['description']; ?>">
 		<meta name="keywords" content="<?php echo $headers['keywords']; ?>">
-		<meta name="author" content="<?php echo $headers['author']; ?>">
+		<meta name="author" content="<?php echo isset( $headers['author'] ) ? $headers['author'] : ''; ?>">
 
 		<meta property="og:title" content="<?php echo $headers['title']; ?>">
 		<meta property="og:description" content="<?php echo $headers['description']; ?>">

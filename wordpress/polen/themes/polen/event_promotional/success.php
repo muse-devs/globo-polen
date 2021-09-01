@@ -1,20 +1,20 @@
 <?php
 
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
-use Polen\Includes\Debug;
 
-session_start();
+$product = $GLOBALS[ Promotional_Event_Rewrite::GLOBAL_KEY_PRODUCT_OBJECT ];
+
 $order_id  = filter_input( INPUT_GET, 'order', FILTER_SANITIZE_STRING );
 $order_key = filter_input( INPUT_GET, 'order_key', FILTER_SANITIZE_STRING );
 $order = wc_get_order( $order_id );
 
 if( empty( $order ) ) {
-    wp_safe_redirect( event_promotional_url_home() );
+    wp_safe_redirect( event_promotional_url_code_validation( $product ) );
     exit;
 }
 
 if( $order->get_order_key() != $order_key ) {
-	wp_safe_redirect( event_promotional_url_code_validation() );
+	wp_safe_redirect( event_promotional_url_code_validation( $product ) );
     exit;
 }
 
@@ -35,7 +35,7 @@ get_header();
 
 				event_promotional_get_order_flow_layout($order_array, $order_number );
 
-                va_partners_footer();
+                va_partners_footer( $product );
 			?>
 		</div>
 	</div>

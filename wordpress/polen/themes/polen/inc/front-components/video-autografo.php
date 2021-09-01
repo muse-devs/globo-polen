@@ -1,6 +1,32 @@
 <?php
 
-function va_get_home_banner($link)
+function va_get_home_banner($title, $description, $link, $images = array("mobile" => "", "desktop" => ""))
+{
+	if (!$title || !$description) {
+		return;
+	}
+?>
+	<div class="row mt-4">
+		<div class="col-12">
+			<div class="va-banner">
+				<img class="image mobile-img" src="<?php echo $images['mobile']; ?>" alt="<?php echo $title; ?>" />
+				<img class="image desktop-img" src="<?php echo $images['desktop']; ?>" alt="<?php echo $title; ?>" />
+				<div class="content">
+					<div class="row">
+						<div class="col-12 col-md-6">
+							<h2><?php echo $title; ?></h2>
+							<p class="mt-3"><?php echo $description; ?></p>
+							<a href="<?php echo $link; ?>" class="btn btn-primary btn-md">Conheça<span class="ml-2"><?php Icon_Class::polen_icon_chevron_right(); ?></span></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php
+}
+
+function va_get_home_banner_de_porta_em_porta($link)
 {
 ?>
 	<div class="row mt-4">
@@ -41,7 +67,7 @@ function va_magalu_box_thank_you()
 <?php
 }
 
-function va_magalu_box_cart()
+function va_magalu_box_cart( $product )
 {
 ?>
 	<div class="row mb-4">
@@ -49,7 +75,7 @@ function va_magalu_box_cart()
 			<div class="magalu-box">
 				<div class="header-box text-center py-4 px-5">
 					<?php /*<img src="<?php echo TEMPLATE_URI . '/assets/img/video-autografo/lu.png'; ?>" alt="Lu"></img>*/ ?>
-					<h3 style="line-height:20px;">Para receber seu vídeo-autógrafo personalizado do Luciano Huck, você precisa:</h3>
+					<h3 style="line-height:20px;">Para receber seu vídeo-autógrafo personalizado do autor, você precisa:</h3>
 				</div>
 				<div class="content-box mt-3 px-2">
 					<div class="row">
@@ -58,7 +84,13 @@ function va_magalu_box_cart()
 								<li class="item itempayment-approved complete">
 									<span class="background status">1</span>
 									<span class="text">
-										<p class="description">Comprar o livro De Porta em Porta no site da <a href="<?php echo event_get_magalu_url(); ?>" target="_blank"><b>Magalu</b></a></p>
+										<?php if( 'de-porta-em-porta' == $product->get_sku() ) : ?>
+											<p class="description">Comprar o livro De Porta em Porta no site da <a href="<?php echo event_get_magalu_url(); ?>" target="_blank"><b>Magalu</b></a></p>
+										<?php else: ?>
+											<?php
+												$link = $product->get_meta( '_promotional_event_link_buy', true ); ?>
+											<p class="description">Comprar o livro<?= !empty( $link ) ? " <a href='{$link}' target='_blank'><b>aqui</b></a>" : ''; ?></p>
+										<?php endif; ?>
 									</span>
 								</li>
 								<li class="item itempayment-approved complete">
@@ -84,8 +116,11 @@ function va_magalu_box_cart()
 <?php
 }
 
-function va_partners_footer()
+function va_partners_footer( $product )
 {
+	if( empty( $product ) || $product->get_sku() != "de-porta-em-porta" ) {
+		return false;
+	}
 ?>
 	<div class="row mb-3">
 		<div class="col-12">
@@ -99,11 +134,14 @@ function va_partners_footer()
 <?php
 }
 
-function va_get_banner_book($small = false)
+function va_get_banner_book(
+	$product,
+	$small = false,
+	$img_bg = TEMPLATE_URI . "/assets/img/video-autografo/bg_lh_right.png"
+	)
 {
-	$img_bg = TEMPLATE_URI . "/assets/img/video-autografo/bg_lh_right.png";
-	$img_book = TEMPLATE_URI . "/assets/img/video-autografo/book_cover.png";
-
+	$pep = new Promotional_Event_Product( $product );
+	$img_book = $pep->get_url_image_product_with_size( 'polen-thumb-lg' );
 ?>
 	<div class="row mb-3">
 		<div class="col-12">
@@ -113,7 +151,7 @@ function va_get_banner_book($small = false)
 				</div>
 				<div class="content<?php echo $small ? '' : ' pb-2'; ?>">
 					<img src="<?php echo $img_book; ?>" alt="Capa do Livro" class="book-cover" />
-					<h1 class="title"><?php echo $small ? 'Livro - ' : ''; ?>De Porta em Porta</h1>
+					<h1 class="title"><?php echo $small ? 'Livro - ' : ''; ?><?php echo $product->get_title(); ?></h1>
 				</div>
 			</div>
 		</div>
@@ -121,7 +159,7 @@ function va_get_banner_book($small = false)
 <?php
 }
 
-function va_get_book_infos()
+function va_get_book_infos( $product )
 {
 ?>
 	<div class="row mb-4">
@@ -130,10 +168,8 @@ function va_get_book_infos()
 				<div class="row">
 					<div class="col-12">
 						<h4 class="title">Sobre o Livro</h4>
-						<p>Em seu novo livro, Luciano Huck compila memórias pessoais, aprendizados e conversas com representantes de várias áreas do conhecimento para trazer luz ao debate sobre a responsabilidade individual para a construção de uma sociedade mais igualitária.<br />
-							<a href="javascript:showMoreText()" class="link-more-text show">Mostrar mais</a>
-						</p>
-						<p class="more-text">De porta em porta reúne as contribuições de figuras como Yuval Noah Harari, Esther Duflo, Michael Sandel e Anne Applebaum, além de memórias muito pessoais de Huck e relatos de encontros com brasileiros anônimos, mas cheios de histórias para contar.</p>
+						<?php echo $product->get_description(); ?>
+							<!-- <a href="javascript:showMoreText()" class="link-more-text show">Mostrar mais</a> -->
 					</div>
 				</div>
 				<div class="row mb-4">
@@ -144,43 +180,47 @@ function va_get_book_infos()
 								<div class="book-info">
 									<div class="title">Páginas</div>
 									<?php Icon_Class::va_icons("pages"); ?>
-									<div class="description">264 páginas</div>
+									<div class="description"><?= $product->get_meta( '_promotional_event_pages_quantity', true ); ?></div>
 								</div>
 							</div>
 							<div class="col-3">
 								<div class="book-info">
 									<div class="title">Idioma</div>
 									<?php Icon_Class::va_icons("language"); ?>
-									<div class="description">Português</div>
+									<div class="description"><?= $product->get_meta( '_promotional_event_language', true ); ?></div>
 								</div>
 							</div>
 							<div class="col-3">
 								<div class="book-info">
 									<div class="title">Editora</div>
 									<?php Icon_Class::va_icons("books"); ?>
-									<div class="description">Objetiva</div>
+									<div class="description"><?= $product->get_meta( '_promotional_event_publishing', true ); ?></div>
 								</div>
 							</div>
 							<div class="col-3">
 								<div class="book-info">
 									<div class="title">Publicação</div>
 									<?php Icon_Class::va_icons("calendar"); ?>
-									<div class="description">20 agosto 2021</div>
+									<?php $published_in = date( 'd/m/Y', strtotime( $product->get_meta( '_promotional_event_published_in', true ) ) ); ?>
+									<div class="description"><?= $published_in; ?></div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="row mb-3">
-					<div class="col-12">
-						<h4 class="title text-md-center">Avaliação</h4>
-						<div class="row book-rate text-center">
-							<div class="col-12">
-								<?php polen_get_stars(4.2); ?>
+				<?php $stars = $product->get_meta( '_promotional_event_rating', true ); ?>
+				<?php if($stars) : ?>
+					<div class="row mb-3">
+						<div class="col-12">
+							<h4 class="title text-md-center">Avaliação</h4>
+							<div class="row book-rate text-center">
+								<div class="col-12">
+									<?php polen_get_stars( $stars ); ?>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+				<?php endif; ?>
 			</div>
 		</div>
 	</div>
@@ -193,7 +233,7 @@ function va_get_book_infos()
 <?php
 }
 
-function va_ctas($link = "#", $link_magalu = "#")
+function va_ctas($link = "#", $link_to_buy = "")
 {
 ?>
 	<div class="row mb-4">
@@ -203,23 +243,25 @@ function va_ctas($link = "#", $link_magalu = "#")
 					<a href="<?php echo $link; ?>" class="btn btn-primary btn-lg btn-block">Quero meu Vídeo-autógrafo</a>
 				</div>
 			</div>
+			<?php if( !empty( $link_to_buy ) ) : ?>
 			<div class="row">
 				<div class="col-12">
-					<a href="<?php echo $link_magalu; ?>" class="btn btn-outline-primary btn-lg btn-block" target="_blank">Comprar na Magalu</a>
+					<a href="<?php echo $link_to_buy; ?>" class="btn btn-outline-primary btn-lg btn-block" target="_blank">Comprar na Magalu</a>
 				</div>
 			</div>
+			<?php endif; ?>
 		</div>
 	</div>
 <?php
 }
 
-function va_what_is()
+function va_what_is( $product )
 {
 ?>
 	<div class="row va-what-is">
 		<div class="col-12 text-center">
 			<h3 class="title"><span class="ico mr-2"><?php Icon_Class::polen_icon_camera_video(); ?></span>O que é o Vídeo-autógrafo</h3>
-			<p>O vídeo-autógrafo é uma nova maneira de conectar e criar novas experiências digitais entre leitores e seus autores favoritos. Ao adquirir uma cópia do livro De Porta em Porta na Magalu, você pode ganhar um vídeo exclusivo e personalizado gravado pelo Luciano Huck.</p>
+			<p>O vídeo-autógrafo é uma nova maneira de conectar e criar novas experiências digitais entre leitores e seus autores favoritos. Ao adquirir uma cópia do livro <?= $product->get_title(); ?>, você pode ganhar um vídeo exclusivo e personalizado gravado por <?= $product->get_meta( '_promotional_event_author', true ); ?>.</p>
 		</div>
 	</div>
 <?php
@@ -231,6 +273,10 @@ function va_front_get_talent_videos($talent, $product_id = 15)
 		return;
 	}
 	$items = polen_get_videos_by_talent($talent);
+
+	if( empty( $items ) ) {
+		return false;
+	}
 
 	$video_url = home_url() . "/v/";
 ?>
@@ -266,7 +312,7 @@ function va_front_get_talent_videos($talent, $product_id = 15)
 <?php
 }
 
-function va_cart_form($coupon = "")
+function va_cart_form( $product, $coupon = "")
 {
 ?>
 	<div class="row mb-3">
@@ -284,6 +330,7 @@ function va_cart_form($coupon = "")
 			<form id="va-cart-form">
 				<input type="hidden" name="action" value="create_orders_video_autograph" />
 				<input type="hidden" name="coupon" value="<?php echo $coupon; ?>" />
+				<input type="hidden" name="product" value="<?php echo $product->get_sku(); ?>" />
 				<p>
 					<label for="" class="lg">Nome</label>
 					<input type="text" name="name" class="form-control form-control-lg" placeholder="Para quem é esse vídeo-autógrafo?" required />
@@ -305,11 +352,11 @@ function va_cart_form($coupon = "")
 				<p>
 					<label>
 						<input type="checkbox" class="form-control form-control-lg" name="terms" id="terms" required />
-						<span class="woocommerce-terms-and-conditions-checkbox-text ml-2" style="line-height: 24px;">Li e concordo com o(s) <a href="http://polen.globo/politica-de-privacidade/" class="woocommerce-terms-and-conditions-link" target="_blank">termos e condições</a>  e com o <a href="<?= site_url('regulamento-da-promocao-video-autografo-do-livro-de-porta-em-porta'); ?>" class="woocommerce-terms-and-conditions-link" target="_blank">Regulamento da Promoção</a>.&nbsp;<span class="required">*</span></span>
+						<span class="woocommerce-terms-and-conditions-checkbox-text ml-2" style="line-height: 24px;">Li e concordo com o(s) <a href="http://polen.me/politica-de-privacidade/" class="woocommerce-terms-and-conditions-link" target="_blank">termos e condições</a> e com o <a href="<?= site_url('regulamento-da-promocao-video-autografo-do-livro-de-porta-em-porta'); ?>" class="woocommerce-terms-and-conditions-link" target="_blank">Regulamento da Promoção</a>.&nbsp;<span class="required">*</span></span>
 					</label>
 				</p>
 				<p>
-					<input type="hidden" name="security" value="<?= wp_create_nonce( Promotional_Event_Admin::NONCE_ACTION ); ?>" />
+					<input type="hidden" name="security" value="<?= wp_create_nonce(Promotional_Event_Admin::NONCE_ACTION); ?>" />
 					<input type="submit" class="btn btn-primary btn-lg btn-block" value="Pedir meu vídeo-autógrafo" />
 				</p>
 			</form>
@@ -332,7 +379,7 @@ function va_cart_form($coupon = "")
 <?php
 }
 
-function va_coupon()
+function va_coupon( $product )
 {
 ?>
 	<div class="row mb-3">
@@ -340,7 +387,9 @@ function va_coupon()
 			<h1 class="title mb-3">Inserir código</h1>
 			<form id="va-check-code">
 				<input type="hidden" name="action" value="check_coupon" />
-				<input type="hidden" name="security" value=<?php echo wp_create_nonce('check-coupon'); ?>>
+				<input type="hidden" name="product" value="<?= $product->get_sku(); ?>" />
+				<?php wp_nonce_field( 'check-coupon', 'security', true ); ?>
+				<!-- <input type="hidden" name="security" value=<?php echo wp_create_nonce('check-coupon'); ?>> -->
 				<input type="text" name="coupon" class="form-control form-control-lg mb-2" placeholder="Inserir código fornecido pela Magalu" required />
 				<input type="submit" class="btn btn-primary btn-lg btn-block" value="Checar" />
 			</form>
