@@ -12,7 +12,7 @@ $oq = new WC_Order_Query([
     'limit' => 1000,
     'paginate' => true,
     // 'social' => '1',
-    'status' => ['completed', 'payment-approved','talent-accepted'],
+    'status' => ['cancelled', 'refunded','failed','payment-in-revision','payment-rejected','talent-rejected','order-expired'],
     'meta_key' => 'campaing',
     'meta_value' => 'criesp',
 ]);
