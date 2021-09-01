@@ -5,12 +5,12 @@ use Polen\Master_class\Master_Class_Rewrite;
 
 function master_class_url_home()
 {
-	return site_url( Master_Class_Rewrite::BASE_URL );
+	return site_url( Master_Class_Rewrite::BASE_URL . '/ronnie-von/beaba-do-vinho' );
 }
 
 function master_class_url_success()
 {
-	return master_class_url_home() . '/ronnie-von/beaba-do-vinho/sucesso/';
+	return master_class_url_home() . '/sucesso/';
 }
 
 function master_class_is_home()
