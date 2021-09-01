@@ -8,8 +8,8 @@ if( strpos( php_sapi_name(), 'cli' ) === false ) {
 include_once dirname( __FILE__ ) . '/init.php';
 
 $oq = new WC_Order_Query([
-    'return' => 'ids',
-    'limit' => 1,
+    // 'return' => 'ids',
+    'limit' => 1000,
     'paginate' => true,
     // 'social' => '1',
     'status' => ['completed', 'payment-approved','talent-accepted'],
@@ -17,6 +17,14 @@ $oq = new WC_Order_Query([
     'meta_value' => 'criesp',
 ]);
 
-var_dump( $oq->get_orders() );
+$result = $oq->get_orders();
+$orders = $result->orders;
+
+foreach( $orders as $order ) {
+    $id = $order->get_id();
+    $date = $order->get_date_created('d/m/Y');
+    $status = $order->get_status();
+    echo "{$id};{$date};{$status}; \r\n";
+}
 
 // var_dump($wpdb->last_query);
