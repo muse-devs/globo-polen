@@ -485,8 +485,22 @@ class Polen_WooCommerce
                 );
                 ?>
             </div>
-        </div>
 
+            <div class="options_group">
+                <?php
+                woocommerce_wp_text_input(
+                    array(
+                        'id'          => '_promotional_event_wartermark',
+                        'value'       => $product_object->get_meta( '_promotional_event_wartermark' ),
+                        'label'       => 'Marca d`agua',
+                        'desc_tip'    => true,
+                        'description' => 'URL da marca d`agua do video player, copiar o link de galeria',
+                        'type'        => 'text',
+                    )
+                );
+                ?>
+            </div>
+        </div>
         <?php
     }
 
@@ -509,6 +523,7 @@ class Polen_WooCommerce
                 $promotional_event_rating = strip_tags( $_POST[ '_promotional_event_rating' ] );
                 $promotional_event_link_buy = strip_tags( $_POST[ '_promotional_event_link_buy' ] );
                 $promotional_event_author = strip_tags( $_POST[ '_promotional_event_author' ] );
+                $promotional_event_wartermark = strip_tags( $_POST[ '_promotional_event_wartermark' ] );
 
                 $product->update_meta_data( '_is_charity', $charity );
                 $product->update_meta_data( '_charity_name', $charity_name );
@@ -524,6 +539,7 @@ class Polen_WooCommerce
                 $product->update_meta_data( '_promotional_event_rating', $promotional_event_rating );
                 $product->update_meta_data( '_promotional_event_link_buy', $promotional_event_link_buy );
                 $product->update_meta_data( '_promotional_event_author', $promotional_event_author );
+                $product->update_meta_data( '_promotional_event_wartermark', $promotional_event_wartermark );
 
 
                 remove_action( 'woocommerce_update_product', array( $this, 'on_product_save' ) );

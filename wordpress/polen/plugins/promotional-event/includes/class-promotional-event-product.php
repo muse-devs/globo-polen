@@ -23,4 +23,9 @@ class Promotional_Event_Product
         }
         return $src[ 0 ];
     }
+
+    public function get_url_wartermark_video_player()
+    {
+        return $this->product->get_meta('_promotional_event_wartermark');
+    }
 }
