@@ -97,7 +97,7 @@ function va_magalu_box_cart( $product )
 									<span class="background status">2</span>
 									<span class="text">
 										<!-- <p class="description">Após a compra, você receberá um e-mail da Magalu contendo o código único para resgatar seu vídeo-autógrafo</p> -->
-										<p class="description">Insira o código que recebeu por e-mail</p>
+										<p class="description">Copiar o código enviado para o seu e-mail.</p>
 									</span>
 								</li>
 								<li class="item itempayment-approved complete">
@@ -391,7 +391,7 @@ function va_coupon( $product )
 ?>
 	<div class="row mb-3">
 		<div class="col-12">
-			<h1 class="title mb-3">Inserir código</h1>
+			<h1 class="title mb-3">Insira o código que recebeu por e-mail</h1>
 			<form id="va-check-code">
 				<input type="hidden" name="action" value="check_coupon" />
 				<input type="hidden" name="product" value="<?= $product->get_sku(); ?>" />
