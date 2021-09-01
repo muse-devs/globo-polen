@@ -152,9 +152,9 @@ $stock = $product->get_stock_quantity();
 	?>
 
 	<!-- Bio -->
-	<div class="row mt-4">
+	<div class="row mt-4 d-none">
 		<div class="col-12 col-md-6 m-md-auto d-flex">
-			<p><?= $product->get_description(); ?></p>
+			<p><?php //echo $product->get_description(); ?></p>
 		</div>
 	</div>
 
