@@ -169,6 +169,9 @@ if (
 			// Página de Video-Autografo
 		} elseif (event_promotional_is_app()) {
 			$product = Promotional_Event_Rewrite::get_current_product();
+			if( empty($product) ) {
+				return false;
+			}
 			$pep = new Promotional_Event_Product( $product );
 			$image_url = $pep->get_url_image_product_with_size( 'polen-thumb-lg' );
 			$author_name = $product->get_meta( '_promotional_event_author', true );
