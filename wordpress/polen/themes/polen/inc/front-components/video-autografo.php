@@ -207,17 +207,19 @@ function va_get_book_infos( $product )
 						</div>
 					</div>
 				</div>
-				<div class="row mb-3">
-					<div class="col-12">
-						<h4 class="title text-md-center">Avaliação</h4>
-						<div class="row book-rate text-center">
-							<div class="col-12">
-								<?php $stars = $product->get_meta( '_promotional_event_rating', true ); ?>
-								<?php $stars && polen_get_stars( $stars ); ?>
+				<?php $stars = $product->get_meta( '_promotional_event_rating', true ); ?>
+				<?php if($stars) : ?>
+					<div class="row mb-3">
+						<div class="col-12">
+							<h4 class="title text-md-center">Avaliação</h4>
+							<div class="row book-rate text-center">
+								<div class="col-12">
+									<?php polen_get_stars( $stars ); ?>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+				<?php endif; ?>
 			</div>
 		</div>
 	</div>
@@ -270,7 +272,7 @@ function va_front_get_talent_videos($talent, $product_id = 15)
 		return;
 	}
 	$items = polen_get_videos_by_talent($talent);
-	
+
 	if( empty( $items ) ) {
 		return false;
 	}
