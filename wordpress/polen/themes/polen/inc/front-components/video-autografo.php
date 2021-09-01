@@ -140,7 +140,8 @@ function va_get_banner_book(
 	$img_bg = TEMPLATE_URI . "/assets/img/video-autografo/bg_lh_right.png"
 	)
 {
-	$img_book = wp_get_attachment_image_src( $product->get_image_id() )[ 0 ];
+	$pep = new Promotional_Event_Product( $product );
+	$img_book = $pep->get_url_image_product_with_size( 'polen-thumb-lg' );
 ?>
 	<div class="row mb-3">
 		<div class="col-12">

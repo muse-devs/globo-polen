@@ -170,7 +170,7 @@ if (
 		} elseif (event_promotional_is_app()) {
 			$product = Promotional_Event_Rewrite::get_current_product();
 			$pep = new Promotional_Event_Product( $product );
-			$image_url = $pep->get_url_image_book();
+			$image_url = $pep->get_url_image_product_with_size( 'polen-thumb-lg' );
 			$author_name = $product->get_meta( '_promotional_event_author', true );
 			$product_name = $product->get_title();
 			

@@ -9,10 +9,15 @@ class Promotional_Event_Product
         $this->product = $product;
     }
 
-    public function get_url_image_book()
+    public function get_url_image_product_small()
+    {
+        return $this->get_url_image_product_with_size( 'small' );
+    }
+
+    public function get_url_image_product_with_size( $size )
     {
         $attachment_id = $this->product->get_image_id();
-        $src = wp_get_attachment_image_src( $attachment_id, 'polen-thumb-lg' );
+        $src = wp_get_attachment_image_src( $attachment_id, $size );
         if( empty( $src ) ) {
             return false;
         }
