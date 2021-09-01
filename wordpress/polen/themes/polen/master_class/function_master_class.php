@@ -10,7 +10,7 @@ function master_class_url_home()
 
 function master_class_url_success()
 {
-	return master_class_url_home() . '/sucesso';
+	return master_class_url_home() . '/ronnie-von/beaba-do-vinho/sucesso/';
 }
 
 function master_class_is_home()
