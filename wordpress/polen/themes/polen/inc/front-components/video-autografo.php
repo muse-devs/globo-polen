@@ -142,6 +142,9 @@ function va_get_banner_book(
 {
 	$pep = new Promotional_Event_Product( $product );
 	$img_book = $pep->get_url_image_product_with_size( 'polen-thumb-lg' );
+	if('rebeldes-tem-asas' == $product->get_sku()) {
+		$img_bg = TEMPLATE_URI . "/assets/img/video-autografo/rta-book-bg.png";
+	}
 ?>
 	<div class="row mb-3">
 		<div class="col-12">
