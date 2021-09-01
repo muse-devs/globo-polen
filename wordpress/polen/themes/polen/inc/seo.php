@@ -184,6 +184,12 @@ if (
 			$headers['site_name'] = "Polen.me - {$author_name} - {$product_name}";
 
 			// Imagem padrão - Logo Polen grande
+		} elseif( master_class_is_app() ) {
+			$headers['title'] = "Masterclass com Ronnie Von Beabá do Vinho";
+			$headers['description'] = "Aprenda a escolher, apreciar e harmonizar vinhos com Ronnie Von.";
+			$headers['url'] = master_class_url_home();
+			$headers['image'] = 'https://i.vimeocdn.com/video/1229508090_520';
+			$headers['site_name'] = "Polen.me - Masterclass - Beabá do Vinho";
 		} else {
 
 			$headers['image'] = 'https://polen.me/polen/uploads/2021/06/cropped-logo.png';
