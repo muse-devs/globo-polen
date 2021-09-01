@@ -396,7 +396,6 @@ function va_coupon( $product )
 				<input type="hidden" name="action" value="check_coupon" />
 				<input type="hidden" name="product" value="<?= $product->get_sku(); ?>" />
 				<?php wp_nonce_field( 'check-coupon', 'security', true ); ?>
-				<!-- <input type="hidden" name="security" value=<?php echo wp_create_nonce('check-coupon'); ?>> -->
 				<input type="text" name="coupon" class="form-control form-control-lg mb-2" placeholder="Insira o código que recebeu por e-mail" required />
 				<input type="submit" class="btn btn-primary btn-lg btn-block" value="Checar" />
 			</form>
