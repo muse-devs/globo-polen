@@ -258,7 +258,7 @@ function va_what_is( $product )
 	<div class="row va-what-is">
 		<div class="col-12 text-center">
 			<h3 class="title"><span class="ico mr-2"><?php Icon_Class::polen_icon_camera_video(); ?></span>O que é o Vídeo-autógrafo</h3>
-			<p>O vídeo-autógrafo é uma nova maneira de conectar e criar novas experiências digitais entre leitores e seus autores favoritos. Ao adquirir uma cópia do livro <?= $product->get_title(); ?> na Magalu, você pode ganhar um vídeo exclusivo e personalizado gravado pelo Autor.</p>
+			<p>O vídeo-autógrafo é uma nova maneira de conectar e criar novas experiências digitais entre leitores e seus autores favoritos. Ao adquirir uma cópia do livro <?= $product->get_title(); ?>, você pode ganhar um vídeo exclusivo e personalizado gravado por <?= $product->get_meta( '_promotional_event_author', true ); ?>.</p>
 		</div>
 	</div>
 <?php
