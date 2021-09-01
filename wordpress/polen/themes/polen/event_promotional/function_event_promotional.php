@@ -188,7 +188,7 @@ function event_promotional_get_order_flow_obj($order_number, $order_status, $ema
             $flow_1[$order_status],
             '_next-step_1' => array(
                 'title' => 'Aguardando confirmação',
-                'description' => 'Você será informado quando o Luciano visualizar e aceitar a sua solicitação de vídeo-autógrafo.',
+                'description' => 'Você será informado quando a sua solicitação de vídeo-autógrafo for aceita.',
                 'status' => $flow_1[$order_status]['status'] === "fail" ? 'pending' : 'in-progress',
             ),
             '_next-step_2' => array(

@@ -359,7 +359,7 @@ function va_cart_form( $product, $coupon = "")
 				<p>
 					<label>
 						<input type="checkbox" class="form-control form-control-lg" name="terms" id="terms" required />
-						<span class="woocommerce-terms-and-conditions-checkbox-text ml-2" style="line-height: 24px;">Li e concordo com o(s) <a href="http://polen.me/politica-de-privacidade/" class="woocommerce-terms-and-conditions-link" target="_blank">termos e condições</a> e com o <a href="<?= site_url('regulamento-da-promocao-video-autografo-do-livro-de-porta-em-porta'); ?>" class="woocommerce-terms-and-conditions-link" target="_blank">Regulamento da Promoção</a>.&nbsp;<span class="required">*</span></span>
+						<span class="woocommerce-terms-and-conditions-checkbox-text ml-2" style="line-height: 24px;">Li e concordo com o(s) <a href="http://polen.me/politica-de-privacidade/" class="woocommerce-terms-and-conditions-link" target="_blank">termos e condições</a></span>
 					</label>
 				</p>
 				<p>
@@ -391,13 +391,13 @@ function va_coupon( $product )
 ?>
 	<div class="row mb-3">
 		<div class="col-12">
-			<h1 class="title mb-3">Insira o código que recebeu por e-mail</h1>
+			<h1 class="title mb-3">Insira o cupom</h1>
 			<form id="va-check-code">
 				<input type="hidden" name="action" value="check_coupon" />
 				<input type="hidden" name="product" value="<?= $product->get_sku(); ?>" />
 				<?php wp_nonce_field( 'check-coupon', 'security', true ); ?>
 				<!-- <input type="hidden" name="security" value=<?php echo wp_create_nonce('check-coupon'); ?>> -->
-				<input type="text" name="coupon" class="form-control form-control-lg mb-2" placeholder="Inserir código fornecido pela Magalu" required />
+				<input type="text" name="coupon" class="form-control form-control-lg mb-2" placeholder="Insira o código que recebeu por e-mail" required />
 				<input type="submit" class="btn btn-primary btn-lg btn-block" value="Checar" />
 			</form>
 		</div>
