@@ -4,7 +4,7 @@ namespace Polen\Master_class;
 
 class Master_Class_Rewrite
 {
-    const BASE_URL = 'master-class';
+    const BASE_URL = 'masterclass';
     const QUERY_VARS_MASTER_CLASS_APP     = 'master_class_app';
 
     const QUERY_VARS_MASTER_CLASS_IS_HOME = 'master_class_is_home';

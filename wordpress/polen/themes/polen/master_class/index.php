@@ -44,9 +44,7 @@ get_header();
                                     </div>
                                     <div class="col-12">
                                         <p>
-                                            Ronnie Von tem uma extensa carreira de sucesso como cantor, compositor, ator e apresentador.
-                                            Grande apreciador de vinhos desde jovem, hoje também é enólogo formado e compartilha dicas
-                                            sobre vinhos em seu canal do YouTube.
+                                        Ronnie Von tem uma extensa carreira de sucesso como cantor, compositor, ator e apresentador. Grande apreciador de vinhos desde jovem, hoje também é enólogo formado e compartilha dicas sobre vinho em suas entrevistas e redes sociais.
                                         </p>
                                     </div>
                                 </div>
