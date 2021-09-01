@@ -158,13 +158,13 @@ function event_promotional_get_order_flow_obj($order_number, $order_status, $ema
             'status' => 'fail',
         ),
         'talent-accepted' => array(
-            'title' => 'O Luciano aceitou',
-            'description' => 'O Luciano aceitou o seu pedido.',
+            'title' => 'Vídeo aceito',
+            'description' => 'O Autor aceitou o seu pedido.',
             'status' => 'complete',
         ),
         '_next-step' => array(
             'title' => 'Aguardando confirmação',
-            'description' => 'Você será informado quando o Luciano visualizar e aceitar a sua solicitação de vídeo-autógrafo.',
+            'description' => 'Você será informado quando a sua solicitação de vídeo-autógrafo for aceita.',
             'status' => 'in-progress',
         ),
     );
@@ -193,7 +193,7 @@ function event_promotional_get_order_flow_obj($order_number, $order_status, $ema
             ),
             '_next-step_2' => array(
                 'title' => 'Aguardando gravação do vídeo',
-                'description' => 'Quando o Luciano disponibilizar o vídeo ele será exibido aqui.',
+                'description' => 'Quando o vídeo for disponibilizado, ele será exibido aqui.',
                 'status' => 'pending',
             ),
         );
@@ -207,7 +207,7 @@ function event_promotional_get_order_flow_obj($order_number, $order_status, $ema
             $flow_2[$order_status],
             '_next-step_2' => array(
                 'title' => 'Aguardando gravação do vídeo',
-                'description' => 'Quando o Luciano disponibilizar o vídeo ele será exibido aqui.',
+                'description' => 'Quando o vídeo for disponibilizado, ele será exibido aqui.',
                 'status' => 'in-progress',
             ),
         );
