@@ -142,6 +142,9 @@ function va_get_banner_book(
 {
 	$pep = new Promotional_Event_Product( $product );
 	$img_book = $pep->get_url_image_product_with_size( 'polen-thumb-lg' );
+	if('rebeldes-tem-asas' == $product->get_sku()) {
+		$img_bg = TEMPLATE_URI . "/assets/img/video-autografo/rta-book-bg.png";
+	}
 ?>
 	<div class="row mb-3">
 		<div class="col-12">
@@ -166,9 +169,13 @@ function va_get_book_infos( $product )
 		<div class="col-12">
 			<div class="box-round book-info-wrapp py-3 px-3">
 				<div class="row">
-					<div class="col-12">
+					<div class="col-12 truncate-wrapper">
 						<h4 class="title">Sobre o Livro</h4>
-						<?php echo $product->get_description(); ?>
+						<input type="checkbox" name="expanded-1" id="expanded-1">
+						<div class="truncate truncate-4">
+							<?php echo $product->get_description(); ?>
+						</div>
+						<label for="expanded-1">Ver mais</label>
 							<!-- <a href="javascript:showMoreText()" class="link-more-text show">Mostrar mais</a> -->
 					</div>
 				</div>
@@ -352,7 +359,7 @@ function va_cart_form( $product, $coupon = "")
 				<p>
 					<label>
 						<input type="checkbox" class="form-control form-control-lg" name="terms" id="terms" required />
-						<span class="woocommerce-terms-and-conditions-checkbox-text ml-2" style="line-height: 24px;">Li e concordo com o(s) <a href="http://polen.me/politica-de-privacidade/" class="woocommerce-terms-and-conditions-link" target="_blank">termos e condições</a> e com o <a href="<?= site_url('regulamento-da-promocao-video-autografo-do-livro-de-porta-em-porta'); ?>" class="woocommerce-terms-and-conditions-link" target="_blank">Regulamento da Promoção</a>.&nbsp;<span class="required">*</span></span>
+						<span class="woocommerce-terms-and-conditions-checkbox-text ml-2" style="line-height: 24px;">Li e concordo com o(s) <a href="http://polen.me/politica-de-privacidade/" class="woocommerce-terms-and-conditions-link" target="_blank">termos e condições</a></span>
 					</label>
 				</p>
 				<p>
@@ -384,13 +391,13 @@ function va_coupon( $product )
 ?>
 	<div class="row mb-3">
 		<div class="col-12">
-			<h1 class="title mb-3">Inserir código</h1>
+			<h1 class="title mb-3">Insira o cupom</h1>
 			<form id="va-check-code">
 				<input type="hidden" name="action" value="check_coupon" />
 				<input type="hidden" name="product" value="<?= $product->get_sku(); ?>" />
 				<?php wp_nonce_field( 'check-coupon', 'security', true ); ?>
 				<!-- <input type="hidden" name="security" value=<?php echo wp_create_nonce('check-coupon'); ?>> -->
-				<input type="text" name="coupon" class="form-control form-control-lg mb-2" placeholder="Inserir código fornecido pela Magalu" required />
+				<input type="text" name="coupon" class="form-control form-control-lg mb-2" placeholder="Insira o código que recebeu por e-mail" required />
 				<input type="submit" class="btn btn-primary btn-lg btn-block" value="Checar" />
 			</form>
 		</div>

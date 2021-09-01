@@ -11,10 +11,10 @@
 		object-position: 0 0;
 	}
 	.desktop-img {
-		display: none;
+		display: none!important;
 	}
 	.mobile-img {
-		display: block;
+		display: block!important;
 	}
 	.content {
 		position: absolute;
@@ -53,10 +53,10 @@
 	@include media-breakpoint-up(md) {
 		height: 350px;
 		.desktop-img {
-			display: block;
+			display: block!important;
 		}
 		.mobile-img {
-			display: none;
+			display: none!important;
 		}
 		.content {
 			padding: 0px 0 0 35px;

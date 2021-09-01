@@ -10,7 +10,7 @@
 	}
 	p {
 		font-size: 14px;
-		font-weight: 700;
+		font-weight: normal;
 		line-height: 18px;
 		&.alt {
 			color: var(--subtext);
@@ -60,7 +60,7 @@
 	}
 }
 
-.comment-box {
+.comment-box, .truncate-wrapper {
 	input {
 		opacity: 0;
 		position: absolute;
