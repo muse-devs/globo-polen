@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                     <td align="center" valign="top">
                         <div>
                             <img src="<?php echo TEMPLATE_URI.'/assets/img/video-autografo/polen-email.png'?>" style="height: 50px; margin: 1em;"></img>
-                            <img src="<?php echo TEMPLATE_URI.'assets/img/video-autografo/reserva.png'?>" style="height: 20px; margin: 1em;"></img>
+                            <img src="<?php echo TEMPLATE_URI.'/assets/img/video-autografo/reserva.png'?>" style="height: 20px; margin: 1em;"></img>
                         </div>
                         <table border="0" cellpadding="0" cellspacing="0" width="600" style="background-color: #571210; overflow: hidden; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1); border-radius: 8px 8px 0px 0px;">
                             <tr>

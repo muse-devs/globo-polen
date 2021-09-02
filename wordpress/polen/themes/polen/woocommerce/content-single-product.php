@@ -152,9 +152,9 @@ $stock = $product->get_stock_quantity();
 	?>
 
 	<!-- Bio -->
-	<div class="row mt-4">
+	<div class="row mt-4 d-none">
 		<div class="col-12 col-md-6 m-md-auto d-flex">
-			<p><?= $product->get_description(); ?></p>
+			<p><?php //echo $product->get_description(); ?></p>
 		</div>
 	</div>
 
@@ -177,5 +177,36 @@ $stock = $product->get_stock_quantity();
 	?>
 
 </div>
+
+<?php
+
+//TODO botar numa função no local correto --------------------------------------------------
+$array_social = array();
+$array_sites = array("facebook", "twitter", "instagram", "linkedin", "youtube");
+
+foreach ($array_sites as $key => $site) {
+	if(!empty($Talent_Fields->$site)) {
+		$array_social[] = urlencode($Talent_Fields->$site);
+	}
+}
+
+$logo_dark = wp_get_attachment_image_url( get_theme_mod( 'custom_logo' ), 'full' );
+
+pol_print_schema_data(array(
+	"url" 						=> $Talent_Fields->talent_url,
+	"title" 					=> get_the_title(),
+	"image" 					=> $bg_image,
+	"date_published"			=> $Talent_Fields->created,
+	"date_modified" 			=> $Talent_Fields->updated,
+	"date_created" 				=> $Talent_Fields->created,
+	"talent_name" 				=> $Talent_Fields->nome,
+	"talent_url" 				=> $Talent_Fields->talent_url,
+	"talent_image" 				=> polen_get_avatar_src($Talent_Fields->user_id, 'polen-square-crop-lg'),
+	"talent_social_links_array"	=> $array_social,
+	"logo" 						=> $logo_dark,
+	"description" 				=> $Talent_Fields->descricao
+));
+
+?>
 
 <?php do_action('woocommerce_after_single_product'); ?>

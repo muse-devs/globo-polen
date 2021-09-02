@@ -500,6 +500,9 @@ class Polen_WooCommerce
                 );
                 ?>
             </div>
+
+
+            
         </div>
         <?php
     }
@@ -531,22 +534,29 @@ class Polen_WooCommerce
                 $product->update_meta_data( '_description_charity', $charity_description );
                 $product->update_meta_data( '_charity_subordinate_merchant_id', $charity_subordinate_id );
 
-                $product->update_meta_data( '_promotional_event', $promotional_event );
-                $product->update_meta_data( '_promotional_event_pages_quantity', $promotional_event_pages_quantity );
-                $product->update_meta_data( '_promotional_event_language', $promotional_event_language );
-                $product->update_meta_data( '_promotional_event_publishing', $promotional_event_publishing );
-                $product->update_meta_data( '_promotional_event_published_in', $promotional_event_published_in );
-                $product->update_meta_data( '_promotional_event_rating', $promotional_event_rating );
-                $product->update_meta_data( '_promotional_event_link_buy', $promotional_event_link_buy );
-                $product->update_meta_data( '_promotional_event_author', $promotional_event_author );
-                $product->update_meta_data( '_promotional_event_wartermark', $promotional_event_wartermark );
+                $this->save_meta($product, $promotional_event, '_promotional_event' );
+                $this->save_meta($product, $promotional_event_pages_quantity, '_promotional_event_pages_quantity' );
+                $this->save_meta($product, $promotional_event_language, '_promotional_event_language' );
+                $this->save_meta($product, $promotional_event_publishing, '_promotional_event_publishing' );
+                $this->save_meta($product, $promotional_event_published_in, '_promotional_event_published_in' );
+                $this->save_meta($product, $promotional_event_rating, '_promotional_event_rating' );
+                $this->save_meta($product, $promotional_event_link_buy, '_promotional_event_link_buy' );
+                $this->save_meta($product, $promotional_event_author, '_promotional_event_author' );
+                $this->save_meta($product, $promotional_event_wartermark, '_promotional_event_wartermark' );
 
-
-                remove_action( 'woocommerce_update_product', array( $this, 'on_product_save' ) );
                 remove_action( 'woocommerce_update_product', array( $this, 'on_product_save' ) );
                 $product->save();
                 add_action( 'woocommerce_update_product', array( $this, 'on_product_save' ) );
             }
         }  
+    }
+
+    private function save_meta( &$product, $value, $key )
+    {
+        if( !empty( $value ) ) {
+            $product->update_meta_data( $key, $value );
+        } else {
+            $product->delete_meta_data( $key );
+        }
     }
 }

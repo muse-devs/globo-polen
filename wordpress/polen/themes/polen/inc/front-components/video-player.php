@@ -229,8 +229,9 @@ function polen_get_url_watermark_video_player( $order )
 			}
 			$pep = new Promotional_Event_Product( $product );
 			$url_warter_mark = $pep->get_url_wartermark_video_player();
-	?>
-		<img src="<?= $url_warter_mark; ?>" class="logo social" alt="Logo Criança Esperança" style="" />
+			if( !empty( $url_warter_mark ) ) : ?>
+				<img src="<?= $url_warter_mark; ?>" class="logo social" alt="Logo Criança Esperança" style="" />
+			<?php endif; ?>
 	<?php endif; ?>
 	
 	<img src="<?php echo TEMPLATE_URI ?>/assets/img/logo.png" class="logo polen" alt="Logo Polen" />

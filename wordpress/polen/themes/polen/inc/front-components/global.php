@@ -12,8 +12,8 @@ function polen_front_get_banner_with_carousel($social = false)
 	);
 	$carrousel2 = array(
 		array(
-			"mobile" => TEMPLATE_URI . "/assets/img/criesp/bg-criesp.jpg",
-			"desktop" => TEMPLATE_URI . "/assets/img/criesp/bg-criesp.jpg"
+			"mobile" => TEMPLATE_URI . "/assets/img/bg-setembro.png",
+			"desktop" => TEMPLATE_URI . "/assets/img/bg-setembro.png"
 		)
 	);
 ?>
@@ -33,6 +33,23 @@ function polen_front_get_banner_with_carousel($social = false)
 						<h2 class="title mb-5">Presenteie e<br />surpreenda com vídeos personalizados.</h2>
 						<a href="<?php echo polen_get_all_talents_url(); ?>" class="banner-button-link">
 							<span class="mr-3">Ver todos os artistas</span>
+							<?php Icon_Class::polen_icon_chevron_right(); ?>
+						</a>
+					</div>
+				</div>
+				<div class="item">
+					<div class="carrousel">
+						<?php foreach ($carrousel2 as $item) : ?>
+							<figure class="image">
+								<img loading="lazy" src="<?php echo $item['mobile']; ?>" alt="Banner da home" class="mobile" />
+								<img loading="lazy" src="<?php echo $item['desktop']; ?>" alt="Banner da home" class="desktop" />
+							</figure>
+						<?php endforeach; ?>
+					</div>
+					<div class="content">
+						<h2 class="title mb-5">Setembro é o mês da prevenção ao suicídio.<br>Agir salva vidas!</h2>
+						<a href="<?php echo polen_get_all_talents_url(); ?>" class="banner-button-link button-yellow">
+							<span class="mr-3">Veja os depoimentos</span>
 							<?php Icon_Class::polen_icon_chevron_right(); ?>
 						</a>
 					</div>
@@ -135,7 +152,7 @@ function polen_front_get_card($item, $size = "small", $social = false)
 						<?php if ($item['in_stock']) : ?><span class="mr-2"><?php Icon_Class::polen_icon_camera_video(); ?></span><?php endif; ?>
 					<?php endif; ?>
 					<?php if ($item['in_stock']) : ?>
-						<?php if (!$social) echo $item["price"] == "0" ? 'GRÁTIS' : wc_price( $item['price'] ); ?>
+						<?php if (!$social) echo $item["price"] == "0" ? 'GRÁTIS' : $item['price_formatted']; ?>
 					<?php else : ?>
 						<span>Esgotado</span>
 					<?php endif; ?>
@@ -343,6 +360,13 @@ function polen_get_avatar($user_id, $size = 'polen-square-crop-lg')
 		$user = get_user_by('id', $user_id);
 		$initials_name = polen_get_initials_name_by_user($user);
 		return '<span>' . $initials_name   . '</span>';
+	}
+}
+
+function polen_get_avatar_src($user_id, $size = 'polen-squere-crop-lg')
+{
+	if (is_plugin_active('wp-user-avatar/wp-user-avatar.php') && has_wp_user_avatar($user_id)) {
+		return get_wp_user_avatar_src($user_id, $size);
 	}
 }
 

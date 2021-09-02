@@ -41,7 +41,7 @@ function pol_print_schema_data($data = array())
 				"name": "<?php echo $data['talent_name']; ?>",
 				"url": "<?php echo $data['talent_url']; ?>",
 				"image": "<?php echo $data['talent_image']; ?>",
-				"sameAs": <?php echo $data['talent_social_links_array']; ?>
+				"sameAs": <?php echo json_encode($data['talent_social_links_array']); ?>
 			},
 			"publisher": {
 				"@type": "Organization",
@@ -176,7 +176,7 @@ if (
 			$image_url = $pep->get_url_image_product_with_size( 'polen-thumb-lg' );
 			$author_name = $product->get_meta( '_promotional_event_author', true );
 			$product_name = $product->get_title();
-			
+
 			$headers['title'] = "Compre o livro &quot;{$product_name}&quot; e ganhe um vídeo personalizado.";
 			$headers['description'] = "Compre o livro &quot;{$product_name}&quot; e ganhe um vídeo personalizado com {$author_name}.";
 			$headers['url'] = event_promotional_url_detail_product( $product );
@@ -184,6 +184,12 @@ if (
 			$headers['site_name'] = "Polen.me - {$author_name} - {$product_name}";
 
 			// Imagem padrão - Logo Polen grande
+		} elseif( master_class_is_app() ) {
+			$headers['title'] = "Masterclass com Ronnie Von Beabá do Vinho";
+			$headers['description'] = "Aprenda a escolher, apreciar e harmonizar vinhos com Ronnie Von.";
+			$headers['url'] = master_class_url_home();
+			$headers['image'] = 'https://i.vimeocdn.com/video/1229508090_520';
+			$headers['site_name'] = "Polen.me - Masterclass - Beabá do Vinho";
 		} else {
 
 			$headers['image'] = 'https://polen.me/polen/uploads/2021/06/cropped-logo.png';
