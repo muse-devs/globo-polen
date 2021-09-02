@@ -7,7 +7,15 @@ use Polen\Social_Base\Social_Base_Rewrite;
 
 $social_slug = $GLOBALS[ Social_Base_Rewrite::QUERY_VARS_SOCIAL_SLUG ];
 
-$products = Social_Base_Product::get_all_products_by_slug_campaing( $social_slug );
+// $products = Social_Base_Product::get_all_products_by_slug_campaing( $social_slug );
+$args = array(
+    'status' => 'publish',
+    'meta_key' => '_social_base_slug_campaing',
+    'meta_value' => $slug_campaing,
+    'orderby' => 'menu_order',
+    'order' => 'DESC',
+);
+$items = _polen_get_info_talents_by_args( $args );
 
 get_header();
 ?>
@@ -19,7 +27,7 @@ get_header();
 	<?php polen_front_get_banner_with_carousel(true);
 	?>
 
-	<?php polen_front_get_news(social_get_products_by_category_slug(social_get_category_base()), "Os artistas que apoiam essa causa", null, true);
+	<?php polen_front_get_news( $items, "Os artistas que apoiam essa causa", null, true );
 	?>
 
 	<?php polen_front_get_tutorial(); ?>
