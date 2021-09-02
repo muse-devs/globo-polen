@@ -258,8 +258,9 @@ class Polen_Talent {
         if( $product->get_price() == 0 ) {
             $label = __( 'Pedir vídeo grátis' );
         } else {
-            $text = $social ? "Doar R$ " : "Pedir vídeo R$ ";
-            $label = __($text, 'polen') . number_format((float) $product->get_price(), 2, ',', '.');
+            $text = $social ? "Doar R$ " : "Pedir vídeo ";
+            $label = __($text, 'polen') . $product->get_price_html();
+            // $label = __($text, 'polen') . number_format((float) $product->get_price(), 2, ',', '.');
         }
         return $label;
     }
@@ -676,16 +677,23 @@ private function get_messenger($order): string
      */
     public function video_expiration_time( $user, $order_id, $social = false ){
         if( $this->is_user_talent( $user ) && !empty( $order_id )) {
-            $order = get_post( $order_id );
-            $first_dateTime = new \DateTime($order->post_date); 
-            $last_dateTime = new \DateTime($order->post_date); 
+            $order = wc_get_order( $order_id );
+            // $first_dateTime = new \DateTime($order->post_date); 
+            $last_dateTime = new \DateTime($order->get_date_created()); 
 
             $current_date = new \DateTime( "now", new \DateTimeZone( get_option( 'timezone_string' ) ) );
 
             //Produto Social do crianca esperanca é 15dias
-            $interval_days = ( !$social ) ? 'P7D' : 'P15D';
+            if( social_order_is_social( $order ) ) {
+                $interval_days = 'P15D';
+            } elseif ( event_promotional_order_is_event_promotional( $order ) ) {
+                $interval_days = 'P30D';
+            } else {
+                $interval_days = 'P7D';
+            }
+            
             $last_dateTime->add(new \DateInterval( $interval_days ));
-            $fomattedDate = $last_dateTime->format('Y-m-d H:i:s');
+            // $fomattedDate = $last_dateTime->format('Y-m-d H:i:s');
 
             $interval = $current_date->diff($last_dateTime);
             if( $interval->format('%D') > 1 && $interval->format('%R') == '+' ){
