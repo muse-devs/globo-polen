@@ -39,12 +39,9 @@ if ( $product->is_in_stock() ) : ?>
 
 		<button type="submit"
 				name="add-to-cart" value="<?php echo esc_attr( $product->get_id() ); ?>"
-				class="single_add_to_cart_button alt btn btn-<?php echo $social ? 'success' : 'primary' ?> btn-lg btn-block btn-get-video py-3">
-					<?php if($donate && !$social) : ?>
+				class="single_add_to_cart_button alt btn btn-primary btn-lg btn-block btn-get-video py-3">
+					<?php if($donate) : ?>
 						<span class="mr-2"><?php Icon_Class::polen_icon_donate(); ?></span>
-					<?php endif; ?>
-					<?php if($social) : ?>
-						<span class="mr-2"><?php Icon_Class::polen_icon_criesp(); ?></span>
 					<?php endif; ?>
 					<?php echo $product->single_add_to_cart_text(); ?>
 		</button>
