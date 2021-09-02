@@ -163,10 +163,11 @@ $stock = $product->get_stock_quantity();
 	<?php polen_get_share_icons(); ?>
 
 	<!-- Doação -->
-	<?php $donate && !$social ?
+	<?php
+	$donate && !$social ?
 		polen_front_get_donation_box($donate_image, $donate_text) :
 		null;
-
+	$video_depoimento = $product->get_meta( Social_Base_Product::PRODUCT_META_VIDEO_TESTEMONIAL_URL, true );
 	$social && sa_get_about($video_depoimento);
 	?>
 
