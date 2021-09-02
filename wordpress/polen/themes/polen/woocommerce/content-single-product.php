@@ -167,7 +167,7 @@ $stock = $product->get_stock_quantity();
 		polen_front_get_donation_box($donate_image, $donate_text) :
 		null;
 
-	$social && criesp_get_donation_box();
+	$social && sa_get_about($video_depoimento);
 	?>
 
 	<!-- Como funciona? -->

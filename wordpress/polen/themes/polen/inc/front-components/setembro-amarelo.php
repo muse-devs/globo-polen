@@ -1,6 +1,6 @@
 <?php
 
-function sa_get_about()
+function sa_get_about($video_depoimento = "https://player.vimeo.com/external/595532426.sd.mp4?s=ab2b9eebb3b1c17cd060ebe49d31ed2949472cea&profile_id=164")
 {
 ?>
 	<section class="row donation-box custom-donation-box mt-4 mb-4">
@@ -18,7 +18,7 @@ function sa_get_about()
 						<p><strong>Vídeo Depoimento</strong></p>
 						<div class="video-slider d-flex justify-content-center">
 							<video id="sa-video-about" playsinline poster="<?php echo TEMPLATE_URI; ?>/assets/img/cover-video-sa.png">
-								<source src="https://player.vimeo.com/external/595532426.sd.mp4?s=ab2b9eebb3b1c17cd060ebe49d31ed2949472cea&profile_id=164" type="video/mp4">
+								<source src="<?php echo $video_depoimento; ?>" type="video/mp4">
 							</video>
 						</div>
 					</div>
@@ -75,6 +75,9 @@ function sa_get_modal() {
 		polVideoTag("#sa-video");
 
 		function closeModalSa() {
+			const video = document.getElementById("sa-video");
+			video.pause();
+			video.currentTime = 0;
 			document.getElementById("sa-modal").classList.remove("d-block");
 		}
 	</script>
