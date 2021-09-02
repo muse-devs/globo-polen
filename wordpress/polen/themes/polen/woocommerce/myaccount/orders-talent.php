@@ -101,11 +101,7 @@ if( ! $talent_is_social ) {
 														<p class="p">Válido por</p>
 														<p class="value small">
 															<?php 
-																if (event_promotional_order_is_event_promotional($order_obj)) {
-																	echo "30 dias";
-																} else {
-																	echo $polen_talent->video_expiration_time( $logged_user, $order['order_id'], $is_social );
-																}
+																echo $polen_talent->video_expiration_time( $logged_user, $order['order_id'], $is_social );
 															?>
 														</p>
 													</div>
