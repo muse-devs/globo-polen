@@ -17,7 +17,7 @@ function sa_get_about()
 					<div class="col-md-12 mt-3">
 						<p><strong>Vídeo Depoimento</strong></p>
 						<div class="video-slider d-flex justify-content-center">
-							<video id="sa-video-about" playsinline poster="<?php echo TEMPLATE_URI; ?>/assets/img/cover-video-sa.png?v=2">
+							<video id="sa-video-about" playsinline poster="<?php echo TEMPLATE_URI; ?>/assets/img/cover-video-sa.png">
 								<source src="https://player.vimeo.com/external/595532426.sd.mp4?s=ab2b9eebb3b1c17cd060ebe49d31ed2949472cea&profile_id=164" type="video/mp4">
 							</video>
 						</div>
@@ -60,7 +60,7 @@ function sa_get_modal() {
 				<div class="col-12 mt-4">
 					<p>
 						<b>Setembro Amarelo:</b><br><br>
-						A Polen apoia a campanha de prevenção ao suicídio. E não se esqueça: depressão é coisa séria. 
+						A Polen apoia a campanha de prevenção ao suicídio. E não se esqueça: depressão é coisa séria.
 						Busque apoio médico. Compartilhe esse vídeo com quem precisa de ajuda.
 					</p>
 				</div>
@@ -73,7 +73,7 @@ function sa_get_modal() {
 	</div>
 	<script>
 		polVideoTag("#sa-video");
-		
+
 		function closeModalSa() {
 			document.getElementById("sa-modal").classList.remove("d-block");
 		}
