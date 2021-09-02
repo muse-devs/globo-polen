@@ -16,9 +16,9 @@ function sa_get_about()
 				<div class="row">
 					<div class="col-md-12 mt-3">
 						<p><strong>Vídeo Depoimento</strong></p>
-						<div class="video-slider">
-							<video muted="" autoplay="" loop="" playsinline="" controls="" poster="https://especiaiscomunicacaoprod.s3.amazonaws.com/criesp/doacoes/crianca/doacao/maik-doacao.png?Expires=1627496328&amp;AWSAccessKeyId=AKIAJXGK6DAEMAYESHFQ&amp;Signature=a1SxmAD%2BObKTL06O%2FhkTZUIu3dE%3D">
-								<source src="https://player.vimeo.com/external/581340431.hd.mp4?s=b5409bc8aef8c09550fb041a6db6dc5a2c324c15&profile_id=174" type="video/mp4">
+						<div class="video-slider d-flex justify-content-center">
+							<video id="sa-video-about" playsinline poster="<?php echo TEMPLATE_URI; ?>/assets/img/cover-video-sa.png?v=2">
+								<source src="https://player.vimeo.com/external/595532426.sd.mp4?s=ab2b9eebb3b1c17cd060ebe49d31ed2949472cea&profile_id=164" type="video/mp4">
 							</video>
 						</div>
 					</div>
@@ -30,5 +30,53 @@ function sa_get_about()
 			</div>
 		</div>
 	</section>
+	<script>
+		polVideoTag("#sa-video-about");
+	</script>
+<?php
+}
+
+function sa_get_modal() {
+?>
+	<div id="sa-modal" class="d-block">
+		<div class="container">
+			<div class="row">
+				<div class="col-12 d-flex justify-content-between align-items-center">
+					<h3>
+						<b>Setembro Amarelo</b><br>
+						Depoimentos
+					</h3>
+					<a href="javascript:closeModalSa()" class="btn-close">
+						<img src="<?php echo TEMPLATE_URI . '/assets/img/close-black.png'; ?>" alt="Fechar"></img>
+					</a>
+				</div>
+				<div class="col-12">
+					<div class="sa-home-video">
+						<video id="sa-video" playsinline poster="<?php echo TEMPLATE_URI; ?>/assets/img/cover-video-sa.png?v=2">
+							<source src="https://player.vimeo.com/external/595532426.sd.mp4?s=ab2b9eebb3b1c17cd060ebe49d31ed2949472cea&profile_id=164" type="video/mp4">
+						</video>
+					</div>
+				</div>
+				<div class="col-12 mt-4">
+					<p>
+						<b>Setembro Amarelo:</b><br><br>
+						A Polen apoia a campanha de prevenção ao suicídio. E não se esqueça: depressão é coisa séria. 
+						Busque apoio médico. Compartilhe esse vídeo com quem precisa de ajuda.
+					</p>
+				</div>
+				<div class="col-12">
+					<button onclick="copyToClipboard('')" class="btn btn-outline-light btn-lg btn-block share-link mb-4">Copiar Link</button>
+					<button onclick="shareVideo('Setembro Amarelo', '')" class="btn btn-outline-light btn-lg btn-block share-link mb-4">Compartilhar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		polVideoTag("#sa-video");
+		
+		function closeModalSa() {
+			document.getElementById("sa-modal").classList.remove("d-block");
+		}
+	</script>
 <?php
 }
