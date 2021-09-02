@@ -37,7 +37,8 @@ function polen_front_get_banner_with_carousel($social = false)
 						</a>
 					</div>
 				</div>
-				<div class="item">
+				<?php else: ?>
+					<div class="item">
 					<div class="carrousel">
 						<?php foreach ($carrousel2 as $item) : ?>
 							<figure class="image">
@@ -48,15 +49,21 @@ function polen_front_get_banner_with_carousel($social = false)
 					</div>
 					<div class="content">
 						<h2 class="title mb-5">Setembro é o mês da prevenção ao suicídio.<br>Agir salva vidas!</h2>
-						<a href="<?php echo polen_get_all_talents_url(); ?>" class="banner-button-link button-yellow">
-							<span class="mr-3">Veja os depoimentos</span>
+						<a href="javascript:openModalSa()" class="banner-button-link button-yellow">
+							<?php Icon_Class::polen_icon_donate(); ?>
+							<span class="mr-3 ml-2">Veja os depoimentos</span>
 							<?php Icon_Class::polen_icon_chevron_right(); ?>
 						</a>
 					</div>
 				</div>
-			<?php endif; ?>
+				<?php endif; ?>
 		</div>
 	</section>
+	<script>
+		function openModalSa() {
+			document.getElementById("sa-modal").classList.add("d-block");
+		}
+	</script>
 <?php
 }
 
@@ -124,7 +131,7 @@ function polen_front_get_card($item, $size = "small", $social = false)
 	}
 
 	if ($social) {
-		$size .= " criesp";
+		$size .= " yellow";
 	}
 
 	if (isset($item['ID'])) {
@@ -140,19 +147,13 @@ function polen_front_get_card($item, $size = "small", $social = false)
 		<div class="polen-card <?= $size; ?>" itemscope itemtype="https://schema.org/Offer">
 			<figure class="image">
 				<?php if ($social) {
-					polen_donate_badge("Criança Esperança", true, true);
-				} else {
-					$donate ? polen_donate_badge("Social") : null;
+					polen_donate_badge("Setembro Amarelo", true, false, true);
 				} ?>
 				<img loading="lazy" src="<?php echo $image[0]; ?>" alt="<?= $item["name"]; ?>">
 				<div class="price text-right" itemprop="price">
-					<?php if ($social && $item['in_stock']) : ?>
-						<span class="text">DOAR</span><br />
-					<?php else : ?>
-						<?php if ($item['in_stock']) : ?><span class="mr-2"><?php Icon_Class::polen_icon_camera_video(); ?></span><?php endif; ?>
-					<?php endif; ?>
 					<?php if ($item['in_stock']) : ?>
-						<?php if (!$social) echo $item["price"] == "0" ? 'GRÁTIS' : $item['price_formatted']; ?>
+						<span class="mr-2"><?php Icon_Class::polen_icon_camera_video(); ?></span>
+						<span><?php echo $item['price_formatted']; ?></span>
 					<?php else : ?>
 						<span>Esgotado</span>
 					<?php endif; ?>

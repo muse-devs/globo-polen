@@ -1,7 +1,11 @@
 .button-yellow {
     background-color: $setembro-amarelo!important;
     color: #000!important;
-    position: relative;
+    border: none!important;
+    min-width: 250px!important;
+    @include media-breakpoint-down(md) {
+        min-width: 180px!important;
+    }
 }
 
 #sa-modal {

@@ -6,6 +6,8 @@ get_header();
 
 <main id="primary" class="site-main">
 
+	<?php sa_get_modal(); ?>
+
 	<?php polen_front_get_banner_with_carousel(true);
 	?>
 
