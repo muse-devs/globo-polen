@@ -315,6 +315,8 @@ require_once TEMPLATE_DIR . '/social/social_function.php';
 
 require_once TEMPLATE_DIR . '/event_promotional/function_event_promotional.php';
 
+require_once TEMPLATE_DIR . '/social_base/function.php';;
+
 /**
 * Funções para master-class
 */
