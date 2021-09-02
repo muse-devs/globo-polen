@@ -49,7 +49,14 @@ $donate_text = stripslashes(get_post_meta(get_the_ID(), '_description_charity', 
 // $social = social_product_is_social($product, social_get_category_base()); //Antigo CRIESP
 $social = Social_Base_Product::product_is_social_base( $product );
 
-$stock = $product->get_stock_quantity();
+// outofstock
+// instock
+if( 'instock' == $product->get_stock_status() ) {
+	$has_stock = true;
+} else {
+	$has_stock = false;
+}
+// $stock = $product->get_stock_status();
 
 ?>
 
@@ -79,14 +86,14 @@ $stock = $product->get_stock_quantity();
 				<?php if($social) : ?>
 					<h5 class="talent-count-videos text-truncate">
 						<?php
-						$videosCount = $stock;
-						if ($videosCount === 1) {
+						// $videosCount = $stock;
+						if ($has_stock) {
 							echo $videosCount . " vídeo disponível";
-						} else if ($videosCount === 0) {
-							echo "Nenhum vídeo disponível";
 						} else {
-							echo $videosCount . " vídeos disponíveis";
-						}
+							echo "Nenhum vídeo disponível :D";
+						}// else {
+						// 	echo $videosCount . " vídeos disponíveis";
+						// }
 						?>
 					</h5>
 				<?php endif; ?>
@@ -100,7 +107,7 @@ $stock = $product->get_stock_quantity();
 
 	<div class="row mt-3 mb-1 talent-page-footer">
 		<div class="col-12 col-md-6 m-md-auto pb-3">
-			<?php if($stock > 0) : ?>
+			<?php if($has_stock) : ?>
 				<?php echo woocommerce_template_single_add_to_cart(); ?>
 			<?php else: ?>
 				<a href="/shop" class="btn btn-success btn-lg btn-block btn-get-video">
@@ -135,7 +142,7 @@ $stock = $product->get_stock_quantity();
 	<?php $social || polen_card_talent_reviews_order($post, $Talent_Fields); ?>
 
 	<?php
-		if (!$social) {
+		// if (!$social) {
 	?>
 		<div class="row mt-4">
 			<div class="col-md-12">
@@ -147,9 +154,9 @@ $stock = $product->get_stock_quantity();
 			</div>
 		</div>
 	<?php
-		} else {
-			criesp_get_send_video_date();
-		}
+		// } else {
+			//  criesp_get_send_video_date();
+		// }
 	?>
 
 	<!-- Bio -->
