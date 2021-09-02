@@ -85,8 +85,12 @@ class Polen_WooCommerce
 
             add_filter( 'woocommerce_product_data_tabs', array( $this, 'charity_tab' ) );
             add_filter( 'woocommerce_product_data_tabs', array( $this, 'promotional_event' ) );
+            add_filter( 'woocommerce_product_data_tabs', array( $this, 'social_base_event' ) );
+            
             add_filter( 'woocommerce_product_data_panels', array( $this, 'charity_product_data_product_tab_content' ) );
             add_filter( 'woocommerce_product_data_panels', array( $this, 'promotional_event_product_data_product_tab_content' ) );
+            add_filter( 'woocommerce_product_data_panels', array( $this, 'social_base_product_data_product_tab_content' ) );
+
             add_action( 'woocommerce_update_product', array( $this, 'on_product_save' ) );
 
             //Todas as compras gratis vão para o status payment-approved
@@ -278,6 +282,17 @@ class Polen_WooCommerce
         $array['promotional_event'] = array(
             'label'    => 'Video-Autógrafo',
             'target'   => 'promotional_event_product_data',
+            'class'    => array(),
+            'priority' => 90,
+        );
+        return $array;
+    }
+
+    public function social_base_event( $array )
+    {
+        $array['social_base'] = array(
+            'label'    => 'Base Social',
+            'target'   => 'social_base_product_data',
             'class'    => array(),
             'priority' => 90,
         );
@@ -507,6 +522,57 @@ class Polen_WooCommerce
         <?php
     }
 
+    public function social_base_product_data_product_tab_content()
+    {
+        global $product_object;
+        ?>
+            <div id="social_base_product_data" class="panel woocommerce_options_panel hidden">
+                <div class="options_group">
+                    <?php
+                    woocommerce_wp_checkbox(
+                        array(
+                            'id'      => '_is_social_base',
+                            'value'   => $product_object->get_meta( '_is_social_base' ) == 'yes' ? 'yes' : 'no',
+                            'label'   => 'Produto é Social',
+                            'cbvalue' => 'yes',
+                        )
+                    );
+                    ?>
+                </div>
+
+                <div class="options_group">
+                    <?php
+                    woocommerce_wp_text_input(
+                        array(
+                            'id'          => '_social_base_slug_campaing',
+                            'value'       => $product_object->get_meta( '_social_base_slug_campaing' ),
+                            'label'       => 'Slug da Campanha',
+                            'desc_tip'    => true,
+                            'description' => 'Slug da companha que este produto é parte',
+                            'type'        => 'text',
+                        )
+                    );
+                    ?>
+                </div>
+
+                <div class="options_group">
+                    <?php
+                    woocommerce_wp_text_input(
+                        array(
+                            'id'          => '_social_base_video_testimonial',
+                            'value'       => $product_object->get_meta( '_social_base_video_testimonial' ),
+                            'label'       => 'Link do video',
+                            'desc_tip'    => true,
+                            'description' => 'URL do Video com o video de talento',
+                            'type'        => 'text',
+                        )
+                    );
+                    ?>
+                </div>
+            </div>
+        <?php
+    }
+
     public function on_product_save( $product_id ) {
         if( is_admin() ){
             $screen = get_current_screen();
@@ -527,6 +593,10 @@ class Polen_WooCommerce
                 $promotional_event_link_buy = strip_tags( $_POST[ '_promotional_event_link_buy' ] );
                 $promotional_event_author = strip_tags( $_POST[ '_promotional_event_author' ] );
                 $promotional_event_wartermark = strip_tags( $_POST[ '_promotional_event_wartermark' ] );
+                
+                $is_social_base = strip_tags( $_POST[ '_is_social_base' ]);
+                $social_base_slug_campaing = strip_tags( $_POST[ '_social_base_slug_campaing' ]);
+                $social_base_video_testimonial = strip_tags( $_POST[ '_social_base_video_testimonial' ]);
 
                 $product->update_meta_data( '_is_charity', $charity );
                 $product->update_meta_data( '_charity_name', $charity_name );
@@ -544,6 +614,10 @@ class Polen_WooCommerce
                 $this->save_meta($product, $promotional_event_author, '_promotional_event_author' );
                 $this->save_meta($product, $promotional_event_wartermark, '_promotional_event_wartermark' );
 
+                $this->save_meta($product, $is_social_base, '_is_social_base' );
+                $this->save_meta($product, $social_base_slug_campaing, '_social_base_slug_campaing' );
+                $this->save_meta($product, $social_base_video_testimonial, '_social_base_video_testimonial' );
+                  
                 remove_action( 'woocommerce_update_product', array( $this, 'on_product_save' ) );
                 $product->save();
                 add_action( 'woocommerce_update_product', array( $this, 'on_product_save' ) );

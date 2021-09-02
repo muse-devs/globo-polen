@@ -60,10 +60,6 @@ class Social_Rewrite
 
         $GLOBALS[ self::QUERY_VARS_SOCIAL_APP ]     = '1';
         
-        if( get_query_var( self::QUERY_VARS_SOCIAL_IS_HOME ) == '1' ) {
-            $GLOBALS[ self::QUERY_VARS_SOCIAL_IS_HOME ] = '1';
-            return get_template_directory() . '/social/index.php';
-        }
         if( get_query_var( self::QUERY_VARS_SOCIAL_CRIESP ) == '1' ) {
             wp_safe_redirect( site_url(), 301 );
             exit;
