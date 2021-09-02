@@ -239,8 +239,13 @@ function polVideoTag(element) {
 		video.removeEventListener("click", playVideo);
 	}
 
+	function endVideo() {
+		video.controls = false;
+		addVideoListener();
+	}
+
 	addVideoListener();
-	video.addEventListener("ended", addVideoListener);
+	video.addEventListener("ended", endVideo);
 }
 
 // Mensagens globais via cookie ----------------------------------------
