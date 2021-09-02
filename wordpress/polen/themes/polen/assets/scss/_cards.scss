@@ -172,6 +172,11 @@
 			@media (max-width: 322px) {
 				left: 1px;
 			}
+			&.yellow {
+				.icon, .bi {
+					color: $setembro-amarelo;
+				}
+			}
 		}
 	}
 	&.responsive {
