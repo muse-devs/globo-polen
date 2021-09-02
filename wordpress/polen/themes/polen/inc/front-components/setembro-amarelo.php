@@ -75,6 +75,9 @@ function sa_get_modal() {
 		polVideoTag("#sa-video");
 
 		function closeModalSa() {
+			const video = document.getElementById("sa-video");
+			video.pause();
+			video.currentTime = 0;
 			document.getElementById("sa-modal").classList.remove("d-block");
 		}
 	</script>
