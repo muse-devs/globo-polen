@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-do_action( 'woocommerce_email_header', $email_heading, $email );
+do_action( 'woocommerce_email_header', 'Pedido Aprovado!', $email );
 
 ?>
 

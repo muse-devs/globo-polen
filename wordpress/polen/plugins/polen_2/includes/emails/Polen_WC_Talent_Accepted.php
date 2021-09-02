@@ -17,11 +17,11 @@ class Polen_WC_Talent_Accepted extends \WC_Email {
     public function __construct() {
         $this->id          = 'wc_talent_accepted';
 		$this->title       = __( 'O talento aceitou', 'polen' );
-		$this->title_ep       = __( 'Luciano aceitou fazer seu vídeo-autógrafo', 'polen' );
+		$this->title_ep       = __( ' aceitou fazer seu vídeo-autógrafo', 'polen' );
 		$this->description = __( 'E-mail que será enviado ao usuário quando o talento aceitar o pedido.', 'polen' );
 		$this->customer_email = true;
 		$this->heading     = __( 'O talento aceitou', 'polen' );
-		$this->heading     = __( 'Luciano aceitou', 'polen' );
+		$this->heading_ep     = __( '%s aceitou', 'polen' );
 
 		$this->subject     = sprintf( _x( '[%s] O talento aceitou', 'E-mail que será enviado ao usuário quando o talento aceitar o pedido.', 'polen' ), '{blogname}' );
 		$this->subject_ep  = '%s aceitou seu pedido e logo fará seu vídeo-autógrafo' ;
@@ -71,10 +71,16 @@ class Polen_WC_Talent_Accepted extends \WC_Email {
 		return sprintf( $this->subject_ep, $author );
 	}
 
+	public function get_heading_ep()
+	{
+		$author = $this->product->get_meta( '_promotional_event_author', true );
+		return sprintf( $this->heading_ep, $author );
+	}
+
 	public function get_content_ep_html() {
 		return wc_get_template_html( sprintf( $this->template_ep_html, $this->product->get_sku() ), array(
 			'order'         => $this->object,
-			'email_heading' => $this->get_heading(),
+			'email_heading' => $this->get_heading_ep(),
 			'sent_to_admin' => true,
 			'plain_text'    => false,
 			'email'			=> $this
