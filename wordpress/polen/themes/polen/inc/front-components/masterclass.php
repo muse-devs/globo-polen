@@ -70,22 +70,9 @@ function mc_get_top_banner()
 		</div>
 	</div>
 	<script>
-		const video = document.querySelector("#mc-video");
 		const success = "<?php echo master_class_url_success(); ?>";
 
-		function addVideoListener() {
-			video.load();
-			video.addEventListener("click", playVideo);
-		}
-
-		function playVideo() {
-			video.play();
-			video.controls = true;
-			video.removeEventListener("click", playVideo);
-		}
-
-		addVideoListener();
-		video.addEventListener("ended", addVideoListener);
+		polVideoTag("#mc-video");
 
 		const formName = "form#form-email-masterclass";
 		document.querySelector(formName).addEventListener("submit", function(evt) {

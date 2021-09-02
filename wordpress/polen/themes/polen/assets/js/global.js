@@ -225,6 +225,24 @@ function truncatedItems() {
 	});
 }
 
+function polVideoTag(element) {
+	const video = document.querySelector(element);
+
+	function addVideoListener() {
+		video.load();
+		video.addEventListener("click", playVideo);
+	}
+
+	function playVideo() {
+		video.play();
+		video.controls = true;
+		video.removeEventListener("click", playVideo);
+	}
+
+	addVideoListener();
+	video.addEventListener("ended", addVideoListener);
+}
+
 // Mensagens globais via cookie ----------------------------------------
 //type: success || error
 //title: only in success
