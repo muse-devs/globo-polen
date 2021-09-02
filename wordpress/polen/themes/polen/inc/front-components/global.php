@@ -37,8 +37,8 @@ function polen_front_get_banner_with_carousel($social = false)
 						</a>
 					</div>
 				</div>
-				<?php endif; ?>
-				<div class="item">
+				<?php else: ?>
+					<div class="item">
 					<div class="carrousel">
 						<?php foreach ($carrousel2 as $item) : ?>
 							<figure class="image">
@@ -50,11 +50,13 @@ function polen_front_get_banner_with_carousel($social = false)
 					<div class="content">
 						<h2 class="title mb-5">Setembro é o mês da prevenção ao suicídio.<br>Agir salva vidas!</h2>
 						<a href="<?php echo polen_get_all_talents_url(); ?>" class="banner-button-link button-yellow">
-							<span class="mr-3">Veja os depoimentos</span>
+							<?php Icon_Class::polen_icon_donate(); ?>
+							<span class="mr-3 ml-2">Veja os depoimentos</span>
 							<?php Icon_Class::polen_icon_chevron_right(); ?>
 						</a>
 					</div>
 				</div>
+				<?php endif; ?>
 		</div>
 	</section>
 <?php
