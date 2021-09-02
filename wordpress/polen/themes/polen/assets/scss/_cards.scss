@@ -172,6 +172,11 @@
 			@media (max-width: 322px) {
 				left: 1px;
 			}
+			&.yellow {
+				.icon, .bi {
+					color: $setembro-amarelo;
+				}
+			}
 		}
 	}
 	&.responsive {
@@ -249,7 +254,7 @@
 			color: white;
 		}
 	}
-	&.criesp {
+	&.criesp, &.yellow {
 		padding-bottom: 5px;
 		color: white;
 		border-radius: 10px;
@@ -267,6 +272,10 @@
 		.title {
 			padding-bottom: 0;
 		}
+	}
+	&.yellow {
+		color: var(--dark);
+		background-color: $setembro-amarelo;
 	}
 }
 
