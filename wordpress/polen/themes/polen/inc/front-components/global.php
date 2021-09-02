@@ -346,6 +346,13 @@ function polen_get_avatar($user_id, $size = 'polen-square-crop-lg')
 	}
 }
 
+function polen_get_avatar_src($user_id, $size = 'polen-squere-crop-lg')
+{
+	if (is_plugin_active('wp-user-avatar/wp-user-avatar.php') && has_wp_user_avatar($user_id)) {
+		return get_wp_user_avatar_src($user_id, $size);
+	}
+}
+
 function polen_box_image_message($image, $text)
 {
 ?>

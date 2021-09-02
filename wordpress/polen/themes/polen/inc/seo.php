@@ -41,7 +41,7 @@ function pol_print_schema_data($data = array())
 				"name": "<?php echo $data['talent_name']; ?>",
 				"url": "<?php echo $data['talent_url']; ?>",
 				"image": "<?php echo $data['talent_image']; ?>",
-				"sameAs": <?php echo $data['talent_social_links_array']; ?>
+				"sameAs": <?php echo json_encode($data['talent_social_links_array']); ?>
 			},
 			"publisher": {
 				"@type": "Organization",
@@ -176,7 +176,7 @@ if (
 			$image_url = $pep->get_url_image_product_with_size( 'polen-thumb-lg' );
 			$author_name = $product->get_meta( '_promotional_event_author', true );
 			$product_name = $product->get_title();
-			
+
 			$headers['title'] = "Compre o livro &quot;{$product_name}&quot; e ganhe um vídeo personalizado.";
 			$headers['description'] = "Compre o livro &quot;{$product_name}&quot; e ganhe um vídeo personalizado com {$author_name}.";
 			$headers['url'] = event_promotional_url_detail_product( $product );
