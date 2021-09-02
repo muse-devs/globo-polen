@@ -33,6 +33,7 @@ if (post_password_required()) {
 }
 
 use Polen\Includes\Polen_Update_Fields;
+use Polen\Social_Base\Social_Base_Product;
 
 global $post;
 $Talent_Fields = new Polen_Update_Fields();
@@ -45,7 +46,8 @@ $donate = get_post_meta(get_the_ID(), '_is_charity', true);
 $donate_name = get_post_meta(get_the_ID(), '_charity_name', true);
 $donate_image =  get_post_meta(get_the_ID(), '_url_charity_logo', true);
 $donate_text = stripslashes(get_post_meta(get_the_ID(), '_description_charity', true));
-$social = social_product_is_social($product, social_get_category_base());
+// $social = social_product_is_social($product, social_get_category_base()); //Antigo CRIESP
+$social = Social_Base_Product::product_is_social_base( $product );
 
 $stock = $product->get_stock_quantity();
 
@@ -98,11 +100,10 @@ $stock = $product->get_stock_quantity();
 
 	<div class="row mt-3 mb-1 talent-page-footer">
 		<div class="col-12 col-md-6 m-md-auto pb-3">
-			<?php if(!$social || $stock > 0) : ?>
+			<?php if($stock > 0) : ?>
 				<?php echo woocommerce_template_single_add_to_cart(); ?>
 			<?php else: ?>
-				<a href="<?php echo social_get_criesp_url(); ?>" class="btn btn-success btn-lg btn-block btn-get-video">
-					<span class="mr-2"><?php Icon_Class::polen_icon_criesp(); ?></span>
+				<a href="/shop" class="btn btn-success btn-lg btn-block btn-get-video">
 					Escolher outro artista
 				</a>
 			<?php endif; ?>
@@ -112,20 +113,20 @@ $stock = $product->get_stock_quantity();
 	<div class="row">
 		<div class="col-12 col-md-6 m-md-auto d-flex">
 			<!-- Se for doação -->
-			<?php if ($donate && !$social) : ?>
+			<?php if ($donate) : ?>
 				<div class="row">
 					<div class="col-md-12 mb-1">
 						<?php polen_donate_badge("100% DO CACHÊ DOADO PARA " . strtoupper($donate_name), false); ?>
 					</div>
 				</div>
 			<?php endif; ?>
-			<?php if ($social) : ?>
+			<?php /* if ($social) : ? >
 				<div class="row">
 					<div class="col-md-12 mb-1">
 						<?php polen_donate_badge("100% DO VALOR DOADO PARA O CRIANÇA ESPERANÇA", false, true); ?>
 					</div>
 				</div>
-			<?php endif; ?>
+			<?php endif; */?>
 			<!-- /------------ -->
 		</div>
 	</div>

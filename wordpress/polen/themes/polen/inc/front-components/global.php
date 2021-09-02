@@ -122,7 +122,8 @@ function polen_front_get_banner()
 // $size pode ser 'medium' e 'small'
 function polen_front_get_card($item, $size = "small", $social = false)
 {
-	$social == false ? $social = social_product_is_social(wc_get_product($item['ID']), social_get_category_base()) : false;
+	$social = product_is_social_base( wc_get_product( $item['ID'] ) );
+	// $social == false ? $social = social_product_is_social(wc_get_product($item['ID']), social_get_category_base()) : false;
 	$class = $size;
 	if ($size === "small") {
 		$class = "col-6 col-md-2";
