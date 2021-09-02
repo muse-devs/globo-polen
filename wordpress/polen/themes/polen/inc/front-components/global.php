@@ -49,7 +49,7 @@ function polen_front_get_banner_with_carousel($social = false)
 					</div>
 					<div class="content">
 						<h2 class="title mb-5">Setembro é o mês da prevenção ao suicídio.<br>Agir salva vidas!</h2>
-						<a href="<?php echo polen_get_all_talents_url(); ?>" class="banner-button-link button-yellow">
+						<a href="javascript:openModalSa()" class="banner-button-link button-yellow">
 							<?php Icon_Class::polen_icon_donate(); ?>
 							<span class="mr-3 ml-2">Veja os depoimentos</span>
 							<?php Icon_Class::polen_icon_chevron_right(); ?>
@@ -59,6 +59,11 @@ function polen_front_get_banner_with_carousel($social = false)
 				<?php endif; ?>
 		</div>
 	</section>
+	<script>
+		function openModalSa() {
+			document.getElementById("sa-modal").classList.add("d-block");
+		}
+	</script>
 <?php
 }
 

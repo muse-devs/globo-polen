@@ -38,7 +38,7 @@ function sa_get_about()
 
 function sa_get_modal() {
 ?>
-	<div id="sa-modal" class="d-block">
+	<div id="sa-modal">
 		<div class="container">
 			<div class="row">
 				<div class="col-12 d-flex justify-content-between align-items-center">
@@ -65,8 +65,8 @@ function sa_get_modal() {
 					</p>
 				</div>
 				<div class="col-12">
-					<button onclick="copyToClipboard('')" class="btn btn-outline-light btn-lg btn-block share-link mb-4">Copiar Link</button>
-					<button onclick="shareVideo('Setembro Amarelo', '')" class="btn btn-outline-light btn-lg btn-block share-link mb-4">Compartilhar</button>
+					<button onclick="copyToClipboard('<?php echo get_home_url(); ?>/social/setembro-amarelo')" class="btn btn-outline-light btn-lg btn-block share-link mb-4">Copiar Link</button>
+					<button onclick="shareVideo('Setembro Amarelo', '<?php echo get_home_url(); ?>/social/setembro-amarelo')" class="btn btn-outline-light btn-lg btn-block share-link mb-4">Compartilhar</button>
 				</div>
 			</div>
 		</div>
