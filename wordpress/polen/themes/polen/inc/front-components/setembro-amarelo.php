@@ -80,3 +80,29 @@ function sa_get_modal() {
 	</script>
 <?php
 }
+
+function sa_get_home_banner($title, $description, $link, $images = array("mobile" => "", "desktop" => ""))
+{
+?>
+	<div class="row mt-4">
+		<div class="col-12">
+			<div class="va-banner">
+				<img class="image mobile-img" src="<?php echo $images['mobile']; ?>" alt="<?php echo $title; ?>" />
+				<img class="image desktop-img" src="<?php echo $images['desktop']; ?>" alt="<?php echo $title; ?>" />
+				<div class="content">
+					<div class="row">
+						<div class="col-12 col-md-6">
+							<h2><?php echo $title; ?></h2>
+							<p class="mt-3"><?php echo $description; ?><br></p>
+							<a href="/social/setembro-amarelo" class="btn btn-primary btn-md button-yellow">
+								<span class="mr-1">Veja os depoimentos</span>
+								<?php Icon_Class::polen_icon_chevron_right(); ?>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php
+}
