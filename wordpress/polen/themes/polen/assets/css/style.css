@@ -13141,7 +13141,11 @@ label.lg {
 .button-yellow {
   background-color: #FFCF34 !important;
   color: #000 !important;
-  position: relative; }
+  border: none !important;
+  min-width: 250px !important; }
+  @media (max-width: 991.98px) {
+    .button-yellow {
+      min-width: 180px !important; } }
 
 #sa-modal {
   background: #FFFFFF;
