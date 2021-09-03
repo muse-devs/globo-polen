@@ -165,7 +165,7 @@ if (
 			// $image = social_get_image_by_category(social_get_category_base());
 
 			$headers['title'] = 'Polen - Setembro Amarelo';
-			$headers['description'] = 'Polen - Campanha Setembro Amarelo';
+			$headers['description'] = 'Setembro é o mês da prevenção ao suicídio. Agir salva vidas!';
 			$headers['image'] = site_url('polen/themes/polen/assets/img/bg-setembro.png');
 			$headers['url'] = site_url('social/' . Social_Base_Rewrite::get_current_slug());
 
