@@ -67,14 +67,18 @@ function sa_get_modal() {
 					</p>
 				</div>
 				<div class="col-12">
-					<button onclick="copyToClipboard('<?php echo get_home_url(); ?>/social/setembro-amarelo#sa-modal')" class="btn btn-outline-light btn-lg btn-block share-link mb-4">Copiar Link</button>
-					<button onclick="shareVideo('Setembro Amarelo', '<?php echo get_home_url(); ?>/social/setembro-amarelo#sa-modal')" class="btn btn-outline-light btn-lg btn-block share-link mb-4">Compartilhar</button>
+					<button id="sa-btn-copy" onclick="copyToClipboard('<?php echo get_home_url(); ?>/social/setembro-amarelo#sa-modal')" class="btn btn-outline-light btn-lg btn-block share-link mb-4" style="display: none;">Copiar Link</button>
+					<button id="sa-btn-share" onclick="shareVideo('Setembro Amarelo', '<?php echo get_home_url(); ?>/social/setembro-amarelo#sa-modal')" class="btn btn-outline-light btn-lg btn-block share-link mb-4" style="display: none;">Compartilhar</button>
 				</div>
 			</div>
 		</div>
 	</div>
 	<script>
 		polVideoTag("#sa-video");
+
+		navigator.share ?
+			document.getElementById("sa-btn-share").style.display = "block" :
+			document.getElementById("sa-btn-copy").style.display = "block"
 
 		function closeModalSa() {
 			const video = document.getElementById("sa-video");
