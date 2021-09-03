@@ -32,7 +32,8 @@ function sa_get_about($video_depoimento = "")
 	</section>
 	<script>
 		const video = document.getElementById("sa-video-about");
-		video.currentTime = 0.1;
+		video.load();
+		video.currentTime = 1;
 	</script>
 <?php
 }
