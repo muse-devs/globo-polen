@@ -163,6 +163,11 @@
 				color: var(--light);
 				font-weight: 400;
 			}
+			del {
+				position: absolute;
+				margin-top: -12px;
+				right: 0;
+			}
 		}
 		.donate-badge {
 			position: absolute;
@@ -171,6 +176,11 @@
 			z-index: 3;
 			@media (max-width: 322px) {
 				left: 1px;
+			}
+			&.yellow {
+				.icon, .bi {
+					color: $setembro-amarelo;
+				}
 			}
 		}
 	}
