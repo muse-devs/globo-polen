@@ -31,7 +31,9 @@ function sa_get_about($video_depoimento = "")
 		</div>
 	</section>
 	<script>
-		// polVideoTag("#sa-video-about");
+		const video = document.getElementById("sa-video-about");
+		video.load();
+		video.currentTime = 1;
 	</script>
 <?php
 }
@@ -65,8 +67,8 @@ function sa_get_modal() {
 					</p>
 				</div>
 				<div class="col-12">
-					<button onclick="copyToClipboard('<?php echo get_home_url(); ?>/social/setembro-amarelo')" class="btn btn-outline-light btn-lg btn-block share-link mb-4">Copiar Link</button>
-					<button onclick="shareVideo('Setembro Amarelo', '<?php echo get_home_url(); ?>/social/setembro-amarelo')" class="btn btn-outline-light btn-lg btn-block share-link mb-4">Compartilhar</button>
+					<button onclick="copyToClipboard('<?php echo get_home_url(); ?>/social/setembro-amarelo#sa-modal')" class="btn btn-outline-light btn-lg btn-block share-link mb-4">Copiar Link</button>
+					<button onclick="shareVideo('Setembro Amarelo', '<?php echo get_home_url(); ?>/social/setembro-amarelo#sa-modal')" class="btn btn-outline-light btn-lg btn-block share-link mb-4">Compartilhar</button>
 				</div>
 			</div>
 		</div>
@@ -79,6 +81,7 @@ function sa_get_modal() {
 			video.pause();
 			// video.currentTime = 0;
 			document.getElementById("sa-modal").classList.remove("d-block");
+			changeHash();
 		}
 	</script>
 <?php
@@ -98,7 +101,7 @@ function sa_get_home_banner($title, $description, $link, $images = array("mobile
 							<h2><?php echo $title; ?></h2>
 							<p class="mt-3"><?php echo $description; ?><br></p>
 							<a href="/social/setembro-amarelo" class="btn btn-primary btn-md button-yellow">
-								<span class="mr-1">Veja os depoimentos</span>
+								<span class="mr-1">Conheça</span>
 								<?php Icon_Class::polen_icon_chevron_right(); ?>
 							</a>
 						</div>
