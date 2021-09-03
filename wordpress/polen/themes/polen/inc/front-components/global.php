@@ -62,6 +62,10 @@ function polen_front_get_banner_with_carousel($social = false)
 	<script>
 		function openModalSa() {
 			document.getElementById("sa-modal").classList.add("d-block");
+			changeHash("sa-modal");
+		}
+		if(window.location.hash.substring(1) == "sa-modal") {
+			openModalSa();
 		}
 	</script>
 <?php
