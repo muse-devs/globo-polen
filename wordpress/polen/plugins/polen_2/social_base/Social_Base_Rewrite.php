@@ -75,4 +75,14 @@ class Social_Base_Rewrite
             return get_template_directory() . '/social_base/index.php';
         }
     }
+
+
+    public static function get_current_slug()
+    {
+        if( get_query_var( self::QUERY_VARS_SOCIAL_IS_DETAIL_PAGE) == '1' ) {
+            $social_slug = get_query_var( self::QUERY_VARS_SOCIAL_SLUG );
+            return $social_slug;
+        }
+        return false;
+    }
 }
