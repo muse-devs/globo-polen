@@ -234,8 +234,10 @@ function polVideoTag(element) {
 	}
 
 	function playVideo() {
-		video.play();
 		video.controls = true;
+		setImediate(function(){
+			video.play();
+		})
 		video.removeEventListener("click", playVideo);
 	}
 
