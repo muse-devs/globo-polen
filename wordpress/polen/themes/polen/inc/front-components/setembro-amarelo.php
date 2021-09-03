@@ -31,7 +31,8 @@ function sa_get_about($video_depoimento = "")
 		</div>
 	</section>
 	<script>
-		// polVideoTag("#sa-video-about");
+		const video = document.getElementById("sa-video-about");
+		video.currentTime = 0.1;
 	</script>
 <?php
 }
@@ -98,7 +99,7 @@ function sa_get_home_banner($title, $description, $link, $images = array("mobile
 							<h2><?php echo $title; ?></h2>
 							<p class="mt-3"><?php echo $description; ?><br></p>
 							<a href="/social/setembro-amarelo" class="btn btn-primary btn-md button-yellow">
-								<span class="mr-1">Veja os depoimentos</span>
+								<span class="mr-1">Conheça</span>
 								<?php Icon_Class::polen_icon_chevron_right(); ?>
 							</a>
 						</div>
