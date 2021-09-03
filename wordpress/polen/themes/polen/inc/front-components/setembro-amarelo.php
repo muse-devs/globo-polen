@@ -66,8 +66,8 @@ function sa_get_modal() {
 					</p>
 				</div>
 				<div class="col-12">
-					<button onclick="copyToClipboard('<?php echo get_home_url(); ?>/social/setembro-amarelo')" class="btn btn-outline-light btn-lg btn-block share-link mb-4">Copiar Link</button>
-					<button onclick="shareVideo('Setembro Amarelo', '<?php echo get_home_url(); ?>/social/setembro-amarelo')" class="btn btn-outline-light btn-lg btn-block share-link mb-4">Compartilhar</button>
+					<button onclick="copyToClipboard('<?php echo get_home_url(); ?>/social/setembro-amarelo#sa-modal')" class="btn btn-outline-light btn-lg btn-block share-link mb-4">Copiar Link</button>
+					<button onclick="shareVideo('Setembro Amarelo', '<?php echo get_home_url(); ?>/social/setembro-amarelo#sa-modal')" class="btn btn-outline-light btn-lg btn-block share-link mb-4">Compartilhar</button>
 				</div>
 			</div>
 		</div>
@@ -80,6 +80,7 @@ function sa_get_modal() {
 			video.pause();
 			// video.currentTime = 0;
 			document.getElementById("sa-modal").classList.remove("d-block");
+			changeHash();
 		}
 	</script>
 <?php
