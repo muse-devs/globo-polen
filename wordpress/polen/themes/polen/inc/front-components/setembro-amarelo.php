@@ -52,8 +52,8 @@ function sa_get_modal() {
 				</div>
 				<div class="col-12">
 					<div class="sa-home-video">
-						<video id="sa-video" playsinline poster="<?php echo TEMPLATE_URI; ?>/assets/img/cover-video-sa.png?v=2">
-							<source src="https://player.vimeo.com/external/595532426.sd.mp4?s=ab2b9eebb3b1c17cd060ebe49d31ed2949472cea&profile_id=164" type="video/mp4">
+						<video id="sa-video" playsinline poster="<?php echo TEMPLATE_URI; ?>/assets/img/social/sa-poster.jpg">
+							<source src="https://player.vimeo.com/external/596862158.sd.mp4?s=9f3886b9be7113cdad714b02b22f2076d229ddc3&profile_id=165" type="video/mp4">
 						</video>
 					</div>
 				</div>
@@ -77,7 +77,7 @@ function sa_get_modal() {
 		function closeModalSa() {
 			const video = document.getElementById("sa-video");
 			video.pause();
-			video.currentTime = 0;
+			// video.currentTime = 0;
 			document.getElementById("sa-modal").classList.remove("d-block");
 		}
 	</script>
