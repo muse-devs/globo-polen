@@ -15,14 +15,53 @@ get_header();
 
 	<?php polen_banner_scrollable(polen_get_new_talents(6), "Destaque", polen_get_all_new_talents_url()); ?>
 
-	<?php va_get_home_banner(event_promotional_url_home()); ?>
+	<div class="row">
+		<div class="col-12">
+			<div id="product-carousel" class="owl-carousel owl-theme">
+				<div class="item">
+					<?php
+					sa_get_home_banner(
+						"Setembro amarelo",
+						"Setembro é o mês mundial de prevenção do suicídio. Agir salva vidas!",
+						"/social/setembro-amarelo",
+						array(
+							"mobile" => TEMPLATE_URI . '/assets/img/banner-setembro-desktop.png',
+							"desktop" => TEMPLATE_URI . '/assets/img/banner-setembro-desktop.png',
+						)
+					);
+					?>
+				</div>
+				<div class="item">
+					<?php mc_get_home_banner(master_class_url_home()); ?>
+				</div>
+				<div class="item">
+					<?php va_get_home_banner_de_porta_em_porta('/produtos/de-porta-em-porta'); ?>
+				</div>
+				<div class="item">
+					<?php
+					//TODO link da landpage
+					va_get_home_banner(
+						"Rebeldes têm asas",
+						"Agora você pode comprar o livro e ter um autógrafo em vídeo do Rony Meisler.",
+						"/produtos/rebeldes-tem-asas",
+						array(
+							"mobile" => TEMPLATE_URI . '/assets/img/video-autografo/rta-banner-home-mobile.jpeg',
+							"desktop" => TEMPLATE_URI . '/assets/img/video-autografo/rta-banner-home-desktop.jpeg',
+						)
+					);
+					?>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<?php polen_front_get_tutorial(); ?>
 
 	<?php polen_front_get_news(polen_get_talents(12), "Todos os talentos", polen_get_all_talents_url());
 	?>
 
-	<?php //polen_front_get_suggestion_box(); ?>
+	<?php //polen_front_get_suggestion_box();
+	?>
 
 </main><!-- #main -->
 

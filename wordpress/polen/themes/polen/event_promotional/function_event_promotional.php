@@ -2,28 +2,42 @@
 
 function event_promotional_url_home()
 {
-    return site_url( Promotional_Event_Rewrite::BASE_URL . '/de-porta-em-porta' );
+    return site_url( Promotional_Event_Rewrite::BASE_URL . '/' );
 }
 
-function event_promotional_url_code_validation()
+function event_promotional_url_detail_product( $product )
 {
-    return event_promotional_url_home() . '/validar-codigo';
+    return event_promotional_url_home() . $product->get_sku();
 }
 
-function event_promotional_url_order( $cupom_code )
+function event_promotional_url_code_validation( $product )
 {
-    return event_promotional_url_home() . '/pedido?cupom_code=' . $cupom_code;
+    return event_promotional_url_detail_product( $product ) . '/validar-codigo';
 }
 
-function event_promotional_url_success( $order_id, $order_key )
+function event_promotional_url_order( $product, $cupom_code )
 {
-    return event_promotional_url_home() . "/confirmado?order={$order_id}&order_key={$order_key}";
+    return event_promotional_url_detail_product( $product ) . '/pedido?cupom_code=' . $cupom_code;
+}
+
+function event_promotional_url_success( $product, $order_id, $order_key )
+{
+    return event_promotional_url_detail_product( $product ) . "/confirmado?order={$order_id}&order_key={$order_key}";
 }
 
 function event_promotional_is_home()
 {
     $is_set = isset( $GLOBALS[ Promotional_Event_Rewrite::QUERY_VARS_EVENT_PROMOTIONAL_IS_HOME ] );
     if( $is_set && $GLOBALS[ Promotional_Event_Rewrite::QUERY_VARS_EVENT_PROMOTIONAL_IS_HOME ] == '1' ) {
+        return true;
+    }
+    return false;
+}
+
+function event_promotional_is_detail_product()
+{
+    $is_set = isset( $GLOBALS[ Promotional_Event_Rewrite::QUERY_VARS_EVENT_PROMOTIONAL_DETAIL_PRODUCT ] );
+    if( $is_set && $GLOBALS[ Promotional_Event_Rewrite::QUERY_VARS_EVENT_PROMOTIONAL_DETAIL_PRODUCT ] == '1' ) {
         return true;
     }
     return false;
@@ -144,13 +158,13 @@ function event_promotional_get_order_flow_obj($order_number, $order_status, $ema
             'status' => 'fail',
         ),
         'talent-accepted' => array(
-            'title' => 'O Luciano aceitou',
-            'description' => 'O Luciano aceitou o seu pedido.',
+            'title' => 'Vídeo aceito',
+            'description' => 'O Autor aceitou o seu pedido.',
             'status' => 'complete',
         ),
         '_next-step' => array(
             'title' => 'Aguardando confirmação',
-            'description' => 'Você será informado quando o Luciano visualizar e aceitar a sua solicitação de vídeo-autógrafo.',
+            'description' => 'Você será informado quando a sua solicitação de vídeo-autógrafo for aceita.',
             'status' => 'in-progress',
         ),
     );
@@ -174,12 +188,12 @@ function event_promotional_get_order_flow_obj($order_number, $order_status, $ema
             $flow_1[$order_status],
             '_next-step_1' => array(
                 'title' => 'Aguardando confirmação',
-                'description' => 'Você será informado quando o Luciano visualizar e aceitar a sua solicitação de vídeo-autógrafo.',
+                'description' => 'Você será informado quando a sua solicitação de vídeo-autógrafo for aceita.',
                 'status' => $flow_1[$order_status]['status'] === "fail" ? 'pending' : 'in-progress',
             ),
             '_next-step_2' => array(
                 'title' => 'Aguardando gravação do vídeo',
-                'description' => 'Quando o Luciano disponibilizar o vídeo ele será exibido aqui.',
+                'description' => 'Quando o vídeo for disponibilizado, ele será exibido aqui.',
                 'status' => 'pending',
             ),
         );
@@ -193,7 +207,7 @@ function event_promotional_get_order_flow_obj($order_number, $order_status, $ema
             $flow_2[$order_status],
             '_next-step_2' => array(
                 'title' => 'Aguardando gravação do vídeo',
-                'description' => 'Quando o Luciano disponibilizar o vídeo ele será exibido aqui.',
+                'description' => 'Quando o vídeo for disponibilizado, ele será exibido aqui.',
                 'status' => 'in-progress',
             ),
         );

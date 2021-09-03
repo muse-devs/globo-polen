@@ -11,6 +11,7 @@ class Social_Rewrite
 
     const QUERY_VARS_SOCIAL_APP     = 'social_app';
     const QUERY_VARS_SOCIAL_IS_HOME = 'social_is_home';
+    const QUERY_VARS_SOCIAL_CRIESP  = 'social_criesp'; 
     
     /**
      * 
@@ -30,7 +31,8 @@ class Social_Rewrite
      */
     public function rewrites()
     {
-        add_rewrite_rule( self::BASE_URL . '/crianca-esperanca', 'index.php?'.self::QUERY_VARS_SOCIAL_APP.'=1&'.self::QUERY_VARS_SOCIAL_IS_HOME.'=1', 'top' );
+        add_rewrite_rule( self::BASE_URL . '/crianca-esperanca', 'index.php?'.self::QUERY_VARS_SOCIAL_APP.'=1&'.self::QUERY_VARS_SOCIAL_CRIESP.'=1', 'top' );
+        add_rewrite_rule( self::BASE_URL . '/setembro-amarelo', 'index.php?'.self::QUERY_VARS_SOCIAL_APP.'=1&'.self::QUERY_VARS_SOCIAL_IS_HOME.'=1', 'top' );
     }
 
 
@@ -41,6 +43,7 @@ class Social_Rewrite
     {
         $query_vars[] = self::QUERY_VARS_SOCIAL_APP;
         $query_vars[] = self::QUERY_VARS_SOCIAL_IS_HOME;
+        $query_vars[] = self::QUERY_VARS_SOCIAL_CRIESP;
         return $query_vars;
     }
 
@@ -56,10 +59,10 @@ class Social_Rewrite
         }
 
         $GLOBALS[ self::QUERY_VARS_SOCIAL_APP ]     = '1';
-        $GLOBALS[ self::QUERY_VARS_SOCIAL_IS_HOME ] = '1';
         
-        if( $GLOBALS[ self::QUERY_VARS_SOCIAL_IS_HOME ] == '1' ) {
-            return get_template_directory() . '/social/index.php';
+        if( get_query_var( self::QUERY_VARS_SOCIAL_CRIESP ) == '1' ) {
+            wp_safe_redirect( site_url(), 301 );
+            exit;
         }
     }
 }

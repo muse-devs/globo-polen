@@ -4,6 +4,7 @@ use Polen\Includes\Cart\Polen_Cart_Item_Factory;
 use Polen\Includes\Polen_Video_Info;
 use Polen\Includes\Polen_Update_Fields;
 use Polen\Social\Social_Rewrite;
+use Polen\Social_Base\Social_Base_Rewrite;
 use Polen\Tributes\Tributes_Model;
 use Polen\Tributes\Tributes_Rewrite_Rules;
 
@@ -41,7 +42,7 @@ function pol_print_schema_data($data = array())
 				"name": "<?php echo $data['talent_name']; ?>",
 				"url": "<?php echo $data['talent_url']; ?>",
 				"image": "<?php echo $data['talent_image']; ?>",
-				"sameAs": <?php echo $data['talent_social_links_array']; ?>
+				"sameAs": <?php echo json_encode($data['talent_social_links_array']); ?>
 			},
 			"publisher": {
 				"@type": "Organization",
@@ -76,7 +77,7 @@ if (
 		global $post;
 		global $is_video;
 		$tribute_app = get_query_var(Tributes_Rewrite_Rules::TRIBUTES_QUERY_VAR_TRUBITES_APP);
-		$social_app = get_query_var(Social_Rewrite::QUERY_VARS_SOCIAL_APP);
+		$social_app = get_query_var(Social_Base_Rewrite::QUERY_VARS_SOCIAL_APP);
 
 		$video_hash = get_query_var('video_hash');
 
@@ -161,21 +162,37 @@ if (
 			// Página Criança Esperança
 		} elseif (!empty($social_app) && $social_app == '1') {
 
-			$image = social_get_image_by_category(social_get_category_base());
+			// $image = social_get_image_by_category(social_get_category_base());
 
-			$headers['image'] = $image;
-			$headers['url'] = site_url('social/crianca-esperanca');
+			$headers['title'] = 'Polen - Setembro Amarelo';
+			$headers['description'] = 'Setembro é o mês da prevenção ao suicídio. Agir salva vidas!';
+			$headers['image'] = site_url('polen/themes/polen/assets/img/bg-setembro.png');
+			$headers['url'] = site_url('social/' . Social_Base_Rewrite::get_current_slug());
 
-			// Página do Livro De porta em porta
+			// Página de Video-Autografo
 		} elseif (event_promotional_is_app()) {
+			$product = Promotional_Event_Rewrite::get_current_product();
+			if( empty($product) ) {
+				return false;
+			}
+			$pep = new Promotional_Event_Product( $product );
+			$image_url = $pep->get_url_image_product_with_size( 'polen-thumb-lg' );
+			$author_name = $product->get_meta( '_promotional_event_author', true );
+			$product_name = $product->get_title();
 
-			$headers['title'] = 'Compre o livro &quot;De porta em porta&quot; e ganhe um vídeo personalizado.';
-			$headers['description'] = 'Compre o livro &quot;De porta em porta&quot; e ganhe um vídeo personalizado com Luciano Hulk.';
-			$headers['url'] = event_promotional_url_home();
-			$headers['image'] = '//polen.me/polen/uploads/2021/08/book_cover.png';
-			$headers['site_name'] = 'Polen.me - Luciano Huck - De porta em porta';
+			$headers['title'] = "Compre o livro &quot;{$product_name}&quot; e ganhe um vídeo personalizado.";
+			$headers['description'] = "Compre o livro &quot;{$product_name}&quot; e ganhe um vídeo personalizado com {$author_name}.";
+			$headers['url'] = event_promotional_url_detail_product( $product );
+			$headers['image'] = $image_url;
+			$headers['site_name'] = "Polen.me - {$author_name} - {$product_name}";
 
 			// Imagem padrão - Logo Polen grande
+		} elseif( master_class_is_app() ) {
+			$headers['title'] = "Masterclass com Ronnie Von Beabá do Vinho";
+			$headers['description'] = "Aprenda a escolher, apreciar e harmonizar vinhos com Ronnie Von.";
+			$headers['url'] = master_class_url_home();
+			$headers['image'] = 'https://i.vimeocdn.com/video/1229508090_520';
+			$headers['site_name'] = "Polen.me - Masterclass - Beabá do Vinho";
 		} else {
 
 			$headers['image'] = 'https://polen.me/polen/uploads/2021/06/cropped-logo.png';
@@ -185,7 +202,7 @@ if (
 		<meta name="title" content="<?php echo $headers['title']; ?>">
 		<meta name="description" content="<?php echo $headers['description']; ?>">
 		<meta name="keywords" content="<?php echo $headers['keywords']; ?>">
-		<meta name="author" content="<?php echo $headers['author']; ?>">
+		<meta name="author" content="<?php echo isset( $headers['author'] ) ? $headers['author'] : ''; ?>">
 
 		<meta property="og:title" content="<?php echo $headers['title']; ?>">
 		<meta property="og:description" content="<?php echo $headers['description']; ?>">

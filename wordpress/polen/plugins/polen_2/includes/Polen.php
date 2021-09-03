@@ -4,6 +4,8 @@ namespace Polen\Includes;
 
 use Polen\Admin\Polen_Admin;
 use Polen\Includes\Polen_Plugin_Settings;
+use Polen\Master_class\Master_Class;
+use Polen\Master_class\Master_Class_Rewrite;
 use Polen\Publics\Polen_Public;
 use Polen\Includes\Polen_Talent;
 use Polen\Includes\Polen_Occasion_List;
@@ -15,6 +17,7 @@ use Polen\Includes\Order_Review\{Polen_Order_Review_Controller, Polen_Order_Revi
 use Polen\Includes\Polen_Signin_Newsletter;
 use Polen\Includes\Polen_Cupom_Create_Admin_Menu;
 use Polen\Social\Social;
+use Polen\Social_Base\Social_Base;
 use Polen\Tributes\Tributes;
 
 class Polen {
@@ -103,7 +106,12 @@ class Polen {
         new Tributes( true );
         
         //Social
-        new Social( true );
+        // new Social( true );
+        new Social_Base( true );
+
+        // Master class
+        new Master_Class(true);
+
     }
 
     /**

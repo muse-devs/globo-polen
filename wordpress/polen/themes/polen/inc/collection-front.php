@@ -74,8 +74,8 @@ function polen_get_new_talents( int $quantity = 4 )
     $args = [
         'numberposts' => $quantity,
         'post_status' => 'publish',
-        'order' => 'date_created',
-        'orderby' => 'DESC'
+        // 'order' => 'menu_order',
+        'orderby' => 'menu_order',
     ];
     $talents = _polen_get_info_talents_by_args( $args );
     return $talents;
@@ -195,6 +195,7 @@ function polen_get_array_related_products( $product_id )
                         "talent_url" => get_permalink($id),
                         "name" => $product->get_title(),
                         "price" => $product->get_regular_price(),
+                        "price_html" => $product->get_price_html(),
                         "category_url" => $cat_link,
                         "category" => wc_get_product_category_list($id),
                         "in_stock" => $product->is_in_stock(),

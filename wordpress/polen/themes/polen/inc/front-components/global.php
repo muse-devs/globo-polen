@@ -12,13 +12,13 @@ function polen_front_get_banner_with_carousel($social = false)
 	);
 	$carrousel2 = array(
 		array(
-			"mobile" => TEMPLATE_URI . "/assets/img/criesp/bg-criesp.jpg",
-			"desktop" => TEMPLATE_URI . "/assets/img/criesp/bg-criesp.jpg"
+			"mobile" => TEMPLATE_URI . "/assets/img/bg-setembro.png",
+			"desktop" => TEMPLATE_URI . "/assets/img/bg-setembro.png"
 		)
 	);
 ?>
 	<section class="top-banner mb-4">
-		<div class="owl-carousel owl-theme">
+		<div id="top-carousel" class="owl-carousel owl-theme">
 			<?php if (!$social) : ?>
 				<div class="item">
 					<div class="carrousel">
@@ -37,9 +37,37 @@ function polen_front_get_banner_with_carousel($social = false)
 						</a>
 					</div>
 				</div>
-			<?php endif; ?>
+				<?php else: ?>
+					<div class="item">
+					<div class="carrousel">
+						<?php foreach ($carrousel2 as $item) : ?>
+							<figure class="image">
+								<img loading="lazy" src="<?php echo $item['mobile']; ?>" alt="Banner da home" class="mobile" />
+								<img loading="lazy" src="<?php echo $item['desktop']; ?>" alt="Banner da home" class="desktop" />
+							</figure>
+						<?php endforeach; ?>
+					</div>
+					<div class="content">
+						<h2 class="title mb-5">Setembro é o mês da prevenção ao suicídio.<br>Agir salva vidas!</h2>
+						<a href="javascript:openModalSa()" class="banner-button-link button-yellow">
+							<?php Icon_Class::polen_icon_donate(); ?>
+							<span class="mr-3 ml-2">Veja os depoimentos</span>
+							<?php Icon_Class::polen_icon_chevron_right(); ?>
+						</a>
+					</div>
+				</div>
+				<?php endif; ?>
 		</div>
 	</section>
+	<script>
+		function openModalSa() {
+			document.getElementById("sa-modal").classList.add("d-block");
+			changeHash("sa-modal");
+		}
+		if(window.location.hash.substring(1) == "sa-modal") {
+			openModalSa();
+		}
+	</script>
 <?php
 }
 
@@ -98,7 +126,8 @@ function polen_front_get_banner()
 // $size pode ser 'medium' e 'small'
 function polen_front_get_card($item, $size = "small", $social = false)
 {
-	$social == false ? $social = social_product_is_social(wc_get_product($item['ID']), social_get_category_base()) : false;
+	$social = product_is_social_base( wc_get_product( $item['ID'] ) );
+	// $social == false ? $social = social_product_is_social(wc_get_product($item['ID']), social_get_category_base()) : false;
 	$class = $size;
 	if ($size === "small") {
 		$class = "col-6 col-md-2";
@@ -107,7 +136,7 @@ function polen_front_get_card($item, $size = "small", $social = false)
 	}
 
 	if ($social) {
-		$size .= " criesp";
+		$size .= " yellow";
 	}
 
 	if (isset($item['ID'])) {
@@ -123,19 +152,13 @@ function polen_front_get_card($item, $size = "small", $social = false)
 		<div class="polen-card <?= $size; ?>" itemscope itemtype="https://schema.org/Offer">
 			<figure class="image">
 				<?php if ($social) {
-					polen_donate_badge("Criança Esperança", true, true);
-				} else {
-					$donate ? polen_donate_badge("Social") : null;
+					polen_donate_badge("Setembro Amarelo", true, false, true);
 				} ?>
 				<img loading="lazy" src="<?php echo $image[0]; ?>" alt="<?= $item["name"]; ?>">
 				<div class="price text-right" itemprop="price">
-					<?php if ($social && $item['in_stock']) : ?>
-						<span class="text">DOAR</span><br />
-					<?php else : ?>
-						<?php if ($item['in_stock']) : ?><span class="mr-2"><?php Icon_Class::polen_icon_camera_video(); ?></span><?php endif; ?>
-					<?php endif; ?>
 					<?php if ($item['in_stock']) : ?>
-						<?php if (!$social) echo $item["price"] == "0" ? 'GRÁTIS' : wc_price( $item['price'] ); ?>
+						<span class="mr-2"><?php Icon_Class::polen_icon_camera_video(); ?></span>
+						<span><?php echo $item['price_formatted']; ?></span>
 					<?php else : ?>
 						<span>Esgotado</span>
 					<?php endif; ?>
@@ -343,6 +366,13 @@ function polen_get_avatar($user_id, $size = 'polen-square-crop-lg')
 		$user = get_user_by('id', $user_id);
 		$initials_name = polen_get_initials_name_by_user($user);
 		return '<span>' . $initials_name   . '</span>';
+	}
+}
+
+function polen_get_avatar_src($user_id, $size = 'polen-squere-crop-lg')
+{
+	if (is_plugin_active('wp-user-avatar/wp-user-avatar.php') && has_wp_user_avatar($user_id)) {
+		return get_wp_user_avatar_src($user_id, $size);
 	}
 }
 

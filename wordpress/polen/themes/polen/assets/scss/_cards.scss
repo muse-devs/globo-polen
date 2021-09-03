@@ -10,7 +10,7 @@
 	}
 	p {
 		font-size: 14px;
-		font-weight: 700;
+		font-weight: normal;
 		line-height: 18px;
 		&.alt {
 			color: var(--subtext);
@@ -60,7 +60,7 @@
 	}
 }
 
-.comment-box {
+.comment-box, .truncate-wrapper {
 	input {
 		opacity: 0;
 		position: absolute;
@@ -163,6 +163,11 @@
 				color: var(--light);
 				font-weight: 400;
 			}
+			del {
+				position: absolute;
+				margin-top: -12px;
+				right: 0;
+			}
 		}
 		.donate-badge {
 			position: absolute;
@@ -171,6 +176,11 @@
 			z-index: 3;
 			@media (max-width: 322px) {
 				left: 1px;
+			}
+			&.yellow {
+				.icon, .bi {
+					color: $setembro-amarelo;
+				}
 			}
 		}
 	}
@@ -249,7 +259,7 @@
 			color: white;
 		}
 	}
-	&.criesp {
+	&.criesp, &.yellow {
 		padding-bottom: 5px;
 		color: white;
 		border-radius: 10px;
@@ -267,6 +277,10 @@
 		.title {
 			padding-bottom: 0;
 		}
+	}
+	&.yellow {
+		color: var(--dark);
+		background-color: $setembro-amarelo;
 	}
 }
 
