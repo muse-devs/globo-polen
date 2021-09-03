@@ -50,7 +50,7 @@ function sa_get_modal() {
 						<img src="<?php echo TEMPLATE_URI . '/assets/img/close-black.png'; ?>" alt="Fechar"></img>
 					</a>
 				</div>
-				<div class="col-12">
+				<div class="col-12 col-md-6 m-md-auto col-lg-4">
 					<div class="sa-home-video">
 						<video id="sa-video" playsinline poster="<?php echo TEMPLATE_URI; ?>/assets/img/social/sa-poster.jpg">
 							<source src="https://player.vimeo.com/external/596862158.sd.mp4?s=9f3886b9be7113cdad714b02b22f2076d229ddc3&profile_id=165" type="video/mp4">
