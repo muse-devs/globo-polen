@@ -290,3 +290,13 @@ body{
 #place_order:hover{
     filter: brightness(.9);
 }
+
+.woocommerce form .form-row {
+    width: 980px !important;
+}
+
+@media (max-width : 420px) {
+    .woocommerce form .form-row {
+        width: 250px !important;
+    }
+}
