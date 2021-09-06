@@ -532,3 +532,42 @@ function polen_get_share_button()
 	</script>
 <?php
 }
+
+function mc_get_box_content()
+{
+	?>
+	<div class="row">
+		<div class="col-12 mb-3">
+			<h2>Conteúdo do curso</h2>
+		</div>
+		<div class="col-12">
+			<div class="box-round p-4 masterclass-content-box">
+				<div class="row">
+					<div class="col-2">
+						<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/taca.svg"; ?>" alt="Ícone garrafa" />
+					</div>
+					<div class="col-10 pl-0 ml-0">
+						<p class="description"><strong>História e Importância do Vinho:</strong> quais os principais tipos de vinhos.</p>
+					</div>
+				</div>
+				<div class="row mt-4">
+					<div class="col-2">
+						<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/garrafa.svg"; ?>" alt="Ícone garrafa" />
+					</div>
+					<div class="col-10 pl-0 ml-0">
+						<p class="description"><strong>Só vinho caro tem qualidade?</strong> Como escolher vinho bom e barato.</p>
+					</div>
+				</div>
+				<div class="row mt-4">
+					<div class="col-2">
+						<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/taca_garrafa.svg"; ?>" alt="Ícone garrafa" />
+					</div>
+					<div class="col-10 pl-0 ml-0">
+						<p class="description"><strong>O que ler nos rótulos das garrafas para escolher seu vinho?</strong> Tipos de taças para cada tipo de vinho.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<?php
+}
