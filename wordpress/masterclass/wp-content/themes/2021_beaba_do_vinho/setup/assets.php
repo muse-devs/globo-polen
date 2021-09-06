@@ -25,7 +25,9 @@ function _theme_assets()
     }
 
     // Arquivos front-end
-    wp_enqueue_style('_theme-style-front', TEMPLATE_URI . '/assets/css/style.css', array(), filemtime(TEMPLATE_DIR . '/assets/css/style.css'));
-    wp_enqueue_script('_theme-js-front', TEMPLATE_URI . '/assets/js/' . $min . 'global.js', array("jquery"), filemtime(TEMPLATE_DIR . '/assets/js/global.js'), false);
+    if (!is_checkout()) {
+        wp_enqueue_style('_theme-style-front', TEMPLATE_URI . '/assets/css/style.css', array(), filemtime(TEMPLATE_DIR . '/assets/css/style.css'));
+        wp_enqueue_script('_theme-js-front', TEMPLATE_URI . '/assets/js/' . $min . 'global.js', array("jquery"), filemtime(TEMPLATE_DIR . '/assets/js/global.js'), false);
+    }
 }
 add_action('wp_enqueue_scripts', '_theme_assets');
