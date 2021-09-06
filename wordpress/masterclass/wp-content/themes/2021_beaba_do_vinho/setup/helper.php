@@ -118,3 +118,15 @@ function get_product_checkout(): string
 
     return $cart_items_ids;
 }
+
+/**
+ * Redirecionar ao checkout após um adição no carrinho
+ *
+ * @return string
+ */
+function redirect_to_checkout(): string
+{
+    global $woocommerce;
+    return $woocommerce->cart->get_checkout_url();
+}
+add_filter ('add_to_cart_redirect', 'redirect_to_checkout');
