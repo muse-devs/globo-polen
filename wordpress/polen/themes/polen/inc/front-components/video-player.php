@@ -233,7 +233,7 @@ function polen_get_url_watermark_video_player( $order )
 				<img src="<?= $url_warter_mark; ?>" class="logo social" alt="Logo Criança Esperança" style="" />
 			<?php endif; ?>
 	<?php endif; ?>
-	
+
 	<img src="<?php echo TEMPLATE_URI ?>/assets/img/logo.png" class="logo polen" alt="Logo Polen" />
 	<?php
 }
