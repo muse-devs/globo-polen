@@ -191,6 +191,21 @@ function mc_get_footer()
 <?php
 }
 
+function mc_get_thank_you_box() 
+{
+?>
+	<div class="row mb-3">
+		<div class="col-12">
+			<div class="thank-you-box">
+				<img class="img-responsive" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/ronnie.png'; ?>" alt="Ronnie Von"></img>
+				<h3>Obrigada por pedir seu curso “Bebá do vinho"</h3>
+				<p>Você vai receber os e-mails com o link do acesso ao curso.</p>
+			</div>
+		</div>
+	</div>
+<?php
+}
+
 function pol_get_footer()
 {
 	?>

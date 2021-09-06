@@ -17,18 +17,15 @@ function get_assets_folder() {
 function _theme_assets()
 {
     $min = get_assets_folder();
-    wp_enqueue_style('_theme-style', TEMPLATE_URI . '/assets/css/default-woocommerce.css');
-    wp_enqueue_script('_theme-js-main', TEMPLATE_URI. '/assets/js/develop.js', array(), null, true);
-
-    if (is_singular() && comments_open() && get_option('thread_comments')) {
-        wp_enqueue_script('comment-reply');
-    }
-
-    if (!is_checkout()) {
-        // Arquivos front-end
-        wp_register_script( 'owl-carousel', TEMPLATE_URI . '/assets/js/vendor/owl.carousel.min.js', array(), "1.0.0", true );
-        wp_enqueue_script('_theme-js-front', TEMPLATE_URI . '/assets/js/' . $min . 'global.js', array("jquery", "owl-carousel"), filemtime(TEMPLATE_DIR . '/assets/js/global.js'), false);
-    }
+    // Arquivos front-end
+    wp_register_script( 'owl-carousel', TEMPLATE_URI . '/assets/js/vendor/owl.carousel.min.js', array(), "1.0.0", true );
+    wp_enqueue_script('_theme-js-front', TEMPLATE_URI . '/assets/js/' . $min . 'global.js', array("jquery"), filemtime(TEMPLATE_DIR . '/assets/js/global.js'), false);
     wp_enqueue_style('_theme-style-front', TEMPLATE_URI . '/assets/css/style.css', array(), filemtime(TEMPLATE_DIR . '/assets/css/style.css'));
+
+    if (is_checkout()) {
+        wp_enqueue_style('_theme-style', TEMPLATE_URI . '/assets/css/default-woocommerce.css');
+        wp_enqueue_script('_theme-js-main', TEMPLATE_URI. '/assets/js/develop.js', array(), null, true);
+    }
+
 }
 add_action('wp_enqueue_scripts', '_theme_assets');
