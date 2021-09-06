@@ -4,6 +4,7 @@
 # Ignorar Configurações
 wordpress/.htaccess
 wordpress/wp-config.php
+wordpress/masterclass/wp-config.php
 
 # Ignorar Modelos padrões do Wordpress
 wordpress/wp-config-sample.php
