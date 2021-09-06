@@ -62,6 +62,10 @@ function polen_front_get_banner_with_carousel($social = false)
 	<script>
 		function openModalSa() {
 			document.getElementById("sa-modal").classList.add("d-block");
+			changeHash("sa-modal");
+		}
+		if(window.location.hash.substring(1) == "sa-modal") {
+			openModalSa();
 		}
 	</script>
 <?php
@@ -154,14 +158,16 @@ function polen_front_get_card($item, $size = "small", $social = false)
 					polen_donate_badge("Social", true, false, false);
 				}?>
 				<img loading="lazy" src="<?php echo $image[0]; ?>" alt="<?= $item["name"]; ?>">
-				<div class="price text-right" itemprop="price">
-					<?php if ($item['in_stock']) : ?>
-						<span class="mr-2"><?php Icon_Class::polen_icon_camera_video(); ?></span>
-						<span><?php echo $item['price_formatted']; ?></span>
-					<?php else : ?>
-						<span>Esgotado</span>
-					<?php endif; ?>
-				</div>
+				<?php if(!$social) : ?>
+					<div class="price text-right" itemprop="price">
+						<?php if ($item['in_stock']) : ?>
+							<span class="mr-2"><?php Icon_Class::polen_icon_camera_video(); ?></span>
+							<span><?php echo $item['price_formatted']; ?></span>
+						<?php else : ?>
+							<span>Esgotado</span>
+						<?php endif; ?>
+					</div>
+				<?php endif; ?>
 				<a href="<?= $item["talent_url"]; ?>" class="link"></a>
 			</figure>
 			<h4 class="title text-truncate">
