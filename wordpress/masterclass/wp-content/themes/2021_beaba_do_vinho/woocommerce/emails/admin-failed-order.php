@@ -27,7 +27,7 @@ do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
 <table border="0" cellpadding="0" cellspacing="0" width="100%" style='color: #ffffff; border-bottom: 0; font-weight: bold; line-height: 100%; vertical-align: middle; font-family: Poppins, "Helvetica Neue", Helvetica, Arial, sans-serif;'>
     <tr>
         <td align="center">
-            <h2>Pagamento Confirmado!</h2>
+            <h2>Pagamento Rejeitado!</h2>
         </td>
     </tr>
     <tr>
