@@ -38,6 +38,9 @@
         .payment_box.payment_method_pagarme-banking-ticket{
             display: none !important;
         }
+        .woocommerce-message{
+            display: none !important;
+        }
     </style>
 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
