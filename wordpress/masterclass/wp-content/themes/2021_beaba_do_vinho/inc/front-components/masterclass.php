@@ -1,32 +1,5 @@
 <?php
 
-function mc_get_home_banner($link)
-{
-?>
-	<div class="row mt-4">
-		<div class="col-12">
-			<div class="mc-banner">
-				<img class="image mobile-img" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/mc-banner-mobile.png'; ?>" alt="Polen Masterclass" />
-				<img class="image desktop-img" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/mc-banner-desktop.png'; ?>" alt="Polen Masterclass" />
-				<div class="content">
-					<div class="left">
-						<img class="img-responsive" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/masterclass-logo.png'; ?>" alt="Polen Masterclass"></img>
-						<p class="mt-3">
-							Aprenda como escolher, apreciar e <br>
-							harmonizar vinhos com Ronnie Von
-						</p>
-						<a href="<?php echo $link; ?>" class="btn btn-primary btn-md">Conheça<span class="ml-2"><?php Icon_Class::polen_icon_chevron_right(); ?></span></a>
-					</div>
-					<div class="right">
-						<img class="img-responsive" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/mask.png'; ?>" alt="Polen Masterclass"></img>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-<?php
-}
-
 function mc_get_top_banner()
 {
 ?>
@@ -53,44 +26,21 @@ function mc_get_top_banner()
 				</div>
 				<div class="row mt-4">
 					<div class="col-12 col-md-6 m-md-auto">
-						<form action="" id="form-email-masterclass">
-							<?php //TODO action e nonce
-							?>
-							<input type="hidden" name="action" value="send_form_request">
-							<input type="hidden" name="page_source" value="<?= filter_input(INPUT_SERVER, 'REQUEST_URI'); ?>" />
-							<input type="hidden" name="is_mobile" value="<?= polen_is_mobile() ? "1" : "0"; ?>" />
-							<input type="hidden" name="security" value=<?php echo wp_create_nonce("send-form-request"); ?>>
-							<input type="email" name="email" class="form-control form-control-lg" placeholder="Digite seu e-mail" required />
-							<input type="submit" value="Quero ganhar desconto" class="btn btn-primary btn-lg btn-block mt-4 gradient" />
-						</form>
+						<input type="submit" value="Quero ganhar desconto" class="btn btn-primary btn-lg btn-block mt-4 gradient" />
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<script>
-		const success = "<?php echo master_class_url_success(); ?>";
-
-		polVideoTag("#mc-video");
-
-		const formName = "form#form-email-masterclass";
-		document.querySelector(formName).addEventListener("submit", function(evt) {
-			evt.preventDefault();
-			polAjaxForm(formName, function() {
-				window.location.href = success;
-			}, function(err) {
-				polMessages.error(err);
-			});
-		});
-	</script>
 <?php
 }
 
-function mc_get_carrossel_how_to() {
+function mc_get_carrossel_how_to()
+{
 ?>
 	<div class="row mb-4">
 		<div class="col-12">
-			<h3 class="title mb-2">Como funciona?</h3>
+			<h3 class="title mb-4">Como funciona?</h3>
 		</div>
 		<div class="col-12">
 			<div id="how-to-carousel" class="owl-carousel owl-theme">
@@ -136,15 +86,29 @@ function mc_get_carrossel_how_to() {
 			</div>
 		</div>
 	</div>
+	<script>
+		jQuery('#how-to-carousel').owlCarousel({
+			loop: true,
+			items: 1,
+			autoplayTimeout: 5000,
+			animateOut: 'fadeOut',
+			autoplayHoverPause: true,
+			margin: 0,
+			nav: false,
+			autoplay: true,
+			dots: true,
+			autoHeight: false,
+		});
+	</script>
 <?php
 }
 
 function mc_get_box_content()
 {
-	?>
-	<div class="row">
+?>
+	<div class="row mb-4">
 		<div class="col-12 mb-3">
-			<h2>Conteúdo do curso</h2>
+			<h3 class="title mb-2">Conteúdo do curso</h3>
 		</div>
 		<div class="col-12">
 			<div class="box-round p-4 masterclass-content-box">
@@ -175,5 +139,53 @@ function mc_get_box_content()
 			</div>
 		</div>
 	</div>
-	<?php
+<?php
+}
+
+function mc_get_bio()
+{
+?>
+	<div class="row">
+		<div class="col-12 text-center mb-4">
+			<div class="row">
+				<div class="col-12">
+					<h3 class="title mb-4">Com quem você vai aprender?</h3>
+				</div>
+				<div class="col-12">
+					<div class="box-round book-info-wrapp py-3 px-3">
+						<div class="row">
+							<div class="col-12 mb-3">
+								<img class="img-responsive" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/ronnie.png'; ?>" alt="Ronnie Von"></img>
+							</div>
+							<div class="col-12">
+								<p>
+									Ronnie Von tem uma extensa carreira de sucesso como cantor, compositor, ator e apresentador. Grande apreciador de vinhos desde jovem, hoje também é enólogo formado e compartilha dicas sobre vinho em suas entrevistas e redes sociais.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php
+}
+
+function mc_get_footer()
+{
+?>
+	<div class="row">
+		<div class="col-12 text-center mb-4">
+			<div class="row">
+				<div class="col-12">
+					<h3 class="title mb-4">Realização</h3>
+				</div>
+				<div class="col-12 d-flex justify-content-around">
+					<img class="img-responsive" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/polen-masterclass.png'; ?>" alt="Polen Masterclass"></img>
+					<img class="img-responsive" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/todo-vino.png'; ?>" alt="Todo Vino"></img>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php
 }
