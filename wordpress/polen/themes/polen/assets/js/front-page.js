@@ -31,6 +31,18 @@ jQuery(document).ready(function ($) {
 		dots: true,
 		autoHeight:false,
 	});
+	$('#how-to-carousel').owlCarousel({
+		loop: true,
+		items: 1,
+		autoplayTimeout: 5000,
+		animateOut: 'fadeOut',
+		autoplayHoverPause:true,
+		margin: 0,
+		nav: false,
+		autoplay: true,
+		dots: true,
+		autoHeight:false,
+	});
 });
 
 const home_video = function () {
