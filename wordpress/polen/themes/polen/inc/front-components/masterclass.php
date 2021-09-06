@@ -27,7 +27,6 @@ function mc_get_home_banner($link)
 <?php
 }
 
-
 function mc_get_top_banner()
 {
 ?>
@@ -84,5 +83,58 @@ function mc_get_top_banner()
 			});
 		});
 	</script>
+<?php
+}
+
+function mc_get_carrossel_how_to() {
+?>
+	<div class="row mb-4">
+		<div class="col-12">
+			<h3 class="title mb-2">Como funciona?</h3>
+		</div>
+		<div class="col-12">
+			<div id="how-to-carousel" class="owl-carousel owl-theme">
+				<div class="item">
+					<div class="box-round py-3 px-3">
+						<div class="row">
+							<div class="col-12 mb-1 d-flex justify-content-center">
+								<?php Icon_Class::polen_icon_camera_video(); ?>
+							</div>
+							<div class="col-12">
+								<h4>Ao vivo</h4>
+								<p class="text-center">Participe de aulas ao vivo e converse em tempo real, tirando todas suas dúvidas com Ronnie Von</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="item">
+					<div class="box-round py-3 px-3">
+						<div class="row">
+							<div class="col-12 mb-1 d-flex justify-content-center">
+								<?php Icon_Class::polen_icon_clock(); ?>
+							</div>
+							<div class="col-12">
+								<h4>Duração</h4>
+								<p class="text-center">Participe do curso com duração de x dias, exclusivo e feito sobre medida para amantes de vinho.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="item">
+					<div class="box-round py-3 px-3">
+						<div class="row">
+							<div class="col-12 mb-1 d-flex justify-content-center">
+								<?php Icon_Class::polen_icon_hand_thumbs_up(); ?>
+							</div>
+							<div class="col-12">
+								<h4>Disponibilidade</h4>
+								<p class="text-center">Tenha acesso e tire suas dúvidas diretamanente com o Ronnie Von.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 <?php
 }
