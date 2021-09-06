@@ -57,8 +57,6 @@ get_header();
 
 	<?php polen_front_get_tutorial(); ?>
 
-	<?php  mc_get_carrossel_how_to(); ?>
-
 	<?php polen_front_get_news(polen_get_talents(12), "Todos os talentos", polen_get_all_talents_url());
 	?>
 
