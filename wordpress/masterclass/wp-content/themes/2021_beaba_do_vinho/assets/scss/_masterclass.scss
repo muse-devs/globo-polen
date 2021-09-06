@@ -227,3 +227,40 @@
 		color: var(--gray);
 	}
 }
+
+.thank-you-box {
+	width: 100%;
+	border-radius: 10px;
+	padding: 20px;
+	background: url("../img/bg-thankyou.png");
+	background-size: 100%;
+	position: relative;
+	margin-top: 70px;
+	img {
+		position: absolute;
+		top: -70px;
+		border-radius: 50%;
+		left:0;
+		right:0;
+		margin-left:auto;
+		margin-right:auto;
+	}
+	h3 {
+		font-size: 16px;
+		line-height: 107%;
+		text-align: center;
+		color: #FFFFFF;
+		margin-top: 70px;
+		border-bottom: 1px solid #7d7d7d;
+		padding-bottom: 30px;
+	}
+	p {
+		font-weight: normal;
+		font-size: 16px;
+		line-height: 20px;
+		text-align: center;
+		letter-spacing: -0.01em;
+		color: #FFFFFF;
+		padding: 20px 0px;
+	}
+}
