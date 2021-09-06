@@ -9,7 +9,7 @@
 
     <?php $uri = get_template_directory_uri(); ?>
 
-    <link rel="icon" type="image/png" href="<?php echo $uri; ?>/assets/ico/favicon-32x32.png" sizes="32x32" />
+    <!-- <link rel="icon" type="image/png" href="<?php echo $uri; ?>/assets/ico/favicon-32x32.png" sizes="32x32" />
     <link rel="icon" type="image/png" href="<?php echo $uri; ?>/assets/ico/favicon-16x16.png" sizes="16x16" />
 
     <link rel="apple-touch-icon" href="<?php echo $uri; ?>/assets/ico/favicon-32x32.png">
@@ -25,7 +25,7 @@
     <meta name="msapplication-square310x310logo" content="<?php echo $uri; ?>/assets/ico/favicon-32x32.png"/>
 
     <link rel="icon" sizes="192x192" href="<?php echo $uri; ?>/assets/ico/favicon-32x32.png">
-    <link rel="icon" sizes="128x128" href="<?php echo $uri; ?>/assets/ico/favicon-32x32.png">
+    <link rel="icon" sizes="128x128" href="<?php echo $uri; ?>/assets/ico/favicon-32x32.png"> -->
 
     <meta name="format-detection" content="telephone=no" />
     <meta name="format-detection" content="date=no" />
@@ -51,3 +51,9 @@
 </head>
 
 <body>
+    <div id="page" class="container site">
+        <header id="masthead" class="row py-4 header-home">
+			<div class="col-8 col-sm-6 d-flex align-items-center">
+				<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/logo-masterclass.svg"; ?>" alt="">
+			</div>
+        </header><!-- #masthead -->
