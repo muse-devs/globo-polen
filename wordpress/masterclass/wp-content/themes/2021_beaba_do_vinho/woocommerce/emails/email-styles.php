@@ -63,7 +63,7 @@ body {
 }
 
 #template_header {
-	background-color: <?php echo esc_attr( $base ); ?>;
+	background-color: #FFF;
 	border-radius: 3px 3px 0 0 !important;
 	color: <?php echo esc_attr( $base_text ); ?>;
 	border-bottom: 0;
@@ -108,7 +108,7 @@ body {
 }
 
 #body_content table td {
-	padding: 48px 48px 32px;
+	padding: 32px 48px 32px;
 }
 
 #body_content table td td {
@@ -142,9 +142,44 @@ body {
 #body_content_inner {
 	color: <?php echo esc_attr( $text_lighter_20 ); ?>;
 	font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+	background: #F3F3F3;
+	padding: 15px;
+	border-radius: 10px;
 	font-size: 14px;
 	line-height: 150%;
 	text-align: <?php echo is_rtl() ? 'right' : 'left'; ?>;
+}
+
+#body_content_inner p{
+	font-weight: 400;
+	font-size: 14px;
+	color: #000000;
+	line-height: 30px;
+	font-family: "Poppins", Helvetica, Helvetica Neue, Arial, sans-serif;
+}
+
+#body_content_inner a {
+	font-weight: 600;
+	font-size: 14px;
+	color: #EA4C89;;
+	line-height: 30px;
+	font-family: "Poppins", Helvetica, Helvetica Neue, Arial, sans-serif;
+}
+
+.footer-content p {
+	font-weight: 400;
+	font-size: 14px;
+	color: #000000;
+	line-height: 30px;
+	font-family: "Poppins", Helvetica, Helvetica Neue, Arial, sans-serif;
+}
+
+.footer-content a {
+	font-weight: 600;
+	font-size: 14px;
+	color: #EA4C89;;
+	line-height: 30px;
+	font-family: "Poppins", Helvetica, Helvetica Neue, Arial, sans-serif;
 }
 
 .td {
@@ -185,14 +220,14 @@ h1 {
 }
 
 h2 {
-	color: <?php echo esc_attr( $base ); ?>;
+	color: #000;
+	text-align: center;
 	display: block;
-	font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
-	font-size: 18px;
+	font-family: "Roboto", Helvetica, Helvetica Neue, Arial, sans-serif;
+	font-size: 28px;
 	font-weight: bold;
 	line-height: 130%;
-	margin: 0 0 18px;
-	text-align: <?php echo is_rtl() ? 'right' : 'left'; ?>;
+	margin: 0px;
 }
 
 h3 {

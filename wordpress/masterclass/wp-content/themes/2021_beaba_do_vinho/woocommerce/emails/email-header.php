@@ -44,8 +44,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 									<!-- Header -->
 									<table border="0" cellpadding="0" cellspacing="0" width="100%" id="template_header">
 										<tr>
-											<td id="header_wrapper">
-												<h1><?php echo $email_heading; ?></h1>
+											<td id="header_wrapper" align="center" valign="top">
+												<img src="<?php echo TEMPLATE_URI.'/assets/img/email/mc-logo.png'?>" style="height: 30px; margin: 1em; float: left;"></img>
+                            					<img src="<?php echo TEMPLATE_URI.'/assets/img/email/todovino-logo.png'?>" style="height: 30px; margin: 1em; float: right;"></img>
 											</td>
 										</tr>
 									</table>

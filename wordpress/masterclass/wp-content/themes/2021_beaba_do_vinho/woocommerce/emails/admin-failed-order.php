@@ -1,8 +1,8 @@
 <?php
 /**
- * Admin failed order email
+ * Customer processing order email
  *
- * This template can be overridden by copying it to yourtheme/woocommerce/emails/admin-failed-order.php
+ * This template can be overridden by copying it to yourtheme/woocommerce/emails/customer-processing-order.php.
  *
  * HOWEVER, on occasion WooCommerce will need to update template files and you
  * (the theme developer) will need to copy the new files to your theme to
@@ -24,38 +24,30 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
 
-<?php /* translators: %1$s: Order number. %2$s: Customer full name. */ ?>
-<p><?php printf( esc_html__( 'Payment for order #%1$s from %2$s has failed. The order was as follows:', 'woocommerce' ), esc_html( $order->get_order_number() ), esc_html( $order->get_formatted_billing_full_name() ) ); ?></p>
+<table border="0" cellpadding="0" cellspacing="0" width="100%" style='color: #ffffff; border-bottom: 0; font-weight: bold; line-height: 100%; vertical-align: middle; font-family: Poppins, "Helvetica Neue", Helvetica, Arial, sans-serif;'>
+    <tr>
+        <td align="center">
+            <h2>Pagamento Confirmado!</h2>
+        </td>
+    </tr>
+    <tr>
+        <td align="center">
+            <img src="<?php echo TEMPLATE_URI.'/assets/img/email/failed.png'?>" style="width: 200px;"></img>
+        </td>
+    </tr>
+    <tr>
+        <td align="left">
+            <p>
+                Olá,<br>
+                Houve um problema com seu pagamento e não conseguimos confirmar a sua vaga na masterclass Beabá do Vinho com Ronnie Von.<br>
+                Não quer perder essa aula? <a href="https://polen.me/masterclass" target="_blank">Clique Aqui!</a> para realizar uma nova compra:<br>
+            </p>
+        </td>
+    </tr>
+</table>
 
 <?php
-
-/*
- * @hooked WC_Emails::order_details() Shows the order details table.
- * @hooked WC_Structured_Data::generate_order_data() Generates structured data.
- * @hooked WC_Structured_Data::output_structured_data() Outputs structured data.
- * @since 2.5.0
- */
-do_action( 'woocommerce_email_order_details', $order, $sent_to_admin, $plain_text, $email );
-
-/*
- * @hooked WC_Emails::order_meta() Shows order meta data.
- */
-do_action( 'woocommerce_email_order_meta', $order, $sent_to_admin, $plain_text, $email );
-
-/*
- * @hooked WC_Emails::customer_details() Shows customer details
- * @hooked WC_Emails::email_address() Shows email address
- */
-do_action( 'woocommerce_email_customer_details', $order, $sent_to_admin, $plain_text, $email );
-
-/**
- * Show user-defined additional content - this is set in each email's settings.
- */
-if ( $additional_content ) {
-	echo wp_kses_post( wpautop( wptexturize( $additional_content ) ) );
-}
-
 /*
  * @hooked WC_Emails::email_footer() Output the email footer
-*/
+ */
 do_action( 'woocommerce_email_footer', $email );
