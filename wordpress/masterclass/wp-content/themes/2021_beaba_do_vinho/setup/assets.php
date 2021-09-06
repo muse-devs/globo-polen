@@ -29,8 +29,3 @@ function _theme_assets()
     wp_enqueue_script('_theme-js-front', TEMPLATE_URI . '/assets/js/' . $min . 'global.js', array("jquery"), filemtime(TEMPLATE_DIR . '/assets/js/global.js'), false);
 }
 add_action('wp_enqueue_scripts', '_theme_assets');
-
-
-// Componentes Front
-require_once TEMPLATE_DIR . '/classes/Icon_Class.php';
-require TEMPLATE_DIR . '/inc/components.php';
