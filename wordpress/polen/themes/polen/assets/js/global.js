@@ -70,7 +70,7 @@ const shareSocial = {
 	network: {
 		facebook: "https://www.facebook.com/share.php?u=",
 		twitter: "https://twitter.com/intent/tweet?text=",
-		whatsapp: "https://wa.me/5581997075300/?text=",
+		whatsapp: "https://wa.me/?text=",
 	},
 	send: function(url, content) {
 		if(!content) {
