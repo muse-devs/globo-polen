@@ -47,7 +47,9 @@ select.form-control:not([size]):not([multiple]) {
 .woocommerce-cart #payment div.payment_box textarea,
 .woocommerce-checkout #payment div.payment_box input.input-text,
 .woocommerce-checkout #payment div.payment_box textarea {
-	color: $input-font-color;
+	color: #000;
+	width: 100%!important;
+	font-size: 1em!important;
 	// background-color: $form-bg-color;
 }
 

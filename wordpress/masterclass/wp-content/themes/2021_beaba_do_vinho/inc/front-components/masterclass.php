@@ -82,7 +82,7 @@ function mc_get_carrossel_how_to()
 							</div>
 							<div class="col-12">
 								<h4>Duração</h4>
-								<p class="text-center">Participe do curso com duração de x dias, exclusivo e feito sobre medida para amantes de vinho.</p>
+								<p class="text-center">Participe do curso com duração de 1 dia, exclusivo e feito sobre medida para amantes de vinho.</p>
 							</div>
 						</div>
 					</div>
@@ -216,6 +216,22 @@ function mc_get_thank_you_box()
 				<img class="img-responsive" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/ronnie.png'; ?>" alt="Ronnie Von"></img>
 				<h3>Obrigada por pedir seu curso “Bebá do vinho"</h3>
 				<p>Você vai receber os e-mails com o link do acesso ao curso.</p>
+			</div>
+		</div>
+	</div>
+<?php
+}
+
+function mc_get_bank_ticket_box() 
+{
+?>
+	<div class="row mb-3">
+		<div class="col-12">
+			<div class="thank-you-box">
+				<img class="img-responsive" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/ronnie.png'; ?>" alt="Ronnie Von"></img>
+				<h3>Obrigada por pedir seu curso “Bebá do vinho"</h3>
+				<p><b>Para não perder o curso faça o pagamento do boleto.</b> O prazo para pagamento do boleto é 29/08/2021</p>
+				<a href="#" class="btn btn-primary btn-lg btn-block mt-4 gradient ticket-custom-button">Pagar Boleto</a>
 			</div>
 		</div>
 	</div>
