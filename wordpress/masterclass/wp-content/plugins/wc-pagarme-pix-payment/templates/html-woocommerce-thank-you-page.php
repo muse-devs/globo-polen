@@ -472,7 +472,7 @@ if( $order ){
 
             <div class="payment__text">
                 <p>
-                    <b>O código é válido até <?php echo date('d/m/Y H:i:s', strtotime( '+3 days', current_time('timestamp'))); ?>.</b>
+                    <b>O código é válido até <?php echo date('d/m/Y H:i:s', strtotime( '+1 days', current_time('timestamp'))); ?>.</b>
                     Se o pagamento não for confirmado, não se preocupe. O pedido será cancelado automaticamente.
                 </p>
             </div>
