@@ -1,5 +1,21 @@
 <?php
 
+function mc_get_buy_button()
+{
+	?>
+		<div class="row mb-4">
+			<div class="col-12 col-md-6 m-md-auto">
+				<button class="btn btn-primary btn-lg btn-block mt-4 gradient mc-custom-button">Quero me inscrever Por R$60,90</button>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12 col-md-6 m-md-auto text-center">
+				<p class="subtitle">Desconto de primeiro lote. Vagas limitadas.</p>
+			</div>
+		</div>
+	<?php
+}
+
 function mc_get_top_banner()
 {
 ?>
@@ -22,16 +38,7 @@ function mc_get_top_banner()
 						<source src="https://player.vimeo.com/external/595532426.sd.mp4?s=ab2b9eebb3b1c17cd060ebe49d31ed2949472cea&profile_id=164" type="video/mp4">
 					</video>
 				</div>
-				<div class="row mb-4">
-					<div class="col-12 col-md-6 m-md-auto">
-						<button class="btn btn-primary btn-lg btn-block mt-4 gradient mc-custom-button">Quero me inscrever Por R$60,90</button>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-12 col-md-6 m-md-auto">
-						<h2 class="subtitle">Preço especial de lançamento termina em<br /><?php Icon_Class::polen_icon_clock(); ?><strong class="ml-2">10 dias</strong></h2>
-					</div>
-				</div>
+				<?php mc_get_buy_button(); ?>
 			</div>
 		</div>
 	</div>
@@ -110,7 +117,7 @@ function mc_get_carrossel_how_to()
 function mc_get_box_content()
 {
 ?>
-	<div class="row mb-4">
+	<div class="row">
 		<div class="col-12 mb-3">
 			<h3 class="title mb-2">Conteúdo do curso</h3>
 		</div>
