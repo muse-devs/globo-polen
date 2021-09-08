@@ -32,6 +32,7 @@ function mc_get_top_banner()
 			</div>
 		</div>
 	</div>
+	<script>polVideoTag("#mc-video");</script>
 <?php
 }
 
