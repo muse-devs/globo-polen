@@ -35,10 +35,12 @@
         .payment_box.payment_method_wc_pagarme_pix_payment_geteway {
             display: none !important;
         }
-        .payment_box.payment_method_pagarme-banking-ticket{
+
+        .payment_box.payment_method_pagarme-banking-ticket {
             display: none !important;
         }
-        .woocommerce-message{
+
+        .woocommerce-message {
             display: none !important;
         }
     </style>
@@ -53,7 +55,20 @@
 <body>
     <div id="page" class="container site">
         <header id="masthead" class="row py-4 header-home">
-			<div class="col-8 col-sm-6 d-flex align-items-center">
-				<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/logo-masterclass.svg"; ?>" alt="">
-			</div>
+            <?php if (is_front_page()) : ?>
+                <div class="col-8 col-sm-6 d-flex align-items-center">
+                    <img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/logo-masterclass.svg"; ?>" alt="Logo Masterclass" />
+                </div>
+            <?php else : ?>
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-6">
+                            <img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/logo-masterclass-black.svg"; ?>" alt="Logo Masterclass" />
+                        </div>
+                        <div class="col-6 text-right">
+                            <img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/todo-vino.png"; ?>" alt="Logo TodoVino" />
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
         </header><!-- #masthead -->

@@ -4,7 +4,7 @@ get_header(); ?>
 <div class="row mc-content">
     <?php $product = get_product_masterclass(); ?>
     <div class="col-12">
-        <?php 
+        <?php
         mc_get_top_banner($product);
         mc_get_carrossel_how_to();
         mc_get_box_content();
