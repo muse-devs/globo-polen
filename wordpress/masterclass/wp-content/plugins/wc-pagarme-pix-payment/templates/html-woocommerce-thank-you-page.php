@@ -426,9 +426,9 @@ if( $order ){
         display: none !important;
     }
 
-   .order_details{
-       display: none !important;
-   }
+    .order_details{
+        display: none !important;
+    }
 
 </style>
 
@@ -436,26 +436,26 @@ if( $order ){
 
 <section class="payment">
     <div id="successPixPaymentBox" style="display: <?php echo $paid ? 'block' : 'none'; ?>;">
-        aqui
+        PAGAMENTO APROVADO COM SUCESSO!
     </div>
     <div class="container" id="watingPixPaymentBox" style="display: <?php echo $paid ? 'none' : 'block'; ?>;">
         <div class="payment__end">
             <p>Para finalizar a sua compra é só realizar o pagamento com Pix!</p>
         </div>
         <div class="payment__text">
-            <p>Obrigado pela compra. Você receberá todos os dados da sua compra no email djovanholi@gmail.com.</p>
+            <p>Obrigado pela compra. Você receberá todos os dados da sua compra no email <?php echo $order->get_billing_email(); ?>.</p>
         </div>
         <div class="course-card">
             <div class="course-card__header">
                 <div class="course-card__image" style="margin: auto;">
-                    <img src="<?php echo get_the_post_thumbnail_url(get_the_ID()) ?>" alt="">
+                    <img src="<?php echo home_url('/'); ?>/wp-content/uploads/2021/09/ronnie.png">
                 </div>
                 <p>Beabá do vinho</p>
             </div>
             <div class="course-card__price">
                 <p>Você vai pagar</p>
                 <div class="course-card__value">
-                    <p>R$60,90</p>
+                    <p><?php echo wc_price($order->get_total()); ?></p>
                 </div>
             </div>
         </div>
@@ -471,7 +471,10 @@ if( $order ){
             <p class="text-success qrcode-copyed" style="text-align: center; display: none; margin-top: 15px;">Código copiado com sucesso!<br>Vá até o aplicativo do seu banco e cole o código.</p>
 
             <div class="payment__text">
-                <p><b>O código é válido até às 13:24.</b>Se o pagamento não for confirmado, não se preocupe. O pedido será cancelado automaticamente.</p>
+                <p>
+                    <b>O código é válido até <?php echo date('d/m/Y H:i:s', strtotime( '+3 days', current_time('timestamp'))); ?>.</b>
+                    Se o pagamento não for confirmado, não se preocupe. O pedido será cancelado automaticamente.
+                </p>
             </div>
             <div class="payment__list">
                 <ul>
