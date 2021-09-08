@@ -136,25 +136,41 @@ add_filter ('woocommerce_add_to_cart_redirect', 'redirect_to_checkout');
 remove_action('woocommerce_thankyou', 'woocommerce_order_details_table', 10);
 
 /**
+ * Verificar se um produto ja está no carrinho
+ * @param int $productId
+ * @return bool
+ */
+function _theme_find_product_in_cart(int $productId): bool
+{
+    $productCartId = WC()->cart->generate_cart_id($productId);
+
+    return WC()->cart->find_product_in_cart($productCartId);
+}
+
+
+/**
  * Retornar informações do produto masterclass
  *
  * @return array
  */
 function get_product_masterclass(): array
 {
-    $product_masterclass = wc_get_product(69);
+    $masterclass_product_id = 69;
+    $masterclass_product = wc_get_product(69);
 
-    if (is_wp_error($product_masterclass) || empty($product_masterclass)) {
+    if (is_wp_error($masterclass_product) || empty($masterclass_product)) {
         return [
             'error' => 'Produto masterclass está com ID diferente',
         ];
     }
 
+    $url_checkout = _theme_find_product_in_cart($masterclass_product_id) ? wc_get_checkout_url() : '?add-to-cart=69';
+
     return [
-        'name' => $product_masterclass->get_name(),
-        'price' => wc_price($product_masterclass->get_price()),
+        'name' => $masterclass_product->get_name(),
+        'price' => wc_price($masterclass_product->get_price()),
         'image_url' => get_the_post_thumbnail_url(69) ?? '',
-        'url_to_checkout' => home_url('/') . '?add-to-cart=69',
+        'url_to_checkout' => $url_checkout,
     ];
 }
 
