@@ -127,16 +127,31 @@
 	margin: 0 -15px;
 	padding: 60px 15px 45px;
 	background: no-repeat center/cover url(../img/masterclass/top-bg.png)
-		var(--dark);
+	var(--dark);
 	.mc-logo {
+		display: block;
 		margin: auto;
 		width: 130px;
 		height: auto;
+		img {
+			margin: 1rem 0;
+		}
+	}
+
+	.gadget {
+		display: inline-block;
+		padding: 2px 7px;
+		font-size: 10px;
+		font-weight: 700;
+		color: var(--dark);
+		background-color: var(--light);
+		border-radius: 60px;
+		box-shadow: 0px 4px 4px rgba(var(--dark), 0.25);
 	}
 
 	.title {
 		margin: 1rem 0;
-		font-size: 24px;
+		font-size: 20px;
 		color: var(--light);
 		text-align: center;
 	}
@@ -144,6 +159,7 @@
 	.subtitle {
 		font-size: 16px;
 		font-weight: 400;
+		line-height: 1.4;
 		color: var(--light);
 		text-align: center;
 	}
@@ -170,6 +186,12 @@
 			height: 400px;
 		}
 	}
+}
+
+.mc-custom-button {
+	font-size: 20px !important;
+	font-weight: 600 !important;
+	text-transform: uppercase;
 }
 
 #how-to-carousel {
