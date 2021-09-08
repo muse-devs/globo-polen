@@ -135,3 +135,26 @@ add_filter ('add_to_cart_redirect', 'redirect_to_checkout');
  * Remover detalhes do pedido da página thankyou
  */
 remove_action('woocommerce_thankyou', 'woocommerce_order_details_table', 10);
+
+/**
+ * Retornar informações do produto masterclass
+ *
+ * @return array
+ */
+function get_product_masterclass(): array
+{
+    $product_masterclass = wc_get_product(69);
+
+    if (is_wp_error($product_masterclass) || empty($product_masterclass)) {
+        return [
+            'error' => 'Produto masterclass está com ID diferente',
+        ];
+    }
+
+    return [
+        'name' => $product_masterclass->get_name(),
+        'price' => wc_price($product_masterclass->get_price()),
+        'image_url' => get_the_post_thumbnail_url(69) ?? '',
+        'url_to_checkout' => home_url('/') . '?add-to-cart=69',
+    ];
+}
