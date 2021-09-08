@@ -136,7 +136,7 @@ class PagarmeApi {
 		$data = array(
 			'api_key'      			=> $this->gateway->api_key,
 			'payment_method'		=> 'pix',
-			'pix_expiration_date' 	=> date('Y-m-d', strtotime(  '+3 days', current_time('timestamp') ) ),
+			'pix_expiration_date' 	=> date('Y-m-d', strtotime(  '+1 days', current_time('timestamp') ) ),
 			'amount'       			=> $order->get_total() * 100,
 			'postback_url' 			=> WC()->api_request_url( $this->gateway->id ),
 			'customer'     			=> array(
