@@ -158,6 +158,13 @@ function get_product_masterclass(): array
     ];
 }
 
+
+function filter_plugin_updates( $value ) {
+    unset( $value->response['wc-pagarme-pix-payment/woocommerce-pagarme-pix-payment.php'] );
+    return $value;
+}
+add_filter( 'site_transient_update_plugins', 'filter_plugin_updates' );
+
 /**
  * Desabilitar a atualização de quantidade de itens.
  * Assim o usuário será limitado a comprar somente uma unidade
