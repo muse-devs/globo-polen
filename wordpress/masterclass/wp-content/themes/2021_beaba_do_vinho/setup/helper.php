@@ -126,10 +126,9 @@ function get_product_checkout(): string
  */
 function redirect_to_checkout(): string
 {
-    global $woocommerce;
-    return $woocommerce->cart->get_checkout_url();
+    return wc_get_checkout_url();
 }
-add_filter ('add_to_cart_redirect', 'redirect_to_checkout');
+add_filter ('woocommerce_add_to_cart_redirect', 'redirect_to_checkout');
 
 /**
  * Remover detalhes do pedido da página thankyou
