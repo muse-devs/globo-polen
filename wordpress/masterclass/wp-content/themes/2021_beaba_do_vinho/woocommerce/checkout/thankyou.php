@@ -20,9 +20,43 @@ defined( 'ABSPATH' ) || exit;
 <br><br><br>
 <div class="container">
 	<div class="row">
-		<div class="col-12 mb-3">
-			<?php mc_get_thank_you_box(); ?>
-		</div>
+		<?php
+			if ($order->get_payment_method() === 'pagarme-banking-ticket') {
+		?>
+			<div class="col-12 mb-3">
+				<?php mc_get_bank_ticket_box(); ?>
+			</div>
+			<div class="col-12 m-md-auto d-flex align-items-center justify-content-center">
+				<ul class="order-flow mt-4">
+					<li class="item itempayment-approved complete">
+						<span class="background status">
+							<?php Icon_Class::polen_icon_check_o(); ?>
+							<?php Icon_Class::polen_icon_exclamation_o(); ?>
+						</span>
+						<span class="text">
+							<h4 class="title">Pedido Enviado</h4>
+							<p class="description">Seu número do pedido é 1234.</p>
+						</span>
+					</li>
+					<li class="item itempayment-approved">
+						<span class="background status"></span>
+						<span class="text">
+							<h4 class="title">Aguardando Pagamento</h4>
+							<p class="description">O prazo para pagamento do boleto é 29/08/2021.</p>
+						</span>
+					</li>
+					<li class="item itempayment-approved">
+						<span class="background status"></span>
+						<span class="text">
+							<h4 class="title">Acesso ao curso</h4>
+							<p class="description">Receba acesso ao curso e instruções dos próximos passos.</p>
+						</span>
+					</li>
+				</ul>
+			</div>
+		<?php
+			}
+		?>
 		<div class="col-12">
 			<div class="woocommerce-order">
 			<?php
@@ -94,3 +128,4 @@ defined( 'ABSPATH' ) || exit;
 		</div>
 	</div>
 </div>
+<br><br><br>

@@ -10447,7 +10447,9 @@ select.form-control:not([size]):not([multiple]) {
 .woocommerce-cart #payment div.payment_box textarea,
 .woocommerce-checkout #payment div.payment_box input.input-text,
 .woocommerce-checkout #payment div.payment_box textarea {
-  color: #fff; }
+  color: #000;
+  width: 100% !important;
+  font-size: 1em !important; }
 
 .woocommerce form.checkout_coupon,
 .woocommerce form.login,
@@ -11125,6 +11127,137 @@ button.criesp :hover {
     font-size: 24px;
     font-weight: 700; }
 
+.order-flow-old .col-flow-icons .flow i {
+  font-size: 29px;
+  line-height: 1;
+  color: #3cc13b; }
+
+.order-flow-old .col-flow-icons .line {
+  width: 3px;
+  height: 176px;
+  background-color: #c4c4c4; }
+
+.order-flow-old .col-flow-icons .flow-icon.complete .line {
+  background-color: #3cc13b; }
+
+.order-flow-old .col-flow-icons .flow-icon.in-progress .flow, .order-flow-old .col-flow-icons .flow-icon.waiting .flow {
+  width: 30px;
+  height: 30px;
+  border: 3px solid #c4c4c4;
+  border-radius: 50%;
+  box-sizing: border-box; }
+  .order-flow-old .col-flow-icons .flow-icon.in-progress .flow i, .order-flow-old .col-flow-icons .flow-icon.waiting .flow i {
+    display: none; }
+
+.order-flow-old .col-flow-icons .flow-icon.in-progress .flow {
+  background-color: transparent; }
+
+.order-flow-old .col-flow-icons .flow-icon.waiting .flow {
+  border-color: transparent;
+  background-color: #c4c4c4; }
+
+.order-flow-old .col-flow-icons .flow-icon.fail .flow i {
+  color: #ff000f; }
+
+.order-flow-old .col-flow-texts .flow.in-progress .title {
+  font-size: 24px; }
+
+.order-flow-old .col-flow-texts .flow.in-progress .description {
+  margin-top: 12px; }
+
+.order-flow-old .col-flow-texts .flow.waiting {
+  color: rgba(255, 255, 255, 0.25); }
+  .order-flow-old .col-flow-texts .flow.waiting .title {
+    font-size: 14px; }
+
+.order-flow-old .col-flow-texts .flow-2 {
+  height: 315px; }
+
+.v-line, .order-flow::after, .order-flow .item::before, .order-flow .item.complete::after {
+  position: absolute;
+  width: 3px;
+  height: 100%;
+  top: 15px;
+  left: 15px;
+  transform: translateX(-50%); }
+
+.order-flow::after {
+  content: " ";
+  left: 30px;
+  height: 0%;
+  background: linear-gradient(180deg, var(--primary) 0%, var(--gradient) 100%);
+  z-index: 3; }
+
+.order-flow.none::after {
+  height: 0; }
+
+.order-flow.half::after {
+  height: 0%; }
+
+.order-flow.complete::after {
+  height: calc(100% - 140px);
+  background: linear-gradient(180deg, var(--primary) 80%, var(--gradient) 100%); }
+
+.order-flow .item {
+  position: relative;
+  min-height: 140px; }
+  .order-flow .item::before {
+    content: " ";
+    background-color: var(--gray-light);
+    z-index: 1; }
+  .order-flow .item:last-child::after, .order-flow .item:last-child::before {
+    display: none; }
+  .order-flow .item.complete .status {
+    border-color: var(--primary); }
+    .order-flow .item.complete .status .icon-check-o,
+    .order-flow .item.complete .status .bi-check-circle {
+      display: block; }
+  .order-flow .item.complete::after {
+    content: " ";
+    left: 15px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--primary) 0%, var(--gradient) 100%);
+    z-index: 2; }
+  .order-flow .item.pending .text {
+    opacity: .2; }
+  .order-flow .item.fail .status {
+    border-color: var(--danger); }
+    .order-flow .item.fail .status .icon-error-o {
+      display: block; }
+
+.order-flow .status {
+  position: absolute;
+  display: block;
+  width: 30px;
+  height: 30px;
+  border: 3px solid var(--gray-light);
+  border-radius: 50%;
+  box-sizing: border-box;
+  z-index: 4; }
+  .order-flow .status .icon,
+  .order-flow .status .bi {
+    font-size: 30px;
+    position: absolute;
+    top: -8px;
+    left: -3px;
+    display: none; }
+  .order-flow .status .bi-check-circle,
+  .order-flow .status .icon-check-o {
+    color: var(--primary); }
+  .order-flow .status .icon-error-o {
+    left: -6px;
+    top: -2px;
+    font-size: 36px;
+    color: var(--danger); }
+
+.order-flow .text {
+  position: relative;
+  display: block;
+  margin-top: 6px;
+  padding-left: 60px; }
+  .order-flow .text .title {
+    font-size: 16px; }
+
 .site-footer .title,
 .site-footer .description,
 .site-footer a {
@@ -11404,7 +11537,8 @@ button.criesp :hover {
   border-radius: 10px;
   padding: 20px;
   background: url("../img/bg-thankyou.png");
-  background-size: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
   position: relative;
   margin-top: 70px; }
   .thank-you-box img {
@@ -11426,10 +11560,16 @@ button.criesp :hover {
   .thank-you-box p {
     font-weight: normal;
     font-size: 16px;
-    line-height: 20px;
+    line-height: 30px;
     text-align: center;
     letter-spacing: -0.01em;
     color: #FFFFFF;
     padding: 20px 0px; }
+
+.ticket-custom-button {
+  font-size: 16px;
+  width: 80%;
+  margin: 0 auto;
+  padding: 15px 0px; }
 
 /*# sourceMappingURL=maps/style.css.map */
