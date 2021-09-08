@@ -130,3 +130,8 @@ function redirect_to_checkout(): string
     return $woocommerce->cart->get_checkout_url();
 }
 add_filter ('add_to_cart_redirect', 'redirect_to_checkout');
+
+/**
+ * Remover detalhes do pedido da página thankyou
+ */
+remove_action('woocommerce_thankyou', 'woocommerce_order_details_table', 10);

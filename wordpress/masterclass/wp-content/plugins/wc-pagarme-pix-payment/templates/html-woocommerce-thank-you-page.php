@@ -3,161 +3,506 @@ defined( 'ABSPATH' ) || exit;
 
 use chillerlan\QRCode\QRCode;
 
-$order_id = wc_get_order_id_by_order_key($_GET['key']);
-$order = wc_get_order( $order_id );
-
 if( $order ){
-    $paid = get_post_meta($order_id, '_wc_pagarme_pix_payment_paid', 'no') === 'yes' ? true : false;
+    $paid = get_post_meta($order->get_id(), '_wc_pagarme_pix_payment_paid', 'no') === 'yes' ? true : false;
 }
 
-
 ?>
+
 <style>
-    .qrcode-copyed{
-        box-shadow: 2px 2px 3px #e1e1e1;
-        border-radius: 5px;
-        width: 320px;
-        border: 1px solid #dadada;
+    body{
+        font-family: 'Poppins', sans-serif;
+        color: black;
+    }
+
+    .container{
+        padding: 0 20px;
+        max-width: 120rem;
+    }
+
+    .course-card{
+        width: 100%;
+        margin-top: 20px;
+        background-color: #F3F3F3;
+        border-radius: 8px;
+    }
+
+    .course-card__header{
+        display: flex;
+        align-items: center;
+        padding: 20px 15px;
+        column-gap: 20px;
+        border-bottom: 2px dashed rgba(0, 0, 0, 0.05);
+    }
+
+    .course-card__header p{
+        font-style: normal;
+        font-weight: bold;
+        font-size: 24px;
+        line-height: 1;
+    }
+
+    .course-card__image{
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+
+    .course-card__image img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .course-card__price{
+        padding: 20px 15px;
+    }
+
+    .course-card__price p{
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 180%;
+        color: #000;
+    }
+
+    .course-card__value p{
+        font-style: normal;
+        font-weight: bold;
+        font-size: 24px;
+        line-height: 180%;
+    }
+
+    .woocommerce-billing-fields h3{
+        display: none;
+    }
+
+    .woocommerce-billing-fields__field-wrapper{
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        row-gap: 20px;
+    }
+
+    .form-row{
+        display: flex;
+        flex-direction: column;
+        padding: 16px !important;
+        border: 1px solid #E5E5E5;
+        width: 100% !important;
+        border-radius: 8px;
+    }
+
+    .form-row input{
+        padding: 0 !important;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px !important;
+        line-height: 150%;
+        border: none !important;
+    }
+
+    .form-row input::placeholder{
+        color: #000 !important;
+        font-style: normal !important;
+        font-weight: normal !important;
+        font-size: 14px !important;
+        line-height: 150% !important;
+    }
+
+    .form-row label{
+        font-family: 'Poppins', sans-serif !important;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 10px;
+        line-height: 100%;
+        color: #999;
+    }
+
+    .woocommerce-input-wrapper input{
+        border: none !important;
+    }
+
+    .woocommerce-input-wrapper input::placeholder{
+        color: #000;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 150%;
+    }
+
+    .footer-container__menu-column{
+        display: none;
+    }
+
+    #order_review_heading{
+        margin-top: 20px;
+
+    }
+
+    #order_review{
+        margin-top: 20px;
+    }
+
+    #payment{
+        background-color: transparent !important;
+    }
+
+    #payment >ul{
+        padding: 0 !important;
+        display: flex;
+        flex-direction: column;
+        row-gap: 20px;
+    }
+
+    #payment ul.payment_methods{
+        border-bottom: none !important;
+    }
+
+    .wc_payment_method{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .wc_payment_method >input{
+        all: unset;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        border: 1px solid rgba(153, 153, 153, 0.5);
+        background-color: rgba(158, 158, 158, 0.25);
+    }
+
+    .wc_payment_method >input:checked{
+        background-color: #FD6C36;
+        border-color: #FD6C36;
+    }
+
+    .wc_payment_method >label{
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 160%;
+    }
+
+    .wc_payment_method >input:checked + label{
+        font-weight: 700;
+    }
+
+    .wc_payment_method >input:checked::before{
+        content: '';
+        display: block;
+        width: 12px;
+        height: 12px;
+        background-color: #FD6C36;
+        border-radius: 50%;
+        border: 2px solid #fff;
+    }
+
+    .payment_box{
+        background-color: transparent !important;
+        padding: 0 !important;
+    }
+
+    .payment_box::before{
+        display: none !important;
+    }
+
+    .payment_box fieldset{
+        padding: 0;
+        margin: 0;
+        border: none;
+    }
+
+    .place-order{
+        padding: 0 !important;
+        border: none;
+    }
+
+    .woocommerce-privacy-policy-text{
+        display: none;
+    }
+
+    .order-info{
+        margin-top: 20px;
+        background-color: #F3F3F3;
+        padding: 20px;
+        border-radius: 8px;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 160%;
+        color: #000;
+    }
+
+    .order-terms{
+        margin-top: 30px;
+        display: flex;
+        flex-direction: column;
+        row-gap: 20px;
+    }
+
+    .order-terms__checkbox{
+        display: flex;
+        align-items: center;
+        column-gap: 20px;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 156%;
+        color: #000;
+    }
+
+    .order-terms__checkbox input{
+        all: unset;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 20px;
+        height: 20px;
+        border: 1px solid #FD6C36;
+        border-radius: 4px;
+    }
+
+    .order-terms__checkbox input:checked{
+        background-color: #FD6C36;
+    }
+
+    .order-terms__checkbox input:checked::before{
+        content: '\f00c';
+        font-family: FontAwesome;
+        color: #fff;
+        font-size: 14px;
+    }
+
+    .order-terms__checkbox label{
+        max-width: 75%;
+    }
+
+    .order-terms__checkbox a{
+        color: #FD6C36;
+        font-weight: 700;
+    }
+
+    #place_order, .default-button{
+        padding: 20px;
+        border-radius: 94px;
+        background: linear-gradient(100.13deg, #FD6C36 10.5%, #D7198B 94.06%);
+    }
+
+    #place_order:hover, .default-button:hover{
+        filter: brightness(.9);
+    }
+
+    .payment__end p{
+        font-style: normal;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 160%;
+        color: #3ABE39;
+        margin-top: 20px;
+    }
+
+    .payment__text{
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 160%;
+        margin-top: 20px;
+    }
+
+    .payment__instructions >.payment__text p{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        max-width: 250px;
         margin: 0 auto;
-        padding: 10px;
-    }
-    @-webkit-keyframes scaleAnimation {
-    0% {
-        opacity: 0;
-        transform: scale(1.5);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
     }
 
-    @keyframes scaleAnimation {
-    0% {
-        opacity: 0;
-        transform: scale(1.5);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-    }
-    @-webkit-keyframes drawCircle {
-    0% {
-        stroke-dashoffset: 151px;
-    }
-    100% {
-        stroke-dashoffset: 0;
-    }
-    }
-    @keyframes drawCircle {
-    0% {
-        stroke-dashoffset: 151px;
-    }
-    100% {
-        stroke-dashoffset: 0;
-    }
-    }
-    @-webkit-keyframes drawCheck {
-    0% {
-        stroke-dashoffset: 36px;
-    }
-    100% {
-        stroke-dashoffset: 0;
-    }
-    }
-    @keyframes drawCheck {
-    0% {
-        stroke-dashoffset: 36px;
-    }
-    100% {
-        stroke-dashoffset: 0;
-    }
-    }
-    @-webkit-keyframes fadeOut {
-    0% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-    }
-    }
-    @keyframes fadeOut {
-    0% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-    }
-    }
-    @-webkit-keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-    }
-    @keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-    }
-    #successAnimationCircle {
-    stroke-dasharray: 151px 151px;
-    stroke: #007bff;
+    .payment__instructions{
+        width: 100%;
+        margin-top: 20px;
+        background-color: #F3F3F3;
+        border-radius: 8px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
     }
 
-    #successAnimationCheck {
-    stroke-dasharray: 36px 36px;
-    stroke: #007bff;
+    .payment__header{
+        display: flex;
+        align-items: center;
+        gap: 10px;
     }
 
-    #successAnimationResult {
-    fill: #007bff;
-    opacity: 0;
+    .payment__header img{
+        width: 32px;
+        height: 32px;
+        object-fit: contain;
     }
 
-    #successAnimation.animated {
-    -webkit-animation: 1s ease-out 0s 1 both scaleAnimation;
-            animation: 1s ease-out 0s 1 both scaleAnimation;
+    .payment__header p{
+        font-style: normal;
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 160%;
     }
-    #successAnimation.animated #successAnimationCircle {
-    -webkit-animation: 1s cubic-bezier(0.77, 0, 0.175, 1) 0s 1 both drawCircle, 0.3s linear 0.9s 1 both fadeOut;
-            animation: 1s cubic-bezier(0.77, 0, 0.175, 1) 0s 1 both drawCircle, 0.3s linear 0.9s 1 both fadeOut;
+
+    .payment__qr{
+        width: 150px;
+        height: 150px;
+        margin: 0 auto;
     }
-    #successAnimation.animated #successAnimationCheck {
-    -webkit-animation: 1s cubic-bezier(0.77, 0, 0.175, 1) 0s 1 both drawCheck, 0.3s linear 0.9s 1 both fadeOut;
-            animation: 1s cubic-bezier(0.77, 0, 0.175, 1) 0s 1 both drawCheck, 0.3s linear 0.9s 1 both fadeOut;
+
+    .payment__qr img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
-    #successAnimation.animated #successAnimationResult {
-    -webkit-animation: 0.3s linear 0.9s both fadeIn;
-            animation: 0.3s linear 0.9s both fadeIn;
+
+    .default-button{
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 150%;
+        color: #fff;
+        width: max-content;
+        padding: 10px 40px;
+        border: none;
+        margin: 0 auto;
     }
+
+    .payment__list p{
+        max-width: 200px;
+    }
+
+    .payment__list ul{
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .payment__list ul li{
+        display: flex;
+        gap: 14px;
+        width: max-content;
+        margin: 0 auto;
+    }
+
+    .payment__list .payment__text{
+        margin: 0;
+    }
+
+    .payment__bullet{
+        width: 32px;
+        height: 32px;
+        background-color: #E2E2E2;
+        color: #1B1A1A;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 12px;
+        line-height: 21px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .woocommerce-order-details{
+        display: none !important;
+    }
+
+    .woocommerce-customer-details{
+        display: none !important;
+    }
+
+   .order_details{
+       display: none !important;
+   }
+
 </style>
-<div class="text-center">
+
+<?php get_header(); ?>
+
+<section class="payment">
     <div id="successPixPaymentBox" style="display: <?php echo $paid ? 'block' : 'none'; ?>;">
-        <h4>Obrigado pelo pagamento!</h4>
-        <svg id="successAnimation" class="animated" xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 70 70">
-            <path id="successAnimationResult" fill="#D8D8D8" d="M35,60 C21.1928813,60 10,48.8071187 10,35 C10,21.1928813 21.1928813,10 35,10 C48.8071187,10 60,21.1928813 60,35 C60,48.8071187 48.8071187,60 35,60 Z M23.6332378,33.2260427 L22.3667622,34.7739573 L34.1433655,44.40936 L47.776114,27.6305926 L46.223886,26.3694074 L33.8566345,41.59064 L23.6332378,33.2260427 Z"/>
-            <circle id="successAnimationCircle" cx="35" cy="35" r="24" stroke="#979797" stroke-width="2" stroke-linecap="round" fill="transparent"/>
-            <polyline id="successAnimationCheck" stroke="#979797" stroke-width="2" points="23 34 34 43 47 27" fill="transparent"/>
-        </svg>
-        <?php echo nl2br($thank_you_message); ?>
+        aqui
     </div>
-    <div id="watingPixPaymentBox" style="display: <?php echo $paid ? 'none' : 'block'; ?>;">
-        <?php echo nl2br($order_recived_message); ?>
-        <button class="btn btn-primary copy-qr-code"><i class="fa fa-copy fa-lg pr-3"></i>Clique aqui para copiar o código</button>
-        <p class="text-success mt-4 qrcode-copyed" style="display: none;">Código copiado com sucesso!<br>Vá até o aplicativo do seu banco e cole o código.</p>
-        <div>
-            <img src="<?php echo (new QRCode)->render( esc_html($qr_code) ); ?>" />
+    <div class="container" id="watingPixPaymentBox" style="display: <?php echo $paid ? 'none' : 'block'; ?>;">
+        <div class="payment__end">
+            <p>Para finalizar a sua compra é só realizar o pagamento com Pix!</p>
         </div>
-        <!--<h5 class="mt-4">Código:</h5>
-        <div><?php echo esc_html($qr_code); ?></div>-->
-        <div><input type="hidden" value="<?php echo esc_html($qr_code); ?>" id="pixQrCodeInput"></div>
-        <input type="hidden" name="wc_pagarme_pix_order_key" value="<?php echo esc_html( sanitize_text_field( $_GET['key'] ) ); ?>"/>
+        <div class="payment__text">
+            <p>Obrigado pela compra. Você receberá todos os dados da sua compra no email djovanholi@gmail.com.</p>
+        </div>
+        <div class="course-card">
+            <div class="course-card__header">
+                <div class="course-card__image" style="margin: auto;">
+                    <img src="<?php echo get_the_post_thumbnail_url(get_the_ID()) ?>" alt="">
+                </div>
+                <p>Beabá do vinho</p>
+            </div>
+            <div class="course-card__price">
+                <p>Você vai pagar</p>
+                <div class="course-card__value">
+                    <p>R$60,90</p>
+                </div>
+            </div>
+        </div>
+        <div class="payment__instructions">
+            <div class="payment__header">
+                <img src="https://logospng.org/download/pix/logo-pix-icone-512.png" alt="">
+                <p>Pagamento via PIX</p>
+            </div>
+            <div class="payment__qr">
+                <img src="<?php echo (new QRCode)->render( esc_html($qr_code) ); ?>" />
+            </div>
+            <button class="default-button button copy-qr-code" style="margin: auto;">Copiar código PIX</button>
+            <p class="text-success qrcode-copyed" style="text-align: center; display: none; margin-top: 15px;">Código copiado com sucesso!<br>Vá até o aplicativo do seu banco e cole o código.</p>
+
+            <div class="payment__text">
+                <p><b>O código é válido até às 13:24.</b>Se o pagamento não for confirmado, não se preocupe. O pedido será cancelado automaticamente.</p>
+            </div>
+            <div class="payment__list">
+                <ul>
+                    <li>
+                        <div class="payment__bullet">
+                            <p>1</p>
+                        </div>
+                        <div class="payment__text">
+                            <p> Abra o app ou banco de sua preferência. Escolha a opção pagar com código Pix “copia e cola”, ou código QR.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="payment__bullet">
+                            <p>2</p>
+                        </div>
+                        <div class="payment__text">
+                            <p> Copie e cole o código, ou escaneie o código QR com a câmera do seu celular. Confira todas as informações e autorize o pagamento.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="payment__bullet">
+                            <p>3</p>
+                        </div>
+                        <div class="payment__text">
+                            <p>Você vai receber a confirmação do pagamento no seu e-mail e através dos nossos canais. E pronto!</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
-</div>
+    <input type="hidden" value="<?php echo esc_html($qr_code); ?>" id="pixQrCodeInput"></div>
+    <input type="hidden" name="wc_pagarme_pix_order_key" value="<?php echo esc_html( sanitize_text_field( $order_key ) ); ?>"/>
+</section>
