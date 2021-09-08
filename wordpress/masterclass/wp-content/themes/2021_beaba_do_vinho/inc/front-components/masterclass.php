@@ -231,7 +231,7 @@ function mc_get_bank_ticket_box()
 				<img class="img-responsive" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/ronnie.png'; ?>" alt="Ronnie Von"></img>
 				<h3>Obrigada por pedir seu curso “Bebá do vinho"</h3>
 				<p><b>Para não perder o curso faça o pagamento do boleto.</b> O prazo para pagamento do boleto é 29/08/2021</p>
-				<a href="#" class="btn btn-primary btn-lg btn-block mt-4 gradient ticket-custom-button">Pagar Boleto</a>
+				<a href="#" id="payment_ticket_custom_button" class="btn btn-primary btn-lg btn-block mt-4 gradient ticket-custom-button">Pagar Boleto</a>
 			</div>
 		</div>
 	</div>
