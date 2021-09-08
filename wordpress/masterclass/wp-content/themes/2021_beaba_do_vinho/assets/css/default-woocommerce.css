@@ -292,7 +292,7 @@ body{
 }
 
 .woocommerce form .form-row {
-    width: 980px !important;
+    width: 100% !important;
 }
 
 @media (max-width : 420px) {
