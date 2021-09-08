@@ -158,3 +158,12 @@ function get_product_masterclass(): array
         'url_to_checkout' => home_url('/') . '?add-to-cart=69',
     ];
 }
+
+/**
+ * Desabilitar a atualização de quantidade de itens.
+ * Assim o usuário será limitado a comprar somente uma unidade
+ * de cada produto.
+ */
+add_filter('woocommerce_is_sold_individually', function () {
+    return true;
+}, 9999, 2);
