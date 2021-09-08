@@ -1,11 +1,14 @@
 <?php
 
-function mc_get_buy_button()
+function mc_get_buy_button($product)
 {
+	if(!$product || empty($product)) {
+		return;
+	}
 	?>
 		<div class="row mb-4">
 			<div class="col-12 col-md-6 m-md-auto">
-				<button class="btn btn-primary btn-lg btn-block mt-4 gradient mc-custom-button">Quero me inscrever Por R$60,90</button>
+				<a href="<?php echo $product['url_to_checkout']; ?>" class="btn btn-primary btn-lg btn-block mt-4 gradient mc-custom-button">Quero me inscrever Por <?php echo $product['price']; ?></a>
 			</div>
 		</div>
 		<div class="row">
@@ -16,8 +19,11 @@ function mc_get_buy_button()
 	<?php
 }
 
-function mc_get_top_banner()
+function mc_get_top_banner($product)
 {
+	if(!$product || empty($product)) {
+		return;
+	}
 ?>
 	<div class="row mb-4">
 		<div class="col-12">
@@ -38,7 +44,7 @@ function mc_get_top_banner()
 						<source src="https://player.vimeo.com/external/595532426.sd.mp4?s=ab2b9eebb3b1c17cd060ebe49d31ed2949472cea&profile_id=164" type="video/mp4">
 					</video>
 				</div>
-				<?php mc_get_buy_button(); ?>
+				<?php mc_get_buy_button($product); ?>
 			</div>
 		</div>
 	</div>
