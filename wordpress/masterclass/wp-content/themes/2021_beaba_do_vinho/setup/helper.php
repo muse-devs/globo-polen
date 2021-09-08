@@ -104,16 +104,14 @@ add_action( 'woocommerce_checkout_order_review', 'remove_checkout_totals', 1 );
  */
 function get_product_checkout(): string
 {
-    global $woocommerce;
-    $cart = $woocommerce->cart->get_cart();
-
+    $cart = WC()->cart->get_cart();
     if (empty($cart) && $cart == null) {
         return '';
     }
 
     $cart_items_ids = '';
-    foreach ($cart as $item_key => $item_value) {
-        $cart_items_ids = $item_value['data']->id;
+    foreach ($cart as $item_value) {
+        $cart_items_ids = $item_value['product_id'];
     }
 
     return $cart_items_ids;
