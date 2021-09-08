@@ -10,23 +10,26 @@ function mc_get_top_banner()
 					<img class="image" src="<?php echo TEMPLATE_URI; ?>/assets/img/masterclass/ronnievon-logo.png" alt="Logo Beabá do Vinho" />
 				</figure>
 				<div class="row">
+					<div class="col-12 col-md-6 m-md-auto text-center">
+						<span class="gadget">Inscrições abertas</span>
+					</div>
 					<div class="col-12 col-md-6 m-md-auto">
 						<h1 class="title">Aprenda a escolher, apreciar e harmonizar vinhos com Ronnie Von</h1>
 					</div>
 				</div>
-				<div class="mc-home-video mb-4">
+				<div class="mc-home-video mb-2">
 					<video id="mc-video" playsinline poster="<?php echo TEMPLATE_URI; ?>/assets/img/masterclass/player-poster.jpg?v=2">
 						<source src="https://player.vimeo.com/external/595532426.sd.mp4?s=ab2b9eebb3b1c17cd060ebe49d31ed2949472cea&profile_id=164" type="video/mp4">
 					</video>
 				</div>
-				<div class="row">
+				<div class="row mb-4">
 					<div class="col-12 col-md-6 m-md-auto">
-						<h2 class="subtitle">Participe do grupo de pré-inscrição no WhatsApp para ter um desconto exclusivo no primeiro dia das inscrições.</h2>
+						<button class="btn btn-primary btn-lg btn-block mt-4 gradient mc-custom-button">Quero me inscrever Por R$60,90</button>
 					</div>
 				</div>
-				<div class="row mt-4">
+				<div class="row">
 					<div class="col-12 col-md-6 m-md-auto">
-						<input type="submit" value="Quero ganhar desconto" class="btn btn-primary btn-lg btn-block mt-4 gradient" />
+						<h2 class="subtitle">Preço especial de lançamento termina em<br /><?php Icon_Class::polen_icon_clock(); ?><strong class="ml-2">10 dias</strong></h2>
 					</div>
 				</div>
 			</div>
