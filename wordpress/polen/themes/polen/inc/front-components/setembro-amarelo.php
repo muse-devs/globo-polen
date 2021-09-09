@@ -15,7 +15,7 @@ function sa_get_about($video_depoimento = "")
 			<div class="box-round py-4 px-4">
 				<div class="row">
 					<div class="col-md-12 mt-3">
-						<p><strong>Vídeo Depoimento</strong></p>
+						<p><strong>Compartilhe gratuitamente esse depoimento:</strong></p>
 						<div class="video-slider d-flex justify-content-center">
 							<video id="sa-video-about" playsinline controls>
 								<source src="<?php echo $video_depoimento; ?>" type="video/mp4">
