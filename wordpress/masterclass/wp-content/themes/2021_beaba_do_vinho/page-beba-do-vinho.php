@@ -1,10 +1,17 @@
+<script>
+    let polenObj = {
+        base_url: '<?= site_url(); ?>',
+        developer: <?php echo DEVELOPER ? 1 : 0; ?>
+    };
+</script>
+
 <?php
 /** Template Name: Página - beaba do vinho */
-get_header(); the_content();
+get_header();
 ?>
 
     <main id="primary" class="site-main">
-    <?php mc_get_top_banner(); ?>
+    <?php mc_get_top_banner_lp(); ?>
 	<div class="row">
 		<div class="col-12 col-md-8 m-md-auto mc-content">
             <div class="row">
