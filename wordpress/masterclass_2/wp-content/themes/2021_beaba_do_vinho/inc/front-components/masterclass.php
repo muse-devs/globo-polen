@@ -61,7 +61,7 @@ function mc_get_top_banner_lp()
 		</div>
 	</div>
 	<script>
-		const success = "/masterclass/sucesso";
+		const success = '<?php echo home_url('/ronnie-von/beaba-do-vinho/sucesso'); ?>';
 
 		polVideoTag("#mc-video");
 
