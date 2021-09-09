@@ -110,7 +110,7 @@ class Polen {
         new Social_Base( true );
 
         // Master class
-        // new Master_Class(true);
+        new Master_Class(true);
 
     }
 
