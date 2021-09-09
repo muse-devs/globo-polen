@@ -15,7 +15,7 @@ function sa_get_about($video_depoimento = "")
 			<div class="box-round py-4 px-4">
 				<div class="row">
 					<div class="col-md-12 mt-3">
-						<p><strong>Vídeo Depoimento</strong></p>
+						<p><strong>Compartilhe gratuitamente esse depoimento:</strong></p>
 						<div class="video-slider d-flex justify-content-center">
 							<video id="sa-video-about" playsinline controls>
 								<source src="<?php echo $video_depoimento; ?>" type="video/mp4">
@@ -55,7 +55,7 @@ function sa_get_modal() {
 				<div class="col-12 col-md-6 m-md-auto col-lg-4">
 					<div class="sa-home-video">
 						<video id="sa-video" playsinline poster="<?php echo TEMPLATE_URI; ?>/assets/img/social/sa-poster.jpg">
-							<source src="https://player.vimeo.com/external/596862158.sd.mp4?s=9f3886b9be7113cdad714b02b22f2076d229ddc3&profile_id=165" type="video/mp4">
+							<source src="https://player.vimeo.com/external/601062018.sd.mp4?s=30d9f9249be71f53530519fce1d76887fa37b81d&profile_id=165" type="video/mp4">
 						</video>
 					</div>
 				</div>

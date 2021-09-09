@@ -27,7 +27,6 @@ function mc_get_home_banner($link)
 <?php
 }
 
-
 function mc_get_top_banner()
 {
 ?>
@@ -85,4 +84,96 @@ function mc_get_top_banner()
 		});
 	</script>
 <?php
+}
+
+function mc_get_carrossel_how_to() {
+?>
+	<div class="row mb-4">
+		<div class="col-12">
+			<h3 class="title mb-2">Como funciona?</h3>
+		</div>
+		<div class="col-12">
+			<div id="how-to-carousel" class="owl-carousel owl-theme">
+				<div class="item">
+					<div class="box-round py-3 px-3">
+						<div class="row">
+							<div class="col-12 mb-1 d-flex justify-content-center">
+								<?php Icon_Class::polen_icon_camera_video(); ?>
+							</div>
+							<div class="col-12">
+								<h4>Ao vivo</h4>
+								<p class="text-center">Participe de aulas ao vivo e converse em tempo real, tirando todas suas dúvidas com Ronnie Von</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="item">
+					<div class="box-round py-3 px-3">
+						<div class="row">
+							<div class="col-12 mb-1 d-flex justify-content-center">
+								<?php Icon_Class::polen_icon_clock(); ?>
+							</div>
+							<div class="col-12">
+								<h4>Duração</h4>
+								<p class="text-center">Participe do curso com duração de x dias, exclusivo e feito sobre medida para amantes de vinho.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="item">
+					<div class="box-round py-3 px-3">
+						<div class="row">
+							<div class="col-12 mb-1 d-flex justify-content-center">
+								<?php Icon_Class::polen_icon_hand_thumbs_up(); ?>
+							</div>
+							<div class="col-12">
+								<h4>Disponibilidade</h4>
+								<p class="text-center">Tenha acesso e tire suas dúvidas diretamanente com o Ronnie Von.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php
+}
+
+function mc_get_box_content()
+{
+	?>
+	<div class="row">
+		<div class="col-12 mb-3">
+			<h2>Conteúdo do curso</h2>
+		</div>
+		<div class="col-12">
+			<div class="box-round p-4 masterclass-content-box">
+				<div class="row">
+					<div class="col-2">
+						<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/taca.svg"; ?>" alt="Ícone garrafa" />
+					</div>
+					<div class="col-10 pl-0 ml-0">
+						<p class="description"><strong>História e Importância do Vinho:</strong> quais os principais tipos de vinhos.</p>
+					</div>
+				</div>
+				<div class="row mt-4">
+					<div class="col-2">
+						<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/garrafa.svg"; ?>" alt="Ícone garrafa" />
+					</div>
+					<div class="col-10 pl-0 ml-0">
+						<p class="description"><strong>Só vinho caro tem qualidade?</strong> Como escolher vinho bom e barato.</p>
+					</div>
+				</div>
+				<div class="row mt-4">
+					<div class="col-2">
+						<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/taca_garrafa.svg"; ?>" alt="Ícone garrafa" />
+					</div>
+					<div class="col-10 pl-0 ml-0">
+						<p class="description"><strong>O que ler nos rótulos das garrafas para escolher seu vinho?</strong> Tipos de taças para cada tipo de vinho.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<?php
 }

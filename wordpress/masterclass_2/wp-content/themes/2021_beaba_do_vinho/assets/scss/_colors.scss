@@ -1,0 +1,56 @@
+$light-100: #fff;
+$light-50: #c4c4c4;
+$light-25: rgba(#ffffff, 0.25);
+$dark-100: #000;
+$dark-50: rgba(#000000, 0.5);
+$dark-25: #707070;
+$error-box-color: #fdebeb;
+$yellow: #fff7dd;
+
+$body-bg: #000;
+$body-color: $light-100;
+$primary: #fd6c36;
+$primary-hover: lighten($primary, 10%);
+$secondary: #377dff;
+$accept: #3cc13b;
+$teal: #ebf9eb;
+$danger: #ff000f;
+$danger-bg: #fdebeb;
+
+$setembro-amarelo: #FFCF34;
+$setembro-amarelo-hover: lighten($setembro-amarelo, 10%);
+
+$progress-bar-bg: $secondary;
+$nav-tabs-link-active-color: $primary;
+$nav-tabs-border-color: $light-50;
+
+$default-bg-color: $light-25;
+$secondary-bg-color: $light-50;
+$font-transparent: $light-50;
+$talent-bg-color: #272727;
+$form-bg-color: $talent-bg-color;
+$form-bg-color-contrast: #404040;
+$font-color2: $light-50;
+$input-font-color: $light-100;
+
+$theme-colors: (
+	"primary": $primary,
+	"primary-hover": $primary-hover,
+	"gradient": #fba729,
+	"secondary": $secondary,
+	"success": $accept,
+	"teal": $teal,
+	"danger": $danger,
+	"danger-bg": $danger-bg,
+	"light": $light-100,
+	"gray-light": $light-50,
+	"gray": $dark-25,
+	"gray-dark": $talent-bg-color,
+	"subtitle-light": #c4c4c4,
+	"subtitle-dark": #9c9c9c,
+	"box-color-light": #e9e9e9,
+	"box-color-dark": #272727,
+	"dark": $dark-100,
+	"subtext": #767676,
+	"yellow": $yellow,
+);
