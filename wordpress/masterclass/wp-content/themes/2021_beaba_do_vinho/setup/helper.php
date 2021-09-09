@@ -247,7 +247,7 @@ function send_email_success_order($order_id)
 
         $email = $order->get_billing_email();
         $name = $order->get_billing_first_name();
-        $last_name = $order->get_billing_first_name();
+        $last_name = $order->get_billing_last_name();
 
         $url = 'https://hooks.zapier.com/hooks/catch/10583855/b4d0u1f/';
         $response = wp_remote_post($url, array(
