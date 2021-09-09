@@ -426,9 +426,9 @@ if( $order ){
         display: none !important;
     }
 
-    .order_details{
-        display: none !important;
-    }
+   .order_details{
+       display: none !important;
+   }
 
 </style>
 
@@ -443,7 +443,7 @@ if( $order ){
             <p>Para finalizar a sua compra é só realizar o pagamento com Pix!</p>
         </div>
         <div class="payment__text">
-            <p>Obrigado pela compra. Você receberá todos os dados da sua compra no email <?php echo $order->get_billing_email(); ?>.</p>
+            <p>Obrigado pela compra. Você receberá todos os dados da sua compra no email.</p>
         </div>
         <div class="course-card">
             <div class="course-card__header">
