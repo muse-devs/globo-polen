@@ -1,5 +1,7 @@
 <?php
-get_header(); ?>
+/** Template Name: Página - Inscrições */
+get_header(); the_content();
+?>
 
 <div class="row mc-content">
     <div class="col-12">
