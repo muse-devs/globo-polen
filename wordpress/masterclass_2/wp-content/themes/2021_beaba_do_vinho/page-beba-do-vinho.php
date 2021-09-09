@@ -1,7 +1,7 @@
 <script>
     let polenObj = {
         base_url: '<?= site_url(); ?>',
-        ajax_url: "/masterclass/wp-admin/admin-ajax.php",
+        ajax_url: '<?= admin_url( 'admin-ajax.php' ); ?>',
         developer: <?php echo DEVELOPER ? 1 : 0; ?>
     };
 </script>
