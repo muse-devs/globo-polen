@@ -62,6 +62,7 @@ wordpress/wp-admin/*.log
 *.sqlite.gz
 sql/*
 !sql/database.sql.gz
+!sql/masterclass/*
 !sql/README.md
 
 #ignorar arquivos temporários de estilos
