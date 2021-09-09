@@ -18,12 +18,16 @@
 defined( 'ABSPATH' ) || exit;
 ?>
 <br><br><br>
-
 <div class="container">
     <div class="row">
         <?php
-        if ($order->get_payment_method() === 'pagarme-banking-ticket') {
-            ?>
+        if ($order->get_payment_method() === 'pagarme-banking-ticket') : ?>
+            <style>
+                .woocommerce-order{
+                    display:none !important;
+                }
+
+            </style>
             <div class="col-12 mb-3">
                 <?php mc_get_bank_ticket_box(); ?>
             </div>
@@ -58,9 +62,7 @@ defined( 'ABSPATH' ) || exit;
                     </li>
                 </ul>
             </div>
-            <?php
-        }
-        ?>
+        <?php endif; ?>
         <div class="col-12">
             <div class="woocommerce-order">
                 <?php
