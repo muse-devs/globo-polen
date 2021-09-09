@@ -10449,7 +10449,7 @@ select.form-control:not([size]):not([multiple]) {
 .woocommerce-checkout #payment div.payment_box textarea {
   color: #000;
   width: 100% !important;
-  font-size: 1em !important; }
+  font-size: 16px !important; }
 
 .woocommerce form.checkout_coupon,
 .woocommerce form.login,
@@ -10585,7 +10585,8 @@ select.form-control:not([size]):not([multiple]) {
   animation: 0.75s linear infinite spinner-border !important; }
 
 .woocommerce form .form-row {
-  padding: 0; }
+  padding: 0;
+  width: 100% !important; }
 
 .woocommerce-Price-currencySymbol {
   margin-right: 3px; }
@@ -10625,7 +10626,7 @@ select.form-control:not([size]):not([multiple]) {
 .woocommerce-cart #payment ul.payment_methods li input,
 .woocommerce-checkout #payment ul.payment_methods li input {
   margin-right: 0.5rem;
-  width: 24px !important; }
+  width: 20px !important; }
   @media (min-width: 992px) {
     #add_payment_method #payment ul.payment_methods li input,
     .woocommerce-cart #payment ul.payment_methods li input,
