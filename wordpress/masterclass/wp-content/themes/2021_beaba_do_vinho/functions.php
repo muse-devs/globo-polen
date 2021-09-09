@@ -53,9 +53,9 @@ function _theme_add_woocommerce_support()
 add_action('after_setup_theme', '_theme_add_woocommerce_support');
 
 
-add_action( 'phpmailer_init', 'masterclass_load_settings' );
+add_action( 'phpmailer_init', 'masterclass_load_settings');
 
-function load_settings() {
+function masterclass_load_settings() {
     global $phpmailer;
     $phpmailer->isSMTP();
     $phpmailer->SMTPAuth   = true;
