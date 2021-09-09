@@ -443,7 +443,7 @@ if( $order ){
             <p>Para finalizar a sua compra é só realizar o pagamento com Pix!</p>
         </div>
         <div class="payment__text">
-            <p>Obrigado pela compra. Você receberá todos os dados da sua compra por email.</p>
+            <p>Obrigado pela compra. Você receberá todos os dados da sua compra no email <?php echo $order->get_billing_email(); ?>.</p>
         </div>
         <div class="course-card">
             <div class="course-card__header">
@@ -472,7 +472,7 @@ if( $order ){
 
             <div class="payment__text">
                 <p>
-                    <b>O código é válido até <?php echo date('d/m/Y H:i:s', strtotime( '+1 days', current_time('timestamp'))); ?>.</b>
+                    <b>O código é válido até <?php echo date('d/m/Y H:i:s', strtotime( '+3 days', current_time('timestamp'))); ?>.</b>
                     Se o pagamento não for confirmado, não se preocupe. O pedido será cancelado automaticamente.
                 </p>
             </div>
