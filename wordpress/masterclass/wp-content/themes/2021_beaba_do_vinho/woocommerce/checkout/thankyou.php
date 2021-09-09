@@ -18,12 +18,7 @@
 defined( 'ABSPATH' ) || exit;
 ?>
 <br><br><br>
-<style>
-    .woocommerce-order{
-        display:none !important;
-    }
 
-</style>
 <div class="container">
     <div class="row">
         <?php
