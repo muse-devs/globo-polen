@@ -63,17 +63,19 @@
 <body>
     <div id="page" class="container site">
         <header id="masthead" class="row py-4 header-home">
-            <?php if (is_front_page()) : ?>
+            <?php global $wp; ?>
+            <?php if (add_query_arg( array(), $wp->request ) === "ronnie-von/beaba-do-vinho/inscrevase") : ?>
                 <div class="col-8 col-sm-6 d-flex align-items-center">
-                    <a href="<?php echo home_url(); ?>">
+                    <a href="<?php echo site_url('ronnie-von/beaba-do-vinho/inscricoes'); ?>">
                         <img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/logo-masterclass.svg"; ?>" alt="Logo Masterclass" />
                     </a>
                 </div>
             <?php else : ?>
+                <?php ; ?>
                 <div class="col-12">
                     <div class="row">
                         <div class="col-6">
-                            <a href="<?php echo home_url(); ?>"><img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/logo-masterclass.svg"; ?>" alt="Logo Masterclass" /></a>
+                            <a href="<?php echo site_url('ronnie-von/beaba-do-vinho/inscricoes'); ?>"><img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/logo-masterclass-black.svg"; ?>" alt="Logo Masterclass" /></a>
                         </div>
                         <div class="col-6 text-right">
                             <img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/todo-vino.png"; ?>" alt="Logo TodoVino" />

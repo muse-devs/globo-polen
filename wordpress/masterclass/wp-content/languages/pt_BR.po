@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 5.8.x - Development package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2021-09-01 22:25:05+0000\n"
+"PO-Revision-Date: 2021-09-08 17:30:20+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -16277,11 +16277,11 @@ msgstr "Cancelar resposta"
 #. translators: %s: Author of the comment being replied to.
 #: wp-includes/comment-template.php:2006 wp-includes/comment-template.php:2485
 msgid "Leave a Reply to %s"
-msgstr "Deixe uma resposta para %s"
+msgstr "Deixe um comentário para %s"
 
 #: wp-includes/comment-template.php:2001 wp-includes/comment-template.php:2483
 msgid "Leave a Reply"
-msgstr "Deixe uma resposta"
+msgstr "Deixe um comentário"
 
 #: wp-includes/comment-template.php:1898
 msgid "Click here to cancel reply."
