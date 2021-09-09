@@ -47,7 +47,8 @@ $donate_name = get_post_meta(get_the_ID(), '_charity_name', true);
 $donate_image =  get_post_meta(get_the_ID(), '_url_charity_logo', true);
 $donate_text = stripslashes(get_post_meta(get_the_ID(), '_description_charity', true));
 // $social = social_product_is_social($product, social_get_category_base()); //Antigo CRIESP
-$social = Social_Base_Product::product_is_social_base( $product );
+// $social = Social_Base_Product::product_is_social_base( $product );
+$social = true;
 
 // outofstock
 // instock
