@@ -19,6 +19,8 @@
 defined('ABSPATH') || exit;
 
 global $product;
+global $Polen_Plugin_Settings;
+global $post;
 
 /**
  * Hook: woocommerce_before_single_product.
@@ -35,7 +37,6 @@ if (post_password_required()) {
 use Polen\Includes\Polen_Update_Fields;
 use Polen\Social_Base\Social_Base_Product;
 
-global $post;
 $Talent_Fields = new Polen_Update_Fields();
 $Talent_Fields = $Talent_Fields->get_vendor_data($post->post_author);
 $terms = wp_get_object_terms(get_the_ID(), 'product_tag');
@@ -47,8 +48,13 @@ $donate_name = get_post_meta(get_the_ID(), '_charity_name', true);
 $donate_image =  get_post_meta(get_the_ID(), '_url_charity_logo', true);
 $donate_text = stripslashes(get_post_meta(get_the_ID(), '_description_charity', true));
 // $social = social_product_is_social($product, social_get_category_base()); //Antigo CRIESP
-// $social = Social_Base_Product::product_is_social_base( $product );
-$social = true;
+
+$histories_enabled = $Polen_Plugin_Settings['polen_histories_on'];
+if($histories_enabled == 1) {
+	$social = true;
+} else {
+	$social = Social_Base_Product::product_is_social_base( $product );
+}
 
 // outofstock
 // instock

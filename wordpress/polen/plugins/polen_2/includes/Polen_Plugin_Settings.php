@@ -274,6 +274,13 @@ class Polen_Plugin_Settings
                     'default'  => '',
                     'required' => array( 'polen_vimeo_on', '=', '1' ),
                 ),
+                array(
+                    'id'       => 'polen_histories_on',
+                    'type'     => 'switch',
+                    'title'    => esc_html__('Ativar player em formato Histórias para todos', 'polen'),
+                    'default'  => 0,
+                    'required' => array( 'polen_vimeo_on', '=', '1' ),
+                ),
             ),
         ) );
 
