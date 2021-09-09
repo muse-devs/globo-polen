@@ -37,12 +37,12 @@ if ( apply_filters( 'woocommerce_checkout_show_terms', true ) && function_exists
         </div>
 
         <div class="order-info" id="pix-payment-custom" style="display: none;">
-            <p>Copie o código Pix na próxima etapa e faça o pagamento na instituição financeira de sua escolha. O código tem validade de 1 hora.</p>
+            <p>Copie o código Pix na próxima etapa e faça o pagamento na instituição financeira de sua escolha. O código tem validade de 1 dia.</p>
         </div>
 
         <div class="order-info" id="bolet-payment-custom" style="display: none;">
             <p><strong>Curso será disponibilizado após o pagamento</strong></p>
-            <p>O prazo para pagamento do boleto é 29/08/2021</p>
+            <p>O prazo para pagamento do boleto é <?php echo date('Y-m-d', strtotime('+1 days', current_time('timestamp'))); ?></p>
         </div>
 
 	</div>

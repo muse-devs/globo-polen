@@ -50,7 +50,7 @@ defined( 'ABSPATH' ) || exit;
 							<h4 class="title">Aguardando Pagamento</h4>
                             <p class="description">
                                 O prazo para pagamento do boleto é
-                                <?php echo date('d/m/Y', strtotime( '+3 days', strtotime($order->get_date_created()->date('Y-m-d H:i:s')))); ?>
+                                <?php echo date('d/m/Y', strtotime( '+1 days', strtotime($order->get_date_created()->date('Y-m-d H:i:s')))); ?>
                             </p>
 						</span>
                     </li>
@@ -142,8 +142,7 @@ defined( 'ABSPATH' ) || exit;
 <script>
     jQuery(document).ready(function($) {
         $('#payment_ticket_custom_button').on('click', function(e) {
-            e.preventDefault();
-            $('.woocommerce-message > span > a').click();
+            $('.woocommerce-message a.button')[0].click();
         });
     });
 </script>
