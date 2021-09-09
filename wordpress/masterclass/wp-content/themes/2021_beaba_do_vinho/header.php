@@ -57,7 +57,9 @@
         <header id="masthead" class="row py-4 header-home">
             <?php if (is_front_page()) : ?>
                 <div class="col-8 col-sm-6 d-flex align-items-center">
-                    <img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/logo-masterclass.svg"; ?>" alt="Logo Masterclass" />
+                    <a href="<?php echo home_url(); ?>">
+                        <img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/logo-masterclass.svg"; ?>" alt="Logo Masterclass" />
+                    </a>
                 </div>
             <?php else : ?>
                 <div class="col-12">
