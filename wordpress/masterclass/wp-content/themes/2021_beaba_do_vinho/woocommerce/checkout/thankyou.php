@@ -28,13 +28,13 @@ defined( 'ABSPATH' ) || exit;
             <?php
             $name_status = 'Pagamento Aprovado';
             $descriptions = 'Seu pagamento foi autorizado pela emissora do cartão.';
-            $name_class = '';
+            $name_class = 'complete';
 
 
             if ( $order->has_status( 'failed' ) ) {
                 $name_status = 'Pagamento Recusado';
                 $descriptions = 'Não foi possível finalizar seu pagamento! Verifique com o seu banco.';
-                $name_class = 'complete';
+                $name_class = '';
             } ?>
 
             <div class="col-12 mb-3">
