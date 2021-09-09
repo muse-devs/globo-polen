@@ -32,7 +32,8 @@ function sa_get_about($video_depoimento = "")
 	</section>
 	<script>
 		const video = document.getElementById("sa-video-about");
-		video.currentTime = 0.1;
+		video.load();
+		video.currentTime = 1;
 	</script>
 <?php
 }
@@ -51,10 +52,10 @@ function sa_get_modal() {
 						<img src="<?php echo TEMPLATE_URI . '/assets/img/close-black.png'; ?>" alt="Fechar"></img>
 					</a>
 				</div>
-				<div class="col-12">
+				<div class="col-12 col-md-6 m-md-auto col-lg-4">
 					<div class="sa-home-video">
-						<video id="sa-video" playsinline poster="<?php echo TEMPLATE_URI; ?>/assets/img/cover-video-sa.png?v=2">
-							<source src="https://player.vimeo.com/external/595532426.sd.mp4?s=ab2b9eebb3b1c17cd060ebe49d31ed2949472cea&profile_id=164" type="video/mp4">
+						<video id="sa-video" playsinline poster="<?php echo TEMPLATE_URI; ?>/assets/img/social/sa-poster.jpg">
+							<source src="https://player.vimeo.com/external/596862158.sd.mp4?s=9f3886b9be7113cdad714b02b22f2076d229ddc3&profile_id=165" type="video/mp4">
 						</video>
 					</div>
 				</div>
@@ -66,8 +67,8 @@ function sa_get_modal() {
 					</p>
 				</div>
 				<div class="col-12">
-					<button onclick="copyToClipboard('<?php echo get_home_url(); ?>/social/setembro-amarelo')" class="btn btn-outline-light btn-lg btn-block share-link mb-4">Copiar Link</button>
-					<button onclick="shareVideo('Setembro Amarelo', '<?php echo get_home_url(); ?>/social/setembro-amarelo')" class="btn btn-outline-light btn-lg btn-block share-link mb-4">Compartilhar</button>
+					<button id="sa-btn-copy" onclick="copyToClipboard('<?php echo get_home_url(); ?>/social/setembro-amarelo#sa-modal')" class="btn btn-outline-light btn-lg btn-block share-link mb-4" style="display: none;">Copiar Link</button>
+					<button id="sa-btn-share" onclick="shareVideo('Setembro Amarelo', '<?php echo get_home_url(); ?>/social/setembro-amarelo#sa-modal')" class="btn btn-outline-light btn-lg btn-block share-link mb-4" style="display: none;">Compartilhar</button>
 				</div>
 			</div>
 		</div>
@@ -75,11 +76,16 @@ function sa_get_modal() {
 	<script>
 		polVideoTag("#sa-video");
 
+		navigator.share ?
+			document.getElementById("sa-btn-share").style.display = "block" :
+			document.getElementById("sa-btn-copy").style.display = "block"
+
 		function closeModalSa() {
 			const video = document.getElementById("sa-video");
 			video.pause();
-			video.currentTime = 0;
+			// video.currentTime = 0;
 			document.getElementById("sa-modal").classList.remove("d-block");
+			changeHash();
 		}
 	</script>
 <?php

@@ -4,6 +4,7 @@ use Polen\Includes\Cart\Polen_Cart_Item_Factory;
 use Polen\Includes\Polen_Video_Info;
 use Polen\Includes\Polen_Update_Fields;
 use Polen\Social\Social_Rewrite;
+use Polen\Social_Base\Social_Base_Rewrite;
 use Polen\Tributes\Tributes_Model;
 use Polen\Tributes\Tributes_Rewrite_Rules;
 
@@ -76,7 +77,7 @@ if (
 		global $post;
 		global $is_video;
 		$tribute_app = get_query_var(Tributes_Rewrite_Rules::TRIBUTES_QUERY_VAR_TRUBITES_APP);
-		$social_app = get_query_var(Social_Rewrite::QUERY_VARS_SOCIAL_APP);
+		$social_app = get_query_var(Social_Base_Rewrite::QUERY_VARS_SOCIAL_APP);
 
 		$video_hash = get_query_var('video_hash');
 
@@ -161,10 +162,12 @@ if (
 			// Página Criança Esperança
 		} elseif (!empty($social_app) && $social_app == '1') {
 
-			$image = social_get_image_by_category(social_get_category_base());
+			// $image = social_get_image_by_category(social_get_category_base());
 
-			$headers['image'] = $image;
-			$headers['url'] = site_url('social/crianca-esperanca');
+			$headers['title'] = 'Polen - Setembro Amarelo';
+			$headers['description'] = 'Setembro é o mês da prevenção ao suicídio. Agir salva vidas!';
+			$headers['image'] = site_url('polen/themes/polen/assets/img/bg-setembro.png');
+			$headers['url'] = site_url('social/' . Social_Base_Rewrite::get_current_slug());
 
 			// Página de Video-Autografo
 		} elseif (event_promotional_is_app()) {

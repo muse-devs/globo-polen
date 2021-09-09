@@ -4,6 +4,7 @@
 # Ignorar Configurações
 wordpress/.htaccess
 wordpress/wp-config.php
+wordpress/masterclass/wp-config.php
 
 # Ignorar Modelos padrões do Wordpress
 wordpress/wp-config-sample.php
@@ -61,6 +62,7 @@ wordpress/wp-admin/*.log
 *.sqlite.gz
 sql/*
 !sql/database.sql.gz
+!sql/masterclass/*
 !sql/README.md
 
 #ignorar arquivos temporários de estilos
