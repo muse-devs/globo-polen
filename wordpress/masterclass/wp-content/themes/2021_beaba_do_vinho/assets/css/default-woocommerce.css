@@ -6,10 +6,10 @@ body{
     font-family: 'Poppins', sans-serif;
 }
 
-.container{
+/* .container{
     padding: 0 20px;
     max-width: 120rem;
-}
+} */
 
 .course-card{
     width: 100%;
@@ -95,7 +95,7 @@ body{
 }
 
 .form-row input::placeholder{
-    color: #000 !important;
+    color: #999 !important;
     font-style: normal !important;
     font-weight: normal !important;
     font-size: 14px !important;
@@ -295,8 +295,34 @@ body{
     width: 100% !important;
 }
 
-@media (max-width : 420px) {
+.select2-selection__rendered {
+    font-size: 14px;
+}
+
+.order-terms__checkbox label, a {
+    font-size: 14px;
+}
+
+.select2-container--default .select2-selection--single {
+    border: 1px solid #d2d2d2!important;
+}
+
+.payment_method_pagarme-credit-card p{
+    font-weight: 600!important;
+    margin: 1em 0em!important;
+}
+
+#pagarme-installments {
+    color: #999 !important;
+    font-style: normal !important;
+    font-weight: normal !important;
+    font-size: 14px !important;
+    line-height: 150% !important;
+    border: 1px solid #d2d2d2!important;
+}
+
+/* @media (max-width : 420px) {
     .woocommerce form .form-row {
         width: 250px !important;
     }
-}
+} */

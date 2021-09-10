@@ -8,7 +8,7 @@ function mc_get_buy_button($product)
 	?>
 		<div class="row mb-4">
 			<div class="col-12 col-md-6 m-md-auto">
-				<a href="<?php echo $product['url_to_checkout']; ?>" class="btn btn-primary btn-lg btn-block mt-4 gradient mc-custom-button">Quero me inscrever Por <?php echo $product['price']; ?></a>
+				<a href="<?php echo $product['url_to_checkout']; ?>" class="btn btn-primary btn-lg btn-block mt-4 gradient mc-custom-button">Quero me inscrever<br>De <s><?php echo $product['price_regular']?></s> Por <?php echo $product['price']; ?></a>
 			</div>
 		</div>
 		<div class="row">
@@ -17,6 +17,65 @@ function mc_get_buy_button($product)
 			</div>
 		</div>
 	<?php
+}
+
+function mc_get_top_banner_lp()
+{
+?>
+	<div class="row mb-4">
+		<div class="col-12">
+			<div class="mc-landing-banner">
+				<figure class="mc-logo">
+					<img class="image" src="<?php echo TEMPLATE_URI; ?>/assets/img/masterclass/ronnievon-logo.png" alt="Logo Beabá do Vinho" />
+				</figure>
+				<div class="row">
+					<div class="col-12 col-md-6 m-md-auto">
+						<h1 class="title">Aprenda a escolher, apreciar e harmonizar vinhos com Ronnie Von</h1>
+					</div>
+				</div>
+				<div class="mc-home-video mb-4">
+					<video id="mc-video" playsinline poster="<?php echo TEMPLATE_URI; ?>/assets/img/masterclass/player-poster.jpg?v=2">
+						<source src="https://player.vimeo.com/external/595532426.sd.mp4?s=ab2b9eebb3b1c17cd060ebe49d31ed2949472cea&profile_id=164" type="video/mp4">
+					</video>
+				</div>
+				<div class="row">
+					<div class="col-12 col-md-6 m-md-auto">
+						<h2 class="subtitle">Participe do grupo de pré-inscrição no WhatsApp para ter um desconto exclusivo no primeiro dia das inscrições.</h2>
+					</div>
+				</div>
+				<div class="row mt-4">
+					<div class="col-12 col-md-6 m-md-auto">
+						<form action="" id="form-email-masterclass">
+							<?php //TODO action e nonce
+							?>
+							<input type="hidden" name="action" value="send_form_request">
+							<input type="hidden" name="page_source" value="<?= filter_input(INPUT_SERVER, 'REQUEST_URI'); ?>" />
+							<input type="hidden" name="is_mobile" value="<?= polen_is_mobile() ? "1" : "0"; ?>" />
+							<input type="hidden" name="security" value=<?php echo wp_create_nonce("send-form-request"); ?>>
+							<input type="email" name="email" class="form-control form-control-lg" placeholder="Digite seu e-mail" required />
+							<input type="submit" value="Quero ganhar desconto" class="btn btn-primary btn-lg btn-block mt-4 gradient" />
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		const success = '<?php echo home_url('/ronnie-von/beaba-do-vinho/sucesso'); ?>';
+
+		polVideoTag("#mc-video");
+
+		const formName = "form#form-email-masterclass";
+		document.querySelector(formName).addEventListener("submit", function(evt) {
+			evt.preventDefault();
+			polAjaxForm(formName, function() {
+				window.location.href = success;
+			}, function(err) {
+				polMessages.error(err);
+			});
+		});
+	</script>
+<?php
 }
 
 function mc_get_top_banner($product)
@@ -41,7 +100,7 @@ function mc_get_top_banner($product)
 				</div>
 				<div class="mc-home-video mb-2">
 					<video id="mc-video" playsinline poster="<?php echo TEMPLATE_URI; ?>/assets/img/masterclass/player-poster.jpg?v=2">
-						<source src="https://player.vimeo.com/external/595532426.sd.mp4?s=ab2b9eebb3b1c17cd060ebe49d31ed2949472cea&profile_id=164" type="video/mp4">
+						<source src="https://player.vimeo.com/external/601444637.sd.mp4?s=0ede70d0f6b6395f53270d501c255399a42a6e4d&profile_id=164" type="video/mp4">
 					</video>
 				</div>
 				<?php mc_get_buy_button($product); ?>
@@ -82,7 +141,7 @@ function mc_get_carrossel_how_to()
 							</div>
 							<div class="col-12">
 								<h4>Duração</h4>
-								<p class="text-center">Participe do curso com duração de 1 dia, exclusivo e feito sobre medida para amantes de vinho.</p>
+								<p class="text-center">Participe do curso com duração de 90 minutos, exclusivo e feito sob medida para amantes de vinho.</p>
 							</div>
 						</div>
 					</div>
@@ -139,7 +198,7 @@ function mc_get_box_content()
 				</div>
 				<div class="row mt-4">
 					<div class="col-2">
-						<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/garrafa.svg"; ?>" alt="Ícone garrafa" />
+						<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/taca.svg"; ?>" alt="Ícone garrafa" />
 					</div>
 					<div class="col-10 pl-0 ml-0">
 						<p class="description"><strong>Só vinho caro tem qualidade?</strong> Como escolher vinho bom e barato.</p>
@@ -147,10 +206,66 @@ function mc_get_box_content()
 				</div>
 				<div class="row mt-4">
 					<div class="col-2">
-						<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/taca_garrafa.svg"; ?>" alt="Ícone garrafa" />
+						<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/taca.svg"; ?>" alt="Ícone garrafa" />
 					</div>
 					<div class="col-10 pl-0 ml-0">
 						<p class="description"><strong>O que ler nos rótulos das garrafas para escolher seu vinho?</strong> Tipos de taças para cada tipo de vinho.</p>
+					</div>
+				</div>
+				<div class="row mt-4">
+					<div class="col-2">
+						<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/taca.svg"; ?>" alt="Ícone garrafa" />
+					</div>
+					<div class="col-10 pl-0 ml-0">
+						<p class="description"><strong>Tipos de taças</strong> para cada tipo de vinho.</p>
+					</div>
+				</div>
+				<div class="row mt-4">
+					<div class="col-2">
+						<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/taca.svg"; ?>" alt="Ícone garrafa" />
+					</div>
+					<div class="col-10 pl-0 ml-0">
+						<p class="description"><strong>Técnicas simples</strong> para não errar na harmonização.</p>
+					</div>
+				</div>
+				<div class="row mt-4">
+					<div class="col-2">
+						<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/taca.svg"; ?>" alt="Ícone garrafa" />
+					</div>
+					<div class="col-10 pl-0 ml-0">
+						<p class="description"><strong>Análise sensorial:</strong> visual, olfativa e gustativa.</p>
+					</div>
+				</div>
+				<div class="row mt-4">
+					<div class="col-2">
+						<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/taca.svg"; ?>" alt="Ícone garrafa" />
+					</div>
+					<div class="col-10 pl-0 ml-0">
+						<p class="description"><strong>Conheça</strong> os principais tipos de aromas.</p>
+					</div>
+				</div>
+				<div class="row mt-4">
+					<div class="col-2">
+						<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/taca.svg"; ?>" alt="Ícone garrafa" />
+					</div>
+					<div class="col-10 pl-0 ml-0">
+						<p class="description"><strong>Técnicas</strong> para treinar o paladar.</p>
+					</div>
+				</div>
+				<div class="row mt-4">
+					<div class="col-2">
+						<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/taca.svg"; ?>" alt="Ícone garrafa" />
+					</div>
+					<div class="col-10 pl-0 ml-0">
+						<p class="description"><strong>Na prática:</strong> pratos populares harmonizados com vinhos.</p>
+					</div>
+				</div>
+				<div class="row mt-4">
+					<div class="col-2">
+						<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/taca.svg"; ?>" alt="Ícone garrafa" />
+					</div>
+					<div class="col-10 pl-0 ml-0">
+						<p class="description"><strong>Na rua:</strong> como escolher vinhos em restaurante</p>
 					</div>
 				</div>
 			</div>
