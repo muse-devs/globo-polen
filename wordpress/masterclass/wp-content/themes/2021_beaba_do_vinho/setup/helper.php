@@ -166,6 +166,7 @@ function get_product_masterclass(): array
 
     return [
         'name' => $masterclass_product->get_name(),
+        'price_regular' => wc_price($masterclass_product->get_regular_price()),
         'price' => wc_price($masterclass_product->get_price()),
         'image_url' => get_the_post_thumbnail_url(69) ?? '',
         'url_to_checkout' => $url_checkout,
