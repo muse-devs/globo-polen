@@ -2,25 +2,27 @@
 
 function mc_get_buy_button($product)
 {
-	if(!$product || empty($product)) {
+	if (!$product || empty($product)) {
 		return;
 	}
-	?>
-		<div class="row mb-4">
-			<div class="col-12 col-md-6 m-md-auto">
-				<a href="<?php echo $product['url_to_checkout']; ?>" class="btn btn-primary btn-lg btn-block mt-4 gradient mc-custom-button">Quero me inscrever<br>De <s><?php echo $product['price_regular']?></s> Por <?php echo $product['price']; ?></a>
-			</div>
+?>
+	<div class="row mb-4">
+		<div class="col-12 col-md-6 m-md-auto">
+			<a href="<?php echo $product['url_to_checkout']; ?>" class="btn btn-primary btn-lg btn-block mt-4 gradient mc-custom-button">Quero me inscrever<br>De <s><?php echo $product['price_regular'] ?></s> Por <?php echo $product['price']; ?></a>
 		</div>
-		<div class="row">
-			<div class="col-12 col-md-6 m-md-auto text-center">
-				<p class="subtitle">Desconto de primeiro lote. Vagas limitadas.</p>
-			</div>
+	</div>
+	<div class="row">
+		<div class="col-12 col-md-6 m-md-auto text-center">
+			<p class="subtitle">Desconto de primeiro lote. Vagas limitadas.</p>
 		</div>
-	<?php
+	</div>
+<?php
 }
 
 function mc_get_top_banner_lp()
 {
+	$poster = TEMPLATE_URI . "/assets/img/masterclass/player-poster.jpg?v=3";
+	$video = "https://player.vimeo.com/external/595532426.sd.mp4?s=ab2b9eebb3b1c17cd060ebe49d31ed2949472cea&profile_id=164";
 ?>
 	<div class="row mb-4">
 		<div class="col-12">
@@ -34,8 +36,8 @@ function mc_get_top_banner_lp()
 					</div>
 				</div>
 				<div class="mc-home-video mb-4">
-					<video id="mc-video" playsinline poster="<?php echo TEMPLATE_URI; ?>/assets/img/masterclass/player-poster.jpg?v=2">
-						<source src="https://player.vimeo.com/external/595532426.sd.mp4?s=ab2b9eebb3b1c17cd060ebe49d31ed2949472cea&profile_id=164" type="video/mp4">
+					<video id="mc-video" playsinline poster="<?php echo $poster; ?>">
+						<source src="<?php echo $video; ?>" type="video/mp4">
 					</video>
 				</div>
 				<div class="row">
@@ -80,7 +82,7 @@ function mc_get_top_banner_lp()
 
 function mc_get_top_banner($product)
 {
-	if(!$product || empty($product)) {
+	if (!$product || empty($product)) {
 		return;
 	}
 ?>
@@ -91,8 +93,12 @@ function mc_get_top_banner($product)
 					<img class="image" src="<?php echo TEMPLATE_URI; ?>/assets/img/masterclass/ronnievon-logo.png" alt="Logo Beabá do Vinho" />
 				</figure>
 				<div class="row">
-					<div class="col-12 col-md-6 m-md-auto text-center">
-						<span class="gadget">Inscrições abertas</span>
+					<div class="col-12">
+						<div class="row">
+							<div class="col-md-6 m-md-auto text-center">
+								<span class="gadget">Inscrições abertas</span>
+							</div>
+						</div>
 					</div>
 					<div class="col-12 col-md-6 m-md-auto">
 						<h1 class="title">Aprenda a escolher, apreciar e harmonizar vinhos com Ronnie Von</h1>
@@ -107,7 +113,9 @@ function mc_get_top_banner($product)
 			</div>
 		</div>
 	</div>
-	<script>polVideoTag("#mc-video");</script>
+	<script>
+		polVideoTag("#mc-video");
+	</script>
 <?php
 }
 
@@ -189,88 +197,103 @@ function mc_get_box_content()
 		<div class="col-12">
 			<div class="box-round p-4 masterclass-content-box">
 				<div class="row">
-					<div class="col-2">
+					<div class="col-2 col-md-1">
 						<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/taca.svg"; ?>" alt="Ícone garrafa" />
 					</div>
-					<div class="col-10 pl-0 ml-0">
+					<div class="col-10 col-md-11 pl-0 ml-0">
 						<p class="description"><strong>História e Importância do Vinho:</strong> quais os principais tipos de vinhos.</p>
 					</div>
 				</div>
 				<div class="row mt-4">
-					<div class="col-2">
+					<div class="col-2 col-md-1">
 						<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/taca.svg"; ?>" alt="Ícone garrafa" />
 					</div>
-					<div class="col-10 pl-0 ml-0">
+					<div class="col-10 col-md-11 pl-0 ml-0">
 						<p class="description"><strong>Só vinho caro tem qualidade?</strong> Como escolher vinho bom e barato.</p>
 					</div>
 				</div>
 				<div class="row mt-4">
-					<div class="col-2">
+					<div class="col-2 col-md-1">
 						<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/taca.svg"; ?>" alt="Ícone garrafa" />
 					</div>
-					<div class="col-10 pl-0 ml-0">
+					<div class="col-10 col-md-11 pl-0 ml-0">
 						<p class="description"><strong>O que ler nos rótulos das garrafas para escolher seu vinho?</strong> Tipos de taças para cada tipo de vinho.</p>
 					</div>
 				</div>
-				<div class="row mt-4">
-					<div class="col-2">
-						<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/taca.svg"; ?>" alt="Ícone garrafa" />
-					</div>
-					<div class="col-10 pl-0 ml-0">
-						<p class="description"><strong>Tipos de taças</strong> para cada tipo de vinho.</p>
+				<div class="row button-more">
+					<div class="col-12">
+						<a href="javascript:showMore()">Ver mais</a>
 					</div>
 				</div>
-				<div class="row mt-4">
-					<div class="col-2">
-						<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/taca.svg"; ?>" alt="Ícone garrafa" />
-					</div>
-					<div class="col-10 pl-0 ml-0">
-						<p class="description"><strong>Técnicas simples</strong> para não errar na harmonização.</p>
-					</div>
-				</div>
-				<div class="row mt-4">
-					<div class="col-2">
-						<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/taca.svg"; ?>" alt="Ícone garrafa" />
-					</div>
-					<div class="col-10 pl-0 ml-0">
-						<p class="description"><strong>Análise sensorial:</strong> visual, olfativa e gustativa.</p>
-					</div>
-				</div>
-				<div class="row mt-4">
-					<div class="col-2">
-						<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/taca.svg"; ?>" alt="Ícone garrafa" />
-					</div>
-					<div class="col-10 pl-0 ml-0">
-						<p class="description"><strong>Conheça</strong> os principais tipos de aromas.</p>
-					</div>
-				</div>
-				<div class="row mt-4">
-					<div class="col-2">
-						<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/taca.svg"; ?>" alt="Ícone garrafa" />
-					</div>
-					<div class="col-10 pl-0 ml-0">
-						<p class="description"><strong>Técnicas</strong> para treinar o paladar.</p>
-					</div>
-				</div>
-				<div class="row mt-4">
-					<div class="col-2">
-						<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/taca.svg"; ?>" alt="Ícone garrafa" />
-					</div>
-					<div class="col-10 pl-0 ml-0">
-						<p class="description"><strong>Na prática:</strong> pratos populares harmonizados com vinhos.</p>
-					</div>
-				</div>
-				<div class="row mt-4">
-					<div class="col-2">
-						<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/taca.svg"; ?>" alt="Ícone garrafa" />
-					</div>
-					<div class="col-10 pl-0 ml-0">
-						<p class="description"><strong>Na rua:</strong> como escolher vinhos em restaurante</p>
+				<div class="row d-none more">
+					<div class="col-12">
+						<div class="row mt-4">
+							<div class="col-2 col-md-1">
+								<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/taca.svg"; ?>" alt="Ícone garrafa" />
+							</div>
+							<div class="col-10 col-md-11 pl-0 ml-0">
+								<p class="description"><strong>Tipos de taças</strong> para cada tipo de vinho.</p>
+							</div>
+						</div>
+						<div class="row mt-4">
+							<div class="col-2 col-md-1">
+								<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/taca.svg"; ?>" alt="Ícone garrafa" />
+							</div>
+							<div class="col-10 col-md-11 pl-0 ml-0">
+								<p class="description"><strong>Técnicas simples</strong> para não errar na harmonização.</p>
+							</div>
+						</div>
+						<div class="row mt-4">
+							<div class="col-2 col-md-1">
+								<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/taca.svg"; ?>" alt="Ícone garrafa" />
+							</div>
+							<div class="col-10 col-md-11 pl-0 ml-0">
+								<p class="description"><strong>Análise sensorial:</strong> visual, olfativa e gustativa.</p>
+							</div>
+						</div>
+						<div class="row mt-4">
+							<div class="col-2 col-md-1">
+								<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/taca.svg"; ?>" alt="Ícone garrafa" />
+							</div>
+							<div class="col-10 col-md-11 pl-0 ml-0">
+								<p class="description"><strong>Conheça</strong> os principais tipos de aromas.</p>
+							</div>
+						</div>
+						<div class="row mt-4">
+							<div class="col-2 col-md-1">
+								<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/taca.svg"; ?>" alt="Ícone garrafa" />
+							</div>
+							<div class="col-10 col-md-11 pl-0 ml-0">
+								<p class="description"><strong>Técnicas</strong> para treinar o paladar.</p>
+							</div>
+						</div>
+						<div class="row mt-4">
+							<div class="col-2 col-md-1">
+								<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/taca.svg"; ?>" alt="Ícone garrafa" />
+							</div>
+							<div class="col-10 col-md-11 pl-0 ml-0">
+								<p class="description"><strong>Na prática:</strong> pratos populares harmonizados com vinhos.</p>
+							</div>
+						</div>
+						<div class="row mt-4">
+							<div class="col-2 col-md-1">
+								<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/taca.svg"; ?>" alt="Ícone garrafa" />
+							</div>
+							<div class="col-10 col-md-11 pl-0 ml-0">
+								<p class="description"><strong>Na rua:</strong> como escolher vinhos em restaurante</p>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<script>
+		function showMore() {
+			document.querySelector(".button-more").classList.add("d-none");
+			document.querySelector(".more").classList.remove("d-none");
+		}
+	</script>
 <?php
 }
 
@@ -322,7 +345,7 @@ function mc_get_footer()
 <?php
 }
 
-function mc_get_thank_you_box() 
+function mc_get_thank_you_box()
 {
 ?>
 	<div class="row mb-3">
@@ -339,9 +362,9 @@ function mc_get_thank_you_box()
 
 function mc_get_bank_ticket_box($date = null)
 {
-    if ($date === null) {
-        $date = date('d/m/Y');
-    }
+	if ($date === null) {
+		$date = date('d/m/Y');
+	}
 ?>
 	<div class="row mb-3">
 		<div class="col-12">
@@ -358,6 +381,6 @@ function mc_get_bank_ticket_box($date = null)
 
 function pol_get_footer()
 {
-	?>
-	<?php
+?>
+<?php
 }
