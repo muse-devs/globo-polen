@@ -21,6 +21,8 @@ function mc_get_buy_button($product)
 
 function mc_get_top_banner_lp()
 {
+	$poster = TEMPLATE_URI . "/assets/img/masterclass/player-poster.jpg?v=3";
+	$video = "https://player.vimeo.com/external/595532426.sd.mp4?s=ab2b9eebb3b1c17cd060ebe49d31ed2949472cea&profile_id=164";
 ?>
 	<div class="row mb-4">
 		<div class="col-12">
@@ -34,8 +36,8 @@ function mc_get_top_banner_lp()
 					</div>
 				</div>
 				<div class="mc-home-video mb-4">
-					<video id="mc-video" playsinline poster="<?php echo TEMPLATE_URI; ?>/assets/img/masterclass/player-poster.jpg?v=2">
-						<source src="https://player.vimeo.com/external/595532426.sd.mp4?s=ab2b9eebb3b1c17cd060ebe49d31ed2949472cea&profile_id=164" type="video/mp4">
+					<video id="mc-video" playsinline poster="<?php echo $poster; ?>">
+						<source src="<?php echo $video; ?>" type="video/mp4">
 					</video>
 				</div>
 				<div class="row">
