@@ -345,15 +345,18 @@ function mc_get_thank_you_box()
 <?php
 }
 
-function mc_get_bank_ticket_box()
+function mc_get_bank_ticket_box($date = null)
 {
+    if ($date === null) {
+        $date = date('d/m/Y');
+    }
 ?>
 	<div class="row mb-3">
 		<div class="col-12">
 			<div class="thank-you-box">
-				<img class="img-responsive" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/ronnie.png'; ?>" alt="Ronnie Von"></img>
+				<img class="img-responsive" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/ronnie.png'; ?>" alt="Ronnie Von">
 				<h3>Obrigada por pedir seu curso “Bebá do vinho"</h3>
-				<p><b>Para não perder o curso faça o pagamento do boleto.</b> O prazo para pagamento do boleto é 29/08/2021</p>
+				<p><b>Para não perder o curso faça o pagamento do boleto.</b> O prazo para pagamento do boleto é <?php echo $date; ?></p>
 				<a href="#" id="payment_ticket_custom_button" class="btn btn-primary btn-lg btn-block mt-4 gradient ticket-custom-button">Pagar Boleto</a>
 			</div>
 		</div>
