@@ -9,23 +9,12 @@
 
     <?php $uri = get_template_directory_uri(); ?>
 
-    <!-- <link rel="icon" type="image/png" href="<?php echo $uri; ?>/assets/ico/favicon-32x32.png" sizes="32x32" />
-    <link rel="icon" type="image/png" href="<?php echo $uri; ?>/assets/ico/favicon-16x16.png" sizes="16x16" />
-
-    <link rel="apple-touch-icon" href="<?php echo $uri; ?>/assets/ico/favicon-32x32.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="<?php echo $uri; ?>/assets/ico/favicon-32x32.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="<?php echo $uri; ?>/assets/ico/favicon-32x32.png">
-    <link rel="apple-touch-icon" sizes="167x167" href="<?php echo $uri; ?>/assets/ico/favicon-32x32.png">
-
-    <meta name="application-name" content="<?php echo $uri; ?>/assets/ico/favicon-32x32.png"/>
-    <meta name="msapplication-TileColor" content=assets/ico/favicon-32x32.png"/>
-    <meta name="msapplication-square70x70logo" content="<?php echo $uri; ?>/assets/ico/favicon-32x32.png"/>
-    <meta name="msapplication-square150x150logo" content="<?php echo $uri; ?>/assets/ico/favicon-32x32.png"/>
-    <meta name="msapplication-wide310x150logo" content="<?php echo $uri; ?>/assets/ico/favicon-32x32.png"/>
-    <meta name="msapplication-square310x310logo" content="<?php echo $uri; ?>/assets/ico/favicon-32x32.png"/>
-
-    <link rel="icon" sizes="192x192" href="<?php echo $uri; ?>/assets/ico/favicon-32x32.png">
-    <link rel="icon" sizes="128x128" href="<?php echo $uri; ?>/assets/ico/favicon-32x32.png"> -->
+    <meta property="og:title" content="Masterclass Ronnie Von">
+    <meta property="og:description" content="Beabá do Vinho com Ronnie Von">
+    <meta property="og:url" content="https://polen.me/masterclass/ronnie-von/beaba-do-vinho/inscricoes/">
+    <meta property="og:image" content="https://polen.me/masterclass/wp-content/uploads/2021/09/Screen-Shot-2021-09-09-at-21.11.14.png">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Masterclass Ronnie Von">
 
     <meta name="format-detection" content="telephone=no" />
     <meta name="format-detection" content="date=no" />
