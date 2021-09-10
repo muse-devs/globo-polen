@@ -64,7 +64,7 @@
     <div id="page" class="container site">
         <header id="masthead" class="row py-4 header-home">
             <?php global $wp; ?>
-            <?php if (add_query_arg( array(), $wp->request ) === "ronnie-von/beaba-do-vinho/inscrevase") : ?>
+            <?php if (add_query_arg( array(), $wp->request ) === "ronnie-von/beaba-do-vinho/inscricoes") : ?>
                 <div class="col-8 col-sm-6 d-flex align-items-center">
                     <a href="<?php echo site_url('ronnie-von/beaba-do-vinho/inscricoes'); ?>">
                         <img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/logo-masterclass.svg"; ?>" alt="Logo Masterclass" />
