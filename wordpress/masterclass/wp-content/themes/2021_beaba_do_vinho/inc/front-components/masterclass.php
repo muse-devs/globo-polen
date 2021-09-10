@@ -100,7 +100,7 @@ function mc_get_top_banner($product)
 				</div>
 				<div class="mc-home-video mb-2">
 					<video id="mc-video" playsinline poster="<?php echo TEMPLATE_URI; ?>/assets/img/masterclass/player-poster.jpg?v=2">
-						<source src="https://player.vimeo.com/external/595532426.sd.mp4?s=ab2b9eebb3b1c17cd060ebe49d31ed2949472cea&profile_id=164" type="video/mp4">
+						<source src="https://player.vimeo.com/external/601444637.sd.mp4?s=0ede70d0f6b6395f53270d501c255399a42a6e4d&profile_id=164" type="video/mp4">
 					</video>
 				</div>
 				<?php mc_get_buy_button($product); ?>
