@@ -217,7 +217,7 @@ function mc_get_box_content()
 						<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/taca.svg"; ?>" alt="Ícone garrafa" />
 					</div>
 					<div class="col-10 pl-0 ml-0">
-						<p class="description">Tipos de taças para cada tipo de vinho.</p>
+						<p class="description"><strong>Tipos de taças</strong> para cada tipo de vinho.</p>
 					</div>
 				</div>
 				<div class="row mt-4">
@@ -225,7 +225,7 @@ function mc_get_box_content()
 						<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/taca.svg"; ?>" alt="Ícone garrafa" />
 					</div>
 					<div class="col-10 pl-0 ml-0">
-						<p class="description">Técnicas simples para não errar na harmonização.</p>
+						<p class="description"><strong>Técnicas simples</strong> para não errar na harmonização.</p>
 					</div>
 				</div>
 				<div class="row mt-4">
@@ -233,7 +233,7 @@ function mc_get_box_content()
 						<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/taca.svg"; ?>" alt="Ícone garrafa" />
 					</div>
 					<div class="col-10 pl-0 ml-0">
-						<p class="description">Análise sensorial: visual, olfativa e gustativa.</p>
+						<p class="description"><strong>Análise sensorial:</strong> visual, olfativa e gustativa.</p>
 					</div>
 				</div>
 				<div class="row mt-4">
@@ -241,7 +241,7 @@ function mc_get_box_content()
 						<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/taca.svg"; ?>" alt="Ícone garrafa" />
 					</div>
 					<div class="col-10 pl-0 ml-0">
-						<p class="description">Conheça os principais tipos de aromas.</p>
+						<p class="description"><strong>Conheça</strong> os principais tipos de aromas.</p>
 					</div>
 				</div>
 				<div class="row mt-4">
@@ -249,7 +249,7 @@ function mc_get_box_content()
 						<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/taca.svg"; ?>" alt="Ícone garrafa" />
 					</div>
 					<div class="col-10 pl-0 ml-0">
-						<p class="description">Técnicas para treinar o paladar.</p>
+						<p class="description"><strong>Técnicas</strong> para treinar o paladar.</p>
 					</div>
 				</div>
 				<div class="row mt-4">
