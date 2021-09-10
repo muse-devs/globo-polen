@@ -42,7 +42,7 @@ if ( apply_filters( 'woocommerce_checkout_show_terms', true ) && function_exists
 
         <div class="order-info" id="bolet-payment-custom" style="display: none;">
             <p><strong>Curso será disponibilizado após o pagamento</strong></p>
-            <p>O prazo para pagamento do boleto é <?php echo date('Y-m-d', strtotime('+1 days', current_time('timestamp'))); ?></p>
+            <p>O prazo para pagamento do boleto é <?php echo date('d-m-Y', strtotime('+1 days', current_time('timestamp'))); ?></p>
         </div>
 
 	</div>
