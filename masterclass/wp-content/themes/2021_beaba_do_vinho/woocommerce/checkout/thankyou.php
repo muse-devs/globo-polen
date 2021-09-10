@@ -86,7 +86,10 @@ defined( 'ABSPATH' ) || exit;
 
             </style>
             <div class="col-12 mb-3">
-                <?php mc_get_bank_ticket_box(); ?>
+                <?php
+                $date = date('d/m/Y', strtotime( '+1 days', strtotime($order->get_date_created()->date('Y-m-d H:i:s'))));
+                mc_get_bank_ticket_box($date);
+                ?>
             </div>
             <div class="col-12 m-md-auto d-flex align-items-center justify-content-center">
                 <ul class="order-flow mt-4">
@@ -106,7 +109,7 @@ defined( 'ABSPATH' ) || exit;
 							<h4 class="title">Aguardando Pagamento</h4>
                             <p class="description">
                                 O prazo para pagamento do boleto é
-                                <?php echo date('d/m/Y', strtotime( '+1 days', strtotime($order->get_date_created()->date('Y-m-d H:i:s')))); ?>
+                                <?php echo $date; ?>
                             </p>
 						</span>
                     </li>
