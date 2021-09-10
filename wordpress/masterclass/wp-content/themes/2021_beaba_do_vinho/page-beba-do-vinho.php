@@ -1,3 +1,13 @@
+<?php
+/** Template Name: Página - beaba do vinho */
+
+// REDIRECT
+$url = home_url('/ronnie-von/beaba-do-vinho/inscricoes/');
+header("Location: {$url}");
+exit;
+
+get_header();
+?>
 <script>
     let polenObj = {
         base_url: '<?= site_url(); ?>',
@@ -6,10 +16,6 @@
     };
 </script>
 
-<?php
-/** Template Name: Página - beaba do vinho */
-get_header();
-?>
 
     <main id="primary" class="site-main">
     <?php mc_get_top_banner_lp(); ?>
