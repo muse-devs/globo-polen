@@ -32,7 +32,6 @@ class Polen_Order_Review_Rewrite
             
                 
                 $product_id = wc_get_product_id_by_sku( get_query_var( 'talent_review_id' ) );
-                error_log("ID do produto em Review: " . $product_id);
                 if( empty( $product_id )) {
                     global $wp_query;
                     $wp_query->set_404();
