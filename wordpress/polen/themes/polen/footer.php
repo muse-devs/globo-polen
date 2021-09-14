@@ -63,6 +63,7 @@
 			<a href="https://twitter.com/polen_me" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("twitter"); ?></a>
 		</div>
 		<div class="col-md-12 pt-3 text-center">2021 @<?= get_bloginfo('name'); ?></div>
+		<p class="col-md-12 small text-center">Sete Vales S.A.</p>
 	</div><!-- .site-info -->
 </footer><!-- #colophon -->
 
