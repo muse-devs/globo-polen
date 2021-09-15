@@ -303,3 +303,33 @@
 	margin: 0 auto;
 	padding: 15px 0px;
 }
+
+.woocommerce-form-coupon {
+	.form-title {
+		font-size: 12px;
+		font-weight: 700;
+		color: #212121;
+		padding: 20px 0px;
+	}
+	#coupon_code {
+		background: #FFFFFF;
+		border: 1px solid #C4C4C4!important;
+		box-sizing: border-box;
+		border-radius: 8px;
+		height: 100%;
+	}
+	#coupon_btn {
+		font-weight: bold;
+		font-size: 14px;
+		line-height: 19px;
+		color: #212121;
+		padding: 20px 30px;
+	}
+	.woocommerce-notices-wrapper {
+		display: none;
+	}
+}
+
+.woocommerce-notices-wrapper {
+	margin-top: 70px;
+}
