@@ -16,40 +16,56 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit;
+   exit;
 }
 
-do_action( 'woocommerce_before_checkout_form', $checkout );
+
 
 if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_required() && ! is_user_logged_in() ) {
-	echo esc_html( apply_filters( 'woocommerce_checkout_must_be_logged_in_message', __( 'You must be logged in to checkout.', 'woocommerce' ) ) );
-	return;
+   echo esc_html( apply_filters( 'woocommerce_checkout_must_be_logged_in_message', __( 'You must be logged in to checkout.', 'woocommerce' ) ) );
+   return;
 }
 
 ?>
-<br><br><br>
 
 <div class="row">
     <div class="col-12">
-        <?php $current_product = wc_get_product(get_product_checkout()); ?>
-        <?php if (!empty($current_product)) : ?>
+        <?php
+        foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) :
+            $_product = apply_filters('woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key);
+            if ($_product && $_product->exists() && $cart_item['quantity'] > 0 && apply_filters('woocommerce_checkout_cart_item_visible', true, $cart_item, $cart_item_key)) : ?>
+                <div class="course-card">
+                    <div class="course-card__header">
+                        <div class="course-card__image">
+                            <img src="<?php echo get_the_post_thumbnail_url($_product->get_id()); ?>"
+                                 alt="<?php echo $_product->get_name(); ?>">
+                        </div>
+                        <p><?php echo wp_kses_post(apply_filters('woocommerce_cart_item_name', $_product->get_name(), $cart_item, $cart_item_key)) . '&nbsp;'; ?></p>
+                    </div>
+                    <div class="course-card__price">
+                        <p>Você vai pagar</p>
+                        <div class="course-card__value">
+                            <?php $subtotal = apply_filters('woocommerce_cart_item_subtotal', WC()->cart->get_product_subtotal( $_product, $cart_item['quantity'] ), $cart_item, $cart_item_key ); ?>
+                            <?php if (WC()->cart->get_coupons()) : ?>
+                                <s>
+                                    <?php echo $subtotal; ?>
+                                </s>
+                                <?php wc_cart_totals_order_total_html(); ?>
+                            <?php else:  ?>
+                                <?php echo $subtotal; ?>
+                            <?php endif ?>
+                        </div>
+                    </div>
+                </div>
 
-            <div class="course-card">
-                <div class="course-card__header">
-                    <div class="course-card__image">
-                        <img src="<?php echo get_the_post_thumbnail_url($current_product->get_id()); ?>"
-                            alt="<?php echo $current_product->get_name(); ?>">
-                    </div>
-                    <p><?php echo $current_product->get_name(); ?></p>
-                </div>
-                <div class="course-card__price">
-                    <p>Você vai pagar</p>
-                    <div class="course-card__value">
-                        <p><?php echo wc_price($current_product->get_price()); ?></p>
-                    </div>
-                </div>
-            </div>
-        <?php endif; ?>
+                <?php
+            endif;
+        endforeach;
+        ?>
+
+    </div>
+    <div class="col-12">
+        <?php do_action( 'woocommerce_before_checkout_form', $checkout ); ?>
     </div>
     <div class="col-12">
         <form name="checkout"
