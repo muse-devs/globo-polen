@@ -24,8 +24,8 @@ function polen_front_get_banner_with_carousel($social = false)
 					<div class="carrousel">
 						<?php foreach ($carrousel as $item) : ?>
 							<figure class="image">
-								<img loading="lazy" src="<?php echo $item['mobile']; ?>" alt="Banner da home" class="mobile" />
-								<img loading="lazy" src="<?php echo $item['desktop']; ?>" alt="Banner da home" class="desktop" />
+								<img loading="lazy" src="<?php echo $item['mobile']; ?>" alt="Presenteie e surpreenda com vídeos personalizados." class="mobile" />
+								<img loading="lazy" src="<?php echo $item['desktop']; ?>" alt="Presenteie e surpreenda com vídeos personalizados." class="desktop" />
 							</figure>
 						<?php endforeach; ?>
 					</div>
@@ -42,8 +42,8 @@ function polen_front_get_banner_with_carousel($social = false)
 					<div class="carrousel">
 						<?php foreach ($carrousel2 as $item) : ?>
 							<figure class="image">
-								<img loading="lazy" src="<?php echo $item['mobile']; ?>" alt="Banner da home" class="mobile" />
-								<img loading="lazy" src="<?php echo $item['desktop']; ?>" alt="Banner da home" class="desktop" />
+								<img loading="lazy" src="<?php echo $item['mobile']; ?>" alt="Setembro é o mês da prevenção ao suicídio. Agir salva vidas!" class="mobile" />
+								<img loading="lazy" src="<?php echo $item['desktop']; ?>" alt="Setembro é o mês da prevenção ao suicídio. Agir salva vidas!" class="desktop" />
 							</figure>
 						<?php endforeach; ?>
 					</div>
