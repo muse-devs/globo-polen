@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Template part for displaying a message that posts cannot be found
  *
@@ -7,45 +8,48 @@
  * @package Polen
  */
 
+global $wp_query;
+
 ?>
 
 <section class="no-results not-found">
 	<header class="page-header">
-		<h1 class="page-title"><?php esc_html_e( 'Nothing Found', 'polen' ); ?></h1>
+		<div class="row">
+			<div class="col-12 col-md-8 m-md-auto">
+				<h1>
+					<?php printf(
+						esc_html__('%s Resultado%s para "%s"', 'polen'),
+						$wp_query->found_posts,
+						$wp_query->found_posts > 1 ? 's' : '',
+						'<span>' . get_search_query() . '</span>'
+					); ?>
+				</h1>
+			</div>
+		</div>
 	</header><!-- .page-header -->
-
-	<div class="page-content">
-		<?php
-		if ( is_home() && current_user_can( 'publish_posts' ) ) :
-
-			printf(
-				'<p>' . wp_kses(
-					/* translators: 1: link to WP admin new post page. */
-					__( 'Ready to publish your first post? <a href="%1$s">Get started here</a>.', 'polen' ),
-					array(
-						'a' => array(
-							'href' => array(),
-						),
-					)
-				) . '</p>',
-				esc_url( admin_url( 'post-new.php' ) )
-			);
-
-		elseif ( is_search() ) :
-			?>
-
-			<p><?php esc_html_e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'polen' ); ?></p>
-			<?php
-			get_search_form();
-
-		else :
-			?>
-
-			<p><?php esc_html_e( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'polen' ); ?></p>
-			<?php
-			get_search_form();
-
-		endif;
-		?>
+	<div class="content">
+		<div class="row my-3">
+			<div class="col-12 col-md-8 m-md-auto">
+				<div class="box-round">
+					<div class="row">
+						<div class="col-12 p-4">
+							<div class="row">
+								<div class="col-12 text-center">
+									<img width="186" src="<?php echo TEMPLATE_URI; ?>/assets/img/errors/not-found.png" alt="Nenhum resultado encontrado">
+								</div>
+								<div class="col-12 text-center mt-4">
+									<h3>Nenhum resultado encontrado.</h3>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12 col-md-8 m-md-auto">
+				<a href="<?php echo site_url("shop"); ?>" class="btn btn-primary btn-lg btn-block">Ver todos</a>
+			</div>
+		</div>
 	</div><!-- .page-content -->
 </section><!-- .no-results -->

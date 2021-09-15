@@ -2,6 +2,41 @@
 
 use Polen\Includes\Polen_Order;
 
+function polen_get_search_form()
+{
+?>
+	<button onclick="showSearchForm()" class="button-no-bg"><?php Icon_Class::polen_icon_research(); ?></button>
+	<div id="search-box" class="search-box">
+		<div class="row p-3">
+			<div class="col-12 col-md-8 m-md-auto">
+				<div class="row mb-3">
+					<div class="col-12 text-right">
+						<button onclick="hiddeSearchForm()" class="button-no-bg black"><?php Icon_Class::polen_icon_close(); ?></button>
+					</div>
+				</div>
+				<form action="/" method="get">
+					<div class="row">
+						<div class="col-12 d-flex justify-content-between">
+							<input class="form-control form-control-lg" type="text" id="search" name="s" value="<?php the_search_query(); ?>" placeholder="Buscar" required />
+							<button type="submit" class="btn btn-primary btn-lg ml-2"><?php Icon_Class::polen_icon_research(); ?></button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<script>
+		function showSearchForm(){
+			document.getElementById("search-box").classList.add("show");
+			document.getElementById("search").focus();
+		}
+		function hiddeSearchForm(){
+			document.getElementById("search-box").classList.remove("show");
+		}
+	</script>
+<?php
+}
+
 function polen_front_get_banner_with_carousel($social = false)
 {
 	$carrousel = array(
@@ -24,8 +59,8 @@ function polen_front_get_banner_with_carousel($social = false)
 					<div class="carrousel">
 						<?php foreach ($carrousel as $item) : ?>
 							<figure class="image">
-								<img loading="lazy" src="<?php echo $item['mobile']; ?>" alt="Banner da home" class="mobile" />
-								<img loading="lazy" src="<?php echo $item['desktop']; ?>" alt="Banner da home" class="desktop" />
+								<img loading="lazy" src="<?php echo $item['mobile']; ?>" alt="Presenteie e surpreenda com vídeos personalizados." class="mobile" />
+								<img loading="lazy" src="<?php echo $item['desktop']; ?>" alt="Presenteie e surpreenda com vídeos personalizados." class="desktop" />
 							</figure>
 						<?php endforeach; ?>
 					</div>
@@ -37,13 +72,13 @@ function polen_front_get_banner_with_carousel($social = false)
 						</a>
 					</div>
 				</div>
-				<?php else: ?>
-					<div class="item">
+			<?php else : ?>
+				<div class="item">
 					<div class="carrousel">
 						<?php foreach ($carrousel2 as $item) : ?>
 							<figure class="image">
-								<img loading="lazy" src="<?php echo $item['mobile']; ?>" alt="Banner da home" class="mobile" />
-								<img loading="lazy" src="<?php echo $item['desktop']; ?>" alt="Banner da home" class="desktop" />
+								<img loading="lazy" src="<?php echo $item['mobile']; ?>" alt="Setembro é o mês da prevenção ao suicídio. Agir salva vidas!" class="mobile" />
+								<img loading="lazy" src="<?php echo $item['desktop']; ?>" alt="Setembro é o mês da prevenção ao suicídio. Agir salva vidas!" class="desktop" />
 							</figure>
 						<?php endforeach; ?>
 					</div>
@@ -56,7 +91,7 @@ function polen_front_get_banner_with_carousel($social = false)
 						</a>
 					</div>
 				</div>
-				<?php endif; ?>
+			<?php endif; ?>
 		</div>
 	</section>
 	<script>
@@ -64,7 +99,7 @@ function polen_front_get_banner_with_carousel($social = false)
 			document.getElementById("sa-modal").classList.add("d-block");
 			changeHash("sa-modal");
 		}
-		if(window.location.hash.substring(1) == "sa-modal") {
+		if (window.location.hash.substring(1) == "sa-modal") {
 			openModalSa();
 		}
 	</script>
@@ -126,8 +161,8 @@ function polen_front_get_banner()
 // $size pode ser 'medium' e 'small'
 function polen_front_get_card($item, $size = "small", $social = false)
 {
-	$product = wc_get_product( $item['ID'] );
-	$social = product_is_social_base( $product );
+	$product = wc_get_product($item['ID']);
+	$social = product_is_social_base($product);
 	// $social == false ? $social = social_product_is_social(wc_get_product($item['ID']), social_get_category_base()) : false;
 	$class = $size;
 	if ($size === "small") {
@@ -152,13 +187,13 @@ function polen_front_get_card($item, $size = "small", $social = false)
 	<div class="<?= $class; ?>">
 		<div class="polen-card <?= $size; ?>" itemscope itemtype="https://schema.org/Offer">
 			<figure class="image">
-				<?php if ( $social ) {
+				<?php if ($social) {
 					polen_donate_badge("Setembro Amarelo", true, false, true);
-				} elseif( $donate == 'yes' ) {
+				} elseif ($donate == 'yes') {
 					polen_donate_badge("Social", true, false, false);
-				}?>
+				} ?>
 				<img loading="lazy" src="<?php echo $image[0]; ?>" alt="<?= $item["name"]; ?>">
-				<?php if(!$social) : ?>
+				<?php if (!$social) : ?>
 					<div class="price text-right" itemprop="price">
 						<?php if ($item['in_stock']) : ?>
 							<span class="mr-2"><?php Icon_Class::polen_icon_camera_video(); ?></span>
