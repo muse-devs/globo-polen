@@ -136,7 +136,7 @@ class PagarmeApi {
 		$data = array(
 			'api_key'      			=> $this->gateway->api_key,
 			'payment_method'		=> 'pix',
-			'pix_expiration_date' 	=> date('Y-m-d', strtotime(  '+1 days', current_time('timestamp') ) ),
+			'pix_expiration_date' 	=> date('Y-m-d', strtotime(  '+3 days', current_time('timestamp') ) ),
 			'amount'       			=> $order->get_total() * 100,
 			'postback_url' 			=> WC()->api_request_url( $this->gateway->id ),
 			'customer'     			=> array(
@@ -157,24 +157,7 @@ class PagarmeApi {
 				'number' => substr( $phone, 2 ),
 			);
 		}
-
-		// Address.
-		if ( ! empty( $order->billing_address_1 ) ) {
-			$data['customer']['address'] = array(
-				'street'        => $order->billing_address_1,
-				'complementary' => $order->billing_address_2,
-				'zipcode'       => $this->only_numbers( $order->billing_postcode ),
-			);
-
-			// Non-WooCommerce default address fields.
-			if ( ! empty( $order->billing_number ) ) {
-				$data['customer']['address']['street_number'] = $order->billing_number;
-			}
-			if ( ! empty( $order->billing_neighborhood ) ) {
-				$data['customer']['address']['neighborhood'] = $order->billing_neighborhood;
-			}
-		}
-
+		
 		// Set the document number.
 		if ( class_exists( 'Extra_Checkout_Fields_For_Brazil' ) ) {
 			$wcbcf_settings = get_option( 'wcbcf_settings' );

@@ -24,3 +24,33 @@ function _theme_add_woocommerce_support()
 }
 
 add_action('after_setup_theme', '_theme_add_woocommerce_support');
+
+add_action( 'phpmailer_init', 'masterclass_load_settings');
+
+function masterclass_load_settings() {
+    global $phpmailer;
+    $phpmailer->isSMTP();
+    $phpmailer->SMTPAuth   = true;
+    $phpmailer->SMTPSecure = 'tls';
+    $phpmailer->Host       = 'email-smtp.us-east-2.amazonaws.com';
+    $phpmailer->Port       = '587';
+    $phpmailer->Username   = 'AKIASWGKUEIQNIMMOAID';
+    $phpmailer->Password   = 'BI1e3yLlNCIzJVvNOMt7LTXpUDirxVuzlU39UlWvNLuv';
+    $phpmailer->From       = 'no-reply@polen.me';
+    $phpmailer->FromName   = 'Polen';
+}
+
+add_filter('rest_authentication_errors', 'required_rest_authentication');
+function required_rest_authentication($result) 
+{
+     if (!empty($result)) {
+         return $result;
+     }
+
+     if (!is_user_logged_in()) {
+         return new WP_Error('rest_not_logged_in', 'Dados Privados.', array('status' => 401));
+     }
+     
+     return $result;
+}
+

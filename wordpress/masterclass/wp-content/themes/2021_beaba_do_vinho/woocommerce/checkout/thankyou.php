@@ -18,19 +18,78 @@
 defined( 'ABSPATH' ) || exit;
 ?>
 <br><br><br>
-<style>
-    .woocommerce-order{
-        display:none !important;
-    }
-
-</style>
 <div class="container">
     <div class="row">
+
         <?php
-        if ($order->get_payment_method() === 'pagarme-banking-ticket') {
-            ?>
+        if ($order->get_payment_method() === 'pagarme-credit-card') : ?>
+
+
+            <?php
+            $name_status = 'Pagamento Aprovado';
+            $descriptions = 'Seu pagamento foi autorizado pela emissora do cartão.';
+            $name_class = 'complete';
+
+
+            if ( $order->has_status( 'failed' ) ) {
+                $name_status = 'Pagamento Recusado';
+                $descriptions = 'Não foi possível finalizar seu pagamento! Verifique com o seu banco.';
+                $name_class = '';
+            } ?>
+
             <div class="col-12 mb-3">
-                <?php mc_get_bank_ticket_box(); ?>
+                <?php mc_get_thank_you_box(); ?>
+            </div>
+            <div class="col-12 m-md-auto d-flex align-items-center justify-content-center">
+                <ul class="order-flow mt-4">
+                    <li class="item itempayment-approved <?php echo $name_class; ?>">
+                    <span class="background status">
+                        <?php Icon_Class::polen_icon_check_o(); ?>
+                        <?php Icon_Class::polen_icon_exclamation_o(); ?>
+                    </span>
+                        <span class="text">
+                        <h4 class="title">Pedido Enviado</h4>
+                        <p class="description">Seu número do pedido é <?php echo $order->get_id(); ?> .</p>
+                    </span>
+                    </li>
+                    <li class="item itempayment-approved <?php echo $name_class; ?>">
+                        <span class="background status">
+                            <?php Icon_Class::polen_icon_check_o(); ?>
+                            <?php Icon_Class::polen_icon_exclamation_o(); ?>
+                        </span>
+
+                        <span class="text">
+                            <h4 class="title"><?php echo $name_status; ?></h4>
+                            <p class="description">
+                               <?php echo $descriptions; ?>
+                            </p>
+                        </span>
+                    </li>
+                    <li class="item itempayment-approved">
+                        <span class="background status"></span>
+                        <span class="text">
+                        <h4 class="title">Acesso ao curso</h4>
+                        <p class="description">Receba acesso ao curso e instruções dos próximos passos via e-mail.</p>
+                    </span>
+                    </li>
+                </ul>
+            </div>
+
+        <?php endif; ?>
+
+        <?php
+        if ($order->get_payment_method() === 'pagarme-banking-ticket') : ?>
+            <style>
+                .woocommerce-order{
+                    display:none !important;
+                }
+
+            </style>
+            <div class="col-12 mb-3">
+                <?php
+                $date = date('d/m/Y', strtotime( '+1 days', strtotime($order->get_date_created()->date('Y-m-d H:i:s'))));
+                mc_get_bank_ticket_box($date);
+                ?>
             </div>
             <div class="col-12 m-md-auto d-flex align-items-center justify-content-center">
                 <ul class="order-flow mt-4">
@@ -50,7 +109,7 @@ defined( 'ABSPATH' ) || exit;
 							<h4 class="title">Aguardando Pagamento</h4>
                             <p class="description">
                                 O prazo para pagamento do boleto é
-                                <?php echo date('d/m/Y', strtotime( '+1 days', strtotime($order->get_date_created()->date('Y-m-d H:i:s')))); ?>
+                                <?php echo $date; ?>
                             </p>
 						</span>
                     </li>
@@ -63,9 +122,7 @@ defined( 'ABSPATH' ) || exit;
                     </li>
                 </ul>
             </div>
-            <?php
-        }
-        ?>
+        <?php endif; ?>
         <div class="col-12">
             <div class="woocommerce-order">
                 <?php
@@ -129,7 +186,8 @@ defined( 'ABSPATH' ) || exit;
 
                 <?php else : ?>
 
-                    <p class="woocommerce-notice woocommerce-notice--success woocommerce-thankyou-order-received"><?php echo apply_filters( 'woocommerce_thankyou_order_received_text', esc_html__( 'Thank you. Your order has been received.', 'woocommerce' ), null ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
+                    <p class="woocommerce-notice woocommerce-notice--success woocommerce-thankyou-order-received">
+                        <?php echo apply_filters( 'woocommerce_thankyou_order_received_text', esc_html__( 'Thank you. Your order has been received.', 'woocommerce' ), null ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
 
                 <?php endif; ?>
 

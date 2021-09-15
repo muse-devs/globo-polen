@@ -436,14 +436,65 @@ if( $order ){
 
 <section class="payment">
     <div id="successPixPaymentBox" style="display: <?php echo $paid ? 'block' : 'none'; ?>;">
-        PAGAMENTO APROVADO COM SUCESSO!
+        <?php
+        $name_status = 'Pagamento Aprovado';
+        $descriptions = 'Seu pagamento foi autorizado pela emissora do cartão.';
+        $name_class = '';
+
+        ?>
+
+        <div class="row mb-3">
+            <div class="col-12">
+                <div class="thank-you-box">
+                    <img class="img-responsive" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/ronnie.png'; ?>" alt="Ronnie Von"></img>
+                    <h3>Obrigada por pedir seu curso “Bebá do vinho"</h3>
+                    <p>Você vai receber os e-mails com o link do acesso ao curso.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 m-md-auto d-flex align-items-center justify-content-center">
+            <ul class="order-flow mt-4">
+                <li class="item itempayment-approved complete">
+                    <span class="background status">
+                        <?php Icon_Class::polen_icon_check_o(); ?>
+                        <?php Icon_Class::polen_icon_exclamation_o(); ?>
+                    </span>
+                    <span class="text">
+                        <h4 class="title">Pedido Enviado</h4>
+                        <p class="description">Seu número do pedido é <?php echo $order->get_id(); ?> .</p>
+                    </span>
+                </li>
+                <li class="item itempayment-approved complete">
+                        <span class="background status">
+                            <?php Icon_Class::polen_icon_check_o(); ?>
+                            <?php Icon_Class::polen_icon_exclamation_o(); ?>
+                        </span>
+
+                    <span class="text">
+                        <h4 class="title"><?php echo $name_status; ?></h4>
+                        <p class="description">
+                           <?php echo $descriptions; ?>
+                        </p>
+                    </span>
+                </li>
+                <li class="item itempayment-approved">
+                    <span class="background status"></span>
+                    <span class="text">
+                        <h4 class="title">Acesso ao curso</h4>
+                        <p class="description">Receba acesso ao curso e instruções dos próximos passos via e-mail.</p>
+                    </span>
+                </li>
+            </ul>
+        </div>
+
     </div>
     <div class="container" id="watingPixPaymentBox" style="display: <?php echo $paid ? 'none' : 'block'; ?>;">
         <div class="payment__end">
             <p>Para finalizar a sua compra é só realizar o pagamento com Pix!</p>
         </div>
         <div class="payment__text">
-            <p>Obrigado pela compra. Você receberá todos os dados da sua compra no email <?php echo $order->get_billing_email(); ?>.</p>
+            <p>Obrigado pela compra. Você receberá todos os dados da sua compra no email.</p>
         </div>
         <div class="course-card">
             <div class="course-card__header">
@@ -472,7 +523,7 @@ if( $order ){
 
             <div class="payment__text">
                 <p>
-                    <b>O código é válido até <?php echo date('d/m/Y H:i:s', strtotime( '+1 days', current_time('timestamp'))); ?>.</b>
+                    <b>O código é válido até <?php echo date('d/m/Y H:i:s', strtotime( '+3 days', current_time('timestamp'))); ?>.</b>
                     Se o pagamento não for confirmado, não se preocupe. O pedido será cancelado automaticamente.
                 </p>
             </div>

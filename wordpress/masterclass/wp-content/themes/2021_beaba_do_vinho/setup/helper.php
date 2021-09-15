@@ -166,6 +166,7 @@ function get_product_masterclass(): array
 
     return [
         'name' => $masterclass_product->get_name(),
+        'price_regular' => wc_price($masterclass_product->get_regular_price()),
         'price' => wc_price($masterclass_product->get_price()),
         'image_url' => get_the_post_thumbnail_url(69) ?? '',
         'url_to_checkout' => $url_checkout,
@@ -187,3 +188,92 @@ add_filter( 'site_transient_update_plugins', 'filter_plugin_updates' );
 add_filter('woocommerce_is_sold_individually', function () {
     return true;
 }, 9999, 2);
+
+
+/**
+ * Função para request webwook
+ *
+ * @params email // required
+ * @route admin-ajax.php?action=send_form_request
+ */
+function send_form_request()
+{
+    try{
+        $email = sanitize_text_field($_POST['email']);
+
+        if( !filter_input( INPUT_POST, 'email', FILTER_VALIDATE_EMAIL ) ) {
+            wp_send_json_error( 'Email incorreto', 422 );
+        }
+
+        $url = 'https://hooks.zapier.com/hooks/catch/10583855/b483m4i/';
+        $response = wp_remote_post($url, array(
+                'method' => 'POST',
+                'timeout' => 45,
+                'headers' => array(),
+                'body' => array(
+                    'email' => $email,
+                ),
+            )
+        );
+
+        if (is_wp_error($response)) {
+            wp_send_json_error( 'Sistema indisponível. Por favor entre em contato com o suporte', 503 );
+            wp_die();
+        }
+
+        wp_send_json_success( 'ok', 200 );
+
+    } catch (\Exception $e) {
+        wp_send_json_error($e->getMessage(), 422);
+        wp_die();
+    }
+}
+add_action('wp_ajax_send_form_request', 'send_form_request');
+add_action('wp_ajax_nopriv_send_form_request', 'send_form_request');
+
+
+/**
+ * Diparar request para quando o pedido mudar de status para completo
+ * @param $order_id
+ */
+function send_email_success_order($order_id)
+{
+    try{
+        $order = wc_get_order($order_id);
+        $order_status = $order->get_status();
+
+        if ( !in_array( $order_status, [ 'completed', 'processing' ] ) ) {
+            return;
+        }
+
+        $email = $order->get_billing_email();
+        $name = $order->get_billing_first_name();
+        $last_name = $order->get_billing_last_name();
+
+        $url = 'https://hooks.zapier.com/hooks/catch/10583855/b4d0u1f/';
+        $response = wp_remote_post($url, array(
+                'method' => 'POST',
+                'timeout' => 45,
+                'headers' => array(),
+                'body' => array(
+                    'name' => $name,
+                    'last_name' => $last_name,
+                    'email' => $email,
+                ),
+            )
+        );
+
+        if (is_wp_error($response)) {
+            wp_send_json_error( 'Sistema indisponível. Por favor entre em contato com o suporte', 503 );
+            wp_die();
+        }
+
+        wp_send_json_success( 'ok', 200 );
+
+    } catch (\Exception $e) {
+        wp_send_json_error($e->getMessage(), 422);
+        wp_die();
+    }
+
+}
+add_action('woocommerce_order_status_changed', 'send_email_success_order');

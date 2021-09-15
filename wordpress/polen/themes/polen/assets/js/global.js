@@ -348,9 +348,16 @@ function polGetCookie(cname) {
 }
 
 function polAcceptCookies() {
-	polSetCookie(polenObj.COOKIES.POLICIES, "true", 30);
+	localStorage.setItem(polenObj.COOKIES.POLICIES, "true");
 	const policies_box = document.getElementById("policies-box");
 	policies_box.parentNode.removeChild(policies_box);
+}
+
+function showLGPDBox() {
+	const box = document.getElementById("policies-box");
+	if (!localStorage.getItem(polenObj.COOKIES.POLICIES)) {
+		box.classList.remove("d-none");
+	}
 }
 
 function replaceLineBreakString(string) {
@@ -401,6 +408,7 @@ function polAjaxForm(formName, callBack, callBackError, reset = true) {
 jQuery(document).ready(function () {
 	truncatedItems();
 	getSessionMessage();
+	showLGPDBox();
 });
 
 (function ($) {
