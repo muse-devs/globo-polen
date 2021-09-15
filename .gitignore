@@ -6,10 +6,18 @@ wordpress/.htaccess
 wordpress/wp-config.php
 wordpress/masterclass/wp-config.php
 
+masterclass/.htaccess
+masterclass/wp-config.php
+masterclass/masterclass/wp-config.php
+
 # Ignorar Modelos padrões do Wordpress
 wordpress/wp-config-sample.php
 wordpress/license.txt
 wordpress/readme.html
+
+masterclass/wp-config-sample.php
+masterclass/license.txt
+masterclass/readme.html
 
 # Ignorar tudo no wp-content/cubonove exceto os diretórios
 # "mu-plugins", "plugins", "themes"
@@ -24,6 +32,17 @@ wordpress/polen/*
 !wordpress/polen/plugins/
 !wordpress/polen/themes/
 
+masterclass/wp-content/*
+!masterclass/wp-content/languages/
+!masterclass/wp-content/mu-plugins/
+!masterclass/wp-content/plugins/
+!masterclass/wp-content/themes/
+masterclass/polen/*
+!masterclass/polen/languages/
+!masterclass/polen/mu-plugins/
+!masterclass/polen/plugins/
+!masterclass/polen/themes/
+
 # Ignorar Arquivo de conteudo gerado dinamicamente podem no acesso ele é estátivo
 wordpress/occasions.json
 
@@ -34,10 +53,17 @@ wordpress/wp-content/plugins/debug-bar/*
 wordpress/polen/plugins/debug-bar/*
 wordpress/polen/plugins/polen_2/test/*
 wordpress/polen/plugins/polen_2/composer.lock
+wordpress/polen/plugins/woo-preview-emails
+
+masterclass/wp-content/plugins/hello.php
+masterclass/polen/plugins/hello.php
 
 # Ignorar temas específicos
 wordpress/wp-content/themes/twenty*/
 wordpress/polen/themes/twenty*/
+
+masterclass/wp-content/themes/twenty*/
+masterclass/polen/themes/twenty*/
 
 # Ignorar dependências do node
 node_modules/
@@ -68,4 +94,3 @@ sql/*
 #ignorar arquivos temporários de estilos
 *.css.map
 
-wordpress/polen/plugins/woo-preview-emails
