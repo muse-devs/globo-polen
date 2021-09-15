@@ -27,7 +27,6 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 }
 
 ?>
-<br><br><br>
 
 <div class="row">
     <div class="col-12">
@@ -65,7 +64,9 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
         ?>
 
     </div>
-    <?php do_action( 'woocommerce_before_checkout_form', $checkout ); ?>
+    <div class="col-12">
+        <?php do_action( 'woocommerce_before_checkout_form', $checkout ); ?>
+    </div>
     <div class="col-12">
         <form name="checkout"
             method="post" class="checkout woocommerce-checkout"
