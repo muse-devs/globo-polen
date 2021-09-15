@@ -13,7 +13,7 @@ function mc_get_buy_button($product)
 	</div>
 	<div class="row">
 		<div class="col-12 col-md-6 m-md-auto text-center">
-			<p class="subtitle">Desconto de primeiro lote. Vagas limitadas.</p>
+			<p class="subtitle"><b>16 de Setembro às 20h, ao vivo</b></p>
 		</div>
 	</div>
 <?php
