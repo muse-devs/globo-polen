@@ -48,7 +48,7 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
                             <?php $subtotal = apply_filters('woocommerce_cart_item_subtotal', WC()->cart->get_product_subtotal( $_product, $cart_item['quantity'] ), $cart_item, $cart_item_key ); ?>
                             <?php if (WC()->cart->get_coupons()) : ?>
                                 <s>
-                                    <?php echo $subtotal; ?>
+                                    <?php echo wc_price($_product->get_regular_price()); ?>
                                 </s>
                                 <?php wc_cart_totals_order_total_html(); ?>
                             <?php else:  ?>
