@@ -167,6 +167,12 @@ class Polen_Plugin_Settings
                     'options'  => $array_pages,
                     'default'  => '',
                 ),
+                array(
+                    'id'       => 'search_bar',
+                    'type'     => 'switch',
+                    'title'    => esc_html__('Ativar Barra de Busca', 'polen'),
+                    'default'  => 0,
+                ),
             ),
         ) );
 
