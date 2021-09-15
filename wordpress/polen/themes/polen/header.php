@@ -41,8 +41,7 @@ use Polen\Includes\Polen_Talent;
 			</div>
 			<?php if(!polen_is_landingpage()) : ?>
 			<div class="col-4 col-sm-6 d-flex justify-content-end align-items-center">
-				<?php //get_search_form();
-				?>
+				<?php polen_get_search_form(); ?>
 				<div class="ml-2">
 					<div class="dropdown">
 						<?php
