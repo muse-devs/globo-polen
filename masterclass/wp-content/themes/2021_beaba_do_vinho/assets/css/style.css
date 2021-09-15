@@ -11592,12 +11592,14 @@ button.criesp :hover {
   border-radius: 8px;
   height: 100%; }
 
-.woocommerce-form-coupon #coupon_btn {
+.woocommerce-form-coupon .btn-outline-light {
   font-weight: bold;
   font-size: 14px;
   line-height: 19px;
   color: #212121;
   padding: 20px 30px; }
+  .woocommerce-form-coupon .btn-outline-light :hover {
+    color: #fff !important; }
 
 .woocommerce-form-coupon .woocommerce-notices-wrapper {
   display: none; }

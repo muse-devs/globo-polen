@@ -30,7 +30,7 @@ if ( ! wc_coupons_enabled() ) {
 				<div class="row">
 				<div class="col-12 d-flex mb-4">
 					<input id="coupon_code" type="text" name="coupon_code" class="form-control form-control-lg mr-3" placeholder="<?php esc_attr_e( 'Coupon code', 'woocommerce' ); ?>" id="coupon_code" value="" />
-					<button id="coupon_btn" type="submit" class="btn btn-outline-light btn-lg" name="apply_coupon" value="<?php esc_attr_e( 'Apply coupon', 'woocommerce' ); ?>">Aplicar</button>
+					<button type="submit" class="btn btn-outline-light btn-lg" name="apply_coupon" value="<?php esc_attr_e( 'Apply coupon', 'woocommerce' ); ?>">Aplicar</button>
 				</div>
 			</div>
 		</div>
