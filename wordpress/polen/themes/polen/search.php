@@ -8,6 +8,8 @@
  * @package Polen
  */
 
+use Polen\Includes\Debug;
+
 get_header();
 global $wp_query;
 ?>
@@ -37,8 +39,10 @@ global $wp_query;
 						while (have_posts()) :
 							the_post();
 							$product = wc_get_product(get_the_ID());
-							$item_data = _polen_get_info_talent_by_product_id($product);
-							polen_front_get_card($item_data, "responsive");
+							if( !empty( $product ) && !is_wp_error( $product ) ) {
+								$item_data = _polen_get_info_talent_by_product_id($product);
+								polen_front_get_card($item_data, "responsive");
+							}
 
 							/**
 							 * Run the loop for the search to output the results.
