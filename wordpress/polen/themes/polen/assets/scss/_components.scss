@@ -1,3 +1,39 @@
+.button-no-bg {
+	height: 100%;
+	color: var(--dark);
+	border: none;
+	background: none;
+	outline: transparent;
+	&.black {
+		color: var(--dark) !important;
+	}
+	.icon {
+		font-size: 20px;
+	}
+}
+
+.home .button-no-bg {
+	color: var(--light);
+}
+
+.search-box {
+	position: fixed;
+	width: 100vw;
+	height: 0;
+	top: 0;
+	left: 0;
+	box-sizing: border-box;
+	background-color: rgba($color: #ffffff, $alpha: 0.9);
+	overflow: hidden;
+	opacity: 0;
+	z-index: 9997;
+	transition: opacity 250ms ease;
+	&.show {
+		height: 100vh;
+		opacity: 1;
+	}
+}
+
 .spinner-border {
 	border-right-color: $light-100;
 }
