@@ -50,11 +50,7 @@ $donate_text = stripslashes(get_post_meta(get_the_ID(), '_description_charity', 
 // $social = social_product_is_social($product, social_get_category_base()); //Antigo CRIESP
 
 $histories_enabled = $Polen_Plugin_Settings['polen_histories_on'];
-if($histories_enabled == 1) {
-	$social = true;
-} else {
-	$social = Social_Base_Product::product_is_social_base( $product );
-}
+$social = Social_Base_Product::product_is_social_base( $product );
 
 // outofstock
 // instock
@@ -86,8 +82,8 @@ if( 'instock' == $product->get_stock_status() ) {
 
 	<!-- Tags -->
 	<div class="row">
-		<div class="col-12<?php echo $social ? ' col-md-6 m-md-auto' : ''; ?> d-flex align-items-center">
-			<?php $social && polen_front_get_talent_stories(); ?>
+		<div class="col-12<?php echo $histories_enabled ? ' col-md-6 m-md-auto' : ''; ?> d-flex align-items-center">
+			<?php $histories_enabled && polen_front_get_talent_stories(); ?>
 			<div>
 				<h1 class="talent-name" title="<?= get_the_title(); ?>"><?= get_the_title(); ?></h1>
 				<?php if($social) : ?>
@@ -108,7 +104,7 @@ if( 'instock' == $product->get_stock_status() ) {
 			<?php polen_get_share_button(); ?>
 		</div>
 		<div class="col-12 mt-3">
-			<?php $social || polen_front_get_talent_videos($Talent_Fields); ?>
+			<?php $histories_enabled || polen_front_get_talent_videos($Talent_Fields); ?>
 		</div>
 	</div>
 
