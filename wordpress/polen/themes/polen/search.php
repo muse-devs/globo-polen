@@ -8,8 +8,6 @@
  * @package Polen
  */
 
-use Polen\Includes\Debug;
-
 get_header();
 global $wp_query;
 ?>
