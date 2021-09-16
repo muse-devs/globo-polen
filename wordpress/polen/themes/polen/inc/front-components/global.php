@@ -176,7 +176,7 @@ function polen_front_get_card($item, $size = "small", $social = false)
 	}
 
 	if (isset($item['ID'])) {
-		$image = wp_get_attachment_image_src(get_post_thumbnail_id($item['ID']), 'polen-thumb-lg');
+		$image_data = polen_get_thumbnail($item['ID']);
 	} else {
 		$image = array();
 		$image[] = '';
@@ -192,7 +192,7 @@ function polen_front_get_card($item, $size = "small", $social = false)
 				} elseif ($donate == 'yes') {
 					polen_donate_badge("Social", true, false, false);
 				} ?>
-				<img loading="lazy" src="<?php echo $image[0]; ?>" alt="<?= $item["name"]; ?>">
+				<img loading="lazy" src="<?php echo $image_data["image"]; ?>" alt="<?php echo $image_data["alt"]; ?>">
 				<?php if (!$social) : ?>
 					<div class="price text-right" itemprop="price">
 						<?php if ($item['in_stock']) : ?>
