@@ -69,3 +69,11 @@ function polen_is_landingpage()
 	global $lp_sigin_lead;
 	return isset($lp_sigin_lead) && $lp_sigin_lead === true;
 }
+
+function polen_get_thumbnail($post_id)
+{
+	$attach_id = get_post_thumbnail_id($post_id);
+	$image = wp_get_attachment_image_src($attach_id, 'polen-thumb-lg')[0];
+	$image_alt = get_post_meta( $attach_id, '_wp_attachment_image_alt', true);
+	return array("image" => $image, "alt" => $image_alt);
+}
