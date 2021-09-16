@@ -78,6 +78,7 @@ if (
 		global $is_video;
 		$tribute_app = get_query_var(Tributes_Rewrite_Rules::TRIBUTES_QUERY_VAR_TRUBITES_APP);
 		$social_app = get_query_var(Social_Base_Rewrite::QUERY_VARS_SOCIAL_APP);
+		$queried_object = polen_queried_object();
 
 		$video_hash = get_query_var('video_hash');
 
@@ -108,6 +109,12 @@ if (
 
 			$headers['title'] = 'Videos personalizados do seu artista favorito, do seu jeito!';
 			$headers['description'] = 'Experimente um novo jeito de se relacionar através de videos personalizados. Emocione com videos personalizados de famosos.';
+
+			// Página de categorias e tags /categoria /tag
+		} elseif ($queried_object) {
+
+			$headers["title"] = "Fãs de {$queried_object->name}, encontre aqui os seus vídeos personalizados.";
+			$headers["description"] = "Você é fã de {$queried_object->name}? Qual o seu ídolo? Garanta já seu vídeo personalizado ou presentei e surpreenda alguém.";
 
 			// Página do Video player - /v
 		} elseif ($is_video === true && !empty($video_hash)) {
