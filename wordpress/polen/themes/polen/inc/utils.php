@@ -77,3 +77,9 @@ function polen_get_thumbnail($post_id)
 	$image_alt = get_post_meta( $attach_id, '_wp_attachment_image_alt', true);
 	return array("image" => $image, "alt" => $image_alt);
 }
+
+function polen_queried_object()
+{
+	$queried_object = get_queried_object();
+	return in_array($queried_object->taxonomy, array("product_cat", "product_tag")) ? $queried_object : null;
+}

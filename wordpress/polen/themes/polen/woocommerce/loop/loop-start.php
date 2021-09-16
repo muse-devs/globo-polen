@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Product Loop Start
  *
@@ -15,17 +16,21 @@
  * @version     3.3.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (!defined('ABSPATH')) {
 	exit;
 }
+
+$obj = polen_queried_object();
+$title = $obj ? "{$obj->name}: " : "";
+
 ?>
 <div class="clear"></div>
 <div class="row my-3">
 	<div class="col-12">
-		<h1>Escolha seu ídolo e garanta seu video personalizado.</h1>
+		<h1><?php echo $title; ?>Escolha seu ídolo e garanta seu video personalizado.</h1>
 	</div>
 </div>
 <section class="row my-4 card-list">
-<div class="col-md-12 p-0 p-md-0">
-	<div class="banner-wrapper">
-		<div class="banner-content">
+	<div class="col-md-12 p-0 p-md-0">
+		<div class="banner-wrapper">
+			<div class="banner-content">
