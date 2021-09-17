@@ -7,7 +7,7 @@
 
 /***/ }),
 
-/***/ 595:
+/***/ 598:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -30,7 +30,7 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 
-const CustomizableDashboard = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["lazy"])(() => __webpack_require__.e(/* import() | customizable-dashboard */ 24).then(__webpack_require__.bind(null, 593)));
+const CustomizableDashboard = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["lazy"])(() => __webpack_require__.e(/* import() | customizable-dashboard */ 24).then(__webpack_require__.bind(null, 596)));
 
 class Dashboard extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   render() {

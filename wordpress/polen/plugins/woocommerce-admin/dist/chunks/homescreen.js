@@ -40,7 +40,7 @@ const CurrencyContext = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["
 
 /***/ }),
 
-/***/ 506:
+/***/ 504:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -100,7 +100,7 @@ var external_wc_components_ = __webpack_require__(21);
 var external_wp_components_ = __webpack_require__(4);
 
 // EXTERNAL MODULE: ./client/header/activity-panel/activity-card/style.scss
-var style = __webpack_require__(519);
+var style = __webpack_require__(518);
 
 // EXTERNAL MODULE: external "lodash"
 var external_lodash_ = __webpack_require__(3);
@@ -349,7 +349,7 @@ const sift = (arr, partitioner) => arr.reduce((all, curr) => {
 
 /***/ }),
 
-/***/ 517:
+/***/ 516:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -363,7 +363,7 @@ const sift = (arr, partitioner) => arr.reduce((all, curr) => {
 /* harmony import */ var _woocommerce_experimental__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_experimental__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _woocommerce_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(21);
 /* harmony import */ var _woocommerce_components__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_components__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(518);
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(517);
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_5__);
 
 
@@ -436,6 +436,13 @@ ActivityHeader.propTypes = {
 
 /***/ }),
 
+/***/ 517:
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
 /***/ 518:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -444,13 +451,6 @@ ActivityHeader.propTypes = {
 /***/ }),
 
 /***/ 519:
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-
-/***/ 520:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -473,7 +473,7 @@ ActivityHeader.propTypes = {
 /* harmony import */ var _header_activity_panel_activity_card__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(508);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(164);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(513);
-/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(521);
+/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(520);
 /* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_index_scss__WEBPACK_IMPORTED_MODULE_12__);
 
 
@@ -727,14 +727,14 @@ const InboxPanel = () => {
 
 /***/ }),
 
-/***/ 521:
+/***/ 520:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ 522:
+/***/ 521:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1462,7 +1462,7 @@ var _extends=Object.assign||function(a){for(var c,b=1;b<arguments.length;b++)for
 
 /***/ }),
 
-/***/ 601:
+/***/ 604:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1502,7 +1502,7 @@ var prop_types_default = /*#__PURE__*/__webpack_require__.n(prop_types);
 var external_wp_i18n_ = __webpack_require__(2);
 
 // EXTERNAL MODULE: ./client/header/activity-panel/activity-header/index.js
-var activity_header = __webpack_require__(517);
+var activity_header = __webpack_require__(516);
 
 // EXTERNAL MODULE: external ["wc","components"]
 var external_wc_components_ = __webpack_require__(21);
@@ -1680,7 +1680,7 @@ function OrdersPanel({
     _fields: ['id', 'number', 'status', 'total_formatted', 'customer', 'products', 'customer_id', 'date_created_gmt']
   }), [orderStatuses]);
   const {
-    orders,
+    orders = [],
     isRequesting,
     isError
   } = Object(external_wp_data_["useSelect"])(select => {
@@ -2203,7 +2203,7 @@ var reviews_style = __webpack_require__(547);
 var currency_context = __webpack_require__(497);
 
 // EXTERNAL MODULE: ./client/lib/sanitize-html/index.js
-var sanitize_html = __webpack_require__(506);
+var sanitize_html = __webpack_require__(504);
 
 // EXTERNAL MODULE: ./client/homescreen/activity-panel/reviews/utils.js
 var reviews_utils = __webpack_require__(102);
@@ -2763,7 +2763,7 @@ const Column = ({
   }, children);
 };
 // EXTERNAL MODULE: ./client/inbox-panel/index.js
-var inbox_panel = __webpack_require__(520);
+var inbox_panel = __webpack_require__(519);
 
 // EXTERNAL MODULE: external ["wc","experimental"]
 var external_wc_experimental_ = __webpack_require__(20);
@@ -2919,7 +2919,7 @@ var external_wp_hooks_ = __webpack_require__(30);
 const DEFAULT_STATS = Object(external_wp_hooks_["applyFilters"])('woocommerce_admin_homepage_default_stats', ['revenue/total_sales', 'revenue/net_revenue', 'orders/orders_count', 'products/items_sold', 'jetpack/stats/visitors', 'jetpack/stats/views']);
 const DEFAULT_HIDDEN_STATS = ['revenue/net_revenue', 'products/items_sold'];
 // EXTERNAL MODULE: ./client/dashboard/store-performance/utils.js
-var store_performance_utils = __webpack_require__(522);
+var store_performance_utils = __webpack_require__(521);
 
 // CONCATENATED MODULE: ./client/homescreen/stats-overview/stats-list.js
 
@@ -3492,7 +3492,7 @@ const StatsOverview = () => {
         onInvoke: () => toggleStat(item.stat)
       }, item.label);
     }))
-  })), Object(external_wp_element_["createElement"])(external_wp_components_["CardBody"], null, Object(external_wp_element_["createElement"])(external_wp_components_["TabPanel"], {
+  })), Object(external_wp_element_["createElement"])(external_wp_components_["TabPanel"], {
     className: "woocommerce-stats-overview__tabs",
     onSelect: period => {
       Object(external_wc_tracks_["recordEvent"])('statsoverview_date_picker_update', {
@@ -3515,7 +3515,7 @@ const StatsOverview = () => {
       compare: 'previous_period'
     },
     stats: activeStats
-  })))), Object(external_wp_element_["createElement"])(external_wp_components_["CardFooter"], null, Object(external_wp_element_["createElement"])(external_wc_components_["Link"], {
+  }))), Object(external_wp_element_["createElement"])(external_wp_components_["CardFooter"], null, Object(external_wp_element_["createElement"])(external_wc_components_["Link"], {
     className: "woocommerce-stats-overview__more-btn",
     href: Object(external_wc_navigation_["getNewPath"])({}, '/analytics/overview'),
     type: "wc-admin",
@@ -3977,7 +3977,7 @@ var dashboard_style = __webpack_require__(512);
 
 
 
-const TaskList = Object(external_wp_element_["lazy"])(() => Promise.all(/* import() | task-list */[__webpack_require__.e(1), __webpack_require__.e(49)]).then(__webpack_require__.bind(null, 600)));
+const TaskList = Object(external_wp_element_["lazy"])(() => Promise.all(/* import() | task-list */[__webpack_require__.e(3), __webpack_require__.e(49)]).then(__webpack_require__.bind(null, 603)));
 const Layout = ({
   defaultHomescreenLayout,
   isBatchUpdating,

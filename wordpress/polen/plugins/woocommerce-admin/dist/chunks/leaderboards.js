@@ -58,7 +58,7 @@ ReportError.propTypes = {
 
 /***/ }),
 
-/***/ 506:
+/***/ 504:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -83,21 +83,21 @@ const ALLOWED_ATTR = ['target', 'href', 'rel', 'name', 'download'];
 
 /***/ }),
 
-/***/ 590:
+/***/ 593:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ 591:
+/***/ 594:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ 608:
+/***/ 611:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -145,10 +145,10 @@ var external_wc_experimental_ = __webpack_require__(20);
 var report_error = __webpack_require__(500);
 
 // EXTERNAL MODULE: ./client/lib/sanitize-html/index.js
-var sanitize_html = __webpack_require__(506);
+var sanitize_html = __webpack_require__(504);
 
 // EXTERNAL MODULE: ./client/analytics/components/leaderboard/style.scss
-var style = __webpack_require__(590);
+var style = __webpack_require__(593);
 
 // CONCATENATED MODULE: ./client/analytics/components/leaderboard/index.js
 
@@ -310,7 +310,7 @@ leaderboard_Leaderboard.defaultProps = {
   return leaderboardData;
 }))(leaderboard_Leaderboard));
 // EXTERNAL MODULE: ./client/dashboard/leaderboards/style.scss
-var leaderboards_style = __webpack_require__(591);
+var leaderboards_style = __webpack_require__(594);
 
 // CONCATENATED MODULE: ./client/dashboard/leaderboards/index.js
 

@@ -35,7 +35,7 @@ msgstr "Continuar"
 msgid "Template Editing"
 msgstr "Edição de modelos"
 
-#: wp-admin/about.php:75
+#: wp-admin/about.php:108
 msgid "The Query Loop Block makes it possible to display posts based on specified parameters; like a PHP loop without the code. Easily display posts from a specific category, to do things like create a portfolio or a page full of your favorite recipes. Think of it as a more complex and powerful Latest Posts Block! Plus, pattern suggestions make it easier than ever to create a list of posts with the design you want."
 msgstr "O bloco de loop de consulta possibilita exibir posts baseados em parâmetros específicos; como uma consulta PHP, sem a necessidade de código. Selecione posts de uma categoria específica, faça coisas como criar um portfólio ou uma página repleta de suas receitas preferidas. Pense nele como algo mais complexo e poderoso que o bloco de posts mais recentes! E mais, sugestões automáticas fazem ser mais fácil do que nunca criar uma lista de posts com o layout que você quiser."
 
@@ -92,94 +92,94 @@ msgstr "O WordPress 5.8 foi criado por uma equipe mundial de entusiastas"
 
 #. translators: %1$s: Link to 5.6's block dev notes. %2$s: Link to 5.7's block
 #. dev notes. %3$s: Link to 5.8's block dev notes.
-#: wp-admin/about.php:219
+#: wp-admin/about.php:252
 msgid "Expanding on previously implemented block supports in WordPress <a href=\"%1$s\">5.6</a> and <a href=\"%2$s\">5.7</a>, WordPress 5.8 introduces several new block support flags and new options to customize your registered blocks. More information is available in the <a href=\"%3$s\">block supports dev note</a>."
 msgstr "Ampliando a compatibilidade dos blocos, implementada anteriormente no WordPress <a href=\"%1$s\">5.6</a> e <a href=\"%2$s\">5.7</a>, o WordPress 5.8 apresenta vários novos indicadores e novas opcões para personalizar seus blocos. Mais informações estão disponíveis nas <a href=\"%3$s\">notas de desenvolvimento dos blocos</a>."
 
-#: wp-admin/about.php:213
+#: wp-admin/about.php:246
 msgid "Adding Additional Block Supports"
 msgstr "Suporte para blocos adicionais"
 
-#: wp-admin/about.php:207
+#: wp-admin/about.php:240
 msgid "WebP is a modern image format that provides improved lossless and lossy compression for images on the web. WebP images are around 30% smaller on average than their JPEG or PNG equivalents, resulting in sites that are faster and use less bandwidth."
 msgstr "WebP é um formato de imagem moderno, que proporciona uma compressão melhorada, com pouca ou mesmo sem perdas, para imagens na Web. Os arquivos WebP são cerca de 30% menores que seus equivalentes em JPEG ou PNG, resultando em sites que são mais rápidos e que usam menos banda para carregar."
 
-#: wp-admin/about.php:203
+#: wp-admin/about.php:236
 msgid "Adding support for WebP"
 msgstr "Suporte a WebP"
 
 #. translators: %s: Link to Browse Happy.
-#: wp-admin/about.php:195
+#: wp-admin/about.php:228
 msgid "Support for Internet Explorer 11 has been dropped as of this release. This means you may have issues managing your site that will not be fixed in the future. If you are currently using IE11, it is strongly recommended that you <a href=\"%s\">switch to a more modern browser</a>."
 msgstr "O suporte ao Internet Explorer 11 foi removido a partir desta versão. Isto significa que você poderá ter problemas na administração de seu site, que não serão corrigidos no futuro. Se você ainda está usando IE11, recomendamos fortemente que você <a href=\"%s\">mude para um navegador mais moderno</a>.  "
 
-#: wp-admin/about.php:189
+#: wp-admin/about.php:222
 msgid "Dropping support for Internet Explorer 11"
 msgstr "Removida a compatibilidade com o Internet Explorer 11"
 
 #. translators: %s: Theme.json dev note link.
-#: wp-admin/about.php:178
+#: wp-admin/about.php:211
 msgid "Introducing the Global Styles and Global Settings APIs: control the editor settings, available customization tools, and style blocks using a theme.json file in the active theme. This configuration file enables or disables features and sets default styles for both a website and blocks. If you build themes, you can experiment with this early iteration of a useful new feature. For more about what is currently available and how it works, <a href=\"%s\">check out this dev note</a>."
 msgstr "Apresentando as APIs de configurações e estilos globais: controle as configurações, ferramentas de personalização disponíveis e blocos de estilo do editor usando o arquivo theme.json no tema ativo. Este arquivo de configurações ativa ou desativa recursos e define os estilos padrão tanto para um site ou para blocos. Se você desenvolve temas, pode experimentar esta versão inicial de um novo e útil recurso. Para mais informações do que está disponível no momento e como funciona, consulte estas <a href=\"%s\">notas para desenvolvedores</a>."
 
-#: wp-admin/about.php:172
+#: wp-admin/about.php:205
 msgid "Theme.json"
 msgstr "Theme.json"
 
-#: wp-admin/about.php:159
+#: wp-admin/about.php:192
 msgid "For Developers to Explore"
 msgstr "Para os desenvolvedores explorarem"
 
-#: wp-admin/about.php:149
+#: wp-admin/about.php:182
 msgid "Colorize your image and cover blocks with duotone filters! Duotone can add a pop of color to your designs and style your images (or videos in the cover block) to integrate well with your themes. You can think of the duotone effect as a black and white filter, but instead of the shadows being black and the highlights being white, you pick your own colors for the shadows and highlights. There’s more to learn about how it works in the documentation."
 msgstr "Dê cor as suas imagens e blocos de cobertura com filtros de bicromia! Este filtro pode agregar um toque de cor a seu projeto e estilizar suas imagens (ou vídeos, quando usar o bloco de cobertura) para integrar-se melhor a seus temas. Você pode pensar no efeito de bicromia como um filtro em preto-e-branco, mas em vez das sombras serem pretas e as luzes brancas, você escolhe as cores de sua preferência para as sombras e para as luzes. Você pode aprender mais sobre como funciona consultando a documentação."
 
-#: wp-admin/about.php:145
+#: wp-admin/about.php:178
 msgid "Style and Colorize Images"
 msgstr "Estilize e colorize imagens"
 
-#: wp-admin/about.php:130
+#: wp-admin/about.php:163
 msgid "Starting in this release the Pattern Transformations tool will suggest block patterns based on the block you are using. Right now, you can give it a try in the Query Block and Social Icon Block. As more patterns are added, you will be able to get inspiration for how to style your site without ever leaving the editor!"
 msgstr "A partir desta versão, a ferramenta Transformações de Padrões irá sugerir padrões de bloco com base no bloco que se está usando. Agora você pode experimentá-la nos blocos de consulta e redes sociais. À medida que mais padrões forem adicionados, você poderá obter inspiração em como estruturar seu site, sem sair do editor!"
 
-#: wp-admin/about.php:126
+#: wp-admin/about.php:159
 msgid "Suggested Patterns for Blocks"
 msgstr "Padrões sugeridos para blocos"
 
-#: wp-admin/about.php:117
+#: wp-admin/about.php:150
 msgid "Sometimes you need a simple landing page, but sometimes you need something a little more robust. As blocks increase, patterns emerge, and content creation gets easier, new solutions are needed to make complex content easy to navigate. List View is the best way to jump between layers of content and nested blocks. Since the List View gives you an overview of all the blocks in your content, you can now navigate quickly to the precise block you need. Ready to focus completely on your content? Toggle it on or off to suit your workflow."
 msgstr "Às vezes, você precisa de uma simples página de chegada, mas outras vezes, você precisa de algo um pouco mais robusto. À medida que temos mais blocos, os padrões se estabelecem e a criação de conteúdo fica mais fácil, novas soluções são necessárias para tornar fácil a navegação por conteúdos mais complexos. A Visão por Lista é a melhor maneira de pular entre camadas de conteúdo e blocos aninhados. Ela lhe dá uma resumo de todos os blocos em seu conteúdo para você navegar rapidamente para o bloco exato que precisa. Pronto para focar completamente em seu conteúdo? Ative ou desative a Visão por Lista para se adequar a seu fluxo de trabalho."
 
-#: wp-admin/about.php:113
+#: wp-admin/about.php:146
 msgid "Overview of the Page Structure"
 msgstr "Resumo da estrutura da página"
 
-#: wp-admin/about.php:103
+#: wp-admin/about.php:136
 msgid "Three Workflow Helpers"
 msgstr "Três assistentes para o fluxo de trabalho"
 
-#: wp-admin/about.php:93
+#: wp-admin/about.php:126
 msgid "You can use the familiar block editor to edit templates that hold your content—simply activate a block theme or a theme that has opted in for this feature. Switch from editing your posts to editing your pages and back again, all while using a familiar block editor. There are more than 20 new blocks available within compatible themes. Read more about this feature and how to experiment with it in the release notes."
 msgstr "Você pode usar o conhecido editor de blocos para editar os modelos que abarcam seu conteúdo: simplesmente ative um tema de blocos ou um tema que optou por incluir este recurso. Alterne entre a edição de posts para a edição de páginas e vice-versa, tudo usando o conhecido editor de blocos. Há mais de 20 novos blocos disponíveis dentro de temas compatíveis. Leia mais sobre esse recurso e como experimentá-lo nas notas da versão."
 
-#: wp-admin/about.php:89
+#: wp-admin/about.php:122
 msgid "Edit the Templates Around Posts"
 msgstr "Edite os modelos junto com os posts"
 
-#: wp-admin/about.php:72
+#: wp-admin/about.php:105
 msgid "Display Posts with New Blocks and Patterns"
 msgstr "Exiba posts com novos blocos e padrões"
 
 #. translators: %s: Widgets dev note link.
-#: wp-admin/about.php:61
+#: wp-admin/about.php:94
 msgid "After months of hard work, the power of blocks has come to both the Block Widgets Editor and the Customizer. Now you can add blocks both in widget areas across your site and with live preview through the Customizer. This opens up new possibilities to create content: from no-code mini layouts to the vast library of core and third-party blocks. For our developers, you can find more details in the <a href=\"%s\">Widgets dev note</a>."
 msgstr "Depois de meses de trabalho duro, o poder dos blocos chegou ao editor de blocos de widgets e ao Personalizador. Agora você pode adicionar blocos nas áreas de widgets do seu site, com pré-visualização no Personalizador. Isto abre novas possibilidades para criar conteúdo: desde pequenos layouts sem a necessidade de código, até uma ampla biblioteca de blocos básicos e de terceiros. Para os nossos desenvolvedores: você pode encontrar mais detalhes nas <a href=\"%s\">notas sobre desenvolvimento de widgets</a>."
 
-#: wp-admin/about.php:55
+#: wp-admin/about.php:88
 msgid "Manage Widgets with Blocks"
 msgstr "Administre seus widgets com blocos"
 
-#: wp-admin/about.php:45
+#: wp-admin/about.php:78
 msgid "Three Essential Powerhouses"
 msgstr "Três pilares essenciais"
 
@@ -688,7 +688,7 @@ msgid "https://developer.wordpress.org/rest-api/frequently-asked-questions/#why-
 msgstr "https://developer.wordpress.org/rest-api/frequently-asked-questions/#why-is-authentication-not-working"
 
 #. translators: %s: WordPress 5.8 Field Guide link.
-#: wp-admin/about.php:238
+#: wp-admin/about.php:271
 msgid "Check out the latest version of the WordPress Field Guide. It highlights developer notes for each change you may want to be aware of. <a href=\"%s\">WordPress 5.8 Field Guide.</a>"
 msgstr "Confira a versão mais recente do Guia de campo do WordPress. Ele destaca as notas para desenvolvedores para cada mudança que você deseja conhecer.<a href=\"%s\">Guia de campo do WordPress 5.8.</a>"
 
@@ -759,7 +759,7 @@ msgstr "Adicionar nova senha de aplicativo"
 msgid "Required to create an Application Password, but not to update the user."
 msgstr "Obrigatório para criar uma senha de aplicação, mas não para atualizar o usuário."
 
-#: wp-admin/about.php:251
+#: wp-admin/about.php:284
 msgid "Go to Updates"
 msgstr "Ir para atualizações"
 
@@ -1116,7 +1116,7 @@ msgstr "O valor \"%1$s\" é menor do que \"%2$s\"."
 msgid "Environment type"
 msgstr "Tipo de ambiente"
 
-#: wp-admin/about.php:233
+#: wp-admin/about.php:266
 msgid "Check the Field Guide for more!"
 msgstr "Consulte o guia de campo para mais informações!"
 
@@ -4144,9 +4144,10 @@ msgctxt "plugin"
 msgid "Cannot Install"
 msgstr "Não é possível instalar"
 
+#. translators: %s: WordPress version
 #. translators: %s: WordPress version.
-#: wp-admin/includes/update.php:302 wp-admin/install.php:238
-#: wp-admin/update-core.php:92 wp-admin/upgrade.php:80
+#: wp-admin/about.php:65 wp-admin/includes/update.php:302
+#: wp-admin/install.php:238 wp-admin/update-core.php:92 wp-admin/upgrade.php:80
 msgid "https://wordpress.org/support/wordpress-version/version-%s/"
 msgstr "https://wordpress.org/support/wordpress-version/version-%s/"
 
@@ -6561,7 +6562,7 @@ msgid "(Currently set to: %s)"
 msgstr "(Atualmente definido como: %s) "
 
 #. translators: %s: WordPress version number.
-#: wp-admin/about.php:275
+#: wp-admin/about.php:308
 msgid "<strong>Version %s</strong> addressed one security issue."
 msgstr "A <strong>versão %s</strong> resolveu um problema de segurança."
 
@@ -6573,15 +6574,15 @@ msgstr "https://br.gravatar.com/"
 msgid "Profile Picture"
 msgstr "Foto do perfil"
 
-#: wp-admin/about.php:272
+#: wp-admin/about.php:45 wp-admin/about.php:305
 msgid "Maintenance and Security Releases"
 msgstr "Versões de segurança e manutenção"
 
-#: wp-admin/about.php:269
+#: wp-admin/about.php:302
 msgid "Security Releases"
 msgstr "Atualizações de segurança"
 
-#: wp-admin/about.php:266
+#: wp-admin/about.php:299
 msgid "Maintenance Releases"
 msgstr "Versões de manutenção"
 
@@ -10041,29 +10042,31 @@ msgstr "Digite o endereço de e-mail de um usuário existente nesta rede para co
 msgid "Show Toolbar when viewing site"
 msgstr "Mostrar a barra de ferramentas ao ver site"
 
+#. translators: %s: HelpHub URL
 #. translators: %s: Documentation URL.
-#: wp-admin/about.php:298
+#: wp-admin/about.php:62 wp-admin/about.php:331
 msgid "For more information, see <a href=\"%s\">the release notes</a>."
 msgstr "Para mais informações, veja <a href=\"%s\">as notas de lançamento</a>."
 
 #. translators: 1: WordPress version number, 2: Plural number of bugs. More
 #. than one security issue.
-#: wp-admin/about.php:292
+#: wp-admin/about.php:325
 msgid "<strong>Version %1$s</strong> addressed some security issues and fixed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed some security issues and fixed %2$s bugs."
 msgstr[0] "A <strong>versão %1$s</strong> corrigiu alguns problemas de segurança e %2$s bug."
 msgstr[1] "A <strong>versão %1$s</strong> corrigiu alguns problemas de segurança e %2$s bugs."
 
+#. translators: 1: WordPress version number, 2: plural number of bugs.
 #. translators: 1: WordPress version number, 2: Plural number of bugs. Singular
 #. security issue.
-#: wp-admin/about.php:286
+#: wp-admin/about.php:50 wp-admin/about.php:319
 msgid "<strong>Version %1$s</strong> addressed a security issue and fixed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed a security issue and fixed %2$s bugs."
 msgstr[0] "A <strong>versão %1$s</strong> corrigiu um problema de segurança e %2$s bug."
 msgstr[1] "A <strong>versão %1$s</strong> corrigiu um problema de segurança e %2$s bugs."
 
 #. translators: 1: WordPress version number, 2: Plural number of bugs.
-#: wp-admin/about.php:280
+#: wp-admin/about.php:313
 msgid "<strong>Version %1$s</strong> addressed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed %2$s bugs."
 msgstr[0] "A <strong>versão %1$s</strong> corrigiu %2$s bug."
@@ -10074,19 +10077,19 @@ msgid "Welcome to your WordPress Dashboard! This is the screen you will see when
 msgstr "Boas-vindas ao Painel do seu WordPress! Esta é a tela que você vai ver quando acessar seu site e que permite ver todos os recursos de gerenciamento do WordPress. Você pode obter ajuda em qualquer tela clicando na aba Ajuda acima do título da tela."
 
 #. translators: %s: WordPress version number.
-#: wp-admin/about.php:277
+#: wp-admin/about.php:310
 msgid "<strong>Version %s</strong> addressed some security issues."
 msgstr "A <strong>versão %s</strong> corrigiu alguns problemas de segurança."
 
-#: wp-admin/about.php:271
+#: wp-admin/about.php:304
 msgid "Maintenance and Security Release"
 msgstr "Versão de segurança e manutenção"
 
-#: wp-admin/about.php:268
+#: wp-admin/about.php:301
 msgid "Security Release"
 msgstr "Versão de segurança"
 
-#: wp-admin/about.php:265
+#: wp-admin/about.php:298
 msgid "Maintenance Release"
 msgstr "Versão de manutenção"
 
@@ -10371,11 +10374,11 @@ msgstr "<strong>Editar</strong> leva você para a tela de edição para esse pos
 msgid "Because this is a multisite installation, you may add accounts that already exist on the Network by specifying a username or email, and defining a role. For more options, such as specifying a password, you have to be a Network Administrator and use the hover link under an existing user&#8217;s name to Edit the user profile under Network Admin > All Users."
 msgstr "Porque esta é uma instalação multisite, você pode adicionar contas que já existem na rede, especificando um nome de usuário ou e-mail e definindo o seu papel. Para obter mais opções, como especificar uma senha, você tem que ser um administrador de rede e use o link sob o nome de um usuário existente para editar o perfil do usuário em Administração de Rede > Todos os Usuários."
 
-#: wp-admin/about.php:254
+#: wp-admin/about.php:287
 msgid "Go to Dashboard &rarr; Home"
 msgstr "Ir para Painel &rarr; Início"
 
-#: wp-admin/about.php:251
+#: wp-admin/about.php:284
 msgid "Go to Dashboard &rarr; Updates"
 msgstr "Ir para o Painel &rarr; Atualizações"
 
@@ -12187,7 +12190,7 @@ msgstr "Atualizações do WordPress"
 msgid "Edit menu item"
 msgstr "Editar item do menu"
 
-#: wp-admin/about.php:254 wp-admin/includes/network.php:148
+#: wp-admin/about.php:287 wp-admin/includes/network.php:148
 msgid "Go to Dashboard"
 msgstr "Ir para o painel"
 
