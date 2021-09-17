@@ -246,7 +246,7 @@ const BetaFeaturesTrackingModal = ({
     onRequestClose: () => setIsModalOpen(false),
     className: "woocommerce-beta-features-tracking-modal"
   }, Object(external_wp_element_["createElement"])("p", null, Object(external_wp_i18n_["__"])('Testing new features requires sharing non-sensitive data via ', 'woocommerce-admin'), Object(external_wp_element_["createElement"])("a", {
-    href: "https://woocommerce.com/usage-tracking"
+    href: "https://woocommerce.com/usage-tracking?utm_medium=product"
   }, Object(external_wp_i18n_["__"])('usage tracking', 'woocommerce-admin')), Object(external_wp_i18n_["__"])('. Gathering usage data allows us to make WooCommerce better — your store will be considered as we evaluate new features, judge the quality of an update, or determine if an improvement makes sense. No personal data is tracked or stored and you can opt-out at any time.', 'woocommerce-admin')), Object(external_wp_element_["createElement"])("div", {
     className: "woocommerce-beta-features-tracking-modal__checkbox"
   }, Object(external_wp_element_["createElement"])(external_wp_components_["CheckboxControl"], {

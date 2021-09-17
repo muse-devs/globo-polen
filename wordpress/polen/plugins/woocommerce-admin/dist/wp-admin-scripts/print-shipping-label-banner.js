@@ -1251,7 +1251,7 @@ class shipping_banner_ShippingBanner extends external_wp_element_["Component"] {
           type: "external"
         }),
         wcsLink: Object(external_wp_element_["createElement"])(external_wp_components_["ExternalLink"], {
-          href: "https://woocommerce.com/products/shipping/",
+          href: "https://woocommerce.com/products/shipping/?utm_medium=product",
           target: "_blank",
           type: "external",
           onClick: this.woocommerceServiceLinkClicked

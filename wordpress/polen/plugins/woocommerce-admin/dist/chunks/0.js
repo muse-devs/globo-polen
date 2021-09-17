@@ -404,10 +404,9 @@ var report_error = __webpack_require__(500);
  * External dependencies
  */
 
-function extendTableData(select, props, queriedTableData) {
+function extendTableData(extendedStoreSelector, props, queriedTableData) {
   const {
     extendItemsMethodNames,
-    extendedItemsStoreName,
     itemIdField
   } = props;
   const itemsData = queriedTableData.items.data;
@@ -420,7 +419,7 @@ function extendTableData(select, props, queriedTableData) {
     [extendItemsMethodNames.getError]: getErrorMethod,
     [extendItemsMethodNames.isRequesting]: isRequestingMethod,
     [extendItemsMethodNames.load]: loadMethod
-  } = select(extendedItemsStoreName);
+  } = extendedStoreSelector;
   const extendQuery = {
     include: itemsData.map(item => item[itemIdField]).join(','),
     per_page: itemsData.length
@@ -448,7 +447,7 @@ function extendTableData(select, props, queriedTableData) {
 var constants = __webpack_require__(53);
 
 // EXTERNAL MODULE: ./client/analytics/components/report-table/style.scss
-var style = __webpack_require__(510);
+var style = __webpack_require__(511);
 
 // CONCATENATED MODULE: ./client/analytics/components/report-table/index.js
 
@@ -975,23 +974,28 @@ const EMPTY_OBJECT = {};
     tableQuery,
     filters,
     advancedFilters,
-    summaryFields
+    summaryFields,
+    extendedItemsStoreName
   } = props;
+  /* eslint @wordpress/no-unused-vars-before-return: "off" */
 
-  if (isRequesting || query.search && !(query[endpoint] && query[endpoint].length)) {
-    return EMPTY_OBJECT;
-  }
-
+  const reportStoreSelector = select(external_wc_data_["REPORTS_STORE_NAME"]);
+  const extendedStoreSelector = extendedItemsStoreName ? select(extendedItemsStoreName) : null;
   const {
     woocommerce_default_date_range: defaultDateRange
-  } = select(external_wc_data_["SETTINGS_STORE_NAME"]).getSetting('wc_admin', 'wcAdminSettings'); // Category charts are powered by the /reports/products/stats endpoint.
+  } = select(external_wc_data_["SETTINGS_STORE_NAME"]).getSetting('wc_admin', 'wcAdminSettings');
+
+  if (isRequesting) {
+    return EMPTY_OBJECT;
+  } // Category charts are powered by the /reports/products/stats endpoint.
+
 
   const chartEndpoint = endpoint === 'categories' ? 'products' : endpoint;
   const primaryData = getSummary ? Object(external_wc_data_["getReportChartData"])({
     endpoint: chartEndpoint,
+    selector: reportStoreSelector,
     dataType: 'primary',
     query,
-    select,
     filters,
     advancedFilters,
     defaultDateRange,
@@ -1000,13 +1004,13 @@ const EMPTY_OBJECT = {};
   const queriedTableData = tableData || Object(external_wc_data_["getReportTableData"])({
     endpoint,
     query,
-    select,
+    selector: reportStoreSelector,
     tableQuery,
     filters,
     advancedFilters,
     defaultDateRange
   });
-  const extendedTableData = extendTableData(select, props, queriedTableData);
+  const extendedTableData = extendedStoreSelector ? extendTableData(extendedStoreSelector, props, queriedTableData) : queriedTableData;
   return {
     primaryData,
     ids: itemIdField && extendedTableData.items.data ? extendedTableData.items.data.map(item => item[itemIdField]) : EMPTY_ARRAY,
@@ -1428,6 +1432,9 @@ report_chart_ReportChart.defaultProps = {
   const {
     woocommerce_default_date_range: defaultDateRange
   } = select(external_wc_data_["SETTINGS_STORE_NAME"]).getSetting('wc_admin', 'wcAdminSettings');
+  /* eslint @wordpress/no-unused-vars-before-return: "off" */
+
+  const reportStoreSelector = select(external_wc_data_["REPORTS_STORE_NAME"]);
   const newProps = {
     mode: chartMode,
     filterParam,
@@ -1451,7 +1458,7 @@ report_chart_ReportChart.defaultProps = {
     endpoint,
     dataType: 'primary',
     query,
-    select,
+    selector: reportStoreSelector,
     limitBy,
     filters,
     advancedFilters,
@@ -1469,7 +1476,7 @@ report_chart_ReportChart.defaultProps = {
     endpoint,
     dataType: 'secondary',
     query,
-    select,
+    selector: reportStoreSelector,
     limitBy,
     filters,
     advancedFilters,
@@ -1484,7 +1491,7 @@ report_chart_ReportChart.defaultProps = {
 
 /***/ }),
 
-/***/ 504:
+/***/ 506:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1518,7 +1525,7 @@ function getSelectedChart(chartName, charts = []) {
 
 /***/ }),
 
-/***/ 505:
+/***/ 507:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1638,7 +1645,8 @@ class ReportSummary extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Com
         order,
         orderby,
         label,
-        type
+        type,
+        isReverseTrend
       } = chart;
       const newPath = {
         chart: key
@@ -1664,6 +1672,7 @@ class ReportSummary extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Com
         delta: delta,
         href: href,
         label: label,
+        reverseTrend: isReverseTrend,
         prevLabel: compare === 'previous_period' ? Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Previous Period:', 'woocommerce-admin') : Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Previous Year:', 'woocommerce-admin'),
         prevValue: prevValue,
         selected: isSelected,
@@ -1801,7 +1810,7 @@ ReportSummary.contextType = _lib_currency_context__WEBPACK_IMPORTED_MODULE_12__[
 
 /***/ }),
 
-/***/ 510:
+/***/ 511:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
