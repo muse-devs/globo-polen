@@ -42,6 +42,7 @@ $Talent_Fields = $Talent_Fields->get_vendor_data($post->post_author);
 $terms = wp_get_object_terms(get_the_ID(), 'product_tag');
 
 $bg_image = wp_get_attachment_image_src($Talent_Fields->cover_image_id, "large")[0];
+$image_data = polen_get_thumbnail(get_the_ID());
 
 $donate = get_post_meta(get_the_ID(), '_is_charity', true);
 $donate_name = get_post_meta(get_the_ID(), '_charity_name', true);
@@ -67,7 +68,13 @@ if( 'instock' == $product->get_stock_status() ) {
 	// params
 	jQuery(document).ready(function() {
 		if(document.querySelector("#stories")) {
-			renderStories(<?php echo polen_get_videos_by_talent($Talent_Fields, true); ?>, <?php echo json_encode(get_the_title()); ?>, <?php echo json_encode(wp_get_attachment_image_src(get_post_thumbnail_id(get_the_ID()), 'polen-thumb-lg')[0]); ?>, <?php echo $social || 'null'; ?>, <?php echo $stock || 'null'; ?>)
+			renderStories(
+				<?php echo polen_get_videos_by_talent($Talent_Fields, true); ?>,
+				<?php echo json_encode(get_the_title()); ?>,
+				<?php echo json_encode($image_data["image"]); ?>,
+				<?php echo $social || 'null'; ?>,
+				<?php echo $stock || 'null'; ?>
+				);
 		}
 	});
 </script>
