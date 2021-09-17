@@ -9,6 +9,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @extends WC_Payment_Gateway
  */
 class WC_Gateway_Stripe extends WC_Stripe_Payment_Gateway {
+
+	const ID = 'stripe';
+
 	/**
 	 * The delay between retries.
 	 *
@@ -84,7 +87,7 @@ class WC_Gateway_Stripe extends WC_Stripe_Payment_Gateway {
 	 */
 	public function __construct() {
 		$this->retry_interval = 1;
-		$this->id             = 'stripe';
+		$this->id             = self::ID;
 		$this->method_title   = __( 'Stripe', 'woocommerce-gateway-stripe' );
 		/* translators: 1) link to Stripe register page 2) link to Stripe api keys page */
 		$this->method_description = __( 'Stripe works by adding payment fields on the checkout and then sending the details to Stripe for verification.', 'woocommerce-gateway-stripe' );
@@ -130,7 +133,6 @@ class WC_Gateway_Stripe extends WC_Stripe_Payment_Gateway {
 
 		// Hooks.
 		add_action( 'wp_enqueue_scripts', [ $this, 'payment_scripts' ] );
-		add_action( 'admin_enqueue_scripts', [ $this, 'admin_scripts' ] );
 		add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, [ $this, 'process_admin_options' ] );
 		add_action( 'woocommerce_admin_order_totals_after_total', [ $this, 'display_order_fee' ] );
 		add_action( 'woocommerce_admin_order_totals_after_total', [ $this, 'display_order_payout' ], 20 );
@@ -334,30 +336,16 @@ class WC_Gateway_Stripe extends WC_Stripe_Payment_Gateway {
 	}
 
 	/**
-	 * Load admin scripts.
-	 *
-	 * @since 3.1.0
-	 * @version 3.1.0
+	 * Maybe override the parent admin_options method.
 	 */
-	public function admin_scripts() {
-		if ( 'woocommerce_page_wc-settings' !== get_current_screen()->id ) {
+	public function admin_options() {
+		if ( ! WC_Stripe_Feature_Flags::is_upe_settings_redesign_enabled() ) {
+			parent::admin_options();
+
 			return;
 		}
 
-		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-
-		wp_register_script( 'woocommerce_stripe_admin', plugins_url( 'assets/js/stripe-admin' . $suffix . '.js', WC_STRIPE_MAIN_FILE ), [], WC_STRIPE_VERSION, true );
-
-		$params = [
-			'time'             => time(),
-			'i18n_out_of_sync' => wp_kses(
-				__( '<strong>Warning:</strong> your site\'s time does not match the time on your browser and may be incorrect. Some payment methods depend on webhook verification and verifying webhooks with a signing secret depends on your site\'s time being correct, so please check your site\'s time before setting a webhook secret. You may need to contact your site\'s hosting provider to correct the site\'s time.', 'woocommerce-gateway-stripe' ),
-				[ 'strong' => [] ]
-			),
-		];
-		wp_localize_script( 'woocommerce_stripe_admin', 'wc_stripe_settings_params', $params );
-
-		wp_enqueue_script( 'woocommerce_stripe_admin' );
+		do_action( 'wc_stripe_gateway_admin_options_wrapper', $this );
 	}
 
 	/**
@@ -683,6 +671,7 @@ class WC_Gateway_Stripe extends WC_Stripe_Payment_Gateway {
 							'result'                => 'success',
 							'redirect'              => $this->get_return_url( $order ),
 							'payment_intent_secret' => $intent->client_secret,
+							'save_payment_method'   => $this->save_payment_method_requested(),
 						];
 					}
 				}
@@ -1110,7 +1099,12 @@ class WC_Gateway_Stripe extends WC_Stripe_Payment_Gateway {
 		clean_post_cache( $order->get_id() );
 		$order = wc_get_order( $order->get_id() );
 
-		if ( ! $order->has_status( [ 'pending', 'failed' ] ) ) {
+		if ( ! $order->has_status(
+			apply_filters(
+				'wc_stripe_allowed_payment_processing_statuses',
+				[ 'pending', 'failed' ]
+			)
+		) ) {
 			// If payment has already been completed, this function is redundant.
 			return;
 		}
@@ -1309,7 +1303,7 @@ class WC_Gateway_Stripe extends WC_Stripe_Payment_Gateway {
 			if ( ! is_wp_error( $oauth_url ) ) {
 				$api_credentials_text = sprintf(
 				/* translators: %1, %2 and %3 are all HTML markup tags */
-					__( '%1$sSetup or link an existing Stripe account.%2$s By clicking this button you agree to the %3$sTerms of Service%2$s. Or, manually enter Stripe account keys below.', 'woocommerce-gateway-stripe' ),
+					__( '%1$sSet up or link an existing Stripe account.%2$s By clicking this button you agree to the %3$sTerms of Service%2$s. Or, manually enter Stripe account keys below.', 'woocommerce-gateway-stripe' ),
 					'<a id="wc_stripe_connect_button" href="' . $oauth_url . '" class="button button-primary">',
 					'</a>',
 					'<a href="https://wordpress.com/tos">'
