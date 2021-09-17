@@ -120,6 +120,9 @@ if (
 		} elseif ($is_video === true && !empty($video_hash)) {
 
 			$video_info = Polen_Video_Info::get_by_hash($video_hash);
+			if( empty( $video_info ) ) {
+				return;
+			}
 			$order = wc_get_order($video_info->order_id);
 			$item_cart = Polen_Cart_Item_Factory::polen_cart_item_from_order($order);
 
