@@ -200,7 +200,7 @@ class Polen_Plugin_Settings
                 ),
                 array(
                     'id'       => 'polen_smtp_port',
-                    'type'     => 'spinner',
+                    'type'     => 'text',
                     'title'    => esc_html__('Porta do servidor SMTP', 'polen'),
                     'desc'     => 'Informe a porta do servidor SMTP.',
                     'default'  => '587',
