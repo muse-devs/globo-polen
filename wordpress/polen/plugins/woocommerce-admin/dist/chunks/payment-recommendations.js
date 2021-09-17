@@ -16,7 +16,16 @@ var _extends=Object.assign||function(a){for(var c,b=1;b<arguments.length;b++)for
 
 /***/ }),
 
-/***/ 598:
+/***/ 60:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+var _extends=Object.assign||function(a){for(var c,b=1;b<arguments.length;b++)for(var d in c=arguments[b],c)Object.prototype.hasOwnProperty.call(c,d)&&(a[d]=c[d]);return a};Object.defineProperty(exports,'__esModule',{value:!0});exports.default=function(a){var b=a.size,c=b===void 0?24:b,d=a.onClick,e=a.icon,f=a.className,g=_objectWithoutProperties(a,['size','onClick','icon','className']),j=['gridicon','gridicons-notice-outline',f,!!function h(k){return 0==k%18}(c)&&'needs-offset',!1,!1].filter(Boolean).join(' ');return _react2.default.createElement('svg',_extends({className:j,height:c,width:c,onClick:d},g,{xmlns:'http://www.w3.org/2000/svg',viewBox:'0 0 24 24'}),_react2.default.createElement('g',null,_react2.default.createElement('path',{d:'M12 4c4.41 0 8 3.59 8 8s-3.59 8-8 8-8-3.59-8-8 3.59-8 8-8m0-2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm1 13h-2v2h2v-2zm-2-2h2l.5-6h-3l.5 6z'})))};var _react=__webpack_require__(5),_react2=_interopRequireDefault(_react);function _interopRequireDefault(a){return a&&a.__esModule?a:{default:a}}function _objectWithoutProperties(a,b){var d={};for(var c in a)0<=b.indexOf(c)||Object.prototype.hasOwnProperty.call(a,c)&&(d[c]=a[c]);return d}module.exports=exports['default'];
+
+
+/***/ }),
+
+/***/ 601:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -46,8 +55,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _payment_recommendations_scss__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(582);
 /* harmony import */ var _payment_recommendations_scss__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_payment_recommendations_scss__WEBPACK_IMPORTED_MODULE_11__);
 /* harmony import */ var _dashboard_utils__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(59);
-/* harmony import */ var _lib_notices__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(507);
-/* harmony import */ var _task_list_tasks_PaymentGatewaySuggestions_components_WCPay__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(515);
+/* harmony import */ var _lib_notices__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(505);
+/* harmony import */ var _task_list_tasks_PaymentGatewaySuggestions_components_WCPay__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(534);
 
 
 /**
@@ -74,7 +83,6 @@ __webpack_require__.r(__webpack_exports__);
 
 const SEE_MORE_LINK = 'https://woocommerce.com/product-category/woocommerce-extensions/payment-gateways/?utm_source=payments_recommendations';
 const DISMISS_OPTION = 'woocommerce_setting_payments_recommendations_hidden';
-const SHOW_MARKETPLACE_SUGGESTION_OPTION = 'woocommerce_show_marketplace_suggestions';
 function getPaymentRecommendationData(select) {
   const {
     getOption,
@@ -89,12 +97,11 @@ function getPaymentRecommendationData(select) {
   const {
     general: settings = {}
   } = getSettings('general');
-  const marketplaceSuggestions = getOption(SHOW_MARKETPLACE_SUGGESTION_OPTION);
   const hidden = getOption(DISMISS_OPTION);
   const countryCode = settings.woocommerce_default_country ? Object(_dashboard_utils__WEBPACK_IMPORTED_MODULE_12__[/* getCountryCode */ "b"])(settings.woocommerce_default_country) : null;
   const countrySupported = countryCode ? Object(_task_list_tasks_PaymentGatewaySuggestions_components_WCPay__WEBPACK_IMPORTED_MODULE_14__[/* isWCPaySupported */ "c"])(countryCode) : false;
-  const isRequestingOptions = isResolvingOption('getOption', [DISMISS_OPTION]) || isResolvingOption('getOption', [SHOW_MARKETPLACE_SUGGESTION_OPTION]);
-  const displayable = !isRequestingOptions && hidden !== 'yes' && marketplaceSuggestions === 'yes' && countrySupported;
+  const isRequestingOptions = isResolvingOption('getOption', [DISMISS_OPTION]);
+  const displayable = !isRequestingOptions && hidden !== 'yes' && countrySupported;
   let plugins;
 
   if (displayable) {
@@ -211,15 +218,6 @@ const PaymentRecommendations = () => {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (PaymentRecommendations);
-
-/***/ }),
-
-/***/ 60:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-var _extends=Object.assign||function(a){for(var c,b=1;b<arguments.length;b++)for(var d in c=arguments[b],c)Object.prototype.hasOwnProperty.call(c,d)&&(a[d]=c[d]);return a};Object.defineProperty(exports,'__esModule',{value:!0});exports.default=function(a){var b=a.size,c=b===void 0?24:b,d=a.onClick,e=a.icon,f=a.className,g=_objectWithoutProperties(a,['size','onClick','icon','className']),j=['gridicon','gridicons-notice-outline',f,!!function h(k){return 0==k%18}(c)&&'needs-offset',!1,!1].filter(Boolean).join(' ');return _react2.default.createElement('svg',_extends({className:j,height:c,width:c,onClick:d},g,{xmlns:'http://www.w3.org/2000/svg',viewBox:'0 0 24 24'}),_react2.default.createElement('g',null,_react2.default.createElement('path',{d:'M12 4c4.41 0 8 3.59 8 8s-3.59 8-8 8-8-3.59-8-8 3.59-8 8-8m0-2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm1 13h-2v2h2v-2zm-2-2h2l.5-6h-3l.5 6z'})))};var _react=__webpack_require__(5),_react2=_interopRequireDefault(_react);function _interopRequireDefault(a){return a&&a.__esModule?a:{default:a}}function _objectWithoutProperties(a,b){var d={};for(var c in a)0<=b.indexOf(c)||Object.prototype.hasOwnProperty.call(a,c)&&(d[c]=a[c]);return d}module.exports=exports['default'];
-
 
 /***/ })
 

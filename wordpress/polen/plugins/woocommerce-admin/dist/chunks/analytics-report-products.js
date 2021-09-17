@@ -17,13 +17,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _woocommerce_data__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_data__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(7);
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(526);
-/* harmony import */ var _lib_get_selected_chart__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(504);
-/* harmony import */ var _table__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(527);
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(525);
+/* harmony import */ var _lib_get_selected_chart__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(506);
+/* harmony import */ var _table__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(526);
 /* harmony import */ var _components_report_chart__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(503);
 /* harmony import */ var _components_report_error__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(500);
-/* harmony import */ var _components_report_summary__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(505);
-/* harmony import */ var _variations_table__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(529);
+/* harmony import */ var _components_report_summary__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(507);
+/* harmony import */ var _variations_table__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(528);
 /* harmony import */ var _components_report_filters__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(501);
 
 
@@ -146,6 +146,11 @@ ProductsReport.propTypes = {
     isRequesting
   } = props;
   const isSingleProductView = !query.search && query.products && query.products.split(',').length === 1;
+  const {
+    getItems,
+    isResolving,
+    getItemsError
+  } = select(_woocommerce_data__WEBPACK_IMPORTED_MODULE_4__["ITEMS_STORE_NAME"]);
 
   if (isRequesting) {
     return {
@@ -155,12 +160,6 @@ ProductsReport.propTypes = {
       isRequesting
     };
   }
-
-  const {
-    getItems,
-    isResolving,
-    getItemsError
-  } = select(_woocommerce_data__WEBPACK_IMPORTED_MODULE_4__["ITEMS_STORE_NAME"]);
 
   if (isSingleProductView) {
     const productId = parseInt(query.products, 10);
@@ -441,7 +440,7 @@ class CategoryBreadcrumbs extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0_
 
 /***/ }),
 
-/***/ 526:
+/***/ 525:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -600,7 +599,7 @@ const filters = Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__["applyFilte
 
 /***/ }),
 
-/***/ 527:
+/***/ 526:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -629,7 +628,7 @@ const filters = Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__["applyFilte
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(509);
 /* harmony import */ var _components_report_table__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(502);
 /* harmony import */ var _lib_currency_context__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(497);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(528);
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(527);
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_15__);
 
 
@@ -755,7 +754,7 @@ class ProductsReportTable extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0_
       const {
         categories
       } = this.props;
-      const productCategories = categoryIds && categoryIds.map(categoryId => categories.get(categoryId)).filter(Boolean) || [];
+      const productCategories = categoryIds && categories && categoryIds.map(categoryId => categories.get(categoryId)).filter(Boolean) || [];
       const stockStatus = Object(_utils__WEBPACK_IMPORTED_MODULE_12__[/* isLowStock */ "a"])(extendedInfoStockStatus, stockQuantity, lowStockAmount) ? Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_woocommerce_components__WEBPACK_IMPORTED_MODULE_7__["Link"], {
         href: Object(_woocommerce_wc_admin_settings__WEBPACK_IMPORTED_MODULE_9__[/* getAdminLink */ "e"])('post.php?action=edit&post=' + productId),
         type: "wp-admin"
@@ -884,16 +883,16 @@ ProductsReportTable.contextType = _lib_currency_context__WEBPACK_IMPORTED_MODULE
     query,
     isRequesting
   } = props;
-
-  if (isRequesting || query.search && !(query.products && query.products.length)) {
-    return {};
-  }
-
   const {
     getItems,
     getItemsError,
     isResolving
   } = select(_woocommerce_data__WEBPACK_IMPORTED_MODULE_10__["ITEMS_STORE_NAME"]);
+
+  if (isRequesting || query.search && !(query.products && query.products.length)) {
+    return {};
+  }
+
   const tableQuery = {
     per_page: -1
   };
@@ -909,14 +908,14 @@ ProductsReportTable.contextType = _lib_currency_context__WEBPACK_IMPORTED_MODULE
 
 /***/ }),
 
-/***/ 528:
+/***/ 527:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ 529:
+/***/ 528:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

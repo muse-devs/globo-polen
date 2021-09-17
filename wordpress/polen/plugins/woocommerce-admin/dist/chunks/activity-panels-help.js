@@ -25,7 +25,7 @@ var chevronRight = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["creat
 
 /***/ }),
 
-/***/ 517:
+/***/ 516:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -39,7 +39,7 @@ var chevronRight = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["creat
 /* harmony import */ var _woocommerce_experimental__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_experimental__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _woocommerce_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(21);
 /* harmony import */ var _woocommerce_components__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_components__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(518);
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(517);
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_5__);
 
 
@@ -112,7 +112,7 @@ ActivityHeader.propTypes = {
 
 /***/ }),
 
-/***/ 518:
+/***/ 517:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
@@ -203,7 +203,7 @@ function symbolObservablePonyfill(root) {
 
 /***/ }),
 
-/***/ 607:
+/***/ 610:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -908,7 +908,7 @@ if (false) {}
 var external_wc_tracks_ = __webpack_require__(16);
 
 // EXTERNAL MODULE: ./client/header/activity-panel/activity-header/index.js
-var activity_header = __webpack_require__(517);
+var activity_header = __webpack_require__(516);
 
 // EXTERNAL MODULE: ./client/dashboard/utils.js
 var utils = __webpack_require__(59);
@@ -942,36 +942,55 @@ const SETUP_TASK_HELP_ITEMS_FILTER = 'woocommerce_admin_setup_task_help_items';
 function getHomeItems() {
   return [{
     title: Object(external_wp_i18n_["__"])('Get Support', 'woocommerce-admin'),
-    link: 'https://woocommerce.com/my-account/create-a-ticket/'
+    link: 'https://woocommerce.com/my-account/create-a-ticket/?utm_medium=product'
   }, {
     title: Object(external_wp_i18n_["__"])('Home Screen', 'woocommerce-admin'),
-    link: 'https://docs.woocommerce.com/document/home-screen'
+    link: 'https://docs.woocommerce.com/document/home-screen?utm_medium=product'
   }, {
     title: Object(external_wp_i18n_["__"])('Inbox', 'woocommerce-admin'),
-    link: 'https://docs.woocommerce.com/document/home-screen/#section-2'
+    link: 'https://docs.woocommerce.com/document/home-screen?utm_medium=product#section-2'
   }, {
     title: Object(external_wp_i18n_["__"])('Stats Overview', 'woocommerce-admin'),
-    link: 'https://docs.woocommerce.com/document/home-screen/#section-4'
+    link: 'https://docs.woocommerce.com/document/home-screen?utm_medium=product#section-4'
   }, {
     title: Object(external_wp_i18n_["__"])('Store Management', 'woocommerce-admin'),
-    link: 'https://docs.woocommerce.com/document/home-screen/#section-5'
+    link: 'https://docs.woocommerce.com/document/home-screen?utm_medium=product#section-5'
   }, {
     title: Object(external_wp_i18n_["__"])('Store Setup Checklist', 'woocommerce-admin'),
-    link: 'https://docs.woocommerce.com/document/woocommerce-setup-wizard/#store-setup-checklist'
+    link: 'https://docs.woocommerce.com/document/woocommerce-setup-wizard?utm_medium=product#store-setup-checklist'
   }];
 }
 
 function getAppearanceItems() {
   return [{
     title: Object(external_wp_i18n_["__"])('Showcase your products and tailor your shopping experience using Blocks', 'woocommerce-admin'),
-    link: 'https://docs.woocommerce.com/document/woocommerce-blocks/?utm_source=help_panel'
+    link: 'https://docs.woocommerce.com/document/woocommerce-blocks/?utm_source=help_panel&utm_medium=product'
   }, {
     title: Object(external_wp_i18n_["__"])('Manage Store Notice, Catalog View and Product Images', 'woocommerce-admin'),
-    link: 'https://docs.woocommerce.com/document/woocommerce-customizer/?utm_source=help_panel'
+    link: 'https://docs.woocommerce.com/document/woocommerce-customizer/?utm_source=help_panel&utm_medium=product'
   }, {
     title: Object(external_wp_i18n_["__"])('How to choose and change a theme', 'woocommerce-admin'),
-    link: 'https://docs.woocommerce.com/document/choose-change-theme/?utm_source=help_panel'
+    link: 'https://docs.woocommerce.com/document/choose-change-theme/?utm_source=help_panel&utm_medium=product'
   }];
+}
+
+function getMarketingItems(props) {
+  const {
+    activePlugins
+  } = props;
+  return [activePlugins.includes('mailpoet') && {
+    title: Object(external_wp_i18n_["__"])('Get started with Mailpoet', 'woocommerce-admin'),
+    link: 'https://kb.mailpoet.com/category/114-getting-started'
+  }, activePlugins.includes('google-listings-and-ads') && {
+    title: Object(external_wp_i18n_["__"])('Set up Google Listing & Ads', 'woocommerce-admin'),
+    link: 'https://docs.woocommerce.com/document/google-listings-and-ads/?utm_medium=product#get-started'
+  }, activePlugins.includes('mailchimp-for-woocommerce') && {
+    title: Object(external_wp_i18n_["__"])('Connect Mailchimp for WooCommerce', 'woocommerce-admin'),
+    link: 'https://mailchimp.com/help/connect-or-disconnect-mailchimp-for-woocommerce/'
+  }, activePlugins.includes('creative-mail-by-constant-contact') && {
+    title: Object(external_wp_i18n_["__"])('Set up Creative Mail for WooCommerce', 'woocommerce-admin'),
+    link: 'https://app.creativemail.com/kb/help/WooCommerce'
+  }].filter(Boolean);
 }
 
 function getPaymentGatewaySuggestions(props) {
@@ -980,56 +999,56 @@ function getPaymentGatewaySuggestions(props) {
   } = props;
   return [{
     title: Object(external_wp_i18n_["__"])('Which Payment Option is Right for Me?', 'woocommerce-admin'),
-    link: 'https://docs.woocommerce.com/document/premium-payment-gateway-extensions/?utm_source=help_panel'
+    link: 'https://docs.woocommerce.com/document/premium-payment-gateway-extensions/?utm_source=help_panel&utm_medium=product'
   }, paymentGatewaySuggestions.woocommerce_payments && {
     title: Object(external_wp_i18n_["__"])('WooCommerce Payments Start Up Guide', 'woocommerce-admin'),
-    link: 'https://docs.woocommerce.com/document/payments//?utm_source=help_panel'
+    link: 'https://docs.woocommerce.com/document/payments/?utm_source=help_panel&utm_medium=product'
   }, paymentGatewaySuggestions.woocommerce_payments && {
     title: Object(external_wp_i18n_["__"])('WooCommerce Payments FAQs', 'woocommerce-admin'),
-    link: 'https://docs.woocommerce.com/documentation/woocommerce-payments/woocommerce-payments-faqs/?utm_source=help_panel'
+    link: 'https://docs.woocommerce.com/documentation/woocommerce-payments/woocommerce-payments-faqs/?utm_source=help_panel&utm_medium=product'
   }, paymentGatewaySuggestions.stripe && {
     title: Object(external_wp_i18n_["__"])('Stripe Setup and Configuration', 'woocommerce-admin'),
-    link: 'https://docs.woocommerce.com/document/stripe/?utm_source=help_panel'
+    link: 'https://docs.woocommerce.com/document/stripe/?utm_source=help_panel&utm_medium=product'
   }, paymentGatewaySuggestions['ppcp-gateway'] && {
     title: Object(external_wp_i18n_["__"])('PayPal Checkout Setup and Configuration', 'woocommerce-admin'),
-    link: 'https://docs.woocommerce.com/document/2-0/woocommerce-paypal-payments/#section-3'
+    link: 'https://docs.woocommerce.com/document/2-0/woocommerce-paypal-payments/?utm_medium=product#section-3'
   }, paymentGatewaySuggestions.square_credit_card && {
     title: Object(external_wp_i18n_["__"])('Square - Get started', 'woocommerce-admin'),
-    link: 'https://docs.woocommerce.com/document/woocommerce-square/?utm_source=help_panel'
+    link: 'https://docs.woocommerce.com/document/woocommerce-square/?utm_source=help_panel&utm_medium=product'
   }, paymentGatewaySuggestions.kco && {
     title: Object(external_wp_i18n_["__"])('Klarna - Introduction', 'woocommerce-admin'),
-    link: 'https://docs.woocommerce.com/document/klarna-checkout/?utm_source=help_panel'
+    link: 'https://docs.woocommerce.com/document/klarna-checkout/?utm_source=help_panel&utm_medium=product'
   }, paymentGatewaySuggestions.klarna_payments && {
     title: Object(external_wp_i18n_["__"])('Klarna - Introduction', 'woocommerce-admin'),
-    link: 'https://docs.woocommerce.com/document/klarna-payments/?utm_source=help_panel'
+    link: 'https://docs.woocommerce.com/document/klarna-payments/?utm_source=help_panel&utm_medium=product'
   }, paymentGatewaySuggestions.payfast && {
     title: Object(external_wp_i18n_["__"])('PayFast Setup and Configuration', 'woocommerce-admin'),
-    link: 'https://docs.woocommerce.com/document/payfast-payment-gateway/?utm_source=help_panel'
+    link: 'https://docs.woocommerce.com/document/payfast-payment-gateway/?utm_source=help_panel&utm_medium=product'
   }, paymentGatewaySuggestions.eway && {
     title: Object(external_wp_i18n_["__"])('eWAY Setup and Configuration', 'woocommerce-admin'),
-    link: 'https://docs.woocommerce.com/document/eway/?utm_source=help_panel'
+    link: 'https://docs.woocommerce.com/document/eway/?utm_source=help_panel&utm_medium=product'
   }, {
     title: Object(external_wp_i18n_["__"])('Direct Bank Transfer (BACS)', 'woocommerce-admin'),
-    link: 'https://docs.woocommerce.com/document/bacs/?utm_source=help_panel'
+    link: 'https://docs.woocommerce.com/document/bacs/?utm_source=help_panel&utm_medium=product'
   }, {
     title: Object(external_wp_i18n_["__"])('Cash on Delivery', 'woocommerce-admin'),
-    link: 'https://docs.woocommerce.com/document/cash-on-delivery/?utm_source=help_panel'
+    link: 'https://docs.woocommerce.com/document/cash-on-delivery/?utm_source=help_panel&utm_medium=product'
   }].filter(Boolean);
 }
 
 function getProductsItems() {
   return [{
     title: Object(external_wp_i18n_["__"])('Adding and Managing Products', 'woocommerce-admin'),
-    link: 'https://docs.woocommerce.com/document/managing-products/?utm_source=help_panel'
+    link: 'https://docs.woocommerce.com/document/managing-products/?utm_source=help_panel&utm_medium=product'
   }, {
     title: Object(external_wp_i18n_["__"])('Import products using the CSV Importer and Exporter', 'woocommerce-admin'),
-    link: 'https://docs.woocommerce.com/document/product-csv-importer-exporter/?utm_source=help_panel'
+    link: 'https://docs.woocommerce.com/document/product-csv-importer-exporter/?utm_source=help_panel&utm_medium=product'
   }, {
     title: Object(external_wp_i18n_["__"])('Migrate products using Cart2Cart', 'woocommerce-admin'),
-    link: 'https://woocommerce.com/products/cart2cart/?utm_source=help_panel'
+    link: 'https://woocommerce.com/products/cart2cart/?utm_source=help_panel&utm_medium=product'
   }, {
     title: Object(external_wp_i18n_["__"])('Learn more about setting up products', 'woocommerce-admin'),
-    link: 'https://docs.woocommerce.com/documentation/plugins/woocommerce/getting-started/setup-products/?utm_source=help_panel'
+    link: 'https://docs.woocommerce.com/documentation/plugins/woocommerce/getting-started/setup-products/?utm_source=help_panel&utm_medium=product'
   }];
 }
 
@@ -1040,19 +1059,19 @@ function getShippingItems({
   const showWCS = countryCode === 'US' && !activePlugins.includes('woocommerce-services');
   return [{
     title: Object(external_wp_i18n_["__"])('Setting up Shipping Zones', 'woocommerce-admin'),
-    link: 'https://docs.woocommerce.com/document/setting-up-shipping-zones/?utm_source=help_panel'
+    link: 'https://docs.woocommerce.com/document/setting-up-shipping-zones/?utm_source=help_panel&utm_medium=product'
   }, {
     title: Object(external_wp_i18n_["__"])('Core Shipping Options', 'woocommerce-admin'),
-    link: 'https://docs.woocommerce.com/documentation/plugins/woocommerce/getting-started/shipping/core-shipping-options/?utm_source=help_panel'
+    link: 'https://docs.woocommerce.com/documentation/plugins/woocommerce/getting-started/shipping/core-shipping-options/?utm_source=help_panel&utm_medium=product'
   }, {
     title: Object(external_wp_i18n_["__"])('Product Shipping Classes', 'woocommerce-admin'),
-    link: 'https://docs.woocommerce.com/document/product-shipping-classes/?utm_source=help_panel'
+    link: 'https://docs.woocommerce.com/document/product-shipping-classes/?utm_source=help_panel&utm_medium=product'
   }, showWCS && {
     title: Object(external_wp_i18n_["__"])('WooCommerce Shipping setup and configuration', 'woocommerce-admin'),
-    link: 'https://docs.woocommerce.com/document/woocommerce-services/#section-3/?utm_source=help_panel'
+    link: 'https://docs.woocommerce.com/document/woocommerce-shipping-and-tax/?utm_source=help_panel&utm_medium=product#section-3'
   }, {
     title: Object(external_wp_i18n_["__"])('Learn more about configuring your shipping settings', 'woocommerce-admin'),
-    link: 'https://docs.woocommerce.com/documentation/plugins/woocommerce/getting-started/shipping/?utm_source=help_panel'
+    link: 'https://docs.woocommerce.com/documentation/plugins/woocommerce/getting-started/shipping/?utm_source=help_panel&utm_medium=product'
   }].filter(Boolean);
 }
 
@@ -1068,10 +1087,10 @@ function getTaxItems(props) {
   automatedTaxSupportedCountries.includes(countryCode);
   return [{
     title: Object(external_wp_i18n_["__"])('Setting up Taxes in WooCommerce', 'woocommerce-admin'),
-    link: 'https://docs.woocommerce.com/document/setting-up-taxes-in-woocommerce/?utm_source=help_panel'
+    link: 'https://docs.woocommerce.com/document/setting-up-taxes-in-woocommerce/?utm_source=help_panel&utm_medium=product'
   }, showWCS && {
     title: Object(external_wp_i18n_["__"])('Automated Tax calculation using WooCommerce Tax', 'woocommerce-admin'),
-    link: 'https://docs.woocommerce.com/document/woocommerce-services/?utm_source=help_panel#section-10'
+    link: 'https://docs.woocommerce.com/document/woocommerce-services/?utm_source=help_panel&utm_medium=product#section-10'
   }].filter(Boolean);
 }
 
@@ -1095,6 +1114,9 @@ function getItems(props) {
 
     case 'payments':
       return getPaymentGatewaySuggestions(props);
+
+    case 'marketing':
+      return getMarketingItems(props);
 
     default:
       return getHomeItems();
@@ -1120,7 +1142,7 @@ function getListItems(props) {
   const itemsByType = getItems(props);
   const genericDocsLink = {
     title: Object(external_wp_i18n_["__"])('WooCommerce Docs', 'woocommerce-admin'),
-    link: 'https://docs.woocommerce.com/?utm_source=help_panel'
+    link: 'https://docs.woocommerce.com/?utm_source=help_panel&utm_medium=product'
   };
   itemsByType.push(genericDocsLink);
   const filteredItems = Object(external_wp_hooks_["applyFilters"])(SETUP_TASK_HELP_ITEMS_FILTER, itemsByType, props.taskName, props); // Filter out items that aren't objects without `title` and `link` properties.

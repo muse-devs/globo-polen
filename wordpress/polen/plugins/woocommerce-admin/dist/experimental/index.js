@@ -2035,7 +2035,30 @@ const ExperimentalCollapsibleList = ({
     return Object(external_wp_element_["createElement"])("div", {
       ref: collapseContainerRef,
       style: transitionStyles
-    }, displayedChildren.hidden);
+    }, Object(external_wp_element_["createElement"])(TransitionGroup["a" /* default */], {
+      className: "woocommerce-experimental-list"
+    }, external_wp_element_["Children"].map(displayedChildren.hidden, child => {
+      const {
+        onExited,
+        in: inTransition,
+        enter,
+        exit,
+        ...remainingProps
+      } = child.props;
+      const animationProp = remainingProps.animation || listProps.animation;
+      return Object(external_wp_element_["createElement"])(CSSTransition["a" /* default */], {
+        key: child.key,
+        timeout: 500,
+        onExited: onExited,
+        in: inTransition,
+        enter: enter,
+        exit: exit,
+        classNames: "woocommerce-list__item"
+      }, Object(external_wp_element_["cloneElement"])(child, {
+        animation: animationProp,
+        ...remainingProps
+      }));
+    })));
   }), displayedChildren.hidden.length > 0 ? Object(external_wp_element_["createElement"])(ExperimentalListItem, {
     key: "collapse-item",
     className: "list-item-collapse",
@@ -2244,13 +2267,13 @@ const OptionalExpansionWrapper = ({
   expanded
 }) => {
   if (!expandable) {
-    return Object(external_wp_element_["createElement"])(external_wp_element_["Fragment"], null, children);
+    return expanded ? Object(external_wp_element_["createElement"])(external_wp_element_["Fragment"], null, children) : null;
   }
 
   return Object(external_wp_element_["createElement"])(VerticalCSSTransition, {
     timeout: 500,
     in: expanded,
-    classNames: "woocommerce-task-list__item-content",
+    classNames: "woocommerce-task-list__item-expandable-content",
     defaultStyle: {
       transitionProperty: 'max-height, opacity'
     }
@@ -2272,7 +2295,8 @@ const TaskItem = ({
   showActionButton,
   level = 3,
   action,
-  actionLabel
+  actionLabel,
+  ...listItemProps
 }) => {
   const className = classnames_default()('woocommerce-task-list__item', {
     complete: completed,
@@ -2286,11 +2310,11 @@ const TaskItem = ({
   }
 
   const showEllipsisMenu = (onDismiss || remindMeLater) && !completed || onDelete && completed;
-  return Object(external_wp_element_["createElement"])(ExperimentalListItem, {
+  return Object(external_wp_element_["createElement"])(ExperimentalListItem, Object.assign({
     disableGutters: true,
     className: className,
     onClick: onClick
-  }, Object(external_wp_element_["createElement"])(OptionalTaskTooltip, {
+  }, listItemProps), Object(external_wp_element_["createElement"])(OptionalTaskTooltip, {
     level: level,
     completed: completed
   }, Object(external_wp_element_["createElement"])("div", {
@@ -2315,7 +2339,7 @@ const TaskItem = ({
     expandable: expandable,
     expanded: expanded
   }, Object(external_wp_element_["createElement"])("div", {
-    className: "woocommerce-task-list__item-content"
+    className: "woocommerce-task-list__item-expandable-content"
   }, content, expandable && !completed && additionalInfo && Object(external_wp_element_["createElement"])("div", {
     className: "woocommerce-task__additional-info",
     dangerouslySetInnerHTML: sanitizeHTML(additionalInfo)
