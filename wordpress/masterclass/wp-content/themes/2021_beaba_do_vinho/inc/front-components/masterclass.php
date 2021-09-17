@@ -8,14 +8,14 @@ function mc_get_buy_button($product)
 ?>
 	<div class="row mb-4">
 		<div class="col-12 col-md-6 m-md-auto">
-			<a href="<?php echo $product['url_to_checkout']; ?>" class="btn btn-primary btn-lg btn-block mt-4 gradient mc-custom-button">Quero me inscrever<br>De <s><?php echo $product['price_regular'] ?></s> Por <?php echo $product['price']; ?></a>
+			<a href="<?php echo $product['url_to_checkout']; ?>" class="btn btn-primary btn-lg btn-block mt-4 gradient mc-custom-button">Vagas Esgotadas</a>
 		</div>
 	</div>
-	<div class="row">
+	<!-- <div class="row">
 		<div class="col-12 col-md-6 m-md-auto text-center">
 			<p class="subtitle"><b>16 de Setembro às 20h, ao vivo</b></p>
 		</div>
-	</div>
+	</div> -->
 <?php
 }
 
@@ -93,13 +93,13 @@ function mc_get_top_banner($product)
 					<img class="image" src="<?php echo TEMPLATE_URI; ?>/assets/img/masterclass/ronnievon-logo.png" alt="Logo Beabá do Vinho" />
 				</figure>
 				<div class="row">
-					<div class="col-12">
+					<!-- <div class="col-12">
 						<div class="row">
 							<div class="col-md-6 m-md-auto text-center">
 								<span class="gadget">Inscrições abertas</span>
 							</div>
 						</div>
-					</div>
+					</div> -->
 					<div class="col-12 col-md-6 m-md-auto">
 						<h1 class="title">Aprenda a escolher, apreciar e harmonizar vinhos com Ronnie Von</h1>
 					</div>
