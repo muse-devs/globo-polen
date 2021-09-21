@@ -3,6 +3,8 @@
 namespace Polen\Includes;
 
 use Polen\Social\Social_Order;
+use Polen\Social_Base\Social_Base_Order;
+use Polen\Social_Base\Social_Base_Product;
 
 class Polen_Cart
 {
@@ -85,13 +87,23 @@ class Polen_Cart
             }
         }
         //PARA CAMPANHAS SOCIAIS
-        $product_is_social = social_product_is_social( $item->get_product(), social_get_category_base() );
+        // $product_is_social = social_product_is_social( $item->get_product(), social_get_category_base() );
+        $product = $item->get_product();
+        $product_is_social = product_is_social_base( $item->get_product(), social_get_category_base() );
         if( $product_is_social ) {
-            $order->add_meta_data( Social_Order::ORDER_META_KEY_SOCIAL, '1' );
-            $order->add_meta_data( Social_Order::ORDER_META_KEY_CAMPAING, 'criesp' );
+            $order->add_meta_data( Social_Base_Order::ORDER_META_KEY_SOCIAL, '1' );
+            $order->add_meta_data( Social_Base_Order::ORDER_META_KEY_CAMPAING, $product->get_meta( Social_Base_Product::PRODUCT_META_SLUG_CAMPAING, true ) );
 
             $instructions_to_video = "Agradecer {$name} de {$city} pela doação ao criança esperança 2021!";
             $item->add_meta_data( 'instructions_to_video', $instructions_to_video, true );
+
+            $interval  = Polen_Order::get_interval_order_social();
+            $timestamp = Polen_Order::get_deadline_timestamp_by_social_event( $order, $interval );
+            $order->add_meta_data( Polen_Order::META_KEY_DEADLINE, $timestamp, true );
+        } else {
+            $interval  = Polen_Order::get_interval_order_basic();
+            $timestamp = Polen_Order::get_deadline_timestamp_by_social_event( $order, $interval );
+            $order->add_meta_data( Polen_Order::META_KEY_DEADLINE, $timestamp, true );
         }
     }
 
