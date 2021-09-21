@@ -553,6 +553,7 @@ __webpack_require__.d(__webpack_exports__, "WEEK", function() { return /* reexpo
 __webpack_require__.d(__webpack_exports__, "MONTH", function() { return /* reexport */ MONTH; });
 __webpack_require__.d(__webpack_exports__, "EXPORT_STORE_NAME", function() { return /* reexport */ EXPORT_STORE_NAME; });
 __webpack_require__.d(__webpack_exports__, "IMPORT_STORE_NAME", function() { return /* reexport */ IMPORT_STORE_NAME; });
+__webpack_require__.d(__webpack_exports__, "getFreeExtensions", function() { return /* reexport */ getFreeExtensions; });
 __webpack_require__.d(__webpack_exports__, "getProfileItems", function() { return /* reexport */ getProfileItems; });
 __webpack_require__.d(__webpack_exports__, "getTasksStatus", function() { return /* reexport */ getTasksStatus; });
 __webpack_require__.d(__webpack_exports__, "getPaymentGatewaySuggestions", function() { return /* reexport */ getPaymentGatewaySuggestions; });
@@ -657,6 +658,7 @@ __webpack_require__.d(plugins_resolvers_namespaceObject, "getRecommendedPlugins"
 // NAMESPACE OBJECT: ./packages/data/build-module/onboarding/selectors.js
 var onboarding_selectors_namespaceObject = {};
 __webpack_require__.r(onboarding_selectors_namespaceObject);
+__webpack_require__.d(onboarding_selectors_namespaceObject, "getFreeExtensions", function() { return getFreeExtensions; });
 __webpack_require__.d(onboarding_selectors_namespaceObject, "getProfileItems", function() { return getProfileItems; });
 __webpack_require__.d(onboarding_selectors_namespaceObject, "getTasksStatus", function() { return getTasksStatus; });
 __webpack_require__.d(onboarding_selectors_namespaceObject, "getPaymentGatewaySuggestions", function() { return getPaymentGatewaySuggestions; });
@@ -666,6 +668,8 @@ __webpack_require__.d(onboarding_selectors_namespaceObject, "isOnboardingRequest
 // NAMESPACE OBJECT: ./packages/data/build-module/onboarding/actions.js
 var onboarding_actions_namespaceObject = {};
 __webpack_require__.r(onboarding_actions_namespaceObject);
+__webpack_require__.d(onboarding_actions_namespaceObject, "getFreeExtensionsError", function() { return getFreeExtensionsError; });
+__webpack_require__.d(onboarding_actions_namespaceObject, "getFreeExtensionsSuccess", function() { return getFreeExtensionsSuccess; });
 __webpack_require__.d(onboarding_actions_namespaceObject, "setError", function() { return actions_setError; });
 __webpack_require__.d(onboarding_actions_namespaceObject, "setIsRequesting", function() { return onboarding_actions_setIsRequesting; });
 __webpack_require__.d(onboarding_actions_namespaceObject, "setProfileItems", function() { return actions_setProfileItems; });
@@ -679,6 +683,7 @@ __webpack_require__.r(onboarding_resolvers_namespaceObject);
 __webpack_require__.d(onboarding_resolvers_namespaceObject, "getProfileItems", function() { return resolvers_getProfileItems; });
 __webpack_require__.d(onboarding_resolvers_namespaceObject, "getTasksStatus", function() { return resolvers_getTasksStatus; });
 __webpack_require__.d(onboarding_resolvers_namespaceObject, "getPaymentGatewaySuggestions", function() { return resolvers_getPaymentGatewaySuggestions; });
+__webpack_require__.d(onboarding_resolvers_namespaceObject, "getFreeExtensions", function() { return resolvers_getFreeExtensions; });
 
 // NAMESPACE OBJECT: ./packages/data/build-module/reviews/selectors.js
 var reviews_selectors_namespaceObject = {};
@@ -2269,6 +2274,9 @@ const withPluginsHydration = data => Object(external_wp_compose_["createHigherOr
  */
 const onboarding_constants_STORE_NAME = 'wc/admin/onboarding';
 // CONCATENATED MODULE: ./packages/data/build-module/onboarding/selectors.js
+const getFreeExtensions = state => {
+  return state.freeExtensions || [];
+};
 const getProfileItems = state => {
   return state.profileItems || {};
 };
@@ -2290,7 +2298,9 @@ const onboarding_action_types_TYPES = {
   SET_IS_REQUESTING: 'SET_IS_REQUESTING',
   SET_PROFILE_ITEMS: 'SET_PROFILE_ITEMS',
   SET_TASKS_STATUS: 'SET_TASKS_STATUS',
-  GET_PAYMENT_METHODS_SUCCESS: 'GET_PAYMENT_METHODS_SUCCESS'
+  GET_PAYMENT_METHODS_SUCCESS: 'GET_PAYMENT_METHODS_SUCCESS',
+  GET_FREE_EXTENSIONS_ERROR: 'GET_FREE_EXTENSIONS_ERROR',
+  GET_FREE_EXTENSIONS_SUCCESS: 'GET_FREE_EXTENSIONS_SUCCESS'
 };
 /* harmony default export */ var onboarding_action_types = (onboarding_action_types_TYPES);
 // CONCATENATED MODULE: ./packages/data/build-module/onboarding/actions.js
@@ -2304,6 +2314,18 @@ const onboarding_action_types_TYPES = {
 
 
 
+function getFreeExtensionsError(error) {
+  return {
+    type: onboarding_action_types.GET_FREE_EXTENSIONS_ERROR,
+    error
+  };
+}
+function getFreeExtensionsSuccess(freeExtensions) {
+  return {
+    type: onboarding_action_types.GET_FREE_EXTENSIONS_SUCCESS,
+    freeExtensions
+  };
+}
 function actions_setError(selector, error) {
   return {
     type: onboarding_action_types.SET_ERROR,
@@ -2404,6 +2426,17 @@ function* resolvers_getPaymentGatewaySuggestions() {
     yield actions_setError('getPaymentGatewaySuggestions', error);
   }
 }
+function* resolvers_getFreeExtensions() {
+  try {
+    const results = yield Object(external_wp_dataControls_["apiFetch"])({
+      path: WC_ADMIN_NAMESPACE + '/onboarding/free-extensions',
+      method: 'GET'
+    });
+    yield getFreeExtensionsSuccess(results);
+  } catch (error) {
+    yield getFreeExtensionsError(error);
+  }
+}
 // CONCATENATED MODULE: ./packages/data/build-module/onboarding/reducer.js
 /**
  * Internal dependencies
@@ -2411,6 +2444,7 @@ function* resolvers_getPaymentGatewaySuggestions() {
 
 const defaultState = {
   errors: {},
+  freeExtensions: [],
   profileItems: {
     business_extensions: null,
     completed: null,
@@ -2432,6 +2466,7 @@ const defaultState = {
 };
 
 const onboarding = (state = defaultState, {
+  freeExtensions,
   type,
   profileItems,
   paymentMethods,
@@ -2473,6 +2508,18 @@ const onboarding = (state = defaultState, {
     case onboarding_action_types.GET_PAYMENT_METHODS_SUCCESS:
       return { ...state,
         paymentMethods
+      };
+
+    case onboarding_action_types.GET_FREE_EXTENSIONS_ERROR:
+      return { ...state,
+        errors: { ...state.errors,
+          getFreeExtensions: error
+        }
+      };
+
+    case onboarding_action_types.GET_FREE_EXTENSIONS_SUCCESS:
+      return { ...state,
+        freeExtensions
       };
 
     default:
@@ -3972,13 +4019,14 @@ function getLeaderboard(options) {
 /**
  * Returns items based on a search query.
  *
- * @param  {Object}   select    Instance of @wordpress/select
- * @param  {string}   endpoint  Report API Endpoint
- * @param  {string[]} search    Array of search strings.
+ * @param {Object} select    Instance of @wordpress/select
+ * @param {string} endpoint  Report API Endpoint
+ * @param {string[]} search    Array of search strings.
+ * @param {Object} options  Query options.
  * @return {Object}   Object containing API request information and the matching items.
  */
 
-function searchItemsByString(select, endpoint, search) {
+function searchItemsByString(select, endpoint, search, options) {
   const {
     getItems,
     getItemsError,
@@ -3990,7 +4038,8 @@ function searchItemsByString(select, endpoint, search) {
   search.forEach(searchWord => {
     const query = {
       search: searchWord,
-      per_page: 10
+      per_page: 10,
+      ...options
     };
     const newItems = getItems(endpoint, query);
     newItems.forEach((item, id) => {
@@ -5381,7 +5430,7 @@ const getReportChartDataResponse = Object(external_lodash_["memoize"])((requestS
  * @param  {string} options.endpoint  Report API Endpoint
  * @param  {string} options.dataType  'primary' or 'secondary'
  * @param  {Object} options.query     Query parameters in the url
- * @param  {Object} options.select    Instance of @wordpress/select
+ * @param  {Object} options.selector    Instance of @wordpress/select response
  * @param  {Array}  options.limitBy   Properties used to limit the results. It will be used in the API call to send the IDs.
  * @param  {string}  options.defaultDateRange   User specified default date range.
  * @return {Object}  Object containing API request information (response, fetching, and error details)
@@ -5389,14 +5438,13 @@ const getReportChartDataResponse = Object(external_lodash_["memoize"])((requestS
 
 function getReportChartData(options) {
   const {
-    endpoint,
-    select
+    endpoint
   } = options;
   const {
     getReportStats,
     getReportStatsError,
     isResolving
-  } = select(reports_constants_STORE_NAME);
+  } = options.selector;
   const requestQuery = getRequestQuery(options); // Disable eslint rule requiring `stats` to be defined below because the next two if statements
   // depend on `getReportStats` to have been called.
   // eslint-disable-next-line @wordpress/no-unused-vars-before-return
@@ -5528,7 +5576,7 @@ function getReportTableQuery(options) {
  * @param  {Object} options                arguments
  * @param  {string} options.endpoint       Report API Endpoint
  * @param  {Object} options.query          Query parameters in the url
- * @param  {Object} options.select         Instance of @wordpress/select
+ * @param  {Object} options.selector       Instance of @wordpress/select response
  * @param  {Object} options.tableQuery     Query parameters specific for that endpoint
  * @param  {string}  options.defaultDateRange   User specified default date range.
  * @return {Object} Object    Table data response
@@ -5536,14 +5584,13 @@ function getReportTableQuery(options) {
 
 function getReportTableData(options) {
   const {
-    endpoint,
-    select
+    endpoint
   } = options;
   const {
     getReportItems,
     getReportItemsError,
-    isResolving
-  } = select(reports_constants_STORE_NAME);
+    hasFinishedResolution
+  } = options.selector;
   const tableQuery = getReportTableQuery(options);
   const response = {
     query: tableQuery,
@@ -5558,12 +5605,15 @@ function getReportTableData(options) {
   // eslint-disable-next-line @wordpress/no-unused-vars-before-return
 
   const items = getReportItems(endpoint, tableQuery);
+  const queryResolved = hasFinishedResolution('getReportItems', [endpoint, tableQuery]);
 
-  if (isResolving('getReportItems', [endpoint, tableQuery])) {
+  if (!queryResolved) {
     return { ...response,
       isRequesting: true
     };
-  } else if (getReportItemsError(endpoint, tableQuery)) {
+  }
+
+  if (getReportItemsError(endpoint, tableQuery)) {
     return { ...response,
       isError: true
     };

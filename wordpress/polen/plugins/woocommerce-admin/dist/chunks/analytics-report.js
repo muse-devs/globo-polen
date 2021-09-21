@@ -96,7 +96,7 @@ ReportError.propTypes = {
 
 /***/ }),
 
-/***/ 594:
+/***/ 597:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -223,7 +223,9 @@ Report.propTypes = {
   const searchWords = Object(_woocommerce_navigation__WEBPACK_IMPORTED_MODULE_5__["getSearchWords"])(query); // Single Category view in Categories Report uses the products endpoint, so search must also.
 
   const mappedReport = report === 'categories' && query.filter === 'single_category' ? 'products' : report;
-  const itemsResult = Object(_woocommerce_data__WEBPACK_IMPORTED_MODULE_6__["searchItemsByString"])(select, mappedReport, searchWords);
+  const itemsResult = Object(_woocommerce_data__WEBPACK_IMPORTED_MODULE_6__["searchItemsByString"])(select, mappedReport, searchWords, {
+    per_page: 100
+  });
   const {
     isError,
     isRequesting,

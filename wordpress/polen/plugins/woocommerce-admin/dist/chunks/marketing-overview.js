@@ -965,7 +965,7 @@ const ReadBlogMessage = () => {
     components: {
       link: Object(external_wp_element_["createElement"])(external_wc_components_["Link"], {
         type: "external",
-        href: "https://woocommerce.com/blog/marketing/coupons/",
+        href: "https://woocommerce.com/blog/marketing/coupons/?utm_medium=product",
         target: "_blank"
       })
     }
@@ -1628,7 +1628,7 @@ module.exports = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5v
 
 /***/ }),
 
-/***/ 604:
+/***/ 607:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

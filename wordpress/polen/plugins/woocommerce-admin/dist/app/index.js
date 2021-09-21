@@ -1465,13 +1465,13 @@ var utils = __webpack_require__(59);
 
 
 
-const AnalyticsReport = Object(external_wp_element_["lazy"])(() => __webpack_require__.e(/* import() | analytics-report */ 6).then(__webpack_require__.bind(null, 594)));
-const AnalyticsSettings = Object(external_wp_element_["lazy"])(() => __webpack_require__.e(/* import() | analytics-settings */ 17).then(__webpack_require__.bind(null, 603)));
-const Dashboard = Object(external_wp_element_["lazy"])(() => __webpack_require__.e(/* import() | dashboard */ 25).then(__webpack_require__.bind(null, 595)));
-const Homescreen = Object(external_wp_element_["lazy"])(() => Promise.all(/* import() | homescreen */[__webpack_require__.e(3), __webpack_require__.e(2), __webpack_require__.e(31)]).then(__webpack_require__.bind(null, 601)));
-const MarketingOverview = Object(external_wp_element_["lazy"])(() => Promise.all(/* import() | marketing-overview */[__webpack_require__.e(2), __webpack_require__.e(34)]).then(__webpack_require__.bind(null, 604)));
-const ProfileWizard = Object(external_wp_element_["lazy"])(() => Promise.all(/* import() | profile-wizard */[__webpack_require__.e(1), __webpack_require__.e(46)]).then(__webpack_require__.bind(null, 602)));
-const SettingsGroup = Object(external_wp_element_["lazy"])(() => Promise.all(/* import() | profile-wizard */[__webpack_require__.e(1), __webpack_require__.e(46)]).then(__webpack_require__.bind(null, 596)));
+const AnalyticsReport = Object(external_wp_element_["lazy"])(() => __webpack_require__.e(/* import() | analytics-report */ 6).then(__webpack_require__.bind(null, 597)));
+const AnalyticsSettings = Object(external_wp_element_["lazy"])(() => __webpack_require__.e(/* import() | analytics-settings */ 17).then(__webpack_require__.bind(null, 606)));
+const Dashboard = Object(external_wp_element_["lazy"])(() => __webpack_require__.e(/* import() | dashboard */ 25).then(__webpack_require__.bind(null, 598)));
+const Homescreen = Object(external_wp_element_["lazy"])(() => Promise.all(/* import() | homescreen */[__webpack_require__.e(1), __webpack_require__.e(2), __webpack_require__.e(31)]).then(__webpack_require__.bind(null, 604)));
+const MarketingOverview = Object(external_wp_element_["lazy"])(() => Promise.all(/* import() | marketing-overview */[__webpack_require__.e(2), __webpack_require__.e(34)]).then(__webpack_require__.bind(null, 607)));
+const ProfileWizard = Object(external_wp_element_["lazy"])(() => Promise.all(/* import() | profile-wizard */[__webpack_require__.e(1), __webpack_require__.e(46)]).then(__webpack_require__.bind(null, 605)));
+const SettingsGroup = Object(external_wp_element_["lazy"])(() => Promise.all(/* import() | profile-wizard */[__webpack_require__.e(1), __webpack_require__.e(46)]).then(__webpack_require__.bind(null, 599)));
 const PAGES_FILTER = 'woocommerce_admin_pages_list';
 const getPages = () => {
   const pages = [];
@@ -2545,8 +2545,8 @@ var abbreviated_notifications_panel = __webpack_require__(253);
 
 
 
-const HelpPanel = Object(external_wp_element_["lazy"])(() => __webpack_require__.e(/* import() | activity-panels-help */ 4).then(__webpack_require__.bind(null, 607)));
-const InboxPanel = Object(external_wp_element_["lazy"])(() => Promise.all(/* import() | activity-panels-inbox */[__webpack_require__.e(2), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, 597)));
+const HelpPanel = Object(external_wp_element_["lazy"])(() => __webpack_require__.e(/* import() | activity-panels-help */ 4).then(__webpack_require__.bind(null, 610)));
+const InboxPanel = Object(external_wp_element_["lazy"])(() => Promise.all(/* import() | activity-panels-inbox */[__webpack_require__.e(2), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, 600)));
 const ActivityPanel = ({
   isEmbedded,
   query,
@@ -4235,8 +4235,8 @@ Object(external_wp_plugins_["registerPlugin"])('wc-admin-navigation', {
 
 
 
-const StoreAlerts = Object(external_wp_element_["lazy"])(() => Promise.all(/* import() | store-alerts */[__webpack_require__.e(3), __webpack_require__.e(47)]).then(__webpack_require__.bind(null, 606)));
-const WCPayUsageModal = Object(external_wp_element_["lazy"])(() => __webpack_require__.e(/* import() | wcpay-usage-modal */ 51).then(__webpack_require__.bind(null, 516)));
+const StoreAlerts = Object(external_wp_element_["lazy"])(() => Promise.all(/* import() | store-alerts */[__webpack_require__.e(1), __webpack_require__.e(47)]).then(__webpack_require__.bind(null, 609)));
+const WCPayUsageModal = Object(external_wp_element_["lazy"])(() => __webpack_require__.e(/* import() | wcpay-usage-modal */ 51).then(__webpack_require__.bind(null, 515)));
 class layout_PrimaryLayout extends external_wp_element_["Component"] {
   render() {
     const {
@@ -9382,6 +9382,50 @@ var external_wp_hooks_ = __webpack_require__(30);
 // EXTERNAL MODULE: ./node_modules/qs/lib/index.js
 var lib = __webpack_require__(32);
 
+// EXTERNAL MODULE: external ["wp","data"]
+var external_wp_data_ = __webpack_require__(7);
+
+// EXTERNAL MODULE: external ["wc","data"]
+var external_wc_data_ = __webpack_require__(11);
+
+// CONCATENATED MODULE: ./client/settings-recommendations/recommendations-eligibility-wrapper.tsx
+
+
+/**
+ * External dependencies
+ */
+
+
+const SHOW_MARKETPLACE_SUGGESTION_OPTION = 'woocommerce_show_marketplace_suggestions';
+
+const RecommendationsEligibilityWrapper = ({
+  children
+}) => {
+  const {
+    currentUserCan
+  } = Object(external_wc_data_["useUser"])();
+  const isMarketplaceSuggestionsEnabled = Object(external_wp_data_["useSelect"])(select => {
+    const {
+      getOption,
+      hasFinishedResolution
+    } = select(external_wc_data_["OPTIONS_STORE_NAME"]);
+    const hasFinishedResolving = hasFinishedResolution('getOption', [SHOW_MARKETPLACE_SUGGESTION_OPTION]);
+    const canShowMarketplaceSuggestions = getOption(SHOW_MARKETPLACE_SUGGESTION_OPTION) === 'yes';
+    return hasFinishedResolving && canShowMarketplaceSuggestions;
+  });
+
+  if (!currentUserCan('install_plugins')) {
+    return null;
+  }
+
+  if (!isMarketplaceSuggestionsEnabled) {
+    return null;
+  }
+
+  return Object(external_wp_element_["createElement"])(external_wp_element_["Fragment"], null, children);
+};
+
+/* harmony default export */ var recommendations_eligibility_wrapper = (RecommendationsEligibilityWrapper);
 // CONCATENATED MODULE: ./client/payments/payment-recommendations-wrapper.tsx
 
 
@@ -9393,16 +9437,17 @@ var lib = __webpack_require__(32);
  * Internal dependencies
  */
 
-const PaymentRecommendationsChunk = Object(external_wp_element_["lazy"])(() => Promise.all(/* import() | payment-recommendations */[__webpack_require__.e(1), __webpack_require__.e(44)]).then(__webpack_require__.bind(null, 598)));
+
+const PaymentRecommendationsChunk = Object(external_wp_element_["lazy"])(() => Promise.all(/* import() | payment-recommendations */[__webpack_require__.e(3), __webpack_require__.e(44)]).then(__webpack_require__.bind(null, 601)));
 const PaymentRecommendations = ({
   page,
   tab,
   section
 }) => {
   if (page === 'wc-settings' && tab === 'checkout' && !section) {
-    return Object(external_wp_element_["createElement"])(external_wp_element_["Suspense"], {
+    return Object(external_wp_element_["createElement"])(recommendations_eligibility_wrapper, null, Object(external_wp_element_["createElement"])(external_wp_element_["Suspense"], {
       fallback: null
-    }, Object(external_wp_element_["createElement"])(PaymentRecommendationsChunk, null));
+    }, Object(external_wp_element_["createElement"])(PaymentRecommendationsChunk, null)));
   }
 
   return null;

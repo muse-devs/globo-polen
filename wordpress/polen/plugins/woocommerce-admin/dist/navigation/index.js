@@ -238,6 +238,7 @@ __webpack_require__.d(__webpack_exports__, "getQueryExcludedScreens", function()
 __webpack_require__.d(__webpack_exports__, "pathIsExcluded", function() { return /* binding */ pathIsExcluded; });
 __webpack_require__.d(__webpack_exports__, "getScreenFromPath", function() { return /* binding */ getScreenFromPath; });
 __webpack_require__.d(__webpack_exports__, "getIdsFromQuery", function() { return /* binding */ getIdsFromQuery; });
+__webpack_require__.d(__webpack_exports__, "getSetOfIdsFromQuery", function() { return /* binding */ getSetOfIdsFromQuery; });
 __webpack_require__.d(__webpack_exports__, "getSearchWords", function() { return /* binding */ getSearchWords; });
 __webpack_require__.d(__webpack_exports__, "getNewPath", function() { return /* binding */ getNewPath; });
 __webpack_require__.d(__webpack_exports__, "getQuery", function() { return /* binding */ getQuery; });
@@ -594,8 +595,18 @@ const getScreenFromPath = (path = getPath()) => {
  */
 
 function getIdsFromQuery(queryString = '') {
-  return [...new Set( // Return only unique ids.
-  queryString.split(',').map(id => parseInt(id, 10)).filter(id => !isNaN(id)))];
+  return [...getSetOfIdsFromQuery(queryString)];
+}
+/**
+ * Get an array of IDs from a comma-separated query parameter.
+ *
+ * @param {string} [queryString=''] string value extracted from URL.
+ * @return {Set<number>} List of IDs converted to a set of integers.
+ */
+
+function getSetOfIdsFromQuery(queryString = '') {
+  return new Set( // Return only unique ids.
+  queryString.split(',').map(id => parseInt(id, 10)).filter(id => !isNaN(id)));
 }
 /**
  * Get an array of searched words given a query.

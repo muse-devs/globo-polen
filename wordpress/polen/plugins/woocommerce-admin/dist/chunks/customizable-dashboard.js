@@ -299,7 +299,7 @@ var _extends=Object.assign||function(a){for(var c,b=1;b<arguments.length;b++)for
 
 /***/ }),
 
-/***/ 593:
+/***/ 596:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -418,9 +418,9 @@ var list_ordered_default = /*#__PURE__*/__webpack_require__.n(list_ordered);
  * Internal dependencies
  */
 
-const LazyDashboardCharts = Object(external_wp_element_["lazy"])(() => __webpack_require__.e(/* import() | dashboard-charts */ 26).then(__webpack_require__.bind(null, 605)));
-const LazyLeaderboards = Object(external_wp_element_["lazy"])(() => Promise.all(/* import() | leaderboards */[__webpack_require__.e(3), __webpack_require__.e(32)]).then(__webpack_require__.bind(null, 608)));
-const LazyStorePerformance = Object(external_wp_element_["lazy"])(() => __webpack_require__.e(/* import() | store-performance */ 48).then(__webpack_require__.bind(null, 599)));
+const LazyDashboardCharts = Object(external_wp_element_["lazy"])(() => __webpack_require__.e(/* import() | dashboard-charts */ 26).then(__webpack_require__.bind(null, 608)));
+const LazyLeaderboards = Object(external_wp_element_["lazy"])(() => Promise.all(/* import() | leaderboards */[__webpack_require__.e(1), __webpack_require__.e(32)]).then(__webpack_require__.bind(null, 611)));
+const LazyStorePerformance = Object(external_wp_element_["lazy"])(() => __webpack_require__.e(/* import() | store-performance */ 48).then(__webpack_require__.bind(null, 602)));
 
 const DashboardCharts = props => Object(external_wp_element_["createElement"])(external_wp_element_["Suspense"], {
   fallback: Object(external_wp_element_["createElement"])(external_wc_components_["Spinner"], null)
