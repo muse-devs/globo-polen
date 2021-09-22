@@ -214,6 +214,9 @@ Report.propTypes = {
   const {
     search
   } = query;
+  /* eslint @wordpress/no-unused-vars-before-return: "off" */
+
+  const itemsSelector = select(_woocommerce_data__WEBPACK_IMPORTED_MODULE_6__["ITEMS_STORE_NAME"]);
 
   if (!search) {
     return {};
@@ -223,7 +226,7 @@ Report.propTypes = {
   const searchWords = Object(_woocommerce_navigation__WEBPACK_IMPORTED_MODULE_5__["getSearchWords"])(query); // Single Category view in Categories Report uses the products endpoint, so search must also.
 
   const mappedReport = report === 'categories' && query.filter === 'single_category' ? 'products' : report;
-  const itemsResult = Object(_woocommerce_data__WEBPACK_IMPORTED_MODULE_6__["searchItemsByString"])(select, mappedReport, searchWords, {
+  const itemsResult = Object(_woocommerce_data__WEBPACK_IMPORTED_MODULE_6__["searchItemsByString"])(itemsSelector, mappedReport, searchWords, {
     per_page: 100
   });
   const {

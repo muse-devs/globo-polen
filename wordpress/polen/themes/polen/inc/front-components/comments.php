@@ -86,42 +86,7 @@ function polen_card_talent_reviews_order(\WP_Post $post, $Talent_Fields)
 		<div class="row">
 			<div class="col-12 col-md-6 m-md-auto">
 				<div class="row">
-					<div class="col-4 col-md-4 text-center text-md-center">
-						<span class="skill-title">Responde em</span>
-						<p class="p mb-0 mt-2">
-							<span class="skill-value">
-								<?php Icon_Class::polen_icon_clock(); ?>
-								<?php
-									switch (true) {
-										case $Talent_Fields->tempo_resposta <= 24:
-											echo "até 1 dia";
-											break;
-									
-										case $Talent_Fields->tempo_resposta <= 48:
-											echo "até 2 dias";
-											break;
-									
-										case $Talent_Fields->tempo_resposta <= 72:
-											echo "até 3 dias";
-											break;
-
-										case $Talent_Fields->tempo_resposta <= 96:
-											echo "até 4 dias";
-											break;
-
-										case $Talent_Fields->tempo_resposta <= 120:
-											echo "até 5 dias";
-											break;
-									
-										default:
-											echo "até 7 dias";
-											break;
-									}
-								?>
-							</span>
-						</p>
-					</div>
-					<div class="col-4 col-md-4 text-center text-md-center">
+					<div class="col-6 col-md-6 text-center text-md-center">
 						<span class="skill-title">Prazo de entrega</span>
 						<p class="p mb-0 mt-2">
 							<span class="skill-value">
@@ -133,7 +98,7 @@ function polen_card_talent_reviews_order(\WP_Post $post, $Talent_Fields)
 							</span>
 						</p>
 					</div>
-					<div class="col-4 col-md-4 text-center text-md-center">
+					<div class="col-6 col-md-6 text-center text-md-center">
 						<?php
 						$total_reviews = get_post_meta($post->ID, "total_review", true);
 						if (empty($total_reviews)) {
