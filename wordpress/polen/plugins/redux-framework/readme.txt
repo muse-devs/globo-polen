@@ -4,7 +4,7 @@ Tags: gutenberg, blocks, gutenberg blocks, editor, block, page builder, block ed
 Requires at least: 4.0
 Requires PHP: 7.1
 Tested up to: 5.8.1
-Stable tag: 4.3.0
+Stable tag: 4.3.1
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -68,7 +68,7 @@ You can also contribute code via our <a href="https://github.com/reduxframework/
 <h4>📝 Documentation and Support</h4>
 <ul>
 <li>For more information about the Template Library, check out <a href="https://extendify.com/" rel="nofollow ugc">Extendify</a>.</li>
-<li>For information about the Redux Options Framework, check out <a href="https://devs.redux.io/” rel=”nofollow ugc”>Redux Documentation</a>.</li>
+<li>For information about the Redux Options Framework, check out <a href="https://devs.redux.io/" rel="nofollow ugc">Redux Documentation</a>.</li>
 <li>If you have additional questions, reach out to us at support@redux.io</li>
 </ul>
 
@@ -107,6 +107,11 @@ Once Installed and Activated you will be invited to Activate your Redux account.
 If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg/) plugin to get bleeding-edge experiments by the Gutenberg team.
 
 == Changelog ==
+
+= 4.3.1 =
+Fixed: `wp_mail has been declared by another process or plugin` message.
+Fixed: Malformed README wouldn't allow clicking of some support links.
+Release date: September 22, 2021
 
 = 4.3.0 =
 Added: Gutenberg Template Library updated to the new Extendify library. See more information here about this upgrade and how to access the legacy library: [https://redux.io/gutenberg-template-library-upgrade](https://redux.io/gutenberg-template-library-upgrade).
