@@ -220,6 +220,15 @@ class table_CategoriesReportTable extends external_wp_element_["Component"] {
       formatDecimal: getCurrencyFormatDecimal,
       getCurrencyConfig
     } = this.context;
+    const {
+      categories,
+      query
+    } = this.props;
+
+    if (!categories) {
+      return [];
+    }
+
     const currency = getCurrencyConfig();
     return Object(external_lodash_["map"])(categoryStats, categoryStat => {
       const {
@@ -229,10 +238,6 @@ class table_CategoriesReportTable extends external_wp_element_["Component"] {
         products_count: productsCount,
         orders_count: ordersCount
       } = categoryStat;
-      const {
-        categories,
-        query
-      } = this.props;
       const category = categories.get(categoryId);
       const persistedQuery = Object(external_wc_navigation_["getPersistedQuery"])(query);
       return [{
