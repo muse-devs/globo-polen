@@ -1209,15 +1209,15 @@ const SelectiveExtensionsBundle = ({
       isResolving: !hasFinishedResolution('getFreeExtensions')
     };
   });
-  Object(external_wp_element_["useEffect"])(() => {
-    const initialValues = createInitialValues(freeExtensions);
-    setValues(initialValues);
-  }, [freeExtensions]);
   const installableExtensions = Object(external_wp_element_["useMemo"])(() => {
     return freeExtensions.filter(list => {
       return ALLOWED_PLUGIN_LISTS.includes(list.key);
     });
   }, [freeExtensions]);
+  Object(external_wp_element_["useEffect"])(() => {
+    const initialValues = createInitialValues(installableExtensions);
+    setValues(initialValues);
+  }, [installableExtensions]);
 
   const getCheckboxChangeHandler = key => {
     return checked => {

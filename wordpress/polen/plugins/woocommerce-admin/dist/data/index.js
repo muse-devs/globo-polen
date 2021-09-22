@@ -4019,19 +4019,19 @@ function getLeaderboard(options) {
 /**
  * Returns items based on a search query.
  *
- * @param {Object} select    Instance of @wordpress/select
- * @param {string} endpoint  Report API Endpoint
- * @param {string[]} search    Array of search strings.
- * @param {Object} options  Query options.
+ * @param  {Object}   selector    Instance of @wordpress/select response
+ * @param  {string}   endpoint  Report API Endpoint
+ * @param  {string[]} search    Array of search strings.
+ * @param  {Object}   options  Query options.
  * @return {Object}   Object containing API request information and the matching items.
  */
 
-function searchItemsByString(select, endpoint, search, options) {
+function searchItemsByString(selector, endpoint, search, options = {}) {
   const {
     getItems,
     getItemsError,
     isResolving
-  } = select(items_constants_STORE_NAME);
+  } = selector;
   const items = {};
   let isRequesting = false;
   let isError = false;
