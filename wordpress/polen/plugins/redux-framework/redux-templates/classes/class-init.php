@@ -47,6 +47,10 @@ class Init {
 			$this->load();
 		}
 
+		if ( false === \Redux_Core::$redux_templates_enabled ) {
+			return;
+		}
+
 		// Editor Load.
 		add_action( 'enqueue_block_editor_assets', array( $this, 'editor_assets' ), 1 );
 		// Admin Load.
@@ -154,7 +158,7 @@ class Init {
 			// phpcs:ignore
 			// delete_user_meta( get_current_user_id(), '_redux_welcome_guide' ); // For testing.
 			if ( \Redux_Helpers::is_gutenberg_page() && $global_vars['left'] === self::$default_left ) {
-				// We don't want to show unless Gutenberg is running and they haven't tried the library yet.
+				// We don't want to show unless Gutenberg is running, and they haven't tried the library yet.
 				$launched = get_user_meta( get_current_user_id(), '_redux_welcome_guide', true );
 				if ( '1' !== $launched ) {
 					$global_vars['welcome'] = 1;
