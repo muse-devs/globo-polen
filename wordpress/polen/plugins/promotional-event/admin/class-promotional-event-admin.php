@@ -11,6 +11,7 @@
  */
 
 use Polen\Includes\Debug;
+use Polen\Includes\Polen_Order;
 use Polen\Includes\Polen_WooCommerce;
 
 /**
@@ -257,6 +258,11 @@ class Promotional_Event_Admin
             wc_add_order_item_meta( $order_item_id, 'allow_video_on_page'   , 'on', true );
             wc_add_order_item_meta( $order_item_id, '_fee_amount'           , 0, true );
             wc_add_order_item_meta( $order_item_id, '_line_total'           , 0, true );
+
+            $interval  = Polen_Order::get_interval_order_event();
+            $timestamp = Polen_Order::get_deadline_timestamp_by_social_event( $order, $interval );
+            $order->add_meta_data( Polen_Order::META_KEY_DEADLINE, $timestamp, true );
+
             $order->save();
 
             $email = WC_Emails::instance();
