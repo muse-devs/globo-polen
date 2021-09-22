@@ -24,9 +24,7 @@ use Polen\Includes\Polen_WooCommerce;
             </td>
             <td>
                 <p id="video-instructions"><?php echo $info ?></p>
-            </td>
-            <td>
-                <a href="#" class="edit-video-instruction" data-old-value="<?= $info; ?>" data-field="<?= Polen_Cart::ITEM_INSTRUCTION_TO_VIDEO; ?>"><i class="fa fa-edit"></i></a>
+                <a href="#" class="edit-video-instruction" data-old-value="<?= $info; ?>" data-field="<?= Polen_Cart::ITEM_INSTRUCTION_TO_VIDEO; ?>">Editar</a>
             </td>
         </tr>
         <?php

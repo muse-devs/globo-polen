@@ -13,7 +13,7 @@ class Polen_Admin_Order_Custom_Fields
     public function __construct( $static = false )
     {
         add_action( 'wp_ajax_polen_edit_order_custom_fields', [ $this, 'edit_order_custom_fields' ] );
-        add_action( 'wp_ajax_nopriv_polen_edit_order_custom_fields', [ $this, 'edit_order_custom_fields' ] );
+        // add_action( 'wp_ajax_nopriv_polen_edit_order_custom_fields', [ $this, 'edit_order_custom_fields' ] );
     }
 
     public function edit_order_custom_fields()
