@@ -838,5 +838,31 @@ class Polen_Talent {
         $post = $posts[ 0 ];
         return wc_get_product( $post );
     }
+
+    /**
+     * Enviar Request para webwook quando um talento for cadastrado
+     *
+     * @param $user_id
+     * @param $userdata
+     */
+    function action_user_talent_register($user_id, $userdata)
+    {
+        if ($userdata['role'] != 'user_talent') {
+            return;
+        }
+
+        $url = 'https://polen.me/colab/3e07450ff56447e13a166e6ac458174b/';
+        wp_remote_post($url, array(
+                'method' => 'POST',
+                'timeout' => 45,
+                'headers' => array(),
+                'body' => array(
+                    'name' => $userdata['first_name'],
+                    'email' => $userdata['email'],
+                ),
+            )
+        );
+    }
+
 }
     
