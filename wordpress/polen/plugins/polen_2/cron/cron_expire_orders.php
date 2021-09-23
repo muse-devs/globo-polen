@@ -44,11 +44,8 @@ $res = $wpq->get_posts();
 if( $res && ! is_null( $res ) && ! is_wp_error( $res ) && is_array( $res ) && count( $res ) > 0 ) {
     foreach( $res as $order_id ) {
         $order = wc_get_order( $order_id );
-
         echo '#' . $order_id . ': Marcado como expirado extorno manual.' . "\n"; 
         $order->update_status( 'order-expired', 'order_note' );
-
-        exit;
     }
 } else {
     echo "Nenhum pedido a ser expirado.\n";
