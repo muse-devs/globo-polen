@@ -64,12 +64,16 @@ class Polen_Admin_Order_Custom_Fields
             
             $order_id = filter_input( INPUT_POST, 'order_id', FILTER_SANITIZE_NUMBER_INT );
             $order = wc_get_order( $order_id );
+            $this->validate_order_valid( $order );
 
             $current_deadline = $order->get_meta( Polen_Order::META_KEY_DEADLINE, true );
             $old_deadline = \WC_DateTime::createFromFormat( 'U', $current_deadline );
-            $this->validate_order_valid( $order );
             
-            $order->add_order_note( "Deadline alterada. Antiga: {$old_deadline->format('d/m/Y')}.", 0, true );
+            if( !empty( $old_deadline ) ) {
+                $order->add_order_note( "Deadline alterada. Antiga: {$old_deadline->format('d/m/Y')}.", 0, true );
+            } else {
+                $order->add_order_note( "Deadline CRIADA (já era para existir verificar o problema).", 0, true );
+            }
             $order->update_meta_data( $field, $date->getTimestamp(), true );
             $order->save();
             wp_send_json_success( 'deadline editada com sucesso', 200 );
