@@ -5,7 +5,7 @@ use Polen\Master_class\Master_Class_Rewrite;
 
 function master_class_url_home()
 {
-	return site_url( Master_Class_Rewrite::BASE_URL . '/ronnie-von/beaba-do-vinho/inscricoes' );
+	return site_url( Master_Class_Rewrite::BASE_URL . '/ronnie-von/beaba-do-vinho' );
 }
 
 function master_class_url_success()

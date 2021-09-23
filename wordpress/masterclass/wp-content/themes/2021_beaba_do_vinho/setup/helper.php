@@ -151,14 +151,14 @@ function _theme_find_product_in_cart(int $productId): bool
  *
  * @return array
  */
-function get_product_masterclass(): array
+function get_product_masterclass($masterclass_id = 69): array
 {
-    $masterclass_product_id = 69;
-    $masterclass_product = wc_get_product(69);
+    $masterclass_product_id = $masterclass_id;
+    $masterclass_product = wc_get_product($masterclass_id);
 
     if (is_wp_error($masterclass_product) || empty($masterclass_product)) {
         return [
-            'error' => 'Produto masterclass está com ID diferente',
+            'error' => 'Produto masterclass não encontrado!',
         ];
     }
 
