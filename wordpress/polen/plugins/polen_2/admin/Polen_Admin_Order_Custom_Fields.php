@@ -4,6 +4,8 @@ namespace Polen\Admin;
 
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
 use Polen\Includes\Polen_Cart;
+use Polen\Includes\Polen_Order;
+use WC_DateTime;
 
 class Polen_Admin_Order_Custom_Fields
 {
@@ -13,9 +15,14 @@ class Polen_Admin_Order_Custom_Fields
     public function __construct( $static = false )
     {
         add_action( 'wp_ajax_polen_edit_order_custom_fields', [ $this, 'edit_order_custom_fields' ] );
+        add_action( 'wp_ajax_polen_edit_order_custom_fields_deadline', [ $this, 'edit_order_custom_fields_deadline' ] );
         // add_action( 'wp_ajax_nopriv_polen_edit_order_custom_fields', [ $this, 'edit_order_custom_fields' ] );
     }
 
+
+    /**
+     * 
+     */
     public function edit_order_custom_fields()
     {
         $field = filter_input( INPUT_POST, 'field' );
@@ -31,9 +38,45 @@ class Polen_Admin_Order_Custom_Fields
 
         $item_cart = Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
         $item_order = $item_cart->get_item_order();
+        
+        $order->add_order_note( "{$field} alterado via wp-admin", 0, true );
         $item_order->update_meta_data( $field, $new_value, true );
         $item_order->save();
         wp_send_json_success( 'editado com sucesso', 200 );
+    }
+
+
+
+    /**
+     * 
+     */
+    public function edit_order_custom_fields_deadline()
+    {
+        $field = filter_input( INPUT_POST, 'field' );
+        $this->validate_deadline_field_is_valid( $field );
+        $new_value = filter_input( INPUT_POST, 'value' );
+        
+        try{
+            $date = WC_DateTime::createFromFormat( 'd/m/Y H:i:s', $new_value . ' 23:59:59' );
+            $nonce = filter_input( INPUT_POST, 'security' );
+            $this->validate_dateTime( $date );
+            $this->validate_nonce( $nonce, self::NONCE_ACTION );
+            
+            $order_id = filter_input( INPUT_POST, 'order_id', FILTER_SANITIZE_NUMBER_INT );
+            $order = wc_get_order( $order_id );
+
+            $current_deadline = $order->get_meta( Polen_Order::META_KEY_DEADLINE, true );
+            $old_deadline = \WC_DateTime::createFromFormat( 'U', $current_deadline );
+            $this->validate_order_valid( $order );
+            
+            $order->add_order_note( "Deadline alterada. Antiga: {$old_deadline->format('d/m/Y')}.", 0, true );
+            $order->update_meta_data( $field, $date->getTimestamp(), true );
+            $order->save();
+            wp_send_json_success( 'deadline editada com sucesso', 200 );
+        } catch ( \Exception $e ) {
+            wp_send_json_error( $e->getMessage(), 401 );
+        }
+        wp_die();
     }
 
 
@@ -44,6 +87,16 @@ class Polen_Admin_Order_Custom_Fields
     {
         wp_send_json_error( $msg, $error_no );
         wp_die();
+    }
+
+    /**
+     * Validacao DateTime
+     */
+    public function validate_dateTime( $date )
+    {
+        if( empty( $date ) ) {
+            $this->return_error( 'Data informada é inválida', 403 );
+        }
     }
 
 
@@ -76,6 +129,14 @@ class Polen_Admin_Order_Custom_Fields
     {
         if( !in_array( $field, Polen_Cart::ALLOWED_ITEM ) ) {
             $this->return_error( 'field é inválido', 403 );
+        }
+    }
+
+
+    public function validate_deadline_field_is_valid( $field )
+    {
+        if( $field != Polen_Order::META_KEY_DEADLINE ) {
+            $this->return_error( 'field deadline é inválido', 403 );
         }
     }
 }
