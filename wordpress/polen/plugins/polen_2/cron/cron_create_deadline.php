@@ -4,12 +4,12 @@ use Polen\Includes\Polen_Order;
 
 include_once dirname( __FILE__ ) . '/init.php';
 
-$order = wc_get_order( 370 );
-$interval = Polen_Order::get_deadline_interval_order_by_social_event( $order );
-$var_dump( Polen_Order::get_deadline_timestamp_by_social_event( $order, $interval ) );
-// echo get_class($order);
-// var_dump(Polen_Order::get_order_ids_by_deadline( ['payment-approved', 'talent-accepted'], "1632171169"));
-die;
+// $order = wc_get_order( 370 );
+// $interval = Polen_Order::get_deadline_interval_order_by_social_event( $order );
+// $var_dump( Polen_Order::get_deadline_timestamp_by_social_event( $order, $interval ) );
+// // echo get_class($order);
+// // var_dump(Polen_Order::get_order_ids_by_deadline( ['payment-approved', 'talent-accepted'], "1632171169"));
+// die;
 
 $args = [
     // 'return' => 'ids',
@@ -56,7 +56,7 @@ for( $i = 1; $i <= $max_page; $i++ ) :
         $order->add_meta_data( Polen_Order::META_KEY_DEADLINE, $created_at->getTimestamp(), true );
         $order->save();
     }
-
+die('OK--KO');
 endfor;
 // var_dump( $wpdb->last_query );
 
