@@ -19,6 +19,11 @@ class Polen_Order
     const SLUG_ORDER_COMPLETE = 'completed';
     const SLUG_ORDER_COMPLETE_INSIDE = 'wc-completed';
 
+    const SLUG_ORDER_PAYMENT_APPROVED = 'payment-approved';
+    const SLUG_ORDER_TALENT_ACCEPTED  = 'talent-accepted';
+
+    const ORDER_STATUSES_NEED_TALENT_ACTION = [ self::SLUG_ORDER_PAYMENT_APPROVED, self::SLUG_ORDER_TALENT_ACCEPTED ];
+
     const WHATSAPP_NUMBER_META_KEY = 'polen_whatsapp_number';
     const WHATSAPP_NUMBER_NONCE_ACTION = 'polen_whatsapp_nonce_action';
 

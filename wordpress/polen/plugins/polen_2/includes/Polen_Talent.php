@@ -328,7 +328,7 @@ class Polen_Talent {
      * @param $order
      * @return string
      */
-private function get_messenger($order): string
+    private function get_messenger($order): string
     {
         $status = $order->get_status();
         $status_fail = [
@@ -340,34 +340,13 @@ private function get_messenger($order): string
         ];
 
         if (in_array($status, $status_fail)) {
-            return 'Sem data';
+            return '-';
         }
 
-        $order_date = $order->get_date_created()->date( 'Ymd');
-
-        $autograph_video = get_post_meta($order->get_id(), 'campaign');
-        $social = get_post_meta($order->get_id(), 'social');
-
-        $social_deadline = 15;
-        $autograph_deadline = 30;
-
-        $number_of_days = 7;
-
-        if (isset($social[0])) {
-            $number_of_days = $social_deadline;
-        }
-
-        if (isset($autograph_video[0])) {
-            $number_of_days = $autograph_deadline;
-        }
-
-        $deadline = $this->calculate_diff_date($order_date, $number_of_days);
-
-        $msg = 'Prazo expirado';
-
-        if ($deadline > 0) {
-            $msg = "{$deadline} dia(s) para o fim do prazo";
-        }
+        $deadline_timestamp = $order->get_meta( Polen_Order::META_KEY_DEADLINE, true );
+        $deadline_date = \WC_DateTime::createFromFormat( 'U', $deadline_timestamp );
+        $deadline = $deadline_date->format('d/m/Y');
+        $msg = "{$deadline}";
 
         return $msg;
     }
@@ -375,7 +354,7 @@ private function get_messenger($order): string
     public function talent_column_content($column, $post_id) {
 
         $order = wc_get_order($post_id);
-        $message = 'Vídeo já foi enviado!';
+        $message = 'Enviado';
 
         if (!$order->has_status('completed')) {
             $message = $this->get_messenger($order);
