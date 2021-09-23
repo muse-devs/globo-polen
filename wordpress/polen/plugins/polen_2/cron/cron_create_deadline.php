@@ -56,7 +56,7 @@ for( $i = 1; $i <= $max_page; $i++ ) :
         $order->add_meta_data( Polen_Order::META_KEY_DEADLINE, $created_at->getTimestamp(), true );
         $order->save();
     }
-die('OK--KO');
+// die('OK--KO');
 endfor;
 // var_dump( $wpdb->last_query );
 
