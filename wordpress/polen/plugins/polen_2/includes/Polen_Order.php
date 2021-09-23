@@ -9,7 +9,7 @@
 namespace Polen\Includes;
 
 use Polen\Publics\Polen_Public;
-
+use DateInterval;
 class Polen_Order
 {
     
@@ -21,6 +21,8 @@ class Polen_Order
 
     const WHATSAPP_NUMBER_META_KEY = 'polen_whatsapp_number';
     const WHATSAPP_NUMBER_NONCE_ACTION = 'polen_whatsapp_nonce_action';
+
+    const META_KEY_DEADLINE = '_polen_deadline';
     
     public function __construct( $static = false ) {
         if( $static ) {
@@ -322,5 +324,120 @@ class Polen_Order
         if( empty( $order ) ) {
             throw new \Exception( 'Pedido não encontrado', 403 );
         }
+    }
+
+    /**
+     * Funcao que retona WC_Orders baseado num array de status de uma deadline,
+     * retorna as Orders que o mate _polen_deadline for menor que o passado por parametro
+     * @param array [ 'payment-approved', 'talent-accepted' ]
+     * @param Timestamp 
+     */
+    public static function get_order_ids_by_deadline( $statuses, $deadline )
+    {
+        $args = [
+            'fields' => 'ids',
+            'post_status' => $statuses,
+            'meta_query' => [
+                [ 'key' => self::META_KEY_DEADLINE, 'value' => intval( $deadline ), 'compare' => '<' ],
+            ],
+            'post_type' => wc_get_order_types(),
+        ];
+        $wp_query = new \WP_Query( $args );
+        $order_ids = $wp_query->get_posts();
+        return $order_ids;
+    }
+
+    /**
+     * Retorna o intevalo de dados para Order Social
+     * @return \DateInterval
+     */
+    public static function get_interval_order_social()
+    {
+        return new DateInterval( 'P15D' );
+    }
+
+    /**
+     * Retorna o Intervalo de Order Video-Autografo
+     * @return \DateInterval
+     */
+    public static function get_interval_order_event()
+    {
+        return new DateInterval( 'P30D' );
+    }
+
+    /**
+     * Retorna o intevalo da data de uma Order basica
+     * @return \DateInterval
+     */
+    public static function get_interval_order_basic()
+    {
+        return new DateInterval( 'P7D' );
+    }
+
+    /**
+     * Retorna o Intervalo de data por tipo de ordem
+     * @param \WC_Order
+     * @return \DateInterval
+     */
+    public static function get_deadline_interval_order_by_social_event( $order )
+    {
+        if( empty( $order ) ) {
+            return false;
+        }
+        if( social_order_is_social( $order ) ) {
+            $interval_time = self::get_interval_order_social();
+        } elseif ( event_promotional_order_is_event_promotional( $order ) ) {
+            $interval_time = self::get_interval_order_event();
+        } else {
+            $interval_time = self::get_interval_order_basic();
+        }
+        return $interval_time;
+    }
+
+    /**
+     * Retorna o Timestamp baseado na data de criacao da Order e do inteval
+     * @param \WC_Order
+     * @param \DateInterval
+     * @return int Timestamp
+     */
+    public static function get_deadline_timestamp_by_social_event( $order, $interval )
+    {
+        if( empty( $order ) || empty( $interval ) ) {
+            return false;
+        }
+        $created_at = new \WC_DateTime( 'now' );
+        $created_at->add( $interval );
+        return $created_at->getTimestamp();
+    }
+
+
+    /**
+     * Pega o Timestamp por uma order
+     * @param \WC_Order
+     * @return int Timestamp
+     */
+    public static function get_deadline_timestamp_by_order( $order )
+    {
+        if( empty( $order ) ) {
+            return false;
+        }
+        $dataInterval = self::get_deadline_interval_order_by_social_event( $order );
+        $timestamp = self::get_deadline_timestamp_by_social_event( $order, $dataInterval );
+        return $timestamp;
+    }
+
+    /**
+     * Sava no meta de deadline o timestamp
+     * @param \WC_Order
+     * @param int $timestamp
+     * @return int
+     */
+    public static function save_deadline_timestamp_in_order( \WC_Order $order, $timestamp )
+    {
+        if( empty( $order ) || empty( $timestamp ) ) {
+            return false;
+        }
+        $order->add_meta_data( self::META_KEY_DEADLINE, $timestamp, true );
+        return $order->save();
     }
 }
