@@ -100,7 +100,7 @@ if( $res && ! is_null( $res ) && ! is_wp_error( $res ) && is_array( $res ) && co
                 $order->update_status( 'order-expired', 'order_note' );
         //     }
         // }
-        exit;
+        // exit;
     }
 } else {
     echo "Nenhum pedido a ser expirado.\n";
