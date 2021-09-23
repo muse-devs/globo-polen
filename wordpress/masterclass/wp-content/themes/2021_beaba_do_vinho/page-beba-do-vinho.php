@@ -1,11 +1,5 @@
 <?php
 /** Template Name: Página - beaba do vinho */
-
-// REDIRECT
-$url = home_url('/ronnie-von/beaba-do-vinho/inscricoes/');
-header("Location: {$url}");
-exit;
-
 get_header();
 ?>
 <script>
