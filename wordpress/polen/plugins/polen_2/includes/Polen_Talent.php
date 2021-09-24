@@ -345,6 +345,9 @@ class Polen_Talent {
 
         $deadline_timestamp = $order->get_meta( Polen_Order::META_KEY_DEADLINE, true );
         $deadline_date = \WC_DateTime::createFromFormat( 'U', $deadline_timestamp );
+        if( empty( $deadline_date ) ) {
+            return '';
+        }
         $deadline = $deadline_date->format('d/m/Y');
         $msg = "{$deadline}";
 
