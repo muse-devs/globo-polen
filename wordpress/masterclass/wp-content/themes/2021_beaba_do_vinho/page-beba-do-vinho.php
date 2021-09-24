@@ -50,7 +50,7 @@ get_header();
                     </div>
                 </div>
                 <div class="col-12 text-center mt-4">
-                    <a href="#" class="btn gradient btn-lg">Quero ganhar desconto</a>
+                    <a href="#" class="btn gradient btn-lg">Entrar na lista de espera</a>
                 </div>
                 <div class="col-12 text-center mt-3">
                     <div class="row">
