@@ -85,18 +85,11 @@ class Polen_Signin_Newsletter
         if( isset( $email ) && !empty( $email ) ) {
             $newsletter = $this->set_email_to_newsletter( $email, $event, $page_source, $is_mobile );
             if( !empty( $newsletter ) ){
-                if( $newsletter == "Te enviamos um email com mais informações") {
-                    //Enviar email para o recem cadastrado
-                    // add_filter( 'woocommerce_defer_transactional_emails', '__return_true' ); 
-                    // \WC_Emails::instance();
-                    $email_service = new Polen_Email_Signin_Prerelease();
-                    $email_service->trigger( $email );
-                    wp_send_json_success( array( 'response' => $newsletter ), 201 );
-                    wp_die();
-                } else {
-                    wp_send_json_error( array( 'response' => $newsletter ), 403 );
-                    wp_die();
-                }
+                wp_send_json_success( array( 'response' => $newsletter ), 201 );
+                wp_die();
+            } else {
+                wp_send_json_error( array( 'response' => $newsletter ), 403 );
+                wp_die();
             }
         } else {
             wp_send_json_error( array( 'response' => 'Não foi possível completar a solicitação' ), 403 );
@@ -118,7 +111,7 @@ class Polen_Signin_Newsletter
 
                 if( $inserted > 0 ){
                     //$this->export_occasion_json();
-                    return "Te enviamos um email com mais informações";
+                    return "Email Cadastrado!";
                 }else{
                     return "Ocorreu um erro ao tentar cadastrar";
                 }
