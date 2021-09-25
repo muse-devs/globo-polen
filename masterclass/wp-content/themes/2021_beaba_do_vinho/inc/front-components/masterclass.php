@@ -8,14 +8,14 @@ function mc_get_buy_button($product)
 ?>
 	<div class="row mb-4">
 		<div class="col-12 col-md-6 m-md-auto">
-			<a href="<?php echo $product['url_to_checkout']; ?>" class="btn btn-primary btn-lg btn-block mt-4 gradient mc-custom-button">Vagas Esgotadas</a>
+			<a href="<?php echo $product['url_to_checkout']; ?>" class="btn btn-primary btn-lg btn-block mt-4 gradient mc-custom-button">Quero me inscrever<br>De <s><?php echo $product['price_regular'] ?></s> Por <?php echo $product['price']; ?></a>
 		</div>
 	</div>
-	<!-- <div class="row">
+	<div class="row">
 		<div class="col-12 col-md-6 m-md-auto text-center">
-			<p class="subtitle"><b>16 de Setembro às 20h, ao vivo</b></p>
+			<p class="subtitle">Desconto de primeiro lote. Vagas limitadas.</p>
 		</div>
-	</div> -->
+	</div>
 <?php
 }
 
