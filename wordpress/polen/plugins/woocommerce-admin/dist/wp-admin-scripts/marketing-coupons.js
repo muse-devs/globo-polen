@@ -1670,7 +1670,7 @@ const ReadBlogMessage = () => {
     components: {
       link: Object(external_wp_element_["createElement"])(external_wc_components_["Link"], {
         type: "external",
-        href: "https://woocommerce.com/blog/marketing/coupons/",
+        href: "https://woocommerce.com/blog/marketing/coupons/?utm_medium=product",
         target: "_blank"
       })
     }

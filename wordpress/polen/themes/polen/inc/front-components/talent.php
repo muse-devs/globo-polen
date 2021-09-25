@@ -92,7 +92,9 @@ function polen_get_talent_card($talent, $social = false)
 	<div class="talent-card alt<?php if($social) { echo ' criesp'; } ?>">
 		<header class="row pb-3 header">
 			<div class="col-md-12 d-flex align-items-center">
-				<div class="avatar avatar-sm" style="background-image: url(<?php echo isset($talent["avatar"]) ? $talent["avatar"] : TEMPLATE_URI . '/assets/img/avatar.png';  ?>)"></div>
+				<figure class="avatar avatar-sm image-cropper">
+					<img src="<?php echo isset($talent["avatar"]) ? $talent["avatar"] : TEMPLATE_URI . '/assets/img/avatar.png';  ?>" alt="<?php echo isset($talent["alt"]) ? $talent["alt"] : $talent["name"]; ?>">
+				</figure>
 				<h4 class="name ml-3"><?php echo $talent["name"]; ?></h4>
 			</div>
 		</header>

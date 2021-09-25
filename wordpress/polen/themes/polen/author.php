@@ -12,6 +12,9 @@
  * @package Polen
  */
 
+Header( "HTTP/1.1 301 Moved Permanently" );
+Header( "Location: " . home_url() );
+
 get_header();
 ?>
 

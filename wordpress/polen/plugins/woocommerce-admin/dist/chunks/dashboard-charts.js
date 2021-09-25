@@ -645,6 +645,9 @@ report_chart_ReportChart.defaultProps = {
   const {
     woocommerce_default_date_range: defaultDateRange
   } = select(external_wc_data_["SETTINGS_STORE_NAME"]).getSetting('wc_admin', 'wcAdminSettings');
+  /* eslint @wordpress/no-unused-vars-before-return: "off" */
+
+  const reportStoreSelector = select(external_wc_data_["REPORTS_STORE_NAME"]);
   const newProps = {
     mode: chartMode,
     filterParam,
@@ -668,7 +671,7 @@ report_chart_ReportChart.defaultProps = {
     endpoint,
     dataType: 'primary',
     query,
-    select,
+    selector: reportStoreSelector,
     limitBy,
     filters,
     advancedFilters,
@@ -686,7 +689,7 @@ report_chart_ReportChart.defaultProps = {
     endpoint,
     dataType: 'secondary',
     query,
-    select,
+    selector: reportStoreSelector,
     limitBy,
     filters,
     advancedFilters,
@@ -701,7 +704,7 @@ report_chart_ReportChart.defaultProps = {
 
 /***/ }),
 
-/***/ 525:
+/***/ 524:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -725,41 +728,48 @@ const charts = Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__["applyFilter
   label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Gross Sales', 'woocommerce-admin'),
   order: 'desc',
   orderby: 'gross_sales',
-  type: 'currency'
+  type: 'currency',
+  isReverseTrend: false
 }, {
   key: 'refunds',
   label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Returns', 'woocommerce-admin'),
   order: 'desc',
   orderby: 'refunds',
-  type: 'currency'
+  type: 'currency',
+  isReverseTrend: true
 }, {
   key: 'coupons',
   label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Coupons', 'woocommerce-admin'),
   order: 'desc',
   orderby: 'coupons',
-  type: 'currency'
+  type: 'currency',
+  isReverseTrend: false
 }, {
   key: 'net_revenue',
   label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Net Sales', 'woocommerce-admin'),
   orderby: 'net_revenue',
-  type: 'currency'
+  type: 'currency',
+  isReverseTrend: false
 }, {
   key: 'taxes',
   label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Taxes', 'woocommerce-admin'),
   order: 'desc',
   orderby: 'taxes',
-  type: 'currency'
+  type: 'currency',
+  isReverseTrend: false
 }, {
   key: 'shipping',
   label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Shipping', 'woocommerce-admin'),
   orderby: 'shipping',
-  type: 'currency'
+  type: 'currency',
+  isReverseTrend: false
 }, {
   key: 'total_sales',
   label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Total Sales', 'woocommerce-admin'),
   order: 'desc',
   orderby: 'total_sales',
-  type: 'currency'
+  type: 'currency',
+  isReverseTrend: false
 }]);
 const advancedFilters = Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__["applyFilters"])(REVENUE_REPORT_ADVANCED_FILTERS_FILTER, {
   filters: {},
@@ -788,7 +798,7 @@ const filters = Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__["applyFilte
 
 /***/ }),
 
-/***/ 526:
+/***/ 525:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -947,7 +957,7 @@ const filters = Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__["applyFilte
 
 /***/ }),
 
-/***/ 530:
+/***/ 529:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1235,7 +1245,7 @@ const advancedFilters = Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__["ap
 
 /***/ }),
 
-/***/ 531:
+/***/ 530:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1340,7 +1350,7 @@ const filters = Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__["applyFilte
 
 /***/ }),
 
-/***/ 532:
+/***/ 531:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1449,7 +1459,7 @@ const filters = Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__["applyFilte
 
 /***/ }),
 
-/***/ 533:
+/***/ 532:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1629,21 +1639,21 @@ const advancedFilters = Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__["ap
 
 /***/ }),
 
-/***/ 588:
+/***/ 591:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ 589:
+/***/ 592:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ 605:
+/***/ 608:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1704,7 +1714,7 @@ var external_wc_experimental_ = __webpack_require__(20);
 var report_chart = __webpack_require__(503);
 
 // EXTERNAL MODULE: ./client/dashboard/dashboard-charts/block.scss
-var block = __webpack_require__(588);
+var block = __webpack_require__(591);
 
 // CONCATENATED MODULE: ./client/dashboard/dashboard-charts/block.js
 
@@ -1804,22 +1814,22 @@ block_ChartBlock.propTypes = {
 var external_wp_hooks_ = __webpack_require__(30);
 
 // EXTERNAL MODULE: ./client/analytics/report/orders/config.js
-var config = __webpack_require__(530);
+var config = __webpack_require__(529);
 
 // EXTERNAL MODULE: ./client/analytics/report/products/config.js
-var products_config = __webpack_require__(526);
+var products_config = __webpack_require__(525);
 
 // EXTERNAL MODULE: ./client/analytics/report/revenue/config.js
-var revenue_config = __webpack_require__(525);
+var revenue_config = __webpack_require__(524);
 
 // EXTERNAL MODULE: ./client/analytics/report/coupons/config.js
-var coupons_config = __webpack_require__(531);
+var coupons_config = __webpack_require__(530);
 
 // EXTERNAL MODULE: ./client/analytics/report/taxes/config.js
-var taxes_config = __webpack_require__(532);
+var taxes_config = __webpack_require__(531);
 
 // EXTERNAL MODULE: ./client/analytics/report/downloads/config.js
-var downloads_config = __webpack_require__(533);
+var downloads_config = __webpack_require__(532);
 
 // CONCATENATED MODULE: ./client/dashboard/dashboard-charts/config.js
 /**
@@ -1904,7 +1914,7 @@ const uniqCharts = Object(external_wp_hooks_["applyFilters"])(DASHBOARD_CHARTS_F
   endpoint: chartDef.report
 })));
 // EXTERNAL MODULE: ./client/dashboard/dashboard-charts/style.scss
-var style = __webpack_require__(589);
+var style = __webpack_require__(592);
 
 // CONCATENATED MODULE: ./client/dashboard/dashboard-charts/index.js
 

@@ -18,16 +18,16 @@ var prop_types_default = /*#__PURE__*/__webpack_require__.n(prop_types);
 var external_wp_i18n_ = __webpack_require__(2);
 
 // EXTERNAL MODULE: ./client/analytics/report/taxes/config.js
-var config = __webpack_require__(532);
+var config = __webpack_require__(531);
 
 // EXTERNAL MODULE: ./client/lib/get-selected-chart/index.js
-var get_selected_chart = __webpack_require__(504);
+var get_selected_chart = __webpack_require__(506);
 
 // EXTERNAL MODULE: ./client/analytics/components/report-chart/index.js + 1 modules
 var report_chart = __webpack_require__(503);
 
 // EXTERNAL MODULE: ./client/analytics/components/report-summary/index.js
-var report_summary = __webpack_require__(505);
+var report_summary = __webpack_require__(507);
 
 // EXTERNAL MODULE: external "lodash"
 var external_lodash_ = __webpack_require__(3);
@@ -473,7 +473,7 @@ function getTaxCode(tax) {
 
 /***/ }),
 
-/***/ 532:
+/***/ 531:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

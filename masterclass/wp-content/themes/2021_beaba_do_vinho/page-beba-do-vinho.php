@@ -1,3 +1,7 @@
+<?php
+/** Template Name: Página - beaba do vinho */
+get_header();
+?>
 <script>
     let polenObj = {
         base_url: '<?= site_url(); ?>',
@@ -6,10 +10,6 @@
     };
 </script>
 
-<?php
-/** Template Name: Página - beaba do vinho */
-get_header();
-?>
 
     <main id="primary" class="site-main">
     <?php mc_get_top_banner_lp(); ?>

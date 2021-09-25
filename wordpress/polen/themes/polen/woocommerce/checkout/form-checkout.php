@@ -48,14 +48,15 @@ $Talent_Fields = new Polen_Update_Fields();
 			$product_id = apply_filters('woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key);
 			$_product   = apply_filters('woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key);
 			$talent_id = get_post_field('post_author', $product_id);
-			$thumbnail = wp_get_attachment_image_src($_product->get_image_id(), 'thumbnail')[0];
+			$thumbnail = polen_get_thumbnail($product_id);
 			$talent = get_user_by('id', $talent_id);
 			$is_social = social_product_is_social( $_product, social_get_category_base() );
 			$talent_data = $Talent_Fields->get_vendor_data($talent_id);
 
 			$talent_cart_detail = array(
 				"has_details" => true,
-				"avatar" => $thumbnail,
+				"avatar" => $thumbnail["image"],
+				"alt" => $thumbnail["alt"],
 				"name" => $_product->get_title(),
 				"career" => $talent_data->profissao,
 				"price" => $_product->get_price_html(),

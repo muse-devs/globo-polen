@@ -42,6 +42,7 @@ $Talent_Fields = $Talent_Fields->get_vendor_data($post->post_author);
 $terms = wp_get_object_terms(get_the_ID(), 'product_tag');
 
 $bg_image = wp_get_attachment_image_src($Talent_Fields->cover_image_id, "large")[0];
+$image_data = polen_get_thumbnail(get_the_ID());
 
 $donate = get_post_meta(get_the_ID(), '_is_charity', true);
 $donate_name = get_post_meta(get_the_ID(), '_charity_name', true);
@@ -50,11 +51,7 @@ $donate_text = stripslashes(get_post_meta(get_the_ID(), '_description_charity', 
 // $social = social_product_is_social($product, social_get_category_base()); //Antigo CRIESP
 
 $histories_enabled = $Polen_Plugin_Settings['polen_histories_on'];
-if($histories_enabled == 1) {
-	$social = true;
-} else {
-	$social = Social_Base_Product::product_is_social_base( $product );
-}
+$social = Social_Base_Product::product_is_social_base( $product );
 
 // outofstock
 // instock
@@ -71,7 +68,13 @@ if( 'instock' == $product->get_stock_status() ) {
 	// params
 	jQuery(document).ready(function() {
 		if(document.querySelector("#stories")) {
-			renderStories(<?php echo polen_get_videos_by_talent($Talent_Fields, true); ?>, <?php echo json_encode(get_the_title()); ?>, <?php echo json_encode(wp_get_attachment_image_src(get_post_thumbnail_id(get_the_ID()), 'polen-thumb-lg')[0]); ?>, <?php echo $social || 'null'; ?>, <?php echo $stock || 'null'; ?>)
+			renderStories(
+				<?php echo polen_get_videos_by_talent($Talent_Fields, true); ?>,
+				<?php echo json_encode(get_the_title()); ?>,
+				<?php echo json_encode($image_data["image"]); ?>,
+				<?php echo $social || 'null'; ?>,
+				<?php echo $stock || 'null'; ?>
+				);
 		}
 	});
 </script>
@@ -86,8 +89,8 @@ if( 'instock' == $product->get_stock_status() ) {
 
 	<!-- Tags -->
 	<div class="row">
-		<div class="col-12<?php echo $social ? ' col-md-6 m-md-auto' : ''; ?> d-flex align-items-center">
-			<?php $social && polen_front_get_talent_stories(); ?>
+		<div class="col-12<?php echo $histories_enabled ? ' col-md-6 m-md-auto' : ''; ?> d-flex align-items-center">
+			<?php $histories_enabled && polen_front_get_talent_stories(); ?>
 			<div>
 				<h1 class="talent-name" title="<?= get_the_title(); ?>"><?= get_the_title(); ?></h1>
 				<?php if($social) : ?>
@@ -108,7 +111,7 @@ if( 'instock' == $product->get_stock_status() ) {
 			<?php polen_get_share_button(); ?>
 		</div>
 		<div class="col-12 mt-3">
-			<?php $social || polen_front_get_talent_videos($Talent_Fields); ?>
+			<?php $histories_enabled || polen_front_get_talent_videos($Talent_Fields); ?>
 		</div>
 	</div>
 

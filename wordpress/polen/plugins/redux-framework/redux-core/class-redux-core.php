@@ -2,7 +2,7 @@
 /**
  * Redux Core Class
  *
- * @class Redux_Core
+ * @class   Redux_Core
  * @version 4.0.0
  * @package Redux Framework
  */
@@ -157,6 +157,20 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 		public static $insights = null;
 
 		/**
+		 * Flag for Redux Template snables status.
+		 *
+		 * @var bool
+		 */
+		public static $redux_templates_enabled = false;
+
+		/**
+		 * Flag for Extendify Template snables status.
+		 *
+		 * @var bool
+		 */
+		public static $extendify_templates_enabled = true;
+
+		/**
 		 * Creates instance of class.
 		 *
 		 * @return Redux_Core
@@ -169,9 +183,18 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 				self::$instance->includes();
 				self::$instance->init();
 				self::$instance->hooks();
+
+				add_action( 'plugins_loaded', array( 'Redux_Core', 'plugins_loaded' ) );
 			}
 
 			return self::$instance;
+		}
+
+		/**
+		 * Things to run after pluggable.php had loaded.
+		 */
+		public static function plugins_loaded() {
+			Redux_Functions_Ex::pro_to_ext();
 		}
 
 		/**
@@ -306,6 +329,8 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
 			self::$upload_url = apply_filters( 'redux/upload_url', self::$upload_url );
 
+			self::$redux_templates_enabled     = (bool) get_option( 'use_redux_templates' );
+			self::$extendify_templates_enabled = (bool) get_option( 'use_extendify_templates', true );
 		}
 
 		/**
@@ -345,10 +370,150 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 
 			add_action( 'admin_init', array( $this, 'admin_init' ) );
 
-			// This needs reworking.  Disabled.
-			// add_action( 'wp_ajax_redux_support_hash', array( 'Redux_Functions', 'support_hash' ) );
-
+			add_filter( 'debug_information', array( $this, 'add_debug_info' ) );
 			add_filter( 'redux/tracking/options', array( 'Redux_Helpers', 'redux_stats_additions' ) );
+		}
+
+		/**
+		 * Add debug infor the WP Site Health screen.
+		 *
+		 * @param array $debug_info Debug data.
+		 *
+		 * @return array
+		 */
+		public function add_debug_info( array $debug_info ): array {
+
+			// Get browser data.
+			if ( ! class_exists( 'Browser' ) ) {
+				require_once self::$dir . 'inc/lib/browser.php';
+			}
+
+			$browser = new Browser();
+
+			$browser_data = array(
+				'Agent'    => $browser->getUserAgent(),
+				'Browser'  => $browser->getBrowser(),
+				'Version'  => $browser->getVersion(),
+				'Platform' => $browser->getPlatform(),
+			);
+
+			// Set Redux dir permission results to Site Health screen.
+			$debug_info['wp-filesystem']['fields'][] = array(
+				'label' => esc_html__( 'The Redux upload directory', 'redux-framework' ),
+				'value' => wp_is_writable( self::$upload_dir ) ? 'Writable' : 'Not writable',
+			);
+
+			// Set Redux plugin results to Site Health screen.
+			$debug_info['redux-framework'] = array(
+				'label'       => esc_html__( 'Redux Framework', 'redux-framework' ),
+				'description' => esc_html__( 'Debug information specific to Redux Framework.', 'redux-framework' ),
+				'fields'      => array(
+					'version'        => array(
+						'label' => esc_html__( 'Version', 'redux-framework' ),
+						'value' => self::$version,
+					),
+					'installation'   => array(
+						'label' => esc_html__( 'Installation', 'redux-framework' ),
+						'value' => self::$installed,
+					),
+					'data directory' => array(
+						'label' => esc_html__( 'Data directory', 'redux-framerwork' ),
+						'value' => self::$dir,
+					),
+					'browser'        => array(
+						'label' => esc_html__( 'Browser', 'redux-framework' ),
+						'value' => $browser_data,
+					),
+				),
+			);
+
+			$redux = Redux::all_instances();
+
+			if ( ! empty( $redux ) && is_array( $redux ) ) {
+				foreach ( $redux as $inst => $data ) {
+					Redux::init( $inst );
+
+					$inst_name = ucwords( str_replace( array( '_', '-' ), ' ', $inst ) );
+					$args      = $data->args;
+
+					$ext = Redux::get_extensions( $inst );
+					if ( ! empty( $ext ) && is_array( $ext ) ) {
+						ksort( $ext );
+
+						foreach ( $ext as $name => $arr ) {
+							$ver = $arr['version'];
+
+							$ex = esc_html( ucwords( str_replace( array( '_', '-' ), ' ', $name ) ) );
+
+							$extensions[ $ex ] = esc_html( $ver );
+						}
+					}
+
+					// Output Redux instances.
+					$debug_info[ 'redux-instance-' . $inst ] = array(
+						// translators: %s = Instance name.
+						'label'       => sprintf( esc_html__( 'Redux Instance: %s', 'redux-framework' ), $inst_name ),
+						// translators: %s = Instance name w/ HTML.
+						'description' => sprintf( esc_html__( 'Debug information for the %s Redux instance.', 'redux-framework' ), '<code>' . $inst . '</code>' ),
+						'fields'      => array(
+							'opt_name'         => array(
+								'label' => esc_html( 'opt_name' ),
+								'value' => $args['opt_name'],
+							),
+							'global_variable'  => array(
+								'label' => esc_html( 'global_variable' ),
+								'value' => $args['global_variable'],
+							),
+							'dev_mode'         => array(
+								'label' => esc_html( 'dev_mode' ),
+								'value' => $args['dev_mode'] ? 'true' : 'false',
+							),
+							'ajax_save'        => array(
+								'label' => esc_html( 'ajax_save' ),
+								'value' => $args['ajax_save'] ? 'true' : 'false',
+							),
+							'page_slug'        => array(
+								'label' => esc_html( 'page_slug' ),
+								'value' => $args['page_slug'],
+							),
+							'page_permissions' => array(
+								'label' => esc_html( 'page_permissions' ),
+								'value' => $args['page_permissions'],
+							),
+							'menu_type'        => array(
+								'label' => esc_html( 'menu_type' ),
+								'value' => $args['menu_type'],
+							),
+							'page_parent'      => array(
+								'label' => esc_html( 'page_parent' ),
+								'value' => $args['page_parent'],
+							),
+							'compiler'         => array(
+								'label' => esc_html( 'compiler' ),
+								'value' => $args['compiler'] ? 'true' : 'false',
+							),
+							'output'           => array(
+								'label' => esc_html( 'output' ),
+								'value' => $args['output'] ? 'true' : 'false',
+							),
+							'output_tag'       => array(
+								'label' => esc_html( 'output_tag' ),
+								'value' => $args['output_tag'] ? 'true' : 'false',
+							),
+							'templates_path'   => array(
+								'label' => esc_html( 'templates_path' ),
+								'value' => $args['templates_path'],
+							),
+							'extensions'       => array(
+								'label' => esc_html( 'extensions' ),
+								'value' => $extensions,
+							),
+						),
+					);
+				}
+			}
+
+			return $debug_info;
 		}
 
 		/**
