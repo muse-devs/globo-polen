@@ -2,6 +2,16 @@
 
 class Icon_Class
 {
+	public static function polen_icon_search()
+	{
+		echo '<i class="icon icon-search"></i>';
+	}
+
+	public static function polen_icon_research()
+	{
+		echo '<i class="icon icon-research"></i>';
+	}
+
 	public static function polen_icon_criesp()
 	{
 		echo '<span class="icon icon-criesp"></span>';

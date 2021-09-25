@@ -1,6 +1,7 @@
 <?php
 use Polen\Admin\Polen_Admin_Order_Custom_Fields;
 use Polen\Includes\Polen_Cart;
+use Polen\Includes\Polen_Order;
 use Polen\Includes\Polen_WooCommerce;
 ?>
 <div class="wrap">
@@ -24,9 +25,7 @@ use Polen\Includes\Polen_WooCommerce;
             </td>
             <td>
                 <p id="video-instructions"><?php echo $info ?></p>
-            </td>
-            <td>
-                <a href="#" class="edit-video-instruction" data-old-value="<?= $info; ?>" data-field="<?= Polen_Cart::ITEM_INSTRUCTION_TO_VIDEO; ?>"><i class="fa fa-edit"></i></a>
+                <a href="#" class="edit-video-instruction" data-old-value="<?= $info; ?>" data-field="<?= Polen_Cart::ITEM_INSTRUCTION_TO_VIDEO; ?>" data-action="polen_edit_order_custom_fields">Editar</a>
             </td>
         </tr>
         <?php
@@ -49,6 +48,31 @@ use Polen\Includes\Polen_WooCommerce;
             }
         }
         ?>
+        <tr>
+            <td>
+                <strong>Expira em:</strong>
+            </td>
+            <td>
+                <?php
+                try {
+                    $_order = wc_get_order( $order_id );
+                    $deadline = $_order->get_meta( Polen_Order::META_KEY_DEADLINE, true );
+                    $field = Polen_Order::META_KEY_DEADLINE;
+                    $deadline_datetime = \WC_DateTime::createFromFormat( 'U', $deadline );
+                    if( empty( $deadline_datetime ) ) {
+                        throw new \Exception( 'Problema com a data de expiração, entre em contato com o Admin', 500 );
+                    }
+                    $deadline_date = $deadline_datetime->format( 'd/m/Y' );
+                    echo $deadline_date;
+                } catch ( \Exception $e ) {
+                    echo  $e->getMessage();
+                }
+                    echo <<<HTML
+                        <a href="#" class="edit-video-instruction" data-old-value="{$deadline_date}" data-field="{$field}" data-action="polen_edit_order_custom_fields_deadline">Editar</a>
+                    HTML;
+                ?>
+            </td>
+        </tr>
     </table>
     <div class="clear"></div>
 </div>
@@ -58,21 +82,24 @@ use Polen\Includes\Polen_WooCommerce;
     jQuery(function(){
         jQuery('.edit-video-instruction').click(function(evt){
             evt.preventDefault();
-            let new_value = prompt( 'Nova instrução', jQuery(evt.currentTarget).attr('data-old-value').replace(/&#13;/g, " ").replace(/&#10;/g, " ") );
+            let new_value = prompt( 'Nova valor', jQuery(evt.currentTarget).attr('data-old-value').replace(/&#13;/g, " ").replace(/&#10;/g, " ") );
             if (new_value === null) {
                 return;
             }
             let data_update = {
-                action : 'polen_edit_order_custom_fields',
-                field : 'instructions_to_video',
+                action : jQuery(evt.currentTarget).attr('data-action'),
+                field : jQuery(evt.currentTarget).attr('data-field'),
                 security : '<?= wp_create_nonce( Polen_Admin_Order_Custom_Fields::NONCE_ACTION ); ?>',
                 value : new_value,
                 order_id: <?= $_GET['post']; ?>
             };
             jQuery.post(ajaxurl, data_update, function(data,a,b){
-                alert('Edição feita com sucesso');
+                alert(data.data);
                 document.location.reload();
-            }).fail(error => { alert('Erro na edição tente novamente'); });
+            }).fail( (xhr, textStatus, errorThrown) => {
+                console.log(xhr, textStatus, errorThrown);
+                alert(xhr.responseJSON.data);
+            });
         });
     });
 </script>

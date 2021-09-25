@@ -18,10 +18,10 @@ var prop_types = __webpack_require__(1);
 var prop_types_default = /*#__PURE__*/__webpack_require__.n(prop_types);
 
 // EXTERNAL MODULE: ./client/analytics/report/orders/config.js
-var config = __webpack_require__(530);
+var config = __webpack_require__(529);
 
 // EXTERNAL MODULE: ./client/lib/get-selected-chart/index.js
-var get_selected_chart = __webpack_require__(504);
+var get_selected_chart = __webpack_require__(506);
 
 // EXTERNAL MODULE: external ["wp","i18n"]
 var external_wp_i18n_ = __webpack_require__(2);
@@ -326,7 +326,7 @@ table_OrdersReportTable.contextType = currency_context["a" /* CurrencyContext */
 var report_chart = __webpack_require__(503);
 
 // EXTERNAL MODULE: ./client/analytics/components/report-summary/index.js
-var report_summary = __webpack_require__(505);
+var report_summary = __webpack_require__(507);
 
 // EXTERNAL MODULE: ./client/analytics/components/report-filters/index.js
 var report_filters = __webpack_require__(501);
@@ -541,7 +541,7 @@ function getTaxCode(tax) {
 
 /***/ }),
 
-/***/ 530:
+/***/ 529:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

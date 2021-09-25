@@ -876,7 +876,7 @@ const WCPayCardBody = ({
   target: "_blank",
   type: "external",
   rel: "noreferrer",
-  href: "https://woocommerce.com/payments/",
+  href: "https://woocommerce.com/payments/?utm_medium=product",
   onClick: onLinkClick
 }, Object(external_wp_i18n_["__"])('Learn more', 'woocommerce-admin'))), Object(external_wp_element_["createElement"])(WCPayAcceptedMethods, null));
 const WCPayCardFooter = ({

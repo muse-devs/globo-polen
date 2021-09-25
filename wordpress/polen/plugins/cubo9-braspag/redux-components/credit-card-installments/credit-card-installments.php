@@ -12,6 +12,9 @@ defined( 'ABSPATH' ) || exit;
 // Don't duplicate me!
 if ( ! class_exists( 'C9_Redux_Credit_Card_Installments', false ) ) {
 
+	if( !class_exists( 'Redux_Field' ) ) {
+		include_once ABSPATH . '/polen/plugins/redux-framework/redux-core/inc/classes/class-redux-field.php';
+	}
 	/**
 	 * Main C9_Redux_Credit_Card_Installments class
 	 *

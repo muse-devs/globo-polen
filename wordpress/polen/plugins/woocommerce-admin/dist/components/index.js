@@ -41405,7 +41405,7 @@ class chart_Chart extends external_wp_element_["Component"] {
     const legendDirection = legendPosition === 'top' ? 'row' : 'column';
     const chartDirection = legendPosition === 'side' ? 'row' : 'column';
     const chartHeight = this.getChartHeight();
-    const legend = isRequesting ? null : Object(external_wp_element_["createElement"])(d3chart_legend, {
+    const legend = legendPosition !== 'hidden' && isRequesting ? null : Object(external_wp_element_["createElement"])(d3chart_legend, {
       colorScheme: viridis,
       data: orderedKeys,
       handleLegendHover: this.handleLegendHover,
@@ -41593,7 +41593,7 @@ chart_Chart.propTypes = {
    * Position the legend must be displayed in. If it's not defined, it's calculated
    * depending on the viewport width and the mode.
    */
-  legendPosition: prop_types_default.a.oneOf(['bottom', 'side', 'top']),
+  legendPosition: prop_types_default.a.oneOf(['bottom', 'side', 'top', 'hidden']),
 
   /**
    * Values to overwrite the legend totals. If not defined, the sum of all line values will be used.
@@ -43246,21 +43246,22 @@ class form_Form extends external_wp_element_["Component"] {
       }
     }), () => {
       this.validate(() => {
-        // onChange keeps track of validity, so needs to
-        // happen after setting the error state.
         const {
           onChange,
           onChangeCallback
-        } = this.props;
-        const callback = onChange ? onChange : onChangeCallback;
+        } = this.props; // Note that onChange is a no-op by default so this will never be null
+
+        const callback = onChangeCallback || onChange;
 
         if (onChangeCallback) {
           external_wp_deprecated_default()('onChangeCallback', {
-            version: '5.1.2',
+            version: '9.0.0',
             alternative: 'onChange',
             plugin: '@woocommerce/components'
           });
-        }
+        } // onChange keeps track of validity, so needs to
+        // happen after setting the error state.
+
 
         callback({
           name,
@@ -43313,11 +43314,12 @@ class form_Form extends external_wp_element_["Component"] {
     });
 
     if (await this.isValidForm()) {
-      const callback = onSubmit ? onSubmit : onSubmitCallback;
+      // Note that onSubmit is a no-op by default so this will never be null
+      const callback = onSubmitCallback || onSubmit;
 
       if (onSubmitCallback) {
         external_wp_deprecated_default()('onSubmitCallback', {
-          version: '5.1.2',
+          version: '9.0.0',
           alternative: 'onSubmit',
           plugin: '@woocommerce/components'
         });

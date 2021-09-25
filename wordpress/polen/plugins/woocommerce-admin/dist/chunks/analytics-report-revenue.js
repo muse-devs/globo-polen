@@ -18,16 +18,16 @@ var prop_types = __webpack_require__(1);
 var prop_types_default = /*#__PURE__*/__webpack_require__.n(prop_types);
 
 // EXTERNAL MODULE: ./client/analytics/report/revenue/config.js
-var config = __webpack_require__(525);
+var config = __webpack_require__(524);
 
 // EXTERNAL MODULE: ./client/lib/get-selected-chart/index.js
-var get_selected_chart = __webpack_require__(504);
+var get_selected_chart = __webpack_require__(506);
 
 // EXTERNAL MODULE: ./client/analytics/components/report-chart/index.js + 1 modules
 var report_chart = __webpack_require__(503);
 
 // EXTERNAL MODULE: ./client/analytics/components/report-summary/index.js
-var report_summary = __webpack_require__(505);
+var report_summary = __webpack_require__(507);
 
 // EXTERNAL MODULE: external ["wp","i18n"]
 var external_wp_i18n_ = __webpack_require__(2);
@@ -426,7 +426,7 @@ revenue_RevenueReport.propTypes = {
 
 /***/ }),
 
-/***/ 525:
+/***/ 524:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -450,41 +450,48 @@ const charts = Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__["applyFilter
   label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Gross Sales', 'woocommerce-admin'),
   order: 'desc',
   orderby: 'gross_sales',
-  type: 'currency'
+  type: 'currency',
+  isReverseTrend: false
 }, {
   key: 'refunds',
   label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Returns', 'woocommerce-admin'),
   order: 'desc',
   orderby: 'refunds',
-  type: 'currency'
+  type: 'currency',
+  isReverseTrend: true
 }, {
   key: 'coupons',
   label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Coupons', 'woocommerce-admin'),
   order: 'desc',
   orderby: 'coupons',
-  type: 'currency'
+  type: 'currency',
+  isReverseTrend: false
 }, {
   key: 'net_revenue',
   label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Net Sales', 'woocommerce-admin'),
   orderby: 'net_revenue',
-  type: 'currency'
+  type: 'currency',
+  isReverseTrend: false
 }, {
   key: 'taxes',
   label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Taxes', 'woocommerce-admin'),
   order: 'desc',
   orderby: 'taxes',
-  type: 'currency'
+  type: 'currency',
+  isReverseTrend: false
 }, {
   key: 'shipping',
   label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Shipping', 'woocommerce-admin'),
   orderby: 'shipping',
-  type: 'currency'
+  type: 'currency',
+  isReverseTrend: false
 }, {
   key: 'total_sales',
   label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Total Sales', 'woocommerce-admin'),
   order: 'desc',
   orderby: 'total_sales',
-  type: 'currency'
+  type: 'currency',
+  isReverseTrend: false
 }]);
 const advancedFilters = Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__["applyFilters"])(REVENUE_REPORT_ADVANCED_FILTERS_FILTER, {
   filters: {},

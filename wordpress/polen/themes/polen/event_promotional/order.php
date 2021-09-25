@@ -11,12 +11,12 @@
 // 	exit;
 // }
 
+$product = $GLOBALS[ Promotional_Event_Rewrite::GLOBAL_KEY_PRODUCT_OBJECT ];
 $cupom_code = filter_input( INPUT_GET, 'cupom_code', FILTER_SANITIZE_STRING );
 if( empty( $cupom_code) ) {
-	wp_safe_redirect( event_promotional_url_code_validation() );
+	wp_safe_redirect( event_promotional_url_code_validation( $product ) );
 	exit;
 }
-$product = $GLOBALS[ Promotional_Event_Rewrite::GLOBAL_KEY_PRODUCT_OBJECT ];
 get_header();
 $coupon = $cupom_code;
 ?>

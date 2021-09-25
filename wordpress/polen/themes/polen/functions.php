@@ -293,6 +293,11 @@ require_once TEMPLATE_DIR . '/inc/collection-front.php';
 require_once TEMPLATE_DIR . '/inc/analitics_function.php';
 
 /**
+ * File responsible to search only products in /?s=
+ */
+require_once TEMPLATE_DIR . '/inc/search.php';
+
+/**
  * Arquivo responsavel por retornos HTML e icones
  */
 require_once TEMPLATE_DIR . '/classes/Icon_Class.php';

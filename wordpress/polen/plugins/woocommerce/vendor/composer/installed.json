@@ -89,17 +89,17 @@
     },
     {
         "name": "composer/installers",
-        "version": "v1.11.0",
-        "version_normalized": "1.11.0.0",
+        "version": "v1.12.0",
+        "version_normalized": "1.12.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/composer/installers.git",
-            "reference": "ae03311f45dfe194412081526be2e003960df74b"
+            "reference": "d20a64ed3c94748397ff5973488761b22f6d3f19"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/composer/installers/zipball/ae03311f45dfe194412081526be2e003960df74b",
-            "reference": "ae03311f45dfe194412081526be2e003960df74b",
+            "url": "https://api.github.com/repos/composer/installers/zipball/d20a64ed3c94748397ff5973488761b22f6d3f19",
+            "reference": "d20a64ed3c94748397ff5973488761b22f6d3f19",
             "shasum": ""
         },
         "require": {
@@ -117,7 +117,7 @@
             "symfony/phpunit-bridge": "^4.2 || ^5",
             "symfony/process": "^2.3"
         },
-        "time": "2021-04-28T06:42:17+00:00",
+        "time": "2021-09-13T08:19:44+00:00",
         "type": "composer-plugin",
         "extra": {
             "class": "Composer\\Installers\\Plugin",
@@ -200,6 +200,7 @@
             "modx",
             "moodle",
             "osclass",
+            "pantheon",
             "phpbb",
             "piwik",
             "ppi",
@@ -220,10 +221,6 @@
             "zend",
             "zikula"
         ],
-        "support": {
-            "issues": "https://github.com/composer/installers/issues",
-            "source": "https://github.com/composer/installers/tree/v1.11.0"
-        },
         "funding": [
             {
                 "url": "https://packagist.com",
@@ -541,17 +538,17 @@
     },
     {
         "name": "woocommerce/woocommerce-admin",
-        "version": "2.4.4",
-        "version_normalized": "2.4.4.0",
+        "version": "2.6.4",
+        "version_normalized": "2.6.4.0",
         "source": {
             "type": "git",
             "url": "https://github.com/woocommerce/woocommerce-admin.git",
-            "reference": "fba09c51a08629b801a6667e6479794d8a919228"
+            "reference": "b7fcc71b972ea7af3579fd5ce5f66ed9bfab80f3"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/woocommerce/woocommerce-admin/zipball/fba09c51a08629b801a6667e6479794d8a919228",
-            "reference": "fba09c51a08629b801a6667e6479794d8a919228",
+            "url": "https://api.github.com/repos/woocommerce/woocommerce-admin/zipball/b7fcc71b972ea7af3579fd5ce5f66ed9bfab80f3",
+            "reference": "b7fcc71b972ea7af3579fd5ce5f66ed9bfab80f3",
             "shasum": ""
         },
         "require": {
@@ -560,11 +557,12 @@
             "php": ">=7.0"
         },
         "require-dev": {
+            "automattic/jetpack-changelogger": "^1.1",
             "bamarni/composer-bin-plugin": "^1.4",
             "suin/phpcs-psr4-sniff": "^2.2",
             "woocommerce/woocommerce-sniffs": "0.1.0"
         },
-        "time": "2021-07-21T03:52:24+00:00",
+        "time": "2021-09-21T19:35:21+00:00",
         "type": "wordpress-plugin",
         "extra": {
             "scripts-description": {
@@ -574,6 +572,23 @@
             },
             "bamarni-bin": {
                 "target-directory": "bin/composer"
+            },
+            "changelogger": {
+                "changelog": "./changelog.txt",
+                "formatter": {
+                    "filename": "bin/changelogger/WCAdminFormatter.php"
+                },
+                "versioning": "semver",
+                "changes-dir": "./changelogs",
+                "types": [
+                    "Fix",
+                    "Add",
+                    "Update",
+                    "Dev",
+                    "Tweak",
+                    "Performance",
+                    "Enhancement"
+                ]
             }
         },
         "installation-source": "dist",
@@ -590,22 +605,22 @@
         "homepage": "https://github.com/woocommerce/woocommerce-admin",
         "support": {
             "issues": "https://github.com/woocommerce/woocommerce-admin/issues",
-            "source": "https://github.com/woocommerce/woocommerce-admin/tree/v2.4.4"
+            "source": "https://github.com/woocommerce/woocommerce-admin/tree/v2.6.4"
         }
     },
     {
         "name": "woocommerce/woocommerce-blocks",
-        "version": "v5.3.3",
-        "version_normalized": "5.3.3.0",
+        "version": "v5.7.1",
+        "version_normalized": "5.7.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/woocommerce/woocommerce-gutenberg-products-block.git",
-            "reference": "76e02a63e86615edc87ad87e9c4a0d2ee3b5e56c"
+            "reference": "7dfe482d9b36f05f3d0ee78d74a26b49f3ebe6f1"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/woocommerce/woocommerce-gutenberg-products-block/zipball/76e02a63e86615edc87ad87e9c4a0d2ee3b5e56c",
-            "reference": "76e02a63e86615edc87ad87e9c4a0d2ee3b5e56c",
+            "url": "https://api.github.com/repos/woocommerce/woocommerce-gutenberg-products-block/zipball/7dfe482d9b36f05f3d0ee78d74a26b49f3ebe6f1",
+            "reference": "7dfe482d9b36f05f3d0ee78d74a26b49f3ebe6f1",
             "shasum": ""
         },
         "require": {
@@ -616,7 +631,7 @@
             "phpunit/phpunit": "7.5.20",
             "woocommerce/woocommerce-sniffs": "0.1.0"
         },
-        "time": "2021-07-15T16:33:15+00:00",
+        "time": "2021-08-30T08:15:59+00:00",
         "type": "wordpress-plugin",
         "extra": {
             "scripts-description": {
@@ -640,10 +655,6 @@
             "blocks",
             "gutenberg",
             "woocommerce"
-        ],
-        "support": {
-            "issues": "https://github.com/woocommerce/woocommerce-gutenberg-products-block/issues",
-            "source": "https://github.com/woocommerce/woocommerce-gutenberg-products-block/tree/v5.3.3"
-        }
+        ]
     }
 ]

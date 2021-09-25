@@ -167,6 +167,12 @@ class Polen_Plugin_Settings
                     'options'  => $array_pages,
                     'default'  => '',
                 ),
+                array(
+                    'id'       => 'search_bar',
+                    'type'     => 'switch',
+                    'title'    => esc_html__('Ativar Barra de Busca', 'polen'),
+                    'default'  => 0,
+                ),
             ),
         ) );
 
@@ -194,7 +200,7 @@ class Polen_Plugin_Settings
                 ),
                 array(
                     'id'       => 'polen_smtp_port',
-                    'type'     => 'spinner',
+                    'type'     => 'text',
                     'title'    => esc_html__('Porta do servidor SMTP', 'polen'),
                     'desc'     => 'Informe a porta do servidor SMTP.',
                     'default'  => '587',
