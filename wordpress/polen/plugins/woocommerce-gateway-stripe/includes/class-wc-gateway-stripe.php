@@ -1,4 +1,7 @@
 <?php
+
+use Polen\Includes\Debug;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -586,6 +589,7 @@ class WC_Gateway_Stripe extends WC_Stripe_Payment_Gateway {
 
 			// Check whether there is an existing intent.
 			$intent = $this->get_intent_from_order( $order );
+			Debug::def($intent);
 			if ( isset( $intent->object ) && 'setup_intent' === $intent->object ) {
 				$intent = false; // This function can only deal with *payment* intents
 			}
