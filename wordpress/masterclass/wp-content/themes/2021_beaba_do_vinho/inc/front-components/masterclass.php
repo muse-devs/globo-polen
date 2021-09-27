@@ -42,7 +42,8 @@ function mc_get_top_banner_lp()
 				</div>
 				<div class="row">
 					<div class="col-12 col-md-6 m-md-auto">
-						<h2 class="subtitle">Participe do grupo de pré-inscrição no WhatsApp para ter um desconto exclusivo no primeiro dia das inscrições.</h2>
+						<h2 class="subtitle">Obrigado por seu interesse, mas infelizmente as inscrições para a Masterclass estão fechadas no momento.
+                            Cadastre-se na lista de espera para ser notificado em primeira mão assim que a próxima turma for aberta.</h2>
 					</div>
 				</div>
 				<div class="row mt-4">
@@ -55,7 +56,7 @@ function mc_get_top_banner_lp()
 							<input type="hidden" name="is_mobile" value="<?= polen_is_mobile() ? "1" : "0"; ?>" />
 							<input type="hidden" name="security" value=<?php echo wp_create_nonce("send-form-request"); ?>>
 							<input type="email" name="email" class="form-control form-control-lg" placeholder="Digite seu e-mail" required />
-							<input type="submit" value="Quero ganhar desconto" class="btn btn-primary btn-lg btn-block mt-4 gradient" />
+							<input type="submit" value="ENTRAR NA LISTA DE ESPERA"" class="btn btn-primary btn-lg btn-block mt-4 gradient" />
 						</form>
 					</div>
 				</div>
