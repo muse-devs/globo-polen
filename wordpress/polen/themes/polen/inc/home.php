@@ -18,6 +18,19 @@ get_header();
 	<div class="row">
 		<div class="col-12">
 			<div id="product-carousel" class="owl-carousel owl-theme">
+      <div class="item">
+					<?php
+					sa_get_home_banner(
+						"Setembro amarelo",
+						"Setembro é o mês mundial de prevenção do suicídio. Agir salva vidas!",
+						"/social/setembro-amarelo",
+						array(
+							"mobile" => TEMPLATE_URI . '/assets/img/banner-setembro-desktop.png',
+							"desktop" => TEMPLATE_URI . '/assets/img/banner-setembro-desktop.png',
+						)
+					);
+					?>
+				</div>
 				<div class="item">
 					<?php mc_get_home_banner(master_class_url_home()); ?>
 				</div>
