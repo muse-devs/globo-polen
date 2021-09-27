@@ -63,11 +63,8 @@
                 <?php ; ?>
                 <div class="col-12">
                     <div class="row">
-                        <div class="col-6">
-                            <a href="<?php echo site_url('ronnie-von/beaba-do-vinho/inscricoes'); ?>"><img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/logo-masterclass-black.svg"; ?>" alt="Logo Masterclass" /></a>
-                        </div>
-                        <div class="col-6 text-right">
-                            <img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/todo-vino.png"; ?>" alt="Logo TodoVino" />
+                        <div class="col-12">
+                            <a href="<?php echo site_url('ronnie-von/beaba-do-vinho/inscricoes'); ?>"><img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/logo-masterclass.svg"; ?>" alt="Logo Masterclass" /></a>
                         </div>
                     </div>
                 </div>
