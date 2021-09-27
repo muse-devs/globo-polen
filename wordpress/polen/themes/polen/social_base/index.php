@@ -2,6 +2,9 @@
 
 defined('ABSPATH') || die;
 
+Header( "HTTP/1.1 307 Temporary Redirect" );
+Header( "Location: " . home_url() );
+
 use Polen\Social_Base\Social_Base_Product;
 use Polen\Social_Base\Social_Base_Rewrite;
 
