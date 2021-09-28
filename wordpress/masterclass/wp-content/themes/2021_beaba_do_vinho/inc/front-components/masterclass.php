@@ -68,7 +68,7 @@ function mc_get_top_banner_lp()
 	<script>
 		const success = '<?php echo home_url('/ronnie-von/beaba-do-vinho/sucesso'); ?>';
 
-		polVideoTag("#mc-video");
+		//polVideoTag("#mc-video");
 
 		const formName = "form#form-email-masterclass";
 		document.querySelector(formName).addEventListener("submit", function(evt) {
@@ -120,7 +120,7 @@ function mc_get_top_banner($product)
 		</div>
 	</div>
 	<script>
-		polVideoTag("#mc-video");
+		//polVideoTag("#mc-video");
 	</script>
 <?php
 }
@@ -133,7 +133,7 @@ function mc_get_carrossel_how_to()
 			<h3 class="title mb-4">Como funciona?</h3>
 		</div>
 		<div class="col-12">
-			<div id="how-to-carousel" class="owl-carousel owl-theme">
+			<div id="how-to-carousel" class="owl-carousel owl-theme box-round">
 				<div class="item">
 					<div class="box-round py-3 px-3">
 						<div class="row">
@@ -185,9 +185,18 @@ function mc_get_carrossel_how_to()
 			autoplayHoverPause: true,
 			margin: 0,
 			nav: false,
-			autoplay: true,
 			dots: true,
 			autoHeight: false,
+			responsive : {
+				0 : {
+					items: 1,
+					autoplay: true,
+				},
+				992 : {
+					items: 3,
+					autoplay: false,
+				}
+			}
 		});
 	</script>
 <?php
