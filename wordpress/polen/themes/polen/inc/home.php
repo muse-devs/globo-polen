@@ -18,7 +18,10 @@ get_header();
 	<div class="row">
 		<div class="col-12">
 			<div id="product-carousel" class="owl-carousel owl-theme">
-				<div class="item">
+        <div class="item">
+					<?php mc_get_home_banner_gustavo(master_class_url_home()); ?>
+				</div>
+        <div class="item">
 					<?php
 					sa_get_home_banner(
 						"Setembro amarelo",
@@ -34,23 +37,6 @@ get_header();
 				<div class="item">
 					<?php mc_get_home_banner(master_class_url_home()); ?>
 				</div>
-				<!-- <div class="item">
-					<?php //va_get_home_banner_de_porta_em_porta('/produtos/de-porta-em-porta'); ?>
-				</div>
-				<div class="item">
-					<?php
-					//TODO link da landpage
-					// va_get_home_banner(
-					// 	"Rebeldes têm asas",
-					// 	"Agora você pode comprar o livro e ter um autógrafo em vídeo do Rony Meisler.",
-					// 	"/produtos/rebeldes-tem-asas",
-					// 	array(
-					// 		"mobile" => TEMPLATE_URI . '/assets/img/video-autografo/rta-banner-home-mobile.jpeg',
-					// 		"desktop" => TEMPLATE_URI . '/assets/img/video-autografo/rta-banner-home-desktop.jpeg',
-					// 	)
-					// );
-					?>
-				</div> -->
 			</div>
 		</div>
 	</div>

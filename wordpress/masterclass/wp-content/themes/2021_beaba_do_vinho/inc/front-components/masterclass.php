@@ -8,7 +8,9 @@ function mc_get_buy_button($product)
 ?>
 	<div class="row mb-4">
 		<div class="col-12 col-md-6 m-md-auto">
-			<a href="<?php echo $product['url_to_checkout']; ?>" class="btn btn-primary btn-lg btn-block mt-4 gradient mc-custom-button">Vagas Esgotadas</a>
+			<a href="<?php echo $product['url_to_checkout']; ?>" class="btn btn-primary btn-lg btn-block mt-4 gradient mc-custom-button">
+				de <s><?php echo $product['price_regular']; ?></s> por <?php echo $product['price']; ?>
+			</a>
 		</div>
 	</div>
 	<!-- <div class="row">
@@ -42,7 +44,8 @@ function mc_get_top_banner_lp()
 				</div>
 				<div class="row">
 					<div class="col-12 col-md-6 m-md-auto">
-						<h2 class="subtitle">Participe do grupo de pré-inscrição no WhatsApp para ter um desconto exclusivo no primeiro dia das inscrições.</h2>
+						<h2 class="subtitle">Obrigado por seu interesse, mas infelizmente as inscrições para a Masterclass estão fechadas no momento.
+                            Cadastre-se na lista de espera para ser notificado em primeira mão assim que a próxima turma for aberta.</h2>
 					</div>
 				</div>
 				<div class="row mt-4">
@@ -55,7 +58,7 @@ function mc_get_top_banner_lp()
 							<input type="hidden" name="is_mobile" value="<?= polen_is_mobile() ? "1" : "0"; ?>" />
 							<input type="hidden" name="security" value=<?php echo wp_create_nonce("send-form-request"); ?>>
 							<input type="email" name="email" class="form-control form-control-lg" placeholder="Digite seu e-mail" required />
-							<input type="submit" value="Quero ganhar desconto" class="btn btn-primary btn-lg btn-block mt-4 gradient" />
+							<input type="submit" value="ENTRAR NA LISTA DE ESPERA"" class="btn btn-primary btn-lg btn-block mt-4 gradient" />
 						</form>
 					</div>
 				</div>
@@ -65,7 +68,7 @@ function mc_get_top_banner_lp()
 	<script>
 		const success = '<?php echo home_url('/ronnie-von/beaba-do-vinho/sucesso'); ?>';
 
-		polVideoTag("#mc-video");
+		//polVideoTag("#mc-video");
 
 		const formName = "form#form-email-masterclass";
 		document.querySelector(formName).addEventListener("submit", function(evt) {
@@ -88,33 +91,36 @@ function mc_get_top_banner($product)
 ?>
 	<div class="row mb-4">
 		<div class="col-12">
-			<div class="mc-landing-banner">
+			<div class="mc-landing-banner" style="background:url('<?php echo TEMPLATE_URI . "/assets/img/masterclass/top-bg-gustavo.png"; ?>');background-size: cover;">
 				<figure class="mc-logo">
-					<img class="image" src="<?php echo TEMPLATE_URI; ?>/assets/img/masterclass/ronnievon-logo.png" alt="Logo Beabá do Vinho" />
+					<img class="image" src="<?php echo TEMPLATE_URI; ?>/assets/img/masterclass/title-sendo-vc.png" alt="Seja Outro Sendo Você" />
 				</figure>
 				<div class="row">
-					<!-- <div class="col-12">
+					<div class="col-12">
 						<div class="row">
 							<div class="col-md-6 m-md-auto text-center">
-								<span class="gadget">Inscrições abertas</span>
+								<span class="gadget">06 de Outubro às 20h</span>
 							</div>
 						</div>
-					</div> -->
+					</div>
 					<div class="col-12 col-md-6 m-md-auto">
-						<h1 class="title">Aprenda a escolher, apreciar e harmonizar vinhos com Ronnie Von</h1>
+						<h1 class="title">Aprenda com dois mestres da comédia a se comunicar melhor e transforme a sua vida profissional e pessoal.</h1>
 					</div>
 				</div>
 				<div class="mc-home-video mb-2">
-					<video id="mc-video" playsinline poster="<?php echo TEMPLATE_URI; ?>/assets/img/masterclass/player-poster.jpg?v=2">
-						<source src="https://player.vimeo.com/external/601444637.sd.mp4?s=0ede70d0f6b6395f53270d501c255399a42a6e4d&profile_id=164" type="video/mp4">
-					</video>
+					<img class="image" src="<?php echo TEMPLATE_URI; ?>/assets/img/masterclass/cover-sendo-vc.png" alt="Seja Outro Sendo Você" />
+				</div>
+				<div class="row">
+					<div class="col-12 col-md-6 m-md-auto">
+						<h2 class="title">Ao vivo com Gustavo Mendes e Gueminho Bernardes | 06 de Outubro às 20h</h2>
+					</div>
 				</div>
 				<?php mc_get_buy_button($product); ?>
 			</div>
 		</div>
 	</div>
 	<script>
-		polVideoTag("#mc-video");
+		//polVideoTag("#mc-video");
 	</script>
 <?php
 }
@@ -127,7 +133,7 @@ function mc_get_carrossel_how_to()
 			<h3 class="title mb-4">Como funciona?</h3>
 		</div>
 		<div class="col-12">
-			<div id="how-to-carousel" class="owl-carousel owl-theme">
+			<div id="how-to-carousel" class="owl-carousel owl-theme box-round">
 				<div class="item">
 					<div class="box-round py-3 px-3">
 						<div class="row">
@@ -136,7 +142,7 @@ function mc_get_carrossel_how_to()
 							</div>
 							<div class="col-12">
 								<h4>Ao vivo</h4>
-								<p class="text-center">Participe de aulas ao vivo e converse em tempo real, tirando todas suas dúvidas com Ronnie Von</p>
+								<p class="text-center"> Participe da Masterclass ao vivo no dia 06 de Outubro às 20h.</p>
 							</div>
 						</div>
 					</div>
@@ -149,7 +155,7 @@ function mc_get_carrossel_how_to()
 							</div>
 							<div class="col-12">
 								<h4>Duração</h4>
-								<p class="text-center">Participe do curso com duração de 90 minutos, exclusivo e feito sob medida para amantes de vinho.</p>
+								<p class="text-center">A masterclass terá uma duração média de 90 minutos.</p>
 							</div>
 						</div>
 					</div>
@@ -162,7 +168,7 @@ function mc_get_carrossel_how_to()
 							</div>
 							<div class="col-12">
 								<h4>Disponibilidade</h4>
-								<p class="text-center">Tenha acesso e tire suas dúvidas diretamanente com o Ronnie Von.</p>
+								<p class="text-center">O curso ficará disponível por 30 dias para você ver e rever quantas vezes quiser.</p>
 							</div>
 						</div>
 					</div>
@@ -179,9 +185,18 @@ function mc_get_carrossel_how_to()
 			autoplayHoverPause: true,
 			margin: 0,
 			nav: false,
-			autoplay: true,
 			dots: true,
 			autoHeight: false,
+			responsive : {
+				0 : {
+					items: 1,
+					autoplay: true,
+				},
+				992 : {
+					items: 3,
+					autoplay: false,
+				}
+			}
 		});
 	</script>
 <?php
@@ -197,27 +212,28 @@ function mc_get_box_content()
 		<div class="col-12">
 			<div class="box-round p-4 masterclass-content-box">
 				<div class="row">
-					<div class="col-2 col-md-1">
-						<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/taca.svg"; ?>" alt="Ícone garrafa" />
-					</div>
-					<div class="col-10 col-md-11 pl-0 ml-0">
-						<p class="description"><strong>História e Importância do Vinho:</strong> quais os principais tipos de vinhos.</p>
+					<div class="col-12 pl-0 ml-3">
+						<p class="description">● <strong>Apresentação</strong></p>
 					</div>
 				</div>
 				<div class="row mt-4">
-					<div class="col-2 col-md-1">
-						<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/taca.svg"; ?>" alt="Ícone garrafa" />
+					<div class="col-12 pl-0 ml-3">
+						<p class="description">● <strong>1ª PARTE - INTRODUÇÃO E CONTEXTO</strong></p>
 					</div>
-					<div class="col-10 col-md-11 pl-0 ml-0">
-						<p class="description"><strong>Só vinho caro tem qualidade?</strong> Como escolher vinho bom e barato.</p>
+					<div class="col-12 pl-0 ml-3">
+						<p class="description">○ HISTÓRIA DE VIDA</p>
 					</div>
-				</div>
-				<div class="row mt-4">
-					<div class="col-2 col-md-1">
-						<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/taca.svg"; ?>" alt="Ícone garrafa" />
+					<div class="col-12 pl-0 ml-3">
+						<p class="description">○ POR QUE RESOLVEMOS DAR ESSA AULA?</p>
 					</div>
-					<div class="col-10 col-md-11 pl-0 ml-0">
-						<p class="description"><strong>O que ler nos rótulos das garrafas para escolher seu vinho?</strong> Tipos de taças para cada tipo de vinho.</p>
+					<div class="col-12 pl-0 ml-3">
+						<p class="description">○ O QUE ESSA AULA OFERECE?</p>
+					</div>
+					<div class="col-12 pl-0 ml-3">
+						<p class="description">○ POR QUE VOCÊS VIERAM FAZER O CURSO?</p>
+					</div>
+					<div class="col-12 pl-0 ml-3">
+						<p class="description">○ QUAL A SUA EXPECTATIVA?</p>
 					</div>
 				</div>
 				<div class="row button-more">
@@ -228,59 +244,51 @@ function mc_get_box_content()
 				<div class="row d-none more">
 					<div class="col-12">
 						<div class="row mt-4">
-							<div class="col-2 col-md-1">
-								<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/taca.svg"; ?>" alt="Ícone garrafa" />
+							<div class="col-12 pl-0 ml-3">
+								<p class="description">● <strong>2ª PARTE – O ATOR E O PERSONAGEM</strong></p>
 							</div>
-							<div class="col-10 col-md-11 pl-0 ml-0">
-								<p class="description"><strong>Tipos de taças</strong> para cada tipo de vinho.</p>
+							<div class="col-12 pl-0 ml-3">
+								<p class="description">○ CONSCIÊNCIA CORPORAL</p>
 							</div>
-						</div>
-						<div class="row mt-4">
-							<div class="col-2 col-md-1">
-								<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/taca.svg"; ?>" alt="Ícone garrafa" />
+							<div class="col-12 pl-0 ml-3">
+								<p class="description">○ PREPARAÇÃO CORPORAL</p>
 							</div>
-							<div class="col-10 col-md-11 pl-0 ml-0">
-								<p class="description"><strong>Técnicas simples</strong> para não errar na harmonização.</p>
+							<div class="col-12 pl-0 ml-3">
+								<p class="description">○ EXPRESSÃO CORPORAL</p>
 							</div>
-						</div>
-						<div class="row mt-4">
-							<div class="col-2 col-md-1">
-								<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/taca.svg"; ?>" alt="Ícone garrafa" />
+							<div class="col-12 pl-0 ml-3">
+								<p class="description">○ TIMIDEZ</p>
 							</div>
-							<div class="col-10 col-md-11 pl-0 ml-0">
-								<p class="description"><strong>Análise sensorial:</strong> visual, olfativa e gustativa.</p>
+							<div class="col-12 pl-0 ml-3">
+								<p class="description">○ CONSTRUÇÃO DE PERSONAGEM</p>
 							</div>
-						</div>
-						<div class="row mt-4">
-							<div class="col-2 col-md-1">
-								<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/taca.svg"; ?>" alt="Ícone garrafa" />
+							<div class="col-12 pl-0 ml-3">
+								<p class="description">○ CONTROLE DO PERSONAGEM</p>
 							</div>
-							<div class="col-10 col-md-11 pl-0 ml-0">
-								<p class="description"><strong>Conheça</strong> os principais tipos de aromas.</p>
+							<div class="col-12 pl-0 ml-3">
+								<p class="description">○ THE PLAY IS THE THING</p>
 							</div>
 						</div>
 						<div class="row mt-4">
-							<div class="col-2 col-md-1">
-								<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/taca.svg"; ?>" alt="Ícone garrafa" />
+							<div class="col-12 pl-0 ml-3">
+								<p class="description">● <strong>3ª PARTE – A COMÉDIA</strong></p>
 							</div>
-							<div class="col-10 col-md-11 pl-0 ml-0">
-								<p class="description"><strong>Técnicas</strong> para treinar o paladar.</p>
+							<div class="col-12 pl-0 ml-3">
+								<p class="description">○ O COMEDIANTE</p>
 							</div>
-						</div>
-						<div class="row mt-4">
-							<div class="col-2 col-md-1">
-								<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/taca.svg"; ?>" alt="Ícone garrafa" />
+							<div class="col-12 pl-0 ml-3">
+								<p class="description">○ COMO NASCEM AS PIADAS</p>
 							</div>
-							<div class="col-10 col-md-11 pl-0 ml-0">
-								<p class="description"><strong>Na prática:</strong> pratos populares harmonizados com vinhos.</p>
+							<div class="col-12 pl-0 ml-3">
+								<p class="description">○ COMO FAZER RIR</p>
 							</div>
 						</div>
 						<div class="row mt-4">
-							<div class="col-2 col-md-1">
-								<img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/taca.svg"; ?>" alt="Ícone garrafa" />
+							<div class="col-12 pl-0 ml-3">
+								<p class="description">● <strong>4ª PARTE – BÔNUS</strong></p>
 							</div>
-							<div class="col-10 col-md-11 pl-0 ml-0">
-								<p class="description"><strong>Na rua:</strong> como escolher vinhos em restaurante</p>
+							<div class="col-12 pl-0 ml-3">
+								<p class="description">○ REFERÊNCIAS</p>
 							</div>
 						</div>
 					</div>
@@ -306,15 +314,29 @@ function mc_get_bio()
 				<div class="col-12">
 					<h3 class="title mb-4">Com quem você vai aprender?</h3>
 				</div>
-				<div class="col-12">
+				<div class="col-md-6 col-sm-12 mt-3">
 					<div class="box-round book-info-wrapp p-4">
 						<div class="row">
 							<div class="col-12 mb-3">
-								<img class="img-responsive" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/ronnie.png'; ?>" alt="Ronnie Von"></img>
+								<img class="img-responsive rounded-circle" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/gustavo.png'; ?>" alt="Gustavo Mendes"></img>
 							</div>
 							<div class="col-12">
 								<p>
-									Ronnie Von tem uma extensa carreira de sucesso como cantor, compositor, ator e apresentador. Grande apreciador de vinhos desde jovem, hoje também é enólogo formado e compartilha dicas sobre vinho em suas entrevistas e redes sociais.
+									<b>Gustavo Mendes</b> é comediante. Nasceu em Guarani e ainda adolescente começou carreira fazendo shows de stand-up em bares e depois conquistou grandes palcos. Com a Dilma explodiu nacionalmente e virou um fenômeno no Youtube; de onde seguiu para o “Casseta e Planeta” da Globo e para o “Agora É Tarde” da Band.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-12 mt-3">
+					<div class="box-round book-info-wrapp p-4">
+						<div class="row">
+							<div class="col-12 mb-3">
+								<img class="img-responsive rounded-circle" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/gueminho.png'; ?>" alt="Gueminho Bernardes"></img>
+							</div>
+							<div class="col-12">
+								<p>
+									<b>Gueminho Bernardes</b> é escritor e comediante. Nasceu em Juiz de Fora, onde criou em 1979 uma das mais importantes companhias de comédia de Minas e do Brasil, o Teatro de Quintal, com quem montou mais de 50 espetáculos. É autor do texto “O Camarim”, vencedor do 3º Prêmio Minas de Dramaturgia.
 								</p>
 							</div>
 						</div>
@@ -335,9 +357,8 @@ function mc_get_footer()
 				<div class="col-12">
 					<h3 class="title mb-4">Realização</h3>
 				</div>
-				<div class="col-12 d-flex justify-content-around">
+				<div class="col-12 d-flex justify-content-center">
 					<img class="img-responsive" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/polen-masterclass.png'; ?>" alt="Polen Masterclass"></img>
-					<img class="img-responsive" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/todo-vino.png'; ?>" alt="Todo Vino"></img>
 				</div>
 			</div>
 		</div>
@@ -351,8 +372,11 @@ function mc_get_thank_you_box()
 	<div class="row mb-3">
 		<div class="col-12">
 			<div class="thank-you-box">
-				<img class="img-responsive" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/ronnie.png'; ?>" alt="Ronnie Von"></img>
-				<h3>Obrigada por pedir seu curso “Bebá do vinho"</h3>
+				<div class="image-top">
+					<img class="img-responsive rounded-circle mr-3" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/gustavo.png'; ?>" alt="Gustavo Mendes"></img>
+					<img class="img-responsive rounded-circle" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/gueminho.png'; ?>" alt="Gueminho Bernardes"></img>
+				</div>
+				<h3>Obrigada por pedir seu curso “Seja outro sendo você"</h3>
 				<p>Você vai receber os e-mails com o link do acesso ao curso.</p>
 			</div>
 		</div>
@@ -369,8 +393,11 @@ function mc_get_bank_ticket_box($date = null)
 	<div class="row mb-3">
 		<div class="col-12">
 			<div class="thank-you-box">
-				<img class="img-responsive" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/ronnie.png'; ?>" alt="Ronnie Von">
-				<h3>Obrigada por pedir seu curso “Bebá do vinho"</h3>
+				<div class="image-top">
+					<img class="img-responsive rounded-circle mr-3" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/gustavo.png'; ?>" alt="Gustavo Mendes"></img>
+					<img class="img-responsive rounded-circle" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/gueminho.png'; ?>" alt="Gueminho Bernardes"></img>
+				</div>
+				<h3>Obrigada por pedir seu curso “Seja outro sendo você"</h3>
 				<p><b>Para não perder o curso faça o pagamento do boleto.</b> O prazo para pagamento do boleto é <?php echo $date; ?></p>
 				<a href="#" id="payment_ticket_custom_button" class="btn btn-primary btn-lg btn-block mt-4 gradient ticket-custom-button">Pagar Boleto</a>
 			</div>

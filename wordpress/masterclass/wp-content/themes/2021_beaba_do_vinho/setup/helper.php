@@ -153,7 +153,6 @@ function _theme_find_product_in_cart(int $productId): bool
  */
 function get_product_masterclass($masterclass_id = 69): array
 {
-    $masterclass_product_id = $masterclass_id;
     $masterclass_product = wc_get_product($masterclass_id);
 
     if (is_wp_error($masterclass_product) || empty($masterclass_product)) {
@@ -162,13 +161,13 @@ function get_product_masterclass($masterclass_id = 69): array
         ];
     }
 
-    $url_checkout = _theme_find_product_in_cart($masterclass_product_id) ? wc_get_checkout_url() : '?add-to-cart=69';
+    $url_checkout = _theme_find_product_in_cart($masterclass_id) ? wc_get_checkout_url() : "?add-to-cart={$masterclass_id}";
 
     return [
         'name' => $masterclass_product->get_name(),
         'price_regular' => wc_price($masterclass_product->get_regular_price()),
         'price' => wc_price($masterclass_product->get_price()),
-        'image_url' => get_the_post_thumbnail_url(69) ?? '',
+        'image_url' => get_the_post_thumbnail_url($masterclass_id) ?? '',
         'url_to_checkout' => $url_checkout,
     ];
 }
@@ -277,3 +276,22 @@ function send_email_success_order($order_id)
 
 }
 add_action('woocommerce_order_status_changed', 'send_email_success_order');
+
+/**
+ * Remover campos padrões do woocommerce
+ *
+ * @param $fields
+ * @return mixed
+ */
+function override_checkout_fields($fields)
+{
+    unset($fields['billing']['billing_company']); //remover empresa
+    unset($fields['billing']['billing_address_2']); //remover endereço 2
+    unset($fields['billing']['billing_cellphone']); //remover celular
+    unset($fields['order']['order_comments']); //remover comentários do pedido / compra
+
+    return $fields;
+}
+
+add_filter('woocommerce_checkout_fields' , 'override_checkout_fields');
+

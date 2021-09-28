@@ -19,8 +19,6 @@ if ( ! defined( 'ABSPATH' ) ) {
    exit;
 }
 
-
-
 if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_required() && ! is_user_logged_in() ) {
    echo esc_html( apply_filters( 'woocommerce_checkout_must_be_logged_in_message', __( 'You must be logged in to checkout.', 'woocommerce' ) ) );
    return;
@@ -73,6 +71,16 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
             action="<?php echo esc_url( wc_get_checkout_url() ); ?>"
             enctype="multipart/form-data">
 
+            <?php do_action( 'woocommerce_checkout_before_order_review_heading' ); ?>
+
+            <h3 id="order_review_heading">Forma de pagamento</h3>
+
+            <?php do_action( 'woocommerce_checkout_before_order_review' ); ?>
+
+            <div id="order_review" class="woocommerce-checkout-review-order">
+                <?php do_action( 'woocommerce_checkout_order_review' ); ?>
+            </div>
+
             <?php if ( $checkout->get_checkout_fields() ) : ?>
 
                 <?php do_action( 'woocommerce_checkout_before_customer_details' ); ?>
@@ -87,17 +95,34 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 
             <?php endif; ?>
 
-            <?php do_action( 'woocommerce_checkout_before_order_review_heading' ); ?>
+            <div class="order-terms">
+                <div class="order-terms__checkbox">
+                    <input type="checkbox" name="terms" required="required" id="terms">
+                    <label for="terms">Aceito os <a href="#">termos de uso</a></label>
+                </div>
+                <div class="order-terms__checkbox">
+                    <input type="checkbox" name="info" id="info" required="required">
+                    <label for="info">Aceito receber informações da Polen</label>
+                </div>
+            </div>
 
-            <h3 id="order_review_heading">Forma de pagamento</h3>
+            <div class="order-info" id="pix-payment-custom" style="display: none;">
+                <p>Copie o código Pix na próxima etapa e faça o pagamento na instituição financeira de sua escolha. O código tem validade de 1 dia.</p>
+            </div>
 
-            <?php do_action( 'woocommerce_checkout_before_order_review' ); ?>
-
-            <div id="order_review" class="woocommerce-checkout-review-order">
-                <?php do_action( 'woocommerce_checkout_order_review' ); ?>
+            <div class="order-info" id="bolet-payment-custom" style="display: none;">
+                <p><strong>Curso será disponibilizado após o pagamento</strong></p>
+                <p>O prazo para pagamento do boleto é <?php echo date('d-m-Y', strtotime('+1 days', current_time('timestamp'))); ?></p>
             </div>
 
             <?php do_action( 'woocommerce_checkout_after_order_review' ); ?>
+
+            <button type="submit"
+                    class="button alt" 
+                    name="woocommerce_checkout_place_order"
+                    id="place_order" value="Finalizar compra"
+                    data-value="Finalizar compra"
+                    style="width:100%">Finalizar compra</button>
 
         </form>
         <br><br>
