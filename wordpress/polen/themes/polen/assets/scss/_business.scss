@@ -1,0 +1,123 @@
+.bus-header {
+  .title {
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 57px;
+  }
+  .description {
+    font-size: 16px;
+    line-height: 19px;
+  }
+}
+
+.bus-tutorial {
+  .title {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 36px;
+  }
+}
+
+.bus-tutorial-item {
+  .title {
+    line-height: 28px;
+    font-weight: 500;
+  }
+  .description {
+    font-size: 16px;
+    line-height: 19px;
+  }
+}
+
+.bus-grid {
+  .title {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 48px;
+  }
+}
+
+.bus-talent-card {
+  position: relative;
+  display: block;
+  flex: 0 0 255px;
+  margin-right: 30px;
+  width: 255px;
+  height: 390px;
+  &:first-child {
+    margin-left: 30px;
+  }
+  .image {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    background-color: var(--gray-light);
+    z-index: 1;
+    img {
+      position: absolute;
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    figcaption {
+      position: absolute;
+      font-size: 24px;
+      line-height: 28px;
+      font-weight: bold;
+      color: var(--light);
+      text-shadow: 0px 4px 15px rgba(0, 0, 0, 0.7);
+      left: 16px;
+      bottom: 16px;
+    }
+  }
+  .link {
+    position: absolute;
+    display: block;
+    top: 0;
+    height: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+  }
+}
+
+.bus-form {
+  .title {
+    font-size: 24px;
+    line-height: 29px;
+    font-weight: 600;
+  }
+}
+
+.pol-input-group {
+  position: relative;
+  display: block;
+  padding: 8px 16px;
+  border: 1px solid var(--gray-light);
+  border-radius: 8px;
+  .label {
+    display: block;
+    font-size: 8px;
+    line-height: 1;
+    font-weight: 400;
+    color: #818181;
+  }
+  .input {
+    margin-top: 4px;
+    padding: 0;
+    width: 100%;
+    font-size: 16px;
+    line-height: 19px;
+    font-weight: 400;
+    border: none;
+    background: none;
+    outline: transparent;
+    &::placeholder {
+      color: var(--gray-light);
+    }
+  }
+}
