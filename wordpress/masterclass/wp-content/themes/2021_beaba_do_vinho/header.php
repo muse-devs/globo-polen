@@ -32,6 +32,10 @@
         .woocommerce-message {
             display: none !important;
         }
+
+        #billing_country_field{
+            display: none !important;
+        }
     </style>
 
     <!-- Google Tag Manager -->

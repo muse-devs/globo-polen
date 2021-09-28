@@ -153,7 +153,6 @@ function _theme_find_product_in_cart(int $productId): bool
  */
 function get_product_masterclass($masterclass_id = 69): array
 {
-    $masterclass_product_id = $masterclass_id;
     $masterclass_product = wc_get_product($masterclass_id);
 
     if (is_wp_error($masterclass_product) || empty($masterclass_product)) {
@@ -162,7 +161,7 @@ function get_product_masterclass($masterclass_id = 69): array
         ];
     }
 
-    $url_checkout = _theme_find_product_in_cart($masterclass_product_id) ? wc_get_checkout_url() : "?add-to-cart={$masterclass_id}";
+    $url_checkout = _theme_find_product_in_cart($masterclass_id) ? wc_get_checkout_url() : "?add-to-cart={$masterclass_id}";
 
     return [
         'name' => $masterclass_product->get_name(),
