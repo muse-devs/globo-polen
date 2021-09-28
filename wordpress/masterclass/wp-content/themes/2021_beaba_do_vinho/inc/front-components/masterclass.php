@@ -89,7 +89,7 @@ function mc_get_top_banner($product)
 ?>
 	<div class="row mb-4">
 		<div class="col-12">
-			<div class="mc-landing-banner">
+			<div class="mc-landing-banner" style="background:url('<?php echo TEMPLATE_URI . "/assets/img/masterclass/top-bg-gustavo.png"; ?>')">
 				<figure class="mc-logo">
 					<img class="image" src="<?php echo TEMPLATE_URI; ?>/assets/img/masterclass/title-sendo-vc.png" alt="Seja Outro Sendo Você" />
 				</figure>
