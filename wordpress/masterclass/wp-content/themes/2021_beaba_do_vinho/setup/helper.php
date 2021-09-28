@@ -162,13 +162,13 @@ function get_product_masterclass($masterclass_id = 69): array
         ];
     }
 
-    $url_checkout = _theme_find_product_in_cart($masterclass_product_id) ? wc_get_checkout_url() : '?add-to-cart=69';
+    $url_checkout = _theme_find_product_in_cart($masterclass_product_id) ? wc_get_checkout_url() : "?add-to-cart={$masterclass_id}";
 
     return [
         'name' => $masterclass_product->get_name(),
         'price_regular' => wc_price($masterclass_product->get_regular_price()),
         'price' => wc_price($masterclass_product->get_price()),
-        'image_url' => get_the_post_thumbnail_url(69) ?? '',
+        'image_url' => get_the_post_thumbnail_url($masterclass_id) ?? '',
         'url_to_checkout' => $url_checkout,
     ];
 }
