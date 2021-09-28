@@ -12,7 +12,7 @@ get_header(); the_content();
         <br>
         <div class="col-12 text-center mt-3">
             <h3 class="title mb-4">O que é a Masterclass?</h3>
-            <p>Viver em sociedade é interagir e comunicar. Independente do seu projeto de vida, um dia vai precisar vender. Seja ideias, produtos ou você mesmo. Essa aula te convida a conhecer e dominar esse vendedor que existe em você, fazendo com que ele trabalhe para a sua felicidade.</p>
+            <p style="font-size: 15px;">Viver em sociedade é interagir e comunicar. Independente do seu projeto de vida, um dia vai precisar vender. Seja ideias, produtos ou você mesmo. Essa aula te convida a conhecer e dominar esse vendedor que existe em você, fazendo com que ele trabalhe para a sua felicidade.</p>
         </div>
         <br>
         <?php
