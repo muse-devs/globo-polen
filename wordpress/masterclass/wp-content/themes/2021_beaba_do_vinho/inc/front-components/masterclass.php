@@ -8,7 +8,9 @@ function mc_get_buy_button($product)
 ?>
 	<div class="row mb-4">
 		<div class="col-12 col-md-6 m-md-auto">
-			<a href="<?php echo $product['url_to_checkout']; ?>" class="btn btn-primary btn-lg btn-block mt-4 gradient mc-custom-button">Inscreva-se</a>
+			<a href="<?php echo $product['url_to_checkout']; ?>" class="btn btn-primary btn-lg btn-block mt-4 gradient mc-custom-button">
+				de <s><?php echo $product['price_regular']; ?></s> por <?php echo $product['price']; ?>
+			</a>
 		</div>
 	</div>
 	<!-- <div class="row">
@@ -66,7 +68,7 @@ function mc_get_top_banner_lp()
 	<script>
 		const success = '<?php echo home_url('/ronnie-von/beaba-do-vinho/sucesso'); ?>';
 
-		polVideoTag("#mc-video");
+		//polVideoTag("#mc-video");
 
 		const formName = "form#form-email-masterclass";
 		document.querySelector(formName).addEventListener("submit", function(evt) {
@@ -89,7 +91,7 @@ function mc_get_top_banner($product)
 ?>
 	<div class="row mb-4">
 		<div class="col-12">
-			<div class="mc-landing-banner">
+			<div class="mc-landing-banner" style="background:url('<?php echo TEMPLATE_URI . "/assets/img/masterclass/top-bg-gustavo.png"; ?>');background-size: cover;">
 				<figure class="mc-logo">
 					<img class="image" src="<?php echo TEMPLATE_URI; ?>/assets/img/masterclass/title-sendo-vc.png" alt="Seja Outro Sendo Você" />
 				</figure>
@@ -118,7 +120,7 @@ function mc_get_top_banner($product)
 		</div>
 	</div>
 	<script>
-		polVideoTag("#mc-video");
+		//polVideoTag("#mc-video");
 	</script>
 <?php
 }
@@ -131,7 +133,7 @@ function mc_get_carrossel_how_to()
 			<h3 class="title mb-4">Como funciona?</h3>
 		</div>
 		<div class="col-12">
-			<div id="how-to-carousel" class="owl-carousel owl-theme">
+			<div id="how-to-carousel" class="owl-carousel owl-theme box-round">
 				<div class="item">
 					<div class="box-round py-3 px-3">
 						<div class="row">
@@ -183,9 +185,18 @@ function mc_get_carrossel_how_to()
 			autoplayHoverPause: true,
 			margin: 0,
 			nav: false,
-			autoplay: true,
 			dots: true,
 			autoHeight: false,
+			responsive : {
+				0 : {
+					items: 1,
+					autoplay: true,
+				},
+				992 : {
+					items: 3,
+					autoplay: false,
+				}
+			}
 		});
 	</script>
 <?php
@@ -307,7 +318,7 @@ function mc_get_bio()
 					<div class="box-round book-info-wrapp p-4">
 						<div class="row">
 							<div class="col-12 mb-3">
-								<img class="img-responsive" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/ronnie.png'; ?>" alt="Ronnie Von"></img>
+								<img class="img-responsive rounded-circle" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/gustavo.png'; ?>" alt="Gustavo Mendes"></img>
 							</div>
 							<div class="col-12">
 								<p>
@@ -321,7 +332,7 @@ function mc_get_bio()
 					<div class="box-round book-info-wrapp p-4">
 						<div class="row">
 							<div class="col-12 mb-3">
-								<img class="img-responsive" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/ronnie.png'; ?>" alt="Ronnie Von"></img>
+								<img class="img-responsive rounded-circle" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/gueminho.png'; ?>" alt="Gueminho Bernardes"></img>
 							</div>
 							<div class="col-12">
 								<p>
@@ -361,8 +372,11 @@ function mc_get_thank_you_box()
 	<div class="row mb-3">
 		<div class="col-12">
 			<div class="thank-you-box">
-				<img class="img-responsive" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/ronnie.png'; ?>" alt="Ronnie Von"></img>
-				<h3>Obrigada por pedir seu curso “Bebá do vinho"</h3>
+				<div class="image-top">
+					<img class="img-responsive rounded-circle mr-3" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/gustavo.png'; ?>" alt="Gustavo Mendes"></img>
+					<img class="img-responsive rounded-circle" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/gueminho.png'; ?>" alt="Gueminho Bernardes"></img>
+				</div>
+				<h3>Obrigada por pedir seu curso “Seja outro sendo você"</h3>
 				<p>Você vai receber os e-mails com o link do acesso ao curso.</p>
 			</div>
 		</div>
@@ -379,8 +393,11 @@ function mc_get_bank_ticket_box($date = null)
 	<div class="row mb-3">
 		<div class="col-12">
 			<div class="thank-you-box">
-				<img class="img-responsive" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/ronnie.png'; ?>" alt="Ronnie Von">
-				<h3>Obrigada por pedir seu curso “Bebá do vinho"</h3>
+				<div class="image-top">
+					<img class="img-responsive rounded-circle mr-3" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/gustavo.png'; ?>" alt="Gustavo Mendes"></img>
+					<img class="img-responsive rounded-circle" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/gueminho.png'; ?>" alt="Gueminho Bernardes"></img>
+				</div>
+				<h3>Obrigada por pedir seu curso “Seja outro sendo você"</h3>
 				<p><b>Para não perder o curso faça o pagamento do boleto.</b> O prazo para pagamento do boleto é <?php echo $date; ?></p>
 				<a href="#" id="payment_ticket_custom_button" class="btn btn-primary btn-lg btn-block mt-4 gradient ticket-custom-button">Pagar Boleto</a>
 			</div>

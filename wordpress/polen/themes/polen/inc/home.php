@@ -18,7 +18,10 @@ get_header();
 	<div class="row">
 		<div class="col-12">
 			<div id="product-carousel" class="owl-carousel owl-theme">
-      <div class="item">
+        <div class="item">
+					<?php mc_get_home_banner_gustavo(master_class_url_home()); ?>
+				</div>
+        <div class="item">
 					<?php
 					sa_get_home_banner(
 						"Setembro amarelo",
