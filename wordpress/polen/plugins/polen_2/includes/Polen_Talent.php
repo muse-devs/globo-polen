@@ -854,7 +854,7 @@ class Polen_Talent {
             return;
         }
 
-        $url = 'https://polen.me/colab/3e07450ff56447e13a166e6ac458174b/';
+        $url = 'https://hooks.zapier.com/hooks/catch/10583855/bucjtyy/';
         wp_remote_post($url, array(
                 'method' => 'POST',
                 'timeout' => 45,
