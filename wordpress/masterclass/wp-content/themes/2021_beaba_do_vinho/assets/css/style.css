@@ -11487,7 +11487,7 @@ button.criesp :hover {
       object-fit: cover; }
     @media (min-width: 768px) {
       .mc-landing-banner .mc-home-video {
-        height: 400px; } }
+        height: 500px; } }
 
 .mc-custom-button {
   font-size: 20px !important;
