@@ -8,7 +8,9 @@ function mc_get_buy_button($product)
 ?>
 	<div class="row mb-4">
 		<div class="col-12 col-md-6 m-md-auto">
-			<a href="<?php echo $product['url_to_checkout']; ?>" class="btn btn-primary btn-lg btn-block mt-4 gradient mc-custom-button">Inscreva-se</a>
+			<a href="<?php echo $product['url_to_checkout']; ?>" class="btn btn-primary btn-lg btn-block mt-4 gradient mc-custom-button">
+				de <s><?php echo $product['price_regular']; ?></s> por <?php echo $product['price']; ?>
+			</a>
 		</div>
 	</div>
 	<!-- <div class="row">
@@ -89,7 +91,7 @@ function mc_get_top_banner($product)
 ?>
 	<div class="row mb-4">
 		<div class="col-12">
-			<div class="mc-landing-banner" style="background:url('<?php echo TEMPLATE_URI . "/assets/img/masterclass/top-bg-gustavo.png"; ?>')">
+			<div class="mc-landing-banner" style="background:url('<?php echo TEMPLATE_URI . "/assets/img/masterclass/top-bg-gustavo.png"; ?>');background-size: cover;">
 				<figure class="mc-logo">
 					<img class="image" src="<?php echo TEMPLATE_URI; ?>/assets/img/masterclass/title-sendo-vc.png" alt="Seja Outro Sendo Você" />
 				</figure>
@@ -361,8 +363,11 @@ function mc_get_thank_you_box()
 	<div class="row mb-3">
 		<div class="col-12">
 			<div class="thank-you-box">
-				<img class="img-responsive" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/ronnie.png'; ?>" alt="Ronnie Von"></img>
-				<h3>Obrigada por pedir seu curso “Bebá do vinho"</h3>
+				<div class="image-top">
+					<img class="img-responsive rounded-circle mr-3" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/gustavo.png'; ?>" alt="Gustavo Mendes"></img>
+					<img class="img-responsive rounded-circle" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/gueminho.png'; ?>" alt="Gueminho Bernardes"></img>
+				</div>
+				<h3>Obrigada por pedir seu curso “Seja outro sendo você"</h3>
 				<p>Você vai receber os e-mails com o link do acesso ao curso.</p>
 			</div>
 		</div>
@@ -379,8 +384,11 @@ function mc_get_bank_ticket_box($date = null)
 	<div class="row mb-3">
 		<div class="col-12">
 			<div class="thank-you-box">
-				<img class="img-responsive" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/ronnie.png'; ?>" alt="Ronnie Von">
-				<h3>Obrigada por pedir seu curso “Bebá do vinho"</h3>
+				<div class="image-top">
+					<img class="img-responsive rounded-circle mr-3" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/gustavo.png'; ?>" alt="Gustavo Mendes"></img>
+					<img class="img-responsive rounded-circle" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/gueminho.png'; ?>" alt="Gueminho Bernardes"></img>
+				</div>
+				<h3>Obrigada por pedir seu curso “Seja outro sendo você"</h3>
 				<p><b>Para não perder o curso faça o pagamento do boleto.</b> O prazo para pagamento do boleto é <?php echo $date; ?></p>
 				<a href="#" id="payment_ticket_custom_button" class="btn btn-primary btn-lg btn-block mt-4 gradient ticket-custom-button">Pagar Boleto</a>
 			</div>
