@@ -307,7 +307,7 @@ function mc_get_bio()
 					<div class="box-round book-info-wrapp p-4">
 						<div class="row">
 							<div class="col-12 mb-3">
-								<img class="img-responsive" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/ronnie.png'; ?>" alt="Ronnie Von"></img>
+								<img class="img-responsive rounded-circle" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/gustavo.png'; ?>" alt="Gustavo Mendes"></img>
 							</div>
 							<div class="col-12">
 								<p>
@@ -321,7 +321,7 @@ function mc_get_bio()
 					<div class="box-round book-info-wrapp p-4">
 						<div class="row">
 							<div class="col-12 mb-3">
-								<img class="img-responsive" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/ronnie.png'; ?>" alt="Ronnie Von"></img>
+								<img class="img-responsive rounded-circle" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/gueminho.png'; ?>" alt="Gueminho Bernardes"></img>
 							</div>
 							<div class="col-12">
 								<p>
