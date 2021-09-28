@@ -277,3 +277,22 @@ function send_email_success_order($order_id)
 
 }
 add_action('woocommerce_order_status_changed', 'send_email_success_order');
+
+
+/**
+ * Remover campos padrões do woocommerce
+ *
+ * @param $fields
+ * @return mixed
+ */
+function override_checkout_fields($fields): mixed
+{
+    unset($fields['billing']['billing_company']); //remover empresa
+    unset($fields['billing']['billing_address_2']); //remover endereço 2
+    unset($fields['billing']['billing_cellphone']); //remover celular
+    unset($fields['order']['order_comments']); //remover comentários do pedido / compra
+
+    return $fields;
+}
+
+add_filter('woocommerce_checkout_fields' , 'override_checkout_fields');
