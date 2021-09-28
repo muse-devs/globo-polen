@@ -9,12 +9,12 @@
 
     <?php $uri = get_template_directory_uri(); ?>
 
-    <meta property="og:title" content="Masterclass Ronnie Von">
-    <meta property="og:description" content="Beabá do Vinho com Ronnie Von">
-    <meta property="og:url" content="https://polen.me/masterclass/ronnie-von/beaba-do-vinho/inscricoes/">
-    <meta property="og:image" content="https://polen.me/masterclass/wp-content/uploads/2021/09/Screen-Shot-2021-09-09-at-21.11.14.png">
+    <meta property="og:title" content="Masterclass Gustavo Mendes e Gueminho Bernardes">
+    <meta property="og:description" content="Seja outro sendo você com Gustavo Mendes e Gueminho Bernardes">
+    <meta property="og:url" content="https://polen.me/masterclass/gustavo-mendes/seja-outro-sendo-voce/inscricao">
+    <meta property="og:image" content="https://polen.me/masterclass/wp-content/themes/2021_beaba_do_vinho/assets/img/masterclass/cover-sendo-vc.png">
     <meta property="og:locale" content="pt_BR">
-    <meta property="og:site_name" content="Masterclass Ronnie Von">
+    <meta property="og:site_name" content="Masterclass Gustavo Mendes e Gueminho Bernardes">
 
     <meta name="format-detection" content="telephone=no" />
     <meta name="format-detection" content="date=no" />
@@ -57,9 +57,9 @@
     <div id="page" class="container site">
         <header id="masthead" class="row py-4 header-home">
             <?php global $wp; ?>
-            <?php if (add_query_arg( array(), $wp->request ) === "ronnie-von/beaba-do-vinho/inscricoes") : ?>
+            <?php if (add_query_arg( array(), $wp->request ) === "gustavo-mendes/seja-outro-sendo-voce/inscricao") : ?>
                 <div class="col-8 col-sm-6 d-flex align-items-center">
-                    <a href="<?php echo site_url('ronnie-von/beaba-do-vinho/inscricoes'); ?>">
+                    <a href="<?php echo site_url('gustavo-mendes/seja-outro-sendo-voce/inscricao'); ?>">
                         <img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/logo-masterclass.svg"; ?>" alt="Logo Masterclass" />
                     </a>
                 </div>
@@ -68,7 +68,7 @@
                 <div class="col-12">
                     <div class="row">
                         <div class="col-12">
-                            <a href="<?php echo site_url('ronnie-von/beaba-do-vinho/inscricoes'); ?>"><img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/logo-masterclass.svg"; ?>" alt="Logo Masterclass" /></a>
+                            <a href="<?php echo site_url('gustavo-mendes/seja-outro-sendo-voce/inscricao'); ?>"><img src="<?php echo TEMPLATE_URI . "/assets/img/masterclass/logo-masterclass.svg"; ?>" alt="Logo Masterclass" /></a>
                         </div>
                     </div>
                 </div>
