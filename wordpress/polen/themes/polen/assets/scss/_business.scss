@@ -1,3 +1,19 @@
+.bus-menu-item {
+  margin: 0 20px;
+  display: none;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  color: var(--dark);
+  @include media-breakpoint-up(md) {
+    display: block;
+  }
+}
+
+.home .bus-menu-item {
+  color: var(--light);
+}
+
 .bus-header {
   .title {
     font-size: 48px;
