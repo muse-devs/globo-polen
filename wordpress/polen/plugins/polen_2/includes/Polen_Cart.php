@@ -94,8 +94,8 @@ class Polen_Cart
             $order->add_meta_data( Social_Base_Order::ORDER_META_KEY_SOCIAL, '1' );
             $order->add_meta_data( Social_Base_Order::ORDER_META_KEY_CAMPAING, $product->get_meta( Social_Base_Product::PRODUCT_META_SLUG_CAMPAING, true ) );
 
-            $instructions_to_video = "Agradecer {$name} de {$city} pela doação ao criança esperança 2021!";
-            $item->add_meta_data( 'instructions_to_video', $instructions_to_video, true );
+            // $instructions_to_video = "Agradecer {$name} de {$city} pela doação ao criança esperança 2021!";
+            // $item->add_meta_data( 'instructions_to_video', $instructions_to_video, true );
 
             $interval  = Polen_Order::get_interval_order_social();
             $timestamp = Polen_Order::get_deadline_timestamp_by_social_event( $order, $interval );

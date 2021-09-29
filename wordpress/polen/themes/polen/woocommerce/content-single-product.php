@@ -133,7 +133,7 @@ if( 'instock' == $product->get_stock_status() ) {
 			<?php if ($donate) : ?>
 				<div class="row">
 					<div class="col-md-12 mb-1">
-						<?php polen_donate_badge("100% DO CACHÊ DOADO PARA " . strtoupper($donate_name), false); ?>
+						<?php polen_donate_badge("100% DO CACHÊ DOADO PARA " . $donate_name, false); ?>
 					</div>
 				</div>
 			<?php endif; ?>
