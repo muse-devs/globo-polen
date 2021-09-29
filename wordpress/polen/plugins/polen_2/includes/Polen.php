@@ -3,6 +3,7 @@
 namespace Polen\Includes;
 
 use Polen\Admin\Polen_Admin;
+use Polen\Enterprise\Enterprise;
 use Polen\Includes\Polen_Plugin_Settings;
 use Polen\Master_class\Master_Class;
 use Polen\Master_class\Master_Class_Rewrite;
@@ -111,6 +112,9 @@ class Polen {
 
         // Master class
         // new Master_Class(true);
+
+        // Enterprise
+        new Enterprise(true);
 
     }
 
