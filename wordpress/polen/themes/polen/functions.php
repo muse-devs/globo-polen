@@ -325,8 +325,15 @@ require_once TEMPLATE_DIR . '/social_base/function.php';;
 /**
 * Funções para master-class
 */
-// flush_rewrite_rules();
 require_once TEMPLATE_DIR . '/master_class/function_master_class.php';
+
+/**
+ * Funções para polen empresas
+ */
+
+// flush_rewrite_rules();
+
+require_once TEMPLATE_DIR . '/enterprise/function_enterprise.php';
 
 
 add_action('wc_gateway_stripe_process_response', function($response, $order) {
