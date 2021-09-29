@@ -13,13 +13,6 @@ get_header();
   <?php polen_front_get_banner_with_carousel();
   ?>
 
-  <?php
-  bus_get_header();
-  bus_get_tutorial();
-  bus_grid(polen_get_new_talents(8), "Nossos talentos");
-  bus_get_form();
-  ?>
-
   <?php polen_banner_scrollable(polen_get_new_talents(6), "Destaque", polen_get_all_new_talents_url()); ?>
 
   <div class="row">

@@ -8,6 +8,12 @@
     font-size: 16px;
     line-height: 19px;
   }
+  @include media-breakpoint-up(md) {
+    .title {
+      font-size: 64px;
+      line-height: 77px;
+    }
+  }
 }
 
 .bus-tutorial {
@@ -16,11 +22,17 @@
     font-weight: 600;
     line-height: 36px;
   }
+  @include media-breakpoint-up(md) {
+    & > .title {
+      font-size: 32px;
+      line-height: 48px;
+    }
+  }
 }
 
 .bus-tutorial-item {
   .title {
-    line-height: 28px;
+    line-height: 24px;
     font-weight: 500;
   }
   .description {
@@ -105,10 +117,15 @@
     line-height: 1;
     font-weight: 400;
     color: #818181;
+    .required {
+      color: var(--danger);
+    }
   }
-  .input {
+  .input,
+  textarea,
+  select {
     margin-top: 4px;
-    padding: 0;
+    padding: 0 !important;
     width: 100%;
     font-size: 16px;
     line-height: 19px;
@@ -117,6 +134,16 @@
     background: none;
     outline: transparent;
     &::placeholder {
+      color: var(--gray-light);
+    }
+  }
+  select {
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -ms-appearance: none;
+    &.not-selected {
       color: var(--gray-light);
     }
   }

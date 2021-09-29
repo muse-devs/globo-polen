@@ -13331,13 +13331,23 @@ label.lg {
   font-size: 16px;
   line-height: 19px; }
 
+@media (min-width: 768px) {
+  .bus-header .title {
+    font-size: 64px;
+    line-height: 77px; } }
+
 .bus-tutorial .title {
   font-size: 24px;
   font-weight: 600;
   line-height: 36px; }
 
+@media (min-width: 768px) {
+  .bus-tutorial > .title {
+    font-size: 32px;
+    line-height: 48px; } }
+
 .bus-tutorial-item .title {
-  line-height: 28px;
+  line-height: 24px;
   font-weight: 500; }
 
 .bus-tutorial-item .description {
@@ -13408,9 +13418,13 @@ label.lg {
     line-height: 1;
     font-weight: 400;
     color: #818181; }
-  .pol-input-group .input {
+    .pol-input-group .label .required {
+      color: var(--danger); }
+  .pol-input-group .input,
+  .pol-input-group textarea,
+  .pol-input-group select {
     margin-top: 4px;
-    padding: 0;
+    padding: 0 !important;
     width: 100%;
     font-size: 16px;
     line-height: 19px;
@@ -13418,7 +13432,17 @@ label.lg {
     border: none;
     background: none;
     outline: transparent; }
-    .pol-input-group .input::placeholder {
+    .pol-input-group .input::placeholder,
+    .pol-input-group textarea::placeholder,
+    .pol-input-group select::placeholder {
+      color: var(--gray-light); }
+  .pol-input-group select {
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -ms-appearance: none; }
+    .pol-input-group select.not-selected {
       color: var(--gray-light); }
 
 /*# sourceMappingURL=maps/style.css.map */

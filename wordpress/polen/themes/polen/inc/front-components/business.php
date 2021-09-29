@@ -1,5 +1,23 @@
 <?php
 
+// Montagem da página ------------------------------
+/*
+bus_get_header();
+bus_get_tutorial();
+bus_grid(bus_get_talents(), "Nossos talentos");
+bus_get_form();
+*/
+// --------------------------------------------------
+
+// Função temporária para pegar talentos Business
+function bus_get_talents()
+{
+  global $Polen_Plugin_Settings;
+  $products_id = $Polen_Plugin_Settings['polen-business-talents'];
+  $products_id = preg_replace('/\s+/', '', $products_id);
+  return !empty($products_id) ? array_chunk(explode(",", $products_id), 4) : array();
+}
+
 function bus_get_header()
 {
 ?>
@@ -53,19 +71,18 @@ function bus_get_tutorial()
 
 function bus_get_card($item)
 {
-  if (isset($item['ID'])) {
-    $image_data = polen_get_thumbnail($item['ID']);
+  if (isset($item)) {
+    $image_data = polen_get_thumbnail($item);
   } else {
-    $image = array();
-    $image[] = '';
+    return;
   }
 ?>
   <section class="bus-talent-card mb-5" itemscope itemtype="https://schema.org/Offer">
     <figure class="image">
       <img loading="lazy" src="<?php echo $image_data["image"]; ?>" alt="<?php echo $image_data["alt"]; ?>" />
-      <figcaption itemprop="name"><?php echo $item['name']; ?></figcaption>
+      <figcaption itemprop="name"><?php echo get_the_title($item); ?></figcaption>
     </figure>
-    <a href="<?= $item["talent_url"]; ?>" class="link"></a>
+    <?php /* <a href="<?= $item["talent_url"]; ?>" class="link"></a> */ ?>
   </section>
 <?php
 }
@@ -76,14 +93,7 @@ function bus_grid_scrollable($items, $title)
     return;
   }
 ?>
-  <section class="row mt-5 banner-scrollable bus-grid">
-    <div class="col-md-12 ml-3">
-      <header class="row mb-3">
-        <div class="col-12">
-          <h2 class="title"><?php echo $title; ?></h2>
-        </div>
-      </header>
-    </div>
+  <section class="row banner-scrollable bus-grid">
     <div class="col-md-12 p-0 p-md-0">
       <div class="banner-wrapper">
         <div class="banner-content">
@@ -99,18 +109,35 @@ function bus_grid_scrollable($items, $title)
 
 function bus_grid($items, $title)
 {
-  bus_grid_scrollable($items, $title);
+  if (empty($items)) {
+    return;
+  }
+?>
+  <section class="row bus-grid">
+    <div class="col-md-12 ml-3">
+      <header class="row mb-5">
+        <div class="col-12 text-md-center">
+          <h2 class="title"><?php echo $title; ?></h2>
+        </div>
+      </header>
+    </div>
+  </section>
+  <?php
+  foreach ($items as $key => $page) {
+    bus_grid_scrollable($page, $title);
+  }
 }
 
 function bus_get_form()
 {
-?>
+  wp_enqueue_script("polen-business");
+  ?>
   <section class="row mt-5 mb-5 bus-form">
     <div class="col-12 mb-4 pb-2 text-center">
       <h2 class="title">Entre em contato com equipe de vendas</h2>
     </div>
-    <div class="col-12">
-      <form id="bus-form" action="#">
+    <div class="col-12 col-md-8 m-md-auto">
+      <form id="bus-form" v-on:submit.prevent="handleSubmit">
         <label class="pol-input-group mb-3">
           <span class="label">Nome Completo<span class="required">*</span></span>
           <input type="text" class="input" placeholder="Seu nome" required />
@@ -118,6 +145,29 @@ function bus_get_form()
         <label class="pol-input-group mb-3">
           <span class="label">Empresa<span class="required">*</span></span>
           <input type="text" class="input" placeholder="Empresa S.A." required />
+        </label>
+        <label class="pol-input-group mb-3">
+          <span class="label">Número de colaboradores<span class="required">*</span></span>
+          <select class="not-selected" required>
+            <option value="">Selecione uma opção</option>
+            <option value="500">1 a 500</option>
+          </select>
+        </label>
+        <label class="pol-input-group mb-3">
+          <span class="label">Cargo<span class="required">*</span></span>
+          <input type="text" class="input" placeholder="Seu cargo" required />
+        </label>
+        <label class="pol-input-group mb-3">
+          <span class="label">e-mail de trabalho<span class="required">*</span></span>
+          <input type="email" class="input" placeholder="exemplo@empresa.com" required />
+        </label>
+        <label class="pol-input-group mb-3">
+          <span class="label">Número de telefone<span class="required">*</span></span>
+          <input type="text" name="phone_number" v-model="phone" v-on:keyup="handleChange" class="input" placeholder="(XX) XXXXX-XXXX" maxlength="15" required />
+        </label>
+        <label class="pol-input-group mb-3">
+          <span class="label">Nome Completo<span class="required">*</span></span>
+          <textarea placeholder="Como você pretende usar os vídeos Polen para sua empresa?" rows="6" required></textarea>
         </label>
         <input type="submit" class="btn btn-primary btn-lg btn-block mt-4" value="Enviar" />
       </form>
