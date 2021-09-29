@@ -445,11 +445,16 @@ if( $order ){
 
         <div class="row mb-3">
             <div class="col-12">
-                <div class="thank-you-box">
-                    <img class="img-responsive" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/ronnie.png'; ?>" alt="Ronnie Von"></img>
-                    <h3>Obrigada por pedir seu curso “Bebá do vinho"</h3>
-                    <p>Você vai receber os e-mails com o link do acesso ao curso.</p>
-                </div>
+                <?php foreach ($order->get_items() as $item) : ?>
+                    <div class="thank-you-box">
+                        <img class="img-responsive"
+                             style="height: 120px;width: 130px;"
+                             src="<?php echo get_the_post_thumbnail_url($item['product_id']); ?>"
+                             alt="<?php echo $item['name']; ?>">
+                        <h3>Obrigada por pedir seu curso “<?php echo $item['name']; ?>"</h3>
+                        <p>Você vai receber os e-mails com o link do acesso ao curso.</p>
+                    </div>
+                <?php endforeach; ?>
             </div>
         </div>
 
@@ -487,9 +492,10 @@ if( $order ){
                 </li>
             </ul>
         </div>
-
     </div>
+
     <div class="container" id="watingPixPaymentBox" style="display: <?php echo $paid ? 'none' : 'block'; ?>;">
+
         <div class="payment__end">
             <p>Para finalizar a sua compra é só realizar o pagamento com Pix!</p>
         </div>
@@ -497,19 +503,22 @@ if( $order ){
             <p>Obrigado pela compra. Você receberá todos os dados da sua compra no email.</p>
         </div>
         <div class="course-card">
-            <div class="course-card__header">
-                <div class="course-card__image" style="margin: auto;">
-                    <img src="<?php echo home_url('/'); ?>/wp-content/uploads/2021/09/ronnie.png">
+            <?php foreach ($order->get_items() as $item) : ?>
+                <div class="course-card__header">
+                    <div class="course-card__image" style="margin: auto;">
+                        <img src="<?php echo get_the_post_thumbnail_url($item['product_id']); ?>">
+                    </div>
+                    <p><?php echo $item['name']; ?></p>
                 </div>
-                <p>Beabá do vinho</p>
-            </div>
-            <div class="course-card__price">
-                <p>Você vai pagar</p>
-                <div class="course-card__value">
-                    <p><?php echo wc_price($order->get_total()); ?></p>
+                <div class="course-card__price">
+                    <p>Você vai pagar</p>
+                    <div class="course-card__value">
+                        <p><?php echo wc_price($order->get_total()); ?></p>
+                    </div>
                 </div>
-            </div>
+            <?php endforeach; ?>
         </div>
+
         <div class="payment__instructions">
             <div class="payment__header">
                 <img src="https://logospng.org/download/pix/logo-pix-icone-512.png" alt="">
