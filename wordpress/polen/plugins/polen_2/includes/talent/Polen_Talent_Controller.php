@@ -101,8 +101,11 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
                            $response = array( 'success' => true, 'message' => 'Vídeo aceito com sucesso', 'code' => 1 ); 
                        }                            
                        if( $type == 'reject' ){
-                           $order->update_status( 'talent-rejected', '', true );
-                           $response = array( 'success' => true, 'message' => 'Vídeo rejeitado', 'code' => 2 ); 
+                           $reason = $_POST[ 'reason' ];
+                           $item_cart = Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
+                           $item_cart->add_meta_data( 'reason_reject', $reason, true );
+                           $order->update_status( 'talent-rejected', "Motivo: {$reason}" );
+                           $response = array( 'success' => true, 'message' => "Vídeo rejeitado", 'code' => 2 ); 
                        }  
                       
                    }
