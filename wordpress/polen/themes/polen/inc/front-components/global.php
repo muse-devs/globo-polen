@@ -587,7 +587,7 @@ function generic_get_about($main_title, $title, $text)
 				<div class="row">
 					<div class="col-md-12 mt-4">
 						<p><strong><?php echo $title; ?></strong></p>
-						<p><?php echo $text; ?></p>
+						<?php echo $text; ?>
 					</div>
 				</div>
 			</div>
