@@ -1,4 +1,5 @@
 const form = "#bus-form";
+const url_success = document.getElementById("url-success").value;
 
 const bus_form = new Vue({
 	el: form,
@@ -16,10 +17,7 @@ const bus_form = new Vue({
 			polAjaxForm(
 				form,
 				function (e) {
-					polMessages.message(
-						"Enviado!",
-						"Seu número foi adicionado com sucesso"
-					);
+					window.location.href = url_success;
 				},
 				function (e) {
 					polMessages.error(e);

@@ -147,4 +147,35 @@
       color: var(--gray-light);
     }
   }
+  &.required {
+    .label {
+      &::after {
+        content: "*";
+        color: var(--danger);
+      }
+    }
+  }
+}
+
+.bus-thankyou {
+  .title {
+    font-size: 48px;
+    font-weight: 500;
+    line-height: 57px;
+  }
+  .description {
+    font-size: 16px;
+    line-height: 19px;
+  }
+  .link {
+    font-size: 16px;
+    color: var(--dark);
+    text-decoration: underline;
+  }
+  @include media-breakpoint-up(md) {
+    .title {
+      font-size: 64px;
+      line-height: 77px;
+    }
+  }
 }

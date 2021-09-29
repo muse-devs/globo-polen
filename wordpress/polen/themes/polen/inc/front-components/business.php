@@ -1,14 +1,5 @@
 <?php
 
-// Montagem da página ------------------------------
-/*
-bus_get_header();
-bus_get_tutorial();
-bus_grid(bus_get_talents(), "Nossos talentos");
-bus_get_form();
-*/
-// --------------------------------------------------
-
 // Função temporária para pegar talentos Business
 function bus_get_talents()
 {
@@ -138,35 +129,36 @@ function bus_get_form()
     </div>
     <div class="col-12 col-md-8 m-md-auto">
       <form id="bus-form" v-on:submit.prevent="handleSubmit">
-        <label class="pol-input-group mb-3">
-          <span class="label">Nome Completo<span class="required">*</span></span>
+        <input type="hidden" id="url-success" value="<?php echo enterprise_url_success(); ?>" />
+        <label class="pol-input-group mb-3 required">
+          <span class="label">Nome Completo</span>
           <input type="text" class="input" placeholder="Seu nome" required />
         </label>
-        <label class="pol-input-group mb-3">
-          <span class="label">Empresa<span class="required">*</span></span>
+        <label class="pol-input-group mb-3 required">
+          <span class="label">Empresa</span>
           <input type="text" class="input" placeholder="Empresa S.A." required />
         </label>
-        <label class="pol-input-group mb-3">
-          <span class="label">Número de colaboradores<span class="required">*</span></span>
+        <label class="pol-input-group mb-3 required">
+          <span class="label">Número de colaboradores</span>
           <select class="not-selected" required>
             <option value="">Selecione uma opção</option>
             <option value="500">1 a 500</option>
           </select>
         </label>
-        <label class="pol-input-group mb-3">
-          <span class="label">Cargo<span class="required">*</span></span>
+        <label class="pol-input-group mb-3 required">
+          <span class="label">Cargo</span>
           <input type="text" class="input" placeholder="Seu cargo" required />
         </label>
-        <label class="pol-input-group mb-3">
-          <span class="label">e-mail de trabalho<span class="required">*</span></span>
+        <label class="pol-input-group mb-3 required">
+          <span class="label">e-mail de trabalho</span>
           <input type="email" class="input" placeholder="exemplo@empresa.com" required />
         </label>
-        <label class="pol-input-group mb-3">
-          <span class="label">Número de telefone<span class="required">*</span></span>
+        <label class="pol-input-group mb-3 required">
+          <span class="label">Número de telefone</span>
           <input type="text" name="phone_number" v-model="phone" v-on:keyup="handleChange" class="input" placeholder="(XX) XXXXX-XXXX" maxlength="15" required />
         </label>
-        <label class="pol-input-group mb-3">
-          <span class="label">Nome Completo<span class="required">*</span></span>
+        <label class="pol-input-group mb-3 required">
+          <span class="label">Mensagem</span>
           <textarea placeholder="Como você pretende usar os vídeos Polen para sua empresa?" rows="6" required></textarea>
         </label>
         <input type="submit" class="btn btn-primary btn-lg btn-block mt-4" value="Enviar" />
