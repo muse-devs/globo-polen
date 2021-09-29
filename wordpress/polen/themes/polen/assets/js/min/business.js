@@ -1,0 +1,1 @@
+const form="#bus-form",bus_form=new Vue({el:form,data:{phone:""},methods:{handleChange:function(o){this.phone=mtel(o.target.value)},handleEdit:function(){this.edit=!0},handleSubmit:function(){polAjaxForm(form,(function(o){polMessages.message("Enviado!","Seu número foi adicionado com sucesso")}),(function(o){polMessages.error(o)}))}}});
