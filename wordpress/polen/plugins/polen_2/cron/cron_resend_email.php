@@ -17,12 +17,12 @@ foreach( $orders as $order ) {
     // echo $order->get_id();
     if( "completed" == $order->get_status() ) {
         if( "rebeldes-tem-asas" == $order->get_meta( 'campaign', true ) ) {
-            // if( "rodolfoneto@gmail.com" == $order->get_billing_email() ) {
+            if( "rodolfoneto@gmail.com" == $order->get_billing_email() ) {
                 echo $order->get_billing_email() . "\n";
                 $mail = new Polen_WC_Completed_Order();
                 $mail->trigger( $order->get_id(), $order );
                 die;
-            // }
+            }
         }
     }
 }
