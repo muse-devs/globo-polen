@@ -44,19 +44,24 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
      *
      */
     public function talent_accept_or_reject(){
-       $response = array();
-       if( !isset( $_POST['security'] ) || !wp_verify_nonce( $_POST['security'], 'polen-order-accept-nonce' ) ) {
-           $response = array( 'success' => false, 'message' => 'nonce_fail' );     
-       }
+        $response = array();
+        if( !isset( $_POST['security'] ) || !wp_verify_nonce( $_POST['security'], 'polen-order-accept-nonce' ) ) {
+        //    $response = array( 'success' => false, 'message' => 'nonce_fail' );
+            wp_send_json_error( 'nonce_fail', 403 );
+            wp_die();
+        }
    
-       if( !isset( $_POST['order'] ) ) {
-           $response = array( 'success' => false, 'message' => 'order_fail' );     
+        if( !isset( $_POST['order'] ) ) {
+            // $response = array( 'success' => false, 'message' => 'order_fail' );
+            wp_send_json_error( 'order_fail', 403 );
+            wp_die();
+        }
 
-       }
-
-       if( !isset( $_POST['type'] ) || ( trim( $_POST['type']) != 'accept' && trim( $_POST['type']) != 'reject' ) ){
-           $response = array( 'success' => false, 'message' => 'type_fail' );     
-       }
+        if( !isset( $_POST['type'] ) || ( trim( $_POST['type']) != 'accept' && trim( $_POST['type']) != 'reject' ) ){
+            // $response = array( 'success' => false, 'message' => 'type_fail' );
+            wp_send_json_error( 'type_fail', 403 );
+            wp_die();
+        }
 
        global $wpdb;
 
@@ -67,7 +72,7 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
 
        if( empty( $order_id ) ) {
         //    wp_send_json_error( 'Erro na order', 403 );
-           echo wp_json_encode( array( 'success' => false, 'message' => 'Sem order_id' ) );
+           wp_send_json_error( 'Sem order_id', 403 );
            wp_die();
        }
 
@@ -91,27 +96,30 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
                $order_list = $wpdb->get_results( $sql );
 
                if( is_countable( $order_list ) && count( $order_list ) == 0 ){
-                   $response = array( 'success' => false, 'message' => 'Pedido não é desse talento' );        
+                   $response = array( 'success' => false, 'data' => 'Pedido não é desse talento' );        
                }else{
+                Debug::def( $_POST);die;
                    $order = wc_get_order( $order_id );
                    \WC_Emails::instance();
                    if($order){
                        if( $type == 'accept' ){
                            $order->update_status( 'talent-accepted', '', true );
-                           $response = array( 'success' => true, 'message' => 'Vídeo aceito com sucesso', 'code' => 1 ); 
+                           $response = array( 'success' => true, 'data' => 'Vídeo aceito com sucesso', 'code' => 1 ); 
                        }                            
                        if( $type == 'reject' ){
                            $reason = $_POST[ 'reason' ];
                            $item_cart = Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
                            $item_cart->add_meta_data( 'reason_reject', $reason, true );
                            $order->update_status( 'talent-rejected', "Motivo: {$reason}" );
-                           $response = array( 'success' => true, 'message' => "Vídeo rejeitado", 'code' => 2 ); 
+                           $response = array( 'success' => true, 'data' => "Vídeo rejeitado", 'code' => 2 ); 
                        }  
                       
                    }
                }
            }else{
-               $response = array( 'success' => false, 'message' => 'Talento sem produto' );     
+            //    $response = array( 'success' => false, 'message' => '' );  
+               wp_send_json_error( 'Talento sem produto', 403 );
+               wp_die();   
            }
            
        }
