@@ -10,7 +10,7 @@ $orders = wc_get_orders( [
     // 'date_completed' => '2021-09-15...2021-09-17'
     'limit' =>70,
     'paged' => 1,
-    'date_completed' => '2020-09-15...2021-09-17'
+    'date_completed' => '2021-09-15...2021-09-17'
 ] );
 WC_Emails::instance();
 foreach( $orders as $order ) {
