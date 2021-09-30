@@ -186,8 +186,8 @@ if( ! $talent_is_social ) {
 								<div class="col-12 mt-3">
 									<textarea id="description" rows="4" class="background-grey form-control" placeholder="Descreva o motivo"></textarea>
 								</div>
-								<div class="col-12 mt-3 mb-4">
-									<button type="button" class="btn btn-primary btn-lg btn-block order-check" button-nonce="<?php echo $order_nonce; ?>" order-id="<?php echo $order['order_id']; ?>" action-type="reject">Declinar pedido</button>
+								<div class="col-12 mt-3 mb-4" button-nonce="<?php echo $accept_reject_nonce; ?>">
+									<button type="button" class="btn btn-primary btn-lg btn-block order-check" order-id="<?php echo $order['order_id']; ?>" action-type="reject">Declinar pedido</button>
 								</div>
 						</div>
 						<!-- Fim -->
@@ -230,7 +230,7 @@ if( ! $talent_is_social ) {
           action: 'get_talent_acceptance',
           order: order_id,
           type: type,
-          //security: wnonce,
+          security: wnonce,
           reason: reason,
           description: description
         }
