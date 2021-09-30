@@ -18,12 +18,12 @@ foreach( $orders as $order ) {
     if( "completed" == $order->get_status() ) {
         // echo $order->get_meta( 'campaign', true );
         if( "de-porta-em-porta" == $order->get_meta( 'campaign', true ) ) {
-            if( "rodolfoneto@gmail.com" == $order->get_billing_email() ) {
+            // if( "rodolfoneto@gmail.com" == $order->get_billing_email() ) {
                 echo $order->get_billing_email() . "\n";
                 $mail = new Polen_WC_Completed_Order();
                 $mail->trigger( $order->get_id(), $order );
                 // die;
-            }
+            // }
         }
     }
 }
