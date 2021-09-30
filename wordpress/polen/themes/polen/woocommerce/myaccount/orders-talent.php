@@ -175,7 +175,8 @@ if( ! $talent_is_social ) {
 									<h1 class="page-title">Olá, poderia nos explicar por quê você decidiu rejeitar esse pedido de vídeo?</h1>
 								</div>
 								<div class="col-12 mt-3">
-									<select id="reason" class="form-control form-control-lg custom-select">
+									<select id="reason" class="form-control form-control-lg custom-select" required="required">
+                    <option value="">Selecione o motivo *</option>
 										<option value="linguagem-impropria">Linguagem Imprópria</option>
 										<option value="direitos-autorais">Direitos Autorais</option>
 										<option value="pedido-complexo">Não consegui entender o pedido</option>
@@ -201,6 +202,15 @@ if( ! $talent_is_social ) {
 (function( $ ) {
 	'use strict';
     $(document).ready(function(){
+
+    // Removendo border red quando o user selecionar um motivo
+    $( "#reason" ).change(function() {
+      if(reason !== "")  {
+        $('#reason').removeClass("border-danger");
+        return;
+      }
+    });
+
 		$('button.order-check').on('click',function() {
 			let wnonce = $(this).parent().attr('button-nonce');
 			let order_id = $(this).attr('order-id');
@@ -209,15 +219,23 @@ if( ! $talent_is_social ) {
 			if(type == 'reject') {
         let reason = $('#reason').val();
         let description = $('#description').val();
+
+        // Obrigando o usuário selecionar a razão
+        if(reason === "")  {
+          $('#reason').toggleClass("border-danger");
+				  return;
+				}
+        // Gerando o informações pra rejeição
 				var data = {
           action: 'get_talent_acceptance',
           order: order_id,
           type: type,
-          security: wnonce,
+          //security: wnonce,
           reason: reason,
           description: description
         }
 			} else {
+        // Gerando as informações para aceita
         var data = {
           action: 'get_talent_acceptance',
           order: order_id,
@@ -244,7 +262,10 @@ if( ! $talent_is_social ) {
 								location.reload();
 							}
 						}
-					}
+					},
+          error: function() {
+            setSessionMessage(CONSTANTS.ERROR, null, "Algo não saiu como esperado, tente novamente");
+          }
 				});
 		});
 	});
