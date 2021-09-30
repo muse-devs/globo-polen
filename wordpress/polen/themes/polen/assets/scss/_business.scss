@@ -163,7 +163,7 @@
       color: var(--gray-light);
     }
   }
-  &.required {
+  &[aria-required=true] {
     .label {
       &::after {
         content: "*";

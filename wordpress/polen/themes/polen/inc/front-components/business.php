@@ -16,7 +16,7 @@ function bus_get_header()
     <div class="col-12 col-md-6 m-auto">
       <h1 class="title text-center mb-4">Polen para Empresas</h1>
       <p class="description text-center mb-5">Aproveite o poder das celebridades para espalhar a emoção e potencializar o seu negócio! Tudo com muita rapidez e facilidade para melhor atender à sua empresa.</p>
-      <a href="#form" class="btn btn-primary btn-lg btn-block">Pedir um Polen para o meu negócio</a>
+      <a href="#bus-form-wrapper" class="btn btn-primary btn-lg btn-block">Pedir um Polen para o meu negócio</a>
     </div>
   </section>
 <?php
@@ -123,41 +123,41 @@ function bus_get_form()
 {
   wp_enqueue_script("polen-business");
   ?>
-  <section class="row mt-5 mb-5 bus-form">
+  <section id="bus-form-wrapper" class="row mt-5 mb-5 bus-form">
     <div class="col-12 mb-4 pb-2 text-center">
       <h2 class="title">Entre em contato com equipe de vendas</h2>
     </div>
     <div class="col-12 col-md-8 m-md-auto">
       <form id="bus-form" v-on:submit.prevent="handleSubmit">
         <input type="hidden" id="url-success" value="<?php echo enterprise_url_success(); ?>" />
-        <label class="pol-input-group mb-3 required">
+        <label class="pol-input-group mb-3" aria-required="true">
           <span class="label">Nome Completo</span>
           <input type="text" class="input" placeholder="Seu nome" required />
         </label>
-        <label class="pol-input-group mb-3 required">
+        <label class="pol-input-group mb-3" aria-required="true">
           <span class="label">Empresa</span>
           <input type="text" class="input" placeholder="Empresa S.A." required />
         </label>
-        <label class="pol-input-group mb-3 required">
+        <label class="pol-input-group mb-3" aria-required="true">
           <span class="label">Número de colaboradores</span>
           <select class="not-selected" required>
             <option value="">Selecione uma opção</option>
             <option value="500">1 a 500</option>
           </select>
         </label>
-        <label class="pol-input-group mb-3 required">
+        <label class="pol-input-group mb-3" aria-required="true">
           <span class="label">Cargo</span>
           <input type="text" class="input" placeholder="Seu cargo" required />
         </label>
-        <label class="pol-input-group mb-3 required">
+        <label class="pol-input-group mb-3" aria-required="true">
           <span class="label">e-mail de trabalho</span>
           <input type="email" class="input" placeholder="exemplo@empresa.com" required />
         </label>
-        <label class="pol-input-group mb-3 required">
+        <label class="pol-input-group mb-3" aria-required="true">
           <span class="label">Número de telefone</span>
           <input type="text" name="phone_number" v-model="phone" v-on:keyup="handleChange" class="input" placeholder="(XX) XXXXX-XXXX" maxlength="15" required />
         </label>
-        <label class="pol-input-group mb-3 required">
+        <label class="pol-input-group mb-3" aria-required="true">
           <span class="label">Mensagem</span>
           <textarea placeholder="Como você pretende usar os vídeos Polen para sua empresa?" rows="6" required></textarea>
         </label>
