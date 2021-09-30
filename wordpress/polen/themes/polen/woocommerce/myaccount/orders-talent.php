@@ -175,7 +175,8 @@ if( ! $talent_is_social ) {
 									<h1 class="page-title">Olá, poderia nos explicar por quê você decidiu rejeitar esse pedido de vídeo?</h1>
 								</div>
 								<div class="col-12 mt-3">
-									<select id="reason" class="form-control form-control-lg custom-select">
+									<select id="reason" class="form-control form-control-lg custom-select" required="required">
+                    <option value="">Selecione o motivo *</option>
 										<option value="linguagem-impropria">Linguagem Imprópria</option>
 										<option value="direitos-autorais">Direitos Autorais</option>
 										<option value="pedido-complexo">Não consegui entender o pedido</option>
@@ -185,8 +186,8 @@ if( ! $talent_is_social ) {
 								<div class="col-12 mt-3">
 									<textarea id="description" rows="4" class="background-grey form-control" placeholder="Descreva o motivo"></textarea>
 								</div>
-								<div class="col-12 mt-3 mb-4">
-									<button type="button" class="btn btn-primary btn-lg btn-block order-check" button-nonce="<?php echo $order_nonce; ?>" order-id="<?php echo $order['order_id']; ?>" action-type="reject">Declinar pedido</button>
+								<div class="col-12 mt-3 mb-4" button-nonce="<?php echo $accept_reject_nonce; ?>">
+									<button type="button" class="btn btn-primary btn-lg btn-block order-check" order-id="<?php echo $order['order_id']; ?>" action-type="reject">Declinar pedido</button>
 								</div>
 						</div>
 						<!-- Fim -->
@@ -201,6 +202,15 @@ if( ! $talent_is_social ) {
 (function( $ ) {
 	'use strict';
     $(document).ready(function(){
+
+    // Removendo border red quando o user selecionar um motivo
+    $( "#reason" ).change(function() {
+      if(reason !== "")  {
+        $('#reason').removeClass("border-danger");
+        return;
+      }
+    });
+
 		$('button.order-check').on('click',function() {
 			let wnonce = $(this).parent().attr('button-nonce');
 			let order_id = $(this).attr('order-id');
@@ -209,6 +219,13 @@ if( ! $talent_is_social ) {
 			if(type == 'reject') {
         let reason = $('#reason').val();
         let description = $('#description').val();
+
+        // Obrigando o usuário selecionar a razão
+        if(reason === "")  {
+          $('#reason').toggleClass("border-danger");
+				  return;
+				}
+        // Gerando o informações pra rejeição
 				var data = {
           action: 'get_talent_acceptance',
           order: order_id,
@@ -218,6 +235,7 @@ if( ! $talent_is_social ) {
           description: description
         }
 			} else {
+        // Gerando as informações para aceita
         var data = {
           action: 'get_talent_acceptance',
           order: order_id,
@@ -244,7 +262,10 @@ if( ! $talent_is_social ) {
 								location.reload();
 							}
 						}
-					}
+					},
+          error: function() {
+            setSessionMessage(CONSTANTS.ERROR, null, "Algo não saiu como esperado, tente novamente");
+          }
 				});
 		});
 	});
