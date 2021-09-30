@@ -19,5 +19,6 @@ foreach( $orders as $order ) {
         echo $order->get_billing_email() . "\n";
         $mail = new Polen_WC_Completed_Order();
         $mail->trigger( $order->get_id(), $order );
+        die;
     }
 }
