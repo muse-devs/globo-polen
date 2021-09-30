@@ -38,7 +38,7 @@ if( ! $talent_is_social ) {
 		} else {
 			echo "<p class='mt-2 mb-4'>Você tem <strong><span id='order-count'>" . $count_total['qtd'] . "</span> pedido(s) de vídeo</strong>, seus pedidos expiram em até {$days_expires} dias.</p>";
 			if (count($talent_orders) > 0) {
-				foreach ($talent_orders as $order) : 
+				foreach ($talent_orders as $order) :
 					$order_obj = new \WC_Order( $order['order_id'] );
 					$is_social = social_order_is_social( $order_obj );
 
@@ -67,7 +67,7 @@ if( ! $talent_is_social ) {
 												<p class="value small"><?php echo $order['email']; ?></p>
 											</div>
 										</div>
-										<?php 
+										<?php
 											if (event_promotional_order_is_event_promotional($order_obj)) {
 										?>
 											<div class="row mt-2">
@@ -89,7 +89,7 @@ if( ! $talent_is_social ) {
 													<p class="value small"><?php echo wc_price( $discounted_value_order ); ?></p>
 												</div>
 											</div>
-										<?php		
+										<?php
 											}
 										?>
 									</div>
@@ -104,7 +104,7 @@ if( ! $talent_is_social ) {
 													<div class="col-6 col-md-6">
 														<p class="p">Válido por</p>
 														<p class="value small">
-															<?php 
+															<?php
 																echo $polen_talent->video_expiration_time( $logged_user, $order['order_id'], $is_social );
 															?>
 														</p>
@@ -125,7 +125,7 @@ if( ! $talent_is_social ) {
 									</div>
 									<div class="col-12 col-md-12 mt-4">
 										<div class="row">
-											
+
 												<?php
 												if ($order['status'] == 'talent-accepted') {
 												?>
@@ -140,15 +140,14 @@ if( ! $talent_is_social ) {
 													$accept_reject_nonce = wp_create_nonce('polen-order-accept-nonce');
 												?>
 													<div class="col-6" button-nonce="<?php echo $accept_reject_nonce; ?>">
-														<button type="button" class="btn btn-primary btn-lg btn-block accept" action-type="accept">Aceitar</button>
+														<button type="button" class="btn btn-primary btn-lg btn-block order-check accept" action-type="accept" order-id="<?php echo $order['order_id']; ?>">Aceitar</button>
 													</div>
 													<div class="col-6">
-														<button class="btn btn-outline-light btn-lg btn-block btn-visualizar-pedido" button-nonce="<?php echo $order_nonce; ?>" order-id="<?php echo $order['order_id']; ?>" data-toggle="modal" data-target="#OrderActions">Declinar</button>
+														<button class="btn btn-outline-light btn-lg btn-block btn-visualizar-pedido" order-id="<?php echo $order['order_id']; ?>" data-toggle="modal" data-target="#OrderActions">Declinar</button>
 													</div>
 												<?php
 												}
 												?>
-											
 										</div>
 									</div>
 								</div>
@@ -176,7 +175,7 @@ if( ! $talent_is_social ) {
 									<h1 class="page-title">Olá, poderia nos explicar por quê você decidiu rejeitar esse pedido de vídeo?</h1>
 								</div>
 								<div class="col-12 mt-3">
-									<select class="form-control form-control-lg custom-select">
+									<select id="reason" class="form-control form-control-lg custom-select">
 										<option value="linguagem-impropria">Linguagem Imprópria</option>
 										<option value="direitos-autorais">Direitos Autorais</option>
 										<option value="pedido-complexo">Não consegui entender o pedido</option>
@@ -184,47 +183,11 @@ if( ! $talent_is_social ) {
 									</select>
 								</div>
 								<div class="col-12 mt-3">
-									<textarea rows="4" class="background-grey" placeholder="Descreva o motivo"></textarea>
+									<textarea id="description" rows="4" class="background-grey form-control" placeholder="Descreva o motivo"></textarea>
 								</div>
 								<div class="col-12 mt-3 mb-4">
-									<button type="button" class="btn btn-primary btn-lg btn-block">Declinar pedido</button>
+									<button type="button" class="btn btn-primary btn-lg btn-block order-check" button-nonce="<?php echo $order_nonce; ?>" order-id="<?php echo $order['order_id']; ?>" action-type="reject">Declinar pedido</button>
 								</div>
-								<!-- <div class="col-12" id="item-render-video-from">
-									<p class="p">Vídeo de</p>
-									<span class="value small" id="video-from"></span>
-								</div>
-								<div class="col-12 mt-4 pb-4 border-bottom">
-									<p class="p">Para</p>
-									<span class="value small" id="video-name"></span>
-								</div> -->
-							</div>
-							<!-- <div class="row mt-4 pb-4 border-bottom">
-								<div class="col">
-									<p class="p">Ocasião</p>
-									<span class="value small" id="video-category"></span>
-								</div>
-							</div>
-							<div class="row mt-4">
-								<div class="col">
-									<p class="p">e-mail de contato</p>
-									<span class="value small" id="video-email"></span>
-								</div>
-							</div>
-							<div class="row mt-4">
-								<div class="col">
-									<p class="p mb-2">Instruções</p>
-									<p class="text" id="video-instructions"></p>
-								</div>
-							</div>
-							<?php
-							//$accept_reject_nonce = wp_create_nonce('polen-order-accept-nonce');
-							?>
-							<div class="row py-4 mb-4">
-								<div class="col-12 text-center modal-group-buttons" button-nonce="<?php echo $accept_reject_nonce; ?>" order-id="">
-									<button type="button" class="talent-check-order accept" action-type="accept"></button>
-									<button type="button" class="talent-check-order reject" action-type="reject"></button>
-								</div>
-							</div> -->
 						</div>
 						<!-- Fim -->
 					</div>
@@ -233,3 +196,57 @@ if( ! $talent_is_social ) {
 		</div><!-- /Modal -->
 	</div><!-- .page-content -->
 </section><!-- .no-results -->
+
+<script>
+(function( $ ) {
+	'use strict';
+    $(document).ready(function(){
+		$('button.order-check').on('click',function() {
+			let wnonce = $(this).parent().attr('button-nonce');
+			let order_id = $(this).attr('order-id');
+			let type = $(this).attr('action-type');
+
+			if(type == 'reject') {
+        let reason = $('#reason').val();
+        let description = $('#description').val();
+				var data = {
+          action: 'get_talent_acceptance',
+          order: order_id,
+          type: type,
+          security: wnonce,
+          reason: reason,
+          description: description
+        }
+			} else {
+        var data = {
+          action: 'get_talent_acceptance',
+          order: order_id,
+          type: type,
+          security: wnonce
+        }
+      }
+
+			polSpinner();
+			$.ajax(
+				{
+					type: 'POST',
+					url: woocommerce_params.ajax_url,
+					data: data,
+					success: function( response ) {
+						let obj = $.parseJSON( response );
+						if( obj['success'] == true ){
+							if( obj['code'] == 1 ){
+								location.href='/my-account/send-video/?order_id=' + order_id;
+							}
+							if( obj['code'] == 2 ) {
+                $('#OrderActions').modal('toggle');
+								setSessionMessage(CONSTANTS.SUCCESS, "Sucesso", "Você recusou o pedido com sucesso");
+								location.reload();
+							}
+						}
+					}
+				});
+		});
+	});
+})( jQuery );
+</script>
