@@ -16,6 +16,7 @@ WC_Emails::instance();
 foreach( $orders as $order ) {
     // echo $order->get_id();
     if( "completed" == $order->get_status() ) {
+        echo $order->get_meta( 'campaign', true );
         if( "rebeldes-tem-asas" == $order->get_meta( 'campaign', true ) ) {
             if( "rodolfoneto@gmail.com" == $order->get_billing_email() ) {
                 echo $order->get_billing_email() . "\n";
