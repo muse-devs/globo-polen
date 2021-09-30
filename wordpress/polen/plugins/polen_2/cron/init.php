@@ -17,7 +17,7 @@ function findWordpressBasePath() {
 }
 
 define( 'BASE_PATH', findWordpressBasePath() . "/" );
-define( 'WP_USE_THEMES', false) ;
+// define( 'WP_USE_THEMES', false) ;
 
 global $wp, $wpdb, $wp_query, $wp_the_query, $wp_rewrite, $wp_did_header, $Polen_Plugin_Settings;
 
