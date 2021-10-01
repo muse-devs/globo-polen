@@ -39,7 +39,7 @@ class Polen_Forms {
     {
         $form_db = new Polen_Form_DB();
         $leads = $form_db->getLeads();
-        require 'partials/forms-enterprise.php';
+        require 'partials/form-enterprise.php';
     }
 
     /**
