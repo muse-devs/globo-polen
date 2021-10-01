@@ -5,12 +5,12 @@ use Polen\Enterprise\Enterprise_Rewrite;
 
 function enterprise_url_home()
 {
-	return site_url( Enterprise_Rewrite::BASE_URL . '/empresas' );
+	return site_url( Enterprise_Rewrite::BASE_URL );
 }
 
 function enterprise_url_success()
 {
-	return enterprise_url_home() . '/empresas/sucesso';
+	return enterprise_url_home() . '/sucesso';
 }
 
 function enterprise_is_home()

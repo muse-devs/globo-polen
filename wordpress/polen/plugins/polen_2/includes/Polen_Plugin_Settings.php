@@ -506,6 +506,12 @@ class Polen_Plugin_Settings
                     'desc'     => 'APENAS O ID DO LUCCAS NETO',
                     'default'  => '',
                 ),
+                array(
+                    'id'       => 'polen-business-talents',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Talentos Polen Business', 'polen'),
+                    'desc'     => 'IDs separados por vírgula. Ex: 123,321,432,234',
+                )
             )
         ) );
     }

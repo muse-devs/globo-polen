@@ -203,6 +203,10 @@ if (
 			$headers['url'] = master_class_url_home();
 			$headers['image'] = 'https://i.vimeocdn.com/video/1229508090_520';
 			$headers['site_name'] = "Polen.me - Masterclass - Beabá do Vinho";
+    } elseif(enterprise_is_app()) {
+      $headers['title'] = "Polen para Empresas";
+      $headers['url'] = enterprise_url_home();
+			$headers['description'] = "Aproveite o poder das celebridades para espalhar a emoção e potencializar o seu negócio! Tudo com muita rapidez e facilidade para melhor atender à sua empresa.";
 		} else {
 
 			$headers['image'] = 'https://polen.me/polen/uploads/2021/06/cropped-logo.png';
