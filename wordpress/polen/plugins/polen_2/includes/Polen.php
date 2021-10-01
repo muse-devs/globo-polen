@@ -3,6 +3,7 @@
 namespace Polen\Includes;
 
 use Polen\Admin\Polen_Admin;
+use Polen\Admin\Polen_Forms;
 use Polen\Enterprise\Enterprise;
 use Polen\Includes\Polen_Plugin_Settings;
 use Polen\Master_class\Master_Class;
@@ -11,6 +12,7 @@ use Polen\Publics\Polen_Public;
 use Polen\Includes\Polen_Talent;
 use Polen\Includes\Polen_Occasion_List;
 use Polen\Includes\Polen_Cart;
+use Polen\Includes\Polen_Form_DB;
 use Polen\Includes\Polen_Checkout;
 use Polen\Includes\Talent\{Polen_Talent_Router, Polen_Talent_Controller, Polen_Talent_Part_Theme};
 use Polen\Includes\Polen_Order;
@@ -74,6 +76,8 @@ class Polen {
         new Polen_Signin_Newsletter( true );
         new Polen_Invite_Talent( true );
         new Polen_Cupom_Create_Admin_Menu( true );
+        new Polen_Forms();
+        new Polen_Form_DB();
 
         //Endpoints Talent Logged
         $ctler = new Polen_Talent_Controller();
