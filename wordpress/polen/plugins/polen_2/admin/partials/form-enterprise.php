@@ -17,6 +17,7 @@
                 <thead>
                 <tr>
                     <th class="text-center">Nome</th>
+                    <th class="text-center">Empresa</th>
                     <th class="text-center">Email</th>
                     <th class="text-center">Qtd. Funcionarios</th>
                     <th class="text-center">Cargo</th>
@@ -28,6 +29,7 @@
                 <tfoot>
                 <tr class="text-center">
                     <th class="text-center">Nome</th>
+                    <th class="text-center">Empresa</th>
                     <th class="text-center">Email</th>
                     <th class="text-center">Qtd. Funcionarios</th>
                     <th class="text-center">Cargo</th>
@@ -40,6 +42,7 @@
                     <?php foreach ($leads as $lead) : ?>
                         <tr class="text-center">
                             <td><?php echo $lead->name; ?></td>
+                            <td><?php echo $lead->company; ?></td>
                             <td><?php echo $lead->email; ?></td>
                             <td><?php echo $lead->employees_quantity; ?></td>
                             <td><?php echo $lead->job; ?></td>
