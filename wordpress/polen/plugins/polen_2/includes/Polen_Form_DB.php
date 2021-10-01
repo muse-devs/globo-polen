@@ -17,6 +17,10 @@ class Polen_Form_DB{
 
     public function insert($args)
     {
+        if (isset($args['action'])) {
+            unset($args['action']);
+        }
+
         $this->wpdb->insert($this->table_name, $args);
     }
 
