@@ -26,7 +26,15 @@ class Polen_Forms {
             'manage_options',
             'forms',
             array($this, 'showForms'),
-            'dashicons-email-alt'
+            'dashicons-email-alt',
+        );
+
+        add_submenu_page('forms',
+            'Newsletter',
+            'Newsletter',
+            'manage_options',
+            'options_form',
+            array($this, 'show_options'),
         );
     }
 
@@ -39,8 +47,9 @@ class Polen_Forms {
     {
         $form_db = new Polen_Form_DB();
         $leads = $form_db->getLeads();
-        require 'partials/form-enterprise.php';
+        require 'partials/forms-admin-enterprise.php';
     }
+
 
     /**
      * Salvar formulários no banco
@@ -77,6 +86,8 @@ class Polen_Forms {
             $form_db = new Polen_Form_DB();
             $form_db->insert($data);
 
+            $this->mail_send($data);
+
             wp_send_json_success('ok', 200);
             wp_die();
 
@@ -96,5 +107,23 @@ class Polen_Forms {
             'email' => 'E-mail',
             'terms' => 'Termos',
         ];
+    }
+
+    private function mail_send($args)
+    {
+        //$to = 'polen.empresas@polen.me';
+
+        $to = 'glaydson.queiroz@polen.me';
+        $subject = 'Novo cadastro Polen empresas!';
+
+        // $body = get_template_part('partials/content', 'alert', $args);
+
+        $body = "aki";
+
+        $headers = array('Content-Type: text/html; charset=UTF-8');
+
+        if (!wp_mail($to, $subject, $body, $headers)) {
+            die('error');
+        }
     }
 }
