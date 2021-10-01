@@ -21,19 +21,6 @@ get_header();
         <div class="item">
 					<?php mc_get_home_banner_gustavo("/masterclass/gustavo-mendes/seja-outro-sendo-voce/inscricao"); ?>
 				</div>
-        <div class="item">
-					<?php
-					sa_get_home_banner(
-						"Setembro amarelo",
-						"Setembro é o mês mundial de prevenção do suicídio. Agir salva vidas!",
-						"/social/setembro-amarelo",
-						array(
-							"mobile" => TEMPLATE_URI . '/assets/img/banner-setembro-desktop.png',
-							"desktop" => TEMPLATE_URI . '/assets/img/banner-setembro-desktop.png',
-						)
-					);
-					?>
-				</div>
 				<div class="item">
 					<?php mc_get_home_banner(master_class_url_home()); ?>
 				</div>
