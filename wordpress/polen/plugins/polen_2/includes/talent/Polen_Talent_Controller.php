@@ -96,22 +96,28 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
                $order_list = $wpdb->get_results( $sql );
 
                if( is_countable( $order_list ) && count( $order_list ) == 0 ){
-                   $response = array( 'success' => false, 'data' => 'Pedido não é desse talento' );        
+                //    $response = array( 'success' => false, 'data' => 'Pedido não é desse talento' );
+                   wp_send_json_error( 'Pedido não é desse talento', 403 );
+                   wp_die();   
                }else{
-                Debug::def( $_POST);die;
+                // Debug::def( $_POST);die;
                    $order = wc_get_order( $order_id );
                    \WC_Emails::instance();
                    if($order){
                        if( $type == 'accept' ){
                            $order->update_status( 'talent-accepted', '', true );
-                           $response = array( 'success' => true, 'data' => 'Vídeo aceito com sucesso', 'code' => 1 ); 
+                           $response = 'Vídeo aceito com sucesso';
+                           $response = [ "code" => "1", "" ]; 
                        }                            
                        if( $type == 'reject' ){
                            $reason = $_POST[ 'reason' ];
+                           $description = $_POST[ 'description' ];
                            $item_cart = Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
                            $item_cart->add_meta_data( 'reason_reject', $reason, true );
-                           $order->update_status( 'talent-rejected', "Motivo: {$reason}" );
-                           $response = array( 'success' => true, 'data' => "Vídeo rejeitado", 'code' => 2 ); 
+                           $item_cart->add_meta_data( 'reason_reject_description', $description, true );
+                           $order->update_status( 'talent-rejected', "Motivo: {$reason}", true );
+                           $order->add_order_note( "Motivo: {$reason}. Descricao: {$description}" );
+                           $response = [ "code" => "2" ]; 
                        }  
                       
                    }
@@ -124,7 +130,7 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
            
        }
 
-       echo wp_json_encode( $response );
+       wp_send_json_success( $response );
        wp_die();
     }
 
