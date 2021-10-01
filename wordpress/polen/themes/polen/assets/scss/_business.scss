@@ -65,6 +65,15 @@
   }
 }
 
+// Medidas do card -------------
+$card-ratio: 1.529411764705882;
+
+$xl-width: 231px;
+$xl-margin: 25px;
+
+$lg-width: 216px;
+$lg-margin: 20px;
+
 .bus-talent-card {
   position: relative;
   display: block;
@@ -110,6 +119,30 @@
     width: 100%;
     height: 100%;
     z-index: 2;
+  }
+  @include media-breakpoint-only(lg) {
+    margin-right: $lg-margin;
+    flex: 0 0 $lg-width;
+    width: $lg-width;
+    height: $lg-width * $card-ratio;
+    &:first-child {
+      margin-left: $lg-margin;
+    }
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+  @include media-breakpoint-only(xl) {
+    margin-right: $xl-margin;
+    flex: 0 0 $xl-width;
+    width: $xl-width;
+    height: $xl-width * $card-ratio;
+    &:first-child {
+      margin-left: $xl-margin;
+    }
+    &:last-child {
+      margin-right: 0;
+    }
   }
 }
 
