@@ -154,13 +154,14 @@
     }
   }
   select {
+    color: var(--gray-light);
     border: none;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     -ms-appearance: none;
-    &.not-selected {
-      color: var(--gray-light);
+    &.selected {
+      color: inherit;
     }
   }
   &[aria-required=true] {

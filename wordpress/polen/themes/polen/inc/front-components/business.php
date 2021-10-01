@@ -128,38 +128,45 @@ function bus_get_form()
       <h2 class="title">Entre em contato com equipe de vendas</h2>
     </div>
     <div class="col-12 col-md-8 m-md-auto">
-      <form id="bus-form" v-on:submit.prevent="handleSubmit">
+      <form id="bus-form" v-on:submit.prevent="handleSubmit" method="POST">
         <input type="hidden" id="url-success" value="<?php echo enterprise_url_success(); ?>" />
+        <input type="hidden" name="action" value="submit_form" />
+        <input type="hidden" name="form_id" value="1" />
+        <input type="hidden" name="terms" value="1" />
+
         <label class="pol-input-group mb-3" aria-required="true">
           <span class="label">Nome Completo</span>
-          <input type="text" class="input" placeholder="Seu nome" required />
+          <input type="text" class="input" name="name" placeholder="Seu nome" required />
         </label>
         <label class="pol-input-group mb-3" aria-required="true">
           <span class="label">Empresa</span>
-          <input type="text" class="input" placeholder="Empresa S.A." required />
+          <input type="text" name="company" class="input" placeholder="Empresa S.A." required />
         </label>
         <label class="pol-input-group mb-3" aria-required="true">
           <span class="label">Número de colaboradores</span>
-          <select class="not-selected" required>
+          <select v-bind:class="{'selected': employees_quantity}" name="employees_quantity" v-model="employees_quantity" required>
             <option value="">Selecione uma opção</option>
-            <option value="500">1 a 500</option>
+            <option value="menos-de-20">Menos de 20</option>
+            <option value="de-20-a-99">De 20 a 99</option>
+            <option value="de-100-a-499">De 100 a 499</option>
+            <option value="mais-de-500">Mais de 500</option>
           </select>
         </label>
         <label class="pol-input-group mb-3" aria-required="true">
           <span class="label">Cargo</span>
-          <input type="text" class="input" placeholder="Seu cargo" required />
+          <input type="text" name="job" class="input" placeholder="Seu cargo" required />
         </label>
         <label class="pol-input-group mb-3" aria-required="true">
           <span class="label">e-mail de trabalho</span>
-          <input type="email" class="input" placeholder="exemplo@empresa.com" required />
+          <input type="email" name="email" class="input" placeholder="exemplo@empresa.com" required />
         </label>
         <label class="pol-input-group mb-3" aria-required="true">
           <span class="label">Número de telefone</span>
-          <input type="text" name="phone_number" v-model="phone" v-on:keyup="handleChange" class="input" placeholder="(XX) XXXXX-XXXX" maxlength="15" required />
+          <input type="text" name="phone" v-model="phone" v-on:keyup="handleChange" class="input" placeholder="(XX) XXXXX-XXXX" maxlength="15" required />
         </label>
         <label class="pol-input-group mb-3" aria-required="true">
           <span class="label">Mensagem</span>
-          <textarea placeholder="Como você pretende usar os vídeos Polen para sua empresa?" rows="6" required></textarea>
+          <textarea name="message" placeholder="Como você pretende usar os vídeos Polen para sua empresa?" rows="6" required></textarea>
         </label>
         <input type="submit" class="btn btn-primary btn-lg btn-block mt-4" value="Enviar" />
       </form>
