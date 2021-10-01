@@ -112,7 +112,7 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 
             <div class="order-info" id="bolet-payment-custom" style="display: none;">
                 <p><strong>Curso será disponibilizado após o pagamento</strong></p>
-                <p>O prazo para pagamento do boleto é <?php echo date('d/m/Y', strtotime('+1 days', current_time('timestamp'))); ?></p>
+                <p>O prazo para pagamento do boleto é <?php echo date('d-m-Y', strtotime('+1 days', current_time('timestamp'))); ?></p>
             </div>
 
             <?php do_action( 'woocommerce_checkout_after_order_review' ); ?>

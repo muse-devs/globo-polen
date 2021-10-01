@@ -33,7 +33,7 @@ function mc_get_home_banner_gustavo($link)
 	<div class="row mt-4">
 		<div class="col-12">
 			<div class="mc-banner">
-				<img class="image mobile-img" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/banner-gustavo-bg.png'; ?>" alt="Polen Masterclass" />
+				<img class="image mobile-img" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/mobile-banner-gustavo-bg.png'; ?>" alt="Polen Masterclass" />
 				<img class="image desktop-img" src="<?php echo TEMPLATE_URI . '/assets/img/masterclass/banner-gustavo-bg.png'; ?>" alt="Polen Masterclass" />
 				<div class="content">
 					<div class="left">

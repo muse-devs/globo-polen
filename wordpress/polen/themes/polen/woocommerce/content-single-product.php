@@ -188,6 +188,19 @@ if( 'instock' == $product->get_stock_status() ) {
 	$social && sa_get_about($video_depoimento);
 	?>
 
+  <?php
+  // Campanha Luccas Neto dia das crianças ----
+  $is_luccas_neto = $Polen_Plugin_Settings['promotional-event-luccas-neto'] == get_the_ID();
+  if($is_luccas_neto) {
+    generic_get_about(
+      "Campanha dia das Crianças",
+      "Dia das Crianças com Luccas Neto",
+      "<p>A Polen e o Luccas Neto vão escolher as quatro histórias e mensagens mais emocionantes para presentear com o boneco autografado do Luccas, entre os pedidos realizados e confirmados até o dia 5 de Outubro!</p>
+      <p>Capriche na mensagem de Dia das Crianças do seu vídeo-Polen! Com certeza quem você presentear vai se emocionar e ainda terá a chance de receber mais um super presente para acompanhar o recado exclusivo que o Luccas vai gravar.</p>"
+    );
+  }
+  ?>
+
 	<!-- Como funciona? -->
 	<?php $social || polen_front_get_tutorial(); ?>
 
