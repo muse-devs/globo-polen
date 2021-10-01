@@ -244,7 +244,6 @@ if (!$talent_is_social) {
 					}
 				}
 
-				console.log('asdasd2');
 				$.ajax({
 					type: 'POST',
 					url: woocommerce_params.ajax_url,
