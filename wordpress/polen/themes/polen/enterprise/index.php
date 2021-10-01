@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The template for displaying all pages
  *
@@ -12,9 +13,15 @@
  * @package Polen
  */
 
-get_header();
-echo "home";
-?>
+get_header(); ?>
 
-<?php
-get_footer();
+<main id="primary" class="site-main">
+  <?php
+  bus_get_header();
+  bus_get_tutorial();
+  bus_grid(bus_get_talents(), "Nossos talentos");
+  bus_get_form();
+  ?>
+</main>
+
+<?php get_footer();

@@ -192,7 +192,7 @@ function polen_front_get_card($item, $size = "small", $social = false)
 				} elseif ($donate == 'yes') {
 					polen_donate_badge("Social", true, false, false);
 				} ?>
-				<img loading="lazy" src="<?php echo $image_data["image"]; ?>" alt="<?php echo $image_data["alt"]; ?>">
+				<img loading="lazy" src="<?php echo $image_data["image"]; ?>" alt="<?php echo $image_data["alt"]; ?>" />
 				<?php if (!$social) : ?>
 					<div class="price text-right" itemprop="price">
 						<?php if ($item['in_stock']) : ?>
