@@ -176,7 +176,7 @@ if( ! $talent_is_social ) {
 								</div>
 								<div class="col-12 mt-3">
 									<select id="reason" class="form-control form-control-lg custom-select" required="required">
-                    <option value="">Selecione o motivo *</option>
+                    					<option value="">Selecione o motivo *</option>
 										<option value="linguagem-impropria">Linguagem Imprópria</option>
 										<option value="direitos-autorais">Direitos Autorais</option>
 										<option value="pedido-complexo">Não consegui entender o pedido</option>
@@ -211,62 +211,61 @@ if( ! $talent_is_social ) {
       }
     });
 
-		$('button.order-check').on('click',function() {
-			let wnonce = $(this).parent().attr('button-nonce');
-			let order_id = $(this).attr('order-id');
-			let type = $(this).attr('action-type');
+	$('button.order-check').on('click',function() {
+		let wnonce = $(this).parent().attr('button-nonce');
+		let order_id = $(this).attr('order-id');
+		let type = $(this).attr('action-type');
 
-			if(type == 'reject') {
-        let reason = $('#reason').val();
-        let description = $('#description').val();
-
-        // Obrigando o usuário selecionar a razão
-        if(reason === "")  {
-          $('#reason').toggleClass("border-danger");
-				  return;
-				}
-        // Gerando o informações pra rejeição
-				var data = {
-          action: 'get_talent_acceptance',
-          order: order_id,
-          type: type,
-          security: wnonce,
-          reason: reason,
-          description: description
-        }
-			} else {
-        // Gerando as informações para aceita
-        var data = {
-          action: 'get_talent_acceptance',
-          order: order_id,
-          type: type,
-          security: wnonce
-        }
-      }
-
-			polSpinner();
-			$.ajax(
-				{
-					type: 'POST',
-					url: woocommerce_params.ajax_url,
-					data: data,
-					success: function( response ) {
-						let obj = $.parseJSON( response );
-						if( obj['success'] == true ){
-							if( obj['code'] == 1 ){
-								location.href='/my-account/send-video/?order_id=' + order_id;
-							}
-							if( obj['code'] == 2 ) {
-                $('#OrderActions').modal('toggle');
-								setSessionMessage(CONSTANTS.SUCCESS, "Sucesso", "Você recusou o pedido com sucesso");
-								location.reload();
-							}
+		if(type == 'reject') {
+        	let reason = $('#reason').val();
+        	let description = $('#description').val();
+			// Obrigando o usuário selecionar a razão
+			if(reason === "")  {
+				$('#reason').toggleClass("border-danger");
+				return;
+			}
+			// Gerando o informações pra rejeição
+			var data = {
+				action: 'get_talent_acceptance',
+				order: order_id,
+				type: type,
+				security: wnonce,
+				reason: reason,
+				description: description
+			}
+		} else {
+			// Gerando as informações para aceita
+			var data = {
+				action: 'get_talent_acceptance',
+				order: order_id,
+				type: type,
+				security: wnonce
+			}
+    	}
+		// Spinner
+		polSpinner();
+		$.ajax(
+			{
+				type: 'POST',
+				url: woocommerce_params.ajax_url,
+				data: data,
+				success: function( response ) {
+					let obj = $.parseJSON( response );
+					if( obj['success'] == true ){
+						if( obj['code'] == 1 ){
+							location.href='/my-account/send-video/?order_id=' + order_id;
 						}
-					},
-          error: function() {
-            setSessionMessage(CONSTANTS.ERROR, null, "Algo não saiu como esperado, tente novamente");
-          }
-				});
+						if( obj['code'] == 2 ) {
+						$('#OrderActions').modal('toggle');
+							setSessionMessage(CONSTANTS.SUCCESS, "Sucesso", "Você recusou o pedido com sucesso");
+							location.reload();
+						}
+					}
+				},
+				error: function() {
+					setSessionMessage(CONSTANTS.ERROR, null, "Algo não saiu como esperado, tente novamente");
+				}
+			});
 		});
 	});
 })( jQuery );
