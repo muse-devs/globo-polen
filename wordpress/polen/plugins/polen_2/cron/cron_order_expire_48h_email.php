@@ -53,8 +53,8 @@ if( !empty( $orders_ids ) ) {
     }
 }
 
+\WC_Emails::instance();
 if( !empty( $txt ) ) {
-    \WC_Emails::instance();
     $email = new Polen_WC_Order_Expire_Tomorrow();
     $email->trigger( $txt );
 }
