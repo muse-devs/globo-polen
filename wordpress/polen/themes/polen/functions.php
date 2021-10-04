@@ -211,6 +211,7 @@ function polen_scripts() {
 	wp_register_script( 'owl-carousel', TEMPLATE_URI . '/assets/js/vendor/owl.carousel.min.js', array(), _S_VERSION, true );
 	wp_register_script( 'zuck', TEMPLATE_URI . '/assets/js/' . $min . 'zuck.js', array(), _S_VERSION, true );
 	wp_register_script( 'form-whatsapp', TEMPLATE_URI . '/assets/js/' . $min . 'form-whatsapp.js', array("vuejs"), _S_VERSION, true );
+	wp_register_script( 'polen-business', TEMPLATE_URI . '/assets/js/' . $min . 'business.js', array("vuejs"), _S_VERSION, true );
 	// --------------------------------------------------------------------------------------------------
 
 	if (polen_is_landingpage()) {
@@ -325,8 +326,15 @@ require_once TEMPLATE_DIR . '/social_base/function.php';;
 /**
 * Funções para master-class
 */
-// flush_rewrite_rules();
 require_once TEMPLATE_DIR . '/master_class/function_master_class.php';
+
+/**
+ * Funções para polen empresas
+ */
+
+// flush_rewrite_rules();
+
+require_once TEMPLATE_DIR . '/enterprise/function_enterprise.php';
 
 
 add_action('wc_gateway_stripe_process_response', function($response, $order) {

@@ -192,7 +192,7 @@ function polen_front_get_card($item, $size = "small", $social = false)
 				} elseif ($donate == 'yes') {
 					polen_donate_badge("Social", true, false, false);
 				} ?>
-				<img loading="lazy" src="<?php echo $image_data["image"]; ?>" alt="<?php echo $image_data["alt"]; ?>">
+				<img loading="lazy" src="<?php echo $image_data["image"]; ?>" alt="<?php echo $image_data["alt"]; ?>" />
 				<?php if (!$social) : ?>
 					<div class="price text-right" itemprop="price">
 						<?php if ($item['in_stock']) : ?>
@@ -567,6 +567,36 @@ function polen_get_share_button()
 		if (navigator.share) {
 			document.querySelector('.share-button').classList.add("show");
 		}
+	</script>
+<?php
+}
+
+function generic_get_about($main_title, $title, $text)
+{
+?>
+	<section class="row donation-box custom-donation-box mt-4 mb-4">
+		<div class="col-md-12">
+			<header class="row mb-3">
+				<div class="col">
+					<h2><?php echo $main_title; ?></h2>
+				</div>
+			</header>
+		</div>
+		<div class="col-md-12">
+			<div class="box-round py-4 px-4">
+				<div class="row">
+					<div class="col-md-12 mt-4">
+						<p><strong><?php echo $title; ?></strong></p>
+						<?php echo $text; ?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<script>
+		const video = document.getElementById("sa-video-about");
+		video.load();
+		video.currentTime = 1;
 	</script>
 <?php
 }

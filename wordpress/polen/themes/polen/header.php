@@ -43,6 +43,7 @@ global $Polen_Plugin_Settings;
 			<?php if(!polen_is_landingpage()) : ?>
 			<div class="col-4 col-sm-6 d-flex justify-content-end align-items-center">
 				<?php $Polen_Plugin_Settings['search_bar'] && polen_get_search_form(); ?>
+        <a href="<?php echo enterprise_url_home(); ?>" class="bus-menu-item">Para empresas</a>
 				<div class="ml-2">
 					<div class="dropdown">
 						<?php
