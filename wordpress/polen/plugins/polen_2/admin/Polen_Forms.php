@@ -109,7 +109,7 @@ class Polen_Forms {
         $body .= "<p>Email: {$args['email']}</p>";
         $body .= "<p>Empresa: {$args['company']}</p>";
         $body .= "<p>Qtd de funcionários: {$args['employees_quantity']}</p>";
-        $body .= "<p>Vaga: {$args['job']}</p>";
+        $body .= "<p>Cargo: {$args['job']}</p>";
         $body .= "<p>Telefone: {$args['phone']}</p>";
         $body .= "<p>Mensagem: {$args['message']}</p>";
 
