@@ -120,7 +120,7 @@ class Polen_Forms {
 
         $body = "aki";
 
-        $headers = array('Content-Type: text/html; charset=UTF-8');
+        $headers = array('Content-Type: text/html; charset=UTF-8; From: polen.me');
 
         if (!wp_mail($to, $subject, $body, $headers)) {
             die('error');
