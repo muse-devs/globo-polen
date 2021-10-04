@@ -102,8 +102,11 @@ class Polen_Forms {
 
     private function mail_send($args)
     {
-        $to = 'polen.empresas@polen.me';
-        $subject = 'Novo cadastro Polen empresas!';
+        global $Polen_Plugin_Settings;
+        $emails = $Polen_Plugin_Settings['recipient_email_polen_company'];
+
+        $to = explode(',', $emails);
+        $subject = "Novo cadastro Polen empresas - {$args['name']}";
 
         $body = "<p>Nome: {$args['name']}</p>";
         $body .= "<p>Email: {$args['email']}</p>";
