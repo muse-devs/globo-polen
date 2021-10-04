@@ -58,11 +58,11 @@ if (!$talent_is_social) {
 													<p class="value small"><?php echo $order['from']; ?></p>
 												</div>
 											<?php endif; ?>
-											<div class="col-6 col-md-6">
+											<div class="col-12 col-md-12">
 												<p class="p">Para <?php echo (defined('ENV_DEV') && (ENV_DEV === true)) ? '(ID: ' . $order['order_id'] . ')' : ''; ?></p>
 												<p class="value small"><?php echo $order['name']; ?></p>
 											</div>
-											<div class="col-6 col-md-6">
+											<div class="col-12 col-md-12">
 												<p class="p">e-mail</p>
 												<p class="value small"><?php echo $order['email']; ?></p>
 											</div>
