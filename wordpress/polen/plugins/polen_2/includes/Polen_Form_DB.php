@@ -12,7 +12,7 @@ class Polen_Form_DB{
         global $wpdb;
 
         $this->wpdb = $wpdb;
-        $this->table_name = $wpdb->base_prefix . 'forms';
+        $this->table_name = $wpdb->base_prefix . 'polen_forms';
     }
 
     public function insert($args)
