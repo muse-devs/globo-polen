@@ -21,12 +21,12 @@ class Polen_WC_Order_Expire_48h extends \WC_Email {
 		$this->title       = __( 'Pedidos expiram amanha!', 'polen' );
 		$this->description = __( 'Esse email é enviado para nosso operacional', 'polen' );
 		$this->customer_email = false;
-		$this->heading     = __( 'Pedidos que expiram amanhã', 'polen' );
+		$this->heading     = __( 'Pedidos que expiram em 48h', 'polen' );
 
 		$this->subject     = 'Lista de pedidos que expiram amanhã';;
 
-		$this->template_html  = 'emails/Polen_WC_Order_Expire_Tomorrow.php';
-		$this->template_plain = 'emails/plain/Polen_WC_Order_Expire_Tomorrow.php';
+		$this->template_html  = 'emails/Polen_WC_Order_Expire_48h.php';
+		$this->template_plain = 'emails/plain/Polen_WC_Order_Expire_48h.php';
 		$this->template_base  = TEMPLATEPATH . 'woocommerce/';
 
 		parent::__construct();
