@@ -514,6 +514,24 @@ class Polen_Plugin_Settings
                 )
             )
         ) );
+
+
+         // Configurar produto promocional
+         \Redux::set_section( $opt_name, array(
+            'title'            => esc_html__( 'Emails Expirar Pedidos', 'polen' ),
+            'id'               => 'polen_email_expire_order',
+            'icon'             => 'dashicons:email',
+            'subsection'       => false,
+            'fields'           => array(
+                array(
+                    'id'       => 'email_emails_order_expire_tomorrow',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Endereços que receberam o email', 'polen'),
+                    'desc'     => 'Emails serarados por Virgura',
+                    'default'  => '',
+                ),
+            )
+        ) );
     }
 
     public function save( $args ) {

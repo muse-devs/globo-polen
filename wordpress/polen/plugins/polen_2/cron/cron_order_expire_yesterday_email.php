@@ -3,10 +3,11 @@ include_once dirname( __FILE__ ) . '/init.php';
 
 use Automattic\WooCommerce\Admin\API\Reports\TimeInterval;
 use Polen\Includes\Emails\Polen_WC_Order_Expire_Today;
+use Polen\Includes\Emails\Polen_WC_Order_Expire_Tomorrow;
 use Polen\Includes\Polen_Order;
 
 $current_date = new WC_DateTime();
-$plus_one_day = new DateInterval('P1D');
+$plus_one_day = new DateInterval('P2D');
 $tomorrow = $current_date->add( $plus_one_day );
 $tomorrow_init = WC_DateTime::createFromFormat( 'Y/m/d H:i:s',  $tomorrow->format('Y/m/d') . ' 00:00:00' );
 $tomorrow_final = WC_DateTime::createFromFormat( 'Y/m/d H:i:s', $tomorrow->format('Y/m/d') . ' 23:59:59' );
@@ -39,15 +40,21 @@ $args = [
 
 $wp_pq = new \WP_Query( $args );
 $orders_ids = $wp_pq->get_posts();
+// $pe = new Polen_WC_Order_Expire_Today();
 
-\WC_Emails::instance();
-$pe = new Polen_WC_Order_Expire_Today();
-
+$txt = "";
 if( !empty( $orders_ids ) ) {
     foreach( $orders_ids as $order_id ) {
-        echo "Enviando email para Order_ID: {$order_id}";
-        $pe->trigger( $order_id );
-        echo "\n";
+        $order = wc_get_order( $order_id );
+        $link_order = admin_url( "post.php?post={$order->get_id()}&action=edit" );
+        $link = "<a href='{$link_order}'>Ver Order</a>";
+        $expiration_date = $tomorrow->format( 'd/m/Y' );
+        $txt .= "<tr><td>No. {$order->get_id()}, {$link}, Expira: {$expiration_date}</td></tr>";
     }
 }
-               
+
+if( !empty( $txt ) ) {
+    \WC_Emails::instance();
+    $email = new Polen_WC_Order_Expire_Tomorrow();
+    $email->trigger( $txt );
+}
