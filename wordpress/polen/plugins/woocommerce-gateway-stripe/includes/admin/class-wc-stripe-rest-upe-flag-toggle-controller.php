@@ -1,6 +1,6 @@
 <?php
 /**
- * Class WC_REST_UPE_Flag_Toggle_Controller
+ * Class WC_Stripe_REST_UPE_Flag_Toggle_Controller
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -8,27 +8,13 @@ defined( 'ABSPATH' ) || exit;
 /**
  * REST controller for UPE feature flag.
  */
-class WC_REST_UPE_Flag_Toggle_Controller extends WP_REST_Controller {
-	/**
-	 * Endpoint namespace.
-	 *
-	 * @var string
-	 */
-	protected $namespace = 'wc/v3';
-
+class WC_Stripe_REST_UPE_Flag_Toggle_Controller extends WC_Stripe_REST_Base_Controller {
 	/**
 	 * Endpoint path.
 	 *
 	 * @var string
 	 */
 	protected $rest_base = 'wc_stripe/upe_flag_toggle';
-
-	/**
-	 * Verify access to request.
-	 */
-	public function check_permission() {
-		return current_user_can( 'manage_woocommerce' );
-	}
 
 	/**
 	 * Configure REST API routes.
@@ -87,9 +73,15 @@ class WC_REST_UPE_Flag_Toggle_Controller extends WP_REST_Controller {
 		}
 
 		$settings = get_option( 'woocommerce_stripe_settings', [] );
-		$settings[ WC_Stripe_Feature_Flags::UPE_CHECKOUT_FEATURE_ATTRIBUTE_NAME ] = $is_upe_enabled ? 'yes' : 'no';
+		$settings[ WC_Stripe_Feature_Flags::UPE_CHECKOUT_FEATURE_ATTRIBUTE_NAME ] = $is_upe_enabled ? 'yes' : 'disabled';
 
 		update_option( 'woocommerce_stripe_settings', $settings );
+
+		// including the class again because otherwise it's not present.
+		if ( WC_Stripe_UPE_Compatibility::are_inbox_notes_supported() ) {
+			require_once WC_STRIPE_PLUGIN_PATH . '/includes/notes/class-wc-stripe-upe-availability-note.php';
+			WC_Stripe_UPE_Availability_Note::possibly_delete_note();
+		}
 
 		return new WP_REST_Response( [ 'result' => 'success' ], 200 );
 	}
