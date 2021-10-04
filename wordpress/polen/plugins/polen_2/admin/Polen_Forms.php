@@ -102,16 +102,14 @@ class Polen_Forms {
 
     private function mail_send($args)
     {
-        //$to = 'polen.empresas@polen.me';
-
-        $to = 'glaydson.queiroz@polen.me';
+        $to = 'polen.empresas@polen.me';
         $subject = 'Novo cadastro Polen empresas!';
 
         $body = "<p>Nome: {$args['name']}</p>";
-        $body .= "<p>email: {$args['email']}</p>";
+        $body .= "<p>Email: {$args['email']}</p>";
         $body .= "<p>Empresa: {$args['company']}</p>";
-        $body .= "<p>Qtd de funcionário: {$args['employees_quantity']}</p>";
-        $body .= "<p>Area: {$args['job']}</p>";
+        $body .= "<p>Qtd de funcionários: {$args['employees_quantity']}</p>";
+        $body .= "<p>Vaga: {$args['job']}</p>";
         $body .= "<p>Telefone: {$args['phone']}</p>";
         $body .= "<p>Mensagem: {$args['message']}</p>";
 
