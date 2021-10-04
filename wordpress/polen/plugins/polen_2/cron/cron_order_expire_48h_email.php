@@ -1,9 +1,7 @@
 <?php
 include_once dirname( __FILE__ ) . '/init.php';
 
-use Automattic\WooCommerce\Admin\API\Reports\TimeInterval;
-use Polen\Includes\Emails\Polen_WC_Order_Expire_Today;
-use Polen\Includes\Emails\Polen_WC_Order_Expire_Tomorrow;
+use Polen\Includes\Emails\Polen_WC_Order_Expire_48h;
 use Polen\Includes\Polen_Order;
 
 $current_date = new WC_DateTime();
@@ -55,6 +53,6 @@ if( !empty( $orders_ids ) ) {
 
 \WC_Emails::instance();
 if( !empty( $txt ) ) {
-    $email = new Polen_WC_Order_Expire_Tomorrow();
+    $email = new Polen_WC_Order_Expire_48h();
     $email->trigger( $txt );
 }
