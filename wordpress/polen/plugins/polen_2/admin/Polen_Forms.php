@@ -77,6 +77,8 @@ class Polen_Forms {
             $form_db = new Polen_Form_DB();
             $form_db->insert($data);
 
+            $this->mail_send($data);
+
             wp_send_json_success('ok', 200);
             wp_die();
 
