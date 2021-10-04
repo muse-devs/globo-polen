@@ -13,7 +13,7 @@ if ( ! class_exists( 'WC_Email' ) ) {
 	return;
 }
 
-class Polen_WC_Order_Expire_Tomorrow extends \WC_Email {
+class Polen_WC_Order_Expire_48h extends \WC_Email {
 
     
     public function __construct() {

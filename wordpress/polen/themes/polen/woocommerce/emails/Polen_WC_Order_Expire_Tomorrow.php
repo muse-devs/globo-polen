@@ -13,7 +13,6 @@ do_action('woocommerce_email_header', $email_heading, $email);
 // $talent_name = $talent['name'];
 // $mail_subject = "Renovar solicitação #{$order->get_id()}";
 
-Debug::def($order);
 ?>
 
 <p>
