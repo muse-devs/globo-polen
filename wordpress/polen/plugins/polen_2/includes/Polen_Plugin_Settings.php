@@ -533,7 +533,7 @@ class Polen_Plugin_Settings
                 array(
                     'id'       => 'recipient_email_polen_company',
                     'type'     => 'text',
-                    'title'    => esc_html__('Configurar email de destinatário', 'polen'),
+                    'title'    => esc_html__('Configurar email de destinatário polen empresas', 'polen'),
                     'desc'     => 'Emails serarados por Virgura',
                     'default'  => '',
                 ),
