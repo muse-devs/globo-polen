@@ -125,7 +125,7 @@ function bus_get_form()
   ?>
   <section id="bus-form-wrapper" class="row mt-5 mb-5 bus-form">
     <div class="col-12 mb-4 pb-2 text-center">
-      <h2 class="title">Entre em contato com a equipe de vendas</h2>
+      <h2 class="title">Entre em contato com a nossa equipe de vendas</h2>
     </div>
     <div class="col-12 col-md-8 m-md-auto">
       <form id="bus-form" v-on:submit.prevent="handleSubmit" method="POST">

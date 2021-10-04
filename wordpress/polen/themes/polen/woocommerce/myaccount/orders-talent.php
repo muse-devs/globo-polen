@@ -63,7 +63,7 @@ if (!$talent_is_social) {
 												<p class="value small"><?php echo $order['name']; ?></p>
 											</div>
 											<div class="col-6 col-md-6">
-												<p class="p">E-mail</p>
+												<p class="p">e-mail</p>
 												<p class="value small"><?php echo $order['email']; ?></p>
 											</div>
 										</div>
