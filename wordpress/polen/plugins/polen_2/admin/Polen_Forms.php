@@ -107,14 +107,14 @@ class Polen_Forms {
         $to = 'glaydson.queiroz@polen.me';
         $subject = 'Novo cadastro Polen empresas!';
 
-        // $body = get_template_part('partials/content', 'alert', $args);
-
-        $body = "aki";
+        $body = "<p>Nome: {$args['name']}</p>";
+        $body .= "<p>email: {$args['email']}</p>";
+        $body .= "<p>Qtd de funcionário: {$args['employees_quantity']}</p>";
+        $body .= "<p>Area: {$args['job']}</p>";
+        $body .= "<p>Telefone: {$args['phone']}</p>";
+        $body .= "<p>Mensagem: {$args['message']}</p>";
 
         $headers = array('Content-Type: text/html; charset=UTF-8; From: polen.me');
-
-        if (!wp_mail($to, $subject, $body, $headers)) {
-            die('error');
-        }
+        
     }
 }
