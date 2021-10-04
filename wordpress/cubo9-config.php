@@ -1,6 +1,6 @@
 <?php
 if( ! defined( 'ABSPATH' ) ) {
-        headear( 'location: /' );
+        header( 'location: /' );
 }
 
 /**
