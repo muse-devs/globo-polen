@@ -520,7 +520,7 @@ class Polen_Plugin_Settings
          \Redux::set_section( $opt_name, array(
             'title'            => esc_html__( 'Configurar emails', 'polen' ),
             'id'               => 'polen_email_expire_order',
-            'icon'             => 'dashicons:email',
+            'icon'             => 'el el-envelope',
             'subsection'       => false,
             'fields'           => array(
                 array(

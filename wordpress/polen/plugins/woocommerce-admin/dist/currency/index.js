@@ -115,6 +115,13 @@ this["wc"] = this["wc"] || {}; this["wc"]["currency"] =
 
 /***/ }),
 
+/***/ 43:
+/***/ (function(module, exports) {
+
+(function() { module.exports = window["wp"]["deprecated"]; }());
+
+/***/ }),
+
 /***/ 442:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -129,7 +136,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _woocommerce_number__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(120);
 /* harmony import */ var _woocommerce_number__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_number__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _wordpress_deprecated__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(58);
+/* harmony import */ var _wordpress_deprecated__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(43);
 /* harmony import */ var _wordpress_deprecated__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_deprecated__WEBPACK_IMPORTED_MODULE_4__);
 /**
  * External dependencies
@@ -474,13 +481,6 @@ function getCurrencyData() {
     }
   };
 }
-
-/***/ }),
-
-/***/ 58:
-/***/ (function(module, exports) {
-
-(function() { module.exports = window["wp"]["deprecated"]; }());
 
 /***/ })
 
