@@ -1,6 +1,7 @@
 var menu = document.querySelector(".dropdown");
 var menu_button = document.querySelector(".dropbtn");
 var menu_content = document.querySelector(".dropdown-content");
+var menu_overlay = document.querySelector("#menu-bg");
 var menu_close = document.querySelector(".menu-close");
 
 jQuery(document).ready(function () {
@@ -25,15 +26,25 @@ jQuery(document).ready(function () {
 		hideMenu();
 	});
 
-	menu_close.addEventListener("click", function () {
+  menu_close.addEventListener("click", function () {
+		hideMenu();
+	});
+
+	menu_overlay.addEventListener("click", function () {
 		hideMenu();
 	});
 });
 
 function showMenu() {
+  if (screen.width < 540) {
+    document.body.classList.add("no-scroll");
+  }
 	menu_content.classList.add("show");
+  menu_overlay.classList.add("show");
 }
 
 function hideMenu() {
+  document.body.classList.remove("no-scroll");
 	menu_content.classList.remove("show");
+  menu_overlay.classList.remove("show");
 }
