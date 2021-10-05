@@ -105,7 +105,7 @@ this["wc"] = this["wc"] || {}; this["wc"]["components"] =
 if (false) { var throwOnDirectAccess, ReactIs; } else {
   // By explicitly using `prop-types` you are opting into new production behavior.
   // http://fb.me/prop-types-in-prod
-  module.exports = __webpack_require__(46)();
+  module.exports = __webpack_require__(47)();
 }
 
 
@@ -229,19 +229,19 @@ if (false) { var throwOnDirectAccess, ReactIs; } else {
 (function() { module.exports = window["wc"]["navigation"]; }());
 
 /***/ }),
-/* 13 */
+/* 13 */,
+/* 14 */
 /***/ (function(module, exports) {
 
 (function() { module.exports = window["wp"]["compose"]; }());
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports) {
 
 (function() { module.exports = window["wp"]["url"]; }());
 
 /***/ }),
-/* 15 */,
 /* 16 */,
 /* 17 */
 /***/ (function(module, exports) {
@@ -922,7 +922,7 @@ module.exports =  true ? __webpack_require__(353) : undefined;
 "use strict";
 
 
-var defineProperties = __webpack_require__(55);
+var defineProperties = __webpack_require__(56);
 var callBind = __webpack_require__(94);
 
 var implementation = __webpack_require__(197);
@@ -1452,6 +1452,12 @@ function withStyles(styleFn) {
 
 /***/ }),
 /* 43 */
+/***/ (function(module, exports) {
+
+(function() { module.exports = window["wp"]["deprecated"]; }());
+
+/***/ }),
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var check = function (it) {
@@ -1471,7 +1477,7 @@ module.exports =
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(78)))
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1493,8 +1499,8 @@ module.exports = function Type(x) {
 
 
 /***/ }),
-/* 45 */,
-/* 46 */
+/* 46 */,
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1507,7 +1513,7 @@ module.exports = function Type(x) {
 
 
 
-var ReactPropTypesSecret = __webpack_require__(47);
+var ReactPropTypesSecret = __webpack_require__(48);
 
 function emptyFunction() {}
 function emptyFunctionWithReset() {}
@@ -1565,7 +1571,7 @@ module.exports = function() {
 
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1584,8 +1590,8 @@ module.exports = ReactPropTypesSecret;
 
 
 /***/ }),
-/* 48 */,
-/* 49 */
+/* 49 */,
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1627,16 +1633,16 @@ emptyFunction.thatReturnsArgument = function (arg) {
 module.exports = emptyFunction;
 
 /***/ }),
-/* 50 */,
 /* 51 */,
-/* 52 */
+/* 52 */,
+/* 53 */
 /***/ (function(module, exports) {
 
 (function() { module.exports = window["wp"]["viewport"]; }());
 
 /***/ }),
-/* 53 */,
-/* 54 */
+/* 54 */,
+/* 55 */
 /***/ (function(module, exports) {
 
 var hasOwnProperty = {}.hasOwnProperty;
@@ -1647,7 +1653,7 @@ module.exports = function (it, key) {
 
 
 /***/ }),
-/* 55 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1712,7 +1718,7 @@ module.exports = defineProperties;
 
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var moment = __webpack_require__(9);
@@ -1758,16 +1764,10 @@ module.exports = {
 
 
 /***/ }),
-/* 57 */
-/***/ (function(module, exports) {
-
-(function() { module.exports = window["wp"]["date"]; }());
-
-/***/ }),
 /* 58 */
 /***/ (function(module, exports) {
 
-(function() { module.exports = window["wp"]["deprecated"]; }());
+(function() { module.exports = window["wp"]["date"]; }());
 
 /***/ }),
 /* 59 */,
@@ -1795,9 +1795,9 @@ module.exports = function (exec) {
 /* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var global = __webpack_require__(43);
+var global = __webpack_require__(44);
 var shared = __webpack_require__(183);
-var has = __webpack_require__(54);
+var has = __webpack_require__(55);
 var uid = __webpack_require__(184);
 var NATIVE_SYMBOL = __webpack_require__(192);
 var USE_SYMBOL_AS_UID = __webpack_require__(317);
@@ -3687,7 +3687,7 @@ var REACT_ELEMENT_TYPE =
   (typeof Symbol === 'function' && Symbol.for && Symbol.for('react.element')) ||
   0xeac7;
 
-var emptyFunction = __webpack_require__(49);
+var emptyFunction = __webpack_require__(50);
 var invariant = __webpack_require__(70);
 var warning = __webpack_require__(71);
 
@@ -4063,7 +4063,7 @@ module.exports = invariant;
 
 
 
-var emptyFunction = __webpack_require__(49);
+var emptyFunction = __webpack_require__(50);
 
 /**
  * Similar to invariant but only logs a warning if the condition is not met.
@@ -5284,7 +5284,7 @@ var $TypeError = GetIntrinsic('%TypeError%');
 var inspect = __webpack_require__(398);
 
 var IsPropertyKey = __webpack_require__(87);
-var Type = __webpack_require__(44);
+var Type = __webpack_require__(45);
 
 /**
  * 7.3.1 Get (O, P) - https://ecma-international.org/ecma-262/6.0/#sec-get-o-p
@@ -5562,7 +5562,7 @@ exports.isValidElementType=function(a){return"string"===typeof a||"function"===t
 /* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var global = __webpack_require__(43);
+var global = __webpack_require__(44);
 var getOwnPropertyDescriptor = __webpack_require__(175).f;
 var createNonEnumerableProperty = __webpack_require__(80);
 var redefine = __webpack_require__(180);
@@ -5678,7 +5678,7 @@ module.exports = function (input, PREFERRED_STRING) {
 /* 135 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var global = __webpack_require__(43);
+var global = __webpack_require__(44);
 var createNonEnumerableProperty = __webpack_require__(80);
 
 module.exports = function (key, value) {
@@ -5694,7 +5694,7 @@ module.exports = function (key, value) {
 /* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var global = __webpack_require__(43);
+var global = __webpack_require__(44);
 var setGlobal = __webpack_require__(135);
 
 var SHARED = '__core-js_shared__';
@@ -5736,7 +5736,7 @@ module.exports = {};
 /***/ (function(module, exports, __webpack_require__) {
 
 var path = __webpack_require__(141);
-var global = __webpack_require__(43);
+var global = __webpack_require__(44);
 
 var aFunction = function (variable) {
   return typeof variable == 'function' ? variable : undefined;
@@ -5752,7 +5752,7 @@ module.exports = function (namespace, method) {
 /* 141 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var global = __webpack_require__(43);
+var global = __webpack_require__(44);
 
 module.exports = global;
 
@@ -6074,7 +6074,7 @@ var _reactAddonsShallowCompare = __webpack_require__(81);
 
 var _reactAddonsShallowCompare2 = _interopRequireDefault(_reactAddonsShallowCompare);
 
-var _reactMomentProptypes = __webpack_require__(56);
+var _reactMomentProptypes = __webpack_require__(57);
 
 var _reactMomentProptypes2 = _interopRequireDefault(_reactMomentProptypes);
 
@@ -6600,7 +6600,7 @@ module.exports = __webpack_require__(365);
 "use strict";
 
 
-var define = __webpack_require__(55);
+var define = __webpack_require__(56);
 var callBind = __webpack_require__(94);
 
 var implementation = __webpack_require__(207);
@@ -9234,7 +9234,7 @@ var propertyIsEnumerableModule = __webpack_require__(176);
 var createPropertyDescriptor = __webpack_require__(104);
 var toIndexedObject = __webpack_require__(131);
 var toPrimitive = __webpack_require__(134);
-var has = __webpack_require__(54);
+var has = __webpack_require__(55);
 var IE8_DOM_DEFINE = __webpack_require__(178);
 
 var nativeGetOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
@@ -9310,7 +9310,7 @@ module.exports = !DESCRIPTORS && !fails(function () {
 /* 179 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var global = __webpack_require__(43);
+var global = __webpack_require__(44);
 var isObject = __webpack_require__(92);
 
 var document = global.document;
@@ -9326,9 +9326,9 @@ module.exports = function (it) {
 /* 180 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var global = __webpack_require__(43);
+var global = __webpack_require__(44);
 var createNonEnumerableProperty = __webpack_require__(80);
-var has = __webpack_require__(54);
+var has = __webpack_require__(55);
 var setGlobal = __webpack_require__(135);
 var inspectSource = __webpack_require__(181);
 var InternalStateModule = __webpack_require__(182);
@@ -9391,10 +9391,10 @@ module.exports = store.inspectSource;
 /***/ (function(module, exports, __webpack_require__) {
 
 var NATIVE_WEAK_MAP = __webpack_require__(300);
-var global = __webpack_require__(43);
+var global = __webpack_require__(44);
 var isObject = __webpack_require__(92);
 var createNonEnumerableProperty = __webpack_require__(80);
-var objectHas = __webpack_require__(54);
+var objectHas = __webpack_require__(55);
 var shared = __webpack_require__(136);
 var sharedKey = __webpack_require__(137);
 var hiddenKeys = __webpack_require__(139);
@@ -9488,7 +9488,7 @@ module.exports = function (key) {
 /* 185 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var has = __webpack_require__(54);
+var has = __webpack_require__(55);
 var toIndexedObject = __webpack_require__(131);
 var indexOf = __webpack_require__(304).indexOf;
 var hiddenKeys = __webpack_require__(139);
@@ -9561,7 +9561,7 @@ module.exports = parent;
 var fails = __webpack_require__(61);
 var getPrototypeOf = __webpack_require__(191);
 var createNonEnumerableProperty = __webpack_require__(80);
-var has = __webpack_require__(54);
+var has = __webpack_require__(55);
 var wellKnownSymbol = __webpack_require__(62);
 var IS_PURE = __webpack_require__(138);
 
@@ -9607,7 +9607,7 @@ module.exports = {
 /* 191 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var has = __webpack_require__(54);
+var has = __webpack_require__(55);
 var toObject = __webpack_require__(144);
 var sharedKey = __webpack_require__(137);
 var CORRECT_PROTOTYPE_GETTER = __webpack_require__(313);
@@ -9648,7 +9648,7 @@ module.exports = !!Object.getOwnPropertySymbols && !fails(function () {
 /***/ (function(module, exports, __webpack_require__) {
 
 var defineProperty = __webpack_require__(93).f;
-var has = __webpack_require__(54);
+var has = __webpack_require__(55);
 var wellKnownSymbol = __webpack_require__(62);
 
 var TO_STRING_TAG = wellKnownSymbol('toStringTag');
@@ -10044,7 +10044,7 @@ var _reactAddonsShallowCompare = __webpack_require__(81);
 
 var _reactAddonsShallowCompare2 = _interopRequireDefault(_reactAddonsShallowCompare);
 
-var _reactMomentProptypes = __webpack_require__(56);
+var _reactMomentProptypes = __webpack_require__(57);
 
 var _reactMomentProptypes2 = _interopRequireDefault(_reactMomentProptypes);
 
@@ -10699,7 +10699,7 @@ var _reactAddonsShallowCompare = __webpack_require__(81);
 
 var _reactAddonsShallowCompare2 = _interopRequireDefault(_reactAddonsShallowCompare);
 
-var _reactMomentProptypes = __webpack_require__(56);
+var _reactMomentProptypes = __webpack_require__(57);
 
 var _reactMomentProptypes2 = _interopRequireDefault(_reactMomentProptypes);
 
@@ -11392,7 +11392,7 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactMomentProptypes = __webpack_require__(56);
+var _reactMomentProptypes = __webpack_require__(57);
 
 var _reactMomentProptypes2 = _interopRequireDefault(_reactMomentProptypes);
 
@@ -11771,7 +11771,7 @@ var _moment = __webpack_require__(9);
 
 var _moment2 = _interopRequireDefault(_moment);
 
-var _reactMomentProptypes = __webpack_require__(56);
+var _reactMomentProptypes = __webpack_require__(57);
 
 var _reactMomentProptypes2 = _interopRequireDefault(_reactMomentProptypes);
 
@@ -13404,7 +13404,7 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactMomentProptypes = __webpack_require__(56);
+var _reactMomentProptypes = __webpack_require__(57);
 
 var _reactMomentProptypes2 = _interopRequireDefault(_reactMomentProptypes);
 
@@ -15012,7 +15012,7 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactMomentProptypes = __webpack_require__(56);
+var _reactMomentProptypes = __webpack_require__(57);
 
 var _reactMomentProptypes2 = _interopRequireDefault(_reactMomentProptypes);
 
@@ -16048,7 +16048,7 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactMomentProptypes = __webpack_require__(56);
+var _reactMomentProptypes = __webpack_require__(57);
 
 var _reactMomentProptypes2 = _interopRequireDefault(_reactMomentProptypes);
 
@@ -16612,7 +16612,7 @@ module.exports = function DefineOwnProperty(IsDataDescriptor, SameValue, FromPro
 
 var assertRecord = __webpack_require__(156);
 
-var Type = __webpack_require__(44);
+var Type = __webpack_require__(45);
 
 // https://ecma-international.org/ecma-262/6.0/#sec-frompropertydescriptor
 
@@ -16657,7 +16657,7 @@ var has = __webpack_require__(74);
 
 var assertRecord = __webpack_require__(156);
 
-var Type = __webpack_require__(44);
+var Type = __webpack_require__(45);
 
 // https://ecma-international.org/ecma-262/6.0/#sec-isdatadescriptor
 
@@ -16709,7 +16709,7 @@ var GetIntrinsic = __webpack_require__(26);
 
 var $TypeError = GetIntrinsic('%TypeError%');
 
-var Type = __webpack_require__(44);
+var Type = __webpack_require__(45);
 var ToBoolean = __webpack_require__(240);
 var IsCallable = __webpack_require__(406);
 
@@ -17447,7 +17447,7 @@ $({ target: 'Object', stat: true, forced: Object.assign !== assign }, {
 /* 300 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var global = __webpack_require__(43);
+var global = __webpack_require__(44);
 var inspectSource = __webpack_require__(181);
 
 var WeakMap = global.WeakMap;
@@ -17459,7 +17459,7 @@ module.exports = typeof WeakMap === 'function' && /native code/.test(inspectSour
 /* 301 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var has = __webpack_require__(54);
+var has = __webpack_require__(55);
 var ownKeys = __webpack_require__(302);
 var getOwnPropertyDescriptorModule = __webpack_require__(175);
 var definePropertyModule = __webpack_require__(93);
@@ -17868,7 +17868,7 @@ module.exports = !fails(function () {
 /***/ (function(module, exports, __webpack_require__) {
 
 var classof = __webpack_require__(132);
-var global = __webpack_require__(43);
+var global = __webpack_require__(44);
 
 module.exports = classof(global.process) == 'process';
 
@@ -17877,7 +17877,7 @@ module.exports = classof(global.process) == 'process';
 /* 315 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var global = __webpack_require__(43);
+var global = __webpack_require__(44);
 var userAgent = __webpack_require__(316);
 
 var process = global.process;
@@ -20653,7 +20653,7 @@ module.exports = function bind(that) {
 "use strict";
 
 
-var define = __webpack_require__(55);
+var define = __webpack_require__(56);
 var getPolyfill = __webpack_require__(198);
 
 module.exports = function shimAssign() {
@@ -21012,7 +21012,7 @@ var _reactAddonsShallowCompare = __webpack_require__(81);
 
 var _reactAddonsShallowCompare2 = _interopRequireDefault(_reactAddonsShallowCompare);
 
-var _reactMomentProptypes = __webpack_require__(56);
+var _reactMomentProptypes = __webpack_require__(57);
 
 var _reactMomentProptypes2 = _interopRequireDefault(_reactMomentProptypes);
 
@@ -22748,7 +22748,7 @@ module.exports = function CheckObjectCoercible(value, optMessage) {
 
 
 var getPolyfill = __webpack_require__(209);
-var define = __webpack_require__(55);
+var define = __webpack_require__(56);
 
 module.exports = function shimValues() {
 	var polyfill = getPolyfill();
@@ -22768,7 +22768,7 @@ module.exports = function shimValues() {
 "use strict";
 
 
-var define = __webpack_require__(55);
+var define = __webpack_require__(56);
 
 var implementation = __webpack_require__(210);
 var getPolyfill = __webpack_require__(211);
@@ -22795,7 +22795,7 @@ module.exports = boundContains;
 "use strict";
 
 
-var define = __webpack_require__(55);
+var define = __webpack_require__(56);
 var getPolyfill = __webpack_require__(211);
 
 module.exports = function shimContains() {
@@ -25477,7 +25477,7 @@ exports['default'] = { create: create, resolve: resolve };
 "use strict";
 
 
-var define = __webpack_require__(55);
+var define = __webpack_require__(56);
 var callBind = __webpack_require__(94);
 
 var implementation = __webpack_require__(234);
@@ -25513,7 +25513,7 @@ var Get = __webpack_require__(113);
 var IsArray = __webpack_require__(114);
 var IsConstructor = __webpack_require__(401);
 var IsInteger = __webpack_require__(407);
-var Type = __webpack_require__(44);
+var Type = __webpack_require__(45);
 
 // https://ecma-international.org/ecma-262/6.0/#sec-arrayspeciescreate
 
@@ -26139,7 +26139,7 @@ var IsDataDescriptor = __webpack_require__(237);
 var IsPropertyKey = __webpack_require__(87);
 var SameValue = __webpack_require__(238);
 var ToPropertyDescriptor = __webpack_require__(239);
-var Type = __webpack_require__(44);
+var Type = __webpack_require__(45);
 
 // https://ecma-international.org/ecma-262/6.0/#sec-definepropertyorthrow
 
@@ -26225,7 +26225,7 @@ var has = __webpack_require__(74);
 
 var assertRecord = __webpack_require__(156);
 
-var Type = __webpack_require__(44);
+var Type = __webpack_require__(45);
 
 // https://ecma-international.org/ecma-262/6.0/#sec-isaccessordescriptor
 
@@ -26421,7 +26421,7 @@ var $TypeError = GetIntrinsic('%TypeError%');
 
 var CreateDataProperty = __webpack_require__(413);
 var IsPropertyKey = __webpack_require__(87);
-var Type = __webpack_require__(44);
+var Type = __webpack_require__(45);
 
 // // https://ecma-international.org/ecma-262/6.0/#sec-createdatapropertyorthrow
 
@@ -26459,7 +26459,7 @@ var IsDataDescriptor = __webpack_require__(237);
 var IsExtensible = __webpack_require__(418);
 var IsPropertyKey = __webpack_require__(87);
 var SameValue = __webpack_require__(238);
-var Type = __webpack_require__(44);
+var Type = __webpack_require__(45);
 
 // https://ecma-international.org/ecma-262/6.0/#sec-createdataproperty
 
@@ -26514,7 +26514,7 @@ var IsArray = __webpack_require__(114);
 var IsPropertyKey = __webpack_require__(87);
 var IsRegExp = __webpack_require__(416);
 var ToPropertyDescriptor = __webpack_require__(239);
-var Type = __webpack_require__(44);
+var Type = __webpack_require__(45);
 
 // https://ecma-international.org/ecma-262/6.0/#sec-ordinarygetownproperty
 
@@ -26701,7 +26701,7 @@ var GetIntrinsic = __webpack_require__(26);
 var $TypeError = GetIntrinsic('%TypeError%');
 
 var IsPropertyKey = __webpack_require__(87);
-var Type = __webpack_require__(44);
+var Type = __webpack_require__(45);
 
 // https://ecma-international.org/ecma-262/6.0/#sec-hasproperty
 
@@ -26729,7 +26729,7 @@ var $TypeError = GetIntrinsic('%TypeError%');
 
 var Get = __webpack_require__(113);
 var ToLength = __webpack_require__(244);
-var Type = __webpack_require__(44);
+var Type = __webpack_require__(45);
 
 // https://262.ecma-international.org/11.0/#sec-lengthofarraylike
 
@@ -27174,7 +27174,7 @@ module.exports = function ToObject(value) {
 "use strict";
 
 
-var define = __webpack_require__(55);
+var define = __webpack_require__(56);
 var getPolyfill = __webpack_require__(248);
 
 module.exports = function shimFlat() {
@@ -27195,7 +27195,7 @@ module.exports = function shimFlat() {
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global) {
 
-var define = __webpack_require__(55);
+var define = __webpack_require__(56);
 var isSymbol = __webpack_require__(247);
 
 var globalKey = '__ global cache key __';
@@ -27857,7 +27857,7 @@ select_filter_SelectFilter.propTypes = {
 };
 /* harmony default export */ var select_filter = (select_filter_SelectFilter);
 // EXTERNAL MODULE: external ["wp","compose"]
-var external_wp_compose_ = __webpack_require__(13);
+var external_wp_compose_ = __webpack_require__(14);
 
 // EXTERNAL MODULE: external ["wp","keycodes"]
 var external_wp_keycodes_ = __webpack_require__(27);
@@ -28503,13 +28503,14 @@ class control_Control extends external_wp_element_["Component"] {
       listboxId,
       onSearch,
       placeholder,
-      searchInputType
+      searchInputType,
+      autoComplete
     } = this.props;
     const {
       isActive
     } = this.state;
     return Object(external_wp_element_["createElement"])("input", {
-      autoComplete: "off",
+      autoComplete: autoComplete || 'off',
       className: "woocommerce-select-control__control-input",
       id: `woocommerce-select-control-${instanceId}__control-input`,
       ref: this.input,
@@ -28685,7 +28686,12 @@ control_Control.propTypes = {
   /**
    * Show all options on focusing, even if a query exists.
    */
-  showAllOnFocus: prop_types_default.a.bool
+  showAllOnFocus: prop_types_default.a.bool,
+
+  /**
+   * Control input autocomplete field, defaults: off.
+   */
+  autoComplete: prop_types_default.a.string
 };
 /* harmony default export */ var control = (control_Control);
 // CONCATENATED MODULE: ./packages/components/build-module/select-control/index.js
@@ -29199,7 +29205,12 @@ select_control_SelectControl.propTypes = {
   /**
    * Render results list positioned statically instead of absolutely.
    */
-  staticList: prop_types_default.a.bool
+  staticList: prop_types_default.a.bool,
+
+  /**
+   * autocomplete prop for the Control input field.
+   */
+  autoComplete: prop_types_default.a.string
 };
 select_control_SelectControl.defaultProps = {
   autofill: null,
@@ -29218,12 +29229,13 @@ select_control_SelectControl.defaultProps = {
   showAllOnFocus: false,
   showClearButton: false,
   hideBeforeSearch: false,
-  staticList: false
+  staticList: false,
+  autoComplete: 'off'
 };
 /* harmony default export */ var select_control = (Object(external_wp_compose_["compose"])([external_wp_components_["withSpokenMessages"], external_wp_compose_["withInstanceId"], external_wp_components_["withFocusOutside"] // this MUST be the innermost HOC as it calls handleFocusOutside
 ])(select_control_SelectControl));
 // EXTERNAL MODULE: external ["wp","url"]
-var external_wp_url_ = __webpack_require__(14);
+var external_wp_url_ = __webpack_require__(15);
 
 // EXTERNAL MODULE: external ["wp","apiFetch"]
 var external_wp_apiFetch_ = __webpack_require__(17);
@@ -32743,19 +32755,21 @@ class date_filter_DateFilter extends external_wp_element_["Component"] {
       beforeError: null,
       after,
       afterText: after ? after.format(date_filter_dateFormat) : '',
-      afterError: null
+      afterError: null,
+      rule: filter.rule
     };
     this.onSingleDateChange = this.onSingleDateChange.bind(this);
     this.onRangeDateChange = this.onRangeDateChange.bind(this);
+    this.onRuleChange = this.onRuleChange.bind(this);
   }
 
   getBetweenString() {
     return Object(external_wp_i18n_["_x"])('{{after /}}{{span}} and {{/span}}{{before /}}', 'Date range inputs arranged on a single line', 'woocommerce-admin');
   }
 
-  getScreenReaderText(filter, config) {
+  getScreenReaderText(filterRule, config) {
     const rule = Object(external_lodash_["find"])(config.rules, {
-      value: filter.rule
+      value: filterRule
     }) || {};
     const {
       before,
@@ -32846,6 +32860,35 @@ class date_filter_DateFilter extends external_wp_element_["Component"] {
     }
   }
 
+  onRuleChange(newRule) {
+    const {
+      onFilterChange
+    } = this.props;
+    const {
+      rule
+    } = this.state;
+    let newDateState = null;
+    let shouldResetValue = false;
+
+    if ([rule, newRule].includes('between')) {
+      newDateState = {
+        before: null,
+        beforeText: '',
+        beforeError: null,
+        after: null,
+        afterText: '',
+        afterError: null
+      };
+      shouldResetValue = true;
+    }
+
+    this.setState({
+      rule: newRule,
+      ...newDateState
+    });
+    onFilterChange('rule', newRule, shouldResetValue);
+  }
+
   isFutureDate(dateString) {
     return external_moment_default()().isBefore(external_moment_default()(dateString), 'day');
   }
@@ -32899,15 +32942,13 @@ class date_filter_DateFilter extends external_wp_element_["Component"] {
 
   getFilterInputs() {
     const {
-      filter
-    } = this.props;
-    const {
       before,
       beforeText,
-      beforeError
+      beforeError,
+      rule
     } = this.state;
 
-    if (filter.rule === 'between') {
+    if (rule === 'between') {
       return this.getRangeInput();
     }
 
@@ -32923,18 +32964,16 @@ class date_filter_DateFilter extends external_wp_element_["Component"] {
     const {
       className,
       config,
-      filter,
-      isEnglish,
-      onFilterChange
+      isEnglish
     } = this.props;
     const {
       rule
-    } = filter;
+    } = this.state;
     const {
       labels,
       rules
     } = config;
-    const screenReaderText = this.getScreenReaderText(filter, config);
+    const screenReaderText = this.getScreenReaderText(rule, config);
     const children = lib_default()({
       mixedString: labels.title,
       components: {
@@ -32945,7 +32984,7 @@ class date_filter_DateFilter extends external_wp_element_["Component"] {
           className: classnames_default()(className, 'woocommerce-filters-advanced__rule'),
           options: rules,
           value: rule,
-          onChange: Object(external_lodash_["partial"])(onFilterChange, 'rule'),
+          onChange: this.onRuleChange,
           "aria-label": labels.rule
         }),
         filter: Object(external_wp_element_["createElement"])("div", {
@@ -33392,10 +33431,13 @@ class advanced_filters_AdvancedFilters extends external_wp_element_["Component"]
     });
   }
 
-  onFilterChange(index, property, value) {
+  onFilterChange(index, property, value, shouldResetValue = false) {
     const newActiveFilters = [...this.state.activeFilters];
     newActiveFilters[index] = { ...newActiveFilters[index],
-      [property]: value
+      [property]: value,
+      ...(shouldResetValue === true ? {
+        value: null
+      } : {})
     };
     this.setState({
       activeFilters: newActiveFilters
@@ -34192,7 +34234,7 @@ function memoizeOne(resultFn, isEqual) {
 /* harmony default export */ var memoize_one_esm = (memoizeOne);
 
 // EXTERNAL MODULE: external ["wp","viewport"]
-var external_wp_viewport_ = __webpack_require__(52);
+var external_wp_viewport_ = __webpack_require__(53);
 
 // EXTERNAL MODULE: ./node_modules/dompurify/dist/purify.js
 var purify = __webpack_require__(66);
@@ -41970,7 +42012,7 @@ compare_filter_CompareFilter.defaultProps = {
   query: {}
 };
 // EXTERNAL MODULE: external ["wp","date"]
-var external_wp_date_ = __webpack_require__(57);
+var external_wp_date_ = __webpack_require__(58);
 
 // CONCATENATED MODULE: ./packages/components/build-module/date/index.js
 /**
@@ -42878,7 +42920,7 @@ class date_range_filter_picker_DateRangeFilterPicker extends external_wp_element
       className: "woocommerce-filters-filter"
     }, Object(external_wp_element_["createElement"])("span", {
       className: "woocommerce-filters-label"
-    }, Object(external_wp_i18n_["__"])('Date Range', 'woocommerce-admin'), ":"), Object(external_wp_element_["createElement"])(external_wp_components_["Dropdown"], {
+    }, Object(external_wp_i18n_["__"])('Date range', 'woocommerce-admin'), ":"), Object(external_wp_element_["createElement"])(external_wp_components_["Dropdown"], {
       contentClassName: contentClasses,
       position: "bottom",
       expandOnMobile: true,
@@ -43192,7 +43234,7 @@ empty_content_EmptyContent.defaultProps = {
 };
 /* harmony default export */ var empty_content = (empty_content_EmptyContent);
 // EXTERNAL MODULE: external ["wp","deprecated"]
-var external_wp_deprecated_ = __webpack_require__(58);
+var external_wp_deprecated_ = __webpack_require__(43);
 var external_wp_deprecated_default = /*#__PURE__*/__webpack_require__.n(external_wp_deprecated_);
 
 // CONCATENATED MODULE: ./packages/components/build-module/form/index.js
@@ -46627,7 +46669,7 @@ SummaryNumber.propTypes = {
   onToggle: prop_types_default.a.func,
 
   /**
-   * A string description of the previous value's timeframe, ex "Previous Year:".
+   * A string description of the previous value's timeframe, ex "Previous year:".
    */
   prevLabel: prop_types_default.a.string,
 
@@ -46661,7 +46703,7 @@ SummaryNumber.defaultProps = {
   href: '',
   hrefType: 'wc-admin',
   isOpen: false,
-  prevLabel: Object(external_wp_i18n_["__"])('Previous Period:', 'woocommerce-admin'),
+  prevLabel: Object(external_wp_i18n_["__"])('Previous period:', 'woocommerce-admin'),
   reverseTrend: false,
   selected: false,
   onLinkClickCallback: external_lodash_["noop"]
@@ -46876,7 +46918,7 @@ class table_Table extends external_wp_element_["Component"] {
       const labelId = `header-${instanceId}-${i}`;
       const thProps = {
         className: classnames_default()('woocommerce-table__header', cellClassName, {
-          'is-left-aligned': isLeftAligned,
+          'is-left-aligned': isLeftAligned || !isNumeric,
           'is-sortable': isSortable,
           'is-sorted': sortedBy === key,
           'is-numeric': isNumeric
@@ -46924,7 +46966,7 @@ class table_Table extends external_wp_element_["Component"] {
       const isHeader = rowHeader === j;
       const Cell = isHeader ? 'th' : 'td';
       const cellClasses = classnames_default()('woocommerce-table__item', cellClassName, {
-        'is-left-aligned': isLeftAligned,
+        'is-left-aligned': isLeftAligned || !isNumeric,
         'is-numeric': isNumeric,
         'is-sorted': sortedBy === headers[j].key
       });
@@ -47377,10 +47419,10 @@ class table_TableCard extends external_wp_element_["Component"] {
     return Object(external_wp_element_["createElement"])(external_wp_components_["Card"], {
       className: classes
     }, Object(external_wp_element_["createElement"])(external_wp_components_["CardHeader"], null, Object(external_wp_element_["createElement"])(external_wp_components_["__experimentalText"], {
-      variant: "title.small",
+      size: 16,
+      weight: 600,
       as: "h2",
-      size: "20",
-      lineHeight: "28px"
+      color: "#23282d"
     }, title), Object(external_wp_element_["createElement"])("div", {
       className: "woocommerce-table__actions"
     }, actions), showMenu && Object(external_wp_element_["createElement"])(ellipsis_menu, {
