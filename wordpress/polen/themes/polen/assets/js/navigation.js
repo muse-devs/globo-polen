@@ -37,6 +37,7 @@ jQuery(document).ready(function () {
 
 function showMenu() {
   if (screen.width < 540) {
+    document.getElementsByTagName("html")[0].classList.add("no-scroll");
     document.body.classList.add("no-scroll");
   }
 	menu_content.classList.add("show");
@@ -44,6 +45,7 @@ function showMenu() {
 }
 
 function hideMenu() {
+  document.getElementsByTagName("html")[0].classList.remove("no-scroll");
   document.body.classList.remove("no-scroll");
 	menu_content.classList.remove("show");
   menu_overlay.classList.remove("show");
