@@ -36,7 +36,9 @@ jQuery(document).ready(function () {
 });
 
 function showMenu() {
-  document.body.classList.add("no-scroll");
+  if (screen.width < 540) {
+    document.body.classList.add("no-scroll");
+  }
 	menu_content.classList.add("show");
   menu_overlay.classList.add("show");
 }

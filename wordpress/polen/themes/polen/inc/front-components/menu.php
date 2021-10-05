@@ -60,9 +60,17 @@ function pol_get_menu()
               Login
             </a>
           </div>
-          <a class="dropbtn">
-            <?php pol_menu_icon(); ?>
-          </a>
+          <div class="d-md-none">
+            <a class="dropbtn">
+              <?php pol_menu_icon(); ?>
+            </a>
+            <div id="menu-bg" class="menu-bg"></div>
+            <div class="dropdown-content background text">
+              <?php pol_menu_extras(); ?>
+              <a href="<?php echo polen_get_login_url(); ?>" class="btn btn-outline-dark btn-lg btn-block mt-4">Entrar</a>
+              <a class="menu-close"><?php Icon_Class::polen_icon_close(); ?></a>
+            </div>
+          </div>
         <?php
         }
         ?>
