@@ -1,6 +1,7 @@
 <?php
 
 require TEMPLATE_DIR . '/inc/front-components/global.php';
+require TEMPLATE_DIR . '/inc/front-components/menu.php';
 require TEMPLATE_DIR . '/inc/front-components/video-player.php';
 require TEMPLATE_DIR . '/inc/front-components/talent.php';
 require TEMPLATE_DIR . '/inc/front-components/comments.php';
