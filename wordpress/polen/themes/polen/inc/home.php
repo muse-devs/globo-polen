@@ -18,9 +18,9 @@ get_header();
 	<div class="row">
 		<div class="col-12">
 			<div id="product-carousel" class="owl-carousel owl-theme">
-        <div class="item">
-					<?php mc_get_home_banner_gustavo("/masterclass/gustavo-mendes/seja-outro-sendo-voce/inscricao"); ?>
-				</div>
+        <!-- <div class="item">
+					<?php //mc_get_home_banner_gustavo("/masterclass/gustavo-mendes/seja-outro-sendo-voce/inscricao"); ?>
+				</div> -->
 				<div class="item">
 					<?php mc_get_home_banner(master_class_url_home()); ?>
 				</div>
