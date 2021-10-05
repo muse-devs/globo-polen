@@ -514,6 +514,31 @@ class Polen_Plugin_Settings
                 )
             )
         ) );
+
+
+         // Configurar Emails
+         \Redux::set_section( $opt_name, array(
+            'title'            => esc_html__( 'Configurar emails', 'polen' ),
+            'id'               => 'polen_email_expire_order',
+            'icon'             => 'dashicons:email',
+            'subsection'       => false,
+            'fields'           => array(
+                array(
+                    'id'       => 'email_emails_order_expire_tomorrow',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Emails Expirar Pedidos', 'polen'),
+                    'desc'     => 'Emails serarados por Virgura',
+                    'default'  => '',
+                ),
+                array(
+                    'id'       => 'recipient_email_polen_company',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Configurar email de destinatário polen empresas', 'polen'),
+                    'desc'     => 'Emails serarados por Virgura',
+                    'default'  => '',
+                ),
+            )
+        ) );
     }
 
     public function save( $args ) {
