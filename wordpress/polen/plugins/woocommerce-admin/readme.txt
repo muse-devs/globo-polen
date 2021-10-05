@@ -2,9 +2,9 @@
 Contributors: woocommerce, automattic
 Tags: ecommerce, e-commerce, store, sales, reports, analytics, dashboard, activity, notices, insights, stats, woo commerce, woocommerce
 Requires at least: 5.4.0
-Tested up to: 5.7.0
+Tested up to: 5.8.1
 Requires PHP: 7.0
-Stable tag: 2.6.4
+Stable tag: 2.7.1
 License: GPLv3
 License URI: https://github.com/woocommerce/woocommerce-admin/blob/main/license.txt
 
@@ -84,6 +84,9 @@ Release and roadmap notes are available on the [WooCommerce Developers Blog](htt
 - Fix: Currency display on Orders activity card on homescreen #7181
 - Fix: Fix obsolete key property in gateway defaults #7229
 - Fix: Fixing button state logic for remote payment gateways #7200
+- Add: Add a logger to Remote Inbox Notifications #7194
+- Add: Add a logger to the rule evaluator #7194
+- Fix: WCPay not working in local payments task #7151
 - Fix: Include onboarding settings on the analytic pages #7109
 - Fix: Load Analytics API only when feature is turned on #7193
 - Fix: Localize string for description #7219

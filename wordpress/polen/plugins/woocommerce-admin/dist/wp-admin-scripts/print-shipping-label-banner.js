@@ -107,7 +107,7 @@ this["wc"] = this["wc"] || {}; this["wc"]["printShippingLabelBanner"] =
 if (false) { var throwOnDirectAccess, ReactIs; } else {
   // By explicitly using `prop-types` you are opting into new production behavior.
   // http://fb.me/prop-types-in-prod
-  module.exports = __webpack_require__(46)();
+  module.exports = __webpack_require__(47)();
 }
 
 
@@ -208,13 +208,6 @@ function Icon(_ref) {
 /***/ }),
 
 /***/ 13:
-/***/ (function(module, exports) {
-
-(function() { module.exports = window["wp"]["compose"]; }());
-
-/***/ }),
-
-/***/ 15:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -245,6 +238,11 @@ const SOURCE = Object.keys(settings).reduce((source, key) => {
 
   return source;
 }, {});
+Object.keys(settings.admin || {}).forEach(key => {
+  if (!mutableSources.includes(key)) {
+    SOURCE[key] = settings.admin[key];
+  }
+});
 const ADMIN_URL = SOURCE.adminUrl;
 const COUNTRIES = SOURCE.countries;
 const CURRENCY = SOURCE.currency;
@@ -333,6 +331,13 @@ function enqueueScript(script) {
     document.body.appendChild(domElement);
   });
 }
+
+/***/ }),
+
+/***/ 14:
+/***/ (function(module, exports) {
+
+(function() { module.exports = window["wp"]["compose"]; }());
 
 /***/ }),
 
@@ -590,78 +595,6 @@ module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
 
-/***/ 46:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-
-
-var ReactPropTypesSecret = __webpack_require__(47);
-
-function emptyFunction() {}
-function emptyFunctionWithReset() {}
-emptyFunctionWithReset.resetWarningCache = emptyFunction;
-
-module.exports = function() {
-  function shim(props, propName, componentName, location, propFullName, secret) {
-    if (secret === ReactPropTypesSecret) {
-      // It is still safe when called from React.
-      return;
-    }
-    var err = new Error(
-      'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +
-      'Use PropTypes.checkPropTypes() to call them. ' +
-      'Read more at http://fb.me/use-check-prop-types'
-    );
-    err.name = 'Invariant Violation';
-    throw err;
-  };
-  shim.isRequired = shim;
-  function getShim() {
-    return shim;
-  };
-  // Important!
-  // Keep this list in sync with production version in `./factoryWithTypeCheckers.js`.
-  var ReactPropTypes = {
-    array: shim,
-    bool: shim,
-    func: shim,
-    number: shim,
-    object: shim,
-    string: shim,
-    symbol: shim,
-
-    any: shim,
-    arrayOf: getShim,
-    element: shim,
-    elementType: shim,
-    instanceOf: getShim,
-    node: shim,
-    objectOf: getShim,
-    oneOf: getShim,
-    oneOfType: getShim,
-    shape: getShim,
-    exact: getShim,
-
-    checkPropTypes: emptyFunctionWithReset,
-    resetWarningCache: emptyFunction
-  };
-
-  ReactPropTypes.PropTypes = ReactPropTypes;
-
-  return ReactPropTypes;
-};
-
-
-/***/ }),
-
 /***/ 464:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -675,6 +608,9 @@ var external_wp_element_ = __webpack_require__(0);
 // EXTERNAL MODULE: external ["wc","data"]
 var external_wc_data_ = __webpack_require__(11);
 
+// EXTERNAL MODULE: ./packages/wc-admin-settings/build-module/index.js
+var build_module = __webpack_require__(13);
+
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/defineProperty.js
 var defineProperty = __webpack_require__(38);
 var defineProperty_default = /*#__PURE__*/__webpack_require__.n(defineProperty);
@@ -686,7 +622,7 @@ var external_wp_i18n_ = __webpack_require__(2);
 var external_wp_components_ = __webpack_require__(4);
 
 // EXTERNAL MODULE: external ["wp","compose"]
-var external_wp_compose_ = __webpack_require__(13);
+var external_wp_compose_ = __webpack_require__(14);
 
 // EXTERNAL MODULE: ./node_modules/interpolate-components/lib/index.js
 var lib = __webpack_require__(18);
@@ -701,9 +637,6 @@ var external_lodash_ = __webpack_require__(3);
 
 // EXTERNAL MODULE: external ["wp","data"]
 var external_wp_data_ = __webpack_require__(7);
-
-// EXTERNAL MODULE: ./packages/wc-admin-settings/build-module/index.js
-var build_module = __webpack_require__(15);
 
 // EXTERNAL MODULE: external ["wc","tracks"]
 var external_wc_tracks_ = __webpack_require__(16);
@@ -1319,6 +1252,7 @@ shipping_banner_ShippingBanner.propTypes = {
  */
 
 
+
 /**
  * Internal dependencies
  */
@@ -1327,8 +1261,8 @@ shipping_banner_ShippingBanner.propTypes = {
 const metaBox = document.getElementById('wc-admin-shipping-banner-root');
 const print_shipping_label_banner_args = metaBox.dataset.args && JSON.parse(metaBox.dataset.args) || {}; // Render the header.
 
-const HydratedShippingBanner = Object(external_wc_data_["withPluginsHydration"])({ ...window.wcSettings.plugins,
-  jetpackStatus: window.wcSettings.dataEndpoints.jetpackStatus
+const HydratedShippingBanner = Object(external_wc_data_["withPluginsHydration"])({ ...Object(build_module["f" /* getSetting */])('plugins'),
+  jetpackStatus: Object(build_module["f" /* getSetting */])('dataEndpoints', {}).jetpackStatus
 })(shipping_banner);
 Object(external_wp_element_["render"])(Object(external_wp_element_["createElement"])(HydratedShippingBanner, {
   itemsCount: print_shipping_label_banner_args.items
@@ -1349,6 +1283,78 @@ Object(external_wp_element_["render"])(Object(external_wp_element_["createElemen
 
 
 
+var ReactPropTypesSecret = __webpack_require__(48);
+
+function emptyFunction() {}
+function emptyFunctionWithReset() {}
+emptyFunctionWithReset.resetWarningCache = emptyFunction;
+
+module.exports = function() {
+  function shim(props, propName, componentName, location, propFullName, secret) {
+    if (secret === ReactPropTypesSecret) {
+      // It is still safe when called from React.
+      return;
+    }
+    var err = new Error(
+      'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +
+      'Use PropTypes.checkPropTypes() to call them. ' +
+      'Read more at http://fb.me/use-check-prop-types'
+    );
+    err.name = 'Invariant Violation';
+    throw err;
+  };
+  shim.isRequired = shim;
+  function getShim() {
+    return shim;
+  };
+  // Important!
+  // Keep this list in sync with production version in `./factoryWithTypeCheckers.js`.
+  var ReactPropTypes = {
+    array: shim,
+    bool: shim,
+    func: shim,
+    number: shim,
+    object: shim,
+    string: shim,
+    symbol: shim,
+
+    any: shim,
+    arrayOf: getShim,
+    element: shim,
+    elementType: shim,
+    instanceOf: getShim,
+    node: shim,
+    objectOf: getShim,
+    oneOf: getShim,
+    oneOfType: getShim,
+    shape: getShim,
+    exact: getShim,
+
+    checkPropTypes: emptyFunctionWithReset,
+    resetWarningCache: emptyFunction
+  };
+
+  ReactPropTypes.PropTypes = ReactPropTypes;
+
+  return ReactPropTypes;
+};
+
+
+/***/ }),
+
+/***/ 48:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+
+
 var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 
 module.exports = ReactPropTypesSecret;
@@ -1356,7 +1362,14 @@ module.exports = ReactPropTypesSecret;
 
 /***/ }),
 
-/***/ 49:
+/***/ 5:
+/***/ (function(module, exports) {
+
+(function() { module.exports = window["React"]; }());
+
+/***/ }),
+
+/***/ 50:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1399,13 +1412,6 @@ module.exports = emptyFunction;
 
 /***/ }),
 
-/***/ 5:
-/***/ (function(module, exports) {
-
-(function() { module.exports = window["React"]; }());
-
-/***/ }),
-
 /***/ 69:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1425,7 +1431,7 @@ var REACT_ELEMENT_TYPE =
   (typeof Symbol === 'function' && Symbol.for && Symbol.for('react.element')) ||
   0xeac7;
 
-var emptyFunction = __webpack_require__(49);
+var emptyFunction = __webpack_require__(50);
 var invariant = __webpack_require__(70);
 var warning = __webpack_require__(71);
 
@@ -1810,7 +1816,7 @@ module.exports = invariant;
 
 
 
-var emptyFunction = __webpack_require__(49);
+var emptyFunction = __webpack_require__(50);
 
 /**
  * Similar to invariant but only logs a warning if the condition is not met.
