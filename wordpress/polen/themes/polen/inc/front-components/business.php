@@ -16,7 +16,7 @@ function bus_get_header()
     <div class="col-12 col-md-6 m-auto">
       <h1 class="title text-center mb-4">Polen para Empresas</h1>
       <p class="description text-center mb-5">Aproveite o poder das celebridades para espalhar a emoção e potencializar o seu negócio! Tudo com muita rapidez e facilidade para melhor atender à sua empresa.</p>
-      <a href="#bus-form-wrapper" class="btn btn-primary btn-lg btn-block gradient">Pedir um Polen para o meu negócio</a>
+      <a href="#bus-form-wrapper" class="btn btn-primary btn-lg btn-block">Pedir um Polen para o meu negócio</a>
     </div>
   </section>
 <?php
@@ -168,7 +168,7 @@ function bus_get_form()
           <span class="label">Mensagem</span>
           <textarea name="message" placeholder="Como você pretende usar os vídeos Polen para sua empresa?" rows="6" required></textarea>
         </label>
-        <input type="submit" class="btn btn-primary btn-lg btn-block gradient mt-4" value="Enviar" />
+        <input type="submit" class="btn btn-primary btn-lg btn-block mt-4" value="Enviar" />
       </form>
     </div>
   </section>
