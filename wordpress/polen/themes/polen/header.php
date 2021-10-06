@@ -40,4 +40,4 @@
 			<?php if(!polen_is_landingpage()) : ?>
         <?php pol_get_menu(); ?>
 			<?php endif; ?>
-		</header><!-- #masthead -->
+		</header>

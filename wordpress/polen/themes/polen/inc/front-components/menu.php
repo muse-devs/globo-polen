@@ -1,5 +1,4 @@
 <?php
-
 use Polen\Includes\Polen_Talent;
 
 function pol_get_menu()

@@ -22,8 +22,13 @@ body {
 }
 
 .no-scroll {
-  position: fixed;
   overflow: hidden;
+  @include media-breakpoint-down(xs) {
+    position: fixed;
+    .link {
+      // pointer-events: none;
+    }
+  }
 }
 
 img {
