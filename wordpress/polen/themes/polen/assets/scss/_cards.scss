@@ -312,6 +312,7 @@
 	margin: 0 -15px;
 	height: 94.6vw;
 	overflow: hidden;
+  border-radius: 8px;
 	//background-color: var(--primary);
 	@include media-breakpoint-up(md) {
 		height: 396px;
@@ -375,7 +376,7 @@
 		padding: 15px;
 		top: 30%;
 		width: 100%;
-		@include media-breakpoint-down(sm) {
+		@include media-breakpoint-down(md) {
 			padding: 0px 30px;
 			top: 50%;
 			left: 0;
