@@ -4,12 +4,16 @@ var menu_content = document.querySelector(".dropdown-content");
 var menu_overlay = document.querySelector("#menu-bg");
 var menu_close = document.querySelector(".menu-close");
 
+function isMobile() {
+  return document.body.clientWidth < 753;
+}
+
 jQuery(document).ready(function () {
 	if (!menu) {
 		return;
 	}
 	menu.addEventListener("mouseover", function () {
-		if (screen.width < 540) {
+		if (isMobile()) {
 			return;
 		}
 		showMenu();
@@ -20,7 +24,7 @@ jQuery(document).ready(function () {
 	});
 
 	menu.addEventListener("mouseout", function () {
-		if (screen.width < 540) {
+		if (isMobile()) {
 			return;
 		}
 		hideMenu();
@@ -36,7 +40,7 @@ jQuery(document).ready(function () {
 });
 
 function showMenu() {
-  if (screen.width < 540) {
+  if (isMobile()) {
     document.getElementsByTagName("html")[0].classList.add("no-scroll");
     document.body.classList.add("no-scroll");
   }
