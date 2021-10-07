@@ -11393,6 +11393,17 @@ textarea {
   .video-banner .content {
     width: 100% !important;
     margin: 0px !important; }
+    .video-banner .content .btn-md {
+      font-size: 17px;
+      padding: 12px 20px; }
+      @media (max-width: 767.98px) {
+        .video-banner .content .btn-md {
+          font-size: 14px; } }
+    .video-banner .content .title {
+      line-height: 130% !important; }
+      @media (max-width: 767.98px) {
+        .video-banner .content .title {
+          font-size: 18px !important; } }
   .video-banner .video {
     width: 100%;
     height: auto; }
@@ -11400,6 +11411,10 @@ textarea {
       .video-banner .video {
         height: 100%;
         width: auto; } }
+    .video-banner .video ::-webkit-media-controls {
+      display: none !important; }
+    .video-banner .video ::-webkit-media-controls-start-playback-button {
+      display: none !important; }
 
 .top-banner {
   position: relative;
