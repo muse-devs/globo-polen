@@ -285,12 +285,35 @@
 	}
 }
 
+.video-banner {
+  height: 400px!important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include media-breakpoint-down(md) {
+    height: 230px!important;
+  }
+  .content {
+    width: 100%!important;
+    margin: 0px!important;
+  }
+  .video {
+    width: 100%;
+    height: auto;
+    @include media-breakpoint-down(sm) {
+      height: 100%;
+      width: auto;
+    }
+  }
+}
+
 .top-banner {
 	position: relative;
 	margin: 0 -15px;
 	height: 94.6vw;
 	overflow: hidden;
-	background-color: var(--primary);
+  border-radius: 8px;
+	//background-color: var(--primary);
 	@include media-breakpoint-up(md) {
 		height: 396px;
 	}
@@ -351,11 +374,11 @@
 	.content {
 		position: absolute;
 		padding: 15px;
-		top: 25%;
+		top: 30%;
 		width: 100%;
-		@include media-breakpoint-down(sm) {
+		@include media-breakpoint-down(md) {
 			padding: 0px 30px;
-			top: 60%;
+			top: 50%;
 			left: 0;
 			right: 0;
 			transform: translateY(-50%);
