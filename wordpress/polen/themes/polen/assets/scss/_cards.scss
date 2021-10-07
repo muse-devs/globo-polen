@@ -296,6 +296,19 @@
   .content {
     width: 100%!important;
     margin: 0px!important;
+    .btn-md {
+      font-size: 17px;
+      padding: 12px 20px;
+      @include media-breakpoint-down(sm) {
+        font-size: 14px;
+      }
+    }
+    .title {
+      line-height: 130%!important;
+      @include media-breakpoint-down(sm) {
+        font-size: 18px!important;
+      }
+    }
   }
   .video {
     width: 100%;
@@ -303,6 +316,12 @@
     @include media-breakpoint-down(sm) {
       height: 100%;
       width: auto;
+    }
+    ::-webkit-media-controls {
+      display:none !important;
+    }
+    ::-webkit-media-controls-start-playback-button {
+      display: none !important;
     }
   }
 }
