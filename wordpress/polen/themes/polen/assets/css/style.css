@@ -11825,6 +11825,7 @@ textarea {
   box-sizing: border-box;
   border-radius: 200px;
   background: #ffff;
+  padding: 4px 8px;
   transition: 0.2s; }
   .category-button img {
     margin-right: 0.5em; }
