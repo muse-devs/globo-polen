@@ -39,6 +39,7 @@ class Polen_Admin {
                 new Polen_Admin_Order_Custom_Fields( $static );
                 new Polen_Cupom_Create_Controller( $static );
                 new Polen_Admin_Video_Info( $static );
+                new Polen_Admin_B2B_Product_Fields( $static );
         }
 
 	/**
