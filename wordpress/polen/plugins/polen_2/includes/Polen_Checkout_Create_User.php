@@ -32,8 +32,9 @@ class Polen_Checkout_Create_User
             }
             if( empty( $user ) ) {
                 $user_password = wp_generate_password( 5, false ) . random_int( 0, 99 );
-                $email_registered = wc_create_new_customer( $user_email, $user_email, $user_password );
-                $user = get_user_by( 'ID', $email_registered );
+                $id_registered = wc_create_new_customer( $user_email, $user_email, $user_password, ['created_by' => 'checkout'] );
+                $user = get_user_by( 'ID', $id_registered );
+                // add_user_meta( $user->ID, 'created_by', 'checkout', true );
             }
             $user_id = $user->ID;
         }
