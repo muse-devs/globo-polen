@@ -336,6 +336,11 @@ require_once TEMPLATE_DIR . '/master_class/function_master_class.php';
 
 require_once TEMPLATE_DIR . '/enterprise/function_enterprise.php';
 
+/**
+ * Função para retornar categorias destacadas
+ */
+require_once TEMPLATE_DIR . '/inc/highlight_categories.php';
+
 
 add_action('wc_gateway_stripe_process_response', function($response, $order) {
 	// $response
