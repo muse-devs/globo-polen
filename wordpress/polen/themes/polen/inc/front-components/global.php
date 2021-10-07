@@ -116,7 +116,7 @@ function polen_front_get_categories_buttons() {
           foreach($categories as $categorie){
             echo "<a href=/categoria/".$categorie["slug"].">";
               echo '<div class="btn btn-outline-dark category-button">';
-                echo '<img src="http://'.$categorie["img"].'"></img>';
+                echo '<img src="'.$categorie["img"].'"></img>';
                 echo $categorie["name"];
               echo '</div>';
             echo "</a>";
