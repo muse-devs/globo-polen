@@ -949,18 +949,14 @@
   box-sizing: border-box;
   border-radius: 200px;
   background: #ffff;
-  transition: 0.3s;
+  transition: 0.2s;
   img {
     margin-right: 0.5em;
   }
 }
 
 .category-button:hover {
-  background: linear-gradient(
-    100.13deg,
-    #fd6c36 10.5%,
-    #d7198b 94.06%
-  ) !important;
+  background: linear-gradient(90deg, #FAA629 1.23%, #FC6C36 100%)!important;
   border: 1px solid #fff;
-  transition: 0.3s;
+  transition: 0.2s;
 }
