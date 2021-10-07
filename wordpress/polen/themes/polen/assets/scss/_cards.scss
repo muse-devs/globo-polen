@@ -309,7 +309,6 @@
 
 .top-banner {
 	position: relative;
-	margin: 0 -15px;
 	height: 94.6vw;
 	overflow: hidden;
   border-radius: 8px;
@@ -933,4 +932,35 @@
 			}
 		}
 	}
+}
+
+.category-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  font-weight: 400;
+  color: var(--category);
+  font-size: 16px;
+  line-height: 18.75px;
+  margin-bottom: 1em;
+  margin-right: 1em;
+  border: 1px solid var(--category);
+  box-sizing: border-box;
+  border-radius: 200px;
+  background: #ffff;
+  transition: 0.3s;
+  img {
+    margin-right: 0.5em;
+  }
+}
+
+.category-button:hover {
+  background: linear-gradient(
+    100.13deg,
+    #fd6c36 10.5%,
+    #d7198b 94.06%
+  ) !important;
+  border: 1px solid #fff;
+  transition: 0.3s;
 }

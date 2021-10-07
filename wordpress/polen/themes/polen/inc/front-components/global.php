@@ -106,6 +106,28 @@ function polen_front_get_banner_with_carousel($social = false)
 <?php
 }
 
+function polen_front_get_categories_buttons() {
+?>
+  <section>
+    <div class="row mb-2">
+      <div class="col-12 d-flex justify-content-start flex-wrap">
+        <?php
+          $categories = highlighted_categories();
+          foreach($categories as $categorie){
+            echo "<a href=/categoria/".$categorie["slug"].">";
+              echo '<div class="btn btn-outline-dark category-button">';
+                echo '<img src="http://'.$categorie["img"].'"></img>';
+                echo $categorie["name"];
+              echo '</div>';
+            echo "</a>";
+          }
+        ?>
+      </div>
+    </div>
+  </section>
+<?php
+}
+
 function polen_front_get_banner_video() {
   $mobile_video = array(
     "poster" => TEMPLATE_URI . "/assets/img/capa-mobile.jpg",
