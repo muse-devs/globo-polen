@@ -403,6 +403,11 @@ function polAjaxForm(formName, callBack, callBackError, reset = true) {
 		});
 }
 
+function polRemoveElement(el) {
+  const _this = document.querySelector(el);
+  _this.parentNode.removeChild(_this);
+}
+
 // -------------------------------------------------------------------------
 
 jQuery(document).ready(function () {
