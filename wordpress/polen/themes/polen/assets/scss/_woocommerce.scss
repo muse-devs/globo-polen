@@ -171,6 +171,7 @@ select.form-control:not([size]):not([multiple]) {
 
 .woocommerce .woocommerce-ordering,
 .woocommerce-page .woocommerce-ordering {
+  margin: 1rem 0 0;
 	@include media-breakpoint-down(sm) {
 		float: left;
 	}
