@@ -30,7 +30,7 @@ Por isso, viemos te desejar boas-vindas à Polen.</p>
 			?>
 <p>Email: <?= $user_login; ?><br>
 Senha Provisória: <?=$user_new_password;?></p>
-				<p><?php printf( esc_html__( 'Your password has been automatically generated: %s', 'woocommerce' ), '<strong>' . esc_html( $user_new_password ) . '</strong>' ); ?></p>
+				
 			<?php 
 	}
 } else {
