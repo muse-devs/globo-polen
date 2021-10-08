@@ -107,6 +107,64 @@ function polen_front_get_banner_with_carousel($social = false)
 <?php
 }
 
+function polen_front_get_categories_buttons() {
+?>
+  <section>
+    <div class="row mb-2">
+      <div class="col-12 d-flex justify-content-start flex-wrap">
+        <?php
+          $categories = highlighted_categories();
+          foreach($categories as $categorie){
+            echo "<a href=/categoria/".$categorie["slug"].">";
+              echo '<div class="btn btn-outline-dark category-button">';
+                echo '<img src="'.$categorie["img"].'"></img>';
+                echo $categorie["name"];
+              echo '</div>';
+            echo "</a>";
+          }
+        ?>
+      </div>
+    </div>
+  </section>
+<?php
+}
+
+function polen_front_get_banner_video() {
+  $mobile_video = array(
+    "poster" => TEMPLATE_URI . "/assets/img/capa-mobile.jpg",
+    "video" => TEMPLATE_URI . "/assets/video/home-mobile.mp4",
+    "class" => "video-mobile"
+  );
+  $desktop_video = array(
+    "poster" => TEMPLATE_URI . "/assets/img/capa-desktop.jpg",
+    "video" => TEMPLATE_URI . "/assets/video/home-desktop.mp4",
+    "class" => "video-desktop"
+  );
+  ?>
+  <section class="top-banner video-banner mb-4">
+    <video class="video" autoplay muted loop playsinline poster="<?php echo polen_is_mobile() ? $mobile_video['poster'] : $desktop_video['poster']; ?>">
+      <source src="<?php echo polen_is_mobile() ? $mobile_video['video'] : $desktop_video['video']; ?>" type="video/mp4">
+    </video>
+    <div class="content">
+      <div class="row">
+        <div class="col-12 mb-3">
+          <h2 class="title text-center">Emocione quem você ama com videos personalizados</h2>
+        </div>
+        <div class="col-12 d-flex justify-content-center">
+          <a href="<?php echo polen_get_all_talents_url(); ?>" class="btn btn-primary btn-md">Ver todos os artistas</a>
+        </div>
+      </div>
+    </div>
+    <script>
+      const home_video = {
+        mobile: <?php echo json_encode($mobile_video); ?>,
+        desktop: <?php echo json_encode($desktop_video); ?>
+      }
+    </script>
+  </section>
+<?php
+}
+
 function polen_front_get_banner()
 {
   // $mobile_video = array(
