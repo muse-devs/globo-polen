@@ -1103,6 +1103,9 @@
   padding: 4px 8px;
   transition: 0.2s;
   min-height: 34px;
+  @include media-breakpoint-down(xs) {
+    margin-right: 4px;
+  }
   img {
     margin-right: 0.5em;
   }

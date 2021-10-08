@@ -11977,6 +11977,9 @@ textarea {
   padding: 4px 8px;
   transition: 0.2s;
   min-height: 34px; }
+  @media (max-width: 575.98px) {
+    .category-button {
+      margin-right: 4px; } }
   .category-button img {
     margin-right: 0.5em; }
 
