@@ -23,7 +23,7 @@ Senha Provisória: <?= $password_generated; ?>
 </p>
 
 <p class="btn_wrap">
-	<a href="<<?php echo get_permalink( get_option('woocommerce_myaccount_page_id') ); ?>" class="btn" target="_blank">Acessar minha conta</a>
+	<a href="<?php echo get_permalink( get_option('woocommerce_myaccount_page_id') ); ?>" class="btn" target="_blank">Acessar minha conta</a>
 </p>
 <?php
 
