@@ -11959,6 +11959,14 @@ textarea {
     border: none;
     background: none; }
 
+.content-category {
+  display: flex;
+  justify-content: start;
+  flex-wrap: wrap; }
+  @media (max-width: 575.98px) {
+    .content-category {
+      justify-content: space-between; } }
+
 .category-button {
   display: flex;
   align-items: center;
@@ -11979,7 +11987,7 @@ textarea {
   min-height: 34px; }
   @media (max-width: 575.98px) {
     .category-button {
-      margin-right: 4px; } }
+      margin-right: 8px; } }
   .category-button img {
     margin-right: 0.5em; }
 
