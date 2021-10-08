@@ -10,6 +10,8 @@ use WP_Error;
  */
 class Polen_Checkout_Create_User
 {
+    const META_KEY_CREATED_BY = 'created_by';
+
     public function __construct( $static = false )
     {
         if( $static ) {
@@ -34,7 +36,7 @@ class Polen_Checkout_Create_User
                 $user_password = wp_generate_password( 5, false ) . random_int( 0, 99 );
                 $id_registered = wc_create_new_customer( $user_email, $user_email, $user_password, ['created_by' => 'checkout'] );
                 $user = get_user_by( 'ID', $id_registered );
-                // add_user_meta( $user->ID, 'created_by', 'checkout', true );
+                add_user_meta( $user->ID, self::META_KEY_CREATED_BY, 'checkout', true );
             }
             $user_id = $user->ID;
         }
