@@ -8,13 +8,6 @@ const CONSTANTS = {
 	THEME: "theme_mode",
 };
 
-const ZAPIERURLS = {
-	NEWSLETTER: "https://hooks.zapier.com/hooks/catch/10583855/b252jhj/",
-	NEW_ACCOUNT: "https://hooks.zapier.com/hooks/catch/10583855/b25uia6/",
-	LANDING_PAGE: "https://hooks.zapier.com/hooks/catch/10583855/b25u8xz/",
-	PURCHASE: "https://hooks.zapier.com/hooks/catch/10583855/buaf22k/",
-}
-
 var interval = setInterval;
 
 function copyToClipboard(text) {
@@ -365,11 +358,14 @@ function replaceLineBreakString(string) {
 	return instruction;
 }
 
-function polRequestZapier(formName, url) {
+function polRequestZapier(formName) {
+  if(polenObj.developer) {
+    return;
+  }
 	jQuery
 	.post(
-		url,
-		jQuery(formName).serialize()
+		polenObj.ajax_url + "?action=zapier_mail",
+		jQuery(formName).find(":not(input[name=action])").serialize()
 	)
 }
 
@@ -436,8 +432,7 @@ jQuery(document).ready(function () {
 		);
 		// Zapier request
 		polRequestZapier(
-			formName,
-			ZAPIERURLS.NEWSLETTER
+			formName
 		);
 	});
 })(jQuery);

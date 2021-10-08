@@ -55,7 +55,8 @@ get_header();
                                             <input type="hidden" name="action" value="polen_signin_lp_lead" />
 											<input type="text" name="fan_name" id="fan_name" placeholder="Entre com o seu nome" class="form-control form-control-lg mb-3" required/>
 											<input type="email" name="fan_email" id="fan_email" placeholder="Entre com o seu e-mail" class="form-control form-control-lg" required/>
-											<input type="hidden" name="product_id" value="<?= $product_id; ?>" />
+											<input type="hidden" name="zapier" value="3" />
+                      <input type="hidden" name="product_id" value="<?= $product_id; ?>" />
 											<input type="hidden" name="is_mobile" value="<?= polen_is_mobile() ? "1" : "0"; ?>" />
 											<input type="hidden" name="page_source" value="<?= $_SERVER['REQUEST_URI']; ?>" />
 											<input type="hidden" name="category" value="<?= $cat_term->name; ?>" />

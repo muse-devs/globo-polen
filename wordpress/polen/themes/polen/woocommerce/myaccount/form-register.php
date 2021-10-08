@@ -56,6 +56,7 @@ $site_key = $Polen_Plugin_Settings['polen_recaptcha_site_key'];
 							<?php wp_nonce_field('woocommerce-register', 'woocommerce-register-nonce'); ?>
 							<button type="submit" class="woocommerce-button btn btn-primary btn-lg btn-block btn-login woocommerce-form-register__submit g-recaptcha" data-sitekey="<?= $site_key; ?>" data-callback='polen_onSubmit' data-action='submit' name="register" value="<?php esc_attr_e('Register', 'woocommerce'); ?>"><?php esc_html_e('Register', 'woocommerce'); ?></button>
 							<input type="hidden" name="register" value="Cadastre-se" />
+              <input type="hidden" name="zapier" value="2" />
 						</p>
 					</div>
 				</div>

@@ -525,7 +525,8 @@ function polen_form_signin_newsletter(string $event = 'newsletter')
     <form id="newsletter">
       <div class="row">
         <div class="col-md-8 mb-2 mb-md-0">
-          <input type="hidden" name="action" value="polen_newsletter_signin">
+          <input type="hidden" name="action" value="polen_newsletter_signin" />
+          <input type="hidden" name="zapier" value="1" />
           <input type="hidden" name="page_source" value="<?= filter_input(INPUT_SERVER, 'REQUEST_URI'); ?>" />
           <input type="hidden" name="event" value="<?= $event; ?>" />
           <input type="hidden" name="is_mobile" value="<?= polen_is_mobile() ? "1" : "0"; ?>" />
