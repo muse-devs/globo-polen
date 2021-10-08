@@ -116,7 +116,7 @@ function polen_front_get_categories_buttons() {
           $categories = highlighted_categories();
           foreach($categories as $categorie){
             echo "<a href=/categoria/".$categorie["slug"].">";
-              echo '<div class="btn btn-outline-dark category-button">';
+              echo '<div class="btn btn-outline-dark category-button" ontouchstart="">';
                 echo '<img src="'.$categorie["img"].'"></img>';
                 echo $categorie["name"];
               echo '</div>';
