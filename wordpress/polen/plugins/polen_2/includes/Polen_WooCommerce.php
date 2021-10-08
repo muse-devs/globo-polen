@@ -622,6 +622,8 @@ class Polen_WooCommerce
                 $this->save_meta($product, $is_social_base, '_is_social_base' );
                 $this->save_meta($product, $social_base_slug_campaing, '_social_base_slug_campaing' );
                 $this->save_meta($product, $social_base_video_testimonial, '_social_base_video_testimonial' );
+
+                do_action( 'polen_custom_fields_b2b' , $product_id );
                   
                 remove_action( 'woocommerce_update_product', array( $this, 'on_product_save' ) );
                 $product->save();

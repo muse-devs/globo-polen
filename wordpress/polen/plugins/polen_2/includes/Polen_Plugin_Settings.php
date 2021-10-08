@@ -1,6 +1,7 @@
 <?php
 
 namespace Polen\Includes;
+use WP_Term_Query;
 
 class Polen_Plugin_Settings
 {
@@ -18,6 +19,20 @@ class Polen_Plugin_Settings
     public static function init() {
         if ( ! class_exists( '\Redux' ) ) {
             return;
+        }
+
+        $args = array(
+            'taxonomy' => 'product_cat',
+            'orderby' => 'name',
+            'order' => 'ASC',
+            'hide_empty' => false,
+        );
+
+        $term_query = new WP_Term_Query($args);
+
+        $categories = [];
+        foreach ($term_query->get_terms() as $term) {
+            $categories[$term->term_id] = $term->name;
         }
 
         // This is your option name where all the Redux data is stored.
@@ -520,7 +535,7 @@ class Polen_Plugin_Settings
          \Redux::set_section( $opt_name, array(
             'title'            => esc_html__( 'Configurar emails', 'polen' ),
             'id'               => 'polen_email_expire_order',
-            'icon'             => 'dashicons:email',
+            'icon'             => 'el el-envelope',
             'subsection'       => false,
             'fields'           => array(
                 array(
@@ -535,6 +550,25 @@ class Polen_Plugin_Settings
                     'type'     => 'text',
                     'title'    => esc_html__('Configurar email de destinatário polen empresas', 'polen'),
                     'desc'     => 'Emails serarados por Virgura',
+                    'default'  => '',
+                ),
+            )
+        ) );
+
+        // Configurar HOME
+        \Redux::set_section( $opt_name, array(
+            'title'            => esc_html__( 'Configuração Home', 'polen' ),
+            'id'               => 'home_config',
+            'icon'             => 'el el-home',
+            'subsection'       => false,
+            'fields'           => array(
+                array(
+                    'id'       => 'highlight_categories',
+                    'type'     => 'select',
+                    'multi'    => true,
+                    'title'    => esc_html__('Destacar categoria', 'polen'),
+                    'desc'     => 'Escolha até 4 categorias para serem destacada',
+                    'options'  => $categories,
                     'default'  => '',
                 ),
             )

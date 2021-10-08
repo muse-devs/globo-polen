@@ -239,7 +239,7 @@ function polen_get_theme_logos() {
 
 	$html =  '<a href="' . get_site_url() . '" class="custom-logo-link" rel="home" aria-current="page">';
 
-	if(is_front_page() || social_is_in_social_app()) {
+	if(social_is_in_social_app()) {
 		$html .= 	'<img width="67" height="40" src="'. $logo_dark . '" class="custom-logo" alt="Polen">';
 	} elseif(master_class_is_app()) {
 		$html .= 	'<img width="208" height="36" src="'. $logo_masterclass . '" class="dark" alt="Polen">';

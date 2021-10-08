@@ -1,12 +1,13 @@
 <?php
 
 // Função temporária para pegar talentos Business
+
+use Polen\Includes\Polen_Product_B2B;
+
 function bus_get_talents()
 {
-  global $Polen_Plugin_Settings;
-  $products_id = $Polen_Plugin_Settings['polen-business-talents'];
-  $products_id = preg_replace('/\s+/', '', $products_id);
-  return !empty($products_id) ? array_chunk(explode(",", $products_id), 4) : array();
+  $products_id = Polen_Product_B2B::get_all_product_ids( 100 );
+  return !empty($products_id) ? array_chunk( $products_id, 4 ) : array();
 }
 
 function bus_get_header()
@@ -114,7 +115,7 @@ function bus_grid($items, $title)
     </div>
   </section>
   <?php
-  foreach ($items as $key => $page) {
+  foreach ($items as $page) {
     bus_grid_scrollable($page, $title);
   }
 }
