@@ -27,7 +27,7 @@ $title = $obj ? "{$obj->name}: " : "";
 <div class="clear"></div>
 <div class="row my-3">
 	<div class="col-12">
-		<h1><?php echo $title; ?>Escolha seu ídolo e garanta seu video personalizado.</h1>
+		<h1 class="<?php echo $obj ? "d-none" : ""; ?>"><?php echo $title; ?>Escolha seu ídolo e garanta seu video personalizado.</h1>
 	</div>
 </div>
 <section class="row my-4 card-list">
