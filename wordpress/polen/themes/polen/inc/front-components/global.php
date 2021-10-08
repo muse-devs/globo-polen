@@ -111,7 +111,7 @@ function polen_front_get_categories_buttons() {
 ?>
   <section>
     <div class="row mb-2">
-      <div class="col-12 d-flex justify-content-start flex-wrap">
+      <div class="col-12 d-flex justify-content-start flex-wrap align-items-stretch">
         <?php
           $categories = highlighted_categories();
           foreach($categories as $categorie){
