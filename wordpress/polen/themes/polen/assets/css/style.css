@@ -11443,10 +11443,11 @@ textarea {
   height: 94.6vw;
   overflow: hidden;
   border-radius: 8px;
+  display: flex;
+  align-items: center;
   position: relative;
   height: 94.6vw;
-  overflow: hidden;
-  background-color: var(--primary); }
+  overflow: hidden; }
   @media (min-width: 768px) {
     .top-banner {
       height: 396px; } }
@@ -11582,12 +11583,12 @@ textarea {
   .top-banner .content {
     position: absolute;
     padding: 15px;
-    top: 25%;
+    top: 30%;
     width: 100%; }
-    @media (max-width: 767.98px) {
+    @media (max-width: 991.98px) {
       .top-banner .content {
         padding: 0px 30px;
-        top: 60%;
+        top: 50%;
         left: 0;
         right: 0;
         transform: translateY(-50%); } }

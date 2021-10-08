@@ -330,6 +330,8 @@
 	height: 94.6vw;
 	overflow: hidden;
   border-radius: 8px;
+  display: flex;
+  align-items: center;
 	//background-color: var(--primary);
 	@include media-breakpoint-up(md) {
 		height: 396px;
@@ -443,7 +445,7 @@
   //margin: 0 -15px;
   height: 94.6vw;
   overflow: hidden;
-  background-color: var(--primary);
+  //background-color: var(--primary);
   @include media-breakpoint-up(md) {
     height: 396px;
   }
@@ -500,11 +502,11 @@
   .content {
     position: absolute;
     padding: 15px;
-    top: 25%;
+    top: 30%;
     width: 100%;
-    @include media-breakpoint-down(sm) {
+    @include media-breakpoint-down(md) {
       padding: 0px 30px;
-      top: 60%;
+      top: 50%;
       left: 0;
       right: 0;
       transform: translateY(-50%);
