@@ -4,7 +4,7 @@ $light-25: rgba(#ffffff, 0.25);
 $dark-100: #000;
 $dark-50: rgba(#000000, 0.5);
 $dark-25: #707070;
-$error-box-color: #fdebeb;
+$error-box-color: hsl(0, 82%, 96%);
 $yellow: #fff7dd;
 
 $body-bg: #000;
@@ -32,6 +32,7 @@ $form-bg-color: $talent-bg-color;
 $form-bg-color-contrast: #404040;
 $font-color2: $light-50;
 $input-font-color: $light-100;
+$category-color: #818181;
 
 $theme-colors: (
 	"primary": $primary,
@@ -53,4 +54,5 @@ $theme-colors: (
 	"dark": $dark-100,
 	"subtext": #767676,
 	"yellow": $yellow,
+  "category": $category-color,
 );

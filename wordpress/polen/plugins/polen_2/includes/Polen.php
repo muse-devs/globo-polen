@@ -6,8 +6,6 @@ use Polen\Admin\Polen_Admin;
 use Polen\Admin\Polen_Forms;
 use Polen\Enterprise\Enterprise;
 use Polen\Includes\Polen_Plugin_Settings;
-use Polen\Master_class\Master_Class;
-use Polen\Master_class\Master_Class_Rewrite;
 use Polen\Publics\Polen_Public;
 use Polen\Includes\Polen_Talent;
 use Polen\Includes\Polen_Occasion_List;
@@ -19,7 +17,6 @@ use Polen\Includes\Polen_Order;
 use Polen\Includes\Order_Review\{Polen_Order_Review_Controller, Polen_Order_Review_Router};
 use Polen\Includes\Polen_Signin_Newsletter;
 use Polen\Includes\Polen_Cupom_Create_Admin_Menu;
-use Polen\Social\Social;
 use Polen\Social_Base\Social_Base;
 use Polen\Tributes\Tributes;
 
@@ -120,6 +117,9 @@ class Polen {
         // Enterprise
         new Enterprise(true);
 
+        //Class que define a criação de um usuário no ato da compra
+        new Polen_Checkout_Create_User( true );
+
     }
 
     /**
@@ -167,6 +167,9 @@ class Polen {
 
         $plugin_admin = new Polen_Admin($this->get_plugin_name(), $this->get_version());
         $plugin_admin->init_classes( true );
+
+        $this->loader->add_action('wp_ajax_nopriv_zapier_mail', $plugin_admin, 'zapier_mail');
+        $this->loader->add_action('wp_ajax_zapier_mail', $plugin_admin, 'zapier_mail');
         
         $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
         $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
