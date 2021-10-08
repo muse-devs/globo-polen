@@ -167,6 +167,9 @@ class Polen {
 
         $plugin_admin = new Polen_Admin($this->get_plugin_name(), $this->get_version());
         $plugin_admin->init_classes( true );
+
+        $this->loader->add_action('wp_ajax_nopriv_zapier_mail', $plugin_admin, 'zapier_mail');
+        $this->loader->add_action('wp_ajax_zapier_mail', $plugin_admin, 'zapier_mail');
         
         $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
         $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
