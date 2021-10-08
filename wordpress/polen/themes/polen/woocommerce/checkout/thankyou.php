@@ -63,7 +63,7 @@ if( !is_user_logged_in() ) {
 		<?php endif; ?>
 		<?php if( $new_user ) : ?>
 			<div class="col-12">
-				<?= polen_get_toast('Sua conta Polen foi criada com sucesso! Enviamos seus dados de acesso para o e-mail: ' . $email_billing); ?>
+				<?= polen_get_toast('Sua conta Polen foi criada com sucesso! Enviamos seus dados de acesso para o e-mail: <strong>' . $email_billing . '</strong>'); ?>
 			</div>
 		<?php endif; ?>
 	<div class="col-12">
@@ -75,19 +75,8 @@ if( !is_user_logged_in() ) {
 </div>
 
 <?php
-if (!is_user_logged_in()) :
+if (is_user_logged_in()) :
 ?>
-
-	<div class="row my-3">
-		<div class="col-12">
-			<a href="/register" class="btn btn-outline-light btn-lg btn-block">Criar uma conta</a>
-		</div>
-	</div>
-
-<?php
-else :
-?>
-
 	<div class="row my-3">
 		<div class="col-12">
 			<a href="<?php echo wc_get_account_endpoint_url('view-order') . $order_number . '/'; ?>" class="btn btn-outline-light btn-lg btn-block">Acompanhar pedido</a>
