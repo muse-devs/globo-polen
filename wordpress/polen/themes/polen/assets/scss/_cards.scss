@@ -311,7 +311,8 @@
   }
   .video {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
     @include media-breakpoint-down(sm) {
       height: 100%;
       width: auto;
@@ -1107,13 +1108,7 @@
   }
 }
 
-.category-button:hover {
-  background: linear-gradient(90deg, #FAA629 1.23%, #FC6C36 100%)!important;
-  border: 1px solid #FD6C36;
-  transition: 0.2s;
-}
-
-.category-button:active {
+.category-button:hover, .category-button:active, .category-button:focus {
   background: linear-gradient(90deg, #FAA629 1.23%, #FC6C36 100%)!important;
   border: 1px solid #FD6C36;
   transition: 0.2s;
