@@ -11965,7 +11965,7 @@ textarea {
   flex-wrap: wrap; }
   @media (max-width: 575.98px) {
     .content-category {
-      justify-content: space-between; } }
+      justify-content: center; } }
 
 .category-button {
   display: flex;

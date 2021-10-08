@@ -1090,7 +1090,7 @@
   justify-content: start;
   flex-wrap: wrap;
   @include media-breakpoint-down(xs) {
-    justify-content: space-between;
+    justify-content: center;
   }
 }
 
