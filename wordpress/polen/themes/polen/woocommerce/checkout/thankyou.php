@@ -63,7 +63,7 @@ if( !is_user_logged_in() ) {
 		<?php endif; ?>
 		<?php if( $new_user ) : ?>
 			<div class="col-12">
-				<?= polen_get_toast('khjfgkajhfgakjhsdgfkahjsdgfaksjhfgaksjdfgaksjhfgaskjhdfgaksjhdfg'); ?>
+				<?= polen_get_toast('Sua conta Polen foi criada com sucesso! Enviamos seus dados de acesso para o e-mail: ' . $email_billing); ?>
 			</div>
 		<?php endif; ?>
 	<div class="col-12">
