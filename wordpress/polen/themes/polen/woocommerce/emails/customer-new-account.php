@@ -21,6 +21,22 @@ do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
 <?php endif; ?>
 
 <?php
+//Quando o usuário não existe e é criado no checkout
+//é setada uma nova senha e enviado no email
+$http_referer = filter_input( INPUT_POST, '_wp_http_referer' );
+if( '/?wc-ajax=update_order_review' == $http_referer ) {
+	$user_id = $email->object->ID;
+	if( $user_id ) {
+			$user_new_password = wp_generate_password( 5, false ) . random_int( 0, 99 );
+			wp_set_password( $user_new_password, $user_id )
+			?>
+				<p>Recomendamos que você altere a sua senha após o primeiro login para se manter protegido.</p>
+				<p><?php printf( esc_html__( 'Your password has been automatically generated: %s', 'woocommerce' ), '<strong>' . esc_html( $user_new_password ) . '</strong>' ); ?></p>
+			<?php 
+	}
+}
+?>
+<?php
 /**
  * Show user-defined additional content - this is set in each email's settings.
  */
