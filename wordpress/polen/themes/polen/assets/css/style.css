@@ -11444,7 +11444,6 @@ textarea {
   overflow: hidden;
   border-radius: 8px;
   position: relative;
-  margin: 0 -15px;
   height: 94.6vw;
   overflow: hidden;
   background-color: var(--primary); }
