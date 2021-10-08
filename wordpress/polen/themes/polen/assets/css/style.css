@@ -11974,7 +11974,8 @@ textarea {
   border-radius: 200px;
   background: #ffff;
   padding: 4px 8px;
-  transition: 0.2s; }
+  transition: 0.2s;
+  min-height: 34px; }
   .category-button img {
     margin-right: 0.5em; }
 
