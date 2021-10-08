@@ -1085,6 +1085,15 @@
   }
 }
 
+.content-category {
+  display: flex;
+  justify-content: start;
+  flex-wrap: wrap;
+  @include media-breakpoint-down(xs) {
+    justify-content: space-between;
+  }
+}
+
 .category-button {
   display: flex;
   align-items: center;
@@ -1104,7 +1113,7 @@
   transition: 0.2s;
   min-height: 34px;
   @include media-breakpoint-down(xs) {
-    margin-right: 4px;
+    margin-right: 8px;
   }
   img {
     margin-right: 0.5em;

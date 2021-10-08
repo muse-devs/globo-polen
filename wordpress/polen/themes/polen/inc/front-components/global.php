@@ -111,18 +111,20 @@ function polen_front_get_categories_buttons() {
 ?>
   <section>
     <div class="row mb-2">
-      <div class="col-12 d-flex justify-content-start flex-wrap">
-        <?php
-          $categories = highlighted_categories();
-          foreach($categories as $categorie){
-            echo "<a href=/categoria/".$categorie["slug"].">";
-              echo '<div class="btn btn-outline-dark category-button" ontouchstart="">';
-                echo '<img src="'.$categorie["img"].'"></img>';
-                echo $categorie["name"];
-              echo '</div>';
-            echo "</a>";
-          }
-        ?>
+      <div class="col-12">
+        <div class="content-category">
+          <?php
+            $categories = highlighted_categories();
+            foreach($categories as $categorie){
+              echo "<a href=/categoria/".$categorie["slug"].">";
+                echo '<div class="btn btn-outline-dark category-button" ontouchstart="">';
+                  echo '<img src="'.$categorie["img"].'"></img>';
+                  echo $categorie["name"];
+                echo '</div>';
+              echo "</a>";
+            }
+          ?>
+        </div>
       </div>
     </div>
   </section>
