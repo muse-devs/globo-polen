@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Template part for displaying page content in page.php
  *
@@ -10,24 +11,25 @@
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<header class="entry-header">
-		<?php //the_title( '<h1 class="entry-title">', '</h1>' ); ?>
-	</header><!-- .entry-header -->
+  <header class="entry-header">
+    <?php //the_title( '<h1 class="entry-title">', '</h1>' );
+    ?>
+  </header><!-- .entry-header -->
 
-	<div class="entry-content">
-		<?php
-		the_content();
+  <div class="entry-content">
+    <?php
+    the_content();
 
-		wp_link_pages(
-			array(
-				'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'polen' ),
-				'after'  => '</div>',
-			)
-		);
-		?>
-	</div><!-- .entry-content -->
+    wp_link_pages(
+      array(
+        'before' => '<div class="page-links">' . esc_html__('Pages:', 'polen'),
+        'after'  => '</div>',
+      )
+    );
+    ?>
+  </div><!-- .entry-content -->
 
-	<?php /*if ( get_edit_post_link() ) : ?>
+  <?php /*if ( get_edit_post_link() ) : ?>
 		<footer class="entry-footer">
 			<?php
 			edit_post_link(
@@ -48,4 +50,16 @@
 			?>
 		</footer><!-- .entry-footer -->
 	<?php endif; */ ?>
-</article><!-- #post-<?php the_ID(); ?> -->
+</article><!-- #post-<?php //the_ID();
+                      ?> -->
+
+<?php
+$obj = polen_queried_object();
+?>
+<?php if ($obj) : ?>
+  <div class="row mt-5 mb-5 pt-5">
+    <div class="col-12 mt-5">
+      <?php polen_banner_scrollable(polen_get_new_talents(6), "Destaque", polen_get_all_new_talents_url()); ?>
+    </div>
+  </div>
+<?php endif; ?>
