@@ -20,7 +20,7 @@ if ( ! defined( '_S_VERSION' ) ) {
 	define( '_S_VERSION', DEVELOPER ? time() : '1.1.1' );
 }
 
-add_action( 'rest_api_init', function()
+add_action( 'init', function()
   {
       header( "Access-Control-Allow-Origin: *" );
   }
