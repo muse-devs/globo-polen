@@ -22,9 +22,10 @@ if ( ! defined( '_S_VERSION' ) ) {
 
 add_action( 'init', function()
   {
-      header( "Access-Control-Allow-Origin: *" );
-      header ("Access-Control-Allow-Methods: DELETE, POST, GET, OPTIONS");
-      header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+      header( "Access-Control-Allow-Origin: http://localhost:3000, https://polen.vercel.app" );
+      header ("Access-Control-Allow-Methods: DELETE, POST, GET");
+      header("Access-Control-Allow-Headers: *");
+      header("Access-Control-Max-Age: 86400");
   }
 );
 
