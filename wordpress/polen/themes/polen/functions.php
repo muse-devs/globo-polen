@@ -20,6 +20,12 @@ if ( ! defined( '_S_VERSION' ) ) {
 	define( '_S_VERSION', DEVELOPER ? time() : '1.1.1' );
 }
 
+add_action( 'rest_api_init', function()
+  {
+      header( "Access-Control-Allow-Origin: *" );
+  }
+);
+
 if ( ! function_exists( 'polen_setup' ) ) :
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.
