@@ -9778,6 +9778,51 @@ input[type="file"]#file-video {
 textarea {
   resize: none; }
 
+.pol-input-group {
+  position: relative;
+  margin: 0;
+  display: block;
+  padding: 8px 16px;
+  border: 1px solid var(--gray-light);
+  border-radius: 8px;
+  box-sizing: border-box; }
+  .pol-input-group .label {
+    display: block;
+    font-size: 12px;
+    line-height: 1;
+    font-weight: 400;
+    color: #818181; }
+    .pol-input-group .label .required {
+      color: var(--danger); }
+  .pol-input-group .input,
+  .pol-input-group textarea,
+  .pol-input-group select {
+    margin-top: 4px;
+    padding: 0 !important;
+    width: 100%;
+    font-size: 16px;
+    line-height: 19px;
+    font-weight: 400;
+    border: none;
+    background: none;
+    outline: transparent; }
+    .pol-input-group .input::placeholder,
+    .pol-input-group textarea::placeholder,
+    .pol-input-group select::placeholder {
+      color: var(--gray-light); }
+  .pol-input-group select {
+    color: var(--gray-light);
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -ms-appearance: none; }
+    .pol-input-group select.selected {
+      color: inherit; }
+  .pol-input-group[aria-required=true] .label::after {
+    content: "*";
+    color: var(--danger); }
+
 @supports (-webkit-appearance: none) or (-moz-appearance: none) {
   input[type="checkbox"],
   input[type="radio"] {
@@ -13796,49 +13841,6 @@ label.lg {
   font-size: 24px;
   line-height: 29px;
   font-weight: 600; }
-
-.pol-input-group {
-  position: relative;
-  display: block;
-  padding: 8px 16px;
-  border: 1px solid var(--gray-light);
-  border-radius: 8px; }
-  .pol-input-group .label {
-    display: block;
-    font-size: 12px;
-    line-height: 1;
-    font-weight: 400;
-    color: #818181; }
-    .pol-input-group .label .required {
-      color: var(--danger); }
-  .pol-input-group .input,
-  .pol-input-group textarea,
-  .pol-input-group select {
-    margin-top: 4px;
-    padding: 0 !important;
-    width: 100%;
-    font-size: 16px;
-    line-height: 19px;
-    font-weight: 400;
-    border: none;
-    background: none;
-    outline: transparent; }
-    .pol-input-group .input::placeholder,
-    .pol-input-group textarea::placeholder,
-    .pol-input-group select::placeholder {
-      color: var(--gray-light); }
-  .pol-input-group select {
-    color: var(--gray-light);
-    border: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    -ms-appearance: none; }
-    .pol-input-group select.selected {
-      color: inherit; }
-  .pol-input-group[aria-required=true] .label::after {
-    content: "*";
-    color: var(--danger); }
 
 .bus-thankyou .title {
   font-size: 48px;

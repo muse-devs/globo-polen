@@ -55,7 +55,7 @@
 			</div>
 		</div>
 	<?php endif; ?>
-	<div class="row mt-4 copyright">
+	<div class="row mt-5 copyright">
 		<div class="col-md-12 pb-4 text-center social">
 			<a href="https://www.facebook.com/Polen-107879504782470/" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("facebook"); ?></a>
 			<a href="https://www.instagram.com/polen.me" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("instagram"); ?></a>

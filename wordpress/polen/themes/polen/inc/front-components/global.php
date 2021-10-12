@@ -534,7 +534,10 @@ function polen_form_signin_newsletter(string $event = 'newsletter')
           <input type="hidden" name="event" value="<?= $event; ?>" />
           <input type="hidden" name="is_mobile" value="<?= polen_is_mobile() ? "1" : "0"; ?>" />
           <input type="hidden" name="security" value=<?php echo wp_create_nonce('news-signin'); ?>>
-          <input type="email" name="email" placeholder="Entre com o seu e-mail" class="form-control form-control-lg" required />
+          <label class="pol-input-group" aria-required="true">
+            <span class="label">e-mail</span>
+            <input type="email" name="email" placeholder="Entre com o seu e-mail" class="input" required />
+          </label>
         </div>
         <div class="col-md-4 mt-2 mt-md-0 d-md-flex align-items-md-center">
           <input type="submit" value="Enviar" class="signin-newsletter-button btn btn-outline-light btn-lg btn-block" />
