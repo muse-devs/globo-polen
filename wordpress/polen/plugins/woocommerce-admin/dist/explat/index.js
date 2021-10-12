@@ -1229,7 +1229,7 @@ const assignment_fetchExperimentAssignment = async ({
   experimentName,
   anonId
 }) => {
-  var _window$wcTracks;
+  var _window$wcTracks, _window$wcSettings, _window$wcSettings$pr, _window$wcSettings$pr2, _window$wcSettings2, _window$wcSettings2$a, _window$wcSettings2$a2, _window$wcSettings2$a3;
 
   if (!((_window$wcTracks = window.wcTracks) !== null && _window$wcTracks !== void 0 && _window$wcTracks.isEnabled)) {
     throw new Error(`Tracking is disabled, can't fetch experimentAssignment`);
@@ -1237,7 +1237,8 @@ const assignment_fetchExperimentAssignment = async ({
 
   const params = Object(lib["stringify"])({
     experiment_name: experimentName,
-    anon_id: anonId !== null && anonId !== void 0 ? anonId : undefined
+    anon_id: anonId !== null && anonId !== void 0 ? anonId : undefined,
+    woo_country_code: ((_window$wcSettings = window.wcSettings) === null || _window$wcSettings === void 0 ? void 0 : (_window$wcSettings$pr = _window$wcSettings.preloadSettings) === null || _window$wcSettings$pr === void 0 ? void 0 : (_window$wcSettings$pr2 = _window$wcSettings$pr.general) === null || _window$wcSettings$pr2 === void 0 ? void 0 : _window$wcSettings$pr2.woocommerce_default_country) || ((_window$wcSettings2 = window.wcSettings) === null || _window$wcSettings2 === void 0 ? void 0 : (_window$wcSettings2$a = _window$wcSettings2.admin) === null || _window$wcSettings2$a === void 0 ? void 0 : (_window$wcSettings2$a2 = _window$wcSettings2$a.preloadSettings) === null || _window$wcSettings2$a2 === void 0 ? void 0 : (_window$wcSettings2$a3 = _window$wcSettings2$a2.general) === null || _window$wcSettings2$a3 === void 0 ? void 0 : _window$wcSettings2$a3.woocommerce_default_country)
   });
   const response = await window.fetch(`https://public-api.wordpress.com/wpcom/v2/experiments/${EXPLAT_VERSION}/assignments/woocommerce?${params}`);
   return await response.json();
@@ -1354,7 +1355,7 @@ const {
 
 /***/ }),
 
-/***/ 48:
+/***/ 49:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1626,7 +1627,7 @@ module.exports = {
 "use strict";
 
 
-var utils = __webpack_require__(48);
+var utils = __webpack_require__(49);
 var formats = __webpack_require__(39);
 var has = Object.prototype.hasOwnProperty;
 
@@ -1912,7 +1913,7 @@ module.exports = function (object, opts) {
 "use strict";
 
 
-var utils = __webpack_require__(48);
+var utils = __webpack_require__(49);
 
 var has = Object.prototype.hasOwnProperty;
 var isArray = Array.isArray;

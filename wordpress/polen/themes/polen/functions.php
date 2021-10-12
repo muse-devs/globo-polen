@@ -20,6 +20,12 @@ if ( ! defined( '_S_VERSION' ) ) {
 	define( '_S_VERSION', DEVELOPER ? time() : '1.1.1' );
 }
 
+add_action( 'rest_api_init', function()
+  {
+      header( "Access-Control-Allow-Origin: *" );
+  }
+);
+
 if ( ! function_exists( 'polen_setup' ) ) :
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.
@@ -211,6 +217,7 @@ function polen_scripts() {
 	wp_register_script( 'owl-carousel', TEMPLATE_URI . '/assets/js/vendor/owl.carousel.min.js', array(), _S_VERSION, true );
 	wp_register_script( 'zuck', TEMPLATE_URI . '/assets/js/' . $min . 'zuck.js', array(), _S_VERSION, true );
 	wp_register_script( 'form-whatsapp', TEMPLATE_URI . '/assets/js/' . $min . 'form-whatsapp.js', array("vuejs"), _S_VERSION, true );
+	wp_register_script( 'polen-business', TEMPLATE_URI . '/assets/js/' . $min . 'business.js', array("vuejs"), _S_VERSION, true );
 	// --------------------------------------------------------------------------------------------------
 
 	if (polen_is_landingpage()) {
@@ -245,9 +252,9 @@ function polen_scripts() {
 
 	wp_enqueue_script( 'bootstrap-js', TEMPLATE_URI . '/assets/bootstrap-4.6.0/dist/js/bootstrap.min.js', array("jquery"), _S_VERSION, true );
 
-	if(is_user_logged_in()) {
+	// if(is_user_logged_in()) {
 		wp_enqueue_script( 'header-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'navigation.js', array("jquery"), _S_VERSION, true );
-	}
+	// }
 }
 add_action( 'wp_enqueue_scripts', 'polen_scripts' );
 
@@ -325,8 +332,20 @@ require_once TEMPLATE_DIR . '/social_base/function.php';;
 /**
 * Funções para master-class
 */
-// flush_rewrite_rules();
 require_once TEMPLATE_DIR . '/master_class/function_master_class.php';
+
+/**
+ * Funções para polen empresas
+ */
+
+// flush_rewrite_rules();
+
+require_once TEMPLATE_DIR . '/enterprise/function_enterprise.php';
+
+/**
+ * Função para retornar categorias destacadas
+ */
+require_once TEMPLATE_DIR . '/inc/highlight_categories.php';
 
 
 add_action('wc_gateway_stripe_process_response', function($response, $order) {

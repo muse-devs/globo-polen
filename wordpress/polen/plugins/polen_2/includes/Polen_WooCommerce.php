@@ -237,12 +237,17 @@ class Polen_WooCommerce
                 'email_to_video'        => 'E-mail',
                 'video_category'        => 'Ocasião', 
                 'instructions_to_video' => 'Instruções do vídeo', 
-                'allow_video_on_page'   => 'Permite que o vídeo apareça na página do talento?',
+                'allow_video_on_page'   => 'Publico?',
             );
+            $order = wc_get_order( $order_id );
+            if( !empty( $order ) && "talent-rejected" == $order->get_status() ) {
+                $meta_labels[ 'reason_reject' ] = 'Rejeitou por';
+                $meta_labels[ 'reason_reject_description' ] = 'Explicação';
+            }
 
             foreach( $res_items as $k => $item ) 
             {
-                $sql = "SELECT `meta_key`, `meta_value` FROM `" . $wpdb->base_prefix . "woocommerce_order_itemmeta` WHERE `order_item_id`=" . $item->order_item_id . " AND `meta_key` IN ( 'offered_by', 'video_to', 'name_to_video', 'email_to_video', 'video_category', 'instructions_to_video', 'allow_video_on_page' )";
+                $sql = "SELECT `meta_key`, `meta_value` FROM `" . $wpdb->base_prefix . "woocommerce_order_itemmeta` WHERE `order_item_id`=" . $item->order_item_id . " AND `meta_key` IN ( 'offered_by', 'video_to', 'name_to_video', 'email_to_video', 'video_category', 'instructions_to_video', 'allow_video_on_page', 'reason_reject', 'reason_reject_description' )";
                 $res = $wpdb->get_results( $sql );
                 
                 $args = array(
@@ -617,6 +622,8 @@ class Polen_WooCommerce
                 $this->save_meta($product, $is_social_base, '_is_social_base' );
                 $this->save_meta($product, $social_base_slug_campaing, '_social_base_slug_campaing' );
                 $this->save_meta($product, $social_base_video_testimonial, '_social_base_video_testimonial' );
+
+                do_action( 'polen_custom_fields_b2b' , $product_id );
                   
                 remove_action( 'woocommerce_update_product', array( $this, 'on_product_save' ) );
                 $product->save();

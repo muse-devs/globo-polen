@@ -192,6 +192,21 @@ class Polen_Cart_Item
 
 
     /**
+     * Adiciona um Meta data AO Item_Cart
+     * Igual as Instrucoes do Video ou Para quem é
+     * @param String
+     * @param string|array
+     * @param bool
+     * @return int
+     */
+    public function add_meta_data( $key, $value, $unique = false )
+    {
+        $this->item->add_meta_data( $key, $value, $unique );
+        return $this->item->save();
+    }
+
+
+    /**
      * Get o object product parent if tiver para produtos variaveis é para retornar o pai
      * @return WC_Product
      */

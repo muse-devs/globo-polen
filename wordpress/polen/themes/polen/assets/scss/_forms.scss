@@ -357,3 +357,13 @@ textarea {
 		animation: 0.75s linear infinite spinner-border;
 	}
 }
+
+.background-grey {
+	background: #E9E9E9;
+	border: 1px solid #CED4DA;
+	box-sizing: border-box;
+	border-radius: 8px;
+	padding: 10px;
+	width: 100%;
+	outline: none;
+}
