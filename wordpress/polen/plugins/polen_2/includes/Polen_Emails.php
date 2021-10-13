@@ -3,6 +3,7 @@
 namespace Polen\Includes;
 
 use Polen\Includes\Emails\Polen_WC_Completed_Order;
+use Polen\Includes\Emails\Polen_WC_Customer_New_Account;
 use Polen\Includes\Emails\Polen_WC_Processing;
 
 if( ! defined( 'ABSPATH' ) ) {
@@ -17,7 +18,11 @@ class Polen_Emails {
         }
     }
 
-    public function register_emails( $emails ) {
+    public function register_emails( $emails )
+    {
+
+        //Nova conta no checkout
+        $emails[ 'WC_Email_Customer_New_Account' ] = new Polen_WC_Customer_New_Account();
 
         //Limpando as Actions
         remove_action( 'woocommerce_order_status_completed_notification', array( $emails[ 'WC_Email_Customer_Completed_Order' ], 'trigger' ), 10 );
