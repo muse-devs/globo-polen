@@ -8,7 +8,10 @@ use Polen\Includes\Polen_WooCommerce;
  */
 function create_social_order( $email, $cidade, $name )
 {
-    $product_id = 48;
+    $product_id = 3691;
+    if( empty( $product_id ) ) {
+        throw new \Exception( 'Produto inválido', 500 );
+    }
     // $email = 'rodolfoneto@gmail.com';
     // $cidade = 'Recife';
     // $name = 'Rodolfo';
