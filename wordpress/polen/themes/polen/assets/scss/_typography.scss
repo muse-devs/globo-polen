@@ -99,3 +99,15 @@ legend {
   font-weight: 400;
   line-height: 18.75px;
 }
+
+@mixin polen-title {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+@mixin polen-text {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 18.75px;
+}
