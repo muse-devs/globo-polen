@@ -2,6 +2,7 @@
 namespace Polen\Includes\Emails;
 
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
+use Polen\Includes\Polen_Video_Info;
 use Polen\Social_Base\Social_Base_Order;
 
 class Polen_WC_Completed_Order extends \WC_Email_Customer_Completed_Order
@@ -95,11 +96,14 @@ class Polen_WC_Completed_Order extends \WC_Email_Customer_Completed_Order
    public function get_content_social_base()
    {
 
-       $social_campaing_name = $this->object->get_meta( Social_Base_Order::ORDER_META_KEY_CAMPAING, true );
+        $video_info = Polen_Video_Info::get_by_order_id( $this->object->get_id() );
+        $video_url = site_url( 'v/' . $video_info->hash );
+        $social_campaing_name = $this->object->get_meta( Social_Base_Order::ORDER_META_KEY_CAMPAING, true );
         return wc_get_template_html(
             sprintf( $this->template_social_base_html, $social_campaing_name ),
             array(
                 'order'              => $this->object,
+                'video_url'          => $video_url,
                 'email_heading'      => $this->get_heading(),
                 'additional_content' => $this->get_additional_content(),
                 'sent_to_admin'      => false,
