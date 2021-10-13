@@ -6,12 +6,12 @@ use Polen\Includes\Polen_WooCommerce;
 /**
  * Criar uma primeira ORDER
  */
-function create_social_order( $email )
+function create_social_order( $email, $cidade, $name )
 {
     $product_id = 48;
     // $email = 'rodolfoneto@gmail.com';
-    $cidade = 'Recife';
-    $nome = 'Rodolfo';
+    // $cidade = 'Recife';
+    // $name = 'Rodolfo';
     $whatsapp_number = '';
     
     $user = get_user_by( 'email', $email );
@@ -24,8 +24,8 @@ function create_social_order( $email )
     $args = array(
         'status'        => Polen_WooCommerce::ORDER_STATUS_TALENT_ACCEPTED,
         'customer_id'   => $user_id,
-        'customer_note' => 'video-polen social',
-        'created_via'   => 'create_terminal',
+        'customer_note' => 'video-polen-social',
+        'created_via'   => 'created_terminal',
     );
 
     $order = wc_create_order( $args );
@@ -45,8 +45,10 @@ function create_social_order( $email )
     // $order->add_meta_data( Polen_Order::META_KEY_DEADLINE, $datetime->getTimestamp(), true );
     add_metadata( 'post', $order_id, Polen_Order::META_KEY_DEADLINE, $datetime->getTimestamp(), true );
     add_metadata( 'post', $order_id, '_polen_customer_email', $email, true );
+    add_metadata( 'post', $order_id, 'social_base', '1', true );
+    add_metadata( 'post', $order_id, 'social_base_campaing', 'reserva-1p-5p', true );
 
-    $instruction = "{$nome} de $cidade";
+    $instruction = "{$name} de $cidade";
     // $final_instruction = str_replace( $product->get_title(), $instruction );
     
     wc_add_order_item_meta( $order_item_id, '_qty', 1, true );
@@ -56,7 +58,7 @@ function create_social_order( $email )
     //Polen Custom Meta Order_Item
     wc_add_order_item_meta( $order_item_id, 'offered_by'            , '', true );
     wc_add_order_item_meta( $order_item_id, 'video_to'              , 'to_myself', true );
-    wc_add_order_item_meta( $order_item_id, 'name_to_video'         , $nome, true );
+    wc_add_order_item_meta( $order_item_id, 'name_to_video'         , $name, true );
     wc_add_order_item_meta( $order_item_id, 'email_to_video'        , $email, true );
     wc_add_order_item_meta( $order_item_id, 'video_category'        , 'Novidade', true );
     wc_add_order_item_meta( $order_item_id, 'instructions_to_video' , $instruction, true );
@@ -67,4 +69,5 @@ function create_social_order( $email )
     wc_add_order_item_meta( $order_item_id, '_line_total'           , 0, true );
     $order = new \WC_Order( $order_id );
     $order->calculate_totals();
+    return $order->get_id();
 }
