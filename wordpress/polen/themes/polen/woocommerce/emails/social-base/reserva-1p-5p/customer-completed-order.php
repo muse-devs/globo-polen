@@ -56,7 +56,7 @@
                         <tr
                           style='color: #ffffff; font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 14px; line-height: 100%; text-align: left;'>
                           <td align="center">
-                            <a href="<?php echo polen_get_link_order_status( $order->get_id() ); ?>" target="_blank"
+                            <a href="<?php echo polen_get_link_watch_video_by_order_id( $order->get_id() ); ?>" target="_blank"
                               style="background: #FC6C36; font-size: 24px; color: #fff; font-weight: 600; text-decoration: none; padding: 20px 40px; border-radius: 72px;">ASSISTA
                               AO VÍDEO</a>
                           </td>
@@ -97,7 +97,7 @@
                         <tr
                           style='color: #ffffff; font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 14px; line-height: 100%; text-align: left;'>
                           <td align="center">
-                            <a href="<?php echo polen_get_link_order_status( $order->get_id() ); ?>" target="_blank"
+                            <a href="<?php echo polen_get_link_watch_video_by_order_id( $order->get_id() ); ?>" target="_blank"
                               style="background: #FC6C36; font-size: 24px; color: #fff; font-weight: 600; text-decoration: none; padding: 20px 40px; border-radius: 72px;">ASSISTA
                               AO VÍDEO</a>
                           </td>
