@@ -5,7 +5,7 @@ use Polen\Includes\Polen_Order;
 function polen_get_search_form()
 {
 ?>
-  <button onclick="showSearchForm()" class="button-no-bg"><?php Icon_Class::polen_icon_research(); ?></button>
+  <button onclick="showSearchForm()" class="button-no-bg"><?php Icon_Class::polen_icon_search(); ?></button>
   <div id="search-box" class="search-box">
     <div class="row p-3">
       <div class="col-12 col-md-8 m-md-auto">
@@ -18,7 +18,7 @@ function polen_get_search_form()
           <div class="row">
             <div class="col-12 d-flex justify-content-between">
               <input class="form-control form-control-lg" type="text" id="search" name="s" value="<?php the_search_query(); ?>" placeholder="Buscar" required />
-              <button type="submit" class="btn btn-primary btn-lg ml-2"><?php Icon_Class::polen_icon_research(); ?></button>
+              <button type="submit" class="btn btn-primary btn-lg ml-2"><?php Icon_Class::polen_icon_search(); ?></button>
             </div>
           </div>
         </form>
@@ -526,18 +526,15 @@ function polen_form_signin_newsletter(string $event = 'newsletter')
   <div id="signin-newsletter" class="col-md-6 mt-4 order-md-2">
     <h5 class="title">Junte-se à nossa lista</h5>
     <p class="description">Seja o primeiro a saber sobre as estrelas mais recentes e as melhores ofertas no <?php bloginfo('name'); ?></p>
-    <form id="newsletter">
+    <form id="newsletter" action="/" method="POST">
       <div class="row">
         <div class="col-md-8 mb-2 mb-md-0">
-          <input type="hidden" name="action" value="polen_newsletter_signin">
+          <input type="hidden" name="action" value="polen_newsletter_signin" />
           <input type="hidden" name="page_source" value="<?= filter_input(INPUT_SERVER, 'REQUEST_URI'); ?>" />
           <input type="hidden" name="event" value="<?= $event; ?>" />
           <input type="hidden" name="is_mobile" value="<?= polen_is_mobile() ? "1" : "0"; ?>" />
-          <input type="hidden" name="security" value=<?php echo wp_create_nonce('news-signin'); ?>>
-          <label class="pol-input-group" aria-required="true">
-            <span class="label">e-mail</span>
-            <input type="email" name="email" placeholder="Entre com o seu e-mail" class="input" required />
-          </label>
+          <input type="hidden" name="security" value=<?php echo wp_create_nonce('news-signin'); ?> />
+          <input type="email" name="email" placeholder="Entre com o seu e-mail" class="form-control form-control-lg" required />
         </div>
         <div class="col-md-4 mt-2 mt-md-0 d-md-flex align-items-md-center">
           <input type="submit" value="Enviar" class="signin-newsletter-button btn btn-outline-light btn-lg btn-block" />

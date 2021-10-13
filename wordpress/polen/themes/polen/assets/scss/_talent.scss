@@ -366,7 +366,7 @@
 
 .talent-card {
 	position: relative;
-	padding: 16px;
+	padding: 24px 16px;
 	font-family: $font-primary;
 	border-radius: 8px;
 	// overflow: hidden;
@@ -377,9 +377,6 @@
 	}
 	&.criesp {
 		background: var(--success);
-	}
-	.header {
-		border-bottom: 1px dashed $light-25;
 	}
 	.details-box {
 		max-height: 0px;
@@ -394,12 +391,13 @@
 	}
 	.price-box {
 		position: relative;
+    border-top: 1px dashed $light-25;
 	}
 	.show-details {
 		position: absolute;
-		padding-top: 3px;
-		width: 39px;
-		height: 39px;
+		padding-top: 5px;
+		width: 32px;
+		height: 32px;
 		bottom: 0;
 		right: 0;
 		border: none;
@@ -414,9 +412,17 @@
 			transform: rotate(180deg);
 		}
 		.icon {
-			font-size: 24px;
+			font-size: 27px;
 		}
 	}
+  .price-box-details {
+    font-size: 12px;
+    line-height: 15.6px;
+    font-weight: 400;
+    strong {
+      font-weight: 400 !important;
+    }
+  }
 	.name {
 		margin: 0;
 		font-family: inherit;

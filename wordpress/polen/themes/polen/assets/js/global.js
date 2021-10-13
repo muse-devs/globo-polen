@@ -418,7 +418,7 @@ jQuery(document).ready(function () {
 
 (function ($) {
 	// Newsletter submit click
-	$(document).on("click", ".signin-newsletter-button", function (e) {
+	$(document).on("submit", "form#newsletter", function (e) {
 		const formName = "form#newsletter";
 		e.preventDefault();
 		// Ajax Request
