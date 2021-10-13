@@ -69,13 +69,12 @@ function bus_get_card($item)
     return;
   }
 ?>
-  <section class="bus-talent-card mb-5" itemscope itemtype="https://schema.org/Offer">
+  <div class="col-6 col-sm-6 col-md-6 col-lg-3 mb-5 bus-talent-card">
     <figure class="image">
       <img loading="lazy" src="<?php echo $image_data["image"]; ?>" alt="<?php echo $image_data["alt"]; ?>" />
       <figcaption itemprop="name"><?php echo get_the_title($item); ?></figcaption>
     </figure>
-    <?php /* <a href="<?= $item["talent_url"]; ?>" class="link"></a> */ ?>
-  </section>
+  </div>
 <?php
 }
 
@@ -85,14 +84,12 @@ function bus_grid_scrollable($items, $title)
     return;
   }
 ?>
-  <section class="row banner-scrollable bus-grid">
-    <div class="col-md-12 p-0 p-md-0">
-      <div class="banner-wrapper">
-        <div class="banner-content">
-          <?php foreach ($items as $item) : ?>
-            <?php bus_get_card($item); ?>
-          <?php endforeach; ?>
-        </div>
+  <section>
+    <div class="container">
+      <div class="row">
+        <?php foreach ($items as $item) : ?>
+          <?php bus_get_card($item); ?>
+        <?php endforeach; ?>
       </div>
     </div>
   </section>
@@ -164,6 +161,10 @@ function bus_get_form()
         <label class="pol-input-group mb-3" aria-required="true">
           <span class="label">Número de telefone</span>
           <input type="text" name="phone" v-model="phone" v-on:keyup="handleChange" class="input" placeholder="(XX) XXXXX-XXXX" maxlength="15" required />
+        </label>
+        <label class="pol-input-group mb-3" aria-required="true">
+          <span class="label">Nome do talento</span>
+          <input type="text" name="talent_name" class="input" placeholder="Nome do talento" required />
         </label>
         <label class="pol-input-group mb-3" aria-required="true">
           <span class="label">Mensagem</span>
