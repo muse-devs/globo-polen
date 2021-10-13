@@ -268,13 +268,16 @@ $Talent_Fields = new Polen_Update_Fields();
 						}
 						?>
 					</div>
+          <div class="col-md-12">
+            <div id="prohibited-instruction-alert" class="alert alert-danger mt-2 d-none" role="alert">Lembre-se: Músicos não tem autorização para cantar trechos de músicas.</div>
+          </div>
 				</div>
 				<!-- <div class="row pb-2">
 					<div class="col-12 d-flex align-items-center reload-sugestions">
 						<?php Icon_Class::polen_icon_reload("reload"); ?><a href="javascript:void(0)" class="link-alt video-instruction-refresh ml-2">Outra sugestão de instrução</a>
 					</div>
 				</div> -->
-				<div class="row mt-4">
+				<div class="row mt-3">
 					<div class="col-12 col-md-12">
 						<?php
 						$social_class = '';
