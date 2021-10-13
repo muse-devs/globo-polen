@@ -22,7 +22,7 @@ if ( ! defined( '_S_VERSION' ) ) {
 
 add_action( 'init', function()
   {
-      header( "Access-Control-Allow-Origin: http://polen.globo" );
+      header( "Access-Control-Allow-Origin: *" );
       header ("Access-Control-Allow-Methods: DELETE, POST, GET");
       header("Access-Control-Allow-Headers: *");
       header("Access-Control-Max-Age: 86400");
