@@ -114,7 +114,7 @@ class Polen_Forms {
         $body .= "<p>Qtd de funcionários: {$args['employees_quantity']}</p>";
         $body .= "<p>Cargo: {$args['job']}</p>";
         $body .= "<p>Telefone: {$args['phone']}</p>";
-        $body .= "<p>Telefone: {$args['talent_name']}</p>";
+        $body .= "<p>Nome do talento: {$args['talent_name']}</p>";
         $body .= "<p>Mensagem: {$args['message']}</p>";
 
         $headers = array('Content-Type: text/html; charset=UTF-8; From: polen.me');
