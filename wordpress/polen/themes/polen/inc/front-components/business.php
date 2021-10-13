@@ -1,12 +1,13 @@
 <?php
 
 // Função temporária para pegar talentos Business
+
+use Polen\Includes\Polen_Product_B2B;
+
 function bus_get_talents()
 {
-  global $Polen_Plugin_Settings;
-  $products_id = $Polen_Plugin_Settings['polen-business-talents'];
-  $products_id = preg_replace('/\s+/', '', $products_id);
-  return !empty($products_id) ? array_chunk(explode(",", $products_id), 4) : array();
+  $products_id = Polen_Product_B2B::get_all_product_ids( 100 );
+  return !empty($products_id) ? array_chunk( $products_id, 4 ) : array();
 }
 
 function bus_get_header()
@@ -68,13 +69,12 @@ function bus_get_card($item)
     return;
   }
 ?>
-  <section class="bus-talent-card mb-5" itemscope itemtype="https://schema.org/Offer">
+  <div class="col-6 col-sm-6 col-md-6 col-lg-3 mb-5 bus-talent-card">
     <figure class="image">
       <img loading="lazy" src="<?php echo $image_data["image"]; ?>" alt="<?php echo $image_data["alt"]; ?>" />
       <figcaption itemprop="name"><?php echo get_the_title($item); ?></figcaption>
     </figure>
-    <?php /* <a href="<?= $item["talent_url"]; ?>" class="link"></a> */ ?>
-  </section>
+  </div>
 <?php
 }
 
@@ -84,14 +84,12 @@ function bus_grid_scrollable($items, $title)
     return;
   }
 ?>
-  <section class="row banner-scrollable bus-grid">
-    <div class="col-md-12 p-0 p-md-0">
-      <div class="banner-wrapper">
-        <div class="banner-content">
-          <?php foreach ($items as $item) : ?>
-            <?php bus_get_card($item); ?>
-          <?php endforeach; ?>
-        </div>
+  <section>
+    <div class="container">
+      <div class="row">
+        <?php foreach ($items as $item) : ?>
+          <?php bus_get_card($item); ?>
+        <?php endforeach; ?>
       </div>
     </div>
   </section>
@@ -114,7 +112,7 @@ function bus_grid($items, $title)
     </div>
   </section>
   <?php
-  foreach ($items as $key => $page) {
+  foreach ($items as $page) {
     bus_grid_scrollable($page, $title);
   }
 }

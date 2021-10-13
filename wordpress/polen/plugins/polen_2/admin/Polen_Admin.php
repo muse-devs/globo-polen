@@ -26,20 +26,21 @@ class Polen_Admin {
         }
 	}
         
-    public function actions()
-    {
-        add_action( 'admin_init', [ $this, 'init_classes' ], 10 );
-    }
+  public function actions()
+  {
+      add_action( 'admin_init', [ $this, 'init_classes' ], 10 );
+  }
 
-    public function init_classes( bool $static = true )
-    {
-            new Polen_Admin_DisableMetabox( $static );
-            // new Polen_Update_Fields( $static );
-            new Polen_Admin_RedirectTalentAccess();
-            new Polen_Admin_Order_Custom_Fields( $static );
-            new Polen_Cupom_Create_Controller( $static );
-            new Polen_Admin_Video_Info( $static );
-    }
+  public function init_classes( bool $static = true )
+  {
+          new Polen_Admin_DisableMetabox( $static );
+          // new Polen_Update_Fields( $static );
+          new Polen_Admin_RedirectTalentAccess();
+          new Polen_Admin_Order_Custom_Fields( $static );
+          new Polen_Cupom_Create_Controller( $static );
+          new Polen_Admin_Video_Info( $static );
+          new Polen_Admin_B2B_Product_Fields( $static );
+  }
 
 	/**
 	 * Register the stylesheets for the admin area.

@@ -107,29 +107,33 @@ function polen_front_get_banner_with_carousel($social = false)
 <?php
 }
 
-function polen_front_get_categories_buttons() {
+function polen_front_get_categories_buttons()
+{
 ?>
   <section>
     <div class="row mb-2">
-      <div class="col-12 d-flex justify-content-start flex-wrap">
-        <?php
+      <div class="col-12">
+        <div class="content-category">
+          <?php
           $categories = highlighted_categories();
-          foreach($categories as $categorie){
-            echo "<a href=/categoria/".$categorie["slug"].">";
-              echo '<div class="btn btn-outline-dark category-button">';
-                echo '<img src="'.$categorie["img"].'"></img>';
-                echo $categorie["name"];
-              echo '</div>';
+          foreach ($categories as $categorie) {
+            echo "<a href=/categoria/" . $categorie["slug"] . ">";
+            echo '<div class="btn btn-outline-dark category-button" ontouchstart="">';
+            echo '<img src="' . $categorie["img"] . '"></img>';
+            echo $categorie["name"];
+            echo '</div>';
             echo "</a>";
           }
-        ?>
+          ?>
+        </div>
       </div>
     </div>
   </section>
 <?php
 }
 
-function polen_front_get_banner_video() {
+function polen_front_get_banner_video()
+{
   $mobile_video = array(
     "poster" => TEMPLATE_URI . "/assets/img/capa-mobile.jpg",
     "video" => TEMPLATE_URI . "/assets/video/home-mobile.mp4",
@@ -140,7 +144,7 @@ function polen_front_get_banner_video() {
     "video" => TEMPLATE_URI . "/assets/video/home-desktop.mp4",
     "class" => "video-desktop"
   );
-  ?>
+?>
   <section class="top-banner video-banner mb-4">
     <video class="video" autoplay muted loop playsinline poster="<?php echo polen_is_mobile() ? $mobile_video['poster'] : $desktop_video['poster']; ?>">
       <source src="<?php echo polen_is_mobile() ? $mobile_video['video'] : $desktop_video['video']; ?>" type="video/mp4">
@@ -666,8 +670,11 @@ function polen_get_toast($text)
     return;
   }
 ?>
-  <div id="pol-toast" class="pol-toast">
-    <div class="text"><?php echo $text; ?></div>
+  <div id="pol-toast" class="pol-toast mb-5">
+    <div class="ico mr-2"><img src="<?php echo TEMPLATE_URI; ?>/assets/img/emoji/festa.png" alt="Emoji Festa"></div>
+    <div class="text">
+      <?php echo $text; ?>
+    </div>
     <button class="ml-2 pol-toast-close" onclick="polRemoveElement('#pol-toast')">
       <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M12 22.5C17.5228 22.5 22 18.0228 22 12.5C22 6.97715 17.5228 2.5 12 2.5C6.47715 2.5 2 6.97715 2 12.5C2 18.0228 6.47715 22.5 12 22.5Z" stroke="#159A52" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />

@@ -11428,7 +11428,8 @@ textarea {
           font-size: 18px !important; } }
   .video-banner .video {
     width: 100%;
-    height: auto; }
+    height: 100%;
+    object-fit: cover; }
     @media (max-width: 767.98px) {
       .video-banner .video {
         height: 100%;
@@ -11443,11 +11444,11 @@ textarea {
   height: 94.6vw;
   overflow: hidden;
   border-radius: 8px;
+  display: flex;
+  align-items: center;
   position: relative;
-  margin: 0 -15px;
   height: 94.6vw;
-  overflow: hidden;
-  background-color: var(--primary); }
+  overflow: hidden; }
   @media (min-width: 768px) {
     .top-banner {
       height: 396px; } }
@@ -11583,12 +11584,12 @@ textarea {
   .top-banner .content {
     position: absolute;
     padding: 15px;
-    top: 25%;
+    top: 30%;
     width: 100%; }
-    @media (max-width: 767.98px) {
+    @media (max-width: 991.98px) {
       .top-banner .content {
         padding: 0px 30px;
-        top: 60%;
+        top: 50%;
         left: 0;
         right: 0;
         transform: translateY(-50%); } }
@@ -11950,13 +11951,26 @@ textarea {
   border-radius: 2px;
   background-color: #dcf8e7; }
   .pol-toast .text {
+    width: 100%;
     font-size: 16px;
     font-weight: 400;
     line-height: 18.75px;
     color: #159a52; }
+  .pol-toast .ico {
+    flex: 0 0 24px;
+    width: 24px;
+    height: 24px; }
   .pol-toast .pol-toast-close {
     border: none;
     background: none; }
+
+.content-category {
+  display: flex;
+  justify-content: start;
+  flex-wrap: wrap; }
+  @media (max-width: 575.98px) {
+    .content-category {
+      justify-content: center; } }
 
 .category-button {
   display: flex;
@@ -11976,13 +11990,19 @@ textarea {
   padding: 4px 8px;
   transition: 0.2s;
   min-height: 34px; }
+  @media (max-width: 575.98px) {
+    .category-button {
+      margin-right: 8px; } }
   .category-button img {
     margin-right: 0.5em; }
 
-.category-button:hover {
-  background: linear-gradient(90deg, #FAA629 1.23%, #FC6C36 100%) !important;
-  border: 1px solid #FD6C36;
-  transition: 0.2s; }
+.category-button:hover,
+.category-button:active,
+.category-button:focus {
+  background: linear-gradient(90deg, #faa629 1.23%, #fc6c36 100%) !important;
+  border: 1px solid #fd6c36;
+  transition: 0.2s;
+  color: #fff !important; }
 
 .woocommerce div.product p.price,
 .woocommerce div.product span.price {
@@ -13735,67 +13755,42 @@ label.lg {
   font-weight: 600;
   line-height: 48px; }
 
-.bus-talent-card {
+.bus-talent-card .image {
   position: relative;
   display: block;
-  flex: 0 0 255px;
-  margin-right: 30px;
-  width: 255px;
-  height: 390px; }
-  .bus-talent-card:first-child {
-    margin-left: 30px; }
-  .bus-talent-card .image {
-    position: relative;
-    display: block;
-    width: 100%;
-    height: 100%;
-    border-radius: 16px;
-    overflow: hidden;
-    background-color: var(--gray-light);
-    z-index: 1; }
-    .bus-talent-card .image img {
-      position: absolute;
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover; }
-    .bus-talent-card .image figcaption {
-      position: absolute;
-      font-size: 24px;
-      line-height: 28px;
-      font-weight: bold;
-      color: var(--light);
-      text-shadow: 0px 4px 15px rgba(0, 0, 0, 0.7);
-      left: 16px;
-      bottom: 16px; }
-  .bus-talent-card .link {
+  width: 100%;
+  height: 390px;
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: var(--gray-light);
+  z-index: 1; }
+  @media (max-width: 767.98px) {
+    .bus-talent-card .image {
+      height: 250px; } }
+  .bus-talent-card .image img {
     position: absolute;
     display: block;
-    top: 0;
-    height: 0;
     width: 100%;
     height: 100%;
-    z-index: 2; }
-  @media (min-width: 992px) and (max-width: 1199.98px) {
-    .bus-talent-card {
-      margin-right: 20px;
-      flex: 0 0 216px;
-      width: 216px;
-      height: 330.35294px; }
-      .bus-talent-card:first-child {
-        margin-left: 20px; }
-      .bus-talent-card:last-child {
-        margin-right: 0; } }
-  @media (min-width: 1200px) {
-    .bus-talent-card {
-      margin-right: 25px;
-      flex: 0 0 231px;
-      width: 231px;
-      height: 353.29412px; }
-      .bus-talent-card:first-child {
-        margin-left: 25px; }
-      .bus-talent-card:last-child {
-        margin-right: 0; } }
+    object-fit: cover; }
+  .bus-talent-card .image figcaption {
+    position: absolute;
+    font-size: 24px;
+    line-height: 28px;
+    font-weight: bold;
+    color: var(--light);
+    text-shadow: 0px 4px 15px rgba(0, 0, 0, 0.7);
+    left: 16px;
+    bottom: 16px; }
+
+.bus-talent-card .link {
+  position: absolute;
+  display: block;
+  top: 0;
+  height: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2; }
 
 .bus-form .title {
   font-size: 24px;

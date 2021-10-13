@@ -36,14 +36,16 @@ class Polen_SignInUser_Google_ReCaptcha
     public function validate_recaptcha( $errors, $username, $email )
     {
         global $Polen_Plugin_Settings;
-
         $gRecaptchaResponse = filter_input( INPUT_POST, 'g-recaptcha-response' );
-        $recaptcha = new ReCaptcha( $Polen_Plugin_Settings['polen_recaptcha_secret_key'] );
-        $resp = $recaptcha->setScoreThreshold(0.5)->verify($gRecaptchaResponse, $_SERVER[ 'SERVER_ADDR' ]);
-        if (!$resp->isSuccess()) {
-            $errors->add('registration-error', 'Você é um robô? Se não tente novamente', 'woocommerce');
+        $http_referer = filter_input( INPUT_POST, '_wp_http_referer' );
+        
+        if( '/register/' == $http_referer ) {
+            $recaptcha = new ReCaptcha( $Polen_Plugin_Settings['polen_recaptcha_secret_key'] );
+            $resp = $recaptcha->setScoreThreshold(0.5)->verify($gRecaptchaResponse, $_SERVER[ 'SERVER_ADDR' ]);
+            if (!$resp->isSuccess()) {
+                $errors->add('registration-error', 'Você é um robô? Se não tente novamente', 'woocommerce');
+            }
         }
-
         return $errors;
     }
 }
