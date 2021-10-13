@@ -53,6 +53,10 @@ class Polen_WC_Customer_New_Account extends WC_Email_Customer_New_Account
     public function trigger( $user_id, $user_pass = '', $password_generated = false ) {
         $this->setup_locale();
 
+        if( strpos(php_sapi_name(), 'cli' ) !== false ) {
+            return '';
+        }
+
         if ( $user_id ) {
             $this->object = new WP_User( $user_id );
 
