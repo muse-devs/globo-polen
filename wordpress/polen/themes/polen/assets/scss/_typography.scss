@@ -27,6 +27,7 @@ h4,
 p {
   font-size: 12px;
   font-weight: 400;
+  word-wrap: break-word;
   &.muted {
     opacity: 0.8;
   }
@@ -100,14 +101,35 @@ legend {
   line-height: 18.75px;
 }
 
-@mixin polen-title {
-  font-size: 1rem;
-  font-weight: 600;
+// Tipografia básica dos componentes - Usar esses. Não tipar na classe do componente ------------------------
+.typo {
   line-height: 1.2;
-}
+  .typo-title {
+    font-size: 1rem;
+    font-weight: 600;
+  }
 
-@mixin polen-text {
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 18.75px;
+  .typo-text {
+    font-size: 16px;
+    font-weight: 400;
+  }
+
+  .typo-link {
+    font-size: 0.8rem;
+    font-weight: 600;
+    &.typo-no-underline {
+      text-decoration: none;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+    &.typo-bold {
+      font-weight: 700;
+    }
+  }
+
+  .typo-category {
+    font-size: 12px;
+    font-weight: 400;
+  }
 }
