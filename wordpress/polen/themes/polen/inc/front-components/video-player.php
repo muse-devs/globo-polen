@@ -10,7 +10,7 @@ function polen_get_talent_video_buttons($talent, $video_url, $video_download, $h
 {
 	$donate = $product ? get_post_meta($product->get_id(), '_is_charity', true) : false;
 ?>
-	<?php if ($product && $product->is_in_stock()) : ?>
+	<?php if ($product && $product->is_in_stock() && 'publish' == $product->get_status) : ?>
 		<?php polen_get_talent_video_buttons_button_buy_one($donate, $product, $order ); ?>
 	<?php endif; ?>
 	<?php if (wp_is_mobile()) : ?>
