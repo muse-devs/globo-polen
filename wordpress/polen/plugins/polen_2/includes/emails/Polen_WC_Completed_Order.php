@@ -2,6 +2,8 @@
 namespace Polen\Includes\Emails;
 
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
+use Polen\Includes\Polen_Video_Info;
+use Polen\Social_Base\Social_Base_Order;
 
 class Polen_WC_Completed_Order extends \WC_Email_Customer_Completed_Order
 {
@@ -13,7 +15,8 @@ class Polen_WC_Completed_Order extends \WC_Email_Customer_Completed_Order
         $this->template_html  = 'emails/customer-completed-order.php';
         $this->template_plain = 'emails/plain/customer-completed-order.php';
         
-        $this->template_ep_html = 'emails/video-autografo/%s/customer-completed-order.php';
+        $this->template_ep_html          = 'emails/video-autografo/%s/customer-completed-order.php';
+        $this->template_social_base_html = 'emails/social-base/%s/customer-completed-order.php';
 
         $this->placeholders   = array(
             '{order_date}'   => '',
@@ -45,15 +48,20 @@ class Polen_WC_Completed_Order extends \WC_Email_Customer_Completed_Order
             $this->recipient                      = $this->object->get_billing_email();
             $this->placeholders['{order_date}']   = wc_format_datetime( $this->object->get_date_created() );
             $this->placeholders['{order_number}'] = $this->object->get_order_number();
+        } else {
+            return;
         }
 
         $cart_item = Polen_Cart_Item_Factory::polen_cart_item_from_order( $this->object );
         $this->product = $cart_item->get_product();
 
         $is_event_promotional = event_promotional_order_is_event_promotional( $order );
+        $is_social_base = order_is_social_base( $order );
         if ( $this->is_enabled() && $this->get_recipient() ) {
             if( $is_event_promotional ) {
                 $this->send( $this->get_recipient(), $this->get_subject_ep(), $this->get_content_ep(), $this->get_headers(), $this->get_attachments() );
+            } elseif( $is_social_base ) {
+                $this->send( $this->get_recipient(), $this->get_subject_social_base(), $this->get_content_social_base(), $this->get_headers(), $this->get_attachments() );
             } else {
                 $this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
             }
@@ -66,12 +74,36 @@ class Polen_WC_Completed_Order extends \WC_Email_Customer_Completed_Order
        return 'Seu Vídeo-Autógrafo está pronto.';
    }
 
+   public function get_subject_social_base() {
+       return 'Sua compra na Reserva veio com um 🎁!';
+   }
+
    public function get_content_ep()
    {
         return wc_get_template_html(
             sprintf( $this->template_ep_html, $this->product->get_sku() ),
             array(
                 'order'              => $this->object,
+                'email_heading'      => $this->get_heading(),
+                'additional_content' => $this->get_additional_content(),
+                'sent_to_admin'      => false,
+                'plain_text'         => false,
+                'email'              => $this,
+            )
+        );
+   }
+
+   public function get_content_social_base()
+   {
+
+        $video_info = Polen_Video_Info::get_by_order_id( $this->object->get_id() );
+        $video_url = site_url( 'v/' . $video_info->hash );
+        $social_campaing_name = $this->object->get_meta( Social_Base_Order::ORDER_META_KEY_CAMPAING, true );
+        return wc_get_template_html(
+            sprintf( $this->template_social_base_html, $social_campaing_name ),
+            array(
+                'order'              => $this->object,
+                'video_url'          => $video_url,
                 'email_heading'      => $this->get_heading(),
                 'additional_content' => $this->get_additional_content(),
                 'sent_to_admin'      => false,
