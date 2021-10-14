@@ -850,7 +850,7 @@ class ZCWC_Stripe_Connect {
     public function get_strip_talent($seller_id)
     {
         global $wpdb;
-        $sql = "SELECT `stripe_account_id`, `stripe_mdr` FROM `" . $wpdb->base_prefix . "polen_talents` WHERE `user_id`=" . $seller_id;
+        $sql = "SELECT `stripe_account_id`, `mdr` FROM `" . $wpdb->base_prefix . "polen_talents` WHERE `user_id`=" . $seller_id;
 
         return $wpdb->get_results( $sql );
 	}
