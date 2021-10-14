@@ -41,15 +41,17 @@ $url_watch_video = $order_is_completed == true ? polen_get_link_watch_video_by_o
 ?>
 
 <?php if ($order_is_completed) :
-$video_info = Polen_Video_Info::get_by_order_id( $order->get_id() );
-?>
-	<div class="row my-3">
-		<div class="col-12">
-		<?php if( $video_info->is_vimeo_process_complete() ) : ?>
-			<a href="<?php echo $url_watch_video; ?>" class="btn btn-outline-light btn-lg btn-block">Assistir vídeo</a>
-		<?php else: ?>
-			<a href="" class="btn btn-outline-light btn-lg btn-block disabled">Video sendo processado, aguarde alguns minutos</a>
-		<?php endif; ?>
+	$video_info = Polen_Video_Info::get_by_order_id( $order->get_id() );
+	if( !empty( $video_info ) ) :
+	?>
+		<div class="row my-3">
+			<div class="col-12">
+			<?php if( $video_info->is_vimeo_process_complete() ) : ?>
+				<a href="<?php echo $url_watch_video; ?>" class="btn btn-outline-light btn-lg btn-block">Assistir vídeo</a>
+			<?php else: ?>
+				<a href="" class="btn btn-outline-light btn-lg btn-block disabled">Video sendo processado, aguarde alguns minutos</a>
+			<?php endif; ?>
+			</div>
 		</div>
-	</div>
+	<?php endif; ?>
 <?php endif; ?>
