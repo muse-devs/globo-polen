@@ -2,6 +2,9 @@
 
 namespace Polen\Includes;
 
+use Polen\Admin\Polen_Admin_B2B_Product_Fields;
+use Polen\Admin\Polen_Admin_Social_Base_Product_Fields;
+
 class Polen_WooCommerce 
 {
     const ORDER_STATUS_PAYMENT_IN_REVISION = 'payment-in-revision';
@@ -85,11 +88,11 @@ class Polen_WooCommerce
 
             add_filter( 'woocommerce_product_data_tabs', array( $this, 'charity_tab' ) );
             add_filter( 'woocommerce_product_data_tabs', array( $this, 'promotional_event' ) );
-            add_filter( 'woocommerce_product_data_tabs', array( $this, 'social_base_event' ) );
+            // add_filter( 'woocommerce_product_data_tabs', array( $this, 'social_base_event' ) );
             
             add_filter( 'woocommerce_product_data_panels', array( $this, 'charity_product_data_product_tab_content' ) );
             add_filter( 'woocommerce_product_data_panels', array( $this, 'promotional_event_product_data_product_tab_content' ) );
-            add_filter( 'woocommerce_product_data_panels', array( $this, 'social_base_product_data_product_tab_content' ) );
+            // add_filter( 'woocommerce_product_data_panels', array( $this, 'social_base_product_data_product_tab_content' ) );
 
             add_action( 'woocommerce_update_product', array( $this, 'on_product_save' ) );
 
@@ -293,16 +296,16 @@ class Polen_WooCommerce
         return $array;
     }
 
-    public function social_base_event( $array )
-    {
-        $array['social_base'] = array(
-            'label'    => 'Base Social',
-            'target'   => 'social_base_product_data',
-            'class'    => array(),
-            'priority' => 90,
-        );
-        return $array;
-    }
+    // public function social_base_event( $array )
+    // {
+    //     $array['social_base'] = array(
+    //         'label'    => 'Base Social',
+    //         'target'   => 'social_base_product_data',
+    //         'class'    => array(),
+    //         'priority' => 90,
+    //     );
+    //     return $array;
+    // }
 
     public function charity_product_data_product_tab_content() {
         global $product_object;
@@ -527,6 +530,7 @@ class Polen_WooCommerce
         <?php
     }
 
+    /*
     public function social_base_product_data_product_tab_content()
     {
         global $product_object;
@@ -576,7 +580,7 @@ class Polen_WooCommerce
                 </div>
             </div>
         <?php
-    }
+    }*/
 
     public function on_product_save( $product_id ) {
         if( is_admin() ){
@@ -599,9 +603,9 @@ class Polen_WooCommerce
                 $promotional_event_author = strip_tags( $_POST[ '_promotional_event_author' ] );
                 $promotional_event_wartermark = strip_tags( $_POST[ '_promotional_event_wartermark' ] );
                 
-                $is_social_base = strip_tags( $_POST[ '_is_social_base' ]);
-                $social_base_slug_campaing = strip_tags( $_POST[ '_social_base_slug_campaing' ]);
-                $social_base_video_testimonial = strip_tags( $_POST[ '_social_base_video_testimonial' ]);
+                // $is_social_base = strip_tags( $_POST[ '_is_social_base' ]);
+                // $social_base_slug_campaing = strip_tags( $_POST[ '_social_base_slug_campaing' ]);
+                // $social_base_video_testimonial = strip_tags( $_POST[ '_social_base_video_testimonial' ]);
 
                 $product->update_meta_data( '_is_charity', $charity );
                 $product->update_meta_data( '_charity_name', $charity_name );
@@ -619,11 +623,12 @@ class Polen_WooCommerce
                 $this->save_meta($product, $promotional_event_author, '_promotional_event_author' );
                 $this->save_meta($product, $promotional_event_wartermark, '_promotional_event_wartermark' );
 
-                $this->save_meta($product, $is_social_base, '_is_social_base' );
-                $this->save_meta($product, $social_base_slug_campaing, '_social_base_slug_campaing' );
-                $this->save_meta($product, $social_base_video_testimonial, '_social_base_video_testimonial' );
+                // $this->save_meta($product, $is_social_base, '_is_social_base' );
+                // $this->save_meta($product, $social_base_slug_campaing, '_social_base_slug_campaing' );
+                // $this->save_meta($product, $social_base_video_testimonial, '_social_base_video_testimonial' );
 
-                do_action( 'polen_custom_fields_b2b' , $product_id );
+                do_action( Polen_Admin_Social_Base_Product_Fields::ACTION_NAME , $product_id );
+                do_action( Polen_Admin_B2B_Product_Fields::ACTION_NAME         , $product_id );
                   
                 remove_action( 'woocommerce_update_product', array( $this, 'on_product_save' ) );
                 $product->save();
