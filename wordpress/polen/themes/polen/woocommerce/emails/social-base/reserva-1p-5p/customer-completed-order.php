@@ -17,6 +17,7 @@
             <img src="<?php echo TEMPLATE_URI.'/assets/img/video-autografo/polen-email.png'?>"
               style="height: 40px; margin: 0.5em 1em;"></img>
             <img src="<?php echo TEMPLATE_URI.'/assets/img/video-autografo/reserva.png'?>" style="height: 20px; margin: 1em;"></img>
+            <img src="<?php echo TEMPLATE_URI.'/assets/img/1p5p/ong.png'?>" style="height: 50px; margin: 1em;"></img>
           </div>
           <table border="0" cellpadding="0" cellspacing="0" width="600" id="template_container"
             style="background-color: #262626; overflow: hidden; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1); border-radius: 10px;">
@@ -56,8 +57,8 @@
                         <tr
                           style='color: #ffffff; font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 14px; line-height: 100%; text-align: left;'>
                           <td align="center">
-                            <a href="<?php echo $video_url; ?>" target="_blank"
-                              style="background: #FC6C36; font-size: 24px; color: #fff; font-weight: 600; text-decoration: none; padding: 20px 40px; border-radius: 72px;">ASSISTA
+                            <a href="<?php echo polen_get_link_order_status( $order->get_id() ); ?>" target="_blank"
+                              style="background: #FC6C36; font-size: 18px; color: #fff; font-weight: 600; text-decoration: none; padding: 20px 40px; border-radius: 72px;word-wrap: break-word;">ASSISTA
                               AO VÍDEO</a>
                           </td>
                         </tr>
@@ -84,7 +85,7 @@
                             style='color: #ffffff; font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 14px; line-height: 100%; text-align: left;'>
                             <p
                               style="font-size: 16px; line-height: 2; font-weight: 400; color: #ffffff; text-align: justify; margin-top: 10px; padding: 10px;">
-                              Hoje, dia 16 de outubro, é o Dia Mundial da Alimentação e, em parceria com a ONG Banco de
+                              Dia 16 de outubro, é o Dia Mundial da Alimentação e, em parceria com a ONG Banco de
                               Alimentos e a Polen, mapeamos as pessoas que mais nos ajudaram na missão de combate à fome
                               no nosso país e trouxemos um agradecimento especial de quem foi positivamente impactado
                               pela sua contribuição ao fazer negócio com a gente.
@@ -97,8 +98,8 @@
                         <tr
                           style='color: #ffffff; font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 14px; line-height: 100%; text-align: left;'>
                           <td align="center">
-                            <a href="<?php echo $video_url; ?>" target="_blank"
-                              style="background: #FC6C36; font-size: 24px; color: #fff; font-weight: 600; text-decoration: none; padding: 20px 40px; border-radius: 72px;">ASSISTA
+                            <a href="<?php echo polen_get_link_order_status( $order->get_id() ); ?>" target="_blank"
+                              style="background: #FC6C36; font-size: 18px; color: #fff; font-weight: 600; text-decoration: none; padding: 20px 40px; border-radius: 72px;word-wrap: break-word;">ASSISTA
                               AO VÍDEO</a>
                           </td>
                         </tr>
