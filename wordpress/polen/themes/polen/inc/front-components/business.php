@@ -165,7 +165,7 @@ function bus_get_form()
           <input type="text" name="phone" v-model="phone" v-on:keyup="handleChange" class="input" placeholder="(XX) XXXXX-XXXX" maxlength="15" required />
         </label>
         <label class="pol-input-group mb-3">
-          <span class="label">Nome do talento</span>
+          <span class="label">Qual talento você possui interesse?</span>
           <input type="text" name="talent_name" class="input" placeholder="Nome do talento" />
         </label>
         <label class="pol-input-group mb-3" aria-required="true">
