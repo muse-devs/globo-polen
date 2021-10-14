@@ -2,6 +2,7 @@
 
 namespace Polen\Includes;
 
+use Polen\Admin\Polen_Admin_Social_Base_Product_Fields;
 use Polen\Social\Social_Order;
 use Polen\Social_Base\Social_Base_Order;
 use Polen\Social_Base\Social_Base_Product;
@@ -89,10 +90,10 @@ class Polen_Cart
         //PARA CAMPANHAS SOCIAIS
         // $product_is_social = social_product_is_social( $item->get_product(), social_get_category_base() );
         $product = $item->get_product();
-        $product_is_social = product_is_social_base( $item->get_product(), social_get_category_base() );
-        if( $product_is_social ) {
+        $product_is_social_base = product_is_social_base( $product );
+        if( $product_is_social_base ) {
             $order->add_meta_data( Social_Base_Order::ORDER_META_KEY_SOCIAL, '1' );
-            $order->add_meta_data( Social_Base_Order::ORDER_META_KEY_CAMPAING, $product->get_meta( Social_Base_Product::PRODUCT_META_SLUG_CAMPAING, true ) );
+            $order->add_meta_data( Social_Base_Order::ORDER_META_KEY_CAMPAING, $product->get_meta( Polen_Admin_Social_Base_Product_Fields::FIELD_NAME_SLUG_CAMPAING, true ) );
 
             // $instructions_to_video = "Agradecer {$name} de {$city} pela doação ao criança esperança 2021!";
             // $item->add_meta_data( 'instructions_to_video', $instructions_to_video, true );
