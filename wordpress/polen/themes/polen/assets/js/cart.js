@@ -73,9 +73,9 @@ function verify_checkbox_selected_to_hidde_or_show_fields() {
 
     // Checando se existem palavras proibidas na instrução do video
     function checkWordsInInstructions(instruction) {
-      let forbiddenWords = ["música", "canta", "toca", "tocar"];
+      let forbiddenWords = ["música", "Música", "musica", "Musica","canta", "cantar",
+      "toca", "tocar", "palinha", "palhinha", "Palinha", "Palhinha", '"'];
       if (forbiddenWords.some(v => instruction.includes(v))) {
-        //polError("Lembre-se: Músicos não tem autorização para cantar trechos de músicas.");
         $('#prohibited-instruction-alert').removeClass("d-none");
       } else {
         $('#prohibited-instruction-alert').addClass("d-none");

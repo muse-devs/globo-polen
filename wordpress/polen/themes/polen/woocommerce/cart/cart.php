@@ -269,7 +269,7 @@ $Talent_Fields = new Polen_Update_Fields();
 						?>
 					</div>
           <div class="col-md-12">
-            <div id="prohibited-instruction-alert" class="alert alert-danger mt-2 d-none" role="alert">Lembre-se: Músicos não tem autorização para cantar trechos de músicas.</div>
+            <div id="prohibited-instruction-alert" class="alert alert-danger mt-2 d-none" role="alert">Lembre-se: os talentos não tem autorização para cantar ou tocar trechos de músicas.</div>
           </div>
 				</div>
 				<!-- <div class="row pb-2">
