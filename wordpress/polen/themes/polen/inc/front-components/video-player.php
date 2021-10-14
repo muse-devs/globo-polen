@@ -3,6 +3,8 @@
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
 use Polen\Includes\Polen_Order_Review;
 use Polen\Includes\Polen_Update_Fields;
+use Polen\Social_Base\Social_Base;
+use Polen\Social_Base\Social_Base_Product;
 
 function polen_get_talent_video_buttons($talent, $video_url, $video_download, $hash = null, $product = null, $order = null)
 {
@@ -217,6 +219,7 @@ function polen_get_video_url_by_video_info( $video_info )
 function polen_get_url_watermark_video_player( $order )
 {
 	$is_social = social_order_is_social( $order );
+	$is_social_base = order_is_social_base( $order );
 	$is_event_promotional = event_promotional_order_is_event_promotional( $order );
 	$cart_item = Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
 	$product = $cart_item->get_product();
@@ -228,6 +231,15 @@ function polen_get_url_watermark_video_player( $order )
 				return false;
 			}
 			$pep = new Promotional_Event_Product( $product );
+			$url_warter_mark = $pep->get_url_wartermark_video_player();
+			if( !empty( $url_warter_mark ) ) : ?>
+				<img src="<?= $url_warter_mark; ?>" class="logo social" alt="Logo Criança Esperança" style="" />
+			<?php endif; ?>
+	<?php elseif( $is_social_base ) :
+		if( empty( $product ) ) {
+				return false;
+			}
+			$pep = new Social_Base_Product( $product );
 			$url_warter_mark = $pep->get_url_wartermark_video_player();
 			if( !empty( $url_warter_mark ) ) : ?>
 				<img src="<?= $url_warter_mark; ?>" class="logo social" alt="Logo Criança Esperança" style="" />
