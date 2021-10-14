@@ -76,7 +76,7 @@ function bus_get_card($item)
         <figcaption itemprop="name"><?php echo get_the_title($item); ?></figcaption>
         <div class="followers">
           <img src="<?php echo TEMPLATE_URI ?>/assets/icons/instagram.svg" alt="Instagram" />
-          <span>250 Mil seguidores</span>
+          <span><?php echo esc_attr(get_post_meta($item, 'talent_subscribed_instagram', true)); ?> seguidores</span>
         </div>
       </div>
     </figure>
