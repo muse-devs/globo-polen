@@ -162,9 +162,9 @@ function bus_get_form()
           <span class="label">Número de telefone</span>
           <input type="text" name="phone" v-model="phone" v-on:keyup="handleChange" class="input" placeholder="(XX) XXXXX-XXXX" maxlength="15" required />
         </label>
-        <label class="pol-input-group mb-3" aria-required="true">
+        <label class="pol-input-group mb-3">
           <span class="label">Nome do talento</span>
-          <input type="text" name="talent_name" class="input" placeholder="Nome do talento" required />
+          <input type="text" name="talent_name" class="input" placeholder="Nome do talento" />
         </label>
         <label class="pol-input-group mb-3" aria-required="true">
           <span class="label">Mensagem</span>
