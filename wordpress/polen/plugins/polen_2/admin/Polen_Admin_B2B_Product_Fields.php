@@ -43,7 +43,7 @@ class Polen_Admin_B2B_Product_Fields
                     array(
                         'id'      => self::FIELD_NAME_IS_B2B,
                         'value'   => $product_object->get_meta( self::FIELD_NAME_IS_B2B ) == 'yes' ? 'yes' : 'no',
-                        'label'   => 'É B2B',
+                        'label'   => 'Destaque para Empresas',
                         'cbvalue' => 'yes',
                     )
                 );
