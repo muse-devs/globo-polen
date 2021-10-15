@@ -11735,6 +11735,9 @@ textarea {
   .banner-content.type-video .polen-card-video:first-child {
     margin-left: 15px; } }
 
+.banner-content.type-video .polen-card-video .video-cover {
+  object-fit: cover; }
+
 .video-cover,
 .video-promo-card .card {
   position: relative;
@@ -11799,6 +11802,7 @@ textarea {
 .video-player-button {
   position: absolute;
   display: block;
+  cursor: pointer;
   width: 100%;
   height: 100%;
   top: 0;
