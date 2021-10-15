@@ -154,9 +154,9 @@ function polen_front_get_banner_video()
         <div class="col-12 mb-3">
           <h2 class="title text-center">Emocione quem você ama com videos personalizados</h2>
         </div>
-        <div class="col-12 d-flex justify-content-center">
-          <a href="<?php echo polen_get_all_talents_url(); ?>" class="btn btn-primary btn-md">Ver todos os talentos</a>
-        </div>
+        <!-- <div class="col-12 d-flex justify-content-center">
+          <a href="<?php //echo polen_get_all_talents_url(); ?>" class="btn btn-primary btn-md">Ver todos os talentos</a>
+        </div> -->
       </div>
     </div>
     <script>
