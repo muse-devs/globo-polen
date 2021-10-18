@@ -34,7 +34,7 @@
 
             $('.polen-cnpj').mask("99.999.999/9999-99");
             $('.polen-cpf').mask("999.999.999-99");
-            $('.polen-phone').mask("(99) 99999-9999");
+            // $('.polen-phone').mask("(99) 99999-9999");
             $('.polen-cep').mask("99999-999");
 
             if( $('#role').val() == 'user_talent' || $('#role').val() == 'user_charity' ) {

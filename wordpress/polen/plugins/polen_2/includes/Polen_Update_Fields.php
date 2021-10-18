@@ -345,7 +345,7 @@ class Polen_Update_Fields
                 "label"       => "Telefone",
                 "label_class" => array( 'title-on-checkout-notes' ),
                 "placeholder" => "Informe seu Telefone",
-                "maxlength"   => 14,
+                "maxlength"   => 20,
             );
             woocommerce_form_field( 'billing_phone', $args, $checkout->get_value( 'billing_phone' ) );
         }
