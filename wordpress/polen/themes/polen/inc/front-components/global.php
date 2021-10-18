@@ -427,11 +427,11 @@ function polen_front_get_videos()
 				<div class="banner-content type-video<?php //if (sizeof($items) < 1) echo " ml-3 ml-md-0" ?>">
           <div class="polen-card-video">
             <figure id="cover-box" class="video-cover" data-id="1">
-              <img loading="lazy" src="https://i.vimeocdn.com/video/1188098290_300x435.jpg" alt="">
+              <img loading="lazy" src="https://polen-homolog.c9t.pw/polen/uploads/2021/10/Screen-Shot-2021-10-18-at-14.15.46.png" alt="">
               <div class="video-player-button" data-id="1"></div>
               <div class="video-icons">
                 <figure class="image-cropper color small">
-                  <img src="https://polen-test1.c9t.pw/polen/uploads/2021/04/F03CE7D0-CFA2-4204-8D7F-336088DA53A9_1_105_c-72x72.jpeg" alt="Afonso Padilha" class="avatar avatar-polen-square-crop-lg wp-user-avatar wp-user-avatar-polen-square-crop-lg alignnone photo">
+                  <img src="https://polen.me/polen/uploads/2021/07/arte-2-300x435.jpg" alt="Afonso Padilha" class="avatar avatar-polen-square-crop-lg wp-user-avatar wp-user-avatar-polen-square-crop-lg alignnone photo">
                 </figure>
                 <figure class="image-cropper small">
                   <img src="https://polen-test1.c9t.pw/polen/themes/polen/assets/img/logo-round-orange.svg" alt="Logo redonda">
@@ -444,11 +444,11 @@ function polen_front_get_videos()
           </div>
           <div class="polen-card-video">
             <figure id="cover-box" class="video-cover" data-id="2">
-              <img loading="lazy" src="https://i.vimeocdn.com/video/1188098290_300x435.jpg" alt="">
+              <img loading="lazy" src="https://polen-homolog.c9t.pw/polen/uploads/2021/10/Screen-Shot-2021-10-18-at-14.15.46.png" alt="">
               <div class="video-player-button" data-id="2"></div>
               <div class="video-icons">
                 <figure class="image-cropper color small">
-                  <img src="https://polen-test1.c9t.pw/polen/uploads/2021/04/F03CE7D0-CFA2-4204-8D7F-336088DA53A9_1_105_c-72x72.jpeg" alt="Afonso Padilha" class="avatar avatar-polen-square-crop-lg wp-user-avatar wp-user-avatar-polen-square-crop-lg alignnone photo">
+                  <img src="https://polen.me/polen/uploads/2021/07/arte-2-300x435.jpg" alt="Afonso Padilha" class="avatar avatar-polen-square-crop-lg wp-user-avatar wp-user-avatar-polen-square-crop-lg alignnone photo">
                 </figure>
                 <figure class="image-cropper small">
                   <img src="https://polen-test1.c9t.pw/polen/themes/polen/assets/img/logo-round-orange.svg" alt="Logo redonda">
