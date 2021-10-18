@@ -431,10 +431,10 @@ function polen_front_get_videos()
               <div class="video-player-button" data-id="1"></div>
               <div class="video-icons">
                 <figure class="image-cropper color small">
-                  <img src="<?php echo TEMPLATE_URI; ?>/polen/uploads/2021/04/F03CE7D0-CFA2-4204-8D7F-336088DA53A9_1_105_c-72x72.jpeg" alt="Afonso Padilha" class="avatar avatar-polen-square-crop-lg wp-user-avatar wp-user-avatar-polen-square-crop-lg alignnone photo">
+                  <img src="https://polen-test1.c9t.pw/polen/uploads/2021/04/F03CE7D0-CFA2-4204-8D7F-336088DA53A9_1_105_c-72x72.jpeg" alt="Afonso Padilha" class="avatar avatar-polen-square-crop-lg wp-user-avatar wp-user-avatar-polen-square-crop-lg alignnone photo">
                 </figure>
                 <figure class="image-cropper small">
-                  <img src="<?php echo TEMPLATE_URI; ?>/polen/themes/polen/assets/img/logo-round-orange.svg" alt="Logo redonda">
+                  <img src="https://polen-test1.c9t.pw/polen/themes/polen/assets/img/logo-round-orange.svg" alt="Logo redonda">
                 </figure>
               </div>
             </figure>
@@ -448,10 +448,10 @@ function polen_front_get_videos()
               <div class="video-player-button" data-id="2"></div>
               <div class="video-icons">
                 <figure class="image-cropper color small">
-                  <img src="<?php echo TEMPLATE_URI; ?>/polen/uploads/2021/04/F03CE7D0-CFA2-4204-8D7F-336088DA53A9_1_105_c-72x72.jpeg" alt="Afonso Padilha" class="avatar avatar-polen-square-crop-lg wp-user-avatar wp-user-avatar-polen-square-crop-lg alignnone photo">
+                  <img src="https://polen-test1.c9t.pw/polen/uploads/2021/04/F03CE7D0-CFA2-4204-8D7F-336088DA53A9_1_105_c-72x72.jpeg" alt="Afonso Padilha" class="avatar avatar-polen-square-crop-lg wp-user-avatar wp-user-avatar-polen-square-crop-lg alignnone photo">
                 </figure>
                 <figure class="image-cropper small">
-                  <img src="<?php echo TEMPLATE_URI; ?>/polen/themes/polen/assets/img/logo-round-orange.svg" alt="Logo redonda">
+                  <img src="https://polen-test1.c9t.pw/polen/themes/polen/assets/img/logo-round-orange.svg" alt="Logo redonda">
                 </figure>
               </div>
             </figure>
