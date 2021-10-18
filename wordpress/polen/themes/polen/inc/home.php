@@ -12,24 +12,26 @@ get_header();
 
   <?php polen_front_get_categories_buttons(); ?>
 
-  <?php polen_front_get_banner_video();?>
+  <?php polen_front_get_banner_video(); ?>
 
-  <?php //polen_front_get_banner_with_carousel(); ?>
+  <?php //polen_front_get_banner_with_carousel();
+  ?>
 
   <?php polen_banner_scrollable(polen_get_new_talents(6), "Destaque", polen_get_all_new_talents_url()); ?>
 
-	<div class="row">
-		<div class="col-12">
-			<div id="product-carousel" class="owl-carousel owl-theme">
+  <div class="row">
+    <div class="col-12">
+      <div id="product-carousel" class="owl-carousel owl-theme">
         <!-- <div class="item">
-					<?php //mc_get_home_banner_gustavo("/masterclass/gustavo-mendes/seja-outro-sendo-voce/inscricao"); ?>
+					<?php //mc_get_home_banner_gustavo("/masterclass/gustavo-mendes/seja-outro-sendo-voce/inscricao");
+          ?>
 				</div> -->
-				<div class="item">
-					<?php mc_get_home_banner(master_class_url_home()); ?>
-				</div>
-			</div>
-		</div>
-	</div>
+        <div class="item">
+          <?php mc_get_home_banner(master_class_url_home()); ?>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <?php polen_front_get_tutorial(); ?>
 

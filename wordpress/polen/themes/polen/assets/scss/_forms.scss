@@ -422,3 +422,16 @@ textarea {
 	width: 100%;
 	outline: none;
 }
+
+.mdc-text-field {
+  margin: 0;
+  width: 100%;
+  --mdc-theme-primary: var(--primary);
+  --mdc-theme-on-primary: var(--primary);
+  --mdc-shape-small: 8px;
+}
+
+.mdc-text-field--focused:not(.mdc-text-field--disabled)
+.mdc-floating-label {
+  color: var(--primary);
+}

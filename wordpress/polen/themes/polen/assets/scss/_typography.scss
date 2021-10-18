@@ -74,7 +74,7 @@ a {
 }
 
 .btn-lg {
-  padding: 0.8rem 1rem;
+  padding: 0.93rem 1rem;
   font-size: 1rem;
   font-weight: 600;
   letter-spacing: 0.03rem;
@@ -104,41 +104,46 @@ legend {
 // Tipografia básica dos componentes - Usar esses. Não tipar na classe do componente ------------------------
 .typo {
   line-height: 1.2;
-  .typo-title {
-    font-size: 1rem;
-    font-weight: 600;
-  }
+}
 
-  .typo-text {
-    font-size: 16px;
-    font-weight: 400;
-  }
+.typo-title {
+  font-size: 1rem;
+  font-weight: 600;
+}
 
-  .typo-p {
-    font-size: 14px;
-    line-height: 1.3;
-  }
+.typo-text {
+  font-size: 16px;
+  font-weight: 400;
+}
 
-  .typo-small {
-    font-size: 12px;
-  }
+.typo-p {
+  font-size: 14px;
+  line-height: 1.3;
+}
 
-  .typo-link {
-    font-size: 0.8rem;
-    font-weight: 600;
-    &.typo-no-underline {
+.typo-small {
+  font-size: 12px;
+}
+
+.typo-double-line-height {
+  line-height: 2;
+}
+
+.typo-link {
+  font-size: 0.8rem;
+  font-weight: 600;
+  &.typo-no-underline {
+    text-decoration: none;
+    &:hover {
       text-decoration: none;
-      &:hover {
-        text-decoration: none;
-      }
-    }
-    &.typo-bold {
-      font-weight: 700;
     }
   }
+  &.typo-bold {
+    font-weight: 700;
+  }
+}
 
-  .typo-category {
-    font-size: 12px;
-    font-weight: 400;
-  }
+.typo-category {
+  font-size: 12px;
+  font-weight: 400;
 }

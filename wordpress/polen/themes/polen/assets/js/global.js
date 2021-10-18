@@ -278,11 +278,21 @@ function getSessionMessage() {
 	sessionStorage.removeItem(CONSTANTS.MESSAGE_COOKIE);
 }
 
+function blockUnblockMaterial(el, block) {
+  const materialEl = document.querySelectorAll(`${el} .mdc-text-field`);
+  materialEl.forEach(function(element, key, parent) {
+    block
+      ? element.classList.add("mdc-text-field--disabled")
+      : element.classList.remove("mdc-text-field--disabled")
+  });
+}
+
 function blockUnblockInputs(el, block) {
+  blockUnblockMaterial(el, block);
 	const allEl = document.querySelectorAll(
 		`${el} input, ${el} select, ${el} textarea`
 	);
-	allEl.forEach(function (element, key, parent) {
+  allEl.forEach(function (element, key, parent) {
 		block
 			? element.setAttribute("readonly", true)
 			: element.removeAttribute("readonly");
