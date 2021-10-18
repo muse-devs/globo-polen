@@ -466,33 +466,28 @@ function polen_front_get_videos()
   <script>
     (function($) {
       $('.video-player-button').on('click',function(){
+        // Get video by data-id id
         let id = $(this).attr('data-id');
         const video = document.querySelector('#video-box[data-id="'+id+'"]');
-        addVideoListener(video);
-        playVideo(video);
+        // Show video and remove cover
         $('#video-box[data-id="'+id+'"]').removeClass("d-none");
         $('#cover-box[data-id="'+id+'"]').addClass("d-none");
-        video.addEventListener("ended", endVideo);
-      });
 
-      function addVideoListener(video) {
-        video.load();
-        video.addEventListener("click", playVideo);
-      }
-
-      function playVideo(video) {
+        // Play video
         video.controls = true;
         setImediate(function(){
           video.play();
         })
-        video.removeEventListener("click", playVideo);
-      }
 
-      function endVideo() {
-        //video.controls = false;
-        $('#video-box').addClass("d-none");
-        $('#cover-box').removeClass("d-none");
-      }
+        video.addEventListener("ended", endVideo);
+
+        function endVideo() {
+          video.controls = false;
+          // Show cover and remove video
+          $('#video-box[data-id="'+id+'"]').addClass("d-none");
+          $('#cover-box[data-id="'+id+'"]').removeClass("d-none");
+        }
+      });
     })(jQuery);
 	</script>
 <?php
