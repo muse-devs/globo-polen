@@ -48,7 +48,7 @@ class Material_Inputs
       </div>
     <?php endif; ?>
     <script>
-      mdc.textField.MDCTextField.attachTo(document.querySelector("#" + "<?php echo $id; ?>"));
+      mdc.textField.MDCTextField.attachTo(document.querySelector("<?php echo "#" . $id; ?>"));
     </script>
   <?php
   }
