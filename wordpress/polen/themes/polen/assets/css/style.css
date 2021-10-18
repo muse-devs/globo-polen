@@ -11611,7 +11611,7 @@ textarea {
   .top-banner .content {
     position: absolute;
     padding: 15px;
-    top: 30%;
+    top: 35%;
     width: 100%; }
     @media (max-width: 991.98px) {
       .top-banner .content {
@@ -11622,6 +11622,7 @@ textarea {
         transform: translateY(-50%); } }
     .top-banner .content .title {
       font-size: 1.7rem;
+      text-shadow: 0px 4px 15px rgba(0, 0, 0, 0.7);
       font-weight: 700;
       color: var(--light); }
       @media screen and (max-width: 376px) {
