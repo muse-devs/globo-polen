@@ -280,10 +280,15 @@ function getSessionMessage() {
 
 function blockUnblockMaterial(el, block) {
   const materialEl = document.querySelectorAll(`${el} .mdc-text-field`);
+  const materialSel = document.querySelectorAll(`${el} .mdc-select`);
   materialEl.forEach(function(element, key, parent) {
     block
       ? element.classList.add("mdc-text-field--disabled")
       : element.classList.remove("mdc-text-field--disabled")
+  });
+  materialSel.forEach(function(element, key, parent) {
+    const select = mdc.select.MDCSelect.attachTo(element);
+    select.disabled = block;
   });
 }
 

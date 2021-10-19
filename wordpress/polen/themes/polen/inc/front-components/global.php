@@ -500,16 +500,17 @@ function polen_form_signin_newsletter(string $event = 'newsletter')
       <div class="row">
         <div class="col-md-8 mb-2 mb-md-0">
           <?php
-          $inputs->hidden_input("action", "polen_newsletter_signin");
-          $inputs->hidden_input("page_source", filter_input(INPUT_SERVER, 'REQUEST_URI'));
-          $inputs->hidden_input("event", $event);
-          $inputs->hidden_input("is_mobile", polen_is_mobile() ? "1" : "0");
-          $inputs->hidden_input("security", wp_create_nonce('news-signin'));
+          $inputs->input_hidden("action", "polen_newsletter_signin");
+          $inputs->input_hidden("page_source", filter_input(INPUT_SERVER, 'REQUEST_URI'));
+          $inputs->input_hidden("event", $event);
+          $inputs->input_hidden("is_mobile", polen_is_mobile() ? "1" : "0");
+          $inputs->input_hidden("security", wp_create_nonce('news-signin'));
           $inputs->material_input(Material_Inputs::TYPE_EMAIL, "email", "email", "Entre com o seu e-mail", true);
           ?>
         </div>
         <div class="col-md-4 mt-2 mt-md-0 d-md-flex align-items-md-center">
-          <input type="submit" value="Enviar" class="signin-newsletter-button btn btn-outline-light btn-lg btn-block" />
+          <!-- <input type="submit" value="Enviar" class="signin-newsletter-button btn btn-outline-light btn-lg btn-block" /> -->
+          <?php $inputs->material_button(Material_Inputs::TYPE_SUBMIT, "botao", "Enviar"); ?>
         </div>
         <div class="col-md-8 mb-2 mb-md-0 small signin-response"></div>
       </div>

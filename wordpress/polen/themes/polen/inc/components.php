@@ -13,4 +13,4 @@ require TEMPLATE_DIR . '/inc/front-components/video-autografo.php';
 require TEMPLATE_DIR . '/inc/front-components/masterclass.php';
 require TEMPLATE_DIR . '/inc/front-components/setembro-amarelo.php';
 require TEMPLATE_DIR . '/inc/front-components/business.php';
-require TEMPLATE_DIR . '/inc/front-components/form.php';
+require TEMPLATE_DIR . '/inc/front-components/material_io.php';
