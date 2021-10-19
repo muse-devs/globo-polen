@@ -13521,7 +13521,6 @@ label.lg {
     .mc-banner .content .left img {
       width: 130px; }
     .mc-banner .content .right img {
-      margin: 2em;
       display: none; }
   @media (min-width: 768px) {
     .mc-banner {
