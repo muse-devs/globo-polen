@@ -13716,13 +13716,13 @@ label.lg {
       width: 150px; }
   .combate-mobile .bottom {
     position: absolute;
-    bottom: -20px;
+    bottom: -5px;
     width: 100%;
     display: flex;
     justify-content: center; }
     .combate-mobile .bottom .btn-primary {
       position: absolute;
-      bottom: 30px; }
+      bottom: 24px; }
 
 .button-yellow {
   background-color: #FFCF34 !important;
