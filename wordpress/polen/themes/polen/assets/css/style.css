@@ -13656,6 +13656,34 @@ label.lg {
   font-size: 14px;
   color: var(--gray); }
 
+@media (max-width: 991.98px) {
+  .combate-desktop {
+    display: none; } }
+
+.combate-mobile {
+  display: none;
+  min-height: 190px; }
+  @media (max-width: 991.98px) {
+    .combate-mobile {
+      display: block; } }
+  .combate-mobile .top {
+    position: absolute;
+    top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center; }
+    .combate-mobile .top .combate-logo {
+      width: 150px; }
+  .combate-mobile .bottom {
+    position: absolute;
+    bottom: -20px;
+    width: 100%;
+    display: flex;
+    justify-content: center; }
+    .combate-mobile .bottom .btn-primary {
+      position: absolute;
+      bottom: 30px; }
+
 .button-yellow {
   background-color: #FFCF34 !important;
   color: #000 !important;

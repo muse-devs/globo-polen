@@ -227,3 +227,38 @@
 		color: var(--gray);
 	}
 }
+
+.combate-desktop {
+	@include media-breakpoint-down(md) {
+		display: none;
+	}
+}
+
+.combate-mobile {
+  display: none;
+  min-height: 190px;
+	@include media-breakpoint-down(md) {
+		display: block;
+	}
+  .top {
+    position: absolute;
+    top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    .combate-logo {
+      width: 150px;
+    }
+  }
+  .bottom {
+    position: absolute;
+    bottom: -20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    .btn-primary {
+      position: absolute;
+      bottom: 30px;
+    }
+  }
+}
