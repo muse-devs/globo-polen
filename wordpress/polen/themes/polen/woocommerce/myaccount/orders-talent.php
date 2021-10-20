@@ -49,41 +49,23 @@ if (!$talent_is_social) {
 						<div class="col md-12">
 							<div class="box-round p-3">
 								<div class="row py-2">
-                  <div class="col-12 mb-4">
-                    <div class="pre-record-message p-3">
-                      <div class="row">
-                        <div class="col-md-12 d-flex align-items-center mb-3">
-                          <div class="ico mr-2"><img src="<?php echo TEMPLATE_URI; ?>/assets/img/emoji/info.png" alt="Emoji Festa"></div>
-                          <div class="text">
-                            Regras importantes:
-                          </div>
-                        </div>
-                        <div class="col-md-12">
-                          <p class="p">
-                            ● Use o celular na posição vertical (em pé) para gravar os vídeos.<br>
-                            ● Não é permitido cantar/tocar músicas ou citar textos/poesias.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
 									<div class="col-12 col-md-12">
 										<div class="row">
 											<?php
 											if (!empty($order['from'])) : ?>
-												<div class="col-12 col-md-6">
-													<p class="p">De</p>
+												<div class="col-12 col-md-12">
+													<p class="p">Vídeo de</p>
 													<p class="value small"><?php echo $order['from']; ?></p>
 												</div>
 											<?php endif; ?>
-											<div class="col-12 col-md-6">
+											<div class="col-12 col-md-12">
 												<p class="p">Para <?php echo (defined('ENV_DEV') && (ENV_DEV === true)) ? '(ID: ' . $order['order_id'] . ')' : ''; ?></p>
 												<p class="value small"><?php echo $order['name']; ?></p>
 											</div>
-											<!-- <div class="col-12 col-md-12">
+											<div class="col-12 col-md-12">
 												<p class="p">e-mail</p>
-												<p class="value small"><?php //echo $order['email']; ?></p>
-											</div> -->
+												<p class="value small"><?php echo $order['email']; ?></p>
+											</div>
 										</div>
 										<?php
 										if (event_promotional_order_is_event_promotional($order_obj)) {
