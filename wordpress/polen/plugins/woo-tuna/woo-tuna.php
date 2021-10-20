@@ -148,8 +148,23 @@ class TUNA_Payment extends WC_Payment_Gateway
 			echo print_r("ERROR PARTNERUNIQUEID REQUIRED");
 			exit;
 		}
-		$orderID = sanitize_text_field($_POST['partnerUniqueId']['id']);
-		$customer_order = wc_get_order((int) $orderID);
+        $orderID = sanitize_text_field($_POST['partnerUniqueId']['id']);
+        $customer_order = wc_get_order((int) $orderID);
+
+        print_r($orderID);
+        echo "<hr>1";
+        print_r($customer_order);
+        echo "<hr>2";
+        print_r($_POST['partnerUniqueId']['id']);
+        echo "<hr>3";
+        print_r($_POST['partnerUniqueId']);
+        echo "<hr>4";
+        print_r($_POST);
+        echo "<hr>5";
+
+        die('aki');
+
+
 		if ($customer_order == null) {
 			echo print_r("ERROR PARTNERUNIQUEID INVALID[".$orderID.']');
 			exit;
