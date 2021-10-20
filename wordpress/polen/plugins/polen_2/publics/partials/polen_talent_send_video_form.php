@@ -103,7 +103,7 @@ if (isset($_REQUEST['order_id']) && !empty($_REQUEST['order_id'])) {
                 <div class="col-12">
                     <form id="form-video-upload" method="post" enctype="multipart/form-data">
                         <div class="form-group text-center">
-                            <button class="btn btn-primary btn-lg btn-block video-rec show">Gravar vídeo</button>
+                            <button id="video-rec" class="btn btn-primary btn-lg btn-block video-rec show">Gravar vídeo</button>
                             <div id="video-file-name" class="text-truncate ml-2"></div>
                             <input type="file" class="form-control-file" id="file-video" name="file_data" accept="video/*">
                         </div>
