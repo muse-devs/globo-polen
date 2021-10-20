@@ -24,7 +24,7 @@ if (isset($_REQUEST['order_id']) && !empty($_REQUEST['order_id'])) {
     <main id="primary" class="site-main mt-4">
         <header class="entry-header">
             <?php the_title('<h1 class="entry-title">', '</h1>'); ?>
-            <button class="btn btn-outline-light btn-lg btn-block mt-4 btn-instru" data-toggle="collapse" data-target="#collapseInstruction" aria-expanded="false" aria-controls="collapseExample">Ver instruções</button>
+            <button class="btn btn-outline-light btn-lg btn-block mt-4 btn-instruction" data-toggle="collapse" data-target="#collapseInstruction" aria-expanded="false" aria-controls="collapseExample">Ver instruções</button>
         </header>
         <div class="collapse mt-3" id="collapseInstruction">
             <!-- Início -->
@@ -82,7 +82,7 @@ if (isset($_REQUEST['order_id']) && !empty($_REQUEST['order_id'])) {
                 <div class="col-12">
                     <div class="py-3 text-center box-video">
                         <div id="content-info" class="content-info show">
-                            <figure class="image wait show">
+                            <figure class="image wait show video-rec">
                                 <img src="<?php echo TEMPLATE_URI ?>/assets/img/upload-info.png" alt="Gravar vídeo agora" class="correct-margin" />
                             </figure>
                             <figure class="image complete">

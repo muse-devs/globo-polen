@@ -12704,7 +12704,8 @@ label[for="wc-stripe-new-payment-method"] {
   border-radius: 8px; }
   .box-video .content-info,
   .box-video .content-upload {
-    display: none; }
+    display: none;
+    cursor: pointer; }
     .box-video .content-info.show,
     .box-video .content-upload.show {
       display: block; }
@@ -12776,6 +12777,13 @@ label[for="wc-stripe-new-payment-method"] {
 
 .btn-instruction {
   font-weight: 400; }
+
+.btn-instruction[aria-expanded="false"] {
+  background: #fff !important;
+  color: #000 !important; }
+
+#video-instructions {
+  word-wrap: break-word; }
 
 .order-flow-old .col-flow-icons .flow i {
   font-size: 29px;

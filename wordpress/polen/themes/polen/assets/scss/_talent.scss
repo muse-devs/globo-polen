@@ -494,6 +494,7 @@
 	.content-info,
 	.content-upload {
 		display: none;
+    cursor: pointer;
 		&.show {
 			display: block;
 		}
@@ -586,4 +587,13 @@
 
 .btn-instruction {
   font-weight: 400;
+}
+
+.btn-instruction[aria-expanded="false"] {
+  background: #fff!important;
+  color: #000!important;
+}
+
+#video-instructions {
+  word-wrap: break-word;
 }
