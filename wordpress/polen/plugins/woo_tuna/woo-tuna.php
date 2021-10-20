@@ -192,7 +192,7 @@ class TUNA_Payment extends WC_Payment_Gateway
             case '9':
             case '2':
                 // Changing the order for processing and reduces the stock.
-                $customer_order->update_status('completed', __('Tuna Payments: Pagamento confirmado.', 'tuna-payment'));
+                $customer_order->update_status('approved', __('Tuna Payments: Pagamento confirmado.', 'tuna-payment'));
                 wc_reduce_stock_levels((int) $orderID);
                 echo print_r("OK");
                 break;
@@ -265,7 +265,7 @@ class TUNA_Payment extends WC_Payment_Gateway
             case '9':
             case '2':
                 // Changing the order for processing and reduces the stock.
-                $customer_order->update_status('completed', __('Tuna Payments: Pagamento confirmado.', 'tuna-payment'));
+                $customer_order->update_status('wc-payment-approved', __('Tuna Payments: Pagamento confirmado.', 'tuna-payment'));
                 wc_reduce_stock_levels((int) $orderID);
                 break;
             case 'C':
@@ -406,7 +406,7 @@ class TUNA_Payment extends WC_Payment_Gateway
                 case '8':
                 case '9':
                 case '2':
-                    $customer_order->update_status('completed', __('Tuna Payments: Pagamento confirmado.', 'tuna-payment'));
+                    $customer_order->update_status('wc-payment-approved', __('Tuna Payments: Pagamento confirmado.', 'tuna-payment'));
                     // Changing the order for processing and reduces the stock.
                     wc_reduce_stock_levels((int) $orderID);
                     break;
@@ -787,7 +787,7 @@ class TUNA_Payment extends WC_Payment_Gateway
                     case '8':
                     case '9':
                     case '2':
-                        $customer_order->update_status('completed', __('Tuna Payments: Pagamento confirmado.', 'tuna-payment'));
+                        $customer_order->update_status('wc-payment-approved', __('Tuna Payments: Pagamento confirmado.', 'tuna-payment'));
                         // Changing the order for processing and reduces the stock.
                         $customer_order->payment_complete();
                         wc_reduce_stock_levels((int) $orderID);
