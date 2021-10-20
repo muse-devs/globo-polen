@@ -701,7 +701,7 @@ function polen_get_home_banner($link)
 						<p class="mt-3">
               Peça agora um vídeo personalizado para<br>os talentos do canal Combate.
 						</p>
-						<a href="<?php echo $link; ?>" class="btn btn-primary btn-md">Ver talentos<span class="ml-2"><?php Icon_Class::polen_icon_chevron_right(); ?></span></a>
+						<a href="<?php echo $link; ?>" class="btn btn-primary btn-md">Ver talentos</a>
 					</div>
 					<div class="right mr-2 ml-4 d-block">
             <!-- <img class="img-responsive mb-4" src="<?php //echo TEMPLATE_URI . '/assets/img/combate/logo.png'; ?>" alt="Canal Combate" style="width: 120px; float:right;"></img>
@@ -718,7 +718,7 @@ function polen_get_home_banner($link)
         </div>
         <div class="bottom">
           <img class="img-responsive" src="<?php echo TEMPLATE_URI . '/assets/img/combate/talentos-mobile.png'; ?>" alt="Talentos do Canal Combate"></img>
-          <a href="<?php echo $link; ?>" class="btn btn-primary btn-md">Ver talentos<span class="ml-2"><?php Icon_Class::polen_icon_chevron_right(); ?></span></a>
+          <a href="<?php echo $link; ?>" class="btn btn-primary btn-md">Ver talentos</a>
         </div>
 			</div>
 		</div>
