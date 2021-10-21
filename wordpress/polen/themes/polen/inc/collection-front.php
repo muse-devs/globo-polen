@@ -5,7 +5,9 @@
  * dado do banco de dados para o Front
  */
 
+use Polen\Includes\Cart\Polen_Cart_Item_Factory;
 use Polen\Includes\Debug;
+use Polen\Includes\Polen_Video_Info;
 
 /**
  * Pegar informações das categorias
@@ -206,4 +208,22 @@ function polen_get_array_related_products( $product_id )
             return $args;
         }
     }
+}
+
+function polen_get_home_stories( $qtd = 4 )
+{
+    $videos_info = Polen_Video_Info::get_by_complete_and_public_rand_order( $qtd );
+    $array_result = [];
+    foreach( $videos_info as $vi ) {
+		$order = wc_get_order($vi->order_id);
+		$cart_item = Polen_Cart_Item_Factory::polen_cart_item_from_order($order);
+        $array_result[] = [
+            'talent_id'    => $vi->talent_id,
+            'talent_thumb' => polen_get_avatar($vi->talent_id, 'polen-square-crop-lg'),
+            'cover'        =>  $vi->vimeo_thumbnail,
+            'video_url'    => $vi->vimeo_file_play,
+            'initials'     => polen_get_initials_name( $cart_item->get_name_to_video() ),
+        ];
+    }
+    return  $array_result;
 }
