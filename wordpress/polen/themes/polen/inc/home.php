@@ -23,7 +23,7 @@ get_header();
 			<div id="product-carousel" class="owl-carousel owl-theme">
         <!-- Banner Canal Combate -->
         <div class="item">
-					<?php polen_get_home_banner(site_url('tag/sportv-combate/')); ?>
+					<?php polen_get_home_banner(site_url('tag/canal-combate/')); ?>
 				</div>
 			</div>
 		</div>
