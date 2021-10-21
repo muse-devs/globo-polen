@@ -6,6 +6,7 @@ class Material_Inputs
   const TYPE_PHONE = "phone";
   const TYPE_SUBMIT = "submit";
   const TYPE_BUTTON = "button";
+  const TYPE_PASSWORD = "password";
 
   function __construct()
   {
@@ -35,7 +36,6 @@ class Material_Inputs
     string $label,
     bool $required = true,
     string $classes = "",
-    string $helper = "",
     array $params = array()
   ) {
     ob_start();
@@ -48,7 +48,6 @@ class Material_Inputs
     string $name,
     string $label,
     bool $required = true,
-    string $helper = "",
     array $params = array()
   ) {
     ob_start();
@@ -56,17 +55,38 @@ class Material_Inputs
     return ob_end_flush();
   }
 
-  public function material_button(string $type = self::TYPE_BUTTON, string $id, string $title, string $classes = "")
+  public function material_input_helper($text)
+  {
+    ?>
+      <small><?php echo $text; ?></small>
+    <?php
+  }
+
+  public function material_button(string $type = self::TYPE_BUTTON, string $id, string $title, string $classes = "", array $params = array())
   {
     ob_start();
     include $this->get_full_path_file('material_button');
     return ob_end_flush();
   }
 
-  public function material_button_link(string $id, string $title, string $link, bool $blank = false, string $classes = "")
+  public function material_button_outlined(string $type = self::TYPE_BUTTON, string $id, string $title, string $classes = "", array $params = array())
+  {
+    ob_start();
+    include $this->get_full_path_file('material_button_outlined');
+    return ob_end_flush();
+  }
+
+  public function material_button_link(string $id, string $title, string $link, bool $blank = false, string $classes = "", array $params = array())
   {
     ob_start();
     include $this->get_full_path_file('material_button_link');
+    return ob_end_flush();
+  }
+
+  public function material_button_link_outlined(string $id, string $title, string $link, bool $blank = false, string $classes = "", array $params = array())
+  {
+    ob_start();
+    include $this->get_full_path_file('material_button_link_outlined');
     return ob_end_flush();
   }
 

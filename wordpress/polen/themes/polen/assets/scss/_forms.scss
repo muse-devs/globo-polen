@@ -436,11 +436,17 @@ textarea {
   --mdc-theme-primary: var(--primary);
   --mdc-theme-on-primary: var(--light);
   --mdc-shape-small: 8px;
+  --mdc-typography-button-font-size: 1rem;
+  --mdc-typography-button-font-weight: 600;
+  --mdc-typography-button-text-transform: none;
 }
 
 .mdc-button--raised {
   --mdc-protected-button-container-height: 54px;
-  --mdc-typography-button-font-size: 1rem;
+}
+
+.mdc-button--outlined {
+  --mdc-outlined-button-container-height: 54px;
 }
 
 .mdc-select {

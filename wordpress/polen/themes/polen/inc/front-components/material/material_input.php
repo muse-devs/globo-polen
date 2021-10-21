@@ -10,8 +10,3 @@
                                                                                                                                                                                                                                                                                                                         echo " {$key}='{$value}'";
                                                                                                                                                                                                                                                                                                                       } ?> />
 </label>
-<?php if ($helper) : ?>
-  <div class="mdc-text-field-helper-line">
-    <div class="mdc-text-field-helper-text" id="helper-<?php echo $id; ?>" aria-hidden="true"><?php echo $helper; ?></div>
-  </div>
-<?php endif; ?>

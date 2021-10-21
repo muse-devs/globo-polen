@@ -22,6 +22,7 @@ if (!defined('ABSPATH')) {
 
 function get_form_login()
 {
+  $inputs = new Material_Inputs();
 ?>
 	<div class="row">
 		<div class="col-12 col-md-6 mx-md-auto">
@@ -38,13 +39,12 @@ function get_form_login()
 						<?php do_action('woocommerce_login_form_start'); ?>
 
 						<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide mb-4">
-							<?php /*<label for="username"><?php esc_html_e('Username or email address', 'woocommerce'); ?>&nbsp;<span class="required">*</span></label> */ ?>
-							<input type="text" class="woocommerce-Input woocommerce-Input--text input-text form-control form-control-lg" name="username" id="username" autocomplete="username" placeholder="<?php esc_html_e('Username or email address', 'woocommerce'); ?>" value="<?php echo (!empty($_POST['username'])) ? esc_attr(wp_unslash($_POST['username'])) : ''; ?>" /><?php // @codingStandardsIgnoreLine
-																																																																																													?>
+              <?php $inputs->material_input(Material_Inputs::TYPE_TEXT, "username", "username", "Nome de usuário ou e-mail", true); ?>
+							<!-- <input type="text" class="woocommerce-Input woocommerce-Input--text input-text form-control form-control-lg" name="username" id="username" autocomplete="username" placeholder="<?php esc_html_e('Username or email address', 'woocommerce'); ?>" value="<?php echo (!empty($_POST['username'])) ? esc_attr(wp_unslash($_POST['username'])) : ''; ?>" /><?php // @codingStandardsIgnoreLine ?> -->
 						</p>
 						<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-							<?php /*<label for="password"><?php esc_html_e('Password', 'woocommerce'); ?>&nbsp;<span class="required">*</span></label> */ ?>
-							<input class="woocommerce-Input woocommerce-Input--text input-text form-control form-control-lg" type="password" name="password" id="password" autocomplete="current-password" placeholder="<?php esc_html_e('Password', 'woocommerce'); ?>" />
+              <?php $inputs->material_input(Material_Inputs::TYPE_PASSWORD, "password", "password", "Senha", true); ?>
+							<!-- <input class="woocommerce-Input woocommerce-Input--text input-text form-control form-control-lg" type="password" name="password" id="password" autocomplete="current-password" placeholder="<?php esc_html_e('Password', 'woocommerce'); ?>" /> -->
 						</p>
 
 						<?php do_action('woocommerce_login_form'); ?>
@@ -54,7 +54,7 @@ function get_form_login()
 								<input class="woocommerce-form__input woocommerce-form__input-checkbox" name="rememberme" type="checkbox" id="rememberme" value="forever" /> <span class="ml-2 align-bottom"><?php esc_html_e('Remember me', 'woocommerce'); ?></span>
 							</label>
 							<?php wp_nonce_field('woocommerce-login', 'woocommerce-login-nonce'); ?>
-							<button type="submit" class="woocommerce-button woocommerce-form-login__submit btn btn-primary btn-lg btn-block btn-login" name="login" value="<?php esc_attr_e('Log in', 'woocommerce'); ?>"><?php esc_html_e('Log in', 'woocommerce'); ?></button>
+              <?php $inputs->material_button(Material_Inputs::TYPE_SUBMIT, "login", "Acessar", "woocommerce-button woocommerce-form-login__submit", array("name" => "login")); ?>
 						</p>
 						<?php
 							global $Polen_Plugin_Settings;
@@ -64,8 +64,8 @@ function get_form_login()
 							<?php
 							$register_page = $Polen_Plugin_Settings['register_page'];
 							$register_link = get_the_permalink( $register_page );
+              $inputs->material_button_link_outlined("link-register", "Criar conta", esc_url($register_link));
 							?>
-							<a href="<?php echo esc_url( $register_link ); ?>" class="btn btn-outline-light btn-lg btn-block"><?php esc_html_e('Criar conta', 'woocommerce'); ?></a>
 						</p>
 						<?php endif; ?>
 						<p class="woocommerce-LostPassword lost_password">

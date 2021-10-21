@@ -161,7 +161,6 @@ function bus_get_form()
           "Número de telefone",
           true,
           "mb-3",
-          "",
           array(
             "placeholder" => "(XX) XXXXX-XXXX",
             "v-model" => "phone",
