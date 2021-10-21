@@ -685,3 +685,43 @@ function polen_get_toast($text)
   </div>
 <?php
 }
+
+function polen_get_home_banner($link)
+{
+?>
+	<div class="row mt-4">
+		<div class="col-12">
+      <!-- Desktop Banner -->
+			<div class="mc-banner combate-desktop">
+				<img class="image mobile-img" src="<?php echo TEMPLATE_URI . '/assets/img/combate/bg-mobile.png'; ?>" alt="Polen Masterclass" />
+				<img class="image desktop-img" src="<?php echo TEMPLATE_URI . '/assets/img/combate/bg.png'; ?>" alt="Polen Masterclass" />
+				<div class="content">
+					<div class="left">
+            <img src="<?php echo TEMPLATE_URI . '/assets/img/combate/logo.png'; ?>" alt="Canal Combate" style="width: 150px;"></img>
+						<p class="mt-3">
+              Peça agora um vídeo personalizado para<br>os talentos do canal Combate.
+						</p>
+						<a href="<?php echo $link; ?>" class="btn btn-primary btn-md">Ver talentos</a>
+					</div>
+					<div class="right mr-2 ml-4 d-block">
+            <!-- <img class="img-responsive mb-4" src="<?php //echo TEMPLATE_URI . '/assets/img/combate/logo.png'; ?>" alt="Canal Combate" style="width: 120px; float:right;"></img>
+            <br> -->
+            <img class="img-responsive" src="<?php echo TEMPLATE_URI . '/assets/img/combate/talentos.png'; ?>" alt="Talentos do Canal Combate" style="float: right; margin-right: -20px; border-radius: 12px;"></img>
+          </div>
+				</div>
+			</div>
+      <!-- Mobile Banner -->
+      <div class="mc-banner combate-mobile">
+				<img class="image" src="<?php echo TEMPLATE_URI . '/assets/img/combate/bg-mobile-new.png'; ?>" alt="Polen Masterclass" />
+				<div class="top">
+          <img class="img-responsive combate-logo" src="<?php echo TEMPLATE_URI . '/assets/img/combate/canal-combate-logo-branco.png'; ?>" alt="Canal Combate" style=""></img>
+        </div>
+        <div class="bottom">
+          <img class="img-responsive" src="<?php echo TEMPLATE_URI . '/assets/img/combate/talentos-mobile.png'; ?>" alt="Talentos do Canal Combate"></img>
+          <a href="<?php echo $link; ?>" class="btn btn-primary btn-md">Ver talentos</a>
+        </div>
+			</div>
+		</div>
+	</div>
+<?php
+}
