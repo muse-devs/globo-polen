@@ -53,8 +53,7 @@ $inputs = new Material_Inputs();
 
 						<p class="woocommerce-form-row form-row">
 							<?php wp_nonce_field('woocommerce-register', 'woocommerce-register-nonce'); ?>
-              <?php $inputs->material_button(Material_Inputs::TYPE_SUBMIT, "register", "Cadastre-se", "woocommerce-button btn-login woocommerce-form-register__submit g-recaptcha", array("data-sitekey" => $site_key, "data-callback" => "polen_onSubmit")); ?>
-							<button type="submit" class="woocommerce-button btn btn-primary btn-lg btn-block btn-login woocommerce-form-register__submit g-recaptcha" data-sitekey="<?= $site_key; ?>" data-callback='polen_onSubmit' data-action='submit' name="register" value="<?php esc_attr_e('Register', 'woocommerce'); ?>"><?php esc_html_e('Register', 'woocommerce'); ?></button>
+              <?php $inputs->material_button(Material_Inputs::TYPE_SUBMIT, "register", "Cadastre-se", "woocommerce-button btn-login woocommerce-form-register__submit g-recaptcha", array("data-sitekey" => $site_key, "data-callback" => "polen_onSubmit", "data-action", "submit", "name" => "register")); ?>
 							<input type="hidden" name="register" value="Cadastre-se" />
 						</p>
 					</div>
