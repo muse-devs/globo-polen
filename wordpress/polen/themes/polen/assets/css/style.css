@@ -12230,12 +12230,12 @@ select.form-control:not([size]):not([multiple]) {
 .woocommerce-cart #payment ul.payment_methods li input,
 .woocommerce-checkout #payment ul.payment_methods li input {
   margin-right: 0.5rem;
-  width: 24px !important; }
+  width: 24px; }
   @media (min-width: 992px) {
     #add_payment_method #payment ul.payment_methods li input,
     .woocommerce-cart #payment ul.payment_methods li input,
     .woocommerce-checkout #payment ul.payment_methods li input {
-      width: 21px !important; } }
+      width: 21px; } }
 
 .holder {
   position: relative;
@@ -12265,6 +12265,105 @@ button.criesp :hover {
 
 .card-brand-icons {
   display: none !important; }
+
+.defaultTunaLabel {
+  color: var(--dark);
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  display: inline-block !important;
+  margin-bottom: 0.5rem; }
+
+.woocommerce-billing-fields .form-row {
+  width: 100% !important;
+  margin-bottom: 1em !important; }
+  .woocommerce-billing-fields .form-row label {
+    color: var(--dark);
+    font-family: "Poppins", sans-serif;
+    font-size: 13px;
+    display: inline-block !important;
+    margin-bottom: 0.5rem; }
+
+.woocommerce-billing-fields .input-text {
+  width: 100%;
+  padding: 10px;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  border-radius: 6px;
+  color: #495057;
+  border: 1px solid #ced4da; }
+
+#savedCardPaymentDiv .cardDataDiv {
+  width: auto !important;
+  display: flex;
+  justify-content: center;
+  padding: 5px 0px;
+  flex-basis: 50% !important; }
+
+#savedCardPaymentDiv .cardItem {
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
+#savedCardPaymentDiv #tuna_saved_card_cvv {
+  display: flex;
+  justify-content: flex-end;
+  width: auto !important;
+  flex-basis: 30% !important;
+  margin-top: 0px; }
+  @media (max-width: 767.98px) {
+    #savedCardPaymentDiv #tuna_saved_card_cvv {
+      justify-content: center;
+      flex-basis: 100% !important; } }
+  #savedCardPaymentDiv #tuna_saved_card_cvv .defaultTunaInputText {
+    width: 50px !important;
+    padding: 10px;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    border-radius: 6px;
+    color: #495057;
+    border: 1px solid #ced4da; }
+    @media (max-width: 767.98px) {
+      #savedCardPaymentDiv #tuna_saved_card_cvv .defaultTunaInputText {
+        margin-top: 5px;
+        width: 70px !important; } }
+
+#commonFields .defaultTunaInputOption {
+  width: 100%;
+  padding: 10px;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  border-radius: 6px;
+  color: #495057;
+  border: 1px solid #ced4da; }
+
+.defaultTunaInputText {
+  width: 100% !important;
+  padding: 10px !important;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  border-radius: 6px;
+  color: #495057;
+  border: 1px solid #ced4da; }
+
+#creditCardPaymentDiv label {
+  color: var(--dark);
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  display: inline-block !important;
+  margin-bottom: 0.5rem; }
+
+#creditCardPaymentDiv #SINGLE_USE_FIELD label {
+  margin-top: 8px; }
+
+#boletoPaymentDocumentDiv label {
+  color: var(--dark);
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  display: inline-block !important;
+  margin-top: 15px; }
+
+.tuna-tabs .tab.selected:after {
+  background-color: var(--primary); }
 
 .wc-stripe-elements-field,
 .wc-stripe-iban-element-field {
@@ -12708,7 +12807,8 @@ label[for="wc-stripe-new-payment-method"] {
   border-radius: 8px; }
   .box-video .content-info,
   .box-video .content-upload {
-    display: none; }
+    display: none;
+    cursor: pointer; }
     .box-video .content-info.show,
     .box-video .content-upload.show {
       display: block; }
@@ -12780,6 +12880,13 @@ label[for="wc-stripe-new-payment-method"] {
 
 .btn-instruction {
   font-weight: 400; }
+
+.btn-instruction[aria-expanded="false"] {
+  background: #fff !important;
+  color: #000 !important; }
+
+#video-instructions {
+  word-wrap: break-word; }
 
 .order-flow-old .col-flow-icons .flow i {
   font-size: 29px;
@@ -13557,7 +13664,6 @@ label.lg {
     .mc-banner .content .left img {
       width: 130px; }
     .mc-banner .content .right img {
-      margin: 2em;
       display: none; }
   @media (min-width: 768px) {
     .mc-banner {
@@ -13692,6 +13798,34 @@ label.lg {
 .masterclass-content-box .description {
   font-size: 14px;
   color: var(--gray); }
+
+@media (max-width: 991.98px) {
+  .combate-desktop {
+    display: none; } }
+
+.combate-mobile {
+  display: none;
+  min-height: 190px; }
+  @media (max-width: 991.98px) {
+    .combate-mobile {
+      display: block; } }
+  .combate-mobile .top {
+    position: absolute;
+    top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center; }
+    .combate-mobile .top .combate-logo {
+      width: 150px; }
+  .combate-mobile .bottom {
+    position: absolute;
+    bottom: -5px;
+    width: 100%;
+    display: flex;
+    justify-content: center; }
+    .combate-mobile .bottom .btn-primary {
+      position: absolute;
+      bottom: 24px; }
 
 .button-yellow {
   background-color: #FFCF34 !important;
