@@ -18,9 +18,9 @@ class Polen_Admin_Order_Custom_Fields_Deadline_BulkActions
 
     public function add_deadline_option( $actions )
     {
-        $actions[ self::KEY_BASE_VALUE . '1' ] = 'Deadline D+1';
-        $actions[ self::KEY_BASE_VALUE . '5' ] = 'Deadline D+5';
         $actions[ self::KEY_BASE_VALUE . '7' ] = 'Deadline D+7';
+        $actions[ self::KEY_BASE_VALUE . '15' ] = 'Deadline D+15';
+        $actions[ self::KEY_BASE_VALUE . '30' ] = 'Deadline D+30';
         return $actions;
     }
 
