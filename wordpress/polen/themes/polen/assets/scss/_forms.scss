@@ -457,6 +457,10 @@ textarea {
   --mdc-shape-small: 8px;
 }
 
+.mdc-list-item {
+  padding: 8px 16px;
+}
+
 .mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label,
 .mdc-select:not(.mdc-select--disabled).mdc-select--focused .mdc-floating-label {
   color: var(--primary);
