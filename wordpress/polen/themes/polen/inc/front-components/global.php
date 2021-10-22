@@ -421,7 +421,7 @@ function polen_front_get_videos($videos)
     <div class="col-md-12">
       <header class="row my-3">
         <div class="col">
-          <h2>Vídeos Polen</h2>
+          <h2>Últimos vídeos gravados pelos famosos</h2>
         </div>
       </header>
     </div>
