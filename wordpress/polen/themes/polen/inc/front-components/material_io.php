@@ -10,7 +10,7 @@ class Material_Inputs
 
   function __construct()
   {
-    wp_enqueue_script('material-js');
+    // wp_enqueue_script('material-js');
 
     ob_start();
     include $this->get_full_path_file('init');

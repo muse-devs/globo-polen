@@ -246,6 +246,7 @@ function polen_scripts() {
 	}
 
 	wp_enqueue_script( 'bootstrap-js', TEMPLATE_URI . '/assets/js/vendor/bootstrap.min.js', array("jquery"), _S_VERSION, true );
+  wp_enqueue_script('material-js');
 
 	// if(is_user_logged_in()) {
 		wp_enqueue_script( 'header-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'navigation.js', array("jquery"), _S_VERSION, true );
