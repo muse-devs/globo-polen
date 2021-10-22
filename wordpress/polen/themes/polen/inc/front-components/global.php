@@ -410,8 +410,11 @@ function polen_front_get_artists($items, $title, $social = false)
 <?php
 }
 
-function polen_front_get_videos()
+function polen_front_get_videos($videos)
 {
+  if (!$videos) {
+		return;
+	}
 ?>
 	<section id="talent-videos" class="row my-1 banner-scrollable">
 		<div class="d-none d-md-block col-md-12 text-right custom-slick-controls"></div>
@@ -424,41 +427,28 @@ function polen_front_get_videos()
     </div>
 		<div class="col-md-12 p-0">
 			<div class="banner-wrapper">
-				<div class="banner-content type-video<?php //if (sizeof($items) < 1) echo " ml-3 ml-md-0" ?>">
-          <div class="polen-card-video">
-            <figure id="cover-box" class="video-cover" data-id="1">
-              <img loading="lazy" src="https://polen-homolog.c9t.pw/polen/uploads/2021/10/Screen-Shot-2021-10-18-at-14.15.46.png" alt="">
-              <div class="video-player-button" data-id="1"></div>
-              <div class="video-icons">
-                <figure class="image-cropper color small">
-                  <img src="https://polen.me/polen/uploads/2021/07/arte-2-300x435.jpg" alt="Afonso Padilha" class="avatar avatar-polen-square-crop-lg wp-user-avatar wp-user-avatar-polen-square-crop-lg alignnone photo">
+				<div class="banner-content type-video">
+          <?php foreach ($videos as $key=>$value) : ?>
+            <?php if ($value['video_url']) : ?>
+              <div class="polen-card-video">
+                <figure id="cover-box" class="video-cover" data-id="<?php echo $key; ?>">
+                  <img loading="lazy" src="<?php echo $value['cover']; ?>" alt="">
+                  <div class="video-player-button" data-id="<?php echo $key; ?>"></div>
+                  <div class="video-icons">
+                    <figure class="image-cropper color small">
+                      <?php echo $value['talent_thumb']; ?>
+                    </figure>
+                    <figure class="image-cropper small">
+                      <?php echo $value['initials']; ?>
+                    </figure>
+                  </div>
                 </figure>
-                <figure class="image-cropper small">
-                  <img src="https://polen-test1.c9t.pw/polen/themes/polen/assets/img/logo-round-orange.svg" alt="Logo redonda">
-                </figure>
+                <video id="video-box" class="video-cover d-none" playsinline width="100%" height="100%" data-id="<?php echo $key; ?>">
+                  <source src="<?php echo $value['video_url']; ?>" type="video/mp4">
+                </video>
               </div>
-            </figure>
-            <video id="video-box" class="video-cover d-none" playsinline width="100%" height="100%" data-id="1">
-              <source src="https://player.vimeo.com/external/578038088.sd.mp4?s=34c4468dd147f91679df8e0ebc4453fd48877d40&profile_id=165&oauth2_token_id=1511985459" type="video/mp4">
-            </video>
-          </div>
-          <div class="polen-card-video">
-            <figure id="cover-box" class="video-cover" data-id="2">
-              <img loading="lazy" src="https://polen-homolog.c9t.pw/polen/uploads/2021/10/Screen-Shot-2021-10-18-at-14.15.46.png" alt="">
-              <div class="video-player-button" data-id="2"></div>
-              <div class="video-icons">
-                <figure class="image-cropper color small">
-                  <img src="https://polen.me/polen/uploads/2021/07/arte-2-300x435.jpg" alt="Afonso Padilha" class="avatar avatar-polen-square-crop-lg wp-user-avatar wp-user-avatar-polen-square-crop-lg alignnone photo">
-                </figure>
-                <figure class="image-cropper small">
-                  <img src="https://polen-test1.c9t.pw/polen/themes/polen/assets/img/logo-round-orange.svg" alt="Logo redonda">
-                </figure>
-              </div>
-            </figure>
-            <video id="video-box" class="video-cover d-none" playsinline width="100%" height="100%" data-id="2">
-              <source src="https://player.vimeo.com/external/578038088.sd.mp4?s=34c4468dd147f91679df8e0ebc4453fd48877d40&profile_id=165&oauth2_token_id=1511985459" type="video/mp4">
-            </video>
-          </div>
+            <?php endif; ?>
+          <?php endforeach; ?>
         </div>
 			</div>
 		</div>
