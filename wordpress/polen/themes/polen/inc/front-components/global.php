@@ -431,19 +431,22 @@ function polen_front_get_videos($videos)
           <?php foreach ($videos as $key=>$value) : ?>
             <?php if ($value['video_url']) : ?>
               <div class="polen-card-video">
-                <figure id="cover-box" class="video-cover" data-id="<?php echo $key; ?>">
-                  <img loading="lazy" src="<?php echo $value['cover']; ?>" alt="">
-                  <div class="video-player-button" data-id="<?php echo $key; ?>"></div>
+                <!-- <figure id="cover-box" class="video-cover" data-id="<?php //echo $key; ?>">
+                  <img loading="lazy" src="<?php //echo $value['cover']; ?>" alt="">
+                  <video id="video-box" class="video-cover d-none" playsinline loop width="100%" height="100%" data-id="<?php echo $key; ?>">
+                    <source src="<?php //echo $value['video_url']; ?>" type="video/mp4">
+                  </video>
+                  <div class="video-player-button" data-id="<?php //echo $key; ?>"></div>
                   <div class="video-icons">
                     <figure class="image-cropper color small">
-                      <?php echo $value['talent_thumb']; ?>
+                      <?php //echo $value['talent_thumb']; ?>
                     </figure>
                     <figure class="image-cropper small">
-                      <?php echo $value['initials']; ?>
+                      <?php //echo $value['initials']; ?>
                     </figure>
                   </div>
-                </figure>
-                <video id="video-box" class="video-cover d-none" playsinline width="100%" height="100%" data-id="<?php echo $key; ?>">
+                </figure> -->
+                <video id="video-box" class="video-cover" playsinline loop width="100%" height="100%" data-id="<?php echo $key; ?>" controls="controls">
                   <source src="<?php echo $value['video_url']; ?>" type="video/mp4">
                 </video>
               </div>
@@ -455,13 +458,10 @@ function polen_front_get_videos($videos)
 	</section>
   <script>
     (function($) {
-      $('.video-player-button').on('click',function(){
+      $('#video-box').on('click',function(){
         // Get video by data-id id
         let id = $(this).attr('data-id');
         const video = document.querySelector('#video-box[data-id="'+id+'"]');
-        // Show video and remove cover
-        $('#video-box[data-id="'+id+'"]').removeClass("d-none");
-        $('#cover-box[data-id="'+id+'"]').addClass("d-none");
 
         // Play video
         video.controls = true;
@@ -473,11 +473,31 @@ function polen_front_get_videos($videos)
 
         function endVideo() {
           video.controls = false;
-          // Show cover and remove video
-          $('#video-box[data-id="'+id+'"]').addClass("d-none");
-          $('#cover-box[data-id="'+id+'"]').removeClass("d-none");
         }
       });
+      // $('.video-player-button').on('click',function(){
+      //   // Get video by data-id id
+      //   let id = $(this).attr('data-id');
+      //   const video = document.querySelector('#video-box[data-id="'+id+'"]');
+      //   // Show video and remove cover
+      //   $('#video-box[data-id="'+id+'"]').removeClass("d-none");
+      //   $('#cover-box[data-id="'+id+'"]').addClass("d-none");
+
+      //   // Play video
+      //   video.controls = true;
+      //   setImediate(function(){
+      //     video.play();
+      //   })
+
+      //   video.addEventListener("ended", endVideo);
+
+      //   function endVideo() {
+      //     video.controls = false;
+      //     // Show cover and remove video
+      //     $('#video-box[data-id="'+id+'"]').addClass("d-none");
+      //     $('#cover-box[data-id="'+id+'"]').removeClass("d-none");
+      //   }
+      // });
     })(jQuery);
 	</script>
 <?php
