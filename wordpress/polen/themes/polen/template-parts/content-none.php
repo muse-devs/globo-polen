@@ -48,7 +48,10 @@ global $wp_query;
 		</div>
 		<div class="row">
 			<div class="col-12 col-md-8 m-md-auto">
-				<a href="<?php echo site_url("shop"); ?>" class="btn btn-primary btn-lg btn-block">Ver todos</a>
+        <?php
+        $inputs = new Material_Inputs();
+        $inputs->material_button_link("btn-voltar", "Ver todos", site_url("shop"));
+        ?>
 			</div>
 		</div>
 	</div><!-- .page-content -->

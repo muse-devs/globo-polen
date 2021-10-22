@@ -1,5 +1,5 @@
 <div class="mdc-select mdc-select--outlined<?php echo $required ? " required" : ""; ?><?php echo $classes ? " " . $classes : ""; ?>">
-  <input id="<?php echo $id; ?>" type="hidden" name="<?php echo $name; ?>" <?php foreach ($params as $key => $value) {
+  <input id="<?php echo $id; ?>" type="hidden" name="<?php echo $name; ?>"<?php foreach ($params as $key => $value) {
                                                                               echo " {$key}='{$value}'";
                                                                             } ?> />
   <div class="mdc-select__anchor" aria-labelledby="outlined-select-label">

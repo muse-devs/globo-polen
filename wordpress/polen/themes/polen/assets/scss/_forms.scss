@@ -446,6 +446,8 @@ textarea {
 }
 
 .mdc-button--outlined {
+  --mdc-outlined-button-label-text-color: var(--dark);
+  --mdc-outlined-button-outline-color: var(--dark);
   --mdc-outlined-button-container-height: 54px;
 }
 

@@ -24,7 +24,11 @@ if (isset($_REQUEST['order_id']) && !empty($_REQUEST['order_id'])) {
     <main id="primary" class="site-main mt-4">
         <header class="entry-header">
             <?php the_title('<h1 class="entry-title">', '</h1>'); ?>
-            <button class="btn btn-outline-light btn-lg btn-block mt-4 btn-instruction" data-toggle="collapse" data-target="#collapseInstruction" aria-expanded="false" aria-controls="collapseExample">Ver instruções</button>
+            <button class="mdc-button mdc-button--outlined btn-instruction" data-toggle="collapse" data-target="#collapseInstruction" aria-expanded="false" aria-controls="collapseExample">
+                <span class="mdc-button__ripple"></span>
+                <span class="mdc-button__label">Ver instruções</span>
+            </button>
+            <!-- <button class="btn btn-outline-light btn-lg btn-block mt-4 btn-instruction" data-toggle="collapse" data-target="#collapseInstruction" aria-expanded="false" aria-controls="collapseExample">Ver instruções</button> -->
         </header>
         <div class="collapse mt-3" id="collapseInstruction">
             <!-- Início -->
@@ -108,7 +112,11 @@ if (isset($_REQUEST['order_id']) && !empty($_REQUEST['order_id'])) {
                             <input type="file" class="form-control-file" id="file-video" name="file_data" accept="video/*">
                         </div>
                         <button type="submit" id="video-send" class="send-video btn btn-primary btn-lg btn-block">Enviar</button>
-                        <button id="video-rec-again" class="btn btn-outline-light btn-lg btn-block mt-3 video-rec">Não gostei, gravar outro video</button>
+                        <button id="video-rec-again" class="mdc-button mdc-button--outlined mt-3 video-rec">
+                            <span class="mdc-button__ripple"></span>
+                            <span class="mdc-button__label">Não gostei, gravar outro video</span>
+                        </button>
+                        <!-- <button id="video-rec-again" class="btn btn-outline-light btn-lg btn-block mt-3 video-rec">Não gostei, gravar outro video</button> -->
                     </form>
                 </div>
             </div>

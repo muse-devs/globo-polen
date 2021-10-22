@@ -4,6 +4,7 @@ use Polen\Includes\Polen_Order;
 
 function polen_get_search_form()
 {
+  $inputs = new Material_Inputs();
 ?>
   <button onclick="showSearchForm()" class="button-no-bg"><?php Icon_Class::polen_icon_search(); ?></button>
   <div id="search-box" class="search-box">
@@ -17,8 +18,8 @@ function polen_get_search_form()
         <form action="/" method="get">
           <div class="row">
             <div class="col-12 d-flex justify-content-between">
-              <input class="form-control form-control-lg" type="text" id="search" name="s" value="<?php the_search_query(); ?>" placeholder="Buscar" required />
-              <button type="submit" class="btn btn-primary btn-lg ml-2"><?php Icon_Class::polen_icon_search(); ?></button>
+              <?php $inputs->material_input(Material_Inputs::TYPE_TEXT, "search", "s", "Buscar", true); ?>
+              <?php $inputs->material_button(Material_Inputs::TYPE_SUBMIT, "btn-search", '<i class="icon icon-search"></i>', "ml-2", array("style" => "width: 54px;")); ?>
             </div>
           </div>
         </form>

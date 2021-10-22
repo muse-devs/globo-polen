@@ -39,12 +39,10 @@ function get_form_login()
 						<?php do_action('woocommerce_login_form_start'); ?>
 
 						<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide mb-4">
-              <?php $inputs->material_input(Material_Inputs::TYPE_TEXT, "username", "username", "Nome de usuário ou e-mail", true); ?>
-							<!-- <input type="text" class="woocommerce-Input woocommerce-Input--text input-text form-control form-control-lg" name="username" id="username" autocomplete="username" placeholder="<?php esc_html_e('Username or email address', 'woocommerce'); ?>" value="<?php echo (!empty($_POST['username'])) ? esc_attr(wp_unslash($_POST['username'])) : ''; ?>" /><?php // @codingStandardsIgnoreLine ?> -->
+              <?php $inputs->material_input(Material_Inputs::TYPE_TEXT, "username", "username", "Nome de usuário ou e-mail", true, "", array("autocomplete" => "username", "value" => (!empty($_POST['username'])) ? esc_attr(wp_unslash($_POST['username'])) : '')); ?>
 						</p>
 						<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-              <?php $inputs->material_input(Material_Inputs::TYPE_PASSWORD, "password", "password", "Senha", true); ?>
-							<!-- <input class="woocommerce-Input woocommerce-Input--text input-text form-control form-control-lg" type="password" name="password" id="password" autocomplete="current-password" placeholder="<?php esc_html_e('Password', 'woocommerce'); ?>" /> -->
+              <?php $inputs->material_input(Material_Inputs::TYPE_PASSWORD, "password", "password", "Senha", true, "", array("autocomplete" => "current-password")); ?>
 						</p>
 
 						<?php do_action('woocommerce_login_form'); ?>
