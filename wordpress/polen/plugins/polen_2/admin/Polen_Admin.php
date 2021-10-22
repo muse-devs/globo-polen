@@ -41,6 +41,7 @@ class Polen_Admin {
           new Polen_Admin_Video_Info( $static );
           new Polen_Admin_B2B_Product_Fields( $static );
           new Polen_Admin_Social_Base_Product_Fields( $static );
+          new Polen_Admin_Order_Custom_Fields_Deadline_BulkActions( $static );
   }
 
 	/**
