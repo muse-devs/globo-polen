@@ -28,7 +28,6 @@ if (isset($_REQUEST['order_id']) && !empty($_REQUEST['order_id'])) {
                 <span class="mdc-button__ripple"></span>
                 <span class="mdc-button__label">Ver instruções</span>
             </button>
-            <!-- <button class="btn btn-outline-light btn-lg btn-block mt-4 btn-instruction" data-toggle="collapse" data-target="#collapseInstruction" aria-expanded="false" aria-controls="collapseExample">Ver instruções</button> -->
         </header>
         <div class="collapse mt-3" id="collapseInstruction">
             <!-- Início -->
@@ -104,19 +103,24 @@ if (isset($_REQUEST['order_id']) && !empty($_REQUEST['order_id'])) {
                 </div>
             </div>
             <div class="row">
-                <div class="col-12">
+                <div class="col-12 mb-2">
                     <form id="form-video-upload" method="post" enctype="multipart/form-data">
                         <div class="form-group text-center">
-                            <button id="video-rec" class="btn btn-primary btn-lg btn-block video-rec show">Gravar vídeo</button>
+                            <button id="video-rec" class="mdc-button mdc-button--raised mt-3 video-rec show">
+                                <span class="mdc-button__ripple"></span>
+                                <span class="mdc-button__label">Gravar vídeo</span>
+                            </button>
                             <div id="video-file-name" class="text-truncate ml-2"></div>
                             <input type="file" class="form-control-file" id="file-video" name="file_data" accept="video/*">
                         </div>
-                        <button type="submit" id="video-send" class="send-video btn btn-primary btn-lg btn-block">Enviar</button>
+                        <button type="submit" id="video-send" class="mdc-button mdc-button--raised send-video">
+                            <span class="mdc-button__ripple"></span>
+                            <span class="mdc-button__label">Enviar</span>
+                        </button>
                         <button id="video-rec-again" class="mdc-button mdc-button--outlined mt-3 video-rec">
                             <span class="mdc-button__ripple"></span>
                             <span class="mdc-button__label">Não gostei, gravar outro video</span>
                         </button>
-                        <!-- <button id="video-rec-again" class="btn btn-outline-light btn-lg btn-block mt-3 video-rec">Não gostei, gravar outro video</button> -->
                     </form>
                 </div>
             </div>
