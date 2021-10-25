@@ -49,8 +49,8 @@ jQuery(document).ready(function ($) {
     items: 4,
     animateOut: 'fadeOut',
     margin: 5,
-    nav: false,
-    dots: true,
+    nav: true,
+    dots: false,
     autoHeight:false,
     navText: ["<i class='icon icon-left-arrow'></i>", "<i class='icon icon-right-arrow'></i>"],
     responsive : {

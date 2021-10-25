@@ -11865,14 +11865,19 @@ textarea {
     background: #5e5e5e; }
 
 #videos-carousel .owl-nav {
-  top: 60%;
-  z-index: 5; }
+  top: auto;
+  bottom: -35px;
+  z-index: 5;
+  display: flex;
+  justify-content: flex-end;
+  right: 50px; }
   #videos-carousel .owl-nav .icon-left-arrow {
-    left: 23px;
-    top: -33px; }
+    left: auto;
+    color: #000; }
   #videos-carousel .owl-nav .icon-right-arrow {
-    right: 23px;
-    top: -33px; }
+    margin-left: 20px;
+    right: auto;
+    color: #000; }
 
 .tutorial .icon {
   font-size: 28px; }
