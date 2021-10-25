@@ -447,7 +447,7 @@ function polen_front_get_videos($videos)
                   </div>
                 </figure> -->
                 <video id="video-box" class="video-cover" playsinline loop width="100%" height="100%" data-id="<?php echo $key; ?>" controls="controls">
-                  <source src="<?php echo $value['video_url']; ?>" type="video/mp4">
+                  <source src="<?php echo $value['video_url']; ?>#t=0.001" type="video/mp4">
                 </video>
               </div>
             <?php endif; ?>
