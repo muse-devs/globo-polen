@@ -178,6 +178,21 @@ class Polen_Video_Info extends Polen_DB
         $result_raw = $self_obj->get_result_multi_fields( $fields, "4", "ORDER BY first_order DESC, ID DESC" );
         return $result_raw;//self::create_instance_many( $result_raw );
     }
+
+
+    /**
+     * Funcao que pegar alguns videos infos publicados, completos e com
+     * ordem aleatória
+     * @param int
+     * @return array
+     */
+    static public function get_by_complete_and_public_rand_order( $qts = 4 )
+    {
+        $self_obj = new static();
+        $where = array( 'vimeo_process_complete' => "1", 'is_public' => '1' );
+        $result_raw = $self_obj->get_result_multi_fields( $where, $qts, "ORDER BY rand()" );
+        return $result_raw;
+    }
     
     /**
      * Retorna os videos nao processados pelo Vimeo

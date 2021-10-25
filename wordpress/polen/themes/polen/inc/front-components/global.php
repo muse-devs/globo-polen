@@ -380,6 +380,99 @@ function polen_front_get_artists($items, $title, $social = false)
 <?php
 }
 
+function polen_front_get_videos($videos)
+{
+  if (!$videos) {
+		return;
+	}
+?>
+	<section id="talent-videos" class="row my-1 banner-scrollable">
+		<div class="d-none d-md-block col-md-12 text-right custom-slick-controls"></div>
+    <div class="col-md-12">
+      <header class="row my-3">
+        <div class="col">
+          <h2>Últimos vídeos gravados pelos famosos</h2>
+        </div>
+      </header>
+    </div>
+		<div class="col-md-12 p-0">
+			<div class="banner-wrapper">
+				<div class="banner-content type-video">
+          <?php foreach ($videos as $key=>$value) : ?>
+            <?php if ($value['video_url']) : ?>
+              <div class="polen-card-video">
+                <!-- <figure id="cover-box" class="video-cover" data-id="<?php //echo $key; ?>">
+                  <img loading="lazy" src="<?php //echo $value['cover']; ?>" alt="">
+                  <video id="video-box" class="video-cover d-none" playsinline loop width="100%" height="100%" data-id="<?php echo $key; ?>">
+                    <source src="<?php //echo $value['video_url']; ?>" type="video/mp4">
+                  </video>
+                  <div class="video-player-button" data-id="<?php //echo $key; ?>"></div>
+                  <div class="video-icons">
+                    <figure class="image-cropper color small">
+                      <?php //echo $value['talent_thumb']; ?>
+                    </figure>
+                    <figure class="image-cropper small">
+                      <?php //echo $value['initials']; ?>
+                    </figure>
+                  </div>
+                </figure> -->
+                <video id="video-box" class="video-cover" playsinline loop width="100%" height="100%" data-id="<?php echo $key; ?>" controls="controls">
+                  <source src="<?php echo $value['video_url']; ?>#t=0.001" type="video/mp4">
+                </video>
+              </div>
+            <?php endif; ?>
+          <?php endforeach; ?>
+        </div>
+			</div>
+		</div>
+	</section>
+  <script>
+    (function($) {
+      $('#video-box').on('click',function(){
+        // Get video by data-id id
+        let id = $(this).attr('data-id');
+        const video = document.querySelector('#video-box[data-id="'+id+'"]');
+
+        // Play video
+        video.controls = true;
+        setImediate(function(){
+          video.play();
+        })
+
+        video.addEventListener("ended", endVideo);
+
+        function endVideo() {
+          video.controls = false;
+        }
+      });
+      // $('.video-player-button').on('click',function(){
+      //   // Get video by data-id id
+      //   let id = $(this).attr('data-id');
+      //   const video = document.querySelector('#video-box[data-id="'+id+'"]');
+      //   // Show video and remove cover
+      //   $('#video-box[data-id="'+id+'"]').removeClass("d-none");
+      //   $('#cover-box[data-id="'+id+'"]').addClass("d-none");
+
+      //   // Play video
+      //   video.controls = true;
+      //   setImediate(function(){
+      //     video.play();
+      //   })
+
+      //   video.addEventListener("ended", endVideo);
+
+      //   function endVideo() {
+      //     video.controls = false;
+      //     // Show cover and remove video
+      //     $('#video-box[data-id="'+id+'"]').addClass("d-none");
+      //     $('#cover-box[data-id="'+id+'"]').removeClass("d-none");
+      //   }
+      // });
+    })(jQuery);
+	</script>
+<?php
+}
+
 function polen_front_get_tutorial()
 {
 ?>

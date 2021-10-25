@@ -79,7 +79,7 @@ class Polen_Cart
                 $item->add_meta_data( 'video_category', $cart_item['video_category'], true );
             }            
             if( isset( $cart_item['instructions_to_video'] ) ) {
-                $instructions_to_video = filter_var( $cart_item['instructions_to_video'], FILTER_SANITIZE_SPECIAL_CHARS );
+                $instructions_to_video = Polen_Utils::sanitize_xss_br_escape( $cart_item['instructions_to_video'] );
                 $item->add_meta_data( 'instructions_to_video', $instructions_to_video, true );
                 $city = $cart_item['instructions_to_video'];
             }
@@ -128,9 +128,9 @@ class Polen_Cart
                             $item_name = $p_item;
                             if( $p_item == 'allow_video_on_page' ) {
                                 $item_data = ( $_POST['allow_video_on_page'] == 'on' ) ? 'on' : 'off';
-                            } elseif( $p_item == 'instructions_to_video') {
-                                $item_name = 'instructions_to_video';
-                                $item_data = filter_var( $_POST['instructions_to_video'], FILTER_SANITIZE_SPECIAL_CHARS );
+                            // } elseif( $p_item == 'instructions_to_video') {
+                                // $item_name = 'instructions_to_video';
+                                // $item_data = Polen_Utils::sanitize_xss_br_escape( $_POST['instructions_to_video'] );
                             } else {
                                 $item_data = $_POST[ $p_item ];
                             }
