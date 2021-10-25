@@ -60,7 +60,10 @@ if ($polen_talent->is_user_talent($current_user)) {
 							</div>
 							<div class="row mb-2">
 								<div class="col-md-12">
-									<a href="<?php echo wc_get_account_endpoint_url('orders'); ?>" class="btn btn-primary btn-lg btn-block">Ganhar agora</a>
+                  <?php
+                  $inputs = new Material_Inputs();
+                  $inputs->material_button_link("link1", "Ganhar agora", wc_get_account_endpoint_url('orders'));
+                  ?>
 								</div>
 							</div>
 						</div>

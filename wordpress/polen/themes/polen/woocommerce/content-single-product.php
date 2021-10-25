@@ -120,9 +120,10 @@ if( 'instock' == $product->get_stock_status() ) {
 			<?php if($has_stock) : ?>
 				<?php echo woocommerce_template_single_add_to_cart(); ?>
 			<?php else: ?>
-				<a href="/shop" class="btn btn-primary btn-lg btn-block btn-get-video">
-					Escolher outro artista
-				</a>
+        <?php
+        $inputs = new Material_Inputs();
+        $inputs->material_button_link("todos", "Escolher outro artista", home_url( "shop" ));
+        ?>
 			<?php endif; ?>
 		</div>
 	</div>

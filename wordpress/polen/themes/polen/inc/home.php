@@ -12,9 +12,10 @@ get_header();
 
   <?php polen_front_get_categories_buttons(); ?>
 
-  <?php polen_front_get_banner_video();?>
+  <?php polen_front_get_banner_video(); ?>
 
-  <?php //polen_front_get_banner_with_carousel(); ?>
+  <?php //polen_front_get_banner_with_carousel();
+  ?>
 
   <?php polen_banner_scrollable(polen_get_new_talents(6), "Destaque", polen_get_all_new_talents_url()); ?>
 

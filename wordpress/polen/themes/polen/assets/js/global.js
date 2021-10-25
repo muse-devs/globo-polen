@@ -278,11 +278,26 @@ function getSessionMessage() {
 	sessionStorage.removeItem(CONSTANTS.MESSAGE_COOKIE);
 }
 
+function blockUnblockMaterial(el, block) {
+  const materialEl = document.querySelectorAll(`${el} .mdc-text-field`);
+  const materialSel = document.querySelectorAll(`${el} .mdc-select`);
+  materialEl.forEach(function(element, key, parent) {
+    block
+      ? element.classList.add("mdc-text-field--disabled")
+      : element.classList.remove("mdc-text-field--disabled")
+  });
+  materialSel.forEach(function(element, key, parent) {
+    const select = mdc.select.MDCSelect.attachTo(element);
+    select.disabled = block;
+  });
+}
+
 function blockUnblockInputs(el, block) {
+  blockUnblockMaterial(el, block);
 	const allEl = document.querySelectorAll(
 		`${el} input, ${el} select, ${el} textarea`
 	);
-	allEl.forEach(function (element, key, parent) {
+  allEl.forEach(function (element, key, parent) {
 		block
 			? element.setAttribute("readonly", true)
 			: element.removeAttribute("readonly");
@@ -418,7 +433,7 @@ jQuery(document).ready(function () {
 
 (function ($) {
 	// Newsletter submit click
-	$(document).on("click", ".signin-newsletter-button", function (e) {
+	$(document).on("submit", "form#newsletter", function (e) {
 		const formName = "form#newsletter";
 		e.preventDefault();
 		// Ajax Request

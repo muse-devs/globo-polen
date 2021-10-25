@@ -156,59 +156,6 @@ $lg-margin: 20px;
   }
 }
 
-.pol-input-group {
-  position: relative;
-  display: block;
-  padding: 8px 16px;
-  border: 1px solid var(--gray-light);
-  border-radius: 8px;
-  .label {
-    display: block;
-    font-size: 12px;
-    line-height: 1;
-    font-weight: 400;
-    color: #818181;
-    .required {
-      color: var(--danger);
-    }
-  }
-  .input,
-  textarea,
-  select {
-    margin-top: 4px;
-    padding: 0 !important;
-    width: 100%;
-    font-size: 16px;
-    line-height: 19px;
-    font-weight: 400;
-    border: none;
-    background: none;
-    outline: transparent;
-    &::placeholder {
-      color: var(--gray-light);
-    }
-  }
-  select {
-    color: var(--gray-light);
-    border: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    -ms-appearance: none;
-    &.selected {
-      color: inherit;
-    }
-  }
-  &[aria-required=true] {
-    .label {
-      &::after {
-        content: "*";
-        color: var(--danger);
-      }
-    }
-  }
-}
-
 .bus-thankyou {
   .title {
     font-size: 48px;

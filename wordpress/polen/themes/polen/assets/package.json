@@ -1,7 +1,9 @@
 {
   "license": "MIT",
   "dependencies": {
-    "gulp-sourcemaps": "^3.0.0"
+    "bootstrap": "4.6.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "material-components-web": "^13.0.0"
   },
   "scripts": {
     "compress": "gulp compressjs",
