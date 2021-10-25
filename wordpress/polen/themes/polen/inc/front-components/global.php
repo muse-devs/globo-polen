@@ -416,8 +416,7 @@ function polen_front_get_videos($videos)
 		return;
 	}
 ?>
-	<section id="talent-videos" class="row my-1 banner-scrollable">
-		<div class="d-none d-md-block col-md-12 text-right custom-slick-controls"></div>
+	<section id="talent-videos" class="row my-1">
     <div class="col-md-12">
       <header class="row my-3">
         <div class="col">
@@ -425,9 +424,8 @@ function polen_front_get_videos($videos)
         </div>
       </header>
     </div>
-		<div class="col-md-12 p-0">
-			<div class="banner-wrapper">
-				<div id="videos-carousel" class="owl-carousel owl-theme">
+		<div class="col-md-12 p-0 mb-3">
+			<div id="videos-carousel" class="owl-carousel owl-theme ">
           <?php foreach ($videos as $key=>$value) : ?>
             <?php if ($value['video_url']) : ?>
               <div class="item">
@@ -451,7 +449,7 @@ function polen_front_get_videos($videos)
               </div>
             <?php endif; ?>
           <?php endforeach; ?>
-			</div>
+      </div>
 		</div>
 	</section>
   <script>

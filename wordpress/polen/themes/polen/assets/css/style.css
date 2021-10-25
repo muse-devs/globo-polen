@@ -11859,6 +11859,21 @@ textarea {
     border-bottom: 6px solid transparent;
     border-left: 10px solid #fd6c36; }
 
+#videos-carousel .owl-dots {
+  bottom: -35px; }
+  #videos-carousel .owl-dots .owl-dot span {
+    background: #5e5e5e; }
+
+#videos-carousel .owl-nav {
+  top: 60%;
+  z-index: 5; }
+  #videos-carousel .owl-nav .icon-left-arrow {
+    left: 23px;
+    top: -33px; }
+  #videos-carousel .owl-nav .icon-right-arrow {
+    right: 23px;
+    top: -33px; }
+
 .tutorial .icon {
   font-size: 28px; }
   .tutorial .icon.icon-camera-video {
