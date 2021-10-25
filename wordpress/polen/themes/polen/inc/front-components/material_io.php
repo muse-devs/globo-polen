@@ -62,28 +62,28 @@ class Material_Inputs
     <?php
   }
 
-  public function material_button(string $type = self::TYPE_BUTTON, string $id, string $title, string $classes = "", array $params = array())
+  public function material_button(string $type = self::TYPE_BUTTON, string $id, string $title, string $classes = "", array $params = array(), $icon = "")
   {
     ob_start();
     include $this->get_full_path_file('material_button');
     return ob_end_flush();
   }
 
-  public function material_button_outlined(string $type = self::TYPE_BUTTON, string $id, string $title, string $classes = "", array $params = array())
+  public function material_button_outlined(string $type = self::TYPE_BUTTON, string $id, string $title, string $classes = "", array $params = array(), $icon = "")
   {
     ob_start();
     include $this->get_full_path_file('material_button_outlined');
     return ob_end_flush();
   }
 
-  public function material_button_link(string $id, string $title, string $link, bool $blank = false, string $classes = "", array $params = array())
+  public function material_button_link(string $id, string $title, string $link, bool $blank = false, string $classes = "", array $params = array(), $icon = "")
   {
     ob_start();
     include $this->get_full_path_file('material_button_link');
     return ob_end_flush();
   }
 
-  public function material_button_link_outlined(string $id, string $title, string $link, bool $blank = false, string $classes = "", array $params = array())
+  public function material_button_link_outlined(string $id, string $title, string $link, bool $blank = false, string $classes = "", array $params = array(), $icon = "")
   {
     ob_start();
     include $this->get_full_path_file('material_button_link_outlined');
