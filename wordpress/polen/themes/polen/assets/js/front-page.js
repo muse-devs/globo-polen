@@ -43,6 +43,16 @@ jQuery(document).ready(function ($) {
 		dots: true,
 		autoHeight:false,
 	});
+  $('#videos-carousel').owlCarousel({
+    loop: false,
+    items: 4,
+    animateOut: 'fadeOut',
+    margin: 0,
+    nav: true,
+    dots: true,
+    autoHeight:false,
+    navText: ["<i class='icon icon-left-arrow'></i>", "<i class='icon icon-right-arrow'></i>"],
+  });
 });
 
 // const home_video = function () {
