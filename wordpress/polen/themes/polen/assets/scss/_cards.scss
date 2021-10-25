@@ -933,15 +933,20 @@
     }
   }
   .owl-nav {
-    top: 60%;
+    top: auto;
+    bottom: -35px;
     z-index: 5;
+    display: flex;
+    justify-content: flex-end;
+    right: 50px;
     .icon-left-arrow {
-      left: 23px;
-      top: -33px;
+      left: auto;
+      color: #000;
     }
     .icon-right-arrow {
-      right: 23px;
-      top: -33px;
+      margin-left: 20px;
+      right: auto;
+      color: #000;
     }
   }
 }

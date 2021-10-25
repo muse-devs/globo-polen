@@ -424,7 +424,7 @@ function polen_front_get_videos($videos)
         </div>
       </header>
     </div>
-		<div class="col-md-12 p-0 mb-3">
+		<div class="col-md-12 p-0 mb-4">
 			<div id="videos-carousel" class="owl-carousel owl-theme ">
           <?php foreach ($videos as $key=>$value) : ?>
             <?php if ($value['video_url']) : ?>
