@@ -6,12 +6,12 @@ jQuery(document).ready(function () {
 		blockUnblockInputs("form.checkout", false);
 	});
 
-  if( $( 'input[name="billing_phone"]' ).length > 0 ) {
-    $( 'input[name="billing_phone"]' )
-    .attr("placeholder", "(99) 9999-9999")
-    .inputmask({
-        mask: ["(99) 9999-9999", "(99) 9 9999-9999"],
-        keepStatic: true
-    });
-  }
+  // if( $( 'input[name="billing_phone"]' ).length > 0 ) {
+  //   $( 'input[name="billing_phone"]' )
+  //   .attr("placeholder", "(99) 9999-9999")
+  //   .inputmask({
+  //       mask: ["(99) 9999-9999", "(99) 9 9999-9999"],
+  //       keepStatic: true
+  //   });
+  // }
 });
