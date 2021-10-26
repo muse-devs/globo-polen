@@ -170,9 +170,11 @@ class TUNA_Payment extends WC_Payment_Gateway
 				echo print_r("OK");
 				exit;
 		}
+        print_r($response->status);
+        die('debug');
 
-		switch (strval($response->status)) {			
-				
+		switch (strval($response->status))
+        {
 			case '4':
 			case '-1':
 			case '6':
