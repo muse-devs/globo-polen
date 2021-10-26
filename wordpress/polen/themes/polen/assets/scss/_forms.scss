@@ -470,3 +470,29 @@ textarea {
 .mdc-select:not(.mdc-select--disabled).mdc-select--focused .mdc-floating-label {
   color: var(--primary);
 }
+
+.combo-advanced {
+  width: 100%;
+  .item {
+    margin-bottom: 1rem;
+    padding: 0.6rem 1rem;
+    display: flex;
+    min-height: 78px;
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+    &.-checked {
+      border-color: var(--primary);
+      background: linear-gradient(0deg, rgba(253, 178, 130, 0.14), rgba(253, 178, 130, 0.14)), #FFFFFF;
+    }
+    .input {
+      display: flex;
+      align-items: center;
+    }
+    .content {
+      margin-left: 0.8rem;
+      .text {
+        margin: 0;
+      }
+    }
+  }
+}
