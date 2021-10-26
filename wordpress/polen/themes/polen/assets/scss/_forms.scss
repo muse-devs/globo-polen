@@ -439,6 +439,9 @@ textarea {
   --mdc-typography-button-font-size: 1rem;
   --mdc-typography-button-font-weight: 600;
   --mdc-typography-button-text-transform: none;
+  .mdc-button__label {
+    text-align: center;
+  }
 }
 
 .mdc-button--raised {
