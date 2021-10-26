@@ -619,6 +619,7 @@ class TUNA_Payment extends WC_Payment_Gateway
 		$cardInfo = null;
 		$boletoInfo = null;
 		if (sanitize_text_field($_POST["tuna_is_boleto_payment"]) == "true") {
+            $customer_order->set_payment_method_title('Boleto');
 			$PaymentMethodType = "3";
 			$installments = 1;
 			$boletoInfo = [
@@ -639,11 +640,12 @@ class TUNA_Payment extends WC_Payment_Gateway
 				]
 			];
 		} else {
+            $customer_order->set_payment_method_title('Pix');
 			if (sanitize_text_field($_POST["tuna_is_pix_payment"]) == "true") {
 				$PaymentMethodType = "D";
 				$installments = 1;
-		}else
-		{
+		}else{
+            $customer_order->set_payment_method_title('Cartão de Crédito');
 			$cardInfo = [
 				"TokenProvider" => "Tuna",
 				"CardHolderName" => sanitize_text_field($_POST["tuna_card_holder_name"]),
