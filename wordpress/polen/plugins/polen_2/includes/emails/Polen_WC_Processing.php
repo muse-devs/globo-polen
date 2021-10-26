@@ -31,8 +31,8 @@ if ( ! class_exists( 'Polen_WC_Processing', false ) ) :
 			$this->customer_email = true;
 			$this->title          = __( 'Order on-hold', 'woocommerce' );
 			$this->description    = __( 'This is an order notification sent to customers containing order details after an order is placed on-hold.', 'woocommerce' );
-			$this->template_html  = 'emails/customer-on-hold-order.php';
-			$this->template_plain = 'emails/plain/customer-on-hold-order.php';
+			$this->template_html  = 'emails/customer-processing-order.php';
+			$this->template_plain = 'emails/plain/customer-processing-order.php';
 			$this->placeholders   = array(
 				'{order_date}'   => '',
 				'{order_number}' => '',
