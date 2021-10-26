@@ -59,7 +59,6 @@ if( !is_user_logged_in() ) {
 
 
 <?php if ($order->has_status('failed')) : ?>
-
   <div class="row">
     <div class="col-md-12">
       <ul class="order-flow">
@@ -95,9 +94,6 @@ if( !is_user_logged_in() ) {
         </li>
       </ul>
     </div>
-    <a href="<?php echo esc_url( $order->get_checkout_payment_url() ); ?>" class="button pay">
-      <?php echo "Tentar novamente" ?>
-    </a>
   </div>
 <?php else : ?>
 
