@@ -25,9 +25,6 @@
 
   <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
     <ul class="mdc-list" role="listbox" aria-label="Food picker listbox">
-      <li class="mdc-list-item mdc-list-item--selected" aria-selected="true" data-value="" role="option">
-        <span class="mdc-list-item__ripple"></span>
-      </li>
       <?php foreach ($items as $key => $value) : ?>
         <li class="mdc-list-item" aria-selected="false" data-value="<?php echo $key; ?>" role="option">
           <span class="mdc-list-item__ripple"></span>
