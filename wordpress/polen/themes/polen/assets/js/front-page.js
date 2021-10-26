@@ -45,13 +45,25 @@ jQuery(document).ready(function ($) {
 	});
   $('#videos-carousel').owlCarousel({
     loop: false,
+    stagePadding: 15,
     items: 4,
     animateOut: 'fadeOut',
-    margin: 0,
+    margin: 5,
     nav: true,
-    dots: true,
+    dots: false,
     autoHeight:false,
     navText: ["<i class='icon icon-left-arrow'></i>", "<i class='icon icon-right-arrow'></i>"],
+    responsive : {
+        0 : {
+          items: 2,
+        },
+        700 : {
+          items: 3,
+        },
+        1020 : {
+          items: 4,
+        }
+    }
   });
 });
 
