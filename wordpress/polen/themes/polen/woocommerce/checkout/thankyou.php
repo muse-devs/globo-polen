@@ -70,9 +70,6 @@ if( !is_user_logged_in() ) {
       <?php $social && criesp_get_thankyou_box(); ?>
     </div>
     <div class="col-md-12">
-      <?php do_action( 'woocommerce_thankyou', $order->get_id() ); ?>
-    </div>
-    <div class="col-md-12">
       <?php polen_get_order_flow_layout($order_array, $order_number, $number, $whatsapp_form); ?>
     </div>
   </div>
@@ -90,6 +87,7 @@ if (is_user_logged_in()) :
 endif;
 
 do_action( 'woocommerce_thankyou_' . $order->get_payment_method(), $order->get_id() );
+do_action( 'woocommerce_thankyou', $order->get_id() );
 
 session_start();
 $order_name = "order_{$order_number}";
