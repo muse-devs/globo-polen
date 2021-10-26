@@ -22,53 +22,73 @@ get_header();
           <div class="col-sm-12">
             <h2 class="text-center title">Perguntas Frequentes</h2>
           </div>
-          <div class="col-sm-12 mt-3">
-            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-              <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingOne">
-                  <h4 class="panel-title">
-                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                      O que é a Polen?
-                    </a>
-                  </h4>
-                </div>
-                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                  <div class="panel-body">
-                    A Polen é uma plataforma que busca conectar fãs e seus ídolos, através de experiências digitais inovadoras, usando mensagens em vídeos para aproximar e emocionar as pessoas.
+          <?php
+            $faq = get_the_content();
+            $faq = apply_filters( 'the_content', get_the_content() );
+            $faq = str_replace('</p>', '', $faq);
+            $faq = explode('<p>', $faq);
+            //print_r($faq);
+          ?>
+          <div class="col-md-10 col-sm-12 my-3 mx-auto">
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="false">
+              <?php foreach ($faq as $key => $item) : ?>
+                <?php
+                  if ($key % 2 != 0) {
+                ?>
+                  <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="heading-<?php echo $key; ?>">
+                      <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-<?php echo $key; ?>" aria-expanded="false" aria-controls="collapse-<?php echo $key; ?>">
+                          <?php echo $item; ?>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapse-<?php echo $key; ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-<?php echo $key; ?>">
+                      <div class="panel-body">
+                        <?php echo $faq[$key + 1]; ?>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-              <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingTwo">
-                  <h4 class="panel-title">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                      O que são os vídeos Polen
-                    </a>
-                  </h4>
-                </div>
-                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                  <div class="panel-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                  </div>
-                </div>
-              </div>
-              <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingThree">
-                  <h4 class="panel-title">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                      Como posso pedir um vídeo Polen?
-                    </a>
-                  </h4>
-                </div>
-                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                  <div class="panel-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                  </div>
-                </div>
-              </div>
+                <?php
+                  }
+                ?>
+              <?php endforeach; ?>
             </div>
           </div>
+          <div class="col-sm-12 mt-5">
+            <h2 class="text-center title">Ainda possui dúvidas?</h2>
+          </div>
+          <div class="col-sm-12 mt-1">
+            <p class="text-center subtitle">Entre em contato conosco 😀</p>
+          </div>
         </div>
+      </div>
+    </section>
+    <section id="bus-form-wrapper" class="row mb-5 bus-form">
+      <div class="col-12 col-md-8 m-md-auto">
+        <form id="bus-form" v-on:submit.prevent="handleSubmit" method="POST">
+          <input type="hidden" id="url-success" value="<?php echo enterprise_url_success(); ?>" />
+          <input type="hidden" name="action" value="submit_form" />
+          <input type="hidden" name="form_id" value="1" />
+          <input type="hidden" name="terms" value="1" />
+          <label class="pol-input-group mb-3" aria-required="true">
+            <span class="label">Nome Completo</span>
+            <input type="text" class="input" name="name" placeholder="Seu nome" required />
+          </label>
+          <label class="pol-input-group mb-3" aria-required="true">
+            <span class="label">e-mail</span>
+            <input type="email" name="email" class="input" placeholder="Seu melhor e-mail" required />
+          </label>
+          <label class="pol-input-group mb-3" aria-required="true">
+            <span class="label">Telefone de contato</span>
+            <input type="text" name="phone" v-model="phone" v-on:keyup="handleChange" class="input" placeholder="(DDD) XXXXX-XXXX" maxlength="15" required />
+          </label>
+          <label class="pol-input-group mb-3" aria-required="true">
+            <span class="label">Mensagem</span>
+            <textarea name="message" placeholder="Descreva o que gostaria de saber" rows="6" required></textarea>
+          </label>
+          <input type="submit" class="btn btn-primary btn-lg btn-block mt-4" value="Enviar" />
+        </form>
       </div>
     </section>
 	</main><!-- #main -->

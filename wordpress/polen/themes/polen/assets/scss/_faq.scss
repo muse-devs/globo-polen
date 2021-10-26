@@ -4,6 +4,15 @@
     font-weight: 500;
     line-height: 38.4px;
   }
+  .subtitle {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #000;
+  }
   .panel-group {
     .panel {
       border-bottom: 1px solid #CED4DA;
@@ -37,6 +46,7 @@
             line-height: 19px;
             letter-spacing: 0em;
             text-align: left;
+            width: 100%;
           }
         }
       }
@@ -51,6 +61,9 @@
           text-align: left;
           color: #495057;
           margin-top: 20px;
+          a {
+            font-size: 16px;
+          }
         }
       }
     }
