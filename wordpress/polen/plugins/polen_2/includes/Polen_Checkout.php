@@ -28,15 +28,15 @@ class Polen_Checkout
     public function remove_woocommerce_fields( $fields ) {
         $removed_keys = array(
             'billing_company',
-            // 'billing_phone',
+            'billing_phone',
             'billing_address_1',
             'billing_address_2',
             'billing_city',
             'billing_postcode',
             'billing_country',
             'billing_state',
-            // 'billing_email',
-            // 'billing_first_name',
+            'billing_email',
+            'billing_first_name',
             'billing_last_name'
         );
 
