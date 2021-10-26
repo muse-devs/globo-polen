@@ -640,8 +640,8 @@ class TUNA_Payment extends WC_Payment_Gateway
 				]
 			];
 		} else {
-            $customer_order->set_payment_method_title('Pix');
 			if (sanitize_text_field($_POST["tuna_is_pix_payment"]) == "true") {
+                $customer_order->set_payment_method_title('Pix');
 				$PaymentMethodType = "D";
 				$installments = 1;
 		}else{
