@@ -14150,4 +14150,49 @@ label.lg {
     font-size: 64px;
     line-height: 77px; } }
 
+#faq .title {
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 38.4px; }
+
+#faq .panel-group .panel {
+  border-bottom: 1px solid #CED4DA;
+  padding: 35px 20px; }
+  #faq .panel-group .panel .panel-heading .panel-title {
+    margin: 0px;
+    position: relative; }
+    #faq .panel-group .panel .panel-heading .panel-title a:after {
+      content: "+";
+      display: block;
+      position: absolute;
+      right: 0;
+      top: 0;
+      font-size: 30px;
+      font-weight: 100; }
+    #faq .panel-group .panel .panel-heading .panel-title a[aria-expanded="true"]:after {
+      content: "-";
+      font-size: 35px; }
+    #faq .panel-group .panel .panel-heading .panel-title a[aria-expanded="true"] {
+      color: var(--primary); }
+    #faq .panel-group .panel .panel-heading .panel-title a {
+      color: #495057;
+      margin: 0px;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 19px;
+      letter-spacing: 0em;
+      text-align: left; }
+  #faq .panel-group .panel .panel-collapse {
+    margin-bottom: 10px; }
+    #faq .panel-group .panel .panel-collapse .panel-body {
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 19px;
+      letter-spacing: 0em;
+      text-align: left;
+      color: #495057;
+      margin-top: 20px; }
+
 /*# sourceMappingURL=maps/style.css.map */
