@@ -12290,7 +12290,6 @@ button.criesp :hover {
   color: var(--dark);
   font-family: "Poppins", sans-serif;
   font-size: 13px;
-  display: inline-block !important;
   margin-bottom: 0.5rem; }
 
 .woocommerce-billing-fields .form-row {
@@ -12379,11 +12378,25 @@ button.criesp :hover {
   color: var(--dark);
   font-family: "Poppins", sans-serif;
   font-size: 13px;
-  display: inline-block !important;
   margin-top: 15px; }
+
+.tuna-tabs .tab {
+  font-size: 16px;
+  font-weight: 500; }
+
+.tuna-tabs .tab {
+  margin-bottom: 5px; }
+
+@media (max-width: 575.98px) {
+  .tuna-tabs {
+    display: flex;
+    justify-content: center; } }
 
 .tuna-tabs .tab.selected:after {
   background-color: var(--primary); }
+
+.woocommerce-privacy-policy-text {
+  display: none; }
 
 .wc-stripe-elements-field,
 .wc-stripe-iban-element-field {
