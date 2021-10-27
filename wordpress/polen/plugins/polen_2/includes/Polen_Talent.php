@@ -272,7 +272,7 @@ class Polen_Talent {
             $label = __( 'Pedir vídeo grátis' );
         } else {
             $text = $social ? "Doar R$ " : "Pedir vídeo ";
-            $label = __($text, 'polen') . $product->get_price_html();
+            $label = __($text, 'polen'); // . $product->get_price_html();
             // $label = __($text, 'polen') . number_format((float) $product->get_price(), 2, ',', '.');
         }
         return $label;

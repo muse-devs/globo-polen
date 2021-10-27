@@ -303,6 +303,40 @@ textarea {
       cursor: pointer;
       // margin-left: 4px;
     }
+    &.custom-check {
+      --border: var(--gray);
+      background: transparent;
+      &::after {
+        transition: none !important;
+      }
+      &.custom-check--small {
+        width: 16px !important;
+        height: 16px;
+      }
+      &:checked {
+        outline: transparent;
+        background-color: var(--primary);
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        align-items: center;
+        &::after {
+          position: relative;
+          margin-top: -2px;
+          width: 7px;
+          height: 4px;
+          border-radius: 0;
+          border: 1px solid var(--light);
+          border-top: none;
+          border-right: none;
+          background: transparent;
+          transform: rotate(320deg);
+        }
+      }
+      &:focus {
+        box-shadow: none;
+      }
+    }
   }
   input[type="checkbox"] {
     &:not(.switch) {
@@ -495,7 +529,7 @@ textarea {
       align-items: center;
     }
     .content {
-      margin-left: 0.8rem;
+      margin-left: 0.5rem;
       display: flex;
       flex-direction: column;
       justify-content: center;
