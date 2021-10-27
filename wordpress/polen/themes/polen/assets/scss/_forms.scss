@@ -473,16 +473,22 @@ textarea {
 
 .combo-advanced {
   width: 100%;
+  font-size: 12px;
   .item {
     margin-bottom: 1rem;
-    padding: 0.6rem 1rem;
+    padding: 0.8rem 1rem;
     display: flex;
     min-height: 78px;
     border-radius: 4px;
     border: 1px solid #ced4da;
     &.-checked {
       border-color: var(--primary);
-      background: linear-gradient(0deg, rgba(253, 178, 130, 0.14), rgba(253, 178, 130, 0.14)), #FFFFFF;
+      background: linear-gradient(
+          0deg,
+          rgba(253, 178, 130, 0.14),
+          rgba(253, 178, 130, 0.14)
+        ),
+        #ffffff;
     }
     .input {
       display: flex;
@@ -490,6 +496,19 @@ textarea {
     }
     .content {
       margin-left: 0.8rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      .header {
+        display: flex;
+        justify-content: space-between;
+      }
+      .title,
+      .price {
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--gray-dark);
+      }
       .text {
         margin: 0;
       }

@@ -1,4 +1,5 @@
-﻿/*!
+@charset "UTF-8";
+/*!
  * Bootstrap v4.6.0 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
  * Copyright 2011-2021 Twitter, Inc.
@@ -9995,22 +9996,34 @@ textarea {
   color: var(--primary); }
 
 .combo-advanced {
-  width: 100%; }
+  width: 100%;
+  font-size: 12px; }
   .combo-advanced .item {
     margin-bottom: 1rem;
-    padding: 0.6rem 1rem;
+    padding: 0.8rem 1rem;
     display: flex;
     min-height: 78px;
     border-radius: 4px;
     border: 1px solid #ced4da; }
     .combo-advanced .item.-checked {
       border-color: var(--primary);
-      background: linear-gradient(0deg, rgba(253, 178, 130, 0.14), rgba(253, 178, 130, 0.14)), #FFFFFF; }
+      background: linear-gradient(0deg, rgba(253, 178, 130, 0.14), rgba(253, 178, 130, 0.14)), #ffffff; }
     .combo-advanced .item .input {
       display: flex;
       align-items: center; }
     .combo-advanced .item .content {
-      margin-left: 0.8rem; }
+      margin-left: 0.8rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center; }
+      .combo-advanced .item .content .header {
+        display: flex;
+        justify-content: space-between; }
+      .combo-advanced .item .content .title,
+      .combo-advanced .item .content .price {
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--gray-dark); }
       .combo-advanced .item .content .text {
         margin: 0; }
 
@@ -12374,7 +12387,6 @@ button.criesp :hover {
   color: var(--dark);
   font-family: "Poppins", sans-serif;
   font-size: 13px;
-  display: inline-block !important;
   margin-bottom: 0.5rem; }
 
 .woocommerce-billing-fields .form-row {
@@ -12463,11 +12475,25 @@ button.criesp :hover {
   color: var(--dark);
   font-family: "Poppins", sans-serif;
   font-size: 13px;
-  display: inline-block !important;
   margin-top: 15px; }
+
+.tuna-tabs .tab {
+  font-size: 16px;
+  font-weight: 500; }
+
+.tuna-tabs .tab {
+  margin-bottom: 5px; }
+
+@media (max-width: 575.98px) {
+  .tuna-tabs {
+    display: flex;
+    justify-content: center; } }
 
 .tuna-tabs .tab.selected:after {
   background-color: var(--primary); }
+
+.woocommerce-privacy-policy-text {
+  display: none; }
 
 .wc-stripe-elements-field,
 .wc-stripe-iban-element-field {

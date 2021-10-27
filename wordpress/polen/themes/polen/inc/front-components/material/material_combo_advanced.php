@@ -2,7 +2,7 @@
   <?php foreach ($items as $item) : ?>
     <label class="item<?php echo $item["checked"] ? ' -checked' : ''; ?><?php echo $item["disabled"] ? ' :disabled' : ''; ?>">
       <div class="input">
-        <input type="radio" name="<?php echo $name; ?>" id="<?php echo $item['id']; ?>" value="<?php echo $item['value']; ?>"<?php echo $item["checked"] ? " checked" : ""; ?><?php echo $item["disabled"] ? " disabled" : ""; ?> />
+        <input type="radio" name="<?php echo $name; ?>" id="<?php echo $item['id']; ?>" class="custom-check custom-check--small" value="<?php echo $item['value']; ?>"<?php echo $item["checked"] ? " checked" : ""; ?><?php echo $item["disabled"] ? " disabled" : ""; ?> />
       </div>
       <div class="content">
         <header class="header">

@@ -124,8 +124,8 @@ if( 'instock' == $product->get_stock_status() ) {
         "select_type",
         "select_type",
         array(
-          $inputs->material_combo_advanced_item("Vídeo para uso pessoal", "R$" . $product->price, "Compre um vídeo personalizado para você ou para presentar outra pessoa", "", "pessoal", true),
-          $inputs->material_combo_advanced_item("Vídeo para meu negócio", "", "Compre um Vídeo Polen para usar no seu negócio", "", "b2b")
+          $inputs->material_combo_advanced_item("Vídeo para uso pessoal", "R$" . $product->price, "Compre um vídeo personalizado para você ou para presentar outra pessoa", "check-pessoal", "pessoal", true),
+          $inputs->material_combo_advanced_item("Vídeo para meu negócio", "", "Compre um Vídeo Polen para usar no seu negócio", "check-b2b", "b2b")
           )); ?>
 				<div class="btn-buy-personal">
           <?php echo woocommerce_template_single_add_to_cart(); ?>
