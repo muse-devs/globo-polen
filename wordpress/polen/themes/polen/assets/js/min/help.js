@@ -1,0 +1,1 @@
+!function(t){t(document).on("click",".panel-button",(function(e){let a=t(this).attr("href");t(".panel-button:not([href="+a+"])").addClass("collapsed").attr("aria-expanded","false"),t(".collapse:not("+a+")").removeClass("show")}))}(jQuery);

@@ -416,49 +416,62 @@ function polen_front_get_videos($videos)
 		return;
 	}
 ?>
-	<section id="talent-videos" class="row my-1 banner-scrollable">
-		<div class="d-none d-md-block col-md-12 text-right custom-slick-controls"></div>
+	<section id="talent-videos" class="row my-1">
     <div class="col-md-12">
       <header class="row my-3">
         <div class="col">
-          <h2>Vídeos Polen</h2>
+          <h2>Últimos vídeos gravados pelos famosos</h2>
         </div>
       </header>
     </div>
-		<div class="col-md-12 p-0">
-			<div class="banner-wrapper">
-				<div class="banner-content type-video">
+		<div class="col-md-12 p-0 mb-4">
+			<div id="videos-carousel" class="owl-carousel owl-theme ">
           <?php foreach ($videos as $key=>$value) : ?>
             <?php if ($value['video_url']) : ?>
-              <div class="polen-card-video">
-                <figure id="cover-box" class="video-cover" data-id="<?php echo $key; ?>">
-                  <img loading="lazy" src="<?php echo $value['cover']; ?>" alt="">
-                  <div class="video-player-button" data-id="<?php echo $key; ?>"></div>
-                  <div class="video-icons">
-                    <figure class="image-cropper color small">
-                      <?php echo $value['talent_thumb']; ?>
-                    </figure>
-                    <figure class="image-cropper small">
-                      <?php echo $value['initials']; ?>
-                    </figure>
-                  </div>
-                </figure>
-                <video id="video-box" class="video-cover d-none" playsinline width="100%" height="100%" data-id="<?php echo $key; ?>">
-                  <source src="<?php echo $value['video_url']; ?>" type="video/mp4">
-                </video>
+              <div class="item">
+                <div class="polen-card-video">
+                  <figure id="cover-box" class="video-cover" data-id="<?php echo $key; ?>">
+                    <img loading="lazy" src="<?php echo $value['cover']; ?>" alt="">
+                    <div class="video-player-button" data-id="<?php echo $key; ?>"></div>
+                    <div class="video-icons">
+                      <figure class="image-cropper color small">
+                        <?php echo $value['talent_thumb']; ?>
+                      </figure>
+                      <figure class="image-cropper small">
+                        <?php echo $value['initials']; ?>
+                      </figure>
+                    </div>
+                  </figure>
+                  <video id="video-box" class="video-cover src-box d-none" playsinline width="100%" height="100%" data-id="<?php echo $key; ?>">
+                    <source src="<?php echo $value['video_url']; ?>" type="video/mp4">
+                  </video>
+                </div>
               </div>
             <?php endif; ?>
           <?php endforeach; ?>
-        </div>
-			</div>
+      </div>
 		</div>
 	</section>
   <script>
     (function($) {
       $('.video-player-button').on('click',function(){
+
         // Get video by data-id id
         let id = $(this).attr('data-id');
         const video = document.querySelector('#video-box[data-id="'+id+'"]');
+
+        // Stop others videos
+        const allVideos = document.querySelectorAll('#video-box:not([data-id="'+id+'"])');
+        if (allVideos) {
+          for (let i = 0; i < allVideos.length; i++) {
+            allVideos[i].controls = false;
+            allVideos[i].pause();
+            allVideos[i].currentTime = 0;
+          }
+          $('#video-box:not([data-id="'+id+'"])').addClass("d-none");
+          $('#cover-box:not([data-id="'+id+'"])').removeClass("d-none");
+        }
+
         // Show video and remove cover
         $('#video-box[data-id="'+id+'"]').removeClass("d-none");
         $('#cover-box[data-id="'+id+'"]').addClass("d-none");
