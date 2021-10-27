@@ -88,7 +88,7 @@ if (
 			'description' => get_bloginfo('description'),
 			'site_name' => get_bloginfo('title'),
 			'url' => get_the_permalink(),
-			'type' => 'site',
+			'type' => 'website',
 			'image' => '',
 			'video' => '',
 			'keywords' => 'Vídeos Personalizados',
@@ -139,7 +139,7 @@ if (
 		} elseif (!empty($post) && $post->post_type == 'page' && $post->post_name == 'v') {
 
 			$video_url = get_the_permalink() . '?' . $_SERVER['QUERY_STRING'];
-			$headers['type'] = null;
+			// $headers['type'] = null;
 			$headers['url'] = $video_url;
 			$headers['video'] = $video_url;
 			$headers['image'] = safeImage(get_the_post_thumbnail_url(get_the_ID()));
@@ -163,7 +163,7 @@ if (
 				$headers['image'] = $tribute->vimeo_thumbnail;
 			} else {
 
-				$headers['type'] = 'Colab';
+				// $headers['type'] = 'Colab';
 				$headers['description'] = 'O Colab te ajuda a criar um vídeo-presente em grupo para você emocionar quem você ama!';
 				$headers['url'] = tribute_get_url_base_url();
 				$headers['image'] = "' . TEMPLATE_URI . '/tributes/assets/img/logo-to-share.png";
