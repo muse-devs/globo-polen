@@ -67,10 +67,10 @@ get_header();
     </section>
     <section id="bus-form-wrapper" class="row mb-5 bus-form">
       <div class="col-12 col-md-8 m-md-auto">
-        <form id="bus-form" v-on:submit.prevent="handleSubmit" method="POST">
+        <form id="help-form" v-on:submit.prevent="handleSubmit" method="POST">
           <input type="hidden" id="url-success" value="<?php echo enterprise_url_success(); ?>" />
           <input type="hidden" name="action" value="submit_form" />
-          <input type="hidden" name="form_id" value="1" />
+          <input type="hidden" name="form_id" value="2" />
           <input type="hidden" name="terms" value="1" />
           <label class="pol-input-group mb-3" aria-required="true">
             <span class="label">Nome Completo</span>
