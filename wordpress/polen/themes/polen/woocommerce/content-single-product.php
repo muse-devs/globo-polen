@@ -116,6 +116,7 @@ if( 'instock' == $product->get_stock_status() ) {
 		</div>
 	</div>
 
+  <!-- Botão de adicionar ao carrinho -->
 	<div class="row mt-3 mb-1 talent-page-footer">
 		<div class="col-12 col-md-6 m-md-auto pb-3">
 			<?php if($has_stock) : ?>
