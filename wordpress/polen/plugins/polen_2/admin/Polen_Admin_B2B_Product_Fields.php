@@ -7,6 +7,7 @@ class Polen_Admin_B2B_Product_Fields
     const TAB_NAME = 'polen_b2b_tab';
     const TAB_CONTENT_NAME = 'polen_b2b_tab_data';
     const FIELD_NAME_IS_B2B = 'polen_is_b2b';
+    const FIELD_NAME_ENABLED_B2B = 'polen_enabled_b2b';
 
     public function __construct( bool $static = false )
     {
@@ -41,10 +42,26 @@ class Polen_Admin_B2B_Product_Fields
             <?php
                 woocommerce_wp_checkbox(
                     array(
-                        'id'      => self::FIELD_NAME_IS_B2B,
-                        'value'   => $product_object->get_meta( self::FIELD_NAME_IS_B2B ) == 'yes' ? 'yes' : 'no',
-                        'label'   => 'Destaque para Empresas',
-                        'cbvalue' => 'yes',
+                        'id'          => self::FIELD_NAME_IS_B2B,
+                        'value'       => $product_object->get_meta( self::FIELD_NAME_IS_B2B ) == 'yes' ? 'yes' : 'no',
+                        'label'       => 'Destaque para Empresas',
+                        'description' => 'Perfil do talento vai aparecer na página /empresas',
+                        'desc_tip'    => true,
+                        'cbvalue'     => 'yes',
+                    )
+                );
+            ?>
+            </div>
+            <div class='options_group'>
+            <?php
+                woocommerce_wp_checkbox(
+                    array(
+                        'id'          => self::FIELD_NAME_ENABLED_B2B,
+                        'value'       => $product_object->get_meta( self::FIELD_NAME_ENABLED_B2B ) == 'yes' ? 'yes' : 'no',
+                        'label'       => 'Disponível para Empresas',
+                        'description' => 'O botão de pedir vídeo para empresa vai estar habilitado.',
+                        'desc_tip'    => true,
+                        'cbvalue'     => 'yes',
                     )
                 );
             ?>
@@ -58,9 +75,12 @@ class Polen_Admin_B2B_Product_Fields
         if( is_admin() ) {
             $screen = get_current_screen();
             if ( $screen->base == 'post' && $screen->post_type == 'product' ) {
-                $product = wc_get_product( $product_id );
-                $is_b2b = strip_tags( $_POST[ self::FIELD_NAME_IS_B2B ] );
-                $this->save_meta($product, $is_b2b, self::FIELD_NAME_IS_B2B );
+                $product     = wc_get_product( $product_id );
+                $is_b2b      = strip_tags( $_POST[ self::FIELD_NAME_IS_B2B ] );
+                $enabled_b2b = strip_tags( $_POST[ self::FIELD_NAME_ENABLED_B2B ] );
+                
+                $this->save_meta($product, $is_b2b,      self::FIELD_NAME_IS_B2B );
+                $this->save_meta($product, $enabled_b2b, self::FIELD_NAME_ENABLED_B2B );
 
                 remove_action( self::ACTION_NAME, array( $this, 'on_product_save' ) );
                 $product->save();
