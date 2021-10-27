@@ -30,7 +30,7 @@ get_header();
 		</div>
 	</div>
 
-  <?php polen_front_get_videos(polen_get_home_stories(6)); ?>
+  <?php //polen_front_get_videos(polen_get_home_stories(6)); ?>
 
   <?php polen_front_get_tutorial(); ?>
 
