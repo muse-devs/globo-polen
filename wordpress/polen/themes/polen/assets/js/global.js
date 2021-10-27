@@ -417,11 +417,6 @@ jQuery(document).ready(function () {
 });
 
 (function ($) {
-  $('.collapse').on('show', function () {
-    $otherPanels = $(this).parents('.panel-group').siblings('.panel-group');
-    $('.collapse',$otherPanels).removeClass('show');
-  });
-
 	// Newsletter submit click
 	$(document).on("click", ".signin-newsletter-button", function (e) {
 		const formName = "form#newsletter";

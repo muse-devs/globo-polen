@@ -14178,6 +14178,11 @@ label.lg {
       top: 0;
       font-size: 30px;
       font-weight: 100; }
+      @media (max-width: 575.98px) {
+        #faq .panel-group .panel .panel-heading .panel-title a:after {
+          right: -30px;
+          top: 30%;
+          transform: translate(-50%, 0%); } }
     #faq .panel-group .panel .panel-heading .panel-title a[aria-expanded="true"]:after {
       content: "-";
       font-size: 35px; }
@@ -14192,7 +14197,8 @@ label.lg {
       line-height: 19px;
       letter-spacing: 0em;
       text-align: left;
-      width: 100%; }
+      width: 100%;
+      word-break: break-word; }
   #faq .panel-group .panel .panel-collapse {
     margin-bottom: 10px; }
     #faq .panel-group .panel .panel-collapse .panel-body {

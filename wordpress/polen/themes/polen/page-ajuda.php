@@ -11,9 +11,10 @@
  *
  * @package Polen
  */
-
 get_header();
 ?>
+
+  <?php wp_enqueue_script('polen-help'); ?>
 
 	<main id="primary" class="site-main">
     <section id="faq" class="my-4">
@@ -38,7 +39,7 @@ get_header();
                   <div class="panel panel-default">
                     <div class="panel-heading" role="tab" id="heading-<?php echo $key; ?>">
                       <h4 class="panel-title">
-                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-<?php echo $key; ?>" aria-expanded="false" aria-controls="collapse-<?php echo $key; ?>">
+                        <a class="panel-button" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-<?php echo $key; ?>" aria-expanded="false" aria-controls="collapse-<?php echo $key; ?>">
                           <?php echo $item; ?>
                         </a>
                       </h4>
