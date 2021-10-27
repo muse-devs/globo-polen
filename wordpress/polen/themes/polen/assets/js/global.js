@@ -392,7 +392,7 @@ function polAjaxForm(formName, callBack, callBackError, reset = true) {
 		.fail(function (e) {
 			console.log(e);
 			if (e.responseJSON) {
-				callBackError(e.responseJSON.data.response || e.responseJSON.data);
+				callBackError(e.responseJSON.data.response || e.responseJSON.data.Error || e.responseJSON.data);
 			} else {
 				callBackError(e.statusText);
 			}
