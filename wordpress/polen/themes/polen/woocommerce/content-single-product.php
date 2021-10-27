@@ -155,7 +155,7 @@ if( 'instock' == $product->get_stock_status() ) {
 		// if (!$social) {
 	?>
 		<div class="row mt-4">
-			<div class="col-md-12">
+			<div class="col-12 col-md-6 m-md-auto">
 				<?php if (count($terms) > 0) : ?>
 					<?php foreach ($terms as $k => $term) : ?>
 						<a href="<?= get_tag_link($term); ?>" class="tag-link mb-2"><?= $term->name; ?></a>
@@ -170,9 +170,9 @@ if( 'instock' == $product->get_stock_status() ) {
 	?>
 
 	<!-- Bio -->
-	<div class="row mt-4 d-none">
+	<div class="row mt-4">
 		<div class="col-12 col-md-6 m-md-auto d-flex">
-			<p><?php //echo $product->get_description(); ?></p>
+			<p><?php echo $product->get_description(); ?></p>
 		</div>
 	</div>
 
