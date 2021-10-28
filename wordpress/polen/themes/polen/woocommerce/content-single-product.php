@@ -120,12 +120,12 @@ if( 'instock' == $product->get_stock_status() ) {
 	<div class="row mt-3 mb-1 talent-page-footer">
 		<div class="col-12 col-md-6 m-md-auto pb-3">
 			<?php if($has_stock) : ?>
-        <?php $inputs->material_combo_advanced(
+        <?php $inputs->pol_combo_advanced(
         "select_type",
         "select_type",
         array(
-          $inputs->material_combo_advanced_item("Vídeo para uso pessoal", $product->get_price_html(), "Compre um vídeo personalizado para você ou para presentar outra pessoa", "check-pessoal", "pessoal", true),
-          $inputs->material_combo_advanced_item("Vídeo para meu negócio", "", "Compre um Vídeo Polen para usar no seu negócio", "check-b2b", "b2b")
+          $inputs->pol_combo_advanced_item("Vídeo para uso pessoal", $product->get_price_html(), "Compre um vídeo personalizado para você ou para presentar outra pessoa", "check-pessoal", "pessoal", true),
+          $inputs->pol_combo_advanced_item("Vídeo para meu negócio", "", "Compre um Vídeo Polen para usar no seu negócio", "check-b2b", "b2b", false, !polen_b2b_product_is_enabled($product))
           )); ?>
 				<div class="btn-buy-personal">
           <?php echo woocommerce_template_single_add_to_cart(); ?>

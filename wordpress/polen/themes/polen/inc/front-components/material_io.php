@@ -104,12 +104,12 @@ class Material_Inputs
     return ob_end_flush();
   }
 
-  public function material_combo_advanced_item(string $title, string $price = "", string $text, string $id, string $value, bool $checked = false, bool $disabled = false)
+  public function pol_combo_advanced_item(string $title, string $price = "", string $text, string $id, string $value, bool $checked = false, bool $disabled = false)
   {
     return array("id" => $id, "title" => $title, "price" => $price, "text" => $text, "value" => $value, "checked" => $checked, "disabled" => $disabled);
   }
 
-  public function material_combo_advanced(string $id, string $name = "", array $items = array())
+  public function pol_combo_advanced(string $id, string $name = "", array $items = array())
   {
     ob_start();
     include $this->get_full_path_file('material_combo_advanced');
