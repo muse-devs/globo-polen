@@ -210,9 +210,9 @@ function polen_get_array_related_products( $product_id )
     }
 }
 
-function polen_get_home_stories( $qtd = 4 )
+function polen_get_home_stories( ...$orders_ids )
 {
-    $videos_info = Polen_Video_Info::get_by_complete_and_public_rand_order( $qtd );
+    $videos_info = Polen_Video_Info::get_by_complete_and_public_by_orders_ids( $orders_ids );
     $array_result = [];
     foreach( $videos_info as $vi ) {
 		$order = wc_get_order($vi->order_id);

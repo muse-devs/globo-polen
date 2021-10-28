@@ -193,7 +193,22 @@ class Polen_Video_Info extends Polen_DB
         $result_raw = $self_obj->get_result_multi_fields( $where, $qts, "ORDER BY rand()" );
         return $result_raw;
     }
-    
+
+
+    /**
+     * 
+     */
+    static public function get_by_complete_and_public_by_orders_ids( $orders_id = [] )
+    {
+        $self_class = new self();
+        global $wpdb;
+        $sql ="SELECT * FROM `{$self_class->table_name()}` WHERE `order_id` IN (".implode(', ', array_fill(0, count($orders_id), '%d')).") LIMIT 0,100;";
+        $sql = call_user_func_array(array($wpdb, 'prepare'), array_merge(array($sql), $orders_id));
+        $result = $wpdb->get_results( $sql );
+        return $result;
+    }
+
+
     /**
      * Retorna os videos nao processados pelo Vimeo
      * @return array [Polen_Video_Info]
@@ -204,6 +219,7 @@ class Polen_Video_Info extends Polen_DB
         $results = $pvi->get_results( 'vimeo_process_complete', '0', '%d' );
         return self::create_instance_many( $results );
     }
+
     
     /**
      * Cria um array de objectos do Polen_Video_Info
