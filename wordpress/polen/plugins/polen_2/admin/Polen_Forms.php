@@ -180,7 +180,7 @@ class Polen_Forms {
                 continue;
             }
 
-            $body .= "<p>{$name_value}: $field[$key]</p>";
+            $body .= "<p>{$name_value}: {$field}</p>";
         }
 
         $headers = array('Content-Type: text/html; charset=UTF-8; From: polen.me');
