@@ -81,13 +81,13 @@ get_header();
             "phone",
             "phone",
             "Telefone de contato",
-            true,
+            false,
             "mb-3",
             array(
               "placeholder" => "(XX) XXXXX-XXXX",
               "v-model" => "phone",
               "v-on:keyup" => "handleChange",
-              "maxlength" => "15",
+              //"maxlength" => "15",
             )
           );
           $inputs->material_textarea("textarea1", "message", "Descreva o que gostaria de saber", true); ?>
