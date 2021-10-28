@@ -153,6 +153,7 @@ if( 'instock' == $product->get_stock_status() ) {
           });
     </script>
 	</div>
+  <!-- --------------------------------------------- -->
 
 	<div class="row">
 		<div class="col-12 col-md-6 m-md-auto d-flex">

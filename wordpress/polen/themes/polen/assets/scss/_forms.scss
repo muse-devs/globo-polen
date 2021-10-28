@@ -524,6 +524,9 @@ textarea {
         ),
         #ffffff;
     }
+    &.-disabled {
+      opacity: 0.5;
+    }
     .input {
       display: flex;
       align-items: center;
