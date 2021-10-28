@@ -141,7 +141,7 @@ class Polen_Forms {
         ];
 
         if (!isset($fields[$field])) {
-            return;
+            return null;
         }
 
         return $fields[$field];
