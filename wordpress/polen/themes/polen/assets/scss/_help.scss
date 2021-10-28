@@ -53,6 +53,9 @@
             text-align: left;
             width: 100%;
             word-break: break-word;
+            strong {
+              font-weight: 500;
+            }
           }
         }
       }
@@ -62,7 +65,7 @@
           font-size: 16px;
           font-style: normal;
           font-weight: 500;
-          line-height: 19px;
+          line-height: 150%;
           letter-spacing: 0em;
           text-align: left;
           color: #495057;

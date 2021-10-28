@@ -66,29 +66,33 @@ get_header();
       </div>
     </section>
     <section id="bus-form-wrapper" class="row mb-5 bus-form">
+      <?php $inputs = new Material_Inputs(); ?>
       <div class="col-12 col-md-8 m-md-auto">
         <form id="help-form" v-on:submit.prevent="handleSubmit" method="POST">
           <input type="hidden" id="url-success" value="<?php echo enterprise_url_success(); ?>" />
-          <input type="hidden" name="action" value="submit_form" />
-          <input type="hidden" name="form_id" value="2" />
-          <input type="hidden" name="terms" value="1" />
-          <label class="pol-input-group mb-3" aria-required="true">
-            <span class="label">Nome Completo</span>
-            <input type="text" class="input" name="name" placeholder="Seu nome" required />
-          </label>
-          <label class="pol-input-group mb-3" aria-required="true">
-            <span class="label">e-mail</span>
-            <input type="email" name="email" class="input" placeholder="Seu melhor e-mail" required />
-          </label>
-          <label class="pol-input-group mb-3" aria-required="true">
-            <span class="label">Telefone de contato</span>
-            <input type="text" name="phone" v-model="phone" v-on:keyup="handleChange" class="input" placeholder="(DDD) XXXXX-XXXX" maxlength="15" required />
-          </label>
-          <label class="pol-input-group mb-3" aria-required="true">
-            <span class="label">Mensagem</span>
-            <textarea name="message" placeholder="Descreva o que gostaria de saber" rows="6" required></textarea>
-          </label>
-          <input type="submit" class="btn btn-primary btn-lg btn-block mt-4" value="Enviar" />
+          <?php
+          $inputs->input_hidden("action", "submit_form");
+          $inputs->input_hidden("form_id", "2");
+          $inputs->input_hidden("terms", "1");
+
+          $inputs->material_input(Material_Inputs::TYPE_TEXT, "name", "name", "Seu nome", true, "mb-3");
+          $inputs->material_input(Material_Inputs::TYPE_EMAIL, "email", "email", "Seu melhor e-mail", true, "mb-3");
+          $inputs->material_input(
+            Material_Inputs::TYPE_PHONE,
+            "phone",
+            "phone",
+            "Telefone de contato",
+            true,
+            "mb-3",
+            array(
+              "placeholder" => "(XX) XXXXX-XXXX",
+              "v-model" => "phone",
+              "v-on:keyup" => "handleChange",
+              "maxlength" => "15",
+            )
+          );
+          $inputs->material_textarea("textarea1", "message", "Descreva o que gostaria de saber", true); ?>
+          <?php $inputs->material_button(Material_Inputs::TYPE_SUBMIT, "send_form", "Enviar", "mt-4"); ?>
         </form>
       </div>
     </section>
