@@ -120,9 +120,10 @@ if( 'instock' == $product->get_stock_status() ) {
 			<?php if($has_stock) : ?>
 				<?php echo woocommerce_template_single_add_to_cart(); ?>
 			<?php else: ?>
-				<a href="/shop" class="btn btn-primary btn-lg btn-block btn-get-video">
-					Escolher outro artista
-				</a>
+        <?php
+        $inputs = new Material_Inputs();
+        $inputs->material_button_link("todos", "Escolher outro artista", home_url( "shop" ));
+        ?>
 			<?php endif; ?>
 		</div>
 	</div>
@@ -155,7 +156,7 @@ if( 'instock' == $product->get_stock_status() ) {
 		// if (!$social) {
 	?>
 		<div class="row mt-4">
-			<div class="col-md-12">
+			<div class="col-12 col-md-6 m-md-auto">
 				<?php if (count($terms) > 0) : ?>
 					<?php foreach ($terms as $k => $term) : ?>
 						<a href="<?= get_tag_link($term); ?>" class="tag-link mb-2"><?= $term->name; ?></a>
@@ -170,9 +171,9 @@ if( 'instock' == $product->get_stock_status() ) {
 	?>
 
 	<!-- Bio -->
-	<div class="row mt-4 d-none">
+	<div class="row mt-4">
 		<div class="col-12 col-md-6 m-md-auto d-flex">
-			<p><?php //echo $product->get_description(); ?></p>
+			<p><?php echo $product->get_description(); ?></p>
 		</div>
 	</div>
 

@@ -28,15 +28,15 @@ class Polen_Checkout
     public function remove_woocommerce_fields( $fields ) {
         $removed_keys = array(
             'billing_company',
-            // 'billing_phone',
+            'billing_phone',
             'billing_address_1',
             'billing_address_2',
             'billing_city',
             'billing_postcode',
             'billing_country',
             'billing_state',
-            // 'billing_email',
-            // 'billing_first_name',
+            'billing_email',
+            'billing_first_name',
             'billing_last_name'
         );
 
@@ -137,13 +137,14 @@ class Polen_Checkout
         $user = wp_get_current_user();
 
         if( is_account_page() ) {
-            ?>
+            /*
+            Movido para form-edit-account.php
             <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                 <label><?php _e( 'Celular', 'woocommerce' ); ?></label>
                 <input type="text" placeholder="<?php _e( 'Celular', 'woocommerce' ); ?>" class="woocommerce-Input input-text form-control form-control-lg" name="billing_phone" id="billing_phone" value="<?php echo esc_attr( $user->billing_phone ); ?>" />
                 <div class="error-message"></div>
             </p>
-        <?php
+        */
         } else {
             if( ! empty( $user->billing_phone ) ) {
             ?>

@@ -55,17 +55,61 @@ if( !is_user_logged_in() ) {
 }
 
 ?>
+
+
+
+<?php if ($order->has_status('failed')) : ?>
+  <div class="row">
+    <div class="col-md-12">
+      <ul class="order-flow">
+        <li class="item item0 fail">
+            <span class="background status">
+              <i class="bi bi-check-circle"></i>
+              <i class="icon icon-error-o"></i>
+            </span>
+          <span class="text">
+                 <h4 class="title">Pagamento Recusado</h4>
+                 <p class="description">Não foi possível finalizar seu pagamento! Verifique com o seu banco.</p>
+            </span>
+        </li>
+        <li class="item item_next-step_1 pending">
+            <span class="background status">
+              <i class="bi bi-check-circle"></i>
+              <i class="icon icon-error-o"></i>
+            </span>
+          <span class="text">
+               <h4 class="title">Aguardando confirmação do talento</h4>
+               <p class="description">Caso seu pedido não seja aprovado pelo talento o seu dinheiro será devolvido imediatamente.</p>
+            </span>
+        </li>
+        <li class="item item_next-step_2 pending">
+            <span class="background status">
+              <i class="bi bi-check-circle"></i>
+              <i class="icon icon-error-o"></i>
+            </span>
+          <span class="text">
+               <h4 class="title">Aguardando gravação do vídeo</h4>
+               <p class="description">Quando o artista disponibilizar o vídeo ele será exibido aqui.</p>
+            </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+<?php else : ?>
+
   <div class="row">
     <?php if (!$social) : ?>
       <div class="col-md-12 mb-4">
         <h1>Seu vídeo foi solicitado com Sucesso</h1>
       </div>
     <?php endif; ?>
+
     <?php if( $new_user ) : ?>
       <div class="col-12">
         <?= polen_get_toast('Sua conta Polen foi criada com sucesso! Enviamos seus dados de acesso para o e-mail: <strong>' . $email_billing . '</strong>'); ?>
       </div>
     <?php endif; ?>
+
     <div class="col-12">
       <?php $social && criesp_get_thankyou_box(); ?>
     </div>
@@ -82,11 +126,14 @@ if (is_user_logged_in()) :
   ?>
   <div class="row my-3">
     <div class="col-12">
-      <a href="<?php echo wc_get_account_endpoint_url('view-order') . $order_number . '/'; ?>" class="btn btn-outline-light btn-lg btn-block">Acompanhar pedido</a>
+      <?php
+      $inputs = new Material_Inputs();
+      $inputs->material_button_link_outlined("btn-view-order", "Acompanhar pedido", wc_get_account_endpoint_url('view-order') . $order_number . '/');
+      ?>
     </div>
-  </div>
 
-<?php
+  <?php
+  endif;
 endif;
 
 do_action( 'woocommerce_thankyou_' . $order->get_payment_method(), $order->get_id() );
