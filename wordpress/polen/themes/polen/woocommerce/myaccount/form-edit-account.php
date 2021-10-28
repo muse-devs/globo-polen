@@ -36,13 +36,17 @@ do_action( 'woocommerce_before_edit_account_form' ); ?>
 	</div>
 </div>
 
+<?php $inputs = new Material_Inputs(); ?>
+
 <form class="woocommerce-EditAccountForm edit-account mt-3" action="" method="post" <?php do_action( 'woocommerce_edit_account_form_tag' ); ?> enctype="multipart/form-data" >
-	<input type="hidden" name="wpua_action" value="update" />
-	<input type="hidden" name="user_id" id="user_id" value="<?php echo esc_attr($user->ID); ?>" />
-	<?php wp_nonce_field('update-user_'.$user->ID); ?>
+  <?php
+  $inputs->input_hidden("wpua_action", "update");
+  $inputs->input_hidden("user_id", esc_attr($user->ID));
+  wp_nonce_field('update-user_'.$user->ID);
+  ?>
 
 	<?php
-	if (is_plugin_active('wp-user-avatar/wp-user-avatar.php')) {	
+	if (is_plugin_active('wp-user-avatar/wp-user-avatar.php')) {
 		$polen_account = new Polen_Account;
 
 		$wpuavatar = new WP_User_Avatar();
@@ -53,52 +57,46 @@ do_action( 'woocommerce_before_edit_account_form' ); ?>
 
 	<?php do_action( 'woocommerce_edit_account_form_start' ); ?>
 
-	<p class="woocommerce-form-row woocommerce-form-row--first form-row form-row-first mb-3">
-		<label><?php esc_html_e( 'First name', 'woocommerce' ); ?></label>
-		<input type="text" placeholder="<?php esc_html_e( 'First name', 'woocommerce' ); ?>" class="woocommerce-Input woocommerce-Input--text input-text form-control form-control-lg" name="account_first_name" id="account_first_name" autocomplete="given-name" value="<?php echo esc_attr( $user->first_name ); ?>" />
+  <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide mb-4">
+    <?php $inputs->material_input(Material_Inputs::TYPE_PHONE, "billing_phone", "billing_phone", "Celular", false, "", array("value" => esc_attr( $user->billing_phone ))); ?>
+  </p>
+	<p class="woocommerce-form-row woocommerce-form-row--first form-row form-row-first mb-4">
+    <?php $inputs->material_input(Material_Inputs::TYPE_TEXT, "account_first_name", "account_first_name", "Nome", false, "", array("value" => esc_attr( $user->first_name ), "autocomplete" => "given-name")); ?>
 	</p>
-	<p class="woocommerce-form-row woocommerce-form-row--last form-row form-row-last mb-3">
-		<label><?php esc_html_e( 'Last name', 'woocommerce' ); ?></label>
-		<input type="text" placeholder="<?php esc_html_e( 'Last name', 'woocommerce' ); ?>" class="woocommerce-Input woocommerce-Input--text input-text form-control form-control-lg" name="account_last_name" id="account_last_name" autocomplete="family-name" value="<?php echo esc_attr( $user->last_name ); ?>" />
+	<p class="woocommerce-form-row woocommerce-form-row--last form-row form-row-last mb-4">
+    <?php $inputs->material_input(Material_Inputs::TYPE_TEXT, "account_last_name", "account_last_name", "Sobrenome", false, "", array("value" => esc_attr( $user->last_name ), "autocomplete" => "family-name")); ?>
 	</p>
 	<div class="clear"></div>
 
-	<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide mb-3">
-		<label><?php esc_html_e( 'Display name', 'woocommerce' ); ?></label>
-		<input type="text" placeholder="<?php esc_html_e( 'Display name', 'woocommerce' ); ?>" class="woocommerce-Input woocommerce-Input--text input-text form-control form-control-lg" name="account_display_name" id="account_display_name" value="<?php echo esc_attr( $user->display_name ); ?>" />
-		<small><?php esc_html_e( 'This will be how your name will be displayed in the account section and in reviews', 'woocommerce' ); ?></small>
+	<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide mb-4">
+    <?php $inputs->material_input(Material_Inputs::TYPE_TEXT, "account_display_name", "account_display_name", "Nome de exibição", false, "", array("value" => esc_attr( $user->display_name ))); ?>
+		<?php $inputs->material_input_helper(esc_html_e( 'This will be how your name will be displayed in the account section and in reviews', 'woocommerce' )); ?>
 	</p>
-	<div class="clear"></div>
 
 	<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-		<label><?php esc_html_e( 'Email address', 'woocommerce' ); ?></label>
-		<input type="email" placeholder="<?php esc_html_e( 'Email address', 'woocommerce' ); ?>" class="woocommerce-Input woocommerce-Input--email input-text form-control form-control-lg" name="account_email" id="account_email" autocomplete="email" value="<?php echo esc_attr( $user->user_email ); ?>" />
+    <?php $inputs->material_input(Material_Inputs::TYPE_EMAIL, "account_email", "account_email", "Endereço de e-mail", false, "", array("value" => esc_attr( $user->user_email ), "autocomplete" => "email")); ?>
 	</p>
 
 	<fieldset class="mt-4">
-		<legend class="col-form-label"><?php esc_html_e( 'Password change', 'woocommerce' ); ?></legend>
+		<legend class="col-form-label mb-2"><?php esc_html_e( 'Password change', 'woocommerce' ); ?></legend>
 
-		<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide mb-3">
-			<label><?php esc_html_e( 'Senha atual', 'woocommerce' ); ?></label>
-			<input type="password" placeholder="<?php esc_html_e( 'Current password (leave blank to leave unchanged)', 'woocommerce' ); ?>" class="woocommerce-Input woocommerce-Input--password input-text form-control form-control-lg" name="password_current" id="password_current" autocomplete="off" />
+		<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide mb-4">
+      <?php $inputs->material_input(Material_Inputs::TYPE_PASSWORD, "password_current", "password_current", "Senha atual", false, "", array("autocomplete" => "off")); ?>
 		</p>
-		<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide mb-3">
-			<label><?php esc_html_e( 'Nova senha', 'woocommerce' ); ?></label>
-			<input type="password" placeholder="<?php esc_html_e( 'New password (leave blank to leave unchanged)', 'woocommerce' ); ?>" class="woocommerce-Input woocommerce-Input--password input-text form-control form-control-lg" name="password_1" id="password_1" autocomplete="off" />
+		<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide mb-4">
+      <?php $inputs->material_input(Material_Inputs::TYPE_PASSWORD, "password_1", "password_1", "Nova senha", false, "", array("autocomplete" => "off")); ?>
 		</p>
 		<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-			<label><?php esc_html_e( 'Confirm new password', 'woocommerce' ); ?></label>
-			<input type="password" placeholder="<?php esc_html_e( 'Confirm new password', 'woocommerce' ); ?>" class="woocommerce-Input woocommerce-Input--password input-text form-control form-control-lg" name="password_2" id="password_2" autocomplete="off" />
+      <?php $inputs->material_input(Material_Inputs::TYPE_PASSWORD, "password_2", "password_2", "Confirmar nova senha", false, "", array("autocomplete" => "off")); ?>
 		</p>
 	</fieldset>
-	<div class="clear"></div>
 
 	<?php do_action( 'woocommerce_edit_account_form' ); ?>
 
-	<p>
+	<p class="mt-4">
 		<?php wp_nonce_field( 'save_account_details', 'save-account-details-nonce' ); ?>
-		<button type="submit" class="woocommerce-Button mt-4 btn btn-primary btn-lg btn-block" name="save_account_details" value="<?php esc_attr_e( 'Save changes', 'woocommerce' ); ?>"><?php esc_html_e( 'Save changes', 'woocommerce' ); ?></button>
-		<input type="hidden" name="action" value="save_account_details" />
+    <?php $inputs->material_button(Material_Inputs::TYPE_SUBMIT, "save_account_details", "Salvar alterações"); ?>
+		<?php $inputs->input_hidden("action", "save_account_details"); ?>
 	</p>
 
 	<?php do_action( 'woocommerce_edit_account_form_end' ); ?>

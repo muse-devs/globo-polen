@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Show options for ordering
  *
@@ -15,17 +16,26 @@
  * @version     3.6.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
+if (!defined('ABSPATH')) {
+  exit;
 }
-
+$inputs = new Material_Inputs();
+$items = array();
+foreach ( $catalog_orderby_options as $id => $name ) {
+  $items[$id] = $name;
+}
 ?>
 <form class="woocommerce-ordering" method="get">
-	<select name="orderby" class="orderby form-control form-control-lg custom-select" aria-label="<?php esc_attr_e( 'Shop order', 'woocommerce' ); ?>">
-		<?php foreach ( $catalog_orderby_options as $id => $name ) : ?>
-			<option value="<?php echo esc_attr( $id ); ?>" <?php selected( $orderby, $id ); ?>><?php echo esc_html( $name ); ?></option>
-		<?php endforeach; ?>
-	</select>
-	<input type="hidden" name="paged" value="1" />
-	<?php wc_query_string_form_fields( null, array( 'orderby', 'submit', 'paged', 'product-page' ) ); ?>
+  <?php $inputs->material_select("orderby", "orderby", "Ordenar", $items, false, "orderby", array()); ?>
+  <?php $inputs->input_hidden("paged", "1"); ?>
+  <?php wc_query_string_form_fields(null, array('orderby', 'submit', 'paged', 'product-page')); ?>
 </form>
+<script>
+  jQuery(document).ready(function() {
+    var select = mdc.select.MDCSelect.attachTo(document.querySelector(".orderby"));
+    select.setValue("<?php echo $orderby; ?>");
+    select.listen('MDCSelect:change', () => {
+      document.querySelector("form.woocommerce-ordering").submit();
+    });
+  });
+</script>

@@ -212,6 +212,8 @@ function polen_scripts() {
 	wp_register_script( 'zuck', TEMPLATE_URI . '/assets/js/' . $min . 'zuck.js', array(), _S_VERSION, true );
 	wp_register_script( 'form-whatsapp', TEMPLATE_URI . '/assets/js/' . $min . 'form-whatsapp.js', array("vuejs"), _S_VERSION, true );
 	wp_register_script( 'polen-business', TEMPLATE_URI . '/assets/js/' . $min . 'business.js', array("vuejs"), _S_VERSION, true );
+  wp_register_script( 'polen-help', TEMPLATE_URI . '/assets/js/' . $min . 'help.js', array("jquery", "vuejs"), _S_VERSION, true );
+  wp_register_script( 'material-js', TEMPLATE_URI . '/assets/js/vendor/material-components-web.min.js', array(), _S_VERSION, false );
 	// --------------------------------------------------------------------------------------------------
 
 	if (polen_is_landingpage()) {
@@ -244,7 +246,8 @@ function polen_scripts() {
 		wp_enqueue_script( 'polen-checkout', TEMPLATE_URI . '/assets/js/' . $min . 'checkout.js', array("jquery"), _S_VERSION, true );
 	}
 
-	wp_enqueue_script( 'bootstrap-js', TEMPLATE_URI . '/assets/bootstrap-4.6.0/dist/js/bootstrap.min.js', array("jquery"), _S_VERSION, true );
+	wp_enqueue_script( 'bootstrap-js', TEMPLATE_URI . '/assets/js/vendor/bootstrap.min.js', array("jquery"), _S_VERSION, true );
+  wp_enqueue_script('material-js');
 
 	// if(is_user_logged_in()) {
 		wp_enqueue_script( 'header-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'navigation.js', array("jquery"), _S_VERSION, true );
