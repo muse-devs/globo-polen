@@ -159,7 +159,7 @@ function bus_get_form()
           "phone",
           "phone",
           "Número de telefone",
-          true,
+          false,
           "mb-3",
           array(
             "placeholder" => "(XX) XXXXX-XXXX",
