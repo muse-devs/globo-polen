@@ -90,7 +90,7 @@ get_header();
               //"maxlength" => "15",
             )
           );
-          $inputs->material_textarea("textarea1", "message", "Descreva o que gostaria de saber", true); ?>
+          $inputs->material_textarea("textarea1", "message", "Descreva o que você gostaria de saber", true); ?>
           <?php $inputs->material_button(Material_Inputs::TYPE_SUBMIT, "send_form", "Enviar", "mt-4"); ?>
         </form>
       </div>
