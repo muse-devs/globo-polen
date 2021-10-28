@@ -56,7 +56,7 @@ function pol_get_menu()
         } else { ?>
           <div class="d-none d-md-block">
             <a class="btn btn-outline-light" href="<?php echo polen_get_login_url(); ?>">
-              Login
+              Entrar
             </a>
           </div>
           <div class="d-md-none">

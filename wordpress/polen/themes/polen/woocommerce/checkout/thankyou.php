@@ -121,13 +121,15 @@ if( !is_user_logged_in() ) {
     </div>
   </div>
 
-  <?php
-  if (is_user_logged_in()) :
-    ?>
-    <div class="row my-3">
-      <div class="col-12">
-        <a href="<?php echo wc_get_account_endpoint_url('view-order') . $order_number . '/'; ?>" class="btn btn-outline-light btn-lg btn-block">Acompanhar pedido</a>
-      </div>
+<?php
+if (is_user_logged_in()) :
+  ?>
+  <div class="row my-3">
+    <div class="col-12">
+      <?php
+      $inputs = new Material_Inputs();
+      $inputs->material_button_link_outlined("btn-view-order", "Acompanhar pedido", wc_get_account_endpoint_url('view-order') . $order_number . '/');
+      ?>
     </div>
 
   <?php

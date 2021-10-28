@@ -38,6 +38,7 @@ if (!$talent_is_social) {
 		} else {
 			echo "<p class='mt-2 mb-4'>Você tem <strong><span id='order-count'>" . $count_total['qtd'] . "</span> pedido(s) de vídeo</strong>, seus pedidos expiram em até {$days_expires} dias.</p>";
 			if (count($talent_orders) > 0) {
+        $inputs = new Material_Inputs();
 				foreach ($talent_orders as $order) :
 					$order_obj = new \WC_Order($order['order_id']);
 					$is_social = social_order_is_social($order_obj);
@@ -148,7 +149,9 @@ if (!$talent_is_social) {
 											if ($order['status'] == 'talent-accepted') {
 											?>
 												<div class="col-12 col-md-12">
-													<button class="btn btn-outline-light btn-lg btn-block btn-enviar-video" data-toggle="" data-target="" onclick="window.location.href = '/my-account/send-video/?order_id=<?php echo $order['order_id']; ?>'">Enviar vídeo</button>
+                          <?php
+                          $inputs->material_button_link_outlined("link-" . $order['order_id'], "Enviar vídeo", "/my-account/send-video/?order_id=" . $order['order_id']);
+                          ?>
 												</div>
 											<?php
 											}
@@ -158,10 +161,10 @@ if (!$talent_is_social) {
 												$accept_reject_nonce = wp_create_nonce('polen-order-accept-nonce');
 											?>
 												<div class="col-6" button-nonce="<?php echo $accept_reject_nonce; ?>">
-													<button type="button" class="btn btn-primary btn-lg btn-block order-check accept" action-type="accept" order-id="<?php echo $order['order_id']; ?>">Aceitar</button>
+                          <?php $inputs->material_button(Material_Inputs::TYPE_BUTTON, "accept-" . $order['order_id'], "Aceitar", "order-check accept", array("action-type" => "accept", "order-id" => $order['order_id'])); ?>
 												</div>
 												<div class="col-6">
-													<button class="btn btn-outline-light btn-lg btn-block btn-visualizar-pedido" order-id="<?php echo $order['order_id']; ?>" data-toggle="modal" data-target="#OrderActions">Declinar</button>
+                          <?php $inputs->material_button_outlined(Material_Inputs::TYPE_BUTTON, "reject-" . $order['order_id'], "Declinar", "click-reject", array("order-id" => $order['order_id'], "data-toggle" => "modal", "data-target" => "#OrderActions")); ?>
 												</div>
 											<?php
 											}
@@ -193,19 +196,18 @@ if (!$talent_is_social) {
 									<h1 class="page-title">Olá, poderia nos explicar por quê você decidiu rejeitar esse pedido de vídeo?</h1>
 								</div>
 								<div class="col-12 mt-3">
-									<select id="reason" class="form-control form-control-lg custom-select" required="required">
-										<option value="">Selecione o motivo *</option>
-										<option value="linguagem-impropria">Linguagem Imprópria</option>
-										<option value="direitos-autorais">Direitos Autorais</option>
-										<option value="pedido-complexo">Não consegui entender o pedido</option>
-										<option value="outro">Outro</option>
-									</select>
+                  <?php $inputs->material_select("reason", "reason", "Selecione o motivo", array(
+                    "linguagem-impropria"   => "Linguagem Imprópria",
+                    "direitos-autorais"     => "Direitos Autorais",
+                    "pedido-complexo"       => "Não consegui entender o pedido",
+                    "Outro"                 => "Outro"
+                  ), true); ?>
 								</div>
 								<div class="col-12 mt-3">
-									<textarea id="description" rows="4" class="background-grey form-control" placeholder="Descreva o motivo"></textarea>
+                  <?php $inputs->material_textarea("description", "description", "Descreva o motivo", true); ?>
 								</div>
 								<div class="col-12 mt-3 mb-4" button-nonce="<?php echo $accept_reject_nonce; ?>">
-									<button type="button" class="btn btn-primary btn-lg btn-block order-check" order-id="<?php echo $order['order_id']; ?>" action-type="reject">Declinar pedido</button>
+                  <?php $inputs->material_button(Material_Inputs::TYPE_BUTTON, "btn-reject", "Declinar pedido", "order-check", array("order-id" => "", "action-type" => "reject")); ?>
 								</div>
 							</div>
 							<!-- Fim -->
@@ -220,14 +222,9 @@ if (!$talent_is_social) {
 	(function($) {
 		'use strict';
 		$(document).ready(function() {
-
-			// Removendo border red quando o user selecionar um motivo
-			$("#reason").change(function() {
-				if (reason !== "") {
-					$('#reason').removeClass("border-danger");
-					return;
-				}
-			});
+      $(".click-reject").on("click", function(e) {
+        $("#btn-reject").attr("order-id", $(this).attr("order-id"));
+      });
 
 			$('button.order-check').on('click', function() {
 				let wnonce = $(this).parent().attr('button-nonce');
@@ -240,7 +237,6 @@ if (!$talent_is_social) {
 
 					// Obrigando o usuário selecionar a razão
 					if (reason === "") {
-						$('#reason').toggleClass("border-danger");
 						return;
 					}
 					// Gerando o informações pra rejeição
@@ -261,6 +257,9 @@ if (!$talent_is_social) {
 						security: wnonce
 					}
 				}
+
+        $(".modal-close")[0].click();
+        polSpinner(CONSTANTS.SHOW);
 
 				$.ajax({
 					type: 'POST',

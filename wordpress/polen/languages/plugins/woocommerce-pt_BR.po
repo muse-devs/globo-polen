@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - WooCommerce - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2021-10-04 21:47:07+0000\n"
+"PO-Revision-Date: 2021-10-12 18:58:23+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10,6 +10,11 @@ msgstr ""
 "X-Generator: GlotPress/3.0.0-alpha.2\n"
 "Language: pt_BR\n"
 "Project-Id-Version: Plugins - WooCommerce - Stable (latest release)\n"
+
+#: packages/woocommerce-admin/src/Features/OnboardingTasks.php:721
+#: packages/woocommerce-admin/dist/chunks/task-list.js:1
+msgid "Set up marketing tools"
+msgstr "Configurar ferramentas de marketing"
 
 #: includes/admin/views/html-admin-page-addons.php:29
 msgid "Search for extensions"
@@ -53,6 +58,11 @@ msgstr "Ativar nas configurações"
 #: packages/woocommerce-admin/src/Notes/MerchantEmailNotifications/NotificationEmail.php:35
 msgid "Hi there,"
 msgstr "Olá,"
+
+#: packages/woocommerce-admin/src/Features/OnboardingTasks.php:585
+#: packages/woocommerce-admin/dist/chunks/task-list.js:1
+msgid "Get ready to start selling"
+msgstr "Prepare-se para começar a vender"
 
 #: includes/rest-api/Controllers/Version3/class-wc-rest-taxes-controller.php:86
 msgid "List of city names. Introduced in WooCommerce 5.3."
@@ -129,7 +139,7 @@ msgstr "Não permitimos pedidos do país informado (%s)"
 msgid "A valid email address is required"
 msgstr "É obrigatório um endereço de e-mail válido"
 
-#: packages/woocommerce-admin/src/Features/Onboarding.php:854
+#: packages/woocommerce-admin/src/Features/Onboarding.php:809
 msgid "Extended task List"
 msgstr "Lista de tarefas estendida"
 
@@ -170,6 +180,13 @@ msgstr "Você tem certeza de que está pronto?"
 msgid "We strongly recommend creating a backup of your site before updating."
 msgstr "Recomendamos com toda a veemência a criação de um backup do seu site antes de atualizar."
 
+#. translators: %1$s: list of product names comma separated, %2%s the last
+#. product name
+#: packages/woocommerce-admin/src/Features/OnboardingTasks.php:605
+#: packages/woocommerce-admin/dist/chunks/task-list.js:1
+msgid "Add %s to my store"
+msgstr "Adicionar %s à minha loja"
+
 #: packages/woocommerce-admin/src/Features/PaymentGatewaySuggestions/DefaultPaymentGateways.php:185
 #: packages/woocommerce-admin/dist/chunks/homescreen.js:1
 #: packages/woocommerce-admin/dist/data/index.js:2
@@ -183,8 +200,8 @@ msgstr "A extensão oficial Razorpay para WooCommerce permite receber pagamentos
 
 #. translators: %s: extension namespace
 #. translators: %s: extension namespace
-#: packages/woocommerce-blocks/src/Domain/Services/ExtendRestApi.php:356
 #: packages/woocommerce-blocks/src/Domain/Services/ExtendRestApi.php:365
+#: packages/woocommerce-blocks/src/Domain/Services/ExtendRestApi.php:373
 msgid "Extension data registered by %s"
 msgstr "Dados de extensão cadastrados por %s"
 
@@ -204,7 +221,7 @@ msgstr "Verdadeiro se o carrinho atende os critérios para exibir custos de entr
 msgid "Whether the product is visible in the catalog"
 msgstr "Se o produto está visível no catálogo"
 
-#: packages/woocommerce-blocks/src/StoreApi/Routes/Checkout.php:635
+#: packages/woocommerce-blocks/src/StoreApi/Routes/Checkout.php:626
 msgid "An account is already registered with your email address. Please log in before proceeding."
 msgstr "Já existe uma conta cadastrada com seu endereço de e-mail. Entre antes de prosseguir."
 
@@ -220,10 +237,6 @@ msgstr "Limite de uso do cupom atingido. Tente novamente em alguns minutos ou en
 #: packages/woocommerce-blocks/src/StoreApi/Schemas/CartSchema.php:147
 msgid "Current set billing address for the customer."
 msgstr "Endereço de faturamento atual definido para o cliente."
-
-#: packages/woocommerce-blocks/src/StoreApi/Schemas/AbstractSchema.php:94
-msgid "Extensions data."
-msgstr "Dados de extensões."
 
 #: packages/woocommerce-admin/src/Features/CustomerEffortScoreTracks.php:378
 msgid "How easy was it to update your settings?"
@@ -259,7 +272,7 @@ msgstr "O ID %1$s do item tentou cadastrar usando uma opção inválida. Os argu
 msgid "You have attempted to register a duplicate item with WooCommerce Navigation: %1$s"
 msgstr "Você tentou cadastrar um item duplicado à navegação do WooCommerce: %1$s"
 
-#: packages/woocommerce-blocks/src/StoreApi/Routes/Checkout.php:419
+#: packages/woocommerce-blocks/src/StoreApi/Routes/Checkout.php:404
 msgid "Unable to create order"
 msgstr "Não é possível criar um pedido"
 
@@ -636,6 +649,15 @@ msgctxt "district"
 msgid "Srem"
 msgstr "Srem"
 
+#: packages/woocommerce-admin/src/Features/OnboardingTasks.php:594
+#: packages/woocommerce-admin/src/Features/OnboardingTasks.php:689
+#: packages/woocommerce-admin/src/Features/OnboardingTasks.php:706
+#: packages/woocommerce-admin/src/Features/OnboardingTasks.php:737
+#: packages/woocommerce-admin/dist/chunks/homescreen.js:1
+#: packages/woocommerce-admin/dist/chunks/task-list.js:1
+msgid "Let's go"
+msgstr "Vamos lá"
+
 #: packages/woocommerce-admin/src/API/ProductVariations.php:55
 msgid "Search by similar product name, sku, or attribute value."
 msgstr "Pesquise produto semelhante por nome, SKU ou valor de atributo."
@@ -648,12 +670,12 @@ msgstr "ID da exportação."
 msgid "Export status message."
 msgstr "Mensagem de status da exportação."
 
-#: packages/woocommerce-admin/src/Loader.php:321
+#: packages/woocommerce-admin/src/Loader.php:322
 #: packages/woocommerce-admin/dist/app/index.js:2
 msgid "Setup Wizard"
 msgstr "Assistente de configuração"
 
-#: packages/woocommerce-admin/src/API/OnboardingTasks.php:527
+#: packages/woocommerce-admin/src/API/OnboardingTasks.php:645
 msgid "Country codes that support Automated Taxes."
 msgstr "Códigos de países que suportam taxas automatizadas."
 
@@ -1695,7 +1717,7 @@ msgstr "Isso mudará o status do estoque de todas as variações."
 msgid "File uploaded: %s"
 msgstr "Arquivo enviado: %s"
 
-#: includes/admin/class-wc-admin-assets.php:439
+#: includes/admin/class-wc-admin-assets.php:443
 msgid "Are you sure you want to run this tool?"
 msgstr "Tem certeza de que deseja executar esta ferramenta?"
 
@@ -1877,7 +1899,7 @@ msgstr "O modo de desenvolvimento do WooCommerce Admin exige que a constante %1$
 msgid "You have installed a development version of WooCommerce Admin which requires files to be built. From the plugin directory, run %1$s and %2$s to install dependencies, then %3$s to build the files."
 msgstr "Você instalou uma versão de desenvolvimento do WooCommerce Admin que requer a construção dos arquivos. No diretório do plugin, execute %1$s e %2$s para instalar as dependências, depois %3$s para construir os arquivos."
 
-#: packages/woocommerce-admin/src/Features/Onboarding.php:451
+#: packages/woocommerce-admin/src/Features/Onboarding.php:453
 msgid "Bundles"
 msgstr "Pacotes"
 
@@ -1893,11 +1915,11 @@ msgstr "Lista de tags, se aplicável."
 msgid "Tag name"
 msgstr "Nome da tag"
 
-#: packages/woocommerce-admin/src/Features/Onboarding.php:410
+#: packages/woocommerce-admin/src/Features/Onboarding.php:412
 msgid "Education and learning"
 msgstr "Educação e aprendizagem"
 
-#: packages/woocommerce-admin/src/Features/Onboarding.php:455
+#: packages/woocommerce-admin/src/Features/Onboarding.php:457
 msgid "Customizable products"
 msgstr "Produtos personalizáveis"
 
@@ -1937,7 +1959,7 @@ msgstr "Link da tag"
 msgid "Tag slug"
 msgstr "Slug da tag"
 
-#: packages/woocommerce-admin/src/API/OnboardingProfile.php:224
+#: packages/woocommerce-admin/src/API/OnboardingProfile.php:271
 msgid "Whether or not the profile was skipped."
 msgstr "Se o perfil foi ou não ignorado."
 
@@ -1997,6 +2019,17 @@ msgstr "Configurar provedores adicionais de pagamento"
 msgid "Invalid admin note"
 msgstr "Nota inválida de administrador"
 
+#. translators: %d is the count of items in the cart.
+#. translators: %d is the count of items in the cart.
+#: packages/woocommerce-blocks/src/BlockTypes/MiniCart.php:208
+#: packages/woocommerce-blocks/build/cart-frontend.js:41
+#: packages/woocommerce-blocks/build/cart.js:33
+#: packages/woocommerce-blocks/build/mini-cart-component-frontend.js:19
+msgid "Your cart (%d item)"
+msgid_plural "Your cart (%d items)"
+msgstr[0] "Seu carrinho (%d item)"
+msgstr[1] "Seu carrinho (%d itens)"
+
 #: packages/woocommerce-blocks/src/StoreApi/Utilities/OrderController.php:340
 #: packages/woocommerce-blocks/build/wc-settings.js:1
 msgid "Country/Region"
@@ -2012,11 +2045,47 @@ msgstr "Cartão de crédito/débito"
 msgid "Line total tax."
 msgstr "Taxa total da linha."
 
+#: packages/woocommerce-admin/src/Features/OnboardingTasks.php:630
+#: packages/woocommerce-admin/src/Features/OnboardingTasks.php:657
+#: packages/woocommerce-admin/src/Features/OnboardingTasks.php:673
+#: packages/woocommerce-admin/src/Features/OnboardingTasks.php:740
+#: packages/woocommerce-admin/dist/chunks/task-list.js:1
+msgid "2 minutes"
+msgstr "2 minutos"
+
+#: packages/woocommerce-admin/src/Features/OnboardingTasks.php:694
+#: packages/woocommerce-admin/src/Features/OnboardingTasks.php:717
+#: packages/woocommerce-admin/src/Features/OnboardingTasks.php:728
+#: packages/woocommerce-admin/dist/chunks/task-list.js:1
+msgid "1 minute"
+msgstr "1 minuto"
+
+#: packages/woocommerce-admin/src/Features/OnboardingTasks.php:589
+#: packages/woocommerce-admin/dist/chunks/homescreen.js:1
+#: packages/woocommerce-admin/dist/chunks/task-list.js:1
+msgid "Store details"
+msgstr "Detalhes da loja"
+
+#: packages/woocommerce-admin/src/Features/OnboardingTasks.php:642
+#: packages/woocommerce-admin/dist/chunks/task-list.js:1
+msgid "1 minute per product"
+msgstr "1 minuto por produto"
+
+#: packages/woocommerce-admin/src/Features/OnboardingTasks.php:635
+#: packages/woocommerce-admin/dist/chunks/task-list.js:1
+msgid "Add my products"
+msgstr "Adicione meus produtos"
+
+#: packages/woocommerce-admin/src/Features/OnboardingTasks.php:598
+#: packages/woocommerce-admin/dist/chunks/task-list.js:1
+msgid "4 minutes"
+msgstr "4 minutos"
+
 #. translators: If your word count is based on single characters (e.g. East
 #. Asian characters), enter 'characters_excluding_spaces' or
 #. 'characters_including_spaces'. Otherwise, enter 'words'. Do not translate
 #. into your own language.
-#: packages/woocommerce-blocks/src/BlockTypes/AbstractBlock.php:358
+#: packages/woocommerce-blocks/src/BlockTypes/AbstractBlock.php:368
 msgctxt "Word count type. Do not translate!"
 msgid "words"
 msgstr "words"
@@ -2149,7 +2218,7 @@ msgstr "Preço dessa taxa de entrega usando a menor unidade da moeda."
 msgid "ID of the shipping method that provided the rate."
 msgstr "ID do método de entrega que forneceu a taxa."
 
-#: packages/woocommerce-blocks/src/StoreApi/Schemas/AbstractSchema.php:226
+#: packages/woocommerce-blocks/src/StoreApi/Schemas/AbstractSchema.php:305
 msgid "Decimal separator for the currency which can be used to format returned prices."
 msgstr "Separador decimal para a moeda que pode ser usada para formatar preços retornados."
 
@@ -2237,24 +2306,24 @@ msgstr "Lista de erros de itens do carrinho, por exemplo, itens no carrinho que 
 msgid "Number of reviews for products in this category."
 msgstr "Número de avaliações para produtos nesta categoria."
 
-#: packages/woocommerce-blocks/src/StoreApi/Schemas/AbstractSchema.php:208
+#: packages/woocommerce-blocks/src/StoreApi/Schemas/AbstractSchema.php:287
 msgid "Currency code (in ISO format) for returned prices."
 msgstr "Código da moeda (no formato ISO) para preços retornados."
 
-#: packages/woocommerce-blocks/src/StoreApi/Schemas/AbstractSchema.php:214
+#: packages/woocommerce-blocks/src/StoreApi/Schemas/AbstractSchema.php:293
 msgid "Currency symbol for the currency which can be used to format returned prices."
 msgstr "Símbolo de moeda para a moeda que pode ser usada para formatar preços retornados."
 
-#: packages/woocommerce-blocks/src/StoreApi/Schemas/AbstractSchema.php:220
+#: packages/woocommerce-blocks/src/StoreApi/Schemas/AbstractSchema.php:299
 msgid "Currency minor unit (number of digits after the decimal separator) for returned prices."
 msgstr "Unidade secundária da moeda (número de dígitos após o separador decimal) para preços retornados."
 
-#: packages/woocommerce-blocks/src/StoreApi/Schemas/AbstractSchema.php:238
-#: packages/woocommerce-blocks/src/StoreApi/Schemas/AbstractSchema.php:244
+#: packages/woocommerce-blocks/src/StoreApi/Schemas/AbstractSchema.php:317
+#: packages/woocommerce-blocks/src/StoreApi/Schemas/AbstractSchema.php:323
 msgid "Price prefix for the currency which can be used to format returned prices."
 msgstr "Prefixo do preço da moeda que pode ser usada para formatar os preços retornados."
 
-#: packages/woocommerce-blocks/src/StoreApi/Schemas/AbstractSchema.php:232
+#: packages/woocommerce-blocks/src/StoreApi/Schemas/AbstractSchema.php:311
 msgid "Thousand separator for the currency which can be used to format returned prices."
 msgstr "Separador de milhares para a moeda que pode ser usada para formatar preços retornados."
 
@@ -2288,7 +2357,6 @@ msgstr "Total de taxas removidas devido ao desconto aplicado por este cupom."
 #: packages/woocommerce-blocks/src/StoreApi/Schemas/AbstractAddressSchema.php:48
 #: packages/woocommerce-blocks/src/StoreApi/Utilities/OrderController.php:336
 #: packages/woocommerce-blocks/assets/js/blocks/cart-checkout/checkout/edit.js:132
-#: packages/woocommerce-blocks/build/checkout-i2.js:37
 #: packages/woocommerce-blocks/build/checkout.js:31
 #: packages/woocommerce-blocks/build/wc-settings.js:1
 msgid "Apartment, suite, etc."
@@ -2518,19 +2586,19 @@ msgstr "Limita os resultados para produtos com base em um preço mínimo, fornec
 msgid "Limit result set to products based on a maximum price, provided using the smallest unit of the currency."
 msgstr "Limita os resultados para produtos com base em um preço máximo, fornecido com a menor unidade da moeda."
 
-#: packages/woocommerce-blocks/src/StoreApi/Routes/Checkout.php:555
+#: packages/woocommerce-blocks/src/StoreApi/Routes/Checkout.php:550
 msgid "No payment method provided."
 msgstr "Nenhum método de pagamento fornecido."
 
-#: packages/woocommerce-blocks/src/StoreApi/Routes/Checkout.php:533
+#: packages/woocommerce-blocks/src/StoreApi/Routes/Checkout.php:530
 msgid "Invalid payment result received from payment method."
 msgstr "Resultado inválido de pagamento recebido do método de pagamento."
 
-#: packages/woocommerce-blocks/src/StoreApi/Routes/Checkout.php:99
+#: packages/woocommerce-blocks/src/StoreApi/Routes/Checkout.php:93
 msgid "Data to pass through to the payment method when processing payment."
 msgstr "Dados a serem transmitidos para o método de pagamento ao processar o pagamento."
 
-#: packages/woocommerce-blocks/src/StoreApi/Routes/Checkout.php:577
+#: packages/woocommerce-blocks/src/StoreApi/Routes/Checkout.php:572
 msgid "This payment gateway is not available."
 msgstr "Este gateway de pagamento não está disponível."
 
@@ -2909,11 +2977,6 @@ msgstr "Comece a usar novos recursos que estão sendo implementados progressivam
 msgid "Plugins must be a non-empty array."
 msgstr "Os plugins devem ser um array não vazio."
 
-#. translators: %s: plugin slug (example: woocommerce-services)
-#: packages/woocommerce-admin/src/API/Plugins.php:308
-msgid "The requested plugin `%s` could not be installed.  Upgrader install failed."
-msgstr "O plugin solicitado `%s` não pôde ser instalado. Falha na instalação do atualizador."
-
 #: packages/woocommerce-admin/src/API/Plugins.php:326
 msgid "Plugins were successfully installed."
 msgstr "Os plugins foram instalados com sucesso."
@@ -2982,7 +3045,7 @@ msgstr "Tabelas de base ausentes: %s. Algumas funcionalidades do WooCommerce pod
 msgid "Take payments with the provider that’s right for you - choose from 100+ payment gateways for WooCommerce."
 msgstr "Faça pagamentos com o provedor certo para você, escolha entre mais de 100 gateways de pagamento para o WooCommerce."
 
-#: packages/woocommerce-admin/src/Features/Homescreen.php:94
+#: packages/woocommerce-admin/src/Features/Homescreen.php:95
 #: packages/woocommerce-admin/src/Features/Navigation/CoreMenu.php:190
 #: packages/woocommerce-admin/dist/app/index.js:2
 msgid "Home"
@@ -3024,10 +3087,6 @@ msgstr "Aumente sua base de clientes e aumente suas vendas com as ferramentas de
 #: packages/woocommerce-admin/src/Notes/Marketing.php:39
 msgid "Connect with your audience"
 msgstr "Conecte-se com seu público"
-
-#: packages/woocommerce-admin/src/Notes/OnboardingEmailMarketing.php:32
-msgid "We're here for you - get tips, product updates and inspiration straight to your email box"
-msgstr "Estamos aqui para você, receba dicas, atualizações de produtos e inspiração diretamente na sua caixa de e-mail"
 
 #: packages/woocommerce-admin/src/Notes/OnboardingPayments.php:50
 msgid "Start accepting payments on your store!"
@@ -3158,6 +3217,14 @@ msgstr "O diretório de uploads da sua loja <a href=\"%1$s\">pode ser navegado p
 msgid "%s() was called before the Action Scheduler data store was initialized"
 msgstr "%s() foi chamado antes da inicialização do armazenamento de dados do Agendador de ações"
 
+#: packages/woocommerce-admin/src/Features/OnboardingTasks.php:651
+#: packages/woocommerce-admin/dist/app/index.js:2
+#: packages/woocommerce-admin/dist/chunks/3.js:1
+#: packages/woocommerce-admin/dist/chunks/marketing-overview.js:1
+#: packages/woocommerce-admin/dist/chunks/task-list.js:1
+msgid "Finish setup"
+msgstr "Concluir configuração"
+
 #: packages/woocommerce-admin/src/Features/PaymentGatewaySuggestions/DefaultPaymentGateways.php:161
 msgid "Take payments via bank transfer."
 msgstr "Aceitar pagamentos por transferência bancária."
@@ -3226,7 +3293,7 @@ msgstr "Visite WooCommerce.com para saber mais sobre os <a href=\"%1$s\" target=
 msgid "There was an error communicating with the WooCommerce Payments plugin."
 msgstr "Ocorreu um erro na comunicação com o plugin WooCommerce Payments."
 
-#: packages/woocommerce-admin/src/API/OnboardingProfile.php:315
+#: packages/woocommerce-admin/src/API/OnboardingProfile.php:362
 msgid "Name of other platform used to sell (not listed)."
 msgstr "Nome de outra plataforma usada para vender (não listada)."
 
@@ -3271,6 +3338,7 @@ msgstr "Parece que uma ou mais tabelas do banco de dados estão faltando. Tentan
 
 #: packages/woocommerce-admin/src/Notes/WooCommercePayments.php:118
 #: packages/woocommerce-admin/dist/chunks/3.js:1
+#: packages/woocommerce-admin/dist/chunks/shipping-recommendations.js:1
 #: packages/woocommerce-admin/dist/chunks/task-list.js:1
 msgid "Get started"
 msgstr "Comece agora"
@@ -3279,6 +3347,12 @@ msgstr "Comece agora"
 msgid "Send targeted campaigns, recover abandoned carts and much more with Mailchimp."
 msgstr "Envie campanhas direcionadas, recupere carrinhos abandonados e muito mais com Mailchimp."
 
+#: packages/woocommerce-admin/src/Features/OnboardingTasks.php:677
+#: packages/woocommerce-admin/dist/chunks/task-list.js:1
+msgid "Set up tax"
+msgstr "Defina as taxas"
+
+#: packages/woocommerce-admin/src/Features/OnboardingTasks.php:661
 #: packages/woocommerce-admin/src/Notes/SetUpAdditionalPaymentTypes.php:94
 #: packages/woocommerce-admin/dist/app/index.js:2
 #: packages/woocommerce-admin/dist/chunks/task-list.js:1
@@ -3298,19 +3372,23 @@ msgstr "Escolha o pagamento que deseja, pague agora, pague mais tarde ou parcele
 msgid "Accept debit and credit cards in 135+ currencies, methods such as Alipay, and one-touch checkout with Apple Pay."
 msgstr "Aceite cartões de débito e crédito em mais de 135 moedas, métodos como Alipay e finalização com um toque com o Apple Pay."
 
-#: packages/woocommerce-admin/src/API/Reports/Orders/Controller.php:538
-#: packages/woocommerce-admin/dist/chunks/analytics-report-orders.js:1
-#: packages/woocommerce-admin/dist/chunks/dashboard-charts.js:1
-msgid "Customer Type"
-msgstr "Tipo de cliente"
+#: packages/woocommerce-admin/src/Features/OnboardingTasks.php:698
+#: packages/woocommerce-admin/dist/chunks/task-list.js:1
+msgid "Set up shipping"
+msgstr "Configurar entregas"
 
-#: packages/woocommerce-admin/src/API/Reports/Revenue/Stats/Controller.php:450
-#: packages/woocommerce-admin/dist/chunks/analytics-report-revenue.js:1
-#: packages/woocommerce-admin/dist/chunks/dashboard-charts.js:1
-msgid "Gross Sales"
-msgstr "Vendas brutas"
+#: packages/woocommerce-admin/src/Features/OnboardingTasks.php:732
+#: packages/woocommerce-admin/dist/chunks/homescreen.js:1
+#: packages/woocommerce-admin/dist/chunks/task-list.js:1
+msgid "Personalize my store"
+msgstr "Personalize minha loja"
 
-#: packages/woocommerce-admin/src/Features/Onboarding.php:405
+#: packages/woocommerce-admin/src/Features/OnboardingTasks.php:626
+#: packages/woocommerce-admin/dist/chunks/task-list.js:1
+msgid "Purchase & install now"
+msgstr "Compre e instale agora"
+
+#: packages/woocommerce-admin/src/Features/Onboarding.php:407
 msgid "CBD and other hemp-derived products"
 msgstr "CBD e outros produtos derivados do cânhamo"
 
@@ -3336,40 +3414,40 @@ msgstr "Baixar seus relatórios %s"
 msgid "Download your %1$s Report: %2$s"
 msgstr "Baixar seu relatório %1$s: %2$s"
 
-#: packages/woocommerce-admin/src/Features/Onboarding.php:847
+#: packages/woocommerce-admin/src/Features/Onboarding.php:802
 msgid "Task List"
 msgstr "Lista de tarefas"
 
-#: packages/woocommerce-admin/src/Features/Onboarding.php:851
-#: packages/woocommerce-admin/src/Features/Onboarding.php:858
+#: packages/woocommerce-admin/src/Features/Onboarding.php:806
+#: packages/woocommerce-admin/src/Features/Onboarding.php:813
 msgid "Disable"
 msgstr "Desativar"
 
-#: packages/woocommerce-admin/src/Features/Onboarding.php:447
+#: packages/woocommerce-admin/src/Features/Onboarding.php:449
 msgid "Bookings"
 msgstr "Reservas"
 
-#: packages/woocommerce-admin/src/Features/Onboarding.php:443
+#: packages/woocommerce-admin/src/Features/Onboarding.php:445
 msgid "Memberships"
 msgstr "Assinaturas"
 
-#: packages/woocommerce-admin/src/Features/Onboarding.php:432
+#: packages/woocommerce-admin/src/Features/Onboarding.php:434
 msgid "Physical products"
 msgstr "Produtos físicos"
 
-#: packages/woocommerce-admin/src/Features/Onboarding.php:400
+#: packages/woocommerce-admin/src/Features/Onboarding.php:402
 msgid "Home, furniture, and garden"
 msgstr "Casa, mobília e jardim"
 
-#: packages/woocommerce-admin/src/Features/Onboarding.php:390
+#: packages/woocommerce-admin/src/Features/Onboarding.php:392
 msgid "Electronics and computers"
 msgstr "Eletrônicos e computadores"
 
-#: packages/woocommerce-admin/src/Features/Onboarding.php:385
+#: packages/woocommerce-admin/src/Features/Onboarding.php:387
 msgid "Health and beauty"
 msgstr "Saúde e beleza"
 
-#: packages/woocommerce-admin/src/Features/Onboarding.php:380
+#: packages/woocommerce-admin/src/Features/Onboarding.php:382
 msgid "Fashion, apparel, and accessories"
 msgstr "Moda, vestuário e acessórios"
 
@@ -3409,11 +3487,11 @@ msgstr "Slug do plugin."
 msgid "Analytics"
 msgstr "Análises"
 
-#: packages/woocommerce-admin/src/Features/Onboarding.php:395
+#: packages/woocommerce-admin/src/Features/Onboarding.php:397
 msgid "Food and drink"
 msgstr "Alimentação e bebidas"
 
-#: packages/woocommerce-admin/src/Features/Onboarding.php:843
+#: packages/woocommerce-admin/src/Features/Onboarding.php:798
 msgid "Profile Setup Wizard"
 msgstr "Assistente de configuração do perfil"
 
@@ -3427,7 +3505,7 @@ msgstr "Endereço IP."
 
 #. translators: site currency symbol (used to show that the product costs
 #. money)
-#: packages/woocommerce-admin/src/Features/Onboarding.php:624
+#: packages/woocommerce-admin/src/Features/Onboarding.php:626
 msgid " — %s"
 msgstr " (%s)"
 
@@ -3435,7 +3513,7 @@ msgstr " (%s)"
 msgid "Current page retrieval should be called on or after the `current_screen` hook."
 msgstr "A recuperação da página atual deve ser chamada ou depois do gancho `current_screen`."
 
-#: packages/woocommerce-admin/src/Features/Onboarding.php:841
+#: packages/woocommerce-admin/src/Features/Onboarding.php:796
 msgid "WooCommerce Onboarding"
 msgstr "Experiência de integração do WooCommerce"
 
@@ -3494,43 +3572,43 @@ msgstr "Tema inválido."
 msgid "Product parent name."
 msgstr "Nome do produto ascendente."
 
-#: packages/woocommerce-admin/src/API/OnboardingProfile.php:358
+#: packages/woocommerce-admin/src/API/OnboardingProfile.php:405
 msgid "Whether or not the store was connected to WooCommerce.com during the extension flow."
 msgstr "Se a loja foi ou não conectada ao WooCommerce.com durante o fluxo de extensão."
 
-#: packages/woocommerce-admin/src/API/OnboardingProfile.php:351
+#: packages/woocommerce-admin/src/API/OnboardingProfile.php:398
 msgid "Whether or not this store was setup for a client."
 msgstr "Se esta loja foi ou não configurada para um cliente."
 
-#: packages/woocommerce-admin/src/API/OnboardingProfile.php:322
+#: packages/woocommerce-admin/src/API/OnboardingProfile.php:369
 msgid "Extra business extensions to install."
 msgstr "Extensões comerciais adicionais a serem instaladas."
 
-#: packages/woocommerce-admin/src/API/OnboardingProfile.php:297
+#: packages/woocommerce-admin/src/API/OnboardingProfile.php:344
 msgid "Name of other platform used to sell."
 msgstr "Nome de outra plataforma usada para vender."
 
-#: packages/woocommerce-admin/src/API/OnboardingProfile.php:281
+#: packages/woocommerce-admin/src/API/OnboardingProfile.php:328
 msgid "Current annual revenue of the store."
 msgstr "Receita anual atual da loja."
 
-#: packages/woocommerce-admin/src/API/OnboardingProfile.php:267
+#: packages/woocommerce-admin/src/API/OnboardingProfile.php:314
 msgid "Other places the store is selling products."
 msgstr "Outros locais em que a loja está vendendo produtos."
 
-#: packages/woocommerce-admin/src/API/OnboardingProfile.php:253
+#: packages/woocommerce-admin/src/API/OnboardingProfile.php:300
 msgid "Number of products to be added."
 msgstr "Número de produtos a serem adicionados."
 
-#: packages/woocommerce-admin/src/API/OnboardingProfile.php:241
+#: packages/woocommerce-admin/src/API/OnboardingProfile.php:288
 msgid "Types of products sold."
 msgstr "Tipos de produtos vendidos."
 
-#: packages/woocommerce-admin/src/API/OnboardingProfile.php:231
+#: packages/woocommerce-admin/src/API/OnboardingProfile.php:278
 msgid "Industry."
 msgstr "Setor."
 
-#: packages/woocommerce-admin/src/API/OnboardingProfile.php:217
+#: packages/woocommerce-admin/src/API/OnboardingProfile.php:264
 msgid "Whether or not the profile was completed."
 msgstr "Se o perfil foi ou não concluído."
 
@@ -3591,19 +3669,19 @@ msgid "Type of note."
 msgstr "Tipo de nota."
 
 #. translators: %s: parameter name
-#: packages/woocommerce-admin/src/API/Reports/TimeInterval.php:631
+#: packages/woocommerce-admin/src/API/Reports/TimeInterval.php:629
 msgid "%s must contain 2 valid dates."
 msgstr "%s deve conter 2 datas válidas."
 
 #. translators: %s: parameter name
-#: packages/woocommerce-admin/src/API/Reports/TimeInterval.php:599
+#: packages/woocommerce-admin/src/API/Reports/TimeInterval.php:597
 msgid "%s must contain 2 numbers."
 msgstr "%s deve conter 2 números."
 
 #. translators: 1: parameter name
 #. translators: 1: parameter name
-#: packages/woocommerce-admin/src/API/Reports/TimeInterval.php:587
-#: packages/woocommerce-admin/src/API/Reports/TimeInterval.php:619
+#: packages/woocommerce-admin/src/API/Reports/TimeInterval.php:585
+#: packages/woocommerce-admin/src/API/Reports/TimeInterval.php:617
 msgid "%1$s is not a numerically indexed array."
 msgstr "%1$s não é um array indexado numericamente."
 
@@ -3621,12 +3699,10 @@ msgstr "Número de clientes."
 
 #: includes/class-wc-countries.php:1137
 #: packages/woocommerce-admin/src/API/Reports/Customers/Controller.php:597
-#: packages/woocommerce-admin/dist/chunks/analytics-report-customers.js:1
 msgid "Postal Code"
 msgstr "CEP"
 
 #: packages/woocommerce-admin/src/API/Reports/Customers/Controller.php:588
-#: packages/woocommerce-admin/dist/chunks/analytics-report-customers.js:1
 msgid "Last Active"
 msgstr "Última atividade"
 
@@ -3638,7 +3714,7 @@ msgstr "Sem permissão para gerenciar temas."
 msgid "Theme status."
 msgstr "Status do tema."
 
-#: packages/woocommerce-admin/src/API/OnboardingProfile.php:343
+#: packages/woocommerce-admin/src/API/OnboardingProfile.php:390
 msgid "Selected store theme."
 msgstr "Tema da loja selecionado."
 
@@ -3666,7 +3742,7 @@ msgstr "Sem permissão para gerenciar plugins."
 msgid "Invalid theme %s."
 msgstr "O tema \"%s\" é inválido."
 
-#: packages/woocommerce-admin/src/API/OnboardingProfile.php:146
+#: packages/woocommerce-admin/src/API/OnboardingProfile.php:163
 msgid "Onboarding profile data has been updated."
 msgstr "Os dados do perfil de experiência de integração foram atualizados."
 
@@ -3918,6 +3994,8 @@ msgid "Number of distinct products sold."
 msgstr "Número de produtos distintos vendidos."
 
 #: packages/woocommerce-admin/src/API/Reports/Orders/Stats/Controller.php:186
+#: packages/woocommerce-admin/dist/chunks/analytics-report-orders.js:1
+#: packages/woocommerce-admin/dist/chunks/dashboard-charts.js:1
 msgid "Average items per order"
 msgstr "Média de itens por pedido"
 
@@ -4102,11 +4180,6 @@ msgstr "Nome de usuário"
 msgid "Order #"
 msgstr "Pedido #"
 
-#: packages/woocommerce-admin/src/API/Reports/Downloads/Controller.php:393
-#: packages/woocommerce-admin/dist/chunks/analytics-report-downloads.js:1
-msgid "File Name"
-msgstr "Nome do arquivo"
-
 #: packages/woocommerce-admin/src/API/Reports/Products/Controller.php:341
 msgid "Add additional piece of info about each product to the report."
 msgstr "Incluir informações adicionais sobre cada produto ao relatório."
@@ -4125,11 +4198,6 @@ msgstr "Quantidade em estoque do produto."
 #: packages/woocommerce-admin/src/API/Reports/Variations/Controller.php:229
 msgid "Product inventory status."
 msgstr "Status do inventário do produto."
-
-#: packages/woocommerce-admin/src/API/Reports/Products/Controller.php:176
-#: packages/woocommerce-admin/src/API/Reports/Variations/Controller.php:186
-msgid "Total Net Sales of all items sold."
-msgstr "Vendas líquidas totais de todos os itens vendidos."
 
 #: packages/woocommerce-admin/src/API/Reports/Taxes/Controller.php:187
 msgid "Priority."
@@ -4263,29 +4331,6 @@ msgstr "Falha ao coletar indicadores de desempenho."
 msgid "Amount of tax codes."
 msgstr "Quantidade de códigos de taxas."
 
-#: packages/woocommerce-admin/src/API/Reports/Taxes/Controller.php:306
-#: packages/woocommerce-admin/dist/chunks/analytics-report-taxes.js:1
-#: packages/woocommerce-admin/dist/chunks/dashboard-charts.js:1
-msgid "Shipping Tax"
-msgstr "Taxa de entrega"
-
-#: packages/woocommerce-admin/src/API/Reports/Taxes/Controller.php:305
-#: packages/woocommerce-admin/dist/chunks/analytics-report-taxes.js:1
-#: packages/woocommerce-admin/dist/chunks/dashboard-charts.js:1
-msgid "Order Tax"
-msgstr "Taxa de pedido"
-
-#: packages/woocommerce-admin/src/API/Reports/Taxes/Controller.php:304
-#: packages/woocommerce-admin/dist/chunks/analytics-report-taxes.js:1
-#: packages/woocommerce-admin/dist/chunks/dashboard-charts.js:1
-msgid "Total Tax"
-msgstr "Total de taxas"
-
-#: packages/woocommerce-admin/src/API/Reports/Taxes/Controller.php:302
-#: packages/woocommerce-admin/dist/chunks/analytics-report-taxes.js:1
-msgid "Tax Code"
-msgstr "Código da taxa"
-
 #: packages/woocommerce-admin/src/API/Reports/Taxes/Controller.php:205
 #: packages/woocommerce-admin/src/API/Reports/Taxes/Stats/Controller.php:183
 msgid "Shipping tax."
@@ -4300,12 +4345,6 @@ msgstr "Taxa de pedido."
 #: packages/woocommerce-admin/src/API/Reports/Taxes/Stats/Controller.php:167
 msgid "Total tax."
 msgstr "Total de taxas."
-
-#: packages/woocommerce-admin/src/API/Reports/Variations/Controller.php:412
-#: packages/woocommerce-admin/dist/chunks/analytics-report-products.js:1
-#: packages/woocommerce-admin/dist/chunks/analytics-report-variations.js:1
-msgid "Product / Variation Title"
-msgstr "Produto/Título da variação"
 
 #: packages/woocommerce-admin/src/API/Reports/Downloads/Controller.php:298
 msgid "Indicates whether all the conditions should be true for the resulting set, or if any one of them is sufficient. Match affects the following parameters: products, orders, username, ip_address."
@@ -4345,32 +4384,6 @@ msgstr "Limita os resultados para itens que não possuem IDs de pedidos especifi
 msgid "Limit result set to items that have the specified order ids."
 msgstr "Limita os resultados para itens que possuem IDs de pedidos especificados."
 
-#: packages/woocommerce-admin/src/API/Leaderboards.php:125
-#: packages/woocommerce-admin/src/API/Reports/Coupons/Controller.php:299
-#: packages/woocommerce-admin/dist/chunks/analytics-report-coupons.js:1
-msgid "Coupon Code"
-msgstr "Código do cupom"
-
-#: packages/woocommerce-admin/src/API/Leaderboards.php:131
-#: packages/woocommerce-admin/src/API/Reports/Coupons/Controller.php:301
-#: packages/woocommerce-admin/dist/chunks/analytics-report-coupons.js:1
-msgid "Amount Discounted"
-msgstr "Valor descontado"
-
-#: packages/woocommerce-admin/src/API/Leaderboards.php:197
-#: packages/woocommerce-admin/src/API/Leaderboards.php:333
-#: packages/woocommerce-admin/src/API/Reports/Categories/Controller.php:330
-#: packages/woocommerce-admin/src/API/Reports/Orders/Controller.php:540
-#: packages/woocommerce-admin/src/API/Reports/Products/Controller.php:390
-#: packages/woocommerce-admin/src/API/Reports/Variations/Controller.php:414
-#: packages/woocommerce-admin/dist/chunks/analytics-report-categories.js:1
-#: packages/woocommerce-admin/dist/chunks/analytics-report-orders.js:1
-#: packages/woocommerce-admin/dist/chunks/analytics-report-products.js:1
-#: packages/woocommerce-admin/dist/chunks/analytics-report-variations.js:1
-#: packages/woocommerce-admin/dist/chunks/dashboard-charts.js:1
-msgid "Items Sold"
-msgstr "Itens vendidos"
-
 #: packages/woocommerce-admin/src/API/Leaderboards.php:267
 #: packages/woocommerce-admin/src/API/Reports/Customers/Controller.php:592
 #: packages/woocommerce-admin/dist/chunks/analytics-report-customers.js:1
@@ -4409,10 +4422,6 @@ msgstr "ID do ranking de pontuações."
 msgid "URL query to persist across links."
 msgstr "Argumentos de consulta de URL que irão persistir através dos links"
 
-#: packages/woocommerce-admin/src/API/Leaderboards.php:327
-msgid "Top Products - Items Sold"
-msgstr "Principais produtos, itens vendidos"
-
 #: packages/woocommerce-admin/src/API/Leaderboards.php:261
 msgid "Customer Name"
 msgstr "Nome do cliente"
@@ -4420,10 +4429,6 @@ msgstr "Nome do cliente"
 #: packages/woocommerce-admin/src/API/Leaderboards.php:258
 msgid "Top Customers - Total Spend"
 msgstr "Principais clientes, total gasto"
-
-#: packages/woocommerce-admin/src/API/Leaderboards.php:191
-msgid "Top Categories - Items Sold"
-msgstr "Principais categorias, itens vendidos"
 
 #: packages/woocommerce-admin/src/API/Leaderboards.php:122
 msgid "Top Coupons - Number of Orders"
@@ -4483,12 +4488,6 @@ msgstr "Dados de relatórios agrupados por condição de segmento."
 #: packages/woocommerce-admin/src/API/Reports/Coupons/Stats/Controller.php:159
 msgid "Number of discounted orders."
 msgstr "Número de pedidos com desconto."
-
-#: packages/woocommerce-admin/src/API/Reports/Coupons/Stats/Controller.php:158
-#: packages/woocommerce-admin/dist/chunks/analytics-report-coupons.js:1
-#: packages/woocommerce-admin/dist/chunks/dashboard-charts.js:1
-msgid "Discounted Orders"
-msgstr "Pedidos com desconto"
 
 #: packages/woocommerce-admin/src/API/Reports/Coupons/Stats/Controller.php:152
 msgid "Number of coupons."
@@ -4643,19 +4642,9 @@ msgstr "Resposta inválida do armazenamento de dados."
 msgid "Net Revenue"
 msgstr "Receita liquida"
 
-#: packages/woocommerce-admin/src/API/Reports/Revenue/Stats/Controller.php:451
-#: packages/woocommerce-admin/dist/chunks/analytics-report-revenue.js:1
-#: packages/woocommerce-admin/dist/chunks/dashboard-charts.js:1
-msgid "Total Sales"
-msgstr "Vendas totais"
-
 #: packages/woocommerce-admin/src/API/Reports/Import/Controller.php:221
 msgid "Regenerate data message."
 msgstr "Regenerar mensagem de dados."
-
-#: packages/woocommerce-admin/src/API/Reports/Revenue/Stats/Controller.php:239
-msgid "Gross Sales."
-msgstr "Vendas brutas."
 
 #: packages/woocommerce-admin/src/API/Reports/Import/Controller.php:215
 msgid "Regeneration status."
@@ -4722,28 +4711,10 @@ msgstr "Relatórios detalhados de produtos."
 msgid "Totals data."
 msgstr "Total de dados."
 
-#: packages/woocommerce-admin/src/API/Leaderboards.php:200
-#: packages/woocommerce-admin/src/API/Leaderboards.php:336
-#: packages/woocommerce-admin/dist/chunks/analytics-report-categories.js:1
-#: packages/woocommerce-admin/dist/chunks/analytics-report-orders.js:1
-#: packages/woocommerce-admin/dist/chunks/analytics-report-products.js:1
-#: packages/woocommerce-admin/dist/chunks/analytics-report-revenue.js:1
-#: packages/woocommerce-admin/dist/chunks/analytics-report-variations.js:1
-#: packages/woocommerce-admin/dist/chunks/dashboard-charts.js:1
-msgid "Net Sales"
-msgstr "Vendas líquidas"
-
 #: packages/woocommerce-admin/src/API/Reports/Orders/Stats/Controller.php:198
 #: packages/woocommerce-admin/src/API/Reports/Revenue/Stats/Controller.php:183
 msgid "Amount discounted by coupons."
 msgstr "Valor descontado por cupons."
-
-#: packages/woocommerce-admin/src/API/Reports/Orders/Stats/Controller.php:163
-#: packages/woocommerce-admin/src/API/Reports/Products/Stats/Controller.php:167
-#: packages/woocommerce-admin/src/API/Reports/Revenue/Stats/Controller.php:175
-#: packages/woocommerce-admin/src/API/Reports/Variations/Stats/Controller.php:164
-msgid "Net Sales."
-msgstr "Vendas líquidas."
 
 #: packages/woocommerce-admin/src/API/Reports/Coupons/Controller.php:273
 #: packages/woocommerce-admin/src/API/Reports/Coupons/Stats/Controller.php:334
@@ -4757,11 +4728,6 @@ msgstr "Total de taxas."
 #: packages/woocommerce-admin/src/API/Reports/Revenue/Stats/Controller.php:197
 msgid "Total of shipping."
 msgstr "Total de entrega. "
-
-#: packages/woocommerce-admin/src/API/Reports/Categories/Controller.php:179
-#: packages/woocommerce-admin/src/API/Reports/Revenue/Stats/Controller.php:167
-msgid "Total Sales."
-msgstr "Vendas totais."
 
 #: packages/woocommerce-admin/src/API/Coupons.php:34
 msgid "Limit results to coupons with codes matching a given string."
@@ -4833,10 +4799,6 @@ msgstr "Limita os resultados para itens que não possuem os status de pedidos es
 msgid "Limit result set to items that have the specified order status."
 msgstr "Limita os resultados para itens que possuem os status de pedidos especificados."
 
-#: packages/woocommerce-admin/src/Notes/DeactivatePlugin.php:41
-msgid "Your current version of WooCommerce Admin is outdated and a newer version is included with WooCommerce.  We recommend deactivating the plugin and using the stable version included with WooCommerce."
-msgstr "Sua versão atual do WooCommerce Admin está desatualizada e uma versão mais recente está incluída no WooCommerce. Recomendamos desativar o plug-in e usar a versão estável incluída no WooCommerce."
-
 #: packages/woocommerce-admin/src/Notes/DeactivatePlugin.php:48
 msgid "Deactivate"
 msgstr "Desativar"
@@ -4869,12 +4831,12 @@ msgstr "Mensagem de instalação do tema."
 msgid "Theme installation status."
 msgstr "Status da instalação do tema."
 
-#: packages/woocommerce-admin/src/API/OnboardingTasks.php:272
-#: packages/woocommerce-admin/src/API/OnboardingTasks.php:287
+#: packages/woocommerce-admin/src/API/OnboardingTasks.php:390
+#: packages/woocommerce-admin/src/API/OnboardingTasks.php:405
 msgid "Write title…"
 msgstr "Escreva o título..."
 
-#: packages/woocommerce-admin/src/API/OnboardingTasks.php:167
+#: packages/woocommerce-admin/src/API/OnboardingTasks.php:285
 msgid "Sorry, the sample products data file was not found."
 msgstr "O arquivo de dados dos produtos de amostra não foi encontrado."
 
@@ -4894,34 +4856,34 @@ msgstr "Receita"
 msgid "Or you can download a pre-built version of the plugin by visiting <a href=\"%1$s\">the releases page in the repository</a>."
 msgstr "Ou você pode baixar uma versão pré-construída do plugin, visitando <a href=\"%1$s\">a página de lançamentos no repositório</a>."
 
-#: packages/woocommerce-admin/src/API/OnboardingTasks.php:354
+#: packages/woocommerce-admin/src/API/OnboardingTasks.php:472
 msgid "On Sale"
 msgstr "Promoção"
 
-#: packages/woocommerce-admin/src/API/OnboardingTasks.php:350
+#: packages/woocommerce-admin/src/API/OnboardingTasks.php:468
 msgid "Fan Favorites"
 msgstr "Favoritos dos fãs"
 
-#: packages/woocommerce-admin/src/API/OnboardingTasks.php:346
+#: packages/woocommerce-admin/src/API/OnboardingTasks.php:464
 msgid "New In"
 msgstr "Novo em"
 
-#: packages/woocommerce-admin/src/API/OnboardingTasks.php:340
+#: packages/woocommerce-admin/src/API/OnboardingTasks.php:458
 msgid "Shop by Category"
 msgstr "Comprar por categoria"
 
-#: packages/woocommerce-admin/src/API/OnboardingTasks.php:314
-#: packages/woocommerce-admin/src/API/OnboardingTasks.php:321
+#: packages/woocommerce-admin/src/API/OnboardingTasks.php:432
+#: packages/woocommerce-admin/src/API/OnboardingTasks.php:439
 msgid "Content…"
 msgstr "Conteúdo..."
 
-#: packages/woocommerce-admin/src/API/OnboardingTasks.php:281
-#: packages/woocommerce-admin/src/API/OnboardingTasks.php:296
+#: packages/woocommerce-admin/src/API/OnboardingTasks.php:399
+#: packages/woocommerce-admin/src/API/OnboardingTasks.php:414
 msgid "Go shopping"
 msgstr "Vá às compras"
 
-#: packages/woocommerce-admin/src/API/OnboardingTasks.php:277
-#: packages/woocommerce-admin/src/API/OnboardingTasks.php:292
+#: packages/woocommerce-admin/src/API/OnboardingTasks.php:395
+#: packages/woocommerce-admin/src/API/OnboardingTasks.php:410
 msgid "Write a short welcome message here"
 msgstr "Escreva aqui uma pequena mensagem de boas-vindas"
 
@@ -4939,15 +4901,15 @@ msgstr "Os recursos do plugin WooCommerce Admin exigem que o <a href=\"%1$s\">Wo
 msgid "Search by similar tax code."
 msgstr "Pesquisar por código de taxa similar."
 
-#: packages/woocommerce-admin/src/API/OnboardingTasks.php:477
+#: packages/woocommerce-admin/src/API/OnboardingTasks.php:595
 msgid "Homepage"
 msgstr "Página inicial"
 
-#: packages/woocommerce-admin/src/API/OnboardingTasks.php:377
+#: packages/woocommerce-admin/src/API/OnboardingTasks.php:495
 msgid "New Products"
 msgstr "Novos produtos"
 
-#: packages/woocommerce-admin/src/API/OnboardingTasks.php:358
+#: packages/woocommerce-admin/src/API/OnboardingTasks.php:476
 msgid "Best Sellers"
 msgstr "Mais vendidos"
 
@@ -4959,8 +4921,8 @@ msgstr "Falha no teste de upload do arquivo especificado."
 msgid "Sorry, you are not allowed to install themes on this site."
 msgstr "Sem permissão para instalar temas neste site."
 
-#: packages/woocommerce-admin/src/API/OnboardingTasks.php:273
-#: packages/woocommerce-admin/src/API/OnboardingTasks.php:288
+#: packages/woocommerce-admin/src/API/OnboardingTasks.php:391
+#: packages/woocommerce-admin/src/API/OnboardingTasks.php:406
 msgid "Welcome to the store"
 msgstr "Boas-vindas à loja"
 
@@ -4976,7 +4938,7 @@ msgstr "Sem permissão para gerenciar essas opções."
 msgid "Sorry, you cannot view these options."
 msgstr "Sem permissão para visualizar estas opções."
 
-#: packages/woocommerce-admin/src/API/OnboardingTasks.php:124
+#: packages/woocommerce-admin/src/API/OnboardingTasks.php:214
 msgid "Sorry, you are not allowed to create new pages."
 msgstr "Sem permissão para criar novas páginas."
 
@@ -5071,12 +5033,6 @@ msgstr "Parabéns pelo processamento de %s pedidos!"
 msgid "Review your orders"
 msgstr "Revise seus pedidos"
 
-#. translators: 1 and 4: Date (e.g. October 16th), 2 and 3: Amount (e.g.
-#. $160.00)
-#: packages/woocommerce-admin/src/Notes/NewSalesRecord.php:101
-msgid "Woohoo, %1$s was your record day for sales! Net Sales was %2$s beating the previous record of %3$s set on %4$s."
-msgstr "Oba! %1$s foi seu dia recorde de vendas! A venda líquida foi de %2$s batendo seu recorde anterior de %3$s definido em %4$s."
-
 #: packages/woocommerce-admin/src/Features/Navigation/CoreMenu.php:250
 #: packages/woocommerce-admin/src/Notes/OrderMilestones.php:245
 msgid "Browse"
@@ -5154,27 +5110,19 @@ msgstr "A propriedade de nome da nota administrativa não pode estar vazia."
 msgid "Report table data is being deleted."
 msgstr "Os dados da tabela de relatórios estão sendo excluídos."
 
-#: packages/woocommerce-admin/src/ReportsSync.php:95
-msgid "Report table data is being rebuilt.  Please allow some time for data to fully populate."
-msgstr "Os dados da tabela de relatórios estão sendo reconstruídos. Aguarde algum tempo para que os dados sejam preenchidos por completo."
-
-#: packages/woocommerce-admin/src/ReportsSync.php:79
-msgid "An import is already in progress.  Please allow the previous import to complete before beginning a new one."
-msgstr "Uma importação já está em andamento. Aguarde que a importação anterior seja concluída antes de iniciar uma nova."
-
 #: packages/woocommerce-admin/src/ReportsSync.php:49
 msgid "Report sync schedulers should be derived from the Automattic\\WooCommerce\\Admin\\Schedulers\\ImportScheduler class."
 msgstr "Os agendadores de sincronização de relatório devem ser derivados da classe Automattic\\WooCommerce\\Admin\\Schedulers\\ImportScheduler. "
 
-#: packages/woocommerce-admin/src/Loader.php:1194
+#: packages/woocommerce-admin/src/Loader.php:1179
 msgid "Statuses that require extra action on behalf of the store admin."
 msgstr "Status que exigem ação extra por parte do administrador da loja."
 
-#: packages/woocommerce-admin/src/Loader.php:1193
+#: packages/woocommerce-admin/src/Loader.php:1178
 msgid "Actionable order statuses"
 msgstr "Status de pedidos que requerem alguma ação"
 
-#: packages/woocommerce-admin/src/Loader.php:1185
+#: packages/woocommerce-admin/src/Loader.php:1170
 msgid "Statuses that should not be included when calculating report totals."
 msgstr "Status que não devem ser incluídos ao calcular os totais do relatório."
 
@@ -5182,17 +5130,17 @@ msgstr "Status que não devem ser incluídos ao calcular os totais do relatório
 msgid "Add your first product"
 msgstr "Adicionar seu primeiro produto"
 
-#: packages/woocommerce-admin/src/Loader.php:1202
-#: packages/woocommerce-admin/src/Loader.php:1203
+#: packages/woocommerce-admin/src/Loader.php:1187
+#: packages/woocommerce-admin/src/Loader.php:1188
 msgid "Default Date Range"
 msgstr "Intervalo padrão de datas"
 
-#: packages/woocommerce-admin/src/Loader.php:1165
+#: packages/woocommerce-admin/src/Loader.php:1150
 msgid "Settings for WooCommerce admin reporting."
 msgstr "Configurações dos relatórios de administrador do WooCommerce."
 
 #. translators: %1$s: updated title, %2$s: blog info name
-#: packages/woocommerce-admin/src/Loader.php:992
+#: packages/woocommerce-admin/src/Loader.php:977
 msgid "%1$s &lsaquo; %2$s"
 msgstr "%1$s &lsaquo; %2$s"
 
@@ -5215,7 +5163,7 @@ msgstr[1] "Parou a insanidade por %d segundos"
 msgid "The next queue will begin processing in approximately %d seconds."
 msgstr "A próxima fila começará o processamento em aproximadamente %d segundos."
 
-#: packages/action-scheduler/classes/data-stores/ActionScheduler_DBStore.php:869
+#: packages/action-scheduler/classes/data-stores/ActionScheduler_DBStore.php:840
 msgid "Unknown status found for action."
 msgstr "Status desconhecido encontrado para ação."
 
@@ -5234,15 +5182,15 @@ msgstr "ação ignorada por %s"
 msgid "Action [%1$s] has an invalid schedule: %2$s"
 msgstr "A ação [%1$s] tem uma agendamento inválido: %2$s"
 
-#: packages/action-scheduler/classes/data-stores/ActionScheduler_DBStore.php:278
+#: packages/action-scheduler/classes/data-stores/ActionScheduler_DBStore.php:243
 msgid "Invalid value for select or count parameter. Cannot query actions."
 msgstr "Valor inválido para o parâmetro select ou count. Não é possível consultar ações."
 
-#: packages/action-scheduler/classes/data-stores/ActionScheduler_DBStore.php:77
+#: packages/action-scheduler/classes/data-stores/ActionScheduler_DBStore.php:78
 msgid "Database error."
 msgstr "Erro de banco de dados."
 
-#: packages/action-scheduler/classes/data-stores/ActionScheduler_wpPostStore.php:865
+#: packages/action-scheduler/classes/data-stores/ActionScheduler_wpPostStore.php:819
 msgid "%s Support for strings longer than this will be removed in a future version."
 msgstr "O suporte de %s para sequências de caracteres maiores que isso será removido em uma versão futura."
 
@@ -5265,7 +5213,7 @@ msgstr "ação completa por %s"
 msgid "action failed via %1$s: %2$s"
 msgstr "ação malsucedida por %1$s: %2$s"
 
-#: packages/woocommerce-admin/src/Loader.php:1184
+#: packages/woocommerce-admin/src/Loader.php:1169
 msgid "Excluded report order statuses"
 msgstr "Status de pedido excluídos do relatório "
 
@@ -5279,7 +5227,7 @@ msgstr "Ocorreu uma falha ao agendar a próxima instância desta ação: %s"
 msgid "A new queue has begun processing. <a href=\"%s\">View actions in-progress &raquo;</a>"
 msgstr "Uma nova fila iniciou o processamento. <a href=\"%s\">Exibir ações em andamento &raquo;</a>"
 
-#: packages/action-scheduler/classes/abstracts/ActionScheduler_Store.php:227
+#: packages/action-scheduler/classes/abstracts/ActionScheduler_Store.php:301
 msgid "ActionScheduler_Action::$args too long. To ensure the args column can be indexed, action args should not be more than %d characters when encoded as JSON."
 msgstr "O ActionScheduler_Action::$args é muito longo. Para garantir que a coluna args possa ser indexada, args de ação não devem ter mais de %d caracteres quando codificados como JSON."
 
@@ -5340,7 +5288,7 @@ msgstr[1] "Migrando %d ações"
 msgid "Unable to remove source migrated action %s"
 msgstr "Não foi possível remover a ação migrada da origem %s"
 
-#: packages/action-scheduler/classes/migration/Controller.php:142
+#: packages/action-scheduler/classes/migration/Controller.php:162
 msgid "Action Scheduler migration in progress. The list of scheduled actions may be incomplete."
 msgstr "Migração do Agendador de ações em andamento. A lista de ações agendadas pode estar incompleta."
 
@@ -5407,10 +5355,9 @@ msgid "Inactive %s"
 msgstr "%s inativa"
 
 #: includes/admin/meta-boxes/views/html-order-items.php:164
-#: packages/woocommerce-blocks/build/cart-frontend.js:25
+#: packages/woocommerce-blocks/build/cart-frontend.js:33
 #: packages/woocommerce-blocks/build/cart.js:25
 #: packages/woocommerce-blocks/build/checkout-frontend.js:25
-#: packages/woocommerce-blocks/build/checkout-i2.js:25
 #: packages/woocommerce-blocks/build/checkout.js:25
 msgid "Fees:"
 msgstr "Taxas:"
@@ -5698,7 +5645,7 @@ msgstr "Lista de IDs de termo de atributo."
 msgid "Attribute taxonomy name."
 msgstr "Nome da taxonomia do atributo."
 
-#: packages/woocommerce-blocks/src/StoreApi/Routes/ProductCollectionData.php:158
+#: packages/woocommerce-blocks/src/StoreApi/Routes/ProductCollectionData.php:179
 msgid "Taxonomy name."
 msgstr "Nome da taxonomia."
 
@@ -5778,11 +5725,11 @@ msgstr "O produto do item do carrinho ou o ID da variação."
 msgid "Total weight (in grams) of all products in the cart."
 msgstr "Peso total (em gramas) de todos os produtos no carrinho."
 
-#: packages/woocommerce-blocks/src/StoreApi/Routes/ProductCollectionData.php:152
+#: packages/woocommerce-blocks/src/StoreApi/Routes/ProductCollectionData.php:173
 msgid "If requested, calculates attribute term counts for products in the collection."
 msgstr "Se solicitado, calcula a contagem de termos de atributos para produtos da coleção."
 
-#: packages/woocommerce-blocks/src/StoreApi/Routes/ProductCollectionData.php:146
+#: packages/woocommerce-blocks/src/StoreApi/Routes/ProductCollectionData.php:161
 msgid "If true, calculates the minimum and maximum product prices for the collection."
 msgstr "Se verdadeiro, calcula os preços mínimo e máximo do produto para a coleção."
 
@@ -5793,6 +5740,7 @@ msgstr "Retorna o número de produtos com cada classificação média."
 #: packages/woocommerce-admin/src/API/Reports/Stock/Stats/Controller.php:85
 #: packages/woocommerce-blocks/src/StoreApi/Schemas/ProductCollectionDataSchema.php:70
 #: packages/woocommerce-blocks/src/StoreApi/Schemas/ProductCollectionDataSchema.php:93
+#: packages/woocommerce-blocks/src/StoreApi/Schemas/ProductCollectionDataSchema.php:116
 msgid "Number of products."
 msgstr "Número de produtos."
 
@@ -5859,11 +5807,11 @@ msgstr "Limita os resultados para produtos com atributos globais selecionados."
 msgid "Limit result set to products with a certain average rating."
 msgstr "Limita os resultados para produtos com uma determinada classificação."
 
-#: packages/woocommerce-blocks/src/StoreApi/Routes/ProductCollectionData.php:176
+#: packages/woocommerce-blocks/src/StoreApi/Routes/ProductCollectionData.php:197
 msgid "If true, calculates rating counts for products in the collection."
 msgstr "Se verdadeiro, calcula as contagens de classificação de produtos da coleção."
 
-#: packages/woocommerce-blocks/src/StoreApi/Routes/ProductCollectionData.php:164
+#: packages/woocommerce-blocks/src/StoreApi/Routes/ProductCollectionData.php:185
 msgid "Query type being performed which may affect counts. Valid values include \"and\" and \"or\"."
 msgstr "Tipo de consulta em execução que pode afetar as contagens. Os valores válidos incluem \"and\" e \"or\"."
 
@@ -5983,6 +5931,7 @@ msgid "Learn more about how usage tracking works, and how you'll be helping in o
 msgstr "Saiba mais sobre como o rastreamento de uso funciona e como você ajudará em nossa <a href=\"%1$s\" target=\"_blank\">documentação de rastreamento de uso</a>."
 
 #: includes/admin/class-wc-admin-setup-wizard.php:453
+#: packages/woocommerce-admin/src/Features/OnboardingTasks.php:688
 #: packages/woocommerce-admin/dist/chunks/task-list.js:1
 msgid "Yes please"
 msgstr "Sim, por favor"
@@ -6144,6 +6093,23 @@ msgstr "Ir para a categoria"
 #: packages/woocommerce-blocks/build/products-by-attribute.js:11
 msgid "Columns"
 msgstr "Colunas"
+
+#: packages/woocommerce-admin/src/API/Reports/Downloads/Controller.php:392
+#: packages/woocommerce-admin/src/API/Reports/Products/Controller.php:388
+#: packages/woocommerce-admin/dist/chunks/analytics-report-categories.js:1
+#: packages/woocommerce-admin/dist/chunks/analytics-report-downloads.js:1
+#: packages/woocommerce-admin/dist/chunks/analytics-report-products.js:1
+#: packages/woocommerce-blocks/assets/js/editor-components/grid-content-control/index.js:20
+#: packages/woocommerce-blocks/build/handpicked-products.js:3
+#: packages/woocommerce-blocks/build/product-best-sellers.js:1
+#: packages/woocommerce-blocks/build/product-category.js:1
+#: packages/woocommerce-blocks/build/product-new.js:1
+#: packages/woocommerce-blocks/build/product-on-sale.js:1
+#: packages/woocommerce-blocks/build/product-tag.js:5
+#: packages/woocommerce-blocks/build/product-top-rated.js:1
+#: packages/woocommerce-blocks/build/products-by-attribute.js:11
+msgid "Product title"
+msgstr "Título do produto"
 
 #. translators: 1: is a link to a support document. 2: closing link
 #. translators: 1: is a link to a support document. 2: closing link
@@ -6689,7 +6655,7 @@ msgstr "Atributos de variação do produto, se aplicável."
 
 #. translators: %1$s is the install command, %2$s is the build command, %3$s is
 #. the watch command.
-#: packages/woocommerce-blocks/src/Domain/Bootstrap.php:154
+#: packages/woocommerce-blocks/src/Domain/Bootstrap.php:164
 msgid "WooCommerce Blocks development mode requires files to be built. From the plugin directory, run %1$s to install dependencies, %2$s to build the files or %3$s to build the files and watch for changes."
 msgstr "O modo de desenvolvimento do WooCommerce Blocks requer que os arquivos sejam criados. No diretório do plugin, execute %1$s para instalar dependências,%2$s para fazer build dos arquivos ou %3$s para fazer build dos arquivos e observar as alterações."
 
@@ -6716,7 +6682,7 @@ msgstr "Ícone do WooCommerce Admin"
 
 #: includes/admin/class-wc-admin-setup-wizard.php:1916
 #: includes/admin/class-wc-admin-setup-wizard.php:1920
-#: packages/woocommerce-admin/src/Loader.php:1164
+#: packages/woocommerce-admin/src/Loader.php:1149
 msgid "WooCommerce Admin"
 msgstr "WooCommerce Admin"
 
@@ -6819,6 +6785,7 @@ msgstr "Obrigado por comprar em {site_url}!"
 #: includes/class-wc-countries.php:909
 #: packages/woocommerce-blocks/src/StoreApi/Schemas/AbstractAddressSchema.php:66
 #: packages/woocommerce-blocks/src/StoreApi/Utilities/OrderController.php:352
+#: packages/woocommerce-admin/dist/chunks/analytics-report-customers.js:1
 #: packages/woocommerce-blocks/build/wc-settings.js:1
 msgid "Postal code"
 msgstr "Código postal"
@@ -7183,7 +7150,7 @@ msgstr "Endereço do site (URL)"
 msgid "WordPress address (URL)"
 msgstr "Endereço do WordPress (URL)"
 
-#: includes/admin/class-wc-admin-assets.php:479
+#: includes/admin/class-wc-admin-assets.php:483
 msgid "Dismiss this suggestion"
 msgstr "Dispensar esta sugestão"
 
@@ -7195,7 +7162,7 @@ msgstr "Iniciar importação"
 msgid "Create Product"
 msgstr "Criar produto"
 
-#: includes/admin/class-wc-admin-assets.php:375
+#: includes/admin/class-wc-admin-assets.php:379
 msgid "Enter a coupon code to apply. Discounts are applied to line totals, before taxes."
 msgstr "Informe um código de cupom para aplicar. Os descontos serão aplicados aos totais da linha, antes das taxas."
 
@@ -7207,7 +7174,7 @@ msgstr "Plugins que você deve usar"
 msgid "Adds an option to the orders screen for removing personal data in bulk. Note that removing personal data cannot be undone."
 msgstr "Adiciona uma opção à listagem de pedidos para remover dados pessoais em massa. Observe que a remoção de dados pessoais não pode ser revertida."
 
-#: includes/admin/class-wc-admin-assets.php:481
+#: includes/admin/class-wc-admin-assets.php:485
 #: includes/admin/marketplace-suggestions/templates/html-product-data-extensions.php:27
 msgid "Manage suggestions"
 msgstr "Gerenciar sugestões"
@@ -7272,13 +7239,13 @@ msgstr "Rastreamento de uso"
 msgid "WooCommerce Status"
 msgstr "Status do WooCommerce"
 
-#: includes/admin/meta-boxes/views/html-order-item.php:96
-#: includes/admin/meta-boxes/views/html-order-item.php:144
+#: includes/admin/meta-boxes/views/html-order-item.php:121
+#: includes/admin/meta-boxes/views/html-order-item.php:169
 msgid "Before discount"
 msgstr "Antes do desconto"
 
 #. translators: %s: discount amount
-#: includes/admin/meta-boxes/views/html-order-item.php:83
+#: includes/admin/meta-boxes/views/html-order-item.php:108
 msgid "%s discount"
 msgstr "%s de desconto"
 
@@ -7746,28 +7713,28 @@ msgctxt "post"
 msgid "Failed"
 msgstr "Malsucedido"
 
-#: packages/action-scheduler/classes/data-stores/ActionScheduler_DBStore.php:867
-#: packages/action-scheduler/classes/data-stores/ActionScheduler_wpPostStore.php:765
+#: packages/action-scheduler/classes/data-stores/ActionScheduler_DBStore.php:838
+#: packages/action-scheduler/classes/data-stores/ActionScheduler_wpPostStore.php:719
 msgid "Invalid action ID. No status found."
 msgstr "ID inválido de ação. Nenhum status encontrado."
 
 #. translators: %s: action ID
-#: packages/action-scheduler/classes/data-stores/ActionScheduler_wpPostStore.php:741
+#: packages/action-scheduler/classes/data-stores/ActionScheduler_wpPostStore.php:695
 msgid "Unable to mark failure on action %s. Database error."
 msgstr "Incapaz de marcar a ação %s como malsucedida. Erro no banco de dados."
 
 #. translators: %s: action ID
-#: packages/action-scheduler/classes/data-stores/ActionScheduler_wpPostStore.php:729
+#: packages/action-scheduler/classes/data-stores/ActionScheduler_wpPostStore.php:683
 msgid "Unable to unlock claim on action %s. Database error."
 msgstr "Incapaz de desbloquear a reivindicação na ação %s. Erro no banco de dados."
 
 #. translators: %s: claim ID
-#: packages/action-scheduler/classes/data-stores/ActionScheduler_wpPostStore.php:714
+#: packages/action-scheduler/classes/data-stores/ActionScheduler_wpPostStore.php:668
 msgid "Unable to unlock claim %s. Database error."
 msgstr "Incapaz de desbloquear a reivindicação %s. Erro no banco de dados."
 
-#: packages/action-scheduler/classes/data-stores/ActionScheduler_DBStore.php:694
-#: packages/action-scheduler/classes/data-stores/ActionScheduler_wpPostStore.php:619
+#: packages/action-scheduler/classes/data-stores/ActionScheduler_DBStore.php:665
+#: packages/action-scheduler/classes/data-stores/ActionScheduler_wpPostStore.php:573
 msgid "Unable to claim actions. Database error."
 msgstr "Incapaz de reivindicar ações. Erro no banco de dados."
 
@@ -7825,23 +7792,23 @@ msgstr "Existem muitos lotes simultâneos."
 msgid "There are too many concurrent batches, but the run is forced to continue."
 msgstr "Há muitos lotes simultâneos, mas a execução foi forçada a continuar."
 
-#: packages/action-scheduler/classes/abstracts/ActionScheduler_Store.php:307
+#: packages/action-scheduler/classes/abstracts/ActionScheduler_Store.php:381
 msgid "Canceled"
 msgstr "Cancelado"
 
-#: packages/action-scheduler/classes/abstracts/ActionScheduler_Store.php:306
+#: packages/action-scheduler/classes/abstracts/ActionScheduler_Store.php:380
 msgid "Failed"
 msgstr "Malsucedido"
 
-#: packages/action-scheduler/classes/abstracts/ActionScheduler_Store.php:305
+#: packages/action-scheduler/classes/abstracts/ActionScheduler_Store.php:379
 msgid "In-progress"
 msgstr "Em processo"
 
-#: packages/action-scheduler/classes/abstracts/ActionScheduler_Store.php:304
+#: packages/action-scheduler/classes/abstracts/ActionScheduler_Store.php:378
 msgid "Pending"
 msgstr "Pendente"
 
-#: packages/action-scheduler/classes/data-stores/ActionScheduler_wpPostStore.php:293
+#: packages/action-scheduler/classes/data-stores/ActionScheduler_wpPostStore.php:238
 msgid "Invalid schedule. Cannot save action."
 msgstr "Agendamento inválido. Não é possível salvar a ação."
 
@@ -8004,28 +7971,28 @@ msgid "action complete"
 msgstr "ação concluída"
 
 #. translators: %s: error message
-#: packages/action-scheduler/classes/data-stores/ActionScheduler_DBStore.php:85
+#: packages/action-scheduler/classes/data-stores/ActionScheduler_DBStore.php:86
 #: packages/action-scheduler/classes/data-stores/ActionScheduler_wpPostStore.php:35
 #: packages/action-scheduler/classes/migration/ActionScheduler_DBStoreMigrator.php:44
 msgid "Error saving action: %s"
 msgstr "Erro ao salvar ação: %s"
 
 #. translators: %s: action ID
-#: packages/action-scheduler/classes/data-stores/ActionScheduler_DBStore.php:473
-#: packages/action-scheduler/classes/data-stores/ActionScheduler_DBStore.php:564
-#: packages/action-scheduler/classes/data-stores/ActionScheduler_DBStore.php:596
-#: packages/action-scheduler/classes/data-stores/ActionScheduler_DBStore.php:806
-#: packages/action-scheduler/classes/data-stores/ActionScheduler_DBStore.php:848
-#: packages/action-scheduler/classes/data-stores/ActionScheduler_wpPostStore.php:467
-#: packages/action-scheduler/classes/data-stores/ActionScheduler_wpPostStore.php:478
-#: packages/action-scheduler/classes/data-stores/ActionScheduler_wpPostStore.php:505
-#: packages/action-scheduler/classes/data-stores/ActionScheduler_wpPostStore.php:798
+#: packages/action-scheduler/classes/data-stores/ActionScheduler_DBStore.php:444
+#: packages/action-scheduler/classes/data-stores/ActionScheduler_DBStore.php:535
+#: packages/action-scheduler/classes/data-stores/ActionScheduler_DBStore.php:567
+#: packages/action-scheduler/classes/data-stores/ActionScheduler_DBStore.php:777
+#: packages/action-scheduler/classes/data-stores/ActionScheduler_DBStore.php:819
+#: packages/action-scheduler/classes/data-stores/ActionScheduler_wpPostStore.php:421
+#: packages/action-scheduler/classes/data-stores/ActionScheduler_wpPostStore.php:432
+#: packages/action-scheduler/classes/data-stores/ActionScheduler_wpPostStore.php:459
+#: packages/action-scheduler/classes/data-stores/ActionScheduler_wpPostStore.php:752
 msgid "Unidentified action %s"
 msgstr "Ação %s não identificada"
 
 #. translators: %s: group name
-#: packages/action-scheduler/classes/data-stores/ActionScheduler_DBStore.php:680
-#: packages/action-scheduler/classes/data-stores/ActionScheduler_wpPostStore.php:639
+#: packages/action-scheduler/classes/data-stores/ActionScheduler_DBStore.php:651
+#: packages/action-scheduler/classes/data-stores/ActionScheduler_wpPostStore.php:593
 msgid "The group \"%s\" does not exist."
 msgstr "O grupo \"%s\" não existe."
 
@@ -8034,7 +8001,7 @@ msgid "action started"
 msgstr "ação iniciada"
 
 #: packages/action-scheduler/classes/abstracts/ActionScheduler_Logger.php:76
-#: packages/action-scheduler/classes/data-stores/ActionScheduler_DBLogger.php:134
+#: packages/action-scheduler/classes/data-stores/ActionScheduler_DBLogger.php:138
 msgid "action canceled"
 msgstr "ação cancelada"
 
@@ -8733,7 +8700,7 @@ msgstr "Item movido pra baixo"
 msgid "Sud Sardegna"
 msgstr "Sud Sardegna"
 
-#: includes/admin/class-wc-admin-assets.php:318
+#: includes/admin/class-wc-admin-assets.php:320
 msgid "You may need to manually restore the item's stock."
 msgstr "Pode ser necessário restaurar manualmente o estoque do item."
 
@@ -8768,7 +8735,6 @@ msgid "Shipping %d"
 msgstr "Entrega %d"
 
 #: includes/class-wc-privacy-exporters.php:258
-#: packages/woocommerce-blocks/build/checkout-i2.js:31
 msgid "Shipping Address"
 msgstr "Endereço de entrega"
 
@@ -8799,7 +8765,6 @@ msgid "Payer first name"
 msgstr "Primeiro do pagador"
 
 #: includes/class-wc-privacy-exporters.php:257
-#: packages/woocommerce-blocks/build/checkout-i2.js:35
 msgid "Billing Address"
 msgstr "Endereço de faturamento"
 
@@ -9024,10 +8989,6 @@ msgstr "Endereço de entrega: solicitaremos que você insira isso para que possa
 #: includes/class-wc-privacy.php:90
 msgid "Location, IP address and browser type: we’ll use this for purposes like estimating taxes and shipping"
 msgstr "Localização, endereço IP e tipo de navegador: usaremos isso para fins de estimativas de taxas e envio"
-
-#: includes/class-wc-privacy.php:89
-msgid "Products you’ve viewed:  we’ll use this to, for example, show you products you’ve recently viewed"
-msgstr "Produtos que você viu: usaremos isso para, por exemplo, mostrar os produtos que você visualizou recentemente"
 
 #: includes/class-wc-privacy.php:86
 msgid "What we collect and store"
@@ -9721,6 +9682,7 @@ msgstr "Selecione um estado&hellip;"
 #: includes/admin/class-wc-admin-setup-wizard.php:246
 #: packages/woocommerce-admin/dist/chunks/3.js:1
 #: packages/woocommerce-admin/dist/chunks/payment-recommendations.js:1
+#: packages/woocommerce-admin/dist/chunks/shipping-recommendations.js:1
 #: packages/woocommerce-admin/dist/chunks/task-list.js:1
 #: packages/woocommerce-admin/dist/onboarding/index.js:1
 msgid "Recommended"
@@ -10524,12 +10486,15 @@ msgid "Paid on %1$s @ %2$s"
 msgstr "Pago em %1$s às %2$s"
 
 #: includes/admin/list-tables/class-wc-admin-list-table-products.php:385
+#: packages/woocommerce-blocks/assets/js/blocks/stock-filter/index.js:38
+#: packages/woocommerce-blocks/build/stock-filter.js:13
 msgid "Filter by stock status"
 msgstr "Filtrar por status do estoque"
 
 #: includes/admin/list-tables/class-wc-admin-list-table-products.php:272
 #: includes/admin/reports/class-wc-report-stock.php:114
 #: includes/wc-product-functions.php:874
+#: packages/woocommerce-admin/dist/chunks/analytics-report-stock.js:1
 msgid "On backorder"
 msgstr "Sob encomenda"
 
@@ -10939,7 +10904,7 @@ msgstr "Data final do preço promocional, em GMT."
 msgid "Customer invoice / Order details"
 msgstr "Fatura do cliente / detalhes do pedido"
 
-#: includes/admin/meta-boxes/class-wc-meta-box-order-actions.php:38
+#: includes/admin/meta-boxes/class-wc-meta-box-order-actions.php:161
 msgid "Email invoice / order details to customer"
 msgstr "Enviar fatura / dados do pedido para o cliente"
 
@@ -10951,7 +10916,7 @@ msgstr "Define se a variação deve ser visível na página do produto."
 msgid "This key is invalid or has already been used. Please reset your password again if needed."
 msgstr "Esta chave é inválida ou já foi usada. Defina sua senha novamente, se necessário."
 
-#: includes/admin/meta-boxes/class-wc-meta-box-order-actions.php:39
+#: includes/admin/meta-boxes/class-wc-meta-box-order-actions.php:162
 msgid "Resend new order notification"
 msgstr "Reenviar notificação de novo pedido"
 
@@ -11112,7 +11077,6 @@ msgstr "Digite um endereço de e-mail válido"
 
 #: templates/cart/cart-shipping.php:67
 #: packages/woocommerce-blocks/build/checkout-frontend.js:33
-#: packages/woocommerce-blocks/build/checkout-i2.js:37
 #: packages/woocommerce-blocks/build/checkout.js:31
 msgid "There are no shipping options available. Please ensure that your address has been entered correctly, or contact us if you need any help."
 msgstr "Não existem métodos de entrega disponíveis. Certifique-se de que o seu endereço foi preenchido corretamente, ou entre em contato conosco se precisar de ajuda."
@@ -11272,7 +11236,7 @@ msgstr "Reembolso #%1$s - %2$s por %3$s"
 msgid "Position"
 msgstr "Posição"
 
-#: includes/admin/meta-boxes/class-wc-meta-box-order-actions.php:50
+#: includes/admin/meta-boxes/class-wc-meta-box-order-actions.php:43
 msgid "Choose an action..."
 msgstr "Selecione uma ação..."
 
@@ -11291,7 +11255,7 @@ msgstr "Ordenar por:"
 msgid "The stock has not been updated because the value has changed since editing. Product %1$d has %2$d units in stock."
 msgstr "O estoque não foi atualizado porque o valor mudou desde a última edição. O produto %1$d tem %2$d unidades em estoque."
 
-#: includes/admin/meta-boxes/class-wc-meta-box-order-actions.php:108
+#: includes/admin/meta-boxes/class-wc-meta-box-order-actions.php:101
 msgid "Order details manually sent to customer."
 msgstr "Detalhes do pedido enviados manualmente para o cliente."
 
@@ -11338,7 +11302,6 @@ msgstr "Já possui uma loja?"
 
 #: includes/admin/class-wc-admin-setup-wizard.php:2244
 #: includes/admin/class-wc-admin-setup-wizard.php:2248
-#: packages/woocommerce-admin/src/Notes/OnboardingEmailMarketing.php:41
 msgid "Yes please!"
 msgstr "Sim, por favor!"
 
@@ -11705,7 +11668,7 @@ msgstr "Cupom agendado para: %s."
 msgid "Order scheduled for: %s."
 msgstr "Pedido agendado para: %s."
 
-#: includes/admin/class-wc-admin-assets.php:376
+#: includes/admin/class-wc-admin-assets.php:380
 msgid "Enter a fixed amount or percentage to apply as a fee."
 msgstr "Insira um valor fixo ou porcentagem para aplicar como uma taxa."
 
@@ -11838,9 +11801,7 @@ msgid "Add New"
 msgstr "Adicionar novo"
 
 #: includes/class-wc-post-types.php:322
-#: packages/woocommerce-admin/dist/chunks/analytics-report-products.js:1
 #: packages/woocommerce-admin/dist/chunks/analytics-report-stock.js:1
-#: packages/woocommerce-admin/dist/chunks/dashboard-charts.js:1
 #: packages/woocommerce-blocks/assets/js/blocks/products/all-products/edit.js:83
 #: packages/woocommerce-blocks/assets/js/blocks/products/all-products/index.js:18
 #: packages/woocommerce-blocks/build/all-products.js:29
@@ -11979,7 +11940,6 @@ msgid "Set Status - In stock"
 msgstr "Configurar status - Em estoque"
 
 #: includes/admin/settings/views/html-admin-page-shipping-zones.php:28
-#: packages/woocommerce-blocks/build/checkout-i2.js:37
 msgid "Manage shipping methods"
 msgstr "Gerenciar métodos de entrega"
 
@@ -12369,7 +12329,7 @@ msgid "Expired :("
 msgstr "Expirado :("
 
 #: includes/admin/helper/views/html-main.php:17
-#: packages/woocommerce-admin/src/Features/Onboarding.php:439
+#: packages/woocommerce-admin/src/Features/Onboarding.php:441
 msgid "Subscriptions"
 msgstr "Assinaturas"
 
@@ -12378,11 +12338,6 @@ msgid "WooCommerce Extensions"
 msgstr "Extensões do WooCommerce"
 
 #: includes/admin/importers/mappings/generic.php:22
-#: packages/woocommerce-admin/src/API/Reports/Downloads/Controller.php:392
-#: packages/woocommerce-admin/src/API/Reports/Products/Controller.php:388
-#: packages/woocommerce-admin/dist/chunks/analytics-report-categories.js:1
-#: packages/woocommerce-admin/dist/chunks/analytics-report-downloads.js:1
-#: packages/woocommerce-admin/dist/chunks/analytics-report-products.js:1
 #: packages/woocommerce-blocks/assets/js/atomic/blocks/product-elements/title/constants.js:7
 #: packages/woocommerce-blocks/build/all-products.js:21
 msgid "Product Title"
@@ -12585,7 +12540,7 @@ msgstr "Ponto de extremidade do WooCommerce"
 msgid "Back to Attributes"
 msgstr "Voltar para os atributos"
 
-#: includes/admin/class-wc-admin-assets.php:438
+#: includes/admin/class-wc-admin-assets.php:442
 msgid "Are you sure you want to delete this log?"
 msgstr "Tem certeza que deseja excluir este registro?"
 
@@ -12814,7 +12769,7 @@ msgstr "Você tem certeza que deseja sair? <a href=\"%s\">Confirmar e sair</a>"
 msgid "Unknown request method."
 msgstr "Método de requisição desconhecido."
 
-#: includes/admin/meta-boxes/class-wc-meta-box-order-actions.php:75
+#: includes/admin/meta-boxes/class-wc-meta-box-order-actions.php:68
 #: src/Internal/ProductAttributesLookup/DataRegenerator.php:276
 msgid "Create"
 msgstr "Criar"
@@ -12841,7 +12796,7 @@ msgstr "ID da área."
 msgid "Recalculate"
 msgstr "Recalcular"
 
-#: includes/admin/class-wc-admin-assets.php:339
+#: includes/admin/class-wc-admin-assets.php:343
 msgid "Recalculate totals? This will calculate taxes based on the customers country (or the store base country) and update totals."
 msgstr "Recalcular total? Isso irá calcular as taxas baseadas no país dos consumidores (ou no país do local da loja) e atualizar o total."
 
@@ -12895,7 +12850,7 @@ msgstr "Nome do tema ascendente"
 #: includes/rest-api/Controllers/Version3/class-wc-rest-product-reviews-controller.php:187
 #: includes/rest-api/Controllers/Version3/class-wc-rest-settings-controller.php:51
 #: packages/woocommerce-admin/src/API/Notes.php:391
-#: packages/woocommerce-admin/src/API/OnboardingProfile.php:87
+#: packages/woocommerce-admin/src/API/OnboardingProfile.php:102
 #: packages/woocommerce-admin/src/API/Reports/Import/Controller.php:110
 msgid "Sorry, you cannot edit this resource."
 msgstr "Sem permissão para editar este recurso."
@@ -13089,10 +13044,9 @@ msgstr "%s não existe."
 #. translators: %s Coupon code.
 #: includes/wc-cart-functions.php:264
 #: packages/woocommerce-blocks/assets/js/base/components/cart-checkout/totals/discount/index.js:77
-#: packages/woocommerce-blocks/build/cart-frontend.js:27
+#: packages/woocommerce-blocks/build/cart-frontend.js:35
 #: packages/woocommerce-blocks/build/cart.js:27
 #: packages/woocommerce-blocks/build/checkout-frontend.js:27
-#: packages/woocommerce-blocks/build/checkout-i2.js:27
 #: packages/woocommerce-blocks/build/checkout.js:27
 msgid "Coupon: %s"
 msgstr "Cupom: %s"
@@ -13118,7 +13072,6 @@ msgstr "Países específicos"
 #: includes/shipping/free-shipping/class-wc-shipping-free-shipping.php:47
 #: packages/woocommerce-admin/dist/chunks/task-list.js:1
 #: packages/woocommerce-blocks/build/cart.js:31
-#: packages/woocommerce-blocks/build/checkout-i2.js:31
 #: packages/woocommerce-blocks/build/checkout.js:31
 msgid "Free shipping"
 msgstr "Frete grátis"
@@ -13370,6 +13323,7 @@ msgid "Edit category"
 msgstr "Editar categoria"
 
 #: includes/class-wc-post-types.php:99
+#: packages/woocommerce-admin/dist/chunks/analytics-report-categories.js:1
 msgid "All categories"
 msgstr "Todas as categorias"
 
@@ -13387,7 +13341,9 @@ msgstr "Pesquisar categorias"
 #: packages/woocommerce-blocks/assets/js/blocks/reviews/reviews-by-category/edit.js:82
 #: packages/woocommerce-blocks/build/reviews-by-category.js:7
 msgid "Category"
-msgstr "Categoria"
+msgid_plural "Categories"
+msgstr[0] "Categoria"
+msgstr[1] ""
 
 #: includes/class-wc-order-item-fee.php:131
 #: includes/class-wc-order-item-product.php:60 includes/class-wc-tax.php:911
@@ -13447,6 +13403,8 @@ msgid "Invalid role"
 msgstr "Função inválida"
 
 #: includes/class-wc-customer.php:776
+#: packages/woocommerce-admin/src/API/OnboardingProfile.php:442
+#: packages/woocommerce-admin/dist/chunks/profile-wizard.js:1
 msgid "Invalid email address"
 msgstr "Endereço de e-mail inválido"
 
@@ -13473,17 +13431,18 @@ msgstr "Endereço"
 #: packages/woocommerce-blocks/assets/js/base/components/block-error-boundary/block-error.js:16
 #: packages/woocommerce-blocks/build/active-filters-frontend.js:13
 #: packages/woocommerce-blocks/build/all-products-frontend.js:1
-#: packages/woocommerce-blocks/build/attribute-filter-frontend.js:1
+#: packages/woocommerce-blocks/build/attribute-filter-frontend.js:27
 #: packages/woocommerce-blocks/build/cart-frontend.js:1
 #: packages/woocommerce-blocks/build/cart.js:5
 #: packages/woocommerce-blocks/build/checkout-frontend.js:1
 #: packages/woocommerce-blocks/build/checkout-i2-frontend.js:1
-#: packages/woocommerce-blocks/build/checkout-i2.js:5
 #: packages/woocommerce-blocks/build/checkout.js:5
+#: packages/woocommerce-blocks/build/mini-cart-component-frontend.js:1
 #: packages/woocommerce-blocks/build/price-filter-frontend.js:1
 #: packages/woocommerce-blocks/build/reviews-frontend.js:5
 #: packages/woocommerce-blocks/build/single-product-frontend.js:1
 #: packages/woocommerce-blocks/build/single-product.js:1
+#: packages/woocommerce-blocks/build/stock-filter-frontend.js:11
 msgid "Error:"
 msgstr "Erro:"
 
@@ -14574,8 +14533,6 @@ msgstr "Áreas de entrega"
 #: packages/woocommerce-blocks/build/cart.js:29
 #: packages/woocommerce-blocks/build/checkout-frontend.js:33
 #: packages/woocommerce-blocks/build/checkout-frontend.js:37
-#: packages/woocommerce-blocks/build/checkout-i2.js:29
-#: packages/woocommerce-blocks/build/checkout-i2.js:37
 #: packages/woocommerce-blocks/build/checkout.js:29
 #: packages/woocommerce-blocks/build/checkout.js:31
 msgid "Shipping options"
@@ -15347,7 +15304,7 @@ msgstr "Nome para o recurso."
 
 #: includes/rest-api/Controllers/Version1/class-wc-rest-customers-v1-controller.php:865
 #: includes/rest-api/Controllers/Version1/class-wc-rest-webhooks-v1-controller.php:711
-#: includes/rest-api/Controllers/Version3/class-wc-rest-crud-controller.php:579
+#: includes/rest-api/Controllers/Version3/class-wc-rest-crud-controller.php:612
 #: includes/rest-api/Controllers/Version3/class-wc-rest-posts-controller.php:636
 #: includes/rest-api/Controllers/Version3/class-wc-rest-product-reviews-controller.php:939
 #: includes/rest-api/Controllers/Version3/class-wc-rest-terms-controller.php:709
@@ -15525,9 +15482,11 @@ msgstr "Um e-mail de redefinição de senha foi enviada para o endereço de e-ma
 #. translators: %s number of products.
 #: includes/admin/reports/class-wc-report-stock.php:154
 #: includes/widgets/class-wc-widget-product-tag-cloud.php:91
-#: packages/woocommerce-blocks/assets/js/blocks/attribute-filter/label.js:23
-#: packages/woocommerce-blocks/build/attribute-filter-frontend.js:21
-#: packages/woocommerce-blocks/build/attribute-filter.js:23
+#: packages/woocommerce-blocks/assets/js/base/components/filter-element-label/index.js:28
+#: packages/woocommerce-blocks/build/attribute-filter-frontend.js:3
+#: packages/woocommerce-blocks/build/attribute-filter.js:5
+#: packages/woocommerce-blocks/build/stock-filter-frontend.js:3
+#: packages/woocommerce-blocks/build/stock-filter.js:5
 msgid "%s product"
 msgid_plural "%s products"
 msgstr[0] "%s produto"
@@ -16023,7 +15982,7 @@ msgid "Awaiting check payment"
 msgstr "Aguardando compensação do cheque"
 
 #: includes/rest-api/Controllers/Version1/class-wc-rest-taxes-v1-controller.php:709
-#: includes/rest-api/Controllers/Version3/class-wc-rest-crud-controller.php:538
+#: includes/rest-api/Controllers/Version3/class-wc-rest-crud-controller.php:559
 #: packages/woocommerce-admin/src/API/Leaderboards.php:447
 #: packages/woocommerce-admin/src/API/Notes.php:539
 #: packages/woocommerce-admin/src/API/ProductsLowInStock.php:289
@@ -16050,7 +16009,7 @@ msgid "Current page of the collection."
 msgstr "Página atual da coleção."
 
 #: includes/rest-api/Controllers/Version1/class-wc-rest-taxes-v1-controller.php:717
-#: includes/rest-api/Controllers/Version3/class-wc-rest-crud-controller.php:546
+#: includes/rest-api/Controllers/Version3/class-wc-rest-crud-controller.php:567
 #: packages/woocommerce-admin/src/API/Leaderboards.php:455
 #: packages/woocommerce-admin/src/API/Notes.php:547
 #: packages/woocommerce-admin/src/API/ProductsLowInStock.php:297
@@ -16201,7 +16160,7 @@ msgstr "Permite que seus clientes busquem os pedidos. Por padrão, quando utiliz
 msgid "Every %d minutes"
 msgstr "A cada %d minutos"
 
-#: includes/rest-api/Controllers/Version3/class-wc-rest-crud-controller.php:555
+#: includes/rest-api/Controllers/Version3/class-wc-rest-crud-controller.php:576
 #: packages/woocommerce-blocks/src/StoreApi/Routes/AbstractTermsRoute.php:42
 #: packages/woocommerce-blocks/src/StoreApi/Routes/Products.php:127
 msgid "Limit results to those matching a string."
@@ -18878,7 +18837,7 @@ msgstr "Por padrão para o endereço de entrega do cliente"
 #: includes/class-wc-query.php:140 includes/wc-account-functions.php:101
 #: packages/woocommerce-admin/src/API/Reports/Downloads/Stats/Controller.php:144
 #: packages/woocommerce-admin/src/Features/Analytics.php:278
-#: packages/woocommerce-admin/src/Features/Onboarding.php:436
+#: packages/woocommerce-admin/src/Features/Onboarding.php:438
 #: packages/woocommerce-admin/src/ReportCSVEmail.php:35
 #: templates/emails/email-downloads.php:22
 #: templates/emails/plain/email-downloads.php:20
@@ -18935,7 +18894,9 @@ msgstr "Adicionar classe de entrega"
 
 #: includes/admin/settings/class-wc-settings-shipping.php:399
 #: packages/woocommerce-blocks/assets/js/blocks/attribute-filter/edit.js:73
+#: packages/woocommerce-blocks/assets/js/blocks/stock-filter/edit.js:37
 #: packages/woocommerce-blocks/build/attribute-filter.js:33
+#: packages/woocommerce-blocks/build/stock-filter.js:13
 msgid "Product count"
 msgstr "Total de produtos"
 
@@ -18978,7 +18939,6 @@ msgstr "Ponto de extremidade para a página \"Minha conta &rarr; Métodos de pag
 #: includes/class-wc-query.php:149 includes/wc-account-functions.php:103
 #: packages/woocommerce-blocks/assets/js/blocks/cart-checkout/payment-methods/no-payment-methods/index.js:36
 #: packages/woocommerce-blocks/build/checkout-frontend.js:29
-#: packages/woocommerce-blocks/build/checkout-i2.js:37
 #: packages/woocommerce-blocks/build/checkout.js:31
 msgid "Payment methods"
 msgstr "Métodos de pagamento"
@@ -19021,7 +18981,7 @@ msgstr "Este pedido não é mais editável."
 msgid "Customer download link"
 msgstr "Link baixável do cliente"
 
-#: includes/admin/meta-boxes/views/html-order-item.php:164
+#: includes/admin/meta-boxes/views/html-order-item.php:189
 msgid "Edit item"
 msgstr "Editar item"
 
@@ -19029,7 +18989,7 @@ msgstr "Editar item"
 msgid "Add item(s)"
 msgstr "Adicionar itens"
 
-#: includes/admin/meta-boxes/views/html-order-item.php:164
+#: includes/admin/meta-boxes/views/html-order-item.php:189
 msgid "Delete item"
 msgstr "Excluir item"
 
@@ -19062,7 +19022,7 @@ msgstr "Cupons são uma boa maneira de oferecer descontos e recompensas para os 
 msgid "Ready to start selling something awesome?"
 msgstr "Pronto para começar a vender algo incrível?"
 
-#: includes/admin/class-wc-admin-assets.php:374
+#: includes/admin/class-wc-admin-assets.php:378
 msgid "Are you sure you wish to delete this note? This action cannot be undone."
 msgstr "Tem certeza que deseja excluir essa nota? Esta ação não poderá ser desfeita."
 
@@ -19120,7 +19080,7 @@ msgstr "O ID é inválido."
 #: includes/rest-api/Controllers/Version1/class-wc-rest-products-v1-controller.php:1656
 #: includes/rest-api/Controllers/Version2/class-wc-rest-product-variations-v2-controller.php:512
 #: includes/rest-api/Controllers/Version2/class-wc-rest-products-v2-controller.php:1563
-#: includes/rest-api/Controllers/Version3/class-wc-rest-crud-controller.php:443
+#: includes/rest-api/Controllers/Version3/class-wc-rest-crud-controller.php:464
 #: includes/rest-api/Controllers/Version3/class-wc-rest-posts-controller.php:438
 msgid "Sorry, you are not allowed to delete %s."
 msgstr "Desculpe, você não possui permissão para excluir %s."
@@ -19133,7 +19093,7 @@ msgstr "Desculpe, você não possui permissão para excluir %s."
 #: includes/rest-api/Controllers/Version1/class-wc-rest-products-v1-controller.php:1688
 #: includes/rest-api/Controllers/Version2/class-wc-rest-product-variations-v2-controller.php:530
 #: includes/rest-api/Controllers/Version2/class-wc-rest-products-v2-controller.php:1601
-#: includes/rest-api/Controllers/Version3/class-wc-rest-crud-controller.php:457
+#: includes/rest-api/Controllers/Version3/class-wc-rest-crud-controller.php:478
 #: includes/rest-api/Controllers/Version3/class-wc-rest-posts-controller.php:451
 msgid "The %s does not support trashing."
 msgstr "%s não tem suporte a lixeira."
@@ -19146,7 +19106,7 @@ msgstr "%s não tem suporte a lixeira."
 #: includes/rest-api/Controllers/Version1/class-wc-rest-products-v1-controller.php:1694
 #: includes/rest-api/Controllers/Version2/class-wc-rest-product-variations-v2-controller.php:541
 #: includes/rest-api/Controllers/Version2/class-wc-rest-products-v2-controller.php:1614
-#: includes/rest-api/Controllers/Version3/class-wc-rest-crud-controller.php:464
+#: includes/rest-api/Controllers/Version3/class-wc-rest-crud-controller.php:485
 #: includes/rest-api/Controllers/Version3/class-wc-rest-posts-controller.php:457
 msgid "The %s has already been deleted."
 msgstr "O %s já foi excluído."
@@ -19161,7 +19121,7 @@ msgstr "O %s já foi excluído."
 #: includes/rest-api/Controllers/Version3/class-wc-rest-product-reviews-controller.php:170
 #: includes/rest-api/Controllers/Version3/class-wc-rest-shipping-zones-controller-base.php:83
 #: includes/rest-api/Controllers/Version3/class-wc-rest-terms-controller.php:161
-#: packages/woocommerce-admin/src/API/OnboardingTasks.php:110
+#: packages/woocommerce-admin/src/API/OnboardingTasks.php:200
 msgid "Sorry, you are not allowed to create resources."
 msgstr "Desculpe, você não possui permissão para criar recursos."
 
@@ -19211,7 +19171,7 @@ msgid "Cannot create existing %s."
 msgstr "Não foi possível criar %s existente."
 
 #: includes/rest-api/Controllers/Version1/class-wc-rest-webhooks-v1-controller.php:720
-#: includes/rest-api/Controllers/Version3/class-wc-rest-crud-controller.php:588
+#: includes/rest-api/Controllers/Version3/class-wc-rest-crud-controller.php:621
 #: includes/rest-api/Controllers/Version3/class-wc-rest-posts-controller.php:645
 #: includes/rest-api/Controllers/Version3/class-wc-rest-terms-controller.php:718
 #: packages/woocommerce-admin/src/API/Reports/Stock/Controller.php:467
@@ -19247,7 +19207,7 @@ msgstr "Se deve ocultar recursos não atribuídos a nenhum produto."
 #: includes/rest-api/Controllers/Version1/class-wc-rest-customers-v1-controller.php:883
 #: includes/rest-api/Controllers/Version1/class-wc-rest-taxes-v1-controller.php:726
 #: includes/rest-api/Controllers/Version1/class-wc-rest-webhooks-v1-controller.php:729
-#: includes/rest-api/Controllers/Version3/class-wc-rest-crud-controller.php:597
+#: includes/rest-api/Controllers/Version3/class-wc-rest-crud-controller.php:630
 #: includes/rest-api/Controllers/Version3/class-wc-rest-posts-controller.php:654
 #: includes/rest-api/Controllers/Version3/class-wc-rest-product-reviews-controller.php:955
 #: packages/woocommerce-admin/src/API/Reports/Stock/Controller.php:476
@@ -19259,7 +19219,7 @@ msgstr "Começar o resultado depois de um número de itens especifico."
 #: includes/rest-api/Controllers/Version1/class-wc-rest-customers-v1-controller.php:890
 #: includes/rest-api/Controllers/Version1/class-wc-rest-taxes-v1-controller.php:733
 #: includes/rest-api/Controllers/Version1/class-wc-rest-webhooks-v1-controller.php:735
-#: includes/rest-api/Controllers/Version3/class-wc-rest-crud-controller.php:603
+#: includes/rest-api/Controllers/Version3/class-wc-rest-crud-controller.php:636
 #: includes/rest-api/Controllers/Version3/class-wc-rest-posts-controller.php:660
 #: includes/rest-api/Controllers/Version3/class-wc-rest-product-reviews-controller.php:959
 #: includes/rest-api/Controllers/Version3/class-wc-rest-terms-controller.php:733
@@ -19288,7 +19248,7 @@ msgstr "Ordenar atributo de forma ascendente ou descendente."
 #: includes/rest-api/Controllers/Version1/class-wc-rest-customers-v1-controller.php:898
 #: includes/rest-api/Controllers/Version1/class-wc-rest-taxes-v1-controller.php:741
 #: includes/rest-api/Controllers/Version1/class-wc-rest-webhooks-v1-controller.php:742
-#: includes/rest-api/Controllers/Version3/class-wc-rest-crud-controller.php:610
+#: includes/rest-api/Controllers/Version3/class-wc-rest-crud-controller.php:643
 #: includes/rest-api/Controllers/Version3/class-wc-rest-posts-controller.php:667
 #: includes/rest-api/Controllers/Version3/class-wc-rest-product-reviews-controller.php:968
 #: packages/woocommerce-admin/src/API/Notes.php:526
@@ -19371,7 +19331,7 @@ msgstr "Aprenda mais sobre cupons"
 #: includes/rest-api/Controllers/Version1/class-wc-rest-webhooks-v1-controller.php:470
 #: includes/rest-api/Controllers/Version2/class-wc-rest-product-variations-v2-controller.php:555
 #: includes/rest-api/Controllers/Version2/class-wc-rest-products-v2-controller.php:1630
-#: includes/rest-api/Controllers/Version3/class-wc-rest-crud-controller.php:474
+#: includes/rest-api/Controllers/Version3/class-wc-rest-crud-controller.php:495
 #: includes/rest-api/Controllers/Version3/class-wc-rest-posts-controller.php:467
 msgid "The %s cannot be deleted."
 msgstr "O %s não pode ser excluído."
@@ -19432,7 +19392,7 @@ msgstr "ID de post inválido."
 #: includes/rest-api/Controllers/Version2/class-wc-rest-products-v2-controller.php:1530
 #: includes/rest-api/Controllers/Version3/class-wc-rest-crud-controller.php:140
 #: includes/rest-api/Controllers/Version3/class-wc-rest-crud-controller.php:235
-#: includes/rest-api/Controllers/Version3/class-wc-rest-crud-controller.php:426
+#: includes/rest-api/Controllers/Version3/class-wc-rest-crud-controller.php:447
 #: includes/rest-api/Controllers/Version3/class-wc-rest-posts-controller.php:153
 msgid "Invalid ID."
 msgstr "ID inválido."
@@ -19446,14 +19406,14 @@ msgstr "Salvar na conta"
 msgid "Can not set resource parent, taxonomy is not hierarchical."
 msgstr "Não foi possível definir o ascendente do recurso, a taxonomia não é hierárquica."
 
-#: includes/rest-api/Controllers/Version3/class-wc-rest-crud-controller.php:635
+#: includes/rest-api/Controllers/Version3/class-wc-rest-crud-controller.php:668
 #: includes/rest-api/Controllers/Version3/class-wc-rest-posts-controller.php:694
 #: packages/woocommerce-admin/src/API/Reports/Stock/Controller.php:513
 #: packages/woocommerce-blocks/src/StoreApi/Routes/Products.php:226
 msgid "Limit result set to all items except those of a particular parent ID."
 msgstr "Limita o resultado para todos os itens, exceto para os com um ID de ascendente em particular."
 
-#: includes/rest-api/Controllers/Version3/class-wc-rest-crud-controller.php:626
+#: includes/rest-api/Controllers/Version3/class-wc-rest-crud-controller.php:659
 #: includes/rest-api/Controllers/Version3/class-wc-rest-posts-controller.php:685
 #: packages/woocommerce-admin/src/API/Reports/Stock/Controller.php:504
 #: packages/woocommerce-blocks/src/StoreApi/Routes/Products.php:216
@@ -19461,7 +19421,7 @@ msgid "Limit result set to those of particular parent IDs."
 msgstr "Limita o resultado para aqueles com IDs de ascendente em particular."
 
 #: includes/rest-api/Controllers/Version1/class-wc-rest-webhooks-v1-controller.php:699
-#: includes/rest-api/Controllers/Version3/class-wc-rest-crud-controller.php:561
+#: includes/rest-api/Controllers/Version3/class-wc-rest-crud-controller.php:582
 #: includes/rest-api/Controllers/Version3/class-wc-rest-posts-controller.php:624
 #: includes/rest-api/Controllers/Version3/class-wc-rest-product-reviews-controller.php:929
 #: packages/woocommerce-admin/src/API/Leaderboards.php:464
@@ -19484,7 +19444,7 @@ msgid "Limit response to resources published after a given ISO8601 compliant dat
 msgstr "Limita resposta para recursos publicados depois de uma data especifica no formato ISO8601."
 
 #: includes/rest-api/Controllers/Version1/class-wc-rest-webhooks-v1-controller.php:705
-#: includes/rest-api/Controllers/Version3/class-wc-rest-crud-controller.php:567
+#: includes/rest-api/Controllers/Version3/class-wc-rest-crud-controller.php:588
 #: includes/rest-api/Controllers/Version3/class-wc-rest-posts-controller.php:630
 #: packages/woocommerce-admin/src/API/Leaderboards.php:470
 #: packages/woocommerce-admin/src/API/Reports/Categories/Controller.php:242
@@ -19565,7 +19525,7 @@ msgstr "Sem permissão para ver este recurso."
 #: packages/woocommerce-admin/src/API/Notes.php:238
 #: packages/woocommerce-admin/src/API/OnboardingFreeExtensions.php:61
 #: packages/woocommerce-admin/src/API/OnboardingPayments.php:61
-#: packages/woocommerce-admin/src/API/OnboardingProfile.php:73
+#: packages/woocommerce-admin/src/API/OnboardingProfile.php:88
 #: packages/woocommerce-admin/src/API/Reports/Controller.php:60
 msgid "Sorry, you cannot list resources."
 msgstr "Sem permissão para listar recursos."
@@ -19602,7 +19562,7 @@ msgstr "América do Sul"
 msgid "United States (US) Minor Outlying Islands"
 msgstr "Ilhas Menores Distantes, Estados Unidos da América (EUA)"
 
-#: includes/admin/class-wc-admin-assets.php:425
+#: includes/admin/class-wc-admin-assets.php:429
 #: includes/admin/views/html-admin-page-status-report.php:46
 msgid "Copying to clipboard failed. Please press Ctrl/Cmd+C to copy."
 msgstr "Não foi possível copiar. Pressione Ctrl/Cmd+C para copiar."
@@ -20029,7 +19989,7 @@ msgstr "%s média mensal de vendas brutas"
 msgid "View more Storefront child themes"
 msgstr "Veja mais temas-filhos do Storefront"
 
-#: packages/woocommerce-admin/src/Features/Onboarding.php:844
+#: packages/woocommerce-admin/src/Features/Onboarding.php:799
 msgid "If you need to access the setup wizard again, please click on the button below."
 msgstr "Caso você precise acessar o assistente de configuração novamente, clique no botão a seguir."
 
@@ -20037,8 +19997,8 @@ msgstr "Caso você precise acessar o assistente de configuração novamente, cli
 msgid "Need a fresh look? Try Storefront child themes"
 msgstr "Precisa de um visual novo? Experimente os temas filhos do Storefront"
 
-#: packages/woocommerce-admin/src/Features/Onboarding.php:833
-#: packages/woocommerce-admin/src/Features/Onboarding.php:845
+#: packages/woocommerce-admin/src/Features/Onboarding.php:788
+#: packages/woocommerce-admin/src/Features/Onboarding.php:800
 msgid "Setup wizard"
 msgstr "Assistente de configuração"
 
@@ -20447,7 +20407,7 @@ msgid "&nbsp;&ndash; Page %s"
 msgstr "&nbsp;&ndash; Página %s"
 
 #: includes/wc-template-functions.php:1450
-#: packages/woocommerce-blocks/assets/js/base/components/product-list/product-sort-select/index.js:23
+#: packages/woocommerce-blocks/assets/js/base/components/product-list/product-sort-select/index.js:22
 #: packages/woocommerce-blocks/build/all-products-frontend.js:9
 #: packages/woocommerce-blocks/build/all-products.js:27
 msgid "Default sorting"
@@ -20567,8 +20527,8 @@ msgstr "OU"
 #. translators: %s attribute name.
 #: includes/widgets/class-wc-widget-layered-nav.php:250
 #: packages/woocommerce-blocks/assets/js/base/components/dropdown-selector/index.js:159
-#: packages/woocommerce-blocks/build/attribute-filter-frontend.js:19
-#: packages/woocommerce-blocks/build/attribute-filter.js:21
+#: packages/woocommerce-blocks/build/attribute-filter-frontend.js:21
+#: packages/woocommerce-blocks/build/attribute-filter.js:23
 msgid "Any %s"
 msgstr "Qualquer %s"
 
@@ -20720,7 +20680,6 @@ msgstr "Pagamento &amp; Entrega"
 #: templates/checkout/form-billing.php:53
 #: packages/woocommerce-blocks/assets/js/blocks/cart-checkout/checkout/form/contact-fields-step.js:34
 #: packages/woocommerce-blocks/build/checkout-frontend.js:29
-#: packages/woocommerce-blocks/build/checkout-i2.js:35
 #: packages/woocommerce-blocks/build/checkout.js:31
 msgid "Create an account?"
 msgstr "Criar uma conta?"
@@ -20793,7 +20752,6 @@ msgstr "Clique aqui para redefinir sua senha"
 #: templates/order/order-details-customer.php:50
 #: packages/woocommerce-blocks/assets/js/blocks/cart-checkout/checkout/form/shipping-fields-step.js:22
 #: packages/woocommerce-blocks/build/checkout-frontend.js:29
-#: packages/woocommerce-blocks/build/checkout-i2.js:31
 #: packages/woocommerce-blocks/build/checkout.js:31
 msgid "Shipping address"
 msgstr "Endereço de entrega"
@@ -20826,9 +20784,9 @@ msgstr "Nenhum produto foi encontrado para a sua seleção."
 #: includes/class-wc-countries.php:1536 includes/class-wc-form-handler.php:271
 #: templates/myaccount/form-edit-account.php:43
 #: templates/myaccount/form-login.php:86
+#: packages/woocommerce-admin/dist/chunks/profile-wizard.js:1
 #: packages/woocommerce-blocks/assets/js/blocks/cart-checkout/checkout/form/contact-fields-step.js:61
 #: packages/woocommerce-blocks/build/checkout-frontend.js:29
-#: packages/woocommerce-blocks/build/checkout-i2.js:35
 #: packages/woocommerce-blocks/build/checkout.js:31
 msgid "Email address"
 msgstr "Endereço de e-mail"
@@ -21079,7 +21037,7 @@ msgid "Apply coupon"
 msgstr "Aplicar cupom"
 
 #: templates/cart/cart-totals.php:25
-#: packages/woocommerce-blocks/build/cart-frontend.js:39
+#: packages/woocommerce-blocks/build/cart-frontend.js:41
 #: packages/woocommerce-blocks/build/cart.js:41
 msgid "Cart totals"
 msgstr "Total no carrinho"
@@ -21106,6 +21064,9 @@ msgid "Featured products"
 msgstr "Produtos em destaque"
 
 #: includes/widgets/class-wc-widget-products.php:43
+#: packages/woocommerce-admin/dist/chunks/analytics-report-products.js:1
+#: packages/woocommerce-admin/dist/chunks/analytics-report-stock.js:1
+#: packages/woocommerce-admin/dist/chunks/dashboard-charts.js:1
 msgid "All products"
 msgstr "Todos os produtos"
 
@@ -21249,7 +21210,6 @@ msgstr "Informe um nome de usuário válido."
 #: templates/order/order-details-customer.php:31
 #: packages/woocommerce-blocks/assets/js/blocks/cart-checkout/checkout/form/billing-fields-step.js:16
 #: packages/woocommerce-blocks/build/checkout-frontend.js:29
-#: packages/woocommerce-blocks/build/checkout-i2.js:35
 #: packages/woocommerce-blocks/build/checkout.js:31
 msgid "Billing address"
 msgstr "Endereço de faturamento"
@@ -21757,8 +21717,8 @@ msgstr "Excluindo países selecionados"
 
 #: includes/shipping/legacy-local-delivery/class-wc-shipping-legacy-local-delivery.php:117
 #: includes/shipping/legacy-local-pickup/class-wc-shipping-legacy-local-pickup.php:96
-#: packages/woocommerce-admin/src/Features/Onboarding.php:850
-#: packages/woocommerce-admin/src/Features/Onboarding.php:857
+#: packages/woocommerce-admin/src/Features/Onboarding.php:805
+#: packages/woocommerce-admin/src/Features/Onboarding.php:812
 #: packages/woocommerce-admin/dist/chunks/3.js:1
 msgid "Enable"
 msgstr "Habilitar"
@@ -22726,10 +22686,6 @@ msgstr "Remover imagem do produto"
 msgid "Use as product image"
 msgstr "Usar como imagem do produto"
 
-#: includes/class-wc-post-types.php:347
-msgid "This is where you can add new products to your store."
-msgstr "Aqui você pode adicionar novos produtos para sua loja."
-
 #: includes/class-wc-post-types.php:408
 msgid "This is where store orders are stored."
 msgstr "Este é o local onde os pedidos são armazenados."
@@ -22741,8 +22697,12 @@ msgid "Refunds"
 msgstr "Reembolsos"
 
 #: includes/class-wc-post-types.php:456
+#: packages/woocommerce-admin/dist/chunks/analytics-report-coupons.js:1
+#: packages/woocommerce-admin/dist/chunks/analytics-report-orders.js:1
 msgid "Coupon"
-msgstr "Cupom"
+msgid_plural "Coupons"
+msgstr[0] "Cupom"
+msgstr[1] ""
 
 #: includes/class-wc-post-types.php:472
 msgid "This is where you can add new coupons that customers can use in your store."
@@ -22998,7 +22958,7 @@ msgstr "Nenhum produto encontrado na lixeira"
 
 #: includes/class-wc-post-types.php:332
 #: packages/woocommerce-blocks/assets/js/base/components/product-list/no-matching-products.js:19
-#: packages/woocommerce-blocks/assets/js/base/components/product-list/product-list.js:92
+#: packages/woocommerce-blocks/assets/js/base/components/product-list/product-list.js:84
 #: packages/woocommerce-blocks/build/all-products-frontend.js:9
 #: packages/woocommerce-blocks/build/all-products.js:27
 msgid "No products found"
@@ -23128,7 +23088,6 @@ msgstr "%s é um campo obrigatório."
 #: includes/class-wc-checkout.php:240
 #: packages/woocommerce-blocks/assets/js/blocks/cart-checkout/checkout/form/order-notes-step.js:35
 #: packages/woocommerce-blocks/build/checkout-frontend.js:29
-#: packages/woocommerce-blocks/build/checkout-i2.js:35
 #: packages/woocommerce-blocks/build/checkout.js:31
 msgid "Notes about your order, e.g. special notes for delivery."
 msgstr "Notas sobre seu pedido, por exemplo, informações especiais sobre entrega."
@@ -23223,7 +23182,7 @@ msgid "Please fill out all password fields."
 msgstr "Preencha todos os campos de senha."
 
 #: includes/class-wc-form-handler.php:285 includes/wc-user-functions.php:43
-#: packages/woocommerce-blocks/src/StoreApi/Routes/Checkout.php:629
+#: packages/woocommerce-blocks/src/StoreApi/Routes/Checkout.php:620
 msgid "Please provide a valid email address."
 msgstr "Informe um endereço de e-mail válido."
 
@@ -23295,11 +23254,13 @@ msgstr "Desculpe, este download expirou"
 
 #. translators: %s number of products in cart.
 #. translators: %d is the count of products.
-#: packages/woocommerce-blocks/src/BlockTypes/ProductCategories.php:359
+#. translators: %d is the number of products in the cart.
+#: packages/woocommerce-blocks/src/BlockTypes/ProductCategories.php:357
 #: packages/woocommerce-admin/dist/chunks/homescreen.js:1
 #: packages/woocommerce-blocks/assets/js/editor-components/product-attribute-term-control/index.js:98
 #: packages/woocommerce-blocks/assets/js/editor-components/product-category-control/index.js:73
 #: packages/woocommerce-blocks/build/featured-category.js:11
+#: packages/woocommerce-blocks/build/mini-cart.js:3
 #: packages/woocommerce-blocks/build/product-best-sellers.js:11
 #: packages/woocommerce-blocks/build/product-category.js:11
 #: packages/woocommerce-blocks/build/product-new.js:11
@@ -23373,6 +23334,10 @@ msgstr "O maior tamanho de arquivo que pode conter em um post."
 msgid "The amount of time (in seconds) that your site will spend on a single operation before timing out (to avoid server lockups)"
 msgstr "Quantidade de tempo (em segundos) que o seu site vai gastar em uma única operação antes do tempo limite (para evitar travamentos de servidor)"
 
+#: includes/admin/views/html-admin-page-status-report.php:336
+msgid "Suhosin is an advanced protection system for PHP installations. It was designed to protect your servers on the one hand against a number of well known problems in PHP applications and on the other hand against potential unknown vulnerabilities within these applications or the PHP core itself. If enabled on your server, Suhosin may need to be configured to increase its data submission limits."
+msgstr "Suhosin é um sistema de proteção avançada para instalações PHP. Ele foi projetado para proteger seus servidores contra uma série de problemas bem conhecidos em aplicações PHP e contra potenciais vulnerabilidades desconhecidas dentro dessas aplicações ou o próprio núcleo do PHP. Se ativado em seu servidor, Suhosin pode precisar ser configurado para aumentar seus limites de envio de dados."
+
 #: includes/admin/views/html-admin-page-status-report.php:347
 msgid "The version of MySQL installed on your hosting server."
 msgstr "A versão do MySQL instalado no seu servidor de hospedagem."
@@ -23389,10 +23354,6 @@ msgstr "O fuso horário padrão do seu servidor."
 #: includes/admin/views/html-admin-page-status-report.php:372
 msgid "Default timezone is %s - it should be UTC"
 msgstr "O fuso horário padrão é %s - deve ser UTC"
-
-#: includes/admin/views/html-admin-page-status-report.php:336
-msgid "Suhosin is an advanced protection system for PHP installations. It was designed to protect your servers on the one hand against a number of well known problems in PHP applications and on the other hand against potential unknown vulnerabilities within these applications or the PHP core itself. If enabled on your server, Suhosin may need to be configured to increase its data submission limits."
-msgstr "Suhosin é um sistema de proteção avançada para instalações PHP. Ele foi projetado para proteger seus servidores contra uma série de problemas bem conhecidos em aplicações PHP e contra potenciais vulnerabilidades desconhecidas dentro dessas aplicações ou o próprio núcleo do PHP. Se ativado em seu servidor, Suhosin pode precisar ser configurado para aumentar seus limites de envio de dados."
 
 #: includes/admin/views/html-admin-page-status-report.php:381
 msgid "Payment gateways can use cURL to communicate with remote servers to authorize payments, other plugins may also use it when communicating with remote services."
@@ -25096,7 +25057,7 @@ msgstr "Gerenciar estoque"
 #: includes/customizer/class-wc-shop-customizer.php:485
 #: includes/widgets/class-wc-widget-rating-filter.php:27
 #: packages/woocommerce-blocks/src/StoreApi/Schemas/ProductCollectionDataSchema.php:87
-#: packages/woocommerce-blocks/assets/js/base/components/product-list/product-sort-select/index.js:34
+#: packages/woocommerce-blocks/assets/js/base/components/product-list/product-sort-select/index.js:33
 #: packages/woocommerce-blocks/assets/js/blocks/products/edit.js:46
 #: packages/woocommerce-blocks/build/all-products-frontend.js:9
 #: packages/woocommerce-blocks/build/all-products.js:21
@@ -25447,6 +25408,7 @@ msgstr "Posição de ordenação personalizada."
 #: packages/woocommerce-admin/src/Notes/WooCommercePayments.php:117
 #: packages/woocommerce-admin/dist/chunks/3.js:1
 #: packages/woocommerce-admin/dist/chunks/profile-wizard.js:1
+#: packages/woocommerce-admin/dist/chunks/shipping-recommendations.js:1
 #: packages/woocommerce-admin/dist/onboarding/index.js:1
 #: packages/woocommerce-blocks/assets/js/blocks/attribute-filter/edit.js:256
 #: packages/woocommerce-blocks/assets/js/blocks/price-filter/edit.js:148
@@ -25540,10 +25502,12 @@ msgstr "Validade do download"
 #: includes/admin/views/html-report-by-date.php:58
 #: packages/woocommerce-admin/dist/chunks/task-list.js:1
 #: packages/woocommerce-blocks/assets/js/base/components/filter-submit-button/index.js:18
-#: packages/woocommerce-blocks/build/attribute-filter-frontend.js:1
-#: packages/woocommerce-blocks/build/attribute-filter.js:7
+#: packages/woocommerce-blocks/build/attribute-filter-frontend.js:3
+#: packages/woocommerce-blocks/build/attribute-filter.js:5
 #: packages/woocommerce-blocks/build/price-filter-frontend.js:1
 #: packages/woocommerce-blocks/build/price-filter.js:3
+#: packages/woocommerce-blocks/build/stock-filter-frontend.js:3
+#: packages/woocommerce-blocks/build/stock-filter.js:5
 msgid "Go"
 msgstr "Ir"
 
@@ -25619,7 +25583,7 @@ msgstr "ID de variação:"
 msgid "Add&nbsp;meta"
 msgstr "Adicionar meta"
 
-#: includes/admin/meta-boxes/views/html-order-item.php:101
+#: includes/admin/meta-boxes/views/html-order-item.php:126
 msgid "After pre-tax discounts."
 msgstr "Depois dos descontos pré taxas."
 
@@ -25812,26 +25776,10 @@ msgid "Choose coupons&hellip;"
 msgstr "Escolher cupons&hellip;"
 
 #: includes/admin/reports/class-wc-report-coupon-usage.php:208
+#: packages/woocommerce-admin/dist/chunks/analytics-report-coupons.js:1
+#: packages/woocommerce-admin/dist/chunks/dashboard-charts.js:1
 msgid "All coupons"
 msgstr "Todos os cupons"
-
-#: includes/admin/reports/class-wc-report-coupon-usage.php:216
-#: includes/admin/reports/class-wc-report-sales-by-category.php:231
-#: includes/admin/reports/class-wc-report-sales-by-product.php:222
-#: includes/widgets/class-wc-widget-products.php:41
-#: packages/woocommerce-admin/dist/chunks/analytics-report-categories.js:1
-#: packages/woocommerce-admin/dist/chunks/analytics-report-coupons.js:1
-#: packages/woocommerce-admin/dist/chunks/analytics-report-customers.js:1
-#: packages/woocommerce-admin/dist/chunks/analytics-report-downloads.js:1
-#: packages/woocommerce-admin/dist/chunks/analytics-report-orders.js:1
-#: packages/woocommerce-admin/dist/chunks/analytics-report-products.js:1
-#: packages/woocommerce-admin/dist/chunks/analytics-report-revenue.js:1
-#: packages/woocommerce-admin/dist/chunks/analytics-report-stock.js:1
-#: packages/woocommerce-admin/dist/chunks/analytics-report-taxes.js:1
-#: packages/woocommerce-admin/dist/chunks/analytics-report-variations.js:1
-#: packages/woocommerce-admin/dist/chunks/dashboard-charts.js:1
-msgid "Show"
-msgstr "Mostrar"
 
 #: includes/admin/reports/class-wc-report-coupon-usage.php:225
 msgid "No used coupons found"
@@ -25860,6 +25808,24 @@ msgstr "Número de cupons usados"
 #: includes/admin/reports/class-wc-report-coupon-usage.php:484
 msgid "Discount amount"
 msgstr "Quantidade de desconto"
+
+#: includes/admin/reports/class-wc-report-coupon-usage.php:216
+#: includes/admin/reports/class-wc-report-sales-by-category.php:231
+#: includes/admin/reports/class-wc-report-sales-by-product.php:222
+#: includes/widgets/class-wc-widget-products.php:41
+#: packages/woocommerce-admin/dist/chunks/analytics-report-categories.js:1
+#: packages/woocommerce-admin/dist/chunks/analytics-report-coupons.js:1
+#: packages/woocommerce-admin/dist/chunks/analytics-report-customers.js:1
+#: packages/woocommerce-admin/dist/chunks/analytics-report-downloads.js:1
+#: packages/woocommerce-admin/dist/chunks/analytics-report-orders.js:1
+#: packages/woocommerce-admin/dist/chunks/analytics-report-products.js:1
+#: packages/woocommerce-admin/dist/chunks/analytics-report-revenue.js:1
+#: packages/woocommerce-admin/dist/chunks/analytics-report-stock.js:1
+#: packages/woocommerce-admin/dist/chunks/analytics-report-taxes.js:1
+#: packages/woocommerce-admin/dist/chunks/analytics-report-variations.js:1
+#: packages/woocommerce-admin/dist/chunks/dashboard-charts.js:1
+msgid "Show"
+msgstr "Mostrar"
 
 #: includes/admin/settings/class-wc-settings-emails.php:328
 #: packages/woocommerce-admin/src/API/Reports/Orders/Controller.php:537
@@ -25927,7 +25893,6 @@ msgid "%s signups in this period"
 msgstr "%s cadastros neste período"
 
 #: includes/admin/reports/class-wc-report-customers.php:150
-#: packages/woocommerce-admin/dist/chunks/analytics-report-categories.js:1
 #: packages/woocommerce-admin/dist/chunks/analytics-report-products.js:1
 #: packages/woocommerce-admin/dist/chunks/analytics-report-variations.js:1
 msgid "orders"
@@ -26044,7 +26009,7 @@ msgstr "Exibindo relatórios de:"
 
 #: includes/admin/reports/class-wc-report-sales-by-product.php:208
 #: packages/woocommerce-admin/dist/components/index.js:2
-#: packages/woocommerce-blocks/build/cart-frontend.js:41
+#: packages/woocommerce-blocks/build/cart-frontend.js:39
 #: packages/woocommerce-blocks/build/checkout-frontend.js:37
 #: packages/woocommerce-blocks/build/wc-blocks-vendors.js:9
 #: packages/woocommerce-blocks/build/wc-blocks-vendors.js:19
@@ -26301,11 +26266,17 @@ msgid "This is the sum of the 'Order total' field within your orders."
 msgstr "Esta é a soma do campo \"Total dos pedidos\" de seus pedidos."
 
 #: includes/admin/reports/class-wc-report-taxes-by-date.php:213
+#: packages/woocommerce-admin/src/API/Reports/Revenue/Stats/Controller.php:451
+#: packages/woocommerce-admin/dist/chunks/analytics-report-revenue.js:1
+#: packages/woocommerce-admin/dist/chunks/dashboard-charts.js:1
 msgid "Total sales"
 msgstr "Total de vendas"
 
 #: includes/admin/reports/class-wc-report-taxes-by-code.php:195
 #: includes/admin/reports/class-wc-report-taxes-by-date.php:215
+#: packages/woocommerce-admin/src/API/Reports/Taxes/Controller.php:304
+#: packages/woocommerce-admin/dist/chunks/analytics-report-taxes.js:1
+#: packages/woocommerce-admin/dist/chunks/dashboard-charts.js:1
 msgid "Total tax"
 msgstr "Total de taxas"
 
@@ -26396,6 +26367,7 @@ msgstr "Este mês"
 #: includes/admin/reports/class-wc-report-sales-by-product.php:143
 #: includes/admin/reports/class-wc-report-taxes-by-code.php:54
 #: includes/admin/reports/class-wc-report-taxes-by-date.php:51
+#: packages/woocommerce-admin/dist/date/index.js:1
 msgid "Last month"
 msgstr "Mês passado"
 
@@ -26418,6 +26390,8 @@ msgstr "Dimensões (C&times;L&times;A) (%s)"
 
 #: includes/admin/meta-boxes/views/html-product-download.php:9
 #: includes/admin/meta-boxes/views/html-product-variation-download.php:8
+#: packages/woocommerce-admin/src/API/Reports/Downloads/Controller.php:393
+#: packages/woocommerce-admin/dist/chunks/analytics-report-downloads.js:1
 msgid "File name"
 msgstr "Nome do arquivo"
 
@@ -26602,7 +26576,7 @@ msgstr "Ativar pagamento na entrega"
 msgid "Allow"
 msgstr "Permitir"
 
-#: includes/admin/class-wc-admin-assets.php:477
+#: includes/admin/class-wc-admin-assets.php:481
 #: packages/woocommerce-admin/src/Notes/WooCommerceSubscriptions.php:53
 msgid "Learn More"
 msgstr "Aprenda mais"
@@ -26679,7 +26653,7 @@ msgstr "Tipo de exibição"
 #: packages/woocommerce-blocks/assets/js/blocks/handpicked-products/block.js:100
 #: packages/woocommerce-blocks/assets/js/editor-components/product-control/index.js:24
 #: packages/woocommerce-blocks/assets/js/editor-components/products-control/index.js:36
-#: packages/woocommerce-blocks/build/all-products.js:5
+#: packages/woocommerce-blocks/build/all-products.js:7
 #: packages/woocommerce-blocks/build/featured-product.js:1
 #: packages/woocommerce-blocks/build/handpicked-products.js:1
 #: packages/woocommerce-blocks/build/handpicked-products.js:3
@@ -26901,13 +26875,12 @@ msgstr "Limite de uso por cliente"
 msgid "Coupon code already exists - customers will use the latest coupon with this code."
 msgstr "Já existe um cupom com esse código - os clientes usarão o último cupom criado com este código."
 
-#: includes/admin/meta-boxes/class-wc-meta-box-order-actions.php:55
+#: includes/admin/meta-boxes/class-wc-meta-box-order-actions.php:48
 #: includes/widgets/class-wc-widget-layered-nav.php:288
 #: packages/woocommerce-blocks/assets/js/base/components/cart-checkout/totals/coupon/index.js:103
-#: packages/woocommerce-blocks/build/cart-frontend.js:29
+#: packages/woocommerce-blocks/build/cart-frontend.js:37
 #: packages/woocommerce-blocks/build/cart.js:29
 #: packages/woocommerce-blocks/build/checkout-frontend.js:29
-#: packages/woocommerce-blocks/build/checkout-i2.js:29
 #: packages/woocommerce-blocks/build/checkout.js:29
 msgid "Apply"
 msgstr "Aplicar"
@@ -26923,8 +26896,6 @@ msgstr "Aplicar"
 #: packages/woocommerce-blocks/assets/js/blocks/cart-checkout/checkout/edit.js:144
 #: packages/woocommerce-blocks/assets/js/blocks/cart-checkout/checkout/form/phone-number/index.js:25
 #: packages/woocommerce-blocks/build/checkout-frontend.js:29
-#: packages/woocommerce-blocks/build/checkout-i2.js:31
-#: packages/woocommerce-blocks/build/checkout-i2.js:37
 #: packages/woocommerce-blocks/build/checkout.js:31
 msgid "Phone"
 msgstr "Telefone"
@@ -26953,7 +26924,7 @@ msgstr "Endereço"
 #: includes/admin/meta-boxes/class-wc-meta-box-order-data.php:611
 #: includes/admin/meta-boxes/views/html-order-shipping.php:44
 #: includes/admin/meta-boxes/views/html-order-shipping.php:46
-#: packages/woocommerce-admin/src/Features/Onboarding.php:415
+#: packages/woocommerce-admin/src/Features/Onboarding.php:417
 #: packages/woocommerce-admin/dist/chunks/profile-wizard.js:1
 msgid "Other"
 msgstr "Outro"
@@ -27053,7 +27024,6 @@ msgstr "Inventário"
 #: packages/woocommerce-blocks/build/cart-frontend.js:43
 #: packages/woocommerce-blocks/build/cart.js:31
 #: packages/woocommerce-blocks/build/checkout-frontend.js:39
-#: packages/woocommerce-blocks/build/checkout-i2.js:31
 #: packages/woocommerce-blocks/build/checkout.js:31
 msgid "Shipping"
 msgstr "Entrega"
@@ -27260,7 +27230,7 @@ msgstr "Funções redefinidas com sucesso"
 msgid "This tool will reset the admin, customer and shop_manager roles to default. Use this if your users cannot access all of the WooCommerce admin pages."
 msgstr "Esta ferramenta irá redefinir as funções do administrador, dos clientes e do gerente da loja para o padrão. Utilize caso seus usuários não consigam acessar todas as páginas administrativas do WooCommerce."
 
-#: includes/admin/meta-boxes/class-wc-meta-box-order-actions.php:40
+#: includes/admin/meta-boxes/class-wc-meta-box-order-actions.php:163
 msgid "Regenerate download permissions"
 msgstr "Gerar novamente permissões de download"
 
@@ -27355,7 +27325,7 @@ msgid_plural "%d webhooks permanently deleted."
 msgstr[0] "%d webhook excluído permanentemente."
 msgstr[1] "%d webhooks excluídos permanentemente."
 
-#: includes/admin/meta-boxes/class-wc-meta-box-order-actions.php:66
+#: includes/admin/meta-boxes/class-wc-meta-box-order-actions.php:59
 msgid "Move to Trash"
 msgstr "Mover para lixeira"
 
@@ -27808,7 +27778,7 @@ msgstr "Estoque"
 #: templates/cart/cart.php:97 templates/emails/email-order-details.php:44
 #: packages/woocommerce-blocks/assets/js/atomic/blocks/product-elements/price/edit.js:73
 #: packages/woocommerce-blocks/assets/js/base/components/price-slider/index.js:355
-#: packages/woocommerce-blocks/assets/js/blocks/active-filters/block.js:42
+#: packages/woocommerce-blocks/assets/js/blocks/active-filters/block.js:73
 #: packages/woocommerce-blocks/build/active-filters-frontend.js:13
 #: packages/woocommerce-blocks/build/active-filters.js:15
 #: packages/woocommerce-blocks/build/all-products.js:21
@@ -27883,8 +27853,13 @@ msgstr "Data de validade"
 #: includes/admin/reports/class-wc-report-downloads.php:221
 #: includes/gateways/paypal/includes/class-wc-gateway-paypal-request.php:310
 #: includes/wc-account-functions.php:196 templates/myaccount/my-orders.php:14
+#: packages/woocommerce-admin/dist/chunks/analytics-report-categories.js:1
+#: packages/woocommerce-admin/dist/chunks/analytics-report-coupons.js:1
+#: packages/woocommerce-admin/dist/chunks/analytics-report-orders.js:1
 msgid "Order"
-msgstr "Pedido"
+msgid_plural "Orders"
+msgstr[0] "Pedido"
+msgstr[1] ""
 
 #: includes/admin/list-tables/class-wc-admin-list-table-orders.php:125
 msgid "Ship to"
@@ -27894,15 +27869,8 @@ msgstr "Enviar para"
 #: includes/admin/reports/class-wc-report-customer-list.php:222
 #: includes/admin/reports/class-wc-report-stock.php:177
 #: includes/wc-account-functions.php:200
-#: packages/woocommerce-blocks/build/checkout-i2.js:35
 msgid "Actions"
 msgstr "Ações"
-
-#: includes/admin/list-tables/class-wc-admin-list-table-products.php:369
-#: includes/admin/meta-boxes/class-wc-meta-box-product-data.php:62
-#: includes/admin/meta-boxes/views/html-variation-admin.php:97
-msgid "Virtual"
-msgstr "Virtual"
 
 #: includes/admin/class-wc-admin-dashboard.php:423
 #: includes/admin/class-wc-admin-menus.php:145
@@ -27918,6 +27886,7 @@ msgstr "Virtual"
 #: packages/woocommerce-admin/src/API/Reports/Products/Controller.php:398
 #: packages/woocommerce-admin/src/API/Reports/Stock/Controller.php:540
 #: packages/woocommerce-admin/src/API/Reports/Variations/Controller.php:420
+#: packages/woocommerce-blocks/src/StoreApi/Schemas/ProductCollectionDataSchema.php:110
 #: templates/myaccount/my-orders.php:16
 #: packages/woocommerce-admin/dist/chunks/analytics-report-categories.js:1
 #: packages/woocommerce-admin/dist/chunks/analytics-report-orders.js:1
@@ -27930,8 +27899,8 @@ msgstr "Status"
 #: includes/admin/class-wc-admin-dashboard.php:424
 #: includes/admin/list-tables/class-wc-admin-list-table-orders.php:126
 #: includes/admin/list-tables/class-wc-admin-list-table-orders.php:469
-#: includes/admin/meta-boxes/views/html-order-item.php:100
-#: includes/admin/meta-boxes/views/html-order-item.php:148
+#: includes/admin/meta-boxes/views/html-order-item.php:125
+#: includes/admin/meta-boxes/views/html-order-item.php:173
 #: includes/admin/meta-boxes/views/html-order-items.php:33
 #: includes/admin/reports/class-wc-report-taxes-by-code.php:218
 #: includes/wc-account-functions.php:199 templates/cart/cart-totals.php:98
@@ -27939,21 +27908,26 @@ msgstr "Status"
 #: templates/myaccount/my-orders.php:17 templates/order/order-details.php:52
 #: packages/woocommerce-blocks/assets/js/base/components/cart-checkout/totals/footer-item/index.js:33
 #: packages/woocommerce-blocks/assets/js/payment-method-extensions/payment-methods/stripe/stripe-utils/utils.js:60
-#: packages/woocommerce-blocks/build/cart-frontend.js:25
-#: packages/woocommerce-blocks/build/cart-frontend.js:29
-#: packages/woocommerce-blocks/build/cart-frontend.js:39
+#: packages/woocommerce-blocks/build/cart-frontend.js:15
+#: packages/woocommerce-blocks/build/cart-frontend.js:33
+#: packages/woocommerce-blocks/build/cart-frontend.js:37
 #: packages/woocommerce-blocks/build/cart.js:25
 #: packages/woocommerce-blocks/build/cart.js:29
 #: packages/woocommerce-blocks/build/cart.js:41
 #: packages/woocommerce-blocks/build/checkout-frontend.js:25
 #: packages/woocommerce-blocks/build/checkout-frontend.js:29
-#: packages/woocommerce-blocks/build/checkout-i2.js:25
-#: packages/woocommerce-blocks/build/checkout-i2.js:29
 #: packages/woocommerce-blocks/build/checkout.js:25
 #: packages/woocommerce-blocks/build/checkout.js:29
+#: packages/woocommerce-blocks/build/mini-cart-component-frontend.js:13
 #: packages/woocommerce-blocks/build/wc-payment-method-stripe.js:1
 msgid "Total"
 msgstr "Total"
+
+#: includes/admin/list-tables/class-wc-admin-list-table-products.php:369
+#: includes/admin/meta-boxes/class-wc-meta-box-product-data.php:62
+#: includes/admin/meta-boxes/views/html-variation-admin.php:97
+msgid "Virtual"
+msgstr "Virtual"
 
 #: includes/admin/list-tables/class-wc-admin-list-table-products.php:365
 #: includes/admin/meta-boxes/class-wc-meta-box-product-data.php:69
@@ -28025,7 +27999,7 @@ msgid "Processing"
 msgstr "Processando"
 
 #: includes/admin/list-tables/class-wc-admin-list-table-orders.php:303
-#: packages/action-scheduler/classes/abstracts/ActionScheduler_Store.php:303
+#: packages/action-scheduler/classes/abstracts/ActionScheduler_Store.php:377
 msgid "Complete"
 msgstr "Concluído"
 
@@ -28063,13 +28037,15 @@ msgstr "Exibir todos os tipos"
 msgid "Product name"
 msgstr "Nome do produto"
 
-#: includes/admin/class-wc-admin-post-types.php:623 templates/cart/cart.php:143
-#: templates/checkout/form-coupon.php:34
+#: includes/admin/class-wc-admin-post-types.php:623
+#: packages/woocommerce-admin/src/API/Leaderboards.php:125
+#: packages/woocommerce-admin/src/API/Reports/Coupons/Controller.php:299
+#: templates/cart/cart.php:143 templates/checkout/form-coupon.php:34
+#: packages/woocommerce-admin/dist/chunks/analytics-report-coupons.js:1
 #: packages/woocommerce-blocks/assets/js/base/components/cart-checkout/totals/coupon/index.js:52
-#: packages/woocommerce-blocks/build/cart-frontend.js:29
+#: packages/woocommerce-blocks/build/cart-frontend.js:37
 #: packages/woocommerce-blocks/build/cart.js:29
 #: packages/woocommerce-blocks/build/checkout-frontend.js:29
-#: packages/woocommerce-blocks/build/checkout-i2.js:29
 #: packages/woocommerce-blocks/build/checkout.js:29
 msgid "Coupon code"
 msgstr "Código do cupom"
@@ -28107,26 +28083,6 @@ msgstr "Visibilidade no catálogo:"
 msgid "OK"
 msgstr "OK"
 
-#: includes/admin/class-wc-admin-post-types.php:706
-#: includes/admin/meta-boxes/views/html-order-items.php:308
-#: includes/admin/meta-boxes/views/html-order-items.php:374
-#: includes/admin/meta-boxes/views/html-product-data-general.php:70
-#: includes/admin/meta-boxes/views/html-product-data-variations.php:123
-#: includes/admin/plugin-updates/views/html-notice-untested-extensions-modal.php:48
-#: includes/wc-account-functions.php:290
-#: packages/action-scheduler/classes/ActionScheduler_ListTable.php:133
-#: packages/woocommerce-admin/dist/chunks/homescreen.js:1
-#: packages/woocommerce-admin/dist/customer-effort-score/index.js:1
-#: packages/woocommerce-admin/dist/experimental/index.js:2
-#: packages/woocommerce-blocks/assets/js/blocks/product-category/block.js:236
-#: packages/woocommerce-blocks/assets/js/blocks/product-tag/block.js:218
-#: packages/woocommerce-blocks/assets/js/blocks/products/all-products/edit.js:241
-#: packages/woocommerce-blocks/build/all-products.js:29
-#: packages/woocommerce-blocks/build/product-category.js:1
-#: packages/woocommerce-blocks/build/product-tag.js:5
-msgid "Cancel"
-msgstr "Cancelar"
-
 #: includes/admin/class-wc-admin-profile.php:46
 #: includes/admin/class-wc-admin-profile.php:106
 #: includes/admin/meta-boxes/class-wc-meta-box-order-data.php:45
@@ -28158,11 +28114,40 @@ msgstr "Sobrenome"
 #: packages/woocommerce-blocks/src/StoreApi/Schemas/AbstractAddressSchema.php:36
 #: packages/woocommerce-blocks/src/StoreApi/Utilities/OrderController.php:328
 #: packages/woocommerce-blocks/assets/js/blocks/cart-checkout/checkout/edit.js:108
-#: packages/woocommerce-blocks/build/checkout-i2.js:37
 #: packages/woocommerce-blocks/build/checkout.js:31
 #: packages/woocommerce-blocks/build/wc-settings.js:1
 msgid "Company"
 msgstr "Empresa"
+
+#: includes/class-wc-countries.php:838 includes/class-wc-countries.php:1228
+#: includes/class-wc-countries.php:1238 includes/class-wc-countries.php:1418
+msgid "Postcode"
+msgstr "CEP"
+
+#: packages/woocommerce-blocks/src/StoreApi/Utilities/OrderController.php:348
+#: packages/woocommerce-blocks/build/wc-settings.js:1
+msgid "State/County"
+msgstr "Estado"
+
+#: includes/admin/class-wc-admin-post-types.php:706
+#: includes/admin/meta-boxes/views/html-order-items.php:308
+#: includes/admin/meta-boxes/views/html-order-items.php:374
+#: includes/admin/meta-boxes/views/html-product-data-general.php:70
+#: includes/admin/meta-boxes/views/html-product-data-variations.php:123
+#: includes/admin/plugin-updates/views/html-notice-untested-extensions-modal.php:48
+#: includes/wc-account-functions.php:290
+#: packages/action-scheduler/classes/ActionScheduler_ListTable.php:133
+#: packages/woocommerce-admin/dist/chunks/homescreen.js:1
+#: packages/woocommerce-admin/dist/customer-effort-score/index.js:1
+#: packages/woocommerce-admin/dist/experimental/index.js:2
+#: packages/woocommerce-blocks/assets/js/blocks/product-category/block.js:236
+#: packages/woocommerce-blocks/assets/js/blocks/product-tag/block.js:218
+#: packages/woocommerce-blocks/assets/js/blocks/products/all-products/edit.js:241
+#: packages/woocommerce-blocks/build/all-products.js:29
+#: packages/woocommerce-blocks/build/product-category.js:1
+#: packages/woocommerce-blocks/build/product-tag.js:5
+msgid "Cancel"
+msgstr "Cancelar"
 
 #: includes/admin/class-wc-admin-profile.php:66
 #: includes/admin/class-wc-admin-profile.php:126
@@ -28182,16 +28167,6 @@ msgstr "Empresa"
 #: packages/woocommerce-blocks/build/wc-settings.js:1
 msgid "City"
 msgstr "Cidade"
-
-#: includes/class-wc-countries.php:838 includes/class-wc-countries.php:1228
-#: includes/class-wc-countries.php:1238 includes/class-wc-countries.php:1418
-msgid "Postcode"
-msgstr "CEP"
-
-#: packages/woocommerce-blocks/src/StoreApi/Utilities/OrderController.php:348
-#: packages/woocommerce-blocks/build/wc-settings.js:1
-msgid "State/County"
-msgstr "Estado"
 
 #: includes/admin/list-tables/class-wc-admin-list-table-orders.php:380
 #: includes/admin/reports/class-wc-report-customer-list.php:217
@@ -28235,7 +28210,9 @@ msgstr "E-mail"
 #: packages/woocommerce-admin/dist/chunks/dashboard-charts.js:1
 #: packages/woocommerce-admin/dist/chunks/homescreen.js:1
 msgid "Orders"
-msgstr "Pedidos"
+msgid_plural "Orders"
+msgstr[0] "Pedidos"
+msgstr[1] ""
 
 #: includes/admin/class-wc-admin-reports.php:50
 msgid "Sales by date"
@@ -28433,7 +28410,6 @@ msgstr "Taxas por código"
 #: packages/woocommerce-blocks/assets/js/blocks/cart-checkout/checkout/edit.js:306
 #: packages/woocommerce-blocks/build/blocks-checkout.js:1
 #: packages/woocommerce-blocks/build/cart.js:43
-#: packages/woocommerce-blocks/build/checkout-i2.js:35
 #: packages/woocommerce-blocks/build/checkout.js:31
 msgid "Taxes"
 msgstr "Taxas"
@@ -28489,7 +28465,7 @@ msgstr "Estado"
 
 #: includes/admin/class-wc-admin-webhooks-table-list.php:94
 #: includes/admin/class-wc-admin-webhooks-table-list.php:208
-#: includes/admin/meta-boxes/class-wc-meta-box-order-actions.php:64
+#: includes/admin/meta-boxes/class-wc-meta-box-order-actions.php:57
 #: includes/admin/settings/views/html-webhooks-edit.php:207
 msgid "Delete permanently"
 msgstr "Excluir permanentemente"
@@ -28633,7 +28609,7 @@ msgstr "Campo personalizado atualizado."
 #: includes/gateways/cod/class-wc-gateway-cod.php:83
 #: includes/gateways/paypal/includes/settings-paypal.php:25
 #: includes/wc-template-functions.php:1834
-#: packages/woocommerce-admin/src/Features/Onboarding.php:417
+#: packages/woocommerce-admin/src/Features/Onboarding.php:419
 #: templates/single-product/tabs/description.php:22
 msgid "Description"
 msgstr "Descrição"
@@ -28769,8 +28745,8 @@ msgstr "%qty% variação"
 #: includes/customizer/class-wc-shop-customizer.php:39
 #: includes/wc-order-functions.php:977
 #: packages/woocommerce-admin/includes/connect-existing-pages.php:62
-#: packages/woocommerce-admin/src/Features/Homescreen.php:83
-#: packages/woocommerce-admin/src/Loader.php:1094
+#: packages/woocommerce-admin/src/Features/Homescreen.php:84
+#: packages/woocommerce-admin/src/Loader.php:1079
 #: packages/woocommerce-admin/src/PageController.php:183
 #: templates/auth/header.php:32
 #: packages/woocommerce-blocks/assets/js/atomic/blocks/product-elements/shared/config.js:17
@@ -28796,6 +28772,7 @@ msgstr "%qty% variação"
 #: packages/woocommerce-blocks/assets/js/blocks/reviews/reviews-by-category/index.js:26
 #: packages/woocommerce-blocks/assets/js/blocks/reviews/reviews-by-product/index.js:26
 #: packages/woocommerce-blocks/assets/js/blocks/single-product/index.js:27
+#: packages/woocommerce-blocks/assets/js/blocks/stock-filter/index.js:21
 #: packages/woocommerce-blocks/assets/js/index.js:23
 #: packages/woocommerce-blocks/build/active-filters.js:17
 #: packages/woocommerce-blocks/build/all-products.js:21
@@ -28803,11 +28780,11 @@ msgstr "%qty% variação"
 #: packages/woocommerce-blocks/build/all-reviews.js:7
 #: packages/woocommerce-blocks/build/attribute-filter.js:33
 #: packages/woocommerce-blocks/build/cart.js:43
-#: packages/woocommerce-blocks/build/checkout-i2.js:37
 #: packages/woocommerce-blocks/build/checkout.js:31
 #: packages/woocommerce-blocks/build/featured-category.js:1
 #: packages/woocommerce-blocks/build/featured-product.js:5
 #: packages/woocommerce-blocks/build/handpicked-products.js:3
+#: packages/woocommerce-blocks/build/mini-cart.js:1
 #: packages/woocommerce-blocks/build/price-filter.js:3
 #: packages/woocommerce-blocks/build/product-best-sellers.js:1
 #: packages/woocommerce-blocks/build/product-categories.js:1
@@ -28821,6 +28798,7 @@ msgstr "%qty% variação"
 #: packages/woocommerce-blocks/build/reviews-by-category.js:9
 #: packages/woocommerce-blocks/build/reviews-by-product.js:17
 #: packages/woocommerce-blocks/build/single-product.js:5
+#: packages/woocommerce-blocks/build/stock-filter.js:13
 #: packages/woocommerce-blocks/build/wc-blocks.js:1
 msgid "WooCommerce"
 msgstr "WooCommerce"
@@ -28830,7 +28808,7 @@ msgid "%qty% variations"
 msgstr "%qty% variações"
 
 #: includes/admin/class-wc-admin-assets.php:285
-#: includes/admin/class-wc-admin-assets.php:452
+#: includes/admin/class-wc-admin-assets.php:456
 #: includes/admin/settings/views/html-webhooks-edit.php:68
 #: includes/class-wc-frontend-scripts.php:581
 #: includes/wc-template-functions.php:2832
@@ -28839,48 +28817,48 @@ msgstr "%qty% variações"
 msgid "Select an option&hellip;"
 msgstr "Selecione uma opção&hellip;"
 
-#: includes/admin/class-wc-admin-assets.php:326
+#: includes/admin/class-wc-admin-assets.php:330
 msgid "Are you sure you wish to process this refund? This action cannot be undone."
 msgstr "Você esta certo que deseja proceder com este reembolso? Esta operação não pode ser desfeita."
 
-#: includes/admin/class-wc-admin-assets.php:327
+#: includes/admin/class-wc-admin-assets.php:331
 msgid "Are you sure you wish to delete this refund? This action cannot be undone."
 msgstr "Você esta certo que deseja excluir este reembolso? Esta operação não pode ser desfeita."
 
-#: includes/admin/class-wc-admin-assets.php:328
+#: includes/admin/class-wc-admin-assets.php:332
 msgid "Are you sure you wish to delete this tax column? This action cannot be undone."
 msgstr "Você esta certo que deseja excluir esta coluna de taxa? Esta operação não pode ser desfeita."
 
-#: includes/admin/class-wc-admin-assets.php:329
+#: includes/admin/class-wc-admin-assets.php:333
 msgid "Remove this item meta?"
 msgstr "Remover este item meta?"
 
-#: includes/admin/class-wc-admin-assets.php:330
+#: includes/admin/class-wc-admin-assets.php:334
 msgid "Remove this attribute?"
 msgstr "Remover esse atributo?"
 
-#: includes/admin/class-wc-admin-assets.php:333
+#: includes/admin/class-wc-admin-assets.php:337
 #: includes/admin/meta-boxes/views/html-order-download-permission.php:9
 #: includes/admin/meta-boxes/views/html-product-attribute.php:9
 #: includes/admin/meta-boxes/views/html-variation-admin.php:18
 msgid "Click to toggle"
 msgstr "Clique para alterar"
 
-#: includes/admin/class-wc-admin-assets.php:334
+#: includes/admin/class-wc-admin-assets.php:338
 #: includes/admin/meta-boxes/views/html-product-attribute.php:30
 msgid "Value(s)"
 msgstr "Valor(es)"
 
-#: includes/admin/class-wc-admin-assets.php:335
+#: includes/admin/class-wc-admin-assets.php:339
 msgid "Enter some text, or some attributes by pipe (|) separating values."
 msgstr "Digite algo ou atributos usando pipe (|) como separador."
 
-#: includes/admin/class-wc-admin-assets.php:336
+#: includes/admin/class-wc-admin-assets.php:340
 #: includes/admin/meta-boxes/views/html-product-attribute.php:75
 msgid "Visible on the product page"
 msgstr "Visível na página de produto"
 
-#: includes/admin/class-wc-admin-assets.php:331
+#: includes/admin/class-wc-admin-assets.php:335
 #: includes/admin/class-wc-admin-attributes.php:206
 #: includes/admin/class-wc-admin-attributes.php:273
 #: includes/admin/class-wc-admin-attributes.php:308
@@ -28905,41 +28883,40 @@ msgid "Name"
 msgstr "Nome"
 
 #. translators: Remove chip.
-#: includes/admin/class-wc-admin-assets.php:332
+#: includes/admin/class-wc-admin-assets.php:336
 #: includes/admin/meta-boxes/views/html-product-attribute.php:8
 #: includes/admin/meta-boxes/views/html-variation-admin.php:17
 #: includes/admin/settings/views/html-admin-page-shipping-classes.php:54
 #: packages/woocommerce-blocks/assets/js/base/components/chip/removable-chip.js:48
 #: packages/woocommerce-blocks/build/active-filters-frontend.js:3
 #: packages/woocommerce-blocks/build/active-filters.js:5
-#: packages/woocommerce-blocks/build/attribute-filter-frontend.js:3
-#: packages/woocommerce-blocks/build/attribute-filter.js:5
-#: packages/woocommerce-blocks/build/cart-frontend.js:21
+#: packages/woocommerce-blocks/build/attribute-filter-frontend.js:9
+#: packages/woocommerce-blocks/build/attribute-filter.js:7
+#: packages/woocommerce-blocks/build/cart-frontend.js:29
 #: packages/woocommerce-blocks/build/cart.js:21
 #: packages/woocommerce-blocks/build/checkout-frontend.js:21
-#: packages/woocommerce-blocks/build/checkout-i2.js:21
 #: packages/woocommerce-blocks/build/checkout.js:21
 msgid "Remove"
 msgstr "Remover"
 
-#: includes/admin/class-wc-admin-assets.php:337
+#: includes/admin/class-wc-admin-assets.php:341
 #: includes/admin/meta-boxes/views/html-product-attribute.php:81
 msgid "Used for variations"
 msgstr "Usado para variações"
 
-#: includes/admin/class-wc-admin-assets.php:338
+#: includes/admin/class-wc-admin-assets.php:342
 msgid "Enter a name for the new attribute term:"
 msgstr "Informe um nome para o novo atributo:"
 
-#: includes/admin/class-wc-admin-assets.php:340
+#: includes/admin/class-wc-admin-assets.php:344
 msgid "Copy billing information to shipping information? This will remove any currently entered shipping information."
 msgstr "Copiar Informações de faturamento para o endereço de entrega? Isto irá remover todas as informações de endereço de entrega existentes atualmente."
 
-#: includes/admin/class-wc-admin-assets.php:342
+#: includes/admin/class-wc-admin-assets.php:346
 msgid "Load the customer's shipping information? This will remove any currently entered shipping information."
 msgstr "Carregar informações de entrega do cliente? Isto irá remover qualquer informação de entrega existente."
 
-#: includes/admin/class-wc-admin-assets.php:343
+#: includes/admin/class-wc-admin-assets.php:347
 #: includes/admin/class-wc-admin-post-types.php:683
 #: includes/admin/list-tables/class-wc-admin-list-table-products.php:130
 #: includes/admin/views/html-bulk-edit-product.php:200
@@ -28947,11 +28924,11 @@ msgstr "Carregar informações de entrega do cliente? Isto irá remover qualquer
 msgid "Featured"
 msgstr "Destaque"
 
-#: includes/admin/class-wc-admin-assets.php:347
+#: includes/admin/class-wc-admin-assets.php:351
 msgid "No customer selected"
 msgstr "Nenhum cliente selecionado"
 
-#: includes/admin/class-wc-admin-assets.php:372
+#: includes/admin/class-wc-admin-assets.php:376
 msgid "Are you sure you want to revoke access to this download?"
 msgstr "Tem certeza de que quer revogar o acesso a este download?"
 
@@ -29015,14 +28992,13 @@ msgstr "Determina a ordem que os termos aparecem nas páginas de produto de loja
 #: includes/admin/class-wc-admin-attributes.php:283
 #: includes/admin/helper/class-wc-helper.php:200
 #: includes/admin/helper/views/html-section-account.php:3
-#: includes/admin/meta-boxes/class-wc-meta-box-order-actions.php:75
+#: includes/admin/meta-boxes/class-wc-meta-box-order-actions.php:68
 #: templates/cart/shipping-calculator.php:86
 #: packages/woocommerce-admin/dist/chunks/task-list.js:1
 #: packages/woocommerce-admin/dist/components/index.js:2
 #: packages/woocommerce-blocks/build/cart-frontend.js:41
 #: packages/woocommerce-blocks/build/cart.js:29
 #: packages/woocommerce-blocks/build/checkout-frontend.js:37
-#: packages/woocommerce-blocks/build/checkout-i2.js:29
 #: packages/woocommerce-blocks/build/checkout.js:29
 #: packages/woocommerce-blocks/build/wc-blocks-vendors.js:9
 msgid "Update"
@@ -29040,7 +29016,7 @@ msgstr "Atributos"
 #: includes/admin/class-wc-admin-attributes.php:313
 #: includes/widgets/class-wc-widget-product-categories.php:49
 #: includes/widgets/class-wc-widget-products.php:51
-#: packages/woocommerce-blocks/assets/js/base/components/reviews/review-sort-select/index.js:18
+#: packages/woocommerce-blocks/assets/js/base/components/reviews/review-sort-select/index.js:17
 #: packages/woocommerce-blocks/assets/js/blocks/reviews/edit-utils.js:173
 #: packages/woocommerce-blocks/build/all-reviews.js:1
 #: packages/woocommerce-blocks/build/all-reviews.js:5
@@ -29142,6 +29118,10 @@ msgstr[1] "<strong>%s produtos</strong> sem estoque"
 msgid "There are no product reviews yet."
 msgstr "Este produto ainda não recebeu avaliações."
 
+#: includes/admin/class-wc-admin-duplicate-product.php:64
+msgid "Make a duplicate from this product"
+msgstr "Duplicar este produto"
+
 #: includes/admin/class-wc-admin-attributes.php:327
 #: includes/admin/class-wc-admin-log-table-list.php:190
 #: includes/admin/meta-boxes/class-wc-meta-box-product-images.php:56
@@ -29157,10 +29137,6 @@ msgstr "Este produto ainda não recebeu avaliações."
 #: packages/woocommerce-admin/dist/experimental/index.js:2
 msgid "Delete"
 msgstr "Excluir"
-
-#: includes/admin/class-wc-admin-duplicate-product.php:64
-msgid "Make a duplicate from this product"
-msgstr "Duplicar este produto"
 
 #: includes/admin/class-wc-admin-duplicate-product.php:65
 msgid "Duplicate"
@@ -29203,10 +29179,9 @@ msgstr "Relatórios"
 #: packages/woocommerce-admin/dist/chunks/analytics-report-revenue.js:1
 #: packages/woocommerce-admin/dist/chunks/dashboard-charts.js:1
 #: packages/woocommerce-blocks/assets/js/base/components/cart-checkout/totals/discount/index.js:106
-#: packages/woocommerce-blocks/build/cart-frontend.js:29
+#: packages/woocommerce-blocks/build/cart-frontend.js:37
 #: packages/woocommerce-blocks/build/cart.js:29
 #: packages/woocommerce-blocks/build/checkout-frontend.js:29
-#: packages/woocommerce-blocks/build/checkout-i2.js:29
 #: packages/woocommerce-blocks/build/checkout.js:29
 msgid "Coupons"
 msgstr "Cupons"
@@ -29270,6 +29245,10 @@ msgstr "Base de atributos de produto"
 msgid "Default"
 msgstr "Padrão"
 
+#: includes/admin/class-wc-admin-pointers.php:62
+msgid "Give your new product a name here. This is a required field and will be what your customers will see in your store."
+msgstr "Dê aqui um novo nome ao seu produto. Este é um campo obrigatório e será o que seus clientes irão ver em sua loja."
+
 #: includes/admin/importers/views/html-csv-import-done.php:69
 #: includes/admin/list-tables/class-wc-admin-list-table-orders.php:466
 #: includes/admin/meta-boxes/views/html-order-items.php:396
@@ -29285,29 +29264,33 @@ msgstr "Padrão"
 #: templates/checkout/form-pay.php:27 templates/checkout/review-order.php:23
 #: templates/emails/email-order-details.php:42
 #: templates/order/order-details.php:51
+#: packages/woocommerce-admin/dist/chunks/analytics-report-categories.js:1
 #: packages/woocommerce-admin/dist/chunks/analytics-report-downloads.js:1
+#: packages/woocommerce-admin/dist/chunks/analytics-report-orders.js:1
+#: packages/woocommerce-admin/dist/chunks/analytics-report-products.js:1
+#: packages/woocommerce-admin/dist/chunks/analytics-report-stock.js:1
 #: packages/woocommerce-admin/dist/chunks/dashboard-charts.js:1
 #: packages/woocommerce-blocks/assets/js/blocks/reviews/edit-utils.js:124
 #: packages/woocommerce-blocks/assets/js/blocks/reviews/reviews-by-product/edit.js:78
 #: packages/woocommerce-blocks/assets/js/blocks/single-product/edit/index.js:101
 #: packages/woocommerce-blocks/build/all-reviews.js:1
-#: packages/woocommerce-blocks/build/cart-frontend.js:39
+#: packages/woocommerce-blocks/build/cart-frontend.js:15
 #: packages/woocommerce-blocks/build/cart.js:41
+#: packages/woocommerce-blocks/build/mini-cart-component-frontend.js:13
 #: packages/woocommerce-blocks/build/reviews-by-category.js:1
 #: packages/woocommerce-blocks/build/reviews-by-product.js:1
 #: packages/woocommerce-blocks/build/reviews-by-product.js:17
 #: packages/woocommerce-blocks/build/single-product.js:5
 msgid "Product"
-msgstr "Produto"
-
-#: includes/admin/class-wc-admin-pointers.php:62
-msgid "Give your new product a name here. This is a required field and will be what your customers will see in your store."
-msgstr "Dê aqui um novo nome ao seu produto. Este é um campo obrigatório e será o que seus clientes irão ver em sua loja."
+msgid_plural "Products"
+msgstr[0] "Produto"
+msgstr[1] ""
 
 #: includes/admin/list-tables/class-wc-admin-list-table-products.php:274
 #: includes/admin/reports/class-wc-report-stock.php:116
 #: includes/wc-formatting-functions.php:1224
 #: includes/wc-product-functions.php:872
+#: packages/woocommerce-admin/dist/chunks/analytics-report-stock.js:1
 msgid "In stock"
 msgstr "Em estoque"
 
@@ -29316,6 +29299,7 @@ msgstr "Em estoque"
 #: includes/admin/list-tables/class-wc-admin-list-table-products.php:276
 #: includes/admin/reports/class-wc-report-stock.php:118
 #: includes/wc-product-functions.php:873
+#: packages/woocommerce-admin/dist/chunks/analytics-report-stock.js:1
 msgid "Out of stock"
 msgstr "Fora de estoque"
 
@@ -29465,29 +29449,26 @@ msgstr "Grátis!"
 
 #: includes/abstracts/abstract-wc-order.php:2028
 #: includes/wc-template-functions.php:2194
-#: packages/woocommerce-blocks/build/cart-frontend.js:25
+#: packages/woocommerce-blocks/build/cart-frontend.js:33
 #: packages/woocommerce-blocks/build/cart.js:25
 #: packages/woocommerce-blocks/build/checkout-frontend.js:25
-#: packages/woocommerce-blocks/build/checkout-i2.js:25
 #: packages/woocommerce-blocks/build/checkout.js:25
 msgid "Subtotal:"
 msgstr "Subtotal:"
 
 #: includes/abstracts/abstract-wc-order.php:2043
-#: packages/woocommerce-blocks/build/cart-frontend.js:25
+#: packages/woocommerce-blocks/build/cart-frontend.js:33
 #: packages/woocommerce-blocks/build/cart.js:25
 #: packages/woocommerce-blocks/build/checkout-frontend.js:25
-#: packages/woocommerce-blocks/build/checkout-i2.js:25
 #: packages/woocommerce-blocks/build/checkout.js:25
 msgid "Discount:"
 msgstr "Desconto:"
 
 #: includes/abstracts/abstract-wc-order.php:2058
 #: includes/admin/meta-boxes/views/html-order-items.php:176
-#: packages/woocommerce-blocks/build/cart-frontend.js:25
+#: packages/woocommerce-blocks/build/cart-frontend.js:33
 #: packages/woocommerce-blocks/build/cart.js:25
 #: packages/woocommerce-blocks/build/checkout-frontend.js:25
-#: packages/woocommerce-blocks/build/checkout-i2.js:25
 #: packages/woocommerce-blocks/build/checkout.js:25
 msgid "Shipping:"
 msgstr "Frete:"
@@ -29577,11 +29558,11 @@ msgstr "Avaliação %s de 5"
 #: packages/woocommerce-blocks/build/all-products.js:21
 #: packages/woocommerce-blocks/build/atomic-block-components/stock-indicator-frontend.js:3
 #: packages/woocommerce-blocks/build/atomic-block-components/stock-indicator.js:3
-#: packages/woocommerce-blocks/build/cart-frontend.js:23
+#: packages/woocommerce-blocks/build/cart-frontend.js:31
 #: packages/woocommerce-blocks/build/cart.js:23
 #: packages/woocommerce-blocks/build/checkout-frontend.js:23
-#: packages/woocommerce-blocks/build/checkout-i2.js:23
 #: packages/woocommerce-blocks/build/checkout.js:23
+#: packages/woocommerce-blocks/build/mini-cart-component-frontend.js:13
 msgid "Available on backorder"
 msgstr "Disponível por encomenda"
 
@@ -29614,9 +29595,12 @@ msgstr "A partir de:"
 #: includes/wc-template-functions.php:3390
 #: packages/woocommerce-admin/dist/chunks/0.js:1
 #: packages/woocommerce-admin/dist/chunks/analytics-report-customers.js:1
+#: packages/woocommerce-admin/dist/chunks/analytics-report-downloads.js:1
 #: packages/woocommerce-admin/dist/chunks/analytics-report-stock.js:1
 msgid "Download"
-msgstr "Baixar"
+msgid_plural "Downloads"
+msgstr[0] "Baixar"
+msgstr[1] ""
 
 #. translators: 1: old order status 2: new order status
 #: includes/class-wc-order.php:368
@@ -29632,7 +29616,7 @@ msgstr "Tem a certeza que pretende ligar todas as variações? Isto irá criar u
 msgid "Import <strong>tax rates</strong> to your store via a csv file."
 msgstr "Importe as <strong>taxas</strong> para sua loja com um arquivo csv."
 
-#: includes/admin/class-wc-admin-assets.php:373
+#: includes/admin/class-wc-admin-assets.php:377
 msgid "You cannot add the same tax rate twice!"
 msgstr "Você não pode adicionar duas vezes as mesma taxa!"
 
@@ -29735,7 +29719,6 @@ msgstr "Se você precisar de ajuda para compreender, usar ou estender o WooComme
 #: includes/shipping/local-pickup/class-wc-shipping-local-pickup.php:31
 #: includes/shipping/local-pickup/class-wc-shipping-local-pickup.php:83
 #: packages/woocommerce-blocks/build/cart.js:31
-#: packages/woocommerce-blocks/build/checkout-i2.js:31
 #: packages/woocommerce-blocks/build/checkout.js:31
 msgid "Local pickup"
 msgstr "Retirar no local"
@@ -29848,7 +29831,7 @@ msgstr "O slug \"%s\" não é permitido porque é um termo reservado. Escolha ou
 msgid "Slug \"%s\" is too long (28 characters max). Shorten it, please."
 msgstr "O slug \"%s\" muito longo (máximo: 28 caracteres). Diminua."
 
-#: includes/admin/class-wc-admin-assets.php:325
+#: includes/admin/class-wc-admin-assets.php:329
 msgid "Please select some items."
 msgstr "Selecione alguns itens."
 
@@ -29927,11 +29910,11 @@ msgstr "Slug/referência exclusiva para o atributo; pode ter no máximo 28 dígi
 msgid "Please enter with one monetary decimal point (%s) without thousand separators and currency symbols."
 msgstr "Digite o valor inserindo um ponto decimal monetário (%s) sem milhares de separadores e símbolos da moeda."
 
-#: includes/admin/class-wc-admin-assets.php:341
+#: includes/admin/class-wc-admin-assets.php:345
 msgid "Load the customer's billing information? This will remove any currently entered billing information."
 msgstr "Carregar informações de faturamento do cliente? Isto irá remover qualquer informação de pagamento existente."
 
-#: includes/admin/class-wc-admin-assets.php:371
+#: includes/admin/class-wc-admin-assets.php:375
 msgid "Could not grant access - the user may already have permission for this file or billing email is not set. Ensure the billing email is set, and the order has been saved."
 msgstr "Não foi possível permitir acesso - este usuário pode já ter permissões para este arquivo ou ainda não definiu um e-mail de faturamento. Certifique-se que o e-mail de faturamento esteja definido e que o pedido tenha sido salvo."
 
@@ -32311,14 +32294,6 @@ msgstr "Lakshadeep"
 #: i18n/states.php:667
 msgid "Pondicherry (Puducherry)"
 msgstr "Pondicherry (Puducherry)"
-
-#: i18n/states.php:670
-msgid "Khuzestan  (خوزستان)"
-msgstr "Khuzistão (خوزستان)"
-
-#: i18n/states.php:671
-msgid "Tehran  (تهران)"
-msgstr "Teerã  (تهران)"
 
 #: i18n/states.php:672
 msgid "Ilaam (ایلام)"
