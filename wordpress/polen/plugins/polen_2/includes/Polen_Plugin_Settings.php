@@ -546,6 +546,13 @@ class Polen_Plugin_Settings
                     'desc'     => 'Emails serarados por Virgura',
                     'default'  => '',
                 ),
+                array(
+                    'id'       => 'recipient_email_polen_help',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Configurar email de destinatário polen ajuda', 'polen'),
+                    'desc'     => 'Emails serarados por Virgura',
+                    'default'  => '',
+                ),
             )
         ) );
 

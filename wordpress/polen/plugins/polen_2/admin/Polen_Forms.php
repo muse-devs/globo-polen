@@ -28,6 +28,15 @@ class Polen_Forms {
             array($this, 'showForms'),
             'dashicons-email-alt'
         );
+
+        add_submenu_page(
+            'forms',
+            'Ajuda',
+            'Ajuda',
+            'manage_options',
+            'help-form',
+            array($this, 'showFormHelp'),
+        );
     }
 
     /**
@@ -40,6 +49,18 @@ class Polen_Forms {
         $form_db = new Polen_Form_DB();
         $leads = $form_db->getLeads();
         require 'partials/form-enterprise.php';
+    }
+
+    /**
+     * View página Ajuda
+     *
+     * @since    1.0.0
+     */
+    public function showFormHelp()
+    {
+        $form_db = new Polen_Form_DB();
+        $leads = $form_db->getLeads(2);
+        require 'partials/form-help.php';
     }
 
     /**
@@ -77,7 +98,7 @@ class Polen_Forms {
             $form_db = new Polen_Form_DB();
             $form_db->insert($data);
 
-            $this->mail_send($data);
+            $this->mailSend($data);
 
             wp_send_json_success('ok', 200);
             wp_die();
@@ -94,28 +115,73 @@ class Polen_Forms {
     private function requiredFields(): array
     {
         return [
-            'name' => 'Nome',
             'email' => 'E-mail',
             'terms' => 'Termos',
+            'form_id' => 'ID do formulário',
         ];
     }
 
-    private function mail_send($args)
+    /**
+     * Retornar nome do campo em portugues para ser usado no disparo de email
+     *
+     * @param string $field
+     * @return null|string
+     */
+    private function translateFields(string $field): ?string
+    {
+        $fields = [
+            'name' => 'Nome',
+            'email' => 'E-mail',
+            'company' => 'Empresa',
+            'employees_quantity' => 'Quantidade de funcionários',
+            'job' => 'Cargo',
+            'phone' => 'Telefone',
+            'talent_name' => 'Nome do talento',
+            'message' => 'Mensagem'
+        ];
+
+        if (!isset($fields[$field])) {
+            return;
+        }
+
+        return $fields[$field];
+    }
+
+    /**
+     * Disparar email de novo cadastro
+     * @param array $fields
+     */
+    private function mailSend(array $fields)
     {
         global $Polen_Plugin_Settings;
-        $emails = $Polen_Plugin_Settings['recipient_email_polen_company'];
+        $emails_company_page = $Polen_Plugin_Settings['recipient_email_polen_company'];
+        $emails_help_page = $Polen_Plugin_Settings['recipient_email_polen_help'];
+
+        $form_company = 1;
+        $form_help = 2;
+
+        if ($fields['form_id'] == $form_company) {
+            $name = 'empresas';
+            $emails =  $emails_company_page;
+        }
+
+        if ($fields['form_id'] == $form_help) {
+            $name = 'ajuda';
+            $emails = $emails_help_page;
+        }
 
         $to = explode(',', $emails);
-        $subject = "Novo cadastro Polen empresas - {$args['name']}";
+        $subject = "Novo cadastro Polen {$name} - {$fields['name']}";
 
-        $body = "<p>Nome: {$args['name']}</p>";
-        $body .= "<p>Email: {$args['email']}</p>";
-        $body .= "<p>Empresa: {$args['company']}</p>";
-        $body .= "<p>Qtd de funcionários: {$args['employees_quantity']}</p>";
-        $body .= "<p>Cargo: {$args['job']}</p>";
-        $body .= "<p>Telefone: {$args['phone']}</p>";
-        $body .= "<p>Nome do talento: {$args['talent_name']}</p>";
-        $body .= "<p>Mensagem: {$args['message']}</p>";
+        $body = '';
+        foreach ($fields as $key => $field) {
+            $name_value = $this->translateFields($key);
+            if ($name_value === null) {
+                continue;
+            }
+
+            $body .= "<p>{$name_value}: $field[$key]</p>";
+        }
 
         $headers = array('Content-Type: text/html; charset=UTF-8; From: polen.me');
 
