@@ -169,7 +169,7 @@ function bus_get_form()
           )
         );
         $inputs->material_input(Material_Inputs::TYPE_TEXT, "talent_name", "talent_name", "Qual talento você possui interesse?", false, "mb-3");
-        $inputs->material_textarea("textarea1", "message", "Como você pretende usar os vídeos Polen para sua empresa?", true); ?>
+        $inputs->material_textarea("textarea1", "message", "Como você pretende usar o vídeo?", true); ?>
         <?php $inputs->material_button(Material_Inputs::TYPE_SUBMIT, "send_form", "Enviar", "mt-4"); ?>
       </form>
     </div>
