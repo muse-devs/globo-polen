@@ -374,9 +374,10 @@ function polen_zapier_thankyou( $order )
 			<input type="hidden" name="data_compra" value="<?php echo $order->order_date; ?>" />
 			<input type="hidden" name="data_atual" value="<?php echo date("Y-m-d H:i:s"); ?>" />
 			<input type="hidden" name="url_source" value="<?php echo site_url( $_SERVER[ 'REDIRECT_URL' ] ); ?>" />
+      <input type="hidden" name="zapier" value="4" />
 		</form>
 		<script>
-			polRequestZapier("#zapier-purchase-data", ZAPIERURLS.PURCHASE);
+			polRequestZapier("#zapier-purchase-data");
 		</script>
 	<?php
 }
