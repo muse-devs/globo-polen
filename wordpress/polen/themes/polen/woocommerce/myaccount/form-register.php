@@ -55,6 +55,7 @@ $inputs = new Material_Inputs();
 							<?php wp_nonce_field('woocommerce-register', 'woocommerce-register-nonce'); ?>
               <?php $inputs->material_button(Material_Inputs::TYPE_SUBMIT, "register", "Cadastre-se", "woocommerce-button btn-login woocommerce-form-register__submit g-recaptcha", array("data-sitekey" => $site_key, "data-callback" => "polen_onSubmit", "data-action", "submit", "name" => "register")); ?>
 							<input type="hidden" name="register" value="Cadastre-se" />
+              <input type="hidden" name="zapier" value="2" />
 						</p>
 					</div>
 				</div>
