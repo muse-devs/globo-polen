@@ -25,7 +25,7 @@
 					?>
 
 					<div class="mt-4 <?php echo is_front_page() ? "col-md-4" : "col-md-8" ?> order-md-1">
-						<h5 class="title"><?= get_bloginfo('name'); ?></h5>
+						<h5 class="title typo typo-title typo-small"><?= get_bloginfo('name'); ?></h5>
 							<?php
 								$menu = wp_nav_menu(
 									array(
@@ -55,7 +55,7 @@
 			</div>
 		</div>
 	<?php endif; ?>
-	<div class="row mt-4 copyright">
+	<div class="row mt-5 copyright">
 		<div class="col-md-12 pb-4 text-center social">
 			<a href="https://www.facebook.com/Polen-107879504782470/" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("facebook"); ?></a>
 			<a href="https://www.instagram.com/polen.me" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("instagram"); ?></a>

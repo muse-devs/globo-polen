@@ -1,6 +1,7 @@
 <?php
 global $Polen_Plugin_Settings;
 $site_key = $Polen_Plugin_Settings['polen_recaptcha_site_key'];
+$inputs = new Material_Inputs();
 ?>
 <div class="woocommerce">
 	<div class="row justify-content-md-center talent-login">
@@ -20,21 +21,19 @@ $site_key = $Polen_Plugin_Settings['polen_recaptcha_site_key'];
 						<?php if ('no' === get_option('woocommerce_registration_generate_username')) : ?>
 
 							<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide mb-4">
-								<input type="text" placeholder="<?php esc_html_e('Username', 'woocommerce'); ?>" class="woocommerce-Input woocommerce-Input--text input-text form-control form-control-lg" name="username" id="reg_username" autocomplete="username" value="<?php echo (!empty($_POST['username'])) ? esc_attr(wp_unslash($_POST['username'])) : ''; ?>" /><?php // @codingStandardsIgnoreLine
-																																																																																											?>
+								<input type="text" placeholder="<?php esc_html_e('Username', 'woocommerce'); ?>" class="woocommerce-Input woocommerce-Input--text input-text form-control form-control-lg" name="username" id="reg_username" autocomplete="username" value="<?php echo (!empty($_POST['username'])) ? esc_attr(wp_unslash($_POST['username'])) : ''; ?>" /><?php // @codingStandardsIgnoreLine ?>
 							</p>
 
 						<?php endif; ?>
 
 						<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide mb-4">
-							<input type="email" placeholder="<?php esc_html_e('Email address', 'woocommerce'); ?>" class="woocommerce-Input woocommerce-Input--text input-text form-control form-control-lg" name="email" id="reg_email" autocomplete="email" value="<?php echo (!empty($_POST['email'])) ? esc_attr(wp_unslash($_POST['email'])) : ''; ?>" /><?php // @codingStandardsIgnoreLine
-																																																																																								?>
+              <?php $inputs->material_input(Material_Inputs::TYPE_EMAIL, "reg_email", "email", "Endereço de e-mail", true, "", array("value" => (!empty($_POST['email'])) ? esc_attr(wp_unslash($_POST['email'])) : '')); ?>
 						</p>
 
 						<?php if ('no' === get_option('woocommerce_registration_generate_password')) : ?>
 
 							<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide mb-4">
-								<input type="password" placeholder="<?php esc_html_e('Password', 'woocommerce'); ?>" class="woocommerce-Input woocommerce-Input--text input-text form-control form-control-lg" name="password" id="reg_password" autocomplete="new-password" />
+                <?php $inputs->material_input(Material_Inputs::TYPE_PASSWORD, "reg_password", "password", "Senha", true); ?>
 							</p>
 
 						<?php else : ?>
@@ -54,7 +53,7 @@ $site_key = $Polen_Plugin_Settings['polen_recaptcha_site_key'];
 
 						<p class="woocommerce-form-row form-row">
 							<?php wp_nonce_field('woocommerce-register', 'woocommerce-register-nonce'); ?>
-							<button type="submit" class="woocommerce-button btn btn-primary btn-lg btn-block btn-login woocommerce-form-register__submit g-recaptcha" data-sitekey="<?= $site_key; ?>" data-callback='polen_onSubmit' data-action='submit' name="register" value="<?php esc_attr_e('Register', 'woocommerce'); ?>"><?php esc_html_e('Register', 'woocommerce'); ?></button>
+              <?php $inputs->material_button(Material_Inputs::TYPE_SUBMIT, "register", "Cadastre-se", "woocommerce-button btn-login woocommerce-form-register__submit g-recaptcha", array("data-sitekey" => $site_key, "data-callback" => "polen_onSubmit", "data-action", "submit", "name" => "register")); ?>
 							<input type="hidden" name="register" value="Cadastre-se" />
               <input type="hidden" name="zapier" value="2" />
 						</p>

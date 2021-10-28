@@ -4,8 +4,9 @@ use Polen\Includes\Polen_Order;
 
 function polen_get_search_form()
 {
+  $inputs = new Material_Inputs();
 ?>
-  <button onclick="showSearchForm()" class="button-no-bg"><?php Icon_Class::polen_icon_research(); ?></button>
+  <button onclick="showSearchForm()" class="button-no-bg"><?php Icon_Class::polen_icon_search(); ?></button>
   <div id="search-box" class="search-box">
     <div class="row p-3">
       <div class="col-12 col-md-8 m-md-auto">
@@ -17,8 +18,8 @@ function polen_get_search_form()
         <form action="/" method="get">
           <div class="row">
             <div class="col-12 d-flex justify-content-between">
-              <input class="form-control form-control-lg" type="text" id="search" name="s" value="<?php the_search_query(); ?>" placeholder="Buscar" required />
-              <button type="submit" class="btn btn-primary btn-lg ml-2"><?php Icon_Class::polen_icon_research(); ?></button>
+              <?php $inputs->material_input(Material_Inputs::TYPE_TEXT, "search", "s", "Buscar", true); ?>
+              <?php $inputs->material_button(Material_Inputs::TYPE_SUBMIT, "btn-search", '<i class="icon icon-search"></i>', "ml-2", array("style" => "width: 54px;")); ?>
             </div>
           </div>
         </form>
@@ -114,17 +115,17 @@ function polen_front_get_categories_buttons()
     <div class="row mb-2">
       <div class="col-12">
         <div class="content-category">
-          <?php
-          $categories = highlighted_categories();
-          foreach ($categories as $categorie) {
-            echo "<a href=/categoria/" . $categorie["slug"] . ">";
-            echo '<div class="btn btn-outline-dark category-button" ontouchstart="">';
-            echo '<img src="' . $categorie["img"] . '"></img>';
-            echo $categorie["name"];
-            echo '</div>';
-            echo "</a>";
-          }
-          ?>
+          <?php $categories = highlighted_categories(); ?>
+          <?php foreach ($categories as $categorie) : ?>
+            <a href="<?php echo get_category_link($categorie["term_id"]); ?>">
+              <div class="btn btn-outline-dark category-button" ontouchstart="">
+                <?php if ($categorie["img"]) : ?>
+                  <img src="<?php echo $categorie["img"]; ?>" />
+                <?php endif; ?>
+                <?php echo $categorie["name"]; ?>
+              </div>
+            </a>
+          <?php endforeach; ?>
         </div>
       </div>
     </div>
@@ -289,8 +290,8 @@ function polen_banner_scrollable($items, $title, $link, $subtitle = "", $social 
     <div class="col-md-12">
       <header class="row mb-3">
         <div class="col-12 d-flex justify-content-between align-items-center">
-          <h2 class="mr-2"><?php echo $title; ?></h2>
-          <a href="<?php echo $link; ?>">Ver todos <?php Icon_Class::polen_icon_chevron_right(); ?></a>
+          <h2 class="typo typo-title mr-2"><?php echo $title; ?></h2>
+          <a href="<?php echo $link; ?>" class="typo typo-link">Ver todos <?php Icon_Class::polen_icon_chevron_right(); ?></a>
         </div>
         <?php if ($subtitle != "") : ?>
           <div class="col-12">
@@ -322,9 +323,9 @@ function polen_front_get_news($items, $title, $link, $social = false)
     <div class="col-md-12">
       <header class="row mb-3">
         <div class="col-12 d-flex justify-content-between align-items-center">
-          <h2 class="mr-2"><?php echo $title; ?></h2>
+          <h2 class="typo typo-title mr-2"><?php echo $title; ?></h2>
           <?php if ($link) : ?>
-            <a href="<?php echo $link; ?>">Ver todos <?php Icon_Class::polen_icon_chevron_right(); ?></a>
+            <a href="<?php echo $link; ?>" class="typo typo-link">Ver todos <?php Icon_Class::polen_icon_chevron_right(); ?></a>
           <?php endif; ?>
         </div>
       </header>
@@ -346,37 +347,6 @@ function polen_front_get_news($items, $title, $link, $social = false)
 <?php
 }
 
-function polen_front_get_categories($items, $link = '#')
-{
-  if (!$items) {
-    return;
-  }
-?>
-  <section class="row pt-2 mb-5 categories">
-    <div class="col-md-12">
-      <header class="row mb-4">
-        <div class="col-12 d-flex justify-content-between align-items-center">
-          <h2 class="mr-2">Categorias</h2>
-          <a href="<?php echo $link; ?>">Ver todos</a>
-        </div>
-      </header>
-    </div>
-    <div class="col md-12">
-      <div class="row">
-        <?php foreach ($items as $item) : ?>
-          <div class="col-md-3">
-            <figure class="polen-card category">
-              <img loading="lazy" src="<?= $item["image"] ?>" alt="<?= $item["title"] ?>">
-              <a href="<?= $item["url"] ?>" class="link"><?= $item["title"] ?></a>
-            </figure>
-          </div>
-        <?php endforeach; ?>
-      </div>
-    </div>
-  </section>
-<?php
-}
-
 function polen_front_get_artists($items, $title, $social = false)
 {
   if (!$items) {
@@ -387,8 +357,8 @@ function polen_front_get_artists($items, $title, $social = false)
     <div class="col-12 col-md-12">
       <header class="row mb-4">
         <div class="col-12 d-flex justify-content-between align-items-center">
-          <h2 class="mr-2"><?= $title; ?></h2>
-          <a href="#">Ver todos <?php Icon_Class::polen_icon_chevron_right(); ?></a>
+          <h2 class="typo typo-title mr-2"><?= $title; ?></h2>
+          <a href="#" class="typo typo-link">Ver todos <?php Icon_Class::polen_icon_chevron_right(); ?></a>
         </div>
       </header>
     </div>
@@ -503,7 +473,7 @@ function polen_front_get_tutorial()
     <div class="col-md-12">
       <header class="row mb-3">
         <div class="col">
-          <h2>Como funciona</h2>
+          <h2 class="typo typo-title">Como funciona</h2>
         </div>
       </header>
     </div>
@@ -608,23 +578,26 @@ function polen_box_related_product_by_product_id($product_id)
  */
 function polen_form_signin_newsletter(string $event = 'newsletter')
 {
+  $inputs = new Material_Inputs();
 ?>
   <div id="signin-newsletter" class="col-md-6 mt-4 order-md-2">
-    <h5 class="title">Junte-se à nossa lista</h5>
-    <p class="description">Seja o primeiro a saber sobre as estrelas mais recentes e as melhores ofertas no <?php bloginfo('name'); ?></p>
-    <form id="newsletter">
+    <h5 class="title typo typo-title typo-small">Junte-se à nossa lista</h5>
+    <p class="description typo typo-p typo-small typo-double-line-height">Seja o primeiro a saber sobre as estrelas mais recentes e as melhores ofertas no <?php bloginfo('name'); ?></p>
+    <form id="newsletter" action="/" method="POST">
       <div class="row">
         <div class="col-md-8 mb-2 mb-md-0">
-          <input type="hidden" name="action" value="polen_newsletter_signin" />
-          <input type="hidden" name="zapier" value="1" />
-          <input type="hidden" name="page_source" value="<?= filter_input(INPUT_SERVER, 'REQUEST_URI'); ?>" />
-          <input type="hidden" name="event" value="<?= $event; ?>" />
-          <input type="hidden" name="is_mobile" value="<?= polen_is_mobile() ? "1" : "0"; ?>" />
-          <input type="hidden" name="security" value=<?php echo wp_create_nonce('news-signin'); ?>>
-          <input type="email" name="email" placeholder="Entre com o seu e-mail" class="form-control form-control-lg" required />
+          <?php
+          $inputs->input_hidden("action", "polen_newsletter_signin");
+          $inputs->input_hidden("page_source", filter_input(INPUT_SERVER, 'REQUEST_URI'));
+          $inputs->input_hidden("event", $event);
+          $inputs->input_hidden("is_mobile", polen_is_mobile() ? "1" : "0");
+          $inputs->input_hidden("security", wp_create_nonce('news-signin'));
+          $inputs->material_input(Material_Inputs::TYPE_EMAIL, "email", "email", "Entre com o seu e-mail", true);
+          ?>
         </div>
         <div class="col-md-4 mt-2 mt-md-0 d-md-flex align-items-md-center">
-          <input type="submit" value="Enviar" class="signin-newsletter-button btn btn-outline-light btn-lg btn-block" />
+          <!-- <input type="submit" value="Enviar" class="signin-newsletter-button btn btn-outline-light btn-lg btn-block" /> -->
+          <?php $inputs->material_button(Material_Inputs::TYPE_SUBMIT, "botao", "Enviar"); ?>
         </div>
         <div class="col-md-8 mb-2 mb-md-0 small signin-response"></div>
       </div>

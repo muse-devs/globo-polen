@@ -11,6 +11,8 @@ if ( ! $product->is_purchasable() ) {
 	return;
 }
 
+$inputs = new Material_Inputs();
+
 echo wc_get_stock_html( $product ); // WPCS: XSS ok.
 
 if ( $product->is_in_stock() ) : ?>
@@ -35,16 +37,18 @@ if ( $product->is_in_stock() ) : ?>
 		?>
 
 		<?php $donate = get_post_meta( get_the_ID(), '_is_charity', true ); ?>
-		<?php $social = social_product_is_social($product, social_get_category_base()) ?>
+		<?php $social = social_product_is_social($product, social_get_category_base()); ?>
 
-		<button type="submit"
-				name="add-to-cart" value="<?php echo esc_attr( $product->get_id() ); ?>"
-				class="single_add_to_cart_button alt btn btn-primary btn-lg btn-block btn-get-video py-3">
-					<?php if($donate) : ?>
-						<span class="mr-2"><?php Icon_Class::polen_icon_donate(); ?></span>
-					<?php endif; ?>
-					<?php echo $product->single_add_to_cart_text(); ?>
-		</button>
+    <?php
+
+    $inputs->material_button(
+      Material_Inputs::TYPE_SUBMIT,
+      "add-to-cart-" . esc_attr($product->get_id()),
+      $product->single_add_to_cart_text(),
+      "single_add_to_cart_button alt btn-get-video py-3",
+      array("name" => "add-to-cart", "value" => esc_attr($product->get_id())),
+      $donate ? "donate" : ""
+    ); ?>
 
 		<?php do_action( 'woocommerce_after_add_to_cart_button' ); ?>
 	</form>
@@ -56,9 +60,7 @@ if ( $product->is_in_stock() ) : ?>
 <?php if ( !$product->is_in_stock() ) : ?>
 	<?php do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 
-		<a href="<?php echo home_url( 'shop' ); ?>" class="single_add_to_cart_button alt btn btn-primary btn-lg btn-block btn-get-video py-3">
-				Escolher outro artista
-		</a>
+    <?php $inputs->material_button_link("todos", "Escolher outro artista", home_url( "shop" )); ?>
 
 		<?php do_action( 'woocommerce_after_add_to_cart_button' ); ?>
 <?php endif; ?>
