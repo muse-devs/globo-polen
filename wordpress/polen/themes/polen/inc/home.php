@@ -31,9 +31,8 @@ get_header();
 	</div>
 
   <?php
-    //$videos = ["355", "3492", "3806", "3554", "2930", "3898", "3168"];
-    $videos_homolog =["120", "121"];
-    polen_front_get_videos(polen_get_home_stories($videos_homolog));
+    $videos = ["3626", "3492", "3806", "3554", "2930", "3898", "3168"];
+    polen_front_get_videos(polen_get_home_stories($videos));
   ?>
 
   <?php polen_front_get_tutorial(); ?>
