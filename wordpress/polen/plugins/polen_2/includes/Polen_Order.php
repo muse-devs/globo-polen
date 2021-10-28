@@ -277,6 +277,11 @@ class Polen_Order
         wc_add_order_item_meta( $order_item_id, '_line_total'           , 0, true );
         $order = new \WC_Order( $order_id );
         $order->calculate_totals();
+
+        $interval  = Polen_Order::get_interval_order_basic();
+        $timestamp = Polen_Order::get_deadline_timestamp( $order, $interval );
+        self::save_deadline_timestamp_in_order( $order, $timestamp );
+
         // $order->set_status( Polen_WooCommerce::ORDER_STATUS_TALENT_ACCEPTED );
         wp_send_json_success( 'ok', 201 );
         wp_die();
@@ -400,17 +405,17 @@ class Polen_Order
     }
 
     /**
-     * Retorna o Timestamp baseado na data de criacao da Order e do inteval
+     * Retorna o Timestamp baseado na data atual e horario 23:59:59 e do inteval
      * @param \WC_Order
      * @param \DateInterval
      * @return int Timestamp
      */
-    public static function get_deadline_timestamp_by_social_event( $order, $interval )
+    public static function get_deadline_timestamp( $order, $interval )
     {
         if( empty( $order ) || empty( $interval ) ) {
             return false;
         }
-        $created_at = new \WC_DateTime( 'now' );
+        $created_at = \WC_DateTime::createFromFormat( 'Y-m-d H:i:s', date('Y-m-d') . ' 23:59:59' );
         $created_at->add( $interval );
         return $created_at->getTimestamp();
     }
@@ -427,7 +432,7 @@ class Polen_Order
             return false;
         }
         $dataInterval = self::get_deadline_interval_order_by_social_event( $order );
-        $timestamp = self::get_deadline_timestamp_by_social_event( $order, $dataInterval );
+        $timestamp = self::get_deadline_timestamp( $order, $dataInterval );
         return $timestamp;
     }
 
