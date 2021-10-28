@@ -16,7 +16,10 @@ const bus_form = new Vue({
       polAjaxForm(
         form,
         function (e) {
-          polMessages.success("Mensagem enviada com sucesso!");
+          polMessages.message(
+						"Enviado!",
+						"Sua mensagem foi enviada com sucesso!"
+					);
         },
         function (e) {
           polMessages.error(e);
