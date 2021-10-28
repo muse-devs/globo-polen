@@ -69,7 +69,6 @@ get_header();
       <?php $inputs = new Material_Inputs(); ?>
       <div class="col-12 col-md-8 m-md-auto">
         <form id="help-form" v-on:submit.prevent="handleSubmit" method="POST">
-          <input type="hidden" id="url-success" value="<?php echo enterprise_url_success(); ?>" />
           <?php
           $inputs->input_hidden("action", "submit_form");
           $inputs->input_hidden("form_id", "2");

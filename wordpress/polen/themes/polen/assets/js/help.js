@@ -1,5 +1,4 @@
 const form = "#help-form";
-const url_success = document.getElementById("url-success").value;
 
 const bus_form = new Vue({
   el: form,
@@ -17,7 +16,7 @@ const bus_form = new Vue({
       polAjaxForm(
         form,
         function (e) {
-          window.location.href = url_success;
+          polMessages.success("Mensagem enviada com sucesso!");
         },
         function (e) {
           polMessages.error(e);
