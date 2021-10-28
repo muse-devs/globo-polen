@@ -8,7 +8,7 @@ const bus_form = new Vue({
   },
   methods: {
     handleChange: function (e) {
-      this.phone = mtel(e.target.value);
+      // this.phone = mtel(e.target.value);
     },
     handleSubmit: function () {
       polAjaxForm(

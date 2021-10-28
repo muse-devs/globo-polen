@@ -525,8 +525,8 @@ class Polen_Plugin_Settings
         ) );
 
 
-         // Configurar Emails
-         \Redux::set_section( $opt_name, array(
+        // Configurar Emails
+        \Redux::set_section( $opt_name, array(
             'title'            => esc_html__( 'Configurar emails', 'polen' ),
             'id'               => 'polen_email_expire_order',
             'icon'             => 'el el-envelope',
@@ -543,6 +543,13 @@ class Polen_Plugin_Settings
                     'id'       => 'recipient_email_polen_company',
                     'type'     => 'text',
                     'title'    => esc_html__('Configurar email de destinatário polen empresas', 'polen'),
+                    'desc'     => 'Emails serarados por Virgura',
+                    'default'  => '',
+                ),
+                array(
+                    'id'       => 'recipient_email_polen_help',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Configurar email de destinatário polen ajuda', 'polen'),
                     'desc'     => 'Emails serarados por Virgura',
                     'default'  => '',
                 ),
