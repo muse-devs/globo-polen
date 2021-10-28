@@ -196,7 +196,9 @@ class Polen_Video_Info extends Polen_DB
 
 
     /**
-     * 
+     * Pega uma lista de Video_Info por um array de orders_ids
+     * @param array
+     * @return array
      */
     static public function get_by_complete_and_public_by_orders_ids( $orders_id = [] )
     {
@@ -204,8 +206,8 @@ class Polen_Video_Info extends Polen_DB
         global $wpdb;
         $sql ="SELECT * FROM `{$self_class->table_name()}` WHERE `order_id` IN (".implode(', ', array_fill(0, count($orders_id), '%d')).") LIMIT 0,100;";
         $sql = call_user_func_array(array($wpdb, 'prepare'), array_merge(array($sql), $orders_id));
-        $result = $wpdb->get_results( $sql );
-        return $result;
+        $results = $wpdb->get_results( $sql );
+        return self::create_instance_many( $results );
     }
 
 
