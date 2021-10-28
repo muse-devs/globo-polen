@@ -7,7 +7,7 @@ const bus_form = new Vue({
   },
   methods: {
     handleChange: function (e) {
-      this.phone = mtel(e.target.value);
+      //this.phone = mtel(e.target.value);
     },
     handleEdit: function () {
       this.edit = true;
@@ -36,4 +36,12 @@ const bus_form = new Vue({
     $('.panel-button:not([href='+id+'])').addClass("collapsed").attr("aria-expanded","false");
     $('.collapse:not('+id+')').removeClass('show');
   });
+
+  // Open collapse url
+  let currentURL = window.location.href;
+  var hash = currentURL.substring(currentURL.indexOf('#'));
+  if (hash) {
+    $('.panel-button[aria-controls='+hash.substring(1)+']').removeClass("collapsed").attr("aria-expanded","true");
+    $(hash).addClass('show');
+  }
 })(jQuery);
