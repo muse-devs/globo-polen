@@ -7,7 +7,7 @@ const bus_form = new Vue({
   },
   methods: {
     handleChange: function (e) {
-      this.phone = mtel(e.target.value);
+      t//his.phone = mtel(e.target.value);
     },
     handleEdit: function () {
       this.edit = true;
