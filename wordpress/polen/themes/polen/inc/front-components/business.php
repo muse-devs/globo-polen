@@ -165,7 +165,7 @@ function bus_get_form()
             "placeholder" => "(XX) XXXXX-XXXX",
             "v-model" => "phone",
             "v-on:keyup" => "handleChange",
-            "maxlength" => "15",
+            // "maxlength" => "15",
           )
         );
         $inputs->material_input(Material_Inputs::TYPE_TEXT, "talent_name", "talent_name", "Qual talento você possui interesse?", false, "mb-3");
