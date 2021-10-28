@@ -104,7 +104,7 @@ class Polen_Forms {
             wp_die();
 
         } catch (\Exception $e) {
-            wp_send_json_error(array('Error' => $e->getMessage()), 422);
+            wp_send_json_error( array( 'Error' => $e->getMessage() ), 422 );
             wp_die();
         }
     }
@@ -186,7 +186,7 @@ class Polen_Forms {
         $headers = array('Content-Type: text/html; charset=UTF-8; From: polen.me');
 
         if (!wp_mail($to, $subject, $body, $headers)) {
-            die('Erro ao disparar email');
+            throw new \Exception( 'Erro ao disparar email' );
         }
     }
 }
