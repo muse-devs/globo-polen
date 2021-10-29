@@ -21,7 +21,8 @@ startTuna = async (tunaSessionToken, allowBoletoPayment, installmentOptions, tun
         let pieceManager = tuna.pieceManager();
 
         pieceManager.forge("#DOCUMENT", "document", {
-            title: "CPF", buyerDocumentFormatter: tuna.getBuyerDocumentFormatter("pt-BR")
+            title: "CPF", buyerDocumentFormatter: tuna.getBuyerDocumentFormatter("pt-BR"),
+            validationMessage: "CPF inválido"
         });
 
         if (installmentOptions)
@@ -239,7 +240,7 @@ useNewCard = () => {
     newCreditCardFieldIDs.push(pieceManager.forge("#VALIDITY", "cardValidity", {
         title: "Validade",
         placeholder: "MM/YYYY",
-        validationMessage: "CVV Inválido"
+        validationMessage: "Data Inválida"
     }));
     newCreditCardFieldIDs.push(pieceManager.forge("#CREDIT_CARD_CVV", "cardCvv", {
         title: "CVV"
