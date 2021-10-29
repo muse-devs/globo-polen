@@ -170,6 +170,7 @@ useBoletoPayment = () => {
     $("#boletoPaymentDocumentDiv").css("display", "block");
     $("#lblCPFBoleto").css("display", "block");
     $("#tuna_boleto_document").css("display", "block");
+    $("#pix-instruction").css("display", "none");
     $("#lblTunaTipo").html("Boleto.");
     $("#lblTunaTipo2").html("boleto");
     $("#tuna_is_boleto_payment").val("true");
@@ -199,6 +200,7 @@ usePixPayment = () => {
     $("#tuna_boleto_document").css("display", "none");
     $("#lblTunaTipo2").html("código");
     $("#lblTunaTipo").html("Pix!");
+    $("#pix-instruction").css("display", "block");
     $("#tuna_is_boleto_payment").val("false");
     $("#tuna_is_pix_payment").val("true");
 }

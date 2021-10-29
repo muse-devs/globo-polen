@@ -12386,7 +12386,9 @@ button.criesp :hover {
 #savedCardPaymentDiv .cardItem {
   display: flex;
   align-items: center;
-  justify-content: center; }
+  justify-content: center;
+  border: 1px solid #000;
+  border-radius: 10px; }
 
 #savedCardPaymentDiv #tuna_saved_card_cvv {
   display: flex;
@@ -12413,12 +12415,12 @@ button.criesp :hover {
 
 #commonFields .defaultTunaInputOption {
   width: 100%;
-  padding: 10px;
+  padding: 10px !important;
   font-family: "Poppins", sans-serif;
   font-size: 14px;
   border-radius: 6px;
   color: #495057;
-  border: 1px solid #ced4da; }
+  border: 1px solid #000; }
 
 .defaultTunaInputText {
   width: 100% !important;
@@ -12427,7 +12429,7 @@ button.criesp :hover {
   font-size: 14px;
   border-radius: 6px;
   color: #495057;
-  border: 1px solid #ced4da; }
+  border: 1px solid #000; }
 
 .defaultTunaCVVImage {
   display: none; }
@@ -12460,11 +12462,36 @@ button.criesp :hover {
   #creditCardPaymentDiv .dual-column div {
     width: 50%; }
 
+#creditCardPaymentDiv .defaultTunaInputText {
+  padding-left: 34px !important; }
+
+#creditCardPaymentDiv #CARD_HOLDER_NAME input {
+  background: url("../img/checkout/card-user-icon.png") no-repeat scroll 10px 12px; }
+
+#creditCardPaymentDiv #CREDIT_CARD input {
+  background: url("../img/checkout/card-icon.png") no-repeat scroll 10px 12px; }
+
+#creditCardPaymentDiv #VALIDITY input {
+  background: url("../img/checkout/card-calendar.png") no-repeat scroll 10px 12px; }
+
+#creditCardPaymentDiv #CREDIT_CARD_CVV input {
+  background: url("../img/checkout/card-cvv-icon.png") no-repeat scroll 10px 12px; }
+
 #boletoPaymentDocumentDiv label {
   color: var(--dark);
   font-family: "Poppins", sans-serif;
   font-size: 13px;
   margin-top: 15px; }
+
+#pix-instruction {
+  background-color: var(--box-color-light);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px; }
+  #pix-instruction h5 {
+    font-size: 15px;
+    color: var(--primary);
+    font-weight: 600; }
 
 .tuna-tabs .tab {
   font-size: 16px;
@@ -12506,11 +12533,6 @@ button.criesp :hover {
     border-color: var(--primary);
     font-weight: 500;
     color: #000 !important; }
-
-#add_payment_method #payment ul.payment_methods li input,
-.woocommerce-cart #payment ul.payment_methods li input,
-.woocommerce-checkout #payment ul.payment_methods li input {
-  margin-bottom: 5px; }
 
 .tuna-tabs .tab.selected:after {
   display: none; }

@@ -68,7 +68,23 @@
     </div>
 </div>
 <div id="boletoPaymentDocumentDiv" style="display: none;">
-    Pague de forma segura com o <span id="lblTunaTipo">Boleto</span><br />
+    Pague de forma segura com o <span id="lblTunaTipo"><b>Boleto</b></span><br /><br />
+    <div id="pix-instruction">
+        <div class="row">
+            <div class="col-sm-12 mb-3">
+                <h5>Imediato</h5>
+                <p>Faça seu pagamento em poucos segundos sem custos adicionais.</p>
+            </div>
+            <div class="col-sm-12 mb-3">
+                <h5>Simples</h5>
+                <p>Para pagar basta abrir o aplicativo do seu banco, procurar pelo PIX e escanear o QRcode.</p>
+            </div>
+            <div class="col-sm-12">
+                <h5>Seguro</h5>
+                <p>O pagamento com PIX foi desenvolvido pelo Banco Central para facilitar suas compras.</p>
+            </div>
+        </div>
+    </div>
     Ao finalizar o pedido, você verá o <span id="lblTunaTipo2">boleto</span> para efetuar o pagamento.<br />
     <label id="lblCPFBoleto" class="defaultTunaLabel">CPF do comprador</label>
     <input class="defaultTunaInputText" type="text" name="tuna_document" placeholder="Dígite somente números" id="tuna_boleto_document" required />

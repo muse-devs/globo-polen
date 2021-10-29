@@ -353,6 +353,8 @@ button.criesp {
     display: flex;
     align-items: center;
     justify-content: center;
+    border: 1px solid #000;
+    border-radius: 10px;
   }
   #tuna_saved_card_cvv {
     display: flex;
@@ -383,12 +385,12 @@ button.criesp {
 #commonFields {
   .defaultTunaInputOption {
     width: 100%;
-    padding: 10px;
+    padding: 10px!important;
     font-family: "Poppins", sans-serif;
     font-size: 14px;
     border-radius: 6px;
     color: #495057;
-    border: 1px solid #ced4da;
+    border: 1px solid #000;
   }
 }
 
@@ -399,7 +401,7 @@ button.criesp {
   font-size: 14px;
   border-radius: 6px;
   color: #495057;
-  border: 1px solid #ced4da;
+  border: 1px solid #000;
 }
 
 .defaultTunaCVVImage {
@@ -444,6 +446,29 @@ button.criesp {
       width: 50%;
     }
   }
+  .defaultTunaInputText {
+    padding-left: 34px!important;
+  }
+  #CARD_HOLDER_NAME {
+    input {
+      background: url("../img/checkout/card-user-icon.png")no-repeat scroll 10px 12px;
+    }
+  }
+  #CREDIT_CARD {
+    input {
+      background: url("../img/checkout/card-icon.png")no-repeat scroll 10px 12px;
+    }
+  }
+  #VALIDITY {
+    input {
+      background: url("../img/checkout/card-calendar.png")no-repeat scroll 10px 12px;
+    }
+  }
+  #CREDIT_CARD_CVV {
+    input {
+      background: url("../img/checkout/card-cvv-icon.png")no-repeat scroll 10px 12px;
+    }
+  }
 }
 
 #boletoPaymentDocumentDiv {
@@ -452,6 +477,18 @@ button.criesp {
     font-family: "Poppins", sans-serif;
     font-size: 13px;
     margin-top: 15px;
+  }
+}
+
+#pix-instruction {
+  background-color: var(--box-color-light);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  h5 {
+    font-size: 15px;
+    color: var(--primary);
+    font-weight: 600;
   }
 }
 
@@ -501,10 +538,6 @@ button.criesp {
     font-weight: 500;
     color: #000!important;
   }
-}
-
-#add_payment_method #payment ul.payment_methods li input, .woocommerce-cart #payment ul.payment_methods li input, .woocommerce-checkout #payment ul.payment_methods li input{
-  margin-bottom: 5px;
 }
 
 .tuna-tabs .tab.selected:after {
