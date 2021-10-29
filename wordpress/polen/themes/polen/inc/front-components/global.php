@@ -754,7 +754,7 @@ function polen_get_home_banner($link)
       <!-- Desktop Banner -->
 			<div class="mc-banner combate-desktop">
 				<img class="image mobile-img" src="<?php echo TEMPLATE_URI . '/assets/img/combate/bg-mobile.png'; ?>" alt="Polen Masterclass" />
-				<img class="image desktop-img" src="<?php echo TEMPLATE_URI . '/assets/img/combate/bg.jpg'; ?>" alt="Polen Masterclass" />
+				<img class="image desktop-img" src="<?php echo TEMPLATE_URI . '/assets/img/combate/bg.jpeg'; ?>" alt="Polen Masterclass" />
 				<div class="content">
 					<div class="left">
             <img src="<?php echo TEMPLATE_URI . '/assets/img/combate/logo.png'; ?>" alt="Canal Combate" style="width: 150px;"></img>
