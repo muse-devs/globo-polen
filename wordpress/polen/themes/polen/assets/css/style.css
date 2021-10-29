@@ -10064,6 +10064,91 @@ textarea {
       .combo-advanced .item .content .text {
         margin: 0; }
 
+.cart-advanced .cart-step {
+  overflow: hidden;
+  max-height: 400px;
+  transition: max-height 350ms ease; }
+  .cart-advanced .cart-step .header .title {
+    display: flex;
+    align-items: center;
+    font-weight: normal; }
+    .cart-advanced .cart-step .header .title .cart-step__ico {
+      margin-right: 0.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background-color: #738ded;
+      color: var(--light); }
+      .cart-advanced .cart-step .header .title .cart-step__ico.cart-step__ico1::after {
+        content: "1"; }
+      .cart-advanced .cart-step .header .title .cart-step__ico.cart-step__ico2::after {
+        content: "2"; }
+  .cart-advanced .cart-step .header .btn-edit {
+    display: block;
+    padding: 0;
+    font-size: 8px;
+    font-weight: 400;
+    text-decoration: underline;
+    color: var(--dark);
+    border: none;
+    background: none; }
+  .cart-advanced .cart-step.-disabled {
+    max-height: 32px; }
+    .cart-advanced .cart-step.-disabled .header .title .cart-step__ico {
+      background-color: #868E96; }
+  .cart-advanced .cart-step.-done .header .title .cart-step__ico {
+    background-color: var(--primary); }
+    .cart-advanced .cart-step.-done .header .title .cart-step__ico::after {
+      content: "";
+      margin: -5px 0 0 1px;
+      width: 16px;
+      height: 9px;
+      border: 2px solid var(--light);
+      border-top: none;
+      border-right: none;
+      box-sizing: border-box;
+      transform: rotate(320deg); }
+
+.cart-advanced .divisor {
+  margin: 8px 0;
+  width: 32px;
+  height: 54px;
+  text-align: center; }
+  .cart-advanced .divisor::after {
+    content: "";
+    display: inline-block;
+    width: 1px;
+    height: 100%;
+    background-color: #ADB5BD; }
+
+.select-advanced .item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 8px;
+  width: 157px;
+  height: 78px;
+  border: 1px solid #ced4da;
+  background-color: #f1f1f1;
+  box-sizing: border-box;
+  border-radius: 4px;
+  transition: background-color 350ms ease; }
+  .select-advanced .item input[type="radio"] {
+    display: none; }
+    .select-advanced .item input[type="radio"]:checked + span {
+      font-weight: 400; }
+  .select-advanced .item.-checked {
+    border: 2px solid #fd6c36;
+    background: linear-gradient(0deg, rgba(252, 108, 54, 0.14), rgba(252, 108, 54, 0.14)), #ffffff; }
+  .select-advanced .item .icon {
+    margin: 0 0 8px;
+    width: 24px;
+    height: 24px; }
+
 /**
  * Owl Carousel v2.3.4
  * Copyright 2013-2018 David Deutsch
@@ -13987,5 +14072,70 @@ label[for="wc-stripe-new-payment-method"] {
   .bus-thankyou .title {
     font-size: 64px;
     line-height: 77px; } }
+
+#faq .title {
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 38.4px; }
+
+#faq .subtitle {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: #000; }
+
+#faq .panel-group .panel {
+  border-bottom: 1px solid #CED4DA;
+  padding: 35px 20px; }
+  #faq .panel-group .panel .panel-heading .panel-title {
+    margin: 0px;
+    position: relative; }
+    #faq .panel-group .panel .panel-heading .panel-title a:after {
+      content: "+";
+      display: block;
+      position: absolute;
+      right: 0;
+      top: 0;
+      font-size: 30px;
+      font-weight: 100; }
+      @media (max-width: 575.98px) {
+        #faq .panel-group .panel .panel-heading .panel-title a:after {
+          right: -30px;
+          top: 30%;
+          transform: translate(-50%, 0%); } }
+    #faq .panel-group .panel .panel-heading .panel-title a[aria-expanded="true"]:after {
+      content: "-";
+      font-size: 35px; }
+    #faq .panel-group .panel .panel-heading .panel-title a[aria-expanded="true"] {
+      color: var(--primary); }
+    #faq .panel-group .panel .panel-heading .panel-title a {
+      color: #495057;
+      margin: 0px;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 19px;
+      letter-spacing: 0em;
+      text-align: left;
+      width: 100%;
+      word-break: break-word; }
+      #faq .panel-group .panel .panel-heading .panel-title a strong {
+        font-weight: 500; }
+  #faq .panel-group .panel .panel-collapse {
+    margin-bottom: 10px; }
+    #faq .panel-group .panel .panel-collapse .panel-body {
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 150%;
+      letter-spacing: 0em;
+      text-align: left;
+      color: #495057;
+      margin-top: 20px; }
+      #faq .panel-group .panel .panel-collapse .panel-body a {
+        font-size: 16px; }
 
 /*# sourceMappingURL=maps/style.css.map */

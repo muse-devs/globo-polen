@@ -63,6 +63,7 @@ $Talent_Fields = new Polen_Update_Fields();
 		polen_get_talent_card( $talent_cart_detail, $is_social ); ?>
     <?php polen_get_cart_form(); ?>
 	</div>
+  <?php /*
 	<form class="woocommerce-cart-form col-12 col-md-6 order-md-1" action="<?php echo esc_url(wc_get_checkout_url()); ?>" method="post">
 		<?php do_action('woocommerce_before_cart_table'); ?>
 
@@ -323,6 +324,7 @@ $Talent_Fields = new Polen_Update_Fields();
 		<?php do_action('woocommerce_after_cart_contents'); ?>
 		<?php do_action('woocommerce_after_cart_table'); ?>
 	</form>
+    */ ?>
 </div>
 
 <?php do_action('woocommerce_before_cart_collaterals'); ?>

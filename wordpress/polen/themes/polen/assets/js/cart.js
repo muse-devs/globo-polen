@@ -1,4 +1,5 @@
 function verify_checkbox_selected_to_hidde_or_show_fields() {
+  return;
   let value_checked = ''
   if (document.querySelectorAll('input[name="video_to"')[1].checked) {
     value_checked = document.querySelectorAll('input[name="video_to"')[1].value;
@@ -16,6 +17,7 @@ function verify_checkbox_selected_to_hidde_or_show_fields() {
 }
 
 (function ($) {
+  return;
   $(document).on('click', '.cart-video-to', verify_checkbox_selected_to_hidde_or_show_fields);
 
   $(document).ready(function () {
