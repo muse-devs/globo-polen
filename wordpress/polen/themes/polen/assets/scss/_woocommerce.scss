@@ -402,9 +402,32 @@ button.criesp {
   border: 1px solid #ced4da;
 }
 
+.defaultTunaCVVImage {
+  display: none;
+}
+
+#CREDIT_CARD .defaultTunaCardBrand, #CREDIT_CARD_CVV .defaultTunaCVVImage {
+  display: none;
+}
+
+#CREDIT_CARD {
+  div {
+    width: 100%;
+  }
+}
+
+#CREDIT_CARD_CVV {
+  direction: inherit!important;
+  place-content: baseline;
+  div {
+    width: 100%;
+  }
+}
+
 #creditCardPaymentDiv {
   label {
-    color: var(--dark);
+    color: #000;
+    font-weight: 400;
     font-family: "Poppins", sans-serif;
     font-size: 13px;
     display: inline-block!important;
@@ -413,6 +436,12 @@ button.criesp {
   #SINGLE_USE_FIELD {
     label {
       margin-top: 8px;
+    }
+  }
+  .dual-column {
+    display: flex;
+    div {
+      width: 50%;
     }
   }
 }
@@ -432,13 +461,54 @@ button.criesp {
 }
 
 .tuna-tabs {
+  margin-bottom: 25px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  .pixPaymentBtn {
+    min-width: 100px;
+    padding: 20px 0px!important;
+    img {
+      margin-right: 0px!important;
+    }
+  }
   .tab {
-    margin-bottom: 5px;
+    display: flex!important;
+    margin-right: 6px;
+    margin-bottom: 6px;
+    justify-content: center;
+    align-items: center;
+    background: #FFFFFF;
+    border: 1px solid #868E96;
+    box-sizing: border-box;
+    border-radius: 8px;
+    padding: 20px 15px;
+    font-size: 11px;
+    line-height: 9px;
+    color: #868E96;
+    img {
+      margin-left: 0px!important;
+      margin-right: 5px!important;
+    }
   }
   @include media-breakpoint-down(xs) {
 		display: flex;
     justify-content: center;
 	}
+  .selected {
+    background-color: var(--box-color-light);
+    border-color: var(--primary);
+    font-weight: 500;
+    color: #000!important;
+  }
+}
+
+#add_payment_method #payment ul.payment_methods li input, .woocommerce-cart #payment ul.payment_methods li input, .woocommerce-checkout #payment ul.payment_methods li input{
+  margin-bottom: 5px;
+}
+
+.tuna-tabs .tab.selected:after {
+  display: none;
 }
 
 .tuna-tabs .tab.selected:after {

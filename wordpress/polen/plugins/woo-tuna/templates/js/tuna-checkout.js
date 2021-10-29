@@ -21,7 +21,10 @@ startTuna = async (tunaSessionToken, allowBoletoPayment, installmentOptions, tun
         let pieceManager = tuna.pieceManager();
 
         pieceManager.forge("#DOCUMENT", "document", {
-            title: "CPF", buyerDocumentFormatter: tuna.getBuyerDocumentFormatter("pt-BR")
+            title: "CPF do títular do cartão", 
+            placeholder: "Dígite somente números",
+            validationMessage: "CPF Inválido",
+            buyerDocumentFormatter: tuna.getBuyerDocumentFormatter("pt-BR")
         });
 
         if (installmentOptions)
@@ -225,24 +228,26 @@ useNewCard = () => {
     let pieceManager = tuna.pieceManager();
 
     newCreditCardFieldIDs.push(pieceManager.forge("#CARD_HOLDER_NAME", "cardHolderName", {
-        title: "Nome Impresso no cartão",
-        placeholder: "Nome Impresso no cartão",
+        title: "Titular do cartão",
+        placeholder: "Digite o nome como é impresso no cartão",
         validationMessage: "Nome inválido"
     }));
 
     newCreditCardFieldIDs.push(pieceManager.forge("#CREDIT_CARD", "cardNumber", {
         title: "Número do Cartão",
-        placeholder: "Número do Cartão",
+        placeholder: "Dígite somente números",
         validationMessage: "Número Inválido"
     }, "sensitive"));
 
     newCreditCardFieldIDs.push(pieceManager.forge("#VALIDITY", "cardValidity", {
-        title: "Validade",
-        placeholder: "MM/YYYY",
-        validationMessage: "CVV Inválido"
+        title: "Data de Validade",
+        placeholder: "MM/AAAA",
+        validationMessage: "Data Inválida"
     }));
     newCreditCardFieldIDs.push(pieceManager.forge("#CREDIT_CARD_CVV", "cardCvv", {
-        title: "CVV"
+        title: "Código de segurança",
+        placeholder: "CVV",
+        validationMessage: "CVV Inválido"
     }, "sensitive"));
     newCreditCardFieldIDs.push(pieceManager.forge("#SINGLE_USE_FIELD", "saveCard", {
         title: "Salvar Cartão"
