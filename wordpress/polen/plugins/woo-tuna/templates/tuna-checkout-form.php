@@ -54,7 +54,7 @@
         <div id="SINGLE_USE_FIELD"></div>
     </div>
     <div id="commonFields">
-        <div id="INSTALLMENT"></div>
+        <div id="INSTALLMENT" class="d-none"></div>
         <div id="DOCUMENT"></div>
     </div>
 </div>
