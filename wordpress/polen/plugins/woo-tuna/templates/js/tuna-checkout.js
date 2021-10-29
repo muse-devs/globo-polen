@@ -21,8 +21,10 @@ startTuna = async (tunaSessionToken, allowBoletoPayment, installmentOptions, tun
         let pieceManager = tuna.pieceManager();
 
         pieceManager.forge("#DOCUMENT", "document", {
-            title: "CPF", buyerDocumentFormatter: tuna.getBuyerDocumentFormatter("pt-BR"),
-            validationMessage: "CPF inválido"
+            title: "CPF do títular do cartão", 
+            placeholder: "Dígite somente números",
+            validationMessage: "CPF Inválido",
+            buyerDocumentFormatter: tuna.getBuyerDocumentFormatter("pt-BR")
         });
 
         if (installmentOptions)
@@ -168,6 +170,7 @@ useBoletoPayment = () => {
     $("#boletoPaymentDocumentDiv").css("display", "block");
     $("#lblCPFBoleto").css("display", "block");
     $("#tuna_boleto_document").css("display", "block");
+    $("#pix-instruction").css("display", "none");
     $("#lblTunaTipo").html("Boleto.");
     $("#lblTunaTipo2").html("boleto");
     $("#tuna_is_boleto_payment").val("true");
@@ -197,6 +200,7 @@ usePixPayment = () => {
     $("#tuna_boleto_document").css("display", "none");
     $("#lblTunaTipo2").html("código");
     $("#lblTunaTipo").html("Pix!");
+    $("#pix-instruction").css("display", "block");
     $("#tuna_is_boleto_payment").val("false");
     $("#tuna_is_pix_payment").val("true");
 }
@@ -226,24 +230,26 @@ useNewCard = () => {
     let pieceManager = tuna.pieceManager();
 
     newCreditCardFieldIDs.push(pieceManager.forge("#CARD_HOLDER_NAME", "cardHolderName", {
-        title: "Nome Impresso no cartão",
-        placeholder: "Nome Impresso no cartão",
+        title: "Titular do cartão",
+        placeholder: "Digite o nome como é impresso no cartão",
         validationMessage: "Nome inválido"
     }));
 
     newCreditCardFieldIDs.push(pieceManager.forge("#CREDIT_CARD", "cardNumber", {
         title: "Número do Cartão",
-        placeholder: "Número do Cartão",
+        placeholder: "Dígite somente números",
         validationMessage: "Número Inválido"
     }, "sensitive"));
 
     newCreditCardFieldIDs.push(pieceManager.forge("#VALIDITY", "cardValidity", {
-        title: "Validade",
-        placeholder: "MM/YYYY",
+        title: "Data de Validade",
+        placeholder: "MM/AAAA",
         validationMessage: "Data Inválida"
     }));
     newCreditCardFieldIDs.push(pieceManager.forge("#CREDIT_CARD_CVV", "cardCvv", {
-        title: "CVV"
+        title: "Código de segurança",
+        placeholder: "CVV",
+        validationMessage: "CVV Inválido"
     }, "sensitive"));
     newCreditCardFieldIDs.push(pieceManager.forge("#SINGLE_USE_FIELD", "saveCard", {
         title: "Salvar Cartão"
