@@ -25,6 +25,13 @@ input[type="date"] {
   min-height: 1.2em;
 }
 
+.custom-select {
+  color: rgba(0, 0, 0, 0.6);
+  height: auto;
+  border-radius: 8px;
+  border-color: var(--gray);
+}
+
 .custom-select-sm {
   max-width: 32%;
 }
