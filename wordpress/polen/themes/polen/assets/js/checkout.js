@@ -14,4 +14,6 @@
 //         keepStatic: true
 //     });
 //   }
+
+//   $('label[for="payment_method_tuna_payment"]').text("Escolha o método de pagamento")
 // });
