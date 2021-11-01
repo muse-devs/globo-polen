@@ -404,6 +404,11 @@ button.criesp {
   border: 1px solid #000;
 }
 
+.defaultTunaInputText:focus {
+  border: 1px solid var(--primary)!important;
+  outline: none;
+}
+
 .defaultTunaCVVImage {
   display: none;
 }
@@ -516,16 +521,29 @@ button.criesp {
     justify-content: center;
     align-items: center;
     background: #FFFFFF;
+    flex-flow: column;
     border: 1px solid #868E96;
     box-sizing: border-box;
     border-radius: 8px;
-    padding: 20px 15px;
+    padding: 15px;
     font-size: 11px;
     line-height: 9px;
     color: #868E96;
+    min-width: 120px;
     img {
       margin-left: 0px!important;
-      margin-right: 5px!important;
+      filter: grayscale(1)!important;
+    }
+    h5 {
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 14px;
+      letter-spacing: 0em;
+      text-align: center;
+      width: 100%!important;
+      margin-top: 10px;
+      margin-bottom: 0px;
     }
   }
   @include media-breakpoint-down(xs) {
@@ -533,10 +551,14 @@ button.criesp {
     justify-content: center;
 	}
   .selected {
-    background-color: var(--box-color-light);
     border-color: var(--primary);
-    font-weight: 500;
-    color: #000!important;
+    img {
+      filter: grayscale(0)!important;
+    }
+    h5 {
+      color: #212529;
+      font-weight: 600;
+    }
   }
 }
 
