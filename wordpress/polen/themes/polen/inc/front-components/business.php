@@ -146,12 +146,21 @@ function bus_get_form()
         $inputs->material_input(Material_Inputs::TYPE_TEXT, "name", "name", "Nome Completo", true, "mb-3");
         $inputs->material_input(Material_Inputs::TYPE_TEXT, "company", "company", "Empresa", true, "mb-3");
 
-        $inputs->material_select("select1", "employees_quantity", "Número de colaboradores", array(
-          "menos-de-20" => "Menos de 20",
-          "de-20-a-99" => "De 20 a 99",
-          "de-100-a-499" => "De 100 a 499",
-          "mais-de-500" => "Mais de 500",
-        ), true, "mb-3");
+        ?>
+          <select name="employees_quantity" class="custom-select mb-3" required>
+            <option value="">Número de colaboradores *</option>
+            <option value="menos-de-20">Menos de 20</option>
+            <option value="de-20-a-99">De 20 a 99</option>
+            <option value="de-100-a-499">De 100 a 499</option>
+            <option value="mais-de-500">Mais de 500</option>
+          </select>
+        <?php
+        // $inputs->material_select("select1", "employees_quantity", "Número de colaboradores", array(
+        //   "menos-de-20" => "Menos de 20",
+        //   "de-20-a-99" => "De 20 a 99",
+        //   "de-100-a-499" => "De 100 a 499",
+        //   "mais-de-500" => "Mais de 500",
+        // ), true, "mb-3");
         $inputs->material_input(Material_Inputs::TYPE_TEXT, "job", "job", "Cargo", true, "mb-3");
         $inputs->material_input(Material_Inputs::TYPE_EMAIL, "email", "email", "e-mail de trabalho", true, "mb-3");
         $inputs->material_input(
@@ -159,7 +168,7 @@ function bus_get_form()
           "phone",
           "phone",
           "Número de telefone",
-          true,
+          false,
           "mb-3",
           array(
             "placeholder" => "(XX) XXXXX-XXXX",
