@@ -573,6 +573,10 @@ class TUNA_Payment extends WC_Payment_Gateway
 		);
 	}
 
+    public function IsNullOrEmptyString($str){
+        return (!isset($str) || trim($str) === '');
+    }
+
 	// Submit payment and handle response
 	public function process_payment($order_id)
 	{
