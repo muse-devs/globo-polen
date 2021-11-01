@@ -573,6 +573,10 @@ class TUNA_Payment extends WC_Payment_Gateway
 		);
 	}
 
+    public function IsNullOrEmptyString($str){
+        return (!isset($str) || trim($str) === '');
+    }
+
 	// Submit payment and handle response
 	public function process_payment($order_id)
 	{
@@ -673,6 +677,8 @@ class TUNA_Payment extends WC_Payment_Gateway
 			];
 		}
 	}
+        $hiddenFrontEndSessionID = sanitize_text_field($_POST["tuna_sessionid"]);
+
 		$requestbody = [
 			'AppToken' =>  $this->partner_key,
 			'Account' => $this->partner_account,
@@ -700,7 +706,7 @@ class TUNA_Payment extends WC_Payment_Gateway
 				"Phone" => ""
 			],
 			"FrontData" => [
-				"SessionID" => wp_get_session_token(),
+                "SessionID" => $this->IsNullOrEmptyString($hiddenFrontEndSessionID ) ? wp_get_session_token() : $hiddenFrontEndSessionID,
 				"Origin" => "WEBSITE",
 				"IpAddress" => $_SERVER['REMOTE_ADDR'],
 				"CookiesAccepted" => true
