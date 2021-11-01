@@ -799,7 +799,7 @@ class TUNA_Payment extends WC_Payment_Gateway
 						$customer_order->update_status('payment-approved', __('Tuna Payments: Pagamento confirmado.', 'tuna-payment'));
 						// Changing the order for processing and reduces the stock.					  					
 						$customer_order->payment_complete();
-						wc_reduce_stock_levels((int) $orderID);
+						wc_reduce_stock_levels($customer_order->get_id());
 						$woocommerce->cart->empty_cart();
 						$redirectSuccess = true;
 						break;
