@@ -508,11 +508,9 @@ button.criesp {
   flex-wrap: wrap;
   justify-content: flex-start;
   .pixPaymentBtn {
-    max-width: 140px;
-    padding: 20px 0px!important;
-    img {
-      margin-right: 0px!important;
-      max-width: 100px;
+    padding: 0px!important;
+    .pix-icon {
+      max-width: 55%!important;
     }
   }
   .tab {
