@@ -239,7 +239,7 @@ function polen_scripts() {
 	}
 
 	if( is_cart() ) {
-		wp_enqueue_script( 'polen-cart', TEMPLATE_URI . '/assets/js/' . $min . 'cart.js', array("jquery"), _S_VERSION, true );
+		wp_enqueue_script( 'polen-cart', TEMPLATE_URI . '/assets/js/' . $min . 'cart.js', array("jquery", "vuejs"), _S_VERSION, true );
 	}
 
 	if( is_checkout() ) {

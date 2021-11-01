@@ -27,7 +27,7 @@
     item.addEventListener("click", function(e) {
       removeChecked();
       this.parentNode.parentNode.classList.add("-checked");
-      component.dispatchEvent(new CustomEvent("pol-combo-change", {
+      component.dispatchEvent(new CustomEvent("polcombochange", {
         detail: e.target.value
       }));
     });

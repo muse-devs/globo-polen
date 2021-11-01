@@ -121,7 +121,7 @@ class Material_Inputs
     return array("icon" => $icon, "title" => $title, "value" => $value, "checked" => $checked, "disabled" => $disabled);
   }
 
-  public function pol_select_advanced(string $id, string $name, array $items)
+  public function pol_select_advanced(string $name, array $items, array $params = array())
   {
     ob_start();
     include $this->get_full_path_file('pol_select_advanced');

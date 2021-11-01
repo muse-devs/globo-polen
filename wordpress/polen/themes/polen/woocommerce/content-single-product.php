@@ -141,7 +141,7 @@ if( 'instock' == $product->get_stock_status() ) {
       const btn_personal = document.querySelector(".btn-buy-personal");
       const btn_b2b = document.querySelector(".btn-buy-b2b");
       document.querySelector("#select_type")
-        .addEventListener("pol-combo-change",
+        .addEventListener("polcombochange",
           function(e) {
             if(e.detail == "b2b") {
               btn_b2b.classList.remove("d-none");
