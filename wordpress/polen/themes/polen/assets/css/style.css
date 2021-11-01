@@ -12513,10 +12513,11 @@ button.criesp :hover {
   flex-wrap: wrap;
   justify-content: flex-start; }
   .tuna-tabs .pixPaymentBtn {
-    min-width: 100px;
+    max-width: 140px;
     padding: 20px 0px !important; }
     .tuna-tabs .pixPaymentBtn img {
-      margin-right: 0px !important; }
+      margin-right: 0px !important;
+      max-width: 100px; }
   .tuna-tabs .tab {
     display: flex !important;
     margin-right: 6px;
@@ -12535,7 +12536,8 @@ button.criesp :hover {
     min-width: 120px; }
     .tuna-tabs .tab img {
       margin-left: 0px !important;
-      filter: grayscale(1) !important; }
+      filter: grayscale(1) !important;
+      max-width: 40% !important; }
     .tuna-tabs .tab h5 {
       font-size: 12px;
       font-style: normal;
