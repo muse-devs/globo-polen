@@ -12513,11 +12513,10 @@ button.criesp :hover {
   flex-wrap: wrap;
   justify-content: flex-start; }
   .tuna-tabs .pixPaymentBtn {
-    max-width: 140px;
-    padding: 20px 0px !important; }
-    .tuna-tabs .pixPaymentBtn img {
-      margin-right: 0px !important;
-      max-width: 100px; }
+    padding: 35px 0px !important; }
+    .tuna-tabs .pixPaymentBtn .pix-icon {
+      max-width: 55% !important;
+      opacity: 1; }
   .tuna-tabs .tab {
     display: flex !important;
     margin-right: 6px;
@@ -12537,7 +12536,8 @@ button.criesp :hover {
     .tuna-tabs .tab img {
       margin-left: 0px !important;
       filter: grayscale(1) !important;
-      max-width: 40% !important; }
+      max-width: 40% !important;
+      opacity: 0.5; }
     .tuna-tabs .tab h5 {
       font-size: 12px;
       font-style: normal;
@@ -12555,7 +12555,8 @@ button.criesp :hover {
   .tuna-tabs .selected {
     border-color: var(--primary); }
     .tuna-tabs .selected img {
-      filter: grayscale(0) !important; }
+      filter: grayscale(0) !important;
+      opacity: 1; }
     .tuna-tabs .selected h5 {
       color: #212529;
       font-weight: 600; }

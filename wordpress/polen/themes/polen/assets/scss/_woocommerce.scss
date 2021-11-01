@@ -508,11 +508,10 @@ button.criesp {
   flex-wrap: wrap;
   justify-content: flex-start;
   .pixPaymentBtn {
-    max-width: 140px;
-    padding: 20px 0px!important;
-    img {
-      margin-right: 0px!important;
-      max-width: 100px;
+    padding: 35px 0px!important;
+    .pix-icon {
+      max-width: 55%!important;
+      opacity: 1;
     }
   }
   .tab {
@@ -535,6 +534,7 @@ button.criesp {
       margin-left: 0px!important;
       filter: grayscale(1)!important;
       max-width: 40%!important;
+      opacity: 0.5;
     }
     h5 {
       font-size: 12px;
@@ -556,6 +556,7 @@ button.criesp {
     border-color: var(--primary);
     img {
       filter: grayscale(0)!important;
+      opacity: 1;
     }
     h5 {
       color: #212529;

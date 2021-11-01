@@ -35,7 +35,7 @@
             <h5>Boleto</h5>
         </div>
         <div type="button" onclick="usePixPayment()" style="display: none;" class="tab pixPaymentBtn">
-            <img src="<?php echo plugin_dir_url( __FILE__ ) . '../assets/icon-pix.png'; ?>" alt="Pix" />
+            <img src="<?php echo plugin_dir_url( __FILE__ ) . '../assets/icon-pix.png'; ?>" alt="Pix" class="pix-icon"/>
         </div>
     </div>
 
