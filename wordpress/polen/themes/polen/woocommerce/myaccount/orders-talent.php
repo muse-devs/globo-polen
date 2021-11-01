@@ -178,44 +178,45 @@ if (!$talent_is_social) {
 		<?php
 				endforeach;
 			}
+      ?>
+      <!-- Modal -->
+      <div class="modal fade" id="OrderActions" tabindex="-1" role="dialog" aria-labelledby="OrderActionsTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="row modal-body">
+              <!-- Início -->
+              <div class="col-12 background talent-order-modal">
+                <button type="button" class="modal-close" data-dismiss="modal" aria-label="Fechar">
+                  <?php Icon_Class::polen_icon_close(); ?>
+                </button>
+                <div class="row body">
+                  <div class="col-12 background">
+                    <h1 class="page-title">Olá, poderia nos explicar por quê você decidiu rejeitar esse pedido de vídeo?</h1>
+                  </div>
+                  <div class="col-12 mt-3">
+                    <?php $inputs->material_select("reason", "reason", "Selecione o motivo", array(
+                      "linguagem-impropria"   => "Linguagem Imprópria",
+                      "direitos-autorais"     => "Direitos Autorais",
+                      "pedido-complexo"       => "Não consegui entender o pedido",
+                      "Outro"                 => "Outro"
+                    ), true); ?>
+                  </div>
+                  <div class="col-12 mt-3">
+                    <?php $inputs->material_textarea("description", "description", "Descreva o motivo", true); ?>
+                  </div>
+                  <div class="col-12 mt-3 mb-4" button-nonce="<?php echo $accept_reject_nonce; ?>">
+                    <?php $inputs->material_button(Material_Inputs::TYPE_BUTTON, "btn-reject", "Declinar pedido", "order-check", array("order-id" => "", "action-type" => "reject")); ?>
+                  </div>
+                </div>
+                <!-- Fim -->
+              </div>
+            </div>
+          </div>
+        </div><!-- /Modal -->
+      </div><!-- .page-content -->
+      <?php
 		}
 		?>
-
-		<!-- Modal -->
-		<div class="modal fade" id="OrderActions" tabindex="-1" role="dialog" aria-labelledby="OrderActionsTitle" aria-hidden="true">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="row modal-body">
-						<!-- Início -->
-						<div class="col-12 background talent-order-modal">
-							<button type="button" class="modal-close" data-dismiss="modal" aria-label="Fechar">
-								<?php Icon_Class::polen_icon_close(); ?>
-							</button>
-							<div class="row body">
-								<div class="col-12 background">
-									<h1 class="page-title">Olá, poderia nos explicar por quê você decidiu rejeitar esse pedido de vídeo?</h1>
-								</div>
-								<div class="col-12 mt-3">
-                  <?php $inputs->material_select("reason", "reason", "Selecione o motivo", array(
-                    "linguagem-impropria"   => "Linguagem Imprópria",
-                    "direitos-autorais"     => "Direitos Autorais",
-                    "pedido-complexo"       => "Não consegui entender o pedido",
-                    "Outro"                 => "Outro"
-                  ), true); ?>
-								</div>
-								<div class="col-12 mt-3">
-                  <?php $inputs->material_textarea("description", "description", "Descreva o motivo", true); ?>
-								</div>
-								<div class="col-12 mt-3 mb-4" button-nonce="<?php echo $accept_reject_nonce; ?>">
-                  <?php $inputs->material_button(Material_Inputs::TYPE_BUTTON, "btn-reject", "Declinar pedido", "order-check", array("order-id" => "", "action-type" => "reject")); ?>
-								</div>
-							</div>
-							<!-- Fim -->
-						</div>
-					</div>
-				</div>
-			</div><!-- /Modal -->
-		</div><!-- .page-content -->
 </section><!-- .no-results -->
 
 <script>
