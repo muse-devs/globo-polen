@@ -28,14 +28,14 @@
         <div onclick="useSavedCreditCard()" id="creditCardPaymentBtn" class="tab selected">Cartão salvo</div>
         <div onclick="useNewCard()" id="newCardBtn" class="tab">
             <img src="<?php echo plugin_dir_url( __FILE__ ) . '../assets/icon-card.png'; ?>" alt="Cartão de Crédito" />
-            Cartão de Crédito
+            <h5>Cartão de<br>Crédito</h5>
         </div>
         <div type="button" onclick="useBoletoPayment()" style="display: none;" class="tab boletoPaymentBtn">
             <img src="<?php echo plugin_dir_url( __FILE__ ) . '../assets/icon-billet.png'; ?>" alt="Boleto" />
-            Boleto
+            <h5>Boleto</h5>
         </div>
         <div type="button" onclick="usePixPayment()" style="display: none;" class="tab pixPaymentBtn">
-            <img src="<?php echo plugin_dir_url( __FILE__ ) . '../assets/icon-pix.png'; ?>" alt="Pix" />
+            <img src="<?php echo plugin_dir_url( __FILE__ ) . '../assets/icon-pix.png'; ?>" alt="Pix" class="pix-icon"/>
         </div>
     </div>
 
