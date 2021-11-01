@@ -19,9 +19,6 @@ if( !empty( $Polen_Plugin_Settings['polen_ca_pub_key'] ) ) : ?>
 
 ?>
 <script type="text/javascript">
-   if(!session_id()) {
-        session_start();
-	} 
 	<?php $current_user = wp_get_current_user(); ?>
   var _user_id = "<?php echo !empty( $current_user ) ? $current_user->user_email : ''; ?>";
   var _session_id = "<?php echo wp_create_nonce(); ?>";
