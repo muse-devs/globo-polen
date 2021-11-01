@@ -792,6 +792,7 @@ class TUNA_Payment extends WC_Payment_Gateway
 					case '8':
 					case '9':
 					case '2':
+						\WC_Emails::instance();
 						$customer_order->update_status('payment-approved', __('Tuna Payments: Pagamento confirmado.', 'tuna-payment'));
 						// Changing the order for processing and reduces the stock.					  					
 						$customer_order->payment_complete();
