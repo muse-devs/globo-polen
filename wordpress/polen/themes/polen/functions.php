@@ -344,6 +344,11 @@ require_once TEMPLATE_DIR . '/enterprise/function_enterprise.php';
  */
 require_once TEMPLATE_DIR . '/inc/highlight_categories.php';
 
+/**
+ * Funcoes responsáveis pelo B2B da polen
+ */
+require_once TEMPLATE_DIR . '/inc/b2b_functions.php';
+
 
 add_action('wc_gateway_stripe_process_response', function($response, $order) {
 	// $response
