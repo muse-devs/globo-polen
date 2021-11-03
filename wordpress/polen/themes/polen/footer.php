@@ -43,7 +43,7 @@
 									echo $menu;
 								} else { ?>
 									<ul class="footer-menu">
-										<li><a href="<?php echo home_url().'/shop'; ?>">Todos os talentos</a></li>
+										<li><a href="<?php echo home_url().'/shop'; ?>">Todos os famosos</a></li>
 										<li><a href="/">Como funciona</a></li>
 										<li><a href="/politica-de-privacidade">Política de privacidade</a></li>
 										<li><a href="/politica-de-privacidade">Termos e condições</a></li>
