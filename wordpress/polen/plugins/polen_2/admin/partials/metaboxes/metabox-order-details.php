@@ -3,6 +3,8 @@ use Polen\Admin\Polen_Admin_Order_Custom_Fields;
 use Polen\Includes\Polen_Cart;
 use Polen\Includes\Polen_Order;
 use Polen\Includes\Polen_WooCommerce;
+use WP_Rocket\Engine\Optimization\DelayJS\HTML;
+
 ?>
 <div class="wrap">
     <?php
@@ -24,8 +26,15 @@ use Polen\Includes\Polen_WooCommerce;
                 <strong><?php echo $j?>:</strong>
             </td>
             <td>
-                <p id="video-instructions"><?php echo $info ?></p>
-                <a href="#" class="edit-video-instruction" data-old-value="<?= $info; ?>" data-field="<?= Polen_Cart::ITEM_INSTRUCTION_TO_VIDEO; ?>" data-action="polen_edit_order_custom_fields">Editar</a>
+                <!-- <p id="video-instructions"><?php echo $info ?></p> -->
+                <table>
+                    <tr>
+                        <?php $info = str_replace( '<br />', "", $info ); ?>
+                        <td style="width: 400px;"><textarea id="video-instruction" style="margin-top: 0px; margin-bottom: 0px; height: 231px;width:100%;" data-action="polen_edit_order_custom_fields" disabled="disabled"><?= $info; ?></textarea></td>
+                        <td><a href="#" class="edit-custom-field" field-edit="video-instruction" data-field="<?= Polen_Cart::ITEM_INSTRUCTION_TO_VIDEO; ?>" data-action="polen_edit_order_custom_fields">Editar</a></td>
+                    </tr>
+                </table>
+                <!-- <a href="#" class="edit-video-instruction" data-old-value="" data-field="<?= Polen_Cart::ITEM_INSTRUCTION_TO_VIDEO; ?>" data-action="polen_edit_order_custom_fields">Editar</a> -->
             </td>
         </tr>
         <?php
@@ -63,12 +72,16 @@ use Polen\Includes\Polen_WooCommerce;
                         throw new \Exception( 'Problema com a data de expiração, entre em contato com o Admin', 500 );
                     }
                     $deadline_date = $deadline_datetime->format( 'd/m/Y' );
-                    echo $deadline_date;
+                    echo <<<HTML
+                        <input type="text" id="deadline-field" disabled="disabled" value="{$deadline_date}"/>
+                    HTML;
+
                 } catch ( \Exception $e ) {
                     echo  $e->getMessage();
                 }
                     echo <<<HTML
-                        <a href="#" class="edit-video-instruction" data-old-value="{$deadline_date}" data-field="{$field}" data-action="polen_edit_order_custom_fields_deadline">Editar</a>
+                        <!-- <a href="#" class="edit-video-instruction" data-old-value="{$deadline_date}" data-field="{$field}" data-action="polen_edit_order_custom_fields_deadline">Editar</a> -->
+                        <a href="#" class="edit-custom-field" field-edit="deadline-field" data-field="{$field}" data-action="polen_edit_order_custom_fields_deadline">Editar</a>
                     HTML;
                 ?>
             </td>
@@ -77,15 +90,19 @@ use Polen\Includes\Polen_WooCommerce;
     <div class="clear"></div>
 </div>
 <script>
-    let instruction = document.getElementById('video-instructions').textContent;
-    document.getElementById('video-instructions').innerHTML = instruction.replace(/&#13;/g, "<br>").replace(/&#10;/g, "<br>");
+    // let instruction = document.getElementById('video-instructions').textContent;
+    // document.getElementById('video-instructions').innerHTML = instruction.replace(/&#13;/g, "<br>").replace(/&#10;/g, "<br>");
     jQuery(function(){
-        jQuery('.edit-video-instruction').click(function(evt){
+        jQuery('.edit-custom-field').click( function( evt ){
             evt.preventDefault();
-            let new_value = prompt( 'Nova valor', jQuery(evt.currentTarget).attr('data-old-value').replace(/&#13;/g, " ").replace(/&#10;/g, " ") );
-            if (new_value === null) {
-                return;
+            let input = jQuery(evt.currentTarget).attr('field-edit');
+            isDisabled = jQuery( '#' + input ).is( ':disabled' );
+            if( isDisabled ) {
+                jQuery( '#' + input ).removeAttr( 'disabled' );
+                jQuery( evt.currentTarget ).html( "Salvar" );
+                return false;
             }
+            let new_value = jQuery( '#' + input ).val();
             let data_update = {
                 action : jQuery(evt.currentTarget).attr('data-action'),
                 field : jQuery(evt.currentTarget).attr('data-field'),
@@ -95,11 +112,35 @@ use Polen\Includes\Polen_WooCommerce;
             };
             jQuery.post(ajaxurl, data_update, function(data,a,b){
                 alert(data.data);
-                document.location.reload();
+                jQuery( '#' + input ).attr( 'disabled', 'disabled' );
+                jQuery( evt.currentTarget ).html( "Editar" );
+                // document.location.reload();
             }).fail( (xhr, textStatus, errorThrown) => {
-                console.log(xhr, textStatus, errorThrown);
+                // console.log(xhr, textStatus, errorThrown);
                 alert(xhr.responseJSON.data);
+                jQuery( '#' + input ).attr( 'disabled', 'disabled' );
             });
         });
+        // jQuery('.edit-video-instruction').click(function(evt){
+        //     evt.preventDefault();
+        //     let new_value = prompt( 'Nova valor', jQuery(evt.currentTarget).attr('data-old-value').replace(/&#13;/g, " ").replace(/&#10;/g, " ") );
+        //     if (new_value === null) {
+        //         return;
+        //     }
+        //     let data_update = {
+        //         action : jQuery(evt.currentTarget).attr('data-action'),
+        //         field : jQuery(evt.currentTarget).attr('data-field'),
+        //         security : '<?= wp_create_nonce( Polen_Admin_Order_Custom_Fields::NONCE_ACTION ); ?>',
+        //         value : new_value,
+        //         order_id: <?= $_GET['post']; ?>
+        //     };
+        //     jQuery.post(ajaxurl, data_update, function(data,a,b){
+        //         alert(data.data);
+        //         document.location.reload();
+        //     }).fail( (xhr, textStatus, errorThrown) => {
+        //         console.log(xhr, textStatus, errorThrown);
+        //         alert(xhr.responseJSON.data);
+        //     });
+        // });
     });
 </script>
