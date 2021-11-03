@@ -45,6 +45,7 @@ $Talent_Fields = new Polen_Update_Fields();
       $talent = get_user_by('id', $talent_id);
       $is_social = social_product_is_social($_product, social_get_category_base());
       $talent_data = $Talent_Fields->get_vendor_data($talent_id);
+      $product_name = str_replace( '%', '&#37;', $_product->get_title() );
 
       $talent_cart_detail = array(
         "has_details" => false,
@@ -62,11 +63,20 @@ $Talent_Fields = new Polen_Update_Fields();
     }
     polen_get_talent_card($talent_cart_detail, $is_social);
     $inputs = new Material_Inputs();
+
+    $cart_item_basic = $cart_item;
+    unset(
+      $cart_item_basic["data"],
+      $cart_item_basic["data_hash"],
+      $cart_item_basic["key"],
+    );
     ?>
-    <form id="cart-advanced" class="woocommerce-cart-form mt-4 cart-advanced" v-on:submit.prevent="onSubmit">
+    <script> const cart_items = <?php echo json_encode($cart_item_basic); ?>; </script>
+    <form id="cart-advanced" class="woocommerce-cart-form mt-4 cart-advanced" action="<?php echo esc_url(wc_get_checkout_url()); ?>" method="post">
       <?php do_action('woocommerce_before_cart_table'); ?>
       <?php do_action('woocommerce_before_cart_contents'); ?>
       <?php
+
       foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) :
         $_product   = apply_filters('woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key);
         $product_id = apply_filters('woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key);
@@ -78,6 +88,7 @@ $Talent_Fields = new Polen_Update_Fields();
       ?>
         <?php endif; ?>
       <?php endforeach; ?>
+      <?php $inputs->input_hidden("cart-item-key", $cart_item_key); ?>
 
       <div class="cart-step cart-step1" v-bind:class="{'-disabled': activeItem != 1, '-done' : activeItem == 2}">
         <?php do_action('woocommerce_cart_contents'); ?>
@@ -92,13 +103,15 @@ $Talent_Fields = new Polen_Update_Fields();
         </header>
         <div class="cart-step__content">
           <?php
-          $inputs->material_input(Material_Inputs::TYPE_TEXT, "name", "name", "Seu nome", true, "mb-3", array(
-            "v-model" => "name"
+          $inputs->material_input(Material_Inputs::TYPE_TEXT, "offered_by", "offered_by", "Seu nome", true, "mb-3", array(
+            "v-model" => "offered_by"
           ));
-          $inputs->material_input(Material_Inputs::TYPE_EMAIL, "email", "email", "Seu e-mail", true, "mb-3", array(
-            "v-model" => "email"
+          $inputs->material_input(Material_Inputs::TYPE_EMAIL, "email_to_video", "email_to_video", "Seu e-mail", true, "mb-3", array(
+            "v-model" => "email_to_video"
           ));
-          $inputs->material_input(Material_Inputs::TYPE_PHONE, "whatsapp", "whatsapp", "Seu Whatsapp (opcional)", false);
+          $inputs->material_input(Material_Inputs::TYPE_PHONE, "whatsapp", "whatsapp", "Seu Whatsapp (opcional)", false, "", array(
+            "value" => $cart_item["whatsapp"]
+          ));
           $inputs->material_input_helper("Pode ficar tranquilo que enviaremos somente atualizações sobre o pedido");
           $inputs->material_button_outlined(Material_Inputs::TYPE_BUTTON, "next1", "Avançar", "mt-4", array(
             ":disabled" => "step1Disabled()",
@@ -119,39 +132,45 @@ $Talent_Fields = new Polen_Update_Fields();
           <h3 class="subtitle">Para quem é o vídeo?</h3>
           <?php
           $icons_path = TEMPLATE_URI . "/assets/img/pol_form_icons/";
-          $inputs->pol_select_advanced("praquem", array(
-            $inputs->pol_select_advanced_item($icons_path . "presente.png", "Presente", "presente"),
-            $inputs->pol_select_advanced_item($icons_path . "mim.png", "Para mim", "paramim")
-          ), array("v-on:polselectchange" => "praquemHandle"));
+          $inputs->pol_select_advanced("video_to", array(
+            $inputs->pol_select_advanced_item($icons_path . "presente.png", "Presente", "other_one", $cart_item["video_to"] == "other_one"),
+            $inputs->pol_select_advanced_item($icons_path . "mim.png", "Para mim", "to_myself", $cart_item["video_to"] == "to_myself")
+          ), array("v-on:polselectchange" => "video_toHandle"));
           ?>
-          <div class="mt-3" v-bind:class="{'d-none' : praquem == 'paramim'}">
-            <?php $inputs->material_input(Material_Inputs::TYPE_TEXT, "quemvai", "quemvai", "Quem vai receber o presente?", false); ?>
+          <div class="mt-3" v-bind:class="{'d-none' : video_to == 'to_myself'}">
+            <?php $inputs->material_input(Material_Inputs::TYPE_TEXT, "name_to_video", "name_to_video", "Quem vai receber o presente?", false, "", array(
+              ":required" => "isForOther()",
+              "value" => $cart_item["name_to_video"]
+            )); ?>
           </div>
           <h3 class="subtitle mt-4">Qual é a ocasião do vídeo?</h3>
           <?php
-          $inputs->pol_select_advanced("ocasiao", array(
-            $inputs->pol_select_advanced_item($icons_path . "aniversario.png", "Aniversário", "aniversario"),
-            $inputs->pol_select_advanced_item($icons_path . "casamento.png", "Casamento", "casamento"),
-            $inputs->pol_select_advanced_item($icons_path . "conselho.png", "Conselho", "conselho"),
-            $inputs->pol_select_advanced_item($icons_path . "formatura.png", "Formatura", "formatura"),
-            $inputs->pol_select_advanced_item($icons_path . "novidade.png", "Novidade", "novidade"),
-            $inputs->pol_select_advanced_item($icons_path . "outras.png", "Outras", "outras")
+          $inputs->pol_select_advanced("video_category", array(
+            $inputs->pol_select_advanced_item($icons_path . "aniversario.png", "Aniversário", "aniversario", $cart_item["video_category"] == "aniversario"),
+            $inputs->pol_select_advanced_item($icons_path . "casamento.png", "Casamento", "casamento", $cart_item["video_category"] == "casamento"),
+            $inputs->pol_select_advanced_item($icons_path . "conselho.png", "Conselho", "conselho", $cart_item["video_category"] == "conselho"),
+            $inputs->pol_select_advanced_item($icons_path . "formatura.png", "Formatura", "formatura", $cart_item["video_category"] == "formatura"),
+            $inputs->pol_select_advanced_item($icons_path . "novidade.png", "Novidade", "novidade", $cart_item["video_category"] == "novidade"),
+            $inputs->pol_select_advanced_item($icons_path . "outras.png", "Outras", "outras", $cart_item["video_category"] == "outras")
           ));
           ?>
           <h3 class="subtitle mt-4">Instruções para o vídeo</h3>
           <div class="box-textarea">
-            <div class="box-textarea__placeholder" v-bind:class="{'-disabled' : description != ''}">
-              <p>Escreva aqui o que você gostaria que Roberta Miranda falasse. Lembre-se:</p>
+            <div class="box-textarea__placeholder" v-bind:class="{'-disabled' : instructions_to_video != ''}">
+              <p>Escreva aqui o que você gostaria que <?php echo $product_name; ?> falasse. Lembre-se:</p>
               <ol>
-                <li>Não são permitidos pedidos comerciais, nem menções á marcas.</li>
+                <li>Não são permitidos pedidos comerciais, nem menções à marcas.</li>
                 <li>Músicos não tem autorização para cantar trechos de músicas com direitos autorais.</li>
               </ol>
             </div>
-            <?php $inputs->material_textarea("instructions", "instructions", "", true, array(
-              "v-model" => "description"
+            <?php $inputs->material_textarea("instructions_to_video", "instructions_to_video", "", true, array(
+              "v-model" => "instructions_to_video"
             )); ?>
           </div>
           <div class="row mt-3">
+            <div class="col-md-12" v-bind:class="{'d-none' : isInstructionsOk()}">
+              <div id="prohibited-instruction-alert" class="alert alert-danger mt-2" role="alert">Lembre-se: Os talentos não tem autorização para cantar ou tocar trechos de músicas.</div>
+            </div>
             <div class="col-12 col-md-12">
               <?php
               $social_class = '';
@@ -182,7 +201,9 @@ $Talent_Fields = new Polen_Update_Fields();
           </div>
         </div>
       </div>
-      <?php $inputs->material_button(Material_Inputs::TYPE_SUBMIT, "btn-buy", "Comprar agora", "mt-5"); ?>
+      <?php $inputs->material_button(Material_Inputs::TYPE_SUBMIT, "btn-buy", "Comprar agora", "mt-5", array(
+        ":disabled" => "!isComplete()"
+      )); ?>
       <?php wp_nonce_field('woocommerce-cart', 'woocommerce-cart-nonce'); ?>
       <?php do_action('woocommerce_after_cart_contents'); ?>
       <?php do_action('woocommerce_after_cart_table'); ?>

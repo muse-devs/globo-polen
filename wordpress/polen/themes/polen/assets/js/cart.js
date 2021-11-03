@@ -2,26 +2,57 @@ const cartAdvanced = new Vue({
   el: "#cart-advanced",
   data: {
     activeItem: 1,
-    name: "",
-    email: "",
-    praquem: "",
-    description: "",
+    offered_by: cart_items.offered_by || "",
+    email_to_video: cart_items.email_to_video || "",
+    video_to: cart_items.video_to || "",
+    instructions_to_video: cart_items.instructions_to_video || "",
   },
   methods: {
     nextStep: function (num) {
       this.activeItem = num;
     },
     step1Disabled: function() {
-      return !this.name || !this.email
+      return !this.offered_by || !this.email_to_video
     },
-    praquemHandle: function(e) {
-      this.praquem = e.detail;
+    video_toHandle: function(e) {
+      this.video_to = e.detail;
+    },
+    isComplete: function() {
+      return this.offered_by != ""
+      && this.email_to_video != ""
+      && this.video_to != ""
+      && this.instructions_to_video != "";
+    },
+    isForOther: function() {
+      return this.video_to == "other_one";
+    },
+    isInstructionsOk: function() {
+      return checkWordsInInstructions(this.instructions_to_video);
     },
     onSubmit: function(e) {
       console.log(jQuery("#cart-advanced").serialize());
     }
   },
 });
+
+// Checando se existem palavras proibidas na instrução do video
+function checkWordsInInstructions(instruction) {
+  let forbiddenWords = [
+    "música",
+    "musica",
+    "canta",
+    "cantar",
+    "toca",
+    "tocar",
+    "palinha",
+    "palhinha",
+    '"',
+  ];
+  if (forbiddenWords.some((v) => instruction.toLowerCase().includes(v))) {
+    return false;
+  }
+  return true;
+}
 
 function verify_checkbox_selected_to_hidde_or_show_fields() {
   return;
@@ -42,17 +73,16 @@ function verify_checkbox_selected_to_hidde_or_show_fields() {
 }
 
 (function ($) {
-  return;
-  $(document).on(
-    "click",
-    ".cart-video-to",
-    verify_checkbox_selected_to_hidde_or_show_fields
-  );
+  // $(document).on(
+  //   "click",
+  //   ".cart-video-to",
+  //   verify_checkbox_selected_to_hidde_or_show_fields
+  // );
 
   $(document).ready(function () {
     verify_checkbox_selected_to_hidde_or_show_fields();
-    $(".polen-cart-item-data").on("blur change paste click", function () {
-      var cart_id = $(this).data("cart-id");
+    $("input, textarea").on("blur change paste click", function () {
+      var cart_id = $("input[name=cart-item-key]").val();
       var item_name = $(this).attr("name");
       var allowed_item = [
         "offered_by",
@@ -62,6 +92,7 @@ function verify_checkbox_selected_to_hidde_or_show_fields() {
         "video_category",
         "instructions_to_video",
         "allow_video_on_page",
+        "whatsapp"
       ];
       if ($.inArray(item_name, allowed_item) !== -1) {
         let item_value;
@@ -73,7 +104,7 @@ function verify_checkbox_selected_to_hidde_or_show_fields() {
             item_value = "off";
           }
         } else {
-          item_value = $("#cart_" + item_name + "_" + cart_id).val();
+          item_value = $(this).val();
         }
         $.ajax({
           type: "POST",
@@ -93,6 +124,8 @@ function verify_checkbox_selected_to_hidde_or_show_fields() {
       }
     });
 
+    /*
+
     // Função para assistir as mudanças nas instruções do video
     // e exibir o aviso para não pedir músicas/cantar
     $("textarea[name='instructions_to_video']").on("change keyup", function () {
@@ -109,30 +142,6 @@ function verify_checkbox_selected_to_hidde_or_show_fields() {
         $(".video-instruction-refresh").click();
       }
     });
-
-    // Checando se existem palavras proibidas na instrução do video
-    function checkWordsInInstructions(instruction) {
-      let forbiddenWords = [
-        "música",
-        "Música",
-        "musica",
-        "Musica",
-        "canta",
-        "cantar",
-        "toca",
-        "tocar",
-        "palinha",
-        "palhinha",
-        "Palinha",
-        "Palhinha",
-        '"',
-      ];
-      if (forbiddenWords.some((v) => instruction.includes(v))) {
-        $("#prohibited-instruction-alert").removeClass("d-none");
-      } else {
-        $("#prohibited-instruction-alert").addClass("d-none");
-      }
-    }
 
     function messagesPreloader(active) {
       var loader = document.getElementById("reload");
@@ -181,5 +190,7 @@ function verify_checkbox_selected_to_hidde_or_show_fields() {
     ta.addEventListener("input", () => {
       pp.classList.toggle("d-none", ta.value !== "");
     });
+    */
   });
 })(jQuery);
+
