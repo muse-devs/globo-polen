@@ -19,7 +19,7 @@ get_header(); ?>
   <?php
   bus_get_header();
   bus_get_tutorial();
-  bus_grid(bus_get_talents(), "Nossos talentos");
+  bus_grid(bus_get_talents(), "Nossos famosos");
   bus_get_form();
   ?>
 </main>

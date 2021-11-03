@@ -150,7 +150,7 @@ abstract class Polen_DB
     public function get( $field, $value, $format = "%s" )
     {
         return self::create_instance_one( $this->wpdb->get_row(
-            $this->wpdb->prepare( "SELECT * FROM {$this->table_name} WHERE {$field} = {$format};", $value )
+            $this->wpdb->prepare( "SELECT * FROM {$this->table_name} WHERE {$field} = {$format} ORDER BY ID DESC;", $value )
         ) );
     }
 
