@@ -581,8 +581,8 @@ function polen_form_signin_newsletter(string $event = 'newsletter')
   $inputs = new Material_Inputs();
 ?>
   <div id="signin-newsletter" class="col-md-6 mt-4 order-md-2">
-    <h5 class="title typo typo-title typo-small">Junte-se à nossa lista</h5>
-    <p class="description typo typo-p typo-small typo-double-line-height">Seja o primeiro a saber sobre as estrelas mais recentes e as melhores ofertas no <?php bloginfo('name'); ?></p>
+    <h5 class="title typo typo-title typo-small">Se conecte com a gente!</h5>
+    <p class="description typo typo-p typo-small typo-double-line-height">Receba novidades e conteúdos exclusivos da Polen.</p>
     <form id="newsletter" action="/" method="POST">
       <div class="row">
         <div class="col-md-8 mb-2 mb-md-0">
