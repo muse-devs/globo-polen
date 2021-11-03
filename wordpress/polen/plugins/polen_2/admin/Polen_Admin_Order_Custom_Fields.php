@@ -40,9 +40,11 @@ class Polen_Admin_Order_Custom_Fields
         $item_order = $item_cart->get_item_order();
         
         $order->add_order_note( "{$field} alterado via wp-admin", 0, true );
+        $new_value = nl2br( $new_value );
         $item_order->update_meta_data( $field, $new_value, true );
         $item_order->save();
         wp_send_json_success( 'editado com sucesso', 200 );
+        wp_die();
     }
 
 
