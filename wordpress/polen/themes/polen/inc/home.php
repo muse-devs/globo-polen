@@ -37,7 +37,7 @@ get_header();
 
   <?php polen_front_get_tutorial(); ?>
 
-  <?php polen_front_get_news(polen_get_talents(12), "Todos os talentos", polen_get_all_talents_url());
+  <?php polen_front_get_news(polen_get_talents(12), "Todos os famosos", polen_get_all_talents_url());
   ?>
 
   <?php //polen_front_get_suggestion_box();
