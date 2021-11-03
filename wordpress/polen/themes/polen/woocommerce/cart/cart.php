@@ -467,6 +467,7 @@ $Talent_Fields = new Polen_Update_Fields();
 				</div>
 			</div>
 		</div>
+    <input type="hidden" name="tuna_sessionid" value="<?php echo wp_create_nonce(); ?>">
 		<?php do_action('woocommerce_after_cart_contents'); ?>
 		<?php do_action('woocommerce_after_cart_table'); ?>
 	</form>

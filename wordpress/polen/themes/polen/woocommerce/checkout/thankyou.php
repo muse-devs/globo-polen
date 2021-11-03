@@ -78,8 +78,8 @@ if( !is_user_logged_in() ) {
               <i class="icon icon-error-o"></i>
             </span>
           <span class="text">
-               <h4 class="title">Aguardando confirmação do talento</h4>
-               <p class="description">Caso seu pedido não seja aprovado pelo talento o seu dinheiro será devolvido imediatamente.</p>
+               <h4 class="title">Aguardando confirmação do seu ídolo</h4>
+               <p class="description">Caso seu pedido não seja aprovado pelo ídolo, você será reembolsado.</p>
             </span>
         </li>
         <li class="item item_next-step_2 pending">

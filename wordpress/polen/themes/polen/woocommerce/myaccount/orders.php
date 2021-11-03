@@ -84,7 +84,7 @@ if( $polen_talent->is_user_talent( $logged_user ) ) {
 									else :
 										//Quando a order está completa mais o Vimeo ainda não processou o video
 										$button_enabled = "";
-										$text_button = "Ver Video";
+										$text_button = "Ver Vídeo";
 										if( !$is_vimeo_process_complete ) {
 											$button_enabled = "disabled";
 											$text_button = "Video sendo processado aguarde";

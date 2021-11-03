@@ -573,6 +573,10 @@ class TUNA_Payment extends WC_Payment_Gateway
 		);
 	}
 
+    public function IsNullOrEmptyString($str){
+        return (!isset($str) || trim($str) === '');
+    }
+
 	// Submit payment and handle response
 	public function process_payment($order_id)
 	{
@@ -673,6 +677,8 @@ class TUNA_Payment extends WC_Payment_Gateway
 			];
 		}
 	}
+        $hiddenFrontEndSessionID = sanitize_text_field($_POST["tuna_sessionid"]);
+
 		$requestbody = [
 			'AppToken' =>  $this->partner_key,
 			'Account' => $this->partner_account,
@@ -700,7 +706,7 @@ class TUNA_Payment extends WC_Payment_Gateway
 				"Phone" => ""
 			],
 			"FrontData" => [
-				"SessionID" => wp_get_session_token(),
+                "SessionID" => $this->IsNullOrEmptyString($hiddenFrontEndSessionID ) ? wp_get_session_token() : $hiddenFrontEndSessionID,
 				"Origin" => "WEBSITE",
 				"IpAddress" => $_SERVER['REMOTE_ADDR'],
 				"CookiesAccepted" => true
@@ -790,10 +796,11 @@ class TUNA_Payment extends WC_Payment_Gateway
 					case '8':
 					case '9':
 					case '2':
+						\WC_Emails::instance();
 						$customer_order->update_status('payment-approved', __('Tuna Payments: Pagamento confirmado.', 'tuna-payment'));
 						// Changing the order for processing and reduces the stock.					  					
 						$customer_order->payment_complete();
-						wc_reduce_stock_levels((int) $orderID);
+						wc_reduce_stock_levels($customer_order->get_id());
 						$woocommerce->cart->empty_cart();
 						$redirectSuccess = true;
 						break;

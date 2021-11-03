@@ -202,10 +202,13 @@ class Polen_Video_Info extends Polen_DB
      */
     static public function get_by_complete_and_public_by_orders_ids( $orders_id = [] )
     {
+        if( empty( $orders_id ) ) {
+            return [];
+        }
         $self_class = new self();
         global $wpdb;
-        $sql ="SELECT * FROM `{$self_class->table_name()}` WHERE `order_id` IN (".implode(', ', array_fill(0, count($orders_id), '%d')).") LIMIT 0,100;";
-        $sql = call_user_func_array(array($wpdb, 'prepare'), array_merge(array($sql), $orders_id));
+        $sql ="SELECT * FROM `{$self_class->table_name()}` WHERE `order_id` IN (".implode(', ', array_fill(0, count($orders_id), '%d')).") ORDER BY FIELD( order_id,".implode(', ', array_fill(0, count($orders_id), '%d')).") LIMIT 0,100;";
+        $sql = call_user_func_array(array($wpdb, 'prepare'), array_merge(array($sql), $orders_id, $orders_id));
         $results = $wpdb->get_results( $sql );
         return self::create_instance_many( $results );
     }
