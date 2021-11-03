@@ -24,7 +24,6 @@ use Polen\Includes\Polen_WooCommerce;
                 <strong><?php echo $j?>:</strong>
             </td>
             <td>
-                <!-- <p id="video-instructions"><?php echo $info ?></p> -->
                 <table>
                     <tr>
                         <?php $info = str_replace( '<br />', "", $info ); ?>
@@ -32,7 +31,6 @@ use Polen\Includes\Polen_WooCommerce;
                         <td><a href="#" class="edit-custom-field" field-edit="video-instruction" data-field="<?= Polen_Cart::ITEM_INSTRUCTION_TO_VIDEO; ?>" data-action="polen_edit_order_custom_fields">Editar</a></td>
                     </tr>
                 </table>
-                <!-- <a href="#" class="edit-video-instruction" data-old-value="" data-field="<?= Polen_Cart::ITEM_INSTRUCTION_TO_VIDEO; ?>" data-action="polen_edit_order_custom_fields">Editar</a> -->
             </td>
         </tr>
         <?php
