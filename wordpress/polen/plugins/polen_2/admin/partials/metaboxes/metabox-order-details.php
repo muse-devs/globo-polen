@@ -78,7 +78,6 @@ use Polen\Includes\Polen_WooCommerce;
                     echo  $e->getMessage();
                 }
                     echo <<<HTML
-                        <!-- <a href="#" class="edit-video-instruction" data-old-value="{$deadline_date}" data-field="{$field}" data-action="polen_edit_order_custom_fields_deadline">Editar</a> -->
                         <a href="#" class="edit-custom-field" field-edit="deadline-field" data-field="{$field}" data-action="polen_edit_order_custom_fields_deadline">Editar</a>
                     HTML;
                 ?>
@@ -88,8 +87,6 @@ use Polen\Includes\Polen_WooCommerce;
     <div class="clear"></div>
 </div>
 <script>
-    // let instruction = document.getElementById('video-instructions').textContent;
-    // document.getElementById('video-instructions').innerHTML = instruction.replace(/&#13;/g, "<br>").replace(/&#10;/g, "<br>");
     jQuery(function(){
         jQuery('.edit-custom-field').click( function( evt ){
             evt.preventDefault();
@@ -112,33 +109,10 @@ use Polen\Includes\Polen_WooCommerce;
                 alert(data.data);
                 jQuery( '#' + input ).attr( 'disabled', 'disabled' );
                 jQuery( evt.currentTarget ).html( "Editar" );
-                // document.location.reload();
             }).fail( (xhr, textStatus, errorThrown) => {
-                // console.log(xhr, textStatus, errorThrown);
                 alert(xhr.responseJSON.data);
                 jQuery( '#' + input ).attr( 'disabled', 'disabled' );
             });
         });
-        // jQuery('.edit-video-instruction').click(function(evt){
-        //     evt.preventDefault();
-        //     let new_value = prompt( 'Nova valor', jQuery(evt.currentTarget).attr('data-old-value').replace(/&#13;/g, " ").replace(/&#10;/g, " ") );
-        //     if (new_value === null) {
-        //         return;
-        //     }
-        //     let data_update = {
-        //         action : jQuery(evt.currentTarget).attr('data-action'),
-        //         field : jQuery(evt.currentTarget).attr('data-field'),
-        //         security : '<?= wp_create_nonce( Polen_Admin_Order_Custom_Fields::NONCE_ACTION ); ?>',
-        //         value : new_value,
-        //         order_id: <?= $_GET['post']; ?>
-        //     };
-        //     jQuery.post(ajaxurl, data_update, function(data,a,b){
-        //         alert(data.data);
-        //         document.location.reload();
-        //     }).fail( (xhr, textStatus, errorThrown) => {
-        //         console.log(xhr, textStatus, errorThrown);
-        //         alert(xhr.responseJSON.data);
-        //     });
-        // });
     });
 </script>
