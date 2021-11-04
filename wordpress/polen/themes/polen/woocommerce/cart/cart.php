@@ -70,6 +70,10 @@ $Talent_Fields = new Polen_Update_Fields();
       $cart_item_basic["data_hash"],
       $cart_item_basic["key"],
     );
+    if (is_user_logged_in()) {
+      $current_user = wp_get_current_user();
+      $email_to_video = $current_user->user_email;
+    }
     ?>
     <script>
       const cart_items = <?php echo json_encode($cart_item_basic); ?>;
@@ -111,10 +115,13 @@ $Talent_Fields = new Polen_Update_Fields();
             "v-model" => "offered_by"
           ));
           $inputs->material_input(Material_Inputs::TYPE_EMAIL, "email_to_video", "email_to_video", "Seu e-mail", true, "mb-3", array(
-            "v-model" => "email_to_video"
+            "v-model" => "email_to_video",
+            "aria-email" => $email_to_video
           ));
           $inputs->material_input(Material_Inputs::TYPE_PHONE, "whatsapp", "whatsapp", "Seu Whatsapp (opcional)", false, "", array(
-            "value" => $cart_item["whatsapp"]
+            "v-model" => "whatsapp",
+            "v-on:keyup" => "handleWhatsappChange",
+            "maxlength" => "15"
           ));
           $inputs->material_input_helper("Pode ficar tranquilo que enviaremos somente atualizações sobre o pedido");
           $inputs->material_button_outlined(Material_Inputs::TYPE_BUTTON, "next1", "Avançar", "mt-4", array(

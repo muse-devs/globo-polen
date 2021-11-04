@@ -1,15 +1,21 @@
+const email_to_video = document.querySelector("input[name=email_to_video]").getAttribute("aria-email");
+
 const cartAdvanced = new Vue({
   el: "#cart-advanced",
   data: {
     activeItem: 1,
     offered_by: cart_items.offered_by || "",
-    email_to_video: cart_items.email_to_video || "",
+    email_to_video: cart_items.email_to_video || email_to_video || "",
     video_to: cart_items.video_to || "",
     instructions_to_video: cart_items.instructions_to_video || "",
+    whatsapp: cart_items.whatsapp || "",
   },
   methods: {
     nextStep: function (num) {
       this.activeItem = num;
+    },
+    handleWhatsappChange: function (e) {
+      this.whatsapp = mtel(e.target.value);
     },
     step1Disabled: function() {
       return !this.offered_by || !this.email_to_video
