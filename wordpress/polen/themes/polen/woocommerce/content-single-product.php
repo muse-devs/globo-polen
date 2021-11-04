@@ -52,6 +52,7 @@ $donate_text = stripslashes(get_post_meta(get_the_ID(), '_description_charity', 
 
 $histories_enabled = $Polen_Plugin_Settings['polen_histories_on'];
 $social = Social_Base_Product::product_is_social_base( $product );
+$inputs = new Material_Inputs();
 
 // outofstock
 // instock
@@ -115,18 +116,44 @@ if( 'instock' == $product->get_stock_status() ) {
 		</div>
 	</div>
 
+  <!-- Botão de adicionar ao carrinho -->
 	<div class="row mt-3 mb-1 talent-page-footer">
 		<div class="col-12 col-md-6 m-md-auto pb-3">
 			<?php if($has_stock) : ?>
-				<?php echo woocommerce_template_single_add_to_cart(); ?>
+        <?php $inputs->pol_combo_advanced(
+        "select_type",
+        "select_type",
+        array(
+          $inputs->pol_combo_advanced_item("Vídeo para uso pessoal", $product->get_price_html(), "Compre um vídeo personalizado para você ou para presentar outra pessoa", "check-pessoal", "pessoal", true),
+          $inputs->pol_combo_advanced_item("Vídeo para meu negócio", "", "Compre um Vídeo Polen para usar no seu negócio", "check-b2b", "b2b", false, !polen_b2b_product_is_enabled($product))
+          )); ?>
+				<div class="btn-buy-personal">
+          <?php echo woocommerce_template_single_add_to_cart(); ?>
+        </div>
+        <div class="btn-buy-b2b d-none">
+          <?php $inputs->material_button_link("btn-b2b", "Pedir vídeo", enterprise_url_home(), false, "", array(), $donate ? "donate" : ""); ?>
+        </div>
 			<?php else: ?>
-        <?php
-        $inputs = new Material_Inputs();
-        $inputs->material_button_link("todos", "Escolher outro artista", home_url( "shop" ));
-        ?>
+        <?php $inputs->material_button_link("todos", "Escolher outro artista", home_url( "shop" ), false, "", array(), $donate ? "donate" : ""); ?>
 			<?php endif; ?>
 		</div>
+    <script>
+      const btn_personal = document.querySelector(".btn-buy-personal");
+      const btn_b2b = document.querySelector(".btn-buy-b2b");
+      document.querySelector("#select_type")
+        .addEventListener("polcombochange",
+          function(e) {
+            if(e.detail == "b2b") {
+              btn_b2b.classList.remove("d-none");
+              btn_personal.classList.add("d-none");
+            } else {
+              btn_b2b.classList.add("d-none");
+              btn_personal.classList.remove("d-none");
+            }
+          });
+    </script>
 	</div>
+  <!-- --------------------------------------------- -->
 
 	<div class="row">
 		<div class="col-12 col-md-6 m-md-auto d-flex">

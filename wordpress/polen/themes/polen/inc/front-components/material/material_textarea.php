@@ -2,7 +2,9 @@
   <span class="mdc-notched-outline">
     <span class="mdc-notched-outline__leading"></span>
     <span class="mdc-notched-outline__notch">
-      <span class="mdc-floating-label" id="label-<?php echo $id; ?>"><?php echo $label; ?></span>
+      <?php if ($label) : ?>
+        <span class="mdc-floating-label" id="label-<?php echo $id; ?>"><?php echo $label; ?></span>
+      <?php endif; ?>
     </span>
     <span class="mdc-notched-outline__trailing"></span>
   </span>
