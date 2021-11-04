@@ -131,7 +131,7 @@ if( 'instock' == $product->get_stock_status() ) {
           <?php echo woocommerce_template_single_add_to_cart(); ?>
         </div>
         <div class="btn-buy-b2b d-none">
-          <?php $inputs->material_button_link("btn-b2b", "Pedir vídeo", enterprise_url_home(), false, "", array(), $donate ? "donate" : ""); ?>
+          <?php $inputs->material_button_link("btn-b2b", "Pedir vídeo", enterprise_url_home() . "#bus-form-wrapper", false, "", array(), $donate ? "donate" : ""); ?>
         </div>
 			<?php else: ?>
         <?php $inputs->material_button_link("todos", "Escolher outro artista", home_url( "shop" ), false, "", array(), $donate ? "donate" : ""); ?>
