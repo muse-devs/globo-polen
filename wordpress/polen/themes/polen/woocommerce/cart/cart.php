@@ -75,7 +75,7 @@ $Talent_Fields = new Polen_Update_Fields();
       const cart_items = <?php echo json_encode($cart_item_basic); ?>;
     </script>
   </div>
-  <div class="col-12 mt-4 col-md-6 order-md-1">
+  <div class="col-12 mt-5 col-md-6 order-md-1 mt-md-4">
     <form id="cart-advanced" class="woocommerce-cart-form cart-advanced" action="<?php echo esc_url(wc_get_checkout_url()); ?>" method="post">
       <?php do_action('woocommerce_before_cart_table'); ?>
       <?php do_action('woocommerce_before_cart_contents'); ?>
