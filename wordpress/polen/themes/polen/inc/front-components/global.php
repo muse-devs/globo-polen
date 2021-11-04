@@ -153,7 +153,7 @@ function polen_front_get_banner_video()
     <div class="content">
       <div class="row">
         <div class="col-12 mb-3">
-          <h2 class="title text-center">Emocione quem você ama com videos personalizados</h2>
+          <h2 class="title text-center">Emocione quem você ama com vídeos personalizados de artistas famosos</h2>
         </div>
         <!-- <div class="col-12 d-flex justify-content-center">
           <a href="<?php //echo polen_get_all_talents_url(); ?>" class="btn btn-primary btn-md">Ver todos os talentos</a>
@@ -484,7 +484,7 @@ function polen_front_get_tutorial()
             <div class="row">
               <div class="col-12 text-center icon subtitle"><?php Icon_Class::polen_icon_phone(); ?></div>
               <div class="col-12 text-center mt-2">
-                <p>Peça o vídeo para o seu ídolo</p>
+                <p>Escolha um ídolo para gravar seu vídeo.</p>
               </div>
             </div>
           </div>
@@ -492,7 +492,7 @@ function polen_front_get_tutorial()
             <div class="row">
               <div class="col-12 text-center icon subtitle"><?php Icon_Class::polen_icon_camera_video(); ?></div>
               <div class="col-12 text-center mt-2">
-                <p>Receba seu vídeo</p>
+                <p>Receba seu vídeo exclusivo por e-mail.</p>
               </div>
             </div>
           </div>
@@ -500,9 +500,12 @@ function polen_front_get_tutorial()
             <div class="row">
               <div class="col-12 text-center icon subtitle"><?php Icon_Class::polen_icon_hand_thumbs_up(); ?></div>
               <div class="col-12 text-center mt-2">
-                <p>Compartilhe com todo mundo</p>
+                <p>Compartilhe o vídeo com todo mundo!</p>
               </div>
             </div>
+          </div>
+          <div class="col-12">
+            <p class="faq-text">Ainda com dúvidas? <a href="/ajuda">Saiba mais</a></p>
           </div>
         </div>
       </div>
