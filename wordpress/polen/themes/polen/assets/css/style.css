@@ -11232,6 +11232,12 @@ textarea {
   .box-round h4 {
     font-size: 16px;
     padding: 15px 0px; }
+  .box-round .faq-text {
+    margin-top: 32px;
+    text-align: center;
+    margin-bottom: 0px; }
+    .box-round .faq-text a {
+      text-decoration: underline; }
   .box-round p {
     font-size: 14px;
     font-weight: normal;
