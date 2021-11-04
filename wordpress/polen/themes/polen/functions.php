@@ -239,7 +239,7 @@ function polen_scripts() {
 	}
 
 	if( is_cart() ) {
-		wp_enqueue_script( 'polen-cart', TEMPLATE_URI . '/assets/js/' . $min . 'cart.js', array("jquery"), _S_VERSION, true );
+		wp_enqueue_script( 'polen-cart', TEMPLATE_URI . '/assets/js/' . $min . 'cart.js', array("jquery", "vuejs"), _S_VERSION, true );
 	}
 
 	if( is_checkout() ) {
@@ -343,6 +343,11 @@ require_once TEMPLATE_DIR . '/enterprise/function_enterprise.php';
  * Função para retornar categorias destacadas
  */
 require_once TEMPLATE_DIR . '/inc/highlight_categories.php';
+
+/**
+ * Funcoes responsáveis pelo B2B da polen
+ */
+require_once TEMPLATE_DIR . '/inc/b2b_functions.php';
 
 
 add_action('wc_gateway_stripe_process_response', function($response, $order) {
