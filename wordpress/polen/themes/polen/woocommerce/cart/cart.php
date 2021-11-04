@@ -171,7 +171,7 @@ $Talent_Fields = new Polen_Update_Fields();
               "v-model" => "instructions_to_video"
             )); ?>
           </div>
-          <div class="row mt-3">
+          <div class="row mt-2">
             <div class="col-md-12" v-bind:class="{'d-none' : isInstructionsOk()}">
               <div id="prohibited-instruction-alert" class="alert alert-danger mt-2" role="alert">Lembre-se: Os talentos não tem autorização para cantar ou tocar trechos de músicas.</div>
             </div>
