@@ -1,9 +1,79 @@
 .site-footer {
+  margin-top: 88px;
 	a {
     line-height: 2;
 		color: white;
 		font-weight: 400;
 	}
+  .panel-group {
+    .panel {
+      border-bottom: 1px solid #CED4DA;
+      padding: 15px 20px;
+      margin-top: 10px;
+      .panel-heading {
+        .panel-title {
+          margin: 0px;
+          position: relative;
+          a:after {
+            content: "+";
+            display: block;
+            position: absolute;
+            right: 0;
+            top: 0;
+            font-size: 25px;
+            font-weight: 100;
+            @include media-breakpoint-down(xs) {
+              right: -15px;
+              top: 30%;
+              transform: translate(-50%, 0%);
+            }
+          }
+          a[aria-expanded="true"]:after {
+            content: "-";
+            font-size: 35px;
+          }
+          a[aria-expanded="true"] {
+            color: var(--primary);
+          }
+          a {
+            color: #495057;
+            margin: 0px;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 19px;
+            letter-spacing: 0em;
+            text-align: left;
+            width: 100%;
+            word-break: break-word;
+            h5 {
+              font-size: 16px;
+            }
+            strong {
+              font-weight: 500;
+            }
+          }
+        }
+      }
+      .panel-collapse {
+        //margin-bottom: 10px;
+        .panel-body {
+          padding: 10px 0px;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 150%;
+          letter-spacing: 0em;
+          text-align: left;
+          color: #495057;
+          //margin-top: 20px;
+          a {
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
 }
 
 .footer-menu {
@@ -21,6 +91,9 @@
 			line-height: 21px;
 			font-weight: 400;
 			color: inherit;
+      i {
+        margin-right: 5px;
+      }
 		}
 	}
 }
