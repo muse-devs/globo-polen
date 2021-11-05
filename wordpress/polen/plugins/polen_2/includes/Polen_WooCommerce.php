@@ -99,7 +99,6 @@ class Polen_WooCommerce
             //Todas as compras gratis vão para o status payment-approved
             add_action( 'woocommerce_checkout_no_payment_needed_redirect', [ $this, 'set_free_order_payment_approved' ], 10, 3 );
 
-            add_action( 'woocommerce_admin_order_data_after_order_details', [$this, 'add_whatsapp_to_admin'] );
         }
     }
     
@@ -150,18 +149,6 @@ class Polen_WooCommerce
         $actions[] = 'woocommerce_order_status_wc-payment-approved_to_wc-talent-rejected';
         $actions[] = 'woocommerce_order_status_wc-payment-approved_to_wc-talent-accepted';
         return $actions;
-    }
-
-    function add_whatsapp_to_admin($order)
-    {
-    ?>
-        <div class="order_data_column">
-            <h3><?php _e( 'Outras informações' ); ?></h3>
-            <?php 
-                echo '<p><strong>' . __( 'Whatsapp' ) . ':</strong>' . get_post_meta( $order->id, 'whatsapp', true ) . '</p>';
-            ?>
-        </div>
-    <?php
     }
 
     public function order_meta( $order, $data ) 

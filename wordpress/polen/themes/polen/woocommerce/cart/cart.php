@@ -64,6 +64,9 @@ $Talent_Fields = new Polen_Update_Fields();
     polen_get_talent_card($talent_cart_detail, $is_social);
     $inputs = new Material_Inputs();
 
+    if(!isset($cart_item["video_to"])) {
+      $cart_item["video_to"] = "other_one";
+    }
     $cart_item_basic = $cart_item;
     unset(
       $cart_item_basic["data"],
@@ -73,6 +76,11 @@ $Talent_Fields = new Polen_Update_Fields();
     if (is_user_logged_in()) {
       $current_user = wp_get_current_user();
       $email_to_video = $current_user->user_email;
+      $offered_by = $current_user->display_name;
+      $phone = get_user_meta($current_user->ID,'billing_phone',true);
+      $cart_item_basic["offered_by"] = $offered_by;
+      $cart_item_basic["email_to_video"] = $email_to_video;
+      $cart_item_basic["phone"] = $phone;
     }
     ?>
     <script>
@@ -111,17 +119,25 @@ $Talent_Fields = new Polen_Update_Fields();
         </header>
         <div class="cart-step__content">
           <?php
-          $inputs->material_input(Material_Inputs::TYPE_TEXT, "offered_by", "offered_by", "Seu nome", true, "mb-3", array(
-            "v-model" => "offered_by"
+          $inputs->material_input(Material_Inputs::TYPE_TEXT, "offered_by", "offered_by", "Seu nome", true, "mb-3", !$offered_by ? array(
+            "v-model" => "offered_by",
+          ) : array(
+            "value" => $offered_by,
+            "readonly" => "readonly"
           ));
-          $inputs->material_input(Material_Inputs::TYPE_EMAIL, "email_to_video", "email_to_video", "Seu e-mail", true, "mb-3", array(
+          $inputs->material_input(Material_Inputs::TYPE_EMAIL, "email_to_video", "email_to_video", "Seu e-mail", true, "mb-3", !$email_to_video ? array(
             "v-model" => "email_to_video",
-            "aria-email" => $email_to_video
+          ) : array(
+            "value" => $email_to_video,
+            "readonly" => "readonly"
           ));
-          $inputs->material_input(Material_Inputs::TYPE_PHONE, "whatsapp", "whatsapp", "Seu Whatsapp (opcional)", false, "", array(
-            "v-model" => "whatsapp",
-            "v-on:keyup" => "handleWhatsappChange",
-            "maxlength" => "15"
+          $inputs->material_input(Material_Inputs::TYPE_PHONE, "phone", "phone", "Seu Whatsapp (opcional)", false, "", !$phone ? array(
+            "v-model" => "phone",
+            "v-on:keyup" => "handlePhoneChange",
+            "maxlength" => "15",
+          ) : array(
+            "value" => $phone,
+            "readonly" => "readonly"
           ));
           $inputs->material_input_helper("Pode ficar tranquilo que enviaremos somente atualizações sobre o pedido");
           $inputs->material_button_outlined(Material_Inputs::TYPE_BUTTON, "next1", "Avançar", "mt-4", array(
@@ -144,8 +160,8 @@ $Talent_Fields = new Polen_Update_Fields();
           <?php
           $icons_path = TEMPLATE_URI . "/assets/img/pol_form_icons/";
           $inputs->pol_select_advanced("video_to", array(
-            $inputs->pol_select_advanced_item($icons_path . "presente.png", "Presente", "other_one", $cart_item["video_to"] == "other_one"),
-            $inputs->pol_select_advanced_item($icons_path . "mim.png", "Para mim", "to_myself", $cart_item["video_to"] == "to_myself")
+            $inputs->pol_select_advanced_item($icons_path . "presente.png", "Presente", "other_one", $cart_item_basic["video_to"] == "other_one"),
+            $inputs->pol_select_advanced_item($icons_path . "mim.png", "Para mim", "to_myself", $cart_item_basic["video_to"] == "to_myself")
           ), array("v-on:polselectchange" => "video_toHandle"));
           ?>
           <div class="mt-3" v-bind:class="{'d-none' : video_to == 'to_myself'}">
