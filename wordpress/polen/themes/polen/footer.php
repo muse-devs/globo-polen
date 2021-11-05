@@ -160,7 +160,7 @@
 	</div>.site-info -->
 </footer><!-- #colophon -->
 
-<!-- <script>
+<script>
   (function ($) {
     // Footer accordion close behavior
     $(document).on("click", ".panel-button", function (e) {
@@ -168,16 +168,8 @@
       $('.panel-button:not([href='+id+'])').addClass("collapsed").attr("aria-expanded","false");
       $('.collapse:not('+id+')').removeClass('show');
     });
-
-    // Open collapse url
-    let currentURL = window.location.href;
-    var hash = currentURL.substring(currentURL.indexOf('#'));
-    if (hash) {
-      $('.panel-button[aria-controls='+hash.substring(1)+']').removeClass("collapsed").attr("aria-expanded","true");
-      $(hash).addClass('show');
-    }
   })(jQuery);
-</script> -->
+</script>
 
 <?php include_once TEMPLATE_DIR . '/inc/custom-footer.php'; ?>
 
