@@ -211,8 +211,6 @@ class TUNA_Payment extends WC_Payment_Gateway
 	}
 	public function payment_callback()
 	{
-        $this->save_log(print_r([apache_request_headers(), file_get_contents('php://input')], true));
-
 		$auth = apache_request_headers();			
 		$parameters = json_decode(file_get_contents('php://input'));
 		//Get only Authorization header
