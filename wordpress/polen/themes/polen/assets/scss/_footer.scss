@@ -22,7 +22,7 @@
             font-size: 25px;
             font-weight: 100;
             @include media-breakpoint-down(xs) {
-              right: -30px;
+              right: -15px;
               top: 30%;
               transform: translate(-50%, 0%);
             }
