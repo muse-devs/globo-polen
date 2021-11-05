@@ -214,7 +214,7 @@ class TUNA_Payment extends WC_Payment_Gateway
         $auth = apache_request_headers();
         //Get only Authorization header
         $valid = $auth['Authorization'];
-        if (empty($_POST['partnerUniqueId']['id'])) {
+        if (empty($_POST['partnerUniqueId'])) {
             echo print_r("ERROR PARTNERUNIQUEID REQUIRED");
             echo(print_r($_POST));
             exit;
@@ -230,7 +230,7 @@ class TUNA_Payment extends WC_Payment_Gateway
             exit;
         }
         $appkey = sanitize_text_field( $valid);
-        $orderID = sanitize_text_field($_POST['partnerUniqueId']['id']);
+        $orderID = sanitize_text_field($_POST['partnerUniqueId']);
         $status = sanitize_text_field($_POST['statusId']);
         if ('Bearer '.$this->partner_key != $appkey) {
             echo print_r("ERROR APPKEY INVALID");
