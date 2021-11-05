@@ -1,24 +1,22 @@
-const email_to_video = document.querySelector("input[name=email_to_video]").getAttribute("aria-email");
-
 const cartAdvanced = new Vue({
   el: "#cart-advanced",
   data: {
     activeItem: 1,
     offered_by: cart_items.offered_by || "",
-    email_to_video: cart_items.email_to_video || email_to_video || "",
+    email_to_video: cart_items.email_to_video || "",
     video_to: cart_items.video_to || "",
     instructions_to_video: cart_items.instructions_to_video || "",
-    whatsapp: cart_items.whatsapp || "",
+    phone: cart_items.phone || "",
   },
   methods: {
     nextStep: function (num) {
       this.activeItem = num;
     },
-    handleWhatsappChange: function (e) {
-      this.whatsapp = mtel(e.target.value);
+    handlePhoneChange: function (e) {
+      this.phone = mtel(e.target.value);
     },
     step1Disabled: function() {
-      return !this.offered_by || !this.email_to_video
+      return !this.offered_by || !polMailValidate(this.email_to_video)
     },
     video_toHandle: function(e) {
       this.video_to = e.detail;
@@ -27,7 +25,8 @@ const cartAdvanced = new Vue({
       return this.offered_by != ""
       && this.email_to_video != ""
       && this.video_to != ""
-      && this.instructions_to_video != "";
+      && this.instructions_to_video != ""
+      && this.activeItem == 2;
     },
     isForOther: function() {
       return this.video_to == "other_one";
@@ -98,7 +97,7 @@ function verify_checkbox_selected_to_hidde_or_show_fields() {
         "video_category",
         "instructions_to_video",
         "allow_video_on_page",
-        "whatsapp"
+        "phone"
       ];
       if ($.inArray(item_name, allowed_item) !== -1) {
         let item_value;

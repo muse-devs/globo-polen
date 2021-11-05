@@ -32,6 +32,7 @@ class Polen_Order
     public function __construct( $static = false ) {
         if( $static ) {
             add_action(    'wp_ajax_create_first_order',         array( $this, 'create_first_order' ) );
+            add_action(    'wp_ajax_create_refund_order_tuna',         array( $this, 'create_refund_order_tuna' ) );
             add_action(    'wp_ajax_search_order_status',        array( $this, 'check_order_status' ) );
             add_action(    'wp_ajax_nopriv_search_order_status', array( $this, 'check_order_status' ) );
             add_action(    'wp_ajax_nopriv_polen_whatsapp_form', array( $this, 'set_whatsapp_into_order' ) );
@@ -220,6 +221,64 @@ class Polen_Order
     <?php
     }
 
+    /**
+     * Criar solicitação de reembolso
+     */
+    public function create_refund_order_tuna()
+    {
+        try {
+            $order_id = sanitize_text_field($_POST['product_id']);
+            $order = wc_get_order($order_id);
+            $date_payment = $order->get_date_created();
+            $date_payment = $date_payment->date('Y-m-d,H:i:s');
+
+            $date_payment = str_replace(',', 'T', $date_payment);
+
+            if ($order->get_payment_method_title() == 'Boleto') {
+                throw new \Exception('Forma de pagamento não aceito para estorno', 403);
+                wp_die();
+            }
+
+            if ($order->get_payment_method() != 'tuna_payment') {
+                throw new \Exception('Essa função de estorno só é permitido para o GATWAY TUNA', 403);
+                wp_die();
+            }
+
+            $url = 'https://engine.tunagateway.com/api/Payment/Cancel';
+
+            $body = [
+                "PartnerUniqueID" => "{$order_id}",
+                "PaymentDate" => $date_payment,
+                "CancelAll" => true,
+                "appToken" => '0dd28347-5920-4e14-85cf-5549e2d6de63',
+                "account" => 'polen'
+            ];
+
+            $response = wp_remote_post($url, array(
+                    'method' => 'POST',
+                    'timeout' => 45,
+                    'headers' => array(
+                        'Content-Type' => 'application/json',
+                        'Accept' => '*/*',
+                    ),
+                    'body' => json_encode($body),
+                )
+            );
+
+            if (is_wp_error($response)) {
+                throw new \Exception('Sistema indisponível. Por favor entre em contato com o suporte', 503);
+                wp_die();
+            }
+
+            $order->update_status('refunded', __('Tuna Payments: Pagamento ressarcido.', 'tuna-payment'));
+
+            wp_send_json_success('ok', 200);
+
+        } catch (\Exception $e) {
+            wp_send_json_error($e->getMessage(), 422);
+            wp_die();
+        }
+    }
 
     /**
      * Criar uma primeira ORDER

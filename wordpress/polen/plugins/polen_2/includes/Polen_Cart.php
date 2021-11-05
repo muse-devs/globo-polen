@@ -75,9 +75,6 @@ class Polen_Cart
             if( isset( $cart_item['email_to_video'] ) ) {
                 $item->add_meta_data( 'email_to_video', $cart_item['email_to_video'], true );
             }
-            if( isset( $cart_item['whatsapp'] ) ) {
-                $order->add_meta_data( 'whatsapp', $cart_item['whatsapp'], true );
-            }
             if( isset( $cart_item['video_category'] ) ) {
                 $item->add_meta_data( 'video_category', $cart_item['video_category'], true );
             }            
@@ -125,7 +122,7 @@ class Polen_Cart
             
                     $cart_item = $cart[$cart_id];
 
-                    $allowed_item = [ 'offered_by', 'video_to', 'name_to_video', 'email_to_video', 'video_category', 'instructions_to_video', 'allow_video_on_page', 'whatsapp' ];
+                    $allowed_item = [ 'offered_by', 'video_to', 'name_to_video', 'email_to_video', 'video_category', 'instructions_to_video', 'allow_video_on_page', 'phone' ];
                     foreach( $allowed_item as $p_item ):
                         if( isset( $_POST[ $p_item ] ) ) {
                             $item_name = $p_item;
