@@ -272,6 +272,7 @@ class TUNA_Payment extends WC_Payment_Gateway
 			case '9':
 			case '2':
 				// Changing the order for processing and reduces the stock.
+                \WC_Emails::instance();
 				$customer_order->update_status('payment-approved', __('Tuna Payments: Pagamento confirmado.', 'tuna-payment'));
 				$customer_order->payment_complete();
 				wc_reduce_stock_levels((int) $orderID);
