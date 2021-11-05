@@ -98,6 +98,7 @@ class Polen_WooCommerce
 
             //Todas as compras gratis vão para o status payment-approved
             add_action( 'woocommerce_checkout_no_payment_needed_redirect', [ $this, 'set_free_order_payment_approved' ], 10, 3 );
+
         }
     }
     
@@ -252,7 +253,7 @@ class Polen_WooCommerce
                 'offered_by'            => 'Oferecido por', 
                 'video_to'              => 'Vídeo para', 
                 'name_to_video'         => 'Quem vai receber?', 
-                'email_to_video'        => 'E-mail',
+                'email_to_video'        => 'e-mail',
                 'video_category'        => 'Ocasião', 
                 'instructions_to_video' => 'Instruções do vídeo', 
                 'allow_video_on_page'   => 'Publico?',

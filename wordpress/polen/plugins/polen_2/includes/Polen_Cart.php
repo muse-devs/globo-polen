@@ -122,7 +122,7 @@ class Polen_Cart
             
                     $cart_item = $cart[$cart_id];
 
-                    $allowed_item = [ 'offered_by', 'video_to', 'name_to_video', 'email_to_video', 'video_category', 'instructions_to_video', 'allow_video_on_page' ];
+                    $allowed_item = [ 'offered_by', 'video_to', 'name_to_video', 'email_to_video', 'video_category', 'instructions_to_video', 'allow_video_on_page', 'phone' ];
                     foreach( $allowed_item as $p_item ):
                         if( isset( $_POST[ $p_item ] ) ) {
                             $item_name = $p_item;

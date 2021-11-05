@@ -132,7 +132,7 @@ function polen_get_talent_card($talent, $social = false)
 				<div class="row personal">
 					<div class="col d-flex justify-content-between">
 						<?php
-						if (empty(!$talent["from"])) : ?>
+						if ( !empty( $talent["from"] ) ) : ?>
 							<div class="item">
 								<span class="title">Vídeo de</span>
 								<p class="value mt-2"><?php echo $talent["from"]; ?></p>

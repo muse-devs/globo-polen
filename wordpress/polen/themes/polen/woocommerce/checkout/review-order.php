@@ -32,7 +32,7 @@ defined( 'ABSPATH' ) || exit;
 						} else {
 							printf('<a href="%s">%s</a>', esc_url($product_permalink), $thumbnail); // PHPCS: XSS ok.
 						}
-						?>			
+						?>
 						<?php echo apply_filters( 'woocommerce_cart_item_name', $_product->get_name(), $cart_item, $cart_item_key ) . '&nbsp;'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 						<?php //echo apply_filters( 'woocommerce_checkout_cart_item_quantity', ' <strong class="product-quantity">' . sprintf( '&times;&nbsp;%s', $cart_item['quantity'] ) . '</strong>', $cart_item, $cart_item_key ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 						<?php echo wc_get_formatted_cart_item_data( $cart_item ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
@@ -44,9 +44,9 @@ defined( 'ABSPATH' ) || exit;
 				<tr>
 					<td colspan="2">
 						<?php
-						// if( isset( $cart_item['video_to'] ) && !empty( $cart_item['video_to'] ) ){
-						// 	echo 'Vídeo para '.$cart_item['video_to'].'<br/>';
-						// }
+						if( isset( $cart_item['video_to'] ) && !empty( $cart_item['video_to'] ) ){
+							echo 'Vídeo para '.$cart_item['video_to'].'<br/>';
+						}
 						if( isset( $cart_item['offered_by'] ) && !empty( $cart_item['offered_by'] ) ){
 							echo '<strong>Vídeo por:</strong> '.$cart_item['offered_by'].'<br/>';
 						}
@@ -54,8 +54,11 @@ defined( 'ABSPATH' ) || exit;
 							echo '<strong>Vídeo para:</strong> '.$cart_item['name_to_video'].'<br/>';
 						}
 						if( isset( $cart_item['email_to_video'] ) && !empty( $cart_item['email_to_video'] ) ){
-							echo '<strong>E-mail:</strong> '.$cart_item['email_to_video'].'<br/>';
+							echo '<strong>e-mail:</strong> '.$cart_item['email_to_video'].'<br/>';
 						}
+            // if( isset( $cart_item['whatsapp'] ) && !empty( $cart_item['whatsapp'] ) ){
+						// 	echo '<strong>Whatsapp:</strong> '.$cart_item['whatsapp'].'<br/>';
+						// }
 						if( isset( $cart_item['video_category'] ) && !empty( $cart_item['video_category'] ) ){
 							echo '<strong>Categoria:</strong> '.$cart_item['video_category'].'<br/>';
 						}
@@ -70,8 +73,8 @@ defined( 'ABSPATH' ) || exit;
 				</tr>
 				<?php
 			}
-			?>		
-		<?php	
+			?>
+		<?php
 		}
 
 		do_action( 'woocommerce_review_order_after_cart_contents' );
