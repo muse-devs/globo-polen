@@ -160,7 +160,7 @@
 	</div>.site-info -->
 </footer><!-- #colophon -->
 
-<script>
+<!-- <script>
   (function ($) {
     // Footer accordion close behavior
     $(document).on("click", ".panel-button", function (e) {
@@ -177,7 +177,7 @@
       $(hash).addClass('show');
     }
   })(jQuery);
-</script>
+</script> -->
 
 <?php include_once TEMPLATE_DIR . '/inc/custom-footer.php'; ?>
 
