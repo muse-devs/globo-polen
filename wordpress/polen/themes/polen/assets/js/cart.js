@@ -16,7 +16,7 @@ const cartAdvanced = new Vue({
       this.phone = mtel(e.target.value);
     },
     step1Disabled: function() {
-      return !this.offered_by || !this.email_to_video
+      return !this.offered_by || !polMailValidate(this.email_to_video)
     },
     video_toHandle: function(e) {
       this.video_to = e.detail;

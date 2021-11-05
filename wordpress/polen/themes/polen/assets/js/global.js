@@ -85,6 +85,14 @@ function setImediate(handle) {
 	setTimeout(handle, 1);
 }
 
+function polMailValidate(value) {
+  const mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  if(value.match(mailformat)) {
+    return true;
+  }
+  return false;
+}
+
 function polMessageKill(id) {
 	clearInterval(interval);
 	var el = document.getElementById(id);
