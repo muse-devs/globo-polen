@@ -123,7 +123,7 @@ $Talent_Fields = new Polen_Update_Fields();
             "v-model" => "offered_by",
           ) : array(
             "value" => $offered_by,
-            "readonly" => "readonly"
+            // "readonly" => "readonly"
           ));
           $inputs->material_input(Material_Inputs::TYPE_EMAIL, "email_to_video", "email_to_video", "Seu e-mail", true, "mb-3", !$email_to_video ? array(
             "v-model" => "email_to_video",
