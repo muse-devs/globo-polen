@@ -57,9 +57,9 @@ class Material_Inputs
 
   public function material_input_helper($text)
   {
-    ?>
-      <small><?php echo $text; ?></small>
-    <?php
+?>
+    <small><?php echo $text; ?></small>
+<?php
   }
 
   public function material_button(string $type = self::TYPE_BUTTON, string $id, string $title, string $classes = "", array $params = array(), $icon = "")
@@ -103,4 +103,29 @@ class Material_Inputs
     include $this->get_full_path_file('material_select');
     return ob_end_flush();
   }
+
+  public function pol_combo_advanced_item(string $title, string $price = "", string $text, string $id, string $value, bool $checked = false, bool $disabled = false)
+  {
+    return array("id" => $id, "title" => $title, "price" => $price, "text" => $text, "value" => $value, "checked" => $checked, "disabled" => $disabled);
+  }
+
+  public function pol_combo_advanced(string $id, string $name = "", array $items = array())
+  {
+    ob_start();
+    include $this->get_full_path_file('pol_combo_advanced');
+    return ob_end_flush();
+  }
+
+  public function pol_select_advanced_item(string $icon, string $title, string $value, bool $checked = false, bool $disabled = false)
+  {
+    return array("icon" => $icon, "title" => $title, "value" => $value, "checked" => $checked, "disabled" => $disabled);
+  }
+
+  public function pol_select_advanced(string $name, array $items, array $params = array())
+  {
+    ob_start();
+    include $this->get_full_path_file('pol_select_advanced');
+    return ob_end_flush();
+  }
+
 }

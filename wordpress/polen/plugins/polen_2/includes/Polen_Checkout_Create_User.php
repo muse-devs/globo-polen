@@ -11,6 +11,7 @@ use WP_Error;
 class Polen_Checkout_Create_User
 {
     const META_KEY_CREATED_BY = 'created_by';
+    const META_KEY_PHONE = 'billing_phone';
 
     public function __construct( $static = false )
     {
@@ -34,11 +35,18 @@ class Polen_Checkout_Create_User
             }
             if( empty( $user ) ) {
                 $user_password = wp_generate_password( 5, false ) . random_int( 0, 99 );
-                $id_registered = wc_create_new_customer( $user_email, $user_email, $user_password, ['created_by' => 'checkout'] );
+                $id_registered = wc_create_new_customer( $user_email, $user_email, $user_password, ['display_name' => $item_cart['offered_by'] ] );
                 $user = get_user_by( 'ID', $id_registered );
+                $phone = $item_cart[ 'phone' ];
                 add_user_meta( $user->ID, self::META_KEY_CREATED_BY, 'checkout', true );
+                add_user_meta( $user->ID, self::META_KEY_PHONE, $phone, true );
             }
             $user_id = $user->ID;
+        } else {
+            $phone = get_user_meta( $user_id, self::META_KEY_PHONE, true );
+            if( empty( $phone ) ) {
+                add_user_meta( $user_id, self::META_KEY_PHONE, $phone, true );
+            }
         }
         return $user_id;
     }
