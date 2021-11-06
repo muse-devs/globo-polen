@@ -470,6 +470,11 @@ textarea {
   --mdc-theme-primary: var(--primary);
   --mdc-theme-on-primary: var(--primary);
   --mdc-shape-small: 8px;
+  .mdc-text-field__input {
+    &:read-only {
+      opacity: 0.5;
+    }
+  }
 }
 
 .mdc-button {
