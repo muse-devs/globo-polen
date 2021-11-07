@@ -386,7 +386,7 @@ function polen_front_get_videos($videos)
 		return;
 	}
 ?>
-	<section id="talent-videos" class="row my-1">
+	<section id="talent-videos" class="row my-1 pb-4">
     <div class="col-md-12">
       <header class="row my-3">
         <div class="col">
