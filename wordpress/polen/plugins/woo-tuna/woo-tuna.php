@@ -143,14 +143,13 @@ class TUNA_Payment extends WC_Payment_Gateway
 		}
 	} 
 	public function payment_pix_verify()
-	{
+	{ 	
 		if (empty($_POST['partnerUniqueId']['id'])) {
 			echo print_r("ERROR PARTNERUNIQUEID REQUIRED");
 			exit;
 		}
-        $orderID = sanitize_text_field($_POST['partnerUniqueId']['id']);
-        $customer_order = wc_get_order((int) $orderID);
-
+		$orderID = sanitize_text_field($_POST['partnerUniqueId']['id']);		
+		$customer_order = wc_get_order((int) $orderID);
 		if ($customer_order == null) {
 			echo print_r("ERROR PARTNERUNIQUEID INVALID[".$orderID.']');
 			exit;
@@ -194,6 +193,7 @@ class TUNA_Payment extends WC_Payment_Gateway
 			case '2':
 				// Changing the order for processing and reduces the stock.
 				$customer_order->update_status('payment-approved', __('Tuna Payments: Pagamento confirmado.', 'tuna-payment'));
+				$customer_order->payment_complete();
 				wc_reduce_stock_levels((int) $orderID);
 				echo print_r("OK");
 				break;
@@ -210,32 +210,38 @@ class TUNA_Payment extends WC_Payment_Gateway
 		exit;
 	}
 	public function payment_callback()
-	{ 	
+	{
 		$auth = apache_request_headers();			
+		$parameters = json_decode(file_get_contents('php://input'));
 		//Get only Authorization header
 		$valid = $auth['Authorization'];
-		if (empty($_POST['partnerUniqueId']['id'])) {
+		if (empty($parameters->partnerUniqueId)) {
 			echo print_r("ERROR PARTNERUNIQUEID REQUIRED");
+			echo(print_r($parameters));	
 			exit;
 		}
-		if (empty($_POST['statusId'])) {
+		if (empty($parameters->statusId)) {
 			echo print_r("ERROR STATUS REQUIRED");
+			echo(print_r($parameters));		
 			exit;
 		}
 		if (empty($valid)) {
 			echo print_r("ERROR APPKEY REQUIRED");
+			echo(print_r($auth));		
 			exit;
 		}
 		$appkey = sanitize_text_field( $valid);
-		$orderID = sanitize_text_field($_POST['partnerUniqueId']['id']);
-		$status = sanitize_text_field($_POST['statusId']);
+		$orderID = sanitize_text_field($parameters->partnerUniqueId);		
+		$status = sanitize_text_field($parameters->statusId);
 		if ('Bearer '.$this->partner_key != $appkey) {
 			echo print_r("ERROR APPKEY INVALID");
+			echo(print_r($auth));	
 			exit;
 		}
 		$customer_order = wc_get_order((int) $orderID);
 		if ($customer_order == null) {
 			echo print_r("ERROR PARTNERUNIQUEID INVALID");
+			echo(print_r($parameters));		
 			exit;
 		}
 
@@ -266,7 +272,9 @@ class TUNA_Payment extends WC_Payment_Gateway
 			case '9':
 			case '2':
 				// Changing the order for processing and reduces the stock.
+                \WC_Emails::instance();
 				$customer_order->update_status('payment-approved', __('Tuna Payments: Pagamento confirmado.', 'tuna-payment'));
+				$customer_order->payment_complete();
 				wc_reduce_stock_levels((int) $orderID);
 				break;
 			case 'C':
@@ -408,6 +416,7 @@ class TUNA_Payment extends WC_Payment_Gateway
 				case '9':
 				case '2':
 					$customer_order->update_status('payment-approved', __('Tuna Payments: Pagamento confirmado.', 'tuna-payment'));
+					$customer_order->payment_complete();
 					// Changing the order for processing and reduces the stock.					  
 					wc_reduce_stock_levels((int) $orderID);
 					break;
@@ -573,13 +582,10 @@ class TUNA_Payment extends WC_Payment_Gateway
 		);
 	}
 
-    public function IsNullOrEmptyString($str){
-        return (!isset($str) || trim($str) === '');
-    }
-
 	// Submit payment and handle response
 	public function process_payment($order_id)
 	{
+		$orderID = $order_id;
 		global $woocommerce;
 		$current_user = wp_get_current_user();
 		// Get this Order's information so that we know
@@ -623,7 +629,7 @@ class TUNA_Payment extends WC_Payment_Gateway
 		$cardInfo = null;
 		$boletoInfo = null;
 		if (sanitize_text_field($_POST["tuna_is_boleto_payment"]) == "true") {
-            $customer_order->set_payment_method_title('Boleto');
+			$customer_order->set_payment_method_title('Boleto');
 			$PaymentMethodType = "3";
 			$installments = 1;
 			$boletoInfo = [
@@ -645,11 +651,12 @@ class TUNA_Payment extends WC_Payment_Gateway
 			];
 		} else {
 			if (sanitize_text_field($_POST["tuna_is_pix_payment"]) == "true") {
-                $customer_order->set_payment_method_title('Pix');
+				$customer_order->set_payment_method_title('Pix');
 				$PaymentMethodType = "D";
 				$installments = 1;
-		}else{
-            $customer_order->set_payment_method_title('Cartão de Crédito');
+		}else
+		{
+			$customer_order->set_payment_method_title('Cartão de Crédito');
 			$cardInfo = [
 				"TokenProvider" => "Tuna",
 				"CardHolderName" => sanitize_text_field($_POST["tuna_card_holder_name"]),
@@ -677,8 +684,6 @@ class TUNA_Payment extends WC_Payment_Gateway
 			];
 		}
 	}
-        $hiddenFrontEndSessionID = sanitize_text_field($_POST["tuna_sessionid"]);
-
 		$requestbody = [
 			'AppToken' =>  $this->partner_key,
 			'Account' => $this->partner_account,
@@ -706,7 +711,7 @@ class TUNA_Payment extends WC_Payment_Gateway
 				"Phone" => ""
 			],
 			"FrontData" => [
-                "SessionID" => $this->IsNullOrEmptyString($hiddenFrontEndSessionID ) ? wp_get_session_token() : $hiddenFrontEndSessionID,
+				"SessionID" => wp_get_session_token(),
 				"Origin" => "WEBSITE",
 				"IpAddress" => $_SERVER['REMOTE_ADDR'],
 				"CookiesAccepted" => true
@@ -751,7 +756,7 @@ class TUNA_Payment extends WC_Payment_Gateway
 		#$this->save_log($api_response['body']);
 		$response = json_decode($api_response['body']);
 		$redirectSuccess = false;
-
+		
 		try {
 
 			if ($response->code == -1) {
@@ -800,7 +805,7 @@ class TUNA_Payment extends WC_Payment_Gateway
 						$customer_order->update_status('payment-approved', __('Tuna Payments: Pagamento confirmado.', 'tuna-payment'));
 						// Changing the order for processing and reduces the stock.					  					
 						$customer_order->payment_complete();
-						wc_reduce_stock_levels($customer_order->get_id());
+						wc_reduce_stock_levels((int) $orderID);
 						$woocommerce->cart->empty_cart();
 						$redirectSuccess = true;
 						break;

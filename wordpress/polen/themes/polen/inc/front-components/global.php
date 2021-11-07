@@ -153,7 +153,7 @@ function polen_front_get_banner_video()
     <div class="content">
       <div class="row">
         <div class="col-12 mb-3">
-          <h2 class="title text-center">Emocione quem você ama com videos personalizados</h2>
+          <h2 class="title text-center">Emocione quem você ama com vídeos personalizados de artistas famosos</h2>
         </div>
         <!-- <div class="col-12 d-flex justify-content-center">
           <a href="<?php //echo polen_get_all_talents_url(); ?>" class="btn btn-primary btn-md">Ver todos os talentos</a>
@@ -484,7 +484,7 @@ function polen_front_get_tutorial()
             <div class="row">
               <div class="col-12 text-center icon subtitle"><?php Icon_Class::polen_icon_phone(); ?></div>
               <div class="col-12 text-center mt-2">
-                <p>Peça o vídeo para o seu ídolo</p>
+                <p>Escolha um ídolo para gravar seu vídeo.</p>
               </div>
             </div>
           </div>
@@ -492,7 +492,7 @@ function polen_front_get_tutorial()
             <div class="row">
               <div class="col-12 text-center icon subtitle"><?php Icon_Class::polen_icon_camera_video(); ?></div>
               <div class="col-12 text-center mt-2">
-                <p>Receba seu vídeo</p>
+                <p>Receba seu vídeo exclusivo por e-mail.</p>
               </div>
             </div>
           </div>
@@ -500,9 +500,12 @@ function polen_front_get_tutorial()
             <div class="row">
               <div class="col-12 text-center icon subtitle"><?php Icon_Class::polen_icon_hand_thumbs_up(); ?></div>
               <div class="col-12 text-center mt-2">
-                <p>Compartilhe com todo mundo</p>
+                <p>Compartilhe o vídeo com todo mundo!</p>
               </div>
             </div>
+          </div>
+          <div class="col-12">
+            <p class="faq-text">Ainda com dúvidas? <a href="/ajuda">Saiba mais</a></p>
           </div>
         </div>
       </div>
@@ -580,7 +583,7 @@ function polen_form_signin_newsletter(string $event = 'newsletter')
 {
   $inputs = new Material_Inputs();
 ?>
-  <div id="signin-newsletter" class="col-md-6 mt-4 order-md-2">
+  <div id="signin-newsletter" class="col-md-5 mt-4">
     <h5 class="title typo typo-title typo-small">Se conecte com a gente!</h5>
     <p class="description typo typo-p typo-small typo-double-line-height">Receba novidades e conteúdos exclusivos da Polen.</p>
     <form id="newsletter" action="/" method="POST">
@@ -737,9 +740,9 @@ function polen_get_toast($text)
     </div>
     <button class="ml-2 pol-toast-close" onclick="polRemoveElement('#pol-toast')">
       <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 22.5C17.5228 22.5 22 18.0228 22 12.5C22 6.97715 17.5228 2.5 12 2.5C6.47715 2.5 2 6.97715 2 12.5C2 18.0228 6.47715 22.5 12 22.5Z" stroke="#159A52" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-        <path d="M15 9.5L9 15.5" stroke="#159A52" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-        <path d="M9 9.5L15 15.5" stroke="#159A52" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M12 22.5C17.5228 22.5 22 18.0228 22 12.5C22 6.97715 17.5228 2.5 12 2.5C6.47715 2.5 2 6.97715 2 12.5C2 18.0228 6.47715 22.5 12 22.5Z" stroke="#767676" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M15 9.5L9 15.5" stroke="#767676" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M9 9.5L15 15.5" stroke="#767676" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
       </svg>
     </button>
   </div>

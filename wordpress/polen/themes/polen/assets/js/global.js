@@ -85,6 +85,14 @@ function setImediate(handle) {
 	setTimeout(handle, 1);
 }
 
+function polMailValidate(value) {
+  const mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  if(value.match(mailformat)) {
+    return true;
+  }
+  return false;
+}
+
 function polMessageKill(id) {
 	clearInterval(interval);
 	var el = document.getElementById(id);
@@ -419,12 +427,34 @@ function polRemoveElement(el) {
   _this.parentNode.removeChild(_this);
 }
 
+function polSelectAdvanced() {
+  const selects = document.querySelectorAll(".select-advanced");
+  if (selects.length < 1) {
+    return;
+  }
+  [...selects].map(select => {
+    let id = select.getAttribute("id");
+    let component = document.querySelector(`#${id}`);
+    let radio = document.querySelectorAll(`#${id} input[name=${id}]`);
+    [...radio].map(item => {
+      item.addEventListener("click", function(e) {
+        [...document.querySelectorAll(`#${id} .item`)].map(item => item.classList.remove("-checked"));
+        this.parentNode.classList.add("-checked");
+        component.dispatchEvent(new CustomEvent("polselectchange", {
+          detail: e.target.value
+        }));
+      });
+    });
+  })
+}
+
 // -------------------------------------------------------------------------
 
 jQuery(document).ready(function () {
 	truncatedItems();
 	getSessionMessage();
 	showLGPDBox();
+  polSelectAdvanced();
 });
 
 (function ($) {

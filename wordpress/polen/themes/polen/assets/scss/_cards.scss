@@ -8,6 +8,14 @@
     font-size: 16px;
     padding: 15px 0px;
   }
+  .faq-text {
+    margin-top: 32px;
+    text-align: center;
+    margin-bottom: 0px;
+    a {
+      text-decoration: underline;
+    }
+  }
   p {
     font-size: 14px;
     font-weight: normal;
@@ -1098,15 +1106,15 @@
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
-  border: 1px solid #acd6bf;
+  border: 1px solid var(--gray-light);
   border-radius: 2px;
-  background-color: #dcf8e7;
+  background-color: #f2f2f2;
   .text {
     width: 100%;
     font-size: 16px;
     font-weight: 400;
     line-height: 18.75px;
-    color: #159a52;
+    color: var(--dark);
   }
   .ico {
     flex: 0 0 24px;

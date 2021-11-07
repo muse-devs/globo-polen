@@ -98,6 +98,7 @@ class Polen_WooCommerce
 
             //Todas as compras gratis vão para o status payment-approved
             add_action( 'woocommerce_checkout_no_payment_needed_redirect', [ $this, 'set_free_order_payment_approved' ], 10, 3 );
+
         }
     }
     
@@ -178,10 +179,11 @@ class Polen_WooCommerce
     public function add_metaboxes() {
         global $current_screen;
 
-        if( $current_screen && ! is_null( $current_screen ) && isset( $current_screen->id ) && $current_screen->id == 'shop_order' && isset( $_REQUEST['action'] ) && $_REQUEST['action'] == 'edit' ) 
+        if( $current_screen && ! is_null( $current_screen ) && isset( $current_screen->id ) && $current_screen->id == 'shop_order' && isset( $_REQUEST['action'] ) && $_REQUEST['action'] == 'edit' )
         {
             add_meta_box( 'Polen_Order_Details', 'Instruções', array( $this, 'metabox_order_details' ), 'shop_order', 'normal', 'low' );
             add_meta_box( 'Polen_Order_Details_Video_Info', 'Info do Video', array( $this, 'metabox_order_details_video_info' ), 'shop_order', 'normal', 'low' );
+            add_meta_box( 'Polen_Refund_Order_tuna', 'Reembolsar pedido', array( $this, 'metabox_create_refund_order_tuna' ), 'shop_order', 'side', 'default' );
         }
 
         if( $current_screen && ! is_null( $current_screen ) && isset( $current_screen->id ) && $current_screen->id == 'product' && isset( $_REQUEST['action'] ) && $_REQUEST['action'] == 'edit' )  {
@@ -211,6 +213,20 @@ class Polen_WooCommerce
         }
     }
 
+    /**
+     * Adicionar metabox na edição de produtos
+     */
+    public function metabox_create_refund_order_tuna()
+    {
+        global $post;
+        $product_id = $post->ID;
+        if( file_exists( TEMPLATEPATH . '/woocommerce/admin/metaboxes/metabox-refund-order-tuna.php' ) ) {
+            require_once TEMPLATEPATH . '/woocommerce/admin/metaboxes/metabox-refund-order-tuna.php';
+        } else {
+            require_once PLUGIN_POLEN_DIR . '/admin/partials/metaboxes/metabox-refund-order-tuna.php';
+        }
+    }
+
     public function metabox_create_first_order()
     {
         global $post;
@@ -237,7 +253,7 @@ class Polen_WooCommerce
                 'offered_by'            => 'Oferecido por', 
                 'video_to'              => 'Vídeo para', 
                 'name_to_video'         => 'Quem vai receber?', 
-                'email_to_video'        => 'E-mail',
+                'email_to_video'        => 'e-mail',
                 'video_category'        => 'Ocasião', 
                 'instructions_to_video' => 'Instruções do vídeo', 
                 'allow_video_on_page'   => 'Publico?',
