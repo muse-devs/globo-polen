@@ -369,3 +369,7 @@ add_action('wc_gateway_stripe_process_webhook_payment_error', function($order, $
 add_filter('wc_stripe_save_to_account_text', function(){
 	return 'Salvar os dados do cartão de credito para proximas compras.';
 });
+
+add_action('woocommerce_before_checkout_process', function(){
+	$emails = WC_Emails::instance();
+});
