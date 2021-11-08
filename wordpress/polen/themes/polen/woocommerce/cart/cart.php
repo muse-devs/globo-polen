@@ -179,6 +179,8 @@ $Talent_Fields = new Polen_Update_Fields();
             $inputs->pol_select_advanced_item($icons_path . "formatura.png", "Formatura", "formatura", $cart_item["video_category"] == "formatura"),
             $inputs->pol_select_advanced_item($icons_path . "novidade.png", "Novidade", "novidade", $cart_item["video_category"] == "novidade"),
             $inputs->pol_select_advanced_item($icons_path . "outras.png", "Outras", "outras", $cart_item["video_category"] == "outras")
+          ), array(
+            "v-on:polselectchange" => "occasionHandle"
           ));
           ?>
           <h3 class="subtitle mt-4">Instruções para o vídeo</h3>
