@@ -109,11 +109,11 @@ $Talent_Fields = new Polen_Update_Fields();
       <div class="cart-step cart-step1" v-bind:class="{'-disabled': activeItem != 1, '-done' : activeItem == 2}">
         <?php do_action('woocommerce_cart_contents'); ?>
         <header class="header mb-4">
-          <h2 class="title">
+          <h2 class="title" v-on:click="nextStep(1)">
             <div class="cart-step__ico cart-step__ico1"></div>
             <span>
               Informações do pedido
-              <a href="javascript:void(0)" class="btn-edit" v-if="activeItem != 1" v-on:click="nextStep(1)">editar</a>
+              <span href="javascript:void(0)" class="btn-edit" v-if="activeItem != 1">editar</span>
             </span>
           </h2>
         </header>
