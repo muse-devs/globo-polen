@@ -154,14 +154,16 @@ function bus_get_form()
             <option value="de-100-a-499">De 100 a 499</option>
             <option value="mais-de-500">Mais de 500</option>
           </select>
+
+          <select name="budget" class="custom-select mb-3" required>
+            <option value="">Orçamento *</option>
+            <option value="de-500-a-1000">De R$500 a R$1.000</option>
+            <option value="de-1000-a-2000">De R$1.000 a R$2.000</option>
+            <option value="de-2000-a-3000">De R$2.000 a R$3.000</option>
+            <option value="de-3000-a-5000">De R$3.000 a R$5.000</option>
+            <option value="mais-de-5000">Mais de R$5.000</option>
+          </select>
         <?php
-        // $inputs->material_select("select1", "employees_quantity", "Número de colaboradores", array(
-        //   "menos-de-20" => "Menos de 20",
-        //   "de-20-a-99" => "De 20 a 99",
-        //   "de-100-a-499" => "De 100 a 499",
-        //   "mais-de-500" => "Mais de 500",
-        // ), true, "mb-3");
-        $inputs->material_input(Material_Inputs::TYPE_TEXT, "job", "job", "Cargo", true, "mb-3");
         $inputs->material_input(Material_Inputs::TYPE_EMAIL, "email", "email", "e-mail de trabalho", true, "mb-3");
         $inputs->material_input(
           Material_Inputs::TYPE_PHONE,
