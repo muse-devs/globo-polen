@@ -2,6 +2,7 @@
 
 namespace Polen\Includes;
 
+use Polen\Admin\Polen_Admin_Social_Base_Product_Fields;
 use Polen\Social\Social_Order;
 use Polen\Social_Base\Social_Base_Order;
 use Polen\Social_Base\Social_Base_Product;
@@ -78,7 +79,7 @@ class Polen_Cart
                 $item->add_meta_data( 'video_category', $cart_item['video_category'], true );
             }            
             if( isset( $cart_item['instructions_to_video'] ) ) {
-                $instructions_to_video = filter_var( $cart_item['instructions_to_video'], FILTER_SANITIZE_SPECIAL_CHARS );
+                $instructions_to_video = Polen_Utils::sanitize_xss_br_escape( $cart_item['instructions_to_video'] );
                 $item->add_meta_data( 'instructions_to_video', $instructions_to_video, true );
                 $city = $cart_item['instructions_to_video'];
             }
@@ -89,10 +90,10 @@ class Polen_Cart
         //PARA CAMPANHAS SOCIAIS
         // $product_is_social = social_product_is_social( $item->get_product(), social_get_category_base() );
         $product = $item->get_product();
-        $product_is_social = product_is_social_base( $item->get_product(), social_get_category_base() );
-        if( $product_is_social ) {
+        $product_is_social_base = product_is_social_base( $product );
+        if( $product_is_social_base ) {
             $order->add_meta_data( Social_Base_Order::ORDER_META_KEY_SOCIAL, '1' );
-            $order->add_meta_data( Social_Base_Order::ORDER_META_KEY_CAMPAING, $product->get_meta( Social_Base_Product::PRODUCT_META_SLUG_CAMPAING, true ) );
+            $order->add_meta_data( Social_Base_Order::ORDER_META_KEY_CAMPAING, $product->get_meta( Polen_Admin_Social_Base_Product_Fields::FIELD_NAME_SLUG_CAMPAING, true ) );
 
             // $instructions_to_video = "Agradecer {$name} de {$city} pela doação ao criança esperança 2021!";
             // $item->add_meta_data( 'instructions_to_video', $instructions_to_video, true );
@@ -121,15 +122,15 @@ class Polen_Cart
             
                     $cart_item = $cart[$cart_id];
 
-                    $allowed_item = [ 'offered_by', 'video_to', 'name_to_video', 'email_to_video', 'video_category', 'instructions_to_video', 'allow_video_on_page' ];
+                    $allowed_item = [ 'offered_by', 'video_to', 'name_to_video', 'email_to_video', 'video_category', 'instructions_to_video', 'allow_video_on_page', 'phone' ];
                     foreach( $allowed_item as $p_item ):
                         if( isset( $_POST[ $p_item ] ) ) {
                             $item_name = $p_item;
                             if( $p_item == 'allow_video_on_page' ) {
                                 $item_data = ( $_POST['allow_video_on_page'] == 'on' ) ? 'on' : 'off';
-                            } elseif( $p_item == 'instructions_to_video') {
-                                $item_name = 'instructions_to_video';
-                                $item_data = filter_var( $_POST['instructions_to_video'], FILTER_SANITIZE_SPECIAL_CHARS );
+                            // } elseif( $p_item == 'instructions_to_video') {
+                                // $item_name = 'instructions_to_video';
+                                // $item_data = Polen_Utils::sanitize_xss_br_escape( $_POST['instructions_to_video'] );
                             } else {
                                 $item_data = $_POST[ $p_item ];
                             }

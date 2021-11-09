@@ -20,8 +20,9 @@
                     <th class="text-center">Empresa</th>
                     <th class="text-center">Email</th>
                     <th class="text-center">Qtd. Funcionarios</th>
-                    <th class="text-center">Cargo</th>
+                    <th class="text-center">Orçamento</th>
                     <th class="text-center">Telefone</th>
+                    <th class="text-center">Talento</th>
                     <th class="text-center">Mensagem</th>
                     <th class="text-center">Cadastro</th>
                 </tr>
@@ -32,8 +33,9 @@
                     <th class="text-center">Empresa</th>
                     <th class="text-center">Email</th>
                     <th class="text-center">Qtd. Funcionarios</th>
-                    <th class="text-center">Cargo</th>
+                    <th class="text-center">Orçamento</th>
                     <th class="text-center">Telefone</th>
+                    <th class="text-center">Talento</th>
                     <th class="text-center">Mensagem</th>
                     <th class="text-center">Cadastro</th>
                 </tr>
@@ -45,8 +47,9 @@
                             <td><?php echo $lead->company; ?></td>
                             <td><?php echo $lead->email; ?></td>
                             <td><?php echo $lead->employees_quantity; ?></td>
-                            <td><?php echo $lead->job; ?></td>
+                            <td><?php echo $lead->budget; ?></td>
                             <td><?php echo $lead->phone; ?></td>
+                            <td><?php echo $lead->talent_name; ?></td>
                             <td><?php echo $lead->message; ?></td>
                             <td><?php echo date("d/m/Y H:i:s", strtotime($lead->created_at)); ; ?></td>
                         </tr>

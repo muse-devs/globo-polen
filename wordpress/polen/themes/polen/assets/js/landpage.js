@@ -17,7 +17,6 @@ form_landpage.addEventListener("submit", function (evt) {
 	);
 	// Zapier request
 	polRequestZapier(
-		formName,
-		ZAPIERURLS.LANDING_PAGE
+		formName
 	);
 });

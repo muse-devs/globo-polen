@@ -3,8 +3,8 @@
 @import "variables";
 
 // Bootstrap por último
-@import "../bootstrap-4.6.0/scss/bootstrap.scss";
-@import "../slick/slick.scss";
+@import "../node_modules/bootstrap/scss/bootstrap";
+// @import "../slick/slick.scss";
 // @import "../slick/slick-theme.scss";
 @import "fonts";
 @import "icons";
@@ -26,8 +26,11 @@
 
 @import "landing";
 @import "tributes";
-@import "video-autografo";
+// @import "video-autografo";
 @import "social";
 @import "masterclass";
-@import "setembro-amarelo";
+// @import "setembro-amarelo";
 @import "business";
+@import "help";
+@import "about";
+@import "material-components-web.css";

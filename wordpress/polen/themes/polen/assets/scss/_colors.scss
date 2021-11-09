@@ -34,23 +34,37 @@ $font-color2: $light-50;
 $input-font-color: $light-100;
 $category-color: #818181;
 
+$polen-primary: #FD6C36;
+$polen-primary-light: #FF9048;
+$polen-primary-dark: #E36131;
+$polen-gradient: #FAA629;
+
+$neutral-100: #212529;
+$neutral-200: #343A40;
+$neutral-300: #495057;
+$neutral-400: #868E96;
+$neutral-500: #ADB5BD;
+$neutral-600: #CED4DA;
+$neutral-700: #DEE2E6;
+$neutral-900: #FFFFFF;
+
 $theme-colors: (
-	"primary": $primary,
-	"primary-hover": $primary-hover,
-	"gradient": #fba729,
+	"primary": $polen-primary,
+	"primary-hover": $polen-primary-light,
+	"gradient": $polen-gradient,
 	"secondary": $secondary,
 	"success": $accept,
 	"teal": $teal,
 	"danger": $danger,
 	"danger-bg": $danger-bg,
-	"light": $light-100,
-	"gray-light": $light-50,
-	"gray": $dark-25,
-	"gray-dark": $talent-bg-color,
+	"light": $neutral-900,
+	"gray-light": $neutral-500,
+	"gray": $neutral-400,
+	"gray-dark": $neutral-100,
 	"subtitle-light": #c4c4c4,
 	"subtitle-dark": #9c9c9c,
 	"box-color-light": #e9e9e9,
-	"box-color-dark": #272727,
+	"box-color-dark": $neutral-100,
 	"dark": $dark-100,
 	"subtext": #767676,
 	"yellow": $yellow,

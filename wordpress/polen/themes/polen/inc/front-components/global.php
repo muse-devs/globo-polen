@@ -4,8 +4,9 @@ use Polen\Includes\Polen_Order;
 
 function polen_get_search_form()
 {
+  $inputs = new Material_Inputs();
 ?>
-  <button onclick="showSearchForm()" class="button-no-bg"><?php Icon_Class::polen_icon_research(); ?></button>
+  <button onclick="showSearchForm()" class="button-no-bg"><?php Icon_Class::polen_icon_search(); ?></button>
   <div id="search-box" class="search-box">
     <div class="row p-3">
       <div class="col-12 col-md-8 m-md-auto">
@@ -17,8 +18,8 @@ function polen_get_search_form()
         <form action="/" method="get">
           <div class="row">
             <div class="col-12 d-flex justify-content-between">
-              <input class="form-control form-control-lg" type="text" id="search" name="s" value="<?php the_search_query(); ?>" placeholder="Buscar" required />
-              <button type="submit" class="btn btn-primary btn-lg ml-2"><?php Icon_Class::polen_icon_research(); ?></button>
+              <?php $inputs->material_input(Material_Inputs::TYPE_TEXT, "search", "s", "Buscar", true); ?>
+              <?php $inputs->material_button(Material_Inputs::TYPE_SUBMIT, "btn-search", '<i class="icon icon-search"></i>', "ml-2", array("style" => "width: 54px;")); ?>
             </div>
           </div>
         </form>
@@ -114,17 +115,17 @@ function polen_front_get_categories_buttons()
     <div class="row mb-2">
       <div class="col-12">
         <div class="content-category">
-          <?php
-          $categories = highlighted_categories();
-          foreach ($categories as $categorie) {
-            echo "<a href=/categoria/" . $categorie["slug"] . ">";
-            echo '<div class="btn btn-outline-dark category-button" ontouchstart="">';
-            echo '<img src="' . $categorie["img"] . '"></img>';
-            echo $categorie["name"];
-            echo '</div>';
-            echo "</a>";
-          }
-          ?>
+          <?php $categories = highlighted_categories(); ?>
+          <?php foreach ($categories as $categorie) : ?>
+            <a href="<?php echo get_category_link($categorie["term_id"]); ?>">
+              <div class="btn btn-outline-dark category-button" ontouchstart="">
+                <?php if ($categorie["img"]) : ?>
+                  <img src="<?php echo $categorie["img"]; ?>" />
+                <?php endif; ?>
+                <?php echo $categorie["name"]; ?>
+              </div>
+            </a>
+          <?php endforeach; ?>
         </div>
       </div>
     </div>
@@ -152,11 +153,11 @@ function polen_front_get_banner_video()
     <div class="content">
       <div class="row">
         <div class="col-12 mb-3">
-          <h2 class="title text-center">Emocione quem você ama com videos personalizados</h2>
+          <h2 class="title text-center">Emocione quem você ama com vídeos personalizados de artistas famosos</h2>
         </div>
-        <div class="col-12 d-flex justify-content-center">
-          <a href="<?php echo polen_get_all_talents_url(); ?>" class="btn btn-primary btn-md">Ver todos os artistas</a>
-        </div>
+        <!-- <div class="col-12 d-flex justify-content-center">
+          <a href="<?php //echo polen_get_all_talents_url(); ?>" class="btn btn-primary btn-md">Ver todos os talentos</a>
+        </div> -->
       </div>
     </div>
     <script>
@@ -289,8 +290,8 @@ function polen_banner_scrollable($items, $title, $link, $subtitle = "", $social 
     <div class="col-md-12">
       <header class="row mb-3">
         <div class="col-12 d-flex justify-content-between align-items-center">
-          <h2 class="mr-2"><?php echo $title; ?></h2>
-          <a href="<?php echo $link; ?>">Ver todos <?php Icon_Class::polen_icon_chevron_right(); ?></a>
+          <h2 class="typo typo-title mr-2"><?php echo $title; ?></h2>
+          <a href="<?php echo $link; ?>" class="typo typo-link">Ver todos <?php Icon_Class::polen_icon_chevron_right(); ?></a>
         </div>
         <?php if ($subtitle != "") : ?>
           <div class="col-12">
@@ -322,9 +323,9 @@ function polen_front_get_news($items, $title, $link, $social = false)
     <div class="col-md-12">
       <header class="row mb-3">
         <div class="col-12 d-flex justify-content-between align-items-center">
-          <h2 class="mr-2"><?php echo $title; ?></h2>
+          <h2 class="typo typo-title mr-2"><?php echo $title; ?></h2>
           <?php if ($link) : ?>
-            <a href="<?php echo $link; ?>">Ver todos <?php Icon_Class::polen_icon_chevron_right(); ?></a>
+            <a href="<?php echo $link; ?>" class="typo typo-link">Ver todos <?php Icon_Class::polen_icon_chevron_right(); ?></a>
           <?php endif; ?>
         </div>
       </header>
@@ -346,37 +347,6 @@ function polen_front_get_news($items, $title, $link, $social = false)
 <?php
 }
 
-function polen_front_get_categories($items, $link = '#')
-{
-  if (!$items) {
-    return;
-  }
-?>
-  <section class="row pt-2 mb-5 categories">
-    <div class="col-md-12">
-      <header class="row mb-4">
-        <div class="col-12 d-flex justify-content-between align-items-center">
-          <h2 class="mr-2">Categorias</h2>
-          <a href="<?php echo $link; ?>">Ver todos</a>
-        </div>
-      </header>
-    </div>
-    <div class="col md-12">
-      <div class="row">
-        <?php foreach ($items as $item) : ?>
-          <div class="col-md-3">
-            <figure class="polen-card category">
-              <img loading="lazy" src="<?= $item["image"] ?>" alt="<?= $item["title"] ?>">
-              <a href="<?= $item["url"] ?>" class="link"><?= $item["title"] ?></a>
-            </figure>
-          </div>
-        <?php endforeach; ?>
-      </div>
-    </div>
-  </section>
-<?php
-}
-
 function polen_front_get_artists($items, $title, $social = false)
 {
   if (!$items) {
@@ -387,8 +357,8 @@ function polen_front_get_artists($items, $title, $social = false)
     <div class="col-12 col-md-12">
       <header class="row mb-4">
         <div class="col-12 d-flex justify-content-between align-items-center">
-          <h2 class="mr-2"><?= $title; ?></h2>
-          <a href="#">Ver todos <?php Icon_Class::polen_icon_chevron_right(); ?></a>
+          <h2 class="typo typo-title mr-2"><?= $title; ?></h2>
+          <a href="#" class="typo typo-link">Ver todos <?php Icon_Class::polen_icon_chevron_right(); ?></a>
         </div>
       </header>
     </div>
@@ -410,6 +380,92 @@ function polen_front_get_artists($items, $title, $social = false)
 <?php
 }
 
+function polen_front_get_videos($videos)
+{
+  if (!$videos) {
+		return;
+	}
+?>
+	<section id="talent-videos" class="row my-1 pb-4">
+    <div class="col-md-12">
+      <header class="row my-3">
+        <div class="col">
+          <h2>Últimos vídeos gravados pelos famosos</h2>
+        </div>
+      </header>
+    </div>
+		<div class="col-md-12 p-0 mb-4">
+			<div id="videos-carousel" class="owl-carousel owl-theme ">
+          <?php foreach ($videos as $key=>$value) : ?>
+            <?php if ($value['video_url']) : ?>
+              <div class="item">
+                <div class="polen-card-video">
+                  <figure id="cover-box" class="video-cover" data-id="<?php echo $key; ?>">
+                    <img loading="lazy" src="<?php echo $value['cover']; ?>" alt="">
+                    <div class="video-player-button" data-id="<?php echo $key; ?>"></div>
+                    <div class="video-icons">
+                      <figure class="image-cropper color small">
+                        <?php echo $value['talent_thumb']; ?>
+                      </figure>
+                      <figure class="image-cropper small">
+                        <?php echo $value['initials']; ?>
+                      </figure>
+                    </div>
+                  </figure>
+                  <video id="video-box" class="video-cover src-box d-none" playsinline width="100%" height="100%" data-id="<?php echo $key; ?>">
+                    <source src="<?php echo $value['video_url']; ?>" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            <?php endif; ?>
+          <?php endforeach; ?>
+      </div>
+		</div>
+	</section>
+  <script>
+    (function($) {
+      $('.video-player-button').on('click',function(){
+
+        // Get video by data-id id
+        let id = $(this).attr('data-id');
+        const video = document.querySelector('#video-box[data-id="'+id+'"]');
+
+        // Stop others videos
+        const allVideos = document.querySelectorAll('#video-box:not([data-id="'+id+'"])');
+        if (allVideos) {
+          for (let i = 0; i < allVideos.length; i++) {
+            allVideos[i].controls = false;
+            allVideos[i].pause();
+            allVideos[i].currentTime = 0;
+          }
+          $('#video-box:not([data-id="'+id+'"])').addClass("d-none");
+          $('#cover-box:not([data-id="'+id+'"])').removeClass("d-none");
+        }
+
+        // Show video and remove cover
+        $('#video-box[data-id="'+id+'"]').removeClass("d-none");
+        $('#cover-box[data-id="'+id+'"]').addClass("d-none");
+
+        // Play video
+        video.controls = true;
+        setImediate(function(){
+          video.play();
+        })
+
+        video.addEventListener("ended", endVideo);
+
+        function endVideo() {
+          video.controls = false;
+          // Show cover and remove video
+          $('#video-box[data-id="'+id+'"]').addClass("d-none");
+          $('#cover-box[data-id="'+id+'"]').removeClass("d-none");
+        }
+      });
+    })(jQuery);
+	</script>
+<?php
+}
+
 function polen_front_get_tutorial()
 {
 ?>
@@ -417,7 +473,7 @@ function polen_front_get_tutorial()
     <div class="col-md-12">
       <header class="row mb-3">
         <div class="col">
-          <h2>Como funciona</h2>
+          <h2 class="typo typo-title">Como funciona</h2>
         </div>
       </header>
     </div>
@@ -428,7 +484,7 @@ function polen_front_get_tutorial()
             <div class="row">
               <div class="col-12 text-center icon subtitle"><?php Icon_Class::polen_icon_phone(); ?></div>
               <div class="col-12 text-center mt-2">
-                <p>Peça o vídeo para o seu ídolo</p>
+                <p>Escolha um ídolo para gravar seu vídeo.</p>
               </div>
             </div>
           </div>
@@ -436,7 +492,7 @@ function polen_front_get_tutorial()
             <div class="row">
               <div class="col-12 text-center icon subtitle"><?php Icon_Class::polen_icon_camera_video(); ?></div>
               <div class="col-12 text-center mt-2">
-                <p>Receba seu vídeo</p>
+                <p>Receba seu vídeo exclusivo por e-mail.</p>
               </div>
             </div>
           </div>
@@ -444,9 +500,12 @@ function polen_front_get_tutorial()
             <div class="row">
               <div class="col-12 text-center icon subtitle"><?php Icon_Class::polen_icon_hand_thumbs_up(); ?></div>
               <div class="col-12 text-center mt-2">
-                <p>Compartilhe com todo mundo</p>
+                <p>Compartilhe o vídeo com todo mundo!</p>
               </div>
             </div>
+          </div>
+          <div class="col-12">
+            <p class="faq-text">Ainda com dúvidas? <a href="/ajuda">Saiba mais</a></p>
           </div>
         </div>
       </div>
@@ -522,22 +581,26 @@ function polen_box_related_product_by_product_id($product_id)
  */
 function polen_form_signin_newsletter(string $event = 'newsletter')
 {
+  $inputs = new Material_Inputs();
 ?>
-  <div id="signin-newsletter" class="col-md-6 mt-4 order-md-2">
-    <h5 class="title">Junte-se à nossa lista</h5>
-    <p class="description">Seja o primeiro a saber sobre as estrelas mais recentes e as melhores ofertas no <?php bloginfo('name'); ?></p>
-    <form id="newsletter">
+  <div id="signin-newsletter" class="col-md-5 mt-4">
+    <h5 class="title typo typo-title typo-small">Se conecte com a gente!</h5>
+    <p class="description typo typo-p typo-small typo-double-line-height">Receba novidades e conteúdos exclusivos da Polen.</p>
+    <form id="newsletter" action="/" method="POST">
       <div class="row">
         <div class="col-md-8 mb-2 mb-md-0">
-          <input type="hidden" name="action" value="polen_newsletter_signin">
-          <input type="hidden" name="page_source" value="<?= filter_input(INPUT_SERVER, 'REQUEST_URI'); ?>" />
-          <input type="hidden" name="event" value="<?= $event; ?>" />
-          <input type="hidden" name="is_mobile" value="<?= polen_is_mobile() ? "1" : "0"; ?>" />
-          <input type="hidden" name="security" value=<?php echo wp_create_nonce('news-signin'); ?>>
-          <input type="email" name="email" placeholder="Entre com o seu e-mail" class="form-control form-control-lg" required />
+          <?php
+          $inputs->input_hidden("action", "polen_newsletter_signin");
+          $inputs->input_hidden("page_source", filter_input(INPUT_SERVER, 'REQUEST_URI'));
+          $inputs->input_hidden("event", $event);
+          $inputs->input_hidden("is_mobile", polen_is_mobile() ? "1" : "0");
+          $inputs->input_hidden("security", wp_create_nonce('news-signin'));
+          $inputs->material_input(Material_Inputs::TYPE_EMAIL, "email", "email", "Entre com o seu e-mail", true);
+          ?>
         </div>
         <div class="col-md-4 mt-2 mt-md-0 d-md-flex align-items-md-center">
-          <input type="submit" value="Enviar" class="signin-newsletter-button btn btn-outline-light btn-lg btn-block" />
+          <!-- <input type="submit" value="Enviar" class="signin-newsletter-button btn btn-outline-light btn-lg btn-block" /> -->
+          <?php $inputs->material_button(Material_Inputs::TYPE_SUBMIT, "botao", "Enviar"); ?>
         </div>
         <div class="col-md-8 mb-2 mb-md-0 small signin-response"></div>
       </div>
@@ -677,11 +740,51 @@ function polen_get_toast($text)
     </div>
     <button class="ml-2 pol-toast-close" onclick="polRemoveElement('#pol-toast')">
       <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 22.5C17.5228 22.5 22 18.0228 22 12.5C22 6.97715 17.5228 2.5 12 2.5C6.47715 2.5 2 6.97715 2 12.5C2 18.0228 6.47715 22.5 12 22.5Z" stroke="#159A52" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-        <path d="M15 9.5L9 15.5" stroke="#159A52" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-        <path d="M9 9.5L15 15.5" stroke="#159A52" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M12 22.5C17.5228 22.5 22 18.0228 22 12.5C22 6.97715 17.5228 2.5 12 2.5C6.47715 2.5 2 6.97715 2 12.5C2 18.0228 6.47715 22.5 12 22.5Z" stroke="#767676" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M15 9.5L9 15.5" stroke="#767676" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M9 9.5L15 15.5" stroke="#767676" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
       </svg>
     </button>
   </div>
+<?php
+}
+
+function polen_get_home_banner($link)
+{
+?>
+	<div class="row mt-4">
+		<div class="col-12">
+      <!-- Desktop Banner -->
+			<div class="mc-banner combate-desktop">
+				<img class="image mobile-img" src="<?php echo TEMPLATE_URI . '/assets/img/combate/bg-mobile.png'; ?>" alt="Polen Masterclass" />
+				<img class="image desktop-img" src="<?php echo TEMPLATE_URI . '/assets/img/combate/bg.jpeg'; ?>" alt="Polen Masterclass" />
+				<div class="content">
+					<div class="left">
+            <img src="<?php echo TEMPLATE_URI . '/assets/img/combate/logo.png'; ?>" alt="Canal Combate" style="width: 150px;"></img>
+						<p class="mt-3">
+              Peça agora um vídeo personalizado para<br>os talentos do canal Combate.
+						</p>
+						<a href="<?php echo $link; ?>" class="btn btn-primary btn-md">Ver talentos</a>
+					</div>
+					<div class="right mr-2 ml-4 d-block">
+            <!-- <img class="img-responsive mb-4" src="<?php //echo TEMPLATE_URI . '/assets/img/combate/logo.png'; ?>" alt="Canal Combate" style="width: 120px; float:right;"></img>
+            <br> -->
+            <img class="img-responsive" src="<?php echo TEMPLATE_URI . '/assets/img/combate/talentos.png'; ?>" alt="Talentos do Canal Combate" style="float: right; margin-right: -20px; border-radius: 12px;"></img>
+          </div>
+				</div>
+			</div>
+      <!-- Mobile Banner -->
+      <div class="mc-banner combate-mobile">
+				<img class="image" src="<?php echo TEMPLATE_URI . '/assets/img/combate/bg-mobile-new.png'; ?>" alt="Polen Masterclass" />
+				<div class="top">
+          <img class="img-responsive combate-logo" src="<?php echo TEMPLATE_URI . '/assets/img/combate/canal-combate-logo-branco.png'; ?>" alt="Canal Combate" style=""></img>
+        </div>
+        <div class="bottom">
+          <img class="img-responsive" src="<?php echo TEMPLATE_URI . '/assets/img/combate/talentos-mobile.png'; ?>" alt="Talentos do Canal Combate"></img>
+          <a href="<?php echo $link; ?>" class="btn btn-primary btn-md">Ver talentos</a>
+        </div>
+			</div>
+		</div>
+	</div>
 <?php
 }

@@ -16,7 +16,10 @@ if( ! $is_social && ! $is_campain ) :
                 <p class="value">R$<?= number_format( $order_partial, 2, ',', '' ); ?></p>
             </div>
             <div class="col-12 text-center mt-3">
-                <a href="/my-account/orders/" class="btn btn-outline-light btn-lg">Ver mais pedidos</a>
+                <a href="/my-account/orders/" class="mdc-button mdc-button--outlined">
+                    <span class="mdc-button__ripple"></span>
+                    <span class="mdc-button__label">Ver mais pedidos</span>
+                </a>
             </div>
         </div>
     </main>
@@ -30,7 +33,10 @@ if( ! $is_social && ! $is_campain ) :
             <p class="text mt-5"><strong>Pronto!<br />Seu vídeo foi enviado.</strong></p>
         </div>
         <div class="col-12 text-center mt-3">
-            <a href="/my-account/orders/" class="btn btn-outline-light btn-lg">Ver mais pedidos</a>
+            <a href="/my-account/orders/" class="mdc-button mdc-button--outlined">
+                <span class="mdc-button__ripple"></span>
+                <span class="mdc-button__label">Ver mais pedidos</span>
+            </a>
         </div>
     </div>
 </main>
@@ -45,7 +51,10 @@ if( ! $is_social && ! $is_campain ) :
                 <p class="value">R$<?= number_format( $order_partial, 2, ',', '' ); ?></p>
             </div>
             <div class="col-12 text-center mt-3">
-                <a href="/my-account/orders/" class="btn btn-outline-light btn-lg">Ver mais pedidos</a>
+                <a href="/my-account/orders/" class="mdc-button mdc-button--outlined">
+                    <span class="mdc-button__ripple"></span>
+                    <span class="mdc-button__label">Ver mais pedidos</span>
+                </a>
             </div>
         </div>
     </main>

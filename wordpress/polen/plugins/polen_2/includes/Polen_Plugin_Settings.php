@@ -521,18 +521,12 @@ class Polen_Plugin_Settings
                     'desc'     => 'APENAS O ID DO LUCCAS NETO',
                     'default'  => '',
                 ),
-                array(
-                    'id'       => 'polen-business-talents',
-                    'type'     => 'text',
-                    'title'    => esc_html__('Talentos Polen Business', 'polen'),
-                    'desc'     => 'IDs separados por vírgula. Ex: 123,321,432,234',
-                )
             )
         ) );
 
 
-         // Configurar Emails
-         \Redux::set_section( $opt_name, array(
+        // Configurar Emails
+        \Redux::set_section( $opt_name, array(
             'title'            => esc_html__( 'Configurar emails', 'polen' ),
             'id'               => 'polen_email_expire_order',
             'icon'             => 'el el-envelope',
@@ -549,6 +543,13 @@ class Polen_Plugin_Settings
                     'id'       => 'recipient_email_polen_company',
                     'type'     => 'text',
                     'title'    => esc_html__('Configurar email de destinatário polen empresas', 'polen'),
+                    'desc'     => 'Emails serarados por Virgura',
+                    'default'  => '',
+                ),
+                array(
+                    'id'       => 'recipient_email_polen_help',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Configurar email de destinatário polen ajuda', 'polen'),
                     'desc'     => 'Emails serarados por Virgura',
                     'default'  => '',
                 ),

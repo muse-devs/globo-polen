@@ -67,6 +67,12 @@ $Talent_Fields = new Polen_Update_Fields();
 				"mail" => $cart_item['email_to_video'] ? $cart_item['email_to_video'] : null,
 				"description" => $cart_item['instructions_to_video'] ? $cart_item['instructions_to_video'] : null
 			);
+
+			if( 'to_myself' == $cart_item['video_to'] ) {
+				// unset( $talent_cart_detail[ "to" ] );
+				$talent_cart_detail[ "to" ] = $talent_cart_detail[ "from" ];
+				$talent_cart_detail[ "from" ] = "";
+			}
 		}
 		polen_get_talent_card($talent_cart_detail, $is_social); ?>
 	</div>
