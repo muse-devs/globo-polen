@@ -1,6 +1,6 @@
 (window["__wcAdmin_webpackJsonp"] = window["__wcAdmin_webpackJsonp"] || []).push([[13],{
 
-/***/ 477:
+/***/ 478:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -18,28 +18,28 @@ var prop_types = __webpack_require__(1);
 var prop_types_default = /*#__PURE__*/__webpack_require__.n(prop_types);
 
 // EXTERNAL MODULE: ./client/analytics/report/revenue/config.js
-var config = __webpack_require__(524);
+var config = __webpack_require__(525);
 
 // EXTERNAL MODULE: ./client/lib/get-selected-chart/index.js
-var get_selected_chart = __webpack_require__(506);
+var get_selected_chart = __webpack_require__(507);
 
 // EXTERNAL MODULE: ./client/analytics/components/report-chart/index.js + 1 modules
-var report_chart = __webpack_require__(503);
+var report_chart = __webpack_require__(505);
 
 // EXTERNAL MODULE: ./client/analytics/components/report-summary/index.js
-var report_summary = __webpack_require__(507);
+var report_summary = __webpack_require__(508);
 
 // EXTERNAL MODULE: external ["wp","i18n"]
 var external_wp_i18n_ = __webpack_require__(2);
 
 // EXTERNAL MODULE: external ["wp","date"]
-var external_wp_date_ = __webpack_require__(57);
+var external_wp_date_ = __webpack_require__(58);
 
 // EXTERNAL MODULE: external ["wp","data"]
 var external_wp_data_ = __webpack_require__(7);
 
 // EXTERNAL MODULE: external ["wp","compose"]
-var external_wp_compose_ = __webpack_require__(13);
+var external_wp_compose_ = __webpack_require__(14);
 
 // EXTERNAL MODULE: external "lodash"
 var external_lodash_ = __webpack_require__(3);
@@ -51,7 +51,7 @@ var external_wc_components_ = __webpack_require__(21);
 var external_wc_number_ = __webpack_require__(120);
 
 // EXTERNAL MODULE: ./packages/wc-admin-settings/build-module/index.js
-var build_module = __webpack_require__(15);
+var build_module = __webpack_require__(13);
 
 // EXTERNAL MODULE: external ["wc","data"]
 var external_wc_data_ = __webpack_require__(11);
@@ -63,10 +63,10 @@ var external_wc_date_ = __webpack_require__(19);
 var lib = __webpack_require__(32);
 
 // EXTERNAL MODULE: ./client/analytics/components/report-table/index.js + 2 modules
-var report_table = __webpack_require__(502);
+var report_table = __webpack_require__(503);
 
 // EXTERNAL MODULE: ./client/lib/currency-context.js
-var currency_context = __webpack_require__(497);
+var currency_context = __webpack_require__(498);
 
 // CONCATENATED MODULE: ./client/analytics/report/revenue/table.js
 
@@ -118,7 +118,7 @@ class table_RevenueReportTable extends external_wp_element_["Component"] {
       isSortable: true,
       isNumeric: true
     }, {
-      label: Object(external_wp_i18n_["__"])('Gross Sales', 'woocommerce-admin'),
+      label: Object(external_wp_i18n_["__"])('Gross sales', 'woocommerce-admin'),
       key: 'gross_sales',
       required: false,
       isSortable: true,
@@ -136,7 +136,7 @@ class table_RevenueReportTable extends external_wp_element_["Component"] {
       isSortable: true,
       isNumeric: true
     }, {
-      label: Object(external_wp_i18n_["__"])('Net Sales', 'woocommerce-admin'),
+      label: Object(external_wp_i18n_["__"])('Net sales', 'woocommerce-admin'),
       key: 'net_revenue',
       required: false,
       isSortable: true,
@@ -154,7 +154,7 @@ class table_RevenueReportTable extends external_wp_element_["Component"] {
       isSortable: true,
       isNumeric: true
     }, {
-      label: Object(external_wp_i18n_["__"])('Total Sales', 'woocommerce-admin'),
+      label: Object(external_wp_i18n_["__"])('Total sales', 'woocommerce-admin'),
       key: 'total_sales',
       required: false,
       isSortable: true,
@@ -244,25 +244,25 @@ class table_RevenueReportTable extends external_wp_element_["Component"] {
       label: Object(external_wp_i18n_["_n"])('order', 'orders', ordersCount, 'woocommerce-admin'),
       value: Object(external_wc_number_["formatValue"])(currency, 'number', ordersCount)
     }, {
-      label: Object(external_wp_i18n_["__"])('gross sales', 'woocommerce-admin'),
+      label: Object(external_wp_i18n_["__"])('Gross sales', 'woocommerce-admin'),
       value: formatAmount(grossSales)
     }, {
-      label: Object(external_wp_i18n_["__"])('returns', 'woocommerce-admin'),
+      label: Object(external_wp_i18n_["__"])('Returns', 'woocommerce-admin'),
       value: formatAmount(refunds)
     }, {
-      label: Object(external_wp_i18n_["__"])('coupons', 'woocommerce-admin'),
+      label: Object(external_wp_i18n_["__"])('Coupons', 'woocommerce-admin'),
       value: formatAmount(coupons)
     }, {
-      label: Object(external_wp_i18n_["__"])('net sales', 'woocommerce-admin'),
+      label: Object(external_wp_i18n_["__"])('Net sales', 'woocommerce-admin'),
       value: formatAmount(netRevenue)
     }, {
-      label: Object(external_wp_i18n_["__"])('taxes', 'woocommerce-admin'),
+      label: Object(external_wp_i18n_["__"])('Taxes', 'woocommerce-admin'),
       value: formatAmount(taxes)
     }, {
-      label: Object(external_wp_i18n_["__"])('shipping', 'woocommerce-admin'),
+      label: Object(external_wp_i18n_["__"])('Shipping', 'woocommerce-admin'),
       value: formatAmount(shipping)
     }, {
-      label: Object(external_wp_i18n_["__"])('total sales', 'woocommerce-admin'),
+      label: Object(external_wp_i18n_["__"])('Total sales', 'woocommerce-admin'),
       value: formatAmount(totalSales)
     }];
   }
@@ -364,7 +364,7 @@ const formatTableQuery = Object(external_lodash_["memoize"])( // @todo Support h
   return formatProps(isError, isRequesting, tableQuery, revenueData);
 }))(table_RevenueReportTable));
 // EXTERNAL MODULE: ./client/analytics/components/report-filters/index.js
-var report_filters = __webpack_require__(501);
+var report_filters = __webpack_require__(502);
 
 // CONCATENATED MODULE: ./client/analytics/report/revenue/index.js
 
@@ -426,7 +426,7 @@ revenue_RevenueReport.propTypes = {
 
 /***/ }),
 
-/***/ 524:
+/***/ 525:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -447,7 +447,7 @@ const REVENUE_REPORT_FILTERS_FILTER = 'woocommerce_admin_revenue_report_filters'
 const REVENUE_REPORT_ADVANCED_FILTERS_FILTER = 'woocommerce_admin_revenue_report_advanced_filters';
 const charts = Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__["applyFilters"])(REVENUE_REPORT_CHARTS_FILTER, [{
   key: 'gross_sales',
-  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Gross Sales', 'woocommerce-admin'),
+  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Gross sales', 'woocommerce-admin'),
   order: 'desc',
   orderby: 'gross_sales',
   type: 'currency',
@@ -468,7 +468,7 @@ const charts = Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__["applyFilter
   isReverseTrend: false
 }, {
   key: 'net_revenue',
-  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Net Sales', 'woocommerce-admin'),
+  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Net sales', 'woocommerce-admin'),
   orderby: 'net_revenue',
   type: 'currency',
   isReverseTrend: false
@@ -487,7 +487,7 @@ const charts = Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__["applyFilter
   isReverseTrend: false
 }, {
   key: 'total_sales',
-  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Total Sales', 'woocommerce-admin'),
+  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Total sales', 'woocommerce-admin'),
   order: 'desc',
   orderby: 'total_sales',
   type: 'currency',

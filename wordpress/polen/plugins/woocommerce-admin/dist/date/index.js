@@ -225,38 +225,38 @@ const presetValues = [{
   label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Yesterday', 'woocommerce-admin')
 }, {
   value: 'week',
-  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Week to Date', 'woocommerce-admin')
+  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Week to date', 'woocommerce-admin')
 }, {
   value: 'last_week',
-  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Last Week', 'woocommerce-admin')
+  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Last week', 'woocommerce-admin')
 }, {
   value: 'month',
-  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Month to Date', 'woocommerce-admin')
+  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Month to date', 'woocommerce-admin')
 }, {
   value: 'last_month',
-  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Last Month', 'woocommerce-admin')
+  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Last month', 'woocommerce-admin')
 }, {
   value: 'quarter',
-  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Quarter to Date', 'woocommerce-admin')
+  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Quarter to date', 'woocommerce-admin')
 }, {
   value: 'last_quarter',
-  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Last Quarter', 'woocommerce-admin')
+  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Last quarter', 'woocommerce-admin')
 }, {
   value: 'year',
-  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Year to Date', 'woocommerce-admin')
+  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Year to date', 'woocommerce-admin')
 }, {
   value: 'last_year',
-  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Last Year', 'woocommerce-admin')
+  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Last year', 'woocommerce-admin')
 }, {
   value: 'custom',
   label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Custom', 'woocommerce-admin')
 }];
 const periods = [{
   value: 'previous_period',
-  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Previous Period', 'woocommerce-admin')
+  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Previous period', 'woocommerce-admin')
 }, {
   value: 'previous_year',
-  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Previous Year', 'woocommerce-admin')
+  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Previous year', 'woocommerce-admin')
 }];
 /**
  * Adds timestamp to a string date.
@@ -374,9 +374,12 @@ function getLastPeriod(period, compare) {
       secondaryEnd = primaryStart.clone().subtract(1, 'days');
       secondaryStart = secondaryEnd.clone().subtract(daysDiff, 'days');
     }
-  } else {
+  } else if (period === 'week') {
     secondaryStart = primaryStart.clone().subtract(1, 'years');
     secondaryEnd = primaryEnd.clone().subtract(1, 'years');
+  } else {
+    secondaryStart = primaryStart.clone().subtract(1, 'years');
+    secondaryEnd = secondaryStart.clone().endOf(period);
   } // When the period is month, be sure to force end of month to take into account leap year
 
 
@@ -894,7 +897,7 @@ function validateDateInputForRange(type, value, before, after, format) {
 
 /***/ }),
 
-/***/ 48:
+/***/ 49:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1159,7 +1162,7 @@ module.exports = {
 "use strict";
 
 
-var utils = __webpack_require__(48);
+var utils = __webpack_require__(49);
 var formats = __webpack_require__(39);
 var has = Object.prototype.hasOwnProperty;
 
@@ -1445,7 +1448,7 @@ module.exports = function (object, opts) {
 "use strict";
 
 
-var utils = __webpack_require__(48);
+var utils = __webpack_require__(49);
 
 var has = Object.prototype.hasOwnProperty;
 var isArray = Array.isArray;

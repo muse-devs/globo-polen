@@ -8,11 +8,14 @@
 		color: var(--dark) !important;
 	}
 	.icon {
-		font-size: 20px;
+		font-size: 24px;
+    @include media-breakpoint-up(md) {
+      font-size: 16px;
+    }
 	}
 }
 
-.home .button-no-bg {
+.header-home .button-no-bg {
 	color: var(--light);
 }
 

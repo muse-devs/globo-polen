@@ -171,8 +171,11 @@ select.form-control:not([size]):not([multiple]) {
 
 .woocommerce .woocommerce-ordering,
 .woocommerce-page .woocommerce-ordering {
+  margin: 1rem 0 0;
+  width: 40%;
 	@include media-breakpoint-down(sm) {
 		float: left;
+    width: 100%;
 	}
 }
 
@@ -265,9 +268,9 @@ select.form-control:not([size]):not([multiple]) {
 .woocommerce-cart #payment ul.payment_methods li input,
 .woocommerce-checkout #payment ul.payment_methods li input {
 	margin-right: 0.5rem;
-	width: 24px !important;
+	width: 24px;
 	@include media-breakpoint-up(lg) {
-		width: 21px !important;
+		width: 21px;
 	}
 }
 
@@ -302,4 +305,274 @@ button.criesp {
 	:hover {
 		background-color: var(--success);
 	}
+}
+
+.card-brand-icons {
+  display: none!important;
+}
+
+.defaultTunaLabel {
+  color: var(--dark);
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  margin-bottom: 0.5rem;
+}
+
+.woocommerce-billing-fields {
+  .form-row {
+    width: 100%!important;
+    margin-bottom: 1em!important;
+    label {
+      color: var(--dark);
+      font-family: "Poppins", sans-serif;
+      font-size: 13px;
+      display: inline-block!important;
+      margin-bottom: 0.5rem;
+    }
+  }
+  .input-text  {
+    width: 100%;
+    padding: 10px;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    border-radius: 6px;
+    color: #495057;
+    border: 1px solid #ced4da;
+  }
+}
+
+#savedCardPaymentDiv {
+  .cardDataDiv {
+    width: auto!important;
+    display: flex;
+    justify-content: center;
+    padding: 5px 0px;
+    flex-basis: 50%!important;
+  }
+  .cardItem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #000;
+    border-radius: 10px;
+  }
+  #tuna_saved_card_cvv {
+    display: flex;
+    justify-content: flex-end;
+    width: auto!important;
+    flex-basis: 30%!important;
+    margin-top: 0px;
+    @include media-breakpoint-down(sm) {
+      justify-content: center;
+      flex-basis: 100%!important;
+    }
+    .defaultTunaInputText {
+      width: 50px!important;
+      padding: 10px;
+      font-family: "Poppins", sans-serif;
+      font-size: 14px;
+      border-radius: 6px;
+      color: #495057;
+      border: 1px solid #ced4da;
+      @include media-breakpoint-down(sm) {
+        margin-top: 5px;
+        width: 70px!important;
+      }
+    }
+  }
+}
+
+#commonFields {
+  .defaultTunaInputOption {
+    width: 100%;
+    padding: 10px!important;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    border-radius: 6px;
+    color: #495057;
+    border: 1px solid #000;
+  }
+}
+
+.defaultTunaInputText {
+  width: 100%!important;
+  padding: 10px!important;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  border-radius: 6px;
+  color: #495057;
+  border: 1px solid #000;
+}
+
+.defaultTunaInputText:focus {
+  border: 1px solid var(--primary)!important;
+  outline: none;
+}
+
+.defaultTunaCVVImage {
+  display: none;
+}
+
+#CREDIT_CARD .defaultTunaCardBrand, #CREDIT_CARD_CVV .defaultTunaCVVImage {
+  display: none;
+}
+
+#CREDIT_CARD {
+  div {
+    width: 100%;
+  }
+}
+
+#CREDIT_CARD_CVV {
+  direction: inherit!important;
+  place-content: baseline;
+  div {
+    width: 100%;
+  }
+}
+
+#creditCardPaymentDiv {
+  label {
+    color: #000;
+    font-weight: 400;
+    font-family: "Poppins", sans-serif;
+    font-size: 13px;
+    display: inline-block!important;
+    margin-bottom: 0.5rem;
+  }
+  #SINGLE_USE_FIELD {
+    label {
+      margin-top: 8px;
+    }
+  }
+  .dual-column {
+    display: flex;
+    div {
+      width: 50%;
+    }
+  }
+  .defaultTunaInputText {
+    padding-left: 34px!important;
+  }
+  #CARD_HOLDER_NAME {
+    input {
+      background: url("../img/checkout/card-user-icon.png")no-repeat scroll 10px 12px;
+    }
+  }
+  #CREDIT_CARD {
+    input {
+      background: url("../img/checkout/card-icon.png")no-repeat scroll 10px 12px;
+    }
+  }
+  #VALIDITY {
+    input {
+      background: url("../img/checkout/card-calendar.png")no-repeat scroll 10px 12px;
+    }
+  }
+  #CREDIT_CARD_CVV {
+    input {
+      background: url("../img/checkout/card-cvv-icon.png")no-repeat scroll 10px 12px;
+    }
+  }
+}
+
+#boletoPaymentDocumentDiv {
+  label {
+    color: var(--dark);
+    font-family: "Poppins", sans-serif;
+    font-size: 13px;
+    margin-top: 15px;
+  }
+}
+
+#pix-instruction {
+  background-color: var(--box-color-light);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  h5 {
+    font-size: 15px;
+    color: var(--primary);
+    font-weight: 600;
+  }
+}
+
+.tuna-tabs .tab {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.tuna-tabs {
+  margin-bottom: 25px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  .pixPaymentBtn {
+    padding: 35px 0px!important;
+    .pix-icon {
+      max-width: 55%!important;
+      opacity: 1;
+    }
+  }
+  .tab {
+    display: flex!important;
+    margin-right: 6px;
+    margin-bottom: 6px;
+    justify-content: center;
+    align-items: center;
+    background: #FFFFFF;
+    flex-flow: column;
+    border: 1px solid #868E96;
+    box-sizing: border-box;
+    border-radius: 8px;
+    padding: 15px;
+    font-size: 11px;
+    line-height: 9px;
+    color: #868E96;
+    min-width: 120px;
+    img {
+      margin-left: 0px!important;
+      filter: grayscale(1)!important;
+      max-width: 40%!important;
+      opacity: 0.5;
+    }
+    h5 {
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 14px;
+      letter-spacing: 0em;
+      text-align: center;
+      width: 100%!important;
+      margin-top: 10px;
+      margin-bottom: 0px;
+    }
+  }
+  @include media-breakpoint-down(xs) {
+		display: flex;
+    justify-content: center;
+	}
+  .selected {
+    border-color: var(--primary);
+    img {
+      filter: grayscale(0)!important;
+      opacity: 1;
+    }
+    h5 {
+      color: #212529;
+      font-weight: 600;
+    }
+  }
+}
+
+.tuna-tabs .tab.selected:after {
+  display: none;
+}
+
+.tuna-tabs .tab.selected:after {
+  background-color: var(--primary);
+}
+
+.woocommerce-privacy-policy-text {
+  display: none;
 }

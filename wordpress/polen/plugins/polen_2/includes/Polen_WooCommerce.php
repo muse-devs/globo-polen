@@ -2,6 +2,9 @@
 
 namespace Polen\Includes;
 
+use Polen\Admin\Polen_Admin_B2B_Product_Fields;
+use Polen\Admin\Polen_Admin_Social_Base_Product_Fields;
+
 class Polen_WooCommerce 
 {
     const ORDER_STATUS_PAYMENT_IN_REVISION = 'payment-in-revision';
@@ -85,16 +88,17 @@ class Polen_WooCommerce
 
             add_filter( 'woocommerce_product_data_tabs', array( $this, 'charity_tab' ) );
             add_filter( 'woocommerce_product_data_tabs', array( $this, 'promotional_event' ) );
-            add_filter( 'woocommerce_product_data_tabs', array( $this, 'social_base_event' ) );
+            // add_filter( 'woocommerce_product_data_tabs', array( $this, 'social_base_event' ) );
             
             add_filter( 'woocommerce_product_data_panels', array( $this, 'charity_product_data_product_tab_content' ) );
             add_filter( 'woocommerce_product_data_panels', array( $this, 'promotional_event_product_data_product_tab_content' ) );
-            add_filter( 'woocommerce_product_data_panels', array( $this, 'social_base_product_data_product_tab_content' ) );
+            // add_filter( 'woocommerce_product_data_panels', array( $this, 'social_base_product_data_product_tab_content' ) );
 
             add_action( 'woocommerce_update_product', array( $this, 'on_product_save' ) );
 
             //Todas as compras gratis vão para o status payment-approved
             add_action( 'woocommerce_checkout_no_payment_needed_redirect', [ $this, 'set_free_order_payment_approved' ], 10, 3 );
+
         }
     }
     
@@ -175,10 +179,11 @@ class Polen_WooCommerce
     public function add_metaboxes() {
         global $current_screen;
 
-        if( $current_screen && ! is_null( $current_screen ) && isset( $current_screen->id ) && $current_screen->id == 'shop_order' && isset( $_REQUEST['action'] ) && $_REQUEST['action'] == 'edit' ) 
+        if( $current_screen && ! is_null( $current_screen ) && isset( $current_screen->id ) && $current_screen->id == 'shop_order' && isset( $_REQUEST['action'] ) && $_REQUEST['action'] == 'edit' )
         {
             add_meta_box( 'Polen_Order_Details', 'Instruções', array( $this, 'metabox_order_details' ), 'shop_order', 'normal', 'low' );
             add_meta_box( 'Polen_Order_Details_Video_Info', 'Info do Video', array( $this, 'metabox_order_details_video_info' ), 'shop_order', 'normal', 'low' );
+            add_meta_box( 'Polen_Refund_Order_tuna', 'Reembolsar pedido', array( $this, 'metabox_create_refund_order_tuna' ), 'shop_order', 'side', 'default' );
         }
 
         if( $current_screen && ! is_null( $current_screen ) && isset( $current_screen->id ) && $current_screen->id == 'product' && isset( $_REQUEST['action'] ) && $_REQUEST['action'] == 'edit' )  {
@@ -208,6 +213,20 @@ class Polen_WooCommerce
         }
     }
 
+    /**
+     * Adicionar metabox na edição de produtos
+     */
+    public function metabox_create_refund_order_tuna()
+    {
+        global $post;
+        $product_id = $post->ID;
+        if( file_exists( TEMPLATEPATH . '/woocommerce/admin/metaboxes/metabox-refund-order-tuna.php' ) ) {
+            require_once TEMPLATEPATH . '/woocommerce/admin/metaboxes/metabox-refund-order-tuna.php';
+        } else {
+            require_once PLUGIN_POLEN_DIR . '/admin/partials/metaboxes/metabox-refund-order-tuna.php';
+        }
+    }
+
     public function metabox_create_first_order()
     {
         global $post;
@@ -234,15 +253,20 @@ class Polen_WooCommerce
                 'offered_by'            => 'Oferecido por', 
                 'video_to'              => 'Vídeo para', 
                 'name_to_video'         => 'Quem vai receber?', 
-                'email_to_video'        => 'E-mail',
+                'email_to_video'        => 'e-mail',
                 'video_category'        => 'Ocasião', 
                 'instructions_to_video' => 'Instruções do vídeo', 
-                'allow_video_on_page'   => 'Permite que o vídeo apareça na página do talento?',
+                'allow_video_on_page'   => 'Publico?',
             );
+            $order = wc_get_order( $order_id );
+            if( !empty( $order ) && "talent-rejected" == $order->get_status() ) {
+                $meta_labels[ 'reason_reject' ] = 'Rejeitou por';
+                $meta_labels[ 'reason_reject_description' ] = 'Explicação';
+            }
 
             foreach( $res_items as $k => $item ) 
             {
-                $sql = "SELECT `meta_key`, `meta_value` FROM `" . $wpdb->base_prefix . "woocommerce_order_itemmeta` WHERE `order_item_id`=" . $item->order_item_id . " AND `meta_key` IN ( 'offered_by', 'video_to', 'name_to_video', 'email_to_video', 'video_category', 'instructions_to_video', 'allow_video_on_page' )";
+                $sql = "SELECT `meta_key`, `meta_value` FROM `" . $wpdb->base_prefix . "woocommerce_order_itemmeta` WHERE `order_item_id`=" . $item->order_item_id . " AND `meta_key` IN ( 'offered_by', 'video_to', 'name_to_video', 'email_to_video', 'video_category', 'instructions_to_video', 'allow_video_on_page', 'reason_reject', 'reason_reject_description' )";
                 $res = $wpdb->get_results( $sql );
                 
                 $args = array(
@@ -288,16 +312,16 @@ class Polen_WooCommerce
         return $array;
     }
 
-    public function social_base_event( $array )
-    {
-        $array['social_base'] = array(
-            'label'    => 'Base Social',
-            'target'   => 'social_base_product_data',
-            'class'    => array(),
-            'priority' => 90,
-        );
-        return $array;
-    }
+    // public function social_base_event( $array )
+    // {
+    //     $array['social_base'] = array(
+    //         'label'    => 'Base Social',
+    //         'target'   => 'social_base_product_data',
+    //         'class'    => array(),
+    //         'priority' => 90,
+    //     );
+    //     return $array;
+    // }
 
     public function charity_product_data_product_tab_content() {
         global $product_object;
@@ -522,6 +546,7 @@ class Polen_WooCommerce
         <?php
     }
 
+    /*
     public function social_base_product_data_product_tab_content()
     {
         global $product_object;
@@ -571,7 +596,7 @@ class Polen_WooCommerce
                 </div>
             </div>
         <?php
-    }
+    }*/
 
     public function on_product_save( $product_id ) {
         if( is_admin() ){
@@ -594,9 +619,9 @@ class Polen_WooCommerce
                 $promotional_event_author = strip_tags( $_POST[ '_promotional_event_author' ] );
                 $promotional_event_wartermark = strip_tags( $_POST[ '_promotional_event_wartermark' ] );
                 
-                $is_social_base = strip_tags( $_POST[ '_is_social_base' ]);
-                $social_base_slug_campaing = strip_tags( $_POST[ '_social_base_slug_campaing' ]);
-                $social_base_video_testimonial = strip_tags( $_POST[ '_social_base_video_testimonial' ]);
+                // $is_social_base = strip_tags( $_POST[ '_is_social_base' ]);
+                // $social_base_slug_campaing = strip_tags( $_POST[ '_social_base_slug_campaing' ]);
+                // $social_base_video_testimonial = strip_tags( $_POST[ '_social_base_video_testimonial' ]);
 
                 $product->update_meta_data( '_is_charity', $charity );
                 $product->update_meta_data( '_charity_name', $charity_name );
@@ -614,9 +639,12 @@ class Polen_WooCommerce
                 $this->save_meta($product, $promotional_event_author, '_promotional_event_author' );
                 $this->save_meta($product, $promotional_event_wartermark, '_promotional_event_wartermark' );
 
-                $this->save_meta($product, $is_social_base, '_is_social_base' );
-                $this->save_meta($product, $social_base_slug_campaing, '_social_base_slug_campaing' );
-                $this->save_meta($product, $social_base_video_testimonial, '_social_base_video_testimonial' );
+                // $this->save_meta($product, $is_social_base, '_is_social_base' );
+                // $this->save_meta($product, $social_base_slug_campaing, '_social_base_slug_campaing' );
+                // $this->save_meta($product, $social_base_video_testimonial, '_social_base_video_testimonial' );
+
+                do_action( Polen_Admin_Social_Base_Product_Fields::ACTION_NAME , $product_id );
+                do_action( Polen_Admin_B2B_Product_Fields::ACTION_NAME         , $product_id );
                   
                 remove_action( 'woocommerce_update_product', array( $this, 'on_product_save' ) );
                 $product->save();

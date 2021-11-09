@@ -8,13 +8,6 @@ const CONSTANTS = {
 	THEME: "theme_mode",
 };
 
-const ZAPIERURLS = {
-	NEWSLETTER: "https://hooks.zapier.com/hooks/catch/10583855/b252jhj/",
-	NEW_ACCOUNT: "https://hooks.zapier.com/hooks/catch/10583855/b25uia6/",
-	LANDING_PAGE: "https://hooks.zapier.com/hooks/catch/10583855/b25u8xz/",
-	PURCHASE: "https://hooks.zapier.com/hooks/catch/10583855/buaf22k/",
-}
-
 var interval = setInterval;
 
 function copyToClipboard(text) {
@@ -90,6 +83,14 @@ function changeHash(hash) {
 
 function setImediate(handle) {
 	setTimeout(handle, 1);
+}
+
+function polMailValidate(value) {
+  const mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  if(value.match(mailformat)) {
+    return true;
+  }
+  return false;
 }
 
 function polMessageKill(id) {
@@ -278,11 +279,26 @@ function getSessionMessage() {
 	sessionStorage.removeItem(CONSTANTS.MESSAGE_COOKIE);
 }
 
+function blockUnblockMaterial(el, block) {
+  const materialEl = document.querySelectorAll(`${el} .mdc-text-field`);
+  const materialSel = document.querySelectorAll(`${el} .mdc-select`);
+  materialEl.forEach(function(element, key, parent) {
+    block
+      ? element.classList.add("mdc-text-field--disabled")
+      : element.classList.remove("mdc-text-field--disabled")
+  });
+  materialSel.forEach(function(element, key, parent) {
+    const select = mdc.select.MDCSelect.attachTo(element);
+    select.disabled = block;
+  });
+}
+
 function blockUnblockInputs(el, block) {
+  blockUnblockMaterial(el, block);
 	const allEl = document.querySelectorAll(
 		`${el} input, ${el} select, ${el} textarea`
 	);
-	allEl.forEach(function (element, key, parent) {
+  allEl.forEach(function (element, key, parent) {
 		block
 			? element.setAttribute("readonly", true)
 			: element.removeAttribute("readonly");
@@ -365,11 +381,14 @@ function replaceLineBreakString(string) {
 	return instruction;
 }
 
-function polRequestZapier(formName, url) {
+function polRequestZapier(formName) {
+  if(polenObj.developer) {
+    return;
+  }
 	jQuery
 	.post(
-		url,
-		jQuery(formName).serialize()
+		polenObj.ajax_url + "?action=zapier_mail",
+		jQuery(formName).find(":not(input[name=action])").serialize()
 	)
 }
 
@@ -392,7 +411,7 @@ function polAjaxForm(formName, callBack, callBackError, reset = true) {
 		.fail(function (e) {
 			console.log(e);
 			if (e.responseJSON) {
-				callBackError(e.responseJSON.data.response || e.responseJSON.data);
+				callBackError(e.responseJSON.data.response || e.responseJSON.data.Error || e.responseJSON.data);
 			} else {
 				callBackError(e.statusText);
 			}
@@ -403,17 +422,44 @@ function polAjaxForm(formName, callBack, callBackError, reset = true) {
 		});
 }
 
+function polRemoveElement(el) {
+  const _this = document.querySelector(el);
+  _this.parentNode.removeChild(_this);
+}
+
+function polSelectAdvanced() {
+  const selects = document.querySelectorAll(".select-advanced");
+  if (selects.length < 1) {
+    return;
+  }
+  [...selects].map(select => {
+    let id = select.getAttribute("id");
+    let component = document.querySelector(`#${id}`);
+    let radio = document.querySelectorAll(`#${id} input[name=${id}]`);
+    [...radio].map(item => {
+      item.addEventListener("click", function(e) {
+        [...document.querySelectorAll(`#${id} .item`)].map(item => item.classList.remove("-checked"));
+        this.parentNode.classList.add("-checked");
+        component.dispatchEvent(new CustomEvent("polselectchange", {
+          detail: e.target.value
+        }));
+      });
+    });
+  })
+}
+
 // -------------------------------------------------------------------------
 
 jQuery(document).ready(function () {
 	truncatedItems();
 	getSessionMessage();
 	showLGPDBox();
+  polSelectAdvanced();
 });
 
 (function ($) {
 	// Newsletter submit click
-	$(document).on("click", ".signin-newsletter-button", function (e) {
+	$(document).on("submit", "form#newsletter", function (e) {
 		const formName = "form#newsletter";
 		e.preventDefault();
 		// Ajax Request
@@ -431,8 +477,7 @@ jQuery(document).ready(function () {
 		);
 		// Zapier request
 		polRequestZapier(
-			formName,
-			ZAPIERURLS.NEWSLETTER
+			formName
 		);
 	});
 })(jQuery);

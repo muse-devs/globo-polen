@@ -88,7 +88,7 @@ if (
 			'description' => get_bloginfo('description'),
 			'site_name' => get_bloginfo('title'),
 			'url' => get_the_permalink(),
-			'type' => 'site',
+			'type' => 'website',
 			'image' => '',
 			'video' => '',
 			'keywords' => 'Vídeos Personalizados',
@@ -97,11 +97,11 @@ if (
 		// Single de Produto - Página do Artista
 		if (!empty($post) && $post->post_type == 'product') {
 
-			$talent = new Polen_Update_Fields();
-			$talent = $talent->get_vendor_data($post->post_author);
-
-			$headers['title'] = "Vídeos Personalizados com {$talent->nome} - Polen.me";
-			$headers['description'] = "Experimente um novo jeito de se relacionar através de videos personalizados com {$talent->nome}";
+			// $talent = new Polen_Update_Fields();
+			// $talent = $talent->get_vendor_data($post->post_author);
+			$talent_name = $post->post_title;
+			$headers['title'] = "Vídeos Personalizados com {$talent_name} - Polen.me";
+			$headers['description'] = "Experimente um novo jeito de se relacionar através de videos personalizados com {$talent_name}";
 			$headers['image'] = safeImage(get_the_post_thumbnail_url(get_the_ID()));
 
 			// Página Todos os Artistas - /shop
@@ -139,7 +139,7 @@ if (
 		} elseif (!empty($post) && $post->post_type == 'page' && $post->post_name == 'v') {
 
 			$video_url = get_the_permalink() . '?' . $_SERVER['QUERY_STRING'];
-			$headers['type'] = null;
+			// $headers['type'] = null;
 			$headers['url'] = $video_url;
 			$headers['video'] = $video_url;
 			$headers['image'] = safeImage(get_the_post_thumbnail_url(get_the_ID()));
@@ -163,7 +163,7 @@ if (
 				$headers['image'] = $tribute->vimeo_thumbnail;
 			} else {
 
-				$headers['type'] = 'Colab';
+				// $headers['type'] = 'Colab';
 				$headers['description'] = 'O Colab te ajuda a criar um vídeo-presente em grupo para você emocionar quem você ama!';
 				$headers['url'] = tribute_get_url_base_url();
 				$headers['image'] = "' . TEMPLATE_URI . '/tributes/assets/img/logo-to-share.png";
@@ -203,6 +203,10 @@ if (
 			$headers['url'] = master_class_url_home();
 			$headers['image'] = 'https://i.vimeocdn.com/video/1229508090_520';
 			$headers['site_name'] = "Polen.me - Masterclass - Beabá do Vinho";
+    } elseif(enterprise_is_app()) {
+      $headers['title'] = "Polen para Empresas";
+      $headers['url'] = enterprise_url_home();
+			$headers['description'] = "Aproveite o poder das celebridades para espalhar a emoção e potencializar o seu negócio! Tudo com muita rapidez e facilidade para melhor atender à sua empresa.";
 		} else {
 
 			$headers['image'] = 'https://polen.me/polen/uploads/2021/06/cropped-logo.png';

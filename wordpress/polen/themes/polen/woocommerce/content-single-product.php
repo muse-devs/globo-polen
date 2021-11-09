@@ -52,6 +52,7 @@ $donate_text = stripslashes(get_post_meta(get_the_ID(), '_description_charity', 
 
 $histories_enabled = $Polen_Plugin_Settings['polen_histories_on'];
 $social = Social_Base_Product::product_is_social_base( $product );
+$inputs = new Material_Inputs();
 
 // outofstock
 // instock
@@ -115,17 +116,44 @@ if( 'instock' == $product->get_stock_status() ) {
 		</div>
 	</div>
 
+  <!-- Botão de adicionar ao carrinho -->
 	<div class="row mt-3 mb-1 talent-page-footer">
 		<div class="col-12 col-md-6 m-md-auto pb-3">
 			<?php if($has_stock) : ?>
-				<?php echo woocommerce_template_single_add_to_cart(); ?>
+        <?php $inputs->pol_combo_advanced(
+        "select_type",
+        "select_type",
+        array(
+          $inputs->pol_combo_advanced_item("Vídeo para uso pessoal", $product->get_price_html(), "Compre um vídeo personalizado para você ou para presentar outra pessoa", "check-pessoal", "pessoal", true),
+          $inputs->pol_combo_advanced_item("Vídeo para meu negócio", "", "Compre um Vídeo Polen para usar no seu negócio", "check-b2b", "b2b", false, !polen_b2b_product_is_enabled($product))
+          )); ?>
+				<div class="btn-buy-personal">
+          <?php echo woocommerce_template_single_add_to_cart(); ?>
+        </div>
+        <div class="btn-buy-b2b d-none">
+          <?php $inputs->material_button_link("btn-b2b", "Pedir vídeo", enterprise_url_home() . "#bus-form-wrapper", false, "", array(), $donate ? "donate" : ""); ?>
+        </div>
 			<?php else: ?>
-				<a href="/shop" class="btn btn-primary btn-lg btn-block btn-get-video">
-					Escolher outro artista
-				</a>
+        <?php $inputs->material_button_link("todos", "Escolher outro artista", home_url( "shop" ), false, "", array(), $donate ? "donate" : ""); ?>
 			<?php endif; ?>
 		</div>
+    <script>
+      const btn_personal = document.querySelector(".btn-buy-personal");
+      const btn_b2b = document.querySelector(".btn-buy-b2b");
+      document.querySelector("#select_type")
+        .addEventListener("polcombochange",
+          function(e) {
+            if(e.detail == "b2b") {
+              btn_b2b.classList.remove("d-none");
+              btn_personal.classList.add("d-none");
+            } else {
+              btn_b2b.classList.add("d-none");
+              btn_personal.classList.remove("d-none");
+            }
+          });
+    </script>
 	</div>
+  <!-- --------------------------------------------- -->
 
 	<div class="row">
 		<div class="col-12 col-md-6 m-md-auto d-flex">
@@ -133,7 +161,7 @@ if( 'instock' == $product->get_stock_status() ) {
 			<?php if ($donate) : ?>
 				<div class="row">
 					<div class="col-md-12 mb-1">
-						<?php polen_donate_badge("100% DO CACHÊ DOADO PARA " . strtoupper($donate_name), false); ?>
+						<?php polen_donate_badge("100% DO CACHÊ DOADO PARA " . $donate_name, false); ?>
 					</div>
 				</div>
 			<?php endif; ?>
@@ -155,7 +183,7 @@ if( 'instock' == $product->get_stock_status() ) {
 		// if (!$social) {
 	?>
 		<div class="row mt-4">
-			<div class="col-md-12">
+			<div class="col-12 col-md-6 m-md-auto">
 				<?php if (count($terms) > 0) : ?>
 					<?php foreach ($terms as $k => $term) : ?>
 						<a href="<?= get_tag_link($term); ?>" class="tag-link mb-2"><?= $term->name; ?></a>
@@ -170,9 +198,9 @@ if( 'instock' == $product->get_stock_status() ) {
 	?>
 
 	<!-- Bio -->
-	<div class="row mt-4 d-none">
+	<div class="row mt-4">
 		<div class="col-12 col-md-6 m-md-auto d-flex">
-			<p><?php //echo $product->get_description(); ?></p>
+			<p><?php echo $product->get_description(); ?></p>
 		</div>
 	</div>
 
@@ -187,6 +215,19 @@ if( 'instock' == $product->get_stock_status() ) {
 	$video_depoimento = $product->get_meta( Social_Base_Product::PRODUCT_META_VIDEO_TESTEMONIAL_URL, true );
 	$social && sa_get_about($video_depoimento);
 	?>
+
+  <?php
+  // Campanha Luccas Neto dia das crianças ----
+  $is_luccas_neto = $Polen_Plugin_Settings['promotional-event-luccas-neto'] == get_the_ID();
+  if($is_luccas_neto) {
+    generic_get_about(
+      "Campanha dia das Crianças",
+      "Dia das Crianças com Luccas Neto",
+      "<p>A Polen e o Luccas Neto vão escolher as quatro histórias e mensagens mais emocionantes para presentear com o boneco autografado do Luccas, entre os pedidos realizados e confirmados até o dia 5 de Outubro!</p>
+      <p>Capriche na mensagem de Dia das Crianças do seu vídeo-Polen! Com certeza quem você presentear vai se emocionar e ainda terá a chance de receber mais um super presente para acompanhar o recado exclusivo que o Luccas vai gravar.</p>"
+    );
+  }
+  ?>
 
 	<!-- Como funciona? -->
 	<?php $social || polen_front_get_tutorial(); ?>

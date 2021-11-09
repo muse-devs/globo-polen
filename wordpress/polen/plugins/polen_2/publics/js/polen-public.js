@@ -69,46 +69,5 @@
 					}
 				});
 		});
-
-		/**** talento ****/
-		$('button.talent-check-order').on('click',function() {
-			var wnonce = $(this).parent().attr('button-nonce');
-			var order_id = $(this).parent().attr('order-id');
-			var type = $(this).attr('action-type');
-
-			if(type == 'reject') {
-				var confirm_reject = confirm("Deseja realmente rejeitar o pedido?");
-				if(!confirm_reject)  {
-					return;
-				} 
-			}
-			$('#OrderActions').modal('toggle');
-			polSpinner();
-			$.ajax(
-				{
-					type: 'POST',
-					url: woocommerce_params.ajax_url,
-					data: {
-					action: 'get_talent_acceptance',
-					order: order_id,
-					type: type,
-					security: wnonce
-					},
-					success: function( response ) {
-						let obj = $.parseJSON( response );
-						if( obj['success'] == true ){
-							if( obj['code'] == 1 ){
-								$('#OrderActions').modal('toggle');
-								location.href='/my-account/send-video/?order_id=' + order_id;
-							}
-							if( obj['code'] == 2 ) {
-								setSessionMessage(CONSTANTS.SUCCESS, "Sucesso", "Você recusou o pedido com sucesso");
-								location.reload();
-							}		
-						}
-					}
-				});
-		});
-
 	});
 })( jQuery );

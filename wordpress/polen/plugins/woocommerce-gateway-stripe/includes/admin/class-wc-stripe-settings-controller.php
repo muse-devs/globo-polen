@@ -10,7 +10,20 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 5.4.1
  */
 class WC_Stripe_Settings_Controller {
-	public function __construct() {
+	/**
+	 * The Stripe account instance.
+	 *
+	 * @var WC_Stripe_Account
+	 */
+	private $account;
+
+	/**
+	 * Constructor
+	 *
+	 * @param WC_Stripe_Account $account Stripe account
+	 */
+	public function __construct( WC_Stripe_Account $account ) {
+		$this->account = $account;
 		add_action( 'admin_enqueue_scripts', [ $this, 'admin_scripts' ] );
 		add_action( 'wc_stripe_gateway_admin_options_wrapper', [ $this, 'admin_options' ] );
 	}
@@ -23,18 +36,25 @@ class WC_Stripe_Settings_Controller {
 	 */
 	public function admin_options( WC_Stripe_Payment_Gateway $gateway ) {
 		global $hide_save_button;
-		$hide_save_button = true;
+		$hide_save_button    = true;
+		$is_stripe_connected = woocommerce_gateway_stripe()->connect->is_connected();
+
 		echo '<h2>' . esc_html( $gateway->get_method_title() );
 		wc_back_link( __( 'Return to payments', 'woocommerce-gateway-stripe' ), admin_url( 'admin.php?page=wc-settings&tab=checkout' ) );
 		echo '</h2>';
-		echo '<div id="wc-stripe-account-settings-container"></div>';
+
+		echo $is_stripe_connected ? '<div id="wc-stripe-account-settings-container"></div>' : '<div id="wc-stripe-new-account-container"></div>';
 	}
 
 	/**
 	 * Load admin scripts.
 	 */
-	public function admin_scripts() {
-		if ( 'woocommerce_page_wc-settings' !== get_current_screen()->id ) {
+	public function admin_scripts( $hook_suffix ) {
+		if ( 'woocommerce_page_wc-settings' !== $hook_suffix ) {
+			return;
+		}
+
+		if ( ! WC_Stripe_Helper::should_enqueue_in_current_tab_section( 'checkout', 'stripe' ) ) {
 			return;
 		}
 
@@ -59,13 +79,23 @@ class WC_Stripe_Settings_Controller {
 			);
 			wp_register_style(
 				'woocommerce_stripe_admin',
-				plugins_url( 'build/style-upe_settings.css', WC_STRIPE_MAIN_FILE ),
+				plugins_url( 'build/upe_settings.css', WC_STRIPE_MAIN_FILE ),
 				[ 'wc-components' ],
 				$script_asset['version']
 			);
-			wp_enqueue_style( 'woocommerce_stripe_admin' );
 		} else {
 			wp_register_script( 'woocommerce_stripe_admin', plugins_url( 'assets/js/stripe-admin' . $suffix . '.js', WC_STRIPE_MAIN_FILE ), [], WC_STRIPE_VERSION, true );
+			wp_register_style(
+				'woocommerce_stripe_admin',
+				plugins_url( 'assets/css/stripe-admin-styles' . $suffix . '.css', WC_STRIPE_MAIN_FILE ),
+				[],
+				WC_STRIPE_VERSION
+			);
+		}
+
+		$oauth_url = woocommerce_gateway_stripe()->connect->get_oauth_url();
+		if ( is_wp_error( $oauth_url ) ) {
+			$oauth_url = '';
 		}
 
 		$params = [
@@ -75,9 +105,11 @@ class WC_Stripe_Settings_Controller {
 				[ 'strong' => [] ]
 			),
 			'is_upe_checkout_enabled' => WC_Stripe_Feature_Flags::is_upe_checkout_enabled(),
+			'stripe_oauth_url'        => $oauth_url,
 		];
 		wp_localize_script( 'woocommerce_stripe_admin', 'wc_stripe_settings_params', $params );
 
 		wp_enqueue_script( 'woocommerce_stripe_admin' );
+		wp_enqueue_style( 'woocommerce_stripe_admin' );
 	}
 }

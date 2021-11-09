@@ -79,45 +79,58 @@ class Polen_Talent {
     /**
      * Metabox to select tallent on product edit
      */
-    function talent_select( $post ) {
+    function talent_select( $post )
+    {
         global $user_ID;
 
         $tallents = get_users(array('role' => self::ROLE_SLUG ));
         $current_tallent = empty($post->ID) ? '' : $post->post_author;
         ?>
         <select name="polen_choose_talent" id="polen_choose_talent">
-        <?php
-        foreach ($tallents as $key => $user) :
-            $selected = '';
-            if ($current_tallent == $user->ID) {
-                $selected = "selected='selected'";
-            }
-            ?>
+            <?php
+            foreach ($tallents as $key => $user) :
+                $selected = '';
+                if ($current_tallent == $user->ID) {
+                    $selected = "selected='selected'";
+                }
+                ?>
                 <option value="<?php echo esc_attr($user->ID) ?>" <?php echo $selected; ?> ><?php echo $user->display_name; ?></option>
-        <?php endforeach ?>
+            <?php endforeach ?>
         </select>
+        <label for="subscribed-instagram">
+            Quantidade de seguidores no instagram
+            <input type="text" id="talent_subscribed_instagram"
+                   name="talent_subscribed_instagram"
+                   value="<?php echo esc_attr(get_post_meta(get_the_ID(), 'talent_subscribed_instagram', true)); ?>">
+        </label>
         <?php
-        }
+    }
 
     /**
      * Save tallent as product author
      */
-    function save_talent_on_product($post_id) {
-        if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)
+    function save_talent_on_product($post_id)
+    {
+        if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
             return;
-        if (!current_user_can('edit_post', $post_id))
+        }
+
+        if (!current_user_can('edit_post', $post_id)) {
             return;
+        }
 
         if (isset($_POST['post_type']) && ( $_POST['post_type'] == 'product' )) {
             $chosen_tallent = isset($_POST['polen_choose_talent']) ? $_POST['polen_choose_talent'] : '';
             $post_author = sanitize_text_field($chosen_tallent);
+
+            update_post_meta($post_id, 'talent_subscribed_instagram', sanitize_text_field($_POST['talent_subscribed_instagram']));
 
             if (!$post_author) {
                 return;
             }
 
             $this->set_product_to_talent($post_id, $post_author);
-            $this->update_talent_alias( $post_id );
+            $this->update_talent_alias($post_id);
         }
     }
 
@@ -258,8 +271,8 @@ class Polen_Talent {
         if( $product->get_price() == 0 ) {
             $label = __( 'Pedir vídeo grátis' );
         } else {
-            $text = $social ? "Doar R$ " : "Pedir vídeo ";
-            $label = __($text, 'polen') . $product->get_price_html();
+            $text = $social ? "Doar" : "Pedir vídeo";
+            $label = __($text, 'polen'); // . $product->get_price_html();
             // $label = __($text, 'polen') . number_format((float) $product->get_price(), 2, ',', '.');
         }
         return $label;
@@ -854,7 +867,7 @@ class Polen_Talent {
             return;
         }
 
-        $url = 'https://polen.me/colab/3e07450ff56447e13a166e6ac458174b/';
+        $url = 'https://hooks.zapier.com/hooks/catch/10583855/bucjtyy/';
         wp_remote_post($url, array(
                 'method' => 'POST',
                 'timeout' => 45,

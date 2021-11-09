@@ -239,7 +239,7 @@ function polen_get_theme_logos() {
 
 	$html =  '<a href="' . get_site_url() . '" class="custom-logo-link" rel="home" aria-current="page">';
 
-	if(is_front_page() || social_is_in_social_app()) {
+	if(social_is_in_social_app()) {
 		$html .= 	'<img width="67" height="40" src="'. $logo_dark . '" class="custom-logo" alt="Polen">';
 	} elseif(master_class_is_app()) {
 		$html .= 	'<img width="208" height="36" src="'. $logo_masterclass . '" class="dark" alt="Polen">';
@@ -374,9 +374,10 @@ function polen_zapier_thankyou( $order )
 			<input type="hidden" name="data_compra" value="<?php echo $order->order_date; ?>" />
 			<input type="hidden" name="data_atual" value="<?php echo date("Y-m-d H:i:s"); ?>" />
 			<input type="hidden" name="url_source" value="<?php echo site_url( $_SERVER[ 'REDIRECT_URL' ] ); ?>" />
+      <input type="hidden" name="zapier" value="4" />
 		</form>
 		<script>
-			polRequestZapier("#zapier-purchase-data", ZAPIERURLS.PURCHASE);
+			polRequestZapier("#zapier-purchase-data");
 		</script>
 	<?php
 }

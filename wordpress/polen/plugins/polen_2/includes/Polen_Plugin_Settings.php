@@ -1,6 +1,7 @@
 <?php
 
 namespace Polen\Includes;
+use WP_Term_Query;
 
 class Polen_Plugin_Settings
 {
@@ -18,6 +19,20 @@ class Polen_Plugin_Settings
     public static function init() {
         if ( ! class_exists( '\Redux' ) ) {
             return;
+        }
+
+        $args = array(
+            'taxonomy' => 'product_cat',
+            'orderby' => 'name',
+            'order' => 'ASC',
+            'hide_empty' => false,
+        );
+
+        $term_query = new WP_Term_Query($args);
+
+        $categories = [];
+        foreach ($term_query->get_terms() as $term) {
+            $categories[$term->term_id] = $term->name;
         }
 
         // This is your option name where all the Redux data is stored.
@@ -497,6 +512,64 @@ class Polen_Plugin_Settings
                     'type'     => 'text',
                     'title'    => esc_html__('Adicionar produto promocional', 'polen'),
                     'desc'     => 'APENAS O ID DO PRODUTO',
+                    'default'  => '',
+                ),
+                array(
+                    'id'       => 'promotional-event-luccas-neto',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Adicionar ID do Luccas Neto', 'polen'),
+                    'desc'     => 'APENAS O ID DO LUCCAS NETO',
+                    'default'  => '',
+                ),
+            )
+        ) );
+
+
+        // Configurar Emails
+        \Redux::set_section( $opt_name, array(
+            'title'            => esc_html__( 'Configurar emails', 'polen' ),
+            'id'               => 'polen_email_expire_order',
+            'icon'             => 'el el-envelope',
+            'subsection'       => false,
+            'fields'           => array(
+                array(
+                    'id'       => 'email_emails_order_expire_tomorrow',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Emails Expirar Pedidos', 'polen'),
+                    'desc'     => 'Emails serarados por Virgura',
+                    'default'  => '',
+                ),
+                array(
+                    'id'       => 'recipient_email_polen_company',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Configurar email de destinatário polen empresas', 'polen'),
+                    'desc'     => 'Emails serarados por Virgura',
+                    'default'  => '',
+                ),
+                array(
+                    'id'       => 'recipient_email_polen_help',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Configurar email de destinatário polen ajuda', 'polen'),
+                    'desc'     => 'Emails serarados por Virgura',
+                    'default'  => '',
+                ),
+            )
+        ) );
+
+        // Configurar HOME
+        \Redux::set_section( $opt_name, array(
+            'title'            => esc_html__( 'Configuração Home', 'polen' ),
+            'id'               => 'home_config',
+            'icon'             => 'el el-home',
+            'subsection'       => false,
+            'fields'           => array(
+                array(
+                    'id'       => 'highlight_categories',
+                    'type'     => 'select',
+                    'multi'    => true,
+                    'title'    => esc_html__('Destacar categoria', 'polen'),
+                    'desc'     => 'Escolha até 4 categorias para serem destacada',
+                    'options'  => $categories,
                     'default'  => '',
                 ),
             )

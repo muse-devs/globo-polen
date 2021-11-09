@@ -17,7 +17,19 @@ define('POL_COOKIES', array(
 
 if ( ! defined( '_S_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', DEVELOPER ? time() : '1.1.1' );
+	define( '_S_VERSION', DEVELOPER ? time() : '2.0.0' );
+}
+
+add_action('init', 'handle_preflight');
+function handle_preflight() {
+        header("Access-Control-Allow-Origin: " . "*");
+        header("Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE");
+        header("Access-Control-Allow-Credentials: true");
+        header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization');
+        if ('OPTIONS' == $_SERVER['REQUEST_METHOD']) {
+            status_header(200);
+            exit();
+        }
 }
 
 if ( ! function_exists( 'polen_setup' ) ) :
@@ -211,6 +223,9 @@ function polen_scripts() {
 	wp_register_script( 'owl-carousel', TEMPLATE_URI . '/assets/js/vendor/owl.carousel.min.js', array(), _S_VERSION, true );
 	wp_register_script( 'zuck', TEMPLATE_URI . '/assets/js/' . $min . 'zuck.js', array(), _S_VERSION, true );
 	wp_register_script( 'form-whatsapp', TEMPLATE_URI . '/assets/js/' . $min . 'form-whatsapp.js', array("vuejs"), _S_VERSION, true );
+	wp_register_script( 'polen-business', TEMPLATE_URI . '/assets/js/' . $min . 'business.js', array("vuejs"), _S_VERSION, true );
+  wp_register_script( 'polen-help', TEMPLATE_URI . '/assets/js/' . $min . 'help.js', array("jquery", "vuejs"), _S_VERSION, true );
+  wp_register_script( 'material-js', TEMPLATE_URI . '/assets/js/vendor/material-components-web.min.js', array(), _S_VERSION, false );
 	// --------------------------------------------------------------------------------------------------
 
 	if (polen_is_landingpage()) {
@@ -236,18 +251,19 @@ function polen_scripts() {
 	}
 
 	if( is_cart() ) {
-		wp_enqueue_script( 'polen-cart', TEMPLATE_URI . '/assets/js/' . $min . 'cart.js', array("jquery"), _S_VERSION, true );
+		wp_enqueue_script( 'polen-cart', TEMPLATE_URI . '/assets/js/' . $min . 'cart.js', array("jquery", "vuejs"), _S_VERSION, true );
 	}
 
 	if( is_checkout() ) {
 		wp_enqueue_script( 'polen-checkout', TEMPLATE_URI . '/assets/js/' . $min . 'checkout.js', array("jquery"), _S_VERSION, true );
 	}
 
-	wp_enqueue_script( 'bootstrap-js', TEMPLATE_URI . '/assets/bootstrap-4.6.0/dist/js/bootstrap.min.js', array("jquery"), _S_VERSION, true );
+	wp_enqueue_script( 'bootstrap-js', TEMPLATE_URI . '/assets/js/vendor/bootstrap.min.js', array("jquery"), _S_VERSION, true );
+  wp_enqueue_script('material-js');
 
-	if(is_user_logged_in()) {
+	// if(is_user_logged_in()) {
 		wp_enqueue_script( 'header-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'navigation.js', array("jquery"), _S_VERSION, true );
-	}
+	// }
 }
 add_action( 'wp_enqueue_scripts', 'polen_scripts' );
 
@@ -325,8 +341,25 @@ require_once TEMPLATE_DIR . '/social_base/function.php';;
 /**
 * Funções para master-class
 */
-// flush_rewrite_rules();
 require_once TEMPLATE_DIR . '/master_class/function_master_class.php';
+
+/**
+ * Funções para polen empresas
+ */
+
+// flush_rewrite_rules();
+
+require_once TEMPLATE_DIR . '/enterprise/function_enterprise.php';
+
+/**
+ * Função para retornar categorias destacadas
+ */
+require_once TEMPLATE_DIR . '/inc/highlight_categories.php';
+
+/**
+ * Funcoes responsáveis pelo B2B da polen
+ */
+require_once TEMPLATE_DIR . '/inc/b2b_functions.php';
 
 
 add_action('wc_gateway_stripe_process_response', function($response, $order) {
@@ -348,3 +381,15 @@ add_action('wc_gateway_stripe_process_webhook_payment_error', function($order, $
 add_filter('wc_stripe_save_to_account_text', function(){
 	return 'Salvar os dados do cartão de credito para proximas compras.';
 });
+
+add_action('woocommerce_before_checkout_process', function(){
+	$emails = WC_Emails::instance();
+});
+
+function filter_woocommerce_coupon_error($err, $err_code, $instance)
+{
+  WC()->cart->remove_coupons();
+  return $err;
+};
+
+add_filter('woocommerce_coupon_error', 'filter_woocommerce_coupon_error', 10, 3);

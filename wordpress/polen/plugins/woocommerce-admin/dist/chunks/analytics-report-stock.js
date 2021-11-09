@@ -1,6 +1,6 @@
 (window["__wcAdmin_webpackJsonp"] = window["__wcAdmin_webpackJsonp"] || []).push([[14],{
 
-/***/ 474:
+/***/ 475:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -42,19 +42,19 @@ const config_filters = Object(external_wp_hooks_["applyFilters"])(STOCK_REPORT_F
   param: 'type',
   showFilters: () => true,
   filters: [{
-    label: Object(external_wp_i18n_["__"])('All Products', 'woocommerce-admin'),
+    label: Object(external_wp_i18n_["__"])('All products', 'woocommerce-admin'),
     value: 'all'
   }, {
-    label: Object(external_wp_i18n_["__"])('Out of Stock', 'woocommerce-admin'),
+    label: Object(external_wp_i18n_["__"])('Out of stock', 'woocommerce-admin'),
     value: 'outofstock'
   }, {
-    label: Object(external_wp_i18n_["__"])('Low Stock', 'woocommerce-admin'),
+    label: Object(external_wp_i18n_["__"])('Low stock', 'woocommerce-admin'),
     value: 'lowstock'
   }, {
-    label: Object(external_wp_i18n_["__"])('In Stock', 'woocommerce-admin'),
+    label: Object(external_wp_i18n_["__"])('In stock', 'woocommerce-admin'),
     value: 'instock'
   }, {
-    label: Object(external_wp_i18n_["__"])('On Backorder', 'woocommerce-admin'),
+    label: Object(external_wp_i18n_["__"])('On backorder', 'woocommerce-admin'),
     value: 'onbackorder'
   }]
 }, {
@@ -83,10 +83,10 @@ var external_wc_navigation_ = __webpack_require__(12);
 var external_wc_number_ = __webpack_require__(120);
 
 // EXTERNAL MODULE: ./packages/wc-admin-settings/build-module/index.js
-var build_module = __webpack_require__(15);
+var build_module = __webpack_require__(13);
 
 // EXTERNAL MODULE: ./client/analytics/components/report-table/index.js + 2 modules
-var report_table = __webpack_require__(502);
+var report_table = __webpack_require__(503);
 
 // CONCATENATED MODULE: ./client/analytics/report/stock/utils.js
 /**
@@ -104,7 +104,7 @@ function isLowStock(status, quantity, threshold) {
   return status && quantity <= threshold === 'instock';
 }
 // EXTERNAL MODULE: ./client/lib/currency-context.js
-var currency_context = __webpack_require__(497);
+var currency_context = __webpack_require__(498);
 
 // CONCATENATED MODULE: ./client/analytics/report/stock/table.js
 
@@ -217,19 +217,19 @@ class table_StockReportTable extends external_wp_element_["Component"] {
     } = totals;
     const currency = this.context.getCurrencyConfig();
     return [{
-      label: Object(external_wp_i18n_["_n"])('product', 'products', products, 'woocommerce-admin'),
+      label: Object(external_wp_i18n_["_n"])('Product', 'Products', products, 'woocommerce-admin'),
       value: Object(external_wc_number_["formatValue"])(currency, 'number', products)
     }, {
-      label: Object(external_wp_i18n_["__"])('out of stock', 'woocommerce-admin'),
+      label: Object(external_wp_i18n_["__"])('Out of stock', 'woocommerce-admin'),
       value: Object(external_wc_number_["formatValue"])(currency, 'number', outofstock)
     }, {
-      label: Object(external_wp_i18n_["__"])('low stock', 'woocommerce-admin'),
+      label: Object(external_wp_i18n_["__"])('Low stock', 'woocommerce-admin'),
       value: Object(external_wc_number_["formatValue"])(currency, 'number', lowstock)
     }, {
-      label: Object(external_wp_i18n_["__"])('on backorder', 'woocommerce-admin'),
+      label: Object(external_wp_i18n_["__"])('On backorder', 'woocommerce-admin'),
       value: Object(external_wc_number_["formatValue"])(currency, 'number', onbackorder)
     }, {
-      label: Object(external_wp_i18n_["__"])('in stock', 'woocommerce-admin'),
+      label: Object(external_wp_i18n_["__"])('In stock', 'woocommerce-admin'),
       value: Object(external_wc_number_["formatValue"])(currency, 'number', instock)
     }];
   }
@@ -263,7 +263,7 @@ class table_StockReportTable extends external_wp_element_["Component"] {
 table_StockReportTable.contextType = currency_context["a" /* CurrencyContext */];
 /* harmony default export */ var table = (table_StockReportTable);
 // EXTERNAL MODULE: ./client/analytics/components/report-filters/index.js
-var report_filters = __webpack_require__(501);
+var report_filters = __webpack_require__(502);
 
 // CONCATENATED MODULE: ./client/analytics/report/stock/index.js
 
@@ -307,7 +307,7 @@ stock_StockReport.propTypes = {
 
 /***/ }),
 
-/***/ 497:
+/***/ 498:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -319,7 +319,7 @@ stock_StockReport.propTypes = {
 /* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _woocommerce_currency__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(88);
 /* harmony import */ var _woocommerce_currency__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_currency__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _woocommerce_wc_admin_settings__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(15);
+/* harmony import */ var _woocommerce_wc_admin_settings__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(13);
 /**
  * External dependencies
  */
@@ -338,7 +338,7 @@ const CurrencyContext = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["
 
 /***/ }),
 
-/***/ 500:
+/***/ 501:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -396,13 +396,13 @@ ReportError.propTypes = {
 
 /***/ }),
 
-/***/ 501:
+/***/ 502:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(0);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(13);
+/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(14);
 /* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_compose__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(1);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
@@ -412,15 +412,15 @@ ReportError.propTypes = {
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _woocommerce_components__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(21);
 /* harmony import */ var _woocommerce_components__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_components__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _woocommerce_wc_admin_settings__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(15);
+/* harmony import */ var _woocommerce_wc_admin_settings__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(13);
 /* harmony import */ var _woocommerce_data__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(11);
 /* harmony import */ var _woocommerce_data__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_data__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _woocommerce_date__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(19);
 /* harmony import */ var _woocommerce_date__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_date__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _woocommerce_tracks__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(16);
 /* harmony import */ var _woocommerce_tracks__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_tracks__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _lib_currency_context__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(497);
-/* harmony import */ var _customer_effort_score_tracks_data_constants__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(53);
+/* harmony import */ var _lib_currency_context__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(498);
+/* harmony import */ var _customer_effort_score_tracks_data_constants__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(54);
 
 
 /**
@@ -468,7 +468,7 @@ class ReportFilters extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Com
       report,
       addCesSurveyForAnalytics
     } = this.props; // This event gets triggered in the following cases.
-    // 1. Select "Single Product" and choose a product.
+    // 1. Select "Single product" and choose a product.
     // 2. Select "Comparison" or any other filter types.
     // The comparsion and other filter types require a user to click
     // a button to execute a query, so this is not a good place to
@@ -637,7 +637,7 @@ ReportFilters.propTypes = {
 
 /***/ }),
 
-/***/ 502:
+/***/ 503:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -656,7 +656,7 @@ var external_wp_components_ = __webpack_require__(4);
 var external_wp_hooks_ = __webpack_require__(30);
 
 // EXTERNAL MODULE: external ["wp","compose"]
-var external_wp_compose_ = __webpack_require__(13);
+var external_wp_compose_ = __webpack_require__(14);
 
 // EXTERNAL MODULE: external ["wp","dom"]
 var external_wp_dom_ = __webpack_require__(90);
@@ -704,7 +704,7 @@ var external_wc_tracks_ = __webpack_require__(16);
   d: "M18,9c-0.009,0-0.017,0.002-0.025,0.003C17.72,5.646,14.922,3,11.5,3C7.91,3,5,5.91,5,9.5c0,0.524,0.069,1.031,0.186,1.519 C5.123,11.016,5.064,11,5,11c-2.209,0-4,1.791-4,4c0,1.202,0.541,2.267,1.38,3h18.593C22.196,17.089,23,15.643,23,14 C23,11.239,20.761,9,18,9z M12,16l-4-5h3V8h2v3h3L12,16z"
 })));
 // EXTERNAL MODULE: ./client/analytics/components/report-error/index.js
-var report_error = __webpack_require__(500);
+var report_error = __webpack_require__(501);
 
 // CONCATENATED MODULE: ./client/analytics/components/report-table/utils.js
 /**
@@ -751,10 +751,10 @@ function extendTableData(extendedStoreSelector, props, queriedTableData) {
   };
 }
 // EXTERNAL MODULE: ./client/customer-effort-score-tracks/data/constants.js
-var constants = __webpack_require__(53);
+var constants = __webpack_require__(54);
 
 // EXTERNAL MODULE: ./client/analytics/components/report-table/style.scss
-var style = __webpack_require__(511);
+var style = __webpack_require__(512);
 
 // CONCATENATED MODULE: ./client/analytics/components/report-table/index.js
 
@@ -1343,7 +1343,7 @@ const EMPTY_OBJECT = {};
 
 /***/ }),
 
-/***/ 511:
+/***/ 512:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
