@@ -134,7 +134,8 @@ class Polen_Forms {
             'email' => 'E-mail',
             'company' => 'Empresa',
             'employees_quantity' => 'Quantidade de funcionários',
-            'job' => 'Cargo',
+            // 'job' => 'Cargo',
+            'budget' => 'Orçamento',
             'phone' => 'Telefone',
             'talent_name' => 'Nome do talento',
             'message' => 'Mensagem'
