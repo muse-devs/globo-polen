@@ -40,6 +40,8 @@ get_header();
   <?php polen_front_get_news(polen_get_talents(12), "Todos os Ídolos", polen_get_all_talents_url());
   ?>
 
+  <?php polen_get_media_news(); ?>
+
   <?php //polen_front_get_suggestion_box();
   ?>
 
