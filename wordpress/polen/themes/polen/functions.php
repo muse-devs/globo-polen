@@ -400,8 +400,8 @@ function show_pagination(array $args)
     'total' => $query->max_num_pages,
     'type' => 'array',
     'prev_next' => true,
-    'prev_text' => __('<i aria-hidden="true" class="fas fa-fw fa-chevron-left"></i>'),
-    'next_text' => __('<i aria-hidden="true" class="fas fa-fw fa-chevron-right"></i>'),
+    'prev_text' => __('<i aria-hidden="true" class="fas fa-fw fa-chevron-left">></i>'),
+    'next_text' => __('<i aria-hidden="true" class="fas fa-fw fa-chevron-right"><</i>'),
   ));
 
   $output = '';
