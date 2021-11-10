@@ -24,7 +24,7 @@
                 <h5 class="title typo typo-title typo-small">Conta</h5>
                 <ul class="footer-menu">
                   <li><a href="/register">Página de cadastro</a></li>
-                  <li><a href="<?php echo polen_get_all_talents_url(); ?>">Todos os talentos</a></li>
+                  <li><a href="<?php echo polen_get_all_talents_url(); ?>">Todos os Ídolos</a></li>
                   <li><a href="/my-account">Minha conta</a></li>
                   <li><a href="/acompanhamento-pedido">Acompanhe seu pedido</a></li>
                 </ul>
@@ -87,7 +87,7 @@
                   <div class="panel-body">
                     <ul class="footer-menu">
                       <li><a href="/register">Página de cadastro</a></li>
-                      <li><a href="<?php echo polen_get_all_talents_url(); ?>">Todos os talentos</a></li>
+                      <li><a href="<?php echo polen_get_all_talents_url(); ?>">Todos os Ídolos</a></li>
                       <li><a href="/my-account">Minha conta</a></li>
                       <li><a href="/acompanhamento-pedido">Acompanhe seu pedido</a></li>
                     </ul>
