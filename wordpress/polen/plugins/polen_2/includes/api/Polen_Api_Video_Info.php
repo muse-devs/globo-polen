@@ -11,10 +11,11 @@ class Polen_Api_Video_Info
 {
     private $namespace;
     private $resource_name;
+    private $schema;
 
     public function __construct()
     {
-        $this->namespace = '/polen-api/v1';
+        $this->namespace = 'polen-api/v1';
         $this->resource_name = 'video-infos';
     }
     public function register_routes()
@@ -36,8 +37,23 @@ class Polen_Api_Video_Info
             ),
             'schema' => array( $this, 'get_item_schema' )
         ) );
+
+        register_rest_route( $this->namespace, '/' . $this->resource_name . '/video-logo-status/waiting', array(
+            array(
+                'methods' => WP_REST_Server::READABLE,
+                'callback' => array( $this, 'get_item_by_video_logo_waiting' ),
+                'permission_callback' => array( $this, 'get_items_permissions_check' )
+            ),
+            'schema' => array( $this, 'get_item_schema' )
+        ) );
     }
 
+
+    /**
+     * 
+     * @param WP_REST_Request
+     * @param bool
+     */
     public function get_items_permissions_check( $request )
     {
         if( !current_user_can( 'read' ) ) {
@@ -54,6 +70,29 @@ class Polen_Api_Video_Info
     public function get_items( $request )
     {
         $videos_infos = Polen_Video_Info::select_all_videos_incompleted();
+        
+        $data = array();
+
+        if( empty( $videos_infos ) ) {
+            return rest_ensure_response( $videos_infos );
+        }
+
+        foreach( $videos_infos as $video_info ) {
+            $response = $this->prepare_item_for_response( $video_info, $request );
+            $data[] = $response;
+        }
+        
+        return rest_ensure_response( $data );
+    }
+
+
+    /**
+     * 
+     * @param WP_REST_Request
+     */
+    public function get_item_by_video_logo_waiting( $request )
+    {
+        $videos_infos = Polen_Video_Info::select_by_video_logo_waiting();
         
         $data = array();
 
@@ -90,6 +129,7 @@ class Polen_Api_Video_Info
     /**
      * 
      * @param Polen\Includes\Polen_Video_Info
+     * @param WP_REST_Request
      */
     public function prepare_item_for_response( $video_info, $request )
     {
@@ -109,6 +149,7 @@ class Polen_Api_Video_Info
         $post_data[ 'duration' ] = $video_info->duration;
         $post_data[ 'vimeo_iframe' ] = $video_info->vimeo_iframe;
         $post_data[ 'first_order' ] = $video_info->first_order;
+        $post_data[ 'video_logo_status' ] = $video_info->video_logo_status;
         $post_data[ 'created_at' ] = $video_info->created_at;
         $post_data[ 'updated_at' ] = $video_info->updated_at;
 
@@ -132,7 +173,7 @@ class Polen_Api_Video_Info
      */
     public function get_item_schema()
     {
-        if( $this->schema ) {
+        if( !empty( $this->schema ) ) {
             return $this->schema;
         }
 
