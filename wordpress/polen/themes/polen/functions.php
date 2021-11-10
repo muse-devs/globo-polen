@@ -373,3 +373,11 @@ add_filter('wc_stripe_save_to_account_text', function(){
 add_action('woocommerce_before_checkout_process', function(){
 	$emails = WC_Emails::instance();
 });
+
+function filter_woocommerce_coupon_error($err, $err_code, $instance)
+{
+  WC()->cart->remove_coupons();
+  return $err;
+};
+
+add_filter('woocommerce_coupon_error', 'filter_woocommerce_coupon_error', 10, 3);
