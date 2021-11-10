@@ -727,6 +727,34 @@ function generic_get_about($main_title, $title, $text)
 <?php
 }
 
+function polen_get_media_news() {
+?>
+  <section id="media-news" class="row my-5">
+    <div class="col-sm-12">
+      <div class="row">
+        <div class="col-sm-12 mb-4">
+          <h2 class="typo typo-title text-center">Polen na mídia</h2>
+        </div>
+        <div class="col-sm-12 veiculos">
+          <a href="/polen-na-midia">
+            <img src="<?php echo TEMPLATE_URI; ?>/assets/img/na-midia/uol.png" alt="UOL"></img>
+          </a>
+          <a href="/polen-na-midia">
+            <img src="<?php echo TEMPLATE_URI; ?>/assets/img/na-midia/gazeta.png" alt="Gazeta do Povo"></img>
+          </a>
+          <a href="/polen-na-midia">
+            <img src="<?php echo TEMPLATE_URI; ?>/assets/img/na-midia/globo.png" alt="Globo"></img>
+          </a>
+          <a href="/polen-na-midia">
+            <img src="<?php echo TEMPLATE_URI; ?>/assets/img/na-midia/startup.png" alt="Startupi"></img>
+          </a>
+        </div>
+      </div>
+    </div>
+  <section>
+<?php
+}
+
 function polen_get_toast($text)
 {
   if (!$text || empty($text)) {

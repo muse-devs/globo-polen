@@ -23,29 +23,48 @@ get_header();
         </div>
       </div>
       <div class="row mt-3">
+        <?php
+          $args = array(
+            'post_type' => 'post_polen_media',
+            'post_status' => 'publish',
+            'posts_per_page' => 10,
+            'paged' => ( get_query_var('paged') ) ? get_query_var('paged') : 1,
+            'orderby' => 'DESC',
+            'order' => 'DESC',
+          );
+
+          $loop = new WP_Query( $args );
+          if ($loop->have_posts()) :
+            while ( $loop->have_posts() ) : $loop->the_post();
+        ?>
+
         <div class="col-md-10 mb-4">
-          <a href="#" target="_blank" rel="noreferrer">
+          <a href="<?php echo esc_attr(get_post_meta(get_the_ID(), 'url_media', true)); ?>" target="_blank" rel="noreferrer">
             <article>
               <div class="news-text">
-                <h4>Ana Maria</h4>
-                <h2>Supla e João Suplicy gravam mensagens para fãs e doam cachê para instituição do Padre Júlio Lancelloti</h2>
-                <h5>13/04/2021</h5>
+                <h4><?php the_title(); ?></h4>
+                <h2><?php echo wp_strip_all_tags( get_the_content() ); ?></h2>
+                <h5><?php echo esc_attr(get_post_meta(get_the_ID(), 'date_media', true)); ?></h5>
               </div>
-              <figure class="news-image" style="background: url('<?php echo TEMPLATE_URI; ?>/assets/img/about-banner.jpg')"></figure>
+              <figure class="news-image" style="background: url('<?php the_post_thumbnail_url(); ?>')"></figure>
             </article>
           </a>
         </div>
-        <div class="col-md-10 mb-4">
-          <a href="#" target="_blank" rel="noreferrer">
-            <article>
-              <div class="news-text">
-                <h4>Ana Maria</h4>
-                <h2>Supla e João Suplicy gravam mensagens para fãs e doam cachê para instituição do Padre Júlio Lancelloti</h2>
-                <h5>13/04/2021</h5>
-              </div>
-              <figure class="news-image" style="background: url('<?php echo TEMPLATE_URI; ?>/assets/img/about-banner.jpg')"></figure>
-            </article>
-          </a>
+
+        <?php
+            endwhile;
+          else :
+        ?>
+            <div class="col-sm-12">
+              <p class="title typo">Sem posts para exibir</p>
+            </div>
+        <?php
+          endif;
+          wp_reset_postdata();
+        ?>
+        <!-- Paginação -->
+        <div class="col-md-10 pagination">
+          <?php echo show_pagination($args); ?>
         </div>
       </div>
     </section>

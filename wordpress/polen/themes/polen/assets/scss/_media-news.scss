@@ -16,45 +16,89 @@
     padding: 12px;
     display: flex;
     align-items: center;
-    h2 {
-      font-size: 16px;
-      font-style: normal;
-      font-weight: 500;
-      line-height: 19px;
-      letter-spacing: 0em;
-      text-align: left;
-      margin-bottom: 0px;
-      padding: 10px 0px;
-    }
-    h4 {
-      font-size: 15px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: 19px;
-      letter-spacing: 0em;
-      text-align: left;
-      margin-bottom: 0px;
-    }
-    h5 {
-      font-size: 10px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: 10px;
-      letter-spacing: 0em;
-      text-align: left;
+    justify-content: space-between;
+    .news-text {
+      max-width: 80%;
+      h2 {
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 19px;
+        letter-spacing: 0em;
+        text-align: left;
+        margin-bottom: 0px;
+        padding: 7px 0px 10px 0px;
+        margin-top: 0px;
+      }
+      h4 {
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 19px;
+        letter-spacing: 0em;
+        text-align: left;
+        margin-bottom: 0px;
+      }
+      h5 {
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 10px;
+        letter-spacing: 0em;
+        text-align: left;
+      }
     }
     .news-image {
       width: 120px;
       height: 83px;
       border-radius: 8px;
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
+      background-size: cover!important;
+      background-repeat: no-repeat!important;
+      background-position: center!important;
       margin-bottom: 0px;
       @include media-breakpoint-down(sm) {
-        width: 220px;
+        width: 220px!important;
       }
+    }
+  }
+  .pagination {
+    display: flex;
+    justify-content: flex-end;
+    ul {
+      li {
+        margin-right: 5px;
+        border: 1px solid #000;
+        width: 35px;
+        height: 35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        a {
+          font-weight: 600;
+          color: #000;
+          i {
+            color:#000;
+          }
+        }
+        .current {
+          font-weight: 600;
+          background: #d7d7d7;
+          text-align: center;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+    }
+  }
+  .veiculos {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    img {
+      margin: 1em;
     }
   }
 }
