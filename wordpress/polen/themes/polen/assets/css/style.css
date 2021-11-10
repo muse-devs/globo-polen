@@ -14418,4 +14418,58 @@ label[for="wc-stripe-new-payment-method"] {
   width: 100%;
   cursor: pointer; }
 
+#media-news h1 {
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 72px;
+  letter-spacing: 0em;
+  text-align: left; }
+
+#media-news a {
+  color: #000; }
+
+#media-news article {
+  border-radius: 8px;
+  border: 1px solid #000;
+  padding: 12px;
+  display: flex;
+  align-items: center; }
+  #media-news article h2 {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: left;
+    margin-bottom: 0px;
+    padding: 10px 0px; }
+  #media-news article h4 {
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: left;
+    margin-bottom: 0px; }
+  #media-news article h5 {
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 10px;
+    letter-spacing: 0em;
+    text-align: left; }
+  #media-news article .news-image {
+    width: 120px;
+    height: 83px;
+    border-radius: 8px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 0px; }
+    @media (max-width: 767.98px) {
+      #media-news article .news-image {
+        width: 220px; } }
+
 /*# sourceMappingURL=maps/style.css.map */
