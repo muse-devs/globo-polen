@@ -26,9 +26,15 @@
         line-height: 19px;
         letter-spacing: 0em;
         text-align: left;
-        margin-bottom: 0px;
-        padding: 7px 0px 10px 0px;
-        margin-top: 0px;
+        margin: 5px 0px;
+        @include media-breakpoint-down(sm) {
+          display: -webkit-box;
+          overflow: hidden;
+          -webkit-line-clamp: 3;
+          padding: 0px;
+          -webkit-box-orient: vertical;
+          font-size: 14px;
+        }
       }
       h4 {
         font-size: 15px;

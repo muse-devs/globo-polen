@@ -42,6 +42,16 @@
         text-align: center;
         color: #fff;
       }
+      @include media-breakpoint-down(sm) {
+        padding: 50px 15px;
+        h5 {
+          font-size: 18px;
+          margin-top: 50px;
+        }
+        h2 {
+          font-size: 22px;
+        }
+      }
       .arrow {
         display: flex;
         justify-content: center;

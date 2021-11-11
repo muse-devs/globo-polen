@@ -14389,6 +14389,14 @@ label[for="wc-stripe-new-payment-method"] {
       letter-spacing: 0em;
       text-align: center;
       color: #fff; }
+    @media (max-width: 767.98px) {
+      #about-banner .banner .content {
+        padding: 50px 15px; }
+        #about-banner .banner .content h5 {
+          font-size: 18px;
+          margin-top: 50px; }
+        #about-banner .banner .content h2 {
+          font-size: 22px; } }
     #about-banner .banner .content .arrow {
       display: flex;
       justify-content: center;
@@ -14447,9 +14455,15 @@ label[for="wc-stripe-new-payment-method"] {
       line-height: 19px;
       letter-spacing: 0em;
       text-align: left;
-      margin-bottom: 0px;
-      padding: 7px 0px 10px 0px;
-      margin-top: 0px; }
+      margin: 5px 0px; }
+      @media (max-width: 767.98px) {
+        #media-news article .news-text h2 {
+          display: -webkit-box;
+          overflow: hidden;
+          -webkit-line-clamp: 3;
+          padding: 0px;
+          -webkit-box-orient: vertical;
+          font-size: 14px; } }
     #media-news article .news-text h4 {
       font-size: 15px;
       font-style: normal;
