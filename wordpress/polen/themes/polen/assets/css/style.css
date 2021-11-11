@@ -12288,7 +12288,8 @@ textarea {
   @media (max-width: 991.98px) {
     .category-button {
       margin-right: 8px;
-      padding: 0px 25px; } }
+      padding: 0px 25px;
+      min-width: 180px; } }
   .category-button img {
     margin-right: 0.5em; }
 
