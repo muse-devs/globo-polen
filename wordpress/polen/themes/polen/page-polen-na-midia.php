@@ -39,7 +39,7 @@ get_header();
         ?>
 
         <div class="col-md-10 mb-4">
-          <a href="<?php echo esc_attr(get_post_meta(get_the_ID(), 'url_media', true)); ?>" target="_blank" rel="noreferrer">
+          <a href="<?php echo esc_attr(get_post_meta(get_the_ID(), 'url_media', true)); ?>" target="_blank" rel="noreferrer" title="<?php echo wp_strip_all_tags( get_the_content() ); ?>">
             <article>
               <div class="news-text">
                 <h4><?php the_title(); ?></h4>
