@@ -96,12 +96,29 @@ class Polen_WooCommerce
 
             add_action( 'woocommerce_update_product', array( $this, 'on_product_save' ) );
 
+            add_action( 'save_post', array( $this, 'save_metabox_post' ) );
+
             //Todas as compras gratis vão para o status payment-approved
             add_action( 'woocommerce_checkout_no_payment_needed_redirect', [ $this, 'set_free_order_payment_approved' ], 10, 3 );
 
         }
     }
     
+    /**
+     * Salvar os inputs customizados do CPT
+     *
+     * @param $post_id
+     * @return mixed|void
+     */
+    public function save_metabox_post($post_id)
+    {
+        if (!current_user_can( 'edit_post', $post_id )) {
+            return $post_id;
+        }
+
+        update_post_meta($post_id, 'url_media', sanitize_text_field($_POST['url_media']));
+        update_post_meta($post_id, 'date_media', sanitize_text_field($_POST['date_media']));
+    }
 
     /**
      * Colocar os status de uma order gratis como pagamento aprovado
@@ -179,6 +196,7 @@ class Polen_WooCommerce
     public function add_metaboxes() {
         global $current_screen;
 
+        add_meta_box( 'Polen_Post_Media', 'Configurações Gerais', array( $this, 'metabox_polen_media' ), 'post_polen_media', 'normal', 'low' );
         if( $current_screen && ! is_null( $current_screen ) && isset( $current_screen->id ) && $current_screen->id == 'shop_order' && isset( $_REQUEST['action'] ) && $_REQUEST['action'] == 'edit' )
         {
             add_meta_box( 'Polen_Order_Details', 'Instruções', array( $this, 'metabox_order_details' ), 'shop_order', 'normal', 'low' );
@@ -224,6 +242,20 @@ class Polen_WooCommerce
             require_once TEMPLATEPATH . '/woocommerce/admin/metaboxes/metabox-refund-order-tuna.php';
         } else {
             require_once PLUGIN_POLEN_DIR . '/admin/partials/metaboxes/metabox-refund-order-tuna.php';
+        }
+    }
+
+    /**
+     * Adicionar metabox na edição de midias
+     */
+    public function metabox_polen_media()
+    {
+        global $post;
+        $product_id = $post->ID;
+        if( file_exists( TEMPLATEPATH . '/woocommerce/admin/metaboxes/metabox-polen-media.php' ) ) {
+            require_once TEMPLATEPATH . '/woocommerce/admin/metaboxes/metabox-polen-media.php';
+        } else {
+            require_once PLUGIN_POLEN_DIR . '/admin/partials/metaboxes/metabox-polen-media.php';
         }
     }
 
