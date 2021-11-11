@@ -96,7 +96,15 @@
   .veiculos {
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
+    width: 100%;
+    @include media-breakpoint-down(sm) {
+      justify-content: flex-start;
+      flex-direction: row;
+      overflow-y: hidden;
+      a {
+        margin-right: 1em;
+      }
+    }
     img {
       margin: 1em;
       filter: grayscale(1);

@@ -735,19 +735,21 @@ function polen_get_media_news() {
         <div class="col-sm-12 mb-4">
           <h2 class="typo typo-title text-center">Polen na mídia</h2>
         </div>
-        <div class="col-sm-12 veiculos">
-          <a href="/polen-na-midia">
-            <img src="<?php echo TEMPLATE_URI; ?>/assets/img/na-midia/globo.png" alt="O Globo"></img>
-          </a>
-          <a href="/polen-na-midia">
-            <img src="<?php echo TEMPLATE_URI; ?>/assets/img/na-midia/folha.png" alt="Folha de São Paulo"></img>
-          </a>
-          <a href="/polen-na-midia">
-            <img src="<?php echo TEMPLATE_URI; ?>/assets/img/na-midia/veja.png" alt="Veja SP"></img>
-          </a>
-          <a href="/polen-na-midia">
-            <img src="<?php echo TEMPLATE_URI; ?>/assets/img/na-midia/exame.png" alt="Exame"></img>
-          </a>
+        <div class="col-sm-12">
+          <div class="veiculos">
+            <a href="/polen-na-midia">
+              <img src="<?php echo TEMPLATE_URI; ?>/assets/img/na-midia/globo.png" alt="O Globo"></img>
+            </a>
+            <a href="/polen-na-midia">
+              <img src="<?php echo TEMPLATE_URI; ?>/assets/img/na-midia/folha.png" alt="Folha de São Paulo"></img>
+            </a>
+            <a href="/polen-na-midia">
+              <img src="<?php echo TEMPLATE_URI; ?>/assets/img/na-midia/veja.png" alt="Veja SP"></img>
+            </a>
+            <a href="/polen-na-midia">
+              <img src="<?php echo TEMPLATE_URI; ?>/assets/img/na-midia/exame.png" alt="Exame"></img>
+            </a>
+          </div>
         </div>
       </div>
     </div>
