@@ -1156,6 +1156,7 @@
   @include media-breakpoint-down(md) {
     margin-right: 8px;
     padding: 0px 25px;
+    min-width: 180px;
   }
   img {
     margin-right: 0.5em;
