@@ -48,7 +48,7 @@
               <div class="col-md-3 mt-4">
                 <h5 class="title typo typo-title typo-small">Institucional</h5>
                 <ul class="footer-menu">
-                  <li><a href="/quem-somos">Quem somos</a></li>
+                  <li><a href="/sobre-nos">Sobre nós</a></li>
                   <li><a href="https://br.linkedin.com/company/polen-me" target="_blank" rel="noreferrer">Trabalhe conosco</a></li>
                   <li><a href="/polen-na-midia">Polen na mídia</a></li>
                   <li><a href="/ajuda">Ajuda</a></li>
@@ -141,7 +141,7 @@
                 <div id="collapse-institucional" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-institucional">
                   <div class="panel-body">
                     <ul class="footer-menu">
-                      <li><a href="/quem-somos">Quem somos</a></li>
+                      <li><a href="/sobre-nos">Sobre nós</a></li>
                       <li><a href="https://br.linkedin.com/company/polen-me" target="_blank" rel="noreferrer">Trabalhe conosco</a></li>
                       <li><a href="/polen-na-midia">Polen na mídia</a></li>
                       <li><a href="/ajuda">Ajuda</a></li>
