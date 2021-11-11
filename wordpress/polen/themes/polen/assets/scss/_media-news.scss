@@ -103,6 +103,9 @@
       overflow-y: hidden;
       a {
         margin-right: 1em;
+        img {
+          min-width: 160px;
+        }
       }
     }
     img {
