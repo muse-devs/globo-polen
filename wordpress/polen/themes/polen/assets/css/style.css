@@ -12264,10 +12264,8 @@ textarea {
 .content-category {
   display: flex;
   justify-content: start;
-  flex-wrap: wrap; }
-  @media (max-width: 575.98px) {
-    .content-category {
-      justify-content: center; } }
+  flex-direction: row;
+  overflow-y: hidden; }
 
 .category-button {
   display: flex;
@@ -12279,17 +12277,18 @@ textarea {
   font-size: 14px;
   line-height: 18.75px;
   margin-bottom: 1em;
-  margin-right: 1em;
+  margin-right: 8px;
   border: 1px solid var(--category);
   box-sizing: border-box;
   border-radius: 200px;
   background: #ffff;
-  padding: 4px 8px;
+  padding: 4px 20px;
   transition: 0.2s;
   min-height: 34px; }
-  @media (max-width: 575.98px) {
+  @media (max-width: 991.98px) {
     .category-button {
-      margin-right: 8px; } }
+      margin-right: 8px;
+      padding: 0px 25px; } }
   .category-button img {
     margin-right: 0.5em; }
 
