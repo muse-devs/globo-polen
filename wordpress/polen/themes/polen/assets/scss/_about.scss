@@ -1,6 +1,6 @@
 #about-banner {
   .banner {
-    background: url("../img/about-banner.jpg");
+    background: url("../img/about-banner-desktop.png");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -8,9 +8,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 50px;
     @include media-breakpoint-down(sm) {
-      background: url("../img/banner-home-mobile-new.png");
+      background: url("../img/about-banner-mobile.png");
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center;
@@ -18,7 +17,11 @@
     .content {
       display: flex;
       justify-content: center;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.5);
+      height: 100%;
       flex-wrap: wrap;
+      padding: 50px;
       h5 {
         font-size: 24px;
         font-style: normal;
