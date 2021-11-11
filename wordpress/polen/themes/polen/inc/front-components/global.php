@@ -122,7 +122,7 @@ function polen_front_get_categories_buttons()
                 <?php if ($categorie["img"]) : ?>
                   <img src="<?php echo $categorie["img"]; ?>" />
                 <?php endif; ?>
-                <?php echo $categorie["name"]; ?>
+                <h5><?php echo $categorie["name"]; ?></h5>
               </div>
             </a>
           <?php endforeach; ?>
