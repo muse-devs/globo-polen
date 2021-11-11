@@ -7,6 +7,7 @@ const cartAdvanced = new Vue({
     video_to: cart_items.video_to || "",
     instructions_to_video: cart_items.instructions_to_video || "",
     phone: cart_items.phone || "",
+    occasion: "",
   },
   methods: {
     nextStep: function (num) {
@@ -21,12 +22,16 @@ const cartAdvanced = new Vue({
     video_toHandle: function(e) {
       this.video_to = e.detail;
     },
+    occasionHandle: function(e){
+      this.occasion = e.detail;
+    },
     isComplete: function() {
       return this.offered_by != ""
       && this.email_to_video != ""
       && this.video_to != ""
       && this.instructions_to_video != ""
-      && this.activeItem == 2;
+      && this.activeItem == 2
+      && this.occasion;
     },
     isForOther: function() {
       return this.video_to == "other_one";
