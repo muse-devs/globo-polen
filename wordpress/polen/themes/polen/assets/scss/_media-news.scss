@@ -99,6 +99,12 @@
     flex-wrap: wrap;
     img {
       margin: 1em;
+      filter: grayscale(1);
+      transition: 0.4s;
+    }
+    img:hover {
+      transition: 0.4s;
+      filter: grayscale(0);
     }
   }
 }
