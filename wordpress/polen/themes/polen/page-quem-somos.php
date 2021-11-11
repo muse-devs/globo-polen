@@ -52,7 +52,7 @@ get_header();
       <div class="row">
         <div class="col-12">
           <video id="polen-about" playsinline poster="<?php echo TEMPLATE_URI; ?>/assets/img/cover-video-about.jpg">
-            <source src="https://player.vimeo.com/external/595532426.sd.mp4?s=ab2b9eebb3b1c17cd060ebe49d31ed2949472cea&profile_id=164" type="video/mp4">
+            <source src="<?php echo TEMPLATE_URI; ?>/assets/video/about-video.mp4" type="video/mp4">
           </video>
         </div>
       </div>
