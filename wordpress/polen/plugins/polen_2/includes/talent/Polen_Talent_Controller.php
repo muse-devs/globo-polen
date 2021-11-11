@@ -304,7 +304,8 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
             // $first_product = reset($talent_products);
             $order = wc_get_order( $order_id );
             if( $order ){
-                $order->update_status( Polen_Order::SLUG_ORDER_COMPLETE, 'talento enviou o video', false );
+                // $order->update_status( Polen_Order::SLUG_ORDER_COMPLETE, 'talento enviou o video', false );
+                $video_info = Polen_Video_Info::get_by_order_id( $order->get_id() );
                 $response = array( 'success' => true, 'message' => 'Pedido completo!' );                        
             }
         }else{
