@@ -737,16 +737,16 @@ function polen_get_media_news() {
         </div>
         <div class="col-sm-12 veiculos">
           <a href="/polen-na-midia">
-            <img src="<?php echo TEMPLATE_URI; ?>/assets/img/na-midia/uol.png" alt="UOL"></img>
+            <img src="<?php echo TEMPLATE_URI; ?>/assets/img/na-midia/globo.png" alt="O Globo"></img>
           </a>
           <a href="/polen-na-midia">
-            <img src="<?php echo TEMPLATE_URI; ?>/assets/img/na-midia/gazeta.png" alt="Gazeta do Povo"></img>
+            <img src="<?php echo TEMPLATE_URI; ?>/assets/img/na-midia/folha.png" alt="Folha de São Paulo"></img>
           </a>
           <a href="/polen-na-midia">
-            <img src="<?php echo TEMPLATE_URI; ?>/assets/img/na-midia/globo.png" alt="Globo"></img>
+            <img src="<?php echo TEMPLATE_URI; ?>/assets/img/na-midia/veja.png" alt="Veja SP"></img>
           </a>
           <a href="/polen-na-midia">
-            <img src="<?php echo TEMPLATE_URI; ?>/assets/img/na-midia/startup.png" alt="Startupi"></img>
+            <img src="<?php echo TEMPLATE_URI; ?>/assets/img/na-midia/exame.png" alt="Exame"></img>
           </a>
         </div>
       </div>

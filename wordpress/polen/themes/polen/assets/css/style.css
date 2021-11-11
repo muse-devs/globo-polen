@@ -14508,6 +14508,11 @@ label[for="wc-stripe-new-payment-method"] {
   justify-content: center;
   flex-wrap: wrap; }
   #media-news .veiculos img {
-    margin: 1em; }
+    margin: 1em;
+    filter: grayscale(1);
+    transition: 0.4s; }
+  #media-news .veiculos img:hover {
+    transition: 0.4s;
+    filter: grayscale(0); }
 
 /*# sourceMappingURL=maps/style.css.map */
