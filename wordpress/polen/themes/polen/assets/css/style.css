@@ -14506,7 +14506,14 @@ label[for="wc-stripe-new-payment-method"] {
 #media-news .veiculos {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap; }
+  width: 100%; }
+  @media (max-width: 767.98px) {
+    #media-news .veiculos {
+      justify-content: flex-start;
+      flex-direction: row;
+      overflow-y: hidden; }
+      #media-news .veiculos a {
+        margin-right: 1em; } }
   #media-news .veiculos img {
     margin: 1em;
     filter: grayscale(1);
