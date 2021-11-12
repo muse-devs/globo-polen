@@ -393,6 +393,10 @@ function unhook_those_pesky_emails( $email_class ) {
 
     remove_action( 'woocommerce_order_status_completed_notification', array( $email_class->emails['Polen_WC_Payment_Approved'], 'trigger' ) );
 
-    remove_action( 'woocommerce_order_status_payment-approved_notification', array( $email_class->emails['Polen_WC_Payment_Approved'], 'trigger' ), 3 );
+    remove_action( 'woocommerce_order_status_payment-approved_notification', array( $email_class->emails['WC_Email_Customer_Completed_Order'], 'trigger' ), 3 );
+
+    remove_action( 'woocommerce_order_status_payment-approved_notification', array( $email_class->emails['WC_Email_New_Order'], 'trigger' ), 3 );
+
+    remove_action( 'woocommerce_order_status_pending_to_payment-approved_notification', array( $email_class->emails['WC_Email_New_Order'], 'trigger' ), 3 );
   }
 }
