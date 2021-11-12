@@ -3,8 +3,7 @@
 function polen_onSubmit(token) {
 	const formName = "form.register";
 	polRequestZapier(
-		formName,
-		ZAPIERURLS.NEW_ACCOUNT
+		formName
 	);
 	document.querySelector('form.register').submit();
 }

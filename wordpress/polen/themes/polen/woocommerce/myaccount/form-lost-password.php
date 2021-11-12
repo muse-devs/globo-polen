@@ -19,6 +19,7 @@
 defined('ABSPATH') || exit;
 
 do_action('woocommerce_before_lost_password_form');
+$inputs = new Material_Inputs();
 ?>
 
 <div class="row">
@@ -31,8 +32,7 @@ do_action('woocommerce_before_lost_password_form');
 		<form method="post" class="woocommerce-ResetPassword lost_reset_password">
 
 			<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide mb-3">
-				<?php /* <label for="user_login"><?php esc_html_e( 'Username or email', 'woocommerce' ); ?></label>*/ ?>
-				<input class="woocommerce-Input woocommerce-Input--text input-text form-control form-control-lg" placeholder="<?php esc_html_e('Username or email', 'woocommerce'); ?>" type="text" name="user_login" id="user_login" autocomplete="username" />
+        <?php $inputs->material_input(Material_Inputs::TYPE_TEXT, "user_login", "user_login", "Nome de usuário ou e-mail", true, "", array("autocomplete" => "username")); ?>
 			</p>
 
 			<div class="clear"></div>
@@ -43,7 +43,7 @@ do_action('woocommerce_before_lost_password_form');
 
 			<p class="woocommerce-form-row form-row">
 				<input type="hidden" name="wc_reset_password" value="true" />
-				<button type="submit" class="woocommerce-Button btn btn-primary btn-lg btn-block" value="<?php esc_attr_e('Reset password', 'woocommerce'); ?>"><?php esc_html_e('Reset password', 'woocommerce'); ?></button>
+        <?php $inputs->material_button(Material_Inputs::TYPE_SUBMIT, "btn-submit", "Redefinir senha"); ?>
 			</p>
 
 			<?php wp_nonce_field('lost_password', 'woocommerce-lost-password-nonce'); ?>

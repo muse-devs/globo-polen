@@ -26,7 +26,7 @@
 	<link rel="profile" href="https://gmpg.org/xfn/11">
 	<?php polen_get_header_objects(); ?>
 	<?php wp_head(); ?>
-    <?php include_once TEMPLATE_DIR . '/inc/analitics_header.php'; ?>
+  <?php include_once TEMPLATE_DIR . '/inc/analitics_header.php'; ?>
 </head>
 
 <body <?php body_class(); ?>>

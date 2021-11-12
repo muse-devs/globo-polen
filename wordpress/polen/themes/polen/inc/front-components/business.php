@@ -6,8 +6,8 @@ use Polen\Includes\Polen_Product_B2B;
 
 function bus_get_talents()
 {
-  $products_id = Polen_Product_B2B::get_all_product_ids( 100 );
-  return !empty($products_id) ? array_chunk( $products_id, 4 ) : array();
+  $products_id = Polen_Product_B2B::get_all_product_ids(100);
+  return !empty($products_id) ? array_chunk($products_id, 4) : array();
 }
 
 function bus_get_header()
@@ -17,7 +17,8 @@ function bus_get_header()
     <div class="col-12 col-md-6 m-auto">
       <h1 class="title text-center mb-4">Polen para Empresas</h1>
       <p class="description text-center mb-5">Aproveite o poder das celebridades para espalhar a emoção e potencializar o seu negócio! Tudo com muita rapidez e facilidade para melhor atender à sua empresa.</p>
-      <a href="#bus-form-wrapper" class="btn btn-primary btn-lg btn-block">Pedir um Polen para o meu negócio</a>
+      <?php $link = new Material_Inputs();
+      $link->material_button_link("link1", "Pedir um Polen para o meu negócio", "#bus-form-wrapper"); ?>
     </div>
   </section>
 <?php
@@ -74,7 +75,7 @@ function bus_get_card($item)
       <img loading="lazy" src="<?php echo $image_data["image"]; ?>" alt="<?php echo $image_data["alt"]; ?>" />
       <div class="card-bottom">
         <figcaption itemprop="name"><?php echo get_the_title($item); ?></figcaption>
-        <?php if( !empty( get_post_meta( $item, 'talent_subscribed_instagram', true ) ) ) : ?>
+        <?php if (!empty(get_post_meta($item, 'talent_subscribed_instagram', true))) : ?>
           <div class="followers">
             <img src="<?php echo TEMPLATE_URI ?>/assets/icons/instagram.svg" alt="Instagram" />
             <span><?php echo esc_attr(get_post_meta($item, 'talent_subscribed_instagram', true)); ?> seguidores</span>
@@ -128,6 +129,7 @@ function bus_grid($items, $title)
 function bus_get_form()
 {
   wp_enqueue_script("polen-business");
+  $inputs = new Material_Inputs();
   ?>
   <section id="bus-form-wrapper" class="row mt-5 mb-5 bus-form">
     <div class="col-12 mb-4 pb-2 text-center">
@@ -136,49 +138,50 @@ function bus_get_form()
     <div class="col-12 col-md-8 m-md-auto">
       <form id="bus-form" v-on:submit.prevent="handleSubmit" method="POST">
         <input type="hidden" id="url-success" value="<?php echo enterprise_url_success(); ?>" />
-        <input type="hidden" name="action" value="submit_form" />
-        <input type="hidden" name="form_id" value="1" />
-        <input type="hidden" name="terms" value="1" />
+        <?php
+        $inputs->input_hidden("action", "submit_form");
+        $inputs->input_hidden("form_id", "1");
+        $inputs->input_hidden("terms", "1");
 
-        <label class="pol-input-group mb-3" aria-required="true">
-          <span class="label">Nome Completo</span>
-          <input type="text" class="input" name="name" placeholder="Seu nome" required />
-        </label>
-        <label class="pol-input-group mb-3" aria-required="true">
-          <span class="label">Empresa</span>
-          <input type="text" name="company" class="input" placeholder="Empresa S.A." required />
-        </label>
-        <label class="pol-input-group mb-3" aria-required="true">
-          <span class="label">Número de colaboradores</span>
-          <select v-bind:class="{'selected': employees_quantity}" name="employees_quantity" v-model="employees_quantity" required>
-            <option value="">Selecione uma opção</option>
+        $inputs->material_input(Material_Inputs::TYPE_TEXT, "name", "name", "Nome Completo", true, "mb-3");
+        $inputs->material_input(Material_Inputs::TYPE_TEXT, "company", "company", "Empresa", true, "mb-3");
+
+        ?>
+          <select name="employees_quantity" class="custom-select mb-3" required>
+            <option value="">Número de colaboradores *</option>
             <option value="menos-de-20">Menos de 20</option>
             <option value="de-20-a-99">De 20 a 99</option>
             <option value="de-100-a-499">De 100 a 499</option>
             <option value="mais-de-500">Mais de 500</option>
           </select>
-        </label>
-        <label class="pol-input-group mb-3" aria-required="true">
-          <span class="label">Cargo</span>
-          <input type="text" name="job" class="input" placeholder="Seu cargo" required />
-        </label>
-        <label class="pol-input-group mb-3" aria-required="true">
-          <span class="label">e-mail de trabalho</span>
-          <input type="email" name="email" class="input" placeholder="exemplo@empresa.com" required />
-        </label>
-        <label class="pol-input-group mb-3" aria-required="true">
-          <span class="label">Número de telefone</span>
-          <input type="text" name="phone" v-model="phone" v-on:keyup="handleChange" class="input" placeholder="(XX) XXXXX-XXXX" maxlength="15" required />
-        </label>
-        <label class="pol-input-group mb-3">
-          <span class="label">Qual talento você possui interesse?</span>
-          <input type="text" name="talent_name" class="input" placeholder="Nome do talento" />
-        </label>
-        <label class="pol-input-group mb-3" aria-required="true">
-          <span class="label">Mensagem</span>
-          <textarea name="message" placeholder="Como você pretende usar os vídeos Polen para sua empresa?" rows="6" required></textarea>
-        </label>
-        <input type="submit" class="btn btn-primary btn-lg btn-block mt-4" value="Enviar" />
+
+          <select name="budget" class="custom-select mb-3" required>
+            <option value="">Orçamento *</option>
+            <option value="de-500-a-1000">De R$500 a R$1.000</option>
+            <option value="de-1000-a-2000">De R$1.000 a R$2.000</option>
+            <option value="de-2000-a-3000">De R$2.000 a R$3.000</option>
+            <option value="de-3000-a-5000">De R$3.000 a R$5.000</option>
+            <option value="mais-de-5000">Mais de R$5.000</option>
+          </select>
+        <?php
+        $inputs->material_input(Material_Inputs::TYPE_EMAIL, "email", "email", "e-mail de trabalho", true, "mb-3");
+        $inputs->material_input(
+          Material_Inputs::TYPE_PHONE,
+          "phone",
+          "phone",
+          "Número de telefone",
+          false,
+          "mb-3",
+          array(
+            "placeholder" => "(XX) XXXXX-XXXX",
+            "v-model" => "phone",
+            "v-on:keyup" => "handleChange",
+            // "maxlength" => "15",
+          )
+        );
+        $inputs->material_input(Material_Inputs::TYPE_TEXT, "talent_name", "talent_name", "Qual Ídolo você possui interesse?", false, "mb-3");
+        $inputs->material_textarea("textarea1", "message", "Como você pretende usar o vídeo?", true); ?>
+        <?php $inputs->material_button(Material_Inputs::TYPE_SUBMIT, "send_form", "Enviar", "mt-4"); ?>
       </form>
     </div>
   </section>

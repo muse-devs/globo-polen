@@ -49,8 +49,8 @@ class Order_Class
 				'status' => 'complete',
 			),
 			'_next-step' => array(
-				'title' => 'Aguardando confirmação do talento',
-				'description' => 'Caso seu pedido não seja aprovado pelo talento o seu dinheiro será devolvido imediatamente.',
+				'title' => 'Aguardando confirmação do seu ídolo',
+				'description' => 'Caso seu pedido não seja aprovado pelo ídolo, você será reembolsado.',
 				'status' => 'in-progress',
 			),
 		);
@@ -72,8 +72,8 @@ class Order_Class
 			$flows = array(
 				$flow_1[$order_status],
 				'_next-step_1' => array(
-					'title' => 'Aguardando confirmação do talento',
-					'description' => 'Caso seu pedido não seja aprovado pelo talento o seu dinheiro será devolvido imediatamente.',
+					'title' => 'Aguardando confirmação do seu ídolo',
+					'description' => 'Caso seu pedido não seja aprovado pelo ídolo, você será reembolsado.',
 					'status' => $flow_1[$order_status]['status'] === "fail" ? 'pending' : 'in-progress',
 				),
 				'_next-step_2' => array(

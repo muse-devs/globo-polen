@@ -17,7 +17,7 @@ define('POL_COOKIES', array(
 
 if ( ! defined( '_S_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', DEVELOPER ? time() : '1.1.1' );
+	define( '_S_VERSION', DEVELOPER ? time() : '2.0.0' );
 }
 
 if ( ! function_exists( 'polen_setup' ) ) :
@@ -212,6 +212,8 @@ function polen_scripts() {
 	wp_register_script( 'zuck', TEMPLATE_URI . '/assets/js/' . $min . 'zuck.js', array(), _S_VERSION, true );
 	wp_register_script( 'form-whatsapp', TEMPLATE_URI . '/assets/js/' . $min . 'form-whatsapp.js', array("vuejs"), _S_VERSION, true );
 	wp_register_script( 'polen-business', TEMPLATE_URI . '/assets/js/' . $min . 'business.js', array("vuejs"), _S_VERSION, true );
+  wp_register_script( 'polen-help', TEMPLATE_URI . '/assets/js/' . $min . 'help.js', array("jquery", "vuejs"), _S_VERSION, true );
+  wp_register_script( 'material-js', TEMPLATE_URI . '/assets/js/vendor/material-components-web.min.js', array(), _S_VERSION, false );
 	// --------------------------------------------------------------------------------------------------
 
 	if (polen_is_landingpage()) {
@@ -237,14 +239,15 @@ function polen_scripts() {
 	}
 
 	if( is_cart() ) {
-		wp_enqueue_script( 'polen-cart', TEMPLATE_URI . '/assets/js/' . $min . 'cart.js', array("jquery"), _S_VERSION, true );
+		wp_enqueue_script( 'polen-cart', TEMPLATE_URI . '/assets/js/' . $min . 'cart.js', array("jquery", "vuejs"), _S_VERSION, true );
 	}
 
 	if( is_checkout() ) {
 		wp_enqueue_script( 'polen-checkout', TEMPLATE_URI . '/assets/js/' . $min . 'checkout.js', array("jquery"), _S_VERSION, true );
 	}
 
-	wp_enqueue_script( 'bootstrap-js', TEMPLATE_URI . '/assets/bootstrap-4.6.0/dist/js/bootstrap.min.js', array("jquery"), _S_VERSION, true );
+	wp_enqueue_script( 'bootstrap-js', TEMPLATE_URI . '/assets/js/vendor/bootstrap.min.js', array("jquery"), _S_VERSION, true );
+  wp_enqueue_script('material-js');
 
 	// if(is_user_logged_in()) {
 		wp_enqueue_script( 'header-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'navigation.js', array("jquery"), _S_VERSION, true );
@@ -341,6 +344,11 @@ require_once TEMPLATE_DIR . '/enterprise/function_enterprise.php';
  */
 require_once TEMPLATE_DIR . '/inc/highlight_categories.php';
 
+/**
+ * Funcoes responsáveis pelo B2B da polen
+ */
+require_once TEMPLATE_DIR . '/inc/b2b_functions.php';
+
 
 add_action('wc_gateway_stripe_process_response', function($response, $order) {
 	// $response
@@ -361,3 +369,50 @@ add_action('wc_gateway_stripe_process_webhook_payment_error', function($order, $
 add_filter('wc_stripe_save_to_account_text', function(){
 	return 'Salvar os dados do cartão de credito para proximas compras.';
 });
+
+add_action('woocommerce_before_checkout_process', function(){
+	$emails = WC_Emails::instance();
+});
+
+function filter_woocommerce_coupon_error($err, $err_code, $instance)
+{
+  WC()->cart->remove_coupons();
+  return $err;
+};
+
+add_filter('woocommerce_coupon_error', 'filter_woocommerce_coupon_error', 10, 3);
+
+/**
+ * Customiza a paginação de todos os tipos de posts
+ *
+ * @param array $args
+ * @return string
+ */
+function show_pagination(array $args)
+{
+  $query = new WP_Query($args);
+
+  $maxPage = 99999;
+  $pages = paginate_links(array(
+    'base' => str_replace($maxPage, '%#%', esc_url(get_pagenum_link($maxPage))),
+    'format' => '?paged=%#%',
+    'current' => max(1, get_query_var('paged')),
+    'total' => $query->max_num_pages,
+    'type' => 'array',
+    'prev_next' => true,
+    'prev_text' => __('<i aria-hidden="true" class="fas fa-fw fa-chevron-left"><</i>'),
+    'next_text' => __('<i aria-hidden="true" class="fas fa-fw fa-chevron-right">></i>'),
+  ));
+
+  $output = '';
+  if (is_array($pages)) {
+    $output .= '<ul class="pagination">';
+    foreach ($pages as $page) {
+      $output .= "<li class=\"pagination__number\">{$page}</li>";
+    }
+    $output .= '</ul>';
+  }
+  wp_reset_query();
+
+  return $output;
+}

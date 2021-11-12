@@ -1,6 +1,7 @@
 <?php
 namespace Polen\Social_Base;
 
+use Polen\Admin\Polen_Admin_Social_Base_Product_Fields;
 use WC_Product;
 use WC_Product_Query;
 
@@ -12,17 +13,33 @@ class Social_Base_Product
     const PRODUCT_META_SLUG_CAMPAING = '_social_base_slug_campaing';
     const PRODUCT_META_VIDEO_TESTEMONIAL_URL = '_social_base_video_testimonial';
 
+    public function __construct( \WC_Product $product )
+    {
+        $this->product = $product;
+    }
+
     public static function product_is_social_base( WC_Product $product = null )
     {
         if( empty( $product) ) {
             return false;
         }
 
-        if( $product->get_meta( self::PRODUCT_META_IS_SOCIAL_BASE, true ) != 'yes' ) {
+        if( $product->get_meta( Polen_Admin_Social_Base_Product_Fields::FIELD_NAME_IS, true ) !== 'yes' ) {
             return false;
         }
 
         return true;
+    }
+
+    public function get_url_wartermark_video_player()
+    {
+        return $this->product->get_meta( Polen_Admin_Social_Base_Product_Fields::FIELD_NAME_URL_WATERMARK, true );
+    }
+
+
+    public function get_campaing_slug()
+    {
+        return $this->product->get_meta( Polen_Admin_Social_Base_Product_Fields::FIELD_NAME_SLUG_CAMPAING, true );
     }
 
     // public static function product_is_social( $product, $category )

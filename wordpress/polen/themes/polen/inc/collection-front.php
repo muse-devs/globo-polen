@@ -5,7 +5,9 @@
  * dado do banco de dados para o Front
  */
 
+use Polen\Includes\Cart\Polen_Cart_Item_Factory;
 use Polen\Includes\Debug;
+use Polen\Includes\Polen_Video_Info;
 
 /**
  * Pegar informações das categorias
@@ -195,7 +197,7 @@ function polen_get_array_related_products( $product_id )
                             "talent_url" => get_permalink($id),
                             "name" => $product->get_title(),
                             "price" => $product->get_regular_price(),
-                            "price_html" => $product->get_price_html(),
+                            "price_formatted" => $product->get_price_html(),
                             "category_url" => $cat_link,
                             "category" => wc_get_product_category_list($id),
                             "in_stock" => $product->is_in_stock(),
@@ -206,4 +208,28 @@ function polen_get_array_related_products( $product_id )
             return $args;
         }
     }
+}
+
+function polen_get_home_stories( ...$orders_ids )
+{
+    $orders_ids_1 = $orders_ids[ 0 ];
+    if( is_array( $orders_ids_1 ) ) {
+        $orders_ids = $orders_ids_1;
+    }
+    $videos_info = Polen_Video_Info::get_by_complete_and_public_by_orders_ids( $orders_ids );
+    $array_result = [];
+    foreach( $videos_info as $vi ) {
+		$order = wc_get_order($vi->order_id);
+		if( !empty( $order ) ) {
+            $cart_item = Polen_Cart_Item_Factory::polen_cart_item_from_order($order);
+            $array_result[] = [
+                'talent_id'    => $vi->talent_id,
+                'talent_thumb' => polen_get_avatar($vi->talent_id, 'polen-square-crop-lg'),
+                'cover'        =>  $vi->vimeo_thumbnail,
+                'video_url'    => $vi->vimeo_file_play,
+                'initials'     => polen_get_initials_name( $cart_item->get_name_to_video() ),
+            ];
+        }
+    }
+    return  $array_result;
 }
