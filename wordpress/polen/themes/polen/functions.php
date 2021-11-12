@@ -374,7 +374,7 @@ add_action( 'woocommerce_email', 'unhook_those_pesky_emails' );
 
 function unhook_those_pesky_emails( $email_class ) {
 
-  if ( is_admin() && ! wp_doing_ajax() ) {
+  if ( is_admin() ) {
 
     $email = \WC_Emails::instance();
 
@@ -394,10 +394,7 @@ function unhook_those_pesky_emails( $email_class ) {
 //    remove_action( 'woocommerce_order_status_completed_notification', array( $email_class->emails['WC_Email_Customer_Completed_Order'], 'trigger' ) );
 
 
-    remove_action( 'woocommerce_order_status_changed', array( $email->Polen_WC_Payment_Approved, 'trigger' ), 1 );
-
-
-
+    remove_action( 'woocommerce_order_status_changed', array( $email['Polen_WC_Payment_Approved'], 'trigger' ), 1 );
 
   }
 }
