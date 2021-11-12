@@ -130,11 +130,13 @@ class Polen_WooCommerce
             return $post_id;
         }
 
-        if ($_POST['no_send_email'] != 'on') {
+        if (!isset($_POST['no_send_email']) || $_POST['no_send_email'] != 'on') {
             return $post_id;
         }
 
         $email_class = wc()->mailer()->get_emails();
+
+        remove_action( 'woocommerce_order_status_payment-approved_notification', array( $email_class->emails['Polen_WC_Payment_Approved'], 'trigger' ), 1 );
 
         remove_action( 'woocommerce_order_status_pending_to_payment-approved_notification', array( $email_class->emails['Polen_WC_Payment_Approved'], 'trigger' ) );
         remove_action( 'woocommerce_order_status_failed_to_payment-approved_notification', array( $email_class->emails['Polen_WC_Payment_Approved'], 'trigger' ) );
