@@ -369,3 +369,30 @@ add_action('wc_gateway_stripe_process_webhook_payment_error', function($order, $
 add_filter('wc_stripe_save_to_account_text', function(){
 	return 'Salvar os dados do cartão de credito para proximas compras.';
 });
+
+add_action( 'woocommerce_email', 'unhook_those_pesky_emails' );
+
+function unhook_those_pesky_emails( $email_class ) {
+
+  if ( is_admin() && ! wp_doing_ajax() ) {
+
+    // New order emails
+    remove_action( 'woocommerce_order_status_pending_to_processing_notification', array( $email_class->emails['WC_Email_New_Order'], 'trigger' ) );
+    remove_action( 'woocommerce_order_status_pending_to_completed_notification', array( $email_class->emails['WC_Email_New_Order'], 'trigger' ) );
+    remove_action( 'woocommerce_order_status_pending_to_on-hold_notification', array( $email_class->emails['WC_Email_New_Order'], 'trigger' ) );
+    remove_action( 'woocommerce_order_status_failed_to_processing_notification', array( $email_class->emails['WC_Email_New_Order'], 'trigger' ) );
+    remove_action( 'woocommerce_order_status_failed_to_completed_notification', array( $email_class->emails['WC_Email_New_Order'], 'trigger' ) );
+    remove_action( 'woocommerce_order_status_failed_to_on-hold_notification', array( $email_class->emails['WC_Email_New_Order'], 'trigger' ) );
+
+    // Processing order emails
+    remove_action( 'woocommerce_order_status_pending_to_processing_notification', array( $email_class->emails['WC_Email_Customer_Processing_Order'], 'trigger' ) );
+    remove_action( 'woocommerce_order_status_pending_to_on-hold_notification', array( $email_class->emails['WC_Email_Customer_Processing_Order'], 'trigger' ) );
+
+    // Completed order emails
+    remove_action( 'woocommerce_order_status_completed_notification', array( $email_class->emails['WC_Email_Customer_Completed_Order'], 'trigger' ) );
+
+    remove_action( 'woocommerce_order_status_completed_notification', array( $email_class->emails['Polen_WC_Payment_Approved'], 'trigger' ) );
+
+    remove_action( 'woocommerce_order_status_payment-approved_notification', array( $email_class->emails['Polen_WC_Payment_Approved'], 'trigger' ), 3 );
+  }
+}
