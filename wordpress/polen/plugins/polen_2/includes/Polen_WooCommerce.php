@@ -136,10 +136,10 @@ class Polen_WooCommerce
 
         $email_class = wc()->mailer()->get_emails();
 
-        remove_action( 'woocommerce_order_status_pending_to_payment-approved_notification', array( $email_class->emails['WC_Email_New_Order'], 'trigger' ) );
-        remove_action( 'woocommerce_order_status_failed_to_payment-approved_notification', array( $email_class->emails['WC_Email_New_Order'], 'trigger' ) );
-        remove_action( 'woocommerce_order_status_order-expired_to_payment-approved_notification', array( $email_class->emails['WC_Email_New_Order'], 'trigger' ) );
-        remove_action( 'woocommerce_order_status_talent-accepted_to_payment-approved_notification', array( $email_class->emails['WC_Email_New_Order'], 'trigger' ) );
+        remove_action( 'woocommerce_order_status_pending_to_payment-approved_notification', array( $email_class->emails['Polen_WC_Payment_Approved'], 'trigger' ) );
+        remove_action( 'woocommerce_order_status_failed_to_payment-approved_notification', array( $email_class->emails['Polen_WC_Payment_Approved'], 'trigger' ) );
+        remove_action( 'woocommerce_order_status_order-expired_to_payment-approved_notification', array( $email_class->emails['Polen_WC_Payment_Approved'], 'trigger' ) );
+        remove_action( 'woocommerce_order_status_talent-accepted_to_payment-approved_notification', array( $email_class->emails['Polen_WC_Payment_Approved'], 'trigger' ) );
     }
 
 
