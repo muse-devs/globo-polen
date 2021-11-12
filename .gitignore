@@ -74,6 +74,8 @@ yarn.lock
 
 # Ignorar dependencias do composer
 wordpress/polen/plugins/polen_2/vendor/*
+wordpress/polen/plugins/polen_2/composer.lock
+wordpress/debug.html
 
 # Ignorar arquivos descompactados no diretório de uploads padrão
 uploads/*

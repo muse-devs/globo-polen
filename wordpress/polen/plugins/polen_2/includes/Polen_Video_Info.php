@@ -192,7 +192,7 @@ class Polen_Video_Info extends Polen_DB
     static public function select_by_video_logo_waiting( int $limit = 4 )
     {
         $self_obj = new static();
-        $fields = array( 'video_logo_status' => self::VIDEO_LOGO_STATUS_WAITING, /*'vimeo_process_complete' => "1"*/ );
+        $fields = array( 'video_logo_status' => self::VIDEO_LOGO_STATUS_WAITING, 'vimeo_process_complete' => "1" );
         $result_raw = $self_obj->get_result_multi_fields( $fields, $limit, "ORDER BY ID ASC" );
         return $result_raw;//self::create_instance_many( $result_raw );
     }
@@ -240,6 +240,22 @@ class Polen_Video_Info extends Polen_DB
     {
         $pvi = new self();
         $results = $pvi->get_results( 'vimeo_process_complete', '0', '%d' );
+        return self::create_instance_many( $results );
+    }
+
+
+    /**
+     * Retorna os videos nao processados pelo Vimeo
+     * @return array [Polen_Video_Info]
+     */
+    static public function select_all_videos_complete_video_logo_sended()
+    {
+        $pvi = new self();
+        $args = [
+            'vimeo_process_complete' => '1',
+            'video_logo_status' => self::VIDEO_LOGO_STATUS_SENDED,
+        ];
+        $results = $pvi->get_result_multi_fields( $args );
         return self::create_instance_many( $results );
     }
 
