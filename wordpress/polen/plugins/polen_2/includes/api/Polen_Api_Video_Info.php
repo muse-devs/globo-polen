@@ -2,9 +2,11 @@
 
 namespace Polen\Includes\API;
 
+use Polen\Includes\Debug;
 use Polen\Includes\Polen_Video_Info;
 use WP_Error;
 use WP_REST_Request;
+use WP_REST_Response;
 use WP_REST_Server;
 
 class Polen_Api_Video_Info
@@ -38,6 +40,15 @@ class Polen_Api_Video_Info
             'schema' => array( $this, 'get_item_schema' )
         ) );
 
+        register_rest_route( $this->namespace, '/' . $this->resource_name . '/(?P<id>[\d]+)/video-logo-status', array(
+            array(
+                'methods' => WP_REST_Server::EDITABLE,
+                'callback' => array( $this, 'update_video_logo_status_item' ),
+                'permission_callback' => array( $this, 'update_video_logo_status_permissions_check' )
+            ),
+            'schema' => array( $this, 'get_item_schema' )
+        ) );
+
         register_rest_route( $this->namespace, '/' . $this->resource_name . '/video-logo-status/waiting', array(
             array(
                 'methods' => WP_REST_Server::READABLE,
@@ -57,6 +68,19 @@ class Polen_Api_Video_Info
     public function get_items_permissions_check( $request )
     {
         if( !current_user_can( 'read' ) ) {
+            return new WP_Error( 'rest_forbidden', 'Você não tem acesso a esse endpoint', array( 'status' => $this->authorization_status_code() ) );
+        }
+        return true;
+    }
+
+
+    /**
+     * 
+     * @param WP_REST_Request
+     */
+    public function update_video_logo_status_permissions_check( $request )
+    {
+        if( !current_user_can('administrator') ) {
             return new WP_Error( 'rest_forbidden', 'Você não tem acesso a esse endpoint', array( 'status' => $this->authorization_status_code() ) );
         }
         return true;
@@ -106,6 +130,43 @@ class Polen_Api_Video_Info
         }
         
         return rest_ensure_response( $data );
+    }
+
+
+
+    /**
+     * 
+     * @param WP_REST_Request
+     * @return WP_Error
+     * @return WP_REST_Response
+     */
+    public function update_video_logo_status_item( $request )
+    {
+        $video_info_id = isset( $request[ 'ID' ] ) ? $request[ 'ID' ] : $request[ 'id' ];
+        $status = $request->get_param( 'video_logo_status' );
+
+        if( empty( $video_info_id ) ) {
+            return new WP_Error( 'rest_forbidden', 'ID inválido', array( 'status' => $this->authorization_status_code() ) );
+        }
+        $statuses_possible = [
+            Polen_Video_Info::VIDEO_LOGO_STATUS_COMPLETED,
+            Polen_Video_Info::VIDEO_LOGO_STATUS_NO,
+            Polen_Video_Info::VIDEO_LOGO_STATUS_SENDED,
+            Polen_Video_Info::VIDEO_LOGO_STATUS_WAITING,
+        ];
+        if( !in_array( $status, $statuses_possible ) ) {
+            return new WP_Error( 'rest_forbidden', 'Status [video_logo_status] inválido', array( 'status' => $this->authorization_status_code() ) );
+        }
+        $video_info = Polen_Video_Info::get_by_id_static( $video_info_id );
+        $video_info->video_logo_status = $status;
+        $video_info->update();
+
+        $data = $this->prepare_item_for_response( 
+            Polen_Video_Info::get_by_id_static( $video_info_id ),
+            $request
+        );
+
+        return new WP_REST_Response( $data, 200 );
     }
 
     /**

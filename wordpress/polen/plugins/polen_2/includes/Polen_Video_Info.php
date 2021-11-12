@@ -243,6 +243,22 @@ class Polen_Video_Info extends Polen_DB
         return self::create_instance_many( $results );
     }
 
+
+    /**
+     * Retorna os videos nao processados pelo Vimeo
+     * @return array [Polen_Video_Info]
+     */
+    static public function select_all_videos_complete_video_logo_sended()
+    {
+        $pvi = new self();
+        $args = [
+            'vimeo_process_complete' => '1',
+            'video_logo_status' => self::VIDEO_LOGO_STATUS_SENDED,
+        ];
+        $results = $pvi->get_result_multi_fields( $args );
+        return self::create_instance_many( $results );
+    }
+
     
     /**
      * Cria um array de objectos do Polen_Video_Info
