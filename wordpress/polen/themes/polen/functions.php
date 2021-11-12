@@ -376,8 +376,6 @@ function unhook_those_pesky_emails( $email_class ) {
 
   if ( is_admin() ) {
 
-    $email = \WC_Emails::instance();
-
     // New order emails
 //    remove_action( 'woocommerce_order_status_pending_to_processing_notification', array( $email_class->emails['WC_Email_New_Order'], 'trigger' ) );
 //    remove_action( 'woocommerce_order_status_pending_to_completed_notification', array( $email_class->emails['WC_Email_New_Order'], 'trigger' ) );
@@ -394,7 +392,16 @@ function unhook_those_pesky_emails( $email_class ) {
 //    remove_action( 'woocommerce_order_status_completed_notification', array( $email_class->emails['WC_Email_Customer_Completed_Order'], 'trigger' ) );
 
 
-    remove_action( 'woocommerce_order_status_changed', array( $email['Polen_WC_Payment_Approved'], 'trigger' ), 1 );
+    remove_action( 'woocommerce_order_status_changed', array( $email_class->emails['Polen_WC_Payment_Approved'], 'trigger' ), 1 );
+
+    remove_action( 'woocommerce_order_status_pending_to_payment-approved_notification', array( $email_class->emails['Polen_WC_Payment_Approved'], 'trigger' ), 1 );
+    remove_action( 'woocommerce_order_status_pending_to_payment-approved_notification', array( $email_class->emails['WC_Email_New_Order'], 'trigger' ), 1 );
+    remove_action( 'woocommerce_order_status_pending_to_payment-approved_notification', array( $email_class->emails['WC_Email_Customer_Completed_Order'], 'trigger' ), 1 );
+
+    remove_action( 'woocommerce_order_status_payment-approved_notification', array( $email_class->emails['WC_Email_Customer_Payment-Approved_Order'], 'trigger' ) );
+    remove_action( 'woocommerce_order_status_payment-approved_notification', array( $email_class->emails['Polen_WC_Payment_Approved'], 'trigger' ) );
+
+
 
   }
 }
