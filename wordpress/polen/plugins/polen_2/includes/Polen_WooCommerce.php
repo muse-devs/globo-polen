@@ -96,14 +96,14 @@ class Polen_WooCommerce
 
             add_action( 'woocommerce_update_product', array( $this, 'on_product_save' ) );
 
-            add_action( 'save_post', array( $this, 'save_metabox_post' ) );
+            add_action( 'save_post_post_polen_media', array( $this, 'save_metabox_post' ) );
+            add_action( 'save_post', array( $this, 'change_status' ) );
 
             //Todas as compras gratis vão para o status payment-approved
             add_action( 'woocommerce_checkout_no_payment_needed_redirect', [ $this, 'set_free_order_payment_approved' ], 10, 3 );
-
         }
     }
-    
+
     /**
      * Salvar os inputs customizados do CPT
      *
@@ -119,6 +119,29 @@ class Polen_WooCommerce
         update_post_meta($post_id, 'url_media', sanitize_text_field($_POST['url_media']));
         update_post_meta($post_id, 'date_media', sanitize_text_field($_POST['date_media']));
     }
+
+    public function change_status($post_id)
+    {
+        if (!current_user_can( 'edit_page', $post_id )) {
+            return $post_id;
+        }
+
+        if (defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE) {
+            return $post_id;
+        }
+
+        if ($_POST['no_send_email'] != 'on') {
+            return $post_id;
+        }
+
+        $email_class = wc()->mailer()->get_emails();
+
+        remove_action( 'woocommerce_order_status_pending_to_payment-approved_notification', array( $email_class->emails['WC_Email_New_Order'], 'trigger' ) );
+        remove_action( 'woocommerce_order_status_failed_to_payment-approved_notification', array( $email_class->emails['WC_Email_New_Order'], 'trigger' ) );
+        remove_action( 'woocommerce_order_status_order-expired_to_payment-approved_notification', array( $email_class->emails['WC_Email_New_Order'], 'trigger' ) );
+        remove_action( 'woocommerce_order_status_talent-accepted_to_payment-approved_notification', array( $email_class->emails['WC_Email_New_Order'], 'trigger' ) );
+    }
+
 
     /**
      * Colocar os status de uma order gratis como pagamento aprovado
@@ -196,7 +219,10 @@ class Polen_WooCommerce
     public function add_metaboxes() {
         global $current_screen;
 
+
         add_meta_box( 'Polen_Post_Media', 'Configurações Gerais', array( $this, 'metabox_polen_media' ), 'post_polen_media', 'normal', 'low' );
+
+
         if( $current_screen && ! is_null( $current_screen ) && isset( $current_screen->id ) && $current_screen->id == 'shop_order' && isset( $_REQUEST['action'] ) && $_REQUEST['action'] == 'edit' )
         {
             add_meta_box( 'Polen_Order_Details', 'Instruções', array( $this, 'metabox_order_details' ), 'shop_order', 'normal', 'low' );
@@ -246,7 +272,7 @@ class Polen_WooCommerce
     }
 
     /**
-     * Adicionar metabox na edição de midias
+     * Adicionar metabox na edição de produtos
      */
     public function metabox_polen_media()
     {
@@ -285,7 +311,7 @@ class Polen_WooCommerce
                 'offered_by'            => 'Oferecido por', 
                 'video_to'              => 'Vídeo para', 
                 'name_to_video'         => 'Quem vai receber?', 
-                'email_to_video'        => 'e-mail',
+                'email_to_video'        => 'E-mail',
                 'video_category'        => 'Ocasião', 
                 'instructions_to_video' => 'Instruções do vídeo', 
                 'allow_video_on_page'   => 'Publico?',
