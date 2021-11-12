@@ -133,17 +133,13 @@ class Polen_WooCommerce
         if ($_POST['no_send_email'] != 'on') {
             return $post_id;
         }
-        $email_class = wc()->mailer()->get_emails();
-//        $email = \WC_Emails::instance();
-//        remove_action( 'woocommerce_order_status_changed', array( $email['Polen_WC_Payment_Approved'], 'trigger' ) );
 
-        remove_action(
-            "woocommerce_order_status_payment-approved_notification",
-            array(
-                $email_class->emails["WC_Email_Customer_Completed_Order"],
-                "trigger"
-            )
-        );
+        $email_class = wc()->mailer()->get_emails();
+
+        remove_action( 'woocommerce_order_status_pending_to_payment-approved_notification', array( $email_class->emails['WC_Email_New_Order'], 'trigger' ) );
+        remove_action( 'woocommerce_order_status_failed_to_payment-approved_notification', array( $email_class->emails['WC_Email_New_Order'], 'trigger' ) );
+        remove_action( 'woocommerce_order_status_order-expired_to_payment-approved_notification', array( $email_class->emails['WC_Email_New_Order'], 'trigger' ) );
+        remove_action( 'woocommerce_order_status_talent-accepted_to_payment-approved_notification', array( $email_class->emails['WC_Email_New_Order'], 'trigger' ) );
     }
 
 
