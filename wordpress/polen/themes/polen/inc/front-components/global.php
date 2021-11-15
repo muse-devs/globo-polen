@@ -579,14 +579,14 @@ function polen_box_related_product_by_product_id($product_id)
  * @param string $newsletter
  * @return HTML
  */
-function polen_form_signin_newsletter(string $event = 'newsletter')
+function polen_form_signin_newsletter(string $id = "newsletter", string $event = 'newsletter')
 {
   $inputs = new Material_Inputs();
 ?>
   <div id="signin-newsletter" class="col-md-5 mt-4">
     <h5 class="title typo typo-title typo-small">Se conecte com a gente!</h5>
     <p class="description typo typo-p typo-small typo-double-line-height">Receba novidades e conteúdos exclusivos da Polen.</p>
-    <form id="newsletter" action="/" method="POST">
+    <form id="<?php echo $id; ?>" action="/" method="POST">
       <div class="row">
         <div class="col-md-8 mb-2 mb-md-0">
           <?php
