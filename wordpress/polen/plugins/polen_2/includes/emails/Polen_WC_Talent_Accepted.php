@@ -52,6 +52,14 @@ class Polen_WC_Talent_Accepted extends \WC_Email {
 			if ( ! $this->is_enabled() || ! $this->get_recipient() ) {
 				return;
 			}
+
+            /**
+             * Não disparar email caso flag no_send_email estiver marcada
+             */
+
+            if (get_post_meta($order_id, 'no_send_email', true) == 1) {
+                return;
+            }
 			
 			$cart_item = Polen_Cart_Item_Factory::polen_cart_item_from_order( $this->object );
 			$this->product = $cart_item->get_product();
