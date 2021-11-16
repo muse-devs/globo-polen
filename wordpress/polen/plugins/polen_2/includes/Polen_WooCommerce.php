@@ -134,12 +134,12 @@ class Polen_WooCommerce
             return $post_id;
         }
 
-        $meta_value = 1;
-        if (!isset($_POST['no_send_email']) || $_POST['no_send_email'] != 'on') {
-            $meta_value = 0;
+        $meta_value = 0;
+        if (isset($_POST['send_email']) && $_POST['send_email'] == 'on') {
+            $meta_value = 1;
         }
 
-        update_post_meta($post_id, 'no_send_email', $meta_value);
+        update_post_meta($post_id, 'send_email', $meta_value);
     }
 
 
