@@ -47,6 +47,14 @@ class Polen_WC_Order_Expired extends \WC_Email {
 				return;
 			}
 
+            /**
+             * Não disparar email caso flag no_send_email estiver marcada
+             */
+
+            if (get_post_meta($order_id, 'no_send_email', true) == 1) {
+                return;
+            }
+
 			/**
 			 * Envio de e-mail para o Fã
 			 */

@@ -260,11 +260,11 @@ class Promotional_Event_Admin
             wc_add_order_item_meta( $order_item_id, '_line_total'           , 0, true );
 
             $interval  = Polen_Order::get_interval_order_event();
-            $timestamp = Polen_Order::get_deadline_timestamp_by_social_event( $order, $interval );
+            $timestamp = Polen_Order::get_deadline_timestamp( $order, $interval );
             $order->add_meta_data( Polen_Order::META_KEY_DEADLINE, $timestamp, true );
 
             $order->save();
-
+            
             $email = WC_Emails::instance();
             $order->update_status( Polen_WooCommerce::ORDER_STATUS_PAYMENT_APPROVED, 'order_note', true );
             
