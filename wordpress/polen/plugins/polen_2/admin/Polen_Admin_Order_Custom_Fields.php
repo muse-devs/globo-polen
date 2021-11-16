@@ -155,9 +155,9 @@ class Polen_Admin_Order_Custom_Fields
 
     function checkbox_no_send_notification($order)
     {  ?>
-        <label for="no_send_email">
-            <h4><?php echo "Não enviar e-mail"; ?></h4>
-            <input type="checkbox" name="no_send_email" id="no_send_email">
+        <label for="send_email">
+            <h4><?php echo "Enviar e-mail de atualização do status"; ?></h4>
+            <input type="checkbox" name="send_email" id="send_email">
         </label>
     <?php }
 }

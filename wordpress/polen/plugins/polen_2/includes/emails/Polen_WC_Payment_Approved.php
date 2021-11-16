@@ -88,8 +88,7 @@ class Polen_WC_Payment_Approved extends \WC_Email {
             /**
              * Não disparar email caso flag no_send_email estiver marcada
              */
-
-            if (get_post_meta($order_id, 'no_send_email', true) == 1) {
+            if (is_admin() === true && get_post_meta($order_id, 'send_email', true) != 1) {
                 return;
             }
 			
