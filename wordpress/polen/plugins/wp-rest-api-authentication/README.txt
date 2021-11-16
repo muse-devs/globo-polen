@@ -1,9 +1,9 @@
 === WordPress REST API Authentication ===
 Contributors: cyberlord92
-Tags: api, jwt, token, oauth, json web token, wp-json, protect-api, REST, REST endpoints, secure api, api key auth, basic auth
+Tags: api, jwt, token, REST, rest-api, json web token, oauth, protect-api, REST endpoints, secure api, api key auth, basic auth
 Requires at least: 3.0.1
-Tested up to: 5.8.1
-Stable tag: 1.6.4
+Tested up to: 5.8.2
+Stable tag: 1.6.5
 Requires PHP: 5.6
 License: MIT/Expat
 License URI: https://docs.miniorange.com/mit-license
@@ -18,6 +18,7 @@ Also, It allows you to log in and register to WordPress REST APIs using any auth
 
 You can protect api with ease and in a highly secure way using this plugin. It also extends the JWT(JSON Web tokens) authentication to validate the REST APIs access based on the JWT token. If the JWT validation is successful, it will allow accessing the requested resource else if the JWT validation is unsuccessful then it will not allow accessing the requested resource.
 
+The plugin also provides the feature for authentication of custom-developed REST endpoints and third-party plugin REST API endpoints like that of Woocommerce, Learndash, Buddypress, Gravity forms etc.
 
 = Usecases =
 
@@ -27,7 +28,7 @@ You can protect api with ease and in a highly secure way using this plugin. It a
 * Authenticate/Protect/Secure WordPress REST API endpoints with the access token / jwt token from other IDPs(OAuth/OIDC providers)
 * Securely Login and register into Mobile or other client applications using REST APIs
 * Obtain user based JWT token to use as authentication source to login and register in other platforms.
-* Authenticate Woocommerce REST API endpoints by bypassing WooCommerce consumers credentials security and instead use own authentication methods to control the data access and thus improving security and removes chances for exposing the WC credentials.
+* Authenticate Woocommerce REST API endpoints by bypassing WooCommerce consumers credentials security and instead of using own authentication methods to control the data access and thus improving security and removing chances for exposing the WC credentials.
 * Authenticate/secure WordPress REST APIs access using Firebase JWT token, any external JWT token, any OAuth 2.0/OpenID Connect(OIDC) provider access/id-token like Azure AD, Azure B2C, Okta, Keycloak, ADFS, AWS Cognito etc or that provided by Social login providers like Google, Facebook, Apple.
 
 The plugin provides an interface for applications to interact with your WordPress REST API endpoints by sending and receiving data as JSON (JavaScript Object Notation) objects. Also, It provides a user-friendly user interface of the plugin to configure the methods and implement them very easily. You can easily secure/protect your WordPress REST API endpoints with ease.
@@ -67,7 +68,7 @@ This authentication is the most secure authentication method and features like t
 
 = API Authentication for Third Party OAuth 2.0 Provider( using Introspection Endpoint / User Info Endpoint or JWKS URL) =
 
-*	If you are looking for protecting/restricting access to your WP REST APIs using your OAuth Provider/Identity provider, then you should go for Third Party Provider Authentication method. It would be helpful to authenticate the WordPress REST APIs with different platforms tokens like the access or JWT token of Google, AWS Cognito, Auth0, miniOrange, firebase, Amazon, Apple, Facebook, Okta etc.
+*	If you are looking for protecting/restrict access to your WP REST APIs using your OAuth Provider/Identity provider, then you should go for Third Party Provider Authentication method. It would be helpful to authenticate the WordPress REST APIs with different platforms tokens like the access or JWT token of Google, AWS Cognito, Auth0, miniOrange, firebase, Amazon, Apple, Facebook, Okta etc.
 So, if you are already using an external OAuth/OpenID Connect (Identity provider) which provides you with an access token/id token or a JWT token, then that token can be used to authenticate the WordPress REST APIs and the plugin will validate the token directly from these token providers and only on successful validation, API endpoints are allowed to access. 
 
 
@@ -160,7 +161,7 @@ This plugin does not store any user data.
     The REST API authentication prevents unauthorized access to your WordPress APIs. It reduces potential attack factors.
 	
 = How to enable API access in WooCommerce?
-    You can enable API access in WooCommerce using our WP REST API Authentication plugin. Please reach out to us at info@xecurify.com.
+    You can enable API access in WooCommerce using our WP REST API Authentication plugin. Please reach out to us at oauthsupport@xecurify.com.
 
 = How does the REST API Authentication plugin work? =
 	You just have to select your Authentication Method.
@@ -188,6 +189,9 @@ This plugin does not store any user data.
 = How do I authenticate WordPress REST API endpoints using external JWT token or access token provided by OAuth/OIDC/Social Login providers? = 
      This plugin provides you with an authentication method called the 'Third Party Provider' authentication method in which the JWT token or access token obtained from external identities(OAuth/OIDC providers) like Firebase, Okta, Azure, Keycloak, ADFS, AWS Cognito, Google, Facebook, Apple etc. can be passed along with API request in the header and the plugin validates that JWT / access token directly from these external sources/providers. 
 
+= How do I access user-specific data for Woocommerce REST API without the need to pass actual Woocommerce API credentials? =
+	This plugin provides a way to bypass Woocommerce security and instead authenticate APIs using the authentication methods, hence improvising the security and hence no chance of Woocommerce credentials getting compromised. The authentication token passed in the API request will validate the user and results into user-specific data only. For more information, please contact us at oauthsupport@xecurify.com
+
 
 == Screenshots ==
 
@@ -197,6 +201,10 @@ This plugin does not store any user data.
 4. Custom API Integration
 
 == Changelog ==
+
+= 1.6.5 =
+* WordPress 5.8.2 compatiblity
+* UI Changes
 
 = 1.6.4 =
 * Security Improvements
