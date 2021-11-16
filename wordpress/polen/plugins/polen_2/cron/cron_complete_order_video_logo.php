@@ -37,6 +37,7 @@ foreach ( $videos as $video ) {
             $order = wc_get_order( $video->order_id );
             $order->update_status( Polen_Order::SLUG_ORDER_COMPLETE, 'Video com logo concluido' );
             $vimeo_api->request( $video->vimeo_id . '/presets/120906813', [], 'PUT');
+            $vimeo_api->request( $video->vimeo_id . '/pictures', [ 'time' => '0.01', 'active' => true ], 'POST' );
             echo "Achei: {$video->vimeo_id} \n";
         }
         
