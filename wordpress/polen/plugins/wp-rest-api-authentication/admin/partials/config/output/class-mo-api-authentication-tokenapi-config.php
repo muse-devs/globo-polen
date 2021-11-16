@@ -18,7 +18,7 @@ class Mo_API_Authentication_Admin_TokenAPI_Config {
 	?>
 	<div id="mo_api_authentication_support_layout" class="mo_api_authentication_support_layout">
 	<div class="mo_api_authentication_common_div_css">
-		<h3>API Reference for Token API : <u><b><small><a href="https://plugins.miniorange.com/rest-api-key-authentication-method" target="_blank" style="color: red">[SETUP GUIDE]</a></small></b></u></h4>
+		<h3>API Reference for Token API : <u><b><small><a href="https://plugins.miniorange.com/rest-api-key-authentication-method" target="_blank" rel="noopener" style="color: red">[SETUP GUIDE]</a></small></b></u></h4>
 		<table class="mo_api_authentication_settings_table">
 			<tr>
 				Once you generate the API Key (token), you can access WP REST API's like below.<br><br>

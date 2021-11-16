@@ -3,7 +3,7 @@ Contributors: cyberlord92
 Tags: api, jwt, token, oauth, json web token, wp-json, protect-api, REST, REST endpoints, secure api, api key auth, basic auth
 Requires at least: 3.0.1
 Tested up to: 5.8.1
-Stable tag: 1.6.3
+Stable tag: 1.6.4
 Requires PHP: 5.6
 License: MIT/Expat
 License URI: https://docs.miniorange.com/mit-license
@@ -197,6 +197,9 @@ This plugin does not store any user data.
 4. Custom API Integration
 
 == Changelog ==
+
+= 1.6.4 =
+* Security Improvements
 
 = 1.6.3 =
 * WordsPress 5.8.1 compatability

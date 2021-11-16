@@ -151,9 +151,9 @@ class Mo_API_Authentication_Admin_Menu {
 	       	<h1>
 	            miniOrange API Authentication&nbsp
 				<a class="add-new-h2" href="admin.php?page=mo_api_authentication_settings&tab=licensing"  style="background: #ffac11;color: #212121;border-color:white">Premium Plans</a>
-	           	<a class="add-new-h2" href="https://forum.miniorange.com/" target="_blank">Ask questions on our forum</a>
-				<a class="add-new-h2" href="https://faq.miniorange.com/" target="_blank">FAQ</a>
-				<a class="add-new-h2" href="https://plugins.miniorange.com/wordpress-rest-api-authentication" target="_blank" style="background-color: #A61407;color:white;border-color:white">Learn more</a>
+	           	<a class="add-new-h2" href="https://forum.miniorange.com/" target="_blank" rel="noopener">Ask questions on our forum</a>
+				<a class="add-new-h2" href="https://faq.miniorange.com/" target="_blank" rel="noopener">FAQ</a>
+				<a class="add-new-h2" href="https://plugins.miniorange.com/wordpress-rest-api-authentication" target="_blank" rel="noopener" style="background-color: #A61407;color:white;border-color:white">Learn more</a>
 				<a class="add-new-h2" href="admin.php?page=mo_api_authentication_settings&tab=postman" style="background-color: #ff6c37;color:white;border-color:white">Postman Samples</a>
 	       	</h1>
        	</div>

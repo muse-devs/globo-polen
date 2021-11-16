@@ -92,7 +92,7 @@ class Mo_API_Authentication_Admin_Basic_Auth_Config {
 		</script>
 		<?php } ?>
 		<div id="mo_api_authentication_support_basicoauth" class="mo_api_authentication_common_div_css">
-			<h3>API Reference for Basic Auth : <u><b><small><a href="https://plugins.miniorange.com/wordpress-rest-api-basic-authentication-method" target="_blank" style="color: red">[SETUP GUIDE]</a></small></b></u></h3>
+			<h3>API Reference for Basic Auth : <u><b><small><a href="https://plugins.miniorange.com/wordpress-rest-api-basic-authentication-method" target="_blank" rel="noopener" style="color: red">[SETUP GUIDE]</a></small></b></u></h3>
 			<table class="mo_api_authentication_settings_table">
 				<tr>
 					After you save the Basic Authentication Configuration, you can access WP REST API's like below.<br><br>
