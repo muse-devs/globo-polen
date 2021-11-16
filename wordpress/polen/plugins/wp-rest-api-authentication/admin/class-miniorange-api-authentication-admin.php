@@ -577,7 +577,7 @@ class Miniorange_API_Authentication_Admin {
 					update_option('message', 'Please fill up Usecase, Email field and Requested demo plan to submit your query.');
 					mo_api_auth_show_error_message();
 				} else {
-					$url = 'http://demo.miniorange.com/wordpress-oauth/';
+					$url = 'https://demo.miniorange.com/wordpress-oauth/';
 
 					$headers = array( 'Content-Type' => 'application/x-www-form-urlencoded', 'charset' => 'UTF - 8');
 					$args = array(

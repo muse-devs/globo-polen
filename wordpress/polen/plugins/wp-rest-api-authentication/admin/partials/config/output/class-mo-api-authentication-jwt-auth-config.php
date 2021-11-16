@@ -7,7 +7,7 @@ class Mo_API_Authentication_Admin_Jwt_Auth_Config {
 	<div id="mo_api_authentication_support_layout" class="mo_api_authentication_support_layout">
 		<div>
 		<div class="mo_api_authentication_common_div_css">
-			<h3>API Reference for JWT Authentication : <u><b><small><a href="https://plugins.miniorange.com/wordpress-rest-api-jwt-authentication-method" target="_blank" style="color: red;size: 2px;">[SETUP GUIDE]</a></small></b></u></h3>
+			<h3>API Reference for JWT Authentication : <u><b><small><a href="https://plugins.miniorange.com/wordpress-rest-api-jwt-authentication-method" target="_blank" rel="noopener" style="color: red;size: 2px;">[SETUP GUIDE]</a></small></b></u></h3>
 			<div class="row">
 			<div class="mo_api_authentication_box">
 					<div class="mo_api_authentication_box_header">
