@@ -1140,10 +1140,6 @@
   align-items: center;
   justify-content: center;
   width: auto;
-  font-weight: 400;
-  color: var(--category);
-  font-size: 14px;
-  line-height: 18.75px;
   margin-bottom: 1em;
   margin-right: 8px;
   border: 1px solid var(--category);
@@ -1157,6 +1153,14 @@
     margin-right: 8px;
     padding: 0px 25px;
     min-width: 180px;
+    min-height: 42px;
+  }
+  h5 {
+    font-weight: 400;
+    color: var(--category);
+    font-size: 14px;
+    line-height: 18.75px;
+    margin: 0px;
   }
   img {
     margin-right: 0.5em;
