@@ -120,6 +120,10 @@ class Polen_WooCommerce
         update_post_meta($post_id, 'date_media', sanitize_text_field($_POST['date_media']));
     }
 
+    /**
+     * Salvar status de envio do email na atualização da order
+     * para ser verificado no disparo do email
+     */
     public function change_status($post_id)
     {
         if (!current_user_can( 'edit_page', $post_id )) {
@@ -130,17 +134,12 @@ class Polen_WooCommerce
             return $post_id;
         }
 
-        if (!isset($_POST['no_send_email']) || $_POST['no_send_email'] != 'on') {
-            return $post_id;
+        $meta_value = 0;
+        if (isset($_POST['send_email']) && $_POST['send_email'] == 'on') {
+            $meta_value = 1;
         }
 
-        $email_class = wc()->mailer()->get_emails();
-        $email = \WC_Emails::instance();
-
-        remove_action( 'woocommerce_order_status_payment-approved_notification', array( $email->Polen_WC_Payment_Approved, 'trigger' ), 1 );
-        remove_action( 'woocommerce_order_status_changed', array( $email->Polen_WC_Payment_Approved, 'trigger' ), 2 );
-
-        remove_action( 'woocommerce_order_status_payment-approved_notification', array( $email_class->emails['Polen_WC_Payment_Approved'], 'trigger' ), 3 );
+        update_post_meta($post_id, 'send_email', $meta_value);
     }
 
 

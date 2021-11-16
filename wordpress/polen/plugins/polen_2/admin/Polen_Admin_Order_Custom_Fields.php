@@ -16,7 +16,11 @@ class Polen_Admin_Order_Custom_Fields
     {
         add_action( 'wp_ajax_polen_edit_order_custom_fields', [ $this, 'edit_order_custom_fields' ] );
         add_action( 'wp_ajax_polen_edit_order_custom_fields_deadline', [ $this, 'edit_order_custom_fields_deadline' ] );
-        add_action( 'woocommerce_admin_order_data_after_order_details', [ $this, 'checkbox_no_send_notification' ] );
+
+        if ($static) {
+            add_action( 'woocommerce_admin_order_data_after_order_details', [ $this, 'checkbox_no_send_notification' ] );
+        }
+
         // add_action( 'wp_ajax_nopriv_polen_edit_order_custom_fields', [ $this, 'edit_order_custom_fields' ] );
     }
 
@@ -151,9 +155,9 @@ class Polen_Admin_Order_Custom_Fields
 
     function checkbox_no_send_notification($order)
     {  ?>
-        <label for="no_send_email">
-            <h4><?php echo "Não enviar e-mail"; ?></h4>
-            <input type="checkbox" name="no_send_email" id="no_send_email" checked="checked">
+        <label for="send_email">
+            <h4><?php echo "Enviar e-mail de atualização do status"; ?></h4>
+            <input type="checkbox" name="send_email" id="send_email">
         </label>
     <?php }
 }

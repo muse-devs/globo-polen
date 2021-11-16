@@ -82,12 +82,12 @@ this["wc"] = this["wc"] || {}; this["wc"]["explat"] =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 461);
+/******/ 	return __webpack_require__(__webpack_require__.s = 463);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 265:
+/***/ 266:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -347,7 +347,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 461:
+/***/ 463:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -534,7 +534,7 @@ function __spreadArray(to, from, pack) {
             ar[i] = from[i];
         }
     }
-    return to.concat(ar || from);
+    return to.concat(ar || Array.prototype.slice.call(from));
 }
 
 function __await(v) {
@@ -1244,7 +1244,7 @@ const assignment_fetchExperimentAssignment = async ({
   return await response.json();
 };
 // EXTERNAL MODULE: ./packages/explat/node_modules/cookie/index.js
-var cookie = __webpack_require__(265);
+var cookie = __webpack_require__(266);
 var cookie_default = /*#__PURE__*/__webpack_require__.n(cookie);
 
 // CONCATENATED MODULE: ./packages/explat/build-module/anon.js
