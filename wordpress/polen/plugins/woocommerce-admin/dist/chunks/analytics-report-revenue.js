@@ -1,6 +1,6 @@
 (window["__wcAdmin_webpackJsonp"] = window["__wcAdmin_webpackJsonp"] || []).push([[13],{
 
-/***/ 478:
+/***/ 481:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -18,22 +18,22 @@ var prop_types = __webpack_require__(1);
 var prop_types_default = /*#__PURE__*/__webpack_require__.n(prop_types);
 
 // EXTERNAL MODULE: ./client/analytics/report/revenue/config.js
-var config = __webpack_require__(525);
+var config = __webpack_require__(528);
 
 // EXTERNAL MODULE: ./client/lib/get-selected-chart/index.js
-var get_selected_chart = __webpack_require__(507);
+var get_selected_chart = __webpack_require__(510);
 
 // EXTERNAL MODULE: ./client/analytics/components/report-chart/index.js + 1 modules
-var report_chart = __webpack_require__(505);
+var report_chart = __webpack_require__(508);
 
 // EXTERNAL MODULE: ./client/analytics/components/report-summary/index.js
-var report_summary = __webpack_require__(508);
+var report_summary = __webpack_require__(511);
 
 // EXTERNAL MODULE: external ["wp","i18n"]
 var external_wp_i18n_ = __webpack_require__(2);
 
 // EXTERNAL MODULE: external ["wp","date"]
-var external_wp_date_ = __webpack_require__(58);
+var external_wp_date_ = __webpack_require__(59);
 
 // EXTERNAL MODULE: external ["wp","data"]
 var external_wp_data_ = __webpack_require__(7);
@@ -42,7 +42,7 @@ var external_wp_data_ = __webpack_require__(7);
 var external_wp_compose_ = __webpack_require__(14);
 
 // EXTERNAL MODULE: external "lodash"
-var external_lodash_ = __webpack_require__(3);
+var external_lodash_ = __webpack_require__(4);
 
 // EXTERNAL MODULE: external ["wc","components"]
 var external_wc_components_ = __webpack_require__(21);
@@ -63,10 +63,10 @@ var external_wc_date_ = __webpack_require__(19);
 var lib = __webpack_require__(32);
 
 // EXTERNAL MODULE: ./client/analytics/components/report-table/index.js + 2 modules
-var report_table = __webpack_require__(503);
+var report_table = __webpack_require__(506);
 
 // EXTERNAL MODULE: ./client/lib/currency-context.js
-var currency_context = __webpack_require__(498);
+var currency_context = __webpack_require__(501);
 
 // CONCATENATED MODULE: ./client/analytics/report/revenue/table.js
 
@@ -364,7 +364,7 @@ const formatTableQuery = Object(external_lodash_["memoize"])( // @todo Support h
   return formatProps(isError, isRequesting, tableQuery, revenueData);
 }))(table_RevenueReportTable));
 // EXTERNAL MODULE: ./client/analytics/components/report-filters/index.js
-var report_filters = __webpack_require__(502);
+var report_filters = __webpack_require__(505);
 
 // CONCATENATED MODULE: ./client/analytics/report/revenue/index.js
 
@@ -426,7 +426,7 @@ revenue_RevenueReport.propTypes = {
 
 /***/ }),
 
-/***/ 525:
+/***/ 528:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
