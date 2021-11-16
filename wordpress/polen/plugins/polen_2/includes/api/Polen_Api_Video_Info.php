@@ -4,6 +4,8 @@ namespace Polen\Includes\API;
 
 use Polen\Includes\Debug;
 use Polen\Includes\Polen_Video_Info;
+use Polen\Social_Base\Social_Base;
+use Polen\Social_Base\Social_Base_Order;
 use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
@@ -125,7 +127,13 @@ class Polen_Api_Video_Info
         }
 
         foreach( $videos_infos as $video_info ) {
+            $order = wc_get_order( $video_info->order_id );
             $response = $this->prepare_item_for_response( $video_info, $request );
+            if( !empty( $order ) ) {
+                if( Social_Base_Order::is_social( $order ) ) {
+                    $response[ Social_Base_Order::ORDER_META_KEY_CAMPAING ] = $order->get_meta( Social_Base_Order::ORDER_META_KEY_CAMPAING );
+                }
+            }
             $data[] = $response;
         }
         
