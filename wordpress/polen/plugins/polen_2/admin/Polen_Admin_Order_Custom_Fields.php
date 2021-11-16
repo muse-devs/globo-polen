@@ -20,6 +20,7 @@ class Polen_Admin_Order_Custom_Fields
         if ($static) {
             add_action( 'woocommerce_admin_order_data_after_order_details', [ $this, 'checkbox_no_send_notification' ] );
         }
+
         // add_action( 'wp_ajax_nopriv_polen_edit_order_custom_fields', [ $this, 'edit_order_custom_fields' ] );
     }
 
@@ -156,7 +157,7 @@ class Polen_Admin_Order_Custom_Fields
     {  ?>
         <label for="no_send_email">
             <h4><?php echo "Não enviar e-mail"; ?></h4>
-            <input type="checkbox" name="no_send_email" id="no_send_email" checked="checked">
+            <input type="checkbox" name="no_send_email" id="no_send_email">
         </label>
     <?php }
 }
