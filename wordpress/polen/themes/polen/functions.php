@@ -393,3 +393,38 @@ function filter_woocommerce_coupon_error($err, $err_code, $instance)
 };
 
 add_filter('woocommerce_coupon_error', 'filter_woocommerce_coupon_error', 10, 3);
+
+/**
+ * Customiza a paginação de todos os tipos de posts
+ *
+ * @param array $args
+ * @return string
+ */
+function show_pagination(array $args)
+{
+  $query = new WP_Query($args);
+
+  $maxPage = 99999;
+  $pages = paginate_links(array(
+    'base' => str_replace($maxPage, '%#%', esc_url(get_pagenum_link($maxPage))),
+    'format' => '?paged=%#%',
+    'current' => max(1, get_query_var('paged')),
+    'total' => $query->max_num_pages,
+    'type' => 'array',
+    'prev_next' => true,
+    'prev_text' => __('<i aria-hidden="true" class="fas fa-fw fa-chevron-left"><</i>'),
+    'next_text' => __('<i aria-hidden="true" class="fas fa-fw fa-chevron-right">></i>'),
+  ));
+
+  $output = '';
+  if (is_array($pages)) {
+    $output .= '<ul class="pagination">';
+    foreach ($pages as $page) {
+      $output .= "<li class=\"pagination__number\">{$page}</li>";
+    }
+    $output .= '</ul>';
+  }
+  wp_reset_query();
+
+  return $output;
+}

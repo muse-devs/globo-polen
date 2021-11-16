@@ -82,7 +82,7 @@ this["wc"] = this["wc"] || {}; this["wc"]["data"] =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 460);
+/******/ 	return __webpack_require__(__webpack_require__.s = 462);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -143,7 +143,7 @@ this["wc"] = this["wc"] || {}; this["wc"]["data"] =
 
 /***/ }),
 
-/***/ 249:
+/***/ 250:
 /***/ (function(module, exports) {
 
 var charenc = {
@@ -183,14 +183,14 @@ module.exports = charenc;
 
 /***/ }),
 
-/***/ 266:
+/***/ 267:
 /***/ (function(module, exports, __webpack_require__) {
 
 (function(){
-  var crypt = __webpack_require__(447),
-      utf8 = __webpack_require__(249).utf8,
-      isBuffer = __webpack_require__(448),
-      bin = __webpack_require__(249).bin,
+  var crypt = __webpack_require__(448),
+      utf8 = __webpack_require__(250).utf8,
+      isBuffer = __webpack_require__(449),
+      bin = __webpack_require__(250).bin,
 
   // The core
   md5 = function (message, options) {
@@ -350,17 +350,17 @@ module.exports = charenc;
 
 /***/ }),
 
-/***/ 3:
-/***/ (function(module, exports) {
-
-(function() { module.exports = window["lodash"]; }());
-
-/***/ }),
-
 /***/ 30:
 /***/ (function(module, exports) {
 
 (function() { module.exports = window["wp"]["hooks"]; }());
+
+/***/ }),
+
+/***/ 4:
+/***/ (function(module, exports) {
+
+(function() { module.exports = window["lodash"]; }());
 
 /***/ }),
 
@@ -371,14 +371,14 @@ module.exports = charenc;
 
 /***/ }),
 
-/***/ 446:
+/***/ 447:
 /***/ (function(module, exports) {
 
 (function() { module.exports = window["wp"]["coreData"]; }());
 
 /***/ }),
 
-/***/ 447:
+/***/ 448:
 /***/ (function(module, exports) {
 
 (function() {
@@ -481,7 +481,7 @@ module.exports = charenc;
 
 /***/ }),
 
-/***/ 448:
+/***/ 449:
 /***/ (function(module, exports) {
 
 /*!
@@ -509,7 +509,7 @@ function isSlowBuffer (obj) {
 
 /***/ }),
 
-/***/ 460:
+/***/ 462:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -568,6 +568,7 @@ __webpack_require__.d(__webpack_exports__, "getPaymentGatewaySuggestions", funct
 __webpack_require__.d(__webpack_exports__, "getOnboardingError", function() { return /* reexport */ getOnboardingError; });
 __webpack_require__.d(__webpack_exports__, "isOnboardingRequesting", function() { return /* reexport */ isOnboardingRequesting; });
 __webpack_require__.d(__webpack_exports__, "getEmailPrefill", function() { return /* reexport */ getEmailPrefill; });
+__webpack_require__.d(__webpack_exports__, "getProductTypes", function() { return /* reexport */ getProductTypes; });
 
 // NAMESPACE OBJECT: ./packages/data/build-module/settings/selectors.js
 var selectors_namespaceObject = {};
@@ -675,6 +676,7 @@ __webpack_require__.d(onboarding_selectors_namespaceObject, "getPaymentGatewaySu
 __webpack_require__.d(onboarding_selectors_namespaceObject, "getOnboardingError", function() { return getOnboardingError; });
 __webpack_require__.d(onboarding_selectors_namespaceObject, "isOnboardingRequesting", function() { return isOnboardingRequesting; });
 __webpack_require__.d(onboarding_selectors_namespaceObject, "getEmailPrefill", function() { return getEmailPrefill; });
+__webpack_require__.d(onboarding_selectors_namespaceObject, "getProductTypes", function() { return getProductTypes; });
 
 // NAMESPACE OBJECT: ./packages/data/build-module/onboarding/actions.js
 var onboarding_actions_namespaceObject = {};
@@ -698,14 +700,20 @@ __webpack_require__.d(onboarding_actions_namespaceObject, "dismissTaskSuccess", 
 __webpack_require__.d(onboarding_actions_namespaceObject, "undoDismissTaskError", function() { return undoDismissTaskError; });
 __webpack_require__.d(onboarding_actions_namespaceObject, "undoDismissTaskRequest", function() { return undoDismissTaskRequest; });
 __webpack_require__.d(onboarding_actions_namespaceObject, "undoDismissTaskSuccess", function() { return undoDismissTaskSuccess; });
+__webpack_require__.d(onboarding_actions_namespaceObject, "hideTaskListError", function() { return hideTaskListError; });
+__webpack_require__.d(onboarding_actions_namespaceObject, "hideTaskListRequest", function() { return hideTaskListRequest; });
+__webpack_require__.d(onboarding_actions_namespaceObject, "hideTaskListSuccess", function() { return hideTaskListSuccess; });
 __webpack_require__.d(onboarding_actions_namespaceObject, "setTasksStatus", function() { return actions_setTasksStatus; });
 __webpack_require__.d(onboarding_actions_namespaceObject, "setPaymentMethods", function() { return setPaymentMethods; });
 __webpack_require__.d(onboarding_actions_namespaceObject, "setEmailPrefill", function() { return setEmailPrefill; });
+__webpack_require__.d(onboarding_actions_namespaceObject, "getProductTypesSuccess", function() { return getProductTypesSuccess; });
+__webpack_require__.d(onboarding_actions_namespaceObject, "getProductTypesError", function() { return getProductTypesError; });
 __webpack_require__.d(onboarding_actions_namespaceObject, "updateProfileItems", function() { return updateProfileItems; });
 __webpack_require__.d(onboarding_actions_namespaceObject, "snoozeTask", function() { return snoozeTask; });
 __webpack_require__.d(onboarding_actions_namespaceObject, "undoSnoozeTask", function() { return undoSnoozeTask; });
 __webpack_require__.d(onboarding_actions_namespaceObject, "dismissTask", function() { return dismissTask; });
 __webpack_require__.d(onboarding_actions_namespaceObject, "undoDismissTask", function() { return undoDismissTask; });
+__webpack_require__.d(onboarding_actions_namespaceObject, "hideTaskList", function() { return hideTaskList; });
 
 // NAMESPACE OBJECT: ./packages/data/build-module/onboarding/resolvers.js
 var onboarding_resolvers_namespaceObject = {};
@@ -716,6 +724,7 @@ __webpack_require__.d(onboarding_resolvers_namespaceObject, "getTasksStatus", fu
 __webpack_require__.d(onboarding_resolvers_namespaceObject, "getTaskLists", function() { return resolvers_getTaskLists; });
 __webpack_require__.d(onboarding_resolvers_namespaceObject, "getPaymentGatewaySuggestions", function() { return resolvers_getPaymentGatewaySuggestions; });
 __webpack_require__.d(onboarding_resolvers_namespaceObject, "getFreeExtensions", function() { return resolvers_getFreeExtensions; });
+__webpack_require__.d(onboarding_resolvers_namespaceObject, "getProductTypes", function() { return resolvers_getProductTypes; });
 
 // NAMESPACE OBJECT: ./packages/data/build-module/reviews/selectors.js
 var reviews_selectors_namespaceObject = {};
@@ -915,7 +924,7 @@ __webpack_require__.d(import_resolvers_namespaceObject, "getImportStatus", funct
 __webpack_require__.d(import_resolvers_namespaceObject, "getImportTotals", function() { return resolvers_getImportTotals; });
 
 // EXTERNAL MODULE: external ["wp","coreData"]
-var external_wp_coreData_ = __webpack_require__(446);
+var external_wp_coreData_ = __webpack_require__(447);
 
 // CONCATENATED MODULE: ./packages/data/build-module/types/wp-data.js
 
@@ -1041,7 +1050,7 @@ const getSettingsError = (state, group, id) => {
 var external_wp_i18n_ = __webpack_require__(2);
 
 // EXTERNAL MODULE: external "lodash"
-var external_lodash_ = __webpack_require__(3);
+var external_lodash_ = __webpack_require__(4);
 
 // CONCATENATED MODULE: ./packages/data/build-module/constants.js
 const JETPACK_NAMESPACE = '/jetpack/v4';
@@ -1884,7 +1893,7 @@ const controls = { ...external_wp_dataControls_["controls"],
 
         if (fetches[names]) {
           return fetches[names].then(result => {
-            resolve(result[optionName]);
+            resolve(result);
           });
         }
 
@@ -2316,6 +2325,7 @@ const getTasksStatus = state => {
   return state.tasksStatus || {};
 };
 const initialTaskLists = [];
+const EMPTY_ARRAY = [];
 const getTaskLists = state => {
   return state.taskLists || initialTaskLists;
 };
@@ -2331,6 +2341,9 @@ const isOnboardingRequesting = (state, selector) => {
 const getEmailPrefill = state => {
   return state.emailPrefill || '';
 };
+const getProductTypes = state => {
+  return state.productTypes || EMPTY_ARRAY;
+};
 // CONCATENATED MODULE: ./packages/data/build-module/onboarding/action-types.js
 const onboarding_action_types_TYPES = {
   SET_ERROR: 'SET_ERROR',
@@ -2339,6 +2352,8 @@ const onboarding_action_types_TYPES = {
   SET_EMAIL_PREFILL: 'SET_EMAIL_PREFILL',
   SET_TASKS_STATUS: 'SET_TASKS_STATUS',
   GET_PAYMENT_METHODS_SUCCESS: 'GET_PAYMENT_METHODS_SUCCESS',
+  GET_PRODUCT_TYPES_SUCCESS: 'GET_PRODUCT_TYPES_SUCCESS',
+  GET_PRODUCT_TYPES_ERROR: 'GET_PRODUCT_TYPES_ERROR',
   GET_FREE_EXTENSIONS_ERROR: 'GET_FREE_EXTENSIONS_ERROR',
   GET_FREE_EXTENSIONS_SUCCESS: 'GET_FREE_EXTENSIONS_SUCCESS',
   GET_TASK_LISTS_ERROR: 'GET_TASK_LISTS_ERROR',
@@ -2354,7 +2369,10 @@ const onboarding_action_types_TYPES = {
   SNOOZE_TASK_SUCCESS: 'SNOOZE_TASK_SUCCESS',
   UNDO_SNOOZE_TASK_ERROR: 'UNDO_SNOOZE_TASK_ERROR',
   UNDO_SNOOZE_TASK_REQUEST: 'UNDO_SNOOZE_TASK_REQUEST',
-  UNDO_SNOOZE_TASK_SUCCESS: 'UNDO_SNOOZE_TASK_SUCCESS'
+  UNDO_SNOOZE_TASK_SUCCESS: 'UNDO_SNOOZE_TASK_SUCCESS',
+  HIDE_TASK_LIST_ERROR: 'HIDE_TASK_LIST_ERROR',
+  HIDE_TASK_LIST_REQUEST: 'HIDE_TASK_LIST_REQUEST',
+  HIDE_TASK_LIST_SUCCESS: 'HIDE_TASK_LIST_SUCCESS'
 };
 /* harmony default export */ var onboarding_action_types = (onboarding_action_types_TYPES);
 // CONCATENATED MODULE: ./packages/data/build-module/onboarding/actions.js
@@ -2489,6 +2507,25 @@ function undoDismissTaskSuccess(task) {
     task
   };
 }
+function hideTaskListError(taskListId, error) {
+  return {
+    type: onboarding_action_types.HIDE_TASK_LIST_ERROR,
+    taskListId,
+    error
+  };
+}
+function hideTaskListRequest(taskListId) {
+  return {
+    type: onboarding_action_types.HIDE_TASK_LIST_REQUEST,
+    taskListId
+  };
+}
+function hideTaskListSuccess(taskList) {
+  return {
+    type: onboarding_action_types.HIDE_TASK_LIST_SUCCESS,
+    taskList
+  };
+}
 function actions_setTasksStatus(tasksStatus) {
   return {
     type: onboarding_action_types.SET_TASKS_STATUS,
@@ -2505,6 +2542,18 @@ function setEmailPrefill(email) {
   return {
     type: onboarding_action_types.SET_EMAIL_PREFILL,
     emailPrefill: email
+  };
+}
+function getProductTypesSuccess(productTypes) {
+  return {
+    type: onboarding_action_types.GET_PRODUCT_TYPES_SUCCESS,
+    productTypes
+  };
+}
+function getProductTypesError(error) {
+  return {
+    type: onboarding_action_types.GET_PRODUCT_TYPES_ERROR,
+    error
   };
 }
 function* updateProfileItems(items) {
@@ -2587,6 +2636,20 @@ function* undoDismissTask(id) {
     throw new Error();
   }
 }
+function* hideTaskList(id) {
+  yield hideTaskListRequest(id);
+
+  try {
+    const taskList = yield Object(external_wp_dataControls_["apiFetch"])({
+      path: `${WC_ADMIN_NAMESPACE}/onboarding/tasks/${id}/hide`,
+      method: 'POST'
+    });
+    yield hideTaskListSuccess(taskList);
+  } catch (error) {
+    yield hideTaskListError(id, error);
+    throw new Error();
+  }
+}
 // CONCATENATED MODULE: ./packages/data/build-module/onboarding/resolvers.js
 /**
  * External dependencies
@@ -2664,6 +2727,17 @@ function* resolvers_getFreeExtensions() {
     yield getFreeExtensionsError(error);
   }
 }
+function* resolvers_getProductTypes() {
+  try {
+    const results = yield Object(external_wp_dataControls_["apiFetch"])({
+      path: WC_ADMIN_NAMESPACE + '/onboarding/product-types',
+      method: 'GET'
+    });
+    yield getProductTypesSuccess(results);
+  } catch (error) {
+    yield getProductTypesError(error);
+  }
+}
 // CONCATENATED MODULE: ./packages/data/build-module/onboarding/reducer.js
 /**
  * Internal dependencies
@@ -2691,6 +2765,7 @@ const defaultState = {
   },
   emailPrefill: '',
   paymentMethods: [],
+  productTypes: [],
   requesting: {},
   taskLists: [],
   tasksStatus: {}
@@ -2718,12 +2793,15 @@ const onboarding = (state = defaultState, {
   profileItems,
   emailPrefill,
   paymentMethods,
+  productTypes,
   replace,
   error,
   isRequesting,
   selector,
   task,
   taskId,
+  taskListId,
+  taskList,
   taskLists,
   tasksStatus
 }) => {
@@ -2764,6 +2842,18 @@ const onboarding = (state = defaultState, {
     case onboarding_action_types.GET_PAYMENT_METHODS_SUCCESS:
       return { ...state,
         paymentMethods
+      };
+
+    case onboarding_action_types.GET_PRODUCT_TYPES_SUCCESS:
+      return { ...state,
+        productTypes
+      };
+
+    case onboarding_action_types.GET_PRODUCT_TYPES_ERROR:
+      return { ...state,
+        errors: { ...state.errors,
+          productTypes: error
+        }
       };
 
     case onboarding_action_types.GET_FREE_EXTENSIONS_ERROR:
@@ -2908,6 +2998,48 @@ const onboarding = (state = defaultState, {
           undoSnoozeTask: false
         },
         taskLists: getUpdatedTaskLists(state.taskLists, task)
+      };
+
+    case onboarding_action_types.HIDE_TASK_LIST_ERROR:
+      return { ...state,
+        errors: { ...state.errors,
+          hideTaskList: error
+        },
+        taskLists: state.taskLists.map(list => {
+          if (taskListId === list.id) {
+            return { ...list,
+              isHidden: false
+            };
+          }
+
+          return list;
+        })
+      };
+
+    case onboarding_action_types.HIDE_TASK_LIST_REQUEST:
+      return { ...state,
+        requesting: { ...state.requesting,
+          hideTaskList: true
+        },
+        taskLists: state.taskLists.map(list => {
+          if (taskListId === list.id) {
+            return { ...list,
+              isHidden: true
+            };
+          }
+
+          return list;
+        })
+      };
+
+    case onboarding_action_types.HIDE_TASK_LIST_SUCCESS:
+      return { ...state,
+        requesting: { ...state.requesting,
+          hideTaskList: false
+        },
+        taskLists: state.taskLists.map(list => {
+          return taskListId === list.id ? taskList : list;
+        })
       };
 
     default:
@@ -3854,6 +3986,7 @@ const notes_action_types_TYPES = {
  * External dependencies
  */
 
+
 /**
  * Internal dependencies
  */
@@ -3897,11 +4030,11 @@ function* removeNote(noteId) {
     throw new Error();
   }
 }
-function* removeAllNotes() {
+function* removeAllNotes(query = {}) {
   yield notes_actions_setIsRequesting('removeAllNotes', true);
 
   try {
-    const url = `${NAMESPACE}/admin/notes/delete/all`;
+    const url = Object(external_wp_url_["addQueryArgs"])(`${NAMESPACE}/admin/notes/delete/all`, query);
     const notes = yield Object(external_wp_dataControls_["apiFetch"])({
       path: url,
       method: 'DELETE'
@@ -5800,7 +5933,7 @@ const reportChartDataResponses = {
     }
   }
 };
-const EMPTY_ARRAY = [];
+const utils_EMPTY_ARRAY = [];
 /**
  * Cache helper for returning the full chart dataset after multiple
  * requests. Memoized on the request query (string), only called after
@@ -5868,7 +6001,7 @@ function getReportChartData(options) {
   }
 
   const totals = stats && stats.data && stats.data.totals || null;
-  let intervals = stats && stats.data && stats.data.intervals || EMPTY_ARRAY; // If we have more than 100 results for this time period,
+  let intervals = stats && stats.data && stats.data.intervals || utils_EMPTY_ARRAY; // If we have more than 100 results for this time period,
   // we need to make additional requests to complete the response.
 
   if (stats.totalResults > MAX_PER_PAGE) {
@@ -6044,7 +6177,7 @@ function getReportTableData(options) {
  */
 const export_constants_STORE_NAME = 'wc/admin/export';
 // EXTERNAL MODULE: ./node_modules/md5/md5.js
-var md5 = __webpack_require__(266);
+var md5 = __webpack_require__(267);
 var md5_default = /*#__PURE__*/__webpack_require__.n(md5);
 
 // CONCATENATED MODULE: ./packages/data/build-module/export/utils.js
