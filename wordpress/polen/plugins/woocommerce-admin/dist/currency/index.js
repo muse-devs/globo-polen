@@ -82,7 +82,7 @@ this["wc"] = this["wc"] || {}; this["wc"]["currency"] =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 442);
+/******/ 	return __webpack_require__(__webpack_require__.s = 443);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -122,7 +122,7 @@ this["wc"] = this["wc"] || {}; this["wc"]["currency"] =
 
 /***/ }),
 
-/***/ 442:
+/***/ 443:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -183,11 +183,12 @@ const CurrencyFactory = function (currencySetting) {
    * Formats money value.
    *
    * @param   {number|string} number number to format
+   * @param   {boolean} [useCode=false] Set to `true` to use the currency code instead of the symbol.
    * @return {?string} A formatted string.
    */
 
 
-  function formatAmount(number) {
+  function formatAmount(number, useCode = false) {
     const formattedNumber = Object(_woocommerce_number__WEBPACK_IMPORTED_MODULE_3__["numberFormat"])(currency, number);
 
     if (formattedNumber === '') {
@@ -196,10 +197,11 @@ const CurrencyFactory = function (currencySetting) {
 
     const {
       priceFormat,
-      symbol
+      symbol,
+      code
     } = currency; // eslint-disable-next-line @wordpress/valid-sprintf
 
-    return Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["sprintf"])(priceFormat, symbol, formattedNumber);
+    return Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["sprintf"])(priceFormat, useCode ? code : symbol, formattedNumber);
   }
   /**
    * Formats money value.
