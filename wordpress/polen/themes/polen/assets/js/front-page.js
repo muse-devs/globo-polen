@@ -67,6 +67,31 @@ jQuery(document).ready(function ($) {
   });
 });
 
+(function ($) {
+	// Newsletter submit click
+	$(document).on("submit", "form#newsletter, form#newsletter-mobile", function (e) {
+		const formName = "form#" + this.id;
+		e.preventDefault();
+		// Ajax Request
+		polAjaxForm(
+			formName,
+			function () {
+				polMessages.message(
+					"Seu e-mail foi adicionado a lista",
+					"Aguarde nossas novidades!"
+				);
+			},
+			function (error) {
+				polMessages.error(error);
+			}
+		);
+		// Zapier request
+		polRequestZapier(
+			formName
+		);
+	});
+})(jQuery);
+
 // const home_video = function () {
 // 	const video_banner = document.getElementById("video-banner");
 // 	if(!video_banner) {

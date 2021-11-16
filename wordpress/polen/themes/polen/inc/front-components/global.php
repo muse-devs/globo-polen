@@ -122,7 +122,7 @@ function polen_front_get_categories_buttons()
                 <?php if ($categorie["img"]) : ?>
                   <img src="<?php echo $categorie["img"]; ?>" />
                 <?php endif; ?>
-                <?php echo $categorie["name"]; ?>
+                <h5><?php echo $categorie["name"]; ?></h5>
               </div>
             </a>
           <?php endforeach; ?>
@@ -156,7 +156,7 @@ function polen_front_get_banner_video()
           <h2 class="title text-center">Emocione quem você ama com vídeos personalizados de artistas famosos</h2>
         </div>
         <!-- <div class="col-12 d-flex justify-content-center">
-          <a href="<?php //echo polen_get_all_talents_url(); ?>" class="btn btn-primary btn-md">Ver todos os talentos</a>
+          <a href="<?php //echo polen_get_all_talents_url(); ?>" class="btn btn-primary btn-md">Ver todos os Ídolos</a>
         </div> -->
       </div>
     </div>
@@ -390,7 +390,7 @@ function polen_front_get_videos($videos)
     <div class="col-md-12">
       <header class="row my-3">
         <div class="col">
-          <h2>Últimos vídeos gravados pelos famosos</h2>
+          <h2>Últimos vídeos gravados pelos Ídolos</h2>
         </div>
       </header>
     </div>
@@ -579,14 +579,14 @@ function polen_box_related_product_by_product_id($product_id)
  * @param string $newsletter
  * @return HTML
  */
-function polen_form_signin_newsletter(string $event = 'newsletter')
+function polen_form_signin_newsletter(string $id = "newsletter", string $event = 'newsletter')
 {
   $inputs = new Material_Inputs();
 ?>
   <div id="signin-newsletter" class="col-md-5 mt-4">
     <h5 class="title typo typo-title typo-small">Se conecte com a gente!</h5>
     <p class="description typo typo-p typo-small typo-double-line-height">Receba novidades e conteúdos exclusivos da Polen.</p>
-    <form id="newsletter" action="/" method="POST">
+    <form id="<?php echo $id; ?>" action="/" method="POST">
       <div class="row">
         <div class="col-md-8 mb-2 mb-md-0">
           <?php
@@ -724,6 +724,36 @@ function generic_get_about($main_title, $title, $text)
     video.load();
     video.currentTime = 1;
   </script>
+<?php
+}
+
+function polen_get_media_news() {
+?>
+  <section id="media-news" class="row my-5">
+    <div class="col-sm-12">
+      <div class="row">
+        <div class="col-sm-12 mb-4">
+          <h2 class="typo typo-title text-center">Polen na mídia</h2>
+        </div>
+        <div class="col-sm-12">
+          <div class="veiculos">
+            <a href="/polen-na-midia">
+              <img src="<?php echo TEMPLATE_URI; ?>/assets/img/na-midia/globo.png" alt="O Globo"></img>
+            </a>
+            <a href="/polen-na-midia">
+              <img src="<?php echo TEMPLATE_URI; ?>/assets/img/na-midia/folha.png" alt="Folha de São Paulo"></img>
+            </a>
+            <a href="/polen-na-midia">
+              <img src="<?php echo TEMPLATE_URI; ?>/assets/img/na-midia/veja.png" alt="Veja SP"></img>
+            </a>
+            <a href="/polen-na-midia">
+              <img src="<?php echo TEMPLATE_URI; ?>/assets/img/na-midia/exame.png" alt="Exame"></img>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  <section>
 <?php
 }
 

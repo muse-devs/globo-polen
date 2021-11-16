@@ -84,6 +84,13 @@ class Polen_WC_Payment_Approved extends \WC_Email {
 			}
 			$cart_item = Polen_Cart_Item_Factory::polen_cart_item_from_order( $this->object );
 			$this->product = $cart_item->get_product();
+
+            /**
+             * Não disparar email caso flag no_send_email estiver marcada
+             */
+            if (is_admin() === true && get_post_meta($order_id, 'send_email', true) != 1) {
+                return;
+            }
 			
 			$order_is_social = social_order_is_social( $this->object );
 			$order_is_ep = event_promotional_order_is_event_promotional( $this->object );

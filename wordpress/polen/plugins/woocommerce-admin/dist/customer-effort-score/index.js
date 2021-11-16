@@ -82,7 +82,7 @@ this["wc"] = this["wc"] || {}; this["wc"]["customerEffortScore"] =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 466);
+/******/ 	return __webpack_require__(__webpack_require__.s = 468);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -134,14 +134,14 @@ if (false) { var throwOnDirectAccess, ReactIs; } else {
 
 /***/ }),
 
-/***/ 4:
+/***/ 3:
 /***/ (function(module, exports) {
 
 (function() { module.exports = window["wp"]["components"]; }());
 
 /***/ }),
 
-/***/ 466:
+/***/ 468:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -168,7 +168,7 @@ var external_wp_compose_ = __webpack_require__(14);
 var external_wp_data_ = __webpack_require__(7);
 
 // EXTERNAL MODULE: external ["wp","components"]
-var external_wp_components_ = __webpack_require__(4);
+var external_wp_components_ = __webpack_require__(3);
 
 // EXTERNAL MODULE: external ["wc","experimental"]
 var external_wc_experimental_ = __webpack_require__(20);
