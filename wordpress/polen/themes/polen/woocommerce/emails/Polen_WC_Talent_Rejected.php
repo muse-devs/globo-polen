@@ -36,7 +36,7 @@ $talent = _polen_get_info_talent_by_product_id($item->get_product(), "polen-squa
 <p>Atenciosamente,<br />Equipe Polen</p>
 
 <p class="btn_wrap">
-	<a href="<?php echo polen_get_all_talents_url(); ?>" class="btn" target="_blank">Ver todos os Famosos</a>
+	<a href="<?php echo polen_get_all_talents_url(); ?>" class="btn" target="_blank">Ver todos os Ídolos</a>
 </p>
 
 <?php

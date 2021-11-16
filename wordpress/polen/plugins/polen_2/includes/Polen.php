@@ -4,6 +4,7 @@ namespace Polen\Includes;
 
 use Polen\Admin\Polen_Admin;
 use Polen\Admin\Polen_Forms;
+use Polen\Admin\Polen_Admin_Custom_Post_Types;
 use Polen\Enterprise\Enterprise;
 use Polen\Includes\API\Polen_Api_Video_Info;
 use Polen\Includes\Polen_Plugin_Settings;
@@ -120,6 +121,9 @@ class Polen {
 
         //Class que define a criação de um usuário no ato da compra
         new Polen_Checkout_Create_User( true );
+
+        // Classe para gerenciar todos os custons posts type
+        new Polen_Admin_Custom_Post_Types();
 
     }
 

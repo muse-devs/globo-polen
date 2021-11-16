@@ -179,7 +179,7 @@ function bus_get_form()
             // "maxlength" => "15",
           )
         );
-        $inputs->material_input(Material_Inputs::TYPE_TEXT, "talent_name", "talent_name", "Qual famoso você possui interesse?", false, "mb-3");
+        $inputs->material_input(Material_Inputs::TYPE_TEXT, "talent_name", "talent_name", "Qual Ídolo você possui interesse?", false, "mb-3");
         $inputs->material_textarea("textarea1", "message", "Como você pretende usar o vídeo?", true); ?>
         <?php $inputs->material_button(Material_Inputs::TYPE_SUBMIT, "send_form", "Enviar", "mt-4"); ?>
       </form>
