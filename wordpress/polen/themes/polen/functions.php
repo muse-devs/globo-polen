@@ -20,6 +20,18 @@ if ( ! defined( '_S_VERSION' ) ) {
 	define( '_S_VERSION', DEVELOPER ? time() : '2.0.0' );
 }
 
+add_action('init', 'handle_preflight');
+function handle_preflight() {
+        header("Access-Control-Allow-Origin: " . "*");
+        header("Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE");
+        header("Access-Control-Allow-Credentials: true");
+        header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization');
+        if ('OPTIONS' == $_SERVER['REQUEST_METHOD']) {
+            status_header(200);
+            exit();
+        }
+}
+
 if ( ! function_exists( 'polen_setup' ) ) :
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.
