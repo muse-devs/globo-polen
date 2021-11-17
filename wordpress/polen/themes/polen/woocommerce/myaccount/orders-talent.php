@@ -1,5 +1,6 @@
 <?php
 
+use Polen\Includes\Polen_Order;
 use Polen\Includes\Polen_Talent;
 
 $polen_talent = new Polen_Talent();
@@ -124,7 +125,8 @@ if (!$talent_is_social) {
 														<p class="p">Válido por</p>
 														<p class="value small">
 															<?php
-															echo $polen_talent->video_expiration_time($logged_user, $order['order_id'], $is_social);
+															echo Polen_Order::get_deadline_formatted_for_order_list( $order_obj ) . '<br>';
+															// echo $polen_talent->video_expiration_time($logged_user, $order['order_id'], $is_social);
 															?>
 														</p>
 													</div>
