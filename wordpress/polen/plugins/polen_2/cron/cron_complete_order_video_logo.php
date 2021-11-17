@@ -15,7 +15,7 @@ $access_token = $Polen_Plugin_Settings['polen_vimeo_access_token'];
 $vimeo_api = new Vimeo($client_id, $client_secret, $access_token);
 // $videos = Polen_Video_Info::select_all_videos_incompleted();
 $videos = Polen_Video_Info::select_all_videos_complete_video_logo_sended();
-var_dump($videos);
+
 echo "Total Videos: " . count($videos) . "\n";
 echo "START\n";
 foreach ( $videos as $video ) {
