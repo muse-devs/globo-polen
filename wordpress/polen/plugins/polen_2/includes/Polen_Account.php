@@ -58,7 +58,7 @@ class Polen_Account
         if( in_array( 'user_talent',  $logged_user->roles ) )
         { 
             $menu_items = array(
-                'dashboard'       => 'Início',
+                // 'dashboard'       => 'Início',
                 'orders'          => 'Meus pedidos',
                 'payment-options' => 'Pagamento',
                 'customer-logout' => __( 'Logout', 'woocommerce' ),
