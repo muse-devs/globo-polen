@@ -73,7 +73,10 @@ use Polen\Includes\Polen_WooCommerce;
                     HTML;
 
                 } catch ( \Exception $e ) {
-                    echo  $e->getMessage();
+                    echo <<<HTML_ERROR
+                        <input type="text" id="deadline-field" disabled="disabled" value=""/>
+                        {$e->getMessage()}
+                    HTML_ERROR;
                 }
                     echo <<<HTML
                         <a href="#" class="edit-custom-field" field-edit="deadline-field" data-field="{$field}" data-action="polen_edit_order_custom_fields_deadline">Editar</a>
