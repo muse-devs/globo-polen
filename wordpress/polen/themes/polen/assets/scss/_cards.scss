@@ -1100,6 +1100,24 @@
   }
 }
 
+.pol-toast-success {
+  background: rgba(87, 189, 132, 0.41);
+  border: 1px solid #57BD84;
+  border-radius: 100px;
+  padding: 10px 20px;
+  display: inline-block;
+  .text {
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 21px;
+    letter-spacing: 0em;
+    @include media-breakpoint-down(sm) {
+      text-align: center;
+    }
+  }
+}
+
 .pol-toast {
   padding: 16px 24px;
   display: flex;
