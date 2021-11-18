@@ -65,7 +65,7 @@ class Api_Controller{
                         'name' => $product->get_name(),
                         'slug' => $product->get_slug(),
                         'image' => $image_object,
-                        'categories' => wp_get_object_terms(get_the_ID() , 'campaigns'),
+                        'categories' => wp_get_object_terms(get_the_ID() , 'product_cat'),
                         'stock' => $product->get_stock_quantity(),
                         'price' => $product->get_price(),
                         'regular_price' => $product->get_regular_price(),

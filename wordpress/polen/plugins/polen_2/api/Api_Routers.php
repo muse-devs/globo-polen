@@ -30,7 +30,7 @@ class Api_Routers{
                 'per_page',
                 'paged',
                 'campaign',
-                'campaign_category,',
+                'campaign_category',
             ],
             'validate_callback' => '__return_null',
         ));
