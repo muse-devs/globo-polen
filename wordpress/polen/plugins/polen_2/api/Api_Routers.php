@@ -16,11 +16,11 @@ class Api_Routers{
         /**
          * ROTA: Listar Talentos
          *
-         * @param s Filtrar por string (opcional.)
+         * @param s Filtrar por string (opcional)
          * @param paged Exibir a página atual (opcional)
          * @param per_page Número de post por página (opcional)
-         * @param campaign ID da campanha (opcional)
-         * @param campaign_category Filtrar por categoria (opcional)
+         * @param campaign Filtrar pela a  campanha - ID (opcional)
+         * @param campaign_category Filtrar por categoria - slug (opcional)
          */
         register_rest_route('/v3', '/talents', array(
             'methods' => WP_REST_Server::READABLE,
@@ -30,8 +30,20 @@ class Api_Routers{
                 'per_page',
                 'paged',
                 'campaign',
-                'campaign_category',
+                'campaign_category,',
             ],
+            'validate_callback' => '__return_null',
+        ));
+
+        /**
+         * ROTA: Descrição do talento
+         */
+        register_rest_route('/v3', '/talent', array(
+            'methods' => 'GET',
+            'args' => array(
+                'slug',
+                ),
+            'callback' => [$controller, 'talent'],
             'validate_callback' => '__return_null',
         ));
     }
