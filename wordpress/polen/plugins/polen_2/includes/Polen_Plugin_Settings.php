@@ -35,20 +35,6 @@ class Polen_Plugin_Settings
             $categories[$term->term_id] = $term->name;
         }
 
-        $args_campaigns = array(
-            'taxonomy' => 'campaigns',
-            'orderby' => 'name',
-            'order' => 'ASC',
-            'hide_empty' => true,
-            'parent' => 0,
-        );
-
-        $term_query_campaigns = new WP_Term_Query($args_campaigns);
-        $campaigns = [];
-        foreach ($term_query_campaigns->get_terms() as $term) {
-            $campaigns[$term->term_id] = $term->name;
-        }
-
         // This is your option name where all the Redux data is stored.
         $opt_name = "Polen_Plugin_Settings";
 
@@ -584,25 +570,6 @@ class Polen_Plugin_Settings
                     'title'    => esc_html__('Destacar categoria', 'polen'),
                     'desc'     => 'Escolha as categorias para serem destacada',
                     'options'  => $categories,
-                    'default'  => '',
-                ),
-            )
-        ) );
-
-        // Configurar Campanhas
-        \Redux::set_section( $opt_name, array(
-            'title'            => esc_html__( 'Configuração das campanhas', 'polen' ),
-            'id'               => 'campaign_config',
-            'icon'             => 'el el-home',
-            'subsection'       => false,
-            'fields'           => array(
-                array(
-                    'id'       => 'campaign_categories',
-                    'type'     => 'select',
-                    'multi'    => true,
-                    'title'    => esc_html__('Escolher categoria da campanha', 'polen'),
-                    'desc'     => 'Escolha categoria para a página do Polen Galo',
-                    'options'  => $campaigns,
                     'default'  => '',
                 ),
             )

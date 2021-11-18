@@ -21,11 +21,6 @@ class Api_Controller{
      */
     private string $error_message;
 
-    public function __construct()
-    {
-        $this->campaign = $this->campaign_config_redux();
-    }
-
     /**
      * Endpoint talent
      *
@@ -36,18 +31,26 @@ class Api_Controller{
     {
         try{
             $api_product = new Api_Product();
+            $params = $request->get_params();
 
-            if ($this->error !== false) {
-               $this->error($this->error_message);
+            $term_id = '';
+            if (isset($params['campaign']) || isset($params['campaign_category'])) {
+                $term_id = $params['campaign_category'] ?? $params['campaign'];
             }
 
-            $query = $api_product->polen_get_products_by_campagins($request->get_params(), $this->campaign);
+            $tax = get_term($term_id, 'campaigns');
+            if ($tax == null) {
+                throw new Exception('Oops, Id da campanha solicitada não foi encontrada na nossa base de dados!', 422);
+            }
+
+            $query = $api_product->polen_get_products_by_campagins($params, $term_id);
 
             $items = array();
             if ($query->have_posts()) {
                 while ($query->have_posts()) {
                     $query->the_post();
                     $attachment = get_post(get_post_thumbnail_id(get_the_ID()));
+                    $product = wc_get_product(get_the_ID());
                     $image_object = array(
                         'id' => $attachment->ID,
                         'alt' => get_post_meta($attachment->ID, '_wp_attachment_image_alt', true ),
@@ -58,12 +61,15 @@ class Api_Controller{
                     );
 
                     $items[] = array(
-                        'id' => get_the_ID(),
-                        'name' => get_the_title(get_the_ID()),
-                        'slug' => basename(get_permalink()),
+                        'id' => $product->get_id(),
+                        'name' => $product->get_name(),
+                        'slug' => $product->get_slug(),
                         'image' => $image_object,
-                        'categories' => wp_get_object_terms(get_the_ID() , 'product_cat'),
-                        'content' => get_the_content(null, null, get_the_ID()),
+                        'categories' => wp_get_object_terms(get_the_ID() , 'campaigns'),
+                        'stock' => $product->get_stock_quantity(),
+                        'price' => $product->get_price(),
+                        'regular_price' => $product->get_regular_price(),
+                        'sale_price' => $product->get_sale_price(),
                         'createdAt' => get_the_date('Y-m-d H:i:s', get_the_ID()),
                     );
                 }
@@ -72,8 +78,8 @@ class Api_Controller{
             $data = array(
                 'items' => $items,
                 'total' => (int) $query->found_posts,
-                'currentPage' => $request->get_param('paged'),
-                'perPage' => count($items),
+                'current_page' => $request->get_param('paged') ?? 1,
+                'per_page' => count($items),
             );
 
             wp_send_json_success($data, 200);
@@ -87,25 +93,6 @@ class Api_Controller{
     private function error($e)
     {
         wp_send_json_error($e, 422);
-    }
-
-    /**
-     * Retornar term_id da campanha do galo pelo o redux
-     *
-     * @return ?int
-     */
-    private function campaign_config_redux(): ?int
-    {
-        global $Polen_Plugin_Settings;
-
-        if (!isset($Polen_Plugin_Settings['campaign_categories'])) {
-            $this->error = true;
-            $this->error_message = 'Oops, campanha não configurada!';
-
-            return 0;
-        }
-
-        return implode($Polen_Plugin_Settings['campaign_categories']);
     }
 
 }

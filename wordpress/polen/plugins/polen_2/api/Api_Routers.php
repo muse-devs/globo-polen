@@ -18,17 +18,19 @@ class Api_Routers{
          *
          * @param s Filtrar por string (opcional.)
          * @param paged Exibir a página atual (opcional)
-         * @param perPage Número de post por página (opcional)
-         * @param category Filtrar por categoria (opcional)
+         * @param per_page Número de post por página (opcional)
+         * @param campaign ID da campanha (opcional)
+         * @param campaign_category Filtrar por categoria (opcional)
          */
         register_rest_route('/v3', '/talents', array(
             'methods' => WP_REST_Server::READABLE,
             'callback' => [$controller, 'talents'],
             'args' => [
                 's',
-                'perPage',
+                'per_page',
                 'paged',
-                'category,',
+                'campaign',
+                'campaign_category,',
             ],
             'validate_callback' => '__return_null',
         ));
