@@ -70,7 +70,7 @@
 				<div class="row">
           <?php
 						if(is_front_page()) {
-							polen_form_signin_newsletter();
+							polen_form_signin_newsletter("newsletter-mobile");
 						}
 					?>
           <div class="col-12 mt-3">
