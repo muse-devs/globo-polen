@@ -155,7 +155,7 @@ if (!$talent_is_social) {
                           <?php
 							if( $video_info->video_logo_status == Polen_Video_Info::VIDEO_LOGO_STATUS_WAITING ||
 								$video_info->video_logo_status == Polen_Video_Info::VIDEO_LOGO_STATUS_SENDED ) {
-									echo 'Video já foi enviado, está sendo processado.';
+									echo 'Vídeo enviado. Aguardando processamento.';
 							} else {
 								$inputs->material_button_link_outlined("link-" . $order['order_id'], "Enviar vídeo", "/my-account/send-video/?order_id=" . $order['order_id']);
 							}
