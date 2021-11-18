@@ -5,6 +5,7 @@ namespace Polen\Includes;
 use Polen\Admin\Polen_Admin;
 use Polen\Admin\Polen_Forms;
 use Polen\Admin\Polen_Admin_Custom_Post_Types;
+use Polen\Api\Api;
 use Polen\Enterprise\Enterprise;
 use Polen\Includes\API\Polen_Api_Video_Info;
 use Polen\Includes\Polen_Plugin_Settings;
@@ -104,7 +105,7 @@ class Polen {
         new Polen_Signin_LP_Lead( true );
 
         //Disabled API REST
-        new Polen_Disable_API_REST( true );
+        // new Polen_Disable_API_REST( true );
 
         //Tributes app
         new Tributes( true );
@@ -124,6 +125,9 @@ class Polen {
 
         // Classe para gerenciar todos os custons posts type
         new Polen_Admin_Custom_Post_Types();
+
+        // Startar API de campanhas
+        new Api();
 
     }
 
