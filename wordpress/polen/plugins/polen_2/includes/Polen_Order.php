@@ -531,6 +531,11 @@ class Polen_Order
         $deadline_datetime = self::get_deadline_in_datetime( $order );
         $current_date = new \WC_DateTime( "now" );
         $interval = $current_date->diff( $deadline_datetime );
+
+        if( empty( $interval ) ) {
+            return '--';
+        }
+        
         if( $interval->format('%D') > 1 && $interval->format('%R') == '+' ){
             return $interval->format('%D dias');
         }
