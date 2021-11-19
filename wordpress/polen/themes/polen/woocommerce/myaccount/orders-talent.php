@@ -145,7 +145,7 @@ if (!$talent_is_social) {
 											</div>
 										</div>
 									</div>
-									<div class="col-12 col-md-12 mt-4">
+									<div class="col-12 col-md-12 mt-2">
 										<div class="row">
 
 											<?php
@@ -155,7 +155,13 @@ if (!$talent_is_social) {
                           <?php
 							if( $video_info->video_logo_status == Polen_Video_Info::VIDEO_LOGO_STATUS_WAITING ||
 								$video_info->video_logo_status == Polen_Video_Info::VIDEO_LOGO_STATUS_SENDED ) {
-									echo 'Vídeo enviado. Aguardando processamento.';
+              ?>
+              <div class="pol-toast-success mb-2">
+                <div class="text">
+                  Vídeo enviado. Aguardando processamento.
+                </div>
+              </div>
+              <?php
 							} else {
 								$inputs->material_button_link_outlined("link-" . $order['order_id'], "Enviar vídeo", "/my-account/send-video/?order_id=" . $order['order_id']);
 							}
