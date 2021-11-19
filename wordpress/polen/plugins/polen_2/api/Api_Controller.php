@@ -96,7 +96,7 @@ class Api_Controller{
             $product = wc_get_product($product_obj->ID);
             $image_object = $this->get_object_image($product_obj->ID);
 
-            $items[] = array(
+            $items = array(
                 'id' => $product->get_id(),
                 'name' => $product->get_name(),
                 'slug' => $product->get_slug(),
