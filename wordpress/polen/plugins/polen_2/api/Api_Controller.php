@@ -2,6 +2,7 @@
 
 namespace Polen\Api;
 
+use Exception;
 use WP_REST_Response;
 
 class Api_Controller{
@@ -33,51 +34,33 @@ class Api_Controller{
             $api_product = new Api_Product();
             $params = $request->get_params();
 
-            $term_id = '';
+            $slug = '';
             if (isset($params['campaign']) || isset($params['campaign_category'])) {
-                $term_id = $params['campaign_category'] ?? $params['campaign'];
+                $slug = $params['campaign_category'] ?? $params['campaign'];
             }
 
-            $tax = get_term($term_id, 'campaigns');
-            if ($tax == null) {
-                throw new Exception('Oops, Id da campanha solicitada não foi encontrada na nossa base de dados!', 422);
-            }
-
-            $query = $api_product->polen_get_products_by_campagins($params, $term_id);
+            $products = $api_product->polen_get_products_by_campagins($params, $slug);
 
             $items = array();
-            if ($query->have_posts()) {
-                while ($query->have_posts()) {
-                    $query->the_post();
-                    $attachment = get_post(get_post_thumbnail_id(get_the_ID()));
-                    $product = wc_get_product(get_the_ID());
-                    $image_object = array(
-                        'id' => $attachment->ID,
-                        'alt' => get_post_meta($attachment->ID, '_wp_attachment_image_alt', true ),
-                        'caption' => $attachment->post_excerpt,
-                        'description' => $attachment->post_content,
-                        'src' => get_the_post_thumbnail_url(get_the_ID()),
-                        'title' => $attachment->post_title,
-                    );
-
-                    $items[] = array(
-                        'id' => $product->get_id(),
-                        'name' => $product->get_name(),
-                        'slug' => $product->get_slug(),
-                        'image' => $image_object,
-                        'categories' => wp_get_object_terms(get_the_ID() , 'product_cat'),
-                        'stock' => $product->get_stock_quantity(),
-                        'price' => $product->get_price(),
-                        'regular_price' => $product->get_regular_price(),
-                        'sale_price' => $product->get_sale_price(),
-                        'createdAt' => get_the_date('Y-m-d H:i:s', get_the_ID()),
-                    );
-                }
+            foreach ($products as $product) {
+                $image_object = $this->get_object_image($product->get_id());
+                $items[] = array(
+                    'id' => $product->get_id(),
+                    'name' => $product->get_name(),
+                    'slug' => $product->get_slug(),
+                    'image' => $image_object,
+                    'categories' => wp_get_object_terms($product->get_id() , 'campaigns'),
+                    'stock' => $product->get_stock_quantity(),
+                    'price' => $product->get_price(),
+                    'regular_price' => $product->get_regular_price(),
+                    'sale_price' => $product->get_sale_price(),
+                    'createdAt' => get_the_date('Y-m-d H:i:s', $product->get_id()),
+                );
             }
 
             $data = array(
                 'items' => $items,
-                'total' => (int) $query->found_posts,
+                'total' => $api_product->get_products_count($params, $slug),
                 'current_page' => $request->get_param('paged') ?? 1,
                 'per_page' => count($items),
             );
@@ -88,6 +71,70 @@ class Api_Controller{
             wp_send_json_error($e->getMessage(), 422);
             wp_die();
         }
+    }
+
+    /**
+     * Endpoint talent
+     *
+     * Retorar todos os talentos
+     * @param $request
+     */
+    public function talent($request): WP_REST_Response
+    {
+        try{
+            $talent_slug = $request->get_param('slug');
+            if (empty($talent_slug)) {
+                throw new Exception('slug é obrigatório', 422);
+            }
+
+            $product_obj = get_page_by_path($talent_slug, OBJECT, 'product');
+
+            if ($product_obj->ID == null) {
+                throw new Exception('Talento não encontrado', 422);
+            }
+
+            $product = wc_get_product($product_obj->ID);
+            $image_object = $this->get_object_image($product_obj->ID);
+
+            $items[] = array(
+                'id' => $product->get_id(),
+                'name' => $product->get_name(),
+                'slug' => $product->get_slug(),
+                'b2b' => get_post_meta($product_obj->ID, 'polen_is_b2b', true),
+                'image' => $image_object,
+                'categories' => wp_get_object_terms($product->get_id() , 'campaigns'),
+                'stock' => $product->get_stock_quantity(),
+                'price' => $product->get_price(),
+                'regular_price' => $product->get_regular_price(),
+                'sale_price' => $product->get_sale_price(),
+                'createdAt' => get_the_date('Y-m-d H:i:s', $product->get_id()),
+            );
+
+            wp_send_json_success($items, 200);
+
+        } catch (\Exception $e) {
+            wp_send_json_error($e->getMessage(), 422);
+            wp_die();
+        }
+    }
+
+    /**
+     * Retornar meta dados da imagem
+     *
+     * @param int $talent_id
+     * @return array
+     */
+    private function get_object_image(int $talent_id): array
+    {
+        $attachment = get_post(get_post_thumbnail_id($talent_id));
+        return array(
+            'id' => $attachment->ID,
+            'alt' => get_post_meta($attachment->ID, '_wp_attachment_image_alt', true),
+            'caption' => $attachment->post_excerpt,
+            'description' => $attachment->post_content,
+            'src' => get_the_post_thumbnail_url($talent_id),
+            'title' => $attachment->post_title,
+        );
     }
 
     private function error($e)

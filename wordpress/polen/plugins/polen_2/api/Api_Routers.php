@@ -20,6 +20,15 @@ class Api_Routers{
          * @param paged Exibir a página atual (opcional)
          * @param per_page Número de post por página (opcional)
          * @param campaign Filtrar pela a  campanha - ID (opcional)
+         * @param orderby ordernar resultados de posts (opcional)
+         *      Values [
+         *           Ordenar por popularidade = popularity
+         *           Ordenar por media de classificação = rating
+         *           Ordenar do mais antigo para o mais novo = date-asc
+         *           Ordenar do mais novo para o mais antigo = date-desc
+         *           Ordenar menor preço para maior: price-asc
+         *           Ordenar maior preço para menor: price-desc
+         *      ]
          * @param campaign_category Filtrar por categoria - slug (opcional)
          */
         register_rest_route('/v3', '/talents', array(
@@ -29,6 +38,7 @@ class Api_Routers{
                 's',
                 'per_page',
                 'paged',
+                'orderby',
                 'campaign',
                 'campaign_category,',
             ],
@@ -37,6 +47,7 @@ class Api_Routers{
 
         /**
          * ROTA: Descrição do talento
+         * @param slug slug do talento (required)
          */
         register_rest_route('/v3', '/talent', array(
             'methods' => 'GET',
