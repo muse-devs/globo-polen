@@ -87,10 +87,21 @@ class Api_Controller{
                 throw new Exception('slug é obrigatório', 422);
             }
 
+            $campaign_slug = $request->get_param('campaign');
+            if (empty($campaign_slug)) {
+                throw new Exception('Campanha é obrigatório', 422);
+            }
+
             $product_obj = get_page_by_path($talent_slug, OBJECT, 'product');
 
-            if ($product_obj->ID == null) {
-                throw new Exception('Talento não encontrado', 422);
+            if (empty($product_obj->ID)) {
+                throw new Exception('Talento não encontrado', 404);
+            }
+
+            $tax_product = get_the_terms($product_obj->ID, 'campaigns');
+
+            if (!isset($tax_product[0]) || $tax_product[0]->taxonomy !== 'campaigns') {
+                throw new Exception('Talento não encontrado', 404);
             }
 
             $product = wc_get_product($product_obj->ID);
