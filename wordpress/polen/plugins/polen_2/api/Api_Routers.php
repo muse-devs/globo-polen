@@ -53,7 +53,7 @@ class Api_Routers{
             'methods' => 'GET',
             'args' => array(
                 'slug',
-                ),
+            ),
             'callback' => [$controller, 'talent'],
             'validate_callback' => '__return_null',
         ));
