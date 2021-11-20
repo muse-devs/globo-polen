@@ -1,8 +1,7 @@
 <?php
-
 namespace Polen\Includes\Cart;
 
-class Polen_Cart_Item
+class Polen_Cart_Item implements Polen_ICart_Item
 {
     
     /**

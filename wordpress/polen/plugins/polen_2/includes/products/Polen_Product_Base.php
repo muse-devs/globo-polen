@@ -15,7 +15,37 @@ class Polen_Product_Base implements Polen_IProduct
         $this->product = $product;
     }
 
+    /**
+     * 
+     * @param html
+     */
+    public function get_home_card_badget_icon()
+    {
+        return '';
+    }
+
+    /**
+     * 
+     * @return string
+     */
+    public function get_home_card_badget_text()
+    {
+        return '';
+    }
+
+    /**
+     * 
+     * @return html
+     */
     public function get_home_card_badget()
+    {
+        return '';
+    }
+
+    /**
+     * @param hmtl
+     */
+    public function get_home_card_badget_html()
     {
         return '';
     }
@@ -213,9 +243,4 @@ class Polen_Product_Base implements Polen_IProduct
     {
         return '';
     }
-    
-    /**
-     * 
-     * @return html
-     */
 }
