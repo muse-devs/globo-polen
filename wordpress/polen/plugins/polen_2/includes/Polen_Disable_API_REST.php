@@ -2,6 +2,8 @@
 
 namespace Polen\Includes;
 
+use WP_REST_Request;
+
 class Polen_Disable_API_REST
 {
 
@@ -9,17 +11,57 @@ class Polen_Disable_API_REST
     {
         if( $static ) {
             add_filter( 'rest_authentication_errors', [ $this, 'disable_rest_api' ] );
+            add_filter( 'determine_current_user', [ $this, 'json_basic_auth_handler' ], 20 );
         }
     }
 
     public function disable_rest_api( $result ) {
-        global $request;
         if ( true === $result || is_wp_error( $result ) ) {
             return $result;
         }
-        if ( ! is_user_logged_in() ) {
-            return new \WP_Error('rest_not_logged_in', 'Silence is Golden', [ 'status' => '401' ] );
+
+        global $wp_json_basic_auth_error;
+        return $wp_json_basic_auth_error;
+    }
+
+
+    public function json_basic_auth_handler( $user ) {
+        global $wp_json_basic_auth_error;
+    
+        $wp_json_basic_auth_error = null;
+        // Debug::def($_SERVER);
+        // Don't authenticate twice
+        if ( ! empty( $user ) ) {
+            return $user;
         }
-        return $result;
+
+        // Check that we're trying to authenticate
+        if ( !isset( $_SERVER['PHP_AUTH_USER'] ) ) {
+            return $user;
+        }
+    
+        $username = $_SERVER['PHP_AUTH_USER'];
+        $password = $_SERVER['PHP_AUTH_PW'];
+    
+        /**
+         * In multi-site, wp_authenticate_spam_check filter is run on authentication. This filter calls
+         * get_currentuserinfo which in turn calls the determine_current_user filter. This leads to infinite
+         * recursion and a stack overflow unless the current function is removed from the determine_current_user
+         * filter during authentication.
+         */
+        remove_filter( 'determine_current_user', 'json_basic_auth_handler', 20 );
+    
+        $user = wp_authenticate( $username, $password );
+    
+        add_filter( 'determine_current_user', 'json_basic_auth_handler', 20 );
+    
+        if ( is_wp_error( $user ) ) {
+            $wp_json_basic_auth_error = $user;
+            return null;
+        }
+    
+        $wp_json_basic_auth_error = true;
+    
+        return $user->ID;
     }
 }
