@@ -1,11 +1,17 @@
 <?php
-
 namespace Polen\Api;
 
 use Exception;
 use WP_REST_Response;
 
 class Api_Controller{
+
+    private $checkout;
+
+    public function __construct()
+    {
+        $this->checkout = new Api_Checkout();
+    }
 
     /**
      * Term_id Campanha
@@ -130,6 +136,21 @@ class Api_Controller{
     }
 
     /**
+     * Endpoint que receberá o request e criará uma order através da class Api_Checkout
+     *
+     * @param $request
+     */
+    public function payment($request)
+    {
+        $this->checkout->create_order($request);
+    }
+
+    private function error($e)
+    {
+        wp_send_json_error($e, 422);
+    }
+
+    /**
      * Retornar meta dados da imagem
      *
      * @param int $talent_id
@@ -147,10 +168,4 @@ class Api_Controller{
             'title' => $attachment->post_title,
         );
     }
-
-    private function error($e)
-    {
-        wp_send_json_error($e, 422);
-    }
-
 }

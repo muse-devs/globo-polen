@@ -31,7 +31,7 @@ class Api_Routers{
          *      ]
          * @param campaign_category Filtrar por categoria - slug (opcional)
          */
-        register_rest_route('/v3', '/talents', array(
+        register_rest_route('v3', '/talents', array(
             'methods' => WP_REST_Server::READABLE,
             'callback' => [$controller, 'talents'],
             'args' => [
@@ -42,20 +42,47 @@ class Api_Routers{
                 'campaign',
                 'campaign_category,',
             ],
-            'validate_callback' => '__return_null',
+            'permission_callback' => '__return_true',
         ));
 
         /**
          * ROTA: Descrição do talento
+         *
          * @param slug slug do talento (required)
+         * @param campaign slug da campanha do talento (required)
          */
-        register_rest_route('/v3', '/talent', array(
-            'methods' => 'GET',
+        register_rest_route('v3', '/talent', array(
+            'methods' => WP_REST_Server::READABLE,
             'args' => array(
                 'slug',
+                'campaign',
             ),
             'callback' => [$controller, 'talent'],
-            'validate_callback' => '__return_null',
+            'permission_callback' => '__return_true',
+        ));
+
+        /**
+         * ROTA: Descrição do talento
+         *
+         * @param name Nome cliente (required)
+         * @param cpf CPF do cliente (required)
+         * @param phone Telefone do cliente (required)
+         * @param email Email do cliente (required)
+         * @param product_id ID do produto que será comprado (required)
+         * @param coupon Cupom que será utilizado na compra (opcional)
+         */
+        register_rest_route('v3', '/payment', array(
+            'methods' => WP_REST_Server::CREATABLE,
+            'args' => array(
+                'name',
+                'cpf',
+                'phone',
+                'email',
+                'product_id',
+                'coupon',
+            ),
+            'callback' => [$controller, 'payment'],
+            'permission_callback' => '__return_true',
         ));
     }
 }
