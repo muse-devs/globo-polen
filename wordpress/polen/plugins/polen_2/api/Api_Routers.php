@@ -62,7 +62,7 @@ class Api_Routers{
         ));
 
         /**
-         * ROTA: Descrição do talento
+         * ROTA: metodo de pagamento
          *
          * @param name Nome cliente (required)
          * @param cpf CPF do cliente (required)
@@ -82,6 +82,20 @@ class Api_Routers{
                 'coupon',
             ),
             'callback' => [$controller, 'payment'],
+            'permission_callback' => '__return_true',
+        ));
+
+        /**
+         * ROTA: Verificar se existe stock
+         *
+         * @param product_id ID do produto que será comprado (required)
+         */
+        register_rest_route('v3', '/cart', array(
+            'methods' => WP_REST_Server::READABLE,
+            'args' => array(
+                'product_id',
+            ),
+            'callback' => [$controller, 'cart'],
             'permission_callback' => '__return_true',
         ));
     }
