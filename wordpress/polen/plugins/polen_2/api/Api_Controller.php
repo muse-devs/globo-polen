@@ -136,6 +136,35 @@ class Api_Controller{
     }
 
     /**
+     * Validar requisição para carrinho
+     *
+     * @param $request
+     */
+    public function cart($request)
+    {
+        try{
+            $product_id = $request->get_param('product_id');
+            if (empty($product_id)) {
+                throw new Exception('Parametro product_id é obrigatório', 422);
+            }
+
+            $product = wc_get_product($product_id);
+            if (empty($product)) {
+                throw new Exception('Produto não encontrado', 404);
+            }
+
+            if ($product->get_stock_status() !== 'instock') {
+                throw new Exception('Produto sem estoque', 422);
+            }
+
+        } catch (\Exception $e) {
+            wp_send_json_error($e->getMessage(), 422);
+            wp_die();
+        }
+
+    }
+
+    /**
      * Endpoint que receberá o request e criará uma order através da class Api_Checkout
      *
      * @param $request
