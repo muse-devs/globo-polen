@@ -33,17 +33,19 @@ class Api_Routers
          * @param campaign_category Filtrar por categoria - slug (opcional)
          */
         register_rest_route('v3', '/talents', array(
-            'methods' => WP_REST_Server::READABLE,
-            'callback' => [$controller, 'talents'],
-            'args' => [
-                's',
-                'per_page',
-                'paged',
-                'orderby',
-                'campaign',
-                'campaign_category,',
-            ],
-            'permission_callback' => '__return_true',
+            array(
+                'methods' => WP_REST_Server::READABLE,
+                'callback' => [$controller, 'talents'],
+                'permission_callback' => '__return_true',
+                'args' => [
+                    's',
+                    'per_page',
+                    'paged',
+                    'orderby',
+                    'campaign',
+                    'campaign_category,',
+                ],
+            ),
         ));
 
         /**
@@ -53,13 +55,15 @@ class Api_Routers
          * @param campaign slug da campanha do talento (required)
          */
         register_rest_route('v3', '/talent', array(
-            'methods' => WP_REST_Server::READABLE,
-            'args' => array(
-                'slug',
-                'campaign',
-            ),
-            'callback' => [$controller, 'talent'],
-            'permission_callback' => '__return_true',
+            array(
+                'methods' => WP_REST_Server::READABLE,
+                'args' => array(
+                    'slug',
+                    'campaign',
+                ),
+                'callback' => [$controller, 'talent'],
+                'permission_callback' => '__return_true',
+            )
         ));
 
         /**
@@ -73,17 +77,19 @@ class Api_Routers
          * @param coupon Cupom que será utilizado na compra (opcional)
          */
         register_rest_route('v3', '/payment', array(
-            'methods' => WP_REST_Server::CREATABLE,
-            'args' => array(
-                'name',
-                'cpf',
-                'phone',
-                'email',
-                'product_id',
-                'coupon',
-            ),
-            'callback' => [$controller, 'payment'],
-            'permission_callback' => '__return_true',
+            array(
+                'methods' => WP_REST_Server::CREATABLE,
+                'args' => array(
+                    'name',
+                    'cpf',
+                    'phone',
+                    'email',
+                    'product_id',
+                    'coupon',
+                ),
+                'callback' => [$controller, 'payment'],
+                'permission_callback' => '__return_true',
+            )
         ));
 
         /**
@@ -92,12 +98,14 @@ class Api_Routers
          * @param product_id ID do produto que será comprado (required)
          */
         register_rest_route('v3', '/cart', array(
-            'methods' => WP_REST_Server::READABLE,
-            'args' => array(
-                'product_id',
-            ),
-            'callback' => [$controller, 'cart'],
-            'permission_callback' => '__return_true',
+            array(
+                'methods' => WP_REST_Server::READABLE,
+                'args' => array(
+                    'product_id',
+                ),
+                'callback' => [$controller, 'cart'],
+                'permission_callback' => '__return_true',
+            )
         ));
     }
 }
