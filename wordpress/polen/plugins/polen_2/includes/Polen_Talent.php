@@ -393,6 +393,16 @@ class Polen_Talent {
     }
     
 
+    /**
+     * Pega Orders por Talento por Status
+     * $status pode ser uma string separada por virgula "'wc-payment-approved', 'wc-talent-accepted'"
+     * Se count for TRUE vai retornar o total
+     * 
+     * @param int
+     * @param string
+     * @param bool
+     * @return array
+     */
     public function get_talent_orders($talent_id, $status = false, $count = false ) {
         if ($talent_id) {
             global $wpdb;
@@ -411,7 +421,7 @@ class Polen_Talent {
             if( $count ){
                 $select = "count( order_items.order_id ) as qtd"; 
             } else {
-                $limit = ' LIMIT 300 ';
+                $limit = ' LIMIT 50 ';
             }
 
             if (is_countable($talent_products) && count($talent_products) > 0) {

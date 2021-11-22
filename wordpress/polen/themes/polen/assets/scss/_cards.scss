@@ -615,6 +615,27 @@
 // 	}
 // }
 
+.bw-banner {
+	border-radius: 10px;
+  display: flex;
+  align-items: center;
+  padding: 20px 20px 0px 20px;
+  @include media-breakpoint-down(xs) {
+    padding: 10px 10px 0px 10px;
+  }
+  .logo {
+    width: 30%;
+    height: 100%!important;
+  }
+  .content {
+    width: 70%;
+    height: 100%;
+    img {
+      width: 100%;
+    }
+  }
+}
+
 .slick-alt {
   width: 130%;
   overflow: hidden;
@@ -1096,6 +1117,24 @@
         padding: 12px 20px;
         font-size: 17px;
       }
+    }
+  }
+}
+
+.pol-toast-success {
+  background: rgba(87, 189, 132, 0.41);
+  border: 1px solid #57BD84;
+  border-radius: 100px;
+  padding: 10px 20px;
+  display: inline-block;
+  .text {
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 21px;
+    letter-spacing: 0em;
+    @include media-breakpoint-down(sm) {
+      text-align: center;
     }
   }
 }

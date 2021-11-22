@@ -22,9 +22,9 @@ get_header();
 	<div class="row">
 		<div class="col-12">
 			<div id="product-carousel" class="owl-carousel owl-theme">
-        <!-- Banner Canal Combate -->
+        <!-- Banner Black Week -->
         <div class="item">
-					<?php polen_get_home_banner(site_url('tag/canal-combate/')); ?>
+					<?php polen_get_home_banner(site_url('tag/black-week/')); ?>
 				</div>
 			</div>
 		</div>
