@@ -19,9 +19,9 @@ class Api_Checkout{
     public function auth()
     {
         $this->woocommerce = new Client(
-            'http://globo-local/',
-            'ck_99e46cdf840dc0868e937722744b72b496414624',
-            'cs_153565e7cbb6a948d8018cc973e5ffbb878dfc4f',
+            'https://polen-api.c9t.pw',
+            'ck_3dd8bbb3e721ee5fac3fc94c67aa3d90a15333a1',
+            'cs_65a67aa24cf9158ab6c2375e523231c7d58c8716',
             [
                 'wp_api' => true,
                 'version' => 'wc/v3'
