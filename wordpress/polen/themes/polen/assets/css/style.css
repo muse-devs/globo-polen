@@ -11904,6 +11904,9 @@ textarea {
   display: flex;
   align-items: center;
   padding: 20px 20px 0px 20px; }
+  @media (max-width: 575.98px) {
+    .bw-banner {
+      padding: 10px 10px 0px 10px; } }
   .bw-banner .logo {
     width: 30%;
     height: 100% !important; }
