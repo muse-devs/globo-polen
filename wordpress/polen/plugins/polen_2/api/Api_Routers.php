@@ -38,12 +38,12 @@ class Api_Routers
                 'callback' => [$controller, 'talents'],
                 'permission_callback' => '__return_true',
                 'args' => [
-                    's',
-                    'per_page',
-                    'paged',
-                    'orderby',
-                    'campaign',
-                    'campaign_category,',
+                    's' => [],
+                    'per_page' => [],
+                    'paged' => [],
+                    'orderby' => [],
+                    'campaign' => [],
+                    'campaign_category' => [],
                 ],
             ),
         ));
@@ -58,8 +58,8 @@ class Api_Routers
             array(
                 'methods' => WP_REST_Server::READABLE,
                 'args' => array(
-                    'slug',
-                    'campaign',
+                    'slug' => [],
+                    'campaign' => [],
                 ),
                 'callback' => [$controller, 'talent'],
                 'permission_callback' => '__return_true',
@@ -80,12 +80,12 @@ class Api_Routers
             array(
                 'methods' => WP_REST_Server::CREATABLE,
                 'args' => array(
-                    'name',
-                    'cpf',
-                    'phone',
-                    'email',
-                    'product_id',
-                    'coupon',
+                    'name' => [],
+                    'cpf' => [],
+                    'phone' => [],
+                    'email' => [],
+                    'product_id' => [],
+                    'coupon' => [],
                 ),
                 'callback' => [$controller, 'payment'],
                 'permission_callback' => '__return_true',
@@ -101,9 +101,25 @@ class Api_Routers
             array(
                 'methods' => WP_REST_Server::READABLE,
                 'args' => array(
-                    'product_id',
+                    'product_id' => [],
                 ),
                 'callback' => [$controller, 'cart'],
+                'permission_callback' => '__return_true',
+            )
+        ));
+
+
+        /**
+         * ROTA: Responsavel pelo fan Logado
+         * Order.
+         */
+        register_rest_route('v3', '/fan/orders', array(
+            array(
+                'methods' => WP_REST_Server::READABLE,
+                'args' => array(
+                    'user_id' => [],
+                ),
+                'callback' => [ new Api_Fan_Order(), 'get_items' ],
                 'permission_callback' => '__return_true',
             )
         ));
