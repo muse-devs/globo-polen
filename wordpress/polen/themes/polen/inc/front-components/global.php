@@ -779,7 +779,7 @@ function polen_get_toast($text)
 <?php
 }
 
-function polen_get_home_banner($link)
+function polen_get_combate_banner($link)
 {
 ?>
 	<div class="row mt-4">
@@ -816,5 +816,25 @@ function polen_get_home_banner($link)
 			</div>
 		</div>
 	</div>
+<?php
+}
+
+function polen_get_home_banner($link)
+{
+?>
+  <div class="row mt-4">
+    <div class="col-12">
+      <a href="<?php echo $link; ?>">
+        <div class="bw-banner" style="background: url('<?php echo TEMPLATE_URI . '/assets/img/black-week/bg.jpg'; ?>')center no-repeat">
+          <div class="logo">
+            <img src="<?php echo TEMPLATE_URI . '/assets/img/black-week/logo.png'; ?>" alt="Black Week" />
+          </div>
+          <div class="content">
+            <img src="<?php echo TEMPLATE_URI . '/assets/img/black-week/talentos.png'; ?>" alt="Black Week" />
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
 <?php
 }
