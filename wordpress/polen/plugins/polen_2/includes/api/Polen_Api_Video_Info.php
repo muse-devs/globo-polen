@@ -142,8 +142,6 @@ class Polen_Api_Video_Info
         return rest_ensure_response( $data );
     }
 
-
-
     /**
      * 
      * @param WP_REST_Request
@@ -158,16 +156,14 @@ class Polen_Api_Video_Info
         if( empty( $video_info_id ) ) {
             return new WP_Error( 'rest_forbidden', 'ID inválido', array( 'status' => $this->authorization_status_code() ) );
         }
-        $statuses_possible = [
-            Polen_Video_Info::VIDEO_LOGO_STATUS_COMPLETED,
-            Polen_Video_Info::VIDEO_LOGO_STATUS_NO,
-            Polen_Video_Info::VIDEO_LOGO_STATUS_SENDED,
-            Polen_Video_Info::VIDEO_LOGO_STATUS_WAITING,
-        ];
+        $statuses_possible = $this->get_status_possible();
         if( !in_array( $status, $statuses_possible ) ) {
             return new WP_Error( 'rest_forbidden', 'Status [video_logo_status] inválido', array( 'status' => $this->authorization_status_code() ) );
         }
         $video_info = Polen_Video_Info::get_by_id_static( $video_info_id );
+        if( empty( $video_info ) ){
+            return new WP_Error( 'rest_404', '', array( 'status' => 404 ) );
+        }
         $video_info->video_logo_status = $status;
         $video_info->update();
 
@@ -177,6 +173,19 @@ class Polen_Api_Video_Info
         );
 
         return new WP_REST_Response( $data, 200 );
+    }
+
+    /**
+     * 
+     */
+    public function get_status_possible()
+    {
+        return [
+            Polen_Video_Info::VIDEO_LOGO_STATUS_COMPLETED,
+            Polen_Video_Info::VIDEO_LOGO_STATUS_NO,
+            Polen_Video_Info::VIDEO_LOGO_STATUS_SENDED,
+            Polen_Video_Info::VIDEO_LOGO_STATUS_WAITING,
+        ];
     }
 
     /**
