@@ -568,7 +568,7 @@ class Polen_Plugin_Settings
                     'type'     => 'select',
                     'multi'    => true,
                     'title'    => esc_html__('Destacar categoria', 'polen'),
-                    'desc'     => 'Escolha até 4 categorias para serem destacada',
+                    'desc'     => 'Escolha as categorias para serem destacada',
                     'options'  => $categories,
                     'default'  => '',
                 ),

@@ -69,7 +69,8 @@ class Polen_Api_Video_Info
      */
     public function get_items_permissions_check( $request )
     {
-        if( !current_user_can( 'read' ) ) {
+        $user = new Polen_Api_User( wp_get_current_user() );
+        if( !$user->check_permission( 'get_items_permissions_check' ) ) {
             return new WP_Error( 'rest_forbidden', 'Você não tem acesso a esse endpoint', array( 'status' => $this->authorization_status_code() ) );
         }
         return true;
@@ -82,7 +83,8 @@ class Polen_Api_Video_Info
      */
     public function update_video_logo_status_permissions_check( $request )
     {
-        if( !current_user_can('administrator') ) {
+        $user = new Polen_Api_User( wp_get_current_user() );
+        if( !$user->check_permission( 'update_video_logo_status_permissions_check' ) ) {
             return new WP_Error( 'rest_forbidden', 'Você não tem acesso a esse endpoint', array( 'status' => $this->authorization_status_code() ) );
         }
         return true;

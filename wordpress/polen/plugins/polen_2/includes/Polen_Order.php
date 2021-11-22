@@ -10,17 +10,41 @@ namespace Polen\Includes;
 
 use Polen\Publics\Polen_Public;
 use DateInterval;
+use DateTime;
+use DateTimeZone;
+use WC_DateTime;
+
 class Polen_Order
 {
     
 //    const METADATA_VIMEO_VIDEO_ID = 'vimeo_video_id';
 //    const METADATA_VIMEO_VIDEO_URL = 'vimeo_video_url';
 //    const METADATA_VIMEO_VIDEO_EMBED_CONTENT = 'vimeo_video_embed_content';
+
+    const ORDER_STATUS_PAYMENT_IN_REVISION = 'payment-in-revision';
+    const ORDER_STATUS_PAYMENT_REJECTED    = 'payment-rejected';
+    const ORDER_STATUS_PAYMENT_APPROVED    = 'payment-approved';
+    const ORDER_STATUS_TALENT_REJECTED     = 'talent-rejected';
+    const ORDER_STATUS_TALENT_ACCEPTED     = 'talent-accepted';
+    const ORDER_STATUS_ORDER_EXPIRED       = 'order-expired';
+    const ORDER_STATUS_COMPLETED           = 'completed';
+
+    const ORDER_STATUS_PAYMENT_IN_REVISION_INSIDE = 'wc-payment-in-revision';
+    const ORDER_STATUS_PAYMENT_REJECTED_INSIDE    = 'wc-payment-rejected';
+    const ORDER_STATUS_PAYMENT_APPROVED_INSIDE    = 'wc-payment-approved';
+    const ORDER_STATUS_TALENT_REJECTED_INSIDE     = 'wc-talent-rejected';
+    const ORDER_STATUS_TALENT_ACCEPTED_INSIDE     = 'wc-talent-accepted';
+    const ORDER_STATUS_ORDER_EXPIRED_INSIDE       = 'wc-order-expired';
+    const ORDER_STATUS_COMPLETED_INSIDE           = 'wc-completed';
+
     const SLUG_ORDER_COMPLETE = 'completed';
     const SLUG_ORDER_COMPLETE_INSIDE = 'wc-completed';
 
     const SLUG_ORDER_PAYMENT_APPROVED = 'payment-approved';
+    const SLUG_ORDER_PAYMENT_APPROVED_INSIDE = 'wc-payment-approved';
+
     const SLUG_ORDER_TALENT_ACCEPTED  = 'talent-accepted';
+    const SLUG_ORDER_TALENT_ACCEPTED_INSIDE  = 'wc-talent-accepted';
 
     const ORDER_STATUSES_NEED_TALENT_ACTION = [ self::SLUG_ORDER_PAYMENT_APPROVED, self::SLUG_ORDER_TALENT_ACCEPTED ];
 
@@ -477,6 +501,76 @@ class Polen_Order
         $created_at = \WC_DateTime::createFromFormat( 'Y-m-d H:i:s', date('Y-m-d') . ' 23:59:59' );
         $created_at->add( $interval );
         return $created_at->getTimestamp();
+    }
+
+
+    /**
+     * Retorna o Timestamp de uma order
+     * @param \WC_Order
+     * @param 
+     * @return int Timestamp
+     */
+    public static function get_deadline( \WC_Order $order )
+    {
+        if( empty( $order ) ) {
+            return false;
+        }
+        $deadline = $order->get_meta( self::META_KEY_DEADLINE, true );
+        return $deadline;
+    }
+
+
+    /**
+     * Retorna o Timestamp de uma order
+     * @param \WC_Order
+     * @return Datetime
+     */
+    public static function get_deadline_in_datetime( \WC_Order $order )
+    {
+        if( empty( $order ) ) {
+            return false;
+        }
+        $deadline = $order->get_meta( self::META_KEY_DEADLINE, true );
+        $aa = new WC_DateTime();
+        $aa->setTimestamp( $deadline );
+        $datetime_datetime = \WC_DateTime::createFromFormat( 'U', $deadline );
+        return $datetime_datetime;
+    }
+
+
+    /**
+     * Pega a deadline de uma Order 
+     * @param \WC_Order
+     * @return string
+     */
+    public static function get_deadline_formatted_for_order_list( $order )
+    {
+        if( empty( $order ) ) {
+            return false;
+        }
+        $deadline_datetime = self::get_deadline_in_datetime( $order );
+        $current_date = new \WC_DateTime( "now" );
+        $interval = $current_date->diff( $deadline_datetime );
+
+        if( empty( $interval ) ) {
+            return '--';
+        }
+        
+        if( $interval->format('%D') > 1 && $interval->format('%R') == '+' ){
+            return $interval->format('%D dias');
+        }
+
+        if( $interval->format('%D') == 1 && $interval->format('%R') == '+' ){
+            return $interval->format('%D dia e %H:%ih');
+        }    
+
+        if( $interval->format('%D') < 1 && $interval->format('%R') == '+' ){
+            return $interval->format('%H:%ih');
+        }    
+
+        if( $interval->format('%R') == '-' ){
+            return 'Expirado!';
+        }     
     }
 
 

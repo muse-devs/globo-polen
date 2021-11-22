@@ -29,7 +29,7 @@ class Polen_Disable_API_REST
         global $wp_json_basic_auth_error;
     
         $wp_json_basic_auth_error = null;
-        Debug::def($_SERVER);
+        // Debug::def($_SERVER);
         // Don't authenticate twice
         if ( ! empty( $user ) ) {
             return $user;
