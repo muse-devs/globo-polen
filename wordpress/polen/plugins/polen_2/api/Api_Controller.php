@@ -14,21 +14,6 @@ class Api_Controller{
     }
 
     /**
-     * Term_id Campanha
-     */
-    private int $campaign;
-
-    /**
-     * Notificará o erro, caso ocorra na classe
-     */
-    private bool $error = false;
-
-    /**
-     * Mensagem de erro
-     */
-    private string $error_message;
-
-    /**
      * Endpoint talent
      *
      * Retorar todos os talentos
