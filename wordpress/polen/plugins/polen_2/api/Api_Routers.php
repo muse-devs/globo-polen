@@ -3,7 +3,8 @@ namespace Polen\Api;
 
 use WP_REST_Server;
 
-class Api_Routers{
+class Api_Routers
+{
 
     public function __construct()
     {
