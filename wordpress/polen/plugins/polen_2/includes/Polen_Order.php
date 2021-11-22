@@ -20,11 +20,31 @@ class Polen_Order
 //    const METADATA_VIMEO_VIDEO_ID = 'vimeo_video_id';
 //    const METADATA_VIMEO_VIDEO_URL = 'vimeo_video_url';
 //    const METADATA_VIMEO_VIDEO_EMBED_CONTENT = 'vimeo_video_embed_content';
+
+    const ORDER_STATUS_PAYMENT_IN_REVISION = 'payment-in-revision';
+    const ORDER_STATUS_PAYMENT_REJECTED    = 'payment-rejected';
+    const ORDER_STATUS_PAYMENT_APPROVED    = 'payment-approved';
+    const ORDER_STATUS_TALENT_REJECTED     = 'talent-rejected';
+    const ORDER_STATUS_TALENT_ACCEPTED     = 'talent-accepted';
+    const ORDER_STATUS_ORDER_EXPIRED       = 'order-expired';
+    const ORDER_STATUS_COMPLETED           = 'completed';
+
+    const ORDER_STATUS_PAYMENT_IN_REVISION_INSIDE = 'wc-payment-in-revision';
+    const ORDER_STATUS_PAYMENT_REJECTED_INSIDE    = 'wc-payment-rejected';
+    const ORDER_STATUS_PAYMENT_APPROVED_INSIDE    = 'wc-payment-approved';
+    const ORDER_STATUS_TALENT_REJECTED_INSIDE     = 'wc-talent-rejected';
+    const ORDER_STATUS_TALENT_ACCEPTED_INSIDE     = 'wc-talent-accepted';
+    const ORDER_STATUS_ORDER_EXPIRED_INSIDE       = 'wc-order-expired';
+    const ORDER_STATUS_COMPLETED_INSIDE           = 'wc-completed';
+
     const SLUG_ORDER_COMPLETE = 'completed';
     const SLUG_ORDER_COMPLETE_INSIDE = 'wc-completed';
 
     const SLUG_ORDER_PAYMENT_APPROVED = 'payment-approved';
+    const SLUG_ORDER_PAYMENT_APPROVED_INSIDE = 'wc-payment-approved';
+
     const SLUG_ORDER_TALENT_ACCEPTED  = 'talent-accepted';
+    const SLUG_ORDER_TALENT_ACCEPTED_INSIDE  = 'wc-talent-accepted';
 
     const ORDER_STATUSES_NEED_TALENT_ACTION = [ self::SLUG_ORDER_PAYMENT_APPROVED, self::SLUG_ORDER_TALENT_ACCEPTED ];
 
@@ -531,6 +551,11 @@ class Polen_Order
         $deadline_datetime = self::get_deadline_in_datetime( $order );
         $current_date = new \WC_DateTime( "now" );
         $interval = $current_date->diff( $deadline_datetime );
+
+        if( empty( $interval ) ) {
+            return '--';
+        }
+        
         if( $interval->format('%D') > 1 && $interval->format('%R') == '+' ){
             return $interval->format('%D dias');
         }

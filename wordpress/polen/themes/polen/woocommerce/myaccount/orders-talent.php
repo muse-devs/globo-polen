@@ -2,6 +2,7 @@
 
 use Polen\Includes\Polen_Order;
 use Polen\Includes\Polen_Talent;
+use Polen\Includes\Polen_Video_Info;
 
 $polen_talent = new Polen_Talent();
 
@@ -43,7 +44,7 @@ if (!$talent_is_social) {
 				foreach ($talent_orders as $order) :
 					$order_obj = new \WC_Order($order['order_id']);
 					$is_social = social_order_is_social($order_obj);
-
+					$video_info = Polen_Video_Info::get_by_order_id( $order['order_id'] );
 					$total_order_value = $order['total_raw'];
 					$discounted_value_order = polen_apply_polen_part_price($total_order_value, $is_social);
 			?>
@@ -144,7 +145,7 @@ if (!$talent_is_social) {
 											</div>
 										</div>
 									</div>
-									<div class="col-12 col-md-12 mt-4">
+									<div class="col-12 col-md-12 mt-2">
 										<div class="row">
 
 											<?php
@@ -152,7 +153,18 @@ if (!$talent_is_social) {
 											?>
 												<div class="col-12 col-md-12">
                           <?php
-                          $inputs->material_button_link_outlined("link-" . $order['order_id'], "Enviar vídeo", "/my-account/send-video/?order_id=" . $order['order_id']);
+							if( $video_info->video_logo_status == Polen_Video_Info::VIDEO_LOGO_STATUS_WAITING ||
+								$video_info->video_logo_status == Polen_Video_Info::VIDEO_LOGO_STATUS_SENDED ) {
+              ?>
+              <div class="pol-toast-success mb-2">
+                <div class="text">
+                  Vídeo enviado. Aguardando processamento.
+                </div>
+              </div>
+              <?php
+							} else {
+								$inputs->material_button_link_outlined("link-" . $order['order_id'], "Enviar vídeo", "/my-account/send-video/?order_id=" . $order['order_id']);
+							}
                           ?>
 												</div>
 											<?php
