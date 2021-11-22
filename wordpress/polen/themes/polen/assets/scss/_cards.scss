@@ -615,6 +615,24 @@
 // 	}
 // }
 
+.bw-banner {
+	border-radius: 10px;
+  display: flex;
+  align-items: center;
+  padding: 20px 20px 0px 20px;
+  .logo {
+    width: 30%;
+    height: 100%!important;
+  }
+  .content {
+    width: 70%;
+    height: 100%;
+    img {
+      width: 100%;
+    }
+  }
+}
+
 .slick-alt {
   width: 130%;
   overflow: hidden;

@@ -11899,6 +11899,20 @@ textarea {
           font-size: 40px;
           line-height: 44px; } }
 
+.bw-banner {
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  padding: 20px 20px 0px 20px; }
+  .bw-banner .logo {
+    width: 30%;
+    height: 100% !important; }
+  .bw-banner .content {
+    width: 70%;
+    height: 100%; }
+    .bw-banner .content img {
+      width: 100%; }
+
 .slick-alt {
   width: 130%;
   overflow: hidden; }
