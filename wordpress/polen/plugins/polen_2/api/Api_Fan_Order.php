@@ -18,7 +18,6 @@ class Api_Fan_Order
             $current_page = 1;
         }
 		$customer_orders = $this->get_orders_by_user_logged( get_current_user_id(), $current_page );
-        Debug::def($customer_orders);
         $new_orders = [];
         if( $customer_orders->total > 0 ) {
             foreach( $customer_orders->orders as $order ){
@@ -61,7 +60,9 @@ class Api_Fan_Order
         $post_data = array();
 
         $post_data[ 'order_id' ]              = $order->get_id();
-        $post_data[ 'product_thumbnail_url' ] = $this->get_talent_thumbnail_url_by_order( $order );
+        $post_data[ 'talent_thumbnail_url' ]  = $this->get_talent_thumbnail_url_by_order( $order );
+        $post_data[ 'talent_name' ]           = $this->get_product_name_by_order( $order );
+        $post_data[ 'talent_slug' ]           = $this->get_product_slug_by_order( $order );
         $post_data[ 'order_status' ]          = $order->get_status();
         $post_data[ 'price' ]                 = $order->calculate_totals();
         $post_data[ 'data' ]                  = $order->get_date_created()->date('d/m/Y');
@@ -83,5 +84,38 @@ class Api_Fan_Order
         }
         $thumb = wp_get_attachment_image_url( $product->get_image_id() );
         return $thumb;
+    }
+
+
+    /**
+     * 
+     * @param WC_Order
+     */
+    private function get_product_name_by_order( $order )
+    {
+        $cart_item = Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
+        $product = $cart_item->get_product();
+        return $product->get_sku();
+    }
+
+
+    /**
+     * 
+     * @param WC_Order
+     */
+    private function get_product_slug_by_order( $order )
+    {
+        $cart_item = Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
+        $product = $cart_item->get_product();
+        return $product->get_title();
+    }
+
+
+    public function check_permission_get_items( $request )
+    {
+        if( 0 == get_current_user_id() || empty( get_current_user_id() ) ) {
+            return false;
+        }
+        return true;
     }
 }
