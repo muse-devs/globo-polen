@@ -109,6 +109,7 @@ class Api_Routers
         ));
 
 
+        $api_fan_order = new Api_Fan_Order();
         /**
          * ROTA: Responsavel pelo fan Logado
          * Order.
@@ -119,8 +120,18 @@ class Api_Routers
                 'args' => array(
                     'user_id' => [],
                 ),
-                'callback' => [ new Api_Fan_Order(), 'get_items' ],
-                'permission_callback' => [ new Api_Fan_Order(), 'check_permission_get_items' ],
+                'callback' => [ $api_fan_order, 'get_items' ],
+                'permission_callback' => [ $api_fan_order, 'check_permission_get_items' ],
+            )
+        ));
+        register_rest_route('v3', '/fan/orders/(?P<id>[\d]+)', array(
+            array(
+                'methods' => WP_REST_Server::READABLE,
+                'args' => array(
+                    'id' => [],
+                ),
+                'callback' => [ $api_fan_order, 'get_item' ],
+                'permission_callback' => [ $api_fan_order, 'check_permission_get_item' ],
             )
         ));
     }

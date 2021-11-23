@@ -39,6 +39,42 @@ class Api_Fan_Order
 
     /**
      * 
+     * @param WP_REST_Request
+     */
+    public function get_item( $request )
+    {
+        $order_id = intval( $request[ 'id' ] );
+        if( empty( $order_id ) ) {
+            wp_send_json_error( 'Compra inválida', 404 );
+            wp_die();
+        }
+
+        $order = wc_get_order( $order_id );
+        if( empty( $order ) ) {
+            wp_send_json_error( 'Compra inválida', 404 );
+            wp_die();
+        }
+
+        if( !$this->verify_order_belongs_user_logged( $order ) ) {
+            wp_send_json_error( 'Compra inválida', 404 );
+            wp_die();
+        }
+
+        $order_response = $this->prepare_item_for_response( $order, $request );
+
+        wp_send_json_success( $order_response );
+        return;
+    }
+
+
+    protected function verify_order_belongs_user_logged( $order )
+    {
+        return true;
+    }
+
+
+    /**
+     * 
      */
     private function get_orders_by_user_logged( $user_id, $param )
     {
@@ -129,6 +165,20 @@ class Api_Fan_Order
     public function check_permission_get_items( $request )
     {
         if( 0 == get_current_user_id() || empty( get_current_user_id() ) ) {
+            return false;
+        }
+        return true;
+    }
+
+    public function check_permission_get_item( $request )
+    {
+        $order_id = $request[ 'id' ];
+        $order = wc_get_order( $order_id );
+        if( empty( $order ) ) {
+            return false;
+        }
+        if( ( 0 == get_current_user_id() || empty( get_current_user_id() ) ) 
+            || $order->get_customer_id() !== get_current_user_id() ) {
             return false;
         }
         return true;
