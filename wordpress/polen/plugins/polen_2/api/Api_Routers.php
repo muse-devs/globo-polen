@@ -120,7 +120,7 @@ class Api_Routers
                     'user_id' => [],
                 ),
                 'callback' => [ new Api_Fan_Order(), 'get_items' ],
-                'permission_callback' => '__return_true',
+                'permission_callback' => [ new Api_Fan_Order(), 'check_permission_get_items' ],
             )
         ));
     }
