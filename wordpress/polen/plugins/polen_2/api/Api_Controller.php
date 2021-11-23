@@ -3,6 +3,7 @@ namespace Polen\Api;
 
 use Exception;
 use WP_REST_Response;
+use WP_REST_Request;
 
 class Api_Controller{
 
