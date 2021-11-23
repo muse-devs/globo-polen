@@ -62,11 +62,13 @@ class Api_Fan_Order
 
         $order_response = $this->prepare_item_for_response( $order, $request );
 
-        // wp_send_json_success( $order_response );
-        return new WP_REST_Response( $order_response, 200 );
+        wp_send_json_success( $order_response );
+        wp_die();
+        // return new WP_REST_Response( $order_response, 200 );
     }
 
 
+    //TODO: Verificar se a order é do usuário logado
     protected function verify_order_belongs_user_logged( $order )
     {
         return true;
@@ -143,7 +145,7 @@ class Api_Fan_Order
         if( empty( $product ) ){ 
             return '';
         }
-        return $product->get_sku();
+        return $product->get_title();
     }
 
 
