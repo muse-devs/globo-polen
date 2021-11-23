@@ -3,7 +3,7 @@ namespace Polen\Api;
 
 use Polen\Includes\Debug;
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
-
+use WP_REST_Response;
 
 class Api_Fan_Order
 {
@@ -62,8 +62,8 @@ class Api_Fan_Order
 
         $order_response = $this->prepare_item_for_response( $order, $request );
 
-        wp_send_json_success( $order_response );
-        return;
+        // wp_send_json_success( $order_response );
+        return new WP_REST_Response( $order_response, 200 );
     }
 
 
