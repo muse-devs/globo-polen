@@ -256,3 +256,4 @@ class Api_Checkout{
 
         return true;
     }
+}
