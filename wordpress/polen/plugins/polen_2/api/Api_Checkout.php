@@ -37,8 +37,8 @@ class Api_Checkout{
      * 3- Criar um novo usuario caso cliete esteja deslogado
      * 4- Verificar status do cupom
      * 5- Registrar order no woocommerce
-     * TODO: 6- Fazer requisição para o TUNA
-     * TODO: 7- Atualizar status de acordo com o response do TUNA
+     * 6- Fazer requisição para o TUNA
+     * 7- Atualizar status de acordo com o response do TUNA
      *
      * @param $request
      * @return array|void
@@ -46,6 +46,7 @@ class Api_Checkout{
     public function create_order($request)
     {
         try{
+            $tuna = new Api_Gateway_Tuna();
             $fields = $request->get_params();
             $required_fields = $this->required_fields();
             $errors = array();
@@ -74,12 +75,8 @@ class Api_Checkout{
                 $coupon = sanitize_text_field($fields['coupon']);
             }
 
-            $this->order_payment_woocommerce($user, $fields['product_id'], $coupon);
-
-            return [
-                'data' => $data,
-                'user' => $user->ID,
-            ];
+            $order_woo = $this->order_payment_woocommerce($user, $fields['product_id'], $coupon);
+            $tuna->process_payment($order_woo->id, $user->data, $fields);
 
         } catch (\Exception $e) {
             wp_send_json_error($e->getMessage(), 422);
@@ -165,7 +162,7 @@ class Api_Checkout{
             ];
         }
 
-        $this->woocommerce->post('orders', $data);
+        return $this->woocommerce->post('orders', $data);
     }
 
     /**

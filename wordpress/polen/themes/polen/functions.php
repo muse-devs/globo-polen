@@ -361,6 +361,11 @@ require_once TEMPLATE_DIR . '/inc/highlight_categories.php';
  */
 require_once TEMPLATE_DIR . '/inc/b2b_functions.php';
 
+/**
+ * Funções para REST API
+ */
+require_once TEMPLATE_DIR . '/api/api_function.php';
+
 
 add_action('wc_gateway_stripe_process_response', function($response, $order) {
 	// $response
