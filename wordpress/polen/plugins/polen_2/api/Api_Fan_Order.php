@@ -1,6 +1,7 @@
 <?php
 namespace Polen\Api;
 
+use Order_Class;
 use Polen\Includes\Debug;
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
 use WP_REST_Response;
@@ -61,6 +62,7 @@ class Api_Fan_Order
         }
 
         $order_response = $this->prepare_item_for_response( $order, $request );
+        $order_response[ 'status_flow' ] = $this->get_status_flow( $order );
 
         wp_send_json_success( $order_response );
         wp_die();
@@ -111,6 +113,7 @@ class Api_Fan_Order
         $post_data[ 'talent_name' ]           = $this->get_product_name_by_order( $order );
         $post_data[ 'talent_slug' ]           = $this->get_product_slug_by_order( $order );
         $post_data[ 'order_status' ]          = $order->get_status();
+        $post_data[ 'order_status_name' ]     = wc_get_order_status_name( $order->get_status() );
         $post_data[ 'price' ]                 = $order->calculate_totals();
         $post_data[ 'data' ]                  = $order->get_date_created()->date('d/m/Y');
 
@@ -146,6 +149,19 @@ class Api_Fan_Order
             return '';
         }
         return $product->get_title();
+    }
+
+
+    /**
+     * 
+     * @param WC_Order
+     */
+    protected function get_status_flow( \WC_Order $order )
+    {
+        $order_id = $order->get_id();
+        $order_status = $order->get_status();
+        $email_billing = $order->get_billing_email();
+        return Order_Class::polen_get_order_flow_obj( $order_id, $order_status, $email_billing );
     }
 
 
