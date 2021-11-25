@@ -22,6 +22,7 @@ class Api_Gateway_Tuna
      * @param $order_id
      * @param $current_user
      * @param array $data
+     * @return mixed
      */
     public function process_payment($order_id, $current_user, array $data)
     {
@@ -97,18 +98,18 @@ class Api_Gateway_Tuna
                 ],
                 "DeliveryAddress" => [
                     "Street" =>  $customer_order->get_shipping_address_1(),
-                    "Number" => "0",
-                    "Complement" => "",
-                    "Neighborhood" => "",
+                    "Number" => '',
+                    "Complement" => '',
+                    "Neighborhood" => '',
                     "City" => $customer_order->get_shipping_city(),
                     "State" => 'CE',
                     "Country" => 'BR',
                     "PostalCode" => $customer_order->get_shipping_postcode(),
-                    "Phone" => ""
+                    "Phone" => '',
                 ],
                 "FrontData" => [
                     "SessionID" => wp_get_session_token(),
-                    "Origin" => "WEBSITE",
+                    "Origin" => 'WEBSITE',
                     "IpAddress" => $_SERVER['REMOTE_ADDR'],
                     "CookiesAccepted" => true
                 ],
@@ -157,12 +158,17 @@ class Api_Gateway_Tuna
 
             $response = json_decode($api_response['body']);
             $new_status = $this->get_status_response($response->status);
+            $response_message = $this->get_response_message($new_status);
 
             $customer_order->update_status($new_status);
 
+            return api_response($response_message['message'], $response_message['status_code']);
+
         } catch (\Exception $e) {
-            wp_send_json_error($e->getMessage(), 422);
-            wp_die();
+            return api_response(
+                array('message' => $e->getMessage()),
+                $e->getCode()
+            );
         }
 
     }
@@ -316,6 +322,36 @@ class Api_Gateway_Tuna
         }
 
         return $new_status;
+    }
+
+    /**
+     * Retornar mensagem de acordo com o status
+     *
+     * @param $status_response
+     * @return array
+     */
+    private function get_response_message($status_response): array
+    {
+        $status_order = [
+            'pending' => [
+                'message' => 'Pagamento pendente',
+                'status_code' => 204,
+            ],
+            'payment-approved' => [
+                'message' => 'Pagamento aprovado',
+                'status_code' => 200,
+            ],
+            'failed' => [
+                'message' => 'Erro ao processar pagamento',
+                'status_code' => 422,
+            ],
+            'cancelled' => [
+                'message' => 'Pagamento cancelado',
+                'status_code' => 422,
+            ]
+        ];
+
+        return $status_order[$status_response];
     }
 
     /**
