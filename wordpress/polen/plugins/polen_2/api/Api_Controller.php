@@ -5,6 +5,7 @@ use Exception;
 use Polen\Includes\API\Polen_Api_Video_Info;
 use Polen\Includes\Polen_Talent;
 use Polen\Includes\Polen_Video_Info;
+use WC_Order;
 use WP_REST_Response;
 use WP_REST_Request;
 
@@ -60,11 +61,13 @@ class Api_Controller{
                 'per_page' => count($items),
             );
 
-            wp_send_json_success($data, 200);
+            return api_response($data, 200);
 
         } catch (\Exception $e) {
-            wp_send_json_error($e->getMessage(), 422);
-            wp_die();
+            return api_response(
+                array('message' => $e->getMessage()),
+                $e->getCode()
+            );
         }
     }
 
@@ -116,11 +119,13 @@ class Api_Controller{
                 'createdAt' => get_the_date('Y-m-d H:i:s', $product->get_id()),
             );
 
-            wp_send_json_success($items, 200);
+            return api_response($items, 200);
 
         } catch (\Exception $e) {
-            wp_send_json_error($e->getMessage(), 422);
-            wp_die();
+            return api_response(
+                array('message' => $e->getMessage()),
+                $e->getCode()
+            );
         }
     }
 
@@ -151,6 +156,16 @@ class Api_Controller{
             wp_die();
         }
 
+    }
+
+    /**
+     * Endpoint que receberá o request e criará uma order através da class Api_Checkout
+     *
+     * @param $request
+     */
+    public function payment($request)
+    {
+        $this->checkout->create_order($request);
     }
 
     /**
@@ -201,13 +216,30 @@ class Api_Controller{
     }
 
     /**
-     * Endpoint que receberá o request e criará uma order através da class Api_Checkout
+     * Rotornar status e informações basicas de um pedido
      *
-     * @param $request
+     * @param $order_id
+     * @return WP_REST_Response
      */
-    public function payment($request)
+    public function get_order_status($request): WP_REST_Response
     {
-        $this->checkout->create_order($request);
+        try {
+            $order_id = $request->get_param('order_id');
+            $order = new WC_Order($order_id);
+
+            $data = array(
+                'id' => $order_id,
+                'status_order' => $order->get_status(),
+                'customer_email' => $order->get_billing_email(),
+            );
+
+            return api_response($data);
+        } catch (\Exception $e) {
+            return api_response(
+                array('message' => $e->getMessage()),
+                $e->getCode()
+            );
+        }
     }
 
     private function error($e)
