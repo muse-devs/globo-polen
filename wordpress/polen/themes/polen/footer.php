@@ -43,6 +43,7 @@
                   <li><a href="https://www.instagram.com/polen.me/" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("instagram"); ?>Instagram</a></li>
                   <li><a href="https://www.facebook.com/Polen-107879504782470/" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("facebook"); ?>Facebook</a></li>
                   <li><a href="https://twitter.com/polen_me/" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("twitter"); ?>Twitter</a></li>
+                  <li><a href="https://medium.com/polen-mais" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("medium"); ?>Medium</a></li>
                 </ul>
               </div>
               <div class="col-md-3 mt-4">
@@ -52,6 +53,7 @@
                   <li><a href="https://br.linkedin.com/company/polen-me" target="_blank" rel="noreferrer">Trabalhe conosco</a></li>
                   <li><a href="/polen-na-midia">Polen na mídia</a></li>
                   <li><a href="/ajuda">Ajuda</a></li>
+                  <li><a href="https://polenmais.blogspot.com/" target="_blank" rel="noreferrer">Blog</a></li>
                 </ul>
               </div>
             </div>
@@ -126,6 +128,7 @@
                       <li><a href="https://www.instagram.com/polen.me/" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("instagram"); ?>Instagram</a></li>
                       <li><a href="https://www.facebook.com/Polen-107879504782470/" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("facebook"); ?>Facebook</a></li>
                       <li><a href="https://twitter.com/polen_me/" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("twitter"); ?>Twitter</a></li>
+                      <li><a href="https://medium.com/polen-mais" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("medium"); ?>Medium</a></li>
                     </ul>
                   </div>
                 </div>
@@ -145,6 +148,7 @@
                       <li><a href="https://br.linkedin.com/company/polen-me" target="_blank" rel="noreferrer">Trabalhe conosco</a></li>
                       <li><a href="/polen-na-midia">Polen na mídia</a></li>
                       <li><a href="/ajuda">Ajuda</a></li>
+                      <li><a href="https://polenmais.blogspot.com/" target="_blank" rel="noreferrer">Blog</a></li>
                     </ul>
                   </div>
                 </div>
