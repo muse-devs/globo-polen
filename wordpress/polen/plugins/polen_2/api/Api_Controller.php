@@ -2,6 +2,10 @@
 namespace Polen\Api;
 
 use Exception;
+use Polen\Includes\API\Polen_Api_Video_Info;
+use Polen\Includes\Cart\Polen_Cart_Item_Factory;
+use Polen\Includes\Polen_Talent;
+use Polen\Includes\Polen_Video_Info;
 use WC_Order;
 use WP_REST_Response;
 use WP_REST_Request;
@@ -19,9 +23,9 @@ class Api_Controller{
      * Endpoint talent
      *
      * Retorar todos os talentos
-     * @param $request
+     * @param WP_REST_Request $request
      */
-    public function talents($request): WP_REST_Response
+    public function talents( $request ): WP_REST_Response
     {
         try{
             $api_product = new Api_Product();
@@ -261,5 +265,33 @@ class Api_Controller{
             'src' => get_the_post_thumbnail_url($talent_id),
             'title' => $attachment->post_title,
         );
+    }
+
+    /**
+     * 
+     */
+    public function get_product_videos( $request )
+    {
+        $product_id = $request[ 'id' ];
+        
+        $Polen_Talent = new Polen_Talent();
+        $talent = $Polen_Talent->get_talent_from_product( $product_id );
+        $videos = Polen_Video_Info::select_by_talent_id( $talent->ID, 5 );
+
+        $data = [];
+        foreach( $videos as $video ) {
+            $order = wc_get_order( $video->order_id );
+            $cart_item = Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
+            $data[] = [
+                'video_info_id'=> $video->ID,
+                'talent_id'    => $video->talent_id,
+                'video_id'     => $video->vimeo_id,
+                'talent_thumb' => polen_get_avatar_src($video->talent_id, 'polen-square-crop-lg'),
+                'cover'        =>  $video->vimeo_thumbnail,
+                'video_url'    => $video->vimeo_file_play,
+                'initials'     => polen_get_initials_name( $cart_item->get_name_to_video() ),
+            ];
+        }
+        return api_response( $data, 200 );
     }
 }
