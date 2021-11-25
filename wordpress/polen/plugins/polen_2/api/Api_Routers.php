@@ -150,5 +150,21 @@ class Api_Routers
                 'permission_callback' => [ $api_fan_order, 'check_permission_get_item' ],
             )
         ));
+
+        $api_user = new Api_User();
+        register_rest_route('v3', '/users', array(
+            array(
+                'methods' => WP_REST_Server::CREATABLE,
+                'args' => array(
+                    'email'            => [],
+                    'password'         => [],
+                    'terms_conditions' => [],
+                    'user_name'        => [],
+                    'campaing'         => [],
+                ),
+                'callback' => [ $api_user, 'sign_on' ],
+                'permission_callback' => [ $api_user, 'check_permission_create_item' ],
+            )
+        ));
     }
 }
