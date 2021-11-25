@@ -144,6 +144,7 @@ class Api_Routers
                     'password'         => [],
                     'terms_conditions' => [],
                     'user_name'        => [],
+                    'campaing'         => [],
                 ),
                 'callback' => [ $api_user, 'sign_on' ],
                 'permission_callback' => [ $api_user, 'check_permission_create_item' ],
