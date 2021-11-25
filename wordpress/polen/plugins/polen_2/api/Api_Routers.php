@@ -67,6 +67,22 @@ class Api_Routers
         ));
 
         /**
+         * ROTA: Para pegar os videos já feitos pelo talento da pagina
+         *
+         * @param int id talento
+         */
+        register_rest_route('v3', '/talent/(?P<id>[\d]+)/videos', array(
+            array(
+                'methods' => WP_REST_Server::READABLE,
+                'args' => array(
+                    'talent_id' => [],
+                ),
+                'callback' => [$controller, 'get_product_videos'],
+                'permission_callback' => '__return_true',
+            )
+        ));
+
+        /**
          * ROTA: metodo de pagamento
          *
          * @param name Nome cliente (required)
@@ -151,6 +167,10 @@ class Api_Routers
             )
         ));
 
+
+        /**
+         * Endpoint de cadastro de usuário
+         */
         $api_user = new Api_User();
         register_rest_route('v3', '/users', array(
             array(

@@ -2,6 +2,9 @@
 namespace Polen\Api;
 
 use Exception;
+use Polen\Includes\API\Polen_Api_Video_Info;
+use Polen\Includes\Polen_Talent;
+use Polen\Includes\Polen_Video_Info;
 use WP_REST_Response;
 use WP_REST_Request;
 
@@ -229,5 +232,23 @@ class Api_Controller{
             'src' => get_the_post_thumbnail_url($talent_id),
             'title' => $attachment->post_title,
         );
+    }
+
+    /**
+     * 
+     */
+    public function get_product_videos( $request )
+    {
+        $product_id = $request[ 'id' ];
+        
+        $Polen_Talent = new Polen_Talent();
+        $talent = $Polen_Talent->get_talent_from_product( $product_id );
+        $videos = Polen_Video_Info::select_by_talent_id( $talent->ID, 5 );
+        $video_info_api = new Polen_Api_Video_Info();
+        $data = [];
+        foreach( $videos as $video ) {
+            $data[] = $video_info_api->prepare_item_for_response( $video, $request );
+        }
+        return api_response( $data, 200 );
     }
 }
