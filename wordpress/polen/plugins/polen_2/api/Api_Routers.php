@@ -108,6 +108,22 @@ class Api_Routers
             )
         ));
 
+        /**
+         * ROTA: Recuperar a senha do usuario pelo o email
+         *
+         * @param email email do usuario para recuperar senha (required)
+         */
+        register_rest_route('v3', '/forgot_password', array(
+            array(
+                'methods' => WP_REST_Server::CREATABLE,
+                'args' => array(
+                    'email' => [],
+                ),
+                'callback' => [$controller, 'forgot_password'],
+                'permission_callback' => '__return_true',
+            )
+        ));
+
 
         $api_fan_order = new Api_Fan_Order();
         /**

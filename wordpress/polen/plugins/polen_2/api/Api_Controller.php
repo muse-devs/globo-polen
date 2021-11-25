@@ -151,6 +151,53 @@ class Api_Controller{
     }
 
     /**
+     * Rota para resetar a senha do usuario
+     *
+     * @param WP_REST_Request $request
+     * @return WP_REST_Response
+     */
+    function forgot_password(WP_REST_Request $request): WP_REST_Response
+    {
+        try {
+            $email = $request->get_param('email') ?? null;
+
+            if (null === $email) {
+                throw new Exception('E-mail é obrigatório.', 422);
+            }
+
+            $user_wp = get_user_by('email', $email);
+            if (!$user_wp) {
+                throw new Exception('Usuário não encontrado', 503);
+            }
+
+            $new_password = wp_generate_password();
+
+            $to = $email;
+            $subject = 'Recuperação de Senha';
+            $headers = array('Content-Type: text/html; charset=UTF-8');
+
+            $args = array(
+                'ID' => $user_wp->ID,
+                'user_pass' => $new_password,
+            );
+            wp_update_user($args);
+
+            $body = "<p>Segue abaixo sua nova senha para acesso ao Polen</p>";
+            $body .= "<p><strong>Nova Senha: {$new_password}</strong></p>";
+
+            wp_mail($to, $subject, $body, $headers);
+
+            return api_response(null, 204);
+
+        } catch (\Exception $e) {
+            return api_response(
+                array('message' => $e->getMessage()),
+                $e->getCode()
+            );
+        }
+    }
+
+    /**
      * Endpoint que receberá o request e criará uma order através da class Api_Checkout
      *
      * @param $request
