@@ -1,10 +1,7 @@
 <?php
 namespace Polen\Api;
 
-use Polen\Includes\Polen_SignInUser;
 use Polen\Includes\Polen_SignInUser_Strong_Password;
-use WP_REST_Response;
-
 class Api_User
 {
 
