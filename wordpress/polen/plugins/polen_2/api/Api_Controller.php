@@ -217,6 +217,22 @@ class Api_Controller{
     }
 
     /**
+     * Endpoint para validação de cupom
+     *
+     * @param $request
+     */
+    public function check_coupon($request)
+    {
+        $code_id = $request->get_param('coupon');
+
+        if (empty($code_id)) {
+            api_response('Cupom obrigatorio', 422);
+        }
+
+        $this->checkout->coupon_rules($code_id);
+    }
+
+    /**
      * Rotornar status e informações basicas de um pedido
      *
      * @param $order_id
