@@ -76,6 +76,7 @@ yarn.lock
 wordpress/polen/plugins/polen_2/vendor/*
 wordpress/polen/plugins/polen_2/composer.lock
 wordpress/debug.html
+wordpress/polen/plugins/polen_2/wordpress/debug.html
 
 # Ignorar arquivos descompactados no diretório de uploads padrão
 uploads/*
