@@ -148,7 +148,10 @@ if (!isset($_SESSION[$order_name])) {
 }
 
 // Zapier de compra finalizada
-if( isset( $Polen_Plugin_Settings['polen_zapier_new_order'] ) && $Polen_Plugin_Settings['polen_zapier_new_order'] == '1' ) {
+if( isset( $Polen_Plugin_Settings['polen_zapier_new_order'] ) 
+    && $Polen_Plugin_Settings['polen_zapier_new_order'] == '1' 
+    && $order->get_status() == Polen_Order::ORDER_STATUS_PAYMENT_APPROVED ) {
+
   if( empty( $order->get_meta( 'zapier_create_order_send_email' ) ) ) {
     $order->add_meta_data( 'zapier_create_order_send_email', '1', true );
     $order->save();
