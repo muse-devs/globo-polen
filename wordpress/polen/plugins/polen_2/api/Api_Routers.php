@@ -6,8 +6,11 @@ use WP_REST_Server;
 class Api_Routers
 {
 
+    protected $base;
+
     public function __construct()
     {
+        $this->base = 'v3';
         add_action('rest_api_init', [ $this, 'init_routers' ]);
     }
 
@@ -32,7 +35,7 @@ class Api_Routers
          *      ]
          * @param campaign_category Filtrar por categoria - slug (opcional)
          */
-        register_rest_route('v3', '/talents', array(
+        register_rest_route($this->base, '/talents', array(
             array(
                 'methods' => WP_REST_Server::READABLE,
                 'callback' => [$controller, 'talents'],
@@ -54,7 +57,7 @@ class Api_Routers
          * @param slug slug do talento (required)
          * @param campaign slug da campanha do talento (required)
          */
-        register_rest_route('v3', '/talent', array(
+        register_rest_route($this->base, '/talent', array(
             array(
                 'methods' => WP_REST_Server::READABLE,
                 'args' => array(
@@ -71,11 +74,11 @@ class Api_Routers
          *
          * @param int id talento
          */
-        register_rest_route('v3', '/talent/(?P<id>[\d]+)/videos', array(
+        register_rest_route($this->base, '/talent/(?P<slug>[^/]*)/videos', array(
             array(
                 'methods' => WP_REST_Server::READABLE,
                 'args' => array(
-                    'talent_id' => [],
+                    'slug' => [],
                 ),
                 'callback' => [$controller, 'get_product_videos'],
                 'permission_callback' => '__return_true',
@@ -92,7 +95,7 @@ class Api_Routers
          * @param product_id ID do produto que será comprado (required)
          * @param coupon Cupom que será utilizado na compra (opcional)
          */
-        register_rest_route('v3', '/payment', array(
+        register_rest_route($this->base, '/payment', array(
             array(
                 'methods' => WP_REST_Server::CREATABLE,
                 'args' => array(
@@ -113,7 +116,7 @@ class Api_Routers
          *
          * @param product_id ID do produto que será comprado (required)
          */
-        register_rest_route('v3', '/cart', array(
+        register_rest_route($this->base, '/cart', array(
             array(
                 'methods' => WP_REST_Server::READABLE,
                 'args' => array(
@@ -129,7 +132,7 @@ class Api_Routers
          *
          * @param email email do usuario para recuperar senha (required)
          */
-        register_rest_route('v3', '/forgot_password', array(
+        register_rest_route($this->base, '/forgot_password', array(
             array(
                 'methods' => WP_REST_Server::CREATABLE,
                 'args' => array(
@@ -146,7 +149,7 @@ class Api_Routers
          * ROTA: Responsavel pelo fan Logado
          * Order.
          */
-        register_rest_route('v3', '/fan/orders', array(
+        register_rest_route($this->base, '/fan/orders', array(
             array(
                 'methods' => WP_REST_Server::READABLE,
                 'args' => array(
@@ -156,7 +159,7 @@ class Api_Routers
                 'permission_callback' => [ $api_fan_order, 'check_permission_get_items' ],
             )
         ));
-        register_rest_route('v3', '/fan/orders/(?P<id>[\d]+)', array(
+        register_rest_route($this->base, '/fan/orders/(?P<id>[\d]+)', array(
             array(
                 'methods' => WP_REST_Server::READABLE,
                 'args' => array(
@@ -172,7 +175,7 @@ class Api_Routers
          * Endpoint de cadastro de usuário
          */
         $api_user = new Api_User();
-        register_rest_route('v3', '/users', array(
+        register_rest_route($this->base, '/users', array(
             array(
                 'methods' => WP_REST_Server::CREATABLE,
                 'args' => array(
