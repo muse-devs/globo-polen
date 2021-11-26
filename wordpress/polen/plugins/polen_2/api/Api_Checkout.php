@@ -170,7 +170,7 @@ class Api_Checkout{
      *
      * @param $code_id
      */
-    private function coupon_rules($code_id)
+    public function coupon_rules($code_id)
     {
         try {
             $coupon = new WC_Coupon($code_id);
@@ -225,22 +225,6 @@ class Api_Checkout{
             'cpf' => 'CPF',
             'product_id' => 'ID do Produto é obrigatório',
         ];
-    }
-
-    /**
-     * Endpoint para validação de cupom
-     *
-     * @param $request
-     */
-    public function check_coupon($request)
-    {
-        $code_id = $request->get_param('coupon');
-
-        if (empty($code_id)) {
-            api_response('Cupom obrigatorio', 422);
-        }
-
-        $this->checkout->coupon_rules($code_id);
     }
 
     /**
