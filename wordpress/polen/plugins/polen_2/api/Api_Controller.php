@@ -285,7 +285,8 @@ class Api_Controller{
             $data[] = [
                 'video_info_id'=> $video->ID,
                 'talent_id'    => $video->talent_id,
-                'video_id'     => $video->vimeo_id,
+                'vimeo_id'     => $video->vimeo_id,
+                'hash'         => $video->hash,
                 'talent_thumb' => polen_get_avatar_src($video->talent_id, 'polen-square-crop-lg'),
                 'cover'        =>  $video->vimeo_thumbnail,
                 'video_url'    => $video->vimeo_file_play,
