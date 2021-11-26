@@ -335,7 +335,7 @@ class Api_Gateway_Tuna
         $status_order = [
             'pending' => [
                 'message' => 'Pagamento pendente',
-                'status_code' => 204,
+                'status_code' => 200,
             ],
             'payment-approved' => [
                 'message' => 'Pagamento aprovado',
