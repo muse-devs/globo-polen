@@ -179,7 +179,7 @@ class Api_Gateway_Tuna
      * @param $current_user
      * @return string
      */
-    public function get_session_id($current_user): string
+    public function get_session_id($current_user)
     {
         try {
             $url = $this->get_endpoint_url('Token/NewSession', true);
@@ -222,7 +222,7 @@ class Api_Gateway_Tuna
      * @param array $card
      * @return string
      */
-    public function generate_token_card(string $session_id, array $card): string
+    public function generate_token_card(string $session_id, array $card)
     {
         try {
             $url = $this->get_endpoint_url('Token/Generate', true);
@@ -232,7 +232,7 @@ class Api_Gateway_Tuna
             $body = [
                 "SessionId" => $session_id,
                 "Card" => [
-                    "CardNumber" => $card['tuna_card_number'],
+                    "CardNumber" => preg_replace("/[^0-9]/", '', $card['tuna_card_number']),
                     "CardHolderName" => $card['tuna_card_holder_name'],
                     "ExpirationMonth" => (int) $tuna_expiration_date[0],
                     "ExpirationYear" => (int) $tuna_expiration_date[1],
