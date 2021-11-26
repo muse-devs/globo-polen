@@ -360,12 +360,13 @@ class Api_Gateway_Tuna
     private function credentials()
     {
         //TODO: Criar uma forma para deixar dinamico, talvez no REDUX
-        $this->partner_key = '1c714e17-60a8-4a2f-9222-e10c48713810';
-        $this->partner_account = 'polen-homolog';
-        $this->operation_mode = 'production';
 
-//        $this->partner_key = 'a3823a59-66bb-49e2-95eb-b47c447ec7a7';
-//        $this->partner_account = 'demo';
-//        $this->operation_mode = 'sandbox';
+//        $this->partner_key = '1c714e17-60a8-4a2f-9222-e10c48713810';
+//        $this->partner_account = 'polen-homolog';
+//        $this->operation_mode = 'production';
+
+        $this->partner_key = 'a3823a59-66bb-49e2-95eb-b47c447ec7a7';
+        $this->partner_account = 'demo';
+        $this->operation_mode = 'sandbox';
     }
 }
