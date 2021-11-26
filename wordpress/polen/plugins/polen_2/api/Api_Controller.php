@@ -220,16 +220,34 @@ class Api_Controller{
      * Endpoint para validação de cupom
      *
      * @param $request
+     * @return WP_REST_Response
      */
-    public function check_coupon($request)
+    public function check_coupon($request): WP_REST_Response
     {
-        $code_id = $request->get_param('coupon');
+        $coupon_code = $request->get_param('coupon_code');
+        $value_cart = $request->get_param('cart_value');
 
-        if (empty($code_id)) {
-            api_response('Cupom obrigatorio', 422);
+        if (empty($coupon_code)) {
+            return api_response('Cupom obrigatorio', 422);
         }
 
-        $this->checkout->coupon_rules($code_id);
+        if (empty($value_cart)) {
+            return api_response('Valor atual do carrinho é obrigatório', 422);
+        }
+
+        $this->checkout->coupon_rules($coupon_code);
+
+        $coupon = new WC_Coupon($coupon_code);
+
+        $value_discount = $coupon->get_discount_amount($value_cart);
+
+        $response = [
+            'discounted_amount' => $value_cart - $value_discount,
+            'discount_amount' => (int) $coupon->get_amount(),
+            'discount_type' => $coupon->get_discount_type(),
+        ];
+
+        return api_response($response);
     }
 
     /**
