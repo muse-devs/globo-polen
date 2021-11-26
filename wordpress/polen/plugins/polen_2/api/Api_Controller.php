@@ -283,19 +283,44 @@ class Api_Controller{
 
         $data = [];
         foreach( $videos as $video ) {
-            $order = wc_get_order( $video->order_id );
-            $cart_item = Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
-            $data[] = [
-                'video_info_id'=> $video->ID,
-                'talent_id'    => $video->talent_id,
-                'vimeo_id'     => $video->vimeo_id,
-                'hash'         => $video->hash,
-                'talent_thumb' => polen_get_avatar_src($video->talent_id, 'polen-square-crop-lg'),
-                'cover'        =>  $video->vimeo_thumbnail,
-                'video_url'    => $video->vimeo_file_play,
-                'initials'     => polen_get_initials_name( $cart_item->get_name_to_video() ),
-            ];
+            $data[] = $this->create_item_video( $video );
         }
         return api_response( $data, 200 );
+    }
+
+
+    /**
+     * 
+     * @param Video_Info
+     */
+    protected function create_item_video( $video )
+    {
+        $order = wc_get_order( $video->order_id );
+        $cart_item = Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
+        $product = $cart_item->get_product();
+
+        $categories_ids = $product->get_category_ids();
+        $categories = [];
+        foreach( $categories_ids as $category_id ) {
+            $term = get_term_by( 'id', $category_id, 'product_cat' );
+            $categories[] = [
+                'id'   => $term->term_id,
+                'name' => $term->name,
+                'slug' => $term->slug,
+            ];
+        }
+
+        return [
+            'video_info_id'    => $video->ID,
+            'talent_id'        => $video->talent_id,
+            'vimeo_id'         => $video->vimeo_id,
+            'hash'             => $video->hash,
+            'talent_thumb'     => polen_get_avatar_src( $video->talent_id, 'polen-square-crop-lg' ),
+            'talent_name'      => $product->get_title(),
+            'talent_category'  => $categories,
+            'cover'            => $video->vimeo_thumbnail,
+            'video_url'        => $video->vimeo_file_play,
+            'initials'         => polen_get_initials_name( $cart_item->get_name_to_video() ),
+        ];
     }
 }
