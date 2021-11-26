@@ -220,9 +220,8 @@ class Api_Controller{
      * Endpoint para validação de cupom
      *
      * @param $request
-     * @return WP_REST_Response
      */
-    public function check_coupon($request): WP_REST_Response
+    public function check_coupon($request)
     {
         $coupon_code = $request->get_param('coupon_code');
         $value_cart = $request->get_param('cart_value');
