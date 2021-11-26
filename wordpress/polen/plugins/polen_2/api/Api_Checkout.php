@@ -20,8 +20,8 @@ class Api_Checkout{
     {
         $this->woocommerce = new Client(
             'https://polen-api.c9t.pw',
-            'ck_3dd8bbb3e721ee5fac3fc94c67aa3d90a15333a1',
-            'cs_65a67aa24cf9158ab6c2375e523231c7d58c8716',
+            'ck_bbac69256370675706263779310cc2eaa27534c9',
+            'cs_1c95fc725d7e5bdc367be454ec9c47dcfc584ede',
             [
                 'wp_api' => true,
                 'version' => 'wc/v3'
