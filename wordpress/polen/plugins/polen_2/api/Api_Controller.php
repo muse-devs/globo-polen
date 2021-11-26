@@ -272,8 +272,11 @@ class Api_Controller{
      */
     public function get_product_videos( $request )
     {
-        $product_id = $request[ 'id' ];
-        
+        $slug = $request[ 'slug' ];
+        $product_id = wc_get_product_id_by_sku( $slug );
+        if( empty( $product_id ) ) {
+            return api_response( 'Produto não encontrado', 404 );
+        }
         $Polen_Talent = new Polen_Talent();
         $talent = $Polen_Talent->get_talent_from_product( $product_id );
         $videos = Polen_Video_Info::select_by_talent_id( $talent->ID, 5 );
