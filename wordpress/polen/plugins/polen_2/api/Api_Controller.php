@@ -7,6 +7,7 @@ use Polen\Includes\Cart\Polen_Cart_Item_Factory;
 use Polen\Includes\Polen_Talent;
 use Polen\Includes\Polen_Video_Info;
 use WC_Order;
+use WC_Coupon;
 use WP_REST_Response;
 use WP_REST_Request;
 
