@@ -819,7 +819,7 @@ function polen_get_combate_banner($link)
 <?php
 }
 
-function polen_get_home_banner($link)
+function polen_get_bw_banner($link)
 {
 ?>
   <div class="row mt-4">
@@ -834,6 +834,23 @@ function polen_get_home_banner($link)
           </div>
         </div>
       </a>
+    </div>
+  </div>
+<?php
+}
+
+function polen_get_lacta_banner($link)
+{
+?>
+  <div class="row mt-4">
+    <div class="col-sm-12">
+      <div class="lacta-banner" style="background: url('<?php echo TEMPLATE_URI . '/assets/img/lacta/bg-banner.jpg'; ?>')center no-repeat">
+        <div class="content">
+          <h2>Natal Lacta</h2>
+          <p>Criando laços para emocionar quem você ama</p>
+          <a href="<?php echo $link; ?>">Saiba mais</a>
+        </div>
+      </div>
     </div>
   </div>
 <?php
