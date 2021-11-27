@@ -223,10 +223,10 @@ function polen_front_get_banner()
 }
 
 // $size pode ser 'medium' e 'small'
-function polen_front_get_card($item, $size = "small", $social = false)
+function polen_front_get_card($item, $size = "small", $social = false, $campanha = "")
 {
   $product = wc_get_product($item['ID']);
-  $social = product_is_social_base($product);
+  // $social = product_is_social_base($product);
   // $social == false ? $social = social_product_is_social(wc_get_product($item['ID']), social_get_category_base()) : false;
   $class = $size;
   if ($size === "small") {
@@ -237,6 +237,10 @@ function polen_front_get_card($item, $size = "small", $social = false)
 
   if ($social) {
     $size .= " yellow";
+  }
+
+  if ($campanha) {
+    $size .= " promotional-" . $campanha;
   }
 
   if (isset($item['ID'])) {
@@ -313,7 +317,7 @@ function polen_banner_scrollable($items, $title, $link, $subtitle = "", $social 
 <?php
 }
 
-function polen_front_get_news($items, $title, $link, $social = false)
+function polen_front_get_news($items, $title, $link, $social = "", $campanha = "")
 {
   if (!$items) {
     return;
@@ -336,7 +340,7 @@ function polen_front_get_news($items, $title, $link, $social = false)
           <div class="banner-wrapper">
             <div class="banner-content">
               <?php foreach ($items as $item) : ?>
-                <?php polen_front_get_card($item, "responsive", $social); ?>
+                <?php polen_front_get_card($item, "responsive", $social, $campanha); ?>
               <?php endforeach; ?>
             </div>
           </div>
