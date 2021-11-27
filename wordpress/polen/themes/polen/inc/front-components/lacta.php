@@ -42,3 +42,40 @@ function getTutorialLacta()
   </section>
 <?php
 }
+
+function get_lacta_insctruction( $product )
+{
+?>
+  <div class="lacta-instruction event-lacta">
+    <div class="header-box text-center">
+      <h3 style="line-height:20px;">Como resgatar meu vídeo</h3>
+    </div>
+    <div class="content-box mt-3 px-2">
+      <div class="row">
+        <div class="col-12 d-flex align-items-center">
+          <ul class="order-flow half">
+            <li class="item itempayment-approved complete">
+              <span class="background status">1</span>
+              <span class="text">
+                <p class="description">Compre produtos no site da <a href="#" target="_blank"><b>Lacta.</b></a></p>
+              </span>
+            </li>
+            <li class="item itempayment-approved complete">
+              <span class="background status">2</span>
+              <span class="text">
+                <p class="description">Receba um e-mail da Lacta com o cupom para obter seu vídeo.</p>
+              </span>
+            </li>
+            <li class="item itempayment-approved complete">
+              <span class="background status">3</span>
+              <span class="text">
+                <p class="description">Clique em "Resgatar meu vídeo" no topo da página e insira o seu cupom.</p>
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+<?php
+}
