@@ -636,6 +636,55 @@
   }
 }
 
+.lacta-banner {
+  width: 100%;
+  height: 300px;
+  background-size: cover!important;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  @include media-breakpoint-down(xs) {
+    height: 190px;
+  }
+  .content {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 20px;
+    h2 {
+      font-size: 41px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 49px;
+      letter-spacing: 0em;
+      text-align: center;
+      width: 100%;
+      color: #fff;
+    }
+    p {
+      font-size: 15px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 18px;
+      letter-spacing: 0em;
+      text-align: center;
+      width: 100%;
+      color: #fff;
+    }
+    a {
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 17px;
+      letter-spacing: 0em;
+      text-align: center;
+      color: #fff;
+      text-decoration: underline;
+    }
+  }
+}
+
 .slick-alt {
   width: 130%;
   overflow: hidden;
