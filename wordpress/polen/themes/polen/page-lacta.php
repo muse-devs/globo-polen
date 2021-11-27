@@ -25,6 +25,7 @@ get_header();
       ?>
     </div>
   </div>
+  <?php getTutorialLacta(); ?>
   <?php
   while (have_posts()) :
     the_post();
