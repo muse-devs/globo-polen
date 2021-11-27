@@ -5,6 +5,7 @@ namespace Polen\Includes;
 use Polen\Admin\Polen_Admin;
 use Polen\Admin\Polen_Forms;
 use Polen\Admin\Polen_Admin_Custom_Post_Types;
+use Polen\Api\Api;
 use Polen\Enterprise\Enterprise;
 use Polen\Includes\Polen_Plugin_Settings;
 use Polen\Publics\Polen_Public;
@@ -76,6 +77,7 @@ class Polen {
         new Polen_Cupom_Create_Admin_Menu( true );
         new Polen_Forms();
         new Polen_Form_DB();
+        new Api();
 
         //Endpoints Talent Logged
         $ctler = new Polen_Talent_Controller();
