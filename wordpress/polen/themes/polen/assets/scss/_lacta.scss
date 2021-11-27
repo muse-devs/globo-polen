@@ -1,0 +1,19 @@
+:root {
+  .event-lacta,
+  .page-template-page-lacta {
+    --primary: #0033a0;
+  }
+}
+.lacta-top-banner {
+  width: 100%;
+  height: 100vw;
+  max-height: 400px;
+  color: var(--light);
+  background: no-repeat center bottom/cover url(../img/lacta/top-bg.svg);
+  .title {
+    font-size: 32px;
+  }
+  p {
+    opacity: 0.8;
+  }
+}

@@ -26,6 +26,10 @@
   }
 }
 
+.page-template-page-lacta .masthead {
+  @extend .header-home;
+}
+
 .custom-logo {
   width: 5rem;
   max-width: 165px !important;
