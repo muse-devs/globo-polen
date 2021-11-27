@@ -3,28 +3,42 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
-#: client/data/settings/resolvers.js:18
-msgid "Error retrieving settings."
+#: client/blocks/upe/payment-method.js:49
+msgid "Credit / Debit Card"
 msgstr ""
 
-#: client/entrypoints/payment-request-settings/payment-request-page.js:14
-msgid "Google Pay / Apple Pay"
+#: client/blocks/upe/payment-method.js:65
+msgid "Stripe Credit Card payment method"
 msgstr ""
 
-#: client/entrypoints/payment-request-settings/payment-request-page.js:17
+#: client/components/payment-method-fees-pill/index.js:20
+#. %s: Transaction fee text.
+msgid "Base transaction fees: %s"
+msgstr ""
+
+#: client/data/account/resolvers.js:18
+msgid "Error retrieving account data."
+msgstr ""
+
+#: client/payment-methods-map.js:103
+msgid "Alipay"
+msgstr ""
+
+#: client/payment-methods-map.js:104
 msgid ""
-"Decide how buttons for digital wallets Apple Pay and Google Pay are "
-"displayed in your store. Depending on their web browser and their wallet "
-"configurations, your customers will see either Apple Pay or Google Pay, but "
-"not both."
+"Alipay is a popular wallet in China, operated by Ant Financial Services "
+"Group, a financial services provider affiliated with Alibaba."
 msgstr ""
 
-#: client/entrypoints/payment-request-settings/payment-request-page.js:28
-msgid "View Apple Pay Guidelines"
+#: client/payment-methods-map.js:125
+msgid "Multibanco"
 msgstr ""
 
-#: client/entrypoints/payment-request-settings/payment-request-page.js:36
-msgid "View Google Pay Guidelines"
+#: client/payment-methods-map.js:126
+msgid ""
+"Multibanco is an interbank network that links the ATMs of all major banks "
+"in Portugal, allowing customers to pay through either their ATM or online "
+"banking environment."
 msgstr ""
 
 #: client/payment-methods-map.js:14
@@ -108,70 +122,122 @@ msgid ""
 "methods."
 msgstr ""
 
-#: client/settings/general-settings-section/remove-method-confirmation-modal.js:16
+#: client/settings/advanced-settings-section/debug-mode.js:21
+msgid "Debug mode"
+msgstr ""
+
+#: client/settings/advanced-settings-section/debug-mode.js:25
+msgid "Log error messages"
+msgstr ""
+
+#: client/settings/advanced-settings-section/debug-mode.js:29
+msgid ""
+"When enabled, payment error logs will be saved to WooCommerce > Status > "
+"Logs."
+msgstr ""
+
+#: client/settings/general-settings-section/disable-upe-confirmation-modal.js:100
+msgid "Disable the new payments experience"
+msgstr ""
+
+#: client/settings/general-settings-section/disable-upe-confirmation-modal.js:114
+#: client/settings/general-settings-section/remove-method-confirmation-modal.js:42
+msgid "Cancel"
+msgstr ""
+
+#: client/settings/general-settings-section/disable-upe-confirmation-modal.js:123
+msgid "Disable"
+msgstr ""
+
+#: client/settings/general-settings-section/disable-upe-confirmation-modal.js:129
+msgid ""
+"Without the new payments experience, your customers will only be able to "
+"pay using credit card / debit card. You will not be able to add other "
+"sales-boosting payment methods anymore."
+msgstr ""
+
+#: client/settings/general-settings-section/disable-upe-confirmation-modal.js:138
+msgid "Payment methods that require the new payments experience:"
+msgstr ""
+
+#: client/settings/general-settings-section/disable-upe-confirmation-modal.js:165
+msgid "Need help? Visit {{ docsLink /}} or {{supportLink /}}."
+msgstr ""
+
+#: client/settings/general-settings-section/disable-upe-confirmation-modal.js:172
+msgid "Stripe docs"
+msgstr ""
+
+#: client/settings/general-settings-section/disable-upe-confirmation-modal.js:180
+msgid "contact support"
+msgstr ""
+
+#: client/settings/general-settings-section/disable-upe-confirmation-modal.js:53
+msgid "🤔 What made you disable the new payments experience?"
+msgstr ""
+
+#: client/settings/general-settings-section/disable-upe-confirmation-modal.js:60
+msgid "Share feedback (1 min)"
+msgstr ""
+
+#: client/settings/general-settings-section/disable-upe-confirmation-modal.js:73
+msgid "There was an error disabling the new payment methods."
+msgstr ""
+
+#: client/settings/general-settings-section/remove-method-confirmation-modal.js:14
+#. %1: payment method name (e.g.: giropay, EPS, Sofort, etc).
+msgid ""
+"Are you sure you want to remove <strong>%1$s</strong>? Your customers will "
+"no longer be able to pay using <strong>%1$s</strong>."
+msgstr ""
+
+#: client/settings/general-settings-section/remove-method-confirmation-modal.js:27
 #. %s: payment method name (e.g.: giropay, EPS, Sofort, etc).
 msgid "Remove %s from checkout"
 msgstr ""
 
-#: client/settings/general-settings-section/remove-method-confirmation-modal.js:28
-#: client/settings/payments-and-transactions-section/manual-capture-control.js:90
-msgid "Cancel"
-msgstr ""
-
-#: client/settings/general-settings-section/remove-method-confirmation-modal.js:31
+#: client/settings/general-settings-section/remove-method-confirmation-modal.js:39
 msgid "Remove"
 msgstr ""
 
-#: client/settings/general-settings-section/remove-method-confirmation-modal.js:39
-#. %1: payment method name (e.g.: giropay, EPS, Sofort, etc).
-msgid ""
-"Are you sure you want to remove %1$s? Your customers will no longer be able "
-"to pay using %1$s."
-msgstr ""
-
-#: client/settings/general-settings-section/remove-method-confirmation-modal.js:47
+#: client/settings/general-settings-section/remove-method-confirmation-modal.js:53
 msgid "You can add it again at any time in Stripe settings."
 msgstr ""
 
-#: client/settings/general-settings-section/upe-opt-in-banner.js:24
-msgid "Enable the new Stripe checkout experience"
+#: client/settings/payment-settings/general-settings-section.js:109
+msgid "Edit account keys"
 msgstr ""
 
-#: client/settings/general-settings-section/upe-opt-in-banner.js:28
+#: client/settings/payment-settings/general-settings-section.js:59
+msgid "Enable Stripe"
+msgstr ""
+
+#: client/settings/payment-settings/general-settings-section.js:63
+msgid "When enabled, payment methods powered by Stripe will appear on checkout."
+msgstr ""
+
+#: client/settings/payment-settings/general-settings-section.js:69
+msgid "Display settings"
+msgstr ""
+
+#: client/settings/payment-settings/general-settings-section.js:76
 msgid ""
-"Get early access to additional payment methods and an improved checkout "
-"experience, now available to some merchants."
+"Enter the payment method name that will be displayed at checkout when there "
+"are multiple available payment methods."
 msgstr ""
 
-#: client/settings/payment-request-section/index.js:109
-msgid "Show express checkouts on"
-msgstr ""
-
-#: client/settings/payment-request-section/index.js:127
-msgid "Checkout"
-msgstr ""
-
-#: client/settings/payment-request-section/index.js:145
-msgid "Product page"
-msgstr ""
-
-#: client/settings/payment-request-section/index.js:159
-msgid "Cart"
-msgstr ""
-
-#: client/settings/payment-request-section/index.js:171
-msgid "Customize appearance"
-msgstr ""
-
-#: client/settings/payment-request-section/index.js:68
-msgid "Enable express checkouts"
-msgstr ""
-
-#: client/settings/payment-request-section/index.js:74
+#: client/settings/payment-settings/general-settings-section.js:80
 msgid ""
-"By enabling this feature, you agree to {{stripeLink}}Stripe{{/stripeLink}}, "
-"{{appleLink}}Apple{{/appleLink}}, and {{googleLink}}Google{{/googleLink}}'s "
-"terms of use."
+"Enter payment method details that will be displayed at checkout, in the "
+"order confirmation screen and in the order notes."
+msgstr ""
+
+#: client/settings/payment-settings/general-settings-section.js:86
+msgid "Name"
+msgstr ""
+
+#: client/settings/payment-settings/general-settings-section.js:92
+msgid "Description"
 msgstr ""
 
 #: client/settings/payments-and-transactions-section/index.js:103
@@ -185,25 +251,25 @@ msgstr ""
 msgid "Full bank statement"
 msgstr ""
 
-#: client/settings/payments-and-transactions-section/index.js:119
+#: client/settings/payments-and-transactions-section/index.js:121
 msgid "Add customer order number to the bank statement"
 msgstr ""
 
-#: client/settings/payments-and-transactions-section/index.js:123
+#: client/settings/payments-and-transactions-section/index.js:125
 msgid ""
 "When enabled, we'll include the order number for card and express checkout "
 "transactions."
 msgstr ""
 
-#: client/settings/payments-and-transactions-section/index.js:149
+#: client/settings/payments-and-transactions-section/index.js:151
 msgid "We'll use the short version in combination with the customer order number."
 msgstr ""
 
-#: client/settings/payments-and-transactions-section/index.js:153
+#: client/settings/payments-and-transactions-section/index.js:155
 msgid "Shortened customer bank statement"
 msgstr ""
 
-#: client/settings/payments-and-transactions-section/index.js:168
+#: client/settings/payments-and-transactions-section/index.js:175
 msgid "Cards & Express Checkouts"
 msgstr ""
 
@@ -247,60 +313,64 @@ msgstr ""
 msgid "Customer bank statement"
 msgstr ""
 
-#: client/settings/payments-and-transactions-section/manual-capture-control.js:102
-msgid "Are you sure you want to enable manual capture of payments?"
+#: client/settings/payments-and-transactions-section/statement-preview/index.js:36
+msgid "Transaction"
 msgstr ""
 
-#: client/settings/payments-and-transactions-section/manual-capture-control.js:109
+#: client/settings/payments-and-transactions-section/statement-preview/index.js:37
+msgid "Amount"
+msgstr ""
+
+#: client/upe-onboarding-wizard/upe-preview-methods-selector/enable-upe-preview-task.js:103
+msgid "FREE upgrade exclusive to Stripe users."
+msgstr ""
+
+#: client/upe-onboarding-wizard/upe-preview-methods-selector/enable-upe-preview-task.js:109
+msgid "No hidden costs or setup fees."
+msgstr ""
+
+#: client/upe-onboarding-wizard/upe-preview-methods-selector/enable-upe-preview-task.js:124
+msgid "Checkout is completed without leaving your store."
+msgstr ""
+
+#: client/upe-onboarding-wizard/upe-preview-methods-selector/enable-upe-preview-task.js:130
+msgid "Customers see only payment methods most relevant for them."
+msgstr ""
+
+#: client/upe-onboarding-wizard/upe-preview-methods-selector/enable-upe-preview-task.js:136
+msgid "Refined checkout experience designed for desktop and mobile."
+msgstr ""
+
+#: client/upe-onboarding-wizard/upe-preview-methods-selector/enable-upe-preview-task.js:147
+msgid "Enable automatic capture of payments"
+msgstr ""
+
+#: client/upe-onboarding-wizard/upe-preview-methods-selector/enable-upe-preview-task.js:153
 msgid ""
-"Only cards support manual capture. When enabled, all other payment methods "
-"will be hidden from checkout."
+"In order to enable the new experience you need to enable the \"automatic "
+"capture\" of payments at checkout."
 msgstr ""
 
-#: client/settings/payments-and-transactions-section/manual-capture-control.js:115
-msgid ""
-"You must capture the payment on the order details screen within 7 days of "
-"authorization, otherwise the money will return to the shopper."
-msgstr ""
-
-#: client/settings/payments-and-transactions-section/manual-capture-control.js:71
-msgid "Issue an authorization on checkout, and capture later"
-msgstr ""
-
-#: client/settings/payments-and-transactions-section/manual-capture-control.js:75
-msgid ""
-"Charge must be captured on the order details screen within 7 days of "
-"authorization, otherwise the authorization and order will be canceled."
-msgstr ""
-
-#: client/settings/payments-and-transactions-section/manual-capture-control.js:83
-msgid "Enable manual capture"
-msgstr ""
-
-#: client/settings/payments-and-transactions-section/manual-capture-control.js:96
+#: client/upe-onboarding-wizard/upe-preview-methods-selector/enable-upe-preview-task.js:169
 msgid "Enable"
 msgstr ""
 
-#: client/upe-onboarding-wizard/upe-preview-methods-selector/add-payment-methods-task.js:135
-msgid "Add payment methods"
-msgstr ""
-
-#: client/upe-onboarding-wizard/upe-preview-methods-selector/add-payment-methods-task.js:161
-msgid "Review accepted payment methods"
-msgstr ""
-
-#: client/upe-onboarding-wizard/upe-preview-methods-selector/add-payment-methods-task.js:170
+#: client/upe-onboarding-wizard/upe-preview-methods-selector/enable-upe-preview-task.js:56
 msgid ""
-"We've added methods that you'd already enabled. For best results, we "
-"recommand adding all available payment methods. We'll only show your "
-"customers the most relevant payment methods based on their location and "
-"purchasing history. {{learnMoreLink}}Learn more{{/learnMoreLink}}"
+"{{wrapper}}Enable the new Stripe checkout experience{{/wrapper}} "
+"{{earlyAccessWrapper}}Early access{{/earlyAccessWrapper}}"
 msgstr ""
 
-#: client/upe-onboarding-wizard/upe-preview-methods-selector/add-payment-methods-task.js:187
-msgid "Payments accepted at checkout"
+#: client/upe-onboarding-wizard/upe-preview-methods-selector/enable-upe-preview-task.js:71
+msgid ""
+"Get early access to additional payment methods and an improved checkout "
+"experience, coming soon to Stripe. {{learnMoreLink /}}"
 msgstr ""
 
-#: client/upe-onboarding-wizard/upe-preview-methods-selector/add-payment-methods-task.js:197
-msgid "Select all"
+#: client/upe-onboarding-wizard/upe-preview-methods-selector/enable-upe-preview-task.js:80
+msgid "Learn more"
+msgstr ""
+
+#: client/upe-onboarding-wizard/upe-preview-methods-selector/enable-upe-preview-task.js:97
+msgid "Easily add new payment methods used by customers from all over the world."
 msgstr ""
