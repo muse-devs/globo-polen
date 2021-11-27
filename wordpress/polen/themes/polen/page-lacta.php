@@ -2,7 +2,8 @@
 
 /** Template Name: Página - Lacta */
 
-$talents = polen_get_talents_by_campaingn('lacta');
+// $talents = polen_get_talents_by_campaingn('lacta');
+$talents = array_chunk(polen_get_talents(16), 8);
 
 get_header();
 ?>
@@ -26,6 +27,11 @@ get_header();
     </div>
   </div>
   <?php getTutorialLacta(); ?>
+  <?php
+  polen_front_get_news($talents[0], null, null, false, "lacta");
+  polen_get_lacta_banner_2("#lacta");
+  polen_front_get_news($talents[1], null, null, false, "lacta");
+  ?>
   <?php
   while (have_posts()) :
     the_post();

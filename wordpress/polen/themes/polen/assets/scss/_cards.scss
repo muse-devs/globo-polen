@@ -267,7 +267,8 @@
     }
   }
   &.criesp,
-  &.yellow {
+  &.yellow,
+  &.promotional-lacta {
     padding-bottom: 5px;
     color: white;
     border-radius: 10px;
@@ -289,6 +290,12 @@
   &.yellow {
     color: var(--dark);
     background-color: $setembro-amarelo;
+  }
+  &.promotional {
+    &-lacta {
+      color: var(--light);
+      background-color: $lacta-primary;
+    }
   }
 }
 
