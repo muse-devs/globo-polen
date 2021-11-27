@@ -380,17 +380,20 @@ function polen_front_get_artists($items, $title, $social = false)
 <?php
 }
 
-function polen_front_get_videos($videos)
+function polen_front_get_videos($videos, $title = "Últimos vídeos gravados pelos Ídolos")
 {
   if (!$videos) {
 		return;
 	}
+  if( ! wp_script_is( 'owl-carousel', 'enqueued' ) ) {
+      wp_enqueue_script('owl-carousel');
+  }
 ?>
 	<section id="talent-videos" class="row my-1 pb-4">
     <div class="col-md-12">
       <header class="row my-3">
         <div class="col">
-          <h2>Últimos vídeos gravados pelos Ídolos</h2>
+          <h2><?php echo $title; ?></h2>
         </div>
       </header>
     </div>
@@ -461,6 +464,30 @@ function polen_front_get_videos($videos)
           $('#cover-box[data-id="'+id+'"]').removeClass("d-none");
         }
       });
+      jQuery(document).ready(function() {
+        $('#videos-carousel').owlCarousel({
+          loop: false,
+          stagePadding: 15,
+          items: 4,
+          animateOut: 'fadeOut',
+          margin: 5,
+          nav: true,
+          dots: false,
+          autoHeight:false,
+          navText: ["<i class='icon icon-left-arrow'></i>", "<i class='icon icon-right-arrow'></i>"],
+          responsive : {
+              0 : {
+                items: 2,
+              },
+              700 : {
+                items: 3,
+              },
+              1020 : {
+                items: 4,
+              }
+          }
+        });
+      })
     })(jQuery);
 	</script>
 <?php
