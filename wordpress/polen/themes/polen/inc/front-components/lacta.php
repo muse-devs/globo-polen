@@ -124,3 +124,34 @@ function polen_get_lacta_header_talent($image, $talent_name)
   </div>
 <?php
 }
+
+function lacta_coupon( $product )
+{
+?>
+	<div class="row mb-3">
+		<div class="col-12 event-lacta">
+			<form id="va-check-code">
+				<input type="hidden" name="action" value="check_coupon" />
+				<input type="hidden" name="product" value="<?= $product->get_sku(); ?>" />
+				<?php wp_nonce_field( 'check-coupon', 'security', true ); ?>
+				<input type="text" name="coupon" class="form-control form-control-lg mb-4" placeholder="Inserir cupom" required />
+				<input type="submit" class="mdc-button mdc-button--raised mdc-ripple-upgraded" value="Checar" />
+			</form>
+		</div>
+	</div>
+	<script>
+		const formId = '#va-check-code';
+		const form = document.querySelector(formId);
+		form.addEventListener("submit", function(e) {
+			e.preventDefault();
+			polAjaxForm(formId, function(res) {
+				polSpinner();
+				blockUnblockInputs(formId, true);
+				window.location.href = res.url;
+			}, function(e) {
+				polMessages.error(e.Error);
+			}, false);
+		});
+	</script>
+<?php
+}
