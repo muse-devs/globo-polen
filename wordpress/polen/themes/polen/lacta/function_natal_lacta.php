@@ -23,15 +23,19 @@ function polen_get_talents_by_campaingn(string $campaingn): array
     $query->get_posts();
     $talents = [];
     foreach ($query->get_posts() as $talents_campaign) {
-        $terms = get_the_terms($talents_campaign->ID, 'product_cat');
         $product = wc_get_product($talents_campaign->ID);
+        $ids = $product->get_category_ids();
+        $category = _polen_get_first_category_object($ids);
+
         $talents[] = [
-            'id' => $product->get_id(),
-            'name' => $product->get_name(),
-            'slug' => $product->get_slug(),
+            'ID' => $product->get_id(),
+            'name' => $product->get_title(),
             'image' => get_the_post_thumbnail_url($talents_campaign->ID),
-            'stock' => $product->get_stock_quantity() ?? 0,
-            'category' => $terms,
+            'talent_url' => $product->get_permalink(),
+            'price' => $product->get_price(),
+            'in_stock' => $product->is_in_stock(),
+            'slug' => $product->get_slug(),
+            'category' => $category->name,
         ];
     }
 
