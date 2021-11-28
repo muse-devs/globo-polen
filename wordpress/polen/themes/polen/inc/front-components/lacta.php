@@ -128,14 +128,19 @@ function polen_get_lacta_header_talent($image, $talent_name)
 function lacta_coupon( $product )
 {
 ?>
+  <?php $inputs = new Material_Inputs(); ?>
 	<div class="row mb-3">
 		<div class="col-12 event-lacta">
 			<form id="va-check-code">
-				<input type="hidden" name="action" value="check_coupon" />
-				<input type="hidden" name="product" value="<?= $product->get_sku(); ?>" />
-				<?php wp_nonce_field( 'check-coupon', 'security', true ); ?>
-				<input type="text" name="coupon" class="form-control form-control-lg mb-4" placeholder="Inserir cupom" required />
-				<input type="submit" class="mdc-button mdc-button--raised mdc-ripple-upgraded" value="Checar" />
+        <?php wp_nonce_field( 'check-coupon', 'security', true ); ?>
+        <?php
+          $inputs->input_hidden("action", "check_coupon");
+          $inputs->input_hidden("product", $product->get_sku());
+          $inputs->input_hidden("terms", "1");
+
+          $inputs->material_input(Material_Inputs::TYPE_TEXT, "coupon", "coupon", "Inserir cupom", true, "mb-3");
+          $inputs->material_button(Material_Inputs::TYPE_SUBMIT, "send_form", "Checar", "mdc-button mdc-button--raised mdc-ripple-upgraded");
+        ?>
 			</form>
 		</div>
 	</div>
@@ -166,22 +171,16 @@ function lacta_cart_form( $product, $coupon = "")
           <?= polen_get_toast('Seu cupom foi validado com sucesso! Para continuar preencha os dados abaixo.'); ?>
 				</div>
 			</div>
+      <?php $inputs = new Material_Inputs(); ?>
 			<form id="va-cart-form">
-				<input type="hidden" name="action" value="create_orders_video_autograph" />
-				<input type="hidden" name="coupon" value="<?php echo $coupon; ?>" />
-				<input type="hidden" name="product" value="<?php echo $product->get_sku(); ?>" />
-				<p>
-					<label for="" class="lg">Nome</label>
-					<input type="text" name="name" class="form-control form-control-lg" placeholder="Para quem é o vídeo?" required />
-				</p>
-				<p>
-					<label for="" class="lg">Cidade</label>
-					<input type="text" name="city" class="form-control form-control-lg" placeholder="Qual a cidade da pessoa?" required />
-				</p>
-				<p>
-					<label for="" class="lg">E-mail</label>
-					<input type="email" name="email" class="form-control form-control-lg" placeholder="Digite seu e-mail" required />
-				</p>
+        <?php
+          $inputs->input_hidden("action", "create_orders_video_autograph");
+          $inputs->input_hidden("coupon", $coupon);
+          $inputs->input_hidden("product", $product->get_sku());
+          $inputs->material_input(Material_Inputs::TYPE_TEXT, "name", "name", "Para quem é o vídeo?", true, "mb-3");
+          $inputs->material_input(Material_Inputs::TYPE_TEXT, "city", "city", "Qual a cidade da pessoa?", true, "mb-3");
+          $inputs->material_input(Material_Inputs::TYPE_EMAIL, "email", "email", "Digite seu e-mail", true, "mb-3");
+        ?>
 				<p>
 					<label>
 						<input type="checkbox" class="form-control form-control-lg" name="terms" id="terms" required />
@@ -190,8 +189,8 @@ function lacta_cart_form( $product, $coupon = "")
 				</p>
 				<p>
 					<input type="hidden" name="security" value="<?= wp_create_nonce(Promotional_Event_Admin::NONCE_ACTION); ?>" />
-					<input type="submit" class="mdc-button mdc-button--raised mdc-ripple-upgraded" value="Pedir meu vídeo" />
 				</p>
+        <?php $inputs->material_button(Material_Inputs::TYPE_SUBMIT, "send_form", "Pedir meu vídeo", "mdc-button mdc-button--raised mdc-ripple-upgraded"); ?>
 			</form>
 		</div>
 	</div>
