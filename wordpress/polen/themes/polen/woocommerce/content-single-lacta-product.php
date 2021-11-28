@@ -118,6 +118,9 @@ if( 'instock' == $product->get_stock_status() ) {
 		</div>
 	</div>
 
+  <!-- Banner -->
+  <?php polen_get_lacta_banner_2("/lacta"); ?>
+
 </div>
 
 <?php do_action('woocommerce_after_single_product'); ?>

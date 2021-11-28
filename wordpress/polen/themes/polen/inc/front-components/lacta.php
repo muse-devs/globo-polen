@@ -83,9 +83,11 @@ function get_lacta_insctruction( $product )
           </ul>
         </div>
       </div>
+    </div>
+  </div>
 <?php
 }
-      
+
 function polen_get_lacta_banner_2($link)
 {
 ?>

@@ -79,8 +79,9 @@
 }
 
 .lacta-instruction {
-	padding: 10px;
+	padding: 20px;
 	border-radius: 8px;
+  border: 1px solid var(--primary);
   width: 100%;
 	.header-box {
 		position: relative;
@@ -113,7 +114,7 @@
 		}
 		.order-flow {
 			.item {
-				min-height: 80px;
+				min-height: 60px;
 			}
 			.status {
 				display: flex;
