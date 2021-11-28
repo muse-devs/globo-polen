@@ -53,6 +53,16 @@ function event_promotional_is_app()
 }
 
 
+function event_promotional_product_is_event_promotional( $product )
+{
+    $is_ep = $product->get_meta( Promotional_Event_Admin::PRODUCT_METAKEY, true );
+    if( $is_ep && $is_ep == 'yes' ) {
+        return true;
+    }
+    return false;
+}
+
+
 function event_promotional_order_is_event_promotional( $order )
 {
     $is_ep = $order->get_meta( Promotional_Event_Admin::ORDER_METAKEY, true );
