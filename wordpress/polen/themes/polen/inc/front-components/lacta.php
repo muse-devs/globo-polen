@@ -51,7 +51,7 @@ function getTutorialLacta()
 <?php
 }
 
-function get_lacta_insctruction( $product )
+function get_lacta_insctruction()
 {
 ?>
   <div class="lacta-instruction event-lacta">
@@ -96,6 +96,31 @@ function polen_get_lacta_banner_2($link)
       <img src="<?php echo TEMPLATE_URI . '/assets/img/lacta/bg-banner-2.png'; ?>" alt="Banner Lacta" style="width: 100%" />
       <a href="<?php echo $link; ?>" target="_blank" class="lacta-banner-link"></a>
     </div>
+  </div>
+<?php
+}
+
+function polen_get_lacta_thank_you()
+{
+?>
+  <div class="lacta-thank-you event-lacta">
+    <div class="title-box">
+      <img src="<?php echo TEMPLATE_URI . '/assets/img/lacta/balao.png'; ?>" alt="Obrigado" />
+      <h4>Agradecemos seu pedido!</h4>
+    </div>
+    <p>Cleo pode enviar seu vídeo personalizado em até 15 dias</p>
+  </div>
+<?php
+}
+
+function polen_get_lacta_header_talent($image, $talent_name)
+{
+?>
+  <div class="lacta-header-talent event-lacta">
+    <figure class="image">
+      <img loading="lazy" src="<?php echo $image; ?>" alt="<?php echo $talent_name; ?>">
+    </figure>
+    <h2><?php echo $talent_name; ?></h2>
   </div>
 <?php
 }
