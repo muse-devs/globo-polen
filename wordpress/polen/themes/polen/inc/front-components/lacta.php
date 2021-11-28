@@ -100,7 +100,7 @@ function polen_get_lacta_banner_2($link)
 <?php
 }
 
-function polen_get_lacta_thank_you()
+function polen_get_lacta_thank_you($talent)
 {
 ?>
   <div class="lacta-thank-you event-lacta">
@@ -108,7 +108,7 @@ function polen_get_lacta_thank_you()
       <img src="<?php echo TEMPLATE_URI . '/assets/img/lacta/balao.png'; ?>" alt="Obrigado" />
       <h4>Agradecemos seu pedido!</h4>
     </div>
-    <p>Cleo pode enviar seu vídeo personalizado em até 15 dias</p>
+    <p><?php echo $talent; ?> pode enviar seu vídeo personalizado em até 15 dias</p>
   </div>
 <?php
 }
@@ -153,5 +153,73 @@ function lacta_coupon( $product )
 			}, false);
 		});
 	</script>
+<?php
+}
+
+function lacta_cart_form( $product, $coupon = "")
+{
+?>
+	<div class="row mb-3">
+		<div class="col-12 event-lacta">
+			<div class="row">
+				<div class="col-12 lacta-toast">
+          <?= polen_get_toast('Seu cupom foi validado com sucesso! Para continuar preencha os dados abaixo.'); ?>
+				</div>
+			</div>
+			<form id="va-cart-form">
+				<input type="hidden" name="action" value="create_orders_video_autograph" />
+				<input type="hidden" name="coupon" value="<?php echo $coupon; ?>" />
+				<input type="hidden" name="product" value="<?php echo $product->get_sku(); ?>" />
+				<p>
+					<label for="" class="lg">Nome</label>
+					<input type="text" name="name" class="form-control form-control-lg" placeholder="Para quem é o vídeo?" required />
+				</p>
+				<p>
+					<label for="" class="lg">Cidade</label>
+					<input type="text" name="city" class="form-control form-control-lg" placeholder="Qual a cidade da pessoa?" required />
+				</p>
+				<p>
+					<label for="" class="lg">E-mail</label>
+					<input type="email" name="email" class="form-control form-control-lg" placeholder="Digite seu e-mail" required />
+				</p>
+				<p>
+					<label>
+						<input type="checkbox" class="form-control form-control-lg" name="terms" id="terms" required />
+						<span class="woocommerce-terms-and-conditions-checkbox-text ml-2" style="line-height: 24px;">Li e concordo com o(s) <a href="http://polen.me/politica-de-privacidade/" class="woocommerce-terms-and-conditions-link" target="_blank">termos e condições</a></span>
+					</label>
+				</p>
+				<p>
+					<input type="hidden" name="security" value="<?= wp_create_nonce(Promotional_Event_Admin::NONCE_ACTION); ?>" />
+					<input type="submit" class="mdc-button mdc-button--raised mdc-ripple-upgraded" value="Pedir meu vídeo" />
+				</p>
+			</form>
+		</div>
+	</div>
+	<script>
+		const formId = '#va-cart-form';
+		const form = document.querySelector(formId);
+		form.addEventListener("submit", function(e) {
+			e.preventDefault();
+			polAjaxForm(formId, function(res) {
+				polSpinner();
+				blockUnblockInputs(formId, true);
+				window.location.href = res.url;
+			}, function(e) {
+				polMessages.error(e.Error);
+			});
+		});
+	</script>
+<?php
+}
+
+function get_lacta_partners()
+{
+?>
+	<div class="row">
+		<div class="col-12 d-flex justify-content-center align-items-center">
+      <img src="<?php echo TEMPLATE_URI . '/assets/img/lacta/logo-lacta.png'; ?>" alt="Lacta" style="max-width: 100%" />
+      <img src="<?php echo TEMPLATE_URI . '/assets/img/lacta/logo-lacos.png'; ?>" alt="Criando Laços" style="max-width: 100%" class="mr-4" />
+		</div>
+	</div>
 <?php
 }
