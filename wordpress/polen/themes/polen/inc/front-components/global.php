@@ -223,10 +223,10 @@ function polen_front_get_banner()
 }
 
 // $size pode ser 'medium' e 'small'
-function polen_front_get_card($item, $size = "small", $social = false)
+function polen_front_get_card($item, $size = "small", $social = false, $campanha = "")
 {
   $product = wc_get_product($item['ID']);
-  $social = product_is_social_base($product);
+  // $social = product_is_social_base($product);
   // $social == false ? $social = social_product_is_social(wc_get_product($item['ID']), social_get_category_base()) : false;
   $class = $size;
   if ($size === "small") {
@@ -237,6 +237,10 @@ function polen_front_get_card($item, $size = "small", $social = false)
 
   if ($social) {
     $size .= " yellow";
+  }
+
+  if ($campanha) {
+    $size .= " promotional-" . $campanha;
   }
 
   if (isset($item['ID'])) {
@@ -313,7 +317,7 @@ function polen_banner_scrollable($items, $title, $link, $subtitle = "", $social 
 <?php
 }
 
-function polen_front_get_news($items, $title, $link, $social = false)
+function polen_front_get_news($items, $title, $link, $social = "", $campanha = "")
 {
   if (!$items) {
     return;
@@ -336,7 +340,7 @@ function polen_front_get_news($items, $title, $link, $social = false)
           <div class="banner-wrapper">
             <div class="banner-content">
               <?php foreach ($items as $item) : ?>
-                <?php polen_front_get_card($item, "responsive", $social); ?>
+                <?php polen_front_get_card($item, "responsive", $social, $campanha); ?>
               <?php endforeach; ?>
             </div>
           </div>
@@ -380,17 +384,20 @@ function polen_front_get_artists($items, $title, $social = false)
 <?php
 }
 
-function polen_front_get_videos($videos)
+function polen_front_get_videos($videos, $title = "Últimos vídeos gravados pelos Ídolos")
 {
   if (!$videos) {
 		return;
 	}
+  if( ! wp_script_is( 'owl-carousel', 'enqueued' ) ) {
+      wp_enqueue_script('owl-carousel');
+  }
 ?>
 	<section id="talent-videos" class="row my-1 pb-4">
     <div class="col-md-12">
       <header class="row my-3">
         <div class="col">
-          <h2>Últimos vídeos gravados pelos Ídolos</h2>
+          <h2><?php echo $title; ?></h2>
         </div>
       </header>
     </div>
@@ -461,6 +468,30 @@ function polen_front_get_videos($videos)
           $('#cover-box[data-id="'+id+'"]').removeClass("d-none");
         }
       });
+      jQuery(document).ready(function() {
+        $('#videos-carousel').owlCarousel({
+          loop: false,
+          stagePadding: 15,
+          items: 4,
+          animateOut: 'fadeOut',
+          margin: 5,
+          nav: true,
+          dots: false,
+          autoHeight:false,
+          navText: ["<i class='icon icon-left-arrow'></i>", "<i class='icon icon-right-arrow'></i>"],
+          responsive : {
+              0 : {
+                items: 2,
+              },
+              700 : {
+                items: 3,
+              },
+              1020 : {
+                items: 4,
+              }
+          }
+        });
+      })
     })(jQuery);
 	</script>
 <?php
@@ -819,7 +850,7 @@ function polen_get_combate_banner($link)
 <?php
 }
 
-function polen_get_home_banner($link)
+function polen_get_bw_banner($link)
 {
 ?>
   <div class="row mt-4">
@@ -834,6 +865,23 @@ function polen_get_home_banner($link)
           </div>
         </div>
       </a>
+    </div>
+  </div>
+<?php
+}
+
+function polen_get_lacta_banner($link)
+{
+?>
+  <div class="row mt-4">
+    <div class="col-sm-12">
+      <div class="lacta-banner" style="background: url('<?php echo TEMPLATE_URI . '/assets/img/lacta/bg-banner.jpg'; ?>')center no-repeat">
+        <div class="content">
+          <h2>Natal Lacta</h2>
+          <p>Criando laços para emocionar quem você ama</p>
+          <a href="<?php echo $link; ?>">Saiba mais</a>
+        </div>
+      </div>
     </div>
   </div>
 <?php
