@@ -31,7 +31,7 @@ function getTutorialLacta()
               </svg>
 
             </div>
-            <p class="ml-3">Se você for um dos primeiros, vai receber um e-mail com o cupom para obter seu vídeo.</p>
+            <p class="ml-3">Os 50 primeiros compradores a usar o código do seu ídolo, vão receber um e-mail com o cupom para resgatar o vídeo.</p>
           </div>
         </div>
         <div class="col-sm-12 col-md-4">
