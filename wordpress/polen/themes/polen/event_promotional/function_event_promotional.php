@@ -101,6 +101,9 @@ function event_promotional_get_order_flow_layout($array_status, $order_number, $
 
 ?>
 	<div class="row">
+    <div class="col-md-12 mb-3">
+      <h2 class="title">Acompanhar pedido</h2>
+    </div>
 		<div class="col-md-12">
 			<ul class="order-flow<?php echo $class; ?>">
 				<?php foreach ($array_status as $key => $value) : ?>
