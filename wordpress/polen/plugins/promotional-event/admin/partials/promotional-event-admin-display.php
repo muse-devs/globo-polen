@@ -17,7 +17,7 @@
     <div class="panel panel-primary">
         <div class="panel-heading clearfix">
             <div class="col-md-10"><h3>Lista de Cupons</h3></div>
-<!--            <div class="col-md-2"><a href="#" class="btn btn-success pull-right" id="export">Exportar CSV</a></div>-->
+            <!--            <div class="col-md-2"><a href="#" class="btn btn-success pull-right" id="export">Exportar CSV</a></div>-->
         </div>
         <div class="panel-body">
             <table id="list-table" class="table table-striped table-bordered hover" cellspacing="0" width="100%">
@@ -45,23 +45,23 @@
                     ?>
 
                     <tr class="text-center">
-                        <td><?php echo $code->ID; ?></td>
-                        <td><?php echo $code->code; ?></td>
+                        <td style="text-align: center;"><?php echo $code->ID; ?></td>
+                        <td style="text-align: center;"><?php echo $code->code; ?></td>
 
                         <?php if ($code->is_used == 1) : ?>
                             <?php $status =  "Utilizado"; ?>
                         <?php endif; ?>
 
-                        <td><?php echo $status; ?></td>
+                        <td style="text-align: center;"><?php echo $status; ?></td>
 
                         <?php if ($order_id) : ?>
-                            <td>
+                            <td style="text-align: center;">
                                 <a href="<?php echo admin_url("/post.php?post={$order_id}&action=edit") ?>">
                                     #<?php echo !empty($order_id) ? $order_id : '--'; ?>
                                 </a>
                             </td>
                         <?php else : ?>
-                            <td> -- </td>
+                            <td style="text-align: center;"> -- </td>
                         <?php endif ?>
                     </tr>
                 <?php endforeach; ?>
@@ -81,8 +81,3 @@
     });
 
 </script>
-
-</script>
-
-
-
