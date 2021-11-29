@@ -158,6 +158,11 @@ class Api_Gateway_Tuna
 
             $response = json_decode($api_response['body']);
             $new_status = $this->get_status_response($response->status);
+
+            if ($new_status === 'payment-approved' || $new_status === 'pending') {
+                wc_reduce_stock_levels($order_id);
+            }
+
             $response_message = $this->get_response_message($new_status);
 
             $customer_order->update_status($new_status);
