@@ -53,6 +53,16 @@ function event_promotional_is_app()
 }
 
 
+function event_promotional_product_is_event_promotional( $product )
+{
+    $is_ep = $product->get_meta( Promotional_Event_Admin::PRODUCT_METAKEY, true );
+    if( $is_ep && $is_ep == 'yes' ) {
+        return true;
+    }
+    return false;
+}
+
+
 function event_promotional_order_is_event_promotional( $order )
 {
     $is_ep = $order->get_meta( Promotional_Event_Admin::ORDER_METAKEY, true );
@@ -91,6 +101,9 @@ function event_promotional_get_order_flow_layout($array_status, $order_number, $
 
 ?>
 	<div class="row">
+    <div class="col-md-12 mb-3">
+      <h2 class="title">Acompanhar pedido</h2>
+    </div>
 		<div class="col-md-12">
 			<ul class="order-flow<?php echo $class; ?>">
 				<?php foreach ($array_status as $key => $value) : ?>
