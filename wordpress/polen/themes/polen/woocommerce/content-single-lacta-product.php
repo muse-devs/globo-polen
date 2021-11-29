@@ -84,11 +84,15 @@ if( 'instock' == $product->get_stock_status() ) {
 	</div>
 
   <!-- Botão de adicionar ao carrinho -->
-	<div class="row mt-4 mb-1 talent-page-footer">
+	<div class="row mt-4 talent-page-footer">
 		<div class="col-12 col-md-6 m-md-auto pb-3 event-lacta">
 			<?php if($has_stock) : ?>
         <div class="btn-buy-b2b">
-          <?php $inputs->material_button_link("btn-b2b", "Resgatar meu vídeo", enterprise_url_home() . "#bus-form-wrapper", false, "", array(), $donate ? "donate" : ""); ?>
+          <a href="<?php echo event_promotional_url_code_validation( $product ); ?>">
+            <div class="mdc-button mdc-button--raised mdc-ripple-upgraded">
+              Resgatar meu vídeo
+            </div>
+          </a>
         </div>
 			<?php else: ?>
         <div class="lacta-btn-disable mb-3">
