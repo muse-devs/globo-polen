@@ -28,7 +28,7 @@ $polen_product = new Polen_Product_Module( $product );
 if( $polen_product->get_is_campaing() ) { 
 	$campaing_slug = $polen_product->get_campaing_slug();
 	wc_get_template( "content-single-{$campaing_slug}-product.php" );
-	wp_die();
+	return;
 }
 
 /**
