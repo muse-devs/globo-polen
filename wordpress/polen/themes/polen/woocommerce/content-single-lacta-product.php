@@ -135,7 +135,7 @@ if( 'instock' == $product->get_stock_status() ) {
       </div>
     </div>
     <div class="col-12 col-md-6 m-md-auto event-lacta">
-      <a href="https://www.lacta.com.br/">
+      <a href="https://www.lacta.com.br/" target="_blank">
         <div class="mdc-button mdc-button--outlined mdc-ripple-upgraded" style="--mdc-ripple-fg-size:294px; --mdc-ripple-fg-scale:1.71077; --mdc-ripple-fg-translate-start:74.375px, -113.195px; --mdc-ripple-fg-translate-end:98px, -120px;">
           Compre agora
         </div>
