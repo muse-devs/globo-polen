@@ -158,7 +158,6 @@ class Promotional_Event_Admin
         try{
             $coupon_code = !empty($_POST['coupon']) ? sanitize_text_field($_POST['coupon']) : null;
             $name = sanitize_text_field($_POST['name']);
-            $city = sanitize_text_field($_POST['city']);
             $email = sanitize_text_field($_POST['email']);
             $term = sanitize_text_field( $_POST['terms'] );
             $nonce = $_POST['security'];
@@ -182,7 +181,7 @@ class Promotional_Event_Admin
             $address = array(
                 'first_name' => $name,
                 'email' => $email,
-                'city' => $city,
+                'city' => '',
                 'state' => '',
                 'country' => 'Brasil',
                 // 'phone' => sanitize_text_field($_POST['phone']),
@@ -206,6 +205,10 @@ class Promotional_Event_Admin
                 throw new Exception('Cupom já foi utilizado', 401);
                 wp_die();
             }
+
+            if (!$product->is_in_stock()) {
+                throw new Exception('Produto sem Estoque', 422);
+            }
             
             $args = array();
             if( !empty(get_current_user_id())) {
@@ -222,6 +225,8 @@ class Promotional_Event_Admin
             $order->update_meta_data( '_polen_customer_email', $email );
             $order->add_meta_data(self::ORDER_METAKEY, 1, true);
             $order->add_meta_data('campaign', $product->get_sku(), true);
+
+            wc_reduce_stock_levels($order->get_id());
 
             // $order->update_status('wc-payment-approved');
 
