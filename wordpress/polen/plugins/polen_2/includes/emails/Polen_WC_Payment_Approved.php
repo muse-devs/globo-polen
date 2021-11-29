@@ -3,6 +3,7 @@
 namespace Polen\Includes;
 
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
+use Polen\Includes\Module\Polen_Order_Module;
 
 if( ! defined( 'ABSPATH') ) {
     die( 'Silence is golden.' );
@@ -54,7 +55,7 @@ class Polen_WC_Payment_Approved extends \WC_Email {
 		$this->social_template_plain = 'emails/plain/Polen_WC_Payment_Approved_social.php';
 		$this->template_html  = 'emails/Polen_WC_Payment_Approved.php';
 		$this->template_plain = 'emails/plain/Polen_WC_Payment_Approved.php';
-		$this->template_base  = TEMPLATEPATH . 'woocommerce/';
+		$this->template_base  = TEMPLATEPATH . '/woocommerce/';
 
 		$this->ep_template_html  = 'emails/video-autografo/%s/Polen_WC_Payment_Approved.php';
 
@@ -88,10 +89,12 @@ class Polen_WC_Payment_Approved extends \WC_Email {
             /**
              * Não disparar email caso flag no_send_email estiver marcada
              */
-            if (is_admin() === true && get_post_meta($order_id, 'send_email', true) != 1) {
-                return;
-            }
-			
+			if( !( defined('DOING_AJAX') ) ) {
+				if (is_admin() === true && get_post_meta($order_id, 'send_email', true) != 1) {
+					return;
+				}
+			}
+
 			$order_is_social = social_order_is_social( $this->object );
 			$order_is_ep = event_promotional_order_is_event_promotional( $this->object );
 			if( $order_is_social ) {
@@ -218,7 +221,9 @@ class Polen_WC_Payment_Approved extends \WC_Email {
 	}
 
 	public function get_content_ep_html() {
-		return wc_get_template_html( sprintf( $this->ep_template_html, $this->product->get_sku() ), array(
+		$polen_order = new Polen_Order_Module( $this->object );
+		$file_templete = sprintf( $this->ep_template_html, $polen_order->get_campaing_slug() );
+		return wc_get_template_html( $file_templete, array(
 			'order'         => $this->object,
 			'email_heading' => $this->get_heading(),
 			'sent_to_admin' => true,
