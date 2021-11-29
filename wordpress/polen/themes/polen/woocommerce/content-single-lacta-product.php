@@ -123,7 +123,18 @@ if( 'instock' == $product->get_stock_status() ) {
 	</div>
 
   <!-- Banner -->
-  <?php polen_get_lacta_banner_2("/lacta"); ?>
+  <div class="row my-4">
+    <div class="col-sm-12">
+      <div class="lacta-wrapper">
+        <div class="lacta-carousel">
+          <img src="http://polen.globo/polen/themes/polen/assets/img/lacta/banner-1.png" alt="Banner Lacta" style="width: 100%">
+          <a href="https://www.lacta.com.br/" target="_blank" class="lacta-banner-link"></a>
+          <img src="http://polen.globo/polen/themes/polen/assets/img/lacta/banner-1.png" alt="Banner Lacta" style="width: 100%">
+          <a href="https://www.lacta.com.br/" target="_blank" class="lacta-banner-link"></a>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </div>
 
