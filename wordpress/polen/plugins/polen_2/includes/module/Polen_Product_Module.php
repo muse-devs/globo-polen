@@ -5,6 +5,9 @@ use Polen\Admin\Polen_Admin_Event_Promotional_Event_Fields as Event_Promotional;
 
 class Polen_Product_Module
 {
+
+    const TAXONOMY_SLUG_CAMPAING = 'campaigns';
+    
     public $object;
 
     /**
@@ -22,8 +25,8 @@ class Polen_Product_Module
     public function get_is_campaing()
     {
         $product = $this->object;
-        $is_campaing = $product->get_meta( Event_Promotional::FIELD_NAME_IS, true );
-        if( 'yes' !== $is_campaing ) {
+        $campaing_taxonomies = wp_get_post_terms( $product->get_id(), self::TAXONOMY_SLUG_CAMPAING );
+        if( empty( $campaing_taxonomies ) || is_wp_error( $campaing_taxonomies ) ) {
             return false;
         }
         return true;
@@ -35,7 +38,7 @@ class Polen_Product_Module
             return '';
         }
         $product = $this->object;
-        $campaing_slug = $product->get_meta( Event_Promotional::FIELD_NAME_SLUG_CAMPAING, true );
-        return $campaing_slug;
+        $campaing_taxonomies = wp_get_post_terms( $product->get_id(), self::TAXONOMY_SLUG_CAMPAING );
+        return $campaing_taxonomies[ 0 ]->slug;
     }
 }
