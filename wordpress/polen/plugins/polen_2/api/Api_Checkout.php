@@ -5,11 +5,13 @@ namespace Polen\Api;
 use Automattic\WooCommerce\Client;
 use DateTime;
 use Exception;
+use Polen\Includes\Polen_Order;
 use WC_Coupon;
 
 class Api_Checkout{
 
     private $woocommerce;
+    const ORDER_METAKEY = 'hotsite';
 
     public function __construct()
     {
@@ -37,8 +39,9 @@ class Api_Checkout{
      * 3- Criar um novo usuario caso cliete esteja deslogado
      * 4- Verificar status do cupom
      * 5- Registrar order no woocommerce
-     * 6- Fazer requisição para o TUNA
-     * 7- Atualizar status de acordo com o response do TUNA
+     * 6- Adicionar meta dados de acordo com o sistema
+     * 7- Fazer requisição para o TUNA
+     * 8- Atualizar status de acordo com o response do TUNA
      *
      * @param $request
      * @return array|void
@@ -67,6 +70,11 @@ class Api_Checkout{
                 throw new Exception('CPF Inválido', 422);
             }
 
+            $product = wc_get_product($fields['product_id']);
+            if (!$product->is_in_stock()) {
+                throw new Exception('Produto sem estoque', 422);
+            }
+
             $user = $this->create_new_user($data);
 
             $coupon = null;
@@ -76,6 +84,7 @@ class Api_Checkout{
             }
 
             $order_woo = $this->order_payment_woocommerce($user, $fields['product_id'], $coupon);
+            $this->add_meta_to_order($order_woo->id, $data);
             $tuna->process_payment($order_woo->id, $user->data, $fields);
 
         } catch (\Exception $e) {
@@ -135,7 +144,7 @@ class Api_Checkout{
         $data = [
             'payment_method' => 'tuna_payment',
             'payment_method_title' => 'API TUNA',
-            'set_paid' => true,
+            'set_paid' => false,
             'billing' => [
                 'first_name' => $user->first_name,
                 'country' => get_user_meta($user->ID, 'billing_country', true),
@@ -223,8 +232,51 @@ class Api_Checkout{
             'email' => 'E-mail',
             'phone' => 'Celular/Telefone',
             'cpf' => 'CPF',
+            'instruction' => 'Instrução',
             'product_id' => 'ID do Produto é obrigatório',
         ];
+    }
+
+    /**
+     * Adicionar metas na order
+     *
+     * @param int $order_id
+     * @param array $data
+     * @throws Exception
+     */
+    private function add_meta_to_order(int $order_id, array $data): void
+    {
+        $order = wc_get_order($order_id);
+        $email = $data['email'];
+        $product = wc_get_product($data['product_id']);
+
+        $order->update_meta_data('_polen_customer_email', $email);
+        $order->add_meta_data(self::ORDER_METAKEY, 'galo', true);
+
+        $quantity = 1;
+        $order_item_id = $order->add_product($product, $quantity);
+
+        wc_add_order_item_meta($order_item_id, '_qty', $quantity, true);
+        wc_add_order_item_meta($order_item_id, '_product_id', $product->get_id(), true);
+        wc_add_order_item_meta($order_item_id, '_line_subtotal', '0', true);
+        wc_add_order_item_meta($order_item_id, '_line_total', '0', true);
+        wc_add_order_item_meta($order_item_id, 'offered_by', '', true);
+
+        wc_add_order_item_meta($order_item_id, 'video_to', 'to_myself', true);
+        wc_add_order_item_meta($order_item_id, 'name_to_video', $data['name'], true);
+        wc_add_order_item_meta($order_item_id, 'email_to_video', $email, true);
+        wc_add_order_item_meta($order_item_id, 'video_category', 'Vídeo-Autógrafo', true);
+        wc_add_order_item_meta($order_item_id, 'instructions_to_video', $data['instruction'], true);
+
+        wc_add_order_item_meta($order_item_id, 'allow_video_on_page', 'on', true);
+        wc_add_order_item_meta($order_item_id, '_fee_amount', 0, true);
+        wc_add_order_item_meta($order_item_id, '_line_total', 0, true);
+
+        $interval  = Polen_Order::get_interval_order_event();
+        $timestamp = Polen_Order::get_deadline_timestamp_by_social_event($order, $interval);
+        $order->add_meta_data(Polen_Order::META_KEY_DEADLINE, $timestamp, true );
+
+        $order->save();
     }
 
     /**
