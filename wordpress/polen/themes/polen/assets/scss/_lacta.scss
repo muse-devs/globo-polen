@@ -76,6 +76,7 @@
   background: #F3F3F3;
   border-radius: 8px;
   padding: 16px;
+  width: 100%;
   h5 {
     font-family: Poppins;
     font-size: 14px;
@@ -292,4 +293,31 @@
   .order-flow .item.complete::after {
     background: var(--primary);
   }
+  .mdc-button--outlined {
+    color: var(--primary);
+    border-color: var(--primary);;
+  }
+}
+
+.lacta-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  .lacta-carousel {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    overflow-y: hidden;
+    overflow-x: auto;
+    img {
+      position: relative;
+      margin-right: 10px;
+      border-radius: 8px;
+    }
+  }
+}
+
+.lacta-carousel::-webkit-scrollbar {
+  display: none;
 }

@@ -1,5 +1,7 @@
 <?php
 
+use Polen\Includes\Module\Polen_Order_Module;
+
 function event_promotional_url_home()
 {
     return site_url( Promotional_Event_Rewrite::BASE_URL . '/' );
@@ -65,11 +67,8 @@ function event_promotional_product_is_event_promotional( $product )
 
 function event_promotional_order_is_event_promotional( $order )
 {
-    $is_ep = $order->get_meta( Promotional_Event_Admin::ORDER_METAKEY, true );
-    if( $is_ep && $is_ep == '1' ) {
-        return true;
-    }
-    return false;
+    $polen_order = new Polen_Order_Module( $order );
+    return $polen_order->get_is_campaing();
 }
 
 

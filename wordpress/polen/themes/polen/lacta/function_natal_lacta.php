@@ -31,7 +31,7 @@ function polen_get_talents_by_campaingn(string $campaingn): array
             'ID' => $product->get_id(),
             'name' => $product->get_title(),
             'image' => get_the_post_thumbnail_url($talents_campaign->ID),
-            'talent_url' => $product->get_permalink(),
+            'talent_url' => event_promotional_url_detail_product( $product ),
             'price' => $product->get_price(),
             'in_stock' => $product->is_in_stock(),
             'slug' => $product->get_slug(),
@@ -40,4 +40,22 @@ function polen_get_talents_by_campaingn(string $campaingn): array
     }
 
     return $talents;
+}
+
+/**
+ * Verificar se a página atual é
+ *
+ * @return bool
+ */
+function is_page_campaingn_lacta(): bool
+{
+    $page = false;
+    $current_template = get_page_template_slug(get_queried_object_id());
+    $templates = wp_get_theme()->get_page_templates();
+    $template_name = $templates[$current_template];
+    if ($template_name === 'Página - Lacta') {
+        $page = true;
+    }
+
+    return $page;
 }
