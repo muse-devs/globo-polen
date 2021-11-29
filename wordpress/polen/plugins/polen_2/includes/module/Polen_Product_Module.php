@@ -41,4 +41,14 @@ class Polen_Product_Module
         $campaing_taxonomies = wp_get_post_terms( $product->get_id(), self::TAXONOMY_SLUG_CAMPAING );
         return $campaing_taxonomies[ 0 ]->slug;
     }
+
+    public function get_campaing_name()
+    {
+        if( !$this->get_is_campaing() ) {
+            return '';
+        }
+        $product = $this->object;
+        $campaing_taxonomies = wp_get_post_terms( $product->get_id(), self::TAXONOMY_SLUG_CAMPAING );
+        return $campaing_taxonomies[ 0 ]->name;
+    }
 }
