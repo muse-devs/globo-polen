@@ -14873,4 +14873,23 @@ label[for="wc-stripe-new-payment-method"] {
 .event-lacta .order-flow .item.complete::after {
   background: var(--primary); }
 
+.lacta-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden; }
+  .lacta-wrapper .lacta-carousel {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    overflow-y: hidden;
+    overflow-x: auto; }
+    .lacta-wrapper .lacta-carousel img {
+      position: relative;
+      margin-right: 10px;
+      border-radius: 8px; }
+
+.lacta-carousel::-webkit-scrollbar {
+  display: none; }
+
 /*# sourceMappingURL=maps/style.css.map */
