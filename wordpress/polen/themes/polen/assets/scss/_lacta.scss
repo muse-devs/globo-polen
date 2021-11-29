@@ -293,6 +293,10 @@
   .order-flow .item.complete::after {
     background: var(--primary);
   }
+  .mdc-button--outlined {
+    color: var(--primary);
+    border-color: var(--primary);;
+  }
 }
 
 .lacta-wrapper {

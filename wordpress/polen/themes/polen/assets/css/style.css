@@ -14874,6 +14874,10 @@ label[for="wc-stripe-new-payment-method"] {
 .event-lacta .order-flow .item.complete::after {
   background: var(--primary); }
 
+.event-lacta .mdc-button--outlined {
+  color: var(--primary);
+  border-color: var(--primary); }
+
 .lacta-wrapper {
   position: relative;
   width: 100%;
