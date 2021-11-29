@@ -16,21 +16,11 @@
  * @version 3.6.0
  */
 
-use Polen\Includes\Module\Polen_Product_Module;
-use Polen\Includes\Polen_Product_B2B;
-
 defined('ABSPATH') || exit;
 
 global $product;
 global $Polen_Plugin_Settings;
 global $post;
-
-$polen_product = new Polen_Product_Module( $product );
-if( $polen_product->get_is_campaing() ) {
-	$campaing_slug = $polen_product->get_campaing_slug();
-	wc_get_template( "content-single-{$campaing_slug}-product.php" );
-	wp_die();
-}
 
 /**
  * Hook: woocommerce_before_single_product.
