@@ -16,6 +16,8 @@
  * @version 3.6.0
  */
 
+use Polen\Includes\Module\Polen_Product_Module;
+
 defined('ABSPATH') || exit;
 
 global $product;
