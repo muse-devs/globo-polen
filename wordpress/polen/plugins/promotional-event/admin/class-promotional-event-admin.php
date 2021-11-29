@@ -110,6 +110,30 @@ class Promotional_Event_Admin
             'options_event',
             array($this, 'show_options'),
         );
+
+        add_submenu_page('promotional-event',
+            'De porta em porta',
+            'De porta em porta',
+            'manage_options',
+            'porta_em_porta_event',
+            array($this, 'show_de_porta_em_porta'),
+        );
+
+        add_submenu_page('promotional-event',
+            'Rebeldes',
+            'Rebeldes',
+            'manage_options',
+            'rebeldes_event',
+            array($this, 'show_rebeldes_event'),
+        );
+
+        add_submenu_page('promotional-event',
+            'Campanha Lacta',
+            'Campanha Lacta',
+            'manage_options',
+            'campanha_lacta_event',
+            array($this, 'show_campanha_lacta_event'),
+        );
     }
 
     /**
@@ -120,7 +144,7 @@ class Promotional_Event_Admin
     public function show_promotions()
     {
         $sql = new Coupons();
-        $values_code = $sql->get_codes();
+        $values_code = $sql->get_all_codes();
         require 'partials/promotional-event-admin-display.php';
     }
 
@@ -137,15 +161,52 @@ class Promotional_Event_Admin
     }
 
     /**
+     * View página de opções do plugin para listagem de cupons de porta em porta
+     *
+     * @since    1.0.0
+     */
+    public function show_de_porta_em_porta()
+    {
+        $sql = new Coupons();
+        $values_code = $sql->get_codes();
+        require 'partials/promotional-event-admin-display.php';
+    }
+
+    /**
+     * View página de opções do plugin para listagem de cupons de rebeldes
+     *
+     * @since    1.0.0
+     */
+    public function show_rebeldes_event()
+    {
+        $sql = new Coupons();
+        $values_code = $sql->get_codes(2);
+        require 'partials/promotional-event-admin-display.php';
+    }
+
+    /**
+     * View página de opções do plugin para listagem de cupons de rebeldes
+     *
+     * @since    1.0.0
+     */
+    public function show_campanha_lacta_event()
+    {
+        $sql = new Coupons();
+        $values_code = $sql->get_codes(3);
+        require 'partials/promotional-event-admin-display.php';
+    }
+
+    /**
      * Criar cupons
      *
      * @throws Exception
      */
     public function create_coupons()
     {
-        $foo = addslashes($_POST['qty']);
+        $qty = addslashes($_POST['qty']);
+        $event_id = addslashes($_POST['event_id']);
         $sql = new Coupons();
-        $sql->insert_coupons($foo);
+        $sql->insert_coupons($qty, $event_id);
         wp_send_json_success( 'ok', 200 );
         wp_die();
     }

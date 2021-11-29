@@ -177,9 +177,9 @@ function lacta_cart_form( $product, $coupon = "")
           $inputs->input_hidden("action", "create_orders_video_autograph");
           $inputs->input_hidden("coupon", $coupon);
           $inputs->input_hidden("product", $product->get_sku());
-          $inputs->material_input(Material_Inputs::TYPE_TEXT, "name", "name", "Para quem é o vídeo?", true, "mb-3");
-          $inputs->material_input(Material_Inputs::TYPE_TEXT, "city", "city", "Qual a cidade da pessoa?", true, "mb-3");
-          $inputs->material_input(Material_Inputs::TYPE_EMAIL, "email", "email", "Digite seu e-mail", true, "mb-3");
+          $inputs->material_input(Material_Inputs::TYPE_TEXT, "name", "name", "Para quem é o vídeo?", true, "mb-3", array("maxlength" => "50"));
+          $inputs->material_input(Material_Inputs::TYPE_TEXT, "city", "city", "Qual a cidade da pessoa?", true, "mb-3", array("maxlength" => "50"));
+          $inputs->material_input(Material_Inputs::TYPE_EMAIL, "email", "email", "Digite seu e-mail", true, "mb-3", array("maxlength" => "50"));
         ?>
 				<p>
 					<label>
