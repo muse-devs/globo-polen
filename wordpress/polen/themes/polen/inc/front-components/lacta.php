@@ -31,7 +31,7 @@ function getTutorialLacta()
               </svg>
 
             </div>
-            <p class="ml-3">Se você for um dos primeiros, vai receber um e-mail com o cupom para obter seu vídeo.</p>
+            <p class="ml-3">Os 50 primeiros compradores a usar o código do seu ídolo, vão receber um e-mail com o cupom para resgatar o vídeo.</p>
           </div>
         </div>
         <div class="col-sm-12 col-md-4">
@@ -65,13 +65,13 @@ function get_lacta_insctruction()
             <li class="item itempayment-approved complete">
               <span class="background status">1</span>
               <span class="text">
-                <p class="description">Compre produtos no site da <a href="#" target="_blank"><b>Lacta.</b></a></p>
+                <p class="description">Compre produtos no site da <a href="https://www.lacta.com.br/" target="_blank"><b>Lacta</b></a>, usando o código do seu ídolo.</p>
               </span>
             </li>
             <li class="item itempayment-approved complete">
               <span class="background status">2</span>
               <span class="text">
-                <p class="description">Receba um e-mail da Lacta com o cupom para obter seu vídeo.</p>
+                <p class="description">Os 50 primeiros compradores a usar o código do seu ídolo, vão receber um e-mail com o cupom para resgatar o vídeo.</p>
               </span>
             </li>
             <li class="item itempayment-approved complete">

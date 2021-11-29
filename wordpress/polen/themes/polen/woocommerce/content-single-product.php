@@ -16,9 +16,6 @@
  * @version 3.6.0
  */
 
-use Polen\Includes\Module\Polen_Product_Module;
-use Polen\Includes\Polen_Product_B2B;
-
 defined('ABSPATH') || exit;
 
 global $product;

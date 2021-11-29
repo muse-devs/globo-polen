@@ -15,7 +15,7 @@ class Coupons{
             $wpdb->insert(
                 $table_name,
                 array(
-                    'code' => Promotional_Event_Generate_Coupon::generate(8),
+                    'code' =>  'LACTA-' . Promotional_Event_Generate_Coupon::generate(6, "", "", false, true),
                     'event_id' => $event_id,
                 )
             );

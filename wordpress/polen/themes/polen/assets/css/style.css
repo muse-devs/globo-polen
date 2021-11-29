@@ -11674,6 +11674,8 @@ textarea {
   .polen-card.promotional-lacta .category {
     margin: 0;
     padding: 5px 7px; }
+  .polen-card.criesp .icon, .polen-card.yellow .icon, .polen-card.promotional-lacta .icon {
+    display: none; }
   .polen-card.criesp .title, .polen-card.yellow .title, .polen-card.promotional-lacta .title {
     padding-bottom: 0; }
 
@@ -14634,6 +14636,18 @@ label[for="wc-stripe-new-payment-method"] {
 :root .page-template-page-lacta {
   --primary: #0033a0; }
 
+.page-template-page-lacta .custom-logo.light {
+  display: none; }
+
+.page-template-page-lacta .custom-logo.dark {
+  display: block; }
+
+.page-template-page-lacta .bus-menu-item {
+  color: var(--light); }
+
+.page-template-page-lacta .menu-icon path {
+  stroke: white; }
+
 .lacta-top-banner {
   width: 100%;
   height: 100vw;
@@ -14678,7 +14692,8 @@ label[for="wc-stripe-new-payment-method"] {
 .lacta-bio {
   background: #F3F3F3;
   border-radius: 8px;
-  padding: 16px; }
+  padding: 16px;
+  width: 100%; }
   .lacta-bio h5 {
     font-family: Poppins;
     font-size: 14px;
@@ -14858,5 +14873,28 @@ label[for="wc-stripe-new-payment-method"] {
 
 .event-lacta .order-flow .item.complete::after {
   background: var(--primary); }
+
+.event-lacta .mdc-button--outlined {
+  color: var(--primary);
+  border-color: var(--primary); }
+
+.lacta-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden; }
+  .lacta-wrapper .lacta-carousel {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    overflow-y: hidden;
+    overflow-x: auto; }
+    .lacta-wrapper .lacta-carousel img {
+      position: relative;
+      margin-right: 10px;
+      border-radius: 8px; }
+
+.lacta-carousel::-webkit-scrollbar {
+  display: none; }
 
 /*# sourceMappingURL=maps/style.css.map */
