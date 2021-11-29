@@ -11,7 +11,7 @@ get_header();
 <main id="primary" class="site-main">
   <div class="row">
     <header class="lacta-top-banner col-12 d-flex align-items-center">
-      <div class="content mt-2">
+      <div class="content mt-2 m-md-auto">
         <h1 class="title">Um pedacinho de emoção para quem você ama.</h1>
         <p class="typo typo-text mt-2">Neste Natal, a Lacta vai aproximar ídolos e fãs com vídeos personalizados emocionantes!</p>
         <div class="text-center">
