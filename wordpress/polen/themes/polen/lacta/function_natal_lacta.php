@@ -31,7 +31,7 @@ function polen_get_talents_by_campaingn(string $campaingn): array
             'ID' => $product->get_id(),
             'name' => $product->get_title(),
             'image' => get_the_post_thumbnail_url($talents_campaign->ID),
-            'talent_url' => $product->get_permalink(),
+            'talent_url' => event_promotional_url_detail_product( $product ),
             'price' => $product->get_price(),
             'in_stock' => $product->is_in_stock(),
             'slug' => $product->get_slug(),
