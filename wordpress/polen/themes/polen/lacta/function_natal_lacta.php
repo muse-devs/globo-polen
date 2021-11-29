@@ -41,3 +41,21 @@ function polen_get_talents_by_campaingn(string $campaingn): array
 
     return $talents;
 }
+
+/**
+ * Verificar se a página atual é
+ *
+ * @return bool
+ */
+function is_page_campaingn_lacta(): bool
+{
+    $page = false;
+    $current_template = get_page_template_slug(get_queried_object_id());
+    $templates = wp_get_theme()->get_page_templates();
+    $template_name = $templates[$current_template];
+    if ($template_name === 'Página - Lacta') {
+        $page = true;
+    }
+
+    return $page;
+}
