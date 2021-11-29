@@ -14871,6 +14871,9 @@ label[for="wc-stripe-new-payment-method"] {
   .lacta-toast .pol-toast .pol-toast-close {
     display: none; }
 
+.event-lacta .order-flow .item {
+  height: auto; }
+
 .event-lacta .order-flow .item.complete::after {
   background: var(--primary); }
 
