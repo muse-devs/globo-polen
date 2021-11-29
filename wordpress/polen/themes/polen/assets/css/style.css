@@ -14692,7 +14692,8 @@ label[for="wc-stripe-new-payment-method"] {
 .lacta-bio {
   background: #F3F3F3;
   border-radius: 8px;
-  padding: 16px; }
+  padding: 16px;
+  width: 100%; }
   .lacta-bio h5 {
     font-family: Poppins;
     font-size: 14px;
