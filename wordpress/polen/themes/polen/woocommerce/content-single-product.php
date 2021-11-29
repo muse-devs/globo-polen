@@ -65,21 +65,6 @@ if( 'instock' == $product->get_stock_status() ) {
 
 ?>
 
-<script>
-	// params
-	jQuery(document).ready(function() {
-		if(document.querySelector("#stories")) {
-			renderStories(
-				<?php echo polen_get_videos_by_talent($Talent_Fields, true); ?>,
-				<?php echo json_encode(get_the_title()); ?>,
-				<?php echo json_encode($image_data["image"]); ?>,
-				<?php echo $social || 'null'; ?>,
-				<?php echo $stock || 'null'; ?>
-				);
-		}
-	});
-</script>
-
 <?php if ($bg_image) : ?>
 	<figure class="image-bg">
 		<img src="<?php echo $bg_image; ?>" alt="<?php echo $Talent_Fields->nome; ?>">
@@ -88,185 +73,69 @@ if( 'instock' == $product->get_stock_status() ) {
 
 <div id="product-<?php the_ID(); ?>" <?php wc_product_class('', $product); ?>>
 
-	<!-- Tags -->
+	<!-- Perfil -->
 	<div class="row">
-		<div class="col-12<?php echo $histories_enabled ? ' col-md-6 m-md-auto' : ''; ?> d-flex align-items-center">
-			<?php $histories_enabled && polen_front_get_talent_stories(); ?>
-			<div>
-				<h1 class="talent-name" title="<?= get_the_title(); ?>"><?= get_the_title(); ?></h1>
-				<?php if($social) : ?>
-					<h5 class="talent-count-videos text-truncate">
-						<?php
-						// $videosCount = $stock;
-						if ($has_stock) {
-							echo $videosCount . " vídeo disponível";
-						} else {
-							echo "Nenhum vídeo disponível :D";
-						}// else {
-						// 	echo $videosCount . " vídeos disponíveis";
-						// }
-						?>
-					</h5>
-				<?php endif; ?>
-			</div>
-			<?php polen_get_share_button(); ?>
-		</div>
-		<div class="col-12 mt-3">
-			<?php $histories_enabled || polen_front_get_talent_videos($Talent_Fields); ?>
+		<div class="col-12 col-md-6 m-md-auto mt-3 d-flex flex-wrap justify-content-center lacta-profile">
+      <figure class="image">
+        <img loading="lazy" src="<?php echo $image_data["image"] ?>" alt="<?php echo get_the_title(); ?>">
+      </figure>
+      <h2><?php echo get_the_title(); ?></h2>
 		</div>
 	</div>
 
   <!-- Botão de adicionar ao carrinho -->
-	<div class="row mt-3 mb-1 talent-page-footer">
-		<div class="col-12 col-md-6 m-md-auto pb-3">
+	<div class="row mt-4 talent-page-footer">
+		<div class="col-12 col-md-6 m-md-auto pb-3 event-lacta">
 			<?php if($has_stock) : ?>
-        <?php $inputs->pol_combo_advanced(
-        "select_type",
-        "select_type",
-        array(
-          $inputs->pol_combo_advanced_item("Vídeo para uso pessoal", $product->get_price_html(), "Compre um vídeo personalizado para você ou para presentar outra pessoa", "check-pessoal", "pessoal", true),
-          $inputs->pol_combo_advanced_item("Vídeo para meu negócio", "", "Compre um Vídeo Polen para usar no seu negócio", "check-b2b", "b2b", false, !polen_b2b_product_is_enabled($product))
-          )); ?>
-				<div class="btn-buy-personal">
-          <?php echo woocommerce_template_single_add_to_cart(); ?>
-        </div>
-        <div class="btn-buy-b2b d-none">
-          <?php $inputs->material_button_link("btn-b2b", "Pedir vídeo", enterprise_url_home() . "#bus-form-wrapper", false, "", array(), $donate ? "donate" : ""); ?>
+        <div class="btn-buy-b2b">
+          <a href="<?php echo event_promotional_url_code_validation( $product ); ?>">
+            <div class="mdc-button mdc-button--raised mdc-ripple-upgraded">
+              Resgatar meu vídeo
+            </div>
+          </a>
         </div>
 			<?php else: ?>
-        <?php $inputs->material_button_link("todos", "Escolher outro artista", home_url( "shop" ), false, "", array(), $donate ? "donate" : ""); ?>
+        <div class="lacta-btn-disable mb-3">
+          <div class="mdc-button mdc-button--raised mdc-ripple-upgraded">
+            Esgotado
+          </div>
+        </div>
+        <?php $inputs->material_button_link_outlined("todos", "Escolher outro artista", home_url( "shop" ), false, "", array(), $donate ? "donate" : ""); ?>
 			<?php endif; ?>
 		</div>
-    <script>
-      const btn_personal = document.querySelector(".btn-buy-personal");
-      const btn_b2b = document.querySelector(".btn-buy-b2b");
-      document.querySelector("#select_type")
-        .addEventListener("polcombochange",
-          function(e) {
-            if(e.detail == "b2b") {
-              btn_b2b.classList.remove("d-none");
-              btn_personal.classList.add("d-none");
-            } else {
-              btn_b2b.classList.add("d-none");
-              btn_personal.classList.remove("d-none");
-            }
-          });
-    </script>
 	</div>
-  <!-- --------------------------------------------- -->
-
-	<div class="row">
-		<div class="col-12 col-md-6 m-md-auto d-flex">
-			<!-- Se for doação -->
-			<?php if ($donate) : ?>
-				<div class="row">
-					<div class="col-md-12 mb-1">
-						<?php polen_donate_badge("100% DO CACHÊ DOADO PARA " . $donate_name, false); ?>
-					</div>
-				</div>
-			<?php endif; ?>
-			<?php /* if ($social) : ? >
-				<div class="row">
-					<div class="col-md-12 mb-1">
-						<?php polen_donate_badge("100% DO VALOR DOADO PARA O CRIANÇA ESPERANÇA", false, true); ?>
-					</div>
-				</div>
-			<?php endif; */?>
-			<!-- /------------ -->
-		</div>
-	</div>
-
-	<!-- Card dos Reviews -->
-	<?php $social || polen_card_talent_reviews_order($post, $Talent_Fields); ?>
-
-	<?php
-		// if (!$social) {
-	?>
-		<div class="row mt-4">
-			<div class="col-12 col-md-6 m-md-auto">
-				<?php if (count($terms) > 0) : ?>
-					<?php foreach ($terms as $k => $term) : ?>
-						<a href="<?= get_tag_link($term); ?>" class="tag-link mb-2"><?= $term->name; ?></a>
-					<?php endforeach; ?>
-				<?php endif; ?>
-			</div>
-		</div>
-	<?php
-		// } else {
-			//  criesp_get_send_video_date();
-		// }
-	?>
 
 	<!-- Bio -->
 	<div class="row mt-4">
 		<div class="col-12 col-md-6 m-md-auto d-flex">
-			<p><?php echo $product->get_description(); ?></p>
+      <div class="lacta-bio">
+        <h5>Sobre o vídeo de <?php echo get_the_title(); ?></h5>
+        <p><?php echo $product->get_description(); ?></p>
+      </div>
 		</div>
 	</div>
 
-	<!-- Share -->
-	<?php polen_get_share_icons(); ?>
+  <!-- Instruções -->
+  <div class="row mt-4">
+		<div class="col-12 col-md-6 m-md-auto d-flex">
+      <?php get_lacta_insctruction($product); ?>
+		</div>
+	</div>
 
-	<!-- Doação -->
-	<?php
-	$donate && !$social ?
-		polen_front_get_donation_box($donate_image, $donate_text) :
-		null;
-	$video_depoimento = $product->get_meta( Social_Base_Product::PRODUCT_META_VIDEO_TESTEMONIAL_URL, true );
-	$social && sa_get_about($video_depoimento);
-	?>
-
-  <?php
-  // Campanha Luccas Neto dia das crianças ----
-  $is_luccas_neto = $Polen_Plugin_Settings['promotional-event-luccas-neto'] == get_the_ID();
-  if($is_luccas_neto) {
-    generic_get_about(
-      "Campanha dia das Crianças",
-      "Dia das Crianças com Luccas Neto",
-      "<p>A Polen e o Luccas Neto vão escolher as quatro histórias e mensagens mais emocionantes para presentear com o boneco autografado do Luccas, entre os pedidos realizados e confirmados até o dia 5 de Outubro!</p>
-      <p>Capriche na mensagem de Dia das Crianças do seu vídeo-Polen! Com certeza quem você presentear vai se emocionar e ainda terá a chance de receber mais um super presente para acompanhar o recado exclusivo que o Luccas vai gravar.</p>"
-    );
-  }
-  ?>
-
-	<!-- Como funciona? -->
-	<?php $social || polen_front_get_tutorial(); ?>
-
-	<!-- Produtos Relacionados -->
-	<?php polen_box_related_product_by_product_id(get_the_ID());
-	?>
+  <!-- Banner -->
+  <div class="row my-4">
+    <div class="col-sm-12">
+      <div class="lacta-wrapper">
+        <div class="lacta-carousel">
+          <img src="<?php echo TEMPLATE_URI . '/assets/img/lacta/banner-1.png'; ?>" alt="Banner Lacta" style="width: 100%" />
+          <a href="https://www.lacta.com.br/" target="_blank" class="lacta-banner-link"></a>
+          <img src="<?php echo TEMPLATE_URI . '/assets/img/lacta/banner-1.png'; ?>" alt="Banner Lacta" style="width: 100%" />
+          <a href="https://www.lacta.com.br/" target="_blank" class="lacta-banner-link"></a>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </div>
-
-<?php
-
-//TODO botar numa função no local correto --------------------------------------------------
-$array_social = array();
-$array_sites = array("facebook", "twitter", "instagram", "linkedin", "youtube");
-
-foreach ($array_sites as $key => $site) {
-	if(!empty($Talent_Fields->$site)) {
-		$array_social[] = urlencode($Talent_Fields->$site);
-	}
-}
-
-$logo_dark = wp_get_attachment_image_url( get_theme_mod( 'custom_logo' ), 'full' );
-
-pol_print_schema_data(array(
-	"url" 						=> $Talent_Fields->talent_url,
-	"title" 					=> get_the_title(),
-	"image" 					=> $bg_image,
-	"date_published"			=> $Talent_Fields->created,
-	"date_modified" 			=> $Talent_Fields->updated,
-	"date_created" 				=> $Talent_Fields->created,
-	"talent_name" 				=> $Talent_Fields->nome,
-	"talent_url" 				=> $Talent_Fields->talent_url,
-	"talent_image" 				=> polen_get_avatar_src($Talent_Fields->user_id, 'polen-square-crop-lg'),
-	"talent_social_links_array"	=> $array_social,
-	"logo" 						=> $logo_dark,
-	"description" 				=> $Talent_Fields->descricao
-));
-
-?>
 
 <?php do_action('woocommerce_after_single_product'); ?>

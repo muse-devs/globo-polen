@@ -14678,7 +14678,8 @@ label[for="wc-stripe-new-payment-method"] {
 .lacta-bio {
   background: #F3F3F3;
   border-radius: 8px;
-  padding: 16px; }
+  padding: 16px;
+  width: 100%; }
   .lacta-bio h5 {
     font-family: Poppins;
     font-size: 14px;
@@ -14858,5 +14859,25 @@ label[for="wc-stripe-new-payment-method"] {
 
 .event-lacta .order-flow .item.complete::after {
   background: var(--primary); }
+
+.lacta-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden; }
+  .lacta-wrapper .lacta-carousel {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    overflow-y: hidden;
+    overflow-x: auto; }
+    .lacta-wrapper .lacta-carousel img {
+      border-radius: 8px;
+      margin-right: 10px;
+      position: relative; }
+
+.lacta-carousel::-webkit-scrollbar {
+  display: none; }
 
 /*# sourceMappingURL=maps/style.css.map */
