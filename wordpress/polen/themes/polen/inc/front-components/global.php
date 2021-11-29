@@ -255,9 +255,7 @@ function polen_front_get_card($item, $size = "small", $social = false, $campanha
   <div class="<?= $class; ?>">
     <div class="polen-card <?= $size; ?>" itemscope itemtype="https://schema.org/Offer">
       <figure class="image">
-        <?php if ($social) {
-          polen_donate_badge("Setembro Amarelo", true, false, true);
-        } elseif ($donate == 'yes') {
+        <?php if ($donate == 'yes') {
           polen_donate_badge("Social", true, false, false);
         } ?>
         <img loading="lazy" src="<?php echo $image_data["image"]; ?>" alt="<?php echo $image_data["alt"]; ?>" />

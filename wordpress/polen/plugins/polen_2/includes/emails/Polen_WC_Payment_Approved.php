@@ -61,7 +61,7 @@ class Polen_WC_Payment_Approved extends \WC_Email {
 		$this->subject_talent = 'Você está a um passo de receber mais R$!';
 		$this->subject_talent_social = 'Recebemos mais uma doação para o Criança Esperança!';
 		$this->subject_social = 'Obrigado por ajudar o Criança Esperança.';
-		$this->subject_ep = 'Vídeo-autógrafo solicitado.';
+		$this->subject_ep = 'Pedido de vídeo recebido ';
     
 		add_action( 'woocommerce_order_status_changed', array( $this, 'trigger' ) );
 

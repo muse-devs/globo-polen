@@ -10,7 +10,9 @@
  * @subpackage Promotional_Event/admin
  */
 
+use Polen\Admin\Polen_Admin_Event_Promotional_Event_Fields;
 use Polen\Includes\Debug;
+use Polen\Includes\Module\Polen_Product_Module;
 use Polen\Includes\Polen_Order;
 use Polen\Includes\Polen_WooCommerce;
 
@@ -220,6 +222,7 @@ class Promotional_Event_Admin
             $coupon_code = !empty($_POST['coupon']) ? sanitize_text_field($_POST['coupon']) : null;
             $name = sanitize_text_field($_POST['name']);
             $email = sanitize_text_field($_POST['email']);
+            $city = sanitize_text_field($_POST['city']);
             $term = sanitize_text_field( $_POST['terms'] );
             $nonce = $_POST['security'];
 
@@ -281,18 +284,19 @@ class Promotional_Event_Admin
                 }
             }
 
+            $polen_product = new Polen_Product_Module( $product );
             $order = wc_create_order( $args );
             $coupon->update_coupoun($coupon_code, $order->get_id());
             $order->update_meta_data( '_polen_customer_email', $email );
-            $order->add_meta_data(self::ORDER_METAKEY, 1, true);
-            $order->add_meta_data('campaign', $product->get_sku(), true);
+            $order->add_meta_data( Polen_Admin_Event_Promotional_Event_Fields::FIELD_NAME_IS, true, true);
+            $order->add_meta_data( Polen_Admin_Event_Promotional_Event_Fields::FIELD_NAME_SLUG_CAMPAING, $polen_product->get_campaing_slug(), true);
 
             wc_reduce_stock_levels($order->get_id());
 
             // $order->update_status('wc-payment-approved');
 
             // ID Product
-            global $Polen_Plugin_Settings;
+            // global $Polen_Plugin_Settings;
             $product_id = $product->get_id();
             // $product_id = $Polen_Plugin_Settings['promotional-event-text'];
 
@@ -306,8 +310,13 @@ class Promotional_Event_Admin
             //     'order_item_type' => 'line_item',
             // ));
 
-            $instruction = "{$name} de {$city} já garantiu sua cópia do livro '{$product->get_title()}'! 
-            Envie um vídeo para agradecer e mande um alô para toda cidade.";
+            $instruction = "
+            Olá {$name} de {$city},<br>
+
+            Eu sou a {$product->get_title()} e junto com a Lacta estou aqui para te 
+            desejar um ótimo Natal, com muita saúde, amor e paz, porque com a Lacta
+            você divide mais que chocolate, você cria laços. Um grande beijo e feliz
+            natal para toda família.";
 
             wc_add_order_item_meta( $order_item_id, '_qty', $quantity, true );
             wc_add_order_item_meta( $order_item_id, '_product_id', $product->get_id(), true );
