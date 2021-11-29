@@ -9,7 +9,7 @@ function polen_get_talents_by_campaingn(string $campaingn): array
 {
     $args = array(
         'post_type' => 'product',
-        'post_status' => 'publish',
+        'post_status' => 'private',
         'tax_query' => array(
             array(
                'taxonomy' => 'campaigns',
