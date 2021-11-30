@@ -154,7 +154,7 @@ function lacta_coupon( $product )
 				blockUnblockInputs(formId, true);
 				window.location.href = res.url;
 			}, function(e) {
-				polMessages.error(e.Error);
+				polMessages.error(e);
 			}, false);
 		});
 	</script>
