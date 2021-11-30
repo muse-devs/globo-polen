@@ -19,26 +19,26 @@ class Polen_Order_Module
     }
 
 
-    public function get_is_campaing()
+    public function get_is_campaign()
     {
         $order = $this->object;
-        $is_campaing = $order->get_meta( Promotional_Event::FIELD_NAME_IS, true );
+        $is_campaign = $order->get_meta( Promotional_Event::FIELD_NAME_IS, true );
 
-        if( 'yes' !== $is_campaing ) {
+        if( 'yes' !== $is_campaign ) {
             return false;
         }
         return true;
     }
 
-    public function get_campaing_slug()
+    public function get_campaign_slug()
     {
         $order = $this->object;
-        $is_campaing = $order->get_meta( Promotional_Event::FIELD_NAME_IS, true );
+        $is_campaign = $order->get_meta( Promotional_Event::FIELD_NAME_IS, true );
 
-        if( 'yes' !== $is_campaing ) {
+        if( 'yes' !== $is_campaign ) {
             return '';
         }
-        $campaing_slug = $order->get_meta( Promotional_Event::FIELD_NAME_SLUG_CAMPAING );
-        return $campaing_slug;
+        $campaign_slug = $order->get_meta( Promotional_Event::FIELD_NAME_SLUG_CAMPAIGN );
+        return $campaign_slug;
     }
 }

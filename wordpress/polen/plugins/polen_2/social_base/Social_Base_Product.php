@@ -10,7 +10,7 @@ defined( 'ABSPATH' ) || die;
 class Social_Base_Product
 {
     const PRODUCT_META_IS_SOCIAL_BASE = '_is_social_base';
-    const PRODUCT_META_SLUG_CAMPAING = '_social_base_slug_campaing';
+    const PRODUCT_META_SLUG_campaign = '_social_base_slug_campaign';
     const PRODUCT_META_VIDEO_TESTEMONIAL_URL = '_social_base_video_testimonial';
 
     public function __construct( \WC_Product $product )
@@ -37,9 +37,9 @@ class Social_Base_Product
     }
 
 
-    public function get_campaing_slug()
+    public function get_campaign_slug()
     {
-        return $this->product->get_meta( Polen_Admin_Social_Base_Product_Fields::FIELD_NAME_SLUG_CAMPAING, true );
+        return $this->product->get_meta( Polen_Admin_Social_Base_Product_Fields::FIELD_NAME_SLUG_CAMPAIGN, true );
     }
 
     // public static function product_is_social( $product, $category )
@@ -65,12 +65,12 @@ class Social_Base_Product
     // }
 
 
-    public static function get_all_products_by_slug_campaing( $slug_campaing )
+    public static function get_all_products_by_slug_campaign( $slug_campaign )
     {
         $args = array(
             'status' => 'publish',
-            'meta_key' => '_social_base_slug_campaing',
-            'meta_value' => $slug_campaing,
+            'meta_key' => '_social_base_slug_campaign',
+            'meta_value' => $slug_campaign,
             'orderby' => 'menu_order',
             'order' => 'DESC',
         );

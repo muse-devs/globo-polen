@@ -8,7 +8,7 @@ class Polen_Admin_Event_Promotional_Event_Fields
     const TAB_CONTENT_NAME = 'polen_promotional_event_tab_data';
     
     const FIELD_NAME_IS             = '_promotional_event';
-    const FIELD_NAME_SLUG_CAMPAING  = '_promotional_event_slug_campaing';
+    const FIELD_NAME_SLUG_CAMPAIGN  = '_promotional_event_slug_campaign';
     const FIELD_NAME_PAGES_QUANTITY = '_promotional_event_pages_quantity';
     const FIELD_NAME_LANGUAGE       = '_promotional_event_language';
     const FIELD_NAME_PUBLISHING     = '_promotional_event_publishing';
@@ -67,8 +67,8 @@ class Polen_Admin_Event_Promotional_Event_Fields
                 <?php
                 woocommerce_wp_text_input(
                     array(
-                        'id'                => self::FIELD_NAME_SLUG_CAMPAING,
-                        'value'             => $product_object->get_meta( self::FIELD_NAME_SLUG_CAMPAING ),
+                        'id'                => self::FIELD_NAME_SLUG_CAMPAIGN,
+                        'value'             => $product_object->get_meta( self::FIELD_NAME_SLUG_CAMPAIGN ),
                         'label'             => 'Slug da campanha',
                         'desc_tip'          => true,
                         'description'       => 'Slug da campanha',
@@ -199,7 +199,7 @@ class Polen_Admin_Event_Promotional_Event_Fields
                 $product = wc_get_product( $product_id );
 
                 $promotional_event = strip_tags( $_POST[ self::FIELD_NAME_IS ] );
-                $promotional_event_campaing_slug = strip_tags( $_POST[ self::FIELD_NAME_SLUG_CAMPAING ] );
+                $promotional_event_campaign_slug = strip_tags( $_POST[ self::FIELD_NAME_SLUG_CAMPAIGN ] );
                 $promotional_event_pages_quantity = strip_tags( $_POST[ self::FIELD_NAME_PAGES_QUANTITY ] );
                 $promotional_event_language = strip_tags( $_POST[ self::FIELD_NAME_LANGUAGE ] );
                 $promotional_event_publishing = strip_tags( $_POST[ self::FIELD_NAME_PUBLISHING ] );
@@ -209,7 +209,7 @@ class Polen_Admin_Event_Promotional_Event_Fields
                 $promotional_event_author = strip_tags( $_POST[ self::FIELD_NAME_AUTHOR ] );
 
                 $this->save_meta($product, $promotional_event, self::FIELD_NAME_IS );
-                $this->save_meta($product, $promotional_event_campaing_slug, self::FIELD_NAME_SLUG_CAMPAING );
+                $this->save_meta($product, $promotional_event_campaign_slug, self::FIELD_NAME_SLUG_CAMPAIGN );
                 $this->save_meta($product, $promotional_event_pages_quantity, self::FIELD_NAME_PAGES_QUANTITY );
                 $this->save_meta($product, $promotional_event_language, self::FIELD_NAME_LANGUAGE );
                 $this->save_meta($product, $promotional_event_publishing, self::FIELD_NAME_PUBLISHING );

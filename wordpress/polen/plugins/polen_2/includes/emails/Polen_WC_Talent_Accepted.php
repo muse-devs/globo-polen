@@ -90,7 +90,7 @@ class Polen_WC_Talent_Accepted extends \WC_Email {
 
 	public function get_content_ep_html() {
 		$polen_order = new Polen_Order_Module( $this->object );
-		$file_templete = sprintf( $this->template_ep_html, $polen_order->get_campaing_slug() );
+		$file_templete = sprintf( $this->template_ep_html, $polen_order->get_campaign_slug() );
 		return wc_get_template_html( $file_templete, array(
 			'order'         => $this->object,
 			'email_heading' => $this->get_heading_ep(),

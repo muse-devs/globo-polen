@@ -304,7 +304,7 @@ class Promotional_Event_Admin
                     $user = get_user_by( 'ID', $id_registered );
                     add_user_meta( $user->ID, Polen_Checkout_Create_User::META_KEY_CREATED_BY, 'checkout', true );
                     $polen_product = new Polen_Product_Module( $product );
-                    add_user_meta( $user->ID, Polen_Admin_Event_Promotional_Event_Fields::FIELD_NAME_SLUG_CAMPAING, $polen_product->get_campaing_slug(), true );
+                    add_user_meta( $user->ID, Polen_Admin_Event_Promotional_Event_Fields::FIELD_NAME_SLUG_CAMPAIGN, $polen_product->get_campaign_slug(), true );
                     $args['customer_id'] = $user->ID;
                 }
             }
@@ -315,7 +315,7 @@ class Promotional_Event_Admin
             $coupon->update_coupoun($coupon_code, $order->get_id());
             $order->update_meta_data( '_polen_customer_email', $email );
             $order->add_meta_data( Polen_Admin_Event_Promotional_Event_Fields::FIELD_NAME_IS, 'yes', true);
-            $order->add_meta_data( Polen_Admin_Event_Promotional_Event_Fields::FIELD_NAME_SLUG_CAMPAING, $polen_product->get_campaing_slug(), true);
+            $order->add_meta_data( Polen_Admin_Event_Promotional_Event_Fields::FIELD_NAME_SLUG_CAMPAIGN, $polen_product->get_campaign_slug(), true);
 
             wc_reduce_stock_levels($order->get_id());
 
@@ -339,7 +339,7 @@ class Promotional_Event_Admin
             $instruction = "
             Olá {$name} de {$city},<br>
 
-            Eu sou a {$product->get_title()} e junto com a Lacta estou aqui para te 
+            Eu sou {$product->get_title()} e junto com a Lacta estou aqui para te 
             desejar um ótimo Natal, com muita saúde, amor e paz, porque com a Lacta
             você divide mais que chocolate, você cria laços. Um grande beijo e feliz
             natal para toda família.";
