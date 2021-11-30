@@ -121,7 +121,7 @@ class Polen_Api_Video_Info
      */
     public function get_item_by_video_logo_waiting( $request )
     {
-        $videos_infos = Polen_Video_Info::select_by_video_logo_waiting();
+        $videos_infos = Polen_Video_Info::select_by_video_logo_waiting( 10 );
         
         $data = array();
 
@@ -234,7 +234,7 @@ class Polen_Api_Video_Info
         $post_data[ 'created_at' ] = $video_info->created_at;
         $post_data[ 'updated_at' ] = $video_info->updated_at;
 
-        $order = wc_get_order( $$video_info->order_id );
+        $order = wc_get_order( $video_info->order_id );
         $polen_order = new Polen_Order_Module( $order );
         $post_data[ 'campaing' ] = $polen_order->get_campaing_slug();
         

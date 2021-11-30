@@ -2,6 +2,8 @@
 namespace Polen\Includes\Emails;
 
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
+use Polen\Includes\Debug;
+use Polen\Includes\Module\Polen_Order_Module;
 use Polen\Includes\Polen_Video_Info;
 use Polen\Social_Base\Social_Base_Order;
 
@@ -22,7 +24,7 @@ class Polen_WC_Completed_Order extends \WC_Email_Customer_Completed_Order
             '{order_date}'   => '',
             '{order_number}' => '',
         );
-
+        $this->template_base  = TEMPLATEPATH . '/woocommerce/';
         // Triggers for this email.
         add_action( 'woocommerce_order_status_completed_notification', array( $this, 'trigger' ), 10, 2 );
 
@@ -38,6 +40,11 @@ class Polen_WC_Completed_Order extends \WC_Email_Customer_Completed_Order
      */
     public function trigger( $order_id, $order = false ) {
         $this->setup_locale();
+
+        /**
+         * Não disparar email caso flag no_send_email estiver marcada
+         */
+
 
         if ( $order_id && ! is_a( $order, 'WC_Order' ) ) {
             $order = wc_get_order( $order_id );
@@ -71,7 +78,7 @@ class Polen_WC_Completed_Order extends \WC_Email_Customer_Completed_Order
     }
 
    public function get_subject_ep() {
-       return 'Seu Vídeo-Autógrafo está pronto.';
+       return 'Seu vídeo chegou!';
    }
 
    public function get_subject_social_base() {
@@ -80,8 +87,11 @@ class Polen_WC_Completed_Order extends \WC_Email_Customer_Completed_Order
 
    public function get_content_ep()
    {
+        $polen_order = new Polen_Order_Module( $this->object );
+        $file_templete = sprintf( $this->template_ep_html, $polen_order->get_campaing_slug() );
+        Debug::def($file_templete);
         return wc_get_template_html(
-            sprintf( $this->template_ep_html, $this->product->get_sku() ),
+            $file_templete,
             array(
                 'order'              => $this->object,
                 'email_heading'      => $this->get_heading(),
