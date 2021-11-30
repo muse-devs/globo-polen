@@ -42,7 +42,7 @@ class Polen_WC_Payment_Approved extends \WC_Email {
 		$this->description = __( 'E-mail que será enviado ao usuário quando o pagamento do pedido é aprovado.', 'polen' );
 		$this->customer_email = true;
 		$this->heading     = __( 'Pagamento Aprovado', 'polen' );
-		$this->heading_ep     = 'Vídeo-autógrafo';
+		$this->heading_ep     = 'Vídeo Lacta';
 		$this->heading_talent_social = __( 'Doação recebida', 'polen' );
 
 		$this->subject     = sprintf( _x( '[%s] Pagamento Aprovado', 'E-mail que será enviado ao usuário quando o pagamento do pedido é aprovado', 'polen' ), '{blogname}' );

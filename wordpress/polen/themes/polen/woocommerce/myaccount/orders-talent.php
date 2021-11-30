@@ -1,5 +1,6 @@
 <?php
 
+use Polen\Includes\Cart\Polen_Cart_Item_Factory;
 use Polen\Includes\Polen_Order;
 use Polen\Includes\Polen_Talent;
 use Polen\Includes\Polen_Video_Info;
@@ -90,11 +91,12 @@ if (!$talent_is_social) {
 										</div>
 										<?php
 										if (event_promotional_order_is_event_promotional($order_obj)) {
+											$item_cart = Polen_Cart_Item_Factory::polen_cart_item_from_order( $order_obj );
 										?>
 											<div class="row mt-2">
 												<div class="col-12">
 													<p class="p">Ocasião</p>
-													<p class="value small">Vídeo-autógrafo</p>
+													<p class="value small"><?= $item_cart->get_video_category(); ?></p>
 												</div>
 											</div>
 										<?php

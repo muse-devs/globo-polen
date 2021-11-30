@@ -25,7 +25,7 @@ class Polen_WC_Talent_Accepted extends \WC_Email {
 		$this->heading_ep     = __( '%s aceitou', 'polen' );
 
 		$this->subject     = sprintf( _x( '[%s] O talento aceitou', 'E-mail que será enviado ao usuário quando o talento aceitar o pedido.', 'polen' ), '{blogname}' );
-		$this->subject_ep  = '%s aceitou seu pedido e logo fará seu vídeo-autógrafo' ;
+		$this->subject_ep  = 'Pedido Aceito!' ;
     
 		$this->template_html  = 'emails/Polen_WC_Talent_Accepted.php';
 		$this->template_plain = 'emails/plain/Polen_WC_Talent_Accepted.php';
@@ -79,7 +79,7 @@ class Polen_WC_Talent_Accepted extends \WC_Email {
 	public function get_subject_ep()
 	{
 		$author = $this->product->get_meta( '_promotional_event_author', true );
-		return sprintf( $this->subject_ep, $author );
+		return $this->subject_ep;
 	}
 
 	public function get_heading_ep()
@@ -90,7 +90,7 @@ class Polen_WC_Talent_Accepted extends \WC_Email {
 
 	public function get_content_ep_html() {
 		$polen_order = new Polen_Order_Module( $this->object );
-		$file_templete = sprintf( $this->ep_template_html, $polen_order->get_campaing_slug() );
+		$file_templete = sprintf( $this->template_ep_html, $polen_order->get_campaing_slug() );
 		return wc_get_template_html( $file_templete, array(
 			'order'         => $this->object,
 			'email_heading' => $this->get_heading_ep(),
