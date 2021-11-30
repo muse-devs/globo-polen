@@ -220,12 +220,15 @@ class Promotional_Event_Admin
     {
         try{
             $coupon_code = !empty($_POST['coupon']) ? sanitize_text_field($_POST['coupon']) : null;
-            $name = sanitize_text_field($_POST['name']);
-            $email = sanitize_text_field($_POST['email']);
-            $city = sanitize_text_field($_POST['city']);
-            $term = sanitize_text_field( $_POST['terms'] );
-            $nonce = $_POST['security'];
+            $name = sanitize_text_field($_POST['name']) ?? null;
+            $email = sanitize_text_field($_POST['email']) ?? null;
+            $city = sanitize_text_field($_POST['city']) ?? null;
+            $term = sanitize_text_field( $_POST['terms'] ) ?? null;
+            $nonce = $_POST['security'] ?? null;
 
+            $city = substr( $city, 0, 50 );
+            $name = substr( $name, 0, 50 );
+            
             $product_sku = filter_input( INPUT_POST, 'product', FILTER_SANITIZE_STRING );
             $product_id = wc_get_product_id_by_sku( $product_sku );
             $product = wc_get_product( $product_id );
@@ -288,7 +291,7 @@ class Promotional_Event_Admin
             $order = wc_create_order( $args );
             $coupon->update_coupoun($coupon_code, $order->get_id());
             $order->update_meta_data( '_polen_customer_email', $email );
-            $order->add_meta_data( Polen_Admin_Event_Promotional_Event_Fields::FIELD_NAME_IS, true, true);
+            $order->add_meta_data( Polen_Admin_Event_Promotional_Event_Fields::FIELD_NAME_IS, 'yes', true);
             $order->add_meta_data( Polen_Admin_Event_Promotional_Event_Fields::FIELD_NAME_SLUG_CAMPAING, $polen_product->get_campaing_slug(), true);
 
             wc_reduce_stock_levels($order->get_id());
@@ -328,7 +331,7 @@ class Promotional_Event_Admin
             wc_add_order_item_meta( $order_item_id, 'video_to'              , 'to_myself', true );
             wc_add_order_item_meta( $order_item_id, 'name_to_video'         , $name, true );
             wc_add_order_item_meta( $order_item_id, 'email_to_video'        , $email, true );
-            wc_add_order_item_meta( $order_item_id, 'video_category'        , 'Vídeo-Autógrafo', true );
+            wc_add_order_item_meta( $order_item_id, 'video_category'        , 'Vídeo-Lacta', true );
             wc_add_order_item_meta( $order_item_id, 'instructions_to_video' , $instruction, true );
 
             wc_add_order_item_meta( $order_item_id, 'allow_video_on_page'   , 'on', true );
