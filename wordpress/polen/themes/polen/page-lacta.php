@@ -30,7 +30,8 @@ get_header();
     <div class="col-12">
       <?php
       //TODO -- função para trazer esses dados
-      $videos = ["461", "421", "422"];
+      // $videos = ["461", "421", "422"];
+      $videos = [];
       polen_front_get_videos(polen_get_home_stories($videos), "Últimos vídeos gravados");
       ?>
     </div>
