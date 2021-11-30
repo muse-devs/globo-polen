@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                     <tr>
                       <td align="center" id="header_wrapper"
                         style="display: flex; justify-content: center;border-bottom: 1px solid rgba(255, 255, 255, 0.2); flex-wrap: wrap; align-items: center; padding: 20px 0px;">
-                        <img src="<?php echo TEMPLATE_URI.'/assets/img/lacta/email/logo.png'?>" style="height: 62px;"></img>
+                        <img src="<?php echo TEMPLATE_URI.'/assets/img/lacta/email/logo.png'?>" style="height: 62px; margin: 0 auto; display: block;"></img>
                       </td>
                       <td align="center" id="header_wrapper"
                         style="display: flex; justify-content: center;border-bottom: 1px solid rgba(255, 255, 255, 0.2); flex-wrap: wrap; align-items: center; padding: 20px 0px;">
