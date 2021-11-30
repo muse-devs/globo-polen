@@ -663,15 +663,16 @@
     flex-wrap: wrap;
     width: 100%;
     padding: 20px;
-    h2 {
-      font-size: 41px;
-      font-style: normal;
-      font-weight: 700;
-      line-height: 49px;
-      letter-spacing: 0em;
-      text-align: center;
-      width: 100%;
-      color: #fff;
+    .logo-lacta {
+      margin-bottom: 20px;
+      @include media-breakpoint-down(xs) {
+        margin-bottom: 0px;
+      }
+      svg {
+        @include media-breakpoint-down(xs) {
+          transform: scale(0.5);
+        }
+      }
     }
     p {
       font-size: 24px;
@@ -683,6 +684,10 @@
       width: 100%;
       font-family: "Poppins",sans-serif;
       color: #fff;
+      @include media-breakpoint-down(xs) {
+        font-size: 14px;
+        line-height: 20px;
+      }
     }
     .about-more {
       font-size: 16px;
@@ -693,6 +698,9 @@
       text-align: center;
       color: #fff;
       text-decoration: underline;
+      @include media-breakpoint-down(xs) {
+        font-size: 11px;
+      }
     }
   }
 }
