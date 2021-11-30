@@ -93,7 +93,7 @@ function polen_get_lacta_banner_2($link)
 ?>
   <div class="row my-4">
     <div class="col-12">
-      <img src="<?php echo TEMPLATE_URI . '/assets/img/lacta/bg-banner-2.png'; ?>" alt="Banner Lacta" style="width: 100%" />
+      <img src="<?php echo TEMPLATE_URI . '/assets/img/lacta/bg-banner-2.jpg'; ?>" alt="Banner Lacta" style="width: 100%" />
       <a href="<?php echo $link; ?>" target="_blank" class="lacta-banner-link"></a>
     </div>
   </div>
@@ -204,7 +204,7 @@ function lacta_cart_form( $product, $coupon = "")
 				blockUnblockInputs(formId, true);
 				window.location.href = res.url;
 			}, function(e) {
-				polMessages.error(e);
+				polMessages.error(e.Error);
 			});
 		});
 	</script>
