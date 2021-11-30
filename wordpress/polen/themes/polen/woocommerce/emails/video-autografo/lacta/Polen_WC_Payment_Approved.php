@@ -31,6 +31,9 @@ if ( ! defined( 'ABSPATH' ) ) {
                       <td align="center" id="header_wrapper"
                         style="display: flex; justify-content: center;border-bottom: 1px solid rgba(255, 255, 255, 0.2); flex-wrap: wrap; align-items: center; padding: 20px 0px;">
                         <img src="<?php echo TEMPLATE_URI.'/assets/img/lacta/email/logo.png'?>" style="height: 62px; margin-top: 20px;"></img>
+                      </td>
+                      <td align="center" id="header_wrapper"
+                        style="display: flex; justify-content: center;border-bottom: 1px solid rgba(255, 255, 255, 0.2); flex-wrap: wrap; align-items: center; padding: 20px 0px;">
                         <h2 style="width: 100%; text-align: center; color: #fff;margin:20px 0px; font-size: 32px;">Pedido de vídeo recebido</h2>
                       </td>
                     </tr>
@@ -60,9 +63,9 @@ if ( ! defined( 'ABSPATH' ) ) {
                           </tr>
                           <tr
                             style='color: #ffffff; font-family: Poppins, "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 14px; line-height: 100%; text-align: left;'>
-                            <td align="center" style="display: flex;justify-content: center;">
+                            <td align="center" style="padding: 0px;">
                               <p
-                                style="font-size: 16px; line-height: 2; font-weight: 400; color: #ffffff; margin: 0 0 10px; text-align: center;">
+                                style="font-size: 16px; line-height: 2; font-weight: 400; color: #ffffff; text-align: center;">
                                 Para acompanhar seu pedido <a href="<?php echo polen_get_link_order_status( $order->get_id() ); ?>" target="_blank" style="color: #fff; font-weight: 600; text-decoration: underline;">clique aqui.</a></p>
                             </td>
                           </tr>
