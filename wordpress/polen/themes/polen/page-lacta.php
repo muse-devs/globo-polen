@@ -38,7 +38,7 @@ get_header();
   <?php getTutorialLacta(); ?>
   <?php
   polen_front_get_news($talents[0], null, null, false, "lacta");
-  polen_get_lacta_banner_2("#lacta");
+  polen_get_lacta_banner_2("https://www.lacta.com.br");
   polen_front_get_news($talents[1], null, null, false, "lacta");
   ?>
   <?php
