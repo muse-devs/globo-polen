@@ -241,6 +241,14 @@ class Promotional_Event_Admin
             if( !filter_input( INPUT_POST, 'email', FILTER_VALIDATE_EMAIL ) ) {
                 throw new Exception('Email inválido', 422);
             }
+
+            if( empty( trim( $name ) ) ) {
+                throw new Exception('Nome é obrigatório', 422);
+            }
+
+            if( empty( trim( $city ) ) ) {
+                throw new Exception('Cidade é obrigatório', 422);
+            }
             
             if( empty( $term ) || $term !== 'on' ) {
                 throw new Exception('Aceite os termos e condições', 422);
