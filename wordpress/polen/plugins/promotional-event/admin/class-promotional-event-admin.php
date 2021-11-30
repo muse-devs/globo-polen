@@ -13,6 +13,7 @@
 use Polen\Admin\Polen_Admin_Event_Promotional_Event_Fields;
 use Polen\Includes\Debug;
 use Polen\Includes\Module\Polen_Product_Module;
+use Polen\Includes\Polen_Checkout_Create_User;
 use Polen\Includes\Polen_Order;
 use Polen\Includes\Polen_WooCommerce;
 
@@ -245,6 +246,10 @@ class Promotional_Event_Admin
                 throw new Exception('Aceite os termos e condições', 422);
             }
 
+            if( empty( $product ) ) {
+                throw new Exception('Produto inválido', 404);
+            }
+
             $address = array(
                 'first_name' => $name,
                 'email' => $email,
@@ -284,7 +289,16 @@ class Promotional_Event_Admin
                 $user_c = get_user_by('email', $email);
                 if(!empty($user_c)) {
                     $args['customer_id'] = $user_c->ID;
+                } else {
+                    $user_email = $email;
+                    $user_password = wp_generate_password( 5, false ) . random_int( 0, 99 );
+                    $id_registered = wc_create_new_customer( $user_email, $user_email, $user_password );
+                    $user = get_user_by( 'ID', $id_registered );
+                    add_user_meta( $user->ID, Polen_Checkout_Create_User::META_KEY_CREATED_BY, 'checkout', true );
+                    $polen_product = new Polen_Product_Module( $product );
+                    add_user_meta( $user->ID, Polen_Admin_Event_Promotional_Event_Fields::FIELD_NAME_SLUG_CAMPAING, $polen_product->get_campaing_slug(), true );
                 }
+
             }
 
             $polen_product = new Polen_Product_Module( $product );
