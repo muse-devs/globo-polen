@@ -2,7 +2,6 @@
 
 namespace Polen\Includes\API;
 
-use Polen\Includes\Debug;
 use Polen\Includes\Module\Polen_Order_Module;
 use Polen\Includes\Polen_Video_Info;
 use Polen\Social_Base\Social_Base;
@@ -234,7 +233,7 @@ class Polen_Api_Video_Info
         $post_data[ 'created_at' ] = $video_info->created_at;
         $post_data[ 'updated_at' ] = $video_info->updated_at;
 
-        $order = wc_get_order( $$video_info->order_id );
+        $order = wc_get_order( $video_info->order_id );
         $polen_order = new Polen_Order_Module( $order );
         $post_data[ 'campaing' ] = $polen_order->get_campaing_slug();
         
