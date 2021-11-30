@@ -61,7 +61,10 @@ get_header();
 		<div class="col-12 col-md-6 m-md-auto d-flex">
       <div class="lacta-bio">
         <h5>Sobre o vídeo de <?php echo $product->get_title(); ?></h5>
-        <p><?php echo $product->get_description(); ?></p>
+        <p>
+          Comprando produtos da Lacta você pode ganhar um vídeo exclusivo de <?php echo $product->get_title(); ?>
+          com uma mensagem de fim de ano para se presentear ou surpreender quem você ama!
+        </p>
       </div>
 		</div>
 	</div>
