@@ -877,9 +877,10 @@ function polen_get_lacta_banner($link)
         <div class="content">
           <h2>Natal Lacta</h2>
           <p>Criando laços para emocionar quem você ama</p>
-          <a href="<?php echo $link; ?>">Saiba mais</a>
+          <div class="link"> Saiba mais</div>
         </div>
       </div>
+      <a href="<?php echo $link; ?>" class="lacta-banner-link"></a>
     </div>
   </div>
 <?php

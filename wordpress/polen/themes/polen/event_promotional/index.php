@@ -78,16 +78,16 @@ get_header();
 
   <!-- Banner -->
   <div class="row my-4">
-    <div class="col-sm-12 mb-4">
+    <div class="col-12 col-md-6 m-md-auto mb-4">
       <div class="lacta-wrapper">
         <div class="lacta-carousel">
-          <img src="<?php echo TEMPLATE_URI . '/assets/img/lacta/banner-1.jpg'; ?>" alt="Banner Lacta" style="width: 100%">
-          <a href="https://www.lacta.com.br/" target="_blank" class="lacta-banner-link"></a>
           <img src="<?php echo TEMPLATE_URI . '/assets/img/lacta/banner-1.jpg'; ?>" alt="Banner Lacta" style="width: 100%">
           <a href="https://www.lacta.com.br/" target="_blank" class="lacta-banner-link"></a>
         </div>
       </div>
     </div>
+  </div>
+  <div class="row">
     <div class="col-12 col-md-6 m-md-auto event-lacta">
       <a href="https://www.lacta.com.br/" target="_blank">
         <div class="mdc-button mdc-button--outlined mdc-ripple-upgraded" style="--mdc-ripple-fg-size:294px; --mdc-ripple-fg-scale:1.71077; --mdc-ripple-fg-translate-start:74.375px, -113.195px; --mdc-ripple-fg-translate-end:98px, -120px;">
