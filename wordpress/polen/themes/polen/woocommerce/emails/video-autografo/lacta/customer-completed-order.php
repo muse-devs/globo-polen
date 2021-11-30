@@ -4,13 +4,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+//do_action( 'woocommerce_email_header', $email_heading, $email );
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Polen.me</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>Polen.me</title>
   </head>
   <body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0"
     style="padding: 0; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">
@@ -99,5 +100,3 @@ if ( ! defined( 'ABSPATH' ) ) {
     </div>
   </body>
 </html>
-
-
