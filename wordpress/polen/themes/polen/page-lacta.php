@@ -30,7 +30,8 @@ get_header();
     <div class="col-12">
       <?php
       //TODO -- função para trazer esses dados
-      $videos = ["461", "421", "422"];
+      // $videos = ["461", "421", "422"];
+      $videos = [];
       polen_front_get_videos(polen_get_home_stories($videos), "Últimos vídeos gravados");
       ?>
     </div>
@@ -38,7 +39,7 @@ get_header();
   <?php getTutorialLacta(); ?>
   <?php
   polen_front_get_news($talents[0], null, null, false, "lacta");
-  polen_get_lacta_banner_2("#lacta");
+  polen_get_lacta_banner_2("https://www.lacta.com.br");
   polen_front_get_news($talents[1], null, null, false, "lacta");
   ?>
   <?php
