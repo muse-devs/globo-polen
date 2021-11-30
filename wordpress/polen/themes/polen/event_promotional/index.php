@@ -37,7 +37,7 @@ get_header();
   <!-- Botão de adicionar ao carrinho -->
 	<div class="row mt-4 talent-page-footer">
 		<div class="col-12 col-md-6 m-md-auto pb-3 event-lacta">
-			<?php if(!$has_stock) : ?>
+			<?php if($has_stock) : ?>
         <div class="btn-buy-b2b">
           <a href="<?php echo event_promotional_url_code_validation( $product ); ?>">
             <div class="mdc-button mdc-button--raised mdc-ripple-upgraded">
