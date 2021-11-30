@@ -4,7 +4,7 @@ namespace Polen\Social_Base;
 class Social_Base_Order
 {
     const ORDER_META_KEY_SOCIAL = 'social_base';
-    const ORDER_META_KEY_CAMPAING = 'social_base_campaing';
+    const ORDER_META_KEY_campaign = 'social_base_campaign';
 
     public static function is_social( $order )
     {

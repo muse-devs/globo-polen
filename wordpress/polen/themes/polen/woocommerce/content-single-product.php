@@ -25,9 +25,9 @@ global $Polen_Plugin_Settings;
 global $post;
 
 $polen_product = new Polen_Product_Module( $product );
-if( $polen_product->get_is_campaing() ) { 
-	$campaing_slug = $polen_product->get_campaing_slug();
-	wc_get_template( "content-single-{$campaing_slug}-product.php" );
+if( $polen_product->get_is_campaign() ) { 
+	$campaign_slug = $polen_product->get_campaign_slug();
+	wc_get_template( "content-single-{$campaign_slug}-product.php" );
 	return;
 }
 

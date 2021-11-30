@@ -4,13 +4,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+//do_action( 'woocommerce_email_header', $email_heading, $email );
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Polen.me</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>Polen.me</title>
   </head>
   <body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0"
     style="padding: 0; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">
@@ -27,9 +28,12 @@ if ( ! defined( 'ABSPATH' ) ) {
                   <table border="0" cellpadding="0" cellspacing="0" width="100%" id="template_header"
                     style='color: #ffffff; border-bottom: 0; font-weight: bold; line-height: 100%; vertical-align: middle; font-family: Poppins, "Helvetica Neue", Helvetica, Arial, sans-serif;'>
                     <tr>
-                      <td id="header_wrapper"
-                        style="display: flex; justify-content: center;border-bottom: 1px solid rgba(255, 255, 255, 0.2); flex-wrap: wrap; align-items: center; padding: 40px 0px;">
-                        <img src="<?php echo TEMPLATE_URI.'/assets/img/lacta/email/logo.png'?>" style="height: 62px;"></img>
+                      <td align="center" id="header_wrapper"
+                        style="display: flex; justify-content: center; flex-wrap: wrap; align-items: center; padding: 20px 0px;">
+                        <img src="<?php echo TEMPLATE_URI.'/assets/img/lacta/email/logo.png'?>" style="height: 62px; margin: 0 auto; display: block;"></img>
+                      </td>
+                      <td align="center" id="header_wrapper"
+                        style="display: flex; justify-content: center;border-bottom: 1px solid rgba(255, 255, 255, 0.2); flex-wrap: wrap; align-items: center; padding: 20px 0px;">
                         <h2 style="width: 100%; text-align: center; color: #fff;margin:20px 0px; font-size: 32px;">Seu vídeo chegou!</h2>
                       </td>
                     </tr>
@@ -46,7 +50,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                         <!-- Content -->
                         <table border="0" cellpadding="20" cellspacing="0" width="100%">
                           <tr>
-                            <td valign="top">
+                            <td align="center" valign="top">
                               <div id="body_content_inner"
                                 style='color: #ffffff; font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 14px; line-height: 100%; text-align: left;'>
                                 <p
@@ -59,7 +63,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                           </tr>
                           <tr
                             style='color: #ffffff; font-family: Poppins, "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 14px; line-height: 100%; text-align: left;'>
-                            <td style="display: flex;justify-content: center;">
+                            <td align="center">
                               <a href="<?php echo polen_get_link_order_status( $order->get_id() ); ?>" target="_blank"
                                 style="font-size: 16px;color: #fff; font-weight: 600; text-decoration: none; border: 1px solid #fff; padding: 15px 40px; border-radius: 10px;margin-bottom: 30px;">Visualizar
                                 vídeo</a>
@@ -96,5 +100,3 @@ if ( ! defined( 'ABSPATH' ) ) {
     </div>
   </body>
 </html>
-
-

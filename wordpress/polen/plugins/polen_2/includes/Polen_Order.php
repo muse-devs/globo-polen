@@ -455,7 +455,7 @@ class Polen_Order
      */
     public static function get_interval_order_event()
     {
-        return new DateInterval( 'P7D' );
+        return new DateInterval( 'P15D' );
     }
 
     /**

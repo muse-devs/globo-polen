@@ -13,6 +13,7 @@
 use Polen\Admin\Polen_Admin_Event_Promotional_Event_Fields;
 use Polen\Includes\Debug;
 use Polen\Includes\Module\Polen_Product_Module;
+use Polen\Includes\Polen_Checkout_Create_User;
 use Polen\Includes\Polen_Order;
 use Polen\Includes\Polen_WooCommerce;
 
@@ -240,9 +241,21 @@ class Promotional_Event_Admin
             if( !filter_input( INPUT_POST, 'email', FILTER_VALIDATE_EMAIL ) ) {
                 throw new Exception('Email inválido', 422);
             }
+
+            if( empty( trim( $name ) ) ) {
+                throw new Exception('Nome é obrigatório', 422);
+            }
+
+            if( empty( trim( $city ) ) ) {
+                throw new Exception('Cidade é obrigatório', 422);
+            }
             
             if( empty( $term ) || $term !== 'on' ) {
                 throw new Exception('Aceite os termos e condições', 422);
+            }
+
+            if( empty( $product ) ) {
+                throw new Exception('Produto inválido', 404);
             }
 
             $address = array(
@@ -284,15 +297,25 @@ class Promotional_Event_Admin
                 $user_c = get_user_by('email', $email);
                 if(!empty($user_c)) {
                     $args['customer_id'] = $user_c->ID;
+                } else {
+                    $user_email = $email;
+                    $user_password = wp_generate_password( 5, false ) . random_int( 0, 99 );
+                    $id_registered = wc_create_new_customer( $user_email, $user_email, $user_password );
+                    $user = get_user_by( 'ID', $id_registered );
+                    add_user_meta( $user->ID, Polen_Checkout_Create_User::META_KEY_CREATED_BY, 'checkout', true );
+                    $polen_product = new Polen_Product_Module( $product );
+                    add_user_meta( $user->ID, Polen_Admin_Event_Promotional_Event_Fields::FIELD_NAME_SLUG_CAMPAIGN, $polen_product->get_campaign_slug(), true );
+                    $args['customer_id'] = $user->ID;
                 }
             }
 
             $polen_product = new Polen_Product_Module( $product );
             $order = wc_create_order( $args );
+            $order->set_customer_id( $args['customer_id'] );
             $coupon->update_coupoun($coupon_code, $order->get_id());
             $order->update_meta_data( '_polen_customer_email', $email );
             $order->add_meta_data( Polen_Admin_Event_Promotional_Event_Fields::FIELD_NAME_IS, 'yes', true);
-            $order->add_meta_data( Polen_Admin_Event_Promotional_Event_Fields::FIELD_NAME_SLUG_CAMPAING, $polen_product->get_campaing_slug(), true);
+            $order->add_meta_data( Polen_Admin_Event_Promotional_Event_Fields::FIELD_NAME_SLUG_CAMPAIGN, $polen_product->get_campaign_slug(), true);
 
             wc_reduce_stock_levels($order->get_id());
 
@@ -316,7 +339,7 @@ class Promotional_Event_Admin
             $instruction = "
             Olá {$name} de {$city},<br>
 
-            Eu sou a {$product->get_title()} e junto com a Lacta estou aqui para te 
+            Eu sou {$product->get_title()} e junto com a Lacta estou aqui para te 
             desejar um ótimo Natal, com muita saúde, amor e paz, porque com a Lacta
             você divide mais que chocolate, você cria laços. Um grande beijo e feliz
             natal para toda família.";
