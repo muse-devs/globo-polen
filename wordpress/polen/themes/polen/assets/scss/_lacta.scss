@@ -24,15 +24,32 @@
 
 .lacta-top-banner {
   width: 100%;
-  height: 100vw;
-  max-height: 400px;
+  height: 150vw;
+  max-height: 480px;
   color: var(--light);
-  background: no-repeat center bottom/cover url(../img/lacta/top-bg.svg);
-  .title {
-    font-size: 32px;
+  background: no-repeat center bottom/cover url(../img/lacta/top-bg-desktop.svg);
+  position: relative;
+  @include media-breakpoint-down(sm) {
+    background: no-repeat center bottom/cover url(../img/lacta/top-bg-mobile.svg);
+    max-height: 400px;
   }
-  p {
-    opacity: 0.8;
+  .content {
+    padding-bottom: 50px;
+    .title {
+      font-size: 32px;
+    }
+    p {
+      opacity: 0.8;
+    }
+  }
+  .lacta-logo {
+    position: absolute;
+    left:50%;
+    margin-left: -38px;
+    bottom: 145px;
+    @include media-breakpoint-down(sm) {
+      bottom: 50px;
+    }
   }
 }
 
