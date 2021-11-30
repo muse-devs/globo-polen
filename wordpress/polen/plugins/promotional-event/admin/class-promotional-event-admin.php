@@ -269,7 +269,7 @@ class Promotional_Event_Admin
 
             $coupon = new Coupons();
             $check = $coupon->check_coupoun_exist($coupon_code);
-            $check_is_used = false;//$coupon->check_coupoun_is_used($coupon_code);
+            $check_is_used = $coupon->check_coupoun_is_used($coupon_code);
 
             if (empty($coupon_code)) {
                 throw new Exception('Cupom é obrigatório', 422);
