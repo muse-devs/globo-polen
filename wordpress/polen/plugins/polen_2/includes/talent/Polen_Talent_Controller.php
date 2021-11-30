@@ -2,6 +2,7 @@
 
 namespace Polen\Includes\Talent;
 
+use Exception;
 use Polen\Includes\{Polen_Talent, Polen_Order, Debug};
 use WC_Order;
 use Vimeo\Vimeo;

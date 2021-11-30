@@ -87,7 +87,7 @@ class Polen_WC_Completed_Order extends \WC_Email_Customer_Completed_Order
    public function get_content_ep()
    {
         $polen_order = new Polen_Order_Module( $this->object );
-        $file_templete = sprintf( $this->template_ep_html, $polen_order->get_campaing_slug() );
+        $file_templete = sprintf( $this->template_ep_html, $polen_order->get_campaign_slug() );
         return wc_get_template_html(
             $file_templete,
             array(
@@ -106,9 +106,9 @@ class Polen_WC_Completed_Order extends \WC_Email_Customer_Completed_Order
 
         $video_info = Polen_Video_Info::get_by_order_id( $this->object->get_id() );
         $video_url = site_url( 'v/' . $video_info->hash );
-        $social_campaing_name = $this->object->get_meta( Social_Base_Order::ORDER_META_KEY_CAMPAING, true );
+        $social_campaign_name = $this->object->get_meta( Social_Base_Order::ORDER_META_KEY_campaign, true );
         return wc_get_template_html(
-            sprintf( $this->template_social_base_html, $social_campaing_name ),
+            sprintf( $this->template_social_base_html, $social_campaign_name ),
             array(
                 'order'              => $this->object,
                 'video_url'          => $video_url,

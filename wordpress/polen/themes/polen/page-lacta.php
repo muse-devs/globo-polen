@@ -2,8 +2,8 @@
 
 /** Template Name: Página - Lacta */
 
-// $talents = polen_get_talents_by_campaingn('lacta');
-$talents = array_chunk(polen_get_talents_by_campaingn('lacta'), 8);
+// $talents = polen_get_talents_by_campaignn('lacta');
+$talents = array_chunk(polen_get_talents_by_campaignn('lacta'), 8);
 
 get_header();
 ?>

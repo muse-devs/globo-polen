@@ -42,7 +42,7 @@ class Polen_WC_Payment_Approved extends \WC_Email {
 		$this->description = __( 'E-mail que será enviado ao usuário quando o pagamento do pedido é aprovado.', 'polen' );
 		$this->customer_email = true;
 		$this->heading     = __( 'Pagamento Aprovado', 'polen' );
-		$this->heading_ep     = 'Vídeo Lacta';
+		$this->heading_ep     = 'Pedido de vídeo recebido';
 		$this->heading_talent_social = __( 'Doação recebida', 'polen' );
 
 		$this->subject     = sprintf( _x( '[%s] Pagamento Aprovado', 'E-mail que será enviado ao usuário quando o pagamento do pedido é aprovado', 'polen' ), '{blogname}' );
@@ -62,7 +62,7 @@ class Polen_WC_Payment_Approved extends \WC_Email {
 		$this->subject_talent = 'Você está a um passo de receber mais R$!';
 		$this->subject_talent_social = 'Recebemos mais uma doação para o Criança Esperança!';
 		$this->subject_social = 'Obrigado por ajudar o Criança Esperança.';
-		$this->subject_ep = 'Pedido de vídeo recebido ';
+		$this->subject_ep = 'Lacta - Pedido de vídeo recebido';
     
 		add_action( 'woocommerce_order_status_changed', array( $this, 'trigger' ) );
 
@@ -222,7 +222,7 @@ class Polen_WC_Payment_Approved extends \WC_Email {
 
 	public function get_content_ep_html() {
 		$polen_order = new Polen_Order_Module( $this->object );
-		$file_templete = sprintf( $this->ep_template_html, $polen_order->get_campaing_slug() );
+		$file_templete = sprintf( $this->ep_template_html, $polen_order->get_campaign_slug() );
 		return wc_get_template_html( $file_templete, array(
 			'order'         => $this->object,
 			'email_heading' => $this->get_heading(),
