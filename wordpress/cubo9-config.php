@@ -9,7 +9,7 @@ if( ! defined( 'ABSPATH' ) ) {
 define( 'WP_CONTENT_DIR', ABSPATH . 'polen' );
 define( 'WP_PLUGIN_DIR', WP_CONTENT_DIR . '/plugins');
 define( 'PLUGINDIR', WP_PLUGIN_DIR );
-if ( defined( 'WP_CLI' ) ) { $_SERVER['HTTP_HOST'] = 'polen.globo'; }
+// if ( defined( 'WP_CLI' ) ) { $_SERVER['HTTP_HOST'] = 'polen.globo'; }
 define( 'WP_CONTENT_URL', '//'. $_SERVER['HTTP_HOST'] . '/polen' );
 define( 'WP_PLUGIN_URL', WP_CONTENT_URL . '/plugins' );
 
