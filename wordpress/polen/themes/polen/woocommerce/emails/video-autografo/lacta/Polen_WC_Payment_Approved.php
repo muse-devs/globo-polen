@@ -28,7 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                   <table border="0" cellpadding="0" cellspacing="0" width="100%" id="template_header"
                     style='color: #ffffff; border-bottom: 0; font-weight: bold; line-height: 100%; vertical-align: middle; font-family: Poppins, "Helvetica Neue", Helvetica, Arial, sans-serif;'>
                     <tr>
-                      <td id="header_wrapper"
+                      <td align="center" id="header_wrapper"
                         style="display: flex; justify-content: center;border-bottom: 1px solid rgba(255, 255, 255, 0.2); flex-wrap: wrap; align-items: center; padding: 20px 0px;">
                         <img src="<?php echo TEMPLATE_URI.'/assets/img/lacta/email/logo.png'?>" style="height: 62px; margin-top: 20px;"></img>
                         <h2 style="width: 100%; text-align: center; color: #fff;margin:20px 0px; font-size: 32px;">Pedido de vídeo recebido</h2>
@@ -47,7 +47,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                         <!-- Content -->
                         <table border="0" cellpadding="20" cellspacing="0" width="100%">
                           <tr>
-                            <td valign="top">
+                            <td align="center" valign="top">
                               <div id="body_content_inner"
                                 style='color: #ffffff; font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 14px; line-height: 100%; text-align: left;'>
                                 <p
@@ -60,7 +60,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                           </tr>
                           <tr
                             style='color: #ffffff; font-family: Poppins, "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 14px; line-height: 100%; text-align: left;'>
-                            <td style="display: flex;justify-content: center;">
+                            <td align="center" style="display: flex;justify-content: center;">
                               <p
                                 style="font-size: 16px; line-height: 2; font-weight: 400; color: #ffffff; margin: 0 0 10px; text-align: center;">
                                 Para acompanhar seu pedido <a href="<?php echo polen_get_link_order_status( $order->get_id() ); ?>" target="_blank" style="color: #fff; font-weight: 600; text-decoration: underline;">clique aqui.</a></p>
