@@ -121,7 +121,7 @@ class Polen_Api_Video_Info
      */
     public function get_item_by_video_logo_waiting( $request )
     {
-        $videos_infos = Polen_Video_Info::select_by_video_logo_waiting( 10 );
+        $videos_infos = Polen_Video_Info::select_by_video_logo_waiting();
         
         $data = array();
 
