@@ -2,10 +2,10 @@
 /**
  * Retornar talentos de acordo com a campanha
  *
- * @param string $campaingn
+ * @param string $campaignn
  * @return array
  */
-function polen_get_talents_by_campaingn(string $campaingn): array
+function polen_get_talents_by_campaignn(string $campaignn): array
 {
     $args = array(
         'post_type' => 'product',
@@ -14,7 +14,7 @@ function polen_get_talents_by_campaingn(string $campaingn): array
             array(
                'taxonomy' => 'campaigns',
                 'field' => 'slug',
-                'terms' => $campaingn,
+                'terms' => $campaignn,
             )
         ),
     );
@@ -47,7 +47,7 @@ function polen_get_talents_by_campaingn(string $campaingn): array
  *
  * @return bool
  */
-function is_page_campaingn_lacta(): bool
+function is_page_campaignn_lacta(): bool
 {
     $page = false;
     $current_template = get_page_template_slug(get_queried_object_id());

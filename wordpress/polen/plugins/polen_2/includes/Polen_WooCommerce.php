@@ -628,8 +628,8 @@ class Polen_WooCommerce
                     <?php
                     woocommerce_wp_text_input(
                         array(
-                            'id'          => '_social_base_slug_campaing',
-                            'value'       => $product_object->get_meta( '_social_base_slug_campaing' ),
+                            'id'          => '_social_base_slug_campaign',
+                            'value'       => $product_object->get_meta( '_social_base_slug_campaign' ),
                             'label'       => 'Slug da Campanha',
                             'desc_tip'    => true,
                             'description' => 'Slug da companha que este produto é parte',
@@ -679,7 +679,7 @@ class Polen_WooCommerce
                 // $promotional_event_wartermark = strip_tags( $_POST[ '_promotional_event_wartermark' ] );
                 
                 // $is_social_base = strip_tags( $_POST[ '_is_social_base' ]);
-                // $social_base_slug_campaing = strip_tags( $_POST[ '_social_base_slug_campaing' ]);
+                // $social_base_slug_campaign = strip_tags( $_POST[ '_social_base_slug_campaign' ]);
                 // $social_base_video_testimonial = strip_tags( $_POST[ '_social_base_video_testimonial' ]);
 
                 $product->update_meta_data( '_is_charity', $charity );
@@ -699,7 +699,7 @@ class Polen_WooCommerce
                 // $this->save_meta($product, $promotional_event_wartermark, '_promotional_event_wartermark' );
 
                 // $this->save_meta($product, $is_social_base, '_is_social_base' );
-                // $this->save_meta($product, $social_base_slug_campaing, '_social_base_slug_campaing' );
+                // $this->save_meta($product, $social_base_slug_campaign, '_social_base_slug_campaign' );
                 // $this->save_meta($product, $social_base_video_testimonial, '_social_base_video_testimonial' );
 
                 do_action( Polen_Admin_Social_Base_Product_Fields::ACTION_NAME    , $product_id );

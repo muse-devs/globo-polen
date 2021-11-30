@@ -93,7 +93,7 @@ class Polen_Cart
         $product_is_social_base = product_is_social_base( $product );
         if( $product_is_social_base ) {
             $order->add_meta_data( Social_Base_Order::ORDER_META_KEY_SOCIAL, '1' );
-            $order->add_meta_data( Social_Base_Order::ORDER_META_KEY_CAMPAING, $product->get_meta( Polen_Admin_Social_Base_Product_Fields::FIELD_NAME_SLUG_CAMPAING, true ) );
+            $order->add_meta_data( Social_Base_Order::ORDER_META_KEY_campaign, $product->get_meta( Polen_Admin_Social_Base_Product_Fields::FIELD_NAME_SLUG_CAMPAIGN, true ) );
 
             $interval  = Polen_Order::get_interval_order_social();
             $timestamp = Polen_Order::get_deadline_timestamp( $order, $interval );
