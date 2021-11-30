@@ -269,7 +269,7 @@ class Promotional_Event_Admin
 
             $coupon = new Coupons();
             $check = $coupon->check_coupoun_exist($coupon_code);
-            $check_is_used = $coupon->check_coupoun_is_used($coupon_code);
+            $check_is_used = false;//$coupon->check_coupoun_is_used($coupon_code);
 
             if (empty($coupon_code)) {
                 throw new Exception('Cupom é obrigatório', 422);
@@ -317,8 +317,6 @@ class Promotional_Event_Admin
             $order->add_meta_data( Polen_Admin_Event_Promotional_Event_Fields::FIELD_NAME_IS, 'yes', true);
             $order->add_meta_data( Polen_Admin_Event_Promotional_Event_Fields::FIELD_NAME_SLUG_CAMPAIGN, $polen_product->get_campaign_slug(), true);
 
-            wc_reduce_stock_levels($order->get_id());
-
             // $order->update_status('wc-payment-approved');
 
             // ID Product
@@ -364,12 +362,13 @@ class Promotional_Event_Admin
             $interval  = Polen_Order::get_interval_order_event();
             $timestamp = Polen_Order::get_deadline_timestamp( $order, $interval );
             $order->add_meta_data( Polen_Order::META_KEY_DEADLINE, $timestamp, true );
-
             $order->save();
             
             $email = WC_Emails::instance();
             $order->update_status( Polen_WooCommerce::ORDER_STATUS_PAYMENT_APPROVED, 'order_note', true );
             
+            wc_reduce_stock_levels($order->get_id());
+
             $order = new \WC_Order($order->get_id());
             $order->calculate_totals();
 
