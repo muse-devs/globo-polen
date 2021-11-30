@@ -9,7 +9,15 @@ if( ! defined( 'ABSPATH' ) ) {
 define( 'WP_CONTENT_DIR', ABSPATH . 'polen' );
 define( 'WP_PLUGIN_DIR', WP_CONTENT_DIR . '/plugins');
 define( 'PLUGINDIR', WP_PLUGIN_DIR );
-// if ( defined( 'WP_CLI' ) ) { $_SERVER['HTTP_HOST'] = 'polen.globo'; }
+
+if ( defined( 'WP_CLI' ) ) {
+        $conn = mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
+        $result = mysqli_query($conn, 'SELECT * FROM `wp_options` WHERE `option_name` = \'siteurl\' LIMIT 1;');
+        $fetch = mysqli_fetch_row( $result );
+        $url_data = parse_url( $fetch[2] );
+        $_SERVER['HTTP_HOST'] = $url_data['host'];
+}
+
 define( 'WP_CONTENT_URL', '//'. $_SERVER['HTTP_HOST'] . '/polen' );
 define( 'WP_PLUGIN_URL', WP_CONTENT_URL . '/plugins' );
 
