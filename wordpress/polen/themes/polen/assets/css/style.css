@@ -11944,15 +11944,14 @@ textarea {
     flex-wrap: wrap;
     width: 100%;
     padding: 20px; }
-    .lacta-banner .content h2 {
-      font-size: 41px;
-      font-style: normal;
-      font-weight: 700;
-      line-height: 49px;
-      letter-spacing: 0em;
-      text-align: center;
-      width: 100%;
-      color: #fff; }
+    .lacta-banner .content .logo-lacta {
+      margin-bottom: 20px; }
+      @media (max-width: 575.98px) {
+        .lacta-banner .content .logo-lacta {
+          margin-bottom: 0px; } }
+      @media (max-width: 575.98px) {
+        .lacta-banner .content .logo-lacta svg {
+          transform: scale(0.5); } }
     .lacta-banner .content p {
       font-size: 24px;
       font-style: normal;
@@ -11963,6 +11962,10 @@ textarea {
       width: 100%;
       font-family: "Poppins",sans-serif;
       color: #fff; }
+      @media (max-width: 575.98px) {
+        .lacta-banner .content p {
+          font-size: 14px;
+          line-height: 20px; } }
     .lacta-banner .content .about-more {
       font-size: 16px;
       font-style: normal;
@@ -11972,6 +11975,9 @@ textarea {
       text-align: center;
       color: #fff;
       text-decoration: underline; }
+      @media (max-width: 575.98px) {
+        .lacta-banner .content .about-more {
+          font-size: 11px; } }
 
 .slick-alt {
   width: 130%;
