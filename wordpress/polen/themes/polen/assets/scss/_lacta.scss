@@ -290,6 +290,11 @@
 }
 
 .event-lacta {
+  .order-flow {
+    .item {
+      height: auto;
+    }
+  }
   .order-flow .item.complete::after {
     background: var(--primary);
   }

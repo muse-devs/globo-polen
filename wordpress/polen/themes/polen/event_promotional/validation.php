@@ -19,7 +19,37 @@ get_header();
       </div>
       <div class="row">
         <div class="col-12 mb-4">
-          <?php get_lacta_insctruction(); ?>
+          <div class="lacta-instruction event-lacta">
+            <div class="header-box text-center">
+              <h3 style="line-height:20px;">Como resgatar meu vídeo</h3>
+            </div>
+            <div class="content-box mt-3 px-2">
+              <div class="row">
+                <div class="col-12 d-flex align-items-center">
+                  <ul class="order-flow half">
+                    <li class="item itempayment-approved complete">
+                      <span class="background status">1</span>
+                      <span class="text">
+                        <p class="description">Compre produtos no site da <a href="https://www.lacta.com.br/" target="_blank"><b>Lacta</b></a>, usando o código do seu ídolo.</p>
+                      </span>
+                    </li>
+                    <li class="item itempayment-approved complete">
+                      <span class="background status">2</span>
+                      <span class="text">
+                        <p class="description">Os 50 primeiros compradores a usar o código do seu ídolo, vão receber um e-mail com o cupom para resgatar o vídeo.</p>
+                      </span>
+                    </li>
+                    <li class="item itempayment-approved complete">
+                      <span class="background status">3</span>
+                      <span class="text">
+                        <p class="description">Insira o cupom no campo abiaxo e clique em  "Checar”.</p>
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 			<?php lacta_coupon( $product ); ?>
