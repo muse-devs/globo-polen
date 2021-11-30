@@ -2,7 +2,6 @@
 namespace Polen\Includes\Emails;
 
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
-use Polen\Includes\Debug;
 use Polen\Includes\Module\Polen_Order_Module;
 use Polen\Includes\Polen_Video_Info;
 use Polen\Social_Base\Social_Base_Order;
@@ -89,7 +88,6 @@ class Polen_WC_Completed_Order extends \WC_Email_Customer_Completed_Order
    {
         $polen_order = new Polen_Order_Module( $this->object );
         $file_templete = sprintf( $this->template_ep_html, $polen_order->get_campaing_slug() );
-        Debug::def($file_templete);
         return wc_get_template_html(
             $file_templete,
             array(
