@@ -28,7 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                     style='color: #ffffff; border-bottom: 0; font-weight: bold; line-height: 100%; vertical-align: middle; font-family: Poppins, "Helvetica Neue", Helvetica, Arial, sans-serif;'>
                     <tr>
                       <td align="center" id="header_wrapper"
-                        style="display: flex; justify-content: center;border-bottom: 1px solid rgba(255, 255, 255, 0.2); flex-wrap: wrap; align-items: center; padding: 20px 0px;">
+                        style="display: flex; justify-content: center; flex-wrap: wrap; align-items: center; padding: 20px 0px;">
                         <img src="<?php echo TEMPLATE_URI.'/assets/img/lacta/email/logo.png'?>" style="height: 62px; margin: 0 auto; display: block;"></img>
                       </td>
                       <td align="center" id="header_wrapper"
