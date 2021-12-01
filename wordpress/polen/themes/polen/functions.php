@@ -433,3 +433,13 @@ function show_pagination(array $args)
 
   return $output;
 }
+
+
+//Remover plugins do menu para Sobhan
+function polen_remove_menus() {
+	remove_menu_page( 'plugins.php' );
+}
+if( 37 == get_current_user_id() ) {
+	add_action( 'admin_menu', 'polen_remove_menus' );
+}
+
