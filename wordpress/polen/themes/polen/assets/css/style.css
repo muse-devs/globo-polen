@@ -11927,6 +11927,65 @@ textarea {
     .bw-banner .content img {
       width: 100%; }
 
+.natal-banner {
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px; }
+  @media (max-width: 575.98px) {
+    .natal-banner {
+      padding: 10px; } }
+  .natal-banner .logo {
+    width: 50%;
+    height: 100% !important; }
+    .natal-banner .logo img {
+      margin-bottom: 20px; }
+      @media (max-width: 575.98px) {
+        .natal-banner .logo img {
+          margin-bottom: 5px; } }
+  .natal-banner .content {
+    width: 50%;
+    height: 100%;
+    padding: 20px; }
+    @media (max-width: 575.98px) {
+      .natal-banner .content {
+        padding: 5px; } }
+    .natal-banner .content p {
+      color: #fff;
+      font-size: 22px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 32px;
+      letter-spacing: 0em; }
+      @media (max-width: 767.98px) {
+        .natal-banner .content p {
+          font-size: 16px;
+          line-height: 15px; } }
+      @media (max-width: 575.98px) {
+        .natal-banner .content p {
+          font-size: 12px; } }
+    .natal-banner .content .click-to-donate {
+      padding: 10px 20px;
+      background: #BAE174;
+      text-transform: uppercase;
+      font-size: 16px;
+      color: #fff;
+      text-shadow: 1px 1px 2px #000000;
+      border-radius: 10px;
+      margin-top: 20px;
+      width: 200px;
+      text-align: center; }
+      @media (max-width: 767.98px) {
+        .natal-banner .content .click-to-donate {
+          font-size: 14px; } }
+      @media (max-width: 575.98px) {
+        .natal-banner .content .click-to-donate {
+          font-size: 10px;
+          margin-top: 10px;
+          width: 150px;
+          padding: 5px 10px; } }
+
 .lacta-banner {
   width: 100%;
   height: 300px;

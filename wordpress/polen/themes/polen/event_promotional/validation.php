@@ -10,6 +10,16 @@ get_header();
 ?>
 
 <main id="primary" class="site-main">
+  <!-- Botão de Voltar -->
+  <div class="row mb-4">
+    <div class="col-12 col-md-8 m-md-auto">
+      <a href="<?php echo get_home_url().'/produtos'."/".$product->slug; ?>">
+        <div class="go-back-button">
+          <i class='icon icon-left-arrow'></i>
+        </div>
+      </a>
+    </div>
+  </div>
 	<div class="row">
 		<div class="col-12 col-md-8 m-md-auto">
       <div class="row">
