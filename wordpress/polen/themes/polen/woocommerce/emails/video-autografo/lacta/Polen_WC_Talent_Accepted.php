@@ -89,8 +89,8 @@ if ( ! defined( 'ABSPATH' ) ) {
                                     style='border-radius: 6px; border: 0; color: #ffffff; font-family: Poppins, "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 12px; line-height: 150%; text-align: center; padding: 24px 0;'>
                                     <p
                                       style="font-size: 16px; line-height: 2; font-weight: 400; color: #ffffff; margin: 0 0 10px; text-align: center;">
-                                      Em caso de dúvida, você pode enviar um e-mail para<br><a href="mailto:atendimento@polen.me"
-                                        style="color: #fff">atendimento@polen.me</a>
+                                      Em caso de dúvida, consulte nossa página de ajuda:<br><a
+                                        href="https://polen.me/ajuda/" target="_blank" style="color: #fff">polen.me/ajuda</a>
                                     </p>
                                     <img src="<?php echo TEMPLATE_URI.'/assets/img/logo.png'?>" style="height: 50px;"></img>
                                   </td>

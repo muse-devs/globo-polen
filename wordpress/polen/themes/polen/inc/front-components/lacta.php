@@ -93,7 +93,8 @@ function polen_get_lacta_banner_2($link)
 ?>
   <div class="row my-4">
     <div class="col-12">
-      <img src="<?php echo TEMPLATE_URI . '/assets/img/lacta/bg-banner-2.jpg'; ?>" alt="Banner Lacta" style="width: 100%; border-radius: 8px;" />
+      <img src="<?php echo TEMPLATE_URI . '/assets/img/lacta/bg-banner-2-desktop.jpg'; ?>" alt="Banner Lacta" class="d-none d-md-block" style="width: 100%; border-radius: 8px;" />
+      <img src="<?php echo TEMPLATE_URI . '/assets/img/lacta/bg-banner-2-mobile.jpg'; ?>" alt="Banner Lacta" class="d-block d-md-none" style="width: 100%; border-radius: 8px;" />
       <a href="<?php echo $link; ?>" target="_blank" class="lacta-banner-link"></a>
     </div>
   </div>
