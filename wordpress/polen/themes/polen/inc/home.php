@@ -22,14 +22,12 @@ get_header();
 	<div class="row">
 		<div class="col-12">
 			<div id="product-carousel" class="owl-carousel owl-theme">
-        <!-- Banner Lacta Week -->
-        <div class="item">
-					<?php polen_get_lacta_banner(site_url('/lacta')); ?>
-				</div>
-        <!-- Banner Black Week
-        <div class="item">
-					<?php //polen_get_bw_banner(site_url('tag/black-week/')); ?>
+        <!-- <div class="item">
+					<?php //polen_get_lacta_banner(site_url('/lacta')); ?>
 				</div> -->
+        <div class="item">
+					<?php polen_get_natal_banner(site_url('tag/natal-social/')); ?>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -1,6 +1,6 @@
 (window["__wcAdmin_webpackJsonp"] = window["__wcAdmin_webpackJsonp"] || []).push([[17],{
 
-/***/ 38:
+/***/ 39:
 /***/ (function(module, exports) {
 
 function _defineProperty(obj, key, value) {
@@ -23,28 +23,28 @@ module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
 
-/***/ 546:
+/***/ 552:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ 547:
+/***/ 553:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ 548:
+/***/ 554:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ 614:
+/***/ 630:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -52,7 +52,7 @@ module.exports["default"] = module.exports, module.exports.__esModule = true;
 __webpack_require__.r(__webpack_exports__);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/extends.js
-var helpers_extends = __webpack_require__(35);
+var helpers_extends = __webpack_require__(36);
 var extends_default = /*#__PURE__*/__webpack_require__.n(helpers_extends);
 
 // EXTERNAL MODULE: external ["wp","element"]
@@ -80,13 +80,13 @@ var external_wc_data_ = __webpack_require__(11);
 var external_wc_tracks_ = __webpack_require__(16);
 
 // EXTERNAL MODULE: ./client/analytics/settings/index.scss
-var settings = __webpack_require__(546);
+var settings = __webpack_require__(552);
 
 // EXTERNAL MODULE: ./client/analytics/settings/config.js + 1 modules
-var config = __webpack_require__(255);
+var config = __webpack_require__(256);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/defineProperty.js
-var defineProperty = __webpack_require__(38);
+var defineProperty = __webpack_require__(39);
 var defineProperty_default = /*#__PURE__*/__webpack_require__.n(defineProperty);
 
 // EXTERNAL MODULE: ./node_modules/prop-types/index.js
@@ -97,7 +97,7 @@ var prop_types_default = /*#__PURE__*/__webpack_require__.n(prop_types);
 var external_lodash_ = __webpack_require__(4);
 
 // EXTERNAL MODULE: ./client/analytics/settings/setting.scss
-var settings_setting = __webpack_require__(547);
+var settings_setting = __webpack_require__(553);
 
 // CONCATENATED MODULE: ./client/analytics/settings/setting.js
 
@@ -571,7 +571,7 @@ function HistoricalDataActions({
   };
 })])(HistoricalDataActions));
 // EXTERNAL MODULE: external ["wc","date"]
-var external_wc_date_ = __webpack_require__(19);
+var external_wc_date_ = __webpack_require__(20);
 
 // CONCATENATED MODULE: ./client/analytics/settings/historical-data/period-selector.js
 
@@ -714,7 +714,7 @@ function HistoricalDataProgress({
 
 /* harmony default export */ var historical_data_progress = (HistoricalDataProgress);
 // EXTERNAL MODULE: external ["wp","hooks"]
-var external_wp_hooks_ = __webpack_require__(30);
+var external_wp_hooks_ = __webpack_require__(28);
 
 // CONCATENATED MODULE: ./client/analytics/settings/historical-data/status.js
 
@@ -795,7 +795,7 @@ function HistoricalDataSkipCheckbox({
   };
 })(HistoricalDataSkipCheckbox));
 // EXTERNAL MODULE: ./client/analytics/settings/historical-data/style.scss
-var style = __webpack_require__(548);
+var style = __webpack_require__(554);
 
 // CONCATENATED MODULE: ./client/analytics/settings/historical-data/layout.js
 

@@ -24,6 +24,17 @@ get_header();
 
 <main id="primary" class="site-main">
 
+  <!-- Botão de Voltar -->
+  <div class="row">
+    <div class="col-12 col-md-6 m-md-auto">
+      <a href="<?php echo get_home_url()."/lacta"; ?>">
+        <div class="go-back-button">
+          <i class='icon icon-left-arrow'></i>
+        </div>
+      </a>
+    </div>
+  </div>
+
   <!-- Perfil -->
 	<div class="row">
 		<div class="col-12 col-md-6 m-md-auto mt-3 d-flex flex-wrap justify-content-center lacta-profile">

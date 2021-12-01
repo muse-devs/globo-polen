@@ -82,7 +82,7 @@ this["wc"] = this["wc"] || {}; this["wc"]["betaFeaturesTrackingModal"] =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 471);
+/******/ 	return __webpack_require__(__webpack_require__.s = 473);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -101,7 +101,7 @@ this["wc"] = this["wc"] || {}; this["wc"]["betaFeaturesTrackingModal"] =
 
 /***/ }),
 
-/***/ 122:
+/***/ 121:
 /***/ (function(module, exports) {
 
 (function() { module.exports = window["wc"]["explat"]; }());
@@ -136,14 +136,14 @@ this["wc"] = this["wc"] || {}; this["wc"]["betaFeaturesTrackingModal"] =
 
 /***/ }),
 
-/***/ 459:
+/***/ 461:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ 471:
+/***/ 473:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -172,7 +172,7 @@ var external_wc_data_ = __webpack_require__(11);
 var external_wc_tracks_ = __webpack_require__(16);
 
 // EXTERNAL MODULE: external ["wc","explat"]
-var external_wc_explat_ = __webpack_require__(122);
+var external_wc_explat_ = __webpack_require__(121);
 
 // CONCATENATED MODULE: ./client/wp-admin-scripts/beta-features-tracking-modal/container.js
 
@@ -279,7 +279,7 @@ const BetaFeaturesTrackingContainer = Object(external_wp_compose_["compose"])(Ob
   };
 }))(BetaFeaturesTrackingModal);
 // EXTERNAL MODULE: ./client/wp-admin-scripts/beta-features-tracking-modal/style.scss
-var style = __webpack_require__(459);
+var style = __webpack_require__(461);
 
 // CONCATENATED MODULE: ./client/wp-admin-scripts/beta-features-tracking-modal/index.js
 

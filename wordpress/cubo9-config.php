@@ -16,6 +16,7 @@ if ( defined( 'WP_CLI' ) ) {
         $fetch = mysqli_fetch_row( $result );
         $url_data = parse_url( $fetch[2] );
         $_SERVER['HTTP_HOST'] = $url_data['host'];
+        mysqli_close( $conn );
 }
 
 define( 'WP_CONTENT_URL', '//'. $_SERVER['HTTP_HOST'] . '/polen' );

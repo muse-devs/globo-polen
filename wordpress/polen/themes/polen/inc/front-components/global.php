@@ -868,6 +868,29 @@ function polen_get_bw_banner($link)
 <?php
 }
 
+function polen_get_natal_banner($link)
+{
+?>
+  <div class="row mt-4">
+    <div class="col-12">
+      <a href="<?php echo $link; ?>">
+        <div class="natal-banner" style="background: url('<?php echo TEMPLATE_URI . '/assets/img/natal/bg.png'; ?>')center no-repeat">
+          <div class="content">
+            <p>Seu vídeo-Polen vira uma doação para uma instituição social!</p>
+            <div class="click-to-donate">
+              Clique para doar
+            </div>
+          </div>
+          <div class="logo">
+            <img src="<?php echo TEMPLATE_URI . '/assets/img/natal/logo.png'; ?>" alt="Natal Emocionante" />
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+<?php
+}
+
 function polen_get_lacta_banner($link)
 {
 ?>
