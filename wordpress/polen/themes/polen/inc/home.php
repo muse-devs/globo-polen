@@ -19,19 +19,18 @@ get_header();
 
   <?php polen_banner_scrollable(polen_get_new_talents(6), "Destaque", polen_get_all_new_talents_url()); ?>
 
-	<!-- <div class="row">
+	<div class="row">
 		<div class="col-12">
 			<div id="product-carousel" class="owl-carousel owl-theme">
-        <div class="item">
+        <!-- <div class="item">
 					<?php //polen_get_lacta_banner(site_url('/lacta')); ?>
-				</div>
-
+				</div> -->
         <div class="item">
-					<?php //polen_get_bw_banner(site_url('tag/black-week/')); ?>
+					<?php polen_get_natal_banner(site_url('tag/natal-social/')); ?>
 				</div>
 			</div>
 		</div>
-	</div> -->
+	</div>
 
   <?php polen_front_get_tutorial(); ?>
 

@@ -1,6 +1,8 @@
 <?php
 
+use Polen\Admin\Polen_Admin_Event_Promotional_Event_Fields;
 use Polen\Includes\Module\Polen_Order_Module;
+use Polen\Includes\Module\Polen_Product_Module;
 
 function event_promotional_url_home()
 {
@@ -57,11 +59,8 @@ function event_promotional_is_app()
 
 function event_promotional_product_is_event_promotional( $product )
 {
-    $is_ep = $product->get_meta( Promotional_Event_Admin::PRODUCT_METAKEY, true );
-    if( $is_ep && $is_ep == 'yes' ) {
-        return true;
-    }
-    return false;
+    $polen_product = new Polen_Product_Module( $product );
+    return $polen_product->get_is_campaign();
 }
 
 
