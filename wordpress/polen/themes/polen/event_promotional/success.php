@@ -29,13 +29,15 @@ get_header();
 
 <main id="primary" class="site-main">
 	<div class="row">
-		<div class="col-12 col-md-8 m-md-auto">
+		<div class="col-12 col-md-8 m-md-auto event-lacta">
+      <div class="row">
+        <div class="col-12 mb-5">
+          <?php polen_get_lacta_thank_you($product->get_title()); ?>
+        </div>
+      </div>
 			<?php
-                va_magalu_box_thank_you();
-
 				event_promotional_get_order_flow_layout($order_array, $order_number );
-
-                va_partners_footer( $product );
+        get_lacta_partners();
 			?>
 		</div>
 	</div>

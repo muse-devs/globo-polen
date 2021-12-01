@@ -81,5 +81,9 @@ function polen_get_thumbnail($post_id)
 function polen_queried_object()
 {
 	$queried_object = get_queried_object();
+    if( empty( $queried_object ) )
+    {
+        return null;
+    }
 	return in_array($queried_object->taxonomy, array("product_cat", "product_tag")) ? $queried_object : null;
 }

@@ -1,6 +1,6 @@
 (window["__wcAdmin_webpackJsonp"] = window["__wcAdmin_webpackJsonp"] || []).push([[49],{
 
-/***/ 473:
+/***/ 475:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -25,7 +25,7 @@ var chevronRight = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["creat
 
 /***/ }),
 
-/***/ 509:
+/***/ 511:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -50,14 +50,14 @@ const ALLOWED_ATTR = ['target', 'href', 'rel', 'name', 'download'];
 
 /***/ }),
 
-/***/ 544:
+/***/ 550:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ 618:
+/***/ 634:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -98,10 +98,10 @@ var external_moment_default = /*#__PURE__*/__webpack_require__.n(external_moment
 var icon = __webpack_require__(116);
 
 // EXTERNAL MODULE: ./node_modules/@wordpress/icons/build-module/library/chevron-left.js
-var chevron_left = __webpack_require__(291);
+var chevron_left = __webpack_require__(293);
 
 // EXTERNAL MODULE: ./node_modules/@wordpress/icons/build-module/library/chevron-right.js
-var chevron_right = __webpack_require__(473);
+var chevron_right = __webpack_require__(475);
 
 // EXTERNAL MODULE: ./packages/wc-admin-settings/build-module/index.js
 var build_module = __webpack_require__(13);
@@ -113,10 +113,10 @@ var external_wc_data_ = __webpack_require__(11);
 var external_wc_tracks_ = __webpack_require__(16);
 
 // EXTERNAL MODULE: external ["wc","experimental"]
-var external_wc_experimental_ = __webpack_require__(20);
+var external_wc_experimental_ = __webpack_require__(17);
 
 // EXTERNAL MODULE: ./client/lib/sanitize-html/index.js
-var sanitize_html = __webpack_require__(509);
+var sanitize_html = __webpack_require__(511);
 
 // EXTERNAL MODULE: ./node_modules/prop-types/index.js
 var prop_types = __webpack_require__(1);
@@ -173,7 +173,7 @@ placeholder_StoreAlertsPlaceholder.defaultProps = {
   hasMultipleAlerts: false
 };
 // EXTERNAL MODULE: ./client/layout/store-alerts/style.scss
-var style = __webpack_require__(544);
+var style = __webpack_require__(550);
 
 // CONCATENATED MODULE: ./client/layout/store-alerts/index.js
 

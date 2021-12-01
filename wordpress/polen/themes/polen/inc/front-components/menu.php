@@ -82,7 +82,7 @@ function pol_get_menu()
 function pol_menu_icon()
 {
 ?>
-  <svg id="menu-icon" width="56" height="48" viewBox="0 0 56 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg id="menu-icon" class="menu-icon" width="56" height="48" viewBox="0 0 56 48" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M16 16H40" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
     <path d="M16 24H40" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
     <path d="M16 32H40" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />

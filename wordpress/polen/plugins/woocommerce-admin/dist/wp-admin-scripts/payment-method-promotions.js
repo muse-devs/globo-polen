@@ -82,7 +82,7 @@ this["wc"] = this["wc"] || {}; this["wc"]["paymentMethodPromotions"] =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 472);
+/******/ 	return __webpack_require__(__webpack_require__.s = 474);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -129,14 +129,14 @@ this["wc"] = this["wc"] || {}; this["wc"]["paymentMethodPromotions"] =
 
 /***/ }),
 
-/***/ 460:
+/***/ 462:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ 472:
+/***/ 474:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -168,7 +168,7 @@ var purify = __webpack_require__(53);
 var external_wp_i18n_ = __webpack_require__(2);
 
 // EXTERNAL MODULE: ./client/wp-admin-scripts/payment-method-promotions/payment-promotion-row.scss
-var payment_promotion_row = __webpack_require__(460);
+var payment_promotion_row = __webpack_require__(462);
 
 // CONCATENATED MODULE: ./client/wp-admin-scripts/payment-method-promotions/payment-promotion-row.tsx
 
@@ -184,10 +184,10 @@ var payment_promotion_row = __webpack_require__(460);
 
 
 
-
 /**
  * Internal dependencies
  */
+
 
 
 function sanitizeHTML(html) {
@@ -201,11 +201,10 @@ function sanitizeHTML(html) {
 
 const PaymentPromotionRow = ({
   pluginSlug,
-  sortColumnContent,
-  descriptionColumnContent,
   title,
   titleLink,
-  subTitleContent
+  subTitleContent,
+  columns
 }) => {
   const [installing, setInstalling] = Object(external_wp_element_["useState"])(false);
   const {
@@ -258,38 +257,49 @@ const PaymentPromotionRow = ({
     });
   };
 
-  return Object(external_wp_element_["createElement"])(external_wp_element_["Fragment"], null, Object(external_wp_element_["createElement"])("td", {
-    className: "sort ui-sortable-handle",
-    width: "1%",
-    dangerouslySetInnerHTML: {
-      __html: sortColumnContent
+  return Object(external_wp_element_["createElement"])(external_wp_element_["Fragment"], null, columns.map(column => {
+    if (column.className.includes('name')) {
+      return Object(external_wp_element_["createElement"])("td", {
+        className: "name",
+        key: column.className
+      }, Object(external_wp_element_["createElement"])("div", {
+        className: "wc-payment-gateway-method_name"
+      }, Object(external_wp_element_["createElement"])(external_wc_components_["Link"], {
+        target: "_blank",
+        type: "external",
+        rel: "noreferrer",
+        href: titleLink
+      }, title), subTitleContent ? Object(external_wp_element_["createElement"])("div", {
+        className: "pre-install-payment-gateway_subtitle",
+        dangerouslySetInnerHTML: sanitizeHTML(subTitleContent)
+      }) : null));
+    } else if (column.className.includes('status')) {
+      return Object(external_wp_element_["createElement"])("td", {
+        className: "pre-install-payment-gateway_status",
+        key: column.className
+      });
+    } else if (column.className.includes('action')) {
+      return Object(external_wp_element_["createElement"])("td", {
+        className: "action",
+        key: column.className
+      }, Object(external_wp_element_["createElement"])(external_wp_components_["Button"], {
+        className: "button alignright",
+        onClick: () => installPaymentGateway(),
+        isSecondary: true,
+        isBusy: installing,
+        "aria-disabled": installing
+      }, Object(external_wp_i18n_["__"])('Install', 'woocommerce-admin')));
     }
-  }), Object(external_wp_element_["createElement"])("td", {
-    className: "name"
-  }, Object(external_wp_element_["createElement"])("div", {
-    className: "wc-payment-gateway-method_name"
-  }, Object(external_wp_element_["createElement"])(external_wc_components_["Link"], {
-    target: "_blank",
-    type: "external",
-    rel: "noreferrer",
-    href: titleLink
-  }, title), subTitleContent ? Object(external_wp_element_["createElement"])("div", {
-    className: "pre-install-payment-gateway_subtitle",
-    dangerouslySetInnerHTML: sanitizeHTML(subTitleContent)
-  }) : null)), Object(external_wp_element_["createElement"])("td", {
-    className: "pre-install-payment-gateway_status"
-  }), Object(external_wp_element_["createElement"])("td", {
-    className: "description",
-    dangerouslySetInnerHTML: sanitizeHTML(descriptionColumnContent)
-  }), Object(external_wp_element_["createElement"])("td", {
-    className: "action"
-  }, Object(external_wp_element_["createElement"])(external_wp_components_["Button"], {
-    className: "button alignright",
-    onClick: () => installPaymentGateway(),
-    isSecondary: true,
-    isBusy: installing,
-    "aria-disabled": installing
-  }, Object(external_wp_i18n_["__"])('Install', 'woocommerce-admin'))));
+
+    return Object(external_wp_element_["createElement"])("td", {
+      key: column.className,
+      className: column.className,
+      width: column.width,
+      dangerouslySetInnerHTML: column.className.includes('sort') ? {
+        __html: column.html
+      } : sanitizeHTML(column.html)
+    });
+  }));
 };
 // CONCATENATED MODULE: ./client/wp-admin-scripts/payment-method-promotions/index.tsx
 
@@ -312,14 +322,18 @@ PAYMENT_METHOD_PROMOTIONS.forEach(paymentMethod => {
   const container = document.querySelector(`[data-gateway_id="${paymentMethod.gatewayId}"]`);
 
   if (container) {
-    const sortColumn = container.children[0].innerHTML;
-    const descriptionColumn = container.children[3].innerHTML;
+    const columns = [...container.children].map(child => {
+      return {
+        className: child.className,
+        html: child.innerHTML,
+        width: child.getAttribute('width')
+      };
+    });
     const title = container.getElementsByClassName('wc-payment-gateway-method-title');
     const subTitle = container.getElementsByClassName('gateway-subtitle');
     Object(external_wp_element_["render"])(Object(external_wp_element_["createElement"])(PaymentPromotionRow, {
+      columns: columns,
       pluginSlug: paymentMethod.pluginSlug,
-      sortColumnContent: sortColumn,
-      descriptionColumnContent: descriptionColumn,
       title: title.length === 1 ? title[0].innerHTML : undefined,
       titleLink: paymentMethod.link,
       subTitleContent: subTitle.length === 1 ? subTitle[0].innerHTML : undefined

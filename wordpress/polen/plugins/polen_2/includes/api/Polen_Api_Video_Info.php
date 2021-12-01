@@ -2,7 +2,7 @@
 
 namespace Polen\Includes\API;
 
-use Polen\Includes\Debug;
+use Polen\Includes\Module\Polen_Order_Module;
 use Polen\Includes\Polen_Video_Info;
 use Polen\Social_Base\Social_Base;
 use Polen\Social_Base\Social_Base_Order;
@@ -133,7 +133,7 @@ class Polen_Api_Video_Info
             $response = $this->prepare_item_for_response( $video_info, $request );
             if( !empty( $order ) ) {
                 if( Social_Base_Order::is_social( $order ) ) {
-                    $response[ Social_Base_Order::ORDER_META_KEY_CAMPAING ] = $order->get_meta( Social_Base_Order::ORDER_META_KEY_CAMPAING );
+                    $response[ Social_Base_Order::ORDER_META_KEY_campaign ] = $order->get_meta( Social_Base_Order::ORDER_META_KEY_campaign );
                 }
             }
             $data[] = $response;
@@ -233,6 +233,10 @@ class Polen_Api_Video_Info
         $post_data[ 'created_at' ] = $video_info->created_at;
         $post_data[ 'updated_at' ] = $video_info->updated_at;
 
+        $order = wc_get_order( $video_info->order_id );
+        $polen_order = new Polen_Order_Module( $order );
+        $post_data[ 'campaign' ] = $polen_order->get_campaign_slug();
+        
         return $post_data;
     }
 

@@ -1,6 +1,6 @@
 (window["__wcAdmin_webpackJsonp"] = window["__wcAdmin_webpackJsonp"] || []).push([[32],{
 
-/***/ 504:
+/***/ 506:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -58,7 +58,7 @@ ReportError.propTypes = {
 
 /***/ }),
 
-/***/ 509:
+/***/ 511:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -83,21 +83,21 @@ const ALLOWED_ATTR = ['target', 'href', 'rel', 'name', 'download'];
 
 /***/ }),
 
-/***/ 601:
+/***/ 615:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ 602:
+/***/ 616:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ 620:
+/***/ 636:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -139,16 +139,16 @@ var external_wc_tracks_ = __webpack_require__(16);
 var external_wc_navigation_ = __webpack_require__(12);
 
 // EXTERNAL MODULE: external ["wc","experimental"]
-var external_wc_experimental_ = __webpack_require__(20);
+var external_wc_experimental_ = __webpack_require__(17);
 
 // EXTERNAL MODULE: ./client/analytics/components/report-error/index.js
-var report_error = __webpack_require__(504);
+var report_error = __webpack_require__(506);
 
 // EXTERNAL MODULE: ./client/lib/sanitize-html/index.js
-var sanitize_html = __webpack_require__(509);
+var sanitize_html = __webpack_require__(511);
 
 // EXTERNAL MODULE: ./client/analytics/components/leaderboard/style.scss
-var style = __webpack_require__(601);
+var style = __webpack_require__(615);
 
 // CONCATENATED MODULE: ./client/analytics/components/leaderboard/index.js
 
@@ -310,7 +310,7 @@ leaderboard_Leaderboard.defaultProps = {
   return leaderboardData;
 }))(leaderboard_Leaderboard));
 // EXTERNAL MODULE: ./client/dashboard/leaderboards/style.scss
-var leaderboards_style = __webpack_require__(602);
+var leaderboards_style = __webpack_require__(616);
 
 // CONCATENATED MODULE: ./client/dashboard/leaderboards/index.js
 
