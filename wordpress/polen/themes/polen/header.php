@@ -33,7 +33,7 @@
 	<?php wp_body_open(); ?>
     <?php include_once TEMPLATE_DIR . '/inc/analitics_init_body.php'; ?>
 	<div id="page" class="container site">
-		<header id="masthead" class="row pt-3 pb-4<?php echo social_is_in_social_app() || master_class_is_app() ? " header-home" : ""; ?>">
+		<header id="masthead" class="masthead row pt-3 pb-4<?php echo social_is_in_social_app() || master_class_is_app() ? " header-home" : ""; ?>">
 			<div class="col-8 col-sm-6 d-flex align-items-center">
 				<?php polen_the_theme_logos(); ?>
 			</div>

@@ -684,9 +684,9 @@ class Polen_Talent {
         if( $this->is_user_talent( $user ) && !empty( $order_id )) {
             $order = wc_get_order( $order_id );
             // $first_dateTime = new \DateTime($order->post_date); 
-            $last_dateTime = new \DateTime($order->get_date_created()); 
+            $last_dateTime = new \WC_DateTime($order->get_date_created()); 
 
-            $current_date = new \DateTime( "now", new \DateTimeZone( get_option( 'timezone_string' ) ) );
+            $current_date = new \WC_DateTime( "now" );
 
             //Produto Social do crianca esperanca é 15dias
             if( social_order_is_social( $order ) ) {

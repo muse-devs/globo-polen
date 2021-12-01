@@ -10,7 +10,10 @@
  * @subpackage Promotional_Event/admin
  */
 
+use Polen\Admin\Polen_Admin_Event_Promotional_Event_Fields;
 use Polen\Includes\Debug;
+use Polen\Includes\Module\Polen_Product_Module;
+use Polen\Includes\Polen_Checkout_Create_User;
 use Polen\Includes\Polen_Order;
 use Polen\Includes\Polen_WooCommerce;
 
@@ -46,6 +49,7 @@ class Promotional_Event_Admin
 	private $version;
 
 	const ORDER_METAKEY = 'promotional_event';
+	const PRODUCT_METAKEY = '_promotional_event';
     // const SESSION_KEY_CUPOM_CODE = 'event_promotion_cupom_code';
     // const SESSION_KEY_SUCCESS_ORDER_ID = 'event_promotion_order_id';
     const NONCE_ACTION = 'promotional_event_2hj3g42jhg43';
@@ -109,6 +113,30 @@ class Promotional_Event_Admin
             'options_event',
             array($this, 'show_options'),
         );
+
+        add_submenu_page('promotional-event',
+            'De porta em porta',
+            'De porta em porta',
+            'manage_options',
+            'porta_em_porta_event',
+            array($this, 'show_de_porta_em_porta'),
+        );
+
+        add_submenu_page('promotional-event',
+            'Rebeldes',
+            'Rebeldes',
+            'manage_options',
+            'rebeldes_event',
+            array($this, 'show_rebeldes_event'),
+        );
+
+        add_submenu_page('promotional-event',
+            'Campanha Lacta',
+            'Campanha Lacta',
+            'manage_options',
+            'campanha_lacta_event',
+            array($this, 'show_campanha_lacta_event'),
+        );
     }
 
     /**
@@ -119,7 +147,7 @@ class Promotional_Event_Admin
     public function show_promotions()
     {
         $sql = new Coupons();
-        $values_code = $sql->get_codes();
+        $values_code = $sql->get_all_codes();
         require 'partials/promotional-event-admin-display.php';
     }
 
@@ -136,15 +164,52 @@ class Promotional_Event_Admin
     }
 
     /**
+     * View página de opções do plugin para listagem de cupons de porta em porta
+     *
+     * @since    1.0.0
+     */
+    public function show_de_porta_em_porta()
+    {
+        $sql = new Coupons();
+        $values_code = $sql->get_codes();
+        require 'partials/promotional-event-admin-display.php';
+    }
+
+    /**
+     * View página de opções do plugin para listagem de cupons de rebeldes
+     *
+     * @since    1.0.0
+     */
+    public function show_rebeldes_event()
+    {
+        $sql = new Coupons();
+        $values_code = $sql->get_codes(2);
+        require 'partials/promotional-event-admin-display.php';
+    }
+
+    /**
+     * View página de opções do plugin para listagem de cupons de rebeldes
+     *
+     * @since    1.0.0
+     */
+    public function show_campanha_lacta_event()
+    {
+        $sql = new Coupons();
+        $values_code = $sql->get_codes(3);
+        require 'partials/promotional-event-admin-display.php';
+    }
+
+    /**
      * Criar cupons
      *
      * @throws Exception
      */
     public function create_coupons()
     {
-        $foo = addslashes($_POST['qty']);
+        $qty = addslashes($_POST['qty']);
+        $event_id = addslashes($_POST['event_id']);
         $sql = new Coupons();
-        $sql->insert_coupons($foo);
+        $sql->insert_coupons($qty, $event_id);
         wp_send_json_success( 'ok', 200 );
         wp_die();
     }
@@ -156,12 +221,15 @@ class Promotional_Event_Admin
     {
         try{
             $coupon_code = !empty($_POST['coupon']) ? sanitize_text_field($_POST['coupon']) : null;
-            $name = sanitize_text_field($_POST['name']);
-            $city = sanitize_text_field($_POST['city']);
-            $email = sanitize_text_field($_POST['email']);
-            $term = sanitize_text_field( $_POST['terms'] );
-            $nonce = $_POST['security'];
+            $name = sanitize_text_field($_POST['name']) ?? null;
+            $email = sanitize_text_field($_POST['email']) ?? null;
+            $city = sanitize_text_field($_POST['city']) ?? null;
+            $term = sanitize_text_field( $_POST['terms'] ) ?? null;
+            $nonce = $_POST['security'] ?? null;
 
+            $city = substr( $city, 0, 50 );
+            $name = substr( $name, 0, 50 );
+            
             $product_sku = filter_input( INPUT_POST, 'product', FILTER_SANITIZE_STRING );
             $product_id = wc_get_product_id_by_sku( $product_sku );
             $product = wc_get_product( $product_id );
@@ -173,15 +241,27 @@ class Promotional_Event_Admin
             if( !filter_input( INPUT_POST, 'email', FILTER_VALIDATE_EMAIL ) ) {
                 throw new Exception('Email inválido', 422);
             }
+
+            if( empty( trim( $name ) ) ) {
+                throw new Exception('Nome é obrigatório', 422);
+            }
+
+            if( empty( trim( $city ) ) ) {
+                throw new Exception('Cidade é obrigatório', 422);
+            }
             
             if( empty( $term ) || $term !== 'on' ) {
                 throw new Exception('Aceite os termos e condições', 422);
             }
 
+            if( empty( $product ) ) {
+                throw new Exception('Produto inválido', 404);
+            }
+
             $address = array(
                 'first_name' => $name,
                 'email' => $email,
-                'city' => $city,
+                'city' => '',
                 'state' => '',
                 'country' => 'Brasil',
                 // 'phone' => sanitize_text_field($_POST['phone']),
@@ -205,6 +285,10 @@ class Promotional_Event_Admin
                 throw new Exception('Cupom já foi utilizado', 401);
                 wp_die();
             }
+
+            if (!$product->is_in_stock()) {
+                throw new Exception('Produto sem Estoque', 422);
+            }
             
             $args = array();
             if( !empty(get_current_user_id())) {
@@ -213,19 +297,30 @@ class Promotional_Event_Admin
                 $user_c = get_user_by('email', $email);
                 if(!empty($user_c)) {
                     $args['customer_id'] = $user_c->ID;
+                } else {
+                    $user_email = $email;
+                    $user_password = wp_generate_password( 5, false ) . random_int( 0, 99 );
+                    $id_registered = wc_create_new_customer( $user_email, $user_email, $user_password );
+                    $user = get_user_by( 'ID', $id_registered );
+                    add_user_meta( $user->ID, Polen_Checkout_Create_User::META_KEY_CREATED_BY, 'checkout', true );
+                    $polen_product = new Polen_Product_Module( $product );
+                    add_user_meta( $user->ID, Polen_Admin_Event_Promotional_Event_Fields::FIELD_NAME_SLUG_CAMPAIGN, $polen_product->get_campaign_slug(), true );
+                    $args['customer_id'] = $user->ID;
                 }
             }
 
+            $polen_product = new Polen_Product_Module( $product );
             $order = wc_create_order( $args );
+            $order->set_customer_id( $args['customer_id'] );
             $coupon->update_coupoun($coupon_code, $order->get_id());
             $order->update_meta_data( '_polen_customer_email', $email );
-            $order->add_meta_data(self::ORDER_METAKEY, 1, true);
-            $order->add_meta_data('campaign', $product->get_sku(), true);
+            $order->add_meta_data( Polen_Admin_Event_Promotional_Event_Fields::FIELD_NAME_IS, 'yes', true);
+            $order->add_meta_data( Polen_Admin_Event_Promotional_Event_Fields::FIELD_NAME_SLUG_CAMPAIGN, $polen_product->get_campaign_slug(), true);
 
             // $order->update_status('wc-payment-approved');
 
             // ID Product
-            global $Polen_Plugin_Settings;
+            // global $Polen_Plugin_Settings;
             $product_id = $product->get_id();
             // $product_id = $Polen_Plugin_Settings['promotional-event-text'];
 
@@ -239,8 +334,13 @@ class Promotional_Event_Admin
             //     'order_item_type' => 'line_item',
             // ));
 
-            $instruction = "{$name} de {$city} já garantiu sua cópia do livro '{$product->get_title()}'! 
-            Envie um vídeo para agradecer e mande um alô para toda cidade.";
+            $instruction = "
+            Olá {$name} de {$city},<br>
+
+            Eu sou {$product->get_title()} e junto com a Lacta estou aqui para te 
+            desejar um ótimo Natal, com muita saúde, amor e paz, porque com a Lacta
+            você divide mais que chocolate, você cria laços. Um grande beijo e feliz
+            natal para toda família.";
 
             wc_add_order_item_meta( $order_item_id, '_qty', $quantity, true );
             wc_add_order_item_meta( $order_item_id, '_product_id', $product->get_id(), true );
@@ -252,7 +352,7 @@ class Promotional_Event_Admin
             wc_add_order_item_meta( $order_item_id, 'video_to'              , 'to_myself', true );
             wc_add_order_item_meta( $order_item_id, 'name_to_video'         , $name, true );
             wc_add_order_item_meta( $order_item_id, 'email_to_video'        , $email, true );
-            wc_add_order_item_meta( $order_item_id, 'video_category'        , 'Vídeo-Autógrafo', true );
+            wc_add_order_item_meta( $order_item_id, 'video_category'        , 'Vídeo-Lacta', true );
             wc_add_order_item_meta( $order_item_id, 'instructions_to_video' , $instruction, true );
 
             wc_add_order_item_meta( $order_item_id, 'allow_video_on_page'   , 'on', true );
@@ -262,12 +362,13 @@ class Promotional_Event_Admin
             $interval  = Polen_Order::get_interval_order_event();
             $timestamp = Polen_Order::get_deadline_timestamp( $order, $interval );
             $order->add_meta_data( Polen_Order::META_KEY_DEADLINE, $timestamp, true );
-
             $order->save();
             
             $email = WC_Emails::instance();
             $order->update_status( Polen_WooCommerce::ORDER_STATUS_PAYMENT_APPROVED, 'order_note', true );
             
+            wc_reduce_stock_levels($order->get_id());
+
             $order = new \WC_Order($order->get_id());
             $order->calculate_totals();
 

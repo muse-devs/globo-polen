@@ -111,7 +111,7 @@ if (isset($_REQUEST['order_id']) && !empty($_REQUEST['order_id'])) {
                                 <span class="mdc-button__label">Gravar vídeo</span>
                             </button>
                             <div id="video-file-name" class="text-truncate ml-2"></div>
-                            <input type="file" class="form-control-file" id="file-video" name="file_data" accept="video/*">
+                            <input type="file" class="form-control-file" id="file-video" name="file_data" accept="video/*" (change)="getFile($event)">
                         </div>
                         <button type="submit" id="video-send" class="mdc-button mdc-button--raised send-video">
                             <span class="mdc-button__ripple"></span>

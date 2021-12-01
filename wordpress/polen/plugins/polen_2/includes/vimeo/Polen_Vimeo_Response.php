@@ -100,6 +100,21 @@ class Polen_Vimeo_Response
         }
         return false;
     }
+
+
+    /**
+     * Verifica se o processamento do video está completo pelo Vimeo
+     * @return boolean
+     */
+    public function video_logo_processing_is_complete()
+    {
+        if( 
+                $this->response['body']['status'] == self::STATUS_AVAILABLE
+            ) {
+            return true;
+        }
+        return false;
+    }
     
     /**
      * Pega a URL a tamanho 640

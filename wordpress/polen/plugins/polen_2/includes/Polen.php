@@ -5,7 +5,9 @@ namespace Polen\Includes;
 use Polen\Admin\Polen_Admin;
 use Polen\Admin\Polen_Forms;
 use Polen\Admin\Polen_Admin_Custom_Post_Types;
+use Polen\Api\Api;
 use Polen\Enterprise\Enterprise;
+use Polen\Includes\API\Polen_Api_Video_Info;
 use Polen\Includes\Polen_Plugin_Settings;
 use Polen\Publics\Polen_Public;
 use Polen\Includes\Polen_Talent;
@@ -76,6 +78,7 @@ class Polen {
         new Polen_Cupom_Create_Admin_Menu( true );
         new Polen_Forms();
         new Polen_Form_DB();
+        new Api();
 
         //Endpoints Talent Logged
         $ctler = new Polen_Talent_Controller();
@@ -196,6 +199,11 @@ class Polen {
         //Tela de cadastro de usuário
         $this->loader->add_filter('woocommerce_created_customer', $this->polen_signIn, 'update_user_date', 10, 3);
         $this->loader->add_action('woocommerce_register_form_start', $this->polen_signIn, 'add_fields_sign_in', 10, 0);
+
+        add_action( 'rest_api_init', function(){
+            $video_info_api_rest = new Polen_Api_Video_Info();
+            $video_info_api_rest->register_routes();
+        });
     }
 
     /**

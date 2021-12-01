@@ -3,8 +3,8 @@ Contributors: dovyp, redux, kprovance
 Tags: gutenberg, blocks, gutenberg blocks, editor, block, page builder, block editor, block library, editor, templates, library
 Requires at least: 4.0
 Requires PHP: 7.1
-Tested up to: 5.8.2
-Stable tag: 4.3.2
+Tested up to: 5.9
+Stable tag: 4.3.4
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -107,6 +107,16 @@ Once Installed and Activated you will be invited to Activate your Redux account.
 If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg/) plugin to get bleeding-edge experiments by the Gutenberg team.
 
 == Changelog ==
+
+= 4.3.4 =
+* Fixed: CSS and JS not loading when embedding Redux due to malformed path.
+* Modified: Update to the Extendify template library.
+* Release date: November, 24 2021
+
+= 4.3.3 =
+Modified: Move template libraries to redux-core directory.
+Modified: Update to the Extendify template library.
+Release date: November 16, 2021
 
 = 4.3.2 =
 Added: Metaboxes!

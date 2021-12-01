@@ -267,7 +267,8 @@
     }
   }
   &.criesp,
-  &.yellow {
+  &.yellow,
+  &.promotional-lacta {
     padding-bottom: 5px;
     color: white;
     border-radius: 10px;
@@ -282,6 +283,9 @@
       margin: 0;
       padding: 5px 7px;
     }
+    .icon {
+      display: none;
+    }
     .title {
       padding-bottom: 0;
     }
@@ -289,6 +293,12 @@
   &.yellow {
     color: var(--dark);
     background-color: $setembro-amarelo;
+  }
+  &.promotional {
+    &-lacta {
+      color: var(--light);
+      background-color: $lacta-primary;
+    }
   }
 }
 
@@ -614,6 +624,151 @@
 // 		height: 269px;
 // 	}
 // }
+
+.bw-banner {
+	border-radius: 10px;
+  display: flex;
+  align-items: center;
+  padding: 20px 20px 0px 20px;
+  @include media-breakpoint-down(xs) {
+    padding: 10px 10px 0px 10px;
+  }
+  .logo {
+    width: 30%;
+    height: 100%!important;
+  }
+  .content {
+    width: 70%;
+    height: 100%;
+    img {
+      width: 100%;
+    }
+  }
+}
+
+.natal-banner {
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  @include media-breakpoint-down(xs) {
+    padding: 10px;
+  }
+  .logo {
+    width: 50%;
+    height: 100%!important;
+    img {
+      margin-bottom: 20px;
+      @include media-breakpoint-down(xs) {
+        margin-bottom: 5px;
+      }
+    }
+  }
+  .content {
+    width: 50%;
+    height: 100%;
+    padding: 20px;
+    @include media-breakpoint-down(xs) {
+      padding: 5px;
+    }
+    p {
+      color: #fff;
+      font-size: 22px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 32px;
+      letter-spacing: 0em;
+      @include media-breakpoint-down(sm) {
+        font-size: 16px;
+        line-height: 15px;
+      }
+      @include media-breakpoint-down(xs) {
+        font-size: 12px;
+      }
+    }
+    .click-to-donate {
+      padding: 10px 20px;
+      background: #BAE174;
+      text-transform: uppercase;
+      font-size: 16px;
+      color: #fff;
+      text-shadow: 1px 1px 2px #000000;
+      border-radius: 10px;
+      margin-top: 20px;
+      width: 200px;
+      text-align: center;
+      @include media-breakpoint-down(sm) {
+        font-size: 14px;
+      }
+      @include media-breakpoint-down(xs) {
+        font-size: 10px;
+        margin-top: 10px;
+        width: 150px;
+        padding: 5px 10px;
+      }
+    }
+  }
+}
+
+.lacta-banner {
+  width: 100%;
+  height: 300px;
+  background-size: cover!important;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  @include media-breakpoint-down(xs) {
+    height: 190px;
+  }
+  .content {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 20px;
+    .logo-lacta {
+      margin-bottom: 20px;
+      @include media-breakpoint-down(xs) {
+        margin-bottom: 0px;
+      }
+      svg {
+        @include media-breakpoint-down(xs) {
+          transform: scale(0.5);
+        }
+      }
+    }
+    p {
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 29px;
+      letter-spacing: 0em;
+      text-align: center;
+      width: 100%;
+      font-family: "Poppins",sans-serif;
+      color: #fff;
+      @include media-breakpoint-down(xs) {
+        font-size: 14px;
+        line-height: 20px;
+      }
+    }
+    .about-more {
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 19px;
+      letter-spacing: 0em;
+      text-align: center;
+      color: #fff;
+      text-decoration: underline;
+      @include media-breakpoint-down(xs) {
+        font-size: 11px;
+      }
+    }
+  }
+}
 
 .slick-alt {
   width: 130%;
@@ -1096,6 +1251,24 @@
         padding: 12px 20px;
         font-size: 17px;
       }
+    }
+  }
+}
+
+.pol-toast-success {
+  background: rgba(87, 189, 132, 0.41);
+  border: 1px solid #57BD84;
+  border-radius: 100px;
+  padding: 10px 20px;
+  display: inline-block;
+  .text {
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 21px;
+    letter-spacing: 0em;
+    @include media-breakpoint-down(sm) {
+      text-align: center;
     }
   }
 }

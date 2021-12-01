@@ -9,6 +9,11 @@ use Polen\Includes\Db\Polen_DB;
 
 class Polen_Video_Info extends Polen_DB
 {
+
+    const VIDEO_LOGO_STATUS_NO        = 'NO';
+    const VIDEO_LOGO_STATUS_WAITING   = 'WAITING';
+    const VIDEO_LOGO_STATUS_SENDED    = 'SENDED';
+    const VIDEO_LOGO_STATUS_COMPLETED = 'COMPLETED';
     
     public $ID;
     public $order_id;
@@ -23,6 +28,7 @@ class Polen_Video_Info extends Polen_DB
     public $vimeo_file_play;
     public $duration;
     public $first_order;
+    public $video_logo_status;
     public $created_at;
     public $updated_at;
     
@@ -32,21 +38,22 @@ class Polen_Video_Info extends Polen_DB
         if( !empty( $id ) ) {
             $object = $this->get_by_id( $id );
             if( !empty( $object ) ) {
-                $this->ID = intval( $object->ID );
-                $this->order_id = intval( $object->order_id );
-                $this->talent_id = intval( $object->talent_id );
-                $this->vimeo_id = $object->vimeo_id;
-                $this->hash = $object->hash;
-                $this->is_public = intval( $object->is_public );
-                $this->vimeo_thumbnail = $object->vimeo_thumbnail;
+                $this->ID                     = intval( $object->ID );
+                $this->order_id               = intval( $object->order_id );
+                $this->talent_id              = intval( $object->talent_id );
+                $this->vimeo_id               = $object->vimeo_id;
+                $this->hash                   = $object->hash;
+                $this->is_public              = intval( $object->is_public );
+                $this->vimeo_thumbnail        = $object->vimeo_thumbnail;
                 $this->vimeo_process_complete = $object->vimeo_process_complete;
-                $this->vimeo_url_download = $object->vimeo_url_download;
-                $this->vimeo_link = $object->vimeo_link;
-                $this->vimeo_file_play = $object->vimeo_file_play;
-                $this->duration = $object->duration;
-                $this->first_order = $object->first_order;
-                $this->created_at = $object->created_at;
-                $this->updated_at = $object->updated_at;
+                $this->vimeo_url_download     = $object->vimeo_url_download;
+                $this->vimeo_link             = $object->vimeo_link;
+                $this->vimeo_file_play        = $object->vimeo_file_play;
+                $this->duration               = $object->duration;
+                $this->first_order            = $object->first_order;
+                $this->video_logo_status      = $object->video_logo_status;
+                $this->created_at             = $object->created_at;
+                $this->updated_at             = $object->updated_at;
                 $this->valid = true;
             }
         }
@@ -100,6 +107,7 @@ class Polen_Video_Info extends Polen_DB
         $return[ 'vimeo_link' ]             = $this->vimeo_link;
         $return[ 'vimeo_file_play' ]        = $this->vimeo_file_play;
         $return[ 'first_order' ]            = $this->first_order;
+        $return[ 'video_logo_status' ]      = $this->video_logo_status;
         $return[ 'duration' ]               = $this->duration;
         
         if ( !empty( $this->created_at ) ) {
@@ -180,6 +188,16 @@ class Polen_Video_Info extends Polen_DB
     }
 
 
+
+    static public function select_by_video_logo_waiting( int $limit = 4 )
+    {
+        $self_obj = new static();
+        $fields = array( 'video_logo_status' => self::VIDEO_LOGO_STATUS_WAITING, 'vimeo_process_complete' => "1" );
+        $result_raw = $self_obj->get_result_multi_fields( $fields, $limit, "ORDER BY ID ASC" );
+        return $result_raw;//self::create_instance_many( $result_raw );
+    }
+
+
     /**
      * Funcao que pegar alguns videos infos publicados, completos e com
      * ordem aleatória
@@ -222,6 +240,22 @@ class Polen_Video_Info extends Polen_DB
     {
         $pvi = new self();
         $results = $pvi->get_results( 'vimeo_process_complete', '0', '%d' );
+        return self::create_instance_many( $results );
+    }
+
+
+    /**
+     * Retorna os videos nao processados pelo Vimeo
+     * @return array [Polen_Video_Info]
+     */
+    static public function select_all_videos_complete_video_logo_sended()
+    {
+        $pvi = new self();
+        $args = [
+            'vimeo_process_complete' => '1',
+            'video_logo_status' => self::VIDEO_LOGO_STATUS_SENDED,
+        ];
+        $results = $pvi->get_result_multi_fields( $args );
         return self::create_instance_many( $results );
     }
 
@@ -299,22 +333,23 @@ class Polen_Video_Info extends Polen_DB
     static public function create_instance_one( $data, $valid = true )
     {
         $object = new self();
-        $object->ID = $data->ID;
-        $object->is_public = $data->is_public;
-        $object->order_id = $data->order_id;
-        $object->talent_id = $data->talent_id;
-        $object->vimeo_id = $data->vimeo_id;
-        $object->hash = $data->hash;
+        $object->ID                     = $data->ID;
+        $object->is_public              = $data->is_public;
+        $object->order_id               = $data->order_id;
+        $object->talent_id              = $data->talent_id;
+        $object->vimeo_id               = $data->vimeo_id;
+        $object->hash                   = $data->hash;
         $object->vimeo_process_complete = $data->vimeo_process_complete;
-        $object->vimeo_thumbnail = $data->vimeo_thumbnail;
-        $object->vimeo_url_download = $data->vimeo_url_download;
-        $object->vimeo_link = $data->vimeo_link;
-        $object->vimeo_file_play = $data->vimeo_file_play;
-        $object->duration = $data->duration;
-        $object->created_at = $data->created_at;
-        $object->first_order = $data->first_order;
-        $object->updated_at = $data->updated_at;
-        $object->valid = $valid;
+        $object->vimeo_thumbnail        = $data->vimeo_thumbnail;
+        $object->vimeo_url_download     = $data->vimeo_url_download;
+        $object->vimeo_link             = $data->vimeo_link;
+        $object->vimeo_file_play        = $data->vimeo_file_play;
+        $object->duration               = $data->duration;
+        $object->created_at             = $data->created_at;
+        $object->first_order            = $data->first_order;
+        $object->video_logo_status      = $data->video_logo_status;
+        $object->updated_at             = $data->updated_at;
+        $object->valid                  = $valid;
         return $object;
     }
 

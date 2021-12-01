@@ -10,6 +10,10 @@ namespace Polen\Includes;
 
 use Polen\Publics\Polen_Public;
 use DateInterval;
+use DateTime;
+use DateTimeZone;
+use WC_DateTime;
+
 class Polen_Order
 {
     
@@ -451,7 +455,7 @@ class Polen_Order
      */
     public static function get_interval_order_event()
     {
-        return new DateInterval( 'P30D' );
+        return new DateInterval( 'P15D' );
     }
 
     /**
@@ -497,6 +501,76 @@ class Polen_Order
         $created_at = \WC_DateTime::createFromFormat( 'Y-m-d H:i:s', date('Y-m-d') . ' 23:59:59' );
         $created_at->add( $interval );
         return $created_at->getTimestamp();
+    }
+
+
+    /**
+     * Retorna o Timestamp de uma order
+     * @param \WC_Order
+     * @param 
+     * @return int Timestamp
+     */
+    public static function get_deadline( \WC_Order $order )
+    {
+        if( empty( $order ) ) {
+            return false;
+        }
+        $deadline = $order->get_meta( self::META_KEY_DEADLINE, true );
+        return $deadline;
+    }
+
+
+    /**
+     * Retorna o Timestamp de uma order
+     * @param \WC_Order
+     * @return Datetime
+     */
+    public static function get_deadline_in_datetime( \WC_Order $order )
+    {
+        if( empty( $order ) ) {
+            return false;
+        }
+        $deadline = $order->get_meta( self::META_KEY_DEADLINE, true );
+        $aa = new WC_DateTime();
+        $aa->setTimestamp( $deadline );
+        $datetime_datetime = \WC_DateTime::createFromFormat( 'U', $deadline );
+        return $datetime_datetime;
+    }
+
+
+    /**
+     * Pega a deadline de uma Order 
+     * @param \WC_Order
+     * @return string
+     */
+    public static function get_deadline_formatted_for_order_list( $order )
+    {
+        if( empty( $order ) ) {
+            return false;
+        }
+        $deadline_datetime = self::get_deadline_in_datetime( $order );
+        $current_date = new \WC_DateTime( "now" );
+        $interval = $current_date->diff( $deadline_datetime );
+
+        if( empty( $interval ) ) {
+            return '--';
+        }
+        
+        if( $interval->format('%D') > 1 && $interval->format('%R') == '+' ){
+            return $interval->format('%D dias');
+        }
+
+        if( $interval->format('%D') == 1 && $interval->format('%R') == '+' ){
+            return $interval->format('%D dia e %H:%ih');
+        }    
+
+        if( $interval->format('%D') < 1 && $interval->format('%R') == '+' ){
+            return $interval->format('%H:%ih');
+        }    
+
+        if( $interval->format('%R') == '-' ){
+            return 'Expirado!';
+        }     
     }
 
 
