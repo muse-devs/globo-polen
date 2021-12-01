@@ -152,7 +152,7 @@ function event_promotional_get_order_flow_obj($order_number, $order_status, $ema
             'status' => 'fail',
         ),
         'payment-approved' => array(
-            'title' => 'Recebemos seu pedido de vídeo-autógrafo',
+            'title' => 'Recebemos seu pedido de vídeo',
             'description' => 'Seu número de pedido é #' . $order_number . ' foi aprovado. ' . $flow_1_complement_email,
             'status' => 'complete',
         ),
@@ -176,7 +176,7 @@ function event_promotional_get_order_flow_obj($order_number, $order_status, $ema
         ),
         '_next-step' => array(
             'title' => 'Aguardando confirmação',
-            'description' => 'Você será informado quando a sua solicitação de vídeo-autógrafo for aceita.',
+            'description' => 'Você será informado quando a sua solicitação de vídeo for aceita.',
             'status' => 'in-progress',
         ),
     );
@@ -185,7 +185,7 @@ function event_promotional_get_order_flow_obj($order_number, $order_status, $ema
     $flow_3 = array(
         'completed' => array(
             'title' => 'Seu vídeo está pronto!',
-            'description' => 'Corre lá e confira seu vídeo-autógrafo.',
+            'description' => 'Corre lá e confira seu vídeo.',
             'status' => 'complete',
         ),
         'cancelled' => array(
@@ -200,7 +200,7 @@ function event_promotional_get_order_flow_obj($order_number, $order_status, $ema
             $flow_1[$order_status],
             '_next-step_1' => array(
                 'title' => 'Aguardando confirmação',
-                'description' => 'Você será informado quando a sua solicitação de vídeo-autógrafo for aceita.',
+                'description' => 'Você será informado quando a sua solicitação de vídeo for aceita.',
                 'status' => $flow_1[$order_status]['status'] === "fail" ? 'pending' : 'in-progress',
             ),
             '_next-step_2' => array(
@@ -245,5 +245,5 @@ function event_promotional_get_order_flow_obj($order_number, $order_status, $ema
 
 function event_get_magalu_url()
 {
-	return "https://www.magazineluiza.com.br/livro-de-porta-em-porta-luciano-huck-com-brinde/p/231238100/li/adml/";
+	return "";
 }
