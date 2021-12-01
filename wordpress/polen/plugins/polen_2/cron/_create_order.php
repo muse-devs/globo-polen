@@ -49,7 +49,7 @@ function create_social_order( $email, $cidade, $name )
     add_metadata( 'post', $order_id, Polen_Order::META_KEY_DEADLINE, $datetime->getTimestamp(), true );
     add_metadata( 'post', $order_id, '_polen_customer_email', $email, true );
     add_metadata( 'post', $order_id, 'social_base', '1', true );
-    add_metadata( 'post', $order_id, 'social_base_campaing', 'reserva-1p-5p', true );
+    add_metadata( 'post', $order_id, 'social_base_campaign', 'reserva-1p-5p', true );
 
     $instruction = "{$name} de $cidade";
     // $final_instruction = str_replace( $product->get_title(), $instruction );

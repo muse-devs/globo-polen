@@ -1,6 +1,7 @@
 <?php
 namespace Polen\Includes\Emails;
 
+use Polen\Includes\Polen_Checkout_Create_User;
 use WC_Email_Customer_New_Account;
 use WP_User;
 
@@ -68,8 +69,9 @@ class Polen_WC_Customer_New_Account extends WC_Email_Customer_New_Account
         }
 
         if ( $this->is_enabled() && $this->get_recipient() ) {
-            $http_referer = filter_input( INPUT_POST, '_wp_http_referer' );
-            if( '/?wc-ajax=update_order_review' == $http_referer ) {
+            $checkout_create_user = new Polen_Checkout_Create_User();
+            if( $checkout_create_user->send_password_in_email_new_user() ) {
+
                 $user_new_password = wp_generate_password( 5, false ) . random_int( 0, 99 );
                 $this->password_generated = $user_new_password;
                 wp_set_password( $user_new_password, $user_id );
@@ -78,6 +80,7 @@ class Polen_WC_Customer_New_Account extends WC_Email_Customer_New_Account
                              $this->get_content_html_checkout(),
                              $this->get_headers(),
                              $this->get_attachments() );
+                             
             } else {
                 $this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
             }

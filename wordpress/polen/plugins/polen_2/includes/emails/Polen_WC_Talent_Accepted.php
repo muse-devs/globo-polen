@@ -3,6 +3,7 @@
 namespace Polen\Includes;
 
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
+use Polen\Includes\Module\Polen_Order_Module;
 
 if( ! defined( 'ABSPATH') ) {
     die( 'Silence is golden.' );
@@ -24,14 +25,14 @@ class Polen_WC_Talent_Accepted extends \WC_Email {
 		$this->heading_ep     = __( '%s aceitou', 'polen' );
 
 		$this->subject     = sprintf( _x( '[%s] O talento aceitou', 'E-mail que será enviado ao usuário quando o talento aceitar o pedido.', 'polen' ), '{blogname}' );
-		$this->subject_ep  = '%s aceitou seu pedido e logo fará seu vídeo-autógrafo' ;
+		$this->subject_ep  = 'Lacta - Pedido de vídeo aceito' ;
     
 		$this->template_html  = 'emails/Polen_WC_Talent_Accepted.php';
 		$this->template_plain = 'emails/plain/Polen_WC_Talent_Accepted.php';
 
 		$this->template_ep_html  = 'emails/video-autografo/%s/Polen_WC_Talent_Accepted.php';
 
-		$this->template_base  = TEMPLATEPATH . 'woocommerce/';
+		$this->template_base  = TEMPLATEPATH . '/woocommerce/';
     
 		add_action( 'woocommerce_order_status_changed', array( $this, 'trigger' ) );
 
@@ -57,9 +58,11 @@ class Polen_WC_Talent_Accepted extends \WC_Email {
              * Não disparar email caso flag no_send_email estiver marcada
              */
 
-            if (get_post_meta($order_id, 'no_send_email', true) == 1) {
-                return;
-            }
+			if( !( defined('DOING_AJAX') ) ) {
+				if (is_admin() === true && get_post_meta($order_id, 'send_email', true) != 1) {
+					return;
+				}
+			}
 			
 			$cart_item = Polen_Cart_Item_Factory::polen_cart_item_from_order( $this->object );
 			$this->product = $cart_item->get_product();
@@ -76,7 +79,7 @@ class Polen_WC_Talent_Accepted extends \WC_Email {
 	public function get_subject_ep()
 	{
 		$author = $this->product->get_meta( '_promotional_event_author', true );
-		return sprintf( $this->subject_ep, $author );
+		return $this->subject_ep;
 	}
 
 	public function get_heading_ep()
@@ -86,7 +89,9 @@ class Polen_WC_Talent_Accepted extends \WC_Email {
 	}
 
 	public function get_content_ep_html() {
-		return wc_get_template_html( sprintf( $this->template_ep_html, $this->product->get_sku() ), array(
+		$polen_order = new Polen_Order_Module( $this->object );
+		$file_templete = sprintf( $this->template_ep_html, $polen_order->get_campaign_slug() );
+		return wc_get_template_html( $file_templete, array(
 			'order'         => $this->object,
 			'email_heading' => $this->get_heading_ep(),
 			'sent_to_admin' => true,

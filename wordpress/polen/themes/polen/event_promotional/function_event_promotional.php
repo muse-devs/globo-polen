@@ -1,5 +1,7 @@
 <?php
 
+use Polen\Includes\Module\Polen_Order_Module;
+
 function event_promotional_url_home()
 {
     return site_url( Promotional_Event_Rewrite::BASE_URL . '/' );
@@ -53,13 +55,20 @@ function event_promotional_is_app()
 }
 
 
-function event_promotional_order_is_event_promotional( $order )
+function event_promotional_product_is_event_promotional( $product )
 {
-    $is_ep = $order->get_meta( Promotional_Event_Admin::ORDER_METAKEY, true );
-    if( $is_ep && $is_ep == '1' ) {
+    $is_ep = $product->get_meta( Promotional_Event_Admin::PRODUCT_METAKEY, true );
+    if( $is_ep && $is_ep == 'yes' ) {
         return true;
     }
     return false;
+}
+
+
+function event_promotional_order_is_event_promotional( $order )
+{
+    $polen_order = new Polen_Order_Module( $order );
+    return $polen_order->get_is_campaign();
 }
 
 
@@ -91,6 +100,9 @@ function event_promotional_get_order_flow_layout($array_status, $order_number, $
 
 ?>
 	<div class="row">
+    <div class="col-md-12 mb-3">
+      <h2 class="title">Acompanhar pedido</h2>
+    </div>
 		<div class="col-md-12">
 			<ul class="order-flow<?php echo $class; ?>">
 				<?php foreach ($array_status as $key => $value) : ?>
@@ -140,7 +152,7 @@ function event_promotional_get_order_flow_obj($order_number, $order_status, $ema
             'status' => 'fail',
         ),
         'payment-approved' => array(
-            'title' => 'Recebemos seu pedido de vídeo-autógrafo',
+            'title' => 'Recebemos seu pedido de vídeo',
             'description' => 'Seu número de pedido é #' . $order_number . ' foi aprovado. ' . $flow_1_complement_email,
             'status' => 'complete',
         ),
@@ -164,7 +176,7 @@ function event_promotional_get_order_flow_obj($order_number, $order_status, $ema
         ),
         '_next-step' => array(
             'title' => 'Aguardando confirmação',
-            'description' => 'Você será informado quando a sua solicitação de vídeo-autógrafo for aceita.',
+            'description' => 'Você será informado quando a sua solicitação de vídeo for aceita.',
             'status' => 'in-progress',
         ),
     );
@@ -173,7 +185,7 @@ function event_promotional_get_order_flow_obj($order_number, $order_status, $ema
     $flow_3 = array(
         'completed' => array(
             'title' => 'Seu vídeo está pronto!',
-            'description' => 'Corre lá e confira seu vídeo-autógrafo.',
+            'description' => 'Corre lá e confira seu vídeo.',
             'status' => 'complete',
         ),
         'cancelled' => array(
@@ -188,7 +200,7 @@ function event_promotional_get_order_flow_obj($order_number, $order_status, $ema
             $flow_1[$order_status],
             '_next-step_1' => array(
                 'title' => 'Aguardando confirmação',
-                'description' => 'Você será informado quando a sua solicitação de vídeo-autógrafo for aceita.',
+                'description' => 'Você será informado quando a sua solicitação de vídeo for aceita.',
                 'status' => $flow_1[$order_status]['status'] === "fail" ? 'pending' : 'in-progress',
             ),
             '_next-step_2' => array(
@@ -233,5 +245,5 @@ function event_promotional_get_order_flow_obj($order_number, $order_status, $ema
 
 function event_get_magalu_url()
 {
-	return "https://www.magazineluiza.com.br/livro-de-porta-em-porta-luciano-huck-com-brinde/p/231238100/li/adml/";
+	return "";
 }

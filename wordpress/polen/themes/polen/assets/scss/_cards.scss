@@ -267,7 +267,8 @@
     }
   }
   &.criesp,
-  &.yellow {
+  &.yellow,
+  &.promotional-lacta {
     padding-bottom: 5px;
     color: white;
     border-radius: 10px;
@@ -282,6 +283,9 @@
       margin: 0;
       padding: 5px 7px;
     }
+    .icon {
+      display: none;
+    }
     .title {
       padding-bottom: 0;
     }
@@ -289,6 +293,12 @@
   &.yellow {
     color: var(--dark);
     background-color: $setembro-amarelo;
+  }
+  &.promotional {
+    &-lacta {
+      color: var(--light);
+      background-color: $lacta-primary;
+    }
   }
 }
 
@@ -632,6 +642,65 @@
     height: 100%;
     img {
       width: 100%;
+    }
+  }
+}
+
+.lacta-banner {
+  width: 100%;
+  height: 300px;
+  background-size: cover!important;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  @include media-breakpoint-down(xs) {
+    height: 190px;
+  }
+  .content {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 20px;
+    .logo-lacta {
+      margin-bottom: 20px;
+      @include media-breakpoint-down(xs) {
+        margin-bottom: 0px;
+      }
+      svg {
+        @include media-breakpoint-down(xs) {
+          transform: scale(0.5);
+        }
+      }
+    }
+    p {
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 29px;
+      letter-spacing: 0em;
+      text-align: center;
+      width: 100%;
+      font-family: "Poppins",sans-serif;
+      color: #fff;
+      @include media-breakpoint-down(xs) {
+        font-size: 14px;
+        line-height: 20px;
+      }
+    }
+    .about-more {
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 19px;
+      letter-spacing: 0em;
+      text-align: center;
+      color: #fff;
+      text-decoration: underline;
+      @include media-breakpoint-down(xs) {
+        font-size: 11px;
+      }
     }
   }
 }

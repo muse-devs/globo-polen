@@ -60,4 +60,15 @@ class Polen_Checkout_Create_User
         }
         return $user_id;
     }
+
+
+    public function send_password_in_email_new_user()
+    {
+        $http_referer = filter_input( INPUT_POST, '_wp_http_referer' );
+        if( '/?wc-ajax=update_order_review' == $http_referer 
+            || ( isset( $_GET['action'] ) && $_GET['action'] == 'create_orders_video_autograph' ) ) {
+                return true;
+        }
+        return false;
+    }
 }
