@@ -77,7 +77,7 @@ class Polen_WC_Completed_Order extends \WC_Email_Customer_Completed_Order
     }
 
    public function get_subject_ep() {
-       return 'Seu vídeo chegou!';
+       return 'Lacta - Seu vídeo chegou!';
    }
 
    public function get_subject_social_base() {
