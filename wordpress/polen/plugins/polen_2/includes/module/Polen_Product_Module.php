@@ -6,7 +6,7 @@ use Polen\Admin\Polen_Admin_Event_Promotional_Event_Fields as Event_Promotional;
 class Polen_Product_Module
 {
 
-    const TAXONOMY_SLUG_campaign = 'campaigns';
+    const TAXONOMY_SLUG_CAMPAIGN = 'campaigns';
     
     public $object;
 
@@ -25,7 +25,7 @@ class Polen_Product_Module
     public function get_is_campaign()
     {
         $product = $this->object;
-        $campaign_taxonomies = wp_get_post_terms( $product->get_id(), self::TAXONOMY_SLUG_campaign );
+        $campaign_taxonomies = wp_get_post_terms( $product->get_id(), self::TAXONOMY_SLUG_CAMPAIGN );
         if( empty( $campaign_taxonomies ) || is_wp_error( $campaign_taxonomies ) ) {
             return false;
         }
@@ -38,7 +38,7 @@ class Polen_Product_Module
             return '';
         }
         $product = $this->object;
-        $campaign_taxonomies = wp_get_post_terms( $product->get_id(), self::TAXONOMY_SLUG_campaign );
+        $campaign_taxonomies = wp_get_post_terms( $product->get_id(), self::TAXONOMY_SLUG_CAMPAIGN );
         return $campaign_taxonomies[ 0 ]->slug;
     }
 
@@ -48,7 +48,7 @@ class Polen_Product_Module
             return '';
         }
         $product = $this->object;
-        $campaign_taxonomies = wp_get_post_terms( $product->get_id(), self::TAXONOMY_SLUG_campaign );
+        $campaign_taxonomies = wp_get_post_terms( $product->get_id(), self::TAXONOMY_SLUG_CAMPAIGN );
         return $campaign_taxonomies[ 0 ]->name;
     }
 }
