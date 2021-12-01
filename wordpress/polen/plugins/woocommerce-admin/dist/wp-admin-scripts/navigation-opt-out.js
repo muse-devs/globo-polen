@@ -82,7 +82,7 @@ this["wc"] = this["wc"] || {}; this["wc"]["navigationOptOut"] =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 470);
+/******/ 	return __webpack_require__(__webpack_require__.s = 472);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -108,14 +108,14 @@ this["wc"] = this["wc"] || {}; this["wc"]["navigationOptOut"] =
 
 /***/ }),
 
-/***/ 454:
+/***/ 456:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ 470:
+/***/ 472:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -186,7 +186,7 @@ class container_NavigationOptOutContainer extends external_wp_element_["Componen
 
 }
 // EXTERNAL MODULE: ./client/wp-admin-scripts/navigation-opt-out/style.scss
-var style = __webpack_require__(454);
+var style = __webpack_require__(456);
 
 // CONCATENATED MODULE: ./client/wp-admin-scripts/navigation-opt-out/index.js
 
