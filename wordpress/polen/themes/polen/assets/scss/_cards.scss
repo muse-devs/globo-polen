@@ -663,35 +663,44 @@
     flex-wrap: wrap;
     width: 100%;
     padding: 20px;
-    h2 {
-      font-size: 41px;
-      font-style: normal;
-      font-weight: 700;
-      line-height: 49px;
-      letter-spacing: 0em;
-      text-align: center;
-      width: 100%;
-      color: #fff;
+    .logo-lacta {
+      margin-bottom: 20px;
+      @include media-breakpoint-down(xs) {
+        margin-bottom: 0px;
+      }
+      svg {
+        @include media-breakpoint-down(xs) {
+          transform: scale(0.5);
+        }
+      }
     }
     p {
-      font-size: 15px;
+      font-size: 24px;
       font-style: normal;
-      font-weight: 400;
-      line-height: 18px;
+      font-weight: 700;
+      line-height: 29px;
       letter-spacing: 0em;
       text-align: center;
       width: 100%;
+      font-family: "Poppins",sans-serif;
       color: #fff;
+      @include media-breakpoint-down(xs) {
+        font-size: 14px;
+        line-height: 20px;
+      }
     }
-    .link {
-      font-size: 14px;
+    .about-more {
+      font-size: 16px;
       font-style: normal;
-      font-weight: 600;
-      line-height: 17px;
+      font-weight: 700;
+      line-height: 19px;
       letter-spacing: 0em;
       text-align: center;
       color: #fff;
       text-decoration: underline;
+      @include media-breakpoint-down(xs) {
+        font-size: 11px;
+      }
     }
   }
 }

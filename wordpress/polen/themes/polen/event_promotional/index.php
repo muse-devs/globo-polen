@@ -51,7 +51,7 @@ get_header();
             Esgotado
           </div>
         </div>
-        <?php $inputs->material_button_link_outlined("todos", "Escolher outro artista", home_url( "shop" ), false, "", array(), $donate ? "donate" : ""); ?>
+        <?php $inputs->material_button_link_outlined("todos", "Escolher outro artista", home_url( "lacta" ), false, "", array(), $donate ? "donate" : ""); ?>
 			<?php endif; ?>
 		</div>
 	</div>

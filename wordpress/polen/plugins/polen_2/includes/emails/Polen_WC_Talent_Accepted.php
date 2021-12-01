@@ -25,7 +25,7 @@ class Polen_WC_Talent_Accepted extends \WC_Email {
 		$this->heading_ep     = __( '%s aceitou', 'polen' );
 
 		$this->subject     = sprintf( _x( '[%s] O talento aceitou', 'E-mail que será enviado ao usuário quando o talento aceitar o pedido.', 'polen' ), '{blogname}' );
-		$this->subject_ep  = 'Pedido Aceito!' ;
+		$this->subject_ep  = 'Lacta - Pedido de vídeo aceito' ;
     
 		$this->template_html  = 'emails/Polen_WC_Talent_Accepted.php';
 		$this->template_plain = 'emails/plain/Polen_WC_Talent_Accepted.php';

@@ -30,7 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                     <tr>
                       <td align="center" id="header_wrapper"
                         style="display: flex; justify-content: center; flex-wrap: wrap; align-items: center; padding: 20px 0px;">
-                        <img src="<?php echo TEMPLATE_URI.'/assets/img/lacta/email/logo.png'?>" style="height: 62px; margin: 0 auto; display: block;"></img>
+                        <img src="<?php echo get_template_directory_uri().'/assets/img/lacta/email/logo.png'?>" style="height: 62px; margin: 0 auto; display: block;"></img>
                       </td>
                       <td align="center" id="header_wrapper"
                         style="display: flex; justify-content: center;border-bottom: 1px solid rgba(255, 255, 255, 0.2); flex-wrap: wrap; align-items: center; padding: 20px 0px;">
@@ -80,7 +80,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                                       Em caso de dúvida, você pode enviar um e-mail para<br><a
                                         href="mailto:atendimento@polen.me" style="color: #fff">atendimento@polen.me</a>
                                     </p>
-                                    <img src="<?php echo TEMPLATE_URI.'/assets/img/logo.png'?>" style="height: 50px;"></img>
+                                    <img src="<?php echo get_template_directory_uri().'/assets/img/logo.png'?>" style="height: 50px;"></img>
                                   </td>
                               </table>
                             </td>
