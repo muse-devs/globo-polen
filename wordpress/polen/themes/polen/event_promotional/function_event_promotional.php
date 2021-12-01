@@ -152,7 +152,7 @@ function event_promotional_get_order_flow_obj($order_number, $order_status, $ema
             'status' => 'fail',
         ),
         'payment-approved' => array(
-            'title' => 'Recebemos seu pedido de vídeo-autógrafo',
+            'title' => 'Recebemos seu pedido de vídeo',
             'description' => 'Seu número de pedido é #' . $order_number . ' foi aprovado. ' . $flow_1_complement_email,
             'status' => 'complete',
         ),
