@@ -37,7 +37,7 @@ class Polen_Api_Video_Info
             array(
                 'methods' => WP_REST_Server::READABLE,
                 'callback' => array( $this, 'get_item_by_hash' ),
-                'permission_callback' => array( $this, 'get_items_permissions_check' )
+                'permission_callback' => '__return_true',//array( $this, 'get_items_permissions_check' )
             ),
             'schema' => array( $this, 'get_item_schema' )
         ) );
@@ -208,7 +208,7 @@ class Polen_Api_Video_Info
         $video_info = Polen_Video_Info::get_by_hash( $hash );
 
         if( empty( $video_info ) ) {
-            return rest_ensure_response( $video_info );
+            return new WP_REST_Response( $video_info, 404 );
         }
         
         $data = $this->prepare_item_for_response( $video_info, $request );
