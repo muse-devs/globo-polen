@@ -77,4 +77,19 @@ class Polen_Product_Module
         ");
         return $results;
     }
+
+
+    /**
+     * Pega o nome da primeira Categoria do produto
+     */
+    public function get_category_name()
+    {
+        $categories_ids = $this->object->get_category_ids();
+        $category_id = $categories_ids[ 0 ];
+        $category = get_term_by( 'id', $category_id, 'product_cat' );
+        if( empty( $category ) ) {
+            return '';
+        }
+        return $category->name;
+    }
 }
