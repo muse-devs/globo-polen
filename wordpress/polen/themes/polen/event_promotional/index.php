@@ -4,7 +4,7 @@
  * Template name: Página Inicial Vídeo Autógrafo
  */
 
-use Polen\Includes\Module\Polen_Order_Module;
+use Polen\Includes\Module\Polen_Product_Module;
 use Polen\Includes\Polen_Order;
 
 $inputs = new Material_Inputs();
@@ -19,6 +19,7 @@ if( 'instock' == $product->get_stock_status() ) {
 
 $image_data = polen_get_thumbnail($product->get_id());
 
+$polen_product = new Polen_Product_Module( $product );
 get_header();
 ?>
 
@@ -36,8 +37,10 @@ get_header();
   </div>
 
     <?php
-    $orders_ids = Polen_Order_Module::get_orders_ids_by_campaign_and_status( 'lacta', Polen_Order::ORDER_STATUS_COMPLETED );
+    $orders_ids = event_promotional_orders_ids_by_user_id_status( $product->get_id(), 'lacta', Polen_Order::ORDER_STATUS_COMPLETED );
     if( count( $orders_ids ) > 0 ) :
+      shuffle( $orders_ids );
+      $orders_ids = array_slice( $orders_ids, 0, 7 );
       polen_front_get_videos( polen_get_home_stories( $orders_ids ), "" );
     ?>
 
@@ -49,7 +52,7 @@ get_header();
       </figure>
       <div class="content ml-2 mt-1">
         <h2 class="name"><?php echo $product->get_title(); ?></h2>
-        <h3 class="category m-0">categoria</h3>
+        <h3 class="category m-0"><?= $polen_product->get_category_name(); ?></h3>
       </div>
 		</div>
 	</div>

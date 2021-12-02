@@ -2,6 +2,7 @@
 
 use Polen\Includes\Module\Polen_Order_Module;
 use Polen\Includes\Module\Polen_Product_Module;
+use Polen\Includes\Polen_Talent;
 
 function event_promotional_url_home()
 {
@@ -67,6 +68,22 @@ function event_promotional_order_is_event_promotional( $order )
 {
     $polen_order = new Polen_Order_Module( $order );
     return $polen_order->get_is_campaign();
+}
+
+function event_promotional_orders_ids_by_user_id_status( $product_id, $campaign, $status )
+{
+    $status = 'wc-' . $status;
+    $orders_ids = Polen_Product_Module::get_orders_ids_by_product_id( $product_id, [ $status ] );
+    $orders_ids_return = [];
+    foreach( $orders_ids as $order_id ) {
+        $polen_order = new Polen_Order_Module( wc_get_order( $order_id ) );
+        if( is_a( $polen_order, 'Polen\Includes\Module\Polen_Order_Module' ) ){
+            if( $campaign === $polen_order->get_campaign_slug() ) {
+                $orders_ids_return[] = $order_id;
+            }
+        }
+    }
+    return $orders_ids_return;
 }
 
 
