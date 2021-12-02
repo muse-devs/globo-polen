@@ -20,8 +20,8 @@ class Api_Video
         if( empty( $video_info ) ) {
             return new WP_REST_Response( $video_info, 404 );
         }
-        $polen_api_video_info = new Polen_Api_Video_Info();
-        $data = $polen_api_video_info->prepare_item_for_response( $video_info, $request );
+        $polen_api_video_info = new Api_Controller();
+        $data = $polen_api_video_info->create_item_video( $video_info );
 
         return rest_ensure_response( $data );
     }
