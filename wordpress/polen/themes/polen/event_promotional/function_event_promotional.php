@@ -1,6 +1,5 @@
 <?php
 
-use Polen\Admin\Polen_Admin_Event_Promotional_Event_Fields;
 use Polen\Includes\Module\Polen_Order_Module;
 use Polen\Includes\Module\Polen_Product_Module;
 
@@ -239,10 +238,4 @@ function event_promotional_get_order_flow_obj($order_number, $order_status, $ema
     }
 
     return $flows;
-}
-
-
-function event_get_magalu_url()
-{
-	return "";
 }
