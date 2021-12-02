@@ -22,6 +22,8 @@ class Polen_Api_Video_Info
         $this->namespace = 'polen/v1';
         $this->resource_name = 'video-infos';
     }
+
+    
     public function register_routes()
     {
         register_rest_route( $this->namespace, '/' . $this->resource_name, array(
@@ -37,7 +39,7 @@ class Polen_Api_Video_Info
             array(
                 'methods' => WP_REST_Server::READABLE,
                 'callback' => array( $this, 'get_item_by_hash' ),
-                'permission_callback' => '__return_true',//array( $this, 'get_items_permissions_check' )
+                'permission_callback' => array( $this, 'get_items_permissions_check' )
             ),
             'schema' => array( $this, 'get_item_schema' )
         ) );

@@ -1,6 +1,7 @@
 <?php
 namespace Polen\Api;
 
+use Polen\Includes\API\Polen_Api_Video_Info;
 use WP_REST_Server;
 
 class Api_Routers
@@ -205,5 +206,18 @@ class Api_Routers
                 'permission_callback' => [ $api_user, 'check_permission_create_item' ],
             )
         ));
+
+
+
+        $api_video = new Api_Video();
+        $polen_api_videos = new Polen_Api_Video_Info();
+        register_rest_route( $this->base, '/videos/hash/(?P<id>[\d]+)', array(
+            array(
+                'methods' => WP_REST_Server::READABLE,
+                'callback' => array( $api_video, 'get_item_by_hash' ),
+                'permission_callback' => '__return_true',
+            ),
+            'schema' => array( $polen_api_videos, 'get_item_schema' )
+        ) );
     }
 }
