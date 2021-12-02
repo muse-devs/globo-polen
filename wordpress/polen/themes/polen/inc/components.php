@@ -14,3 +14,4 @@ require TEMPLATE_DIR . '/inc/front-components/masterclass.php';
 require TEMPLATE_DIR . '/inc/front-components/setembro-amarelo.php';
 require TEMPLATE_DIR . '/inc/front-components/business.php';
 require TEMPLATE_DIR . '/inc/front-components/material_io.php';
+require TEMPLATE_DIR . '/inc/front-components/lacta.php';

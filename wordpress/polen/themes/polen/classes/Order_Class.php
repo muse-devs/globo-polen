@@ -58,7 +58,7 @@ class Order_Class
 		$flow_3 = array(
 			'completed' => array(
 				'title' => 'Seu vídeo está pronto!',
-				'description' => 'O talento aceitou o seu pedido.',
+				'description' => '',
 				'status' => 'complete',
 			),
 			'cancelled' => array(

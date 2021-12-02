@@ -2,7 +2,7 @@
 
 namespace Polen\Includes\API;
 
-use Polen\Includes\Debug;
+use Polen\Includes\Module\Polen_Order_Module;
 use Polen\Includes\Polen_Video_Info;
 use Polen\Social_Base\Social_Base;
 use Polen\Social_Base\Social_Base_Order;
@@ -19,7 +19,7 @@ class Polen_Api_Video_Info
 
     public function __construct()
     {
-        $this->namespace = 'polen-api/v1';
+        $this->namespace = 'polen/v1';
         $this->resource_name = 'video-infos';
     }
     public function register_routes()
@@ -28,6 +28,15 @@ class Polen_Api_Video_Info
             array(
                 'methods' => WP_REST_Server::READABLE,
                 'callback' => array( $this, 'get_items' ),
+                'permission_callback' => array( $this, 'get_items_permissions_check' )
+            ),
+            'schema' => array( $this, 'get_item_schema' )
+        ) );
+
+        register_rest_route( $this->namespace, '/' . $this->resource_name . '/hash/(?P<id>[\d]+)', array(
+            array(
+                'methods' => WP_REST_Server::READABLE,
+                'callback' => array( $this, 'get_item_by_hash' ),
                 'permission_callback' => array( $this, 'get_items_permissions_check' )
             ),
             'schema' => array( $this, 'get_item_schema' )
@@ -133,7 +142,7 @@ class Polen_Api_Video_Info
             $response = $this->prepare_item_for_response( $video_info, $request );
             if( !empty( $order ) ) {
                 if( Social_Base_Order::is_social( $order ) ) {
-                    $response[ Social_Base_Order::ORDER_META_KEY_CAMPAING ] = $order->get_meta( Social_Base_Order::ORDER_META_KEY_CAMPAING );
+                    $response[ Social_Base_Order::ORDER_META_KEY_campaign ] = $order->get_meta( Social_Base_Order::ORDER_META_KEY_campaign );
                 }
             }
             $data[] = $response;
@@ -188,6 +197,26 @@ class Polen_Api_Video_Info
         ];
     }
 
+
+    /**
+     * 
+     * @param \WP_REST_Request
+     */
+    public function get_item_by_hash( $request )
+    {
+        $hash = (int) $request['id'];
+        $video_info = Polen_Video_Info::get_by_hash( $hash );
+
+        if( empty( $video_info ) ) {
+            return rest_ensure_response( $video_info );
+        }
+        
+        $data = $this->prepare_item_for_response( $video_info, $request );
+
+        return rest_ensure_response( $data );
+    }
+
+
     /**
      * 
      * @param \WP_REST_Request
@@ -233,6 +262,10 @@ class Polen_Api_Video_Info
         $post_data[ 'created_at' ] = $video_info->created_at;
         $post_data[ 'updated_at' ] = $video_info->updated_at;
 
+        $order = wc_get_order( $video_info->order_id );
+        $polen_order = new Polen_Order_Module( $order );
+        $post_data[ 'campaign' ] = $polen_order->get_campaign_slug();
+        
         return $post_data;
     }
 

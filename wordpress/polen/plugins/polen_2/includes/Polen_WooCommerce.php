@@ -3,6 +3,7 @@
 namespace Polen\Includes;
 
 use Polen\Admin\Polen_Admin_B2B_Product_Fields;
+use Polen\Admin\Polen_Admin_Event_Promotional_Event_Fields;
 use Polen\Admin\Polen_Admin_Social_Base_Product_Fields;
 
 class Polen_WooCommerce 
@@ -87,11 +88,11 @@ class Polen_WooCommerce
             } );
 
             add_filter( 'woocommerce_product_data_tabs', array( $this, 'charity_tab' ) );
-            add_filter( 'woocommerce_product_data_tabs', array( $this, 'promotional_event' ) );
+            // add_filter( 'woocommerce_product_data_tabs', array( $this, 'promotional_event' ) );
             // add_filter( 'woocommerce_product_data_tabs', array( $this, 'social_base_event' ) );
             
             add_filter( 'woocommerce_product_data_panels', array( $this, 'charity_product_data_product_tab_content' ) );
-            add_filter( 'woocommerce_product_data_panels', array( $this, 'promotional_event_product_data_product_tab_content' ) );
+            // add_filter( 'woocommerce_product_data_panels', array( $this, 'promotional_event_product_data_product_tab_content' ) );
             // add_filter( 'woocommerce_product_data_panels', array( $this, 'social_base_product_data_product_tab_content' ) );
 
             add_action( 'woocommerce_update_product', array( $this, 'on_product_save' ) );
@@ -360,15 +361,15 @@ class Polen_WooCommerce
         );
         return $array;
     }
-    public function promotional_event( $array ){
-        $array['promotional_event'] = array(
-            'label'    => 'Video-Autógrafo',
-            'target'   => 'promotional_event_product_data',
-            'class'    => array(),
-            'priority' => 90,
-        );
-        return $array;
-    }
+    // public function promotional_event( $array ){
+    //     $array['promotional_event'] = array(
+    //         'label'    => 'Video-Autógrafo',
+    //         'target'   => 'promotional_event_product_data',
+    //         'class'    => array(),
+    //         'priority' => 90,
+    //     );
+    //     return $array;
+    // }
 
     // public function social_base_event( $array )
     // {
@@ -462,7 +463,7 @@ class Polen_WooCommerce
 
     public function promotional_event_product_data_product_tab_content()
     {
-        global $product_object; ?>
+/*        global $product_object; ?>
 
         <div id="promotional_event_product_data" class="panel woocommerce_options_panel hidden">
             <div class='options_group'>
@@ -601,7 +602,7 @@ class Polen_WooCommerce
 
             
         </div>
-        <?php
+        <?php */
     }
 
     /*
@@ -627,8 +628,8 @@ class Polen_WooCommerce
                     <?php
                     woocommerce_wp_text_input(
                         array(
-                            'id'          => '_social_base_slug_campaing',
-                            'value'       => $product_object->get_meta( '_social_base_slug_campaing' ),
+                            'id'          => '_social_base_slug_campaign',
+                            'value'       => $product_object->get_meta( '_social_base_slug_campaign' ),
                             'label'       => 'Slug da Campanha',
                             'desc_tip'    => true,
                             'description' => 'Slug da companha que este produto é parte',
@@ -667,18 +668,18 @@ class Polen_WooCommerce
                 $charity_description = strip_tags( $_POST['_description_charity'] );
                 $charity_subordinate_id = strip_tags( $_POST['_charity_subordinate_merchant_id'] );
 
-                $promotional_event = strip_tags( $_POST[ '_promotional_event' ] );
-                $promotional_event_pages_quantity = strip_tags( $_POST[ '_promotional_event_pages_quantity' ] );
-                $promotional_event_language = strip_tags( $_POST[ '_promotional_event_language' ] );
-                $promotional_event_publishing = strip_tags( $_POST[ '_promotional_event_publishing' ] );
-                $promotional_event_published_in = strip_tags( $_POST[ '_promotional_event_published_in' ] );
-                $promotional_event_rating = strip_tags( $_POST[ '_promotional_event_rating' ] );
-                $promotional_event_link_buy = strip_tags( $_POST[ '_promotional_event_link_buy' ] );
-                $promotional_event_author = strip_tags( $_POST[ '_promotional_event_author' ] );
-                $promotional_event_wartermark = strip_tags( $_POST[ '_promotional_event_wartermark' ] );
+                // $promotional_event = strip_tags( $_POST[ '_promotional_event' ] );
+                // $promotional_event_pages_quantity = strip_tags( $_POST[ '_promotional_event_pages_quantity' ] );
+                // $promotional_event_language = strip_tags( $_POST[ '_promotional_event_language' ] );
+                // $promotional_event_publishing = strip_tags( $_POST[ '_promotional_event_publishing' ] );
+                // $promotional_event_published_in = strip_tags( $_POST[ '_promotional_event_published_in' ] );
+                // $promotional_event_rating = strip_tags( $_POST[ '_promotional_event_rating' ] );
+                // $promotional_event_link_buy = strip_tags( $_POST[ '_promotional_event_link_buy' ] );
+                // $promotional_event_author = strip_tags( $_POST[ '_promotional_event_author' ] );
+                // $promotional_event_wartermark = strip_tags( $_POST[ '_promotional_event_wartermark' ] );
                 
                 // $is_social_base = strip_tags( $_POST[ '_is_social_base' ]);
-                // $social_base_slug_campaing = strip_tags( $_POST[ '_social_base_slug_campaing' ]);
+                // $social_base_slug_campaign = strip_tags( $_POST[ '_social_base_slug_campaign' ]);
                 // $social_base_video_testimonial = strip_tags( $_POST[ '_social_base_video_testimonial' ]);
 
                 $product->update_meta_data( '_is_charity', $charity );
@@ -687,22 +688,23 @@ class Polen_WooCommerce
                 $product->update_meta_data( '_description_charity', $charity_description );
                 $product->update_meta_data( '_charity_subordinate_merchant_id', $charity_subordinate_id );
 
-                $this->save_meta($product, $promotional_event, '_promotional_event' );
-                $this->save_meta($product, $promotional_event_pages_quantity, '_promotional_event_pages_quantity' );
-                $this->save_meta($product, $promotional_event_language, '_promotional_event_language' );
-                $this->save_meta($product, $promotional_event_publishing, '_promotional_event_publishing' );
-                $this->save_meta($product, $promotional_event_published_in, '_promotional_event_published_in' );
-                $this->save_meta($product, $promotional_event_rating, '_promotional_event_rating' );
-                $this->save_meta($product, $promotional_event_link_buy, '_promotional_event_link_buy' );
-                $this->save_meta($product, $promotional_event_author, '_promotional_event_author' );
-                $this->save_meta($product, $promotional_event_wartermark, '_promotional_event_wartermark' );
+                // $this->save_meta($product, $promotional_event, '_promotional_event' );
+                // $this->save_meta($product, $promotional_event_pages_quantity, '_promotional_event_pages_quantity' );
+                // $this->save_meta($product, $promotional_event_language, '_promotional_event_language' );
+                // $this->save_meta($product, $promotional_event_publishing, '_promotional_event_publishing' );
+                // $this->save_meta($product, $promotional_event_published_in, '_promotional_event_published_in' );
+                // $this->save_meta($product, $promotional_event_rating, '_promotional_event_rating' );
+                // $this->save_meta($product, $promotional_event_link_buy, '_promotional_event_link_buy' );
+                // $this->save_meta($product, $promotional_event_author, '_promotional_event_author' );
+                // $this->save_meta($product, $promotional_event_wartermark, '_promotional_event_wartermark' );
 
                 // $this->save_meta($product, $is_social_base, '_is_social_base' );
-                // $this->save_meta($product, $social_base_slug_campaing, '_social_base_slug_campaing' );
+                // $this->save_meta($product, $social_base_slug_campaign, '_social_base_slug_campaign' );
                 // $this->save_meta($product, $social_base_video_testimonial, '_social_base_video_testimonial' );
 
-                do_action( Polen_Admin_Social_Base_Product_Fields::ACTION_NAME , $product_id );
-                do_action( Polen_Admin_B2B_Product_Fields::ACTION_NAME         , $product_id );
+                do_action( Polen_Admin_Social_Base_Product_Fields::ACTION_NAME    , $product_id );
+                do_action( Polen_Admin_B2B_Product_Fields::ACTION_NAME            , $product_id );
+                do_action( Polen_Admin_Event_Promotional_Event_Fields::ACTION_NAME, $product_id );
                   
                 remove_action( 'woocommerce_update_product', array( $this, 'on_product_save' ) );
                 $product->save();

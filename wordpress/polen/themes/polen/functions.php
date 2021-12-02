@@ -366,6 +366,11 @@ require_once TEMPLATE_DIR . '/inc/b2b_functions.php';
  */
 require_once TEMPLATE_DIR . '/api/api_function.php';
 
+/** 
+ * Funções para página natal lacta
+ */
+require_once TEMPLATE_DIR . '/lacta/function_natal_lacta.php';
+
 
 add_action('wc_gateway_stripe_process_response', function($response, $order) {
 	// $response

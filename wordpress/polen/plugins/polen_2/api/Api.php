@@ -1,5 +1,4 @@
 <?php
-
 namespace Polen\Api;
 
 class Api{

@@ -2,6 +2,7 @@
 
 namespace Polen\Includes\Talent;
 
+use Exception;
 use Polen\Includes\{Polen_Talent, Polen_Order, Debug};
 use WC_Order;
 use Vimeo\Vimeo;
@@ -10,6 +11,7 @@ use Vimeo\Exceptions\{VimeoRequestException, ExceptionInterface};
 use Polen\Includes\Polen_Video_Info;
 use Polen\Includes\Vimeo\{Polen_Vimeo_Response, Polen_Vimeo_Vimeo_Options};
 use Polen\Includes\Cart\{Polen_Cart_Item_Factory, Polen_Cart_Item};
+use WC_Emails;
 
 class Polen_Talent_Controller extends Polen_Talent_Controller_Base
 {
@@ -102,10 +104,10 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
                }else{
                 // Debug::def( $_POST);die;
                    $order = wc_get_order( $order_id );
-                   \WC_Emails::instance();
+                   WC_Emails::instance();
                    if($order){
                        if( $type == 'accept' ){
-                           $order->update_status( 'talent-accepted', '', true );
+                           $order->update_status( Polen_Order::ORDER_STATUS_TALENT_ACCEPTED );
                            $response = 'Vídeo aceito com sucesso';
                            $response = [ "code" => "1", "" ]; 
                        }                            

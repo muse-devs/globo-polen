@@ -82,7 +82,7 @@ this["wc"] = this["wc"] || {}; this["wc"]["onboarding"] =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 271);
+/******/ 	return __webpack_require__(__webpack_require__.s = 273);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -94,17 +94,24 @@ this["wc"] = this["wc"] || {}; this["wc"]["onboarding"] =
 
 /***/ }),
 
+/***/ 16:
+/***/ (function(module, exports) {
+
+(function() { module.exports = window["wc"]["tracks"]; }());
+
+/***/ }),
+
+/***/ 17:
+/***/ (function(module, exports) {
+
+(function() { module.exports = window["wc"]["experimental"]; }());
+
+/***/ }),
+
 /***/ 2:
 /***/ (function(module, exports) {
 
 (function() { module.exports = window["wp"]["i18n"]; }());
-
-/***/ }),
-
-/***/ 20:
-/***/ (function(module, exports) {
-
-(function() { module.exports = window["wc"]["experimental"]; }());
 
 /***/ }),
 
@@ -115,7 +122,7 @@ this["wc"] = this["wc"] || {}; this["wc"]["onboarding"] =
 
 /***/ }),
 
-/***/ 271:
+/***/ 273:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -145,7 +152,7 @@ __webpack_require__.d(__webpack_exports__, "WooOnboardingTaskListItem", function
 var external_wp_components_ = __webpack_require__(3);
 
 // EXTERNAL MODULE: external ["wc","experimental"]
-var external_wc_experimental_ = __webpack_require__(20);
+var external_wc_experimental_ = __webpack_require__(17);
 
 // EXTERNAL MODULE: external ["wp","element"]
 var external_wp_element_ = __webpack_require__(0);
@@ -915,7 +922,7 @@ const RecommendedRibbon = ({
 // CONCATENATED MODULE: ./packages/onboarding/build-module/components/RecommendedRibbon/index.js
 
 // EXTERNAL MODULE: ./node_modules/gridicons/dist/notice-outline.js
-var notice_outline = __webpack_require__(61);
+var notice_outline = __webpack_require__(63);
 var notice_outline_default = /*#__PURE__*/__webpack_require__.n(notice_outline);
 
 // CONCATENATED MODULE: ./packages/onboarding/build-module/components/SetupRequired.js
@@ -1020,26 +1027,55 @@ WooPaymentGatewayConfigure.Slot = ({
 });
 // CONCATENATED MODULE: ./packages/onboarding/build-module/components/WooPaymentGatewayConfigure/index.js
 
+// EXTERNAL MODULE: external ["wc","tracks"]
+var external_wc_tracks_ = __webpack_require__(16);
+
 // CONCATENATED MODULE: ./packages/onboarding/build-module/components/WooOnboardingTask/WooOnboardingTask.js
 /**
  * External dependencies
  */
 
 
+
+const trackView = taskId => {
+  const activePlugins = wp.data.select('wc/admin/plugins').getActivePlugins();
+  const installedPlugins = wp.data.select('wc/admin/plugins').getInstalledPlugins();
+  const isJetpackConnected = wp.data.select('wc/admin/plugins').isJetpackConnected();
+  Object(external_wc_tracks_["recordEvent"])('task_view', {
+    task_name: taskId,
+    wcs_installed: installedPlugins.includes('woocommerce-services'),
+    wcs_active: activePlugins.includes('woocommerce-services'),
+    jetpack_installed: installedPlugins.includes('jetpack'),
+    jetpack_active: activePlugins.includes('jetpack'),
+    jetpack_connected: isJetpackConnected
+  });
+};
+
 const WooOnboardingTask = ({
   id,
   ...props
-}) => Object(external_wp_element_["createElement"])(external_wp_components_["Fill"], Object.assign({
-  name: 'woocommerce_onboarding_task_' + id
-}, props));
+}) => {
+  return Object(external_wp_element_["createElement"])(external_wp_components_["Fill"], Object.assign({
+    name: 'woocommerce_onboarding_task_' + id
+  }, props));
+};
 
 WooOnboardingTask.Slot = ({
   id,
   fillProps
-}) => Object(external_wp_element_["createElement"])(external_wp_components_["Slot"], {
-  name: 'woocommerce_onboarding_task_' + id,
-  fillProps: fillProps
-});
+}) => {
+  // The Slot is a React component and this hook works as expected.
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  Object(external_wp_element_["useEffect"])(() => {
+    trackView(id);
+  }, [id]);
+  return Object(external_wp_element_["createElement"])(external_wp_components_["Slot"], {
+    name: 'woocommerce_onboarding_task_' + id,
+    fillProps: fillProps
+  });
+};
+
+
 // CONCATENATED MODULE: ./packages/onboarding/build-module/components/WooOnboardingTask/index.js
 
 // CONCATENATED MODULE: ./packages/onboarding/build-module/components/WooOnboardingTaskListItem/WooOnboardingTaskListItem.js
@@ -1096,7 +1132,7 @@ WooOnboardingTaskListItem.Slot = ({
 
 /***/ }),
 
-/***/ 61:
+/***/ 63:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

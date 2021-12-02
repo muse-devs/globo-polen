@@ -2,7 +2,6 @@
 namespace Polen\Api;
 
 use Exception;
-use Polen\Includes\API\Polen_Api_Video_Info;
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
 use Polen\Includes\Polen_Talent;
 use Polen\Includes\Polen_Video_Info;
@@ -332,18 +331,7 @@ class Api_Controller{
         $order = wc_get_order( $video->order_id );
         $cart_item = Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
         $product = $cart_item->get_product();
-
-        $categories_ids = $product->get_category_ids();
-        $categories = [];
-        foreach( $categories_ids as $category_id ) {
-            $term = get_term_by( 'id', $category_id, 'product_cat' );
-            $categories[] = [
-                'id'   => $term->term_id,
-                'name' => $term->name,
-                'slug' => $term->slug,
-            ];
-        }
-
+        $categories = $this->get_categories_object_by_product( $product );
         return [
             'video_info_id'    => $video->ID,
             'talent_id'        => $video->talent_id,
@@ -356,5 +344,31 @@ class Api_Controller{
             'video_url'        => $video->vimeo_file_play,
             'initials'         => polen_get_initials_name( $cart_item->get_name_to_video() ),
         ];
+    }
+
+
+    /**
+     * Cria um Array de objectos para o Front-end
+     * export interface Category {
+     *   id: number;
+     *   name: string;
+     *   slug: string;
+     * }
+     * @param WC_Product
+     * @return Array
+     */
+    protected function get_categories_object_by_product( $product )
+    {
+        $categories_ids = $product->get_category_ids();
+        $categories = [];
+        foreach( $categories_ids as $category_id ) {
+            $term = get_term_by( 'id', $category_id, 'product_cat' );
+            $categories[] = [
+                'id'   => $term->term_id,
+                'name' => $term->name,
+                'slug' => $term->slug,
+            ];
+        }
+        return  $categories;
     }
 }

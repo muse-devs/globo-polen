@@ -1,6 +1,6 @@
-(window["__wcAdmin_webpackJsonp"] = window["__wcAdmin_webpackJsonp"] || []).push([[3,53],{
+(window["__wcAdmin_webpackJsonp"] = window["__wcAdmin_webpackJsonp"] || []).push([[3,54],{
 
-/***/ 271:
+/***/ 273:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -30,7 +30,7 @@ __webpack_require__.d(__webpack_exports__, "WooOnboardingTaskListItem", function
 var external_wp_components_ = __webpack_require__(3);
 
 // EXTERNAL MODULE: external ["wc","experimental"]
-var external_wc_experimental_ = __webpack_require__(20);
+var external_wc_experimental_ = __webpack_require__(17);
 
 // EXTERNAL MODULE: external ["wp","element"]
 var external_wp_element_ = __webpack_require__(0);
@@ -800,7 +800,7 @@ const RecommendedRibbon = ({
 // CONCATENATED MODULE: ./packages/onboarding/build-module/components/RecommendedRibbon/index.js
 
 // EXTERNAL MODULE: ./node_modules/gridicons/dist/notice-outline.js
-var notice_outline = __webpack_require__(61);
+var notice_outline = __webpack_require__(63);
 var notice_outline_default = /*#__PURE__*/__webpack_require__.n(notice_outline);
 
 // CONCATENATED MODULE: ./packages/onboarding/build-module/components/SetupRequired.js
@@ -905,26 +905,55 @@ WooPaymentGatewayConfigure.Slot = ({
 });
 // CONCATENATED MODULE: ./packages/onboarding/build-module/components/WooPaymentGatewayConfigure/index.js
 
+// EXTERNAL MODULE: external ["wc","tracks"]
+var external_wc_tracks_ = __webpack_require__(16);
+
 // CONCATENATED MODULE: ./packages/onboarding/build-module/components/WooOnboardingTask/WooOnboardingTask.js
 /**
  * External dependencies
  */
 
 
+
+const trackView = taskId => {
+  const activePlugins = wp.data.select('wc/admin/plugins').getActivePlugins();
+  const installedPlugins = wp.data.select('wc/admin/plugins').getInstalledPlugins();
+  const isJetpackConnected = wp.data.select('wc/admin/plugins').isJetpackConnected();
+  Object(external_wc_tracks_["recordEvent"])('task_view', {
+    task_name: taskId,
+    wcs_installed: installedPlugins.includes('woocommerce-services'),
+    wcs_active: activePlugins.includes('woocommerce-services'),
+    jetpack_installed: installedPlugins.includes('jetpack'),
+    jetpack_active: activePlugins.includes('jetpack'),
+    jetpack_connected: isJetpackConnected
+  });
+};
+
 const WooOnboardingTask = ({
   id,
   ...props
-}) => Object(external_wp_element_["createElement"])(external_wp_components_["Fill"], Object.assign({
-  name: 'woocommerce_onboarding_task_' + id
-}, props));
+}) => {
+  return Object(external_wp_element_["createElement"])(external_wp_components_["Fill"], Object.assign({
+    name: 'woocommerce_onboarding_task_' + id
+  }, props));
+};
 
 WooOnboardingTask.Slot = ({
   id,
   fillProps
-}) => Object(external_wp_element_["createElement"])(external_wp_components_["Slot"], {
-  name: 'woocommerce_onboarding_task_' + id,
-  fillProps: fillProps
-});
+}) => {
+  // The Slot is a React component and this hook works as expected.
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  Object(external_wp_element_["useEffect"])(() => {
+    trackView(id);
+  }, [id]);
+  return Object(external_wp_element_["createElement"])(external_wp_components_["Slot"], {
+    name: 'woocommerce_onboarding_task_' + id,
+    fillProps: fillProps
+  });
+};
+
+
 // CONCATENATED MODULE: ./packages/onboarding/build-module/components/WooOnboardingTask/index.js
 
 // CONCATENATED MODULE: ./packages/onboarding/build-module/components/WooOnboardingTaskListItem/WooOnboardingTaskListItem.js
@@ -967,7 +996,7 @@ WooOnboardingTaskListItem.Slot = ({
 
 /***/ }),
 
-/***/ 507:
+/***/ 509:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -996,7 +1025,7 @@ function createNoticesFromResponse(response) {
 
 /***/ }),
 
-/***/ 514:
+/***/ 517:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1016,7 +1045,7 @@ function createNoticesFromResponse(response) {
 /* harmony import */ var _woocommerce_components__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_components__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _woocommerce_data__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(11);
 /* harmony import */ var _woocommerce_data__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_data__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _woocommerce_explat__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(122);
+/* harmony import */ var _woocommerce_explat__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(121);
 /* harmony import */ var _woocommerce_explat__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_explat__WEBPACK_IMPORTED_MODULE_8__);
 
 
@@ -1211,7 +1240,7 @@ class UsageModal extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Compon
 
 /***/ }),
 
-/***/ 519:
+/***/ 524:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1227,7 +1256,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var interpolate_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(interpolate_components__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _woocommerce_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(21);
 /* harmony import */ var _woocommerce_components__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_components__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _profile_wizard_steps_usage_modal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(514);
+/* harmony import */ var _profile_wizard_steps_usage_modal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(517);
 
 
 /**
@@ -1285,7 +1314,7 @@ const UsageModal = () => {
 
 /***/ }),
 
-/***/ 539:
+/***/ 546:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1301,7 +1330,7 @@ __webpack_require__.d(__webpack_exports__, "a", function() { return /* reexport 
 var external_wp_i18n_ = __webpack_require__(2);
 
 // EXTERNAL MODULE: external ["wp","apiFetch"]
-var external_wp_apiFetch_ = __webpack_require__(17);
+var external_wp_apiFetch_ = __webpack_require__(19);
 var external_wp_apiFetch_default = /*#__PURE__*/__webpack_require__.n(external_wp_apiFetch_);
 
 // EXTERNAL MODULE: external ["wc","data"]
@@ -1311,9 +1340,9 @@ var external_wc_data_ = __webpack_require__(11);
 var external_wc_tracks_ = __webpack_require__(16);
 
 // EXTERNAL MODULE: ./client/lib/notices/index.js
-var notices = __webpack_require__(507);
+var notices = __webpack_require__(509);
 
-// CONCATENATED MODULE: ./client/task-list/tasks/PaymentGatewaySuggestions/components/WCPay/utils.js
+// CONCATENATED MODULE: ./client/tasks/fills/PaymentGatewaySuggestions/components/WCPay/utils.js
 /**
  * External dependencies
  */
@@ -1366,15 +1395,15 @@ var lib_default = /*#__PURE__*/__webpack_require__.n(lib);
 var external_wc_components_ = __webpack_require__(21);
 
 // EXTERNAL MODULE: external ["wc","experimental"]
-var external_wc_experimental_ = __webpack_require__(20);
+var external_wc_experimental_ = __webpack_require__(17);
 
 // EXTERNAL MODULE: ./packages/onboarding/build-module/index.js + 26 modules
-var build_module = __webpack_require__(271);
+var build_module = __webpack_require__(273);
 
-// EXTERNAL MODULE: ./client/task-list/tasks/PaymentGatewaySuggestions/components/Action.js
-var Action = __webpack_require__(542);
+// EXTERNAL MODULE: ./client/tasks/fills/PaymentGatewaySuggestions/components/Action.js
+var Action = __webpack_require__(547);
 
-// CONCATENATED MODULE: ./client/task-list/tasks/PaymentGatewaySuggestions/components/WCPay/Suggestion.js
+// CONCATENATED MODULE: ./client/tasks/fills/PaymentGatewaySuggestions/components/WCPay/Suggestion.js
 
 
 /**
@@ -1434,17 +1463,17 @@ const Suggestion = ({
     onSetupCallback: onSetupCallback
   }))));
 };
-// EXTERNAL MODULE: ./client/task-list/tasks/PaymentGatewaySuggestions/components/WCPay/UsageModal.js
-var UsageModal = __webpack_require__(519);
+// EXTERNAL MODULE: ./client/tasks/fills/PaymentGatewaySuggestions/components/WCPay/UsageModal.js
+var UsageModal = __webpack_require__(524);
 
-// CONCATENATED MODULE: ./client/task-list/tasks/PaymentGatewaySuggestions/components/WCPay/index.js
+// CONCATENATED MODULE: ./client/tasks/fills/PaymentGatewaySuggestions/components/WCPay/index.js
 
 
 
 
 /***/ }),
 
-/***/ 542:
+/***/ 547:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1554,18 +1583,27 @@ const Action = ({
   }
 
   if (isInstalled && hasPlugins) {
-    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["Button"], {
       className: classes,
       isPrimary: isRecommended,
       isSecondary: !isRecommended,
       isBusy: isBusy,
       disabled: isBusy,
       onClick: () => handleClick()
-    }, Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Finish setup', 'woocommerce-admin')));
+    }, Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Finish setup', 'woocommerce-admin'));
   }
 
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(SetupButton, null);
 };
+
+/***/ }),
+
+/***/ 63:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+var _extends=Object.assign||function(a){for(var c,b=1;b<arguments.length;b++)for(var d in c=arguments[b],c)Object.prototype.hasOwnProperty.call(c,d)&&(a[d]=c[d]);return a};Object.defineProperty(exports,'__esModule',{value:!0});exports.default=function(a){var b=a.size,c=b===void 0?24:b,d=a.onClick,e=a.icon,f=a.className,g=_objectWithoutProperties(a,['size','onClick','icon','className']),j=['gridicon','gridicons-notice-outline',f,!!function h(k){return 0==k%18}(c)&&'needs-offset',!1,!1].filter(Boolean).join(' ');return _react2.default.createElement('svg',_extends({className:j,height:c,width:c,onClick:d},g,{xmlns:'http://www.w3.org/2000/svg',viewBox:'0 0 24 24'}),_react2.default.createElement('g',null,_react2.default.createElement('path',{d:'M12 4c4.41 0 8 3.59 8 8s-3.59 8-8 8-8-3.59-8-8 3.59-8 8-8m0-2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm1 13h-2v2h2v-2zm-2-2h2l.5-6h-3l.5 6z'})))};var _react=__webpack_require__(5),_react2=_interopRequireDefault(_react);function _interopRequireDefault(a){return a&&a.__esModule?a:{default:a}}function _objectWithoutProperties(a,b){var d={};for(var c in a)0<=b.indexOf(c)||Object.prototype.hasOwnProperty.call(a,c)&&(d[c]=a[c]);return d}module.exports=exports['default'];
+
 
 /***/ })
 

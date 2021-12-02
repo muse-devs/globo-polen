@@ -2,6 +2,7 @@
 namespace Polen\Includes\Emails;
 
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
+use Polen\Includes\Module\Polen_Order_Module;
 use Polen\Includes\Polen_Video_Info;
 use Polen\Social_Base\Social_Base_Order;
 
@@ -22,7 +23,7 @@ class Polen_WC_Completed_Order extends \WC_Email_Customer_Completed_Order
             '{order_date}'   => '',
             '{order_number}' => '',
         );
-
+        $this->template_base  = TEMPLATEPATH . '/woocommerce/';
         // Triggers for this email.
         add_action( 'woocommerce_order_status_completed_notification', array( $this, 'trigger' ), 10, 2 );
 
@@ -38,6 +39,11 @@ class Polen_WC_Completed_Order extends \WC_Email_Customer_Completed_Order
      */
     public function trigger( $order_id, $order = false ) {
         $this->setup_locale();
+
+        /**
+         * Não disparar email caso flag no_send_email estiver marcada
+         */
+
 
         if ( $order_id && ! is_a( $order, 'WC_Order' ) ) {
             $order = wc_get_order( $order_id );
@@ -71,7 +77,7 @@ class Polen_WC_Completed_Order extends \WC_Email_Customer_Completed_Order
     }
 
    public function get_subject_ep() {
-       return 'Seu Vídeo-Autógrafo está pronto.';
+       return 'Lacta - Seu vídeo chegou!';
    }
 
    public function get_subject_social_base() {
@@ -80,8 +86,10 @@ class Polen_WC_Completed_Order extends \WC_Email_Customer_Completed_Order
 
    public function get_content_ep()
    {
+        $polen_order = new Polen_Order_Module( $this->object );
+        $file_templete = sprintf( $this->template_ep_html, $polen_order->get_campaign_slug() );
         return wc_get_template_html(
-            sprintf( $this->template_ep_html, $this->product->get_sku() ),
+            $file_templete,
             array(
                 'order'              => $this->object,
                 'email_heading'      => $this->get_heading(),
@@ -98,9 +106,9 @@ class Polen_WC_Completed_Order extends \WC_Email_Customer_Completed_Order
 
         $video_info = Polen_Video_Info::get_by_order_id( $this->object->get_id() );
         $video_url = site_url( 'v/' . $video_info->hash );
-        $social_campaing_name = $this->object->get_meta( Social_Base_Order::ORDER_META_KEY_CAMPAING, true );
+        $social_campaign_name = $this->object->get_meta( Social_Base_Order::ORDER_META_KEY_campaign, true );
         return wc_get_template_html(
-            sprintf( $this->template_social_base_html, $social_campaing_name ),
+            sprintf( $this->template_social_base_html, $social_campaign_name ),
             array(
                 'order'              => $this->object,
                 'video_url'          => $video_url,

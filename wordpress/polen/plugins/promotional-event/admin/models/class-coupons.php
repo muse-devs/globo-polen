@@ -6,7 +6,7 @@ class Coupons{
      *
      * @throws Exception
      */
-    public function insert_coupons($qty)
+    public function insert_coupons($qty, $event_id)
     {
         global $wpdb;
         $table_name = $wpdb->prefix . 'promotional_event';
@@ -15,10 +15,24 @@ class Coupons{
             $wpdb->insert(
                 $table_name,
                 array(
-                    'code' => Promotional_Event_Generate_Coupon::generate(8),
+                    'code' =>  'LACTA-' . Promotional_Event_Generate_Coupon::generate(6, "", "", false, true),
+                    'event_id' => $event_id,
                 )
             );
         }
+    }
+
+    /**
+     * Retornar todos os códigos pelo o evento do ID
+     *
+     * @since    1.0.0
+     */
+    public function get_codes($event_id = 1)
+    {
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'promotional_event';
+
+        return $wpdb->get_results( "SELECT * FROM {$table_name} WHERE event_id = {$event_id}");
     }
 
     /**
@@ -26,7 +40,7 @@ class Coupons{
      *
      * @since    1.0.0
      */
-    public function get_codes()
+    public function get_all_codes()
     {
         global $wpdb;
         $table_name = $wpdb->prefix . 'promotional_event';
