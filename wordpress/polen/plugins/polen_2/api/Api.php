@@ -1,12 +1,14 @@
 <?php
 namespace Polen\Api;
 
-class Api{
+class Api {
 
-    public function __construct()
+    public function __construct( bool $static = false )
     {
-        new Api_Routers();
-        add_action('init', [$this, 'create_taxonomy_campaigns']);
+        if( $static ) {
+            new Api_Routers( true );
+            add_action('init', [$this, 'create_taxonomy_campaigns']);
+        }
     }
 
     /**
