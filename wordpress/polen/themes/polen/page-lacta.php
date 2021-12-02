@@ -2,6 +2,9 @@
 
 /** Template Name: Página - Lacta */
 
+use Polen\Includes\Module\Polen_Order_Module;
+use Polen\Includes\Polen_Order;
+
 // $talents = polen_get_talents_by_campaignn('lacta');
 $talents = array_chunk(polen_get_talents_by_campaignn('lacta'), 8);
 
@@ -31,8 +34,10 @@ get_header();
       <?php
       //TODO -- função para trazer esses dados
       // $videos = ["461", "421", "422"];
-      $videos = [];
-      polen_front_get_videos(polen_get_home_stories($videos), "Últimos vídeos gravados");
+      $orders_ids = Polen_Order_Module::get_orders_ids_by_campaign_and_status( 'lacta', Polen_Order::ORDER_STATUS_COMPLETED );
+      if( count( $orders_ids ) >= 4 ) {
+        polen_front_get_videos( polen_get_home_stories( $orders_ids ), "Últimos vídeos gravados" );
+      }
       ?>
     </div>
   </div>
