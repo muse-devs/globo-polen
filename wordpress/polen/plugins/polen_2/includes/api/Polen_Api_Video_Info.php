@@ -22,6 +22,8 @@ class Polen_Api_Video_Info
         $this->namespace = 'polen/v1';
         $this->resource_name = 'video-infos';
     }
+
+    
     public function register_routes()
     {
         register_rest_route( $this->namespace, '/' . $this->resource_name, array(
@@ -208,7 +210,7 @@ class Polen_Api_Video_Info
         $video_info = Polen_Video_Info::get_by_hash( $hash );
 
         if( empty( $video_info ) ) {
-            return rest_ensure_response( $video_info );
+            return new WP_REST_Response( $video_info, 404 );
         }
         
         $data = $this->prepare_item_for_response( $video_info, $request );
