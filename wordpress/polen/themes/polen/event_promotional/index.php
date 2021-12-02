@@ -37,13 +37,13 @@ get_header();
 
 
     <?php
-    $orders_ids = Polen_Order_Module::get_orders_ids_by_campaign_and_status( 'lacta', Polen_Order::ORDER_STATUS_COMPLETED );
+    $orders_ids = event_promotional_orders_ids_by_user_id_status( $product->get_id(), 'lacta', Polen_Order::ORDER_STATUS_COMPLETED );
     if( count( $orders_ids ) > 0 ) :
       polen_front_get_videos( polen_get_home_stories( $orders_ids ), "" );
     else :
     ?>
   <!-- Perfil -->
-	<div class="row"> -->
+	<div class="row">
     <div class="col-12 col-md-6 m-md-auto mt-3 d-flex flex-wrap justify-content-center lacta-profile">
       <figure class="image">
         <img loading="lazy" src="<?php echo $image_data["image"] ?>" alt="<?php echo $product->get_title(); ?>">
