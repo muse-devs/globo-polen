@@ -19,7 +19,7 @@ class Api_Routers
 
     function init_routers()
     {
-        $controller = new Api_Controller();
+        $controller = new Api_Controller( true );
         /**
          * ROTA: Listar Talentos
          *

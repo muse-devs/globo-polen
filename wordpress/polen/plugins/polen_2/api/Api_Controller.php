@@ -14,9 +14,11 @@ class Api_Controller{
 
     private $checkout;
 
-    public function __construct()
+    public function __construct( bool $static = false )
     {
-        $this->checkout = new Api_Checkout();
+        if( $static ) {
+            $this->checkout = new Api_Checkout();
+        }
     }
 
     /**
@@ -326,7 +328,7 @@ class Api_Controller{
      * 
      * @param Video_Info
      */
-    protected function create_item_video( $video )
+    public function create_item_video( $video )
     {
         $order = wc_get_order( $video->order_id );
         $cart_item = Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
