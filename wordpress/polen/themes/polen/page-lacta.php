@@ -35,7 +35,7 @@ get_header();
       //TODO -- função para trazer esses dados
       // $videos = ["461", "421", "422"];
       $orders_ids = Polen_Order_Module::get_orders_ids_by_campaign_and_status( 'lacta', Polen_Order::ORDER_STATUS_COMPLETED );
-      if( count( $orders_ids ) >= 1 ) {
+      if( count( $orders_ids ) >= 4 ) {
         polen_front_get_videos( polen_get_home_stories( $orders_ids ), "Últimos vídeos gravados" );
       }
       ?>
