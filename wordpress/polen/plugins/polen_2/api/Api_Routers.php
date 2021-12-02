@@ -56,7 +56,7 @@ class Api_Routers
          *
          * @param cupom Verificar cupom
          */
-        register_rest_route('v3', '/coupon', array(
+        register_rest_route($this->base, '/coupon', array(
             array(
                 'methods' => WP_REST_Server::READABLE,
                 'args' => array(
