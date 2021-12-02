@@ -40,7 +40,7 @@ get_header();
     $orders_ids = event_promotional_orders_ids_by_user_id_status( $product->get_id(), 'lacta', Polen_Order::ORDER_STATUS_COMPLETED );
     if( count( $orders_ids ) > 0 ) :
       shuffle( $orders_ids );
-      $orders_ids = array_slice( $orders_ids, 0, 4 );
+      $orders_ids = array_slice( $orders_ids, 0, 7 );
       polen_front_get_videos( polen_get_home_stories( $orders_ids ), "" );
     ?>
 
