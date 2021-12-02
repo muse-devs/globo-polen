@@ -78,7 +78,7 @@ class Polen {
         new Polen_Cupom_Create_Admin_Menu( true );
         new Polen_Forms();
         new Polen_Form_DB();
-        new Api();
+        new Api( true );
 
         //Endpoints Talent Logged
         $ctler = new Polen_Talent_Controller();

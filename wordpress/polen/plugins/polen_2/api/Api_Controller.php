@@ -25,7 +25,7 @@ class Api_Controller{
      * Retorar todos os talentos
      * @param WP_REST_Request $request
      */
-    public function talents( $request ): WP_REST_Response
+    public function get_talents( $request ): WP_REST_Response
     {
         try{
             $api_product = new Api_Product();

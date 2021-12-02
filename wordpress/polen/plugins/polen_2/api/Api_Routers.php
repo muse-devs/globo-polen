@@ -9,10 +9,12 @@ class Api_Routers
 
     protected $base;
 
-    public function __construct()
+    public function __construct( bool $static = false )
     {
         $this->base = 'polen/v1';
-        add_action('rest_api_init', [ $this, 'init_routers' ]);
+        if( $static ) {
+            add_action('rest_api_init', [ $this, 'init_routers' ]);
+        }
     }
 
     function init_routers()
@@ -39,7 +41,7 @@ class Api_Routers
         register_rest_route($this->base, '/talents', array(
             array(
                 'methods' => WP_REST_Server::READABLE,
-                'callback' => [$controller, 'talents'],
+                'callback' => [$controller, 'get_talents'],
                 'permission_callback' => '__return_true',
                 'args' => [
                     's' => [],
