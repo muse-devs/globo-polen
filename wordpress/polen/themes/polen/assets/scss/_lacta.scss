@@ -80,6 +80,21 @@
     text-align: center;
     width: 100%;
   }
+  &.mini {
+    .image {
+      margin: 0;
+      width: 48px;
+      height: 48px;
+    }
+    .name {
+      font-size: 16px;
+      line-height: 1.2;
+    }
+    .category {
+      font-size: 14px;
+      font-weight: 400;
+    }
+  }
 }
 
 .lacta-btn-disable {
