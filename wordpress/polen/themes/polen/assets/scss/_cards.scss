@@ -689,7 +689,7 @@
     }
     .click-to-donate {
       padding: 10px 20px;
-      background: #BAE174;
+      background: #8faf4a;
       text-transform: uppercase;
       font-size: 16px;
       color: #fff;
@@ -698,6 +698,7 @@
       margin-top: 20px;
       width: 200px;
       text-align: center;
+      box-shadow: 0px 2px 55px -27px rgba(0,0,0,0.75);
       @include media-breakpoint-down(sm) {
         font-size: 14px;
       }

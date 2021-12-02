@@ -26,149 +26,155 @@
 @function icon-char($filename) {
 	$char: "";
 
-	@if $filename == books {
+	@if $filename == arrow-down {
 		$char: "\E001";
 	}
-	@if $filename == calendar {
+	@if $filename == books {
 		$char: "\E002";
 	}
-	@if $filename == camera-video {
+	@if $filename == calendar {
 		$char: "\E003";
 	}
-	@if $filename == check-o {
+	@if $filename == camera-video {
 		$char: "\E004";
 	}
-	@if $filename == chevron-down {
+	@if $filename == check-o {
 		$char: "\E005";
 	}
-	@if $filename == clock {
+	@if $filename == chevron-down {
 		$char: "\E006";
 	}
-	@if $filename == close-o {
+	@if $filename == clock {
 		$char: "\E007";
 	}
-	@if $filename == close {
+	@if $filename == close-o {
 		$char: "\E008";
 	}
-	@if $filename == company {
+	@if $filename == close {
 		$char: "\E009";
 	}
-	@if $filename == copy {
+	@if $filename == company {
 		$char: "\E00A";
 	}
-	@if $filename == credit-card {
+	@if $filename == copy {
 		$char: "\E00B";
 	}
-	@if $filename == criesp {
+	@if $filename == credit-card {
 		$char: "\E00C";
 	}
-	@if $filename == donate {
+	@if $filename == criesp {
 		$char: "\E00D";
 	}
-	@if $filename == down-arrow {
+	@if $filename == donate {
 		$char: "\E00E";
 	}
-	@if $filename == download-alt {
+	@if $filename == down-arrow {
 		$char: "\E00F";
 	}
-	@if $filename == edit {
+	@if $filename == download-alt {
 		$char: "\E010";
 	}
-	@if $filename == error-o {
+	@if $filename == edit {
 		$char: "\E011";
 	}
-	@if $filename == error-outline {
+	@if $filename == error-o {
 		$char: "\E012";
 	}
-	@if $filename == facebook {
+	@if $filename == error-outline {
 		$char: "\E013";
 	}
-	@if $filename == filter {
+	@if $filename == facebook {
 		$char: "\E014";
 	}
-	@if $filename == hand-thumbs-up {
+	@if $filename == filter {
 		$char: "\E015";
 	}
-	@if $filename == instagram {
+	@if $filename == hand-thumbs-up {
 		$char: "\E016";
 	}
-	@if $filename == language {
+	@if $filename == instagram {
 		$char: "\E017";
 	}
-	@if $filename == left-arrow {
+	@if $filename == language {
 		$char: "\E018";
 	}
-	@if $filename == like {
+	@if $filename == left-arrow {
 		$char: "\E019";
 	}
-	@if $filename == linkedin {
+	@if $filename == like {
 		$char: "\E01A";
 	}
-	@if $filename == load {
+	@if $filename == linkedin {
 		$char: "\E01B";
 	}
-	@if $filename == menu {
+	@if $filename == load {
 		$char: "\E01C";
 	}
-	@if $filename == mobile {
+	@if $filename == menu {
 		$char: "\E01D";
 	}
-	@if $filename == no-photo {
+	@if $filename == mobile {
 		$char: "\E01E";
 	}
-	@if $filename == pages {
+	@if $filename == no-photo {
 		$char: "\E01F";
 	}
-	@if $filename == paypal {
+	@if $filename == pages {
 		$char: "\E020";
 	}
-	@if $filename == phone {
+	@if $filename == paypal {
 		$char: "\E021";
 	}
-	@if $filename == play {
+	@if $filename == phone {
 		$char: "\E022";
 	}
-	@if $filename == reload {
+	@if $filename == play {
 		$char: "\E023";
 	}
-	@if $filename == research {
+	@if $filename == reload {
 		$char: "\E024";
 	}
-	@if $filename == right-arrow {
+	@if $filename == research {
 		$char: "\E025";
 	}
-	@if $filename == search {
+	@if $filename == right-arrow {
 		$char: "\E026";
 	}
-	@if $filename == software-download {
+	@if $filename == search {
 		$char: "\E027";
 	}
-	@if $filename == star-fill {
+	@if $filename == share {
 		$char: "\E028";
 	}
-	@if $filename == star {
+	@if $filename == software-download {
 		$char: "\E029";
 	}
-	@if $filename == tiktok {
+	@if $filename == star-fill {
 		$char: "\E02A";
 	}
-	@if $filename == trash {
+	@if $filename == star {
 		$char: "\E02B";
 	}
-	@if $filename == twitter {
+	@if $filename == tiktok {
 		$char: "\E02C";
 	}
-	@if $filename == up-arrow {
+	@if $filename == trash {
 		$char: "\E02D";
 	}
-	@if $filename == video-camera {
+	@if $filename == twitter {
 		$char: "\E02E";
 	}
-	@if $filename == whatsapp {
+	@if $filename == up-arrow {
 		$char: "\E02F";
 	}
-	@if $filename == x-circle {
+	@if $filename == video-camera {
 		$char: "\E030";
+	}
+	@if $filename == whatsapp {
+		$char: "\E031";
+	}
+	@if $filename == x-circle {
+		$char: "\E032";
 	}
 
 	@return $char;
@@ -185,6 +191,9 @@
 	}
 }
 
+.icon-arrow-down {
+	@include icon(arrow-down);
+}
 .icon-books {
 	@include icon(books);
 }
@@ -298,6 +307,9 @@
 }
 .icon-search {
 	@include icon(search);
+}
+.icon-share {
+	@include icon(share);
 }
 .icon-software-download {
 	@include icon(software-download);
