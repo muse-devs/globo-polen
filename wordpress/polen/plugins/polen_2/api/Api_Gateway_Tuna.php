@@ -158,6 +158,11 @@ class Api_Gateway_Tuna
 
             $response = json_decode($api_response['body']);
             $new_status = $this->get_status_response($response->status);
+
+            if ($new_status === 'payment-approved' || $new_status === 'pending') {
+                wc_reduce_stock_levels($order_id);
+            }
+
             $response_message = $this->get_response_message($new_status);
 
             $customer_order->update_status($new_status);
@@ -179,7 +184,7 @@ class Api_Gateway_Tuna
      * @param $current_user
      * @return string
      */
-    public function get_session_id($current_user): string
+    public function get_session_id($current_user)
     {
         try {
             $url = $this->get_endpoint_url('Token/NewSession', true);
@@ -222,7 +227,7 @@ class Api_Gateway_Tuna
      * @param array $card
      * @return string
      */
-    public function generate_token_card(string $session_id, array $card): string
+    public function generate_token_card(string $session_id, array $card)
     {
         try {
             $url = $this->get_endpoint_url('Token/Generate', true);
@@ -232,7 +237,7 @@ class Api_Gateway_Tuna
             $body = [
                 "SessionId" => $session_id,
                 "Card" => [
-                    "CardNumber" => $card['tuna_card_number'],
+                    "CardNumber" => preg_replace("/[^0-9]/", '', $card['tuna_card_number']),
                     "CardHolderName" => $card['tuna_card_holder_name'],
                     "ExpirationMonth" => (int) $tuna_expiration_date[0],
                     "ExpirationYear" => (int) $tuna_expiration_date[1],
@@ -335,7 +340,7 @@ class Api_Gateway_Tuna
         $status_order = [
             'pending' => [
                 'message' => 'Pagamento pendente',
-                'status_code' => 204,
+                'status_code' => 200,
             ],
             'payment-approved' => [
                 'message' => 'Pagamento aprovado',
@@ -360,12 +365,13 @@ class Api_Gateway_Tuna
     private function credentials()
     {
         //TODO: Criar uma forma para deixar dinamico, talvez no REDUX
-        $this->partner_key = '1c714e17-60a8-4a2f-9222-e10c48713810';
-        $this->partner_account = 'polen-homolog';
-        $this->operation_mode = 'production';
 
-//        $this->partner_key = 'a3823a59-66bb-49e2-95eb-b47c447ec7a7';
-//        $this->partner_account = 'demo';
-//        $this->operation_mode = 'sandbox';
+//        $this->partner_key = '1c714e17-60a8-4a2f-9222-e10c48713810';
+//        $this->partner_account = 'polen-homolog';
+//        $this->operation_mode = 'production';
+
+        $this->partner_key = 'a3823a59-66bb-49e2-95eb-b47c447ec7a7';
+        $this->partner_account = 'demo';
+        $this->operation_mode = 'sandbox';
     }
 }

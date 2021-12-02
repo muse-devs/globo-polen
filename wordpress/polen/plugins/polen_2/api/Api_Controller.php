@@ -6,6 +6,7 @@ use Polen\Includes\Cart\Polen_Cart_Item_Factory;
 use Polen\Includes\Polen_Talent;
 use Polen\Includes\Polen_Video_Info;
 use WC_Order;
+use WC_Coupon;
 use WP_REST_Response;
 use WP_REST_Request;
 
@@ -213,6 +214,39 @@ class Api_Controller{
                 $e->getCode()
             );
         }
+    }
+
+    /**
+     * Endpoint para validação de cupom
+     *
+     * @param $request
+     */
+    public function check_coupon($request)
+    {
+        $coupon_code = $request->get_param('coupon_code');
+        $value_cart = $request->get_param('cart_value');
+
+        if (empty($coupon_code)) {
+            return api_response('Cupom obrigatorio', 422);
+        }
+
+        if (empty($value_cart)) {
+            return api_response('Valor atual do carrinho é obrigatório', 422);
+        }
+
+        $this->checkout->coupon_rules($coupon_code);
+
+        $coupon = new WC_Coupon($coupon_code);
+
+        $value_discount = $coupon->get_discount_amount($value_cart);
+
+        $response = [
+            'discounted_amount' => $value_cart - $value_discount,
+            'discount_amount' => (int) $coupon->get_amount(),
+            'discount_type' => $coupon->get_discount_type(),
+        ];
+
+        return api_response($response);
     }
 
     /**

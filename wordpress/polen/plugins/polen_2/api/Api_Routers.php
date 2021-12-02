@@ -52,6 +52,22 @@ class Api_Routers
         ));
 
         /**
+         * ROTA: Verificar cupom
+         *
+         * @param cupom Verificar cupom
+         */
+        register_rest_route('v3', '/coupon', array(
+            array(
+                'methods' => WP_REST_Server::READABLE,
+                'args' => array(
+                    'coupon' => [],
+                ),
+                'callback' => [$controller, 'check_coupon'],
+                'permission_callback' => '__return_true',
+            )
+        ));
+
+        /**
          * ROTA: Descrição do talento
          *
          * @param slug slug do talento (required)
