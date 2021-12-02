@@ -19,7 +19,7 @@ class Polen_Api_Video_Info
 
     public function __construct()
     {
-        $this->namespace = 'polen-api/v1';
+        $this->namespace = 'polen/v1';
         $this->resource_name = 'video-infos';
     }
     public function register_routes()
