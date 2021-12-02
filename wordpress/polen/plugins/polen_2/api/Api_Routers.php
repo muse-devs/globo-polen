@@ -10,7 +10,7 @@ class Api_Routers
 
     public function __construct()
     {
-        $this->base = 'v3';
+        $this->base = 'polen/v1';
         add_action('rest_api_init', [ $this, 'init_routers' ]);
     }
 

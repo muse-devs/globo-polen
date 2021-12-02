@@ -2,7 +2,6 @@
 namespace Polen\Api;
 
 use Exception;
-use Polen\Includes\API\Polen_Api_Video_Info;
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
 use Polen\Includes\Polen_Talent;
 use Polen\Includes\Polen_Video_Info;
