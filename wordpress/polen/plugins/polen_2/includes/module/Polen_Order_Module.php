@@ -52,7 +52,7 @@ class Polen_Order_Module
     {
         $orders_query = new WC_Order_Query([
             'return' => 'ids',
-            'limit' => 3,
+            'limit' => 10,
             'paginate' => true,
             'status' => [ $order_status ],
             'meta_key' => Polen_Admin_Event_Promotional_Event_Fields::FIELD_NAME_SLUG_CAMPAIGN,
