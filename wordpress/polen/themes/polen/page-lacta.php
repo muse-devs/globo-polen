@@ -6,7 +6,7 @@ use Polen\Includes\Module\Polen_Order_Module;
 use Polen\Includes\Polen_Order;
 
 // $talents = polen_get_talents_by_campaignn('lacta');
-$talents = array_chunk(polen_get_talents_by_campaignn('lacta'), 8);
+$talents = polen_get_talents_by_campaignn('lacta');
 
 get_header();
 ?>
@@ -43,9 +43,8 @@ get_header();
   </div>
   <?php getTutorialLacta(); ?>
   <?php
-  polen_front_get_news($talents[0], null, null, false, "lacta");
+  polen_front_get_news($talents, null, null, false, "lacta");
   polen_get_lacta_banner_2("https://www.lacta.com.br");
-  polen_front_get_news($talents[1], null, null, false, "lacta");
   ?>
   <?php
   while (have_posts()) :

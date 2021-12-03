@@ -26,7 +26,7 @@ get_header();
 <main id="primary" class="site-main">
 
   <!-- Botão de Voltar -->
-  <div class="row">
+  <div class="row mb-4">
     <div class="col-12 col-md-6 m-md-auto d-md-none">
       <a href="<?php echo get_home_url()."/lacta"; ?>">
         <div class="go-back-button">
@@ -45,8 +45,8 @@ get_header();
     ?>
 
   <!-- Perfil -->
-	<div class="row">
-    <div class="col-12 col-md-6 m-md-auto mt-3 d-flex flex-wrap justify-content-left lacta-profile mini">
+	<div class="row mb-4">
+    <div class="col-12 col-md-6 m-md-auto d-flex flex-wrap justify-content-left lacta-profile mini">
       <figure class="image">
         <img loading="lazy" src="<?php echo $image_data["image"] ?>" alt="<?php echo $product->get_title(); ?>">
       </figure>
@@ -60,9 +60,9 @@ get_header();
   <?php else : ?>
 
   <!-- Perfil -->
-	<div class="row">
-    <div class="col-12 col-md-6 m-md-auto mt-3 d-flex flex-wrap justify-content-center lacta-profile">
-      <figure class="image">
+	<div class="row mb-5">
+    <div class="col-12 col-md-6 m-md-auto d-flex flex-wrap justify-content-center lacta-profile">
+      <figure class="image mb-4">
         <img loading="lazy" src="<?php echo $image_data["image"] ?>" alt="<?php echo $product->get_title(); ?>">
       </figure>
       <h2><?php echo $product->get_title(); ?></h2>
@@ -72,8 +72,8 @@ get_header();
   <?php endif; ?>
 
   <!-- Botão de adicionar ao carrinho -->
-	<div class="row mt-4 talent-page-footer">
-		<div class="col-12 col-md-6 m-md-auto pb-3 event-lacta">
+	<div class="row mb-5 talent-page-footer">
+		<div class="col-12 col-md-6 m-md-auto event-lacta">
 			<?php if($has_stock) : ?>
         <div class="btn-buy-b2b">
           <a href="<?php echo event_promotional_url_code_validation( $product ); ?>">
@@ -94,7 +94,7 @@ get_header();
 	</div>
 
   <!-- Bio -->
-	<div class="row mt-4">
+	<div class="row mb-5">
 		<div class="col-12 col-md-6 m-md-auto d-flex">
       <div class="lacta-bio">
         <h5>Sobre o vídeo de <?php echo $product->get_title(); ?></h5>
@@ -107,15 +107,15 @@ get_header();
 	</div>
 
   <!-- Instruções -->
-  <div class="row mt-4">
+  <div class="row mb-5">
 		<div class="col-12 col-md-6 m-md-auto event-lacta">
       <?php get_lacta_insctruction($product); ?>
 		</div>
 	</div>
 
   <!-- Banner -->
-  <div class="row my-4">
-    <div class="col-12 col-md-6 m-md-auto mb-4">
+  <div class="row mb-4">
+    <div class="col-12 col-md-6 m-md-auto">
       <div class="lacta-wrapper">
         <div class="lacta-carousel">
           <img src="<?php echo TEMPLATE_URI . '/assets/img/lacta/banner-1.jpg'; ?>" alt="Banner Lacta" style="width: 100%">
