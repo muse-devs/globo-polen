@@ -221,5 +221,14 @@ class Api_Routers
             ),
             'schema' => array( $polen_api_videos, 'get_item_schema' )
         ) );
+
+        register_rest_route( $this->base, '/videos/hash/(?P<id>[\d]+)/download', array(
+            array(
+                'methods' => WP_REST_Server::READABLE,
+                'callback' => array( $api_video, 'get_download_link_by_hash' ),
+                'permission_callback' => '__return_true',
+            ),
+            'schema' => array( $polen_api_videos, 'get_item_schema' )
+        ) );
     }
 }
