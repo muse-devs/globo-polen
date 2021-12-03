@@ -167,12 +167,16 @@
 			.item {
 				min-height: 60px;
 			}
+      .text {
+        padding-left: 45px;
+      }
 			.status {
 				display: flex;
 				align-items: center;
         justify-content: center;
 				font-weight: 700;
 				font-size: 12px;
+        margin-top: 8px;
 				color: var(--light);
 				border-color: var(--primary);
 				background-color: var(--primary);

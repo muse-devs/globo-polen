@@ -1,6 +1,7 @@
 <?php
 
 use \Polen\Includes\Cart\Polen_Cart_Item_Factory;
+use Polen\Includes\Module\Polen_Order_Module;
 
 if (isset($_REQUEST['order_id']) && !empty($_REQUEST['order_id'])) {
     $min = get_assets_folder();
@@ -10,8 +11,9 @@ if (isset($_REQUEST['order_id']) && !empty($_REQUEST['order_id'])) {
 
     $order_id = filter_input(INPUT_GET, 'order_id');
     $order = wc_get_order($order_id);
-    $polen_order = Polen_Cart_Item_Factory::polen_cart_item_from_order($order);
-    $instruction = $polen_order->get_instructions_to_video();
+    $item_cart = Polen_Cart_Item_Factory::polen_cart_item_from_order($order);
+    $instruction = $item_cart->get_instructions_to_video();
+    $polen_order = new Polen_Order_Module( $order );
 ?>
 
     <script>
@@ -34,10 +36,10 @@ if (isset($_REQUEST['order_id']) && !empty($_REQUEST['order_id'])) {
             <div class="col-12 talent-order-modal">
                 <div class="row d-flex align-items-center">
                     <?php
-                    if (!empty($polen_order->get_offered_by())) : ?>
+                    if ( $polen_order->get_video_to() === Polen_Order_Module::VIDEO_TO_OTHER_ONE ) : ?>
                         <div class="col-6">
                             <p class="p">Vídeo de</p>
-                            <span class="value small"><?= $polen_order->get_offered_by(); ?></span>
+                            <span class="value small"><?= $item_cart->get_offered_by(); ?></span>
                         </div>
                     <?php endif; ?>
                     <div class="col-6 mt-3">
@@ -48,7 +50,7 @@ if (isset($_REQUEST['order_id']) && !empty($_REQUEST['order_id'])) {
                 <div class="row mt-4">
                     <div class="col">
                         <p class="p">Ocasião</p>
-                        <span class="value small"><?= $polen_order->get_video_category(); ?></span>
+                        <span class="value small"><?= $item_cart->get_video_category(); ?></span>
                     </div>
                 </div>
                 <div class="row mt-4">
