@@ -87,6 +87,10 @@ class Api_Checkout{
             $this->add_meta_to_order($order_woo->id, $data);
             $payment = $tuna->process_payment($order_woo->id, $user->data, $fields);
 
+            if ($payment['order_status'] != 200) {
+                throw new Exception($payment['message']);
+            }
+
             wp_send_json_success($payment);
 
         } catch (\Exception $e) {
