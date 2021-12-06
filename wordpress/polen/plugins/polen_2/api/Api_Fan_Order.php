@@ -4,6 +4,7 @@ namespace Polen\Api;
 use Order_Class;
 use Polen\Includes\Debug;
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
+use Polen\Includes\Polen_Order_Review;
 use WP_REST_Response;
 
 class Api_Fan_Order
@@ -16,8 +17,6 @@ class Api_Fan_Order
     public function get_items( $request )
     {
         $params = $request->get_params();
-        // $per_page = $params['per_page'] ?? get_option('posts_per_page');
-        // $paged = $params['paged'] ?? 1;
 
 		$customer_orders = $this->get_orders_by_user_logged( get_current_user_id(), $params );
         $new_orders = [];
@@ -33,7 +32,7 @@ class Api_Fan_Order
             'current_page' => $request->get_param('paged') ?? 1,
             'per_page' => 10,
         );
-        wp_send_json_success( $data );
+        return api_response( $data );
         // return $customer_orders;
     }
 
@@ -64,21 +63,60 @@ class Api_Fan_Order
         $order_response = $this->prepare_item_for_response( $order, $request );
         $order_response[ 'status_flow' ] = $this->get_status_flow( $order );
 
-        wp_send_json_success( $order_response );
-        wp_die();
-        // return new WP_REST_Response( $order_response, 200 );
+        return api_response( $order_response );
     }
 
 
-    //TODO: Verificar se a order é do usuário logado
-    protected function verify_order_belongs_user_logged( $order )
+    /**
+     * Criar um OrderReview com o usuário logado
+     * 
+     */
+    public function create_order_review( \WP_REST_Request $request )
     {
-        return true;
+
+        $user_id  = get_current_user_id();
+        $rate     = filter_var( $request->get_param( 'rate' )    , FILTER_SANITIZE_NUMBER_INT );
+        $comment  = filter_var( $request->get_param( 'comment' ), FILTER_SANITIZE_STRING );
+        $order_id = filter_var( $request->get_param( 'order_id' ), FILTER_SANITIZE_NUMBER_INT );
+        $approved = '0';
+
+        try {
+            $order = wc_get_order( $order_id );
+            $cart_item = Polen_Cart_Item_Factory::polen_cart_item_from_order($order);
+            $talent_id = $cart_item->get_talent_id();
+        
+            $order_review = new Polen_Order_Review();
+            $order_review->set_user_id( $user_id );
+            $order_review->set_comment_karma( $rate );
+            $order_review->set_rate( $rate );
+            $order_review->set_comment_content( $comment );
+            $order_review->set_order_id( $order_id );
+            $order_review->set_comment_approved( $approved );
+            $order_review->set_talent_id( $talent_id );
+
+            $order_review->save();
+            
+            return api_response( 'Comentário criado com sucesso. Em análise', 201 );
+        } catch ( \Exception $e ) {
+            return api_response( $e->getMessage(), $e->getCode() );
+        }
     }
 
 
     /**
      * 
+     */
+    protected function verify_order_belongs_user_logged( $order )
+    {
+        if( $order->get_customer_id() === wp_get_current_user() ) {
+            return true;
+        }
+        return false;
+    }
+
+
+    /**
+     * Pega as orders de um usuário.
      */
     private function get_orders_by_user_logged( $user_id, $param )
     {
@@ -179,7 +217,9 @@ class Api_Fan_Order
         return $product->get_sku();
     }
 
-
+    /**
+     * 
+     */
     public function check_permission_get_items( $request )
     {
         if( 0 == get_current_user_id() || empty( get_current_user_id() ) ) {
@@ -188,6 +228,9 @@ class Api_Fan_Order
         return true;
     }
 
+    /**
+     * 
+     */
     public function check_permission_get_item( $request )
     {
         $order_id = $request[ 'id' ];
