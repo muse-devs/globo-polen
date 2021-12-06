@@ -23,7 +23,7 @@ class Api_Video
             return new WP_REST_Response( $video_info, 404 );
         }
         $polen_api_video_info = new Api_Controller();
-        $data = $polen_api_video_info->create_item_video( $video_info );
+        $data = $polen_api_video_info->propare_item_video( $video_info );
 
         return rest_ensure_response( $data );
     }

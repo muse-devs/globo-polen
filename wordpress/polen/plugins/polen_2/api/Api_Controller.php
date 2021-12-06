@@ -318,7 +318,7 @@ class Api_Controller{
 
         $data = [];
         foreach( $videos as $video ) {
-            $data[] = $this->create_item_video( $video );
+            $data[] = $this->propare_item_video( $video );
         }
         return api_response( $data, 200 );
     }
@@ -328,7 +328,7 @@ class Api_Controller{
      * 
      * @param Video_Info
      */
-    public function create_item_video( $video )
+    public function propare_item_video( $video )
     {
         $order = wc_get_order( $video->order_id );
         $cart_item = Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
@@ -340,6 +340,7 @@ class Api_Controller{
             'vimeo_id'         => $video->vimeo_id,
             'hash'             => $video->hash,
             'talent_thumb'     => polen_get_avatar_src( $video->talent_id, 'polen-square-crop-lg' ),
+            'talent_slug'      => $product->get_sku(),
             'talent_name'      => $product->get_title(),
             'talent_category'  => $categories,
             'cover'            => $video->vimeo_thumbnail,
