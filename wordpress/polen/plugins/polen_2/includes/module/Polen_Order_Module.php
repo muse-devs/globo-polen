@@ -60,7 +60,7 @@ class Polen_Order_Module
 
     public function get_name_to_video()
     {
-        if( self::VIDEO_TO_OTHER_ONE === $this->get_video_to() ) {
+        if( self::VIDEO_TO_OTHER_ONE === $this->get_video_to() || $this->get_is_campaign() ) {
             return $this->cart_item->get_name_to_video();
         }
         return $this->cart_item->get_offered_by();
