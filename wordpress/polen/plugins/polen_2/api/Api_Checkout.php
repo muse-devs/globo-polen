@@ -85,7 +85,9 @@ class Api_Checkout{
 
             $order_woo = $this->order_payment_woocommerce($user, $fields['product_id'], $coupon);
             $this->add_meta_to_order($order_woo->id, $data);
-            $tuna->process_payment($order_woo->id, $user->data, $fields);
+            $payment = $tuna->process_payment($order_woo->id, $user->data, $fields);
+
+            wp_send_json_success($payment);
 
         } catch (\Exception $e) {
             wp_send_json_error($e->getMessage(), 422);
@@ -272,9 +274,9 @@ class Api_Checkout{
         wc_add_order_item_meta($order_item_id, '_fee_amount', 0, true);
         wc_add_order_item_meta($order_item_id, '_line_total', 0, true);
 
-        $interval  = Polen_Order::get_interval_order_event();
-        $timestamp = Polen_Order::get_deadline_timestamp_by_social_event($order, $interval);
-        $order->add_meta_data(Polen_Order::META_KEY_DEADLINE, $timestamp, true );
+//        $interval  = Polen_Order::get_interval_order_event();
+//        $timestamp = Polen_Order::get_deadline_timestamp_by_social_event($order, $interval);
+//        $order->add_meta_data(Polen_Order::META_KEY_DEADLINE, $timestamp, true );
 
         $order->save();
     }
