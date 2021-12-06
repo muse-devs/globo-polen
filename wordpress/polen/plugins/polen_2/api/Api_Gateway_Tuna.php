@@ -167,7 +167,12 @@ class Api_Gateway_Tuna
 
             $customer_order->update_status($new_status);
 
-            return api_response($response_message['message'], $response_message['status_code']);
+            $data = [
+                'message' => $response_message['message'],
+                'order_id' => $order_id,
+            ];
+
+            return api_response($data, $response_message['status_code']);
 
         } catch (\Exception $e) {
             return api_response(
