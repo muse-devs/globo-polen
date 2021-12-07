@@ -188,7 +188,7 @@ class Api_Routers
                 'permission_callback' => [ $api_fan_order, 'check_permission_get_item' ],
             )
         ));
-        register_rest_route($this->base, '/fan/orders/(?P<id>[\d]+)', array(
+        register_rest_route($this->base, '/fan/orders/(?P<id>[\d]+)/reviews', array(
             array(
                 'methods' => WP_REST_Server::CREATABLE,
                 'args' => array(

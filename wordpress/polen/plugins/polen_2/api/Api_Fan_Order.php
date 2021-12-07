@@ -1,6 +1,7 @@
 <?php
 namespace Polen\Api;
 
+use Exception;
 use Order_Class;
 use Polen\Includes\Debug;
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
@@ -77,10 +78,13 @@ class Api_Fan_Order
         $user_id  = get_current_user_id();
         $rate     = filter_var( $request->get_param( 'rate' )    , FILTER_SANITIZE_NUMBER_INT );
         $comment  = filter_var( $request->get_param( 'comment' ), FILTER_SANITIZE_STRING );
-        $order_id = filter_var( $request->get_param( 'order_id' ), FILTER_SANITIZE_NUMBER_INT );
+        $order_id = filter_var( $request[ 'id' ], FILTER_SANITIZE_NUMBER_INT );
         $approved = '0';
 
         try {
+            if( empty( $rate ) ) {
+                throw new Exception( 'A nota é obrigatória', 401 );
+            }
             $order = wc_get_order( $order_id );
             $cart_item = Polen_Cart_Item_Factory::polen_cart_item_from_order($order);
             $talent_id = $cart_item->get_talent_id();
