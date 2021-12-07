@@ -261,9 +261,6 @@ var Zuck = (function (t) {
                                             "\n\n                    "
                                         )
                                         .concat(
-                                            '<div class="mark-water"><img class="img-responsive polen-mw" src="'+polenObj.base_url+'/polen/themes/polen/assets/img/logo.png" style="margin-left: auto;" /></div>'
-                                        )
-                                        .concat(
                                             i(n, "link")
                                                 ? '<a class="tip link" href="'
                                                       .concat(i(n, "link"), '">\n                            ')

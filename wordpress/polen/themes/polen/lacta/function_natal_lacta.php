@@ -10,6 +10,8 @@ function polen_get_talents_by_campaignn(string $campaignn): array
     $args = array(
         'post_type' => 'product',
         'post_status' => 'private',
+        'orderby' => 'title',
+        'order' => 'ASC',
         'tax_query' => array(
             array(
                'taxonomy' => 'campaigns',
