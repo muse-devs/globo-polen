@@ -239,7 +239,11 @@ class Api_Checkout{
             'phone' => 'Celular/Telefone',
             'cpf' => 'CPF',
             'instruction' => 'Instrução',
-            'product_id' => 'ID do Produto é obrigatório',
+            'video_to' =>  'Endereçamento do vídeo',
+            'video_category' => 'Categoria do vídeo',
+            'name_to_video' => 'Nome de quem receberá o vídeo',
+            'allow_video_on_page' => 'Configuração de exibição',
+            'product_id' => 'ID do Produto',
         ];
     }
 
@@ -250,37 +254,40 @@ class Api_Checkout{
      * @param array $data
      * @throws Exception
      */
-    private function add_meta_to_order(int $order_id, array $data): void
+    private function add_meta_to_order(int $order_id, array $data)
     {
         $order = wc_get_order($order_id);
         $email = $data['email'];
+        $status = $data['allow_video_on_page'] ? 'on' : false;
         $product = wc_get_product($data['product_id']);
 
         $order->update_meta_data('_polen_customer_email', $email);
-        $order->add_meta_data(self::ORDER_METAKEY, 'galo', true);
+        $order->add_meta_data(self::ORDER_METAKEY, 'polen_galo', true);
+
+        $order_item_id = wc_add_order_item($order_id, array(
+            'order_item_name' => $product->get_title(),
+            'order_item_type' => 'line_item', // product
+        ));
 
         $quantity = 1;
-        $order_item_id = $order->add_product($product, $quantity);
+        // $order_item_id = $order->add_product($product, $quantity);
 
         wc_add_order_item_meta($order_item_id, '_qty', $quantity, true);
-        wc_add_order_item_meta($order_item_id, '_product_id', $product->get_id(), true);
-        wc_add_order_item_meta($order_item_id, '_line_subtotal', '0', true);
-        wc_add_order_item_meta($order_item_id, '_line_total', '0', true);
-        wc_add_order_item_meta($order_item_id, 'offered_by', '', true);
-
-        wc_add_order_item_meta($order_item_id, 'video_to', 'to_myself', true);
-        wc_add_order_item_meta($order_item_id, 'name_to_video', $data['name'], true);
-        wc_add_order_item_meta($order_item_id, 'email_to_video', $email, true);
-        wc_add_order_item_meta($order_item_id, 'video_category', 'Vídeo-Autógrafo', true);
-        wc_add_order_item_meta($order_item_id, 'instructions_to_video', $data['instruction'], true);
-
-        wc_add_order_item_meta($order_item_id, 'allow_video_on_page', 'on', true);
-        wc_add_order_item_meta($order_item_id, '_fee_amount', 0, true);
+        // wc_add_order_item_meta($order_item_id, '_product_id', $product->get_id(), true);
+        wc_add_order_item_meta($order_item_id, '_line_subtotal', 0, true);
         wc_add_order_item_meta($order_item_id, '_line_total', 0, true);
+        wc_add_order_item_meta($order_item_id, 'offered_by', $data['name'], true);
+        wc_add_order_item_meta($order_item_id, 'video_to', $data['video_to'], true);
+        wc_add_order_item_meta($order_item_id, 'name_to_video', $data['name_to_video'], true);
+        wc_add_order_item_meta($order_item_id, 'email_to_video', $email, true);
+        wc_add_order_item_meta($order_item_id, 'video_category', $data['video_category'], true);
+        wc_add_order_item_meta($order_item_id, 'instructions_to_video', $data['instruction'], true);
+        wc_add_order_item_meta($order_item_id, 'allow_video_on_page', $status, true);
 
-//        $interval  = Polen_Order::get_interval_order_event();
-//        $timestamp = Polen_Order::get_deadline_timestamp_by_social_event($order, $interval);
-//        $order->add_meta_data(Polen_Order::META_KEY_DEADLINE, $timestamp, true );
+        $interval = Polen_Order::get_interval_order_basic();
+        $timestamp = Polen_Order::get_deadline_timestamp($order, $interval);
+        Polen_Order::save_deadline_timestamp_in_order($order, $timestamp);
+        $order->add_meta_data(Polen_Order::META_KEY_DEADLINE, $timestamp, true);
 
         $order->save();
     }
