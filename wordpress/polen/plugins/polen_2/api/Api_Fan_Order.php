@@ -77,8 +77,8 @@ class Api_Fan_Order extends Api_Order
 
         $user_id  = get_current_user_id();
         $rate     = filter_var( $request->get_param( 'rate' )    , FILTER_SANITIZE_NUMBER_INT );
-        $comment  = filter_var( $request->get_param( 'comment' ), FILTER_SANITIZE_STRING );
-        $order_id = filter_var( $request[ 'id' ], FILTER_SANITIZE_NUMBER_INT );
+        $comment  = filter_var( $request->get_param( 'comment' ) , FILTER_SANITIZE_STRING );
+        $order_id = filter_var( $request[ 'id' ]                 , FILTER_SANITIZE_NUMBER_INT );
         $approved = '0';
 
         try {
