@@ -200,6 +200,24 @@ class Api_Routers
         ));
 
 
+        /** ********************************
+         * Orders Endpoints
+         */
+        $api_order = new Api_Order();
+        register_rest_route($this->base, '/orders/(?P<id>[\d]+)/flow', array(
+            array(
+                'methods' => WP_REST_Server::READABLE,
+                'args' => array(
+                    'id' => [],
+                ),
+                'callback' => [ $api_order, 'get_flow_by_order' ],
+                'permission_callback' => '__return_true',
+            )
+        ));
+
+
+
+
         /**
          * Endpoint de cadastro de usuário
          */

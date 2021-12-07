@@ -8,7 +8,7 @@ use Polen\Includes\Cart\Polen_Cart_Item_Factory;
 use Polen\Includes\Polen_Order_Review;
 use WP_REST_Response;
 
-class Api_Fan_Order
+class Api_Fan_Order extends Api_Order
 {
 
     /**
@@ -191,19 +191,6 @@ class Api_Fan_Order
             return '';
         }
         return $product->get_title();
-    }
-
-
-    /**
-     * 
-     * @param WC_Order
-     */
-    protected function get_status_flow( \WC_Order $order )
-    {
-        $order_id = $order->get_id();
-        $order_status = $order->get_status();
-        $email_billing = $order->get_billing_email();
-        return Order_Class::polen_get_order_flow_obj( $order_id, $order_status, $email_billing );
     }
 
 
