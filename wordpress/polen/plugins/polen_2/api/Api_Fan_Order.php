@@ -6,6 +6,7 @@ use Order_Class;
 use Polen\Includes\Debug;
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
 use Polen\Includes\Polen_Order_Review;
+use Polen\Includes\Polen_Video_Info;
 use WP_REST_Response;
 
 class Api_Fan_Order extends Api_Order
@@ -46,19 +47,16 @@ class Api_Fan_Order extends Api_Order
     {
         $order_id = intval( $request[ 'id' ] );
         if( empty( $order_id ) ) {
-            wp_send_json_error( 'Compra inválida', 404 );
-            wp_die();
+            return api_response( 'Order_ID inválida', 404 );
         }
 
         $order = wc_get_order( $order_id );
         if( empty( $order ) ) {
-            wp_send_json_error( 'Compra inválida', 404 );
-            wp_die();
+            return api_response( 'Order inválida', 404 );
         }
 
         if( !$this->verify_order_belongs_user_logged( $order ) ) {
-            wp_send_json_error( 'Compra inválida', 404 );
-            wp_die();
+            return api_response( 'Compra não é do usuário', 404 );
         }
 
         $order_response = $this->prepare_item_for_response( $order, $request );
@@ -112,7 +110,7 @@ class Api_Fan_Order extends Api_Order
      */
     protected function verify_order_belongs_user_logged( $order )
     {
-        if( $order->get_customer_id() === wp_get_current_user() ) {
+        if( $order->get_customer_id() === get_current_user_id() ) {
             return true;
         }
         return false;
@@ -158,6 +156,12 @@ class Api_Fan_Order extends Api_Order
         $post_data[ 'order_status_name' ]     = wc_get_order_status_name( $order->get_status() );
         $post_data[ 'price' ]                 = $order->calculate_totals();
         $post_data[ 'data' ]                  = $order->get_date_created()->date('d/m/Y');
+        $post_data[ 'video_hash' ]            = '';
+
+        $video_info = Polen_Video_Info::get_by_order_id( $order->get_id() );
+        if( !empty( $video_info ) ) {
+            $post_data[ 'video_hash' ] = $video_info->hash;
+        }
 
         return $post_data;
     }
