@@ -188,6 +188,34 @@ class Api_Routers
                 'permission_callback' => [ $api_fan_order, 'check_permission_get_item' ],
             )
         ));
+        register_rest_route($this->base, '/fan/orders/(?P<id>[\d]+)/reviews', array(
+            array(
+                'methods' => WP_REST_Server::CREATABLE,
+                'args' => array(
+                    'id' => [],
+                ),
+                'callback' => [ $api_fan_order, 'create_order_review' ],
+                'permission_callback' => [ $api_fan_order, 'check_permission_get_item' ],
+            )
+        ));
+
+
+        /** ********************************
+         * Orders Endpoints
+         */
+        $api_order = new Api_Order();
+        register_rest_route($this->base, '/orders/(?P<id>[\d]+)/flow', array(
+            array(
+                'methods' => WP_REST_Server::READABLE,
+                'args' => array(
+                    'id' => [],
+                ),
+                'callback' => [ $api_order, 'get_flow_by_order' ],
+                'permission_callback' => '__return_true',
+            )
+        ));
+
+
 
 
         /**
