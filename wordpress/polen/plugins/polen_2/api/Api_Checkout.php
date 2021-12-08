@@ -153,9 +153,9 @@ class Api_Checkout
     /**
      * Criar uma order no woocommerce
      *
-     * @param $user
-     * @param $product_id
-     * @param null $coupon
+     * @param WP_User $user
+     * @param int $product_id
+     * @param string $coupon
      */
     public function order_payment_woocommerce($user, $product_id, $coupon = null)
     {
@@ -163,6 +163,9 @@ class Api_Checkout
             'payment_method' => 'tuna_payment',
             'payment_method_title' => 'API TUNA',
             'set_paid' => false,
+            'customer_id'   => $user->ID,
+            'customer_note' => 'created by api rest',
+            'created_via'   => 'checkout_rest_api',
             'billing' => [
                 'first_name' => $user->display_name,
                 'country' => get_user_meta($user->ID, 'billing_country', true),
