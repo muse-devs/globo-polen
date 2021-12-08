@@ -21,13 +21,14 @@ class Api_Checkout
     {
         $this->auth();
     }
-    // TODO: Criar campo no redux para gerenciar essas chaves
+
     public function auth()
     {
+        global $Polen_Plugin_Settings;
         $this->woocommerce = new Client(
             site_url(),
-            'ck_58c13313d131b1f4d68cf59f9bf318078e2681af',
-            'cs_6cde6f9554eb2a668a160695779be5071064b681',
+            $Polen_Plugin_Settings['polen_api_rest_cosumer_key'],
+            $Polen_Plugin_Settings['polen_api_rest_cosumer_secret'],
             [
                 'wp_api' => true,
                 'version' => 'wc/v3'
@@ -177,12 +178,7 @@ class Api_Checkout
                     'quantity' => 1,
                 ],
             ],
-            // 'shipping_lines' => [
-            //     [
-            //         'method_id' => 'tuna_payment',
-            //         'method_title' => 'Cartão de Crédito',
-            //     ]
-            // ],
+
         ];
 
         if ($coupon !== null ) {
