@@ -83,9 +83,15 @@ class Api_Checkout{
                 $coupon = sanitize_text_field($fields['coupon']);
             }
 
-            $order_woo = $this->order_payment_woocommerce($user, $fields['product_id'], $coupon);
+            $order_woo = $this->order_payment_woocommerce($user['user_object']->data, $fields['product_id'], $coupon);
             $this->add_meta_to_order($order_woo->id, $data);
-            $tuna->process_payment($order_woo->id, $user->data, $fields);
+            $payment = $tuna->process_payment($order_woo->id, $user, $fields);
+
+            if ($payment['order_status'] != 200) {
+                throw new Exception($payment['message']);
+            }
+
+            wp_send_json_success($payment);
 
         } catch (\Exception $e) {
             wp_send_json_error($e->getMessage(), 422);
@@ -99,7 +105,7 @@ class Api_Checkout{
      * @param array $data
      * @return \WP_User
      */
-    private function create_new_user(array $data): \WP_User
+    private function create_new_user(array $data): array
     {
         $userdata = array(
             'user_login' => $data['email'],
@@ -111,10 +117,12 @@ class Api_Checkout{
         );
 
         $userId = wp_insert_user($userdata);
-        $user = get_user_by('id', $userId);
+        $user['user_object'] = get_user_by('id', $userId);
+        $user['new_account'] = true;
 
-        if (empty($user)) {
-            $user = get_user_by('login', $data['email']);
+        if (empty($user['user_object'])) {
+            $user['new_account'] = false;
+            $user['user_object'] = get_user_by('login', $data['email']);
         }
 
         $address = array(
@@ -126,7 +134,7 @@ class Api_Checkout{
         );
 
         foreach ($address as $key => $value) {
-            update_user_meta($user->ID, $key, $value);
+            update_user_meta($user['user_object']->ID, $key, $value);
         }
 
         return $user;
@@ -146,7 +154,7 @@ class Api_Checkout{
             'payment_method_title' => 'API TUNA',
             'set_paid' => false,
             'billing' => [
-                'first_name' => $user->first_name,
+                'first_name' => $user->display_name,
                 'country' => get_user_meta($user->ID, 'billing_country', true),
                 'email' => $user->user_email,
                 'phone' => get_user_meta($user->ID, 'billing_cellphone', true),
@@ -233,7 +241,11 @@ class Api_Checkout{
             'phone' => 'Celular/Telefone',
             'cpf' => 'CPF',
             'instruction' => 'Instrução',
-            'product_id' => 'ID do Produto é obrigatório',
+            'video_to' =>  'Endereçamento do vídeo',
+            'video_category' => 'Categoria do vídeo',
+            'name_to_video' => 'Nome de quem receberá o vídeo',
+            'allow_video_on_page' => 'Configuração de exibição',
+            'product_id' => 'ID do Produto',
         ];
     }
 
@@ -244,37 +256,36 @@ class Api_Checkout{
      * @param array $data
      * @throws Exception
      */
-    private function add_meta_to_order(int $order_id, array $data): void
+    private function add_meta_to_order(int $order_id, array $data)
     {
         $order = wc_get_order($order_id);
         $email = $data['email'];
+        $status = $data['allow_video_on_page'] ? 'on' : false;
         $product = wc_get_product($data['product_id']);
 
         $order->update_meta_data('_polen_customer_email', $email);
-        $order->add_meta_data(self::ORDER_METAKEY, 'galo', true);
+        $order->add_meta_data(self::ORDER_METAKEY, 'polen_galo', true);
+
+        $order_item_id = wc_add_order_item($order_id, array(
+            'order_item_name' => $product->get_title(),
+            'order_item_type' => 'line_item', // product
+        ));
 
         $quantity = 1;
-        $order_item_id = $order->add_product($product, $quantity);
 
         wc_add_order_item_meta($order_item_id, '_qty', $quantity, true);
-        wc_add_order_item_meta($order_item_id, '_product_id', $product->get_id(), true);
-        wc_add_order_item_meta($order_item_id, '_line_subtotal', '0', true);
-        wc_add_order_item_meta($order_item_id, '_line_total', '0', true);
-        wc_add_order_item_meta($order_item_id, 'offered_by', '', true);
-
-        wc_add_order_item_meta($order_item_id, 'video_to', 'to_myself', true);
-        wc_add_order_item_meta($order_item_id, 'name_to_video', $data['name'], true);
+        wc_add_order_item_meta($order_item_id, 'offered_by', $data['name'], true);
+        wc_add_order_item_meta($order_item_id, 'video_to', $data['video_to'], true);
+        wc_add_order_item_meta($order_item_id, 'name_to_video', $data['name_to_video'], true);
         wc_add_order_item_meta($order_item_id, 'email_to_video', $email, true);
-        wc_add_order_item_meta($order_item_id, 'video_category', 'Vídeo-Autógrafo', true);
+        wc_add_order_item_meta($order_item_id, 'video_category', $data['video_category'], true);
         wc_add_order_item_meta($order_item_id, 'instructions_to_video', $data['instruction'], true);
+        wc_add_order_item_meta($order_item_id, 'allow_video_on_page', $status, true);
 
-        wc_add_order_item_meta($order_item_id, 'allow_video_on_page', 'on', true);
-        wc_add_order_item_meta($order_item_id, '_fee_amount', 0, true);
-        wc_add_order_item_meta($order_item_id, '_line_total', 0, true);
-
-        $interval  = Polen_Order::get_interval_order_event();
-        $timestamp = Polen_Order::get_deadline_timestamp_by_social_event($order, $interval);
-        $order->add_meta_data(Polen_Order::META_KEY_DEADLINE, $timestamp, true );
+        $interval = Polen_Order::get_interval_order_basic();
+        $timestamp = Polen_Order::get_deadline_timestamp($order, $interval);
+        Polen_Order::save_deadline_timestamp_in_order($order, $timestamp);
+        $order->add_meta_data(Polen_Order::META_KEY_DEADLINE, $timestamp, true);
 
         $order->save();
     }
