@@ -106,7 +106,7 @@ class Polen {
         new Polen_Signin_LP_Lead( true );
 
         //Disabled API REST
-        // new Polen_Disable_API_REST( true );
+        new Polen_Disable_API_REST( true );
 
         //Tributes app
         new Tributes( true );
