@@ -174,12 +174,7 @@ class Api_Checkout
                     'quantity' => 1,
                 ],
             ],
-            // 'shipping_lines' => [
-            //     [
-            //         'method_id' => 'tuna_payment',
-            //         'method_title' => 'Cartão de Crédito',
-            //     ]
-            // ],
+
         ];
 
         if ($coupon !== null ) {
