@@ -22,14 +22,13 @@ class Api_Gateway_Tuna
      * @param $order_id
      * @param $current_user
      * @param array $data
-     * @return mixed
      */
     public function process_payment($order_id, $current_user, array $data)
     {
         try {
             $url = $this->get_endpoint_url('Payment/Init');
 
-            $session_id = $this->get_session_id($current_user);
+            $session_id = $this->get_session_id($current_user['user_object']->data);
             $token = $this->generate_token_card($session_id, $data);
 
             $customer_order = new WC_Order($order_id);
@@ -89,7 +88,7 @@ class Api_Gateway_Tuna
                 'Customer' => [
                     'Email' => $customer_order->get_billing_email(),
                     'Name' => $name,
-                    'ID' => $current_user->ID,
+                    'ID' => $current_user['user_object']->data->ID,
                     'Document' => $document_value,
                     'DocumentType' => $document_type
                 ],
@@ -159,7 +158,7 @@ class Api_Gateway_Tuna
             $response = json_decode($api_response['body']);
             $new_status = $this->get_status_response($response->status);
 
-            if ($new_status === 'payment-approved' || $new_status === 'pending') {
+            if ($new_status === 'payment-approved') {
                 wc_reduce_stock_levels($order_id);
             }
 
@@ -170,6 +169,7 @@ class Api_Gateway_Tuna
             return [
                 'message' => $response_message['message'],
                 'order_id' => $order_id,
+                'new_account' => $current_user['new_account'],
                 'order_status' => $response_message['status_code'],
             ];
 

@@ -83,9 +83,9 @@ class Api_Checkout{
                 $coupon = sanitize_text_field($fields['coupon']);
             }
 
-            $order_woo = $this->order_payment_woocommerce($user, $fields['product_id'], $coupon);
+            $order_woo = $this->order_payment_woocommerce($user['user_object']->data, $fields['product_id'], $coupon);
             $this->add_meta_to_order($order_woo->id, $data);
-            $payment = $tuna->process_payment($order_woo->id, $user->data, $fields);
+            $payment = $tuna->process_payment($order_woo->id, $user, $fields);
 
             if ($payment['order_status'] != 200) {
                 throw new Exception($payment['message']);
@@ -105,7 +105,7 @@ class Api_Checkout{
      * @param array $data
      * @return \WP_User
      */
-    private function create_new_user(array $data): \WP_User
+    private function create_new_user(array $data): array
     {
         $userdata = array(
             'user_login' => $data['email'],
@@ -117,10 +117,12 @@ class Api_Checkout{
         );
 
         $userId = wp_insert_user($userdata);
-        $user = get_user_by('id', $userId);
+        $user['user_object'] = get_user_by('id', $userId);
+        $user['new_account'] = true;
 
-        if (empty($user)) {
-            $user = get_user_by('login', $data['email']);
+        if (empty($user['user_object'])) {
+            $user['new_account'] = false;
+            $user['user_object'] = get_user_by('login', $data['email']);
         }
 
         $address = array(
@@ -132,7 +134,7 @@ class Api_Checkout{
         );
 
         foreach ($address as $key => $value) {
-            update_user_meta($user->ID, $key, $value);
+            update_user_meta($user['user_object']->ID, $key, $value);
         }
 
         return $user;
@@ -152,7 +154,7 @@ class Api_Checkout{
             'payment_method_title' => 'API TUNA',
             'set_paid' => false,
             'billing' => [
-                'first_name' => $user->first_name,
+                'first_name' => $user->display_name,
                 'country' => get_user_meta($user->ID, 'billing_country', true),
                 'email' => $user->user_email,
                 'phone' => get_user_meta($user->ID, 'billing_cellphone', true),
@@ -270,12 +272,8 @@ class Api_Checkout{
         ));
 
         $quantity = 1;
-        // $order_item_id = $order->add_product($product, $quantity);
 
         wc_add_order_item_meta($order_item_id, '_qty', $quantity, true);
-        // wc_add_order_item_meta($order_item_id, '_product_id', $product->get_id(), true);
-        wc_add_order_item_meta($order_item_id, '_line_subtotal', 0, true);
-        wc_add_order_item_meta($order_item_id, '_line_total', 0, true);
         wc_add_order_item_meta($order_item_id, 'offered_by', $data['name'], true);
         wc_add_order_item_meta($order_item_id, 'video_to', $data['video_to'], true);
         wc_add_order_item_meta($order_item_id, 'name_to_video', $data['name_to_video'], true);
