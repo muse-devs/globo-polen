@@ -97,8 +97,6 @@ class Api_Checkout
             if ( $payment['order_status'] != 200 ) {
                 throw new Exception($payment['message']);
             }
-            Debug::def($payment);
-
             wp_send_json_success( $payment, 201 );
 
         } catch (\Exception $e) {
