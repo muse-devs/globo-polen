@@ -154,6 +154,11 @@ class Api_Controller{
                 throw new Exception('Produto sem estoque', 422);
             }
 
+            $add_cart_item = WC()->cart->add_to_cart( $product_id, 1 );
+            if( !$add_cart_item ) {
+                throw new Exception('Produto não pode ser comprado', 422 );
+            }
+
         } catch (\Exception $e) {
             wp_send_json_error($e->getMessage(), 422);
             wp_die();

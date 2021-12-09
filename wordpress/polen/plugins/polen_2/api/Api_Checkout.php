@@ -8,7 +8,11 @@ use Exception;
 use Polen\Includes\Debug;
 use Polen\Includes\Polen_Checkout_Create_User;
 use Polen\Includes\Polen_Order;
+use WC_Cart;
 use WC_Coupon;
+use WC_Customer;
+use WC_Session_Handler;
+use WP_REST_Request;
 
 class Api_Checkout
 {
@@ -48,10 +52,10 @@ class Api_Checkout
      * 7- Fazer requisição para o TUNA
      * 8- Atualizar status de acordo com o response do TUNA
      *
-     * @param $request
+     * @param WP_REST_Request $request
      * @return array|void
      */
-    public function create_order($request)
+    public function create_order( WP_REST_Request $request )
     {
         try {
             $tuna = new Api_Gateway_Tuna();
@@ -87,7 +91,7 @@ class Api_Checkout
 
             $coupon = null;
             if (isset($fields['coupon'])) {
-                $this->coupon_rules($fields['coupon']);
+                $this->check_cupom($fields['coupon']);
                 $coupon = sanitize_text_field($fields['coupon']);
             }
 
@@ -105,7 +109,6 @@ class Api_Checkout
             wp_die();
         }
     }
-    
 
     /**
      * Criar usuario
@@ -198,44 +201,29 @@ class Api_Checkout
     public function coupon_rules($code_id)
     {
         try {
-            $coupon = new WC_Coupon($code_id);
 
-            if (!get_post($coupon->get_id())) {
-                throw new Exception('Cupom não existe', 422);
-            }
-
-            $coupon_rules = $this->woocommerce->get("coupons/{$coupon->get_id()}");
-
-            if (!empty($coupon_rules->usage_limit) && $coupon_rules->usage_limit >= $coupon_rules->usage_count) {
-                throw new Exception('Cupom já obteve o seu limite de uso', 422);
-            }
-
-            if (!empty($coupon_rules->usage_limit_per_user)) {
-                if (!is_user_logged_in()) {
-                    throw new Exception('Você precisa está logado para utilizar esse cupom', 422);
-                }
-
-                $current_user = wp_get_current_user();
-
-                if (in_array($current_user->user_email, $coupon_rules->used_by)) {
-                    throw new Exception('Você já utilizou esse cupom', 422);
-                }
-            }
-
-            if (!empty($coupon_rules->date_expires_gmt)) {
-                $last_date = DateTime::createFromFormat('Y-m-d H:i:s', $coupon_rules->date_expires_gmt);
-                $today = new DateTime();
-
-                if ($today > $last_date) {
-                    throw new Exception('Cupom já expirou', 422);
-                }
-            }
+            $this->check_cupom( $code_id );
 
         } catch (\Exception $e) {
             wp_send_json_error($e->getMessage(), 422);
             wp_die();
         }
 
+    }
+
+    protected function check_cupom( $coupom_code )
+    {
+        $return = WC()->cart->apply_coupon( $coupom_code );
+        if( !$return ) {
+            WC()->cart->empty_cart();
+            throw new Exception( 'Cupom inválido', 422 );
+        }
+
+        if( empty( WC()->cart->get_applied_coupons() ) ) {
+            WC()->cart->empty_cart();
+            throw new Exception( 'Cupom inválido', 422 );
+        }
+        return true;
     }
 
     /**

@@ -8,9 +8,17 @@ class Api {
         if( $static ) {
             new Api_Routers( true );
             add_action('init', [$this, 'create_taxonomy_campaigns']);
+            add_action( 'rest_api_init', array( $this, 'rest_api_includes' ) ); // add to construct class
         }
     }
 
+    // create this method
+    public function rest_api_includes() {
+        if ( empty( WC()->cart ) ) {
+            WC()->frontend_includes();
+            wc_load_cart();
+        }
+    }
     /**
      * Registrar taxonomia de campanha em produtos
      */
