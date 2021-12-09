@@ -6,6 +6,7 @@ use Automattic\WooCommerce\Client;
 use DateTime;
 use Exception;
 use Polen\Includes\Debug;
+use Polen\Includes\Emails\Polen_WC_Customer_New_Account;
 use Polen\Includes\Polen_Checkout_Create_User;
 use Polen\Includes\Polen_Order;
 use WC_Cart;
