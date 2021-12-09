@@ -22,11 +22,11 @@ get_header();
 	<div class="row">
 		<div class="col-12">
 			<div id="product-carousel" class="owl-carousel owl-theme">
-        <!-- <div class="item">
-					<?php //polen_get_lacta_banner(site_url('/lacta')); ?>
-				</div> -->
         <div class="item">
 					<?php polen_get_natal_banner(site_url('tag/natal-social/')); ?>
+				</div>
+        <div class="item">
+					<?php polen_get_lacta_banner(site_url('/lacta')); ?>
 				</div>
 			</div>
 		</div>
