@@ -1,6 +1,7 @@
 <?php
 
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
+use Polen\Includes\Module\Polen_Order_Module;
 use Polen\Includes\Polen_Order;
 use Polen\Includes\Polen_Talent;
 use Polen\Includes\Polen_Video_Info;
@@ -41,13 +42,14 @@ if (!$talent_is_social) {
 		} else {
 			echo "<p class='mt-2 mb-4'>Você tem <strong><span id='order-count'>" . $count_total['qtd'] . "</span> pedido(s) de vídeo</strong>, seus pedidos expiram em até {$days_expires} dias.</p>";
 			if (count($talent_orders) > 0) {
-        $inputs = new Material_Inputs();
+        		$inputs = new Material_Inputs();
 				foreach ($talent_orders as $order) :
 					$order_obj = new \WC_Order($order['order_id']);
 					$is_social = social_order_is_social($order_obj);
 					$video_info = Polen_Video_Info::get_by_order_id( $order['order_id'] );
 					$total_order_value = $order['total_raw'];
 					$discounted_value_order = polen_apply_polen_part_price($total_order_value, $is_social);
+					$polen_order = new Polen_Order_Module( $order_obj );
 			?>
 					<div class="row mb-3" box-id="<?php echo $order['order_id']; ?>">
 						<div class="col md-12">
@@ -74,15 +76,15 @@ if (!$talent_is_social) {
 									<div class="col-12 col-md-12">
 										<div class="row">
 											<?php
-											if (!empty($order['from'])) : ?>
+											if ( $polen_order->get_video_to() === Polen_Order_Module::VIDEO_TO_OTHER_ONE ) : ?>
 												<div class="col-12 col-md-6">
 													<p class="p">De</p>
-													<p class="value small"><?php echo $order['from']; ?></p>
+													<p class="value small"><?php echo $polen_order->get_offered_by(); ?></p>
 												</div>
 											<?php endif; ?>
 											<div class="col-12 col-md-6">
 												<p class="p">Para <?php echo (defined('ENV_DEV') && (ENV_DEV === true)) ? '(ID: ' . $order['order_id'] . ')' : ''; ?></p>
-												<p class="value small"><?php echo $order['name']; ?></p>
+												<p class="value small"><?php echo $polen_order->get_name_to_video(); ?></p>
 											</div>
 											<!-- <div class="col-12 col-md-12">
 												<p class="p">e-mail</p>

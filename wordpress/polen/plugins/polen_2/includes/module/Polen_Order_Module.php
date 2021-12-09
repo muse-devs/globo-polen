@@ -4,11 +4,17 @@ namespace Polen\Includes\Module;
 use Polen\Admin\Polen_Admin_Event_Promotional_Event_Fields as Promotional_Event;
 use Polen\Admin\Polen_Admin_Event_Promotional_Event_Fields;
 use Polen\Admin\Polen_Admin_Order_Custom_Fields;
+use Polen\Includes\Cart\Polen_Cart_Item;
+use Polen\Includes\Cart\Polen_Cart_Item_Factory;
 use WC_Order_Query;
 
 class Polen_Order_Module
 {
+    const VIDEO_TO_TO_MYSELF = 'to_myself';
+    const VIDEO_TO_OTHER_ONE = 'other_one';
+
     public $object;
+    public $cart_item;
 
     public function __construct( $order )
     {
@@ -17,6 +23,8 @@ class Polen_Order_Module
         }
 
         $this->object = $order;
+
+        $this->cart_item = Polen_Cart_Item_Factory::polen_cart_item_from_order( $this->object );
     }
 
 
@@ -44,6 +52,29 @@ class Polen_Order_Module
     }
 
 
+
+    public function get_video_to()
+    {
+        return $this->cart_item->get_video_to();
+    }
+
+    public function get_name_to_video()
+    {
+        if( self::VIDEO_TO_OTHER_ONE === $this->get_video_to() || $this->get_is_campaign() ) {
+            return $this->cart_item->get_name_to_video();
+        }
+        return $this->cart_item->get_offered_by();
+    }
+
+    public function get_offered_by()
+    {
+        return $this->cart_item->get_offered_by();
+    }
+
+
+
+
+
     /**
      * 
      * Retorna Orders_ids por alguma campanha e por um status especifico
@@ -64,6 +95,3 @@ class Polen_Order_Module
         return $result->orders;
     }
 }
-
-// $order->add_meta_data( Polen_Admin_Event_Promotional_Event_Fields::FIELD_NAME_IS, 'yes', true);
-// $order->add_meta_data( Polen_Admin_Event_Promotional_Event_Fields::FIELD_NAME_SLUG_CAMPAIGN, $polen_product->get_campaign_slug(), true);
