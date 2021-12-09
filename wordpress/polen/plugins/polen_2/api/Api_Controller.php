@@ -307,7 +307,7 @@ class Api_Controller{
             'alt' => get_post_meta($attachment->ID, '_wp_attachment_image_alt', true),
             'caption' => $attachment->post_excerpt,
             'description' => $attachment->post_content,
-            'src' => get_the_post_thumbnail_url($talent_id),
+            // 'src' => get_the_post_thumbnail_url($talent_id),
             'title' => $attachment->post_title,
         );
     }
