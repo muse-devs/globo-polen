@@ -96,6 +96,7 @@ class Api_Checkout
             }
 
             $order_woo = $this->order_payment_woocommerce($user['user_object']->data, $fields['product_id'], $coupon);
+
             $this->add_meta_to_order($order_woo->id, $data);
             $payment = $tuna->process_payment($order_woo->id, $user, $fields);
             if ( $payment['order_status'] != 200 ) {
@@ -258,7 +259,7 @@ class Api_Checkout
         // $product = wc_get_product($data['product_id']);
 
         $order->update_meta_data('_polen_customer_email', $email);
-        $order->add_meta_data( self::ORDER_METAKEY, 'polen_galo', true );
+        $order->add_meta_data( self::ORDER_METAKEY, 'galo_idolos', true );
 
         // $order_item_id = wc_add_order_item($order_id, array(
         //     'order_item_name' => $product->get_title(),
