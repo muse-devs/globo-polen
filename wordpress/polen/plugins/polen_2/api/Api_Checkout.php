@@ -59,6 +59,10 @@ class Api_Checkout
     public function create_order( WP_REST_Request $request )
     {
         try {
+            $nonce = $request->get_param( 'security' );
+            if( !wp_verify_nonce( $nonce, $_SERVER['HTTP_USER_AGENT'].$_SERVER['REMOTE_ADDR'] ) ) {
+                throw new Exception( 'Falha na verificação de segurança', 401 );
+            }
             $tuna = new Api_Gateway_Tuna();
             $fields = $request->get_params();
             $required_fields = $this->required_fields();
