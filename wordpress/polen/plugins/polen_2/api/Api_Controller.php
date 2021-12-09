@@ -3,6 +3,7 @@ namespace Polen\Api;
 
 use Exception;
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
+use Polen\Includes\Debug;
 use Polen\Includes\Polen_Talent;
 use Polen\Includes\Polen_Video_Info;
 use WC_Order;
@@ -82,6 +83,7 @@ class Api_Controller{
      */
     public function talent($request): WP_REST_Response
     {
+        Debug::def( $_SERVER['REMOTE_ADDR']);
         try{
             $talent_slug = $request->get_param('slug');
             if (empty($talent_slug)) {
@@ -297,6 +299,9 @@ class Api_Controller{
     private function get_object_image(int $talent_id): array
     {
         $attachment = get_post(get_post_thumbnail_id($talent_id));
+        if( empty( $attachment ) ) {
+            return '';
+        }
         return array(
             'id' => $attachment->ID,
             'alt' => get_post_meta($attachment->ID, '_wp_attachment_image_alt', true),
