@@ -41,7 +41,7 @@ do_action( 'woocommerce_email_header', $email_heading, $email );
  * @hooked WC_Structured_Data::output_structured_data() Outputs structured data.
  * @since 2.5.0
  */
-do_action( 'woocommerce_email_order_details', $order, $sent_to_admin, $plain_text, $email );
+wc_get_template( 'emails/campaign/galo_idolos/email-header.php', array( 'email_heading' => $email_heading ) );
 
 /*
  * @hooked WC_Emails::order_meta() Shows order meta data.
@@ -70,4 +70,4 @@ if ( $additional_content ) {
 /*
  * @hooked WC_Emails::email_footer() Output the email footer
  */
-do_action( 'woocommerce_email_footer', $email );
+wc_get_template( 'emails/campaign/galo_idolos/email-footer.php' );

@@ -5,7 +5,8 @@
 
 defined( 'ABSPATH' ) || exit;
 
-do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
+wc_get_template( 'emails/campaign/galo_idolos/email-header.php', array( 'email_heading' => $email_heading ) );
+?>
 
 <p class="img_wrap">
 	<img src="<?php echo get_template_directory_uri() . "/assets/img/email/boas-vindas.png"; ?>" alt="Menina segurando celular">
@@ -27,4 +28,4 @@ Senha Provisória: <?= $password_generated; ?>
 </p>
 <?php
 
-do_action( 'woocommerce_email_footer', $email );
+wc_get_template( 'emails/campaign/galo_idolos/email-footer.php' );

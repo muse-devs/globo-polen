@@ -3,6 +3,7 @@ namespace Polen\Includes\Emails;
 
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
 use Polen\Includes\Module\Polen_Order_Module;
+use Polen\Includes\Polen_Campaign;
 use Polen\Includes\Polen_Video_Info;
 use Polen\Social_Base\Social_Base_Order;
 
@@ -54,6 +55,8 @@ class Polen_WC_Completed_Order extends \WC_Email_Customer_Completed_Order
             $this->recipient                      = $this->object->get_billing_email();
             $this->placeholders['{order_date}']   = wc_format_datetime( $this->object->get_date_created() );
             $this->placeholders['{order_number}'] = $this->object->get_order_number();
+
+            $this->campaign_template_html  = 'emails/campaign/%s/customer-completed-order.php';
         } else {
             return;
         }
@@ -61,45 +64,74 @@ class Polen_WC_Completed_Order extends \WC_Email_Customer_Completed_Order
         $cart_item = Polen_Cart_Item_Factory::polen_cart_item_from_order( $this->object );
         $this->product = $cart_item->get_product();
 
-        $is_event_promotional = event_promotional_order_is_event_promotional( $order );
-        $is_social_base = order_is_social_base( $order );
-        if ( $this->is_enabled() && $this->get_recipient() ) {
-            if( $is_event_promotional ) {
-                $this->send( $this->get_recipient(), $this->get_subject_ep(), $this->get_content_ep(), $this->get_headers(), $this->get_attachments() );
-            } elseif( $is_social_base ) {
-                $this->send( $this->get_recipient(), $this->get_subject_social_base(), $this->get_content_social_base(), $this->get_headers(), $this->get_attachments() );
-            } else {
-                $this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
-            }
+        // $is_event_promotional = event_promotional_order_is_event_promotional( $order );
+        // $is_social_base = order_is_social_base( $order );
+        // if ( $this->is_enabled() && $this->get_recipient() ) {
+        //     if( $is_event_promotional ) {
+        //         $this->send( $this->get_recipient(), $this->get_subject_ep(), $this->get_content_ep(), $this->get_headers(), $this->get_attachments() );
+        //     } elseif( $is_social_base ) {
+        //         $this->send( $this->get_recipient(), $this->get_subject_social_base(), $this->get_content_social_base(), $this->get_headers(), $this->get_attachments() );
+        //     } else {
+        //         $this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
+        //     }
+        // }
+        $order_is_campaing = Polen_Campaign::get_is_order_campaing( $this->object );
+        if( $order_is_campaing ) {
+            $this->send( $this->get_recipient(), $this->get_subject_galo(), $this->get_content_campaign(), $this->get_headers(), $this->get_attachments() );
+        } else {
+            $this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
         }
 
         $this->restore_locale();
     }
 
-   public function get_subject_ep() {
-       return 'Lacta - Seu vídeo chegou!';
-   }
 
-   public function get_subject_social_base() {
-       return 'Sua compra na Reserva veio com um 🎁!';
-   }
+    public function get_subject_galo()
+    {
+        return 'Seu pedido no Galo Ídolos foi concluído';
+    }
 
-   public function get_content_ep()
-   {
-        $polen_order = new Polen_Order_Module( $this->object );
-        $file_templete = sprintf( $this->template_ep_html, $polen_order->get_campaign_slug() );
-        return wc_get_template_html(
-            $file_templete,
-            array(
-                'order'              => $this->object,
-                'email_heading'      => $this->get_heading(),
-                'additional_content' => $this->get_additional_content(),
-                'sent_to_admin'      => false,
-                'plain_text'         => false,
-                'email'              => $this,
-            )
-        );
-   }
+    public function get_content_campaign()
+    {
+         $polen_order = Polen_Campaign::get_order_campaing_slug( $this->object );
+         $file_templete = sprintf( $this->campaign_template_html, $polen_order );
+         return wc_get_template_html(
+             $file_templete,
+             array(
+                 'order'              => $this->object,
+                 'email_heading'      => $this->get_heading(),
+                 'additional_content' => $this->get_additional_content(),
+                 'sent_to_admin'      => false,
+                 'plain_text'         => false,
+                 'email'              => $this,
+             )
+         );
+    }
+
+//    public function get_subject_ep() {
+//        return 'Lacta - Seu vídeo chegou!';
+//    }
+
+//    public function get_subject_social_base() {
+//        return 'Sua compra na Reserva veio com um 🎁!';
+//    }
+
+//    public function get_content_ep()
+//    {
+//         $polen_order = new Polen_Order_Module( $this->object );
+//         $file_templete = sprintf( $this->template_ep_html, $polen_order->get_campaign_slug() );
+//         return wc_get_template_html(
+//             $file_templete,
+//             array(
+//                 'order'              => $this->object,
+//                 'email_heading'      => $this->get_heading(),
+//                 'additional_content' => $this->get_additional_content(),
+//                 'sent_to_admin'      => false,
+//                 'plain_text'         => false,
+//                 'email'              => $this,
+//             )
+//         );
+//    }
 
    public function get_content_social_base()
    {

@@ -26,6 +26,8 @@ class Polen_WC_Order_Expired extends \WC_Email {
 		$this->template_html  = 'emails/Polen_WC_Order_Expired.php';
 		$this->template_plain = 'emails/plain/Polen_WC_Order_Expired.php';
 		$this->template_base  = TEMPLATEPATH . 'woocommerce/';
+
+		$this->campaign_template_html = 'emails/campaign/%s/Polen_WC_Order_Expired.php';
     
 		add_action( 'woocommerce_order_status_changed', array( $this, 'trigger' ) );
 
@@ -57,7 +59,13 @@ class Polen_WC_Order_Expired extends \WC_Email {
 			/**
 			 * Envio de e-mail para o Fã
 			 */
-			$this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
+
+			$order_is_campaing = Polen_Campaign::get_is_order_campaing( $this->object );
+			if( $order_is_campaing) {
+				$this->send( $this->get_recipient(), $this->get_subject_campaing(), $this->get_content_campaign_html(), $this->get_headers(), $this->get_attachments() );
+			} else {
+				$this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
+			}
 
 			/**
 			 * Envio de e-mail para o Talento
@@ -69,6 +77,24 @@ class Polen_WC_Order_Expired extends \WC_Email {
 			$talent = $Polen_Talent->get_talent_from_product( $product_id );
 			$this->send( $talent->email, $this->get_subject(), $this->get_content_talent(), $this->get_headers(), $this->get_attachments() );
 		}
+	}
+
+
+	public function get_subject_campaing()
+	{
+		return 'Seu pedido expirou';
+	}
+
+	public function get_content_campaign_html() {
+		$slug_campaign = Polen_Campaign::get_order_campaing_slug( $this->object );
+		$file_templete = sprintf( $this->campaign_template_html, $slug_campaign );
+		return wc_get_template_html( $file_templete, array(
+			'order'         => $this->object,
+			'email_heading' => $this->get_heading(),
+			'sent_to_admin' => true,
+			'plain_text'    => false,
+			'email'			=> $this
+		), '', $this->template_base );
 	}
 
 	public function get_content_talent() {
