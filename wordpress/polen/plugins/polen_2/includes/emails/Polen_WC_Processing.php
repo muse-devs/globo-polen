@@ -5,6 +5,9 @@
  * @package WooCommerce\Emails
  */
 namespace Polen\Includes\Emails;
+
+use Polen\Includes\Polen_Campaign;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
@@ -85,13 +88,20 @@ if ( ! class_exists( 'Polen_WC_Processing', false ) ) :
 				$this->recipient                      = $this->object->get_billing_email();
 				$this->placeholders['{order_date}']   = wc_format_datetime( $this->object->get_date_created() );
 				$this->placeholders['{order_number}'] = $this->object->get_order_number();
+
+				$this->campaign_template_html = 'emails/campaign/%s/admin-new-order.php';
 			}
 
-            $order_is_social = social_order_is_social( $order );
-			if ( $this->is_enabled() && $this->get_recipient() && ! $order_is_social ) {
+            // $order_is_social = social_order_is_social( $order );
+			// if ( $this->is_enabled() && $this->get_recipient() && ! $order_is_social ) {
+			// 	$this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
+			// }
+			$order_is_campaing = Polen_Campaign::get_is_order_campaing( $this->object );
+			if( $order_is_campaing) {
+				$this->send( $this->get_recipient(), $this->get_subject(), $this->get_content_campaign_html(), $this->get_headers(), $this->get_attachments() );
+			} else {
 				$this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
 			}
-
 			$this->restore_locale();
 		}
 
@@ -112,6 +122,18 @@ if ( ! class_exists( 'Polen_WC_Processing', false ) ) :
 					'email'              => $this,
 				)
 			);
+		}
+
+		public function get_content_campaign_html() {
+			$slug_campaign = Polen_Campaign::get_order_campaing_slug( $this->object );
+			$file_templete = sprintf( $this->campaign_template_html, $slug_campaign );
+			return wc_get_template_html( $file_templete, array(
+				'order'         => $this->object,
+				'email_heading' => $this->get_heading(),
+				'sent_to_admin' => true,
+				'plain_text'    => false,
+				'email'			=> $this
+			), '', $this->template_base );
 		}
 
 		/**

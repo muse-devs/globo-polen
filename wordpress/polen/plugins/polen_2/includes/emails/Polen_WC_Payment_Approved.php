@@ -250,14 +250,13 @@ class Polen_WC_Payment_Approved extends \WC_Email {
 	public function get_content_campaign_html() {
 		$slug_campaign = Polen_Campaign::get_order_campaing_slug( $this->object );
 		$file_templete = sprintf( $this->campaign_template_html, $slug_campaign );
-		$asd = wc_get_template_html( $file_templete, array(
+		return wc_get_template_html( $file_templete, array(
 			'order'         => $this->object,
 			'email_heading' => $this->get_heading(),
 			'sent_to_admin' => true,
 			'plain_text'    => false,
 			'email'			=> $this
 		), '', $this->template_base );
-		return $asd;
 	}
 
 	public function get_content_talent_plain() {

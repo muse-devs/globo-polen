@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-do_action( 'woocommerce_email_header', $email_heading, $email );
+wc_get_template( 'emails/campaign/galo_idolos/email-header.php', array( 'email_heading' => $email_heading ) );
 
 ?>
 
@@ -38,4 +38,4 @@ if( isset( $additional_content ) && ! empty( $additional_content ) ) {
 	echo wp_kses_post( wpautop( wptexturize( $additional_content ) ) );
 }
 
-do_action( 'woocommerce_email_footer', $email );
+wc_get_template( 'emails/campaign/galo_idolos/email-footer.php' );

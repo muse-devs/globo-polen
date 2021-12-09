@@ -25,13 +25,13 @@ class Polen_Emails {
         $emails[ 'WC_Email_Customer_New_Account' ] = new Polen_WC_Customer_New_Account();
 
         //Limpando as Actions
-        remove_action( 'woocommerce_order_status_completed_notification', array( $emails[ 'WC_Email_Customer_Completed_Order' ], 'trigger' ), 10 );
+        // remove_action( 'woocommerce_order_status_completed_notification', array( $emails[ 'WC_Email_Customer_Completed_Order' ], 'trigger' ), 10 );
         $emails[ 'WC_Email_Customer_Completed_Order' ] = new Polen_WC_Completed_Order();
 
         //Limpando as Actions
-        remove_action( 'woocommerce_order_status_pending_to_on-hold_notification', array( $emails['WC_Email_Customer_Processing_Order'], 'trigger' ), 10 );
-        remove_action( 'woocommerce_order_status_failed_to_on-hold_notification', array( $emails['WC_Email_Customer_Processing_Order'], 'trigger' ), 10 );
-        remove_action( 'woocommerce_order_status_cancelled_to_on-hold_notification', array( $emails['WC_Email_Customer_Processing_Order'], 'trigger' ), 10 );
+        // remove_action( 'woocommerce_order_status_pending_to_on-hold_notification', array( $emails['WC_Email_Customer_Processing_Order'], 'trigger' ), 10 );
+        // remove_action( 'woocommerce_order_status_failed_to_on-hold_notification', array( $emails['WC_Email_Customer_Processing_Order'], 'trigger' ), 10 );
+        // remove_action( 'woocommerce_order_status_cancelled_to_on-hold_notification', array( $emails['WC_Email_Customer_Processing_Order'], 'trigger' ), 10 );
         $emails['WC_Email_Customer_Processing_Order'] = new Polen_WC_Processing();
 
 		require_once PLUGIN_POLEN_DIR . '/includes/emails/Polen_WC_Payment_Approved.php';
