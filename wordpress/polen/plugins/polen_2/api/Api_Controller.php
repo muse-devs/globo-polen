@@ -391,6 +391,9 @@ class Api_Controller{
 
 
 
+    /**
+     * Gera um nonce para o checkout nao ficar 100% expostos
+     */
     public function create_nonce( \WP_REST_Request $request )
     {
         return api_response( wp_create_nonce( $_SERVER['HTTP_USER_AGENT'].$_SERVER['REMOTE_ADDR'] ) );
