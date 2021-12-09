@@ -17,7 +17,7 @@ $talent = _polen_get_info_talent_by_product_id($item->get_product(), "polen-squa
 <p>Você pode acompanhar o status do seu pedido aqui:</p>
 
 <p class="btn_wrap">
-	<a href="<?php echo polen_get_link_order_status( $order->get_id() ); ?>" class="btn" target="_blank" style="width: 100%">Acompanhe seu pedido</a>
+	<a href="https://galoidolos.com.br/minha-conta/pedidos" class="btn" target="_blank" style="width: 100%">Acompanhe seu pedido</a>
 </p>
 
 <p>

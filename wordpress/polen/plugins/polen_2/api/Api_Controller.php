@@ -28,7 +28,7 @@ class Api_Controller{
      * Retorar todos os talentos
      * @param WP_REST_Request $request
      */
-    public function get_talents( $request ): WP_REST_Response
+    public function get_talents( WP_REST_Request $request ): WP_REST_Response
     {
         try{
             $api_product = new Api_Product();
@@ -386,5 +386,16 @@ class Api_Controller{
             ];
         }
         return  $categories;
+    }
+
+
+
+
+    /**
+     * Gera um nonce para o checkout nao ficar 100% expostos
+     */
+    public function create_nonce( \WP_REST_Request $request )
+    {
+        return api_response( wp_create_nonce( $_SERVER['HTTP_USER_AGENT'].$_SERVER['REMOTE_ADDR'] ) );
     }
 }

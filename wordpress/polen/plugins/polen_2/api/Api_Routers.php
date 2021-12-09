@@ -258,5 +258,15 @@ class Api_Routers
             ),
             'schema' => array( $polen_api_videos, 'get_item_schema' )
         ) );
+
+
+        register_rest_route( $this->base, '/nonce', array(
+            array(
+                'methods' => WP_REST_Server::READABLE,
+                'callback' => array( $controller, 'create_nonce' ),
+                'permission_callback' => '__return_true',
+            ),
+            'schema' => array( $polen_api_videos, 'get_item_schema' )
+        ) );
     }
 }
