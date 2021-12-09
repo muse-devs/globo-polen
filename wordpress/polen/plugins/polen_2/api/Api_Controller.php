@@ -8,6 +8,7 @@ use Polen\Includes\Polen_Talent;
 use Polen\Includes\Polen_Video_Info;
 use WC_Order;
 use WC_Coupon;
+use WC_Logger;
 use WP_REST_Response;
 use WP_REST_Request;
 
@@ -43,35 +44,36 @@ class Api_Controller{
                 $slug = 'galo_idolos';
             }
 
-            $products = $api_product->polen_get_products_by_campagins($params, $slug);
+            // $products = $api_product->polen_get_products_by_campagins($params, $slug);
 
-            $items = array();
-            foreach ($products->products as $product) {
-                $image_object = $this->get_object_image($product->get_id());
-                $items[] = array(
-                    'id' => $product->get_id(),
-                    'name' => $product->get_name(),
-                    'slug' => $product->get_slug(),
-                    'image' => $image_object,
-                    'categories' => wp_get_object_terms($product->get_id() , 'product_cat'),
-                    'stock' => $product->get_stock_quantity() ?? 0,
-                    'price' => $product->get_price(),
-                    'regular_price' => $product->get_regular_price(),
-                    'sale_price' => $product->get_sale_price(),
-                    'createdAt' => get_the_date('Y-m-d H:i:s', $product->get_id()),
-                );
-            }
+            // $items = array();
+            // foreach ($products->products as $product) {
+            //     $image_object = $this->get_object_image($product->get_id());
+            //     $items[] = array(
+            //         'id' => $product->get_id(),
+            //         'name' => $product->get_name(),
+            //         'slug' => $product->get_slug(),
+            //         'image' => $image_object,
+            //         'categories' => wp_get_object_terms($product->get_id() , 'product_cat'),
+            //         'stock' => $product->get_stock_quantity() ?? 0,
+            //         'price' => $product->get_price(),
+            //         'regular_price' => $product->get_regular_price(),
+            //         'sale_price' => $product->get_sale_price(),
+            //         'createdAt' => get_the_date('Y-m-d H:i:s', $product->get_id()),
+            //     );
+            // }
 
             $data = array(
-                'items' => $items,
-                'total' => $products->total,//$api_product->get_products_count($params, $slug),
-                'current_page' => $request->get_param('paged') ?? 1,
-                'per_page' => count($items),
+                'items' => [],//$items,
+                'total' => 0,//$products->total,//$api_product->get_products_count($params, $slug),
+                'current_page' 1,//=> $request->get_param('paged') ?? 1,
+                'per_page' => 0,//count($items),
             );
 
             return api_response($data, 200);
 
         } catch (\Exception $e) {
+            Debug::def($e->getMessage());
             return api_response(
                 array('message' => $e->getMessage()),
                 $e->getCode()
