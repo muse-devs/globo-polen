@@ -124,13 +124,13 @@ class Api_Checkout
             'user_pass' => wp_generate_password(),
             'first_name' => $data['name'],
             'nickname' => $data['name'],
-            // 'role' => 'customer',
+            'role' => 'customer',
         );
 
         $user['new_account'] = false;
         $user_wp = get_user_by( 'email', $userdata['user_email'] );
         if( false === $user_wp ) {
-            $userId = wc_create_new_customer( $userdata['user_email'], $userdata['user_email'], $userdata['user_pass'], $userdata );
+            $userId = wp_insert_user($userdata);
             $user_wp = get_user_by( 'ID', $userId );
             $user['new_account'] = true;
             update_user_meta( $userId, self::USER_METAKEY, 'polen_galo' );
