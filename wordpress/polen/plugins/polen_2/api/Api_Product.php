@@ -2,6 +2,7 @@
 
 namespace Polen\Api;
 
+use stdClass;
 use WC_Product_Query;
 use WP_Query;
 
@@ -12,9 +13,9 @@ class Api_Product
      *
      * @param array $params
      * @param string $campaingn
-     * @return array
+     * @return stdClass
      */
-    public function polen_get_products_by_campagins(array $params, string $campaingn = ''): array
+    public function polen_get_products_by_campagins(array $params, string $campaingn = ''): stdClass
     {
         $per_page = $params['per_page'] ?? get_option('posts_per_page');
         $paged = $params['paged'] ?? 1;
@@ -24,8 +25,9 @@ class Api_Product
         $order = $orderby[1] ?? 'DESC';
 
         $args = array(
-            'limit' => $per_page,
-            'page' => $paged,
+            'limit'    => $per_page,
+            'page'     => $paged,
+            'paginate' => true,
         );
 
         if (!empty($campaingn)) {
@@ -42,7 +44,7 @@ class Api_Product
 
         $query = new WC_Product_Query($args);
 
-        return wc_products_array_orderby($query->get_products(), $orderby[0], $order);
+        return $query->get_products();//wc_products_array_orderby($query->get_products(), $orderby[0], $order);
     }
 
     /**
@@ -55,6 +57,7 @@ class Api_Product
     public function get_products_count(array $args, string $campaingn = ''): int
     {
         $query_args = array(
+            'return' => 'ids',
             'post_type' => 'product',
             'post_status' => 'publish',
             'meta_query' => array(),
