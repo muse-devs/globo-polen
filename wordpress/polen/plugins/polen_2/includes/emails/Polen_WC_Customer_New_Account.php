@@ -1,6 +1,7 @@
 <?php
 namespace Polen\Includes\Emails;
 
+use Polen\Api\Api_Checkout;
 use Polen\Includes\Polen_Checkout_Create_User;
 use WC_Email_Customer_New_Account;
 use WP_User;
@@ -67,7 +68,7 @@ class Polen_WC_Customer_New_Account extends WC_Email_Customer_New_Account
             $this->recipient          = $this->user_email;
             $this->password_generated = $password_generated;
         }
-
+        // $meta_campaign = get_user_meta( $user_id, Api_Checkout::USER_METAKEY, true );
         if ( $this->is_enabled() && $this->get_recipient() ) {
             $checkout_create_user = new Polen_Checkout_Create_User();
             if( $checkout_create_user->send_password_in_email_new_user() ) {
@@ -81,6 +82,13 @@ class Polen_WC_Customer_New_Account extends WC_Email_Customer_New_Account
                              $this->get_headers(),
                              $this->get_attachments() );
                              
+            } else if($password_generated) {
+                $this->password_generated = $user_pass;
+                $this->send( $this->get_recipient(),
+                $this->get_default_subject_checkout(),
+                $this->get_content_html_checkout(),
+                $this->get_headers(),
+                $this->get_attachments() );
             } else {
                 $this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
             }

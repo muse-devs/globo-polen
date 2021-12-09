@@ -23,7 +23,8 @@ if (!defined('ABSPATH')) {
 /*
  * @hooked WC_Emails::email_header() Output the email header
  */
-do_action('woocommerce_email_header', $email_heading, $email); ?>
+wc_get_template( 'emails/campaign/galo_idolos/email-header.php', array( 'email_heading' => $email_heading ) );
+?>
 
 <?php
 $item = Polen\Includes\Cart\Polen_Cart_Item_Factory::polen_cart_item_from_order($order);
@@ -88,4 +89,4 @@ if ($additional_content) {
 /*
  * @hooked WC_Emails::email_footer() Output the email footer
  */
-do_action('woocommerce_email_footer', $email);
+wc_get_template( 'emails/campaign/galo_idolos/email-footer.php' );

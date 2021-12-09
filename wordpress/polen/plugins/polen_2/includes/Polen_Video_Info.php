@@ -178,12 +178,16 @@ class Polen_Video_Info extends Polen_DB
         return parent::delete( $where );
     }
     
-    
+    /**
+     * 
+     * @param int
+     * @param int
+     */
     static public function select_by_talent_id( int $talent_id, $limit = 4 )
     {
         $self_obj = new static();
         $fields = array( 'talent_id' => $talent_id, 'vimeo_process_complete' => "1", 'is_public' => '1' );
-        $result_raw = $self_obj->get_result_multi_fields( $fields, "4", "ORDER BY first_order DESC, ID DESC" );
+        $result_raw = $self_obj->get_result_multi_fields( $fields, intval( $limit ), "ORDER BY first_order DESC, ID DESC" );
         return $result_raw;//self::create_instance_many( $result_raw );
     }
 
