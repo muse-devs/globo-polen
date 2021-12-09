@@ -87,7 +87,6 @@ class Api_Controller{
      */
     public function talent($request): WP_REST_Response
     {
-        Debug::def( $_SERVER['REMOTE_ADDR']);
         try{
             $talent_slug = $request->get_param('slug');
             if (empty($talent_slug)) {
