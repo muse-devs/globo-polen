@@ -876,7 +876,7 @@ function polen_get_natal_banner($link)
       <a href="<?php echo $link; ?>">
         <div class="natal-banner" style="background: url('<?php echo TEMPLATE_URI . '/assets/img/natal/bg.png'; ?>')center no-repeat">
           <div class="content">
-            <p>Seu vídeo-Polen vira uma doação para uma instituição social!</p>
+            <p>Seu Vídeo-Polen vira uma doação para uma instituição social!</p>
             <div class="click-to-donate">
               Clique para doar
             </div>
