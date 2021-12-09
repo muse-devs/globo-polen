@@ -72,7 +72,6 @@ class Api_Controller{
             return api_response($data, 200);
 
         } catch (\Exception $e) {
-            Debug::def($e->getMessage());
             return api_response(
                 array('message' => $e->getMessage()),
                 $e->getCode()
