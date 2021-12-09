@@ -130,6 +130,9 @@ class Polen {
         // Startar API de campanhas
         new Api();
 
+        // Iniciar Polen Campaign
+        new Polen_Campaign( true );
+
     }
 
     /**

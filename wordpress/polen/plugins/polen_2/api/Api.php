@@ -7,7 +7,6 @@ class Api {
     {
         if( $static ) {
             new Api_Routers( true );
-            add_action('init', [$this, 'create_taxonomy_campaigns']);
             add_action( 'rest_api_init', array( $this, 'rest_api_includes' ) ); // add to construct class
         }
     }
@@ -19,19 +18,5 @@ class Api {
             wc_load_cart();
         }
     }
-    /**
-     * Registrar taxonomia de campanha em produtos
-     */
-    function create_taxonomy_campaigns()
-    {
-        register_taxonomy(
-            'campaigns',
-            'product',
-            array(
-                'label' => 'Campanhas',
-                'rewrite' => array('slug' => 'campanha'),
-                'hierarchical' => true,
-            )
-        );
-    }
+
 }
