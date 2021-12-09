@@ -300,7 +300,7 @@ class Api_Controller{
     {
         $attachment = get_post(get_post_thumbnail_id($talent_id));
         if( empty( $attachment ) ) {
-            '';
+            return '';
         }
         return array(
             'id' => $attachment->ID,
