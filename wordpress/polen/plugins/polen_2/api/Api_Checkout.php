@@ -126,7 +126,7 @@ class Api_Checkout
         $userdata = array(
             'user_login' => $data['email'],
             'user_email' => $data['email'],
-            'user_pass' => wp_generate_password(),
+            'user_pass' => wp_generate_password(6, false),
             'first_name' => $data['name'],
             'nickname' => $data['name'],
             'role' => 'customer',
@@ -140,6 +140,8 @@ class Api_Checkout
             $user['new_account'] = true;
             update_user_meta( $userId, self::USER_METAKEY, 'polen_galo' );
             update_user_meta( $userId, Polen_Checkout_Create_User::META_KEY_CREATED_BY, 'checkout' );
+            $new_user_email = new Polen_WC_Customer_New_Account();
+            $new_user_email->trigger( $userId, $userdata[ 'user_pass' ], true );
         }
 
         $user['user_object'] = $user_wp;
