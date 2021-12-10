@@ -3671,11 +3671,12 @@ class shipping_Shipping extends external_wp_element_["Component"] {
       key: 'rates',
       label: Object(external_wp_i18n_["__"])('Set shipping costs', 'woocommerce-admin'),
       description: Object(external_wp_i18n_["__"])('Define how much customers pay to ship to different destinations', 'woocommerce-admin'),
-      content: Object(external_wp_element_["createElement"])(shipping_rates, extends_default()({
+      content: Object(external_wp_element_["createElement"])(shipping_rates, {
         buttonText: pluginsToActivate.length || requiresJetpackConnection ? Object(external_wp_i18n_["__"])('Proceed', 'woocommerce-admin') : Object(external_wp_i18n_["__"])('Complete task', 'woocommerce-admin'),
         shippingZones: this.state.shippingZones,
-        onComplete: this.completeStep
-      }, this.props)),
+        onComplete: this.completeStep,
+        createNotice: this.props.createNotice
+      }),
       visible: settings.woocommerce_ship_to_countries === 'disabled' ? false : true
     }, {
       key: 'label_printing',
