@@ -568,8 +568,32 @@ class Polen_Plugin_Settings
                     'type'     => 'select',
                     'multi'    => true,
                     'title'    => esc_html__('Destacar categoria', 'polen'),
-                    'desc'     => 'Escolha até 4 categorias para serem destacada',
+                    'desc'     => 'Escolha as categorias para serem destacada',
                     'options'  => $categories,
+                    'default'  => '',
+                ),
+            )
+        ) );
+
+        // Configurar API REST
+        \Redux::set_section( $opt_name, array(
+            'title'            => esc_html__( 'Configuração API REST', 'polen' ),
+            'id'               => 'api_rest_config',
+            'icon'             => '',
+            'subsection'       => false,
+            'fields'           => array(
+                array(
+                    'id'       => 'polen_api_rest_cosumer_key',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Adicionar chave consumer key', 'polen'),
+                    'desc'     => 'Copie aqui chave gerada na configuração do wocommerce',
+                    'default'  => '',
+                ),
+                array(
+                    'id'       => 'polen_api_rest_cosumer_secret',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Adicionar chave consumer secret', 'polen'),
+                    'desc'     => 'Copie aqui chave gerada na configuração do wocommerce',
                     'default'  => '',
                 ),
             )
