@@ -12,6 +12,8 @@
     "require": {
         "mobiledetect/mobiledetectlib": "^2.8",
         "vimeo/vimeo-api": "^3.0",
-        "google/recaptcha": "^1.2"
+        "google/recaptcha": "^1.2",
+        "automattic/woocommerce": "^3.0",
+        "sendgrid/sendgrid": "~7"
     }
 }
