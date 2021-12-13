@@ -14,5 +14,7 @@
 
 .wcstripe-tooltip__content-wrapper{display:contents}.wcstripe-tooltip__tooltip-wrapper{visibility:hidden;position:fixed;opacity:0;transition:opacity 150ms ease-in;z-index:100010}.wcstripe-tooltip__tooltip-wrapper.is-hiding{opacity:0 !important;transition:opacity 200ms ease-out 300ms}.wcstripe-tooltip__tooltip{position:relative;color:#fff;background-color:#1e1e1e;padding:10px;text-align:center}.wcstripe-tooltip__tooltip::after{content:' ';position:absolute;bottom:0;left:50%;transform:translate(-50%, 22px);border:solid 15px transparent;border-top-color:#1e1e1e}.wcstripe-tooltip__tooltip-left-top::after{left:0;transform:translate(0, 22px)}
 
+.payment-methods__unavailable-methods{display:none;margin:0 0 0 1.5rem}@media (min-width: 661px){.payment-methods__unavailable-methods{display:flex}}.payment-methods__unavailable-method{border-radius:2px;width:38px;height:24px;margin:1px 5px 1px 1px}.payment-methods__unavailable-method:last-child{margin-right:1px}
+
 #wc-stripe-account-settings-container{box-sizing:border-box}#wc-stripe-new-account-container{display:flex;justify-content:center}
 
