@@ -1,0 +1,325 @@
+{
+  "id": "e416baa2-7d16-4e2c-b571-d12d8880cd28",
+  "version": "2.0",
+  "name": "Polen-Homolog",
+  "url": "http://polen.globo/produto/r/",
+  "tests": [{
+    "id": "3c21aacc-8a79-45ee-a130-5cdfc942fdb3",
+    "name": "Buy_Use_Exist",
+    "commands": [{
+      "id": "0be47b26-1b33-4f0d-babd-61cb01f541ea",
+      "comment": "",
+      "command": "open",
+      "target": "http://polen.globo/talento/r/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "89d1ae31-1938-4053-b2ba-61a302689558",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1252x803",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "5dbbbf73-8683-4f71-9bc6-105a13ce87f1",
+      "comment": "",
+      "command": "click",
+      "target": "css=#add-to-cart-293 > .mdc-button__label",
+      "targets": [
+        ["css=#add-to-cart-293 > .mdc-button__label", "css:finder"],
+        ["xpath=//button[@id='add-to-cart-293']/span[3]", "xpath:idRelative"],
+        ["xpath=//span[3]", "xpath:position"],
+        ["xpath=//span[contains(.,'Pedir vídeo')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "f10935d9-4974-467c-9d8d-313c8435bcb2",
+      "comment": "",
+      "command": "click",
+      "target": "name=offered_by",
+      "targets": [
+        ["name=offered_by", "name"],
+        ["css=#offered_by > .mdc-text-field__input", "css:finder"],
+        ["xpath=//input[@name='offered_by']", "xpath:attributes"],
+        ["xpath=//label[@id='offered_by']/input", "xpath:idRelative"],
+        ["xpath=//label/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ef4e2248-b3c3-47f7-bb46-bffc1ccdfaac",
+      "comment": "",
+      "command": "type",
+      "target": "name=offered_by",
+      "targets": [
+        ["name=offered_by", "name"],
+        ["css=#offered_by > .mdc-text-field__input", "css:finder"],
+        ["xpath=//input[@name='offered_by']", "xpath:attributes"],
+        ["xpath=//label[@id='offered_by']/input", "xpath:idRelative"],
+        ["xpath=//label/input", "xpath:position"]
+      ],
+      "value": "Rodolfo"
+    }, {
+      "id": "3ac40116-aa95-4665-b482-3e72d5f0d947",
+      "comment": "",
+      "command": "type",
+      "target": "name=email_to_video",
+      "targets": [
+        ["name=email_to_video", "name"],
+        ["css=#email_to_video > .mdc-text-field__input", "css:finder"],
+        ["xpath=//input[@name='email_to_video']", "xpath:attributes"],
+        ["xpath=//label[@id='email_to_video']/input", "xpath:idRelative"],
+        ["xpath=//label[2]/input", "xpath:position"]
+      ],
+      "value": "rodolfoneto@gmail.com"
+    }, {
+      "id": "f87816eb-eff9-4480-9704-bf7bc37cf34c",
+      "comment": "",
+      "command": "type",
+      "target": "name=phone",
+      "targets": [
+        ["name=phone", "name"],
+        ["css=#phone > .mdc-text-field__input", "css:finder"],
+        ["xpath=//input[@name='phone']", "xpath:attributes"],
+        ["xpath=//label[@id='phone']/input", "xpath:idRelative"],
+        ["xpath=//label[3]/input", "xpath:position"]
+      ],
+      "value": "(37) 84563-8745"
+    }, {
+      "id": "b1aed598-808f-4779-a75c-96f7e5eecfd2",
+      "comment": "",
+      "command": "click",
+      "target": "css=.mdc-button__label:nth-child(2)",
+      "targets": [
+        ["css=.mdc-button__label:nth-child(2)", "css:finder"],
+        ["xpath=//button[@id='next1']/span[2]", "xpath:idRelative"],
+        ["xpath=//button/span[2]", "xpath:position"],
+        ["xpath=//span[contains(.,'Avançar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "227808f3-99c5-478e-80b8-dcf5df67edfb",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.mdc-button__label:nth-child(2)",
+      "targets": [
+        ["css=.mdc-button__label:nth-child(2)", "css:finder"],
+        ["xpath=//button[@id='next1']/span[2]", "xpath:idRelative"],
+        ["xpath=//button/span[2]", "xpath:position"],
+        ["xpath=//span[contains(.,'Avançar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "291c0a32-c79c-4ed3-b530-2a223b29b0ca",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.mdc-button__label:nth-child(2)",
+      "targets": [
+        ["css=.mdc-button__label:nth-child(2)", "css:finder"],
+        ["xpath=//button[@id='next1']/span[2]", "xpath:idRelative"],
+        ["xpath=//button/span[2]", "xpath:position"],
+        ["xpath=//span[contains(.,'Avançar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "dac4dcf9-2522-453a-b2f7-eb3c18e7cc79",
+      "comment": "",
+      "command": "click",
+      "target": "css=#video_to > .col-6:nth-child(2) span",
+      "targets": [
+        ["css=#video_to > .col-6:nth-child(2) span", "css:finder"],
+        ["xpath=//div[@id='video_to']/div[2]/label/span", "xpath:idRelative"],
+        ["xpath=//div[2]/label/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Para mim')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "13f4b584-16db-4071-a60b-0e5cd7128ce0",
+      "comment": "",
+      "command": "click",
+      "target": "css=.cart-step2 > .cart-step__content",
+      "targets": [
+        ["css=.cart-step2 > .cart-step__content", "css:finder"],
+        ["xpath=//form[@id='cart-advanced']/div[3]/div", "xpath:idRelative"],
+        ["xpath=//form/div[3]/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "be9dbeea-bf0c-4198-b7c2-9bb33b854903",
+      "comment": "",
+      "command": "click",
+      "target": "css=.col-6:nth-child(5) > .item",
+      "targets": [
+        ["css=.col-6:nth-child(5) > .item", "css:finder"],
+        ["xpath=//div[@id='video_category']/div[5]/label", "xpath:idRelative"],
+        ["xpath=//div[5]/label", "xpath:position"],
+        ["xpath=//label[contains(.,'Novidade')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "90e83ac6-c957-4b41-9484-ec40569beb4f",
+      "comment": "",
+      "command": "click",
+      "target": "name=instructions_to_video",
+      "targets": [
+        ["name=instructions_to_video", "name"],
+        ["css=#instructions_to_video > .mdc-text-field__input", "css:finder"],
+        ["xpath=//textarea[@name='instructions_to_video']", "xpath:attributes"],
+        ["xpath=//label[@id='instructions_to_video']/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6ee74554-a4ca-428b-ba9a-7200d235b998",
+      "comment": "",
+      "command": "type",
+      "target": "name=instructions_to_video",
+      "targets": [
+        ["name=instructions_to_video", "name"],
+        ["css=#instructions_to_video > .mdc-text-field__input", "css:finder"],
+        ["xpath=//textarea[@name='instructions_to_video']", "xpath:attributes"],
+        ["xpath=//label[@id='instructions_to_video']/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": "sdf af asdf asdf asfd asdflaksdfg ahjdf \\nasdkfyg adfjhg asdjfhg afd \\nsdfkhg askfhg dfhgsfglk jsfgjk sdg\\nsdfgk sgfhs gsd gjksdfg\\nskfghjg skdjhs dfkgjhdfg"
+    }, {
+      "id": "2bf0a478-c348-4ae0-9ea3-0743f0e041bc",
+      "comment": "",
+      "command": "click",
+      "target": "css=.mdc-button__touch",
+      "targets": [
+        ["css=.mdc-button__touch", "css:finder"],
+        ["xpath=//button[@id='btn-buy']/span[2]", "xpath:idRelative"],
+        ["xpath=//form/button/span[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9a6cee8b-4c38-47c7-832b-7d1ffcb3a8dc",
+      "comment": "",
+      "command": "click",
+      "target": "css=#stripe-payment-data > p",
+      "targets": [
+        ["css=#stripe-payment-data > p", "css:finder"],
+        ["xpath=//div[@id='stripe-payment-data']/p", "xpath:idRelative"],
+        ["xpath=//li/div/div/p", "xpath:position"],
+        ["xpath=//p[contains(.,'MODO DE TESTE HABILITADO. No modo de teste, você pode usar o número de cartão 4242424242424242 com qualquer código de segurança e uma data de validade qualquer ou consultar a documentação \"Como testar o Stripe\" para mais números de cartão.')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "dcb7f8c9-a4c7-4f58-85f2-b372d95888ba",
+      "comment": "",
+      "command": "click",
+      "target": "css=#stripe-payment-data > p",
+      "targets": [
+        ["css=#stripe-payment-data > p", "css:finder"],
+        ["xpath=//div[@id='stripe-payment-data']/p", "xpath:idRelative"],
+        ["xpath=//li/div/div/p", "xpath:position"],
+        ["xpath=//p[contains(.,'MODO DE TESTE HABILITADO. No modo de teste, você pode usar o número de cartão 4242424242424242 com qualquer código de segurança e uma data de validade qualquer ou consultar a documentação \"Como testar o Stripe\" para mais números de cartão.')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "40eda07e-a1f1-49ff-818c-6f2c8951f3cc",
+      "comment": "",
+      "command": "doubleClick",
+      "target": "css=#stripe-payment-data > p",
+      "targets": [
+        ["css=#stripe-payment-data > p", "css:finder"],
+        ["xpath=//div[@id='stripe-payment-data']/p", "xpath:idRelative"],
+        ["xpath=//li/div/div/p", "xpath:position"],
+        ["xpath=//p[contains(.,'MODO DE TESTE HABILITADO. No modo de teste, você pode usar o número de cartão 4242424242424242 com qualquer código de segurança e uma data de validade qualquer ou consultar a documentação \"Como testar o Stripe\" para mais números de cartão.')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "83109f43-2e6c-48c6-b917-09f203ffffbb",
+      "comment": "",
+      "command": "selectFrame",
+      "target": "index=3",
+      "targets": [
+        ["index=3"]
+      ],
+      "value": ""
+    }, {
+      "id": "aa6f3b49-101e-4fd0-b351-533abcdfeb50",
+      "comment": "",
+      "command": "click",
+      "target": "name=cardnumber",
+      "targets": [
+        ["name=cardnumber", "name"],
+        ["css=.CardNumberField-input-wrapper .InputElement", "css:finder"],
+        ["xpath=//input[@name='cardnumber']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/form/div/div[2]/span/span[2]/div/div[2]/span/input", "xpath:idRelative"],
+        ["xpath=//span/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b04263e1-7676-49ec-afbf-4a600daeec16",
+      "comment": "",
+      "command": "type",
+      "target": "name=cardnumber",
+      "targets": [
+        ["name=cardnumber", "name"],
+        ["css=.InputContainer > .is-complete", "css:finder"],
+        ["xpath=//input[@name='cardnumber']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/form/div/div[2]/span/span[2]/div/div[2]/span/input", "xpath:idRelative"],
+        ["xpath=//span/input", "xpath:position"]
+      ],
+      "value": "4242 4242 4242 4242"
+    }, {
+      "id": "0a6a1ad7-b77d-4427-a25c-8c567058c759",
+      "comment": "",
+      "command": "type",
+      "target": "name=exp-date",
+      "targets": [
+        ["name=exp-date", "name"],
+        ["css=span > .InputContainer > .is-complete", "css:finder"],
+        ["xpath=//input[@name='exp-date']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/form/div/div[2]/span[2]/span/span/input", "xpath:idRelative"],
+        ["xpath=//span/span/input", "xpath:position"]
+      ],
+      "value": "10 / 29"
+    }, {
+      "id": "c7d92571-d85a-4691-9e30-038a40c5585d",
+      "comment": "",
+      "command": "type",
+      "target": "name=cvc",
+      "targets": [
+        ["name=cvc", "name"],
+        ["css=.CardField-cvc .InputElement", "css:finder"],
+        ["xpath=//input[@name='cvc']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/form/div/div[2]/span[3]/span/span/input", "xpath:idRelative"],
+        ["xpath=//span[3]/span/span/input", "xpath:position"]
+      ],
+      "value": "465"
+    }, {
+      "id": "0c4fb8e4-3a1e-4db6-873c-e97f3b8c7258",
+      "comment": "",
+      "command": "selectFrame",
+      "target": "relative=parent",
+      "targets": [
+        ["relative=parent"]
+      ],
+      "value": ""
+    }, {
+      "id": "4782afe2-66e3-4170-a5d2-cafeb4660461",
+      "comment": "",
+      "command": "click",
+      "target": "css=.woocommerce-form__label",
+      "targets": [
+        ["css=.woocommerce-form__label", "css:finder"],
+        ["xpath=//div[@id='payment']/div[2]/div/p/label", "xpath:idRelative"],
+        ["xpath=//div/p/label", "xpath:position"],
+        ["xpath=//label[contains(.,'Li e concordo com o(s) termos e condições do site *')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "8b3f2048-8c59-4406-a819-e8437ccdc01f",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }],
+  "urls": ["https://polen-homolog.c9t.pw/", "https://polen-homolog.c9t.pw/produto/r/"],
+  "plugins": []
+}
