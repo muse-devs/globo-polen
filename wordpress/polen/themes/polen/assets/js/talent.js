@@ -1,3 +1,4 @@
+$ = jQuery;
 var modal = document.getElementById("video-modal");
 var video_box = document.getElementById("video-box");
 var share_button = document.querySelectorAll(".share-button");
@@ -178,3 +179,68 @@ function openVideoById(id) {
 function clickToBuy() {
 	document.querySelector(".single_add_to_cart_button").click();
 }
+
+$('.video-player-button').on('click',function() {
+
+  // Get video by data-id id
+  let id = $(this).attr('data-id');
+  const video = document.querySelector('#video-box[data-id="'+id+'"]');
+
+  // Stop others videos
+  const allVideos = document.querySelectorAll('#video-box:not([data-id="'+id+'"])');
+  if (allVideos) {
+    for (let i = 0; i < allVideos.length; i++) {
+      allVideos[i].controls = false;
+      allVideos[i].pause();
+      allVideos[i].currentTime = 0;
+    }
+    $('#video-box:not([data-id="'+id+'"])').addClass("d-none");
+    $('#cover-box:not([data-id="'+id+'"])').removeClass("d-none");
+  }
+
+  // Show video and remove cover
+  $('#video-box[data-id="'+id+'"]').removeClass("d-none");
+  $('#cover-box[data-id="'+id+'"]').addClass("d-none");
+
+  // Play video
+  video.controls = true;
+  setImediate(function(){
+    video.play();
+  })
+
+  video.addEventListener("ended", endVideo);
+
+  function endVideo() {
+    video.controls = false;
+    // Show cover and remove video
+    $('#video-box[data-id="'+id+'"]').addClass("d-none");
+    $('#cover-box[data-id="'+id+'"]').removeClass("d-none");
+  }
+});
+
+jQuery(document).ready(function() {
+  if($('#videos-carousel').length > 0) {
+    $('#videos-carousel').owlCarousel({
+      loop: false,
+      stagePadding: 15,
+      items: 4,
+      animateOut: 'fadeOut',
+      margin: 5,
+      nav: true,
+      dots: false,
+      autoHeight:false,
+      navText: ["<i class='icon icon-left-arrow'></i>", "<i class='icon icon-right-arrow'></i>"],
+      responsive : {
+          0 : {
+            items: 2,
+          },
+          700 : {
+            items: 3,
+          },
+          1020 : {
+            items: 4,
+          }
+      }
+    });
+  }
+});

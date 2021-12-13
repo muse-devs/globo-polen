@@ -64,8 +64,10 @@ function polen_front_get_talent_videos($talent)
 					<?php foreach ($items as $item) : ?>
 						<div class="polen-card-video">
 							<figure class="video-cover">
-								<img loading="lazy" src="<?= $item['cover']; ?>" alt="<?= $item['title']; ?>" data-url="<?= $item['video']; ?>">
-								<a href="javascript:openVideoByHash('<?= $item['hash']; ?>')" class="video-player-button"></a>
+                <video src="<?= $item['video']; ?>" poster="<?= $item['cover']; ?>"></video>
+                <div class="video-player-button" data-id="0"></div>
+								<?php /*<img loading="lazy" src="<?= $item['cover']; ?>" alt="<?= $item['title']; ?>" data-url="<?= $item['video']; ?>">
+								<a href="javascript:openVideoByHash('<?= $item['hash']; ?>')" class="video-player-button"></a> */ ?>
 								<?php polen_video_icons($talent->user_id, $item['initials'], $item['first_order'] == "1"); ?>
 							</figure>
 						</div>
@@ -83,6 +85,70 @@ function polen_front_get_talent_videos($talent)
 			<div id="video-box"></div>
 		</div>
 	</div>
+<?php
+}
+
+function polen_front_get_talent_mini_bio($talent)
+{
+  ?>
+  <div class="talent-mini-bio text-center">
+    <div class="avatar avatar-lg">
+        <img src="<?php echo $talent->cover_image_thumb; ?>" alt="<?php echo $talent->nome; ?>" />
+    </div>
+    <h2 class="typo typo-subtitle-large text-center mt-3"><?php echo $talent->nome; ?></h2>
+    <h3 class="typo typo-text mt-1"><?php echo $talent->profissao; ?></h3>
+  </div>
+  <?php
+}
+
+function polen_front_get_videos_single($talent, $videos)
+{
+  if( ! wp_script_is( 'owl-carousel', 'enqueued' ) ) {
+      wp_enqueue_script('owl-carousel');
+  }
+?>
+	<section id="talent-videos" class="row my-1 pb-4">
+    <?php if($videos && sizeof($videos) > 0) : ?>
+		<div class="col-md-12 p-0 mb-4">
+			<div id="videos-carousel" class="owl-carousel owl-theme ">
+          <?php foreach ($videos as $key=>$video) : ?>
+            <?php if ($video['video']) : ?>
+              <div class="item">
+                <div class="polen-card-video talent-single">
+                  <figure id="cover-box" class="video-cover" data-id="<?php echo $key; ?>">
+                    <img loading="lazy" src="<?php echo $video['cover']; ?>" alt="">
+                    <div class="video-player-button" data-id="<?php echo $key; ?>"></div>
+                    <div class="video-icons">
+                      <figure class="image-cropper color small">
+                        <?php echo $video['thumb']; ?>
+                      </figure>
+                      <figure class="image-cropper small">
+                        <?php echo $video['initials']; ?>
+                      </figure>
+                    </div>
+                  </figure>
+                  <video id="video-box" class="src-box d-none" playsinline data-id="<?php echo $key; ?>"
+                    <?php if ($key == 0) {
+                      echo " muted";
+                    } ?>>
+                    <source src="<?php echo $video['video']; ?>" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            <?php endif; ?>
+          <?php endforeach; ?>
+          <div class="item">
+            <?php polen_talent_promo_card($talent); ?>
+          </div>
+      </div>
+		</div>
+    <?php endif; ?>
+	</section>
+  <script>
+    window.onload = function() {
+      jQuery('.video-player-button')[0].click();
+    }
+  </script>
 <?php
 }
 
