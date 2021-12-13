@@ -93,7 +93,7 @@ function polen_card_talent_reviews_order(\WP_Post $post, $Talent_Fields)
 								<?php Icon_Class::polen_icon_calendar(); ?>
 								<?php
 									$date = date("d/m/Y");
-									echo date( "d/m/y", strtotime('+7 days') );
+									echo date( "d/m/y", strtotime('+14 days') );
 								?>
 							</span>
 						</p>
