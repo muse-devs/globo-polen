@@ -95,7 +95,7 @@ function polen_front_get_talent_mini_bio($talent)
     <div class="avatar avatar-lg">
         <img src="<?php echo $talent->cover_image_thumb; ?>" alt="<?php echo $talent->nome; ?>" />
     </div>
-    <h2 class="typo typo-subtitle-large text-center mt-3"><?php echo $talent->nome; ?></h2>
+    <h2 class="typo typo-subtitle-large text-center mt-3"><?php echo $talent->nome ? $talent->nome : get_the_title(); ?></h2>
     <h3 class="typo typo-text mt-1"><?php echo $talent->profissao; ?></h3>
   </div>
   <?php
