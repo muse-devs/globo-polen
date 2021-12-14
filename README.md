@@ -32,6 +32,14 @@ Suba o docker rodando o seguinte script
 ```
 docker-compose up -d
 ```
+Acesse a pasta do plugin da Polen
+```
+wordpress/polen/plugins/polen_2
+```
+Verifique se sua máquina possui o composer e instale as dependências rodando:
+```
+composer install
+```
 Importe o seguinte arquivo sql dentro da base de dados que foi criada pelo Docker
 ```
 sql/database.sql.gz
