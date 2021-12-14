@@ -19,6 +19,9 @@
 use Polen\Includes\Cart\Polen_Cart_Item;
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
 
+global $Polen_Plugin_Settings;
+$order_expires = $Polen_Plugin_Settings['order_expires'];
+
 defined('ABSPATH') || exit;
 
 if( social_order_is_social( $order ) ) {
@@ -58,7 +61,7 @@ $total = polen_get_total_order_email_detail_to_talent( $order, $email );
 				</td>
 				<td>
 					<p class="details_title">Válido por</p>
-					<span class="details_value">7 dias</span>
+					<span class="details_value"><?php echo $order_expires; ?> dias</span>
 				</td>
 			</tr>
 			<tr>

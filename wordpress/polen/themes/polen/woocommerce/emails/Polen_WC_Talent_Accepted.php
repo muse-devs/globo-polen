@@ -9,11 +9,13 @@ do_action( 'woocommerce_email_header', $email_heading, $email );
 ?>
 
 <?php
+global $Polen_Plugin_Settings;
+$order_expires = $Polen_Plugin_Settings['order_expires'];
 $item = Polen\Includes\Cart\Polen_Cart_Item_Factory::polen_cart_item_from_order($order);
 $talent = _polen_get_info_talent_by_product_id($item->get_product(), "polen-square-crop-md");
 ?>
 
-<p><?php printf( esc_html__( 'Olá, %1$s aceitou o seu pedido #%2$s de vídeo e deverá responder em até 7 dias.', 'woocommerce' ), esc_html($talent['name']), esc_html($order->get_order_number()) ); ?></p>
+<p><?php printf( esc_html__( 'Olá, %1$s aceitou o seu pedido #%2$s de vídeo e deverá responder em até %3$s dias.', 'woocommerce' ), esc_html($talent['name']), esc_html($order->get_order_number()), esc_html($order_expires) ); ?></p>
 <p>Você pode acompanhar o status do seu pedido aqui:</p>
 
 <p class="btn_wrap">
