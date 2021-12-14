@@ -1,5 +1,17 @@
 <?php
 /**
+ * Customer new account email
+ *
+ * This template can be overridden by copying it to yourtheme/woocommerce/emails/customer-new-account.php.
+ *
+ * HOWEVER, on occasion WooCommerce will need to update template files and you
+ * (the theme developer) will need to copy the new files to your theme to
+ * maintain compatibility. We try to do this as little as possible, but it does
+ * happen. When this occurs the version of the template file will be bumped and
+ * the readme will list any important changes.
+ *
+ * @see https://docs.woocommerce.com/document/template-structure/
+ * @package WooCommerce\Templates\Emails
  * @version 3.7.0
  */
 
@@ -20,7 +32,7 @@ Por isso, viemos te desejar boas-vindas à Polen.</p>
 <p>Recomendamos que você altere a sua senha após o primeiro login para se manter protegido.</p>
 
 <p>Email: <?= $user_login; ?><br>
-Senha Provisória: <?= $password_generated; ?>
+Senha Provisória: <?= $user_pass; ?>
 </p>
 
 <p class="btn_wrap">

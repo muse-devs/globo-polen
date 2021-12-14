@@ -19,7 +19,7 @@ class Polen_WC_Payment_In_Revision extends \WC_Email {
 		$this->customer_email = true;
 		$this->heading     = __( 'Aguardando confirmação do pagamento', 'polen' );
 
-		$this->subject     = sprintf( _x( '[%s] Aguardando confirmação do pagamento', 'E-mail que será enviado ao usuário quando um pedido é está aguardando confirmação de pagamento.', 'polen' ), '{blogname}' );
+		$this->subject     = 'Aguardando confirmação do pagamento';
     
 		$this->template_html  = 'emails/Polen_WC_Payment_in_Revision.php';
 		$this->template_plain = 'emails/plain/Polen_WC_Payment_in_Revision.php';

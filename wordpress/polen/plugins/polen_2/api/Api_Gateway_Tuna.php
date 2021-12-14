@@ -3,6 +3,7 @@
 namespace Polen\Api;
 
 use Exception;
+use Polen\Includes\Debug;
 use WC_Order;
 
 class Api_Gateway_Tuna
@@ -25,7 +26,7 @@ class Api_Gateway_Tuna
      */
     public function process_payment($order_id, $current_user, array $data)
     {
-        try {
+        // try {
             $url = $this->get_endpoint_url('Payment/Init');
 
             $session_id = $this->get_session_id($current_user['user_object']->data);
@@ -53,6 +54,7 @@ class Api_Gateway_Tuna
             $payment_method_type = '1';
 
             $tuna_expiration_date = $this->separate_month_year($data['tuna_expiration_date']);
+            $customer_order->calculate_totals();
 
             $card_info = [
                 "Token" => $token,
@@ -157,28 +159,29 @@ class Api_Gateway_Tuna
 
             $response = json_decode($api_response['body']);
             $new_status = $this->get_status_response($response->status);
+            if( "failed" === $new_status || 'cancelled' === $new_status ) {
+                throw new Exception( 'Erro no pagamento, tente novamente', 422 );
+            }
 
             if ($new_status === 'payment-approved') {
                 wc_reduce_stock_levels($order_id);
             }
 
             $response_message = $this->get_response_message($new_status);
-
+            Debug::def($new_status);
             $customer_order->update_status($new_status);
-
+            $customer_order->save();
             return [
                 'message' => $response_message['message'],
                 'order_id' => $order_id,
                 'new_account' => $current_user['new_account'],
                 'order_status' => $response_message['status_code'],
+                'order_code' => $customer_order->get_order_key()
             ];
 
-        } catch (\Exception $e) {
-            return api_response(
-                array('message' => $e->getMessage()),
-                $e->getCode()
-            );
-        }
+        // } catch ( Exception $e ) {
+        //     return api_response( $e->getMessage(), 422 );
+        // }
 
     }
 
@@ -269,8 +272,7 @@ class Api_Gateway_Tuna
             return $response->token;
 
         } catch (\Exception $e) {
-            wp_send_json_error($e->getMessage(), 422);
-            wp_die();
+            return api_response( $e->getMessage(), 422 );
         }
     }
 
