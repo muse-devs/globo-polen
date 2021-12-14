@@ -165,10 +165,8 @@ class Api_Controller{
             }
 
         } catch (\Exception $e) {
-            wp_send_json_error($e->getMessage(), 422);
-            wp_die();
+            return api_response( $e->getMessage(), 422 );
         }
-
     }
 
     /**
@@ -178,7 +176,7 @@ class Api_Controller{
      */
     public function payment($request)
     {
-        $this->checkout->create_order($request);
+        return $this->checkout->create_order($request);
     }
 
     /**

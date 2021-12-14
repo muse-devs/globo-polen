@@ -7,6 +7,7 @@ use DateTime;
 use Exception;
 use Polen\Includes\Debug;
 use Polen\Includes\Emails\Polen_WC_Customer_New_Account;
+use Polen\Includes\Polen_Campaign;
 use Polen\Includes\Polen_Checkout_Create_User;
 use Polen\Includes\Polen_Order;
 use WC_Cart;
@@ -76,8 +77,7 @@ class Api_Checkout
             }
 
             if (!empty($errors)) {
-                wp_send_json_error( $errors, 422 );
-                wp_die();
+                return api_response( $errors, 422 );
             }
 
             if (!$this->CPF_validate($fields['cpf'])) {
@@ -92,7 +92,17 @@ class Api_Checkout
                 throw new Exception( 'Produto sem estoque', 422 );
             }
 
-            $user = $this->create_new_user( $data );
+            //TODO: Pegar o slug da campanha pelo produto add o metodo
+            // na classe Polen_Campaign::
+            $campaign = 'galo_idolos';
+            $user = $this->create_new_user( $data, $campaign );
+            
+            WC()->cart->empty_cart();
+            
+            $add_product_cart = WC()->cart->add_to_cart( $product->get_id(), 1 );
+            if( !$add_product_cart ) {
+                throw new Exception( 'Esse produto não pode ser comprado', 422 );
+            }
 
             $coupon = null;
             if (isset($fields['coupon'])) {
@@ -101,17 +111,15 @@ class Api_Checkout
             }
 
             $order_woo = $this->order_payment_woocommerce($user['user_object']->data, $fields['product_id'], $coupon);
-
-            $this->add_meta_to_order($order_woo->id, $data);
+            $this->add_meta_to_order( $order_woo->id, $data );
             $payment = $tuna->process_payment($order_woo->id, $user, $fields);
-            if ( $payment['order_status'] != 200 ) {
-                throw new Exception($payment['message']);
-            }
-            wp_send_json_success( $payment, 201 );
+            // if ( $payment['order_status'] != 200 ) {
+            //     throw new Exception($payment['message']);
+            // }
+            return api_response( $payment, 201 );
 
         } catch (\Exception $e) {
-            wp_send_json_error( $e->getMessage(), $e->getCode() );
-            wp_die();
+            return api_response( $e->getMessage(), $e->getCode() );
         }
     }
 
@@ -121,7 +129,7 @@ class Api_Checkout
      * @param array $data
      * @return \WP_User
      */
-    private function create_new_user( array $data ): array
+    private function create_new_user( array $data, $campaign = '' )
     {
         $userdata = array(
             'user_login' => $data['email'],
@@ -135,15 +143,26 @@ class Api_Checkout
         $user['new_account'] = false;
         $user_wp = get_user_by( 'email', $userdata['user_email'] );
         if( false === $user_wp ) {
-            $userId = wp_insert_user($userdata);
-            $user_wp = get_user_by( 'ID', $userId );
+
+            $args = [];
+            if( !empty( $campaign ) ) {
+                $args[ 'campaign' ] = $campaign;
+            }
+            $args[ Polen_Checkout_Create_User::META_KEY_CREATED_BY ] = 'checkout';
+            
+            $api_user = new Api_User();
+            $user_id = $api_user->create_user_custumer(
+                $userdata['user_email'],
+                $userdata['first_name'],
+                $userdata['user_pass'],
+                $args,
+                true
+            );
             $user['new_account'] = true;
-            update_user_meta( $userId, self::USER_METAKEY, 'polen_galo' );
-            update_user_meta( $userId, Polen_Checkout_Create_User::META_KEY_CREATED_BY, 'checkout' );
-            $new_user_email = new Polen_WC_Customer_New_Account();
-            $new_user_email->trigger( $userId, $userdata[ 'user_pass' ], true );
+            $user_wp = get_user_by( 'id', $user_id );
         }
 
+        unset( $user_wp->user_pass );
         $user['user_object'] = $user_wp;
 
         $address = array(
@@ -154,8 +173,8 @@ class Api_Checkout
             'billing_cellphone' => preg_replace('/[^0-9]/', '', $data['phone']),
         );
 
-        foreach ($address as $key => $value) {
-            update_user_meta($user['user_object']->ID, $key, $value);
+        foreach ( $address as $key => $value ) {
+            update_user_meta( $user['user_object']->ID, $key, $value );
         }
         return $user;
     }
@@ -208,11 +227,10 @@ class Api_Checkout
     {
         try {
 
-            $this->check_cupom( $code_id );
+            return api_response( $this->check_cupom( $code_id ), 200 );
 
         } catch (\Exception $e) {
-            wp_send_json_error($e->getMessage(), 422);
-            wp_die();
+            return api_response($e->getMessage(), 422);
         }
 
     }
@@ -221,13 +239,13 @@ class Api_Checkout
     {
         $return = WC()->cart->apply_coupon( $coupom_code );
         if( !$return ) {
-            WC()->cart->empty_cart();
-            throw new Exception( 'Cupom inválido', 422 );
+            // WC()->cart->empty_cart();
+            throw new Exception( 'Cupom inválido' . __LINE__, 422 );
         }
 
         if( empty( WC()->cart->get_applied_coupons() ) ) {
-            WC()->cart->empty_cart();
-            throw new Exception( 'Cupom inválido', 422 );
+            // WC()->cart->empty_cart();
+            throw new Exception( 'Cupom inválido' . __LINE__, 422 );
         }
         return true;
     }
