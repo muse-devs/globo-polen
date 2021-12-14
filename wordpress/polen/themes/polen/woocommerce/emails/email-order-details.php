@@ -58,7 +58,7 @@ $total = polen_get_total_order_email_detail_to_talent( $order, $email );
 				</td>
 				<td>
 					<p class="details_title">Válido por</p>
-					<span class="details_value">7 dias</span>
+					<span class="details_value">15 dias</span>
 				</td>
 			</tr>
 			<tr>
