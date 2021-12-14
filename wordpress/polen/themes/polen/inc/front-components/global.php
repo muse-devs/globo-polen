@@ -382,7 +382,7 @@ function polen_front_get_artists($items, $title, $social = false)
 <?php
 }
 
-function polen_front_get_videos($videos, $title = "Últimos vídeos gravados pelos Ídolos")
+function polen_front_get_videos($videos, $title = "Vídeos em destaque")
 {
   if (!$videos) {
 		return;
