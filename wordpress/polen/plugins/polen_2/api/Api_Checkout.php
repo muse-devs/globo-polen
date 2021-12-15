@@ -111,8 +111,9 @@ class Api_Checkout
             }
 
             $order_woo = $this->order_payment_woocommerce($user['user_object']->data, $fields['product_id'], $coupon);
-            $this->add_meta_to_order( $order_woo->id, $data );
-            $payment = $tuna->process_payment($order_woo->id, $user, $fields);
+            $this->add_meta_to_order($order_woo, $data);
+            $payment = $tuna->process_payment($order_woo->get_id(), $user, $fields);
+
             // if ( $payment['order_status'] != 200 ) {
             //     throw new Exception($payment['message']);
             // }
@@ -184,38 +185,42 @@ class Api_Checkout
      *
      * @param WP_User $user
      * @param int $product_id
-     * @param string $coupon
+     * @param $coupon
      */
-    public function order_payment_woocommerce($user, $product_id, $coupon = null)
+    public function order_payment_woocommerce($user, $product_id, $coupon = '')
     {
-        $data = [
-            'payment_method' => 'tuna_payment',
-            'payment_method_title' => 'API TUNA',
-            'set_paid' => false,
+        $args = [
+            // 'status'        => null,
             'customer_id'   => $user->ID,
             'customer_note' => 'created by api rest',
             'created_via'   => 'checkout_rest_api',
-            'billing' => [
-                'first_name' => $user->display_name,
-                'country' => get_user_meta($user->ID, 'billing_country', true),
-                'email' => $user->user_email,
-                'phone' => get_user_meta($user->ID, 'billing_cellphone', true),
-            ],
-            'line_items' => [
-                [
-                    'product_id' => $product_id,
-                    'quantity' => 1,
-                ],
-            ],
-
+            'parent'        => null,
+            'cart_hash'     => null,
         ];
 
-        if ($coupon !== null ) {
-            $data['coupon_lines'][] = [
-                'code' => $coupon,
-            ];
-        }
-        return $this->woocommerce->post('orders', $data);
+        $order = wc_create_order($args);
+        $product = wc_get_product($product_id);
+
+        $address = array(
+            'first_name' => $user->display_name,
+            'last_name'  => '',
+            'email'      => $user->user_email,
+            'phone'      => get_user_meta($user->ID, 'billing_cellphone', true),
+            'address_1'  => '',
+            'address_2'  => '',
+            'city'       => '',
+            'state'      => '',
+            'postcode'   => '',
+            'country'    => 'BR'
+        );
+
+        $order->add_product($product, 1);
+        $order->set_address($address, 'billing');
+        $order->apply_coupon($coupon);
+        $order->calculate_totals();
+        $order->save();
+
+        return $order;
     }
 
     /**
@@ -272,30 +277,28 @@ class Api_Checkout
     /**
      * Adicionar metas na order
      *
-     * @param int $order_id
+     * @param \WC_Order $order
      * @param array $data
      * @throws Exception
      */
-    private function add_meta_to_order(int $order_id, array $data)
+    private function add_meta_to_order($order, array $data)
     {
-        $order = wc_get_order($order_id);
         $email = $data['email'];
         $status = $data['allow_video_on_page'] ? 'on' : 'off';
         // $product = wc_get_product($data['product_id']);
 
         $order->update_meta_data('_polen_customer_email', $email);
-        $order->add_meta_data( self::ORDER_METAKEY, 'galo_idolos', true );
+        $order->add_meta_data( self::ORDER_METAKEY, 'polen_galo', true);
 
-        // $order_item_id = wc_add_order_item($order_id, array(
-        //     'order_item_name' => $product->get_title(),
-        //     'order_item_type' => 'line_item', // product
-        // ));
         $items = $order->get_items();
-        $item = array_pop( $items );
+        $item = array_pop($items);
         $order_item_id = $item->get_id();
-        // $quantity = 1;
+        $quantity = 1;
 
-        // wc_add_order_item_meta($order_item_id, '_qty', $quantity, true);
+        wc_add_order_item_meta($order_item_id, '_line_subtotal', $order->get_subtotal(), true );
+        wc_add_order_item_meta($order_item_id, '_line_total', $order->get_total(), true );
+
+        wc_add_order_item_meta($order_item_id, '_qty'                 , $quantity, true);
         wc_add_order_item_meta($order_item_id, 'offered_by'           , $data['name'], true);
         wc_add_order_item_meta($order_item_id, 'video_to'             , $data['video_to'], true);
         wc_add_order_item_meta($order_item_id, 'name_to_video'        , $data['name_to_video'], true);
