@@ -344,6 +344,8 @@ class Mo_API_Authentication_Admin_License {
             document.getElementById(popup_id).style.visibility = "hidden";
         }
         </script>
+        <br>
+        <div style="text-align: center; border: 2px solid blue;border-radius: 5px;width: 80%;margin-left: 9em;background-color: #c2dcff;color: #2c4d78"><b><span style="color: red;">*</span> There will be extra discount on top of these mentioned prices during the End Of Year Sale Offer Period which will be expired on 31st December, 2021. <a href="https://plugins.miniorange.com/wordpress-rest-api-authentication" target="_blank"> <br>Click here</a> to check out all the deals. Contact us at oauthsupport@xecurify.com to avail Sale benefits.</b></div>
 
         <section class="popup-overlay">
 
