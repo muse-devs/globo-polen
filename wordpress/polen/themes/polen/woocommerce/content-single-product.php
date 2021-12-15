@@ -102,36 +102,26 @@ if( 'instock' == $product->get_stock_status() ) {
 
 	<!-- Tags -->
 	<div class="row">
-    <?php if($videos && sizeof($videos) > 0): ?>
-      <div class="col-12<?php echo $histories_enabled ? ' col-md-6 m-md-auto' : ''; ?> d-flex align-items-center">
-        <?php $histories_enabled && polen_front_get_talent_stories(); ?>
-        <div>
-          <h1 class="talent-name" title="<?= get_the_title(); ?>"><?= get_the_title(); ?></h1>
-          <?php if($social) : ?>
-            <h5 class="talent-count-videos text-truncate">
-              <?php
-              // $videosCount = $stock;
-              if ($has_stock) {
-                echo $videosCount . " vídeo disponível";
-              } else {
-                echo "Nenhum vídeo disponível :D";
-              }// else {
-              // 	echo $videosCount . " vídeos disponíveis";
-              // }
-              ?>
-            </h5>
-          <?php endif; ?>
-        </div>
-        <?php polen_get_share_button(); ?>
-      </div>
-      <div class="col-12 mt-3">
-        <?php $histories_enabled || polen_front_get_videos_single($Talent_Fields, $videos); ?>
-      </div>
-    <?php else: ?>
-      <div class="col-12 col-md-6 m-md-auto">
-        <?php polen_front_get_talent_mini_bio($Talent_Fields); ?>
-      </div>
-    <?php endif; ?>
+		<div class="col-12<?php echo $histories_enabled ? ' col-md-6 m-md-auto' : ''; ?> d-flex align-items-center">
+			<?php $histories_enabled && polen_front_get_talent_stories(); ?>
+			<?php if($histories_enabled) : ?>
+				<div>
+					<h1 class="talent-name" title="<?= get_the_title(); ?>"><?= get_the_title(); ?></h1>
+				</div>
+			<?php endif; ?>
+			<?php polen_get_share_button(); ?>
+		</div>
+		<?php if(!$histories_enabled) : ?>
+			<?php if($videos && sizeof($videos) > 0): ?>
+				<div class="col-12 mt-3">
+					<?php polen_front_get_videos_single($Talent_Fields, $videos); ?>
+				</div>
+			<?php else: ?>
+				<div class="col-12 col-md-6 m-md-auto">
+					<?php polen_front_get_talent_mini_bio($Talent_Fields); ?>
+				</div>
+			<?php endif; ?>
+		<?php endif; ?>
 	</div>
 
   <!-- Botão de adicionar ao carrinho -->
