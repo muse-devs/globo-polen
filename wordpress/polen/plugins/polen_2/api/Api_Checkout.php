@@ -3,17 +3,10 @@
 namespace Polen\Api;
 
 use Automattic\WooCommerce\Client;
-use DateTime;
 use Exception;
-use Polen\Includes\Debug;
-use Polen\Includes\Emails\Polen_WC_Customer_New_Account;
 use Polen\Includes\Polen_Campaign;
 use Polen\Includes\Polen_Checkout_Create_User;
 use Polen\Includes\Polen_Order;
-use WC_Cart;
-use WC_Coupon;
-use WC_Customer;
-use WC_Session_Handler;
 use WP_REST_Request;
 
 class Api_Checkout
@@ -107,6 +100,12 @@ class Api_Checkout
             if (isset($fields['coupon'])) {
                 $this->check_cupom($fields['coupon']);
                 $coupon = sanitize_text_field($fields['coupon']);
+
+                $check_cupom_data = [ 'billing_email' => $fields[ 'email' ] ];
+                WC()->cart->check_customer_coupons( $check_cupom_data );
+                if( empty( WC()->cart->get_applied_coupons() ) ) {
+                    throw new Exception( 'Cupom inválido', 422 );
+                }
             }
 
             $order_woo = $this->order_payment_woocommerce($user['user_object']->data, $fields['product_id'], $coupon);
@@ -251,6 +250,7 @@ class Api_Checkout
             // WC()->cart->empty_cart();
             throw new Exception( 'Cupom inválido' . __LINE__, 422 );
         }
+
         return true;
     }
 
