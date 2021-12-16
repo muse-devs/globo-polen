@@ -143,7 +143,7 @@ function mo_api_auth_is_valid_request() {
 	$headers = mo_api_auth_getallheaders();
 	$headers = array_change_key_case($headers, CASE_UPPER);
 	
-	if (stripos(explode('?', $_SERVER['REQUEST_URI'], 2)[0], '/wp/v2') === false){
+	if (!stripos(explode('?', $_SERVER['REQUEST_URI'], 2)[0], '/wp/v2') === false){
 		if(get_option('mo_rest_api_protect_migrate')){
 			$response = array(
 				'status'	=>	'error',
