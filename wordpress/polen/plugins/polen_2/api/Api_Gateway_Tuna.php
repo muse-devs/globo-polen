@@ -3,9 +3,7 @@
 namespace Polen\Api;
 
 use Exception;
-use Polen\Includes\Debug;
-use Polen\Includes\Polen_Order;
-use WC_Emails;
+use Polen\Includes\Polen_Campaign;
 use WC_Order;
 
 class Api_Gateway_Tuna
@@ -37,13 +35,14 @@ class Api_Gateway_Tuna
 
         $name = $customer_order->get_billing_first_name();
         $product = wc_get_product($data['product_id']);
+        $product_campaign_slug = Polen_Campaign::get_product_campaign_slug( $product );
 
         $purchased_items = [
             [
                 "Amount" => floatval($product->get_sale_price()),
                 "ProductDescription" => $product->get_name(),
                 "ItemQuantity" => 1,
-                "CategoryName" => 'galo_idolos',
+                "CategoryName" => $product_campaign_slug,
                 "AntiFraud" => [
                     "Ean" => $product->get_sku()
                 ]
@@ -263,6 +262,10 @@ class Api_Gateway_Tuna
                 throw new Exception(__('Problemas com o processo de pagamento', 'tuna-payment'));
             }
 
+            if ( empty( $api_response['body'] ) ) {
+                throw new Exception(__('Problemas com o processo de pagamento, recarregue a página.', 'tuna-payment'));
+            }
+
             $response = json_decode($api_response['body']);
 
             return $response->token;
@@ -315,10 +318,10 @@ class Api_Gateway_Tuna
     private function get_status_response($status_response): string
     {
         $status_code = [
-            'payment-in-revision' => ['0', 'P'],
-            'payment-approved' => ['2', '8', '9'],
-            'failed' => ['A', 'N', '4', -1],
-            'cancelled' => ['D', '5'],
+            'payment-in-revision' => [ '1', '0', 'C', 'P'],
+            'payment-approved' => [ '2', '8', '9' ],
+            'failed' => [ 'A', '6', 'N', '4', 'B', -1 ],
+            'cancelled' => [ 'D', 'E' ],
         ];
 
         $new_status = '';
@@ -330,6 +333,48 @@ class Api_Gateway_Tuna
 
         return $new_status;
     }
+
+
+    /*
+    public function get_end_status($status)
+    {
+        $code = "Erro";
+        switch ($status) {
+            case '8':
+            case '9':
+            case '2':
+                $code = "payment-approved";
+                break;
+            case '1':
+            case '0':
+            case 'C':
+            case 'P':
+                $code = "payment-in-revision";
+                break;
+            case 'A':
+            case '6':
+                $code = "failed";
+                break;
+            case '5':
+            case '7':
+            case '3':
+                $code = "refunded";
+                break;
+            case '4':
+            case 'B':
+            case 'N':
+            case 'B':
+                $code = "failed";
+                break;
+            case 'E':
+                $code = "failed";
+                break;
+            case 'D':
+                $code = "failed";
+                break;
+        }
+        return $code;
+    } */
 
     /**
      * Retornar mensagem de acordo com o status

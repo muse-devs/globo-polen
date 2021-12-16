@@ -189,7 +189,7 @@ class Api_Checkout
     public function order_payment_woocommerce($user, $product_id, $coupon = '')
     {
         $args = [
-            // 'status'        => null,
+            'status'        => 'pending',
             'customer_id'   => $user->ID,
             'customer_note' => 'created by api rest',
             'created_via'   => 'checkout_rest_api',
