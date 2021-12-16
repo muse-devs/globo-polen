@@ -214,7 +214,13 @@ class Api_Checkout
 
         $order->add_product($product, 1);
         $order->set_address($address, 'billing');
-        $order->apply_coupon($coupon);
+        if( !empty( $coupon ) ) {
+            $result_cumpo_apply = $order->apply_coupon($coupon);
+            if( is_wp_error( $result_cumpo_apply ) ) {
+                $order->update_status( 'cancelled', "erro-no-cupom-{$coupon}" );
+                throw new Exception( 'Cupom inválido', 422 );
+            }
+        }
         $order->calculate_totals();
         $order->save();
 
