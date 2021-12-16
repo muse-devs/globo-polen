@@ -225,7 +225,7 @@ function polen_front_get_banner()
 // $size pode ser 'medium' e 'small'
 function polen_front_get_card($item, $size = "small", $social = false, $campanha = "")
 {
-  $product = wc_get_product($item['ID']);
+  // $product = wc_get_product($item['ID']);
   // $social = product_is_social_base($product);
   // $social == false ? $social = social_product_is_social(wc_get_product($item['ID']), social_get_category_base()) : false;
   $class = $size;
@@ -382,7 +382,7 @@ function polen_front_get_artists($items, $title, $social = false)
 <?php
 }
 
-function polen_front_get_videos($videos, $title = "Últimos vídeos gravados pelos Ídolos")
+function polen_front_get_videos($videos, $title = "Vídeos em destaque")
 {
   if (!$videos) {
 		return;
@@ -876,7 +876,7 @@ function polen_get_natal_banner($link)
       <a href="<?php echo $link; ?>">
         <div class="natal-banner" style="background: url('<?php echo TEMPLATE_URI . '/assets/img/natal/bg.png'; ?>')center no-repeat">
           <div class="content">
-            <p>Seu vídeo-Polen vira uma doação para uma instituição social!</p>
+            <p>Seu Vídeo-Polen vira uma doação para uma instituição social!</p>
             <div class="click-to-donate">
               Clique para doar
             </div>

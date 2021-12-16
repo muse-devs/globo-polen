@@ -362,6 +362,11 @@ require_once TEMPLATE_DIR . '/inc/highlight_categories.php';
 require_once TEMPLATE_DIR . '/inc/b2b_functions.php';
 
 /**
+ * Funções para REST API
+ */
+require_once TEMPLATE_DIR . '/api/api_function.php';
+
+/** 
  * Funções para página natal lacta
  */
 require_once TEMPLATE_DIR . '/lacta/function_natal_lacta.php';

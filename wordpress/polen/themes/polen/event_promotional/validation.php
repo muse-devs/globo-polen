@@ -40,7 +40,7 @@ get_header();
                     <li class="item itempayment-approved complete">
                       <span class="background status">1</span>
                       <span class="text">
-                        <p class="description">Compre produtos no site da <a href="https://www.lacta.com.br/" target="_blank"><b>Lacta</b></a>, usando o código do seu ídolo.</p>
+                        <p class="description">Compre produtos no site da <a href="<?= $product->get_meta( '_promotional_event_link_buy', true ); ?>" target="_blank"><b>Lacta</b></a>, usando o código do seu ídolo.</p>
                       </span>
                     </li>
                     <li class="item itempayment-approved complete">
