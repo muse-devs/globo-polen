@@ -129,21 +129,6 @@ class Api_Routers
                 'permission_callback' => '__return_true',
             )
         ));
-        register_rest_route($this->base, '/payment2', array(
-            array(
-                'methods' => WP_REST_Server::CREATABLE,
-                'args' => array(
-                    'name' => [],
-                    'cpf' => [],
-                    'phone' => [],
-                    'email' => [],
-                    'product_id' => [],
-                    'coupon' => [],
-                ),
-                'callback' => [$controller, 'payment2'],
-                'permission_callback' => '__return_true',
-            )
-        ));
 
         /**
          * ROTA: Verificar se existe stock
