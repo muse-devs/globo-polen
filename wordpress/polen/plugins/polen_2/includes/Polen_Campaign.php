@@ -3,6 +3,7 @@
 namespace Polen\Includes;
 
 use Polen\Api\Api_Checkout;
+use Polen\Includes\Module\Polen_Product_Module;
 
 class Polen_Campaign
 {
@@ -108,5 +109,24 @@ class Polen_Campaign
     public static function set_user_campaign( $customer_id, $campaign )
     {
         return update_user_meta( $customer_id, self::KEY_USER_META_CAMPAIGN, $campaign, true );
+    }
+
+
+    /**
+     * 
+     */
+    public static function get_product_is_campaign( $product )
+    {
+        $polen_product = new Polen_Product_Module( $product );
+        return $polen_product->get_is_campaign();
+    }
+
+    /**
+     * 
+     */
+    public static function get_product_campaign_slug( $product )
+    {
+        $polen_product = new Polen_Product_Module( $product );
+        return $polen_product->get_campaign_slug();
     }
 }

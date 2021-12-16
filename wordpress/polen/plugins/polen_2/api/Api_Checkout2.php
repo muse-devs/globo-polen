@@ -16,7 +16,7 @@ use WC_Customer;
 use WC_Session_Handler;
 use WP_REST_Request;
 
-class Api_Checkout
+class Api_Checkout2
 {
 
     private $woocommerce;
@@ -59,68 +59,36 @@ class Api_Checkout
      */
     public function create_order( WP_REST_Request $request )
     {
-        try {
-            $nonce = $request->get_param( 'security' );
-            if( !wp_verify_nonce( $nonce, $_SERVER['HTTP_USER_AGENT'].$_SERVER['REMOTE_ADDR'] ) ) {
-                throw new Exception( 'Falha na verificação de segurança', 401 );
-            }
-            $tuna = new Api_Gateway_Tuna();
-            $fields = $request->get_params();
-            $required_fields = $this->required_fields();
-            $errors = array();
 
-            foreach ($required_fields as $key => $field) {
-                if (!isset($fields[$key]) && !empty($field)) {
-                    $errors[] = "O campo {$field} é obrigatório";
-                }
-                $data[$key] = sanitize_text_field($fields[$key]);
-            }
 
-            if (!empty($errors)) {
-                return api_response( $errors, 422 );
-            }
 
-            if (!$this->CPF_validate($fields['cpf'])) {
-                throw new Exception( 'CPF Inválido', 422 );
-            }
 
-            $product = wc_get_product( $fields['product_id'] );
-            if( empty( $product ) ) {
-                throw new Exception( 'Produto inválido', 422 );
-            }
-            if (!$product->is_in_stock()) {
-                throw new Exception( 'Produto sem estoque', 422 );
-            }
 
-            $product = wc_get_product( $fields[ 'product_id' ] );
-            $campaign_slug = Polen_Campaign::get_product_campaign_slug( $product );
-            $user = $this->create_new_user( $data, $campaign_slug );
-            
-            WC()->cart->empty_cart();
-            
-            $add_product_cart = WC()->cart->add_to_cart( $product->get_id(), 1 );
-            if( !$add_product_cart ) {
-                throw new Exception( 'Esse produto não pode ser comprado', 422 );
-            }
+        $fields = $request->get_params();
+        var_dump( $this->create_cart( $request ) );
 
-            $coupon = null;
-            if (isset($fields['coupon'])) {
-                $this->check_cupom($fields['coupon']);
-                $coupon = sanitize_text_field($fields['coupon']);
-            }
+        // return api_response('??');
+        $order = WC()->checkout()->create_order( $fields );
+        $process_checkout = WC()->checkout()->process_checkout($order);
+        Debug::def($order,$process_checkout);
+        return api_response($order);
+        
+    }
 
-            $order_woo = $this->order_payment_woocommerce($user['user_object']->data, $fields['product_id'], $coupon);
-            $this->add_meta_to_order($order_woo, $data);
-            $payment = $tuna->process_payment($order_woo->get_id(), $user, $fields);
-
-            // if ( $payment['order_status'] != 200 ) {
-            //     throw new Exception($payment['message']);
-            // }
-            return api_response( $payment, 201 );
-
-        } catch (\Exception $e) {
-            return api_response( $e->getMessage(), $e->getCode() );
+    public function create_cart( \WP_REST_Request $request )
+    {
+        $params = $request->get_params();
+        WC()->cart->empty_cart();
+        var_dump( "add_to_cart: {$params[ 'product_id' ]}", WC()->cart->add_to_cart( $params[ 'product_id' ], 1 ) );
+        if( isset( $params[ 'coupon' ] ) && !empty( $params[ 'coupon' ] ) ) {
+            var_dump( 'add cupom: ', WC()->cart->add_discount( $params[ 'coupon' ] ) );
         }
+        var_dump( 'check_cart_items: ', WC()->cart->check_cart_items() );
+        var_dump( 'needs_payment: ', WC()->cart->needs_payment() );
+        // var_dump( 'get_total: ', WC()->cart->get_total() );
+        // var_dump( 'get_total_discount: ', WC()->cart->get_total_discount() );
+        var_dump( 'get_totals: ', WC()->cart->get_totals() );
+        WC()->cart->calculate_totals();
     }
 
     /**
@@ -184,42 +152,38 @@ class Api_Checkout
      *
      * @param WP_User $user
      * @param int $product_id
-     * @param $coupon
+     * @param string $coupon
      */
-    public function order_payment_woocommerce($user, $product_id, $coupon = '')
+    public function order_payment_woocommerce($user, $product_id, $coupon = null)
     {
-        $args = [
-            // 'status'        => null,
+        $data = [
+            'payment_method' => 'tuna_payment',
+            'payment_method_title' => 'API TUNA',
+            'set_paid' => false,
             'customer_id'   => $user->ID,
             'customer_note' => 'created by api rest',
             'created_via'   => 'checkout_rest_api',
-            'parent'        => null,
-            'cart_hash'     => null,
+            'billing' => [
+                'first_name' => $user->display_name,
+                'country' => get_user_meta($user->ID, 'billing_country', true),
+                'email' => $user->user_email,
+                'phone' => get_user_meta($user->ID, 'billing_cellphone', true),
+            ],
+            'line_items' => [
+                [
+                    'product_id' => $product_id,
+                    'quantity' => 1,
+                ],
+            ],
+
         ];
 
-        $order = wc_create_order($args);
-        $product = wc_get_product($product_id);
-
-        $address = array(
-            'first_name' => $user->display_name,
-            'last_name'  => '',
-            'email'      => $user->user_email,
-            'phone'      => get_user_meta($user->ID, 'billing_cellphone', true),
-            'address_1'  => '',
-            'address_2'  => '',
-            'city'       => '',
-            'state'      => '',
-            'postcode'   => '',
-            'country'    => 'BR'
-        );
-
-        $order->add_product($product, 1);
-        $order->set_address($address, 'billing');
-        $order->apply_coupon($coupon);
-        $order->calculate_totals();
-        $order->save();
-
-        return $order;
+        if ($coupon !== null ) {
+            $data['coupon_lines'][] = [
+                'code' => $coupon,
+            ];
+        }
+        return $this->woocommerce->post('orders', $data);
     }
 
     /**
@@ -276,32 +240,30 @@ class Api_Checkout
     /**
      * Adicionar metas na order
      *
-     * @param \WC_Order $order
+     * @param int $order_id
      * @param array $data
      * @throws Exception
      */
-    private function add_meta_to_order($order, array $data)
+    private function add_meta_to_order(int $order_id, array $data)
     {
+        $order = wc_get_order($order_id);
         $email = $data['email'];
         $status = $data['allow_video_on_page'] ? 'on' : 'off';
         // $product = wc_get_product($data['product_id']);
 
         $order->update_meta_data('_polen_customer_email', $email);
+        $order->add_meta_data( self::ORDER_METAKEY, 'galo_idolos', true );
 
+        // $order_item_id = wc_add_order_item($order_id, array(
+        //     'order_item_name' => $product->get_title(),
+        //     'order_item_type' => 'line_item', // product
+        // ));
         $items = $order->get_items();
-        $item = array_pop($items);
+        $item = array_pop( $items );
         $order_item_id = $item->get_id();
-        $quantity = 1;
+        // $quantity = 1;
 
-        $product = wc_get_product( $data[ 'product_id' ] );
-        $campaign_slug = Polen_Campaign::get_product_campaign_slug( $product );
-
-        $order->add_meta_data( self::ORDER_METAKEY, $campaign_slug, true);
-
-        wc_add_order_item_meta($order_item_id, '_line_subtotal', $order->get_subtotal(), true );
-        wc_add_order_item_meta($order_item_id, '_line_total'   , $order->get_total(), true );
-
-        wc_add_order_item_meta($order_item_id, '_qty'                 , $quantity, true);
+        // wc_add_order_item_meta($order_item_id, '_qty', $quantity, true);
         wc_add_order_item_meta($order_item_id, 'offered_by'           , $data['name'], true);
         wc_add_order_item_meta($order_item_id, 'video_to'             , $data['video_to'], true);
         wc_add_order_item_meta($order_item_id, 'name_to_video'        , $data['name_to_video'], true);
@@ -313,8 +275,9 @@ class Api_Checkout
         $interval  = Polen_Order::get_interval_order_basic();
         $timestamp = Polen_Order::get_deadline_timestamp($order, $interval);
         Polen_Order::save_deadline_timestamp_in_order($order, $timestamp);
+        $order->add_meta_data(Polen_Order::META_KEY_DEADLINE, $timestamp, true);
 
-        return $order->save();
+        $order->save();
     }
 
     /**
