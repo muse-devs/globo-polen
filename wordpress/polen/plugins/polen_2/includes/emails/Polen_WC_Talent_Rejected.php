@@ -24,6 +24,8 @@ class Polen_WC_Talent_Rejected extends \WC_Email {
 		$this->template_html  = 'emails/Polen_WC_Talent_Rejected.php';
 		$this->template_plain = 'emails/plain/Polen_WC_Talent_Rejected.php';
 		$this->template_base  = TEMPLATEPATH . 'woocommerce/';
+
+		$this->campaign_template_html = 'emails/campaign/%s/Polen_WC_Talent_Rejected.php';
     
 		add_action( 'woocommerce_order_status_changed', array( $this, 'trigger' ) );
 		
@@ -44,12 +46,34 @@ class Polen_WC_Talent_Rejected extends \WC_Email {
 			if ( ! $this->is_enabled() || ! $this->get_recipient() ) {
 				return;
 			}
-			$this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
+			
+			$order_is_campaing = Polen_Campaign::get_is_order_campaing( $this->object );
+			if( $order_is_campaing ) {
+				$this->send( $this->get_recipient(), $this->get_subject_campaing(), $this->get_content_campaign_html(), $this->get_headers(), $this->get_attachments() );
+			} else {
+				$this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
+			}
 		}
 	}
 
+	public function get_subject_campaing()
+	{
+		return 'O talento não aceitou o seu pedido';
+	}
     public function get_content_html() {
 		return wc_get_template_html( $this->template_html, array(
+			'order'         => $this->object,
+			'email_heading' => $this->get_heading(),
+			'sent_to_admin' => true,
+			'plain_text'    => false,
+			'email'			=> $this
+		), '', $this->template_base );
+	}
+
+    public function get_content_campaign_html() {
+		$slug_campaign = Polen_Campaign::get_order_campaing_slug( $this->object );
+		$file_templete = sprintf( $this->campaign_template_html, $slug_campaign );
+		return wc_get_template_html( $file_templete, array(
 			'order'         => $this->object,
 			'email_heading' => $this->get_heading(),
 			'sent_to_admin' => true,

@@ -2,10 +2,10 @@
 # This file is distributed under the same license as the WooCommerce Admin package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WooCommerce Admin 2.9.0\n"
+"Project-Id-Version: WooCommerce Admin 2.9.3\n"
 "Report-Msgid-Bugs-To: "
 "https://wordpress.org/support/plugin/woocommerce-admin\n"
-"POT-Creation-Date: 2021-11-29 23:25:00+00:00\n"
+"POT-Creation-Date: 2021-12-15 02:58:31+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -124,6 +124,11 @@ msgstr ""
 #: src/API/Reports/Variations/Controller.php:416 src/Features/Analytics.php:228
 #: src/Features/Navigation/CoreMenu.php:95 src/ReportCSVEmail.php:36
 #: client/analytics/report/revenue/table.js:65
+#: client/analytics/report/coupons/table.js:38
+#: client/analytics/report/customers/table.js:59
+#: client/analytics/report/get-reports.js:78
+#: client/analytics/report/orders/config.js:26
+#: client/analytics/report/products/config.js:43
 #: client/analytics/report/taxes/config.js:47
 #: client/analytics/report/taxes/table.js:58
 #: client/analytics/report/variations/config.js:44
@@ -6902,7 +6907,7 @@ msgstr ""
 
 #: client/tasks/fills/PaymentGatewaySuggestions/components/Setup/Configure.js:103
 #: client/tasks/fills/appearance.js:331
-#: client/tasks/fills/shipping/index.js:216
+#: client/tasks/fills/shipping/index.js:234
 #: packages/components/build-module/dynamic-form/dynamic-form.js:23
 msgid "Proceed"
 msgstr ""
@@ -6959,11 +6964,11 @@ msgid ""
 "connect later in store settings."
 msgstr ""
 
-#: client/tasks/fills/PaymentGatewaySuggestions/index.js:213
+#: client/tasks/fills/PaymentGatewaySuggestions/index.js:214
 msgid "Enabled payment gateways"
 msgstr ""
 
-#: client/tasks/fills/PaymentGatewaySuggestions/index.js:224
+#: client/tasks/fills/PaymentGatewaySuggestions/index.js:225
 msgid "Additional payment gateways"
 msgstr ""
 
@@ -7078,7 +7083,7 @@ msgid "Store notice text"
 msgstr ""
 
 #: client/tasks/fills/appearance.js:367
-#: client/tasks/fills/shipping/index.js:217
+#: client/tasks/fills/shipping/index.js:235
 msgid "Complete task"
 msgstr ""
 
@@ -7173,57 +7178,57 @@ msgid ""
 "service"
 msgstr ""
 
-#: client/tasks/fills/shipping/index.js:152
+#: client/tasks/fills/shipping/index.js:156
 msgid "📦 Shipping is done! Don't worry, you can always change it later"
 msgstr ""
 
-#: client/tasks/fills/shipping/index.js:183
+#: client/tasks/fills/shipping/index.js:197
 #: client/tasks/fills/tax/manual-configuration/index.tsx:45
 #: client/tasks/fills/tax/woocommerce-tax/setup.tsx:99
 msgid "Set store location"
 msgstr ""
 
-#: client/tasks/fills/shipping/index.js:184
+#: client/tasks/fills/shipping/index.js:198
 #: client/tasks/fills/tax/manual-configuration/index.tsx:46
 #: client/tasks/fills/tax/woocommerce-tax/setup.tsx:100
 msgid "The address from which your business operates"
 msgstr ""
 
-#: client/tasks/fills/shipping/index.js:206
+#: client/tasks/fills/shipping/index.js:224
 msgid "Set shipping costs"
 msgstr ""
 
-#: client/tasks/fills/shipping/index.js:207
+#: client/tasks/fills/shipping/index.js:225
 msgid "Define how much customers pay to ship to different destinations"
 msgstr ""
 
-#: client/tasks/fills/shipping/index.js:231
+#: client/tasks/fills/shipping/index.js:254
 msgid "Enable shipping label printing"
 msgstr ""
 
-#: client/tasks/fills/shipping/index.js:239
+#: client/tasks/fills/shipping/index.js:262
 msgid ""
 "We recommend using ShipStation to save time at the post office by printing "
 "your shipping labels at home. Try ShipStation free for 30 days. "
 "{{link}}Learn more{{/link}}."
 msgstr ""
 
-#: client/tasks/fills/shipping/index.js:254
+#: client/tasks/fills/shipping/index.js:277
 msgid ""
 "With WooCommerce Shipping you can save time by printing your USPS and DHL "
 "Express shipping labels at home"
 msgstr ""
 
-#: client/tasks/fills/shipping/index.js:287
+#: client/tasks/fills/shipping/index.js:310
 #: client/tasks/fills/tax/woocommerce-tax/setup.tsx:122
 msgid "Connect your store"
 msgstr ""
 
-#: client/tasks/fills/shipping/index.js:288
+#: client/tasks/fills/shipping/index.js:311
 msgid "Connect your store to WordPress.com to enable label printing"
 msgstr ""
 
-#: client/tasks/fills/shipping/index.js:71
+#: client/tasks/fills/shipping/index.js:75
 msgid "Rest of the world"
 msgstr ""
 

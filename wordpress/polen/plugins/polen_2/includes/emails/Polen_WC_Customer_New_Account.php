@@ -1,6 +1,8 @@
 <?php
 namespace Polen\Includes\Emails;
 
+use Polen\Api\Api_Checkout;
+use Polen\Includes\Polen_Campaign;
 use Polen\Includes\Polen_Checkout_Create_User;
 use WC_Email_Customer_New_Account;
 use WP_User;
@@ -30,7 +32,8 @@ class Polen_WC_Customer_New_Account extends WC_Email_Customer_New_Account
      * @return string
      */
     public function get_default_subject_checkout() {
-        return 'Conta Criada';
+        //TODO: pegar o nome da campanha PELO SLUG que está no Usuário
+        return 'Boas-vindas ao Galo Ídolos';
     }
 
 
@@ -41,7 +44,7 @@ class Polen_WC_Customer_New_Account extends WC_Email_Customer_New_Account
      * @return string
      */
     public function get_default_heading_checkout() {
-        return 'Sua conta foi criada na Polen.me!';
+        return 'Sua conta foi criada';
     }
 
     /**
@@ -53,22 +56,31 @@ class Polen_WC_Customer_New_Account extends WC_Email_Customer_New_Account
      */
     public function trigger( $user_id, $user_pass = '', $password_generated = false ) {
         $this->setup_locale();
-
-        if( strpos(php_sapi_name(), 'cli' ) !== false ) {
-            return '';
-        }
-
-        if ( $user_id ) {
+        if ( $user_id ){ 
             $this->object = new WP_User( $user_id );
 
-            $this->user_pass          = $user_pass;
             $this->user_login         = stripslashes( $this->object->user_login );
             $this->user_email         = stripslashes( $this->object->user_email );
             $this->recipient          = $this->user_email;
+            $this->user_pass          = $user_pass;
             $this->password_generated = $password_generated;
         }
+        
+        $user_is_campaign = Polen_Campaign::get_is_user_campaing( $this->object->ID );
+        if( $user_is_campaign ) {
 
-        if ( $this->is_enabled() && $this->get_recipient() ) {
+            $slug_campaing = Polen_Campaign::get_user_campaing_slug( $this->object->ID );
+            $this->template_html           = sprintf( 'emails/campaign/%s/customer-new-account.php', $slug_campaing );
+
+            $this->send( $this->get_recipient(),
+                $this->get_default_subject_checkout(),
+                $this->get_content_html(),
+                $this->get_headers(),
+                $this->get_attachments()
+            );
+
+
+        } else if ( $this->is_enabled() && $this->get_recipient() ) {
             $checkout_create_user = new Polen_Checkout_Create_User();
             if( $checkout_create_user->send_password_in_email_new_user() ) {
 
@@ -81,6 +93,14 @@ class Polen_WC_Customer_New_Account extends WC_Email_Customer_New_Account
                              $this->get_headers(),
                              $this->get_attachments() );
                              
+            } else if($password_generated) {
+                //Lacta
+                $this->password_generated = $user_pass;
+                $this->send( $this->get_recipient(),
+                $this->get_default_subject_checkout(),
+                $this->get_content_html_checkout(),
+                $this->get_headers(),
+                $this->get_attachments() );
             } else {
                 $this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
             }

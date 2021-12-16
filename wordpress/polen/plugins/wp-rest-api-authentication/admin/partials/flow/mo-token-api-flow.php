@@ -143,17 +143,17 @@ function mo_api_auth_is_valid_request() {
 	$headers = mo_api_auth_getallheaders();
 	$headers = array_change_key_case($headers, CASE_UPPER);
 	
-	if (stripos(explode('?', $_SERVER['REQUEST_URI'], 2)[0], '/wp/v2') === false){
-		if(get_option('mo_rest_api_protect_migrate')){
-			$response = array(
-				'status'	=>	'error',
-				'error'		=>  'Restricted',
-				'error_description'	=>	'Sorry, you are not allowed to access REST API.'
-			);
-			wp_send_json($response, 403);
-		}
-		return true;
-	}
+	// if (stripos(explode('?', $_SERVER['REQUEST_URI'], 2)[0], '/wp/v2') === false){
+	// 	if(get_option('mo_rest_api_protect_migrate')){
+	// 		$response = array(
+	// 			'status'	=>	'error',
+	// 			'error'		=>  'Restricted',
+	// 			'error_description'	=>	'Sorry, you are not allowed to access REST API.'
+	// 		);
+	// 		wp_send_json($response, 403);
+	// 	}
+	// 	return true;
+	// }
 
 	if( get_option( 'mo_api_authentication_selected_authentication_method' ) == 'basic_auth' ) {
 		$response = Mo_API_Authentication_Basic_OAuth::mo_api_auth_is_valid_request($headers);

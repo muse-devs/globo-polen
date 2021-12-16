@@ -39,7 +39,21 @@ class Polen_Product_Module
         }
         $product = $this->object;
         $campaign_taxonomies = wp_get_post_terms( $product->get_id(), self::TAXONOMY_SLUG_CAMPAIGN );
+        if( !empty( $campaign_taxonomies[ 0 ]->parent ) ) {
+            $campaign_taxonomies[ 0 ] = $this->get_term_top_most_parent( $campaign_taxonomies[ 0 ]->parent, self::TAXONOMY_SLUG_CAMPAIGN );
+        }
         return $campaign_taxonomies[ 0 ]->slug;
+    }
+
+    public function get_term_top_most_parent( $term, $taxonomy ) {
+        // Start from the current term
+        $parent  = get_term( $term, $taxonomy );
+        // Climb up the hierarchy until we reach a term with parent = '0'
+        while ( $parent->parent != '0' ) {
+            $term_id = $parent->parent;
+            $parent  = get_term( $term_id, $taxonomy);
+        }
+        return $parent;
     }
 
     public function get_campaign_name()
