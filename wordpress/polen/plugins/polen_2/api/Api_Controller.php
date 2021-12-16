@@ -19,7 +19,6 @@ class Api_Controller{
     {
         if( $static ) {
             $this->checkout = new Api_Checkout();
-            $this->checkout2 = new Api_Checkout2();
         }
     }
 
@@ -178,10 +177,6 @@ class Api_Controller{
     public function payment($request)
     {
         return $this->checkout->create_order($request);
-    }
-    public function payment2($request)
-    {
-        return $this->checkout2->create_order($request);
     }
 
     /**
