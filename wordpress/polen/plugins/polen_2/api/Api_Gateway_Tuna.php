@@ -5,6 +5,7 @@ namespace Polen\Api;
 use Exception;
 use Polen\Includes\Debug;
 use Polen\Includes\Polen_Order;
+use WC_Emails;
 use WC_Order;
 
 class Api_Gateway_Tuna
@@ -37,13 +38,13 @@ class Api_Gateway_Tuna
 
             $name = $customer_order->get_billing_first_name();
             $product = wc_get_product($data['product_id']);
-// var_dump(floatval($product->get_sale_price()));die;
+
             $purchased_items = [
                 [
                     "Amount" => floatval($product->get_sale_price()),
                     "ProductDescription" => $product->get_name(),
                     "ItemQuantity" => 1,
-                    "CategoryName" => 'galo',
+                    "CategoryName" => 'galo_idolos',
                     "AntiFraud" => [
                         "Ean" => $product->get_sku()
                     ]
@@ -159,7 +160,6 @@ class Api_Gateway_Tuna
             }
 
             $response = json_decode($api_response['body']);
-// var_dump($response,__LINE__);die;
             $new_status = $this->get_status_response($response->status);
             if( "failed" === $new_status || 'cancelled' === $new_status ) {
                 throw new Exception( 'Erro no pagamento, tente novamente', 422 );
@@ -168,9 +168,8 @@ class Api_Gateway_Tuna
             if ($new_status === 'payment-approved') {
                 wc_reduce_stock_levels($order_id);
             }
-// var_dump($new_status);die;
+
             $response_message = $this->get_response_message($new_status);
-// Debug::def(wc_get_order_statuses());
             $customer_order->update_status( $new_status );
 
             return [

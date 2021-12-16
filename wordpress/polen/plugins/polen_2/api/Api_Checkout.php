@@ -92,10 +92,9 @@ class Api_Checkout
                 throw new Exception( 'Produto sem estoque', 422 );
             }
 
-            //TODO: Pegar o slug da campanha pelo produto add o metodo
-            // na classe Polen_Campaign::
-            $campaign = 'galo_idolos';
-            $user = $this->create_new_user( $data, $campaign );
+            $product = wc_get_product( $fields[ 'product_id' ] );
+            $campaign_slug = Polen_Campaign::get_product_campaign_slug( $product );
+            $user = $this->create_new_user( $data, $campaign_slug );
             
             WC()->cart->empty_cart();
             
@@ -288,15 +287,19 @@ class Api_Checkout
         // $product = wc_get_product($data['product_id']);
 
         $order->update_meta_data('_polen_customer_email', $email);
-        $order->add_meta_data( self::ORDER_METAKEY, 'polen_galo', true);
 
         $items = $order->get_items();
         $item = array_pop($items);
         $order_item_id = $item->get_id();
         $quantity = 1;
 
+        $product = wc_get_product( $data[ 'product_id' ] );
+        $campaign_slug = Polen_Campaign::get_product_campaign_slug( $product );
+
+        $order->add_meta_data( self::ORDER_METAKEY, $campaign_slug, true);
+
         wc_add_order_item_meta($order_item_id, '_line_subtotal', $order->get_subtotal(), true );
-        wc_add_order_item_meta($order_item_id, '_line_total', $order->get_total(), true );
+        wc_add_order_item_meta($order_item_id, '_line_total'   , $order->get_total(), true );
 
         wc_add_order_item_meta($order_item_id, '_qty'                 , $quantity, true);
         wc_add_order_item_meta($order_item_id, 'offered_by'           , $data['name'], true);
@@ -310,9 +313,8 @@ class Api_Checkout
         $interval  = Polen_Order::get_interval_order_basic();
         $timestamp = Polen_Order::get_deadline_timestamp($order, $interval);
         Polen_Order::save_deadline_timestamp_in_order($order, $timestamp);
-        $order->add_meta_data(Polen_Order::META_KEY_DEADLINE, $timestamp, true);
 
-        $order->save();
+        return $order->save();
     }
 
     /**
