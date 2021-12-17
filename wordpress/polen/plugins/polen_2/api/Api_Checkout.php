@@ -232,18 +232,19 @@ class Api_Checkout
      *
      * @param $code_id
      */
-    public function coupon_rules($code_id)
+    public function coupon_rules($code_id, $product_id = 0 )
     {
-        try {
-
-            return api_response( $this->check_cupom( $code_id ), 200 );
-
-        } catch (\Exception $e) {
-            return api_response($e->getMessage(), 422);
+        if( !empty( $product_id ) ) {
+            WC()->cart->empty_cart();
+            $add_product_cart = WC()->cart->add_to_cart( $product_id, 1 );
         }
-
+        $this->check_cupom( $code_id );
     }
 
+
+    /**
+     * 
+     */
     protected function check_cupom( $coupom_code )
     {
         $return = WC()->cart->apply_coupon( $coupom_code );
