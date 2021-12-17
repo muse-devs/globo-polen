@@ -44,7 +44,7 @@ const commentbox = new Vue({
 							setSessionMessage(
 								CONSTANTS.SUCCESS,
 								"Vídeo avaliado com sucesso!",
-								"Seu comentário poderá aparecer na página do Talento"
+								"Seu comentário poderá aparecer na página do Ídolo"
 							);
 							window.location.href = "/my-account/orders";
 						} else {
