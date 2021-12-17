@@ -3,6 +3,7 @@
 namespace Polen\Api;
 
 use Exception;
+use Polen\Includes\Debug;
 use Polen\Includes\Polen_Campaign;
 use WC_Order;
 
@@ -158,6 +159,7 @@ class Api_Gateway_Tuna
         }
 
         $response = json_decode($api_response['body']);
+        Debug::def($response);
         $new_status = $this->get_status_response($response->status);
         if( "failed" === $new_status || 'cancelled' === $new_status ) {
             throw new Exception( 'Erro no pagamento, tente novamente', 422 );
