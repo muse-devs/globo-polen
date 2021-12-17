@@ -81,6 +81,8 @@ function polen_create_review($order_id)
  */
 function polen_card_talent_reviews_order(\WP_Post $post, $Talent_Fields)
 {
+  global $Polen_Plugin_Settings;
+  $order_expires = $Polen_Plugin_Settings['order_expires'];
 ?>
 	<div class="col-md-12 mt-3">
 		<div class="row">
@@ -93,7 +95,7 @@ function polen_card_talent_reviews_order(\WP_Post $post, $Talent_Fields)
 								<?php Icon_Class::polen_icon_calendar(); ?>
 								<?php
 									$date = date("d/m/Y");
-									echo date( "d/m/y", strtotime('+7 days') );
+									echo date( "d/m/y", strtotime('+'.$order_expires.' days') );
 								?>
 							</span>
 						</p>

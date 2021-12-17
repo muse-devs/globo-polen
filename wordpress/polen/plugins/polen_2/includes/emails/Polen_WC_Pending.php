@@ -63,7 +63,7 @@ class Polen_WC_Pending extends WC_Email
 
     public function get_subject()
     {
-        return 'Seu pedido no Galo Ídolos está com o pagamento pendente';
+        return 'Pedido Recebido';
     }
 
 	public function get_content() {

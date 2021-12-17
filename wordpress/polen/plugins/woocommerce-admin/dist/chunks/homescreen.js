@@ -2736,10 +2736,9 @@ const PaymentGatewaySuggestions = ({
       return map;
     }, {});
     return paymentGatewaySuggestions.reduce((map, suggestion) => {
-      const {
-        id
-      } = suggestion;
-      const installedGateway = mappedPaymentGateways[suggestion.id] ? mappedPaymentGateways[id] : {};
+      // A colon ':' is used sometimes to have multiple configs for the same gateway ex: woocommerce_payments:us.
+      const id = (suggestion.id || '').split(':')[0];
+      const installedGateway = mappedPaymentGateways[id] ? mappedPaymentGateways[id] : {};
       const enrichedSuggestion = {
         installed: !!mappedPaymentGateways[id],
         postInstallScripts: installedGateway.post_install_scripts,
@@ -2752,7 +2751,7 @@ const PaymentGatewaySuggestions = ({
         requiredSettings: installedGateway.required_settings_keys ? installedGateway.required_settings_keys.map(settingKey => installedGateway.settings[settingKey]).filter(Boolean) : [],
         ...suggestion
       };
-      map.set(id, enrichedSuggestion);
+      map.set(suggestion.id, enrichedSuggestion);
       return map;
     }, new Map());
   };
@@ -3463,7 +3462,6 @@ var shipping = __webpack_require__(570);
 // CONCATENATED MODULE: ./client/tasks/fills/shipping/index.js
 
 
-
 /**
  * External dependencies
  */
@@ -3648,8 +3646,14 @@ class shipping_Shipping extends external_wp_element_["Component"] {
   getSteps() {
     const {
       countryCode,
+      createNotice,
+      invalidateResolutionForStoreSelector,
       isJetpackConnected,
-      settings
+      onComplete,
+      optimisticallyCompleteTask,
+      settings,
+      task,
+      updateAndPersistSettingsForGroup
     } = this.props;
     const pluginsToActivate = this.getPluginsToActivate();
     const requiresJetpackConnection = !isJetpackConnected && countryCode === 'US';
@@ -3657,7 +3661,10 @@ class shipping_Shipping extends external_wp_element_["Component"] {
       key: 'store_location',
       label: Object(external_wp_i18n_["__"])('Set store location', 'woocommerce-admin'),
       description: Object(external_wp_i18n_["__"])('The address from which your business operates', 'woocommerce-admin'),
-      content: Object(external_wp_element_["createElement"])(location_StoreLocation, extends_default()({}, this.props, {
+      content: Object(external_wp_element_["createElement"])(location_StoreLocation, {
+        createNotice: createNotice,
+        updateAndPersistSettingsForGroup: updateAndPersistSettingsForGroup,
+        settings: settings,
         onComplete: values => {
           const country = Object(utils["b" /* getCountryCode */])(values.countryState);
           Object(external_wc_tracks_["recordEvent"])('tasklist_shipping_set_location', {
@@ -3665,7 +3672,7 @@ class shipping_Shipping extends external_wp_element_["Component"] {
           });
           this.completeStep();
         }
-      })),
+      }),
       visible: true
     }, {
       key: 'rates',
@@ -3674,8 +3681,15 @@ class shipping_Shipping extends external_wp_element_["Component"] {
       content: Object(external_wp_element_["createElement"])(shipping_rates, {
         buttonText: pluginsToActivate.length || requiresJetpackConnection ? Object(external_wp_i18n_["__"])('Proceed', 'woocommerce-admin') : Object(external_wp_i18n_["__"])('Complete task', 'woocommerce-admin'),
         shippingZones: this.state.shippingZones,
-        onComplete: this.completeStep,
-        createNotice: this.props.createNotice
+        onComplete: () => {
+          const {
+            id
+          } = task;
+          optimisticallyCompleteTask(id);
+          invalidateResolutionForStoreSelector();
+          this.completeStep();
+        },
+        createNotice: createNotice
       }),
       visible: settings.woocommerce_ship_to_countries === 'disabled' ? false : true
     }, {
@@ -3691,7 +3705,7 @@ class shipping_Shipping extends external_wp_element_["Component"] {
           })
         }
       }) : Object(external_wp_i18n_["__"])('With WooCommerce Shipping you can save time ' + 'by printing your USPS and DHL Express shipping labels at home', 'woocommerce-admin'),
-      content: Object(external_wp_element_["createElement"])(external_wc_components_["Plugins"], extends_default()({
+      content: Object(external_wp_element_["createElement"])(external_wc_components_["Plugins"], {
         onComplete: (plugins, response) => {
           Object(notices["a" /* createNoticesFromResponse */])(response);
           Object(external_wc_tracks_["recordEvent"])('tasklist_shipping_label_printing', {
@@ -3707,22 +3721,22 @@ class shipping_Shipping extends external_wp_element_["Component"] {
             plugins_to_activate: pluginsToActivate
           });
           Object(external_wc_navigation_["getHistory"])().push(Object(external_wc_navigation_["getNewPath"])({}, '/', {}));
+          onComplete();
         },
         pluginSlugs: pluginsToActivate
-      }, this.props)),
+      }),
       visible: pluginsToActivate.length
     }, {
       key: 'connect',
       label: Object(external_wp_i18n_["__"])('Connect your store', 'woocommerce-admin'),
       description: Object(external_wp_i18n_["__"])('Connect your store to WordPress.com to enable label printing', 'woocommerce-admin'),
-      content: Object(external_wp_element_["createElement"])(connect, extends_default()({
+      content: Object(external_wp_element_["createElement"])(connect, {
         redirectUrl: Object(wc_admin_settings_build_module["e" /* getAdminLink */])('admin.php?page=wc-admin'),
-        completeStep: this.completeStep
-      }, this.props, {
+        completeStep: this.completeStep,
         onConnect: () => {
           Object(external_wc_tracks_["recordEvent"])('tasklist_shipping_connect_store');
         }
-      })),
+      }),
       visible: requiresJetpackConnection
     }];
     return Object(external_lodash_["filter"])(steps, step => step.visible);
@@ -3783,8 +3797,14 @@ const ShippingWrapper = Object(external_wp_compose_["compose"])(Object(external_
   const {
     updateAndPersistSettingsForGroup
   } = dispatch(external_wc_data_["SETTINGS_STORE_NAME"]);
+  const {
+    invalidateResolutionForStoreSelector,
+    optimisticallyCompleteTask
+  } = dispatch(external_wc_data_["ONBOARDING_STORE_NAME"]);
   return {
     createNotice,
+    invalidateResolutionForStoreSelector,
+    optimisticallyCompleteTask,
     updateAndPersistSettingsForGroup
   };
 }))(shipping_Shipping);
@@ -3793,10 +3813,12 @@ Object(external_wp_plugins_["registerPlugin"])('wc-admin-onboarding-task-shippin
   render: () => Object(external_wp_element_["createElement"])(build_module["WooOnboardingTask"], {
     id: "shipping"
   }, ({
-    onComplete
+    onComplete,
+    task
   }) => {
     return Object(external_wp_element_["createElement"])(ShippingWrapper, {
-      onComplete: onComplete
+      onComplete: onComplete,
+      task: task
     });
   })
 });

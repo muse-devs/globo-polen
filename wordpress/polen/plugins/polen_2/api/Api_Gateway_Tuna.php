@@ -3,8 +3,7 @@
 namespace Polen\Api;
 
 use Exception;
-use Polen\Includes\Debug;
-use Polen\Includes\Polen_Order;
+use Polen\Includes\Polen_Campaign;
 use WC_Order;
 
 class Api_Gateway_Tuna
@@ -27,163 +26,157 @@ class Api_Gateway_Tuna
      */
     public function process_payment($order_id, $current_user, array $data)
     {
-        // try {
-            $url = $this->get_endpoint_url('Payment/Init');
+        $url = $this->get_endpoint_url('Payment/Init');
 
-            $session_id = $this->get_session_id($current_user['user_object']->data);
-            $token = $this->generate_token_card($session_id, $data);
+        $session_id = $this->get_session_id($current_user['user_object']->data);
+        $token = $this->generate_token_card($session_id, $data);
 
-            $customer_order = new WC_Order($order_id);
+        $customer_order = new WC_Order($order_id);
 
-            $name = $customer_order->get_billing_first_name();
-            $product = wc_get_product($data['product_id']);
-// var_dump(floatval($product->get_sale_price()));die;
-            $purchased_items = [
-                [
-                    "Amount" => floatval($product->get_sale_price()),
-                    "ProductDescription" => $product->get_name(),
-                    "ItemQuantity" => 1,
-                    "CategoryName" => 'galo',
-                    "AntiFraud" => [
-                        "Ean" => $product->get_sku()
-                    ]
-                ]
-            ];
+        $name = $customer_order->get_billing_first_name();
+        $product = wc_get_product($data['product_id']);
+        $product_campaign_slug = Polen_Campaign::get_product_campaign_slug( $product );
 
-            $document_type = 'CPF';
-            $document_value = sanitize_text_field($data['cpf']);
-            $payment_method_type = '1';
-
-            $tuna_expiration_date = $this->separate_month_year($data['tuna_expiration_date']);
-            $customer_order->calculate_totals();
-
-            $card_info = [
-                "Token" => $token,
-                "TokenProvider" => 'Tuna',
-                "CardHolderName" => sanitize_text_field($data["tuna_card_holder_name"]),
-                "BrandName" => sanitize_text_field($data["tuna_card_brand"]),
-                "ExpirationMonth" => (int) $tuna_expiration_date[0],
-                "ExpirationYear" => (int) $tuna_expiration_date[1],
-                "TokenSingleUse" => 1,
-                "SaveCard" => false,
-                "BillingInfo" => [
-                    "Document" => $document_value,
-                    "DocumentType" => $document_type,
-                    "Address" => [
-                        "Street" => '',
-                        "Number" => '',
-                        "Complement" => '',
-                        "Neighborhood" => '',
-                        "City" => '',
-                        "State" => '',
-                        "Country" => '',
-                        "PostalCode" => '',
-                        "Phone" => $customer_order->get_billing_phone(),
-                    ]
-                ]
-            ];
-
-            $body = [
-                'AppToken' => $this->partner_key,
-                'Account' => $this->partner_account,
-                'PartnerUniqueID' => $order_id,
-                'TokenSession' => $session_id,
-                'Customer' => [
-                    'Email' => $customer_order->get_billing_email(),
-                    'Name' => $name,
-                    'ID' => $current_user['user_object']->data->ID,
-                    'Document' => $document_value,
-                    'DocumentType' => $document_type
-                ],
+        $purchased_items = [
+            [
+                "Amount" => floatval($product->get_sale_price()),
+                "ProductDescription" => $product->get_name(),
+                "ItemQuantity" => 1,
+                "CategoryName" => $product_campaign_slug,
                 "AntiFraud" => [
-                    "DeliveryAddressee" => $name
-                ],
-                "DeliveryAddress" => [
-                    "Street" =>  $customer_order->get_shipping_address_1(),
+                    "Ean" => $product->get_sku()
+                ]
+            ]
+        ];
+
+        $document_type = 'CPF';
+        $document_value = sanitize_text_field($data['cpf']);
+        $payment_method_type = '1';
+
+        $tuna_expiration_date = $this->separate_month_year($data['tuna_expiration_date']);
+        $customer_order->calculate_totals();
+
+        $card_info = [
+            "Token" => $token,
+            "TokenProvider" => 'Tuna',
+            "CardHolderName" => sanitize_text_field($data["tuna_card_holder_name"]),
+            "BrandName" => sanitize_text_field($data["tuna_card_brand"]),
+            "ExpirationMonth" => (int) $tuna_expiration_date[0],
+            "ExpirationYear" => (int) $tuna_expiration_date[1],
+            "TokenSingleUse" => 1,
+            "SaveCard" => false,
+            "BillingInfo" => [
+                "Document" => $document_value,
+                "DocumentType" => $document_type,
+                "Address" => [
+                    "Street" => '',
                     "Number" => '',
                     "Complement" => '',
                     "Neighborhood" => '',
-                    "City" => $customer_order->get_shipping_city(),
-                    "State" => 'CE',
-                    "Country" => 'BR',
-                    "PostalCode" => $customer_order->get_shipping_postcode(),
-                    "Phone" => '',
-                ],
-                "FrontData" => [
-                    "SessionID" => wp_get_session_token(),
-                    "Origin" => 'WEBSITE',
-                    "IpAddress" => $_SERVER['REMOTE_ADDR'],
-                    "CookiesAccepted" => true
-                ],
-                "ShippingItems" => [
-                    "Items" => [
-                        [
-                            "Type" => $customer_order->get_shipping_method(),
-                            "Amount" => floatval($customer_order->get_shipping_total()),
-                            "Code" => '',
-                        ]
-                    ]
-                ],
-                "PaymentItems" => [
-                    "Items" => $purchased_items,
-                ],
-                "PaymentData" => [
-                    'Countrycode' => 'BR',
-                    "SalesChannel" => 'ECOMMERCE',
-                    "PaymentMethods" => [
-                        [
-                            "PaymentMethodType" => $payment_method_type,
-                            "Amount" => floatval($customer_order->get_total()),
-                            "Installments" => 1,
-                            "CardInfo" => $card_info,
-                        ]
+                    "City" => '',
+                    "State" => '',
+                    "Country" => '',
+                    "PostalCode" => '',
+                    "Phone" => $customer_order->get_billing_phone(),
+                ]
+            ]
+        ];
+
+        $body = [
+            'AppToken' => $this->partner_key,
+            'Account' => $this->partner_account,
+            'PartnerUniqueID' => $order_id,
+            'TokenSession' => $session_id,
+            'Customer' => [
+                'Email' => $customer_order->get_billing_email(),
+                'Name' => $name,
+                'ID' => $current_user['user_object']->data->ID,
+                'Document' => $document_value,
+                'DocumentType' => $document_type
+            ],
+            "AntiFraud" => [
+                "DeliveryAddressee" => $name
+            ],
+            "DeliveryAddress" => [
+                "Street" =>  $customer_order->get_shipping_address_1(),
+                "Number" => '',
+                "Complement" => '',
+                "Neighborhood" => '',
+                "City" => $customer_order->get_shipping_city(),
+                "State" => 'CE',
+                "Country" => 'BR',
+                "PostalCode" => $customer_order->get_shipping_postcode(),
+                "Phone" => '',
+            ],
+            "FrontData" => [
+                "SessionID" => wp_get_session_token(),
+                "Origin" => 'WEBSITE',
+                "IpAddress" => $_SERVER['REMOTE_ADDR'],
+                "CookiesAccepted" => true
+            ],
+            "ShippingItems" => [
+                "Items" => [
+                    [
+                        "Type" => $customer_order->get_shipping_method(),
+                        "Amount" => floatval($customer_order->get_shipping_total()),
+                        "Code" => '',
                     ]
                 ]
-            ];
+            ],
+            "PaymentItems" => [
+                "Items" => $purchased_items,
+            ],
+            "PaymentData" => [
+                'Countrycode' => 'BR',
+                "SalesChannel" => 'ECOMMERCE',
+                "PaymentMethods" => [
+                    [
+                        "PaymentMethodType" => $payment_method_type,
+                        "Amount" => floatval($customer_order->get_total()),
+                        "Installments" => 1,
+                        "CardInfo" => $card_info,
+                    ]
+                ]
+            ]
+        ];
 
-            $api_response = wp_remote_post($url, array(
-                'headers' => array(
-                    'Content-Type'  => 'application/json',
-                    'Accept' => '*/*',
-                ),
-                'body' => json_encode($body),
-                'timeout' => 120,
-            ));
+        $api_response = wp_remote_post($url, array(
+            'headers' => array(
+                'Content-Type'  => 'application/json',
+                'Accept' => '*/*',
+            ),
+            'body' => json_encode($body),
+            'timeout' => 120,
+        ));
 
-            if (is_wp_error($api_response)) {
-                throw new Exception(__('No momento, estamos enfrentando problemas ao tentar nos conectar a este portal de pagamento. Desculpe pela inconveniência.' . $api_response->get_error_message(), 'tuna-payment'));
-            }
+        if (is_wp_error($api_response)) {
+            throw new Exception(__('No momento, estamos enfrentando problemas ao tentar nos conectar a este portal de pagamento. Desculpe pela inconveniência.' . $api_response->get_error_message(), 'tuna-payment'));
+        }
 
-            if (empty($api_response['body'])) {
-                throw new Exception(__('Requisição incorreta', 'tuna-payment'));
-            }
+        if (empty($api_response['body'])) {
+            throw new Exception(__('Requisição incorreta', 'tuna-payment'));
+        }
 
-            $response = json_decode($api_response['body']);
-// var_dump($response,__LINE__);die;
-            $new_status = $this->get_status_response($response->status);
-            if( "failed" === $new_status || 'cancelled' === $new_status ) {
-                throw new Exception( 'Erro no pagamento, tente novamente', 422 );
-            }
+        $response = json_decode($api_response['body']);
+        $new_status = $this->get_status_response($response->status);
+        if( "failed" === $new_status || 'cancelled' === $new_status ) {
+            throw new Exception( 'Erro no pagamento, tente novamente', 422 );
+        }
 
-            if ($new_status === 'payment-approved') {
-                wc_reduce_stock_levels($order_id);
-            }
-// var_dump($new_status);die;
-            $response_message = $this->get_response_message($new_status);
-// Debug::def(wc_get_order_statuses());
-            $customer_order->update_status( $new_status );
+        if ($new_status === 'payment-approved') {
+            wc_reduce_stock_levels($order_id);
+        }
 
-            return [
-                'message' => $response_message['message'],
-                'order_id' => $order_id,
-                'new_account' => $current_user['new_account'],
-                'order_status' => $response_message['status_code'],
-                'order_code' => $customer_order->get_order_key()
-            ];
+        $response_message = $this->get_response_message($new_status);
+        $customer_order->update_status( $new_status );
 
-        // } catch ( Exception $e ) {
-        //     return api_response( $e->getMessage(), 422 );
-        // }
+        return [
+            'message' => $response_message['message'],
+            'order_id' => $order_id,
+            'new_account' => $current_user['new_account'],
+            'order_status' => $response_message['status_code'],
+            'order_code' => $customer_order->get_order_key()
+        ];
 
     }
 
@@ -269,6 +262,10 @@ class Api_Gateway_Tuna
                 throw new Exception(__('Problemas com o processo de pagamento', 'tuna-payment'));
             }
 
+            if ( empty( $api_response['body'] ) ) {
+                throw new Exception(__('Problemas com o processo de pagamento, recarregue a página.', 'tuna-payment'));
+            }
+
             $response = json_decode($api_response['body']);
 
             return $response->token;
@@ -320,12 +317,11 @@ class Api_Gateway_Tuna
      */
     private function get_status_response($status_response): string
     {
-// var_dump($status_response);die;
         $status_code = [
-            'payment-in-revision' => ['0', 'P'],
-            'payment-approved' => ['2', '8', '9'],
-            'failed' => ['A', 'N', '4', -1],
-            'cancelled' => ['D', '5'],
+            'payment-in-revision' => [ '1', '0', 'C', 'P'],
+            'payment-approved' => [ '2', '8', '9' ],
+            'failed' => [ 'A', '6', 'N', '4', 'B', -1 ],
+            'cancelled' => [ 'D', 'E' ],
         ];
 
         $new_status = '';
@@ -338,13 +334,55 @@ class Api_Gateway_Tuna
         return $new_status;
     }
 
+
+    /*
+    public function get_end_status($status)
+    {
+        $code = "Erro";
+        switch ($status) {
+            case '8':
+            case '9':
+            case '2':
+                $code = "payment-approved";
+                break;
+            case '1':
+            case '0':
+            case 'C':
+            case 'P':
+                $code = "payment-in-revision";
+                break;
+            case 'A':
+            case '6':
+                $code = "failed";
+                break;
+            case '5':
+            case '7':
+            case '3':
+                $code = "refunded";
+                break;
+            case '4':
+            case 'B':
+            case 'N':
+            case 'B':
+                $code = "failed";
+                break;
+            case 'E':
+                $code = "failed";
+                break;
+            case 'D':
+                $code = "failed";
+                break;
+        }
+        return $code;
+    } */
+
     /**
      * Retornar mensagem de acordo com o status
      *
      * @param $status_response
      * @return array
      */
-    private function get_response_message($status_response): array
+    private function get_response_message($status_response)
     {
         $status_order = [
             'payment-in-revision' => [
@@ -364,7 +402,7 @@ class Api_Gateway_Tuna
                 'status_code' => 422,
             ]
         ];
-// var_dump($status_response,$status_order[$status_response],__LINE__);die;
+
         return $status_order[$status_response];
     }
 

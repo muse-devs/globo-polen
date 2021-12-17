@@ -32,7 +32,8 @@ class Polen_WC_Customer_New_Account extends WC_Email_Customer_New_Account
      * @return string
      */
     public function get_default_subject_checkout() {
-        return 'Conta Criada';
+        //TODO: pegar o nome da campanha PELO SLUG que está no Usuário
+        return 'Boas-vindas ao Galo Ídolos';
     }
 
 
