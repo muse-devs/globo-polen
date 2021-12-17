@@ -3,7 +3,6 @@
 namespace Polen\Api;
 
 use Exception;
-use Polen\Includes\Debug;
 use Polen\Includes\Polen_Campaign;
 use WC_Order;
 
@@ -161,7 +160,6 @@ class Api_Gateway_Tuna
         $response = json_decode($api_response['body']);
         $new_status = $this->get_status_response($response->status);
         if( "failed" === $new_status || 'cancelled' === $new_status ) {
-            $customer_order->update_status( 'failed', 'falha no pagamento' );
             throw new Exception( 'Erro no pagamento, tente novamente', 422 );
         }
 
@@ -413,14 +411,10 @@ class Api_Gateway_Tuna
      */
     private function credentials()
     {
-        //TODO: Criar uma forma para deixar dinamico, talvez no REDUX
+        global $Polen_Plugin_Settings;
 
-//        $this->partner_key = '1c714e17-60a8-4a2f-9222-e10c48713810';
-//        $this->partner_account = 'polen-homolog';
-//        $this->operation_mode = 'production';
-
-        $this->partner_key = 'a13fcd4d-6a5f-4520-802a-76ce569a3fe1';
-        $this->partner_account = 'polen';
-        $this->operation_mode = 'production';
+        $this->partner_key = $Polen_Plugin_Settings['polen_api_rest_partner_key'];
+        $this->partner_account = $Polen_Plugin_Settings['polen_api_rest_account'];
+        $this->operation_mode = $Polen_Plugin_Settings['polen_api_rest_type_keys'];
     }
 }
