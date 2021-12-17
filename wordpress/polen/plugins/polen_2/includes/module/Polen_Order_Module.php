@@ -32,9 +32,9 @@ class Polen_Order_Module
     public function get_is_campaign()
     {
         $order = $this->object;
-        $is_campaign = $order->get_meta( Promotional_Event::FIELD_NAME_IS, true );
+        $campaign_slug = $order->get_meta( Api_Checkout::ORDER_METAKEY, true );
 
-        if( 'yes' !== $is_campaign ) {
+        if( empty( $campaign_slug ) ) {
             return false;
         }
         return true;
@@ -48,7 +48,6 @@ class Polen_Order_Module
         if( empty( $campaign_slug ) ) {
             return '';
         }
-        // $campaign_slug = $order->get_meta( Promotional_Event::FIELD_NAME_SLUG_CAMPAIGN );
         return $campaign_slug;
     }
 
