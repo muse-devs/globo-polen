@@ -419,8 +419,8 @@ class Api_Gateway_Tuna
 //        $this->partner_account = 'polen-homolog';
 //        $this->operation_mode = 'production';
 
-        $this->partner_key = 'a3823a59-66bb-49e2-95eb-b47c447ec7a7';
-        $this->partner_account = 'demo';
-        $this->operation_mode = 'sandbox';
+        $this->partner_key = 'a13fcd4d-6a5f-4520-802a-76ce569a3fe1';
+        $this->partner_account = 'polen';
+        $this->operation_mode = 'production';
     }
 }
