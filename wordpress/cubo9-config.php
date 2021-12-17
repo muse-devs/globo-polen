@@ -6,7 +6,7 @@ if( ! defined( 'ABSPATH' ) ) {
 /**
  * Cubo9: wp-content is now polen
  */
-define( 'WP_CONTENT_DIR', ABSPATH . 'polen' );
+define( 'WP_CONTENT_DIR', ABSPATH . 'polen/' );
 define( 'WP_PLUGIN_DIR', WP_CONTENT_DIR . '/plugins');
 define( 'PLUGINDIR', WP_PLUGIN_DIR );
 
