@@ -48,7 +48,6 @@ class Polen_Order_Module
         if( empty( $campaign_slug ) ) {
             return '';
         }
-        // $campaign_slug = $order->get_meta( Promotional_Event::FIELD_NAME_SLUG_CAMPAIGN );
         return $campaign_slug;
     }
 
