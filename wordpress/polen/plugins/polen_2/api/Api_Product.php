@@ -28,6 +28,7 @@ class Api_Product
             'limit'    => $per_page,
             'page'     => $paged,
             'paginate' => true,
+            'status' => 'publish',
         );
 
         if (!empty($campaingn)) {

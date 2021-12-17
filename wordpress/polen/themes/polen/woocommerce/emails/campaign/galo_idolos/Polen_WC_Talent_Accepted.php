@@ -9,11 +9,16 @@ wc_get_template( 'emails/campaign/galo_idolos/email-header.php', array( 'email_h
 ?>
 
 <?php
-$item = Polen\Includes\Cart\Polen_Cart_Item_Factory::polen_cart_item_from_order($order);
-$talent = _polen_get_info_talent_by_product_id($item->get_product(), "polen-square-crop-md");
+$item = Polen\Includes\Cart\Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
+$talent = _polen_get_info_talent_by_product_id( $item->get_product(), "polen-square-crop-md" );
+$user = $order->get_user();
+$user_name = '';
+if( !empty( $user ) ) {
+	$user_name = $user->display_name;
+}
 ?>
 
-<p><?php printf( esc_html__( 'Olá, %1$s aceitou o seu pedido #%2$s de vídeo e deverá responder em até 7 dias.', 'woocommerce' ), esc_html($talent['name']), esc_html($order->get_order_number()) ); ?></p>
+<p><?php printf( esc_html__( 'Olá %1$s, <br>%2$s aceitou o seu pedido #%3$s de vídeo e deverá responder em até 7 dias.', 'woocommerce' ), esc_html( $user_name ), esc_html($talent['name']), esc_html($order->get_order_number()) ); ?></p>
 <p>Você pode acompanhar o status do seu pedido aqui:</p>
 
 <p class="btn_wrap">
