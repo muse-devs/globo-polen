@@ -235,6 +235,7 @@ class Api_Controller{
     {
         try {
             $coupon_code = $request->get_param('coupon_code');
+            $product_id = $request->get_param('product_id');
             $value_cart = $request->get_param('cart_value');
 
             if (empty($coupon_code)) {
@@ -245,7 +246,7 @@ class Api_Controller{
                 return api_response('Valor atual do carrinho é obrigatório', 422);
             }
 
-            $this->checkout->coupon_rules($coupon_code);
+            $this->checkout->coupon_rules( $coupon_code, $product_id );
 
             $coupon = new WC_Coupon($coupon_code);
 
