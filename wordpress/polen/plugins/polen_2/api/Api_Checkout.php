@@ -234,14 +234,7 @@ class Api_Checkout
      */
     public function coupon_rules($code_id)
     {
-        try {
-
-            return api_response( $this->check_cupom( $code_id ), 200 );
-
-        } catch (\Exception $e) {
-            return api_response($e->getMessage(), 422);
-        }
-
+        $this->check_cupom( $code_id );
     }
 
     protected function check_cupom( $coupom_code )
