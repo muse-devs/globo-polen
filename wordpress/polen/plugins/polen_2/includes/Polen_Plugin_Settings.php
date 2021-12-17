@@ -585,12 +585,11 @@ class Polen_Plugin_Settings
                 array(
                     'id'       => 'polen_api_rest_type_keys',
                     'type'     => 'select',
-                    'title'    => esc_html__('Configurar chave produção', 'polen'),
-                    'desc'     => 'Cole aqui chave partner key do TUNA',
+                    'title'    => esc_html__('Configurar tipo de chave', 'polen'),
                     'placeholder' => 'Escolha tipo da configuração',
                     'options'  => [
                         'production' => 'Produção',
-                        'demo' => 'homolog',
+                        'sandbox' => 'Sandbox',
                     ],
                     'default'  => '',
                 ),
