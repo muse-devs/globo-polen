@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-wc_get_template( 'emails/campaign/galo_idolos/email-header.php', array( 'email_heading' => $email_heading ) );
+wc_get_template( 'emails/campaign/galo_idolos/email-header.php', array( 'email_heading' => "Seu pedido foi aceito" ) );
 
 ?>
 
@@ -18,11 +18,11 @@ if( !empty( $user ) ) {
 }
 ?>
 
-<p><?php printf( esc_html__( 'Olá %1$s, %2$s aceitou o seu pedido #%3$s de vídeo e deverá responder em até 7 dias.', 'woocommerce' ), esc_html( $user_name ), esc_html($talent['name']), esc_html($order->get_order_number()) ); ?></p>
+<p><?php printf( esc_html__( 'Olá %1$s, %2$s aceitou o seu pedido #%3$s de vídeo e deverá responder em até 15 dias.', 'woocommerce' ), esc_html( $user_name ), esc_html($talent['name']), esc_html($order->get_order_number()) ); ?></p>
 <p>Você pode acompanhar o status do seu pedido aqui:</p>
 
 <p class="btn_wrap">
-	<a href="https://galoidolos.com.br/minha-conta/pedidos" class="btn" target="_blank" style="width: 100%">Acompanhe seu pedido</a>
+	<a href="https://galoidolos.com.br/minha-conta/pedidos" class="btn" target="_blank" style="background:#FFCD00; color: #000;width: 100%">Acompanhe seu pedido</a>
 </p>
 
 <p>

@@ -17,7 +17,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-wc_get_template( 'emails/campaign/galo_idolos/email-header.php', array( 'email_heading' => $email_heading ) );
+wc_get_template( 'emails/campaign/galo_idolos/email-header.php', array( 'email_heading' => "Boas-vindas ao Galo Ídolos" ) );
 
 $user_obj = get_user_by( 'login', $user_login);
 ?>
@@ -44,7 +44,7 @@ if ( $additional_content ) {
 
 ?>
 	<p class="btn_wrap">
-		<a href="http://galoidolos.com.br" class="btn" target="_blank">Ir para o Galo Ídolos</a>
+  <a href="http://galoidolos.com.br" class="btn" target="_blank" style="background:#FFCD00; color: #000;">Ir para o Galo Ídolos</a>
 	</p>
 <?php
 
