@@ -55,7 +55,7 @@ $talent = _polen_get_info_talent_by_product_id($item->get_product(), "polen-squa
 </div>
 
 <p class="btn_wrap">
-	<a href="https://www.galoidolos.com.br/login" class="btn" target="_blank" style="width: 100%">Assistir vídeo</a>
+	<a href="https://www.galoidolos.com.br/minha-conta/assistir-video/<?php echo $order->get_id();?>" class="btn" target="_blank" style="background:#FFCD00; color: #000; width: 100%">Assistir vídeo</a>
 </p>
 
 <?php

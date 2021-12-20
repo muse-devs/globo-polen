@@ -45,7 +45,7 @@ class Api_Product
 
         $query = new WC_Product_Query($args);
 
-        return $query->get_products();//wc_products_array_orderby($query->get_products(), $orderby[0], $order);
+        return wc_products_array_orderby($query->get_products(), $orderby[0], $order);
     }
 
     /**

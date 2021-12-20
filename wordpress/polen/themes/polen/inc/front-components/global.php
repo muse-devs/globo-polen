@@ -876,14 +876,31 @@ function polen_get_natal_banner($link)
       <a href="<?php echo $link; ?>">
         <div class="natal-banner" style="background: url('<?php echo TEMPLATE_URI . '/assets/img/natal/bg.png'; ?>')center no-repeat">
           <div class="content">
-            <p>Seu Vídeo-Polen vira uma doação para uma instituição social!</p>
-            <div class="click-to-donate">
-              Clique para doar
+            <div class="text">
+              <p>Seu Vídeo-Polen vira uma doação para uma instituição social!</p>
+              <div class="click-to-donate">
+                Clique para doar
+              </div>
             </div>
           </div>
           <div class="logo">
             <img src="<?php echo TEMPLATE_URI . '/assets/img/natal/logo.png'; ?>" alt="Natal Emocionante" />
           </div>
+        </div>
+      </a>
+    </div>
+  </div>
+<?php
+}
+
+function polen_get_galo_banner($link)
+{
+?>
+  <div class="row mt-4">
+    <div class="col-12">
+      <a href="<?php echo $link; ?>">
+        <div class="galo-banner" style="background: url('<?php echo TEMPLATE_URI . '/assets/img/galo/bg.png'; ?>')center no-repeat">
+          <img loading="lazy" src="<?php echo TEMPLATE_URI; ?>/assets/img/galo/content.png" alt="Galo Ídolos" class="img-responsive" />
         </div>
       </a>
     </div>
