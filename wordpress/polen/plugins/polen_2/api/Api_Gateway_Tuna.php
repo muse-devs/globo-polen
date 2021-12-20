@@ -411,14 +411,10 @@ class Api_Gateway_Tuna
      */
     private function credentials()
     {
-        //TODO: Criar uma forma para deixar dinamico, talvez no REDUX
+        global $Polen_Plugin_Settings;
 
-//        $this->partner_key = '1c714e17-60a8-4a2f-9222-e10c48713810';
-//        $this->partner_account = 'polen-homolog';
-//        $this->operation_mode = 'production';
-
-        $this->partner_key = 'a3823a59-66bb-49e2-95eb-b47c447ec7a7';
-        $this->partner_account = 'demo';
-        $this->operation_mode = 'sandbox';
+        $this->partner_key = $Polen_Plugin_Settings['polen_api_rest_partner_key'];
+        $this->partner_account = $Polen_Plugin_Settings['polen_api_rest_account'];
+        $this->operation_mode = $Polen_Plugin_Settings['polen_api_rest_type_keys'];
     }
 }

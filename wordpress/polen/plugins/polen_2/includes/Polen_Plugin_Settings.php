@@ -583,17 +583,28 @@ class Polen_Plugin_Settings
             'subsection'       => false,
             'fields'           => array(
                 array(
-                    'id'       => 'polen_api_rest_cosumer_key',
-                    'type'     => 'text',
-                    'title'    => esc_html__('Adicionar chave consumer key', 'polen'),
-                    'desc'     => 'Copie aqui chave gerada na configuração do wocommerce',
+                    'id'       => 'polen_api_rest_type_keys',
+                    'type'     => 'select',
+                    'title'    => esc_html__('Configurar tipo de chave', 'polen'),
+                    'placeholder' => 'Escolha tipo da configuração',
+                    'options'  => [
+                        'production' => 'Produção',
+                        'sandbox' => 'Sandbox',
+                    ],
                     'default'  => '',
                 ),
                 array(
-                    'id'       => 'polen_api_rest_cosumer_secret',
+                    'id'       => 'polen_api_rest_partner_key',
                     'type'     => 'text',
-                    'title'    => esc_html__('Adicionar chave consumer secret', 'polen'),
-                    'desc'     => 'Copie aqui chave gerada na configuração do wocommerce',
+                    'title'    => esc_html__('Adicionar chave partner key', 'polen'),
+                    'desc'     => 'Cole aqui chave partner key do TUNA',
+                    'default'  => '',
+                ),
+                array(
+                    'id'       => 'polen_api_rest_account',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Adicionar chave account', 'polen'),
+                    'desc'     => 'Cole aqui chave partner key do TUNA',
                     'default'  => '',
                 ),
             )
