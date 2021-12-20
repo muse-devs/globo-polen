@@ -156,7 +156,7 @@ $Talent_Fields = new Polen_Update_Fields();
           </h2>
         </header>
         <div class="cart-step__content">
-          <h3 class="subtitle">Para quem é o vídeo?</h3>
+          <h3 class="subtitle">Para quem é o vídeo?*</h3>
           <?php
           $icons_path = TEMPLATE_URI . "/assets/img/pol_form_icons/";
           $inputs->pol_select_advanced("video_to", array(
@@ -170,7 +170,7 @@ $Talent_Fields = new Polen_Update_Fields();
               "value" => $cart_item["name_to_video"]
             )); ?>
           </div>
-          <h3 class="subtitle mt-4">Qual é a ocasião do vídeo?</h3>
+          <h3 class="subtitle mt-4">Qual é a ocasião do vídeo?*</h3>
           <?php
           $inputs->pol_select_advanced("video_category", array(
             $inputs->pol_select_advanced_item($icons_path . "aniversario.png", "Aniversário", "aniversario", $cart_item["video_category"] == "aniversario"),
@@ -184,16 +184,18 @@ $Talent_Fields = new Polen_Update_Fields();
             "v-on:polselectchange" => "occasionHandle"
           ));
           ?>
-          <h3 class="subtitle mt-4">Instruções para o vídeo</h3>
-          <div class="box-textarea">
-            <div class="box-textarea__placeholder" v-bind:class="{'-disabled' : instructions_to_video != ''}">
-              <p>Escreva aqui o que você gostaria que <?php echo $product_name; ?> falasse. Lembre-se:</p>
+          <h3 class="subtitle mt-4">Instruções para o vídeo*
+            <?php polen_get_tooltip("
+            <div class='box-textarea__placeholder'>
               <ol>
                 <li>Não são permitidos pedidos comerciais, nem menções à marcas.</li>
                 <li>Músicos não tem autorização para cantar trechos de músicas com direitos autorais.</li>
               </ol>
             </div>
-            <?php $inputs->material_textarea("instructions_to_video", "instructions_to_video", "", true, array(
+            "); ?>
+          </h3>
+          <div class="box-textarea">
+            <?php $inputs->material_textarea("instructions_to_video", "instructions_to_video", "Instruções para o vídeo", true, array(
               "v-model" => "instructions_to_video"
             )); ?>
           </div>

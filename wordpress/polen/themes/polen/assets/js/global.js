@@ -455,6 +455,7 @@ jQuery(document).ready(function () {
 	getSessionMessage();
 	showLGPDBox();
   polSelectAdvanced();
+  jQuery('[data-toggle="tooltip"]').tooltip();
 });
 
 function closeModal() {
