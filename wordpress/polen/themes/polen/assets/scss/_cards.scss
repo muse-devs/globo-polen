@@ -652,13 +652,16 @@
   align-items: center;
   justify-content: space-between;
   padding: 20px;
-  @include media-breakpoint-down(xs) {
+  height: 350px;
+  @include media-breakpoint-down(sm) {
     padding: 10px;
     height: 190px;
   }
   .logo {
     width: 50%;
     height: 100%!important;
+    display: flex;
+    align-items: center;
     @include media-breakpoint-down(xs) {
       height: auto!important;
     }
@@ -673,6 +676,8 @@
     width: 50%;
     height: 100%;
     padding: 20px;
+    display: flex;
+    align-items: center;
     @include media-breakpoint-down(xs) {
       padding: 5px;
       height: auto;
@@ -717,6 +722,21 @@
   }
 }
 
+.galo-banner {
+  border-radius: 10px;
+  padding: 20px;
+  height: 350px;
+  display: flex;
+  align-items: center;
+  @include media-breakpoint-down(sm) {
+    padding: 10px;
+    height: 190px;
+  }
+  img {
+    width: 100%;
+  }
+}
+
 .lacta-banner {
   width: 100%;
   height: 350px;
@@ -725,7 +745,7 @@
   display: flex;
   align-items: center;
   position: relative;
-  @include media-breakpoint-down(xs) {
+  @include media-breakpoint-down(sm) {
     height: 190px;
   }
   .content {
@@ -736,11 +756,11 @@
     padding: 20px;
     .logo-lacta {
       margin-bottom: 20px;
-      @include media-breakpoint-down(xs) {
+      @include media-breakpoint-down(sm) {
         margin-bottom: 0px;
       }
       svg {
-        @include media-breakpoint-down(xs) {
+        @include media-breakpoint-down(sm) {
           transform: scale(0.5);
         }
       }
@@ -755,7 +775,7 @@
       width: 100%;
       font-family: "Poppins",sans-serif;
       color: #fff;
-      @include media-breakpoint-down(xs) {
+      @include media-breakpoint-down(sm) {
         font-size: 14px;
         line-height: 20px;
       }
@@ -769,7 +789,7 @@
       text-align: center;
       color: #fff;
       text-decoration: underline;
-      @include media-breakpoint-down(xs) {
+      @include media-breakpoint-down(sm) {
         font-size: 11px;
       }
     }
