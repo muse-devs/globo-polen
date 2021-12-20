@@ -18,7 +18,7 @@ if( !empty( $user ) ) {
 }
 ?>
 
-<p><?php printf( esc_html__( 'Olá %1$s, <br>%2$s aceitou o seu pedido #%3$s de vídeo e deverá responder em até 7 dias.', 'woocommerce' ), esc_html( $user_name ), esc_html($talent['name']), esc_html($order->get_order_number()) ); ?></p>
+<p><?php printf( esc_html__( 'Olá %1$s, %2$s aceitou o seu pedido #%3$s de vídeo e deverá responder em até 7 dias.', 'woocommerce' ), esc_html( $user_name ), esc_html($talent['name']), esc_html($order->get_order_number()) ); ?></p>
 <p>Você pode acompanhar o status do seu pedido aqui:</p>
 
 <p class="btn_wrap">
