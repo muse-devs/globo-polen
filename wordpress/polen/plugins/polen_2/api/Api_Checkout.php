@@ -111,11 +111,22 @@ class Api_Checkout
 
             $order_woo = $this->order_payment_woocommerce($user['user_object']->data, $fields['product_id'], $coupon);
             $this->add_meta_to_order($order_woo, $data);
+
+            if (WC()->cart->get_cart_contents_total() == 0) {
+                $order_without_payment = [
+                    'message' => 'Order criada sem pagamento',
+                    'order_id' => $order_woo->get_id(),
+                    'new_account' => $user['new_account'],
+                    'order_status' => 200,
+                    'order_code' => $order_woo->get_order_key()
+                ];
+                $order_woo->update_status('payment-approved');
+
+                return api_response( $order_without_payment, 201 );
+            }
+
             $payment = $tuna->process_payment($order_woo->get_id(), $user, $fields);
 
-            // if ( $payment['order_status'] != 200 ) {
-            //     throw new Exception($payment['message']);
-            // }
             return api_response( $payment, 201 );
 
         } catch (\Exception $e) {
