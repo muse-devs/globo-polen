@@ -88,8 +88,8 @@ class Polen_WC_Customer_New_Account extends WC_Email_Customer_New_Account
                 $this->password_generated = $user_new_password;
                 wp_set_password( $user_new_password, $user_id );
                 $this->send( $this->get_recipient(),
-                             $this->get_default_subject_checkout(),
-                             $this->get_content_html_checkout(),
+                             $this->get_default_subject(),
+                             $this->get_content_html(),
                              $this->get_headers(),
                              $this->get_attachments() );
                              
@@ -97,8 +97,8 @@ class Polen_WC_Customer_New_Account extends WC_Email_Customer_New_Account
                 //Lacta
                 $this->password_generated = $user_pass;
                 $this->send( $this->get_recipient(),
-                $this->get_default_subject_checkout(),
-                $this->get_content_html_checkout(),
+                $this->get_default_subject(),
+                $this->get_content_html(),
                 $this->get_headers(),
                 $this->get_attachments() );
             } else {
