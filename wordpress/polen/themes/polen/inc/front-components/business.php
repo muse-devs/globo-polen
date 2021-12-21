@@ -78,7 +78,7 @@ function bus_get_card($item)
         <?php if (!empty(get_post_meta($item, 'talent_subscribed_instagram', true))) : ?>
           <div class="followers">
             <img src="<?php echo TEMPLATE_URI ?>/assets/icons/instagram.svg" alt="Instagram" />
-            <span><?php echo esc_attr(get_post_meta($item, 'talent_subscribed_instagram', true)); ?> seguidores</span>
+            <!-- <span><?php //echo esc_attr(get_post_meta($item, 'talent_subscribed_instagram', true)); ?> seguidores</span> -->
           </div>
         <?php endif; ?>
       </div>
@@ -130,6 +130,9 @@ function bus_get_form()
 {
   wp_enqueue_script("polen-business");
   $inputs = new Material_Inputs();
+  if(isset($_GET['talent'])) {
+
+  }
   ?>
   <section id="bus-form-wrapper" class="row mt-5 mb-5 bus-form">
     <div class="col-12 mb-4 pb-2 text-center">
@@ -157,9 +160,7 @@ function bus_get_form()
 
           <select name="budget" class="custom-select mb-3" required>
             <option value="">Orçamento *</option>
-            <option value="de-500-a-1000">De R$500 a R$1.000</option>
-            <option value="de-1000-a-2000">De R$1.000 a R$2.000</option>
-            <option value="de-2000-a-3000">De R$2.000 a R$3.000</option>
+            <option value="de-1500-a-3000">De R$1.500 a R$3.000</option>
             <option value="de-3000-a-5000">De R$3.000 a R$5.000</option>
             <option value="mais-de-5000">Mais de R$5.000</option>
           </select>
@@ -179,7 +180,10 @@ function bus_get_form()
             // "maxlength" => "15",
           )
         );
-        $inputs->material_input(Material_Inputs::TYPE_TEXT, "talent_name", "talent_name", "Qual Ídolo você possui interesse?", false, "mb-3");
+        $inputs->material_input(Material_Inputs::TYPE_TEXT, "talent_name", "talent_name", "Qual Ídolo você possui interesse?", false, "mb-3",
+        array(
+          "value" => $_GET['talent'],
+        ));
         $inputs->material_textarea("textarea1", "message", "Como você pretende usar o vídeo?", true); ?>
         <?php $inputs->material_button(Material_Inputs::TYPE_SUBMIT, "send_form", "Enviar", "mt-4"); ?>
       </form>
