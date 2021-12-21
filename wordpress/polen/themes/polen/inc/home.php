@@ -22,9 +22,9 @@ get_header();
 	<div class="row">
 		<div class="col-12">
 			<div id="product-carousel" class="owl-carousel owl-theme">
-        <!-- <div class="item">
-					<?php //polen_get_galo_banner(site_url('tag/galo-idolos/')); ?>
-				</div> -->
+        <div class="item">
+					<?php polen_get_galo_banner(site_url('tag/galo-idolos/')); ?>
+				</div>
         <div class="item">
 					<?php polen_get_lacta_banner(site_url('/lacta')); ?>
 				</div>

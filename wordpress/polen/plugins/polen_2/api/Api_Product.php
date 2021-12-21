@@ -29,6 +29,8 @@ class Api_Product
             'page'     => $paged,
             'paginate' => true,
             'status' => 'publish',
+            'orderby' => $orderby[0],
+            'order' => $order,
         );
 
         if (!empty($campaingn)) {
@@ -45,7 +47,7 @@ class Api_Product
 
         $query = new WC_Product_Query($args);
 
-        return $query->get_products();//wc_products_array_orderby($query->get_products(), $orderby[0], $order);
+        return $query->get_products(); // wc_products_array_orderby($query->get_products(), $orderby[0], $order);
     }
 
     /**
