@@ -7,7 +7,7 @@ const cartAdvanced = new Vue({
     video_to: cart_items.video_to || "",
     instructions_to_video: cart_items.instructions_to_video || "",
     phone: cart_items.phone || "",
-    occasion: "",
+    occasion: cart_items.video_category || "",
   },
   methods: {
     nextStep: function (num) {
@@ -15,6 +15,9 @@ const cartAdvanced = new Vue({
     },
     handlePhoneChange: function (e) {
       this.phone = mtel(e.target.value);
+    },
+    handleInstructionsChange: function(e) {
+      this.instructions_to_video = e.target.value.trim();
     },
     step1Disabled: function() {
       return !this.offered_by || !polMailValidate(this.email_to_video)
@@ -39,8 +42,11 @@ const cartAdvanced = new Vue({
     isInstructionsOk: function() {
       return checkWordsInInstructions(this.instructions_to_video);
     },
-    onSubmit: function(e) {
-      console.log(jQuery("#cart-advanced").serialize());
+    handleSubmit: function(e) {
+      if(this.instructions_to_video.length < 10) {
+        e.preventDefault();
+        polMessages.error("Preencha corretamente o campo de instruções. É através dele que o Ídolo saberá o que gravar no video.");
+      }
     }
   },
 });
