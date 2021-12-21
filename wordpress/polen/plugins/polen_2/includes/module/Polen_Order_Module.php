@@ -94,4 +94,36 @@ class Polen_Order_Module
         $result = $orders_query->get_orders();
         return $result->orders;
     }
+
+
+    /**
+     * Retorna a Oriem do Pedido se foi Polen ou se for
+     * 
+     * @return string
+     */
+    public function get_origin_to_list_orders_talent()
+    {
+        if( $this->get_is_campaign() ) {
+            return $this->get_campaign_slug();
+        }
+
+        return 'Polen';
+    }
+
+
+    /**
+     * Cria uma linha na lista de Orders do Talento com a origem de onde veio o pedido,
+     * se da Polen ou de algum WhiteLabel
+     * 
+     * @return HTML
+     */
+    public function get_html_origin_to_list_orders_talent()
+    {
+        return <<<HTML
+            <div class="col-6 col-md-6">
+                <p class="p">Origem do Pedido</p>
+                <p class="value small">{$this->get_origin_to_list_orders_talent()}</p>
+            </div>
+        HTML;
+    }
 }
