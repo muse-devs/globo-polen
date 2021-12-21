@@ -463,6 +463,12 @@ function closeModal() {
 	modal.classList.remove("show");
 }
 
+String.prototype.allTrim = String.prototype.allTrim ||
+function() {
+  return this.replace(/\s+/g,' ')
+              .replace(/^\s+|\s+$/,'');
+};
+
 function polSlugfy(s, opt) {
 	s = String(s);
 	opt = Object(opt);

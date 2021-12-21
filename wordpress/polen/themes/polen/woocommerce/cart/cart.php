@@ -88,7 +88,7 @@ $Talent_Fields = new Polen_Update_Fields();
     </script>
   </div>
   <div class="col-12 mt-5 col-md-6 order-md-1 mt-md-4">
-    <form id="cart-advanced" class="woocommerce-cart-form cart-advanced" action="<?php echo esc_url(wc_get_checkout_url()); ?>" method="post">
+    <form id="cart-advanced" class="woocommerce-cart-form cart-advanced" action="<?php echo esc_url(wc_get_checkout_url()); ?>" method="post" v-on:submit="handleSubmit">
       <?php do_action('woocommerce_before_cart_table'); ?>
       <?php do_action('woocommerce_before_cart_contents'); ?>
       <?php
@@ -196,7 +196,9 @@ $Talent_Fields = new Polen_Update_Fields();
           </h3>
           <div class="box-textarea">
             <?php $inputs->material_textarea("instructions_to_video", "instructions_to_video", "Instruções para o vídeo", true, array(
-              "v-model" => "instructions_to_video"
+              "v-model" => "instructions_to_video",
+              "v-on:change" => "handleInstructionsChange",
+              "minlength" => "10"
             )); ?>
           </div>
           <div class="row mt-2">
