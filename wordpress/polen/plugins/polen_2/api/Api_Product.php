@@ -29,6 +29,8 @@ class Api_Product
             'page'     => $paged,
             'paginate' => true,
             'status' => 'publish',
+            'orderby' => $orderby[0],
+            'order' => $order,
         );
 
         if (!empty($campaingn)) {
