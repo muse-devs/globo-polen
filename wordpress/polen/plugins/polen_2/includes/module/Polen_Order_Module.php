@@ -1,11 +1,8 @@
 <?php
 namespace Polen\Includes\Module;
 
-use Polen\Admin\Polen_Admin_Event_Promotional_Event_Fields as Promotional_Event;
 use Polen\Admin\Polen_Admin_Event_Promotional_Event_Fields;
-use Polen\Admin\Polen_Admin_Order_Custom_Fields;
 use Polen\Api\Api_Checkout;
-use Polen\Includes\Cart\Polen_Cart_Item;
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
 use WC_Order_Query;
 

@@ -933,3 +933,17 @@ function polen_get_lacta_banner($link)
   </div>
 <?php
 }
+
+function polen_get_tooltip($text, $placement = "right")
+{
+?>
+  <button type="button"
+    class="btn btn-tooltip"
+    data-toggle="tooltip"
+    data-html="true"
+    data-placement="<?php echo $placement; ?>"
+    title="<?php echo $text; ?>">
+      ?
+  </button>
+<?php
+}

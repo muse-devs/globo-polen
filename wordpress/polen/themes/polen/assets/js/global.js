@@ -455,12 +455,19 @@ jQuery(document).ready(function () {
 	getSessionMessage();
 	showLGPDBox();
   polSelectAdvanced();
+  jQuery('[data-toggle="tooltip"]').tooltip();
 });
 
 function closeModal() {
 	let modal = document.querySelector(".show");
 	modal.classList.remove("show");
 }
+
+String.prototype.allTrim = String.prototype.allTrim ||
+function() {
+  return this.replace(/\s+/g,' ')
+              .replace(/^\s+|\s+$/,'');
+};
 
 function polSlugfy(s, opt) {
 	s = String(s);
