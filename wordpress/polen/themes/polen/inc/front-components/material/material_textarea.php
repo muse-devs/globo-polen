@@ -8,7 +8,7 @@
     </span>
     <span class="mdc-notched-outline__trailing"></span>
   </span>
-  <textarea class="mdc-text-field__input" pattern=".{3,}" rows="6" cols="40" aria-labelledby="label-<?php echo $id; ?>" name="<?php echo $name; ?>" <?php echo $required ? " required" : ""; ?> <?php foreach ($params as $key => $value) {
+  <textarea class="mdc-text-field__input" rows="6" cols="40" aria-labelledby="label-<?php echo $id; ?>" name="<?php echo $name; ?>" <?php echo $required ? " required" : ""; ?> <?php foreach ($params as $key => $value) {
                                                                                                                                                                                   echo " {$key}='{$value}'";
                                                                                                                                                                                 } ?>></textarea>
 </label>
