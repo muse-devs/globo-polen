@@ -538,6 +538,7 @@ textarea {
         #ffffff;
     }
     &.-disabled {
+      cursor: not-allowed;
       opacity: 0.5;
     }
     .input {
