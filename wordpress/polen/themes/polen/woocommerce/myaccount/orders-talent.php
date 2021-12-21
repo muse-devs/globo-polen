@@ -138,6 +138,15 @@ if (!$talent_is_social) {
 												</div>
 											</div>
 										</div>
+										<div class="row mt-2">
+<?php
+	echo $polen_order->get_html_origin_to_list_orders_talent();
+?>
+												<div class="col-6 col-md-6">
+													<p class="p"></p>
+													<p class="value small"></p>
+												</div>
+											</div>
 										<div class="row">
 											<div class="col-md-12">
 												<div class="row mt-2">
