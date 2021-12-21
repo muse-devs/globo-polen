@@ -133,13 +133,13 @@ if( 'instock' == $product->get_stock_status() ) {
         "select_type",
         array(
           $inputs->pol_combo_advanced_item("Vídeo para uso pessoal", $product->get_price_html(), "Compre um vídeo personalizado para você ou para presentar outra pessoa", "check-pessoal", "pessoal", true),
-          $inputs->pol_combo_advanced_item("Vídeo para meu negócio", "", "Compre um Vídeo Polen para usar no seu negócio", "check-b2b", "b2b", false, !polen_b2b_product_is_enabled($product))
+          $inputs->pol_combo_advanced_item("Vídeo para meu negócio", "Valor sob consulta", "Compre um Vídeo Polen para usar no seu negócio", "check-b2b", "b2b", false, !polen_b2b_product_is_enabled($product))
           )); ?>
 				<div class="btn-buy-personal">
           <?php echo woocommerce_template_single_add_to_cart(); ?>
         </div>
         <div class="btn-buy-b2b d-none">
-          <?php $inputs->material_button_link("btn-b2b", "Pedir vídeo", enterprise_url_home() . "#bus-form-wrapper", false, "", array(), $donate ? "donate" : ""); ?>
+          <?php $inputs->material_button_link("btn-b2b", "Pedir vídeo", enterprise_url_home() . '?talent='.get_the_title().'#bus-form-wrapper', false, "", array(), $donate ? "donate" : ""); ?>
         </div>
 			<?php else: ?>
         <?php $inputs->material_button_link("todos", "Escolher outro artista", home_url( "shop" ), false, "", array(), $donate ? "donate" : ""); ?>

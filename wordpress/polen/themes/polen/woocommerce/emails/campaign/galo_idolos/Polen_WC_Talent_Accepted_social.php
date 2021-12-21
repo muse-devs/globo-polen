@@ -11,7 +11,7 @@ do_action( 'woocommerce_email_header', $email_heading, $email );
 <?php
 $item = Polen_Cart_Item_Factory::polen_cart_item_from_order($order);
 $product = $item->get_product();
-$talent_id = $item->get_talent_id();
+$talent_id = $item->_id();
 ?>
 
 <p><?php printf( esc_html__( 'Olá, %1$s aceitou o seu pedido #%2$s de vídeo e deverá responder em até 15 dias.', 'woocommerce' ), esc_html($product->get_title()), esc_html($order->get_order_number()) ); ?></p>
