@@ -130,9 +130,6 @@ function bus_get_form()
 {
   wp_enqueue_script("polen-business");
   $inputs = new Material_Inputs();
-  if(isset($_GET['talent'])) {
-
-  }
   ?>
   <section id="bus-form-wrapper" class="row mt-5 mb-5 bus-form">
     <div class="col-12 mb-4 pb-2 text-center">
