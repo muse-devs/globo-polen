@@ -76,10 +76,10 @@ function bus_get_card($item)
       <div class="card-bottom">
         <figcaption itemprop="name"><?php echo get_the_title($item); ?></figcaption>
         <?php if (!empty(get_post_meta($item, 'talent_subscribed_instagram', true))) : ?>
-          <div class="followers">
-            <img src="<?php echo TEMPLATE_URI ?>/assets/icons/instagram.svg" alt="Instagram" />
-            <!-- <span><?php //echo esc_attr(get_post_meta($item, 'talent_subscribed_instagram', true)); ?> seguidores</span> -->
-          </div>
+          <!-- <div class="followers">
+            <img src="<?php //echo TEMPLATE_URI ?>/assets/icons/instagram.svg" alt="Instagram" />
+            <span><?php //echo esc_attr(get_post_meta($item, 'talent_subscribed_instagram', true)); ?> seguidores</span>
+          </div> -->
         <?php endif; ?>
       </div>
     </figure>
