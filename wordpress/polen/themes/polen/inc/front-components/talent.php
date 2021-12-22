@@ -88,15 +88,15 @@ function polen_front_get_talent_videos($talent)
 <?php
 }
 
-function polen_front_get_talent_mini_bio($talent)
+function polen_front_get_talent_mini_bio($image_data, $name, $category)
 {
   ?>
   <div class="talent-mini-bio text-center">
     <div class="avatar avatar-lg">
-        <img src="<?php echo $talent->cover_image_thumb; ?>" alt="<?php echo $talent->nome; ?>" />
+        <img src="<?php echo $image_data['image']; ?>" alt="<?php echo $image_data["alt"]; ?>" />
     </div>
-    <h2 class="typo typo-subtitle-large text-center mt-3"><?php echo $talent->nome ? $talent->nome : get_the_title(); ?></h2>
-    <h3 class="typo typo-text mt-1"><?php echo $talent->profissao; ?></h3>
+    <h2 class="typo typo-subtitle-large text-center mt-3"><?php echo $name; ?></h2>
+    <h3 class="typo typo-text mt-1"><?php echo $category; ?></h3>
   </div>
   <?php
 }

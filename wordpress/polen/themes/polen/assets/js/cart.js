@@ -8,9 +8,14 @@ const cartAdvanced = new Vue({
     instructions_to_video: cart_items.instructions_to_video || "",
     phone: cart_items.phone || "",
     occasion: cart_items.video_category || "",
+    submit: true,
   },
   methods: {
     nextStep: function (num) {
+      if(!formCheckValidationsPartial()) {
+        return;
+      }
+      this.submit = false;
       this.activeItem = num;
     },
     handlePhoneChange: function (e) {
@@ -43,6 +48,13 @@ const cartAdvanced = new Vue({
       return checkWordsInInstructions(this.instructions_to_video);
     },
     handleSubmit: function(e) {
+      if(!this.submit) {
+        e.preventDefault();
+      }
+      if(this.occasion === "") {
+        e.preventDefault();
+        polMessages.error("É Necessário escolher uma ocasião para o vídeo");
+      }
       if(this.instructions_to_video.length < 10) {
         e.preventDefault();
         polMessages.error("Preencha corretamente o campo de instruções. É através dele que o Ídolo saberá o que gravar no video.");
@@ -50,6 +62,25 @@ const cartAdvanced = new Vue({
     }
   },
 });
+
+function formCheckValidationsPartial() {
+  const offered_by = document.querySelector("input[name=offered_by]");
+  const email_to_video = document.querySelector("input[name=email_to_video]");
+  const phone = document.querySelector("input[name=phone]");
+  return offered_by.checkValidity() && email_to_video.checkValidity() && phone.checkValidity();
+}
+
+function formCheckValidations() {
+  let valid = true;
+  const form_items = document.querySelector(form).elements;
+  [].map.call(form_items, e => {
+    if (!e.checkValidity()) {
+      return valid = e.checkValidity();
+    }
+    return valid;
+  });
+  return valid;
+}
 
 // Checando se existem palavras proibidas na instrução do video
 function checkWordsInInstructions(instruction) {
