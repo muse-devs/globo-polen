@@ -53,7 +53,7 @@ const cartAdvanced = new Vue({
       }
       if(this.occasion === "") {
         e.preventDefault();
-        polMessages.error("Favor escolher uma Ocasião para o vídeo");
+        polMessages.error("É Necessário escolher uma ocasião para o vídeo");
       }
       if(this.instructions_to_video.length < 10) {
         e.preventDefault();
