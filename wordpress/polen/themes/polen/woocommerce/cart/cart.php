@@ -167,6 +167,7 @@ $Talent_Fields = new Polen_Update_Fields();
           <div class="mt-3" v-bind:class="{'d-none' : video_to == 'to_myself'}">
             <?php $inputs->material_input(Material_Inputs::TYPE_TEXT, "name_to_video", "name_to_video", "Quem vai receber o presente?", false, "", array(
               ":required" => "isForOther()",
+              "minlength" => "3",
               "value" => $cart_item["name_to_video"]
             )); ?>
           </div>

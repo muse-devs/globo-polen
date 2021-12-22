@@ -49,6 +49,7 @@ use Polen\Social_Base\Social_Base_Product;
 $Talent_Fields = new Polen_Update_Fields();
 $Talent_Fields = $Talent_Fields->get_vendor_data($post->post_author);
 $terms = wp_get_object_terms(get_the_ID(), 'product_tag');
+$categories = wp_get_object_terms(get_the_ID(), 'product_cat');
 $videos = polen_get_videos_by_talent($Talent_Fields);
 
 $bg_image = wp_get_attachment_image_src($Talent_Fields->cover_image_id, "large")[0];
@@ -118,7 +119,7 @@ if( 'instock' == $product->get_stock_status() ) {
 				</div>
 			<?php else: ?>
 				<div class="col-12 col-md-6 m-md-auto">
-					<?php polen_front_get_talent_mini_bio($Talent_Fields); ?>
+					<?php polen_front_get_talent_mini_bio($image_data, get_the_title(), $categories[0]->name); ?>
 				</div>
 			<?php endif; ?>
 		<?php endif; ?>
