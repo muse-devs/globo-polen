@@ -106,6 +106,19 @@ class Api_Fan_Order extends Api_Order
 
 
     /**
+     * Verifica se o usuário pode ou não fazer um Review
+     * @return bool
+     */
+    public function get_can_order_review( $request )
+    {
+        $user_id = get_current_user_id();
+        $hash = $request[ 'hash' ];
+        $video_info = Polen_Video_Info::get_by_hash( $hash );
+        return api_response( Polen_Order_Review::can_make_review( $user_id, $video_info->order_id ) );
+    }
+
+
+    /**
      * 
      */
     protected function verify_order_belongs_user_logged( $order )
@@ -239,4 +252,24 @@ class Api_Fan_Order extends Api_Order
         }
         return true;
     }
+
+
+    /**
+     * 
+     */
+    public function check_permission_get_item_review( $request )
+    {
+        $hash = $request[ 'hash' ];
+        $video_info = Polen_Video_Info::get_by_hash( $hash );
+        $order = wc_get_order( $video_info->order_id );
+        if( empty( $order ) ) {
+            return false;
+        }
+        if( ( 0 == get_current_user_id() || empty( get_current_user_id() ) ) 
+            || $order->get_customer_id() !== get_current_user_id() ) {
+            return false;
+        }
+        return true;
+    }
+
 }
