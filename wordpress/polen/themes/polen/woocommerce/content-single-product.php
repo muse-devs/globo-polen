@@ -105,7 +105,7 @@ if( 'instock' == $product->get_stock_status() ) {
 	<div class="row">
 		<div class="col-12<?php echo $histories_enabled ? ' col-md-6 m-md-auto' : ''; ?> d-flex align-items-center">
 			<?php $histories_enabled && polen_front_get_talent_stories(); ?>
-			<?php if($histories_enabled) : ?>
+			<?php if(sizeof($videos) > 0) : ?>
 				<div>
 					<h1 class="talent-name" title="<?= get_the_title(); ?>"><?= get_the_title(); ?></h1>
 				</div>
