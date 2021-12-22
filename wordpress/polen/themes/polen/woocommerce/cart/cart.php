@@ -140,8 +140,8 @@ $Talent_Fields = new Polen_Update_Fields();
             "readonly" => "readonly"
           ));
           $inputs->material_input_helper("Pode ficar tranquilo que enviaremos somente atualizações sobre o pedido");
-          $inputs->material_button_outlined(Material_Inputs::TYPE_BUTTON, "next1", "Avançar", "mt-4", array(
-            ":disabled" => "step1Disabled()",
+          $inputs->material_button_outlined(Material_Inputs::TYPE_SUBMIT, "next1", "Avançar", "mt-4", array(
+            // ":disabled" => "step1Disabled()",
             "v-on:click" => "nextStep(2)"
           ));
           ?>
@@ -167,7 +167,6 @@ $Talent_Fields = new Polen_Update_Fields();
           <div class="mt-3" v-bind:class="{'d-none' : video_to == 'to_myself'}">
             <?php $inputs->material_input(Material_Inputs::TYPE_TEXT, "name_to_video", "name_to_video", "Quem vai receber o presente?", false, "", array(
               ":required" => "isForOther()",
-              "minlength" => "3",
               "value" => $cart_item["name_to_video"]
             )); ?>
           </div>
@@ -237,7 +236,8 @@ $Talent_Fields = new Polen_Update_Fields();
         </div>
       </div>
       <?php $inputs->material_button(Material_Inputs::TYPE_SUBMIT, "btn-buy", "Comprar agora", "mt-5", array(
-        ":disabled" => "!isComplete()"
+        ":disabled" => "activeItem == 1",
+        "v-on:click" => "submit = true"
       )); ?>
       <?php wp_nonce_field('woocommerce-cart', 'woocommerce-cart-nonce'); ?>
       <?php do_action('woocommerce_after_cart_contents'); ?>
