@@ -72,11 +72,12 @@ class Api_Fan_Order extends Api_Order
      */
     public function create_order_review( \WP_REST_Request $request )
     {
-
+        $hash = $request[ 'hash' ];
+        $video_info = Polen_Video_Info::get_by_hash( $hash );
         $user_id  = get_current_user_id();
         $rate     = filter_var( $request->get_param( 'rate' )    , FILTER_SANITIZE_NUMBER_INT );
         $comment  = filter_var( $request->get_param( 'comment' ) , FILTER_SANITIZE_STRING );
-        $order_id = filter_var( $request[ 'id' ]                 , FILTER_SANITIZE_NUMBER_INT );
+        $order_id = filter_var( $video_info->order_id            , FILTER_SANITIZE_NUMBER_INT );
         $approved = '0';
 
         try {
