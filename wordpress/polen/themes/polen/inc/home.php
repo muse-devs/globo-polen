@@ -28,9 +28,9 @@ get_header();
         <div class="item">
 					<?php polen_get_lacta_banner(site_url('/lacta')); ?>
 				</div>
-        <div class="item">
-					<?php polen_get_natal_banner(site_url('tag/natal-social/')); ?>
-				</div>
+        <!-- <div class="item">
+					<?php //polen_get_natal_banner(site_url('tag/natal-social/')); ?>
+				</div> -->
 			</div>
 		</div>
 	</div>
