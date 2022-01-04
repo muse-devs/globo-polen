@@ -63,6 +63,11 @@ function event_promotional_product_is_event_promotional( $product )
     return $polen_product->get_is_campaign();
 }
 
+function event_promotional_order_get_slug_event( $order )
+{
+    $polen_order = new Polen_Order_Module( $order );
+    return $polen_order->get_campaign_slug();
+}
 
 function event_promotional_order_is_event_promotional( $order )
 {

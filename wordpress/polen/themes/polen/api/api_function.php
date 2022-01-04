@@ -24,7 +24,7 @@ function custom_fields_in_order_admin($order)
 
     $order_is_ep = event_promotional_order_is_event_promotional($order);
     if ($order_is_ep) {
-        $origin = $order_is_ep;
+        $origin = event_promotional_order_get_slug_event($order);
     }
 
     echo "<p><strong>Origem:</strong><br> {$origin} </p><br>";
