@@ -3,7 +3,14 @@
     <div class="panel panel-primary">
         <div class="panel-heading clearfix d-flex">
             <div class="col-md-10"><h3>Lista de contatos formulário empresas</h3></div>
-            <div class="col-md-2"><a href="#" class="btn btn-success pull-right float-right" id="export">Exportar CSV</a></div>
+            <div class="col-md-2">
+                <a
+                    href="?page=forms&export_form=2"
+                    class="btn btn-success pull-right float-right"
+                    id="export">
+                    Exportar CSV
+                </a>
+            </div>
         </div>
         <div class="table-responsive-lg panel-body">
 <!--            <div class="rows d-flex">-->
@@ -70,8 +77,3 @@
     });
 
 </script>
-
-</script>
-
-
-

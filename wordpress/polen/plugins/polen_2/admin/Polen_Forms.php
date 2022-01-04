@@ -12,6 +12,14 @@ class Polen_Forms {
         add_action('admin_menu', array($this, 'addMenu'));
         add_action('wp_ajax_submit_form', array($this, 'submitForm'));
         add_action('wp_ajax_nopriv_submit_form', array($this, 'submitForm'));
+
+        if( isset( $_GET['export_form'] ) ){
+            $csv = $this->export_to_csv($_GET['export_form']);
+            header('Content-Type: text/csv; charset=utf-8');
+            header( 'Content-Disposition: attachment;filename=export_'. date('d_m_Y').'.csv');
+            echo $csv;
+            exit;
+        }
     }
 
     /**
@@ -189,5 +197,45 @@ class Polen_Forms {
         if (!wp_mail($to, $subject, $body, $headers)) {
             throw new \Exception( 'Erro ao disparar email' );
         }
+    }
+
+    public function export_to_csv()
+    {
+        $titles = array(
+            'ID',
+            'Nome',
+            'Empresa',
+            'Email',
+            'Quantidade de Funcionarios',
+            'Orçamento',
+            'Telefone',
+            'Talento',
+            'Mensagem',
+            'Cadastro',
+        );
+
+        $output = implode(';', $titles);
+        $output .= PHP_EOL;
+
+        $form_db = new Polen_Form_DB();
+        $leads = $form_db->getLeads();
+
+        if (count($leads) > 0) {
+            foreach ($leads as $row) {
+                $output .= $row->id . ';';
+                $output .= $row->name . ';';
+                $output .= $row->company . ';';
+                $output .= $row->email . ';';
+                $output .= $row->employees_quantity . ';';
+                $output .= $row->job . ';';
+                $output .= $row->phone . ';';
+                $output .= $row->talent . ';';
+                $output .= $row->message . ';';
+                $output .= $row->created_at . ';';
+                $output .= PHP_EOL;
+            }
+        }
+
+        echo $output;
     }
 }

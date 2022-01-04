@@ -11,6 +11,7 @@
  */
 
 use Polen\Admin\Polen_Admin_Event_Promotional_Event_Fields;
+use Polen\Api\Api_Checkout;
 use Polen\Includes\Debug;
 use Polen\Includes\Module\Polen_Product_Module;
 use Polen\Includes\Polen_Checkout_Create_User;
@@ -316,6 +317,7 @@ class Promotional_Event_Admin
             $order->update_meta_data( '_polen_customer_email', $email );
             $order->add_meta_data( Polen_Admin_Event_Promotional_Event_Fields::FIELD_NAME_IS, 'yes', true);
             $order->add_meta_data( Polen_Admin_Event_Promotional_Event_Fields::FIELD_NAME_SLUG_CAMPAIGN, $polen_product->get_campaign_slug(), true);
+            $order->add_meta_data( Api_Checkout::ORDER_METAKEY, $polen_product->get_campaign_slug(), true );
 
             // $order->update_status('wc-payment-approved');
 
