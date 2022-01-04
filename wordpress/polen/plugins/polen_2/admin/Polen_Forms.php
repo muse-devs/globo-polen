@@ -15,14 +15,8 @@ class Polen_Forms {
 
         if( isset( $_GET['export_form'] ) ){
             $csv = $this->export_to_csv($_GET['export_form']);
-            header("Pragma: public");
-            header("Expires: 0");
-            header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
-            header("Cache-Control: private", false);
-            header("Content-Type: application/octet-stream");
-            header("Content-Disposition: attachment; filename=\"report.csv\";");
-            header("Content-Transfer-Encoding: binary");
-
+            header('Content-Type: text/csv; charset=utf-8');
+            header( 'Content-Disposition: attachment;filename=export_'. date('d_m_Y').'.csv');
             echo $csv;
             exit;
         }
@@ -220,7 +214,7 @@ class Polen_Forms {
             'Cadastro',
         );
 
-        $output = implode(',', $titles);
+        $output = implode(';', $titles);
         $output .= PHP_EOL;
 
         $form_db = new Polen_Form_DB();
@@ -228,16 +222,16 @@ class Polen_Forms {
 
         if (count($leads) > 0) {
             foreach ($leads as $row) {
-                $output .= $row->id . ',';
-                $output .= $row->name . ',';
-                $output .= $row->company . ',';
-                $output .= $row->email . ',';
-                $output .= $row->employees_quantity . ',';
-                $output .= $row->job . ',';
-                $output .= $row->phone . ',';
-                $output .= $row->talent . ',';
-                $output .= $row->message . ',';
-                $output .= $row->created_at . ',';
+                $output .= $row->id . ';';
+                $output .= $row->name . ';';
+                $output .= $row->company . ';';
+                $output .= $row->email . ';';
+                $output .= $row->employees_quantity . ';';
+                $output .= $row->job . ';';
+                $output .= $row->phone . ';';
+                $output .= $row->talent . ';';
+                $output .= $row->message . ';';
+                $output .= $row->created_at . ';';
                 $output .= PHP_EOL;
             }
         }
