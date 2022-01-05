@@ -244,13 +244,26 @@ class Api_Routers
             )
         ));
 
-        register_rest_route($this->base, '/my-account', array(
+        register_rest_route($this->base, '/my_account', array(
             array(
                 'methods' => WP_REST_Server::READABLE,
                 'args' => array(
                     'email'            => [],
                 ),
                 'callback' => [ $api_user, 'my_account' ],
+                'permission_callback' => [ $api_user, 'check_permission_create_item' ],
+            )
+        ));
+
+        register_rest_route($this->base, '/update_pass', array(
+            array(
+                'methods' => WP_REST_Server::CREATABLE,
+                'args' => array(
+                    'email'            => [],
+                    'current_pass'     => [],
+                    'new_pass'         => [],
+                ),
+                'callback' => [ $api_user, 'update_pass' ],
                 'permission_callback' => [ $api_user, 'check_permission_create_item' ],
             )
         ));

@@ -134,14 +134,44 @@ class Api_User
 
         $response = [
             'ID' => $user->data->ID,
-            'name' => $user->data->display_name,
-            'phone' => get_user_meta($user->data->ID,'billing_phone',true),
+            'name' => get_user_meta($user->data->ID,'first_name', true),
+            'last_name' => get_user_meta($user->data->ID,'last_name', true),
+            'phone' => get_user_meta($user->data->ID,'billing_phone', true),
             'email' => $user->data->user_email,
             'display_name' => $user->data->display_name,
-            'date_registered' => $user->data->user_registered
+            'date_registered' => $user->data->user_registered,
         ];
 
         return api_response($response, 200);
     }
 
+    /**
+     * Atualizar senha do usuario
+     *
+     * @param \WP_REST_Request $request
+     * @return \WP_REST_Response
+     */
+    public function update_pass(\WP_REST_Request $request): \WP_REST_Response
+    {
+        $data = $request->get_params();
+
+        $user = get_user_by('email', $data['email']);
+        if(empty($user)) {
+            return api_response(['message' => 'Não existe nenhum usuario com esse email'], 403);
+        }
+
+        $check = wp_authenticate($data['email'], $data['current_pass']);
+        if (is_wp_error($check)) {
+            return api_response(['message' => 'Senha atual incorreta'], 403);
+        }
+
+        if(!$this->check_security_password(sanitize_text_field($data['new_pass']))) {
+            $strong_password = new Polen_SignInUser_Strong_Password();
+            return api_response( ['message' => $strong_password->get_default_message_error() ], 403 );
+        }
+
+        wp_set_password($data['new_pass'], $user->data->ID);
+
+        return api_response( ['message' => 'Senha Atualizada' ], 200 );
+    }
 }
