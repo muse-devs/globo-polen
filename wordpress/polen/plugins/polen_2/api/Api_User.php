@@ -114,4 +114,34 @@ class Api_User
         return $customer_id;
     }
 
+    /**
+     * Recuperar dados do usuario
+     *
+     * @param \WP_REST_Request $request
+     * @return \WP_REST_Response
+     */
+    public function my_account(\WP_REST_Request $request): \WP_REST_Response
+    {
+        $email = $request->get_param('email');
+        if(empty($email)) {
+            return api_response(['message' => 'Email Obrigatório'], 403);
+        }
+
+        $user = get_user_by('email', $email);
+        if(empty($user)) {
+            return api_response(['message' => 'Não existe nenhum usuario com esse email'], 403);
+        }
+
+        $response = [
+            'ID' => $user->data->ID,
+            'name' => $user->data->display_name,
+            'phone' => get_user_meta($user->data->ID,'billing_phone',true),
+            'email' => $user->data->user_email,
+            'display_name' => $user->data->display_name,
+            'date_registered' => $user->data->user_registered
+        ];
+
+        return api_response($response, 200);
+    }
+
 }

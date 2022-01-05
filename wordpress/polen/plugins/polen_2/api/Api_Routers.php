@@ -224,15 +224,12 @@ class Api_Routers
                 'permission_callback' => '__return_true',
             )
         ));
-
-
-
-
+        
         /**
          * Endpoint de cadastro de usuário
          */
         $api_user = new Api_User();
-        register_rest_route($this->base, '/users', array(
+            register_rest_route($this->base, '/users', array(
             array(
                 'methods' => WP_REST_Server::CREATABLE,
                 'args' => array(
@@ -247,7 +244,16 @@ class Api_Routers
             )
         ));
 
-
+        register_rest_route($this->base, '/my-account', array(
+            array(
+                'methods' => WP_REST_Server::READABLE,
+                'args' => array(
+                    'email'            => [],
+                ),
+                'callback' => [ $api_user, 'my_account' ],
+                'permission_callback' => [ $api_user, 'check_permission_create_item' ],
+            )
+        ));
 
         $api_video = new Api_Video();
         $polen_api_videos = new Polen_Api_Video_Info();
