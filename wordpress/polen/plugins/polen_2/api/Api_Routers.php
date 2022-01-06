@@ -244,6 +244,24 @@ class Api_Routers
             )
         ));
 
+        /**
+         * Atualizar usuario
+         */
+        register_rest_route($this->base, '/users', array(
+            array(
+                'methods' => WP_REST_Server::EDITABLE,
+                'args' => array(
+                    'email'         => [],
+                    'user_name'     => [],
+                    'last_name'     => [],
+                    'display_name'  => [],
+                    'phone'         => [],
+                ),
+                'callback' => [ $api_user, 'update_account' ],
+                'permission_callback' => [ $api_user, 'check_permission_create_item' ],
+            )
+        ));
+
         register_rest_route($this->base, '/my_account', array(
             array(
                 'methods' => WP_REST_Server::READABLE,
