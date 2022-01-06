@@ -262,7 +262,7 @@ class Api_Routers
             )
         ));
 
-        register_rest_route($this->base, '/my_account', array(
+        register_rest_route($this->base, '/users', array(
             array(
                 'methods' => WP_REST_Server::READABLE,
                 'args' => array(
