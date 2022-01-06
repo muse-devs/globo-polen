@@ -134,7 +134,7 @@ class Api_User
 
         $response = [
             'ID' => $user->data->ID,
-            'name' => get_user_meta($user->data->ID,'first_name', true),
+            'first_name' => get_user_meta($user->data->ID,'first_name', true),
             'last_name' => get_user_meta($user->data->ID,'last_name', true),
             'phone' => get_user_meta($user->data->ID,'billing_phone', true),
             'email' => $user->data->user_email,
