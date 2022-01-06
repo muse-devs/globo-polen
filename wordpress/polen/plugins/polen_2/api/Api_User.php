@@ -174,4 +174,32 @@ class Api_User
 
         return api_response( ['message' => 'Senha Atualizada' ], 200 );
     }
+
+    /**
+     * Atualizar dados da conta
+     *
+     * @param \WP_REST_Request $request
+     * @return \WP_REST_Response
+     */
+    public function update_account(\WP_REST_Request $request): \WP_REST_Response
+    {
+        $data = $request->get_params();
+
+        $user = get_user_by('email', $data['email']);
+        if(empty($user)) {
+            return api_response(['message' => 'Não existe nenhum usuario com esse email'], 403);
+        }
+
+        $args = [
+            'ID' => $user->data->ID,
+            'first_name' => $data['user_name'] ?? get_user_meta($user->data->ID,'first_name', true),
+            'last_name' => $data['last_name'] ?? get_user_meta($user->data->ID,'last_name', true),
+            'display_name' => $data['display_name'] ?? $user->data->display_name,
+        ];
+
+        wp_update_user($args);
+        update_user_meta($user->data->ID, 'billing_phone', $data['phone']);
+
+        return api_response(['message' => 'Dados Atualizados'], 200);
+    }
 }
