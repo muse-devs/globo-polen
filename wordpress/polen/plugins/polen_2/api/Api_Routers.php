@@ -224,15 +224,12 @@ class Api_Routers
                 'permission_callback' => '__return_true',
             )
         ));
-
-
-
-
+        
         /**
          * Endpoint de cadastro de usuário
          */
         $api_user = new Api_User();
-        register_rest_route($this->base, '/users', array(
+            register_rest_route($this->base, '/create_user', array(
             array(
                 'methods' => WP_REST_Server::CREATABLE,
                 'args' => array(
@@ -247,7 +244,47 @@ class Api_Routers
             )
         ));
 
+        /**
+         * Atualizar usuario
+         */
+        register_rest_route($this->base, '/users', array(
+            array(
+                'methods' => WP_REST_Server::EDITABLE,
+                'args' => array(
+                    'email'         => [],
+                    'user_name'     => [],
+                    'last_name'     => [],
+                    'display_name'  => [],
+                    'phone'         => [],
+                ),
+                'callback' => [ $api_user, 'update_account' ],
+                'permission_callback' => [ $api_user, 'check_permission_create_item' ],
+            )
+        ));
 
+        register_rest_route($this->base, '/users', array(
+            array(
+                'methods' => WP_REST_Server::READABLE,
+                'args' => array(
+                    'email'            => [],
+                ),
+                'callback' => [ $api_user, 'my_account' ],
+                'permission_callback' => [ $api_user, 'check_permission_create_item' ],
+            )
+        ));
+
+        register_rest_route($this->base, '/update_pass', array(
+            array(
+                'methods' => WP_REST_Server::CREATABLE,
+                'args' => array(
+                    'email'            => [],
+                    'current_pass'     => [],
+                    'new_pass'         => [],
+                ),
+                'callback' => [ $api_user, 'update_pass' ],
+                'permission_callback' => [ $api_user, 'check_permission_create_item' ],
+            )
+        ));
 
         $api_video = new Api_Video();
         $polen_api_videos = new Polen_Api_Video_Info();
