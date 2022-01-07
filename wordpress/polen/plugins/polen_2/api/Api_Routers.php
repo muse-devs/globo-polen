@@ -229,7 +229,7 @@ class Api_Routers
          * Endpoint de cadastro de usuário
          */
         $api_user = new Api_User();
-            register_rest_route($this->base, '/users', array(
+            register_rest_route($this->base, '/create_user', array(
             array(
                 'methods' => WP_REST_Server::CREATABLE,
                 'args' => array(
