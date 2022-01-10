@@ -136,13 +136,13 @@ function polen_front_get_categories_buttons()
 function polen_front_get_banner_video()
 {
   $mobile_video = array(
-    "poster" => TEMPLATE_URI . "/assets/img/capa-mobile.jpg",
-    "video" => TEMPLATE_URI . "/assets/video/home-mobile.mp4",
+    "poster" => "https://i.vimeocdn.com/video/1344893855-6d42b6b001ce1aad37eda73011f78177e71754995fd86e590499b8c50605bf02-d_384x230",
+    "video" => "https://player.vimeo.com/external/664445842.sd.mp4?s=0894358a43408ff52f0a8bcd516a69f7ead8b15f&profile_id=164",
     "class" => "video-mobile"
   );
   $desktop_video = array(
-    "poster" => TEMPLATE_URI . "/assets/img/capa-desktop.jpg",
-    "video" => TEMPLATE_URI . "/assets/video/home-desktop.mp4",
+    "poster" => "https://i.vimeocdn.com/video/1344905857-204fca2864c8cea7552cd885c5f9edf2916ed5ca409c641f69532312e1c3e86d-d_1040x426",
+    "video" => "https://player.vimeo.com/external/664451249.sd.mp4?s=d5c7153dc213adc440b30c6cc587690d7b44ec80&profile_id=165",
     "class" => "video-desktop"
   );
 ?>
