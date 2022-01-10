@@ -1142,6 +1142,10 @@
 }
 
 #videos-carousel {
+  min-height: 348px;
+  @include media-breakpoint-down(sm) {
+    min-height: 262px;
+  }
   .owl-dots {
     bottom: -35px;
     .owl-dot {
