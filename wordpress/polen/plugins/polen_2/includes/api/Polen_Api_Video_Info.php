@@ -67,7 +67,15 @@ class Polen_Api_Video_Info
         register_rest_route( $this->namespace, '/' . $this->resource_name . '/hash/(?P<hash>[\d]+)/update_thumbnail', array(
             array(
                 'methods' => WP_REST_Server::EDITABLE,
-                'callback' => array( $this, 'update_thumb_video' ),
+                'callback' => array( $this, 'update_thumb_video_by_hash' ),
+                'permission_callback' => array( $this, 'update_video_logo_status_permissions_check' )
+            ),
+            'schema' => array( $this, 'get_item_schema' )
+        ) );
+        register_rest_route( $this->namespace, '/' . $this->resource_name . '/hashs/update_thumbnail', array(
+            array(
+                'methods' => WP_REST_Server::EDITABLE,
+                'callback' => array( $this, 'update_thumb_videos_by_hashs' ),
                 'permission_callback' => array( $this, 'update_video_logo_status_permissions_check' )
             ),
             'schema' => array( $this, 'get_item_schema' )
@@ -232,7 +240,39 @@ class Polen_Api_Video_Info
     /**
      * Handler API que faz update da Thumb no Video Info
      */
-    public function update_thumb_video( $request )
+    public function update_thumb_video_by_hash( $request )
+    {
+        $hash_vimeo = $request[ 'hash' ];
+        try {
+            $this->update_thumb_videoinfo_by_hash( $hash_vimeo );
+            return api_response( 'atualizado com sucesso', 200 );
+        } catch( Exception $e ) {
+            return api_response( $e->getMessage(), $e->getCode() );
+        }
+    }
+
+    /**
+     * Handler API que faz update da Thumb no Video Info em lote
+     * @param WP_REST_Request
+     * @return WP_REST_Response
+     */
+    public function update_thumb_videos_by_hashs( $request )
+    {
+        $hashs = $request->get_param( 'hashs' );
+        try {
+            foreach( $hashs as $hash_vimeo ) {
+                $this->update_thumb_videoinfo_by_hash( $hash_vimeo );
+            }
+            return api_response( 'atualizado com sucesso', 200 );
+        } catch( Exception $e ) {
+            return api_response( $e->getMessage(), $e->getCode() );
+        }
+    }
+
+    /**
+     * Handler API que faz update da Thumb no Video Info
+     */
+    public function update_thumb_videos( $request )
     {
         $hash_vimeo = $request[ 'hash' ];
         try {
