@@ -230,7 +230,7 @@ class Polen_Api_Video_Info
     }
 
     /**
-     * 
+     * Handler API que faz update da Thumb no Video Info
      */
     public function update_thumb_video( $request )
     {
