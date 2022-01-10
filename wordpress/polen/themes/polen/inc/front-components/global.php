@@ -391,7 +391,7 @@ function polen_front_get_videos($videos, $title = "Vídeos em destaque")
       wp_enqueue_script('owl-carousel');
   }
 ?>
-	<section id="talent-videos" class="row my-1 pb-4">
+	<section id="talent-videos" class="row my-1 pb-4 mb-5">
     <div class="col-md-12">
       <header class="row my-3">
         <div class="col">
