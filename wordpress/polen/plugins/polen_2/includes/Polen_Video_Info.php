@@ -212,6 +212,7 @@ class Polen_Video_Info extends Polen_DB
             AND pm_meta.meta_value = %s
             AND vi.vimeo_process_complete = 1
             AND vi.is_public = 1
+            ORDER BY ID DESC
             LIMIT %d
         ", $talent_id, $campaign, $limit );
         return self::create_instance_many( $wpdb->get_results( $sql ) );
