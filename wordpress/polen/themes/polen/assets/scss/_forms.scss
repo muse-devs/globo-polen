@@ -470,6 +470,11 @@ textarea {
   --mdc-theme-primary: var(--primary);
   --mdc-theme-on-primary: var(--primary);
   --mdc-shape-small: 8px;
+  .mdc-text-field__input {
+    &:read-only {
+      opacity: 0.5;
+    }
+  }
 }
 
 .mdc-button {
@@ -533,6 +538,7 @@ textarea {
         #ffffff;
     }
     &.-disabled {
+      cursor: not-allowed;
       opacity: 0.5;
     }
     .input {
@@ -544,6 +550,7 @@ textarea {
       display: flex;
       flex-direction: column;
       justify-content: center;
+      width: 100%;
       .header {
         display: flex;
         justify-content: space-between;
@@ -571,6 +578,7 @@ textarea {
         display: flex;
         align-items: center;
         font-weight: normal;
+        cursor: pointer;
         .cart-step__ico {
           margin-right: 0.5rem;
           display: flex;
@@ -596,8 +604,9 @@ textarea {
       .btn-edit {
         display: block;
         padding: 0;
-        font-size: 8px;
+        font-size: 12px;
         font-weight: 400;
+        line-height: 1;
         text-decoration: underline;
         color: var(--dark);
         border: none;
@@ -661,30 +670,21 @@ textarea {
   }
 }
 
-.box-textarea {
-  position: relative;
-  .mdc-text-field {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+.box-textarea__placeholder {
+  padding: 16px;
+  p,
+  ol li {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--light);
+    text-align: left;
   }
-  .box-textarea__placeholder {
-    padding: 16px;
-    p,
-    ol li {
-      font-size: 14px;
-      font-weight: 400;
-      color: var(--gray);
-    }
-    ol {
-      margin: 0;
-      padding-left: 20px;
-    }
-    &.-disabled {
-      opacity: 0;
-    }
+  ol {
+    margin: 0;
+    padding-left: 20px;
+  }
+  &.-disabled {
+    opacity: 0;
   }
 }
 
@@ -733,4 +733,14 @@ textarea {
       height: 24px;
     }
   }
+}
+
+.btn-tooltip {
+  padding: 0;
+  border-radius: 50%;
+  font-weight: 700;
+  width: 20px;
+  height: 20px;
+  background-color: var(--dark);
+  vertical-align: baseline;
 }

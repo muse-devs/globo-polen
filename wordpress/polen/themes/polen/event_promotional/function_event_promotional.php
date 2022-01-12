@@ -1,5 +1,9 @@
 <?php
 
+use Polen\Includes\Module\Polen_Order_Module;
+use Polen\Includes\Module\Polen_Product_Module;
+use Polen\Includes\Polen_Talent;
+
 function event_promotional_url_home()
 {
     return site_url( Promotional_Event_Rewrite::BASE_URL . '/' );
@@ -53,13 +57,38 @@ function event_promotional_is_app()
 }
 
 
+function event_promotional_product_is_event_promotional( $product )
+{
+    $polen_product = new Polen_Product_Module( $product );
+    return $polen_product->get_is_campaign();
+}
+
+function event_promotional_order_get_slug_event( $order )
+{
+    $polen_order = new Polen_Order_Module( $order );
+    return $polen_order->get_campaign_slug();
+}
+
 function event_promotional_order_is_event_promotional( $order )
 {
-    $is_ep = $order->get_meta( Promotional_Event_Admin::ORDER_METAKEY, true );
-    if( $is_ep && $is_ep == '1' ) {
-        return true;
+    $polen_order = new Polen_Order_Module( $order );
+    return $polen_order->get_is_campaign();
+}
+
+function event_promotional_orders_ids_by_user_id_status( $product_id, $campaign, $status )
+{
+    $status = 'wc-' . $status;
+    $orders_ids = Polen_Product_Module::get_orders_ids_by_product_id( $product_id, [ $status ] );
+    $orders_ids_return = [];
+    foreach( $orders_ids as $order_id ) {
+        $polen_order = new Polen_Order_Module( wc_get_order( $order_id ) );
+        if( is_a( $polen_order, 'Polen\Includes\Module\Polen_Order_Module' ) ){
+            if( $campaign === $polen_order->get_campaign_slug() ) {
+                $orders_ids_return[] = $order_id;
+            }
+        }
     }
-    return false;
+    return $orders_ids_return;
 }
 
 
@@ -91,6 +120,9 @@ function event_promotional_get_order_flow_layout($array_status, $order_number, $
 
 ?>
 	<div class="row">
+    <div class="col-md-12 mb-3">
+      <h2 class="title">Acompanhar pedido</h2>
+    </div>
 		<div class="col-md-12">
 			<ul class="order-flow<?php echo $class; ?>">
 				<?php foreach ($array_status as $key => $value) : ?>
@@ -140,7 +172,7 @@ function event_promotional_get_order_flow_obj($order_number, $order_status, $ema
             'status' => 'fail',
         ),
         'payment-approved' => array(
-            'title' => 'Recebemos seu pedido de vídeo-autógrafo',
+            'title' => 'Recebemos seu pedido de vídeo',
             'description' => 'Seu número de pedido é #' . $order_number . ' foi aprovado. ' . $flow_1_complement_email,
             'status' => 'complete',
         ),
@@ -164,7 +196,7 @@ function event_promotional_get_order_flow_obj($order_number, $order_status, $ema
         ),
         '_next-step' => array(
             'title' => 'Aguardando confirmação',
-            'description' => 'Você será informado quando a sua solicitação de vídeo-autógrafo for aceita.',
+            'description' => 'Você será informado quando a sua solicitação de vídeo for aceita.',
             'status' => 'in-progress',
         ),
     );
@@ -173,7 +205,7 @@ function event_promotional_get_order_flow_obj($order_number, $order_status, $ema
     $flow_3 = array(
         'completed' => array(
             'title' => 'Seu vídeo está pronto!',
-            'description' => 'Corre lá e confira seu vídeo-autógrafo.',
+            'description' => 'Corre lá e confira seu vídeo.',
             'status' => 'complete',
         ),
         'cancelled' => array(
@@ -188,7 +220,7 @@ function event_promotional_get_order_flow_obj($order_number, $order_status, $ema
             $flow_1[$order_status],
             '_next-step_1' => array(
                 'title' => 'Aguardando confirmação',
-                'description' => 'Você será informado quando a sua solicitação de vídeo-autógrafo for aceita.',
+                'description' => 'Você será informado quando a sua solicitação de vídeo for aceita.',
                 'status' => $flow_1[$order_status]['status'] === "fail" ? 'pending' : 'in-progress',
             ),
             '_next-step_2' => array(
@@ -228,10 +260,4 @@ function event_promotional_get_order_flow_obj($order_number, $order_status, $ema
     }
 
     return $flows;
-}
-
-
-function event_get_magalu_url()
-{
-	return "https://www.magazineluiza.com.br/livro-de-porta-em-porta-luciano-huck-com-brinde/p/231238100/li/adml/";
 }

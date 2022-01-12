@@ -183,8 +183,7 @@ class Promotional_Event_Rewrite
         if( empty( $product ) ) {
             return false;
         }
-        $promotional_event = $product->get_meta( '_promotional_event', true );
-        if( $promotional_event != 'yes' ){
+        if( !event_promotional_product_is_event_promotional( $product ) ) {
             return false;
         }
         return true;

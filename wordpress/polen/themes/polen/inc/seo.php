@@ -190,8 +190,8 @@ if (
 			$author_name = $product->get_meta( '_promotional_event_author', true );
 			$product_name = $product->get_title();
 
-			$headers['title'] = "Compre o livro &quot;{$product_name}&quot; e ganhe um vídeo personalizado.";
-			$headers['description'] = "Compre o livro &quot;{$product_name}&quot; e ganhe um vídeo personalizado com {$author_name}.";
+			$headers['title'] = "Compre produtos da Lacta para poder ganhar um vídeo personalizado de &quot;{$product_name}&quot;";
+			$headers['description'] = "Compre produtos da Lacta para poder ganhar um vídeo personalizado de &quot;{$product_name}&quot;";
 			$headers['url'] = event_promotional_url_detail_product( $product );
 			$headers['image'] = $image_url;
 			$headers['site_name'] = "Polen.me - {$author_name} - {$product_name}";

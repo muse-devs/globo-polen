@@ -3,304 +3,181 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
-#: client/data/settings/resolvers.js:18
-msgid "Error retrieving settings."
+#: client/blocks/upe/payment-method.js:49
+msgid "Credit / Debit Card"
 msgstr ""
 
-#: client/entrypoints/payment-request-settings/payment-request-page.js:14
-msgid "Google Pay / Apple Pay"
+#: client/blocks/upe/payment-method.js:65
+msgid "Stripe Credit Card payment method"
 msgstr ""
 
-#: client/entrypoints/payment-request-settings/payment-request-page.js:17
+#: client/components/payment-method-fees-pill/index.js:20
+#. %s: Transaction fee text.
+msgid "Base transaction fees: %s"
+msgstr ""
+
+#: client/components/payment-method-missing-currency-pill/index.js:27
+#. $1: a payment method name. %2: Currency(ies).
+msgid "%1$s won't be visible to your customers until you add %2$s to your store."
+msgid_plural ""
+"%1$s won't be visible to your customers until you add one of these "
+"currencies to your store: %2$s."
+msgstr[0] ""
+msgstr[1] ""
+
+#: client/components/payment-method-missing-currency-pill/index.js:38
+msgid "Requires currency"
+msgstr ""
+
+#: client/data/account/actions.js:33
+msgid "Error updating account data."
+msgstr ""
+
+#: client/settings/connect-stripe-account/index.js:104
+msgid "Create or connect an account"
+msgstr ""
+
+#: client/settings/connect-stripe-account/index.js:117
+msgid "Enter account keys (advanced)"
+msgstr ""
+
+#: client/settings/connect-stripe-account/index.js:121
+msgid "Enter account keys"
+msgstr ""
+
+#: client/settings/connect-stripe-account/index.js:69
+msgid "Get started with Stripe"
+msgstr ""
+
+#: client/settings/connect-stripe-account/index.js:75
 msgid ""
-"Decide how buttons for digital wallets Apple Pay and Google Pay are "
-"displayed in your store. Depending on their web browser and their wallet "
-"configurations, your customers will see either Apple Pay or Google Pay, but "
-"not both."
+"Connect or create a Stripe account to accept payments directly onsite, "
+"including Payment Request buttons (such as Apple Pay and Google Pay), "
+"iDeal, SEPA, Sofort, and more international payment methods."
 msgstr ""
 
-#: client/entrypoints/payment-request-settings/payment-request-page.js:28
-msgid "View Apple Pay Guidelines"
-msgstr ""
-
-#: client/entrypoints/payment-request-settings/payment-request-page.js:36
-msgid "View Google Pay Guidelines"
-msgstr ""
-
-#: client/payment-methods-map.js:14
-msgid "Credit card / debit card"
-msgstr ""
-
-#: client/payment-methods-map.js:15
+#: client/settings/connect-stripe-account/index.js:84
 msgid ""
-"Let your customers pay with major credit and debit cards without leaving "
-"your store."
+"By clicking \"Create or connect an account\", you agree to the "
+"{{tosLink}}Terms of service.{{/tosLink}}"
 msgstr ""
 
-#: client/payment-methods-map.js:26
-msgid "giropay"
+#: client/settings/general-settings-section/index.js:47
+msgid "Updating payment methods information, please wait."
 msgstr ""
 
-#: client/payment-methods-map.js:27
+#: client/settings/general-settings-section/remove-method-confirmation-modal.js:14
+#. %1: payment method name (e.g.: giropay, EPS, Sofort, etc).
 msgid ""
-"Expand your business with giropay — Germany’s second most popular payment "
-"system."
+"Are you sure you want to remove <strong>%1$s</strong>? Your customers will "
+"no longer be able to pay using <strong>%1$s</strong>."
 msgstr ""
 
-#: client/payment-methods-map.js:37
-msgid "Direct debit payment"
-msgstr ""
-
-#: client/payment-methods-map.js:38
-msgid ""
-"Reach 500 million customers and over 20 million businesses across the "
-"European Union."
-msgstr ""
-
-#: client/payment-methods-map.js:48
-msgid "Sofort"
-msgstr ""
-
-#: client/payment-methods-map.js:49
-msgid ""
-"Accept secure bank transfers from Austria, Belgium, Germany, Italy, "
-"Netherlands, and Spain."
-msgstr ""
-
-#: client/payment-methods-map.js:59
-msgid "EPS"
-msgstr ""
-
-#: client/payment-methods-map.js:60
-msgid ""
-"EPS is an Austria-based payment method that allows customers to complete "
-"transactions online using their bank credentials."
-msgstr ""
-
-#: client/payment-methods-map.js:70
-msgid "Bancontact"
-msgstr ""
-
-#: client/payment-methods-map.js:71
-msgid ""
-"Bancontact is the most popular online payment method in Belgium, with over "
-"15 million cards in circulation."
-msgstr ""
-
-#: client/payment-methods-map.js:81
-msgid "iDEAL"
-msgstr ""
-
-#: client/payment-methods-map.js:82
-msgid ""
-"iDEAL is a Netherlands-based payment method that allows customers to "
-"complete transactions online using their bank credentials."
-msgstr ""
-
-#: client/payment-methods-map.js:92
-msgid "Przelewy24"
-msgstr ""
-
-#: client/payment-methods-map.js:93
-msgid ""
-"Przelewy24 is a Poland-based payment method aggregator that allows "
-"customers to complete transactions online using bank transfers and other "
-"methods."
-msgstr ""
-
-#: client/settings/general-settings-section/remove-method-confirmation-modal.js:16
+#: client/settings/general-settings-section/remove-method-confirmation-modal.js:27
 #. %s: payment method name (e.g.: giropay, EPS, Sofort, etc).
 msgid "Remove %s from checkout"
 msgstr ""
 
-#: client/settings/general-settings-section/remove-method-confirmation-modal.js:28
-#: client/settings/payments-and-transactions-section/manual-capture-control.js:90
-msgid "Cancel"
-msgstr ""
-
-#: client/settings/general-settings-section/remove-method-confirmation-modal.js:31
+#: client/settings/general-settings-section/remove-method-confirmation-modal.js:39
 msgid "Remove"
 msgstr ""
 
-#: client/settings/general-settings-section/remove-method-confirmation-modal.js:39
-#. %1: payment method name (e.g.: giropay, EPS, Sofort, etc).
-msgid ""
-"Are you sure you want to remove %1$s? Your customers will no longer be able "
-"to pay using %1$s."
+#: client/settings/general-settings-section/remove-method-confirmation-modal.js:42
+msgid "Cancel"
 msgstr ""
 
-#: client/settings/general-settings-section/remove-method-confirmation-modal.js:47
+#: client/settings/general-settings-section/remove-method-confirmation-modal.js:53
 msgid "You can add it again at any time in Stripe settings."
 msgstr ""
 
-#: client/settings/general-settings-section/upe-opt-in-banner.js:24
-msgid "Enable the new Stripe checkout experience"
+#: client/settings/general-settings-section/section-heading.js:50
+msgid "Payment methods"
 msgstr ""
 
-#: client/settings/general-settings-section/upe-opt-in-banner.js:28
-msgid ""
-"Get early access to additional payment methods and an improved checkout "
-"experience, now available to some merchants."
+#: client/settings/general-settings-section/section-heading.js:53
+msgid "Early access"
 msgstr ""
 
-#: client/settings/payment-request-section/index.js:109
-msgid "Show express checkouts on"
+#: client/settings/general-settings-section/section-heading.js:63
+msgid "Payment methods menu"
 msgstr ""
 
-#: client/settings/payment-request-section/index.js:127
-msgid "Checkout"
+#: client/settings/general-settings-section/section-heading.js:69
+msgid "Refresh payment methods"
 msgstr ""
 
-#: client/settings/payment-request-section/index.js:145
-msgid "Product page"
+#: client/settings/general-settings-section/section-heading.js:76
+msgid "Disable"
 msgstr ""
 
-#: client/settings/payment-request-section/index.js:159
-msgid "Cart"
+#: client/settings/save-settings-section/index.js:23
+msgid "Save changes"
 msgstr ""
 
-#: client/settings/payment-request-section/index.js:171
-msgid "Customize appearance"
+#: client/stripe-utils/utils.js:106
+msgid "Invalid email address, please correct and try again."
 msgstr ""
 
-#: client/settings/payment-request-section/index.js:68
-msgid "Enable express checkouts"
+#: client/stripe-utils/utils.js:111
+msgid "Unable to process this payment, please try again or use alternative method."
 msgstr ""
 
-#: client/settings/payment-request-section/index.js:74
-msgid ""
-"By enabling this feature, you agree to {{stripeLink}}Stripe{{/stripeLink}}, "
-"{{appleLink}}Apple{{/appleLink}}, and {{googleLink}}Google{{/googleLink}}'s "
-"terms of use."
+#: client/stripe-utils/utils.js:39
+msgid "The card number is not a valid credit card number."
 msgstr ""
 
-#: client/settings/payments-and-transactions-section/index.js:103
-msgid ""
-"Enter the name your customers will see on their transactions. Use a "
-"recognizable name – e.g. the legal entity name or website address–to avoid "
-"potential disputes and chargebacks."
+#: client/stripe-utils/utils.js:43
+msgid "The card expiration month is invalid."
 msgstr ""
 
-#: client/settings/payments-and-transactions-section/index.js:107
-msgid "Full bank statement"
+#: client/stripe-utils/utils.js:47
+msgid "The card expiration year is invalid."
 msgstr ""
 
-#: client/settings/payments-and-transactions-section/index.js:119
-msgid "Add customer order number to the bank statement"
+#: client/stripe-utils/utils.js:51
+msgid "The card security code is invalid."
 msgstr ""
 
-#: client/settings/payments-and-transactions-section/index.js:123
-msgid ""
-"When enabled, we'll include the order number for card and express checkout "
-"transactions."
+#: client/stripe-utils/utils.js:55
+msgid "The card number is incorrect."
 msgstr ""
 
-#: client/settings/payments-and-transactions-section/index.js:149
-msgid "We'll use the short version in combination with the customer order number."
+#: client/stripe-utils/utils.js:59
+msgid "The card number is incomplete."
 msgstr ""
 
-#: client/settings/payments-and-transactions-section/index.js:153
-msgid "Shortened customer bank statement"
+#: client/stripe-utils/utils.js:63
+msgid "The card security code is incomplete."
 msgstr ""
 
-#: client/settings/payments-and-transactions-section/index.js:168
-msgid "Cards & Express Checkouts"
+#: client/stripe-utils/utils.js:67
+msgid "The card expiration date is incomplete."
 msgstr ""
 
-#: client/settings/payments-and-transactions-section/index.js:43
-msgid "All Other Payment Methods"
+#: client/stripe-utils/utils.js:71
+msgid "The card has expired."
 msgstr ""
 
-#: client/settings/payments-and-transactions-section/index.js:44
-msgid "All Payment Methods"
+#: client/stripe-utils/utils.js:75
+msgid "The card security code is incorrect."
 msgstr ""
 
-#: client/settings/payments-and-transactions-section/index.js:50
-msgid "Payments settings"
+#: client/stripe-utils/utils.js:79
+msgid "The card zip code failed validation."
 msgstr ""
 
-#: client/settings/payments-and-transactions-section/index.js:55
-msgid "Enable payments via saved cards"
+#: client/stripe-utils/utils.js:83
+msgid "The card expiration year is in the past"
 msgstr ""
 
-#: client/settings/payments-and-transactions-section/index.js:59
-msgid ""
-"If enabled, users will be able to pay with a saved card during checkout. "
-"Card details are saved on Stripe servers, not on your store."
+#: client/stripe-utils/utils.js:87
+msgid "The card was declined."
 msgstr ""
 
-#: client/settings/payments-and-transactions-section/index.js:67
-msgid "Enable separate credit card form"
+#: client/stripe-utils/utils.js:91
+msgid "There is no card on a customer that is being charged."
 msgstr ""
 
-#: client/settings/payments-and-transactions-section/index.js:71
-msgid ""
-"If enabled, the credit card form will display separate credit card number "
-"field, expiry date field and CVC field."
-msgstr ""
-
-#: client/settings/payments-and-transactions-section/index.js:77
-msgid "Transaction preferences"
-msgstr ""
-
-#: client/settings/payments-and-transactions-section/index.js:84
-msgid "Customer bank statement"
-msgstr ""
-
-#: client/settings/payments-and-transactions-section/manual-capture-control.js:102
-msgid "Are you sure you want to enable manual capture of payments?"
-msgstr ""
-
-#: client/settings/payments-and-transactions-section/manual-capture-control.js:109
-msgid ""
-"Only cards support manual capture. When enabled, all other payment methods "
-"will be hidden from checkout."
-msgstr ""
-
-#: client/settings/payments-and-transactions-section/manual-capture-control.js:115
-msgid ""
-"You must capture the payment on the order details screen within 7 days of "
-"authorization, otherwise the money will return to the shopper."
-msgstr ""
-
-#: client/settings/payments-and-transactions-section/manual-capture-control.js:71
-msgid "Issue an authorization on checkout, and capture later"
-msgstr ""
-
-#: client/settings/payments-and-transactions-section/manual-capture-control.js:75
-msgid ""
-"Charge must be captured on the order details screen within 7 days of "
-"authorization, otherwise the authorization and order will be canceled."
-msgstr ""
-
-#: client/settings/payments-and-transactions-section/manual-capture-control.js:83
-msgid "Enable manual capture"
-msgstr ""
-
-#: client/settings/payments-and-transactions-section/manual-capture-control.js:96
-msgid "Enable"
-msgstr ""
-
-#: client/upe-onboarding-wizard/upe-preview-methods-selector/add-payment-methods-task.js:135
-msgid "Add payment methods"
-msgstr ""
-
-#: client/upe-onboarding-wizard/upe-preview-methods-selector/add-payment-methods-task.js:161
-msgid "Review accepted payment methods"
-msgstr ""
-
-#: client/upe-onboarding-wizard/upe-preview-methods-selector/add-payment-methods-task.js:170
-msgid ""
-"We've added methods that you'd already enabled. For best results, we "
-"recommand adding all available payment methods. We'll only show your "
-"customers the most relevant payment methods based on their location and "
-"purchasing history. {{learnMoreLink}}Learn more{{/learnMoreLink}}"
-msgstr ""
-
-#: client/upe-onboarding-wizard/upe-preview-methods-selector/add-payment-methods-task.js:187
-msgid "Payments accepted at checkout"
-msgstr ""
-
-#: client/upe-onboarding-wizard/upe-preview-methods-selector/add-payment-methods-task.js:197
-msgid "Select all"
+#: client/stripe-utils/utils.js:95
+msgid "An error occurred while processing the card."
 msgstr ""

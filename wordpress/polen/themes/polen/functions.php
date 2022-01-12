@@ -17,7 +17,19 @@ define('POL_COOKIES', array(
 
 if ( ! defined( '_S_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', DEVELOPER ? time() : '1.1.1' );
+	define( '_S_VERSION', DEVELOPER ? time() : '2.0.0' );
+}
+
+add_action('init', 'handle_preflight');
+function handle_preflight() {
+        header("Access-Control-Allow-Origin: " . "*");
+        header("Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE");
+        header("Access-Control-Allow-Credentials: true");
+        header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization');
+        if ('OPTIONS' == $_SERVER['REQUEST_METHOD']) {
+            status_header(200);
+            exit();
+        }
 }
 
 if ( ! function_exists( 'polen_setup' ) ) :
@@ -214,6 +226,7 @@ function polen_scripts() {
 	wp_register_script( 'polen-business', TEMPLATE_URI . '/assets/js/' . $min . 'business.js', array("vuejs"), _S_VERSION, true );
   wp_register_script( 'polen-help', TEMPLATE_URI . '/assets/js/' . $min . 'help.js', array("jquery", "vuejs"), _S_VERSION, true );
   wp_register_script( 'material-js', TEMPLATE_URI . '/assets/js/vendor/material-components-web.min.js', array(), _S_VERSION, false );
+  wp_register_script('popper-js', TEMPLATE_URI . '/assets/js/vendor/popper.min.js', array(), _S_VERSION, true);
 	// --------------------------------------------------------------------------------------------------
 
 	if (polen_is_landingpage()) {
@@ -246,7 +259,7 @@ function polen_scripts() {
 		wp_enqueue_script( 'polen-checkout', TEMPLATE_URI . '/assets/js/' . $min . 'checkout.js', array("jquery"), _S_VERSION, true );
 	}
 
-	wp_enqueue_script( 'bootstrap-js', TEMPLATE_URI . '/assets/js/vendor/bootstrap.min.js', array("jquery"), _S_VERSION, true );
+	wp_enqueue_script( 'bootstrap-js', TEMPLATE_URI . '/assets/js/vendor/bootstrap.min.js', array("jquery", "popper-js"), _S_VERSION, true );
   wp_enqueue_script('material-js');
 
 	// if(is_user_logged_in()) {
@@ -349,6 +362,16 @@ require_once TEMPLATE_DIR . '/inc/highlight_categories.php';
  */
 require_once TEMPLATE_DIR . '/inc/b2b_functions.php';
 
+/**
+ * Funções para REST API
+ */
+require_once TEMPLATE_DIR . '/api/api_function.php';
+
+/**
+ * Funções para página natal lacta
+ */
+require_once TEMPLATE_DIR . '/lacta/function_natal_lacta.php';
+
 
 add_action('wc_gateway_stripe_process_response', function($response, $order) {
 	// $response
@@ -369,6 +392,62 @@ add_action('wc_gateway_stripe_process_webhook_payment_error', function($order, $
 add_filter('wc_stripe_save_to_account_text', function(){
 	return 'Salvar os dados do cartão de credito para proximas compras.';
 });
+
+add_action('woocommerce_before_checkout_process', function(){
+	WC_Emails::instance();
+});
+
+function filter_woocommerce_coupon_error($err, $err_code, $instance)
+{
+  WC()->cart->remove_coupons();
+  return $err;
+};
+
+add_filter('woocommerce_coupon_error', 'filter_woocommerce_coupon_error', 10, 3);
+
+/**
+ * Customiza a paginação de todos os tipos de posts
+ *
+ * @param array $args
+ * @return string
+ */
+function show_pagination(array $args)
+{
+  $query = new WP_Query($args);
+
+  $maxPage = 99999;
+  $pages = paginate_links(array(
+    'base' => str_replace($maxPage, '%#%', esc_url(get_pagenum_link($maxPage))),
+    'format' => '?paged=%#%',
+    'current' => max(1, get_query_var('paged')),
+    'total' => $query->max_num_pages,
+    'type' => 'array',
+    'prev_next' => true,
+    'prev_text' => __('<i aria-hidden="true" class="fas fa-fw fa-chevron-left"><</i>'),
+    'next_text' => __('<i aria-hidden="true" class="fas fa-fw fa-chevron-right">></i>'),
+  ));
+
+  $output = '';
+  if (is_array($pages)) {
+    $output .= '<ul class="pagination">';
+    foreach ($pages as $page) {
+      $output .= "<li class=\"pagination__number\">{$page}</li>";
+    }
+    $output .= '</ul>';
+  }
+  wp_reset_query();
+
+  return $output;
+}
+
+
+//Remover plugins do menu para Sobhan
+function polen_remove_menus() {
+	remove_menu_page( 'plugins.php' );
+}
+if( 37 == get_current_user_id() ) {
+	add_action( 'admin_menu', 'polen_remove_menus' );
+}
 
 add_action( 'woocommerce_email', 'unhook_those_pesky_emails' );
 

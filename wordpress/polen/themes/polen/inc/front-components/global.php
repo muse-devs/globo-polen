@@ -122,7 +122,7 @@ function polen_front_get_categories_buttons()
                 <?php if ($categorie["img"]) : ?>
                   <img src="<?php echo $categorie["img"]; ?>" />
                 <?php endif; ?>
-                <?php echo $categorie["name"]; ?>
+                <h5><?php echo $categorie["name"]; ?></h5>
               </div>
             </a>
           <?php endforeach; ?>
@@ -136,13 +136,13 @@ function polen_front_get_categories_buttons()
 function polen_front_get_banner_video()
 {
   $mobile_video = array(
-    "poster" => TEMPLATE_URI . "/assets/img/capa-mobile.jpg",
-    "video" => TEMPLATE_URI . "/assets/video/home-mobile.mp4",
+    "poster" => "https://i.vimeocdn.com/video/1344893855-6d42b6b001ce1aad37eda73011f78177e71754995fd86e590499b8c50605bf02-d_384x230",
+    "video" => "https://player.vimeo.com/external/664445842.sd.mp4?s=0894358a43408ff52f0a8bcd516a69f7ead8b15f&profile_id=164",
     "class" => "video-mobile"
   );
   $desktop_video = array(
-    "poster" => TEMPLATE_URI . "/assets/img/capa-desktop.jpg",
-    "video" => TEMPLATE_URI . "/assets/video/home-desktop.mp4",
+    "poster" => "https://i.vimeocdn.com/video/1344905857-204fca2864c8cea7552cd885c5f9edf2916ed5ca409c641f69532312e1c3e86d-d_1040x426",
+    "video" => "https://player.vimeo.com/external/664451249.sd.mp4?s=d5c7153dc213adc440b30c6cc587690d7b44ec80&profile_id=165",
     "class" => "video-desktop"
   );
 ?>
@@ -153,10 +153,10 @@ function polen_front_get_banner_video()
     <div class="content">
       <div class="row">
         <div class="col-12 mb-3">
-          <h2 class="title text-center">Emocione quem você ama com vídeos personalizados de artistas famosos</h2>
+          <h2 class="title text-center">Emocione quem você ama com vídeos personalizados dos seus ídolos</h2>
         </div>
         <!-- <div class="col-12 d-flex justify-content-center">
-          <a href="<?php //echo polen_get_all_talents_url(); ?>" class="btn btn-primary btn-md">Ver todos os talentos</a>
+          <a href="<?php //echo polen_get_all_talents_url(); ?>" class="btn btn-primary btn-md">Ver todos os Ídolos</a>
         </div> -->
       </div>
     </div>
@@ -223,10 +223,10 @@ function polen_front_get_banner()
 }
 
 // $size pode ser 'medium' e 'small'
-function polen_front_get_card($item, $size = "small", $social = false)
+function polen_front_get_card($item, $size = "small", $social = false, $campanha = "")
 {
-  $product = wc_get_product($item['ID']);
-  $social = product_is_social_base($product);
+  // $product = wc_get_product($item['ID']);
+  // $social = product_is_social_base($product);
   // $social == false ? $social = social_product_is_social(wc_get_product($item['ID']), social_get_category_base()) : false;
   $class = $size;
   if ($size === "small") {
@@ -237,6 +237,10 @@ function polen_front_get_card($item, $size = "small", $social = false)
 
   if ($social) {
     $size .= " yellow";
+  }
+
+  if ($campanha) {
+    $size .= " promotional-" . $campanha;
   }
 
   if (isset($item['ID'])) {
@@ -251,9 +255,7 @@ function polen_front_get_card($item, $size = "small", $social = false)
   <div class="<?= $class; ?>">
     <div class="polen-card <?= $size; ?>" itemscope itemtype="https://schema.org/Offer">
       <figure class="image">
-        <?php if ($social) {
-          polen_donate_badge("Setembro Amarelo", true, false, true);
-        } elseif ($donate == 'yes') {
+        <?php if ($donate == 'yes') {
           polen_donate_badge("Social", true, false, false);
         } ?>
         <img loading="lazy" src="<?php echo $image_data["image"]; ?>" alt="<?php echo $image_data["alt"]; ?>" />
@@ -313,7 +315,7 @@ function polen_banner_scrollable($items, $title, $link, $subtitle = "", $social 
 <?php
 }
 
-function polen_front_get_news($items, $title, $link, $social = false)
+function polen_front_get_news($items, $title, $link, $social = "", $campanha = "")
 {
   if (!$items) {
     return;
@@ -336,7 +338,7 @@ function polen_front_get_news($items, $title, $link, $social = false)
           <div class="banner-wrapper">
             <div class="banner-content">
               <?php foreach ($items as $item) : ?>
-                <?php polen_front_get_card($item, "responsive", $social); ?>
+                <?php polen_front_get_card($item, "responsive", $social, $campanha); ?>
               <?php endforeach; ?>
             </div>
           </div>
@@ -380,17 +382,20 @@ function polen_front_get_artists($items, $title, $social = false)
 <?php
 }
 
-function polen_front_get_videos($videos)
+function polen_front_get_videos($videos, $title = "Vídeos em destaque")
 {
   if (!$videos) {
 		return;
 	}
+  if( ! wp_script_is( 'owl-carousel', 'enqueued' ) ) {
+      wp_enqueue_script('owl-carousel');
+  }
 ?>
-	<section id="talent-videos" class="row my-1">
+	<section id="talent-videos" class="row my-1 pb-4 mb-5">
     <div class="col-md-12">
       <header class="row my-3">
         <div class="col">
-          <h2>Últimos vídeos gravados pelos famosos</h2>
+          <h2><?php echo $title; ?></h2>
         </div>
       </header>
     </div>
@@ -461,6 +466,30 @@ function polen_front_get_videos($videos)
           $('#cover-box[data-id="'+id+'"]').removeClass("d-none");
         }
       });
+      jQuery(document).ready(function() {
+        $('#videos-carousel').owlCarousel({
+          loop: false,
+          stagePadding: 15,
+          items: 4,
+          animateOut: 'fadeOut',
+          margin: 5,
+          nav: true,
+          dots: false,
+          autoHeight:false,
+          navText: ["<i class='icon icon-left-arrow'></i>", "<i class='icon icon-right-arrow'></i>"],
+          responsive : {
+              0 : {
+                items: 2,
+              },
+              700 : {
+                items: 3,
+              },
+              1020 : {
+                items: 4,
+              }
+          }
+        });
+      })
     })(jQuery);
 	</script>
 <?php
@@ -579,14 +608,14 @@ function polen_box_related_product_by_product_id($product_id)
  * @param string $newsletter
  * @return HTML
  */
-function polen_form_signin_newsletter(string $event = 'newsletter')
+function polen_form_signin_newsletter(string $id = "newsletter", string $event = 'newsletter')
 {
   $inputs = new Material_Inputs();
 ?>
   <div id="signin-newsletter" class="col-md-5 mt-4">
     <h5 class="title typo typo-title typo-small">Se conecte com a gente!</h5>
     <p class="description typo typo-p typo-small typo-double-line-height">Receba novidades e conteúdos exclusivos da Polen.</p>
-    <form id="newsletter" action="/" method="POST">
+    <form id="<?php echo $id; ?>" action="/" method="POST">
       <div class="row">
         <div class="col-md-8 mb-2 mb-md-0">
           <?php
@@ -727,6 +756,36 @@ function generic_get_about($main_title, $title, $text)
 <?php
 }
 
+function polen_get_media_news() {
+?>
+  <section id="media-news" class="row my-5">
+    <div class="col-sm-12">
+      <div class="row">
+        <div class="col-sm-12 mb-4">
+          <h2 class="typo typo-title text-center">Polen na mídia</h2>
+        </div>
+        <div class="col-sm-12">
+          <div class="veiculos">
+            <a href="/polen-na-midia">
+              <img src="<?php echo TEMPLATE_URI; ?>/assets/img/na-midia/globo.png" alt="O Globo"></img>
+            </a>
+            <a href="/polen-na-midia">
+              <img src="<?php echo TEMPLATE_URI; ?>/assets/img/na-midia/folha.png" alt="Folha de São Paulo"></img>
+            </a>
+            <a href="/polen-na-midia">
+              <img src="<?php echo TEMPLATE_URI; ?>/assets/img/na-midia/veja.png" alt="Veja SP"></img>
+            </a>
+            <a href="/polen-na-midia">
+              <img src="<?php echo TEMPLATE_URI; ?>/assets/img/na-midia/exame.png" alt="Exame"></img>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  <section>
+<?php
+}
+
 function polen_get_toast($text)
 {
   if (!$text || empty($text)) {
@@ -740,16 +799,16 @@ function polen_get_toast($text)
     </div>
     <button class="ml-2 pol-toast-close" onclick="polRemoveElement('#pol-toast')">
       <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 22.5C17.5228 22.5 22 18.0228 22 12.5C22 6.97715 17.5228 2.5 12 2.5C6.47715 2.5 2 6.97715 2 12.5C2 18.0228 6.47715 22.5 12 22.5Z" stroke="#159A52" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-        <path d="M15 9.5L9 15.5" stroke="#159A52" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-        <path d="M9 9.5L15 15.5" stroke="#159A52" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M12 22.5C17.5228 22.5 22 18.0228 22 12.5C22 6.97715 17.5228 2.5 12 2.5C6.47715 2.5 2 6.97715 2 12.5C2 18.0228 6.47715 22.5 12 22.5Z" stroke="#767676" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M15 9.5L9 15.5" stroke="#767676" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M9 9.5L15 15.5" stroke="#767676" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
       </svg>
     </button>
   </div>
 <?php
 }
 
-function polen_get_home_banner($link)
+function polen_get_combate_banner($link)
 {
 ?>
 	<div class="row mt-4">
@@ -786,5 +845,105 @@ function polen_get_home_banner($link)
 			</div>
 		</div>
 	</div>
+<?php
+}
+
+function polen_get_bw_banner($link)
+{
+?>
+  <div class="row mt-4">
+    <div class="col-12">
+      <a href="<?php echo $link; ?>">
+        <div class="bw-banner" style="background: url('<?php echo TEMPLATE_URI . '/assets/img/black-week/bg.jpg'; ?>')center no-repeat">
+          <div class="logo">
+            <img src="<?php echo TEMPLATE_URI . '/assets/img/black-week/logo.png'; ?>" alt="Black Week" />
+          </div>
+          <div class="content">
+            <img src="<?php echo TEMPLATE_URI . '/assets/img/black-week/talentos.png'; ?>" alt="Black Week" />
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+<?php
+}
+
+function polen_get_natal_banner($link)
+{
+?>
+  <div class="row mt-4">
+    <div class="col-12">
+      <a href="<?php echo $link; ?>">
+        <div class="natal-banner" style="background: url('<?php echo TEMPLATE_URI . '/assets/img/natal/bg.png'; ?>')center no-repeat">
+          <div class="content">
+            <div class="text">
+              <p>Seu Vídeo-Polen vira uma doação para uma instituição social!</p>
+              <div class="click-to-donate">
+                Clique para doar
+              </div>
+            </div>
+          </div>
+          <div class="logo">
+            <img src="<?php echo TEMPLATE_URI . '/assets/img/natal/logo.png'; ?>" alt="Natal Emocionante" />
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+<?php
+}
+
+function polen_get_galo_banner($link)
+{
+?>
+  <div class="row mt-4">
+    <div class="col-12">
+      <a href="<?php echo $link; ?>">
+        <div class="galo-banner" style="background: url('<?php echo TEMPLATE_URI . '/assets/img/galo/bg.png'; ?>')center no-repeat">
+          <img loading="lazy" src="<?php echo TEMPLATE_URI; ?>/assets/img/galo/content.png" alt="Galo Ídolos" class="img-responsive" />
+        </div>
+      </a>
+    </div>
+  </div>
+<?php
+}
+
+function polen_get_lacta_banner($link)
+{
+?>
+  <div class="row mt-4">
+    <div class="col-sm-12">
+      <div class="lacta-banner" style="background: url('<?php echo TEMPLATE_URI . '/assets/img/lacta/bg-banner.jpg'; ?>')center no-repeat">
+        <div class="content">
+          <div class="text-center logo-lacta">
+            <svg width="158" height="62" viewBox="0 0 82 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M69.5923 4.91611C70.5507 6.9401 71.4201 9.04878 72.2007 11.2153C69.6897 11.2506 67.6742 11.6642 66.4844 12.6423C67.3877 9.97327 68.4237 7.38329 69.5923 4.91611ZM64.4646 19.5837C64.7059 18.6014 64.9642 17.6261 65.2395 16.655C67.1901 15.7136 70.7864 15.3028 73.6064 15.4863C74.0101 16.8385 74.3813 18.2062 74.7201 19.5837H79.941C77.8407 12.1398 75.0292 5.25203 72.1258 0.402344H67.0602C64.1569 5.25203 61.3453 12.1398 59.2451 19.5837H64.4646Z" fill="white" />
+              <path d="M80.4644 21.8702C75.1828 23.8476 68.9739 25.6698 60.1708 25.6698C44.6958 25.6698 33.8546 21.8702 19.5215 21.8702C13.53 21.8702 8.40367 22.8201 5.09668 23.89V18.1328V12.48V0.402344H0V29.746C5.52858 27.9549 11.3663 26.2556 19.5215 26.2556C33.5145 26.2556 43.7685 32.0001 60.1708 32.0001C69.0671 32.0001 75.9238 30.3939 81.6387 27.6444C81.3296 25.7926 80.9273 23.8773 80.4644 21.8702Z" fill="white" />
+              <path d="M38.1464 19.9859C40.6799 19.9859 43.3969 19.3987 45.4675 18.0085V13.3451C43.0582 14.9513 40.8338 15.6613 38.5176 15.6613C34.4089 15.6613 33.3278 12.9739 33.3278 9.69937C33.3278 6.14679 34.687 4.32463 37.3744 4.32463C39.2276 4.32463 40.2777 5.43684 40.4019 7.47495H45.3447C45.2205 2.47142 42.1944 0 37.3758 0C30.7039 0 28.1704 4.38673 28.1704 9.69937C28.1704 15.7855 30.7336 19.9859 38.1464 19.9859Z" fill="white" />
+              <path d="M17.9468 4.91665C18.9051 6.94064 19.7746 9.04932 20.5551 11.2159C18.0442 11.2512 16.0286 11.6647 14.8388 12.6428C15.7435 9.97381 16.7795 7.38383 17.9468 4.91665ZM13.5939 16.6569C15.5459 15.7155 19.1394 15.3048 21.9609 15.4883C22.3646 16.8404 22.7358 18.2081 23.0745 19.5857H28.294C26.1938 12.1418 23.3822 5.25398 20.4789 0.404297H15.4132C12.5099 5.25398 9.69836 12.1418 7.59814 19.5857H12.8176C13.0604 18.6033 13.3187 17.6266 13.5939 16.6569Z" fill="white" />
+              <path d="M51.3682 19.5837H56.4649V4.72697H61.5615V0.402344H46.2715V4.72697H51.3682V19.5837Z" fill="white" />
+            </svg>
+          </div>
+          <p>Criando laços para emocionar quem você ama</p>
+          <div class="about-more"> Saiba mais</div>
+        </div>
+      </div>
+      <a href="<?php echo $link; ?>" class="lacta-banner-link"></a>
+    </div>
+  </div>
+<?php
+}
+
+function polen_get_tooltip($text, $placement = "right")
+{
+?>
+  <button type="button"
+    class="btn btn-tooltip"
+    data-toggle="tooltip"
+    data-html="true"
+    data-placement="<?php echo $placement; ?>"
+    title="<?php echo $text; ?>">
+      ?
+  </button>
 <?php
 }

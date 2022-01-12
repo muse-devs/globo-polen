@@ -5,6 +5,9 @@
   line-height: 24px;
   font-weight: 400;
   color: var(--dark);
+  &:hover {
+    color: var(--primary);
+  }
   @include media-breakpoint-up(md) {
     display: block;
   }

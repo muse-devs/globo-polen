@@ -1,6 +1,10 @@
 <?php
 
+use Polen\Includes\Cart\Polen_Cart_Item_Factory;
+use Polen\Includes\Module\Polen_Order_Module;
+use Polen\Includes\Polen_Order;
 use Polen\Includes\Polen_Talent;
+use Polen\Includes\Polen_Video_Info;
 
 $polen_talent = new Polen_Talent();
 
@@ -38,13 +42,14 @@ if (!$talent_is_social) {
 		} else {
 			echo "<p class='mt-2 mb-4'>Você tem <strong><span id='order-count'>" . $count_total['qtd'] . "</span> pedido(s) de vídeo</strong>, seus pedidos expiram em até {$days_expires} dias.</p>";
 			if (count($talent_orders) > 0) {
-        $inputs = new Material_Inputs();
+        		$inputs = new Material_Inputs();
 				foreach ($talent_orders as $order) :
 					$order_obj = new \WC_Order($order['order_id']);
 					$is_social = social_order_is_social($order_obj);
-
+					$video_info = Polen_Video_Info::get_by_order_id( $order['order_id'] );
 					$total_order_value = $order['total_raw'];
 					$discounted_value_order = polen_apply_polen_part_price($total_order_value, $is_social);
+					$polen_order = new Polen_Order_Module( $order_obj );
 			?>
 					<div class="row mb-3" box-id="<?php echo $order['order_id']; ?>">
 						<div class="col md-12">
@@ -71,15 +76,15 @@ if (!$talent_is_social) {
 									<div class="col-12 col-md-12">
 										<div class="row">
 											<?php
-											if (!empty($order['from'])) : ?>
+											if ( $polen_order->get_video_to() === Polen_Order_Module::VIDEO_TO_OTHER_ONE ) : ?>
 												<div class="col-12 col-md-6">
 													<p class="p">De</p>
-													<p class="value small"><?php echo $order['from']; ?></p>
+													<p class="value small"><?php echo $polen_order->get_offered_by(); ?></p>
 												</div>
 											<?php endif; ?>
 											<div class="col-12 col-md-6">
 												<p class="p">Para <?php echo (defined('ENV_DEV') && (ENV_DEV === true)) ? '(ID: ' . $order['order_id'] . ')' : ''; ?></p>
-												<p class="value small"><?php echo $order['name']; ?></p>
+												<p class="value small"><?php echo $polen_order->get_name_to_video(); ?></p>
 											</div>
 											<!-- <div class="col-12 col-md-12">
 												<p class="p">e-mail</p>
@@ -88,11 +93,12 @@ if (!$talent_is_social) {
 										</div>
 										<?php
 										if (event_promotional_order_is_event_promotional($order_obj)) {
+											$item_cart = Polen_Cart_Item_Factory::polen_cart_item_from_order( $order_obj );
 										?>
 											<div class="row mt-2">
 												<div class="col-12">
 													<p class="p">Ocasião</p>
-													<p class="value small">Vídeo-autógrafo</p>
+													<p class="value small"><?= $item_cart->get_video_category(); ?></p>
 												</div>
 											</div>
 										<?php
@@ -124,13 +130,23 @@ if (!$talent_is_social) {
 														<p class="p">Válido por</p>
 														<p class="value small">
 															<?php
-															echo $polen_talent->video_expiration_time($logged_user, $order['order_id'], $is_social);
+															echo Polen_Order::get_deadline_formatted_for_order_list( $order_obj ) . '<br>';
+															// echo $polen_talent->video_expiration_time($logged_user, $order['order_id'], $is_social);
 															?>
 														</p>
 													</div>
 												</div>
 											</div>
 										</div>
+										<div class="row mt-2">
+<?php
+	echo $polen_order->get_html_origin_to_list_orders_talent();
+?>
+												<div class="col-6 col-md-6">
+													<p class="p"></p>
+													<p class="value small"></p>
+												</div>
+											</div>
 										<div class="row">
 											<div class="col-md-12">
 												<div class="row mt-2">
@@ -142,7 +158,7 @@ if (!$talent_is_social) {
 											</div>
 										</div>
 									</div>
-									<div class="col-12 col-md-12 mt-4">
+									<div class="col-12 col-md-12 mt-2">
 										<div class="row">
 
 											<?php
@@ -150,7 +166,18 @@ if (!$talent_is_social) {
 											?>
 												<div class="col-12 col-md-12">
                           <?php
-                          $inputs->material_button_link_outlined("link-" . $order['order_id'], "Enviar vídeo", "/my-account/send-video/?order_id=" . $order['order_id']);
+							if( $video_info->video_logo_status == Polen_Video_Info::VIDEO_LOGO_STATUS_WAITING ||
+								$video_info->video_logo_status == Polen_Video_Info::VIDEO_LOGO_STATUS_SENDED ) {
+              ?>
+              <div class="pol-toast-success mb-2">
+                <div class="text">
+                  Vídeo enviado. Aguardando processamento.
+                </div>
+              </div>
+              <?php
+							} else {
+								$inputs->material_button_link_outlined("link-" . $order['order_id'], "Enviar vídeo", "/my-account/send-video/?order_id=" . $order['order_id']);
+							}
                           ?>
 												</div>
 											<?php

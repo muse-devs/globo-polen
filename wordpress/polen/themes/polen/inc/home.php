@@ -22,10 +22,15 @@ get_header();
 	<div class="row">
 		<div class="col-12">
 			<div id="product-carousel" class="owl-carousel owl-theme">
-        <!-- Banner Canal Combate -->
         <div class="item">
-					<?php polen_get_home_banner(site_url('tag/canal-combate/')); ?>
+					<?php polen_get_galo_banner(site_url('tag/galo-idolos/')); ?>
 				</div>
+        <div class="item">
+					<?php polen_get_lacta_banner(site_url('/lacta')); ?>
+				</div>
+        <!-- <div class="item">
+					<?php //polen_get_natal_banner(site_url('tag/natal-social/')); ?>
+				</div> -->
 			</div>
 		</div>
 	</div>
@@ -33,12 +38,14 @@ get_header();
   <?php polen_front_get_tutorial(); ?>
 
   <?php
-    $videos = ["3626", "3492", "3806", "3554", "2930", "3898", "3168"];
+    $videos = ["3492", "3806", "3554", "2930", "3898", "3168"];
     polen_front_get_videos(polen_get_home_stories($videos));
   ?>
 
-  <?php polen_front_get_news(polen_get_talents(12), "Todos os famosos", polen_get_all_talents_url());
+  <?php polen_front_get_news(polen_get_talents(12), "Todos os Ídolos", polen_get_all_talents_url());
   ?>
+
+  <?php polen_get_media_news(); ?>
 
   <?php //polen_front_get_suggestion_box();
   ?>

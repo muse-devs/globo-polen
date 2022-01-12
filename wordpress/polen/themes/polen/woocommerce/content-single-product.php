@@ -16,11 +16,20 @@
  * @version 3.6.0
  */
 
+use Polen\Includes\Module\Polen_Product_Module;
+
 defined('ABSPATH') || exit;
 
 global $product;
 global $Polen_Plugin_Settings;
 global $post;
+
+$polen_product = new Polen_Product_Module( $product );
+// if( $polen_product->get_is_campaign() ) {
+// 	$campaign_slug = $polen_product->get_campaign_slug();
+// 	wc_get_template( "content-single-{$campaign_slug}-product.php" );
+// 	return;
+// }
 
 /**
  * Hook: woocommerce_before_single_product.
@@ -40,6 +49,8 @@ use Polen\Social_Base\Social_Base_Product;
 $Talent_Fields = new Polen_Update_Fields();
 $Talent_Fields = $Talent_Fields->get_vendor_data($post->post_author);
 $terms = wp_get_object_terms(get_the_ID(), 'product_tag');
+$categories = wp_get_object_terms(get_the_ID(), 'product_cat');
+$videos = polen_get_videos_by_talent($Talent_Fields);
 
 $bg_image = wp_get_attachment_image_src($Talent_Fields->cover_image_id, "large")[0];
 $image_data = polen_get_thumbnail(get_the_ID());
@@ -65,20 +76,22 @@ if( 'instock' == $product->get_stock_status() ) {
 
 ?>
 
-<script>
-	// params
-	jQuery(document).ready(function() {
-		if(document.querySelector("#stories")) {
-			renderStories(
-				<?php echo polen_get_videos_by_talent($Talent_Fields, true); ?>,
-				<?php echo json_encode(get_the_title()); ?>,
-				<?php echo json_encode($image_data["image"]); ?>,
-				<?php echo $social || 'null'; ?>,
-				<?php echo $stock || 'null'; ?>
-				);
-		}
-	});
-</script>
+<?php if($histories_enabled) : ?>
+  <script>
+    // params
+    jQuery(document).ready(function() {
+      if(document.querySelector("#stories")) {
+        renderStories(
+          <?php echo polen_get_videos_by_talent($Talent_Fields, true); ?>,
+          <?php echo json_encode(get_the_title()); ?>,
+          <?php echo json_encode($image_data["image"]); ?>,
+          <?php echo $social || 'null'; ?>,
+          <?php echo $stock || 'null'; ?>
+          );
+      }
+    });
+  </script>
+<?php endif; ?>
 
 <?php if ($bg_image) : ?>
 	<figure class="image-bg">
@@ -92,28 +105,24 @@ if( 'instock' == $product->get_stock_status() ) {
 	<div class="row">
 		<div class="col-12<?php echo $histories_enabled ? ' col-md-6 m-md-auto' : ''; ?> d-flex align-items-center">
 			<?php $histories_enabled && polen_front_get_talent_stories(); ?>
-			<div>
-				<h1 class="talent-name" title="<?= get_the_title(); ?>"><?= get_the_title(); ?></h1>
-				<?php if($social) : ?>
-					<h5 class="talent-count-videos text-truncate">
-						<?php
-						// $videosCount = $stock;
-						if ($has_stock) {
-							echo $videosCount . " vídeo disponível";
-						} else {
-							echo "Nenhum vídeo disponível :D";
-						}// else {
-						// 	echo $videosCount . " vídeos disponíveis";
-						// }
-						?>
-					</h5>
-				<?php endif; ?>
-			</div>
+			<?php if(sizeof($videos) > 0) : ?>
+				<div>
+					<h1 class="talent-name" title="<?= get_the_title(); ?>"><?= get_the_title(); ?></h1>
+				</div>
+			<?php endif; ?>
 			<?php polen_get_share_button(); ?>
 		</div>
-		<div class="col-12 mt-3">
-			<?php $histories_enabled || polen_front_get_talent_videos($Talent_Fields); ?>
-		</div>
+		<?php if(!$histories_enabled) : ?>
+			<?php if($videos && sizeof($videos) > 0): ?>
+				<div class="col-12 mt-3">
+					<?php polen_front_get_videos_single($Talent_Fields, $videos); ?>
+				</div>
+			<?php else: ?>
+				<div class="col-12 col-md-6 m-md-auto">
+					<?php polen_front_get_talent_mini_bio($image_data, get_the_title(), $categories[0]->name); ?>
+				</div>
+			<?php endif; ?>
+		<?php endif; ?>
 	</div>
 
   <!-- Botão de adicionar ao carrinho -->
@@ -125,13 +134,13 @@ if( 'instock' == $product->get_stock_status() ) {
         "select_type",
         array(
           $inputs->pol_combo_advanced_item("Vídeo para uso pessoal", $product->get_price_html(), "Compre um vídeo personalizado para você ou para presentar outra pessoa", "check-pessoal", "pessoal", true),
-          $inputs->pol_combo_advanced_item("Vídeo para meu negócio", "", "Compre um Vídeo Polen para usar no seu negócio", "check-b2b", "b2b", false, !polen_b2b_product_is_enabled($product))
+          $inputs->pol_combo_advanced_item("Vídeo para meu negócio", "Valor sob consulta", "Compre um Vídeo Polen para usar no seu negócio", "check-b2b", "b2b", false, !polen_b2b_product_is_enabled($product))
           )); ?>
 				<div class="btn-buy-personal">
           <?php echo woocommerce_template_single_add_to_cart(); ?>
         </div>
         <div class="btn-buy-b2b d-none">
-          <?php $inputs->material_button_link("btn-b2b", "Pedir vídeo", enterprise_url_home() . "#bus-form-wrapper", false, "", array(), $donate ? "donate" : ""); ?>
+          <?php $inputs->material_button_link("btn-b2b", "Pedir vídeo", enterprise_url_home() . '?talent='.get_the_title().'#bus-form-wrapper', false, "", array(), $donate ? "donate" : ""); ?>
         </div>
 			<?php else: ?>
         <?php $inputs->material_button_link("todos", "Escolher outro artista", home_url( "shop" ), false, "", array(), $donate ? "donate" : ""); ?>
@@ -140,7 +149,8 @@ if( 'instock' == $product->get_stock_status() ) {
     <script>
       const btn_personal = document.querySelector(".btn-buy-personal");
       const btn_b2b = document.querySelector(".btn-buy-b2b");
-      document.querySelector("#select_type")
+      const pol_select = document.querySelector("#select_type");
+      pol_select && pol_select
         .addEventListener("polcombochange",
           function(e) {
             if(e.detail == "b2b") {

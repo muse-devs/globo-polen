@@ -335,7 +335,7 @@ function polen_get_videos_by_talent($talent, $json = false)
 			'video' => $item->vimeo_file_play,
 			'hash' => $item->hash,
 			'first_order' => $item->first_order,
-			'initials' => polen_get_initials_name($cart_item->get_name_to_video()),
+			'initials' => $item->order_id == "4874"?'':polen_get_initials_name($cart_item->get_name_to_video()),
 		];
 	}
 
