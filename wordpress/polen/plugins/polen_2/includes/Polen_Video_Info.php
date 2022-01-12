@@ -5,6 +5,7 @@
  */
 namespace Polen\Includes;
 
+use Polen\Api\Api_Checkout;
 use Polen\Includes\Db\Polen_DB;
 
 class Polen_Video_Info extends Polen_DB
@@ -202,8 +203,9 @@ class Polen_Video_Info extends Polen_DB
         $self_obj = new static();
         $table_name = $self_obj->table_name();
         global $wpdb;
+        $campaign_key = Api_Checkout::ORDER_METAKEY;
         $sql = $wpdb->prepare( "SELECT vi.* FROM {$table_name} AS vi
-            INNER JOIN wp_postmeta AS pm_meta ON pm_meta.post_id = vi.order_id AND pm_meta.meta_key = \"hotsite\"
+            INNER JOIN wp_postmeta AS pm_meta ON pm_meta.post_id = vi.order_id AND pm_meta.meta_key = \"{$campaign_key}\"
             WHERE
             ( 1 = 1 )
             AND vi.talent_id = %s
