@@ -296,7 +296,8 @@ function polen_talent_review($reviews)
       ?>
       <div id="review-carousel" class="owl-carousel owl-theme">
         <?php
-        foreach ($reviews as $review) {
+        foreach ($reviews as $i => $review) {
+          if ($i > 8) break;
           $review_id = $review->comment_ID;
           $date = new DateTime($review->comment_date);
           $rate = get_comment_meta($review_id, "rate");
