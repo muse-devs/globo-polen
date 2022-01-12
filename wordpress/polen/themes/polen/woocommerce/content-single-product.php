@@ -45,6 +45,7 @@ if (post_password_required()) {
 
 use Polen\Includes\Polen_Update_Fields;
 use Polen\Social_Base\Social_Base_Product;
+use Polen\Includes\Polen_Order_Review;
 
 $Talent_Fields = new Polen_Update_Fields();
 $Talent_Fields = $Talent_Fields->get_vendor_data($post->post_author);
@@ -64,6 +65,11 @@ $donate_text = stripslashes(get_post_meta(get_the_ID(), '_description_charity', 
 $histories_enabled = $Polen_Plugin_Settings['polen_histories_on'];
 $social = Social_Base_Product::product_is_social_base( $product );
 $inputs = new Material_Inputs();
+
+
+$product_post = get_post($product->get_id());
+$talent = get_user_by('id', $product_post->post_author);
+$reviews = Polen_Order_Review::get_order_reviews_by_talent_id($talent->ID);
 
 // outofstock
 // instock
@@ -166,11 +172,11 @@ if( 'instock' == $product->get_stock_status() ) {
   <!-- --------------------------------------------- -->
 
 	<div class="row">
-		<div class="col-12 col-md-6 m-md-auto d-flex">
+		<div class="col-12 col-md-6 m-md-auto d-flex justify-content-center">
 			<!-- Se for doação -->
 			<?php if ($donate) : ?>
 				<div class="row">
-					<div class="col-md-12 mb-1">
+					<div class="col-md-12 mb-4">
 						<?php polen_donate_badge("100% DO CACHÊ DOADO PARA " . $donate_name, false); ?>
 					</div>
 				</div>
@@ -187,7 +193,8 @@ if( 'instock' == $product->get_stock_status() ) {
 	</div>
 
 	<!-- Card dos Reviews -->
-	<?php $social || polen_card_talent_reviews_order($post, $Talent_Fields); ?>
+	<?php //$social || polen_card_talent_reviews_order($post, $Talent_Fields); ?>
+  <?php $social || polen_talent_deadline($post, $Talent_Fields); ?>
 
 	<?php
 		// if (!$social) {
@@ -238,6 +245,9 @@ if( 'instock' == $product->get_stock_status() ) {
     );
   }
   ?>
+
+  <!-- Avaliações -->
+	<?php $social || polen_talent_review($reviews); ?>
 
 	<!-- Como funciona? -->
 	<?php $social || polen_front_get_tutorial(); ?>
