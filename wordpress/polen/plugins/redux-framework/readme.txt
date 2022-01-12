@@ -3,8 +3,8 @@ Contributors: dovyp, redux, kprovance
 Tags: gutenberg, blocks, gutenberg blocks, editor, block, page builder, block editor, block library, editor, templates, library
 Requires at least: 4.0
 Requires PHP: 7.1
-Tested up to: 5.8.1
-Stable tag: 4.3.1
+Tested up to: 5.9
+Stable tag: 4.3.5
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -108,6 +108,29 @@ If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg
 
 == Changelog ==
 
+= 4.3.5 =
+* Added: Add former premium feature: Option panel Search Bar. See Sample demo or the [docs site](https://devs.redux.io/core-extensions).
+* Added: Add former premium feature: Shortcodes.  See Sample demo or the [docs site](https://devs.redux.io/core-extensions).
+* Fixed: #3852 - Editor in metaboxes not saving HTML.  WIll now save the same HTML posts/pages allows.
+* Fixed: Front end formatting issue with the Extendify template library.
+* Release date: December 01, 2021
+
+= 4.3.4 =
+* Fixed: CSS and JS not loading when embedding Redux due to malformed path.
+* Modified: Update to the Extendify template library.
+* Release date: November, 24 2021
+
+= 4.3.3 =
+Modified: Move template libraries to redux-core directory.
+Modified: Update to the Extendify template library.
+Release date: November 16, 2021
+
+= 4.3.2 =
+Added: Metaboxes!
+Fixed: Incorrect return type in Options Constructor.
+Modified: Prefixed Browser class to avoid conflict with older versions in other projects.
+Release date: November 11, 2021
+
 = 4.3.1 =
 Fixed: `wp_mail has been declared by another process or plugin` message.
 Fixed: Malformed README wouldn't allow clicking of some support links.
@@ -138,7 +161,7 @@ Release date: August 11, 2021
 = 4.2.11 =
 Fixed: Removed type declarations on core return values to support improperly written third-party extensions.
 Fixed: Added shim to prevent errors on functions calls outdated extensions are still using.
-Fixed: Removed type declarations on field code to support outdated versions of PHP (PHP 7.4 is the minimum recommendation from WordPress...please update if you are able. [https://wordpress.org/about/requirements](https://wordpress.org/about/requirements).
+Fixed: Removed type declarations on field code to support outdated versions of PHP (PHP 7.4 is the minimum recommendation from WordPress...please update if you are able). [https://wordpress.org/about/requirements](https://wordpress.org/about/requirements).
 Fixed: Support URL button kicking back a JavaScript error.
 Release date: July 29, 2021
 

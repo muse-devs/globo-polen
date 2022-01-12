@@ -16,7 +16,11 @@
  * @version 3.7.0
  */
 
+use Polen\Includes\Cart\Polen_Cart_Item;
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
+
+global $Polen_Plugin_Settings;
+$order_expires = $Polen_Plugin_Settings['order_expires'];
 
 defined('ABSPATH') || exit;
 
@@ -57,7 +61,7 @@ $total = polen_get_total_order_email_detail_to_talent( $order, $email );
 				</td>
 				<td>
 					<p class="details_title">Válido por</p>
-					<span class="details_value">7 dias</span>
+					<span class="details_value"><?php echo $order_expires; ?> dias</span>
 				</td>
 			</tr>
 			<tr>
@@ -67,7 +71,8 @@ $total = polen_get_total_order_email_detail_to_talent( $order, $email );
 			</tr>
 			<tr>
 				<?php $video_de = $item->get_offered_by(); ?>
-				<?php if (!empty($video_de)) : ?>
+				<?php $video_to = $item->get_video_to() ?>
+				<?php if ( Polen_Cart_Item::VIDEO_FOR_OTHER_ONE == $video_to ) : ?>
 					<td>
 						<p class="details_title">Vídeo de</p>
 						<span class="details_value"><?php echo $item->get_offered_by(); ?></span>
@@ -75,11 +80,17 @@ $total = polen_get_total_order_email_detail_to_talent( $order, $email );
 					<td valign="center">
 						<img src="<?php echo get_template_directory_uri(); ?>/assets/img/email/arrow.png ?>" alt="Seta para a direita">
 					</td>
+					<td <?php echo empty($video_de) ? " colspan='3'" : ""; ?>>
+						<p class="details_title">Para</p>
+						<span class="details_value"><?php echo $item->get_name_to_video(); ?></span>
+					</td>
+				<?php else: ?>
+					<td <?php echo empty($video_de) ? " colspan='3'" : ""; ?>>
+						<p class="details_title">Para</p>
+						<span class="details_value"><?php echo $item->get_name_to_video(); ?></span>
+					</td>
 				<?php endif; ?>
-				<td <?php echo empty($video_de) ? " colspan='3'" : ""; ?>>
-					<p class="details_title">Para</p>
-					<span class="details_value"><?php echo $item->get_name_to_video(); ?></span>
-				</td>
+
 			</tr>
 			<tr>
 				<td colspan="3">

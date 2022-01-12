@@ -1,6 +1,5 @@
 var __kdt = __kdt || [];
 __kdt.push({ "public_key": params.public_key });
-__kdt.push({ "post_on_load": false });
 
 (function () {
     var kdt = document.createElement('script');

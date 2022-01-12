@@ -48,7 +48,7 @@ class Polen_Vimeo_Response
     public function is_error()
     {
         $return = false;
-        if( isset( $this->response['body']['error'] ) && !empty( $this->response['body']['error'] ) ) {
+        if( $this->get_general_error() != null && $this->get_general_error() != '' ) {
             $return = true;
         }
         return $return;
@@ -62,7 +62,16 @@ class Polen_Vimeo_Response
     {
         return !empty( $this->get_developer_message() )
             ? $this->get_developer_message()
-            : $this->response['body']['error'];
+            : $this->get_general_error();
+    }
+
+
+    public function get_general_error()
+    {
+        if( isset( $this->response['body']['error'] ) ) {
+            return $this->response['body']['error'];
+        }
+        return '';
     }
     
     /**
@@ -95,6 +104,21 @@ class Polen_Vimeo_Response
         if( 
                 $this->response['body']['status'] == self::STATUS_AVAILABLE &&
                 $this->response['body']['pictures']['sizes'][3]['link'] != self::URL_IMAGE_640_VIMEO_DEFULT
+            ) {
+            return true;
+        }
+        return false;
+    }
+
+
+    /**
+     * Verifica se o processamento do video está completo pelo Vimeo
+     * @return boolean
+     */
+    public function video_logo_processing_is_complete()
+    {
+        if( 
+                $this->response['body']['status'] == self::STATUS_AVAILABLE
             ) {
             return true;
         }

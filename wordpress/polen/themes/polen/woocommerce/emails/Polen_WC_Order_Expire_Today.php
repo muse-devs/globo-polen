@@ -4,6 +4,9 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
+global $Polen_Plugin_Settings;
+$order_expires = $Polen_Plugin_Settings['order_expires'];
+
 do_action('woocommerce_email_header', $email_heading, $email);
 
 $item = Polen\Includes\Cart\Polen_Cart_Item_Factory::polen_cart_item_from_order($order);
@@ -25,7 +28,7 @@ $mail_subject = "Renovar solicitação #{$order->get_id()}";
   Olá,<br />
 	Hoje expira o prazo inicial de entrega do seu vídeo de <strong><?php echo $talent_name; ?></strong>, mas ainda não foi concluído.
 Às vezes acontece por conta da agenda dos nosso talentos mas temos uma solução pra você!
-Queremos saber se você tem interesse em renovar a solicitação por mais 7 dias sem nenhum custo adicional.
+Queremos saber se você tem interesse em renovar a solicitação por mais <?php echo $order_expires; ?> dias sem nenhum custo adicional.
 </p>
 
 <p>Por favor, nos envie uma resposta para <a href="mailto:atendimento@polen.me?subject=<?php echo $mail_subject; ?>">atendimento@polen.me</a> com o número do pedido.

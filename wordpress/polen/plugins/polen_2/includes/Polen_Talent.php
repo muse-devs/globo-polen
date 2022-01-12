@@ -393,6 +393,16 @@ class Polen_Talent {
     }
     
 
+    /**
+     * Pega Orders por Talento por Status
+     * $status pode ser uma string separada por virgula "'wc-payment-approved', 'wc-talent-accepted'"
+     * Se count for TRUE vai retornar o total
+     * 
+     * @param int
+     * @param string
+     * @param bool
+     * @return array
+     */
     public function get_talent_orders($talent_id, $status = false, $count = false ) {
         if ($talent_id) {
             global $wpdb;
@@ -411,7 +421,7 @@ class Polen_Talent {
             if( $count ){
                 $select = "count( order_items.order_id ) as qtd"; 
             } else {
-                $limit = ' LIMIT 300 ';
+                $limit = ' LIMIT 50 ';
             }
 
             if (is_countable($talent_products) && count($talent_products) > 0) {
@@ -674,9 +684,9 @@ class Polen_Talent {
         if( $this->is_user_talent( $user ) && !empty( $order_id )) {
             $order = wc_get_order( $order_id );
             // $first_dateTime = new \DateTime($order->post_date); 
-            $last_dateTime = new \DateTime($order->get_date_created()); 
+            $last_dateTime = new \WC_DateTime($order->get_date_created()); 
 
-            $current_date = new \DateTime( "now", new \DateTimeZone( get_option( 'timezone_string' ) ) );
+            $current_date = new \WC_DateTime( "now" );
 
             //Produto Social do crianca esperanca é 15dias
             if( social_order_is_social( $order ) ) {

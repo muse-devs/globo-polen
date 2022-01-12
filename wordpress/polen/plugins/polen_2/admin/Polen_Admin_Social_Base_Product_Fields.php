@@ -8,7 +8,7 @@ class Polen_Admin_Social_Base_Product_Fields
     const TAB_CONTENT_NAME = 'polen_social_base_tab_data';
     
     const FIELD_NAME_IS            = '_is_social_base';
-    const FIELD_NAME_SLUG_CAMPAING = '_social_base_slug_campaing';
+    const FIELD_NAME_SLUG_CAMPAIGN = '_social_base_slug_campaign';
     const FIELD_NAME_URL_VIDEO     = '_social_base_video_testimonial';
     const FIELD_NAME_URL_WATERMARK = '_social_base_watermark';
 
@@ -59,8 +59,8 @@ class Polen_Admin_Social_Base_Product_Fields
                     <?php
                     woocommerce_wp_text_input(
                         array(
-                            'id'          => self::FIELD_NAME_SLUG_CAMPAING,
-                            'value'       => $product_object->get_meta( self::FIELD_NAME_SLUG_CAMPAING ),
+                            'id'          => self::FIELD_NAME_SLUG_CAMPAIGN,
+                            'value'       => $product_object->get_meta( self::FIELD_NAME_SLUG_CAMPAIGN ),
                             'label'       => 'Slug da Campanha',
                             'desc_tip'    => true,
                             'description' => 'Slug da companha que este produto é parte',
@@ -114,13 +114,13 @@ class Polen_Admin_Social_Base_Product_Fields
             if ( $screen->base == 'post' && $screen->post_type == 'product' ) {
                 $product = wc_get_product( $product_id );
                 $is_social_base = strip_tags( $_POST[ self::FIELD_NAME_IS ]);
-                $social_base_slug_campaing = strip_tags( $_POST[ self::FIELD_NAME_SLUG_CAMPAING ]);
+                $social_base_slug_campaign = strip_tags( $_POST[ self::FIELD_NAME_SLUG_CAMPAIGN ]);
                 $social_base_video_testimonial = strip_tags( $_POST[ self::FIELD_NAME_URL_VIDEO ]);
                 $social_base_watermark = strip_tags( $_POST[ self::FIELD_NAME_URL_WATERMARK ]);
 
 
                 $this->save_meta($product, $is_social_base, self::FIELD_NAME_IS );
-                $this->save_meta($product, $social_base_slug_campaing, self::FIELD_NAME_SLUG_CAMPAING );
+                $this->save_meta($product, $social_base_slug_campaign, self::FIELD_NAME_SLUG_CAMPAIGN );
                 $this->save_meta($product, $social_base_video_testimonial, self::FIELD_NAME_URL_VIDEO );
                 $this->save_meta($product, $social_base_watermark, self::FIELD_NAME_URL_WATERMARK );
 

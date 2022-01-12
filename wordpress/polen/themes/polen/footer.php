@@ -24,7 +24,7 @@
                 <h5 class="title typo typo-title typo-small">Conta</h5>
                 <ul class="footer-menu">
                   <li><a href="/register">Página de cadastro</a></li>
-                  <li><a href="<?php echo polen_get_all_talents_url(); ?>">Todos os talentos</a></li>
+                  <li><a href="<?php echo polen_get_all_talents_url(); ?>">Todos os Ídolos</a></li>
                   <li><a href="/my-account">Minha conta</a></li>
                   <li><a href="/acompanhamento-pedido">Acompanhe seu pedido</a></li>
                 </ul>
@@ -43,15 +43,17 @@
                   <li><a href="https://www.instagram.com/polen.me/" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("instagram"); ?>Instagram</a></li>
                   <li><a href="https://www.facebook.com/Polen-107879504782470/" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("facebook"); ?>Facebook</a></li>
                   <li><a href="https://twitter.com/polen_me/" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("twitter"); ?>Twitter</a></li>
+                  <li><a href="https://medium.com/polen-mais" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("medium"); ?>Medium</a></li>
                 </ul>
               </div>
               <div class="col-md-3 mt-4">
                 <h5 class="title typo typo-title typo-small">Institucional</h5>
                 <ul class="footer-menu">
-                  <!-- <li><a href="/">Quem somos</a></li> -->
+                  <li><a href="/sobre-nos">Sobre nós</a></li>
                   <li><a href="https://br.linkedin.com/company/polen-me" target="_blank" rel="noreferrer">Trabalhe conosco</a></li>
-                  <!-- <li><a href="/">Polen na mídia</a></li> -->
+                  <li><a href="/polen-na-midia">Polen na mídia</a></li>
                   <li><a href="/ajuda">Ajuda</a></li>
+                  <li><a href="https://polenmais.blogspot.com/" target="_blank" rel="noreferrer">Blog</a></li>
                 </ul>
               </div>
             </div>
@@ -70,7 +72,7 @@
 				<div class="row">
           <?php
 						if(is_front_page()) {
-							polen_form_signin_newsletter();
+							polen_form_signin_newsletter("newsletter-mobile");
 						}
 					?>
           <div class="col-12 mt-3">
@@ -87,7 +89,7 @@
                   <div class="panel-body">
                     <ul class="footer-menu">
                       <li><a href="/register">Página de cadastro</a></li>
-                      <li><a href="<?php echo polen_get_all_talents_url(); ?>">Todos os talentos</a></li>
+                      <li><a href="<?php echo polen_get_all_talents_url(); ?>">Todos os Ídolos</a></li>
                       <li><a href="/my-account">Minha conta</a></li>
                       <li><a href="/acompanhamento-pedido">Acompanhe seu pedido</a></li>
                     </ul>
@@ -126,6 +128,7 @@
                       <li><a href="https://www.instagram.com/polen.me/" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("instagram"); ?>Instagram</a></li>
                       <li><a href="https://www.facebook.com/Polen-107879504782470/" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("facebook"); ?>Facebook</a></li>
                       <li><a href="https://twitter.com/polen_me/" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("twitter"); ?>Twitter</a></li>
+                      <li><a href="https://medium.com/polen-mais" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("medium"); ?>Medium</a></li>
                     </ul>
                   </div>
                 </div>
@@ -141,10 +144,11 @@
                 <div id="collapse-institucional" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-institucional">
                   <div class="panel-body">
                     <ul class="footer-menu">
-                      <!-- <li><a href="/">Quem somos</a></li> -->
+                      <li><a href="/sobre-nos">Sobre nós</a></li>
                       <li><a href="https://br.linkedin.com/company/polen-me" target="_blank" rel="noreferrer">Trabalhe conosco</a></li>
-                      <!-- <li><a href="/">Polen na mídia</a></li> -->
+                      <li><a href="/polen-na-midia">Polen na mídia</a></li>
                       <li><a href="/ajuda">Ajuda</a></li>
+                      <li><a href="https://polenmais.blogspot.com/" target="_blank" rel="noreferrer">Blog</a></li>
                     </ul>
                   </div>
                 </div>

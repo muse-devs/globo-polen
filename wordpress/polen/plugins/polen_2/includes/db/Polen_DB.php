@@ -136,6 +136,9 @@ abstract class Polen_DB
      */
     public static function get_by_id_static( int $id )
     {
+        if( empty( static::get_static( 'ID', $id, '%d' ) ) ) {
+            return null;
+        }
         return static::create_instance_one( static::get_static( 'ID', $id, '%d' ) );
     }
     

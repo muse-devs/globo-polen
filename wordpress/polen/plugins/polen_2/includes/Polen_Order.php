@@ -10,17 +10,41 @@ namespace Polen\Includes;
 
 use Polen\Publics\Polen_Public;
 use DateInterval;
+use DateTime;
+use DateTimeZone;
+use WC_DateTime;
+
 class Polen_Order
 {
     
 //    const METADATA_VIMEO_VIDEO_ID = 'vimeo_video_id';
 //    const METADATA_VIMEO_VIDEO_URL = 'vimeo_video_url';
 //    const METADATA_VIMEO_VIDEO_EMBED_CONTENT = 'vimeo_video_embed_content';
+
+    const ORDER_STATUS_PAYMENT_IN_REVISION = 'payment-in-revision';
+    const ORDER_STATUS_PAYMENT_REJECTED    = 'payment-rejected';
+    const ORDER_STATUS_PAYMENT_APPROVED    = 'payment-approved';
+    const ORDER_STATUS_TALENT_REJECTED     = 'talent-rejected';
+    const ORDER_STATUS_TALENT_ACCEPTED     = 'talent-accepted';
+    const ORDER_STATUS_ORDER_EXPIRED       = 'order-expired';
+    const ORDER_STATUS_COMPLETED           = 'completed';
+
+    const ORDER_STATUS_PAYMENT_IN_REVISION_INSIDE = 'wc-payment-in-revision';
+    const ORDER_STATUS_PAYMENT_REJECTED_INSIDE    = 'wc-payment-rejected';
+    const ORDER_STATUS_PAYMENT_APPROVED_INSIDE    = 'wc-payment-approved';
+    const ORDER_STATUS_TALENT_REJECTED_INSIDE     = 'wc-talent-rejected';
+    const ORDER_STATUS_TALENT_ACCEPTED_INSIDE     = 'wc-talent-accepted';
+    const ORDER_STATUS_ORDER_EXPIRED_INSIDE       = 'wc-order-expired';
+    const ORDER_STATUS_COMPLETED_INSIDE           = 'wc-completed';
+
     const SLUG_ORDER_COMPLETE = 'completed';
     const SLUG_ORDER_COMPLETE_INSIDE = 'wc-completed';
 
     const SLUG_ORDER_PAYMENT_APPROVED = 'payment-approved';
+    const SLUG_ORDER_PAYMENT_APPROVED_INSIDE = 'wc-payment-approved';
+
     const SLUG_ORDER_TALENT_ACCEPTED  = 'talent-accepted';
+    const SLUG_ORDER_TALENT_ACCEPTED_INSIDE  = 'wc-talent-accepted';
 
     const ORDER_STATUSES_NEED_TALENT_ACTION = [ self::SLUG_ORDER_PAYMENT_APPROVED, self::SLUG_ORDER_TALENT_ACCEPTED ];
 
@@ -336,6 +360,11 @@ class Polen_Order
         wc_add_order_item_meta( $order_item_id, '_line_total'           , 0, true );
         $order = new \WC_Order( $order_id );
         $order->calculate_totals();
+
+        $interval  = Polen_Order::get_interval_order_basic();
+        $timestamp = Polen_Order::get_deadline_timestamp( $order, $interval );
+        self::save_deadline_timestamp_in_order( $order, $timestamp );
+
         // $order->set_status( Polen_WooCommerce::ORDER_STATUS_TALENT_ACCEPTED );
         wp_send_json_success( 'ok', 201 );
         wp_die();
@@ -426,7 +455,7 @@ class Polen_Order
      */
     public static function get_interval_order_event()
     {
-        return new DateInterval( 'P30D' );
+        return new DateInterval( 'P15D' );
     }
 
     /**
@@ -459,19 +488,89 @@ class Polen_Order
     }
 
     /**
-     * Retorna o Timestamp baseado na data de criacao da Order e do inteval
+     * Retorna o Timestamp baseado na data atual e horario 23:59:59 e do inteval
      * @param \WC_Order
      * @param \DateInterval
      * @return int Timestamp
      */
-    public static function get_deadline_timestamp_by_social_event( $order, $interval )
+    public static function get_deadline_timestamp( $order, $interval )
     {
         if( empty( $order ) || empty( $interval ) ) {
             return false;
         }
-        $created_at = new \WC_DateTime( 'now' );
+        $created_at = \WC_DateTime::createFromFormat( 'Y-m-d H:i:s', date('Y-m-d') . ' 23:59:59' );
         $created_at->add( $interval );
         return $created_at->getTimestamp();
+    }
+
+
+    /**
+     * Retorna o Timestamp de uma order
+     * @param \WC_Order
+     * @param 
+     * @return int Timestamp
+     */
+    public static function get_deadline( \WC_Order $order )
+    {
+        if( empty( $order ) ) {
+            return false;
+        }
+        $deadline = $order->get_meta( self::META_KEY_DEADLINE, true );
+        return $deadline;
+    }
+
+
+    /**
+     * Retorna o Timestamp de uma order
+     * @param \WC_Order
+     * @return Datetime
+     */
+    public static function get_deadline_in_datetime( \WC_Order $order )
+    {
+        if( empty( $order ) ) {
+            return false;
+        }
+        $deadline = $order->get_meta( self::META_KEY_DEADLINE, true );
+        $aa = new WC_DateTime();
+        $aa->setTimestamp( $deadline );
+        $datetime_datetime = \WC_DateTime::createFromFormat( 'U', $deadline );
+        return $datetime_datetime;
+    }
+
+
+    /**
+     * Pega a deadline de uma Order 
+     * @param \WC_Order
+     * @return string
+     */
+    public static function get_deadline_formatted_for_order_list( $order )
+    {
+        if( empty( $order ) ) {
+            return false;
+        }
+        $deadline_datetime = self::get_deadline_in_datetime( $order );
+        $current_date = new \WC_DateTime( "now" );
+        $interval = $current_date->diff( $deadline_datetime );
+
+        if( empty( $interval ) ) {
+            return '--';
+        }
+        
+        if( $interval->format('%D') > 1 && $interval->format('%R') == '+' ){
+            return $interval->format('%D dias');
+        }
+
+        if( $interval->format('%D') == 1 && $interval->format('%R') == '+' ){
+            return $interval->format('%D dia e %H:%ih');
+        }    
+
+        if( $interval->format('%D') < 1 && $interval->format('%R') == '+' ){
+            return $interval->format('%H:%ih');
+        }    
+
+        if( $interval->format('%R') == '-' ){
+            return 'Expirado!';
+        }     
     }
 
 
@@ -486,7 +585,7 @@ class Polen_Order
             return false;
         }
         $dataInterval = self::get_deadline_interval_order_by_social_event( $order );
-        $timestamp = self::get_deadline_timestamp_by_social_event( $order, $dataInterval );
+        $timestamp = self::get_deadline_timestamp( $order, $dataInterval );
         return $timestamp;
     }
 

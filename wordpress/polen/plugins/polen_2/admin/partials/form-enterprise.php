@@ -3,7 +3,14 @@
     <div class="panel panel-primary">
         <div class="panel-heading clearfix d-flex">
             <div class="col-md-10"><h3>Lista de contatos formulário empresas</h3></div>
-            <div class="col-md-2"><a href="#" class="btn btn-success pull-right float-right" id="export">Exportar CSV</a></div>
+            <div class="col-md-2">
+                <a
+                    href="?page=forms&export_form=2"
+                    class="btn btn-success pull-right float-right"
+                    id="export">
+                    Exportar CSV
+                </a>
+            </div>
         </div>
         <div class="table-responsive-lg panel-body">
 <!--            <div class="rows d-flex">-->
@@ -20,7 +27,7 @@
                     <th class="text-center">Empresa</th>
                     <th class="text-center">Email</th>
                     <th class="text-center">Qtd. Funcionarios</th>
-                    <th class="text-center">Cargo</th>
+                    <th class="text-center">Orçamento</th>
                     <th class="text-center">Telefone</th>
                     <th class="text-center">Talento</th>
                     <th class="text-center">Mensagem</th>
@@ -33,7 +40,7 @@
                     <th class="text-center">Empresa</th>
                     <th class="text-center">Email</th>
                     <th class="text-center">Qtd. Funcionarios</th>
-                    <th class="text-center">Cargo</th>
+                    <th class="text-center">Orçamento</th>
                     <th class="text-center">Telefone</th>
                     <th class="text-center">Talento</th>
                     <th class="text-center">Mensagem</th>
@@ -47,7 +54,7 @@
                             <td><?php echo $lead->company; ?></td>
                             <td><?php echo $lead->email; ?></td>
                             <td><?php echo $lead->employees_quantity; ?></td>
-                            <td><?php echo $lead->job; ?></td>
+                            <td><?php echo $lead->budget; ?></td>
                             <td><?php echo $lead->phone; ?></td>
                             <td><?php echo $lead->talent_name; ?></td>
                             <td><?php echo $lead->message; ?></td>
@@ -70,8 +77,3 @@
     });
 
 </script>
-
-</script>
-
-
-

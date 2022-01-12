@@ -26,7 +26,7 @@ $reviews = Polen_Order_Review::get_order_reviews_by_talent_id($talent->ID);
 			$review_id = $review->comment_ID;
 			$date = new DateTime($review->comment_date);
 			$rate = get_comment_meta($review_id, "rate");
-			
+
 			$user_name = $review->comment_author;
 			if( empty( $user_name ) ) {
 				$user = get_user_by( 'id', $review->user_id );
@@ -44,7 +44,7 @@ $reviews = Polen_Order_Review::get_order_reviews_by_talent_id($talent->ID);
 	?>
 		<div class="row">
 			<div class="co-12 col-md-12 text-center mt-4">
-				<h1 class="page-title">Este talento ainda não possui nenhum review.</h1>
+				<h1 class="page-title">Este ídolo ainda não possui nenhum review.</h1>
 			</div>
 			<div class="col-12 page-content text-center mt-4 mb-4">
 				<p>Peça agora mesmo um vídeo personalizado de <a href="<?php echo get_home_url(); ?>/talento/<?php echo $product->slug; ?>"><?php echo $product->name; ?></a> para ter uma experiência inédita e deixe aqui seu review!</p>

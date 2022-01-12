@@ -568,8 +568,43 @@ class Polen_Plugin_Settings
                     'type'     => 'select',
                     'multi'    => true,
                     'title'    => esc_html__('Destacar categoria', 'polen'),
-                    'desc'     => 'Escolha até 4 categorias para serem destacada',
+                    'desc'     => 'Escolha as categorias para serem destacada',
                     'options'  => $categories,
+                    'default'  => '',
+                ),
+            )
+        ) );
+
+        // Configurar API REST
+        \Redux::set_section( $opt_name, array(
+            'title'            => esc_html__( 'Configuração API REST', 'polen' ),
+            'id'               => 'api_rest_config',
+            'icon'             => '',
+            'subsection'       => false,
+            'fields'           => array(
+                array(
+                    'id'       => 'polen_api_rest_type_keys',
+                    'type'     => 'select',
+                    'title'    => esc_html__('Configurar tipo de chave', 'polen'),
+                    'placeholder' => 'Escolha tipo da configuração',
+                    'options'  => [
+                        'production' => 'Produção',
+                        'sandbox' => 'Sandbox',
+                    ],
+                    'default'  => '',
+                ),
+                array(
+                    'id'       => 'polen_api_rest_partner_key',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Adicionar chave partner key', 'polen'),
+                    'desc'     => 'Cole aqui chave partner key do TUNA',
+                    'default'  => '',
+                ),
+                array(
+                    'id'       => 'polen_api_rest_account',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Adicionar chave account', 'polen'),
+                    'desc'     => 'Cole aqui chave partner key do TUNA',
                     'default'  => '',
                 ),
             )

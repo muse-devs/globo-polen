@@ -7,13 +7,22 @@ const cartAdvanced = new Vue({
     video_to: cart_items.video_to || "",
     instructions_to_video: cart_items.instructions_to_video || "",
     phone: cart_items.phone || "",
+    occasion: cart_items.video_category || "",
+    submit: true,
   },
   methods: {
     nextStep: function (num) {
+      if(!formCheckValidationsPartial()) {
+        return;
+      }
+      this.submit = false;
       this.activeItem = num;
     },
     handlePhoneChange: function (e) {
       this.phone = mtel(e.target.value);
+    },
+    handleInstructionsChange: function(e) {
+      this.instructions_to_video = e.target.value.trim();
     },
     step1Disabled: function() {
       return !this.offered_by || !polMailValidate(this.email_to_video)
@@ -21,12 +30,16 @@ const cartAdvanced = new Vue({
     video_toHandle: function(e) {
       this.video_to = e.detail;
     },
+    occasionHandle: function(e){
+      this.occasion = e.detail;
+    },
     isComplete: function() {
       return this.offered_by != ""
       && this.email_to_video != ""
       && this.video_to != ""
       && this.instructions_to_video != ""
-      && this.activeItem == 2;
+      && this.activeItem == 2
+      && this.occasion;
     },
     isForOther: function() {
       return this.video_to == "other_one";
@@ -34,11 +47,40 @@ const cartAdvanced = new Vue({
     isInstructionsOk: function() {
       return checkWordsInInstructions(this.instructions_to_video);
     },
-    onSubmit: function(e) {
-      console.log(jQuery("#cart-advanced").serialize());
+    handleSubmit: function(e) {
+      if(!this.submit) {
+        e.preventDefault();
+      }
+      if(this.occasion === "") {
+        e.preventDefault();
+        polMessages.error("É Necessário escolher uma ocasião para o vídeo");
+      }
+      if(this.instructions_to_video.length < 10) {
+        e.preventDefault();
+        polMessages.error("Preencha corretamente o campo de instruções. É através dele que o Ídolo saberá o que gravar no video.");
+      }
     }
   },
 });
+
+function formCheckValidationsPartial() {
+  const offered_by = document.querySelector("input[name=offered_by]");
+  const email_to_video = document.querySelector("input[name=email_to_video]");
+  const phone = document.querySelector("input[name=phone]");
+  return offered_by.checkValidity() && email_to_video.checkValidity() && phone.checkValidity();
+}
+
+function formCheckValidations() {
+  let valid = true;
+  const form_items = document.querySelector(form).elements;
+  [].map.call(form_items, e => {
+    if (!e.checkValidity()) {
+      return valid = e.checkValidity();
+    }
+    return valid;
+  });
+  return valid;
+}
 
 // Checando se existem palavras proibidas na instrução do video
 function checkWordsInInstructions(instruction) {

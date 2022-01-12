@@ -301,7 +301,7 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 			$theme_paths = array_unique( $theme_paths );
 			$file_path   = self::wp_normalize_path( $file );
 
-			$filename = explode( '\\', $file );
+			$filename = explode( DIRECTORY_SEPARATOR, $file );
 
 			end( $filename );
 
@@ -588,9 +588,12 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 			if ( $redux_pro_key && ! get_user_option( 'extendifysdk_redux_key_moved' ) ) {
 				try {
 					$extendify_user_state = get_user_meta( get_current_user_id(), 'extendifysdk_user_data' );
+					if ( false === $extendify_user_state ) {
+						$extendify_user_state = array();
+					}
 
 					if ( ! isset( $extendify_user_state[0] ) ) {
-						$extendify_user_state[0] = '{}';
+						$extendify_user_state[0] = wp_json_encode( array() ); // '{}';
 					}
 
 					$extendify_user_data                    = json_decode( $extendify_user_state[0], true );

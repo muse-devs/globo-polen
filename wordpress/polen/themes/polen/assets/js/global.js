@@ -455,37 +455,19 @@ jQuery(document).ready(function () {
 	getSessionMessage();
 	showLGPDBox();
   polSelectAdvanced();
+  jQuery('[data-toggle="tooltip"]').tooltip();
 });
-
-(function ($) {
-	// Newsletter submit click
-	$(document).on("submit", "form#newsletter", function (e) {
-		const formName = "form#newsletter";
-		e.preventDefault();
-		// Ajax Request
-		polAjaxForm(
-			formName,
-			function () {
-				polMessages.message(
-					"Seu e-mail foi adicionado a lista",
-					"Aguarde nossas novidades!"
-				);
-			},
-			function (error) {
-				polMessages.error(error);
-			}
-		);
-		// Zapier request
-		polRequestZapier(
-			formName
-		);
-	});
-})(jQuery);
 
 function closeModal() {
 	let modal = document.querySelector(".show");
 	modal.classList.remove("show");
 }
+
+String.prototype.allTrim = String.prototype.allTrim ||
+function() {
+  return this.replace(/\s+/g,' ')
+              .replace(/^\s+|\s+$/,'');
+};
 
 function polSlugfy(s, opt) {
 	s = String(s);

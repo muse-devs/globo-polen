@@ -30,11 +30,11 @@
             <img src="<?php echo plugin_dir_url( __FILE__ ) . '../assets/icon-card.png'; ?>" alt="Cartão de Crédito" />
             <h5>Cartão de<br>Crédito</h5>
         </div>
-        <div type="button" onclick="useBoletoPayment()" style="display: none;" class="tab boletoPaymentBtn">
+        <div onclick="useBoletoPayment()" style="display: none;" class="tab boletoPaymentBtn">
             <img src="<?php echo plugin_dir_url( __FILE__ ) . '../assets/icon-billet.png'; ?>" alt="Boleto" />
             <h5>Boleto</h5>
         </div>
-        <div type="button" onclick="usePixPayment()" style="display: none;" class="tab pixPaymentBtn">
+        <div onclick="usePixPayment()" style="display: none;" class="tab pixPaymentBtn">
             <img src="<?php echo plugin_dir_url( __FILE__ ) . '../assets/icon-pix.png'; ?>" alt="Pix" class="pix-icon"/>
         </div>
     </div>

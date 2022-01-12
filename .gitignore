@@ -14,6 +14,8 @@ masterclass/masterclass/wp-config.php
 wordpress/wp-config-sample.php
 wordpress/license.txt
 wordpress/readme.html
+Wordpress/debug.html
+wordpress/polen/plugins/polen_2/composer.lock
 
 masterclass/wp-config-sample.php
 masterclass/license.txt
@@ -72,6 +74,9 @@ yarn.lock
 
 # Ignorar dependencias do composer
 wordpress/polen/plugins/polen_2/vendor/*
+wordpress/polen/plugins/polen_2/composer.lock
+wordpress/debug.html
+wordpress/polen/plugins/polen_2/wordpress/debug.html
 
 # Ignorar arquivos descompactados no diretório de uploads padrão
 uploads/*

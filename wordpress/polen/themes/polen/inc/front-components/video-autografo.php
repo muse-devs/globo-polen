@@ -85,7 +85,7 @@ function va_magalu_box_cart( $product )
 									<span class="background status">1</span>
 									<span class="text">
 										<?php if( 'de-porta-em-porta' == $product->get_sku() ) : ?>
-											<p class="description">Compre o livro De Porta em Porta no site da <a href="<?php echo event_get_magalu_url(); ?>" target="_blank"><b>Magalu</b></a></p>
+											<p class="description">Compre o livro De Porta em Porta no site da <a href="<?php echo ''; ?>" target="_blank"><b>Magalu</b></a></p>
 										<?php else: ?>
 											<?php
 												$link = $product->get_meta( '_promotional_event_link_buy', true ); ?>
