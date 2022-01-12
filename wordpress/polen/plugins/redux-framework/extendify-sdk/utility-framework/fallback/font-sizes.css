@@ -1,0 +1,36 @@
+.has-gigantic-font-size,
+.editor-styles-wrapper .has-gigantic-font-size.wp-block {
+    /* no suggestion */
+    /* Have to be specific for how Neve targets headings */
+    --fallback-size: clamp(
+        var(--wp--preset--font-size--huge, 22px),
+        calc(1rem + var(--wp--custom--typography--gigantic--preferred, 5vw)),
+        var(--wp--preset--font-size--huge, 42px) * 2
+    );
+    font-size: var(--wp--preset--font-size--gigantic, var(--fallback-size));
+}
+
+.has-ext-small-font-size {
+    /* no suggestion */
+    font-size: var(--wp--preset--font-size--ext-small) !important;
+}
+
+.has-ext-medium-font-size {
+    /* no suggestion */
+    font-size: var(--wp--preset--font-size--ext-medium) !important;
+}
+
+.has-ext-large-font-size {
+    /* no suggestion */
+    font-size: var(--wp--preset--font-size--ext-large) !important;
+}
+
+.has-ext-x-large-font-size {
+    /* no suggestion */
+    font-size: var(--wp--preset--font-size--ext-x-large) !important;
+}
+
+.has-ext-gigantic-font-size {
+    /* no suggestion */
+    font-size: var(--wp--preset--font-size--ext-gigantic) !important;
+}

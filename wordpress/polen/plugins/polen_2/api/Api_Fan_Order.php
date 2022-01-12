@@ -5,6 +5,8 @@ use Exception;
 use Order_Class;
 use Polen\Includes\Debug;
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
+use Polen\Includes\Module\Polen_Order_Module;
+use Polen\Includes\Module\Polen_Product_Module;
 use Polen\Includes\Polen_Order_Review;
 use Polen\Includes\Polen_Video_Info;
 use WP_REST_Response;
@@ -19,8 +21,11 @@ class Api_Fan_Order extends Api_Order
     public function get_items( $request )
     {
         $params = $request->get_params();
-
-		$customer_orders = $this->get_orders_by_user_logged( get_current_user_id(), $params );
+        $campaign = $params[ 'campaign' ];
+        if( empty( $campaign ) ) {
+            return api_response( 'Campaign não pode ser nulo', 400 );
+        }
+		$customer_orders = $this->get_orders_by_user_logged( get_current_user_id(), $campaign, $params );
         $new_orders = [];
         if( $customer_orders->total > 0 ) {
             foreach( $customer_orders->orders as $order ){
@@ -35,12 +40,11 @@ class Api_Fan_Order extends Api_Order
             'per_page' => 10,
         );
         return api_response( $data );
-        // return $customer_orders;
     }
 
 
     /**
-     * 
+     * Gega um order pelo usuário e campaign
      * @param WP_REST_Request
      */
     public function get_item( $request )
@@ -134,7 +138,7 @@ class Api_Fan_Order extends Api_Order
     /**
      * Pega as orders de um usuário.
      */
-    private function get_orders_by_user_logged( $user_id, $param )
+    private function get_orders_by_user_logged( $user_id, $campaign, $param )
     {
         $current_page = intval( $param[ 'paged' ] ) ?? 1;
         $customer_orders = wc_get_orders(
@@ -144,6 +148,8 @@ class Api_Fan_Order extends Api_Order
 					'customer' => $user_id,
 					'page'     => $current_page,
 					'paginate' => true,
+                    'meta_key' => Api_Checkout::ORDER_METAKEY,
+                    'meta_value' => $campaign,
 				)
 			)
 		);
