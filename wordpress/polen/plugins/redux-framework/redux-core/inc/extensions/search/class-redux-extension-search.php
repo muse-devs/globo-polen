@@ -37,8 +37,6 @@ if ( ! class_exists( 'Redux_Extension_Search' ) ) {
 		 * @param object $parent ReduxFramework object pointer.
 		 */
 		public function __construct( $parent ) {
-			global $pagenow;
-
 			if ( false === $parent->args['search'] ) {
 				return;
 			}
@@ -70,19 +68,21 @@ if ( ! class_exists( 'Redux_Extension_Search' ) ) {
 			 *
 			 * @param string  bundled stylesheet src
 			 */
-			wp_enqueue_style(
-				'redux-extension-search-css',
-				// phpcs:ignore WordPress.NamingConventions.ValidHookName
-				apply_filters( "redux/search/{$this->parent->args[ 'opt_name' ]}/enqueue/redux-extension-search-css", $this->extension_url . 'redux-extension-search.css' ),
-				array(),
-				self::$version
-			);
+			if ( $this->parent->args['dev_mode'] ) {
+				wp_enqueue_style(
+					'redux-extension-search-css',
+					// phpcs:ignore WordPress.NamingConventions.ValidHookName
+					apply_filters( "redux/search/{$this->parent->args[ 'opt_name' ]}/enqueue/redux-extension-search-css", $this->extension_url . 'redux-extension-search.css' ),
+					array(),
+					self::$version
+				);
+			}
 
 			/**
 			 * Redux search JS
 			 * filter 'redux/page/{opt_name}/enqueue/redux-extension-search-js
 			 *
-			 * @param string  bundled javscript
+			 * @param string  bundled javascript
 			 */
 			wp_enqueue_script(
 				'redux-extension-search-js',
@@ -96,9 +96,9 @@ if ( ! class_exists( 'Redux_Extension_Search' ) ) {
 			// Values used by the javascript.
 			wp_localize_script(
 				'redux-extension-search-js',
-				'reduxsearch',
+				'reduxSearch',
 				array(
-					'search' => esc_html__( 'Search for field(s)', 'redux-pro' ),
+					'search' => esc_html__( 'Search for field(s)', 'redux-framework' ),
 				)
 			);
 		}
