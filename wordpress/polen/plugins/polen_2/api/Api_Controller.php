@@ -319,18 +319,22 @@ class Api_Controller{
     }
 
     /**
-     * 
+     * Handler para pegar Videos por Produto por Camapanha
      */
     public function get_product_videos( $request )
     {
         $slug = $request[ 'slug' ];
+        $campaign = $request->get_param( 'campaign' );
+        if( empty( $campaign ) ) {
+            return api_response( 'Campanha em branco', 403 );
+        }
         $product_id = wc_get_product_id_by_sku( $slug );
         if( empty( $product_id ) ) {
             return api_response( 'Produto não encontrado', 404 );
         }
         $Polen_Talent = new Polen_Talent();
         $talent = $Polen_Talent->get_talent_from_product( $product_id );
-        $videos = Polen_Video_Info::select_by_talent_id( $talent->ID, 5 );
+        $videos = Polen_Video_Info::select_by_talent_id_and_campaign( $talent->ID, $campaign, 5 );
 
         $data = [];
         foreach( $videos as $video ) {
@@ -353,6 +357,7 @@ class Api_Controller{
         return [
             'video_info_id'    => $video->ID,
             'talent_id'        => $video->talent_id,
+            'order_id'         => $video->order_id,
             'vimeo_id'         => $video->vimeo_id,
             'hash'             => $video->hash,
             'talent_thumb'     => polen_get_avatar_src( $video->talent_id, 'polen-square-crop-lg' ),
