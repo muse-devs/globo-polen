@@ -192,6 +192,30 @@ class Polen_Video_Info extends Polen_DB
     }
 
 
+    /**
+     * Funcao que pegar os videos Publico de de um Talent e com Campagn
+     * @param int
+     * @param int
+     */
+    static public function select_by_talent_id_and_campaign( int $talent_id, $campaign, $limit = 4 )
+    {
+        $self_obj = new static();
+        $table_name = $self_obj->table_name();
+        global $wpdb;
+        $sql = $wpdb->prepare( "SELECT vi.* FROM {$table_name} AS vi
+            INNER JOIN wp_postmeta AS pm_meta ON pm_meta.post_id = vi.order_id AND pm_meta.meta_key = \"hotsite\"
+            WHERE
+            ( 1 = 1 )
+            AND vi.talent_id = %s
+            AND pm_meta.meta_value = %s
+            AND vi.vimeo_process_complete = 1
+            AND vi.is_public = 1
+            LIMIT %d
+        ", $talent_id, $campaign, $limit );
+        return self::create_instance_many( $wpdb->get_results( $sql ) );
+    }
+
+
 
     static public function select_by_video_logo_waiting( int $limit = 4 )
     {
