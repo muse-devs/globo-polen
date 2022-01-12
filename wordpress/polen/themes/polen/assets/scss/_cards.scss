@@ -35,7 +35,7 @@
 .box-stars {
   .bi,
   .icon {
-    font-size: 16px;
+    font-size: 16px!important;
     margin-right: 3px;
   }
   .bi-star,
@@ -1138,6 +1138,23 @@
     border-top: 6px solid transparent;
     border-bottom: 6px solid transparent;
     border-left: 10px solid $primary;
+  }
+}
+
+#review-carousel {
+  .box-round {
+    height: 100%;
+    .link-alt {
+      color: $primary;
+    }
+  }
+  .owl-dots {
+    bottom: -35px;
+    .owl-dot {
+      span {
+        background: #5e5e5e;
+      }
+    }
   }
 }
 
