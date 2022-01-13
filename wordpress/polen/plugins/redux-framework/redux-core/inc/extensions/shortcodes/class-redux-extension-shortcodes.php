@@ -44,12 +44,12 @@ if ( ! class_exists( 'Redux_Extension_Shortcodes' ) ) {
 
 			if ( ! class_exists( 'Redux_Shortcodes' ) ) {
 				require_once dirname( __FILE__ ) . '/class-redux-shortcodes.php';
-				new Redux_Shortcodes( $parent );
+				new Redux_Shortcodes();
 			}
 
 			// Allow users to extend if they want.
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
-			do_action( 'redux/shorcodes/' . $parent->args['opt_name'] . '/construct' );
+			do_action( 'redux/shortcodes/' . $parent->args['opt_name'] . '/construct' );
 		}
 	}
 }

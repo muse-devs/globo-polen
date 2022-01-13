@@ -5,6 +5,7 @@
  */
 namespace Polen\Includes;
 
+use Polen\Api\Api_Checkout;
 use Polen\Includes\Db\Polen_DB;
 
 class Polen_Video_Info extends Polen_DB
@@ -189,6 +190,32 @@ class Polen_Video_Info extends Polen_DB
         $fields = array( 'talent_id' => $talent_id, 'vimeo_process_complete' => "1", 'is_public' => '1' );
         $result_raw = $self_obj->get_result_multi_fields( $fields, intval( $limit ), "ORDER BY first_order DESC, ID DESC" );
         return $result_raw;//self::create_instance_many( $result_raw );
+    }
+
+
+    /**
+     * Funcao que pegar os videos Publico de de um Talent e com Campagn
+     * @param int
+     * @param int
+     */
+    static public function select_by_talent_id_and_campaign( int $talent_id, $campaign, $limit = 4 )
+    {
+        $self_obj = new static();
+        $table_name = $self_obj->table_name();
+        global $wpdb;
+        $campaign_key = Api_Checkout::ORDER_METAKEY;
+        $sql = $wpdb->prepare( "SELECT vi.* FROM {$table_name} AS vi
+            INNER JOIN wp_postmeta AS pm_meta ON pm_meta.post_id = vi.order_id AND pm_meta.meta_key = \"{$campaign_key}\"
+            WHERE
+            ( 1 = 1 )
+            AND vi.talent_id = %s
+            AND pm_meta.meta_value = %s
+            AND vi.vimeo_process_complete = 1
+            AND vi.is_public = 1
+            ORDER BY ID DESC
+            LIMIT %d
+        ", $talent_id, $campaign, $limit );
+        return self::create_instance_many( $wpdb->get_results( $sql ) );
     }
 
 

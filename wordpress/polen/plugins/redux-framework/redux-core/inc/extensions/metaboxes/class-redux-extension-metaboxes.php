@@ -162,6 +162,13 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 		public $wp_links = array();
 
 		/**
+		 * Notices.
+		 *
+		 * @var array
+		 */
+		private $notices = array();
+
+		/**
 		 * ReduxFramework_extension_metaboxes constructor.
 		 *
 		 * @param object $parent ReduxFramework object.
@@ -169,14 +176,14 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 		public function __construct( $parent ) {
 			global $pagenow;
 
+			parent::__construct( $parent, __FILE__ );
+
 			$this->parent = $parent;
 
 			$this->parent->extensions['metaboxes'] = $this;
 
-			if ( empty( self::$extension_dir ) ) {
-				$this->extension_dir = trailingslashit( str_replace( '\\', '/', dirname( __FILE__ ) ) );
-				$this->extension_url = site_url( str_replace( trailingslashit( str_replace( '\\', '/', ABSPATH ) ), '', $this->extension_dir ) );
-			}
+			$this->extension_dir = trailingslashit( str_replace( '\\', '/', dirname( __FILE__ ) ) );
+			$this->extension_url = site_url( str_replace( trailingslashit( str_replace( '\\', '/', ABSPATH ) ), '', $this->extension_dir ) );
 
 			// Only run metaboxes on the pages/posts, not the front-end.
 			// The DOING_AJAX check allows for redux_post_meta to work inside
@@ -275,11 +282,9 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 				if ( ! empty( $box['sections'] ) ) {
 					$this->sections = $box['sections'];
 
-					array_merge( $this->parent->sections, $box['sections'] );
-
 					$this->post_types = wp_parse_args( $this->post_types, $box['post_types'] );
 
-					// Checking to overide the parent variables.
+					// Checking to override the parent variables.
 					$add_field = false;
 
 					foreach ( $box['post_types'] as $type ) {
@@ -566,12 +571,14 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 					 *
 					 * @param string  bundled stylesheet src
 					 */
-					wp_enqueue_style(
-						'redux-extension-metaboxes-css',
-						apply_filters( "redux/metaboxes/{$this->parent->args['opt_name']}/enqueue/redux-extension-metaboxes-css", $this->extension_url . 'redux-extension-metaboxes.css' ), // phpcs:ignore: WordPress.NamingConventions.ValidHookName
-						array(),
-						self::$version
-					);
+					if ( $this->parent->args['dev_mode'] ) {
+						wp_enqueue_style(
+							'redux-extension-metaboxes-css',
+							apply_filters( "redux/metaboxes/{$this->parent->args['opt_name']}/enqueue/redux-extension-metaboxes-css", $this->extension_url . 'redux-extension-metaboxes.css' ), // phpcs:ignore: WordPress.NamingConventions.ValidHookName
+							array(),
+							self::$version
+						);
+					}
 
 					/**
 					 * Redux metaboxes JS
@@ -857,7 +864,7 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 							'showposts' => 1,
 						);
 
-						if ( get_posts( $args ) === $post ) {
+						if ( isset( $post ) && get_posts( $args ) === $post ) {
 							return $post[0]->ID;
 						}
 					}

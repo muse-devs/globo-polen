@@ -306,7 +306,7 @@ class Polen_Api_Video_Info
         if( empty( $video_info ) ) {
             throw new Exception( 'Vimeo Info not found', 404 );
         }
-        $video_info->vimeo_thumbnail = $vimeo_response->get_image_url_640();
+        $video_info->vimeo_thumbnail = $vimeo_response->get_image_url_base();
         return $video_info->update();
     }
 
