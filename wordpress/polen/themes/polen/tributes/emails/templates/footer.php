@@ -20,7 +20,7 @@
 										" target="_blank">
 							<img src="%s" alt="Ícone Facebook" />
 						</a>
-						<a href="https://www.instagram.com/polen.me/" style="
+						<a href="https://www.instagram.com/siga.polen/" style="
 											display: inline-block;
 											margin-left: 40px;
 											text-decoration: none;

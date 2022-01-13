@@ -40,7 +40,7 @@
                 <h5 class="title typo typo-title typo-small">Redes Sociais</h5>
                 <ul class="footer-menu">
                   <li><a href="https://vm.tiktok.com/ZMeKtWr1H/" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("tiktok"); ?>TikTok</a></li>
-                  <li><a href="https://www.instagram.com/polen.me/" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("instagram"); ?>Instagram</a></li>
+                  <li><a href="https://www.instagram.com/siga.polen/" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("instagram"); ?>Instagram</a></li>
                   <li><a href="https://www.facebook.com/Polen-107879504782470/" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("facebook"); ?>Facebook</a></li>
                   <li><a href="https://twitter.com/polen_me/" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("twitter"); ?>Twitter</a></li>
                   <li><a href="https://medium.com/polen-mais" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("medium"); ?>Medium</a></li>
@@ -125,7 +125,7 @@
                   <div class="panel-body">
                     <ul class="footer-menu">
                       <li><a href="https://vm.tiktok.com/ZMeKtWr1H/" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("tiktok"); ?>TikTok</a></li>
-                      <li><a href="https://www.instagram.com/polen.me/" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("instagram"); ?>Instagram</a></li>
+                      <li><a href="https://www.instagram.com/siga.polen/" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("instagram"); ?>Instagram</a></li>
                       <li><a href="https://www.facebook.com/Polen-107879504782470/" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("facebook"); ?>Facebook</a></li>
                       <li><a href="https://twitter.com/polen_me/" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("twitter"); ?>Twitter</a></li>
                       <li><a href="https://medium.com/polen-mais" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("medium"); ?>Medium</a></li>
