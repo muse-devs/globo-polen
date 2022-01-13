@@ -312,7 +312,7 @@ function polen_talent_review($reviews)
           <div class="box-round py-3 px-3">
             <div class="row comment-box">
               <div class="col-sm-12">
-                <span class="typo-title"><?php echo $user_name; ?></span>
+                <span class="typo-title"><?php echo preg_replace( '/@\S*/', '', $user_name ); ?></span>
               </div>
               <div class="col-md-12 box-stars">
                 <?php polen_get_stars((int) $rate[0]); ?>
