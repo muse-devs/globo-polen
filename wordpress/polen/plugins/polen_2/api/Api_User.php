@@ -203,4 +203,37 @@ class Api_User
 
         return api_response(['message' => 'Dados Atualizados'], 200);
     }
+
+    /**
+     * @param \WP_REST_Request $request
+     * @return \WP_REST_Response
+     */
+    public function commments(\WP_REST_Request $request): \WP_REST_Response
+    {
+        $slug = $request['slug'];
+
+        $product_id = wc_get_product_id_by_sku($slug);
+        if (empty($product_id)) {
+            return api_response('Talento não encontrado', 404);
+        }
+
+        $comments = get_approved_comments($product_id);
+        if (!isset($comments[0])) {
+            api_response(['message' => 'Não foi encontrado nenhum comentário para esse talento'], 404);
+        }
+
+        $reviews = [];
+        foreach ($comments as $comment) {
+            $reviews[] = [
+                'comment_id' => $comment->comment_ID,
+                'display_name_author' => $comment->comment_author,
+                'author_email' => $comment->comment_author_email,
+                'content_comment' => $comment->comment_content,
+                'comment_date' => $comment->comment_date,
+                'ip_comment' => $comment->comment_author_IP
+            ];
+        }
+
+        return api_response($reviews, 200);
+    }
 }
