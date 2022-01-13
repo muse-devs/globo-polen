@@ -210,11 +210,16 @@ class Api_User
      */
     public function commments(\WP_REST_Request $request): \WP_REST_Response
     {
-        $product_id = $request['id'];
-        $comments = get_approved_comments($product_id);
+        $slug = $request['slug'];
 
+        $product_id = wc_get_product_id_by_sku($slug);
+        if (empty($product_id)) {
+            return api_response('Talento não encontrado', 404);
+        }
+
+        $comments = get_approved_comments($product_id);
         if (!isset($comments[0])) {
-            api_response(['message' => 'Não foi encontrado nenhum comentário para esse talento'], 403);
+            api_response(['message' => 'Não foi encontrado nenhum comentário para esse talento'], 404);
         }
 
         $reviews = [];
@@ -230,6 +235,5 @@ class Api_User
         }
 
         return api_response($reviews, 200);
-
     }
 }

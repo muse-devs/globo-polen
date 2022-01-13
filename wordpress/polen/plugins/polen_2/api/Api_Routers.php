@@ -276,11 +276,11 @@ class Api_Routers
         /**
          * Exibir comentários
          */
-        register_rest_route($this->base, '/users/(?P<id>[\d]+)/comments', array(
+        register_rest_route($this->base, '/users/(?P<slug>[^/]*)/comments', array(
             array(
                 'methods' => WP_REST_Server::READABLE,
                 'args' => array(
-                    'id'            => [],
+                    'slug'            => [],
                 ),
                 'callback' => [ $api_user, 'commments' ],
                 'permission_callback' => [ $api_user, 'check_permission_create_item' ],
