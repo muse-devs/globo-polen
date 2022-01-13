@@ -227,13 +227,26 @@ class Api_User
         $comments = [];
 
         foreach ($reviews as $review) {
+
             $review_id = $review->comment_ID;
             $rate = get_comment_meta($review_id, 'rate');
 
+            $user_name = $review->comment_author;
+            if( empty( $user_name ) ) {
+                $user = get_user_by( 'id', $review->user_id );
+                $user_name = $user->display_name;
+            }
+
+            $user_email = $review->comment_author_email;
+            if( empty( $user_email ) ) {
+                $user = get_user_by( 'id', $review->user_id );
+                $user_email = $user->user_email;
+            }
+
             $comments[] = array(
                 'comment_id' => $review->comment_ID,
-                'display_name_author' => $review->comment_author,
-                'author_email' => $review->comment_author_email,
+                'display_name_author' => $user_name,
+                'author_email' => $user_email,
                 'comment' => $review->comment_content,
                 'rate' => (int) $rate[0],
                 'comment_date' => $review->comment_date,
