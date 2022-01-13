@@ -4,6 +4,7 @@ namespace Polen\Api;
 use Exception;
 use Polen\Includes\Emails\Polen_WC_Customer_New_Account;
 use Polen\Includes\Polen_Campaign;
+use Polen\Includes\Polen_Order_Review;
 use Polen\Includes\Polen_SignInUser_Strong_Password;
 use WP_Error;
 
@@ -212,28 +213,34 @@ class Api_User
     {
         $slug = $request['slug'];
 
-        $product_id = wc_get_product_id_by_sku($slug);
+        $product_id = wc_get_product_id_by_sku( $slug );
+
         if (empty($product_id)) {
             return api_response('Talento não encontrado', 404);
         }
 
-        $comments = get_approved_comments($product_id);
-        if (!isset($comments[0])) {
-            api_response(['message' => 'Não foi encontrado nenhum comentário para esse talento'], 404);
+        $product = wc_get_product($product_id);
+        $product_post = get_post($product->get_id());
+        $talent = get_user_by('id', $product_post->post_author);
+
+        $reviews = Polen_Order_Review::get_order_reviews_by_talent_id($talent->ID);
+        $comments = [];
+
+        foreach ($reviews as $review) {
+            $review_id = $review->comment_ID;
+            $rate = get_comment_meta($review_id, 'rate');
+
+            $comments[] = array(
+                'comment_id' => $review->comment_ID,
+                'display_name_author' => $review->comment_author,
+                'author_email' => $review->comment_author_email,
+                'comment' => $review->comment_content,
+                'rate' => (int) $rate[0],
+                'comment_date' => $review->comment_date,
+                'ip_comment' => $review->comment_author_IP
+            );
         }
 
-        $reviews = [];
-        foreach ($comments as $comment) {
-            $reviews[] = [
-                'comment_id' => $comment->comment_ID,
-                'display_name_author' => $comment->comment_author,
-                'author_email' => $comment->comment_author_email,
-                'content_comment' => $comment->comment_content,
-                'comment_date' => $comment->comment_date,
-                'ip_comment' => $comment->comment_author_IP
-            ];
-        }
-
-        return api_response($reviews, 200);
+        return api_response($comments, 200);
     }
 }
