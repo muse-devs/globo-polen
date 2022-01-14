@@ -87,20 +87,9 @@ class Polen_Cart
                 $item->add_meta_data( 'allow_video_on_page', $cart_item['allow_video_on_page'], true );
             }
         }
-        //PARA CAMPANHAS SOCIAIS
-        // $product_is_social = social_product_is_social( $item->get_product(), social_get_category_base() );
-        $product = $item->get_product();
-        $product_is_social_base = product_is_social_base( $product );
-        if( $product_is_social_base ) {
-            $order->add_meta_data( Social_Base_Order::ORDER_META_KEY_SOCIAL, '1' );
-            $order->add_meta_data( Social_Base_Order::ORDER_META_KEY_campaign, $product->get_meta( Polen_Admin_Social_Base_Product_Fields::FIELD_NAME_SLUG_CAMPAIGN, true ) );
 
-            $interval  = Polen_Order::get_interval_order_social();
-            $timestamp = Polen_Order::get_deadline_timestamp( $order, $interval );
-        } else {
-            $interval  = Polen_Order::get_interval_order_basic();
-            $timestamp = Polen_Order::get_deadline_timestamp( $order, $interval );
-        }
+        $interval  = Polen_Order::get_interval_order_basic();
+        $timestamp = Polen_Order::get_deadline_timestamp( $order, $interval );
         $order->add_meta_data( Polen_Order::META_KEY_DEADLINE, $timestamp, true );
     }
 
@@ -124,9 +113,9 @@ class Polen_Cart
                             $item_name = $p_item;
                             if( $p_item == 'allow_video_on_page' ) {
                                 $item_data = ( $_POST['allow_video_on_page'] == 'on' ) ? 'on' : 'off';
-                            // } elseif( $p_item == 'instructions_to_video') {
+                            } elseif( $p_item == 'instructions_to_video') {
                                 // $item_name = 'instructions_to_video';
-                                // $item_data = Polen_Utils::sanitize_xss_br_escape( $_POST['instructions_to_video'] );
+                                $item_data = Polen_Utils::sanitize_xss_br_escape( $_POST['instructions_to_video'] );
                             } else {
                                 $item_data = $_POST[ $p_item ];
                             }
