@@ -245,7 +245,7 @@ class Api_User
 
             $comments[] = array(
                 'comment_id' => $review->comment_ID,
-                'display_name_author' => $user_name,
+                'display_name_author' => preg_replace('/@.*/', '', $user_name),
                 'author_email' => $user_email,
                 'comment' => $review->comment_content,
                 'rate' => (int) $rate[0],

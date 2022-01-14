@@ -739,6 +739,8 @@ class TUNA_Payment extends WC_Payment_Gateway
                 ]
             ]
         ];
+        // add split
+        $requestbody['PaymentItems']['Items'][0]['Split'] = ['MerchantID' => $product->get_id() ];
         #$this->save_log(json_encode($requestbody));
         $api_response = wp_remote_post($url, array(
             'headers'     => array(
