@@ -1,9 +1,10 @@
 <?php
 namespace Polen\Admin;
 
+ABSPATH ?? die;
+
 use Polen\Api\Api_Checkout;
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
-use Polen\Includes\Debug;
 use WC_Order;
 use WP_Query;
 
@@ -19,6 +20,9 @@ class Polen_Admin_Export_Order_Campaign
 
     public function ajax_handler()
     {
+        if( !current_user_can( 'administrator' ) ) {
+            die('Silence is golden');
+        }
         $campaign = $_GET[ 'campaign' ];
         if( empty( $campaign ) ) {
             echo 'Campaign can not be null';
