@@ -40,7 +40,7 @@ class Polen_Admin_Export_Order_Campaign
         header("Content-Type: application/download");
     
         // disposition / encoding on response body
-        header("Content-Disposition: attachment;filename=orders.csv");
+        header("Content-Disposition: attachment;filename={$campaign}.csv");
         header("Content-Transfer-Encoding: binary");
 
         $ids = $this->process_query_get_ids( $campaign );
