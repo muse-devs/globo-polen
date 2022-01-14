@@ -623,6 +623,8 @@ class TUNA_Payment extends WC_Payment_Gateway
         if (strlen($documentValue) > 17) {
             $documentType = "CNPJ";
         }
+
+        $documentValue = preg_replace('/[\.\-\/" "]+/', '', $documentValue);
         $installments = (int)sanitize_text_field($_POST['tuna_installments']);
         $PaymentMethodType = "1";
         $cardInfo = null;
@@ -643,7 +645,7 @@ class TUNA_Payment extends WC_Payment_Gateway
                         "City" => $customer_order->get_billing_city(),
                         "State" =>  $this->get_state_code($customer_order->get_billing_state()),
                         "Country" => $customer_order->get_billing_country() != null ? $customer_order->get_billing_country() : "BR",
-                        "PostalCode" => $customer_order->get_billing_postcode(),
+                        "PostalCode" => preg_replace('/[\.\-\/" "]+/', '', $customer_order->get_billing_postcode()),
                         "Phone" =>  $customer_order->get_billing_phone()
                     ]
                 ]
@@ -740,7 +742,7 @@ class TUNA_Payment extends WC_Payment_Gateway
             ]
         ];
         // add split
-        $requestbody['PaymentItems']['Items'][0]['Split'] = ['MerchantID' => $product->get_id() ];
+       //  $requestbody['PaymentItems']['Items'][0]['Split'] = ['MerchantID' => $product->get_id() ];
         #$this->save_log(json_encode($requestbody));
         $api_response = wp_remote_post($url, array(
             'headers'     => array(
