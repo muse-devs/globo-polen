@@ -13,8 +13,7 @@ class Polen_Admin_Export_Order_Campaign
     public function __construct( $static = false )
     {
         if( $static ) {
-            add_action( 'wp_ajax_exporttt', [ $this, 'ajax_handler' ] );
-            add_action( 'wp_ajax_nopriv_exporttt', [ $this, 'ajax_handler' ] );
+            add_action( 'wp_ajax_order-by-campaign', [ $this, 'ajax_handler' ] );
         }
     }
 
