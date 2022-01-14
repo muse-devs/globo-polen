@@ -38,7 +38,7 @@ async function startTuna (
         let pieceManager = tuna.pieceManager();
 
         pieceManager.forge("#DOCUMENT", "document", {
-            title: "Documento", buyerDocumentFormatter: tuna.getBuyerDocumentFormatter("pt-BR")
+            title: "CPF do títular do cartão", buyerDocumentFormatter: tuna.getBuyerDocumentFormatter("pt-BR")
         });
 
         if (installmentOptions)

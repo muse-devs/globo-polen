@@ -40,9 +40,17 @@
 <div id=" mainPaymentDiv">
     <div class="tabs tuna-tabs">
         <div onclick="useSavedCreditCard()" id="creditCardPaymentBtn" class="tab selected">Cartão salvo</div>
-        <div onclick="useNewCard()" id="newCardBtn" class="tab">Novo cartão</div>
-        <div type="button" onclick="useBoletoPayment()" style="display: none;" class="tab boletoPaymentBtn">Boleto</div>
-        <div type="button" onclick="usePixPayment()" style="display: none;" class="tab pixPaymentBtn">Pix</div>
+        <div onclick="useNewCard()" id="newCardBtn" class="tab">
+            <img src="<?php echo plugin_dir_url( __FILE__ ) . '../assets/icon-card.png'; ?>" alt="Cartão de Crédito" />
+            <h5>Cartão de<br>Crédito</h5>
+        </div>
+        <div type="button" onclick="useBoletoPayment()" style="display: none;" class="tab boletoPaymentBtn">
+            <img src="<?php echo plugin_dir_url( __FILE__ ) . '../assets/icon-billet.png'; ?>" alt="Boleto" />
+            <h5>Boleto</h5>
+        </div>
+        <div type="button" onclick="usePixPayment()" style="display: none;" class="tab pixPaymentBtn">
+            <img src="<?php echo plugin_dir_url( __FILE__ ) . '../assets/icon-pix.png'; ?>" alt="Pix" class="pix-icon"/>    
+        </div>
         <div type="button" onclick="useCryptoPayment()" style="display: none;" class="tab cryptoPaymentBtn">Bitcoin</div>
     </div>
 
@@ -74,6 +82,22 @@
 
 <div id="boletoPaymentDocumentDiv" style="display: none;">
     Pague de forma segura com o <span id="lblTunaTipo">Boleto</span><br />
+    <div id="pix-instruction">
+        <div class="row">
+            <div class="col-sm-12 mb-3">
+                <h5>Imediato</h5>
+                <p>Faça seu pagamento em poucos segundos sem custos adicionais.</p>
+            </div>
+            <div class="col-sm-12 mb-3">
+                <h5>Simples</h5>
+                <p>Para pagar basta abrir o aplicativo do seu banco, procurar pelo PIX e escanear o QRcode.</p>
+            </div>
+            <div class="col-sm-12">
+                <h5>Seguro</h5>
+                <p>O pagamento com PIX foi desenvolvido pelo Banco Central para facilitar suas compras.</p>
+            </div>
+        </div>
+    </div>
     Ao finalizar o pedido, você verá o <span id="lblTunaTipo2">boleto</span> para efetuar o pagamento.<br />
     <label id="lblCPFBoleto" class="defaultTunaLabel">CPF</label>
     <input class="defaultTunaInputText" type="text" name="tuna_document" id="tuna_boleto_document" required />
