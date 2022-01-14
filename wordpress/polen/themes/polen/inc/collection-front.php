@@ -37,7 +37,8 @@ function _polen_get_info_talent_by_product_id( \WC_Product $talent_object, $size
             $talent['price_formatted'] = $talent_object->get_price_html();
         }
         $talent['name'] = $talent_object->get_title();
-		$talent['in_stock'] = $talent_object->is_in_stock();
+		    $talent['in_stock'] = $talent_object->is_in_stock();
+        $talent['stock'] = $talent_object->get_stock_quantity();
 
         $ids = $talent_object->get_category_ids();
         $category = _polen_get_first_category_object( $ids );

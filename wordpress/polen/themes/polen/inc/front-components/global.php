@@ -262,7 +262,7 @@ function polen_front_get_card($item, $size = "small", $social = false, $campanha
         <?php if (!$social) : ?>
           <div class="price text-right" itemprop="price">
             <?php if ($item['in_stock']) : ?>
-              <span class="mr-2"><?php Icon_Class::polen_icon_camera_video(); ?></span>
+              <?php /* ?><span class="mr-2"><?php Icon_Class::polen_icon_camera_video(); ?></span><?php */ ?>
               <span><?php echo $item['price_formatted']; ?></span>
             <?php else : ?>
               <span>Esgotado</span>
@@ -271,6 +271,10 @@ function polen_front_get_card($item, $size = "small", $social = false, $campanha
         <?php endif; ?>
         <a href="<?= $item["talent_url"]; ?>" class="link"></a>
       </figure>
+      <?php $stock = $item['stock']; ?>
+      <?php if($stock > 0 && $stock <= 10): ?>
+        <span class="polen-card__low-stock"><?php echo $stock; ?> videos apenas</span>
+      <?php endif; ?>
       <h4 class="title text-truncate">
         <a href="<?= $item["talent_url"]; ?>" title="<?= $item["name"]; ?>" itemprop="name"><?= $item["name"]; ?></a>
       </h4>
