@@ -273,6 +273,20 @@ class Api_Routers
             )
         ));
 
+        /**
+         * Exibir comentários
+         */
+        register_rest_route($this->base, '/users/(?P<slug>[^/]*)/comments', array(
+            array(
+                'methods' => WP_REST_Server::READABLE,
+                'args' => array(
+                    'slug'            => [],
+                ),
+                'callback' => [ $api_user, 'commments' ],
+                'permission_callback' => [ $api_user, 'check_permission_create_item' ],
+            )
+        ));
+
         register_rest_route($this->base, '/update_pass', array(
             array(
                 'methods' => WP_REST_Server::CREATABLE,

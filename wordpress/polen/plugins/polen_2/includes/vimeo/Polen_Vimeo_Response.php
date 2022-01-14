@@ -124,6 +124,16 @@ class Polen_Vimeo_Response
         }
         return false;
     }
+
+    /**
+     * Pega a URL base para qualquer tamanho
+     * @return string URL
+     */
+    public function get_image_url_base()
+    {
+        return $this->response['body']['pictures']['base_link'];
+    }
+
     
     /**
      * Pega a URL a tamanho 640

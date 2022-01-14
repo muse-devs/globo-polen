@@ -249,3 +249,113 @@ function polen_get_talent_card($talent, $social = false)
 	</script>
 <?php
 }
+
+function polen_talent_deadline($talent)
+{
+  global $Polen_Plugin_Settings;
+  $order_expires = $Polen_Plugin_Settings['order_expires'];
+?>
+  <div class="col-md-12">
+		<div class="row">
+			<div class="col-12 col-md-6 m-md-auto">
+				<div class="row">
+					<div class="col-12 col-md-12">
+            <div class="box-round py-3 px-3 text-center text-md-center">
+              <p class="typo-double-line-height mb-0">
+                Peça hoje e receba até <br>
+                <b>
+                  <?php
+                  $date = date("d/m/Y");
+                  echo date( "d/m/y", strtotime('+'.$order_expires.' days') );
+                ?>
+                </b>
+              </p>
+            </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php
+}
+
+function polen_talent_review($reviews)
+{
+?>
+  <section class="row tutorial mt-4 mb-4">
+    <div class="col-md-12">
+      <header class="row mb-3">
+        <div class="col">
+          <h2 class="typo typo-title">Avaliações</h2>
+        </div>
+      </header>
+    </div>
+    <div class="col-md-12 mb-3">
+      <?php
+        if($reviews) {
+      ?>
+      <div id="review-carousel" class="owl-carousel owl-theme">
+        <?php
+        foreach ($reviews as $i => $review) {
+          if ($i > 8) break;
+          $review_id = $review->comment_ID;
+          $date = new DateTime($review->comment_date);
+          $rate = get_comment_meta($review_id, "rate");
+
+          $user_name = $review->comment_author;
+          if( empty( $user_name ) ) {
+            $user = get_user_by( 'id', $review->user_id );
+            $user_name = $user->display_name;
+          }
+        ?>
+        <div class="item mr-3">
+          <div class="box-round py-3 px-3">
+            <div class="row comment-box">
+              <div class="col-sm-12">
+                <span class="typo-title"><?php echo preg_replace( '/@\S*/', '', $user_name ); ?></span>
+              </div>
+              <div class="col-md-12 box-stars">
+                <?php polen_get_stars((int) $rate[0]); ?>
+              </div>
+              <div class="col-sm-12">
+                <p class="typo-p truncate truncate-4"><?php echo $review->comment_content; ?></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <?php
+        }
+        ?>
+        <div class="item mr-3">
+          <a href="<?= polen_get_url_review_page(); ?>" class="link-alt typo-link typo-no-underline">
+            <div class="box-round py-3 px-3 d-flex align-items-center justify-content-center">
+              <div class="row">
+                <div class="col-sm-12">
+                  <h3 class="typo-title text-center">Gostou das avaliações?</h3>
+                </div>
+                <div class="col-sm-12 d-flex justify-content-center">
+                <span class="typo typo-link link-alt">Ver todos</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <?php
+        }
+        else {
+      ?>
+      <div class="box-round py-4 px-4">
+        <div class="row">
+          <div class="col-12 page-content text-center mt-3">
+            <p>Esse ídolo ainda não tem avaliação, compre hoje e seja o primeiro a avaliar.</p>
+          </div>
+        </div>
+      </div>
+      <?php
+        }
+      ?>
+    </div>
+  </section>
+<?php
+}
