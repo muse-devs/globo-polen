@@ -2,8 +2,8 @@
 namespace Polen\Admin;
 defined( 'ABSPATH' ) || die;
 
+use Polen\Admin\Polen_Admin_Export_Order_Campaign;
 use Polen\Includes\Ajax\Polen_Cupom_Create_Controller;
-use \Polen\Includes\Polen_Update_Fields;
 use Polen\Tributes\Tributes_Admin;
 use Polen\Tributes\Tributes_Details_Admin;
 
@@ -43,6 +43,7 @@ class Polen_Admin {
           new Polen_Admin_Social_Base_Product_Fields( $static );
           new Polen_Admin_Order_Custom_Fields_Deadline_BulkActions( $static );
           new Polen_Admin_Event_Promotional_Event_Fields( $static );
+          new Polen_Admin_Export_Order_Campaign( $static );
   }
 
 	/**
