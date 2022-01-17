@@ -148,6 +148,24 @@ function polen_get_talents( int $quantity = 10 )
     return $talents;
 }
 
+/**
+ * Retornar talentos por categorias
+ *
+ * @param string $slug
+ * @param int $quantity
+ * @return array|type
+ */
+function polen_get_talents_by_product_cat(string $slug, int $quantity = 10)
+{
+    $args = array(
+        'post_type' => 'product',
+        'posts_per_page' => $quantity,
+        'product_cat' => $slug
+    );
+
+    return _polen_get_info_talents_by_args( $args );
+
+}
 
 /**
  * Retorna a URL do arquivo JSON das occasions para a tela do brief do videos
