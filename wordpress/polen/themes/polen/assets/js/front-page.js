@@ -43,6 +43,31 @@ jQuery(document).ready(function ($) {
 		dots: true,
 		autoHeight:false,
 	});
+  $('.talents-carousel').owlCarousel({
+		loop: false,
+    stagePadding: 15,
+    items: 6,
+    animateOut: 'fadeOut',
+    margin: 5,
+    nav: true,
+    dots: false,
+    autoHeight:false,
+    navText: ["<i class='icon icon-left-arrow'></i>", "<i class='icon icon-right-arrow'></i>"],
+    responsive : {
+        0 : {
+          items: 2,
+        },
+        650 : {
+          items: 3,
+        },
+        800 : {
+          items: 4,
+        },
+        1020 : {
+          items: 6,
+        }
+    }
+	});
   // $('#videos-carousel').owlCarousel({
   //   loop: false,
   //   stagePadding: 15,

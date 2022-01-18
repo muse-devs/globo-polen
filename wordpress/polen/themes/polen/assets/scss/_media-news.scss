@@ -103,6 +103,7 @@
     display: flex;
     justify-content: center;
     width: 100%;
+    overflow-x: hidden;
     @include media-breakpoint-down(sm) {
       justify-content: flex-start;
       flex-direction: row;
