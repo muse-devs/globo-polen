@@ -42,7 +42,8 @@ class Api_Contact
             $phone   = filter_var( $request->get_param( 'phone' ), FILTER_SANITIZE_NUMBER_INT );
             $message = filter_var( $request->get_param( 'message' ), FILTER_SANITIZE_SPECIAL_CHARS );
 
-            return api_response( $this->send_email( $name, $email, $phone, $message ), 200 );
+            $response_sendgrid = $this->send_email( $name, $email, $phone, $message );
+            return api_response( $response_sendgrid->body(), $response_sendgrid->statusCode() );
         } catch ( Exception $e ) {
             return api_response( $e->getMessage(), $e->getCode() );
         }
