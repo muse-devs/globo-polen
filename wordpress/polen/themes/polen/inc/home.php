@@ -60,7 +60,7 @@ $inputs = new Material_Inputs();
 
   <!-- Banners -->
 	<div class="row d-flex justify-content-center my-4">
-		<div class="col-xs-12 col-sm-6">
+		<div class="col-xs-12 col-sm-6 mb-5">
       <?php $inputs->material_button_link_outlined("todos", "Ver todos ídolos", home_url( "shop" ), false, "", array()); ?>
 		</div>
 	</div>
