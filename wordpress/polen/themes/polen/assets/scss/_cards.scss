@@ -1207,6 +1207,34 @@
   }
 }
 
+.talents-carousel {
+  .owl-dots {
+    bottom: -0px;
+    .owl-dot {
+      span {
+        background: #5e5e5e;
+      }
+    }
+  }
+  .owl-nav {
+    top: auto;
+    bottom: -35px;
+    z-index: 5;
+    display: flex;
+    justify-content: flex-end;
+    right: 50px;
+    .icon-left-arrow {
+      left: auto;
+      color: #000;
+    }
+    .icon-right-arrow {
+      margin-left: 20px;
+      right: auto;
+      color: #000;
+    }
+  }
+}
+
 // .col-flex-20 {
 // 	margin: 0 2.5% 25px 0;
 // 	width: 18%;
