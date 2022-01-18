@@ -319,6 +319,46 @@ function polen_banner_scrollable($items, $title, $link, $subtitle = "", $social 
 <?php
 }
 
+function polen_talents_by_category($items, $title, $emoji = "", $link = "", $subtitle = "", $social = false)
+{
+  if (!$items) {
+    return;
+  }
+?>
+  <section class="row mb-4">
+    <div class="col-md-12">
+      <header class="row mb-3">
+        <div class="col-12 d-flex justify-content-between align-items-center">
+          <h2 class="typo typo-title mr-2">
+            <?php if ($emoji != "") : ?>
+              <img class="mr-1" loading="lazy" src="<?php echo $emoji; ?>" alt="<?php echo $title; ?>">
+            <?php endif; ?>
+            <?php echo $title; ?>
+          </h2>
+          <?php if ($link != "") : ?>
+            <a href="<?php echo $link; ?>" class="typo typo-link">Ver todos <?php Icon_Class::polen_icon_chevron_right(); ?></a>
+          <?php endif; ?>
+        </div>
+        <?php if ($subtitle != "") : ?>
+          <div class="col-12">
+            <p class="my-1"><?php echo $subtitle; ?></p>
+          </div>
+        <?php endif; ?>
+      </header>
+    </div>
+    <div class="col-md-12 p-0 p-md-0 mb-5">
+      <div class="owl-carousel owl-theme talents-carousel">
+        <?php foreach ($items as $item) : ?>
+          <div class="item">
+            <?php polen_front_get_card($item, "responsive", $social); ?>
+          </div>
+        <?php endforeach; ?>
+      </div>
+    </div>
+  </section>
+<?php
+}
+
 function polen_front_get_news($items, $title, $link, $social = "", $campanha = "")
 {
   if (!$items) {
@@ -905,6 +945,21 @@ function polen_get_galo_banner($link)
       <a href="<?php echo $link; ?>">
         <div class="galo-banner" style="background: url('<?php echo TEMPLATE_URI . '/assets/img/galo/bg.png'; ?>')center no-repeat">
           <img loading="lazy" src="<?php echo TEMPLATE_URI; ?>/assets/img/galo/content.png" alt="Galo Ídolos" class="img-responsive" />
+        </div>
+      </a>
+    </div>
+  </div>
+<?php
+}
+
+function polen_get_sertanejo_banner($link)
+{
+?>
+  <div class="row mt-4">
+    <div class="col-12">
+      <a href="<?php echo $link; ?>">
+        <div class="sertanejo-banner" style="background: url('<?php echo TEMPLATE_URI . '/assets/img/sertanejo/bg.png'; ?>')center no-repeat; background-size: cover">
+          <img loading="lazy" src="<?php echo TEMPLATE_URI; ?>/assets/img/sertanejo/content.png" alt="Semana Sertaneja" class="img-responsive" />
         </div>
       </a>
     </div>
