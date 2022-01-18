@@ -160,11 +160,19 @@ function polen_get_talents_by_product_cat(string $slug, int $quantity = 10)
     $args = array(
         'post_type' => 'product',
         'posts_per_page' => $quantity,
-        'product_cat' => $slug
+        'product_cat' => $slug,
+    );
+
+    $args['tax_query'] = array(
+        array(
+            'taxonomy' => 'campaigns',
+            'terms' => array('lacta'),
+            'field' => 'slug',
+            'operator' => 'NOT IN',
+        ),
     );
 
     return _polen_get_info_talents_by_args( $args );
-
 }
 
 /**
