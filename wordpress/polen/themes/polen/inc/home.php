@@ -38,30 +38,39 @@ $inputs = new Material_Inputs();
   <?php
     $videos = ["3492", "3806", "3554", "2930", "3898", "3168"];
     polen_front_get_videos(polen_get_home_stories($videos));
+
+    $emojis= array(
+      "musica" => TEMPLATE_URI.'/assets/img/emoji/music.png',
+      "atrizes-e-atores" => TEMPLATE_URI.'/assets/img/emoji/arts.png',
+      "apresentadores" => TEMPLATE_URI.'/assets/img/emoji/mic.png',
+      "esporte" => TEMPLATE_URI.'/assets/img/emoji/esporte.png',
+      "influencers" => TEMPLATE_URI.'/assets/img/emoji/selfie.png',
+      "comediantes" => TEMPLATE_URI.'/assets/img/emoji/laugh.png'
+    );
   ?>
 
   <!-- Listagem de Talentos - Música -->
-  <?php polen_talents_by_category(polen_get_talents_by_product_cat("musica", 10), "Música"); ?>
+  <?php polen_talents_by_category(polen_get_talents_by_product_cat("musica", 10), "Música", $emojis['musica']); ?>
 
   <!-- Listagem de Talentos - Atrizes e Atores -->
-  <?php polen_talents_by_category(polen_get_talents_by_product_cat("atrizes-e-atores", 10), "Atrizes e Atores"); ?>
+  <?php polen_talents_by_category(polen_get_talents_by_product_cat("atrizes-e-atores", 10), "Atrizes e Atores", $emojis['atrizes-e-atores']); ?>
 
   <!-- Listagem de Talentos - Apresentadores -->
-  <?php polen_talents_by_category(polen_get_talents_by_product_cat("apresentadores", 10), "Apresentadores"); ?>
+  <?php polen_talents_by_category(polen_get_talents_by_product_cat("apresentadores", 10), "Apresentadores", $emojis['apresentadores']); ?>
 
   <!-- Listagem de Talentos - Esporte -->
-  <?php polen_talents_by_category(polen_get_talents_by_product_cat("esporte", 10), "Esporte"); ?>
+  <?php polen_talents_by_category(polen_get_talents_by_product_cat("esporte", 10), "Esporte", $emojis['esporte']); ?>
 
   <!-- Listagem de Talentos - Influencers -->
-  <?php polen_talents_by_category(polen_get_talents_by_product_cat("influencers", 10), "Influencers"); ?>
+  <?php polen_talents_by_category(polen_get_talents_by_product_cat("influencers", 10), "Influencers", $emojis['influencers']); ?>
 
   <!-- Listagem de Talentos - Comediantes -->
-  <?php polen_talents_by_category(polen_get_talents_by_product_cat("comediantes", 10), "Comediantes"); ?>
+  <?php polen_talents_by_category(polen_get_talents_by_product_cat("comediantes", 10), "Comediantes", $emojis['comediantes']); ?>
 
   <!-- Banners -->
 	<div class="row d-flex justify-content-center my-4">
 		<div class="col-xs-12 col-sm-6 mb-5">
-      <?php $inputs->material_button_link_outlined("todos", "Ver todos ídolos", home_url( "shop" ), false, "", array()); ?>
+      <?php $inputs->material_button_link_outlined("todos", "Ver todos os ídolos", home_url( "shop" ), false, "", array()); ?>
 		</div>
 	</div>
 

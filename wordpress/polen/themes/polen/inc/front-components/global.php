@@ -319,7 +319,7 @@ function polen_banner_scrollable($items, $title, $link, $subtitle = "", $social 
 <?php
 }
 
-function polen_talents_by_category($items, $title, $link = "", $subtitle = "", $social = false)
+function polen_talents_by_category($items, $title, $emoji = "", $link = "", $subtitle = "", $social = false)
 {
   if (!$items) {
     return;
@@ -329,7 +329,12 @@ function polen_talents_by_category($items, $title, $link = "", $subtitle = "", $
     <div class="col-md-12">
       <header class="row mb-3">
         <div class="col-12 d-flex justify-content-between align-items-center">
-          <h2 class="typo typo-title mr-2"><?php echo $title; ?></h2>
+          <h2 class="typo typo-title mr-2">
+            <?php if ($emoji != "") : ?>
+              <img class="mr-1" loading="lazy" src="<?php echo $emoji; ?>" alt="<?php echo $title; ?>">
+            <?php endif; ?>
+            <?php echo $title; ?>
+          </h2>
           <?php if ($link != "") : ?>
             <a href="<?php echo $link; ?>" class="typo typo-link">Ver todos <?php Icon_Class::polen_icon_chevron_right(); ?></a>
           <?php endif; ?>
