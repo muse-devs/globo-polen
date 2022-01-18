@@ -609,6 +609,40 @@ class Polen_Plugin_Settings
                 ),
             )
         ) );
+
+
+
+        // Configurar API REST
+        \Redux::set_section( $opt_name, array(
+            'title'            => esc_html__( 'Dados Sendgrid Templates', 'polen' ),
+            'id'               => 'sendgrid_data',
+            'icon'             => '',
+            'subsection'       => false,
+            'fields'           => array(
+                array(
+                    'id'       => 'sendgrid_apikey',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Sendgrid Apikey', 'polen'),
+                    'placeholder' => 'Sendgrid Apikey',
+                    'desc'     => 'Sendgrid Apikey',
+                    'default'  => '',
+                ),
+                array(
+                    'id'       => 'sendgrid_theme_galo_help',
+                    'type'     => 'text',
+                    'title'    => esc_html__('ThemeID Galo Help', 'polen'),
+                    'desc'     => 'ThemeID Galo Help',
+                    'default'  => '',
+                ),
+                // array(
+                //     'id'       => 'polen_api_rest_account',
+                //     'type'     => 'text',
+                //     'title'    => esc_html__('Adicionar chave account', 'polen'),
+                //     'desc'     => 'Cole aqui chave partner key do TUNA',
+                //     'default'  => '',
+                // ),
+            )
+        ) );
     }
 
     public function save( $args ) {
