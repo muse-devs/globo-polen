@@ -325,7 +325,7 @@ function polen_talents_by_category($items, $title, $emoji = "", $link = "", $sub
     return;
   }
 ?>
-  <section class="row">
+  <section class="row mb-4">
     <div class="col-md-12">
       <header class="row mb-3">
         <div class="col-12 d-flex justify-content-between align-items-center">
