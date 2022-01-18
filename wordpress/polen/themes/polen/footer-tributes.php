@@ -19,7 +19,7 @@
 			</div>
 			<div class="col-12 text-center col-md-6 text-md-right social">
 				<a href="https://www.facebook.com/Polen-107879504782470/" target="_blank"><?php Icon_Class::polen_icon_social("facebook"); ?></a>
-				<a href="https://www.instagram.com/siga.polen/" target="_blank"><?php Icon_Class::polen_icon_social("instagram"); ?></a>
+				<a href="https://www.instagram.com/polen.me/" target="_blank"><?php Icon_Class::polen_icon_social("instagram"); ?></a>
 				<a href="https://vm.tiktok.com/ZMeKtWr1H/" target="_blank"><?php Icon_Class::polen_icon_social("tiktok"); ?></a>
 			</div>
 		</div>
