@@ -161,6 +161,7 @@ function polen_get_talents_by_product_cat(string $slug, int $quantity = 10)
         'post_type' => 'product',
         'posts_per_page' => $quantity,
         'product_cat' => $slug,
+        'post_status' => 'publish',
     );
 
     $args['tax_query'] = array(
