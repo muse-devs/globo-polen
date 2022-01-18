@@ -952,6 +952,21 @@ function polen_get_galo_banner($link)
 <?php
 }
 
+function polen_get_sertanejo_banner($link)
+{
+?>
+  <div class="row mt-4">
+    <div class="col-12">
+      <a href="<?php echo $link; ?>">
+        <div class="sertanejo-banner" style="background: url('<?php echo TEMPLATE_URI . '/assets/img/sertanejo/bg.png'; ?>')center no-repeat; background-size: cover">
+          <img loading="lazy" src="<?php echo TEMPLATE_URI; ?>/assets/img/sertanejo/content.png" alt="Semana Sertaneja" class="img-responsive" />
+        </div>
+      </a>
+    </div>
+  </div>
+<?php
+}
+
 function polen_get_lacta_banner($link)
 {
 ?>
