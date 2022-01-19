@@ -18,22 +18,22 @@ class Api_Checkout
 
     public function __construct()
     {
-        $this->auth();
+        // $this->auth();
     }
 
-    public function auth()
-    {
-        global $Polen_Plugin_Settings;
-        $this->woocommerce = new Client(
-            site_url(),
-            $Polen_Plugin_Settings['polen_api_rest_cosumer_key'],
-            $Polen_Plugin_Settings['polen_api_rest_cosumer_secret'],
-            [
-                'wp_api' => true,
-                'version' => 'wc/v3'
-            ]
-        );
-    }
+    // public function auth()
+    // {
+    //     global $Polen_Plugin_Settings;
+    //     $this->woocommerce = new Client(
+    //         site_url(),
+    //         $Polen_Plugin_Settings['polen_api_rest_cosumer_key'],
+    //         $Polen_Plugin_Settings['polen_api_rest_cosumer_secret'],
+    //         [
+    //             'wp_api' => true,
+    //             'version' => 'wc/v3'
+    //         ]
+    //     );
+    // }
 
     /**
      * Criação de uma order completa, seguindo os passos:
