@@ -343,6 +343,19 @@ class Api_Controller{
         return api_response( $data, 200 );
     }
 
+    public function get_payment_status($request)
+    {
+        $order_id = $request['id'];
+
+        $current_status = $this->checkout->get_status($order_id);
+
+        return api_response(
+            [
+                'paid' => $current_status == 'payment-approved',
+                'payment_status' => $current_status
+            ]
+        );
+    }
 
     /**
      * 
