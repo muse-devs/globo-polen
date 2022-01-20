@@ -394,6 +394,42 @@ class Api_Gateway_Tuna
         return $status_order[$status_response];
     }
 
+    public function get_tuna_status($order_id)
+    {
+        $order = wc_get_order($order_id);
+
+        $url = $this->get_endpoint_url('Payment/Status');
+
+        $item = [
+            "AppToken" => $this->partner_key,
+            "Account" => $this->partner_account,
+            "PartnerUniqueID" => $order->get_id(),
+            "PaymentDate" => $order->get_date_created()->format('Y-m-d')
+        ];
+
+        $api_response = wp_remote_post(
+            $url,
+            array(
+                'headers' => array(
+                    'Content-Type'  => 'application/json'
+                ),
+                'body' => json_encode($item)
+            )
+        );
+
+        if (is_wp_error($api_response)) {
+            throw new Exception(__('Problemas com o processo de pagamento, recarregue a página.', 'tuna-payment'));
+        }
+
+        if (empty($api_response['body'])) {
+            throw new Exception(__('Problemas com o processo de pagamento, recarregue a página.', 'tuna-payment'));
+        }
+
+        $response = json_decode($api_response['body']);
+
+        return $this->get_status_response($response->status);
+    }
+
     /**
      * Configuração das credenciais
      */
