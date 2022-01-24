@@ -449,7 +449,7 @@ function polSelectAdvanced() {
 }
 
 function onFullScreen(e) {
-  var isFullscreenNow = document.webkitFullscreenElement !== null
+  var isFullscreenNow = document.webkitFullscreenElement || document.fullscreenElement;
   e.target.style["object-fit"] = isFullscreenNow ? "contain" : "cover";
 }
 
