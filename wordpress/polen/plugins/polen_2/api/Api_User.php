@@ -7,6 +7,7 @@ use Polen\Includes\Polen_Campaign;
 use Polen\Includes\Polen_Order_Review;
 use Polen\Includes\Polen_SignInUser_Strong_Password;
 use WP_Error;
+use WP_Query;
 
 class Api_User
 {
