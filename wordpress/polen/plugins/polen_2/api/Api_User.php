@@ -133,9 +133,19 @@ class Api_User
             return api_response(['message' => 'Não existe nenhum usuario com esse email'], 403);
         }
 
+        $query = new WP_Query(array('post_type' => 'product', 'author' =>  $user->data->ID));
+        $product = $query->get_posts();
+
+        $image = '';
+        if (isset($product) && !empty($product)) {
+            $att = wp_get_attachment_image_src(get_post_thumbnail_id($product[0]->ID), 'polen-square-crop-xl');
+            $image = $att[0];
+        }
+
         $response = [
             'ID' => $user->data->ID,
             'name' => get_user_meta($user->data->ID,'first_name', true) . ' ' . get_user_meta($user->data->ID,'last_name', true),
+            'thumbnail' => $image,
             'first_name' => get_user_meta($user->data->ID,'first_name', true),
             'last_name' => get_user_meta($user->data->ID,'last_name', true),
             'phone' => get_user_meta($user->data->ID,'billing_phone', true),
