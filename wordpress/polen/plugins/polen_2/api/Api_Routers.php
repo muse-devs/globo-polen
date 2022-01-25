@@ -283,6 +283,17 @@ class Api_Routers
             )
         ));
 
+        register_rest_route($this->base, '/users/talent', array(
+            array(
+                'methods' => WP_REST_Server::READABLE,
+                'args' => array(
+                    'email'            => [],
+                ),
+                'callback' => [ $api_user, 'my_account_talent' ],
+                'permission_callback' => [ $api_user, 'check_permission_create_item' ],
+            )
+        ));
+
         /**
          * Exibir comentários
          */
