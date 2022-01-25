@@ -162,6 +162,16 @@ class Api_Routers
             )
         ));
 
+        register_rest_route($this->base, '/get_payment_status/(?P<id>[\d]+)', array(
+            array(
+                'methods' => WP_REST_Server::READABLE,
+                'args' => array(
+                    'id' => [],
+                ),
+                'callback' => [ $controller, 'get_payment_status' ],
+                'permission_callback' => '__return_true',
+            )
+        ));
 
         $api_fan_order = new Api_Fan_Order();
         /**
@@ -269,6 +279,17 @@ class Api_Routers
                     'email'            => [],
                 ),
                 'callback' => [ $api_user, 'my_account' ],
+                'permission_callback' => [ $api_user, 'check_permission_create_item' ],
+            )
+        ));
+
+        register_rest_route($this->base, '/users/talent', array(
+            array(
+                'methods' => WP_REST_Server::READABLE,
+                'args' => array(
+                    'email'            => [],
+                ),
+                'callback' => [ $api_user, 'my_account_talent' ],
                 'permission_callback' => [ $api_user, 'check_permission_create_item' ],
             )
         ));

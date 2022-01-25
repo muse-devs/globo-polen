@@ -7,6 +7,7 @@ use Polen\Includes\Polen_Campaign;
 use Polen\Includes\Polen_Order_Review;
 use Polen\Includes\Polen_SignInUser_Strong_Password;
 use WP_Error;
+use WP_Query;
 
 class Api_User
 {
@@ -136,6 +137,52 @@ class Api_User
         $response = [
             'ID' => $user->data->ID,
             'name' => get_user_meta($user->data->ID,'first_name', true) . ' ' . get_user_meta($user->data->ID,'last_name', true),
+            'first_name' => get_user_meta($user->data->ID,'first_name', true),
+            'last_name' => get_user_meta($user->data->ID,'last_name', true),
+            'phone' => get_user_meta($user->data->ID,'billing_phone', true),
+            'email' => $user->data->user_email,
+            'display_name' => $user->data->display_name,
+            'date_registered' => $user->data->user_registered,
+        ];
+
+        return api_response($response, 200);
+    }
+
+    /**
+     * Recuperar dados de um talento
+     *
+     * @param \WP_REST_Request $request
+     * @return \WP_REST_Response
+     */
+    public function my_account_talent(\WP_REST_Request $request): \WP_REST_Response
+    {
+        $email = $request->get_param('email');
+        if(empty($email)) {
+            return api_response(['message' => 'Email Obrigatório'], 403);
+        }
+
+        $user = get_user_by('email', $email);
+        if(empty($user)) {
+            return api_response(['message' => 'Não existe nenhum usuario com esse email'], 403);
+        }
+
+        if ( !in_array( 'user_talent', $user->roles, true ) ) {
+            return api_response(['message' => 'Usuário não tem permissão para acessar o sistema'], 403);
+        }
+
+        $query = new WP_Query(array('post_type' => 'product', 'author' =>  $user->data->ID));
+        $product = $query->get_posts();
+
+        $image = '';
+        if (isset($product) && !empty($product)) {
+            $att = wp_get_attachment_image_src(get_post_thumbnail_id($product[0]->ID), 'polen-square-crop-xl');
+            $image = $att[0];
+        }
+
+        $response = [
+            'ID' => $user->data->ID,
+            'name' => get_user_meta($user->data->ID,'first_name', true) . ' ' . get_user_meta($user->data->ID,'last_name', true),
+            'thumbnail' => $image,
             'first_name' => get_user_meta($user->data->ID,'first_name', true),
             'last_name' => get_user_meta($user->data->ID,'last_name', true),
             'phone' => get_user_meta($user->data->ID,'billing_phone', true),
