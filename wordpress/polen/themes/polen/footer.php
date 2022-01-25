@@ -18,9 +18,9 @@
 		<div class="row d-none d-md-block">
 			<div class="col-12">
 				<div class="row justify-content-md-between">
-          <div class="<?php echo is_front_page() ? "col-md-7" : "col-md-12" ?>">
+          <div class="<?php echo is_front_page() ? "col-md-8" : "col-md-12" ?>">
             <div class="row">
-              <div class="col-md-3 mt-4">
+              <div class="col-md-2 mt-4">
                 <h5 class="title typo typo-title typo-small">Conta</h5>
                 <ul class="footer-menu">
                   <li><a href="/register">Página de cadastro</a></li>
@@ -29,14 +29,17 @@
                   <li><a href="/acompanhamento-pedido">Acompanhe seu pedido</a></li>
                 </ul>
               </div>
-              <div class="col-md-3 mt-4">
-                <h5 class="title typo typo-title typo-small">Transparência</h5>
+              <div class="col-md-2 mt-4">
+                <h5 class="title typo typo-title typo-small">Institucional</h5>
                 <ul class="footer-menu">
-                  <li><a href="/termos-de-uso">Termos de uso</a></li>
-                  <li><a href="/politica-de-privacidade">Política de privacidade</a></li>
+                  <li><a href="/sobre-nos">Sobre nós</a></li>
+                  <li><a href="https://br.linkedin.com/company/polen-me" target="_blank" rel="noreferrer">Trabalhe conosco</a></li>
+                  <li><a href="/polen-na-midia">Polen na mídia</a></li>
+                  <li><a href="/ajuda">Ajuda</a></li>
+                  <li><a href="https://polenmais.blogspot.com/" target="_blank" rel="noreferrer">Blog</a></li>
                 </ul>
               </div>
-              <div class="col-md-3 mt-4">
+              <div class="col-md-2 mt-4">
                 <h5 class="title typo typo-title typo-small">Redes Sociais</h5>
                 <ul class="footer-menu">
                   <li><a href="https://vm.tiktok.com/ZMeKtWr1H/" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("tiktok"); ?>TikTok</a></li>
@@ -47,13 +50,18 @@
                 </ul>
               </div>
               <div class="col-md-3 mt-4">
-                <h5 class="title typo typo-title typo-small">Institucional</h5>
+                <h5 class="title typo typo-title typo-small">Transparência</h5>
                 <ul class="footer-menu">
-                  <li><a href="/sobre-nos">Sobre nós</a></li>
-                  <li><a href="https://br.linkedin.com/company/polen-me" target="_blank" rel="noreferrer">Trabalhe conosco</a></li>
-                  <li><a href="/polen-na-midia">Polen na mídia</a></li>
-                  <li><a href="/ajuda">Ajuda</a></li>
-                  <li><a href="https://polenmais.blogspot.com/" target="_blank" rel="noreferrer">Blog</a></li>
+                  <li><a href="/termos-de-uso">Termos de uso</a></li>
+                  <li><a href="/politica-de-privacidade">Política de privacidade</a></li>
+                </ul>
+              </div>
+              <div class="col-md-3 mt-4">
+                <h5 class="title typo typo-title typo-small">Para Empresas</h5>
+                <ul class="footer-menu">
+                  <li><a href="/empresas">Polen para empresas</a></li>
+                  <li><a href="https://www.instagram.com/polenparaempresas/" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("instagram"); ?>Instagram</a></li>
+                  <li><a href="/empresas#bus-form-wrapper">Fale conosco</a></li>
                 </ul>
               </div>
             </div>
@@ -149,6 +157,24 @@
                       <li><a href="/polen-na-midia">Polen na mídia</a></li>
                       <li><a href="/ajuda">Ajuda</a></li>
                       <li><a href="https://polenmais.blogspot.com/" target="_blank" rel="noreferrer">Blog</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="heading-para-empresas">
+                  <h4 class="panel-title">
+                    <a class="panel-button" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-para-empresas" aria-expanded="false" aria-controls="collapse-para-empresas">
+                      <h5>Para Empresas</h5>
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapse-para-empresas" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-para-empresas">
+                  <div class="panel-body">
+                    <ul class="footer-menu">
+                      <li><a href="/empresas">Polen para empresas</a></li>
+                      <li><a href="https://www.instagram.com/polenparaempresas/" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("instagram"); ?>Instagram</a></li>
+                      <li><a href="/empresas#bus-form-wrapper">Fale conosco</a></li>
                     </ul>
                   </div>
                 </div>
