@@ -656,7 +656,7 @@ function polen_form_signin_newsletter(string $id = "newsletter", string $event =
 {
   $inputs = new Material_Inputs();
 ?>
-  <div id="signin-newsletter" class="col-md-5 mt-4">
+  <div id="signin-newsletter" class="col-md-4 mt-4">
     <h5 class="title typo typo-title typo-small">Se conecte com a gente!</h5>
     <p class="description typo typo-p typo-small typo-double-line-height">Receba novidades e conteúdos exclusivos da Polen.</p>
     <form id="<?php echo $id; ?>" action="/" method="POST">
@@ -668,7 +668,7 @@ function polen_form_signin_newsletter(string $id = "newsletter", string $event =
           $inputs->input_hidden("event", $event);
           $inputs->input_hidden("is_mobile", polen_is_mobile() ? "1" : "0");
           $inputs->input_hidden("security", wp_create_nonce('news-signin'));
-          $inputs->material_input(Material_Inputs::TYPE_EMAIL, "email", "email", "Entre com o seu e-mail", true);
+          $inputs->material_input(Material_Inputs::TYPE_EMAIL, "email", "email", "E-mail", true);
           ?>
         </div>
         <div class="col-md-4 mt-2 mt-md-0 d-md-flex align-items-md-center">
