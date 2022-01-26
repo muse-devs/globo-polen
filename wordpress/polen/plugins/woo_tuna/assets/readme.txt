@@ -2,8 +2,10 @@
 Contributors: tunasoftware
 Tags: ecommerce, tuna, woocommerce 
 Requires at least: 5.5
-Tested up to: 5.9
-Stable tag: 1.4
+Tested up to: 5.8.1
+WC requires at least: 3.0.0
+WC tested up to: 4.7.1
+Stable tag: 2.0
 Requires PHP: 7.1.3
 License: MIT License
 License URI: https://spdx.org/licenses/MIT.html
@@ -19,7 +21,7 @@ Para instalar **não é necessário que você tenha conhecimentos técnicos**! V
 ### Porque utilizar o Plugin da Tuna?
 * Você consegue se integrar com múltiplos provedores de pagamento pelo nosso Console, sem precisar de desenvolvimento.
 * Poderá testar a performance dos provedores implementados, mediante testes AB, para otimizar sua solução de pagamentos.
-* O usuário consegue pagar utilizando diversos meios de pagamento: crédito, débito, boleto e PIX.
+* O usuário consegue pagar utilizando diversos meios de pagamento: crédito, débito, boleto, PIX e Bitcoin.
 * Permite que o usuário salve seus cartões para simplificar compras futuras.
 * O plugin inclui o layout do carrinho para incluir informações de pagamento.
 * Inclui tokenização de cartões compatível com os padrões de segurança PCI
