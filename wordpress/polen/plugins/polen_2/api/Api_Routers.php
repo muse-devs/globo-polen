@@ -162,6 +162,16 @@ class Api_Routers
             )
         ));
 
+        register_rest_route($this->base, '/get_payment_status/(?P<id>[\d]+)', array(
+            array(
+                'methods' => WP_REST_Server::READABLE,
+                'args' => array(
+                    'id' => [],
+                ),
+                'callback' => [ $controller, 'get_payment_status' ],
+                'permission_callback' => '__return_true',
+            )
+        ));
 
         $api_fan_order = new Api_Fan_Order();
         /**
@@ -273,6 +283,17 @@ class Api_Routers
             )
         ));
 
+        register_rest_route($this->base, '/users/talent', array(
+            array(
+                'methods' => WP_REST_Server::READABLE,
+                'args' => array(
+                    'email'            => [],
+                ),
+                'callback' => [ $api_user, 'my_account_talent' ],
+                'permission_callback' => [ $api_user, 'check_permission_create_item' ],
+            )
+        ));
+
         /**
          * Exibir comentários
          */
@@ -320,11 +341,37 @@ class Api_Routers
             'schema' => array( $polen_api_videos, 'get_item_schema' )
         ) );
 
-
+        
+        /**
+         * Criacao do endpoint de Nonce para acesso ao checkout
+         */
         register_rest_route( $this->base, '/nonce', array(
             array(
                 'methods' => WP_REST_Server::READABLE,
                 'callback' => array( $controller, 'create_nonce' ),
+                'permission_callback' => '__return_true',
+            ),
+            'schema' => array( $polen_api_videos, 'get_item_schema' )
+        ) );
+
+        
+        /**
+         * Criacao de um endpoint para envio de email de ajuda Galo
+         */
+        $api_contact = new Api_Contact();
+        register_rest_route( $this->base, '/contact', array(
+            array(
+                'methods' => WP_REST_Server::CREATABLE,
+                'callback' => array( $api_contact, 'handler_email_help' ),
+                'permission_callback' => '__return_true',
+            ),
+            'schema' => array( $polen_api_videos, 'get_item_schema' )
+        ) );
+        #CRIANDO ENDOPINT PARA NONCE DO FORMULARIO DE EMAIL DO 
+        register_rest_route( $this->base, '/contact', array(
+            array(
+                'methods' => WP_REST_Server::READABLE,
+                'callback' => array( $api_contact, 'create_nonce' ),
                 'permission_callback' => '__return_true',
             ),
             'schema' => array( $polen_api_videos, 'get_item_schema' )

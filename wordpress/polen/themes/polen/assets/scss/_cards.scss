@@ -765,6 +765,22 @@
   }
 }
 
+.sertanejo-banner {
+  border-radius: 10px;
+  padding: 20px;
+  padding-right: 0px;
+  height: 350px;
+  display: flex;
+  align-items: center;
+  @include media-breakpoint-down(sm) {
+    padding: 10px;
+    height: 190px;
+  }
+  img {
+    width: 100%;
+  }
+}
+
 .lacta-banner {
   width: 100%;
   height: 350px;
@@ -1182,6 +1198,34 @@
   }
   .owl-dots {
     bottom: -35px;
+    .owl-dot {
+      span {
+        background: #5e5e5e;
+      }
+    }
+  }
+  .owl-nav {
+    top: auto;
+    bottom: -35px;
+    z-index: 5;
+    display: flex;
+    justify-content: flex-end;
+    right: 50px;
+    .icon-left-arrow {
+      left: auto;
+      color: #000;
+    }
+    .icon-right-arrow {
+      margin-left: 20px;
+      right: auto;
+      color: #000;
+    }
+  }
+}
+
+.talents-carousel {
+  .owl-dots {
+    bottom: -0px;
     .owl-dot {
       span {
         background: #5e5e5e;

@@ -29,7 +29,6 @@ class Api_Gateway_Tuna
         $url = $this->get_endpoint_url('Payment/Init');
 
         $session_id = $this->get_session_id($current_user['user_object']->data);
-        $token = $this->generate_token_card($session_id, $data);
 
         $customer_order = new WC_Order($order_id);
 
@@ -49,38 +48,42 @@ class Api_Gateway_Tuna
             ]
         ];
 
+        $payment_method_type = $this->method_payment_type($data['method_payment']);
+
         $document_type = 'CPF';
         $document_value = sanitize_text_field($data['cpf']);
-        $payment_method_type = '1';
 
-        $tuna_expiration_date = $this->separate_month_year($data['tuna_expiration_date']);
         $customer_order->calculate_totals();
-
-        $card_info = [
-            "Token" => $token,
-            "TokenProvider" => 'Tuna',
-            "CardHolderName" => sanitize_text_field($data["tuna_card_holder_name"]),
-            "BrandName" => sanitize_text_field($data["tuna_card_brand"]),
-            "ExpirationMonth" => (int) $tuna_expiration_date[0],
-            "ExpirationYear" => (int) $tuna_expiration_date[1],
-            "TokenSingleUse" => 1,
-            "SaveCard" => false,
-            "BillingInfo" => [
-                "Document" => $document_value,
-                "DocumentType" => $document_type,
-                "Address" => [
-                    "Street" => '',
-                    "Number" => '',
-                    "Complement" => '',
-                    "Neighborhood" => '',
-                    "City" => '',
-                    "State" => '',
-                    "Country" => '',
-                    "PostalCode" => '',
-                    "Phone" => $customer_order->get_billing_phone(),
+        $card_info = null;
+        if ($data['method_payment'] == 'cc') {
+            $token = $this->generate_token_card($session_id, $data);
+            $tuna_expiration_date = $this->separate_month_year($data['tuna_expiration_date']);
+            $card_info = [
+                "Token" => $token,
+                "TokenProvider" => 'Tuna',
+                "CardHolderName" => sanitize_text_field($data["tuna_card_holder_name"]),
+                "BrandName" => sanitize_text_field($data["tuna_card_brand"]),
+                "ExpirationMonth" => (int) $tuna_expiration_date[0],
+                "ExpirationYear" => (int) $tuna_expiration_date[1],
+                "TokenSingleUse" => 1,
+                "SaveCard" => false,
+                "BillingInfo" => [
+                    "Document" => $document_value,
+                    "DocumentType" => $document_type,
+                    "Address" => [
+                        "Street" => '',
+                        "Number" => '',
+                        "Complement" => '',
+                        "Neighborhood" => '',
+                        "City" => '',
+                        "State" => '',
+                        "Country" => '',
+                        "PostalCode" => '',
+                        "Phone" => $customer_order->get_billing_phone(),
+                    ]
                 ]
-            ]
-        ];
+            ];
+        }
 
         $body = [
             'AppToken' => $this->partner_key,
@@ -158,6 +161,7 @@ class Api_Gateway_Tuna
         }
 
         $response = json_decode($api_response['body']);
+
         $new_status = $this->get_status_response($response->status);
         if( "failed" === $new_status || 'cancelled' === $new_status ) {
             throw new Exception( 'Erro no pagamento, tente novamente', 422 );
@@ -170,14 +174,40 @@ class Api_Gateway_Tuna
         $response_message = $this->get_response_message($new_status);
         $customer_order->update_status( $new_status );
 
-        return [
+        $response_payment = [
             'message' => $response_message['message'],
             'order_id' => $order_id,
             'new_account' => $current_user['new_account'],
+            'method_payment' => 'Cartão de crédito',
             'order_status' => $response_message['status_code'],
             'order_code' => $customer_order->get_order_key()
         ];
 
+        if ($data['method_payment'] == 'pix') {
+            $response_payment['pix_code'] = $response->methods[0]->pixInfo->qrContent;
+            $response_payment['pix_qrcode'] = $response->methods[0]->pixInfo->qrImage;
+            $response_payment['method_payment'] = 'pix';
+        }
+
+        return $response_payment;
+    }
+
+    /**
+     * Retornar valor do metodo de pagamento de acordo com o tuna
+     *
+     * @param string $type
+     * @return string
+     */
+    public function method_payment_type($type = 'cc'): string
+    {
+        $methods = array(
+            'cc' => '1',
+            'pix' => 'D',
+            'billet' => '3',
+
+        );
+
+        return $methods[$type];
     }
 
     /**
@@ -334,48 +364,6 @@ class Api_Gateway_Tuna
         return $new_status;
     }
 
-
-    /*
-    public function get_end_status($status)
-    {
-        $code = "Erro";
-        switch ($status) {
-            case '8':
-            case '9':
-            case '2':
-                $code = "payment-approved";
-                break;
-            case '1':
-            case '0':
-            case 'C':
-            case 'P':
-                $code = "payment-in-revision";
-                break;
-            case 'A':
-            case '6':
-                $code = "failed";
-                break;
-            case '5':
-            case '7':
-            case '3':
-                $code = "refunded";
-                break;
-            case '4':
-            case 'B':
-            case 'N':
-            case 'B':
-                $code = "failed";
-                break;
-            case 'E':
-                $code = "failed";
-                break;
-            case 'D':
-                $code = "failed";
-                break;
-        }
-        return $code;
-    } */
-
     /**
      * Retornar mensagem de acordo com o status
      *
@@ -404,6 +392,42 @@ class Api_Gateway_Tuna
         ];
 
         return $status_order[$status_response];
+    }
+
+    public function get_tuna_status($order_id)
+    {
+        $order = wc_get_order($order_id);
+
+        $url = $this->get_endpoint_url('Payment/Status');
+
+        $item = [
+            "AppToken" => $this->partner_key,
+            "Account" => $this->partner_account,
+            "PartnerUniqueID" => $order->get_id(),
+            "PaymentDate" => $order->get_date_created()->format('Y-m-d')
+        ];
+
+        $api_response = wp_remote_post(
+            $url,
+            array(
+                'headers' => array(
+                    'Content-Type'  => 'application/json'
+                ),
+                'body' => json_encode($item)
+            )
+        );
+
+        if (is_wp_error($api_response)) {
+            throw new Exception(__('Problemas com o processo de pagamento, recarregue a página.', 'tuna-payment'));
+        }
+
+        if (empty($api_response['body'])) {
+            throw new Exception(__('Problemas com o processo de pagamento, recarregue a página.', 'tuna-payment'));
+        }
+
+        $response = json_decode($api_response['body']);
+
+        return $this->get_status_response($response->status);
     }
 
     /**

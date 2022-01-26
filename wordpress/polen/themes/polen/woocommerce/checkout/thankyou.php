@@ -56,6 +56,13 @@ if( !is_user_logged_in() ) {
 
 ?>
 
+<?php if ($order->get_payment_method_title() == 'Boleto') : ?>
+    <style>
+        .woocommerce-info{
+            display:block !important;
+        }
+    </style>
+<?php endif; ?>
 
 
 <?php if ($order->has_status('failed')) : ?>

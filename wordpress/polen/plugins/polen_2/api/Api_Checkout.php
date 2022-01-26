@@ -18,22 +18,22 @@ class Api_Checkout
 
     public function __construct()
     {
-        $this->auth();
+        // $this->auth();
     }
 
-    public function auth()
-    {
-        global $Polen_Plugin_Settings;
-        $this->woocommerce = new Client(
-            site_url(),
-            $Polen_Plugin_Settings['polen_api_rest_cosumer_key'],
-            $Polen_Plugin_Settings['polen_api_rest_cosumer_secret'],
-            [
-                'wp_api' => true,
-                'version' => 'wc/v3'
-            ]
-        );
-    }
+    // public function auth()
+    // {
+    //     global $Polen_Plugin_Settings;
+    //     $this->woocommerce = new Client(
+    //         site_url(),
+    //         $Polen_Plugin_Settings['polen_api_rest_cosumer_key'],
+    //         $Polen_Plugin_Settings['polen_api_rest_cosumer_secret'],
+    //         [
+    //             'wp_api' => true,
+    //             'version' => 'wc/v3'
+    //         ]
+    //     );
+    // }
 
     /**
      * Criação de uma order completa, seguindo os passos:
@@ -334,6 +334,21 @@ class Api_Checkout
         Polen_Order::save_deadline_timestamp_in_order($order, $timestamp);
 
         return $order->save();
+    }
+
+    public function get_status($order_id)
+    {
+        $tuna = new Api_Gateway_Tuna();
+
+        $order = wc_get_order($order_id);
+        $status_woocommerce = $order->get_status();
+        $status_tuna = $tuna->get_tuna_status($order_id);
+
+        if ($status_woocommerce != $status_tuna && $status_woocommerce != 'pending') {
+            $order->update_status($status_tuna);
+        }
+
+        return $status_tuna;
     }
 
     /**
