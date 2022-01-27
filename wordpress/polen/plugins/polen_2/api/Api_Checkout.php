@@ -344,7 +344,7 @@ class Api_Checkout
         $status_woocommerce = $order->get_status();
         $status_tuna = $tuna->get_tuna_status($order_id);
 
-        if ($status_woocommerce != $status_tuna && $status_woocommerce != 'pending') {
+        if ($status_woocommerce != $status_tuna) {
             $order->update_status($status_tuna);
         }
 

@@ -348,7 +348,7 @@ class Api_Gateway_Tuna
     private function get_status_response($status_response): string
     {
         $status_code = [
-            'payment-in-revision' => [ '1', '0', 'C', 'P'],
+            'pending' => [ '1', '0', 'C', 'P'],
             'payment-approved' => [ '2', '8', '9' ],
             'failed' => [ 'A', '6', 'N', '4', 'B', -1 ],
             'cancelled' => [ 'D', 'E' ],
@@ -373,7 +373,7 @@ class Api_Gateway_Tuna
     private function get_response_message($status_response)
     {
         $status_order = [
-            'payment-in-revision' => [
+            'pending' => [
                 'message' => 'Pagamento pendente',
                 'status_code' => 200,
             ],
