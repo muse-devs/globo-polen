@@ -68,9 +68,7 @@ class Api_Talent_Dashboard extends WP_REST_Controller
         $products_id = Api_Talent_Utils::get_globals_product_id();
         // $user_id = 
         $return = [];
-        $return
-
-
+        
         return api_response( 'AEEEEEEEEEEEEEEEE' );
     }
 
