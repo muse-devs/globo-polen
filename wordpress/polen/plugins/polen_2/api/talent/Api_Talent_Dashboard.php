@@ -68,24 +68,20 @@ class Api_Talent_Dashboard extends WP_REST_Controller
     public function dashboard( WP_REST_Request $request )
     {
         $products_id = Api_Talent_Utils::get_globals_product_id();
-        $slug = $request['slug'];
 
-        $product_id = wc_get_product_id_by_sku($slug);
-        if (empty($product_id)) {
-            return api_response('Talento não encontrado', 404);
-        }
+        $product_id = implode($products_id);
 
-        $product = wc_get_product([$product_id]);
+        $product = wc_get_product($product_id);
         $product_post = get_post($product->get_id());
         $talent = get_user_by('id', $product_post->post_author);
 
         $reviews = Polen_Order_Review::get_order_reviews_by_talent_id($talent->ID);
 
         $response = [
-            'total_pending_order' => Polen_Order_V2::get_qty_orders_by_products_id_status([$product_id], ['wc-payment-approved', 'wc-talent-accepted']),
-            'total_pending_value' => Polen_Order_V2::get_total_orders_by_products_id_status([$product_id], ['wc-pending']),
-            'total_orders_recorded' => Polen_Order_V2::get_qty_orders_by_products_id_status([$product_id], ['wc-completed']),
-            'total_orders_expired' => Polen_Order_V2::get_qty_orders_by_products_id_status([$product_id], ['wc-order-expired']),
+            'total_pending_order' => Polen_Order_V2::get_qty_orders_by_products_id_status($products_id, ['wc-payment-approved', 'wc-talent-accepted']),
+            'total_pending_value' => Polen_Order_V2::get_total_orders_by_products_id_status($products_id, ['wc-pending']),
+            'total_orders_recorded' => Polen_Order_V2::get_qty_orders_by_products_id_status($products_id, ['wc-completed']),
+            'total_orders_expired' => Polen_Order_V2::get_qty_orders_by_products_id_status($products_id, ['wc-order-expired']),
             'comment_count_order' => count($reviews),
         ];
 
