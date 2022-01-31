@@ -108,10 +108,10 @@ class Polen_WC_Customer_New_Account extends WC_Email_Customer_New_Account
                 //Lacta
                 $this->password_generated = $user_pass;
                 $this->send( $this->get_recipient(),
-                $this->get_subject(),
-                $this->get_content_html(),
-                $this->get_headers(),
-                $this->get_attachments() );
+                    $this->get_subject(),
+                    $this->get_content_html(),
+                    $this->get_headers(),
+                    $this->get_attachments() );
             } else {
                 $this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
             }

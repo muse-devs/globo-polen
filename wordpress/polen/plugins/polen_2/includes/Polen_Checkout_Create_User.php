@@ -29,16 +29,24 @@ class Polen_Checkout_Create_User
             if( empty( $item_cart ) || !isset( $item_cart['email_to_video'] ) ) {
                 return new WP_Error(234, __LINE__);
             }
-            $user_email = $item_cart['email_to_video'];
+            $user_email = $item_cart[ 'email_to_video' ];
             $user = get_user_by( 'email', $user_email );
             if( is_wp_error( $user ) ) {
                 return new WP_Error(234, __LINE__);
             }
             if( empty( $user ) ) {
-                $user_password = wp_generate_password( 5, false ) . random_int( 0, 99 );
-                $id_registered = wc_create_new_customer( $user_email, $user_email, $user_password );
-                $user = get_user_by( 'ID', $id_registered );
-                add_user_meta( $user->ID, self::META_KEY_CREATED_BY, 'checkout', true );
+                $user_name = $item_cart[ 'offered_by' ];
+                $cc = new Polen_Create_Customer();
+                $userdata = array(
+                    'email' => $user_email,
+                    'name' => $user_name,
+                );
+                $id_registered = $cc->create_new_user(
+                    $userdata,
+                    '',
+                    true
+                );
+                $user = $id_registered;
             } else {
                 $customer = new WC_Customer( $user->ID );
                 $customer->set_display_name( $item_cart['offered_by'] );
