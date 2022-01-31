@@ -263,7 +263,7 @@ function polen_front_get_card($item, $size = "small", $social = false, $campanha
           <div class="price text-right" itemprop="price">
             <?php if ($item['in_stock']) : ?>
               <?php /* ?><span class="mr-2"><?php Icon_Class::polen_icon_camera_video(); ?></span><?php */ ?>
-              <span><?php echo $item['price_formatted']; ?></span>
+              <span><?php echo str_replace(",00", "", $item['price_formatted']); ?></span>
             <?php else : ?>
               <span>Esgotado</span>
             <?php endif; ?>
