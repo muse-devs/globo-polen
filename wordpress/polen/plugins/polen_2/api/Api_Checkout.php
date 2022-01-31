@@ -336,6 +336,21 @@ class Api_Checkout
         return $order->save();
     }
 
+    public function get_status($order_id)
+    {
+        $tuna = new Api_Gateway_Tuna();
+
+        $order = wc_get_order($order_id);
+        $status_woocommerce = $order->get_status();
+        $status_tuna = $tuna->get_tuna_status($order_id);
+
+        if ($status_woocommerce != $status_tuna) {
+            $order->update_status($status_tuna);
+        }
+
+        return $status_tuna;
+    }
+
     /**
      * Verifica se um CPF é válido
      *

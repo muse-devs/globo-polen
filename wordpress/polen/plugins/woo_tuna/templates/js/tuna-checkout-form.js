@@ -197,6 +197,7 @@ function useBoletoPayment() {
     $("#boletoPaymentDocumentDiv").css("display", "block");
     $("#lblCPFBoleto").css("display", "block");
     $("#tuna_boleto_document").css("display", "block");
+    $("#pix-instruction").css("display", "none");
     $("#lblTunaTipo").html("Boleto.");
     $("#lblTunaTipo2").html("boleto");
     $("#tuna_is_boleto_payment").val("true");
@@ -226,6 +227,7 @@ function usePixPayment() {
     $("#boletoPaymentDocumentDiv").css("display", "block");
     $("#lblCPFBoleto").css("display", "none");
     $("#tuna_boleto_document").css("display", "none");
+    $("#pix-instruction").css("display", "block");
     $("#lblTunaTipo2").html("código");
     $("#lblTunaTipo").html("Pix!");
     $("#tuna_is_boleto_payment").val("false");

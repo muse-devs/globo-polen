@@ -3,7 +3,7 @@
 Plugin Name: Tuna Payments para WooCommerce
 Plugin URI: https://www.tuna.uy/
 Description: Conecte Tuna no seu site do WooCommerce para aceitar pagamentos online de múltiplos provedores de pagamentos.
-Version: 1.7
+Version: 2.0
  * Requires PHP:      7.2
  * Requires at least: 5.0
  * Tested up to: 5.5.3

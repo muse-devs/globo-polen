@@ -262,8 +262,8 @@ function polen_front_get_card($item, $size = "small", $social = false, $campanha
         <?php if (!$social) : ?>
           <div class="price text-right" itemprop="price">
             <?php if ($item['in_stock']) : ?>
-              <span class="mr-2"><?php Icon_Class::polen_icon_camera_video(); ?></span>
-              <span><?php echo $item['price_formatted']; ?></span>
+              <?php /* ?><span class="mr-2"><?php Icon_Class::polen_icon_camera_video(); ?></span><?php */ ?>
+              <span><?php echo str_replace(",00", "", $item['price_formatted']); ?></span>
             <?php else : ?>
               <span>Esgotado</span>
             <?php endif; ?>
@@ -271,6 +271,10 @@ function polen_front_get_card($item, $size = "small", $social = false, $campanha
         <?php endif; ?>
         <a href="<?= $item["talent_url"]; ?>" class="link"></a>
       </figure>
+      <?php $stock = $item['stock']; ?>
+      <?php if($stock > 0 && $stock <= 10): ?>
+        <span class="polen-card__low-stock"><?php echo $stock; ?> videos apenas</span>
+      <?php endif; ?>
       <h4 class="title text-truncate">
         <a href="<?= $item["talent_url"]; ?>" title="<?= $item["name"]; ?>" itemprop="name"><?= $item["name"]; ?></a>
       </h4>
@@ -309,6 +313,46 @@ function polen_banner_scrollable($items, $title, $link, $subtitle = "", $social 
             <?php polen_front_get_card($item, "responsive", $social); ?>
           <?php endforeach; ?>
         </div>
+      </div>
+    </div>
+  </section>
+<?php
+}
+
+function polen_talents_by_category($items, $title, $emoji = "", $link = "", $subtitle = "", $social = false)
+{
+  if (!$items) {
+    return;
+  }
+?>
+  <section class="row mb-4">
+    <div class="col-md-12">
+      <header class="row mb-3">
+        <div class="col-12 d-flex justify-content-between align-items-center">
+          <h2 class="typo typo-title mr-2">
+            <?php if ($emoji != "") : ?>
+              <img class="mr-1" loading="lazy" src="<?php echo $emoji; ?>" alt="<?php echo $title; ?>">
+            <?php endif; ?>
+            <?php echo $title; ?>
+          </h2>
+          <?php if ($link != "") : ?>
+            <a href="<?php echo $link; ?>" class="typo typo-link">Ver todos <?php Icon_Class::polen_icon_chevron_right(); ?></a>
+          <?php endif; ?>
+        </div>
+        <?php if ($subtitle != "") : ?>
+          <div class="col-12">
+            <p class="my-1"><?php echo $subtitle; ?></p>
+          </div>
+        <?php endif; ?>
+      </header>
+    </div>
+    <div class="col-md-12 p-0 p-md-0 mb-5">
+      <div class="owl-carousel owl-theme talents-carousel">
+        <?php foreach ($items as $item) : ?>
+          <div class="item">
+            <?php polen_front_get_card($item, "responsive", $social); ?>
+          </div>
+        <?php endforeach; ?>
       </div>
     </div>
   </section>
@@ -612,7 +656,7 @@ function polen_form_signin_newsletter(string $id = "newsletter", string $event =
 {
   $inputs = new Material_Inputs();
 ?>
-  <div id="signin-newsletter" class="col-md-5 mt-4">
+  <div id="signin-newsletter" class="col-md-4 mt-4">
     <h5 class="title typo typo-title typo-small">Se conecte com a gente!</h5>
     <p class="description typo typo-p typo-small typo-double-line-height">Receba novidades e conteúdos exclusivos da Polen.</p>
     <form id="<?php echo $id; ?>" action="/" method="POST">
@@ -624,7 +668,7 @@ function polen_form_signin_newsletter(string $id = "newsletter", string $event =
           $inputs->input_hidden("event", $event);
           $inputs->input_hidden("is_mobile", polen_is_mobile() ? "1" : "0");
           $inputs->input_hidden("security", wp_create_nonce('news-signin'));
-          $inputs->material_input(Material_Inputs::TYPE_EMAIL, "email", "email", "Entre com o seu e-mail", true);
+          $inputs->material_input(Material_Inputs::TYPE_EMAIL, "email", "email", "E-mail", true);
           ?>
         </div>
         <div class="col-md-4 mt-2 mt-md-0 d-md-flex align-items-md-center">
@@ -901,6 +945,21 @@ function polen_get_galo_banner($link)
       <a href="<?php echo $link; ?>">
         <div class="galo-banner" style="background: url('<?php echo TEMPLATE_URI . '/assets/img/galo/bg.png'; ?>')center no-repeat">
           <img loading="lazy" src="<?php echo TEMPLATE_URI; ?>/assets/img/galo/content.png" alt="Galo Ídolos" class="img-responsive" />
+        </div>
+      </a>
+    </div>
+  </div>
+<?php
+}
+
+function polen_get_sertanejo_banner($link)
+{
+?>
+  <div class="row mt-4">
+    <div class="col-12">
+      <a href="<?php echo $link; ?>">
+        <div class="sertanejo-banner" style="background: url('<?php echo TEMPLATE_URI . '/assets/img/sertanejo/bg.png'; ?>')center no-repeat; background-size: cover">
+          <img loading="lazy" src="<?php echo TEMPLATE_URI; ?>/assets/img/sertanejo/content.png" alt="Semana Sertaneja" class="img-responsive" />
         </div>
       </a>
     </div>

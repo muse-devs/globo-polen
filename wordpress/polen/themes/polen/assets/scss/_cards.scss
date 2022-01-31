@@ -35,7 +35,7 @@
 .box-stars {
   .bi,
   .icon {
-    font-size: 16px!important;
+    font-size: 16px !important;
     margin-right: 3px;
   }
   .bi-star,
@@ -114,6 +114,7 @@
 }
 
 .polen-card {
+  position: relative;
   .image {
     position: relative;
     display: block;
@@ -310,6 +311,22 @@
       color: var(--light);
       background-color: $lacta-primary;
     }
+  }
+  .polen-card__low-stock {
+    position: absolute;
+    display: inline-block;
+    padding: 2px 8px;
+    font-size: 8px;
+    font-weight: 500;
+    color: white;
+    margin: -21px 0 0 3px;
+
+    /* Gradients/institucional-gradient */
+
+    background: $institucional_gradient;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+    z-index: 2;
   }
 }
 
@@ -637,7 +654,7 @@
 // }
 
 .bw-banner {
-	border-radius: 10px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   padding: 20px 20px 0px 20px;
@@ -646,7 +663,7 @@
   }
   .logo {
     width: 30%;
-    height: 100%!important;
+    height: 100% !important;
   }
   .content {
     width: 70%;
@@ -670,11 +687,11 @@
   }
   .logo {
     width: 50%;
-    height: 100%!important;
+    height: 100% !important;
     display: flex;
     align-items: center;
     @include media-breakpoint-down(xs) {
-      height: auto!important;
+      height: auto !important;
     }
     img {
       margin-bottom: 20px;
@@ -719,7 +736,7 @@
       margin-top: 20px;
       width: 200px;
       text-align: center;
-      box-shadow: 0px 2px 55px -27px rgba(0,0,0,0.75);
+      box-shadow: 0px 2px 55px -27px rgba(0, 0, 0, 0.75);
       @include media-breakpoint-down(sm) {
         font-size: 14px;
       }
@@ -748,10 +765,26 @@
   }
 }
 
+.sertanejo-banner {
+  border-radius: 10px;
+  padding: 20px;
+  padding-right: 0px;
+  height: 350px;
+  display: flex;
+  align-items: center;
+  @include media-breakpoint-down(sm) {
+    padding: 10px;
+    height: 190px;
+  }
+  img {
+    width: 100%;
+  }
+}
+
 .lacta-banner {
   width: 100%;
   height: 350px;
-  background-size: cover!important;
+  background-size: cover !important;
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -784,7 +817,7 @@
       letter-spacing: 0em;
       text-align: center;
       width: 100%;
-      font-family: "Poppins",sans-serif;
+      font-family: "Poppins", sans-serif;
       color: #fff;
       @include media-breakpoint-down(sm) {
         font-size: 14px;
@@ -1190,6 +1223,34 @@
   }
 }
 
+.talents-carousel {
+  .owl-dots {
+    bottom: -0px;
+    .owl-dot {
+      span {
+        background: #5e5e5e;
+      }
+    }
+  }
+  .owl-nav {
+    top: auto;
+    bottom: -35px;
+    z-index: 5;
+    display: flex;
+    justify-content: flex-end;
+    right: 50px;
+    .icon-left-arrow {
+      left: auto;
+      color: #000;
+    }
+    .icon-right-arrow {
+      margin-left: 20px;
+      right: auto;
+      color: #000;
+    }
+  }
+}
+
 // .col-flex-20 {
 // 	margin: 0 2.5% 25px 0;
 // 	width: 18%;
@@ -1333,7 +1394,7 @@
 
 .pol-toast-success {
   background: rgba(87, 189, 132, 0.41);
-  border: 1px solid #57BD84;
+  border: 1px solid #57bd84;
   border-radius: 100px;
   padding: 10px 20px;
   display: inline-block;

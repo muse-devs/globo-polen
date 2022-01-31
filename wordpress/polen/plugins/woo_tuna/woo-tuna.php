@@ -45,7 +45,7 @@ class TUNA_Payment extends WC_Payment_Gateway
 		update_option("tuna_payment_antifraud_config", $this->antifraud_config );
 
 		// Lets check for SSL
-		add_action('admin_notices', array($this,	'do_ssl_check'));
+		#add_action('admin_notices', array($this,	'do_ssl_check'));
 		/*add_action('woocommerce_view_order', array($this, 'pending_payment_message'));*/
 		/*add_action('woocommerce_thankyou', array($this, 'pending_payment_message'));*/
 		add_action('woocommerce_api_tuna_payment_callback', array($this, 'payment_callback'));
@@ -481,30 +481,29 @@ class TUNA_Payment extends WC_Payment_Gateway
 		$tmpUserID = $this->GUIDv4(true);
 		$current_user = wp_get_current_user();
     $installment_fees = array(
-            $this->installment_fee1,
-            $this->installment_fee2,
-            $this->installment_fee3,
-            $this->installment_fee4,
-            $this->installment_fee5,
-            $this->installment_fee6,
-            $this->installment_fee7,
-            $this->installment_fee8,
-            $this->installment_fee9,
-            $this->installment_fee10,
-            $this->installment_fee11,
-            $this->installment_fee12
+            $this->installment_fee1==''?0:$this->installment_fee1,
+            $this->installment_fee2==''?0:$this->installment_fee2,
+            $this->installment_fee3==''?0:$this->installment_fee3,
+            $this->installment_fee4==''?0:$this->installment_fee4,
+            $this->installment_fee5==''?0:$this->installment_fee5,
+            $this->installment_fee6==''?0:$this->installment_fee6,
+            $this->installment_fee7==''?0:$this->installment_fee7,
+            $this->installment_fee8==''?0:$this->installment_fee8,
+            $this->installment_fee9==''?0:$this->installment_fee9,
+            $this->installment_fee10==''?0:$this->installment_fee10,
+            $this->installment_fee11==''?0:$this->installment_fee11,
+            $this->installment_fee12==''?0:$this->installment_fee12
         );
-
+		$this->save_log($this->installment_fee4);
         wc_get_template(
 			'tuna-checkout-form.php',
 			array(
 				'token_session_id' => $this->get_session_id($tmpUserID),
 				'allow_boleto_payment' => $this->allow_boleto,
 				'allow_pix_payment' => $this->allow_pix,
-        'allow_crypto_payment' => $this->allow_crypto,
-				'force_authentication' => $this->force_authentication,
+        'allow_crypto_payment' => $this->allow_crypto, 
 				'max_parcels_number' => $this->max_parcels_number,
-                'min_parcel_value' => $this->min_parcel_value,
+                'min_parcel_value' => $this->min_parcel_value==''?0:$this->min_parcel_value,
                 'installment_fees' => $installment_fees,
 				'tmpUserID' =>($current_user->ID==0?$tmpUserID:$current_user->ID),
 				'internal_session_id' =>  wp_get_session_token()
@@ -604,14 +603,7 @@ class TUNA_Payment extends WC_Payment_Gateway
 
 	public function get_session_id($tmpUserID)
 	{
-		$current_user = wp_get_current_user();
-		if ($this->force_authentication == "yes") {
-			if (empty($current_user->user_email))
-				return "";
-			if ($current_user->ID == 0)
-				return "";
-		}
-
+		$current_user = wp_get_current_user(); 
 		$url_production = 'https://token.tunagateway.com/api/Token/NewSession';
 		$url_sandbox = 'https://token.tuna-demo.uy/api/Token/NewSession';
 
@@ -625,7 +617,9 @@ class TUNA_Payment extends WC_Payment_Gateway
 				"ID" => ($current_user->ID==0?$tmpUserID:$current_user->ID) . '',
 			]
 		];
-
+		$tmpSessionID = '';
+		try
+		{
 		#$this->save_log(json_encode($cItem));
 		$api_response = wp_remote_post(
 			$url,
@@ -642,9 +636,13 @@ class TUNA_Payment extends WC_Payment_Gateway
 		if (empty($api_response['body']))
 			throw new Exception(__('Problemas com o processo de pagamento, recarregue a página.', 'tuna-payment'));
 
-        #$this->save_log($api_response['body']);
+        $this->save_log($api_response['body']);
 		$response = json_decode($api_response['body']);
-		return __($response->sessionId);
+		
+		
+			$tmpSessionID = __(strval($response->sessionId));
+		}catch (\Exception $e) {}
+		return $tmpSessionID;
 	}
 
 	public function save_log($txt)
@@ -668,6 +666,7 @@ class TUNA_Payment extends WC_Payment_Gateway
 			'title' => array(
 				'title'		=> __('Título no carrinho', 'tuna-payment'),
 				'type'		=> 'text',
+				'required'  => true,
 				'desc_tip'	=> __('Título que o usuário vai ver na tela de pagamento.', 'tuna-payment'),
 				'default'	=> __('Cartão de Crédito, Pix, Bitcoin ou Boleto', 'tuna-payment'),
 			),
@@ -701,13 +700,7 @@ class TUNA_Payment extends WC_Payment_Gateway
 				'label'		=> __('Habilite essa opção para que quando seus pagamentos sejam atualizados pela verificação de status, a ordem também seja automaticamente atualizada.', 'tuna-payment'),
 				'type'		=> 'checkbox',
 				'default'	=> 'no',
-			),
-      'force_authentication' => array(
-				'title'		=> __('Forçar que usuários façam login', 'tuna-payment'),
-				'label'		=> __('Habilite essa opção para que os usuários façam login antes de fazer o pagamento. Isso é importante parar manter os cartões salvos para próxima compra.', 'tuna-payment'),
-				'type'		=> 'checkbox',
-				'default'	=> 'yes',
-			),
+	  ),
 			'title_credentials' => array(
 				'title' => __('Credenciais', 'tuna-payment'),
 				'type' => 'title',
@@ -719,12 +712,14 @@ class TUNA_Payment extends WC_Payment_Gateway
 			'partner_key' => array(
 				'title'		=> __('Partner Key', 'tuna-payment'),
 				'type'		=> 'text',
+				'required'  => true,
 				'desc_tip'	=> __('Insira suas credenciais. Partner key  informado em console.tuna.uy', 'tuna-payment'),
 				'default'	=> __('partner_key', 'tuna-payment'),
 			),
 			'partner_account' => array(
 				'title'		=> __('Partner Account', 'tuna-payment'),
 				'type'		=> 'text',
+				'required'  => true,
 				'desc_tip' => __('Insira suas credenciais. Partner account informado em console.tuna.uy', 'tuna-payment'),
 				'default'	=> __('partner-account', 'tuna-payment'),
 			),
@@ -769,68 +764,81 @@ class TUNA_Payment extends WC_Payment_Gateway
       'min_parcel_value' => array(
 				'title'		=> __('Valor da menor parcela', 'tuna-payment'),
 				'type'		=> 'text',
+				'required'  => true,
 				'desc_tip'	=> __('Este é menor valor de parcela que será exibido nas opções de pagamento. Caso não queira utilizar, deixe o valor como 0.0', 'tuna-payment'),
 				'default'	=> __('0.0', 'tuna-payment'),
 			),
       'installment_fee1' => array(
 				'title'		=> __('Juros para 1ª parcela', 'tuna-payment'),
-        'type'		=> 'text',
-        'desc_tip'	=> __('É possível oferecer descontos com taxas negativas de juros. Exemplo: -10.0', 'tuna-payment'),
+        		'type'		=> 'text',
+				'required'  => true,
+        		'desc_tip'	=> __('É possível oferecer descontos com taxas negativas de juros. Exemplo: -10.0', 'tuna-payment'),
 				'default'	=> __('0.0', 'tuna-payment'),
 			),
       'installment_fee2' => array(
 				'title'		=> __('Juros para 2ª parcela', 'tuna-payment'),
-        'type'		=> 'text',
+        		'type'		=> 'text',
+				'required'  => true,
 				'default'	=> __('0.0', 'tuna-payment'),
 			),
       'installment_fee3' => array(
 				'title'		=> __('Juros para 3ª parcela', 'tuna-payment'),
-        'type'		=> 'text',
+        		'type'		=> 'text',
+				'required'  => true,
 				'default'	=> __('0.0', 'tuna-payment'),
 			),
       'installment_fee4' => array(
 				'title'		=> __('Juros para 4ª parcela', 'tuna-payment'),
                 'type'		=> 'text',
+				'required'  => 'true',
 				'default'	=> __('0.0', 'tuna-payment'),
 			),
       'installment_fee5' => array(
 				'title'		=> __('Juros para 5ª parcela', 'tuna-payment'),
             'type'		=> 'text',
+			'required'  => 'true',
 				'default'	=> __('0.0', 'tuna-payment'),
 			),
       'installment_fee6' => array(
 				'title'		=> __('Juros para 6ª parcela', 'tuna-payment'),
 				'type'		=> 'text',
+				'required'  => 'true',
 				'default'	=> __('0.0', 'tuna-payment'),
 			),
       'installment_fee7' => array(
 				'title'		=> __('Juros para 7ª parcela', 'tuna-payment'),
 				'type'		=> 'text',
+				'required'  => true,
 				'default'	=> __('0.0', 'tuna-payment'),
 			),
       'installment_fee8' => array(
 				'title'		=> __('Juros para 8ª parcela', 'tuna-payment'),
 				'type'		=> 'text',
+				'required'  => true,
 				'default'	=> __('0.0', 'tuna-payment'),
 			),
       'installment_fee9' => array(
 				'title'		=> __('Juros para 9ª parcela', 'tuna-payment'),
 				'type'		=> 'text',
+				'required'  => true,
 				'default'	=> __('0.0', 'tuna-payment'),
 			),
       'installment_fee10' => array(
 				'title'		=> __('Juros para 10ª parcela', 'tuna-payment'),
 				'type'		=> 'text',
+				'required'  => true,
 				'default'	=> __('0.0', 'tuna-payment'),
 			),
       'installment_fee11' => array(
 				'title'		=> __('Juros para 11ª parcela', 'tuna-payment'),
 				'type'		=> 'text',
+				'required'  => true,
 				'default'	=> __('0.0', 'tuna-payment'),
 			),
       'installment_fee12' => array(
 				'title'		=> __('Juros para 12ª parcela', 'tuna-payment'),
 				'type'		=> 'text',
+				'required'  => true,
 				'default'	=> __('0.0', 'tuna-payment'),
 			)
 		);
@@ -852,7 +860,9 @@ class TUNA_Payment extends WC_Payment_Gateway
 
 		$url = ($this->operation_mode === "production") ? $url_production : $url_sandbox;
 
-		$fullName =  $customer_order->get_billing_first_name() . " " . $customer_order->get_billing_last_name();
+        // Adição POLEN
+        $user = get_user_by('email', $customer_order->get_billing_email());
+        $fullName = $user->first_name . ' ' . $user->last_name;
 
 		$custormerID =($current_user->ID==0?sanitize_text_field($_POST["tuna_tmpuser_id"]):$current_user->ID) . '';
 
@@ -862,7 +872,7 @@ class TUNA_Payment extends WC_Payment_Gateway
 		foreach ($cart as $cart_item) {
 			$product = wc_get_product($cart_item['product_id']);
 			$cItem = [[
-				"Amount" => floatval($product->get_sale_price()),
+				"Amount" => floatval($product->get_price()),
 				"ProductDescription" => $product->get_name(),
 				"ItemQuantity" =>  $cart_item['quantity'],
 				"CategoryName" => $product->get_type(),
@@ -879,6 +889,7 @@ class TUNA_Payment extends WC_Payment_Gateway
 			$documentType = "CNPJ";
 		}
 
+        $documentValue = preg_replace('/[\.\-\/" "]+/', '', $documentValue);
 		$installments = (int)sanitize_text_field($_POST['tuna_installments']);
 		$PaymentMethodType = "1";
 		$cardInfo = null;
@@ -891,18 +902,19 @@ class TUNA_Payment extends WC_Payment_Gateway
 			$boletoInfo = [
 				"BillingInfo" => [
 					"Document" => $documentValue,
+					"Name" => $fullName,
 					"DocumentType" => $documentType,
-					"Address" => [
-						"Street" => $customer_order->get_billing_address_1(),
-						"Number" => '0',
-						"Complement" => '',
-						"Neighborhood" => "A",
-						"City" => $customer_order->get_billing_city(),
-						"State" =>  $this->get_state_code($customer_order->get_billing_state()),
-						"Country" => $customer_order->get_billing_country() != null ? $customer_order->get_billing_country() : "BR",
-						"PostalCode" => $customer_order->get_billing_postcode(),
-						"Phone" =>  $customer_order->get_billing_phone()
-					]
+                    "Address" => [
+                        "Street" => $customer_order->get_billing_address_1(),
+                        "Number" => '000',
+                        "Complement" => 'altos',
+                        "Neighborhood" => "A",
+                        "City" => 'Curitiba',
+                        "State" => 'PR',
+                        "Country" => $customer_order->get_billing_country() != null ? $customer_order->get_billing_country() : "BR",
+                        "PostalCode" => $customer_order->get_billing_postcode() ? preg_replace('/[\.\-\/" "]+/', '', $customer_order->get_billing_postcode() ) : 80250080,
+                        "Phone" => $customer_order->get_billing_phone() ?? '999999999999',
+                    ]
 				]
 			];
 		} else {
@@ -919,18 +931,18 @@ class TUNA_Payment extends WC_Payment_Gateway
             $order_total = floatval($customer_order->get_total());
 
             $fees = array(
-                $this->installment_fee1,
-                $this->installment_fee2,
-                $this->installment_fee3,
-                $this->installment_fee4,
-                $this->installment_fee5,
-                $this->installment_fee6,
-                $this->installment_fee7,
-                $this->installment_fee8,
-                $this->installment_fee9,
-                $this->installment_fee10,
-                $this->installment_fee11,
-                $this->installment_fee12
+                $this->installment_fee1==''?0:$this->installment_fee1,
+                $this->installment_fee2==''?0:$this->installment_fee2,
+                $this->installment_fee3==''?0:$this->installment_fee3,
+                $this->installment_fee4==''?0:$this->installment_fee4,
+                $this->installment_fee5==''?0:$this->installment_fee5,
+                $this->installment_fee6==''?0:$this->installment_fee6,
+                $this->installment_fee7==''?0:$this->installment_fee7,
+                $this->installment_fee8==''?0:$this->installment_fee8,
+                $this->installment_fee9==''?0:$this->installment_fee9,
+                $this->installment_fee10==''?0:$this->installment_fee10,
+                $this->installment_fee11==''?0:$this->installment_fee11,
+                $this->installment_fee12==''?0:$this->installment_fee12
             );
             $fee = $fees[$installments - 1] / 100;
             $installment_amount = get_installment_amount($order_total, $fee, $installments);
@@ -973,6 +985,7 @@ class TUNA_Payment extends WC_Payment_Gateway
                 "SaveCard" => false,
                 "BillingInfo" => [
                     "Document" => $documentValue,
+					"Name" => $fullName,
                     "DocumentType" => $documentType,
                     "Address" => [
                         "Street" => $customer_order->get_billing_address_1(),
@@ -982,7 +995,7 @@ class TUNA_Payment extends WC_Payment_Gateway
                         "City" => $customer_order->get_billing_city(),
                         "State" => $this->get_state_code($customer_order->get_billing_state()),
                         "Country" => $customer_order->get_billing_country() != null ? $customer_order->get_billing_country() : "BR",
-                        "PostalCode" => $customer_order->get_billing_postcode(),
+                        "PostalCode" => $customer_order->get_billing_postcode() ? preg_replace('/[\.\-\/" "]+/', '', $customer_order->get_billing_postcode() ) : 80250080,
                         "Phone" =>  $customer_order->get_billing_phone()
                     ]
                 ]
@@ -1031,7 +1044,7 @@ class TUNA_Payment extends WC_Payment_Gateway
 					"City" => $customer_order->get_shipping_city(),
 					"State" => $this->get_state_code($customer_order->get_shipping_state()),
 					"Country" => $customer_order->get_shipping_country() != null ? $customer_order->get_shipping_country() : "BR",
-					"PostalCode" => $customer_order->get_shipping_postcode(),
+                    "PostalCode" => $customer_order->get_shipping_postcode() ? preg_replace('/[\.\-\/" "]+/', '', $customer_order->get_shipping_postcode() ) : 80250080,
 					"Phone" => ""
 				],
 				"SalesChannel" => "ECOMMERCE",

@@ -45,6 +45,7 @@ function get_installment_options($order_total, $fees, $installment_params)
 
     for ($parcel_count = 1; $parcel_count <= $max_parcels_number; $parcel_count++) {
         if ($fees[$parcel_count - 1] == 0) {
+            $fee = 0;
             $parcel_value = $order_total / $parcel_count;
         } else {
             $fee = $fees[$parcel_count - 1] / 100;
