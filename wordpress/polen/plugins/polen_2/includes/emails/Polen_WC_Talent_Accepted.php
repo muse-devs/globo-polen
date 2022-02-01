@@ -4,6 +4,8 @@ namespace Polen\Includes;
 
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
 use Polen\Includes\Module\Polen_Order_Module;
+use Polen\Includes\Sendgrid\Polen_Sendgrid_Emails;
+use Polen\Includes\Sendgrid\Polen_Sendgrid_Redux;
 
 if( ! defined( 'ABSPATH') ) {
     die( 'Silence is golden.' );
@@ -36,11 +38,13 @@ class Polen_WC_Talent_Accepted extends \WC_Email {
 		$this->template_base  = TEMPLATEPATH . '/woocommerce/';
     
 		add_action( 'woocommerce_order_status_changed', array( $this, 'trigger' ), 10, 1 );
+		// add_action( 'woocommerce_order_status_' . Polen_Order::ORDER_STATUS_TALENT_ACCEPTED . '_notification', array( $this, 'trigger' ), 10, 1 );
 
 		parent::__construct();
     }
 
 	public function trigger( $order_id ) {
+		// Debug::def( self::class, __FUNCTION__, __LINE__, __FILE__ );
 		$this->object = wc_get_order( $order_id );
 		if( $this->object->get_status() === Polen_WooCommerce::ORDER_STATUS_TALENT_ACCEPTED ) {
 			if ( version_compare( '3.0.0', WC()->version, '>' ) ) {
@@ -74,14 +78,48 @@ class Polen_WC_Talent_Accepted extends \WC_Email {
 			// } else {
 			// 	$this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
 			// }
+
 			$order_is_campaing = Polen_Campaign::get_is_order_campaing( $this->object );
 			if( $order_is_campaing) {
 				$this->send( $this->get_recipient(), $this->get_subject_campaing(), $this->get_content_campaign_html(), $this->get_headers(), $this->get_attachments() );
 			} else {
-				$this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
+				// $this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
+				$customer_name  = $cart_item->get_offered_by();
+				$customer_email = $this->get_recipient();
+				$talent_name    = $this->product->get_title();
+				$order_link     = polen_get_url_my_account() . "/view-order/{$order_id}/";
+
+				$this->send_email(
+					$customer_name,
+					$customer_email,
+					$talent_name,
+					$order_id,
+					$order_link
+				);
 			}
 		}
 	}
+
+
+	public function send_email( $name_customer, $email_customer, $talent_name, $order_id, $order_link )
+    {
+        global $Polen_Plugin_Settings;
+        $apikeySendgrid = $Polen_Plugin_Settings[ Polen_Sendgrid_Redux::APIKEY ];
+        $send_grid = new Polen_Sendgrid_Emails( $apikeySendgrid );
+        $send_grid->set_from(
+            $Polen_Plugin_Settings['polen_smtp_from_email'],
+            $Polen_Plugin_Settings['polen_smtp_from_name']
+        );
+        $send_grid->set_to( $email_customer, $name_customer );
+        $send_grid->set_template_id( $Polen_Plugin_Settings[ Polen_Sendgrid_Redux::THEME_ID_POLEN_TALENT_ACCEPTED ] );
+        $send_grid->set_template_data( 'order_id', $order_id );
+        $send_grid->set_template_data( 'talent_name', $talent_name );
+        $send_grid->set_template_data( 'order_link', $order_link );
+
+        return $send_grid->send_email();
+    }
+
+
 
 	public function get_subject_campaing()
 	{

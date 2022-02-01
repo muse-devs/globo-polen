@@ -66,11 +66,13 @@ class Polen_WC_Payment_Approved extends \WC_Email {
 		$this->subject_ep = 'Lacta - Pedido de vídeo recebido';
     
 		add_action( 'woocommerce_order_status_changed', array( $this, 'trigger' ) );
-
+		// add_action( 'woocommerce_order_status_' . Polen_Order::SLUG_ORDER_PAYMENT_APPROVED . '_notification', array( $this, 'trigger' ) );
+		
 		parent::__construct();
     }
 
     public function trigger( $order_id ) {
+		
 		$this->object = wc_get_order( $order_id );
 		if( $this->object->has_status( 'payment-approved') ) {
 			if ( version_compare( '3.0.0', WC()->version, '>' ) ) {
