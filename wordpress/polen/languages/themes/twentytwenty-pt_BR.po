@@ -29,7 +29,7 @@ msgstr "Pesquisar"
 msgid "Nothing Found"
 msgstr "Nada encontrado"
 
-#: classes/class-twentytwenty-customize.php:250
+#: classes/class-twentytwenty-customize.php:251
 msgid "Show author bio"
 msgstr "Mostrar biografia do autor"
 
@@ -110,35 +110,35 @@ msgstr "O principal destino da arte moderna no norte da Suécia. Funciona todos 
 msgid "The New UMoMA Opens its Doors"
 msgstr "O novo UMoMA abre suas portas"
 
-#: classes/class-twentytwenty-customize.php:399
+#: classes/class-twentytwenty-customize.php:400
 msgid "Overlay Opacity"
 msgstr "Transparência da camada de sobreposição"
 
-#: classes/class-twentytwenty-customize.php:379
+#: classes/class-twentytwenty-customize.php:380
 msgid "The color used for the text in the overlay."
 msgstr "A cor usada no texto da camada de sobreposição."
 
-#: classes/class-twentytwenty-customize.php:378
+#: classes/class-twentytwenty-customize.php:379
 msgid "Overlay Text Color"
 msgstr "Cor do texto da camada de sobreposição"
 
-#: classes/class-twentytwenty-customize.php:357
+#: classes/class-twentytwenty-customize.php:358
 msgid "The color used for the overlay. Defaults to the accent color."
 msgstr "A cor usada na camada de sobreposição. Padrão para a cor de destaque."
 
-#: classes/class-twentytwenty-customize.php:356
+#: classes/class-twentytwenty-customize.php:357
 msgid "Overlay Background Color"
 msgstr "Cor de fundo da camada de sobreposição"
 
-#: classes/class-twentytwenty-customize.php:287
+#: classes/class-twentytwenty-customize.php:288
 msgid "Settings for the \"Cover Template\" page template. Add a featured image to use as background."
 msgstr "Configurações para o modelo de página \"Cobertura\". Adicione uma imagem destacada para usá-la como fundo."
 
-#: classes/class-twentytwenty-customize.php:187
+#: classes/class-twentytwenty-customize.php:188
 msgid "Apply a custom color for links, buttons, featured images."
 msgstr "Aplique uma cor personalizada nos links, botões e imagens destacadas."
 
-#: classes/class-twentytwenty-customize.php:127
+#: classes/class-twentytwenty-customize.php:128
 msgid "Primary Color"
 msgstr "Cor primária"
 
@@ -169,12 +169,12 @@ msgstr[0] "Foi encontrado %s resultado para a sua pesquisa."
 msgstr[1] "Foram encontrados %s resultados para a sua pesquisa."
 
 #. translators: %s: HTML character for up arrow.
-#: footer.php:49
+#: footer.php:55
 msgid "Up %s"
 msgstr "Subir %s"
 
 #. translators: %s: HTML character for up arrow.
-#: footer.php:43
+#: footer.php:49
 msgid "To the top %s"
 msgstr "Ir para o topo %s"
 
@@ -268,7 +268,6 @@ msgstr "<span class=\"nav-short\">Posts</span> mais recentes"
 msgid "Full Width Template"
 msgstr "Modelo com largura total"
 
-#. translators: %s: Author name.
 #. translators: %s: Author name.
 #: inc/template-tags.php:375 template-parts/entry-author-bio.php:20
 msgid "By %s"
@@ -429,7 +428,7 @@ msgstr "Menu expandido para desktop"
 msgid "Desktop Horizontal Menu"
 msgstr "Menu horizontal para desktop"
 
-#: footer.php:33
+#: footer.php:39
 msgid "Powered by WordPress"
 msgstr "Distribuído por WordPress"
 
@@ -441,12 +440,12 @@ msgstr "Comentários mais antigos"
 msgid "Newer Comments"
 msgstr "Comentários mais recentes"
 
-#: classes/class-twentytwenty-walker-page.php:110 inc/template-tags.php:580
+#: classes/class-twentytwenty-walker-page.php:115 inc/template-tags.php:580
 msgid "Show sub menu"
 msgstr "Mostrar submenu"
 
 #. translators: %d: ID of a post.
-#: classes/class-twentytwenty-walker-page.php:73
+#: classes/class-twentytwenty-walker-page.php:78
 msgid "#%d (no title)"
 msgstr "#%d (sem título)"
 
@@ -458,52 +457,52 @@ msgstr "Por autor do post"
 msgid "says:"
 msgstr "diz:"
 
-#: classes/class-twentytwenty-customize.php:400
+#: classes/class-twentytwenty-customize.php:401
 msgid "Make sure that the contrast is high enough so that the text is readable."
 msgstr "Tenha certeza de que há contraste o suficiente para que o texto seja legível."
 
-#: classes/class-twentytwenty-customize.php:310
+#: classes/class-twentytwenty-customize.php:311
 msgid "Creates a parallax effect when the visitor scrolls."
 msgstr "Cria um efeito parallax durante a rolagem de tela."
 
-#: classes/class-twentytwenty-customize.php:309
+#: classes/class-twentytwenty-customize.php:310
 msgid "Fixed Background Image"
 msgstr "Imagem de fundo fixa"
 
 #. Template Name of the theme
-#: classes/class-twentytwenty-customize.php:285
+#: classes/class-twentytwenty-customize.php:286
 msgid "Cover Template"
 msgstr "Modelo de cobertura"
 
-#: classes/class-twentytwenty-customize.php:274
+#: classes/class-twentytwenty-customize.php:275
 msgid "Summary"
 msgstr "Resumo"
 
-#: classes/class-twentytwenty-customize.php:273
+#: classes/class-twentytwenty-customize.php:274
 msgid "Full text"
 msgstr "Texto completo"
 
-#: classes/class-twentytwenty-customize.php:271
+#: classes/class-twentytwenty-customize.php:272
 msgid "On archive pages, posts show:"
 msgstr "Em páginas de arquivo, mostrar dos posts:"
 
-#: classes/class-twentytwenty-customize.php:229
+#: classes/class-twentytwenty-customize.php:230
 msgid "Show search in header"
 msgstr "Mostrar pesquisa no cabeçalho"
 
-#: classes/class-twentytwenty-customize.php:206
+#: classes/class-twentytwenty-customize.php:207
 msgid "Theme Options"
 msgstr "Opções do tema"
 
-#: classes/class-twentytwenty-customize.php:105
+#: classes/class-twentytwenty-customize.php:106
 msgid "Header &amp; Footer Background Color"
 msgstr "Cor de fundo do cabeçalho e rodapé"
 
-#: classes/class-twentytwenty-customize.php:86
+#: classes/class-twentytwenty-customize.php:87
 msgid "Scales the logo to half its uploaded size, making it sharp on high-res screens."
 msgstr "Aumenta o tamanho do logo enviado pela metade, tornando-o mais nítido em telas com alta resolução."
 
-#: classes/class-twentytwenty-customize.php:85
+#: classes/class-twentytwenty-customize.php:86
 msgid "Retina logo"
 msgstr "Logo para telas retina"
 
@@ -524,6 +523,6 @@ msgid "https://wordpress.org/themes/twentytwenty/"
 msgstr "https://br.wordpress.org/themes/twentytwenty/"
 
 #. Author URI of the theme
-#: footer.php:32
+#: footer.php:38
 msgid "https://wordpress.org/"
 msgstr "https://br.wordpress.org/"
