@@ -98,7 +98,7 @@ class Polen_WooCommerce
             add_action( 'woocommerce_update_product', array( $this, 'on_product_save' ) );
 
             add_action( 'save_post_post_polen_media', array( $this, 'save_metabox_post' ) );
-            add_action( 'save_post', array( $this, 'change_status' ) );
+            // add_action( 'save_post', array( $this, 'change_status' ) );
 
             //Todas as compras gratis vão para o status payment-approved
             add_action( 'woocommerce_checkout_no_payment_needed_redirect', [ $this, 'set_free_order_payment_approved' ], 10, 3 );
@@ -125,23 +125,23 @@ class Polen_WooCommerce
      * Salvar status de envio do email na atualização da order
      * para ser verificado no disparo do email
      */
-    public function change_status($post_id)
-    {
-        if (!current_user_can( 'edit_page', $post_id )) {
-            return $post_id;
-        }
+    // public function change_status($post_id)
+    // {
+    //     if (!current_user_can( 'edit_page', $post_id )) {
+    //         return $post_id;
+    //     }
 
-        if (defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE) {
-            return $post_id;
-        }
+    //     if (defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE) {
+    //         return $post_id;
+    //     }
 
-        $meta_value = 0;
-        if (isset($_POST['send_email']) && $_POST['send_email'] == 'on') {
-            $meta_value = 1;
-        }
+    //     $meta_value = 0;
+    //     if (isset($_POST['send_email']) && $_POST['send_email'] == 'on') {
+    //         $meta_value = 1;
+    //     }
 
-        update_post_meta($post_id, 'send_email', $meta_value);
-    }
+    //     update_post_meta($post_id, 'send_email', $meta_value);
+    // }
 
 
     /**
