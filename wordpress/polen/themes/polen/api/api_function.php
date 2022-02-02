@@ -30,3 +30,21 @@ function custom_fields_in_order_admin($order)
     echo "<p><strong>Origem:</strong><br> {$origin} </p><br>";
 }
 add_action('woocommerce_admin_order_data_after_billing_address', 'custom_fields_in_order_admin', 10, 1);
+
+/**
+ * Exibir origem do pedido para api
+ */
+function get_origin_order($order)
+{
+    $origin = 'polen_site';
+    if (get_post_meta($order->id, 'hotsite', true)) {
+        $origin = get_post_meta($order->id, 'hotsite', true);
+    }
+
+    $order_is_ep = event_promotional_order_is_event_promotional($order);
+    if ($order_is_ep) {
+        $origin = event_promotional_order_get_slug_event($order);
+    }
+
+    return $origin;
+}

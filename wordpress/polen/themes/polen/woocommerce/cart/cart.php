@@ -193,7 +193,7 @@ $Talent_Fields = new Polen_Update_Fields();
                 <li>Músicos não tem autorização para cantar trechos de músicas com direitos autorais.</li>
               </ol>
             </div>
-            "); ?>
+            ", 'top'); ?>
           </h3>
           <div class="box-textarea">
             <?php $inputs->material_textarea("instructions_to_video", "instructions_to_video", "Instruções para o vídeo", true, array(
