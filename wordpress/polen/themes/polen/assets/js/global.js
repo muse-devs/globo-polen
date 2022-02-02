@@ -460,8 +460,11 @@ jQuery(document).ready(function () {
   getSessionMessage();
   showLGPDBox();
   polSelectAdvanced();
-  jQuery('[data-toggle="tooltip"]').tooltip();
-  jQuery(document).on('webkitfullscreenchange mozfullscreenchange fullscreenchange', function(e){
+  jQuery('[data-toggle="tooltip"]').tooltip({
+    animated: 'fade',
+    trigger: 'click'
+  });
+  jQuery(document).on('webkitfullscreenchange mozfullscreenchange fullscreenchange', function (e) {
     onFullScreen(e);
   });
 });
