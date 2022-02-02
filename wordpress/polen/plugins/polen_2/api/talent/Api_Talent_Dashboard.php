@@ -67,13 +67,11 @@ class Api_Talent_Dashboard extends WP_REST_Controller
      */
     public function dashboard( WP_REST_Request $request ): \WP_REST_Response
     {
-        $products_id = Api_Talent_Utils::get_globals_product_id();
-
-        $product_id = implode($products_id);
-
-        $product = wc_get_product($product_id);
+        $products_id  = Api_Talent_Utils::get_globals_product_id();
+        $product_id   = implode($products_id);
+        $product      = wc_get_product($product_id);
         $product_post = get_post($product->get_id());
-        $talent = get_user_by('id', $product_post->post_author);
+        $talent       = get_user_by('id', $product_post->post_author);
 
         $reviews = Polen_Order_Review::get_order_reviews_by_talent_id($talent->ID);
 

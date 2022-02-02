@@ -13,28 +13,19 @@ class Api_Contact
     {
         $ip = $_SERVER[ 'REMOTE_ADDR' ];
         $client = $_SERVER[ 'HTTP_USER_AGENT' ];
-        $nonce = crypt( $ip . $client, 'st' );
-        return api_response( $nonce, 200 );
+        return api_response( Api_Util_Security::create_nonce($ip . $client), 200 );
     }
 
-    public function verify_nonce( $nonce )
-    {
-        $ip = $_SERVER[ 'REMOTE_ADDR' ];
-        $client = $_SERVER[ 'HTTP_USER_AGENT' ];
-        $current_nonce = crypt( $ip . $client, 'st' );
-        if( $current_nonce === $nonce ) {
-            return true;
-        }
-        return false;
-    }
 
 
 
     public function handler_email_help( WP_REST_Request $request )
     {
         try {
+            $ip = $_SERVER[ 'REMOTE_ADDR' ];
+            $client = $_SERVER[ 'HTTP_USER_AGENT' ];
             $nonce = $request->get_param( 'security' );
-            if( !$this->verify_nonce( $nonce ) ) {
+            if( !Api_Util_Security::verify_nonce($ip . $client, $nonce) ) {
                 throw new Exception( 'Erro na segurança', 403 );
             }
             $name    = filter_var( $request->get_param( 'name' ), FILTER_SANITIZE_STRING );

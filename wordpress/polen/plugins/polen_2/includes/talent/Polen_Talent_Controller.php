@@ -409,18 +409,15 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
      * O Talento aceita ou rejeita um pedido de video
      *
      */
-    public function talent_accept_or_reject_api( $security, $type, $order_id, $reason_reject = '', $description_reject = '' )
+    public function talent_accept_or_reject_api( $type, $order_id, $reason_reject = '', $description_reject = '' )
     {
         $response = array();
-        if( !isset( $security ) || !wp_verify_nonce( $security, 'polen-order-accept-nonce' ) ) {
-            throw new Exception( 'Problema na seguraça', 403 );
-        }
    
-        if( !isset( $order_id ) ) {
+        if( empty( $order_id ) ) {
             throw new Exception( 'Order nao pode ser valor nulo', 401  );
         }
 
-        if( !isset( $type ) || ( trim( $type ) != 'accept' && trim( $type ) != 'reject' ) ){
+        if( empty( $type ) || ( trim( $type ) != 'accept' && trim( $type ) != 'reject' ) ){
             throw new Exception( 'Opcoes tem que ser Aceitar ou Negar', 401  );
         }
 
@@ -476,6 +473,9 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
                             $response = [ "code" => "1", "" ]; 
                         }
                         if( $type == 'reject' ) {
+                            if(empty($reason_reject)) {
+                                throw new Exception('Razão para negar o pedido nao pode ser nulo', 403);
+                            }
                             $item_cart = Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
                             $item_cart->add_meta_data( 'reason_reject', $reason_reject, true );
                             $item_cart->add_meta_data( 'reason_reject_description', $description_reject, true );
