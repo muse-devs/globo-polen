@@ -2,6 +2,7 @@
 namespace Polen\Includes\Emails;
 
 use Polen\Api\Api_Checkout;
+use Polen\Includes\Debug;
 use Polen\Includes\Polen_Campaign;
 use Polen\Includes\Polen_Checkout_Create_User;
 use WC_Email_Customer_New_Account;
@@ -66,6 +67,7 @@ class Polen_WC_Customer_New_Account extends WC_Email_Customer_New_Account
      * @param bool   $password_generated Whether the password was generated automatically or not.
      */
     public function trigger( $user_id, $user_pass = '', $password_generated = false ) {
+        Debug::def($user_id, $user_pass , $password_generated);
         $this->setup_locale();
         if ( $user_id ){ 
             $this->object = new WP_User( $user_id );
@@ -74,7 +76,9 @@ class Polen_WC_Customer_New_Account extends WC_Email_Customer_New_Account
             $this->user_email         = stripslashes( $this->object->user_email );
             $this->recipient          = $this->user_email;
             $this->user_pass          = $user_pass;
-            $this->password_generated = $password_generated;
+            if( $password_generated ) {
+                $this->password_generated = $password_generated;
+            }
         }
         
         $user_is_campaign = Polen_Campaign::get_is_user_campaing( $this->object->ID );
@@ -105,7 +109,7 @@ class Polen_WC_Customer_New_Account extends WC_Email_Customer_New_Account
                 //              $this->get_attachments() );
                              
             // } else if(!empty($user_pass)) {
-            if( !empty( $user_pass ) ) {
+            if( $password_generated ) {
                 //Lacta
                 $this->password_generated = $user_pass;
                 $this->send( $this->get_recipient(),
