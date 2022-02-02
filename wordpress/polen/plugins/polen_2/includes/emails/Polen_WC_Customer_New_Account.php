@@ -92,19 +92,20 @@ class Polen_WC_Customer_New_Account extends WC_Email_Customer_New_Account
 
 
         } else if ( $this->is_enabled() && $this->get_recipient() ) {
-            $checkout_create_user = new Polen_Checkout_Create_User();
-            if( $checkout_create_user->send_password_in_email_new_user() ) {
+            // $checkout_create_user = new Polen_Checkout_Create_User();
+            // if( $checkout_create_user->send_password_in_email_new_user() ) {
 
-                $user_new_password = wp_generate_password( 5, false ) . random_int( 0, 99 );
-                $this->password_generated = $user_new_password;
-                wp_set_password( $user_new_password, $user_id );
-                $this->send( $this->get_recipient(),
-                             $this->get_subject(),
-                             $this->get_content_html(),
-                             $this->get_headers(),
-                             $this->get_attachments() );
+                // $user_new_password = wp_generate_password( 5, false ) . random_int( 0, 99 );
+                // $this->password_generated = $user_new_password;
+                // wp_set_password( $user_new_password, $user_id );
+                // $this->send( $this->get_recipient(),
+                //              $this->get_subject(),
+                //              $this->get_content_html(),
+                //              $this->get_headers(),
+                //              $this->get_attachments() );
                              
-            } else if($password_generated) {
+            // } else if(!empty($user_pass)) {
+            if( !empty( $user_pass ) ) {
                 //Lacta
                 $this->password_generated = $user_pass;
                 $this->send( $this->get_recipient(),
@@ -127,20 +128,20 @@ class Polen_WC_Customer_New_Account extends WC_Email_Customer_New_Account
      *
      * @return string
      */
-    public function get_content_html_checkout() {
-        return wc_get_template_html(
-            $this->template_html_checkout,
-            array(
-                'email_heading'      => $this->get_default_heading_checkout(),
-                'additional_content' => $this->get_additional_content(),
-                'user_login'         => $this->user_login,
-                'user_pass'          => $this->user_pass,
-                'blogname'           => $this->get_blogname(),
-                'password_generated' => $this->password_generated,
-                'sent_to_admin'      => false,
-                'plain_text'         => false,
-                'email'              => $this,
-            )
-        );
-    }
+    // public function get_content_html_checkout() {
+    //     return wc_get_template_html(
+    //         $this->template_html_checkout,
+    //         array(
+    //             'email_heading'      => $this->get_default_heading_checkout(),
+    //             'additional_content' => $this->get_additional_content(),
+    //             'user_login'         => $this->user_login,
+    //             'user_pass'          => $this->user_pass,
+    //             'blogname'           => $this->get_blogname(),
+    //             'password_generated' => $this->password_generated,
+    //             'sent_to_admin'      => false,
+    //             'plain_text'         => false,
+    //             'email'              => $this,
+    //         )
+    //     );
+    // }
 }
