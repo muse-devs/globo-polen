@@ -67,7 +67,6 @@ class Polen_WC_Customer_New_Account extends WC_Email_Customer_New_Account
      * @param bool   $password_generated Whether the password was generated automatically or not.
      */
     public function trigger( $user_id, $user_pass = '', $password_generated = false ) {
-        Debug::def($user_id, $user_pass , $password_generated);
         $this->setup_locale();
         if ( $user_id ){ 
             $this->object = new WP_User( $user_id );
@@ -110,7 +109,7 @@ class Polen_WC_Customer_New_Account extends WC_Email_Customer_New_Account
                              
             // } else if(!empty($user_pass)) {
             if( $password_generated ) {
-                //Lacta
+                //CHECKOUT
                 $this->password_generated = $user_pass;
                 $this->send( $this->get_recipient(),
                     $this->get_subject(),
