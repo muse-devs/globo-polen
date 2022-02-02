@@ -83,8 +83,8 @@ class Polen_WC_Customer_New_Account extends WC_Email_Customer_New_Account
         $user_is_campaign = Polen_Campaign::get_is_user_campaing( $this->object->ID );
         if( $user_is_campaign ) {
 
-            $slug_campaing = Polen_Campaign::get_user_campaing_slug( $this->object->ID );
-            $this->template_html           = sprintf( 'emails/campaign/%s/customer-new-account.php', $slug_campaing );
+            $slug_campaing       = Polen_Campaign::get_user_campaing_slug( $this->object->ID );
+            $this->template_html = sprintf( 'emails/campaign/%s/customer-new-account.php', $slug_campaing );
 
             $this->send( $this->get_recipient(),
                 $this->get_default_subject_checkout(),
