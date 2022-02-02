@@ -31,7 +31,8 @@ class Polen_WC_Talent_Rejected extends \WC_Email {
 
 		$this->campaign_template_html = 'emails/campaign/%s/Polen_WC_Talent_Rejected.php';
     
-		add_action( 'woocommerce_order_status_changed', array( $this, 'trigger' ) );
+		// add_action( 'woocommerce_order_status_changed', array( $this, 'trigger' ) );
+		add_action( 'woocommerce_order_status_'.Polen_Order::ORDER_STATUS_PAYMENT_APPROVED.'_to_'.Polen_Order::ORDER_STATUS_TALENT_REJECTED.'_notification', [$this, 'trigger']);
 		
 		parent::__construct();
     }
@@ -48,6 +49,10 @@ class Polen_WC_Talent_Rejected extends \WC_Email {
 			$this->recipient = $order_email;
 
 			if ( ! $this->is_enabled() || ! $this->get_recipient() ) {
+				return;
+			}
+
+			if( !Polen_Emails::is_to_send_admin_edit_order() ){
 				return;
 			}
 			

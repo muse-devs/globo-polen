@@ -8,4 +8,5 @@ abstract class Polen_Sendgrid_Redux
     
     const THEME_ID_POLEN_TALENT_ACCEPTED = 'sendgrid_theme_polen_accepted';
     const THEME_ID_POLEN_TALENT_REJECT = 'sendgrid_theme_polen_reject';
+    const THEME_ID_POLEN_PAYMENT_APPROVED = 'sendgrid_theme_polen_payment_approved';
 }

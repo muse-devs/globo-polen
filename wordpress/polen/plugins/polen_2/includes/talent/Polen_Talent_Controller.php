@@ -247,8 +247,6 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
             $this->average_video_response( get_current_user_id() );
 
             wp_send_json_success( $response->response, 200 );
-        } catch ( ExceptionInterface $e ) {
-            wp_send_json_error( $e->getMessage(), $e->getCode() );
         } catch ( \Exception $e ) {
             wp_send_json_error( $e->getMessage(), $e->getCode() );
         }

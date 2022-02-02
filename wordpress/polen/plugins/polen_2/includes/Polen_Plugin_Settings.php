@@ -650,6 +650,13 @@ class Polen_Plugin_Settings
                     'desc'     => 'ThemeID Polen Talento Rejeitou',
                     'default'  => '',
                 ),
+                array(
+                    'id'       => Polen_Sendgrid_Redux::THEME_ID_POLEN_PAYMENT_APPROVED,
+                    'type'     => 'text',
+                    'title'    => esc_html__('ThemeID Polen Pagamento Aprovado', 'polen'),
+                    'desc'     => 'ThemeID Polen Pagamento Aprovado',
+                    'default'  => '',
+                ),
                 // array(
                 //     'id'       => 'polen_api_rest_account',
                 //     'type'     => 'text',
