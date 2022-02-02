@@ -53,22 +53,22 @@ $inputs = new Material_Inputs();
   ?>
 
   <!-- Listagem de Talentos - Música -->
-  <?php polen_talents_by_category(polen_get_talents_by_product_cat("musica", 10), "Música", $emojis['musica']); ?>
+  <?php polen_talents_by_category(polen_get_talents_by_product_cat("musica", 10), "Música", $emojis['musica'], '/categoria/musica'); ?>
 
   <!-- Listagem de Talentos - Atrizes e Atores -->
-  <?php polen_talents_by_category(polen_get_talents_by_product_cat("atrizes-e-atores", 10), "Atrizes e Atores", $emojis['atrizes-e-atores']); ?>
+  <?php polen_talents_by_category(polen_get_talents_by_product_cat("atrizes-e-atores", 10), "Atrizes e Atores", $emojis['atrizes-e-atores'], '/categoria/atrizes-e-atores'); ?>
 
   <!-- Listagem de Talentos - Apresentadores -->
-  <?php polen_talents_by_category(polen_get_talents_by_product_cat("apresentadores", 10), "Apresentadores", $emojis['apresentadores']); ?>
+  <?php polen_talents_by_category(polen_get_talents_by_product_cat("apresentadores", 10), "Apresentadores", $emojis['apresentadores'], '/categoria/apresentadores'); ?>
 
   <!-- Listagem de Talentos - Esporte -->
-  <?php polen_talents_by_category(polen_get_talents_by_product_cat("esporte", 10), "Esporte", $emojis['esporte']); ?>
+  <?php polen_talents_by_category(polen_get_talents_by_product_cat("esporte", 10), "Esporte", $emojis['esporte'], '/categoria/esporte'); ?>
 
   <!-- Listagem de Talentos - Influencers -->
-  <?php polen_talents_by_category(polen_get_talents_by_product_cat("influencers", 10), "Influencers", $emojis['influencers']); ?>
+  <?php polen_talents_by_category(polen_get_talents_by_product_cat("influencers", 10), "Influencers", $emojis['influencers'], '/categoria/influencers'); ?>
 
   <!-- Listagem de Talentos - Comediantes -->
-  <?php polen_talents_by_category(polen_get_talents_by_product_cat("comediantes", 10), "Comediantes", $emojis['comediantes']); ?>
+  <?php polen_talents_by_category(polen_get_talents_by_product_cat("comediantes", 10), "Comediantes", $emojis['comediantes'], '/categoria/comediantes'); ?>
 
   <!-- Banners -->
 	<div class="row d-flex justify-content-center my-4">
