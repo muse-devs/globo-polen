@@ -1,6 +1,8 @@
 <?php
 
 namespace Polen\Includes;
+
+use Polen\Includes\Sendgrid\Polen_Sendgrid_Redux;
 use WP_Term_Query;
 
 class Polen_Plugin_Settings
@@ -632,6 +634,27 @@ class Polen_Plugin_Settings
                     'type'     => 'text',
                     'title'    => esc_html__('ThemeID Galo Help', 'polen'),
                     'desc'     => 'ThemeID Galo Help',
+                    'default'  => '',
+                ),
+                array(
+                    'id'       => Polen_Sendgrid_Redux::THEME_ID_POLEN_TALENT_ACCEPTED,
+                    'type'     => 'text',
+                    'title'    => esc_html__('ThemeID Polen Talento Aceitou', 'polen'),
+                    'desc'     => 'ThemeID Polen Talento Aceitou',
+                    'default'  => '',
+                ),
+                array(
+                    'id'       => Polen_Sendgrid_Redux::THEME_ID_POLEN_TALENT_REJECT,
+                    'type'     => 'text',
+                    'title'    => esc_html__('ThemeID Polen Talento Rejeitou', 'polen'),
+                    'desc'     => 'ThemeID Polen Talento Rejeitou',
+                    'default'  => '',
+                ),
+                array(
+                    'id'       => Polen_Sendgrid_Redux::THEME_ID_POLEN_PAYMENT_APPROVED,
+                    'type'     => 'text',
+                    'title'    => esc_html__('ThemeID Polen Pagamento Aprovado', 'polen'),
+                    'desc'     => 'ThemeID Polen Pagamento Aprovado',
                     'default'  => '',
                 ),
                 // array(

@@ -4,6 +4,7 @@ namespace Polen\Includes\Module;
 use Polen\Admin\Polen_Admin_Event_Promotional_Event_Fields;
 use Polen\Api\Api_Checkout;
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
+use Polen\Includes\Polen_Order;
 use WC_Order_Query;
 
 class Polen_Order_Module
@@ -66,6 +67,12 @@ class Polen_Order_Module
     public function get_offered_by()
     {
         return $this->cart_item->get_offered_by();
+    }
+
+
+    public function get_deadline()
+    {
+        return $this->object->get_meta( Polen_Order::META_KEY_DEADLINE, true );
     }
 
 

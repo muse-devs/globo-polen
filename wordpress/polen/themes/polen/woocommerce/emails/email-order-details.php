@@ -24,18 +24,18 @@ $order_expires = $Polen_Plugin_Settings['order_expires'];
 
 defined('ABSPATH') || exit;
 
-if( social_order_is_social( $order ) ) {
-	wc_get_template(
-		'emails/email-order-details-criesp.php',
-		array(
-			'order'         => $order,
-			'sent_to_admin' => $sent_to_admin,
-			'plain_text'    => $plain_text,
-			'email'         => $email,
-		)
-	);
-	return;
-}
+// if( social_order_is_social( $order ) ) {
+// 	wc_get_template(
+// 		'emails/email-order-details-criesp.php',
+// 		array(
+// 			'order'         => $order,
+// 			'sent_to_admin' => $sent_to_admin,
+// 			'plain_text'    => $plain_text,
+// 			'email'         => $email,
+// 		)
+// 	);
+// 	return;
+// }
 
 $item  = Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
 $total = polen_get_total_order_email_detail_to_talent( $order, $email );
