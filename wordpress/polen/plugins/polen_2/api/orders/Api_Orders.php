@@ -2,6 +2,7 @@
 namespace Polen\Api\Orders;
 
 use Polen\Api\Talent\Api_Talent_Check_Permission;
+use Polen\Includes\Polen_Order;
 use Polen\Includes\Polen_Talent;
 use WP_REST_Controller;
 use WP_REST_Request;
@@ -53,6 +54,7 @@ class Api_Orders extends WP_REST_Controller
         $talent_orders = $polen_talent->get_talent_orders($talent_id, false);
 
         foreach ($talent_orders as $talent_order) {
+            $order = wc_get_order($talent_order['order_id']);
             $customer_orders[] = [
                 'order_id' => $talent_order['order_id'],
                 'from' => $talent_order['name'],
@@ -60,6 +62,7 @@ class Api_Orders extends WP_REST_Controller
                 'category' => $talent_order['category'],
                 'total' => $talent_order['total_value'],
                 'total_raw' => $talent_order['total_raw'],
+                'deadline' => date('Y-m-d', Polen_Order::get_deadline_timestamp_by_order($order)),
                 'origin' => $talent_order['origin'],
                 'instructions' => $talent_order['instructions'],
             ];
