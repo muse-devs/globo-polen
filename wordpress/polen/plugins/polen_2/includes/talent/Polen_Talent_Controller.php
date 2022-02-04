@@ -9,9 +9,10 @@ use Vimeo\Vimeo;
 use Vimeo\Exceptions\{VimeoRequestException, ExceptionInterface};
 
 use Polen\Includes\Polen_Video_Info;
-use Polen\Includes\Vimeo\{Polen_Vimeo_Response, Polen_Vimeo_Vimeo_Options};
+use Polen\Includes\Vimeo\{Polen_Vimeo_Factory, Polen_Vimeo_Response, Polen_Vimeo_Vimeo_Options};
 use Polen\Includes\Cart\{Polen_Cart_Item_Factory, Polen_Cart_Item};
 use WC_Emails;
+use WP_REST_Request;
 
 class Polen_Talent_Controller extends Polen_Talent_Controller_Base
 {
@@ -276,7 +277,7 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
             $video_info->vimeo_process_complete = 0;
             $video_info->vimeo_link = $response->get_vimeo_link();
             $video_info->first_order = $cart_item->get_first_order();
-            $video_info->vimeo_url_download = $response->get_download_source_url();
+            $video_info->vimeo_url_download = 'get_in_time';//$response->get_download_source_url();
             $video_info->vimeo_iframe = $response->get_iframe();
             $video_info->video_logo_status = $video_logo_status;
             return $video_info;
@@ -301,11 +302,8 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
         $checked = $this->check_product_and_order( $talent_id, $order_id );
 
         if( $checked ){
-            // $first_product = reset($talent_products);
             $order = wc_get_order( $order_id );
             if( $order ){
-                // $order->update_status( Polen_Order::SLUG_ORDER_COMPLETE, 'talento enviou o video', false );
-                $video_info = Polen_Video_Info::get_by_order_id( $order->get_id() );
                 $response = array( 'success' => true, 'message' => 'Pedido completo!' );                        
             }
         }else{

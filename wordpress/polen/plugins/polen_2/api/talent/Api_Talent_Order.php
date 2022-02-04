@@ -4,6 +4,7 @@ namespace Polen\Api\Talent;
 use Exception;
 use Polen\Api\Api_Util_Security;
 use Polen\Includes\Talent\Polen_Talent_Controller;
+use Polen\Includes\Vimeo\Polen_Vimeo;
 use WP_REST_Controller;
 use WP_REST_Request;
 use WP_REST_Server;
@@ -70,6 +71,17 @@ class Api_Talent_Order extends WP_REST_Controller
                 'args' => []
             ]
         ] );
+
+
+        //Rota para criação de um slot no Vimeo
+        register_rest_route( $this->namespace, $this->rest_base . '/orders/slot-vimeo', [
+            [
+                'methods' => WP_REST_Server::CREATABLE,
+                'callback' => [ $this, 'create_vimeo_slot' ],
+                'permission_callback' => [ Api_Talent_Check_Permission::class, 'check_permission' ],
+                'args' => []
+            ]
+        ] );
     }
 
 
@@ -114,5 +126,37 @@ class Api_Talent_Order extends WP_REST_Controller
         $client = $_SERVER[ 'HTTP_USER_AGENT' ];
         $user_id = get_current_user_id();
         return api_response( Api_Util_Security::create_nonce($ip . $client . $user_id), 200 );
+    }
+
+
+    /**
+     * Handler de criacao de um slot de video no vimeo
+     */
+    public function create_vimeo_slot(WP_REST_Request $request)
+    {
+        $security       = $request->get_param('security');
+        $order_id       = $request->get_param('order_id');
+        $file_size      = $request->get_param('file_size');
+        $name_to_video  = $request->get_param('name_to_video');
+        $user_id        = get_current_user_id();
+        $ip             = $_SERVER['REMOTE_ADDR'];
+        $client         = $_SERVER['HTTP_USER_AGENT'];
+
+        try {
+            if(!isset($security) || !Api_Util_Security::verify_nonce($ip . $client . $user_id, $security)) {
+                throw new Exception('Problema na seguraça tente novamente', 403);
+            }
+            if(empty($order_id) || empty($file_size) || empty($name_to_video)) {
+                throw new Exception('Formato de request inválido', 403);
+            }
+            $vimeo = new Polen_Vimeo();
+            $vimeo_response = $vimeo->make_video_slot_vimeo($order_id, $file_size, $name_to_video);
+            if($vimeo_response->is_error()) {
+                throw new Exception('Erro na criação do slot do video', 401);
+            }
+            return api_response($vimeo_response->response, 200);
+        } catch(Exception $e) {
+            return api_response($e->getMessage(), $e->getCode());
+        }
     }
 }
