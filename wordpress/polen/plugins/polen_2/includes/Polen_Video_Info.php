@@ -372,7 +372,7 @@ class Polen_Video_Info extends Polen_DB
         $object->hash                   = $data->hash;
         $object->vimeo_process_complete = $data->vimeo_process_complete;
         $object->vimeo_thumbnail        = $data->vimeo_thumbnail;
-        // $object->vimeo_url_download     = $data->vimeo_url_download;
+        $object->vimeo_url_download     = $data->vimeo_url_download;
         $object->vimeo_link             = $data->vimeo_link;
         $object->vimeo_file_play        = $data->vimeo_file_play;
         $object->duration               = $data->duration;
