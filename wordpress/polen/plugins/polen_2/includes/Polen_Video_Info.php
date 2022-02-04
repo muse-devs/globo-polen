@@ -47,7 +47,7 @@ class Polen_Video_Info extends Polen_DB
                 $this->is_public              = intval( $object->is_public );
                 $this->vimeo_thumbnail        = $object->vimeo_thumbnail;
                 $this->vimeo_process_complete = $object->vimeo_process_complete;
-                $this->vimeo_url_download     = $object->vimeo_url_download;
+                // $this->vimeo_url_download     = $object->vimeo_url_download;
                 $this->vimeo_link             = $object->vimeo_link;
                 $this->vimeo_file_play        = $object->vimeo_file_play;
                 $this->duration               = $object->duration;
@@ -104,7 +104,7 @@ class Polen_Video_Info extends Polen_DB
         $return[ 'hash' ]                   = $this->hash;
         $return[ 'vimeo_thumbnail' ]        = $this->vimeo_thumbnail;
         $return[ 'vimeo_process_complete' ] = $this->vimeo_process_complete;
-        $return[ 'vimeo_url_download' ]     = $this->vimeo_url_download;
+        // $return[ 'vimeo_url_download' ]     = $this->vimeo_url_download;
         $return[ 'vimeo_link' ]             = $this->vimeo_link;
         $return[ 'vimeo_file_play' ]        = $this->vimeo_file_play;
         $return[ 'first_order' ]            = $this->first_order;
@@ -372,7 +372,7 @@ class Polen_Video_Info extends Polen_DB
         $object->hash                   = $data->hash;
         $object->vimeo_process_complete = $data->vimeo_process_complete;
         $object->vimeo_thumbnail        = $data->vimeo_thumbnail;
-        $object->vimeo_url_download     = $data->vimeo_url_download;
+        // $object->vimeo_url_download     = $data->vimeo_url_download;
         $object->vimeo_link             = $data->vimeo_link;
         $object->vimeo_file_play        = $data->vimeo_file_play;
         $object->duration               = $data->duration;
