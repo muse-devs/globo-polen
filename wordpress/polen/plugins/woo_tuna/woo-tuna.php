@@ -864,6 +864,10 @@ class TUNA_Payment extends WC_Payment_Gateway
         $user = get_user_by('email', $customer_order->get_billing_email());
         $fullName = $user->first_name . ' ' . $user->last_name;
 
+        if (empty(trim($fullName))) {
+            $fullName = $user->display_name;
+        }
+
 		$custormerID =($current_user->ID==0?sanitize_text_field($_POST["tuna_tmpuser_id"]):$current_user->ID) . '';
 
 		$itens = [];

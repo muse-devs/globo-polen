@@ -1,7 +1,9 @@
 <?php
 namespace Polen\Api;
 
+use Polen\Api\Orders\Api_Orders;
 use Polen\Api\Talent\Api_Talent_Dashboard;
+use Polen\Api\Talent\Api_Talent_Order;
 
 class Api {
 
@@ -22,6 +24,12 @@ class Api {
             #Área do Talento Logado
             $talent_dashboard = new Api_Talent_Dashboard();
             $talent_dashboard->register_routes();
+
+            #Área de pedidos
+            $talent_dashboard = new Api_Orders();
+            $talent_dashboard->register_routes();
+            $talent_order = new Api_Talent_Order();
+            $talent_order->register_routes();
         }
     }
 
