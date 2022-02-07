@@ -103,8 +103,8 @@ class Polen_Video_Player
             wp_send_json_error( 'Video não encontrado', 404 );
             wp_die();
         }
-        // $video_info->vimeo_url_download = $vimeo_result->get_download_best_quality_url();
-        // $video_info->update();
+        // $video_info->vimeo_url_download = $vimeo_result->get_download_best_quality_url(); 
+        // $video_info->update(); 
 
         return wp_send_json_success( $vimeo_result->get_download_best_quality_url(), 200 );
     }
