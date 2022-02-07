@@ -9,6 +9,7 @@ namespace Polen\Includes;
 
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
 use Polen\Includes\Polen_Order;
+use WP_User;
 
 class Polen_Talent {
 
@@ -138,6 +139,8 @@ class Polen_Talent {
         if( $user_id && ! is_null( $user_id ) && ! empty( $user_id ) ) {
             $user_data = get_userdata( $user_id );
             $user_roles = $user_data->roles;
+            $aa = new Polen_Update_Fields();
+            $vendor_data = $aa->get_vendor_data($user_id);
 
             // verify if user is a talent
             if ( in_array( self::ROLE_SLUG, $user_roles, true ) ) {

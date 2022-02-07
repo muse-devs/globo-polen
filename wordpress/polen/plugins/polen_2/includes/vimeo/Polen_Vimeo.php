@@ -38,6 +38,9 @@ class Polen_Vimeo
         }
         
         $order = wc_get_order($order_id);
+        if(empty($order)) {
+            throw new VimeoRequestException('Pedido não encontrado', 404);
+        }
         $cart_item = Polen_Cart_Item_Factory::polen_cart_item_from_order($order);
         
         $video_info = Polen_Video_Info::mount_video_info_with_order_cart_item_vimeo_response(
