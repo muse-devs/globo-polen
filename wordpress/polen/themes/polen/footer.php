@@ -45,7 +45,7 @@
                   <li><a href="https://www.instagram.com/polen.me/" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("instagram"); ?>Instagram</a></li>
                   <li><a href="https://www.facebook.com/Polen-107879504782470/" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("facebook"); ?>Facebook</a></li>
                   <li><a href="https://twitter.com/polen_me/" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("twitter"); ?>Twitter</a></li>
-                  <li><a href="https://medium.com/polen-mais" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("medium"); ?>Medium</a></li>
+
                 </ul>
               </div>
               <div class="col-md-3 mt-4">
@@ -135,7 +135,6 @@
                       <li><a href="https://www.instagram.com/polen.me/" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("instagram"); ?>Instagram</a></li>
                       <li><a href="https://www.facebook.com/Polen-107879504782470/" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("facebook"); ?>Facebook</a></li>
                       <li><a href="https://twitter.com/polen_me/" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("twitter"); ?>Twitter</a></li>
-                      <li><a href="https://medium.com/polen-mais" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("medium"); ?>Medium</a></li>
                     </ul>
                   </div>
                 </div>
