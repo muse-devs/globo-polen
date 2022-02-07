@@ -9,9 +9,10 @@ use Vimeo\Vimeo;
 use Vimeo\Exceptions\{VimeoRequestException, ExceptionInterface};
 
 use Polen\Includes\Polen_Video_Info;
-use Polen\Includes\Vimeo\{Polen_Vimeo_Response, Polen_Vimeo_Vimeo_Options};
+use Polen\Includes\Vimeo\{Polen_Vimeo_Factory, Polen_Vimeo_Response, Polen_Vimeo_Vimeo_Options};
 use Polen\Includes\Cart\{Polen_Cart_Item_Factory, Polen_Cart_Item};
 use WC_Emails;
+use WP_REST_Request;
 
 class Polen_Talent_Controller extends Polen_Talent_Controller_Base
 {
@@ -247,8 +248,6 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
             $this->average_video_response( get_current_user_id() );
 
             wp_send_json_success( $response->response, 200 );
-        } catch ( ExceptionInterface $e ) {
-            wp_send_json_error( $e->getMessage(), $e->getCode() );
         } catch ( \Exception $e ) {
             wp_send_json_error( $e->getMessage(), $e->getCode() );
         }
@@ -278,7 +277,7 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
             $video_info->vimeo_process_complete = 0;
             $video_info->vimeo_link = $response->get_vimeo_link();
             $video_info->first_order = $cart_item->get_first_order();
-            $video_info->vimeo_url_download = $response->get_download_source_url();
+            $video_info->vimeo_url_download = 'get_in_time';//$response->get_download_source_url();
             $video_info->vimeo_iframe = $response->get_iframe();
             $video_info->video_logo_status = $video_logo_status;
             return $video_info;
@@ -303,11 +302,8 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
         $checked = $this->check_product_and_order( $talent_id, $order_id );
 
         if( $checked ){
-            // $first_product = reset($talent_products);
             $order = wc_get_order( $order_id );
             if( $order ){
-                // $order->update_status( Polen_Order::SLUG_ORDER_COMPLETE, 'talento enviou o video', false );
-                $video_info = Polen_Video_Info::get_by_order_id( $order->get_id() );
                 $response = array( 'success' => true, 'message' => 'Pedido completo!' );                        
             }
         }else{
@@ -404,5 +400,95 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
                 }catch( Exception $e ){}
             }
         }
-    } 
+    }
+
+
+    /**
+     * O Talento aceita ou rejeita um pedido de video
+     *
+     */
+    public function talent_accept_or_reject_api( $type, $order_id, $reason_reject = '', $description_reject = '' )
+    {
+        $response = array();
+   
+        if( empty( $order_id ) ) {
+            throw new Exception( 'Order nao pode ser valor nulo', 401  );
+        }
+
+        if( empty( $type ) || ( trim( $type ) != 'accept' && trim( $type ) != 'reject' ) ){
+            throw new Exception( 'Opcoes tem que ser Aceitar ou Negar', 401  );
+        }
+
+        global $wpdb;
+
+        require_once ABSPATH . '/wp-includes/pluggable.php';
+        $talent_id = get_current_user_id();
+        if( empty( $talent_id ) ) {
+            throw new Exception( 'Usuário não está logado', 403  );
+        }
+        $order_id = trim( $order_id ); 
+        $type = strip_tags( $type );
+
+        if( empty( $order_id ) ) {
+            throw new Exception( 'Order nao pode ser valor nulo', 401  );
+        }
+
+        $sql_product = " SELECT * FROM {$wpdb->prefix}posts WHERE post_type = 'product' and post_author = {$talent_id};";
+        $talent_products = $wpdb->get_results( $sql_product );
+
+        $talent_products_ids_txt = ''; 
+        if( !empty( $talent_products ) ) {
+            foreach( $talent_products as $talent_product ) {
+                $talent_products_ids[] = $talent_product->ID;
+                $talent_products_ids_txt = implode( ',', $talent_products_ids );
+            }
+        }
+
+        if( is_countable( $talent_products ) && count( $talent_products ) > 0 ){
+            $first_product = reset($talent_products);
+
+
+            if( is_object( $first_product ) && isset( $first_product->ID ) ){
+                $sql = " SELECT order_items.order_id
+                    FROM {$wpdb->prefix}woocommerce_order_items as order_items
+                    LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta as order_item_meta ON order_items.order_item_id = order_item_meta.order_item_id
+                    LEFT JOIN {$wpdb->posts} AS posts ON order_items.order_id = posts.ID
+                    WHERE posts.post_type = 'shop_order'
+                        AND order_items.order_id = ".$order_id."
+                        AND order_items.order_item_type = 'line_item'
+                        AND order_item_meta.meta_key = '_product_id'
+                        AND order_item_meta.meta_value IN ( {$talent_products_ids_txt})";
+                $order_list = $wpdb->get_results( $sql );
+
+                if( is_countable( $order_list ) && count( $order_list ) == 0 ){
+                    throw new Exception( 'Order não é desse usuário', 403 );  
+                } else {
+                    $order = wc_get_order( $order_id );
+                    WC_Emails::instance();
+                    if( $order ){
+                        if( $type == 'accept' ){
+                            $order->update_status( Polen_Order::ORDER_STATUS_TALENT_ACCEPTED, 'Talento Aceitou fazer o pedido' );
+                            $response = [ "code" => "1", "" ]; 
+                        }
+                        if( $type == 'reject' ) {
+                            if(empty($reason_reject)) {
+                                throw new Exception('Razão para negar o pedido nao pode ser nulo', 403);
+                            }
+                            $item_cart = Polen_Cart_Item_Factory::polen_cart_item_from_order( $order );
+                            $item_cart->add_meta_data( 'reason_reject', $reason_reject, true );
+                            $item_cart->add_meta_data( 'reason_reject_description', $description_reject, true );
+                            $order->update_status( 'talent-rejected', "Motivo: {$reason_reject}" );
+                            $order->add_order_note( "Motivo: {$reason_reject}. Descricao: {$description_reject}" );
+                            $response = [ "code" => "2" ];
+                        }
+                    }
+                }
+            } else {
+                throw new Exception( 'Usuário sem pedidos', 403 );
+            }
+            
+        }
+
+        return $response;
+    }
 }

@@ -38,10 +38,6 @@ msgstr "https://wordpress.org/support/article/twenty-twenty-one/#dark-mode-suppo
 msgid "Dark Mode is a device setting. If a visitor to your site requests it, your site will be shown with a dark background and light text. <a href=\"%s\">Learn more about Dark Mode.</a>"
 msgstr "O modo escuro é uma configuração do dispositivo. Se um visitante do seu site solicitar isso, seu site será exibido com um fundo escuro e um texto claro. <a href=\"%s\">Saiba mais sobre o modo escuro.</a>"
 
-#: classes/class-twenty-twenty-one-dark-mode.php:181
-msgid "Dark Mode can also be turned on and off with a button that you can find in the bottom right corner of the page."
-msgstr "O modo escuro também pode ser ativado ou desativado com um botão que você pode encontrar no canto inferior direito da página."
-
 #: classes/class-twenty-twenty-one-dark-mode.php:380
 msgid "This website uses LocalStorage to save the setting when Dark Mode support is turned on or off.<br> LocalStorage is necessary for the setting to work and is only used when a user clicks on the Dark Mode button.<br> No data is saved in the database or transferred."
 msgstr "Este site usa o LocalStorage para salvar a configuração quando o suporte ao modo escuro é ligado ou desligado.<br>O LocalStorage é necessário para que a configuração funcione e só é usado quando o usuário clica no botão Modo escuro.<br>Nenhum dado é salvo no banco de dados ou transferido."
@@ -116,15 +112,10 @@ msgid "Background color"
 msgstr "Cor de fundo"
 
 #. translators: %s: WordPress Version.
-#. translators: %s: WordPress Version.
-#. translators: %s: WordPress Version.
 #: inc/back-compat.php:42 inc/back-compat.php:61 inc/back-compat.php:86
 msgid "This theme requires WordPress 5.3 or newer. You are running version %s. Please upgrade."
 msgstr "Este tema requer o WordPress 5.3 ou mais recente. Você está executando a versão %s, é necessário atualizar."
 
-#. translators: %: Page number.
-#. translators: %: Page number.
-#. translators: %: Page number.
 #. translators: %: Page number.
 #: image.php:48 template-parts/content/content-page.php:36
 #: template-parts/content/content-single.php:30
@@ -167,19 +158,19 @@ msgctxt "Font size"
 msgid "XS"
 msgstr "PP"
 
-#: comments.php:87
+#: comments.php:85
 msgid "Leave a comment"
 msgstr "Deixe um comentário"
 
 #. translators: %s: Comment count number.
-#: comments.php:40
+#: comments.php:39
 msgctxt "Comments title"
 msgid "%s comment"
 msgid_plural "%s comments"
 msgstr[0] "%s comentário"
 msgstr[1] "%s comentários"
 
-#: comments.php:35
+#: comments.php:34
 msgid "1 comment"
 msgstr "1 comentário"
 
@@ -361,7 +352,6 @@ msgid "View all of %s's posts."
 msgstr "Ver todos os posts de %s."
 
 #. translators: %s: Author name.
-#. translators: %s: Author name.
 #: inc/template-tags.php:49 template-parts/post/author-bio.php:19
 msgid "By %s"
 msgstr "Por %s"
@@ -409,36 +399,26 @@ msgstr[0] "Foi encontrado %d resultado para a sua pesquisa."
 msgstr[1] "Foi encontrados %d resultados para a sua pesquisa."
 
 #. translators: %s: Search term.
-#. translators: %s: Search term.
 #: search.php:21 template-parts/content/content-none.php:22
 msgid "Results for \"%s\""
 msgstr "Resultados para \"%s\""
 
-#. translators: %s: List of tags.
 #. translators: %s: List of tags.
 #: inc/template-tags.php:118 inc/template-tags.php:162
 msgid "Tagged %s"
 msgstr "Marcado com %s"
 
 #. translators: %s: List of categories.
-#. translators: %s: List of categories.
 #: inc/template-tags.php:108 inc/template-tags.php:152
 msgid "Categorized as %s"
 msgstr "Categorizado como %s"
 
-#. translators: Used between list items, there is a space after the comma.
-#. translators: Used between list items, there is a space after the comma.
-#. translators: Used between list items, there is a space after the comma.
 #. translators: Used between list items, there is a space after the comma.
 #: inc/template-tags.php:104 inc/template-tags.php:114
 #: inc/template-tags.php:148 inc/template-tags.php:158
 msgid ", "
 msgstr ", "
 
-#. translators: %s: Name of current post. Only visible to screen readers.
-#. translators: %s: Name of current post. Only visible to screen readers.
-#. translators: %s: Name of current post. Only visible to screen readers.
-#. translators: %s: Name of current post. Only visible to screen readers.
 #. translators: %s: Name of current post. Only visible to screen readers.
 #: image.php:70 image.php:95 inc/template-tags.php:92 inc/template-tags.php:135
 #: template-parts/content/content-page.php:48
@@ -568,7 +548,7 @@ msgstr "Tamanho completo"
 msgid "Published %s"
 msgstr "%s publicado"
 
-#: comments.php:62 image.php:45 inc/template-tags.php:228
+#: comments.php:61 image.php:45 inc/template-tags.php:228
 #: template-parts/content/content-page.php:33
 #: template-parts/content/content-single.php:27
 #: template-parts/content/content.php:33
@@ -592,11 +572,11 @@ msgstr "Menu primário"
 msgid "Skip to content"
 msgstr "Pular para o conteúdo"
 
-#: functions.php:360
+#: functions.php:363
 msgid "Add widgets here to appear in your footer."
 msgstr "Adicione widgets aqui para aparecerem no rodapé."
 
-#: functions.php:358
+#: functions.php:361
 msgid "Footer"
 msgstr "Rodapé"
 
@@ -701,7 +681,7 @@ msgid "Extra small"
 msgstr "Extra pequeno"
 
 #. translators: %s: WordPress.
-#: footer.php:60
+#: footer.php:67
 msgid "Proudly powered by %s."
 msgstr "Orgulhosamente desenvolvido com %s."
 
@@ -709,15 +689,15 @@ msgstr "Orgulhosamente desenvolvido com %s."
 msgid "Secondary menu"
 msgstr "Menu secundário"
 
-#: comments.php:79
+#: comments.php:78
 msgid "Comments are closed."
 msgstr "Comentários estão encerrados."
 
-#: comments.php:71
+#: comments.php:70
 msgid "Newer comments"
 msgstr "Comentários mais recentes"
 
-#: comments.php:67
+#: comments.php:66
 msgid "Older comments"
 msgstr "Comentários mais antigos"
 
@@ -738,7 +718,7 @@ msgid "Nothing here"
 msgstr "Nada aqui"
 
 #. Author URI of the theme
-#: footer.php:61
+#: footer.php:68
 msgid "https://wordpress.org/"
 msgstr "https://br.wordpress.org/"
 

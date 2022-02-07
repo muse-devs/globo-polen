@@ -26,13 +26,13 @@ class Polen_Emails {
         $emails[ 'WC_Email_Customer_New_Account' ] = new Polen_WC_Customer_New_Account();
 
         //Limpando as Actions
-        remove_action( 'woocommerce_order_status_completed_notification', array( $emails[ 'WC_Email_Customer_Completed_Order' ], 'trigger' ), 10 );
+        // remove_action( 'woocommerce_order_status_completed_notification', array( $emails[ 'WC_Email_Customer_Completed_Order' ], 'trigger' ), 10 );
         $emails[ 'WC_Email_Customer_Completed_Order' ] = new Polen_WC_Completed_Order();
 
         //Limpando as Actions
-        remove_action( 'woocommerce_order_status_pending_to_on-hold_notification', array( $emails['WC_Email_Customer_Processing_Order'], 'trigger' ), 10 );
-        remove_action( 'woocommerce_order_status_failed_to_on-hold_notification', array( $emails['WC_Email_Customer_Processing_Order'], 'trigger' ), 10 );
-        remove_action( 'woocommerce_order_status_cancelled_to_on-hold_notification', array( $emails['WC_Email_Customer_Processing_Order'], 'trigger' ), 10 );
+        // remove_action( 'woocommerce_order_status_pending_to_on-hold_notification', array( $emails['WC_Email_Customer_Processing_Order'], 'trigger' ), 10 );
+        // remove_action( 'woocommerce_order_status_failed_to_on-hold_notification', array( $emails['WC_Email_Customer_Processing_Order'], 'trigger' ), 10 );
+        // remove_action( 'woocommerce_order_status_cancelled_to_on-hold_notification', array( $emails['WC_Email_Customer_Processing_Order'], 'trigger' ), 10 );
         $emails['WC_Email_Customer_Processing_Order'] = new Polen_WC_Processing();
         
         $emails['Polen_WC_Pending'] = new Polen_WC_Pending();
@@ -57,5 +57,24 @@ class Polen_Emails {
 
 		return $emails;
 	}
+
+
+    /**
+     * 
+     */
+    static public function is_to_send_admin_edit_order()
+    {
+        if( !( defined('DOING_AJAX') ) ) {
+            if( is_admin() ){
+                $screen = get_current_screen();
+                if ( $screen->base == 'post' && $screen->post_type == 'shop_order' ){
+                    if( !isset( $_POST['send_email'] ) || $_POST['send_email'] != 'on' ) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
 
 }

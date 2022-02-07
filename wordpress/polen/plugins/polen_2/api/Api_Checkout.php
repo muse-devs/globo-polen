@@ -6,6 +6,7 @@ use Automattic\WooCommerce\Client;
 use Exception;
 use Polen\Includes\Polen_Campaign;
 use Polen\Includes\Polen_Checkout_Create_User;
+use Polen\Includes\Polen_Create_Customer;
 use Polen\Includes\Polen_Order;
 use WP_REST_Request;
 
@@ -16,24 +17,6 @@ class Api_Checkout
     const ORDER_METAKEY = 'hotsite';
     const USER_METAKEY  = 'hotsite';
 
-    public function __construct()
-    {
-        // $this->auth();
-    }
-
-    // public function auth()
-    // {
-    //     global $Polen_Plugin_Settings;
-    //     $this->woocommerce = new Client(
-    //         site_url(),
-    //         $Polen_Plugin_Settings['polen_api_rest_cosumer_key'],
-    //         $Polen_Plugin_Settings['polen_api_rest_cosumer_secret'],
-    //         [
-    //             'wp_api' => true,
-    //             'version' => 'wc/v3'
-    //         ]
-    //     );
-    // }
 
     /**
      * Criação de uma order completa, seguindo os passos:
@@ -86,9 +69,10 @@ class Api_Checkout
                 throw new Exception( 'Produto sem estoque', 422 );
             }
 
+            $create_user = new Polen_Create_Customer();
             $product = wc_get_product( $fields[ 'product_id' ] );
             $campaign_slug = Polen_Campaign::get_product_campaign_slug( $product );
-            $user = $this->create_new_user( $data, $campaign_slug );
+            $user = $create_user->create_new_user( $data, $campaign_slug );
             
             WC()->cart->empty_cart();
             
@@ -134,61 +118,7 @@ class Api_Checkout
         }
     }
 
-    /**
-     * Criar usuario
-     *
-     * @param array $data
-     * @return \WP_User
-     */
-    private function create_new_user( array $data, $campaign = '' )
-    {
-        $userdata = array(
-            'user_login' => $data['email'],
-            'user_email' => $data['email'],
-            'user_pass' => wp_generate_password(6, false),
-            'first_name' => $data['name'],
-            'nickname' => $data['name'],
-            'role' => 'customer',
-        );
 
-        $user['new_account'] = false;
-        $user_wp = get_user_by( 'email', $userdata['user_email'] );
-        if( false === $user_wp ) {
-
-            $args = [];
-            if( !empty( $campaign ) ) {
-                $args[ 'campaign' ] = $campaign;
-            }
-            $args[ Polen_Checkout_Create_User::META_KEY_CREATED_BY ] = 'checkout';
-            
-            $api_user = new Api_User();
-            $user_id = $api_user->create_user_custumer(
-                $userdata['user_email'],
-                $userdata['first_name'],
-                $userdata['user_pass'],
-                $args,
-                true
-            );
-            $user['new_account'] = true;
-            $user_wp = get_user_by( 'id', $user_id );
-        }
-
-        unset( $user_wp->user_pass );
-        $user['user_object'] = $user_wp;
-
-        $address = array(
-            'billing_email' => $data['email'],
-            'billing_cpf' => preg_replace('/[^0-9]/', '', $data['cpf']),
-            'billing_country' => 'BR',
-            'billing_phone' => preg_replace('/[^0-9]/', '', $data['phone']),
-            'billing_cellphone' => preg_replace('/[^0-9]/', '', $data['phone']),
-        );
-
-        foreach ( $address as $key => $value ) {
-            update_user_meta( $user['user_object']->ID, $key, $value );
-        }
-        return $user;
-    }
 
     /**
      * Criar uma order no woocommerce

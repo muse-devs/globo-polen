@@ -2,8 +2,8 @@
 Contributors: cyberlord92
 Tags: api, jwt, token, REST, rest-api, json web token, oauth, protect-api, REST endpoints, secure api, api key auth, basic auth
 Requires at least: 3.0.1
-Tested up to: 5.8.2
-Stable tag: 1.6.6
+Tested up to: 5.9
+Stable tag: 1.6.7
 Requires PHP: 5.6
 License: MIT/Expat
 License URI: https://docs.miniorange.com/mit-license
@@ -201,6 +201,9 @@ This plugin does not store any user data.
 4. Custom API Integration
 
 == Changelog ==
+
+= 1.6.7 = 
+* Compatiblity with WordPress 5.9
 
 = 1.6.6 = 
 * UI Updates

@@ -56,67 +56,6 @@ class Api_User
 
 
     /**
-     * 
-     * @param string
-     * @param string
-     * @param string
-     * @param array
-     * @return int
-     */
-    public function create_user_custumer( $email, $user_name, $password, $metas = [], $is_checkout = false )
-    {
-        $args = [ 'display_name' => $user_name ];
-
-        //Seguindo Padrao do Woocommerce com as ACTIONs
-        $errors = new WP_Error();
-
-        do_action( 'woocommerce_register_post', $email, $email, $errors );
-        
-        $errors = apply_filters( 'woocommerce_registration_errors', $errors, $email, $email );
-		if ( $errors->get_error_code() ) {
-			throw new Exception( $errors->get_error_messages(), $errors->get_error_code() );
-		}
-		
-        $new_customer_data = apply_filters(
-			'woocommerce_new_customer_data',
-			array_merge(
-				$args,
-				array(
-					'user_login' => $email,
-					'user_pass'  => $password,
-					'user_email' => $email,
-					'role'       => 'customer',
-				)
-			)
-		);
-
-        $customer_id = wp_insert_user( $new_customer_data );
-
-        if( is_wp_error( $customer_id ) ) {
-            throw new Exception( implode( $customer_id->get_error_messages() ), 403 );
-        }
-
-        if( isset( $metas[ 'campaign' ] ) ) {
-            Polen_Campaign::set_user_campaign( $customer_id, $metas['campaign'] );
-            unset( $metas['campaign'] );
-        }
-
-        if( !empty( $metas ) ) {
-            foreach( $metas as $key => $value ) {
-                update_user_meta( $customer_id, $key, $value );
-            }
-        }
-
-        if( !$is_checkout ) {
-            $password = '';
-        }
-
-        do_action( 'woocommerce_created_customer', $customer_id, [ 'user_pass' => $password ], $is_checkout );
-
-        return $customer_id;
-    }
-
-    /**
      * Recuperar dados do usuario
      *
      * @param \WP_REST_Request $request

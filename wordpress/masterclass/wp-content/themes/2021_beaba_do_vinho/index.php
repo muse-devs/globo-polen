@@ -1,2 +1,0 @@
-<?php
-// Silece is gold
