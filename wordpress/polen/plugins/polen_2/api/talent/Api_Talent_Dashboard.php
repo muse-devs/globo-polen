@@ -76,10 +76,10 @@ class Api_Talent_Dashboard extends WP_REST_Controller
         $reviews = Polen_Order_Review::get_order_reviews_by_talent_id($talent->ID);
 
         $response = [
-            'total_pending_order'   => Polen_Order_V2::get_qty_orders_by_products_id_status($products_id, ['wc-payment-approved', 'wc-talent-accepted']),
+            'qty_pending_order'     => Polen_Order_V2::get_qty_orders_by_products_id_status($products_id, ['wc-payment-approved', 'wc-talent-accepted']),
             'total_pending_value'   => Polen_Order_V2::get_total_orders_by_products_id_status($products_id, ['wc-pending']),
-            'total_orders_recorded' => Polen_Order_V2::get_qty_orders_by_products_id_status($products_id, ['wc-completed']),
-            'total_orders_expired'  => Polen_Order_V2::get_qty_orders_by_products_id_status($products_id, ['wc-order-expired']),
+            'qty_orders_recorded'   => Polen_Order_V2::get_qty_orders_by_products_id_status($products_id, ['wc-completed']),
+            'qty_orders_expired'    => Polen_Order_V2::get_qty_orders_by_products_id_status($products_id, ['wc-order-expired']),
             'deadline_orders_today' => Polen_Order_V2::get_qty_orders_by_products_id_deadline($products_id, date('Y/m/d')),
             'comment_count_order'   => count($reviews),
             'comment_rating_order'  => Polen_Order_Review::get_sum_rate_by_talent($talent->ID),
