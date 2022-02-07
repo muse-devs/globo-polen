@@ -67,7 +67,7 @@ class Api_Talent_Payment
         $result['banking_agency'] = substr($user_talent_data->agencia, 0, 2) .
             str_repeat('#', strlen($user_talent_data->agencia) - 2);
         $result['account_number'] = substr($user_talent_data->conta, 0, 2) .
-            str_repeat('#', strlen($user_talent_data->conta) - 2);
+            str_repeat('#', strlen($user_talent_data->conta) - 4) . '-#';
         
         if($user_talent_data->natureza_juridica == 'PJ') {
             $result['name'] = $user_talent_data->razao_social;
