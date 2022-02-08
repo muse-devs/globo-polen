@@ -486,7 +486,98 @@ class Polen_Talent {
         }
     }
 
-    
+    /**
+     * Pega Orders por Talento por Status
+     * $status pode ser uma string separada por virgula "'wc-payment-approved', 'wc-talent-accepted'"
+     *
+     * @param int $talent_id
+     * @return array
+     */
+    public function get_talent_orders_v2(int $talent_id): array
+    {
+        $product_id = $this->get_product_id_by_talent_id($talent_id);
+        $orders_ids = $this->get_orders_ids_by_product_id($product_id);
+
+        return $this->get_order_info($orders_ids);
+
+    }
+
+    /**
+     * Pegar todas as orders pelo o ID e status
+     *
+     * @param integer $product_id (required)
+     * @param array $order_status (optional)
+     *
+     * @return array
+     */
+    public function get_orders_ids_by_product_id(int $product_id, array $order_status = ['wc-payment-approved', 'wc-talent-accepted']): array
+    {
+        global $wpdb;
+
+        return $wpdb->get_col("
+            SELECT order_items.order_id
+                FROM {$wpdb->prefix}woocommerce_order_items as order_items
+            LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta as order_item_meta ON order_items.order_item_id = order_item_meta.order_item_id
+            LEFT JOIN {$wpdb->posts} AS posts ON order_items.order_id = posts.ID
+            WHERE posts.post_type = 'shop_order'
+                AND posts.post_status IN ( '" . implode( "','", $order_status ) . "' )
+                AND order_items.order_item_type = 'line_item'
+                AND order_item_meta.meta_key = '_product_id'
+                AND order_item_meta.meta_value = $product_id
+        ");
+    }
+
+    /**
+     * Retornar ID do produto pelo o ID do talento
+     *
+     * @param int $talent_id
+     * @return int
+     */
+    public function get_product_id_by_talent_id(int $talent_id): int
+    {
+        $args = [
+            'post_type' => 'product',
+            'author' => $talent_id,
+        ];
+
+        $query = new WP_Query($args);
+        $talent_product = $query->get_posts();
+
+        return $talent_product[0]->ID;
+    }
+
+    /**
+     * Retornar informações basicas
+     *
+     * @param array $orders_id
+     * @return array
+     */
+    public function get_order_info(array $orders_id): array
+    {
+        $objects = [];
+        foreach ($orders_id as $order_id) {
+            $obj['order_id'] = $order_id;
+            $order = wc_get_order($order_id);
+            $obj['origin'] = get_origin_order($order);
+            $obj['status'] = $order->get_status();
+            $obj['total'] = $order->get_formatted_order_total();
+            $obj['total_value'] = $order->get_total();
+            $obj['total_raw'] = $order->get_subtotal();
+
+            foreach ($order->get_items() as $item) {
+                $obj['email'] = $item->get_meta('email_to_video', true);
+                $obj['instructions'] = $item->get_meta('instructions_to_video', true);
+                $obj['name'] = $item->get_meta('name_to_video', true);
+                $obj['from'] = $item->get_meta('offered_by', true);
+                $obj['category'] = $item->get_meta('video_category', true);
+            }
+            $objects[] = $obj;
+        }
+
+        return $objects;
+    }
+
+
     /**
      * Se um talento tentar logar pelo wp-login.php sera redirecionado para /my-account/orders/
      * 
