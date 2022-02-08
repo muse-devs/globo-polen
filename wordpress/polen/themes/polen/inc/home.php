@@ -25,7 +25,7 @@ $inputs = new Material_Inputs();
 		<div class="col-12">
 			<div id="product-carousel" class="owl-carousel owl-theme">
         <div class="item">
-          <?php polen_get_sertanejo_banner(site_url('tag/sertanejo/')); ?>
+          <?php polen_get_bbb_banner(site_url('tag/bbb/')); ?>
         </div>
         <div class="item">
 					<?php polen_get_galo_banner(site_url('tag/galo-idolos/')); ?>
