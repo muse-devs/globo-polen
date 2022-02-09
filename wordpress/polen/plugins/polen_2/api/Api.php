@@ -4,6 +4,7 @@ namespace Polen\Api;
 use Polen\Api\Orders\Api_Orders;
 use Polen\Api\Talent\Api_Talent_Dashboard;
 use Polen\Api\Talent\Api_Talent_Order;
+use Polen\Api\Talent\Api_Talent_Payment;
 
 class Api {
 
@@ -30,6 +31,8 @@ class Api {
             $talent_dashboard->register_routes();
             $talent_order = new Api_Talent_Order();
             $talent_order->register_routes();
+            $talent_payment = new Api_Talent_Payment();
+            $talent_payment->register_route();
         }
     }
 

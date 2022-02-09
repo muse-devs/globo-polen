@@ -14,15 +14,15 @@ class Api_Orders extends WP_REST_Controller
 
     public function __construct()
     {
-        $this->namespace = 'polen/v1/talent';
-        $this->rest_base = 'orders';
+        $this->namespace = 'polen/v1';
+        $this->rest_base = 'talents';
 
         add_action('rest_api_init', [$this, 'register_routes']);
     }
 
     public function register_routes()
     {
-        register_rest_route( $this->namespace, $this->rest_base . '/(?P<id>[\d]+)', [
+        register_rest_route( $this->namespace, $this->rest_base . '/orders/(?P<id>[\d]+)', [
             [
                 'methods' => WP_REST_Server::READABLE,
                 'callback' => [$this, 'get_orders'],
