@@ -24,8 +24,6 @@ function send_zapier_by_change_status($order)
             wp_die();
         }
 
-        wp_send_json_success( 'ok', 200 );
-
     } catch (\Exception $e) {
         wp_send_json_error($e->getMessage(), 422);
         wp_die();
