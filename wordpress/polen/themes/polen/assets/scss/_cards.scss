@@ -765,16 +765,17 @@
   }
 }
 
-.sertanejo-banner {
+.bbb-banner {
   border-radius: 10px;
-  padding: 20px;
-  padding-right: 0px;
+  padding: 20px 0px 0px 20px;
   height: 350px;
   display: flex;
   align-items: center;
+  overflow: hidden;
   @include media-breakpoint-down(sm) {
-    padding: 10px;
     height: 190px;
+    padding: 0px;
+    align-items: flex-end;
   }
   img {
     width: 100%;

@@ -955,14 +955,15 @@ function polen_get_galo_banner($link)
 <?php
 }
 
-function polen_get_sertanejo_banner($link)
+function polen_get_bbb_banner($link)
 {
 ?>
   <div class="row mt-4">
     <div class="col-12">
       <a href="<?php echo $link; ?>">
-        <div class="sertanejo-banner" style="background: url('<?php echo TEMPLATE_URI . '/assets/img/sertanejo/bg.png'; ?>')center no-repeat; background-size: cover">
-          <img loading="lazy" src="<?php echo TEMPLATE_URI; ?>/assets/img/sertanejo/content.png" alt="Semana Sertaneja" class="img-responsive" />
+        <div class="bbb-banner" style="background: url('<?php echo TEMPLATE_URI . '/assets/img/bbb/bg.png'; ?>')center no-repeat; background-size: cover">
+          <img loading="lazy" src="<?php echo TEMPLATE_URI; ?>/assets/img/bbb/content-desktop.png" alt="Big Brother Brasil" class="img-responsive d-none d-md-block" />
+          <img loading="lazy" src="<?php echo TEMPLATE_URI; ?>/assets/img/bbb/content-mobile.png" alt="Big Brother Brasil" class="img-responsive d-block d-md-none" />
         </div>
       </a>
     </div>

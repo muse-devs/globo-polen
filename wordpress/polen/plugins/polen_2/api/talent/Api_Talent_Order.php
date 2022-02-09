@@ -43,7 +43,7 @@ class Api_Talent_Order extends WP_REST_Controller
     public function __construct()
     {
         $this->namespace = 'polen/v1';
-        $this->rest_base = 'talent';
+        $this->rest_base = 'talents';
     }
 
 
