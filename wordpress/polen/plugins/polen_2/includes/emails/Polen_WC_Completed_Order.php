@@ -48,6 +48,7 @@ class Polen_WC_Completed_Order extends \WC_Email_Customer_Completed_Order
 
         if ( $order_id && ! is_a( $order, 'WC_Order' ) ) {
             $order = wc_get_order( $order_id );
+            send_zapier_by_change_status($order);
         }
 
         if ( is_a( $order, 'WC_Order' ) ) {
