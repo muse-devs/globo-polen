@@ -37,6 +37,7 @@ class Polen_WC_Order_Expired extends \WC_Email {
     public function trigger( $order_id ) {
 		$this->object = wc_get_order( $order_id );
 		if( $this->object->has_status( 'order-expired') ) {
+            send_zapier_by_change_status($this->object);
 			if ( version_compare( '3.0.0', WC()->version, '>' ) ) {
 				$order_email = $this->object->billing_email;
 			} else {

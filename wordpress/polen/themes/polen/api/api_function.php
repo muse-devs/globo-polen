@@ -27,7 +27,12 @@ function custom_fields_in_order_admin($order)
         $origin = event_promotional_order_get_slug_event($order);
     }
 
-    echo "<p><strong>Origem:</strong><br> {$origin} </p><br>";
+    $payment = $order->get_payment_method_title();
+
+    $html = "<p><strong>Origem:</strong><br> {$origin} </p>";
+    $html .= "<p><strong>Via:</strong><br> {$payment} </p><br>";
+
+    echo $html;
 }
 add_action('woocommerce_admin_order_data_after_billing_address', 'custom_fields_in_order_admin', 10, 1);
 
