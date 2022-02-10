@@ -12423,6 +12423,16 @@ textarea {
   height: 10px;
   border-radius: 50%; }
 
+.carousel-control-prev {
+  width: auto;
+  border: none;
+  background: none; }
+
+.carousel-control-next {
+  width: auto;
+  border: none;
+  background: none; }
+
 .tutorial .icon {
   font-size: 28px; }
   .tutorial .icon.icon-camera-video {

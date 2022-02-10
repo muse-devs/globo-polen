@@ -39,6 +39,14 @@ $inputs = new Material_Inputs();
             <?php polen_get_galo_banner(site_url('tag/galo-idolos/')); ?>
           </div>
         </div>
+        <button class="carousel-control-prev d-block d-md-none" type="button" data-target="#carouselExampleIndicators" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </button>
+        <button class="carousel-control-next d-block d-md-none" type="button" data-target="#carouselExampleIndicators" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </button>
       </div>
 		</div>
 	</div>
