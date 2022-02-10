@@ -406,6 +406,11 @@ function filter_woocommerce_coupon_error($err, $err_code, $instance)
 add_filter('woocommerce_coupon_error', 'filter_woocommerce_coupon_error', 10, 3);
 
 /**
+ * Funções para disparado de zapier
+ */
+require_once TEMPLATE_DIR . '/inc/zapier.php';
+
+/**
  * Customiza a paginação de todos os tipos de posts
  *
  * @param array $args

@@ -94,6 +94,7 @@ class Api_Checkout
             }
 
             $order_woo = $this->order_payment_woocommerce($user['user_object']->data, $fields['product_id'], $coupon);
+            $order_woo->set_payment_method_title($this->method_payment_name($data['method_payment']));
             $this->add_meta_to_order($order_woo, $data);
 
             if (WC()->cart->get_cart_contents_total() == 0) {
@@ -279,6 +280,20 @@ class Api_Checkout
         }
 
         return $status_tuna;
+    }
+
+    /**
+     * Retornar Titulo do metodo de pagaamento
+     */
+    public function method_payment_name($type = 'cc'): string
+    {
+        $methods = array(
+            'cc' => 'Cartão de Crédito',
+            'pix' => 'Pix',
+            'billet' => 'Boleto',
+        );
+
+        return $methods[$type];
     }
 
     /**

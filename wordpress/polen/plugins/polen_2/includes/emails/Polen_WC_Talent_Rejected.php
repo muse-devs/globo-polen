@@ -40,6 +40,7 @@ class Polen_WC_Talent_Rejected extends \WC_Email {
 	public function trigger( $order_id ) {
 		$this->object = wc_get_order( $order_id );
 		if( $this->object->get_status() === Polen_WooCommerce::ORDER_STATUS_TALENT_REJECTED ) {
+            send_zapier_by_change_status($this->object);
 			if ( version_compare( '3.0.0', WC()->version, '>' ) ) {
 				$order_email = $this->object->billing_email;
 			} else {
