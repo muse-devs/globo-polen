@@ -41,14 +41,8 @@ class Polen_WC_Completed_Order extends \WC_Email_Customer_Completed_Order
     public function trigger( $order_id, $order = false ) {
         $this->setup_locale();
 
-        /**
-         * Não disparar email caso flag no_send_email estiver marcada
-         */
-
-
         if ( $order_id && ! is_a( $order, 'WC_Order' ) ) {
             $order = wc_get_order( $order_id );
-            send_zapier_by_change_status($order);
         }
 
         if ( is_a( $order, 'WC_Order' ) ) {
@@ -76,6 +70,7 @@ class Polen_WC_Completed_Order extends \WC_Email_Customer_Completed_Order
         //         $this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
         //     }
         // }
+        send_zapier_by_change_status($this->object);
         $order_is_campaing = Polen_Campaign::get_is_order_campaing( $this->object );
         if( $order_is_campaing ) {
             $this->send( $this->get_recipient(), $this->get_subject_galo(), $this->get_content_campaign(), $this->get_headers(), $this->get_attachments() );
