@@ -272,20 +272,25 @@ foreach ($array_sites as $key => $site) {
 
 $logo_dark = wp_get_attachment_image_url( get_theme_mod( 'custom_logo' ), 'full' );
 
-pol_print_schema_data(array(
-	"url" 						=> $Talent_Fields->talent_url,
-	"title" 					=> get_the_title(),
-	"image" 					=> $bg_image,
-	"date_published"			=> $Talent_Fields->created,
-	"date_modified" 			=> $Talent_Fields->updated,
-	"date_created" 				=> $Talent_Fields->created,
-	"talent_name" 				=> $Talent_Fields->nome,
-	"talent_url" 				=> $Talent_Fields->talent_url,
-	"talent_image" 				=> polen_get_avatar_src($Talent_Fields->user_id, 'polen-square-crop-lg'),
-	"talent_social_links_array"	=> $array_social,
-	"logo" 						=> $logo_dark,
-	"description" 				=> $Talent_Fields->descricao
-));
+// pol_print_schema_data(array(
+// 	"url" 						=> $Talent_Fields->talent_url,
+// 	"title" 					=> get_the_title(),
+// 	"image" 					=> $bg_image,
+// 	"date_published"			=> $Talent_Fields->created,
+// 	"date_modified" 			=> $Talent_Fields->updated,
+// 	"date_created" 				=> $Talent_Fields->created,
+// 	"talent_name" 				=> $Talent_Fields->nome,
+// 	"talent_url" 				=> $Talent_Fields->talent_url,
+// 	"talent_image" 				=> polen_get_avatar_src($Talent_Fields->user_id, 'polen-square-crop-lg'),
+// 	"talent_social_links_array"	=> $array_social,
+// 	"logo" 						=> $logo_dark,
+// 	"description" 				=> $Talent_Fields->descricao
+// ));
+
+// Novo conteúdo Schema.org
+$total_reviews = Polen_Order_Review::get_number_total_reviews_by_talent_id($talent->ID);
+$sum_reviews = Polen_Order_Review::get_sum_rate_by_talent($talent->ID);
+pol_print_schema_data_extended($Talent_Fields, $reviews, $total_reviews, $sum_reviews, $product);
 
 ?>
 
