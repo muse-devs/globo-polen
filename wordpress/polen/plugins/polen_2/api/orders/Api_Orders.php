@@ -51,7 +51,7 @@ class Api_Orders extends WP_REST_Controller
         $customer_orders = [];
 
         $polen_talent = new Polen_Talent();
-        $customer_orders = $polen_talent->get_talent_orders($talent_id);
+        $customer_orders = $polen_talent->get_talent_orders_v2($talent_id);
 
         // foreach ($talent_orders as $talent_order) {
         //     $order = wc_get_order($talent_order['order_id']);
