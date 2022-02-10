@@ -16,7 +16,23 @@ class Polen_Emails {
     public function __construct( bool $static = false ) {
         if( $static ) {
             add_filter( 'woocommerce_email_classes', array( $this, 'register_emails' ), 99, 1 );
+            add_filter( 'woocommerce_email_actions', array( $this, 'email_actions' ), 20, 1 );
         }
+    }
+
+    function email_actions( $actions ) 
+    {
+        foreach ( $this->order_statuses as $order_status => $values ) 
+        {
+			$actions[] = 'woocommerce_order_status_' . $order_status;
+		}
+        $actions[] = 'woocommerce_order_status_'.Polen_Order::ORDER_STATUS_PAYMENT_APPROVED.'_to_'.Polen_Order::ORDER_STATUS_TALENT_REJECTED;
+        $actions[] = 'woocommerce_order_status_'.Polen_Order::ORDER_STATUS_PAYMENT_APPROVED.'_to_'.Polen_Order::ORDER_STATUS_TALENT_ACCEPTED;
+        $actions[] = 'woocommerce_order_status_'.Polen_Order::ORDER_STATUS_TALENT_ACCEPTED.'_to_'.Polen_Order::ORDER_STATUS_PAYMENT_APPROVED;
+        $actions[] = 'woocommerce_order_status_'.Polen_Order::ORDER_STATUS_TALENT_REJECTED.'_to_'.Polen_Order::ORDER_STATUS_PAYMENT_APPROVED;
+        $actions[] = 'woocommerce_order_status_'.Polen_Order::ORDER_STATUS_ORDER_EXPIRED.'_to_'.Polen_Order::ORDER_STATUS_PAYMENT_APPROVED;
+        $actions[] = 'woocommerce_order_status_'.Polen_Order::ORDER_STATUS_TALENT_ACCEPTED.'_to_'.Polen_Order::ORDER_STATUS_COMPLETED;
+        return $actions;
     }
 
     public function register_emails( $emails )
@@ -26,7 +42,7 @@ class Polen_Emails {
         $emails[ 'WC_Email_Customer_New_Account' ] = new Polen_WC_Customer_New_Account();
 
         //Limpando as Actions
-        // remove_action( 'woocommerce_order_status_completed_notification', array( $emails[ 'WC_Email_Customer_Completed_Order' ], 'trigger' ), 10 );
+        remove_action( 'woocommerce_order_status_completed_notification', array( $emails[ 'WC_Email_Customer_Completed_Order' ], 'trigger' ), 10 );
         $emails[ 'WC_Email_Customer_Completed_Order' ] = new Polen_WC_Completed_Order();
 
         //Limpando as Actions
