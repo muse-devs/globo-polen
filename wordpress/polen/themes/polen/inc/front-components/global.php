@@ -332,7 +332,7 @@ function polen_banner_scrollable($items, $title, $emoji = "", $link = "", $subti
     </div>
     <?php ; ?>
     <?php if (count($items) > 6) : ?>
-      <div class="col-md-12 mt-4">
+      <div class="col-md-12 mt-4 d-none d-md-block">
         <div class="pol-dots">
           <a href="javascript:polPrevCarousel('banner-<?php echo createSlug($title); ?>')">
             <i class='icon icon-left-arrow pol-prev-button mr-2'></i>
