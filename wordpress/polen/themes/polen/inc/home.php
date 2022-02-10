@@ -24,7 +24,21 @@ $inputs = new Material_Inputs();
     </div>
   </div>
 
-  <div class="row mb-3">
+  <!-- Banners -->
+	<div class="row">
+		<div class="col-12">
+			<div id="product-carousel" class="owl-carousel owl-theme">
+        <div class="item">
+          <?php polen_get_bbb_banner(site_url('tag/bbb/')); ?>
+        </div>
+        <div class="item">
+					<?php polen_get_galo_banner(site_url('tag/galo-idolos/')); ?>
+				</div>
+			</div>
+		</div>
+	</div>
+
+  <!-- <div class="row mb-3">
 		<div class="col-12">
       <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel">
         <ol class="carousel-indicators">
@@ -33,10 +47,10 @@ $inputs = new Material_Inputs();
         </ol>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <?php polen_get_bbb_banner(site_url('tag/bbb/')); ?>
+            <?php //polen_get_bbb_banner(site_url('tag/bbb/')); ?>
           </div>
           <div class="carousel-item">
-            <?php polen_get_galo_banner(site_url('tag/galo-idolos/')); ?>
+            <?php //polen_get_galo_banner(site_url('tag/galo-idolos/')); ?>
           </div>
         </div>
         <button class="carousel-control-prev d-block d-md-none" type="button" data-target="#carouselExampleIndicators" data-slide="prev">
@@ -49,7 +63,7 @@ $inputs = new Material_Inputs();
         </button>
       </div>
 		</div>
-	</div>
+	</div> -->
 
   <!-- Como Funciona -->
   <?php polen_front_get_tutorial(); ?>
