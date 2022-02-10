@@ -144,7 +144,7 @@ function polen_front_get_videos_single($talent, $videos)
         </div>
       </div>
 		</div>
-    <div class="col-md-12">
+    <div class="col-md-12 d-none d-md-block">
       <div class="pol-dots">
         <a href="javascript:polPrevCarousel('banner-talent-videos')">
           <i class='icon icon-left-arrow pol-prev-button mr-2'></i>
