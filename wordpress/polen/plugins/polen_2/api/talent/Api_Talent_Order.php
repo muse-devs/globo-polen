@@ -3,10 +3,13 @@ namespace Polen\Api\Talent;
 
 use Exception;
 use Polen\Api\Api_Util_Security;
+use Polen\Includes\Polen_Order;
+use Polen\Includes\Polen_Talent;
 use Polen\Includes\Talent\Polen_Talent_Controller;
 use Polen\Includes\Vimeo\Polen_Vimeo;
 use WP_REST_Controller;
 use WP_REST_Request;
+use WP_REST_Response;
 use WP_REST_Server;
 
 class Api_Talent_Order extends WP_REST_Controller
@@ -158,5 +161,16 @@ class Api_Talent_Order extends WP_REST_Controller
         } catch(Exception $e) {
             return api_response($e->getMessage(), $e->getCode());
         }
+    }
+
+    /**
+     * Pega as informacoes das Orders do Talento Logado
+     */
+    public function get_orders_info(WP_REST_Request $request): WP_REST_Response
+    {
+        $polen_order = new Polen_Talent();
+        $orders = $polen_order->get_product_id_by_talent_id(get_current_user_id());
+        
+        return api_response($orders, 200);
     }
 }
