@@ -72,7 +72,6 @@ class Polen_WooCommerce
             add_action( 'init', array( $this, 'register_custom_order_statuses' ) );
             add_filter( 'wc_order_statuses', array( $this, 'add_custom_order_statuses' ) );
             add_filter( 'bulk_actions-edit-shop_order', array( $this, 'dropdown_bulk_actions_shop_order' ), 20, 1 );
-            add_filter( 'woocommerce_email_actions', array( $this, 'email_actions' ), 20, 1 );
             add_action( 'woocommerce_checkout_create_order', array( $this, 'order_meta' ), 12, 2 );
             add_action( 'add_meta_boxes', array( $this, 'add_metaboxes' ) );
             add_action( 'admin_head', array( $this, 'remove_metaboxes' ) );
@@ -178,20 +177,6 @@ class Polen_WooCommerce
         {
 			$actions[ $order_status ] = $values[ 'label' ];
 		}
-        return $actions;
-    }
-
-    function email_actions( $actions ) 
-    {
-        foreach ( $this->order_statuses as $order_status => $values ) 
-        {
-			$actions[] = 'woocommerce_order_status_' . $order_status;
-		}
-        $actions[] = 'woocommerce_order_status_'.Polen_Order::ORDER_STATUS_PAYMENT_APPROVED.'_to_'.Polen_Order::ORDER_STATUS_TALENT_REJECTED;
-        $actions[] = 'woocommerce_order_status_'.Polen_Order::ORDER_STATUS_PAYMENT_APPROVED.'_to_'.Polen_Order::ORDER_STATUS_TALENT_ACCEPTED;
-        $actions[] = 'woocommerce_order_status_'.Polen_Order::ORDER_STATUS_TALENT_ACCEPTED.'_to_'.Polen_Order::ORDER_STATUS_PAYMENT_APPROVED;
-        $actions[] = 'woocommerce_order_status_'.Polen_Order::ORDER_STATUS_TALENT_REJECTED.'_to_'.Polen_Order::ORDER_STATUS_PAYMENT_APPROVED;
-        $actions[] = 'woocommerce_order_status_'.Polen_Order::ORDER_STATUS_ORDER_EXPIRED.'_to_'.Polen_Order::ORDER_STATUS_PAYMENT_APPROVED;
         return $actions;
     }
 

@@ -213,4 +213,9 @@ class Polen_Order_Module
     {
         return $this->object->get_items();
     }
+
+    public function get_view_order_url()
+    {
+        return $this->object->get_view_order_url();
+    }
 }

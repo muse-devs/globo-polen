@@ -163,6 +163,7 @@ class Api_Talent_Order extends WP_REST_Controller
         }
     }
 
+    
     /**
      * Pega as informacoes das Orders do Talento Logado
      */
@@ -170,7 +171,7 @@ class Api_Talent_Order extends WP_REST_Controller
     {
         $polen_order = new Polen_Talent();
         $orders = $polen_order->get_product_id_by_talent_id(get_current_user_id());
-        
+
         return api_response($orders, 200);
     }
 }
