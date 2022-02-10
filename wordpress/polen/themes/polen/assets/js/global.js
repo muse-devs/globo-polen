@@ -600,3 +600,11 @@ function mtel(v) {
   v = v.replace(/(\d)(\d{4})$/, "$1-$2"); //Coloca hífen entre o quarto e o quinto dígitos
   return v;
 }
+
+function polNextCarousel(slug) {
+  document.getElementById(slug).scrollLeft += 300;
+}
+
+function polPrevCarousel(slug) {
+  document.getElementById(slug).scrollLeft -= 300;
+}
