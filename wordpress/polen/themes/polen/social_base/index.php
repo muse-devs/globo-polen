@@ -27,7 +27,7 @@ get_header();
 
 	<?php sa_get_modal(); ?>
 
-	<?php polen_front_get_banner_with_carousel(true);
+	<?php //polen_front_get_banner_with_carousel(true);
 	?>
 
 	<?php polen_front_get_news( $items, "Os artistas que apoiam essa causa", null, true );

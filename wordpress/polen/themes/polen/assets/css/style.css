@@ -12194,7 +12194,8 @@ textarea {
     -ms-overflow-style: none;
     /* IE and Edge */
     scrollbar-width: none;
-    /* Firefox */ }
+    /* Firefox */
+    scroll-behavior: smooth; }
     .banner-scrollable .banner-wrapper .banner-content::-webkit-scrollbar {
       display: none; }
     .banner-scrollable .banner-wrapper .banner-content .polen-card:not(.type-video) {
@@ -12405,25 +12406,22 @@ textarea {
       right: auto;
       color: #000; }
 
-.talents-carousel .owl-dots {
-  bottom: -0px; }
-  .talents-carousel .owl-dots .owl-dot span {
-    background: #5e5e5e; }
-
-.talents-carousel .owl-nav {
-  top: auto;
-  bottom: -35px;
-  z-index: 5;
+.pol-dots {
   display: flex;
-  justify-content: flex-end;
-  right: 50px; }
-  .talents-carousel .owl-nav .icon-left-arrow {
-    left: auto;
-    color: #000; }
-  .talents-carousel .owl-nav .icon-right-arrow {
-    margin-left: 20px;
-    right: auto;
-    color: #000; }
+  justify-content: flex-end; }
+  .pol-dots .icon {
+    color: #000;
+    font-size: 19px;
+    cursor: pointer; }
+  .pol-dots .icon-left-arrow {
+    left: auto; }
+  .pol-dots .icon-right-arrow {
+    right: auto; }
+
+.carousel-indicators li {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%; }
 
 .tutorial .icon {
   font-size: 28px; }

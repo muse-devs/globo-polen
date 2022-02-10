@@ -107,41 +107,53 @@ function polen_front_get_videos_single($talent, $videos)
       wp_enqueue_script('owl-carousel');
   }
 ?>
-	<section id="talent-videos" class="row my-1 pb-4">
+	<section id="talent-videos" class="row my-1 pb-4 banner-scrollable">
     <?php if($videos && sizeof($videos) > 0) : ?>
-		<div class="col-md-12 p-0 mb-4">
-			<div id="videos-carousel" class="owl-carousel owl-theme ">
-          <?php foreach ($videos as $key=>$video) : ?>
-            <?php if ($video['video']) : ?>
-              <div class="item">
-                <div class="polen-card-video talent-single">
-                  <figure id="cover-box" class="video-cover" data-id="<?php echo $key; ?>">
-                    <img loading="lazy" src="<?php echo $video['cover']; ?>" alt="">
-                    <div class="video-player-button" data-id="<?php echo $key; ?>"></div>
-                    <div class="video-icons">
-                      <figure class="image-cropper color small">
-                        <?php echo $video['thumb']; ?>
-                      </figure>
-                      <figure class="image-cropper small">
-                        <?php echo $video['initials']; ?>
-                      </figure>
-                    </div>
-                  </figure>
-                  <video id="video-box" class="src-box d-none" playsinline data-id="<?php echo $key; ?>"
-                    <?php if ($key == 0) {
-                      echo " muted";
-                    } ?>>
-                    <source src="<?php echo $video['video']; ?>" type="video/mp4">
-                  </video>
-                </div>
+		<div class="col-md-12 p-0 mb-3">
+      <div class="banner-wrapper">
+        <div id="banner-talent-videos" class="banner-content">
+        <?php foreach ($videos as $key=>$video) : ?>
+          <?php if ($video['video']) : ?>
+            <div class="col-6 col-md-3">
+              <div class="polen-card-video talent-single">
+                <figure id="cover-box" class="video-cover" data-id="<?php echo $key; ?>">
+                  <img loading="lazy" src="<?php echo $video['cover']; ?>" alt="">
+                  <div class="video-player-button" data-id="<?php echo $key; ?>"></div>
+                  <div class="video-icons">
+                    <figure class="image-cropper color small">
+                      <?php echo $video['thumb']; ?>
+                    </figure>
+                    <figure class="image-cropper small">
+                      <?php echo $video['initials']; ?>
+                    </figure>
+                  </div>
+                </figure>
+                <video id="video-box" class="src-box d-none" playsinline data-id="<?php echo $key; ?>"
+                  <?php if ($key == 0) {
+                    echo " muted";
+                  } ?>>
+                  <source src="<?php echo $video['video']; ?>" type="video/mp4">
+                </video>
               </div>
-            <?php endif; ?>
-          <?php endforeach; ?>
-          <div class="item">
-            <?php polen_talent_promo_card($talent); ?>
-          </div>
+            </div>
+          <?php endif; ?>
+        <?php endforeach; ?>
+        <div class="col-6 col-md-3">
+          <?php polen_talent_promo_card($talent); ?>
+        </div>
+        </div>
       </div>
 		</div>
+    <div class="col-md-12">
+      <div class="pol-dots">
+        <a href="javascript:polPrevCarousel('banner-talent-videos')">
+          <i class='icon icon-left-arrow pol-prev-button mr-2'></i>
+        </a>
+        <a href="javascript:polNextCarousel('banner-talent-videos')">
+          <i class='icon icon-right-arrow pol-next-button ml-2'></i>
+        </a>
+      </div>
+    </div>
     <?php endif; ?>
 	</section>
   <script>
