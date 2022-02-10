@@ -97,6 +97,7 @@ class Polen_WooCommerce
             add_action( 'woocommerce_update_product', array( $this, 'on_product_save' ) );
 
             add_action( 'save_post_post_polen_media', array( $this, 'save_metabox_post' ) );
+            add_action( 'save_post', array($this, 'seo_save_postdata') );
             // add_action( 'save_post', array( $this, 'change_status' ) );
 
             //Todas as compras gratis vão para o status payment-approved
@@ -223,6 +224,7 @@ class Polen_WooCommerce
             global $post;
             $product_id = $post->ID;
             add_meta_box( 'Polen_Product_First_Order', 'Primeira Order', array( $this, 'metabox_create_first_order' ), 'product', 'side', 'default' );
+            add_meta_box( 'Polen_Product_SEO', 'SEO', array( $this, 'metabox_SEO' ), 'product', 'normal', 'default' );
         }
     }
 
@@ -282,6 +284,32 @@ class Polen_WooCommerce
             require_once TEMPLATEPATH . '/woocommerce/admin/metaboxes/metabox-first-order.php';
         } else {
             require_once PLUGIN_POLEN_DIR . '/admin/partials/metaboxes/metabox-first-order.php';
+        }
+    }
+
+    public function metabox_SEO($post)
+    {
+        if( file_exists( TEMPLATEPATH . '/woocommerce/admin/metaboxes/metabox-seo.php' ) ) {
+            require_once TEMPLATEPATH . '/woocommerce/admin/metaboxes/metabox-seo.php';
+        } else {
+            require_once PLUGIN_POLEN_DIR . '/admin/partials/metaboxes/metabox-seo.php';
+        }
+    }
+
+    public function seo_save_postdata( $post_id ) {
+        if ( array_key_exists( 'meta-seo-title', $_POST ) ) {
+            update_post_meta(
+                $post_id,
+                '_seo_title',
+                sanitize_text_field($_POST['meta-seo-title'])
+            );
+        }
+        if ( array_key_exists( 'meta-seo-description', $_POST ) ) {
+            update_post_meta(
+                $post_id,
+                '_seo_description',
+                sanitize_text_field($_POST['meta-seo-description'])
+            );
         }
     }
 

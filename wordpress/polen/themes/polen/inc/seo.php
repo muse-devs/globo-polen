@@ -143,11 +143,14 @@ if (
     // Single de Produto - Página do Artista
     if (!empty($post) && $post->post_type == 'product') {
 
+      $title = get_post_meta( $post->ID, '_seo_title', true );
+      $description = get_post_meta( $post->ID, '_seo_description', true );
+
       // $talent = new Polen_Update_Fields();
       // $talent = $talent->get_vendor_data($post->post_author);
       $talent_name = $post->post_title;
-      $headers['title'] = "Vídeos Personalizados com {$talent_name} - Polen.me";
-      $headers['description'] = "Experimente um novo jeito de se relacionar através de videos personalizados com {$talent_name}";
+      $headers['title'] = $title ? $title : "Vídeos Personalizados com {$talent_name} - Polen.me";
+      $headers['description'] = $description ? $description : "Experimente um novo jeito de se relacionar através de videos personalizados com {$talent_name}";
       $headers['image'] = safeImage(get_the_post_thumbnail_url(get_the_ID()));
 
       // Página Todos os Artistas - /shop
