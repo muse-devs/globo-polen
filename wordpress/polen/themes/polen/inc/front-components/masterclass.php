@@ -119,12 +119,12 @@ function mc_get_carrossel_how_to() {
 			<h3 class="title mb-2">Como funciona?</h3>
 		</div>
 		<div class="col-12">
-			<div id="how-to-carousel" class="owl-carousel owl-theme">
+			<!-- <div id="how-to-carousel" class="owl-carousel owl-theme">
 				<div class="item">
 					<div class="box-round py-3 px-3">
 						<div class="row">
 							<div class="col-12 mb-1 d-flex justify-content-center">
-								<?php Icon_Class::polen_icon_camera_video(); ?>
+								<?php //Icon_Class::polen_icon_camera_video(); ?>
 							</div>
 							<div class="col-12">
 								<h4>Ao vivo</h4>
@@ -137,7 +137,7 @@ function mc_get_carrossel_how_to() {
 					<div class="box-round py-3 px-3">
 						<div class="row">
 							<div class="col-12 mb-1 d-flex justify-content-center">
-								<?php Icon_Class::polen_icon_clock(); ?>
+								<?php //Icon_Class::polen_icon_clock(); ?>
 							</div>
 							<div class="col-12">
 								<h4>Duração</h4>
@@ -150,7 +150,7 @@ function mc_get_carrossel_how_to() {
 					<div class="box-round py-3 px-3">
 						<div class="row">
 							<div class="col-12 mb-1 d-flex justify-content-center">
-								<?php Icon_Class::polen_icon_hand_thumbs_up(); ?>
+								<?php //Icon_Class::polen_icon_hand_thumbs_up(); ?>
 							</div>
 							<div class="col-12">
 								<h4>Disponibilidade</h4>
@@ -159,7 +159,7 @@ function mc_get_carrossel_how_to() {
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 <?php
