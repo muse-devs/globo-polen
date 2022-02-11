@@ -71,6 +71,7 @@ class Polen_WC_Payment_Approved extends \WC_Email {
     
 		// add_action( 'woocommerce_order_status_changed', array( $this, 'trigger' ) );
 		add_action( 'woocommerce_order_status_'.Polen_Order::SLUG_ORDER_PAYMENT_APPROVED, [ $this, 'trigger' ] );
+		// add_action( 'woocommerce_order_status_'.Polen_Order::SLUG_ORDER_PAYMENT_APPROVED.'_notification', [ $this, 'trigger' ] );
 		add_action( 'woocommerce_order_status_'.Polen_Order::ORDER_STATUS_TALENT_ACCEPTED.'_to_'.Polen_Order::ORDER_STATUS_PAYMENT_APPROVED.'_notification', [$this, 'trigger'] );
         add_action( 'woocommerce_order_status_'.Polen_Order::ORDER_STATUS_TALENT_REJECTED.'_to_'.Polen_Order::ORDER_STATUS_PAYMENT_APPROVED.'_notification', [$this, 'trigger'] );
         add_action( 'woocommerce_order_status_'.Polen_Order::ORDER_STATUS_ORDER_EXPIRED.'_to_'.Polen_Order::ORDER_STATUS_PAYMENT_APPROVED.'_notification', [$this, 'trigger'] );

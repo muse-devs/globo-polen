@@ -27,6 +27,7 @@ class Polen_Emails {
         foreach ( $order_statuses as $order_status => $values ) 
         {
 			$actions[] = 'woocommerce_order_status_' . $order_status;
+			$actions[] = 'woocommerce_order_status_' . $order_status . '_notification';
 		}
         $actions[] = 'woocommerce_order_status_'.Polen_Order::ORDER_STATUS_PAYMENT_APPROVED.'_to_'.Polen_Order::ORDER_STATUS_TALENT_REJECTED;
         $actions[] = 'woocommerce_order_status_'.Polen_Order::ORDER_STATUS_PAYMENT_APPROVED.'_to_'.Polen_Order::ORDER_STATUS_TALENT_ACCEPTED;
