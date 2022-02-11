@@ -121,7 +121,7 @@ if( 'instock' == $product->get_stock_status() ) {
 		<?php if(!$histories_enabled) : ?>
 			<?php if($videos && sizeof($videos) > 0): ?>
 				<div class="col-12 mt-3">
-					<?php polen_front_get_videos_single($Talent_Fields, $videos); ?>
+					<?php polen_front_get_videos_single($Talent_Fields, $videos, $image_data); ?>
 				</div>
 			<?php else: ?>
 				<div class="col-12 col-md-6 m-md-auto">

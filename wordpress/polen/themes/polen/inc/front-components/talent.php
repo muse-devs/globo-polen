@@ -1,6 +1,6 @@
 <?php
 
-function polen_talent_promo_card($talent)
+function polen_talent_promo_card($talent, $image_data)
 {
 	global $product;
 ?>
@@ -8,7 +8,7 @@ function polen_talent_promo_card($talent)
 		<div class="box-color card row">
 			<div class="col-12 col-md-12 d-flex flex-column justify-content-center align-items-center text-center p-2">
 				<div class="image-cropper">
-					<?php echo polen_get_avatar($talent->user_id, 'polen-square-crop-lg'); ?>
+          <img src="<?php echo $image_data['image']; ?>" alt="<?php echo $image_data["alt"]; ?>" />
 				</div>
 				<p class="mt-2">E aí, ficou com vontade de ter um vídeo?</p>
 				<?php if ($product->is_in_stock()) : ?>
@@ -101,7 +101,7 @@ function polen_front_get_talent_mini_bio($image_data, $name, $category)
   <?php
 }
 
-function polen_front_get_videos_single($talent, $videos)
+function polen_front_get_videos_single($talent, $videos, $image_data)
 {
   if( ! wp_script_is( 'owl-carousel', 'enqueued' ) ) {
       wp_enqueue_script('owl-carousel');
@@ -139,7 +139,7 @@ function polen_front_get_videos_single($talent, $videos)
           <?php endif; ?>
         <?php endforeach; ?>
         <div class="col-6 col-md-3">
-          <?php polen_talent_promo_card($talent); ?>
+          <?php polen_talent_promo_card($talent, $image_data); ?>
         </div>
         </div>
       </div>
