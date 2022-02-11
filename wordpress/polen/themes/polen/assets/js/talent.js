@@ -217,26 +217,3 @@ $('.video-player-button').on('click',function() {
     $('#cover-box[data-id="'+id+'"]').removeClass("d-none");
   }
 });
-
-jQuery(document).ready(function() {
-  $('#review-carousel').owlCarousel({
-    loop: false,
-    items: 3,
-    animateOut: 'fadeOut',
-    margin: 0,
-    nav: false,
-    dots: true,
-    autoHeight:false,
-    responsive : {
-      0 : {
-        items: 1,
-      },
-      700 : {
-        items: 2,
-      },
-      1020 : {
-        items: 3,
-      }
-    }
-  })
-});

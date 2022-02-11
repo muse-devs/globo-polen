@@ -114,7 +114,7 @@ function polen_front_get_videos_single($talent, $videos, $image_data)
         <div id="banner-talent-videos" class="banner-content">
         <?php foreach ($videos as $key=>$video) : ?>
           <?php if ($video['video']) : ?>
-            <div class="col-6 col-md-3">
+            <div class="responsive">
               <div class="polen-card-video talent-single">
                 <figure id="cover-box" class="video-cover" data-id="<?php echo $key; ?>">
                   <img loading="lazy" src="<?php echo $video['cover']; ?>" alt="">
@@ -353,6 +353,30 @@ function polen_talent_review($reviews)
           </a>
         </div>
       </div>
+      <script>
+        jQuery(document).ready(function() {
+          $('#review-carousel').owlCarousel({
+            loop: false,
+            items: 3,
+            animateOut: 'fadeOut',
+            margin: 0,
+            nav: false,
+            dots: true,
+            autoHeight:false,
+            responsive : {
+              0 : {
+                items: 1,
+              },
+              700 : {
+                items: 2,
+              },
+              1020 : {
+                items: 3,
+              }
+            }
+          })
+        });
+      </script>
       <?php
         }
         else {
