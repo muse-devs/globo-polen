@@ -1,6 +1,6 @@
 <?php
 
-function polen_talent_promo_card($talent, $image_data)
+function polen_talent_promo_card($talent, $image_data = array())
 {
 	global $product;
 ?>
@@ -8,7 +8,11 @@ function polen_talent_promo_card($talent, $image_data)
 		<div class="box-color card row">
 			<div class="col-12 col-md-12 d-flex flex-column justify-content-center align-items-center text-center p-2">
 				<div class="image-cropper">
-          <img src="<?php echo $image_data['image']; ?>" alt="<?php echo $image_data["alt"]; ?>" />
+          <?php if ($image_data) : ?>
+            <img src="<?php echo $image_data['image']; ?>" alt="<?php echo $image_data["alt"]; ?>" />
+          <?php else : ?>
+            <?php echo polen_get_avatar($talent->user_id, 'polen-square-crop-lg'); ?>
+					<?php endif; ?>
 				</div>
 				<p class="mt-2">E aí, ficou com vontade de ter um vídeo?</p>
 				<?php if ($product->is_in_stock()) : ?>
@@ -114,7 +118,7 @@ function polen_front_get_videos_single($talent, $videos, $image_data)
         <div id="banner-talent-videos" class="banner-content">
         <?php foreach ($videos as $key=>$video) : ?>
           <?php if ($video['video']) : ?>
-            <div class="responsive">
+            <div class="col-6 col-md-3">
               <div class="polen-card-video talent-single">
                 <figure id="cover-box" class="video-cover" data-id="<?php echo $key; ?>">
                   <img loading="lazy" src="<?php echo $video['cover']; ?>" alt="">
@@ -353,30 +357,6 @@ function polen_talent_review($reviews)
           </a>
         </div>
       </div>
-      <script>
-        jQuery(document).ready(function() {
-          $('#review-carousel').owlCarousel({
-            loop: false,
-            items: 3,
-            animateOut: 'fadeOut',
-            margin: 0,
-            nav: false,
-            dots: true,
-            autoHeight:false,
-            responsive : {
-              0 : {
-                items: 1,
-              },
-              700 : {
-                items: 2,
-              },
-              1020 : {
-                items: 3,
-              }
-            }
-          })
-        });
-      </script>
       <?php
         }
         else {
