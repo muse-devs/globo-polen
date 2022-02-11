@@ -55,16 +55,7 @@ class Api_Talent_Order extends WP_REST_Controller
      */
     public function register_routes()
     {
-        //Rota para aceitar ou não o pedido de video
-        register_rest_route( $this->namespace, $this->rest_base . '/orders/(?P<id>[\d]+)/acceptance', [
-            [
-                'methods' => WP_REST_Server::EDITABLE,
-                'callback' => [ $this, 'accept_reject_order' ],
-                'permission_callback' => [ Api_Talent_Check_Permission::class, 'check_permission' ],
-                'args' => []
-            ]
-        ] );
-
+        
         //Rota para pegar um nonde válido
         register_rest_route( $this->namespace, $this->rest_base . '/orders/nonce', [
             [
@@ -74,13 +65,33 @@ class Api_Talent_Order extends WP_REST_Controller
                 'args' => []
             ]
         ] );
-
+    
+        //Rota para aceitar ou não o pedido de video
+        register_rest_route( $this->namespace, $this->rest_base . '/orders/(?P<id>[\d]+)/acceptance', [
+            [
+                'methods' => WP_REST_Server::EDITABLE,
+                'callback' => [ $this, 'accept_reject_order' ],
+                'permission_callback' => [ Api_Talent_Check_Permission::class, 'check_permission' ],
+                'args' => []
+            ]    
+        ] );            
 
         //Rota para criação de um slot no Vimeo
-        register_rest_route( $this->namespace, $this->rest_base . '/orders/slot-vimeo', [
+        register_rest_route( $this->namespace, $this->rest_base . '/orders/(?P<id>[\d]+)/slot-vimeo', [
             [
                 'methods' => WP_REST_Server::CREATABLE,
                 'callback' => [ $this, 'create_vimeo_slot' ],
+                'permission_callback' => [ Api_Talent_Check_Permission::class, 'check_permission' ],
+                'args' => []
+            ]
+        ] );
+
+
+        //Rota para completar o envio do pedido, criacao do Video-Info
+        register_rest_route( $this->namespace, $this->rest_base . '/orders/(?P<id>[\d]+)/sended', [
+            [
+                'methods' => WP_REST_Server::CREATABLE,
+                'callback' => [ $this, 'complete_order' ],
                 'permission_callback' => [ Api_Talent_Check_Permission::class, 'check_permission' ],
                 'args' => []
             ]
@@ -158,6 +169,25 @@ class Api_Talent_Order extends WP_REST_Controller
                 throw new Exception('Erro na criação do slot do video', 401);
             }
             return api_response($vimeo_response->response, 200);
+        } catch(Exception $e) {
+            return api_response($e->getMessage(), $e->getCode());
+        }
+    }
+
+
+    public function complete_order(WP_REST_Request $request): WP_REST_Response
+    {
+        $talent_id = get_current_user_id();
+        $order_id  = $request['id'];
+        $vimeo_id  = $request->get_param('vimeo_id');
+        try{
+            $polen_talent_controller = new Polen_Talent_Controller();
+            $checked = $polen_talent_controller->check_product_and_order( $talent_id, $order_id );
+            if(!$checked) {
+                throw new Exception('Erro na relação Idolo/Pedido');
+            }
+            $polen_talent_controller->send_video_vimeo_complete($vimeo_id, $order_id);
+            return api_response('Completo com sucesso', 200);
         } catch(Exception $e) {
             return api_response($e->getMessage(), $e->getCode());
         }

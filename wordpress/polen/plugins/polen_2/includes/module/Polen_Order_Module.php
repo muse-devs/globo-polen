@@ -183,6 +183,11 @@ class Polen_Order_Module
     }
 
 
+    public function get_id()
+    {
+        return $this->object->get_id();
+    }
+
     public function get_formatted_order_total()
     {
         return $this->object->get_formatted_order_total();
@@ -190,18 +195,18 @@ class Polen_Order_Module
 
     public function get_status()
     {
-        $this->object->get_status();
+        return $this->object->get_status();
     }
 
     public function get_total_for_talent()
     {
-        $this->object->get_total() * 0.75;
+        return $this->object->get_total() * 0.75;
     }
 
 
     public function get_total()
     {
-        $this->object->get_total();
+        return $this->object->get_total();
     }
 
     public function get_subtotal()

@@ -926,6 +926,7 @@ class Polen_Talent {
         ");
     }
 
+
     /**
      * Pega Orders por Talento por Status
      * $status pode ser uma string separada por virgula "'wc-payment-approved', 'wc-talent-accepted'"
@@ -976,13 +977,14 @@ class Polen_Talent {
         $order               = new Polen_Order_Module($wc_order);
         $obj['status']       = $order->get_status();
         $obj['total']        = $order->get_formatted_order_total();
-        $obj['total_value']  = $order->get_total_for_talent();
+        $obj['total_value']  = $order->get_total();
+        $obj['total_talent'] = $order->get_total_for_talent();
         $obj['total_raw']    = $order->get_subtotal();
         $obj['instructions'] = $order->get_instructions_to_video();
         $obj['name']         = $order->get_name_to_video();
         $obj['from']         = $order->get_offered_by();
         $obj['category']     = $order->get_video_category();
-        $obj['deadline']     = $order->get_deadline_formatted();
+        $obj['deadline']     = $order->get_deadline();
 
         return $obj;
     }
@@ -997,8 +999,14 @@ class Polen_Talent {
     public function get_orders_info(array $orders_id): array
     {
         $objects = [];
+
         foreach ($orders_id as $order_id) {
-            $objects = $this->get_order_info_v2($order_id);
+            $video_info = Polen_Video_Info::get_by_order_id($order_id);
+            if(empty($video_info) || $video_info->video_logo_status == Polen_Video_Info::VIDEO_LOGO_STATUS_WAITING ||
+               $video_info->video_logo_status == Polen_Video_Info::VIDEO_LOGO_STATUS_SENDED)
+            {
+                $objects = $this->get_order_info_v2($order_id);
+            }
         }
 
         return $objects;
