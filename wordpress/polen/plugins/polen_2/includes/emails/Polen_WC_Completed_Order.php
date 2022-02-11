@@ -67,7 +67,7 @@ class Polen_WC_Completed_Order extends \WC_Email_Customer_Completed_Order
         $cart_item = Polen_Cart_Item_Factory::polen_cart_item_from_order( $this->object );
         $this->product = $cart_item->get_product();
 
-        // send_zapier_by_change_status($this->object);
+        send_zapier_by_change_status($this->object);
         $order_is_campaing = Polen_Campaign::get_is_order_campaing( $this->object );
         if( $order_is_campaing ) {
             $this->send( $this->get_recipient(), $this->get_subject_galo(), $this->get_content_campaign(), $this->get_headers(), $this->get_attachments() );
