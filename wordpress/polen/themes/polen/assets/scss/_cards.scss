@@ -939,6 +939,7 @@
       overflow-x: auto;
       -ms-overflow-style: none; /* IE and Edge */
       scrollbar-width: none; /* Firefox */
+      scroll-behavior: smooth;
       &::-webkit-scrollbar {
         display: none;
       }
@@ -1224,32 +1225,38 @@
   }
 }
 
-.talents-carousel {
-  .owl-dots {
-    bottom: -0px;
-    .owl-dot {
-      span {
-        background: #5e5e5e;
-      }
-    }
+.pol-dots {
+  display: flex;
+  justify-content: flex-end;
+  .icon {
+    color: #000;
+    font-size: 19px;
+    cursor: pointer;
   }
-  .owl-nav {
-    top: auto;
-    bottom: -35px;
-    z-index: 5;
-    display: flex;
-    justify-content: flex-end;
-    right: 50px;
-    .icon-left-arrow {
-      left: auto;
-      color: #000;
-    }
-    .icon-right-arrow {
-      margin-left: 20px;
-      right: auto;
-      color: #000;
-    }
+  .icon-left-arrow {
+    left: auto;
   }
+  .icon-right-arrow {
+    right: auto;
+  }
+}
+
+.carousel-indicators li {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.carousel-control-prev {
+  width: auto;
+  border: none;
+  background: none;
+}
+
+.carousel-control-next {
+  width: auto;
+  border: none;
+  background: none;
 }
 
 // .col-flex-20 {

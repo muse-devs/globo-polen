@@ -15,6 +15,8 @@ class Polen_WooCommerce
     const ORDER_STATUS_TALENT_ACCEPTED     = 'talent-accepted';
     const ORDER_STATUS_ORDER_EXPIRED       = 'order-expired';
 
+    public $order_statuses = [];
+    
     public function __construct( $static = false ) 
     {
         $this->order_statuses = array(
@@ -72,7 +74,6 @@ class Polen_WooCommerce
             add_action( 'init', array( $this, 'register_custom_order_statuses' ) );
             add_filter( 'wc_order_statuses', array( $this, 'add_custom_order_statuses' ) );
             add_filter( 'bulk_actions-edit-shop_order', array( $this, 'dropdown_bulk_actions_shop_order' ), 20, 1 );
-            add_filter( 'woocommerce_email_actions', array( $this, 'email_actions' ), 20, 1 );
             add_action( 'woocommerce_checkout_create_order', array( $this, 'order_meta' ), 12, 2 );
             add_action( 'add_meta_boxes', array( $this, 'add_metaboxes' ) );
             add_action( 'admin_head', array( $this, 'remove_metaboxes' ) );
@@ -98,6 +99,7 @@ class Polen_WooCommerce
             add_action( 'woocommerce_update_product', array( $this, 'on_product_save' ) );
 
             add_action( 'save_post_post_polen_media', array( $this, 'save_metabox_post' ) );
+            add_action( 'save_post', array($this, 'seo_save_postdata') );
             // add_action( 'save_post', array( $this, 'change_status' ) );
 
             //Todas as compras gratis vão para o status payment-approved
@@ -181,20 +183,6 @@ class Polen_WooCommerce
         return $actions;
     }
 
-    function email_actions( $actions ) 
-    {
-        foreach ( $this->order_statuses as $order_status => $values ) 
-        {
-			$actions[] = 'woocommerce_order_status_' . $order_status;
-		}
-        $actions[] = 'woocommerce_order_status_'.Polen_Order::ORDER_STATUS_PAYMENT_APPROVED.'_to_'.Polen_Order::ORDER_STATUS_TALENT_REJECTED;
-        $actions[] = 'woocommerce_order_status_'.Polen_Order::ORDER_STATUS_PAYMENT_APPROVED.'_to_'.Polen_Order::ORDER_STATUS_TALENT_ACCEPTED;
-        $actions[] = 'woocommerce_order_status_'.Polen_Order::ORDER_STATUS_TALENT_ACCEPTED.'_to_'.Polen_Order::ORDER_STATUS_PAYMENT_APPROVED;
-        $actions[] = 'woocommerce_order_status_'.Polen_Order::ORDER_STATUS_TALENT_REJECTED.'_to_'.Polen_Order::ORDER_STATUS_PAYMENT_APPROVED;
-        $actions[] = 'woocommerce_order_status_'.Polen_Order::ORDER_STATUS_ORDER_EXPIRED.'_to_'.Polen_Order::ORDER_STATUS_PAYMENT_APPROVED;
-        return $actions;
-    }
-
     public function order_meta( $order, $data ) 
     {
         $items = WC()->cart->get_cart();
@@ -238,6 +226,7 @@ class Polen_WooCommerce
             global $post;
             $product_id = $post->ID;
             add_meta_box( 'Polen_Product_First_Order', 'Primeira Order', array( $this, 'metabox_create_first_order' ), 'product', 'side', 'default' );
+            add_meta_box( 'Polen_Product_SEO', 'SEO', array( $this, 'metabox_SEO' ), 'product', 'normal', 'default' );
         }
     }
 
@@ -297,6 +286,32 @@ class Polen_WooCommerce
             require_once TEMPLATEPATH . '/woocommerce/admin/metaboxes/metabox-first-order.php';
         } else {
             require_once PLUGIN_POLEN_DIR . '/admin/partials/metaboxes/metabox-first-order.php';
+        }
+    }
+
+    public function metabox_SEO($post)
+    {
+        if( file_exists( TEMPLATEPATH . '/woocommerce/admin/metaboxes/metabox-seo.php' ) ) {
+            require_once TEMPLATEPATH . '/woocommerce/admin/metaboxes/metabox-seo.php';
+        } else {
+            require_once PLUGIN_POLEN_DIR . '/admin/partials/metaboxes/metabox-seo.php';
+        }
+    }
+
+    public function seo_save_postdata( $post_id ) {
+        if ( array_key_exists( 'meta-seo-title', $_POST ) ) {
+            update_post_meta(
+                $post_id,
+                '_seo_title',
+                sanitize_text_field($_POST['meta-seo-title'])
+            );
+        }
+        if ( array_key_exists( 'meta-seo-description', $_POST ) ) {
+            update_post_meta(
+                $post_id,
+                '_seo_description',
+                sanitize_text_field($_POST['meta-seo-description'])
+            );
         }
     }
 

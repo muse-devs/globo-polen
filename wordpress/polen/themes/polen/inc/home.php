@@ -17,8 +17,12 @@ $inputs = new Material_Inputs();
   <!-- Banner Principal - Vídeo -->
   <?php polen_front_get_banner_video(); ?>
 
-  <!-- Listagem de Talentos - Destaques -->
-  <?php polen_talents_by_category(polen_get_new_talents(10), "Destaque"); ?>
+  <div class="row mb-3">
+    <div class="col-sm-12">
+      <!-- Listagem de Talentos - Destaques -->
+      <?php polen_banner_scrollable(polen_get_new_talents(10), "Destaque"); ?>
+    </div>
+  </div>
 
   <!-- Banners -->
 	<div class="row">
@@ -33,6 +37,33 @@ $inputs = new Material_Inputs();
 			</div>
 		</div>
 	</div>
+
+  <!-- <div class="row mb-3">
+		<div class="col-12">
+      <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <?php //polen_get_bbb_banner(site_url('tag/bbb/')); ?>
+          </div>
+          <div class="carousel-item">
+            <?php //polen_get_galo_banner(site_url('tag/galo-idolos/')); ?>
+          </div>
+        </div>
+        <button class="carousel-control-prev d-block d-md-none" type="button" data-target="#carouselExampleIndicators" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </button>
+        <button class="carousel-control-next d-block d-md-none" type="button" data-target="#carouselExampleIndicators" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </button>
+      </div>
+		</div>
+	</div> -->
 
   <!-- Como Funciona -->
   <?php polen_front_get_tutorial(); ?>
@@ -52,23 +83,32 @@ $inputs = new Material_Inputs();
     );
   ?>
 
-  <!-- Listagem de Talentos - Música -->
-  <?php polen_talents_by_category(polen_get_talents_by_product_cat("musica", 10), "Música", $emojis['musica'], '/categoria/musica'); ?>
-
-  <!-- Listagem de Talentos - Atrizes e Atores -->
-  <?php polen_talents_by_category(polen_get_talents_by_product_cat("atrizes-e-atores", 10), "Atrizes e Atores", $emojis['atrizes-e-atores'], '/categoria/atrizes-e-atores'); ?>
-
-  <!-- Listagem de Talentos - Apresentadores -->
-  <?php polen_talents_by_category(polen_get_talents_by_product_cat("apresentadores", 10), "Apresentadores", $emojis['apresentadores'], '/categoria/apresentadores'); ?>
-
-  <!-- Listagem de Talentos - Esporte -->
-  <?php polen_talents_by_category(polen_get_talents_by_product_cat("esporte", 10), "Esporte", $emojis['esporte'], '/categoria/esporte'); ?>
-
-  <!-- Listagem de Talentos - Influencers -->
-  <?php polen_talents_by_category(polen_get_talents_by_product_cat("influencers", 10), "Influencers", $emojis['influencers'], '/categoria/influencers'); ?>
-
-  <!-- Listagem de Talentos - Comediantes -->
-  <?php polen_talents_by_category(polen_get_talents_by_product_cat("comediantes", 10), "Comediantes", $emojis['comediantes'], '/categoria/comediantes'); ?>
+  <div class="row">
+    <div class="col-sm-12 mb-4">
+      <!-- Listagem de Talentos - Música -->
+      <?php polen_banner_scrollable(polen_get_talents_by_product_cat("musica", 10), "Música", $emojis['musica'], '/categoria/musica'); ?>
+    </div>
+    <div class="col-sm-12 mb-4">
+      <!-- Listagem de Talentos - Atrizes e Atores -->
+      <?php polen_banner_scrollable(polen_get_talents_by_product_cat("atrizes-e-atores", 10), "Atrizes e Atores", $emojis['atrizes-e-atores'], '/categoria/atrizes-e-atores'); ?>
+    </div>
+    <div class="col-sm-12 mb-4">
+      <!-- Listagem de Talentos - Apresentadores -->
+      <?php polen_banner_scrollable(polen_get_talents_by_product_cat("apresentadores", 10), "Apresentadores", $emojis['apresentadores'], '/categoria/apresentadores'); ?>
+    </div>
+    <div class="col-sm-12 mb-4">
+      <!-- Listagem de Talentos - Esporte -->
+      <?php polen_banner_scrollable(polen_get_talents_by_product_cat("esporte", 10), "Esporte", $emojis['esporte'], '/categoria/esporte'); ?>
+    </div>
+    <div class="col-sm-12 mb-4">
+      <!-- Listagem de Talentos - Influencers -->
+      <?php polen_banner_scrollable(polen_get_talents_by_product_cat("influencers", 10), "Influencers", $emojis['influencers'], '/categoria/influencers'); ?>
+    </div>
+    <div class="col-sm-12 mb-4">
+      <!-- Listagem de Talentos - Comediantes -->
+      <?php polen_banner_scrollable(polen_get_talents_by_product_cat("comediantes", 10), "Comediantes", $emojis['comediantes'], '/categoria/comediantes'); ?>
+    </div>
+  </div>
 
   <!-- Banners -->
 	<div class="row d-flex justify-content-center my-4">

@@ -11,7 +11,7 @@ namespace Polen\Includes;
 use Polen\Publics\Polen_Public;
 use DateInterval;
 use DateTime;
-use DateTimeZone;
+use Polen\Api\Api_Checkout;
 use WC_DateTime;
 
 class Polen_Order
@@ -52,6 +52,8 @@ class Polen_Order
     const WHATSAPP_NUMBER_NONCE_ACTION = 'polen_whatsapp_nonce_action';
 
     const META_KEY_DEADLINE = '_polen_deadline';
+
+    const META_KEY_CAMPAIGN = Api_Checkout::ORDER_METAKEY;
     
     public function __construct( $static = false ) {
         if( $static ) {

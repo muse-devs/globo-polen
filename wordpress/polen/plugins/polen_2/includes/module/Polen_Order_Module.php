@@ -1,10 +1,13 @@
 <?php
 namespace Polen\Includes\Module;
 
+use Exception;
 use Polen\Admin\Polen_Admin_Event_Promotional_Event_Fields;
 use Polen\Api\Api_Checkout;
+use Polen\Includes\Cart\Polen_Cart_Item;
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
 use Polen\Includes\Polen_Order;
+use WC_DateTime;
 use WC_Order_Query;
 
 class Polen_Order_Module
@@ -15,18 +18,20 @@ class Polen_Order_Module
     public $object;
     public $cart_item;
 
-    public function __construct( $order )
+    public function __construct($order)
     {
-        if( empty( $order ) ) {
+        if(empty($order)) {
+            // throw new Exception('Nao é uma order válida', 500);
             return null;
         }
 
         $this->object = $order;
-
         $this->cart_item = Polen_Cart_Item_Factory::polen_cart_item_from_order( $this->object );
     }
 
-
+    /**
+     * 
+     */
     public function get_is_campaign()
     {
         $order = $this->object;
@@ -38,6 +43,10 @@ class Polen_Order_Module
         return true;
     }
 
+
+    /**
+     * 
+     */
     public function get_campaign_slug()
     {
         $order = $this->object;
@@ -50,12 +59,27 @@ class Polen_Order_Module
     }
 
 
-
+    /**
+     * 
+     */
     public function get_video_to()
     {
         return $this->cart_item->get_video_to();
     }
 
+
+    /**
+     * 
+     */
+    public function get_video_to_is_to_my_self()
+    {
+        return $this->cart_item->get_video_to() === Polen_Cart_Item::VIDEO_FOR_TO_MY_SELF ? true : false;
+    }
+
+
+    /**
+     * 
+     */
     public function get_name_to_video()
     {
         if( self::VIDEO_TO_OTHER_ONE === $this->get_video_to() || $this->get_is_campaign() ) {
@@ -64,15 +88,52 @@ class Polen_Order_Module
         return $this->cart_item->get_offered_by();
     }
 
+
+    /**
+     * 
+     */
     public function get_offered_by()
     {
         return $this->cart_item->get_offered_by();
     }
 
 
+    /**
+     * 
+     */
+    public function get_instructions_to_video()
+    {
+        return $this->cart_item->get_instructions_to_video();
+    }
+
+    /**
+     * Retorna um inteiro com o timestamp da deadline
+     */
     public function get_deadline()
     {
         return $this->object->get_meta( Polen_Order::META_KEY_DEADLINE, true );
+    }
+
+
+    /**
+     * Retorna a deadline formatada
+     */
+    public function get_deadline_formatted()
+    {
+        $deadline = $this->get_deadline();
+        $currentDate = new WC_DateTime();
+        $deadlineDate = WC_DateTime::createFromFormat('U', $deadline);
+        $interval = $deadlineDate->diff($currentDate);
+        if(!$interval) {
+            return '';
+        }
+        return $interval->format('%d');
+    }
+
+
+    public function get_video_category()
+    {
+        return $this->cart_item->get_video_category();
     }
 
 
@@ -129,5 +190,47 @@ class Polen_Order_Module
                 <p class="value small">{$this->get_origin_to_list_orders_talent()}</p>
             </div>
         HTML;
+    }
+
+
+    public function get_id()
+    {
+        return $this->object->get_id();
+    }
+
+    public function get_formatted_order_total()
+    {
+        return $this->object->get_formatted_order_total();
+    }
+
+    public function get_status()
+    {
+        return $this->object->get_status();
+    }
+
+    public function get_total_for_talent()
+    {
+        return $this->object->get_total() * 0.75;
+    }
+
+
+    public function get_total()
+    {
+        return $this->object->get_total();
+    }
+
+    public function get_subtotal()
+    {
+        return $this->object->get_subtotal();
+    }
+
+    public function get_items()
+    {
+        return $this->object->get_items();
+    }
+
+    public function get_view_order_url()
+    {
+        return $this->object->get_view_order_url();
     }
 }

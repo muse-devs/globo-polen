@@ -657,6 +657,13 @@ class Polen_Plugin_Settings
                     'desc'     => 'ThemeID Polen Pagamento Aprovado',
                     'default'  => '',
                 ),
+                array(
+                    'id'       => Polen_Sendgrid_Redux::THEME_ID_POLEN_ORDER_COMPLETED,
+                    'type'     => 'text',
+                    'title'    => esc_html__('ThemeID Polen Pedido Completo', 'polen'),
+                    'desc'     => 'ThemeID Polen Pedido Completo',
+                    'default'  => '',
+                ),
                 // array(
                 //     'id'       => 'polen_api_rest_account',
                 //     'type'     => 'text',

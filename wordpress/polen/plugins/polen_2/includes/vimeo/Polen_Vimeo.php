@@ -2,6 +2,7 @@
 namespace Polen\Includes\Vimeo;
 
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
+use Polen\Includes\Module\Polen_Order_Module;
 use Polen\Includes\Polen_Video_Info;
 use Polen\Includes\Talent\Polen_Talent_Controller;
 use Vimeo\Exceptions\VimeoRequestException;
@@ -21,39 +22,25 @@ class Polen_Vimeo
      * @throws VimeoRequestException
      * @return Polen_Vimeo_Response
      */
-    public function make_video_slot_vimeo($order_id, $file_size, $name_to_video)
+    public function make_video_slot_vimeo($order_id, $file_size)
     {
-        $lib = Polen_Vimeo_Factory::create_vimeo_instance_with_redux();
-
-        $order_id       = filter_var($order_id, FILTER_SANITIZE_NUMBER_INT);
-        $file_size      = filter_var($file_size, FILTER_SANITIZE_NUMBER_INT);
-        $name_to_video  = filter_var($name_to_video);
-        $args           = Polen_Vimeo_Vimeo_Options::get_option_insert_video($file_size, $name_to_video);
+        $order       = wc_get_order($order_id);
+        $polen_order = new Polen_Order_Module($order);
+        if(empty($polen_order)) {
+            throw new VimeoRequestException('Pedido não encontrado', 404);
+        }
+        $args = Polen_Vimeo_Vimeo_Options::get_option_insert_video(
+            $file_size,
+            $polen_order->get_name_to_video() . " #{$order_id}"
+        );
+        $lib            = Polen_Vimeo_Factory::create_vimeo_instance_with_redux();
         $vimeo_response = $lib->request('/me/videos', $args, 'POST');
-        
-        $response = new Polen_Vimeo_Response($vimeo_response);
-
+        $response       = new Polen_Vimeo_Response($vimeo_response);
         if($response->is_error()) {
             throw new VimeoRequestException($response->get_developer_message(), 500);
         }
-        
-        $order = wc_get_order($order_id);
-        if(empty($order)) {
-            throw new VimeoRequestException('Pedido não encontrado', 404);
-        }
-        $cart_item = Polen_Cart_Item_Factory::polen_cart_item_from_order($order);
-        
-        $video_info = Polen_Video_Info::mount_video_info_with_order_cart_item_vimeo_response(
-            $order,
-            $cart_item,
-            $response,
-            Polen_Video_Info::VIDEO_LOGO_STATUS_WAITING
-        );
-        $video_info->insert();
-        
-        //recalcula o tempo de resposta do talento
-        $talent_controller = new Polen_Talent_Controller();
-        $talent_controller->average_video_response(get_current_user_id());
+        // $talent_controller = new Polen_Talent_Controller();
+        // $talent_controller->average_video_response(get_current_user_id());
 
         return $response;
     }

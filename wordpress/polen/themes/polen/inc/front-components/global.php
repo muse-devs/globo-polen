@@ -286,46 +286,18 @@ function polen_front_get_card($item, $size = "small", $social = false, $campanha
 <?php
 }
 
-function polen_banner_scrollable($items, $title, $link, $subtitle = "", $social = false)
+function createSlug($str, $delimiter = '-'){
+  $slug = strtolower(trim(preg_replace('/[\s-]+/', $delimiter, preg_replace('/[^A-Za-z0-9-]+/', $delimiter, preg_replace('/[&]/', 'and', preg_replace('/[\']/', '', iconv('UTF-8', 'ASCII//TRANSLIT', $str))))), $delimiter));
+  return $slug;
+}
+
+function polen_banner_scrollable($items, $title, $emoji = "", $link = "", $subtitle = "", $social = false)
 {
   if (!$items) {
     return;
   }
 ?>
   <section class="row mb-2 banner-scrollable">
-    <div class="col-md-12">
-      <header class="row mb-3">
-        <div class="col-12 d-flex justify-content-between align-items-center">
-          <h2 class="typo typo-title mr-2"><?php echo $title; ?></h2>
-          <a href="<?php echo $link; ?>" class="typo typo-link">Ver todos <?php Icon_Class::polen_icon_chevron_right(); ?></a>
-        </div>
-        <?php if ($subtitle != "") : ?>
-          <div class="col-12">
-            <p class="my-1"><?php echo $subtitle; ?></p>
-          </div>
-        <?php endif; ?>
-      </header>
-    </div>
-    <div class="col-md-12 p-0 p-md-0">
-      <div class="banner-wrapper">
-        <div class="banner-content">
-          <?php foreach ($items as $item) : ?>
-            <?php polen_front_get_card($item, "responsive", $social); ?>
-          <?php endforeach; ?>
-        </div>
-      </div>
-    </div>
-  </section>
-<?php
-}
-
-function polen_talents_by_category($items, $title, $emoji = "", $link = "", $subtitle = "", $social = false)
-{
-  if (!$items) {
-    return;
-  }
-?>
-  <section class="row mb-4">
     <div class="col-md-12">
       <header class="row mb-3">
         <div class="col-12 d-flex justify-content-between align-items-center">
@@ -349,15 +321,28 @@ function polen_talents_by_category($items, $title, $emoji = "", $link = "", $sub
         <?php endif; ?>
       </header>
     </div>
-    <div class="col-md-12 p-0 p-md-0 mb-5">
-      <div class="owl-carousel owl-theme talents-carousel">
-        <?php foreach ($items as $item) : ?>
-          <div class="item">
+    <div class="col-md-12 p-0 p-md-0">
+      <div class="banner-wrapper">
+        <div id="banner-<?php echo createSlug($title); ?>" class="banner-content">
+          <?php foreach ($items as $item) : ?>
             <?php polen_front_get_card($item, "responsive", $social); ?>
-          </div>
-        <?php endforeach; ?>
+          <?php endforeach; ?>
+        </div>
       </div>
     </div>
+    <?php ; ?>
+    <?php if (count($items) > 6) : ?>
+      <div class="col-md-12 mt-4 d-none d-md-block">
+        <div class="pol-dots">
+          <a href="javascript:polPrevCarousel('banner-<?php echo createSlug($title); ?>')">
+            <i class='icon icon-left-arrow pol-prev-button mr-2'></i>
+          </a>
+          <a href="javascript:polNextCarousel('banner-<?php echo createSlug($title); ?>')">
+            <i class='icon icon-right-arrow pol-next-button ml-2'></i>
+          </a>
+        </div>
+      </div>
+    <?php endif; ?>
   </section>
 <?php
 }
@@ -513,30 +498,6 @@ function polen_front_get_videos($videos, $title = "Vídeos em destaque")
           $('#cover-box[data-id="'+id+'"]').removeClass("d-none");
         }
       });
-      jQuery(document).ready(function() {
-        $('#videos-carousel').owlCarousel({
-          loop: false,
-          stagePadding: 15,
-          items: 4,
-          animateOut: 'fadeOut',
-          margin: 5,
-          nav: true,
-          dots: false,
-          autoHeight:false,
-          navText: ["<i class='icon icon-left-arrow'></i>", "<i class='icon icon-right-arrow'></i>"],
-          responsive : {
-              0 : {
-                items: 2,
-              },
-              700 : {
-                items: 3,
-              },
-              1020 : {
-                items: 4,
-              }
-          }
-        });
-      })
     })(jQuery);
 	</script>
 <?php
@@ -642,7 +603,7 @@ function polen_box_related_product_by_product_id($product_id)
 ?>
   <div class="row">
     <div class="col-12 col-md-12">
-      <?php polen_banner_scrollable($args, "Veja também", $cat_link); ?>
+      <?php polen_banner_scrollable($args, "Veja também", "",$cat_link); ?>
     </div>
   </div>
 <?php
@@ -943,7 +904,7 @@ function polen_get_natal_banner($link)
 function polen_get_galo_banner($link)
 {
 ?>
-  <div class="row mt-4">
+  <div class="row">
     <div class="col-12">
       <a href="<?php echo $link; ?>">
         <div class="galo-banner" style="background: url('<?php echo TEMPLATE_URI . '/assets/img/galo/bg.png'; ?>')center no-repeat">
@@ -958,7 +919,7 @@ function polen_get_galo_banner($link)
 function polen_get_bbb_banner($link)
 {
 ?>
-  <div class="row mt-4">
+  <div class="row">
     <div class="col-12">
       <a href="<?php echo $link; ?>">
         <div class="bbb-banner" style="background: url('<?php echo TEMPLATE_URI . '/assets/img/bbb/bg.png'; ?>')center no-repeat; background-size: cover">

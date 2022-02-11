@@ -1,4 +1,7 @@
 <?php
+
+use Polen\Includes\Polen_Order;
+
 /**
  * Tratar response da API
  *
@@ -27,7 +30,12 @@ function custom_fields_in_order_admin($order)
         $origin = event_promotional_order_get_slug_event($order);
     }
 
-    echo "<p><strong>Origem:</strong><br> {$origin} </p><br>";
+    $payment = $order->get_payment_method_title();
+
+    $html = "<p><strong>Origem:</strong><br> {$origin} </p>";
+    $html .= "<p><strong>Via:</strong><br> {$payment} </p><br>";
+
+    echo $html;
 }
 add_action('woocommerce_admin_order_data_after_billing_address', 'custom_fields_in_order_admin', 10, 1);
 
@@ -37,8 +45,8 @@ add_action('woocommerce_admin_order_data_after_billing_address', 'custom_fields_
 function get_origin_order($order)
 {
     $origin = 'polen_site';
-    if (get_post_meta($order->id, 'hotsite', true)) {
-        $origin = get_post_meta($order->id, 'hotsite', true);
+    if (get_post_meta($order->get_id(), Polen_Order::META_KEY_CAMPAIGN, true)) {
+        $origin = get_post_meta($order->get_id(), Polen_Order::META_KEY_CAMPAIGN, true);
     }
 
     $order_is_ep = event_promotional_order_is_event_promotional($order);
