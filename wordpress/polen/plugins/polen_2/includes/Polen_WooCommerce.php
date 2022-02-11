@@ -15,6 +15,8 @@ class Polen_WooCommerce
     const ORDER_STATUS_TALENT_ACCEPTED     = 'talent-accepted';
     const ORDER_STATUS_ORDER_EXPIRED       = 'order-expired';
 
+    public $order_statuses = [];
+    
     public function __construct( $static = false ) 
     {
         $this->order_statuses = array(

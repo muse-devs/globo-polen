@@ -977,13 +977,14 @@ class Polen_Talent {
         $wc_order            = wc_get_order($order_id);
         $order               = new Polen_Order_Module($wc_order);
         $obj['status']       = $order->get_status();
-        $obj['total']        = $order->get_formatted_order_total();
-        $obj['total_value']  = $order->get_total();
-        $obj['total_talent'] = $order->get_total_for_talent();
-        $obj['total_raw']    = $order->get_subtotal();
+        // $obj['total']        = $order->get_formatted_order_total();
+        // $obj['total_value']  = $order->get_total();
+        $obj['total_value'] = $order->get_total_for_talent();
+        // $obj['total_raw']    = $order->get_subtotal();
         $obj['instructions'] = $order->get_instructions_to_video();
         $obj['name']         = $order->get_name_to_video();
         $obj['from']         = $order->get_offered_by();
+        $obj['to_myself']    = $order->get_video_to_is_to_my_self();
         $obj['category']     = $order->get_video_category();
         $obj['deadline']     = $order->get_deadline();
 
