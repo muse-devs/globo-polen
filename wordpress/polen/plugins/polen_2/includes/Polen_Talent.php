@@ -1001,12 +1001,7 @@ class Polen_Talent {
         $objects = [];
 
         foreach ($orders_id as $order_id) {
-            $video_info = Polen_Video_Info::get_by_order_id($order_id);
-            if(empty($video_info) || $video_info->video_logo_status == Polen_Video_Info::VIDEO_LOGO_STATUS_WAITING ||
-               $video_info->video_logo_status == Polen_Video_Info::VIDEO_LOGO_STATUS_SENDED)
-            {
-                $objects = $this->get_order_info_v2($order_id);
-            }
+            $objects[] = $this->get_order_info_v2($order_id);
         }
 
         return $objects;
