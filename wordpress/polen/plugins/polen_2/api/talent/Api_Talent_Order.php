@@ -90,7 +90,7 @@ class Api_Talent_Order extends WP_REST_Controller
         //Rota para completar o envio do pedido, criacao do Video-Info
         register_rest_route( $this->namespace, $this->rest_base . '/orders/(?P<id>[\d]+)/sended', [
             [
-                'methods' => WP_REST_Server::CREATABLE,
+                'methods' => WP_REST_Server::EDITABLE,
                 'callback' => [ $this, 'complete_order' ],
                 'permission_callback' => [ Api_Talent_Check_Permission::class, 'check_permission' ],
                 'args' => []
