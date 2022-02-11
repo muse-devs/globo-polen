@@ -118,7 +118,7 @@ function polen_front_get_videos_single($talent, $videos, $image_data)
         <div id="banner-talent-videos" class="banner-content">
         <?php foreach ($videos as $key=>$video) : ?>
           <?php if ($video['video']) : ?>
-            <div class="col-6 col-md-3">
+            <div class="responsive">
               <div class="polen-card-video talent-single">
                 <figure id="cover-box" class="video-cover" data-id="<?php echo $key; ?>">
                   <img loading="lazy" src="<?php echo $video['cover']; ?>" alt="">
