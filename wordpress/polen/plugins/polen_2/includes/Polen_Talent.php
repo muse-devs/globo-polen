@@ -998,7 +998,7 @@ class Polen_Talent {
     {
         $objects = [];
         foreach ($orders_id as $order_id) {
-            $objects = $this->get_order_info_v2($order_id);
+            $objects[] = $this->get_order_info_v2($order_id);
         }
 
         return $objects;
