@@ -14,6 +14,7 @@ const duracaoMaxima = 65; //segundos
 
 window.URL = window.URL || window.webkitURL;
 let videoDuration;
+let vimeo_id;
 
 window.onload = () => {
 	form.onsubmit = function (evt) {
@@ -46,6 +47,7 @@ window.onload = () => {
 				(data, textStatus, jqXHR) => {
 					if (jqXHR.status == 200) {
 						let file = file_input.files[0];
+						vimeo_id = data.data.body.uri;
 						let upload = new tus.Upload(file, {
 							uploadUrl: data.data.body.upload.upload_link,
 							onError: errorHandler,
@@ -109,9 +111,10 @@ let completeHandler = () => {
 	let obj_complete_order = {
 		action: "order_status_completed",
 		order: upload_video.order_id,
+		vimeo_id,
 	};
 	jQuery
-		.post(polenObj.ajax_url, obj_complete_order, () => {
+		.post(polenObj.ajax_url, obj_complete_order, (data, textStatus, jqXHR) => {
 			window.location.href =
 				polenObj.base_url +
 				"/my-account/success-upload/?order_id=" +
@@ -123,7 +126,7 @@ let completeHandler = () => {
 		});
 };
 let errorHandler = (data, textStatus, jqXHR) => {
-	alert("Erro no envio do arquivo, tente novamente");
+	alert("Erro no envio do vídeo, tente novamente.");
 	document.location.reload();
 };
 
