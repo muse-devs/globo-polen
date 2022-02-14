@@ -1,1 +1,1 @@
-// export { default as PolAvatar } from "src/components/PolAvatar";
+export { default as PolSEO } from "components/PolSEO";
