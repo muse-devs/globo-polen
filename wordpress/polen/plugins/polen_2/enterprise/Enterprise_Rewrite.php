@@ -62,7 +62,7 @@ class Enterprise_Rewrite
 
         if ($this->is_home()) {
             $GLOBALS[self::QUERY_VARS_MASTER_CLASS_IS_HOME] = '1';
-            return get_template_directory() . '/enterprise/index.php';
+            return get_template_directory() . '/b2b/public/index.html';
         }
 
         if( $this->is_page_success() ) {
