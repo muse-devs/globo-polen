@@ -1,0 +1,20 @@
+.talent-header {
+  color: var(--bs-low-pure);
+  .name {
+    color: inherit;
+    @include media-breakpoint-up(md) {
+      font: var(--pol-font-16-regular);
+    }
+  }
+  .btn-logout {
+    border: none;
+    background: none;
+    @include media-breakpoint-up(md) {
+      font: var(--pol-font-16-bold);
+    }
+    color: inherit;
+    .text {
+      text-decoration: underline;
+    }
+  }
+}
