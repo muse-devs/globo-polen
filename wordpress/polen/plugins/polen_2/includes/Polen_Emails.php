@@ -22,7 +22,9 @@ class Polen_Emails {
 
     function email_actions( $actions ) 
     {
-        foreach ( $this->order_statuses as $order_status => $values ) 
+        $polen_woocommerce = new Polen_WooCommerce();
+        $order_statuses = $polen_woocommerce->order_statuses;
+        foreach ( $order_statuses as $order_status => $values ) 
         {
 			$actions[] = 'woocommerce_order_status_' . $order_status;
 		}

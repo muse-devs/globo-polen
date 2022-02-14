@@ -4,6 +4,7 @@ namespace Polen\Includes\Module;
 use Exception;
 use Polen\Admin\Polen_Admin_Event_Promotional_Event_Fields;
 use Polen\Api\Api_Checkout;
+use Polen\Includes\Cart\Polen_Cart_Item;
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
 use Polen\Includes\Polen_Order;
 use WC_DateTime;
@@ -64,6 +65,15 @@ class Polen_Order_Module
     public function get_video_to()
     {
         return $this->cart_item->get_video_to();
+    }
+
+
+    /**
+     * 
+     */
+    public function get_video_to_is_to_my_self()
+    {
+        return $this->cart_item->get_video_to() === Polen_Cart_Item::VIDEO_FOR_TO_MY_SELF ? true : false;
     }
 
 
@@ -183,6 +193,11 @@ class Polen_Order_Module
     }
 
 
+    public function get_id()
+    {
+        return $this->object->get_id();
+    }
+
     public function get_formatted_order_total()
     {
         return $this->object->get_formatted_order_total();
@@ -190,18 +205,18 @@ class Polen_Order_Module
 
     public function get_status()
     {
-        $this->object->get_status();
+        return $this->object->get_status();
     }
 
     public function get_total_for_talent()
     {
-        $this->object->get_total() * 0.75;
+        return $this->object->get_total() * 0.75;
     }
 
 
     public function get_total()
     {
-        $this->object->get_total();
+        return $this->object->get_total();
     }
 
     public function get_subtotal()

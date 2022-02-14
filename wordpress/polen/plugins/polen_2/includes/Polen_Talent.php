@@ -923,8 +923,10 @@ class Polen_Talent {
                 AND order_items.order_item_type = 'line_item'
                 AND order_item_meta.meta_key = '_product_id'
                 AND order_item_meta.meta_value = $product_id
+                AND 0 = (SELECT COUNT(*) FROM {$wpdb->prefix}video_info AS vi WHERE vi.order_id = posts.ID);
         ");
     }
+
 
     /**
      * Pega Orders por Talento por Status
@@ -975,14 +977,16 @@ class Polen_Talent {
         $wc_order            = wc_get_order($order_id);
         $order               = new Polen_Order_Module($wc_order);
         $obj['status']       = $order->get_status();
-        $obj['total']        = $order->get_formatted_order_total();
-        $obj['total_value']  = $order->get_total_for_talent();
-        $obj['total_raw']    = $order->get_subtotal();
+        // $obj['total']        = $order->get_formatted_order_total();
+        // $obj['total_value']  = $order->get_total();
+        $obj['total_value'] = $order->get_total_for_talent();
+        // $obj['total_raw']    = $order->get_subtotal();
         $obj['instructions'] = $order->get_instructions_to_video();
         $obj['name']         = $order->get_name_to_video();
         $obj['from']         = $order->get_offered_by();
+        $obj['to_myself']    = $order->get_video_to_is_to_my_self();
         $obj['category']     = $order->get_video_category();
-        $obj['deadline']     = $order->get_deadline_formatted();
+        $obj['deadline']     = $order->get_deadline();
 
         return $obj;
     }
@@ -997,6 +1001,7 @@ class Polen_Talent {
     public function get_orders_info(array $orders_id): array
     {
         $objects = [];
+
         foreach ($orders_id as $order_id) {
             $objects[] = $this->get_order_info_v2($order_id);
         }
