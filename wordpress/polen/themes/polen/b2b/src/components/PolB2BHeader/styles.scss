@@ -1,0 +1,8 @@
+@import "../../styles/mixins";
+
+.test {
+  background-color: green;
+  @include desktop {
+    background-color: red;
+  }
+}
