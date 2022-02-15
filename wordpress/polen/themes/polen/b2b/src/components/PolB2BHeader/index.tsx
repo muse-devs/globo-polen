@@ -14,7 +14,7 @@ const PolB2bHeader = () => {
           </a>
         </Col>
         <Col xs={6} className="d-flex align-items-center justify-content-end">
-          <Button variant="outline-light" href="#fale">
+          <Button variant="outline-light" href="#faleconosco">
             Fale Conosco
           </Button>
         </Col>
