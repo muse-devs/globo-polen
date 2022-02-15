@@ -24,25 +24,34 @@ const videos = [
 ];
 
 export default function () {
+
+  const handleClick = evt => {
+    console.log(evt.currentTarget);
+  }
+
   return (
     <section>
       <Row>
-        <Col md={6} className="ps-4 order-1 order-md-0">
+        <Col md={6} className="ps-4 mt-4 mt-md-0 order-1 order-md-0">
           <h1 className="typo-xl">
             Use os vídeos personalizados dos ídolos da Polen para impulsionar o
             seu <em>negócio</em>
           </h1>
-          <p>
+          <p className="typo-xs">
             Crie autoridade para sua marca, aumente suas vendas, e crie mais
             engajamento com seus clientes e colaboradores.
           </p>
-          <Button href="#faleconosco">Fale com a equipe de vendas</Button>
+          <div className="d-grid gap-2 mt-4">
+            <Button href="#faleconosco" size="lg">
+              Fale com a equipe de vendas
+            </Button>
+          </div>
         </Col>
         <Col md={6}>
           <PolScrollable id={"super-banner"}>
             {videos.map((item) => (
               <section>
-                <div className="super-banner-item me-4" key={item.name}>
+                <div className="super-banner-item me-4" key={item.name} onClick={handleClick}>
                   <figure className="video-card">
                     <img src={item.image} alt={item.name} className="poster" />
                     <video
