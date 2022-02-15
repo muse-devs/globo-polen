@@ -1,5 +1,5 @@
 import * as React from "react";
-import { PolSEO, PolB2BHeader, PolB2BSuperBanner } from "components";
+import { PolSEO, PolB2BHeader, PolB2BSuperBanner, PolHowToHelpYou } from "components";
 
 const IndexPage = () => {
   return (
@@ -8,6 +8,7 @@ const IndexPage = () => {
       <main>
         <PolB2BHeader />
         <PolB2BSuperBanner />
+        <PolHowToHelpYou />
       </main>
     </>
   );
