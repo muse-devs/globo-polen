@@ -5,7 +5,7 @@ export default function () {
   return (
     <Row>
       <Col md={6} className="ps-md-4">
-        <h1>
+        <h1 className="typo-xl">
           Use os vídeos personalizados dos ídolos da Polen para impulsionar o
           seu <em>negócio</em>
         </h1>

@@ -7,17 +7,17 @@
 
 .card-title {
   font: var(--pol-font-16-bold);
-  color: var(--bs-low-pure);
+  color: var(--bs-high-pure);
 }
 
 .card-value {
   font: var(--pol-font-16-normal);
-  color: var(--bs-low-pure);
+  color: var(--bs-high-pure);
 }
 
 .typo-xxs {
   font: var(--pol-font-14-regular);
-  color: var(--bs-low-pure);
+  color: var(--bs-high-pure);
   strong {
     font: var(--pol-font-14-bold);
   }
@@ -25,7 +25,7 @@
 
 .typo-xs {
   font: var(--pol-font-16-regular);
-  color: var(--bs-low-pure);
+  color: var(--bs-high-pure);
   strong {
     font: var(--pol-font-16-bold);
   }
@@ -33,7 +33,7 @@
 
 .typo-sm {
   font: var(--pol-font-20-regular);
-  color: var(--bs-low-pure);
+  color: var(--bs-high-pure);
   strong {
     font: var(--pol-font-20-bold);
   }
@@ -41,7 +41,7 @@
 
 .typo-md {
   font: var(--pol-font-24-regular);
-  color: var(--bs-low-pure);
+  color: var(--bs-high-pure);
   strong {
     font: var(--pol-font-24-bold);
   }
@@ -49,12 +49,34 @@
 
 .typo-lg {
   font: var(--pol-font-32-regular);
-  color: var(--bs-low-pure);
+  color: var(--bs-high-pure);
   strong {
     font: var(--pol-font-32-bold);
   }
 }
 
+.typo-xl {
+  font: var(--pol-font-32-regular);
+  color: var(--bs-high-pure);
+  strong {
+    font: var(--pol-font-32-bold);
+  }
+  @include media-breakpoint-up(md) {
+    font-size: 48px;
+  }
+}
+
+.typo-xxl {
+  font: var(--pol-font-32-regular);
+  color: var(--bs-high-pure);
+  strong {
+    font: var(--pol-font-32-bold);
+  }
+  @include media-breakpoint-up(md) {
+    font-size: 56px;
+  }
+}
+
 .typo-neutral {
-  color: var(--bs-low-medium);
+  color: var(--bs-high-medium);
 }
