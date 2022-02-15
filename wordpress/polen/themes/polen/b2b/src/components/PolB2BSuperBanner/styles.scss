@@ -1,0 +1,36 @@
+.super-banner-item {
+  position: relative;
+  width: 241px;
+  height: 353px;
+  background-color: red;
+  .video-card {
+    width: 100%;
+    height: 100%;
+    .poster {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .video-player {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+    }
+  }
+  .logo {
+    position: absolute;
+    text-align: center;
+    left: 50%;
+    bottom: 0;
+    transform: translate(-50%, 0);
+    .image {
+      width: 70px;
+      height: 70px;
+    }
+    .name {
+      margin-top: 0.8rem;
+    }
+  }
+}
