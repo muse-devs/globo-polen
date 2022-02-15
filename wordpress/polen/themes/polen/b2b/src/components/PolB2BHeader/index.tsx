@@ -1,6 +1,7 @@
 import React from "react";
 import { ChevronLeft } from "react-feather";
 import { Container, Row, Col, Button } from "react-bootstrap";
+import "./styles.scss";
 import logo from "images/logo-b2b.png";
 
 const PolB2bHeader = () => {
