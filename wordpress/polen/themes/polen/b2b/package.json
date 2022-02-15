@@ -3,14 +3,15 @@
   "version": "1.0.0",
   "private": true,
   "description": "Polen B2B",
-  "author": "Ricardo Rodrigues",
+  "author": "Polen.me",
   "keywords": [
     "gatsby"
   ],
+  "homepage": "./",
   "scripts": {
     "develop": "gatsby develop",
     "start": "gatsby develop",
-    "build": "gatsby build",
+    "build": "gatsby build --prefix-paths",
     "serve": "gatsby serve",
     "clean": "gatsby clean"
   },
