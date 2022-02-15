@@ -6,7 +6,7 @@ import logo from "images/logo-b2b.png";
 
 const PolB2bHeader = () => {
   return (
-    <Container fluid>
+    <Container>
       <Row className="py-4">
         <Col xs={6} className="d-flex align-items-center">
           <a href="/">
@@ -15,7 +15,7 @@ const PolB2bHeader = () => {
           </a>
         </Col>
         <Col xs={6} className="d-flex align-items-center justify-content-end">
-          <Button variant="outline-light" href="#faleconosco">
+          <Button variant="outline-light" size="sm" href="#faleconosco">
             Fale Conosco
           </Button>
         </Col>
