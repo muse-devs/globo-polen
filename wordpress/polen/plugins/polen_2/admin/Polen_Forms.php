@@ -4,6 +4,7 @@ namespace Polen\Admin;
 
 use Exception;
 use Polen\Includes\Polen_Form_DB;
+use Polen\Includes\Polen_Zapier;
 
 class Polen_Forms {
 
@@ -105,7 +106,8 @@ class Polen_Forms {
 
             $form_db = new Polen_Form_DB();
             $form_db->insert($data);
-
+            $zapier = new Polen_Zapier();
+            $zapier->send('https://hooks.zapier.com/hooks/catch/10583855/br5beyv/', $data);
             $this->mailSend($data);
 
             wp_send_json_success('ok', 200);
@@ -123,8 +125,11 @@ class Polen_Forms {
     private function requiredFields(): array
     {
         return [
+            'name' => 'Nome',
             'email' => 'E-mail',
-            'terms' => 'Termos',
+            'company' => 'Empresa',
+            'phone' => 'Telefone',
+            // 'terms' => 'Termos',
             'form_id' => 'ID do formulário',
         ];
     }
@@ -141,12 +146,12 @@ class Polen_Forms {
             'name' => 'Nome',
             'email' => 'E-mail',
             'company' => 'Empresa',
-            'employees_quantity' => 'Quantidade de funcionários',
+            // 'employees_quantity' => 'Quantidade de funcionários',
             // 'job' => 'Cargo',
-            'budget' => 'Orçamento',
+            // 'budget' => 'Orçamento',
             'phone' => 'Telefone',
-            'talent_name' => 'Nome do talento',
-            'message' => 'Mensagem'
+            // 'talent_name' => 'Nome do talento',
+            // 'message' => 'Mensagem'
         ];
 
         if (!isset($fields[$field])) {
@@ -160,7 +165,7 @@ class Polen_Forms {
      * Disparar email de novo cadastro
      * @param array $fields
      */
-    private function mailSend(array $fields)
+    public function mailSend(array $fields)
     {
         global $Polen_Plugin_Settings;
         $emails_company_page = $Polen_Plugin_Settings['recipient_email_polen_company'];
