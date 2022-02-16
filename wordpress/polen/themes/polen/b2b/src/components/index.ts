@@ -6,4 +6,5 @@ export { default as PolScrollable } from "components/PolScrollable";
 export { default as PolHowItWork } from "components/PolHowItWork";
 export { default as PolB2BForm } from "components/PolB2BForm";
 export { default as PolIdols } from "components/PolIdols";
+export { default as PolFaq } from "components/PolFaq";
 export { default as PolB2BFooter } from "components/PolB2BFooter";

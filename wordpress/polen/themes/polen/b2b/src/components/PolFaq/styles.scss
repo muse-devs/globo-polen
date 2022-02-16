@@ -1,0 +1,25 @@
+.faq-accordion {
+  border: 1px solid #515151;
+  border-radius: 16px;
+  padding: 32px;
+  .accordion-header {
+    position: relative;
+    &:after {
+      content: "+";
+      display: block;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 0;
+      font-size: 34px;
+      font-weight: 100;
+      color: var(--bs-high-pure);
+    }
+    border-bottom: 1px solid #515151;
+    button {
+      background: none;
+      border: none;
+      color: var(--bs-high-pure);
+    }
+  }
+}
