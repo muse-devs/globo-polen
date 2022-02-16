@@ -10,6 +10,12 @@ const idols = [
   { name: "Bruno Chelles", img: "https://polen.me/polen/uploads/2021/06/IMG-20210429-WA0035.jpg" },
   { name: "Gleice", img: "https://polen.me/polen/uploads/2021/10/IMG_3903-1-2.jpg" },
   { name: "Papatinho", img: "https://polen.me/polen/uploads/2021/06/youknowmyface_Papatinho_2021-15-4-2.jpg" },
+  { name: "Lazinho", img: "https://polen.me/polen/uploads/2022/01/806bf11b-7460-4b31-92e2-468b8a4a6724.jpeg" },
+  { name: "João Gordo", img: "https://polen.me/polen/uploads/2022/02/IMG_0498.jpg" },
+  { name: "Vanessa", img: "https://polen.me/polen/uploads/2021/08/Vanessa-Gerbelli-1.jpeg" },
+  { name: "Bruno Chelles", img: "https://polen.me/polen/uploads/2021/06/IMG-20210429-WA0035.jpg" },
+  { name: "Gleice", img: "https://polen.me/polen/uploads/2021/10/IMG_3903-1-2.jpg" },
+  { name: "Papatinho", img: "https://polen.me/polen/uploads/2021/06/youknowmyface_Papatinho_2021-15-4-2.jpg" },
 ]
 
 export default function () {
