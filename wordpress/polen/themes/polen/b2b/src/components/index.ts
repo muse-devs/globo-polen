@@ -4,3 +4,4 @@ export { default as PolB2BSuperBanner } from "components/PolB2BSuperBanner";
 export { default as PolHowToHelpYou } from "components/PolHowToHelpYou";
 export { default as PolScrollable } from "components/PolScrollable";
 export { default as PolHowItWork } from "components/PolHowItWork";
+export { default as PolB2BForm } from "components/PolB2BForm";
