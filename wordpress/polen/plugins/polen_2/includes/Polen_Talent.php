@@ -10,6 +10,7 @@ namespace Polen\Includes;
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
 use Polen\Includes\Module\Polen_Order_Module;
 use Polen\Includes\Polen_Order;
+use Polen\Includes\v2\Polen_Order_V2;
 use WP_Query;
 use WP_User;
 
@@ -989,6 +990,17 @@ class Polen_Talent {
         $obj['deadline']     = $order->get_deadline();
 
         return $obj;
+    }
+
+    /**
+     * Retornar numero de orders com expiração para o dia atual
+     *
+     * @param array $orders_id
+     * @return int|null
+     */
+    public function get_products_deadline_today_count(array $orders_id): ?int
+    {
+        return Polen_Order_V2::get_qty_orders_by_products_id_deadline($orders_id, date('Y/m/d'));;
     }
 
 

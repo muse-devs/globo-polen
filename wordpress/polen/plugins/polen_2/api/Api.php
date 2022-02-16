@@ -33,6 +33,8 @@ class Api {
             $talent_order->register_routes();
             $talent_payment = new Api_Talent_Payment();
             $talent_payment->register_route();
+            $contact = new Api_Contact();
+            $contact->register_route();
         }
     }
 
