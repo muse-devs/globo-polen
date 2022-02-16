@@ -148,7 +148,7 @@ class Polen_Forms {
             'company' => 'Empresa',
             // 'employees_quantity' => 'Quantidade de funcionários',
             // 'job' => 'Cargo',
-            // 'budget' => 'Orçamento',
+            'product' => 'Código do Produto',
             'phone' => 'Telefone',
             // 'talent_name' => 'Nome do talento',
             // 'message' => 'Mensagem'

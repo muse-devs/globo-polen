@@ -114,7 +114,7 @@ class Api_Contact
             $form_db->insert($body);
             
             $body['product'] = $slug;
-            $form_service    = new Polen_Forms();
+            $form_service = new Polen_Forms();
             $form_service->mailSend($body);
 
             $url_zapier_b2b_hotspot = $Polen_Plugin_Settings['polen_url_zapier_b2b_hotspot'];
