@@ -7,6 +7,7 @@ import {
   PolIdols,
   PolHowItWork,
   PolB2BForm,
+  PolB2BFooter,
 } from "components";
 
 const IndexPage = () => {
@@ -20,6 +21,7 @@ const IndexPage = () => {
         <PolIdols />
         <PolHowItWork />
         <PolB2BForm />
+        <PolB2BFooter />
       </main>
     </>
   );
