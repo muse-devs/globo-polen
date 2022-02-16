@@ -5,3 +5,4 @@ export { default as PolHowToHelpYou } from "components/PolHowToHelpYou";
 export { default as PolScrollable } from "components/PolScrollable";
 export { default as PolHowItWork } from "components/PolHowItWork";
 export { default as PolB2BForm } from "components/PolB2BForm";
+export { default as PolIdols } from "components/PolIdols";

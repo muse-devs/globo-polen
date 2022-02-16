@@ -4,6 +4,7 @@ import {
   PolB2BHeader,
   PolB2BSuperBanner,
   PolHowToHelpYou,
+  PolIdols,
   PolHowItWork,
   PolB2BForm,
 } from "components";
@@ -16,6 +17,7 @@ const IndexPage = () => {
         <PolB2BHeader />
         <PolB2BSuperBanner />
         <PolHowToHelpYou />
+        <PolIdols />
         <PolHowItWork />
         <PolB2BForm />
       </main>
