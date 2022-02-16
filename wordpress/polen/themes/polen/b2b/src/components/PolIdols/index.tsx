@@ -23,7 +23,7 @@ export default function () {
         </Col>
         <Col md={12}>
           <Form>
-            <div className="categories-list d-flex justify-content-center flex-wrap">
+            <div className="categories-list d-flex justify-content-center flex-wrap mb-5 py-4">
               <Form.Check
                 inline
                 label="Todos"
