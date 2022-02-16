@@ -78,11 +78,10 @@ export default function () {
         <Col md={6}>
           <PolScrollable id={"super-banner"}>
             {videos.map((item, key) => (
-              <section>
+              <section key={`item-${key}`}>
                 <div
                   id={`super-banner-item-${key}`}
                   className="super-banner-item me-4"
-                  key={`item-${key}`}
                   onClick={(evt) => handleClick(evt, key)}
                 >
                   <figure className="video-card">
