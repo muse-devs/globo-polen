@@ -6,7 +6,7 @@ export default function () {
     <section className="form-b2b">
       <Container fluid>
         <Row>
-          <Col md={8} className="m-md-auto">
+          <Col md={8} lg={4} className="m-md-auto">
             <h2 className="typo-xxl text-center">Fale Conosco</h2>
             <p className="typo-xs text-left text-md-center">
               Nosso time está ansioso para falar com você!

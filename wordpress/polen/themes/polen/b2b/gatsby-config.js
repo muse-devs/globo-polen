@@ -1,5 +1,5 @@
 module.exports = {
-  pathPrefix: "empresas",
+  pathPrefix: "polen/themes/polen/b2b/public",
   siteMetadata: {
     title: `Polen B2B`,
     siteUrl: `https://polen.me/empresas`,
