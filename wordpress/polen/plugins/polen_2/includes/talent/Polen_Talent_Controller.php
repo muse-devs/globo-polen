@@ -282,7 +282,9 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
             throw new Exception('Erro com o processamento do Vimeo', 500);
         }
         $video_info = Polen_Video_Info::get_by_order_id($order_id);
-        $video_info->delete();
+        if(!empty($video_info)) {
+            $video_info->delete();
+        }
 
         $video_info = $this->mount_video_info( $order, $cart_item, $response);
         $video_info->insert();
