@@ -29,8 +29,19 @@ export default function () {
   const [videos, setVideos] = React.useState(videosData);
 
   const handleClick = (evt, key) => {
-    console.log(evt.currentTarget);
-    const video: HTMLVideoElement = document.querySelector(`#super-banner-video-${key}`);
+    const video: HTMLVideoElement = document.querySelector(
+      `#super-banner-video-${key}`
+    );
+    if (!video.paused) {
+      video.pause();
+      setVideos((current) => {
+        return current.map((item, index) => ({
+          ...item,
+          paused: true,
+        }));
+      });
+      return;
+    }
 
     setVideos((current) => {
       return current.map((item, index) => ({
@@ -38,7 +49,12 @@ export default function () {
         paused: key == index ? false : true,
       }));
     });
-    // video.play();
+
+    const allVideos = document.querySelectorAll(".video-player");
+    [].map.call(allVideos, (item) => (!item.paused ? item.pause() : null));
+
+    video.currentTime = 0.1;
+    video.play();
   };
 
   return (
@@ -70,18 +86,16 @@ export default function () {
                   onClick={(evt) => handleClick(evt, key)}
                 >
                   <figure className="video-card">
-                    {videos[key].paused ? (
                       <img
                         src={item.image}
                         alt={item.name}
                         className="poster"
                       />
-                    ) : null}
                     <video
                       id={`super-banner-video-${key}`}
                       src={item.video}
                       className={`video-player${
-                        videos[key].paused ? " d-none" : ""
+                        !videos[key].paused ? " active" : ""
                       }`}
                       playsInline
                     ></video>
