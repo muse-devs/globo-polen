@@ -255,6 +255,27 @@
   }
 }
 
+.slick-dots {
+  bottom: -30px!important;
+  width: 50%!important;
+  .slick-active {
+    button {
+      &:before {
+        color: var(--bs-secondary)!important;
+      }
+    }
+  }
+  li {
+    button {
+      &:before {
+        color: #515151!important;
+        opacity: 1;
+        font-size: 16px!important;
+      }
+    }
+  }
+}
+
 .arrow {
   position: absolute;
   bottom: -40px;
