@@ -57,7 +57,7 @@ export default function () {
 
   return (
     <section>
-      <Row>
+      <Row className="g-0 p-3">
         <Col md={6} className="ps-md-5 mt-4 mt-md-0 order-1 order-md-0">
           <h1 className="typo-xl">
             Use os vídeos personalizados dos ídolos da Polen para impulsionar o
