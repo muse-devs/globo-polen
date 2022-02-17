@@ -3,7 +3,7 @@ import { Row, Col } from "react-bootstrap";
 
 export default function () {
   return (
-    <section className="p-5">
+    <section className="p-md-5">
       <Row>
         <Col md={12}>
           <h2 className="typo-xxl text-center">
