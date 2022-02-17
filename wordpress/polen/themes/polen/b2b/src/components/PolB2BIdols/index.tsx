@@ -21,7 +21,7 @@ const idols = [
 export default function () {
   return (
     <section>
-      <Row className="py-3 py-md-5 g-0">
+      <Row className="py-3 g-0 my-5">
         <Col md={12}>
           <h2 className="typo-xxl text-center mb-4">
             Ídolos da Polen

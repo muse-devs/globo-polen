@@ -5,7 +5,7 @@ import "./styles.scss";
 export default function () {
   return (
     <section>
-      <Row className="g-0 p-3 p-md-5">
+      <Row className="g-0 p-3 p-md-5 mt-5">
         <Col md={12}>
           <h2 className="typo-xxl text-center">
             Como a  Polen pode te ajudar

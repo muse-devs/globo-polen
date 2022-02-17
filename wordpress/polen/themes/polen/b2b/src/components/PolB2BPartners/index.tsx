@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
-import { PolScrollable } from "..";
 import Slider from "react-slick";
+import { ArrowLeft, ArrowRight } from "react-feather";
 import logo from "images/logo-company.png";
 import ceo from "images/ceo.png";
 import "./styles.scss";
@@ -12,17 +12,35 @@ const partners = [
   { logo: logo, message: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.', name: "Jane Cooper", position: "CEO - Edenred", avatar: ceo },
   { logo: logo, message: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.', name: "Jane Cooper", position: "CEO - Edenred", avatar: ceo },
   { logo: logo, message: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.', name: "Jane Cooper", position: "CEO - Edenred", avatar: ceo },
-  { logo: logo, message: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.', name: "Jane Cooper", position: "CEO - Edenred", avatar: ceo },
-  { logo: logo, message: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.', name: "Jane Cooper", position: "CEO - Edenred", avatar: ceo },
-  { logo: logo, message: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.', name: "Jane Cooper", position: "CEO - Edenred", avatar: ceo },
 ];
 
+function SampleNextArrow(props) {
+  const { onClick } = props;
+  return (
+    <div className="arrow next-arrow" onClick={onClick}>
+      <ArrowRight />
+    </div>
+  );
+}
+
+function SamplePrevArrow(props) {
+  const { onClick } = props;
+  return (
+    <div className="arrow prev-arrow me-3" onClick={onClick}>
+      <ArrowLeft />
+    </div>
+
+  );
+}
+
 const settings = {
-  dots: true,
+  dots: false,
   infinite: true,
   speed: 500,
   slidesToShow: 3,
-  slidesToScroll: 3,
+  slidesToScroll: 1,
+  nextArrow: <SampleNextArrow />,
+  prevArrow: <SamplePrevArrow />,
   responsive: [
     {
       breakpoint: 600,
@@ -38,20 +56,11 @@ export default function () {
   return (
     <section>
       <Row className="p-3 p-md-5 g-0">
-        <Col md={12} className="d-block d-sm-none">
+        <Col md={12} className="d-block d-sm-none mb-4">
           <h2 className="typo-xxl text-center">
             Palavras dos nossos parceiros
           </h2>
         </Col>
-        {/* <Col sm={12} className="mt-5">
-          <PolScrollable id="partners-list">
-            {partners.map((item, key) => (
-              <Col xs={12} md={4} key={key}>
-                <CardPartner data={item} key={key} />
-              </Col>
-            ))}
-          </PolScrollable>
-        </Col> */}
         <Col>
           <Slider {...settings}>
             {partners.map((item, key) => (
