@@ -20,7 +20,7 @@ const idols = [
 
 export default function () {
   return (
-    <section className="py-5">
+    <section className="py-md-5">
       <Row>
         <Col md={12}>
           <h2 className="typo-xxl text-center mb-4">
