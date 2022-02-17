@@ -18,6 +18,11 @@ export default function () {
   return (
     <section className="p-md-5">
       <Row>
+        <Col md={12} className="d-block d-sm-none">
+          <h2 className="typo-xxl text-center">
+            Palavras dos nossos parceiros
+          </h2>
+        </Col>
         <Col sm={12} className="mt-5">
           <PolScrollable id="partners-list">
             {partners.map((item, key) => (
