@@ -42,7 +42,7 @@ $custom-colors: (
 $theme-colors: map-merge($theme-colors, $custom-colors);
 
 $grid-columns: 12;
-$grid-gutter-width: 18px;
+$grid-gutter-width: 32px;
 
 $grid-breakpoints: (
   xs: 0,

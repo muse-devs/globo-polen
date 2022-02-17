@@ -1,6 +1,7 @@
 import React from "react";
 import { Row, Col, Button } from "react-bootstrap";
 import { PolScrollable } from "components";
+import { playVideo } from "services";
 import kovi from "images/logos/kovi.png";
 import "./styles.scss";
 
@@ -50,11 +51,8 @@ export default function () {
       }));
     });
 
-    const allVideos = document.querySelectorAll(".video-player");
-    [].map.call(allVideos, (item) => (!item.paused ? item.pause() : null));
+    playVideo(video);
 
-    video.currentTime = 0.1;
-    video.play();
   };
 
   return (
