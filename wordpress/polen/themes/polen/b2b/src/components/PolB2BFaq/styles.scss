@@ -16,9 +16,11 @@
       color: var(--bs-high-pure);
     }
     border-bottom: 1px solid #515151;
-    button {
+    .accordion-button {
       background: none;
       border: none;
+      text-align: left;
+      padding-right: 10%;
       color: var(--bs-high-pure);
     }
   }
