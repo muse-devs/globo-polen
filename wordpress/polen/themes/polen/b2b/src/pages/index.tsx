@@ -4,10 +4,11 @@ import {
   PolSEO,
   PolB2BHeader,
   PolB2BSuperBanner,
-  PolHowToHelpYou,
-  PolIdols,
-  PolHowItWork,
-  PolFaq,
+  PolB2BHelpYou,
+  PolB2BIdols,
+  PolB2BHowItWork,
+  PolB2BPartners,
+  PolB2BFaq,
   PolB2BForm,
   PolB2BFooter,
   PolB2BCases,
@@ -21,11 +22,12 @@ const IndexPage = () => {
         <Container fluid>
           <PolB2BHeader />
           <PolB2BSuperBanner />
-          <PolHowToHelpYou />
-          <PolIdols />
-          <PolHowItWork />
+          <PolB2BHelpYou />
+          <PolB2BIdols />
+          <PolB2BHowItWork />
           <PolB2BCases />
-          <PolFaq />
+          <PolB2BPartners />
+          <PolB2BFaq />
           <PolB2BForm />
           <PolB2BFooter />
         </Container>
