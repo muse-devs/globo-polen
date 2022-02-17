@@ -56,8 +56,8 @@ export default function () {
   return (
     <section>
       <Row className="p-3 p-md-5 g-0">
-        <Col md={12} className="d-block d-sm-none mb-4">
-          <h2 className="typo-xxl text-center">
+        <Col md={12} className="d-block d-md-none">
+          <h2 className="typo-xxl text-center mb-4">
             Palavras dos nossos parceiros
           </h2>
         </Col>

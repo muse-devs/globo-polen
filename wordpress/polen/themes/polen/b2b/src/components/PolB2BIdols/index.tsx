@@ -48,7 +48,15 @@ const settings = {
   variableWidth: true,
   slidesToScroll: 1,
   nextArrow: <SampleNextArrow />,
-  prevArrow: <SamplePrevArrow />
+  prevArrow: <SamplePrevArrow />,
+  responsive: [
+    {
+      breakpoint: 900,
+      settings: {
+        arrows: false,
+      }
+    }
+  ]
 };
 
 export default function () {
@@ -97,7 +105,7 @@ export default function () {
           </Form>
         </Col>
         <Col>
-          <Slider {...settings}>
+          <Slider {...settings} className="idols-list">
             {idols.map((item, key) => (
               <div key={key}>
                 <CardIdol data={item} key={key} />

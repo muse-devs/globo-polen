@@ -1,9 +1,12 @@
 import React from "react";
 import { Row, Col, Button } from "react-bootstrap";
-import { PolScrollable } from "components";
 import { playVideo } from "services";
 import kovi from "images/logos/kovi.png";
+import Slider from "react-slick";
+import { ArrowLeft, ArrowRight } from "react-feather";
 import "./styles.scss";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const videosData = [
   {
@@ -34,6 +37,44 @@ const videosData = [
     paused: true,
   },
 ];
+
+function SampleNextArrow(props) {
+  const { onClick } = props;
+  return (
+    <div className="arrow next-arrow me-3" onClick={onClick}>
+      <ArrowRight />
+    </div>
+  );
+}
+
+function SamplePrevArrow(props) {
+  const { onClick } = props;
+  return (
+    <div className="arrow prev-arrow me-4" onClick={onClick}>
+      <ArrowLeft />
+    </div>
+
+  );
+}
+
+const settings = {
+  dots: false,
+  infinite: true,
+  speed: 500,
+  centerMode: false,
+  variableWidth: true,
+  slidesToScroll: 1,
+  nextArrow: <SampleNextArrow />,
+  prevArrow: <SamplePrevArrow />,
+  responsive: [
+    {
+      breakpoint: 900,
+      settings: {
+        arrows: false,
+      }
+    }
+  ]
+};
 
 export default function () {
   const [videos, setVideos] = React.useState(videosData);
@@ -87,35 +128,36 @@ export default function () {
           </Row>
         </Col>
         <Col md={6}>
-          <PolScrollable id={"super-banner"}>
+          <Slider {...settings} className="videos-list">
             {videos.map((item, key) => (
-              <section key={`item-${key}`}>
-                <div
-                  id={`super-banner-item-${key}`}
-                  className={`super-banner-item${key == videos.length - 1 ? "" : " me-3"}`}
-                  onClick={(evt) => handleClick(evt, key)}
-                >
-                  <figure className="video-card">
-                    <img src={item.image} alt={item.name} className="poster" />
-                    <video
-                      id={`super-banner-video-${key}`}
-                      src={item.video}
-                      className={`video-player${
-                        !videos[key].paused ? " active" : ""
-                      }`}
-                      playsInline
-                    ></video>
-                  </figure>
-                  {videos[key].paused ? (
-                    <figure className="logo">
-                      <img src={item.logo} alt={item.name} className="image" />
-                      <figcaption className="name">{item.name}</figcaption>
+              <div key={key}>
+                <section key={`item-${key}`}>
+                  <div
+                    id={`super-banner-item-${key}`}
+                    className={`super-banner-item${key == videos.length ? "" : " me-3"}`}
+                    onClick={(evt) => handleClick(evt, key)}
+                  >
+                    <figure className="video-card">
+                      <img src={item.image} alt={item.name} className="poster" />
+                      <video
+                        id={`super-banner-video-${key}`}
+                        src={item.video}
+                        className={`video-player${!videos[key].paused ? " active" : ""
+                          }`}
+                        playsInline
+                      ></video>
                     </figure>
-                  ) : null}
-                </div>
-              </section>
+                    {videos[key].paused ? (
+                      <figure className="logo">
+                        <img src={item.logo} alt={item.name} className="image" />
+                        <figcaption className="name">{item.name}</figcaption>
+                      </figure>
+                    ) : null}
+                  </div>
+                </section>
+              </div>
             ))}
-          </PolScrollable>
+          </Slider>
         </Col>
       </Row>
     </section>
