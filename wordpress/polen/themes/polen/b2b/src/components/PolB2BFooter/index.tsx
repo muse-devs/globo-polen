@@ -5,8 +5,8 @@ import logo from "images/logo-b2b.png";
 
 export default function () {
   return (
-    <section>
-      <Row className="px-md-5 mt-5">
+    <section style={{ backgroundColor: "var(--bs-low-medium)" }}>
+      <Row className="py-3 px-md-5 mt-5">
         <Col md={4}>
           <p>
             <img src={logo} alt="Logo Polen B2B" width={182} />
