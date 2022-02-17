@@ -23,7 +23,7 @@ class Api_Talent_Payment
     /**
      * 
      */
-    public function register_route()
+    public function register_routes()
     {
         //Rota para pegar um nonde válido
         register_rest_route($this->namespace, $this->rest_base . '/payment', [

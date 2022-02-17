@@ -18,7 +18,7 @@ class Api_Contact
     {
         $this->base = 'polen/v1';
     }
-    public function register_route()
+    public function register_routes()
     {
         /**
          * Criacao de um endpoint para envio de email de ajuda Galo
@@ -87,46 +87,6 @@ class Api_Contact
     }
 
 
-    public function handler_b2b_contact(WP_REST_Request $request)
-    {
-        global $Polen_Plugin_Settings;
-
-        $ip     = $_SERVER[ 'REMOTE_ADDR' ];
-        $client = $_SERVER[ 'HTTP_USER_AGENT' ];
-        $nonce  = $request->get_param( 'security' );
-
-        $form_id = filter_var($request->get_param( 'form_id' ), FILTER_SANITIZE_NUMBER_INT);
-        $name    = filter_var($request->get_param( 'name' ), FILTER_SANITIZE_STRING);
-        $email   = filter_var($request->get_param( 'email' ), FILTER_SANITIZE_EMAIL);
-        $company = filter_var($request->get_param( 'company' ), FILTER_SANITIZE_SPECIAL_CHARS);
-        $phone   = filter_var($request->get_param( 'phone' ), FILTER_SANITIZE_SPECIAL_CHARS);
-        $slug    = filter_var($request->get_param( 'slug-product' ), FILTER_SANITIZE_SPECIAL_CHARS);
-        $terms   = '1';
-        $body = compact('form_id', 'name', 'email', 'company', 'phone');
-        try {
-            if(!Api_Util_Security::verify_nonce($ip . $client, $nonce)) {
-                throw new Exception('Erro na segurança', 403);
-            }
-
-            $this->validate_inputs_b2b($body);
-
-            $form_db = new Polen_Form_DB();
-            $form_db->insert($body);
-            
-            $body['product'] = $slug;
-            $form_service = new Polen_Forms();
-            $form_service->mailSend($body);
-
-            $url_zapier_b2b_hotspot = $Polen_Plugin_Settings['polen_url_zapier_b2b_hotspot'];
-            $zapier = new Polen_Zapier();
-            $zapier->send($url_zapier_b2b_hotspot, $body);
-            
-            return api_response(true, 201);
-        } catch(Exception $e) {
-            return api_response($e->getMessage(), $e->getCode());
-        }
-    }
-
 
 
     public function send_email( $name, $email, $phone, $message )
@@ -146,37 +106,4 @@ class Api_Contact
         $send_grid->set_template_data( 'message', $message );
         return $send_grid->send_email();
     }
-
-
-    /**
-     * 
-     */
-    protected function validate_inputs_b2b(array $body)
-    {
-        if(!filter_var($body['email'], FILTER_VALIDATE_EMAIL)) {
-            throw new Exception('Email inválido', 401);
-        }
-        $required_fields = $this->required_fields_b2b();
-        foreach($required_fields as $item) {
-            if(empty(trim($body[$item]))) {
-                throw new Exception('Todos os campos são obrigatórios');
-            }
-        }
-    }
-
-
-    /**
-     * Retorna todos os campos do formulário que são obrigatórios
-     */
-    private function required_fields_b2b(): array
-    {
-        return [
-            'name',
-            'email',
-            'company',
-            'phone',
-            'form_id',
-        ];
-    }
-
 }
