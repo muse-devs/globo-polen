@@ -67,7 +67,7 @@ const videosData = [
 export default function () {
   return (
     <section className="cases-b2b">
-      <Row className="g-0 px-md-5">
+      <Row className="g-0 p-3 px-md-5">
         <Col md={12} className="m-md-auto">
           <h2 className="typo-xxl text-center">Histórias de Sucesso</h2>
         </Col>
@@ -85,9 +85,9 @@ export default function () {
 
 function CardCase({ data }) {
   return (
-    <section className="card-case">
+    <section className="card-case col-md-4 col-12">
       <div className="card-case__wrapp">
-        <Row>
+        <Row className="g-0">
           <Col md={5}>
             <figure className="video-player">
               <img src={data.image} alt={data.name} className="poster" />
