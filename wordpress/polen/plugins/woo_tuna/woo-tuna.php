@@ -865,7 +865,7 @@ class TUNA_Payment extends WC_Payment_Gateway
         $fullName = $user->first_name . ' ' . $user->last_name;
 
         if (empty(trim($fullName))) {
-            $fullName = $user->display_name;
+            $fullName = preg_replace('/[0-9\@\.\;]+/', ' ', $user->display_name);
         }
 
 		$custormerID =($current_user->ID==0?sanitize_text_field($_POST["tuna_tmpuser_id"]):$current_user->ID) . '';

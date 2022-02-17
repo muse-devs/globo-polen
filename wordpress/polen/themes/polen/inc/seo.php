@@ -67,40 +67,42 @@ function pol_print_schema_data_extended($talent, $reviews, $total_reviews, $sum_
 
 ?>
   <script type="application/ld+json">
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "<?php echo $sum_reviews / $total_reviews; ?>",
-      "reviewCount": "<?php echo $total_reviews; ?>"
-    },
-    "description": "<?php echo $talent->descricao; ?>",
-    "name": "<?php echo $talent->nome; ?>",
-    "image": "<?php echo polen_get_avatar_src($talent->user_id, 'polen-square-crop-lg'); ?>",
-    "offers": {
-      "@type": "Offer",
-      "availability": "https://schema.org/InStock",
-      "price": "<?php echo $product->get_price(); ?>",
-      "priceCurrency": "BRL"
-    },
-    "review": [
-      <?php foreach($reviews as $key => $review): ?>
-        <?php $name = preg_replace( '/@\S*/', '', get_user_by( 'id', $review->user_id )->display_name); ?>
-        {
-        "@type": "Review",
-        "author": "<?php echo $name; ?>",
-        "datePublished": "<?php echo $review->comment_date; ?>",
-        "reviewBody": "<?php echo $review->comment_content; ?>",
-        "name": "<?php echo $name; ?>",
-        "reviewRating": {
-          "@type": "Rating",
-          "bestRating": "5",
-          "ratingValue": "<?php echo get_comment_meta($review->comment_ID, "rate")[0]; ?>",
-          "worstRating": "1"
-        }
-      }<?php echo $key + 1 < sizeof($reviews) ? "," : ""; ?>
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "<?php echo $sum_reviews / $total_reviews; ?>",
+        "reviewCount": "<?php echo $total_reviews; ?>"
+      },
+      "description": "<?php echo $talent->descricao; ?>",
+      "name": "<?php echo $talent->nome; ?>",
+      "image": "<?php echo polen_get_avatar_src($talent->user_id, 'polen-square-crop-lg'); ?>",
+      "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/InStock",
+        "price": "<?php echo $product->get_price(); ?>",
+        "priceCurrency": "BRL"
+      },
+      "review": [
+        <?php foreach ($reviews as $key => $review) : ?>
+          <?php $name = preg_replace('/@\S*/', '', get_user_by('id', $review->user_id)->display_name); ?> {
+            "@type": "Review",
+            "author": "<?php echo $name; ?>",
+            "datePublished": "<?php echo $review->comment_date; ?>",
+            "reviewBody": "<?php echo $review->comment_content; ?>",
+            "name": "<?php echo $name; ?>",
+            "reviewRating": {
+              "@type": "Rating",
+              "bestRating": "5",
+              "ratingValue": "<?php echo get_comment_meta($review->comment_ID, "rate")[0]; ?>",
+              "worstRating": "1"
+            }
+          }
+          <?php echo $key + 1 < sizeof($reviews) ? "," : ""; ?>
         <?php endforeach; ?>
-    ]
+      ]
+    }
   </script>
   <?php
 }
@@ -143,8 +145,8 @@ if (
     // Single de Produto - Página do Artista
     if (!empty($post) && $post->post_type == 'product') {
 
-      $title = get_post_meta( $post->ID, '_seo_title', true );
-      $description = get_post_meta( $post->ID, '_seo_description', true );
+      $title = get_post_meta($post->ID, '_seo_title', true);
+      $description = get_post_meta($post->ID, '_seo_description', true);
 
       // $talent = new Polen_Update_Fields();
       // $talent = $talent->get_vendor_data($post->post_author);
