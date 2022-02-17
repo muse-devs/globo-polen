@@ -10,6 +10,7 @@ import {
   PolFaq,
   PolB2BForm,
   PolB2BFooter,
+  PolB2BCases,
 } from "components";
 
 const IndexPage = () => {
@@ -23,6 +24,7 @@ const IndexPage = () => {
           <PolHowToHelpYou />
           <PolIdols />
           <PolHowItWork />
+          <PolB2BCases />
           <PolFaq />
           <PolB2BForm />
           <PolB2BFooter />
