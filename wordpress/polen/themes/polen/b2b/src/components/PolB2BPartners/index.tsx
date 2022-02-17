@@ -40,7 +40,7 @@ export default function () {
 function CardPartner({ data }) {
   return (
     <section className="me-md-3">
-      <Row>
+      <Row className="g-0">
         <Col xs={12}>
           <div className="box-color p-4 mb-4">
             <Row>

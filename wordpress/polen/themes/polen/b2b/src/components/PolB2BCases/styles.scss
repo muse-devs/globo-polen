@@ -1,11 +1,12 @@
 .card-case {
-  .card-case__wrapp {
-    width: calc(100vw - var(--bs-gutter-x));
-  }
+  // .card-case__wrapp {
+  //   width: calc(100vw - var(--bs-gutter-x));
+  // }
   .video-player {
     position: relative;
     width: 100%;
-    height: calc(100vw - var(--bs-gutter-x));
+    height: 0;
+    padding-bottom: 100%;
     video, .poster {
       position: absolute;
       width: 100%;
