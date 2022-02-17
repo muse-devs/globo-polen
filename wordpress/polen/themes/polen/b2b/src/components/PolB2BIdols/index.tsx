@@ -1,7 +1,10 @@
 import React from "react";
 import { Row, Col, Form } from "react-bootstrap";
-import { PolScrollable } from "components";
+import Slider from "react-slick";
+import { ArrowLeft, ArrowRight } from "react-feather";
 import "./styles.scss";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const idols = [
   { name: "Lazinho", img: "https://polen.me/polen/uploads/2022/01/806bf11b-7460-4b31-92e2-468b8a4a6724.jpeg" },
@@ -16,7 +19,37 @@ const idols = [
   { name: "Bruno Chelles", img: "https://polen.me/polen/uploads/2021/06/IMG-20210429-WA0035.jpg" },
   { name: "Gleice", img: "https://polen.me/polen/uploads/2021/10/IMG_3903-1-2.jpg" },
   { name: "Papatinho", img: "https://polen.me/polen/uploads/2021/06/youknowmyface_Papatinho_2021-15-4-2.jpg" },
-]
+];
+
+function SampleNextArrow(props) {
+  const { onClick } = props;
+  return (
+    <div className="arrow next-arrow me-3" onClick={onClick}>
+      <ArrowRight />
+    </div>
+  );
+}
+
+function SamplePrevArrow(props) {
+  const { onClick } = props;
+  return (
+    <div className="arrow prev-arrow me-4" onClick={onClick}>
+      <ArrowLeft />
+    </div>
+
+  );
+}
+
+const settings = {
+  dots: false,
+  infinite: true,
+  speed: 500,
+  centerMode: false,
+  variableWidth: true,
+  slidesToScroll: 1,
+  nextArrow: <SampleNextArrow />,
+  prevArrow: <SamplePrevArrow />
+};
 
 export default function () {
   return (
@@ -64,29 +97,36 @@ export default function () {
           </Form>
         </Col>
         <Col>
-          <PolScrollable id={"idols-list"}>
+          <Slider {...settings}>
             {idols.map((item, key) => (
-              <section key={`item-${key}`}>
-                <div
-                  id={`item-${key}`}
-                  className="super-banner-item"
-                >
-                  <figure className="video-card">
-                    <img
-                      src={item.img}
-                      alt={item.name}
-                      className="poster"
-                    />
-                  </figure>
-                  <div className="idol-name">
-                    <h3 className={"mb-0 typo-lg"}><strong>{item.name}</strong></h3>
-                  </div>
-                </div>
-              </section>
+              <div key={key}>
+                <CardIdol data={item} key={key} />
+              </div>
             ))}
-          </PolScrollable>
+          </Slider>
         </Col>
       </Row>
+    </section>
+  );
+}
+
+function CardIdol({ data }) {
+  return (
+    <section>
+      <div
+        className="super-banner-item"
+      >
+        <figure className="video-card">
+          <img
+            src={data.img}
+            alt={data.name}
+            className="poster"
+          />
+        </figure>
+        <div className="idol-name">
+          <h3 className={"mb-0 typo-lg"}><strong>{data.name}</strong></h3>
+        </div>
+      </div>
     </section>
   );
 }

@@ -4,7 +4,7 @@ import { Row, Col } from "react-bootstrap";
 export default function () {
   return (
     <section>
-      <Row className="p-3 p-md-5 g-0">
+      <Row className="p-3 p-md-5 g-0 mt-4">
         <Col md={12}>
           <h2 className="typo-xxl text-center">
             Como funciona
