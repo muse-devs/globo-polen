@@ -94,23 +94,24 @@ const settings = {
   slidesToShow: 1,
   slidesToScroll: 1,
   nextArrow: <SampleNextArrow />,
-  prevArrow: <SamplePrevArrow />
+  prevArrow: <SamplePrevArrow />,
+  responsive: [
+    {
+      breakpoint: 900,
+      settings: {
+       dots: false,
+      }
+    }
+  ]
 };
 
 export default function () {
   return (
-    <section className="cases-b2b my-5">
+    <section className="cases-b2b mb-5">
       <Row className="g-0 p-3 px-md-5">
         <Col md={12} className="m-md-auto">
-          <h2 className="typo-xxl text-center">Histórias de Sucesso</h2>
+          <h2 className="typo-xxl text-center mb-5">Histórias de Sucesso</h2>
         </Col>
-        {/* <Col md={12} className="mt-5">
-          <PolScrollable id={"cases-b2b"}>
-            {videosData.map((item, key) => (
-              <CardCase data={item} key={key} />
-            ))}
-          </PolScrollable>
-        </Col> */}
         <Col md={12}>
           <Slider {...settings}>
             {videosData.map((item, key) => (
@@ -137,15 +138,17 @@ function CardCase({ data }) {
             </figure>
           </Col>
           <Col md={7}>
-            <p className="typo-md d-flex align-items-center">
-              <Calendar color="var(--bs-primary)" className="me-2" />
-              Evento
-            </p>
-            <h4 className="typo-md">{data.name}</h4>
-            <span
-              dangerouslySetInnerHTML={{ __html: data.text }}
-              className="typo-xs"
-            />
+            <div className="p-md-4">
+              <p className="typo-md d-flex align-items-center">
+                <Calendar color="var(--bs-primary)" className="me-2" />
+                Evento
+              </p>
+              <h4 className="typo-md">{data.name}</h4>
+              <span
+                dangerouslySetInnerHTML={{ __html: data.text }}
+                className="typo-xs"
+              />
+            </div>
           </Col>
         </Row>
       </div>
