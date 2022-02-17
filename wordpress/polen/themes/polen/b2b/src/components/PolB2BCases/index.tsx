@@ -1,8 +1,12 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
 import { PolScrollable } from "components";
+import Slider from "react-slick";
+import { ArrowLeft, ArrowRight } from "react-feather";
 import { Calendar } from "react-feather";
 import "./styles.scss";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const videosData = [
   {
@@ -64,6 +68,35 @@ const videosData = [
   },
 ];
 
+function SampleNextArrow(props) {
+  const { onClick } = props;
+  return (
+    <div className="arrow next-arrow" onClick={onClick}>
+      <ArrowRight />
+    </div>
+  );
+}
+
+function SamplePrevArrow(props) {
+  const { onClick } = props;
+  return (
+    <div className="arrow prev-arrow me-3" onClick={onClick}>
+      <ArrowLeft />
+    </div>
+
+  );
+}
+
+const settings = {
+  dots: true,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  nextArrow: <SampleNextArrow />,
+  prevArrow: <SamplePrevArrow />
+};
+
 export default function () {
   return (
     <section className="cases-b2b my-5">
@@ -71,12 +104,21 @@ export default function () {
         <Col md={12} className="m-md-auto">
           <h2 className="typo-xxl text-center">Histórias de Sucesso</h2>
         </Col>
-        <Col md={12} className="mt-5">
+        {/* <Col md={12} className="mt-5">
           <PolScrollable id={"cases-b2b"}>
             {videosData.map((item, key) => (
               <CardCase data={item} key={key} />
             ))}
           </PolScrollable>
+        </Col> */}
+        <Col md={12}>
+          <Slider {...settings}>
+            {videosData.map((item, key) => (
+              <div key={key}>
+                <CardCase data={item} key={key} />
+              </div>
+            ))}
+          </Slider>
         </Col>
       </Row>
     </section>
@@ -85,7 +127,7 @@ export default function () {
 
 function CardCase({ data }) {
   return (
-    <section className="card-case col-md-4 col-12">
+    <section className="card-case col-12">
       <div className="card-case__wrapp">
         <Row className="g-0">
           <Col md={5}>

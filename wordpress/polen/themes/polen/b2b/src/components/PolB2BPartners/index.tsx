@@ -43,7 +43,7 @@ const settings = {
   prevArrow: <SamplePrevArrow />,
   responsive: [
     {
-      breakpoint: 600,
+      breakpoint: 900,
       settings: {
         slidesToShow: 1,
         slidesToScroll: 1,
@@ -61,7 +61,7 @@ export default function () {
             Palavras dos nossos parceiros
           </h2>
         </Col>
-        <Col>
+        <Col md={12}>
           <Slider {...settings}>
             {partners.map((item, key) => (
               <div key={key}>
