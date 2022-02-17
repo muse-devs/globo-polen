@@ -24,6 +24,15 @@ const videosData = [
     name: "item2",
     paused: true,
   },
+  {
+    image:
+      "https://i.vimeocdn.com/video/1364305989-55d3b1bef407347f5c2c527cf9db5b00bf9e80daf4d5dfe26081140cb47999ad-d",
+    video:
+      "https://player.vimeo.com/progressive_redirect/playback/634757715/rendition/720p?loc=external&oauth2_token_id=1511985459&signature=11f36c28ddac629de6b3f726d073bca4c9a4a3847530345c6eb53258bfdbaaf6",
+    logo: kovi,
+    name: "item2",
+    paused: true,
+  },
 ];
 
 export default function () {
@@ -68,7 +77,7 @@ export default function () {
             engajamento com seus clientes e colaboradores.
           </p>
           <Row>
-            <Col md={6} className="m-auto">
+            <Col md={6} className="m-auto m-md-0">
               <div className="d-grid gap-2 mt-4">
                 <Button href="#faleconosco" size="lg">
                   Fale com a equipe de vendas
@@ -83,7 +92,7 @@ export default function () {
               <section key={`item-${key}`}>
                 <div
                   id={`super-banner-item-${key}`}
-                  className="super-banner-item me-4"
+                  className={`super-banner-item${key == videos.length - 1 ? "" : " me-3"}`}
                   onClick={(evt) => handleClick(evt, key)}
                 >
                   <figure className="video-card">
