@@ -60,7 +60,7 @@ export default function () {
   return (
     <section>
       <Row>
-        <Col md={6} className="ps-4 mt-4 mt-md-0 order-1 order-md-0">
+        <Col md={6} className="ps-md-5 mt-4 mt-md-0 order-1 order-md-0">
           <h1 className="typo-xl">
             Use os vídeos personalizados dos ídolos da Polen para impulsionar o
             seu <em>negócio</em>
@@ -69,11 +69,15 @@ export default function () {
             Crie autoridade para sua marca, aumente suas vendas, e crie mais
             engajamento com seus clientes e colaboradores.
           </p>
-          <div className="d-grid gap-2 mt-4">
-            <Button href="#faleconosco" size="lg">
-              Fale com a equipe de vendas
-            </Button>
-          </div>
+          <Row>
+            <Col md={6} className="m-auto">
+              <div className="d-grid gap-2 mt-4">
+                <Button href="#faleconosco" size="lg">
+                  Fale com a equipe de vendas
+                </Button>
+              </div>
+            </Col>
+          </Row>
         </Col>
         <Col md={6}>
           <PolScrollable id={"super-banner"}>
@@ -85,11 +89,7 @@ export default function () {
                   onClick={(evt) => handleClick(evt, key)}
                 >
                   <figure className="video-card">
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        className="poster"
-                      />
+                    <img src={item.image} alt={item.name} className="poster" />
                     <video
                       id={`super-banner-video-${key}`}
                       src={item.video}

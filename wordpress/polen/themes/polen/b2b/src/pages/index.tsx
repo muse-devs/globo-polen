@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Container } from "react-bootstrap";
 import {
   PolSEO,
   PolB2BHeader,
@@ -16,14 +17,16 @@ const IndexPage = () => {
     <>
       <PolSEO />
       <main>
-        <PolB2BHeader />
-        <PolB2BSuperBanner />
-        <PolHowToHelpYou />
-        <PolIdols />
-        <PolHowItWork />
-        <PolFaq />
-        <PolB2BForm />
-        <PolB2BFooter />
+        <Container fluid>
+          <PolB2BHeader />
+          <PolB2BSuperBanner />
+          <PolHowToHelpYou />
+          <PolIdols />
+          <PolHowItWork />
+          <PolFaq />
+          <PolB2BForm />
+          <PolB2BFooter />
+        </Container>
       </main>
     </>
   );
