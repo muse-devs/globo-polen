@@ -4,8 +4,8 @@ import "./styles.scss";
 
 export default function () {
   return (
-    <section className="p-md-5">
-      <Row>
+    <section>
+      <Row className="p-3 p-md-5 g-0">
         <Col md={12}>
           <h2 className="typo-xxl text-center">
             Perguntas frequentes
