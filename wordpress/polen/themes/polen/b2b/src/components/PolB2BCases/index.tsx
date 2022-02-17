@@ -2,6 +2,7 @@ import React from "react";
 import { Row, Col } from "react-bootstrap";
 import { PolScrollable } from "components";
 import { Calendar } from "react-feather";
+import "./styles.scss";
 
 const videosData = [
   {
@@ -82,23 +83,30 @@ export default function () {
   );
 }
 
-function CardCase({data}) {
+function CardCase({ data }) {
   return (
-    <section>
-      <Row>
-        <Col md={5}>
-          <figure>
-            <video src={data.video} width={"100%"}></video>
-          </figure>
-        </Col>
-        <Col md={7}>
-          <p>
-            <Calendar color="var(--bs-primary)" /> Evento
-          </p>
-          <h4>{data.name}</h4>
-          {data.text}
-        </Col>
-      </Row>
+    <section className="card-case">
+      <div className="card-case__wrapp">
+        <Row>
+          <Col md={5}>
+            <figure className="video-player">
+              <img src={data.image} alt={data.name} className="poster" />
+              <video src={data.video} width={"100%"}></video>
+            </figure>
+          </Col>
+          <Col md={7}>
+            <p className="typo-md d-flex align-items-center">
+              <Calendar color="var(--bs-primary)" className="me-2" />
+              Evento
+            </p>
+            <h4 className="typo-md">{data.name}</h4>
+            <span
+              dangerouslySetInnerHTML={{ __html: data.text }}
+              className="typo-xs"
+            />
+          </Col>
+        </Row>
+      </div>
     </section>
   );
 }
