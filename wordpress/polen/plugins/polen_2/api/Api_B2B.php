@@ -61,6 +61,11 @@ class Api_B2B
     }
 
 
+    /**
+     * Prepara o produto para um RESPONSE
+     * @param \WC_Product
+     * @return array
+     */
     protected function prepare_product_to_response(WC_Product $product)
     {
         return [
@@ -72,6 +77,9 @@ class Api_B2B
     }
 
 
+    /**
+     * Pega um produtos
+     */
     public function get_products(WP_REST_Request $request)
     {
         $limit = $request->get_param('limit') ?? 10;
@@ -85,8 +93,11 @@ class Api_B2B
     }
 
 
-
-
+    /**
+     * Handler que recebe os dados de um lead do B2B
+     * Envia email, envia para o Zapier, cadastrar em DB
+     * 
+     */
     public function handler_b2b_contact(WP_REST_Request $request)
     {
         global $Polen_Plugin_Settings;
