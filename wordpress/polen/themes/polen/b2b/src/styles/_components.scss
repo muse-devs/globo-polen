@@ -254,3 +254,25 @@
     box-shadow: 0px 12px 26px rgba(16, 30, 115, 0.06);
   }
 }
+
+.arrow {
+  position: absolute;
+  bottom: -40px;
+  cursor: pointer;
+  color: var(--bs-secondary);
+  border: 1px solid #515151;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.prev-arrow {
+  right: 40px;
+}
+
+.next-arrow {
+  right: 0;
+}

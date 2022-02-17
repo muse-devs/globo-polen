@@ -66,7 +66,7 @@ const videosData = [
 
 export default function () {
   return (
-    <section className="cases-b2b">
+    <section className="cases-b2b my-5">
       <Row className="g-0 p-3 px-md-5">
         <Col md={12} className="m-md-auto">
           <h2 className="typo-xxl text-center">Histórias de Sucesso</h2>

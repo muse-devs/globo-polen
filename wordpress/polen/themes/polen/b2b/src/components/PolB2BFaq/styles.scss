@@ -31,4 +31,11 @@
       color: var(--bs-high-pure);
     }
   }
+  .accordion-body {
+    padding: 10px;
+    color: var(--bs-low-light);
+    @include desktop {
+      font-size: 20px;
+    }
+  }
 }
