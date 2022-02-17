@@ -16,8 +16,8 @@ const partners = [
 
 export default function () {
   return (
-    <section className="p-md-5">
-      <Row>
+    <section>
+      <Row className="p-3 p-md-5 g-0">
         <Col md={12} className="d-block d-sm-none">
           <h2 className="typo-xxl text-center">
             Palavras dos nossos parceiros

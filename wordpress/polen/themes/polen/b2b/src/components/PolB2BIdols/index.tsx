@@ -20,8 +20,8 @@ const idols = [
 
 export default function () {
   return (
-    <section className="py-md-5">
-      <Row>
+    <section>
+      <Row className="py-3 py-md-5 g-0">
         <Col md={12}>
           <h2 className="typo-xxl text-center mb-4">
             Ídolos da Polen

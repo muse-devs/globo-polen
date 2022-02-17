@@ -19,7 +19,7 @@ const IndexPage = () => {
     <>
       <PolSEO />
       <main>
-        <Container fluid>
+        <Container fluid className="px-0">
           <PolB2BHeader />
           <PolB2BSuperBanner />
           <PolB2BHelpYou />
