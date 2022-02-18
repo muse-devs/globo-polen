@@ -1,7 +1,6 @@
 import React from "react";
 import { Row, Col, Button } from "react-bootstrap";
 import { Mail } from "react-feather";
-import { Link, navigate } from 'gatsby';
 import logo from "images/logo-b2b.png";
 
 export default function () {
