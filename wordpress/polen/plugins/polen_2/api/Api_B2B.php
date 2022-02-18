@@ -111,7 +111,7 @@ class Api_B2B
         $email   = filter_var($request->get_param( 'email' ), FILTER_SANITIZE_EMAIL);
         $company = filter_var($request->get_param( 'company' ), FILTER_SANITIZE_SPECIAL_CHARS);
         $phone   = filter_var($request->get_param( 'phone' ), FILTER_SANITIZE_SPECIAL_CHARS);
-        $slug    = filter_var($request->get_param( 'slug-product' ), FILTER_SANITIZE_SPECIAL_CHARS);
+        $slug    = filter_var($request->get_param( 'slug_product' ), FILTER_SANITIZE_SPECIAL_CHARS);
         $terms   = '1';
         $body = compact('form_id', 'name', 'email', 'company', 'phone');
         try {
