@@ -10,3 +10,4 @@ export { default as PolB2BFaq } from "components/PolB2BFaq";
 export { default as PolB2BFooter } from "components/PolB2BFooter";
 export { default as PolB2BCases } from "components/PolB2BCases";
 export { default as PolB2BPartners } from "components/PolB2BPartners";
+export { default as PolNonce } from "components/PolNonce";

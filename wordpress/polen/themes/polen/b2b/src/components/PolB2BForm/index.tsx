@@ -1,5 +1,6 @@
 import React from "react";
 import { Row, Col, Form, Button } from "react-bootstrap";
+import { PolNonce } from "components";
 
 export default function () {
   return (
@@ -13,25 +14,25 @@ export default function () {
           <Form>
             <input
               type="text"
-              name=""
+              name="name"
               placeholder="Nome Completo"
               className="form-control mt-4"
             />
             <input
               type="text"
-              name=""
+              name="company"
               placeholder="Empresa"
               className="form-control mt-4"
             />
             <input
               type="email"
-              name=""
+              name="email"
               placeholder="e-mail de trabalho"
               className="form-control mt-4"
             />
             <input
               type="tel"
-              name=""
+              name="phone"
               placeholder="Número de telefone"
               className="form-control mt-4"
             />
@@ -40,6 +41,9 @@ export default function () {
                 Enviar
               </Button>
             </div>
+            <PolNonce />
+            <input type="hidden" name="slug_product" defaultValue={""} />
+            <input type="hidden" name="form_id" defaultValue={"1"} />
           </Form>
         </Col>
       </Row>

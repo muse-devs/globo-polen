@@ -10,3 +10,12 @@ export interface SEO {
   keywords?: string;
   author?: string;
 }
+export interface ContactB2B {
+  form_id: string;
+  name: string;
+  email: string;
+  phone: string;
+  slug_product: string;
+  company: string;
+  security: string;
+}
