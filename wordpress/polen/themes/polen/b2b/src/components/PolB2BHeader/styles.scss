@@ -1,8 +1,8 @@
 @import "../../styles/mixins";
 
-.test {
-  background-color: green;
+.logo-b2b {
   @include desktop {
-    background-color: red;
+    width: 147px;
+    margin-left: 15px;
   }
 }
