@@ -25,7 +25,7 @@ export async function getNonce() {
 
 export async function getB2BTalents(categories: Array<String> = []) {
   try {
-    const res = await polApi.get(`/b2b/talents`, { params: { categories } });
+    const res = await polApi.get(`/b2b/talents?categories=${categories}&limit=100`);
 
     return res.data;
   } catch (err) {

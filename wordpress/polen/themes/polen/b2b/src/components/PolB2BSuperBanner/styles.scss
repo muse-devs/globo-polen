@@ -1,8 +1,10 @@
+@import "../../styles/mixins";
+
 .super-banner-item {
   position: relative;
   width: 241px;
   height: 353px;
-  background-color: red;
+  background-color: #000;
   .video-card {
     width: 100%;
     height: 100%;
@@ -44,6 +46,12 @@
 }
 
 .videos-list {
+  .super-banner-item {
+    @include desktop {
+      width: 402px;
+      height: 637px;
+    }
+  }
   .arrow {
     bottom: -60px;
   }
