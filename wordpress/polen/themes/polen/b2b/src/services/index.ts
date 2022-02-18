@@ -15,9 +15,9 @@ const polApi = axios.create({
 
 export async function getNonce() {
   try {
-    const res = await polApi.get(`/nonce`);
+    const res = await polApi.get(`/contact`);
 
-    return res.data.data;
+    return res.data;
   } catch (err) {
     throw err.response;
   }
@@ -35,7 +35,7 @@ export async function getB2BTalents(categories: Array<String> = []) {
 
 export async function contactFormB2B(params: ContactB2B) {
   try {
-    const res = await polApi.get(`/b2b/contact`, { params });
+    const res = await polApi.post(`/b2b/contact`, params);
 
     return res.data;
   } catch (err) {
