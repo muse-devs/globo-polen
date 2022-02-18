@@ -8,7 +8,7 @@ const PolB2bHeader = () => {
   return (
     <Row className="py-4 px-3 px-md-5 g-0">
       <Col xs={6} className="d-flex align-items-center">
-        <a href="/">
+        <a href="http://polen.me/">
           <ChevronLeft />
           <img src={logo} alt="Logo B2B" width={114} />
         </a>
