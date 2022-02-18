@@ -1,3 +1,7 @@
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
+
 module.exports = {
   pathPrefix: "polen/themes/polen/b2b/public",
   siteMetadata: {
@@ -7,7 +11,7 @@ module.exports = {
   plugins: [
     "gatsby-plugin-sass",
     "gatsby-plugin-react-helmet",
-    'gatsby-plugin-resolve-src',
+    "gatsby-plugin-resolve-src",
     {
       resolve: `gatsby-plugin-google-fonts`,
       options: {

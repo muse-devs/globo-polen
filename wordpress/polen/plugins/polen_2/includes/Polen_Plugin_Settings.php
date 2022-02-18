@@ -499,6 +499,14 @@ class Polen_Plugin_Settings
                     'desc'     => 'Envio de informações de marketig para novas compras',
                     'default'  => '',
                 ),
+                array(
+                    'id'       => 'polen_url_zapier_b2b_hotspot',
+                    'type'     => 'text',
+                    'title'    => esc_html__('URL Request para Zapier cadastrar no Hobspot', 'polen'),
+                    'subtitle' => esc_html__('URL Request para Zapier cadastrar no Hobspot', 'polen'),
+                    'desc'     => 'URL Request para Zapier cadastrar no Hobspot',
+                    'default'  => '',
+                ),
             )
         ) );
         

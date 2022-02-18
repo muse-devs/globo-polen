@@ -353,28 +353,5 @@ class Api_Routers
             ),
             'schema' => array( $polen_api_videos, 'get_item_schema' )
         ) );
-
-        
-        /**
-         * Criacao de um endpoint para envio de email de ajuda Galo
-         */
-        $api_contact = new Api_Contact();
-        register_rest_route( $this->base, '/contact', array(
-            array(
-                'methods' => WP_REST_Server::CREATABLE,
-                'callback' => array( $api_contact, 'handler_email_help' ),
-                'permission_callback' => '__return_true',
-            ),
-            'schema' => array( $polen_api_videos, 'get_item_schema' )
-        ) );
-        #CRIANDO ENDOPINT PARA NONCE DO FORMULARIO DE EMAIL DO 
-        register_rest_route( $this->base, '/contact', array(
-            array(
-                'methods' => WP_REST_Server::READABLE,
-                'callback' => array( $api_contact, 'create_nonce' ),
-                'permission_callback' => '__return_true',
-            ),
-            'schema' => array( $polen_api_videos, 'get_item_schema' )
-        ) );
     }
 }

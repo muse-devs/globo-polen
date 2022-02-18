@@ -2,7 +2,10 @@
 
 namespace Polen\Includes;
 
-class Polen_Form_DB{
+use Exception;
+
+class Polen_Form_DB
+{
 
     private $wpdb;
     private $table_name;
@@ -20,8 +23,12 @@ class Polen_Form_DB{
         if (isset($args['action'])) {
             unset($args['action']);
         }
+        $inserted = $this->wpdb->insert($this->table_name, $args);
+        if(!empty($this->wpdb->last_error)) {
+            throw new Exception($this->wpdb->last_error, 503);
+        }
 
-        $this->wpdb->insert($this->table_name, $args);
+        return $inserted;
     }
 
     public function getLeads($form_id = 1)
