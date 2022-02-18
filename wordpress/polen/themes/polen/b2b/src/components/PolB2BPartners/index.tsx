@@ -59,7 +59,7 @@ export default function () {
     <section>
       <Row className="p-3 p-md-5 g-0">
         <Col md={12} className="d-block d-md-none">
-          <h2 className="typo-xxl text-center mb-4">
+          <h2 className="typo-xxl text-center mb-4 mt-5">
             Palavras dos nossos parceiros
           </h2>
         </Col>

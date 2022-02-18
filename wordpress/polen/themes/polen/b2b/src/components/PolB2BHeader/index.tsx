@@ -6,11 +6,11 @@ import logo from "images/logo-b2b.png";
 
 const PolB2bHeader = () => {
   return (
-    <Row className="py-4 px-3 px-md-5 g-0">
+    <Row className="py-4 px-3 px-md-5 g-0 mb-md-4">
       <Col xs={6} className="d-flex align-items-center">
         <a href="http://polen.me/">
           <ChevronLeft />
-          <img src={logo} alt="Logo B2B" width={114} />
+          <img src={logo} alt="Logo B2B" className="logo-b2b" width={114} />
         </a>
       </Col>
       <Col xs={6} className="d-flex align-items-center justify-content-end">

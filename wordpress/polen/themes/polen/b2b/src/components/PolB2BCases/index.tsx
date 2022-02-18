@@ -1,6 +1,5 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
-import { PolScrollable } from "components";
 import Slider from "react-slick";
 import { ArrowLeft, ArrowRight } from "react-feather";
 import { Calendar } from "react-feather";
@@ -93,6 +92,7 @@ const settings = {
   speed: 500,
   slidesToShow: 1,
   slidesToScroll: 1,
+  fade: true,
   nextArrow: <SampleNextArrow />,
   prevArrow: <SamplePrevArrow />,
   responsive: [
@@ -128,10 +128,10 @@ export default function () {
 
 function CardCase({ data }) {
   return (
-    <section className="card-case col-12">
+    <section className="card-case col-xs-12 col-sm-10 mx-auto">
       <div className="card-case__wrapp">
         <Row className="g-0">
-          <Col md={5}>
+          <Col md={5} className="d-flex align-items-center">
             <figure className="video-player">
               <img src={data.image} alt={data.name} className="poster" />
               <video src={data.video} width={"100%"}></video>
@@ -139,11 +139,11 @@ function CardCase({ data }) {
           </Col>
           <Col md={7}>
             <div className="p-md-4">
-              <p className="typo-md d-flex align-items-center">
+              <p className="typo-md d-flex align-items-center mb-4">
                 <Calendar color="var(--bs-primary)" className="me-2" />
                 Evento
               </p>
-              <h4 className="typo-md">{data.name}</h4>
+              <h4 className="typo-lg mb-4">{data.name}</h4>
               <span
                 dangerouslySetInnerHTML={{ __html: data.text }}
                 className="typo-xs"
