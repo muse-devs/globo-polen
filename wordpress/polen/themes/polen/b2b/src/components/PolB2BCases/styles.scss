@@ -1,3 +1,5 @@
+@import "../../styles/mixins";
+
 .card-case {
   // .card-case__wrapp {
   //   width: calc(100vw - var(--bs-gutter-x));
@@ -12,6 +14,25 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+    }
+  }
+}
+
+.cases-b2b {
+  .arrow {
+    @include desktop {
+      top: 50%;
+    }
+  }
+  .prev-arrow {
+    @include desktop {
+      left: 0;
+    }
+  }
+
+  .next-arrow {
+    @include desktop {
+      right: 0;
     }
   }
 }
