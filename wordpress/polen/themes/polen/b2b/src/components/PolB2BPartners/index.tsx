@@ -2,16 +2,18 @@ import React from "react";
 import { Row, Col } from "react-bootstrap";
 import Slider from "react-slick";
 import { ArrowLeft, ArrowRight } from "react-feather";
-import logo from "images/logo-company.png";
+import endered from "images/logos/logo-edenred.png";
+import kovi from "images/logos/logo-kovi.png";
+import tecmundo from "images/logos/logo-tecmundo.png";
 import ceo from "images/ceo.png";
 import "./styles.scss";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const partners = [
-  { logo: logo, message: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.', name: "Jane Cooper", position: "CEO - Edenred", avatar: ceo },
-  { logo: logo, message: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.', name: "Jane Cooper", position: "CEO - Edenred", avatar: ceo },
-  { logo: logo, message: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.', name: "Jane Cooper", position: "CEO - Edenred", avatar: ceo },
+  { logo: endered, message: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.', name: "Jane Cooper", position: "CEO - Edenred", avatar: ceo },
+  { logo: kovi, message: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.', name: "Jane Cooper", position: "CEO - Edenred", avatar: ceo },
+  { logo: tecmundo, message: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.', name: "Jane Cooper", position: "CEO - Edenred", avatar: ceo },
 ];
 
 function SampleNextArrow(props) {
@@ -83,7 +85,7 @@ function CardPartner({ data }) {
           <div className="box-color p-4 mb-4">
             <Row>
               <Col sm={12} className="d-flex justify-content-center mb-3">
-                <img src={data.logo} alt="Logo B2B" width={160} />
+                <img src={data.logo} alt="Logo B2B" height={91} />
               </Col>
               <Col sm={12}>
                 <p className="mb-4 typo-xs">{data.message}</p>
