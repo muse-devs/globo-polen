@@ -1,3 +1,5 @@
+const isBrowser = typeof window !== "undefined";
+
 export const getError = (obj) => {
   return (
     obj?.data?.message ||
@@ -19,7 +21,11 @@ export const polCaptalize = (string) => {
 };
 
 export const getURLParam = (param) => {
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  return urlParams.get(param);
-}
+  if (isBrowser) {
+    const queryString = window?.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    return urlParams.get(param);
+  }
+
+  return null;
+};
