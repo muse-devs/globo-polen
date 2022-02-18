@@ -11,3 +11,5 @@ export { default as PolB2BFooter } from "components/PolB2BFooter";
 export { default as PolB2BCases } from "components/PolB2BCases";
 export { default as PolB2BPartners } from "components/PolB2BPartners";
 export { default as PolNonce } from "components/PolNonce";
+export { default as PolMessage } from "components/PolMessage";
+export { default as PolPreloader } from "components/PolPreloader";
