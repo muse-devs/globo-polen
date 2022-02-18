@@ -1,8 +1,17 @@
 import React from "react";
 import { Row, Col, Form, Button } from "react-bootstrap";
+import { useAppContext } from "context";
+import { showMessage, MESSAGE_TYPES } from "components/PolMessage";
 import { PolNonce } from "components";
+import { getError, getURLParam } from "utils";
 
 export default function () {
+  const context = useAppContext();
+
+  // React.useEffect(() => {
+  //   showMessage(context, MESSAGE_TYPES.MESSAGE, "Testando", "erro de teste");
+  // }, []);
+
   return (
     <section id="faleconosco" className="form-b2b">
       <Row className="px-3 px-md-5 g-0">
@@ -42,7 +51,7 @@ export default function () {
               </Button>
             </div>
             <PolNonce />
-            <input type="hidden" name="slug_product" defaultValue={""} />
+            <input type="hidden" name="slug_product" defaultValue={getURLParam("talent")} />
             <input type="hidden" name="form_id" defaultValue={"1"} />
           </Form>
         </Col>
