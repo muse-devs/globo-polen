@@ -108,7 +108,7 @@ export default function () {
   return (
     <section>
       <Row className="g-0 p-3">
-        <Col md={6} className="ps-md-5 mt-4 mt-md-0 order-1 order-md-0">
+        <Col md={12} lg={6} className="p-md-5 mt-4 mt-md-4 order-1 order-md-0">
           <h1 className="typo-xl">
             Use os vídeos personalizados dos ídolos da Polen para impulsionar o
             seu <em>negócio</em>
@@ -127,7 +127,7 @@ export default function () {
             </Col>
           </Row>
         </Col>
-        <Col md={6}>
+        <Col md={12} lg={6}>
           <Slider {...settings} className="videos-list">
             {videos.map((item, key) => (
               <div key={key}>

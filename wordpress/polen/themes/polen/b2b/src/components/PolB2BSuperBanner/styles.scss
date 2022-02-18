@@ -1,3 +1,5 @@
+@import "../../styles/mixins";
+
 .super-banner-item {
   position: relative;
   width: 241px;
@@ -44,6 +46,12 @@
 }
 
 .videos-list {
+  .super-banner-item {
+    @include desktop {
+      width: 402px;
+      height: 637px;
+    }
+  }
   .arrow {
     bottom: -60px;
   }
