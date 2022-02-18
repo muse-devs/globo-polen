@@ -910,7 +910,11 @@ class Polen_Talent {
      *
      * @return array
      */
-    public function get_orders_ids_by_product_id(int $product_id, array $order_status = ['wc-payment-approved', 'wc-talent-accepted']): array
+    public function get_orders_ids_by_product_id(
+        int $product_id,
+        string $orderby = 'ASC',
+        array $order_status
+    ): array
     {
         global $wpdb;
 
@@ -924,7 +928,8 @@ class Polen_Talent {
                 AND order_items.order_item_type = 'line_item'
                 AND order_item_meta.meta_key = '_product_id'
                 AND order_item_meta.meta_value = $product_id
-                AND 0 = (SELECT COUNT(*) FROM {$wpdb->prefix}video_info AS vi WHERE vi.order_id = posts.ID);
+                AND 0 = (SELECT COUNT(*) FROM {$wpdb->prefix}video_info AS vi WHERE vi.order_id = posts.ID)
+                ORDER BY order_items.order_id {$orderby};
         ");
     }
 
