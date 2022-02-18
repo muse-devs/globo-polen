@@ -1,6 +1,5 @@
 import React from "react";
 import { Row, Col, Accordion } from "react-bootstrap";
-import {Link} from 'gatsby';
 import "./styles.scss";
 
 export default function () {
@@ -71,7 +70,7 @@ export default function () {
             <Accordion.Item eventKey="9">
               <Accordion.Header className="typo-xs py-4"><strong>Onde posso encontrar mais informações sobre as Políticas de Privacidade e Uso da plataforma?</strong></Accordion.Header>
               <Accordion.Body className="typo-xs py-3">
-                Você pode encontrar todas essas informações no nosso <Link to='https://polen.me/termos-de-uso/' target="_blank"><a target="_blank" rel="noreferrer"> Termo de Uso</a></Link> e na nossa <Link to='https://polen.me/politica-de-privacidade/' target="_blank"><a target="_blank" rel="noreferrer"> Política de Privacidade</a></Link>.
+                Você pode encontrar todas essas informações no nosso <a href='https://polen.me/termos-de-uso/' target="_blank" rel="noreferrer"> Termo de Uso</a> e na nossa <a href='https://polen.me/politica-de-privacidade/' target="_blank" rel="noreferrer"> Política de Privacidade</a>.
               </Accordion.Body>
             </Accordion.Item>
             <Accordion.Item eventKey="10">
