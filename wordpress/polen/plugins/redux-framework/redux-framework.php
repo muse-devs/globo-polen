@@ -4,15 +4,15 @@
  * for WordPress themes and plugins. Developed with WordPress coding
  * standards and PHP best practices in mind.
  *
- * Plugin Name:         Redux
+ * Plugin Name:         Template Library and Redux Framework
  * Plugin URI:          http://wordpress.org/plugins/redux-framework
  * GitHub URI:          reduxframework/redux-framework
  * Description:         Build better sites in WordPress fast!
- * Version:             4.3.9
+ * Version:             4.3.10
  * Requires at least:   4.0
  * Requires PHP:        7.1
  * Author:              Extendify
- * Author URI:          https://extendify.com
+ * Author URI:          https://extendify.com/?utm_source=redux&utm_medium=plugins-page&utm_campaign=by
  * License:             GPLv3 or later
  * License URI:         http://www.gnu.org/licenses/gpl-3.0.txt
  * Text Domain:         redux-framework
