@@ -34,8 +34,6 @@ class Api_Orders extends WP_REST_Controller
             ]
         ] );
 
-
-
         register_rest_route( $this->namespace, $this->rest_base . '/orders/(?P<order_id>[\d]+)', [
             [
                 'methods' => WP_REST_Server::READABLE,
@@ -67,7 +65,6 @@ class Api_Orders extends WP_REST_Controller
         ] );
     }
 
-
     /**
      * Retornar pedidos por ID do cliente
      *
@@ -76,13 +73,25 @@ class Api_Orders extends WP_REST_Controller
      */
     public function get_orders(WP_REST_Request $request): \WP_REST_Response
     {
-        $talent_id = get_current_user_id();
-        $customer_orders = [];
+        $params = $request->get_params();
+        $orderby = $params['orderby'] ?? 'DESC';
+        $order_status = $params['status'] ? [$params['status']] : ['wc-payment-approved', 'wc-talent-accepted'];
+
+        $date_filter = $params['deadline'] ?? false;
+
+        $filters = [
+            'orderby' => $orderby,
+            'status' => $order_status,
+            'deadline' => $date_filter,
+        ];
+
+        $products_id  = Api_Talent_Utils::get_globals_product_id();
 
         $polen_talent = new Polen_Talent();
-        $customer_orders = $polen_talent->get_talent_orders_v2($talent_id);
+        $foo = $polen_talent->get_order_ids($products_id, $filters);
+        $data = $polen_talent->get_orders_info($foo);
 
-        return api_response($customer_orders);
+        return api_response($data);
     }
 
 
