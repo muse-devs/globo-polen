@@ -3,6 +3,7 @@ import { Row, Col } from "react-bootstrap";
 import Slider from "react-slick";
 import { ArrowLeft, ArrowRight } from "react-feather";
 import { Calendar } from "react-feather";
+import { playVideo } from "services";
 import "./styles.scss";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -82,13 +83,12 @@ function SamplePrevArrow(props) {
     <div className="arrow prev-arrow me-3" onClick={onClick}>
       <ArrowLeft />
     </div>
-
   );
 }
 
 const settings = {
   dots: true,
-  infinite: true,
+  infinite: false,
   speed: 500,
   slidesToShow: 1,
   slidesToScroll: 1,
@@ -99,13 +99,39 @@ const settings = {
     {
       breakpoint: 900,
       settings: {
-       dots: false,
-      }
-    }
-  ]
+        dots: false,
+      },
+    },
+  ],
 };
 
 export default function () {
+  const [videos, setVideos] = React.useState(videosData);
+
+  const handleClick = (evt, key) => {
+    const video: HTMLVideoElement = document.querySelector(
+      `#cases-video-${key}`
+    );
+    if (!video.paused) {
+      video.pause();
+      setVideos((current) => {
+        return current.map((item, index) => ({
+          ...item,
+          paused: true,
+        }));
+      });
+      return;
+    }
+
+    setVideos((current) => {
+      return current.map((item, index) => ({
+        ...item,
+        paused: key == index ? false : true,
+      }));
+    });
+
+    playVideo(video);
+  };
   return (
     <section className="cases-b2b mb-5">
       <Row className="g-0 p-3 px-md-5">
@@ -116,42 +142,58 @@ export default function () {
           <Slider {...settings}>
             {videosData.map((item, key) => (
               <div key={key}>
-                <CardCase data={item} key={key} />
+                <section className="card-case col-xs-12 col-sm-10 mx-auto">
+                  <div
+                    className="card-case__wrapp"
+                    onClick={(evt) => handleClick(evt, key)}
+                  >
+                    <Row className="g-0">
+                      <Col md={5} className="d-flex align-items-center">
+                        <figure
+                          className={`video-card${
+                            videos[key].paused ? " -paused" : ""
+                          }`}
+                        >
+                          <img
+                            src={item.image}
+                            alt={item.name}
+                            className="poster"
+                          />
+                          <video
+                            id={`cases-video-${key}`}
+                            src={item.video}
+                            width={"100%"}
+                            className={`video-player${
+                              !videos[key].paused ? " -active" : ""
+                            }`}
+                            playsInline
+                          ></video>
+                        </figure>
+                      </Col>
+                      <Col md={7}>
+                        <div className="p-md-4">
+                          <p className="typo-md d-flex align-items-center mb-4">
+                            <Calendar
+                              color="var(--bs-primary)"
+                              className="me-2"
+                            />
+                            Evento
+                          </p>
+                          <h4 className="typo-lg mb-4">{item.name}</h4>
+                          <span
+                            dangerouslySetInnerHTML={{ __html: item.text }}
+                            className="typo-xs"
+                          />
+                        </div>
+                      </Col>
+                    </Row>
+                  </div>
+                </section>
               </div>
             ))}
           </Slider>
         </Col>
       </Row>
-    </section>
-  );
-}
-
-function CardCase({ data }) {
-  return (
-    <section className="card-case col-xs-12 col-sm-10 mx-auto">
-      <div className="card-case__wrapp">
-        <Row className="g-0">
-          <Col md={5} className="d-flex align-items-center">
-            <figure className="video-player">
-              <img src={data.image} alt={data.name} className="poster" />
-              <video src={data.video} width={"100%"}></video>
-            </figure>
-          </Col>
-          <Col md={7}>
-            <div className="p-md-4">
-              <p className="typo-md d-flex align-items-center mb-4">
-                <Calendar color="var(--bs-primary)" className="me-2" />
-                Evento
-              </p>
-              <h4 className="typo-lg mb-4">{data.name}</h4>
-              <span
-                dangerouslySetInnerHTML={{ __html: data.text }}
-                className="typo-xs"
-              />
-            </div>
-          </Col>
-        </Row>
-      </div>
     </section>
   );
 }

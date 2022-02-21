@@ -59,7 +59,7 @@ function SamplePrevArrow(props) {
 
 const settings = {
   dots: false,
-  infinite: true,
+  infinite: false,
   speed: 500,
   centerMode: false,
   variableWidth: true,
@@ -109,16 +109,16 @@ export default function () {
     <section>
       <Row className="g-0 p-3">
         <Col md={12} lg={6} className="p-md-5 mt-4 mt-md-4 order-1 order-md-0">
-          <h1 className="typo-xl">
+          <h1 className="typo-xl title-b2b">
             Use os vídeos personalizados dos ídolos da Polen para impulsionar o
-            seu <em>negócio</em>
+            seu <em className="title-b2b-highlight">negócio</em>
           </h1>
           <p className="typo-xs">
             Crie autoridade para sua marca, aumente suas vendas, e crie mais
             engajamento com seus clientes e colaboradores.
           </p>
           <Row>
-            <Col md={6} className="m-auto m-md-0">
+            <Col lg={8} className="m-auto m-md-0">
               <div className="d-grid gap-2 mt-4">
                 <Button href="#faleconosco" size="lg">
                   Fale com a equipe de vendas
