@@ -1,7 +1,7 @@
 <?php
 
 //Removendo o Dashboard até desenhar um melhor
-wp_safe_redirect( site_url( 'my-account/orders/' ) );
+wp_safe_redirect(site_url('my-account/orders/'));
 exit;
 
 use Polen\Includes\Polen_Talent;

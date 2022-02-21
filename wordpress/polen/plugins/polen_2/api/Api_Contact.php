@@ -2,16 +2,61 @@
 namespace Polen\Api;
 
 use Exception;
+use Polen\Admin\Polen_Forms;
+use Polen\Includes\Polen_Form_DB;
+use Polen\Includes\Polen_Zapier;
 use Polen\Includes\Sendgrid\Polen_Sendgrid_Emails;
 use Polen\Includes\Sendgrid\Polen_Sendgrid_Redux;
 use WP_REST_Request;
+use WP_REST_Server;
 
 class Api_Contact
 {
 
+    public $base;
+    public function __construct()
+    {
+        $this->base = 'polen/v1';
+    }
+    public function register_routes()
+    {
+        /**
+         * Criacao de um endpoint para envio de email de ajuda Galo
+         */
+        register_rest_route( $this->base, '/contact', array(
+            array(
+                'methods'             => WP_REST_Server::CREATABLE,
+                'callback'            => array($this, 'handler_email_help'),
+                'permission_callback' => '__return_true',
+            ),
+            'schema' => array()
+        ) );
+        
+        #CRIANDO ENDOPINT PARA NONCE DO FORMULARIO DE EMAIL DO 
+        register_rest_route( $this->base, '/contact', array(
+            array(
+                'methods'             => WP_REST_Server::READABLE,
+                'callback'            => array($this, 'create_nonce'),
+                'permission_callback' => '__return_true',
+            ),
+            'schema' => array()
+        ) );
+
+
+        register_rest_route( $this->base, '/b2b', array(
+            array(
+                'methods'             => WP_REST_Server::CREATABLE,
+                'callback'            => array($this, 'handler_b2b_contact'),
+                'permission_callback' => '__return_true',
+            ),
+            'schema' => array()
+        ) );
+    }
+
+
     public function create_nonce( WP_REST_Request $request )
     {
-        $ip = $_SERVER[ 'REMOTE_ADDR' ];
+        $ip     = $_SERVER[ 'REMOTE_ADDR' ];
         $client = $_SERVER[ 'HTTP_USER_AGENT' ];
         return api_response( Api_Util_Security::create_nonce($ip . $client), 200 );
     }
@@ -22,12 +67,13 @@ class Api_Contact
     public function handler_email_help( WP_REST_Request $request )
     {
         try {
-            $ip = $_SERVER[ 'REMOTE_ADDR' ];
+            $ip     = $_SERVER[ 'REMOTE_ADDR' ];
             $client = $_SERVER[ 'HTTP_USER_AGENT' ];
-            $nonce = $request->get_param( 'security' );
+            $nonce  = $request->get_param( 'security' );
             if( !Api_Util_Security::verify_nonce($ip . $client, $nonce) ) {
                 throw new Exception( 'Erro na segurança', 403 );
             }
+
             $name    = filter_var( $request->get_param( 'name' ), FILTER_SANITIZE_STRING );
             $email   = filter_var( $request->get_param( 'email' ), FILTER_SANITIZE_EMAIL );
             $phone   = filter_var( $request->get_param( 'phone' ), FILTER_SANITIZE_NUMBER_INT );
@@ -39,6 +85,7 @@ class Api_Contact
             return api_response( $e->getMessage(), $e->getCode() );
         }
     }
+
 
 
 
@@ -59,5 +106,4 @@ class Api_Contact
         $send_grid->set_template_data( 'message', $message );
         return $send_grid->send_email();
     }
-
 }

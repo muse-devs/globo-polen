@@ -9,7 +9,7 @@ class Polen_Product_B2B
     /**
      * 
      */
-    public static function get_all_product_ids( $qtd = 20 )
+    public static function get_all_product_ids(array $categories = null, $qtd = 20)
     {
         $args = array(
             'fields' => 'ids',
@@ -25,6 +25,15 @@ class Polen_Product_B2B
                 )
             )
         );
+        if(!empty($categories)) {
+            $args['tax_query'] = array(
+                array(
+                    'taxonomy' => 'product_cat',
+                    'field' => 'slug', 
+                    'terms' => $categories
+                )
+            );
+        }
         $products = get_posts( $args );
         return $products;
     }

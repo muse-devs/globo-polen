@@ -6,7 +6,7 @@ use Polen\Includes\Polen_Product_B2B;
 
 function bus_get_talents()
 {
-  $products_id = Polen_Product_B2B::get_all_product_ids(100);
+  $products_id = Polen_Product_B2B::get_all_product_ids([], 100);
   return !empty($products_id) ? array_chunk($products_id, 4) : array();
 }
 
