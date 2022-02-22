@@ -59,7 +59,7 @@ $obj = polen_queried_object();
 <?php if ($obj) : ?>
   <div class="row mt-5 mb-5 pt-5">
     <div class="col-12 mt-5">
-      <?php polen_banner_scrollable(polen_get_new_talents(6), "Destaque", polen_get_all_new_talents_url()); ?>
+      <?php polen_banner_scrollable(polen_get_new_talents(6), "Destaque", "", polen_get_all_new_talents_url()); ?>
     </div>
   </div>
 <?php endif; ?>
