@@ -3,7 +3,8 @@ require("dotenv").config({
 });
 
 module.exports = {
-  pathPrefix: "polen/themes/polen/b2b/public",
+  pathPrefix: "empresas",
+  assetPrefix: "polen/themes/polen/b2b",
   siteMetadata: {
     title: `Polen B2B`,
     siteUrl: `https://polen.me/empresas`,
