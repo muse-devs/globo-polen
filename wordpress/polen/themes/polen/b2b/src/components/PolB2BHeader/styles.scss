@@ -1,0 +1,8 @@
+@import "../../styles/mixins";
+
+.logo-b2b {
+  @include desktop {
+    width: 147px;
+    margin-left: 15px;
+  }
+}

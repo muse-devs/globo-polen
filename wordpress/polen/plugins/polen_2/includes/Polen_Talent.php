@@ -910,7 +910,11 @@ class Polen_Talent {
      *
      * @return array
      */
-    public function get_orders_ids_by_product_id(int $product_id, array $order_status = ['wc-payment-approved', 'wc-talent-accepted']): array
+    public function get_orders_ids_by_product_id(
+        int $product_id,
+        string $orderby = 'ASC',
+        array $order_status
+    ): array
     {
         global $wpdb;
 
@@ -924,10 +928,28 @@ class Polen_Talent {
                 AND order_items.order_item_type = 'line_item'
                 AND order_item_meta.meta_key = '_product_id'
                 AND order_item_meta.meta_value = $product_id
-                AND 0 = (SELECT COUNT(*) FROM {$wpdb->prefix}video_info AS vi WHERE vi.order_id = posts.ID);
+                AND 0 = (SELECT COUNT(*) FROM {$wpdb->prefix}video_info AS vi WHERE vi.order_id = posts.ID)
+                ORDER BY order_items.order_id {$orderby};
         ");
     }
 
+    /**
+     * Retornar as Orders de acordo com os filtros
+     *
+     * @param filter
+     * @param Timestamp
+     */
+    public function get_order_ids($products_id, $filter = [])
+    {
+        $data = $this->get_orders_ids_by_product_id($products_id[0], $filter['orderby'], $filter['status']);
+
+        if (isset($filter['deadline']) && !empty($filter['deadline'])) {
+            $response = Polen_Order_V2::get_orders_by_products_id_deadline($products_id, $filter['status'], $filter['orderby']);
+            $data = $this->get_ids_in_array($response);
+        }
+
+        return $data;
+    }
 
     /**
      * Pega Orders por Talento por Status
@@ -1003,6 +1025,21 @@ class Polen_Talent {
         return Polen_Order_V2::get_qty_orders_by_products_id_deadline($orders_id, date('Y/m/d'));;
     }
 
+    /**
+     * Formatar resultado na consulta com get_results (ARRAY_A)
+     *
+     * @param array $orders_id
+     * @return array
+     */
+    private function get_ids_in_array(array $orders_id): array
+    {
+        $data = [];
+        foreach ($orders_id as $order_id) {
+            $data[] = $order_id['order_id'];
+        }
+
+        return $data;
+    }
 
     /**
      * Retornar informações basicas de um array de orders

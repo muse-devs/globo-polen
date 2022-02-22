@@ -117,4 +117,43 @@ class Polen_Order_V2
         }
         return floatval( $result );
     }
+
+    /**
+     * Pegar a quantidade de Orders por Produtos_Id e Deadline
+     *
+     * @param array produtos_id
+     * @param string deadline format 'Y/m/d'
+     */
+    static public function get_orders_by_products_id_deadline($products_id, $status, $order)
+    {
+        global $wpdb;
+
+        $product_ids_pattern = implode( ', ', array_fill( 0, count( $products_id ), '%s' ) );
+        $timestamp_start = strtotime(date('Y-m-d') . ' 00:00:00');
+        $timestamp_final = strtotime(date('Y-m-d') . ' 23:59:59');
+        $status_pattern = implode( ', ', array_fill( 0, count( $status ), '%s' ) );
+        $sql = "SELECT
+                opl.order_id
+            FROM
+                wp_wc_order_product_lookup AS opl
+            INNER JOIN wp_wc_order_stats AS os ON ( os.order_id = opl.order_id )
+            INNER JOIN wp_postmeta as pm ON ( pm.post_id = opl.order_id AND pm.meta_key = '_polen_deadline' )
+            WHERE
+                opl.product_id IN ( {$product_ids_pattern} )
+            AND
+                os.status IN ( {$status_pattern} )
+            AND
+                CAST(pm.meta_value AS SIGNED) >= %s
+            AND
+                CAST(pm.meta_value AS SIGNED) <= %s
+            GROUP BY opl.order_id
+            ORDER BY opl.order_id {$order};";
+        $sql_prepared = Polen_Utils::esc_arr($sql, array_merge($products_id, $status, [$timestamp_start, $timestamp_final]));
+
+        if (!empty($wpdb->last_error)) {
+            return null;
+        }
+
+        return $wpdb->get_results($sql_prepared, ARRAY_A);
+    }
 }
