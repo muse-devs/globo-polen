@@ -1,0 +1,41 @@
+@import "../../styles/mixins";
+
+.faq-accordion {
+  border: 1px solid #515151;
+  border-radius: 16px;
+  padding: 32px;
+  .accordion-header {
+    position: relative;
+    @include desktop {
+      strong {
+        font-size: 24px;
+      }
+    }
+    &:after {
+      content: "+";
+      display: block;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 0;
+      font-size: 34px;
+      font-weight: 100;
+      color: var(--bs-high-pure);
+    }
+    border-bottom: 1px solid #515151;
+    .accordion-button {
+      background: none;
+      border: none;
+      text-align: left;
+      padding-right: 10%;
+      color: var(--bs-high-pure);
+    }
+  }
+  .accordion-body {
+    padding: 10px;
+    color: var(--bs-low-light);
+    @include desktop {
+      font-size: 20px;
+    }
+  }
+}

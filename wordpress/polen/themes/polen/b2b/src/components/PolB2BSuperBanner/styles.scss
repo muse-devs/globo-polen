@@ -1,0 +1,66 @@
+@import "styles/mixins";
+
+.super-banner-item {
+  position: relative;
+  width: 241px;
+  height: 353px;
+  background-color: #000;
+  .video-card {
+    width: 100%;
+    height: 100%;
+    .poster {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
+    .video-player {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 3;
+      opacity: 0;
+      transition: opacity 250ms ease;
+      &.active {
+        opacity: 1;
+      }
+    }
+  }
+  .logo {
+    position: absolute;
+    text-align: center;
+    left: 50%;
+    bottom: 0;
+    transform: translate(-50%, 0);
+    z-index: 2;
+    .image {
+      width: 70px;
+      height: 70px;
+    }
+    .name {
+      margin-top: 0.8rem;
+    }
+  }
+}
+
+.videos-list {
+  .super-banner-item {
+    @include desktop {
+      width: 402px;
+      height: 637px;
+    }
+  }
+  .arrow {
+    bottom: -60px;
+  }
+}
+
+.title-b2b {
+  .title-b2b-highlight {
+    padding: 15px;
+    font-style: normal;
+    background: no-repeat center/contain url("images/b2b-elipse.png");
+  }
+}

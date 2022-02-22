@@ -68,9 +68,14 @@ class Api_B2B
      */
     protected function prepare_product_to_response(WC_Product $product)
     {
+        $media_obj = wp_get_attachment_image_src($product->get_image_id(), 'polen-thumb-lg');
+        $url_image = '';
+        if(!empty($media_obj)) {
+            $url_image = $media_obj[0];
+        }
         return [
             'name'      => $product->get_title(),
-            'thumbnail' => wp_get_attachment_image_src($product->get_image_id())[0],
+            'thumbnail' => $url_image,
             'sku'       => $product->get_sku(),
             'permalink' => $product->get_permalink(),
         ];
@@ -111,7 +116,7 @@ class Api_B2B
         $email   = filter_var($request->get_param( 'email' ), FILTER_SANITIZE_EMAIL);
         $company = filter_var($request->get_param( 'company' ), FILTER_SANITIZE_SPECIAL_CHARS);
         $phone   = filter_var($request->get_param( 'phone' ), FILTER_SANITIZE_SPECIAL_CHARS);
-        $slug    = filter_var($request->get_param( 'slug-product' ), FILTER_SANITIZE_SPECIAL_CHARS);
+        $slug    = filter_var($request->get_param( 'slug_product' ), FILTER_SANITIZE_SPECIAL_CHARS);
         $terms   = '1';
         $body = compact('form_id', 'name', 'email', 'company', 'phone');
         try {
