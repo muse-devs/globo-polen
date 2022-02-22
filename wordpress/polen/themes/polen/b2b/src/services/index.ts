@@ -2,11 +2,14 @@ import axios from "axios";
 import { ContactB2B } from "interfaces";
 
 export function playVideo(video) {
-  const allVideos = document.querySelectorAll("video");
-  [].map.call(allVideos, (item) => (!item.paused ? item.pause() : null));
-
+  stopVideos();
   video.currentTime = 0.1;
   video.play();
+}
+
+export function stopVideos() {
+  const allVideos = document.querySelectorAll("video");
+  [].map.call(allVideos, (item) => (!item.paused ? item.pause() : null));
 }
 
 const polApi = axios.create({
