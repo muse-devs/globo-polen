@@ -1,6 +1,6 @@
 <?php
 
-function polen_talent_promo_card($talent, $image_data = array())
+function polen_talent_promo_card($talent_id, $image_data = array())
 {
 	global $product;
 ?>
@@ -11,7 +11,7 @@ function polen_talent_promo_card($talent, $image_data = array())
           <?php if ($image_data) : ?>
             <img src="<?php echo $image_data['image']; ?>" alt="<?php echo $image_data["alt"]; ?>" />
           <?php else : ?>
-            <?php echo polen_get_avatar($talent->user_id, 'polen-square-crop-lg'); ?>
+            <?php echo polen_get_avatar($talent_id, 'polen-square-crop-lg'); ?>
 					<?php endif; ?>
 				</div>
 				<p class="mt-2">E aí, ficou com vontade de ter um vídeo?</p>
@@ -53,9 +53,9 @@ function polen_front_get_talent_stories()
  * @param stdClass Polen_Talent_Fields
  * @return HTML
  */
-function polen_front_get_talent_videos($talent)
+function polen_front_get_talent_videos($talent_id)
 {
-	$items = polen_get_videos_by_talent($talent);
+	$items = polen_get_videos_by_talent($talent_id);
 
 	global $product;
 	$video_url = home_url() . "/v/";
@@ -72,11 +72,11 @@ function polen_front_get_talent_videos($talent)
                 <div class="video-player-button" data-id="0"></div>
 								<?php /*<img loading="lazy" src="<?= $item['cover']; ?>" alt="<?= $item['title']; ?>" data-url="<?= $item['video']; ?>">
 								<a href="javascript:openVideoByHash('<?= $item['hash']; ?>')" class="video-player-button"></a> */ ?>
-								<?php polen_video_icons($talent->user_id, $item['initials'], $item['first_order'] == "1"); ?>
+								<?php polen_video_icons($talent_id, $item['initials'], $item['first_order'] == "1"); ?>
 							</figure>
 						</div>
 					<?php endforeach; ?>
-					<?php polen_talent_promo_card($talent); ?>
+					<?php polen_talent_promo_card($talent_id); ?>
 				</div>
 			</div>
 		</div>
@@ -105,7 +105,7 @@ function polen_front_get_talent_mini_bio($image_data, $name, $category)
   <?php
 }
 
-function polen_front_get_videos_single($talent, $videos, $image_data)
+function polen_front_get_videos_single($talent_id, $videos, $image_data)
 {
   if( ! wp_script_is( 'owl-carousel', 'enqueued' ) ) {
       wp_enqueue_script('owl-carousel');
@@ -143,7 +143,7 @@ function polen_front_get_videos_single($talent, $videos, $image_data)
           <?php endif; ?>
         <?php endforeach; ?>
         <div class="col-6 col-md-3">
-          <?php polen_talent_promo_card($talent, $image_data); ?>
+          <?php polen_talent_promo_card($talent_id, $image_data); ?>
         </div>
         </div>
       </div>
@@ -266,10 +266,8 @@ function polen_get_talent_card($talent, $social = false)
 <?php
 }
 
-function polen_talent_deadline($talent)
+function polen_talent_deadline($deadline_medio)
 {
-  global $Polen_Plugin_Settings;
-  $order_expires = $Polen_Plugin_Settings['order_expires'];
 ?>
   <div class="col-md-12">
 		<div class="row">
@@ -280,10 +278,7 @@ function polen_talent_deadline($talent)
               <p class="typo-double-line-height mb-0">
                 Peça hoje e receba até <br>
                 <b>
-                  <?php
-                  $date = date("d/m/Y");
-                  echo date( "d/m/y", strtotime('+'.$order_expires.' days') );
-                ?>
+                  <?php echo $deadline_medio; ?>
                 </b>
               </p>
             </div>
