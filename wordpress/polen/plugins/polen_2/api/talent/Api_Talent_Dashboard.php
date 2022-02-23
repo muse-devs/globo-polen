@@ -77,6 +77,7 @@ class Api_Talent_Dashboard extends WP_REST_Controller
 
         $response = [
             'qty_pending_order'     => Polen_Order_V2::get_qty_orders_by_products_id_status($products_id, ['wc-payment-approved', 'wc-talent-accepted']),
+            'qty_orders_accepted'   => Polen_Order_V2::get_total_orders_by_products_id_status($products_id, ['wc-talent-accepted']),
             'total_pending_value'   => Polen_Order_V2::get_total_orders_by_products_id_status($products_id, ['wc-pending']),
             'qty_orders_recorded'   => Polen_Order_V2::get_qty_orders_by_products_id_status($products_id, ['wc-completed']),
             'qty_orders_expired'    => Polen_Order_V2::get_qty_orders_by_products_id_status($products_id, ['wc-order-expired']),
