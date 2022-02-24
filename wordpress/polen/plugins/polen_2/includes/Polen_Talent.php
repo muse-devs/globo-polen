@@ -913,7 +913,7 @@ class Polen_Talent {
     public function get_orders_ids_by_product_id(
         int $product_id,
         array $order_status,
-        string $orderby = 'ASC',
+        string $orderby = 'ASC'
     ): array
     {
         global $wpdb;
