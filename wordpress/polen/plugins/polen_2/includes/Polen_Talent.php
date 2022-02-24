@@ -915,7 +915,7 @@ class Polen_Talent {
     public function get_orders_ids_by_product_id(
         int $product_id,
         string $orderby = 'ASC',
-        array $order_status = []
+        array $order_status = ['wc-payment-approved', 'wc-talent-accepted']
     ): array
     {
         global $wpdb;
@@ -943,7 +943,7 @@ class Polen_Talent {
      */
     public function get_order_ids($products_id, $filter = [])
     {
-        $data = $this->get_orders_ids_by_product_id($products_id[0], $filter['status'], $filter['orderby']);
+        $data = $this->get_orders_ids_by_product_id($products_id[0], $filter['orderby'], [$filter['status']]);
 
         if (isset($filter['deadline']) && !empty($filter['deadline'])) {
             $response = Polen_Order_V2::get_orders_by_products_id_deadline($products_id, $filter['status'], $filter['orderby']);
@@ -955,7 +955,7 @@ class Polen_Talent {
 
     /**
      * Pega Orders por Talento por Status
-     * $status pode ser uma string separada por virgula "'wc-payment-approved', 'wc-talent-accepted'"
+     * $status pode ser uma array separada por virgula ['wc-payment-approved', 'wc-talent-accepted']
      *
      * @param int $talent_id
      * @return array
