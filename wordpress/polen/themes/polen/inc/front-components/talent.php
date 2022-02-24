@@ -360,12 +360,10 @@ function polen_talent_review($reviews)
             $('#review-carousel').owlCarousel({
               loop: false,
               items: 3,
-              autoplayTimeout: 5000,
               animateOut: 'fadeOut',
-              autoplayHoverPause: true,
               margin: 0,
               nav: false,
-              autoplay: true,
+              autoplay: false,
               dots: true,
               autoHeight: false,
               responsive: {
