@@ -7,6 +7,7 @@
 
 namespace Polen\Includes;
 
+use Exception;
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
 use Polen\Includes\Module\Polen_Order_Module;
 use Polen\Includes\Polen_Order;
@@ -906,14 +907,15 @@ class Polen_Talent {
      * Pegar todas as orders pelo o ID e status
      *
      * @param integer $product_id (required)
+     * @param string orderby
      * @param array $order_status (optional)
      *
      * @return array
      */
     public function get_orders_ids_by_product_id(
         int $product_id,
-        array $order_status,
-        string $orderby = 'ASC'
+        string $orderby = 'ASC',
+        array $order_status = []
     ): array
     {
         global $wpdb;
@@ -1056,6 +1058,57 @@ class Polen_Talent {
         }
 
         return $objects;
+    }
+
+
+
+    /**
+     * Recalcula o tempo médio que o talento atende o vídeo
+     * @param int user_id
+     */
+    public function average_video_response( $talent_id ){
+        if( !empty( $talent_id ) ){
+            global $wpdb;
+
+            $sql = "SELECT TIMESTAMPDIFF(HOUR, p.post_date, vi.updated_at) as average_time 
+                    FROM {$wpdb->prefix}video_info vi 
+                    INNER JOIN {$wpdb->posts} p on p.id = order_id 
+                    WHERE vi.talent_id = {$talent_id} and vi.vimeo_process_complete = 1 AND vi.updated_at is not null
+                    ORDER BY vi.created_at DESC LIMIT 2 ";
+            $all_times = $wpdb->get_results( $sql );
+
+            if( $all_times ){
+                try{
+                    if( count($all_times) == 2 ){
+                        $average_hour = 0;
+                        foreach( $all_times as $this_time ){
+                            $average_hour += $this_time->average_time;
+                        }
+
+                        $average_time = ceil( $average_hour/2 );
+                        if( floor( $average_time ) < 48 ){
+                            $average_time = 48;
+                        }else if( floor( $average_time ) > 72 ){
+                            $average_time = ceil( $average_time );
+                        }
+                    }  
+
+                    if( count( $all_times ) == 1 ){
+                        if( isset( $all_times[0] ) ){
+                            if( isset( $all_times[0]->average_time ) ){
+                                $average_time = ceil( $all_times[0]->average_time );
+                            }
+                        }
+                    }
+
+                    $update = $wpdb->update(
+                        $wpdb->base_prefix . 'polen_talents',
+                        array( 'tempo_resposta' => $average_time ),
+                        array( 'user_id' => $talent_id ),
+                    );
+                }catch( Exception $e ){}
+            }
+        }
     }
 
 }
