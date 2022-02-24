@@ -912,8 +912,8 @@ class Polen_Talent {
      */
     public function get_orders_ids_by_product_id(
         int $product_id,
+        array $order_status,
         string $orderby = 'ASC',
-        array $order_status
     ): array
     {
         global $wpdb;
@@ -941,7 +941,7 @@ class Polen_Talent {
      */
     public function get_order_ids($products_id, $filter = [])
     {
-        $data = $this->get_orders_ids_by_product_id($products_id[0], $filter['orderby'], $filter['status']);
+        $data = $this->get_orders_ids_by_product_id($products_id[0], $filter['status'], $filter['orderby']);
 
         if (isset($filter['deadline']) && !empty($filter['deadline'])) {
             $response = Polen_Order_V2::get_orders_by_products_id_deadline($products_id, $filter['status'], $filter['orderby']);
