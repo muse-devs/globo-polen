@@ -3,6 +3,7 @@ namespace Polen\Api;
 
 use Polen\Api\Orders\Api_Orders;
 use Polen\Api\Talent\Api_Talent_Dashboard;
+use Polen\Api\Talent\Api_Talent_My_Account;
 use Polen\Api\Talent\Api_Talent_Order;
 use Polen\Api\Talent\Api_Talent_Payment;
 use Polen\Api\Api_B2B;
@@ -26,6 +27,9 @@ class Api {
             #Área do Talento Logado
             $talent_dashboard = new Api_Talent_Dashboard();
             $talent_dashboard->register_routes();
+
+            $talent_myaccount = new Api_Talent_My_Account();
+            $talent_myaccount->register_routes();
 
             #Área de pedidos
             $talent_dashboard = new Api_Orders();
