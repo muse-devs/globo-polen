@@ -16,6 +16,7 @@
  * @version 3.6.0
  */
 
+use Polen\Includes\Module\Factory\Polen_Product_Module_Factory;
 use Polen\Includes\Module\Polen_Product_Module;
 
 defined('ABSPATH') || exit;
@@ -36,20 +37,14 @@ if (post_password_required()) {
 	return;
 }
 
-use Polen\Social_Base\Social_Base_Product;
 use Polen\Includes\Polen_Order_Review;
 
-$polen_product = new Polen_Product_Module( $product );
+$polen_product = Polen_Product_Module_Factory::create_product_from_campaing($product);
 $terms         = wp_get_object_terms($polen_product->get_id(), 'product_tag');
 $categories    = wp_get_object_terms($polen_product->get_id(), 'product_cat');
 $videos        = $polen_product->get_videos();//polen_get_videos_by_talent($Talent_Fields);
 $image_data    = polen_get_thumbnail($polen_product->get_id());
-$product_post  = get_post($product->get_id());
 $talent_id     = $polen_product->get_user_talent_id();
-$has_stock     = $polen_product->get_in_stock();
-// $reviews       = Polen_Order_Review::get_order_reviews_by_talent_id(
-// 	$polen_product->get_user_talent_id()
-// );
 
 $inputs = new Material_Inputs();
 
@@ -81,7 +76,7 @@ $inputs = new Material_Inputs();
   <!-- Botão de adicionar ao carrinho -->
 	<div class="row mt-3 mb-1 talent-page-footer">
 		<div class="col-12 col-md-6 m-md-auto pb-3">
-			<?php if($has_stock) : ?>
+	<?php if($polen_product->get_in_stock()) : ?>
         <?php $inputs->pol_combo_advanced(
         "select_type",
         "select_type",
@@ -89,32 +84,11 @@ $inputs = new Material_Inputs();
 		  $polen_product->b2c_combobox_advanced_item_html($inputs),
 		  $polen_product->b2b_combobox_advanced_item_html($inputs),
           )); ?>
-				<div class="btn-buy-personal">
-          <?php $polen_product->template_single_add_to_cart(); ?>
-        </div>
-        <div class="btn-buy-b2b d-none">
-          <?php $polen_product->template_button_buy_b2b($inputs); ?>
-        </div>
-			<?php else: ?>
-        <?php $polen_product->template_button_others_talents($inputs); ?>
-			<?php endif; ?>
+		<?php echo $polen_product->template_buy_buttons($inputs, $polen_product); ?>
+	<?php else: ?>
+        <?php echo $polen_product->template_button_others_talents($inputs); ?>
+	<?php endif; ?>
 		</div>
-    <script>
-      const btn_personal = document.querySelector(".btn-buy-personal");
-      const btn_b2b = document.querySelector(".btn-buy-b2b");
-      const pol_select = document.querySelector("#select_type");
-      pol_select && pol_select
-        .addEventListener("polcombochange",
-          function(e) {
-            if(e.detail == "b2b") {
-              btn_b2b.classList.remove("d-none");
-              btn_personal.classList.add("d-none");
-            } else {
-              btn_b2b.classList.add("d-none");
-              btn_personal.classList.remove("d-none");
-            }
-          });
-    </script>
 	</div>
   <!-- --------------------------------------------- -->
 

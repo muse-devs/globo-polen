@@ -241,7 +241,11 @@ class Polen_Product_Module
      */
     public function template_single_add_to_cart()
     {
-        return woocommerce_template_single_add_to_cart();
+        ob_start();
+        woocommerce_template_single_add_to_cart();
+        $result_html = ob_get_contents();
+        ob_end_clean();
+        return $result_html;
     }
 
 
@@ -249,6 +253,15 @@ class Polen_Product_Module
     {
         ob_start();
         $inputs->material_button_link("btn-b2b", "Pedir vídeo", enterprise_url_home() . '?talent='.$this->get_title().'#bus-form-wrapper', false, "", array(), $this->get_is_charity() ? "donate" : "");
+        $result_html = ob_get_contents();
+        ob_end_clean();
+        return $result_html;
+    }
+
+    public function template_buy_buttons($inputs)
+    {
+        ob_start();
+        polen_buy_buttons_b2c_b2b($inputs, $this);
         $result_html = ob_get_contents();
         ob_end_clean();
         return $result_html;
@@ -322,7 +335,7 @@ class Polen_Product_Module
     public function b2c_combobox_advanced_item_html($inputs)
     {
         $disabled = false;
-        $checked = false;
+        $checked = true;
         return $inputs->pol_combo_advanced_item(
             "Vídeo para uso pessoal",
             $this->get_price_html(),
