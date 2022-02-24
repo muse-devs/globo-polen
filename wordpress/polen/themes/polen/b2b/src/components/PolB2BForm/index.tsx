@@ -66,6 +66,7 @@ export default function () {
               name="name"
               placeholder="Nome Completo"
               className="form-control mt-4"
+              value={formData.name}
               onChange={handleChange}
               required
             />
@@ -74,6 +75,7 @@ export default function () {
               name="company"
               placeholder="Empresa"
               className="form-control mt-4"
+              value={formData.company}
               onChange={handleChange}
               required
             />
@@ -82,6 +84,7 @@ export default function () {
               name="email"
               placeholder="e-mail de trabalho"
               className="form-control mt-4"
+              value={formData.email}
               onChange={handleChange}
               required
             />
@@ -90,6 +93,7 @@ export default function () {
               name="phone"
               placeholder="Número de telefone"
               className="form-control mt-4"
+              value={formData.phone}
               onChange={handleChange}
               required
             />
