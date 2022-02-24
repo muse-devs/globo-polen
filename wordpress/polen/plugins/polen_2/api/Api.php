@@ -25,23 +25,23 @@ class Api {
             wc_load_cart();
 
             #Área do Talento Logado
-            $talent_dashboard = new Api_Talent_Dashboard();
-            $talent_dashboard->register_routes();
+            // $talent_dashboard = new Api_Talent_Dashboard();
+            // $talent_dashboard->register_routes();
 
-            $talent_myaccount = new Api_Talent_My_Account();
-            $talent_myaccount->register_routes();
+            // $talent_myaccount = new Api_Talent_My_Account();
+            // $talent_myaccount->register_routes();
 
-            #Área de pedidos
-            $talent_dashboard = new Api_Orders();
-            $talent_dashboard->register_routes();
-            $talent_order = new Api_Talent_Order();
-            $talent_order->register_routes();
-            $talent_payment = new Api_Talent_Payment();
-            $talent_payment->register_routes();
-            $contact = new Api_Contact();
-            $contact->register_routes();
-            $b2b = new Api_B2B();
-            $b2b->register_routes();
+            // #Área de pedidos
+            // $talent_dashboard = new Api_Orders();
+            // $talent_dashboard->register_routes();
+            // $talent_order = new Api_Talent_Order();
+            // $talent_order->register_routes();
+            // $talent_payment = new Api_Talent_Payment();
+            // $talent_payment->register_routes();
+            // $contact = new Api_Contact();
+            // $contact->register_routes();
+            // $b2b = new Api_B2B();
+            // $b2b->register_routes();
         }
     }
 
