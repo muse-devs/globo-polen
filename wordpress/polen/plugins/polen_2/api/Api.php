@@ -32,10 +32,10 @@ class Api {
             $talent_myaccount->register_routes();
 
             // #Área de pedidos
-            // $talent_dashboard = new Api_Orders();
-            // $talent_dashboard->register_routes();
-            // $talent_order = new Api_Talent_Order();
-            // $talent_order->register_routes();
+            $talent_dashboard = new Api_Orders();
+            $talent_dashboard->register_routes();
+            $talent_order = new Api_Talent_Order();
+            $talent_order->register_routes();
             // $talent_payment = new Api_Talent_Payment();
             // $talent_payment->register_routes();
             // $contact = new Api_Contact();
