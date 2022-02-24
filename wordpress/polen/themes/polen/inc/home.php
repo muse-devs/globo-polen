@@ -29,10 +29,22 @@ $inputs = new Material_Inputs();
 		<div class="col-12">
 			<div id="product-carousel" class="owl-carousel owl-theme">
         <div class="item">
-          <?php polen_get_bbb_banner(site_url('tag/bbb/')); ?>
+          <?php
+            $banners = array(
+              "mobile" => TEMPLATE_URI.'/assets/img/banners/carnaval/banner-mobile.png',
+              "desktop" => TEMPLATE_URI.'/assets/img/banners/carnaval/banner-desktop.png'
+            );
+          ?>
+          <?php polen_get_banner('Polen Folia',$banners, site_url('tag/carnaval/')); ?>
         </div>
         <div class="item">
-					<?php polen_get_galo_banner(site_url('tag/galo-idolos/')); ?>
+          <?php
+            $banners = array(
+              "mobile" => TEMPLATE_URI.'/assets/img/banners/galo/banner-mobile.png',
+              "desktop" => TEMPLATE_URI.'/assets/img/banners/galo/banner-desktop.png'
+            );
+          ?>
+          <?php polen_get_banner('Galo Ídolos', $banners, site_url('tag/galo-idolos/')); ?>
 				</div>
 			</div>
 		</div>
@@ -73,7 +85,7 @@ $inputs = new Material_Inputs();
     $videos = ["3492", "3806", "3554", "2930", "3898", "3168"];
     polen_front_get_videos(polen_get_home_stories($videos));
 
-    $emojis= array(
+    $emojis = array(
       "musica" => TEMPLATE_URI.'/assets/img/emoji/music.png',
       "atrizes-e-atores" => TEMPLATE_URI.'/assets/img/emoji/arts.png',
       "apresentadores" => TEMPLATE_URI.'/assets/img/emoji/mic.png',
