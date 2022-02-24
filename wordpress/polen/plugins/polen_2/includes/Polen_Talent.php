@@ -963,7 +963,7 @@ class Polen_Talent {
     public function get_talent_orders_v2(int $talent_id): array
     {
         $product_id = $this->get_product_id_by_talent_id($talent_id);
-        $orders_ids = $this->get_orders_ids_by_product_id($product_id);
+        $orders_ids = $this->get_orders_ids_by_product_id($product_id, ['wc-payment-approved', 'wc-talent-accepted']);
 
         return $this->get_orders_info($orders_ids);
 
