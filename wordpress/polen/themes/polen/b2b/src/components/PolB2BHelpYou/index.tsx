@@ -8,7 +8,7 @@ export default function () {
       <Row className="g-0 p-3 p-md-5 mt-5">
         <Col md={12}>
           <h2 className="typo-xxl text-center">
-            Como a  Polen pode te ajudar
+            Como a  Polen pode te ajudar:
           </h2>
         </Col>
         <Col md={12} className='mt-5'>

@@ -23,7 +23,7 @@ export default function () {
                 </defs>
               </svg>
               <h4 className="typo-md mt-4">Fale com um de nossos representantes</h4>
-              <p className="typo-xs mb-4">Preencha nosso formulário de contato (anchor para form) para iniciar o atendimento. Nosso representante vai entrar em contato para entender as necessidades de sua empresa.</p>
+              <p className="typo-xs mb-4">Preencha nosso <a href="#faleconosco">formulário de contato</a> para iniciar o atendimento. Nosso representante vai entrar em contato para entender as necessidades de sua empresa.</p>
             </Col>
             <Col md={4} className="mb-4">
               <svg width="95" height="61" viewBox="0 0 95 61" fill="none" xmlns="http://www.w3.org/2000/svg">
