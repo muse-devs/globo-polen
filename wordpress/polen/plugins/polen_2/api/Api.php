@@ -36,10 +36,10 @@ class Api {
             $talent_dashboard->register_routes();
             $talent_order = new Api_Talent_Order();
             $talent_order->register_routes();
-            // $talent_payment = new Api_Talent_Payment();
-            // $talent_payment->register_routes();
-            // $contact = new Api_Contact();
-            // $contact->register_routes();
+            $talent_payment = new Api_Talent_Payment();
+            $talent_payment->register_routes();
+            $contact = new Api_Contact();
+            $contact->register_routes();
             // $b2b = new Api_B2B();
             // $b2b->register_routes();
         }
