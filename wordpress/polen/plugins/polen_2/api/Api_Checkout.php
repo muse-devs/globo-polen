@@ -220,6 +220,7 @@ class Api_Checkout
             'name_to_video' => 'Nome de quem receberá o vídeo',
             'allow_video_on_page' => 'Configuração de exibição',
             'product_id' => 'ID do Produto',
+            'method_payment' => 'Método de pagamento',
         ];
     }
 
