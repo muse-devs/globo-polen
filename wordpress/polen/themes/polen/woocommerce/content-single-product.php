@@ -68,7 +68,7 @@ $inputs = new Material_Inputs();
 				</div>
 			<?php else: ?>
 				<div class="col-12 col-md-6 m-md-auto">
-					<?php polen_front_get_talent_mini_bio($image_data, $polen_product->get_description(), $categories[0]->name); ?>
+					<?php polen_front_get_talent_mini_bio($image_data, $polen_product->get_title(), $categories[0]->name); ?>
 				</div>
 			<?php endif; ?>
 	</div>

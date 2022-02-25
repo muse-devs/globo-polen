@@ -248,7 +248,7 @@ function polen_scripts() {
 	if((is_singular() && is_product()) || event_promotional_is_detail_product()) {
 		// wp_enqueue_script( 'slick-slider', TEMPLATE_URI . '/assets/slick/slick.min.js', array("jquery"), '', true );
 		wp_enqueue_script( 'vimeo');
-		// wp_enqueue_script( 'talent-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'talent.js', array("vimeo", "zuck"), _S_VERSION, true );
+		wp_enqueue_script( 'talent-scripts', TEMPLATE_URI . '/assets/js/' . $min . 'talent.js', array("vimeo", "zuck"), _S_VERSION, true );
 	}
 
 	if( is_cart() ) {
