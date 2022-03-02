@@ -32,18 +32,18 @@ class Api_Talent_My_Account extends WP_REST_Controller
             ]
         ] );
 
-        register_rest_route($this->namespace, $this->rest_base . '/update_pass', [
+        register_rest_route($this->namespace, $this->rest_base . '/password', [
             [
-                'methods' => WP_REST_Server::CREATABLE,
+                'methods' => WP_REST_Server::EDITABLE,
                 'callback' => [$this, 'update_password'],
                 'permission_callback' => [Api_Talent_Check_Permission::class, 'check_permission'],
                 'args' => []
             ]
         ] );
 
-        register_rest_route($this->namespace, $this->rest_base . '/update_user', [
+        register_rest_route($this->namespace, $this->rest_base . '/user', [
             [
-                'methods' => WP_REST_Server::CREATABLE,
+                'methods' => WP_REST_Server::EDITABLE,
                 'callback' => [$this, 'update_user'],
                 'permission_callback' => [Api_Talent_Check_Permission::class, 'check_permission'],
                 'args' => []
