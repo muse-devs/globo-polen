@@ -1,7 +1,7 @@
 <?php
 namespace Polen\Includes\Module;
 
-use PHPMailer\PHPMailer\Exception;
+use Exception;
 use Polen\Includes\Polen_SignInUser_Strong_Password;
 
 class Polen_User_Module
@@ -76,6 +76,7 @@ class Polen_User_Module
 
     /**
      * Atualizar senha do usuario
+     * @throws Exception
      */
     public function update_pass(string $current_pass, string $new_password)
     {
