@@ -2,7 +2,6 @@
 namespace Polen\Api\Talent;
 
 use Polen\Includes\Module\Polen_User_Module;
-use Polen\Includes\Polen_SignInUser_Strong_Password;
 use WP_REST_Controller;
 use WP_REST_Request;
 use WP_REST_Server;
@@ -35,8 +34,17 @@ class Api_Talent_My_Account extends WP_REST_Controller
 
         register_rest_route($this->namespace, $this->rest_base . '/update_pass', [
             [
-                'methods' => WP_REST_Server::READABLE,
+                'methods' => WP_REST_Server::CREATABLE,
                 'callback' => [$this, 'update_password'],
+                'permission_callback' => [Api_Talent_Check_Permission::class, 'check_permission'],
+                'args' => []
+            ]
+        ] );
+
+        register_rest_route($this->namespace, $this->rest_base . '/update_user', [
+            [
+                'methods' => WP_REST_Server::CREATABLE,
+                'callback' => [$this, 'update_user'],
                 'permission_callback' => [Api_Talent_Check_Permission::class, 'check_permission'],
                 'args' => []
             ]
@@ -86,5 +94,24 @@ class Api_Talent_My_Account extends WP_REST_Controller
         }
     }
 
+    /**
+     * Atualizar Senha do usuario
+     *
+     * @param WP_REST_Request $request
+     * @return \WP_REST_Response
+     */
+    public function update_user(\WP_REST_Request $request): \WP_REST_Response
+    {
+        $products_id  = Api_Talent_Utils::get_globals_product_id();
 
+        $user_module = Polen_User_Module::create_from_product_id($products_id[0]);
+        $data = $request->get_params();
+
+        try {
+            $user_module->update_user($data);
+            return api_response('Dados atualizados', 200);
+        } catch (\Exception $e) {
+            return api_response($e->getMessage(), $e->getCode());
+        }
+    }
 }
