@@ -57,7 +57,7 @@ class Polen_User_Module
     {
         global $wpdb;
         $sql = "
-            SELECT `user_id`, `celular`, `telefone`, `whatsapp`, `email`, `nome_fantasia`
+            SELECT `user_id`, `celular`, `telefone`, `whatsapp`, `email`, `nome_fantasia`, `nascimento`
             FROM `" . $this->table . "`
             WHERE `user_id`=" . $this->user->ID;
 
@@ -94,11 +94,17 @@ class Polen_User_Module
 
     /**
      * Atualizar dados
+     *
      * @param array $data
+     * @throws Exception
      */
     public function update_user(array $data)
     {
         global $wpdb;
+
+        if (empty($data)) {
+            throw new Exception('Nenhum dado para ser atualizado!', 403);
+        }
 
         $wpdb->update($this->table, $this->treatment_result($data), array('user_id'=> $this->user->ID));
     }
