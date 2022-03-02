@@ -103,6 +103,14 @@ use Polen\Includes\Polen_Bancos;
                         <table class="form-table">
                             <tr>
                                 <th>
+                                    Data de nascimento
+                                </th>
+                                <td>
+                                    <input type="text" name="nascimento" value="<?php echo ( isset( $vendorInfo->nascimento ) ) ? $vendorInfo->nascimento : ''; ?>" autocomplete="off" class="widefat polen-date" maxlength="10">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
                                     Categorias do Talento
                                 </th>
                                 <td>

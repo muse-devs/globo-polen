@@ -162,6 +162,10 @@ class Polen_Update_Fields
         } else {
             $reter_iss = 'N';
         }
+
+        $nascimento = (string) strip_tags( trim( $_POST['nascimento'] ) );
+        $args['nascimento'] = $nascimento;
+
         $args['reter_iss'] = $reter_iss;
 
         // Aba "Informações de Contato"
