@@ -80,7 +80,7 @@ class Polen_User_Module
      */
     public function update_pass(string $current_pass, string $new_password)
     {
-        $check = wp_authenticate($this->user->email, $current_pass);
+        $check = wp_authenticate($this->user->data->user_email, $current_pass);
         if (is_wp_error($check)) {
             throw new Exception('Senha atual incorreta', 403);
         }
