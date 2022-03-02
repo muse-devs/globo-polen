@@ -57,7 +57,7 @@ class Polen_User_Module
     {
         global $wpdb;
         $sql = "
-            SELECT `user_id`, `celular`, `telefone`, `whatsapp`, `email`, `nome_fantasia`, `nascimento`
+            SELECT `user_id`, `email`, `celular`, `telefone`, `whatsapp`, `email`, `nome_fantasia`, `nascimento`
             FROM `" . $this->table . "`
             WHERE `user_id`=" . $this->user->ID;
 
