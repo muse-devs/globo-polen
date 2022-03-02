@@ -63,6 +63,7 @@ class Api_Talent_My_Account extends WP_REST_Controller
         foreach ($talent_object as $talent) {
             $data['user_id'] = $talent->user_id;
             $data['name'] = $user_module->get_display_name();
+            $data['email'] = $talent->email;
             $data['birthday'] = $talent->nascimento;
             $data['fantasy_name'] = $talent->nome_fantasia;
             $data['phone'] = $talent->celular;
