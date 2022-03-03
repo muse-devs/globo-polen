@@ -454,37 +454,4 @@ if( 37 == get_current_user_id() ) {
 	add_action( 'admin_menu', 'polen_remove_menus' );
 }
 
-add_action('woocommerce_thankyou', 'thankyou_custom_url', 1, 1);
-function thankyou_custom_url($order_id)
-{
-    $order         = wc_get_order( $order_id );
 
-    $order_key     = $order->get_order_key();
-    $transaction_id= $order->get_transaction_id();
-    $method = $order->get_payment_method_title();
-
-    $billing_email = $order->get_billing_email();
-    $order_num     = $order->get_order_number();
-    $order_date    = $order->get_date_created();
-
-    // Order item data (first item)
-    $order_items = $order->get_items();
-    $first_item  = reset($order_items);
-    $video_to    = $first_item->get_meta('video_to');
-    $item_qty    = $first_item->get_quantity();
-    $product     = $first_item->get_product(); // Get the WC_Product object instance
-    $sku         = $product->get_sku(); // Get the product code (SKU)
-
-    // Build your query string
-    $query_string  = "?key={$order_key}";
-    $query_string .= "&method={$method}";
-    $query_string .= "&videoto={$video_to}";
-
-    $path = "/checkout/order-received/{$order->get_id()}/";
-    $url  = home_url($path . $query_string);
-
-    if (!$order->has_status('failed')) {
-        wp_redirect($url);
-        exit();
-    }
-}
