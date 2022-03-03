@@ -22,31 +22,22 @@ const videosData = [
   },
   {
     image:
-      "",
+      "https://i.vimeocdn.com/video/1386366167-1ca2d94a134ddfe1c96de8a1eeeb2baf2a7ba0117367426e798275eeae1e78b4-d_240",
     video:
-      "",
+      "https://player.vimeo.com/progressive_redirect/playback/683905373/rendition/540p?loc=external&signature=57ee9edec345249a784f17b97483e18d73c6ea91eddda79706af06db6258ae56",
     logo: tecmundo,
     name: "Tecmundo",
     paused: true,
   },
   {
     image:
-      "",
+      "https://i.vimeocdn.com/video/1386366167-1ca2d94a134ddfe1c96de8a1eeeb2baf2a7ba0117367426e798275eeae1e78b4-d_240",
     video:
-      "",
-    logo: tecmundo,
-    name: "Tecmundo",
-    paused: true,
-  },
-  {
-    image:
-      "",
-    video:
-      "",
+      "https://player.vimeo.com/progressive_redirect/playback/683905373/rendition/540p?loc=external&signature=57ee9edec345249a784f17b97483e18d73c6ea91eddda79706af06db6258ae56",
     logo: prestex,
     name: "Prestex",
     paused: true,
-  },
+  }
 ];
 
 function SampleNextArrow(props) {
