@@ -139,7 +139,7 @@ export default function () {
           </Row>
         </Col>
         <Col md={12} lg={6}>
-          <Slider {...settings} className="videos-list d-flex">
+          <Slider {...settings} className="videos-list overflow-hidden">
             {videos.map((item, key) => (
               <div key={key}>
                 <section key={`item-${key}`}>
