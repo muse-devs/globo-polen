@@ -8,6 +8,7 @@ use Polen\Includes\Polen_Campaign;
 use Polen\Includes\Polen_Checkout_Create_User;
 use Polen\Includes\Polen_Create_Customer;
 use Polen\Includes\Polen_Order;
+use Polen\Includes\Polen_Utils;
 use WP_REST_Request;
 
 class Api_Checkout
@@ -248,6 +249,8 @@ class Api_Checkout
 
         $order->add_meta_data( self::ORDER_METAKEY, $campaign_slug, true);
 
+        $instructions = Polen_Utils::sanitize_xss_br_escape($data['instruction']);
+
         wc_add_order_item_meta($order_item_id, '_line_subtotal', $order->get_subtotal(), true );
         wc_add_order_item_meta($order_item_id, '_line_total'   , $order->get_total(), true );
 
@@ -257,7 +260,7 @@ class Api_Checkout
         wc_add_order_item_meta($order_item_id, 'name_to_video'        , $data['name_to_video'], true);
         wc_add_order_item_meta($order_item_id, 'email_to_video'       , $email, true);
         wc_add_order_item_meta($order_item_id, 'video_category'       , $data['video_category'], true);
-        wc_add_order_item_meta($order_item_id, 'instructions_to_video', $data['instruction'], true);
+        wc_add_order_item_meta($order_item_id, 'instructions_to_video', $instructions, true);
         wc_add_order_item_meta($order_item_id, 'allow_video_on_page'  , $status, true);
 
         $interval  = Polen_Order::get_interval_order_basic();

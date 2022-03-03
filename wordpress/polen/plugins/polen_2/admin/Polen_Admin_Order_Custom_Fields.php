@@ -5,6 +5,7 @@ namespace Polen\Admin;
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
 use Polen\Includes\Polen_Cart;
 use Polen\Includes\Polen_Order;
+use Polen\Includes\Polen_Utils;
 use WC_DateTime;
 
 class Polen_Admin_Order_Custom_Fields
@@ -45,7 +46,7 @@ class Polen_Admin_Order_Custom_Fields
         $item_order = $item_cart->get_item_order();
 
         $old_value = $item_order->get_meta( $field, true );
-        $new_value = nl2br( $new_value );
+        $new_value = Polen_Utils::sanitize_xss_br_escape( $new_value );
         $order->add_order_note( "{$field} alterado via wp-admin: Valor antigo: {$old_value}", 0, true );
         $item_order->update_meta_data( $field, $new_value, true );
         $item_order->save();
