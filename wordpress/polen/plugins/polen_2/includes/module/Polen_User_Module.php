@@ -1,7 +1,7 @@
 <?php
 namespace Polen\Includes\Module;
 
-use PHPMailer\PHPMailer\Exception;
+use Exception;
 use Polen\Includes\Polen_SignInUser_Strong_Password;
 
 class Polen_User_Module
@@ -10,10 +10,17 @@ class Polen_User_Module
      * Obj
      * Informações básicas do usuario
      */
-    public $user;
+    public object $user;
+
+    /**
+     * Salvar tabela para uso dessa classe
+     */
+    public string $table;
 
     public function __construct(int $user_id)
     {
+        global $wpdb;
+        $this->table = $wpdb->base_prefix . 'polen_talents';
         $this->user = get_user_by('ID', $user_id);
     }
 
@@ -50,8 +57,8 @@ class Polen_User_Module
     {
         global $wpdb;
         $sql = "
-            SELECT `user_id`, `celular`, `telefone`, `whatsapp`, `email`, `nome_fantasia`
-            FROM `" . $wpdb->base_prefix . "polen_talents`
+            SELECT `user_id`, `email`, `celular`, `telefone`, `whatsapp`, `email`, `nome_fantasia`, `nascimento`
+            FROM `" . $this->table . "`
             WHERE `user_id`=" . $this->user->ID;
 
         return $wpdb->get_results($sql);
@@ -69,10 +76,11 @@ class Polen_User_Module
 
     /**
      * Atualizar senha do usuario
+     * @throws Exception
      */
     public function update_pass(string $current_pass, string $new_password)
     {
-        $check = wp_authenticate($this->user->email, $current_pass);
+        $check = wp_authenticate($this->user->data->user_email, $current_pass);
         if (is_wp_error($check)) {
             throw new Exception('Senha atual incorreta', 403);
         }
@@ -83,6 +91,39 @@ class Polen_User_Module
         }
 
         wp_set_password($new_password, $this->user->ID);
+    }
+
+    /**
+     * Atualizar dados
+     *
+     * @param array $data
+     * @throws Exception
+     */
+    public function update_user(array $data)
+    {
+        global $wpdb;
+
+        if (empty($data)) {
+            throw new Exception('Nenhum dado para ser atualizado!', 403);
+        }
+
+        $wpdb->update($this->table, $this->treatment_result($data), array('user_id'=> $this->user->ID));
+    }
+
+    /**
+     * Mudar nome das chaves de acordo como está feito o banco de dados (para pt-br)
+     * Tratar e limpar valores
+     *
+     * @param array $data
+     * @return array
+     */
+    private function treatment_result(array $data): array
+    {
+        $values['celular'] = sanitize_text_field($data['phone']);
+        $values['telefone'] = sanitize_text_field($data['telephone']);
+        $values['whatsapp'] = sanitize_text_field($data['whatsapp']);
+
+        return array_filter($values, 'ucfirst');
     }
 
     /**

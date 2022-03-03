@@ -943,7 +943,7 @@ class Polen_Talent {
      */
     public function get_order_ids($products_id, $filter = [])
     {
-        $data = $this->get_orders_ids_by_product_id($products_id[0], $filter['orderby'], [$filter['status']]);
+        $data = $this->get_orders_ids_by_product_id($products_id[0], $filter['orderby'], $filter['status']);
 
         if (isset($filter['deadline']) && !empty($filter['deadline'])) {
             $response = Polen_Order_V2::get_orders_by_products_id_deadline($products_id, $filter['status'], $filter['orderby']);
@@ -963,7 +963,7 @@ class Polen_Talent {
     public function get_talent_orders_v2(int $talent_id): array
     {
         $product_id = $this->get_product_id_by_talent_id($talent_id);
-        $orders_ids = $this->get_orders_ids_by_product_id($product_id);
+        $orders_ids = $this->get_orders_ids_by_product_id($product_id, ['wc-payment-approved', 'wc-talent-accepted']);
 
         return $this->get_orders_info($orders_ids);
 
