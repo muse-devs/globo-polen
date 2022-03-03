@@ -4,7 +4,7 @@ namespace Polen\Includes;
 class Polen_Utils
 {
     /**
-     * Sanitize as intradas de input contra XSS
+     * Sanitize as entradas de input contra XSS
      * @param string
      * @return string
      */
@@ -12,6 +12,26 @@ class Polen_Utils
     {
         $string_escaped = htmlspecialchars( $txt );
         return nl2br( $string_escaped );
+    }
+
+
+    /**
+     * Remove o Sanitize para apresentação desse conteúdo no site
+     * o segundo parametro pode ser View ou Edit
+     * Se for Edit ele remove o <br> e adiciona /r/n para 
+     * TextÁreas ou textos raw de forma geral
+     * @param string
+     * @param string context 'edit
+     * @return string
+     */
+    public static function remove_sanitize_xss_br_escape( $txt, $context = 'view' )
+    {
+        $string_escaped = stripslashes($txt);
+        $string_escaped = htmlspecialchars_decode($string_escaped);
+        if('edit' === $context) {
+            $string_escaped = str_replace(array("<br />", "<br/>", "<br>"), "\r\n", $string_escaped);
+        }
+        return $string_escaped;
     }
 
 
