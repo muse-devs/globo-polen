@@ -88,8 +88,8 @@ class Api_Orders extends WP_REST_Controller
         $products_id  = Api_Talent_Utils::get_globals_product_id();
 
         $polen_talent = new Polen_Talent();
-        $foo = $polen_talent->get_order_ids($products_id, $filters);
-        $data = $polen_talent->get_orders_info($foo);
+        $ids = $polen_talent->get_order_ids($products_id, $filters);
+        $data = $polen_talent->get_orders_info($ids);
 
         return api_response($data);
     }
@@ -134,7 +134,7 @@ class Api_Orders extends WP_REST_Controller
         $products_id  = Api_Talent_Utils::get_globals_product_id();
 
         $polen_talent = new Polen_Talent();
-        $orders_talent_accepted = $polen_talent->get_orders_ids_by_product_id($products_id[0], ['wc-talent-accepted']);
+        $orders_talent_accepted = $polen_talent->get_orders_ids_by_product_id($products_id[0], 'ASC', ['wc-talent-accepted']);
         $products_deadline = $polen_talent->get_products_deadline_today_count($products_id);
 
         $data = [
