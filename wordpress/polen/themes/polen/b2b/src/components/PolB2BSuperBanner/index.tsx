@@ -13,29 +13,38 @@ import "slick-carousel/slick/slick-theme.css";
 const videosData = [
   {
     image:
-      "https://i.vimeocdn.com/video/1386366167-1ca2d94a134ddfe1c96de8a1eeeb2baf2a7ba0117367426e798275eeae1e78b4-d_240",
+      "https://i.vimeocdn.com/video/1386967119-b65de17a3632bcd46c391bb3b5107962f4d412233e0ae6b6bbe805d3894850f1-d",
     video:
-      "https://player.vimeo.com/progressive_redirect/playback/683905373/rendition/540p?loc=external&signature=57ee9edec345249a784f17b97483e18d73c6ea91eddda79706af06db6258ae56",
-    logo: kovi,
-    name: "Kovi",
+      "https://player.vimeo.com/progressive_redirect/playback/684263761/rendition/360p?loc=external&oauth2_token_id=1511981636&signature=246855c0ccbb10e626b83c414d6719e7541da5971ad093d33f1534a82b6529f8",
+    logo: prestex,
+    name: "Prestex",
     paused: true,
   },
   {
     image:
-      "https://i.vimeocdn.com/video/1386366167-1ca2d94a134ddfe1c96de8a1eeeb2baf2a7ba0117367426e798275eeae1e78b4-d_240",
+      "https://i.vimeocdn.com/video/1386960511-912c42c5a88f23f3cb394f814835f87697a2a71b2c2ce82be23f9b69f8c2a2f9-d",
     video:
-      "https://player.vimeo.com/progressive_redirect/playback/683905373/rendition/540p?loc=external&signature=57ee9edec345249a784f17b97483e18d73c6ea91eddda79706af06db6258ae56",
+      "https://player.vimeo.com/progressive_redirect/playback/684259555/rendition/720p?loc=external&oauth2_token_id=1511981636&signature=ffc1af403024ddd44faa35242ada977e9f90b779b812027c5b5a8778ba54d6e0",
     logo: tecmundo,
     name: "Tecmundo",
     paused: true,
   },
   {
     image:
-      "https://i.vimeocdn.com/video/1386366167-1ca2d94a134ddfe1c96de8a1eeeb2baf2a7ba0117367426e798275eeae1e78b4-d_240",
+      "https://i.vimeocdn.com/video/1386963189-e8ea64538d64c6f028d412088490a863dee3b0172aae2680738c1ab6c6e9c0c6-d",
     video:
-      "https://player.vimeo.com/progressive_redirect/playback/683905373/rendition/540p?loc=external&signature=57ee9edec345249a784f17b97483e18d73c6ea91eddda79706af06db6258ae56",
-    logo: prestex,
-    name: "Prestex",
+      "https://player.vimeo.com/progressive_redirect/playback/684261255/rendition/540p?loc=external&oauth2_token_id=1511981636&signature=791c8c070bbc178b4052c152459ead787ee2d1695a7fbb08c129d51cece4d7cb",
+    logo: kovi,
+    name: "Kovi",
+    paused: true,
+  },
+  {
+    image:
+      "https://i.vimeocdn.com/video/1386381073-2c2afce77fc053b7b1b39ee96ad17fce7f9f60f1e9d0595845b7b47cde644f82-d",
+    video:
+      "https://player.vimeo.com/progressive_redirect/playback/683914281/rendition/540p?loc=external&oauth2_token_id=1511981636&signature=ae937716f2b2a6098ee778ac9d8ec4aababae6e755af71cb9c14e1f6887622b3",
+    logo: tecmundo,
+    name: "Tecmundo",
     paused: true,
   },
 ];
