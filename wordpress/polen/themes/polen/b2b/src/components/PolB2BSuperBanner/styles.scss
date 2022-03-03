@@ -46,6 +46,10 @@
 }
 
 .videos-list {
+  overflow: hidden;
+  @include desktop {
+    height: 637px;
+  }
   .super-banner-item {
     @include desktop {
       width: 402px;
