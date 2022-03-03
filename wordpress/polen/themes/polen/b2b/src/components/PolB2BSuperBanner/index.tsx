@@ -2,6 +2,8 @@ import React from "react";
 import { Row, Col, Button } from "react-bootstrap";
 import { playVideo } from "services";
 import kovi from "images/logos/kovi.png";
+import tecmundo from "images/logos/logo-tecmundo.png";
+import prestex from "images/logos/prestex.jpg";
 import Slider from "react-slick";
 import { ArrowLeft, ArrowRight } from "react-feather";
 import "./styles.scss";
@@ -11,29 +13,38 @@ import "slick-carousel/slick/slick-theme.css";
 const videosData = [
   {
     image:
-      "https://i.vimeocdn.com/video/1364305989-55d3b1bef407347f5c2c527cf9db5b00bf9e80daf4d5dfe26081140cb47999ad-d",
+      "https://i.vimeocdn.com/video/1386366167-1ca2d94a134ddfe1c96de8a1eeeb2baf2a7ba0117367426e798275eeae1e78b4-d_240",
     video:
-      "https://player.vimeo.com/progressive_redirect/playback/634757715/rendition/720p?loc=external&oauth2_token_id=1511985459&signature=11f36c28ddac629de6b3f726d073bca4c9a4a3847530345c6eb53258bfdbaaf6",
+      "https://player.vimeo.com/progressive_redirect/playback/683905373/rendition/540p?loc=external&signature=57ee9edec345249a784f17b97483e18d73c6ea91eddda79706af06db6258ae56",
     logo: kovi,
-    name: "item1",
+    name: "Kovi",
     paused: true,
   },
   {
     image:
-      "https://i.vimeocdn.com/video/1364305989-55d3b1bef407347f5c2c527cf9db5b00bf9e80daf4d5dfe26081140cb47999ad-d",
+      "",
     video:
-      "https://player.vimeo.com/progressive_redirect/playback/634757715/rendition/720p?loc=external&oauth2_token_id=1511985459&signature=11f36c28ddac629de6b3f726d073bca4c9a4a3847530345c6eb53258bfdbaaf6",
-    logo: kovi,
-    name: "item2",
+      "",
+    logo: tecmundo,
+    name: "Tecmundo",
     paused: true,
   },
   {
     image:
-      "https://i.vimeocdn.com/video/1364305989-55d3b1bef407347f5c2c527cf9db5b00bf9e80daf4d5dfe26081140cb47999ad-d",
+      "",
     video:
-      "https://player.vimeo.com/progressive_redirect/playback/634757715/rendition/720p?loc=external&oauth2_token_id=1511985459&signature=11f36c28ddac629de6b3f726d073bca4c9a4a3847530345c6eb53258bfdbaaf6",
-    logo: kovi,
-    name: "item2",
+      "",
+    logo: tecmundo,
+    name: "Tecmundo",
+    paused: true,
+  },
+  {
+    image:
+      "",
+    video:
+      "",
+    logo: prestex,
+    name: "Prestex",
     paused: true,
   },
 ];
