@@ -6,7 +6,10 @@
 namespace Polen\Includes;
 
 use Polen\Api\Api_Checkout;
+use Polen\Includes\Cart\Polen_Cart_Item;
 use Polen\Includes\Db\Polen_DB;
+use Polen\Includes\Vimeo\Polen_Vimeo_Response;
+use WC_Order;
 
 class Polen_Video_Info extends Polen_DB
 {
@@ -47,7 +50,7 @@ class Polen_Video_Info extends Polen_DB
                 $this->is_public              = intval( $object->is_public );
                 $this->vimeo_thumbnail        = $object->vimeo_thumbnail;
                 $this->vimeo_process_complete = $object->vimeo_process_complete;
-                $this->vimeo_url_download     = $object->vimeo_url_download;
+                // $this->vimeo_url_download     = $object->vimeo_url_download;
                 $this->vimeo_link             = $object->vimeo_link;
                 $this->vimeo_file_play        = $object->vimeo_file_play;
                 $this->duration               = $object->duration;
@@ -104,7 +107,7 @@ class Polen_Video_Info extends Polen_DB
         $return[ 'hash' ]                   = $this->hash;
         $return[ 'vimeo_thumbnail' ]        = $this->vimeo_thumbnail;
         $return[ 'vimeo_process_complete' ] = $this->vimeo_process_complete;
-        $return[ 'vimeo_url_download' ]     = $this->vimeo_url_download;
+        // $return[ 'vimeo_url_download' ]     = $this->vimeo_url_download;
         $return[ 'vimeo_link' ]             = $this->vimeo_link;
         $return[ 'vimeo_file_play' ]        = $this->vimeo_file_play;
         $return[ 'first_order' ]            = $this->first_order;
@@ -212,6 +215,7 @@ class Polen_Video_Info extends Polen_DB
             AND pm_meta.meta_value = %s
             AND vi.vimeo_process_complete = 1
             AND vi.is_public = 1
+            ORDER BY ID DESC
             LIMIT %d
         ", $talent_id, $campaign, $limit );
         return self::create_instance_many( $wpdb->get_results( $sql ) );
@@ -410,5 +414,34 @@ class Polen_Video_Info extends Polen_DB
         return self::create_instance_many( $wpdb->get_results(
             "SELECT * FROM wp_video_info WHERE vimeo_process_complete=1 AND vimeo_file_play IS NULL LIMIT 100;"
         ) );
+    }
+
+
+    /**
+     * Criando um Polen_Video_Info para salvar a primeira vez no Banco as info
+     * quando o Vimeo recebo o REQUEST do slot
+     * @param type $order
+     * @param type $cart_item
+     * @param type $response
+     * @return Polen_Video_Info
+     */
+    public static function mount_video_info_with_order_cart_item_vimeo_response(
+        WC_Order $order,
+        Polen_Cart_Item $cart_item,
+        Polen_Vimeo_Response $response,
+        string $video_logo_status = Polen_Video_Info::VIDEO_LOGO_STATUS_WAITING )
+    {
+            $video_info = new Polen_Video_Info();
+            $video_info->is_public = $cart_item->get_public_in_detail_page();
+            $video_info->order_id = $order->get_id();
+            $video_info->talent_id = get_current_user_id();
+            $video_info->vimeo_id = $response->get_vimeo_id();
+            $video_info->vimeo_process_complete = 0;
+            $video_info->vimeo_link = $response->get_vimeo_link();
+            $video_info->first_order = $cart_item->get_first_order();
+            $video_info->vimeo_url_download = 'get_in_time';//$response->get_download_source_url();
+            $video_info->vimeo_iframe = $response->get_iframe();
+            $video_info->video_logo_status = $video_logo_status;
+            return $video_info;
     }
 }

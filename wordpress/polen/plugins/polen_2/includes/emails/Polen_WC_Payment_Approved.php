@@ -2,8 +2,12 @@
 
 namespace Polen\Includes;
 
+use DateTime;
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
 use Polen\Includes\Module\Polen_Order_Module;
+use Polen\Includes\Sendgrid\Polen_Sendgrid_Emails;
+use Polen\Includes\Sendgrid\Polen_Sendgrid_Redux;
+use WC_DateTime;
 
 if( ! defined( 'ABSPATH') ) {
     die( 'Silence is golden.' );
@@ -65,12 +69,15 @@ class Polen_WC_Payment_Approved extends \WC_Email {
 		$this->subject_social = 'Obrigado por ajudar o Criança Esperança.';
 		$this->subject_ep = 'Lacta - Pedido de vídeo recebido';
     
-		add_action( 'woocommerce_order_status_changed', array( $this, 'trigger' ) );
-
+		add_action( 'woocommerce_order_status_'.Polen_Order::ORDER_STATUS_PAYMENT_APPROVED, [ $this, 'trigger' ] );
+		add_action( 'woocommerce_order_status_'.Polen_Order::ORDER_STATUS_TALENT_ACCEPTED.'_to_'.Polen_Order::ORDER_STATUS_PAYMENT_APPROVED.'_notification', [$this, 'trigger'] );
+        add_action( 'woocommerce_order_status_'.Polen_Order::ORDER_STATUS_TALENT_REJECTED.'_to_'.Polen_Order::ORDER_STATUS_PAYMENT_APPROVED.'_notification', [$this, 'trigger'] );
+        add_action( 'woocommerce_order_status_'.Polen_Order::ORDER_STATUS_ORDER_EXPIRED.'_to_'.Polen_Order::ORDER_STATUS_PAYMENT_APPROVED.'_notification', [$this, 'trigger'] );
 		parent::__construct();
     }
 
     public function trigger( $order_id ) {
+		
 		$this->object = wc_get_order( $order_id );
 		if( $this->object->has_status( 'payment-approved') ) {
 			if ( version_compare( '3.0.0', WC()->version, '>' ) ) {
@@ -86,21 +93,36 @@ class Polen_WC_Payment_Approved extends \WC_Email {
 			}
 			$cart_item = Polen_Cart_Item_Factory::polen_cart_item_from_order( $this->object );
 			$this->product = $cart_item->get_product();
-
             /**
-             * Não disparar email caso flag no_send_email estiver marcada
+			 * Não disparar email caso flag no_send_email estiver marcada
              */
-			if( !( defined('DOING_AJAX') ) ) {
-				if (is_admin() === true && get_post_meta($order_id, 'send_email', true) != 1) {
-					return;
-				}
+			if( !Polen_Emails::is_to_send_admin_edit_order() ){
+				return;
 			}
 
 			$order_is_campaing = Polen_Campaign::get_is_order_campaing( $this->object );
 			if( $order_is_campaing ) {
 				$this->send( $this->get_recipient(), $this->get_subject_campaign(), $this->get_content_campaign(), $this->get_headers(), $this->get_attachments() );
 			} else {
-				$this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
+				// $this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
+				$order_module = new Polen_Order_Module( $this->object );
+				$customer_name = $order_module->get_offered_by();
+				$item  = Polen_Cart_Item_Factory::polen_cart_item_from_order( $this->object );
+				$total = $this->object->get_total();
+				$to_name = $order_module->get_name_to_video();
+				$deadline = $order_module->get_deadline();
+				$deadline_date = \WC_DateTime::createFromFormat( 'U', $deadline );
+				$deadline = $deadline_date->format('d/m/Y');
+				$this->send_email(
+					$customer_name,
+					$this->get_recipient(),
+					$order_id,
+					$total,
+					$deadline,
+					$to_name,
+					$item->get_video_category(),
+					$item->get_instructions_to_video()
+				);
 			}
 
 			/**
@@ -120,6 +142,40 @@ class Polen_WC_Payment_Approved extends \WC_Email {
 			// }
 		}
 	}
+
+
+	public function send_email(
+		$name_customer,
+		$email_customer,
+		$order_id,
+		$order_value,
+		$deadline,
+		$to_name,
+		$occasion,
+		$instructions )
+	{
+
+        global $Polen_Plugin_Settings;
+        $apikeySendgrid = $Polen_Plugin_Settings[ Polen_Sendgrid_Redux::APIKEY ];
+        $send_grid = new Polen_Sendgrid_Emails( $apikeySendgrid );
+        $send_grid->set_from(
+            $Polen_Plugin_Settings['polen_smtp_from_email'],
+            $Polen_Plugin_Settings['polen_smtp_from_name']
+        );
+        $send_grid->set_to( $email_customer, $name_customer );
+        $send_grid->set_template_id( $Polen_Plugin_Settings[ Polen_Sendgrid_Redux::THEME_ID_POLEN_PAYMENT_APPROVED ] );
+        $send_grid->set_template_data( 'customer_name', $name_customer );
+        $send_grid->set_template_data( 'order_id', $order_id );
+        $send_grid->set_template_data( 'order_value', $order_value );
+        $send_grid->set_template_data( 'deadline', $deadline );
+        $send_grid->set_template_data( 'to_name', $to_name );
+        $send_grid->set_template_data( 'occasion', $occasion );
+        $send_grid->set_template_data( 'instructions', $instructions );
+
+        return $send_grid->send_email();
+    }
+
+
 
 	public function get_recipient_talent()
 	{

@@ -8,7 +8,11 @@
 namespace Polen\Includes;
 
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
+use Polen\Includes\Module\Polen_Order_Module;
 use Polen\Includes\Polen_Order;
+use Polen\Includes\v2\Polen_Order_V2;
+use WP_Query;
+use WP_User;
 
 class Polen_Talent {
 
@@ -138,6 +142,8 @@ class Polen_Talent {
         if( $user_id && ! is_null( $user_id ) && ! empty( $user_id ) ) {
             $user_data = get_userdata( $user_id );
             $user_roles = $user_data->roles;
+            $aa = new Polen_Update_Fields();
+            $vendor_data = $aa->get_vendor_data($user_id);
 
             // verify if user is a talent
             if ( in_array( self::ROLE_SLUG, $user_roles, true ) ) {
@@ -452,14 +458,15 @@ class Polen_Talent {
                             endforeach;   
                             return $obj; 
                         }
-                        
+
                         foreach ($order_list as $obj_order):
                             $obj['order_id'] = $obj_order->order_id;
                             $order = wc_get_order($obj_order->order_id);
-
+                            $obj['origin'] = get_origin_order($order);
                             $obj['status'] = $order->get_status();
 
                             $obj['total'] = $order->get_formatted_order_total();
+                            $obj['total_value'] = $order->get_total();
                             $obj['total_raw'] = $order->get_subtotal();
                             foreach ($order->get_items() as $item_id => $item) {
                                 $obj['email'] = $item->get_meta('email_to_video', true);
@@ -647,6 +654,10 @@ class Polen_Talent {
         }
     }
 
+
+    /**
+     * 
+     */
     public function get_time_to_videos( $user ){
         if( $this->is_user_talent( $user ) ) {
             $pending = $this->get_talent_orders( $user->ID, false, true );
@@ -888,6 +899,163 @@ class Polen_Talent {
                 ),
             )
         );
+    }
+
+
+    /**
+     * Pegar todas as orders pelo o ID e status
+     *
+     * @param integer $product_id (required)
+     * @param array $order_status (optional)
+     *
+     * @return array
+     */
+    public function get_orders_ids_by_product_id(
+        int $product_id,
+        string $orderby = 'ASC',
+        array $order_status
+    ): array
+    {
+        global $wpdb;
+
+        return $wpdb->get_col("
+            SELECT order_items.order_id
+                FROM {$wpdb->prefix}woocommerce_order_items as order_items
+            LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta as order_item_meta ON order_items.order_item_id = order_item_meta.order_item_id
+            LEFT JOIN {$wpdb->posts} AS posts ON order_items.order_id = posts.ID
+            WHERE posts.post_type = 'shop_order'
+                AND posts.post_status IN ( '" . implode( "','", $order_status ) . "' )
+                AND order_items.order_item_type = 'line_item'
+                AND order_item_meta.meta_key = '_product_id'
+                AND order_item_meta.meta_value = $product_id
+                AND 0 = (SELECT COUNT(*) FROM {$wpdb->prefix}video_info AS vi WHERE vi.order_id = posts.ID)
+                ORDER BY order_items.order_id {$orderby};
+        ");
+    }
+
+    /**
+     * Retornar as Orders de acordo com os filtros
+     *
+     * @param filter
+     * @param Timestamp
+     */
+    public function get_order_ids($products_id, $filter = [])
+    {
+        $data = $this->get_orders_ids_by_product_id($products_id[0], $filter['orderby'], $filter['status']);
+
+        if (isset($filter['deadline']) && !empty($filter['deadline'])) {
+            $response = Polen_Order_V2::get_orders_by_products_id_deadline($products_id, $filter['status'], $filter['orderby']);
+            $data = $this->get_ids_in_array($response);
+        }
+
+        return $data;
+    }
+
+    /**
+     * Pega Orders por Talento por Status
+     * $status pode ser uma string separada por virgula "'wc-payment-approved', 'wc-talent-accepted'"
+     *
+     * @param int $talent_id
+     * @return array
+     */
+    public function get_talent_orders_v2(int $talent_id): array
+    {
+        $product_id = $this->get_product_id_by_talent_id($talent_id);
+        $orders_ids = $this->get_orders_ids_by_product_id($product_id);
+
+        return $this->get_orders_info($orders_ids);
+
+    }
+
+
+
+    /**
+     * Retornar ID do produto pelo o ID do talento
+     *
+     * @param int $talent_id
+     * @return int
+     */
+    public function get_product_id_by_talent_id(int $talent_id): int
+    {
+        $args = [
+            'post_type' => 'product',
+            'author' => $talent_id,
+        ];
+
+        $query = new WP_Query($args);
+        $talent_product = $query->get_posts();
+
+        return $talent_product[0]->ID;
+    }
+
+
+    /**
+     * Retorna as informacoes de uma order
+     * @param int $order_id
+     * @return array
+     */
+    public function get_order_info_v2($order_id)
+    {
+        $obj['order_id']     = $order_id;
+        $wc_order            = wc_get_order($order_id);
+        $order               = new Polen_Order_Module($wc_order);
+        $obj['status']       = $order->get_status();
+        // $obj['total']        = $order->get_formatted_order_total();
+        // $obj['total_value']  = $order->get_total();
+        $obj['total_value'] = $order->get_total_for_talent();
+        // $obj['total_raw']    = $order->get_subtotal();
+        $obj['instructions'] = $order->get_instructions_to_video();
+        $obj['name']         = $order->get_name_to_video();
+        $obj['from']         = $order->get_offered_by();
+        $obj['to_myself']    = $order->get_video_to_is_to_my_self();
+        $obj['category']     = $order->get_video_category();
+        $obj['deadline']     = $order->get_deadline();
+
+        return $obj;
+    }
+
+    /**
+     * Retornar numero de orders com expiração para o dia atual
+     *
+     * @param array $orders_id
+     * @return int|null
+     */
+    public function get_products_deadline_today_count(array $orders_id): ?int
+    {
+        return Polen_Order_V2::get_qty_orders_by_products_id_deadline($orders_id, date('Y/m/d'));;
+    }
+
+    /**
+     * Formatar resultado na consulta com get_results (ARRAY_A)
+     *
+     * @param array $orders_id
+     * @return array
+     */
+    private function get_ids_in_array(array $orders_id): array
+    {
+        $data = [];
+        foreach ($orders_id as $order_id) {
+            $data[] = $order_id['order_id'];
+        }
+
+        return $data;
+    }
+
+    /**
+     * Retornar informações basicas de um array de orders
+     *
+     * @param array $orders_id
+     * @return array
+     */
+    public function get_orders_info(array $orders_id): array
+    {
+        $objects = [];
+
+        foreach ($orders_id as $order_id) {
+            $objects[] = $this->get_order_info_v2($order_id);
+        }
+
+        return $objects;
     }
 
 }

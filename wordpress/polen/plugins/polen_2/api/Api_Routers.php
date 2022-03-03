@@ -162,6 +162,16 @@ class Api_Routers
             )
         ));
 
+        register_rest_route($this->base, '/get_payment_status/(?P<id>[\d]+)', array(
+            array(
+                'methods' => WP_REST_Server::READABLE,
+                'args' => array(
+                    'id' => [],
+                ),
+                'callback' => [ $controller, 'get_payment_status' ],
+                'permission_callback' => '__return_true',
+            )
+        ));
 
         $api_fan_order = new Api_Fan_Order();
         /**
@@ -273,6 +283,31 @@ class Api_Routers
             )
         ));
 
+        register_rest_route($this->base, '/users/talent', array(
+            array(
+                'methods' => WP_REST_Server::READABLE,
+                'args' => array(
+                    'email'            => [],
+                ),
+                'callback' => [ $api_user, 'my_account_talent' ],
+                'permission_callback' => [ $api_user, 'check_permission_create_item' ],
+            )
+        ));
+
+        /**
+         * Exibir comentários
+         */
+        register_rest_route($this->base, '/users/(?P<slug>[^/]*)/comments', array(
+            array(
+                'methods' => WP_REST_Server::READABLE,
+                'args' => array(
+                    'slug'            => [],
+                ),
+                'callback' => [ $api_user, 'commments' ],
+                'permission_callback' => [ $api_user, 'check_permission_create_item' ],
+            )
+        ));
+
         register_rest_route($this->base, '/update_pass', array(
             array(
                 'methods' => WP_REST_Server::CREATABLE,
@@ -306,7 +341,10 @@ class Api_Routers
             'schema' => array( $polen_api_videos, 'get_item_schema' )
         ) );
 
-
+        
+        /**
+         * Criacao do endpoint de Nonce para acesso ao checkout
+         */
         register_rest_route( $this->base, '/nonce', array(
             array(
                 'methods' => WP_REST_Server::READABLE,

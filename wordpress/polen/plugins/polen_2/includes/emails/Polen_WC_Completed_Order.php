@@ -4,7 +4,11 @@ namespace Polen\Includes\Emails;
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
 use Polen\Includes\Module\Polen_Order_Module;
 use Polen\Includes\Polen_Campaign;
+use Polen\Includes\Polen_Emails;
+use Polen\Includes\Polen_Order;
 use Polen\Includes\Polen_Video_Info;
+use Polen\Includes\Sendgrid\Polen_Sendgrid_Emails;
+use Polen\Includes\Sendgrid\Polen_Sendgrid_Redux;
 use Polen\Social_Base\Social_Base_Order;
 
 class Polen_WC_Completed_Order extends \WC_Email_Customer_Completed_Order
@@ -41,11 +45,6 @@ class Polen_WC_Completed_Order extends \WC_Email_Customer_Completed_Order
     public function trigger( $order_id, $order = false ) {
         $this->setup_locale();
 
-        /**
-         * Não disparar email caso flag no_send_email estiver marcada
-         */
-
-
         if ( $order_id && ! is_a( $order, 'WC_Order' ) ) {
             $order = wc_get_order( $order_id );
         }
@@ -61,29 +60,60 @@ class Polen_WC_Completed_Order extends \WC_Email_Customer_Completed_Order
             return;
         }
 
+        if( !Polen_Emails::is_to_send_admin_edit_order() ){
+            return;
+        }
+
         $cart_item = Polen_Cart_Item_Factory::polen_cart_item_from_order( $this->object );
         $this->product = $cart_item->get_product();
 
-        // $is_event_promotional = event_promotional_order_is_event_promotional( $order );
-        // $is_social_base = order_is_social_base( $order );
-        // if ( $this->is_enabled() && $this->get_recipient() ) {
-        //     if( $is_event_promotional ) {
-        //         $this->send( $this->get_recipient(), $this->get_subject_ep(), $this->get_content_ep(), $this->get_headers(), $this->get_attachments() );
-        //     } elseif( $is_social_base ) {
-        //         $this->send( $this->get_recipient(), $this->get_subject_social_base(), $this->get_content_social_base(), $this->get_headers(), $this->get_attachments() );
-        //     } else {
-        //         $this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
-        //     }
-        // }
+        send_zapier_by_change_status($this->object);
         $order_is_campaing = Polen_Campaign::get_is_order_campaing( $this->object );
         if( $order_is_campaing ) {
             $this->send( $this->get_recipient(), $this->get_subject_galo(), $this->get_content_campaign(), $this->get_headers(), $this->get_attachments() );
         } else {
-            $this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
+            // $this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
+            $order_module = new Polen_Order_Module( $this->object );
+            $customer_name = $order_module->get_offered_by();
+            $order_url = $order_module->get_view_order_url();
+            $this->send_email(
+                $customer_name,
+                $this->get_recipient(),
+                $order_id,
+                $order_url
+            );
         }
 
         $this->restore_locale();
     }
+
+
+    /**
+     * Enviar email Via SendGrid API
+     */
+	public function send_email(
+		$name_customer,
+		$email_customer,
+		$order_id,
+        $order_url )
+	{
+
+        global $Polen_Plugin_Settings;
+        $apikeySendgrid = $Polen_Plugin_Settings[ Polen_Sendgrid_Redux::APIKEY ];
+        $send_grid = new Polen_Sendgrid_Emails( $apikeySendgrid );
+        $send_grid->set_from(
+            $Polen_Plugin_Settings['polen_smtp_from_email'],
+            $Polen_Plugin_Settings['polen_smtp_from_name']
+        );
+        $send_grid->set_to( $email_customer, $name_customer );
+        $send_grid->set_template_id( $Polen_Plugin_Settings[ Polen_Sendgrid_Redux::THEME_ID_POLEN_ORDER_COMPLETED ] );
+        $send_grid->set_template_data( 'customer_name', $name_customer );
+        $send_grid->set_template_data( 'order_id', $order_id );
+        $send_grid->set_template_data( 'order_url', $order_url );
+
+        return $send_grid->send_email();
+    }
+
 
 
     public function get_subject_galo()

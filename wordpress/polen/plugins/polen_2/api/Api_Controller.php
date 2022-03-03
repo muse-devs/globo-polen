@@ -45,6 +45,8 @@ class Api_Controller{
 
             $products = $api_product->polen_get_products_by_campagins($params, $slug);
 
+            
+
             $items = array();
             foreach ($products->products as $product) {
                 $image_object = $this->get_object_image($product->get_id());
@@ -54,7 +56,7 @@ class Api_Controller{
                     'slug' => $product->get_slug(),
                     'image' => $image_object,
                     'categories' => wp_get_object_terms($product->get_id() , 'product_cat'),
-                    'stock' => $product->get_stock_quantity() ?? 0,
+                    'stock' => $product->is_in_stock() ? $this->check_stock($product) : 0,
                     'price' => $product->get_price(),
                     'regular_price' => $product->get_regular_price(),
                     'sale_price' => $product->get_sale_price(),
@@ -78,7 +80,7 @@ class Api_Controller{
             );
         }
     }
-
+    
     /**
      * Endpoint talent
      *
@@ -120,7 +122,7 @@ class Api_Controller{
                 'b2b' => get_post_meta($product_obj->ID, 'polen_is_b2b', true),
                 'image' => $image_object,
                 'categories' => wp_get_object_terms($product->get_id() , 'campaigns'),
-                'stock' => $product->get_stock_quantity() ?? 0,
+                'stock' => $product->is_in_stock() ? $this->check_stock($product) : 0,
                 'price' => $product->get_price(),
                 'regular_price' => $product->get_regular_price(),
                 'sale_price' => $product->get_sale_price(),
@@ -343,6 +345,19 @@ class Api_Controller{
         return api_response( $data, 200 );
     }
 
+    public function get_payment_status($request)
+    {
+        $order_id = $request['id'];
+
+        $current_status = $this->checkout->get_status($order_id);
+
+        return api_response(
+            [
+                'paid' => $current_status == 'payment-approved',
+                'payment_status' => $current_status
+            ]
+        );
+    }
 
     /**
      * 
@@ -396,9 +411,6 @@ class Api_Controller{
         return  $categories;
     }
 
-
-
-
     /**
      * Gera um nonce para o checkout nao ficar 100% expostos
      */
@@ -407,5 +419,18 @@ class Api_Controller{
         // Debug::def( $_SERVER['HTTP_USER_AGENT'] , $_SERVER['REMOTE_ADDR'] );
         // return api_response( wp_create_nonce( $_SERVER['HTTP_USER_AGENT'] . $_SERVER['REMOTE_ADDR'] ) );
         return api_response( '1d13b5e353' );
+    }
+
+    /**
+     * Verificar se o produto contem estoque e retornar a quantidade
+     */
+    private function check_stock($product)
+    {
+        $stock = $product->get_stock_quantity();
+        if ($stock === null && $product->is_in_stock()) {
+            $stock = true;
+        }
+
+        return $stock;
     }
 }

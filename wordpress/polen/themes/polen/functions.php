@@ -406,6 +406,11 @@ function filter_woocommerce_coupon_error($err, $err_code, $instance)
 add_filter('woocommerce_coupon_error', 'filter_woocommerce_coupon_error', 10, 3);
 
 /**
+ * Funções para disparado de zapier
+ */
+require_once TEMPLATE_DIR . '/inc/zapier.php';
+
+/**
  * Customiza a paginação de todos os tipos de posts
  *
  * @param array $args
@@ -440,47 +445,11 @@ function show_pagination(array $args)
   return $output;
 }
 
-
 //Remover plugins do menu para Sobhan
 function polen_remove_menus() {
 	remove_menu_page( 'plugins.php' );
 }
+
 if( 37 == get_current_user_id() ) {
 	add_action( 'admin_menu', 'polen_remove_menus' );
-}
-
-add_action( 'woocommerce_email', 'unhook_those_pesky_emails' );
-
-function unhook_those_pesky_emails( $email_class ) {
-
-  if ( is_admin() ) {
-
-    // New order emails
-//    remove_action( 'woocommerce_order_status_pending_to_processing_notification', array( $email_class->emails['WC_Email_New_Order'], 'trigger' ) );
-//    remove_action( 'woocommerce_order_status_pending_to_completed_notification', array( $email_class->emails['WC_Email_New_Order'], 'trigger' ) );
-//    remove_action( 'woocommerce_order_status_pending_to_on-hold_notification', array( $email_class->emails['WC_Email_New_Order'], 'trigger' ) );
-//    remove_action( 'woocommerce_order_status_failed_to_processing_notification', array( $email_class->emails['WC_Email_New_Order'], 'trigger' ) );
-//    remove_action( 'woocommerce_order_status_failed_to_completed_notification', array( $email_class->emails['WC_Email_New_Order'], 'trigger' ) );
-//    remove_action( 'woocommerce_order_status_failed_to_on-hold_notification', array( $email_class->emails['WC_Email_New_Order'], 'trigger' ) );
-
-    // Processing order emails
-//    remove_action( 'woocommerce_order_status_pending_to_processing_notification', array( $email_class->emails['WC_Email_Customer_Processing_Order'], 'trigger' ) );
-//    remove_action( 'woocommerce_order_status_pending_to_on-hold_notification', array( $email_class->emails['WC_Email_Customer_Processing_Order'], 'trigger' ) );
-//
-//    // Completed order emails
-//    remove_action( 'woocommerce_order_status_completed_notification', array( $email_class->emails['WC_Email_Customer_Completed_Order'], 'trigger' ) );
-
-
-    remove_action( 'woocommerce_order_status_changed', array( $email_class->emails['Polen_WC_Payment_Approved'], 'trigger' ), 1 );
-
-    remove_action( 'woocommerce_order_status_pending_to_payment-approved_notification', array( $email_class->emails['Polen_WC_Payment_Approved'], 'trigger' ), 1 );
-    remove_action( 'woocommerce_order_status_pending_to_payment-approved_notification', array( $email_class->emails['WC_Email_New_Order'], 'trigger' ), 1 );
-    remove_action( 'woocommerce_order_status_pending_to_payment-approved_notification', array( $email_class->emails['WC_Email_Customer_Completed_Order'], 'trigger' ), 1 );
-
-    remove_action( 'woocommerce_order_status_payment-approved_notification', array( $email_class->emails['WC_Email_Customer_Payment-Approved_Order'], 'trigger' ) );
-    remove_action( 'woocommerce_order_status_payment-approved_notification', array( $email_class->emails['Polen_WC_Payment_Approved'], 'trigger' ) );
-
-
-
-  }
 }

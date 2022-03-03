@@ -32,7 +32,7 @@ $user_obj = get_user_by( 'login', $user_login);
 <p><?php printf( esc_html__( 'Thanks for creating an account on %1$s. Your username is %2$s. You can access your account area to view orders, change your password, and more at: %3$s', 'woocommerce' ), 'Galo Idolos', '<strong>' . esc_html( $user_login ) . '</strong>', make_clickable( esc_url( 'https://galoidolos.com.br/' ) ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
 <?php if ( $password_generated ) : ?>
 	<?php /* translators: %s: Auto generated password */ ?>
-	<p><?php printf( esc_html__( 'Your password has been automatically generated: %s', 'woocommerce' ), '<strong>' . esc_html( $user_pass ) . '</strong>' ); ?></p>
+	<p><?php printf( esc_html__( 'Sua senha foi gerada automaticamente: %s', 'woocommerce' ), '<strong>' . esc_html( $user_pass ) . '</strong>' ); ?></p>
 <?php endif; ?>
 <?php
 /**

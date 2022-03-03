@@ -37,7 +37,8 @@ function _polen_get_info_talent_by_product_id( \WC_Product $talent_object, $size
             $talent['price_formatted'] = $talent_object->get_price_html();
         }
         $talent['name'] = $talent_object->get_title();
-		$talent['in_stock'] = $talent_object->is_in_stock();
+		    $talent['in_stock'] = $talent_object->is_in_stock();
+        $talent['stock'] = $talent_object->get_stock_quantity();
 
         $ids = $talent_object->get_category_ids();
         $category = _polen_get_first_category_object( $ids );
@@ -147,6 +148,33 @@ function polen_get_talents( int $quantity = 10 )
     return $talents;
 }
 
+/**
+ * Retornar talentos por categorias
+ *
+ * @param string $slug
+ * @param int $quantity
+ * @return array|type
+ */
+function polen_get_talents_by_product_cat(string $slug, int $quantity = 10)
+{
+    $args = array(
+        'post_type' => 'product',
+        'posts_per_page' => $quantity,
+        'product_cat' => $slug,
+        'post_status' => 'publish',
+    );
+
+    $args['tax_query'] = array(
+        array(
+            'taxonomy' => 'campaigns',
+            'terms' => array('lacta'),
+            'field' => 'slug',
+            'operator' => 'NOT IN',
+        ),
+    );
+
+    return _polen_get_info_talents_by_args( $args );
+}
 
 /**
  * Retorna a URL do arquivo JSON das occasions para a tela do brief do videos

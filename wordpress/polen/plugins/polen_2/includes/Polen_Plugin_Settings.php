@@ -1,6 +1,8 @@
 <?php
 
 namespace Polen\Includes;
+
+use Polen\Includes\Sendgrid\Polen_Sendgrid_Redux;
 use WP_Term_Query;
 
 class Polen_Plugin_Settings
@@ -497,6 +499,14 @@ class Polen_Plugin_Settings
                     'desc'     => 'Envio de informações de marketig para novas compras',
                     'default'  => '',
                 ),
+                array(
+                    'id'       => 'polen_url_zapier_b2b_hotspot',
+                    'type'     => 'text',
+                    'title'    => esc_html__('URL Request para Zapier cadastrar no Hobspot', 'polen'),
+                    'subtitle' => esc_html__('URL Request para Zapier cadastrar no Hobspot', 'polen'),
+                    'desc'     => 'URL Request para Zapier cadastrar no Hobspot',
+                    'default'  => '',
+                ),
             )
         ) );
         
@@ -607,6 +617,68 @@ class Polen_Plugin_Settings
                     'desc'     => 'Cole aqui chave partner key do TUNA',
                     'default'  => '',
                 ),
+            )
+        ) );
+
+
+
+        // Configurar API REST
+        \Redux::set_section( $opt_name, array(
+            'title'            => esc_html__( 'Dados Sendgrid Templates', 'polen' ),
+            'id'               => 'sendgrid_data',
+            'icon'             => '',
+            'subsection'       => false,
+            'fields'           => array(
+                array(
+                    'id'       => 'sendgrid_apikey',
+                    'type'     => 'text',
+                    'title'    => esc_html__('Sendgrid Apikey', 'polen'),
+                    'placeholder' => 'Sendgrid Apikey',
+                    'desc'     => 'Sendgrid Apikey',
+                    'default'  => '',
+                ),
+                array(
+                    'id'       => 'sendgrid_theme_galo_help',
+                    'type'     => 'text',
+                    'title'    => esc_html__('ThemeID Galo Help', 'polen'),
+                    'desc'     => 'ThemeID Galo Help',
+                    'default'  => '',
+                ),
+                array(
+                    'id'       => Polen_Sendgrid_Redux::THEME_ID_POLEN_TALENT_ACCEPTED,
+                    'type'     => 'text',
+                    'title'    => esc_html__('ThemeID Polen Talento Aceitou', 'polen'),
+                    'desc'     => 'ThemeID Polen Talento Aceitou',
+                    'default'  => '',
+                ),
+                array(
+                    'id'       => Polen_Sendgrid_Redux::THEME_ID_POLEN_TALENT_REJECT,
+                    'type'     => 'text',
+                    'title'    => esc_html__('ThemeID Polen Talento Rejeitou', 'polen'),
+                    'desc'     => 'ThemeID Polen Talento Rejeitou',
+                    'default'  => '',
+                ),
+                array(
+                    'id'       => Polen_Sendgrid_Redux::THEME_ID_POLEN_PAYMENT_APPROVED,
+                    'type'     => 'text',
+                    'title'    => esc_html__('ThemeID Polen Pagamento Aprovado', 'polen'),
+                    'desc'     => 'ThemeID Polen Pagamento Aprovado',
+                    'default'  => '',
+                ),
+                array(
+                    'id'       => Polen_Sendgrid_Redux::THEME_ID_POLEN_ORDER_COMPLETED,
+                    'type'     => 'text',
+                    'title'    => esc_html__('ThemeID Polen Pedido Completo', 'polen'),
+                    'desc'     => 'ThemeID Polen Pedido Completo',
+                    'default'  => '',
+                ),
+                // array(
+                //     'id'       => 'polen_api_rest_account',
+                //     'type'     => 'text',
+                //     'title'    => esc_html__('Adicionar chave account', 'polen'),
+                //     'desc'     => 'Cole aqui chave partner key do TUNA',
+                //     'default'  => '',
+                // ),
             )
         ) );
     }

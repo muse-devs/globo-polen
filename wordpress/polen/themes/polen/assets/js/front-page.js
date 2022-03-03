@@ -6,90 +6,65 @@
 // home_carrousel();
 
 jQuery(document).ready(function ($) {
-	$('#top-carousel').owlCarousel({
-		loop: true,
-		items: 1,
-		autoplayTimeout: 5000,
-		animateOut: 'fadeOut',
-		autoplayHoverPause:true,
-		margin: 0,
-		nav: true,
-		autoplay: true,
-		dots: true,
-		autoHeight:false,
-		navText: ["<i class='icon icon-left-arrow'></i>", "<i class='icon icon-right-arrow'></i>"],
-	});
-	$('#product-carousel').owlCarousel({
-		loop: true,
-		items: 1,
-		autoplayTimeout: 5000,
-		animateOut: 'fadeOut',
-		autoplayHoverPause:true,
-		margin: 0,
-		nav: false,
-		autoplay: true,
-		dots: true,
-		autoHeight:false,
-	});
-	$('#how-to-carousel').owlCarousel({
-		loop: true,
-		items: 1,
-		autoplayTimeout: 5000,
-		animateOut: 'fadeOut',
-		autoplayHoverPause:true,
-		margin: 0,
-		nav: false,
-		autoplay: true,
-		dots: true,
-		autoHeight:false,
-	});
-  // $('#videos-carousel').owlCarousel({
-  //   loop: false,
-  //   stagePadding: 15,
-  //   items: 4,
-  //   animateOut: 'fadeOut',
-  //   margin: 5,
-  //   nav: true,
-  //   dots: false,
-  //   autoHeight:false,
-  //   navText: ["<i class='icon icon-left-arrow'></i>", "<i class='icon icon-right-arrow'></i>"],
-  //   responsive : {
-  //       0 : {
-  //         items: 2,
-  //       },
-  //       700 : {
-  //         items: 3,
-  //       },
-  //       1020 : {
-  //         items: 4,
-  //       }
-  //   }
-  // });
+  $('#product-carousel').owlCarousel({
+    loop: true,
+    items: 1,
+    autoplayTimeout: 5000,
+    animateOut: 'fadeOut',
+    autoplayHoverPause: true,
+    margin: 0,
+    nav: false,
+    autoplay: true,
+    dots: true,
+    autoHeight: false,
+  });
+  $('#videos-carousel').owlCarousel({
+    loop: false,
+    stagePadding: 15,
+    items: 4,
+    animateOut: 'fadeOut',
+    margin: 5,
+    nav: true,
+    dots: false,
+    autoHeight:false,
+    navText: ["<i class='icon icon-left-arrow'></i>", "<i class='icon icon-right-arrow'></i>"],
+    responsive : {
+        0 : {
+          items: 2,
+        },
+        700 : {
+          items: 3,
+        },
+        1020 : {
+          items: 4,
+        }
+    }
+  });
 });
 
 (function ($) {
-	// Newsletter submit click
-	$(document).on("submit", "form#newsletter, form#newsletter-mobile", function (e) {
-		const formName = "form#" + this.id;
-		e.preventDefault();
-		// Ajax Request
-		polAjaxForm(
-			formName,
-			function () {
-				polMessages.message(
-					"Seu e-mail foi adicionado a lista",
-					"Aguarde nossas novidades!"
-				);
-			},
-			function (error) {
-				polMessages.error(error);
-			}
-		);
-		// Zapier request
-		polRequestZapier(
-			formName
-		);
-	});
+  // Newsletter submit click
+  $(document).on("submit", "form#newsletter, form#newsletter-mobile", function (e) {
+    const formName = "form#" + this.id;
+    e.preventDefault();
+    // Ajax Request
+    polAjaxForm(
+      formName,
+      function () {
+        polMessages.message(
+          "Seu e-mail foi adicionado a lista",
+          "Aguarde nossas novidades!"
+        );
+      },
+      function (error) {
+        polMessages.error(error);
+      }
+    );
+    // Zapier request
+    polRequestZapier(
+      formName
+    );
+  });
 })(jQuery);
 
 // const home_video = function () {

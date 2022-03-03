@@ -15,6 +15,8 @@ class Polen_WooCommerce
     const ORDER_STATUS_TALENT_ACCEPTED     = 'talent-accepted';
     const ORDER_STATUS_ORDER_EXPIRED       = 'order-expired';
 
+    public $order_statuses = [];
+    
     public function __construct( $static = false ) 
     {
         $this->order_statuses = array(
@@ -72,7 +74,6 @@ class Polen_WooCommerce
             add_action( 'init', array( $this, 'register_custom_order_statuses' ) );
             add_filter( 'wc_order_statuses', array( $this, 'add_custom_order_statuses' ) );
             add_filter( 'bulk_actions-edit-shop_order', array( $this, 'dropdown_bulk_actions_shop_order' ), 20, 1 );
-            add_filter( 'woocommerce_email_actions', array( $this, 'email_actions' ), 20, 1 );
             add_action( 'woocommerce_checkout_create_order', array( $this, 'order_meta' ), 12, 2 );
             add_action( 'add_meta_boxes', array( $this, 'add_metaboxes' ) );
             add_action( 'admin_head', array( $this, 'remove_metaboxes' ) );
@@ -98,7 +99,8 @@ class Polen_WooCommerce
             add_action( 'woocommerce_update_product', array( $this, 'on_product_save' ) );
 
             add_action( 'save_post_post_polen_media', array( $this, 'save_metabox_post' ) );
-            add_action( 'save_post', array( $this, 'change_status' ) );
+            add_action( 'save_post', array($this, 'seo_save_postdata') );
+            // add_action( 'save_post', array( $this, 'change_status' ) );
 
             //Todas as compras gratis vão para o status payment-approved
             add_action( 'woocommerce_checkout_no_payment_needed_redirect', [ $this, 'set_free_order_payment_approved' ], 10, 3 );
@@ -125,23 +127,23 @@ class Polen_WooCommerce
      * Salvar status de envio do email na atualização da order
      * para ser verificado no disparo do email
      */
-    public function change_status($post_id)
-    {
-        if (!current_user_can( 'edit_page', $post_id )) {
-            return $post_id;
-        }
+    // public function change_status($post_id)
+    // {
+    //     if (!current_user_can( 'edit_page', $post_id )) {
+    //         return $post_id;
+    //     }
 
-        if (defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE) {
-            return $post_id;
-        }
+    //     if (defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE) {
+    //         return $post_id;
+    //     }
 
-        $meta_value = 0;
-        if (isset($_POST['send_email']) && $_POST['send_email'] == 'on') {
-            $meta_value = 1;
-        }
+    //     $meta_value = 0;
+    //     if (isset($_POST['send_email']) && $_POST['send_email'] == 'on') {
+    //         $meta_value = 1;
+    //     }
 
-        update_post_meta($post_id, 'send_email', $meta_value);
-    }
+    //     update_post_meta($post_id, 'send_email', $meta_value);
+    // }
 
 
     /**
@@ -178,17 +180,6 @@ class Polen_WooCommerce
         {
 			$actions[ $order_status ] = $values[ 'label' ];
 		}
-        return $actions;
-    }
-
-    function email_actions( $actions ) 
-    {
-        foreach ( $this->order_statuses as $order_status => $values ) 
-        {
-			$actions[] = 'woocommerce_order_status_' . $order_status;
-		}
-        $actions[] = 'woocommerce_order_status_wc-payment-approved_to_wc-talent-rejected';
-        $actions[] = 'woocommerce_order_status_wc-payment-approved_to_wc-talent-accepted';
         return $actions;
     }
 
@@ -235,6 +226,7 @@ class Polen_WooCommerce
             global $post;
             $product_id = $post->ID;
             add_meta_box( 'Polen_Product_First_Order', 'Primeira Order', array( $this, 'metabox_create_first_order' ), 'product', 'side', 'default' );
+            add_meta_box( 'Polen_Product_SEO', 'SEO', array( $this, 'metabox_SEO' ), 'product', 'normal', 'default' );
         }
     }
 
@@ -294,6 +286,32 @@ class Polen_WooCommerce
             require_once TEMPLATEPATH . '/woocommerce/admin/metaboxes/metabox-first-order.php';
         } else {
             require_once PLUGIN_POLEN_DIR . '/admin/partials/metaboxes/metabox-first-order.php';
+        }
+    }
+
+    public function metabox_SEO($post)
+    {
+        if( file_exists( TEMPLATEPATH . '/woocommerce/admin/metaboxes/metabox-seo.php' ) ) {
+            require_once TEMPLATEPATH . '/woocommerce/admin/metaboxes/metabox-seo.php';
+        } else {
+            require_once PLUGIN_POLEN_DIR . '/admin/partials/metaboxes/metabox-seo.php';
+        }
+    }
+
+    public function seo_save_postdata( $post_id ) {
+        if ( array_key_exists( 'meta-seo-title', $_POST ) ) {
+            update_post_meta(
+                $post_id,
+                '_seo_title',
+                sanitize_text_field($_POST['meta-seo-title'])
+            );
+        }
+        if ( array_key_exists( 'meta-seo-description', $_POST ) ) {
+            update_post_meta(
+                $post_id,
+                '_seo_description',
+                sanitize_text_field($_POST['meta-seo-description'])
+            );
         }
     }
 
@@ -361,26 +379,6 @@ class Polen_WooCommerce
         );
         return $array;
     }
-    // public function promotional_event( $array ){
-    //     $array['promotional_event'] = array(
-    //         'label'    => 'Video-Autógrafo',
-    //         'target'   => 'promotional_event_product_data',
-    //         'class'    => array(),
-    //         'priority' => 90,
-    //     );
-    //     return $array;
-    // }
-
-    // public function social_base_event( $array )
-    // {
-    //     $array['social_base'] = array(
-    //         'label'    => 'Base Social',
-    //         'target'   => 'social_base_product_data',
-    //         'class'    => array(),
-    //         'priority' => 90,
-    //     );
-    //     return $array;
-    // }
 
     public function charity_product_data_product_tab_content() {
         global $product_object;
@@ -461,201 +459,7 @@ class Polen_WooCommerce
     <?php
     }
 
-    public function promotional_event_product_data_product_tab_content()
-    {
-/*        global $product_object; ?>
-
-        <div id="promotional_event_product_data" class="panel woocommerce_options_panel hidden">
-            <div class='options_group'>
-            <?php
-                woocommerce_wp_checkbox(
-                    array(
-                        'id'      => '_promotional_event',
-                        'value'   => $product_object->get_meta( '_promotional_event' ) == 'yes' ? 'yes' : 'no',
-                        'label'   => 'É um Vídeo-Autógrafo',
-                        'cbvalue' => 'yes',
-                    )
-                );
-            ?>
-            </div>
-            
-            <div class="options_group">
-                <?php
-                woocommerce_wp_text_input(
-                    array(
-                        'id'                => '_promotional_event_pages_quantity',
-                        'value'             => $product_object->get_meta( '_promotional_event_pages_quantity' ),
-                        'label'             => 'Qtd de Paginas',
-                        'desc_tip'          => true,
-                        'description'       => 'Quantidade de pagidas do Livro',
-                        'type'              => 'text',
-                    )
-                );
-                ?>
-            </div>
-            
-            <div class="options_group">
-                <?php
-                woocommerce_wp_text_input(
-                    array(
-                        'id'                => '_promotional_event_language',
-                        'value'             => $product_object->get_meta( '_promotional_event_language' ),
-                        'label'             => 'Idioma',
-                        'desc_tip'          => true,
-                        'description'       => 'Idioma do Livro',
-                        'type'              => 'text',
-                    )
-                );
-                ?>
-            </div>
-            
-            <div class="options_group">
-                <?php
-                woocommerce_wp_text_input(
-                    array(
-                        'id'          => '_promotional_event_publishing',
-                        'value'       => $product_object->get_meta( '_promotional_event_publishing' ),
-                        'label'       => 'Editora',
-                        'desc_tip'    => true,
-                        'description' => 'Editora do livro.',
-                        'type'        => 'text',
-                    )
-                );
-                ?>
-            </div>
-            
-            <div class="options_group">
-                <?php
-                woocommerce_wp_text_input(
-                    array(
-                        'id'          => '_promotional_event_published_in',
-                        'value'       => $product_object->get_meta( '_promotional_event_published_in' ),
-                        'label'       => 'Publicado em',
-                        'desc_tip'    => true,
-                        'description' => 'Data de publicação.',
-                        'type'        => 'date',
-                    )
-                );
-                ?>
-            </div>
-            
-            <div class="options_group">
-                <?php
-                woocommerce_wp_text_input(
-                    array(
-                        'id'          => '_promotional_event_rating',
-                        'value'       => $product_object->get_meta( '_promotional_event_rating' ),
-                        'label'       => 'Score do Livro ex: <b>4.2</b>',
-                        'desc_tip'    => true,
-                        'description' => 'Nota dos leitores do livro.',
-                        'type'        => 'text',
-                    )
-                );
-                ?>
-            </div>
-
-            <div class="options_group">
-                <?php
-                woocommerce_wp_text_input(
-                    array(
-                        'id'          => '_promotional_event_link_buy',
-                        'value'       => $product_object->get_meta( '_promotional_event_link_buy' ),
-                        'label'       => 'Link de compra',
-                        'desc_tip'    => true,
-                        'description' => 'Link para comprar o livro.',
-                        'type'        => 'text',
-                    )
-                );
-                ?>
-            </div>
-
-            <div class="options_group">
-                <?php
-                woocommerce_wp_text_input(
-                    array(
-                        'id'          => '_promotional_event_author',
-                        'value'       => $product_object->get_meta( '_promotional_event_author' ),
-                        'label'       => 'Autor',
-                        'desc_tip'    => true,
-                        'description' => 'Autor do livro.',
-                        'type'        => 'text',
-                    )
-                );
-                ?>
-            </div>
-
-            <div class="options_group">
-                <?php
-                woocommerce_wp_text_input(
-                    array(
-                        'id'          => '_promotional_event_wartermark',
-                        'value'       => $product_object->get_meta( '_promotional_event_wartermark' ),
-                        'label'       => 'Marca d`agua',
-                        'desc_tip'    => true,
-                        'description' => 'URL da marca d`agua do video player, copiar o link de galeria',
-                        'type'        => 'text',
-                    )
-                );
-                ?>
-            </div>
-
-
-            
-        </div>
-        <?php */
-    }
-
-    /*
-    public function social_base_product_data_product_tab_content()
-    {
-        global $product_object;
-        ?>
-            <div id="social_base_product_data" class="panel woocommerce_options_panel hidden">
-                <div class="options_group">
-                    <?php
-                    woocommerce_wp_checkbox(
-                        array(
-                            'id'      => '_is_social_base',
-                            'value'   => $product_object->get_meta( '_is_social_base' ) == 'yes' ? 'yes' : 'no',
-                            'label'   => 'Produto é Social',
-                            'cbvalue' => 'yes',
-                        )
-                    );
-                    ?>
-                </div>
-
-                <div class="options_group">
-                    <?php
-                    woocommerce_wp_text_input(
-                        array(
-                            'id'          => '_social_base_slug_campaign',
-                            'value'       => $product_object->get_meta( '_social_base_slug_campaign' ),
-                            'label'       => 'Slug da Campanha',
-                            'desc_tip'    => true,
-                            'description' => 'Slug da companha que este produto é parte',
-                            'type'        => 'text',
-                        )
-                    );
-                    ?>
-                </div>
-
-                <div class="options_group">
-                    <?php
-                    woocommerce_wp_text_input(
-                        array(
-                            'id'          => '_social_base_video_testimonial',
-                            'value'       => $product_object->get_meta( '_social_base_video_testimonial' ),
-                            'label'       => 'Link do video',
-                            'desc_tip'    => true,
-                            'description' => 'URL do Video com o video de talento',
-                            'type'        => 'text',
-                        )
-                    );
-                    ?>
-                </div>
-            </div>
-        <?php
-    }*/
+    public function promotional_event_product_data_product_tab_content(){}
 
     public function on_product_save( $product_id ) {
         if( is_admin() ){
@@ -668,39 +472,11 @@ class Polen_WooCommerce
                 $charity_description = strip_tags( $_POST['_description_charity'] );
                 $charity_subordinate_id = strip_tags( $_POST['_charity_subordinate_merchant_id'] );
 
-                // $promotional_event = strip_tags( $_POST[ '_promotional_event' ] );
-                // $promotional_event_pages_quantity = strip_tags( $_POST[ '_promotional_event_pages_quantity' ] );
-                // $promotional_event_language = strip_tags( $_POST[ '_promotional_event_language' ] );
-                // $promotional_event_publishing = strip_tags( $_POST[ '_promotional_event_publishing' ] );
-                // $promotional_event_published_in = strip_tags( $_POST[ '_promotional_event_published_in' ] );
-                // $promotional_event_rating = strip_tags( $_POST[ '_promotional_event_rating' ] );
-                // $promotional_event_link_buy = strip_tags( $_POST[ '_promotional_event_link_buy' ] );
-                // $promotional_event_author = strip_tags( $_POST[ '_promotional_event_author' ] );
-                // $promotional_event_wartermark = strip_tags( $_POST[ '_promotional_event_wartermark' ] );
-                
-                // $is_social_base = strip_tags( $_POST[ '_is_social_base' ]);
-                // $social_base_slug_campaign = strip_tags( $_POST[ '_social_base_slug_campaign' ]);
-                // $social_base_video_testimonial = strip_tags( $_POST[ '_social_base_video_testimonial' ]);
-
                 $product->update_meta_data( '_is_charity', $charity );
                 $product->update_meta_data( '_charity_name', $charity_name );
                 $product->update_meta_data( '_url_charity_logo', $charity_url );
                 $product->update_meta_data( '_description_charity', $charity_description );
                 $product->update_meta_data( '_charity_subordinate_merchant_id', $charity_subordinate_id );
-
-                // $this->save_meta($product, $promotional_event, '_promotional_event' );
-                // $this->save_meta($product, $promotional_event_pages_quantity, '_promotional_event_pages_quantity' );
-                // $this->save_meta($product, $promotional_event_language, '_promotional_event_language' );
-                // $this->save_meta($product, $promotional_event_publishing, '_promotional_event_publishing' );
-                // $this->save_meta($product, $promotional_event_published_in, '_promotional_event_published_in' );
-                // $this->save_meta($product, $promotional_event_rating, '_promotional_event_rating' );
-                // $this->save_meta($product, $promotional_event_link_buy, '_promotional_event_link_buy' );
-                // $this->save_meta($product, $promotional_event_author, '_promotional_event_author' );
-                // $this->save_meta($product, $promotional_event_wartermark, '_promotional_event_wartermark' );
-
-                // $this->save_meta($product, $is_social_base, '_is_social_base' );
-                // $this->save_meta($product, $social_base_slug_campaign, '_social_base_slug_campaign' );
-                // $this->save_meta($product, $social_base_video_testimonial, '_social_base_video_testimonial' );
 
                 do_action( Polen_Admin_Social_Base_Product_Fields::ACTION_NAME    , $product_id );
                 do_action( Polen_Admin_B2B_Product_Fields::ACTION_NAME            , $product_id );

@@ -1,6 +1,6 @@
 <?php
 
-function polen_talent_promo_card($talent)
+function polen_talent_promo_card($talent, $image_data = array())
 {
 	global $product;
 ?>
@@ -8,7 +8,11 @@ function polen_talent_promo_card($talent)
 		<div class="box-color card row">
 			<div class="col-12 col-md-12 d-flex flex-column justify-content-center align-items-center text-center p-2">
 				<div class="image-cropper">
-					<?php echo polen_get_avatar($talent->user_id, 'polen-square-crop-lg'); ?>
+          <?php if ($image_data) : ?>
+            <img src="<?php echo $image_data['image']; ?>" alt="<?php echo $image_data["alt"]; ?>" />
+          <?php else : ?>
+            <?php echo polen_get_avatar($talent->user_id, 'polen-square-crop-lg'); ?>
+					<?php endif; ?>
 				</div>
 				<p class="mt-2">E aí, ficou com vontade de ter um vídeo?</p>
 				<?php if ($product->is_in_stock()) : ?>
@@ -101,47 +105,59 @@ function polen_front_get_talent_mini_bio($image_data, $name, $category)
   <?php
 }
 
-function polen_front_get_videos_single($talent, $videos)
+function polen_front_get_videos_single($talent, $videos, $image_data)
 {
   if( ! wp_script_is( 'owl-carousel', 'enqueued' ) ) {
       wp_enqueue_script('owl-carousel');
   }
 ?>
-	<section id="talent-videos" class="row my-1 pb-4">
+	<section id="talent-videos" class="row my-1 pb-4 banner-scrollable">
     <?php if($videos && sizeof($videos) > 0) : ?>
-		<div class="col-md-12 p-0 mb-4">
-			<div id="videos-carousel" class="owl-carousel owl-theme ">
-          <?php foreach ($videos as $key=>$video) : ?>
-            <?php if ($video['video']) : ?>
-              <div class="item">
-                <div class="polen-card-video talent-single">
-                  <figure id="cover-box" class="video-cover" data-id="<?php echo $key; ?>">
-                    <img loading="lazy" src="<?php echo $video['cover']; ?>" alt="">
-                    <div class="video-player-button" data-id="<?php echo $key; ?>"></div>
-                    <div class="video-icons">
-                      <figure class="image-cropper color small">
-                        <?php echo $video['thumb']; ?>
-                      </figure>
-                      <figure class="image-cropper small">
-                        <?php echo $video['initials']; ?>
-                      </figure>
-                    </div>
-                  </figure>
-                  <video id="video-box" class="src-box d-none" playsinline data-id="<?php echo $key; ?>"
-                    <?php if ($key == 0) {
-                      echo " muted";
-                    } ?>>
-                    <source src="<?php echo $video['video']; ?>" type="video/mp4">
-                  </video>
-                </div>
+		<div class="col-md-12 p-0 mb-3">
+      <div class="banner-wrapper">
+        <div id="banner-talent-videos" class="banner-content">
+        <?php foreach ($videos as $key=>$video) : ?>
+          <?php if ($video['video']) : ?>
+            <div class="responsive">
+              <div class="polen-card-video talent-single">
+                <figure id="cover-box" class="video-cover" data-id="<?php echo $key; ?>">
+                  <img loading="lazy" src="<?php echo $video['cover']; ?>" alt="">
+                  <div class="video-player-button" data-id="<?php echo $key; ?>"></div>
+                  <div class="video-icons">
+                    <figure class="image-cropper color small">
+                      <?php echo $video['thumb']; ?>
+                    </figure>
+                    <figure class="image-cropper small">
+                      <?php echo $video['initials']; ?>
+                    </figure>
+                  </div>
+                </figure>
+                <video id="video-box" class="src-box d-none" playsinline data-id="<?php echo $key; ?>"
+                  <?php if ($key == 0) {
+                    echo " muted";
+                  } ?>>
+                  <source src="<?php echo $video['video']; ?>" type="video/mp4">
+                </video>
               </div>
-            <?php endif; ?>
-          <?php endforeach; ?>
-          <div class="item">
-            <?php polen_talent_promo_card($talent); ?>
-          </div>
+            </div>
+          <?php endif; ?>
+        <?php endforeach; ?>
+        <div class="col-6 col-md-3">
+          <?php polen_talent_promo_card($talent, $image_data); ?>
+        </div>
+        </div>
       </div>
 		</div>
+    <div class="col-md-12 d-none d-md-block">
+      <div class="pol-dots">
+        <a href="javascript:polPrevCarousel('banner-talent-videos')">
+          <i class='icon icon-left-arrow pol-prev-button mr-2'></i>
+        </a>
+        <a href="javascript:polNextCarousel('banner-talent-videos')">
+          <i class='icon icon-right-arrow pol-next-button ml-2'></i>
+        </a>
+      </div>
+    </div>
     <?php endif; ?>
 	</section>
   <script>
@@ -296,7 +312,8 @@ function polen_talent_review($reviews)
       ?>
       <div id="review-carousel" class="owl-carousel owl-theme">
         <?php
-        foreach ($reviews as $review) {
+        foreach ($reviews as $i => $review) {
+          if ($i > 8) break;
           $review_id = $review->comment_ID;
           $date = new DateTime($review->comment_date);
           $rate = get_comment_meta($review_id, "rate");
@@ -311,7 +328,7 @@ function polen_talent_review($reviews)
           <div class="box-round py-3 px-3">
             <div class="row comment-box">
               <div class="col-sm-12">
-                <span class="typo-title"><?php echo $user_name; ?></span>
+                <span class="typo-title"><?php echo preg_replace( '/@\S*/', '', $user_name ); ?></span>
               </div>
               <div class="col-md-12 box-stars">
                 <?php polen_get_stars((int) $rate[0]); ?>
@@ -340,6 +357,33 @@ function polen_talent_review($reviews)
           </a>
         </div>
       </div>
+      <script>
+        jQuery(document).ready(function ($) {
+          $('#review-carousel').owlCarousel({
+            loop: false,
+            items: 3,
+            autoplayTimeout: 5000,
+            animateOut: 'fadeOut',
+            autoplayHoverPause: true,
+            margin: 0,
+            nav: false,
+            autoplay: true,
+            dots: true,
+            autoHeight: false,
+            responsive : {
+                0 : {
+                  items: 1,
+                },
+                700 : {
+                  items: 2,
+                },
+                1020 : {
+                  items: 3,
+                }
+            }
+          });
+        });
+      </script>
       <?php
         }
         else {
