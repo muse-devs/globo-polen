@@ -48,7 +48,7 @@
 .videos-list {
   overflow: hidden;
   @include desktop {
-    height: 637px;
+    height: 707px;
   }
   .super-banner-item {
     @include desktop {
@@ -57,7 +57,7 @@
     }
   }
   .arrow {
-    bottom: -60px;
+    bottom: 0px;
   }
 }
 
