@@ -2,6 +2,7 @@
 
 use \Polen\Includes\Cart\Polen_Cart_Item_Factory;
 use Polen\Includes\Module\Polen_Order_Module;
+use Polen\Includes\Polen_Utils;
 
 if (isset($_REQUEST['order_id']) && !empty($_REQUEST['order_id'])) {
     $min = get_assets_folder();
@@ -12,7 +13,7 @@ if (isset($_REQUEST['order_id']) && !empty($_REQUEST['order_id'])) {
     $order_id = filter_input(INPUT_GET, 'order_id');
     $order = wc_get_order($order_id);
     $item_cart = Polen_Cart_Item_Factory::polen_cart_item_from_order($order);
-    $instruction = $item_cart->get_instructions_to_video();
+    $instruction = Polen_Utils::remove_sanitize_xss_br_escape($item_cart->get_instructions_to_video());
     $polen_order = new Polen_Order_Module( $order );
 ?>
 

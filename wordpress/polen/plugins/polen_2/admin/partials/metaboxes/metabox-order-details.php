@@ -2,6 +2,7 @@
 use Polen\Admin\Polen_Admin_Order_Custom_Fields;
 use Polen\Includes\Polen_Cart;
 use Polen\Includes\Polen_Order;
+use Polen\Includes\Polen_Utils;
 use Polen\Includes\Polen_WooCommerce;
 ?>
 <div class="wrap">
@@ -26,7 +27,7 @@ use Polen\Includes\Polen_WooCommerce;
             <td>
                 <table>
                     <tr>
-                        <?php $info = str_replace( '<br />', "", $info ); ?>
+                        <?php $info = Polen_Utils::remove_sanitize_xss_br_escape($info, 'edit'); ?>
                         <td style="width: 400px;"><textarea id="video-instruction" style="margin-top: 0px; margin-bottom: 0px; height: 231px;width:100%;" data-action="polen_edit_order_custom_fields" disabled="disabled"><?= $info; ?></textarea></td>
                         <td><a href="#" class="edit-custom-field" field-edit="video-instruction" data-field="<?= Polen_Cart::ITEM_INSTRUCTION_TO_VIDEO; ?>" data-action="polen_edit_order_custom_fields">Editar</a></td>
                     </tr>

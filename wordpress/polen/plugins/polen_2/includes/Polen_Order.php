@@ -344,6 +344,7 @@ class Polen_Order
             Para continuar basta aceitar no botão verde! E aí <nome>, pronto para se conectar com seus fãs!?
         ";
         $final_instruction = str_replace( '<nome>', $product->get_title(), $instruction );
+        $final_instruction = Polen_Utils::sanitize_xss_br_escape($final_instruction);
         
         wc_add_order_item_meta( $order_item_id, '_qty', 1, true );
         wc_add_order_item_meta( $order_item_id, '_product_id', $product->get_id(), true );

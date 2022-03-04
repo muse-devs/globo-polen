@@ -121,7 +121,7 @@ class Polen_WC_Payment_Approved extends \WC_Email {
 					$deadline,
 					$to_name,
 					$item->get_video_category(),
-					$item->get_instructions_to_video()
+					Polen_Utils::remove_sanitize_xss_br_escape($item->get_instructions_to_video(), 'edit')
 				);
 			}
 
