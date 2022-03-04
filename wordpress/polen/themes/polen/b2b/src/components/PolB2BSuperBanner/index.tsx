@@ -1,9 +1,9 @@
 import React from "react";
 import { Row, Col, Button } from "react-bootstrap";
 import { playVideo } from "services";
-import kovi from "images/logos/kovi.png";
-import tecmundo from "images/logos/logo-tecmundo.png";
-import prestex from "images/logos/prestex.jpg";
+import kovi from "images/logos/rounded/kovi.png";
+import tecmundo from "images/logos/rounded/tecmundo.png";
+import prestex from "images/logos/rounded/prestex.png";
 import Slider from "react-slick";
 import { ArrowLeft, ArrowRight } from "react-feather";
 import "./styles.scss";
@@ -149,13 +149,14 @@ export default function () {
                     onClick={(evt) => handleClick(evt, key)}
                   >
                     <figure className="video-card">
-                      <img src={item.image} alt={item.name} className="poster" />
+                      <img src={item.image} alt={item.name} className="poster rounded" />
                       <video
                         id={`super-banner-video-${key}`}
                         src={item.video}
-                        className={`video-player${!videos[key].paused ? " active" : ""
+                        className={`rounded video-player${!videos[key].paused ? " active" : ""
                           }`}
                         playsInline
+                        //controls
                       ></video>
                     </figure>
                     {videos[key].paused ? (
