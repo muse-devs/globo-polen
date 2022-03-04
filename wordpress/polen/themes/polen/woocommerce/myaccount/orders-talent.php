@@ -4,6 +4,7 @@ use Polen\Includes\Cart\Polen_Cart_Item_Factory;
 use Polen\Includes\Module\Polen_Order_Module;
 use Polen\Includes\Polen_Order;
 use Polen\Includes\Polen_Talent;
+use Polen\Includes\Polen_Utils;
 use Polen\Includes\Polen_Video_Info;
 
 $polen_talent = new Polen_Talent();
@@ -152,7 +153,7 @@ if (!$talent_is_social) {
 												<div class="row mt-2">
 													<div class="col-12 col-md-12">
 														<p class="p">Instruções</p>
-														<p class="value small"><?php echo $order['instructions']; ?></p>
+														<p class="value small"><?php echo Polen_Utils::remove_sanitize_xss_br_escape($order['instructions']); ?></p>
 													</div>
 												</div>
 											</div>
