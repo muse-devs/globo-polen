@@ -1006,7 +1006,7 @@ class Polen_Talent {
         // $obj['total_value']  = $order->get_total();
         $obj['total_value'] = $order->get_total_for_talent();
         // $obj['total_raw']    = $order->get_subtotal();
-        $obj['instructions'] = $order->get_instructions_to_video();
+        $obj['instructions'] = Polen_Utils::remove_sanitize_xss_br_escape($order->get_instructions_to_video(), 'edit');
         $obj['name']         = $order->get_name_to_video();
         $obj['from']         = $order->get_offered_by();
         $obj['to_myself']    = $order->get_video_to_is_to_my_self();
