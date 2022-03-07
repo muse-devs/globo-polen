@@ -5,6 +5,7 @@
   display: flex;
   overflow-x: scroll;
   @include desktop {
+    overflow-x: hidden;
     justify-content: center;
   }
   .form-check-input {
