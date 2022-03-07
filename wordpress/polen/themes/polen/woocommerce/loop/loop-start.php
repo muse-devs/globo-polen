@@ -26,6 +26,9 @@ $title = $obj ? "{$obj->name}: " : "";
 ?>
 <div class="clear"></div>
 <div class="row my-3">
+  <div class="col-12">
+    <?php polen_front_get_categories_buttons(); ?>
+  </div>
 	<div class="col-12">
 		<h1 class="<?php echo $obj ? "d-none" : ""; ?>"><?php echo $title; ?>Escolha seu ídolo e peça seu vídeo personalizado!</h1>
 	</div>
