@@ -86,6 +86,7 @@ $inputs = new Material_Inputs();
     polen_front_get_videos(polen_get_home_stories($videos));
 
     $emojis = array(
+      "b2b" => TEMPLATE_URI.'/assets/img/emoji/b2b.png',
       "musica" => TEMPLATE_URI.'/assets/img/emoji/music.png',
       "atrizes-e-atores" => TEMPLATE_URI.'/assets/img/emoji/arts.png',
       "apresentadores" => TEMPLATE_URI.'/assets/img/emoji/mic.png',
@@ -96,6 +97,10 @@ $inputs = new Material_Inputs();
   ?>
 
   <div class="row">
+    <div class="col-sm-12 mb-4">
+      <!-- Listagem de Talentos - B2B -->
+      <?php polen_banner_scrollable(polen_get_talents_by_product_cat("b2b-only", 10), "Para Empresas", $emojis['b2b'], '/categoria/b2b-only'); ?>
+    </div>
     <div class="col-sm-12 mb-4">
       <!-- Listagem de Talentos - Música -->
       <?php polen_banner_scrollable(polen_get_talents_by_product_cat("musica", 10), "Música", $emojis['musica'], '/categoria/musica'); ?>
