@@ -77,7 +77,7 @@ export default function () {
         </Col>
         <Col md={12}>
           <Form>
-            <div className="categories-list mb-5 p-4">
+            <div key={'inline-checkbox'} className="categories-list mb-5 p-4">
               <Form.Check
                 inline
                 label="Todos"
@@ -85,6 +85,7 @@ export default function () {
                 type={'checkbox'}
                 onChange={handleChange}
                 checked={categorie === '' ? true : false}
+                id={'inline-checkbox-1'}
               />
               <Form.Check
                 inline
@@ -93,6 +94,7 @@ export default function () {
                 type={'checkbox'}
                 onChange={handleChange}
                 checked={categorie === '[esporte]' ? true : false}
+                id={'inline-checkbox-2'}
               />
               <Form.Check
                 inline
@@ -101,6 +103,7 @@ export default function () {
                 type={'checkbox'}
                 onChange={handleChange}
                 checked={categorie === '[apresentadores]' ? true : false}
+                id={'inline-checkbox-3'}
               />
               <Form.Check
                 inline
@@ -109,6 +112,7 @@ export default function () {
                 type={'checkbox'}
                 onChange={handleChange}
                 checked={categorie === '[musica]' ? true : false}
+                id={'inline-checkbox-4'}
               />
               <Form.Check
                 inline
@@ -117,6 +121,7 @@ export default function () {
                 type={'checkbox'}
                 onChange={handleChange}
                 checked={categorie === '[dubladores]' ? true : false}
+                id={'inline-checkbox-5'}
               />
             </div>
           </Form>
