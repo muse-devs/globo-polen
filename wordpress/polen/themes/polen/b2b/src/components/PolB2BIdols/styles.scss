@@ -1,5 +1,12 @@
+@import "../../styles/mixins";
+
 .categories-list {
   border-bottom: 1px solid #515151;
+  display: flex;
+  overflow-x: scroll;
+  @include desktop {
+    justify-content: center;
+  }
   .form-check-input {
     border: 1px solid #515151;
     cursor: pointer;

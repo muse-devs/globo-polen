@@ -47,33 +47,25 @@ const settings = {
 
 export default function () {
   const [idols, setIdols] = React.useState(null);
-  const [categories, setCategories] = React.useState([]);
+  const [categorie, setCategorie] = React.useState('');
 
   const handleChange = (evt) => {
     let name = evt.target.name;
-    if (name === 'todos') {
-      setCategories([]);
-      return;
-    }
-    if (categories.includes(name)) {
-      setCategories(categories.filter(item => item !== name));
-    } else {
-      setCategories([...categories, name]);
-    }
+    setCategorie(name);
   };
 
   React.useEffect(() => {
-    getB2BTalents(categories).then((res) => {
+    getB2BTalents(categorie).then((res) => {
       setIdols(res.data);
     });
   }, []);
 
   React.useEffect(() => {
     setIdols(null);
-    getB2BTalents(categories).then((res) => {
+    getB2BTalents(categorie).then((res) => {
       setIdols(res.data);
     });
-  }, [categories]);
+  }, [categorie]);
 
   return (
     <section>
@@ -85,46 +77,51 @@ export default function () {
         </Col>
         <Col md={12}>
           <Form>
-            <div className="categories-list d-flex justify-content-center flex-wrap mb-5 py-4">
+            <div key={'inline-checkbox'} className="categories-list mb-5 p-4">
               <Form.Check
                 inline
                 label="Todos"
-                name="todos"
+                name=""
                 type={'checkbox'}
                 onChange={handleChange}
-                checked={categories.length === 0 ? true : false}
+                checked={categorie === '' ? true : false}
+                id={'inline-checkbox-1'}
               />
               <Form.Check
                 inline
                 label="Esporte"
-                name="esporte"
+                name="[esporte]"
                 type={'checkbox'}
                 onChange={handleChange}
-                checked={categories.includes('esporte') ? true : false}
+                checked={categorie === '[esporte]' ? true : false}
+                id={'inline-checkbox-2'}
               />
               <Form.Check
                 inline
                 label="Apresentadores"
-                name="apresentadores"
+                name="[apresentadores]"
                 type={'checkbox'}
                 onChange={handleChange}
-                checked={categories.includes('apresentadores') ? true : false}
+                checked={categorie === '[apresentadores]' ? true : false}
+                id={'inline-checkbox-3'}
               />
               <Form.Check
                 inline
                 label="Música"
-                name="musica"
+                name="[musica]"
                 type={'checkbox'}
                 onChange={handleChange}
-                checked={categories.includes('musica') ? true : false}
+                checked={categorie === '[musica]' ? true : false}
+                id={'inline-checkbox-4'}
               />
               <Form.Check
                 inline
                 label="Dubladores"
-                name="dubladores"
+                name="[dubladores]"
                 type={'checkbox'}
                 onChange={handleChange}
-                checked={categories.includes('dubladores') ? true : false}
+                checked={categorie === '[dubladores]' ? true : false}
+                id={'inline-checkbox-5'}
               />
             </div>
           </Form>
@@ -161,7 +158,7 @@ function CardIdol({ data }) {
     <section>
       <a href={data.permalink} target="_blank">
         <div
-          className="super-banner-item"
+          className="super-banner-item me-2"
         >
           <figure className="video-card">
             <img
@@ -171,7 +168,7 @@ function CardIdol({ data }) {
             />
           </figure>
           <div className="idol-name">
-            <h3 className={"mb-0 typo-lg"}><strong>{data.name}</strong></h3>
+            <h3 className={"mb-0 typo-md"}><strong>{data.name}</strong></h3>
           </div>
         </div>
       </a>

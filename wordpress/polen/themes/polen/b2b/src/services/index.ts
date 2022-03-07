@@ -26,10 +26,10 @@ export async function getNonce() {
   }
 }
 
-export async function getB2BTalents(categories: Array<String> = []) {
+export async function getB2BTalents(categorie) {
   try {
     const res = await polApi.get(
-      `/b2b/talents?categories=${categories}&limit=100`
+      `/b2b/talents?categories=${categorie}&limit=100`
     );
 
     return res.data;

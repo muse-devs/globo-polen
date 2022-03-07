@@ -1,9 +1,13 @@
 import React from "react";
 import { Row, Col, Button } from "react-bootstrap";
 import { playVideo } from "services";
-import kovi from "images/logos/kovi.png";
-import tecmundo from "images/logos/logo-tecmundo.png";
-import prestex from "images/logos/prestex.jpg";
+import kovi from "images/logos/rounded/kovi.png";
+import tecmundo from "images/logos/rounded/tecmundo.png";
+import prestex from "images/logos/rounded/prestex.png";
+import cid from "images/covers/cid.png";
+import supla from "images/covers/supla.png";
+import vampeta from "images/covers/vampeta.png";
+import falcao from "images/covers/falcao.png";
 import Slider from "react-slick";
 import { ArrowLeft, ArrowRight } from "react-feather";
 import "./styles.scss";
@@ -12,39 +16,35 @@ import "slick-carousel/slick/slick-theme.css";
 
 const videosData = [
   {
-    image:
-      "https://i.vimeocdn.com/video/1386366167-1ca2d94a134ddfe1c96de8a1eeeb2baf2a7ba0117367426e798275eeae1e78b4-d_240",
+    image: cid,
     video:
-      "https://player.vimeo.com/progressive_redirect/playback/683905373/rendition/540p?loc=external&signature=57ee9edec345249a784f17b97483e18d73c6ea91eddda79706af06db6258ae56",
+      "https://player.vimeo.com/progressive_redirect/playback/684263761/rendition/360p?loc=external&oauth2_token_id=1511981636&signature=246855c0ccbb10e626b83c414d6719e7541da5971ad093d33f1534a82b6529f8",
+    logo: prestex,
+    name: "Prestex",
+    paused: true,
+  },
+  {
+    image: supla,
+    video:
+      "https://player.vimeo.com/progressive_redirect/playback/684259555/rendition/720p?loc=external&oauth2_token_id=1511981636&signature=ffc1af403024ddd44faa35242ada977e9f90b779b812027c5b5a8778ba54d6e0",
+    logo: tecmundo,
+    name: "Tecmundo",
+    paused: true,
+  },
+  {
+    image: vampeta,
+    video:
+      "https://player.vimeo.com/progressive_redirect/playback/684261255/rendition/540p?loc=external&oauth2_token_id=1511981636&signature=791c8c070bbc178b4052c152459ead787ee2d1695a7fbb08c129d51cece4d7cb",
     logo: kovi,
     name: "Kovi",
     paused: true,
   },
   {
-    image:
-      "",
+    image: falcao,
     video:
-      "",
+      "https://player.vimeo.com/progressive_redirect/playback/683914281/rendition/540p?loc=external&oauth2_token_id=1511981636&signature=ae937716f2b2a6098ee778ac9d8ec4aababae6e755af71cb9c14e1f6887622b3",
     logo: tecmundo,
     name: "Tecmundo",
-    paused: true,
-  },
-  {
-    image:
-      "",
-    video:
-      "",
-    logo: tecmundo,
-    name: "Tecmundo",
-    paused: true,
-  },
-  {
-    image:
-      "",
-    video:
-      "",
-    logo: prestex,
-    name: "Prestex",
     paused: true,
   },
 ];
@@ -70,7 +70,7 @@ function SamplePrevArrow(props) {
 
 const settings = {
   dots: false,
-  infinite: false,
+  infinite: true,
   speed: 500,
   centerMode: false,
   variableWidth: true,
@@ -91,11 +91,9 @@ export default function () {
   const [videos, setVideos] = React.useState(videosData);
 
   const handleClick = (evt, key) => {
-    const video: HTMLVideoElement = document.querySelector(
-      `#super-banner-video-${key}`
-    );
-    if (!video.paused) {
-      video.pause();
+
+    if (!videos[key].paused) {
+      evt.target.pause();
       setVideos((current) => {
         return current.map((item, index) => ({
           ...item,
@@ -112,7 +110,7 @@ export default function () {
       }));
     });
 
-    playVideo(video);
+    playVideo(evt.target);
 
   };
 
@@ -149,11 +147,11 @@ export default function () {
                     onClick={(evt) => handleClick(evt, key)}
                   >
                     <figure className="video-card">
-                      <img src={item.image} alt={item.name} className="poster" />
+                      <img src={item.image} alt={item.name} className="poster rounded" />
                       <video
                         id={`super-banner-video-${key}`}
                         src={item.video}
-                        className={`video-player${!videos[key].paused ? " active" : ""
+                        className={`rounded video-player${!videos[key].paused ? " active" : ""
                           }`}
                         playsInline
                       ></video>
