@@ -62,6 +62,7 @@
 
 .videos-list {
   overflow: hidden;
+  height: 380px;
   @include desktop {
     height: 707px;
   }
