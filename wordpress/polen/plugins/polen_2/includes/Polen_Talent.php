@@ -943,7 +943,7 @@ class Polen_Talent {
      */
     public function get_order_ids($products_id, $filter = [])
     {
-        $data = $this->get_orders_ids_by_product_id($products_id[0], $filter['orderby'], [$filter['status']]);
+        $data = $this->get_orders_ids_by_product_id($products_id[0], $filter['orderby'], $filter['status']);
 
         if (isset($filter['deadline']) && !empty($filter['deadline'])) {
             $response = Polen_Order_V2::get_orders_by_products_id_deadline($products_id, $filter['status'], $filter['orderby']);
@@ -1006,7 +1006,7 @@ class Polen_Talent {
         // $obj['total_value']  = $order->get_total();
         $obj['total_value'] = $order->get_total_for_talent();
         // $obj['total_raw']    = $order->get_subtotal();
-        $obj['instructions'] = $order->get_instructions_to_video();
+        $obj['instructions'] = Polen_Utils::remove_sanitize_xss_br_escape($order->get_instructions_to_video(), 'edit');
         $obj['name']         = $order->get_name_to_video();
         $obj['from']         = $order->get_offered_by();
         $obj['to_myself']    = $order->get_video_to_is_to_my_self();

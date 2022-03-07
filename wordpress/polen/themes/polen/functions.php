@@ -372,6 +372,10 @@ require_once TEMPLATE_DIR . '/api/api_function.php';
  */
 require_once TEMPLATE_DIR . '/lacta/function_natal_lacta.php';
 
+/**
+ * Funções para modificar a página padrão thankyou page
+ */
+require_once TEMPLATE_DIR . '/inc/function_thankyoupage.php';
 
 add_action('wc_gateway_stripe_process_response', function($response, $order) {
 	// $response
@@ -453,3 +457,5 @@ function polen_remove_menus() {
 if( 37 == get_current_user_id() ) {
 	add_action( 'admin_menu', 'polen_remove_menus' );
 }
+
+

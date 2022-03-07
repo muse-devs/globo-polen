@@ -18,6 +18,7 @@
 
 use Polen\Includes\Cart\Polen_Cart_Item;
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
+use Polen\Includes\Polen_Utils;
 
 global $Polen_Plugin_Settings;
 $order_expires = $Polen_Plugin_Settings['order_expires'];
@@ -117,7 +118,7 @@ $total = polen_get_total_order_email_detail_to_talent( $order, $email );
 			<tr>
 				<td colspan="3">
 					<p class="details_title">Instruções</p>
-					<span id="video-instructions" class="details_value_small"><?php echo $item->get_instructions_to_video(); ?></span>
+					<span id="video-instructions" class="details_value_small"><?php echo Polen_Utils::remove_sanitize_xss_br_escape($item->get_instructions_to_video()); ?></span>
 				</td>
 			</tr>
 		</tbody>
