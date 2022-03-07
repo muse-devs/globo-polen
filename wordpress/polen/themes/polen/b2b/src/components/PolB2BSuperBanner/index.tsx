@@ -4,6 +4,10 @@ import { playVideo } from "services";
 import kovi from "images/logos/rounded/kovi.png";
 import tecmundo from "images/logos/rounded/tecmundo.png";
 import prestex from "images/logos/rounded/prestex.png";
+import cid from "images/covers/cid.png";
+import supla from "images/covers/supla.png";
+import vampeta from "images/covers/vampeta.png";
+import falcao from "images/covers/falcao.png";
 import Slider from "react-slick";
 import { ArrowLeft, ArrowRight } from "react-feather";
 import "./styles.scss";
@@ -12,8 +16,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 const videosData = [
   {
-    image:
-      "https://i.vimeocdn.com/video/1386967119-b65de17a3632bcd46c391bb3b5107962f4d412233e0ae6b6bbe805d3894850f1-d",
+    image: cid,
     video:
       "https://player.vimeo.com/progressive_redirect/playback/684263761/rendition/360p?loc=external&oauth2_token_id=1511981636&signature=246855c0ccbb10e626b83c414d6719e7541da5971ad093d33f1534a82b6529f8",
     logo: prestex,
@@ -21,8 +24,7 @@ const videosData = [
     paused: true,
   },
   {
-    image:
-      "https://i.vimeocdn.com/video/1386960511-912c42c5a88f23f3cb394f814835f87697a2a71b2c2ce82be23f9b69f8c2a2f9-d",
+    image: supla,
     video:
       "https://player.vimeo.com/progressive_redirect/playback/684259555/rendition/720p?loc=external&oauth2_token_id=1511981636&signature=ffc1af403024ddd44faa35242ada977e9f90b779b812027c5b5a8778ba54d6e0",
     logo: tecmundo,
@@ -30,8 +32,7 @@ const videosData = [
     paused: true,
   },
   {
-    image:
-      "https://i.vimeocdn.com/video/1386963189-e8ea64538d64c6f028d412088490a863dee3b0172aae2680738c1ab6c6e9c0c6-d",
+    image: vampeta,
     video:
       "https://player.vimeo.com/progressive_redirect/playback/684261255/rendition/540p?loc=external&oauth2_token_id=1511981636&signature=791c8c070bbc178b4052c152459ead787ee2d1695a7fbb08c129d51cece4d7cb",
     logo: kovi,
@@ -39,8 +40,7 @@ const videosData = [
     paused: true,
   },
   {
-    image:
-      "https://i.vimeocdn.com/video/1386381073-2c2afce77fc053b7b1b39ee96ad17fce7f9f60f1e9d0595845b7b47cde644f82-d",
+    image: falcao,
     video:
       "https://player.vimeo.com/progressive_redirect/playback/683914281/rendition/540p?loc=external&oauth2_token_id=1511981636&signature=ae937716f2b2a6098ee778ac9d8ec4aababae6e755af71cb9c14e1f6887622b3",
     logo: tecmundo,
@@ -70,7 +70,7 @@ function SamplePrevArrow(props) {
 
 const settings = {
   dots: false,
-  infinite: false,
+  infinite: true,
   speed: 500,
   centerMode: false,
   variableWidth: true,
@@ -91,11 +91,9 @@ export default function () {
   const [videos, setVideos] = React.useState(videosData);
 
   const handleClick = (evt, key) => {
-    const video: HTMLVideoElement = document.querySelector(
-      `#super-banner-video-${key}`
-    );
-    if (!video.paused) {
-      video.pause();
+
+    if (!videos[key].paused) {
+      evt.target.pause();
       setVideos((current) => {
         return current.map((item, index) => ({
           ...item,
@@ -112,7 +110,7 @@ export default function () {
       }));
     });
 
-    playVideo(video);
+    playVideo(evt.target);
 
   };
 
@@ -156,7 +154,6 @@ export default function () {
                         className={`rounded video-player${!videos[key].paused ? " active" : ""
                           }`}
                         playsInline
-                        //controls
                       ></video>
                     </figure>
                     {videos[key].paused ? (
