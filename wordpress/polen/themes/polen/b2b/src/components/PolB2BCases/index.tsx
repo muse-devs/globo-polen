@@ -116,7 +116,7 @@ export default function () {
     <section className="cases-b2b mb-5">
       <Row className="g-0 p-3 px-md-5">
         <Col md={12} className="m-md-auto">
-          <h2 className="typo-xxl text-center mb-5">Histórias de Sucesso</h2>
+          <h2 className="typo-xl text-center mb-5">Histórias de Sucesso</h2>
         </Col>
         <Col md={12}>
           <Slider {...settings}>
