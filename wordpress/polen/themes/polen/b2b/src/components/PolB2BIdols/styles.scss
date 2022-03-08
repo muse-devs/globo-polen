@@ -4,6 +4,9 @@
   border-bottom: 1px solid #515151;
   display: flex;
   overflow-x: scroll;
+  .form-check-label {
+    cursor: pointer;
+  }
   @include desktop {
     overflow-x: hidden;
     justify-content: center;
