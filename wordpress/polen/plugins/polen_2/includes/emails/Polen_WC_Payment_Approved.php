@@ -111,8 +111,10 @@ class Polen_WC_Payment_Approved extends \WC_Email {
 				$total = $this->object->get_total();
 				$to_name = $order_module->get_name_to_video();
 				$deadline = $order_module->get_deadline();
-				$deadline_date = \WC_DateTime::createFromFormat( 'U', $deadline );
+				$deadline_date = \WC_DateTime::createFromFormat('U', $deadline);
 				$deadline = $deadline_date->format('d/m/Y');
+				$instructions = Polen_Utils::remove_sanitize_xss_br_escape($item->get_instructions_to_video());
+				
 				$this->send_email(
 					$customer_name,
 					$this->get_recipient(),
@@ -121,7 +123,7 @@ class Polen_WC_Payment_Approved extends \WC_Email {
 					$deadline,
 					$to_name,
 					$item->get_video_category(),
-					Polen_Utils::remove_sanitize_xss_br_escape($item->get_instructions_to_video(), 'edit')
+					$instructions
 				);
 			}
 
