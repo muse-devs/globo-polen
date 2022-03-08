@@ -10,8 +10,8 @@ class Polen_Utils
      */
     public static function sanitize_xss_br_escape( $txt )
     {
-        $string_escaped = htmlspecialchars( $txt );
-        return nl2br( $string_escaped );
+        $string_escaped = htmlspecialchars($txt);
+        return nl2br($string_escaped);
     }
 
 
@@ -29,7 +29,7 @@ class Polen_Utils
         $string_escaped = stripslashes($txt);
         $string_escaped = htmlspecialchars_decode($string_escaped);
         if('edit' === $context) {
-            $string_escaped = str_replace(array("<br />", "<br/>", "<br>"), "\n", $string_escaped);
+            $string_escaped = str_replace(array("<br />", "<br/>", "<br>"), PHP_EOL, $string_escaped);
         }
         return $string_escaped;
     }
