@@ -158,7 +158,7 @@ export default function () {
                     </figure>
                     {videos[key].paused ? (
                       <figure className="logo">
-                        <img src={item.logo} alt={item.name} className="image" />
+                        <img src={item.logo} alt={item.name} className="image" width={70} height={70} />
                         <figcaption className="name">{item.name}</figcaption>
                       </figure>
                     ) : null}

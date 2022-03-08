@@ -10,7 +10,7 @@ const PolB2bHeader = () => {
       <Col xs={6} className="d-flex align-items-center">
         <a href="http://polen.me/">
           <ChevronLeft />
-          <img src={logo} alt="Logo B2B" className="logo-b2b" width={114} />
+          <img src={logo} alt="Logo B2B" className="logo-b2b" width={114} height={'auto'} />
         </a>
       </Col>
       <Col xs={6} className="d-flex align-items-center justify-content-end">
