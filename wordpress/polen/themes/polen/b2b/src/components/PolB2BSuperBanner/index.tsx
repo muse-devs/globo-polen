@@ -129,7 +129,7 @@ export default function () {
           <Row>
             <Col lg={8} className="m-auto m-md-0">
               <div className="d-grid gap-2 mt-4">
-                <Button href="#faleconosco" size="lg">
+                <Button href="#faleconosco" size="lg" className={"cta-button"}>
                   Fale com a equipe de vendas
                 </Button>
               </div>

@@ -68,7 +68,7 @@ export default function () {
     >
       <Row className="px-3 px-md-5 g-0">
         <Col md={8} lg={6} className="m-md-auto">
-          <h2 className="typo-xxl text-center">Fale Conosco</h2>
+          <h2 className="typo-xl text-center">Fale Conosco</h2>
           <p className="typo-xs text-left text-md-center">
             Nosso time está ansioso para falar com você!
           </p>

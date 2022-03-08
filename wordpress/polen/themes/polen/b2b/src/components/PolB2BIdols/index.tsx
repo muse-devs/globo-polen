@@ -71,7 +71,7 @@ export default function () {
     <section>
       <Row className="py-3 g-0 my-5">
         <Col md={12}>
-          <h2 className="typo-xxl text-center mb-4">
+          <h2 className="typo-xl text-center mb-4">
             Ídolos da Polen
           </h2>
         </Col>

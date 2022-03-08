@@ -30,8 +30,8 @@ const IndexPage = () => {
             <PolB2BHowItWork />
             {/* <PolB2BCases />
             <PolB2BPartners /> */}
-            <PolB2BFaq />
             <PolB2BForm />
+            <PolB2BFaq />
             <PolB2BFooter />
           </Container>
           <PolMessage />
