@@ -180,7 +180,7 @@ function CardLoading() {
   return (
     <section>
       <div
-        className="super-banner-item"
+        className="super-banner-item me-2"
       >
         <div className="loading-item">
           <Spinner animation="border" variant="primary" />
