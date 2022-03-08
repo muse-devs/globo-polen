@@ -332,19 +332,8 @@ class Polen_Order
             'order_item_type' => 'line_item', // product
         ));
         
-        $talent_name = $product->get_title();
-        $instruction = "
-        Bem-vindo <nome>, nós da Polen estamos MUITO felizes em ter você na plataforma!<br />
-            Pronto para conhecer nosso sistema e ver como é divertido gravar Vídeos-Polen personalizados?<br />
-            O seu primeiro Vídeo-Polen é um vídeo de apresentação bem simples!<br />
-            Nesse vídeo-polen lembre-se de dizer:<br />
-            - seu nome<br />
-            - que agora faz parte da Polen<br />
-            - que esta pronto para gravar Vídeos-Polen para todos os fãs<br />
-            Para continuar basta aceitar no botão verde! E aí <nome>, pronto para se conectar com seus fãs!?
-        ";
-        $final_instruction = str_replace( '<nome>', $product->get_title(), $instruction );
-        $final_instruction = Polen_Utils::sanitize_xss_br_escape($final_instruction);
+        $instruction = "Grave um vídeo contando para seus fãs que agora você faz parte da Polen!";
+        $final_instruction = Polen_Utils::sanitize_xss_br_escape($instruction);
         
         wc_add_order_item_meta( $order_item_id, '_qty', 1, true );
         wc_add_order_item_meta( $order_item_id, '_product_id', $product->get_id(), true );
