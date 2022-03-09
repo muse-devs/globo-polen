@@ -4,12 +4,16 @@
   border: 1px solid #515151;
   border-radius: 16px;
   padding: 32px;
+  .no-border-bottom {
+    button {
+      border-bottom: none!important;
+    }
+   }
   .accordion-header {
     position: relative;
+    padding-right: 10%;
     @include desktop {
-      strong {
-        font-size: 24px;
-      }
+      padding-right: 0%;
     }
     &:after {
       content: "+";
@@ -22,20 +26,20 @@
       font-weight: 100;
       color: var(--bs-high-pure);
     }
-    border-bottom: 1px solid #515151;
     .accordion-button {
       background: none;
       border: none;
       text-align: left;
-      padding-right: 10%;
       color: var(--bs-high-pure);
+      border-bottom: 1px solid #515151;
+      width: 100%;
+      padding: 20px 0px;
+    }
+    .accordion-button[aria-expanded="true"] {
+      border-bottom: none;
     }
   }
   .accordion-body {
-    padding: 10px;
     color: var(--bs-low-light);
-    @include desktop {
-      font-size: 20px;
-    }
   }
 }

@@ -9,7 +9,7 @@ export default function () {
       <Row className="p-3 px-md-5 mt-5 g-0">
         <Col md={4}>
           <p>
-            <img src={logo} alt="Logo Polen B2B" width={182} className="mb-sm-3" />
+            <img src={logo} alt="Logo Polen B2B" width={182} height={44} className="mb-sm-3" />
           </p>
           <p>
             <Button variant="outline-light" size="lg" href="http://polen.me/">

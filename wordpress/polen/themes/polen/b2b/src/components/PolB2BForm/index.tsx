@@ -21,10 +21,22 @@ export default function () {
 
   const [preload, setPreload] = React.useState(false);
 
+  const polMaskPhone = (v) => {
+    if (v) {
+      v = v.replace(/\D/g, ""); //Remove tudo o que não é dígito
+      v = v.replace(/^(\d{2})(\d)/g, "($1) $2"); //Coloca parênteses em volta dos dois primeiros dígitos
+      v = v.replace(/(\d)(\d{4})$/, "$1-$2"); //Coloca hífen entre o quarto e o quinto dígitos
+    }
+    return v;
+  };
+
   const handleChange = (evt) => {
+    const target = evt.target;
+    const name = target.name;
+    const value = target.type === "tel" ? polMaskPhone(target.value) : target.value;
     setFormData((current) => ({
       ...current,
-      [evt.target.name]: evt.target.value,
+      [name]: value,
     }));
   };
 
@@ -56,7 +68,7 @@ export default function () {
     >
       <Row className="px-3 px-md-5 g-0">
         <Col md={8} lg={6} className="m-md-auto">
-          <h2 className="typo-xxl text-center">Fale Conosco</h2>
+          <h2 className="typo-xl text-center">Fale Conosco</h2>
           <p className="typo-xs text-left text-md-center">
             Nosso time está ansioso para falar com você!
           </p>
