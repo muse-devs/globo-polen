@@ -56,7 +56,7 @@ class Api_Contact
 
     public function create_nonce( WP_REST_Request $request )
     {
-        $ip     = $_SERVER[ 'REMOTE_ADDR' ];
+        $ip     = $_SERVER[ 'HTTP_X_FORWARDED_FOR' ];
         $client = $_SERVER[ 'HTTP_USER_AGENT' ];
         return api_response( Api_Util_Security::create_nonce($ip . $client), 200 );
     }
@@ -67,7 +67,7 @@ class Api_Contact
     public function handler_email_help( WP_REST_Request $request )
     {
         try {
-            $ip     = $_SERVER[ 'REMOTE_ADDR' ];
+            $ip     = $_SERVER[ 'HTTP_X_FORWARDED_FOR' ];
             $client = $_SERVER[ 'HTTP_USER_AGENT' ];
             $nonce  = $request->get_param( 'security' );
             if( !Api_Util_Security::verify_nonce($ip . $client, $nonce) ) {
