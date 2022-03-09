@@ -41,6 +41,6 @@ class Api_Util_Security
      */
     protected static function make_hash($nonce_action)
     {
-        return substr(hash_hmac('md5',$nonce_action, 'ahgfajhrgj34hgjh34g5jh3g'), -12, 10);
+        return substr(hash_hmac('md5',$nonce_action, NONCE_SALT), -12, 10);
     }
 }
