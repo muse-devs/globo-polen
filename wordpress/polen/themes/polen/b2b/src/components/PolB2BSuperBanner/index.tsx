@@ -4,10 +4,6 @@ import { playVideo } from "services";
 import kovi from "images/logos/rounded/kovi.png";
 import tecmundo from "images/logos/rounded/tecmundo.png";
 import prestex from "images/logos/rounded/prestex.png";
-import cid from "images/covers/cid.webp";
-import supla from "images/covers/supla.webp";
-import vampeta from "images/covers/vampeta.webp";
-import falcao from "images/covers/falcao.webp";
 import Slider from "react-slick";
 import { ArrowLeft, ArrowRight } from "react-feather";
 import "./styles.scss";
@@ -16,7 +12,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 const videosData = [
   {
-    image: cid,
+    image: `${process.env.ASSETS_URI}/covers/cid.webp`,
     video:
       "https://player.vimeo.com/progressive_redirect/playback/684263761/rendition/360p?loc=external&oauth2_token_id=1511981636&signature=246855c0ccbb10e626b83c414d6719e7541da5971ad093d33f1534a82b6529f8",
     logo: prestex,
@@ -24,7 +20,7 @@ const videosData = [
     paused: true,
   },
   {
-    image: supla,
+    image: `${process.env.ASSETS_URI}/covers/supla.webp`,
     video:
       "https://player.vimeo.com/progressive_redirect/playback/684259555/rendition/720p?loc=external&oauth2_token_id=1511981636&signature=ffc1af403024ddd44faa35242ada977e9f90b779b812027c5b5a8778ba54d6e0",
     logo: tecmundo,
@@ -32,7 +28,7 @@ const videosData = [
     paused: true,
   },
   {
-    image: vampeta,
+    image: `${process.env.ASSETS_URI}/covers/vampeta.webp`,
     video:
       "https://player.vimeo.com/progressive_redirect/playback/684261255/rendition/540p?loc=external&oauth2_token_id=1511981636&signature=791c8c070bbc178b4052c152459ead787ee2d1695a7fbb08c129d51cece4d7cb",
     logo: kovi,
@@ -40,7 +36,7 @@ const videosData = [
     paused: true,
   },
   {
-    image: falcao,
+    image: `${process.env.ASSETS_URI}/covers/falcao.webp`,
     video:
       "https://player.vimeo.com/progressive_redirect/playback/683914281/rendition/540p?loc=external&oauth2_token_id=1511981636&signature=ae937716f2b2a6098ee778ac9d8ec4aababae6e755af71cb9c14e1f6887622b3",
     logo: tecmundo,
