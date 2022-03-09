@@ -5,6 +5,7 @@ use Exception;
 use Polen\Admin\Polen_Forms;
 use Polen\Includes\Polen_Form_DB;
 use Polen\Includes\Polen_Zapier;
+use Polen\Includes\RemoteAddress;
 use Polen\Includes\Sendgrid\Polen_Sendgrid_Emails;
 use Polen\Includes\Sendgrid\Polen_Sendgrid_Redux;
 use WP_REST_Request;
@@ -56,7 +57,8 @@ class Api_Contact
 
     public function create_nonce( WP_REST_Request $request )
     {
-        $ip     = $_SERVER[ 'HTTP_X_FORWARDED_FOR' ];
+        $ra = new RemoteAddress();
+        $ip     = $ra->getIpAddress();
         $client = $_SERVER[ 'HTTP_USER_AGENT' ];
         return api_response( Api_Util_Security::create_nonce($ip . $client), 200 );
     }
