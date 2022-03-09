@@ -72,7 +72,7 @@ export default function () {
                     </linearGradient>
                   </defs>
                 </svg>
-                <h4 className="typo-md mt-4">Emocione e motive sua equipe</h4>
+                <p className="typo-md mt-4">Emocione e motive sua equipe</p>
                 <p className="typo-xs mb-5">Use os vídeos da Polen para promover cargos, celebrar uma data especial, ou parabenizar sua equipe por resultados. Mantenha seus funcionários engajados criando momentos marcantes.</p>
               </div>
             </Col>
@@ -129,7 +129,7 @@ export default function () {
                     </linearGradient>
                   </defs>
                 </svg>
-                <h4 className="typo-md mt-4">Surpreenda seus clientes</h4>
+                <p className="typo-md mt-4">Surpreenda seus clientes</p>
                 <p className="typo-xs mb-4">Encontre a celebridade certa para ser porta-voz de sua marca, engajando seu público com um conteúdo personalizado para as suas redes sociais. </p>
               </div>
             </Col>
@@ -235,7 +235,7 @@ export default function () {
                     </linearGradient>
                   </defs>
                 </svg>
-                <h4 className="typo-md mt-4">Crie momentos memoráveis</h4>
+                <p className="typo-md mt-4">Crie momentos memoráveis</p>
                 <p className="typo-xs mb-4">Mande uma mensagem especial para sua audiência durante seus eventos, seja para agradecer, emocionar ou criar uma dinâmica criativa.</p>
               </div>
             </Col>

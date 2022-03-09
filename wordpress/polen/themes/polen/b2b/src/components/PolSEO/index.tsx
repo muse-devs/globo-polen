@@ -16,7 +16,11 @@ const PolSEO: React.FC<SEO> = ({
 }) => {
   return (
     <>
-      <Helmet>
+      <Helmet
+      htmlAttributes={{
+        lang: 'pt-BR',
+      }}
+      >
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-title" content={site_name} />
