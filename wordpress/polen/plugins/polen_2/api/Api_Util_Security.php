@@ -44,7 +44,7 @@ class Api_Util_Security
      */
     protected static function make_hash($nonce_action)
     {
-        Debug::def(md5($nonce_action));
+        Debug::def(md5($nonce_action),$nonce_action);
         return substr(md5($nonce_action), 0, 12);
     }
 }
