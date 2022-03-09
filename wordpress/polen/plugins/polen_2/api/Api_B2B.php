@@ -107,7 +107,7 @@ class Api_B2B
     {
         global $Polen_Plugin_Settings;
 
-        $ip     = $_SERVER[ 'REMOTE_ADDR' ];
+        $ip     = '756937659387659823645827546';
         $client = $_SERVER[ 'HTTP_USER_AGENT' ];
         $nonce  = $request->get_param( 'security' );
 
