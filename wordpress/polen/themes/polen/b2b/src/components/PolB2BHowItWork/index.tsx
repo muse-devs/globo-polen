@@ -10,7 +10,7 @@ export default function () {
             Como funciona
           </h2>
         </Col>
-        <Col md={12} className='mt-5'>
+        <Col md={12} className='mt-5 how-work'>
           <Row>
             <Col md={4} className="mb-4">
               <svg width="79" height="61" viewBox="0 0 79 61" fill="none" xmlns="http://www.w3.org/2000/svg">
