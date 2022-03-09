@@ -18,7 +18,7 @@ const polApi = axios.create({
 
 export async function getNonce() {
   try {
-    const res = await polApi.get(`/b2b/contact`);
+    const res = await polApi.get(`/contact`);
 
     return res.data;
   } catch (err) {
