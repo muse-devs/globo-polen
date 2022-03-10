@@ -116,11 +116,11 @@ export default function () {
               />
               <Form.Check
                 inline
-                label="Dubladores"
-                name="[dubladores]"
+                label="Atrizes e Atores"
+                name="[atrizes-e-atores]"
                 type={'checkbox'}
                 onChange={handleChange}
-                checked={categorie === '[dubladores]' ? true : false}
+                checked={categorie === '[atrizes-e-atores]' ? true : false}
                 id={'inline-checkbox-5'}
               />
             </div>
