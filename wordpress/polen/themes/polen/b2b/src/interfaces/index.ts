@@ -15,7 +15,7 @@ export interface ContactB2B {
   name: string;
   email: string;
   phone: string;
-  slug_product: string;
+  product_name: string;
   company: string;
   security: string;
 }

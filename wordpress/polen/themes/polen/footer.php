@@ -60,7 +60,7 @@
                 <ul class="footer-menu">
                   <li><a href="/empresas">Polen para empresas</a></li>
                   <li><a href="https://www.instagram.com/polenparaempresas/" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("instagram"); ?>Instagram</a></li>
-                  <li><a href="/empresas#bus-form-wrapper">Fale conosco</a></li>
+                  <li><a href="/empresas#faleconosco">Fale conosco</a></li>
                 </ul>
               </div>
             </div>
@@ -172,7 +172,7 @@
                     <ul class="footer-menu">
                       <li><a href="/empresas">Polen para empresas</a></li>
                       <li><a href="https://www.instagram.com/polenparaempresas/" target="_blank" rel="noreferrer"><?php Icon_Class::polen_icon_social("instagram"); ?>Instagram</a></li>
-                      <li><a href="/empresas#bus-form-wrapper">Fale conosco</a></li>
+                      <li><a href="/empresas#faleconosco">Fale conosco</a></li>
                     </ul>
                   </div>
                 </div>
