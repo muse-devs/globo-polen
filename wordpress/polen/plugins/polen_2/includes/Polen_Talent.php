@@ -18,6 +18,7 @@ use WP_User;
 class Polen_Talent {
 
     const ROLE_SLUG = 'user_talent';
+    const FLAG_FIRST_ORDER_DONE = 'first_order_done';
     public $tallent_slug;
     
     public function __construct($static = false) {
@@ -151,6 +152,7 @@ class Polen_Talent {
                 update_user_meta( $user_id, 'talent_enabled', '0' );
                 $sku = ( isset( $vendor_data->talent_alias ) && ! is_null( $vendor_data->talent_alias ) && ! empty( $vendor_data->talent_alias ) ) ? $vendor_data->talent_alias : $user_data->user_nicename;
                 // verify if the talent has a product
+                Polen_Talent::set_first_order_status_by_talent_id($user_id, false);
                 $user_product = new \WP_Query( array( 'author' => $user_id ) );
                 if( ! $user_product->have_posts() ) {
                     $polen_update_field = new Polen_Update_Fields();
@@ -960,14 +962,14 @@ class Polen_Talent {
      * @param int $talent_id
      * @return array
      */
-    public function get_talent_orders_v2(int $talent_id): array
-    {
-        $product_id = $this->get_product_id_by_talent_id($talent_id);
-        $orders_ids = $this->get_orders_ids_by_product_id($product_id, ['wc-payment-approved', 'wc-talent-accepted']);
+    // public function get_talent_orders_v2(int $talent_id): array
+    // {
+    //     $product_id = $this->get_product_id_by_talent_id($talent_id);
+    //     $orders_ids = $this->get_orders_ids_by_product_id($product_id, ['wc-payment-approved', 'wc-talent-accepted']);
 
-        return $this->get_orders_info($orders_ids);
+    //     return $this->get_orders_info($orders_ids);
 
-    }
+    // }
 
 
 
@@ -1109,6 +1111,33 @@ class Polen_Talent {
                 }catch( Exception $e ){}
             }
         }
+    }
+
+    /**
+     * 
+     */
+    public static function set_first_order_status_by_talent_id($user_id, $done = false) {
+        return update_user_meta($user_id, self::FLAG_FIRST_ORDER_DONE, $done ? '1' : '0');
+    }
+
+
+    /**
+     * 
+     */
+    public static function get_first_order_status_by_talent_id($user_id) {
+        return get_user_meta($user_id, self::FLAG_FIRST_ORDER_DONE, true);
+    }
+
+
+    /**
+     * 
+     */
+    public static function get_first_order_id_by_talent_id($user_id) {
+        $product = self::get_product_by_user_id($user_id);
+        if(empty($product) || is_wp_error($product)) {
+            return false;
+        }
+        return Polen_Order::get_first_order_by_product_id($product->get_id());
     }
 
 }

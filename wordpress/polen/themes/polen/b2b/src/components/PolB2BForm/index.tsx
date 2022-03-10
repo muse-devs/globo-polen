@@ -16,7 +16,7 @@ export default function () {
     name: "",
     phone: "",
     security: "",
-    slug_product: getURLParam("talent"),
+    product_name: getURLParam("talent"),
   });
 
   const [preload, setPreload] = React.useState(false);

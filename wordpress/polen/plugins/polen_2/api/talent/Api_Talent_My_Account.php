@@ -1,7 +1,11 @@
 <?php
 namespace Polen\Api\Talent;
 
+use Polen\Api\Api_Util_Security;
+use Polen\Includes\API\Polen_Api_User;
 use Polen\Includes\Module\Polen_User_Module;
+use Polen\Includes\Polen_Talent;
+use WP_Query;
 use WP_REST_Controller;
 use WP_REST_Request;
 use WP_REST_Server;
@@ -23,6 +27,9 @@ class Api_Talent_My_Account extends WP_REST_Controller
      */
     public function register_routes()
     {
+        #
+        #
+        #
         register_rest_route($this->namespace, $this->rest_base . '/myaccount', [
             [
                 'methods' => WP_REST_Server::READABLE,
@@ -32,6 +39,21 @@ class Api_Talent_My_Account extends WP_REST_Controller
             ]
         ] );
 
+        /**
+         * 
+         */
+        register_rest_route($this->namespace, $this->rest_base . '/me', [
+            [
+                'methods' => WP_REST_Server::READABLE,
+                'callback' => [$this, 'my_account_inicial'],
+                'permission_callback' => [ Api_Talent_Check_Permission::class, 'check_permission' ],
+                'args' => []
+            ]
+        ] );
+
+        /**
+         * 
+         */
         register_rest_route($this->namespace, $this->rest_base . '/password', [
             [
                 'methods' => WP_REST_Server::EDITABLE,
@@ -41,6 +63,9 @@ class Api_Talent_My_Account extends WP_REST_Controller
             ]
         ] );
 
+        #
+        #
+        #
         register_rest_route($this->namespace, $this->rest_base . '/user', [
             [
                 'methods' => WP_REST_Server::EDITABLE,
@@ -49,6 +74,8 @@ class Api_Talent_My_Account extends WP_REST_Controller
                 'args' => []
             ]
         ] );
+
+        
     }
 
     /**
@@ -115,5 +142,48 @@ class Api_Talent_My_Account extends WP_REST_Controller
         } catch (\Exception $e) {
             return api_response($e->getMessage(), $e->getCode());
         }
+    }
+
+
+    /**
+     * Recuperar dados de um talento
+     *
+     * @param \WP_REST_Request $request
+     * @return \WP_REST_Response
+     */
+    public function my_account_inicial(\WP_REST_Request $request): \WP_REST_Response
+    {
+        $user = wp_get_current_user();
+
+        if(empty($user)) {
+            return api_response(['message' => 'Não existe nenhum usuario com esse email'], 403);
+        }
+
+        $query = new WP_Query(array('post_type' => 'product', 'author' =>  $user->data->ID));
+        $products_id = Api_Talent_Utils::get_globals_product_id();
+
+        $image = '';
+        if (isset($products_id) && !empty($products_id)) {
+            $att = wp_get_attachment_image_src(get_post_thumbnail_id($products_id[0]), 'polen-square-crop-xl');
+            $image = $att[0];
+        }
+        $product = wc_get_product($products_id[0]);
+
+        $response = [
+            'ID'               => $user->data->ID,
+            'name'             => get_user_meta($user->data->ID,'first_name', true) . ' ' . get_user_meta($user->data->ID,'last_name', true),
+            'thumbnail'        => $image,
+            'first_name'       => get_user_meta($user->data->ID,'first_name', true),
+            'last_name'        => get_user_meta($user->data->ID,'last_name', true),
+            'phone'            => get_user_meta($user->data->ID,'billing_phone', true),
+            'email'            => $user->data->user_email,
+            'display_name'     => $user->data->display_name,
+            'date_registered'  => $user->data->user_registered,
+            'first_order_done' => Polen_Talent::get_first_order_status_by_talent_id($user->data->ID)?true:false,
+            'first_order_id'   => Polen_Talent::get_first_order_id_by_talent_id($user->data->ID),
+            'sku'              => $product->get_sku(),
+        ];
+
+        return api_response($response, 200);
     }
 }

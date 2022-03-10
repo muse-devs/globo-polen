@@ -363,6 +363,28 @@ class Polen_Order
     }
 
 
+    public static function get_first_order_by_product_id($product_id)
+    {
+        global $wpdb;
+        $sql = "SELECT
+            p.ID AS order_id
+        FROM
+            wp_posts AS p
+        INNER JOIN wp_woocommerce_order_items AS oi ON (oi.order_id=p.ID AND oi.order_item_type='line_item')
+        INNER JOIN wp_woocommerce_order_itemmeta AS oim ON (oim.order_item_id=oi.order_item_id AND oim.meta_key='first_order')
+        INNER JOIN wp_woocommerce_order_itemmeta AS oim_prod_id ON (oim_prod_id.order_item_id=oi.order_item_id AND oim_prod_id.meta_key='_product_id' AND oim_prod_id.meta_value=%d)
+        WHERE
+            p.post_type IN ('shop_order')
+        AND p.post_status IN ('wc-completed','wc-payment-approved','wc-talent-rejected','wc-talent-accepted')";
+        $result = $wpdb->get_results($wpdb->prepare($sql, $product_id));
+        if(empty($result)) {
+            return null;
+        }
+        $last_data = array_pop($result);
+        return $last_data->order_id;
+    }
+
+
     /**
      * Salvar na Order o numero de whatsapp para
      * recebimento do video final

@@ -3,6 +3,7 @@ namespace Polen\Api\Talent;
 
 use Exception;
 use Polen\Api\Api_Util_Security;
+use Polen\Includes\Module\Polen_Order_Module;
 use Polen\Includes\Polen_Order;
 use Polen\Includes\Polen_Talent;
 use Polen\Includes\Talent\Polen_Talent_Controller;
@@ -105,18 +106,11 @@ class Api_Talent_Order extends WP_REST_Controller
     public function accept_reject_order( WP_REST_Request $request )
     {
         $order_id           = $request['id'];
-        $security           = $request->get_param('security');
         $option             = $request->get_param('option');
         $reason_reject      = $request->get_param('reason_reject') ?? '';
         $description_reject = $request->get_param('description_reject') ?? '';
-        $user_id            = get_current_user_id();
-        $ip                 = $_SERVER['REMOTE_ADDR'];
-        $client             = $_SERVER['HTTP_USER_AGENT'];
 
         try {
-            if(!isset($security) || !Api_Util_Security::verify_nonce($ip . $client . $user_id, $security)) {
-                throw new Exception('Problema na seguraça tente novamente', 403);
-            }
 
             $talent_controller = new Polen_Talent_Controller();
             $result = $talent_controller->talent_accept_or_reject_api(
@@ -148,18 +142,18 @@ class Api_Talent_Order extends WP_REST_Controller
      */
     public function create_vimeo_slot(WP_REST_Request $request)
     {
-        $security       = $request->get_param('security');
+        // $security       = $request->get_param('security');
         $order_id       = $request->get_param('order_id');
         $file_size      = $request->get_param('file_size');
         $name_to_video  = $request->get_param('name_to_video');
-        $user_id        = get_current_user_id();
-        $ip             = $_SERVER['REMOTE_ADDR'];
-        $client         = $_SERVER['HTTP_USER_AGENT'];
+        // $user_id        = get_current_user_id();
+        // $ip             = '756937659387659823645827546';
+        // $client         = $_SERVER['HTTP_USER_AGENT'];
 
         try {
-            if(!isset($security) || !Api_Util_Security::verify_nonce($ip . $client . $user_id, $security)) {
-                throw new Exception('Problema na seguraça tente novamente', 403);
-            }
+            // if(!isset($security) || !Api_Util_Security::verify_nonce($ip . $client . $user_id, $security)) {
+            //     throw new Exception('Problema na seguraça tente novamente', 403);
+            // }
             if(empty($order_id) || empty($file_size) || empty($name_to_video)) {
                 throw new Exception('Formato de request inválido', 403);
             }
@@ -187,9 +181,25 @@ class Api_Talent_Order extends WP_REST_Controller
                 throw new Exception('Erro na relação Idolo/Pedido');
             }
             $polen_talent_controller->send_video_vimeo_complete($vimeo_id, $order_id);
+            $this->set_first_order_complete($order_id, $talent_id);
             return api_response('Completo com sucesso', 200);
         } catch(Exception $e) {
             return api_response($e->getMessage(), $e->getCode());
+        }
+    }
+
+    /**
+     * Se for uma FirstOrder seta o usuário com a flag de concluido
+     * @param int
+     * @param int
+     */
+    protected function set_first_order_complete(int $order_id, int $talent_id)
+    {
+        //Seta se for FirstOrder como Complete no usuário
+        $order = wc_get_order($order_id);
+        $polen_order = new Polen_Order_Module($order);
+        if($polen_order->get_is_first_order()) {
+            Polen_Talent::set_first_order_status_by_talent_id($talent_id, true);
         }
     }
 
