@@ -1,6 +1,9 @@
 <?php
 namespace Polen\Api;
 
+use Polen\Includes\Debug;
+use WC_Logger;
+
 /**
  * Classe auxiliar para geração de hash de nonce
  */
@@ -41,6 +44,6 @@ class Api_Util_Security
      */
     protected static function make_hash($nonce_action)
     {
-        return substr(wp_hash($nonce_action, 'nonce'), -12, 10);
+        return substr(md5($nonce_action), 0, 12);
     }
 }

@@ -5,6 +5,7 @@ use Exception;
 use Polen\Admin\Polen_Forms;
 use Polen\Includes\Polen_Form_DB;
 use Polen\Includes\Polen_Zapier;
+use Polen\Includes\RemoteAddress;
 use Polen\Includes\Sendgrid\Polen_Sendgrid_Emails;
 use Polen\Includes\Sendgrid\Polen_Sendgrid_Redux;
 use WP_REST_Request;
@@ -56,7 +57,7 @@ class Api_Contact
 
     public function create_nonce( WP_REST_Request $request )
     {
-        $ip     = $_SERVER[ 'REMOTE_ADDR' ];
+        $ip     = '756937659387659823645827546';
         $client = $_SERVER[ 'HTTP_USER_AGENT' ];
         return api_response( Api_Util_Security::create_nonce($ip . $client), 200 );
     }
@@ -67,7 +68,7 @@ class Api_Contact
     public function handler_email_help( WP_REST_Request $request )
     {
         try {
-            $ip     = $_SERVER[ 'REMOTE_ADDR' ];
+            $ip     = '756937659387659823645827546';
             $client = $_SERVER[ 'HTTP_USER_AGENT' ];
             $nonce  = $request->get_param( 'security' );
             if( !Api_Util_Security::verify_nonce($ip . $client, $nonce) ) {
