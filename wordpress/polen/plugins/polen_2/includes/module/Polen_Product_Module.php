@@ -252,7 +252,7 @@ class Polen_Product_Module
     public function template_button_buy_b2b($inputs)
     {
         ob_start();
-        $inputs->material_button_link("btn-b2b", "Pedir vídeo", enterprise_url_home() . '?talent='.$this->get_title().'#bus-form-wrapper', false, "", array(), $this->get_is_charity() ? "donate" : "");
+        $inputs->material_button_link("btn-b2b", "Pedir vídeo", enterprise_url_home() . '?talent='.$this->get_title().'#faleconosco', false, "", array(), $this->get_is_charity() ? "donate" : "");
         $result_html = ob_get_contents();
         ob_end_clean();
         return $result_html;

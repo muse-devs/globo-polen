@@ -78,9 +78,16 @@
 }
 
 .title-b2b {
+  @include desktop {
+    font-size: 48px;
+  }
   .title-b2b-highlight {
     padding: 15px;
     font-style: normal;
     background: no-repeat center/contain url("images/b2b-elipse.png");
   }
+}
+
+.cta-button {
+  max-width: 420px;
 }

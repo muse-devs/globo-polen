@@ -14,10 +14,13 @@ module.exports = {
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-resolve-src",
     {
-      resolve: `gatsby-plugin-google-fonts`,
+      resolve: `gatsby-plugin-google-fonts-with-attributes`,
       options: {
         fonts: [`Inter`, `source sans pro\:400,600,700`],
         display: "swap",
+        attributes: {
+          rel: "stylesheet preload prefetch",
+        },
       },
     },
     {

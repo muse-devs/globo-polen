@@ -7,7 +7,7 @@ export default function () {
     <section>
       <Row className="p-3 p-md-5 g-0 my-5">
         <Col md={12}>
-          <h2 className="typo-xxl text-center">
+          <h2 className="typo-xl text-center">
             Perguntas frequentes
           </h2>
         </Col>
@@ -67,18 +67,18 @@ export default function () {
                 A marca d'água Polen não pode ser removida, no entanto, oferecemos marcas d'água co-branded por um custo adicional.
               </Accordion.Body>
             </Accordion.Item>
-            <Accordion.Item eventKey="9">
+            {/* <Accordion.Item eventKey="9">
               <Accordion.Header className="typo-xs"><strong>Onde posso encontrar mais informações sobre as Políticas de Privacidade e Uso da plataforma?</strong></Accordion.Header>
               <Accordion.Body className="typo-xs py-3">
                 Você pode encontrar todas essas informações no nosso <a href='https://polen.me/termos-de-uso/' target="_blank" rel="noreferrer"> Termo de Uso</a> e na nossa <a href='https://polen.me/politica-de-privacidade/' target="_blank" rel="noreferrer"> Política de Privacidade</a>.
               </Accordion.Body>
-            </Accordion.Item>
-            <Accordion.Item eventKey="10">
+            </Accordion.Item> */}
+            {/* <Accordion.Item eventKey="10">
               <Accordion.Header className="typo-xs no-border-bottom"><strong>Quanto custa pedir um vídeo Polen para Empresas ?</strong></Accordion.Header>
               <Accordion.Body className="typo-xs py-3">
                 Não trabalhamos com um preço fixo. O custo varia de acordo com o ídolo escolhido, por onde a campanha será divulgada e qual mensagem será gravada.
               </Accordion.Body>
-            </Accordion.Item>
+            </Accordion.Item> */}
           </Accordion>
         </Col>
       </Row>
