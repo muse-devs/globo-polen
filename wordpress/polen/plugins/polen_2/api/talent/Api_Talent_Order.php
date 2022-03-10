@@ -3,6 +3,7 @@ namespace Polen\Api\Talent;
 
 use Exception;
 use Polen\Api\Api_Util_Security;
+use Polen\Includes\Module\Polen_Order_Module;
 use Polen\Includes\Polen_Order;
 use Polen\Includes\Polen_Talent;
 use Polen\Includes\Talent\Polen_Talent_Controller;
@@ -187,9 +188,25 @@ class Api_Talent_Order extends WP_REST_Controller
                 throw new Exception('Erro na relação Idolo/Pedido');
             }
             $polen_talent_controller->send_video_vimeo_complete($vimeo_id, $order_id);
+            $this->set_first_order_complete($order_id, $talent_id);
             return api_response('Completo com sucesso', 200);
         } catch(Exception $e) {
             return api_response($e->getMessage(), $e->getCode());
+        }
+    }
+
+    /**
+     * Se for uma FirstOrder seta o usuário com a flag de concluido
+     * @param int
+     * @param int
+     */
+    protected function set_first_order_complete(int $order_id, int $talent_id)
+    {
+        //Seta se for FirstOrder como Complete no usuário
+        $order = wc_get_order($order_id);
+        $polen_order = new Polen_Order_Module($order);
+        if($polen_order->get_is_first_order()) {
+            Polen_Talent::set_first_order_status_by_talent_id($talent_id, true);
         }
     }
 

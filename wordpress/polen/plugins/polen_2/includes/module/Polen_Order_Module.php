@@ -193,6 +193,18 @@ class Polen_Order_Module
     }
 
 
+    /**
+     * Verifica se é a FirstOrder
+     * @return bool
+     */
+    public function get_is_first_order()
+    {
+        $cart_item = Polen_Cart_Item_Factory::polen_cart_item_from_order($this->object);
+        $is_first_order = $cart_item->get_first_order();
+        return $is_first_order == '1' ? true : false;
+    }
+
+
     public function get_id()
     {
         return $this->object->get_id();
