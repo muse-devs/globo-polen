@@ -22,9 +22,8 @@ class Mo_API_Authentication_Basic_OAuth {
 						$pword = $creds[1];
 						$user = get_user_by('login', $uname);
 						if( $user ) {
-							wp_set_current_user($user->ID);
-
 							if(wp_check_password( $pword, $user->user_pass, $user->ID )){
+								wp_set_current_user($user->ID);
 								return true;
 							} else {
 								$response = array(

@@ -2,7 +2,7 @@
 class Mo_API_Authentication_Admin_Feedback {
 
     static function mo_api_authentication_display_feedback_form() {
-        if ( 'plugins.php' != basename( $_SERVER['PHP_SELF'] ) ) {
+        if ( 'plugins.php' != basename( sanitize_text_field($_SERVER['PHP_SELF']) ) ) {
             return;
         }
 

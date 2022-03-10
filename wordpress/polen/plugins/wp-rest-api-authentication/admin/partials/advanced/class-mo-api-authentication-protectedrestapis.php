@@ -29,23 +29,36 @@
                 };
             </script>
 
-            <div class="mo_table_layout">
-                <h1>Restrict Public Access to WP REST APIs</h1>
-                <?php settings_errors( 'ProtectedRestAPI_notices' ); ?>
-                <p>All the REST APIs listed below are protected from public access. You can uncheck the checkboxes to make it publicly accessible.</p>
-
-                <form method="post" action="" id="ProtectedRestAPI_form">
-                    <input type="hidden" name="option" value="mo_api_authentication_protected_apis_form">
-                    <?php wp_nonce_field( '' ); ?>
-					<?php wp_nonce_field('ProtectedRestAPI_admin_nonce','ProtectedRestAPI_admin_nonce_fields'); ?>
+            <div id="mo_api_authentication_password_setting_layout" class="mo_api_authentication_support_layout"> 
+                    <form method="post" action="" id="ProtectedRestAPI_form">
+                    <button type="button" style="width:70px;float: right;background: #473970;margin: 10px 10px" onclick="moProtectedAPIsSave()" class="button button-primary button-large">Save</button>
+                    <input type="submit" name="reset" value="Reset Settings" style="width:110px;float: right;background: #473970;margin-right: 5px;margin-top: 10px" class="button button-primary button-large">
+                <h2 style="font-size: 20px;font-weight: 700">Protected REST API Settings</h2>
+                <p style="font-size: 14px;font-weight: 400">All the REST APIs listed below are protected from public access. You can uncheck the checkboxes to make it publicly accessible.</p>
+                <p style="font-size: 14px;font-weight: 400"><b>Tip: </b>This Setting with the free plan is only available for standard WordPress endpoints. For custom build endpoints or 3rd party plugin endpoints, go for <b><i>Premium</i></b> now.</p>
+                <p style="font-size: 14px;font-weight: 400"><b>Note: </b>The custom/3rd party plugin endpoints access can still be blocked or allowed to be accessed publicly with this plan of the plugin.</p>
+                <br>
+                <div class="mo_api_authentication_support_layout" id="mo_api_jwtauth_client_creds" style="margin-left: 5px; margin-top: 2px; width: 90%">
+                     <input type="hidden" name="option" value="mo_api_authentication_protected_apis_form">
+                     <?php wp_nonce_field( '' ); ?>
+                    <?php wp_nonce_field('ProtectedRestAPI_admin_nonce','ProtectedRestAPI_admin_nonce_fields'); ?>
 
                     <div id="protectedrestapi_container"><?php self::ProtectedRestAPI_display_route_checkboxes(); ?></div>
-                    <?php submit_button(); ?>
-                    <input type="submit" name="reset" value="Reset Settings">
-                </form>
-                <h4>To authenticate third-party plugin/Custom API endpoints <a href="admin.php?page=mo_api_authentication_settings&tab=licensing" rel="noopener noreferrer">Click here</a> to Upgrade Now.</h4>
-            </div>
 
+                </div>
+                    <br>
+                
+                </form>
+
+            <br>
+            </div>
+            <script >
+                
+                function moProtectedAPIsSave(){
+                    document.getElementById("ProtectedRestAPI_form").submit();
+                }
+
+            </script>
 		<?php
 		}
 
