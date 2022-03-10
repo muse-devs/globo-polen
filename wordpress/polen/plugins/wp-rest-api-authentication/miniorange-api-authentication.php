@@ -3,7 +3,7 @@
  * Plugin Name:       WordPress REST API Authentication
  * Plugin URI:        wp-rest-api-authentication
  * Description:       WordPress REST API Authentication secures rest API access for unauthorized users using OAuth 2.0, Basic Auth, JWT, API Key. Also reduces potential attack factors to the respective site.
- * Version:           1.6.7
+ * Version:           2.1.0
  * Author:            miniOrange
  * Author URI:        https://www.miniorange.com
  * License:           MIT/Expat
@@ -20,13 +20,22 @@ if ( ! defined( 'WPINC' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'MINIORANGE_API_AUTHENTICATION_VERSION', '1.6.7' );
+define( 'MINIORANGE_API_AUTHENTICATION_VERSION', '2.1.0' );
 // require_once plugin_dir_path( __FILE__ ) . 'admin/partials/support/class-mo-api-authentication-feedback.php';
 
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-miniorange-api-authentication-activator.php
  */
+
+function remove_footer_admin () 
+{
+    echo '';
+}
+ 
+if(isset($_GET['page']) && sanitize_text_field($_GET['page']) == 'mo_api_authentication_settings' ){
+	add_filter('admin_footer_text', 'remove_footer_admin');
+}
 
 function mo_api_auth_activate_miniorange_api_authentication() {
 	mo_rest_api_set_cron_job();

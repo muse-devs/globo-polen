@@ -106,18 +106,11 @@ class Api_Talent_Order extends WP_REST_Controller
     public function accept_reject_order( WP_REST_Request $request )
     {
         $order_id           = $request['id'];
-        $security           = $request->get_param('security');
         $option             = $request->get_param('option');
         $reason_reject      = $request->get_param('reason_reject') ?? '';
         $description_reject = $request->get_param('description_reject') ?? '';
-        $user_id            = get_current_user_id();
-        $ip                 = $_SERVER['REMOTE_ADDR'];
-        $client             = $_SERVER['HTTP_USER_AGENT'];
 
         try {
-            if(!isset($security) || !Api_Util_Security::verify_nonce($ip . $client . $user_id, $security)) {
-                throw new Exception('Problema na seguraça tente novamente', 403);
-            }
 
             $talent_controller = new Polen_Talent_Controller();
             $result = $talent_controller->talent_accept_or_reject_api(
@@ -149,18 +142,18 @@ class Api_Talent_Order extends WP_REST_Controller
      */
     public function create_vimeo_slot(WP_REST_Request $request)
     {
-        $security       = $request->get_param('security');
+        // $security       = $request->get_param('security');
         $order_id       = $request->get_param('order_id');
         $file_size      = $request->get_param('file_size');
         $name_to_video  = $request->get_param('name_to_video');
-        $user_id        = get_current_user_id();
-        $ip             = $_SERVER['REMOTE_ADDR'];
-        $client         = $_SERVER['HTTP_USER_AGENT'];
+        // $user_id        = get_current_user_id();
+        // $ip             = '756937659387659823645827546';
+        // $client         = $_SERVER['HTTP_USER_AGENT'];
 
         try {
-            if(!isset($security) || !Api_Util_Security::verify_nonce($ip . $client . $user_id, $security)) {
-                throw new Exception('Problema na seguraça tente novamente', 403);
-            }
+            // if(!isset($security) || !Api_Util_Security::verify_nonce($ip . $client . $user_id, $security)) {
+            //     throw new Exception('Problema na seguraça tente novamente', 403);
+            // }
             if(empty($order_id) || empty($file_size) || empty($name_to_video)) {
                 throw new Exception('Formato de request inválido', 403);
             }
