@@ -341,6 +341,11 @@ class Polen_Talent_Controller extends Polen_Talent_Controller_Base
         if( $checked ){
             $vimeo_id = filter_input( INPUT_POST, 'vimeo_id' );
             try {
+                $order = wc_get_order($order_id);
+                $polen_order = new Polen_Order_Module($order);
+                if($polen_order->get_is_first_order()) {
+                    Polen_Talent::set_first_order_status_by_talent_id($talent_id, true);
+                }
                 $this->send_video_vimeo_complete($vimeo_id, $order_id);
                 wp_send_json_success(array( 'success' => true, 'message' => 'Pedido completo!' ));
             } catch(Exception $e) {
