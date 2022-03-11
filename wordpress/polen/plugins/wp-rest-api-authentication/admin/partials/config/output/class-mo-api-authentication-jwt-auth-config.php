@@ -4,352 +4,151 @@ class Mo_API_Authentication_Admin_Jwt_Auth_Config {
 
 	public static function mo_api_auth_configuration_output() {
 		?>
-	<div id="mo_api_authentication_support_layout" class="mo_api_authentication_support_layout">
-		<div>
-		<div class="mo_api_authentication_common_div_css">
-			<h3>API Reference for JWT Authentication : <u><b><small><a href="https://plugins.miniorange.com/wordpress-rest-api-jwt-authentication-method" target="_blank" rel="noopener" style="color: red;size: 2px;">[SETUP GUIDE]</a></small></b></u></h3>
-			<div class="row">
-			<div class="mo_api_authentication_box">
-					<div class="mo_api_authentication_box_header">
-						<h4 class="mo_api_authentication_box_heading"><span class="mo_api_authentication_request_button">post</span> /wp-json/api/v1/token </h4>				
+	<div id="mo_api_jwt_authentication_support_layout" class="mo_api_authentication_support_layout">
+	
+	<form>					
+		<input type="hidden" name="action" id="mo_api_jwtauth_save_config_input" value="Save JWT Auth">
+		<div id="mo_api_authentication_support_basicoauth" class="mo_api_authentication_common_div_css">
+
+			<button type="button" onclick="moJWTAuthenticationMethodSave('save_jwt_auth')" class="mo_api_authentication_method_save_button button button-primary button-large" style="background: #473970;">Next</button>
+			<a href="admin.php?page=mo_api_authentication_settings"><button type="button" class="mo_api_authentication_method_save_button button button-primary button-large" style="background: #473970;margin-right: 15px;">Back</button></a>
+			<h4><a href="admin.php?page=mo_api_authentication_settings&tab=config" style="text-decoration: none">Configure Methods</a> > JWT Authentication Method</h4>
+			<h2 class="mo_api_authentication_method_head">JWT Authentication Method</h2>
+			
+			<p class="mo_api_authentication_method_description">WordPress REST API - JWT Authentication Method involves the REST APIs access on validation against the JWT token (JSON Web Token) generated based on the user’s username, password using highly secure encryption algorithm.</p>
+			<br>
+			<div class="mo_api_auth_setup_guide2">
+				<div class="mo_api_auth_setup_guide1"><img src="<?php echo esc_attr(plugin_dir_url(dirname(dirname(dirname(__FILE__)))));?>/images/youtube.png" height="25px" width="25px"></div>
+				<a href="https://www.youtube.com/watch?v=XlbSVHR7ohQ" target="_blank"><div class="mo_api_authentication_guide1"><p style="font-weight: 700;">Video guide</b></p></div></a>
+			</div>
+			<div class="mo_api_auth_setup_guide">
+				<div class="mo_api_auth_setup_guide1"><img src="<?php echo esc_attr(plugin_dir_url(dirname(dirname(dirname(__FILE__)))));?>/images/user-guide.png" height="25px" width="25px"></div>
+				<a href="https://plugins.miniorange.com/wordpress-rest-api-jwt-authentication-method#step_1" target="_blank"><div class="mo_api_authentication_guide1"><p style="font-weight: 700;">Setup Guide</p></div></a>
+			</div>
+			<div class="mo_api_auth_setup_guide2">
+				<div class="mo_api_auth_setup_guide1"><img src="<?php echo esc_attr(plugin_dir_url(dirname(dirname(dirname(__FILE__)))));?>/images/document.png" height="25px" width="25px"></div>
+				<a href="https://developers.miniorange.com/docs/rest-api-authentication/wordpress/jwt-authentication" target="_blank"><div class="mo_api_authentication_guide1"><p style="font-weight: 700;">Developer Doc</b></p></div></a>
+			</div>
+			<br><br>	
+			<div class="mo_api_authentication_support_layout" style="border-width: 0px;padding-left: 2px">
+				<br>
+				<h3 style="margin-top: 40px">Select JWT Token generation types -</h3>
+				<p><b>Tip: </b>With the current plan of the plugin, by default HS256 Encryption algorithm is configured.</p>
+				<br>
+				<div class="mo_api_authentication_card_layout_internal">
+
+					<div class="mo_api_flex_child1" id=mo_api_config_bauth>
+						
+						<div style="height: 30%">
+							<img src="<?php echo esc_attr(plugin_dir_url(dirname(dirname(dirname(__FILE__)))));?>/images/select-all.png" height="25px" width="25px" style="float: right;padding-top: 0px;padding-right: 5px;">
+						<div style="width: 20%;float: left;padding-top: 25px;padding-left: 80px;">
+						<img src="<?php echo esc_attr(plugin_dir_url(dirname(dirname(dirname(__FILE__)))));?>/images/key.png" height="30px" width="30px"></div>
+						</div>
+						<div style="height: 60%;width: 80%;text-align: center;padding-top: 10%">
+							<p style="font-size: 15px;font-weight: 500">JWT generation using HS256 Encryption</p>
+						</div>
+						
 					</div>
-					<div class="mo_api_authentication_box_body">
-						<div class="mo_api_authentication_box_body_text">
-							<p>
-								To request the JWT token, you need to send HTTP request in format below.
-							</p>
-							<p>Note : This token has default validity of <b>1 hour</b>.</p>						
+					<div class="mo_api_flex_child1" style="cursor:no-drop;">
+						<div style="height: 30%">
+							<div class="mo_api_auth_premium_label_jwt">
+								<div class="mo_api_auth_premium_label_internal_jwt">
+									<div class="mo_api_auth_premium_label_text_jwt">Premium</div>
+								</div>
+							</div>
+							<div style="width: 20%;float: left;padding-top: 25px;padding-left: 80px;">
+								<img src="<?php echo esc_attr(plugin_dir_url(dirname(dirname(dirname(__FILE__)))));?>/images/secure.png" height="30px" width="30px">
+							</div>
 						</div>
-						<div class="mo_api_authentication_box_white_section">
-							<h5 class="mo_api_authentication_box_white_section_heading">Parameters</h5>
+						<div style="height: 60%;width: 80%;text-align: center;padding-top: 10%">
+							<p style="font-size: 15px;font-weight: 500">JWT generation using RS256 Encryption</p>
 						</div>
-						<br>
-						<div class="mo_api_authentication_box_body_text">
-							<table class="mo_api_authentication_settings_table">
-								<thead>
-									<th style="text-align:left">Name</th>
-									<th style="text-align:left">Description</th>
-								</thead>
-								<tbody>
-									<tr>
-										<td>
-											<hr>
-										</td>
-										<td>
-											<hr>
-										</td>
-									</tr>
-									<tr>
-										<td>username <span style="color:red">* required</span> <br>
-										<b>(string)</b>
-										</td>
-										<td>Your WordPress username</td>
-									</tr>
-									<tr>
-										<td>
-											<hr>
-										</td>
-										<td>
-											<hr>
-										</td>
-									</tr>
-									<tr>
-										<td>password <span style="color:red">* required</span> <br>
-										<b>(string)</b>
-										</td>
-										<td>Your WordPress password</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-						<br>
-						<div class="mo_api_authentication_box_white_section">
-							<h5 class="mo_api_authentication_box_white_section_heading">Responses</h5>
-						</div>
-						<br>
-						<div class="mo_api_authentication_box_body_text">
-							<table class="mo_api_authentication_settings_table">
-								<thead>
-									<th style="text-align:left">Code</th>
-									<th style="text-align:left">Description</th>
-								</thead>
-								<tbody>
-									<tr>
-										<td>
-											<hr>
-										</td>
-										<td>
-											<hr>
-										</td>
-									</tr>
-									<tr>
-										<td style="vertical-align:baseline"><b>200</b></td>
-										<td>
-											<div class="mo_api_authentication_code_output">Successful response</div>
-											<p>Sample response</p>
-											<div class="mo_api_authentication_code_output">
-											{<br>
-												"token_type":"Bearer",<br>
-												"iat":1573547305,<br>
-												"expires_in":1573550905,<br>
-												"jwt_token":" HEADER . PAYLOAD . SIGNATURE "<br>
-											}
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<hr>
-										</td>
-										<td>
-											<hr>
-										</td>
-									</tr>
-									<tr>
-										<td style="vertical-align:baseline"><b>400</b></td>
-										<td>
-											<div class="mo_api_authentication_code_output">Bad Request</div>
-											<p>Sample response</p>
-											<div class="mo_api_authentication_code_output">
-											{<br>
-												"status":"error",<br>
-												"error":"BAD_REQUEST",<br>
-												"code":"400",<br>
-												"error_description":"Username and password are required."<br>
-											}
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<hr>
-										</td>
-										<td>
-											<hr>
-										</td>
-									</tr>
-									<tr>
-										<td style="vertical-align:baseline"><b>403</b></td>
-										<td>
-											<div class="mo_api_authentication_code_output">Forbidden response</div>
-											<p>Sample response</p>
-											<div class="mo_api_authentication_code_output">
-											{<br>
-												"status":"error",<br>
-												"error":"FORBIDDEN",<br>
-												"code":"403",<br>
-												"error_description":"Invalid Username or Password."<br>
-											}
-											</div>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-						<br>
-						<div class="mo_api_authentication_box_white_section">
-							<h5 class="mo_api_authentication_box_white_section_heading">Example</h5>
-						</div>
-						<br>
-						<div class="mo_api_authentication_box_body_text">
-							<table class="mo_api_authentication_settings_table">
-								<thead>
-									<th style="text-align:left">Request</th>
-									<th style="text-align:left">Format</th>
-								</thead>
-								<tbody>
-									<tr>
-										<td>
-											<hr>
-										</td>
-										<td>
-											<hr>
-										</td>
-									</tr>
-									<tr>
-										<td><b>Curl</b></td>
-										<td>
-											curl -d "username=<b>&lt;wordpress_username&gt;</b>&password=<b>&lt;wordpress_password&gt;</b>" -X POST <?php echo esc_url( get_home_url() );?>/wp-json/api/v1/token
-										</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-						<br>
 					</div>
 				</div>
 				<br>
-				<div class="mo_api_authentication_box">
-					<div class="mo_api_authentication_box_header">
-						<h4 class="mo_api_authentication_box_heading"><span class="mo_api_authentication_request_button">get</span> /wp-json/wp/v2/posts </h4>				
-					</div>
-					<div class="mo_api_authentication_box_body">
-						<div class="mo_api_authentication_box_body_text">
-							<p>
-								Once you get the JWT token, you can access WP REST API's like below.
-							</p>
-						</div>
-						<div class="mo_api_authentication_box_white_section">
-							<h5 class="mo_api_authentication_box_white_section_heading">Header</h5>
-						</div>
-						<br>
-						<div class="mo_api_authentication_box_body_text">
-							<table class="mo_api_authentication_settings_table">
-								<thead>
-									<th style="text-align:left">Name</th>
-									<th style="text-align:left">Value</th>
-								</thead>
-								<tbody>
-									<tr>
-										<td>
-											<hr>
-										</td>
-										<td>
-											<hr>
-										</td>
-									</tr>
-									<tr>
-										<td>Authorization</td>
-										<td>Bearer <b>&lt;jwt_token&gt;</b></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-						<br>
-						<div class="mo_api_authentication_box_white_section">
-							<h5 class="mo_api_authentication_box_white_section_heading">Responses</h5>
-						</div>
-						<br>
-						<div class="mo_api_authentication_box_body_text">
-							<table class="mo_api_authentication_settings_table">
-								<thead>
-									<th style="text-align:left">Code</th>
-									<th style="text-align:left">Description</th>
-								</thead>
-								<tbody>
-									<tr>
-										<td>
-											<hr>
-										</td>
-										<td>
-											<hr>
-										</td>
-									</tr>
-									<tr>
-										<td style="vertical-align:baseline"><b>200</b></td>
-										<td>
-											<div class="mo_api_authentication_code_output">Successful response</div>
-											<p>Sample response</p>
-											<div class="mo_api_authentication_code_output">
-											[{<br>
-												"id":1,<br>
-												"slug":"hello-world",<br>
-												"status":"publish",<br>
-												"type":"post",<br>
-												"link":"http://< wp_base_url >/hello-world/",<br>
-												"title":{<br>
-													"rendered":"Hello World"<br>
-													},<br>
-												"content":{<br>
-													"rendered":"\nWelcome to WordPress. This is your first post. Edit or delete it, then start writing!\n",<br>
-													"protected":false<br>
-													},<br>
-													...<br>												
-											}]
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<hr>
-										</td>
-										<td>
-											<hr>
-										</td>
-									</tr>
-									<tr>
-										<td style="vertical-align:baseline"><b>401</b></td>
-										<td>
-											<div class="mo_api_authentication_code_output">Invalid Signature response</div>
-											<p>Sample response</p>
-											<div class="mo_api_authentication_code_output">
-											{<br>
-												"status":"error",<br>
-												"error":"INVALID_SIGNATURE",<br>
-												"code":"401",<br>
-												"error_description":"JWT Signature is invalid."<br>
-											}
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<hr>
-										</td>
-										<td>
-											<hr>
-										</td>
-									</tr>
-									<tr>
-										<td style="vertical-align:baseline"><b>401</b></td>
-										<td>
-											<div class="mo_api_authentication_code_output">Missing Authorization Header</div>
-											<p>Sample response</p>
-											<div class="mo_api_authentication_code_output">
-											{<br>
-												"status":"error",<br>
-												"error":"MISSING_AUTHORIZATION_HEADER",<br>
-												"code":"401",<br>
-												"error_description":"Authorization header not received. Either authorization header was not sent or it was removed by your server due to security reasons. Check more details for the error on"<br>
-											}
-											</div>
-											<p><b>NOTE:</b> This error may occur because of server environment,If Apache server then put the below line in your <b>htaccess</b> file after the RewriteBase.</p>
-											<code class="mo_api_authentication_code_output">
-												RewriteCond %{HTTP:Authorization} ^(.*)<br>
-												RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
-											</code>
-											<p>If NGINX server then put the below line in your <b>conf</b> file.</p>
-											<code class="mo_api_authentication_code_output">
-												add_header Access-Control-Allow-Headers "Authorization";
-											</code>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-						<br>
-						<div class="mo_api_authentication_box_white_section">
-							<h5 class="mo_api_authentication_box_white_section_heading">Example</h5>
-						</div>
-						<br>
-						<div class="mo_api_authentication_box_body_text">
-							<table class="mo_api_authentication_settings_table">
-								<thead>
-									<th style="text-align:left">Request</th>
-									<th style="text-align:left">Format</th>
-								</thead>
-								<tbody>
-									<tr>
-										<td>
-											<hr>
-										</td>
-										<td>
-											<hr>
-										</td>
-									</tr>
-									<tr>
-										<td><b>Curl</b></td>
-										<td>
-											curl -H "Authorization:Bearer <b>&lt;jwt_token&gt;</b>" -X GET <?php echo esc_url( get_home_url() );?>/wp-json/wp/v2/posts
-										</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-						<br>
-					</div>
+				
+				<br>
+				
+				<div style="display: flex;">
+					<div style="float: left"><h3>Signing Key/Certificate Configuration - </h3></div>
+					<div style="float: left;margin: 10px;">
+					<div class="mo_api_auth_inner_premium_label_jwt"><p style="font-size: 0.8em;">Premium</p></div>
+				 	</div>
+				 </div>
+			 <p><b>Tip: </b>With the current plan of the plugin, by default a randomly generated secret key will be used.</p>
+				<br>
+				<div style="cursor:no-drop;">
+					<textarea type="textbox" placeholder="Configure your certificate or secret key" disabled style="width: 70%;height: 100px;"></textarea>
+				</div>
+		
+				<br>
+				
+			</div>
+			<br>
+
+		</div>
+	</form>
+</div>
+<div class="mo_api_authentication_support_layout" id="mo_api_jwtauth_finish" style="display: none;margin-left: 20px;">
+
+	<form method="post" id="mo-api-jwt-authentication-method-form" action="">
+					<input required type="hidden" name="option" value="mo_api_jwt_authentication_config_form" />
+					<?php wp_nonce_field("mo_api_jwt_authentication_method_config","mo_api_jwt_authentication_method_config_fields"); ?>	
+
+			<div id="mo_api_basicauth_client_creds" style="margin-left: 20px;">
+				<button type="button" onclick="moJWTAuthenticationMethodFinish()" class="mo_api_authentication_method_save_button2 button button-primary button-large" style="background: #473970;margin-right: 10px;">Finish</button>
+				<a href="admin.php?page=mo_api_authentication_settings"><button type="button" class="mo_api_authentication_method_save_button button button-primary button-large" style="background: #473970;margin-right: 15px;">Back</button></a>
+				<b><p><a href="admin.php?page=mo_api_authentication_settings&tab=config" style="text-decoration: none">Configure Methods</a> > JWT Authentication Method</p></b>
+			<h2 style="font-size: 22px;">Configuration Overview</h2>
+				<br>
+				<div class="mo_api_authentication_support_layout" style="width: 80%;">
+					<br>
+				
+					<table width="80%">
+						<tr>
+							<td>
+								<p style="font-size: 15px;">JWT Token Generation Algorithm :</p>
+							</td>
+							<td>
+								<p style="font-size: 15px;font-weight: 500">HS256
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p style="font-size: 15px;">JWT Token Signing key/certificate :</p>
+							</td>
+							<td>
+								<p style="font-size: 15px;font-weight: 500"><?php
+								if(get_option('mo_api_authentication_jwt_client_secret')){
+									echo get_option('mo_api_authentication_jwt_client_secret');
+								}
+								else{
+									echo 'sample-certificate';
+								}
+								?></p>
+							</td>
+						</tr>
+					</table>
 				</div>
 			</div>
+			<br><br>
+		</form>
 		</div>
+	
+		<script>
+			function moJWTAuthenticationMethodSave(action){
+				
+				div = document.getElementById('mo_api_jwt_authentication_support_layout');
+				div.style.display = "none";
+				div2 = document.getElementById('mo_api_jwtauth_finish');
+				div2.style.display = "block";
+			}
+
+			function moJWTAuthenticationMethodFinish(){
+				document.getElementById("mo-api-jwt-authentication-method-form").submit();
+			}
+
+		</script>
 	<?php }
 }

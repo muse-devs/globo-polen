@@ -78,14 +78,14 @@ class Mo_API_Authentication_Admin_License {
             }
 
             .display-2 {
-            font-size: 3.8rem;
+            font-size: 3rem;
             letter-spacing: -.1rem;
             }
             .display-2 .currency {
             font-size: 1.5rem;
             position: relative;
             font-weight: 400;
-            top: -45px;
+            top: -20px;
             letter-spacing: 0px;
             }
             .display-2 .period {
@@ -106,7 +106,7 @@ class Mo_API_Authentication_Admin_License {
             }
 
             .btn-gradient {
-            background-color: #3473b4;
+            background: #473970
             transition: background .3s ease-in-out;
             }
             .btn-gradient:hover {
@@ -126,7 +126,7 @@ class Mo_API_Authentication_Admin_License {
             }
 
             .btn-gradient {
-            background-color: #3473b4;
+            background: #473970;
             transition: background .3s ease-in-out;
             }
             .btn-gradient:hover {
@@ -307,6 +307,8 @@ class Mo_API_Authentication_Admin_License {
             clear: both;
             }
 
+            
+
 
         </style>
         <?php
@@ -344,8 +346,6 @@ class Mo_API_Authentication_Admin_License {
             document.getElementById(popup_id).style.visibility = "hidden";
         }
         </script>
-        <br>
-        <div style="text-align: center; border: 2px solid blue;border-radius: 5px;width: 80%;margin-left: 9em;background-color: #c2dcff;color: #2c4d78"><b><span style="color: red;">*</span> There will be extra discount on top of these mentioned prices during the End Of Year Sale Offer Period which will be expired on 31st December, 2021. <a href="https://plugins.miniorange.com/wordpress-rest-api-authentication" target="_blank"> <br>Click here</a> to check out all the deals. Contact us at oauthsupport@xecurify.com to avail Sale benefits.</b></div>
 
         <section class="popup-overlay">
 
@@ -841,7 +841,6 @@ class Mo_API_Authentication_Admin_License {
                     <h4 class="card-title"> 
                         API Key Authentication <br> Method
                     </h4>
-                    <p class="card-text">(One time Payment)</p>
                     <!-- <ul class="list-group">
                         <li class="list-group-item">Ultimate Features</li>
                         <li class="list-group-item">Responsive Ready</li>
@@ -864,7 +863,6 @@ class Mo_API_Authentication_Admin_License {
                     <h4 class="card-title"> 
                         Basic Authentication <br> Method
                     </h4>
-                    <p class="card-text">(One time Payment)</p>
                     <button onclick="mo_show_popup_feature('basic-authentication')" class="btn btn-gradient mt-2 btn-view-plan">View Plan</button>
                     <a href="#" onclick="upgradeform('wp_rest_api_authentication_custom_basic_auth_plan')" class="btn btn-gradient mt-2">Upgrade now</a>
                     </div>
@@ -881,7 +879,7 @@ class Mo_API_Authentication_Admin_License {
                     <h4 class="card-title"> 
                         JWT Authentication <br> Method
                     </h4>
-                    <p class="card-text">(One time Payment)</p>
+                    
                     <button onclick="mo_show_popup_feature('jwt-authentication')" class="btn btn-gradient mt-2 btn-view-plan">View Plan</button>
                     <a href="#" onclick="upgradeform('wp_rest_api_authentication_custom_jwt_plan')" class="btn btn-gradient mt-2">Upgrade now</a>
                     </div>
@@ -894,15 +892,24 @@ class Mo_API_Authentication_Admin_License {
 
                 <!-- OAuth 2.0 Auth  -->
                 <div class="col-xs-12 col-lg-4">
-                <div class="card text-xs-center">
-                    <div class="card-header">
+
+                <div class="card text-xs-center" >
+                <div><img src="<?php echo esc_attr(plugin_dir_url(dirname(dirname(dirname(__FILE__)))));?>admin/images/mostsecure.png" height="120px" width="120px" style="margin-left: -49px; margin-top: -82px; z-index: 1; position: absolute"></div>
+
+
+                    <!-- <div class="mo_api_auth_premium_label_main" > -->
+						<!-- <div class="mo_api_auth_premium_label_internal"> -->
+						<!-- <div class="mo_api_auth_premium_label_text" style=' background-color: #ffa033'>Most Secure</div> -->
+						<!-- </div> -->
+					<!-- </div> -->
+                    <div class="card-header" >
                     <h3 class="display-2"><span class="currency">$</span>249<sup style="color: #e0d8d7">*</sup></h3>
                     </div>
                     <div class="card-block">
                     <h4 class="card-title"> 
-                        OAuth 2.0 Authentication <br> Method
+                        OAuth 2.0 Authentication <br> Method 
                     </h4>
-                    <p class="card-text">(One time Payment)</p>
+                    
                     <button onclick="mo_show_popup_feature('oauth-authentication')" class="btn btn-gradient mt-2 btn-view-plan">View Plan</button>
                     <a href="#" onclick="upgradeform('wp_rest_api_authentication_custom_oauth_auth_plan')" class="btn btn-gradient mt-2">Upgrade now</a>
                     </div>
@@ -911,7 +918,9 @@ class Mo_API_Authentication_Admin_License {
 
                 <!-- Third Party Auth  -->
                 <div class="col-xs-12 col-lg-4">
-                <div class="card text-xs-center">
+                <div class="card text-xs-center" >
+                    <!-- <div class="" style="color:white">asd</div> -->
+                  
                     <div class="card-header">
                     <h3 class="display-2"><span class="currency">$</span>349<sup style="color: #e0d8d7">*</sup></h3>
                     </div>
@@ -919,7 +928,7 @@ class Mo_API_Authentication_Admin_License {
                     <h4 class="card-title"> 
                         Authentication From External<br> OAuth 2.0 Providers
                     </h4>
-                    <p class="card-text">(e.g: Azure, Cognito, Firebase)</p>
+
                     <button onclick="mo_show_popup_feature('oauth-external-providers-authentication')" class="btn btn-gradient mt-2 btn-view-plan">View Plan</button>
                     <button onclick="upgradeform('wp_rest_api_authentication_from_external_oauth_provider_plan')" class="btn btn-gradient mt-2">Upgrade now</button>
                     </div>
@@ -929,27 +938,7 @@ class Mo_API_Authentication_Admin_License {
                 <!-- OAuth 2.0 + Third Party Auth  -->
                 <div class="col-xs-12 col-lg-4">
                 <div class="card text-xs-center">
-                    <div class="card-header">
-                    <h3 class="display-2">?</h3>
-                    </div>
-                    <div class="card-block">
-                    <h4 class="card-title"> 
-                        Authentication From External<br> Providers
-                    </h4>
-                    <p class="card-text">(One time Payment)</p>
-                    <button onclick="mo_show_popup_feature('external-authentication')" class="btn btn-gradient mt-2 btn-view-plan">View Plan</button>
-                    <button onclick="mo_show_popup_feature('contact-form')" class="btn btn-gradient mt-2">Request a quote</button>
-                    </div>
-                </div>
-                </div>
-
-            </div>
-            <br>
-            <div class="row">
-
-                <!-- Protecting 3rd party plugin or custom APIs  -->
-                <div class="col-xs-12 col-lg-4">
-                <div class="card text-xs-center">
+            
                     <div class="card-header">
                     <h3 class="display-2"><span class="currency">$</span>399<sup style="color: #e0d8d7">*</sup></h3>
                     </div>
@@ -957,16 +946,22 @@ class Mo_API_Authentication_Admin_License {
                     <h4 class="card-title"> 
                         Protecting 3rd Party Plugin or <br> Custom APIs 
                     </h4>
-                    <p class="card-text">(One time Payment)</p>
+                    
                     <button onclick="mo_show_popup_feature('protecting-third-party-plugin-authentication')" class="btn btn-gradient mt-2 btn-view-plan">View Plan</button>
                     <a href="#" onclick="upgradeform('wp_rest_api_authentication_custom_apis_plan')" class="btn btn-gradient mt-2">Upgrade now</a>
                     </div>
                 </div>
                 </div>
+            </div>
+            <br>
+            <div class="row">
+
+                <!-- Protecting 3rd party plugin or custom APIs  -->
 
                 <!-- All Inclusive  -->
-                <div class="col-xs-12 col-lg-8">
+                <div class="col-xs-12 col-lg-12">
                 <div class="card text-xs-center">
+                    <div><img src="<?php echo esc_attr(plugin_dir_url(dirname(dirname(dirname(__FILE__)))));?>admin/images/mostpopular.png" height="180px" width="180px" style="margin-left: -85px; margin-top: -110px; z-index: 1; position: absolute"></div>
                     <div class="card-header">
                     <h3 class="display-2"><span class="currency">$</span>449<sup style="color: #e0d8d7">*</sup></h3>
                     </div>
@@ -974,7 +969,7 @@ class Mo_API_Authentication_Admin_License {
                     <h4 class="card-title"> 
                         All Inclusive Plan
                     </h4>
-                    <p class="card-text">(One time Payment)</p>
+                    
                     <br>
                     <button onclick="mo_show_popup_feature('all-inclusive')" class="btn btn-gradient mt-2 btn-view-plan">View Plan</button>
                     <a href="#" onclick="upgradeform('wp_rest_api_authentication_enterprise_plan')" class="btn btn-gradient mt-2">Upgrade now</a>
@@ -985,16 +980,28 @@ class Mo_API_Authentication_Admin_License {
             </div>
             <br><br>
             <div class="row">
-            <div class="moc-licensing-notice">
-            <span style="color: red;">*</span>Cost applicable for one instance only. Licenses are perpetual and the Support Plan includes 12 months of maintenance (support and version updates). You can renew maintenance after 12 months at 50% of the current license cost.
-            <br>
-            <br>
-            <p><span style="color: red;">*</span><strong>MultiSite Network Support</strong>
-                There is an additional cost for the number of subsites in Multisite Network.</p>
-            <h4>10 Days Return Policy</h4>
-            <p>At miniOrange, we want to ensure you are 100% happy with your purchase. If the premium plugin you purchased is not working as advertised and you've attempted to resolve any issues with our support team, which couldn't get resolved. We will refund the whole amount within 10 days of the purchase. Please email us at <a href="mailto:info@xecurify.com" target="_blank">info@xecurify.com</a> for any queries regarding the return policy.</p>
+                <div class="mo_api_authentication_support_layout" style="padding-left: 20px;">
+                    <br>
+                <h4 class="mo-oauth-h2" style="text-align: center;">LICENSING POLICY</h4>
+                       <!--  <hr style="background-color:#17a2b8; width: 10%;height: 3px;border-width: 3px;"> -->
+                        <br>
+                        <p style="font-size: 0.9em;"><span style="color: red;">*</span>Cost applicable for one instance only. Licenses are perpetual and the Support Plan includes 12 months of maintenance (support and version updates). You can renew maintenance after 12 months at 50% of the current license cost.<br></p>
+
+                        <p style="font-size: 0.9em;"><span style="color: red;">*</span>We provide deep discounts on bulk license purchases and pre-production environment licenses. As the no. of licenses increases, the discount percentage also increases. Contact us at <a href="mailto:apisupport@xecurify.com?subject=WP REST API Authentication Plugin - Enquiry">apisupport@xecurify.com</a> for more information.</p>
+
+                        <p style="font-size: 0.9em;"><span style="color: red;">*</span><strong>MultiSite Network Support : </strong>
+                            There is an additional cost for the number of subsites in Multisite Network. The Multisite licenses are based on the <b>total number of subsites</b> in your WordPress Network.
+                            <br>
+                            <br>
+                            <strong>Note</strong> : All the data remains within your premises/server. We do not provide the developer license for our paid plugins and the source code is protected. It is strictly prohibited to make any changes in the code without having written permission from miniOrange. There are hooks provided in the plugin which can be used by the developers to extend the plugin's functionality.
+                            <br>
+                            <br>
+                        At miniOrange, we want to ensure you are 100% happy with your purchase. If the premium plugin you purchased is not working as advertised and you've attempted to resolve any issues with our support team, which couldn't get resolved. Please email us at <a href="mailto:info@xecurify.com" target="_blank">info@xecurify.com</a> for any queries regarding the return policy.</p>
+           <br>
         </div>
+        <br>
             </div>
+            
         </div>
         <!-- End Licensing Table -->
         <a  id="mobacktoaccountsetup" style="display:none;" href="<?php echo esc_html( add_query_arg( array( 'tab' => 'account' ), htmlentities( $_SERVER['REQUEST_URI'] ) ) ); ?>">Back</a>

@@ -8,19 +8,21 @@ class Mo_API_Authentication_Postman {
 
             .mo-postman-body {
             display: flex;
-            justify-content: center;
-            min-height: 100vh;
-            background: #f1f1f1;
+            width: 70%;
+            min-height: 70vh;
+            background: #FFFFFF;
+
             }
 
             .container {
             position: relative;
-            margin: 0 20px;
+            margin: 0 10px;
             }
 
             .container .mo-postman-card {
+            float: left;
             position: relative;
-            width: 320px;
+            width: 250px;
             height: 500px;
             background: #232323;
             border-radius: 20px;
@@ -49,8 +51,8 @@ class Mo_API_Authentication_Postman {
             content: 'Postman';
             position: absolute;
             top: 50%;
-            left: 0%;
-            font-size: 6em;
+            left: 5%;
+            font-size: 4em;
             font-weight: 800;
             font-style: italic;
             color: #ff6c374f;
@@ -60,7 +62,7 @@ class Mo_API_Authentication_Postman {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            z-index: 99;
+            
             width: 100%;
             height: 220px;
             transition: 0.5s;
@@ -86,7 +88,7 @@ class Mo_API_Authentication_Postman {
             height: 100px;
             text-align: center;
             transition: 1s;
-            z-index: 10;
+
             }
 
             .container .mo-postman-card:hover .contentBx {
@@ -183,6 +185,16 @@ class Mo_API_Authentication_Postman {
             .image {
             width: 320px;
             }
+
+            .mo_api_authentication_postman_layout{
+                   margin-top: -32px;
+                   background-color:#FFFFFF; 
+                   border:1px solid #CCCCCC; 
+                   padding-left:20px;
+                   border-radius: 0.3em;
+
+            }
+
             </style>
         <?php
     }
@@ -190,14 +202,18 @@ class Mo_API_Authentication_Postman {
     public static function mo_api_authentication_postman_page(){
         self::emit_css();
         ?>
-        <div class="mo-postman-body">
-            <div class="container">
+    <div class="mo_api_authentication_postman_layout" >
+        <h2 style="font-size: 20px;font-weight: 700">Postman Samples</h2>
+        <p style="font-size: 14px;font-weight: 400;margin-right: 10px;">Download the postman samples to directy test the API configuration from Postman application.</p>
+        <p style="font-size: 14px;font-weight: 400;margin-right: 10px;"><b>Tip : </b>Postman app can be downloaded using this <a href="https://www.postman.com/downloads/" target="_blank">LINK</a></p>
+        <div style="display: flex;padding-left: 2em; margin-left: -45px;">
+            <div class="container" >
                 <div class="mo-postman-card">
                     <div class="imgBx">
                         <img class="image" src="<?php echo plugin_dir_url(dirname(dirname(__FILE__)));?>/images/apikey-postman.png">
                     </div>
                     <div class="contentBx">
-                        <h2>API Key Authentication</h2>
+                        <h2>API Key Auth</h2>
                         <a onclick="mo_postman_download_file('api-key')" href="#">Download</a>
                     </div>
                 </div>
@@ -209,9 +225,9 @@ class Mo_API_Authentication_Postman {
                     <img class="image" src="<?php echo plugin_dir_url(dirname(dirname(__FILE__)));?>/images/basic-auth-postman.png">
                 </div>
                 <div class="contentBx">
-                    <h2>Basic Authentication</h2>
+                    <h2>Basic Auth</h2>
                     <div class="size">
-                        <span class="select-method" id="basic-username-password" onclick="mo_postman_select_method('basic-username-password')">Username : Password</span>
+                        <span class="select-method" id="basic-username-password" onclick="mo_postman_select_method('basic-username-password')">User : Password</span>
                         <span class="select-method" id="basic-client-credentials" onclick="mo_postman_select_method('basic-client-credentials')">Client ID : Secret</span>
                     </div>
                     <a onclick="mo_postman_download_file('')" href="#">Download</a>
@@ -225,7 +241,7 @@ class Mo_API_Authentication_Postman {
                     <img class="image" src="<?php echo plugin_dir_url(dirname(dirname(__FILE__)));?>/images/jwt-postman.png">
                 </div>
                 <div class="contentBx">
-                    <h2>JWT Authentication</h2>
+                    <h2>JWT Auth</h2>
                     <div class="size">
                         <span id="jwt-token" class="select-method" onclick="mo_postman_select_method('jwt-token')" >Token</span>
                         <span id="jwt-resource" class="select-method" onclick="mo_postman_select_method('jwt-resource')">Resource</span>
@@ -234,8 +250,9 @@ class Mo_API_Authentication_Postman {
                 </div>
                 </div>
             </div>
-        </div>
-
+       </div>
+       <br><br>
+    </div>
         <form id="mo-postman-form" action="" method="POST">
             <?php wp_nonce_field('mo_api_authentication_postman_config','mo_api_authentication_postman_fields'); ?>
             <input type="hidden" name="option" value="mo_api_authentication_postman_file">

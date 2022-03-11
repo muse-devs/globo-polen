@@ -65,70 +65,25 @@ class Miniorange_API_Authentication_Admin {
 		add_action( 'admin_menu',  array( $this, 'miniorange_api_authentication_save_settings' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'plugin_settings_style' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'plugin_settings_script' ) );
-		add_action('admin_notices', array( $this, 'mo_api_admin_notice') );
-		add_action('admin_init', array( $this, 'mo_api_close_pops') );
+		
     }
 
-    function mo_api_admin_notice() {
-
-	    		if(current_user_can('administrator') && get_option('mo_rest_api_show_popup')){
-
-	  			$mo_api_notice_flag = 0;
-	  			if( empty(($_GET['tab'])) ){
-	  				$mo_api_notice_flag = 1;
-	  			}
-	    		else{ 
-					if( (sanitize_text_field($_GET['tab']) ) != NULL && sanitize_text_field($_GET['tab']) !='licensing' ) {
-						$mo_api_notice_flag = 1;
-					}
-				}
-	    		if( $mo_api_notice_flag == 1 ){
-
-	    			if( isset($_SERVER['HTTPS']) == 'on' ){
-	    				$mo_host = 'https://';
-	    			}
-	    			else{
-	    				$mo_host = 'http://';
-	    			}
-
-	    			$mo_api_pop_url = $mo_host . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
-    			if( strpos($_SERVER['REQUEST_URI'], '?') != false ){
-    				$mo_api_pop_url = $mo_api_pop_url . '&mra=true';
-    			}
-    			else{
-    				$mo_api_pop_url = $mo_api_pop_url . '?mra=true';
-    			}
-		         echo '<div class="notice notice-warning mo_api_notice">
-		             <h2 style="margin-right:1%"><img src="'.plugin_dir_url( __FILE__ ).'images/miniorange.png" height= "30px"width="30px"><strong>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;miniOrange WordPress REST API Authentication</strong>: Upgrade to <strong><i>Premium</i></strong> to unlock all features. <a href="admin.php?page=mo_api_authentication_settings&tab=licensing" rel="noopener noreferrer" style="font-size: small"><span style="font-size:18px;"><strong>   Upgrade Now</strong></span></a><a href="'.$mo_api_pop_url.'"><img src="'.plugin_dir_url(__FILE__).'/images/cancel.png'.'" style="height:15px;width:15px;float:right;"></a></h2>
-		         </div>';
-		        
-		    }
-		   
-		}
-	}
-
-	function mo_api_close_pops() {
-		
-		if( strpos($_SERVER['REQUEST_URI'], 'mra') != false){
-
-			update_option('mo_rest_api_show_popup', 0);
-		}
-	}
+	//Function to add the Premium settings in Plugin's section
 
     function add_action_links ( $actions ) {
 
-	   $url = esc_url( add_query_arg(
-		'page',
-		'mo_api_authentication_settings',
-		get_admin_url() . 'admin.php'
-	) );	
-	   $url2 =  $url.'&tab=licensing';
-	   $settings_link = "<a href='$url'>" . esc_attr( 'Configure' ) . '</a>';
-	   $settings_link2 = "<a href='$url2' style=><b>" . esc_attr( 'Upgrade to Premium' ) . '</b></a>';
-	   array_push($actions, $settings_link2);
-	   array_push($actions, $settings_link);
-	   return array_reverse($actions);
-}
+		   $url = esc_url( add_query_arg(
+			'page',
+			'mo_api_authentication_settings',
+			get_admin_url() . 'admin.php'
+		) );	
+		   $url2 =  $url.'&tab=licensing';
+		   $settings_link = "<a href='$url'>" . esc_attr( 'Configure' ) . '</a>';
+		   $settings_link2 = "<a href='$url2' style=><b>" . esc_attr( 'Upgrade to Premium' ) . '</b></a>';
+		   array_push($actions, $settings_link2);
+		   array_push($actions, $settings_link);
+		   return array_reverse($actions);
+	}
 
 	/**
 	 * Register the stylesheets for the admin area.
@@ -279,7 +234,7 @@ class Miniorange_API_Authentication_Admin {
 	public function mo_api_auth_initialize_api_flow() {
 
 		if ( !mo_api_auth_user_has_capability() ) {
-			if(strpos($_SERVER['REQUEST_URI'], '/api/v1/token') !== false  && get_option( 'mo_api_authentication_selected_authentication_method' ) === 'jwt_auth' ) {
+			if(strpos(sanitize_text_field($_SERVER['REQUEST_URI']), '/api/v1/token') !== false  && get_option( 'mo_api_authentication_selected_authentication_method' ) === 'jwt_auth' ) {
 				$json = file_get_contents('php://input');
 				$json = json_decode( $json, true );
 				if( json_last_error() !== JSON_ERROR_NONE ) {
@@ -293,7 +248,7 @@ class Miniorange_API_Authentication_Admin {
 	}
 
 	function regenerate_token() {	
-		if ($_SERVER['REQUEST_METHOD'] === 'POST' &&  current_user_can('administrator') ) {
+		if (sanitize_text_field($_SERVER['REQUEST_METHOD']) === 'POST' &&  current_user_can('administrator') ) {
 			$bearer_token = stripslashes( wp_generate_password( 32, false, false ) );
 			update_option( 'mo_api_auth_bearer_token ', $bearer_token );
 			echo esc_attr( $bearer_token );
@@ -302,11 +257,28 @@ class Miniorange_API_Authentication_Admin {
 	}
 
 	function regenerate_client_credentials(){
-		if ($_SERVER['REQUEST_METHOD'] === 'POST' &&  current_user_can('administrator') ) {
+		if (sanitize_text_field($_SERVER['REQUEST_METHOD']) === 'POST' &&  current_user_can('administrator') ) {
 			mo_api_authentication_create_client();
 			$response = [
 				'client_id' => get_option( 'mo_api_auth_clientid' ),
 				'client_secret' => get_option( 'mo_api_auth_clientsecret' )
+			];
+			wp_send_json( $response, 200 );
+		}
+	}
+
+	function save_temporary_data(){
+		
+		if (sanitize_text_field($_SERVER['REQUEST_METHOD']) === 'POST' &&  current_user_can('administrator') ) {
+			if(isset($_POST['auth_method']) && sanitize_text_field($_POST['auth_method']) == 'basic_auth'){
+
+				$api_temp = array();
+				$api_temp['algo'] = sanitize_text_field($_POST['algo']);
+				$api_temp['token_type'] = sanitize_text_field($_POST['token_type']);
+				update_option('mo_rest_api_ajax_method_data',$api_temp);
+			}
+			$response = [
+				'success' => 'true'
 			];
 			wp_send_json( $response, 200 );
 		}
@@ -351,7 +323,7 @@ class Miniorange_API_Authentication_Admin {
 
 	function miniorange_api_authentication_save_settings() {
 
-		if ($_SERVER['REQUEST_METHOD'] === 'POST' &&  current_user_can('administrator') ) {
+		if (sanitize_text_field($_SERVER['REQUEST_METHOD']) === 'POST' &&  current_user_can('administrator') ) {
 
 			if ( isset( $_POST['option'] ) and sanitize_text_field( $_POST['option'] ) == "mo_api_authentication_change_email_address" && isset($_REQUEST['mo_api_authentication_change_email_address_form_fields']) && wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['mo_api_authentication_change_email_address_form_fields'])), 'mo_api_authentication_change_email_address_form') ) {
 				$this->miniorange_api_authentication_remove_registered_user();
@@ -365,13 +337,13 @@ class Miniorange_API_Authentication_Admin {
 				$fname = '';
 				$lname = '';
 				$company = '';
-				if( $this->mo_api_authentication_check_empty_or_null( $_POST['email'] ) || $this->mo_api_authentication_check_empty_or_null( $_POST['password'] ) || $this->mo_api_authentication_check_empty_or_null( $_POST['confirmPassword'] ) ) {
+				if( $this->mo_api_authentication_check_empty_or_null( sanitize_email($_POST['email']) ) || $this->mo_api_authentication_check_empty_or_null( sanitize_text_field($_POST['password']) ) || $this->mo_api_authentication_check_empty_or_null( sanitize_text_field($_POST['confirmPassword']) ) ) {
 					update_option( 'mo_api_auth_message', 'All the fields are required. Please enter valid entries.');
-					mo_api_auth_show_error_message();
+					update_option('mo_api_auth_message_flag', 2);
 					return;
-				} else if( strlen( $_POST['password'] ) < 8 || strlen( $_POST['confirmPassword'] ) < 8){
+				} else if( strlen( sanitize_text_field($_POST['password']) ) < 8 || strlen( sanitize_text_field($_POST['confirmPassword']) ) < 8){
 					update_option( 'mo_api_auth_message', 'Choose a password with minimum length 8.');
-					mo_api_auth_show_error_message();
+					update_option('mo_api_auth_message_flag', 2);
 					return;
 				} else {
 					$email = sanitize_email( $_POST['email'] );
@@ -382,7 +354,6 @@ class Miniorange_API_Authentication_Admin {
 					$lname = stripslashes( sanitize_text_field($_POST['lname' ]) );
 					$company = stripslashes( sanitize_text_field($_POST['company']) );
 				}
-				
 				
 				update_option( 'mo_api_authentication_admin_email', $email );
 				update_option( 'mo_api_authentication_admin_phone', $phone );
@@ -401,28 +372,28 @@ class Miniorange_API_Authentication_Admin {
 
 						if(strcasecmp($response['status'], 'SUCCESS') != 0) {
 							update_option( 'mo_api_auth_message', 'Failed to create customer. Try again.');
-							mo_api_auth_show_error_message();
+							update_option('mo_api_auth_message_flag', 2);
 						} else {
 							update_option( 'mo_api_authentication_verify_customer', 'true' );
 							update_option( 'mo_api_auth_message', sanitize_text_field( $response['message'] ) );
-							mo_api_auth_show_success_message();
+							update_option('mo_api_auth_message_flag', 1);
 						}
 					} elseif(strcasecmp( $content['status'], 'SUCCESS') == 0 ) {
 						update_option( 'mo_api_authentication_verify_customer', 'true' );
 						update_option( 'mo_api_auth_message', 'Account already exist. Please Login.');
-						mo_api_auth_show_error_message();
+						update_option('mo_api_auth_message_flag', 2);
 					} else if(is_null($content)) {
 						update_option( 'mo_api_auth_message', 'Failed to create customer. Try again.');
-						mo_api_auth_show_error_message();
+						update_option('mo_api_auth_message_flag', 2);
 					} else {
 						update_option( 'mo_api_auth_message', sanitize_text_field( $content['message'] ) );
-						mo_api_auth_show_error_message();
+						update_option('mo_api_auth_message_flag', 1);
 					}
 					
 				} else {
 					update_option( 'mo_api_auth_message', 'Passwords do not match.');
 					delete_option('mo_api_authentication_verify_customer');
-					mo_api_auth_show_error_message();
+					update_option('mo_api_auth_message_flag', 2);
 				}
 			} else if( isset( $_POST['option'] ) and sanitize_text_field( $_POST['option'] ) == "mo_api_authentication_goto_login" && isset($_REQUEST['mo_api_authentication_goto_login_fields']) && wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['mo_api_authentication_goto_login_fields'])), 'mo_api_authentication_goto_login') ) {
 				delete_option( 'mo_api_authentication_new_registration' );
@@ -454,10 +425,10 @@ class Miniorange_API_Authentication_Admin {
 					delete_option( 'password' );
 					update_option( 'mo_api_auth_message', 'Customer retrieved successfully');
 					delete_option( 'mo_api_authentication_verify_customer' );
-					mo_api_auth_show_success_message();
+					update_option('mo_api_auth_message_flag', 1);
 				} else {
 					update_option( 'mo_api_auth_message', 'Invalid username or password. Please try again.');
-					mo_api_auth_show_error_message();
+					update_option('mo_api_auth_message_flag', 2);
 				}
 			} else if ( isset( $_POST['option'] ) and sanitize_text_field( $_POST['option'] ) == 'mo_api_authentication_skip_feedback' && isset($_REQUEST['mo_api_authentication_skip_feedback_form_fields']) && wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['mo_api_authentication_skip_feedback_form_fields'])), 'mo_api_authentication_skip_feedback_form') ) {
 				$path = plugin_dir_path( dirname( __FILE__ ) ) .'miniorange-api-authentication.php';
@@ -509,14 +480,14 @@ class Miniorange_API_Authentication_Admin {
 					deactivate_plugins( $path );
 					if ( $submited == false ) {
 						update_option('mo_api_auth_message', 'Your query could not be submitted. Please try again.');
-						mo_api_auth_show_error_message();
+						update_option('mo_api_auth_message_flag', 2);
 					} else {
 						update_option('mo_api_auth_message', 'Thanks for getting in touch! We shall get back to you shortly.');
-						mo_api_auth_show_success_message();
+						update_option('mo_api_auth_message_flag', 1);
 					}
 				} else {
 					update_option( 'message', 'Please Select one of the reasons ,if your reason is not mentioned please select Other Reasons' );
-					$this->mo_api_auth_show_error_message();
+					update_option('mo_api_auth_message_flag', 2);
 				}
 			}
 
@@ -535,11 +506,11 @@ class Miniorange_API_Authentication_Admin {
 					$submited = $customer->submit_contact_us( $email, $phone, $query, $send_config );
 					if ( $submited == false ) {
 						update_option('mo_api_auth_message', 'Your query could not be submitted. Please try again.');
-						mo_api_auth_show_error_message();
+						update_option('mo_api_auth_message_flag', 2);
 						return;
 					} else {
 						update_option('mo_api_auth_message', 'Thanks for getting in touch! We shall get back to you shortly.');
-						mo_api_auth_show_success_message();
+						update_option('mo_api_auth_message_flag', 1);
 						return;
 					}
 				}
@@ -552,15 +523,15 @@ class Miniorange_API_Authentication_Admin {
 				$payment_plan = new Miniorange_API_Authentication_Customer();
 				if ( $this->mo_api_authentication_check_empty_or_null( $email ) || $this->mo_api_authentication_check_empty_or_null( $query ) ) {
 					update_option('mo_api_auth_message', 'Please fill up Email and Query fields to submit your query.');
-					mo_api_auth_show_error_message();
+					update_option('mo_api_auth_message_flag', 2);
 				} else {
 					$submited = $payment_plan->mo_api_authentication_send_email_alert( $email, $phone,'', $query, "Payment Plan Information: WordPress REST API Authentication", $plugin_config );
 					if ( $submited == false ) {
 						update_option('mo_api_auth_message', 'Your query could not be submitted. Please try again.');
-						mo_api_auth_show_error_message();
+						update_option('mo_api_auth_message_flag', 2);
 					} else {
 						update_option('mo_api_auth_message', 'Thanks for getting in touch! We shall get back to you shortly.');
-						mo_api_auth_show_success_message();
+						update_option('mo_api_auth_message_flag', 1);
 					}
 				}
 			} else if( isset( $_POST['option'] ) and sanitize_text_field( $_POST['option'] ) == "mo_api_authentication_demo_request_form" && isset($_REQUEST['mo_api_authentication_demo_request_field']) && wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['mo_api_authentication_demo_request_field'])), 'mo_api_authentication_demo_request_form') ) {
@@ -575,7 +546,7 @@ class Miniorange_API_Authentication_Admin {
 
 				if ( $this->mo_api_authentication_check_empty_or_null( $email ) || $this->mo_api_authentication_check_empty_or_null( $demo_plan ) || $this->mo_api_authentication_check_empty_or_null( $query ) ) {
 					update_option('message', 'Please fill up Usecase, Email field and Requested demo plan to submit your query.');
-					mo_api_auth_show_error_message();
+					update_option('mo_api_auth_message_flag', 2);
 				} else {
 					$url = 'https://demo.miniorange.com/wordpress-oauth/';
 
@@ -614,10 +585,10 @@ class Miniorange_API_Authentication_Admin {
 
 					if($output->status == 'SUCCESS'){
 						update_option('mo_api_auth_message', sanitize_text_field( $output->message ));
-						mo_api_auth_show_success_message();
+						update_option('mo_api_auth_message_flag', 1);
 					}else{
 						update_option('mo_api_auth_message', sanitize_text_field( $output->message ));
-						mo_api_auth_show_error_message();
+						update_option('mo_api_auth_message_flag', 2);
 					}
 
 				}

@@ -15,208 +15,140 @@
 class Mo_API_Authentication_Admin_TokenAPI_Config {
 
 	public static function mo_api_auth_configuration_output() {
+
+		$mo_api_key_enable = (get_option('mo_api_authentication_selected_authentication_method') == 'tokenapi') ? 1 : 0;
+
 	?>
-	<div id="mo_api_authentication_support_layout" class="mo_api_authentication_support_layout">
-	<div class="mo_api_authentication_common_div_css">
-		<h3>API Reference for Token API : <u><b><small><a href="https://plugins.miniorange.com/rest-api-key-authentication-method" target="_blank" rel="noopener" style="color: red">[SETUP GUIDE]</a></small></b></u></h4>
-		<table class="mo_api_authentication_settings_table">
-			<tr>
-				Once you generate the API Key (token), you can access WP REST API's like below.<br><br>
-			</tr>
-		</table>
-		<div class="row">
-			<div class="mo_api_authentication_box">
-				<div class="mo_api_authentication_box_header">
-					<h4 class="mo_api_authentication_box_heading"><span class="mo_api_authentication_request_button">get</span> /wp-json/wp/v2/posts </h4>				
-				</div>
-				<div class="mo_api_authentication_box_body">
-					<div class="mo_api_authentication_box_body_text">
-						<p>
-							Request all WordPress Posts
-						</p>
-					</div>
-					<div class="mo_api_authentication_box_white_section">
-						<h5 class="mo_api_authentication_box_white_section_heading">Header</h5>
-					</div>
+	<div id="mo_api_key_authentication_support_layout" class="mo_api_authentication_support_layout">
+		<form method="post" id="mo-apikey-authentication-method-form" action="">
+						
+
+		<input type="hidden" name="action" id="mo_api_apikeyauth_save_config_input" value="Save APIKey Auth">
+		<div id="mo_api_authentication_support_basicoauth" class="mo_api_authentication_common_div_css">
+
+			<button type="button" onclick="moAPIKeyAuthenticationMethodSave('save_apikey_auth')" class="mo_api_authentication_method_save_button button button-primary button-large" style="background: #473970;" <?php if(!$mo_api_key_enable){echo 'disabled';} ?> >Next</button>
+			<a href="admin.php?page=mo_api_authentication_settings"><button type="button" class="mo_api_authentication_method_save_button button button-primary button-large" style="background: #473970;margin-right: 15px;">Back</button></a>
+			<h4><a href="admin.php?page=mo_api_authentication_settings&tab=config" style="text-decoration: none">Configure Methods</a> > API Key Authentication Method</h4>
+			
+			<div style="display: flex;">
+				<div style="float: left"><h2 class="mo_api_authentication_method_head">API Key Authentication Method</h2></div>
+				<div class="mo_api_authentication_premium_methods">
+				<div class="mo_api_auth_inner_premium_label"><p>Premium</p></div>
+			 	</div>
+			</div>	
+			<p class="mo_api_authentication_method_description">WordPress REST API - API Key Authentication Method involves the REST APIs access on validation against the API key/token.</p>
+			<br>
+			<div class="mo_api_auth_setup_guide2">
+				<div class="mo_api_auth_setup_guide1"><img src="<?php echo esc_attr(plugin_dir_url(dirname(dirname(dirname(__FILE__)))));?>/images/youtube.png" height="25px" width="25px"></div>
+				<a href="https://www.youtube.com/watch?v=HdWvlkAdXgA" target="_blank"><div class="mo_api_authentication_guide1"><p style="font-weight: 700;">Video guide</b></p></div></a>
+			</div>
+			<div class="mo_api_auth_setup_guide2">
+				<div class="mo_api_auth_setup_guide1"><img src="<?php echo esc_attr(plugin_dir_url(dirname(dirname(dirname(__FILE__)))));?>/images/user-guide.png" height="25px" width="25px"></div>
+				<a href="https://plugins.miniorange.com/rest-api-key-authentication-method#step_1" target="_blank"><div class="mo_api_authentication_guide1"><p style="font-weight: 700;">Setup Guide</p></div></a>
+			</div>
+			<div class="mo_api_auth_setup_guide2">
+				<div class="mo_api_auth_setup_guide1"><img src="<?php echo esc_attr(plugin_dir_url(dirname(dirname(dirname(__FILE__)))));?>/images/document.png" height="25px" width="25px"></div>
+				<a href="https://developers.miniorange.com/docs/rest-api-authentication/wordpress/api-key-authentication" target="_blank"><div class="mo_api_authentication_guide1"><p style="font-weight: 700;">Developer Doc</b></p></div></a>
+			</div>
+			<br><br><br>
+			<div class="mo_api_authentication_support_layout" style="margin-left: 5px; margin-top: 40px;width: 90%">
+				<br>
+					<table width="100%">
+						<tr>
+							<td>
+								<p style="font-size: 15px;font-weight: 500"><img src="<?php echo esc_attr(plugin_dir_url(dirname(dirname(dirname(__FILE__)))));?>/images/universal-key.png" height="25px" width="25px;margin-top:10px;margin-right:10px">&nbsp;Universal API Key : </p>
+							</td>
+							<td>
+								<p><input type="text" name="" style="width: 80%" value="<?php if(get_option('mo_api_auth_bearer_token')){echo get_option('mo_api_auth_bearer_token');}else{echo 'xxxxxxxxxxxxxxxxxxxxxx';} ?>" disabled>
+									<img src="<?php echo esc_attr(plugin_dir_url(dirname(dirname(dirname(__FILE__)))));?>/images/write.png" height="25px" width="25px;margin-top:10px;">
+								</p>
+							</td>
+						</tr>
+					</table>
+				<br>
+				<p><b>Tip:</b> Universal key can be used to unlock all the WordPress REST API access which does not involves user permissions. You can create the key for any user from the above dropdown.</p>
+				<br>
+			</div>
+			<br>
+			<div class="mo_api_authentication_support_layout" style="margin-left: 5px;margin-top:20px; width: 90%">
+				<br>
+					<table width="100%">
+						<tr>
+							<td style="width: 42%">
+								<p style="font-size: 15px;font-weight: 500"><img src="<?php echo esc_attr(plugin_dir_url(dirname(dirname(dirname(__FILE__)))));?>/images/user-based-login.png" height="25px" width="25px;margin-top:10px;"> &nbsp; User-specific API Key : </p>
+							</td>
+							<td style="width: 58%">
+								<?php $users = get_users();?>
+								<p>
+						<select readonly style="width:80%;margin-top:5px">
+						$count = 0;
+						<?php foreach($users as $user){
+							$count++;
+							if($count==11){
+								break;
+							}
+						?>
+							<option><?php echo esc_attr( $user->user_login ); ?></option>
+						<?php
+						} ?>
+						</select>
+						<img src="<?php echo esc_attr(plugin_dir_url(dirname(dirname(dirname(__FILE__)))));?>/images/write.png" height="25px" width="25px;"></p>
+							</td>
+						</tr>
+					</table>
+				<br>
+				<p><b>Tip:</b> User specific key can be used to unlock all the WordPress REST API access including the ones that involves user permissions.</p>
+				<br>
+			</div>
+			<br>
+		</div>
+	</form>
+	</div>
+<div class="mo_api_authentication_support_layout" id="mo_api_keyauth_finish" style="display: none;margin-left: 20px;">
+
+	<form method="post" id="mo-api-key-authentication-method-form" action="">
+					<input required type="hidden" name="option" value="mo_api_key_authentication_config_form" />
+					<?php wp_nonce_field("mo_api_key_authentication_method_config","mo_api_key_authentication_method_config_fields"); ?>	
+
+			<div id="mo_api_basicauth_client_creds" style="margin-left: 20px;">
+				<button type="button" onclick="moAPIKeyAuthenticationMethodFinish()" class="mo_api_authentication_method_save_button2 button button-primary button-large" style="background: #473970;margin-right: 10px;">Finish</button>
+				<a href="admin.php?page=mo_api_authentication_settings"><button type="button" class="mo_api_authentication_method_save_button button button-primary button-large" style="background: #473970;margin-right: 15px;">Back</button></a>
+				<b><p><a href="admin.php?page=mo_api_authentication_settings&tab=config" style="text-decoration: none">Configure Methods</a> > API Key Authentication Method</p></b>
+			<h2 style="font-size: 22px;">Configuration Overview</h2>
+				<br>
+				<div class="mo_api_authentication_support_layout" style="width: 80%;">
 					<br>
-					<div class="mo_api_authentication_box_body_text">
-						<table class="mo_api_authentication_settings_table">
-							<thead>
-								<th style="text-align:left">Name</th>
-								<th style="text-align:left">Value</th>
-							</thead>
-							<tbody>
-								<tr>
-									<td>
-										<hr>
-									</td>
-									<td>
-										<hr>
-									</td>
-								</tr>
-								<tr>
-									<td>Authorization</td>
-									<td>Bearer < token ></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<br>
-					<div class="mo_api_authentication_box_white_section">
-						<h5 class="mo_api_authentication_box_white_section_heading">Responses</h5>
-					</div>
-					<br>
-					<div class="mo_api_authentication_box_body_text">
-						<table class="mo_api_authentication_settings_table">
-							<thead>
-								<th style="text-align:left">Code</th>
-								<th style="text-align:left">Description</th>
-							</thead>
-							<tbody>
-								<tr>
-									<td>
-										<hr>
-									</td>
-									<td>
-										<hr>
-									</td>
-								</tr>
-								<tr>
-									<td style="vertical-align:baseline"><b>200</b></td>
-									<td>
-										<div class="mo_api_authentication_code_output">Successful response</div>
-										<p>Sample response</p>
-										<div class="mo_api_authentication_code_output">
-										[{<br>
-											"id":1,<br>
-											"slug":"hello-world",<br>
-											"status":"publish",<br>
-											"type":"post",<br>
-											"link":"http://< wp_base_url >/hello-world/",<br>
-											"title":{<br>
-												"rendered":"Hello World"<br>
-												},<br>
-											"content":{<br>
-												"rendered":"\nWelcome to WordPress. This is your first post. Edit or delete it, then start writing!\n",<br>
-												"protected":false<br>
-												},<br>
-												...<br>												
-										}]
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<hr>
-									</td>
-									<td>
-										<hr>
-									</td>
-								</tr>
-								<tr>
-									<td style="vertical-align:baseline"><b>401</b></td>
-									<td>
-										<div class="mo_api_authentication_code_output">Invalid API Key</div>
-										<p>Sample response</p>
-										<div class="mo_api_authentication_code_output">
-										{<br>
-											"status":"error",<br>
-											"error":"INVALID_API_KEY",<br>
-											"code":"401",<br>
-											"error_description":"Sorry, you are using invalid API Key."<br>
-										}
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<hr>
-									</td>
-									<td>
-										<hr>
-									</td>
-								</tr>
-								<tr>
-									<td style="vertical-align:baseline"><b>401</b></td>
-									<td>
-										<div class="mo_api_authentication_code_output">Missing Authorization Header</div>
-										<p>Sample response</p>
-										<div class="mo_api_authentication_code_output">
-										{<br>
-											"status":"error",<br>
-											"error":"MISSING_AUTHORIZATION_HEADER",<br>
-											"code":"401",<br>
-											"error_description":"Authorization header not received. Either authorization header was not sent or it was removed by your server due to security reasons."<br>
-										}
-										</div>
-										<p><b>NOTE:</b> This error may occur because of server environment,If Apache server then put the below line in your <b>htaccess</b> file after the RewriteBase.</p>
-										<code class="mo_api_authentication_code_output">
-											RewriteCond %{HTTP:Authorization} ^(.*)<br>
-											RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
-										</code>
-										<p>If NGINX server then put the below line in your <b>conf</b> file.</p>
-										<code class="mo_api_authentication_code_output">
-											add_header Access-Control-Allow-Headers "Authorization";
-										</code>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<br>
-					<div class="mo_api_authentication_box_white_section">
-						<h5 class="mo_api_authentication_box_white_section_heading">Example</h5>
-					</div>
-					<br>
-					<div class="mo_api_authentication_box_body_text">
-						<table class="mo_api_authentication_settings_table">
-							<thead>
-								<th style="text-align:left">Request</th>
-								<th style="text-align:left">Format</th>
-							</thead>
-							<tbody>
-								<tr>
-									<td>
-										<hr>
-									</td>
-									<td>
-										<hr>
-									</td>
-								</tr>
-								<tr>
-									<td><b>Curl</b></td>
-									<td>
-										curl -H "Authorization:Bearer <?php if(get_option('mo_api_auth_bearer_token') == false) echo '<b>&lt;token&gt;</b>'; else echo esc_attr( get_option('mo_api_auth_bearer_token') ); ?>" -X GET <?php echo esc_url( get_home_url() );?>/wp-json/wp/v2/posts
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<br>
+				
+					<table width="80%">
+						<tr>
+							<td>
+								<p style="font-size: 15px;"> Universal API Key :</p>
+							</td>
+							<td>
+								<p style="font-size: 15px;font-weight: 500"><?php if(get_option('mo_api_auth_bearer_token')){echo get_option('mo_api_auth_bearer_token');}else{echo 'universal-api-key';} ?>
+								</p>
+							</td>
+						</tr>
+					</table>
+					<p style="padding-right: 10px;"><b>Tip : </b>Please keep this API key securely and do not share it. In case if it is compromised, you can always regenerate it.</p>
 				</div>
 			</div>
+			<br><br>
 		</div>
-	</div>
+	
+		<script>
+			function moAPIKeyAuthenticationMethodSave(action){
+				
+				div = document.getElementById('mo_api_key_authentication_support_layout');
+				div.style.display = "none";
+				div2 = document.getElementById('mo_api_keyauth_finish');
+				div2.style.display = "block";
+			}
 
-	<script>
+			function moAPIKeyAuthenticationMethodFinish(){
+				document.getElementById("mo-api-key-authentication-method-form").submit();
+			}
 
-		function showAPIKey(){
-			document.getElementById('mo_api_auth_bearer_token').type = 'textbox';
-		}
-
-			
-		function regenerateAndCopyToken() {
-			var data = {
-				'action': 'regenerate_token',
-			};
-
-			jQuery.post(ajaxurl, data, function(response) {
-				document.getElementById('generate_token_success_message').style.display = "block";
-				mo_api_auth_bearer_token.value = response;
-				mo_api_auth_bearer_token = document.getElementbyId("mo_api_auth_bearer_token");
-			});
-		}
-	</script>
-	<?php
-	}
+		</script>
+	<?php }
 }
