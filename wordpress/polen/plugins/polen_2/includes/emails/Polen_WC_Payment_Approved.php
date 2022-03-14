@@ -5,6 +5,7 @@ namespace Polen\Includes;
 use DateTime;
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
 use Polen\Includes\Module\Polen_Order_Module;
+use Polen\Includes\Module\Polen_User_Module;
 use Polen\Includes\Sendgrid\Polen_Sendgrid_Emails;
 use Polen\Includes\Sendgrid\Polen_Sendgrid_Redux;
 use WC_DateTime;
@@ -128,18 +129,19 @@ class Polen_WC_Payment_Approved extends \WC_Email {
 			/**
 			 * Envio de e-mail para o Talento
 			 */
-			foreach ( $this->object->get_items() as $item_id => $item ) {
-				$product_id = $item->get_product_id();
-			}
-			$Polen_Talent = new Polen_Talent();
-			$talent = $Polen_Talent->get_talent_from_product( $product_id );
-			$this->recipient_talent = $talent->email;
-			
-			// if( ! $order_is_social ) {
-				$this->send( $this->get_recipient_talent(), $this->get_subject_talent(), $this->get_content_talent(), $this->get_headers(), $this->get_attachments() );
-			// } else {
-			// 	$this->send( $this->get_recipient_talent(), $this->get_subject_talent_social(), $this->get_content_talent_social(), $this->get_headers(), $this->get_attachments() );
-			// }
+            foreach ( $this->object->get_items() as $item_id => $item ) {
+                $product_id = $item->get_product_id();
+            }
+
+            $talent_user = Polen_User_Module::create_from_product_id($product_id);
+            $talent_email = $talent_user->get_receiving_email();
+            $this->recipient_talent = $talent_email;
+
+            // if( ! $order_is_social ) {
+            $this->send( $this->get_recipient_talent(), $this->get_subject_talent(), $this->get_content_talent(), $this->get_headers(), $this->get_attachments() );
+            // } else {
+            // 	$this->send( $this->get_recipient_talent(), $this->get_subject_talent_social(), $this->get_content_talent_social(), $this->get_headers(), $this->get_attachments() );
+            // }
 		}
 	}
 
