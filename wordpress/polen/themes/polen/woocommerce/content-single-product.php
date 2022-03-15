@@ -157,7 +157,7 @@ $logo_dark = wp_get_attachment_image_url( get_theme_mod( 'custom_logo' ), 'full'
 // Novo conteúdo Schema.org
 $total_reviews = Polen_Order_Review::get_number_total_reviews_by_talent_id($talent_id);
 $sum_reviews = Polen_Order_Review::get_sum_rate_by_talent($talent_id);
-pol_print_schema_data_extended($Talent_Fields, $reviews, $total_reviews, $sum_reviews, $product);
+pol_print_schema_data_extended($talent_id, $reviews, $total_reviews, $sum_reviews, $product);
 
 ?>
 
