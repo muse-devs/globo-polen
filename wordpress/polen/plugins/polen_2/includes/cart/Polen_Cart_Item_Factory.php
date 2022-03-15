@@ -33,6 +33,9 @@ class Polen_Cart_Item_Factory
     public static function polen_cart_item_from_order( $order )
     {
         $data = $order->get_items();
+        if(empty($data)) {
+            return '';
+        }
         foreach( $data as $item_id => $item ) {
             return new Polen_Cart_Item( $item );
         }
