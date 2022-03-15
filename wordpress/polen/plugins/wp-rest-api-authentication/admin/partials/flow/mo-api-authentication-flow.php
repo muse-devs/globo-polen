@@ -3,71 +3,38 @@
 function mo_api_authentication_config_app_settings()
 {
 
-	if ($_SERVER['REQUEST_METHOD'] === 'POST' &&  current_user_can('administrator') ) {
-		if( ( isset( $_POST['option'] ) and sanitize_text_field( $_POST['option'] ) == 'mo_api_authentication_config_form' ) && isset($_REQUEST['mo_api_authentication_authentication_method_config_fields']) && wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['mo_api_authentication_authentication_method_config_fields'])), 'mo_api_authentication_authentication_method_config') ) {
+	if (sanitize_text_field($_SERVER['REQUEST_METHOD']) === 'POST' &&  current_user_can('administrator') ) {
+		
+		if( ( isset( $_POST['option'] ) and sanitize_text_field( $_POST['option'] ) == 'mo_api_basic_authentication_config_form' ) && isset($_REQUEST['mo_api_basic_authentication_method_config_fields']) && wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['mo_api_basic_authentication_method_config_fields'])), 'mo_api_basic_authentication_method_config') ) {
+			update_option( 'mo_api_authentication_selected_authentication_method', 'basic_auth' );
+			$mo_rest_api_ajax_method_data = get_option('mo_rest_api_ajax_method_data');
+			if( $mo_rest_api_ajax_method_data ){
+				update_option( 'mo_api_authentication_authentication_key', $mo_rest_api_ajax_method_data['token_type']);
+			}	
+			delete_option('mo_rest_api_ajax_method_data');
+			update_option( 'mo_api_auth_message', 'Basic Authentication Method is configured successfully.');
+			update_option('mo_api_auth_message_flag', 1);
+		}
 
-			if (isset($_POST['action'])){
-				if( sanitize_text_field( $_POST['action'] ) == 'Save Configuration' ) {
-					if(get_option('mo_save_settings')==0)
-					{
-						update_option('mo_save_settings', 1);
-					}
-					if( !empty( $_POST['mo_api_authentication_selected_authentication_method'] ) ) {
-						$selected_auth_method = "";
-						$selected_auth_method = sanitize_text_field($_POST['mo_api_authentication_selected_authentication_method']);
-						update_option( 'mo_api_authentication_selected_authentication_method', $selected_auth_method );
-						update_option( 'mo_api_authentication_config_settings_'.$selected_auth_method, true );
-						
-						if( $selected_auth_method == 'tokenapi' ) {
-							if ( get_option( 'mo_api_auth_bearer_token' ) === false ) {
-								$bearer_token = stripslashes( wp_generate_password( 32, false, false ) );
-								update_option( 'mo_api_auth_bearer_token', $bearer_token );
-							}
-							update_option( 'mo_api_auth_message', 'API Key authentication is enabled' );
-							update_option( 'mo_api_display_popup', get_option('mo_api_display_popup') + 1 );
-						} 
-						elseif( ( $selected_auth_method == 'basic_auth' ) && (empty( $_POST['mo_api_authentication_authentication_key'] ) ) )
-							{
-								update_option( 'mo_api_auth_message', 'Select Basic Authentication key type' );
-								mo_api_auth_show_error_message();
-								return;
-							}
-						elseif( ( $selected_auth_method == 'basic_auth' ) && (!empty( $_POST['mo_api_authentication_authentication_key'] ) ) ) {
-							if( sanitize_text_field( $_POST['mo_api_authentication_authentication_key'] ) == 'cid_secret' ){
-								if (get_option( 'mo_api_auth_clientid' ) === false ){
-									mo_api_authentication_create_client();
-								}
-							}
-							update_option( 'mo_api_authentication_authentication_key', sanitize_text_field( $_POST['mo_api_authentication_authentication_key'] ) );
-							update_option( 'mo_api_auth_message', 'Basic authentication is enabled' );
-							update_option( 'mo_api_display_popup', get_option('mo_api_display_popup') + 1 );
-						} elseif( $selected_auth_method == 'jwt_auth' ) {
-							update_option( 'mo_api_authentication_jwt_client_secret', stripslashes( wp_generate_password( 32, false, false ) ) );
-							update_option( 'mo_api_authentication_jwt_signing_algorithm', 'HS256' );
-							update_option( 'mo_api_auth_message', 'JWT authentication is enabled' );
-							update_option( 'mo_api_display_popup', get_option('mo_api_display_popup') + 1 );
-						} else {
-							update_option( 'mo_api_auth_message', $selected_auth_method. ' Authentication method is not supported with your version' );
-							mo_api_auth_show_error_message();
-							return;
-						}
-						mo_api_auth_show_success_message();
-					} else {
-						update_option( 'mo_api_auth_message', 'Please select valid Authentication Method' );
-						mo_api_auth_show_error_message();
-						return;
-					} 
-				}	elseif( sanitize_text_field( $_POST['action'] ) == 'Reset' ) {
-					mo_api_authentication_reset_settings();
-					mo_api_auth_show_success_message();
-					update_option( 'mo_api_display_popup', get_option('mo_api_display_popup') + 1 );
-				}
-			} else {
-				update_option( 'mo_api_auth_message', 'Something went wrong!! Please try again.' );
-				mo_api_auth_show_error_message();
-				return;
+		if( ( isset( $_POST['option'] ) and sanitize_text_field( $_POST['option'] ) == 'mo_api_jwt_authentication_config_form' ) && isset($_REQUEST['mo_api_jwt_authentication_method_config_fields']) && wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['mo_api_jwt_authentication_method_config_fields'])), 'mo_api_jwt_authentication_method_config') ) {
+
+			update_option( 'mo_api_authentication_selected_authentication_method', 'jwt_auth' );
+			update_option( 'mo_api_authentication_jwt_client_secret', stripslashes( wp_generate_password( 32, false, false ) ) );
+			update_option( 'mo_api_authentication_jwt_signing_algorithm', 'HS256' );
+			update_option( 'mo_api_auth_message', 'JWT Authentication Method is configured successfully.');
+			update_option('mo_api_auth_message_flag', 1);
+		}
+
+		if( ( isset( $_POST['option'] ) and sanitize_text_field( $_POST['option'] ) == 'mo_api_key_authentication_config_form' ) && isset($_REQUEST['mo_api_key_authentication_method_config_fields']) && wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['mo_api_key_authentication_method_config_fields'])), 'mo_api_key_authentication_method_config') ) {
+			update_option( 'mo_api_authentication_selected_authentication_method', 'tokenapi' );
+			if ( get_option( 'mo_api_auth_bearer_token' ) === false ) {
+				$bearer_token = stripslashes( wp_generate_password( 32, false, false ) );
+				update_option( 'mo_api_auth_bearer_token', $bearer_token );
 			}
-		} else if ( ( isset( $_POST['option'] ) && sanitize_text_field( $_POST['option'] ) == "mo_api_authentication_protected_apis_form" ) && isset($_REQUEST['ProtectedRestAPI_admin_nonce_fields']) && wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['ProtectedRestAPI_admin_nonce_fields'])), 'ProtectedRestAPI_admin_nonce') ) {
+			update_option( 'mo_api_auth_message', 'API Key Authentication Method is configured successfully.');
+			update_option('mo_api_auth_message_flag', 1);
+		}
+		else if ( ( isset( $_POST['option'] ) && sanitize_text_field( $_POST['option'] ) == "mo_api_authentication_protected_apis_form" ) && isset($_REQUEST['ProtectedRestAPI_admin_nonce_fields']) && wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['ProtectedRestAPI_admin_nonce_fields'])), 'ProtectedRestAPI_admin_nonce') ) {
 			
 			// Catch the routes that should be whitelisted
 			$rest_routes = (isset($_POST['rest_routes'])) ?
@@ -78,20 +45,24 @@ function mo_api_authentication_config_app_settings()
 			if (empty( $rest_routes ) || isset($_POST['reset'])) {
 				mo_api_authentication_reset_api_protection();
 				add_settings_error('ProtectedRestAPI_notices', 'settings_updated', 'All APIs below are protected.', 'updated');
+				update_option( 'mo_api_auth_message', 'Your Settings for Protected REST APIs have been reset successfully');
+				update_option('mo_api_auth_message_flag', 1);
 				return;
 			}
 
 			// Save whitelist to the Options table
 			update_option('mo_api_authentication_protectedrestapi_route_whitelist', $rest_routes);
 			add_settings_error('ProtectedRestAPI_notices', 'settings_updated', 'Whitelist settings saved.', 'updated');
+			update_option( 'mo_api_auth_message', 'Your Settings for Protected REST APIs have been saved successfully');
+			update_option('mo_api_auth_message_flag', 1);
 
 		}  else if ( ( isset( $_POST['option'] ) && sanitize_text_field( $_POST['option'] ) == "mo_api_authentication_postman_file" ) && isset($_REQUEST['mo_api_authentication_postman_fields']) && wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['mo_api_authentication_postman_fields'])), 'mo_api_authentication_postman_config') ) {
 			$method = isset( $_POST[ 'file_name' ] ) ? sanitize_text_field( $_POST[ 'file_name' ] ) : '';
 			if( $method !== '' ) {
 				mo_api_authentication_postman_download( $method );
 			} else {
-				update_option( 'mo_api_auth_message', 'Something went wrong!! Please try again.' );
-				mo_api_auth_show_error_message();
+				update_option( 'mo_api_auth_message', 'Something went wrong!! Please select any of the "Token" or "Resource" option and try again.' );
+				update_option('mo_api_auth_message_flag', 2);
 				return;
 			}
 		}

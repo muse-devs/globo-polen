@@ -161,6 +161,7 @@ class Miniorange_api_authentication {
 		$this->loader->add_action( 'rest_api_init', $plugin_admin, 'mo_api_auth_initialize_api_flow' );
 		$this->loader->add_action( 'wp_ajax_regenerate_token', $plugin_admin, 'regenerate_token' );
 		$this->loader->add_action( 'wp_ajax_regenerate_client_credentials', $plugin_admin, 'regenerate_client_credentials' );
+		$this->loader->add_action( 'wp_ajax_save_temporary_data', $plugin_admin, 'save_temporary_data' );
 	}
 
 	/**

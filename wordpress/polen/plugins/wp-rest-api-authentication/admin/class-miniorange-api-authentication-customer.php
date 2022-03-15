@@ -9,7 +9,7 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
- * @package 		miniOrange API Authentication
+ * @package 		miniOrange OAuth
  * @license		    https://docs.miniorange.com/mit-license MIT/Expat
  */
 
@@ -290,9 +290,9 @@ class Miniorange_API_Authentication_Customer {
 		$fields = array(
 			'firstName'			=> $current_user->user_firstname,
 			'lastName'	 		=> $current_user->user_lastname,
-			'company' 			=> $_SERVER['SERVER_NAME'],
+			'company' 			=> sanitize_text_field($_SERVER['SERVER_NAME']),
 			'email' 			=> $email,
-			'ccEmail'           => 'oauthsupport@xecurify.com',
+			'ccEmail'           => 'apisupport@xecurify.com',
 			'phone'				=> $phone,
 			'query'				=> $query
 		);
@@ -360,10 +360,10 @@ class Miniorange_API_Authentication_Customer {
 			'email' 		=> array(
 				'customerKey' 	=> $customerKey,
 				'fromEmail' 	=> $fromEmail,
-				'bccEmail' 		=> 'oauthsupport@xecurify.com',
+				'bccEmail' 		=> 'apisupport@xecurify.com',
 				'fromName' 		=> 'miniOrange',
-				'toEmail' 		=> 'oauthsupport@xecurify.com',
-				'toName' 		=> 'oauthsupport@xecurify.com',
+				'toEmail' 		=> 'apisupport@xecurify.com',
+				'toName' 		=> 'apisupport@xecurify.com',
 				'subject' 		=> $subject,
 				'content' 		=> $content
 			),
@@ -423,10 +423,10 @@ class Miniorange_API_Authentication_Customer {
 			'email' 		=> array(
 				'customerKey' 	=> $customerKey,
 				'fromEmail' 	=> $fromEmail,
-				'bccEmail' 		=> 'oauthsupport@xecurify.com',
+				'bccEmail' 		=> 'apisupport@xecurify.com',
 				'fromName' 		=> 'miniOrange',
-				'toEmail' 		=> 'oauthsupport@xecurify.com',
-				'toName' 		=> 'oauthsupport@xecurify.com',
+				'toEmail' 		=> 'apisupport@xecurify.com',
+				'toName' 		=> 'apisupport@xecurify.com',
 				'subject' 		=> $subject,
 				'content' 		=> $content
 			),

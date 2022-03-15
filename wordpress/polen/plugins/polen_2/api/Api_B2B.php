@@ -107,7 +107,7 @@ class Api_B2B
     {
         global $Polen_Plugin_Settings;
 
-        $ip     = $_SERVER[ 'REMOTE_ADDR' ];
+        $ip     = '756937659387659823645827546';
         $client = $_SERVER[ 'HTTP_USER_AGENT' ];
         $nonce  = $request->get_param( 'security' );
 
@@ -116,7 +116,7 @@ class Api_B2B
         $email   = filter_var($request->get_param( 'email' ), FILTER_SANITIZE_EMAIL);
         $company = filter_var($request->get_param( 'company' ), FILTER_SANITIZE_SPECIAL_CHARS);
         $phone   = filter_var($request->get_param( 'phone' ), FILTER_SANITIZE_SPECIAL_CHARS);
-        $slug    = filter_var($request->get_param( 'slug_product' ), FILTER_SANITIZE_SPECIAL_CHARS);
+        $product = filter_var($request->get_param( 'product_name' ), FILTER_SANITIZE_SPECIAL_CHARS);
         $terms   = '1';
         $body = compact('form_id', 'name', 'email', 'company', 'phone');
         try {
@@ -129,7 +129,7 @@ class Api_B2B
             $form_db = new Polen_Form_DB();
             $form_db->insert($body);
             
-            $body['product'] = $slug;
+            $body['product'] = $product;
             $form_service = new Polen_Forms();
             $form_service->mailSend($body);
 

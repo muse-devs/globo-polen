@@ -65,6 +65,27 @@ class Polen_User_Module
     }
 
     /**
+     * Retornar email para recebimento de notificações
+     *
+     */
+    public function get_receiving_email()
+    {
+        global $wpdb;
+        $sql = "
+            SELECT `email`
+            FROM `" . $this->table . "`
+            WHERE `user_id`=" . $this->user->ID;
+
+        $results = $wpdb->get_results($sql);
+        if (empty($results)) {
+            $user = get_user_by('id', $this->user->ID);
+            $results[] = $user->email;
+        }
+
+        return $results[0]->email;
+    }
+
+    /**
      * Retornar nome customizado do usuario
      *
      * @return string
