@@ -169,6 +169,16 @@ class Api_Talent_My_Account extends WP_REST_Controller
         }
         $product = wc_get_product($products_id[0]);
 
+        $first_order_done = Polen_Talent::get_first_order_status_by_talent_id($user->data->ID)?true:false;
+        if(!$first_order_done) {
+            #Se nao existir $first_order_id entao $first_order_done é true
+            #caso nao exista fist_order para o talento isso precisa ser ignorado no front
+            $first_order_id = Polen_Talent::get_first_order_id_by_talent_id($user->data->ID);
+            if(empty($first_order_id)) {
+                $first_order_done = true;
+            }
+        }
+
         $response = [
             'ID'               => $user->data->ID,
             'name'             => get_user_meta($user->data->ID,'first_name', true) . ' ' . get_user_meta($user->data->ID,'last_name', true),
@@ -179,8 +189,8 @@ class Api_Talent_My_Account extends WP_REST_Controller
             'email'            => $user->data->user_email,
             'display_name'     => $user->data->display_name,
             'date_registered'  => $user->data->user_registered,
-            'first_order_done' => Polen_Talent::get_first_order_status_by_talent_id($user->data->ID)?true:false,
-            'first_order_id'   => Polen_Talent::get_first_order_id_by_talent_id($user->data->ID),
+            'first_order_done' => $first_order_done,
+            'first_order_id'   => $first_order_id,
             'sku'              => $product->get_sku(),
         ];
 

@@ -44,6 +44,7 @@ class Polen_Admin {
           new Polen_Admin_Order_Custom_Fields_Deadline_BulkActions( $static );
           new Polen_Admin_Event_Promotional_Event_Fields( $static );
           new Polen_Admin_Export_Order_Campaign( $static );
+          new Polen_Admin_Order_B2B($static);
   }
 
 	/**
@@ -97,10 +98,10 @@ class Polen_Admin {
     {
         try {
             $urls = [
-                'newsletter' => 'https://hooks.zapier.com/hooks/catch/10583855/b252jhj/',
-                'new_account' => 'https://hooks.zapier.com/hooks/catch/10583855/b25uia6/',
+                'newsletter'   => 'https://hooks.zapier.com/hooks/catch/10583855/b252jhj/',
+                'new_account'  => 'https://hooks.zapier.com/hooks/catch/10583855/b25uia6/',
                 'landing_page' => 'https://hooks.zapier.com/hooks/catch/10583855/b25u8xz/',
-                'pushcharse' => 'https://hooks.zapier.com/hooks/catch/10583855/buaf22k/',
+                'pushcharse'   => 'https://hooks.zapier.com/hooks/catch/10583855/buaf22k/',
             ];
 
             $zapier = $_POST['zapier'];
