@@ -2,9 +2,10 @@
 
 namespace Polen\Admin;
 
+defined( 'ABSPATH' ) || exit;
+
 use Polen\Api\Api_Checkout;
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
-use Polen\Includes\Debug;
 use Polen\Includes\Polen_Utils;
 use WC_Order;
 use WP_Error;
@@ -14,10 +15,18 @@ class Polen_Admin_Order_B2B
     public function __construct(bool $static = false)
     {
         if($static) {
-            add_action('woocommerce_new_order', [$this, 'new_order_handler'], 10, 3);
-            add_action('add_meta_boxes', [$this, 'add_meta_box_handler']);
+            add_action('woocommerce_new_order',    [$this, 'new_order_handler'], 10000, 3);
+            add_action('woocommerce_update_order', [$this, 'new_order_handler'], 10, 3);
+            add_action('add_meta_boxes',           [$this, 'add_meta_box_handler']);
+            // add_action('woocommerce_order_object_updated_props', [$this,'asda'], 10, 2);
         }
     }
+
+    // public function asda($order, $props)
+    // {
+    //     $order->set_order_key(wc_generate_order_key('b2b'));
+    //     $order->save();
+    // }
 
     /**
      * 
@@ -84,12 +93,20 @@ class Polen_Admin_Order_B2B
             update_post_meta($order_id, '_billing_corporate_name', $corporate_name);
             update_post_meta($order_id, '_billing_company', $company_name);
 
-            wc_add_order_item_meta($item_order->get_id(), 'company_name', $company_name, true);
-            wc_add_order_item_meta($item_order->get_id(), 'video_to', $video_to, true);
-            wc_add_order_item_meta($item_order->get_id(), 'email_to_video', $email_to_video, true);
-            wc_add_order_item_meta($item_order->get_id(), 'instructions_to_video', $instructions_to_video, true);
-            wc_add_order_item_meta($item_order->get_id(), 'video_category', $video_category, true);
-            wc_add_order_item_meta($item_order->get_id(), 'licence_in_days', $licence_in_days, true);
+            wc_update_order_item_meta($item_order->get_id(), 'company_name', $company_name, true);
+            wc_update_order_item_meta($item_order->get_id(), 'video_to', $video_to, true);
+            wc_update_order_item_meta($item_order->get_id(), 'email_to_video', $email_to_video, true);
+            wc_update_order_item_meta($item_order->get_id(), 'instructions_to_video', $instructions_to_video, true);
+            wc_update_order_item_meta($item_order->get_id(), 'video_category', $video_category, true);
+            wc_update_order_item_meta($item_order->get_id(), 'licence_in_days', $licence_in_days, true);
+
+            remove_action('woocommerce_new_order',    [$this, 'new_order_handler'], 10);
+            remove_action('woocommerce_update_order', [$this, 'new_order_handler'], 10);
+            
+            $post = get_post($order_id);
+            if(empty($post->post_password)) {
+                wp_update_post(['id'=>$order_id,'post_password'=>wc_generate_order_key()]);
+            }
         }
     }
 }
