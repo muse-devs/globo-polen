@@ -33,7 +33,7 @@ class Polen_Admin_Order_B2B
      */
     public function add_meta_box_handler()
     {
-        global $current_screen;
+        global $current_screen, $post;
         if( $current_screen 
             && ! is_null( $current_screen ) 
             && isset( $current_screen->id )
@@ -42,8 +42,23 @@ class Polen_Admin_Order_B2B
             // && $_REQUEST['action'] == 'edit'
         )
         {
-            add_meta_box('Polen_order_b2b_fields', 'Campos B2B', [$this, 'add_other_fields_for'], 'shop_order', 'normal', 'default');
+            
+            if(!empty($_GET['post']) && 'edit' == $_GET['action']) {
+                if($post->b2b == '1') {
+                    add_meta_box('Polen_order_b2b_link', 'Link da Order B2B', [$this, 'show_link_order_b2b'], 'shop_order', 'normal', 'default');
+                    add_meta_box('Polen_order_b2b_fields', 'Campos B2B', [$this, 'add_other_fields_for'], 'shop_order', 'normal', 'default');
+                }
+            } else {
+                add_meta_box('Polen_order_b2b_fields', 'Campos B2B', [$this, 'add_other_fields_for'], 'shop_order', 'normal', 'default');
+            }
         }
+    }
+
+
+    public function show_link_order_b2b()
+    {
+        global $post;
+        echo printf('https://pagamento.polen.me?order=%s&code=%s', $post->ID, $post->post_password);
     }
 
 
