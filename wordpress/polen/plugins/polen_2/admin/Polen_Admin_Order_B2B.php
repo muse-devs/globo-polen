@@ -6,6 +6,7 @@ defined( 'ABSPATH' ) || exit;
 
 use Polen\Api\Api_Checkout;
 use Polen\Includes\Cart\Polen_Cart_Item_Factory;
+use Polen\Includes\Polen_Talent;
 use Polen\Includes\Polen_Utils;
 use WC_Order;
 use WP_Error;
@@ -18,15 +19,8 @@ class Polen_Admin_Order_B2B
             add_action('woocommerce_new_order',    [$this, 'new_order_handler'], 10000, 3);
             add_action('woocommerce_update_order', [$this, 'new_order_handler'], 10, 3);
             add_action('add_meta_boxes',           [$this, 'add_meta_box_handler']);
-            // add_action('woocommerce_order_object_updated_props', [$this,'asda'], 10, 2);
         }
     }
-
-    // public function asda($order, $props)
-    // {
-    //     $order->set_order_key(wc_generate_order_key('b2b'));
-    //     $order->save();
-    // }
 
     /**
      * 
@@ -54,10 +48,13 @@ class Polen_Admin_Order_B2B
         }
     }
 
-
+    /**
+     * 
+     */
     public function show_link_order_b2b()
     {
         global $post;
+        //TODO: Tirar o LINK do hardcode e colocar num lugar apropriado ex. Redux
         echo printf('https://pagamento.polen.me?order=%s&code=%s', $post->ID, $post->post_password);
     }
 
