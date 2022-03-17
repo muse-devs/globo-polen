@@ -1,12 +1,10 @@
 <?php
 namespace Polen\Api;
 
-use Polen\Api\Orders\Api_Orders;
-use Polen\Api\Talent\Api_Talent_Dashboard;
-use Polen\Api\Talent\Api_Talent_My_Account;
-use Polen\Api\Talent\Api_Talent_Order;
-use Polen\Api\Talent\Api_Talent_Payment;
 use Polen\Api\Api_B2B;
+use Polen\Api\Orders\Api_Orders;
+use Polen\Api\Talent\{Api_Talent_Dashboard, Api_Talent_My_Account, Api_Talent_Order, Api_Talent_Payment};
+use Polen\Api\b2b\Checkout\Api_Checkout;
 
 class Api {
 
@@ -34,14 +32,23 @@ class Api {
             // #Área de pedidos
             $talent_dashboard = new Api_Orders();
             $talent_dashboard->register_routes();
+
             $talent_order = new Api_Talent_Order();
             $talent_order->register_routes();
+
             $talent_payment = new Api_Talent_Payment();
             $talent_payment->register_routes();
+
             $contact = new Api_Contact();
             $contact->register_routes();
+
+            #b2b
             $b2b = new Api_B2B();
             $b2b->register_routes();
+
+            $b2b_checkout = new Api_Checkout();
+            $b2b_checkout->register_routes();
+
         }
     }
 
