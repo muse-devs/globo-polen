@@ -847,7 +847,7 @@ function polen_get_tooltip($text, $placement = "right")
 function polen_alert($text = "")
 {
   ?>
-  <?php //polen_alert("Para melhorar a experiencia dos nossos ídolos, criamos um novo Dashboard. Para acessar " . '<a href="https://idolo.polen.me" target="_blank">clique aqui</a>'); ?>
+  <?php //polen_alert('Para melhorar a experiencia dos nossos ídolos, criamos um novo Dashboard. Para acessar <a href="https://idolo.polen.me" target="_blank">clique aqui</a>'); ?>
   <div class="alert alert-warning alert-dismissible fade show mb-5" role="alert">
     <?php echo $text; ?>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
