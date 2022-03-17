@@ -7,6 +7,8 @@
  * @package Polen
  */
 
+use Polen\Includes\Polen_Talent;
+
 define('TEMPLATE_URI', get_template_directory_uri());
 define('TEMPLATE_DIR', get_template_directory());
 define('DEVELOPER', defined('ENV_DEV') && ENV_DEV);
@@ -458,4 +460,8 @@ if( 37 == get_current_user_id() ) {
 	add_action( 'admin_menu', 'polen_remove_menus' );
 }
 
-
+add_action('woocommerce_account_content', function(){
+	if(Polen_Talent::static_is_user_talent(wp_get_current_user())) {
+		polen_alert('Para melhorar a experiencia dos nossos ídolos, criamos um novo Dashboard. Para acessar <a href="https://idolo.polen.me" target="_blank">clique aqui</a>');
+	}
+}, 1);
