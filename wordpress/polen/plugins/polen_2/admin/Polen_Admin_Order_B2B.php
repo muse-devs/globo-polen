@@ -86,11 +86,14 @@ class Polen_Admin_Order_B2B
             }
             $cart_item = Polen_Cart_Item_Factory::polen_cart_item_from_order($order);
             if(empty($cart_item)) {
-                return new WP_Error('no_order_item', 'Compra sem itens, não é possível ');
+                $error = new WP_Error('no_order_item', 'Compra sem itens, não é possível');
+                wp_die($error->get_error_message());
             }
+
             $item_order = $cart_item->get_item_order();
             if(empty($item_order)) {
-                return new WP_Error('no_order_item', 'Compra sem itens, não é possível(2)');
+                $error = new WP_Error('no_order_item', 'Compra sem itens, não é possível(2)');
+                wp_die($error->get_error_message());
             }
 
             $company_name          = sanitize_text_field($_POST['company_name']);
