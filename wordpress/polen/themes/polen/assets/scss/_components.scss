@@ -403,3 +403,17 @@
 .om-holder {
   z-index: 94!important;
 }
+
+.alert {
+  &.alert-warning {
+    font-size: 14px;
+    color: #212121;
+    background-color: #FDF5F2;
+    border: 1px solid #FFAC4B;
+    a {
+      color: #212121;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+  }
+}
