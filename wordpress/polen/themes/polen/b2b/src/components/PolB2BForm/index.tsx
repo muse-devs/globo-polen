@@ -8,8 +8,7 @@ import { ContactB2B } from "interfaces";
 import { contactFormB2B } from "services";
 
 export default function () {
-  const context = useAppContext();
-  const [formData, setFormData] = React.useState<ContactB2B | undefined>({
+  const modelContact = {
     company: "",
     email: "",
     form_id: "1",
@@ -17,7 +16,11 @@ export default function () {
     phone: "",
     security: "",
     product_name: getURLParam("talent"),
-  });
+  };
+  const context = useAppContext();
+  const [formData, setFormData] = React.useState<ContactB2B | undefined>(
+    modelContact
+  );
 
   const [preload, setPreload] = React.useState(false);
 
@@ -33,11 +36,16 @@ export default function () {
   const handleChange = (evt) => {
     const target = evt.target;
     const name = target.name;
-    const value = target.type === "tel" ? polMaskPhone(target.value) : target.value;
+    const value =
+      target.type === "tel" ? polMaskPhone(target.value) : target.value;
     setFormData((current) => ({
       ...current,
       [name]: value,
     }));
+  };
+
+  const resetForm = () => {
+    setFormData(modelContact);
   };
 
   const handleSubmit = (evt) => {
@@ -45,6 +53,7 @@ export default function () {
     setPreload(true);
     contactFormB2B(formData)
       .then((res) => {
+        resetForm();
         showMessage(
           context,
           MESSAGE_TYPES.MESSAGE,
@@ -107,10 +116,11 @@ export default function () {
               className="form-control mt-4"
               value={formData.phone}
               onChange={handleChange}
+              maxLength={15}
               required
             />
             <div className="d-grid gap-2 mt-4 pt-1">
-              <Button type="submit" size="lg">
+              <Button type="submit" size="lg" disabled={preload}>
                 Enviar
               </Button>
             </div>
