@@ -35,10 +35,14 @@ class Polen_B2B_Only extends Polen_Product_Module
     public function b2b_combobox_advanced_item_html($inputs)
     {
         $disabled = false;
+
+        $range = get_post_meta(get_the_ID(), 'polen_price_range_b2b', false);
+        $price_range = $range[0] ?? 'Valor sob consulta';
+
         $checked = true;
         return $inputs->pol_combo_advanced_item(
             "Vídeo para meu negócio", 
-            "Valor sob consulta",
+            "{$price_range}",
             "Compre um Vídeo Polen para usar no seu negócio",
             "check-b2b",
             "b2b",

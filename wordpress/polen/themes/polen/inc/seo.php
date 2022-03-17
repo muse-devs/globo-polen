@@ -59,9 +59,9 @@ function pol_print_schema_data($data = array())
 <?php
 }
 
-function pol_print_schema_data_extended($talent, $reviews, $total_reviews, $sum_reviews, $product)
+function pol_print_schema_data_extended($talent_id, $reviews, $total_reviews, $sum_reviews, $product)
 {
-  if (!$talent || empty($talent)) {
+  if (!$product || empty($product)) {
     return;
   }
 
@@ -75,9 +75,9 @@ function pol_print_schema_data_extended($talent, $reviews, $total_reviews, $sum_
         "ratingValue": "<?php echo $sum_reviews / $total_reviews; ?>",
         "reviewCount": "<?php echo $total_reviews; ?>"
       },
-      "description": "<?php echo $talent->descricao; ?>",
-      "name": "<?php echo $talent->nome; ?>",
-      "image": "<?php echo polen_get_avatar_src($talent->user_id, 'polen-square-crop-lg'); ?>",
+      "description": "<?php echo $product->get_description(); ?>",
+      "name": "<?php echo $product->get_title(); ?>",
+      "image": "<?php echo polen_get_avatar_src($talent_id, 'polen-square-crop-lg'); ?>",
       "offers": {
         "@type": "Offer",
         "availability": "https://schema.org/InStock",

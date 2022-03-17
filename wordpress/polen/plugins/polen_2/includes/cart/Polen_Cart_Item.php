@@ -88,6 +88,26 @@ class Polen_Cart_Item
         return $this->item->get_meta( 'instructions_to_video' );
     }
 
+    /**
+     * Quando a Order é B2B tem uma questão de Licença que o comprador pode
+     * usar durante X dias 30|60|90
+     * @return int
+     */
+    public function get_licence_in_days()
+    {
+        return $this->item->get_meta( 'licence_in_days' );
+    }
+
+
+    /**
+     * Quando a Order é B2B pega o nome fantasia da empresa
+     * @return int
+     */
+    public function get_company_name()
+    {
+        return $this->item->get_meta( 'company_name' );
+    }
+
 
     /**
      * Pega o Item Order da Compra
