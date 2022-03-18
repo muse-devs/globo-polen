@@ -3,6 +3,7 @@ namespace Polen\Api\b2b\Checkout;
 
 use Exception;
 use Polen\Api\Api_Util_Security;
+use Polen\Api\Module\Tuna_Credit_Card;
 use Polen\Includes\Module\Products\Polen_B2B_Orders;
 use Polen\Includes\Polen_Create_Customer;
 use WP_REST_Controller;
@@ -58,7 +59,15 @@ class Api_Checkout extends WP_REST_Controller
                 throw new Exception('Erro na segurança', 403);
             }
 
-            $required_fields = $this->required_fields();
+            $method_payment = $request->get_param('method_payment');
+            $card = false;
+            $tuna = new Tuna_Credit_Card();
+
+            if ($method_payment == 'cc') {
+                $card = true;
+            }
+
+            $required_fields = $this->required_fields($card);
             $fields_checkout = $request->get_params();
 
             foreach ($required_fields as $key => $field) {
@@ -72,15 +81,12 @@ class Api_Checkout extends WP_REST_Controller
                 throw new Exception('Email inválido', 403);
             }
 
-            /*
-            TODO: Os passos posteriores só serão executados caso o pagamento for aprovado
-            TODO: implementar pagamento
-            */
-
             $create_user = new Polen_Create_Customer();
             $user = $create_user->create_new_user($data);
 
             $b2b_order = new Polen_B2B_Orders($request['order_id'], $request['key_order']);
+
+            $tuna->payment($request['order_id'], $user, $data);
             $b2b_order->update_order($data);
 
             return api_response([
@@ -113,9 +119,9 @@ class Api_Checkout extends WP_REST_Controller
     /**
      * Retorna todos os campos do formulário que são obrigatórios
      */
-    private function required_fields(): array
+    private function required_fields($card = false): array
     {
-        return [
+        $fields = [
             'name' => 'Nome do representante',
             'company' => 'Nome empresa',
             'address_1' => 'Endereço',
@@ -129,8 +135,21 @@ class Api_Checkout extends WP_REST_Controller
             'phone' => 'Celular',
             'cnpj' => 'CNPJ',
             'corporate_name' => 'Razão Social',
-            'method_payment' => 'Método de pagamento',
         ];
+
+        if ($card === true) {
+            $cards = [
+                'tuna_card_holder_name' => 'Nome do cartão',
+                'tuna_card_brand' => 'Bandeira',
+                'tuna_expiration_date' => 'Data de Vencimento',
+                'tuna_card_number' => 'Numero do cartão',
+                'tuna_cvv' => 'Código de segurança',
+            ];
+
+            $fields = array_merge($fields, $cards);
+        }
+
+        return $fields;
     }
 
 }
