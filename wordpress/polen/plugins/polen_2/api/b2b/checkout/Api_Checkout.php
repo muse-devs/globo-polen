@@ -39,6 +39,15 @@ class Api_Checkout extends WP_REST_Controller
             ]
         ] );
 
+        register_rest_route($this->namespace, $this->rest_base . '/thankyou/(?P<order_id>[\d]+)/(?P<key_order>[^/]*)', [
+            [
+                'methods' => WP_REST_Server::READABLE,
+                'callback' => [$this, 'thankyou'],
+                'permission_callback' => [],
+                'args' => []
+            ],
+        ] );
+
     }
 
     /**
@@ -114,6 +123,27 @@ class Api_Checkout extends WP_REST_Controller
             return api_response($e->getMessage(), $e->getCode());
         }
 
+    }
+
+    /**
+     * Exibir valor do pedido na tela de agradecimento
+     *
+     * @param WP_REST_Request $request
+     * @return \WP_REST_Response
+     */
+    public function thankyou(WP_REST_Request $request): \WP_REST_Response
+    {
+        try {
+            $b2b_order = new Polen_B2B_Orders($request['order_id'], $request['key_order']);
+
+            $response = [
+                'total' => $b2b_order->get_total()
+            ];
+
+            return api_response($response);
+        } catch(Exception $e) {
+            return api_response($e->getMessage(), $e->getCode());
+        }
     }
 
     /**
