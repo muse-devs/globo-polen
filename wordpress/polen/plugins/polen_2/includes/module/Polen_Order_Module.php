@@ -43,6 +43,15 @@ class Polen_Order_Module
         return true;
     }
 
+    /**
+     * Retornar produto da order
+     *
+     */
+    public function get_product_from_order()
+    {
+        return $this->cart_item->get_product();
+    }
+
 
     /**
      * 
