@@ -118,7 +118,7 @@ class Polen_Update_Fields
         // Aba "Geral"
         $talent_alias = (string) sanitize_title( strip_tags( trim( $_POST['talent_alias'] ) ) );
         $args['talent_alias'] = ( $talent_alias ) ? sanitize_title( $talent_alias ) : sanitize_title( $email );
-        $args['talent_url'] = get_bloginfo('url') . '/talent/' . $args['talent_alias'];
+        $args['talent_url'] = get_bloginfo('url') . '/talento/' . $args['talent_alias'];
         $talent_cover_image_id     = ( isset( $_POST['talent_cover_image_id'] ) && ! empty( $_POST['talent_cover_image_id'] ) ) ? $_POST['talent_cover_image_id'] : false;
         $args['cover_image_id']    = ( $talent_cover_image_id ) ? $talent_cover_image_id : '';
         $talent_cover_image_url    = ( isset( $_POST['talent_cover_image_url'] ) && ! empty( $_POST['talent_cover_image_url'] ) ) ? $_POST['talent_cover_image_url'] : false;
@@ -137,6 +137,9 @@ class Polen_Update_Fields
             $natureza_juridica = null;
         }
         $args['natureza_juridica'] = $natureza_juridica;
+
+        $contact_email = sanitize_email($_POST['contact_email']);
+        update_user_meta($user_id, 'contact_email', $contact_email);
 
         if( $natureza_juridica == 'PJ' ) {
             $razao_social = (string) strip_tags( trim( $_POST['razao_social'] ) );

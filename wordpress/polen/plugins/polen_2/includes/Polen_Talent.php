@@ -530,7 +530,10 @@ class Polen_Talent {
      * @param \WP_User $user
      * @return boolean
      */
-    static public function static_is_user_talent(\WP_User $user) {
+    static public function static_is_user_talent(\WP_User $user = null) {
+        if(empty($user)) {
+            return false;
+        }
         $roles = $user->roles;
         if (in_array( self::ROLE_SLUG, $roles ) !== false) {
             return true;
