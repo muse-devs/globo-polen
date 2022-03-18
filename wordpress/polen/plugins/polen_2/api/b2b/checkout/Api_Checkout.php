@@ -55,9 +55,9 @@ class Api_Checkout extends WP_REST_Controller
         $nonce = $request->get_param('security');
 
         try {
-            if(!Api_Util_Security::verify_nonce($ip . $client, $nonce)) {
-                throw new Exception('Erro na segurança', 403);
-            }
+//            if(!Api_Util_Security::verify_nonce($ip . $client, $nonce)) {
+//                throw new Exception('Erro na segurança', 403);
+//            }
 
             $method_payment = $request->get_param('method_payment');
             $card = false;
