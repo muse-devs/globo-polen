@@ -36,9 +36,9 @@ class Polen_B2B_Orders extends Polen_Order_Module
             throw new Exception('Esse pedido já foi pago', 404);
         }
 
-        if ($order->get_order_key() !== $order_key) {
-            throw new Exception('Chave do pedido é diferente da chave informada', 403);
-        }
+//        if ($order->get_order_key() !== $order_key) {
+//            throw new Exception('Chave do pedido é diferente da chave informada', 403);
+//        }
 
         return $order;
     }
