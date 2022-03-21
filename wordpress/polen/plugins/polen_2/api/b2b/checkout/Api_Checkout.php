@@ -141,10 +141,14 @@ class Api_Checkout extends WP_REST_Controller
     public function thankyou(WP_REST_Request $request): \WP_REST_Response
     {
         try {
-            $b2b_order = new Polen_B2B_Orders($request['order_id'], $request['key_order']);
+            /*TODO:Fazer validação na classe*/
+            $order = wc_get_order($request['order_id']);
+            if (empty($order)) {
+                throw new Exception('Não existe pedido com esse ID', 403);
+            }
 
             $response = [
-                'total' => $b2b_order->get_total()
+                'total' => $order->get_total()
             ];
 
             return api_response($response);
