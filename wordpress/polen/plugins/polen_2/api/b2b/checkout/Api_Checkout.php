@@ -3,7 +3,7 @@ namespace Polen\Api\b2b\Checkout;
 
 use Exception;
 use Polen\Api\Api_Util_Security;
-use Polen\Api\Module\Tuna_Credit_Card;
+use Polen\Api\Module\{Tuna_Credit_Card,Tuna_Pix};
 use Polen\Includes\Module\Products\Polen_B2B_Orders;
 use Polen\Includes\Polen_Create_Customer;
 use WP_REST_Controller;
@@ -48,6 +48,15 @@ class Api_Checkout extends WP_REST_Controller
             ],
         ] );
 
+        register_rest_route($this->namespace, $this->rest_base . '/status/(?P<order_id>[\d]+)/(?P<key_order>[^/]*)', [
+            [
+                'methods' => WP_REST_Server::READABLE,
+                'callback' => [$this, 'check_status'],
+                'permission_callback' => [],
+                'args' => []
+            ],
+        ] );
+
     }
 
     /**
@@ -70,10 +79,11 @@ class Api_Checkout extends WP_REST_Controller
 
             $method_payment = $request->get_param('method_payment');
             $card = false;
-            $tuna = new Tuna_Credit_Card();
+            $tuna = new Tuna_Pix();
 
             if ($method_payment == 'cc') {
                 $card = true;
+                $tuna = new Tuna_Credit_Card();
             }
 
             $required_fields = $this->required_fields($card);
@@ -95,13 +105,10 @@ class Api_Checkout extends WP_REST_Controller
 
             $b2b_order = new Polen_B2B_Orders($request['order_id'], $request['key_order']);
 
-            $tuna->payment($request['order_id'], $user, $data);
+            $response = $tuna->payment($request['order_id'], $user, $data);
             $b2b_order->update_order($data);
 
-            return api_response([
-                'status' => 'Pagamento aprovado',
-                'new_account' => $user['new_account'],
-            ]);
+            return api_response($response);
 
         } catch(Exception $e) {
             return api_response($e->getMessage(), $e->getCode());
@@ -145,6 +152,22 @@ class Api_Checkout extends WP_REST_Controller
             return api_response($e->getMessage(), $e->getCode());
         }
     }
+
+    public function check_status($request)
+    {
+        $order_id = $request['order_id'];
+        $tuna = new Tuna_Pix();
+
+        $current_status = $tuna->get_status($order_id);
+
+        return api_response(
+            [
+                'paid' => $current_status == 'completed',
+                'payment_status' => $current_status
+            ]
+        );
+    }
+
 
     /**
      * Retorna todos os campos do formulário que são obrigatórios
