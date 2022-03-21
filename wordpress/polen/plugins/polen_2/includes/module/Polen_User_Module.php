@@ -1,11 +1,15 @@
 <?php
 namespace Polen\Includes\Module;
 
+defined('ABSPATH') || die;
+
 use Exception;
 use Polen\Includes\Polen_SignInUser_Strong_Password;
 
 class Polen_User_Module
 {
+
+    const META_KEY_EMAIL_CONTACT = 'contact_email';
     /**
      * Obj
      * Informações básicas do usuario
@@ -62,6 +66,20 @@ class Polen_User_Module
             WHERE `user_id`=" . $this->user->ID;
 
         return $wpdb->get_results($sql);
+    }
+
+    /**
+     * Retornar email para recebimento de notificações
+     *
+     */
+    public function get_receiving_email()
+    {
+        $contact_email = get_user_meta($this->user->ID, self::META_KEY_EMAIL_CONTACT, true);
+        if(empty($contact_email)) {
+            $contact_email = $this->user->user_email;
+        }
+
+        return $contact_email;
     }
 
     /**

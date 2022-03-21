@@ -43,6 +43,15 @@ class Polen_Order_Module
         return true;
     }
 
+    /**
+     * Retornar produto da order
+     *
+     */
+    public function get_product_from_order()
+    {
+        return $this->cart_item->get_product();
+    }
+
 
     /**
      * 
@@ -134,6 +143,24 @@ class Polen_Order_Module
     public function get_video_category()
     {
         return $this->cart_item->get_video_category();
+    }
+
+
+    /**
+     * Order B2B
+     */
+    public function get_licence_in_days()
+    {
+        return $this->cart_item->get_licence_in_days();
+    }
+
+
+    /**
+     * Order B2B
+     */
+    public function get_company_name()
+    {
+        return $this->cart_item->get_company_name();
     }
 
 
@@ -244,5 +271,15 @@ class Polen_Order_Module
     public function get_view_order_url()
     {
         return $this->object->get_view_order_url();
+    }
+
+    public function get_billing_cnpj()
+    {
+        return $this->object->get_meta('_billing_cnpj');
+    }
+
+    public function get_corporate_name()
+    {
+        return $this->object->get_meta('_billing_corporate_name');
     }
 }

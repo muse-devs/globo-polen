@@ -11,7 +11,11 @@ use Polen\Includes\Polen_Bancos;
     <?php
     $current_screen = get_current_screen();
     $Polen_Update_Fields = new Polen_Update_Fields();
-    $vendorInfo = $Polen_Update_Fields->get_vendor_data( intval( $_REQUEST['user_id'] ?? null ) );
+    $user_id = $_REQUEST['user_id'];
+    if(!empty($user_id)) {
+        $user = get_user_by('id', $user_id);
+    }
+    $vendorInfo = $Polen_Update_Fields->get_vendor_data( intval( $user_id ?? null ) );
     ?>
     <table class="form-table">
         <tbody>
@@ -204,12 +208,20 @@ use Polen\Includes\Polen_Bancos;
                     <!-- Informações de Contato -->
                     <div id="PolenVendorProfileTab2">
                         <table class="form-table">
-                            <tr>
+                            <tr style="overflow: hidden;height: 0;display: block;">
                                 <th>
                                     E-mail
                                 </th>
                                 <td>
                                     <input type="text" id="store_email" name="store_email" value="<?php echo ( isset( $vendorInfo->email ) ) ? $vendorInfo->email : ''; ?>" autocomplete="off" class="widefat" maxlength="255">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    E-mail Contato
+                                </th>
+                                <td>
+                                    <input type="text" id="contact_email" name="contact_email" value="<?php echo ( isset( $user->contact_email ) ) ? $user->contact_email : ''; ?>" autocomplete="off" class="widefat" maxlength="255">
                                 </td>
                             </tr>
                             <tr>

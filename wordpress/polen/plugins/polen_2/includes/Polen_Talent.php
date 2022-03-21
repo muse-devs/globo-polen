@@ -530,7 +530,10 @@ class Polen_Talent {
      * @param \WP_User $user
      * @return boolean
      */
-    static public function static_is_user_talent(\WP_User $user) {
+    static public function static_is_user_talent(\WP_User $user = null) {
+        if(empty($user)) {
+            return false;
+        }
         $roles = $user->roles;
         if (in_array( self::ROLE_SLUG, $roles ) !== false) {
             return true;
@@ -1003,12 +1006,15 @@ class Polen_Talent {
         $obj['order_id']     = $order_id;
         $wc_order            = wc_get_order($order_id);
         $order               = new Polen_Order_Module($wc_order);
+        $raw_instruction     = $order->get_instructions_to_video();
+        $instruction         = Polen_Utils::remove_sanitize_xss_br_escape($raw_instruction, 'edit');
+        $instruction         = Polen_Utils::remove_sanitize_xss_br_escape($instruction, 'edit');
         $obj['status']       = $order->get_status();
         // $obj['total']        = $order->get_formatted_order_total();
         // $obj['total_value']  = $order->get_total();
         $obj['total_value'] = $order->get_total_for_talent();
         // $obj['total_raw']    = $order->get_subtotal();
-        $obj['instructions'] = Polen_Utils::remove_sanitize_xss_br_escape($order->get_instructions_to_video(), 'edit');
+        $obj['instructions'] = $instruction;;
         $obj['name']         = $order->get_name_to_video();
         $obj['from']         = $order->get_offered_by();
         $obj['to_myself']    = $order->get_video_to_is_to_my_self();

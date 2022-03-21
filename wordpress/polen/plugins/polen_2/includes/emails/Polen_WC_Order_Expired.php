@@ -2,6 +2,8 @@
 
 namespace Polen\Includes;
 
+use Polen\Includes\Module\Polen_User_Module;
+
 if( ! defined( 'ABSPATH') ) {
     die( 'Silence is golden.' );
 }
@@ -74,9 +76,10 @@ class Polen_WC_Order_Expired extends \WC_Email {
 			foreach ( $this->object->get_items() as $item_id => $item ) {
 				$product_id = $item->get_product_id();
 			}
-			$Polen_Talent = new Polen_Talent();
-			$talent = $Polen_Talent->get_talent_from_product( $product_id );
-			$this->send( $talent->email, $this->get_subject(), $this->get_content_talent(), $this->get_headers(), $this->get_attachments() );
+			// $Polen_Talent = new Polen_Talent();
+			// $talent = $Polen_Talent->get_talent_from_product( $product_id );
+			$user_polen = Polen_User_Module::create_from_product_id($product_id);
+			$this->send( $user_polen->get_receiving_email(), $this->get_subject(), $this->get_content_talent(), $this->get_headers(), $this->get_attachments() );
 		}
 	}
 

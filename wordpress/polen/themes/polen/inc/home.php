@@ -31,15 +31,6 @@ $inputs = new Material_Inputs();
         <div class="item">
           <?php
             $banners = array(
-              "mobile" => TEMPLATE_URI.'/assets/img/banners/carnaval/banner-mobile.png',
-              "desktop" => TEMPLATE_URI.'/assets/img/banners/carnaval/banner-desktop.png'
-            );
-          ?>
-          <?php polen_get_banner('Polen Folia',$banners, site_url('tag/carnaval/')); ?>
-        </div>
-        <div class="item">
-          <?php
-            $banners = array(
               "mobile" => TEMPLATE_URI.'/assets/img/banners/galo/banner-mobile.png',
               "desktop" => TEMPLATE_URI.'/assets/img/banners/galo/banner-desktop.png'
             );
