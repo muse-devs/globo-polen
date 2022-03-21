@@ -16,6 +16,10 @@ export default function () {
     phone: "",
     security: "",
     product_name: getURLParam("talent"),
+    utm_source: getURLParam("utm_source"),
+    utm_campaign: getURLParam("utm_campaign"),
+    utm_term: getURLParam("utm_term"),
+    utm_content: getURLParam("utm_content")
   };
   const context = useAppContext();
   const [formData, setFormData] = React.useState<ContactB2B | undefined>(
