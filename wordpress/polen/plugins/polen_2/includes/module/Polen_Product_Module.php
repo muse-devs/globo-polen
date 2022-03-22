@@ -317,7 +317,7 @@ class Polen_Product_Module
         $range = get_post_meta(get_the_ID(), 'polen_price_range_b2b', false);
         $price_range = $range[0] ? "A partir de R$ {$range[0]}" : 'Valor sob consulta';
 
-        $checked = false;
+        $checked = true;
         return $inputs->pol_combo_advanced_item(
             "Vídeo para meu negócio", 
             "{$price_range}",
@@ -339,7 +339,7 @@ class Polen_Product_Module
     public function b2c_combobox_advanced_item_html($inputs)
     {
         $disabled = false;
-        $checked = true;
+        $checked = false;
         return $inputs->pol_combo_advanced_item(
             "Vídeo para uso pessoal",
             $this->get_price_html(),
