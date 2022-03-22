@@ -37,7 +37,7 @@ class Polen_B2B_Only extends Polen_Product_Module
         $disabled = false;
 
         $range = get_post_meta(get_the_ID(), 'polen_price_range_b2b', false);
-        $price_range = $range[0] ?? 'Valor sob consulta';
+        $price_range = $range[0] ? "A partir de R$ {$range[0]}" : 'Valor sob consulta';
 
         $checked = true;
         return $inputs->pol_combo_advanced_item(
