@@ -26,7 +26,7 @@ class Gateway_Tuna
      * @param string|array $card_info // informações do cartão de crédito
      * @return array
      */
-    protected function body_for_request($order_id, $current_user = '', $card_info = '')
+    protected function body_for_request($order_id, $current_user = '', $card_info = null)
     {
         $session_id = $this->get_session_id($current_user['user_object']->data);
         $order = new WC_Order($order_id);
@@ -54,6 +54,7 @@ class Gateway_Tuna
         ];
 
         $method = $card_info ? 'cc' : 'pix';
+
         $payment_method_type = $this->method_payment_type($method);
 
         $document_type = 'cnpj';
@@ -78,14 +79,14 @@ class Gateway_Tuna
             ],
             "DeliveryAddress" => [
                 "Street" =>  $order->get_shipping_address_1(),
-                "Number" => '',
+                "Number" => '2577',
                 "Complement" => '',
                 "Neighborhood" => '',
                 "City" => $order->get_shipping_city(),
                 "State" => 'CE',
                 "Country" => 'BR',
                 "PostalCode" => $order->get_shipping_postcode(),
-                "Phone" => '',
+                "Phone" => '85999999999',
             ],
             "FrontData" => [
                 "SessionID" => wp_get_session_token(),
