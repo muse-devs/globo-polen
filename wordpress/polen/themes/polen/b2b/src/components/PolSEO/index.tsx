@@ -45,7 +45,7 @@ const PolSEO: React.FC<SEO> = ({
 
         <meta name="title" content={title} key="title" />
         <meta name="description" content={description} key="description" />
-        <meta name="canonical" content={canonical} key="canonical" />
+        <link rel="canonical" href={canonical} key="canonical" />
         <meta name="keywords" content={keywords} key="keywords" />
         <meta name="author" content={author} key="author" />
 

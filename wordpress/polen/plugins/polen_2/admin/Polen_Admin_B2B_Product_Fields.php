@@ -73,10 +73,10 @@ class Polen_Admin_B2B_Product_Fields
                 woocommerce_wp_text_input(
                     array(
                         'id'          => self::FIELD_NAME_PRICE_RANGE,
-                        'label'       => 'Faixa de preço B2B',
-                        'placeholder' => 'Ex: R$1.500 a R$3.000',
+                        'label'       => 'À partir de R$',
+                        'placeholder' => 'Ex: R$1.500',
                         'desc_tip'    => 'true',
-                        'description' => 'Escolha faixa de preço que será exibido para este talento',
+                        'description' => 'Preço B2B. Deixe o campo em branco para ser exibido a mensagem: Valor sob consulta',
                     )
                 );
                 ?>
