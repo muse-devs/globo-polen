@@ -74,7 +74,7 @@ class Polen_Admin_B2B_Product_Fields
                     array(
                         'id'          => self::FIELD_NAME_PRICE_RANGE,
                         'label'       => 'À partir de R$',
-                        'placeholder' => 'Ex: R$1.500',
+                        'placeholder' => 'Ex: 1.500',
                         'desc_tip'    => 'true',
                         'description' => 'Preço B2B. Deixe o campo em branco para ser exibido a mensagem: Valor sob consulta',
                     )
