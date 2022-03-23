@@ -315,9 +315,14 @@ class Polen_Product_Module
         $disabled = !$this->is_b2b();
 
         $range = get_post_meta(get_the_ID(), 'polen_price_range_b2b', false);
-        $price_range = $range[0] ?? 'Valor sob consulta';
+        $price_range = $range[0] ? "A partir de R$ {$range[0]}" : 'Valor sob consulta';
 
-        $checked = false;
+        if ($disabled) {
+            $checked = false;
+        } else {
+            $checked = true;
+        }
+
         return $inputs->pol_combo_advanced_item(
             "Vídeo para meu negócio", 
             "{$price_range}",
@@ -338,8 +343,16 @@ class Polen_Product_Module
      */
     public function b2c_combobox_advanced_item_html($inputs)
     {
+        $is_b2b = $this->is_b2b();
+
         $disabled = false;
-        $checked = true;
+        
+        if($is_b2b) {
+            $checked = false;
+        } else {
+            $checked = true;
+        }
+
         return $inputs->pol_combo_advanced_item(
             "Vídeo para uso pessoal",
             $this->get_price_html(),

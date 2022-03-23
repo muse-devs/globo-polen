@@ -2,6 +2,7 @@
 namespace Polen\Api;
 
 use Polen\Api\Api_B2B;
+use Polen\Api\b2b\Account\Api_Recover_Password;
 use Polen\Api\Orders\Api_Orders;
 use Polen\Api\Talent\{Api_Talent_Dashboard, Api_Talent_My_Account, Api_Talent_Order, Api_Talent_Payment};
 use Polen\Api\b2b\Checkout\Api_Checkout;
@@ -49,6 +50,8 @@ class Api {
             $b2b_checkout = new Api_Checkout();
             $b2b_checkout->register_routes();
 
+            $b2b_account = new Api_Recover_Password();
+            $b2b_account->register_routes();
         }
     }
 

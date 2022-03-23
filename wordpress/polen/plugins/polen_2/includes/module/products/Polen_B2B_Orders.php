@@ -32,9 +32,13 @@ class Polen_B2B_Orders extends Polen_Order_Module
             throw new Exception('Não existe pedido com esse ID', 403);
         }
 
-        if ($order->get_order_key() !== $order_key) {
-            throw new Exception('Chave do pedido é diferente da chave informada', 403);
+        if ($order->get_status() == 'completed') {
+            throw new Exception('Esse pedido já foi pago!', 406);
         }
+
+//        if ($order->get_order_key() !== $order_key) {
+//            throw new Exception('Chave do pedido é diferente da chave informada', 403);
+//        }
 
         return $order;
     }
@@ -66,8 +70,10 @@ class Polen_B2B_Orders extends Polen_Order_Module
         $company_name = parent::get_company_name();
         $instructions_to_video = parent::get_instructions_to_video();
         $licence_in_days = parent::get_licence_in_days();
+        $price = parent::get_total();
+        $category_video = parent::get_video_category();
 
-        return compact('cnpj', 'corporate_name', 'company_name', 'instructions_to_video', 'licence_in_days');
+        return compact('cnpj', 'corporate_name', 'company_name', 'instructions_to_video', 'licence_in_days', 'category_video', 'price');
     }
 
     /**
