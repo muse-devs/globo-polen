@@ -71,8 +71,9 @@ class Polen_B2B_Orders extends Polen_Order_Module
         $instructions_to_video = parent::get_instructions_to_video();
         $licence_in_days = parent::get_licence_in_days();
         $price = parent::get_total();
+        $category_video = parent::get_video_category();
 
-        return compact('cnpj', 'corporate_name', 'company_name', 'instructions_to_video', 'licence_in_days', 'price');
+        return compact('cnpj', 'corporate_name', 'company_name', 'instructions_to_video', 'licence_in_days', 'category_video', 'price');
     }
 
     /**
