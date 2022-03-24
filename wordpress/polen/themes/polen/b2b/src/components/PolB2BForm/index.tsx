@@ -21,6 +21,7 @@ export default function () {
     utm_source: getURLParam("utm_source"),
     utm_campaign: getURLParam("utm_campaign"),
     utm_term: getURLParam("utm_term"),
+    utm_medium: getURLParam("utm_medium"),
     utm_content: getURLParam("utm_content")
   };
   const context = useAppContext();
