@@ -14,6 +14,8 @@ export default function () {
     form_id: "1",
     name: "",
     phone: "",
+    city: "",
+    state: "",
     security: "",
     product_name: getURLParam("talent"),
     utm_source: getURLParam("utm_source"),
@@ -121,6 +123,24 @@ export default function () {
               value={formData.phone}
               onChange={handleChange}
               maxLength={15}
+              required
+            />
+            <input
+              type="text"
+              name="city"
+              placeholder="Cidade"
+              className="form-control mt-4"
+              value={formData.city}
+              onChange={handleChange}
+              required
+            />
+            <input
+              type="text"
+              name="state"
+              placeholder="Estado"
+              className="form-control mt-4"
+              value={formData.state}
+              onChange={handleChange}
               required
             />
             <div className="d-grid gap-2 mt-4 pt-1">
