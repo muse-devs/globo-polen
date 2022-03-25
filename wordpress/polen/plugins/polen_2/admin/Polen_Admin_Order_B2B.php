@@ -54,8 +54,7 @@ class Polen_Admin_Order_B2B
     public function show_link_order_b2b()
     {
         global $post;
-        //TODO: Tirar o LINK do hardcode e colocar num lugar apropriado ex. Redux
-        echo printf('https://pagar.polen.me?order=%s&code=%s', $post->ID, $post->post_password);
+        echo "https://pagar.polen.me?order={$post->ID}&code={$post->post_password}";
     }
 
 
