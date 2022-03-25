@@ -29,7 +29,7 @@ export default function () {
     modelContact
   );
   const [states, setStates] = React.useState([
-    { uf: '', name: 'Estado' },
+    { uf: '', name: 'Estado*' },
     { uf: 'AC', name: 'Acre' },
     { uf: 'AL', name: 'Alagoas' },
     { uf: 'AP', name: 'Amapá' },
@@ -58,6 +58,12 @@ export default function () {
     { uf: 'SE', name: 'Sergipe' },
     { uf: 'TO', name: 'Tocantins' },
   ]);
+  const formIsCompleted =
+    formData.company !== "" &&
+    formData.email !== "" &&
+    formData.phone !== "" &&
+    formData.city !== "" &&
+    formData.state !== "";
   const [cities, setCities] = React.useState(null)
   const [preload, setPreload] = React.useState(false);
 
@@ -110,7 +116,9 @@ export default function () {
     if (formData.state) {
       getCitiesByState(formData.state)
         .then((res) => {
-          setCities(res);
+          const citiesList = res;
+          citiesList.unshift({nome: 'Selecione a cidade...*'})
+          setCities(citiesList);
         })
         .catch((err) => {
           showMessage(context, MESSAGE_TYPES.ERROR, "", 'Não foram encontradas cidades');
@@ -134,7 +142,7 @@ export default function () {
             <input
               type="text"
               name="name"
-              placeholder="Nome Completo"
+              placeholder="Nome Completo*"
               className="form-control mt-4"
               value={formData.name}
               onChange={handleChange}
@@ -143,7 +151,7 @@ export default function () {
             <input
               type="text"
               name="company"
-              placeholder="Empresa"
+              placeholder="Empresa*"
               className="form-control mt-4"
               value={formData.company}
               onChange={handleChange}
@@ -152,7 +160,7 @@ export default function () {
             <input
               type="email"
               name="email"
-              placeholder="E-mail de trabalho"
+              placeholder="E-mail de trabalho*"
               className="form-control mt-4"
               value={formData.email}
               onChange={handleChange}
@@ -161,7 +169,7 @@ export default function () {
             <input
               type="tel"
               name="phone"
-              placeholder="Número de telefone"
+              placeholder="Número de telefone*"
               className="form-control mt-4"
               value={formData.phone}
               onChange={handleChange}
@@ -199,7 +207,7 @@ export default function () {
                     return (
                       <option
                         key={i}
-                        value={item.nome}
+                        value={item.nome === 'Selecione a cidade...*' ? '' : item.nome}
                       >
                         {item.nome}
                       </option>
@@ -209,7 +217,7 @@ export default function () {
               ) : ''
             }
             <div className="d-grid gap-2 mt-4 pt-1">
-              <Button type="submit" size="lg" disabled={preload}>
+              <Button type="submit" size="lg" disabled={!formIsCompleted ? true : false}>
                 Enviar
               </Button>
             </div>
