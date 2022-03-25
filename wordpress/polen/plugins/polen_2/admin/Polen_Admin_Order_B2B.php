@@ -104,7 +104,7 @@ class Polen_Admin_Order_B2B
             
             update_post_meta($order_id, 'b2b', '1');
             update_post_meta($order_id, Api_Checkout::ORDER_METAKEY, 'b2b');
-            update_post_meta($order_id, '_billing_cnpj', $cnpj);
+            update_post_meta($order_id, '_billing_cnpj_cpf', $cnpj);
             update_post_meta($order_id, '_billing_corporate_name', $corporate_name);
             update_post_meta($order_id, '_billing_company', $company_name);
 
