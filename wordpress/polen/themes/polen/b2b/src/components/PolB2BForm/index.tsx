@@ -5,7 +5,7 @@ import { showMessage, MESSAGE_TYPES } from "components/PolMessage";
 import { PolNonce, PolPreloader } from "components";
 import { getError, getURLParam } from "utils";
 import { ContactB2B } from "interfaces";
-import { contactFormB2B } from "services";
+import { contactFormB2B, getCitiesByState } from "services";
 
 export default function () {
   const modelContact = {
@@ -28,7 +28,37 @@ export default function () {
   const [formData, setFormData] = React.useState<ContactB2B | undefined>(
     modelContact
   );
-
+  const [states, setStates] = React.useState([
+    { uf: '', name: 'Estado' },
+    { uf: 'AC', name: 'Acre' },
+    { uf: 'AL', name: 'Alagoas' },
+    { uf: 'AP', name: 'Amapá' },
+    { uf: 'AM', name: 'Amazonas' },
+    { uf: 'BA', name: 'Bahia' },
+    { uf: 'CE', name: 'Ceará' },
+    { uf: 'DF', name: 'Distrito Federal' },
+    { uf: 'ES', name: 'Espírito Santo' },
+    { uf: 'GO', name: 'Goiás' },
+    { uf: 'MA', name: 'Maranhão' },
+    { uf: 'MT', name: 'Mato Grosso' },
+    { uf: 'MS', name: 'Mato Grosso do Sul' },
+    { uf: 'MG', name: 'Minas Gerais' },
+    { uf: 'PA', name: 'Pará' },
+    { uf: 'PB', name: 'Paraíba' },
+    { uf: 'PR', name: 'Paraná' },
+    { uf: 'PE', name: 'Pernambuco' },
+    { uf: 'PI', name: 'Piauí' },
+    { uf: 'RJ', name: 'Rio de Janeiro' },
+    { uf: 'RN', name: 'Rio Grande do Norte' },
+    { uf: 'RS', name: 'Rio Grande do Sul' },
+    { uf: 'RO', name: 'Rondônia' },
+    { uf: 'RR', name: 'Roraíma' },
+    { uf: 'SC', name: 'Santa Catarina' },
+    { uf: 'SP', name: 'São Paulo' },
+    { uf: 'SE', name: 'Sergipe' },
+    { uf: 'TO', name: 'Tocantins' },
+  ]);
+  const [cities, setCities] = React.useState(null)
   const [preload, setPreload] = React.useState(false);
 
   const polMaskPhone = (v) => {
@@ -76,6 +106,18 @@ export default function () {
       });
   };
 
+  React.useEffect(() => {
+    if (formData.state) {
+      getCitiesByState(formData.state)
+        .then((res) => {
+          setCities(res);
+        })
+        .catch((err) => {
+          showMessage(context, MESSAGE_TYPES.ERROR, "", 'Não foram encontradas cidades');
+        })
+    }
+  }, [formData.state]);
+
   return (
     <section
       id="faleconosco"
@@ -110,7 +152,7 @@ export default function () {
             <input
               type="email"
               name="email"
-              placeholder="e-mail de trabalho"
+              placeholder="E-mail de trabalho"
               className="form-control mt-4"
               value={formData.email}
               onChange={handleChange}
@@ -126,24 +168,46 @@ export default function () {
               maxLength={15}
               required
             />
-            <input
-              type="text"
-              name="city"
-              placeholder="Cidade"
-              className="form-control mt-4"
-              value={formData.city}
-              onChange={handleChange}
-              required
-            />
-            <input
-              type="text"
+            <select
+              className={"form-select mt-4"}
               name="state"
-              placeholder="Estado"
-              className="form-control mt-4"
               value={formData.state}
               onChange={handleChange}
               required
-            />
+            >
+              {states.map((item) => {
+                return (
+                  <option
+                    key={item.uf}
+                    value={item.uf}
+                  >
+                    {item.name}
+                  </option>
+                );
+              })}
+            </select>
+            {
+              cities ? (
+                <select
+                  className={"form-select mt-4"}
+                  name="city"
+                  value={formData.city}
+                  onChange={handleChange}
+                  required
+                >
+                  {cities.map((item, i) => {
+                    return (
+                      <option
+                        key={i}
+                        value={item.nome}
+                      >
+                        {item.nome}
+                      </option>
+                    );
+                  })}
+                </select>
+              ) : ''
+            }
             <div className="d-grid gap-2 mt-4 pt-1">
               <Button type="submit" size="lg" disabled={preload}>
                 Enviar
