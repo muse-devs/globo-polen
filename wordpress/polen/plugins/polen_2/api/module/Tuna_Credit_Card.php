@@ -23,7 +23,7 @@ class Tuna_Credit_Card extends Gateway_Tuna
         $type_document = parent::check_cpf_cnpj($value_document);
 
         return [
-            "Token" => $token,
+            "Token" => $token,  
             "TokenProvider" => 'Tuna',
             "CardHolderName" => sanitize_text_field($data["tuna_card_holder_name"]),
             "BrandName" => sanitize_text_field($data["tuna_card_brand"]),
