@@ -57,7 +57,7 @@ class Gateway_Tuna
 
         $payment_method_type = $this->method_payment_type($method);
 
-        $document_value = preg_replace('/[^0-9]/', '', $costumer_order->get_billing_cnpj());
+        $document_value = preg_replace('/[^0-9]/', '', $costumer_order->get_billing_cnpj_cpf());
         $document_type = $this->check_cpf_cnpj($document_value);
 
         $order->calculate_totals();
