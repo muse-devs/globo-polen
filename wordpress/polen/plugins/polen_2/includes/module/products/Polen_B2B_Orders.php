@@ -31,7 +31,7 @@ class Polen_B2B_Orders
         }
 
         if ($order->get_status() == 'completed') {
-            throw new Exception('Esse pedido já foi pago', 404);
+            throw new Exception('Esse pedido já foi pago', 406);
         }
 
         $module_order = new Polen_Order_Module($order);
